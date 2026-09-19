@@ -29,7 +29,7 @@ The engine divides the cost of a trip by the litres delivered after the transit 
 | litres delivered a trip | 32901.00 |
 | cost per litre delivered, naira | 15.0704 |
 
-Local currency per litre prints to four decimals. The denominator is the delivered volume. The station pays for what arrives, and the trip's cost is spread over those litres. A cost per litre computed on the loaded payload would spread the same cost over litres the station never receives. The engine prints no such figure, and this course gives none.
+Local currency per litre prints to four decimals. The denominator is the delivered volume. In the engine's own formula, cost per litre delivered = cost per trip / the litres delivered after the transit loss. A cost per litre computed on the loaded payload would spread the same cost over litres the station never receives. The engine prints no such figure, and this course gives none.
 
 ## Distance and cost
 

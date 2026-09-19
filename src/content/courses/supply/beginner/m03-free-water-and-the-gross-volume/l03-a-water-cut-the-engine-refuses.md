@@ -23,7 +23,7 @@ A water cut equal to the dip is possible: the tank holds only water, and the gro
 | --- | --- |
 | -3 | REFUSED: A water cut cannot be negative. |
 
-A negative height is a typing or reference error, just as a negative dip is. The engine does not clamp it to 0 mm, because a water cut of 0 mm is a real reading that says the paste found no water.
+A negative water cut is refused, just as a negative dip is. The engine does not clamp it to 0 mm, because a water cut of 0 mm is a real reading: on AK-02 it reads water 0.000 m3, gross 1086.941 m3.
 
 ## A water cut the table cannot convert
 

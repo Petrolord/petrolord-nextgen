@@ -36,7 +36,7 @@ The grouping also needs a build-up to group. Hand `marginWaterfall` a build-up t
 
 > REFUSED: A landed cost per litre is required.
 
-A build-up the engine refused has no price, and a share of a price that does not exist is a share of nothing.
+A build-up the engine refused has no price, and marginWaterfall answers it with the same refusal and no shares.
 
 ## Why this view matters
 

@@ -6,7 +6,7 @@
 
 AK-01's table starts at 0 mm with 0.000 m3. Its first entry is the empty tank, so there is no height inside the tank that lies below the table. Every dip from the floor upward has an entry at or beneath it.
 
-Not every calibration starts on the floor. A tank may be strapped only over the range someone cared about at the time, or its lowest rings may be left out because the bottom is irregular. The digest builds such a case deliberately: the same AK-01 tank with a partial calibration that starts at 300 mm, where the volume is 114.040 m3, and ends at 800 mm. Its first entry is a real volume, and it is not the empty tank.
+Not every calibration starts on the floor. The digest builds such a case deliberately: the same AK-01 tank with a partial calibration that starts at 300 mm, where the volume is 114.040 m3, and ends at 800 mm. Its first entry is a real volume, and it is not the empty tank.
 
 ## What the engine does with a dip beneath it
 
@@ -20,7 +20,7 @@ Put dips to that partial table through dipToStandardVolume, with no water, and t
 
 At 300 mm the dip sits on the first entry and reads its volume, 114.040 m3. At 640 mm it sits between entries and the engine interpolates to 243.285 m3. At 180 mm the dip is beneath the first entry and the engine refuses.
 
-The refusal says what is missing and what to do about it. The table has no entry below the dip, so there is no second point to draw a line to. One available shortcut would be to assume the tank is empty at 0 mm and draw a line from there, but that assumption is exactly what this table does not state. The bottom of a real tank holds a sump, a sloping floor and pipework, and the volume below the first entry is whatever the calibration would have measured there. So the engine sends you back to the calibration: extend it down to the tank floor.
+The refusal says what is missing and what to do about it. The table has no entry below the dip, so there is no second point to draw a line to. One available shortcut would be to assume the tank is empty at 0 mm and draw a line from there, but that assumption is exactly what this table does not state. The volume below the first entry is a figure only a calibration can state, so the engine sends you back to the calibration: extend it down to the tank floor.
 
 ## A negative dip
 

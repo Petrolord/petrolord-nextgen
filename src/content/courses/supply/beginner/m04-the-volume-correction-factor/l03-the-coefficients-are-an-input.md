@@ -12,9 +12,9 @@ It names what is missing, says where it lives, says the engine does not ship it,
 
 ## Why there is no default
 
-The form of the last lesson is fixed. The coefficients are not. They differ by commodity group, so the right row for a petrol is a different row from the right row for a diesel or a kerosene, and the table they come from is a published, controlled document that a terminal holds under its own measurement procedures.
+The form of the last lesson is fixed. The coefficients are not. They are a published table per commodity group, so the row that fits a petrol is not the row that fits a diesel or a kerosene. The engine ships none of that table and has no default.
 
-A default row would be easy to ship and wrong in a way nobody could see. Put the wrong group's coefficients into the form and it still returns a VCF to six decimals. That VCF multiplies the whole stock, and its error lands in the day's unaccounted figure as if it were a loss or a gain in the tank.
+A default row would be a coefficient that nobody typed. With no default, every VCF the form returns rests on three coefficients the caller supplied, and without them the form returns no VCF at all, only the refusal above. The synthetic row shows the same form moving with density: at 31.5 C it reads 0.975246 at 700 kg/m3 and 0.983832 at 900 kg/m3, so the row and the density both reach the figure that multiplies the stock.
 
 So the coefficients are an input, like the dip and the strapping table. The engine carries the form, and the terminal carries the table.
 
@@ -24,7 +24,7 @@ The form also needs its two measured inputs. Leave out the density or the temper
 
 REFUSED: Density at 15 C and observed temperature are both needed.
 
-Both are measured at the tank: the temperature by a thermometer lowered to set levels, the density by a sample corrected to 15 C. A typical density from a product reference list is a starting point at most. The certificate of quality is the authority on what arrived, and where a cargo's quality comes from is the subject of the sibling course `crude`.
+Both are measured inputs, and the engine forms no VCF without them. A typical density from a product reference list is a starting point at most. The certificate of quality is the authority on what arrived, and where a cargo's quality comes from is the subject of the sibling course `crude`.
 
 ## A limit the course teaches and never grades
 

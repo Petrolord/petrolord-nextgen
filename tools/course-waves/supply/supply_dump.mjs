@@ -152,7 +152,7 @@ const priceAtFx = (rate) => {
 out('# supply: Terminals, Depots & Fuel Supply. Teaching digest.');
 out('# PRECISION: volumes print to three decimals of a cubic metre (a litre); VCF to six decimals and its alpha to nine; probabilities and utilisation to six decimals; offered load in erlangs, minutes and queue lengths to four; days of cover and turns to four; money in US dollars to two decimals and dollars per litre to six; local currency per litre to four; percents to four; litres to two; tonnes and barrels to four; kilometres to two; hours to three; trips to six; exchange rates to four. Heights are whole millimetres. Counts are whole numbers.');
 out('# NO CLOCK: neither engine reads a date or a random number, so no figure below depends on when or where the digest was built.');
-out('# ENGINES: engines/downstream/terminalDepot.js and engines/downstream/fuelPricing.js at petrolord-engines e4d3b10 (MD3-0 and MD3-1), vendored in NextGen under packages/engines.');
+out('# ENGINES: engines/downstream/terminalDepot.js and engines/downstream/fuelPricing.js at petrolord-engines 13f0936 (MD3-0, MD3-1 and MD3-2), vendored in NextGen under packages/engines.');
 out('# CASES: AKODO (a coastal import terminal: three tanks, their strapping tables, a morning of dips and one day), IBAFO (an inland depot: its loading rack, tank farm, throughput economics, a truck lane, a fleet and a forecourt), BADAGRY (one petrol cargo landed and priced to the nozzle). All three are invented records.');
 out('# RATES: every rate, margin, levy, freight, exchange rate and tax below is INVENTED for this course and is not a published figure. The engine ships no rate and no volume correction coefficient, and the one coefficient row below is SYNTHETIC.');
 out('# Built by build_digest.sh from supply_dump.mjs and supply_fields.mjs. Never edited by hand.');
@@ -738,6 +738,25 @@ for (const lp of F.BADAGRY_LOSS_SWEEP) {
   row(lp, lit(r.outturn.litres), usd(r.totalUsd), usdL(r.perLitreUsd), locL(r.perLitreLocal));
 }
 out('');
+out('An ocean loss left blank is a missing rate, so the build-up is not complete and the landed total is a floor. A loss left out of the call takes the 0 the signature states. A loss of 100 percent or more, or below 0, is refused:');
+head('ocean loss (stated)', 'the engine answers');
+{
+  const lossRow = (v, label) => {
+    const r = landed(chargesWith(F.BADAGRY_RATES, onCif), { oceanLossPercent: v });
+    if (r.error) { row(label, refused(r, `loss ${label}`)); return r; }
+    row(label, `complete ${r.complete}; missing ${r.missingRates.length ? r.missingRates.join(', ') : 'none'}; outturn ${lit(r.outturn.litres)} litres; landed total ${usd(r.totalUsd)} USD; USD per litre sold ${usdL(r.perLitreUsd)}; ${r.basisOfTotal}`);
+    return r;
+  };
+  const b = lossRow('', 'blank');
+  lossRow(null, 'null');
+  const o = lossRow(undefined, 'left out of the call');
+  lossRow(100, '100');
+  lossRow(120, '120');
+  lossRow(-0.5, '-0.5');
+  const zero = landed(chargesWith(F.BADAGRY_RATES, onCif), { oceanLossPercent: 0 });
+  out(`The blank row spreads the landed total over the bill-of-lading litres, as the 0 percent row does: its USD per litre sold equals the 0 percent row's: ${b.perLitreUsd === zero.perLitreUsd}. The row left out of the call reads the 0 percent row's USD per litre sold: ${o.perLitreUsd === zero.perLitreUsd}, and complete ${o.complete}.`);
+}
+out('');
 out(`The exchange rate enters once, at the end: naira per litre sold = USD per litre sold x ${fx(BC.fxRate)}. With no exchange rate the local figure is ${plain(landed(chargesWith(F.BADAGRY_RATES, onCif), { fxRate: null }).perLitreLocal)}.`);
 out('');
 {
@@ -817,7 +836,7 @@ out('Held by the engines repository (FINDINGS-supply), taught as limits and neve
 out('H1: the charges levied at discharge (jetty, storage) are billed on the bill-of-lading quantity; whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know (SECTION 19 prints the two quantities).');
 out(`H2: the volume correction coefficient tables and every published rate stay unshipped. volumeCorrectionFactor refuses without coefficients (SECTION 6), and every template rate is absent: IMPORT_TEMPLATE ships ${FP.IMPORT_TEMPLATE.filter((c) => c.amount === null).length} of ${FP.IMPORT_TEMPLATE.length} rates as none and PUMP_TEMPLATE ${FP.PUMP_TEMPLATE.filter((c) => c.amount === null).length} of ${FP.PUMP_TEMPLATE.length}.`);
 out('');
-out('Rules the engines keep at 60ee266 (MD3-0, engines PR #221), each measured in this digest:');
+out('Rules the engines keep at 13f0936 from MD3-0 (engines PR #221), each measured in this digest:');
 out(`a day is not closed without its opening stock (SECTION 7): ${refused(TD.reconcileStock({ ...DAY, openingM3: '', closingDippedM3: closingStd }), 'rule opening')}`);
 out(`a dip below a table that does not start at the empty tank is refused, and so is a negative dip (SECTION 4).`);
 out(`a water cut the table cannot convert is refused, and so is water above the product dip (SECTIONS 4 and 5).`);
@@ -831,11 +850,18 @@ out(`insurance quoted on CIF is solved in closed form (SECTION 18): CIF ${usd(ba
 out('a freight-stage charge on C&F or CIF, and a charge with an unknown stage, are refused (SECTION 18).');
 out('a blank trucking cost is missing and named, and a cost left out of the call takes its stated default (SECTION 14).');
 out('');
-out('Rules the engines keep at e4d3b10 (MD3-1, engines PR #224), each measured in this digest:');
+out('Rules the engines keep at 13f0936 from MD3-1 (engines PR #224), each measured in this digest:');
 out(`a load time of zero minutes is refused (SECTION 10): "${TD.rackQueue({ ...F.IBAFO_RACK, loadMinutes: 0 }).error}"`);
 out(`throughputEconomics needs the throughput and the fee (SECTION 13): "${TD.throughputEconomics({ ...F.IBAFO_ECONOMICS, feePerM3: '' }).error}" A blank cost or loss is taken as zero and named in assumedZero.`);
 out(`tankFarmCover with no daily throughput gives no days of cover and no turns (SECTION 12): turns a year ${plain(TD.tankFarmCover({ tanks: F.IBAFO_TANKS }).turnsPerYear)}.`);
 out('an opening stock derived from the day\'s own closing dip balances every day and measures nothing (SECTION 7).');
+out('');
+out('Rules the engines keep at 13f0936 from MD3-2 (engines PR #225), each measured in this digest:');
+{
+  const blank = landed(chargesWith(F.BADAGRY_RATES, onCif), { oceanLossPercent: '' });
+  out(`an ocean loss left blank is a missing rate and the landed total is a floor (SECTION 19): complete ${blank.complete}; missing ${blank.missingRates.join(', ')}; ${blank.basisOfTotal}`);
+  out(`an ocean loss of 100 percent or more is refused (SECTION 19): ${refused(landed(chargesWith(F.BADAGRY_RATES, onCif), { oceanLossPercent: 100 }), 'rule loss 100')}`);
+}
 
 /* ------------------------------------------------------------------ */
 section('WHAT THE ORACLES CHECK');

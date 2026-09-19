@@ -40,7 +40,7 @@ q(2, "A gauger types -3 mm for the water on the diesel tank. How does the engine
   "Refused as no dip reading"],
  "The engine refuses with its own sentence for the water: A water cut cannot be negative. It never clamps the cut to 0 mm, which is a real reading that returns water 0.000 m3 and gross 1086.941 m3. The negative-dip sentence belongs to the dip.")
 
-q(0, "With AK-01's partial calibration in use, the product reads 640 mm and the water paste 150 mm. Which answer comes back from dipToStandardVolume?",
+q(0, "With AK-01's partial calibration in use, the product reads 640 mm and the water cut 150 mm. Which answer comes back from dipToStandardVolume?",
  "REFUSED: The water cut cannot be converted: The dip is below the first strapping entry. The table does not cover this height; extend it down to the tank floor.",
  ["REFUSED: The water cut is above the product dip. Check both readings.",
   "REFUSED: A water cut cannot be negative.",
@@ -94,12 +94,12 @@ q(0, "The three AKODO tanks total 4581.490 m3 gross observed. What does the word
   "The heel below each outlet has come off, leaving only pumpable product."],
  "Gross means free water off. Observed means at this morning's temperatures, so 4581.490 m3 mixes three temperatures and three products and is not yet a stock to close a day on.")
 
-q(2, "The paste on AK-02's tape shows no water, so the cut is typed as 0 mm. How is that treated?",
+q(2, "AK-02's water cut, dipped at 5406 mm, is typed as 0 mm. How is that treated?",
  "Takes it as a real reading and removes nothing, so the gross is 1086.941 m3.",
  ["Refuses it, since 0 mm of water is read the same way as a blank box with no reading in it.",
   "Assumes the tank's usual water of 95 mm, since a tank that is truly dry is unlikely.",
   "Reports the gross as none until a water cut above 0 mm is given."],
- "A stated cut of 0 mm means the paste found no water. The swept table reads water 0.000 m3, gross 1086.941 m3 for it.")
+ "A stated cut of 0 mm is a real reading, and it removes nothing. The swept table reads water 0.000 m3, gross 1086.941 m3 for it.")
 
 q(1, "On the partial table with the dip at 640 mm, which water cut is refused with the sentence about water above the product dip?",
  "700 mm",

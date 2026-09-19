@@ -17,7 +17,7 @@ The engine counts it tank by tank: each tank's capacity less its stock, never be
 | IB-T3 (AGO) | 5000.000 | 3902.600 | 1097.400 |
 | IB-T4 (DPK) | 2500.000 | 1377.000 | 1123.000 |
 
-The farm's ullage is 11767.300 m3. Like the pumpable stock, it is useful only tank by tank. A gas oil receipt can go into IB-T3 and nowhere else, so the room for gas oil is IB-T3's 1097.400 m3, however much room the petrol tanks have. The farm total answers a question no receipt asks.
+The farm's ullage is 11767.300 m3. Like the pumpable stock, it is useful only tank by tank. The tank rows print the room in each tank: IB-T3, the farm's one AGO tank, has 1097.400 m3 of ullage, and IB-T4, its one DPK tank, has 1123.000 m3. The farm total adds room across tanks that hold different products.
 
 Notice IB-T2. It has 7335.300 m3 of room and no pumpable stock. The tank ready to receive is the one that cannot yet deliver.
 
@@ -35,7 +35,7 @@ For IBAFO:
 | daily throughput (liftings) m3 | 2640.000 |
 | turns a year | 44.1108 |
 
-The divisor is working capacity. The heel never turns, so it is left out of the room the product cycles through. Turns print to four decimals.
+The divisor is working capacity, capacity less heel, as the engine's formula states. Turns print to four decimals.
 
 The daily throughput is the other half of the formula, and the engine does not supply it. With no daily throughput the engine gives days of cover none and turns a year none: both need the throughput.
 
@@ -43,7 +43,7 @@ The daily throughput is the other half of the formula, and the engine does not s
 
 A farm with many turns is working its tanks hard. Each turn is a receipt and a run of liftings, and each receipt needs ullage to arrive into. A farm with few turns is holding stock for a long time relative to what it sells. Neither is good or bad on its own. A strategic reserve is meant to turn slowly; a busy inland depot close to its market turns fast.
 
-Turns are also the figure a depot's commercial side reads. A throughput fee earns on every cubic metre that passes, so more turns on the same tanks earn more fees from the same steel. Module four reads the money side of IBAFO's throughput.
+Turns are also the figure a depot's commercial side reads. The throughput fee in module four is charged on throughput, revenue = throughput x fee, and turns are built on the same daily throughput. Module four reads the money side of IBAFO's throughput.
 
 ## The two readings together
 

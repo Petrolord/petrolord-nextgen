@@ -10,7 +10,7 @@ A bay that takes a mean of 24 minutes a load can manage 60 / 24 loads an hour. T
 
 offered load (erlangs) = arrivals per hour / (60 / load minutes)
 
-At IBAFO, 9 arrivals an hour at 24 minutes a load give an offered load of 3.6000 erlangs. An erlang is one bay kept busy for a whole hour. So the offered load says how many bays the arriving work would keep busy on average if it could be spread perfectly over them. It is a property of the traffic and the load time. Adding or removing a bay leaves it where it is.
+At IBAFO, 9 arrivals an hour at 24 minutes a load give an offered load of 3.6000 erlangs. The digest gives the erlang no definition beyond that formula, so read the offered load as the formula prints it: the arrivals an hour over the loads one bay manages an hour. It is a property of the traffic and the load time. Adding or removing a bay leaves it where it is.
 
 ## Utilisation
 

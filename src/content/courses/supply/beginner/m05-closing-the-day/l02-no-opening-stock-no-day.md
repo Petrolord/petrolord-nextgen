@@ -12,7 +12,7 @@ The first sentence is the verdict. Without a starting point the ledger has nothi
 
 ## Why the engine does not start from zero
 
-A blank opening stock has an obvious zero waiting to fill it, and that zero would be badly wrong. On the AKODO day the opening stock is 4953.700 m3. Treat it as 0 m3 and the gap carries the whole of yesterday's stock as if it were a gain the tanks made today, and someone goes looking for product that never arrived.
+A blank opening stock could be read as 0 m3, and the engine does not read it that way. On the AKODO day the opening stock it needs is 4953.700 m3, and with that figure left blank the call returns the refusal above and no gap at all.
 
 The engine refuses instead, because a starting stock is a measured quantity. Someone dipped the tanks at the end of yesterday; that figure is the opening stock. If nobody did, the day has no honest start.
 
@@ -28,7 +28,7 @@ Side by side, the two cases show the shape of the ledger: the opening stock is a
 
 ## Yesterday's dip is today's opening
 
-The instruction in the refusal carries a discipline. The closing dip of one day and the opening stock of the next are the same measurement, taken once at the changeover and used twice. It is recorded at standard, it belongs to yesterday, and it is fixed before today's dips are taken. The next lesson shows why that last condition is the one that matters most.
+The instruction in the refusal names one source for the opening stock: yesterday's closing dip. On the AKODO day that figure is 4953.700 m3. The next lesson takes the opening stock from today's closing dip instead, and shows what the day then reads: every day balances, and none of them measures anything.
 
 In the panel, clear the opening stock and read the refusal. Then restore it and clear the closing dip instead, and read which figure survives.
 

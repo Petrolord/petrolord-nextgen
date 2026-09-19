@@ -20,7 +20,7 @@ The lane runs 312.00 km to a station cluster, with a 33000.00 litre payload, an 
 | cost per litre delivered, naira | 15.0704 |
 | kg CO2e a trip | none |
 
-The answer is complete, because every cost box was typed. The carbon figure is none, because no diesel emission factor was supplied, and the engine says the figure is absent rather than zero. The cost per litre is spread over the litres delivered after the transit loss.
+The answer reads complete true, a flag that names a cost box left blank or null. A cost left out of the call takes the default its signature states and still reads complete true: with the driver cost left out, the lane reads 437830.99 naira a trip, complete true. The carbon figure is none, because no diesel emission factor was supplied, and the engine says the figure is absent rather than zero. The cost per litre is spread over the litres delivered after the transit loss.
 
 ## The fleet
 
@@ -35,7 +35,7 @@ The stations on the lane take 1260000.00 litres a day. With the lane's trips a t
 | spare trips a day | 0.345262 |
 | spare litres a day | 11393.64 |
 
-The 58 trucks are a ceiling. The spare is what rounding up bought, and it is no allowance for breakdowns or peaks; the engine sizes for the average cycle.
+The 58 trucks are a ceiling, and the spare is what rounding up bought.
 
 ## The forecourt
 
@@ -60,13 +60,11 @@ The forecourt is the rack's queue with nozzles for bays. Its tank check fails, a
 
 The lane's weight sits in its cycle. The queue hours and the average speed are typed inputs, and the cycle sets the trips a truck a day, which sets both the depreciation a trip and the fleet.
 
-The fleet's weight sits in the ceiling. A fleet utilisation of 0.991038 is a figure for an average day. The operator adds whatever spare the business needs.
-
-The forecourt's weight sits in the peak share and the reorder level. The first decides whether the queue is stable. The second decides whether a full truck can discharge. The forecourt's delivery of 33000.00 litres is the IBAFO lane's payload, and stationSizing checks the payload loaded. The lane delivers 32901.00 litres a trip after its transit loss, and the station's check does not use that figure. A lane planner who fills every truck and a station manager who orders at a fixed level are making one decision between them, and the warning is where it shows.
+The forecourt gives two separate answers, a queue and a tank check. The nozzle sweep reads stable false at 5 nozzles and true at 6. The reorder sweep reads payload fits false at a fraction of 0.25 and true at 0.1. The forecourt's delivery of 33000.00 litres is the IBAFO lane's payload, and stationSizing checks the payload loaded. The lane delivers 32901.00 litres a trip after its transit loss, and the station's check does not use that figure.
 
 ## A blank box anywhere
 
-Every link refuses or names a missing measured input. A blank driver cost reads complete false with Driver named; a blank truck capital reads a floor; a missing demand or nozzle count is refused. The chain holds only as long as every box on it was filled by someone who measured it.
+A blank or null input shows at every link, in one of three ways. A blank driver cost reads complete false with Driver named, and a blank truck capital reads a floor. A missing demand or nozzle count is refused. A farm with no daily throughput gives days of cover none. A cost left out of the lane call is the case to watch: it takes its stated default and reads complete true. The chain holds only as long as every box on it was filled by someone who measured it.
 
 ## Exercise
 

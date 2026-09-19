@@ -1,6 +1,6 @@
 # Divided by the outturn
 
-The importer pays the landed total and sells the outturn. So the cost of one litre sold is the landed total divided by the outturn litres. The engine's own sentence for it is short: the loss divides the cost. The landed total stays the same and the litres it is spread over fall.
+The importer pays the landed total and sells the outturn. So the cost of one litre sold is the landed total divided by the outturn litres. The digest puts it in one short sentence: the loss divides the cost. The landed total stays the same and the litres it is spread over fall.
 
 {{panel:supply-price-explorer}}
 

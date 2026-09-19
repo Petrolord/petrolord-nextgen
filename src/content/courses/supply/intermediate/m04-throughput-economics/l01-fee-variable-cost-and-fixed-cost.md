@@ -32,13 +32,11 @@ For IBAFO:
 | margin | 4988.00 |
 | margin per m3 | 1.89 |
 
-Money prints to two decimals of a dollar. The margin per m3 is the period's margin spread over the period's throughput, and it carries the fixed cost inside it.
+Money prints to two decimals of a dollar. The digest prints the margin per m3, 1.89 USD/m3, beside the margin and gives it no formula of its own, so quote it as printed and with its period.
 
 ## Three kinds of number
 
-The fee is charged per cubic metre and scales with throughput. The variable cost is spent per cubic metre and scales the same way: power for the pumps, additive, the consumables of loading. The fixed cost is spent whatever passes: staff, insurance on the site, the maintenance calendar. The distinction matters because the margin per m3 moves with throughput even when the fee and the variable cost do not. Spread the same fixed cost over more cubic metres and each one carries less of it.
-
-That is also why a margin per m3 from one period cannot be multiplied by another period's throughput. It already contains one period's fixed cost divided by one period's volume.
+The fee is charged per cubic metre and scales with throughput. The variable cost is spent per cubic metre and scales the same way: power for the pumps, additive, the consumables of loading. The fixed cost is spent whatever passes: staff, insurance on the site, the maintenance calendar. The engine's formula keeps the three apart: margin = revenue - throughput x variable cost - fixed cost, and revenue = throughput x fee. The fee and the variable cost enter once for every cubic metre. The fixed cost enters once for the period, 9400.00 USD at IBAFO, whatever the throughput.
 
 ## A blank input
 
@@ -55,7 +53,7 @@ With the fixed cost blank the margin reads 14388.00 USD, and assumedZero says wh
 
 ## A period's margin
 
-The margin is a period's margin. It is never a valuation of the depot. It does not discount anything, it carries no capital, and it says nothing about whether building the depot was worth it. Those are questions for the Economics courses, which own discounting and investment appraisal. This course teaches no NPV or IRR, and a report should not stretch a throughput margin into one.
+The margin is a period's margin. It is never a valuation of the depot. It does not discount anything, and it says nothing about whether building the depot was worth it. Those are questions for the Economics courses, which own discounting and investment appraisal. This course teaches no NPV or IRR, and a report should not stretch a throughput margin into one.
 
 What the margin does say is whether the fee covers the costs for the period at the stated volume. At IBAFO it does, by 4988.00 USD.
 
@@ -65,4 +63,4 @@ The same call computes a second ledger from the same volumes: the weight of the 
 
 ## Exercise
 
-Read IBAFO's throughput, fee, variable cost and fixed cost, and say which are invented. Read the blank fixed cost row and say what assumedZero tells you. Then read the revenue, margin and margin per m3 and say which input makes the margin per m3 depend on the period's throughput, and why the margin is a period's figure and never a valuation.
+Read IBAFO's throughput, fee, variable cost and fixed cost, and say which are invented. Read the blank fixed cost row and say what assumedZero tells you. Then read the revenue, margin and margin per m3 and say which input enters the margin once for the period, and why the margin is a period's figure and never a valuation.

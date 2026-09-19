@@ -2,9 +2,9 @@
 
 ## Two kinds of data a module could carry
 
-A module could carry two kinds of fixed data. One kind is true everywhere and forever: a cubic metre holds 1000 litres, and a barrel is 0.158987294928 m3 by definition. fuelPricing exports both as constants, and nothing about them depends on a market or a date.
+A module could carry two kinds of fixed data. One kind is a unit conversion. fuelPricing exports two as constants: LITRES_PER_M3 at 1000 and M3_PER_BBL at 0.158987294928.
 
-The other kind is true somewhere and for a while: a duty, a levy, a regulated margin, a published correction coefficient. The engine ships none of that kind. This lesson reads what it ships in its place.
+The other kind is a rate or a coefficient: a duty, a levy, a regulated margin, a published correction coefficient. The engine ships none of that kind. This lesson reads what it ships in its place.
 
 ## Templates with every rate absent
 

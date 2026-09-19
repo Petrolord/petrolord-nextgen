@@ -10,7 +10,7 @@ For an M/M/c rack the engine computes:
 
 mean wait = Erlang C / (bays x service rate - arrivals)
 
-The service rate is the loads a single bay manages an hour, 60 divided by the load minutes. The denominator is the rack's spare loading capacity an hour: what all the bays together could load, less what is arriving. The engine prints the result in minutes, to four decimals.
+The service rate is the loads a single bay manages an hour, 60 divided by the load minutes. The denominator is the bays times that rate, less the arrivals an hour, and the digest prints it only as that formula. The engine prints the result in minutes, to four decimals.
 
 For IBAFO at 9 arrivals an hour, 24 minute loads and 4 bays:
 
@@ -36,11 +36,11 @@ The load minutes swept on the same 4 bays at 9 arrivals an hour:
 | 24 | 0.787753 | 47.2652 |
 | 26 | 0.945114 | 245.7297 |
 
-The load time is part of the spare capacity too. Only the load minutes change down this table, and the printed mean wait goes from 2.8704 minutes at 16 minutes a load to 245.7297 minutes at 26.
+The load time sits in that denominator too, through the service rate. Only the load minutes change down this table, and the printed mean wait goes from 2.8704 minutes at 16 minutes a load to 245.7297 minutes at 26.
 
-## The spare capacity drives it
+## The bays swept
 
-The denominator explains why the wait climbs so steeply as a rack fills. When arrivals come close to what the bays can load, the spare capacity shrinks towards nothing and the mean wait grows without bound. The bay sweep at 9 arrivals an hour shows it from the other side, as spare capacity is added:
+The bays sit in the same denominator. The bay sweep at 9 arrivals an hour prints the wait as bays are added:
 
 | bays | probability of waiting | mean wait minutes |
 | --- | --- | --- |
@@ -50,11 +50,11 @@ The denominator explains why the wait climbs so steeply as a rack fills. When ar
 | 6 | 0.196566 | 1.9657 |
 | 7 | 0.086243 | 0.6088 |
 
-At 3 bays there is no spare capacity at all, and the engine prints none for the wait. The lesson after next explains that refusal.
+At 3 bays the utilisation reads 1.200000, the rack is marked unstable, and the engine prints none for the wait. The lesson after next explains that refusal.
 
 ## Time on site
 
-The mean time on site is the whole visit: the wait in the yard and the time on the bay. For a haulier this is the figure that matters. The truck lane in module five carries queueing hours in its cycle for exactly this reason, as a typed input of its own.
+The engine prints a mean time on site of 71.2652 minutes beside the mean wait of 47.2652 minutes. The digest gives the time on site no formula, so quote it by its label and keep it apart from the wait. The truck lane in module five carries queueing hours in its cycle as a typed input of its own.
 
 ## Units
 
@@ -62,4 +62,4 @@ The engine works in hours internally, because the arrivals and the service rate 
 
 ## Exercise
 
-Read IBAFO's probability of waiting, mean wait and mean time on site at 4 bays. Say what population of trucks the mean wait is averaged over, and use the printed 60.0000 minutes to say why a driver who queued that morning might report a longer wait than the mean. Then read the bay sweep and say what the row at 3 bays prints for the wait, and what that says about the rack's spare capacity.
+Read IBAFO's probability of waiting, mean wait and mean time on site at 4 bays. Say what population of trucks the mean wait is averaged over, and use the printed 60.0000 minutes to say why a driver who queued that morning might report a longer wait than the mean. Then read the bay sweep and say what the row at 3 bays prints for the wait, and what the utilisation on that row reads.

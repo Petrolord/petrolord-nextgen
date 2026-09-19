@@ -6,7 +6,7 @@
 
 A tank is calibrated once, carefully, and the result is written down as a table. Each row pairs a height above the tank's datum, in millimetres, with the volume the tank holds when liquid stands at that height, in cubic metres. The name comes from the old practice of measuring a tank's circumference with a steel strap at several rings, but the table can come from a strap, from an optical survey or from the tank's drawings. What matters for this course is what the table is: the only thing that links a dip to a volume for that one tank.
 
-A strapping table belongs to a tank and to nothing else. Two tanks of the same nominal size do not share one, because their shells, floors and fittings differ. That is why terminalDepot ships no table and refuses a dip when the tank has none:
+A strapping table belongs to a tank and to nothing else, and each AKODO tank carries its own. terminalDepot ships no table and refuses a dip when the tank has none:
 
 REFUSED: No strapping table for this tank.
 

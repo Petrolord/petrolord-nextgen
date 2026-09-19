@@ -19,9 +19,9 @@ At 14750 mm the dip lands on the last entry and reads its volume. At 14800 mm th
 
 Between two entries the engine draws a straight line. Above the last entry there is only one point, so the tempting move is to take the slope of the last step and carry it upward. That is extrapolation, and the refusal names what it would do: invent capacity the tank does not have.
 
-The reason is physical. The top of a tank is where its geometry stops being regular. A vertical tank has a roof, a floating roof deck, overflow vents and a shell that ends. A horizontal bullet closes over in a curve. Above the calibrated height the volume per millimetre does whatever the tank's top does, and a straight line carried up from the last step knows none of it. A stock figure computed that way would show product in space that is not part of the tank.
+The table states a volume at each entry up to 14750 mm and nothing above it. A straight line carried up from the last step would give a volume at a height no calibration covered, and the refusal names that volume for what it is: capacity the tank does not have.
 
-There is a practical side too. A dip above the last entry is a warning in its own right. Either the reading is wrong, or the tank has been filled past its calibrated height, which is a safe filling question before it is a stock question. In both cases the engine stops and makes somebody look.
+So a dip above the last entry stops the chain at its first link. Either the reading or the table has to change before any volume is formed, and until then the engine stops and makes somebody look.
 
 ## The top of the other two tables
 

@@ -1,7 +1,7 @@
 # supply: Terminals, Depots & Fuel Supply. Teaching digest.
 # PRECISION: volumes print to three decimals of a cubic metre (a litre); VCF to six decimals and its alpha to nine; probabilities and utilisation to six decimals; offered load in erlangs, minutes and queue lengths to four; days of cover and turns to four; money in US dollars to two decimals and dollars per litre to six; local currency per litre to four; percents to four; litres to two; tonnes and barrels to four; kilometres to two; hours to three; trips to six; exchange rates to four. Heights are whole millimetres. Counts are whole numbers.
 # NO CLOCK: neither engine reads a date or a random number, so no figure below depends on when or where the digest was built.
-# ENGINES: engines/downstream/terminalDepot.js and engines/downstream/fuelPricing.js at petrolord-engines e4d3b10 (MD3-0 and MD3-1), vendored in NextGen under packages/engines.
+# ENGINES: engines/downstream/terminalDepot.js and engines/downstream/fuelPricing.js at petrolord-engines 13f0936 (MD3-0, MD3-1 and MD3-2), vendored in NextGen under packages/engines.
 # CASES: AKODO (a coastal import terminal: three tanks, their strapping tables, a morning of dips and one day), IBAFO (an inland depot: its loading rack, tank farm, throughput economics, a truck lane, a fleet and a forecourt), BADAGRY (one petrol cargo landed and priced to the nozzle). All three are invented records.
 # RATES: every rate, margin, levy, freight, exchange rate and tax below is INVENTED for this course and is not a published figure. The engine ships no rate and no volume correction coefficient, and the one coefficient row below is SYNTHETIC.
 # Built by build_digest.sh from supply_dump.mjs and supply_fields.mjs. Never edited by hand.
@@ -596,6 +596,17 @@ The BADAGRY cargo, insurance on CIF, the ocean loss swept (bill of lading 457727
 | 0.45 | 45566774.37 | 26513943.86 | 0.581870 | 884.6753 |
 | 1 | 45315024.23 | 26513943.86 | 0.585103 | 889.5902 |
 
+An ocean loss left blank is a missing rate, so the build-up is not complete and the landed total is a floor. A loss left out of the call takes the 0 the signature states. A loss of 100 percent or more, or below 0, is refused:
+| ocean loss (stated) | the engine answers |
+| --- | --- |
+| blank | complete false; missing Ocean loss; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; A FLOOR, not a cost: 1 rate(s) not supplied. |
+| null | complete false; missing Ocean loss; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; A FLOOR, not a cost: 1 rate(s) not supplied. |
+| left out of the call | complete true; missing none; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; All supplied rates applied. |
+| 100 | REFUSED: The ocean loss must be at least 0 and under 100 percent. |
+| 120 | REFUSED: The ocean loss must be at least 0 and under 100 percent. |
+| -0.5 | REFUSED: The ocean loss must be at least 0 and under 100 percent. |
+The blank row spreads the landed total over the bill-of-lading litres, as the 0 percent row does: its USD per litre sold equals the 0 percent row's: true. The row left out of the call reads the 0 percent row's USD per litre sold: true, and complete true.
+
 The exchange rate enters once, at the end: naira per litre sold = USD per litre sold x 1520.4000. With no exchange rate the local figure is none.
 
 HELD (FINDINGS-supply H1): the charges levied at discharge are billed on the bill-of-lading quantity. The jetty line is 54927.30 USD and the storage line 121297.79 USD, each on 45772.752 m3 on the bill of lading, where the outturn is 45566.774 m3. Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know.
@@ -680,7 +691,7 @@ Held by the engines repository (FINDINGS-supply), taught as limits and never gra
 H1: the charges levied at discharge (jetty, storage) are billed on the bill-of-lading quantity; whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know (SECTION 19 prints the two quantities).
 H2: the volume correction coefficient tables and every published rate stay unshipped. volumeCorrectionFactor refuses without coefficients (SECTION 6), and every template rate is absent: IMPORT_TEMPLATE ships 9 of 9 rates as none and PUMP_TEMPLATE 7 of 7.
 
-Rules the engines keep at 60ee266 (MD3-0, engines PR #221), each measured in this digest:
+Rules the engines keep at 13f0936 from MD3-0 (engines PR #221), each measured in this digest:
 a day is not closed without its opening stock (SECTION 7): REFUSED: No opening stock, so the day cannot be closed. The opening stock is yesterday's closing dip.
 a dip below a table that does not start at the empty tank is refused, and so is a negative dip (SECTION 4).
 a water cut the table cannot convert is refused, and so is water above the product dip (SECTIONS 4 and 5).
@@ -691,11 +702,15 @@ insurance quoted on CIF is solved in closed form (SECTION 18): CIF 24331931.09 U
 a freight-stage charge on C&F or CIF, and a charge with an unknown stage, are refused (SECTION 18).
 a blank trucking cost is missing and named, and a cost left out of the call takes its stated default (SECTION 14).
 
-Rules the engines keep at e4d3b10 (MD3-1, engines PR #224), each measured in this digest:
+Rules the engines keep at 13f0936 from MD3-1 (engines PR #224), each measured in this digest:
 a load time of zero minutes is refused (SECTION 10): "Arrival rate and load time are both needed."
 throughputEconomics needs the throughput and the fee (SECTION 13): "Throughput and the throughput fee are both needed for the money answer." A blank cost or loss is taken as zero and named in assumedZero.
 tankFarmCover with no daily throughput gives no days of cover and no turns (SECTION 12): turns a year none.
 an opening stock derived from the day's own closing dip balances every day and measures nothing (SECTION 7).
+
+Rules the engines keep at 13f0936 from MD3-2 (engines PR #225), each measured in this digest:
+an ocean loss left blank is a missing rate and the landed total is a floor (SECTION 19): complete false; missing Ocean loss; A FLOOR, not a cost: 1 rate(s) not supplied.
+an ocean loss of 100 percent or more is refused (SECTION 19): REFUSED: The ocean loss must be at least 0 and under 100 percent.
 
 # SECTION 24: WHAT THE ORACLES CHECK (owned by Expert m06)
 

@@ -10,7 +10,7 @@ That is a problem for anyone who has to agree a stock. A cargo loaded in a cool 
 
 ## A reference temperature
 
-The trade settles this by agreeing one reference temperature and stating every volume as if the product stood at it. In this course that reference is 15 C. A volume stated at 15 C is a volume at standard; the volume the tank held at its real temperature is the gross observed volume.
+The answer is to state every volume against one reference. In the correction form this course reads, that reference is 15 C: the density enters as the density at 15 C, the temperature enters as the observed temperature less 15 C, and the VCF is exactly 1.000000 at 15 C. The volume the tank held at its real temperature is the gross observed volume. The same volume multiplied by the VCF is the volume at standard.
 
 The figure that carries one to the other is the volume correction factor, the VCF:
 

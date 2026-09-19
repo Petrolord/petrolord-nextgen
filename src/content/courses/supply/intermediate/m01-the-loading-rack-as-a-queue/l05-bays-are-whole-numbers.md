@@ -1,12 +1,12 @@
 # Bays are whole numbers
 
-The offered load at IBAFO is 3.6000 erlangs. That figure says the arriving work would keep that many bays busy if it could be spread perfectly. It is tempting to read it as a bay count and to conclude that the rack needs 3.6000 bays. A rack cannot have a fraction of a bay, and the engine refuses to pretend otherwise.
+The offered load at IBAFO is 3.6000 erlangs. That figure is the arrivals an hour over the loads one bay manages an hour. It is tempting to read it as a bay count and to conclude that the rack needs 3.6000 bays. A rack cannot have a fraction of a bay, and the engine refuses to pretend otherwise.
 
 {{panel:supply-depot-explorer}}
 
 ## What the engine refuses
 
-The bay count goes into the Erlang recursion as a count. The engine checks it before anything else runs:
+The engine refuses a bay count that is not a whole number, one or more:
 
 | bays (stated) | the engine answers |
 | --- | --- |

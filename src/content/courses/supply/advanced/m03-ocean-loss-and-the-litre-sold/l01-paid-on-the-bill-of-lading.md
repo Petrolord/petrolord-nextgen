@@ -1,12 +1,12 @@
 # Paid on the bill of lading
 
-Two quantities describe one cargo at the end of a voyage. The bill of lading states what was loaded, and the importer pays for it. The outturn is what is measured ashore, and the importer sells that. The two differ by the ocean loss. This module is about keeping them apart, because a cost is incurred on one and recovered on the other.
+Two quantities describe one cargo at the end of a voyage. In the digest's words, the importer pays for the bill-of-lading quantity and sells the outturn. The two differ by the ocean loss. This module is about keeping them apart, because a cost is incurred on one and recovered on the other.
 
 {{panel:supply-price-explorer}}
 
 ## The rule
 
-The engine states it in one line: outturn = bill-of-lading x (1 - ocean loss / 100). The ocean loss is a percentage of the bill-of-lading quantity, and it is an input. The engine does not estimate it from the voyage, the product or the weather. On a real cargo it is what the shore tanks measure against the bill of lading, and the Associate tier of this course showed how those shore tanks are measured.
+The digest states it in one line: outturn = bill-of-lading x (1 - ocean loss / 100). The ocean loss is a percentage of the bill-of-lading quantity, and it is an input the caller supplies.
 
 BADAGRY's ocean loss is 0.45 percent. Like every figure on the BADAGRY record, it is invented for this course.
 
@@ -26,9 +26,11 @@ The outturn enters when the question turns from what the cargo cost to what a li
 
 ## A loss is not a line
 
-It is tempting to treat the ocean loss as one more line in the build-up, a charge in dollars added to the landed total. The engine does not do that, for a reason this whole tier leans on: a loss added as a charge understates the cost of a litre sold. The loss is not money paid to anyone. It is litres paid for and never received, so it changes the number of litres the money is spread over. The landed total stays the same.
+It is tempting to treat the ocean loss as one more line in the build-up, a charge in dollars added to the landed total. The engine does not do that. In the digest's words, the loss divides the cost: the landed total stays the same and the litres it is spread over fall. The next lesson reads that division.
 
-The ocean loss is also an input of its own and has no row in `IMPORT_TEMPLATE`. The template's 9 lines are charges, each paid to someone on a base. The loss is paid to no one and has no base of its own.
+The ocean loss is also an input of its own and has no row in `IMPORT_TEMPLATE`, whose 9 lines are charges, each with a basis and a stage. It still counts toward a complete build-up. Left blank, it is a missing rate: the walk reads complete false, missing Ocean loss, and labels its total "A FLOOR, not a cost: 1 rate(s) not supplied." That blank row spreads the landed total over all 45772751.75 bill-of-lading litres, 0.579252 USD a litre sold. Left out of the call entirely, the loss takes the 0 the signature states and reads complete true. A loss of 100 percent or more is refused, and so is one below 0:
+
+> REFUSED: The ocean loss must be at least 0 and under 100 percent.
 
 ## Exercise
 

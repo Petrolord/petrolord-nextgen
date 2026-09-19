@@ -303,12 +303,12 @@ q(2, "The rack's refusal says to add a bay, and a forecourt can add a nozzle. Wh
   "The offered load."],
  "Bays at the rack and nozzles at the forecourt are the same input of one queue model. Adding one lowers the utilisation and leaves the offered load where it was, 3.6000 erlangs at IBAFO's rack.")
 
-q(3, "Why do the farm's 44.1108 turns a year interest the side of the depot that earns IBAFO's invented throughput fee?",
- "The fee earns on every cubic metre that passes.",
+q(3, "The farm turns 44.1108 times a year, and IBAFO earns an invented throughput fee. What ties the turns to the fee's revenue?",
+ "Both are formed from throughput in the engine's formulas.",
  ["Turns set the fee rate the engine applies to each cubic metre.",
   "Each turn adds the invented fixed cost of 9400.00 USD once more.",
   "The margin per m3 of 1.89 USD is paid once for each turn."],
- "A throughput fee earns on every cubic metre that passes, so more turns on the same tanks earn more fees from the same steel. Turns = daily throughput x 365 / working capacity; the fee, 7.80 USD/m3, is an invented input the caller types.")
+ "Turns = daily throughput x 365 / working capacity, and revenue = throughput x fee. The fee, 7.80 USD/m3, is an invented input the caller types.")
 
 emit(Q, '/root/wt-md-supply-nextgen/tools/course-banks/supply/intermediate/tdsi_exam.json', label='tdsi_exam', expect_n=42)
 finish()

@@ -20,7 +20,7 @@ The rack's inputs are 9 arrivals an hour, a mean of 24 minutes a load and 4 bays
 
 Read in order, these say: the traffic is an offered load of 3.6000 erlangs; each of the 4 bays is loading for 0.900000 of its time; an arriving truck finds every bay full with a probability of 0.787753; averaged over every truck, including those that load at once, the wait is 47.2652 minutes; and the yard holds 7.0898 trucks on average. Little's law ties the last two to the arrivals: 9 x 47.2652 / 60 = 7.0898.
 
-The report's headline should be the probability of waiting and the mean wait. A report that leads with a utilisation of 0.900000 invites the reader to think the rack has room, and the driver's experience says otherwise.
+The engine prints all of these for one rack. A report that quotes only the utilisation of 0.900000 leaves out the probability of waiting, 0.787753, and the mean wait, 47.2652 minutes.
 
 ## The margin of stability
 
@@ -46,7 +46,7 @@ The farm's four tanks, counted tank by tank:
 | days of cover | 3.8345 |
 | turns a year | 44.1108 |
 
-The pumpable stock is the sum of each tank's stock above its own heel, never below zero. IB-T2 holds 164.700 m3 against a heel of 210.000 m3 and contributes 0.000 m3. The farm's stock less its heel, 10077.700 m3, is the figure the engine prints only to say it does not use it.
+The pumpable stock is the sum of each tank's stock above its own heel, never below zero. IB-T2 holds 164.700 m3 against a heel of 210.000 m3 and contributes 0.000 m3. The farm's stock less its heel, 10077.700 m3, is a figure the digest prints beside the engine's, with the note that it is not pumpable stock.
 
 The days of cover divide the pumpable stock by the liftings, and they describe the farm as one pool of three products. The petrol that can be lifted today is IB-T1's 5078.400 m3.
 

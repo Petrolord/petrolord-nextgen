@@ -8,7 +8,7 @@ The last link of the tank chain is the shortest:
 
 standard volume = gross observed volume x VCF
 
-The gross observed volume comes from module three, with free water already off. The VCF is the figure typed off AKODO's own tables in the last lesson, invented for this course like the tables themselves. dipToStandardVolume multiplies the two and reports the result in m3 at standard, meaning the volume the product would occupy at 15 C.
+The gross observed volume comes from module three, with free water already off. The VCF is the figure typed off AKODO's own tables in the last lesson, invented for this course like the tables themselves. dipToStandardVolume multiplies the two and reports the result in m3 at standard. The form of the last three lessons gives a VCF of exactly 1.000000 at 15 C, so a product observed at 15 C reads the same volume gross observed and at standard.
 
 ## AKODO at standard
 
@@ -29,9 +29,9 @@ Read AK-01 across. 3461.489 m3 of petrol stood in the tank at 31.5 C, gross obse
 The morning now has two totals, and they are different quantities:
 
 - the total gross observed volume, 4581.490 m3, at three observed temperatures;
-- the total standard volume, 4499.452 m3, all at 15 C.
+- the total standard volume, 4499.452 m3, each tank's gross observed volume times its typed VCF.
 
-Only the second is a stock. The first is a true statement about the tanks this morning, but its three parts were measured at 31.5 C, 30 C and 29 C, so the sum mixes three temperatures. The standard total states every part at the same reference, which is what lets it be set against an opening stock held at standard.
+Only the second is a stock. The first is a true statement about the tanks this morning, but its three parts were measured at 31.5 C, 30 C and 29 C, so the sum mixes three temperatures. The standard total states every part at standard, which is what lets it be set against an opening stock held at standard.
 
 Keep the units on both. A figure written as 4581.490 m3 without saying gross observed invites someone to close the day on it. Module five shows the digest doing exactly that and what the day then reads.
 

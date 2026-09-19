@@ -29,7 +29,7 @@ The fully blank build-up shows why the label matters. Its total is 23392000.00 U
 
 The digest prices the cargo twice more, changing only the duty. With the course's invented duty typed 0, the build-up is complete true, total 25114857.82 USD. With the duty left blank, it is complete false, missing Import duty, total 25114857.82 USD, labelled "A FLOOR, not a cost: 1 rate(s) not supplied."
 
-The two totals print the same figure. The flag and the missing list tell them apart. A duty typed 0 is a statement about a regime, and the engine takes it as one. A blank duty is an absence, and the engine names it. The template's rate column is empty on purpose, so a default of zero would make every untouched line a claim that the charge does not exist.
+The two totals print the same figure. The flag and the missing list tell them apart. In the digest's words, a rate typed 0 is a rate, and the engine applies it. A blank duty is an absence, and the engine names it. The template's rate column is empty on purpose, so a default of zero would make every untouched line a claim that the charge does not exist.
 
 ## Reading the floor against the full build
 

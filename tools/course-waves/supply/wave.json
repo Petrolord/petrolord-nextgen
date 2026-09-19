@@ -91,7 +91,7 @@
   "engine-suites": {
    "file": "run_gates.sh",
    "md5": "239ad84da9f1d6d31d84196d3a0965d5",
-   "result": "exit 0: Tests:       138 passed, 138 total"
+   "result": "exit 0: Tests:       139 passed, 139 total"
   },
   "digest-repro": {
    "file": "gate_repro.sh",
@@ -111,7 +111,7 @@
   "kit-digestprose": {
    "file": "/root/dc-wavekit/digestprose.mjs",
    "md5": "97dda85819e61737a76d8caf5badb46d",
-   "result": "exit 0: [digestprose] /root/md-wip-supply/digest.txt: 712 line(s), 24 section title(s) and 11 in-body marker(s) swept against their blocks, 32 history framings, 39 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 5 deferred as verbatim engine strings; 0 failing"
+   "result": "exit 0: [digestprose] /root/md-wip-supply/digest.txt: 727 line(s), 24 section title(s) and 11 in-body marker(s) swept against their blocks, 32 history framings, 39 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 8 deferred as verbatim engine strings; 0 failing"
   },
   "kit-digestfigures": {
    "file": "/root/dc-wavekit/digestfigures.py",

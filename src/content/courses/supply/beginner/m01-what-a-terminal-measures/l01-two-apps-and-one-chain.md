@@ -15,7 +15,7 @@ Two engine modules sit behind the course. The counts below are measured from the
 
 Each module exports its rules as functions and its fixed data as constants. The digest lists the names behind each count on a line of their own, the functions apart from the constants, so every count above can be checked name by name. terminalDepot owns the tank and the depot. Five of its functions carry this whole tier: volumeAtDip, dipToStandardVolume, volumeCorrectionFactor, reconcileStock and trendUnaccounted. It exports no constants, so no strapping table, no correction coefficient and no opening stock lives inside it. Each of those arrives from the terminal that owns the tank.
 
-fuelPricing owns the cargo and the price. Among its constants are two conversions fixed by definition, LITRES_PER_M3 at 1000 and M3_PER_BBL at 0.158987294928, and two templates of line items whose rates are all absent. The Expert tier walks those templates.
+fuelPricing owns the cargo and the price. Among its constants are two conversions, LITRES_PER_M3 at 1000 and M3_PER_BBL at 0.158987294928, and two templates of line items whose rates are all absent. The Expert tier walks those templates.
 
 ## Three invented places
 

@@ -25,7 +25,7 @@ The IBAFO farm this morning:
 
 ## The tank below its heel
 
-IB-T2 holds 164.700 m3 against a heel of 210.000 m3. The product in it sits below the outlet's reach, so the pumps can draw none of it and the engine counts its pumpable stock as 0.000 m3. The tank is neither empty nor available. It is a tank waiting for a receipt.
+IB-T2 holds 164.700 m3 against a heel of 210.000 m3. Its stock is below its own heel, and the engine counts its pumpable stock as 0.000 m3. The tank is neither empty nor available. It is a tank waiting for a receipt.
 
 A pumpable stock can never be negative. A tank below its heel does not owe volume to anyone. The engine stops each tank's count at zero, which is the physical truth: a pump draws from one tank, and a shortfall in one tank has no effect on what another can deliver.
 

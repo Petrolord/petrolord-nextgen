@@ -18,7 +18,7 @@ For IBAFO:
 | daily throughput (liftings) m3 | 2640.000 |
 | days of cover | 3.8345 |
 
-Days of cover prints to four decimals. The daily throughput here is the depot's liftings, the volume loaded out to trucks in a day. It is a measured or planned rate the caller supplies. The engine does not infer it from the rack, and the rack's 216 trucks a day is a count of trucks, whose loads the rack model does not carry.
+Days of cover prints to four decimals. The daily throughput here is the depot's liftings, the volume loaded out to trucks in a day. It is an input the caller supplies, and with none the engine gives days of cover none and turns a year none. The engine does not infer it from the rack, and the rack's 216 trucks a day is a count of trucks, whose loads the rack model does not carry.
 
 ## What the figure means
 
@@ -34,7 +34,7 @@ The third is that the rate holds. A depot's liftings vary by day of the week and
 
 ## Why the numerator is where errors hide
 
-Of the two inputs, the throughput is usually the one argued over, because it is a forecast. The stock is usually trusted, because it is measured. That trust belongs to the dipped volume. It does not extend to the pumpable figure unless the heels have been taken off tank by tank. On a morning like this one, with IB-T2 below its heel, the difference between methods moves the numerator, and every day of cover inherits it.
+Of the two inputs, the stock is the one this course has traced to the tanks. The pumpable figure built on it holds only when the heels have been taken off tank by tank. On a morning like this one, with IB-T2 below its heel, the difference between methods moves the numerator, and every day of cover inherits it.
 
 ## Cover and the queue
 

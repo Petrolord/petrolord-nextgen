@@ -28,7 +28,7 @@ The third shape belongs to the price module and appears in the Expert tier. A co
 
 ## Why a zero would be worse
 
-Every blank in that table has an easy zero waiting to fill it. A blank dip read as 0 mm is an empty tank. A blank opening stock read as 0 m3 turns a whole tank of yesterday's product into an apparent gain. A blank VCF read as 0 wipes the stock out entirely, and a blank closing dip read as 0 m3 reports the day's whole expected stock as lost. Each of those zeros produces a clean looking figure, and each figure is wrong with nothing on its face to say so. None reads as none because the honest statement about an unmeasured quantity is that nobody measured it.
+Every blank in that table could be read as a zero, and the engine reads none of them that way. A blank dip is refused with "No dip reading." A blank opening stock is refused, and the refusal names where the figure comes from. A blank VCF leaves the standard volume as none beside a gross of 3461.489 m3, and a blank closing dip leaves the unaccounted figure as none beside an expected closing of 4508.100 m3. Each answer says which input was not measured. None reads as none because the honest statement about an unmeasured quantity is that nobody measured it.
 
 The same rule reaches past the tank. The throughput economics call, met in the Professional tier, reports its emissions as none when no emission factor is supplied, and its note says an invented factor would be worse than none.
 

@@ -33,6 +33,8 @@ Each of these is a rule in force at the engines' current version.
 | The money answer needs the throughput and the fee; a blank cost or loss is taken as zero and named in assumedZero. | "Throughput and the throughput fee are both needed for the money answer." |
 | With no daily throughput the tank farm gives no days of cover and no turns. | turns a year none |
 | An opening stock derived from the day's own closing dip balances every day and measures nothing. | the AKODO demonstration |
+| An ocean loss left blank is a missing rate, and the landed total is a floor. | complete false; missing Ocean loss; "A FLOOR, not a cost: 1 rate(s) not supplied." |
+| An ocean loss of 100 percent or more is refused. | REFUSED: The ocean loss must be at least 0 and under 100 percent. |
 
 ## Three rows read closely
 

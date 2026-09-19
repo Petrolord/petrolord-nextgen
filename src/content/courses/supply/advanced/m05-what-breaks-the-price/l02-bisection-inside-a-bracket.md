@@ -20,11 +20,11 @@ breakeven: found true, at 1641.7105 naira to the dollar, after 18 bisection step
 
 That is the exchange rate at which the invented chain's pump price meets the invented cap. Every sweep row above it reads false and every sweep row below it reads true.
 
-## Why the engine bisects
+## Two methods for one breakeven
 
-The oracle that checks this engine solves the breakeven in closed form. The engine bisects instead, and the difference is the point.
+The oracle that checks this engine solves the breakeven in closed form. The engine bisects instead. The digest prints that split and no reason for it.
 
-A closed form is written for one shape of chain. Add an element, move the tax to a different basis or insert a percentage line in the middle, and the formula must be rederived by hand. Bisection needs none of that. It asks the chain for its price and reads the sign. Whatever the build-up contains, as long as the price at the two ends of the bracket lies on opposite sides of the cap, bisection finds where it crosses.
+What the digest does print is how the engine's search behaves. priceSensitivity re-prices the whole chain at each value of the driver and hands solveCrossing the bracket from the lowest to the highest value swept. If the price does not cross the cap inside that range, the engine says so and returns no value.
 
 The two methods reaching the same exchange rate is what the oracle's check is for.
 

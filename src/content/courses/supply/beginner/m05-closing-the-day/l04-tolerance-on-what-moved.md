@@ -2,11 +2,11 @@
 
 {{panel:supply-tank-explorer}}
 
-## Why the band is set on throughput
+## The band is set on throughput
 
-Every measurement in the day carries some uncertainty: the tapes, the thermometers, the interpolated tables and the meters on receipts and deliveries. Product that moves is product measured on the way in or out, so a busy day leaves more room for honest error than a still one.
+The day's gap is judged against a band, and the engine's formula says what the band stands on: tolerance = a stated percent of throughput, and throughput = receipts + deliveries. The band grows with the product that moved, and a day that moved nothing has no band at all, as the last section of this lesson shows.
 
-So reconcileStock sets its tolerance on throughput, defined as receipts plus deliveries, and states it as a percent of that throughput. AKODO's stated tolerance is 0.2 percent of throughput, a figure chosen for this course. On the AKODO day, with receipts of 2870.000 m3 and deliveries of 3312.500 m3, the engine prints the throughput as 6182.500 m3. That is the base of the band, and 0.2 percent of it comes to 12.365 m3.
+AKODO's stated tolerance is 0.2 percent of throughput, a figure chosen for this course. On the AKODO day, with receipts of 2870.000 m3 and deliveries of 3312.500 m3, the engine prints the throughput as 6182.500 m3. That is the base of the band, and 0.2 percent of it comes to 12.365 m3.
 
 The unaccounted figure is judged against that band on both sides. A gap of -8.648 m3 on the day reads within tolerance: true. The engine also states the gap as a share of throughput: -0.1399 percent. Keep the units apart: the tolerance percent is the stated band, and the unaccounted percent is the day's result on the same base.
 
@@ -24,7 +24,7 @@ The same day, with only the tolerance percent changing:
 
 Nothing about the tanks changes down this table. The unaccounted figure stays -8.648 m3 in every row. What changes is the band it is held to. At 0.05 percent the band is 3.091 m3 and the day is outside it; at 0.1 percent the band is 6.183 m3 and the day is still outside; from 0.2 percent upward it is within.
 
-Whether a day passes depends on a percent somebody chose. The percent should come from the terminal's own measurement procedures and the uncertainty of its instruments, and it should be fixed before the day is closed. A tolerance tuned after the fact until the day passes is the same trap as the reconciliation that cannot fail, in a softer form.
+Whether a day passes depends on a percent somebody chose. The same gap of -8.648 m3 reads false at 0.1 percent and true at 0.2 percent. The percent is a stated input like the receipts and the deliveries, and the day's verdict carries it.
 
 ## A day with nothing moving
 
@@ -40,4 +40,4 @@ In the panel, sweep the tolerance percent on the AKODO day and watch the within 
 
 Read the tolerance sweep at 0.1 percent and at 0.2 percent: the tolerance in m3 and the verdict at each. Say what changed between the two rows, what did not, and what that shows about where a day's verdict comes from.
 
-Self check: the band went from 6.183 m3 to 12.365 m3 and the verdict from false to true. The unaccounted figure stayed -8.648 m3. The verdict depends on the stated percent as well as on the tanks, so the percent has to be set before the day is closed.
+Self check: the band went from 6.183 m3 to 12.365 m3 and the verdict from false to true. The unaccounted figure stayed -8.648 m3. The verdict depends on the stated percent as well as on the tanks.

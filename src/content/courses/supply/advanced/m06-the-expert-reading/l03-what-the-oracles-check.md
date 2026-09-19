@@ -19,7 +19,7 @@ The value of an oracle is that it reaches the same figure by a different road. A
 
 In this tier there are two clear pairs. For insurance quoted on CIF, the engine uses a closed form and the oracle iterates the fixed point: guess a CIF, charge the premium on it, repeat. For the exchange rate breakeven, the pairing runs the other way: the engine bisects and the oracle solves in closed form. In each pair, a mistake in one method would have to be reproduced by a quite different method to go unnoticed.
 
-The terminal oracle works the same way. It builds a strapping table from tank geometry where the engine interpolates, computes Erlang C by the exact factorial form in rational arithmetic where the engine recurses, and searches for the fleet one truck at a time where the engine takes a ceiling.
+The terminal oracle works the same way. It builds a strapping table from tank geometry where the engine interpolates, and computes Erlang C by the exact factorial form in rational arithmetic where the engine recurses. The fleet pair belongs to the pricing oracle, whose method column lists an integer fleet search: it searches for the fleet one truck at a time, where the engine takes a ceiling.
 
 ## What the oracles do not check
 
@@ -27,7 +27,7 @@ The oracles check figures and verdicts. They never check the wording of a refusa
 
 The published source column reads none on both rows. No rate is checked against a published figure, because every rate is synthetic. The volume correction form is pinned by the engine's tests and not validated against a published table, because no table is shipped. Those tests assert the form itself and two invariants that need no coefficient: a VCF of exactly 1 at 15 C, and below 1 above it. On the course's synthetic row, the VCF at 15 C is 1.000000, exactly one.
 
-So the checking has an honest shape. Arithmetic, algebra and queueing are checked by independent methods. Rates and coefficients, which are data, are not checked at all, and the course says so every time it uses one.
+Read together, the rows give the checking its edges. The method column lists what each oracle computes by an independent method. The published source column reads none: every rate is synthetic, and no coefficient table is shipped.
 
 ## Exercise
 

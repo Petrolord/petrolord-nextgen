@@ -50,8 +50,8 @@ K2 for any commodity group, and do not say the synthetic row resembles one.
 
 ## History on this wave
 
-This digest describes the engines as they are at e4d3b10 (MD3-0 and MD3-1). It carries NO
-section about what the engine used to do. SECTION 23 states the rules MD3-0 and MD3-1 put
+This digest describes the engines as they are at 13f0936 (MD3-0, MD3-1 and MD3-2). It carries NO
+section about what the engine used to do. SECTION 23 states the rules MD3-0, MD3-1 and MD3-2 put
 in force, each in the present tense with a measured figure. A sentence about
 former behaviour that reads as current behaviour is a defect; do not write
 "used to", "was changed", "before the repair" or anything of that shape. If you

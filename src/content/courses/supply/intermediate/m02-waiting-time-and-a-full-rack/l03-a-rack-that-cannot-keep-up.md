@@ -17,7 +17,7 @@ The rack keeps its 4 bays and 24 minute loads while the arrivals rise:
 | 9.5 | 0.950000 | probability of waiting 0.891419, mean wait 106.9703 minutes |
 | 10 | 1.000000 | stable false, probability of waiting 1.000000, mean wait none |
 
-Quote the waits in order from the top: 4.3056 minutes, then 8.5731, then 17.8930, then 47.2652, then 106.9703. Set them beside the utilisation column, which gives no sign of where the wait is heading. The mean wait formula divides by the rack's spare capacity, and down this table the spare capacity is running out.
+Quote the waits in order from the top: 4.3056 minutes, then 8.5731, then 17.8930, then 47.2652, then 106.9703. Set them beside the utilisation column: 0.600000, 0.700000, 0.800000, 0.900000 and 0.950000. The mean wait formula divides by the bays times the service rate less the arrivals, and down this table only the arrivals change.
 
 ## The row where no average exists
 
@@ -25,7 +25,7 @@ At 10 arrivals an hour the utilisation reaches 1.000000. The arriving work equal
 
 > REFUSED: The rack cannot keep up with arrivals. The queue grows without limit, so no average waiting time exists. Add a bay, load faster, or spread the arrivals.
 
-The refusal is exact. With no spare capacity, every random bunch of arrivals adds trucks to the line and nothing ever works them off. The line does not settle at a long length; it keeps growing for as long as the traffic holds. An average of a quantity that grows without limit does not exist, and a figure printed for it would be an artefact of the arithmetic. A rack at a utilisation of exactly one is already in this state. The boundary is at one, and one is on the wrong side of it.
+The refusal is exact. In its own words the queue grows without limit, so no average waiting time exists. An average of a quantity that grows without limit does not exist, and a figure printed for it would be an artefact of the arithmetic. A rack at a utilisation of exactly one is already in this state. The boundary is at one, and one is on the wrong side of it.
 
 The engine still reports what it can: stable false, and a probability of waiting of 1.000000. Every arriving truck waits.
 
@@ -35,7 +35,7 @@ The bay sweep reaches the same place with the arrivals held at 9 an hour. At 3 b
 
 ## Reading the three remedies
 
-The refusal names three ways out, and each moves a different input. Adding a bay raises the denominator of the utilisation. Loading faster shortens the load minutes and so lowers the offered load. Spreading the arrivals lowers the arrivals in the peak hour. This digest sweeps the bays and the arrivals and prints no sweep of the load minutes, so this course quotes no figure for the second remedy.
+The refusal names three ways out, and each moves a different input. Adding a bay raises the denominator of the utilisation. Loading faster shortens the load minutes and so lowers the offered load. Spreading the arrivals lowers the arrivals in the peak hour. The digest sweeps all three inputs. On 4 bays at 9 arrivals an hour, the load minutes sweep prints a mean wait of 47.2652 minutes at 24 minutes a load and 10.1887 minutes at 20.
 
 ## Why a refusal is the better answer
 
@@ -43,4 +43,4 @@ A model that printed a large wait at a utilisation of one would invite a planner
 
 ## Exercise
 
-Read the arrivals sweep from 6 to 9.5 arrivals an hour and quote each mean wait. Say what the utilisation column fails to warn you about. Then read the row at 10 arrivals and quote the engine's refusal. Say why the engine prints no mean wait there, and which input each of its three remedies changes.
+Read the arrivals sweep from 6 to 9.5 arrivals an hour and quote each mean wait. Quote the utilisation beside each. Then read the row at 10 arrivals and quote the engine's refusal. Say why the engine prints no mean wait there, and which input each of its three remedies changes.

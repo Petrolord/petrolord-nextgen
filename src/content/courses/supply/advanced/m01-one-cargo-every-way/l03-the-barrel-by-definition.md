@@ -11,7 +11,7 @@ The `fuelPricing` module exports two unit constants:
 - `LITRES_PER_M3` is 1000;
 - `M3_PER_BBL` is 0.158987294928.
 
-Barrels are cubic metres divided by the second constant. The engine never reaches a barrel from tonnes directly. It forms the cubic metres through the density first, then divides. So the barrel figure carries the density's uncertainty and none of its own: the constant is a definition, and the density is the measurement.
+Barrels are cubic metres divided by the second constant. The engine never reaches a barrel from tonnes directly. It forms the cubic metres through the density first, then divides. So a quantity entered in tonnes reaches the barrel column through the density and then the constant. The digest's density sweep shows the first step moving: the same 34000 tonnes read 45637.584 m3 at PMS's typical 745 kg/m3 and 40476.190 m3 at AGO's typical 840 kg/m3.
 
 That order tells you where to look when two barrel figures for one cargo disagree. The constant cannot be the cause. Either the density differs or the quantity typed in differs.
 
@@ -32,11 +32,11 @@ The module accepts tonnes, m3, litres and barrels. Hand it a unit outside that l
 
 > REFUSED: Unknown quantity unit "kg".
 
-That refusal matters more than it looks. A quantity typed as 34000 kg might be a slip for tonnes, or it might truly be kilograms, and those are two different cargoes. An engine that coerced an unknown unit into a known one would return a clean figure for whichever guess it made, and nobody reading the figure could tell a guess had been made. Refusing the unit returns nothing, and nothing is the one answer that cannot be carried forward into a landed cost.
+The refusal is the whole answer. The call returns no quantity in any unit, so nothing from it can be carried forward into a landed cost.
 
 ## Why a definition belongs in the engine and a density does not
 
-The contrast with the last lesson is the point of this one. The engine ships the barrel because the barrel is the same everywhere and for every product. It ships no density default because a density belongs to one cargo on one certificate. A constant the engine owns can be exported, and the module exports this one by name. A measurement the engine does not own has to come in as an input, and when it does not come in, the engine says so.
+The contrast with the last lesson is the point of this one. The engine ships the barrel as a constant, M3_PER_BBL, and applies the same figure to every product. It ships no density default because a density belongs to one cargo on one certificate. A constant the engine owns can be exported, and the module exports this one by name. A measurement the engine does not own has to come in as an input, and when it does not come in, the engine says so.
 
 ## Exercise
 

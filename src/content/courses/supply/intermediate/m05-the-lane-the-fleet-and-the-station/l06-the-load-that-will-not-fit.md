@@ -15,7 +15,7 @@ The IBAFO forecourt's tank:
 | reorder at fraction of usable | 0.25 |
 | delivery litres | 33000.00 |
 
-Dead stock is the station's heel: the volume below the pump's suction that the station cannot sell. The engine computes:
+Dead stock is a volume stated for the tank, and the digest defines it only by what the engine does with it. The engine computes:
 
 usable = capacity less dead stock
 reorder level = dead stock + usable x the reorder fraction

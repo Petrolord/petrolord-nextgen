@@ -12,7 +12,7 @@ VCF = exp( -alpha x dT x (1 + 0.8 x alpha x dT) )
 
 Here rho is the density at 15 C in kg/m3, and dT is the observed temperature less 15 C. K0, K1 and K2 are coefficients.
 
-Read the second line first. alpha is the product's coefficient of thermal expansion: the fraction by which its volume grows per degree. dT is how many degrees the product sits away from the reference. Their product, alpha x dT, is roughly the fraction by which the volume has swollen, and the exponential turns that into a factor that shrinks the volume back. The bracket with 0.8 in it is a second order term. When dT is zero, at 15 C, the exponent is zero and the VCF is exactly one.
+Read the second line first. dT is the observed temperature less 15 C, and alpha multiplies it. The product alpha x dT sits in the exponent twice: once on its own, and once more inside the bracket with 0.8 in it. The digest prints the VCF the form gives, and no size for either part. When dT is zero, at 15 C, the exponent is zero and the VCF is exactly one; the synthetic row prints 1.000000 there. Away from 15 C the VCF moves off one: on the synthetic row at 741.6 kg/m3 it reads 1.006736 at 10 C, 0.993236 at 20 C and 0.965932 at 40 C.
 
 Now the first line. alpha is not one number for all fuels. It is built from the density at 15 C with three coefficients. They are what makes the form fit a commodity group, they are published per commodity group, and the engine ships none and has no default. The next lesson reads what it does when they are missing.
 
@@ -36,7 +36,7 @@ Here the temperature is held at 31.5 C and the density is swept:
 | 846.3 | 0.001080514 | 0.982080 |
 | 900 | 0.000975309 | 0.983832 |
 
-Read the alpha column. It falls as the density rises, from 0.001489796 at 700 kg/m3 to 0.000975309 at 900 kg/m3. That is the first line of the form at work: density appears under K0 and K1, so a denser product has a smaller alpha on this row. The VCF column moves the other way, from 0.975246 to 0.983832. A product with a smaller alpha swells less at the same temperature, so less has to be taken back out.
+Read the alpha column. It falls as the density rises, from 0.001489796 at 700 kg/m3 to 0.000975309 at 900 kg/m3. That is the first line of the form at work: density appears under K0 and K1, so a denser product has a smaller alpha on this row. The VCF column moves the other way, from 0.975246 to 0.983832. A smaller alpha puts a smaller product alpha x dT into the exponent at the same temperature, and the printed VCF sits closer to one.
 
 In the temperature sweep of the previous lesson, alpha stayed at 0.001350036 in every row. That is also the form speaking. alpha depends only on density and the coefficients, and temperature enters the second line alone.
 

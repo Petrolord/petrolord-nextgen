@@ -1,6 +1,6 @@
 # The probability of waiting
 
-The utilisation says how busy the bays are on average. It does not say how often a truck arrives to find them all busy. That second figure is the one a driver feels, and the engine computes it separately, as the Erlang C probability of waiting.
+The utilisation says how busy the bays are on average. It does not say how often a truck arrives to find them all busy. The engine computes that second figure separately, as the Erlang C probability of waiting.
 
 {{panel:supply-depot-explorer}}
 
@@ -31,7 +31,7 @@ The engine's two sweeps contain a pair of rows that makes this plain. Both have 
 | 6 arrivals an hour | 4 | 0.600000 | 0.287043 |
 | 9 arrivals an hour | 6 | 0.600000 | 0.196566 |
 
-The utilisations match and the probabilities do not. A larger rack running at the same utilisation pools more bays against the same bunching, so an arriving truck is more likely to find one free. Any rule of thumb stated as a utilisation limit, with no bay count beside it, is silent on this.
+The utilisations match and the probabilities do not: 0.287043 on 4 bays at 6 arrivals an hour, and 0.196566 on 6 bays at 9 arrivals an hour. Any rule of thumb stated as a utilisation limit, with no bay count beside it, is silent on this.
 
 ## Reading the sweeps
 
