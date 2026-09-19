@@ -1,0 +1,103 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# refinery Expert m03, Variance on Margin. Digest sections 20 (the direction and
+# margin effect columns) and 21, as the four lessons of m03 teach them: cost
+# lines and revenue lines, the margin effect, totals on margin, and the ledger
+# margins and units against plan. 15 questions.
+
+q(2, "How does a matched ODIOMA variance line get its direction of cost or revenue?",
+ "From its event type: a delivery is revenue, a receipt or unit_run is cost.",
+ ["From the sign of the line's total variance: positive reads revenue, negative cost.",
+  "From whether the line's value rose or fell against the plan.",
+  "From the unit value on the line: above plan reads revenue, below it reads cost."],
+ "A delivery's value is what it sold for, so a delivery line is revenue. Every other event's value is what it cost, so a receipt line and a unit_run line are cost. The direction is fixed before any variance is computed.")
+
+q(0, "The escravos receipt line reads a total variance of 11607000.00. What margin effect does the engine give it?",
+ "-11607000.00",
+ ["11607000.00", "-30508000.00", "-5427700.00"],
+ "marginEffect is the total with its sign set by what it did to margin: as it is on a revenue line, reversed on a cost line. Escravos is a cost line, so 11607000.00 reads -11607000.00. -30508000.00 is the Forcados total as recorded and -5427700.00 the gasoline margin effect.")
+
+q(3, "The jet delivery line reads a total variance of -3731500.00 and a margin effect of -3731500.00. Why does the sign stay the same?",
+ "It is a revenue line, and a revenue gap counts as it is.",
+ ["Its price variance is negative, so the engine leaves the total alone.",
+  "Its unexplained reads 0.00, so there is nothing to reverse on it.",
+  "Every negative total keeps its sign when it is put on margin."],
+ "The engine's rule is \"margin: a revenue gap counts as it is, a cost gap with its sign reversed\". Jet is a delivery and so a revenue line. The crude unit's total of -319550.00 is also negative, and on margin it reads 319550.00 because it is a cost line.")
+
+q(1, "Put on margin, the Forcados (illustrative) line's total becomes which figure?",
+ "30508000.00",
+ ["-30508000.00", "-30720000.00", "212000.00"],
+ "The Forcados total variance is -30508000.00. It is a cost line, so the sign is reversed and the margin effect reads 30508000.00. -30720000.00 is its volume variance and 212000.00 its unexplained.")
+
+q(1, "The Forcados line helps the margin by 30508000.00. Why does the module refuse to read that as good news for the month?",
+ "The crude never arrived, so the products it would have made are missing from the delivery lines.",
+ ["The engine marks the line costed false, so its effect is left out of every margin total.",
+  "A positive margin effect on a cost line means that spending rose against the plan.",
+  "Its 212000.00 unexplained is dropped when the lines are added, so the figure overstates it."],
+ "Money not spent on crude is margin kept on that line, and the line is read on its own. A refinery that does not receive its crude does not run it, and every product line sold fewer barrels than planned. The story of the month is read across all the lines.")
+
+q(3, "Which figure does the engine print as the month's headline variance?",
+ "-5452450.00, the total on margin",
+ ["-44233150.00, every total added as recorded",
+  "-19390350.00, the cost lines",
+  "-24842800.00, the revenue lines as recorded"],
+ "The headline total is on margin, -5452450.00. The two rows as recorded say what happened to spending and to sales. The sum of every line's total as recorded is printed and is not the headline.")
+
+q(0, "Adding every line's total variance as recorded gives -44233150.00. Why is that sum not the headline?",
+ "It adds money spent less to money received less.",
+ ["It leaves out the Forcados line.",
+  "It counts the lpg sale twice.",
+  "It is formed at the actual unit values, which differ from the plan unit values on each line."],
+ "Money spent less helps the margin and money received less hurts it. The -44233150.00 mixes the two, so it describes nothing a refinery can act on. The engine signs each line before it adds and prints the margin total, -5452450.00.")
+
+q(2, "Read the headline row on margin. What price variance does it carry?",
+ "-1290760.00",
+ ["-3949690.00", "1020050.00", "-270710.00"],
+ "The margin row reads a volume variance of -3949690.00, a price variance of -1290760.00, an unexplained of -212000.00 and a total of -5452450.00. 1020050.00 is the cost lines' price variance as recorded and -270710.00 the revenue lines'.")
+
+q(2, "The cost lines as recorded carry an unexplained of 212000.00. What does the headline row on margin read in that column?",
+ "-212000.00",
+ ["212000.00", "0.00", "-3949690.00"],
+ "A cost gap counts with its sign reversed on margin, and the only unexplained money of the month sits on a cost line, Forcados. So 212000.00 as recorded reads -212000.00 on margin: money paid out with no barrels. -3949690.00 is the margin row's volume variance.")
+
+q(1, "The cost lines as recorded read a price variance of 1020050.00. What does its sign say?",
+ "The crude and unit runs that did move cost more a barrel than planned.",
+ ["The month spent less on crude and on unit runs than the plan expected it to.",
+  "The cost lines helped the margin on price by that figure.",
+  "Fewer barrels of crude were bought and run through the units than the plan expected."],
+ "On a cost line a positive price variance is a dearer barrel. The cost row's total variance of -19390350.00 says the month spent less overall, and its volume variance of -20622400.00 says fewer barrels were bought and run.")
+
+q(3, "What margin variance does reconcilePeriod read across the plan and actual ledgers?",
+ "-5011450.00",
+ ["-5452450.00", "-235150.00", "4776300.00"],
+ "reconcilePeriod reads a plan margin of 4776300.00, an actual margin of -235150.00 and a margin variance of -5011450.00. -5452450.00 is the margin total of the matched lines.")
+
+q(0, "The margin variance less the margin total of the matched lines comes to 441000.00. What accounts for it?",
+ "The unmatched lpg sale, which the ledger margins count and the lines do not.",
+ ["The Forcados bill of 212000.00, counted once in each of the two totals.",
+  "Rounding in the plan unit values, carried to four decimals on each line.",
+  "The reformer's price variance, taken on its actual 131000.00 bbl."],
+ "The ledger margins count every movement and the variance lines count only the matched ones. The unmatched movements, deliveries counted as revenue and the rest as cost, come to 441000.00, the lpg delivery the plan never carried.")
+
+q(1, "Which unit reads 68.95 percent of plan, and with what difference?",
+ "The reformer, a difference of -59000.00",
+ ["The crude unit, a difference of -59000.00", "The reformer, a difference of -265000.00", "The crude unit, a difference of -265000.00"],
+ "The reformer ran 131000.00 bbl against a plan of 190000.00 bbl, a difference of -59000.00 bbl and 68.95 percent of plan. The crude unit reads -265000.00 bbl and 73.50 percent.")
+
+q(0, "The crude unit reads 73.50 percent in the units against plan table. Against which figure is that measured?",
+ "Its plan throughput, 1000000.00 bbl.",
+ ["Its capacity in the configuration, 1200000.00 bbl.",
+  "Escravos received, 735000.00 bbl.",
+  "The cargo size, 350000.00 bbl."],
+ "Utilisation of plan reads the actual against the plan's throughput for the unit: 735000.00 bbl against 1000000.00 bbl. The crude unit's capacity of 1200000.00 bbl is a different base, so 73.50 percent of plan is not a statement about capacity.")
+
+q(3, "dualLedgerTotals reads the actual ledger apart. What revenue does it print for it?",
+ "60423500.00",
+ ["60658650.00", "84825300.00", "80049000.00"],
+ "The actual ledger reads cost 60658650.00, revenue 60423500.00 and margin -235150.00. The plan ledger reads cost 80049000.00 and revenue 84825300.00. Each margin agrees with the one reconcilePeriod reads: true.")
+
+emit(Q, '/root/wt-md-refinery-nextgen/tools/course-banks/refinery/advanced/rfa_m03.json', expect_n=15)
+finish()

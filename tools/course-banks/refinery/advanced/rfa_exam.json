@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "Which pair does makeEvent return for a flare of 100 bbl: its signedQuantity and its emits flag?",
+  "options": [
+   "-100, flagged as emitting by its nature",
+   "-100, with the emits flag left false",
+   "0, since a flare moves nothing out of the site",
+   "100, flagged as emitting by its nature"
+  ],
+  "answer": 0,
+  "explanation": "Flaring takes product off the site and releases it, so it signs negative and emits by its nature, like burn and vent. Loss shares the -100 and reads false."
+ },
+ {
+  "prompt": "A receipt of 100 bbl goes through makeEvent. What signedQuantity comes back?",
+  "options": [
+   "-100",
+   "0",
+   "100",
+   "-500"
+  ],
+  "answer": 2,
+  "explanation": "A receipt is the one event type that signs to +100 for 100 bbl. Deliveries, burns, flares, vents and losses sign to -100; transfers, unit runs and blends to 0. A quantity typed as -500 is refused."
+ },
+ {
+  "prompt": "Which of these events leaves the site's total quantity unchanged?",
+  "options": [
+   "a blend",
+   "a loss",
+   "a vent",
+   "a delivery"
+  ],
+  "answer": 0,
+  "explanation": "A blend signs to 0, as a transfer and a unit_run do: each moves material inside the site. A loss, a vent and a delivery each sign 100 bbl to -100."
+ },
+ {
+  "prompt": "What quantity does the ODIOMA plan ledger's jet delivery line hold?",
+  "options": [
+   "160000.00 bbl",
+   "101200.00 bbl",
+   "163400.00 bbl",
+   "136000.00 bbl"
+  ],
+  "answer": 3,
+  "explanation": "The jet delivery line reads 136000.00 bbl at 104.9000. 160000.00 bbl is the Jet A-1 ceiling in the configuration, 101200.00 bbl the month's actual jet delivery, and 163400.00 bbl the plan's gasoline."
+ },
+ {
+  "prompt": "What gross margin per barrel of crude did the ODIOMA plan find?",
+  "options": [
+   "4.7763",
+   "14.0100",
+   "1.4000",
+   "3.1000"
+  ],
+  "answer": 0,
+  "explanation": "The plan reads total crude 1000000.00 bbl, margin 4776300.00 and gross margin per barrel 4.7763. 14.0100 is the expansion screen's figure, and 1.4000 and 3.1000 are the two units' operating costs a barrel."
+ },
+ {
+  "prompt": "The reformer's unit_run line in the plan ledger reads 589000.00 on 190000.00 bbl. Which per-barrel figure is that?",
+  "options": [
+   "1.4000, the crude unit's cost",
+   "3.2000, the month's actual",
+   "3.1000, its operating cost",
+   "4.2000, the expansion's cost"
+  ],
+  "answer": 2,
+  "explanation": "The reformer line reads 190000.00 bbl and 589000.00, 3.1000 a barrel, the reformer's operating cost in the configuration. 3.2000 is the reformer's actual unit value in the month."
+ },
+ {
+  "prompt": "Which cargo size was the ODIOMA plan scheduled with?",
+  "options": [
+   "400000.00 bbl",
+   "190000.00 bbl",
+   "600000.00 bbl",
+   "350000.00 bbl"
+  ],
+  "answer": 3,
+  "explanation": "The plan is cascaded from 2027-03-01 over 31 days with a cargo size of 350000.00 bbl. 400000.00 bbl is the Forcados receipt in the plan and 600000.00 bbl the Escravos receipt."
+ },
+ {
+  "prompt": "Which ODIOMA line reads an actual unit value of 61.0000?",
+  "options": [
+   "gasoline delivery",
+   "fuel_oil delivery",
+   "diesel delivery",
+   "jet delivery"
+  ],
+  "answer": 1,
+  "explanation": "The fuel_oil line reads an actual unit value of 61.0000 against a plan of 60.2000. Gasoline reads 112.0895, diesel 98.4000 and jet 104.0998."
+ },
+ {
+  "prompt": "What price variance does the crude unit's line carry?",
+  "options": [
+   "51450.00",
+   "13100.00",
+   "-371000.00",
+   "-319550.00"
+  ],
+  "answer": 0,
+  "explanation": "The cdu line ran at 1.4700 a barrel against the plan's 1.4000 on 735000.00 bbl and reads a price variance of 51450.00. -371000.00 is its volume variance and -319550.00 its total; 13100.00 is the reformer's price variance."
+ },
+ {
+  "prompt": "Jet A-1 sold 101200.00 bbl against a plan of 136000.00 bbl. Priced at the plan's 104.9000, that barrel gap gives which figure?",
+  "options": [
+   "-80980.00",
+   "-3731500.00",
+   "-3650520.00",
+   "-34800.00"
+  ],
+  "answer": 2,
+  "explanation": "Volume variance = (actual quantity - plan quantity) x plan unit value, and the jet line prints -3650520.00. -80980.00 is its price variance, -3731500.00 its total and -34800.00 its quantity gap in bbl."
+ },
+ {
+  "prompt": "Beside its actual unit value of 0.0000, what plan unit value does the Forcados (illustrative) line carry?",
+  "options": [
+   "78.9000",
+   "76.8000",
+   "80.2000",
+   "74.0000"
+  ],
+  "answer": 1,
+  "explanation": "Plan unit value = plan value / plan quantity: 30720000.00 over 400000.00 bbl. The actual unit value reads 0 when no barrels arrived. 78.9000 and 80.2000 are Escravos in the plan and in the month, and 74.0000 is the expansion's crude."
+ },
+ {
+  "prompt": "The escravos line's total variance is 11607000.00. How does the engine split it?",
+  "options": [
+   "955500.00 volume and 10651500.00 price",
+   "10651500.00 volume and 955500.00 price",
+   "11607000.00 volume and 0.00 price",
+   "10651500.00 volume and 955500.00 unexplained"
+  ],
+  "answer": 1,
+  "explanation": "The escravos line reads a volume variance of 10651500.00, a price variance of 955500.00 and 0.00 unexplained. The barrel gap of 135000.00 is priced at 78.9000; the price rise to 80.2000 is taken on the 735000.00 bbl that arrived."
+ },
+ {
+  "prompt": "Gasoline sold 112660.00 bbl against a plan of 163400.00 bbl. Which quantity gap does its line print?",
+  "options": [
+   "-50740.00",
+   "-34800.00",
+   "-90000.00",
+   "-104000.00"
+  ],
+  "answer": 0,
+  "explanation": "Quantity gap = actual quantity - plan quantity, and the gasoline line prints -50740.00. -34800.00 is jet's gap, -90000.00 diesel's and -104000.00 fuel_oil's."
+ },
+ {
+  "prompt": "The actual ledger holds a movement with no plan line to meet. Where does attributeVariance put it?",
+  "options": [
+   "In the unexplained column of the nearest delivery line on the plan.",
+   "In a new variance line of its own, priced at its actual unit value.",
+   "In a separate unmatched list, with the ledger it came from.",
+   "Nowhere, since it is dropped before the match is made."
+  ],
+  "answer": 2,
+  "explanation": "The match on material and type finds no partner, so the row stands apart. ODIOMA's lpg sale of 9000.00 bbl for 441000.00 is marked present in actual, and no volume, price or unexplained figure absorbs it."
+ },
+ {
+  "prompt": "The reformer is a cost line with a total variance of -169800.00. What does it read on margin?",
+  "options": [
+   "-169800.00, as a negative stays",
+   "13100.00, its price variance",
+   "-182900.00, its volume variance",
+   "169800.00, since less was spent"
+  ],
+  "answer": 3,
+  "explanation": "A cost gap counts with its sign reversed on margin. The reformer ran 131000.00 bbl against 190000.00 bbl, so less was spent running it, and its margin effect reads 169800.00."
+ },
+ {
+  "prompt": "Diesel is a revenue line. What margin effect does it carry?",
+  "options": [
+   "-9054000.00",
+   "-536800.00",
+   "-9590800.00",
+   "-6092800.00"
+  ],
+  "answer": 2,
+  "explanation": "A revenue gap counts as it is, so the diesel total of -9590800.00 is also its margin effect. -9054000.00 and -536800.00 are its volume and price variances, and -6092800.00 is the fuel_oil margin effect."
+ },
+ {
+  "prompt": "What total variance do the revenue lines read, added as recorded?",
+  "options": [
+   "-19390350.00",
+   "-44233150.00",
+   "-20622400.00",
+   "-24842800.00"
+  ],
+  "answer": 3,
+  "explanation": "The revenue lines as recorded read -24842800.00: the month received less than the plan from products. -19390350.00 is the cost lines' total and -20622400.00 their volume variance, and -44233150.00 is every line's total added as recorded."
+ },
+ {
+  "prompt": "The headline row's volume variance on margin reads -3949690.00. Where does a figure of that kind send a manager?",
+  "options": [
+   "To purchasing and to sales",
+   "To the invoices",
+   "To supply and to the units",
+   "To the tax-loss pool"
+  ],
+  "answer": 2,
+  "explanation": "A volume problem sends the reader to supply and to the units; a price problem to purchasing and sales; an unexplained figure to the invoices."
+ },
+ {
+  "prompt": "How many events does dualLedgerTotals count in the plan ledger?",
+  "options": [
+   "9",
+   "8",
+   "5",
+   "34"
+  ],
+  "answer": 3,
+  "explanation": "dualLedgerTotals reads 34 events in the plan ledger and 9 in the actual ledger, with 0 uncosted events in each. 5 is the event count on each unit_run and delivery line of the plan ledger."
+ },
+ {
+  "prompt": "The plan ledger's margin and the plan's own margin both read 4776300.00. What does that agreement check?",
+  "options": [
+   "That the month's actual margin matched the plan's own margin figure.",
+   "That building the ledger from the schedule lost no money.",
+   "That every one of the eight variance lines reads costed true.",
+   "That the unmatched lpg sale is counted once."
+  ],
+  "answer": 1,
+  "explanation": "reconcilePeriod reads the plan ledger margin as 4776300.00 and the plan's own margin as 4776300.00. The ledger built from the schedule and the plan it came from give the same figure, so the cascade lost nothing."
+ },
+ {
+  "prompt": "What annual throughput does the ODIOMA expansion screen print?",
+  "options": [
+   "735000.00 bbl",
+   "1000000.00 bbl",
+   "1200000.00 bbl",
+   "3753600.00 bbl"
+  ],
+  "answer": 3,
+  "explanation": "The screen prints annual throughput of 3753600.00 bbl, the production the screening engine receives in the first operating year. The other three are figures of the ODIOMA month."
+ },
+ {
+  "prompt": "From which reference point is the expansion's capital scaled by the modular law?",
+  "options": [
+   "117831965.35 at 12000 bpd",
+   "14000000.00 at 12000 bpd",
+   "58915982.67 at 10000 bpd",
+   "100000000.00 at 10000 bpd"
+  ],
+  "answer": 3,
+  "explanation": "Capital is scaled by the modular law from 100000000.00 at 10000 bpd, and the 12000 bpd plant comes out at 117831965.35. 14000000.00 is the fixed operating cost a year."
+ },
+ {
+  "prompt": "The screen's gross margin per barrel reads 14.0100. What does it take away from the gross value of 92.2100?",
+  "options": [
+   "The crude cost alone, at 74.0000",
+   "The crude cost and the variable operating cost",
+   "The fixed operating cost and the tax",
+   "The royalty and the crude cost"
+  ],
+  "answer": 1,
+  "explanation": "The gross margin per barrel is the gross value less the crude cost less the variable operating cost, as the Associate tier defined it. The screen prints gross value 92.2100 and gross margin per barrel 14.0100."
+ },
+ {
+  "prompt": "What gross revenue does each operating year of the expansion carry, in millions?",
+  "options": [
+   "307.5315",
+   "291.7664",
+   "346.1195",
+   "38.5879"
+  ],
+  "answer": 2,
+  "explanation": "Each operating year reads gross revenue 346.1195, opex 307.5315 and, before any tax, a net cash flow of 38.5879. 291.7664 is opexFixed."
+ },
+ {
+  "prompt": "What does the opexVariable of 15.7651 million carry?",
+  "options": [
+   "The variable operating cost on the year's throughput",
+   "The crude cost on the year's throughput, at 74.0000 a barrel",
+   "The fixed operating cost for the year",
+   "The tax on the year's taxable income"
+  ],
+  "answer": 0,
+  "explanation": "It is the second of the two cost streams. opexFixed, 291.7664, holds the fixed cost and the crude, and the two sum to the opex of 307.5315; tax sits in a column of its own."
+ },
+ {
+  "prompt": "Why would a royalty on a refinery's product sales reach into bought crude?",
+  "options": [
+   "Its revenue already contains the crude price, which carries the producer's royalty.",
+   "The screening engine charges royalty on opex, and opex holds the crude bill.",
+   "A refinery's tax rate of 30 percent is levied only after the royalty.",
+   "The fiscalType TaxRoyalty charges royalty on capital as well as revenue."
+  ],
+  "answer": 0,
+  "explanation": "A royalty is charged on gross revenue, and a refinery's gross revenue is the value of products made from crude it bought. The royalty on that crude, where one is due, was paid by the producer and sits inside the price the refinery paid."
+ },
+ {
+  "prompt": "The expansion is valued with start year 2031. What does the first calendar year read?",
+  "options": [
+   "2027",
+   "2029",
+   "2031",
+   "2033"
+  ],
+  "answer": 2,
+  "explanation": "Year 0 takes the start year as its label. The money in every row is unchanged, which the digest confirms by printing the same NPV and total tax for both runs."
+ },
+ {
+  "prompt": "How much loss is left in the pool at the end of 2029?",
+  "options": [
+   "117.8320 million",
+   "79.2440 million",
+   "40.6561 million",
+   "2.0682 million"
+  ],
+  "answer": 1,
+  "explanation": "The pool enters 2029 at 117.8320 million, absorbs that year's 38.5879 million of taxable income and ends at 79.2440 million. 40.6561 and 2.0682 are the pool at the end of 2030 and 2031."
+ },
+ {
+  "prompt": "At nine decimals, what tax does year 5 pay with the loss carried forward?",
+  "options": [
+   "11.576380800 million",
+   "2.068157348 million",
+   "38.587936000 million",
+   "10.955933596 million"
+  ],
+  "answer": 3,
+  "explanation": "Year 5 reads a loss carried in of 2.068157348 million, taxable income of 38.587936000 million and tax of 10.955933596 million. Year 6 pays 11.576380800 million."
+ },
+ {
+  "prompt": "How is a year's tax formed once a loss is being carried?",
+  "options": [
+   "taxable income x 30 percent, less the loss carried in, once above zero",
+   "(taxable income - the tax paid last year) x 30 percent, once above zero",
+   "the loss carried in x 30 percent, taken off the year's income",
+   "(taxable income - the loss carried in) x 30 percent, once above zero"
+  ],
+  "answer": 3,
+  "explanation": "The digest states: the tax = (taxable income - the loss carried in) x the tax rate of 30 percent once that is above zero. The loss is set against income before the rate is applied."
+ },
+ {
+  "prompt": "What difference in total tax over the life does carrying the loss forward make?",
+  "options": [
+   "196.1780 million",
+   "11.5764 million",
+   "35.3496 million",
+   "64.8440 million"
+  ],
+  "answer": 2,
+  "explanation": "The two lifetime totals are 196.1780 carried and 231.5276 thrown away, and the engine prints the gap between them itself. 11.5764 is one full year's tax, and 64.8440 is a screen reading of another kind."
+ },
+ {
+  "prompt": "How is the option-off tax column of the ODIOMA expansion produced?",
+  "options": [
+   "feasibilityEconomics with lossCarryForward true and the rate at 0",
+   "The same inputs through calculateEconomics directly, with the option off",
+   "attributeVariance run over the plan and the actual cash flows",
+   "reconcilePeriod read across the 22 years of the project life"
+  ],
+  "answer": 1,
+  "explanation": "feasibilityEconomics switches lossCarryForward on. The comparison runs the same inputs through calculateEconomics directly with the option off, where each year is taxed on its own taxable income."
+ },
+ {
+  "prompt": "If the construction loss is thrown away, when does the plant first pay tax?",
+  "options": [
+   "2032, year 5",
+   "2027, year 0",
+   "2033, year 6",
+   "2029, year 2"
+  ],
+  "answer": 3,
+  "explanation": "Thrown away, the loss shelters nothing, so year 2, calendar 2029, is taxed at once. Carried, it pushes the first tax to 2032."
+ },
+ {
+  "prompt": "With the loss carried forward, what net cash flow does 2032 read?",
+  "options": [
+   "27.0116",
+   "38.5879",
+   "10.9559",
+   "27.6320"
+  ],
+  "answer": 3,
+  "explanation": "2032 is year 5, the first year with tax to pay, a tax of 10.9559, and its net cash flow reads 27.6320. 2029 to 2031 read 38.5879 with no tax, and from 2033 each year reads 27.0116."
+ },
+ {
+  "prompt": "Which movements does materialBalance treat as leaving a tank?",
+  "options": [
+   "Receipts and deliveries alone",
+   "Unit runs, blends and transfers",
+   "Deliveries, burns, flares, vents and losses",
+   "Receipts, unit runs and blends"
+  ],
+  "answer": 2,
+  "explanation": "Receipts are the one movement it counts in, and a unit run counts as nothing. A refinery's crude leaves through the crude unit, which is why H3 is held and no material balance is printed."
+ },
+ {
+  "prompt": "What does modularrefinery_cases.json hold?",
+  "options": [
+   "6 plans, 3 variance lines, 1 schedule",
+   "8 feasibility cases, 5 scale points",
+   "8 plans and 5 variance lines",
+   "5 feasibility cases, 8 scale points"
+  ],
+  "answer": 1,
+  "explanation": "oracle_modularrefinery.py writes it, keeping annual accounts and a dated tax-loss ledger used oldest first, and restating the mid-year NPV from the screening engine."
+ },
+ {
+  "prompt": "Held item H2 leaves a fuller capital allowance model open. Which part of the Academy owns it?",
+  "options": [
+   "The Economics module",
+   "The supply course",
+   "The crude course",
+   "This course's Expert tier"
+  ],
+  "answer": 0,
+  "explanation": "Carrying the loss forward covers the refinery case; a fuller allowance model belongs to the Economics module. The Economics courses also own NPV, IRR, Monte Carlo and decision trees."
+ },
+ {
+  "prompt": "Is there a published source in the engines repository for the 0.6 and 0.9 exponents?",
+  "options": [
+   "Yes, one is cited beside each exponent in the code.",
+   "Yes, it is held in the feasibility oracle's file.",
+   "Yes, it is the ODIOMA vendor quotation itself.",
+   "No; none is in the engines repository."
+  ],
+  "answer": 3,
+  "explanation": "No. The course therefore holds the exponents as a limit, and a quotation for the actual plant is what replaces them."
+ },
+ {
+  "prompt": "What do the engines state about crude yields?",
+  "options": [
+   "They are fixed vectors.",
+   "They vary with the unit's throughput.",
+   "They carry quality through the plan.",
+   "They are fitted afresh each period."
+  ],
+  "answer": 0,
+  "explanation": "Each crude in the configuration carries one row of yields, naphtha to offgas, and the engine treats that row as a fixed vector. Escravos (illustrative), for one, carries a naphtha yield of 0.2100."
+ },
+ {
+  "prompt": "At a month-end review of ODIOMA, which figure is the month judged against?",
+  "options": [
+   "The actual margin, -235150.00",
+   "The plan margin, 4776300.00",
+   "The crude unit capacity, 1200000.00 bbl",
+   "The screen's NPV, 88.6345 million"
+  ],
+  "answer": 1,
+  "explanation": "The plan's margin of 4776300.00 and its gross margin per barrel of 4.7763 are what the month is read against. The actual margin of -235150.00 is what the month did."
+ },
+ {
+  "prompt": "The course's one sentence says a refinery is judged on what?",
+  "options": [
+   "Its margin per barrel of crude",
+   "Its throughput against capacity",
+   "Its NPV at 12 percent",
+   "Its product slate by volume"
+  ],
+  "answer": 0,
+  "explanation": "A refinery is judged on its margin per barrel of crude: the screen prices that barrel, the plan finds it, the schedule dates it, and the actuals are read against it line by line on what each gap did to margin."
+ },
+ {
+  "prompt": "What does this tier teach doing with money that moved with no barrels?",
+  "options": [
+   "Fold it into the line's volume variance.",
+   "Keep it in its own column, where a reader can see it.",
+   "Spread it over the line's price variance.",
+   "Drop it from every total on margin."
+  ],
+  "answer": 1,
+  "explanation": "The engine keeps it in the unexplained column: 212000.00 on the Forcados line as recorded, and -212000.00 in the headline row on margin. It stays visible so the question of what the money was for stays open."
+ }
+]
