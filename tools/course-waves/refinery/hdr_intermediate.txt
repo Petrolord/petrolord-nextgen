@@ -1,0 +1,28 @@
+-- ============================================================================
+-- refinery PROFESSIONAL DEEP SEED: Refinery Feasibility & Planning,
+-- intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE PLAN AND THE SCHEDULE. A blank limit is no limit
+-- and a typed zero is a limit of zero; a blank cost or price is refused by
+-- name; the feedless unit is the crude unit and carries every barrel of crude;
+-- margin is revenue less crude and unit operating cost, and the gross margin
+-- is that margin per barrel of crude; each stream balance leaves a surplus or
+-- none, and each stream carries the plan's value of one more barrel; the plan
+-- cascades into cargoes and weekly events dated from a fixed period start.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The plan is solved, and a stream's marginal
+-- value comes with the solution. The crude course owns the LP; this tier reads
+-- what the plan prints.
+--
+-- THE TRAP THE TIER IS BUILT ON. A cargo typed as 0 and a cargo left blank are
+-- two different plans, and the crude unit's operating cost is charged on every
+-- barrel of crude.
+--
+-- The capstone grades six numbers, each an engine return: a crude run to the
+-- whole barrel, a utilisation in percent to two decimals, a margin to the
+-- whole dollar, a gross margin and two stream values to the cent.
+-- ============================================================================
