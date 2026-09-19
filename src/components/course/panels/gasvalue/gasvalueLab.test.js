@@ -490,7 +490,7 @@ describe('AGREEMENT WITH THE DIGEST, the rollout explorer (Expert)', () => {
     const [liq, wat] = S.kanoVessels; const e = S.vesselEdges; const b = e.blankLead;
     pin(26, [
       ...S.kanoVessels.map((s, i) => row(inp(L.KANO_FILL_LIMITS[i].maxFillRatio), s.fillRatioBasis, f4(s.usableM3), f4(s.usableTonnes), f4(s.vapourSpaceM3), f4(s.coverDays), f4(s.safetyStockTonnes), f4(s.reorderAtTonnes), f4(s.ullageAtReorderTonnes), yesNo(s.deliveryFitsUllage), f4(s.deliveriesPerMonth))),
-      `The same ${inp(L.KANO_FILL_LIMITS[1].maxFillRatio)} read on the other basis (as a share of the liquid volume) gives ${f4(wat.otherBasisTonnesNotUsed)} t, which is ${f4(-wat.otherBasisLessEngineNotUsed)} t below the filling density's ${f4(wat.usableTonnes)} t. The vapour space is not spare capacity: it is what keeps a vessel of expanding liquid from rupturing.`,
+      `The same ${inp(L.KANO_FILL_LIMITS[1].maxFillRatio)} read on the other basis (as a share of the liquid volume) gives ${f4(wat.otherBasisTonnesNotUsed)} t, which is ${f4(-wat.otherBasisLessEngineNotUsed)} t below the filling density's ${f4(wat.usableTonnes)} t. The vapour space is the vessel less the usable liquid; the fill-limit refusal below states what it is for.`,
       ...e.refusals.map((x) => row(x.probe, refused(x.refusal))),
       `A BLANK LEAD TIME IS MISSING. With the lead time left blank (''): missingInputs ${list(b.missingInputs)}; reorderAtTonnes ${orNull(b.reorderAtTonnes)}; deliveryFitsUllage ${yesNo(b.deliveryFitsUllage)}. The cover (${f4(b.coverDays)} days) does not depend on it and is still given.`,
     ]);

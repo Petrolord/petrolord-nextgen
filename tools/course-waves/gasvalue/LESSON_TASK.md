@@ -63,7 +63,7 @@ it in your hand back as a digest gap.
 
 ## History on this wave
 
-The digest describes the engines as they are at f0aef14, after MD4-0 repaired
+The digest describes the engines as they are at df31f53 (MD45-1), after MD4-0 repaired
 eighteen defects. It carries NO section about what an engine used to do. Teach
 every repaired rule as how the engine works: the CO2 in the gas passes through;
 the methane that escapes is the methane in the gas; a blank efficiency is
@@ -114,11 +114,11 @@ Run it over your lessons as well as the digest.
    "liquid_volume", "volume", "mass", "mole", "gas mass", "propane and heavier",
    "heating value". Quote them as printed.
 4. **A refusal is quoted verbatim or described, never re-worded inside
-   quotation marks.** The digest prints each after `REFUSED:`. Two engine
-   sentences carry the contrastive shape the owner rule bans (the heating-value
-   note in SECTION 8 and the vaporizer's floor note in SECTION 27); quote them
-   only as the engine's words, in quotation marks, and never copy the shape into
-   your own prose.
+   quotation marks.** The digest prints each after `REFUSED:`. Since engines
+   df31f53 (MD45-1) no engine sentence the digest quotes carries the
+   contrastive shape the owner rule bans; the heating-value note (SECTION 8),
+   the blend note (SECTION 25) and the vaporizer's floor note (SECTION 27) were
+   reworded upstream and may be quoted verbatim.
 5. **Omitted and blank are different.** A value left out of the call keeps the
    engine's stated default; a box left blank is missing. The digest prints the
    omitted default for on-stream days (SECTION 13) and prints a blank refused or
@@ -200,3 +200,24 @@ minimum, every figure you wanted and could not find in the digest, every
 two-figure comparison you wrote and the digest line it points at, every "why"
 you wanted to write and had no digest sentence for, and anything in the digest
 you believe is wrong.
+
+## LEAD RULINGS (2026-09-19, after the foundation)
+
+1. **No unprinted glosses.** In the Commercial & Trading courses every tier's
+   key-truth audit found 12 to 22 lesson sentences the digest never prints:
+   domain glosses, design rationales ("the tool refuses because..."),
+   definitions, benchmarking advice, course routing, "the engine states it"
+   for digest prose. Each one then became a wrong bank key and a lesson fix.
+   Write ONLY what a digest line prints or a reading of a printed row, cite
+   the section, and put domain context in one clearly framed sentence
+   ("In practice, ...") that no question can key on.
+2. **Engine follow-up in flight (MD45-1):** the two engine notes that break
+   the copy rule (flareToValue ghvNote, lpgCng vaporizer floor note) will be
+   reworded, so quote neither verbatim; paraphrase what they say and cite the
+   section. The oracles' inline ledgers and the flare molar masses / richness
+   band edges will be exported (no figure changes).
+3. **P1 is repaired on the Suite page:** the LPG & CNG Rollout Studio's
+   vaporizer will open with a BLANK outlet temperature instead of 15 C. Do
+   not teach the page's opening vaporizer state; teach the engine rule
+   (liquid in above its boiling point refused, vapour out below it refused,
+   blank boiling point gives a floor).

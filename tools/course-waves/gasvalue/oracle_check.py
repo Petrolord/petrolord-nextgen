@@ -26,14 +26,10 @@ abatement, never from the engine's):
   oracle_lpgcng.cascade             the cascade as a mass ledger by false
                                     position, conservation asserted
 
-FOUR LEDGERS ARE TRANSCRIBED from the oracles' main() rather than called,
-because the oracles compute them inline and export no function for them: the
-net abatement (avoided - product + displaced, oracle_flaretovalue main()), the
-LPG storage on a water-capacity basis (cap x 999.1 x fill / 1000,
-oracle_lpgcng main()), the vaporizer's three terms and design margin, and the
-conversion case's derived consumption, saving and payback (oracle_lpgcng
-main()). Each is a one-line identity; RECON.md recommends exporting them, as
-MD3-1 did for the supply wave.
+THE FOUR LEDGERS the oracles once computed inline in main() are exported
+since MD45-1 (engines df31f53) and are CALLED here: oracle_flaretovalue
+.net_abatement, oracle_lpgcng.storage (both bases), oracle_lpgcng.vaporizer
+and oracle_lpgcng.conversion. Nothing is transcribed.
 
 WHAT IS COMPARED. Each oracle value must sit within the field's own grading
 tolerance of the engine's value (one unit in the printed place, fields.json).
@@ -101,28 +97,21 @@ def econ_of(gas, route, vol, days):
     return OF.economics(case, gas)
 
 
-def storage_water(cap, fill):
-    # transcribed from oracle_lpgcng main(): water-capacity basis
-    return float(Fr(str(cap)) * Fr('999.1') * Fr(str(fill)) / 1000)
+def storage_water(v, rho):
+    return OL.storage(v['vesselCapacityM3'], v['maxFillRatio'], v['fillRatioBasis'], rho, v['demandTonnesPerDay'],
+                      v['leadTimeDays'], v['safetyDays'], v['deliveryTonnes'])['usableTonnes']
 
 
 def vaporizer(v, latent):
-    # transcribed from oracle_lpgcng main(): three terms, then the margin
-    terms = [v['massFlowKgHr'] * v['liquidCpKJkgK'] * (v['boilingPointC'] - v['inletTempC']),
-             v['massFlowKgHr'] * latent,
-             v['massFlowKgHr'] * v['vapourCpKJkgK'] * (v['outletTempC'] - v['boilingPointC'])]
-    return sum(terms) / 3600 * (1 + v['designMarginPercent'] / 100)
+    return OL.vaporizer(v['massFlowKgHr'], v['liquidCpKJkgK'], v['inletTempC'], v['boilingPointC'], latent,
+                        v['vapourCpKJkgK'], v['outletTempC'], v['designMarginPercent'])['designDutyKW']
 
 
 def conversion(c):
-    # transcribed from oracle_lpgcng main(): energy equivalence, saving, payback
     b, n = c['baseFuel'], c['newFuel']
-    nc = Fr(str(b['consumptionPer100Km'])) * Fr(str(b['energyPerUnitMJ'])) / (Fr(str(n['energyPerUnitMJ'])) * Fr(str(n['efficiencyRatio'])))
-    km = Fr(str(c['annualDistanceKm']))
-    base_cost = Fr(str(b['consumptionPer100Km'])) / 100 * km * Fr(str(b['pricePerUnit']))
-    new_cost = nc / 100 * km * Fr(str(n['pricePerUnit']))
-    saving = base_cost - new_cost - Fr(str(c['annualExtraMaintenance']))
-    return float(Fr(str(c['conversionCost'])) / saving)
+    return OL.conversion(c['annualDistanceKm'], b['consumptionPer100Km'], b['pricePerUnit'], b['energyPerUnitMJ'],
+                         n['pricePerUnit'], n['energyPerUnitMJ'], n['efficiencyRatio'], c['conversionCost'],
+                         c['annualExtraMaintenance'])['simplePaybackYears']
 
 
 def capstone():
@@ -143,7 +132,7 @@ def capstone():
     ec = econ_of(ga, route, fa['volumeMMscfd'], fa['onstreamDays'])
     fla = flare_of(ga, fa, route['recoveryFraction'])
     cf = K['ADIBAWA_COUNTERFACTUAL']
-    net = fla['avoidedFlareCo2eTonnes'] - cf['productCombustionTonnesCo2ePerYear'] + cf['displacedFuelTonnesCo2ePerYear']
+    net = OF.net_abatement(fla['avoidedFlareCo2eTonnes'], cf['productCombustionTonnesCo2ePerYear'], cf['displacedFuelTonnesCo2ePerYear'])
     cr = OF.credits(net, K['ADIBAWA_CREDITS']['creditPrices'], ec['grossMarginPerYear'], K['ADIBAWA_CREDITS']['hurdleMarginPerYear'])
     out['adibawa_capital_usd'] = ec['capitalCost']
     out['adibawa_cng_kg_per_year'] = ec['productPerYear']
@@ -154,7 +143,7 @@ def capstone():
     # ASABA
     bl = OL.blend(K['ASABA_LPG'])
     v = K['ASABA_VESSEL']
-    out['asaba_usable_lpg_t'] = storage_water(v['vesselCapacityM3'], v['maxFillRatio'])
+    out['asaba_usable_lpg_t'] = storage_water(v, bl['densityKgM3'])
     out['asaba_vaporizer_design_kw'] = vaporizer(K['ASABA_VAPORIZER'], bl['latentHeatKJkg'])
     b = K['ASABA_BOTTLING']
     c = math.floor(Fr(b['positions']) * Fr(str(b['availabilityFraction'])))
@@ -191,7 +180,7 @@ console.log(JSON.stringify({{ ghv: g.ghvBtuScf, gpm: g.gpmC3Plus, co2: a.flareCo
     g = gas_of(T['EGBEMA_GAS'])
     fl = flare_of(g, T['EGBEMA_PARCEL'], T['EGBEMA_ROUTES']['cng']['recoveryFraction'])
     cf = T['EGBEMA_COUNTERFACTUALS'][0]
-    net = fl['avoidedFlareCo2eTonnes'] - cf['productCombustionTonnesCo2ePerYear'] + cf['displacedFuelTonnesCo2ePerYear']
+    net = OF.net_abatement(fl['avoidedFlareCo2eTonnes'], cf['productCombustionTonnesCo2ePerYear'], cf['displacedFuelTonnesCo2ePerYear'])
     ec = econ_of(g, {'id': 'cng', **T['EGBEMA_ROUTES']['cng']}, T['EGBEMA_PARCEL']['volumeMMscfd'], T['EGBEMA_PARCEL']['onstreamDays'])
     cr = OF.credits(net, T['EGBEMA_CREDITS']['creditPrices'], ec['grossMarginPerYear'], T['EGBEMA_CREDITS']['hurdleMarginPerYear'])
     b = T['KANO_BOTTLING']

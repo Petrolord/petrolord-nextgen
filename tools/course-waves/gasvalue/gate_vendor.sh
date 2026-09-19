@@ -1,12 +1,12 @@
 #!/bin/sh
 # GATE: every file this wave teaches from is vendored sha-identical with the
-# canonical engines commit the shared vendor commit pins (f0aef14, MD4-0 and
+# canonical engines commit the re-vendor pins (df31f53, MD45-1, after MD4-0 and
 # MD5-0). This wave does not re-vendor; it proves the base it stands on. The
-# comparison is against `git show f0aef14:<path>` in /root/petrolord-engines,
+# comparison is against `git show df31f53:<path>` in /root/petrolord-engines,
 # read-only.
 E=/root/petrolord-engines
 V=${ET_ENGINES:-/root/wt-et-gasvalue-nextgen/packages/engines}
-PIN=f0aef14
+PIN=df31f53
 fail=0; n=0
 for p in engines/downstream/flareToValue.js engines/downstream/lpgCng.js engines/downstream/modularRefinery.js \
   engines/downstream/terminalDepot.js engines/production/gasProperties.js engines/facilities/compression.js \

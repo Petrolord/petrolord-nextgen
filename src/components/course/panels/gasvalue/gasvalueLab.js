@@ -417,37 +417,22 @@ export function missingProbesAt() {
 }
 
 /**
- * SECTION 7: where the richness word changes, asked of the engine by bisection
- * on the propane fraction of a methane and propane mix, exactly as the dump asks.
+ * SECTION 7: where the richness word changes, read from the engine's export
+ * RICHNESS_GPM (MD45-1), as the dump reads it. The words either side come from
+ * a methane and propane mix a ten-thousandth below and above each edge.
  */
 export function richnessEdgesAt() {
-  const at = (x) => gasAt(rowsOf([['C1', 1 - x], ['C3', x]]));
-  const edge = (fromWord) => {
-    let lo = 0; let hi = 0.5;
-    for (let i = 0; i < 200; i += 1) {
-      const mid = (lo + hi) / 2;
-      const w = at(mid).richness;
-      if (fromWord === 'lean' ? w === 'lean' : w !== 'rich') lo = mid; else hi = mid;
-    }
-    return { gpmC3Plus: at(hi).gpmC3Plus, below: at(lo).richness, above: at(hi).richness };
-  };
-  return { leanToModerate: edge('lean'), moderateToRich: edge('moderate') };
+  const gpmPropane = gasAt(rowsOf([['C3', 1]])).gpmC3Plus;
+  const wordAt = (gpm) => { const x = gpm / gpmPropane; return gasAt(rowsOf([['C1', 1 - x], ['C3', x]])).richness; };
+  const edge = (gpm) => ({ gpmC3Plus: gpm, below: wordAt(gpm * (1 - 1e-4)), above: wordAt(gpm * (1 + 1e-4)) });
+  return { leanToModerate: edge(FV.RICHNESS_GPM.moderate), moderateToRich: edge(FV.RICHNESS_GPM.rich) };
 }
 
-/**
- * SECTION 10: the molar masses the flare is weighed at, asked of the engine
- * about itself as the dump asks it: a gas that is all CO2 flared, and one that
- * is all methane flared with next to no destruction.
- */
+/** SECTION 10: the molar masses the flare's tonnes are weighed at, the engine's export FLARE_MOLAR_MASS (MD45-1). */
 export function flareMolarMassAt(code) {
-  const probe = engineGas(rowsOf([[code, 1]]));
-  const r = FV.abatement({
-    gas: probe, volumeMMscfd: 1000, onstreamDays: 1, flareDestructionEfficiency: code === 'CO2' ? 1 : 1e-9, gwpMethane: 1,
-  });
-  if (!r || r.error) return null;
-  const lbmol = (1000 * 1e6) / FV.SCF_PER_LBMOL;
-  const t = code === 'CO2' ? r.flareCo2Tonnes : r.flareCh4Tonnes / (1 - 1e-9);
-  return (t * 1000 * FV.LB_PER_KG) / lbmol;
+  if (code === 'CO2') return FV.FLARE_MOLAR_MASS.CO2;
+  if (code === 'C1' || code === 'CH4') return FV.FLARE_MOLAR_MASS.CH4;
+  return null;
 }
 export const flareMolarMassesAt = () => ({ co2: flareMolarMassAt('CO2'), methane: flareMolarMassAt('C1') });
 

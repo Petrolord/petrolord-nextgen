@@ -137,7 +137,7 @@ vaporizer's pressure, or the outlet blank like the boiling point. The engine is
 right; the page's two defaults contradict each other. The course teaches the
 KANO vaporizer (inlet 18, boiling 38, outlet 55), never the page's defaults.
 
-### 3b. F-R1, four oracle ledgers are inline in main(). COVERAGE CAVEAT, recommend an engines PR.
+### 3b. F-R1, four oracle ledgers were inline in main(). REPAIRED UPSTREAM IN MD45-1 (engines #228, df31f53); oracle_check.py now calls them. The foundation's note follows.
 
 `oracle_flaretovalue.py` computes the net abatement (avoided - product +
 displaced) inline in main(); `oracle_lpgcng.py` computes the storage (both
@@ -167,7 +167,7 @@ carries CO2 at 44.010 in GAS_COMPONENT_REFERENCE; the oracle uses the same pair,
 the digest prints both (SECTIONS 2 and 10), and nothing graded mixes them. Not a
 defect; noted.
 
-### 3d. F-R3, two engine strings break the owner copy rule. DEFERRED AND PINNED.
+### 3d. F-R3, engine strings broke the owner copy rule. REPAIRED UPSTREAM IN MD45-1 (three strings reworded); the digest now quotes the new wording and defers nothing. The foundation's note follows.
 
 `flareToValue.characteriseGas` ghvNote ("... makes the mixture value missing,
 not partial.") and `lpgCng.vaporizerDuty` note ("It is a floor, not the duty.")
@@ -177,7 +177,7 @@ engines copy sweep that rewords them turns the digest gate red until the digest
 is rebuilt. The lesson task tells writers to quote them only as the engine's
 words.
 
-### 3e. F-R4, constants the engine does not export. FILLED BY ASKING THE ENGINE.
+### 3e. F-R4, constants the engine did not export. REPAIRED UPSTREAM IN MD45-1: FLARE_MOLAR_MASS and RICHNESS_GPM; the digest, the capstone generator and the lab read them. The foundation's note follows.
 
 The flare's molar masses (44.009 and 16.043) are inline in abatement and the
 richness band edges (1 and 2.5 gal/Mscf) are inline in characteriseGas. Neither
@@ -234,14 +234,14 @@ tolerance), chained oracle to oracle:
 | flareCo2Tonnes, flareCh4Tonnes, flareCo2eTonnes | oracle_flaretovalue.flare (by moles, W-36 cross-check inside) |
 | capitalCost, productPerYear, valuePerMscf | oracle_flaretovalue.economics |
 | avoidedFlareCo2eTonnes | oracle_flaretovalue.flare with the recovery |
-| netAbatementTonnesCo2ePerYear | the oracle's ledger, TRANSCRIBED from its main() (3b) |
+| netAbatementTonnesCo2ePerYear | oracle_flaretovalue.net_abatement (exported in MD45-1) |
 | breakevenCreditPrice | oracle_flaretovalue.credits on the oracle's own margin and net |
-| usableTonnes (water basis) | the oracle's storage ledger, TRANSCRIBED (3b) |
-| designDutyKW | the oracle's vaporizer ledger on oracle_lpgcng.blend's latent heat, TRANSCRIBED (3b) |
+| usableTonnes (water basis) | oracle_lpgcng.storage (exported in MD45-1) |
+| designDutyKW | oracle_lpgcng.vaporizer (exported in MD45-1) on oracle_lpgcng.blend's latent heat |
 | averageWaitMinutes | oracle_lpgcng.erlang_c (exact rationals, floored positions) |
 | massKg | oracle_lpgcng.mass (DAK by bisection) |
 | leftInBanksKg | oracle_lpgcng.cascade (mass ledger by false position, conservation asserted) |
-| simplePaybackYears | the oracle's conversion ledger, TRANSCRIBED (3b) |
+| simplePaybackYears | oracle_lpgcng.conversion (exported in MD45-1) |
 
 Not graded although oracle-covered: the blend's own figures (they feed two
 graded fields), the Z factor, queue probability and length, the counts. Not
@@ -269,3 +269,29 @@ negcontrol_md4.sh, both goldens and the three jest suites) with
 (`downstream.flareToValue`, `downstream.lpgCng`, `downstream.gasvalue.golden`)
 run 200 of 200 in the worktree, and both oracles regenerate their goldens
 byte-identical (run from a scratch copy in this wave directory).
+
+## 8. The extension round (2026-09-19), engines df31f53 (MD45-1)
+
+Re-vendored by the lead (d39ae319). Rebuilt on it before any edit, the
+foundation digest differed in exactly three lines: SECTION 1's export count
+(flareToValue now exports FLARE_MOLAR_MASS and RICHNESS_GPM) and the two
+reworded engine notes (the heating-value note in SECTION 8, the vaporizer
+floor note in SECTION 27). **All eighteen graded fields are byte-identical**
+(fields.json and capstone.json unchanged; the prompts' molar masses and
+exponent are read from exports and print the same figures). The writers' gaps
+in DIGEST-GAPS.md were then closed additively: the digest grew from 895 to
+1030 lines, 36 sections either side. REVISE.md maps every changed line.
+
+LEAD RULING on the fill basis, applied: the digest prints both cases. Typed
+blank the basis is refused (the engine's "Unknown fill ratio basis" refusal);
+OMITTED, lpgStorageSizing takes liquid_volume and NAMES it in its output
+(fillRatioBasis liquid_volume). The output names the basis it assumed, so
+there is no engine follow-up, and the lessons teach the typed basis.
+
+Gaps NOT closed, reported rather than typed: hitFillLimit's cap (maxFills 500)
+is an inline default the engine does not export, so the digest says only "the
+cap the call carries"; the gas constant in m = PVM/ZRT is inline in
+gasMassInVessel and not printed as a figure; blockedBy's precedence with two
+inputs missing and a blank credit-price entry are not probed; a route payback
+(capital over margin) is not printed because no oracle computes it; coverDays
+is rounded by the engine to three decimals (a rounding note says so).

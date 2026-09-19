@@ -5,7 +5,7 @@
 //     /root/et-wip-gasvalue/digest.txt --rules /root/et-wip-gasvalue
 //
 // THIS WAVE'S HISTORY POSITION. The digest teaches the engines as they are at
-// f0aef14, after MD4-0. It never narrates what an engine used to return: the
+// df31f53 (MD45-1, after MD4-0). It never narrates what an engine used to return: the
 // eighteen MD4-0 repairs are taught as how the engines work, and the four
 // FINDINGS HELD items (H1 to H4) are stated as limits in the present tense in
 // SECTIONS 14 and 35.
@@ -92,7 +92,9 @@ export default {
     { frag: 'Every component needs a mole fraction.', src: 'engines/downstream/flareToValue.js' },
     { frag: 'The gas composition sums to nothing.', src: 'engines/downstream/flareToValue.js' },
     { frag: 'Derived from the composition and the component liquid densities', src: 'engines/downstream/flareToValue.js' },
-    { frag: 'A heating value missing on any component makes the mixture value missing, not partial.', src: 'engines/downstream/flareToValue.js' },
+    { frag: 'A heating value missing on any component leaves the mixture value missing too. No partial average is reported.', src: 'engines/downstream/flareToValue.js' },
+    { frag: 'It is a floor: the full duty is at least this.', src: 'engines/downstream/lpgCng.js' },
+    { frag: 'reported as missing for the blend. It is never averaged over the components that have it.', src: 'engines/downstream/lpgCng.js' },
     { frag: 'CO2 = the CO2 in the gas plus the combustion efficiency times the hydrocarbon carbon', src: 'engines/downstream/flareToValue.js' },
     { frag: 'No combustion efficiency was given, so the destruction efficiency stands in for it.', src: 'engines/downstream/flareToValue.js' },
     { frag: 'no methane global warming potential supplied', src: 'engines/downstream/flareToValue.js' },

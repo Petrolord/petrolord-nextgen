@@ -105,6 +105,7 @@ const structureKeys = (() => {
 })();
 if (structureKeys.size !== 18) throw new Error(`SECTION OWNERS: structure.py yielded ${structureKeys.size} module keys, expected 18`);
 let sectionNo = 0;
+const fnLabel = (names) => { out(`function: ${names}`); out(''); };
 const section = (title) => {
   sectionNo += 1;
   const own = SECTION_OWNERS[sectionNo];
@@ -153,14 +154,15 @@ const flareMolarMass = (code) => {
 /* ================================================================== */
 out('# gasvalue: Flare Gas to Value & LPG/CNG. Teaching digest.');
 out('# PRECISION: every computed figure prints to four decimals (Btu/scf, gal/Mscf, kg/Mscf, mole fractions, carbon per mole, lb/lbmol, t/Mscf, MWh/Mscf, dollars per Mscf, dollars per tonne, kg of product a year, tonnes of LPG, m3, days, kg/m3, kJ/kg, kg/kmol, kW, minutes, erlangs, Z, reduced pressure and temperature, kg in a vessel, bar, kg per fill, naira, litres, kg of fuel, years, shares and ratios) except where the engine itself reports a quantity coarser: tonnes of CO2, methane and CO2e a year and kilograms stored, delivered and left in a cascade to three decimals; revenue, operating cost, margin, capital and cash flows in dollars to two. Every input prints exactly as it is typed, in gasvalue_fields.mjs for a case or beside the question in gasvalue_dump.mjs for a probe. Counts print as whole numbers.');
-out('# ENGINES: engines/downstream/flareToValue.js and engines/downstream/lpgCng.js at petrolord-engines f0aef14, with modularRefinery.js for the capital power law, vendored in NextGen under packages/engines.');
+out('# ENGINES: engines/downstream/flareToValue.js and engines/downstream/lpgCng.js at petrolord-engines df31f53 (MD45-1, after MD4-0), with modularRefinery.js for the capital power law, vendored in NextGen under packages/engines.');
 out('# CASES: EGBEMA (a flow station in Imo State flaring associated gas, and the four ways to sell it), KANO (an LPG storage and bottling plant), IBAFO (a CNG mother station on the Lagos-Ibadan expressway and a Lagos bus operator switching to CNG), and beside them the two live apps\' own opening examples. EVERY ANALYSIS, EFFICIENCY, GWP, PRICE, COST, FILL LIMIT AND VEHICLE FIGURE IN THIS DIGEST IS INVENTED AND ILLUSTRATIVE: no figure is a published analysis, a measured flare, a market price or a regulation. Place names are real places; the records are not. The component heating values, liquid densities and LPG properties are the engine\'s own labelled typical tables.');
 out('# NO CLOCK: nothing in scope reads a date or a clock, and the digest is the same bytes in every time zone and at every machine date.');
 out('# Built by build_digest.sh from gasvalue_dump.mjs and gasvalue_fields.mjs. Never edited by hand.');
 
 /* ------------------------------------------------------------------ */
 section('WHAT THE TWO MODULES EXPORT');
-out('The Flare Gas to Value Studio calls flareToValue. The LPG & CNG Rollout Studio calls lpgCng, which calls the loading-rack queue in terminalDepot for its carousel and forecourt, the gas Z factor in production/gasProperties and the compressor train in facilities/compression rather than writing its own. flareToValue scales capital with the power law in modularRefinery. The counts below are measured from the modules themselves.');
+fnLabel('every export of flareToValue and lpgCng, counted');
+out('The Flare Gas to Value Studio calls flareToValue. The LPG & CNG Rollout Studio calls lpgCng, which calls the loading-rack queue in terminalDepot for its carousel and forecourt, the gas Z factor in production/gasProperties and the compressor train in facilities/compression, and writes none of the three itself. flareToValue scales capital with the power law in modularRefinery. The counts below are measured from the modules themselves.');
 out('');
 head('module', 'exported functions', 'exported constants and tables');
 for (const [name, mod] of [['flareToValue', F], ['lpgCng', L]]) {
@@ -185,6 +187,7 @@ row('does the customer save by switching fuel', 'conversionEconomics');
 
 /* ------------------------------------------------------------------ */
 section('A STANDARD CUBIC FOOT IS A COUNT OF MOLES');
+fnLabel('flareToValue constants and lpgCng constants; characteriseGas');
 out('A standard cubic foot counts gas at 60 F and 14.696 psia, so a volume of gas is a number of moles. The engine\'s unit constants, printed from the module:');
 out('');
 head('constant', 'value', 'what it is');
@@ -205,9 +208,19 @@ for (const code of ['C1', 'C2', 'C3', 'N2', 'CO2']) {
   row(REF[code].label, inp(REF[code].molarMassLbLbmol), fx(g.kgPerMscf));
 }
 claim(perMw.every((x) => Math.abs(x - perMw[0]) < 1e-7), 'the mass per Mscf over the molar mass is the same for every component');
+out('');
+out('kgPerMscf is built from two of those constants: the lb-mol in one Mscf is 1000 over SCF_PER_LBMOL, the pounds are that times the mole-weighted molar mass, and the kilograms are the pounds over LB_PER_KG. The same arithmetic done here on the engine\'s constants, beside the engine:');
+head('pure component', '1000 / SCF_PER_LBMOL x molar mass / LB_PER_KG', 'kgPerMscf (engine)', 'difference');
+for (const code of ['C1', 'CO2']) {
+  const g = gasOf([[code, 1]], `pure ${code}`);
+  const byHand = (1000 / F.SCF_PER_LBMOL) * REF[code].molarMassLbLbmol / F.LB_PER_KG;
+  claim(Math.abs(byHand - g.kgPerMscf) < 1e-7, `${code}: kgPerMscf is built from SCF_PER_LBMOL and LB_PER_KG`);
+  row(REF[code].label, fx(byHand), fx(g.kgPerMscf), fx(byHand - g.kgPerMscf));
+}
 
 /* ------------------------------------------------------------------ */
 section('THE COMPONENT REFERENCE TABLE');
+fnLabel('flareToValue.GAS_COMPONENT_REFERENCE, GAS_REFERENCE_NOTE');
 out('GAS_COMPONENT_REFERENCE, as the engine exports it. The studio fills a gas analysis from these rows; the analysis carries the figures and the engine reads what it is given.');
 out('');
 head('code', 'label', 'carbon per molecule', 'molar mass lb/lbmol', 'typical heating value Btu/scf', 'liquid density lb/gal', 'recoverable as NGL', 'inert');
@@ -221,9 +234,11 @@ out('The CO2 row carries one carbon per molecule and is marked inert: its carbon
 
 /* ------------------------------------------------------------------ */
 section('AN ANALYSIS THAT DOES NOT SUM TO ONE');
+fnLabel('flareToValue.characteriseGas');
 const eg = gasOf(T.EGBEMA_GAS, 'EGBEMA gas');
 const es = gasOf(T.EGBEMA_SHORT_GAS, 'EGBEMA short gas');
-out(`EGBEMA's laboratory sheet, typed in full: ${rowsText(T.EGBEMA_GAS)}. The same sheet typed short, with less methane: ${rowsText(T.EGBEMA_SHORT_GAS)}.`);
+claim(T.EGBEMA_SHORT_GAS.map(([c, y], i) => (y < T.EGBEMA_GAS[i][1] ? c : '')).filter(Boolean).join(',') === 'C1,C2,C3', 'the short sheet types methane, ethane and propane short and nothing else');
+out(`EGBEMA's laboratory sheet, typed in full: ${rowsText(T.EGBEMA_GAS)}. The same sheet typed short, with less methane, ethane and propane: ${rowsText(T.EGBEMA_SHORT_GAS)}.`);
 out('');
 head('sheet', 'rawMoleFractionSum', 'normalisationNote');
 row('EGBEMA in full', fx(eg.rawMoleFractionSum), eg.normalisationNote === null ? 'none' : eg.normalisationNote);
@@ -238,6 +253,7 @@ T.EGBEMA_SHORT_GAS.forEach(([code, y], i) => {
 
 /* ------------------------------------------------------------------ */
 section('THE GAS BY THE MOLE: HEATING VALUE, INERTS, CARBON AND MASS');
+fnLabel('flareToValue.characteriseGas');
 const lean = gasOf(T.OGUTA_LEAN_GAS, 'OGUTA lean gas');
 const suiteGas = gasOf(T.SUITE_FLARE.gas, 'studio default gas');
 out('Every property below is a mole-weighted sum over the normalised analysis: the heating value is the mole-weighted heating value, the carbon per mole counts every carbon atom (the CO2\'s included), the hydrocarbon carbon per mole counts only the carbon that can burn, and the mass in one Mscf is the moles in a thousand standard cubic feet times the molar mass.');
@@ -250,6 +266,14 @@ for (const [name, g] of [['EGBEMA', eg], ['OGUTA', lean], ['studio opening gas',
 }
 out('');
 out('In every row, carbonPerMol minus hydrocarbonCarbonPerMol is the CO2 mole fraction: the only carbon that cannot burn is the carbon already in CO2.');
+out('');
+out('inertMoleFraction is the sum of the normalised fractions of the components the reference marks inert, nitrogen and CO2:');
+head('gas', 'N2 (normalised)', 'CO2 (normalised)', 'N2 plus CO2', 'inertMoleFraction (engine)');
+for (const [name, g] of [['EGBEMA', eg], ['OGUTA', lean], ['studio opening gas', suiteGas]]) {
+  const y = (code) => (g.normalised.find((r) => r.code === code) || { moleFraction: 0 }).moleFraction;
+  claim(Math.abs(y('N2') + y('CO2') - g.inertMoleFraction) < 1e-7, `${name}: the inerts are N2 plus CO2`);
+  row(name, fx(y('N2')), fx(y('CO2')), fx(y('N2') + y('CO2')), fx(g.inertMoleFraction));
+}
 out('');
 out('The heating value is blended on moles. Two shortcuts beside it on EGBEMA, each computed from the same reference table:');
 const egMass = (() => { const m = T.EGBEMA_GAS.map(([c, y]) => y * REF[c].molarMassLbLbmol); const t = m.reduce((s, x) => s + x, 0); return m.map((x) => x / t); })();
@@ -265,6 +289,7 @@ out('Both shortcuts read higher than the engine on this gas.');
 
 /* ------------------------------------------------------------------ */
 section('A CARBON NUMBER IS NEVER ASSUMED, AND WHAT THE ANALYSIS REFUSES');
+fnLabel('flareToValue.characteriseGas');
 const typedC3 = comps([['C1', 0.9], ['C3', 0.1]]);
 const noC = typedC3.map((c) => (c.code === 'C3' ? { ...c, c: null } : c));
 const gTyped = must(F.characteriseGas({ components: typedC3 }), 'typed carbon');
@@ -285,6 +310,7 @@ row('every mole fraction zero', refused(F.characteriseGas({ components: comps([[
 
 /* ------------------------------------------------------------------ */
 section('THE LIQUIDS IN THE GAS');
+fnLabel('flareToValue.characteriseGas, RICHNESS_GPM');
 out('gpmC2Plus and gpmC3Plus are gallons of liquid per thousand standard cubic feet, derived from the composition: the moles in a thousand standard cubic feet, times each component\'s mole fraction and molar mass, over its liquid density, summed over the recoverable components. The engine\'s basis sentence:');
 out(`"${eg.gpmBasis}"`);
 out('');
@@ -293,23 +319,34 @@ for (const [name, g] of [['EGBEMA', eg], ['OGUTA', lean], ['studio opening gas',
   row(name, fx(g.gpmC2Plus), fx(g.gpmC3Plus), fx(g.gpmC2Plus - g.gpmC3Plus), g.richness);
 }
 out('');
-// The richness bands are read from the engine by bisection on a methane and
-// propane mix: the propane fraction at which the word changes, and the
-// gpmC3Plus there.
-const richAt = (x) => gasOf([['C1', 1 - x], ['C3', x]], 'richness probe');
-const edge = (fromWord) => {
-  let lo = 0; let hi = 0.5;
-  claim(richAt(lo).richness === 'lean' && richAt(hi).richness === 'rich', 'the probe spans lean to rich');
-  for (let i = 0; i < 200; i += 1) {
-    const mid = (lo + hi) / 2;
-    const w = richAt(mid).richness;
-    if (fromWord === 'lean' ? w === 'lean' : w !== 'rich') lo = mid; else hi = mid;
-  }
-  return richAt(hi).gpmC3Plus;
-};
-const leanEdge = edge('lean');
-const richEdge = edge('moderate');
-out('The richness word is read off gpmC3Plus. The engine was asked where the word changes, by bisection on the propane fraction of a methane and propane mix:');
+out('The rows each cut sums, and each row\'s gallons, for EGBEMA: gpmC2Plus sums ethane to pentanes plus, gpmC3Plus propane to pentanes plus, each row the moles in one Mscf (1000 over SCF_PER_LBMOL) times its normalised fraction and molar mass over its liquid density.');
+head('component', 'recoverable as NGL', 'in gpmC2Plus', 'in gpmC3Plus', 'gal/Mscf');
+let c2Sum = 0; let c3Sum = 0;
+for (const r of eg.normalised) {
+  const ref = REF[r.code];
+  const inC2 = ['C2', 'C3', 'IC4', 'NC4', 'C5'].includes(r.code);
+  const inC3 = ['C3', 'IC4', 'NC4', 'C5'].includes(r.code);
+  const gal = ref.recoverableAsNgl ? ((1000 / F.SCF_PER_LBMOL) * r.moleFraction * ref.molarMassLbLbmol) / ref.liquidDensityLbGal : null;
+  if (inC2) c2Sum += gal; if (inC3) c3Sum += gal;
+  row(r.code, yesNo(ref.recoverableAsNgl), yesNo(inC2), yesNo(inC3), gal === null ? 'none' : fx(gal));
+}
+claim(Math.abs(c2Sum - eg.gpmC2Plus) < 1e-5 && Math.abs(c3Sum - eg.gpmC3Plus) < 1e-5, 'the rows sum to the engine\'s gpm');
+row('sum', '', '', '', `${fx(c2Sum)} (gpmC2Plus), ${fx(c3Sum)} (gpmC3Plus)`);
+out('');
+// The richness edges are the engine's export RICHNESS_GPM. A methane and
+// propane probe either side of each edge confirms the words before printing.
+const leanEdge = F.RICHNESS_GPM.moderate;
+const richEdge = F.RICHNESS_GPM.rich;
+// In a methane and propane mix gpmC3Plus is proportional to the propane
+// fraction, so the fraction for a target gpm is the target over the gpm of
+// pure propane; the probe sits a ten-thousandth either side of each edge.
+const gpmPropane = gasOf([['C3', 1]], 'pure propane').gpmC3Plus;
+const probeAt = (edgeGpm) => [1 - 1e-4, 1 + 1e-4].map((k) => {
+  const x = (edgeGpm * k) / gpmPropane;
+  return gasOf([['C1', 1 - x], ['C3', x]], 'richness probe').richness;
+});
+claim(probeAt(leanEdge).join() === 'lean,moderate' && probeAt(richEdge).join() === 'moderate,rich', 'the words change at the exported edges');
+out('The richness word is read off gpmC3Plus against the lower edges the engine exports as RICHNESS_GPM (a screening word; a route\'s own liquids limit governs):');
 head('word changes', 'gpmC3Plus where it changes');
 row('lean to moderate', fx(leanEdge));
 row('moderate to rich', fx(richEdge));
@@ -318,6 +355,7 @@ out('A gas at or above the lower edge reads moderate; at or above the upper edge
 
 /* ------------------------------------------------------------------ */
 section('A MISSING DENSITY IS A MISSING ANSWER');
+fnLabel('flareToValue.characteriseGas');
 const noDens = comps(T.EGBEMA_GAS).map((c) => (c.code === 'C3' ? { ...c, liquidDensityLbGal: null } : c));
 const noGhv = comps(T.EGBEMA_GAS).map((c) => (c.code === 'NC4' ? { ...c, ghvBtuScf: null } : c));
 const gNoDens = must(F.characteriseGas({ components: noDens }), 'no density');
@@ -333,24 +371,30 @@ out('A blank density leaves the liquids content and the richness word missing (n
 
 /* ------------------------------------------------------------------ */
 section('THE MASS CEILING ON LIQUIDS');
+fnLabel('flareToValue.characteriseGas');
 out('kgPerMscf is the mass of one Mscf of the gas; c3PlusKgPerMscf is the part of it that is propane and heavier. They are the most any route can take out of a thousand standard cubic feet, by mass.');
 out('');
 head('gas', 'kgPerMscf', 'c3PlusKgPerMscf', 'c3PlusKgPerMscf over kgPerMscf');
 for (const [name, g] of [['EGBEMA', eg], ['OGUTA', lean], ['studio opening gas', suiteGas]]) {
   row(name, fx(g.kgPerMscf), fx(g.c3PlusKgPerMscf), fx(g.c3PlusKgPerMscf / g.kgPerMscf));
 }
+out('');
+claim(gNoDens.c3PlusKgPerMscf === eg.c3PlusKgPerMscf && gNoDens.kgPerMscf === eg.kgPerMscf, 'the mass ceiling reads no liquid density');
+out(`The mass ceiling reads no liquid density. With propane's liquid density left blank (SECTION 8), EGBEMA's c3PlusKgPerMscf is still ${fx(gNoDens.c3PlusKgPerMscf)} and its kgPerMscf ${fx(gNoDens.kgPerMscf)}.`);
 
 /* ------------------------------------------------------------------ */
 section('THE FLARE BY 40 CFR 98.233(n)');
+fnLabel('flareToValue.abatement, FLARE_MOLAR_MASS');
 const P = T.EGBEMA_PARCEL;
 const efl = must(F.abatement({ gas: eg, ...P }), 'EGBEMA flare');
-const mwCo2 = flareMolarMass('CO2');
-const mwCh4 = flareMolarMass('C1');
+const mwCo2 = F.FLARE_MOLAR_MASS.CO2;
+const mwCh4 = F.FLARE_MOLAR_MASS.CH4;
+claim(Math.abs(flareMolarMass('CO2') - mwCo2) < 1e-6 && Math.abs(flareMolarMass('C1') - mwCh4) < 1e-6, 'an all-CO2 and an all-methane flare give back the exported molar masses');
 out(`EGBEMA flares ${inp(P.volumeMMscfd)} MMscfd on ${inp(P.onstreamDays)} days a year. The flare study gives a destruction efficiency of ${inp(P.flareDestructionEfficiency)} and a combustion efficiency of ${inp(P.flareCombustionEfficiency)}, and the study uses a methane GWP of ${inp(P.gwpMethane)}.`);
 out('');
 out(`The engine's basis sentence: "${efl.basis}"`);
 out('');
-out('The molar masses the flare is weighed at are not exported. Asked about itself (a gas that is all CO2 flared, and one that is all methane flared with next to no destruction), the engine gives:');
+out('The molar masses the flare\'s tonnes are weighed at, as the engine exports them in FLARE_MOLAR_MASS (an all-CO2 flare and an all-methane flare give the same figures back). The reference table carries CO2 at its tabulated molar mass for the gas\'s mass and liquids (SECTION 3); the flare\'s tonnes use these:');
 head('species', 'molar mass kg/kmol the flare uses');
 row('CO2', fx(mwCo2, 3));
 row('methane', fx(mwCh4, 3));
@@ -361,8 +405,11 @@ row('flareCo2Tonnes (t/yr)', t3(efl.flareCo2Tonnes));
 row('flareCh4Tonnes (t/yr)', t3(efl.flareCh4Tonnes));
 row('flareCo2eTonnes (t/yr)', t3(efl.flareCo2eTonnes));
 row('methaneShareOfFlareCo2e', fx(efl.methaneShareOfFlareCo2e));
+claim(Math.abs(efl.flareCh4Tonnes * P.gwpMethane / efl.flareCo2eTonnes - efl.methaneShareOfFlareCo2e) < 1e-5, 'the methane share is methane x GWP over CO2e');
 row('destructionEfficiency', inp(efl.destructionEfficiency));
 row('combustionEfficiency', inp(efl.combustionEfficiency));
+out('');
+out('methaneShareOfFlareCo2e is flareCh4Tonnes times the GWP over flareCo2eTonnes.');
 out('');
 out('THE CO2 IN THE GAS PASSES THROUGH. Two probes at EGBEMA\'s volume and days: a gas that is all CO2, and a gas that is all methane, each flared at EGBEMA\'s efficiencies.');
 const pureCo2 = must(F.abatement({ gas: gasOf([['CO2', 1]], 'pure CO2'), ...P }), 'pure CO2 flare');
@@ -376,7 +423,7 @@ claim(pureCo2.flareCo2Tonnes === pureCo2Low.flareCo2Tonnes && pureCo2.flareCh4To
 out('');
 out('The CO2 already in the gas leaves the flare as CO2 at every efficiency, and none of it is methane.');
 out('');
-out('METHANE FROM THE METHANE. The methane that escapes is the methane in the gas times one less the destruction efficiency. Unburned ethane and heavier are not methane and carry no GWP here. Beside the engine, the figure a flare gives if every unburned carbon atom is counted as methane, computed from the engine\'s own carbon per mole:');
+out('METHANE FROM THE METHANE. The methane that escapes is the methane in the gas times one less the destruction efficiency. Unburned ethane and heavier are not methane and carry no GWP here. Beside the engine, the figure a flare gives if every unburned carbon atom is counted as methane, computed here as the lb-mol a year (scfPerYear over SCF_PER_LBMOL) times carbonPerMol (every carbon atom, the CO2\'s included) times one less the destruction efficiency, weighed at FLARE_MOLAR_MASS.CH4 and converted with LB_PER_KG:');
 const lbmolYr = efl.scfPerYear / F.SCF_PER_LBMOL;
 const allCarbonCh4 = (lbmolYr * eg.carbonPerMol * (1 - P.flareDestructionEfficiency) * mwCh4) / F.LB_PER_KG / 1000;
 head('methane, t/yr', 'value', 'over the engine\'s');
@@ -385,11 +432,15 @@ row('every unburned carbon counted as methane', t3(allCarbonCh4), fx(allCarbonCh
 
 /* ------------------------------------------------------------------ */
 section('DESTRUCTION AND COMBUSTION EFFICIENCY');
+fnLabel('flareToValue.abatement');
 out('The rule separates two efficiencies. The DESTRUCTION efficiency is the share of hydrocarbon destroyed and sets the methane. The COMBUSTION efficiency is the share oxidised to CO2 and sets the CO2. A combustion efficiency cannot exceed the destruction efficiency. Left out, the destruction efficiency stands in for it, and the engine says so.');
 const standIn = must(F.abatement({ gas: eg, ...P, flareCombustionEfficiency: null }), 'stand-in');
 out('');
 head('EGBEMA', 'combustion efficiency used', 'flareCo2Tonnes', 'flareCh4Tonnes', 'flareCo2eTonnes', 'combustionEfficiencyNote');
 row('both efficiencies given', inp(efl.combustionEfficiency), t3(efl.flareCo2Tonnes), t3(efl.flareCh4Tonnes), t3(efl.flareCo2eTonnes), efl.combustionEfficiencyNote === null ? 'none' : efl.combustionEfficiencyNote);
+const blankC = must(F.abatement({ gas: eg, ...P, flareCombustionEfficiency: '' }), 'blank combustion');
+claim(blankC.flareCo2Tonnes === standIn.flareCo2Tonnes && blankC.combustionEfficiencyNote === standIn.combustionEfficiencyNote, 'a blank combustion efficiency behaves as left out');
+row('combustion efficiency typed blank (\'\')', inp(blankC.combustionEfficiency), t3(blankC.flareCo2Tonnes), t3(blankC.flareCh4Tonnes), t3(blankC.flareCo2eTonnes), blankC.combustionEfficiencyNote);
 row('combustion efficiency left out', inp(standIn.combustionEfficiency), t3(standIn.flareCo2Tonnes), t3(standIn.flareCh4Tonnes), t3(standIn.flareCo2eTonnes), standIn.combustionEfficiencyNote);
 row('left out minus given', fx(standIn.combustionEfficiency - efl.combustionEfficiency), t3(standIn.flareCo2Tonnes - efl.flareCo2Tonnes), t3(standIn.flareCh4Tonnes - efl.flareCh4Tonnes), t3(standIn.flareCo2eTonnes - efl.flareCo2eTonnes), '');
 claim(standIn.flareCh4Tonnes === efl.flareCh4Tonnes && standIn.flareCo2Tonnes > efl.flareCo2Tonnes, 'the stand-in moves the CO2 and leaves the methane');
@@ -407,6 +458,7 @@ for (const eta of [0.9, 0.95, 0.97, 0.99, 1]) {
 
 /* ------------------------------------------------------------------ */
 section('CO2e WITH A STATED GWP, AND THE METHANE SHARE');
+fnLabel('flareToValue.abatement');
 out('The methane GWP is an input with no default: the assessment report it comes from is the study\'s to choose, and this course does not choose it. CO2e is the CO2 plus the methane times the GWP. EGBEMA\'s flare at the study\'s GWP and at two others, for comparison only:');
 head('GWP (input)', 'flareCo2eTonnes', 'methaneShareOfFlareCo2e');
 for (const gwp of [P.gwpMethane, 20, 40]) {
@@ -426,6 +478,7 @@ claim(noGwp.flareCo2eTonnes === null, 'no CO2e without a GWP');
 
 /* ------------------------------------------------------------------ */
 section('NO EFFICIENCY, NO FLARE: WHAT abatement REFUSES');
+fnLabel('flareToValue.abatement');
 out('What abatement refuses, each probe on EGBEMA\'s gas with the rest of EGBEMA\'s parcel:');
 head('probe', 'engine');
 row('destruction efficiency left blank (\'\')', refused(F.abatement({ gas: eg, ...P, flareDestructionEfficiency: '' }), 'blank eta'));
@@ -438,9 +491,13 @@ row('a gas the analysis refused', refused(F.abatement({ gas: F.characteriseGas({
 out('');
 const omitted = must(F.abatement({ gas: eg, volumeMMscfd: P.volumeMMscfd, flareDestructionEfficiency: P.flareDestructionEfficiency, gwpMethane: P.gwpMethane }), 'days omitted');
 out(`On-stream days OMITTED from the call (not typed at all) take the stated default: scfPerYear ${inp(omitted.scfPerYear)}. Typed blank, they are refused, as the table shows.`);
+const daysDefault = must(F.routeEconomics({ route: template('cng'), gas: eg, volumeMMscfd: P.volumeMMscfd, ...T.EGBEMA_ROUTES.cng }), 'route days omitted').onstreamDays;
+claim(omitted.scfPerYear === P.volumeMMscfd * 1e6 * daysDefault, 'the omitted default is the days routeEconomics reports');
+out(`The default itself: routeEconomics, asked with the days omitted, reports onstreamDays ${inp(daysDefault)}, and ${inp(P.volumeMMscfd)} MMscfd times a million times ${inp(daysDefault)} is the scfPerYear above.`);
 
 /* ------------------------------------------------------------------ */
 section('WHAT THE FLARE MODEL LEAVES OUT');
+fnLabel('flareToValue.abatement');
 out('These are stated limits of the engine, taught and never computed with:');
 out('- The efficiencies have no default. 40 CFR 98.233(n)(1) is a United States rule with tiered default pairs; whether a Nigerian flare study defaults to any tier, or to the NUPRC flare regulations\' basis, is a regulation reading, and both efficiencies stay inputs.');
 out('- An unlit flare is not modelled. Gas sent to a flare that is not lit is vented, all of it methane; the engine\'s flare is lit.');
@@ -453,6 +510,7 @@ row(`studio opening gas, ${inp(T.SUITE_FLARE.volumeMMscfd)} MMscfd, ${inp(T.SUIT
 
 /* ------------------------------------------------------------------ */
 section('THE EGBEMA FLARE END TO END, AND THE STUDIO\'S OPENING GAS');
+fnLabel('flareToValue.characteriseGas, abatement');
 out('EGBEMA, read in one table from the analysis to the CO2e:');
 head('step', 'figure');
 row('sheet sum', fx(eg.rawMoleFractionSum));
@@ -478,6 +536,7 @@ row('richness', suiteGas.richness);
 
 /* ------------------------------------------------------------------ */
 section('FOUR ROUTES AND THEIR ENVELOPES');
+fnLabel('flareToValue.ROUTE_TEMPLATES, ROUTE_TEMPLATE_NOTE');
 out('ROUTE_TEMPLATES, as the engine exports them. Every limit ships unset (null): the envelope is the study\'s to fill.');
 out('');
 head('route id', 'label', 'yield unit', 'yield ceiling', 'requirement', 'direction', 'unit', 'limit');
@@ -492,6 +551,7 @@ for (const t of F.ROUTE_TEMPLATES) for (const q of t.requirements) if (q.note) o
 
 /* ------------------------------------------------------------------ */
 section('SCREENING EGBEMA: PASS, FAIL AND NOT FULLY SCREENED');
+fnLabel('flareToValue.screenRoute');
 out('The EGBEMA study\'s limits, route by route (a requirement not listed is left unset):');
 head('route', 'limits typed');
 for (const t of F.ROUTE_TEMPLATES) row(t.label, Object.entries(T.EGBEMA_LIMITS[t.id]).map(([k, v]) => `${k} ${inp(v)}`).join(', '));
@@ -503,6 +563,9 @@ out('');
 head('route', 'verdict', 'failures (requirement: actual against limit, shortfall)', 'uncheckedRequirements');
 for (const s of screens) row(s.label, s.verdict, s.failures.length ? s.failures.map((x) => `${x.requirement}: ${fx(x.actual)} against ${inp(x.limit)}, short by ${fx(x.shortfall)} ${x.unit}`).join('; ') : 'none', list(s.uncheckedRequirements));
 claim(screens.map((s) => s.verdict).join(',') === 'passes,fails,passes,not fully screened', 'the four verdicts are passes, fails, passes, not fully screened');
+out('');
+claim(screens.every((sc) => sc.checks.every((c) => c.margin === null || Math.abs(c.margin - (c.direction === 'min' ? c.actual - c.limit : c.limit - c.actual)) < 1e-6)), 'the margin is actual minus limit on a minimum and limit minus actual on a maximum');
+out('The margin column is the actual minus the limit on a minimum requirement and the limit minus the actual on a maximum; a negative margin is a failure, and the shortfall is its size.');
 out('');
 out('Three verdicts appear: passes, fails, and not fully screened. A requirement with no limit is reported unchecked; an unset limit is not a satisfied one.');
 out('');
@@ -518,6 +581,7 @@ row('screenRoute on a gas the analysis refused', refused(F.screenRoute({ route: 
 
 /* ------------------------------------------------------------------ */
 section('WHAT THE GAS CAN YIELD: THE CEILING ON EACH ROUTE');
+fnLabel("flareToValue.yieldCeiling; the refusals are routeEconomics'");
 out('Each route\'s yield is typed per Mscf in the route\'s own unit, and each carries a basis for the most one Mscf of this gas can make (yieldCeiling): CNG and mini LNG on the whole gas mass, LPG on the propane and heavier, gas to power on the heating value in MWh (the heating value times a thousand over BTU_PER_MWH).');
 out('');
 head('route', 'yield unit', 'ceiling basis', 'EGBEMA ceiling per Mscf', 'OGUTA ceiling per Mscf', 'studio opening gas ceiling per Mscf', 'EGBEMA yield typed');
@@ -538,6 +602,7 @@ out(`The studio's LPG route on its opening gas at ${inp(T.SUITE_FLARE.lpgYieldPe
 
 /* ------------------------------------------------------------------ */
 section('A ROUTE\'S YEAR: PRODUCT, REVENUE, COST AND MARGIN');
+fnLabel('flareToValue.routeEconomics');
 out(`EGBEMA's four routes on ${inp(P.volumeMMscfd)} MMscfd and ${inp(P.onstreamDays)} days. The inputs typed:`);
 head('route', 'yield per Mscf', 'recovery', 'price per unit, dollars', 'reference capital, dollars', 'reference capacity MMscfd', 'fixed opex, dollars a year', 'variable opex, dollars per Mscf');
 for (const t of F.ROUTE_TEMPLATES) { const r = T.EGBEMA_ROUTES[t.id]; row(t.label, `${inp(r.productUnitPerMscf)} ${r.productUnitLabel}`, inp(r.recoveryFraction), inp(r.pricePerProductUnit), inp(r.referenceCapitalCost), inp(r.referenceCapacityMMscfd), inp(r.fixedOpexPerYear), inp(r.variableOpexPerMscf)); }
@@ -546,6 +611,11 @@ const econ = Object.fromEntries(F.ROUTE_TEMPLATES.map((t) => [t.id, must(F.route
 out('mscfPerYear is the volume in Mscf a day times the on-stream days; productPerYear is that times the yield times the recovery; revenue is product times price; operating cost is the fixed cost plus the variable cost per Mscf of the whole parcel; valuePerMscf is the margin over mscfPerYear.');
 head('route', 'mscfPerYear', 'productPerYear', 'revenuePerYear, dollars', 'operatingCostPerYear, dollars', 'grossMarginPerYear, dollars', 'valuePerMscf, dollars');
 for (const t of F.ROUTE_TEMPLATES) { const e = econ[t.id]; row(t.label, fx(e.mscfPerYear), `${fx(e.productPerYear)} ${e.productUnitLabel}`, d2(e.revenuePerYear), d2(e.operatingCostPerYear), d2(e.grossMarginPerYear), fx(e.valuePerMscf)); }
+claim(F.ROUTE_TEMPLATES.every((t) => Math.abs(econ[t.id].revenuePerYear - econ[t.id].operatingCostPerYear - econ[t.id].grossMarginPerYear) < 0.02), 'the margin is revenue minus operating cost');
+out('');
+out('grossMarginPerYear is revenuePerYear minus operatingCostPerYear, on every row.');
+const econOmit = must(F.routeEconomics({ route: template('cng'), gas: eg, volumeMMscfd: P.volumeMMscfd, ...T.EGBEMA_ROUTES.cng }), 'days omitted');
+out(`On-stream days OMITTED from routeEconomics take the stated default: onstreamDays ${inp(econOmit.onstreamDays)}, mscfPerYear ${fx(econOmit.mscfPerYear)} on the CNG route. Typed blank, they are refused, as the table below shows.`);
 out('');
 out('Recovery is a design outcome typed per route. It is refused outside (0, 1]:');
 head('probe', 'engine');
@@ -565,6 +635,7 @@ claim(blankVar.assumedZero.includes('variable operating cost') && blankFix.assum
 
 /* ------------------------------------------------------------------ */
 section('CAPITAL BY THE MODULAR POWER LAW, AND THE CASH FLOW HANDED ON');
+fnLabel('flareToValue.routeEconomics, modularRefinery.scaleCapex and SCALING_EXPONENT');
 out('Capital is scaled from the route\'s reference plant: cost = reference cost times (capacity over reference capacity) to the exponent. The exponents modularRefinery exports:');
 head('SCALING_EXPONENT', 'value');
 for (const [k, v] of Object.entries(MR.SCALING_EXPONENT)) row(k, inp(v));
@@ -576,6 +647,11 @@ for (const t of F.ROUTE_TEMPLATES) {
   row(t.label, d2(e.capitalCost), inp(e.scalingExponent), d2(stick), d2(e.capitalCost - stick));
 }
 out('');
+out(`Every route's capital is scaled TO the parcel's ${inp(P.volumeMMscfd)} MMscfd from its reference capacity (the inputs table above); the six-tenths column is the same scaling at SCALING_EXPONENT.STICK_BUILT.`);
+const blankExp = must(F.routeEconomics({ route: template('cng'), gas: eg, volumeMMscfd: P.volumeMMscfd, onstreamDays: P.onstreamDays, ...T.EGBEMA_ROUTES.cng, scalingExponent: '' }), 'blank exponent');
+claim(blankExp.scalingExponent === MR.SCALING_EXPONENT.MODULAR && blankExp.capitalCost === econ.cng.capitalCost, 'a blank exponent takes the modular exponent');
+out(`With the scaling exponent typed blank ('') routeEconomics takes the MODULAR exponent: scalingExponent ${inp(blankExp.scalingExponent)}, capitalCost ${d2(blankExp.capitalCost)} on the CNG route.`);
+out('');
 out('The engine assembles the cash flow and hands it on; it does not discount it. Year 0 is the capital as a negative, and the recurring figure is the margin:');
 head('route', 'cashFlow.year0', 'cashFlow.recurring');
 for (const t of F.ROUTE_TEMPLATES) row(t.label, d2(econ[t.id].cashFlow.year0), d2(econ[t.id].cashFlow.recurring));
@@ -586,6 +662,7 @@ out(`With the reference cost left blank the capital is null and the note reads: 
 
 /* ------------------------------------------------------------------ */
 section('THE COUNTERFACTUAL: ONLY THE RECOVERED SHARE IS AVOIDED');
+fnLabel('flareToValue.abatement');
 out(`The CNG route recovers ${inp(T.EGBEMA_ROUTES.cng.recoveryFraction)} of EGBEMA's flare. The gas it does not recover is still flared, so the avoided flare CO2e is the flare's CO2e times the recovery. The net abatement is the avoided flare, less what burning the product emits, plus what the product displaces. Three counterfactuals on the same flare and the same route:`);
 out('');
 const abs = T.EGBEMA_COUNTERFACTUALS.map((cf) => must(F.abatement({ gas: eg, ...P, recoveryFraction: T.EGBEMA_ROUTES.cng.recoveryFraction, ...cf }), cf.counterfactualLabel));
@@ -615,12 +692,17 @@ out(`The flare's gross CO2e is still reported beside a blocked net, as grossClai
 
 /* ------------------------------------------------------------------ */
 section('DOES THE PROJECT NEED CREDITS: THE BREAKEVEN CREDIT PRICE');
+fnLabel('flareToValue.creditSensitivity');
 const net0 = abs[0].netAbatementTonnesCo2ePerYear;
 const cr = must(F.creditSensitivity({ netAbatementTonnesCo2ePerYear: net0, grossMarginPerYear: econ.cng.grossMarginPerYear, ...T.EGBEMA_CREDITS }), 'credits');
 out(`The CNG route against the diesel counterfactual: net abatement ${t3(net0)} t/yr, gross margin ${d2(econ.cng.grossMarginPerYear)} a year, hurdle margin ${inp(T.EGBEMA_CREDITS.hurdleMarginPerYear)} a year. Credit prices typed in this order: ${T.EGBEMA_CREDITS.creditPrices.map(inp).join(', ')} dollars per tonne. Credit prices are case inputs; the engine ships none.`);
 out('');
 head('credit price (input, in the order typed)', 'creditRevenuePerYear', 'totalMarginPerYear', 'clearsHurdle');
 for (const p of cr.points) row(inp(p.creditPrice), d2(p.creditRevenuePerYear), d2(p.totalMarginPerYear), yesNo(p.clearsHurdle));
+claim(cr.points.every((p) => Math.abs(p.creditRevenuePerYear - p.creditPrice * net0) < 0.01 && Math.abs(p.totalMarginPerYear - econ.cng.grossMarginPerYear - p.creditRevenuePerYear) < 0.02), 'credit revenue is price times net tonnes, total margin is margin plus credit revenue');
+out('');
+out('creditRevenuePerYear is the credit price times the net abatement in tonnes; totalMarginPerYear is the route\'s gross margin plus that; a point clears when its total margin reaches the hurdle.');
+out(`The breakeven's numerator, the hurdle minus the margin: ${d2(T.EGBEMA_CREDITS.hurdleMarginPerYear - econ.cng.grossMarginPerYear)} a year, over ${t3(net0)} t/yr.`);
 out('');
 head('field', 'value');
 row('standsAloneWithoutCredits', yesNo(cr.standsAloneWithoutCredits));
@@ -648,6 +730,7 @@ function blankOr(v) { return v === null ? 'null' : fx(v); }
 
 /* ------------------------------------------------------------------ */
 section('THE BID TABLE');
+fnLabel('flareToValue.compareRoutes');
 const abatementsFor = { cng: abs[0] };
 const cmp = F.compareRoutes({ screenings: screens, economics: F.ROUTE_TEMPLATES.map((t) => econ[t.id]), abatements: abatementsFor });
 out('compareRoutes lays the routes side by side. A route that fails screening stays in the table with its failure named. The EGBEMA study, with its limits:');
@@ -673,6 +756,7 @@ claim(cmpOpen.bestByValuePerMscf === null && cmpOpen.leaderNotFullyScreened !== 
 
 /* ------------------------------------------------------------------ */
 section('THE EGBEMA ROUTES END TO END, AND WHAT THE ORACLE CHECKS ON A PARCEL');
+fnLabel('flareToValue.routeEconomics, abatement, creditSensitivity');
 out('EGBEMA\'s CNG route, from the gas to the credit test:');
 head('step', 'figure');
 row('CNG yield ceiling, kg/Mscf', fx(econ.cng.yieldCeilingPerMscf));
@@ -689,6 +773,7 @@ out('What the validation oracle (oracle_flaretovalue.py, in packages/engines/too
 
 /* ------------------------------------------------------------------ */
 section('THE LPG BLEND: THREE PROPERTIES ON THREE BASES');
+fnLabel('lpgCng.lpgBlendProperties, LPG_REFERENCE');
 out('LPG_REFERENCE, as the engine exports it:');
 head('code', 'label', 'molar mass kg/kmol', 'typical liquid density kg/m3', 'range', 'typical latent heat kJ/kg', 'range', 'typical boiling point C');
 for (const r of L.LPG_REFERENCE) row(r.code, r.label, inp(r.molarMassKgKmol), inp(r.typicalLiquidDensityKgM3), r.liquidDensityRange, inp(r.typicalLatentHeatKJkg), r.latentHeatRange, inp(r.typicalBoilingPointC));
@@ -710,9 +795,14 @@ head('probe', 'engine');
 row('a blank butane volume fraction', refused(L.lpgBlendProperties({ components: blendComps({ propane: 0.35, butane: '' }) }), 'blank vf'));
 row('a butane liquid density left blank', refused(L.lpgBlendProperties({ components: blendComps(T.KANO_BLEND).map((c) => (c.code === 'butane' ? { ...c, liquidDensityKgM3: '' } : c)) }), 'no density'));
 row('a negative volume fraction', refused(L.lpgBlendProperties({ components: blendComps({ propane: -0.1, butane: 1.1 }) }), 'negative vf'));
+const noLatent = must(L.lpgBlendProperties({ components: blendComps(T.KANO_BLEND).map((c) => (c.code === 'butane' ? { ...c, latentHeatKJkg: '' } : c)) }), 'no latent');
+claim(noLatent.latentHeatKJkg === null && noLatent.densityKgM3 === kb.densityKgM3, 'a blank latent heat leaves the blend latent heat missing and the density given');
+out('');
+out(`With butane's latent heat left blank the blend's latent heat is null, its density still ${fx(noLatent.densityKgM3)} kg/m3, and the note reads: "${noLatent.note}"`);
 
 /* ------------------------------------------------------------------ */
 section('THE VESSEL: THE FILL LIMIT AND ITS BASIS, COVER AND REORDER');
+fnLabel('lpgCng.lpgStorageSizing, FILL_RATIO_BASIS, WATER_KG_M3');
 out(`The fill limit is required and has no default; the code value is the site's. A code states it two ways, and the engine takes the basis explicitly (FILL_RATIO_BASIS: ${Object.values(L.FILL_RATIO_BASIS).join(', ')}). On the water-capacity basis the engine weighs the water capacity at WATER_KG_M3 = ${inp(L.WATER_KG_M3)} kg/m3. KANO's vessel, with two illustrative fill limits (neither is a code value):`);
 out(`Vessel ${inp(T.KANO_VESSEL.vesselCapacityM3)} m3, demand ${inp(T.KANO_VESSEL.demandTonnesPerDay)} t/day, delivery ${inp(T.KANO_VESSEL.deliveryTonnes)} t, lead time ${inp(T.KANO_VESSEL.leadTimeDays)} days, safety stock ${inp(T.KANO_VESSEL.safetyDays)} days, liquid density the blend's ${fx(kb.densityKgM3)} kg/m3.`);
 out('');
@@ -721,11 +811,24 @@ head('fill limit (input)', 'fillRatioBasis', 'usableM3', 'usableTonnes', 'vapour
 storeK.forEach((s, i) => row(inp(T.KANO_FILL_LIMITS[i].maxFillRatio), s.fillRatioBasis, fx(s.usableM3), fx(s.usableTonnes), fx(s.vapourSpaceM3), fx(s.coverDays), fx(s.safetyStockTonnes), fx(s.reorderAtTonnes), fx(s.ullageAtReorderTonnes), yesNo(s.deliveryFitsUllage), fx(s.deliveriesPerMonth)));
 const swapped = must(L.lpgStorageSizing({ ...T.KANO_VESSEL, maxFillRatio: T.KANO_FILL_LIMITS[1].maxFillRatio, fillRatioBasis: 'liquid_volume', liquidDensityKgM3: kb.densityKgM3 }), 'swapped');
 out('');
-out(`The same ${inp(T.KANO_FILL_LIMITS[1].maxFillRatio)} read on the other basis (as a share of the liquid volume) gives ${fx(swapped.usableTonnes)} t, which is ${fx(storeK[1].usableTonnes - swapped.usableTonnes)} t below the filling density's ${fx(storeK[1].usableTonnes)} t. The vapour space is not spare capacity: it is what keeps a vessel of expanding liquid from rupturing.`);
+out(`The same ${inp(T.KANO_FILL_LIMITS[1].maxFillRatio)} read on the other basis (as a share of the liquid volume) gives ${fx(swapped.usableTonnes)} t, which is ${fx(storeK[1].usableTonnes - swapped.usableTonnes)} t below the filling density's ${fx(storeK[1].usableTonnes)} t. The vapour space is the vessel less the usable liquid; the fill-limit refusal below states what it is for.`);
+out('');
+out('The rules behind the columns, each checked on both rows: usableM3 is usableTonnes over the density; vapourSpaceM3 is the vessel less usableM3; coverDays is usableTonnes over the demand; safetyStockTonnes is the demand times the safety days; reorderAtTonnes is the demand times the lead time plus the safety stock; ullageAtReorderTonnes is usableTonnes less reorderAtTonnes; deliveriesPerMonth is the demand times 30 over the delivery.');
+const Kv = T.KANO_VESSEL;
+head('fill limit (input)', 'usableTonnes over demand', 'demand x safety days', 'demand x lead + safety stock', 'usableTonnes less reorder', 'the engine\'s cover, safety, reorder, ullage');
+storeK.forEach((st, i) => {
+  const cover = st.usableTonnes / Kv.demandTonnesPerDay; const saf = Kv.demandTonnesPerDay * Kv.safetyDays;
+  const reo = Kv.demandTonnesPerDay * Kv.leadTimeDays + saf; const ull = st.usableTonnes - reo;
+  claim(Math.abs(cover - st.coverDays) < 1e-3 && Math.abs(saf - st.safetyStockTonnes) < 1e-4 && Math.abs(reo - st.reorderAtTonnes) < 1e-4 && Math.abs(ull - st.ullageAtReorderTonnes) < 1e-3, 'the storage rules reproduce the engine');
+  row(inp(T.KANO_FILL_LIMITS[i].maxFillRatio), fx(cover), fx(saf), fx(reo), fx(ull), `${fx(st.coverDays)}, ${fx(st.safetyStockTonnes)}, ${fx(st.reorderAtTonnes)}, ${fx(st.ullageAtReorderTonnes)}`);
+});
+out('');
+out('Rounding note: the engine reports coverDays to three decimals, so its cover prints with a final 0 at four decimals and can differ in the fourth decimal from usableTonnes over the demand.');
 out('');
 head('probe', 'engine');
 row('fill limit left blank', refused(L.lpgStorageSizing({ ...T.KANO_VESSEL, liquidDensityKgM3: kb.densityKgM3 }), 'no fill'));
 row('fill limit 1', refused(L.lpgStorageSizing({ ...T.KANO_VESSEL, maxFillRatio: 1, liquidDensityKgM3: kb.densityKgM3 }), 'fill 1'));
+row('basis typed blank (\'\')', refused(L.lpgStorageSizing({ ...T.KANO_VESSEL, maxFillRatio: 0.85, fillRatioBasis: '', liquidDensityKgM3: kb.densityKgM3 }), 'blank basis'));
 row('basis typed as \'weight\'', refused(L.lpgStorageSizing({ ...T.KANO_VESSEL, maxFillRatio: 0.42, fillRatioBasis: 'weight', liquidDensityKgM3: kb.densityKgM3 }), 'bad basis'));
 row('a filling density of 0.6 on water capacity at the KANO blend density', refused(L.lpgStorageSizing({ ...T.KANO_VESSEL, maxFillRatio: 0.6, fillRatioBasis: 'water_capacity_mass', liquidDensityKgM3: kb.densityKgM3 }), 'liquid full'));
 row('no liquid density', refused(L.lpgStorageSizing({ ...T.KANO_VESSEL, maxFillRatio: 0.85 }), 'no rho'));
@@ -733,9 +836,17 @@ out('');
 const blankLead = must(L.lpgStorageSizing({ ...T.KANO_VESSEL, ...T.KANO_FILL_LIMITS[0], leadTimeDays: '', liquidDensityKgM3: kb.densityKgM3 }), 'blank lead');
 out(`A BLANK LEAD TIME IS MISSING. With the lead time left blank (''): missingInputs ${list(blankLead.missingInputs)}; reorderAtTonnes ${blankOr(blankLead.reorderAtTonnes)}; deliveryFitsUllage ${yesNo(blankLead.deliveryFitsUllage)}. The cover (${fx(blankLead.coverDays)} days) does not depend on it and is still given.`);
 claim(blankLead.reorderAtTonnes === null && blankLead.deliveryFitsUllage === null, 'a blank lead time leaves the reorder point unstated');
+const { leadTimeDays: _lt, ...noLead } = T.KANO_VESSEL;
+const omitLead = must(L.lpgStorageSizing({ ...noLead, ...T.KANO_FILL_LIMITS[0], liquidDensityKgM3: kb.densityKgM3 }), 'omitted lead');
+out(`With the lead time OMITTED from the call it takes the stated 0: missingInputs ${list(omitLead.missingInputs)}; reorderAtTonnes ${fx(omitLead.reorderAtTonnes)} (the safety stock alone).`);
+const { fillRatioBasis: _fb, ...noBasis } = T.KANO_FILL_LIMITS[0];
+const omitBasis = must(L.lpgStorageSizing({ ...T.KANO_VESSEL, ...noBasis, liquidDensityKgM3: kb.densityKgM3 }), 'omitted basis');
+claim(omitBasis.fillRatioBasis === L.FILL_RATIO_BASIS.LIQUID_VOLUME, 'the omitted basis is named in the output');
+out(`THE BASIS, BLANK AND OMITTED. Typed blank ('') the basis is refused (the probe table above). OMITTED from the call, the engine takes ${omitBasis.fillRatioBasis} and names it in its output: fillRatioBasis ${omitBasis.fillRatioBasis}, usableTonnes ${fx(omitBasis.usableTonnes)} at a fill limit of ${inp(noBasis.maxFillRatio)}.`);
 
 /* ------------------------------------------------------------------ */
 section('THE VAPORIZER: THREE TERMS AND THE BOILING POINT AT PRESSURE');
+fnLabel('lpgCng.vaporizerDuty');
 const V = T.KANO_VAPORIZER;
 const kv = must(L.vaporizerDuty({ ...V, latentHeatKJkg: kb.latentHeatKJkg }), 'KANO vaporizer');
 out(`KANO's vaporizer: ${inp(V.massFlowKgHr)} kg/h of the blend (latent heat ${fx(kb.latentHeatKJkg)} kJ/kg, from the blend on mass), liquid in at ${inp(V.inletTempC)} C (liquid heat capacity ${inp(V.liquidCpKJkgK)} kJ/kg K), boiling at ${inp(V.boilingPointC)} C at the vaporizer's pressure, vapour out at ${inp(V.outletTempC)} C (vapour heat capacity ${inp(V.vapourCpKJkgK)} kJ/kg K), design margin ${inp(V.designMarginPercent)} percent.`);
@@ -744,6 +855,10 @@ head('term', 'kW', 'share of the duty');
 for (const t of kv.terms) row(t.label, fx(t.kW), fx(t.share));
 row('dutyKW', fx(kv.dutyKW), fx(1));
 row('designDutyKW (with the margin)', fx(kv.designDutyKW), '');
+out('');
+const termsByHand = [V.massFlowKgHr * V.liquidCpKJkgK * (V.boilingPointC - V.inletTempC), V.massFlowKgHr * kb.latentHeatKJkg, V.massFlowKgHr * V.vapourCpKJkgK * (V.outletTempC - V.boilingPointC)].map((x) => x / L.KJ_PER_KWH);
+claim(termsByHand.every((x, i) => Math.abs(x - kv.terms[i].kW) < 1e-5) && Math.abs(kv.designDutyKW - kv.dutyKW * (1 + V.designMarginPercent / 100)) < 1e-5, 'the three terms and the margin reproduce the engine');
+out('The terms, each in kJ an hour over KJ_PER_KWH: warm the liquid is the mass flow times the liquid heat capacity times (boiling point less inlet); boil it is the mass flow times the latent heat; superheat is the mass flow times the vapour heat capacity times (outlet less boiling point). designDutyKW is dutyKW times one plus the margin percent over 100.');
 out('');
 const floorV = must(L.vaporizerDuty({ ...V, boilingPointC: null, latentHeatKJkg: kb.latentHeatKJkg }), 'no bp');
 out(`With the boiling point left blank the engine gives the boil alone: dutyKW ${fx(floorV.dutyKW)}, missingTerms ${list(floorV.missingTerms)}, and the note "${floorV.note}"`);
@@ -757,6 +872,7 @@ row('a design margin of -5 percent', refused(L.vaporizerDuty({ ...V, designMargi
 
 /* ------------------------------------------------------------------ */
 section('THE CAROUSEL IS A QUEUE, ON THE POSITIONS WHOLLY WORKING');
+fnLabel('lpgCng.bottlingPlant (it calls terminalDepot.rackQueue)');
 const B = T.KANO_BOTTLING;
 const kq = must(L.bottlingPlant(B), 'KANO carousel');
 out(`KANO fills ${inp(B.cylindersPerDay)} cylinders over a ${inp(B.shiftHoursPerDay)} hour shift, ${inp(B.fillMinutesPerCylinder)} minutes a cylinder, on ${inp(B.positions)} positions each available ${inp(B.availabilityFraction)} of the time. The carousel is the loading-rack queue (Erlang C) run on the positions wholly working: the floor of the positions times the availability.`);
@@ -766,6 +882,7 @@ row('arrivalsPerHour', fx(kq.arrivalsPerHour));
 row('effectivePositions', fx(kq.effectivePositions));
 row('queuePositions', inp(kq.queuePositions));
 row('positionRoundingNote', kq.positionRoundingNote);
+row('the positions rounded to the nearest whole one (the shortcut the engine does not take)', inp(Math.round(kq.effectivePositions)));
 row('minimumPositionsForThroughput', inp(kq.minimumPositionsForThroughput));
 row('queue offered (erlangs)', fx(kq.queue.offered));
 row('queue utilisation', fx(kq.queue.utilisation));
@@ -795,9 +912,14 @@ row('no fill time', refused(L.bottlingPlant({ ...B, fillMinutesPerCylinder: '' }
 
 /* ------------------------------------------------------------------ */
 section('CYLINDERS AND TRAILERS IN CIRCULATION: LITTLE\'S LAW');
+fnLabel('lpgCng.assetFloat');
 const kf = must(L.assetFloat({ unitsPerDay: B.cylindersPerDay, cycleStages: T.KANO_CYLINDER_CYCLE, sparesFraction: T.KANO_CYLINDER_SPARES }), 'cylinders');
 const tf = must(L.assetFloat({ unitsPerDay: T.IBAFO_TRAILER_TRIPS, cycleStages: T.IBAFO_TRAILER_CYCLE, sparesFraction: T.IBAFO_TRAILER_SPARES }), 'trailers');
-out(`Assets in the system = throughput times time in the system. The fleet is the ceiling of that plus a spares allowance. KANO's cylinders: ${inp(B.cylindersPerDay)} a day, spares ${inp(T.KANO_CYLINDER_SPARES)}. IBAFO's trailers to its daughter stations: ${inp(T.IBAFO_TRAILER_TRIPS)} trips a day, spares ${inp(T.IBAFO_TRAILER_SPARES)}.`);
+out(`Assets in the system = throughput times time in the system. The cycle is the sum of its stage days, and the fleet is the ceiling of (the assets in circulation plus the spares allowance), the spares allowance being the assets in circulation times the spares fraction. KANO's cylinders: ${inp(B.cylindersPerDay)} a day, spares ${inp(T.KANO_CYLINDER_SPARES)}. IBAFO's trailers to its daughter stations: ${inp(T.IBAFO_TRAILER_TRIPS)} trips a day, spares ${inp(T.IBAFO_TRAILER_SPARES)}.`);
+for (const [f, cyc, rate, sp] of [[kf, T.KANO_CYLINDER_CYCLE, B.cylindersPerDay, T.KANO_CYLINDER_SPARES], [tf, T.IBAFO_TRAILER_CYCLE, T.IBAFO_TRAILER_TRIPS, T.IBAFO_TRAILER_SPARES]]) {
+  const days = cyc.reduce((a, x) => a + x.days, 0);
+  claim(Math.abs(days - f.cycleDays) < 1e-9 && f.fleetRequired === Math.ceil(rate * days * (1 + sp)), 'the cycle is the sum of the stages and the fleet the ceiling of the sum');
+}
 out('');
 for (const [name, f, cyc] of [['KANO cylinders', kf, T.KANO_CYLINDER_CYCLE], ['IBAFO trailers', tf, T.IBAFO_TRAILER_CYCLE]]) {
   head(`${name}: stage (input)`, 'days (input)', 'share of the cycle');
@@ -821,8 +943,9 @@ row('a negative spares allowance', refused(L.assetFloat({ unitsPerDay: 10, cycle
 
 /* ------------------------------------------------------------------ */
 section('GAS IN A BANK: REAL GAS, IDEAL GAS, GAUGE AND ABSOLUTE');
+fnLabel('lpgCng.gasMassInVessel, PRESSURE_BASIS, DAK_RANGE');
 const G = T.IBAFO_GAS;
-out(`Every pressure in lpgCng is absolute. The engine says so on every CNG result: pressureBasis "${L.PRESSURE_BASIS}". IBAFO's banks hold gas of specific gravity ${inp(G.gasSg)} at ${inp(G.temperatureC)} C. The mass is m = P V M over Z R T, with Z by Dranchuk-Abou-Kassem on Sutton pseudo-criticals.`);
+out(`Every pressure in lpgCng is absolute. The engine says so on every CNG result: pressureBasis "${L.PRESSURE_BASIS}". IBAFO's banks hold gas of specific gravity ${inp(G.gasSg)} at ${inp(G.temperatureC)} C. The mass is m = P V M over Z R T, with Z by Dranchuk-Abou-Kassem on Sutton pseudo-criticals: P the pressure in Pa (bar(a) times 100000), V the volume in m3, M the gas's molar mass (its specific gravity times the molar mass of air, in kg/kmol), T the temperature in K, R the gas constant, and the ideal mass is the same with Z taken as one.`);
 out('');
 const bankRows = T.IBAFO_BANKS.map((b) => ({ b, r: must(L.gasMassInVessel({ volumeM3: b.volumeM3, pressureBar: b.pressureBar, ...G }), b.label) }));
 head('bank', 'volume m3 (input)', 'pressure bar(a) (input)', 'z', 'ppr', 'tpr', 'correlationInRange', 'massKg', 'idealMassKg', 'realVersusIdeal');
@@ -852,15 +975,18 @@ row('no temperature', refused(L.gasMassInVessel({ volumeM3: 2, pressureBar: 250,
 
 /* ------------------------------------------------------------------ */
 section('THE CASCADE: EQUALISING BANK BY BANK');
+fnLabel('lpgCng.cascadeFills');
 const Vh = T.IBAFO_VEHICLE;
 const kc = must(L.cascadeFills({ banks: T.IBAFO_BANKS, ...Vh, ...G }), 'IBAFO cascade');
-out(`IBAFO's cascade: ${T.IBAFO_BANKS.map((b) => `${b.label} ${inp(b.volumeM3)} m3 at ${inp(b.pressureBar)} bar(a)`).join(', ')}. A bus tank of ${inp(Vh.vehicleTankM3)} m3 arrives at ${inp(Vh.vehicleStartBar)} bar(a) and is filled to ${inp(Vh.vehicleTargetBar)} bar(a). Each vehicle equalises with the lowest bank above it, then the next bank up, until it reaches its target; the engine counts whole fills until the next vehicle cannot reach its target.`);
+out(`IBAFO's cascade: ${T.IBAFO_BANKS.map((b) => `${b.label} ${inp(b.volumeM3)} m3 at ${inp(b.pressureBar)} bar(a)`).join(', ')}. The gas is IBAFO's, specific gravity ${inp(G.gasSg)} at ${inp(G.temperatureC)} C. A bus tank of ${inp(Vh.vehicleTankM3)} m3 arrives at ${inp(Vh.vehicleStartBar)} bar(a) and is filled to ${inp(Vh.vehicleTargetBar)} bar(a). Each vehicle equalises with the lowest bank above it, then the next bank up, until it reaches its target; the engine counts whole fills until the next vehicle cannot reach its target.`);
 out('');
 head('field', 'value');
 row('kgPerFill', fx(kc.kgPerFill));
 row('fillsBeforeRecharge', inp(kc.fillsBeforeRecharge));
 row('deliveredKg', t3(kc.deliveredKg));
 row('storedKg', t3(kc.storedKg));
+row('the Low, Mid and High bank masses summed (SECTION 30)', t3(bankRows.reduce((a, x) => a + x.r.massKg, 0)));
+claim(Math.abs(bankRows.reduce((a, x) => a + x.r.massKg, 0) - kc.storedKg) < 0.002, 'storedKg is the sum of the bank masses');
 row('leftInBanksKg', t3(kc.leftInBanksKg));
 row('storedKg minus deliveredKg minus leftInBanksKg', t3(kc.storedKg - kc.deliveredKg - kc.leftInBanksKg));
 row('cascadeEfficiency (delivered over stored)', fx(kc.cascadeEfficiency));
@@ -871,6 +997,7 @@ claim(Math.abs(kc.storedKg - kc.deliveredKg - kc.leftInBanksKg) < 0.002, 'the ca
 claim(kc.nextVehicleReachesBar < Vh.vehicleTargetBar, 'the next vehicle stops short of its target');
 out('');
 out('The gas is conserved: what the banks held is what was delivered plus what is left in them.');
+out('hitFillLimit reads true only when the count reaches the maxFills cap the call carries; here it stopped on a vehicle that could not reach its target.');
 out('');
 head('bank', 'startBar', 'endBar');
 for (const b of kc.banksAfter) row(b.label, fx(b.startBar), fx(b.endBar));
@@ -897,6 +1024,7 @@ row('temperature left blank (\'\')', refused(L.cascadeFills({ banks: T.IBAFO_BAN
 
 /* ------------------------------------------------------------------ */
 section('THE COMPRESSOR AS A UNIT BRIDGE');
+fnLabel('lpgCng.cngCompression (it calls facilities/compression.compressorTrain)');
 const Cm = T.IBAFO_COMPRESSION;
 const kcm = must(L.cngCompression({ ...Cm, gasSg: G.gasSg }), 'compression');
 out(`cngCompression does not compute compression itself. It converts the station's metric inputs to the field units the Facilities compression engine speaks, calls it, and converts the answer back. The thermodynamics belong to the Facilities course and are not graded here. IBAFO's compressor: ${inp(Cm.throughputKgPerHour)} kg/h of gas ${inp(G.gasSg)}, suction ${inp(Cm.suctionBar)} bar(a) at ${inp(Cm.suctionTempC)} C, discharge ${inp(Cm.dischargeBar)} bar(a).`);
@@ -917,6 +1045,7 @@ row('no throughput', refused(L.cngCompression({ ...Cm, throughputKgPerHour: '', 
 
 /* ------------------------------------------------------------------ */
 section('THE FORECOURT QUEUE');
+fnLabel('lpgCng.cngDispensing (it calls terminalDepot.rackQueue)');
 const D = T.IBAFO_DISPENSING;
 out(`A CNG forecourt is the same queue as the carousel and the loading rack. IBAFO: ${inp(D.vehiclesPerHour)} buses an hour, ${inp(D.fillMinutes)} minutes a fill, each fill the cascade's ${fx(kc.kgPerFill)} kg.`);
 head('dispensers (input)', 'utilisation', 'probabilityOfWaiting', 'averageWaitMinutes', 'kgPerHour');
@@ -937,6 +1066,7 @@ out(`The engine's note: "${must(L.cngDispensing({ vehiclesPerHour: D.vehiclesPer
 
 /* ------------------------------------------------------------------ */
 section('THE CUSTOMER\'S SWITCH: COST PER KILOMETRE AND SIMPLE PAYBACK');
+fnLabel('lpgCng.conversionEconomics');
 const X = T.IBAFO_CONVERSION;
 const kx = must(L.conversionEconomics(X), 'conversion');
 out(`A Lagos bus covering ${inp(X.annualDistanceKm)} km a year on ${inp(X.baseFuel.consumptionPer100Km)} litres of PMS per 100 km at ${inp(X.baseFuel.pricePerUnit)} naira a litre (${inp(X.baseFuel.energyPerUnitMJ)} MJ a litre). CNG at ${inp(X.newFuel.pricePerUnit)} naira a kg (${inp(X.newFuel.energyPerUnitMJ)} MJ a kg); no consumption on CNG is measured, and the converted engine turns CNG energy into distance ${inp(X.newFuel.efficiencyRatio)} times as well as PMS energy. Conversion ${inp(X.conversionCost)} naira; extra maintenance ${inp(X.annualExtraMaintenance)} naira a year. Emission factors ${inp(X.baseFuel.emissionFactorKgCo2ePerUnit)} kg CO2e a litre of PMS and ${inp(X.newFuel.emissionFactorKgCo2ePerUnit)} a kg of CNG (illustrative).`);
@@ -953,6 +1083,8 @@ row('CNG cost per km', fx(kx.newFuel.costPerKm));
 row('annualSaving (after maintenance)', fx(kx.annualSaving));
 row('savingPerKm', fx(kx.savingPerKm));
 row('simplePaybackYears', fx(kx.simplePaybackYears));
+row('conversion cost over annualSaving', fx(X.conversionCost / kx.annualSaving));
+row('PMS consumption x PMS energy over (CNG energy x efficiency ratio)', fx((X.baseFuel.consumptionPer100Km * X.baseFuel.energyPerUnitMJ) / (X.newFuel.energyPerUnitMJ * X.newFuel.efficiencyRatio)));
 row('kgCo2eAvoidedPerYear', fx(kx.kgCo2eAvoidedPerYear));
 row('paybackNote', kx.paybackNote);
 out('');
@@ -980,6 +1112,7 @@ row('recurring', fx(kx.annualCashFlow.recurring));
 
 /* ------------------------------------------------------------------ */
 section('HELD LIMITS AND WHAT THE ORACLES CHECK');
+fnLabel('none: stated limits');
 out('HELD, taught as stated limits and never computed with:');
 out('- The flare efficiencies have no default: the rule\'s tiered defaults are a United States rule, and the basis for a Nigerian study is a regulation reading.');
 out('- An unlit flare is not modelled: gas sent to an unlit flare is vented, all of it methane.');
@@ -992,6 +1125,7 @@ out('What the validation oracles check, independently of the engines (oracle_fla
 
 /* ------------------------------------------------------------------ */
 section('THE KANO AND IBAFO ROLLOUT END TO END');
+fnLabel('lpgCng, the figures above');
 head('step', 'figure');
 row('KANO blend density, kg/m3', fx(kb.densityKgM3));
 row('KANO usable LPG at a 0.85 liquid fill, t', fx(storeK[0].usableTonnes));

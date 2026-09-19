@@ -41,14 +41,13 @@ run promptleak 0 python3 gate_promptleak.py
 run promptleak-CONTROL nonzero python3 gate_promptleak.py --plant
 run capstone-leak 0 python3 gate_capstone_leak.py
 run capstone-leak-CONTROL nonzero python3 gate_capstone_leak.py --plant
-# leakage.mjs over the teaching road. At the foundation the 78 lessons are
-# title-only placeholders with no numeric literal, and the kit REFUSES an empty
-# sweep (exit 2), which is the expected and correct answer: the gate is armed
-# for the lesson phase. The digest, which every lesson quotes, is swept now in
+# leakage.mjs over the teaching road: the 78 written lessons (at the
+# foundation they were title-only placeholders and the kit refused the empty
+# sweep with exit 2; since the lesson phase it must exit 0). The digest, which every lesson quotes, is swept now in
 # the BEGINNER tier's place, the strictest seat: any graded value of any tier
 # found there is a leak.
 mkdir -p $W/scratch/digest-as-content/beginner/m00 && cp $W/digest.txt $W/scratch/digest-as-content/beginner/m00/l00-digest.md
-run kit-leakage-lessons 2 node /root/dc-wavekit/leakage.mjs $W --content-root $R/src/content/courses/gasvalue
+run kit-leakage-lessons 0 node /root/dc-wavekit/leakage.mjs $W --content-root $R/src/content/courses/gasvalue
 run kit-leakage-digest 0 node /root/dc-wavekit/leakage.mjs $W --content-root $W/scratch/digest-as-content
 run kit-leakage-CONTROL 0 node /root/dc-wavekit/leakage.mjs --selftest
 run copy-rule 0 python3 gate_copy_rule.py

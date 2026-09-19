@@ -70,18 +70,8 @@ const F = await import(`${ROOT}/engines/downstream/flareToValue.js`);
 const L = await import(`${ROOT}/engines/downstream/lpgCng.js`);
 const M = await import(`${ROOT}/engines/downstream/modularRefinery.js`);
 
-/**
- * The molar masses the flare is worked at are not exported by flareToValue, so
- * the engine is asked about itself: a gas that is all CO2 (or all methane)
- * flared with no destruction gives back the molar mass it was weighed at.
- */
-export const flareMolarMass = (code) => {
-  const probe = F.characteriseGas({ components: components([[code, 1]]) });
-  const r = F.abatement({ gas: probe, volumeMMscfd: 1000, onstreamDays: 1, flareDestructionEfficiency: code === 'CO2' ? 1 : 1e-9, gwpMethane: 1 });
-  const lbmol = (1000 * 1e6) / F.SCF_PER_LBMOL;
-  const t = code === 'CO2' ? r.flareCo2Tonnes : r.flareCh4Tonnes / (1 - 1e-9);
-  return Math.round(((t * 1000 * F.LB_PER_KG) / lbmol) * 1000) / 1000;
-};
+/** The molar masses the flare is worked at, read from the engine's export (MD45-1). */
+export const flareMolarMass = (code) => (code === 'CO2' ? F.FLARE_MOLAR_MASS.CO2 : F.FLARE_MOLAR_MASS.CH4);
 /** A gas analysis as components, with the engine's own reference figures. */
 export const components = (rows) => rows.map(([code, moleFraction]) => {
   const r = F.GAS_COMPONENT_REFERENCE.find((x) => x.code === code);

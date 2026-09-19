@@ -246,7 +246,7 @@ export const LiquidsMode = ({ gas, rows, onRow, onPreset, edges, probes }) => {
       )}
       {e && (
         <>
-          <Lead>Where the richness word changes, asked of the engine by bisection on a methane and propane mix:</Lead>
+          <Lead>Where the richness word changes, the lower edges the engine exports as RICHNESS_GPM:</Lead>
           <Tbl
             head={['word changes', 'gpmC3Plus where it changes']}
             rows={[['lean to moderate', fmt.f4(e.leanToModerate.gpmC3Plus)], ['moderate to rich', fmt.f4(e.moderateToRich.gpmC3Plus)]]}
@@ -331,7 +331,7 @@ export const FlareMode = ({ flare, inputs, onInput, onEgbema, onClear, molar, pa
       )}
       {m && (
         <Note>
-          The molar masses the flare is weighed at, asked of the engine about itself: CO2 {fmt.t3(m.co2)} kg/kmol,
+          The molar masses the flare is weighed at, as the engine exports them in FLARE_MOLAR_MASS: CO2 {fmt.t3(m.co2)} kg/kmol,
           methane {fmt.t3(m.methane)} kg/kmol.
         </Note>
       )}
