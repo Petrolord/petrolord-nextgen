@@ -450,12 +450,25 @@ begin
   -- ASSOCIATE, OKRIKA. Every rate is a count times its base over the hours of
   -- both workforces; the rolling window ending at month 14 is months 3 to 14,
   -- summed and then divided.
-  if abs(v_g_okrika_combined_trir_per_200k - (16 * 200000.0 / (1846220.0 + 3127655.0))) > 1e-12
-     or abs(v_g_okrika_combined_ltir_per_1m - (4 * 1000000.0 / (1846220.0 + 3127655.0))) > 1e-12
-     or abs(v_g_okrika_far_per_100m - (1 * 100000000.0 / (1846220.0 + 3127655.0))) > 1e-11
-     or abs(v_g_okrika_severity_rate_per_200k - (187 * 200000.0 / (1846220.0 + 3127655.0))) > 1e-12
-     or abs(v_g_okrika_tier1_pse_rate_per_200k - (3 * 200000.0 / (1846220.0 + 3127655.0))) > 1e-12 then
-    raise exception 'H1 go-live refused: the second route in SQL does not reproduce the OKRIKA annual rates from the counts and hours in the prompt [graded field: beginner/okrika_combined_trir_per_200k, beginner/okrika_combined_ltir_per_1m, beginner/okrika_far_per_100m, beginner/okrika_severity_rate_per_200k, beginner/okrika_tier1_pse_rate_per_200k]';
+  v_x := 16 * 200000.0 / (1846220.0 + 3127655.0);
+  if abs(v_g_okrika_combined_trir_per_200k - v_x) > 1e-12 then
+    raise exception 'H1 go-live refused: the rate of the recordable cases of both workforces over the hours of both workforces is % on the 200000 hour base, against the seeded % [graded field: beginner/okrika_combined_trir_per_200k]', v_x, v_g_okrika_combined_trir_per_200k;
+  end if;
+  v_x := 4 * 1000000.0 / (1846220.0 + 3127655.0);
+  if abs(v_g_okrika_combined_ltir_per_1m - v_x) > 1e-12 then
+    raise exception 'H1 go-live refused: the rate of the lost time injuries over the hours of both workforces is % on the 1000000 hour base, against the seeded % [graded field: beginner/okrika_combined_ltir_per_1m]', v_x, v_g_okrika_combined_ltir_per_1m;
+  end if;
+  v_x := 1 * 100000000.0 / (1846220.0 + 3127655.0);
+  if abs(v_g_okrika_far_per_100m - v_x) > 1e-11 then
+    raise exception 'H1 go-live refused: the rate of the fatality over the hours of both workforces is % on the 100000000 hour base, against the seeded % [graded field: beginner/okrika_far_per_100m]', v_x, v_g_okrika_far_per_100m;
+  end if;
+  v_x := 187 * 200000.0 / (1846220.0 + 3127655.0);
+  if abs(v_g_okrika_severity_rate_per_200k - v_x) > 1e-12 then
+    raise exception 'H1 go-live refused: the rate of the days lost over the hours of both workforces is % on the 200000 hour base, against the seeded % [graded field: beginner/okrika_severity_rate_per_200k]', v_x, v_g_okrika_severity_rate_per_200k;
+  end if;
+  v_x := 3 * 200000.0 / (1846220.0 + 3127655.0);
+  if abs(v_g_okrika_tier1_pse_rate_per_200k - v_x) > 1e-12 then
+    raise exception 'H1 go-live refused: the rate of the Tier 1 process safety events over the hours of both workforces is % on the 200000 hour base, against the seeded % [graded field: beginner/okrika_tier1_pse_rate_per_200k]', v_x, v_g_okrika_tier1_pse_rate_per_200k;
   end if;
   if (select sum(v_ok_h[g]) from generate_series(1, 12) g) <> 4973875.0 or (select sum(v_ok_c[g]) from generate_series(1, 12) g) <> 16 then
     raise exception 'H1 go-live refused: OKRIKA months 1 to 12 do not sum to the annual report the prompt states';
