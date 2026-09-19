@@ -18,7 +18,7 @@ A point on the line is inside the band. The engine returns `signal` null for bot
 
 ## Why the boundary matters
 
-A tie on a limit sounds like an edge case nobody meets. It is met more often than it sounds, because counts are whole numbers. A point sits on its limit whenever the count happens to equal the limit times the units, and small charts with round exposures produce that. Point 2 of the golden case also shows the floored limit at work: 0 events against an LCL of 0.000000 cannot signal, for the reason the previous module gave.
+A tie on a limit sounds like an edge case nobody meets. It is met more often than it sounds, because counts are whole numbers. A point sits on its limit whenever the count happens to equal the limit times the units, and small charts with round exposures produce that. Point 2 of the golden case shows a lower limit that is zero on its own arithmetic: 0 events against an LCL of 0.000000 cannot signal, because it sits on the limit. Nothing was floored there, and the engine reports lclFloored as false, since the raw lower limit is already exactly zero.
 
 The rule also has to be the same everywhere the chart is read. A note that calls a point on the line a signal, while the engine calls it quiet, disagrees with the tool the rest of the team is using.
 
