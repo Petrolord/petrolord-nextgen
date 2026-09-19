@@ -12,7 +12,7 @@ The last lesson read one blend. This one reads the library itself, one crude at 
 | --- | --- | --- | --- | --- | --- | --- |
 | Obigbo Light | 0.4167 | 25.2590 | 18.2484 | 16.5914 | 25.7110 | 13.7736 |
 
-It is the light, low-sulfur backbone of the export blend.
+In the export blend it is 65 by volume and carries a mass fraction of 0.6346.
 
 ## Egbema Medium
 
@@ -22,7 +22,7 @@ It is the light, low-sulfur backbone of the export blend.
 | --- | --- | --- | --- | --- | --- | --- |
 | Egbema Medium | 0.0000 | 16.3636 | 13.6364 | 17.8571 | 29.0000 | 23.1429 |
 
-Its aromatics and resins are what hold asphaltenes in a blend. Blended at 85 with 15 of Obigbo Light, the pair screens stable at 0.6634.
+In the export blend it is 35 by volume and carries a mass fraction of 0.3654. Blended at 85 with 15 of Obigbo Light, the pair screens stable at 0.6634, and the engine's message says the asphaltenes "are held by the aromatics and resins present".
 
 ## Asarama Heavy
 
@@ -32,7 +32,7 @@ Its aromatics and resins are what hold asphaltenes in a blend. Blended at 85 wit
 | --- | --- | --- | --- | --- | --- | --- |
 | Asarama Heavy | 0.0000 | 8.8462 | 11.5886 | 14.0097 | 35.5556 | 30.0000 |
 
-This is the crude that makes every basis matter. In the three-crude blend at 20 by volume it carries a mass fraction of 0.2162, and vanadium on mass minus volume there is 1.5761 ppm. With Ubie Condensate it screens unstable at 1.7614.
+In the three-crude blend at 20 by volume it carries a mass fraction of 0.2162, and vanadium on mass minus volume there is 1.5761 ppm. With Ubie Condensate it screens unstable at 1.7614.
 
 ## Ubie Condensate
 
@@ -42,7 +42,7 @@ This is the crude that makes every basis matter. In the three-crude blend at 20 
 | --- | --- | --- | --- | --- | --- | --- |
 | Ubie Condensate | 2.8571 | 52.5974 | 22.7807 | 14.8897 | 6.8750 | 0.0000 |
 
-A condensate is a diluent and a naphtha source. As a blend component its saturates are a stability risk, which is why the gravity rule of thumb flags it beside Asarama Heavy at an API contrast of 37.4000.
+Beside Asarama Heavy with no SARA supplied, the gravity rule of thumb flags the pair at an API contrast of 37.4000, and the engine's message names "a light paraffinic component". With the SARA supplied, the same pair screens unstable on the index at 1.7614.
 
 ## Ebocha partial assay
 

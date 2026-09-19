@@ -25,7 +25,7 @@ The second row is the one this tier returns to again and again. Obigbo Light and
 
 ## Where this rule stops
 
-"Volume is taken as conserved" is an assumption, and the engine states it as one. Real crudes of very different gravity can shrink a little when they mix, because the light molecules fit between the heavy ones. The engine does not model that shrinkage. Every blend in this course is computed under the stated assumption, and every figure you read is the engine's answer under it.
+"Volume is taken as conserved" is an assumption, and the engine states it as one, in the same sentence that says mass is conserved. The digest prints nothing about how far a real blend departs from it, so this course does not either. Every blend in this course is computed under the stated assumption, and every figure you read is the engine's answer under it. When you quote a blend's specific gravity, the assumption travels with it.
 
 ## Why density comes first
 

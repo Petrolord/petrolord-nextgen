@@ -525,6 +525,8 @@ export const refutas = () => {
     domain: PROBES.viscosityDomain.map((v) => ({ viscosityCSt: v, index: CA.viscosityBlendIndex(v) })),
     outsideBasis: outside.bases.viscosityCSt,
     outsideValue: outside.properties.viscosityCSt,
+    outsideApi: outside.properties.api,
+    outsideSulfur: outside.properties.sulfurWtPct,
   };
 };
 
@@ -722,6 +724,7 @@ export const studioPair = () => {
   return {
     api: b.properties.api,
     sulfurWtPct: b.properties.sulfurWtPct,
+    sulfurBasis: b.bases.sulfurWtPct,
     t50: t50Readings(STUDIO_PAIR, b, crv),
     yields: y,
     grossValue: nb.grossValue,

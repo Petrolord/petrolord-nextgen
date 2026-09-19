@@ -1,22 +1,20 @@
 # D86 is a product test
 
-Every curve in this tier has been a TBP curve. There is another distillation in the laboratory, and the engine is careful about it.
+Every curve in this tier has been a TBP curve. There is another distillation the digest names, and the engine is careful about it.
 
 ## Two distillations
 
-A true boiling point distillation, TBP, separates a crude sharply, with many theoretical stages and reflux, so each temperature on the curve is close to the true boiling point of what comes over at that volume. It is slow and it needs a large sample. A crude assay is reported as a TBP distillation.
+The digest puts the difference in one line: "D86 is a product test; a crude assay is reported as a TBP distillation." Every curve the Kwale valuation is built on is a TBP curve, and the functions that read those curves say so. The Associate tier's first reading function is described in the digest as the one that "reads a TBP curve: the volume percent distilled at a temperature". blendDistillationCurves, temperatureAtVolumePercent and cutYields all work on the curves it reads.
 
-D86 is a simple batch distillation with no fractionation to speak of. It is fast, cheap and repeatable, and it is the test written into product specifications for gasoline, kerosene and diesel. The digest puts it in one line: D86 is a product test; a crude assay is reported as a TBP distillation.
-
-Because D86 does not fractionate, its curve is flatter than the TBP curve of the same material: its initial point reads high and its end point reads low. The two curves are of the same sample, measured differently, and they are not interchangeable. Every function in this tier, volumePercentAt, blendDistillationCurves, temperatureAtVolumePercent, cutYields, assumes a TBP curve.
+The digest prints nothing about how a D86 curve differs in shape from a TBP curve of the same material, so this course says nothing about that either. What it does print is how the engine treats a D86 curve that arrives in place of a TBP one.
 
 ## A conversion exists
 
-There is a published way to turn a D86 curve into an estimated TBP curve. The digest describes d86ToTbp: it has the structure of the cut-point-difference conversion (API Technical Data Book Procedure 3A1.1). The method anchors on the 50 percent point and converts the temperature differences between successive points, each through its own coefficients.
+The digest describes d86ToTbp: it "has the structure of the cut-point-difference conversion (API Technical Data Book Procedure 3A1.1)". That is a published procedure, named by the engine, and the engine carries its structure and nothing more.
 
 ## And the engine does not ship it
 
-d86ToTbp ships no coefficient table, because reproducing a published table from memory is what the engines refuse. A coefficient table typed from memory could be wrong in a way nothing would catch: the conversion would run, return a plausible curve, and every yield and netback built on it would carry the error. So the structure is there, and the numbers must come from the published source, supplied by whoever calls it.
+In the digest's words, d86ToTbp "ships no coefficient table, because reproducing a published table from memory is what the engines refuse." So the structure is there, and the coefficients must come from the published source, supplied by whoever calls it.
 
 Called without the table, the engine refuses in its own words:
 
@@ -25,14 +23,14 @@ Called without the table, the engine refuses in its own words:
 | a D86 curve and no coefficients | REFUSED: D86 to TBP conversion needs the API Technical Data Book Procedure 3A1.1 coefficient table, which is not shipped with this package. Supply it, or enter the assay as a TBP distillation, which is how crude assays are reported. |
 | a D86 curve with no 50 percent point, and a table | REFUSED: The D86 curve needs a 50 percent point to anchor the conversion. |
 
-The first refusal gives two ways forward: supply the table, or supply the assay the way crude assays are reported. The second shows why the 50 percent point matters to this method. The conversion is anchored there, and without it the differences have nothing to hang from.
+The first refusal gives two ways forward: supply the table, or enter the assay as a TBP distillation, the way crude assays are reported. The second is asked with a table supplied, and it still refuses, because the curve has no 50 percent point. Its sentence names the reason: the conversion is anchored there.
 
 ## What this means for a valuation
 
-If a crude arrives with only a D86 curve, this studio will not quietly treat it as a TBP curve, and it will not convert it with coefficients nobody can trace. The right move is to ask for the assay's TBP distillation. A netback built on a D86 curve read as TBP would put barrels in the wrong cuts, and the error would reach the differential without a trace.
+If a crude arrives with only a D86 curve, the engine does not convert it with a table it does not carry. Its refusal tells the caller what to supply: the coefficient table from the published procedure, or the assay as a TBP distillation. Every yield and netback in this tier was built on a TBP curve, and a D86 curve does not enter that chain until one of those two is supplied.
 
-This lesson has no panel. The valuation explorer works on TBP curves only, which is the point.
+This lesson has no panel. The valuation explorer works on TBP curves only, the curves every figure in this tier was read from.
 
 ## Exercise
 
-Read the two refusals. Say what each asks the caller to supply, and why the engine asks for the coefficient table from the published source when it could have carried one of its own. Then say why the second refusal names the 50 percent point in particular.
+Read the two refusals. Say what each asks the caller to supply, and quote the digest's reason that d86ToTbp ships no coefficient table. Then say why the second refusal is returned even though a table was supplied with it.

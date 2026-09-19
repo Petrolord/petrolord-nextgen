@@ -30,7 +30,7 @@ Notice that losses appear in the list. A blank loss percent is treated the same 
 
 ## Where the line is
 
-This rule is for costs, and it is not a general permission to fill blanks with zero. The Associate tier taught the opposite for properties: a blank sulfur is absent, never a zero, and the property comes back as not blended with the crude named.
+This rule is for costs only. It does not permit filling other blanks with zero. The Associate tier taught the opposite for properties: a blank sulfur is absent. It is not read as a zero, and the property comes back as not blended with the crude named.
 
 So two kinds of blank get two answers, each chosen for what the blank would do to the result. A blank property would pull a blended value toward zero and pass it off as measured, so it is not blended. A blank netback cost changes a legitimate question into another legitimate question, so it is taken as zero and named. The principle is the same in both: the engine never lets an assumption sit unlabelled inside a figure.
 

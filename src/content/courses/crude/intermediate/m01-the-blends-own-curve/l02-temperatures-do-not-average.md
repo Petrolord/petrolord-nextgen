@@ -12,13 +12,13 @@ You can read that pair as "at 530 F, the volume percent is 50", holding the temp
 
 ## Amounts add
 
-A volume percent is an amount: a share of the barrels. When 55 barrels of Kwale Light and 45 of Ughelli Medium are heated to one temperature, the barrels each crude gives up are added in the receiver. So at a fixed temperature, the blend's amount is the volume-weighted sum of the crudes' amounts. The digest states it as the engine's rule: yields are additive on volume.
+A volume percent on the curve is a share of the barrels distilled. The digest states the engine's rule for it: "Yields are additive on volume: at any temperature the blend has distilled the volume-weighted sum of what each crude has distilled." So at a fixed temperature, the blend's volume percent is the volume-weighted sum of the crudes' volume percents.
 
 ## Temperatures do not add
 
-A temperature is not an amount of anything. There is no receiver in which the 530 F of one crude and the 650 F of the other are poured together. Averaging the temperatures at which each crude reaches 50 percent is an operation on the curve's other axis, and nothing physical sits behind it.
+The rule the digest gives is a rule for volume percents at a fixed temperature. It gives no rule that weights temperatures, and the engine applies none. In the digest's words, blendDistillationCurves forms the blend's curve "at every temperature any component measured". It does not average temperatures.
 
-So blendDistillationCurves never averages temperatures. It forms the blend's curve at every temperature any component measured, weights the volume percents at each one, and leaves the temperatures exactly as the crudes reported them.
+So blendDistillationCurves forms the blend's curve at every temperature any component measured, weights the volume percents at each one, and leaves the temperatures exactly as the crudes reported them.
 
 ## What the two rows say
 
@@ -33,11 +33,11 @@ At 530 F, Kwale Light has reached 50.0000 percent and the blend has distilled 43
 
 ## Where this goes next
 
-Module 2 reads that temperature. It prints the engine's reading off the blend's curve beside the volume-weighted mean and the mass-weighted mean of the two crudes' own 50 percent temperatures, so the averaged temperature can be read as a figure and set against the engine's. This lesson only establishes why the engine will not form the blend's curve by averaging along the temperature axis: the thing that adds is the amount.
+Module 2 reads that temperature. It prints the engine's reading off the blend's curve beside the volume-weighted mean and the mass-weighted mean of the two crudes' own 50 percent temperatures, so the averaged temperature can be read as a figure and set against the engine's. This lesson only establishes what the engine does: it weights volume percents at fixed temperatures, and it leaves the temperature axis as the crudes reported it.
 
-## Why it matters to a buyer
+## Where the cuts come from
 
-A refinery sells cuts, and a cut is a band of temperature. What it needs to know is how many barrels of the blend fall inside each band. That is a question about amounts at fixed temperatures, which is exactly the form in which the blend's curve is built. A curve assembled by averaging temperatures would place each band's barrels by an operation with no physical meaning, and every cut yield taken from it would inherit that.
+A cut's yield is read off a curve at two temperatures: in the Associate tier's words, the curve at the cut's upper bound minus the curve at its lower bound. Both readings are volume percents at fixed temperatures, which is the form in which the blend's curve is built. Module 3 of this tier takes the Kwale blend's cut yields off that curve, and the digest prints them beside the same yields weighted on volume from the two crudes.
 
 ## Exercise
 

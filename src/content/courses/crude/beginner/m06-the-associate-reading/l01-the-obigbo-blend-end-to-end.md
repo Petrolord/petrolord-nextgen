@@ -46,11 +46,11 @@ The blend's cut yields on the studio's default cuts, from the blend's own curve,
 | Vacuum residue | 17.0528 |
 | total | 100.0000 |
 
-The six yields total 100.0000. Both crudes' curves run from 0 to 100 percent, so every cut on the blend's curve has a yield. Closes: true. Cuts with no yield: nothing.
+The six yields total 100.0000. Closes: true. Cuts with no yield: nothing. The digest takes these yields from the blend's own curve and says the Professional tier explains that curve, so this tier reads the yields as printed.
 
-## Reading it as a buyer would
+## Reading it in one pass
 
-A buyer of this cargo reads a gravity of 32.8173 API, a sulfur of 0.2642 wt%, a viscosity of 7.4743 cSt under the engine's stated basis, and a product slate. The same buyer reads a stability screen that says do not commingle without a lab test. Every one of those figures is the engine's, on a basis it names, and a reader can trace each back to the rule that formed it.
+The blend in one pass reads a gravity of 32.8173 API, a sulfur of 0.2642 wt% on mass, a viscosity of 7.4743 cSt on the "Refutas index on mass fraction", six cut yields that close, and a CII of 0.9163 in the unstable band with stable false. Every one of those figures is the engine's, on a basis it names, and a reader can trace each back to the rule that formed it.
 
 ## Exercise
 

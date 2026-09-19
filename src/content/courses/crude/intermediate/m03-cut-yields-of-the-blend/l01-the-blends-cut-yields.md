@@ -33,7 +33,7 @@ If yields add on volume, there are two ways to get the blend's cut yields. Run c
 
 Closes: true.
 
-Every row of "the two ways differ by" reads 0.0000. That is the rule of module 1 confirmed at the level of products: cutting the blend's curve gives the same barrels as blending the crudes' cuts on volume. A cut is a difference of two volume percents, each volume percent is a volume-weighted sum, and a difference of volume-weighted sums is the volume-weighted sum of the differences.
+Every row of "the two ways differ by" reads 0.0000. That is the rule of module 1 confirmed at the level of products: cutting the blend's curve gives the same barrels as blending the crudes' cuts on volume. The digest prints the check row by row, and the column reads 0.0000 on all five cuts.
 
 ## Reading the crude columns
 
@@ -41,14 +41,14 @@ The two crude columns are each crude's own cut yields on Kwale's cuts. Ughelli M
 
 ## The third column is the trap
 
-The last column weights the same crude yields by mass fraction. It is printed so it can be read beside the engine's, and the engine never reports it. For naphtha, the blend reads 20.5591 on volume and 20.4189 on mass. For atmospheric residue it reads 43.0526 on volume and 43.2685 on mass.
+The last column weights the same crude yields by mass fraction. It is printed so it can be read beside the engine's. For naphtha, the blend reads 20.5591 on volume and 20.4189 on mass. For atmospheric residue it reads 43.0526 on volume and 43.2685 on mass.
 
-The tier header names this trap: a mass-weighted yield gives a figure that looks finished. It has four decimals, it is formed from real yields with real weights, and it is on the wrong basis. A yield is a volume percent, so it blends on volume shares. Weighting it by mass shares answers a question nobody asked.
+The tier header names this trap: a mass-weighted yield gives a figure that looks finished. It has four decimals and it is formed from the crudes' own yields, and its weights are mass shares. The digest's rule for yields is "Yields are additive on volume", and the engine's column is the one formed on that basis.
 
 ## Closing
 
-The blend's yields total 100.0000 and the set closes. The Associate tier set out what closing means: every cut has a yield and the total is within the engine's closing tolerance of 100 percent. The total is reported as it computes and is never normalised, so a set that closes has earned it. Lesson 3 shows a set that does not.
+The blend's yields total 100.0000 and the set closes. The Associate tier set out what closing means: every cut has a yield and the total is within the engine's closing tolerance of 100 percent. The total is reported as it computes, and the engine does not scale it to 100. Lesson 3 shows a set that does not.
 
 ## Exercise
 
-Read the Diesel / AGO row: Kwale Light 18.8816, Ughelli Medium 20.0000, the blend 19.3849, the volume-weighted figure 19.3849, the difference 0.0000 and the mass-weighted figure 19.4040. Say what the 0.0000 confirms about the two routes, and say which basis the mass-weighted figure uses and why that basis does not suit a yield.
+Read the Diesel / AGO row: Kwale Light 18.8816, Ughelli Medium 20.0000, the blend 19.3849, the volume-weighted figure 19.3849, the difference 0.0000 and the mass-weighted figure 19.4040. Say what the 0.0000 confirms about the two routes, and say which basis the mass-weighted figure uses. Then quote the digest's rule that names the basis yields blend on.

@@ -12,11 +12,11 @@ The stability screen has two routes. With SARA on every crude it forms the collo
 
 The basis is none. The API contrast is not formed, because one of the two gravities does not exist. The stable answer is no verdict. The engine's message reads: "No SARA analysis and not every crude has a gravity, so no stability screen was made. Supply SARA for a colloidal instability index."
 
-## Why the engine does not fill the gap
+## What the engine does with the gap
 
-A missing gravity could be guessed from a neighbouring field, or read as zero, or the crude could be left out of the contrast. Each of those would produce an answer, and each answer would rest on a number nobody measured. Leaving the crude out would turn a two-crude blend into a one-crude screen with no contrast at all. The engine takes the only honest route: no screen, and a message that says why.
+The engine does not supply the missing gravity. The row prints what it returns in its place: the basis none, the contrast not formed, and no verdict. The message says in the engine's words that "no stability screen was made", and it names what would give one: "Supply SARA for a colloidal instability index." Every cell of the row reports the gap, and none of them is a number standing in for the gravity.
 
-This is the blank rule of module two once more. A blank is absent. It is not a zero, and it is not a default.
+This is the blank rule of module two once more. A blank is absent. The engine does not read it as a zero, and it does not put a default in its place.
 
 ## The three stable answers, together
 

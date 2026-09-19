@@ -17,7 +17,7 @@ q(0, "In the kernel's own terms, what is the 400 bbl of Butane the Apapa termina
  ["A row, because it limits how the volumes of the four components behave jointly.",
   "A coefficient of the objective, since the tank volume enters the cost of the recipe.",
   "The batch row's right-hand side, the barrels to deliver."],
- "solveLP keeps bounds as bounds and does not write them as extra rows. A tank limit belongs to one component, so it stays attached to that one variable and reports as a component at its availability.")
+ "The bounds are passed apart from the rows: the kernel shifts every lower bound to the origin, and it gives a bound no shadow price. A tank limit belongs to one component, so it is a bound on that one variable, and a component held by it reports as a component at its availability.")
 
 q(3, "A planner asks why the Sulfur maximum cannot be entered as a bound on the kernel. What is the reason?",
  "A specification constrains a mixture of volumes, and a bound belongs to one volume alone.",

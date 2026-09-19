@@ -18,23 +18,32 @@ The Product Blending Optimizer calls productBlending. Its 5 functions build and 
 
 ## One rule in one place
 
-productBlending imports the gravity and viscosity rules from crudeAssay rather than restating them. That is a design choice with a practical point. If the rule for turning a blended specific gravity into API lived in two places, the two apps could quietly disagree about the same blend. With one copy, the studio and the optimizer compute gravity and viscosity the same way, and a correction to the rule reaches both.
+productBlending imports the gravity and viscosity rules from crudeAssay rather than restating them. Those are the digest's words, and they say where each rule lives: in crudeAssay, once. The optimizer does not carry a second copy of either rule. It takes the one the studio uses.
 
 The same idea runs through this whole tier. Every property has one rule, the rule names its basis, and the engine prints that basis beside the answer so that nobody has to guess how a figure was formed.
 
 ## What each app is for
 
-The studio is a reading tool. You give it crudes and shares, and it tells you what the blend is: its gravity, its sulfur and the other per-mass properties, its viscosity, what the barrel turns into, and whether the mixture is likely to stay stable. It does not choose the shares for you.
+The digest lists four questions the studio answers, each with the function that answers it:
 
-The optimizer is a choosing tool. You give it components with a cost and a quality each, and a set of specifications, and it chooses the shares. It answers the least-cost recipe that meets every specification, with which specifications bind, what each binding one is costing, and the quality handed over on the rest.
+| question | function |
+| --- | --- |
+| what does this barrel turn into | cutYields, on a crude's curve or on blendDistillationCurves |
+| what happens to the properties when two crudes mix | blendCrudes |
+| will the mixture drop asphaltenes in the tank | screenBlendStability (inside blendCrudes) |
+| what is it worth against the crude already bought | netbackValue, with its marker differential |
+
+In each of the four, the crudes and their shares are something you supply, and the function reports what follows from them.
+
+The optimizer answers one question: the least-cost recipe that meets every specification (optimiseBlend), with which specifications bind, what each binding one is costing, and the quality handed over on the rest. There the shares are the answer. You type the components and the specifications, and the recipe comes back.
 
 ## Where the kernel goes next
 
-solveLP is a general linear programme solver. This course owns linear programming for the whole module, and the Expert tier teaches it from the ground up. The same kernel plans a refinery, and the Refinery Feasibility & Planning course takes that up.
+solveLP is the kernel that productBlending calls to do the solving. The Expert tier of this course teaches linear programming from the ground up, starting from solveLP's own statement of what it minimises. Refinery planning is the subject of the Refinery Feasibility & Planning course.
 
 ## What this tier uses
 
-Everything in the Associate tier comes from crudeAssay. The optimizer and its kernel wait for the Expert tier.
+The Associate tier works through the studio's questions: gravity, the blending bases, viscosity, the curve and its cuts, and the stability screen. The optimizer's question and its kernel wait for the Expert tier.
 
 ## Exercise
 

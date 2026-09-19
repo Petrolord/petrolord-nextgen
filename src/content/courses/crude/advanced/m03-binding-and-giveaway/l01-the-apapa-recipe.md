@@ -25,7 +25,7 @@ The template sets five specifications: RON at least 91, MON at least 81, Sulfur 
 | Butane | 400.0000 | 0.0500 | 21640.0000 |
 | total | 8000.0000 | 1.0000 | 698701.5605 |
 
-The status is optimal. The unit cost is 87.3377 $/bbl. Each row of the cost column is the component's volume times its price, and the total cost of the cargo is 698701.5605 $.
+The status is optimal. The unit cost is 87.3377 $/bbl. The digest states the rule for the cost column: "Each component's cost $ is its volume bbl times its cost $/bbl, and the total is their sum." The total cost of the cargo is 698701.5605 $.
 
 ## What to read first
 
@@ -33,7 +33,7 @@ Read the status. Optimal says a recipe exists and this is the cheapest one the r
 
 Read the bounds next. Butane sits at 400.0000 bbl, its full availability, and the engine lists it: "Components at their availability: Butane." The engine names no other component in that line. A component at its availability is a bound holding exactly, one of the constraints that pins the vertex.
 
-Read the total. The volumes sum to 8000.0000 bbl, the batch row met exactly as an equation must be, and the volume fractions sum to 1.0000. A fraction is the easier column to carry to a cargo of another size, while the volume column is what the tank farm pumps.
+Read the total. The volumes sum to 8000.0000 bbl, the batch row met exactly as an equation must be, and the volume fractions sum to 1.0000.
 
 Then read the specifications, which is the next lesson's work. Two of them are pressed against their limits and three are not, and which is which says more about this cargo than the recipe does.
 

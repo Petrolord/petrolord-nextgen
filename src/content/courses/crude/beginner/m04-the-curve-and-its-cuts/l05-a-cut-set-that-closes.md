@@ -1,6 +1,6 @@
 # A cut set that closes
 
-A set of cuts that covers a whole crude should account for all of it. cutYields reports the total as it computes it, never normalised, and the set closes only when every cut has a yield and the total is within the engine's closing tolerance of 100 percent.
+A set of cuts that covers a whole crude should account for all of it. cutYields reports the total as it computes it and does not normalise it. The set closes only when every cut has a yield and the total is within the engine's closing tolerance of 100 percent.
 
 {{panel:crude-assay-explorer}}
 
@@ -25,9 +25,9 @@ The Ebocha partial assay starts at 4 percent and stops at 88.
 
 Four of its six studio cuts reach outside the measured range, so they have no yield: LPG / Light ends, Naphtha, Vacuum gasoil and Vacuum residue. The engine names all four. Its known cuts total 33.6742 percent, and the set does not close.
 
-## Why the total is never normalised
+## The total as it computes
 
-A tempting tidy-up would scale the known cuts so that they add to 100. The engine does not do it, and the reason is the whole point of this lesson. Scaling Ebocha's two known cuts up to fill the barrel would claim that the crude is nothing but kerosene and diesel, which the assay does not say. The total of 33.6742 tells the honest story: this much of the barrel is accounted for by cuts the curve can answer, and the rest is not.
+The digest states the rule: the total is reported as it computes. The engine does not normalise it, and it does not scale Ebocha's two known cuts up so that they add to 100. The total of 33.6742 is the sum of the two cuts the curve can answer, 16.3881 and 17.2861, and the four cuts it cannot answer are named beside it. A reader sees both halves: what the curve accounts for, and which cuts it leaves without a yield.
 
 ## A cut set inside the curve
 
@@ -47,4 +47,4 @@ A cut set that closes is a complete product slate, and it can be priced. One tha
 
 ## Exercise
 
-Read the two Ebocha rows in this lesson. Quote the total and the closes flag of each, and the cuts with no yield. Say what the two rows together show about the two conditions a cut set must meet to close. Then explain why normalising Ebocha's 33.6742 percent to 100 would misstate the crude.
+Read the two Ebocha rows in this lesson. Quote the total and the closes flag of each, and the cuts with no yield. Say what the two rows together show about the two conditions a cut set must meet to close. Then say what the engine reports beside Ebocha's 33.6742 percent in place of a total scaled to 100.

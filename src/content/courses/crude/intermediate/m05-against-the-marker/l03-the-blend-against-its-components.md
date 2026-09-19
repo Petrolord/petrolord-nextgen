@@ -28,15 +28,15 @@ The digest gives the reason in one line: yields add on volume and every other te
 
 Follow it through the chain. Module 1 showed that the blend's curve is the volume-weighted sum of the crudes' curves at every temperature. Module 3 showed that the blend's cut yields therefore equal the volume-weighted crude yields, with the difference printed as 0.0000 for every cut. The gross product value is each yield times a fixed price, summed, so it inherits that weighting. The loss is a fixed percent of gross. Processing and freight are the same per barrel for every barrel of crude, whichever crude it is. Every step either weights by volume or treats every barrel alike, and nothing in the chain breaks the weighting.
 
-T50 is different because a temperature is read off the curve's other axis. The netback is built entirely from amounts: barrels of product at a price per barrel, less costs per barrel. Amounts add.
+T50 is where the same move does not hold. Module 2 printed the volume-weighted mean of the crudes' T50 minus the engine as -3.3184 F for the Kwale blend. The netback's terms are the ones the digest's reason names: yields, which add on volume, and terms per barrel.
 
 ## Why the check matters
 
 The course prints this as a figure for two reasons.
 
-First, it is a check on the whole chain. If any step in building the blend's netback had used the wrong basis, a mass-weighted yield, a grid-read cut, a loss taken after the costs, the two figures would part, and the difference column would show it. A 0.0000 there is evidence that every step upstream was on its right basis.
+First, it sets two routes to the same figure side by side. One route runs the whole chain on the blend's own curve. The other values each crude alone and weights the two netbacks by volume. The digest prints the difference between them as 0.0000, and the same column in module 3 printed 0.0000 on every cut. Each is a check on one pair of routes, and the digest prints the result of each.
 
-Second, it says something a buyer needs. Blending two crudes at Kwale does not, on this valuation, create or destroy netback. The blend is worth the barrels that went into it. A reason to blend, if there is one, lies outside the netback: in a specification, a tank, or a stability question of the kind the Associate tier screened.
+Second, it says what the valuation shows about blending at Kwale. The blend's netback, 64.9473 $/bbl, and the volume-weighted mean of its two crudes' netbacks are the same figure. The digest's words for it are that the blend is worth what its barrels are worth. The netback prints nothing beyond that about why a refinery might blend.
 
 ## The tier's engine fact
 

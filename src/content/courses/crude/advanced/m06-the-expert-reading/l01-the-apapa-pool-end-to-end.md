@@ -1,6 +1,6 @@
 # The Apapa pool end to end
 
-This lesson reads the Apapa PMS result once, in the order an expert reads any least-cost recipe, and then reads the optimizer's own default pool the same way. Nothing here is new. The point is the order, because each line only means something once the line before it has been read.
+This lesson reads the Apapa PMS result once, in one fixed order of eight steps, and then reads the optimizer's own default pool the same way. The order is this lesson's device: the digest prints the lines, and the lesson puts them in sequence.
 
 ## 1. The status
 
@@ -8,7 +8,7 @@ Optimal. A recipe exists that meets every specification inside every tank limit,
 
 ## 2. What was skipped
 
-Nothing. Every specification was applied. Had the sulfur row been skipped, as it is when Isomerate carries no sulfur figure, the recipe would be an answer to a smaller question, and its total cost of 695245.0644 $ would be the cost of that smaller question.
+Nothing. Every specification was applied. Had the sulfur row been skipped, as it is when Isomerate carries no sulfur figure, the recipe would meet the other specifications only, and the digest prints its total cost as 695245.0644 $.
 
 ## 3. The recipe and its bounds
 
@@ -36,7 +36,7 @@ At a sulfur limit of 51 ppm the saving is 551.6796 $; at an RVP limit of 10 psi 
 
 ## The default pool, the same way
 
-The Product Blending Optimizer opens on its own gasoline pool: 1000 bbl on the 50 ppm template. Read in the same order:
+The Product Blending Optimizer opens on its own gasoline pool, 1000 bbl on the 50 ppm template, with components the digest calls "its own, with the same names as Apapa's and different figures". Read in the same order:
 
 | component | volume bbl |
 | --- | --- |
@@ -47,7 +47,7 @@ The Product Blending Optimizer opens on its own gasoline pool: 1000 bbl on the 5
 
 Total cost 86122.7710 $, unit cost 86.1228 $/bbl, binding Sulfur and RVP. Isomerate enters at 0.0000 bbl. The price table reads 86.1228 $/bbl on Total volume, 55.0114 $ per ppm on the Sulfur maximum with rowPrice -0.0720, and 578.9052 $ per psi on the RVP maximum with rowPrice -0.2674. RON, MON and both density rows price at 0.0000.
 
-Two readings stand out. The same two specifications bind in both pools. And in the default pool the marginal and average barrels print the same figure, 86.1228.
+The same two specifications bind in both pools. In the default pool the marginal and average barrels print the same figure, 86.1228.
 
 {{panel:crude-recipe-explorer}}
 

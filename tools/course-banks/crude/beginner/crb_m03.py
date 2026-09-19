@@ -112,7 +112,7 @@ q(3, "One crude in a blend is typed at 0.1 cSt. What does blendCrudes return for
  ["A refusal of the whole blend, as for a crude with no gravity.",
   "The blend viscosity with the 0.1 cSt clamped to 0.2001.",
   "The other crude's viscosity alone, with the thin crude named."],
- "The probe at 0.1 cSt returns no index, and a blend with one viscosity outside the domain is not blended, under that basis sentence. The engine returns no index there rather than a number, so there is nothing to blend.")
+ "The probe at 0.1 cSt returns no index. With one crude's viscosity outside the domain, the blend's viscosity is not blended, under that basis sentence, and the other properties of the blend are formed as usual. The engine returns no index there rather than a number.")
 
 emit(Q, '/root/wt-md-crude-nextgen/tools/course-banks/crude/beginner/crb_m03.json', label='crb_m03', expect_n=15)
 finish()

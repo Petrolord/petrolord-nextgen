@@ -6,7 +6,7 @@ The kernel's method is two-phase simplex. The name describes the order of work: 
 
 A simplex method walks from vertex to vertex, so it needs a vertex to start from. For a problem with only <= rows, right-hand sides of zero or more and zero lower bounds, the origin is one. A blend is never that simple. The batch row is an equation, sum(v_i) = target, and the origin does not satisfy it.
 
-Phase one solves this by adding an artificial variable to each row that the starting point cannot satisfy, and then driving those artificial variables to zero. If it succeeds, the point it ends on meets every real row, and phase two can begin from it. If it cannot, the rows contradict, and the answer is infeasible. So infeasible is not a guess or a timeout. It is what phase one proves when the artificial variables cannot all be removed.
+Phase one solves this by adding an artificial variable to each row that the starting point cannot satisfy, and then driving those artificial variables to zero. If it succeeds, the point it ends on meets every real row, and phase two can begin from it. If it cannot, the rows contradict, and the answer is infeasible. In the digest's words, if phase one cannot, "the rows contradict and the answer is infeasible."
 
 ## Phase two: from vertex to vertex
 
@@ -18,7 +18,7 @@ In the textbook case the kernel reports 2 iterations to reach x 3.0000, y 1.5000
 
 A vertex is degenerate when more constraints hold exactly than are needed to pin it. Blending problems are degenerate constantly, because specifications bind exactly at the optimum. Module three reads the Apapa optimum, where Sulfur and RVP are both met exactly.
 
-At a degenerate vertex a pivot can change which constraints define the corner without moving the point at all. A careless rule for choosing pivots can then cycle through the same set of corners forever. The kernel uses Bland's rule to pick the entering variable, which cannot cycle. The rule is a small detail with a large consequence for exactly the problems this tier cares about.
+At a degenerate vertex a pivot can change which constraints define the corner without moving the point at all. A careless rule for choosing pivots can then cycle through the same set of corners forever. The kernel uses Bland's rule to pick the entering variable, which cannot cycle.
 
 ## What the two phases give the reader
 

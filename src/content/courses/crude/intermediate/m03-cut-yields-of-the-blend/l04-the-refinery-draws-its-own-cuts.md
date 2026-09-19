@@ -6,7 +6,7 @@ The same blend has different yields at different refineries. Nothing about the c
 
 ## Two cut sets on one curve
 
-Kwale is a topping refinery with no vacuum unit. Its cut set ends at atmospheric residue, from 650 F with no upper bound, running to 100 percent, because it has nowhere to split that material further. The studio's default cut set, which the Associate tier used on the Obigbo library, is a vacuum refinery's: it splits the heavy end at 1000 F into vacuum gasoil and vacuum residue.
+Kwale is a topping refinery with no vacuum unit. Its cut set ends at atmospheric residue, from 650 F with no upper bound, running to 100 percent. The digest gives the reason in its own words: "The Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residue." The studio's default cut set, which the Associate tier used on the Obigbo library, is a vacuum refinery's: it splits the heavy end at 1000 F into vacuum gasoil and vacuum residue.
 
 | cut | Kwale from F | Kwale to F |
 | --- | --- | --- |
@@ -50,20 +50,20 @@ The digest prints the Kwale blend, 55 and 45, on each.
 
 Both sets draw LPG / Light ends from 0 percent, with no lower bound, to 90 F, and both tables print 0.7174 for it. Where the bounds are the same, the yield is the same, because it is the same stretch of the same curve.
 
-Everywhere else the bounds differ. Kwale ends naphtha at 330 F; the default set ends it at 350 F. Kwale's kerosene runs 330 to 480 F; the default's runs 350 to 500 F. Kwale's diesel runs 480 to 650 F; the default's runs 500 to 650 F. Each of those cuts covers a different stretch of the curve, so each has its own yield, and the names do not line up either: DPK and Jet, AGO and Gasoil are two refineries' words for their own products.
+Everywhere else the bounds differ. Kwale ends naphtha at 330 F; the default set ends it at 350 F. Kwale's kerosene runs 330 to 480 F; the default's runs 350 to 500 F. Kwale's diesel runs 480 to 650 F; the default's runs 500 to 650 F. Each of those cuts covers a different stretch of the curve, so each has its own yield, and the two sets give those cuts different names: DPK and Jet, AGO and Gasoil.
 
 At the heavy end, Kwale sells one cut from 650 F where the default set sells two, split at 1000 F.
 
 ## Lesson 2, several times over
 
-Going from one cut set to the other is a series of moved boundaries. The boundary between naphtha and kerosene moves from 330 F to 350 F. The one between kerosene and diesel moves from 480 F to 500 F. A new boundary appears at 1000 F inside Kwale's residue. Each move shifts barrels between the two cuts that share that boundary and nowhere else, which is why the rule of lesson 2 is enough to explain every difference between these tables without a new idea.
+Going from one cut set to the other is a series of moved boundaries. The boundary between naphtha and kerosene moves from 330 F to 350 F. The one between kerosene and diesel moves from 480 F to 500 F. A new boundary appears at 1000 F inside Kwale's residue. For a moved boundary, lesson 2's rule applies: moving a cut point moves barrels between two cuts and nowhere else. The digest prints the two tables and not each move on its own, so the lesson reads the tables as printed.
 
-## Why the cut set belongs to the refinery
+## Whose cuts
 
-A crude assay is a property of the crude. A cut set is a property of the refinery that runs it: the units it has, the products it sells and the specifications it meets. That is why the studio takes the cut set as an input rather than fixing one. Asking what a blend yields without saying whose cuts is an incomplete question.
+The digest says of Kwale that "It draws its own cut points", and it prints the studio's default set beside them "for contrast (a vacuum refinery's cut set)". The blend's curve is the same under both tables. The cut set is what changes, so a yield is quoted with the cut set it was drawn on: 20.5591 is naphtha on Kwale's cuts, and 22.6185 is naphtha on the default's.
 
-It is also why the next module values the blend on Kwale's cuts and Kwale's prices. A netback is a refinery's view of a crude. The same blend valued on the default set would carry a vacuum refinery's products and a vacuum refinery's prices, and its figure would answer a different buyer's question.
+The next module values the blend on Kwale's cuts and Kwale's prices. Its netback table lists Kwale's five cuts, each with its own yield and its own price per barrel of product.
 
 ## Exercise
 
-Read the Naphtha row in both yield tables, 20.5591 and 22.6185, and the naphtha bounds in both cut sets. Say what differs between the two cuts and why that is enough to give the same blend two naphtha yields. Then say why LPG / Light ends prints the same figure in both.
+Read the Naphtha row in both yield tables, 20.5591 and 22.6185, and the naphtha bounds in both cut sets. Say what differs between the two cuts, and what the two yields show about quoting a yield without its cut set. Then say why LPG / Light ends prints the same figure in both.

@@ -371,7 +371,7 @@
    "RON 95, MON 85, sulfur 10 ppm and RVP 8.5 psi, with density 0.82 to 0.845 kg/l."
   ],
   "answer": 0,
-  "explanation": "The 10 ppm template carries RON 95, MON 85, Sulfur 10 ppm and RVP 8.5 psi; the 50 ppm one carries 91, 81, 50 and 9. Both carry Density on volume from 0.72 to 0.775 kg/l. Templates are starting points and never a compliance source."
+  "explanation": "The 10 ppm template carries RON 95, MON 85, Sulfur 10 ppm and RVP 8.5 psi; the 50 ppm one carries 91, 81, 50 and 9. Both carry Density on volume from 0.72 to 0.775 kg/l. Templates are starting points. They are not a compliance source."
  },
  {
   "prompt": "The AGO cargo's cetane minimum of 48 binds. What is one cetane number of relief worth, and which way does the relief run?",
@@ -401,10 +401,10 @@
    "Rounding in the rowPrice of -0.2569, printed to four decimals and so drifting over a psi.",
    "The Butane bound, which the re-solves remove before moving the limit.",
    "The Density range, which binds once the RVP limit moves a whole psi.",
-   "The rows move non-linearly in the limit, and the optimal vertex can change."
+   "The optimum moves to a different vertex, and the RVP row's index units are not a straight line in psi."
   ],
   "answer": 3,
-  "explanation": "The digest checks each price by re-solving with the limit moved one whole unit each way, and names two causes for the gap: the rows move non-linearly in the limit, and the optimal vertex can change. Rounding is not among the causes it names."
+  "explanation": "The RVP re-solves change what holds (at 10 psi only Sulfur binds; at 8 psi Reformate sits at its availability), so the optimum moves to a different vertex, and the RVP row is in index units, which are not a straight line in psi. Rounding is not among the causes the digest names."
  },
  {
   "prompt": "What does the Apapa recipe achieve for MON, and what does it give away?",

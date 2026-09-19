@@ -6,9 +6,9 @@ A cut point is a decision the refinery makes, and it moves. When it does, the ba
 
 ## A cut point is a shared boundary
 
-In Kwale's cut set, 650 F is the top of Diesel / AGO and the bottom of Atmospheric residue. It is one temperature serving as two bounds. That is what makes a cut set close: each cut starts where the one below it stops, so the cuts tile the curve with no gap and no overlap.
+In Kwale's cut set, 650 F is the top of Diesel / AGO and the bottom of Atmospheric residue. It is one temperature serving as two bounds. Kwale's cut table shows the same at every boundary: each cut starts at the temperature where the one below it stops, 90, 330, 480 and 650 F.
 
-Because the boundary is shared, moving it changes exactly two cuts. Everything below the lower of the two, and everything above the upper, is drawn between bounds that did not move.
+A cut's yield is the curve at its upper bound minus the curve at its lower bound, so a cut whose two bounds did not move reads the same curve at the same two temperatures.
 
 ## The diesel end point, moved
 
@@ -25,22 +25,22 @@ The digest moves the diesel end point from 650 F to 700 F on the Kwale blend and
 
 Read the change column. Three cuts show 0.0000. Diesel / AGO gains 5.0376 and Atmospheric residue changes by -5.0376. The total changes by 0.0000. Moving a cut point moves barrels between two cuts and nowhere else.
 
-## Why the two changes cancel
+## The two cuts that share the bound
 
-Diesel's yield is the curve at its top minus the curve at its bottom. Residue has no upper bound, so its yield is 100 percent minus the curve at its bottom. The moved temperature is diesel's top and residue's bottom. Raising it adds the curve's rise between 650 F and 700 F to diesel and takes the same rise from residue. One quantity is added in one place and subtracted in the other, which is why the change column prints 5.0376 and -5.0376.
+The moved temperature is diesel's top and residue's bottom. Diesel's yield is the curve at its top minus the curve at its bottom. Residue has no upper bound, and the Associate tier's rule says a last cut with no upper bound runs to 100 percent: it takes everything not yet distilled at its lower bound. So both yields read the curve at the moved temperature, one as its top and one as its bottom. The change column prints 5.0376 for diesel and -5.0376 for residue, and 0.0000 for the total.
 
-That is also why the total is unmoved. The first cut starts at 0 percent and the last runs to 100 percent, and neither end moved.
+## The rows that did not move
 
-## Why a refinery moves a cut point
+LPG / Light ends reads 0.7174 in both columns, Naphtha 20.5591 and Kerosene / DPK 16.2860. The bounds of those three cuts are no lower bound, 90, 330 and 480 F, and none of them is the moved temperature, so each reads the curve at the same two temperatures before and after. Their change column prints 0.0000. Diesel / AGO runs from 480 F to 650 F before the move and from 480 F to 700 F after it. Atmospheric residue runs from 650 F before and from 700 F after, to 100 percent both times.
 
-A refinery sets its diesel end point by what the product specification allows and what the market pays. Lifting the end point pulls heavier material into diesel. Whether that is worth doing depends on what diesel and residue are worth and whether the heavier diesel still meets its own specification. This course prices the cuts in module 4. The quality side of a product is the recipe question the Expert tier takes up, and the planning of a refinery's cut points against its markets is taught in the `refinery` course.
+## What the lesson fixes
 
-What this lesson fixes is the accounting. Whatever the reason for moving a cut point, the barrels come from one neighbour and go to the other. No cut further away changes, and the blend does not gain or lose volume.
+This lesson fixes the accounting and nothing more. The digest gives no reason for moving a cut point, only what the move does. This course prices the cuts in module 4, and the planning of a refinery's cut points is the subject of the `refinery` course. On the Kwale blend, the barrels come from one neighbour and go to the other, no cut further away changes, and the total changes by 0.0000.
 
-## A check you can run on any cut table
+## Reading the change column
 
-When two yield tables differ by a cut point, the change column should show exactly two nonzero entries of opposite sign, on the two cuts that share the moved boundary, and a total change of zero. Anything else means more than one boundary moved, or the curve itself changed. The Kwale table above passes it: two nonzero entries, on Diesel / AGO and Atmospheric residue, and a total change of 0.0000. The panel lets you drag Kwale's cut points and watch the same check hold on every move.
+The Kwale table is the one the digest prints, and it reads this way: two nonzero entries of opposite sign, 5.0376 on Diesel / AGO and -5.0376 on Atmospheric residue, the two cuts that share the moved boundary, and a total change of 0.0000. The panel lets you drag Kwale's cut points and watch the same check hold on every move.
 
 ## Exercise
 
-Read the change column. Name the two cuts whose yields changed and the two figures, and name the three that did not. Then say which single temperature both changed cuts share as a bound, and why the total's change is 0.0000.
+Read the change column. Name the two cuts whose yields changed and the two figures, and name the three that did not. Then say which single temperature both changed cuts share as a bound, and quote the digest's sentence that describes what moving a cut point does.

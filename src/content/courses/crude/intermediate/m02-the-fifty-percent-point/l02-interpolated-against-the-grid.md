@@ -25,11 +25,11 @@ The digest prints both readings for two blends.
 
 The grid reading is a temperature from the crudes' measurement grid. In the Kwale blend, 650 F is Ughelli Medium's own 50 percent point, and the blend's curve reads 56.9474 percent there. The grid reading therefore reports the temperature at which the blend has passed 50 percent by whatever amount the grid happens to allow, and calls it the fifty percent point. The grid reading minus the engine is 62.6816 F for the Kwale blend and 72.8571 F for the default pair.
 
-## Why the error is not a fixed size
+## Two blends, two gaps
 
-How wrong a grid reading is depends entirely on where the grid points fall. If some crude happened to be measured at a temperature where the blend stood near 50 percent, the grid reading would land close. If the nearest point past 50 is a long way up the curve, it lands far off. Nothing in the reading tells you which case you are in. That is what makes it dangerous: the error is an accident of which temperatures two laboratories chose to report, and it changes with every new pair of assays.
+The digest prints the grid reading minus the engine for two blends: 62.6816 F for the Kwale blend and 72.8571 F for the default pair. It prints no rule that fixes the size of that gap in advance, and this course does not offer one. Each gap is read from its own row, for its own pair of curves.
 
-The interpolated reading does not depend on that accident in the same way. It uses the two points on either side and places the answer on the straight line between them.
+The grid reading is defined by the digest as "the first point of the blend's curve at or past 50 percent". The interpolated reading is temperatureAtVolumePercent(curve, 50), which uses the two curve points on either side of 50 percent and places the answer on the straight line between them. For the Kwale blend those points are 530 F at 43.6471 percent and 650 F at 56.9474 percent.
 
 ## What rides on T50
 

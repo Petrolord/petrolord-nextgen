@@ -226,7 +226,7 @@ The index has a domain. ln(ln(nu + 0.8)) is undefined where ln(nu + 0.8) is zero
 | 10 | 23.5747 |
 | 100 | 33.1962 |
 | 1000 | 39.0657 |
-A blend with one viscosity outside the domain is not blended; basis "not blended: a component viscosity is missing or outside the index domain".
+With one crude's viscosity outside the domain (the Obigbo export blend with Egbema Medium's viscosity typed as 0.15 cSt), the blend's viscosity is not blended; basis "not blended: a component viscosity is missing or outside the index domain". The other properties of that blend are formed as usual: API 32.8173, sulfur 0.2642 wt%.
 
 # SECTION 9: THE TBP CURVE BETWEEN AND OUTSIDE ITS MEASURED POINTS (owned by Associate m04)
 
@@ -335,7 +335,7 @@ With no SARA, the screen falls back to a gravity-contrast rule of thumb: a wide 
 | lighter crude just past it | 35.01 | 19 | 16.0100 | false |
 | lighter crude well past it | 36 | 19 | 17.0000 | false |
 A flag needs a contrast above the one threshold and a lighter crude above the other, both at once.
-The two thresholds, found by bisection on the engine itself (the smallest value that raises the flag, the other condition held well past its own threshold):
+The two thresholds, found by bisection on the engine itself with the other condition held well past its own threshold. Each is the edge the flag starts ABOVE: at the threshold itself the engine gives no verdict (the probes above), and every value past it raises the flag.
 | threshold | value |
 | --- | --- |
 | API contrast, lighter crude at 45 API | 15.0000 |
@@ -503,7 +503,7 @@ The studio's default cuts on the same Kwale blend, for contrast (a vacuum refine
 | Vacuum gasoil | 26.6940 |
 | Vacuum residue | 16.3586 |
 
-A cut the curve cannot answer. Kwale Light with the Ebocha partial assay, 50 and 50, on Kwale's cuts: the blend's curve starts at 110 F and stops at 920 F, so a cut with a bound below 110 F has no yield. The open-ended residue cut still has one: it runs from its lower bound to 100 percent, and its lower bound lies inside the curve.
+A cut the curve cannot answer. Kwale Light with the Ebocha partial assay, 50 and 50, on Kwale's cuts: the blend's curve starts at 110 F and stops at 920 F, so a cut with a bound below 110 F or above 920 F has no yield. The open-ended residue cut still has one: it runs from its lower bound to 100 percent, and its lower bound lies inside the curve.
 | cut | yield volume percent |
 | --- | --- |
 | LPG / Light ends | unknown |
@@ -566,6 +566,8 @@ Each crude alone is valued on the same Kwale cut set, product prices, processing
 
 The volume-weighted mean of the two crudes' own netbacks is 64.9473 $/bbl; the blend's netback minus that mean is 0.0000. Yields add on volume and every other term is per barrel, so the blend is worth what its barrels are worth.
 
+The differential is formed whether or not the valuation is complete. The Kwale Light and Ebocha partial assay blend of SECTION 15, valued against the same marker, reports complete: false, a netback of 48.3393 $/bbl over the cuts it can value, and a differential of -24.1607 $/bbl.
+
 What netbackValue refuses:
 | asked | what the engine returned |
 | --- | --- |
@@ -600,7 +602,7 @@ What the Crude Assay & Blending Studio shows with nothing typed: its default pai
 | figure | value |
 | --- | --- |
 | blend API | 30.6451 |
-| blend sulfur wt% | 1.0050 |
+| blend sulfur wt% (basis: mass) | 1.0050 |
 | blend T50 F (interpolated) | 617.1429 |
 | Watson K at T50 (screening) | 11.7452 |
 | LPG / Light ends yield volume percent | 0.4615 |
@@ -612,6 +614,7 @@ What the Crude Assay & Blending Studio shows with nothing typed: its default pai
 | gross product value $/bbl | 76.6165 |
 | netback $/bbl | 69.7334 |
 | stability screen basis | api-contrast |
+Crudes in the default pair that carry a SARA analysis: none. So the screen falls back to the gravity contrast (SECTION 11).
 
 WHAT THE ORACLE CHECKS ON A CARGO. The crude assay engine is held to an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules and not from the JavaScript. It loads a cargo in barrels and pounds, inverts the Refutas index by bisection, takes yields by segment overlap, finds T50 by bisection and keeps the netback as a 100,000 bbl account. Its golden cases, counted from the vendored file:
 | golden set | cases |
@@ -622,7 +625,7 @@ WHAT THE ORACLE CHECKS ON A CARGO. The crude assay engine is held to an independ
 
 # SECTION 19: WHAT A LINEAR PROGRAMME IS (owned by Expert m01)
 
-solveLP minimises c'x subject to rows A x (<=, =, >=) b and bounds lo <= x <= hi (bounds kept as bounds, never as extra rows), or maximises when asked. Its status is always one of optimal, infeasible or unbounded, and the caller is told which. The optimum of a linear programme, when there is one, is found at a vertex of the feasible region: a point where at least as many constraints and bounds hold exactly as there are variables.
+solveLP minimises c'x subject to rows A x (<=, =, >=) b and bounds lo <= x <= hi, or maximises when asked. The bounds are passed apart from the rows: the kernel shifts every lower bound to the origin, and it gives a bound no shadow price. Its status is always one of optimal, infeasible or unbounded, and the caller is told which. The optimum of a linear programme, when there is one, is found at a vertex of the feasible region: a point where at least as many constraints and bounds hold exactly as there are variables.
 
 THE TEXTBOOK CASE, before any blending: two products, two shared units. Maximise 5x + 4y subject to 6x + 4y <= 24 and 1x + 2y <= 6, with x and y at least 0.
 | status | x | y | objective | shadow price, row 1 | shadow price, row 2 | iterations |
@@ -666,7 +669,7 @@ optimiseBlend turns every specification into a linear row. A limit on a ratio, s
 | index, on volume (RVP) | the property's index | 1 |
 | index, on mass (viscosity) | SG x the property's index | SG |
 
-RVP blends through an index: RVPI = RVP^n, blended on volume and inverted. RVP_INDEX_EXPONENT is 1.25, a named and overridable parameter. A specification counts as binding when the achieved value is within BINDING_TOLERANCE (1e-7) times the limit (or 1, if larger) of it.
+RVP blends through an index: RVPI = RVP^n, blended on volume and inverted. RVP_INDEX_EXPONENT is 1.25: an exported constant that is the default exponent of rvpIndex and rvpFromIndex. Each of those two functions takes an exponent argument that replaces the default, and the gasoline templates call them with the default. A specification counts as binding when the achieved value is within BINDING_TOLERANCE (1e-7) times the limit (or 1, if larger) of it.
 
 | RVP psi | rvpIndex | rvpFromIndex of that index |
 | --- | --- | --- |
@@ -676,7 +679,7 @@ RVP blends through an index: RVPI = RVP^n, blended on volume and inverted. RVP_I
 | 12.9 | 24.4477 | 12.9000 |
 | 52.8 | 142.3287 | 52.8000 |
 
-SPEC_TEMPLATES, the optimizer's starting shapes. They are starting points and never a compliance source: the regulation in force governs, and every limit is editable.
+SPEC_TEMPLATES, the optimizer's starting shapes. They are starting points. They are not a compliance source: the regulation in force governs, and every limit is editable.
 | template | specification | basis | min | max | unit |
 | --- | --- | --- | --- | --- | --- |
 | Gasoline, 50 ppm sulfur | RON | volume | 91 | no maximum | no unit |
@@ -727,6 +730,8 @@ APAPA: an invented Lagos import and blending terminal makes an 8000 bbl PMS carg
 | Butane | 400.0000 | 0.0500 | 21640.0000 |
 | total | 8000.0000 | 1.0000 | 698701.5605 |
 Unit cost 87.3377 $/bbl. Status optimal.
+Each component's cost $ is its volume bbl times its cost $/bbl, and the total is their sum.
+Each component also carries its own density in kg/l, which is the figure the Density specification reads; at Apapa each is typed equal to its SG (Reformate 0.805, FCC gasoline 0.748, Isomerate 0.662, Butane 0.582).
 
 | specification | min | max | achieved | giveaway | binding | basis |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -763,16 +768,28 @@ The LP prices each ROW: the change in cost per unit of the row's right-hand side
 | Density maximum | 0.0000 | kg/l | 0.0000 |
 | Density minimum | 0.0000 | kg/l | 0.0000 |
 
+The Total volume row is the batch's equality row, sum(v_i) = target, and takes no relief sign: its price is its rowPrice as the kernel returns it, the change in cost for one more barrel of target volume.
+The rowPrice column prints to four decimals. The products below use the unrounded rowPrice, so the printed rowPrice times the printed scale does not reproduce them by hand.
 The sulfur row's scale: sum(SG x volume) over the recipe is 6037.3872. rowPrice x that sum is -551.8026; the reported value of relief is 551.8026 $ per ppm (relief on a maximum is the negative of dCost/dL).
 The RVP row is in index units. rowPrice x 8000.0000 bbl is -2054.8893 $ per index point. The reported value of relief is 4448.9659 $ per psi; divided by the negative of the per-index figure, that is 2.1651 index points per psi, the slope of the index at the 9 psi limit. The same slope from the exported exponent, RVP_INDEX_EXPONENT x 9^(RVP_INDEX_EXPONENT - 1), is 2.1651.
 
-CHECKING A PRICE BY RE-SOLVING. The engine re-solved with the limit moved one whole unit each way. A shadow price is a derivative at the optimum; one whole unit of relief can differ from it, because the rows move non-linearly in the limit and the optimal vertex can change.
+CHECKING A PRICE BY RE-SOLVING. The engine re-solved with the limit moved one whole unit each way. A shadow price is the value of relief AT THE MARGIN, a derivative at the optimum; the saving from one whole unit of relief is a different number, and the table prints both.
 | re-solve | total cost $ | saving against the optimum $ | shadow price $ per unit |
 | --- | --- | --- | --- |
 | Sulfur limit 51 | 698149.8809 | 551.6796 | 551.8026 |
 | Sulfur limit 49 | 699253.4861 | -551.9256 | 551.8026 |
 | RVP limit 10 | 695050.1663 | 3651.3942 | 4448.9659 |
 | RVP limit 8 | 703453.0642 | -4751.5037 | 4448.9659 |
+
+What holds at each re-solve, beside the optimum:
+| re-solve | binding | components at their availability |
+| --- | --- | --- |
+| the optimum (Sulfur 50, RVP 9) | Sulfur, RVP | Butane |
+| Sulfur limit 51 | Sulfur, RVP | Butane |
+| Sulfur limit 49 | Sulfur, RVP | Butane |
+| RVP limit 10 | Sulfur | Isomerate, Butane |
+| RVP limit 8 | Sulfur, RVP | Reformate |
+The sulfur re-solves keep the same specifications binding and the same component at its availability, so the optimum stays at the same vertex; the gap between the whole-unit saving and the shadow price comes from the limit itself, which multiplies every volume in the sulfur row (w_i - L d_i), so the cost is not a straight line in L even at one vertex. The RVP re-solves change what holds, so the optimum moves to a different vertex, and the RVP row is in index units, which are not a straight line in psi.
 
 THE MARGINAL BARREL. The volume row's price is the cost of one more barrel of product at the margin. It is not the unit cost (the average): the component at its availability cannot supply the next barrel, so the next barrel is made from the others.
 | figure | $/bbl |
@@ -841,6 +858,7 @@ An infeasible blend is a real answer, and the useful one: the specifications can
 | --- | --- | --- |
 | Apapa PMS pool to the 10 ppm gasoline template | infeasible | REFUSED: No recipe from these components can meet every specification. Relax a limit, or bring in a component that can. |
 | Apapa PMS pool with a RON minimum of 99 | infeasible | REFUSED: No recipe from these components can meet every specification. Relax a limit, or bring in a component that can. |
+An infeasible result carries the status infeasible, this sentence as its error, and no recipe. The digest prints every sentence the engine returns in place of a recipe after REFUSED:, so these two are counted among the refusals at the end of SECTION 27.
 
 Which limit of the 10 ppm template makes the Apapa pool infeasible: each limit in turn moved back to its 50 ppm template value, the rest kept at 10 ppm:
 | limit moved back | 10 ppm value | 50 ppm value | status |
@@ -872,6 +890,7 @@ What optimiseBlend refuses, each in its own words:
 | Isomerate with its cost left blank | REFUSED: No cost for Isomerate. A least-cost recipe needs a price on every component; remove the component or give it one. |
 | Butane with a maximum of -50 | REFUSED: Butane maximum must be a number of zero or more. Leave a maximum blank for no limit. |
 | Reformate with a minimum of 3000 and a maximum of 2000 | REFUSED: Reformate has a minimum above its maximum. |
+Each of these carries the status invalid and no recipe: the engine refuses it before the problem reaches the kernel.
 
 A SPECIFICATION NOT APPLIED. A specification cannot be imposed on components that do not carry the property, and a mass-basis specification needs every density. Neither is dropped silently: the recipe comes back with the specification listed as skipped, with the reason.
 | asked | status | total cost $ | skipped | reason (the engine) |
@@ -879,7 +898,7 @@ A SPECIFICATION NOT APPLIED. A specification cannot be imposed on components tha
 | Isomerate with no sulfur figure | optimal | 695245.0644 | Sulfur | Not every component carries this property, so the specification was not applied. |
 | FCC gasoline with no SG and no API | optimal | 695245.0644 | Sulfur | This property blends on mass and not every component has a density (sg or API), so the specification was not applied. |
 
-What each recipe reports as achieved for the skipped specification, and for Density, which blends on volume and needs no SG:
+What each recipe reports as achieved for the skipped specification, and for Density, which blends on volume and needs no SG. Density reads each component's own density figure (SECTION 21), and the probe removes only FCC gasoline's SG and API, so its density of 0.748 kg/l stays in the blend:
 | asked | skipped specification achieved | Density applied | Density achieved kg/l |
 | --- | --- | --- | --- |
 | Isomerate with no sulfur figure | not formed (the engine returns no value) | true | 0.7536 |
@@ -894,6 +913,14 @@ At that optimum butane is 339.9340 bbl against its availability of 400: inside i
 # SECTION 26: THE OPTIMIZER'S DEFAULT POOL (owned by Expert m06)
 
 What the Product Blending Optimizer shows with nothing typed: its default gasoline pool, 1000 bbl, the 50 ppm template.
+
+Its four components are its own, with the same names as Apapa's and different figures:
+| component | cost $/bbl | SG | density kg/l | RON | MON | sulfur ppm | RVP psi | available bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Reformate | 92 | 0.8 | 0.8 | 100 | 89 | 2 | 3 | 600 |
+| FCC gasoline | 84 | 0.75 | 0.75 | 92 | 80 | 120 | 6 | 600 |
+| Isomerate | 89 | 0.66 | 0.66 | 87 | 85 | 1 | 13 | 300 |
+| Butane | 55 | 0.58 | 0.58 | 94 | 89 | 1 | 52 | 80 |
 
 | component | volume bbl |
 | --- | --- |
@@ -927,7 +954,7 @@ CONSTANTS THE ENGINES STATE, read from the modules:
 | --- | --- |
 | CII_BANDS.STABLE | 0.7 |
 | CII_BANDS.UNSTABLE | 0.9 |
-| RVP_INDEX_EXPONENT | 1.25 |
+| RVP_INDEX_EXPONENT, the default exponent of rvpIndex and rvpFromIndex | 1.25 |
 | BINDING_TOLERANCE | 1e-7 |
 | viscosityBlendIndex(1), the Refutas index of 1 cSt | 3.2518 |
 | sgFromApi(10), water | 1.0000 |
@@ -936,7 +963,7 @@ WHAT THE ORACLES CHECK. Each engine is held to an independent Python oracle in t
 | oracle | how it computes | golden cases |
 | --- | --- | --- |
 | oracle_crudeassay.py | loads a cargo in barrels and pounds; Refutas inverted by bisection; yields by segment overlap; T50 by bisection; netback as a 100,000 bbl account | 6 blends, 4 curve cases, 1 blended default curve |
-| oracle_productblending.py | rows built from physical mass balances, solved by exact rational vertex enumeration; properties from physical inventories; relief by exact re-solve with the limit moved | 9 pools |
+| oracle_productblending.py | rows built from physical mass balances, solved by exact rational vertex enumeration; properties from physical inventories; relief by exact re-solve with the limit moved by a step of 1/10^7 of a unit each way, an exact one-sided derivative on each side | 9 pools |
 | oracle_lp.py | exact rational vertex enumeration with no simplex at all; shadow prices as exact one-sided derivatives by re-solve | 181 problems (124 optimal, 44 infeasible, 13 unbounded) |
 
 Refusals printed in this digest, each asserted against the engine before it was printed: 17.

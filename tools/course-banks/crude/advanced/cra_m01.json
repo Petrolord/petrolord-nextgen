@@ -19,7 +19,7 @@
    "The batch row's right-hand side, the barrels to deliver."
   ],
   "answer": 0,
-  "explanation": "solveLP keeps bounds as bounds and does not write them as extra rows. A tank limit belongs to one component, so it stays attached to that one variable and reports as a component at its availability."
+  "explanation": "The bounds are passed apart from the rows: the kernel shifts every lower bound to the origin, and it gives a bound no shadow price. A tank limit belongs to one component, so it is a bound on that one variable, and a component held by it reports as a component at its availability."
  },
  {
   "prompt": "A planner asks why the Sulfur maximum cannot be entered as a bound on the kernel. What is the reason?",

@@ -29,13 +29,13 @@ Every basis cell the engine returns for these ten rows reads "mass".
 
 ## Reading the difference column
 
-On every row, mass minus volume is a positive number. In each of these blends the crude richer in sulfur, acid, nitrogen and metals is also the denser one, and the denser crude carries more of the mass than of the volume, as the last lesson showed. So the mass basis gives it more weight, and the volume shortcut understates the property.
+On every row, mass minus volume is a positive number. The last lesson printed the weights behind it. In the export blend, Egbema Medium carries a mass fraction of 0.3654 against a volume fraction of 0.3500, and the column mass fraction minus volume fraction reads 0.0154 for it and -0.0154 for Obigbo Light. The library prints each crude's own figures: Egbema Medium's sulfur is 0.48 wt% at an SG of 0.8990, and Obigbo Light's is 0.14 wt% at an SG of 0.8408. The mass basis weights each crude's sulfur by its mass fraction, and the volume shortcut weights it by its volume fraction.
 
 The size of the gap depends on the blend. For sulfur in the export blend it is 0.0052 wt%. For sulfur in the three-crude blend, which carries Asarama Heavy at 20 by volume, it is 0.0298 wt%. For vanadium in the three-crude blend it is 1.5761 ppm.
 
-## Why the small gap still matters
+## What the volume column is
 
-A sulfur gap of 0.0052 wt% looks harmless on its own. Sulfur is a specification property, though, and a cargo sold against a maximum sulfur is either on the right side of that limit or it is not. A blend that looks compliant on the volume shortcut can fail on the engine's mass basis, and the buyer's laboratory measures the real thing. The metals feed a refinery's catalyst budget, and an understated vanadium figure understates the catalyst it will consume. None of this makes the volume column a rough answer worth keeping. It is a different quantity, formed on a basis the property does not have.
+The digest says what the volume column is for: it is the same property weighted by volume fraction with the engine's own blendOnVolume, "printed only to be read against the right answer; the engine never reports it." Sulfur, TAN, nitrogen, nickel and vanadium are per unit mass, so blendCrudes weights them by mass fraction. The volume column is a different quantity, formed on a basis the digest does not give these properties. The engine's answer is the mass column, and its basis cell says so.
 
 ## The one conversion
 
@@ -43,4 +43,4 @@ Every per-mass property here uses the same mass fractions the engine formed once
 
 ## Exercise
 
-Read the sulfur rows for both blends. Quote the engine's figure, the volume shortcut and the mass minus volume column for each. Then read the vanadium rows the same way. Say what the four difference figures show about the direction of the error the volume shortcut makes on these blends, and explain in terms of the crudes' densities why it runs that way.
+Read the sulfur rows for both blends. Quote the engine's figure, the volume shortcut and the mass minus volume column for each. Then read the vanadium rows the same way. Say what the four difference figures show about the direction of the gap on these blends. Then quote the mass fraction minus volume fraction column for Egbema Medium in the export blend, and say which weight the engine applies to each crude's sulfur.

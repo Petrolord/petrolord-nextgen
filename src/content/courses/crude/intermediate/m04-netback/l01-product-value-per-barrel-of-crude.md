@@ -40,14 +40,14 @@ The price column is per barrel of product. A price is a market figure the refine
 
 The value column is the only one in dollars per barrel of crude. It is what each product contributes to one barrel of the blend. Reading down it shows where the value sits. Atmospheric residue contributes 24.5400 $/bbl of crude at a price of 57 $/bbl of product, while LPG / Light ends contributes 0.3443 at 48. A cut's contribution depends on its price and its yield together, and neither alone tells you how much a cut matters.
 
-## Why yields must be on volume here
+## The yield in the formula
 
-Every earlier module in this tier insisted on volume for yields. This is where that pays. Prices are per barrel, and a barrel is a volume. A yield on mass would say what fraction of the tonnes becomes naphtha, and multiplying that by a price per barrel would mix a mass share with a volume price. The product value is only a value per barrel of crude when the yield is a volume fraction of the crude and the price is per volume of product.
+The digest's formula is netback = sum(cut yield fraction x cut product price) x (1 - loss percent / 100) - processing cost - freight, "all per barrel of crude". The yield it takes is the one cutYields returns, in volume percent of the whole crude, the blend's own yields from module 3. The price it takes is per barrel of product. Every earlier module in this tier kept yields on volume, and the formula takes them as they come.
 
 ## Gross is not the answer
 
-74.2412 $/bbl is gross. Nothing has yet been lost in processing, paid to run the refinery, or paid to bring the crude in. The next lessons take those off, and every term is reported, never only the total, so a reader can see where each dollar went.
+74.2412 $/bbl is gross. Nothing has yet been lost in processing, paid to run the refinery, or paid to bring the crude in. The next lessons take those off, and every term is reported beside the total, so a reader can see where each dollar went.
 
 ## Exercise
 
-Read the Naphtha and Kerosene / DPK rows: yields 20.5591 and 16.2860, prices 74 and 93, values 15.2137 and 15.1460 $/bbl of crude. Say which two figures on each row the value is formed from, and what unit conversion the yield performs. Then say what reading only the price column would miss about how much each cut contributes.
+Read the Naphtha and Kerosene / DPK rows: yields 20.5591 and 16.2860, prices 74 and 93, values 15.2137 and 15.1460 $/bbl of crude. Say which two figures on each row the value is formed from, and what unit each of the three figures is in. Then say what reading only the price column would miss about how much each cut contributes.

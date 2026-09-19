@@ -1,6 +1,6 @@
 # SARA blends on mass
 
-SARA fractions are weight percent, per unit mass, like sulfur. So screenBlendStability blends each SARA fraction on mass and then forms the blend's CII from the blended fractions.
+The library prints each SARA analysis in wt%. With a SARA analysis on every crude, screenBlendStability blends each SARA fraction on mass and then forms the blend's CII from the blended fractions.
 
 {{panel:crude-assay-explorer}}
 
@@ -16,9 +16,9 @@ Each blended fraction is a mass-weighted average of the crudes' own fractions. T
 
 ## The order of operations
 
-The engine blends the fractions first and forms the index second. The CII is a ratio, and a ratio of averages is a different number from an average of ratios. Blending the four fractions keeps the blend's composition physical: it is the saturates, aromatics, resins and asphaltenes actually present in the mixed oil.
+The engine blends the fractions first and forms the index second. The digest states both steps in one sentence: it "blends each SARA fraction on mass and forms CII = (saturates + asphaltenes) / (aromatics + resins)". So the four blended fractions in the table are the inputs to the ratio, and the CII column is the ratio formed from them, with the same formula that gives each crude its own index.
 
-Look at the first pair. Asarama Heavy alone has a CII of 0.7668 and Ubie Condensate alone 8.3458, as the first lesson of this module showed. The blend's CII is 1.7614. The blend's index comes from the blend's composition, and there is no shortcut from the two single-crude indices to it.
+Look at the first pair. Asarama Heavy alone has a CII of 0.7668 and Ubie Condensate alone 8.3458, as the first lesson of this module showed. The blend's CII is 1.7614. The blend's index is formed from the blended fractions in the table, and the digest prints no route from the two single-crude indices to it.
 
 ## The wrong basis beside the right one
 

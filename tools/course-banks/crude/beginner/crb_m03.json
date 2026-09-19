@@ -162,6 +162,6 @@
    "not blended, with the basis: not blended: a component viscosity is missing or outside the index domain."
   ],
   "answer": 3,
-  "explanation": "The probe at 0.1 cSt returns no index, and a blend with one viscosity outside the domain is not blended, under that basis sentence. The engine returns no index there rather than a number, so there is nothing to blend."
+  "explanation": "The probe at 0.1 cSt returns no index. With one crude's viscosity outside the domain, the blend's viscosity is not blended, under that basis sentence, and the other properties of the blend are formed as usual. The engine returns no index there rather than a number."
  }
 ]

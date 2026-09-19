@@ -39,18 +39,18 @@ The Ebocha partial assay starts at 4 at 110 and ends at 88 at 920. Its first poi
 
 At 60 F and at 1000 F the engine returns unknown. At 2 percent and at 95 percent, the temperature is unknown too.
 
-## Why the engine refuses to extrapolate
+## The rule the engine follows
 
-The tempting move is to extend the last straight segment past the end of the data. Run Ebocha's segment from 70 at 760 to 88 at 920 out past 920 F, and you would get a number at 1000 F. That number would depend entirely on the slope of one segment, and nothing guarantees that a crude's heavy end follows the slope of the segment before it. The residue of a heavy crude can hold a large share of the barrel, and a guess at the heavy end is a guess at the most contested part of the valuation.
+The digest states the rule in two sentences. "Outside the measured range the curve answers only where it says so itself: below a first point at 0 percent nothing has distilled, and above a last point at 100 percent everything has. Anywhere else outside the range the value is unknown."
 
-Clamping is just as tempting and just as wrong: reading anything below the first point as 4 percent, or anything above the last as 88. That treats the unmeasured light end and the unmeasured heavy end as if they did not exist.
+Read Obigbo Light against it. Its first point is 0 at 85, so at 60 F the curve says 0.0000 of its own accord. Its last point is 100 at 1380, so at 1500 F it says 100.0000. Read Ebocha against it. Its first point is 4 at 110 and its last is 88 at 920. Neither end is at 0 or 100 percent, so neither end says anything past itself, and at 60 F and at 1000 F the value is unknown.
 
-So the engine returns unknown. An unknown is visible. It stops a cut yield from being formed out of a guess, and it tells the reader exactly where the assay ran out.
+The engine does not run Ebocha's last segment, from 70 at 760 to 88 at 920, on past 920 F. It does not read anything below the first point as 4 percent, or anything above the last as 88. It returns unknown, and an unknown is visible: it tells the reader exactly where the assay ran out.
 
 ## What unknown asks of you
 
-An unknown is a request for data. The remedy for the Ebocha partial assay is a full assay that measures the light end and the heavy end. Until then, any cut that reaches into those regions has no yield, and the next two lessons show how the engine reports that. In the assay explorer, the unmeasured ends of the Ebocha curve are drawn as unknown.
+An unknown marks where the data stops. Any cut that reaches into those regions has no yield, and the next two lessons show how the engine reports that: of Ebocha's 6 studio cuts, 4 have no yield. In the assay explorer, the unmeasured ends of the Ebocha curve are drawn as unknown.
 
 ## Exercise
 
-Read the Obigbo Light reading at 1500 F and the Ebocha reading at 1000 F. Quote both. Say what the two answers show about the difference between a curve whose last point is at 100 percent and a curve whose last point is at 88 percent. Then explain why the engine returns unknown for Ebocha at 60 F while it returns 0.0000 for Obigbo Light at the same temperature.
+Read the Obigbo Light reading at 1500 F and the Ebocha reading at 1000 F. Quote both. Say what the two answers show about the difference between a curve whose last point is at 100 percent and a curve whose last point is at 88 percent. Then quote the digest's rule for reading outside the measured range, and use it to say why the engine returns unknown for Ebocha at 60 F and 0.0000 for Obigbo Light at the same temperature.

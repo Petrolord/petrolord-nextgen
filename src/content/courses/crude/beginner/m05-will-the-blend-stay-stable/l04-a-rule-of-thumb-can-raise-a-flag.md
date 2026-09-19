@@ -1,12 +1,12 @@
 # A rule of thumb can raise a flag
 
-SARA is not always available. With no SARA on some crude in the blend, the screen falls back to a gravity-contrast rule of thumb, and the rule is built so that it can raise a flag and cannot clear one.
+With no SARA on some crude in the blend, the screen falls back to a gravity-contrast rule of thumb, and the rule is built so that it can raise a flag and cannot clear one.
 
 {{panel:crude-assay-explorer}}
 
 ## The rule
 
-A wide spread of API with a light paraffinic crude in the blend is the combination that classically drops asphaltenes. So the rule asks two things: is the contrast in API between the lighter and the heavier crude above one threshold, and is the lighter crude above another. A flag needs both at once. When the rule flags, the engine returns stable false. When it does not flag, the engine returns stable null, never true.
+A wide spread of API with a light paraffinic crude in the blend is the combination that classically drops asphaltenes. So the rule asks two things: is the contrast in API between the lighter and the heavier crude above one threshold, and is the lighter crude above another. A flag needs both at once. When the rule flags, the engine returns stable false. When it does not flag, the engine returns stable null. It does not return true.
 
 ## Probing the thresholds
 
@@ -23,7 +23,7 @@ The two thresholds are not exported, so the engine is probed with two crudes of 
 
 The first three probes hold the lighter crude at 40 API and move the heavier one. At a contrast of 15.0000 there is no verdict, and at 15.0100 the rule flags. The last three hold the heavier crude at 19 API and move the lighter one. With the lighter crude at 35 there is no verdict even at a contrast of 16.0000, and at 35.01 the rule flags.
 
-Bisection on the engine itself finds the smallest value that raises each flag:
+Bisection on the engine itself, with the other condition held well past its own threshold, finds each threshold as the edge the flag starts ABOVE. At the threshold itself the engine gives no verdict, as the probes at 15.0000 and at 35 show, and every value past it raises the flag:
 
 | threshold | value |
 | --- | --- |
@@ -43,7 +43,7 @@ The export blend does not flag, and the engine's message is careful about what t
 
 ## Why the rule cannot clear a blend
 
-A rule of thumb captures one known danger. A blend can drop asphaltenes for reasons the gravity spread does not show: an unusually asphaltenic heavy crude, or a medium crude with a saturate-rich composition. So an absent flag proves nothing, and the engine will not turn it into a stable verdict.
+The digest says it once: "The rule can raise a flag and it cannot clear one." An absent flag comes back as stable null.
 
 The Obigbo export blend shows why this matters. With every SARA supplied, the export blend screens unstable on the CII, at 0.9163. With the SARA taken away, the gravity screen gives no verdict. Had the engine returned true on the absent flag, it would have called a blend stable that its own index calls unstable.
 

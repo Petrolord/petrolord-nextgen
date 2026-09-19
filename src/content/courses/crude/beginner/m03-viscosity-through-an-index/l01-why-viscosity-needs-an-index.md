@@ -6,7 +6,7 @@ Gravity blends on a straight line in specific gravity, and sulfur on a straight 
 
 ## How far apart the viscosities sit
 
-The four field streams in the library carry these viscosities, in cSt: Obigbo Light 4.6, Egbema Medium 22, Asarama Heavy 610 and Ubie Condensate 1.1. A pipeline or a terminal pump sees the viscosity of the blend, and a blend that pumps at one viscosity can stall at another.
+The four field streams in the library carry these viscosities, in cSt: Obigbo Light 4.6, Egbema Medium 22, Asarama Heavy 610 and Ubie Condensate 1.1. Each is typed as the library prints it, and the lessons in this module blend them in pairs.
 
 ## What a straight average gives
 
@@ -20,16 +20,16 @@ The engine's answer and a straight average of the cSt figures on mass, with no i
 
 Read the last column. The straight average minus the engine is 3.4833 cSt for the export blend, 330.3100 for Asarama Heavy with Ubie Condensate, and 232.9041 for Egbema Medium with Asarama Heavy. For Asarama Heavy with Ubie Condensate the engine gives 9.2496 cSt, and the straight average gives 339.5596.
 
-## Why the straight average fails
+## What the engine does instead
 
-A small amount of a thin oil cuts the viscosity of a thick one hard. A straight average carries the thick crude's large cSt figure into the result at its full size. The physics does not work that way: the thin crude thins the whole blend. Blending practice has long found that viscosity becomes close to linear in blend share only after a double logarithm is taken of it. So blending engines transform each viscosity into an index, average the index, and transform the answer back.
+The digest gives the reason in one line: "Viscosity mixes nowhere near linearly, so it is blended through an index." The engine does three things. It turns each crude's viscosity into an index, VBI = A x ln(ln(nu + 0.8)) + B with nu in cSt (viscosityBlendIndex). It blends that index. Then it turns the blended index back into a viscosity (viscosityFromBlendIndex). The table above sets the engine's answer beside the straight average, and on every row the last column is positive. For the export blend the engine's figure is 7.4743 cSt, and the straight average on mass is 10.9576.
 
 The index this engine uses is the Refutas index. The next lesson sets out its formula and its two constants. The lesson after that deals with the fraction it is averaged on, which is a held question in this course.
 
-## What this means for a blender
+## What the basis cell says
 
-A heavy crude that will not pump at a terminal's temperature is often cut with a light crude or a condensate. A blender who sized the diluent on the straight average would be sizing it on a figure the engine does not recognise. The index route is the one a blending engine can defend, and the engine names its basis beside every viscosity it returns, so a reader can see which route produced the figure.
+The engine names its basis beside every viscosity it returns: "Refutas index on mass fraction". The straight average in the table carries no basis from the engine, because the engine never forms it. When you quote a blend viscosity, quote the basis with it, so a reader can see which route produced the figure and which fraction the index was blended on.
 
 ## Exercise
 
-Read the Asarama Heavy and Ubie Condensate row. Quote the two crudes' viscosities from the library, the engine's blend viscosity, the straight average on mass and the linear average minus the engine. Say what the two blend figures show about how a straight average treats a very thick crude in a blend, and explain in one sentence why an index is needed.
+Read the Asarama Heavy and Ubie Condensate row. Quote the two crudes' viscosities from the library, the engine's blend viscosity, the straight average on mass and the linear average minus the engine. Say what the last column shows for that pair, and quote the digest's one-line reason for blending viscosity through an index.

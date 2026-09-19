@@ -55,7 +55,7 @@ q(0, "On the AGO pool, which index does the optimizer's Viscosity at 40 C row bl
  "Viscosity at 40 C blends through the Refutas index on mass (indexOnMass), the same index as the assay studio, with weights SG x the property's index and SG. Cetane and flash point are treated linearly on volume. The mass basis is held item C12, stated as a limit.")
 
 q(2, "SPEC_TEMPLATES give the 50 ppm gasoline template a Sulfur maximum of 50 ppm and an RVP maximum of 9 psi. What standing do those limits have?",
- "They are starting points and never a compliance source, and every limit is editable.",
+ "They are starting points; the regulation in force governs, and every limit is editable.",
  ["They are the regulation in force for PMS, carried into the optimizer so every cargo complies.",
   "They are fixed, and a user who wants another limit writes a new template in code.",
   "They are the buyer's contract terms, read from the cargo nomination for each run."],

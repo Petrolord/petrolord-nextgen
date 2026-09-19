@@ -305,7 +305,7 @@ describe('AGREEMENT WITH THE DIGEST, the Associate sections', () => {
       row('the offset inside the double log', '1 minus viscosityFromBlendIndex of a very negative index', fx(r.offset)),
       row('the lowest viscosity the index reaches', 'viscosityFromBlendIndex of a very negative index', fx(r.floor)),
       ...r.domain.map((d) => row(inp(d.viscosityCSt), d.index === null ? 'no index (outside the domain)' : fx(d.index))),
-      `A blend with one viscosity outside the domain is not blended; basis "${r.outsideBasis}".`,
+      `With one crude's viscosity outside the domain (the Obigbo export blend with Egbema Medium's viscosity typed as ${inp(0.15)} cSt), the blend's viscosity is not blended; basis "${r.outsideBasis}". The other properties of that blend are formed as usual: API ${fx(r.outsideApi)}, sulfur ${fx(r.outsideSulfur)} wt%.`,
     ]);
     expect(r.outsideValue).toBeNull();
   });
@@ -503,7 +503,7 @@ describe('AGREEMENT WITH THE DIGEST, the Professional sections', () => {
       row('netback $/bbl', fx(n.netback)),
       row('differential against the marker $/bbl', fx(n.marker.differential)),
       row('blend API', fx(s.api)),
-      row('blend sulfur wt%', fx(s.sulfurWtPct)),
+      row(`blend sulfur wt% (basis: ${s.sulfurBasis})`, fx(s.sulfurWtPct)),
       row('blend T50 F (interpolated)', fx(s.t50.t50)),
       row('Watson K at T50 (screening)', fx(s.t50.watsonK)),
       ...s.yields.cuts.map((r) => row(`${r.name} yield volume percent`, fx(r.yieldVolPercent))),
@@ -552,7 +552,7 @@ describe('AGREEMENT WITH THE DIGEST, the Expert sections', () => {
       ...b.templates.flatMap((t) => t.specs.map((s) => row(t.name, s.name, s.basis, s.min === null ? 'no minimum' : inp(s.min), s.max === null ? 'no maximum' : inp(s.max), s.unit || 'no unit'))),
       ...S.propertyCheck.map((r) => row(r.name, fx(r.achieved), fx(r.again), fx(r.difference))),
     ]);
-    pinIn(20, [`RVP_INDEX_EXPONENT is ${inp(b.exponent)}, a named and overridable parameter`, `BINDING_TOLERANCE (${inp(b.tolerance)})`]);
+    pinIn(20, [`RVP_INDEX_EXPONENT is ${inp(b.exponent)}: an exported constant that is the default exponent of rvpIndex and rvpFromIndex`, `BINDING_TOLERANCE (${inp(b.tolerance)})`]);
   });
 
   it('SECTION 21, the Apapa PMS recipe', () => {
@@ -648,7 +648,7 @@ describe('AGREEMENT WITH THE DIGEST, the Expert sections', () => {
     pin(27, [
       row('CII_BANDS.STABLE', inp(k.ciiStable)),
       row('CII_BANDS.UNSTABLE', inp(k.ciiUnstable)),
-      row('RVP_INDEX_EXPONENT', inp(k.rvpExponent)),
+      row('RVP_INDEX_EXPONENT, the default exponent of rvpIndex and rvpFromIndex', inp(k.rvpExponent)),
       row('BINDING_TOLERANCE', inp(k.bindingTolerance)),
       row('viscosityBlendIndex(1), the Refutas index of 1 cSt', fx(k.refutasOfOne)),
       row('sgFromApi(10), water', fx(k.water)),

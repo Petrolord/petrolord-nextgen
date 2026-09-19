@@ -38,11 +38,11 @@ That is why a cut can be no better than the curve at its two ends. If either rea
 
 ## An inverted cut
 
-A cut drawn backwards, from 500 F to 350 F on Obigbo Light, has no yield. The engine names it in its list of unknown cuts, marked inverted, 500 to 350 F. A negative yield would be a number with no physical meaning, and the engine will not return one.
+A cut drawn backwards, from 500 F to 350 F on Obigbo Light, has no yield. The engine names it in its list of unknown cuts, marked inverted, 500 to 350 F. The engine returns no yield for it, and the name tells the reader which cut and which way round it was drawn.
 
-## What the cut set tells a buyer
+## What the cut table answers
 
-Put the rows side by side and each crude's product slate is visible at a glance: which crude is rich in naphtha, which in vacuum gasoil and residue. That is the first thing a refinery asks of an assay, and it is two readings of a curve per cut. The planner who reads it still has to check each column against the curve it came from, because a yield is only as good as the two readings behind it.
+The digest's first section lists the question cutYields answers: what does this barrel turn into. Put the rows side by side and each crude's answer sits in its own row, cut by cut, with a total and a closes flag beside it. Each yield is two readings of a curve. A reader who checks a column against the curve it came from is checking the only two figures behind it.
 
 ## Exercise
 

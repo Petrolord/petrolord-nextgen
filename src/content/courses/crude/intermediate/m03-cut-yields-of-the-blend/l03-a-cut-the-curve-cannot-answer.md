@@ -8,7 +8,7 @@ Module 1 built a blend's curve that stops short. This lesson draws Kwale's cuts 
 
 Kwale Light with the Ebocha partial assay, 50 and 50. The Ebocha curve says nothing below 110 F or above 920 F, so the blend's curve keeps only the temperatures where both crudes are known. It starts at 110 F and stops at 920 F.
 
-Kwale's cut set was drawn for whole crudes. Its LPG cut has no lower bound and runs to 90 F, and its naphtha cut runs from 90 F to 330 F. Both need the curve at 90 F, and the blend's curve has no value there. So a cut with a bound below 110 F has no yield.
+Kwale's cut set was drawn for whole crudes. Its LPG cut has no lower bound and runs to 90 F, and its naphtha cut runs from 90 F to 330 F. Both need the curve at 90 F, and the blend's curve has no value there. The digest's rule is that a cut with a bound below 110 F or above 920 F has no yield. Kwale's set has no bound above 920 F, so the two cuts without a yield are the two bounded at 90 F.
 
 ## What the engine returns
 
@@ -26,7 +26,7 @@ unknownCuts: LPG / Light ends, Naphtha. Closes: false. The cuts with a yield tot
 
 Three things are worth reading in that result.
 
-First, the two cuts with a bound below 110 F come back unknown. There is no yield, and there is no zero. A zero would say the blend has no light ends and no naphtha, which is a claim about the crude that nobody measured. Unknown says the assay cannot tell.
+First, the two cuts with a bound below 110 F come back unknown. There is no yield, and the engine does not put a zero in its place. The table prints unknown, which says the blend's curve has no value at the bound.
 
 Second, the engine names them in unknownCuts, so the reader knows which products are missing without scanning the table for gaps.
 
@@ -38,15 +38,15 @@ Kerosene / DPK, from 330 F to 480 F, sits wholly inside the stretch the curve co
 
 Those yields are usable for the middle of the barrel. The whole barrel is not accounted for.
 
-## Why not normalise
+## The total as it computes
 
-A tempting repair is to scale the three known yields up until they total 100. That would spread the missing light ends and naphtha across kerosene, diesel and residue in proportion to their size, which is a guess about the crude dressed as a yield. The engine reports the total as it computes and never normalises, so that guess is never made on the reader's behalf.
+The engine does not scale the three known yields up until they total 100. The Associate tier's rule holds on a blend as on a single crude: the total is reported as it computes, and here that is 76.3376 percent, with the two cuts it leaves out named in unknownCuts.
 
 ## The same gap in the valuation
 
 Valued on Kwale's prices, costs and losses, netbackValue carries the gap forward. It names the cuts with no yield (unyieldedCuts: LPG / Light ends, Naphtha), keeps their yield and value empty, and reports the valuation complete: false. Its netback over the cuts it can value is 48.3393 $/bbl.
 
-The fix is on the assay side: supply the light end of the Ebocha curve, and the unknown cuts can be answered.
+Both reports name the same two cuts. It starts in the Ebocha curve, which says nothing below 110 F, and the digest prints it in the yields and again in the valuation.
 
 ## Exercise
 

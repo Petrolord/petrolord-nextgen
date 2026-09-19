@@ -14,7 +14,7 @@ The constants are not typed into this lesson from a handbook. They are read back
 | A | viscosityBlendIndex(e^e - 0.8) minus B | 14.5340 |
 | the offset inside the double log | 1 minus viscosityFromBlendIndex of a very negative index | 0.8000 |
 
-So the index is 14.5340 times the double log of the viscosity plus 0.8000, plus 10.9750. Asking the engine for its own constants is a good habit. A formula copied from a handbook can carry a different offset or a different scale, and the engine's answer is the one its blends are built on.
+So the index is 14.5340 times the double log of the viscosity plus 0.8000, plus 10.9750. Asking the engine for its own constants means the lesson quotes the figures its blends are built on, read from the function that builds them.
 
 ## The index of each crude
 
@@ -25,11 +25,11 @@ So the index is 14.5340 times the double log of the viscosity plus 0.8000, plus 
 | Asarama Heavy | 610 | 37.9879 | 610.0000 |
 | Ubie Condensate | 1.1 | 4.5307 | 1.1000 |
 
-The last column is a round trip. Each viscosity goes into the index and comes back out unchanged, which proves the two functions are exact inverses.
+The last column is a round trip. Each viscosity goes into the index and comes back out unchanged at four decimals, for all four crudes.
 
-## The double log compresses
+## The index beside the viscosity
 
-Read the index column beside the viscosity column. Asarama Heavy is 610 cSt and its index is 37.9879. Ubie Condensate is 1.1 cSt and its index is 4.5307. A set of probes from 1 to 1000 cSt shows the same compression.
+Read the index column beside the viscosity column. Asarama Heavy is 610 cSt and its index is 37.9879. Ubie Condensate is 1.1 cSt and its index is 4.5307. A set of probes from 1 to 1000 cSt reads the index at four more viscosities.
 
 | viscosity cSt | viscosityBlendIndex returns |
 | --- | --- |
@@ -38,7 +38,7 @@ Read the index column beside the viscosity column. Asarama Heavy is 610 cSt and 
 | 100 | 33.1962 |
 | 1000 | 39.0657 |
 
-Each probe multiplies the viscosity by ten, and the index moves from 3.2518 at 1 cSt to 39.0657 at 1000 cSt. A thousandfold range of viscosity becomes a range of index values that can be averaged like any other number. This compression is what makes the index blend close to linearly where the viscosity does not.
+Each probe multiplies the typed viscosity by ten, and the index reads 3.2518 at 1 cSt, 23.5747 at 10, 33.1962 at 100 and 39.0657 at 1000 cSt. These index values, and not the cSt figures, are what a blend weights. The engine then inverts the weighted index, and the round-trip column above shows the inversion returning each crude's own viscosity.
 
 ## How a blend uses it
 
@@ -46,7 +46,7 @@ The engine converts each crude's viscosity into its index, takes a weighted aver
 
 ## Where the index comes from
 
-Refutas is a published and widely used form of the viscosity blending index, and variants of the same double-log family appear in standard methods. What they share is the double log. What they can differ in is the constants, the offset and the fraction the index is averaged on. This course teaches the engine's form exactly as the engine computes it. When you meet a viscosity index in another tool, check its constants against the three printed above before comparing any figure it gives with this engine's.
+The digest names one other member of the family: "ASTM D7152 blends the same family of index on VOLUME; the two disagree, and which basis to use is a HELD decision." So two forms of the same double-log index can differ in the fraction the index is averaged on, and the digest prints both for the same blends in the next lesson. This course teaches the engine's form exactly as the engine computes it. When you meet a viscosity index in another tool, check its constants against the three printed above before comparing any figure it gives with this engine's.
 
 ## Exercise
 

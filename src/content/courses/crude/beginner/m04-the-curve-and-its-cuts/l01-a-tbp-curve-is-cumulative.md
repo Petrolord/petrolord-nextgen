@@ -16,9 +16,9 @@ The first point, 0 at 85, is the initial boiling point: nothing has distilled be
 
 ## Why cumulative matters
 
-Every point counts everything that has distilled so far, from the lightest molecule up to that temperature. So the curve only rises as the temperature rises.
+The digest's heading for the library's curves says what each point is: the "volume percent distilled at each temperature". A point is a running total. Obigbo Light's points read 0, 10, 30, 50, 70, 90 and 100 percent at 85, 205, 390, 548, 742, 1060 and 1380 F, and each reading is the whole volume distilled by that temperature.
 
-That is what makes a cut possible. The volume that boils between two temperatures is the reading at the upper one minus the reading at the lower one. This module's last two lessons build every cut yield on that one subtraction, and it only works because the curve is cumulative.
+That is what makes a cut possible. The volume that boils between two temperatures is the reading at the upper one minus the reading at the lower one. The digest states it as the rule cutYields follows: each cut's yield is "the curve at the cut's upper bound minus the curve at its lower bound". This module's last two lessons build every cut yield on that one subtraction.
 
 ## The two ways to read it
 

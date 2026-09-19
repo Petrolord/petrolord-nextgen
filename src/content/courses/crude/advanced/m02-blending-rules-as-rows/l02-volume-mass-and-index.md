@@ -23,7 +23,7 @@ The row sum((w_i - L d_i) v_i) <= 0 has two weights, and choosing them is choosi
 
 SPEC_TEMPLATES are the optimizer's starting shapes, and each row carries its basis. The 50 ppm gasoline template reads RON on volume with a minimum of 91, MON on volume with a minimum of 81, Sulfur on mass with a maximum of 50 ppm, RVP on index with a maximum of 9 psi, and Density on volume between 0.72 and 0.775 kg/l. The diesel template declares Viscosity at 40 C on index, on mass, between 2 and 4.5 cSt. The fuel oil template does the same for Viscosity at 50 C with a maximum of 380 cSt.
 
-Two cautions come with them. They are starting points and never a compliance source: the regulation in force governs, and every limit is editable. And every figure in them is invented and illustrative, like every figure in this course.
+Two cautions come with them. They are starting points. They are not a compliance source: the regulation in force governs, and every limit is editable. And every figure in them is invented and illustrative, like every figure in this course.
 
 ## Agreement is a check
 

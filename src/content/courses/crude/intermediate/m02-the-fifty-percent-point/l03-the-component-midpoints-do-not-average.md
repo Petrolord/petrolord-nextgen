@@ -30,15 +30,13 @@ For the Kwale blend the volume-weighted mean minus the engine is -3.3184 F and t
 
 Four readings are printed. Only one of them is read off the blend's own curve.
 
-## Why neither average is the answer
+## What each average is formed from
 
-An average of the midpoints looks only at one point on each crude's curve. It ignores the shape of the curves around those points. Two crudes can have the same T50 and very different curves, one boiling off steadily and one bunched. Blend each with a third crude and the blends' curves differ, so their T50s differ, while the averaged midpoints are identical. The average cannot see what it would need to see.
+Each average takes one figure from each crude, its own 50 percent temperature, and weights the two: by volume share in one column and by mass share in the other. For the Kwale blend those figures are 530 F for Kwale Light and 650 F for Ughelli Medium. The engine's route is the one module 1 built. It forms the blend's curve at every temperature either crude measured, weights the volume percents, then reads 50 percent off that curve with temperatureAtVolumePercent.
 
-The engine's route sees everything the assays carry. It builds the blend's curve at every temperature either crude measured, weights the amounts, then reads 50 percent off that curve. Every point of both curves near the middle has a say.
+## The mass average beside the engine
 
-## Why the mass average is also not the fix
-
-The Associate tier showed a case where the mass-weighted mean does come out right: the mass-weighted mean of the API numbers is the blend API, and the digest prints the difference as 0.0000. It is tempting to think mass weighting rescues the midpoints too. It does not, and the reason is specific. API works on mass because 1 / SG blends linearly on mass, which is a property of how density combines. There is no comparable identity for a boiling temperature. The Kwale row prints the mass-weighted mean of the crudes' T50 as 586.0503 F beside the engine's 587.3184 F, and only the second is read off a curve.
+The Associate tier read a case where the digest prints a mass-weighted mean minus the engine of 0.0000: the mass-weighted mean of the API numbers is the blend API, and the digest gives the reason, that 1 / SG blends linearly on mass. For T50 the digest prints the same column as -1.2681 F for the Kwale blend and -2.9207 F for the default pair. The Kwale row prints the mass-weighted mean of the crudes' T50 as 586.0503 F beside the engine's 587.3184 F, and only the second is read off a curve.
 
 ## The trap in one sentence
 

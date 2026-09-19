@@ -28,13 +28,13 @@ This course takes processing cost as one number the refinery supplies. How a ref
 
 ## Freight
 
-Freight is the cost of bringing a barrel of crude from where it is bought to the refinery. It is also per barrel of crude. A netback is taken at the refinery, so the cost of getting there comes off. Two crudes with the same product value but different freight have different netbacks, and the netback is the figure that lets a buyer compare them at its own gate.
+Freight is the cost of bringing a barrel of crude from where it is bought to the refinery. It is also per barrel of crude. The digest's heading for this module names what a netback is: what a barrel of crude is worth at the refinery. Freight comes off in the formula as a figure per barrel, after the losses.
 
 What freight is made of, and the terminal side of moving a cargo, belongs to the `supply` course. Here, as with processing, freight is one figure per barrel of crude.
 
 ## Why every term is reported
 
-The engine reports every term, never only the total. That is more than presentation. A netback of 64.9473 on its own cannot be checked or argued with. Laid out as gross, loss, processing and freight, each term can be questioned by the person who knows it best: the product trader on prices, the refinery on processing, the shipping desk on freight. And the order of the chain is visible, so a loss taken in the wrong place shows up at once.
+The digest says that every term is reported beside the total. Laid out as gross 74.2412, loss 0.5939, processing 6.8000 and freight 1.9000, each term of the 64.9473 can be read on its own row. The order of the chain is visible too. Lesson 2 printed what the same terms give when the losses are taken after the costs, 65.0169, and the engine's column beside it.
 
 ## Complete and nothing assumed
 

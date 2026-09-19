@@ -22,17 +22,15 @@ The blend's netback is 64.9473 $/bbl, the marker's is 72.5, and the engine repor
 
 The differential is this crude minus the marker, so its sign has a fixed meaning. A negative differential says the crude nets back less than the marker at this refinery. A positive one says it nets back more. At -7.5527, the Kwale blend is worth less to Kwale than its marker crude, by the figure the engine prints.
 
-Always read the sign against the definition. Some desks quote a differential the other way round, marker minus crude, and a figure read with the wrong convention reverses a buy into a sell. The engine's convention is stated with the function: this crude's netback minus the marker's.
+Always read the sign against the definition. The engine's convention is stated with the function: this crude's netback minus the marker's.
 
-## What a differential is used for
+## A differential on an incomplete netback
 
-A differential is a price signal. If the Kwale blend is offered at a price tied to the marker, the differential says how far below or above that marker price the refinery can pay and still break even against running the marker. It turns a refinery's internal valuation into a number a seller understands.
-
-That is also why the differential inherits everything in the netback. If a price were missing, the netback would be incomplete, and a differential built on it would compare part of one crude with the whole of another. If a cost were blank and taken as zero, the netback would carry that assumption, and so would the differential. The engine names both conditions on the netback itself, so they travel with the differential.
+The differential is formed from the netback beneath it, whatever that netback is. The digest says so directly: "The differential is formed whether or not the valuation is complete." It prints the case. The Kwale Light and Ebocha partial assay blend of module 3, valued against the same marker, reports complete: false, a netback of 48.3393 $/bbl over the cuts it can value, and a differential of -24.1607 $/bbl. That differential is formed on a netback that leaves two cuts out, and complete: false on the netback is where a reader finds that out. A cost left blank and taken as zero is named on the netback the same way, in assumedZero.
 
 ## Both sides on the same basis
 
-A differential only means something when the two netbacks are built the same way: the same cut set, the same product prices, the same processing cost and freight treatment. The marker's 72.5 is Kwale's own figure for its marker crude, on Kwale's terms. Comparing a crude valued at one refinery against a marker valued at another would mix two different sets of cuts and prices, and the difference would measure the refineries as much as the crudes.
+The digest values each crude on one set of terms: "Each crude alone is valued on the same Kwale cut set, product prices, processing cost, freight and losses as the blend." The marker is Kwale's too: "Kwale's marker is 72.5 $/bbl." Every differential in this module is read against that one marker on those terms.
 
 ## In the panel
 
@@ -40,4 +38,4 @@ The valuation explorer ends its waterfall at the netback and then draws the mark
 
 ## Exercise
 
-Read the blend's netback, the marker and the differential. State the engine's definition of the differential and use it to say what the sign of -7.5527 tells the Kwale buyer. Then say what the differential would carry with it if the netback beneath it were incomplete.
+Read the blend's netback, the marker and the differential. State the engine's definition of the differential and use it to say what the sign of -7.5527 tells the Kwale buyer. Then read the differential the digest prints for the Kwale Light and Ebocha blend, and say which line of its netback a reader must quote beside it.

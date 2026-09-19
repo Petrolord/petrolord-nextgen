@@ -1,12 +1,12 @@
 # The Watson factor
 
-Two numbers describe where a crude sits: how dense it is and how hot it boils. The Watson characterisation factor puts them into one.
+The Watson characterisation factor takes two figures the blend already has, a boiling temperature and a specific gravity, and forms one number from them.
 
 {{panel:crude-valuation-explorer}}
 
-## What K is for
+## What the digest says about K
 
-Crudes and fractions of the same density can be very different in chemistry. A paraffinic stream is light for its boiling range; an aromatic stream is dense for its boiling range. Neither density alone nor boiling point alone separates them, but the two together do. The Watson factor is the classic way of combining them, and refiners use it as a quick read on the chemical family of a stream. As a general direction, a higher K leans paraffinic and a lower K leans naphthenic and aromatic. This course does not set bands on it, and the digest prints none.
+The digest says three things about K and no more. It gives the formula. It says the studio takes Tb as the blend's T50, "a SCREENING basis: the strict basis is the mean average boiling point, which the studio does not compute". And it says "the page labels K as the screening figure". It prints no bands on K and no reading of what a given K means, so this course sets none.
 
 ## The formula the engine uses
 
@@ -31,12 +31,12 @@ Each figure uses the blend's own T50, interpolated off the blend's own curve, an
 
 The formula has a cube root of an absolute temperature and a division by a specific gravity. Neither makes sense for every input. The digest prints two probes: watsonK declines a non-physical input: at -500 F it returns no value, and at SG 0 it returns no value.
 
-A temperature of -500 F lies below absolute zero, so there is no absolute temperature to take a root of. The second would divide by zero. In both cases the engine returns no value instead of a number that would look like a characterisation factor.
+Tb is F plus the offset of 459.6700, and at -500 F that is below zero on the Rankine scale. An SG of 0 is the divisor of the formula. In both cases the engine returns no value, and no figure is printed for K.
 
 ## What K is not asked to do here
 
-K in this studio is a label on the blend. Nothing downstream in the valuation uses it: the cut yields come from the curve, and the netback in module 4 comes from the yields and prices. K is a characterisation for the reader. Lesson 5 is about the basis it is taken on, which the studio itself marks as a screening basis.
+The digest's rules for the valuation leave K out. Cut yields are the curve at the cut's upper bound minus the curve at its lower bound. The netback formula in module 4 is written in cut yields, product prices, losses, processing cost and freight, and K is not among its terms. Lesson 5 is about the basis it is taken on, which the studio itself marks as a screening basis.
 
 ## Exercise
 
-Read the Kwale blend's SG, its T50 interpolated and its Watson K at T50, and the offset the engine gives, 459.6700. Say which of the two inputs to K came from the blend's curve and which from its gravity, and on what basis each was blended. Then read the two probes the engine declines and say what a number returned in their place would have claimed.
+Read the Kwale blend's SG, its T50 interpolated and its Watson K at T50, and the offset the engine gives, 459.6700. Say which of the two inputs to K came from the blend's curve and which from its gravity, and on what basis each was blended. Then read the two probes the engine declines and quote what it returns for each.

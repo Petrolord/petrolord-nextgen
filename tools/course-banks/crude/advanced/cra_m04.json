@@ -129,7 +129,7 @@
    "The price is a derivative at the optimum; a whole unit of relief is a finite move."
   ],
   "answer": 3,
-  "explanation": "A shadow price is a derivative at the optimum, and one whole unit of relief can differ from it. The re-solve table prints both savings beside the price of 551.8026 $ per ppm."
+  "explanation": "A shadow price is the value of relief at the margin, a derivative at the optimum; the saving from one whole unit of relief is a different number, and the re-solve table prints both savings beside the price of 551.8026 $ per ppm."
  },
  {
   "prompt": "The RVP shadow price at Apapa is 4448.9659 $ per psi. Where does the digest read what relieving the maximum by one whole psi saves?",

@@ -1,30 +1,30 @@
 # What the oracle checks on a cargo
 
-Every figure in this tier came from the engine. This lesson is about why anyone should believe them.
+Every figure in this tier came from the engine. This lesson reads what the digest says the engine is held to.
 
-## An engine checked against itself proves nothing
+## An independent oracle
 
-A test that recomputes the engine's figure with the engine's own formula will always agree with it. If the formula is wrong, the test is wrong the same way, and the two agree on the wrong answer. Agreement is only evidence when the second computation gets there by a different road.
-
-So the crude assay engine is held to an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules and never from the JavaScript.
+The digest names it: "The crude assay engine is held to an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules and not from the JavaScript." Two things in that sentence matter to a reader. The oracle is independent of the engine's code. And what it is written from is the rules, the same rules this tier has quoted section by section.
 
 ## How the oracle computes
 
-The oracle loads a cargo in barrels and pounds, inverts the Refutas index by bisection, takes yields by segment overlap, finds T50 by bisection, and keeps the netback as a 100,000 bbl account.
+The digest lists the oracle's methods in one sentence: "It loads a cargo in barrels and pounds, inverts the Refutas index by bisection, takes yields by segment overlap, finds T50 by bisection and keeps the netback as a 100,000 bbl account." Each can be set beside the engine's own route, as this course has quoted it.
 
-A cargo in barrels and pounds. The engine converts volume shares to mass shares with a formula and blends on the fractions. The oracle instead fills a notional cargo: so many barrels of each crude, each weighing so many pounds. Mass-basis properties come from adding up the pounds of sulfur and dividing by the pounds of crude. Volume-basis properties come from adding barrels. If the engine's mass fractions were wrong, the physical inventory would disagree.
+A cargo in barrels and pounds. The engine converts volume shares to mass shares once, with resolveFractions: each crude's mass share is its volume share times its specific gravity, over the sum of those products. The oracle loads a cargo in barrels and pounds.
 
-Refutas inverted by bisection. The engine inverts the viscosity index directly, with viscosityFromBlendIndex. The oracle searches for the viscosity whose index matches, by halving an interval until it closes in.
+Refutas inverted by bisection. The engine inverts the index with viscosityFromBlendIndex, and the Associate tier printed its round trip. The oracle inverts it by bisection.
 
-Yields by segment overlap. The engine takes a cut as the curve at the top minus the curve at the bottom. The oracle treats the curve as a set of straight segments and measures how much of each segment falls inside each cut.
+Yields by segment overlap. The engine takes a cut's yield as the curve at the cut's upper bound minus the curve at its lower bound. The oracle takes yields by segment overlap.
 
-T50 by bisection. The engine interpolates between the two curve points either side of 50 percent. The oracle searches the curve for the temperature at which it reaches 50.
+T50 by bisection. The engine reads T50 as temperatureAtVolumePercent(curve, 50), interpolated between the curve's points. The oracle finds T50 by bisection.
 
-Netback as an account. The engine computes dollars per barrel with a formula. The oracle keeps books on a 100,000 bbl cargo: it sells the products from the cargo's barrels, takes out the lost volume, pays processing and freight on the cargo, and divides at the end. A loss taken in the wrong place in the engine would not survive a set of books that tracks where every barrel went.
+Netback as an account. The engine computes the netback per barrel of crude with the formula module 4 quoted. The oracle keeps the netback as a 100,000 bbl account.
+
+On every one of the five, the two routes are named differently in the digest. The digest does not describe the oracle's routes past those words, so this lesson does not describe them either.
 
 ## What it is checked on
 
-The oracle is run on golden cases, counted from the vendored file, and on each the two roads must meet:
+The oracle is run on golden cases, counted from the vendored file:
 
 | golden set | cases |
 | --- | --- |
@@ -32,10 +32,10 @@ The oracle is run on golden cases, counted from the vendored file, and on each t
 | curve cases | 4 |
 | blended default curve | 1 |
 
-## What the oracle does not settle
+## What the oracle is written to
 
-An oracle confirms that the engine computes what the rules say. It cannot decide which rule is right. The held item C13, Watson K taken at T50, is a choice of basis. An oracle written to the same rule will agree with it, and that agreement says nothing about whether T50 is the right stand in for the mean average boiling point. Held items are stated as limits for exactly that reason: no test can close them.
+The oracle is written from the rules. The held item C13, Watson K taken at T50, is one of those rules as the studio states it, and the digest calls T50 "a SCREENING basis: the strict basis is the mean average boiling point, which the studio does not compute". The digest teaches C13 as a stated limit, and this course does too. The golden-set counts say what the oracle was run on. They say nothing about which basis for K is right.
 
 ## Exercise
 
-Take two Kwale figures from this tier, the blend T50 of 587.3184 F and the netback of 64.9473 $/bbl, and for each say which of the oracle's methods reaches that kind of figure and how its road differs from the engine's. Then quote the three golden-set counts. Finally, say why a check that used the engine's own formula would not count as evidence.
+Take two Kwale figures from this tier, the blend T50 of 587.3184 F and the netback of 64.9473 $/bbl. For each, quote the oracle's method from the digest and the engine's route from this tier. Then quote the three golden-set counts, and quote the digest's words for what the oracle is written from.

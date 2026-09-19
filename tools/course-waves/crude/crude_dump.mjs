@@ -350,7 +350,8 @@ head('viscosity cSt', 'viscosityBlendIndex returns');
 for (const v of [0.1, 0.2, 0.2001, 1, 10, 100, 1000]) { const i = C.viscosityBlendIndex(v); row(inp(v), i === null ? 'no index (outside the domain)' : fx(i)); }
 const bad = C.blendCrudes([{ ...lib.obl, volumeFraction: 65 }, { ...lib.egm, viscosityCSt: 0.15, volumeFraction: 35 }]);
 claim(bad.properties.viscosityCSt === null, 'a viscosity outside the domain is not blended');
-out(`A blend with one viscosity outside the domain is not blended; basis "${bad.bases.viscosityCSt}".`);
+claim(Number.isFinite(bad.properties.api) && Number.isFinite(bad.properties.sulfurWtPct), 'the other properties still blend beside an out-of-domain viscosity');
+out(`With one crude's viscosity outside the domain (the Obigbo export blend with Egbema Medium's viscosity typed as ${inp(0.15)} cSt), the blend's viscosity is not blended; basis "${bad.bases.viscosityCSt}". The other properties of that blend are formed as usual: API ${fx(bad.properties.api)}, sulfur ${fx(bad.properties.sulfurWtPct)} wt%.`);
 
 /* ------------------------------------------------------------------ */
 section('THE TBP CURVE BETWEEN AND OUTSIDE ITS MEASURED POINTS');
@@ -441,7 +442,7 @@ out('A flag needs a contrast above the one threshold and a lighter crude above t
 const bisectFlag = (make) => { let lo = 0; let hi = 60; for (let i = 0; i < 200; i += 1) { const m = (lo + hi) / 2; if (make(m).stable === false) hi = m; else lo = m; } return hi; };
 const contrastAt = bisectFlag((d) => C.screenBlendStability({ components: [{ name: 'light', api: 45 }, { name: 'heavy', api: 45 - d }], massFractions: [0.5, 0.5] }));
 const lightAt = bisectFlag((a) => C.screenBlendStability({ components: [{ name: 'light', api: a }, { name: 'heavy', api: a - 25 }], massFractions: [0.5, 0.5] }));
-out('The two thresholds, found by bisection on the engine itself (the smallest value that raises the flag, the other condition held well past its own threshold):');
+out('The two thresholds, found by bisection on the engine itself with the other condition held well past its own threshold. Each is the edge the flag starts ABOVE: at the threshold itself the engine gives no verdict (the probes above), and every value past it raises the flag.');
 head('threshold', 'value');
 row('API contrast, lighter crude at 45 API', fx(contrastAt));
 row('lighter crude API, contrast held at 25', fx(lightAt));
@@ -589,7 +590,7 @@ const kwStudio = C.cutYields({ curve: kwCurve, cuts: F.STUDIO_CUTS });
 head('cut', 'yield volume percent');
 for (const r of kwStudio.cuts) row(r.name, fx(r.yieldVolPercent));
 out('');
-out('A cut the curve cannot answer. Kwale Light with the Ebocha partial assay, 50 and 50, on Kwale\'s cuts: the blend\'s curve starts at 110 F and stops at 920 F, so a cut with a bound below 110 F has no yield. The open-ended residue cut still has one: it runs from its lower bound to 100 percent, and its lower bound lies inside the curve.');
+out('A cut the curve cannot answer. Kwale Light with the Ebocha partial assay, 50 and 50, on Kwale\'s cuts: the blend\'s curve starts at 110 F and stops at 920 F, so a cut with a bound below 110 F or above 920 F has no yield. The open-ended residue cut still has one: it runs from its lower bound to 100 percent, and its lower bound lies inside the curve.');
 const kpY = C.cutYields({ curve: kpCurve, cuts: F.KWALE_CUTS });
 head('cut', 'yield volume percent');
 for (const r of kpY.cuts) row(r.name, fxOr(r.yieldVolPercent, 'unknown'));
@@ -650,6 +651,12 @@ claim(Math.abs(kwNet.netback - volNet) < 1e-9, 'the blend netback equals the vol
 out('');
 out(`The volume-weighted mean of the two crudes' own netbacks is ${fx(volNet)} $/bbl; the blend's netback minus that mean is ${dfx(kwNet.netback, volNet)}. Yields add on volume and every other term is per barrel, so the blend is worth what its barrels are worth.`);
 out('');
+{
+  const kpMk = C.netbackValue({ cuts: kpY.cuts, prices: kv.prices, processingCostPerBbl: kv.processingCostPerBbl, freightPerBbl: kv.freightPerBbl, lossPercent: kv.lossPercent, marker: kv.marker });
+  claim(kpMk.complete === false && kpMk.marker && Number.isFinite(kpMk.marker.differential), 'an incomplete valuation still forms a differential');
+  out(`The differential is formed whether or not the valuation is complete. The Kwale Light and Ebocha partial assay blend of SECTION 15, valued against the same marker, reports complete: ${kpMk.complete}, a netback of ${fx(kpMk.netback)} $/bbl over the cuts it can value, and a differential of ${fx(kpMk.marker.differential)} $/bbl.`);
+}
+out('');
 out('What netbackValue refuses:');
 head('asked', 'what the engine returned');
 for (const loss of [101, -1]) row(`losses of ${inp(loss)} percent`, refused(C.netbackValue({ cuts: kwY.cuts, prices: kv.prices, lossPercent: loss }), `loss ${loss}`));
@@ -680,13 +687,18 @@ const stY = C.cutYields({ curve: stCurve, cuts: F.STUDIO_CUTS });
 const stNet = C.netbackValue({ cuts: stY.cuts, ...sv });
 head('figure', 'value');
 row('blend API', fx(stBlend.properties.api));
-row('blend sulfur wt%', fx(stBlend.properties.sulfurWtPct));
+row(`blend sulfur wt% (basis: ${stBlend.bases.sulfurWtPct})`, fx(stBlend.properties.sulfurWtPct));
 row('blend T50 F (interpolated)', fx(stT.t50));
 row('Watson K at T50 (screening)', fx(C.watsonK({ meanBoilingPointF: stT.t50, sg: stBlend.properties.sg })));
 for (const r of stY.cuts) row(`${r.name} yield volume percent`, fx(r.yieldVolPercent));
 row('gross product value $/bbl', fx(stNet.grossValue));
 row('netback $/bbl', fx(stNet.netback));
 row('stability screen basis', stBlend.stability.basis);
+{
+  const withSara = stComps.filter((c) => c.sara).map((c) => c.name);
+  claim(withSara.length === 0 && stBlend.stability.basis === 'api-contrast', 'the default pair carries no SARA and screens on gravity');
+  out(`Crudes in the default pair that carry a SARA analysis: ${withSara.length ? withSara.join(', ') : 'none'}. So the screen falls back to the gravity contrast (SECTION 11).`);
+}
 out('');
 out('WHAT THE ORACLE CHECKS ON A CARGO. The crude assay engine is held to an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules and not from the JavaScript. It loads a cargo in barrels and pounds, inverts the Refutas index by bisection, takes yields by segment overlap, finds T50 by bisection and keeps the netback as a 100,000 bbl account. Its golden cases, counted from the vendored file:');
 {
@@ -699,7 +711,7 @@ out('WHAT THE ORACLE CHECKS ON A CARGO. The crude assay engine is held to an ind
 
 /* ------------------------------------------------------------------ */
 section('WHAT A LINEAR PROGRAMME IS');
-out('solveLP minimises c\'x subject to rows A x (<=, =, >=) b and bounds lo <= x <= hi (bounds kept as bounds, never as extra rows), or maximises when asked. Its status is always one of optimal, infeasible or unbounded, and the caller is told which. The optimum of a linear programme, when there is one, is found at a vertex of the feasible region: a point where at least as many constraints and bounds hold exactly as there are variables.');
+out('solveLP minimises c\'x subject to rows A x (<=, =, >=) b and bounds lo <= x <= hi, or maximises when asked. The bounds are passed apart from the rows: the kernel shifts every lower bound to the origin, and it gives a bound no shadow price. Its status is always one of optimal, infeasible or unbounded, and the caller is told which. The optimum of a linear programme, when there is one, is found at a vertex of the feasible region: a point where at least as many constraints and bounds hold exactly as there are variables.');
 out('');
 const tb = F.TEXTBOOK_LP;
 out(`THE TEXTBOOK CASE, before any blending: ${tb.label}. Maximise ${tb.c[0]}x + ${tb.c[1]}y subject to ${tb.A[0][0]}x + ${tb.A[0][1]}y <= ${tb.b[0]} and ${tb.A[1][0]}x + ${tb.A[1][1]}y <= ${tb.b[1]}, with x and y at least 0.`);
@@ -747,12 +759,12 @@ row('mass', 'SG x the property', 'SG');
 row('index, on volume (RVP)', 'the property\'s index', '1');
 row('index, on mass (viscosity)', 'SG x the property\'s index', 'SG');
 out('');
-out(`RVP blends through an index: RVPI = RVP^n, blended on volume and inverted. RVP_INDEX_EXPONENT is ${inp(P.RVP_INDEX_EXPONENT)}, a named and overridable parameter. A specification counts as binding when the achieved value is within BINDING_TOLERANCE (${inp(P.BINDING_TOLERANCE)}) times the limit (or 1, if larger) of it.`);
+out(`RVP blends through an index: RVPI = RVP^n, blended on volume and inverted. RVP_INDEX_EXPONENT is ${inp(P.RVP_INDEX_EXPONENT)}: an exported constant that is the default exponent of rvpIndex and rvpFromIndex. Each of those two functions takes an exponent argument that replaces the default, and the gasoline templates call them with the default. A specification counts as binding when the achieved value is within BINDING_TOLERANCE (${inp(P.BINDING_TOLERANCE)}) times the limit (or 1, if larger) of it.`);
 out('');
 head('RVP psi', 'rvpIndex', 'rvpFromIndex of that index');
 for (const v of [3.2, 6.2, 9, 12.9, 52.8]) row(inp(v), fx(P.rvpIndex(v)), fx(P.rvpFromIndex(P.rvpIndex(v))));
 out('');
-out('SPEC_TEMPLATES, the optimizer\'s starting shapes. They are starting points and never a compliance source: the regulation in force governs, and every limit is editable.');
+out('SPEC_TEMPLATES, the optimizer\'s starting shapes. They are starting points. They are not a compliance source: the regulation in force governs, and every limit is editable.');
 head('template', 'specification', 'basis', 'min', 'max', 'unit');
 for (const t of Object.values(P.SPEC_TEMPLATES)) {
   for (const s of t.specs) row(t.name, s.name, s.basis + (s.basis === 'index' ? (s.indexOnMass ? ', on mass' : ', on volume') : ''), s.min === undefined ? 'no minimum' : inp(s.min), s.max === undefined ? 'no maximum' : inp(s.max), s.unit || 'no unit');
@@ -781,6 +793,10 @@ head('component', 'volume bbl', 'volume fraction', 'cost $');
 for (const r of pms.recipe) row(r.name, fx(r.volume), fx(r.volumeFraction), fx(r.cost));
 row('total', fx(pms.totalVolume), fx(1), fx(pms.totalCost));
 out(`Unit cost ${fx(pms.unitCost)} $/bbl. Status ${pms.status}.`);
+claim(pms.recipe.every((r) => Math.abs(r.cost - r.volume * F.APAPA_PMS_POOL.find((c) => c.id === r.id).cost) < 1e-9), 'each cost is volume times cost per bbl');
+out('Each component\'s cost $ is its volume bbl times its cost $/bbl, and the total is their sum.');
+claim(F.APAPA_PMS_POOL.every((c) => c.density === c.sg), 'each Apapa component types its density equal to its SG');
+out(`Each component also carries its own density in kg/l, which is the figure the Density specification reads; at Apapa each is typed equal to its SG (${F.APAPA_PMS_POOL.map((c) => `${c.name} ${inp(c.density)}`).join(', ')}).`);
 out('');
 head('specification', 'min', 'max', 'achieved', 'giveaway', 'binding', 'basis');
 for (const a of pms.achieved) row(a.name, a.min === null ? 'no minimum' : inp(a.min), a.max === null ? 'no maximum' : inp(a.max), fx(a.value), fx(a.giveaway), String(a.binding), a.basis);
@@ -811,18 +827,36 @@ const pmsSp = (n) => pms.shadowPrices.find((s) => s.name === n);
 const sulfurSp = pmsSp('Sulfur maximum');
 const rvpSp = pmsSp('RVP maximum');
 const mass = F.APAPA_PMS_POOL.reduce((s, c, i) => s + c.sg * pmsVols[i], 0);
+claim(pms.shadowPrices[0].name === 'Total volume' && pms.shadowPrices[0].price === pms.shadowPrices[0].rowPrice, 'the volume row price is its rowPrice');
+out('The Total volume row is the batch\'s equality row, sum(v_i) = target, and takes no relief sign: its price is its rowPrice as the kernel returns it, the change in cost for one more barrel of target volume.');
+out('The rowPrice column prints to four decimals. The products below use the unrounded rowPrice, so the printed rowPrice times the printed scale does not reproduce them by hand.');
 out(`The sulfur row's scale: sum(SG x volume) over the recipe is ${fx(mass)}. rowPrice x that sum is ${fx(sulfurSp.rowPrice * mass)}; the reported value of relief is ${fx(sulfurSp.price)} $ per ppm (relief on a maximum is the negative of dCost/dL).`);
 const rvpLimit = pmsSpecs.find((s) => s.id === 'rvp').max;
 const perIndex = rvpSp.rowPrice * pms.totalVolume;
 out(`The RVP row is in index units. rowPrice x ${fx(pms.totalVolume)} bbl is ${fx(perIndex)} $ per index point. The reported value of relief is ${fx(rvpSp.price)} $ per psi; divided by the negative of the per-index figure, that is ${fx(rvpSp.price / -perIndex)} index points per psi, the slope of the index at the ${inp(rvpLimit)} psi limit. The same slope from the exported exponent, RVP_INDEX_EXPONENT x ${inp(rvpLimit)}^(RVP_INDEX_EXPONENT - 1), is ${fx(P.RVP_INDEX_EXPONENT * rvpLimit ** (P.RVP_INDEX_EXPONENT - 1))}.`);
 out('');
-out('CHECKING A PRICE BY RE-SOLVING. The engine re-solved with the limit moved one whole unit each way. A shadow price is a derivative at the optimum; one whole unit of relief can differ from it, because the rows move non-linearly in the limit and the optimal vertex can change.');
+out('CHECKING A PRICE BY RE-SOLVING. The engine re-solved with the limit moved one whole unit each way. A shadow price is the value of relief AT THE MARGIN, a derivative at the optimum; the saving from one whole unit of relief is a different number, and the table prints both.');
 const resolveWith = (id, key, value) => P.optimiseBlend({ components: F.APAPA_PMS_POOL, specs: pmsSpecs.map((s) => (s.id === id ? { ...s, [key]: value } : s)), targetVolume: F.APAPA_PMS_TARGET });
 head('re-solve', 'total cost $', 'saving against the optimum $', 'shadow price $ per unit');
 for (const [id, key, lim, sp] of [['sulfurPpm', 'max', 51, sulfurSp], ['sulfurPpm', 'max', 49, sulfurSp], ['rvp', 'max', 10, rvpSp], ['rvp', 'max', 8, rvpSp]]) {
   const r = resolveWith(id, key, lim);
   row(`${sp.name.replace(' maximum', '')} limit ${inp(lim)}`, fx(r.totalCost), dfx(pms.totalCost, r.totalCost), fx(sp.price));
 }
+out('');
+out('What holds at each re-solve, beside the optimum:');
+head('re-solve', 'binding', 'components at their availability');
+{
+  const atAvail = (r) => { const n = r.recipe.filter((x) => Math.abs(x.volume - F.APAPA_PMS_POOL.find((c) => c.id === x.id).maxVolume) < 1e-6).map((x) => x.name); return n.length ? n.join(', ') : 'nothing'; };
+  const same = [];
+  for (const [label, r] of [['the optimum (Sulfur 50, RVP 9)', pms], ['Sulfur limit 51', resolveWith('sulfurPpm', 'max', 51)], ['Sulfur limit 49', resolveWith('sulfurPpm', 'max', 49)], ['RVP limit 10', resolveWith('rvp', 'max', 10)], ['RVP limit 8', resolveWith('rvp', 'max', 8)]]) {
+    const key = `${r.bindingSpecs.join(', ')} | ${atAvail(r)}`;
+    same.push(key);
+    row(label, r.bindingSpecs.join(', '), atAvail(r));
+  }
+  claim(same[1] === same[0] && same[2] === same[0], 'the sulfur re-solves keep the same constraints holding');
+  claim(same[3] !== same[0] && same[4] !== same[0], 'the RVP re-solves change what holds');
+}
+out('The sulfur re-solves keep the same specifications binding and the same component at its availability, so the optimum stays at the same vertex; the gap between the whole-unit saving and the shadow price comes from the limit itself, which multiplies every volume in the sulfur row (w_i - L d_i), so the cost is not a straight line in L even at one vertex. The RVP re-solves change what holds, so the optimum moves to a different vertex, and the RVP row is in index units, which are not a straight line in psi.');
 out('');
 out('THE MARGINAL BARREL. The volume row\'s price is the cost of one more barrel of product at the margin. It is not the unit cost (the average): the component at its availability cannot supply the next barrel, so the next barrel is made from the others.');
 const plus = P.optimiseBlend({ components: F.APAPA_PMS_POOL, specs: pmsSpecs, targetVolume: F.APAPA_PMS_TARGET + 1 });
@@ -886,6 +920,8 @@ head('asked', 'status', 'what the engine returned');
 row('Apapa PMS pool to the 10 ppm gasoline template', tight.status, refused(tight, '10 ppm'));
 const hiRon = P.optimiseBlend({ components: F.APAPA_PMS_POOL, specs: pmsSpecs.map((s) => (s.id === 'ron' ? { ...s, min: 99 } : s)), targetVolume: F.APAPA_PMS_TARGET });
 row('Apapa PMS pool with a RON minimum of 99', hiRon.status, refused(hiRon, 'ron 99'));
+claim(tight.status === 'infeasible' && typeof tight.error === 'string' && !tight.recipe, 'an infeasible result carries a sentence and no recipe');
+out('An infeasible result carries the status infeasible, this sentence as its error, and no recipe. The digest prints every sentence the engine returns in place of a recipe after REFUSED:, so these two are counted among the refusals at the end of SECTION 27.');
 out('');
 out('Which limit of the 10 ppm template makes the Apapa pool infeasible: each limit in turn moved back to its 50 ppm template value, the rest kept at 10 ppm:');
 {
@@ -919,11 +955,19 @@ for (const [label, v] of [['400 (as typed)', 400], ['0 (tank empty)', 0], ['left
 out('');
 out('What optimiseBlend refuses, each in its own words:');
 head('asked', 'what the engine returned');
-row('no components', refused(P.optimiseBlend({ components: [], specs: pmsSpecs, targetVolume: 8000 }), 'no comps'));
-row('a target volume of 0', refused(P.optimiseBlend({ components: F.APAPA_PMS_POOL, specs: pmsSpecs, targetVolume: 0 }), 'target 0'));
-row('Isomerate with its cost left blank', refused(P.optimiseBlend({ components: F.APAPA_PMS_POOL.map((c) => (c.id === 'iso' ? { ...c, cost: '' } : c)), specs: pmsSpecs, targetVolume: 8000 }), 'blank cost'));
-row('Butane with a maximum of -50', refused(P.optimiseBlend({ components: setBut(-50), specs: pmsSpecs, targetVolume: 8000 }), 'negative max'));
-row('Reformate with a minimum of 3000 and a maximum of 2000', refused(P.optimiseBlend({ components: F.APAPA_PMS_POOL.map((c) => (c.id === 'ref' ? { ...c, minVolume: 3000, maxVolume: 2000 } : c)), specs: pmsSpecs, targetVolume: 8000 }), 'crossed'));
+{
+  const inputRefusals = [
+    ['no components', P.optimiseBlend({ components: [], specs: pmsSpecs, targetVolume: 8000 }), 'no comps'],
+    ['a target volume of 0', P.optimiseBlend({ components: F.APAPA_PMS_POOL, specs: pmsSpecs, targetVolume: 0 }), 'target 0'],
+    ['Isomerate with its cost left blank', P.optimiseBlend({ components: F.APAPA_PMS_POOL.map((c) => (c.id === 'iso' ? { ...c, cost: '' } : c)), specs: pmsSpecs, targetVolume: 8000 }), 'blank cost'],
+    ['Butane with a maximum of -50', P.optimiseBlend({ components: setBut(-50), specs: pmsSpecs, targetVolume: 8000 }), 'negative max'],
+    ['Reformate with a minimum of 3000 and a maximum of 2000', P.optimiseBlend({ components: F.APAPA_PMS_POOL.map((c) => (c.id === 'ref' ? { ...c, minVolume: 3000, maxVolume: 2000 } : c)), specs: pmsSpecs, targetVolume: 8000 }), 'crossed'],
+  ];
+  for (const [label, r, where] of inputRefusals) row(label, refused(r, where));
+  const st = [...new Set(inputRefusals.map(([, r]) => r.status))];
+  claim(st.length === 1 && inputRefusals.every(([, r]) => !r.recipe), 'every input refusal carries one status and no recipe');
+  out(`Each of these carries the status ${st[0]} and no recipe: the engine refuses it before the problem reaches the kernel.`);
+}
 out('');
 out('A SPECIFICATION NOT APPLIED. A specification cannot be imposed on components that do not carry the property, and a mass-basis specification needs every density. Neither is dropped silently: the recipe comes back with the specification listed as skipped, with the reason.');
 const noSulfurIso = P.optimiseBlend({ components: F.APAPA_PMS_POOL.map((c) => (c.id === 'iso' ? { ...c, sulfurPpm: undefined } : c)), specs: pmsSpecs, targetVolume: 8000 });
@@ -933,7 +977,8 @@ head('asked', 'status', 'total cost $', 'skipped', 'reason (the engine)');
 row('Isomerate with no sulfur figure', noSulfurIso.status, fx(noSulfurIso.totalCost), noSulfurIso.skippedSpecs[0].name, noSulfurIso.skippedSpecs[0].reason);
 row('FCC gasoline with no SG and no API', noDensity.status, fx(noDensity.totalCost), noDensity.skippedSpecs[0].name, noDensity.skippedSpecs[0].reason);
 out('');
-out('What each recipe reports as achieved for the skipped specification, and for Density, which blends on volume and needs no SG:');
+claim(noDensity.recipe && F.APAPA_PMS_POOL.find((c) => c.id === 'fcc').density === 0.748, 'FCC gasoline keeps its own density figure when sg and api are removed');
+out(`What each recipe reports as achieved for the skipped specification, and for Density, which blends on volume and needs no SG. Density reads each component's own density figure (SECTION 21), and the probe removes only FCC gasoline's SG and API, so its density of ${inp(F.APAPA_PMS_POOL.find((c) => c.id === 'fcc').density)} kg/l stays in the blend:`);
 head('asked', 'skipped specification achieved', 'Density applied', 'Density achieved kg/l');
 for (const [label, r] of [['Isomerate with no sulfur figure', noSulfurIso], ['FCC gasoline with no SG and no API', noDensity]]) {
   const sk = r.achieved.find((a) => a.id === r.skippedSpecs[0].id);
@@ -956,6 +1001,10 @@ row('Isomerate at least 1200 bbl', floor.status, fx(floor.recipe.find((x) => x.i
 section('THE OPTIMIZER\'S DEFAULT POOL');
 out(`What the Product Blending Optimizer shows with nothing typed: its default gasoline pool, ${inp(F.OPTIMIZER_DEFAULT_TARGET)} bbl, the 50 ppm template.`);
 const def = P.optimiseBlend({ components: F.OPTIMIZER_DEFAULT_POOL, specs: pmsSpecs, targetVolume: F.OPTIMIZER_DEFAULT_TARGET });
+out('');
+out('Its four components are its own, with the same names as Apapa\'s and different figures:');
+head('component', 'cost $/bbl', 'SG', 'density kg/l', 'RON', 'MON', 'sulfur ppm', 'RVP psi', 'available bbl');
+for (const c of F.OPTIMIZER_DEFAULT_POOL) row(c.name, inp(c.cost), inp(c.sg), inp(c.density), inp(c.ron), inp(c.mon), inp(c.sulfurPpm), inp(c.rvp), inp(c.maxVolume));
 out('');
 head('component', 'volume bbl');
 for (const r of def.recipe) row(r.name, fx(r.volume));
@@ -980,18 +1029,21 @@ out('CONSTANTS THE ENGINES STATE, read from the modules:');
 head('constant', 'value');
 row('CII_BANDS.STABLE', inp(C.CII_BANDS.STABLE));
 row('CII_BANDS.UNSTABLE', inp(C.CII_BANDS.UNSTABLE));
-row('RVP_INDEX_EXPONENT', inp(P.RVP_INDEX_EXPONENT));
+row('RVP_INDEX_EXPONENT, the default exponent of rvpIndex and rvpFromIndex', inp(P.RVP_INDEX_EXPONENT));
 row('BINDING_TOLERANCE', inp(P.BINDING_TOLERANCE));
 row('viscosityBlendIndex(1), the Refutas index of 1 cSt', fx(C.viscosityBlendIndex(1)));
 row('sgFromApi(10), water', fx(C.sgFromApi(10)));
 out('');
 out('WHAT THE ORACLES CHECK. Each engine is held to an independent Python oracle in tools/validation/downstream, written from the rules and not from the JavaScript, and its golden cases are counted here from the vendored golden files:');
+const oracleSrc = fs.readFileSync(`${ROOT}/tools/validation/downstream/oracle_productblending.py`, 'utf8');
+const deltaM = oracleSrc.match(/^DELTA = F\(1, 10 \*\* (\d+)\)$/m);
+claim(deltaM !== null, 'the product blending oracle states its relief step');
 const gold = (f) => JSON.parse(fs.readFileSync(`${ROOT}/test-data/downstream/goldens/${f}`, 'utf8'));
 const ca = gold('crudeassay_cases.json'); const pb = gold('productblending_cases.json'); const lp = gold('lp_cases.json');
 const lpCases = Array.isArray(lp.cases) ? lp.cases : [];
 head('oracle', 'how it computes', 'golden cases');
 row('oracle_crudeassay.py', 'loads a cargo in barrels and pounds; Refutas inverted by bisection; yields by segment overlap; T50 by bisection; netback as a 100,000 bbl account', `${ca.blends.length} blends, ${ca.curves.length} curve cases, ${ca.blendedDefault ? 1 : 0} blended default curve`);
-row('oracle_productblending.py', 'rows built from physical mass balances, solved by exact rational vertex enumeration; properties from physical inventories; relief by exact re-solve with the limit moved', `${pb.cases.length} pools`);
+row('oracle_productblending.py', `rows built from physical mass balances, solved by exact rational vertex enumeration; properties from physical inventories; relief by exact re-solve with the limit moved by a step of 1/10^${deltaM[1]} of a unit each way, an exact one-sided derivative on each side`, `${pb.cases.length} pools`);
 row('oracle_lp.py', 'exact rational vertex enumeration with no simplex at all; shadow prices as exact one-sided derivatives by re-solve', `${lpCases.length} problems (${['optimal', 'infeasible', 'unbounded'].map((s) => `${lpCases.filter((c) => c.status === s).length} ${s}`).join(', ')})`);
 out('');
 out(`Refusals printed in this digest, each asserted against the engine before it was printed: ${refusedCount}.`);

@@ -6,7 +6,7 @@ The blend's curve needs temperatures to stand on. The engine takes them from the
 
 ## Two grids that do not line up
 
-Kwale Light was measured at 75, 190, 370, 530, 720, 1030 and 1350 F. Ughelli Medium was measured at 90, 265, 480, 650, 860, 1200 and 1470 F. The two assays share no temperature. A laboratory reports the temperatures at which it reached round volume percents, so two crudes almost never land on the same grid.
+Kwale Light was measured at 75, 190, 370, 530, 720, 1030 and 1350 F. Ughelli Medium was measured at 90, 265, 480, 650, 860, 1200 and 1470 F. The two assays share no temperature.
 
 blendDistillationCurves does not pick one crude's grid and throw the other away. It forms the blend's curve at every temperature any component measured. The digest prints the count: the blend's curve has 14 points, every temperature either crude measured.
 
@@ -43,7 +43,7 @@ With both crudes known at every row, each blend figure is the volume-weighted su
 
 ## Why keep every temperature
 
-A measured point is information the laboratory paid for. Build the blend only on Kwale Light's grid and every bend in Ughelli Medium's curve between those temperatures is lost; build it on Ughelli Medium's and the reverse. Taking the union keeps every measured point from both crudes on the blend's curve. Between two of the blend's points the curve is again read linearly, so the more real points it stands on, the less of it is a straight line drawn across an unmeasured gap.
+The union keeps every measured point from both crudes on the blend's curve: Kwale Light's seven temperatures and Ughelli Medium's seven, 14 points in all. Each of them is a temperature at which one of the two crudes was measured. Between two of the blend's points the curve is again read linearly, as volumePercentAt reads any curve, and the table prints the blend's volume percent at all 14.
 
 The union is also what lets the blend's curve start where the lightest crude starts and end where the heaviest ends. The first row, 75 F, is Kwale Light's first point. The last, 1470 F, is Ughelli Medium's last.
 

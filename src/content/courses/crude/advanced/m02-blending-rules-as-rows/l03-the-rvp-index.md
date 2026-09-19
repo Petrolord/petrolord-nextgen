@@ -1,10 +1,10 @@
 # The RVP index
 
-Reid vapour pressure measures how readily a gasoline evaporates, and a gasoline specification caps it. RVP does not blend as a plain volume average, and the optimizer handles it the way the assay studio handles viscosity. It transforms the property into an index that does blend linearly, blends the index, and turns the answer back.
+Both gasoline templates cap RVP, at 9 psi in the 50 ppm template and 8.5 psi in the 10 ppm one, and both declare its basis as index, on volume. The optimizer handles it the way the assay studio handles viscosity. It transforms the property into an index, blends the index, and turns the answer back.
 
 ## The index
 
-The rule is RVPI = RVP^n. The index is blended on volume and inverted. The exponent is RVP_INDEX_EXPONENT, and the engine states it as 1.25, a named and overridable parameter. It is a constant the engine exports, so a learner can read it rather than trust a recollection of it, and a planner whose own correlation uses another exponent can set it.
+The rule is RVPI = RVP^n. The index is blended on volume and inverted. The exponent is RVP_INDEX_EXPONENT, and the engine states it as 1.25: an exported constant that is the default exponent of rvpIndex and rvpFromIndex. Each of those two functions takes an exponent argument that replaces the default, and the gasoline templates call them with the default. Because the constant is exported, a learner can read it rather than trust a recollection of it.
 
 rvpIndex takes a pressure to its index and rvpFromIndex takes an index back. The digest prints both for five pressures:
 

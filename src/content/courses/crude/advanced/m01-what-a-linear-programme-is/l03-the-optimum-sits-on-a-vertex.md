@@ -19,19 +19,19 @@ The digest solves the textbook case at every vertex its two rows and two bounds 
 | x 0.0000, y 3.0000 | 12.0000 | optimal |
 | x 3.0000, y 1.5000 | 21.0000 | optimal |
 
-Each row names which constraints hold exactly. At x 0.0000, y 0.0000 both bounds hold. At x 4.0000, y 0.0000, row 1 holds with y on its bound. At x 0.0000, y 3.0000, row 2 holds with x on its bound. At x 3.0000, y 1.5000 both rows hold exactly and neither bound does.
+The table prints each point, its objective and the kernel's status, and not which constraints hold there. What the digest does say is where the points come from, "the vertices the two rows and the two bounds make", and what a vertex is: a point where at least as many constraints and bounds hold exactly as there are variables. With two variables, x and y, that is at least two.
 
 The kernel's optimum for the full problem, x 3.0000, y 1.5000, objective 21.0000, is the last row of that table. The optimum is one of the corners.
 
 ## What this means for a blend
 
-Three consequences follow, and every later module leans on them.
+Three consequences follow.
 
-First, at the optimum some constraints hold exactly. In a blend those are the binding specifications and the components at a bound. A binding specification is not a coincidence; it is what an optimum looks like.
+First, at the optimum some constraints hold exactly. In a blend those are the binding specifications and the components at a bound. The digest says it of the Apapa recipe: "A binding specification is met exactly; the optimum is pressed against it."
 
-Second, some constraints hold with room to spare. Those are the specifications with giveaway, and a small change to them does not move the corner at all.
+Second, some constraints hold with room to spare. Those are the specifications with giveaway, and the digest prices them at zero: "relieving a limit the blend does not touch saves nothing."
 
-Third, when a limit is moved far enough, the optimum jumps to a different corner. Module four meets this when a shadow price, which is a rate at one corner, is checked against a whole unit of relief.
+Third, a limit moved by a whole unit can move the optimum to a different corner. Module four prints both cases: the RVP re-solves change what holds, and the sulfur re-solves keep the same specifications binding.
 
 {{panel:crude-recipe-explorer}}
 
@@ -39,4 +39,4 @@ In the panel, drag the objective line across the textbook region. It leaves the 
 
 ## Exercise
 
-Read the four vertices in the digest's table and their objectives: 0.0000, 20.0000, 12.0000 and 21.0000. Say which one the kernel returns as the optimum of the maximisation. Then name, for that point, which of the two rows and two bounds hold exactly, and say what the count of them shows against the digest's definition of a vertex.
+Read the four vertices in the digest's table and their objectives: 0.0000, 20.0000, 12.0000 and 21.0000. Say which one the kernel returns as the optimum of the maximisation. Then quote the digest's definition of a vertex, and say how many constraints and bounds it requires to hold exactly in this two-variable problem.

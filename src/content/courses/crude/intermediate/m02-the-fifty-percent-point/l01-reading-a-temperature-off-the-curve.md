@@ -22,17 +22,17 @@ The digest prints the Kwale blend, Kwale Light and Ughelli Medium at 55 and 45, 
 | 70 | 796.5882 |
 | 90 | 1133.0737 |
 
-None of those temperatures is a point of the blend's curve. The blend's 14 points sit at the temperatures the two crudes measured, and the blend's volume percent at those temperatures is whatever the weighting gives: 8.0714 at 190 F, 43.6471 at 530 F, 85.5000 at 1030 F. A round volume percent such as 10 or 50 almost never falls on one of them. So each reading is an interpolation between the two curve points on either side of it.
+None of those temperatures is a point of the blend's curve. The blend's 14 points sit at the temperatures the two crudes measured, and the blend's volume percent at those temperatures is whatever the weighting gives: 8.0714 at 190 F, 43.6471 at 530 F, 85.5000 at 1030 F. None of the five volume percents in the table above, 10, 30, 50, 70 and 90, is a figure the blend's curve prints at one of its 14 points. So each reading is an interpolation between the two curve points on either side of it.
 
 ## Why the fifty percent point gets a name
 
-Of all the temperatures a curve can give, the one at 50 percent is singled out. T50 is the temperature by which half the barrels have boiled off. It is a single number that says where the middle of the crude sits on the boiling scale, and it feeds the characterisation factor this module takes up in lesson 4.
+Of all the temperatures a curve can give, the one at 50 percent is singled out. T50 is the temperature at which the blend's own curve reaches 50 percent: temperatureAtVolumePercent(curve, 50), interpolated between the curve's points. The studio takes the Watson factor of lesson 4 at it.
 
 For the Kwale blend, the engine's T50 is 587.3184 F. For the studio's default pair, 60 and 40, which is what the app opens on, it is 617.1429 F.
 
 ## What interpolation assumes
 
-Linear interpolation assumes the curve is a straight line between two measured points. A real TBP curve is smooth and bends, so the straight line is an approximation, and its quality depends on how close the points are. That is one more reason module 1 kept every temperature either crude measured: the more points the blend's curve stands on, the shorter each straight stretch between them.
+Linear interpolation takes the curve as a straight line between two of its points. That is the rule the digest states for both functions, and it prints nothing about how far any real curve departs from a straight line between its points, so this course does not either. What it does print is where the straight stretches run: between the 14 points of the Kwale blend's curve.
 
 The approximation is stated, and it is the same one used everywhere in the engine. volumePercentAt reads linearly between points to build the blend's curve, and temperatureAtVolumePercent reads linearly between points to get a temperature back from it. One rule, both directions.
 

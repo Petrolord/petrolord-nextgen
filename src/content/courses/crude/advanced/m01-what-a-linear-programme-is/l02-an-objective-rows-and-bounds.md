@@ -4,11 +4,11 @@ Before any blending, the digest poses the textbook case, because a problem in tw
 
 ## The three parts
 
-**The objective** is what the kernel improves: maximise 5x + 4y. It is a single linear expression in the variables, and the kernel is told whether to minimise or maximise it. A blend minimises cost; this textbook case maximises earnings. The mathematics is the same with the sign turned over.
+**The objective** is what the kernel improves: maximise 5x + 4y. A blend minimises cost; this textbook case maximises earnings. The kernel minimises, or maximises when asked.
 
 **The rows** are the shared constraints: 6x + 4y <= 24 and 1x + 2y <= 6. Each row is a linear expression, a sense (<=, = or >=) and a right-hand side. A row ties the variables together, because it limits what they do jointly.
 
-**The bounds** belong to one variable each: here x and y are at least 0. The kernel keeps bounds as bounds, never as extra rows. That matters in a blend, where every component has a floor and a tank limit. Kept as bounds, they stay attached to one component each, and they report cleanly as a component sitting at its availability, which module three reads at Apapa.
+**The bounds** belong to one variable each: here x and y are at least 0. The digest says how the kernel takes them: "The bounds are passed apart from the rows: the kernel shifts every lower bound to the origin, and it gives a bound no shadow price." In a blend every component has a floor and a tank limit, and a component held at its limit reports as a component at its availability, which module three reads at Apapa.
 
 ## The answer and how it is reported
 
@@ -24,7 +24,7 @@ Read it in order. The status is optimal, so a best point exists and was found. T
 
 The same three parts build every recipe. The variables are the component volumes. The objective is cost, the sum of each volume times its price, minimised. The rows are the batch, where the volumes sum to the target, and one row for each limit of each specification. The bounds are each component's minimum and its availability in tank.
 
-Setting a problem up well is mostly a matter of putting each fact in the right part. A tank limit written as a row is still correct, but it is carried as a row and it is priced as a row. A specification cannot be a bound, because it constrains a mixture of volumes and never one volume alone.
+The kernel prices each row and gives a bound no shadow price, so which part a fact goes in decides whether it comes back with a price. A specification limits a blended property of several volumes at once, so it is written as a row. A tank limit belongs to one volume, so it is passed as a bound.
 
 {{panel:crude-recipe-explorer}}
 
