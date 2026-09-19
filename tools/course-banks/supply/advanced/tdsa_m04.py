@@ -1,0 +1,116 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# supply Expert m04, From Depot Gate to Nozzle. Digest SECTIONS 20 and 21.
+# 15 questions. Every margin, levy, tax, cap and the exchange rate behind the
+# landed cost are the course's invented BADAGRY figures.
+
+q(1, "The course's invented value added tax of 6.5 percent is the last element of the BADAGRY pump price. Which figure is it a percent of?",
+ "The running total above it, 1009.2253 naira a litre",
+ ["The landed cost at the depot gate, 884.6753 naira a litre",
+  "The pump price it forms, 1074.8249 naira a litre",
+  "The running total after the dealer, 999.6253 naira a litre"],
+ "Its basis is percent_of_running, so it adds that percent of everything above it: the landed cost, every invented margin and the invented levies.")
+
+q(3, "The same invented 6.5 percent is typed as a percent of the landed cost instead of the running total. What does buildPumpPrice report?",
+ "A pump price of 1066.7292 naira a litre, complete true.",
+ ["A pump price of 1074.8249 naira a litre, since a rate that is supplied gives the same amount on any basis.",
+  "A pump price of 1031.3197 naira a litre, labelled a floor because the tax no longer reads the margins.",
+  "A refusal, since percent_of_landed is a basis for the import walk and not a pump price element."],
+ "The basis changes the amount and every rate is still supplied, so the build-up is complete. Nothing in 1066.7292 looks wrong; only its base differs from the running-total build.")
+
+q(0, "The invented depot and terminal margin is 21 naira a litre. What does it do to the running total on BADAGRY?",
+ "It takes it from 884.6753 to 905.6753 naira a litre.",
+ ["It adds 21 percent of 884.6753 naira a litre to the landed cost.",
+  "It takes it from 1009.2253 to 1074.8249 naira a litre.",
+  "It sets the terminal's share at 0.823088."],
+ "A per_litre element adds its amount wherever it sits. The running column is the price so far, and the terminal's share is 0.019538.")
+
+q(2, "Two pump elements, the invented dealer margin and the statutory levies, are blank. Which answer does the waterfall engine give?",
+ "complete false, both elements named as missing, price 1031.3197 naira a litre, labelled a floor.",
+ ["complete true at 1031.3197 naira a litre, with the two blank elements taken as zero and named in assumedZero.",
+  "REFUSED: A landed cost per litre is required, since the chain cannot be walked with two elements missing.",
+  "complete false with the price reported as none, since the tax cannot read a running total with gaps in it."],
+ "The waterfall keeps both missing elements visible and prints its sentence \"A FLOOR, not a price: 2 rate(s) not supplied.\" A figure missing two invented elements is not a price anyone can check a cap on.")
+
+q(1, "Against the course's invented cap of 1040.0000 naira a litre, the complete BADAGRY price of 1074.8249 gives which answer?",
+ "A shortfall of 34.8249 naira a litre, and the cap covers the chain: false.",
+ ["A shortfall of -34.8249 naira a litre, and the cap covers the chain: true.",
+  "A shortfall of -75.1751 naira a litre, and the cap covers the chain: true.",
+  "A shortfall of 34.8249 naira a litre, and the cap covers the chain: true."],
+ "The shortfall is the chain's price less the cap. A positive figure means the cap is below the chain's cost, so the verdict is false.")
+
+q(3, "The invented cap is 1150.0000 naira a litre. What does a shortfall of -75.1751 naira a litre mean?",
+ "The cap sits above the chain's price, and the cap covers the chain.",
+ ["The chain loses 75.1751 naira on every litre it sells under the cap.",
+  "The cap is below the chain's cost by 75.1751 naira a litre.",
+  "The government share must fall by 75.1751 naira to meet it."],
+ "A negative shortfall means the cap sits above the price of 1074.8249 naira a litre. A positive one would mean the cap is below the chain's cost.")
+
+q(0, "A reader sets the floor price of 1031.3197 naira a litre beside the invented cap of 1040.0000. Why is no cap verdict worth reading from that pair?",
+ "The floor is a price the full build-up cannot fall below, and the complete price of 1074.8249 sits above that cap.",
+ ["The floor is always above the complete price, so a cap that clears the floor clears the full chain as well.",
+  "The engine applies the cap to the landed cost only, so the margins left blank play no part in the verdict.",
+  "The cap is invented and the floor is measured, so a comparison between the two carries no information."],
+ "With every invented rate supplied the shortfall at 1040.0000 is 34.8249 and the verdict false. A cap verdict is worth reading only on a build-up the engine reports as complete.")
+
+q(2, "marginWaterfall groups the invented BADAGRY build-up by recipient. What is the Government row?",
+ "75.1996 naira a litre, the levies and the value added tax together",
+ ["0.069965 naira a litre, the Government share of price",
+  "9.6000 naira a litre, the statutory levies alone",
+  "31.2500 naira a litre, the dealer margin it regulates"],
+ "Government is the one recipient with two elements. The invented levies add 9.6000 and the invented tax is added on the running total of 1009.2253, and the grouping reports the two together with a share of 0.069965.")
+
+q(3, "The Government share of the BADAGRY price is 0.069965 and the invented tax rate is 6.5 percent. What separates the two figures?",
+ "The rate applies to the tax row's base; the share is a fraction of the final price from both government elements.",
+ ["The share is the invented tax rate restated after rounding, so the two figures describe one quantity.",
+  "The share is the tax rate applied to the landed cost, and the rate is the tax applied to the running total.",
+  "The rate is a fraction of the price, and the share is the rate applied to the running total above it."],
+ "A rate belongs to a base and a share belongs to a price. 0.069965 is 75.1996 of 1074.8249 naira a litre; 6.5 percent is what the tax row applies to 1009.2253.")
+
+q(1, "The course removes the recipient from the invented bridging element. How does marginWaterfall treat it?",
+ "It groups the 24.5000 naira a litre as Unattributed.",
+ ["It assigns the element to Chain, the recipient the template gives bridging.",
+  "It drops the element and closes the grouping on a lower price.",
+  "It refuses the grouping until every element names a recipient."],
+ "The engine keeps the money visible and names it as unattributed, so the gap in the labelling is on the page. It does not guess the recipient.")
+
+q(0, "marginWaterfall is handed a build-up that the engine refused. What does it return?",
+ "REFUSED: A landed cost per litre is required.",
+ ["Every share reported as none.",
+  "REFUSED: An FOB price and its basis are required.",
+  "One Unattributed row holding the price."],
+ "A refused build-up has no price, and a share of a price that does not exist is a share of nothing, so the grouping refuses with the same sentence.")
+
+q(2, "In the invented BADAGRY grouping, which recipient row comes first, and why?",
+ "Product (landed) at 884.6753 naira a litre, because the grouping runs largest first.",
+ ["Terminal at 21.0000 naira a litre, as the template's order puts it first.",
+  "Government at 75.1996 naira a litre, as statutory elements lead.",
+  "Dealer at 31.2500 naira a litre, as the nozzle end is listed first."],
+ "marginWaterfall groups the build-up by recipient, largest first. The landed cost is grouped as Product (landed) with a share of 0.823088.")
+
+q(3, "Suppose an invented per-litre margin were moved to sit after the value added tax. Which amount would change?",
+ "The tax amount, since the margin would leave the running total it reads.",
+ ["The margin's own amount, since a per-litre element depends on its place.",
+  "The landed cost, since the running total starts from a different figure.",
+  "None, since every element is summed onto the same price in the end."],
+ "A per-litre element is the same wherever it sits. A percent_of_running element depends on everything above it, so its place is part of its value.")
+
+q(1, "The invented dealer margin shows a share of price of 0.029075. What is that share a fraction of?",
+ "The final pump price, 1074.8249 naira a litre.",
+ ["The landed cost, 884.6753 naira a litre.",
+  "The running total above the dealer, 968.3753 naira a litre.",
+  "The margins alone, before levies and tax."],
+ "The share column divides each amount by the final price, so it means something only once the build-up is complete. 31.2500 naira a litre over 1074.8249 is the dealer's 0.029075.")
+
+q(0, "buildPumpPrice is called for BADAGRY with no landed cost per litre. What does it return?",
+ "REFUSED: A landed cost per litre is required.",
+ ["A waterfall starting from zero, labelled a floor, with the landed cost missing.",
+  "A waterfall starting from 884.6753 naira a litre, the last landed cost it saw.",
+  "REFUSED: Cargo quantity is required."],
+ "The waterfall starts from the landed cost per litre at the depot gate. Without it there is nothing to add the invented elements onto, and the engine refuses.")
+
+emit(Q, '/root/wt-md-supply-nextgen/tools/course-banks/supply/advanced/tdsa_m04.json', expect_n=15)
+finish()
