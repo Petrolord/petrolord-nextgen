@@ -35,7 +35,7 @@ q(2, "The Agbor curve prints weightedAverageCostPerTonne 18.7868 USD. How does S
  ["The mean of the six costs per tonne, each counted once",
   "netAnnualCostOfAll over paysForItselfTonnes, 5310.000 t",
   "The middle step's cost per tonne"],
- "SECTION 20: the weighted average is the net annual cost of all the measures over the total tonnes, 290443.84 USD over 15460.000 t. The mean of the six costs counted once is the plain mean, -29.7913 USD, which the digest computes for contrast.")
+ "SECTION 20: the weighted average is the net annual cost of all the measures over the total tonnes, 290443.84 USD over 15460.000 t. The mean of the six costs per tonne, each counted once, is -29.7913 USD (computed here).")
 
 q(2, "SECTION 20 computes a plain mean of the six Agbor costs per tonne, -29.7913 USD. What does the digest say that plain mean does?",
  "It weights a small measure the same as a large one.",

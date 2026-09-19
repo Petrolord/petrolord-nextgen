@@ -25,11 +25,11 @@ q(1, "The invented saving is declared on LHV and its emission factor on HHV. Wha
  "SECTION 23: REFUSED: The energy saving is on LHV, the emission factor is on HHV. A gigajoule on one heating value basis is a different amount of fuel on the other, so they cannot be multiplied together. The basisNote is the answer when no basis is declared at all.")
 
 q(0, "The invented saving is sent with no heating value basis declared. What does priceSaving do?",
- "It computes, and attaches a basisNote saying all three must share one basis",
+ "It returns a basisNote: the saving, price and factor must share one basis",
  ["It refuses: the energy saving is on LHV and the emission factor on HHV",
   "It reads every quantity as LHV by default and returns basis LHV with no note",
   "It refuses: an energy saving and a basis are both required to price"],
- "SECTION 23, no basis declared: basisNote \"No heating value basis declared. The saving, the fuel price and the emission factor must all be on the same one (IPCC default factors are on net calorific value, which is LHV).\" The LHV and HHV refusal needs two bases declared, and the only saving refusal printed is for a blank saving.")
+ "SECTION 23, no basis declared: basisNote \"No heating value basis declared. The saving, the fuel price and the emission factor must all be on the same one (IPCC default factors are on net calorific value, which is LHV).\" That row prints no refusal. The LHV and HHV refusal is the call with the saving on LHV and the factor on HHV, and the only saving refusal printed is for a blank saving.")
 
 q(2, "The invented saving is priced with no life and no rate. What comes back for the cost per tonne?",
  "costPerTonneCo2e none, with a note asking for the life and a discount rate",
@@ -60,11 +60,11 @@ q(0, "The same invented saving is sent to abatementCost directly, over 8 years a
  "SECTION 23, the same call made directly: capitalRecoveryFactor 0.18744402, annualisedCapital 39363.24 USD, netAnnualCost -49136.76 USD, costPerTonne -74.2270 USD, paysForItself true. -127251.65 USD is Tune the fired heaters' net annual cost in SECTION 18.")
 
 q(2, "Setting the whole implementation cost against one year's value and one year's tonnes gives which figure, and what is its status?",
- "183.5403 USD a tonne, computed here by the digest for contrast",
+ "183.5403 USD a tonne, which SECTION 23 labels (computed here)",
  ["183.5403 USD a tonne, the engine's costPerTonneCo2e output",
-  "-74.2270 USD a tonne, computed here by the digest for contrast",
+  "-74.2270 USD a tonne, which SECTION 23 labels (computed here)",
   "2.372881 years, the engine's simplePaybackYears for the saving"],
- "SECTION 23: setting the whole implementation cost against one year's value and one year's tonnes (computed here) gives 183.5403 USD a tonne. The engine's costPerTonneCo2e is -74.2270 USD, levelised over 8 years at 0.1.")
+ "SECTION 23: \"Setting the whole implementation cost against one year's value and one year's tonnes (computed here) gives 183.5403 USD a tonne.\" The engine's costPerTonneCo2e is -74.2270 USD, from abatementCost over 8 years at 0.1, and 2.372881 years is simplePaybackYears.")
 
 q(3, "SECTION 26 names what no oracle recomputes. Which of these is on that list?",
  "The simple payback, 2.372881 years",

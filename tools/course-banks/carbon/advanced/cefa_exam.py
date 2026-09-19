@@ -31,14 +31,14 @@ q(3, "Vapour recovery on the storage tanks appears in SECTION 18 at 35.4193, 14.
  ["14.5045, straight line at a rate of 0",
   "316.7568, its capital against one year",
   "-29.7913, the plain mean of the curve"],
- "Order 4 on the curve carries 35.4193, the levelised figure. 14.5045 belongs to the rate-0 column, 316.7568 to the one-year column the digest computes for contrast, and -29.7913 is the digest's unweighted mean.")
+ "SECTION 20 ranks the measures cheapest first and prints order 4 at 35.4193, the cost per tonne at 0.1 in SECTION 18. 14.5045 is the rate-0 column, 316.7568 the capital-against-one-year column marked computed here, and -29.7913 the plain mean (computed here).")
 
 q(1, "What does the curve's refusedNote say of a measure abatementCost refused?",
  "It is off the curve and out of every total until it is costed.",
  ["It is placed last on the curve at a cost per tonne of 0 USD.",
   "It stays in totalAbatementTonnes and leaves the weighted average.",
   "It is costed at a capital of 0 and named in the assumedZero field."],
- "The note in SECTION 19 keeps an uncosted measure away from the steps and from every sum until a cost exists for it.")
+ "SECTION 19, the refusedNote verbatim: \"A refused measure is off the curve and out of every total until it is costed.\" assumedZero names blank running figures only, and a refused measure is not placed on the curve at any cost.")
 
 q(0, "An invented abatement of -500 t a year is sent for the Heat integration project. Which reasons does the refusal give?",
  "A measure that adds emissions is no abatement, and its cost per tonne would change sign.",
@@ -75,7 +75,7 @@ q(3, "The 9400 t claim is run with the flare's emission not passed. Which source
  ["steam, power, vents",
   "flare",
   "steam"],
- "Leaving the flare out adds it to the unchecked list, so the basis names four sources. Three are named on the six as costed, and one, steam, once every computed source is passed.")
+ "With the flare's emission left out, the flare joins the sources the basis names, four in all. Three are named on the six as costed, and one, steam, once every computed source is passed.")
 
 q(0, "In the digest's own words, what does raising a claim beyond its source's emission do to how a measure looks?",
  "It makes the measure look cheaper as well as larger.",
@@ -126,7 +126,7 @@ q(1, "The basisNote for a saving with no basis declared says IPCC default factor
  ["Gross calorific value, which is HHV",
   "Net calorific value, which is HHV",
   "Whichever basis the saving declares"],
- "The note's parenthesis ties IPCC defaults to net calorific value and names that LHV. The course's own factor is SYNTHETIC and makes no such claim.")
+ "The basisNote closes: \"(IPCC default factors are on net calorific value, which is LHV).\" The course's factor of 56.1 kg CO2e per GJ is SYNTHETIC, and the Agbor saving declares all three quantities on LHV.")
 
 q(1, "When priceSaving calls abatementCost for the invented Agbor saving, which figure goes in as the abatement?",
  "annualTonnesCo2e, 661.980",
@@ -162,32 +162,28 @@ q(3, "How does the energyIntensity disclaimer frame the peer figure of 680 MJ a 
  ["As the Solomon Energy Intensity Index for Agbor",
   "As a benchmark the engine ships with the module",
   "As the intensity with a stream missing, a floor"],
- "The engine brings no peer of its own: whatever is compared was supplied by the user, who must hold the right to it. The disclaimer rules out the Solomon index by name.")
-
-# --- the saving's basis, returned
+ "The disclaimer's last sentence: the peer figure compared is one you supplied and have the right to use. The Solomon index is named only to say this figure is NOT it, and floor is the peerNote's word for a missing stream.")
 q(0, "Which heating value basis does priceSaving return for the invented Agbor saving?",
  "LHV, the basis all three quantities declare",
  ["HHV, the basis the factor would need",
   "None, with the basisNote attached",
   "LHV for money and HHV for carbon"],
- "The Agbor saving, price and factor are all declared on LHV and the output table reads basis LHV. A basisNote comes back only when nothing is declared, and mixed bases are refused.")
+ "SECTION 23: the saving, the fuel price and the factor are all declared on LHV, and the output table reads basis LHV. The basisNote is the no-basis-declared row, and a saving on LHV with a factor on HHV is refused.")
 
 q(2, "The flare's emission is left out and the over-claims column on the 9400 t curve comes back empty. How is that empty column read?",
  "The flare's claim was not checked, and the basis names the flare.",
  ["The flare's 9400 t claim fits within what the flare emits.",
   "The curve found no over-claim, so it gives a verdict on the target.",
   "The flare's claim was refused and taken off the curve and totals."],
- "No emission, no check: the empty column speaks only for sources that were passed. The verdict on that row is still none.")
-
-# --- back to the cost of a tonne
+ "SECTION 21: \"Where a claim acts on a source whose emission is not passed, it cannot be checked, the verdict is none and the basis names the source.\" That row prints the basis naming steam, flare, power, vents and a total abatement of 18660.000 t, so the claim stays on the curve.")
 q(1, "What does SECTION 18 print for Solar for purchased power with the whole capital set against one year?",
- "823.3333 USD a tonne, computed here",
- ["764.5161 USD a tonne, computed here",
+ "823.3333 USD a tonne, in the one-year column",
+ ["764.5161 USD a tonne, in the one-year column",
   "-13.5714 USD a tonne, at a rate of 0",
   "45.8573 USD a tonne, at a rate of 0.1"],
- "The one-year column is the digest's own arithmetic, shown as the wrong route: 823.3333 for Solar and 764.5161 for flare recovery. -13.5714 and 45.8573 are engine costs at the two rates.")
+ "Of SECTION 18's two columns, the capital-against-one-year column is the one marked computed here: 823.3333 for Solar and 764.5161 for flare recovery. -13.5714 is Solar's cost per tonne at a rate of 0 and 45.8573 its cost per tonne at 0.1.")
 
-q(3, "On a measure with capital, which box left blank draws a refusal whose words name the one-year trap?",
+q(3, "On a measure with capital, which box left blank draws the refusal that speaks of setting a one-off capital cost against one year's saving?",
  "The life",
  ["The discount rate",
   "The capital cost",
@@ -248,28 +244,28 @@ q(3, "Which of these abatementCost calls returns costPerTonne none without refus
  ["The abatement left blank",
   "An abatement of -500 t a year",
   "The capital cost left blank"],
- "A typed zero is accepted, with nothing to divide by and the flag false. A blank abatement, a negative one and a blank capital each draw a refusal.")
+ "The typed zero is the one call of the four that SECTION 19 prints as accepted, and it answers costPerTonne none with paysForItself false. The blank abatement, the -500 t and the blank capital are each refused.")
 
-q(2, "The 9400 t curve prints a residual to target of 0.000 t. Why does the course read no target met from it?",
- "Its meetsTarget is none: the claim exceeds what the flare emits.",
- ["Its residual is recomputed by an oracle and graded as a miss.",
-  "Its target is 30 percent of the curve's total, 18660.000 t.",
-  "Its residual is computed here by the digest for contrast."],
- "That row adds up tonnes that do not exist, and the engine withholds the verdict. The residual is an engine output that no oracle recomputes and nothing grades.")
+q(2, "The 9400 t curve prints a residual to target of 0.000 t. Which meetsTarget does the same row print?",
+ "none, beside that residual of 0.000 t",
+ ["true, as the residual to target is 0.000 t",
+  "true, and labelled an upper bound",
+  "false, with a residual of 1370.083 t"],
+ "SECTION 21 prints meetsTarget none on that row, and says where a claim exceeds what its source emits the curve adds up tonnes that do not exist. The residual of 1370.083 t is the six measures as costed, whose basis names sources with no computed emission.")
 
 q(1, "What does SECTION 18 print as the Heat integration project's cost per tonne at a rate of 0 (straight line)?",
  "-66.6667 USD a tonne",
  ["-14.2492, at 0.1",
   "-120.5882, capital 0 typed",
   "688.2353 USD, one year"],
- "Straight line: -66.6667. At 0.1 it is -14.2492; with no capital -120.5882; and 688.2353 is the one-year route, shown for contrast.")
+ "Straight line, the rate-0 column: -66.6667. The 0.1 column gives -14.2492, capital 0 typed gives -120.5882 (SECTION 19), and 688.2353 sits in the one-year column marked computed here.")
 
 q(0, "Which of these does SECTION 25 list as a rule in force for the path?",
  "A measure with no start year is named.",
  ["A measure with no start year starts in the baseline year.",
   "A baseline of zero is accepted from an inventory that computed nothing.",
   "A year whose measures abate more than the baseline is drawn at zero."],
- "The rules table pairs the non-positive baseline refusal with naming the unscheduled measure, and adds the over-abatement refusal from MD45-1. SECTION 22 prints the unscheduled measure left off the path.")
+ "SECTION 25 places three path rules in SECTION 22: a baseline that is not positive is refused, a measure with no start year is named, and a year whose scheduled measures abate more than the baseline is refused. SECTION 22 prints the unscheduled measure left off the path.")
 
 q(3, "Name the curve's costliest step and the year it joins the path.",
  "Flare gas recovery, 2030",

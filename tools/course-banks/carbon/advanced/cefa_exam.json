@@ -30,7 +30,7 @@
    "35.4193, levelised at the rate of 0.1"
   ],
   "answer": 3,
-  "explanation": "Order 4 on the curve carries 35.4193, the levelised figure. 14.5045 belongs to the rate-0 column, 316.7568 to the one-year column the digest computes for contrast, and -29.7913 is the digest's unweighted mean."
+  "explanation": "SECTION 20 ranks the measures cheapest first and prints order 4 at 35.4193, the cost per tonne at 0.1 in SECTION 18. 14.5045 is the rate-0 column, 316.7568 the capital-against-one-year column marked computed here, and -29.7913 the plain mean (computed here)."
  },
  {
   "prompt": "What does the curve's refusedNote say of a measure abatementCost refused?",
@@ -41,7 +41,7 @@
    "It is costed at a capital of 0 and named in the assumedZero field."
   ],
   "answer": 1,
-  "explanation": "The note in SECTION 19 keeps an uncosted measure away from the steps and from every sum until a cost exists for it."
+  "explanation": "SECTION 19, the refusedNote verbatim: \"A refused measure is off the curve and out of every total until it is costed.\" assumedZero names blank running figures only, and a refused measure is not placed on the curve at any cost."
  },
  {
   "prompt": "An invented abatement of -500 t a year is sent for the Heat integration project. Which reasons does the refusal give?",
@@ -96,7 +96,7 @@
    "steam, flare, power, vents"
   ],
   "answer": 3,
-  "explanation": "Leaving the flare out adds it to the unchecked list, so the basis names four sources. Three are named on the six as costed, and one, steam, once every computed source is passed."
+  "explanation": "With the flare's emission left out, the flare joins the sources the basis names, four in all. Three are named on the six as costed, and one, steam, once every computed source is passed."
  },
  {
   "prompt": "In the digest's own words, what does raising a claim beyond its source's emission do to how a measure looks?",
@@ -173,7 +173,7 @@
    "Whichever basis the saving declares"
   ],
   "answer": 1,
-  "explanation": "The note's parenthesis ties IPCC defaults to net calorific value and names that LHV. The course's own factor is SYNTHETIC and makes no such claim."
+  "explanation": "The basisNote closes: \"(IPCC default factors are on net calorific value, which is LHV).\" The course's factor of 56.1 kg CO2e per GJ is SYNTHETIC, and the Agbor saving declares all three quantities on LHV."
  },
  {
   "prompt": "When priceSaving calls abatementCost for the invented Agbor saving, which figure goes in as the abatement?",
@@ -228,7 +228,7 @@
    "As one the user supplied and has the right to use"
   ],
   "answer": 3,
-  "explanation": "The engine brings no peer of its own: whatever is compared was supplied by the user, who must hold the right to it. The disclaimer rules out the Solomon index by name."
+  "explanation": "The disclaimer's last sentence: the peer figure compared is one you supplied and have the right to use. The Solomon index is named only to say this figure is NOT it, and floor is the peerNote's word for a missing stream."
  },
  {
   "prompt": "Which heating value basis does priceSaving return for the invented Agbor saving?",
@@ -239,7 +239,7 @@
    "LHV for money and HHV for carbon"
   ],
   "answer": 0,
-  "explanation": "The Agbor saving, price and factor are all declared on LHV and the output table reads basis LHV. A basisNote comes back only when nothing is declared, and mixed bases are refused."
+  "explanation": "SECTION 23: the saving, the fuel price and the factor are all declared on LHV, and the output table reads basis LHV. The basisNote is the no-basis-declared row, and a saving on LHV with a factor on HHV is refused."
  },
  {
   "prompt": "The flare's emission is left out and the over-claims column on the 9400 t curve comes back empty. How is that empty column read?",
@@ -250,21 +250,21 @@
    "The flare's claim was refused and taken off the curve and totals."
   ],
   "answer": 2,
-  "explanation": "No emission, no check: the empty column speaks only for sources that were passed. The verdict on that row is still none."
+  "explanation": "SECTION 21: \"Where a claim acts on a source whose emission is not passed, it cannot be checked, the verdict is none and the basis names the source.\" That row prints the basis naming steam, flare, power, vents and a total abatement of 18660.000 t, so the claim stays on the curve."
  },
  {
   "prompt": "What does SECTION 18 print for Solar for purchased power with the whole capital set against one year?",
   "options": [
-   "764.5161 USD a tonne, computed here",
-   "823.3333 USD a tonne, computed here",
+   "764.5161 USD a tonne, in the one-year column",
+   "823.3333 USD a tonne, in the one-year column",
    "-13.5714 USD a tonne, at a rate of 0",
    "45.8573 USD a tonne, at a rate of 0.1"
   ],
   "answer": 1,
-  "explanation": "The one-year column is the digest's own arithmetic, shown as the wrong route: 823.3333 for Solar and 764.5161 for flare recovery. -13.5714 and 45.8573 are engine costs at the two rates."
+  "explanation": "Of SECTION 18's two columns, the capital-against-one-year column is the one marked computed here: 823.3333 for Solar and 764.5161 for flare recovery. -13.5714 is Solar's cost per tonne at a rate of 0 and 45.8573 its cost per tonne at 0.1."
  },
  {
-  "prompt": "On a measure with capital, which box left blank draws a refusal whose words name the one-year trap?",
+  "prompt": "On a measure with capital, which box left blank draws the refusal that speaks of setting a one-off capital cost against one year's saving?",
   "options": [
    "The discount rate",
    "The capital cost",
@@ -360,18 +360,18 @@
    "An abatement of 0 typed"
   ],
   "answer": 3,
-  "explanation": "A typed zero is accepted, with nothing to divide by and the flag false. A blank abatement, a negative one and a blank capital each draw a refusal."
+  "explanation": "The typed zero is the one call of the four that SECTION 19 prints as accepted, and it answers costPerTonne none with paysForItself false. The blank abatement, the -500 t and the blank capital are each refused."
  },
  {
-  "prompt": "The 9400 t curve prints a residual to target of 0.000 t. Why does the course read no target met from it?",
+  "prompt": "The 9400 t curve prints a residual to target of 0.000 t. Which meetsTarget does the same row print?",
   "options": [
-   "Its residual is recomputed by an oracle and graded as a miss.",
-   "Its target is 30 percent of the curve's total, 18660.000 t.",
-   "Its meetsTarget is none: the claim exceeds what the flare emits.",
-   "Its residual is computed here by the digest for contrast."
+   "true, as the residual to target is 0.000 t",
+   "true, and labelled an upper bound",
+   "none, beside that residual of 0.000 t",
+   "false, with a residual of 1370.083 t"
   ],
   "answer": 2,
-  "explanation": "That row adds up tonnes that do not exist, and the engine withholds the verdict. The residual is an engine output that no oracle recomputes and nothing grades."
+  "explanation": "SECTION 21 prints meetsTarget none on that row, and says where a claim exceeds what its source emits the curve adds up tonnes that do not exist. The residual of 1370.083 t is the six measures as costed, whose basis names sources with no computed emission."
  },
  {
   "prompt": "What does SECTION 18 print as the Heat integration project's cost per tonne at a rate of 0 (straight line)?",
@@ -382,7 +382,7 @@
    "688.2353 USD, one year"
   ],
   "answer": 1,
-  "explanation": "Straight line: -66.6667. At 0.1 it is -14.2492; with no capital -120.5882; and 688.2353 is the one-year route, shown for contrast."
+  "explanation": "Straight line, the rate-0 column: -66.6667. The 0.1 column gives -14.2492, capital 0 typed gives -120.5882 (SECTION 19), and 688.2353 sits in the one-year column marked computed here."
  },
  {
   "prompt": "Which of these does SECTION 25 list as a rule in force for the path?",
@@ -393,7 +393,7 @@
    "A year whose measures abate more than the baseline is drawn at zero."
   ],
   "answer": 0,
-  "explanation": "The rules table pairs the non-positive baseline refusal with naming the unscheduled measure, and adds the over-abatement refusal from MD45-1. SECTION 22 prints the unscheduled measure left off the path."
+  "explanation": "SECTION 25 places three path rules in SECTION 22: a baseline that is not positive is refused, a measure with no start year is named, and a year whose scheduled measures abate more than the baseline is refused. SECTION 22 prints the unscheduled measure left off the path."
  },
  {
   "prompt": "Name the curve's costliest step and the year it joins the path.",

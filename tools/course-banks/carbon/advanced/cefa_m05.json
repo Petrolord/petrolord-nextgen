@@ -24,13 +24,13 @@
  {
   "prompt": "The invented saving is sent with no heating value basis declared. What does priceSaving do?",
   "options": [
-   "It computes, and attaches a basisNote saying all three must share one basis",
+   "It returns a basisNote: the saving, price and factor must share one basis",
    "It refuses: the energy saving is on LHV and the emission factor on HHV",
    "It reads every quantity as LHV by default and returns basis LHV with no note",
    "It refuses: an energy saving and a basis are both required to price"
   ],
   "answer": 0,
-  "explanation": "SECTION 23, no basis declared: basisNote \"No heating value basis declared. The saving, the fuel price and the emission factor must all be on the same one (IPCC default factors are on net calorific value, which is LHV).\" The LHV and HHV refusal needs two bases declared, and the only saving refusal printed is for a blank saving."
+  "explanation": "SECTION 23, no basis declared: basisNote \"No heating value basis declared. The saving, the fuel price and the emission factor must all be on the same one (IPCC default factors are on net calorific value, which is LHV).\" That row prints no refusal. The LHV and HHV refusal is the call with the saving on LHV and the factor on HHV, and the only saving refusal printed is for a blank saving."
  },
  {
   "prompt": "The invented saving is priced with no life and no rate. What comes back for the cost per tonne?",
@@ -80,12 +80,12 @@
   "prompt": "Setting the whole implementation cost against one year's value and one year's tonnes gives which figure, and what is its status?",
   "options": [
    "183.5403 USD a tonne, the engine's costPerTonneCo2e output",
-   "-74.2270 USD a tonne, computed here by the digest for contrast",
-   "183.5403 USD a tonne, computed here by the digest for contrast",
+   "-74.2270 USD a tonne, which SECTION 23 labels (computed here)",
+   "183.5403 USD a tonne, which SECTION 23 labels (computed here)",
    "2.372881 years, the engine's simplePaybackYears for the saving"
   ],
   "answer": 2,
-  "explanation": "SECTION 23: setting the whole implementation cost against one year's value and one year's tonnes (computed here) gives 183.5403 USD a tonne. The engine's costPerTonneCo2e is -74.2270 USD, levelised over 8 years at 0.1."
+  "explanation": "SECTION 23: \"Setting the whole implementation cost against one year's value and one year's tonnes (computed here) gives 183.5403 USD a tonne.\" The engine's costPerTonneCo2e is -74.2270 USD, from abatementCost over 8 years at 0.1, and 2.372881 years is simplePaybackYears."
  },
  {
   "prompt": "SECTION 26 names what no oracle recomputes. Which of these is on that list?",

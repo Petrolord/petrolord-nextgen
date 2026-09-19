@@ -30,11 +30,11 @@ q(3, "Which targetBasis does SECTION 21 print on the curve where Flare gas recov
   "not assessed: no computed emission to check the claims on steam"],
  "SECTION 21 prints \"not assessed: claims exceed what a source emits\" on that row. The steam, power, vents basis is the six measures as costed, the basis naming the flare is the same claim with the flare's emission not passed, and the steam-only basis is the curve with every computed source passed.")
 
-q(1, "Rerun that 9400 t curve, this time giving it no flare emission. Which result appears?",
+q(1, "Rerun that 9400 t curve, this time giving it no flare emission. What do the over-claims column and the targetBasis print?",
  "none, and the targetBasis names the flare among the sources it could not check",
  ["flare: claimed 9400.000 against 7562.133 emitted, found as on the row before",
   "flare: claimed 9400.000 against 0.000 emitted, since no emission was passed",
-  "none, and meetsTarget reads true on the 18660.000 t total against the target"],
+  "none, and the targetBasis reads claims exceed what a source emits"],
  "SECTION 21, the same claim with the flare's emission not passed: over-claims none, meetsTarget none, targetBasis \"not assessed: no computed emission to check the claims on steam, flare, power, vents\". With nothing passed for the flare there is nothing to check the claim against.")
 
 q(0, "On the six invented Agbor measures as costed, which measures does the engine list among the unchecked claims?",

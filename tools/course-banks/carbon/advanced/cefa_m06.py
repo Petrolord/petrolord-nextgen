@@ -61,16 +61,16 @@ q(3, "Solar for purchased power is order 5 on the Agbor curve. In which year doe
 q(1, "How does oracle_energyefficiency.py model the steam trap?",
  "As an isentropic nozzle, its throat at the larger of the downstream and critical pressures",
  ["By the choked and subsonic flux formulas that the engine itself uses for the trap",
-  "As a duty ledger, the route exported as duty_ledger since MD45-1 for the saving",
+  "As a duty ledger, the route the oracle takes for the tuning saving",
   "By bisection on the downstream pressure, the route it takes for excess air"],
  "SECTION 26: the steam trap as an ISENTROPIC NOZZLE with its throat at the larger of the downstream and critical pressures, where the engine uses the choked and subsonic flux formulas. The duty ledger is the tuning saving's route and bisection is the excess air route.")
 
 q(2, "What are H1 to H4 in this course?",
  "Limits, taught as stated and never graded",
- ["Rules MD5-0 put in force, each with a figure",
+ ["Rules in force, each shown with a figure",
   "Figures to compute with at the owner's rates",
-  "Rules MD45-1 put in force, each with its section"],
- "SECTION 25: HELD, taught as stated limits and never graded. The MD5-0 and MD45-1 rules are printed in their own tables, each as the engine answers now with the section that prints it.")
+  "Rules in force, each with its section"],
+ "SECTION 25: HELD, taught as stated limits and never graded. The rules in force are printed in tables of their own, each as the engine answers now with the section that prints it, and H1 to H4 are not among them.")
 
 q(1, "Which figure is both the Agbor curve's totalAbatementTonnes and the path's abated tonnes in 2031?",
  "15460.000 t",
@@ -88,10 +88,10 @@ q(1, "Two outputs of the Agbor curve are on SECTION 26's list of what neither or
 
 q(3, "How does oracle_carbonabatement.py compute combustion?",
  "By mass, in exact rationals",
- ["In floating point, by a closed form",
+ ["As a ledger, the route it takes for the inventory",
   "As a species ledger whose mass balance closes",
   "By bisection on the stack oxygen reading"],
- "SECTION 26: combustion by MASS in exact rationals (kg of carbon times the CO2/C and CH4/C mass ratios, molar masses built from atomic weights). The species ledger is oracle_energyefficiency.py's route, and bisection is its route for excess air; exact rationals rule out floating point.")
+ "SECTION 26: combustion by MASS in exact rationals (kg of carbon times the CO2/C and CH4/C mass ratios, molar masses built from atomic weights). The ledger is its route for the inventory, the species ledger is oracle_energyefficiency.py's combustion route, and bisection is that oracle's route for excess air.")
 
 q(2, "The engine finds the pinch from a cascade. Which route does the efficiency oracle take to it?",
  "By the largest heat deficit, with no cascade",
