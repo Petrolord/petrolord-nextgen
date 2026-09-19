@@ -11,7 +11,7 @@
   "explanation": "The C3H8 row reads 5 in the c + h/4 + s - o/2 column. CH4 reads 2, C2H6 3.5, and both inerts 0."
  },
  {
-  "prompt": "SECTION 11 says the air's nitrogen is the rest of the stoichiometric air once its oxygen is met. Which figure does it print for it, in kmol per kmol fuel?",
+  "prompt": "SECTION 11 says the air's nitrogen is the rest of the stoichiometric air. Which figure does it print for it, in kmol per kmol fuel?",
   "options": [
    "9.975652",
    "8.999152",
@@ -85,7 +85,7 @@
    "9.5230 percent"
   ],
   "answer": 3,
-  "explanation": "9.5230 percent, beside 10.925631 kmol of air per kmol fuel. 13.9199 is the course's 2.8 target, 32.1223 the current 5.5 reading and 55.7461 a reading of 8."
+  "explanation": "9.5230 percent, beside 10.925631 kmol of air per kmol fuel. 13.9199 is the Isiokpo 2.8 target, 32.1223 the current 5.5 reading and 55.7461 a reading of 8."
  },
  {
   "prompt": "Tuned to 2.8 percent and read on the higher heating value, how big is the heater's total loss?",
@@ -198,7 +198,7 @@
   "explanation": "The 4.5 row prints target efficiency 86.9933, fuelSavingPercent 0.6786 and annualEnergySavedGJ 2782.362. 5214.422 is the 3.5 row, 6742.370 the 2.8 row and 8337.934 the 2.0 row, all against 410000 GJ a year (invented)."
  },
  {
-  "prompt": "The tuning sweep's lowest target sits on the declared 2 percent floor. What target efficiency on LHV does it print there?",
+  "prompt": "The invented Isiokpo tuning sweep's lowest target sits on the declared 2 percent floor. What target efficiency on LHV does it print there?",
   "options": [
    "87.8476 percent",
    "88.1965 percent",
@@ -233,7 +233,7 @@
  {
   "prompt": "The invented Isiokpo trap is called with no downstream pressure at all. Where does SECTION 15 say it is taken to discharge?",
   "options": [
-   "Into a header at 5 bar a, still choked.",
+   "At 5 bar a downstream, still choked.",
    "At its critical ratio, 0.5774 of 9 bar a.",
    "To atmosphere, ATMOSPHERE_BAR_A, 1.01325 bar a.",
    "Nowhere: the call is refused as blank."
@@ -242,7 +242,7 @@
   "explanation": "SECTION 15: with no downstream pressure given the trap vents to ATMOSPHERE_BAR_A, 1.01325 bar a. A downstream box present but blank is refused; a box left out takes the atmosphere default."
  },
  {
-  "prompt": "Raise the header pressure the trap blows into to 6 bar a. What happens to choked, and to the year's loss?",
+  "prompt": "Raise the invented Isiokpo trap's downstream pressure to 6 bar a. What happens to choked, and to the year's loss?",
   "options": [
    "Choked true, 355.757 tonnes a year",
    "Choked false, 348.419 tonnes a year",
@@ -321,13 +321,13 @@
  {
   "prompt": "The choked-flow note for the invented Isiokpo trap names a pressure ratio of 0.1126. Which call is that ratio from?",
   "options": [
-   "The call with a header at 3 bar a",
+   "The call at 3 bar a downstream",
    "The critical ratio at the saturated exponent",
    "The call with no downstream pressure given",
-   "The call with a header at 8 bar a"
+   "The call at 8 bar a downstream"
   ],
   "answer": 2,
-  "explanation": "The downstream table prints the left-out case at a pressure ratio of 0.112583, which the note prints as 0.1126. 3 bar a prints 0.333333 and 8 bar a 0.888889; the critical ratio at 1.135 is 0.577430."
+  "explanation": "The trap's record gives no downstream pressure, and with none given SECTION 15 takes it to vent to atmosphere, 1.01325 bar a; the choked-flow note printed for it names 0.1126. The downstream table prints 3 bar a at 0.333333 and 8 bar a at 0.888889, and the same note names the critical 0.5774 at 1.135."
  },
  {
   "prompt": "Someone types 9000 into the trap's hours box. Which answer comes back?",
@@ -352,7 +352,7 @@
   "explanation": "SECTION 16 prints Fuel not burned reheating makeup 99227.28, Raw water not bought 22176.00 and Treatment not repeated 54432.00 USD. The trap's cost, 7826.65 USD, is SECTION 15."
  },
  {
-  "prompt": "A return fraction of 1.2 is typed as the condensate target. Which answer comes back?",
+  "prompt": "A return fraction of 1.2 is typed as the target of the invented condensate case. Which answer comes back?",
   "options": [
    "REFUSED: Return fractions must lie between 0 and 1.",
    "REFUSED: The target return (0.25) is below the current return (0.35). Returning less condensate is a cost, so there is nothing to value.",
@@ -396,7 +396,7 @@
   "explanation": "SECTION 17: a stream is hot when its supply is above its target. C2 goes from 57 to 104 C, so it is cold, as C1 is. H1 and H2 have supplies above their targets and are hot, whatever their CP."
  },
  {
-  "prompt": "In the SECTION 17 problem table at 15 C, what surplus does the interval from shifted 148.500 C to 111.500 C carry?",
+  "prompt": "In the SECTION 17 problem table at 15 C for the invented Isiokpo streams, what surplus does the interval from shifted 148.500 C to 111.500 C carry?",
   "options": [
    "22.050 kW",
    "-3.600 kW",

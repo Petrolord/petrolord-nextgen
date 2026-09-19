@@ -42,8 +42,8 @@ q(2, "The stack loss section relates the invented Isiokpo heater's HHV dry flue 
  "9.9883 x 840.9925 / 930.6273: the same kilojoules over a different heating value.",
  ["9.9883 x 930.6273 / 840.9925, the heating values swapped.",
   "9.9883 less 8.4741 plus the 1.8000 radiation loss, carried on both bases.",
-  "The HHV total loss of 22.0712 less the HHV moisture loss of 11.2450 and radiation."],
- "The stack loss section: the dry flue gas loss is the same kilojoules on both bases, divided by a different heating value: 9.9883 x 840.9925 / 930.6273 = 9.0262 (computed here). 840.9925 and 930.6273 are the fuel's lhvMJPerKmolFuel and hhvMJPerKmolFuel.")
+  "9.9883 x 77.9288 / 86.4029, the two current efficiencies in place of the heating values."],
+ "The stack loss section: the dry flue gas loss is the same kilojoules on both bases, divided by a different heating value: 9.9883 x 840.9925 / 930.6273 = 9.0262 (computed here). 840.9925 and 930.6273 are the fuel's lhvMJPerKmolFuel and hhvMJPerKmolFuel; 77.9288 and 86.4029 are the current efficiencies, which the printed relation does not use.")
 
 q(0, "stackLossEfficiency is called for the invented Isiokpo heater with the radiation and convection loss left blank. What does the stack loss section print?",
  "REFUSED: A radiation and convection loss is required and is not defaulted. It comes off a published chart against surface area and firing rate, which this module does not reproduce.",
@@ -64,7 +64,7 @@ q(1, "A radiation and convection loss of -3 is typed for the invented Isiokpo he
  ["No refusal: the loss enters the ledger as typed, and the current LHV efficiency prints above the 87.2029 percent of the 1.0 row.",
   "REFUSED: A radiation and convection loss is required and is not defaulted. It comes off a published chart against surface area and firing rate, which this module does not reproduce.",
   "No refusal: a negative loss is read as 0 and the unburned loss of 0.0000 is carried instead."],
- "The stack loss section prints the call with -3 refused: \"The radiation and convection loss cannot be negative: a loss below zero would add to the efficiency.\" SECTION 25 lists the rule among those MD45-1 put in force.")
+ "The stack loss section prints the call with -3 refused: \"The radiation and convection loss cannot be negative: a loss below zero would add to the efficiency.\" SECTION 25 lists it among the rules in force: a negative radiation or unburned loss is refused.")
 
 q(0, "stackLossEfficiency is called with the heating value basis \"gross\". What does the engine answer?",
  "REFUSED: The heating value basis must be LHV or HHV. \"gross\" is neither, and an efficiency on an unknown basis cannot be compared with anything.",
@@ -90,9 +90,9 @@ q(3, "The stack loss section checks a relation on all four of its rows for the i
 q(1, "Which stack and combustion air temperatures does the stack loss section give the invented Isiokpo heater?",
  "Stack 238 C, combustion air 28 C",
  ["Stack 238 C, combustion air 25 C",
-  "Stack 163 C, combustion air 28 C",
-  "Stack 238 C, combustion air 32 C"],
- "The stack loss section: stack 238 C, combustion air 28 C, both invented. 25 C is the reference temperature of the typical latent heat, 163 C the supply of stream H1 and 32 C the supply of stream C1 in SECTION 17.")
+  "Stack 400 C, combustion air 28 C",
+  "Stack 28 C, combustion air 238 C"],
+ "The stack loss section: stack 238 C, combustion air 28 C, both invented. 25 C is the reference temperature of the typical latent heat and 400 C the top of the typical flue gas cp range (SECTION 1). The last pairing, 28 C for the stack and 238 C for the air, swaps the two.")
 
 q(0, "Read the tuned line on LHV: which total loss and efficiency sit together there?",
  "Total loss 12.1524 percent, efficiency 87.8476 percent",

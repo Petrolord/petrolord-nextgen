@@ -38,10 +38,10 @@ q(2, "The invented Isiokpo tuning is asked for a target of 1.5 percent oxygen ag
   "REFUSED: A minimum safe stack oxygen is required and is not defaulted. Below some excess air a burner makes carbon monoxide, and where that point sits depends on the burner, the fuel and the draught control."],
  "SECTION 14 prints the 1.5 percent target refused with that sentence, naming both figures. The target-required refusal answers a blank target and the floor refusal a blank floor. The sweep prints no row below the floor.")
 
-q(1, "A tuning call gives a current reading and a safe floor but leaves the target empty. Which answer comes back from excessAirSaving?",
+q(1, "A tuning call for the invented Isiokpo heater gives a current reading and a safe floor but leaves the target empty. Which answer comes back from excessAirSaving?",
  "REFUSED: The target stack oxygen is required, so that it can be checked against the declared safe floor.",
  ["No refusal: the target is taken at the 2 percent floor and the saving prints as 8337.934 GJ a year.",
-  "No refusal: the target is taken at 2.8 percent, the course's case, and the saving prints as 6742.370 GJ.",
+  "No refusal: the target is taken at 2.8 percent, the Isiokpo case, and the saving prints as 6742.370 GJ.",
   "REFUSED: The two efficiencies are on different bases (LHV and HHV) and cannot be compared."],
  "SECTION 14 prints the blank target refused with that sentence. 8337.934 GJ is the 2.0 row and 6742.370 GJ the 2.8 row, each a typed target. The different-bases refusal answers a current efficiency on LHV with a target on HHV.")
 
@@ -57,14 +57,14 @@ q(2, "Reading the sweep table, which saving percent does the 3.5 percent target 
  ["0.6786",
   "2.0336",
   "1.6445"],
- "fuelSavingPercent 1.2718 belongs to the 3.5 percent target, beside 5214.422 GJ a year. The 4.5 target carries 0.6786, the floor at 2.0 carries 2.0336 and the course's 2.8 case 1.6445.")
+ "fuelSavingPercent 1.2718 belongs to the 3.5 percent target, beside 5214.422 GJ a year. The 4.5 target carries 0.6786, the floor at 2.0 carries 2.0336 and the Isiokpo 2.8 target 1.6445.")
 
 q(0, "Which target row of the SECTION 14 sweep sits on the declared 2 percent floor of the invented Isiokpo burner, and what does it save a year?",
  "The 2.0 row, 8337.934 GJ a year",
  ["The 2.8 row, 6742.370 GJ a year",
   "The 3.5 row, 5214.422 GJ a year",
   "The 1.5 row, a saving above 8337.934 GJ"],
- "The sweep prints targets of 2.0, 2.8, 3.5 and 4.5 percent, every one at or above the declared floor, and the 2.0 row saves 8337.934 GJ a year at 88.1965 percent on LHV. A target of 1.5 percent is refused, so the sweep prints no 1.5 row.")
+ "The sweep prints targets of 2.0, 2.8, 3.5 and 4.5 percent, every one at or above the declared floor, and the 2.0 row saves 8337.934 GJ a year at 88.1965 percent on LHV. A target of 1.5 percent against the 2 percent floor is refused.")
 
 q(1, "How does excessAirSaving arrive at annualEnergySavedGJ 6742.370 for the invented Isiokpo heater?",
  "It multiplies fuelSavingFraction 0.0164448058 by the 410000 GJ of fuel a year it is given.",
@@ -99,7 +99,7 @@ q(1, "The sweep is run to a target of 4.5 percent oxygen. What target efficiency
  ["87.5160 percent",
   "86.4029 percent",
   "88.1965 percent"],
- "86.9933 percent is what the 4.5 target carries, with a saving of 2782.362 GJ a year. 87.5160 goes with 3.5 and 88.1965 with the 2.0 floor; 86.4029 is the current efficiency, the starting point of the whole sweep.")
+ "86.9933 percent is what the 4.5 target carries, with a saving of 2782.362 GJ a year. 87.5160 goes with 3.5 and 88.1965 with the 2.0 floor; 86.4029 is currentEfficiencyPercent, the heater at 5.5 percent.")
 
 q(3, "Which of these figures does excessAirSaving not return for the invented Isiokpo tuning?",
  "The shortcut's 0.0144463600",

@@ -16,7 +16,7 @@ q(1, "Follow the invented Isiokpo heater's current reading of 5.5 percent oxygen
   "21.2938 percent excess air and 86.4029 percent on LHV"],
  "Excess air 32.1223 percent is the 5.5 row of the oxygen table; 86.4029 percent is the current row on LHV. The 2.8 target pairs 13.9199 with 87.8476, 79.2343 is that target on HHV, and 21.2938 goes with a 4 percent reading.")
 
-q(1, "Across the three invented Isiokpo steam and stream records, which call does the engine answer in part while naming the gap?",
+q(1, "Across the invented Isiokpo steam and stream calls, which one does the engine answer in part while naming the gap?",
  "The condensate case with its treatment cost blank",
  ["The condensate case with its boiler efficiency blank",
   "The trap with its isentropic exponent blank",
@@ -30,12 +30,12 @@ q(0, "A blank boiler efficiency reaches both the invented Isiokpo trap and the I
   "Both take a boiler efficiency of 1 and name it in a note beside the fuel and the carbon."],
  "The trap row with no boiler efficiency keeps its 355.757 tonnes a year and prints fuel and carbon as none (SECTION 15). For condensateReturnValue the same blank is one of SECTION 16's four refusals, so no value prints.")
 
-q(2, "Across the invented Isiokpo steam calls, which argument takes a stated default when it is left out of the call entirely?",
- "The trap's hours in service, at 8760",
- ["The condensate case's treatment cost",
-  "The tuning's minimum safe stack oxygen",
-  "The pinch targets' minimum approach"],
- "SECTION 15: hours left out of the call take the stated default of 8760, 371.004 tonnes a year; a blank hours box is refused. A blank treatment cost leaves that line none and the value a floor, and a blank safe floor or minimum approach is refused.")
+q(2, "Across the invented Isiokpo steam calls, which of these gaps does SECTION 15 or 16 answer with a stated default?",
+ "The trap's hours left out of the call, taken at 8760",
+ ["The trap's hours box left blank, taken at 8760",
+  "The condensate case's hours box left blank, taken at 8400",
+  "The trap's discharge coefficient left blank, taken at 1"],
+ "Of these gaps only one draws a default: the trap's hours absent from the call, which SECTION 15 answers with 8760 and 371.004 tonnes a year. Both hours boxes, the trap's and the condensate case's, are refused when present but blank (SECTIONS 15 and 16), and the discharge coefficient refusal says it is not defaulted.")
 
 q(3, "Which of these Isiokpo figures is an engine output, where the digest marks the other three computed here?",
  "annualEnergySavedGJ 6742.370",
@@ -93,12 +93,12 @@ q(0, "SECTION 17 prints the invented Isiokpo pinch at approaches of 10, 15 and 2
   "The pinch appears only at 15 C; the 10 and 20 C rows print threshold problem true instead."],
  "The three target rows print pinch hot 118.000 C each time and pinch cold 108.000, 103.000 and 98.000 C, with threshold problem false in every row. 110.500 is the shifted temperature of the 15 C zero.")
 
-q(3, "In the heater chain from stack oxygen to tuning, which input is never read off the stack gas and must be declared after a combustion test?",
+q(3, "In the heater chain from stack oxygen to tuning, which input does SECTION 14 say is declared after a combustion test?",
  "The minimum safe stack oxygen, 2 percent at Isiokpo.",
  ["The current dry stack oxygen, 5.5 percent at Isiokpo.",
   "The target stack oxygen, 2.8 percent at Isiokpo.",
   "The stack temperature, 238 C at the invented heater."],
- "SECTION 14 prints a minimum safe stack oxygen of 2 percent declared after a combustion test (invented), and refuses it blank because where the CO point sits depends on the burner, the fuel and the draught control. SECTION 12's assumption says an oxygen reading alone cannot see carbon monoxide.")
+ "SECTION 14 prints a minimum safe stack oxygen of 2 percent declared after a combustion test (invented), and refuses it blank: \"A minimum safe stack oxygen is required and is not defaulted.\" SECTION 12 asks for a measured dry stack oxygen, the 2.8 percent target is checked against the declared floor, and the 238 C stack is an invented input of the stack loss section.")
 
 q(1, "A failed steam trap has its own rule in force. According to that row, what must a trap be given?",
  "A boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year.",

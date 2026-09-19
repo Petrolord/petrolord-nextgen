@@ -77,7 +77,7 @@ q(0, "The first SECTION 12 refusal is labelled \"all air\", a dry stack oxygen o
  ["A stack at the 12 percent row's 121.0076 percent excess air.",
   "The stoichiometric case, with excess air of 0.0000 percent.",
   "A stack making CO that reads as though it had more air."],
- "The second sentence names 20.946 percent as air with no fuel burned, and SECTION 1 prints O2_MOLE_FRACTION_DRY_AIR 0.20946. The 12 row, with 121.0076 percent excess air, is the highest reading SECTION 12 answers, and its 0 row is the stoichiometric case.")
+ "The second sentence names 20.946 percent as air with no fuel burned, and SECTION 1 prints O2_MOLE_FRACTION_DRY_AIR 0.20946. 121.0076 percent is the excess air of the 12 row, the highest row SECTION 12 prints, and 0.0000 percent that of its 0 row. The CO sentence is the engine's assumption, printed above the table.")
 
 q(2, "Which row of the SECTION 12 table carries 4.5228 percent in its excess air column?",
  "1 percent",
@@ -100,7 +100,7 @@ q(0, "Which unit goes with the 13.180063 printed in the actual air column?",
   "percent of the stoichiometric air"],
  "The SECTION 12 column is headed actual air kmol per kmol fuel. kg air per kg fuel is the unit of stoichAirKgPerKgFuel 15.612763, kmol O2 per kmol fuel the unit of o2PerKmolFuel 2.089500, and the excess air column is the one in percent.")
 
-q(3, "SECTION 14 prints the refusal for a blank minimum safe stack oxygen, which lesson three reads beside the SECTION 12 assumption. On what does it say the carbon monoxide point depends?",
+q(3, "SECTION 14 prints the refusal for a blank minimum safe stack oxygen. On what does it say the carbon monoxide point depends?",
  "The burner, the fuel and the draught control.",
  ["The stack oxygen, the fuel and the excess air.",
   "The stack temperature and radiation loss.",

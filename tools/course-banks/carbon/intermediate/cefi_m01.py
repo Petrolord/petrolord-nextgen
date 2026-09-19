@@ -9,7 +9,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # lessons quote (FUEL_REFERENCE, the air constants, ATMOSPHERIC_N2_MOLAR_MASS).
 # Every figure is a string the digest prints; the analysis is invented.
 
-q(1, "SECTION 11 states the oxygen demand rule combustionStoichiometry applies to each component of the invented Isiokpo fuel gas. Which is it?",
+q(1, "SECTION 11 states the oxygen demand of each component of the invented Isiokpo fuel gas. Which rule does it print?",
  "c + h/4 + s - o/2, weighted by the component's mole fraction.",
  ["c + h/2 + s - o/2, weighted by the component's mole fraction.",
   "c + h/4 + s + o/2, weighted by the component's molar mass.",
@@ -42,7 +42,7 @@ q(1, "Which SECTION 11 figure is the stoichiometric air for the invented Isiokpo
  ["9.975652 kmol air per kmol fuel",
   "18.5068 kg fuel per kmol of fuel",
   "7.886152 kmol N2 per kmol fuel"],
- "SECTION 11 prints stoichAirKgPerKgFuel 15.612763 kg air per kg fuel and stoichAirPerKmolFuel 9.975652 kmol air per kmol fuel, the same air on two bases. 18.5068 is fuelMolarMassKgKmol, and 7.886152 is products.airN2PerKmolFuel.")
+ "SECTION 11 prints stoichAirKgPerKgFuel 15.612763 kg air per kg fuel beside stoichAirPerKmolFuel 9.975652 kmol air per kmol fuel. 18.5068 is fuelMolarMassKgKmol, and 7.886152 is products.airN2PerKmolFuel.")
 
 q(2, "The invented Isiokpo fuel gas carries CO2 at a mole fraction of 0.025. Where does SECTION 11 put that 0.025 kmol in the combustion products?",
  "Inside products.co2PerKmolFuel, 1.098000 kmol per kmol fuel.",
@@ -107,7 +107,7 @@ q(0, "SECTION 1 prints the CO2 row of FUEL_REFERENCE, PRODUCT_MOLAR_MASS.CO2 and
   "Each module rounds its own, so 44.009 and 44.097 both appear."],
  "SECTION 1: the CO2 row, PRODUCT_MOLAR_MASS.CO2 and carbonAbatement.MW_CO2 are one number, 44.009, and an inert CO2 in the fuel weighs the same going in as it does in the flue gas. 44.097 is propane's molar mass and 28.014 is N2.")
 
-q(2, "How much water does each kmol of fuel burned make, as products.h2oPerKmolFuel?",
+q(2, "How much water does each kmol of the invented Isiokpo fuel gas make when burned, as products.h2oPerKmolFuel?",
  "2.033000",
  ["1.098000",
   "0.015000",

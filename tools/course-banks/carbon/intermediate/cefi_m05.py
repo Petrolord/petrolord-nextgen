@@ -16,7 +16,7 @@ q(2, "SECTION 15 prints the engine's choked-flow note for the invented Isiokpo t
   "0.555556"],
  "The note at 1.3, verbatim: \"Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5457, so the loss depends on the upstream pressure alone.\" At 1.135 the note names the critical 0.5774. 0.555556 is the pressure ratio of a trap discharging at 5 bar a.")
 
-q(0, "The invented Isiokpo trap, 9 bar a upstream at an exponent of 1.135, discharges into a header at 5 bar a. What does SECTION 15 print?",
+q(0, "5 bar a sits downstream of the invented 9 bar a trap at an exponent of 1.135. Which choked flag and hourly loss does SECTION 15 pair with it?",
  "Choked true, 42.3520 kg an hour",
  ["Choked false, 41.4785 kg an hour",
   "Choked false, 37.5765 kg an hour",
@@ -44,7 +44,7 @@ q(2, "steamTrapLoss is called for the invented Isiokpo trap with an isentropic e
   "REFUSED: An orifice diameter, an upstream pressure and a steam density are required."],
  "SECTION 15 prints the same refusal for a blank exponent and for an exponent of 1. The discharge coefficient and orifice refusals answer those boxes left blank. 42.3520 kg an hour is the loss at the stated 1.135.")
 
-q(3, "No boiler efficiency is typed for the failed trap. Which result comes back?",
+q(3, "No boiler efficiency is typed for the invented Isiokpo trap. Which result comes back?",
  "355.757 tonnes of steam a year, with the fuel and the carbon none.",
  ["355.757 tonnes of steam a year, with the fuel and the carbon 0.",
   "355.757 tonnes of steam a year, with fuel at a boiler efficiency of 1.",
@@ -65,19 +65,19 @@ q(1, "SECTION 16 prices raising the invented Isiokpo condensate return from 0.35
   "annualValue 175835.28 USD, complete false, and a floor note."],
  "With the treatment blank SECTION 16 prints annualValue 121403.28, complete false and the valueNote \"A floor on the value: Treatment not repeated not priced. The treatment cost is the one usually left out.\" With treatment priced it prints 175835.28 and complete true.")
 
-q(3, "What carbon does the condensate case report once the treatment price is dropped?",
+q(3, "What carbon does the invented Isiokpo condensate case report once the treatment price is left blank?",
  "742.220, the same as with the treatment priced",
  ["none, since the value is not complete",
   "63.721, the trap's figure for its boiler",
   "742.220 priced and 0.000 left blank"],
- "SECTION 16 prints annualTonnesCo2e 742.220 in both columns, on the SYNTHETIC factor of 56.1 kg CO2e per GJ. Only the treatment line and the totals differ between the columns. 63.721 tCO2e is the trap of SECTION 15.")
+ "SECTION 16 prints annualTonnesCo2e 742.220 in both columns, on the SYNTHETIC factor of 56.1 kg CO2e per GJ. The treatment line, annualValue and complete differ between the columns. 63.721 tCO2e is the trap of SECTION 15.")
 
 q(2, "The invented Isiokpo condensate case is called with a target return of 0.25 against the current 0.35. What does condensateReturnValue answer?",
  "REFUSED: The target return (0.25) is below the current return (0.35). Returning less condensate is a cost, so there is nothing to value.",
  ["REFUSED: Return fractions must lie between 0 and 1.",
   "No refusal: a negative annualValue, with complete true and the fuel line printed below zero for the year.",
   "REFUSED: A boiler efficiency in (0, 1] is required: the fuel saved depends on it and it is not assumed."],
- "SECTION 16 prints the call refused with that sentence, and SECTION 25 lists the rule among those MD45-1 put in force. The return-fraction refusal answers a target of 1.2, and the boiler efficiency refusal a blank boiler efficiency.")
+ "SECTION 16 prints the 0.25 target refused with that sentence, and SECTION 25 lists a target condensate return below the current one as refused. No negative annualValue is printed. A target of 1.2 draws the return-fraction refusal, and a blank boiler efficiency the boiler refusal.")
 
 q(1, "At a minimum approach of 20 C, which utility targets does SECTION 17 print for the four invented Isiokpo streams?",
  "59.700 kW hot and 273.900 kW cold",
@@ -107,7 +107,7 @@ q(2, "Which heat recovered figure goes with the 10 C row of the Isiokpo pinch ta
   "586.950 kW"],
  "The 10 C row prints heat recovered 585.150 kW. 561.000 is the 15 C row, 527.250 the 20 C row and 586.950 the total cold stream duty.")
 
-q(1, "In the SECTION 17 problem table at 15 C, where does the heat flow reach zero, and how is the pinch reported?",
+q(1, "In the SECTION 17 problem table at 15 C for the invented Isiokpo streams, where does the heat flow reach zero, and how is the pinch reported?",
  "At shifted 110.500 C, inside the range: 118.000 C hot side, 103.000 C cold side.",
  ["At shifted 155.500 C, the top of the cascade: 163.000 C hot side, 148.500 C cold side.",
   "At shifted 33.500 C, the bottom of the cascade: 41.000 C hot side, 32.000 C cold side.",

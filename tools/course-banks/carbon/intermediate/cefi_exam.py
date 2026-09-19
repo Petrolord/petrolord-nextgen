@@ -16,7 +16,7 @@ q(2, "In the SECTION 11 demand table, what unweighted c + h/4 + s - o/2 term doe
   "0"],
  "The C3H8 row reads 5 in the c + h/4 + s - o/2 column. CH4 reads 2, C2H6 3.5, and both inerts 0.")
 
-q(2, "SECTION 11 says the air's nitrogen is the rest of the stoichiometric air once its oxygen is met. Which figure does it print for it, in kmol per kmol fuel?",
+q(2, "SECTION 11 says the air's nitrogen is the rest of the stoichiometric air. Which figure does it print for it, in kmol per kmol fuel?",
  "7.886152",
  ["9.975652",
   "8.999152",
@@ -63,7 +63,7 @@ q(3, "At a dry reading of 2 percent, the invented burner's safe floor, how much 
  ["32.1223 percent",
   "13.9199 percent",
   "55.7461 percent"],
- "9.5230 percent, beside 10.925631 kmol of air per kmol fuel. 13.9199 is the course's 2.8 target, 32.1223 the current 5.5 reading and 55.7461 a reading of 8.")
+ "9.5230 percent, beside 10.925631 kmol of air per kmol fuel. 13.9199 is the Isiokpo 2.8 target, 32.1223 the current 5.5 reading and 55.7461 a reading of 8.")
 
 q(2, "Tuned to 2.8 percent and read on the higher heating value, how big is the heater's total loss?",
  "20.7657 percent",
@@ -135,7 +135,7 @@ q(1, "In the SECTION 14 sweep for the invented Isiokpo heater, how much fuel a y
   "8337.934 GJ"],
  "The 4.5 row prints target efficiency 86.9933, fuelSavingPercent 0.6786 and annualEnergySavedGJ 2782.362. 5214.422 is the 3.5 row, 6742.370 the 2.8 row and 8337.934 the 2.0 row, all against 410000 GJ a year (invented).")
 
-q(1, "The tuning sweep's lowest target sits on the declared 2 percent floor. What target efficiency on LHV does it print there?",
+q(1, "The invented Isiokpo tuning sweep's lowest target sits on the declared 2 percent floor. What target efficiency on LHV does it print there?",
  "88.1965 percent",
  ["87.8476 percent",
   "87.5160 percent",
@@ -158,12 +158,12 @@ q(0, "The engine's tuning method opens by holding one thing fixed while fuel sca
 
 q(2, "The invented Isiokpo trap is called with no downstream pressure at all. Where does SECTION 15 say it is taken to discharge?",
  "To atmosphere, ATMOSPHERE_BAR_A, 1.01325 bar a.",
- ["Into a header at 5 bar a, still choked.",
+ ["At 5 bar a downstream, still choked.",
   "At its critical ratio, 0.5774 of 9 bar a.",
   "Nowhere: the call is refused as blank."],
  "SECTION 15: with no downstream pressure given the trap vents to ATMOSPHERE_BAR_A, 1.01325 bar a. A downstream box present but blank is refused; a box left out takes the atmosphere default.")
 
-q(1, "Raise the header pressure the trap blows into to 6 bar a. What happens to choked, and to the year's loss?",
+q(1, "Raise the invented Isiokpo trap's downstream pressure to 6 bar a. What happens to choked, and to the year's loss?",
  "Choked false, 348.419 tonnes a year",
  ["Choked true, 355.757 tonnes a year",
   "Choked false, 315.643 tonnes a year",
@@ -214,10 +214,10 @@ q(2, "What does SECTION 15 compute from the engine's figures for the gap between
 
 q(2, "The choked-flow note for the invented Isiokpo trap names a pressure ratio of 0.1126. Which call is that ratio from?",
  "The call with no downstream pressure given",
- ["The call with a header at 3 bar a",
+ ["The call at 3 bar a downstream",
   "The critical ratio at the saturated exponent",
-  "The call with a header at 8 bar a"],
- "The downstream table prints the left-out case at a pressure ratio of 0.112583, which the note prints as 0.1126. 3 bar a prints 0.333333 and 8 bar a 0.888889; the critical ratio at 1.135 is 0.577430.")
+  "The call at 8 bar a downstream"],
+ "The trap's record gives no downstream pressure, and with none given SECTION 15 takes it to vent to atmosphere, 1.01325 bar a; the choked-flow note printed for it names 0.1126. The downstream table prints 3 bar a at 0.333333 and 8 bar a at 0.888889, and the same note names the critical 0.5774 at 1.135.")
 
 q(1, "Someone types 9000 into the trap's hours box. Which answer comes back?",
  "REFUSED: Hours in service a year are required, between 0 and 8784. A blank is not read as a full year.",
@@ -233,7 +233,7 @@ q(3, "With the treatment cost priced on the invented Isiokpo condensate case, wh
   "The trap's annual steam cost"],
  "SECTION 16 prints Fuel not burned reheating makeup 99227.28, Raw water not bought 22176.00 and Treatment not repeated 54432.00 USD. The trap's cost, 7826.65 USD, is SECTION 15.")
 
-q(0, "A return fraction of 1.2 is typed as the condensate target. Which answer comes back?",
+q(0, "A return fraction of 1.2 is typed as the target of the invented condensate case. Which answer comes back?",
  "REFUSED: Return fractions must lie between 0 and 1.",
  ["REFUSED: The target return (0.25) is below the current return (0.35). Returning less condensate is a cost, so there is nothing to value.",
   "No refusal: the return is capped at 1 and complete prints true.",
@@ -261,7 +261,7 @@ q(1, "Four invented Isiokpo streams are printed in SECTION 17. Which one is cold
   "H2 lean oil cooler, 118 C to 41 C: its CP is 5.7 kW/K."],
  "SECTION 17: a stream is hot when its supply is above its target. C2 goes from 57 to 104 C, so it is cold, as C1 is. H1 and H2 have supplies above their targets and are hot, whatever their CP.")
 
-q(3, "In the SECTION 17 problem table at 15 C, what surplus does the interval from shifted 148.500 C to 111.500 C carry?",
+q(3, "In the SECTION 17 problem table at 15 C for the invented Isiokpo streams, what surplus does the interval from shifted 148.500 C to 111.500 C carry?",
  "-44.400 kW",
  ["22.050 kW",
   "-3.600 kW",

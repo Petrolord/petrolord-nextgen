@@ -44,11 +44,11 @@
   "explanation": "SECTION 14 prints the 1.5 percent target refused with that sentence, naming both figures. The target-required refusal answers a blank target and the floor refusal a blank floor. The sweep prints no row below the floor."
  },
  {
-  "prompt": "A tuning call gives a current reading and a safe floor but leaves the target empty. Which answer comes back from excessAirSaving?",
+  "prompt": "A tuning call for the invented Isiokpo heater gives a current reading and a safe floor but leaves the target empty. Which answer comes back from excessAirSaving?",
   "options": [
    "No refusal: the target is taken at the 2 percent floor and the saving prints as 8337.934 GJ a year.",
    "REFUSED: The target stack oxygen is required, so that it can be checked against the declared safe floor.",
-   "No refusal: the target is taken at 2.8 percent, the course's case, and the saving prints as 6742.370 GJ.",
+   "No refusal: the target is taken at 2.8 percent, the Isiokpo case, and the saving prints as 6742.370 GJ.",
    "REFUSED: The two efficiencies are on different bases (LHV and HHV) and cannot be compared."
   ],
   "answer": 1,
@@ -74,7 +74,7 @@
    "1.6445"
   ],
   "answer": 2,
-  "explanation": "fuelSavingPercent 1.2718 belongs to the 3.5 percent target, beside 5214.422 GJ a year. The 4.5 target carries 0.6786, the floor at 2.0 carries 2.0336 and the course's 2.8 case 1.6445."
+  "explanation": "fuelSavingPercent 1.2718 belongs to the 3.5 percent target, beside 5214.422 GJ a year. The 4.5 target carries 0.6786, the floor at 2.0 carries 2.0336 and the Isiokpo 2.8 target 1.6445."
  },
  {
   "prompt": "Which target row of the SECTION 14 sweep sits on the declared 2 percent floor of the invented Isiokpo burner, and what does it save a year?",
@@ -85,7 +85,7 @@
    "The 1.5 row, a saving above 8337.934 GJ"
   ],
   "answer": 0,
-  "explanation": "The sweep prints targets of 2.0, 2.8, 3.5 and 4.5 percent, every one at or above the declared floor, and the 2.0 row saves 8337.934 GJ a year at 88.1965 percent on LHV. A target of 1.5 percent is refused, so the sweep prints no 1.5 row."
+  "explanation": "The sweep prints targets of 2.0, 2.8, 3.5 and 4.5 percent, every one at or above the declared floor, and the 2.0 row saves 8337.934 GJ a year at 88.1965 percent on LHV. A target of 1.5 percent against the 2 percent floor is refused."
  },
  {
   "prompt": "How does excessAirSaving arrive at annualEnergySavedGJ 6742.370 for the invented Isiokpo heater?",
@@ -140,7 +140,7 @@
    "88.1965 percent"
   ],
   "answer": 1,
-  "explanation": "86.9933 percent is what the 4.5 target carries, with a saving of 2782.362 GJ a year. 87.5160 goes with 3.5 and 88.1965 with the 2.0 floor; 86.4029 is the current efficiency, the starting point of the whole sweep."
+  "explanation": "86.9933 percent is what the 4.5 target carries, with a saving of 2782.362 GJ a year. 87.5160 goes with 3.5 and 88.1965 with the 2.0 floor; 86.4029 is currentEfficiencyPercent, the heater at 5.5 percent."
  },
  {
   "prompt": "Which of these figures does excessAirSaving not return for the invented Isiokpo tuning?",
