@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Reading AK-01 end to end, what input stands behind its water figure of 80.588 m3?",
+  "options": [
+   "The typed VCF of 0.980300, applied to the water",
+   "AK-01's own table, read at the 212 mm tape reading",
+   "The dip of 9318 mm less the gross of 3461.489 m3",
+   "A fixed share of the volume at the dip of 3542.077 m3"
+  ],
+  "answer": 1,
+  "explanation": "The water cut is a second tape reading, 212 mm, turned into 80.588 m3 through the same strapping table that reads the 9318 mm dip."
+ },
+ {
+  "prompt": "The same AKODO day is closed on the gross closing stock of 4581.490 m3 against an opening stock held at standard. What does the engine read?",
+  "options": [
+   "unaccounted -8.648 m3, direction loss, within tolerance true",
+   "unaccounted 0.000 m3, balanced, within tolerance true",
+   "REFUSED, since a gross closing stock cannot be put to reconcileStock",
+   "unaccounted 73.390 m3, direction gain, within tolerance false"
+  ],
+  "answer": 3,
+  "explanation": "Nothing in the tanks changed. Gross observed m3 at three observed temperatures was set against m3 at standard, and the mixed units read as a gain outside tolerance."
+ },
+ {
+  "prompt": "Between the standard closing and the gross closing of the AKODO day, what is the one input that differs?",
+  "options": [
+   "The closing stock: 4499.452 m3 at standard against 4581.490 m3 gross observed.",
+   "The opening stock: 4953.700 m3 on one closing and 4945.052 m3 on the other.",
+   "The tolerance: 0.2 percent on one closing and 0.1 percent on the other.",
+   "The receipts: 2870.000 m3 on one closing and none on the other."
+  ],
+  "answer": 0,
+  "explanation": "Only the closing stock moves. The standard closing matches the opening stock's basis and reads a loss within tolerance; the gross closing reads a gain produced by mixing units."
+ },
+ {
+  "prompt": "Reading AK-03 backwards from its standard volume of 51.556 m3, how should its gross of 52.161 m3 be treated?",
+  "options": [
+   "Rebuilt from the rounded 52.501 m3 and 0.341 m3 before it is multiplied by the VCF of 0.988400.",
+   "Replaced by the shortcut reading of 51.126 m3, since the bullet's curve makes the gross unreliable.",
+   "Quoted as printed, since the engine forms it from the unrounded volumes at 1847 mm and 41 mm.",
+   "Replaced by the 10 mm table's reading of 52.508 m3."
+  ],
+  "answer": 2,
+  "explanation": "52.161 m3 is quoted as printed and is not rebuilt from the rounded columns. Multiplied by the typed 0.988400 it gives 51.556 m3 at standard."
+ },
+ {
+  "prompt": "At the end of the tank chain, a call returns gross 3461.489 m3 and standard none. Which link was left unsupplied?",
+  "options": [
+   "The water cut",
+   "The strapping table",
+   "The VCF",
+   "The opening stock"
+  ],
+  "answer": 2,
+  "explanation": "A missing table or an unconvertible water cut refuses the whole call, and the opening stock belongs to the day. A missing VCF lets the gross print and names the standard volume none."
+ },
+ {
+  "prompt": "On AK-01's partial table the dip reads 640 mm and the water 700 mm. How far down the chain does anything get formed?",
+  "options": [
+   "The gross of 243.285 m3 is formed and only the standard volume is named none.",
+   "The volume at the dip is formed and the water is left out with a note beside it.",
+   "The chain runs to the day, which then reads the gap outside tolerance.",
+   "Nothing is formed: the call is refused and no gross, standard volume or gap follows."
+  ],
+  "answer": 3,
+  "explanation": "REFUSED: The water cut is above the product dip. Check both readings. A refused link stops the chain there, so nothing downstream is formed from it."
+ },
+ {
+  "prompt": "At a tolerance of 0.1 percent the AKODO band is 6.183 m3. What does the day then read?",
+  "options": [
+   "The same -8.648 m3, now outside the band: within tolerance false.",
+   "A smaller gap of 6.183 m3, since the band caps what can be reported.",
+   "The same -8.648 m3, still within the band, since a loss is judged on one side.",
+   "A refusal, since a band under the gap cannot close the day."
+  ],
+  "answer": 0,
+  "explanation": "The unaccounted figure stays -8.648 m3. At 0.1 percent the band is 6.183 m3 and the day is outside it; at 0.2 percent it is 12.365 m3 and the day is within."
+ },
+ {
+  "prompt": "The nine-day record is kept to 7 days. What do the run and the prompt read?",
+  "options": [
+   "A run of 4 days of loss, and no prompt is printed.",
+   "A run of 4 days of loss, and the prompt is printed.",
+   "A run of 7 days, and the prompt is printed.",
+   "A run of 3 days of loss, and no prompt is printed."
+  ],
+  "answer": 1,
+  "explanation": "Kept to 5 or 6 days the run is 2 or 3 days of loss and the prompt is none; kept to 7, 8 or 9 days the run is 4, 5 or 6 days and the prompt prints."
+ },
+ {
+  "prompt": "Two candidate openings exist for one day: yesterday's dip at 4953.700 m3, or 4945.052 m3 worked back from today's dip. What rule follows?",
+  "options": [
+   "The opening stock may be taken from either source, provided the day closes inside its band.",
+   "The opening stock is an input taken from before the day began, yesterday's closing dip.",
+   "The derived opening is to be preferred, since it is built from the day's own measured figures.",
+   "The two openings are averaged and the day closed on the mean."
+  ],
+  "answer": 1,
+  "explanation": "The derived opening balances every day, 0.000 m3, so it measures nothing. The real opening reads -8.648 m3, a loss within 12.365 m3, because it could have come out wrong."
+ },
+ {
+  "prompt": "Which figure on the AKODO sheet is a tape height and no volume at all?",
+  "options": [
+   "9318 mm",
+   "3542.077 m3",
+   "80.588 m3",
+   "4499.452 m3"
+  ],
+  "answer": 0,
+  "explanation": "9318 mm is AK-01's dip. 3542.077 m3 and 80.588 m3 are read through its table, and 4499.452 m3 is the standard total the day closes on."
+ },
+ {
+  "prompt": "What does the Professional tier add that the Associate tier never touched?",
+  "options": [
+   "The coefficient table this tier refused, shipped at last for AKODO",
+   "A second AKODO day, reconciled against the first",
+   "Time spent waiting, money and carbon, at the inland depot IBAFO",
+   "The BADAGRY cargo's price at the pump"
+  ],
+  "answer": 2,
+  "explanation": "The Professional tier moves to IBAFO and models its rack as a queue, its tank farm, its throughput economics and its lane. BADAGRY belongs to the Expert tier."
+ },
+ {
+  "prompt": "Which rule from this tier does the next tier carry over unchanged?",
+  "options": [
+   "A VCF is always typed off the terminal's own tables.",
+   "A tolerance is always 0.2 percent of throughput.",
+   "A strapping table is always read at 250 mm steps.",
+   "A missing value stays missing."
+  ],
+  "answer": 3,
+  "explanation": "The Professional tier adds new inputs, a bay count, a heel, a distance and a payload, and treats each the same way: refused or named, never guessed."
+ },
+ {
+  "prompt": "Link two of the chain on AK-02: the dip of 5406 mm lies between 5250 mm at 1055.575 m3 and 5500 mm at 1105.841 m3. What is the input the engine cannot do without here?",
+  "options": [
+   "AK-02's typed VCF of 0.987600",
+   "AK-02's own strapping table",
+   "AK-02's density of 846.3 kg/m3",
+   "AK-02's water cut of 95 mm"
+  ],
+  "answer": 1,
+  "explanation": "The table's two entries and the dip are the whole input to volumeAtDip, which reads 1086.941 m3. With no table the engine refuses."
+ },
+ {
+  "prompt": "Across the whole AKODO reading, which reading of the table does the engine never take?",
+  "options": [
+   "One reading at the dip, and another at the water cut",
+   "One reading between two entries, drawn as a straight line",
+   "One reading at an entry, when a dip lands exactly on it",
+   "One reading at the dip less the water height"
+  ],
+  "answer": 3,
+  "explanation": "On AK-03 the shortcut at the dip less the water reads 51.126 m3 against the gross 52.161 m3. The engine reads each height where it was measured."
+ },
+ {
+  "prompt": "Every figure on the AKODO sheet traces back to one of three sources. Which three?",
+  "options": [
+   "A tape, a table or a typed figure",
+   "A tape, a meter or a default",
+   "A table, a default or a guess",
+   "A typed figure, a zero or a tape"
+  ],
+  "answer": 0,
+  "explanation": "Dips and water cuts are tapes, volumes come from the strapping tables, and the VCFs are typed off AKODO's own tables. Nothing in the chain is assumed."
+ }
+]
