@@ -95,11 +95,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261011_rf_refinery_course           ) echo PENDING ;;
-    20261011_rf_refinery_beginner_deep    ) echo PENDING ;;
-    20261011_rf_refinery_intermediate_deep) echo PENDING ;;
-    20261011_rf_refinery_advanced_deep    ) echo PENDING ;;
-    20261011_rf_refinery_go_live          ) echo PENDING ;;
+    20261011_rf_refinery_course                 ) echo 9c1dbaaab25b4e12f2e25f1a2acde04681da806fe03c0b963bacdf5384286559 ;;
+    20261011_rf_refinery_beginner_deep          ) echo 8b4ba6ade0f6cbafa004677021fc0e0c110bba75bffc29b84395caf409bcc207 ;;
+    20261011_rf_refinery_intermediate_deep      ) echo 63b191aaeabf22ac8423f772cd788f686ab3b65b295307cf0bf3c2cae24b700f ;;
+    20261011_rf_refinery_advanced_deep          ) echo e9a8865582381ecf15c40cb0dda2bed91aff82f6514fe51576cafe3ed6c8217f ;;
+    20261011_rf_refinery_go_live                ) echo 5206dcd672852086720bd985d010ea8b0d71c550dbe727605e83c197137e56aa ;;
     *) echo UNPINNED ;;
   esac
 }
