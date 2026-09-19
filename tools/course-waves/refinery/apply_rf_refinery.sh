@@ -54,8 +54,21 @@
 # at a route that does not exist.
 #
 # Verify the upload by CHUNK CONTENT and not by hash: serve the built
-# DashboardPage chunk and confirm it carries `apps/refinery`. `go-live`
-# below will not run until you confirm that in writing.
+# DashboardPage chunk and confirm it carries `apps/refinery`.
+#
+# SECOND GATE: THE SUITE PRODUCTION UPLOAD CARRYING SUITE MAIN 1a71d9c90
+# (merged and NOT yet uploaded when this ladder was cut; Suite production was
+# e36846604). The course teaches the Suite's Refinery Planning Studio and
+# Modular Refinery Feasibility pages as Suite #534 (97ff40ba7,
+# fix/md2-0-refinery-apps) repaired them on the MD2-0 engines, and the MD-1
+# follow-ups (blank tax and discount rate, blank construction years) reached
+# Suite main inside #540. Until that upload is live the pages a learner opens
+# beside the course still run the pre-MD2-0 engines. Verify it by serving the
+# Suite production build and confirming it is at or after 1a71d9c90 (the build
+# stamp, or the RefineryPlanningStudio chunk carrying "No plan solves this
+# configuration"). The same upload gates crude and supply.
+#
+# `go-live` below will not run until you confirm BOTH in writing.
 # ============================================================================
 #
 # MIGRATIONS.md. This ladder is HELD, so the go-live is logged when it is
@@ -230,7 +243,8 @@ case "${1:-verify}" in
     echo "Seeded. The course is coming_soon and no learner can reach it."
     echo "LOG THE FOUR APPLIED MIGRATIONS IN MIGRATIONS.md NOW, with today's date:"
     for f in $SEEDS; do echo "    migrations/$f.sql"; done
-    echo "DO NOT run go-live until an upload carries /dashboard/apps/refinery."
+    echo "DO NOT run go-live until BOTH are live: a NextGen upload carrying /dashboard/apps/refinery,"
+    echo "and the Suite production upload carrying Suite main 1a71d9c90 (Suite #534 and the MD-1 engines)."
     ;;
 
   go-live)
@@ -242,6 +256,15 @@ case "${1:-verify}" in
     printf "Type exactly  apps/refinery  to proceed: "
     read -r answer
     [ "$answer" = "apps/refinery" ] || refuse "upload gate not confirmed"
+    echo
+    echo "SECOND GATE. Confirm the Suite production upload carrying Suite main"
+    echo "1a71d9c90 is LIVE (it carries Suite #534, the Refinery Planning and"
+    echo "Modular Refinery page repairs this course teaches, and the MD-1 engines):"
+    echo "serve the Suite production build and see it at or after 1a71d9c90."
+    echo "Merged is not uploaded."
+    printf "Type exactly  1a71d9c90  to proceed: "
+    read -r answer
+    [ "$answer" = "1a71d9c90" ] || refuse "Suite upload gate (1a71d9c90: Suite #534 and the MD-1 engines) not confirmed"
     run_file "$GOLIVE"
     echo
     state
