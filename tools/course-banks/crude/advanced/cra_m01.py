@@ -5,12 +5,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # crude Expert m01, What a Linear Programme Is. Digest section 19.
 
-q(2, "The Apapa recipe puts 3284.6899 bbl of Reformate and 784.1881 bbl of Isomerate into an 8000 bbl cargo. What do those fractional volumes say about the decision the optimizer is making?",
- "Each volume is a continuous variable, free to take any real value inside its bounds.",
- ["The kernel rounds a whole-barrel recipe, and the decimals are what the rounding left.",
-  "Each volume is interpolated between two whole-barrel recipes solved either side of it.",
-  "The decimals are tank strapping corrections added after the recipe was chosen."],
- "A recipe is a list of volumes, and nothing forces one to be a whole number of barrels. The decision variables are real numbers, free to move inside their bounds.")
+q(2, "Two rows, x + y <= 2 and x + y >= 3, sit under the objective minimise x + y. Which answer comes back from solveLP?",
+ "infeasible, since no point meets both rows",
+ ["optimal, objective 3.0000, where x + y >= 3 holds",
+  "unbounded, since x + y has no floor",
+  "it throws, as the rows contradict each other"],
+ "Infeasible and unbounded are answers, and the digest prints this problem's status as infeasible. The kernel throws only on a malformed problem.")
 
 q(0, "In the kernel's own terms, what is the 400 bbl of Butane the Apapa terminal holds?",
  "A bound on one variable, the upper limit on Butane's volume.",
@@ -45,7 +45,7 @@ q(3, "The Apapa pool blends four components. By the course's definition of a ver
  ["Exactly two, one for each binding specification the recipe presses against.",
   "At least five, one for each specification in the 50 ppm gasoline template.",
   "At least eight, a lower and an upper bound for each of the four components."],
- "A vertex is a point where at least as many constraints and bounds hold exactly as there are variables. Four volumes means at least four, and the batch row, which always holds, is one of them.")
+ "A vertex is a point where at least as many constraints and bounds hold exactly as there are variables. The Apapa pool blends four components, so four volumes, and the batch row sum(v_i) = target is an equation met by every recipe.")
 
 q(1, "The kernel is asked to minimise x with a lower bound of 5 above an upper bound of 3. What does it return?",
  "The status infeasible, because no value of x fits both of its bounds.",
@@ -104,11 +104,11 @@ q(0, "The LP kernel uses absolute tolerances on its pivots and on phase one. Wha
  "L4 is held and taught as a limit. The course shows the tolerances working at barrel scale and makes no claim for coefficients in the millions.")
 
 q(2, "A blend minimises cost, and the textbook case maximises earnings. What does that difference change about the method?",
- "Nothing but the sign: the kernel is told which way to go.",
- ["A maximisation has no phase one, since the origin is always feasible for it.",
+ "The same kernel does both: it minimises, or maximises when asked.",
+ ["A maximisation is refused, since solveLP only minimises its objective.",
   "A minimisation needs its costs written as rows first.",
   "A maximisation has no shadow prices to report."],
- "The objective is a single linear expression and the kernel is told whether to minimise or maximise it. The textbook case is a maximisation and still carries shadow prices, 0.7500 and 0.5000.")
+ "solveLP minimises c'x subject to its rows and bounds, or maximises when asked. The textbook case is a maximisation and still carries shadow prices, 0.7500 and 0.5000.")
 
 emit(Q, '/root/wt-md-crude-nextgen/tools/course-banks/crude/advanced/cra_m01.json', label='cra_m01', expect_n=15)
 finish()

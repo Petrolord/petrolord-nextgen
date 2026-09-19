@@ -40,19 +40,19 @@ q(2, "Butane's maximum is typed as 0 because the tank is empty. What does the en
   "The Apapa recipe unchanged, Butane at 400.0000 bbl and 698701.5605 $."],
  "A typed 0 is none. The recipe comes back with Butane at 0.0000 bbl, and the binding list is Sulfur alone.")
 
-q(3, "With Butane's maximum left blank the recipe takes 438.1863 bbl of it at 698569.3341 $, and Sulfur and RVP bind. What stops Butane at that volume?",
- "The specifications that bind at that optimum, Sulfur and RVP, since a blank maximum is no limit.",
- ["Its 400 bbl tank, which the engine keeps as the default when the field is blank.",
-  "The batch row alone, since 8000.0000 bbl leaves no room for more of it.",
-  "A default cap the engine sets on any component with a blank maximum."],
- "A maximum left blank is no limit. The engine returns optimal with Butane at 438.1863 bbl and binding Sulfur, RVP.")
+q(3, "Butane's maximum is left blank, and the recipe takes 438.1863 bbl of it at 698569.3341 $. How has the engine read the blank?",
+ "As no limit: a maximum left blank sets no bound on Butane's volume.",
+ ["As the 400 bbl tank, the default the engine keeps for a blank field.",
+  "As a maximum of 0, the reading the engine gives a typed zero.",
+  "As a default cap the engine sets on any component left blank."],
+ "A maximum left blank is no limit. The engine returns optimal with Butane at 438.1863 bbl and binding Sulfur, RVP; a typed 0 is none, and gives Butane at 0.0000 bbl.")
 
-q(0, "Why must the engine never read a blank maximum as zero, nor a typed zero as a blank?",
- "Either mistake gives a confident, optimal-looking recipe for a question nobody asked.",
- ["A blank read as zero raises an error, and a zero read as blank is refused, so both mistakes simply stop the solve and the planner sees them at once in the output.",
-  "A blank and a zero give the same recipe, so the reading does not matter.",
-  "A blank maximum is read as zero, so the empty tank and the blank are one row."],
- "A typed 0 solves optimal at 710560.2149 $ with Butane at 0.0000 bbl; a blank solves optimal at 698569.3341 $ with Butane at 438.1863 bbl. Both are optimal, so neither misreading shows as an error.")
+q(0, "optimiseBlend is called with no components at all. What does it return?",
+ "REFUSED: No components to blend.",
+ ["The status infeasible, with no recipe.",
+  "Optimal, with an empty recipe.",
+  "The kernel throws on a malformed row."],
+ "The refusals table prints the request with no components beside \"REFUSED: No components to blend.\"")
 
 q(2, "The Apapa pool is solved with Isomerate's cost field empty. What comes back from the optimizer?",
  "REFUSED: No cost for Isomerate. A least-cost recipe needs a price on every component; remove the component or give it one.",
@@ -62,18 +62,18 @@ q(2, "The Apapa pool is solved with Isomerate's cost field empty. What comes bac
  "A blank cost is refused. The cost column is the objective, and a least-cost recipe needs a price on every component.")
 
 q(1, "A blank maximum is solved and a blank cost is refused. What makes the two blanks different?",
- "A blank maximum has a meaning a user can intend, no tank limit, while a blank cost leaves no least-cost question to ask.",
+ "A blank maximum is no limit; a least-cost recipe needs a price on each component.",
  ["A blank maximum is read as zero, while a blank cost is read as a free component.",
   "The kernel checks costs itself and throws, while the optimizer checks maximums.",
   "A maximum can never be typed, so every maximum is blank and the engine sets it."],
- "A maximum left blank is no limit: Butane left blank solves at 438.1863 bbl. A least-cost recipe needs a price on every component, so a blank cost is refused.")
+ "A maximum left blank is no limit: Butane left blank solves at 438.1863 bbl. A blank cost is refused, with Isomerate named.")
 
 q(3, "A target volume of 0 returns \"REFUSED: The target volume must be greater than zero.\" Which reading of that answer holds?",
  "It is one of the inputs optimiseBlend refuses, each in its own words.",
  ["It is the optimizer's word for unbounded, used when the batch row has no upper limit.",
   "It is an optimal empty recipe, since a batch of zero costs nothing to blend.",
   "It is the kernel throwing on a malformed row with the wrong coefficient count."],
- "It sits among what optimiseBlend refuses, each in its own words, beside \"REFUSED: No components to blend.\" The infeasible pools also print a REFUSED message, and they carry the status infeasible beside it.")
+ "It sits among what optimiseBlend refuses, each in its own words. The infeasible pools also print a REFUSED message, and they carry the status infeasible beside it.")
 
 q(0, "Isomerate carries no sulfur figure. The engine returns optimal at 695245.0644 $ with Sulfur skipped. What does that total cost?",
  "A recipe meeting every specification except the skipped sulfur row.",
@@ -89,12 +89,12 @@ q(1, "FCC gasoline has no SG and no API, yet every component still carries a sul
   "Without an SG the engine cannot form the batch row, so every specification on that component is skipped with it."],
  "On the mass basis w_i is SG x sulfur and d_i is SG. The engine says so: \"This property blends on mass and not every component has a density (sg or API), so the specification was not applied.\"")
 
-q(3, "In both skipped cases, what does the recipe report as achieved for the skipped Sulfur, and for Density?",
- "Sulfur is not formed and returns no value; Density, which blends on volume, is applied and achieved at 0.7536 kg/l.",
- ["Sulfur at 0.0000 ppm, and Density skipped with it for want of an SG.",
+q(3, "With Sulfur skipped because Isomerate carries no sulfur figure, what does the recipe report as achieved for Sulfur, and for Density?",
+ "Sulfur is not formed and returns no value; Density, which blends on volume, is applied at 0.7536 kg/l.",
+ ["Sulfur at 0.0000 ppm, the missing figure read as none, and Density at 0.7536 kg/l.",
   "Sulfur at 50.0000 and Density at 0.7547, as in the full Apapa recipe.",
   "Neither is reported, since a skipped row blanks every achieved value."],
- "The skipped specification is not formed: the engine returns no value. Density blends on volume and needs no SG, so it is applied in both cases at 0.7536 kg/l.")
+ "The skipped specification is not formed: the engine returns no value. Density blends on volume, is applied, and achieves 0.7536 kg/l on that recipe.")
 
 q(2, "Reformate is typed with a minimum of 3000 and a maximum of 2000. The kernel alone would call such a problem infeasible. What does the optimizer return?",
  "REFUSED: Reformate has a minimum above its maximum.",

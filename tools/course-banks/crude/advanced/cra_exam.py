@@ -10,11 +10,9 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 q(2, "In the optimizer's default pool Isomerate enters at 0.0000 bbl. In the kernel's terms, what holds exactly for Isomerate there?",
  "Its lower bound of zero on the Isomerate volume.",
  ["Its availability, the upper bound, which the result reports as a tank drawn full.",
-  "The batch row, which the other three components meet with no Isomerate in it.",
+  "Its floor of 1200 bbl, the minimum the Isomerate case sets.",
   "No constraint at all, because a component at zero is dropped from the problem."],
  "The default pool reports \"At zero: Isomerate\" and \"Components at their availability: nothing\". A volume on a bound of zero is a bound holding exactly, one of the constraints that can pin a vertex.")
-
-# 2 [2M m02 m04]
 q(0, "At Apapa the sulfur dual is scaled by sum(SG x volume), 6037.3872, while the RVP dual is scaled by the 8000.0000 bbl batch. What decides the difference?",
  "The basis each row declares: d_i is SG on the mass basis and 1 on the index-on-volume basis.",
  ["Whether the row binds: a binding row is scaled by the batch and a slack row by its mass.",
@@ -47,30 +45,24 @@ q(2, "With Butane's maximum typed as 0 the recipe costs 710560.2149 $ and only S
  "A non-binding specification has a price of zero. With Butane's maximum typed as 0 the binding list is Sulfur alone, so the RVP maximum is not binding and relieving it saves nothing.")
 
 # 6 [2M m02 m04]
-q(0, "RVP_INDEX_EXPONENT is overridable. Where does a planner's own exponent enter the Apapa problem?",
+q(0, "RVP_INDEX_EXPONENT is 1.25. Where does it enter the Apapa problem?",
  "In the RVP row's coefficients and the 9 psi limit's index, and so in the slope at the limit.",
  ["In the objective, as a cost per psi added to each component's price per barrel.",
   "In the bounds of the high-RVP components, which it tightens as the exponent rises.",
   "Only in the report, where the achieved RVP is turned back into psi after the solve."],
- "RVPI = RVP^n sets both w_i and the limit's index in the row, and the slope at the limit is RVP_INDEX_EXPONENT x 9^(RVP_INDEX_EXPONENT - 1), which prints 2.1651 at the engine's 1.25.")
-
-# 7 [2M m03 m05]
+ "RVPI = RVP^n sets both w_i and the limit's index in the row, and the slope at the limit is RVP_INDEX_EXPONENT x 9^(RVP_INDEX_EXPONENT - 1), which prints 2.1651.")
 q(3, "With Butane at its 400 bbl availability the Apapa cargo costs 698701.5605 $. With the maximum left blank it takes 438.1863 bbl and costs 698569.3341 $. What does the pair show about Butane's bound at Apapa?",
- "The bound held exactly and was holding the recipe back.",
+ "The bound held exactly: with no limit, the recipe takes more Butane.",
  ["The bound was slack: both recipes bind on Sulfur and RVP whatever Butane's maximum.",
   "A blank maximum is read as a tank of zero, so the second recipe is a different pool.",
   "A blank maximum is rounded to a past availability."],
  "At Apapa the result prints \"Components at their availability: Butane.\" A maximum left blank is no limit, and that recipe takes 438.1863 bbl of Butane at 698569.3341 $, against 400.0000 bbl at 698701.5605 $ with the bound in place.")
-
-# 8 [m01]
-q(1, "The Apapa pool is asked for the 10 ppm template. Before the recipe, the binding list or any price, what is the first line an expert reads?",
- "The status, which for this request is infeasible.",
- ["The binding list, which names the one limit that failed so the planner can relax it.",
-  "The giveaway table, which shows how far each specification sits from its limit.",
-  "The unit cost, which shows how far the cargo has moved from the 50 ppm recipe."],
- "Nothing else in a result has meaning until the status is read. With infeasible there is nothing further but the refusal: \"REFUSED: No recipe from these components can meet every specification. Relax a limit, or bring in a component that can.\" No single limit moved back rescues the pool.")
-
-# 9 [2M m01 m02]
+q(1, "The Apapa cargo is re-solved with the sulfur maximum tightened to 49 ppm. What does it print?",
+ "699253.4861 $, a saving of -551.9256 $.",
+ ["698149.8809 $, a saving of 551.6796 $.",
+  "695050.1663 $, a saving of 3651.3942 $.",
+  "710560.2149 $, with Sulfur alone binding."],
+ "The re-solve table prints Sulfur limit 49 at 699253.4861 $, a saving against the optimum of -551.9256 $. 698149.8809 $ is the sulfur limit of 51, 695050.1663 $ the RVP limit of 10, and 710560.2149 $ the recipe with Butane typed as 0.")
 q(2, "The RON minimum of 91 blends on volume. In the ratio row sum((w_i - L d_i) v_i), what are w_i and d_i for RON?",
  "w_i is each component's RON and d_i is 1, the weights of the volume basis.",
  ["w_i is SG x each component's RON and d_i is SG, as on the mass basis.",
@@ -79,14 +71,12 @@ q(2, "The RON minimum of 91 blends on volume. In the ratio row sum((w_i - L d_i)
  "SPEC_TEMPLATES declares RON on volume, and on the volume basis w_i is the property and d_i is 1. The mass basis and the two index bases carry the other weights in the same table.")
 
 # 10 [2M m02 m05]
-q(0, "FCC gasoline with no SG and no API forces the Sulfur specification to be skipped, yet Density is applied and achieved at 0.7536 kg/l. Why does Density survive?",
- "Density blends on volume, so its row needs no SG.",
- ["Density is exempt from skipping, as the template marks it a required specification.",
-  "The engine fills FCC gasoline's density from the template's 0.72 minimum to build the row.",
-  "Density is a bound on each component, so it never needs a row that carries weights."],
- "A volume-basis row weights each component by 1, so a missing SG leaves it whole. Sulfur is on the mass basis, where every weight is an SG, so FCC gasoline's blank stops that row alone.")
-
-# 11 [2M m03 m04]
+q(0, "The AGO recipe's density achieves 0.8450 against the template's 0.82 to 0.845 kg/l. What does the engine report for it?",
+ "Giveaway 0.0000, binding true, pressed against the 0.845 maximum.",
+ ["Giveaway 0.0000, binding false, as 0.8450 sits inside the range.",
+  "Binding true at the 0.82 minimum, the end a range is read from.",
+  "Skipped, since density blends on volume and the AGO rows are on mass."],
+ "The AGO table prints Density achieved 0.8450, giveaway 0.0000, binding true, and the price rows list it as the Density maximum at 852453.4687 $ per kg/l.")
 q(3, "At Apapa both the Density maximum row and the Density minimum row price at 0.0000 per kg/l. Why?",
  "The blend's 0.7547 kg/l sits inside both ends of the range.",
  ["The two rows cancel, as a range is priced as its maximum's dual less its minimum's.",
@@ -103,46 +93,36 @@ q(1, "Apapa's marginal barrel sits 0.1731 $/bbl above its average and the defaul
  "Both pools are on the 50 ppm template and both bind on Sulfur and RVP. What the digest prints differently is availability: Butane at 400.0000 bbl at Apapa, and nothing in the default pool.")
 
 # 13 [2M m04 m06]
-q(0, "oracle_productblending.py prices relief by exact re-solve with the limit moved. Which Apapa figures in the digest come from the same route?",
- "The re-solves at sulfur limits of 51 and 49 and RVP limits of 10 and 8, each one whole unit away.",
- ["The rowPrices of -0.0914 and -0.2569, read from the rows at the optimum.",
-  "The scales 6037.3872 and 8000.0000 that turn each dual into a price per unit.",
-  "The index slope of 2.1651 at the 9 psi limit, turning index points into psi."],
- "The engine reports a scaled derivative, and the digest also re-solves the limit one whole unit each way. The oracle's route is the re-solve, so it checks the engine's derivative by a separate computation.")
-
-# 14 [m05]
+q(0, "What does the Apapa PMS recipe take of Isomerate?",
+ "784.1881 bbl, a volume fraction of 0.0980.",
+ ["784.1881 bbl, a volume fraction of 0.0500.",
+  "1200.0000 bbl, the volume on its floor.",
+  "1500 bbl, its whole availability."],
+ "The recipe prints Isomerate at 784.1881 bbl, a volume fraction of 0.0980, costing 69165.3861 $. 0.0500 is Butane's fraction, 1200.0000 bbl is the Isomerate floor case, and 1500 bbl is Isomerate's availability.")
 q(3, "A user types -50 in Butane's maximum, meaning no limit. What does the engine return?",
  "A refusal that names Butane's maximum, asks for a number of zero or more, and says to leave it blank for no limit.",
  ["An optimal recipe with Butane unlimited: a negative maximum is read as the blank the user meant, and it takes 438.1863 bbl.",
   "An optimal recipe with Butane at 0.0000 bbl: a negative maximum is clamped to zero.",
   "The status infeasible: no volume of zero or more can sit below a maximum of -50 in the kernel's bounds."],
- "A negative maximum describes no tank, and the engine refuses it by name. The message reminds the user that a blank is how no limit is written.")
-
-# 15 [2M m01 m05]
-q(2, "The Apapa pool on the 10 ppm template comes back infeasible. Why is that verdict a proof about the problem?",
+ "The engine returns \"REFUSED: Butane maximum must be a number of zero or more. Leave a maximum blank for no limit.\" A maximum left blank is no limit.")
+q(2, "The Apapa pool on the 10 ppm template comes back infeasible. By the method's own account, what does that verdict mean?",
  "Phase one could not drive its artificial variables to zero, so no recipe meets every row.",
  ["The kernel stops after a fixed number of iterations and reports infeasible on timeout.",
   "The engine tries each limit of the template in turn and gives up after the fourth.",
   "Phase two visited every vertex and found none as cheap as the 50 ppm recipe."],
  "Phase one finds any point that meets every row by driving artificial variables to zero; if it cannot, the rows contradict and the answer is infeasible. The kernel's status is always one of optimal, infeasible or unbounded.")
-
-# 16 [m06]
-q(1, "A planner in the refinery course meets a shadow price on a refinery plan. Where was the reading of it taught?",
- "In this course's Expert tier; refinery leans on it and does not teach it again.",
- ["In the refinery course's own first module, which re-teaches the kernel for refinery streams.",
-  "In the Economics courses, which own every price a planner reads off a plan.",
-  "In the supply course, which owns landed cost and pump price."],
- "This course owns linear programming for the Commercial & Trading module. The refinery course owns the refinery plan, the schedule, the variance model and the modular feasibility screen.")
-
-# 17 [m06]
-q(3, "A learner wants to discount the Apapa cargo's cost over several years with a net present value. Where does this course send them?",
- "To the Economics courses, where net present value is taught.",
- ["To the refinery course, which owns the variance model and every calculation made across time.",
-  "To the supply course, which owns landed cost and pump price and the value of a cargo over its life.",
-  "To the shadow price lessons, as relief is a present value."],
- "Net present value, internal rate of return, Monte Carlo and decision trees belong to the Economics courses.")
-
-# 18 [m04]
+q(1, "On the AGO recipe, what sulfur does the engine report as achieved, and on which basis does it blend?",
+ "28.1533 ppm, on mass.",
+ ["28.1533 ppm, on volume.",
+  "50.0000 ppm, on mass.",
+  "21.8467 ppm, on mass."],
+ "The AGO table prints Sulfur achieved 28.1533 with giveaway 21.8467, binding false, and the diesel template carries Sulfur on mass. 50.0000 is the Apapa PMS sulfur, where the row binds.")
+q(3, "How much Kerosene does the AGO recipe take, and at what cost?",
+ "1505.9222 bbl, costing 161434.8562 $.",
+ ["1505.9222 bbl, costing 53915.9391 $.",
+  "624.0271 bbl, costing 161434.8562 $.",
+  "2670.0508 bbl, costing 271010.1523 $."],
+ "The AGO recipe prints Kerosene at 1505.9222 bbl and 161434.8562 $. 624.0271 bbl and 53915.9391 $ are Hydrotreated LCO's, and 2670.0508 bbl with 271010.1523 $ is Straight-run gasoil.")
 q(0, "In the textbook plant a manager can buy one extra hour on either unit. Reading the kernel's duals, which purchase raises earnings more?",
  "An hour on the first unit, whose row prices at 0.7500 against 0.5000 on the second.",
  ["An hour on the second unit, whose row 2 has the smaller right-hand side of 6.",
@@ -156,9 +136,7 @@ q(2, "The AGO recipe achieves a flash point of 73.7403 C against a minimum of 55
  ["It blends through the Refutas index on mass, and 18.7403 is the smaller gap of a range.",
   "It binds, as a flash point minimum is a safety limit the engine holds exactly.",
   "It is skipped for lack of a density, and 18.7403 is the gap it leaves."],
- "Cetane and flash point are treated linearly on volume, which the template notes is a screening approximation. For a minimum, giveaway is the achieved value minus the limit.")
-
-# 20 [m04]
+ "For a minimum, giveaway is the achieved value minus the limit, and the AGO table prints 18.7403. SPEC_TEMPLATES carries Flash point on volume in the gasoil template.")
 q(1, "On the AGO recipe the Cetane number minimum has rowPrice 0.1932 and price 1159.3909 $ per unit, both positive, while the Density maximum's rowPrice x scale and its price carry opposite signs. Why the difference?",
  "A minimum's relief is dCost/dL, and a maximum's is its negative.",
  ["Cetane blends on volume and density on mass, so only density's scale turns the sign.",
@@ -191,14 +169,12 @@ q(2, "With an Isomerate floor of 1200 bbl, Butane falls to 339.9340 bbl. Would t
  "At that optimum butane is 339.9340 bbl against its availability of 400: inside its availability. Isomerate sits on its 1200 bbl floor, a lower bound; an availability is an upper bound.")
 
 # 24 [m03]
-q(1, "At Apapa the cost line for Butane reads 21640.0000 $. What is it?",
- "Butane's 400.0000 bbl times its cost of 54.1 $/bbl.",
- ["Butane's share of the octane giveaway value, 16804.7174 $ plus 11176.9355 $, over its barrels.",
-  "Butane's price of relief on its 400 bbl tank.",
-  "The unit cost of Butane in the cargo, per barrel."],
- "The Butane line reads 400.0000 bbl and 21640.0000 $, and Butane costs 54.1 $/bbl. The cost column sums to the cargo's 698701.5605 $.")
-
-# 25 [m02]
+q(1, "At the textbook corner x 0.0000, y 3.0000, what does the kernel print?",
+ "objective 12.0000, status optimal",
+ ["objective 20.0000, status optimal",
+  "objective 12.0000, status infeasible",
+  "objective 21.0000, status optimal"],
+ "The corner table prints x 0.0000, y 3.0000 at 12.0000 with the status optimal. 20.0000 is the corner x 4.0000, y 0.0000, and 21.0000 the optimum at x 3.0000, y 1.5000.")
 q(3, "In SPEC_TEMPLATES, how does the Fuel oil, 380 cSt template declare Viscosity at 50 C?",
  "index, on mass, with a maximum of 380 cSt and no minimum",
  ["volume, with a maximum of 380 cSt and no minimum, the same basis as its density",
@@ -212,25 +188,19 @@ q(0, "oracle_crudeassay.py holds the assay engine to 6 blends, 4 curve cases and
  ["At the first grid point past 50 percent, read straight off the blended curve.",
   "As the average of the component crudes' own midpoints, weighted on volume.",
   "By reading T50 back out of the golden files it checks."],
- "The oracle \"loads a cargo in barrels and pounds; Refutas inverted by bisection; yields by segment overlap; T50 by bisection; netback as a 100,000 bbl account\". It is written from the rules and not from the JavaScript.")
-
-# 27 [2M m02 m06]
-q(1, "A planner reports the AGO recipe's viscosity. Given held item C12, what should the report carry?",
- "The basis the engine used, the Refutas index on mass, beside the 3.0036 cSt.",
+ "The oracle_crudeassay.py row lists T50 by bisection and Refutas inverted by bisection. It is written from the rules and not from the JavaScript.")
+q(1, "Given held item C12, which report of the AGO viscosity matches what the digest prints?",
+ "The engine's 3.0036 cSt, stated as the Refutas index blended on mass fraction.",
  ["2.9518 cSt alone, the volume figure, as the course keys volume as the correct basis.",
-  "The mean of 3.0036 and 2.9518 cSt, the reading between the two bases.",
-  "No viscosity at all, as a held item is not reported until decided."],
- "Stating the limit beside the figure is the discipline for every held item. On this pool the volumes and the 594720.9475 $ cost stay put when the basis changes; the achieved viscosity moves.")
-
-# 28 [m04]
+  "The mean of 3.0036 and 2.9518 cSt, the engine's reading between the two bases.",
+  "No viscosity at all, as the engine withholds a figure on a held basis."],
+ "The engine prints 3.0036 cSt with the index on mass and 2.9518 cSt with the same index on volume. C12 is taught as a stated limit and never graded, and the basis is a course and owner decision.")
 q(3, "A buyer asks Apapa for more cargo, and the desk quotes the extra barrels at the unit cost of 87.3377 $/bbl. What does that quote give away?",
- "0.1731 $/bbl on every added barrel, for as long as the vertex holds.",
+ "0.1731 $/bbl on the next barrel, the marginal minus the average.",
  ["Nothing: every barrel of a least-cost cargo costs the unit cost at the margin, whatever the bounds.",
   "87.5108 $/bbl on every added barrel, the whole of the marginal barrel's cost.",
   "The value of the Butane already blended in the cargo."],
- "Marginal minus average is 0.1731. A shadow price is a derivative at the optimum, and the optimal vertex can change, so a large extension is checked by re-solving.")
-
-# 29 [m01]
+ "Marginal minus average is 0.1731: the volume row's price, 87.5108 $/bbl, is the marginal barrel, and the unit cost, 87.3377 $/bbl, is the average barrel.")
 q(2, "The digest solves each textbook corner with both coordinates fixed by bounds, and all four print the status optimal. Why optimal at every one?",
  "Each fixed point is feasible, so the kernel has a point to return.",
  ["Each corner is the optimum of the full problem, so all four report one objective.",
@@ -300,25 +270,19 @@ q(3, "Moving the RVP limit to 10 prints a saving of 3651.3942 $, and moving it t
  ["Rounding in the rowPrice of -0.2569, printed to four decimals and so drifting over a psi.",
   "The Butane bound, which the re-solves remove before moving the limit.",
   "The Density range, which binds once the RVP limit moves a whole psi."],
- "The digest checks each price by re-solving with the limit moved one whole unit each way, and names two causes for the gap: non-linear rows and a vertex that can change. The rowPrice rounding is a print matter; the price of 4448.9659 is formed by the engine.")
-
-# 38 [m06]
-q(0, "The expert reading order ends with a re-solve, after the marginal barrel. Why does the re-solve come last?",
- "It prices a move larger than a small step, which the rates read before it cannot.",
- ["It is the step that decides the status, which the rest of the reading depends on.",
-  "It replaces the prices of relief, which count for nothing until a re-solve is made.",
-  "It finds the skipped specifications, which the recipe leaves out of its binding list."],
- "Shadow prices and the marginal barrel are rates at the optimum. A whole psi or a large cargo extension is a finite move, and the digest prices those by solving again, as at 8001 bbl or an RVP limit of 10.")
-
-# 39 [2M m03 m05]
-q(2, "With Butane's tank typed as 0, RVP leaves the binding list. What happens to the RVP row's giveaway in that recipe?",
- "It becomes positive: the RVP row has room once Butane is gone.",
- ["It stays at 0.0000, as a specification that binds in one pool binds in every pool.",
-  "It becomes negative: with Butane gone the blend sits above its 9 psi maximum.",
-  "It is skipped, as a component at 0 carries no RVP figure."],
- "Giveaway for a maximum is the limit minus the achieved value. With the tank typed as 0 the binding list is Sulfur alone and the status optimal, so the RVP maximum is met with room and the giveaway is positive.")
-
-# 40 [m01]
+ "The digest checks each price by re-solving with the limit moved one whole unit each way, and names two causes for the gap: the rows move non-linearly in the limit, and the optimal vertex can change. Rounding is not among the causes it names.")
+q(0, "What does the Apapa recipe achieve for MON, and what does it give away?",
+ "84.4928, a giveaway of 3.4928.",
+ ["94.5010, a giveaway of 3.5010.",
+  "84.4928, a giveaway of 3.5010.",
+  "84.4928, a giveaway of 0.0000, binding."],
+ "The Apapa table prints MON achieved 84.4928 against its minimum of 81, giveaway 3.4928, binding false. 94.5010 and 3.5010 are RON's.")
+q(2, "At Apapa the RVP rowPrice times the 8000.0000 bbl batch prints -2054.8893. In what unit is that figure?",
+ "$ per index point, as the row is in index units",
+ ["$ per psi, the value of one psi of RVP relief at the limit",
+  "$ per ppm, the unit the sulfur row's figure is in",
+  "$ per bbl, the cost of one more barrel"],
+ "The digest prints: rowPrice x 8000.0000 bbl is -2054.8893 $ per index point. The RVP row is in index units.")
 q(1, "How does solveLP carry a tank limit such as Butane's 400 bbl at Apapa?",
  "As an upper bound on Butane's volume in lo <= x <= hi, with no extra row for it.",
  ["As an extra row, Butane's barrels at most 400, priced like a specification.",
@@ -332,11 +296,9 @@ q(3, "Compare a component whose cost is blank with one whose sulfur figure is bl
  ["Both are refused: the engine never solves with a blank in the table, and names the component.",
   "Both are read as zero, so the component is free in one case and sulfur-free in the other.",
   "Both are skipped: the recipe solves without the component that carries the blank."],
- "A cost is part of the objective, so without it there is no least-cost question. A specification is one row among several, so without it there is still a question, only a smaller one, at 695245.0644 $ on the Apapa pool.")
-
-# 42 [m06]
-q(2, "The digest counts the LP oracle's golden cases as 181 problems. How does its method stand on tolerances against the kernel's?",
- "It has none: it works in exact rational arithmetic.",
+ "The blank cost returns the refusal that begins \"No cost for Isomerate\". The blank sulfur figure returns optimal at 695245.0644 $, with Sulfur listed as skipped and its reason.")
+q(2, "The digest counts the LP oracle's golden cases as 181 problems. How does its method stand against the kernel's absolute tolerances?",
+ "It works in exact rational arithmetic, with no simplex at all.",
  ["The kernel's own absolute tolerances, shared by running a simplex with Bland's rule.",
   "A larger tolerance than the kernel's, sized for problems scaled in millions.",
   "A relative tolerance on each pivot, set tighter than the kernel's absolute ones."],

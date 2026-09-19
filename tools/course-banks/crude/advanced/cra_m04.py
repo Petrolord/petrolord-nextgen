@@ -45,14 +45,14 @@ q(0, "The value of RVP relief, 4448.9659 $ per psi, divided by the negative of t
  ["The index is linear in RVP, so its slope is the same at every pressure and the limit could be read anywhere.",
   "The exponent 1.25 was fitted to the Apapa pool so the two routes would meet at this one cargo.",
   "The RVP row is scaled by sum(SG x volume), 6037.3872, which the index slope cancels."],
- "2.1651 index points per psi is the slope of the index at the 9 psi limit, and the same slope from the exported exponent is 2.1651. The RVP row is in index units and scales by the 8000.0000 bbl batch; RVP_INDEX_EXPONENT is a named and overridable parameter.")
+ "2.1651 index points per psi is the slope of the index at the 9 psi limit, and the same slope from the exported exponent is 2.1651. The RVP row is in index units and scales by the 8000.0000 bbl batch.")
 
 q(1, "Why is the slope of the RVP index read at 9 psi and at no other pressure?",
- "The index is curved in RVP, and the relief that matters is relief on the limit, which sits at 9 psi.",
+ "The price uses dIndex/dL, the index's slope at the limit L, which is 9 psi.",
  ["It is Butane's RVP, since Butane is the component at its availability.",
   "The exponent is defined at 9 psi, and RVP_INDEX_EXPONENT holds only there.",
   "It is the RVP of FCC gasoline, the largest component in the recipe."],
- "RVP blends through RVPI = RVP^n. The slope of the index at the 9 psi limit is 2.1651 index points per psi. Across a whole psi the rows move non-linearly in the limit, which is why a whole psi of relief need not save the reported figure.")
+ "optimiseBlend reports price = rowPrice x sum(d_i v_i) x dIndex/dL. At Apapa that slope, at the 9 psi limit, is 2.1651 index points per psi.")
 
 q(3, "The Total volume row at Apapa reads 87.5108 as its price and 87.5108 as its rowPrice. Why do the two columns agree on this row?",
  "Its right-hand side is already barrels of product, so the dual is dollars per barrel.",
@@ -87,14 +87,14 @@ q(3, "Raising the Apapa sulfur maximum to 51 ppm prints a saving of 551.6796 $, 
  ["The re-solves were run on a different pool, so their savings measure another recipe entirely.",
   "The shadow price is read at the 51 ppm re-solve, so it prices a different limit from the recipe's.",
   "Four-place rounding of the re-solved totals opens the gap."],
- "One whole unit of relief can differ from the derivative, because the rows move non-linearly in the limit and the optimal vertex can change.")
+ "A shadow price is a derivative at the optimum, and one whole unit of relief can differ from it. The re-solve table prints both savings beside the price of 551.8026 $ per ppm.")
 
-q(2, "The RVP re-solves print a saving of 3651.3942 $ at 10 psi and -4751.5037 $ at 8 psi, against a shadow price of 4448.9659 $ per psi. What should a planner do before renegotiating a cargo's RVP by a whole psi?",
- "Re-solve with the new limit and read the saving the re-solve prints.",
- ["Multiply the shadow price by the change in the limit, since it holds for any move of the RVP maximum, however large.",
-  "Take the average of the two re-solves as the value of a psi.",
-  "Price the psi at the unit cost of 87.3377 $/bbl instead."],
- "The shadow price is a derivative at the optimum. Across a whole psi the rows move non-linearly in the limit and the optimal vertex can change, so a large move is priced by solving again.")
+q(2, "The RVP shadow price at Apapa is 4448.9659 $ per psi. Where does the digest read what relieving the maximum by one whole psi saves?",
+ "From the re-solve at an RVP limit of 10, which prints 3651.3942 $.",
+ ["From the shadow price, since it holds for any move of the RVP maximum, however large.",
+  "From the average of the two re-solves, taken as the value of a psi.",
+  "From the unit cost of 87.3377 $/bbl, taken over the batch."],
+ "The engine re-solved with the limit moved one whole unit each way, and relieving the 9 psi maximum to 10 prints a saving of 3651.3942 $ against the price of 4448.9659 $ per psi.")
 
 q(1, "The AGO Density maximum is priced at 852453.4687 $ per kg/l. What must a reader hold in mind?",
  "The price is per whole kg/l of the density limit.",

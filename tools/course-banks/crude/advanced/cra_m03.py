@@ -24,7 +24,7 @@ q(2, "The Apapa pool has four variables. Which four constraints hold exactly at 
  ["The batch row and the RON, MON and density rows, each met at its template limit.",
   "The four upper bounds, each component at its availability.",
   "The sulfur and RVP rows, each counted as row and bound."],
- "Four variables need four things holding exactly. At Apapa they are the batch row, Butane at its availability, and the binding Sulfur and RVP rows; RON, MON and Density carry giveaway.")
+ "A vertex needs at least as many constraints and bounds holding exactly as there are variables. At Apapa they are the batch row, Butane at its availability, and the binding Sulfur and RVP rows; RON, MON and Density carry giveaway.")
 
 q(1, "The Apapa result lists Sulfur and RVP as binding. What does the course say a binding specification is?",
  "Met exactly, with the optimum pressed against it, so relaxing it lowers the cost.",
@@ -48,25 +48,25 @@ q(2, "Density is achieved at 0.7547 kg/l inside a range of 0.72 to 0.775, with a
  "For a range the engine reports the smaller of the two gaps. The blend sits nearer the maximum, and 0.0203 kg/l is that distance.")
 
 q(1, "The AGO cargo at the same terminal binds on Cetane number and Density, and there sulfur gives away 21.8467 ppm. What does that say about binding?",
- "Binding is a verdict about one pool at one set of prices.",
- ["A sulfur specification binds on every gasoline and never on a gasoil, since the two templates set different sulfur limits.",
+ "A specification that binds on one pool can give quality away on another.",
+ ["A sulfur limit binds on every gasoline template and never on a gasoil template.",
   "The AGO recipe is off specification on sulfur, since a gasoil must meet its limit exactly.",
   "Sulfur binds only where the template carries it on mass, and the AGO sulfur row is on volume."],
- "At Apapa sulfur binds with a giveaway of 0.0000. On the AGO pool it does not, and both templates carry sulfur on mass. Binding belongs to a recipe, a pool and its prices.")
+ "At Apapa Sulfur binds with a giveaway of 0.0000. On the AGO pool Sulfur is not binding and gives away 21.8467 ppm, and both templates carry sulfur on mass.")
 
 q(3, "A binding specification shows a giveaway of 0.0000 and binding true. What does the Apapa table show about those two columns in every row?",
  "Each zero giveaway is a true.",
  ["A true can carry a positive giveaway when the limit is a range and the recipe sits inside both ends.",
   "The columns are independent: binding is typed by the user and giveaway is computed by the engine.",
   "Every false carries a giveaway below one unit of its property, whatever the specification."],
- "A specification either binds with zero giveaway or gives quality away and does not bind. At Apapa the two zeros, Sulfur and RVP, are the two trues.")
+ "In the Apapa table the two zero giveaways, Sulfur and RVP, are the two trues, and RON, MON and Density carry giveaway with binding false.")
 
 q(0, "Why does the Apapa recipe deliver a RON of 94.5010 against a RON minimum of 91?",
- "The recipe is held by the sulfur and RVP rows, and the octane arrives with the barrels they call for.",
- ["The optimizer adds octane on purpose, as a safety margin against a failed certificate at the port.",
+ "RON does not bind, and the blend does not touch its 91 minimum.",
+ ["The optimizer adds octane on purpose, as a safety margin.",
   "RON blends on mass, so the volume figure overstates what the buyer receives in the tank.",
-  "Octane carries no cost in this pool, so the kernel adds it freely to the recipe."],
- "RON does not bind: its giveaway is 3.5010 and it blends on volume. The recipe sits where the sulfur and RVP rows hold it, and it includes Reformate at 3284.6899 bbl, which carries 98.6 RON.")
+  "RON binds at 94.5010, the value the template sets for the cargo."],
+ "RON's binding is false, with a giveaway of 3.5010 on the volume basis. A non-binding specification has a price of zero: relieving a limit the blend does not touch saves nothing.")
 
 q(1, "valueGiveaway prices the MON giveaway of 3.4928 at a typed 0.4 $ per unit per bbl. What does it report over the 8000 bbl batch?",
  "11176.9355 $, the MON gap valued at the typed unit value.",
@@ -80,7 +80,7 @@ q(2, "The RON giveaway of 3.5010 is valued at 16804.7174 $ over the batch. Where
  ["From the kernel, which reads a price per octane number off the RON row's dual at the optimum.",
   "From a market feed of octane premiums at run time.",
   "From the 50 ppm gasoline template, which carries a value beside each limit."],
- "An octane number has no price inside the optimizer. The 0.6 is the user's typed unit value, and the RON row's own value of relief is 0.0000.")
+ "valueGiveaway takes a value per unit from the user. The 0.6 is the typed unit value on the RON row, and the RON row's own value of relief is 0.0000.")
 
 q(3, "Density's giveaway of 0.0203 kg/l has no unit value typed. What does valueGiveaway report for it?",
  "not priced",
@@ -101,14 +101,14 @@ q(1, "The RON minimum's value of relief is 0.0000 while the RON giveaway, priced
  ["One of them is wrong, since a limit with priced giveaway must carry a value of relief.",
   "The giveaway value is the relief price times the volume blended over the batch.",
   "The relief price is the giveaway value per barrel, spread over the 8000 bbl."],
- "The recipe is held by sulfur and RVP, so relief on RON saves nothing. The priced giveaway values the octane above 91 at the user's price per unit over the volume blended.")
+ "A non-binding specification has a price of zero, and RON does not bind. valueGiveaway values the RON gap at the user's typed 0.6 over the volume blended.")
 
-q(0, "A reader wants to add the RON giveaway of 3.5010 and the Density giveaway of 0.0203 into one figure of quality handed over. What is wrong with that?",
- "They are in different units, octane numbers and kg/l.",
- ["Density's giveaway would need doubling first, since a range has two ends to count.",
-  "Nothing, once each is rounded to four decimals and written in the same table.",
-  "Density's is subtracted, since it sits in a range."],
- "Giveaway is measured in the property's own unit. Whether either is worth money is a separate question that needs a price per unit from the user.")
+q(0, "Which total cost and unit cost does the Apapa recipe print?",
+ "698701.5605 $ and 87.3377 $/bbl.",
+ ["698701.5605 $ and 87.5108 $/bbl.",
+  "698569.3341 $ and 87.3377 $/bbl.",
+  "710560.2149 $ and 87.3377 $/bbl."],
+ "The Apapa recipe totals 8000.0000 bbl at 698701.5605 $, unit cost 87.3377 $/bbl. 87.5108 is the volume row's price, the marginal barrel; 698569.3341 $ and 710560.2149 $ are the recipes with Butane's maximum left blank and typed as 0.")
 
 emit(Q, '/root/wt-md-crude-nextgen/tools/course-banks/crude/advanced/cra_m03.json', label='cra_m03', expect_n=15)
 finish()

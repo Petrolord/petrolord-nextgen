@@ -63,18 +63,18 @@
    "The RVP row is scaled by sum(SG x volume), 6037.3872, which the index slope cancels."
   ],
   "answer": 0,
-  "explanation": "2.1651 index points per psi is the slope of the index at the 9 psi limit, and the same slope from the exported exponent is 2.1651. The RVP row is in index units and scales by the 8000.0000 bbl batch; RVP_INDEX_EXPONENT is a named and overridable parameter."
+  "explanation": "2.1651 index points per psi is the slope of the index at the 9 psi limit, and the same slope from the exported exponent is 2.1651. The RVP row is in index units and scales by the 8000.0000 bbl batch."
  },
  {
   "prompt": "Why is the slope of the RVP index read at 9 psi and at no other pressure?",
   "options": [
    "It is Butane's RVP, since Butane is the component at its availability.",
-   "The index is curved in RVP, and the relief that matters is relief on the limit, which sits at 9 psi.",
+   "The price uses dIndex/dL, the index's slope at the limit L, which is 9 psi.",
    "The exponent is defined at 9 psi, and RVP_INDEX_EXPONENT holds only there.",
    "It is the RVP of FCC gasoline, the largest component in the recipe."
   ],
   "answer": 1,
-  "explanation": "RVP blends through RVPI = RVP^n. The slope of the index at the 9 psi limit is 2.1651 index points per psi. Across a whole psi the rows move non-linearly in the limit, which is why a whole psi of relief need not save the reported figure."
+  "explanation": "optimiseBlend reports price = rowPrice x sum(d_i v_i) x dIndex/dL. At Apapa that slope, at the 9 psi limit, is 2.1651 index points per psi."
  },
  {
   "prompt": "The Total volume row at Apapa reads 87.5108 as its price and 87.5108 as its rowPrice. Why do the two columns agree on this row?",
@@ -129,18 +129,18 @@
    "The price is a derivative at the optimum; a whole unit of relief is a finite move."
   ],
   "answer": 3,
-  "explanation": "One whole unit of relief can differ from the derivative, because the rows move non-linearly in the limit and the optimal vertex can change."
+  "explanation": "A shadow price is a derivative at the optimum, and one whole unit of relief can differ from it. The re-solve table prints both savings beside the price of 551.8026 $ per ppm."
  },
  {
-  "prompt": "The RVP re-solves print a saving of 3651.3942 $ at 10 psi and -4751.5037 $ at 8 psi, against a shadow price of 4448.9659 $ per psi. What should a planner do before renegotiating a cargo's RVP by a whole psi?",
+  "prompt": "The RVP shadow price at Apapa is 4448.9659 $ per psi. Where does the digest read what relieving the maximum by one whole psi saves?",
   "options": [
-   "Multiply the shadow price by the change in the limit, since it holds for any move of the RVP maximum, however large.",
-   "Take the average of the two re-solves as the value of a psi.",
-   "Re-solve with the new limit and read the saving the re-solve prints.",
-   "Price the psi at the unit cost of 87.3377 $/bbl instead."
+   "From the shadow price, since it holds for any move of the RVP maximum, however large.",
+   "From the average of the two re-solves, taken as the value of a psi.",
+   "From the re-solve at an RVP limit of 10, which prints 3651.3942 $.",
+   "From the unit cost of 87.3377 $/bbl, taken over the batch."
   ],
   "answer": 2,
-  "explanation": "The shadow price is a derivative at the optimum. Across a whole psi the rows move non-linearly in the limit and the optimal vertex can change, so a large move is priced by solving again."
+  "explanation": "The engine re-solved with the limit moved one whole unit each way, and relieving the 9 psi maximum to 10 prints a saving of 3651.3942 $ against the price of 4448.9659 $ per psi."
  },
  {
   "prompt": "The AGO Density maximum is priced at 852453.4687 $ per kg/l. What must a reader hold in mind?",

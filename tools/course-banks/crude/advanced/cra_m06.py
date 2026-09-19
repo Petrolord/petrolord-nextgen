@@ -6,38 +6,30 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # crude Expert m06, The Expert Reading. Digest sections 26 and 27, read with 21 to 25.
 
 # target rank 1
-q(3, "An expert reads a least-cost result in a fixed order. What comes straight after the status?",
- "Whether any specification was skipped, with its reason.",
- ["The recipe and the components at their availability, since the volumes are what the tank farm pumps first.",
-  "The prices of relief, since they say which rows are worth relaxing first.",
-  "The giveaway on the specifications that do not bind."],
- "The order is status, skipped, recipe and bounds, binding, giveaway, prices of relief, the marginal barrel, and a re-solve for any large move. A skipped row changes what question the recipe answers, so it is read before the recipe.")
-
-# target rank 3
-q(0, "Reading the Apapa result, nothing is skipped. Had Isomerate carried no sulfur figure, the recipe would have cost 695245.0644 $. How is that figure read?",
- "As the cost of a smaller question, with sulfur left out.",
- ["As a saving of the difference against 698701.5605 $, which the terminal could book by dropping the sulfur figure.",
-  "As the Apapa cargo's true cost, since the 50 ppm total includes a sulfur penalty the engine adds at the optimum.",
-  "As an infeasible cargo, because a recipe with a skipped specification is never a recipe in the kernel's sense."],
- "A skipped sulfur row leaves a recipe that meets every specification but one. It is not the cost of the cargo on the 50 ppm template.")
-
-# target rank 0
-q(1, "The optimizer's default pool is 1000 bbl on the 50 ppm template: Reformate 516.0028, FCC gasoline 414.8506, Isomerate 0.0000 and Butane 69.1466 bbl. What does it report about its bounds?",
+q(3, "In the optimizer's default pool, what is relief worth on its two binding specifications?",
+ "Sulfur 55.0114 $ per ppm and RVP 578.9052 $ per psi.",
+ ["Sulfur 551.8026 $ per ppm and RVP 4448.9659 $ per psi.",
+  "Sulfur 55.0114 $ per ppm and RVP 4448.9659 $ per psi.",
+  "Sulfur -0.0720 $ per ppm and RVP -0.2674 $ per psi."],
+ "The default pool's price table prints 55.0114 $ per ppm on the Sulfur maximum and 578.9052 $ per psi on the RVP maximum, with the rowPrices -0.0720 and -0.2674 beside them. 551.8026 and 4448.9659 are the Apapa cargo's figures.")
+q(0, "When the productBlending oracle checks a recipe, where do the achieved properties it compares come from?",
+ "From physical inventories, with its rows from physical mass balances.",
+ ["From propertyOfBlend, called on the engine's own recipe.",
+  "From the engine's LP rows, read back at the optimum.",
+  "From the Refutas index inverted by bisection, for all of them."],
+ "The oracle_productblending.py row reads: rows built from physical mass balances, solved by exact rational vertex enumeration; properties from physical inventories.")
+q(1, "The optimizer's default pool blends Reformate 516.0028, FCC gasoline 414.8506, Isomerate 0.0000 and Butane 69.1466 bbl. What does it report about its bounds?",
  "Components at their availability: nothing. At zero: Isomerate.",
  ["Butane at its availability, as in the Apapa cargo.",
   "Every component at a bound, either its availability or zero.",
   "Isomerate is skipped, since it takes no barrels."],
- "Isomerate enters at 0.0000 bbl, on its lower bound, and no component sits at its availability. That is why its marginal and average barrels both print 86.1228.")
-
-# target rank 2
-q(2, "The default pool's sulfur relief is 55.0114 $ per ppm on a 1000 bbl batch, and Apapa's is 551.8026 $ per ppm on an 8000 bbl batch. What does the pairing show?",
- "Each is per ppm on its own cargo, so the two are not a like-for-like comparison.",
- ["The default pool's sulfur limit is looser, which is why its relief is worth less per ppm on the same template.",
-  "Apapa's relief is overstated, since relief should match on a shared template.",
-  "Both are rowPrices, the duals of the two sulfur rows."],
- "A price of relief is measured over its own batch and recipe. The batches, recipes and rows differ, so the two figures are each read on their own cargo.")
-
-# target rank 1
+ "The default pool prints \"Components at their availability: nothing. At zero: Isomerate.\" With no availability limit pressing, its marginal barrel and unit cost both print 86.1228.")
+q(2, "What does the Product Blending Optimizer show with nothing typed?",
+ "Its default gasoline pool, 1000 bbl, on the 50 ppm template.",
+ ["The Apapa PMS pool, 8000 bbl, on the 50 ppm template.",
+  "Its default gasoline pool, 1000 bbl, on the 10 ppm template.",
+  "The Apapa AGO pool, 6000 bbl, on the 50 ppm diesel template."],
+ "With nothing typed the optimizer shows its default gasoline pool, 1000 bbl, the 50 ppm template. The Apapa PMS cargo is 8000 bbl and the AGO cargo 6000 bbl.")
 q(0, "The default pool's price table prints rowPrice -0.0720 on the Sulfur maximum and -0.2674 on the RVP maximum. How are those figures read?",
  "As the rows' duals, which are not prices per ppm or per psi.",
  ["As the dollars saved per ppm and per psi, turned negative because the default pool is a maximisation of margin.",
@@ -62,14 +54,12 @@ q(3, "Held item C12 prints the Obigbo export blend at 7.4743 cSt with the Refuta
  "The engine blends on mass fraction and names it, \"Refutas index on mass fraction\". The two disagree, both are printed, and no basis is keyed as right.")
 
 # target rank 0
-q(0, "Held item C13 says Watson K is taken at the blend's T50. How does the course state the limit?",
- "As a screening basis; the strict basis is the mean average boiling point.",
- ["As an error in the engine, to be fixed before the course grades it.",
-  "As the strict basis, since T50 is the mean average boiling point.",
-  "As a mass basis, like the Refutas index on mass fraction."],
- "C13 is one of three held items, each taught as a stated limit and never graded: Watson K is taken at the blend's T50, a screening basis.")
-
-# target rank 1
+q(0, "Of the three held items, which one concerns the LP kernel, and what does the engine do there?",
+ "L4: absolute tolerances on its pivots and on phase one.",
+ ["C12: absolute tolerances on the pivots.",
+  "C13: a binding test of 1e-7 times the limit on each row.",
+  "L4: the Refutas index taken on mass fraction in the AGO rows."],
+ "SECTION 27 lists three held items: L4, the LP kernel's absolute tolerances on its pivots and on phase one; C12, the Refutas index on mass fraction; C13, Watson K taken at the blend's T50.")
 q(2, "oracle_lp.py checks the kernel on 181 problems (124 optimal, 44 infeasible, 13 unbounded) by exact rational vertex enumeration with no simplex at all. What fact from the first module makes that route possible?",
  "The optimum of a linear programme, when there is one, sits at a vertex.",
  ["The kernel's absolute tolerances make every problem exact once its coefficients are written as rational numbers.",
@@ -79,37 +69,29 @@ q(2, "oracle_lp.py checks the kernel on 181 problems (124 optimal, 44 infeasible
 
 # target rank 3
 q(1, "Why do 44 infeasible and 13 unbounded problems sit among the LP oracle's golden cases?",
- "Those statuses are answers and must be checked as answers.",
+ "Infeasible and unbounded are answers the kernel returns, like optimal.",
  ["They are problems the kernel cannot solve, kept to show where the tolerances of L4 fail on real cargoes.",
   "They are malformed problems, kept to check that the kernel throws on a row with the wrong coefficient count.",
   "They are the cases that the oracle cannot enumerate and so hands back to the simplex kernel for its answer."],
- "Optimal, infeasible and unbounded are each a verdict the kernel reports. An oracle that checked only optimal problems would leave two of the three answers untested.")
-
-# target rank 2
+ "The oracle_lp.py row counts 124 optimal, 44 infeasible and 13 unbounded. Infeasible and unbounded are answers; a malformed problem is not, and there the kernel throws.")
 q(3, "oracle_productblending.py holds the blending engine on 9 pools. How does it compute a price of relief?",
  "By exact re-solve with the limit moved.",
  ["By reading rowPrice from the engine and multiplying it by the scale the engine printed.",
   "By the same scaled derivative the engine uses, restated in Python.",
   "It does not price relief; it checks recipes and properties only."],
- "Its rows come from physical mass balances, solved by exact rational vertex enumeration. Each oracle is an independent Python oracle written from the rules.")
-
-# target rank 0
+ "The oracle_productblending.py row reads: relief by exact re-solve with the limit moved. Each oracle is written from the rules and not from the JavaScript.")
 q(0, "The engines state RVP_INDEX_EXPONENT 1.25 and BINDING_TOLERANCE 1e-7 in their modules. What does that give a reader?",
- "A value read from the module itself: RVP_INDEX_EXPONENT is a named and overridable parameter.",
+ "A value read from the module itself, as the engines state it.",
  ["A regulation, since each constant is the limit the regulation in force sets.",
   "A graded value the capstone checks to four decimals.",
   "A default price per unit of relief for every binding row."],
- "The constants are read from the modules. CII_BANDS.STABLE 0.7 and CII_BANDS.UNSTABLE 0.9 are stated the same way. SPEC_TEMPLATES are starting points; the regulation in force governs.")
-
-# target rank 1
-q(2, "A planner asks which course teaches the volume correction factor, free water and stock reconciliation for a finished Apapa cargo in a terminal's tanks. Where does this course send them?",
- "To the supply course, Terminals, Depots & Fuel Supply.",
- ["To the refinery course, which owns the refinery plan, the schedule and the variance model for every product.",
-  "Nowhere, since the cargo leaves this course once it is blended.",
-  "To this course's Expert tier, where Apapa is blended."],
- "The Apapa cargo in this tier is a recipe: which components, in what volumes, at what cost. What happens to it in a terminal's tanks is the supply course's material.")
-
-# target rank 3
+ "The digest lists the constants the engines state, read from the modules: CII_BANDS.STABLE 0.7, CII_BANDS.UNSTABLE 0.9, RVP_INDEX_EXPONENT 1.25 and BINDING_TOLERANCE 1e-7. SPEC_TEMPLATES are starting points; the regulation in force governs.")
+q(2, "oracle_lp.py holds the kernel to 181 problems. How does it compute shadow prices?",
+ "As exact one-sided derivatives, by re-solve.",
+ ["By rescaling the kernel's duals.",
+  "By a whole-unit re-solve, averaged.",
+  "It checks statuses and objectives only."],
+ "The oracle_lp.py row reads: exact rational vertex enumeration with no simplex at all; shadow prices as exact one-sided derivatives by re-solve.")
 q(1, "Reading the Apapa pool and the default pool side by side, which reading holds in both?",
  "The same two specifications bind, Sulfur and RVP.",
  ["The marginal and average barrels print the same figure.",
@@ -123,7 +105,7 @@ q(0, "The digest counts the refusals it prints: 17. What stands behind that coun
  ["Each was written by the course from the engine's rules, so the wording is the course's own paraphrase.",
   "Each is a status the kernel returns from phase one.",
   "Each is graded against the capstone's own figures."],
- "A refusal is quoted verbatim, because the engine's words are the only thing vouching for it. The digest asserts each one against the engine before printing it.")
+ "The digest closes: \"Refusals printed in this digest, each asserted against the engine before it was printed: 17.\"")
 
 emit(Q, '/root/wt-md-crude-nextgen/tools/course-banks/crude/advanced/cra_m06.json', label='cra_m06', expect_n=15)
 finish()
