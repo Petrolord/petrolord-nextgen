@@ -42,7 +42,7 @@ The two ways of reading the liquids sit side by side:
 
 gpmC3Plus is the propane and heavier as liquid gallons per Mscf, derived with the liquid densities. c3PlusKgPerMscf is the same cut as a mass per Mscf. The richness word is read off the gallons. The ceiling is stated on the mass.
 
-The gallons carry the liquid densities in them, and a blank density leaves them null.
+The gallons carry the liquid densities in them, and a blank density leaves them null. The mass ceiling reads no liquid density. With propane's liquid density left blank, EGBEMA's c3PlusKgPerMscf is still 6.6647 and its kgPerMscf 26.7066, while its gpmC3Plus reads null.
 
 ## Reading the ceiling in the explorer
 

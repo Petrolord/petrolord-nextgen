@@ -6,7 +6,7 @@ IBAFO's station fills buses from three banks at three pressures. The arrangement
 
 ## The cascade
 
-IBAFO's cascade: Low 2 m3 at 230 bar(a), Mid 2 m3 at 250 bar(a), High 2 m3 at 270 bar(a). A bus tank of 0.1 m3 arrives at 25 bar(a) and is filled to 200 bar(a). All of it is invented for the course. The three banks are the same volumes and pressures the bank module read.
+IBAFO's cascade: Low 2 m3 at 230 bar(a), Mid 2 m3 at 250 bar(a), High 2 m3 at 270 bar(a). A bus tank of 0.1 m3 arrives at 25 bar(a) and is filled to 200 bar(a). The gas is IBAFO's, specific gravity 0.62 at 30 C. All of it is invented for the course. The three banks are the same volumes, pressures and gas the bank module read.
 
 ## The rule
 

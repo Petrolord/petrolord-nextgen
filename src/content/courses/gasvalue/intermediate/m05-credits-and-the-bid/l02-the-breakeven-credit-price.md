@@ -18,7 +18,7 @@ The field's own label states the rule: breakevenCreditPrice is (hurdle minus mar
 | --- | --- |
 | breakevenCreditPrice ((hurdle minus margin) over net tonnes) | 16.0152 |
 
-The breakeven prints 16.0152 dollars per tonne, to four decimals. The course prints the three inputs and the result. It prints no row for the hurdle minus the margin on its own, so this lesson quotes the inputs and the breakeven and computes nothing between them.
+The course prints the numerator on its own: the hurdle minus the margin is 3491850.00 a year, over 218032.865 t/yr. The breakeven prints 16.0152 dollars per tonne, to four decimals.
 
 ## Closed form
 

@@ -6,7 +6,7 @@ A carousel fills cylinders at the plant. A cylinder also travels out to a custom
 
 ## The rule
 
-The engine's basis sentence: "Little's Law: assets in the system = throughput x time in the system." Assets in the system = throughput times time in the system. The fleet is the ceiling of that plus a spares allowance.
+The engine's basis sentence: "Little's Law: assets in the system = throughput x time in the system." Assets in the system = throughput times time in the system. The cycle is the sum of its stage days, and the fleet is the ceiling of (the assets in circulation plus the spares allowance), the spares allowance being the assets in circulation times the spares fraction.
 
 KANO's cylinders: 3200 a day, spares 0.08. The cycle has four stages, each typed in days:
 

@@ -12,6 +12,20 @@ gpmC2Plus is the liquid content of ethane and heavier. gpmC3Plus is the liquid c
 
 The two cuts sum over different rows of the reference table. gpmC2Plus sums over every recoverable component: C2, C3, IC4, NC4 and C5. gpmC3Plus starts at propane: C3, IC4, NC4 and C5. The one row in the first and outside the second is C2, ethane, with a molar mass of 30.07 lb/lbmol and a liquid density of 2.971 lb/gal.
 
+The course prints each row's gallons for EGBEMA and the cut it falls in:
+
+| component | recoverable as NGL | in gpmC2Plus | in gpmC3Plus | gal/Mscf |
+| --- | --- | --- | --- | --- |
+| C1 | false | false | false | none |
+| C2 | true | true | false | 2.7737 |
+| C3 | true | true | true | 1.7019 |
+| IC4 | true | true | true | 0.4241 |
+| NC4 | true | true | true | 0.6602 |
+| C5 | true | true | true | 0.4343 |
+| N2 | false | false | false | none |
+| CO2 | false | false | false | none |
+| sum |  |  |  | 5.9942 (gpmC2Plus), 3.2205 (gpmC3Plus) |
+
 ## The gap is the ethane
 
 The course prints both cuts and the gap between them:

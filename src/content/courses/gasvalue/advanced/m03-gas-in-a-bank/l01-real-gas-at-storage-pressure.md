@@ -12,7 +12,7 @@ Every pressure in lpgCng is absolute. The engine says so on every CNG result: pr
 
 The engine's rule for the mass: m = P V M over Z R T, with Z by Dranchuk-Abou-Kassem on Sutton pseudo-criticals.
 
-In practice, P, V, M, R and T in that rule are read as the pressure, the volume, the molar mass, the gas constant and the temperature. Z is the factor the engine computes: it takes Z with the Dranchuk-Abou-Kassem correlation, from reduced pressure and reduced temperature on Sutton's pseudo-critical properties. The Z factor comes from the production engine's gas properties, which lpgCng calls.
+The course prints what each letter is: P the pressure in Pa (bar(a) times 100000), V the volume in m3, M the gas's molar mass (its specific gravity times the molar mass of air, in kg/kmol), T the temperature in K, R the gas constant, and the ideal mass is the same with Z taken as one. The Z factor comes from the gas Z factor in production/gasProperties, which lpgCng calls.
 
 ## IBAFO's three banks
 

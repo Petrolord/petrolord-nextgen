@@ -39,7 +39,7 @@ A boiling point left blank is not refused. The engine gives the boil alone:
 | dutyKW | 71.8176 |
 | missingTerms | Warm the liquid to boiling; Superheat the vapour |
 
-71.8176 kW is the Boil it term from KANO's full result. The two terms that need the boiling point are named in missingTerms. The engine attaches a note that lists the same two terms, says that the duty covers only the terms supplied, and calls the figure a floor. It is a floor on the duty. The duty on KANO's full inputs is 85.8215 kW.
+71.8176 kW is the Boil it term from KANO's full result. The two terms that need the boiling point are named in missingTerms. The engine attaches a note that lists the same two terms: "Duty covers only the terms supplied. Missing: Warm the liquid to boiling, Superheat the vapour. It is a floor: the full duty is at least this." The duty on KANO's full inputs is 85.8215 kW.
 
 That gives three cases on one input. The boiling point at the vaporizer's pressure, 38 C, gives the full duty. An atmospheric boiling point below the inlet is refused. A blank gives the boil as a floor, with the missing terms named.
 

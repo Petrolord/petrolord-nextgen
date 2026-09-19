@@ -22,6 +22,14 @@ characteriseGas reports three mole fractions for every gas. Each is a mole-weigh
 
 Read EGBEMA's row against its sheet. The sheet carries N2 0.018 and CO2 0.028. The engine reports inertMoleFraction 0.0460 and co2MoleFraction 0.0280. The methane on the sheet is C1 0.742, and the engine reports methaneMoleFraction 0.7420.
 
+inertMoleFraction is the sum of the normalised fractions of the components the reference marks inert, nitrogen and CO2. The course prints that sum beside the engine's figure:
+
+| gas | N2 (normalised) | CO2 (normalised) | N2 plus CO2 | inertMoleFraction (engine) |
+| --- | --- | --- | --- | --- |
+| EGBEMA | 0.0180 | 0.0280 | 0.0460 | 0.0460 |
+| OGUTA | 0.0120 | 0.0150 | 0.0270 | 0.0270 |
+| studio opening gas | 0.0200 | 0.0200 | 0.0400 | 0.0400 |
+
 Module four reads the CO2 fraction and the methane fraction again at the flare, each in its own term of the flare rule.
 
 ## The inerts stay in the heating value

@@ -6,13 +6,13 @@ This course follows a gas from the laboratory sheet that describes it to the fla
 
 The Flare Gas to Value Studio calls flareToValue. The LPG & CNG Rollout Studio calls lpgCng.
 
-Neither module works alone. lpgCng calls the loading-rack queue in terminalDepot for its carousel and forecourt, the gas Z factor in production/gasProperties and the compressor train in facilities/compression. flareToValue scales capital with the power law in modularRefinery.
+Neither module works alone. lpgCng calls the loading-rack queue in terminalDepot for its carousel and forecourt, the gas Z factor in production/gasProperties and the compressor train in facilities/compression, and writes none of the three itself. flareToValue scales capital with the power law in modularRefinery.
 
 The counts below are measured from the modules themselves:
 
 | module | exported functions | exported constants and tables |
 | --- | --- | --- |
-| flareToValue | 7 | 8 |
+| flareToValue | 7 | 10 |
 | lpgCng | 10 | 9 |
 
 ## Each question has one function
@@ -50,6 +50,6 @@ The flare is also a line in an emissions inventory. That inventory is taught in 
 
 ## Exercise
 
-Read the export table: flareToValue exports 7 functions and 8 constants and tables, and lpgCng exports 10 functions and 9 constants and tables. Name the two flareToValue functions this tier uses and the question each answers, and name the three modules lpgCng calls and what it calls each one for.
+Read the export table: flareToValue exports 7 functions and 10 constants and tables, and lpgCng exports 10 functions and 9 constants and tables. Name the two flareToValue functions this tier uses and the question each answers, and name the three modules lpgCng calls and what it calls each one for.
 
 Self check: characteriseGas answers what is in this gas, and how much liquid could it give. abatement answers what the flare emits, and what recovering it abates. lpgCng calls terminalDepot's loading-rack queue for its carousel and forecourt, production/gasProperties for the gas Z factor and facilities/compression for the compressor train.

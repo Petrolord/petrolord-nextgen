@@ -28,7 +28,7 @@ The efficiencies have no default. A blank is not read as a perfect flare. The en
 
 A combustion efficiency of 0.98 above a destruction efficiency of 0.97 is refused: a flare combustion efficiency must lie in (0, 1] and cannot exceed the destruction efficiency.
 
-A combustion efficiency left out is a different case. Module four read it: left out, the destruction efficiency stands in for it, and the engine says so in a note.
+A combustion efficiency left out is a different case. Module four read it: left out, the destruction efficiency stands in for it, and the engine says so in a note. Typed blank (''), it behaves the same way: 0.97 is used, the CO2 reads 184877.310 tonnes a year and the note is the same.
 
 ## Volume, days and gas
 
@@ -38,7 +38,7 @@ On-stream days left blank are refused, and so are 367 days. The refusal states t
 
 ## Omitted and blank are different
 
-On-stream days can also be left out of the call entirely. Omitted is not the same as blank. On-stream days omitted from the call, never typed at all, take the stated default, and the engine reports scfPerYear 2625000000. Typed blank, they are refused.
+On-stream days can also be left out of the call entirely. Omitted is not the same as blank. On-stream days omitted from the call, never typed at all, take the stated default, and the engine reports scfPerYear 2625000000. The default itself: routeEconomics, asked with the days omitted, reports onstreamDays 350, and 7.5 MMscfd times a million times 350 is that scfPerYear. Typed blank, they are refused.
 
 Set that beside EGBEMA's flare as typed, 7.5 MMscfd on 355 days, where scfPerYear is 2662500000. The omitted call reports 2625000000 and the typed call 2662500000, and neither is refused. The blank call is refused.
 

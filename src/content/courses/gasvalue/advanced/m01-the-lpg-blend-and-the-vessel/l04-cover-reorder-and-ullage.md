@@ -1,6 +1,6 @@
 # Cover, reorder and ullage
 
-A vessel's stock is only half the story at Kano. The plant draws LPG every day and receives it in deliveries. Beside the usable stock, `lpgStorageSizing` prints a cover, a safety stock, a reorder level, the ullage at the reorder and a verdict on whether a delivery fits. This lesson reads those fields on both of KANO's illustrative fill limits.
+At Kano the plant draws LPG every day and receives it in deliveries. Beside the usable stock, `lpgStorageSizing` prints a cover, a safety stock, a reorder level, the ullage at the reorder and a verdict on whether a delivery fits. This lesson reads those fields on both of KANO's illustrative fill limits.
 
 {{panel:gasvalue-rollout-explorer}}
 
@@ -21,6 +21,17 @@ Take the 0.85 liquid_volume row. usableTonnes is 71.0685. coverDays is 8.8840. s
 
 The field names carry their units. The cover is in days. The safety stock, the reorder level and the ullage at the reorder are in tonnes. The delivery verdict is true or false, and it is reached against the 20 t delivery KANO types.
 
+## The rules behind the columns
+
+The course prints the rule behind each column, checked on both rows: coverDays is usableTonnes over the demand; safetyStockTonnes is the demand times the safety days; reorderAtTonnes is the demand times the lead time plus the safety stock; ullageAtReorderTonnes is usableTonnes less reorderAtTonnes; deliveriesPerMonth is the demand times 30 over the delivery.
+
+| fill limit (input) | usableTonnes over demand | demand x safety days | demand x lead + safety stock | usableTonnes less reorder | the engine's cover, safety, reorder, ullage |
+| --- | --- | --- | --- | --- | --- |
+| 0.85 | 8.8836 | 16.0000 | 40.0000 | 31.0685 | 8.8840, 16.0000, 40.0000, 31.0685 |
+| 0.42 | 7.8679 | 16.0000 | 40.0000 | 22.9433 | 7.8680, 16.0000, 40.0000, 22.9433 |
+
+The engine reports coverDays to three decimals, so its cover prints with a final 0 at four decimals and can differ in the fourth decimal from usableTonnes over the demand.
+
 ## Reading down the columns
 
 Now read down, from the liquid volume row to the water capacity row.
@@ -36,8 +47,6 @@ deliveryFitsUllage reads true on both rows. On both bases, the engine's verdict 
 The delivery verdict is a word, and the ullage beside it is a figure. Read both together. On the liquid volume row the verdict true sits beside an ullage of 31.0685 t. On the water capacity row the same verdict sits beside 22.9433 t. The verdict alone does not show the ullage it was reached on; the column beside it does.
 
 The next lesson clears one input, the lead time, and reads what the engine then prints in these fields.
-
-In practice, a planner reads the reorder level against the delivery schedule the plant has agreed with its supplier.
 
 ## In the explorer
 

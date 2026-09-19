@@ -8,7 +8,7 @@ A thousand standard cubic feet is a fixed count of moles. characteriseGas turns 
 
 The engine states the rule: the mass in one Mscf is the moles in a thousand standard cubic feet times the molar mass. The molar mass of a mixture is itself a mole-weighted sum over the normalised analysis, built from the molar masses in the reference table: methane 16.043 lb/lbmol, ethane 30.07, propane 44.096, iso-butane and n-butane 58.122, pentanes plus 72.15, nitrogen 28.014 and carbon dioxide 44.01.
 
-The molar mass is in lb/lbmol and the answer is in kilograms. flareToValue exports the constants for those units: SCF_PER_LBMOL, 379.49 standard cubic feet in one lb-mol, and LB_PER_KG, 2.20462262 pounds in one kilogram.
+The molar mass is in lb/lbmol and the answer is in kilograms. kgPerMscf is built from two of the constants flareToValue exports: the lb-mol in one Mscf is 1000 over SCF_PER_LBMOL (379.49), the pounds are that times the mole-weighted molar mass, and the kilograms are the pounds over LB_PER_KG (2.20462262).
 
 ## The three gases
 
@@ -32,7 +32,14 @@ Module one asked the engine about one Mscf of each pure component:
 | Nitrogen | 28.014 | 33.4842 |
 | Carbon dioxide | 44.01 | 52.6038 |
 
-Every row there is the same count of moles, so the mass follows the molar mass. The three gases above follow the same rule. Each is one Mscf, the same count of moles as every pure row, and each mass follows its own mole-weighted molar mass.
+The same arithmetic done by the course on the engine's constants, beside the engine:
+
+| pure component | 1000 / SCF_PER_LBMOL x molar mass / LB_PER_KG | kgPerMscf (engine) | difference |
+| --- | --- | --- | --- |
+| Methane | 19.1757 | 19.1757 | 0.0000 |
+| Carbon dioxide | 52.6038 | 52.6038 | 0.0000 |
+
+Every row is the same count of moles, so the mass follows the molar mass. The three gases above follow the same rule, each mass following its own mole-weighted molar mass.
 
 ## A volume that carries different masses
 

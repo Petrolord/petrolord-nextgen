@@ -29,7 +29,14 @@ The net abatement is the one lesson 4 of module 4 read on the diesel row. The gr
 
 standsAloneWithoutCredits reads false: at a gross margin of 21008150.00 and a hurdle of 24500000, the route does not clear on its own. The verdict names the price it needs and closes on a sentence of its own: "This is a bet on the credit price."
 
-The four prices typed each print a clearsHurdle. At 40 it reads true, at 8 false, at 20 true and at 12 false. Two of the four typed prices clear the hurdle and two do not.
+The four prices typed each print a clearsHurdle. creditRevenuePerYear is the credit price times the net abatement in tonnes; totalMarginPerYear is the route's gross margin plus that; a point clears when its total margin reaches the hurdle. At 40 it reads true, at 8 false, at 20 true and at 12 false. Two of the four typed prices clear the hurdle and two do not.
+
+| credit price (input, in the order typed) | creditRevenuePerYear | totalMarginPerYear | clearsHurdle |
+| --- | --- | --- | --- |
+| 40 | 8721314.60 | 29729464.60 | true |
+| 8 | 1744262.92 | 22752412.92 | false |
+| 20 | 4360657.30 | 25368807.30 | true |
+| 12 | 2616394.38 | 23624544.38 | false |
 
 Credit prices sit with the methane GWP among the stated limits of the Associate tier: the methane GWP and any credit price are case inputs; the engine ships neither. This course never tells a study what a credit will sell for.
 

@@ -6,7 +6,7 @@ A cascade fills vehicles until it cannot fill the next one, and then the banks n
 
 ## IBAFO's count
 
-Low 2 m3 at 230 bar(a), Mid 2 m3 at 250 bar(a), High 2 m3 at 270 bar(a); a bus tank of 0.1 m3 arriving at 25 bar(a), filled to 200 bar(a).
+Low 2 m3 at 230 bar(a), Mid 2 m3 at 250 bar(a), High 2 m3 at 270 bar(a); a bus tank of 0.1 m3 arriving at 25 bar(a), filled to 200 bar(a). The gas is IBAFO's, specific gravity 0.62 at 30 C.
 
 | field | value |
 | --- | --- |
@@ -27,7 +27,7 @@ The count is of whole fills, each a vehicle that reaches the target. The next ve
 
 ## The flag beside it
 
-hitFillLimit prints false on IBAFO, beside the count. It is a flag, true or false, and on IBAFO's cascade it reads false.
+hitFillLimit prints false on IBAFO, beside the count. It reads true only when the count reaches the maxFills cap the call carries; here it stopped on a vehicle that could not reach its target.
 
 ## A ceiling in one respect
 

@@ -8,7 +8,7 @@ characteriseGas gives every gas a richness word beside its gallon figures. This 
 
 The richness word is read off gpmC3Plus, the gallons of propane and heavier in a thousand standard cubic feet. It takes one of three values: lean, moderate or rich.
 
-The engine was asked where the word changes, by bisection on the propane fraction of a methane and propane mix, and it gave these two edges:
+The word is read off gpmC3Plus against the lower edges the engine exports as RICHNESS_GPM (a screening word; a route's own liquids limit governs). The two edges are:
 
 | word changes | gpmC3Plus where it changes |
 | --- | --- |
@@ -27,9 +27,11 @@ The rule at each edge is stated: a gas at or above the lower edge reads moderate
 
 EGBEMA's gpmC3Plus is 3.2205, at or above the upper edge of 2.5000, and the engine reads it rich. The studio's opening gas is 2.6894, also at or above 2.5000, and reads rich. OGUTA's is 0.4890, below the lower edge of 1.0000, and reads lean. None of the three reads moderate.
 
-## The edges are the engine's own answers
+## The edges are the engine's own export
 
-The two edges were found by asking the engine, on a methane and propane mix, where the word changes as the propane fraction moves. Each edge is therefore a value of gpmC3Plus, the same figure the word is read off, and each is printed to four decimals, the precision every gal/Mscf figure in this course carries.
+The engine exports them as a constant, RICHNESS_GPM, one of the ten constants and tables flareToValue exports. Each edge is a value of gpmC3Plus, the same figure the word is read off, and each is printed to four decimals, the precision every gal/Mscf figure in this course carries.
+
+The engine's own label for the word is a screening word, and the same line adds that a route's own liquids limit governs.
 
 To read a gas's richness, read its gpmC3Plus and set it against the two edges, 1.0000 and 2.5000, with the at-or-above rule at each.
 
@@ -39,7 +41,7 @@ The richness word is derived from gpmC3Plus, and gpmC3Plus is derived from the c
 
 ## Reading the word in the explorer
 
-The flare explorer shows the richness word against the two edges the engine was asked for. Load EGBEMA, OGUTA and the studio's opening gas in turn and read each gpm C3+ against the edges. Then edit the propane fraction and watch for the point where the word changes.
+The flare explorer shows the richness word against the two edges the engine exports. Load EGBEMA, OGUTA and the studio's opening gas in turn and read each gpm C3+ against the edges. Then edit the propane fraction and watch for the point where the word changes.
 
 ## Exercise
 

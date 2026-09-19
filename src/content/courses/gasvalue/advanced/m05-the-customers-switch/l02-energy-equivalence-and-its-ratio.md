@@ -14,8 +14,9 @@ The engine prints the source of its CNG figure:
 | --- | --- |
 | consumptionSource | derived from energy equivalence |
 | newFuelConsumptionPer100Km (kg) | 10.1449 |
+| PMS consumption x PMS energy over (CNG energy x efficiency ratio) | 10.1449 |
 
-consumptionSource reads derived from energy equivalence. It is the first field on the result to read. It names what the CNG figure rests on. The figure 10.1449 kg per 100 km comes from the PMS consumption, the two fuels' energy contents and the efficiency ratio.
+consumptionSource reads derived from energy equivalence. It is the first field on the result to read. It names what the CNG figure rests on. The figure 10.1449 kg per 100 km is the PMS consumption times the PMS energy over (the CNG energy times the efficiency ratio), and the course prints that arithmetic beside the engine at the same 10.1449.
 
 ## The ratio moves the answer
 

@@ -8,7 +8,7 @@ EGBEMA's laboratory sheet sums to one. The same sheet typed short does not, and 
 
 EGBEMA's laboratory sheet, typed in full, reads: C1 0.742, C2 0.104, C3 0.062, IC4 0.013, NC4 0.021, C5 0.012, N2 0.018, CO2 0.028.
 
-The same sheet typed short, with less methane, reads: C1 0.73, C2 0.102, C3 0.061, IC4 0.013, NC4 0.021, C5 0.012, N2 0.018, CO2 0.028.
+The same sheet typed short, with less methane, ethane and propane, reads: C1 0.73, C2 0.102, C3 0.061, IC4 0.013, NC4 0.021, C5 0.012, N2 0.018, CO2 0.028.
 
 The engine reports the raw sum of each sheet and a note:
 

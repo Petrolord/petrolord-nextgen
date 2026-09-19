@@ -35,7 +35,7 @@ Every reference cost and capacity is invented and illustrative.
 
 Every route's scalingExponent reads 0.9, the MODULAR value. capitalCost prints to two decimals, in dollars.
 
-The table prints the six-tenths rule on the same plant beside the engine's figure, and it prints the difference as its own column. That column is the only comparison between the two this lesson draws. On CNG, modular minus six-tenths is 1899679.94. On mini LNG it is -9909377.93, on LPG -2643920.39, and on gas to power -4959777.43. One route's difference is positive and three are negative. The six-tenths column is a reading the engine does not use for these routes: the capital each route carries is capitalCost, on the exponent 0.9.
+The table prints the six-tenths rule on the same plant beside the engine's figure, and it prints the difference as its own column. On CNG, modular minus six-tenths is 1899679.94. On mini LNG it is -9909377.93, on LPG -2643920.39, and on gas to power -4959777.43. One route's difference is positive and three are negative. The six-tenths column is a reading the engine does not use for these routes: the capital each route carries is capitalCost, on the exponent 0.9.
 
 ## Two routes read through
 
@@ -43,7 +43,7 @@ On CNG the study's reference plant costs 24000000 dollars at 6 MMscfd. The capit
 
 On mini LNG the reference plant costs 80000000 dollars at 15 MMscfd. The capital is 42870938.50 on the exponent 0.9. The six-tenths reading is 52780316.43, and the difference column prints -9909377.93.
 
-The capacity each route is scaled to is an input of the law. The table prints the reference plant and the scaled capital, and it prints no row for the scaled capacity, so this lesson reads the reference and the result and computes nothing between them.
+Every route's capital is scaled to the parcel's 7.5 MMscfd from its reference capacity, and the six-tenths column is the same scaling at SCALING_EXPONENT.STICK_BUILT, 0.6. With the scaling exponent typed blank (''), routeEconomics takes the MODULAR exponent: scalingExponent 0.9, capitalCost 29337983.06 on the CNG route.
 
 ## The cash flow handed on
 

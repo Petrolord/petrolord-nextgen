@@ -31,7 +31,7 @@ coverDays is 8.8840. The cover does not depend on the lead time and is still giv
 
 ## Blank is missing
 
-A box left blank is missing, and the engine reports it that way: the lead time appears in missingInputs, the reorder level is null and the verdict is withheld. The course teaches the blank case only, because that is the case the engine was run on and printed. What the engine does with a lead time left out of the call is a separate question that this lesson leaves alone.
+A box left blank is missing, and the engine reports it that way: the lead time appears in missingInputs, the reorder level is null and the verdict is withheld. Omitted from the call, the lead time is a different case: it takes the stated 0, missingInputs reads none, and reorderAtTonnes is 16.0000, the safety stock alone.
 
 ## Missing and refused are two answers
 

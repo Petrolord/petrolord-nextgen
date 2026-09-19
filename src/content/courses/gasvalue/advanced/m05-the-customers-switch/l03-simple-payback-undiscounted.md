@@ -12,9 +12,10 @@ Conversion 1200000 naira; extra maintenance 60000 naira a year. The engine retur
 | --- | --- |
 | annualSaving (after maintenance) | 3825710.1400 |
 | simplePaybackYears | 0.3137 |
+| conversion cost over annualSaving | 0.3137 |
 | paybackNote | Simple payback is undiscounted. Anything needing a discount rate belongs in the sanctioned economics engine. |
 
-annualSaving is the saving after maintenance: 3825710.1400 naira a year. simplePaybackYears is 0.3137, printed in years to four decimals.
+annualSaving is the saving after maintenance: 3825710.1400 naira a year. simplePaybackYears is 0.3137, printed in years to four decimals. It is the conversion cost over the annual saving, and the course prints that division beside the engine at the same 0.3137.
 
 ## The cash flow the engine hands on
 

@@ -1,6 +1,6 @@
 # Revenue, cost and margin
 
-A route's year runs from the parcel to a value per Mscf in five printed steps. This lesson reads all four EGBEMA routes through them.
+A route's year runs from the parcel to a value per Mscf in six printed steps. This lesson reads all four EGBEMA routes through them.
 
 {{panel:gasvalue-route-explorer}}
 
@@ -17,12 +17,13 @@ EGBEMA's four routes on 7.5 MMscfd and 355 days:
 
 Each price is per unit of the route's own product: per kilogram of CNG, per tonne of LNG, per tonne of LPG, per MWh. Every price and every cost here is invented and illustrative. None is a market price.
 
-## The five steps
+## The six steps
 
 - mscfPerYear is the volume in Mscf a day times the on-stream days.
 - productPerYear is that times the yield times the recovery.
 - revenue is product times price.
 - operating cost is the fixed cost plus the variable cost per Mscf of the whole parcel.
+- grossMarginPerYear is revenuePerYear minus operatingCostPerYear, on every row.
 - valuePerMscf is the margin over mscfPerYear.
 
 ## The year the engine prints
@@ -34,7 +35,7 @@ Each price is per unit of the route's own product: per kilogram of CNG, per tonn
 | LPG and condensate extraction | 11352.9000 t LPG | 5335863.00 | 3345500.00 | 1990363.00 | 0.7476 |
 | Gas to power or gas to wire | 212733.7500 MWh | 12338557.50 | 4798125.00 | 7540432.50 | 2.8321 |
 
-Dollars of revenue, cost and margin print to two decimals. valuePerMscf prints to four. Quote each as it prints.
+Dollars of revenue, cost and margin print to two decimals. valuePerMscf prints to four.
 
 ## Reading one row
 

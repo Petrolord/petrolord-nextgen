@@ -26,7 +26,7 @@ The note fixes two things. The queue's figures (utilisation 0.7333, probability 
 
 ## Rounded down
 
-The rule is the floor. 16.5600 is rounded down to 16. Positions rounded to the nearest whole one give a figure that looks finished, and the engine does not take that step. The table of whole position counts from the last lesson prints what other counts do to the wait:
+The rule is the floor. 16.5600 is rounded down to 16. The positions rounded to the nearest whole one print 17, the shortcut the engine does not take. The table of whole position counts from the last lesson prints what other counts do to the wait:
 
 | positions (input) | probabilityOfWaiting | averageWaitMinutes |
 | --- | --- | --- |

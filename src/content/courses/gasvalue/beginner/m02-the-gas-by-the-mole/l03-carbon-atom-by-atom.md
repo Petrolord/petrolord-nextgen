@@ -38,7 +38,7 @@ The flare rule the engine follows is 40 CFR 98.233(n), and its basis sentence re
 
 The two counts split across the two terms of that sum. The hydrocarbon carbon, 1.3320 per mole on EGBEMA, is the carbon the combustion efficiency multiplies. The CO2 in the gas, 0.0280 on EGBEMA and the gap between the two counts, is added as it stands.
 
-Module four prints a shortcut built from the other count. It computes the methane a flare gives if every unburned carbon atom is counted as methane, from the engine's own carbon per mole, and prints it beside the engine's methane. The engine does not take that shortcut: its methane is the methane in the gas.
+Module four prints a shortcut built from the other count. It computes the methane a flare gives if every unburned carbon atom is counted as methane, from carbonPerMol (every carbon atom, the CO2's included) times one less the destruction efficiency. The engine does not take that shortcut: its methane is the methane in the gas.
 
 ## Reading the carbon in the explorer
 

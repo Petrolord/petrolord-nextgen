@@ -36,7 +36,7 @@ The tonnes print to three decimals. That is the precision the engine itself repo
 
 ## Weighed at two molar masses
 
-The engine was asked about itself for the molar masses the flare is weighed at. Asked about a gas that is all CO2 flared and one that is all methane flared with next to no destruction, it gives:
+The flare's tonnes are weighed at the molar masses the engine exports in FLARE_MOLAR_MASS, and an all-CO2 flare and an all-methane flare give the same figures back. The reference table carries CO2 at its tabulated molar mass, 44.01, for the gas's mass and liquids. The flare's tonnes use these:
 
 | species | molar mass kg/kmol the flare uses |
 | --- | --- |

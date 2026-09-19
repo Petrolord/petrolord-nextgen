@@ -12,7 +12,7 @@ A typed yield is the study's figure. The ceiling is the gas's. When the typed fi
 | EGBEMA, CNG route at 30 kg/Mscf | REFUSED: Route "Compressed natural gas" yields 30 kg per Mscf, more than the 26.706618 kg the gas holds (gas mass). A yield above what the gas contains is refused. |
 | EGBEMA, gas to power at 0 MWh/Mscf | REFUSED: Route "Gas to power or gas to wire" needs a positive product yield per Mscf. |
 
-A yield above the ceiling is refused, and a yield of zero is refused.
+A yield above the ceiling is refused, and a yield of zero is refused. The ceiling is yieldCeiling's, and the refusals are routeEconomics'.
 
 ## Reading a refusal
 

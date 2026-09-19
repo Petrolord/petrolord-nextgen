@@ -21,7 +21,7 @@ The field names carry their units. usableM3 is the usable stock in cubic metres.
 
 ## The vapour space is kept
 
-The vapour space is not spare capacity: it is what keeps a vessel of expanding liquid from rupturing. The engine's refusal of a blank fill limit gives the same reason in its own words: "LPG expands and a vessel filled liquid-full ruptures hydraulically."
+The vapour space is the vessel less the usable liquid, and the fill-limit refusal states what it is for. The engine's refusal of a blank fill limit reads: "A maximum fill ratio is required and is not defaulted. It is a code limit for the product and the vessel: LPG expands and a vessel filled liquid-full ruptures hydraulically."
 
 On KANO's liquid volume row the vapour space is 22.5000 m3. On the water capacity row it is 37.0770 m3. Each is printed as its own column beside the stock.
 

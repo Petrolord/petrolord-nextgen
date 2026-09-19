@@ -28,7 +28,7 @@ The Associate tier printed two shortcuts beside EGBEMA's heating value, each fro
 
 EGBEMA's 1248.4110 Btu/scf appears twice in the gas to power study. In the screen it is the actual against the study's Minimum heating value of 950, with a margin of 298.4110 and a status of pass. In the ceiling it becomes 0.3659 MWh per Mscf. The CNG route reads the same heating value against its own limit of 1000.
 
-A heating value can also be missing. The Associate tier showed EGBEMA's analysis with n-butane's heating value left blank: the mixture's ghvBtuScf prints null. A blank heating value leaves the mixture's heating value missing, and the engine's note on that row names the value as missing on the mixture. The course prints no gas to power ceiling for that probe.
+A heating value can also be missing. The Associate tier showed EGBEMA's analysis with n-butane's heating value left blank: the mixture's ghvBtuScf prints null. A blank heating value leaves the mixture's heating value missing, and the engine's note on that row reads: "A heating value missing on any component leaves the mixture value missing too. No partial average is reported." The course prints no gas to power ceiling for that probe.
 
 ## The yield the study typed
 

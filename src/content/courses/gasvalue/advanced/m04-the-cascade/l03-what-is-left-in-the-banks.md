@@ -9,12 +9,13 @@ When IBAFO's cascade can fill no more buses, gas is still in the banks. `cascade
 | field | value |
 | --- | --- |
 | storedKg | 1274.384 |
+| the Low, Mid and High bank masses summed | 1274.384 |
 | deliveredKg | 608.505 |
 | leftInBanksKg | 665.879 |
 | storedKg minus deliveredKg minus leftInBanksKg | 0.000 |
 | cascadeEfficiency (delivered over stored) | 0.4775 |
 
-storedKg is the gas the banks held at the start: 1274.384 kg. deliveredKg is what the 38 fills took: 608.505 kg. leftInBanksKg is what stays behind: 665.879 kg. These three print to three decimals, the precision the engine reports them at.
+storedKg is the gas the banks held at the start: 1274.384 kg, and the course prints the three bank masses of the bank module summed beside it, also 1274.384. deliveredKg is what the 38 fills took: 608.505 kg. leftInBanksKg is what stays behind: 665.879 kg. These three print to three decimals, the precision the engine reports them at.
 
 The fourth line is the ledger check: storedKg minus deliveredKg minus leftInBanksKg, 0.000. The gas is conserved: what the banks held is what was delivered plus what is left in them.
 

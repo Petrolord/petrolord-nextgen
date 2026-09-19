@@ -30,17 +30,20 @@ On liquid_volume, 0.85 is a share of the vessel's volume and gives 127.5000 m3 u
 
 ## The same number on the wrong basis
 
-A fill limit read on the other basis is the shortcut the engine does not take. The same 0.42 read as a share of the liquid volume gives 35.1162 t. That is 27.8271 t below the filling density's 62.9433 t. The number typed is identical in both readings. Only the basis differs, and the tonnes differ by 27.8271 t.
+A fill limit read on the other basis is the shortcut the engine does not take. The same 0.42 read as a share of the liquid volume gives 35.1162 t. That is 27.8271 t below the filling density's 62.9433 t. Only the basis differs, and the tonnes differ by 27.8271 t.
 
 The engine takes the basis explicitly, and a basis it does not know is refused by name:
 
 | probe | engine |
 | --- | --- |
+| basis typed blank ('') | REFUSED: Unknown fill ratio basis "". Use liquid_volume or water_capacity_mass. |
 | basis typed as 'weight' | REFUSED: Unknown fill ratio basis "weight". Use liquid_volume or water_capacity_mass. |
 | a filling density of 0.6 on water capacity at the KANO blend density | REFUSED: At this density the filling density fills the vessel liquid-full. Check the limit and its basis. |
 | no liquid density | REFUSED: A liquid density is required; it is not assumed. |
 
-The fourth probe is worth reading slowly. A filling density of 0.6 on water capacity, at KANO's blend density, is refused because it fills the vessel liquid-full, and the refusal asks the user to check the limit and its basis. The fifth probe shows that the liquid density is required here too, and the refusal says it is not assumed.
+A basis typed blank is refused the same way. Omitted from the call, the basis is a different case: the engine takes liquid_volume and names it in its output, fillRatioBasis liquid_volume, usableTonnes 71.0685 at a fill limit of 0.85.
+
+The liquid-full probe is worth reading slowly. A filling density of 0.6 on water capacity, at KANO's blend density, is refused because it fills the vessel liquid-full, and the refusal asks the user to check the limit and its basis. The last probe shows that the liquid density is required here too, and the refusal says it is not assumed.
 
 In practice, a site's code limit arrives on a document that states its own basis, and the engine asks the user to carry that basis across with the number.
 

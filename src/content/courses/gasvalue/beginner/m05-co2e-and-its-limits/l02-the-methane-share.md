@@ -15,7 +15,7 @@ On EGBEMA's flare, with both efficiencies given and the study's GWP of 29.8, the
 | flareCo2eTonnes (t/yr) | 215946.438 |
 | methaneShareOfFlareCo2e | 0.1568 |
 
-CO2e is the CO2 plus the methane times the GWP. The two tables below run EGBEMA's flare across the GWP, which multiplies the methane in that sum, and across the destruction efficiency, which sets the methane, and read the share in every row.
+methaneShareOfFlareCo2e is flareCh4Tonnes times the GWP over flareCo2eTonnes. CO2e is the CO2 plus the methane times the GWP. The two tables below run EGBEMA's flare across the GWP, which multiplies the methane in that sum, and across the destruction efficiency, which sets the methane, and read the share in every row.
 
 ## The share at three GWPs
 

@@ -28,9 +28,9 @@ The status column carries three words. A check with a limit reads pass or fail. 
 
 ## Reading the margin column
 
-The margin column prints signed figures. Every pass in the table carries a positive margin: 2.5000 on the CNG volume, 0.0140 on the inerts, 248.4110 on the CNG heating value, 1.2205 on the liquids content. Both fails carry a negative one: -2.5000 on the mini LNG volume and -0.0080 on its CO2. The same volume, 7.5000, gives a margin of 2.5000 against a limit of 5 and -2.5000 against a limit of 10.
+The margin column is the actual minus the limit on a minimum requirement and the limit minus the actual on a maximum; a negative margin is a failure, and the shortfall is its size. Every pass in the table carries a positive margin: 2.5000 on the CNG volume, 0.0140 on the inerts, 248.4110 on the CNG heating value, 1.2205 on the liquids content. Both fails carry a negative one: -2.5000 on the mini LNG volume and -0.0080 on its CO2. The same volume, 7.5000, gives a margin of 2.5000 against a limit of 5 and -2.5000 against a limit of 10.
 
-Read the gas to power heating value beside the CNG heating value. The actual is 1248.4110 in both rows. The limits are 950 and 1000, and the margins print 298.4110 and 248.4110.
+On a maximum the sign reads the same way: the CNG inerts, 0.0460 against a limit of 0.06, print 0.0140.
 
 ## Three verdicts
 

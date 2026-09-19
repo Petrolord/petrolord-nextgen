@@ -8,8 +8,6 @@ KANO's plant turns liquid LPG into vapour in a vaporizer. `vaporizerDuty` sizes 
 
 The inputs, all invented for the course: 650 kg/h of the blend, with a latent heat of 397.7592 kJ/kg from the blend on mass. The liquid comes in at 18 C, with a liquid heat capacity of 2.45 kJ/kg K. It boils at 38 C at the vaporizer's pressure. The vapour goes out at 55 C, with a vapour heat capacity of 1.68 kJ/kg K. The design margin is 15 percent.
 
-The latent heat is the figure the blend lesson met: 397.7592 kJ/kg, blended on mass.
-
 ## The three terms
 
 | term | kW | share of the duty |
@@ -22,17 +20,17 @@ The latent heat is the figure the blend lesson met: 397.7592 kJ/kg, blended on m
 
 Warm the liquid to boiling takes the liquid from 18 C to the boiling point, 38 C. Boil it turns the liquid to vapour at that boiling point. Superheat the vapour takes the vapour from 38 C to the outlet, 55 C.
 
+The course prints each term's rule, each in kJ an hour over KJ_PER_KWH: warm the liquid is the mass flow times the liquid heat capacity times (boiling point less inlet); boil it is the mass flow times the latent heat; superheat is the mass flow times the vapour heat capacity times (outlet less boiling point).
+
 Their kW are 8.8472, 71.8176 and 5.1567. Their shares of the duty are 0.1031, 0.8368 and 0.0601. The dutyKW row prints 85.8215 kW with a share of 1.0000.
 
-## The share column
-
-Read the share column. Boil it prints 0.8368. Warm the liquid to boiling prints 0.1031 and Superheat the vapour prints 0.0601. The three shares sit beside the dutyKW row's 1.0000.
+## The latent heat it was run on
 
 The vaporizer here was run on the engine's latent heat, 397.7592 kJ/kg on mass. The blend lesson printed the volume average of KANO's latent heat, 399.0000 kJ/kg, as the reading the engine does not use.
 
 ## The design margin
 
-dutyKW is 85.8215 kW. designDutyKW, with the margin, is 98.6948 kW. The margin is the 15 percent typed, and the engine prints the design duty as its own row. A negative margin is refused:
+dutyKW is 85.8215 kW. designDutyKW, with the margin, is 98.6948 kW. The margin is the 15 percent typed, and designDutyKW is dutyKW times one plus the margin percent over 100. A negative margin is refused:
 
 | probe | engine |
 | --- | --- |
@@ -43,7 +41,7 @@ The second refusal is the latent heat again. With no latent heat the engine give
 
 ## When a term cannot be computed
 
-The next lesson reads the boiling point closely. One result from it is read here as well. With the boiling point left blank, the engine gives the boil alone: dutyKW 71.8176, with missingTerms naming Warm the liquid to boiling and Superheat the vapour. The engine's note lists those two missing terms and says that the duty covers only the terms supplied. It calls the figure a floor on the duty. The full duty on KANO's inputs is the 85.8215 kW above.
+The next lesson reads the boiling point closely. One result from it is read here as well. With the boiling point left blank, the engine gives the boil alone: dutyKW 71.8176, with missingTerms naming Warm the liquid to boiling and Superheat the vapour. The engine's note reads: "Duty covers only the terms supplied. Missing: Warm the liquid to boiling, Superheat the vapour. It is a floor: the full duty is at least this." The full duty on KANO's inputs is the 85.8215 kW above.
 
 In practice, a vendor sizing a vaporizer reads the design duty against the unit's rated capacity.
 

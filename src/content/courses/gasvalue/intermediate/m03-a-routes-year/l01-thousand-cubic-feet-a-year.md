@@ -31,13 +31,15 @@ The variable cost is charged on the whole parcel. The value per Mscf is spread o
 
 ## On-stream days are required
 
-The on-stream days are a required input. Typed blank on the CNG route, they are refused:
+Typed blank on the CNG route, the on-stream days are refused:
 
 | probe | engine |
 | --- | --- |
 | CNG on-stream days left blank ('') | REFUSED: On-stream days are required, more than 0 and no more than 366. |
 
-The same refusal appears in the flare's abatement in the Associate tier, for days typed blank and for days typed as 367. A blank box is missing. The Associate tier also printed what the flare does when the days are omitted from the call altogether: they take the stated default, and scfPerYear reads 2625000000. That default is printed for abatement. The course prints no omitted-days case for routeEconomics, so this lesson teaches only the blank one for a route: refused.
+The same refusal appears in the flare's abatement in the Associate tier, for days typed blank and for days typed as 367. A blank box is missing.
+
+Omitted from the call altogether, never typed, the days are a different case. On-stream days omitted from routeEconomics take the stated default: onstreamDays 350, mscfPerYear 2625000.0000 on the CNG route. Typed blank, they are refused. The Associate tier read the same default for the flare, where scfPerYear reads 2625000000.
 
 ## One volume, many checks
 

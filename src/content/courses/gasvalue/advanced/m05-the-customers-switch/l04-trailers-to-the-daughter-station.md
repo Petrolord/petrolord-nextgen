@@ -6,7 +6,7 @@ IBAFO is a mother station. It also sends CNG by trailer to daughter stations, an
 
 ## The rule
 
-"Little's Law: assets in the system = throughput x time in the system." Assets in the system = throughput times time in the system. The fleet is the ceiling of that plus a spares allowance.
+"Little's Law: assets in the system = throughput x time in the system." Assets in the system = throughput times time in the system. The cycle is the sum of its stage days, and the fleet is the ceiling of (the assets in circulation plus the spares allowance), the spares allowance being the assets in circulation times the spares fraction.
 
 IBAFO's trailers to its daughter stations: 4 trips a day, spares 0.1. All invented.
 

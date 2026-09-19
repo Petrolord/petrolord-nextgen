@@ -8,11 +8,11 @@ The gallon figures are built from the liquid densities, and the heating value is
 
 The engine was asked about EGBEMA's analysis twice more: once with propane's liquid density left blank, and once with n-butane's heating value left blank.
 
-| probe | gpmC2Plus | gpmC3Plus | richness | missingLiquidDensity | ghvBtuScf |
-| --- | --- | --- | --- | --- | --- |
-| EGBEMA as typed | 5.9942 | 3.2205 | rich | none | 1248.4110 |
-| propane density blank | null | null | null | C3 | 1248.4110 |
-| n-butane heating value blank | 5.9942 | 3.2205 | rich | none | null |
+| probe | gpmC2Plus | gpmC3Plus | richness | missingLiquidDensity | ghvBtuScf | ghvNote |
+| --- | --- | --- | --- | --- | --- | --- |
+| EGBEMA as typed | 5.9942 | 3.2205 | rich | none | 1248.4110 | none |
+| propane density blank | null | null | null | C3 | 1248.4110 | none |
+| n-butane heating value blank | 5.9942 | 3.2205 | rich | none | null | A heating value missing on any component leaves the mixture value missing too. No partial average is reported. |
 
 ## A blank density
 
@@ -24,7 +24,7 @@ Propane is in both cuts, so both gallon figures are missing, and the richness wo
 
 With n-butane's heating value blank, ghvBtuScf is null. The gallon figures read 5.9942 and 3.2205 and the richness word reads rich, as in the typed row.
 
-The engine attaches a note to the missing heating value. In its own words, the note says that a heating value missing on any component makes the value for the whole mixture missing, and that the mixture value is not given as a partial figure.
+The engine attaches a note to the missing heating value, ghvNote, and it reads: "A heating value missing on any component leaves the mixture value missing too. No partial average is reported."
 
 ## Missing means missing
 

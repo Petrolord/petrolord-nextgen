@@ -21,10 +21,11 @@ Left out, the destruction efficiency stands in for the combustion efficiency, an
 | EGBEMA | combustion efficiency used | flareCo2Tonnes | flareCh4Tonnes | flareCo2eTonnes |
 | --- | --- | --- | --- | --- |
 | both efficiencies given | 0.955 | 182079.024 | 1136.490 | 215946.438 |
+| combustion efficiency typed blank ('') | 0.97 | 184877.310 | 1136.490 | 218744.723 |
 | combustion efficiency left out | 0.97 | 184877.310 | 1136.490 | 218744.723 |
 | left out minus given | 0.0150 | 2798.286 | 0.000 | 2798.285 |
 
-The note the engine attaches to the second row reads: "No combustion efficiency was given, so the destruction efficiency stands in for it. 40 CFR 98.233(n) puts combustion 1.5 points below destruction, so the CO2 here is slightly high."
+A combustion efficiency typed blank behaves as one left out: the same efficiency used, the same tonnes and the same note. The note the engine attaches to both rows reads: "No combustion efficiency was given, so the destruction efficiency stands in for it. 40 CFR 98.233(n) puts combustion 1.5 points below destruction, so the CO2 here is slightly high."
 
 The stand-in moves the CO2 and leaves the methane where it was, because the methane is set by the destruction efficiency alone. The CO2 moves by 2798.286 tonnes a year. The methane difference reads 0.000.
 
