@@ -1,0 +1,26 @@
+{
+ "tonnes": {
+  "decimals": 2,
+  "match": "^(?:owaza_heater_co2_t|owaza_flare_co2_t|owaza_flare_ch4_t|owaza_flare_ch4_tco2e|owaza_scope1_tco2e|owaza_total_tco2e|igrita_trap_t_per_yr|ikorodu_path_final_gap_t)$"
+ },
+ "percent": {
+  "decimals": 4,
+  "match": "^(?:igrita_excess_air_pct|igrita_efficiency_lhv_pct)$"
+ },
+ "gj": {
+  "decimals": 0,
+  "match": "^(?:igrita_tuning_saving_gj)$"
+ },
+ "kw": {
+  "decimals": 2,
+  "match": "^(?:igrita_pinch_hot_utility_kw|igrita_pinch_cold_utility_kw)$"
+ },
+ "usdPerTonne": {
+  "decimals": 2,
+  "match": "^(?:ikorodu_boiler_tuning_cost_per_t_usd|ikorodu_waste_heat_cost_per_t_usd|ikorodu_curve_weighted_average_usd_per_t|ikorodu_saving_cost_per_t_usd)$"
+ },
+ "usd": {
+  "decimals": 2,
+  "match": "^(?:ikorodu_flare_recovery_net_annual_cost_usd)$"
+ }
+}

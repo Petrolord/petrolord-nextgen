@@ -782,5 +782,52 @@
       "digest.txt": "186440d40db46261e26dd39dd7e3b170a67ddb66022a874ad22ee240079257ba",
       "fields.json": "e2318d8ea06db86f28ac2496f03a66740ee1fc6664ed56db592ef52ae7a8a971"
     }
+  },
+  "carbon": {
+    "course": "MD5",
+    "live": "/root/et-wip-carbon",
+    "kit": "full",
+    "kitNote": "Foundation kit, the first Energy Transition course (module energy_transition). The mirror carries every file the wave is rebuilt and gated from: the digest, its generator and the teaching records; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles (oracle_carbonabatement, oracle_energyefficiency) on the capstone; every gate with its negative control (reproducibility across five zones, the clock and random source, collisions, promptleak, capstone leak, the kit leakage sweep over the digest by owning tier, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon with its two reproduction scripts and the four task files. The seed ladder joins it in the migration phase.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "capstone.json",
+      "carbon_dump.mjs",
+      "carbon_fields.mjs",
+      "carbon_capstone.mjs",
+      "carbon_fields_capstone.mjs",
+      "structure.py",
+      "scaffold.py",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "source_prose.rules.mjs",
+      "oracle_check.py",
+      "discriminate.mjs",
+      "gate_repro.sh",
+      "gate_clock.sh",
+      "fakeclock.mjs",
+      "gate_collisions.py",
+      "gate_promptleak.py",
+      "gate_capstone_leak.py",
+      "gate_leakage_digest.sh",
+      "gate_copy_rule.py",
+      "run_gates.sh",
+      "recon_probe.mjs",
+      "recon_pagedefaults.mjs",
+      "RECON.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md"
+    ],
+    "pins": {
+      "digest.txt": "e4f9764676ceaa7a723ef702ee4c25502cea3768e3599743433c07782c7c6961",
+      "fields.json": "da6e741d3873ae8b182356e37fc6e417375dc200d9d4d1eeeaee2e20f17abf18"
+    }
   }
 }

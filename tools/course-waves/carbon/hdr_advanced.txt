@@ -1,0 +1,27 @@
+-- ============================================================================
+-- carbon EXPERT DEEP SEED: Carbon & Energy Efficiency, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE CURVE AND THE PATH. The cost of a tonne abated,
+-- capital annualised over the measure's life by a capital recovery factor; a
+-- negative cost that pays for itself; the marginal abatement cost curve ranked
+-- cheapest first with its weighted average; measures that interact and claims
+-- above what a source emits; a target on a partial inventory; the path and its
+-- unabated gap; one saving priced in money and carbon from the same energy;
+-- energy intensity against a peer the plant has the right to use.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A blank capital cost is not free, a blank
+-- rate is not 0, a rate is a fraction, and a curve whose claims exceed what a
+-- source emits gives no verdict.
+--
+-- THE TRAP THE TIER IS BUILT ON. A one-off capital cost set against one year's
+-- saving makes every capital measure look expensive.
+--
+-- No NPV, IRR, Monte Carlo or decision tree is taught or graded; the levelised
+-- cost per tonne is. The capstone grades four costs in US dollars per tonne and
+-- one net annual cost in US dollars at 0.01, and one unabated gap in tCO2e at
+-- 0.01.
+-- ============================================================================
