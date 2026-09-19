@@ -1,0 +1,22 @@
+{
+ "usd": {
+  "decimals": 2,
+  "match": "^(?:ikarama_modular_capex_usd|ikarama_stick_built_capex_usd|ikarama_first_year_revenue_usd|amassoma_plan_margin_usd|koloama_usan_price_variance_usd|koloama_diesel_volume_variance_usd|koloama_margin_variance_usd|koloama_cost_variance_usd)$"
+ },
+ "bbl": {
+  "decimals": 2,
+  "match": "^(?:ikarama_annual_throughput_bbl|amassoma_crude_run_bbl)$"
+ },
+ "per_bbl": {
+  "decimals": 4,
+  "match": "^(?:ikarama_gross_value_per_bbl|ikarama_gross_margin_per_bbl|amassoma_gross_margin_per_bbl|amassoma_naphtha_value_per_bbl|amassoma_gasoil_value_per_bbl)$"
+ },
+ "pct": {
+  "decimals": 2,
+  "match": "^(?:amassoma_cdu_utilisation_pct)$"
+ },
+ "mm": {
+  "decimals": 4,
+  "match": "^(?:koloama_first_tax_mm|koloama_lifetime_tax_mm)$"
+ }
+}

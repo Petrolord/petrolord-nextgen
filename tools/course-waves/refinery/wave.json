@@ -1,0 +1,190 @@
+{
+ "slug": "refinery",
+ "prefix": "rf",
+ "name": "Refinery Feasibility & Planning",
+ "pathOrder": 49,
+ "module": "commercial_trading",
+ "moduleLabel": "Commercial & Trading",
+ "prerequisite": null,
+ "repo": "/root/wt-md-refinery-nextgen",
+ "branch": "feat/md-refinery-course",
+ "siblings": [
+  {
+   "slug": "crude",
+   "pathOrder": 48,
+   "branch": "feat/md-crude-course",
+   "owns": "linear programming, crudeAssay, productBlending",
+   "module": "commercial_trading"
+  },
+  {
+   "slug": "supply",
+   "pathOrder": 50,
+   "branch": "feat/md-supply-course",
+   "owns": "terminalDepot, fuelPricing: measurement and logistics",
+   "module": "supply_chain"
+  }
+ ],
+ "periodStart": "2027-03-01",
+ "periodDays": 31,
+ "startYear": 2027,
+ "goldens": [
+  "downstream/goldens/refineryplanning_cases.json",
+  "downstream/goldens/modularrefinery_cases.json"
+ ],
+ "engines": [
+  "engines/downstream/refineryPlanning.js",
+  "engines/downstream/streamModel.js",
+  "engines/downstream/modularRefinery.js",
+  "engines/economics/screening.js",
+  "lib/lp/simplex.js"
+ ],
+ "enginesVendoredAt": "Engines e4d3b10 (engines #224, MD2-1: dualLedgerTotals, feasibilityEconomics blank rates, blank construction years), re-vendored on this branch as b30406eb, a cherry-pick of the shared vendor commit 41d88b9f; first cut on b1f29251 (60ee266). engines/economics/screening.js is NextGen's older copy (VENDOR.json group 4) with lossCarryForward patched on; the vendored downstream.refinery.golden suite passes on it.",
+ "plan": {
+  "state": "LESSONS WRITTEN (78); EXTENSION ROUND 2026-09-19: re-vendored at e4d3b10, digest extended additively for the writers' gaps, four printed differences recomputed from the printed figures, module ruling applied. REVISE.md maps every change to lessons.",
+  "thesis": "A refinery is judged on its margin per barrel of crude: the screen prices that barrel before any capital is spent, the plan finds it with every barrel run through the crude unit, the schedule dates it, and the actuals are read against it line by line on what each gap did to margin.",
+  "tiers": {
+   "beginner": "THE MODULAR SCREEN: modularRefinery. Graded: two capital costs, the slate value, annual throughput, gross margin per barrel, first-year revenue.",
+   "intermediate": "THE PLAN AND THE SCHEDULE: refineryPlanning planRefinery and cascadeToSchedule. Graded: crude run, crude unit utilisation, plan margin, gross margin per barrel, two stream values.",
+   "advanced": "ACTUALS, VARIANCE AND THE INVESTMENT CASE: streamModel attributeVariance, reconcilePeriod, feasibilityEconomics. Graded: a price variance, a volume variance, the margin total, the cost total, the first tax and the lifetime tax. No NPV or IRR."
+  },
+  "cases": {
+   "teaching": [
+    "OKORDIA",
+    "ABUA",
+    "ODIOMA"
+   ],
+   "capstone": [
+    "IKARAMA",
+    "AMASSOMA",
+    "KOLOAMA"
+   ]
+  }
+ },
+ "digest": {
+  "lines": 736,
+  "sections": 24,
+  "withheld": null,
+  "note": "No section is history. SECTION 24 states the owner decisions in force and the HELD items. materialBalance and dualLedgerTotals are left out (RECON 3b, 3c, STOPPED)."
+ },
+ "grading": {
+  "grader": "public.academy_submit_capstone reads expected, tol and the answer as numeric: abs(got - expected) <= tol, tol absolute in the field's units. No NPV, IRR or label is graded.",
+  "tolerance": "One derivation, CLASSES in refinery_fields_capstone.mjs: USD and bbl 0.5 (whole unit; the digest prints two decimals), $/bbl 0.005 (the cent; the digest prints four), percent 0.005 (the digest prints two), MM 0.00005 (the digest prints four). The stored value is the engine's rounded six places past the graded place.",
+  "collisionRule": "No graded value within its tolerance of the absolute value of any number token the digest prints, and no two graded values within the looser of their tolerances."
+ },
+ "findings": {
+  "3a-clock": "No clock read without an override: cascadeToSchedule (periodStart), feasibilityEconomics and calculateEconomics (startYear) found in the source and guarded; expandQuickInputs never called. Fake-clock rebuild byte-identical; schedule identical in seven zones from a string period start; a local-midnight Date moves it east of Greenwich (contract, taught).",
+  "3b-materialBalance": "HELD as H3 (lead ruling): taught in SECTION 24 as a present-tense limit, never graded.",
+  "3c-dualLedgerTotals": "REPAIRED in engines #224 (R7): cost, revenue and margin apart. Taught in SECTION 21, not graded (no oracle).",
+  "3d-blank-rate": "REPAIRED in engines #224 (M7): a blank or null tax or discount rate is refused. SECTION 2 prints both refusals.",
+  "3f-page-payback": "The Studio's scenario table computes annual margin and simple payback in the page; no engine or oracle covers them. Not printed, not graded.",
+  "5-vendored-screening": "No refinery output differs from the engines-repo golden on NextGen's older screening copy (vendored golden suite green).",
+  "3h-blank-schedule-terms": "REPAIRED in engines #224 (M8): every schedule term, construction years included, reads blank or absent as its default. SECTION 5 prints the table."
+ },
+ "decisions": [
+  "Period start 2027-03-01 (31 days, crossing the 14 March 2027 North American spring change), passed as a string; start year 2027, with 2031 used once to show it labels no figure.",
+  "Tolerances per class (USD/bbl 0.5, $/bbl 0.005, percent 0.005, MM 0.00005), each at least half a unit of what the digest prints; the prompts ask for exactly that precision.",
+  "Tax fields graded in the screening engine's millions to four decimals, the digest's own precision for that unit.",
+  "Schedule counts not graded: oracle_refineryplanning.schedule_dates takes the cargo count as an input.",
+  "variance_case (not parametrised) is driven by an AST edit of its two ledger literals, fed the oracle's own exact plan; accounts() by setting its PRICES table.",
+  "Manifests carry the three panel ids; courseContent.test.js 'every panel referenced is registered' is red until the panel phase registers them (the compliance precedent). The academy module is commercial_trading (lead ruling 2026-09-19), which already exists in academyModules.js; the lab agent adds commercial_trading and supply_chain to CourseModuleNav MODULE_ORDER.",
+  "Lesson placeholders are title-only H1 files, as compliance."
+ ],
+ "gates": {
+  "structure": {
+   "file": "structure.py",
+   "md5": "edd3da9ec9d73f4a5fc4defc962272d4",
+   "result": "exit 0: panels: 73 of 78 lessons carry one; ids ['refinery-plan-explorer', 'refinery-screen-explorer', 'refinery-variance-explorer']"
+  },
+  "digest-repro": {
+   "file": "gate_repro.sh",
+   "md5": "f987f8a3d29f9cec76ddf84a724b3d21",
+   "result": "exit 0: gate_repro: PASS"
+  },
+  "kit-digestrepro": {
+   "file": "/root/dc-wavekit/digestrepro.sh",
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "result": "exit 0: NOTE: no truth-*.json in this wave. If numsweep runs here, harvest_digest.py first."
+  },
+  "clock": {
+   "file": "gate_clock.sh",
+   "md5": "b09e256f72e44ee66dc6d426fa6fb9e5",
+   "result": "exit 0: gate_clock: PASS"
+  },
+  "kit-digestprose": {
+   "file": "/root/dc-wavekit/digestprose.mjs",
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "result": "exit 0: [digestprose] /root/md-wip-refinery/digest.txt: 736 line(s), 24 section title(s) and 8 in-body marker(s) swept against their blocks, 32 history framings, 20 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 1 deferred as verbatim engine strings; 0 failing"
+  },
+  "kit-digestfigures": {
+   "file": "/root/dc-wavekit/digestfigures.py",
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "result": "exit 0: [digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "kit-digestleak": {
+   "file": "/root/dc-wavekit/digestleak.py",
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "result": "exit 0: => 0 graded answer(s) reachable from this digest"
+  },
+  "capstone-generator": {
+   "file": "refinery_capstone.mjs",
+   "md5": "4cc85cbba0ec8d750e637955516872c2",
+   "result": "exit 0: advanced      koloama_lifetime_tax_mm                         46.7190119584  tol 0.00005"
+  },
+  "oracle-check": {
+   "file": "oracle_check.py",
+   "md5": "2234bb68042c78c1b4d18353eb04ee87",
+   "result": "exit 0: graded fields the oracle reproduces: 18 of 18",
+   "control": "exit 1: graded fields the oracle reproduces: 17 of 18"
+  },
+  "discriminate": {
+   "file": "discriminate.mjs",
+   "md5": "d9ecdf717248241382bed1968a373d26",
+   "result": "exit 0: the closest miss anywhere in the eighteen: amassoma_gasoil_value_per_bbl at 13.5 tolerances (tolerance 0.005)",
+   "control": "exit 1: the closest miss anywhere in the eighteen: amassoma_gasoil_value_per_bbl at 13.5 tolerances (tolerance 0.005)"
+  },
+  "kit-leakage-digest": {
+   "file": "gate_leakage_probe.sh",
+   "md5": "62182fa18262a22d2e5cbe4bc3a45c58",
+   "result": "exit 0: => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "collisions": {
+   "file": "gate_collisions.py",
+   "md5": "a92feee70c6f21add5c4d8f0296d54de",
+   "result": "exit 0: collisions with the digest: 0; graded pairs sharing a value: 0",
+   "control": "exit 1: collisions with the digest: 1; graded pairs sharing a value: 0"
+  },
+  "kit-collisions": {
+   "file": "/root/dc-wavekit/collisions.py",
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "result": "exit 0: fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "promptleak": {
+   "file": "gate_promptleak.py",
+   "md5": "0b6c0fdc3ad950fea55465c71310b602",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 5"
+  },
+  "capstone-leak": {
+   "file": "gate_capstone_leak.py",
+   "md5": "27811ce3d4d872255ebe011f92a1eb07",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 5"
+  },
+  "copy-rule": {
+   "file": "gate_copy_rule.py",
+   "md5": "6e6d31b1d6103c3e3e35c1fb2f8e529c",
+   "result": "exit 0: violations: 0",
+   "control": "exit 1: violations: 2"
+  },
+  "kit-gradeprecision": {
+   "file": "/root/dc-wavekit/gradeprecision.py",
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "result": "exit 0: [gradeprecision] /root/md-wip-refinery: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 5 declared class(es)"
+  },
+  "kit-sourceprose": {
+   "file": "/root/dc-wavekit/sourceprose.mjs",
+   "md5": "c370c51a0af6d3f8098ae859fb28ae1e",
+   "result": "exit 0: [sourceprose] 4 source file(s), 216 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
+  }
+ }
+}

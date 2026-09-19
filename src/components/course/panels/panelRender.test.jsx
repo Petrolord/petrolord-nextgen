@@ -90,6 +90,12 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('crude/ValuationExplorer.jsx');
     expect(names).toContain('crude/RecipeExplorer.jsx');
   });
+  it('finds the refinery (Refinery Feasibility & Planning) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('refinery/ScreenExplorer.jsx');
+    expect(names).toContain('refinery/PlanExplorer.jsx');
+    expect(names).toContain('refinery/VarianceExplorer.jsx');
+  });
   it('finds the supply (Terminals, Depots & Fuel Supply) panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('supply/TankExplorer.jsx');

@@ -1,0 +1,305 @@
+{
+  "app_slug": "refinery",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-one-shape-three-ledgers",
+      "title": "One Shape, Three Ledgers",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-plan-schedule-and-actual",
+          "title": "Plan, schedule and actual",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-an-event-and-its-value",
+          "title": "An event and its value",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-an-event-refuses",
+          "title": "What an event refuses",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-plan-ledger",
+          "title": "The plan ledger",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-volume-and-price-variance",
+      "title": "Volume and Price Variance",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-matched-on-material-and-type",
+          "title": "Matched on material and type",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-volume-variance",
+          "title": "The volume variance",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-price-variance",
+          "title": "The price variance",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-money-with-no-barrels",
+          "title": "Money with no barrels",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-unmatched-movements",
+          "title": "Unmatched movements",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-variance-on-margin",
+      "title": "Variance on Margin",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-cost-lines-and-revenue-lines",
+          "title": "Cost lines and revenue lines",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-margin-effect",
+          "title": "The margin effect",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-totals-on-margin",
+          "title": "Totals on margin",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-units-against-plan",
+          "title": "Units against plan",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-investment-case",
+      "title": "The Investment Case",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-streams-into-the-screening-engine",
+          "title": "Streams into the screening engine",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-revenue-as-revenue",
+          "title": "Revenue as revenue",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-no-royalty-on-a-refinery",
+          "title": "No royalty on a refinery",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-capital-expensed-when-spent",
+          "title": "Capital expensed when spent",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-feasibility-npv",
+          "title": "The feasibility NPV",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-tax-losses-carried-forward",
+      "title": "Tax Losses Carried Forward",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-construction-year-loss",
+          "title": "A construction year loss",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-loss-pool-year-by-year",
+          "title": "The loss pool year by year",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-first-taxable-year",
+          "title": "The first taxable year",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-carrying-the-loss-is-worth",
+          "title": "What carrying the loss is worth",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-odioma-month-end-to-end",
+          "title": "The Odioma month end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-odioma-expansion-end-to-end",
+          "title": "The Odioma expansion end to end",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-variance-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-is-held-and-what-the-oracles-check",
+          "title": "What is held and what the oracles check",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-where-this-course-hands-over",
+          "title": "Where this course hands over",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
