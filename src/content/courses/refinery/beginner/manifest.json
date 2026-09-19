@@ -1,0 +1,305 @@
+{
+  "app_slug": "refinery",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-feasibility-screen-computes",
+      "title": "What a Feasibility Screen Computes",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-two-apps-and-one-barrel",
+          "title": "Two apps and one barrel",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-screen-before-a-study",
+          "title": "A screen before a study",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-blank-box-is-refused",
+          "title": "A blank box is refused",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-illustrative-prices-and-what-they-give",
+          "title": "Illustrative prices and what they give",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-capital-and-the-scaling-law",
+      "title": "Capital and the Scaling Law",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-cost-from-a-reference-point",
+          "title": "Cost from a reference point",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-six-tenths-and-nine-tenths",
+          "title": "Six tenths and nine tenths",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-crossover-at-the-reference-size",
+          "title": "The crossover at the reference size",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-cost-per-barrel-of-capacity",
+          "title": "Cost per barrel of capacity",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-exponents-are-held",
+          "title": "The exponents are held",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-product-slate",
+      "title": "The Product Slate",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-three-configurations",
+          "title": "Three configurations",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-value-per-barrel-of-crude",
+          "title": "Value per barrel of crude",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-loss-is-carried",
+          "title": "The loss is carried",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-an-unpriced-product-is-named",
+          "title": "An unpriced product is named",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-yields-that-do-not-close",
+          "title": "Yields that do not close",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-throughput-and-the-gross-margin",
+      "title": "Throughput and the Gross Margin",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-nameplate-days-and-utilisation",
+          "title": "Nameplate, days and utilisation",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-utilisation-is-a-fraction",
+          "title": "Utilisation is a fraction",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-gross-margin-per-barrel",
+          "title": "The gross margin per barrel",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-annual-streams",
+          "title": "The annual streams",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-capital-in-the-construction-years",
+          "title": "Capital in the construction years",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-crude-supply-and-licensing",
+      "title": "Crude Supply and Licensing",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-three-supply-scenarios",
+          "title": "Three supply scenarios",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-premium-and-the-run-rate",
+          "title": "The premium and the run rate",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-licensing-sequence",
+          "title": "The licensing sequence",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-licences-out-of-order",
+          "title": "Licences out of order",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-okordia-screen-end-to-end",
+          "title": "The Okordia screen end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-okordia-under-three-supplies",
+          "title": "Okordia under three supplies",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-screen-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
