@@ -69,6 +69,7 @@ import HeatTransferLearningPage from '@/pages/apps/HeatTransferLearningPage';
 import MeteringLearningPage from '@/pages/apps/MeteringLearningPage';
 import ProducedWaterLearningPage from '@/pages/apps/ProducedWaterLearningPage';
 import CorrosionLearningPage from '@/pages/apps/CorrosionLearningPage';
+import SafetyStatsLearningPage from '@/pages/apps/SafetyStatsLearningPage';
 import RiskChangeLearningPage from '@/pages/apps/RiskChangeLearningPage';
 import ComplianceLearningPage from '@/pages/apps/ComplianceLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
@@ -442,6 +443,7 @@ const DashboardPage = () => {
     <Route path="apps/metering" element={<MeteringLearningPage />} />
     <Route path="apps/producedwater" element={<ProducedWaterLearningPage />} />
     <Route path="apps/corrosion" element={<CorrosionLearningPage />} />
+    <Route path="apps/safetystats" element={<SafetyStatsLearningPage />} />
     <Route path="apps/riskchange" element={<RiskChangeLearningPage />} />
     <Route path="apps/compliance" element={<ComplianceLearningPage />} />
 

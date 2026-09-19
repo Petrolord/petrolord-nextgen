@@ -226,6 +226,10 @@ export const PANELS = {
   'compliance-register-explorer': React.lazy(() => import('@/components/course/panels/compliance/RegisterExplorer')),
   'compliance-plan-explorer': React.lazy(() => import('@/components/course/panels/compliance/PlanExplorer')),
   'compliance-readiness-explorer': React.lazy(() => import('@/components/course/panels/compliance/ReadinessExplorer')),
+  // H1 Safety Performance Statistics & KPIs (academy module hse)
+  'ss-rates-explorer': React.lazy(() => import('@/components/course/panels/safetystats/RatesExplorer')),
+  'ss-intervals-explorer': React.lazy(() => import('@/components/course/panels/safetystats/IntervalsExplorer')),
+  'ss-uchart-explorer': React.lazy(() => import('@/components/course/panels/safetystats/UChartExplorer')),
 };
 
 export function resolvePanel(id) {
