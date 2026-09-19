@@ -26,10 +26,46 @@ DIRECTIONS, all checked and all counted:
      explanation under --banks. At the foundation phase there are no banks, and
      the run must SAY so with --no-banks rather than print a zero.
 
+  8. THE LESSONS. Every .md file under --lessons (default
+     <NextGen>/src/content/courses/hygiene, recursive), front matter included,
+     read with thousands commas removed (so 6,690.8 is read as 6690.8): no
+     capstone site name; no capstone INPUT RECORD (both values of one record on
+     one line); no capstone count SERIES (the five weekly LEX values, joined);
+     no DISTINCTIVE capstone CONDITION as a whole numeric token, plain or at the
+     six decimals the course prints (SHARED conditions are excused with the
+     reason written beside them, and the run says how many it excused); no
+     graded value at the four renderings; and no numeric literal within TEN
+     tolerances of a graded value at any unit scale wave.json leakScales names
+     (x1, x1e3, x1e-3, x1e2, x1e-2, x60, x1/60). A missing lessons directory, or
+     one with no .md file, is a REFUSAL unless the run declares --no-lessons.
+     LESSON_TASK.md has always said this gate covers the lessons; until
+     direction 8 it read none of them (H1 found the same hole: its direction 10).
+     A FINDING NEVER PRINTS THE VALUE IT FOUND, only the field key, the file
+     and the rendering or scale: finalise.py pins this gate's output into
+     wave.json, and a finding that quoted the answer would put it back there.
+  9. THE BRIEFS AND wave.json. wave.json and every writer brief (BRIEF.md,
+     LESSON_TASK.md, BANK_TASK.md, KEY_TRUTH_TASK.md, PANELS.md): no graded value
+     at the four renderings, no numeric literal within TEN tolerances of a graded
+     value at the leakScales, and not the capstone's T6 weekly-factor margin
+     (read from h2_capstone.mjs --evidence) at its renderings. wave.json once
+     printed two Expert graded answers inside a negative-control result string
+     and the margin under decisions; a brief is read by every writer, so a
+     graded value there is a leak into every tier at once.
+
 Two CONTROLS run every time: a graded value planted into a copy of the digest,
 and a condition planted into a copy of the digest, must both be caught.
 
-    python3 gate_capstone_leak.py [--banks DIR] [--no-banks]
+    python3 gate_capstone_leak.py [--banks DIR] [--no-banks] [--lessons DIR] [--no-lessons]
+    python3 gate_capstone_leak.py --no-banks --plant-lesson
+        THE LESSONS CONTROL: appends, in memory, to the first lesson file read,
+        a literal three tolerances off a graded value (a near miss, so no
+        rendering matches and only the numeric comparison can catch it); must
+        exit 1 with a [8 lessons numeric] finding naming that file.
+    python3 gate_capstone_leak.py --no-banks --plant-brief
+        THE BRIEFS CONTROL: appends, in memory, to wave.json the six-decimal
+        rendering of an Expert graded value, the exact shape of the defect this
+        direction was built for; must exit 1 with a [9 briefs] finding naming
+        wave.json.
 
 Exit 0 clean, 1 on a leak, 2 if it cannot do its job.
 """
@@ -43,8 +79,18 @@ if '--banks' in ARGS:
     BANKS = ARGS[ARGS.index('--banks') + 1]
 if '--no-banks' in ARGS:
     SWEEP_BANKS = False
-for a in ARGS:
-    if a.startswith('--') and a not in ('--banks', '--no-banks'):
+NG = os.environ.get('H2_NEXTGEN', '/root/wt-h2-nextgen')
+LESSONS = os.path.join(NG, 'src/content/courses/hygiene')
+SWEEP_LESSONS = '--no-lessons' not in ARGS
+if '--lessons' in ARGS:
+    LESSONS = ARGS[ARGS.index('--lessons') + 1]
+PLANT_LESSON = '--plant-lesson' in ARGS
+PLANT_BRIEF = '--plant-brief' in ARGS
+VALUE_FLAGS = ('--banks', '--lessons')
+for i, a in enumerate(ARGS):
+    if i > 0 and ARGS[i - 1] in VALUE_FLAGS:
+        continue
+    if a.startswith('--') and a not in ('--banks', '--no-banks', '--lessons', '--no-lessons', '--plant-lesson', '--plant-brief'):
         print(f'  GATE REFUSES: unknown option {a}')
         sys.exit(2)
 LAB = os.environ.get('H2_LAB', '/root/wt-h2-nextgen/src/components/course/panels/hygiene/hygieneLab.js')
@@ -190,7 +236,7 @@ def sweep(digest, label='digest'):
     for tier, key, value, tol in FIELDS:
         for shape, s in renderings(value, decimals_of(key)):
             if s in digest:
-                findings.append(f'DIRECTION 2: {key} as {shape} ({s}) is in {label}')
+                findings.append(f'DIRECTION 2: {key} at its {shape} rendering is in {label}')
     # 4. site names
     if SITE_WORDS.search(digest):
         findings.append(f'DIRECTION 4: a capstone site is named in {label}')
@@ -232,6 +278,158 @@ if SWEEP_BANKS:
                          if not x.startswith('DIRECTION 1:') or 'bank' in x]
     bank_note = f'{len(files)} bank files, {texts} field texts swept'
 
+# THE UNIT SCALES, from wave.json leakScales, the same list leakage.mjs uses.
+SCALE_OF = {'1': 1.0, 'x1e3': 1e3, 'x1e-3': 1e-3, 'x1e2': 1e2, 'x1e-2': 1e-2, 'x60': 60.0, 'x1/60': 1 / 60}
+WAVE_TEXT = need(os.path.join(HERE, 'wave.json'), 'wave.json')
+LEAK_SCALES = json.loads(WAVE_TEXT).get('leakScales')
+if not isinstance(LEAK_SCALES, list) or '1' not in LEAK_SCALES or any(l not in SCALE_OF for l in LEAK_SCALES):
+    print(f'  GATE REFUSES: wave.json leakScales {LEAK_SCALES} is missing, lacks "1" or names a scale this gate does not know')
+    sys.exit(2)
+SCALES = [(l, SCALE_OF[l]) for l in LEAK_SCALES]
+N_TOL = 10
+PLAIN_COMMAS = re.compile(r'(\d),(?=\d{3}(?!\d))')
+
+
+def literals(text):
+    out = []
+    for m in NUMTOK.finditer(text):
+        try:
+            out.append(float(m.group(0)))
+        except ValueError:
+            pass
+    return out
+
+
+def numeric_hits(lits):
+    """(literal, key, scale label) for every literal within N_TOL tolerances of a graded value at a scale."""
+    hits = []
+    for tier, key, value, tol in FIELDS:
+        for label, f in SCALES:
+            target, band = value * f, N_TOL * tol * f
+            for x in lits:
+                if abs(x - target) <= band:
+                    hits.append((x, key, label))
+    return hits
+
+
+def series_of(name):
+    m = re.search(r'const ' + name + r' = Object\.freeze\(\{(.*?)\n\}\);', CAP, re.S)
+    return [(k, [x.strip() for x in arr.split(',') if x.strip()])
+            for k, arr in re.findall(r'(\w+):\s*Object\.freeze\(\[([-\d.,\s]+)\]\)', m.group(1))]
+
+
+# 8. THE LESSONS
+lesson_note = 'NOT SWEPT: --no-lessons declares this run says NOTHING about any lesson'
+lesson_files, planted_in, excused_shared, plant_extra = [], None, set(), []
+if SWEEP_LESSONS:
+    if not os.path.isdir(LESSONS):
+        print(f'  GATE REFUSES: no lessons directory at {LESSONS}. Pass --no-lessons to declare that this run does not sweep lessons.')
+        sys.exit(2)
+    lesson_files = sorted(glob.glob(os.path.join(LESSONS, '**', '*.md'), recursive=True))
+    if not lesson_files:
+        print(f'  GATE REFUSES: the lessons directory {LESSONS} holds no .md file')
+        sys.exit(2)
+    conds = [(n, k, v) for n in SITES for k, v in scenario(n)[0]]
+    distinctive_conds = [c for c in conds if c[2] not in SHARED]
+    recs = [(n, r) for n in SITES for r in scenario(n)[1]]
+    series = [(n, k, arr) for n in SITES for k, arr in series_of(n)]
+    if not series:
+        print('  GATE REFUSES: no capstone count series parsed out of h2_capstone.mjs')
+        sys.exit(2)
+    n_lits = n_lines = 0
+
+    def lesson_findings(rel, text):
+        global n_lits, n_lines
+        out = []
+        plain = PLAIN_COMMAS.sub(r'\1', text)
+        toks = tokens(plain)
+        if SITE_WORDS.search(plain):
+            out.append(f'[8 lessons] {rel} names a capstone site ({SITE_WORDS.search(plain).group(0)})')
+        for n, k, v in conds:
+            if v in toks or norm(v) in toks:
+                if v in SHARED:
+                    excused_shared.add(v)
+                else:
+                    out.append(f'[8 lessons] {rel} carries the capstone condition {n}.{k} = {v}')
+        for line in plain.split('\n'):
+            n_lines += 1
+            ltoks = tokens(line)
+            for n, r in recs:
+                if all(v in ltoks or norm(v) in ltoks for v in r.values()):
+                    out.append(f'[8 lessons] {rel} carries a whole {n} input record {r} on one line')
+        for n, k, arr in series:
+            if ', '.join(arr) in plain or ','.join(arr) in plain:
+                out.append(f'[8 lessons] {rel} carries the {n}.{k} series')
+        for tier, key, value, tol in FIELDS:
+            for shape, s_ in renderings(value, decimals_of(key)):
+                if s_ in plain:
+                    out.append(f'[8 lessons] {rel} carries {key} at its {shape} rendering')
+        lits = literals(plain)
+        n_lits += len(lits)
+        for x, key, label in numeric_hits(lits):
+            out.append(f'[8 lessons numeric] {rel} carries a literal within {N_TOL} tolerances of {key} at {label}')
+        return out
+
+    for fi, p in enumerate(lesson_files):
+        rel = os.path.relpath(p, LESSONS)
+        text = io.open(p, encoding='utf-8').read()
+        found = lesson_findings(rel, text)
+        findings += found
+        if fi == 0 and PLANT_LESSON:
+            # THE CONTROL: the same file again with a near miss appended, in
+            # memory. It is caught only if it adds a numeric finding the clean
+            # file does not have, so a pre-existing finding cannot satisfy it.
+            k0 = FIELDS[2]
+            planted = lesson_findings(rel, text + f'\nA planted near miss: {k0[2] - 3 * k0[3]:.7f}.\n')
+            plant_extra = [f for f in planted if f not in found and f.startswith(f'[8 lessons numeric] {rel} ')]
+            planted_in = rel
+    lesson_note = (f'{len(lesson_files)} lesson files under {LESSONS}, {n_lines} lines, {n_lits} numeric literals '
+                   f'compared against 18 graded values at {len(SCALES)} scales ({", ".join(l for l, _ in SCALES)}) within {N_TOL} tolerances; '
+                   f'{len(conds)} capstone conditions ({len(distinctive_conds)} distinctive swept, {len(excused_shared)} SHARED seen and excused: '
+                   f'{", ".join(sorted(excused_shared, key=float)) or "none"}), {len(recs)} input records, {len(series)} series')
+
+# 9. THE BRIEFS AND wave.json
+BRIEFS = ['wave.json', 'BRIEF.md', 'LESSON_TASK.md', 'BANK_TASK.md', 'KEY_TRUTH_TASK.md', 'PANELS.md']
+import subprocess
+_ev = subprocess.run(['node', os.path.join(HERE, 'h2_capstone.mjs'), '--evidence'], cwd=HERE, capture_output=True, text=True)
+try:
+    T6 = float(json.loads(_ev.stdout)['t6MarginRf'])
+except Exception:
+    print('  GATE REFUSES: cannot read t6MarginRf from h2_capstone.mjs --evidence')
+    sys.exit(2)
+t6_renderings = [s_ for _, s_ in renderings(T6, 6)] + ['%.4f' % T6, ('%.4f' % T6).rstrip('0')]
+brief_lits = 0
+
+
+def brief_findings(b, text):
+    global brief_lits
+    out = []
+    plain = PLAIN_COMMAS.sub(r'\1', text)
+    for tier, key, value, tol in FIELDS:
+        for shape, s_ in renderings(value, decimals_of(key)):
+            if s_ in plain:
+                out.append(f'[9 briefs] {b} carries {key} at its {shape} rendering')
+    for s_ in sorted(set(t6_renderings)):
+        if re.search(r'(?<![\d.])' + re.escape(s_) + r'(?!\d)', plain):
+            out.append(f'[9 briefs] {b} carries the capstone T6 weekly-factor margin at a {len(s_.split(".")[-1])}-decimal rendering')
+    lits = literals(plain)
+    brief_lits += len(lits)
+    for x, key, label in numeric_hits(lits):
+        out.append(f'[9 briefs numeric] {b} carries a literal within {N_TOL} tolerances of {key} at {label}')
+    return out
+
+
+brief_plant_extra = []
+for b in BRIEFS:
+    text = need(os.path.join(HERE, b), b)
+    found = brief_findings(b, text)
+    findings += found
+    if b == 'wave.json' and PLANT_BRIEF:
+        # THE CONTROL: the shape of the original defect, appended in memory.
+        planted = brief_findings(b, text + f'\n"planted": "the finest answer a learner can give is {FIELDS[16][2]:.6f}"\n')
+        brief_plant_extra = [f for f in planted if f not in found or planted.count(f) > found.count(f)]
+brief_note = f'{len(BRIEFS)} files ({", ".join(BRIEFS)}), {brief_lits} numeric literals, 18 graded values and the T6 margin'
+
 # CONTROLS
 ctl1 = sweep(DIGEST + f'\nplanted {FIELDS[4][2]!r}\n')
 distinctive = [v for n in SITES for _, v in scenario(n)[0] if v not in SHARED]
@@ -246,11 +444,24 @@ print(f'gate_capstone_leak EXAMINED: {nconds} stated conditions ({nconds - sum(1
       f'{len(SHARED)} SHARED with a reason, {len(dead)} dead) and {nrecs} input records across 3 sites; '
       f'18 graded values at up to four renderings; digest {len(DIGEST.splitlines())} lines; dump, records and lab sources; banks: {bank_note}.')
 print(f'  table-only coincidences (a condition value printed inside a published or swept table, never in prose, never as a whole record): {len(real_coincidences)}: {", ".join(real_coincidences)}')
+print(f'  direction 8 lessons: {lesson_note}.')
+print(f'  direction 9 briefs: {brief_note}.')
 print(f'  CONTROLS FIRED: a planted graded value and a planted condition were both caught.')
 if dead:
     print(f'  GATE FAILS: SHARED rows that clear nothing: {dead}')
     sys.exit(1)
 for f in findings:
     print(f'  {f}')
+if PLANT_LESSON or PLANT_BRIEF:
+    if PLANT_LESSON:
+        want = '[8 lessons numeric]'
+        caught = planted_in is not None and bool(plant_extra)
+        print(f'  planted in {planted_in}: {plant_extra[:1]}')
+    else:
+        want = '[9 briefs]'
+        caught = any(f.startswith('[9 briefs') and ' wave.json ' in f for f in brief_plant_extra)
+        print(f'  planted in wave.json: {brief_plant_extra[:2]}')
+    print(f'  NEGATIVE CONTROL {"--plant-lesson" if PLANT_LESSON else "--plant-brief"}: expected a {want} finding, {"caught" if caught else "NOT CAUGHT"}')
+    sys.exit(1 if caught else 2)
 print(f'gate_capstone_leak: {len(findings)} finding(s).')
 sys.exit(1 if findings else 0)

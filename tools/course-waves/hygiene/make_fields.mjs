@@ -42,7 +42,10 @@ const out = rows.map((r) => {
   if (tol < floor) {
     unanswerable.push(
       `${r.tier}/${r.key}: graded at ${tol} but the ${cls} class prints to ${PRINTED_DECIMALS[cls]} decimals, `
-      + `so the finest answer a learner can give is ${r.value.toFixed(PRINTED_DECIMALS[cls])} and the error that `
+      // The value itself is NOT printed: this line is pinned into wave.json by
+      // finalise.py, and wave.json is read by every writer (gate_capstone_leak
+      // direction 9). The field key names the answer; the grader holds it.
+      + `so the finest answer a learner can give is ${r.key} at ${PRINTED_DECIMALS[cls]} decimals and the error that `
       + `quoting it carries is up to ${floor}, which is ${(floor / tol).toPrecision(3)} times the tolerance`);
   }
   if (tol !== stated) widened.push(`${r.tier}/${r.key} ${stated} -> ${tol}`);

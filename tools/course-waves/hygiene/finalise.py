@@ -44,6 +44,14 @@ GATES = [
     ('discriminate.mjs --slack-tolerances (negative control, must exit 1)', f'{HERE}/discriminate.mjs', 'node discriminate.mjs --slack-tolerances', 1),
     ('gate_collisions.mjs', f'{HERE}/gate_collisions.mjs', 'node gate_collisions.mjs', 0),
     ('gate_capstone_leak.py --no-banks', f'{HERE}/gate_capstone_leak.py', 'python3 gate_capstone_leak.py --no-banks', 0),
+    ('gate_capstone_leak.py --no-banks --plant-lesson (negative control, must exit 1)', f'{HERE}/gate_capstone_leak.py', 'python3 gate_capstone_leak.py --no-banks --plant-lesson', 1),
+    ('gate_capstone_leak.py --no-banks --plant-brief (negative control, must exit 1)', f'{HERE}/gate_capstone_leak.py', 'python3 gate_capstone_leak.py --no-banks --plant-brief', 1),
+    ('gate_vocabulary.py', f'{HERE}/gate_vocabulary.py', 'python3 gate_vocabulary.py', 0),
+    ('gate_vocabulary.py --plant (negative control, must exit 1)', f'{HERE}/gate_vocabulary.py', 'python3 gate_vocabulary.py --plant', 1),
+    ('leakage.mjs --tier beginner', f'{KIT}/leakage.mjs', f'node {KIT}/leakage.mjs . --tier beginner', 0),
+    ('leakage.mjs --tier intermediate', f'{KIT}/leakage.mjs', f'node {KIT}/leakage.mjs . --tier intermediate', 0),
+    ('leakage.mjs --tier advanced', f'{KIT}/leakage.mjs', f'node {KIT}/leakage.mjs . --tier advanced', 0),
+    ('leakage.mjs --selftest', f'{KIT}/leakage.mjs', f'node {KIT}/leakage.mjs --selftest', 0),
     ('gate_claims.mjs', f'{HERE}/gate_claims.mjs', 'node gate_claims.mjs', 0),
     ('gate_claims.mjs --plant-a-recon-figure (negative control, must exit 1)', f'{HERE}/gate_claims.mjs', 'node gate_claims.mjs --plant-a-recon-figure', 1),
     ('gate_copy_rule.py', f'{HERE}/gate_copy_rule.py', 'python3 gate_copy_rule.py', 0),
@@ -84,14 +92,15 @@ WAVE = {
     'branch': 'feat/h2-hygiene-course',
     'goldens': ['hse/goldens/exposure_cases.json'],
     'engines': ['engines/hse/exposure.js'],
-    'enginesVendoredAt': 'NextGen, sha-identical with petrolord-engines 870cc8f (PR #217). SIX paths, walked as an import closure from __tests__/hse.exposure.test.js by vendor_hygiene.sh: the suite, the engine and the golden it reads at runtime, plus three NAMED members (oracle_exposure.py, FINDINGS-exposure.md, negcontrol_exposure.sh mode 755). 24 proofs (blob, sha256, cmp, bytes), 0 deviations. The canonical pin in VENDOR.json is NOT moved; the six paths are ledgered kind "extra", group h2-hygiene-course, each pinned to its vendored blob, so the edit merges by path with H1 (which moves the pin to f123a57, a commit that does not carry exposure.js). The entries clear as STALE once the pin reaches 870cc8f or later.',
+    'enginesVendoredAt': 'NextGen, sha-identical with petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217). Re-vendored 2026-09-19 for #220 only: exposure.js, the jest suite and FINDINGS-exposure.md moved; the golden, the oracle and the negative-control script are byte-identical between the two commits. SIX paths, walked as an import closure from __tests__/hse.exposure.test.js by vendor_hygiene.sh: the suite, the engine and the golden it reads at runtime, plus three NAMED members (oracle_exposure.py, FINDINGS-exposure.md, negcontrol_exposure.sh mode 755). 24 proofs (blob, sha256, cmp, bytes), 0 deviations. The canonical pin in VENDOR.json is NOT moved; the six paths are ledgered kind "extra", group h2-hygiene-course, each pinned to its vendored blob, so the edit merges by path with H1 (which moves the pin to f123a57, a commit that does not carry exposure.js). The entries clear as STALE once the pin reaches b43f1d9 or later.',
     'leakScales': ['1', 'x1e3', 'x1e-3', 'x1e2', 'x1e-2', 'x60', 'x1/60'],
     'decisions': {
+        'heatLabels': 'ACCEPTED 2026-09-19 (BRIEF.md): a WBGT built from thermometer readings carries "the NIOSH 2016-106 section 9.3.2 weighting, checked for transcription only"; a RAL, a REL or a margin against either carries the section 8.1 label. A WBGT the instrument read out, and the graded one-hour averages of stated readouts, are arithmetic on stated values and carry neither.',
         'heat': 'No graded field passes through the NIOSH 2016-106 RAL or REL equation, a margin, an exceedance verdict, or a WBGT built from globe, wet bulb and dry bulb readings. They are TAUGHT as "the NIOSH 2016-106 section 8.1 equation, checked for transcription only". REASON: the constants and the WBGT weights are transcription only (FINDINGS-exposure.md section 6: planting the same error in engine and oracle leaves the suite green), and NIOSH\'s own worked example disagrees with its own equation (27.8 C printed against 27.458939 C at 348.9 W; 25 C against 24.047916 C for the RAL), so a learner following the document\'s figure would be marked wrong. The two graded heat fields are one-hour time weighted averages of STATED readouts, arithmetic by definition.',
         'coefficient16_61': 'OSHA Table A-1 cannot separate 16.61 from 5/log10 2 at its printed decimal (0 of 150 rows reject the exact coefficient; digest section 5). The OSHA TWA and the extended-shift action level are graded on the coefficient the mandatory Appendix A TEXT writes. NIOSH Table 1-2 does separate 10.0 from 3/log10 2 (49 of 83 rows).',
         'weeklyLex': 'Graded with FIVE days given, so the statutory divisor of 5 equals the day count; the capstone generator measures the two agree to 1e-12. The energy average is the one L108 Figure 26 reproduces for the day.',
         'stel': 'A fifteen-minute time weighted average by definition; the prompt STATES the remainder of the window counts as zero.',
-        'oracleOnlyNeverGraded': ['NIOSH protector derating by type (0.75/0.5/0.3)', 'OSHA dual protection +5 dB', 'Brief and Scala WEEKLY factor on its own (only decides which factor governs; margin 0.2875 in the capstone)'],
+        'oracleOnlyNeverGraded': ['NIOSH protector derating by type (0.75/0.5/0.3)', 'OSHA dual protection +5 dB', 'Brief and Scala WEEKLY factor on its own (only decides which factor governs; the capstone asserts the weekly factor sits above the daily one by more than 0.2)'],
     },
     'constants': {
         '$comment': 'MEASURED out of the engine in digest section 3 and pinned against a literal typed in h2_dump.mjs, a third location. 40 pins, all within 1e-12 relative except the three limit doses, bisected, within 1e-9.',
@@ -104,7 +113,7 @@ WAVE = {
         '16 and 128': 'Brief and Scala denominators. The daily one is reproduced by BC OHS Reg 5.50; the weekly one is ORACLE ONLY.',
     },
     'plan': {
-        'state': 'FOUNDATION COMPLETE. Engine vendored, digest built (25 sections, byte-reproducible), 18 graded fields generated through the vendored engine, discriminating and collision-free, NextGen lab + 3 panels + route + tests. No lesson, bank, key truth or migration is written. No database write of any kind.',
+        'state': 'LESSONS WRITTEN (78, committed on feat/h2-hygiene-course), gates repaired 2026-09-19 before the banks: gate_capstone_leak reads the lessons (direction 8) and wave.json plus every brief (direction 9), gate_vocabulary gates digest section 24, leakage runs on all three tiers with the x60 and x1/60 scales. No bank, key truth or migration is written. No database write of any kind.',
         'thesis': 'An exposure figure is a measurement read against a criterion, and it means nothing until the criterion is named, so the course reads one record three ways, builds each metric from the formula its source prints, and says for every formula how strong the evidence behind it is.',
         'tiers': {
             'beginner': 'Associate. NOISE DOSE AND ITS CRITERIA: reference duration, decibel exchange rate, threshold, noise dose, TWA, the printed coefficients, OSHA PEL / OSHA action level / NIOSH noise REL on one record, warnings and refusals.',
@@ -115,7 +124,7 @@ WAVE = {
         'questionsPerTier': 132, 'questionsPerModuleBank': 15, 'examQuestions': 42,
         'panels': {'hy-noise-dosimeter': 'NoiseDosimeterExplorer.jsx', 'hy-protection-chemicals': 'ProtectionChemicalsExplorer.jsx', 'hy-heat-stress': 'HeatStressExplorer.jsx'},
         'route': '/dashboard/apps/hygiene',
-        'next': 'scaffold.py the 78 stubs, write lessons from digest.txt per LESSON_TASK.md, then banks (BANK_TASK.md) with a key-truth second reader (KEY_TRUTH_TASK.md), then the five-migration ladder with the go-live HELD.',
+        'next': 'banks (BANK_TASK.md) with a key-truth second reader (KEY_TRUTH_TASK.md), then the five-migration ladder with the go-live HELD.',
     },
     'fields': {
         'count': len(fields),
@@ -147,8 +156,9 @@ WAVE = {
         'incident rates': 'safetystats (H1)',
         'risk matrix': 'riskchange',
     },
-    'openItems': {
-        'engine message names the wrong field': 'nioshHeatAssessment remaps the refused FIELD from periods[i].wbgtC to wbgtPeriods[i].wbgtC but leaves the MESSAGE saying "periods[0].wbgtC must be a finite number" (digest section 10, golden refusal heat-bad-wbgt-row). Cosmetic; the field is right. Opened as petrolord-engines PR #220 (branch fix/hse-exposure-heat-refusal-message, d9c1a89) with its own jest guard, proved red without the repair; the vendored copy is never patched. After #220 merges, re-vendor and rebuild the digest: one line of section 10 changes, no figure moves.',
+    'openItems': {},
+    'closedItems': {
+        'engine message names the wrong field': 'CLOSED 2026-09-19. petrolord-engines PR #220 merged (d9c1a89, main 466f21f) and the closure was re-vendored at b43f1d9. The digest rebuilt with two lines changed: section 10 now prints "wbgtPeriods[0].wbgtC must be a finite number" for heat-bad-wbgt-row, and the header states b43f1d9 and the engine source length (706 to 708 lines). Numeric literal multiset: 3366 before and after, the only change the engine line count 706 to 708; no figure moved.',
     },
     'cleared_claims': [],
     'gates': results,

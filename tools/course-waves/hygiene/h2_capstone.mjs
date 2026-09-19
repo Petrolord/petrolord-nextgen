@@ -2,7 +2,7 @@
 //
 // Three sites, six graded fields each. Every value is a return value of
 // engines/hse/exposure.js (vendored sha-identical from petrolord-engines
-// 870cc8f), or arithmetic on two such values with the arithmetic stated.
+// b43f1d9; first vendored at 870cc8f), or arithmetic on two such values with the arithmetic stated.
 //
 //   UTOROGU  Associate     one operator's eight-hour dosimeter day, read
 //                          under the OSHA PEL, the OSHA action level and the
@@ -450,5 +450,7 @@ if (process.argv.includes('--json')) {
   const byMech = {};
   CLEAR.forEach((c) => { byMech[c.mechanism] = (byMech[c.mechanism] || 0) + 1; });
   process.stdout.write(`by mechanism: ${Object.entries(byMech).sort().map(([m, n2]) => `${m} ${n2}`).join(', ')}\n`);
-  process.stdout.write(`T6 margin: weekly factor minus daily factor = ${T6_MARGIN.toFixed(6)}\n`);
+  // The margin itself stays in --evidence (t6MarginRf), which only the gates read:
+  // this line is pinned into wave.json by finalise.py, which every writer reads.
+  process.stdout.write(`T6 margin: weekly factor minus daily factor is above 0.2, asserted (the figure is in --evidence only)\n`);
 }

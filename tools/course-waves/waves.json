@@ -474,6 +474,7 @@
       "gate_capstone_leak.py",
       "gate_copy_rule.py",
       "gate_claims.mjs",
+      "gate_vocabulary.py",
       "digest_prose.rules.mjs",
       "structure.py",
       "scaffold.py",
