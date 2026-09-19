@@ -1,1 +1,40 @@
 # Gross margin per barrel of crude
+
+The margin is a month's total. To compare months, crudes or refineries of different sizes, planners divide it by the crude that earned it. The digest gives the definition:
+
+gross margin per barrel = margin / total crude.
+
+For ABUA as typed: margin 7077935.48, total crude 2029032.26 bbl, gross margin per barrel of crude 3.4883. That is the figure the course's one sentence is built on. A refinery is judged on its margin per barrel of crude.
+
+{{panel:refinery-plan-explorer}}
+
+## Per barrel of crude
+
+The denominator is crude, and only crude. It is not product sold and it is not unit throughput. That matters because not every barrel run is sold: every crude yields some offgas that no product takes, the reformer and the hydrotreater each make offgas as well, and the plan leaves 103638.71 bbl of it as surplus. Dividing by crude makes the figure a statement about the barrel the refinery bought: what each one is worth after it has been bought, distilled, processed and sold.
+
+It is also why the figure travels. The Associate tier's screen priced a gross margin a barrel before any capital was spent. The plan prints the same quantity for a running month. When the two sit side by side, one is the promise and the other is the plan.
+
+## The five changes, per barrel
+
+SECTION 13 prints both the margin and the gross margin per barrel for each change. Read them together:
+
+| change | total crude (bbl) | margin | gross margin per bbl | margin change from the plan as typed |
+| --- | --- | --- | --- | --- |
+| the plan as typed | 2029032.26 | 7077935.48 | 3.4883 | 0.00 |
+| the diesel hydrotreater typed as shut for a turnaround (capacity 0) | 735294.12 | 424264.71 | 0.5770 | -6653670.78 |
+| the diesel hydrotreater capacity left blank (no limit) | 2082608.70 | 7173508.35 | 3.4445 | 95572.86 |
+| the crude unit at 1900000 barrels for the month | 1900000.00 | 6847760.00 | 3.6041 | -230175.48 |
+| the Forcados cargo cancelled (availability typed 0) | 1747826.09 | 4030705.04 | 2.3061 | -3047230.44 |
+| a jet floor of 300000 and a fuel oil floor of 700000 | 2267857.14 | 5929846.43 | 2.6147 | -1148089.06 |
+
+Look at the third and fourth rows. With the hydrotreater left blank, the margin change is 95572.86, and the gross margin per barrel reads 3.4445 against 3.4883 as typed. With the crude unit held at 1900000 barrels for the month, the margin change is -230175.48, and the gross margin per barrel reads 3.6041.
+
+Those two rows are the lesson, and the exercise asks you to read them. The margin change column carries its sign. The gross margin column carries no change at all, so set each figure against 3.4883 yourself and see which way it moved. The total and the ratio need not move together. When a plan runs extra crude, the extra barrels are the ones the plan valued last, and they can add to the total while pulling the average down. When a plan is made to run less crude, it keeps the barrels it values most and drops the rest, and the average can rise while the total falls.
+
+## Which to maximise
+
+The plan maximises the margin, the total. It does not maximise the gross margin per barrel, and a planner should not either within one month. A higher ratio bought by running less crude is a smaller month. The gross margin per barrel is for comparison: between one refinery and another, between a plan and its actuals, between the screen and the plan. Inside one month's plan, the total decides.
+
+## Exercise
+
+Read the rows for the hydrotreater left blank and the crude unit at 1900000 barrels. For each, give the margin change from the plan as typed (95572.86 and -230175.48) and the gross margin per barrel (3.4445 and 3.6041) beside 3.4883 as typed. Say what the pair shows about why a plan is chosen on its margin, and what the gross margin per barrel is still good for.
