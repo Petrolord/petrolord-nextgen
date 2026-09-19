@@ -29,7 +29,7 @@ import { COURSE_ICONS } from '@/components/sidebar/courseIcons';
 // so a new module slug never disappears from the sidebar.
 export const MODULE_ORDER = [
   'geoscience', 'reservoir', 'drilling', 'production',
-  'facilities', 'economics', 'assurance', 'hse',
+  'facilities', 'economics', 'assurance', 'hse', 'commercial_trading', 'supply_chain',
 ];
 
 export const orderModules = (slugs) => {
