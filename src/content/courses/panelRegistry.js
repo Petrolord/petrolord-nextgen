@@ -226,6 +226,10 @@ export const PANELS = {
   'compliance-register-explorer': React.lazy(() => import('@/components/course/panels/compliance/RegisterExplorer')),
   'compliance-plan-explorer': React.lazy(() => import('@/components/course/panels/compliance/PlanExplorer')),
   'compliance-readiness-explorer': React.lazy(() => import('@/components/course/panels/compliance/ReadinessExplorer')),
+  // MD3 supply: Terminals, Depots & Fuel Supply (academy module supply_chain)
+  'supply-tank-explorer': React.lazy(() => import('@/components/course/panels/supply/TankExplorer')),
+  'supply-depot-explorer': React.lazy(() => import('@/components/course/panels/supply/DepotExplorer')),
+  'supply-price-explorer': React.lazy(() => import('@/components/course/panels/supply/PriceExplorer')),
 };
 
 export function resolvePanel(id) {
