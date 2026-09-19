@@ -1,0 +1,30 @@
+-- ============================================================================
+-- gasvalue PROFESSIONAL DEEP SEED: Flare Gas to Value & LPG/CNG, intermediate
+-- tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: ROUTES, RECOVERY AND THE CREDIT. Four routes carry
+-- requirement envelopes whose limits are the study's to set, and a check with
+-- no limit is unchecked; each route's yield has a basis and a ceiling in what
+-- the gas holds; a route's year is product, revenue, cost and margin per Mscf,
+-- with a blank cost named and capital scaled by the modular power law and
+-- handed on undiscounted; only the recovered share of the flare is avoided,
+-- and the net abatement needs a declared counterfactual; the breakeven credit
+-- price is closed form.
+--
+-- THE ENGINE FACT THIS TIER OWNS. One flare gives three different net
+-- abatements under three counterfactuals, and the engine gives none until one
+-- is declared.
+--
+-- THE TRAP THE TIER IS BUILT ON. The whole flare credited to a plant that
+-- recovers part of it, the first clearing price in the order typed, and a yield
+-- above what the gas holds each give a figure that looks finished.
+--
+-- HELD, taught as a limit and never graded: GWP values and credit prices as
+-- case inputs (H4). Every figure is invented and illustrative. The capstone
+-- grades six engine figures: capital at 0.01 dollars, two tonnages at 0.01 t,
+-- the rest at 1e-4.
+-- ============================================================================

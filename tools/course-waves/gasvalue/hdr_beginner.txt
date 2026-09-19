@@ -1,0 +1,30 @@
+-- ============================================================================
+-- gasvalue ASSOCIATE DEEP SEED: Flare Gas to Value & LPG/CNG, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE GAS AND THE FLARE. A standard cubic foot is a count
+-- of moles, so the analysis is read by the mole: a sheet that does not sum to
+-- one is scaled and named; the heating value, the carbon and the mass in a
+-- thousand cubic feet are mole-weighted; the liquids in the gas are derived
+-- from the composition and the liquid densities, and a missing density leaves
+-- them missing. The flare follows 40 CFR 98.233(n): the CO2 in the gas passes
+-- through, the hydrocarbon carbon burns at the combustion efficiency, and the
+-- methane that escapes is the methane in the gas at one less the destruction
+-- efficiency.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The flare's two efficiencies set two
+-- different species: destruction sets the methane, combustion sets the CO2,
+-- and neither has a default.
+--
+-- THE TRAP THE TIER IS BUILT ON. Every unburned carbon counted as methane, the
+-- gas's CO2 burned as fuel, and a blank efficiency read as a perfect flare each
+-- give a figure that looks finished.
+--
+-- HELD, taught as a limit and never graded: the efficiency tiers (H1), the
+-- unlit flare (H2), the GWP as a case input (H4). Every figure is invented and
+-- illustrative. The capstone grades six engine figures, three at 1e-4 and the
+-- flare's three tonnages at 0.01 t.
+-- ============================================================================

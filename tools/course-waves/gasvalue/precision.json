@@ -1,0 +1,58 @@
+{
+ "tonnes": {
+  "decimals": 3,
+  "match": "^(?:eriemu_flare_co2_t|eriemu_flare_ch4_t|eriemu_flare_co2e_t|adibawa_avoided_co2e_t|adibawa_net_abatement_t)$"
+ },
+ "kgLeft": {
+  "decimals": 3,
+  "match": "^(?:asaba_left_in_banks_kg)$"
+ },
+ "usd": {
+  "decimals": 2,
+  "match": "^(?:adibawa_capital_usd)$"
+ },
+ "btuPerScf": {
+  "decimals": 4,
+  "match": "^(?:eriemu_ghv_btu_scf)$"
+ },
+ "galPerMscf": {
+  "decimals": 4,
+  "match": "^(?:eriemu_gpm_c3plus)$"
+ },
+ "kgPerMscf": {
+  "decimals": 4,
+  "match": "^(?:eriemu_c3plus_kg_per_mscf)$"
+ },
+ "kgPerYear": {
+  "decimals": 4,
+  "match": "^(?:adibawa_cng_kg_per_year)$"
+ },
+ "usdPerMscf": {
+  "decimals": 4,
+  "match": "^(?:adibawa_value_per_mscf)$"
+ },
+ "usdPerTonne": {
+  "decimals": 4,
+  "match": "^(?:adibawa_breakeven_credit_usd_per_t)$"
+ },
+ "lpgTonnes": {
+  "decimals": 4,
+  "match": "^(?:asaba_usable_lpg_t)$"
+ },
+ "kW": {
+  "decimals": 4,
+  "match": "^(?:asaba_vaporizer_design_kw)$"
+ },
+ "minutes": {
+  "decimals": 4,
+  "match": "^(?:asaba_carousel_wait_min)$"
+ },
+ "kgBank": {
+  "decimals": 4,
+  "match": "^(?:asaba_bank_mass_kg)$"
+ },
+ "years": {
+  "decimals": 4,
+  "match": "^(?:asaba_payback_years)$"
+ }
+}
