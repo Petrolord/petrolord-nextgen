@@ -29,7 +29,7 @@ The OBEN record shows it. Its fifth period is 0.200000 h at 99.100000 dBA. The O
 
 ## The words on the page
 
-Always write the decibel exchange rate, or an exchange rate of 5 dB, in full. The Economics courses in this academy use exchange rate for currency, and a bare phrase in a report can be read that way by someone arriving from those pages.
+Always write the decibel exchange rate, or an exchange rate of 5 dB, in full. The Economics courses in this academy use the same two words for currency, and a bare phrase in a report can be read that way by someone arriving from those pages.
 
 The rate is also why a criterion is more than a limit. A criterion in this engine is a criterion level, a decibel exchange rate, a threshold and a limit noise dose, all four together, and changing any one of them changes the answer for the same record.
 

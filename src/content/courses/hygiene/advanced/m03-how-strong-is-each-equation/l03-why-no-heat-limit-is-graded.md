@@ -1,4 +1,4 @@
-# Why no heat limit is graded
+# Why no heat stress limit is graded
 
 No graded field in this course passes through the RAL or the NIOSH heat REL, a margin against either, an exceedance verdict, or a WBGT built from globe, wet bulb and dry bulb readings. The two graded heat stress quantities are one-hour time weighted averages of readings a scenario states: the WBGT an instrument read out, and the metabolic rates. This lesson gives the three reasons, each measured.
 

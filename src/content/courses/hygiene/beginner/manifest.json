@@ -152,7 +152,7 @@
     },
     {
      "key": "l03-the-niosh-rel",
-     "title": "The NIOSH REL",
+     "title": "The NIOSH noise REL",
      "order": 3,
      "est_minutes": 13,
      "panels": [

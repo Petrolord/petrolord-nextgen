@@ -3,7 +3,7 @@
 # module, path_order 62.
 #
 # Engine: engines/hse/exposure.js, vendored sha-identical with petrolord-engines
-# 870cc8f (PR #217). It imports nothing, so the vendoring closure walked from
+# b43f1d9 (PR #217, re-vendored after #220). It imports nothing, so the vendoring closure walked from
 # the jest suite is SIX paths: three reached by the walk (the suite, the engine,
 # the golden) and three NAMED with their reason (the oracle, FINDINGS, the
 # negative-control script). A LATER ENGINE CHANGE WILL GROW THAT CLOSURE; re-walk
@@ -115,7 +115,7 @@ TIERS = {
   ('m03-three-criteria-one-record', 'Three Criteria, One Record', [
     ('l01-the-osha-pel-setup', 'The OSHA PEL setup', 12, [N]),
     ('l02-the-action-level-is-half-a-dose', 'The action level is half a noise dose', 13, [N]),
-    ('l03-the-niosh-rel', 'The NIOSH REL', 13, [N]),
+    ('l03-the-niosh-rel', 'The NIOSH noise REL', 13, [N]),
     ('l04-one-day-three-answers', 'One day and three answers', 14, [N]),
     ('l05-ceilings-and-table-tops', 'Ceilings and the tops of the tables', 13, [N]),
   ]),
@@ -195,7 +195,7 @@ TIERS = {
   ('m03-how-strong-is-each-equation', 'How Strong Is Each Equation', [
     ('l01-published-reproduced-transcribed', 'Published, reproduced, transcribed', 14, []),
     ('l02-the-worked-example-that-disagrees', 'The worked example that disagrees', 14, [H]),
-    ('l03-why-no-heat-limit-is-graded', 'Why no heat limit is graded', 13, []),
+    ('l03-why-no-heat-limit-is-graded', 'Why no heat stress limit is graded', 13, []),
     ('l04-band-summaries-are-not-the-equation', 'Band summaries are not the equation', 13, [H]),
   ]),
   ('m04-errata-in-the-standards', 'Errata in the Standards', [
@@ -211,7 +211,7 @@ TIERS = {
     ('l04-the-weekly-factor-and-which-governs', 'The weekly factor and which governs', 14, [P]),
     ('l05-the-factor-only-lowers-a-limit', 'The factor only lowers a limit', 12, [P]),
   ]),
-  ('m06-from-exposures-to-a-sampling-decision', 'From Exposures to a Sampling Decision', [
+  ('m06-from-exposures-to-a-sampling-decision', 'From Noise, Chemical and Heat Exposures to a Sampling Decision', [
     ('l01-three-hazards-one-crew', 'Three hazards and one crew', 13, [N, P, H]),
     ('l02-adjusted-limits-in-a-mixture', 'Adjusted limits in a mixture', 13, [P]),
     ('l03-what-to-measure-next', 'What to measure next', 13, []),

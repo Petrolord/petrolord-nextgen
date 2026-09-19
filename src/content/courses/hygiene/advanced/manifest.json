@@ -154,7 +154,7 @@
     },
     {
      "key": "l03-why-no-heat-limit-is-graded",
-     "title": "Why no heat limit is graded",
+     "title": "Why no heat stress limit is graded",
      "order": 3,
      "est_minutes": 13,
      "panels": [],
@@ -292,7 +292,7 @@
   },
   {
    "key": "m06-from-exposures-to-a-sampling-decision",
-   "title": "From Exposures to a Sampling Decision",
+   "title": "From Noise, Chemical and Heat Exposures to a Sampling Decision",
    "order": 6,
    "lessons": [
     {
