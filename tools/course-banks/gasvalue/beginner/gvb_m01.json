@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Which flareToValue function answers the studio question \"what is in this gas, and how much liquid could it give\"?",
+  "options": [
+   "creditSensitivity",
+   "screenRoute",
+   "characteriseGas",
+   "routeEconomics"
+  ],
+  "answer": 2,
+  "explanation": "The digest's table of questions pairs that question with characteriseGas. creditSensitivity answers whether the project needs carbon credits to clear its hurdle, screenRoute answers which way of selling the gas it allows, and routeEconomics answers what a route makes, earns and costs in a year."
+ },
+ {
+  "prompt": "What does the digest's export table count for flareToValue?",
+  "options": [
+   "7 exported functions and 10 exported constants and tables",
+   "10 exported functions and 9 exported constants and tables",
+   "10 exported functions and 7 exported constants and tables",
+   "10 exported functions and 10 exported constants and tables"
+  ],
+  "answer": 0,
+  "explanation": "The flareToValue row reads 7 functions (abatement, characteriseGas, compareRoutes, creditSensitivity, routeEconomics, screenRoute, yieldCeiling) and 10 constants and tables. 10 functions and 9 constants and tables is the lpgCng row."
+ },
+ {
+  "prompt": "lpgCng calls three modules and writes none of the three itself. What does it call terminalDepot for?",
+  "options": [
+   "The gas Z factor, for the gas in a bank",
+   "The compressor train, for the station compressor",
+   "The power law, for scaling a plant's capital",
+   "The loading-rack queue, for its carousel and forecourt"
+  ],
+  "answer": 3,
+  "explanation": "The digest says lpgCng calls the loading-rack queue in terminalDepot for its carousel and forecourt, the gas Z factor in production/gasProperties and the compressor train in facilities/compression. The capital power law is in modularRefinery, which flareToValue uses."
+ },
+ {
+  "prompt": "SCF_PER_LBMOL reads 379.49. What does the constant count?",
+  "options": [
+   "Pounds in one kilogram",
+   "Standard cubic feet in one lb-mol",
+   "US gallons in one cubic foot",
+   "Cubic metres in one standard cubic foot"
+  ],
+  "answer": 1,
+  "explanation": "The constants table gives SCF_PER_LBMOL 379.49, standard cubic feet in one lb-mol. Pounds in one kilogram is LB_PER_KG (2.20462262), US gallons in one cubic foot is GAL_PER_FT3 (7.480519) and cubic metres in one standard cubic foot is lpgCng's M3_PER_SCF (0.02831684659)."
+ },
+ {
+  "prompt": "One Mscf of methane carries 19.1757 kg and one Mscf of carbon dioxide carries 52.6038 kg. What does the digest say the two rows hold the same?",
+  "options": [
+   "The mass in the Mscf",
+   "The count of moles",
+   "The molar mass behind the row",
+   "The typical heating value of the gas"
+  ],
+  "answer": 1,
+  "explanation": "A standard cubic foot counts gas at 60 F and 14.696 psia, so every row is the same count of moles and the mass follows the molar mass: 16.043 lb/lbmol for methane and 44.01 for carbon dioxide. The heating values differ too, 1010 Btu/scf for methane against 0 for carbon dioxide."
+ },
+ {
+  "prompt": "How does the digest say kgPerMscf is built from the engine's constants?",
+  "options": [
+   "1000 times SCF_PER_LBMOL gives the lb-mol, times the molar mass gives pounds, times LB_PER_KG gives kilograms",
+   "1000 over SCF_PER_LBMOL gives the lb-mol, times GAL_PER_FT3 gives cubic feet, over LB_PER_KG gives kilograms",
+   "SCF_PER_LBMOL over 1000 gives the lb-mol, times the molar mass gives pounds, over LB_PER_KG gives kilograms",
+   "1000 over SCF_PER_LBMOL gives the lb-mol, times the molar mass gives pounds, over LB_PER_KG gives kilograms"
+  ],
+  "answer": 3,
+  "explanation": "The lb-mol in one Mscf is 1000 over SCF_PER_LBMOL, the pounds are that times the mole-weighted molar mass, and the kilograms are the pounds over LB_PER_KG. Done on the constants it gives 19.1757 for methane and 52.6038 for carbon dioxide, a difference of 0.0000 from the engine on both rows."
+ },
+ {
+  "prompt": "Propane's molar mass in the reference is 44.096 lb/lbmol. What kgPerMscf does characteriseGas give for one Mscf of pure propane?",
+  "options": [
+   "52.6038",
+   "52.7066",
+   "35.9417",
+   "33.4842"
+  ],
+  "answer": 1,
+  "explanation": "Pure propane gives 52.7066 kg in one Mscf. 52.6038 is pure carbon dioxide at 44.01 lb/lbmol, 35.9417 is pure ethane at 30.07 and 33.4842 is pure nitrogen at 28.014."
+ },
+ {
+  "prompt": "Which rows of GAS_COMPONENT_REFERENCE are marked inert?",
+  "options": [
+   "N2 alone",
+   "CO2 alone",
+   "N2 and CO2",
+   "C1, N2 and CO2"
+  ],
+  "answer": 2,
+  "explanation": "The inert column reads true on N2 (Nitrogen) and CO2 (Carbon dioxide) and false on every other row, C1 included. Both inert rows carry a typical heating value of 0."
+ },
+ {
+  "prompt": "The CO2 row carries one carbon per molecule and is marked inert. What does the digest say about that carbon?",
+  "options": [
+   "It is left out of the carbon per mole, because the row is marked inert.",
+   "It is counted as a fuel carbon, at the typical heating value of methane.",
+   "It is counted at zero in the carbon per mole, as nitrogen's row is.",
+   "It is counted when the carbon per mole is counted, and CO2 is no fuel."
+  ],
+  "answer": 3,
+  "explanation": "The digest's sentence on the row: its carbon is counted when the carbon per mole is counted, and it is not a fuel. The CO2 row's typical heating value is 0, and nitrogen carries 0 carbon per molecule where CO2 carries 1."
+ },
+ {
+  "prompt": "The engine's note on GAS_COMPONENT_REFERENCE calls two of its columns definitional. Which two?",
+  "options": [
+   "Molar masses and carbon numbers",
+   "Heating values and liquid densities",
+   "Molar masses and heating values",
+   "Carbon numbers and liquid densities"
+  ],
+  "answer": 0,
+  "explanation": "The note: \"Molar masses and carbon numbers are definitional. Heating values and liquid densities are typical: the gas analysis and the certificate govern, and a measured value should replace these.\""
+ },
+ {
+  "prompt": "Which code does GAS_COMPONENT_REFERENCE label \"Pentanes plus\", and how many carbon per molecule does its row carry?",
+  "options": [
+   "NC4, with 4",
+   "C5, with 5",
+   "C5, with 4",
+   "IC4, with 5"
+  ],
+  "answer": 1,
+  "explanation": "The C5 row is labelled Pentanes plus and carries 5 carbon per molecule. IC4 (Iso-butane) and NC4 (n-Butane) each carry 4."
+ },
+ {
+  "prompt": "EGBEMA's sheet is typed short, summing to 0.9850. What does characteriseGas do with it?",
+  "options": [
+   "It refuses the sheet: the gas composition sums to nothing.",
+   "It scales the fractions to one and says so in a note.",
+   "It uses the fractions as typed and reports their raw sum.",
+   "It adds the shortfall to methane and leaves the rest as typed."
+  ],
+  "answer": 1,
+  "explanation": "The normalisationNote reads: \"The mole fractions summed to 0.985 and were scaled to one. Check the analysis if that was not intended.\" Every normalised figure on the short sheet differs from its typed figure, C1 0.73 becoming 0.7411."
+ },
+ {
+  "prompt": "On the short EGBEMA sheet, which fractions does the engine work with for methane and nitrogen?",
+  "options": [
+   "C1 0.7411 and N2 0.0183",
+   "C1 0.7420 and N2 0.0180",
+   "C1 0.7411 and N2 0.018",
+   "C1 0.73 and N2 0.018"
+  ],
+  "answer": 0,
+  "explanation": "The normalised short-sheet column reads C1 0.7411 and N2 0.0183: the nitrogen moves from its typed 0.018 as the methane moves from 0.73. C1 0.7420 and N2 0.0180 are the full sheet's normalised figures."
+ },
+ {
+  "prompt": "Which function do the studios use to answer \"does the project need carbon credits to clear its hurdle\"?",
+  "options": [
+   "compareRoutes",
+   "routeEconomics",
+   "screenRoute",
+   "creditSensitivity"
+  ],
+  "answer": 3,
+  "explanation": "creditSensitivity is the function paired with the credits question. The bid, a route's year and the selling routes go to the other three."
+ },
+ {
+  "prompt": "Which of these constants is one that lpgCng exports?",
+  "options": [
+   "SCF_PER_LBMOL",
+   "RICHNESS_GPM",
+   "PSI_PER_BAR",
+   "FLARE_MOLAR_MASS"
+  ],
+  "answer": 2,
+  "explanation": "PSI_PER_BAR is in lpgCng's list of 9, with M3_PER_SCF and KJ_PER_KWH. SCF_PER_LBMOL, RICHNESS_GPM and FLARE_MOLAR_MASS are three of flareToValue's 10."
+ }
+]
