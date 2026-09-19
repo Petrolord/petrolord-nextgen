@@ -5,13 +5,13 @@
    "They live in fuelPricing, whose 8 constants the tank calls read.",
    "They are built into the functions as defaults, so none is counted.",
    "None of them lives in the module, so each one arrives from the terminal that owns the tank.",
-   "They sit in a registry of tanks outside the engine's exported names."
+   "They sit in PRODUCT_REFERENCE, which each of the tank calls reads first."
   ],
   "answer": 2,
-  "explanation": "terminalDepot exports its rules as 8 functions and no fixed data at all, so every table, coefficient and opening stock is an input the terminal supplies."
+  "explanation": "terminalDepot exports 8 functions and 0 constants, so no table, coefficient or opening stock ships inside it. volumeAtDip refuses with no strapping table, volumeCorrectionFactor refuses with no coefficients and reconcileStock refuses with no opening stock. PRODUCT_REFERENCE is read only when a caller passes one of its densities in."
  },
  {
-  "prompt": "Which two of fuelPricing's constants hold data that is true everywhere and forever, whatever the market or the date?",
+  "prompt": "Which two of fuelPricing's constants each hold a single number?",
   "options": [
    "LITRES_PER_M3 and M3_PER_BBL",
    "IMPORT_TEMPLATE and PUMP_TEMPLATE",
@@ -19,7 +19,7 @@
    "RATE_DISCLAIMER and PRODUCT_REFERENCE"
   ],
   "answer": 0,
-  "explanation": "A cubic metre holds 1000 litres and a barrel is 0.158987294928 m3 by definition. The templates carry line items with every rate absent, and the density table is labelled a starting point."
+  "explanation": "LITRES_PER_M3 reads 1000 and M3_PER_BBL reads 0.158987294928. IMPORT_TEMPLATE and PUMP_TEMPLATE are tables of line items with every rate absent, CHARGE_BASIS is a list of bases, RATE_DISCLAIMER is a sentence and PRODUCT_REFERENCE is a table of typical densities."
  },
  {
   "prompt": "dipToStandardVolume is called on AK-01 with its dip, its water cut and its table, and with no volume correction factor. What does the engine answer?",
@@ -66,15 +66,15 @@
   "explanation": "dipToStandardVolume still has everything it needs for the gross, so it reports gross 3461.489 m3 and gives the standard volume as none. The other three have nothing to form and refuse."
  },
  {
-  "prompt": "The lesson imagines a blank opening stock read as 0 m3 on the AKODO day, where the real opening stock is 4953.700 m3. What would that zero do to the day?",
+  "prompt": "Which of these is one of terminalDepot's 8 exported functions?",
   "options": [
-   "It would leave the gap as it is, since the opening sets only the band.",
-   "It would book a whole tank of yesterday's product as a gain made today.",
-   "It would bring on the still day reading, since no stock moves.",
-   "It would halve the expected closing, as if two stocks were averaged."
+   "buildPumpPrice",
+   "trendUnaccounted",
+   "cargoQuantities",
+   "fleetSizing"
   ],
   "answer": 1,
-  "explanation": "The expected closing starts from the opening stock. Reading 4953.700 m3 as 0 m3 pushes the whole of yesterday's stock into the gap as an apparent gain, a clean looking figure that is wrong."
+  "explanation": "terminalDepot exports dipToStandardVolume, rackQueue, reconcileStock, tankFarmCover, throughputEconomics, trendUnaccounted, volumeAtDip and volumeCorrectionFactor. buildPumpPrice, cargoQuantities and fleetSizing are three of fuelPricing's 9."
  },
  {
   "prompt": "What does IMPORT_TEMPLATE tell a user about each of its line items, from ocean freight to the demurrage provision?",
@@ -154,14 +154,14 @@
   "explanation": "The note says factors are published, versioned data and an invented one would be worse than none. A missing value stays missing and is never read as 0."
  },
  {
-  "prompt": "The lesson asks what would happen if a blank VCF were read as 0. What would AK-01's standard volume become?",
+  "prompt": "When one measured input is left blank, null or absent, which three kinds of answer does the engine give?",
   "options": [
-   "The gross 3461.489 m3, since a factor of 0 leaves a volume uncorrected.",
-   "Zero, wiping out the stock with nothing on its face to say so.",
-   "A refusal, since the engine rejects any VCF below 1.000000.",
-   "The volume at the dip, since a zero factor switches the correction off."
+   "It refuses, or takes a typical figure and labels it a starting point.",
+   "It refuses, reports the figure it cannot form as none, or labels its answer incomplete.",
+   "It reads the blank as zero, or refuses when zero would make no sense at all.",
+   "It fills a default from its constants, warns in a note, or refuses the call."
   ],
   "answer": 1,
-  "explanation": "Standard volume is the gross times the VCF, so a zero factor erases the stock. That is why the engine reports the standard volume as none when the VCF is missing and says so."
+  "explanation": "The table of missing inputs answers every call one of those three ways: a refusal in the engine's own sentence, a figure given as none beside the ones it could form, or an answer labelled incomplete. No row fills a blank with a typical figure, a default or a zero."
  }
 ]

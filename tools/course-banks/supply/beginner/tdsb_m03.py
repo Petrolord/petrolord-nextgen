@@ -26,19 +26,19 @@ q(3, "AK-02's water cut is set equal to its dip, 5406 mm. What does the engine a
   "water 1086.941 m3 and gross none, since a tank of water holds no product"],
  "A water cut equal to the dip is possible: the tank holds water and no product, so the whole 1086.941 m3 is water and the gross is 0.000 m3.")
 
-q(1, "AK-02 is dipped at 5406 mm with a water cut of 5500 mm. Why does the engine refuse instead of trimming the water down to the dip?",
- "It cannot tell which reading is wrong, and trimming would pick the dip as correct with no reason to.",
- ["It trims the water only on horizontal tanks, where the narrowing shell makes the top of the water uncertain.",
-  "A water cut above the dip reads above the table, so the table refuses it before the dip is ever read.",
-  "Trimming would make the gross 0.000 m3, and the engine never reports a tank holding no product."],
- "A water layer standing higher than the liquid surface cannot happen, so one of the two readings is wrong. The refusal asks for both to be checked.")
+q(1, "A water cut of 5500 mm is typed against AK-02's dip of 5406 mm. Which answer comes back?",
+ "REFUSED: The water cut is above the product dip. Check both readings.",
+ ["water 1086.941 m3, gross 0.000 m3, the water trimmed down to the dip",
+  "REFUSED: A water cut cannot be negative.",
+  "water 1105.841 m3, read at the 5500 mm entry, and gross none"],
+ "A water cut above the product dip is refused, and the sentence asks for both readings to be checked. A cut equal to the dip, 5406 mm, is not refused: it reads water 1086.941 m3 and gross 0.000 m3.")
 
-q(2, "A gauger types a negative water height, -3 mm, for the diesel tank. Why is it refused and never clamped up to zero?",
- "A water cut of 0 mm is a real reading that says the paste found no water, and -3 mm is a typing or reference error.",
- ["A negative cut means water below the datum, which the table cannot convert unless the terminal extends its calibration down past 0 mm.",
-  "The engine reads -3 mm as 3 mm and refuses only when that falls between two entries of the table.",
-  "Any cut below the first water entry of 95 mm is refused on AK-02, since the table starts there."],
- "REFUSED: A water cut cannot be negative. A clamp to 0 mm would turn an error into a claim that the tank is dry.")
+q(2, "A gauger types -3 mm for the water on the diesel tank. How does the engine answer?",
+ "Refused as a negative water cut",
+ ["Clamped to 0 mm: water 0.000 m3, gross 1086.941 m3",
+  "Refused as a negative dip",
+  "Refused as no dip reading"],
+ "The engine refuses with its own sentence for the water: A water cut cannot be negative. It never clamps the cut to 0 mm, which is a real reading that returns water 0.000 m3 and gross 1086.941 m3. The negative-dip sentence belongs to the dip.")
 
 q(0, "With AK-01's partial calibration in use, the product reads 640 mm and the water paste 150 mm. Which answer comes back from dipToStandardVolume?",
  "REFUSED: The water cut cannot be converted: The dip is below the first strapping entry. The table does not cover this height; extend it down to the tank floor.",
@@ -47,19 +47,19 @@ q(0, "With AK-01's partial calibration in use, the product reads 640 mm and the 
   "gross 243.285 m3, the water left out because the table cannot read it"],
  "The dip of 640 mm is inside the table, but 150 mm lies below its first entry, so the water volume cannot be read and there is no gross. The refusal carries the table's own sentence.")
 
-q(3, "When the water cut cannot be converted, why does the engine refuse the whole call instead of reporting the volume at the dip?",
- "That volume would count the water as product and look like a normal gross.",
- ["The volume at the dip is formed after the water, so it does not exist yet when the water fails.",
-  "The engine reports the volume at the dip only when the dip lands exactly on an entry of the table.",
-  "A refused water cut also invalidates the dip, since both readings come from a single tape."],
- "A gross observed volume has had its water taken off, or it is not reported. The 640 mm dip reads gross 243.285 m3 only with its 0 mm water.")
+q(3, "Which water volume comes off AK-03's volume at the dip for its 41 mm cut?",
+ "0.341 m3",
+ ["0.220 m3",
+  "0.120 m3",
+  "51.126 m3"],
+ "The 41 mm cut goes through AK-03's own 100 mm table and reads 0.341 m3, which leaves gross 52.161 m3. 0.220 m3 is the same height on the 10 mm table, 0.120 m3 the difference between the two tables there, and 51.126 m3 the shortcut read at 1806 mm.")
 
-q(1, "Why is the 150 mm row on the partial table the one the lesson says to remember?",
- "Water lives at the bottom of the tank, the part a partial calibration leaves out, so a table can read every dip and still fail on the water.",
- ["It is the one row where the engine reports a gross with the water left out and labelled as missing.",
-  "It shows that a water cut is always converted through a separate table from the dip.",
-  "It is the one height where the partial and full tables give different answers for the same water."],
- "The partial table starts at 300 mm with 114.040 m3. Every dip AKODO takes may land inside it while the water, at the floor, lands below it.")
+q(1, "The 150 mm water cut on AK-01's partial calibration is refused because it lies below the table's first entry. Which is that first entry?",
+ "300 mm at 114.040 m3",
+ ["0 mm at 0.000 m3, the empty tank",
+  "250 mm at 95.033 m3",
+  "125 mm at 47.517 m3"],
+ "The partial table starts at 300 mm, where the volume is 114.040 m3 and not the empty tank, and ends at 800 mm. 0 mm, 125 mm and 250 mm are heights on AK-01's full table.")
 
 q(2, "On AK-03, dipped at 1847 mm with 41 mm of water, a shortcut subtracts the heights first and reads the table once at 1806 mm. What does it give against the engine's gross?",
  "51.126 m3 against the gross 52.161 m3",

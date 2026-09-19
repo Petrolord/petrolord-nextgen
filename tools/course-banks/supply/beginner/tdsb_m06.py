@@ -17,7 +17,7 @@ q(3, "The same AKODO day is closed on the gross closing stock of 4581.490 m3 aga
  ["unaccounted -8.648 m3, direction loss, within tolerance true",
   "unaccounted 0.000 m3, balanced, within tolerance true",
   "REFUSED, since a gross closing stock cannot be put to reconcileStock"],
- "Nothing in the tanks changed. Gross observed m3 at three observed temperatures was set against m3 at standard, and the mixed units read as a gain outside tolerance.")
+ "The closing stock is gross observed at three observed temperatures and the opening is held at standard. On that basis the day reads unaccounted 73.390 m3, direction gain, within tolerance false.")
 
 q(0, "Between the standard closing and the gross closing of the AKODO day, what is the one input that differs?",
  "The closing stock: 4499.452 m3 at standard against 4581.490 m3 gross observed.",
@@ -53,10 +53,10 @@ q(0, "At a tolerance of 0.1 percent the AKODO band is 6.183 m3. What does the da
  "The unaccounted figure stays -8.648 m3. At 0.1 percent the band is 6.183 m3 and the day is outside it; at 0.2 percent it is 12.365 m3 and the day is within.")
 
 q(1, "The nine-day record is kept to 7 days. What do the run and the prompt read?",
- "A run of 4 days of loss, and the prompt is printed.",
- ["A run of 4 days of loss, and no prompt is printed.",
-  "A run of 7 days, and the prompt is printed.",
-  "A run of 3 days of loss, and no prompt is printed."],
+ "A run of 4, with the prompt",
+ ["A run of 4, with no prompt",
+  "A run of 7, with the prompt",
+  "A run of 3, with no prompt"],
  "Kept to 5 or 6 days the run is 2 or 3 days of loss and the prompt is none; kept to 7, 8 or 9 days the run is 4, 5 or 6 days and the prompt prints.")
 
 q(1, "Two candidate openings exist for one day: yesterday's dip at 4953.700 m3, or 4945.052 m3 worked back from today's dip. What rule follows?",
@@ -83,7 +83,7 @@ q(3, "Which rule from this tier does the next tier carry over unchanged?",
  ["A VCF is always typed off the terminal's own tables.",
   "A tolerance is always 0.2 percent of throughput.",
   "A strapping table is always read at 250 mm steps."],
- "The Professional tier adds new inputs, a bay count, a heel, a distance and a payload, and treats each the same way: refused or named, never guessed.")
+ "The table of missing inputs covers both apps, and the next tier's calls answer the same way: bays that are not a whole number, a missing distance or payload, and a missing demand are refused, never guessed.")
 
 q(1, "Link two of the chain on AK-02: the dip of 5406 mm lies between 5250 mm at 1055.575 m3 and 5500 mm at 1105.841 m3. What is the input the engine cannot do without here?",
  "AK-02's own strapping table",
@@ -99,12 +99,12 @@ q(3, "Across the whole AKODO reading, which reading of the table does the engine
   "One reading at an entry, when a dip lands exactly on it"],
  "On AK-03 the shortcut at the dip less the water reads 51.126 m3 against the gross 52.161 m3. The engine reads each height where it was measured.")
 
-q(0, "Every figure on the AKODO sheet traces back to one of three sources. Which three?",
- "A tape, a table or a typed figure",
- ["A tape, a meter or a default",
-  "A table, a default or a guess",
-  "A typed figure, a zero or a tape"],
- "Dips and water cuts are tapes, volumes come from the strapping tables, and the VCFs are typed off AKODO's own tables. Nothing in the chain is assumed.")
+q(0, "Which list runs AK-01's figures in the order the chain forms them: the dip, the volume at the dip, the gross observed volume, the standard volume?",
+ "9318 mm, 3542.077 m3, 3461.489 m3, 3393.298 m3",
+ ["9318 mm, 3461.489 m3, 3542.077 m3, 3393.298 m3",
+  "9318 mm, 3542.077 m3, 3393.298 m3, 3461.489 m3",
+  "9318 mm, 3542.077 m3, 3461.488 m3, 3393.298 m3"],
+ "The chain reads the table at the dip, takes the water off to reach the gross observed volume, and then applies the typed VCF for the standard volume. Swapping the gross and the volume at the dip, or the gross and the standard, breaks that order, and 3461.488 m3 is the shortcut reading the engine never takes.")
 
 emit(Q, '/root/wt-md-supply-nextgen/tools/course-banks/supply/beginner/tdsb_m06.json', expect_n=15)
 finish()

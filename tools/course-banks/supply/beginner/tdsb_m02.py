@@ -52,7 +52,7 @@ q(2, "Why will volumeAtDip not carry the slope of the last step upward to read a
  ["Above the last entry the engine needs the tank's diameter, which a strapping table does not carry.",
   "A dip above the last entry is always a typing error, so the engine treats it as no reading at all.",
   "The engine keeps extrapolation for horizontal tanks, whose curve it can follow past the last entry."],
- "The top of a tank is where its geometry stops being regular, and a line carried up from the last step knows none of it. AK-02 at 12010 mm and AK-03 at 3010 mm are refused the same way.")
+ "The refusal gives the reason in its own words: the table does not cover this height, and extrapolating one invents capacity the tank does not have. AK-02 at 12010 mm and AK-03 at 3010 mm, the bullet, are refused with the same sentence.")
 
 q(0, "A partial calibration of AK-01 starts at 300 mm with 114.040 m3. A dip of 180 mm is put to it. What does the engine answer?",
  "REFUSED: The dip is below the first strapping entry. The table does not cover this height; extend it down to the tank floor.",
@@ -62,11 +62,11 @@ q(0, "A partial calibration of AK-01 starts at 300 mm with 114.040 m3. A dip of 
  "The table states nothing below 300 mm, so there is no second point to draw a line to. The refusal sends the user back to the calibration.")
 
 q(1, "On that partial table, why does the engine not draw a line from an empty tank at 0 mm up to the first entry?",
- "The table does not state that the tank is empty at 0 mm, and the bottom of a real tank holds a sump, a sloping floor and pipework.",
+ "The table does not cover that height, and the refusal asks for it to be extended down to the tank floor.",
  ["It does draw that line whenever the first entry sits below 800 mm, which is where this table ends.",
-  "It only interpolates between two entries the terminal typed, and a point at 0 mm below the first entry of 114.040 m3 is one it would have to supply itself.",
+  "It reads any dip below the first entry as a negative dip, and refuses it with that sentence.",
   "The line would need the product's density, and a strapping table holds heights and volumes only."],
- "The volume below the first entry is whatever the calibration would have measured there. Assuming 0.000 m3 at 0 mm is exactly what a table starting at 300 mm does not state.")
+ "The partial table starts at 300 mm, where the volume is 114.040 m3 and not the empty tank. A dip of 180 mm gets the refusal for a dip below the first strapping entry, which ends by asking for the table to be extended down to the tank floor. A negative dip gets a different sentence.")
 
 q(3, "Two dips are refused: 180 mm on the partial table and -5 mm on AK-01's full table. What cures each?",
  "More calibration for the 180 mm dip, and a fresh reading for the -5 mm dip.",
@@ -75,38 +75,38 @@ q(3, "Two dips are refused: 180 mm on the partial table and -5 mm on AK-01's ful
   "More calibration for both, extending each table down past the height that was refused."],
  "180 mm is a real height the calibration does not cover. -5 mm is a height that cannot exist. Both stop the chain at its first link.")
 
-q(2, "Put to the partial table through dipToStandardVolume with no water, 300 mm reads 114.040 m3 and 640 mm reads 243.285 m3. How was each figure formed?",
- "300 mm lands on the first entry; 640 mm is interpolated between two entries.",
- ["640 mm lands on an entry; 300 mm is interpolated between 0 mm and the next entry.",
-  "Both are interpolated along a line drawn up from an empty tank at 0 mm.",
-  "Both are read off AK-01's full table, since the partial one states only its two ends."],
- "At 300 mm the dip sits on the first entry and reads its volume. At 640 mm it sits between entries of a table that runs to 800 mm, and the engine interpolates.")
+q(2, "AK-01's partial calibration runs from 300 mm to 800 mm. Put to it through dipToStandardVolume with no water, what does a dip of 640 mm return?",
+ "gross 243.285 m3",
+ ["gross 114.040 m3",
+  "Refused",
+  "gross 3542.077 m3"],
+ "640 mm lies inside the partial table and reads gross 243.285 m3 with no water. 300 mm, its first entry, reads 114.040 m3, and a dip of 180 mm below it is refused. 3542.077 m3 is AK-01's morning dip of 9318 mm on the full table.")
 
-q(0, "AK-03's table ends at 3000 mm with 81.289 m3. What does that last entry mark?",
- "The top of the shell of a bullet 3 m across, which is the tank full.",
- ["The highest dip AKODO recorded, since tables stop at the tallest reading.",
-  "A safe fill height set below the top of the shell by the terminal.",
-  "The height above which the engine follows the curve by itself."],
- "AK-03 is 3 m in diameter and 11.5 m long, with 31 entries every 100 mm. On a bullet 3 m across, 3000 mm is the top of the shell.")
+q(0, "AK-03's strapping table has 31 entries every 100 mm. Which are its first and its last entries?",
+ "From 0.000 m3 at 0 mm to 81.289 m3 at 3000 mm",
+ ["From 0.000 m3 at 0 mm to 2412.743 m3 at 12000 mm",
+  "From 50.925 m3 at 1800 mm to 54.279 m3 at 1900 mm",
+  "From 0.000 m3 at 0 mm to 52.501 m3 at 1847 mm"],
+ "AK-03, the horizontal bullet 3 m across and 11.5 m long, is strapped from 0 mm = 0.000 m3 to 3000 mm = 81.289 m3. 12000 mm is AK-02's last entry; 1800 mm and 1900 mm are the entries that bracket AK-03's morning dip of 1847 mm, which is no entry.")
 
-q(1, "Two tanks of the same nominal size stand side by side at a terminal. Why can one tank's strapping table not read the other's dip?",
- "Their shells, floors and fittings differ, so a table belongs to one tank.",
- ["A table is only valid for the product it was calibrated with, so a petrol table cannot read a diesel dip.",
-  "A table carries the tank's typed VCF, which differs from tank to tank.",
-  "The engine checks the tank's name against its table before any call."],
- "A strapping table is the only thing that links a dip to a volume for that one tank. That is why terminalDepot ships no table and refuses with No strapping table for this tank.")
+q(1, "Which step and which count of entries belong to AK-02's strapping table?",
+ "250 mm, 49 entries",
+ ["250 mm, 60 entries",
+  "100 mm, 31 entries",
+  "10 mm, 301 entries"],
+ "AK-02, the vertical AGO tank 16 m across, is strapped every 250 mm to 12000 mm in 49 entries. 60 entries is AK-01's table, 31 entries AK-03's, and 301 entries the bullet strapped every 10 mm.")
 
 q(3, "Swept up AK-01's own table, which of these heights does the engine interpolate?",
  "125 mm",
  ["250 mm", "9500 mm", "0 mm"],
  "0 mm, 250 mm and 9500 mm are entries of the 250 mm table and return their own volumes. 125 mm sits between entries and reads 47.517 m3 by interpolation.")
 
-q(2, "Beyond the stock figure, what does a dip above a table's last entry warn a terminal about?",
- "Either the reading is wrong or the tank has been filled past its calibrated height.",
- ["Only that the table's step is too coarse near the roof of the tank.",
-  "That the strapping table needs a VCF before it can read that height.",
-  "Nothing further, since the engine clamps it to the last entry's volume."],
- "Filling past the calibrated height is a safe filling question before it is a stock question. The engine stops and makes somebody look, on AK-01 at 14800 mm as on AK-02 at 12010 mm.")
+q(2, "Which volume does volumeAtDip return for AK-01 dipped exactly on the highest height its table lists?",
+ "5606.957 m3",
+ ["3611.261 m3",
+  "A refusal above the last entry",
+  "2412.743 m3"],
+ "A dip on the last entry reads that entry's own volume, 5606.957 m3. Only a dip above it, such as 14800 mm, is refused. 3611.261 m3 is the 9500 mm entry, and 2412.743 m3 is AK-02's last entry.")
 
 emit(Q, '/root/wt-md-supply-nextgen/tools/course-banks/supply/beginner/tdsb_m02.json', expect_n=15)
 finish()

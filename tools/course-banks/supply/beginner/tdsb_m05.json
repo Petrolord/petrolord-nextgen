@@ -30,7 +30,7 @@
    "REFUSED: No opening stock, so the day cannot be closed. The opening stock is yesterday's closing dip."
   ],
   "answer": 3,
-  "explanation": "Without a starting point the ledger has nothing to add receipts to. The refusal names where the figure comes from: yesterday's closing dip, fixed before today's dips."
+  "explanation": "Without the opening stock the call is refused. The refusal names where the figure comes from: yesterday's closing dip."
  },
  {
   "prompt": "The demonstration takes the opening stock as closing dip - receipts + deliveries + known losses. With a closing dip of 4380.250 m3 it opens on 4825.850 m3. Why does the day read balanced?",
@@ -41,7 +41,7 @@
    "The derived opening stock is at standard, while the real opening of 4953.700 m3 is gross observed."
   ],
   "answer": 1,
-  "explanation": "Every row of the demonstration balances with unaccounted 0.000 m3, so none of them measured anything. A leak overnight would lower the dip and the derived opening together."
+  "explanation": "With the opening taken that way, the expected closing is the dip itself, whatever the dip reads. Every row of the demonstration balances with unaccounted 0.000 m3, so none of them measured anything."
  },
  {
   "prompt": "Both the real AKODO day and the derived day close on 4499.452 m3. The real day opens on 4953.700 m3 and the derived day on 4945.052 m3. Which one measures the terminal?",
@@ -52,7 +52,7 @@
    "Neither, until the two opening stocks agree to within the tolerance band of the day."
   ],
   "answer": 1,
-  "explanation": "The real day reads unaccounted -8.648 m3, direction loss, within 12.365 m3. The derived day reads 0.000 m3, balanced, because its answer was settled before the question was asked."
+  "explanation": "The real day opens on yesterday's closing dip and reads unaccounted -8.648 m3, direction loss, within 12.365 m3. The derived day reads 0.000 m3, balanced, and every row of that demonstration balances, so none of them measured anything."
  },
  {
   "prompt": "The AKODO tolerance is 0.2 percent. Of which figure is it a percent?",
@@ -74,18 +74,18 @@
    "The band goes from 6.183 m3 to 12.365 m3 while the verdict stays true in both rows."
   ],
   "answer": 0,
-  "explanation": "Nothing about the tanks changes: the unaccounted figure stays -8.648 m3 in every row. Only the band moves, so the verdict depends on a percent somebody chose before the day was closed."
+  "explanation": "The unaccounted figure stays -8.648 m3 on the same day. Only the band moves, so the verdict depends on the stated percent."
  },
  {
   "prompt": "A still day: opening 4953.700 m3, no receipts and no deliveries, dipped at 4954.200 m3. Why is it outside tolerance?",
   "options": [
    "A gain of 0.500 m3 is outside the 0.2 percent band, which on a still day is set on the opening stock instead.",
    "The engine refuses a day with no movements and reports the verdict as false.",
-   "No product moved, so the throughput and the band are zero and any gap reads outside.",
-   "Any gain is outside tolerance, since the band is applied to losses only."
+   "No product moved, so there is no throughput and the band is 0.000 m3.",
+   "Any gain is outside, since the band covers losses only."
   ],
   "answer": 2,
-  "explanation": "The engine prints unaccounted 0.500 m3, tolerance 0.000 m3, within tolerance false, direction gain. It invents no band for the still day and lets someone look."
+  "explanation": "With no receipts and no deliveries there is no throughput, and the band is a stated percent of throughput. The still day prints a band of 0.000 m3 and reads outside it with its 0.500 m3 gain."
  },
  {
   "prompt": "The AKODO day prints unaccounted percent of throughput -0.1399 and a tolerance of 0.2 percent of throughput. How do the two percents differ?",
@@ -99,15 +99,15 @@
   "explanation": "Both percents sit on the throughput of 6182.500 m3. Keep the units apart: one is a band chosen before the day, the other what the day produced."
  },
  {
-  "prompt": "Why does reconcileStock set its tolerance on throughput?",
+  "prompt": "How does reconcileStock form the expected closing?",
   "options": [
-   "Throughput is a wide base, which keeps the band loose enough for an ordinary day to pass it.",
-   "The opening stock is not known until the day closes, so throughput is the only base available.",
-   "Product that moves is measured on the way in or out, so a busy day leaves more room for honest error.",
-   "A band on throughput cancels the known losses, which are booked on receipts and deliveries."
+   "opening + receipts - deliveries + known losses",
+   "receipts - deliveries - known losses",
+   "opening + receipts - deliveries - known losses",
+   "dipped closing - receipts + deliveries + known losses"
   ],
   "answer": 2,
-  "explanation": "Tapes, thermometers, tables and meters each carry uncertainty on every transfer. On the AKODO day 0.2 percent of 6182.500 m3 gives a band of 12.365 m3."
+  "explanation": "expected closing = opening + receipts - deliveries - known losses, which on the AKODO day is 4508.100 m3. dipped closing - receipts + deliveries + known losses is how the demonstration derives an opening stock from the day's own dip, which balances every day."
  },
  {
   "prompt": "Over nine days, what does trendUnaccounted report for the cumulative gap and the run?",
@@ -151,7 +151,7 @@
    "A drifting meter, a passing valve, or a temperature effect not being corrected"
   ],
   "answer": 3,
-  "explanation": "None of the three is a single event, so each shows up as a run. The prompt reads: 6 days of loss in a row. One day is noise; a run in one direction is worth investigating."
+  "explanation": "The prompt reads: 6 days of loss in a row. One day is noise; a run in one direction is worth investigating: a drifting meter, a passing valve, or a temperature effect not being corrected."
  },
  {
   "prompt": "trendUnaccounted is given no days at all. What does it report?",
