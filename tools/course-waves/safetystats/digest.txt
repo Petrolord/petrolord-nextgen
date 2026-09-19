@@ -1,0 +1,614 @@
+# H1 TEACHING DIGEST: Safety Performance Statistics & KPIs
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The engine FINDINGS record, the oracle and the engine source comments are PROVENANCE and not teaching truth.
+
+# PRECISION. Rates on every base, interval limits, rate ratios, p-values, proportions, exposure units, centre lines and derived hours print to SIX decimals; chi-square and gamma quantities print to TWELVE; counts and stated hours are whole numbers; relative differences print in exponent form.
+
+# ENGINE. engines/hse/safetyStats.js, vendored sha-identical with petrolord-engines f123a57, 620 lines, importing nothing. The vendored golden test-data/hse/goldens/safetyStats_cases.json carries 321 cases, 22 of them refusals, written by the scipy and mpmath oracle.
+
+# WHAT IS NEVER IN THIS FILE. No capstone workplace, no capstone count or hours and no graded answer. The capstones run their own workplaces and the digest never names them.
+
+# THIS ENGINE HAS NO REPAIR HISTORY. Every section below describes what the engine does today.
+
+# SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Expert m06)
+
+Every rate in this engine is a count times a base over exposure hours. Every function returns either a result object carrying a `basis` block or an object with `error` and `field`, where `field` names the offending input.
+
+| function | what it needs | what it returns |
+| --- | --- | --- |
+| `incidenceRate` | count, exposureHours, base | a rate for any case class the caller counts: recordables, DART cases, lost time cases |
+| `fatalAccidentRate` | fatalities, exposureHours | fatalities per 100,000,000 hours; the one rate with a fixed base |
+| `severityRate` | daysLost, exposureHours, base | days lost times the base over the hours; no time charges added |
+| `pseRate` | tier, pseCount, exposureHours, base | an API RP 754 process safety event rate; the tier is an input |
+| `pooledRate` | counts, exposureHours, base | sum of counts times the base over the sum of hours, with the mean of the period rates beside it |
+| `rollingRate` | counts, exposureHours, base, windowPeriods | one sum-then-divide rate per complete trailing window |
+| `rateConfidenceInterval` | count, exposureHours, base, confidence | the Garwood exact interval for a Poisson count, scaled to the base |
+| `compareRates` | count1, exposureHours1, count2, exposureHours2, confidence | the conditional exact test: rate ratio, its interval and a central p-value |
+| `uChart` | counts, exposureHours, base | a Shewhart u-chart with varying exposure |
+
+The special functions the interval needs are exported too: `logGamma`, `regularizedGammaP`, `regularizedGammaQ`, `chiSquareQuantile` and `chiSquareQuantileUpper`.
+
+The named bases, read from the exported `RATE_BASES`:
+
+| name | hours |
+| --- | --- |
+| `OSHA_200K` | 200000 |
+| `IOGP_1M` | 1000000 |
+| `FAR_100M` | 100000000 |
+
+WHAT THE ENGINE DOES NOT DO, read from its own header and checked here against its exports:
+- It does not classify an event as recordable, DART or lost time. The count arrives classified.
+- It does not classify a process safety event into API RP 754 Tier 1 or Tier 2. The threshold quantity tables are licensed content and are not in the engine; the tier is an input.
+- It carries no benchmark rates. The IOGP figures in section 25 come from the vendored golden, where they are published inputs.
+- Its exported names are, in full: RATE_BASES, chiSquareQuantile, chiSquareQuantileUpper, compareRates, fatalAccidentRate, incidenceRate, logGamma, pooledRate, pseRate, rateConfidenceInterval, regularizedGammaP, regularizedGammaQ, rollingRate, severityRate, uChart.
+
+# SECTION 2: A rate is a count over exposure, and the caller names the base (owned by Associate m01 and Associate m02)
+
+The UGHELLI stream is one site for one year: 2318640 hours (stated), 9 recordable cases, 4 DART cases, 2 lost time cases, 0 fatalities, 96 days lost, 1 Tier 1 and 4 Tier 2 process safety events (all stated).
+
+| base, hours | recordable rate | the engine baseLabel |
+| --- | --- | --- |
+| 200000 | 0.776317 | per 200,000 hours (OSHA/BLS: 100 full-time workers, 40 h x 50 weeks) |
+| 1000000 | 3.881586 | per 1,000,000 hours (IOGP) |
+| 100000000 | 388.158576 | per 100,000,000 hours (FAR, IOGP) |
+
+Derived: the million-hour figure over the OSHA figure is 5.000000, and the hundred-million-hour figure over the OSHA figure is 500.000000. The count and the hours did not change; only the base did. That is the whole reason the engine takes no default.
+
+The formula the engine reports in `basis.formula`: count x base / exposureHours.
+
+A call with no base is refused, and the refusal names the field. The engine's own words:
+
+> base is required: name the base (200,000 for OSHA/BLS, 1,000,000 for IOGP, 100,000,000 for FAR); there is no default
+
+# SECTION 3: Why hours and never headcount (owned by Associate m01)
+
+Two crews of 40 people each (stated), one recordable each (stated). The day crew worked 80000 hours and the rotation crew 116480 hours (stated).
+
+| crew | hours | recordables | rate per 200,000 hours | recordables per 100 people, derived |
+| --- | --- | --- | --- | --- |
+| day crew | 80000 | 1 | 2.500000 | 2.500000 |
+| rotation crew | 116480 | 1 | 1.717033 | 2.500000 |
+
+Derived: the day crew rate over the rotation crew rate is 1.456000, which is the rotation crew's hours over the day crew's hours, 1.456000. Per head the two crews read the same; per hour of exposure they do not. The engine takes hours and has no headcount input at all.
+
+WHERE THE OSHA BASE COMES FROM. The engine labels 200,000 hours "per 200,000 hours (OSHA/BLS: 100 full-time workers, 40 h x 50 weeks)". Derived: 100 times 40 times 50 is 200000, which is the exported `OSHA_200K`, 200000.
+
+# SECTION 4: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l05 and Associate m03 and Associate m04 and Professional m02 l04 and Professional m04 l05 and Expert m01 l05)
+
+Each row is a real call. The message column is the engine's `error` string, verbatim. A refusal carries no number.
+
+| function | what was passed | field named | the engine's message |
+| --- | --- | --- | --- |
+| `incidenceRate` | a fractional count | `count` | count must be a whole number, zero or more: an event count is not a fraction |
+| `incidenceRate` | a negative count | `count` | count must be a whole number, zero or more: an event count is not a fraction |
+| `incidenceRate` | zero hours | `exposureHours` | exposureHours must be a finite number of hours above zero: a rate over no exposure is undefined |
+| `incidenceRate` | no base | `base` | base is required: name the base (200,000 for OSHA/BLS, 1,000,000 for IOGP, 100,000,000 for FAR); there is no default |
+| `incidenceRate` | a negative base | `base` | base must be a finite number of hours above zero |
+| `fatalAccidentRate` | zero hours | `exposureHours` | exposureHours must be a finite number of hours above zero: a rate over no exposure is undefined |
+| `severityRate` | negative days | `daysLost` | daysLost must be a finite number of days, zero or more |
+| `severityRate` | no base | `base` | base is required: name the base (200,000 for OSHA/BLS, 1,000,000 for IOGP, 100,000,000 for FAR); there is no default |
+| `pseRate` | tier 3 | `tier` | tier must be 1 or 2: classify the events against API RP 754 before rating them |
+| `pseRate` | no tier | `tier` | tier must be 1 or 2: classify the events against API RP 754 before rating them |
+| `pseRate` | the FAR base | `base` | base must be 200,000 or 1,000,000 for an API RP 754 PSE rate |
+| `pooledRate` | arrays of different length | `exposureHours` | exposureHours must be an array the same length as counts |
+| `pooledRate` | events in a period with no hours | `exposureHours[1]` | exposureHours[1] is zero but counts has events in that period: an event needs someone at work |
+| `pooledRate` | no hours anywhere | `exposureHours` | exposureHours sum to zero: a rate over no exposure is undefined |
+| `rollingRate` | no window | `windowPeriods` | windowPeriods must be a whole number of periods, 1 or more (12 for a rolling 12-month rate) |
+| `rollingRate` | a window longer than the series | `windowPeriods` | windowPeriods is longer than the series: no complete window exists |
+| `rateConfidenceInterval` | confidence as a percentage | `confidence` | confidence must be a fraction strictly between 0 and 1, for example 0.95 |
+| `rateConfidenceInterval` | no confidence | `confidence` | confidence must be a fraction strictly between 0 and 1, for example 0.95 |
+| `compareRates` | both groups empty | `count1` | count1 and count2 are both zero: the conditional test has no events to condition on |
+| `compareRates` | a group with no hours | `exposureHours2` | exposureHours2 must be a finite number of hours above zero: a rate over no exposure is undefined |
+| `uChart` | a point with no hours | `exposureHours[1]` | exposureHours[1] is zero: a u-chart point needs exposure; drop periods with no hours before charting |
+| `uChart` | no events in any period | `counts` | counts are all zero: the centre line is zero and every limit has zero width |
+
+22 refusals are tabled above, across 9 functions.
+
+# SECTION 5: The BLS worked example, reproduced through the engine (owned by Associate m02 and Associate m06)
+
+The golden's source line: BLS, How to compute a firm's incidence rate (bls.gov/iif/overview/compute-nonfatal-incidence-rates.htm): (7 x 200,000) / 400,000 = 3.5
+
+| case | count, golden | hours, golden | base | rate | golden rate | published | relative difference |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ABC Company, recordables | 7 | 400000 | 200000 | 3.500000 | 3.500000 | 3.5 | 0 |
+| ABC Company, DART | 3 | 400000 | 200000 | 1.500000 | 1.500000 | 1.5 | 0 |
+
+# SECTION 6: TRIR, DART and lost time on both bases (owned by Associate m02)
+
+| case class | count, stated | per 200,000 hours | per 1,000,000 hours | ratio, derived |
+| --- | --- | --- | --- | --- |
+| recordable | 9 | 0.776317 | 3.881586 | 5.000000 |
+| DART | 4 | 0.345030 | 1.725149 | 5.000000 |
+| lost time | 2 | 0.172515 | 0.862575 | 5.000000 |
+
+The engine has one function for all three. The case class is the caller's count, and the name a company prints beside the number (TRIR, DART rate, LTIF, LTIR) is not something the engine checks. IOGP's LTIR counts fatalities plus lost workday cases per million hours, and its TRIR counts fatalities, lost workday cases, restricted workday cases and medical treatment cases per million hours; the definitions sit in the engine FINDINGS record as provenance.
+
+# SECTION 7: The fatal accident rate, and why it alone has a fixed base (owned by Associate m03 and Expert m04)
+
+| case | count, golden | hours, golden | rate | golden rate | published | relative difference |
+| --- | --- | --- | --- | --- | --- | --- |
+| IOGP 2024 FAR | 32 | 4158877000 | 0.769438 | 0.769438 | 0.77 | 0 |
+| IOGP 2023 FAR | 27 | 3291382000 | 0.820324 | 0.820324 | 0.82 | 0 |
+| IOGP 2024 FAR through incidenceRate on 100,000,000 | 32 | 4158877000 | 0.769438 | 0.769438 | 0.77 | 0 |
+| IOGP 2024 fatal incidents per 100,000,000 hours | 21 | 4158877000 | 0.504944 | 0.504944 | none printed | 0 |
+
+`fatalAccidentRate` takes no base argument; its `basis.base` is 100000000 and its `basis.standard` reads "IOGP safety performance indicators, FAR". FAR has one definition, so the engine fixes it, and every other rate has more than one, so the engine refuses to guess.
+
+A fatality count and a fatal incident count are different counts: 2024 had 32 fatalities in 21 fatal incidents (golden). The first gives the FAR and the second the fatal incident rate, on the same hours.
+
+UGHELLI, with 0 fatalities in 2318640 hours, has an observed FAR of 0.000000. A zero FAR on a few million hours says little; section 17 is where the upper limit on a zero count lives.
+
+# SECTION 8: The severity rate has no single standard (owned by Associate m03)
+
+| base | days lost, stated | severity rate | the engine note |
+| --- | --- | --- | --- |
+| 200000 | 96 | 8.280716 | no ANSI Z16.1 time charges are added; days are as counted by the caller |
+| 1000000 | 96 | 41.403581 | no ANSI Z16.1 time charges are added; days are as counted by the caller |
+
+Derived, and a different quantity: days lost per lost time case is 96 over 2, which is 48.000000 days a case. That is the shape of IOGP's LWDC severity, days per case, and it has no hours in it at all. The engine does not compute it.
+
+| golden case | days, golden | hours, golden | base | rate | golden rate | relative difference |
+| --- | --- | --- | --- | --- | --- | --- |
+| severity-osha-base | 312 | 400000 | 200000 | 156.000000 | 156.000000 | 0 |
+| severity-million-base | 45.5 | 1830000 | 1000000 | 24.863388 | 24.863388 | 0 |
+
+The engine accepts a fractional number of days (the second golden case passes 45.5) and refuses a negative one. The base is required here exactly as it is for an incidence rate, because the OSHA-style convention uses 200,000 and the ANSI Z16.1 convention used 1,000,000 with scheduled time charges for fatalities and permanent disabilities, which the engine does not add.
+
+# SECTION 9: The API RP 754 process safety event rate, with the tier as an input (owned by Associate m03 l05 and Expert m06 l02)
+
+| tier, stated | events, stated | base | PSE rate | the engine formula |
+| --- | --- | --- | --- | --- |
+| 1 | 1 | 200000 | 0.086257 | Tier 1 PSE count x base / total work hours |
+| 1 | 1 | 1000000 | 0.431287 | Tier 1 PSE count x base / total work hours |
+| 2 | 4 | 200000 | 0.345030 | Tier 2 PSE count x base / total work hours |
+| 2 | 4 | 1000000 | 1.725149 | Tier 2 PSE count x base / total work hours |
+
+The engine's standard line: "API RP 754, API Guide to Reporting Process Safety Events section 3.3". Only the 200,000 and 1,000,000 bases are accepted, "consistent with the basis for calculating the Company's occupational injury rate". Section 4 tables the refusals for tier 3, a missing tier and the FAR base.
+
+The engine does not decide whether an event is Tier 1 or Tier 2. That needs the threshold quantity tables of API RP 754, which are licensed and are not in the engine, the golden or this course. A learner who is given a tier can rate it; a learner who is given a release has to classify it outside this engine.
+
+| golden case | tier | events | hours | base | rate | golden rate | relative difference |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| pse-tier1-200k | 1 | 2 | 1650000 | 200000 | 0.242424 | 0.242424 | 0 |
+| pse-tier2-1m | 2 | 9 | 1650000 | 1000000 | 5.454545 | 5.454545 | 0 |
+
+# SECTION 10: Sum, then divide: pooling sites (owned by Associate m04 and Expert m05 l05)
+
+| site | recordables, stated | hours, stated | site rate per 200,000 |
+| --- | --- | --- | --- |
+| compression station | 3 | 512300 | 1.171189 |
+| flow station | 8 | 1904760 | 0.840001 |
+| jetty | 1 | 61480 | 3.253090 |
+
+| what | value |
+| --- | --- |
+| pooled rate, `rate` | 0.968312 |
+| pooled count, `count` | 12 |
+| pooled hours, `exposureHours` | 2478540 |
+| mean of the site rates, `meanOfPeriodRates` | 1.754760 |
+| mean over pooled, derived | 1.812185 |
+
+The engine note, verbatim: "meanOfPeriodRates is the unweighted mean of the per-period rates over periods with hours; it is NOT the pooled rate". In the mean of rates each site carries a weight of one third, derived 0.333333. In the pooled rate each site carries its share of the hours, and the jetty's share, derived, is 61480 over 2478540, which is 0.024805. The pooled rate is the rate of the whole workforce; the mean of rates weights a jetty crew like a flow station.
+
+A MOTHBALLED SITE with 0 hours and 0 events contributes nothing. With it listed, the pooled rate is 0.968312, its own period rate is null, never zero, `periodsWithoutHours` is 1, and the mean of rates over the sites with hours is 1.754760.
+
+ONE EVENT at a site with no hours is refused as bad data, naming the period:
+
+> exposureHours[3] is zero but counts has events in that period: an event needs someone at work
+
+THE SAME RULE AT INDUSTRY SCALE. IOGP computes its five-year rolling average as the sum of fatalities over the sum of hours (golden, 2020 to 2024):
+
+| year | fatalities, golden | hours, golden | FAR that year |
+| --- | --- | --- | --- |
+| 2020 | 14 | 2544201000 | 0.550271 |
+| 2021 | 20 | 2679026000 | 0.746540 |
+| 2022 | 33 | 2579000000 | 1.279566 |
+| 2023 | 27 | 3291382000 | 0.820324 |
+| 2024 | 32 | 4158877000 | 0.769438 |
+
+| what | value | golden value | relative difference |
+| --- | --- | --- | --- |
+| five-year FAR, sum then divide | 0.826095 | 0.826095 | 0 |
+| mean of the five yearly FARs | 0.833228 | 0.833228 | 0 |
+
+# SECTION 11: The rolling rate: one sum-then-divide rate per complete window (owned by Associate m05)
+
+The AKASO stream is 15 months (stated). Month 5 is a shutdown with no hours and month 11 is a short month of 18240 hours with 1 recordable.
+
+| month | recordables, stated | hours, stated | monthly rate per 200,000 |
+| --- | --- | --- | --- |
+| 1 | 2 | 212400 | 1.883239 |
+| 2 | 1 | 198750 | 1.006289 |
+| 3 | 0 | 224310 | 0.000000 |
+| 4 | 3 | 205880 | 2.914319 |
+| 5 | 0 | 0 | none: no hours |
+| 6 | 1 | 219960 | 0.909256 |
+| 7 | 2 | 231040 | 1.731302 |
+| 8 | 0 | 208520 | 0.000000 |
+| 9 | 1 | 196330 | 1.018693 |
+| 10 | 2 | 214670 | 1.863325 |
+| 11 | 1 | 18240 | 10.964912 |
+| 12 | 0 | 222150 | 0.000000 |
+| 13 | 2 | 209880 | 1.905851 |
+| 14 | 1 | 201460 | 0.992753 |
+| 15 | 1 | 215790 | 0.926827 |
+
+The monthly rate column is derived, count times 200,000 over hours, and is the figure the engine averages when it reports the mean of the monthly rates.
+
+| window | months | count | hours | rolling rate | mean of monthly rates | months without hours |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 1 to 12 | 13 | 2152250 | 1.208038 | 2.026485 | 1 |
+| 2 | 2 to 13 | 13 | 2149730 | 1.209454 | 2.028541 | 1 |
+| 3 | 3 to 14 | 13 | 2152440 | 1.207931 | 2.027310 | 1 |
+| 4 | 4 to 15 | 14 | 2143920 | 1.306019 | 2.111567 | 1 |
+
+4 windows from 15 months: one entry per COMPLETE window, and none for the first eleven months, which have no complete window yet. Every window contains the short month, and in every window the mean of the monthly rates sits above the rolling rate, because the short month's own rate of 10.964912 enters the mean with the weight of a full month.
+
+The engine note, verbatim: "meanOfPeriodRates is shown for comparison only; a period with no hours has no rate and is left out of that mean".
+
+A WINDOW WITH NO HOURS has no rate. 3 periods of 0, 0, 5000 hours with 0, 0, 1 events (stated) and a window of 2 give:
+
+| window | rate | mean of rates | the engine's returned reason |
+| --- | --- | --- | --- |
+| 1 | null | null | no hours in this window: the rate is undefined |
+| 2 | 40.000000 | 40.000000 | null |
+
+THE IOGP FIVE YEAR RULE is a rolling window of 5 years. Run as one: 1 window, rate 0.826095, the same figure section 10 printed as the pooled rate.
+
+# SECTION 12: What the basis block tells you (owned by Associate m06 l03)
+
+Every result carries a `basis` object. It is the part of the answer that says what the number means. Read on the UGHELLI stream and the goldens above:
+
+| function | basis keys | base | formula |
+| --- | --- | --- | --- |
+| `incidenceRate` | base, baseLabel, formula | 200000 | count x base / exposureHours |
+| `fatalAccidentRate` | base, baseLabel, formula, standard | 100000000 | fatalities x 100,000,000 / exposureHours |
+| `severityRate` | base, baseLabel, formula, note | 200000 | daysLost x base / exposureHours |
+| `pseRate` | base, baseLabel, formula, standard | 200000 | Tier 1 PSE count x base / total work hours |
+| `pooledRate` | base, baseLabel, formula, note | 200000 | sum(counts) x base / sum(exposureHours) |
+| `rollingRate` | base, baseLabel, windowPeriods, formula, note | 200000 | sum(counts in window) x base / sum(exposureHours in window) |
+
+# SECTION 13: A count is a draw: the same observed rate at growing exposure (owned by Professional m01)
+
+An event count is modelled by the Poisson count model: the true rate times the exposure gives a mean, and the count observed is one draw around it. The interval says how far the true rate could be from the observed one.
+
+The IMO ladder holds the observed rate at 2.000000 per 200,000 hours and grows the exposure: each count is paired with 100000 hours per event (stated).
+
+| count | hours | rate | lower 95 | upper 95 | upper over lower, derived | width over rate, derived |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 100000 | 2.000000 | 0.050636 | 11.143287 | 220.068159 | 5.546326 |
+| 2 | 200000 | 2.000000 | 0.242209 | 7.224688 | 29.828286 | 3.491239 |
+| 5 | 500000 | 2.000000 | 0.649395 | 4.667333 | 7.187207 | 2.008969 |
+| 10 | 1000000 | 2.000000 | 0.959078 | 3.678071 | 3.835008 | 1.359497 |
+| 20 | 2000000 | 2.000000 | 1.221652 | 3.088838 | 2.528411 | 0.933593 |
+| 50 | 5000000 | 2.000000 | 1.484439 | 2.636751 | 1.776261 | 0.576156 |
+| 100 | 10000000 | 2.000000 | 1.627280 | 2.432536 | 1.494848 | 0.402628 |
+
+Every row reads the same rate. At 1 event the upper limit is 220.068159 times the lower; at 100 events it is 1.494848 times. A rate with no interval beside it hides which row it came from.
+
+# SECTION 14: The Garwood interval, from the chi-square distribution (owned by Professional m02)
+
+For a count N the limits are chi2(alpha/2; 2N)/2 and chi2(1 - alpha/2; 2N + 2)/2, times base over hours. The engine's method line: "Garwood (1936) exact Poisson interval, chi-square form: [chi2(alpha/2, 2N)/2, chi2(1-alpha/2, 2N+2)/2] x base / exposureHours".
+
+| quantity at N = 7, 95 percent | value |
+| --- | --- |
+| chi-square lower quantile, 14 degrees of freedom | 5.628726103040 |
+| half of it, the count lower limit | 2.814363051520 |
+| engine countLower | 2.814363051520 |
+| chi-square upper quantile, 16 degrees of freedom | 28.845350723405 |
+| half of it, the count upper limit | 14.422675361702 |
+| engine countUpper | 14.422675361702 |
+
+The lower limit uses 2N degrees of freedom and the upper uses 2N + 2. The lower limit is the Poisson mean at which N or more events has probability alpha/2, which is a quantile of the gamma distribution of shape N; the upper limit is the mean at which N or fewer events has probability alpha/2, which is a quantile of the gamma distribution of shape N + 1. Twice a gamma of shape k is a chi-square on 2k degrees of freedom, which is where the halves and the two degrees of freedom come from.
+
+THE GARWOOD TABLE, count limits at 95 percent on a base of 1 over 1 hour, against the golden:
+
+| count | count lower | count upper | lower against golden | upper against golden |
+| --- | --- | --- | --- | --- |
+| 0 | 0.000000000000 | 3.688879454114 | 0 | 2.41e-16 |
+| 1 | 0.025317807984 | 5.571643390939 | 1.10e-15 | 0 |
+| 2 | 0.242209278544 | 7.224687667724 | 2.29e-16 | 2.46e-16 |
+| 3 | 0.618672122896 | 8.767273069742 | 3.59e-16 | 2.03e-16 |
+| 5 | 1.623486390118 | 11.668332079323 | 6.84e-16 | 1.52e-16 |
+| 10 | 4.795388696132 | 18.390356042018 | 9.26e-16 | 1.93e-16 |
+| 32 | 21.887976311285 | 45.174452079421 | 6.49e-16 | 1.10e-15 |
+| 100 | 81.363991250923 | 121.626793792427 | 2.10e-15 | 2.34e-15 |
+| 1000 | 938.973018407692 | 1063.952136016309 | 3.63e-15 | 6.62e-15 |
+
+AT OTHER CONFIDENCE LEVELS, the same count of 7 on a base of 1 over 1 hour:
+
+| confidence | count lower | count upper |
+| --- | --- | --- |
+| 0.800000 | 3.894766804876 | 11.770914461548 |
+| 0.900000 | 3.285315691895 | 13.148113802432 |
+| 0.950000 | 2.814363051520 | 14.422675361702 |
+| 0.990000 | 2.037337478700 | 17.133593268913 |
+
+# SECTION 15: Conservative by construction: the exact coverage of the 95 percent interval (owned by Professional m02 l03)
+
+Derived from the engine: for a true mean mu, the probability of observing k events is Q(k + 1, mu) minus Q(k, mu), with the engine's `regularizedGammaQ` (and Q(0, mu) taken as 0). The interval for k covers mu when countLower(k) <= mu <= countUpper(k). The coverage is the sum of the probabilities of the k whose interval covers mu.
+
+| true mean | coverage | total probability summed |
+| --- | --- | --- |
+| 0.500000 | 0.985612 | 1.000000 |
+| 1.000000 | 0.981012 | 1.000000 |
+| 2.000000 | 0.983436 | 1.000000 |
+| 3.500000 | 0.990126 | 1.000000 |
+| 5.000000 | 0.979567 | 1.000000 |
+| 10.000000 | 0.975386 | 1.000000 |
+| 20.000000 | 0.956795 | 1.000000 |
+
+The coverage is at or above 0.95 at every mean probed. A count is a whole number, so no interval built from it can cover exactly 95 percent at every mean; the exact interval is built so that it never falls short, and the coverage above 0.95 in the table is what that costs in width.
+
+# SECTION 16: Confidence is a required fraction, and the upper tail is solved directly (owned by Professional m02 l04 and Professional m02 l05)
+
+`confidence` has no default, and it must be a fraction strictly between 0 and 1. Section 4 tables the refusals for 95 and for a missing value.
+
+WHAT FLOATING POINT DOES TO alpha. With confidence 0.95 the engine forms alpha as 1 minus 0.95, which in double precision is 0.050000000000000044; alpha over 2 is 0.025000000000000022. And 1 minus 0.025 is 0.975, which IS the double 0.975.
+
+The engine solves the upper limit on the UPPER tail at alpha/2 directly, with `chiSquareQuantileUpper`, rather than on the lower tail at 1 minus alpha/2. At 0.025 the two routes agree closely; where the tail probability is small the lower-tail route runs out of digits, because 1 minus a tiny number rounds. Measured on 2 degrees of freedom:
+
+| upper tail q | upper-tail route | lower-tail route at 1 - q | exact, derived: minus 2 ln q | upper route error | lower route error |
+| --- | --- | --- | --- | --- | --- |
+| 0.025000 | 7.377758908228 | 7.377758908228 | 7.377758908228 | 1.20e-16 | 0 |
+| 1e-4 | 18.420680743952 | 18.420680743953 | 18.420680743952 | 5.79e-16 | 1.14e-14 |
+| 1e-8 | 36.841361487905 | 36.841361477855 | 36.841361487905 | 1.93e-16 | 2.73e-10 |
+| 1e-12 | 55.262042231857 | 55.262086475787 | 55.262042231857 | 1.29e-16 | 8.01e-7 |
+| 1e-15 | 69.077552789821 | 69.079151984682 | 69.077552789821 | 6.17e-16 | 2.32e-5 |
+| 1e-17 | 78.287893161798 | none: 1 - q rounds to 1 | 78.287893161798 | 5.45e-16 | none |
+
+On 2 degrees of freedom the chi-square upper quantile is exactly minus 2 ln q, which is why that column can be derived here. At 0.025 the two routes agree to the last digit printed; the lower-tail route loses digits as q shrinks, and at 1e-17 the number 1 minus q is exactly 1 and the lower-tail route cannot be asked the question at all. The upper-tail route stays close to exact throughout. The course states the design choice as the engine makes it: solve the smaller tail directly.
+
+# SECTION 17: Zero events (owned by Professional m03)
+
+The ABO crew worked 41300 hours (stated) with 0 recordables. The observed rate is 0. The interval is not:
+
+| confidence | count upper | rate upper per 200,000 | rate lower | minus ln of half the miss, derived |
+| --- | --- | --- | --- | --- |
+| 0.800000 | 2.302585092994 | 11.150533 | 0.000000 | 2.302585092994 |
+| 0.900000 | 2.995732273554 | 14.507178 | 0.000000 | 2.995732273554 |
+| 0.950000 | 3.688879454114 | 17.863823 | 0.000000 | 3.688879454114 |
+| 0.990000 | 5.298317366548 | 25.657711 | 0.000000 | 5.298317366548 |
+
+THE RULE OF THREE says an upper 95 percent limit at zero events is about 3 events. The engine's CENTRAL 95 percent interval gives a count upper limit of 3.688879454114, because it leaves 2.5 percent in the upper tail. The central 90 percent interval leaves 5 percent there and gives 2.995732273554: that is the one-sided 95 percent limit the rule of three approximates. Derived: 3 over that figure is 1.001425.
+
+So on the ABO hours the rule of three gives, derived, 14.527845 per 200,000 hours, the central 90 percent upper limit is 14.507178, and the engine's central 95 percent upper limit is 17.863823.
+
+HOW MUCH EXPOSURE IT TAKES. Derived: the hours at which zero events brings the central 95 percent upper limit down to a target rate is the count upper limit times 200,000 over the target. Each row is then checked by calling the engine at those hours:
+
+| target per 200,000 | hours needed, derived | engine upper limit at those hours |
+| --- | --- | --- |
+| 2.000000 | 368887.945411 | 2.000000 |
+| 1.000000 | 737775.890823 | 1.000000 |
+| 0.500000 | 1475551.781646 | 0.500000 |
+| 0.250000 | 2951103.563291 | 0.250000 |
+
+A crew with no recordables on the ABO hours cannot, at 95 percent, rule out a true rate as high as 17.863823 per 200,000 hours. Zero is still a measurement: it bounds the rate from above.
+
+# SECTION 18: Comparing two rates by conditioning on the total (owned by Professional m04)
+
+ERHA east recorded 6 events in 240500 hours and west 11 in 902700 hours (stated). Given the total of 17 events, and equal rates, east's share of the events is binomial with the east share of the hours as its probability.
+
+| what the engine returns | value |
+| --- | --- |
+| expectedProportion, east hours over all hours | 0.210374 |
+| east share of the events, derived | 0.352941 |
+| lowerTail, P(east count <= observed) | 0.951727 |
+| upperTail, P(east count >= observed) | 0.128104 |
+| pValue, central two-sided | 0.256209 |
+| rateRatio, east over west | 2.047326 |
+| rateRatioLower, 95 percent | 0.621694 |
+| rateRatioUpper, 95 percent | 6.039396 |
+| upperUnbounded | false |
+
+No base is taken: it cancels in a ratio. The engine's method line: "conditional exact binomial test (Przyborowski and Wilenski 1940), central two-sided p-value (twice the smaller tail, capped at 1), Clopper-Pearson rate-ratio interval".
+
+WHEN ONE GROUP HAS NO EVENTS (goldens):
+
+| golden case | count1, hours1 | count2, hours2 | rateRatio | lower | upper | upperUnbounded | pValue | reason |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| compare-first-zero | 0, 180000 | 6, 210000 | 0.000000 | 0.000000 | 0.990863 | false | 0.048748 | null |
+| compare-second-zero | 4, 90000 | 0, 150000 | null | 1.100207 | null | true | 0.039551 | count2 is zero: the rate ratio and its upper limit are unbounded |
+
+A ratio with no events underneath it is unbounded, and the engine says so with null and a reason, never with Infinity. Both groups empty is refused (section 4).
+
+# SECTION 19: The central p-value, the minlike p-value, and why the engine chose central (owned by Professional m05)
+
+UTOROGU north recorded 7 events in 355200 hours and south 6 in 1048900 hours (stated).
+
+| what | value |
+| --- | --- |
+| engine pValue, central: twice the smaller tail, capped at 1 | 0.051759 |
+| minlike p-value, derived: the probability of every count no more likely than the one observed | 0.025879 |
+| engine rate ratio, north over south | 3.445148 |
+| engine 95 percent rate-ratio interval | 0.991404 to 12.408545 |
+
+The central p-value is above 0.05 and the rate-ratio interval includes 1: the two agree that the data do not rule out equal rates at 95 percent. The minlike p-value, the convention of R's poisson.test and of scipy's binomtest, is below 0.05 on the same counts and disagrees with that interval. The engine uses the central convention because it is the test the Clopper-Pearson interval inverts (Fay 2010). A reader who checks an engine p-value in R will see a different number on some inputs; that is this choice, and it is declared.
+
+THE AGREEMENT, SWEPT. Every pair of counts from 0 to 15 north and 0 to 24 south on the UTOROGU hours, except both zero: 399 comparisons. The central p-value falls below 0.05 exactly when the engine's interval excludes 1 on 399 of them. The minlike p-value, derived, disagrees with the interval on 14 of them.
+
+NO DIFFERENCE FOUND IS A WEAK CLAIM. On UTOROGU the rate-ratio interval runs from 0.991404 to 12.408545: it includes 1, and it also includes a north rate 12.408545 times the south one. A p-value above 0.05 says the data cannot tell; it does not say the rates are equal.
+
+# SECTION 20: Published rates with their intervals (owned by Professional m06)
+
+| case | count | hours | base | rate | lower 95 | upper 95 | upper against golden |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| BLS ABC Company recordables | 7 | 400000 | 200000 | 3.500000 | 1.407182 | 7.211338 | 7.39e-16 |
+| IOGP 2024 FAR | 32 | 4158877000 | 100000000 | 0.769438 | 0.526295 | 1.086218 | 1.02e-15 |
+
+The BLS worked example's 3.5 is consistent, at 95 percent, with any true rate from 1.407182 to 7.211338 per 200,000 hours: 7 cases is a small count. The IOGP 2024 FAR of 0.769438 rests on 32 fatalities and its interval runs from 0.526295 to 1.086218.
+
+WRITING A RATE WITH ITS UNCERTAINTY. The house form this course uses: the rate, the base, the count and hours it came from, and the interval with its confidence, for example "3.500000 per 200,000 hours (7 cases in 400000 hours; 95 percent exact interval 1.407182 to 7.211338)". No P label is used for a confidence interval anywhere in this course.
+
+# SECTION 21: The u-chart: exposure units, a pooled centre line and limits that move (owned by Expert m01)
+
+The EGBEMA stream is 12 months (stated). Each month's exposure units are its hours over the base, n = hours / 200,000; u is the count over n, which is the month's rate on that base.
+
+| month | count | hours | units n | u | LCL | UCL | lclFloored | signal |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 6 | 402350 | 2.011750 | 2.982478 | 0.000000 | 6.491006 | true | null |
+| 2 | 4 | 388120 | 1.940600 | 2.061218 | 0.000000 | 6.556366 | true | null |
+| 3 | 4 | 97230 | 0.486150 | 8.227913 | 0.000000 | 10.211920 | true | null |
+| 4 | 5 | 296410 | 1.482050 | 3.373705 | 0.000000 | 7.084918 | true | null |
+| 5 | 3 | 371880 | 1.859400 | 1.613424 | 0.000000 | 6.635494 | true | null |
+| 6 | 6 | 409930 | 2.049650 | 2.927329 | 0.000000 | 6.457588 | true | null |
+| 7 | 5 | 398470 | 1.992350 | 2.509599 | 0.000000 | 6.508479 | true | null |
+| 8 | 16 | 421090 | 2.105450 | 7.599326 | 0.000000 | 6.410039 | true | above |
+| 9 | 4 | 386940 | 1.934700 | 2.067504 | 0.000000 | 6.561947 | true | null |
+| 10 | 4 | 384560 | 1.922800 | 2.080300 | 0.000000 | 6.573282 | true | null |
+| 11 | 2 | 392710 | 1.963550 | 1.018563 | 0.000000 | 6.534895 | true | null |
+| 12 | 4 | 405240 | 2.026200 | 1.974139 | 0.000000 | 6.478154 | true | null |
+
+| what | value |
+| --- | --- |
+| centre line, sum of counts over sum of units | 2.893273 |
+| mean of the monthly u, derived | 3.202958 |
+| sum of counts | 63 |
+| sum of units, derived | 21.774650 |
+| outOfControl, zero-based month index | [7] |
+
+The engine's method line: "u chart, variable sample size (Montgomery): ubar = sum(c) / sum(n), limits ubar +/- 3 sqrt(ubar / n_i), lower floored at 0". The limits are the centre plus and minus 3 times the square root of the centre over n, so a month with fewer hours gets wider limits: month 3, with 97230 hours, has a UCL of 10.211920 against 6.491006 for month 1. Every lower limit on this chart is floored at 0 and flagged, because the raw lower limit is negative at this exposure.
+
+Two charts the engine refuses to draw, both in section 4: a month with zero hours (drop it first) and a chart with no events at all (the limits would have zero width).
+
+# SECTION 22: Signals: strictly outside, three sigma, and a low point (owned by Expert m02)
+
+STRICTLY OUTSIDE. The golden case uchart-points-on-the-limits puts two points exactly on their limits. Its note reads: "ubar = 1 and n = 9 per point, so the limits are exactly 0 and 2 and the points sit exactly on them: under the strict rule (Montgomery: a point OUTSIDE the limits) neither signals".
+
+| point | count | u | LCL | UCL | signal |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 18 | 2.000000 | 0.000000 | 2.000000 | null |
+| 2 | 0 | 0.000000 | 0.000000 | 2.000000 | null |
+
+THREE SIGMA, AND WHAT A NARROWER BAND COSTS. On EGBEMA, derived limits at 2 sigma beside the engine's 3 sigma:
+
+| month | u | UCL at 3 sigma, engine | UCL at 2 sigma, derived | above at 2 sigma |
+| --- | --- | --- | --- | --- |
+| 1 | 2.982478 | 6.491006 | 5.291761 | false |
+| 2 | 2.061218 | 6.556366 | 5.335335 | false |
+| 3 | 8.227913 | 10.211920 | 7.772371 | true |
+| 4 | 3.373705 | 7.084918 | 5.687703 | false |
+| 5 | 1.613424 | 6.635494 | 5.388087 | false |
+| 6 | 2.927329 | 6.457588 | 5.269483 | false |
+| 7 | 2.509599 | 6.508479 | 5.303410 | false |
+| 8 | 7.599326 | 6.410039 | 5.237783 | true |
+| 9 | 2.067504 | 6.561947 | 5.339055 | false |
+| 10 | 2.080300 | 6.573282 | 5.346612 | false |
+| 11 | 1.018563 | 6.534895 | 5.321021 | false |
+| 12 | 1.974139 | 6.478154 | 5.283194 | false |
+
+At 3 sigma the engine flags 1 month. At 2 sigma, derived, 2 months sit above the upper limit. A narrower band flags more months, and each flag is an investigation.
+
+A LOW POINT THAT SIGNALS. The golden case uchart-positive-lcl-with-a-low-point; its note reads: "large exposure gives positive lower limits; a month with 0 events in 4.8 million hours falls below its lower limit (a signal worth investigating as under-reporting)".
+
+| point | count | hours | u | LCL | UCL | signal |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 48 | 5000000 | 1.920000 | 0.936592 | 2.512443 | null |
+| 2 | 52 | 5200000 | 2.000000 | 0.951893 | 2.497142 | null |
+| 3 | 61 | 6100000 | 2.000000 | 1.011164 | 2.437872 | null |
+| 4 | 0 | 4800000 | 0.000000 | 0.920345 | 2.528691 | below |
+| 5 | 55 | 5500000 | 2.000000 | 0.973261 | 2.475775 | null |
+| 6 | 47 | 4700000 | 2.000000 | 0.911835 | 2.537201 | null |
+| 7 | 50 | 5000000 | 2.000000 | 0.936592 | 2.512443 | null |
+
+SMALL EXPOSURE, WIDE LIMITS. The golden case uchart-small-exposure-wide-limits; its note reads: "two thin periods: limits scale with 1/sqrt(n_i)".
+
+| point | count | hours | u | UCL | signal |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 3 | 2000 | 300.000000 | 44.196051 | above |
+| 2 | 0 | 2000 | 0.000000 | 44.196051 | null |
+| 3 | 1 | 400000 | 0.500000 | 4.965310 | null |
+
+On EGBEMA the same thing is visible: month 3 has the highest u on the chart, 8.227913, and no signal, because its limit is wide.
+
+# SECTION 23: What a signal means, and revising the limits after a found cause (owned by Expert m03)
+
+A signal is a question: something in that month may differ from the rest. It is not a finding about a cause. If investigation finds an assignable cause, the month is set aside and the chart is redrawn on the rest. On EGBEMA, with month 8 set aside:
+
+| chart | months | centre | months flagged |
+| --- | --- | --- | --- |
+| as drawn | 12 | 2.893273 | [8] |
+| revised, month 8 set aside | 11 | 2.389523 | [] |
+
+Setting a month aside needs a found cause. Setting it aside because it is high is removing the data that disagree.
+
+NO SIGNAL IS A WEAK REASSURANCE. Month 3 on the drawn chart reads 8.227913 and does not signal, because with 97230 hours its upper limit is 10.211920. A quiet chart can be a chart with too little exposure per point to see anything.
+
+# SECTION 24: Before and after an intervention, with and without the flagged month (owned by Expert m03 l04 and Expert m05 l04 and Expert m06)
+
+The intervention went in at the start of month 7 (stated). The flagged month, 8, falls AFTER it.
+
+| comparison | after: count, hours | before: count, hours | rate ratio after over before | lower 95 | upper 95 | central p-value |
+| --- | --- | --- | --- | --- | --- | --- |
+| all months | 35, 2389010 | 28, 1965920 | 1.028627 | 0.607952 | 1.755328 | 1.000000 |
+| month 8 set aside | 19, 1967920 | 28, 1965920 | 0.677882 | 0.357764 | 1.257771 | 0.241552 |
+
+With every month in, the after period reads a rate ratio of 1.028627 with a p-value of 1.000000. With month 8 set aside it reads 0.677882 with a p-value of 0.241552. One month turns the ratio from above 1 to below it, and neither comparison is significant at 0.05: the data cannot say the intervention changed the rate in either direction. A before-and-after claim has to say which months it used and why. The p-value of 1.000000 is the cap: twice the smaller tail, derived 1.015454, is above 1.
+
+RATE CHASING. A month picked because it was the worst is likely to be followed by a better one even if nothing changed, because part of what made it the worst was chance. On EGBEMA:
+
+| month | count | u | expected count at the centre line, derived: centre times units |
+| --- | --- | --- | --- |
+| 8 | 16 | 7.599326 | 6.091641 |
+| 9 | 4 | 2.067504 | 5.597615 |
+
+The month after the worst reads 2.067504 against the worst month's 7.599326, and it sits inside its limits like the other ordinary months. A programme launched at the worst month would take credit for that fall, and the chart gives no reason to think anything changed.
+
+# SECTION 25: Benchmarking against the IOGP published figures (owned by Expert m04)
+
+| IOGP figure | count, golden | hours, golden | base | engine | published | relative difference against golden |
+| --- | --- | --- | --- | --- | --- | --- |
+| TRIR 2024 | 3071 | 3795000000 | 1000000 | 0.809223 | 0.81 | 0 |
+| FAR 2024 | 32 | 4158877000 | 100000000 | 0.769438 | 0.77 | 0 |
+| FAR 2023 | 27 | 3291382000 | 100000000 | 0.820324 | 0.82 | 0 |
+
+The IOGP report prints the hours to the nearest million, so the engine's 0.809223 anchors the formula and the printed 0.81, and nothing finer.
+
+SAME BASE AND SAME DEFINITION FIRST. UGHELLI's recordable rate is 0.776317 per 200,000 hours (section 2). Set beside the IOGP TRIR of 0.809223 per 1,000,000 it looks lower. On the IOGP base UGHELLI reads 3.881586, which is, derived, 4.796684 times the IOGP figure. The definitions must match too: IOGP's TRIR counts fatalities, lost workday, restricted workday and medical treatment cases.
+
+A BENCHMARK IS A POPULATION FIGURE. Run through the engine as if the IOGP total were a second group:
+
+| what | value |
+| --- | --- |
+| rate ratio, UGHELLI over IOGP 2024 | 4.796684 |
+| 95 percent interval | 2.191251 to 9.117590 |
+| central p-value | 0.000301 |
+| expectedProportion, derived from UGHELLI hours over all hours | 0.000611 |
+
+The interval is almost all UGHELLI's uncertainty: the IOGP total rests on 3071 events and UGHELLI on 9. The IOGP figure pools many companies with different work, different reporting and different definitions of a recordable; it is a reference line. The test treats it as one workforce under one rate, and it is many workforces under many. The engine does not know which companies are in it, and a benchmark comparison inherits every one of those differences.
+
+THE FIVE YEAR VIEW. IOGP's own five-year FAR (section 10) is 0.826095 by sum then divide and 0.833228 by the mean of the five yearly rates. Quote the first.
+
+# SECTION 26: The traps: denominators, contractors and reclassification (owned by Expert m05)
+
+AMUKPE: company 846200 hours with 4 recordables, contractors 1392750 hours with 9 (stated).
+
+| what is counted | count | hours | rate per 200,000 |
+| --- | --- | --- | --- |
+| company events over company hours | 4 | 846200 | 0.945403 |
+| company events over company and contractor hours | 4 | 2238950 | 0.357310 |
+| company and contractor events over company and contractor hours | 13 | 2238950 | 1.161259 |
+| the same, with 2 recordables reclassified to first aid | 11 | 2238950 | 0.982603 |
+
+DENOMINATORS THAT MOVE. The second row adds the contractor hours and leaves out the contractor events: the rate falls with no change on site. Events and hours must come from the same workforce, both in or both out.
+
+RECLASSIFICATION. Moving 2 recordables to first aid lowers the recordable rate from 1.161259 to 0.982603. The 58 days lost do not move, so the severity rate on the same hours is 5.181000 before the reclassification and after it. A rate that falls while the harm does not is a change in counting.
+
+THE MEAN OF RATES, ONE LEVEL UP. A group that averages its sites' rates, or an industry body that averages its members' rates, makes the section 10 mistake at a larger scale. KWALE's mean of site rates was 1.754760 against a pooled 0.968312, and IOGP's five yearly FARs average to 0.833228 against a pooled 0.826095.
+
+# SECTION 27: What the engine does not classify, and where the judgement stays (owned by Expert m06)
+
+Every figure in this course starts from a count someone classified. The engine checks that a count is a whole number and that hours are positive; it cannot check whether an injury was recordable, whether a restricted day was a lost day, or whether a release crossed a Tier 1 threshold. Section 4 shows what it refuses; nothing in it refuses a count that was classified wrongly.
+
+A MONITORING NOTE, in the shape this course grades at Expert: the chart and its centre, the months that signal and what was found, whether the limits were revised and on which months, any before-and-after claim with the months it used, and every rate with its base and its interval.
+
+# SECTION 28: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+Four words in this course already mean something else elsewhere in the academy. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| word | what it already means elsewhere | the rule here |
+| --- | --- | --- |
+| Poisson | Poisson's ratio, an elastic property of rock and steel, in the geomechanics, rock physics, pore pressure, casing and tubing, stimulation and perforation courses | always "Poisson distribution" or "Poisson count model", never bare "Poisson" |
+| severity | a consequence category on a risk matrix in the risk and compliance courses, and an exception level in production surveillance | always "severity rate", days lost per base hours, never bare "severity" |
+| confidence interval | elsewhere a percentile range of outcomes may sit near this phrase | here it is an interval on an ESTIMATED RATE at a stated confidence; no P label is ever used |
+| FAR | the planned QRA course will teach FAR as a PREDICTED rate | here FAR is an OBSERVED rate; write "observed FAR" wherever the two could be confused |

@@ -618,5 +618,44 @@
       "digest.txt": "d2830fc9ed1be24cb445acf2ca0332b7c0e8644cfae41d99baf673f79552bb88",
       "fields.json": "792165af33c6b5cfd291f4a6810691f6011bc73105292f42280d5570f41add13"
     }
+  },
+  "safetystats": {
+    "course": "H1",
+    "live": "/root/hse-wip-safetystats",
+    "kit": "foundation",
+    "kitNote": "Foundation kit: everything the wave is rebuilt and gated from before a lesson is written. The digest, its generator and the teaching streams; the eighteen graded answers, their generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle cross-check that replays the vendored scipy oracle on the capstone; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the structure; the vendoring script and this mirror script; and the five writer briefs. The seed ladder (gen_course, gen_golive, gen_seeds, verify_sql, the scratch database and the apply script) joins it with the migrations.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "truth-safetystats.json",
+      "h1_dump.mjs",
+      "h1_fields.mjs",
+      "h1_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "oracle_check.py",
+      "structure.py",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "gate_capstone_leak.mjs",
+      "gate_claims.mjs",
+      "gate_copy_rule.py",
+      "gate_typed_literals.py",
+      "gate_vocabulary.py",
+      "run_gates.py",
+      "vendor_safetystats.sh",
+      "mirror.sh",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md"
+    ],
+    "pins": {
+      "digest.txt": "042a36b12ea3d4d3f3efdadc9b0a574988159e881f24874e3753e0a59acb4053",
+      "fields.json": "301f6ace1451f6c0256f0ebf95a6fb9242481e9195ca13e81ca09f1cf5bb703c"
+    }
   }
 }

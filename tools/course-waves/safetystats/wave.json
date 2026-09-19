@@ -1,0 +1,336 @@
+{
+ "slug": "safetystats",
+ "prefix": "h1",
+ "name": "Safety Performance Statistics & KPIs",
+ "pathOrder": 61,
+ "module": "hse",
+ "prerequisite": null,
+ "repo": "/root/wt-h1-nextgen",
+ "branch": "feat/h1-safetystats-course",
+ "goldens": [
+  "hse/goldens/safetyStats_cases.json"
+ ],
+ "engines": [
+  "engines/hse/safetyStats.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines f123a575 (engines PR #216). The canonical pin in VENDOR.json moves 5cbdca5 -> f123a57; the only paths that differ between those commits are README.md (ledgered group 7, pinned by vendored sha) and the six hse paths vendored here, so no live course's graded value moves. SIX paths, walked by vendor_safetystats.sh over a git-archive export of the commit with the jest suite as the only seed: the suite, the engine and the golden it reads at runtime; plus three NAMED paths (oracle_safetystats.py, FINDINGS-safetystats.md, negcontrol_safetystats.sh, mode 755 as upstream). 6 paths x 4 proofs (blob hash, sha256, cmp, byte count) = 24, zero deviations. VENDOR.manifest regenerated from the clone (816 paths) and verified; guard clean, 666 paths compared.",
+ "constants": {
+  "$comment": "The engine exports RATE_BASES (200000, 1000000, 100000000) and no other constant a course could grade. Digest section 1 prints them from the export and section 3 checks 100 x 40 x 50 against OSHA_200K. The Lanczos coefficients and the iteration tolerances are implementation, not teaching, and are never graded."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE. Engine vendored at f123a57, digest built (28 sections), fields.json and precision.json generated from the one tolerance derivation, 18 graded fields discriminating, lab and three panels shipped with vitest. No lesson, bank, key truth or migration is written yet.",
+  "thesis": "A safety rate is a count divided by exposure hours on a base somebody chose. Associate owns WHAT IS THE RATE, Professional owns HOW SURE ARE WE, Expert owns IS ANYTHING CHANGING. Each capstone grades only its own tier's question.",
+  "tiers": {
+   "beginner": "Associate: rates and bases. m01 a rate is a count over exposure (hours not headcount, the base required, the refusals), m02 TRIR DART LTIR on two bases, m03 FAR severity rate PSE rate, m04 sum then divide, m05 the rolling rate, m06 one report end to end. Digest sections 1 to 12.",
+   "intermediate": "Professional: uncertainty. m01 the Poisson count model, m02 the Garwood interval, m03 zero events and the rule of three, m04 comparing two rates, m05 the central against the minlike p-value, m06 intervals in a report. Digest sections 13 to 20.",
+   "advanced": "Expert: monitoring and judgement. m01 the u-chart, m02 signals, m03 what a signal means and revising limits, m04 benchmarking against IOGP published figures, m05 the traps (denominators, contractors, reclassification, rate chasing, the mean of rates one level up), m06 judgement end to end. Digest sections 21 to 27."
+  }
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "301f6ace1451f6c0256f0ebf95a6fb9242481e9195ca13e81ca09f1cf5bb703c",
+  "keys": [
+   "okrika_combined_trir_per_200k",
+   "okrika_combined_ltir_per_1m",
+   "okrika_far_per_100m",
+   "okrika_severity_rate_per_200k",
+   "okrika_tier1_pse_rate_per_200k",
+   "okrika_rolling12_trir_month14_per_200k",
+   "bonny_alpha_trir_lower95_per_200k",
+   "bonny_alpha_trir_upper95_per_200k",
+   "bonny_crew_zero_event_upper95_per_200k",
+   "bonny_rate_ratio_lower95",
+   "bonny_rate_ratio_upper95",
+   "bonny_compare_p_value",
+   "forcados_centre_per_200k",
+   "forcados_ucl_month09_per_200k",
+   "forcados_lcl_month07_per_200k",
+   "forcados_revised_centre_per_200k",
+   "forcados_before_after_p_value",
+   "forcados_before_after_p_value_without_month06"
+  ]
+ },
+ "fieldsDiscrimination": {
+  "okrika_combined_trir_per_200k": "mean of the two workforce rates, the IOGP 1M base, one workforce only, the fatality counted twice",
+  "okrika_combined_ltir_per_1m": "the OSHA 200k base, recordables counted, the fatality added again, employee hours only",
+  "okrika_far_per_100m": "a 1M or 200k base, contractor hours only, the lost-time count used",
+  "okrika_severity_rate_per_200k": "days per lost-time case (IOGP's LWDC severity shape), the 1M base, days per recordable, employee hours only",
+  "okrika_tier1_pse_rate_per_200k": "the 1M base, Tier 1 plus Tier 2, the Tier 2 count, employee hours only",
+  "okrika_rolling12_trir_month14_per_200k": "the mean of the monthly rates, the calendar-year window, the window ending a month early, 11 and 13 month windows",
+  "bonny_alpha_trir_lower95_per_200k": "df 2N+2, alpha not halved, the normal approximation, 90 percent, the 1M base",
+  "bonny_alpha_trir_upper95_per_200k": "df 2N, alpha not halved, the normal approximation, 99 percent, the 1M base",
+  "bonny_crew_zero_event_upper95_per_200k": "the rule of three, the central 90 percent limit, one event assumed, the 1M base, the point estimate",
+  "bonny_rate_ratio_lower95": "alpha not halved, the Wald log interval, the groups swapped, the hours ratio ignored",
+  "bonny_rate_ratio_upper95": "alpha not halved, the Wald log interval, the groups swapped, the hours ratio ignored",
+  "bonny_compare_p_value": "the minlike convention of R and scipy (0.030627, below 0.05 where central is above), one tail not doubled, equal hours assumed, a normal z test",
+  "forcados_centre_per_200k": "the mean of the monthly u, the 1M base, the median u, recordables per month",
+  "forcados_ucl_month09_per_200k": "two-sigma limits, limits from the average exposure, the centre as the mean of u, hours not converted to units",
+  "forcados_lcl_month07_per_200k": "two-sigma limits, limits from the average exposure, the centre as the mean of u, floored by habit at zero",
+  "forcados_revised_centre_per_200k": "not revised, the mean of the kept u, the flagged month's events dropped with its hours kept, the short month dropped instead",
+  "forcados_before_after_p_value": "minlike, one tail, equal hours, month six removed, a normal z test",
+  "forcados_before_after_p_value_without_month06": "month six left in, month six events dropped with its hours kept, minlike, one tail, equal hours",
+  "summary": "79 wrong methods over 18 routes, 0 WEAK, closest miss 822.7 tolerances (forcados_before_after_p_value via minlike). Negative control at tolerance x1e9: 18 of 18 WEAK."
+ },
+ "digest": {
+  "lines": 614,
+  "sections": 28,
+  "md5": "704175bdf725ca1681ee18a5cb08e29c",
+  "sha256": "042a36b12ea3d4d3f3efdadc9b0a574988159e881f24874e3753e0a59acb4053"
+ },
+ "history": {
+  "position": "THIS ENGINE HAS NO REPAIR HISTORY: written, oracle-gated and merged in one pull request. No history module, no framed history section; structure.py and digest_prose.rules.mjs refuse any key, title or heading that reads as one."
+ },
+ "scopeSeams": {
+  "the 5x5 risk matrix": "OWNED BY riskchange (and EC6's 20/12/6 scale). This course never uses a risk matrix; a bare 'severity' here would collide with it, so the word is always 'severity rate'.",
+  "FAR as a predicted rate": "WILL BE OWNED BY H5 qra. H1 teaches an OBSERVED FAR only.",
+  "percentile ranges": "OWNED BY the economics uncertainty course and the Suite percentileConventions. A confidence interval here is on an estimated rate and carries no P label."
+ },
+ "namingCollisions": {
+  "Poisson": "Poisson's ratio in geomech, rockphysics, porepressure, casingtubing, stimulation, perfsand. Always 'Poisson distribution' or 'Poisson count model'. Gated by gate_vocabulary.py.",
+  "severity": "a risk-matrix category (riskchange, compliance) and an exception level (surveillance). Always 'severity rate'. Gated.",
+  "confidence interval": "never a P10/P90 range; no P label anywhere. Gated.",
+  "FAR": "observed here, predicted in the planned H5. Reported for a human read by gate_vocabulary.py."
+ },
+ "openItems": {
+  "FINDINGS rationale sentence": "FINDINGS-safetystats.md judgement call 4 says the upper limit is solved on the upper tail 'because 1 - 0.025 is not exactly 0.975 in floating point'. In IEEE double 1 - 0.025 === 0.975 is TRUE (digest section 16 asserts and prints it). The DESIGN is right for a different reason, which the digest measures: the lower-tail route loses digits as q shrinks and at q = 1e-17 cannot be asked at all. Provenance wording only; no engine number moves. Belongs in a petrolord-engines docs PR, not in the vendored copy.",
+  "missing-base message on pseRate": "pseRate's missing-base refusal is the shared checkBase message, which offers 100,000,000 for FAR as a choice; pseRate then refuses that base. A learner who follows the message is refused a second time. UX only; worth one line in the engines repo.",
+  "benchmark data": "The engine carries no IOGP benchmark table; Expert m04 benchmarks against the IOGP figures in the vendored golden only."
+ },
+ "cleared_claims": [
+  "The BLS worked example's 3.5 is consistent, at 95 percent, with any true rate from 1.407182 to 7.211338 per 200,000 hours: 7 cases is a small count."
+ ],
+ "cleared_claims_note": "digestfigures.py K11 reports a count it cannot recompute and a wave clears it by name once somebody has read it. THIS ONE WAS READ: the 7 is the BLS worked example's recordable count, printed in the count column of the row above it (7 cases in 400000 hours), and the sentence makes no claim about how many ROWS carry it.",
+ "gates": {
+  "structure.py": {
+   "md5": "7ff09e52f70664d203f0790e8b46cf2e",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "h1_capstone.mjs": {
+   "md5": "81c40e41d5ea7654a63a3b1c4e84b892",
+   "command": "node h1_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h1_capstone: 83 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "391049027d223cd214857e9125b120f6",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h1_capstone: 83 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "391049027d223cd214857e9125b120f6",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "h1_capstone: 83 label-and-call and scenario assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "8bf7683249f4ecd161160e58e948eb79",
+   "command": "/root/hseenv/bin/python oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded fields replayed through the vendored oracle, worst relative difference 1.46e-13; 5 scenario claims checked; 0 problem(s)"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "8bf7683249f4ecd161160e58e948eb79",
+   "command": "/root/hseenv/bin/python oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: one field was perturbed by ten tolerances; this run must fail naming it."
+  },
+  "discriminate.mjs": {
+   "md5": "64ae0760a01a63fea70cd45f7893654f",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: forcados_before_after_p_value via minlike_convention, 8.227e+2 tolerances away"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "64ae0760a01a63fea70cd45f7893654f",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000. Expected 18 WEAK routes, got 18."
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh hse-wip-safetystats",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h1_dump: 502 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules hse-wip-safetystats",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/hse-wip-safetystats/digest.txt: 614 line(s), 28 section title(s) and 36 in-body marker(s) swept against their blocks, 32 history framings, 17 engine pin(s); 0 warned for a human read and 0 framed as c"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py hse-wip-safetystats",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (1 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py hse-wip-safetystats",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py hse-wip-safetystats",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py hse-wip-safetystats",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py hse-wip-safetystats",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/hse-wip-safetystats: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 3 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py hse-wip-safetystats",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py hse-wip-safetystats",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "6860cd015906bb67d953c07af3fc7d85",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "6860cd015906bb67d953c07af3fc7d85",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "6860cd015906bb67d953c07af3fc7d85",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "6860cd015906bb67d953c07af3fc7d85",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "b121ad0ef74bb77c1d001d7e644e5c9d",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "b121ad0ef74bb77c1d001d7e644e5c9d",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_typed_literals.py": {
+   "md5": "b233e1b6a9738f0bc5a57edebb56f2eb",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "b233e1b6a9738f0bc5a57edebb56f2eb",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "3b4cab22225b879efe7ce99354f25126",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 4, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "3b4cab22225b879efe7ce99354f25126",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected bare Poisson, bare severity and a P label caught; got ['a P label', 'bare Poisson', 'bare severity']"
+  },
+  "gate_claims.mjs": {
+   "md5": "54d2422648142a2684a0eeec978f2de0",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "54d2422648142a2684a0eeec978f2de0",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 2."
+  }
+ }
+}

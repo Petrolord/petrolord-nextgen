@@ -1,0 +1,14 @@
+{
+ "p": {
+  "decimals": 6,
+  "match": "^(?:bonny_compare_p_value|forcados_before_after_p_value|forcados_before_after_p_value_without_month06)$"
+ },
+ "rate": {
+  "decimals": 6,
+  "match": "^(?:bonny_alpha_trir_lower95_per_200k|bonny_alpha_trir_upper95_per_200k|bonny_crew_zero_event_upper95_per_200k|forcados_centre_per_200k|forcados_lcl_month07_per_200k|forcados_revised_centre_per_200k|forcados_ucl_month09_per_200k|okrika_combined_ltir_per_1m|okrika_combined_trir_per_200k|okrika_far_per_100m|okrika_rolling12_trir_month14_per_200k|okrika_severity_rate_per_200k|okrika_tier1_pse_rate_per_200k)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:bonny_rate_ratio_lower95|bonny_rate_ratio_upper95)$"
+ }
+}
