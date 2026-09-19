@@ -1,0 +1,27 @@
+-- ============================================================================
+-- crude EXPERT DEEP SEED: Crude Assay & Blending, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE LEAST-COST RECIPE, and linear programming for the
+-- whole downstream module. An LP is an objective, rows and bounds; its optimum
+-- sits on a vertex; optimal, infeasible and unbounded are all answers; a limit
+-- on a ratio is a linear row; volume, mass and index are declared bases; a
+-- binding specification is met exactly and the rest give quality away; the
+-- shadow price of a specification is the money one unit of relief saves, per
+-- unit of the property, at the margin; the marginal barrel is not the average
+-- barrel.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A row's dual is not a price. optimiseBlend
+-- scales it by the row's own weights and the index slope into dollars per
+-- ppm, per psi, per octane number, and keeps rowPrice beside it.
+--
+-- THE TRAP THE TIER IS BUILT ON. A tank typed as 0 is empty, a blank maximum
+-- is unlimited, and a blank cost is refused; each changes the recipe.
+--
+-- HELD, taught as a limit and never graded: the kernel's absolute tolerances
+-- (L4). Every figure is invented and illustrative. The capstone grades six
+-- four-decimal engine figures at a tolerance of 5e-5.
+-- ============================================================================

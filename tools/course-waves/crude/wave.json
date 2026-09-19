@@ -1,0 +1,208 @@
+{
+ "slug": "crude",
+ "prefix": "cr",
+ "name": "Crude Assay & Blending",
+ "pathOrder": 48,
+ "module": "downstream",
+ "moduleLabel": "Midstream & Downstream",
+ "prerequisite": null,
+ "repo": "/root/wt-md-crude-nextgen",
+ "branch": "feat/md-crude-course",
+ "siblings": [
+  {
+   "slug": "refinery",
+   "pathOrder": 49,
+   "branch": "feat/md-refinery-course",
+   "repo": "/root/wt-md-refinery-nextgen"
+  },
+  {
+   "slug": "supply",
+   "pathOrder": 50,
+   "branch": "feat/md-supply-course",
+   "repo": "/root/wt-md-supply-nextgen"
+  }
+ ],
+ "asOf": null,
+ "goldens": [
+  "downstream/goldens/crudeassay_cases.json",
+  "downstream/goldens/productblending_cases.json",
+  "downstream/goldens/lp_cases.json"
+ ],
+ "engines": [
+  "engines/downstream/crudeAssay.js",
+  "engines/downstream/productBlending.js",
+  "lib/lp/simplex.js"
+ ],
+ "oracles": [
+  "tools/validation/downstream/oracle_crudeassay.py",
+  "tools/validation/downstream/oracle_productblending.py",
+  "tools/validation/downstream/oracle_lp.py"
+ ],
+ "enginesVendoredAt": "NextGen, sha-identical with engines 60ee266 (MD3-0, #221; MD1-0 repaired this scope at 5cbdca5 -> #215). Vendored by the shared vendor commit b1f29251 on feat/md-vendor-downstream (the whole downstream family plus lib/lp, downstream removed from excludedDomains), made by the lead; this wave does not re-vendor.",
+ "plan": {
+  "state": "FOUNDATION: recon, structure, digest, eighteen graded fields, gates, scaffold and task files. No lesson, bank, panel or migration is written.",
+  "thesis": "Every property of a blend is computed on its own basis (gravity through specific gravity on volume, sulfur and the other per-mass properties on mass, viscosity through an index, yields on volume off the curve), and every least-cost recipe is a linear programme whose binding specifications, value of relief and infeasibility are answers in their own right.",
+  "tiers": {
+   "beginner": "THE ASSAY AND THE BLEND: crudeAssay gravity, bases, Refutas, curve, cuts, stability. Graded: API, sulfur wt%, vanadium ppm, a mass share, the CII, a cut yield.",
+   "intermediate": "THE BLENDED BARREL AND WHAT IT IS WORTH: blendDistillationCurves, temperatureAtVolumePercent, cutYields on the blend, netbackValue. Graded: T50, two blend cut yields, gross, loss and netback per bbl.",
+   "advanced": "THE LEAST-COST RECIPE (linear programming for the whole module): solveLP, optimiseBlend, propertyOfBlend, valueGiveaway, SPEC_TEMPLATES, rvpIndex. Graded: least total cost, two recipe volumes, relief on sulfur, RVP and RON."
+  },
+  "cases": {
+   "teaching": [
+    "OBIGBO",
+    "KWALE",
+    "APAPA",
+    "the studio's default pair",
+    "the optimizer's default pool",
+    "the textbook LP"
+   ],
+   "capstone": [
+    "IDAMA",
+    "OGBELE",
+    "ONNE"
+   ]
+  }
+ },
+ "digest": {
+  "lines": 844,
+  "sections": 27,
+  "withheld": null,
+  "note": "No section is history. Every repaired MD1-0 rule is taught as how the engine works; SECTION 27 states the three HELD items as limits. Every figure is invented and illustrative, and the preamble says so."
+ },
+ "grading": {
+  "grader": "public.academy_submit_capstone reads expected, tol and the answer as numeric, so every graded field is a number the engine returns and no basis word, band or verdict is graded.",
+  "tolerance": "5e-5 for all eighteen: the digest prints every computed figure to four decimals and a field is graded at half a unit in that place (gradeprecision.py 18 of 18). Wide against engine error (LP 1e-9 relative, relief within the oracle's two exact quotients) and narrow against every wrong route (discriminate closest miss 14 tolerances). One derivation: DECIMALS and TOLERANCE in crude_capstone.mjs.",
+  "collisionRule": "No graded value within its tolerance of the absolute value of any number token the digest prints (the go-live rule), and no two graded values within tolerance of each other.",
+  "notGraded": "Refutas viscosity (HELD C12), Watson K (HELD C13), valueGiveaway dollars (no oracle computes it), the marker differential (no oracle computes it), every basis word, band, stable verdict and status."
+ },
+ "leakScales": [
+  "1"
+ ],
+ "gates": {
+  "structure": {
+   "file": "structure.py",
+   "md5": "fc918767ae2859068fdafc39cba697a2",
+   "result": "exit 0: panels: 69 of 78 lessons carry one; ids ['crude-assay-explorer', 'crude-recipe-explorer', 'crude-valuation-explorer']"
+  },
+  "vendor": {
+   "file": "gate_vendor.sh",
+   "md5": "719c8c4b81aa402bdf70c46a95372e86",
+   "result": "exit 0: gate_vendor: PASS"
+  },
+  "engine-jest": {
+   "file": "gate_vendor.sh",
+   "md5": "719c8c4b81aa402bdf70c46a95372e86",
+   "result": "exit 0: Tests:       866 passed, 866 total"
+  },
+  "digest-repro": {
+   "file": "gate_repro.sh",
+   "md5": "1dd1d8cb287935f78879b013e5aeaaac",
+   "result": "exit 0: gate_repro: PASS"
+  },
+  "kit-digestrepro": {
+   "file": "/root/dc-wavekit/digestrepro.sh",
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "result": "exit 0: NOTE: no truth-*.json in this wave. If numsweep runs here, harvest_digest.py first."
+  },
+  "clock": {
+   "file": "gate_clock.sh",
+   "md5": "4e3ea2df362c67253a8bd146b6a1f22b",
+   "result": "exit 0: gate_clock: PASS"
+  },
+  "kit-digestprose": {
+   "file": "/root/dc-wavekit/digestprose.mjs",
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "result": "exit 0: [digestprose] /root/md-wip-crude/digest.txt: 844 line(s), 27 section title(s) and 14 in-body marker(s) swept against their blocks, 32 history framings, 27 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+  },
+  "kit-digestfigures": {
+   "file": "/root/dc-wavekit/digestfigures.py",
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "result": "exit 0: [digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "capstone-generator": {
+   "file": "crude_capstone.mjs",
+   "md5": "0f107d8c34fa6b5f12bf8c8cbefacd66",
+   "result": "exit 0: advanced      onne_ron_relief_usd_per_octane              4032.6308   (4032.630838167829)"
+  },
+  "oracle-check": {
+   "file": "oracle_check.py",
+   "md5": "edba0e92ea80f8975e2ddf92d12c4e48",
+   "result": "exit 0: graded fields the oracle reproduces within tolerance: 18 of 18",
+   "control": "exit 1: graded fields the oracle reproduces within tolerance: 17 of 18"
+  },
+  "discriminate": {
+   "file": "discriminate.mjs",
+   "md5": "73f43bd818323c56b7ed28d31faf03a1",
+   "result": "exit 0: WEAK fields: 0",
+   "control": "exit 1: WEAK fields: 1"
+  },
+  "collisions": {
+   "file": "gate_collisions.py",
+   "md5": "f949c132d7218f00dc7cf4d826ec6cca",
+   "result": "exit 0: collisions with the digest: 0; graded pairs sharing a value: 0",
+   "control": "exit 1: collisions with the digest: 1; graded pairs sharing a value: 0"
+  },
+  "promptleak": {
+   "file": "gate_promptleak.py",
+   "md5": "571f782e5485987e710bd679a9421dc7",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 3"
+  },
+  "capstone-leak": {
+   "file": "gate_capstone_leak.py",
+   "md5": "9a827fa55e809d274635533fafda6673",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 2"
+  },
+  "kit-leakage-lessons": {
+   "file": "/root/dc-wavekit/leakage.mjs",
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "result": "exit 2: This gate does not pass on an empty or unreadable sweep."
+  },
+  "kit-leakage-digest": {
+   "file": "/root/dc-wavekit/leakage.mjs",
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "result": "exit 0: => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "kit-leakage": {
+   "file": "/root/dc-wavekit/leakage.mjs",
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "control": "exit 0: negative control: ALL PASS"
+  },
+  "copy-rule": {
+   "file": "gate_copy_rule.py",
+   "md5": "38a85233ca53ca156a0e7494d9ef0aed",
+   "result": "exit 0: violations: 0",
+   "control": "exit 1: violations: 2"
+  },
+  "kit-gradeprecision": {
+   "file": "/root/dc-wavekit/gradeprecision.py",
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "result": "exit 0: [gradeprecision] /root/md-wip-crude: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 10 declared class(es)",
+   "control": "exit 0: [gradeprecision] selftest OK: all three FC3 cases are caught with the half-unit computed from the digest's own header, a satisfiable tolerance is not reported, a declared class overrides the header, a digest with no stated precision refuses, and an answer key only PARTLY classified refuses and names every field it could not check"
+  },
+  "kit-sourceprose": {
+   "file": "/root/dc-wavekit/sourceprose.mjs",
+   "md5": "c370c51a0af6d3f8098ae859fb28ae1e",
+   "result": "exit 0: [sourceprose] 4 source file(s), 213 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
+  }
+ },
+ "findings": {
+  "R1": "STOPPED FOR THE LEAD. netbackValue reads a cut with no yield (null from cutYields) as a zero-yield cut and reports complete: true; reachable in the live studio (a partial curve or a cut point outside it). Kwale Light + Ebocha partial 50/50 on Kwale's cuts: LPG and naphtha unknown, netback 48.3393, complete true. The oracle's netback_cargo skips a None yield too, so it agrees and cannot catch it. Not graded, not printed by the digest.",
+  "R2": "STOPPED FOR THE LEAD. propertyOfBlend drops a component with no value from the property's denominator, so optimiseBlend prints an achieved value for a SKIPPED specification (Apapa PMS, isomerate sulfur blank: Sulfur achieved 60.5648 ppm with 656 bbl of isomerate left out); live in RecipeResults' Achieved column beside 'not applied'. Not graded, not printed by the digest.",
+  "R3": "STOPPED FOR THE LEAD (copy). screenBlendStability's fallback messages open 'No SARA analysis supplied' when SARA was supplied for some crudes. The digest quotes the message only where no crude carries SARA.",
+  "N1": "API blends linearly on MASS (mass-weighted mean of API numbers equals the blend API to 1e-14): taught as a computed identity in SECTION 4; never modelled as a wrong route. The engine comment 'API gravity does not blend at all' could be softened; not a defect.",
+  "N2": "oracle_productblending's RVP relief quotients carry about 6e-5 of float noise (its rvp_index is a float); oracle_check requires the engine's relief between the two quotients and the two within twice the tolerance.",
+  "N3": "With no availability bound active the marginal barrel equals the average barrel (every spec row has a zero rhs); ONNE has none active, so marginal-versus-average is taught on APAPA, where butane is at its cap.",
+  "N4": "Sulfur blended on volume makes ONNE infeasible; discriminate prints it as NO RECIPE and never counts it toward the three numeric routes."
+ },
+ "decisions": [
+  "Refutas viscosity and Watson K are NOT graded although the brief lists them as natural candidates: they are FINDINGS HELD items C12 and C13 and the standing rules say held items are taught, never graded. Both are taught as stated limits (SECTIONS 8, 14, 27) with the other basis printed beside them.",
+  "Every graded field is a four-decimal figure at tolerance 5e-5 (TOLERANCE = 5 / 10^(DECIMALS + 1); 0.5 * 10 ** -4 is a hair under 5e-5 in floating point and failed gradeprecision).",
+  "The relief prompts ask for the value of relief 'at the margin', because one whole unit re-solved is a different number wherever the value of relief curves (sulfur and RVP); discriminate models the whole-unit reading as a wrong route.",
+  "The Expert capstone's alkylate tank is typed as 0 bbl so 'a typed zero read as unlimited' is a live wrong route (alkylate at 91.5 $/bbl enters the recipe when unlimited).",
+  "The gravity-screen thresholds, the API constants, the Refutas constants and the Rankine offset are not typed in the digest: each is read back from the engine (probes or inverse calls).",
+  "leakage.mjs REFUSES the 78 title-only placeholders (no numeric literal, exit 2, expected at the foundation) and sweeps the digest in the beginner tier's place, clean.",
+  "Teaching cases and the apps' opening examples: the digest prints the studio's default pair and the optimizer's default pool as the app shows them, read from the Suite source into crude_fields.mjs."
+ ]
+}

@@ -1,0 +1,1 @@
+# Temperatures do not average

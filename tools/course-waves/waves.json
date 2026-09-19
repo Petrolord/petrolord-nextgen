@@ -618,5 +618,50 @@
       "digest.txt": "d2830fc9ed1be24cb445acf2ca0332b7c0e8644cfae41d99baf673f79552bb88",
       "fields.json": "792165af33c6b5cfd291f4a6810691f6011bc73105292f42280d5570f41add13"
     }
+  },
+  "crude": {
+    "course": "MD1",
+    "live": "/root/md-wip-crude",
+    "kit": "full",
+    "kitNote": "Foundation kit, the first Commercial & Trading course (module downstream). The mirror carries every file the wave is rebuilt and gated from: the digest, its generator and the teaching records; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles (oracle_crudeassay, oracle_productblending) on the capstone; every gate with its negative control (reproducibility across four zones, the clock, the vendor pin, collisions, promptleak, capstone leak, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files. The seed ladder joins it in the lesson phase.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "capstone.json",
+      "crude_dump.mjs",
+      "crude_fields.mjs",
+      "crude_capstone.mjs",
+      "crude_fields_capstone.mjs",
+      "structure.py",
+      "scaffold.py",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "source_prose.rules.mjs",
+      "oracle_check.py",
+      "discriminate.mjs",
+      "gate_repro.sh",
+      "gate_clock.sh",
+      "fakeclock.mjs",
+      "gate_vendor.sh",
+      "gate_collisions.py",
+      "gate_promptleak.py",
+      "gate_capstone_leak.py",
+      "gate_copy_rule.py",
+      "run_gates.sh",
+      "RECON.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md"
+    ],
+    "pins": {
+      "digest.txt": "5abb54755819bdf2af1a83fc8b605fe31620d6307f77ed80b7b2ade0f22bc9da",
+      "fields.json": "aa36514e7aaf8017dce9e5436faa56ccd55fcc2508ce8d4e970d507cda9711fc"
+    }
   }
 }
