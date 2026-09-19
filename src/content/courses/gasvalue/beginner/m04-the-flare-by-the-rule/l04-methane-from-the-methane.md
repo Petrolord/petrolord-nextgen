@@ -12,7 +12,7 @@ The methane that escapes is the methane in the gas times one less the destructio
 
 ## EGBEMA's methane
 
-EGBEMA's gas carries methaneMoleFraction 0.7420, and its flare study gives a destruction efficiency of 0.97. The engine reports flareCh4Tonnes 1136.490 tonnes a year. The flare weighs its methane at 16.043 kg/kmol.
+EGBEMA's gas carries methaneMoleFraction 0.7420, and its flare study gives a destruction efficiency of 0.97. The engine reports flareCh4Tonnes 1136.490 tonnes a year. The flare weighs its methane at 16.043 kg/kmol, the figure the engine exports in FLARE_MOLAR_MASS.
 
 A probe on a gas that is all methane, at EGBEMA's volume, days and efficiencies, gives the methane half on its own:
 
@@ -20,7 +20,7 @@ A probe on a gas that is all methane, at EGBEMA's volume, days and efficiencies,
 | --- | --- | --- |
 | all methane, EGBEMA efficiencies | 133751.879 | 1531.658 |
 
-The all-methane gas escapes 1531.658 tonnes of methane a year, and EGBEMA's gas 1136.490. The destruction efficiency is 0.97 for both. The factor the two gases do not share is the methane in the gas: the probe gas is all methane, and EGBEMA's carries methaneMoleFraction 0.7420.
+The all-methane gas escapes 1531.658 tonnes of methane a year, and EGBEMA's gas 1136.490. The destruction efficiency is 0.97 for both. The probe gas is all methane, and EGBEMA's carries methaneMoleFraction 0.7420.
 
 ## The shortcut the engine does not take
 

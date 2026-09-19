@@ -336,6 +336,7 @@ describe('AGREEMENT WITH THE DIGEST, the flare explorer (Associate)', () => {
     pin(13, [
       ...S.flareRefusals.map((x) => row(x.probe, refused(x.refusal))),
       `On-stream days OMITTED from the call (not typed at all) take the stated default: scfPerYear ${inp(S.omittedDays.scfPerYear)}. Typed blank, they are refused, as the table shows.`,
+      `On-stream days typed as 366 are accepted: scfPerYear ${inp(L.flareAt(L.rowsOf(L.EGBEMA_GAS), { ...L.egbemaFlareInputs(), onstreamDays: 366 }).scfPerYear)}.`,
     ]);
   });
 

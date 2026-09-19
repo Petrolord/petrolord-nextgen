@@ -22,7 +22,7 @@ Here is EGBEMA screened against the study's own limits. Every actual figure come
 | Gas to power or gas to wire | Minimum heating value | 1248.4110 | 950 | pass | 298.4110 |
 | Gas to power or gas to wire | Maximum inerts | 0.0460 | unset | unchecked | none |
 
-The actual column repeats four figures. The volume is 7.5000 on every route. The inert mole fraction is 0.0460 wherever inerts are checked. The heating value is 1248.4110 on both routes that ask for one. The only figures that appear once are the CO2 mole fraction, 0.0280, and the liquids content, 3.2205. Same gas, same figures: what changes from route to route is the limit.
+Read the actual column row by row. The volume reads 7.5000 on every route. The inert mole fraction reads 0.0460 on every inerts row. The heating value reads 1248.4110 on the CNG and gas to power rows. The CO2 row reads 0.0280, and the liquids row 3.2205.
 
 The status column carries three words. A check with a limit reads pass or fail. The check with no limit reads unchecked, and its margin reads none.
 
@@ -51,7 +51,7 @@ Look at the actual figure on that unchecked row: 0.0460. It is the same inert mo
 
 In the panel, type a Maximum inerts limit on the gas to power route and read its verdict again.
 
-The screen gives each route its own verdict and ranks nothing. Module 5's bid table lays the four routes side by side, and a route that fails screening stays in that table with its failure named.
+The screen gives each route its own verdict. Module 5's bid table lays the four routes side by side, and a route that fails screening stays in that table with its failure named.
 
 ## Exercise
 

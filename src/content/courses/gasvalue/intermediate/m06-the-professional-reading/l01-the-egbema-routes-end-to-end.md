@@ -20,7 +20,7 @@ This lesson reads EGBEMA's CNG route as one parcel, from the gas to the credit t
 
 ## Reading it step by step
 
-**The screen.** Before any of these figures, the route passes the study's screen. Its three checks read pass: a volume of 7.5000 against 5, inerts of 0.0460 against 0.06, a heating value of 1248.4110 against 1000. The verdict is passes.
+**The screen.** The route passes the study's screen. Its three checks read pass: a volume of 7.5000 against 5, inerts of 0.0460 against 0.06, a heating value of 1248.4110 against 1000. The verdict is passes.
 
 **The ceiling.** The CNG yield ceiling is 26.7066 kg per Mscf, on the gas mass basis. The study's yield of 18.5 kg sits at or below it. Typed at 30 kg, the yield is refused, and the refusal prints the ceiling as 26.706618 kg.
 

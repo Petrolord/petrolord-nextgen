@@ -51,7 +51,7 @@ With both efficiencies given, the combustion efficiency is 0.955 and the share i
 
 With the combustion efficiency left out, the destruction efficiency stands in at 0.97. The methane is the same, 1136.490, because the methane is set by the destruction efficiency alone. The CO2 is 184877.310 against 182079.024 with both given, and the CO2e is 218744.723. The share reads 0.1548.
 
-Read the two rows side by side. They share the methane, 1136.490. They differ in the combustion efficiency used, in the CO2 and in the CO2e, and the share reads 0.1568 in one and 0.1548 in the other. A share of EGBEMA's flare at 0.97 is therefore read together with the combustion efficiency it was computed on.
+Read the two rows side by side. They share the methane, 1136.490. They differ in the combustion efficiency used, in the CO2 and in the CO2e, and the share reads 0.1568 in one and 0.1548 in the other.
 
 ## A blank GWP blocks the share
 

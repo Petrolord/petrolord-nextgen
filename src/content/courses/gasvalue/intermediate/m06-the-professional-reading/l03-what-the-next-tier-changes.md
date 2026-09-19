@@ -24,10 +24,10 @@ lpgCng exports ten functions, and those ten are the ones in the table.
 
 | module | exported functions | exported constants and tables |
 | --- | --- | --- |
-| flareToValue | 7 | 8 |
+| flareToValue | 7 | 10 |
 | lpgCng | 10 | 9 |
 
-The Associate tier and this tier together used all seven of flareToValue's functions: characteriseGas and abatement for the gas and the flare, and screenRoute, yieldCeiling, routeEconomics, creditSensitivity and compareRoutes for the routes. The next tier moves to lpgCng's ten.
+flareToValue's seven functions are abatement, characteriseGas, compareRoutes, creditSensitivity, routeEconomics, screenRoute and yieldCeiling. The next tier moves to lpgCng's ten.
 
 ## What lpgCng calls
 
@@ -53,7 +53,7 @@ Three habits of reading carry over, each one this tier practised on a printed fi
 
 **A basis is named.** Every route here carried a ceiling basis word: gas mass, propane and heavier, heating value. lpgCng's two basis constants are named above, and the reader quotes a basis as it is printed.
 
-**A blank is handled one of a few printed ways.** Here a blank cost was named in assumedZero, a blank recovery was refused, and a blank reference cost gave a null capital with a note.
+**A blank reads as the engine prints it.** Here a blank cost was named in assumedZero, a blank recovery was refused, and a blank reference cost gave a null capital with a note.
 
 **A cash flow is handed on.** routeEconomics handed its cash flow to the sanctioned economics engine undiscounted. This course computes no discounted figure.
 

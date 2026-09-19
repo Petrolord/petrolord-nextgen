@@ -57,7 +57,7 @@
   }
  },
  "digest": {
-  "lines": 1030,
+  "lines": 1036,
   "sections": 36,
   "withheld": null,
   "note": "No section is history. Every repaired MD4-0 rule is taught as how the engine works; SECTIONS 14 and 35 state the four HELD items as limits. Every figure is invented and illustrative, and the preamble says so. Extension round on df31f53: every section carries a 'function:' line and the writers' gaps are closed as computed rule rows (RECON 8, REVISE.md)."
@@ -123,7 +123,7 @@
   "kit-digestprose": {
    "file": "/root/dc-wavekit/digestprose.mjs",
    "md5": "97dda85819e61737a76d8caf5badb46d",
-   "result": "exit 0: [digestprose] /root/et-wip-gasvalue/digest.txt: 1030 line(s), 36 section title(s) and 18 in-body marker(s) swept against their blocks, 32 history framings, 81 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+   "result": "exit 0: [digestprose] /root/et-wip-gasvalue/digest.txt: 1036 line(s), 36 section title(s) and 18 in-body marker(s) swept against their blocks, 32 history framings, 81 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
   },
   "kit-digestfigures": {
    "file": "/root/dc-wavekit/digestfigures.py",

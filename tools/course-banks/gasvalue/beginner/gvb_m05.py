@@ -56,12 +56,12 @@ q(1, "On-stream days are omitted from the call entirely, never typed. What does 
   "It takes the top of the range, 366 days"],
  "On-stream days omitted from the call take the stated default, and scfPerYear reads 2625000000. Typed blank, they are refused.")
 
-q(2, "Which two on-stream days probes does abatement's refusal table answer with the on-stream days sentence?",
+q(2, "Which pair of on-stream days probes are both answered with the on-stream days sentence in abatement's refusal table?",
  "Days typed blank ('') and days typed as 367",
  ["Days omitted from the call and days typed as 367",
   "Days typed blank ('') and days omitted",
   "Days typed as 355 and days typed as 367"],
- "The table prints \"REFUSED: On-stream days are required, more than 0 and no more than 366.\" for the blank and for 367. Omitted days take the stated default (scfPerYear 2625000000), and EGBEMA's 355 days are answered.")
+ "The table prints \"REFUSED: On-stream days are required, more than 0 and no more than 366.\" for the blank, for 0 and for 367. Omitted days take the stated default (scfPerYear 2625000000), and EGBEMA's 355 days are answered.")
 
 q(3, "Which of these calls does abatement answer with \"REFUSED: A characterised gas is required.\"?",
  "A call on a gas the analysis refused",

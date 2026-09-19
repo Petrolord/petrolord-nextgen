@@ -211,11 +211,7 @@ you believe is wrong.
    Write ONLY what a digest line prints or a reading of a printed row, cite
    the section, and put domain context in one clearly framed sentence
    ("In practice, ...") that no question can key on.
-2. **Engine follow-up in flight (MD45-1):** the two engine notes that break
-   the copy rule (flareToValue ghvNote, lpgCng vaporizer floor note) will be
-   reworded, so quote neither verbatim; paraphrase what they say and cite the
-   section. The oracles' inline ledgers and the flare molar masses / richness
-   band edges will be exported (no figure changes).
+2. **RETIRED (MD45-1 merged as df31f53):** the heating-value and vaporizer floor notes are reworded and may be quoted verbatim as the digest prints them now (body rule 4 governs).
 3. **P1 is repaired on the Suite page:** the LPG & CNG Rollout Studio's
    vaporizer will open with a BLANK outlet temperature instead of 15 C. Do
    not teach the page's opening vaporizer state; teach the engine rule

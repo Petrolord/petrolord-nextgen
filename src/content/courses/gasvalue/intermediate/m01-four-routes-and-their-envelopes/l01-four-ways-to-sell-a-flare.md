@@ -17,7 +17,7 @@ Read the columns in order. Each route's yield is typed per Mscf in the route's o
 
 ## Five questions, five functions
 
-The Flare Gas to Value Studio answers the route questions with five of the seven functions flareToValue exports. The course's question table pairs each question with the function that answers it:
+The Flare Gas to Value Studio answers the route questions with flareToValue's functions. The course's question table pairs each question with the function that answers it:
 
 | question | function |
 | --- | --- |

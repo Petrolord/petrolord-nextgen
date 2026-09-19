@@ -24,7 +24,7 @@ One of the engine's probes isolates this term. It flares a gas that is all metha
 | --- | --- | --- |
 | all methane, EGBEMA efficiencies | 133751.879 | 1531.658 |
 
-A gas that is all methane carries no CO2, so the first term of the rule is empty and all 133751.879 tonnes of CO2 a year come from the second: the combustion efficiency times the hydrocarbon carbon. The CO2 is weighed at the molar mass the flare uses for it, 44.009 kg/kmol.
+Set the probe beside the rule. The rule reads the CO2 as the CO2 in the gas plus the combustion efficiency times the hydrocarbon carbon, and this probe's gas is methane and nothing else. The engine gives it 133751.879 tonnes of CO2 a year, at EGBEMA's combustion efficiency of 0.955. The CO2 is weighed at the molar mass the flare uses for it, 44.009 kg/kmol.
 
 ## Move the combustion efficiency, move the CO2
 

@@ -525,6 +525,7 @@ export function flareRefusalsAt() {
     ['combustion efficiency 0.98 above a destruction efficiency of 0.97', eg, { ...P, flareCombustionEfficiency: 0.98 }],
     ['no volume', eg, { ...P, volumeMMscfd: '' }],
     ["on-stream days left blank ('')", eg, { ...P, onstreamDays: '' }],
+    ['on-stream days 0', eg, { ...P, onstreamDays: 0 }],
     ['on-stream days 367', eg, { ...P, onstreamDays: 367 }],
     ['a gas the analysis refused', rowsOf([['C1', '']]), P],
   ].map(([probe, rows, inputs]) => ({ probe, refusal: flareAt(rows, inputs).refusal }));

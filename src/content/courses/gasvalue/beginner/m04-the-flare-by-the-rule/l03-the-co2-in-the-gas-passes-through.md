@@ -27,11 +27,11 @@ The course states what the probes show: the CO2 already in the gas leaves the fl
 
 ## Against the rule
 
-The efficiencies change between the rows, from 0.97 and 0.955 to 0.5 and 0.5, and the CO2 does not. In the rule, the efficiencies sit in the second term of the CO2 and in the methane, and a gas that is all CO2 has no hydrocarbon carbon and no methane for them to act on. What is left is the first term, the CO2 in the gas, and it passes through.
+The efficiencies change between the rows, from 0.97 and 0.955 to 0.5 and 0.5, and the CO2 does not. In the rule, the efficiencies sit in the second term of the CO2 and in the methane. The first term, the CO2 in the gas, carries none.
 
-The methane reads 0.000 in both rows. The CH4 half of the rule is the methane in the gas times one less the destruction efficiency, and a gas that is all CO2 has no methane in it.
+The methane reads 0.000 in both rows. The CH4 half of the rule is the methane in the gas times one less the destruction efficiency.
 
-The flare weighs its CO2 at 44.009 kg/kmol. That figure was found the same way, by asking the engine about a gas that is all CO2 flared.
+The flare weighs its CO2 at 44.009 kg/kmol, the figure the engine exports in FLARE_MOLAR_MASS. An all-CO2 flare and an all-methane flare give the exported figures back.
 
 ## On EGBEMA
 

@@ -15,7 +15,7 @@ EGBEMA's CNG route against the diesel counterfactual, with a hurdle of 24500000 
 | 20 | 4360657.30 | 25368807.30 | true |
 | 12 | 2616394.38 | 23624544.38 | false |
 
-Each row prints the credit revenue a year at that price, the total margin a year, and whether the total clears the hurdle. The dollar figures print to two decimals. Two prices clear: 40 and 20. Two do not: 8 and 12.
+Each row prints the credit revenue a year at that price, the total margin a year, and whether the total clears the hurdle. creditRevenuePerYear is the credit price times the net abatement in tonnes; totalMarginPerYear is the route's gross margin plus that; a point clears when its total margin reaches the hurdle. The dollar figures print to two decimals. Two prices clear: 40 and 20. Two do not: 8 and 12.
 
 ## Three prices on one case
 
@@ -29,13 +29,13 @@ The breakeven is the price at which the route just clears its hurdle, in closed 
 
 **lowestTestedClearingPrice, 20.** Of the prices the study typed, 40 and 20 clear. The lower of the two is 20. It is a price from the study's own list.
 
-**The first price in the order typed that clears, 40.** Read the table from the top: 40 is the first row, and it clears. That is the figure a reader gets by stopping at the first true. It depends on the order the prices were typed in. lowestTestedClearingPrice is the engine's field. The first price in the order typed that clears is printed beside it under a plain label, with no field name.
+**The first price in the order typed that clears, 40.** Read the table from the top: 40 is the first row, and it clears. The first price in the order typed that clears is a third figure again, and it is neither.
 
-**breakevenCreditPrice, 16.0152.** The closed form. It is none of the four typed prices.
+**breakevenCreditPrice, 16.0152.** The closed form. It is none of the four typed prices. Its numerator is the hurdle minus the margin, 3491850.00 a year, and it is taken over the net abatement of 218032.865 t/yr.
 
 ## The trap in the order
 
-This tier's trap includes the first clearing price in the order typed: it gives a figure that looks finished. Here it reads 40. The engine's field reads 20, and the breakeven reads 16.0152. Three figures sit on one case, and two of them carry field names: lowestTestedClearingPrice and breakevenCreditPrice.
+Here the first clearing price in the order typed reads 40. lowestTestedClearingPrice reads 20, and breakevenCreditPrice reads 16.0152. Three figures sit on one case.
 
 Read the two fields together. The lowest tested price that clears is chosen from the prices the study tested. The breakeven is (hurdle minus margin) over net tonnes, and its formula carries no typed price.
 

@@ -39,7 +39,7 @@ This tier meets four kinds of blank input, and each is handled its own way:
 
 The credit test adds one more. With the route's price missing, creditSensitivity answers with no verdict: breakevenCreditPrice null, and "No margin for this route, so whether it needs credits cannot be said. Supply its price and costs."
 
-Each blank ends in a printed signal: a name, a refusal, a null with a note. None ends in a figure with nothing beside it.
+The course states the cost rule in one sentence: a cost box left blank is taken as zero and named in assumedZero. In the same table, the recovery and the on-stream days are refused, and the reference plant cost gives a null capital with its note.
 
 In the panel, clear the CNG variable cost and read the operating cost, the value per Mscf and assumedZero together. Then type the cost back and read assumedZero return to none.
 

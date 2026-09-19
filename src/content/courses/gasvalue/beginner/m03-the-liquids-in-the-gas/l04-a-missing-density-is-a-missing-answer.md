@@ -18,7 +18,7 @@ The engine was asked about EGBEMA's analysis twice more: once with propane's liq
 
 With propane's liquid density blank, gpmC2Plus is null, gpmC3Plus is null and the richness word is null. The engine names the component: missingLiquidDensity C3.
 
-Propane is in both cuts, so both gallon figures are missing, and the richness word, read off gpmC3Plus, is missing with them. The heating value reads 1248.4110 Btu/scf, as in the typed row.
+Propane is in both cuts: the component table marks C3 true in gpmC2Plus and true in gpmC3Plus. On this probe both gallon figures read null. The richness word is read off gpmC3Plus, and it reads null too. The heating value reads 1248.4110 Btu/scf, as in the typed row.
 
 ## A blank heating value
 

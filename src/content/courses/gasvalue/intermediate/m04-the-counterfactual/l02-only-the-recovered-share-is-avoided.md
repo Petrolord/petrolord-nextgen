@@ -29,7 +29,7 @@ The counterfactual moves the other two terms: what burning the product emits and
 
 ## The trap this tier is built on
 
-The whole flare credited to a plant that recovers part of it gives a figure that looks finished. On EGBEMA that figure is the gross flare, 215946.438 t/yr. The engine does not credit it. The CNG route's avoided flare is 190032.865 t/yr, the flare times 0.88, and that is the figure the net abatement starts from.
+Count the whole flare as avoided at a plant that recovers part of it, and the figure is the gross flare, 215946.438 t/yr on EGBEMA. The engine does not count it as avoided. The CNG route's avoided flare is 190032.865 t/yr, the flare times 0.88, and that is the figure the net abatement starts from.
 
 The gross figure still appears in the output. It is reported beside a blocked net as grossClaimIfNoCounterfactual: the claim the engine will not make. The first term of the net is the avoided flare.
 
@@ -46,7 +46,7 @@ When the recovery is missing or out of range, abatement blocks the net. It names
 
 The interval is the same (0, 1] routeEconomics uses. The blockedBy text restates the rule of this lesson in the engine's own words: gas the plant does not recover is still flared.
 
-routeEconomics and abatement answer a bad recovery in two ways. routeEconomics refuses the route: "needs a recovery fraction in (0, 1]." abatement returns a net of null and names the reason in blockedBy.
+The two engines are probed at different recoveries. routeEconomics refuses a CNG recovery of 0, 1.2 or blank: the route "needs a recovery fraction in (0, 1]." abatement, with no recovery or with 1.5, returns a net of null and names the reason in blockedBy.
 
 ## Reading the avoided flare with the year
 

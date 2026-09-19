@@ -1,6 +1,6 @@
 # Recovery is a design outcome
 
-The yield says what one Mscf makes. The recovery says what share of the parcel the route recovers. Recovery is a design outcome typed per route, and the engine ships no figure for it.
+The yield says what one Mscf makes. The recovery says what share of the parcel the route recovers. Recovery is a design outcome typed per route, and a blank recovery is refused.
 
 {{panel:gasvalue-route-explorer}}
 

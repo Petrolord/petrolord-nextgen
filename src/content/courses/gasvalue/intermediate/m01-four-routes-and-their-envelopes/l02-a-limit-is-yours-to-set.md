@@ -6,7 +6,7 @@ A route's envelope is a list of requirements. Each one has a direction and a uni
 
 ## The envelopes as the engine exports them
 
-ROUTE_TEMPLATES carries eleven requirements across the four routes. Every limit column reads null:
+ROUTE_TEMPLATES carries its requirements across the four routes, one row each. Every limit column reads null:
 
 | route id | requirement | direction | unit | limit |
 | --- | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ Every limit ships unset (null): the envelope is the study's to fill. The engine'
 
 ## Two requirements carry their own notes
 
-Two of the eleven rows carry a note of their own in the templates.
+The templates carry notes on two requirements.
 
 On Mini LNG's Maximum CO2 before treatment: "CO2 freezes in a liquefaction train and must be removed first. The limit is the licensor's."
 
@@ -68,4 +68,4 @@ One refusal sits in front of every screen. Asked to screen a gas the analysis re
 
 ## Exercise
 
-Read the EGBEMA limits table beside the eleven template rows. Name the one requirement the study left unset and the route it belongs to. Then read the studio's opening verdict table and say what all four routes report when every limit is unset, quoting the sentence about an unset limit.
+Read the EGBEMA limits table beside the template rows. Name the one requirement the study left unset and the route it belongs to. Then read the studio's opening verdict table and say what all four routes report when every limit is unset, quoting the sentence about an unset limit.

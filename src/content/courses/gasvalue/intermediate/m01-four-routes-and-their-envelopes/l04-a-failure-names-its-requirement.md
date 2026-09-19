@@ -12,7 +12,7 @@ EGBEMA's mini LNG route is the one route that fails the study's screen. Its fail
 | --- | --- | --- |
 | Mini LNG | fails | Minimum volume: 7.5000 against 10, short by 2.5000 MMscfd; Maximum CO2 before treatment: 0.0280 against 0.02, short by 0.0080 mole fraction |
 
-Two requirements are named, in the order the template carries them. Each carries its unit: the volume shortfall is 2.5000 MMscfd, and the CO2 shortfall is 0.0080 mole fraction. The check table prints the same two rows with margins of -2.5000 and -0.0080.
+Two requirements are named. Each carries its unit: the volume shortfall is 2.5000 MMscfd, and the CO2 shortfall is 0.0080 mole fraction. The check table prints the same two rows with margins of -2.5000 and -0.0080.
 
 The failures field lists only what failed. Mini LNG's third requirement, Maximum inerts, reads pass at 0.0460 against 0.06 with a margin of 0.0140, and it does not appear in the failures. The other three routes print none in the failures column: CNG and LPG pass, and gas to power fails nothing.
 

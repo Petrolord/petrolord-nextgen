@@ -242,6 +242,8 @@ The molar masses the flare's tonnes are weighed at, as the engine exports them i
 
 methaneShareOfFlareCo2e is flareCh4Tonnes times the GWP over flareCo2eTonnes.
 
+Rounding note: the engine forms CO2e from the unrounded CO2 and methane tonnages and reports each of the three to three decimals, so a printed CO2e need not equal the printed CO2 plus the printed methane times the GWP in its last decimals.
+
 THE CO2 IN THE GAS PASSES THROUGH. Two probes at EGBEMA's volume and days: a gas that is all CO2, and a gas that is all methane, each flared at EGBEMA's efficiencies.
 | probe | flareCo2Tonnes | flareCh4Tonnes |
 | --- | --- | --- |
@@ -294,6 +296,8 @@ The methane GWP is an input with no default: the assessment report it comes from
 | 20 | 204808.832 | 0.1110 |
 | 40 | 227538.640 | 0.1998 |
 
+Rounding note: the engine forms CO2e from the unrounded CO2 and methane tonnages and reports each of the three to three decimals, so a printed CO2e need not equal the printed CO2 plus the printed methane times the GWP in its last decimals.
+
 With the GWP left blank:
 | field | value |
 | --- | --- |
@@ -315,10 +319,12 @@ What abatement refuses, each probe on EGBEMA's gas with the rest of EGBEMA's par
 | combustion efficiency 0.98 above a destruction efficiency of 0.97 | REFUSED: A flare combustion efficiency must lie in (0, 1] and cannot exceed the destruction efficiency. |
 | no volume | REFUSED: A gas volume is required. |
 | on-stream days left blank ('') | REFUSED: On-stream days are required, more than 0 and no more than 366. |
+| on-stream days 0 | REFUSED: On-stream days are required, more than 0 and no more than 366. |
 | on-stream days 367 | REFUSED: On-stream days are required, more than 0 and no more than 366. |
 | a gas the analysis refused | REFUSED: A characterised gas is required. |
 
 On-stream days OMITTED from the call (not typed at all) take the stated default: scfPerYear 2625000000. Typed blank, they are refused, as the table shows.
+On-stream days typed as 366 are accepted: scfPerYear 2745000000.
 The default itself: routeEconomics, asked with the days omitted, reports onstreamDays 350, and 7.5 MMscfd times a million times 350 is the scfPerYear above.
 
 # SECTION 14: WHAT THE FLARE MODEL LEAVES OUT (owned by Associate m05)
@@ -1004,7 +1010,7 @@ HELD, taught as stated limits and never computed with:
 - Fill limits by code (NFPA 58, EN or NUPRC practice) are not shipped: the limit is a safety code value, typed by the site with its basis.
 - GWP values and credit prices are case inputs.
 
-PINNED, NOT VALIDATED: the component heating values and liquid densities, the typical LPG densities and latent heats, the DAK and Sutton coefficients, the form of the rule's equations as their variable definitions fix it, and water at 15 C for a filling density.
+PINNED AND UNVALIDATED: the component heating values and liquid densities, the typical LPG densities and latent heats, the DAK and Sutton coefficients, the form of the rule's equations as their variable definitions fix it, and water at 15 C for a filling density.
 
 What the validation oracles check, independently of the engines (oracle_flaretovalue.py and oracle_lpgcng.py): the gas in exact rationals in kilograms and cubic metres; the flare by the rule by moles, cross-checked by the rule's volumetric route; Z by bisection on reduced density with a second correlation as a plausibility check; the cascade as a mass ledger with conservation asserted; Erlang C in exact rationals on the positions wholly working; ledgers for the blend, storage, vaporizer, floats and the switch. The compressor train's thermodynamics are the Facilities engine's and are validated there; only the unit bridge is checked here.
 
@@ -1027,4 +1033,4 @@ function: lpgCng, the figures above
 | IBAFO trailers required | 8 |
 | IBAFO bus simple payback, years | 0.3137 |
 
-# Refusals printed in this digest, each asserted against the engine before it was printed: 56.
+# Refusals printed in this digest, each asserted against the engine before it was printed: 57.

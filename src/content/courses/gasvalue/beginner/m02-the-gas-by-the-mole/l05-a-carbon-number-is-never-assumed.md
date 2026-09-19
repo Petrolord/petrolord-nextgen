@@ -15,7 +15,7 @@ A hydrocarbon typed without a carbon number takes it from the reference by its c
 
 The two rows read the same, 1.2000 and 1.2000. The code C3 finds propane's row in the reference table, and that row carries 3 carbon per molecule. The blank is filled from a known code.
 
-Both counts read 1.2000 in each row because the probe gas carries no CO2, so there is no gap between them.
+Set the two columns beside the carbon lesson in this module: for EGBEMA, OGUTA and the studio's opening gas, carbonPerMol minus hydrocarbonCarbonPerMol is the CO2 mole fraction. The probe gas is methane 0.9 and propane 0.1.
 
 ## An unknown code is refused
 
@@ -35,7 +35,7 @@ characteriseGas refuses three other analyses, each in its own words:
 | a blank mole fraction (methane typed as '') | REFUSED: Every component needs a mole fraction. |
 | every mole fraction zero | REFUSED: The gas composition sums to nothing. |
 
-Read the first probe closely. It types methane 1.1 and ethane -0.1, and the engine refuses the sheet on the ethane: a mole fraction cannot be negative.
+Read the first probe closely. It types methane 1.1 and ethane -0.1, and the engine refuses the sheet: a mole fraction cannot be negative.
 
 The second probe types methane as a blank. The engine refuses it with its own sentence, every component needs a mole fraction, and that sentence differs from the one for a sheet of zeros.
 

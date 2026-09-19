@@ -43,7 +43,7 @@ The GWP is blank too. Module five read what a blank GWP does on EGBEMA's flare: 
 
 ## What the opening state teaches
 
-The studio's opening gas is a complete answer to the first of characteriseGas's questions: what is in this gas, and how much liquid could it give. It is not yet an answer to abatement's: what the flare emits. That answer needs a destruction efficiency from the case, and its CO2e needs a GWP, and the studio opens with both blank.
+The opening gas table carries characteriseGas's figures. The course's table of questions gives characteriseGas this one: what is in this gas, and how much liquid could it give. It gives abatement another: what does the flare emit, and what does recovering it abate. On the opening parcel abatement refuses, because the studio opens with the efficiencies blank, and the CO2e needs a GWP, which the studio also opens blank.
 
 ## Reading it in the explorer
 

@@ -271,7 +271,7 @@ q(0, "Which on-stream days does abatement accept?",
  ["367",
   "0",
   "blank ('')"],
- "EGBEMA's 355 days are answered, scfPerYear 2662500000. The refusal states the range, more than 0 and no more than 366, and 367 and a blank are both refused in the digest's table.")
+ "EGBEMA's 355 days are answered, scfPerYear 2662500000. The refusal states the range, more than 0 and no more than 366, and 0, 367 and a blank are all refused in the digest's table.")
 
 q(0, "Which of these does the digest state as a limit of the flare model?",
  "An unlit flare is not modelled.",

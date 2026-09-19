@@ -411,6 +411,8 @@ row('combustionEfficiency', inp(efl.combustionEfficiency));
 out('');
 out('methaneShareOfFlareCo2e is flareCh4Tonnes times the GWP over flareCo2eTonnes.');
 out('');
+out('Rounding note: the engine forms CO2e from the unrounded CO2 and methane tonnages and reports each of the three to three decimals, so a printed CO2e need not equal the printed CO2 plus the printed methane times the GWP in its last decimals.');
+out('');
 out('THE CO2 IN THE GAS PASSES THROUGH. Two probes at EGBEMA\'s volume and days: a gas that is all CO2, and a gas that is all methane, each flared at EGBEMA\'s efficiencies.');
 const pureCo2 = must(F.abatement({ gas: gasOf([['CO2', 1]], 'pure CO2'), ...P }), 'pure CO2 flare');
 const pureCo2Low = must(F.abatement({ gas: gasOf([['CO2', 1]], 'pure CO2'), ...P, flareDestructionEfficiency: 0.5, flareCombustionEfficiency: 0.5 }), 'pure CO2 flare low');
@@ -465,6 +467,8 @@ for (const gwp of [P.gwpMethane, 20, 40]) {
   const r = must(F.abatement({ gas: eg, ...P, gwpMethane: gwp }), 'gwp sweep');
   row(inp(gwp), t3(r.flareCo2eTonnes), fx(r.methaneShareOfFlareCo2e));
 }
+out('');
+out('Rounding note: the engine forms CO2e from the unrounded CO2 and methane tonnages and reports each of the three to three decimals, so a printed CO2e need not equal the printed CO2 plus the printed methane times the GWP in its last decimals.');
 const noGwp = must(F.abatement({ gas: eg, ...P, gwpMethane: '' }), 'no gwp');
 out('');
 out('With the GWP left blank:');
@@ -486,11 +490,15 @@ row('destruction efficiency 1.2', refused(F.abatement({ gas: eg, ...P, flareDest
 row('combustion efficiency 0.98 above a destruction efficiency of 0.97', refused(F.abatement({ gas: eg, ...P, flareCombustionEfficiency: 0.98 }), 'etaC > etaD'));
 row('no volume', refused(F.abatement({ gas: eg, ...P, volumeMMscfd: '' }), 'no volume'));
 row('on-stream days left blank (\'\')', refused(F.abatement({ gas: eg, ...P, onstreamDays: '' }), 'blank days'));
+row('on-stream days 0', refused(F.abatement({ gas: eg, ...P, onstreamDays: 0 }), 'days 0'));
 row('on-stream days 367', refused(F.abatement({ gas: eg, ...P, onstreamDays: 367 }), 'days > 366'));
 row('a gas the analysis refused', refused(F.abatement({ gas: F.characteriseGas({ components: comps([['C1', '']]) }), ...P }), 'no gas'));
 out('');
 const omitted = must(F.abatement({ gas: eg, volumeMMscfd: P.volumeMMscfd, flareDestructionEfficiency: P.flareDestructionEfficiency, gwpMethane: P.gwpMethane }), 'days omitted');
 out(`On-stream days OMITTED from the call (not typed at all) take the stated default: scfPerYear ${inp(omitted.scfPerYear)}. Typed blank, they are refused, as the table shows.`);
+const days366 = must(F.abatement({ gas: eg, ...P, onstreamDays: 366 }), 'days 366');
+claim(days366.scfPerYear === P.volumeMMscfd * 1e6 * 366, 'the edge of the refusal, 366 days, is accepted');
+out(`On-stream days typed as 366 are accepted: scfPerYear ${inp(days366.scfPerYear)}.`);
 const daysDefault = must(F.routeEconomics({ route: template('cng'), gas: eg, volumeMMscfd: P.volumeMMscfd, ...T.EGBEMA_ROUTES.cng }), 'route days omitted').onstreamDays;
 claim(omitted.scfPerYear === P.volumeMMscfd * 1e6 * daysDefault, 'the omitted default is the days routeEconomics reports');
 out(`The default itself: routeEconomics, asked with the days omitted, reports onstreamDays ${inp(daysDefault)}, and ${inp(P.volumeMMscfd)} MMscfd times a million times ${inp(daysDefault)} is the scfPerYear above.`);
@@ -1119,7 +1127,7 @@ out('- An unlit flare is not modelled: gas sent to an unlit flare is vented, all
 out('- Fill limits by code (NFPA 58, EN or NUPRC practice) are not shipped: the limit is a safety code value, typed by the site with its basis.');
 out('- GWP values and credit prices are case inputs.');
 out('');
-out('PINNED, NOT VALIDATED: the component heating values and liquid densities, the typical LPG densities and latent heats, the DAK and Sutton coefficients, the form of the rule\'s equations as their variable definitions fix it, and water at 15 C for a filling density.');
+out('PINNED AND UNVALIDATED: the component heating values and liquid densities, the typical LPG densities and latent heats, the DAK and Sutton coefficients, the form of the rule\'s equations as their variable definitions fix it, and water at 15 C for a filling density.');
 out('');
 out('What the validation oracles check, independently of the engines (oracle_flaretovalue.py and oracle_lpgcng.py): the gas in exact rationals in kilograms and cubic metres; the flare by the rule by moles, cross-checked by the rule\'s volumetric route; Z by bisection on reduced density with a second correlation as a plausibility check; the cascade as a mass ledger with conservation asserted; Erlang C in exact rationals on the positions wholly working; ledgers for the blend, storage, vaporizer, floats and the switch. The compressor train\'s thermodynamics are the Facilities engine\'s and are validated there; only the unit bridge is checked here.');
 
