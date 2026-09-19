@@ -33,7 +33,7 @@ Every cost in the ranking is the levelised cost from module one: the capital ann
 
 ## How the rank is checked
 
-SECTION 26 names what recomputes the curve. The oracle for carbonAbatement builds the curve "by explicit rank", a second route to the same order, and its goldens are asserted by the engine test suites. The rank itself is oracle-checked, and so are the costs it ranks: the same oracle levels each cost per tonne from a year-by-year present value ledger, where the engine uses a capital recovery factor. Two outputs of the curve are not: the residual to target and paysForItselfTonnes are listed in SECTION 26 as recomputed by neither oracle. Lesson four reads the second of those.
+SECTION 26 names what recomputes the curve. The oracle for carbonAbatement builds the curve "by explicit rank", and its goldens are asserted by the engine test suites. The same oracle computes the cost per tonne levelised from a year-by-year present value ledger, where the engine uses a capital recovery factor. Of the curve's totals, SECTION 26 prints that it returns totalAbatementTonnes and weightedAverageCostPerTonne, and that it sums the net annual costs only inside the weighted average and returns no netAnnualCostOfAll. Two outputs of the curve are listed in SECTION 26 as recomputed by neither oracle: the residual to target and paysForItselfTonnes. Lesson four reads the second of those.
 
 ## Exercise
 

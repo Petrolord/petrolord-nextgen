@@ -18,7 +18,7 @@ The engine prints paysForItselfTonnes 5310.000 and names the three measures whos
 
 SECTION 18 says what the flag means: a negative cost per tonne means the measure pays for itself and abates carbon as a side effect. So 5310.000 t a year of Agbor's abatement comes from measures whose savings cover their annualised capital and running cost. The other three measures, 1850.000, 2100.000 and 6200.000 t a year, carry positive costs.
 
-The Heat integration project is in the list at -14.2492 USD a tonne, with 2750000 USD of capital levelised over 15 years at 0.1. Module one read the same measure at 688.2353 USD a tonne with the whole capital set against one year. That figure is the wrong route, printed for contrast, and the engine never computes it. The list is built from the levelised costs, which is why the life and the rate on each measure matter to it.
+The Heat integration project is in the list at -14.2492 USD a tonne, with 2750000 USD of capital levelised over 15 years at 0.1. Module one read the same measure at 688.2353 USD a tonne with the whole capital set against one year. That column is marked computed here, and SECTION 18 prints that the engine refuses to compare a one-off cost with a recurring saving. The list carries the levelised figure, -14.2492.
 
 ## Two of the three share a source
 
@@ -26,7 +26,7 @@ SECTION 20's interaction table names one source: heaters, with Tune the fired he
 
 ## What no oracle recomputes
 
-SECTION 26 lists paysForItselfTonnes among the outputs recomputed by neither oracle, beside carbonIntensity, the curve's residual to target, compositeCurve and the simple payback. The digest says they are taught from the engine and never graded. The flags on each measure come from the sign of a cost per tonne that the oracle does recompute, levelised from a year-by-year present value ledger. The total of 5310.000 t is the engine's own sum and is taught as printed.
+SECTION 26 lists paysForItselfTonnes among the outputs recomputed by neither oracle, beside carbonIntensity, the curve's residual to target, compositeCurve and the simple payback. The digest says they are taught from the engine and never graded. SECTION 18 prints what the flag reads: "A negative cost per tonne means the measure pays for itself". The cost per tonne is not on SECTION 26's list of outputs neither oracle recomputes. paysForItselfTonnes is on it, so 5310.000 t is taught as the engine prints it.
 
 ## Reading the list against the tonnes
 

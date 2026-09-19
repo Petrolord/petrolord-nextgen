@@ -171,7 +171,8 @@ const heaterAt = (o2, basis = EE.HEATING_VALUE_BASIS.LHV, over = {}) => {
 };
 const isCur = heaterAt(H.currentO2Percent); const isTgt = heaterAt(H.targetO2Percent);
 const isCurH = heaterAt(H.currentO2Percent, EE.HEATING_VALUE_BASIS.HHV); const isTgtH = heaterAt(H.targetO2Percent, EE.HEATING_VALUE_BASIS.HHV);
-const H2O_KG = isCur.moistureKgPerKmolFuel / isSt.products.h2oPerKmolFuel;
+// The engine's moisture figure sits on its exported water molar mass (SECTION 25 H2 quotes the export).
+if ((isCur.moistureKgPerKmolFuel / isSt.products.h2oPerKmolFuel).toFixed(3) !== EE.PRODUCT_MOLAR_MASS.H2O.toFixed(3)) throw new Error('the moisture figure no longer sits on PRODUCT_MOLAR_MASS.H2O');
 const isSave = EE.excessAirSaving({ current: isCur, target: isTgt, minimumSafeO2Percent: H.minimumSafeO2Percent, targetO2Percent: H.targetO2Percent, annualFuelEnergyGJ: H.annualFuelEnergyGJ });
 
 const costOf = (m, r = F.AGBOR_DISCOUNT_RATE) => CA.abatementCost({ ...m, discountRate: r });
@@ -309,7 +310,8 @@ out('');
 section('CARBON IN, CO2 OUT: THE ATOM BALANCE AND ITS MOLAR MASSES', ['carbonAbatement.combustionCo2FromCarbon']);
 {
   const one = CA.combustionCo2FromCarbon({ fuelKmolPerYear: 1000, carbonPerKmolFuel: 1, destructionEfficiencyFraction: 1 });
-  out(`The engine's molar masses come from the IUPAC conventional atomic weights: MW_C ${CA.MW_C}, MW_CO2 ${CA.MW_CO2} (${CA.MW_C} plus two oxygens at ${((CA.MW_CO2 - CA.MW_C) / 2).toFixed(3)}), MW_CH4 ${CA.MW_CH4} (${CA.MW_C} plus four hydrogens at ${((CA.MW_CH4 - CA.MW_C) / 4).toFixed(3)}). The oxygen and hydrogen weights are read back from the engine's own molar masses (computed here).`);
+  out(`The engine's molar masses come from the IUPAC conventional atomic weights: MW_C ${CA.MW_C}, MW_CO2 ${CA.MW_CO2} (${CA.MW_C} plus two oxygens at ${((CA.MW_CO2 - CA.MW_C) / 2).toFixed(3)}), MW_CH4 ${CA.MW_CH4} (${CA.MW_C} plus four hydrogens at ${((CA.MW_CH4 - CA.MW_C) / 4).toFixed(3)}). The two weights are the O and the H of energyEfficiency.ATOMIC_WEIGHT (SECTION 1), O ${EE.ATOMIC_WEIGHT.O} and H ${EE.ATOMIC_WEIGHT.H}; carbonAbatement exports its three molar masses and no atomic weight.`);
+  if (((CA.MW_CO2 - CA.MW_C) / 2).toFixed(3) !== EE.ATOMIC_WEIGHT.O.toFixed(3) || ((CA.MW_CH4 - CA.MW_C) / 4).toFixed(3) !== EE.ATOMIC_WEIGHT.H.toFixed(3)) throw new Error('SECTION 3: the molar masses no longer sit on ATOMIC_WEIGHT');
   out('');
   out(`The engine's method, verbatim: "${one.method}"`);
   out('');
@@ -855,7 +857,7 @@ section('THE COST OF A TONNE ABATED', ['carbonAbatement.abatementCost']);
   out('');
   out('The capital recovery factor is r(1 + r)^n / ((1 + r)^n - 1). At a rate of 0 it is 1/n, straight line. The net annual cost is the annualised capital plus the annual cost less the annual savings; the cost per tonne is that over the tonnes abated a year.');
   out('');
-  out('The same measures at a rate of 0 (straight line), and with the whole capital set against one year (computed here from the inputs; the engine refuses to compare a one-off cost with a recurring saving):');
+  out('The same measures at a rate of 0 (straight line), and with the whole capital set against one year. The first column is the engine\'s own cost per tonne, called at a rate of 0. Only the second column is computed here from the inputs; the engine refuses to compare a one-off cost with a recurring saving:');
   head('measure', 'cost per tonne at rate 0 USD', 'capital against one year USD per tonne (computed here)');
   F.AGBOR_MEASURES.forEach((m) => {
     const z = costOf(m, 0);
@@ -1078,7 +1080,7 @@ section('WHAT IS HELD, AND THE MD5-0 AND MD45-1 RULES IN FORCE');
   out('HELD, taught as stated limits and never graded (FINDINGS-carbon):');
   head('item', 'the limit');
   row('H1', 'Which IPCC assessment report a Nigerian operator files on (AR5 or AR6) is a regulatory reading and the owner\'s decision. The engine ships no GWP; the course prints both reports (SECTION 6).');
-  row('H2', `The engine's typical methane heating values are ${ref('CH4').typicalLhvMJKmol} LHV and ${ref('CH4').typicalHhvMJKmol} HHV MJ per kmol, a difference of ${(ref('CH4').typicalHhvMJKmol - ref('CH4').typicalLhvMJKmol).toFixed(1)} (computed here); two moles of water condensed at the engine's own latent heat is ${(2 * H2O_KG * EE.PROPERTY_REFERENCE.waterLatentHeatKJkg.typical / 1000).toFixed(3)} MJ (computed here: 2 x ${H2O_KG.toFixed(3)} kg, the engine's water molar mass read back from its moisture figure, x ${EE.PROPERTY_REFERENCE.waterLatentHeatKJkg.typical} kJ/kg). The pair is labelled typical and is not corrected without ISO 6976 in hand; the fuel analysis governs.`);
+  row('H2', `The engine's typical methane heating values are ${ref('CH4').typicalLhvMJKmol} LHV and ${ref('CH4').typicalHhvMJKmol} HHV MJ per kmol, a difference of ${(ref('CH4').typicalHhvMJKmol - ref('CH4').typicalLhvMJKmol).toFixed(1)} (computed here); two moles of water condensed at the engine's own latent heat is ${(2 * EE.PRODUCT_MOLAR_MASS.H2O * EE.PROPERTY_REFERENCE.waterLatentHeatKJkg.typical / 1000).toFixed(3)} MJ (computed here: 2 x ${EE.PRODUCT_MOLAR_MASS.H2O.toFixed(3)} kg, the H2O of energyEfficiency.PRODUCT_MOLAR_MASS (SECTION 1), x ${EE.PROPERTY_REFERENCE.waterLatentHeatKJkg.typical} kJ/kg). The pair is labelled typical and is not corrected without ISO 6976 in hand; the fuel analysis governs.`);
   row('H3', 'Every escaped carbon atom is counted as methane (SECTION 5).');
   row('H4', 'Combustion N2O is not computed by the atom balance; it needs an emission factor line (SECTION 3).');
   row('inputs', 'GWP values, emission factors and every price are inputs. Neither engine ships one.');
@@ -1126,6 +1128,7 @@ section('WHAT THE ORACLES CHECK');
   row('oracle_energyefficiency.py', 'combustion as a species ledger whose mass balance must close; excess air by BISECTION where the engine solves a closed form; efficiency as a loss ledger; the tuning saving as a duty ledger (duty_ledger, exported since MD45-1); the steam trap as an ISENTROPIC NOZZLE with its throat at the larger of the downstream and critical pressures, where the engine uses the choked and subsonic flux formulas; the pinch by the LARGEST HEAT DEFICIT with no cascade; a levelised cost per tonne');
   out('');
   out('Not recomputed by either oracle: carbonIntensity, the curve\'s residual to target and paysForItselfTonnes, compositeCurve and the simple payback. They are taught from the engine and never graded.');
+  out('Of the curve\'s totals, oracle_carbonabatement.py returns totalAbatementTonnes and weightedAverageCostPerTonne. It sums the net annual costs only inside the weighted average and returns no netAnnualCostOfAll, so neither oracle recomputes that total on its own.');
   out('');
   out(`This digest: ${answeredCount} engine answers asserted and ${refusedCount} refusals asserted before printing.`);
 }

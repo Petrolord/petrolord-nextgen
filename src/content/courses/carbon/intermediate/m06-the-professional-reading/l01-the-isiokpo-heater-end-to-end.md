@@ -45,7 +45,7 @@ SECTION 14 takes the two LHV efficiencies, holds the target against a declared f
 | fuelSavingPercent | 1.6445 |
 | annualEnergySavedGJ | 6742.370 |
 
-The digest prints the percentage-point shortcut beside it as a wrong route shown for contrast: 5923.008 GJ a year, 819.363 GJ below the engine's saving. The engine returns only the ratio. On HHV, SECTION 14 prints a saving fraction of 0.0164763814 computed from the two HHV efficiencies, and no annual HHV figure; the 410000 GJ it prints is stated on LHV.
+The digest prints the percentage-point shortcut beside it, computed here from the engine's efficiencies: 5923.008 GJ a year, 819.363 GJ below the engine's saving. The engine returns only the ratio. On HHV, SECTION 14 prints a saving fraction of 0.0164763814 computed from the two HHV efficiencies, and no annual HHV figure; the 410000 GJ it prints is stated on LHV.
 
 ## The boxes along the way
 

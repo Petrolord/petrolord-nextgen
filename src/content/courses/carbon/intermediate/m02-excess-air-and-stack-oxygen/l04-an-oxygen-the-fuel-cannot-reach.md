@@ -12,7 +12,7 @@ The last row the engine answers is the reading of 12 percent:
 | --- | --- | --- | --- | --- |
 | 12 | 121.0076 | 22.046948 | 21.070448 | 23.103448 |
 
-At 12 percent the invented Isiokpo fuel is burning in 22.046948 kmol of air per kmol of fuel, against the 9.975652 of the stoichiometric case. The engine still answers, and SECTION 12 prints the answer.
+At 12 percent the invented Isiokpo fuel is burning in 22.046948 kmol of air per kmol of fuel, against the 9.975652 of the 0 row, excess air 0.0000 percent. The engine still answers, and SECTION 12 prints the answer.
 
 ## Readings the engine refuses
 
@@ -32,7 +32,7 @@ A reading of 21 percent and a reading of -1 percent get the same message. The me
 
 ## Missing inputs stay missing
 
-The last two refusals are about boxes left empty. A blank oxygen reading is refused with its own message: a measured dry stack oxygen is required. The engine does not read a blank as 0 percent, which would be the stoichiometric case of lesson one and a heater with no excess air at all.
+The last two refusals are about boxes left empty. A blank oxygen reading is refused with its own message: a measured dry stack oxygen is required. The engine does not read a blank as 0 percent, the 0 row of lesson one, excess air 0.0000 percent.
 
 The other refusal is for a call with no stoichiometry. The relation of lesson two needs the oxygen demand, the stoichiometric air and the dry products of module one, and without them there is nothing to solve.
 

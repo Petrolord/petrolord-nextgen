@@ -28,7 +28,7 @@ A heater at complete combustion makes one gas. Type a lower destruction efficien
 | 0.999 | 23098.327 | 8.429 |
 | 0.995 | 23005.841 | 42.143 |
 
-At 0.999 the heaters emit 23098.327 t of CO2 and 8.429 t of methane. At 0.995 they emit 23005.841 t of CO2 and 42.143 t of methane. The carbon that stops leaving as CO2 leaves as methane instead, and the methane is in tonnes of methane until a GWP set converts it.
+At 0.999 the heaters emit 23098.327 t of CO2 and 8.429 t of methane. At 0.995 they emit 23005.841 t of CO2 and 42.143 t of methane. The carbon that stops leaving as CO2 leaves as methane instead, and the methane column is in tonnes of methane.
 
 The rule is the same one the 1000 kmol table showed. The carbon in is fixed by the fuel and its analysis. The destruction efficiency divides it between the two routes.
 

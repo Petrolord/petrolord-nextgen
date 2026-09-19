@@ -14,7 +14,7 @@ The atom balance counts carbon in kilomoles, and an inventory reports tonnes. Th
 
 The engine's molar masses come from the IUPAC conventional atomic weights. Carbon is 12.011. Carbon dioxide is one carbon and two oxygens. Methane is one carbon and four hydrogens.
 
-The oxygen weight of 15.999 and the hydrogen weight of 1.008 in that table are read back from the engine's own molar masses. They are the digest's arithmetic on the engine's constants, and they show how each constant is built. The engine itself exports the three molar masses and no atomic weight for oxygen or hydrogen.
+The oxygen weight of 15.999 and the hydrogen weight of 1.008 in that table are the O and the H of energyEfficiency.ATOMIC_WEIGHT, the atomic weights the efficiency module exports, and they show how each constant is built. carbonAbatement itself exports the three molar masses and no atomic weight.
 
 ## From kilomoles to tonnes
 

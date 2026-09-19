@@ -37,7 +37,7 @@ That is the movement the blank-rate refusal names. On the curve of the next modu
 
 ## Which rate is right
 
-The rate is an input, and this course grades no choice of rate. The digest computes every Agbor cost at 0.1 and prints the straight-line column beside it for contrast. What the engine requires is that the rate be stated, and stated as a fraction. A measure with a capital of 0 typed needs no life and no rate (SECTION 19).
+The rate is an input, and this course grades no choice of rate. The digest computes every Agbor cost at 0.1 and prints beside it the straight-line column, the engine's cost per tonne at a rate of 0. What the engine requires is that the rate be stated, and stated as a fraction. A measure with a capital of 0 typed needs no life and no rate (SECTION 19).
 
 ## Exercise
 

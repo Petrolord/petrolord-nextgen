@@ -31,7 +31,7 @@ A partial inventory is not refused. It is a number, and its reportable status is
 
 ## Reading a zero gap
 
-A final gap of 0.000 t looks like a target met. On the partial baseline it is a gap measured against a target of 31578.593 t in 2033, a target built on an inventory that does not count Agbor's purchased electricity. On the full baseline, with every line computed and the inventory reportable, the same measures leave 1370.083 t unabated in 2033.
+A final gap of 0.000 t looks like a target met. On the partial baseline it is a gap measured against a target of 31578.593 t in 2033, a target built on an inventory that does not count Agbor's purchased electricity. On the full baseline, 56100.276 tCO2e, the same measures leave 1370.083 t unabated in 2033.
 
 The first shortfall year reads 2027 on both baselines. The partial baseline hides the final gap and does not hide the early one. This module's last lesson reads that year.
 

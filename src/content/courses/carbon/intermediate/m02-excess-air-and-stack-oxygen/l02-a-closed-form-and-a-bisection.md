@@ -10,7 +10,7 @@ SECTION 12 states the relation in words. With E the excess-air fraction, E times
 
 E x (oxygen demand) / (stoichiometric dry products + E x stoichiometric air) = measured dry O2 fraction
 
-Every term but E is a figure the learner has already met. The oxygen demand is o2PerKmolFuel, 2.089500 kmol O2 per kmol of the invented Isiokpo fuel (SECTION 11). The stoichiometric air is stoichAirPerKmolFuel, 9.975652 kmol air per kmol fuel (SECTION 11). The stoichiometric dry products are the dry flue gas at no excess air, which the first row of SECTION 12 prints as 8.999152 kmol per kmol fuel. The measured fraction is the analyser's dry oxygen reading.
+Three of the terms beside E are figures the learner has already met. The oxygen demand is o2PerKmolFuel, 2.089500 kmol O2 per kmol of the invented Isiokpo fuel (SECTION 11). The stoichiometric air is stoichAirPerKmolFuel, 9.975652 kmol air per kmol fuel (SECTION 11). The measured fraction is the analyser's dry oxygen reading. The fourth, the stoichiometric dry products, is a term the relation names; the digest prints no figure under that name.
 
 Read the relation as it is written. On the top, E multiplies the oxygen demand. On the bottom, E multiplies the stoichiometric air and is added to the dry products. E is the only unknown, and it appears on both sides of the fraction bar. The measured fraction is a dry fraction, which is why the bottom carries dry products and leaves the water of module one out.
 

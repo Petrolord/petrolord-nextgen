@@ -11,7 +11,7 @@ The two modules export constants, and it is worth reading what those constants a
 | carbonAbatement.MW_CH4 | 16.043 |
 | carbonAbatement.SCOPE | ONE 1, TWO 2 |
 
-energyEfficiency exports air and oxygen constants, a list of heating value bases (LHV and HHV), a fuel reference table and a table of typical stack properties.
+energyEfficiency exports eleven constants: air and oxygen constants, a list of heating value bases (LHV and HHV), a fuel reference table and its note, a table of typical stack properties, ATOMIC_WEIGHT (the atomic weights of C, H, O, N and S), PRODUCT_MOLAR_MASS (the flue gas products) and ATMOSPHERE_BAR_A (one standard atmosphere).
 
 What neither module exports is stated just as plainly: neither module exports an emission factor or a global warming potential. The held items list says it again for the whole course: "GWP values, emission factors and every price are inputs. Neither engine ships one."
 

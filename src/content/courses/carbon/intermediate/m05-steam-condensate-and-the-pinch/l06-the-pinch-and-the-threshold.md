@@ -24,7 +24,7 @@ SECTION 17 prints the Isiokpo pinch at all three approaches:
 | 15 | 25.950 | 240.150 | 118.000 | 103.000 |
 | 20 | 59.700 | 273.900 | 118.000 | 98.000 |
 
-The pinch on the hot side prints 118.000 C at every approach. The cold side prints 108.000, 103.000 and 98.000 C. Both utilities print higher at each wider approach in the table.
+The pinch on the hot side prints 118.000 C at every approach. The cold side prints 108.000, 103.000 and 98.000 C. The hot utility prints 1.800, 25.950 and 59.700 kW at approaches of 10, 15 and 20 C.
 
 ## A zero at the end is a threshold
 

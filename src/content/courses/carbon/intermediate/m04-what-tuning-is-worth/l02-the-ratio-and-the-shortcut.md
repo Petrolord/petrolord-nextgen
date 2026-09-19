@@ -25,7 +25,7 @@ Both rows apply to the same 410000 GJ of fuel a year on LHV, invented for this c
 
 ## Which figure is the answer
 
-The engine's figure is the answer. The shortcut is printed as a wrong route shown for contrast, and this course never presents it as a saving. The engine's own sentence gives its direction: subtracting the percentages understates the saving. At Isiokpo the understatement is the 819.363 GJ a year the digest prints.
+The engine's figure is the answer. The shortcut is computed here from the engine's efficiencies, and the digest prints that the engine does not return it. The engine's own sentence gives its direction: subtracting the percentages understates the saving. At Isiokpo the understatement is the 819.363 GJ a year the digest prints.
 
 The trap is quiet. The shortcut's figure is a plausible number with the right units and the right sign. Nothing about 5923.008 GJ a year announces that it is wrong. The only defence is to know which quantity sits on the bottom of the ratio, and the engine's method names it.
 

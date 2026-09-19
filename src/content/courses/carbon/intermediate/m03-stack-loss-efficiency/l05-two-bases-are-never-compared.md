@@ -21,7 +21,7 @@ SECTION 13 shows the first claim directly:
 | current, 5.5 percent O2 | HHV | 77.9288 |
 | target, 2.8 percent O2 | HHV | 79.2343 |
 
-At the current reading the heater is 86.4029 percent on LHV and 77.9288 percent on HHV. The digest prints the gap between them as a difference of 8.4741 percentage points, computed from the engine's figures. That gap is no loss the heater suffers and no gain a tuning could win. It is the two bases disagreeing about how much heat the fuel supplied, for a heater that did not change.
+At the current reading the heater is 86.4029 percent on LHV and 77.9288 percent on HHV. The digest prints the gap between them as a difference of 8.4741 percentage points, computed from the engine's figures. Both figures belong to one heater at one reading; only the basis differs.
 
 ## The comparisons that are allowed
 

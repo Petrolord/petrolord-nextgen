@@ -92,7 +92,7 @@ Left out of the call, the destruction efficiency takes its stated default of com
 
 Engine functions behind this section: carbonAbatement.combustionCo2FromCarbon.
 
-The engine's molar masses come from the IUPAC conventional atomic weights: MW_C 12.011, MW_CO2 44.009 (12.011 plus two oxygens at 15.999), MW_CH4 16.043 (12.011 plus four hydrogens at 1.008). The oxygen and hydrogen weights are read back from the engine's own molar masses (computed here).
+The engine's molar masses come from the IUPAC conventional atomic weights: MW_C 12.011, MW_CO2 44.009 (12.011 plus two oxygens at 15.999), MW_CH4 16.043 (12.011 plus four hydrogens at 1.008). The two weights are the O and the H of energyEfficiency.ATOMIC_WEIGHT (SECTION 1), O 15.999 and H 1.008; carbonAbatement exports its three molar masses and no atomic weight.
 
 The engine's method, verbatim: "Atom balance: carbon in equals CO2 out. This is conservation of mass, so it needs no source document."
 
@@ -636,7 +636,7 @@ Six Agbor measures (every figure invented, US dollars), annualised at a discount
 
 The capital recovery factor is r(1 + r)^n / ((1 + r)^n - 1). At a rate of 0 it is 1/n, straight line. The net annual cost is the annualised capital plus the annual cost less the annual savings; the cost per tonne is that over the tonnes abated a year.
 
-The same measures at a rate of 0 (straight line), and with the whole capital set against one year (computed here from the inputs; the engine refuses to compare a one-off cost with a recurring saving):
+The same measures at a rate of 0 (straight line), and with the whole capital set against one year. The first column is the engine's own cost per tonne, called at a rate of 0. Only the second column is computed here from the inputs; the engine refuses to compare a one-off cost with a recurring saving:
 | measure | cost per tonne at rate 0 USD | capital against one year USD per tonne (computed here) |
 | --- | --- | --- |
 | Tune the fired heaters | -168.9474 | -150.0000 |
@@ -859,7 +859,7 @@ HELD, taught as stated limits and never graded (FINDINGS-carbon):
 | item | the limit |
 | --- | --- |
 | H1 | Which IPCC assessment report a Nigerian operator files on (AR5 or AR6) is a regulatory reading and the owner's decision. The engine ships no GWP; the course prints both reports (SECTION 6). |
-| H2 | The engine's typical methane heating values are 802.6 LHV and 890.8 HHV MJ per kmol, a difference of 88.2 (computed here); two moles of water condensed at the engine's own latent heat is 87.985 MJ (computed here: 2 x 18.015 kg, the engine's water molar mass read back from its moisture figure, x 2442 kJ/kg). The pair is labelled typical and is not corrected without ISO 6976 in hand; the fuel analysis governs. |
+| H2 | The engine's typical methane heating values are 802.6 LHV and 890.8 HHV MJ per kmol, a difference of 88.2 (computed here); two moles of water condensed at the engine's own latent heat is 87.985 MJ (computed here: 2 x 18.015 kg, the H2O of energyEfficiency.PRODUCT_MOLAR_MASS (SECTION 1), x 2442 kJ/kg). The pair is labelled typical and is not corrected without ISO 6976 in hand; the fuel analysis governs. |
 | H3 | Every escaped carbon atom is counted as methane (SECTION 5). |
 | H4 | Combustion N2O is not computed by the atom balance; it needs an emission factor line (SECTION 3). |
 | inputs | GWP values, emission factors and every price are inputs. Neither engine ships one. |
@@ -908,5 +908,6 @@ Two independent oracles in the engines repository (tools/validation/downstream) 
 | oracle_energyefficiency.py | combustion as a species ledger whose mass balance must close; excess air by BISECTION where the engine solves a closed form; efficiency as a loss ledger; the tuning saving as a duty ledger (duty_ledger, exported since MD45-1); the steam trap as an ISENTROPIC NOZZLE with its throat at the larger of the downstream and critical pressures, where the engine uses the choked and subsonic flux formulas; the pinch by the LARGEST HEAT DEFICIT with no cascade; a levelised cost per tonne |
 
 Not recomputed by either oracle: carbonIntensity, the curve's residual to target and paysForItselfTonnes, compositeCurve and the simple payback. They are taught from the engine and never graded.
+Of the curve's totals, oracle_carbonabatement.py returns totalAbatementTonnes and weightedAverageCostPerTonne. It sums the net annual costs only inside the weighted average and returns no netAnnualCostOfAll, so neither oracle recomputes that total on its own.
 
 This digest: 73 engine answers asserted and 60 refusals asserted before printing.

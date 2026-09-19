@@ -37,7 +37,7 @@ SECTION 14 prints the saving at four targets, every one at or above the declared
 | 3.5 | 87.5160 | 1.2718 | 5214.422 |
 | 4.5 | 86.9933 | 0.6786 | 2782.362 |
 
-Every row starts from the same current state, 5.5 percent oxygen and 86.4029 percent on LHV, with 410000 GJ of fuel a year. The row at 2.0 percent sits on the floor itself and prints the largest saving in the table, 8337.934 GJ a year. The course's case, 2.8 percent, prints 6742.370 GJ a year.
+Every row starts from the same current state, 5.5 percent oxygen and 86.4029 percent on LHV, with 410000 GJ of fuel a year. The row at 2.0 percent sits on the floor itself and prints 8337.934 GJ a year. The Isiokpo target, 2.8 percent, prints 6742.370 GJ a year.
 
 The table stops at the floor. The engine prints no saving for a target below 2 percent at this burner, because it refuses to compute one. Whatever such a target might appear to be worth, it is a figure the engine will not produce until the floor is re-declared after a combustion test.
 

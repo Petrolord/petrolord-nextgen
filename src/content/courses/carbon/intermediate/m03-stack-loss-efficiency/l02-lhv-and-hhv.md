@@ -16,7 +16,7 @@ SECTION 1 prints a typical LHV and a typical HHV for every burning row of FUEL_R
 | C4H10 | 2657.3 | 2877.5 |
 | H2 | 241.8 | 285.8 |
 
-The two inert rows, CO2 and N2, carry 0 on both bases. On every burning row the HHV column prints the higher figure. The engine's moisture notes, which lesson three reads in full, name the reason: HHV counts the latent heat of the water made from hydrogen as available and LHV never counted it.
+The two inert rows, CO2 and N2, carry 0 on both bases. Methane, for one, prints 802.6 LHV and 890.8 HHV. The engine's moisture notes, which lesson three reads in full, name the reason: HHV counts the latent heat of the water made from hydrogen as available and LHV never counted it.
 
 The note attached to the whole table governs how these figures are used, verbatim: "Atom counts are definitional and drive the stoichiometry. Heating values are typical: the fuel analysis governs, and a measured value should replace these."
 

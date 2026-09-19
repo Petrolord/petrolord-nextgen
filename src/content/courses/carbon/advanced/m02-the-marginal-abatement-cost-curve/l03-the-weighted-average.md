@@ -1,6 +1,6 @@
 # The weighted average
 
-A curve of six measures can be summarised by one cost per tonne, and there are two ways to take it. SECTION 20 prints the one the engine returns, the weighted average, and computes the other for contrast. Every AGBOR figure here is invented for this course, and the money is in US dollars.
+A curve of six measures can be summarised by one cost per tonne, and there are two ways to take it. SECTION 20 prints the one the engine returns, the weighted average, and computes the other, the plain mean, marked computed here. Every AGBOR figure here is invented for this course, and the money is in US dollars.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -18,11 +18,11 @@ SECTION 20 defines it: the weighted average is the net annual cost of all the me
 
 Each measure's net annual cost is printed in SECTION 18: -127251.65, -179904.83, -48447.11, 484221.51, 96300.31 and 65525.62 USD. The net annual cost of all is their sum. The digest carries a rounding note on it: the six figures as printed sum to 290443.85 USD, and the engine sums the net annual costs it holds to four decimals, which gives 290443.84 USD. Quote 290443.84 USD, which is the engine's figure. The one-cent difference is rounding in the printed rows.
 
-## The plain mean, for contrast
+## The plain mean, computed here
 
-SECTION 20 also computes the plain mean of the six costs per tonne: -29.7913 USD. The digest says what is wrong with it: it weights a small measure the same as a large one. Tune the fired heaters counts once at -167.4364 USD a tonne on its 760.000 t, and Flare gas recovery counts once at 78.1002 USD a tonne on its 6200.000 t.
+SECTION 20 also computes the plain mean of the six costs per tonne: -29.7913 USD. SECTION 20 prints it with one clause: "which weights a small measure the same as a large one." Tune the fired heaters counts once at -167.4364 USD a tonne on its 760.000 t, and Flare gas recovery counts once at 78.1002 USD a tonne on its 6200.000 t.
 
-The two summaries carry different signs. The weighted average is 18.7868 USD a tonne and the plain mean is -29.7913 USD a tonne. The plain mean is computed here by the digest and the engine does not return it. It is never an answer.
+The two summaries carry different signs. The weighted average is 18.7868 USD a tonne and the plain mean is -29.7913 USD a tonne. The plain mean is computed here by the digest, and no engine output in SECTION 20 carries it.
 
 ## Why the weights are tonnes
 

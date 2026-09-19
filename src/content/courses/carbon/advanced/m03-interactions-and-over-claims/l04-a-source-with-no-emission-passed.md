@@ -37,7 +37,7 @@ SECTION 21 then passes every source the inventory computes: power, 10988.000 tCO
 
 Read the second and third rows as a pair. They share the claim, 9400 t, the total, 18660.000 t, the target, 16830.083 t, and a verdict of none. They differ in one input, whether the flare's emission reached the curve, and in the basis. With the emission passed, the claim is checked and named as an over-claim. Without it, the claim is unchecked, and the basis names the flare.
 
-An empty over-claims column is therefore read with the source ids beside it. It speaks only for the sources that were passed.
+An empty over-claims column is therefore read with the basis beside it. SECTION 21 prints the rule: "Where a claim acts on a source whose emission is not passed, it cannot be checked, the verdict is none and the basis names the source."
 
 ## Exercise
 

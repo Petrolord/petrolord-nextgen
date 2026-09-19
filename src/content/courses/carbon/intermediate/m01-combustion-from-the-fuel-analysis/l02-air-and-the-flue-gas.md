@@ -36,7 +36,7 @@ SECTION 12 prints the flue gas at a range of dry stack oxygen readings. Its firs
 | --- | --- | --- | --- | --- |
 | 0 | 0.0000 | 9.975652 | 8.999152 | 11.032152 |
 
-The actual air in that row is 9.975652, the same figure SECTION 11 prints as stoichAirPerKmolFuel, and the excess air is 0.0000 percent. A stack reading no oxygen at all is the stoichiometric case.
+The actual air in that row is 9.975652, the same figure SECTION 11 prints as stoichAirPerKmolFuel, and the excess air is 0.0000 percent. That is the 0 row: a stack reading of no oxygen at all, excess air 0.0000 percent.
 
 Two flue gas figures appear in the row, one dry and one wet, and every row of SECTION 12 carries both. SECTION 12 prints the relation between them: the wet flue gas less the dry is the water the hydrogen makes, 2.033000 in every row, which is products.h2oPerKmolFuel. In practice, a stack oxygen analyser reads on the dry basis. The digest also prints the air's nitrogen leaving as products.airN2PerKmolFuel 7.886152 kmol per kmol fuel, a figure lesson four returns to, because what the engine calls nitrogen there carries more than nitrogen.
 

@@ -125,7 +125,7 @@
   "kit-digestprose": {
    "file": "/root/dc-wavekit/digestprose.mjs",
    "md5": "97dda85819e61737a76d8caf5badb46d",
-   "result": "exit 0: [digestprose] /root/et-wip-carbon/digest.txt: 912 line(s), 26 section title(s) and 20 in-body marker(s) swept against their blocks, 32 history framings, 109 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+   "result": "exit 0: [digestprose] /root/et-wip-carbon/digest.txt: 913 line(s), 26 section title(s) and 20 in-body marker(s) swept against their blocks, 32 history framings, 109 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
   },
   "kit-digestfigures": {
    "file": "/root/dc-wavekit/digestfigures.py",
@@ -197,7 +197,7 @@
   "kit-sourceprose": {
    "file": "/root/dc-wavekit/sourceprose.mjs",
    "md5": "c370c51a0af6d3f8098ae859fb28ae1e",
-   "result": "exit 0: [sourceprose] 4 source file(s), 201 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
+   "result": "exit 0: [sourceprose] 4 source file(s), 202 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
   }
  }
 }

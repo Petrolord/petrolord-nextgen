@@ -15,7 +15,7 @@ SECTION 1 prints the constants energyEfficiency uses for air:
 | O2_MOLAR_MASS | 31.998 |
 | ATMOSPHERIC_N2_MOLAR_MASS | 28.1610 |
 
-The fourth is marked differently from the other three. SECTION 1 says it is printed to four decimals and derived by the engine from the three air constants above it, and prints the formula: (AIR_MOLAR_MASS - O2_MOLE_FRACTION_DRY_AIR x O2_MOLAR_MASS) / (1 - O2_MOLE_FRACTION_DRY_AIR). It is no value typed into the module. It is what is left of air once its oxygen is accounted for.
+The fourth is marked differently from the other three. SECTION 1 says it is printed to four decimals and derived by the engine from the three air constants above it, and prints the formula: (AIR_MOLAR_MASS - O2_MOLE_FRACTION_DRY_AIR x O2_MOLAR_MASS) / (1 - O2_MOLE_FRACTION_DRY_AIR). It is no value typed into the module. SECTION 11 names what it carries: "the air's non-oxygen part".
 
 In practice, dry air carries argon and small amounts of other gases beside its oxygen and nitrogen, and a combustion calculation has to decide where those gases go.
 

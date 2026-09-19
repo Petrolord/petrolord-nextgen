@@ -71,4 +71,4 @@ The discharge coefficient, 0.72 at Isiokpo, is required because it depends on th
 
 ## Exercise
 
-Read the SECTION 15 downstream table and the engine's choked-flow note. Say which rows are choked, what the kg an hour column does across those rows, and what it does in the rows where choked is false. Then say what that means for a trap blowing into a condensate header at 5 bar a and at 8 bar a.
+Read the SECTION 15 downstream table and the engine's choked-flow note. Say which rows are choked, what the kg an hour column does across those rows, and what it does in the rows where choked is false. Then say what that means for a trap at a downstream pressure of 5 bar a and of 8 bar a.

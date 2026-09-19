@@ -10,7 +10,7 @@ SECTION 1 names the two apps and the engines behind them. The Carbon Footprint &
 
 That sentence is the hand-off. The Associate tier read carbonAbatement as an inventory. This tier read energyEfficiency as a heater, a trap, a condensate system and a pinch. The Expert tier reads the two together: a saving computed by the efficiency engine, priced by the abatement engine's cost per tonne.
 
-SECTION 1 lists the functions the Expert tier opens. From carbonAbatement: abatementCost, abatementCurve and decarbonisationPath. From energyEfficiency: priceSaving and energyIntensity. The Professional tier has used none of them.
+SECTION 1 also lists functions that no section of this tier names. From carbonAbatement: abatementCost, abatementCurve and decarbonisationPath. From energyEfficiency: priceSaving and energyIntensity. Each section that prints one of them as an engine function behind it is headed as owned by an Expert module.
 
 ## A new record
 
@@ -18,11 +18,11 @@ The Expert tier works on the third record the digest describes: Agbor, a gas pro
 
 ## The same rules, in a new unit
 
-The rules of this tier travel. SECTION 25 lists, among the rules in force, two that the Expert tier applies to a saving: "The cost per tonne of a saving is the levelised abatementCost, and needs a life and a rate", and "A saving, its price and its factor declared on different heating value bases are refused".
+SECTION 25 lists, among the rules in force, two about a saving: "The cost per tonne of a saving is the levelised abatementCost, and needs a life and a rate", and "A saving, its price and its factor declared on different heating value bases are refused".
 
-The second is this tier's basis rule carried one step further. Module three read the refusal that stops an LHV efficiency being set against an HHV one. Module four's saving came out on LHV because its efficiencies and its fuel figure were on LHV. The Expert tier multiplies a saving by a price and by an emission factor, and the rule says all three must be declared on one basis.
+Both rows point at SECTION 23, and this lesson quotes them and reads no further. The same table lists rules that point at this tier's own sections, among them "A target oxygen is required and checked against the declared floor" (SECTION 14) and "A trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year" (SECTION 15). Its MD45-1 table adds "A heating value basis other than LHV or HHV is refused; the basis is read without regard to case" (SECTION 13).
 
-The first is this tier's refusal to fill a blank carried into money. A radiation loss, a safe oxygen floor, an exponent and a boiler efficiency were each asked for and never assumed. The Expert tier asks for a life and a rate in the same way.
+Module three read the refusal that stops an LHV efficiency being set against an HHV one, and module four's saving prints on LHV: annualEnergySavedGJ 6742.370.
 
 ## What stays behind
 
@@ -30,4 +30,4 @@ The combustion, the stack losses, the trap, the condensate and the pinch are thi
 
 ## Exercise
 
-Read SECTION 1's sentence on the two studios and the two SECTION 25 rules quoted above. Say which engine computes a saving and which one prices it per tonne, which Professional tier rule the basis rule extends, and which inputs the Expert tier asks for before it will annualise a cost.
+Read SECTION 1's sentence on the two studios and the two SECTION 25 rules quoted above. Say which function the efficiency studio's cost per tonne is, which section the two saving rules point at, and which inputs the first of them says a cost per tonne of a saving needs.

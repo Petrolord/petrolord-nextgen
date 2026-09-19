@@ -30,15 +30,15 @@ Because it is the same function, the cost per tonne of a saving follows the rule
 | costPerTonne USD | -74.2270 |
 | paysForItself | true |
 
-With no life and no rate, the call does not refuse. It returns costPerTonneCo2e none with this costPerTonneNote: "A cost per tonne needs the measure life and a discount rate, to annualise the implementation cost against a yearly saving." The money and the carbon are still returned.
+With no life and no rate, the call does not refuse. It returns costPerTonneCo2e none with this costPerTonneNote: "A cost per tonne needs the measure life and a discount rate, to annualise the implementation cost against a yearly saving."
 
-## The wrong route, printed for contrast
+## A figure marked computed here
 
-SECTION 23 also sets the whole implementation cost against one year's value and one year's tonnes, computed here by the digest: 183.5403 USD a tonne. That is the trap of module one's last lesson. The engine does not compute it, and it is never an answer. Levelised over 8 years at 0.1, the same saving prints -74.2270 USD a tonne.
+SECTION 23 also sets the whole implementation cost against one year's value and one year's tonnes, computed here by the digest: 183.5403 USD a tonne. It is marked computed here, as SECTION 18 marks its one-year column. Levelised over 8 years at 0.1, the same saving prints -74.2270 USD a tonne.
 
-## Checked by a second route
+## What SECTION 26 says of it
 
-SECTION 26 says the energyEfficiency oracle computes "a levelised cost per tonne", and the carbonAbatement oracle levels the cost per tonne from a year-by-year present value ledger where the engine uses a capital recovery factor. The saving's cost per tonne is an output the oracles recompute.
+SECTION 26 says the energyEfficiency oracle computes "a levelised cost per tonne", and the carbonAbatement oracle levels the cost per tonne from a year-by-year present value ledger where the engine uses a capital recovery factor. The cost per tonne is not on SECTION 26's list of outputs neither oracle recomputes.
 
 ## Reading the sign
 

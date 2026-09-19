@@ -21,7 +21,7 @@ SECTION 23 prints what the figure is: the implementation cost over one year's va
 
 SECTION 26 names what neither oracle recomputes: carbonIntensity, the curve's residual to target and paysForItselfTonnes, compositeCurve, and the simple payback. They are taught from the engine and never graded. So 2.372881 years is the engine's figure, taught here as printed, and it carries no second route behind it.
 
-The cost per tonne beside it is different. SECTION 26 says the energyEfficiency oracle computes a levelised cost per tonne, and the carbonAbatement oracle levels the cost per tonne from a year-by-year present value ledger. The -74.2270 USD a tonne is recomputed by another route. The 2.372881 years is not.
+The cost per tonne beside it is not on that list. SECTION 26 says the energyEfficiency oracle computes a levelised cost per tonne, and the carbonAbatement oracle levels the cost per tonne from a year-by-year present value ledger. The simple payback is on the list of outputs neither oracle recomputes, and the cost per tonne is not.
 
 ## Two figures in two units
 
@@ -29,7 +29,7 @@ The simple payback is in years. The cost per tonne is in US dollars a tonne of C
 
 ## What the payback is not
 
-The simple payback is not the cost per tonne, and it is not the one-year figure of the last lesson. SECTION 23 computes that figure, 183.5403 USD a tonne, by setting the whole implementation cost against one year's value and one year's tonnes, and prints it only for contrast. It is in US dollars a tonne and it is the wrong route. The simple payback, 2.372881, is in years and it is the engine's own output.
+The simple payback is not the cost per tonne, and it is not the one-year figure of the last lesson. SECTION 23 computes that figure, 183.5403 USD a tonne, by setting the whole implementation cost against one year's value and one year's tonnes, and marks it computed here. It is in US dollars a tonne. The simple payback, 2.372881, is in years and it is the engine's own output.
 
 ## Scope
 

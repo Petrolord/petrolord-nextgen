@@ -45,7 +45,7 @@ At 15 C the heat flow is zero at shifted 110.500 C, inside the range, which make
 
 ## Three kinds of answer
 
-The three records show three ways the engine handles what it was not given.
+The three calls show three ways the engine handles what it was not given.
 
 It refuses. A trap with no exponent, a condensate system with no boiler efficiency, a problem table with no minimum approach: no answer prints.
 
@@ -57,4 +57,4 @@ SECTION 25 lists the trap's rule and the two pinch rules among those in force: a
 
 ## Exercise
 
-Read the three records of this lesson. For each, name one box the engine refuses when blank. For the trap and the condensate system, name one figure the engine still reports when a different box is blank. Then say what the engine attaches to the condensate total of 121403.28 USD, and what the digest's zero at shifted 110.500 C lets the engine name.
+Read the three calls of this lesson. For each, name one box the engine refuses when blank. For the trap and the condensate system, name one figure the engine still reports when a different box is blank. Then say what the engine attaches to the condensate total of 121403.28 USD, and what the digest's zero at shifted 110.500 C lets the engine name.

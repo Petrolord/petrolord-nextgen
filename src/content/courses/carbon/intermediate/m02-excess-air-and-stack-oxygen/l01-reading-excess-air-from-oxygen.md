@@ -19,7 +19,7 @@ The function takes a measured dry stack oxygen and the stoichiometry of module o
 | 8 | 55.7461 | 15.536691 | 14.560191 | 16.593191 |
 | 12 | 121.0076 | 22.046948 | 21.070448 | 23.103448 |
 
-Every row is one call. The oxygen column is the input, and the other four columns are what the engine derives from it and from the fuel. The first row is the stoichiometric case of lesson two: no oxygen in the stack, excess air 0.0000 percent and actual air equal to stoichAirPerKmolFuel, 9.975652.
+Every row is one call. The oxygen column is the input, and the other four columns are what the engine derives from it and from the fuel. The first row is the 0 row of lesson two: no oxygen in the stack, excess air 0.0000 percent and actual air equal to stoichAirPerKmolFuel, 9.975652.
 
 ## Reading a row
 

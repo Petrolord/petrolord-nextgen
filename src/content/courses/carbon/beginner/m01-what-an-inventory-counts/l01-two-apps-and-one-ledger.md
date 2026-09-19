@@ -8,14 +8,14 @@ Each module exports its rules as functions and its fixed data as constants. The 
 
 | module | exported functions | exported constants |
 | --- | --- | --- |
-| carbonAbatement | 9 | 4 |
-| energyEfficiency | 10 | 8 |
+| carbonAbatement | 10 | 4 |
+| energyEfficiency | 10 | 11 |
 
-The carbonAbatement functions are abatementCost, abatementCurve, buildInventory, carbonIntensity, combustionCo2FromCarbon, decarbonisationPath, emissionLine, makeFactor and makeGwpSet. Its four constants are MW_C, MW_CH4, MW_CO2 and SCOPE. The Associate tier works with the inventory side of that list: combustionCo2FromCarbon for burned carbon, makeGwpSet for the global warming potentials, makeFactor and emissionLine for each line, buildInventory for the totals and carbonIntensity for a figure per unit of output.
+The carbonAbatement functions are abatementCost, abatementCurve, atomBalanceLines, buildInventory, carbonIntensity, combustionCo2FromCarbon, decarbonisationPath, emissionLine, makeFactor and makeGwpSet. Its four constants are MW_C, MW_CH4, MW_CO2 and SCOPE. The Associate tier works with the inventory side of that list: combustionCo2FromCarbon for burned carbon, atomBalanceLines to hand a combustion to the inventory as lines, makeGwpSet for the global warming potentials, makeFactor and emissionLine for each line, buildInventory for the totals and carbonIntensity for a figure per unit of output.
 
 ## Where the two apps meet
 
-The two apps are separate pages, and they share one ledger. The Energy & Utilities Efficiency Studio prices a saving in carbon as well as in money, and its cost per tonne is carbonAbatement.abatementCost, called from inside energyEfficiency.priceSaving. The function that costs a tonne saved by an efficiency measure is the same function the Carbon Footprint & Abatement Studio uses. A tonne saved in either app is priced by carbonAbatement.
+The two apps are separate pages. The Energy & Utilities Efficiency Studio prices a saving in carbon as well as in money, and the digest prints where its cost per tonne comes from: it "is carbonAbatement.abatementCost called from inside energyEfficiency.priceSaving." The function that costs a tonne saved by an efficiency measure is carbonAbatement's own abatementCost, a function of the module the Carbon Footprint & Abatement Studio calls.
 
 ## Three invented records
 
@@ -41,4 +41,4 @@ In practice, a real inventory replaces every invented input with a measured or d
 
 Read the module table and the sentence about priceSaving. Say what the relationship between the two apps shows about where a tonne of CO2e is counted and priced.
 
-Self check: carbonAbatement exports 9 functions and 4 constants and energyEfficiency exports 10 functions and 8 constants, so the two apps run on separate modules. The efficiency app's cost per tonne is carbonAbatement.abatementCost called from inside energyEfficiency.priceSaving, so a tonne saved in either app is priced by the one carbonAbatement function.
+Self check: carbonAbatement exports 10 functions and 4 constants and energyEfficiency exports 10 functions and 11 constants. The Carbon Footprint & Abatement Studio calls carbonAbatement and the Energy & Utilities Efficiency Studio calls energyEfficiency, and the efficiency app's cost per tonne is carbonAbatement.abatementCost called from inside energyEfficiency.priceSaving: the cost of a tonne saved by an efficiency measure comes from the carbonAbatement function.

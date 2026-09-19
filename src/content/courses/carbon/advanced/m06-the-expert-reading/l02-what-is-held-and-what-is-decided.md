@@ -9,12 +9,12 @@ Every engine carries decisions and limits. SECTION 25 separates them. Four items
 | item | the limit |
 | --- | --- |
 | H1 | Which IPCC assessment report a Nigerian operator files on (AR5 or AR6) is a regulatory reading and the owner's decision. The engine ships no GWP; the course prints both reports (SECTION 6). |
-| H2 | The engine's typical methane heating values are 802.6 LHV and 890.8 HHV MJ per kmol, a difference of 88.2 (computed here); two moles of water condensed at the engine's own latent heat is 87.985 MJ (computed here: 2 x 18.015 kg, the engine's water molar mass read back from its moisture figure, x 2442 kJ/kg). The pair is labelled typical and is not corrected without ISO 6976 in hand; the fuel analysis governs. |
+| H2 | The engine's typical methane heating values are 802.6 LHV and 890.8 HHV MJ per kmol, a difference of 88.2 (computed here); two moles of water condensed at the engine's own latent heat is 87.985 MJ (computed here: 2 x 18.015 kg, the H2O of energyEfficiency.PRODUCT_MOLAR_MASS (SECTION 1), x 2442 kJ/kg). The pair is labelled typical and is not corrected without ISO 6976 in hand; the fuel analysis governs. |
 | H3 | Every escaped carbon atom is counted as methane (SECTION 5). |
 | H4 | Combustion N2O is not computed by the atom balance; it needs an emission factor line (SECTION 3). |
 | inputs | GWP values, emission factors and every price are inputs. Neither engine ships one. |
 
-Each held item is a limit a reader states. H1 is not answered here: this course computes every inventory on IPCC AR6 GWP100, fossil methane, prints the other sets beside it, and names no report an operator should file on. H2's two figures, 88.2 and 87.985, are both marked computed here and are not engine outputs. H3 is the engine's stated and conservative assumption. H4 names a gas the atom balance does not count.
+Each held item is a limit a reader states. H1 is not answered here: this course computes every inventory on IPCC AR6 GWP100, fossil methane, prints the other sets beside it, and names no report an operator should file on. H2's two figures, 88.2 and 87.985, are both marked computed here and are not engine outputs. H3 is, in SECTION 5's words, "the engine's stated and conservative assumption". H4 names a gas the atom balance does not count.
 
 The inputs row is the one this tier leans on most. Every cost, saving, rate, life and tonne on the Agbor measures is an input the user types. The engine prices what it is given.
 

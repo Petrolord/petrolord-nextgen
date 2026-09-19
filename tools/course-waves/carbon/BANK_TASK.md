@@ -74,9 +74,9 @@ and a distractor quickly.
   invented figures and the stem says it is invented; every GWP is named with
   its set.
 
-## Held items and the MD5-0 rules
+## Held items and the MD5-0 and MD45-1 rules
 
-The rules in SECTION 25 are CURRENT RULES at f0aef14 and may be keyed like any
+The rules in SECTION 25 are CURRENT RULES at df31f53 (the f0aef14 table and the MD45-1 table, both in force) and may be keyed like any
 rule. Ask about them in the present tense; no question may be about what the
 engine used to do. H1 to H4 are limits and may be asked about as limits only:
 no question may key a "right" choice between AR5 and AR6.

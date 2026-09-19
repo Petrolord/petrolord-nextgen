@@ -33,8 +33,8 @@ The residual to target sits beside the target verdict on every SECTION 21 curve,
 
 ## Reading a figure with its status
 
-Three statuses run through this tier. An engine output an oracle recomputes is checked by a second route. An engine output no oracle recomputes is taught as printed. A figure marked computed here is the digest's own arithmetic on engine figures: the capital against one year, the plain mean, the one-year cost of a saving. The last kind is printed for contrast and is never an engine output.
+Three statuses run through this tier. An engine output an oracle recomputes is checked by a second route. An engine output no oracle recomputes is taught as printed. A figure marked computed here is the digest's own arithmetic on engine figures: the capital against one year, the plain mean, the one-year cost of a saving. The last kind is marked computed here, and no engine call returns it.
 
 ## Exercise
 
-Read SECTION 26's list of outputs neither oracle recomputes, paysForItselfTonnes on the Agbor curve, and the cost per tonne of Tune the fired heaters. Say what the list shows about the status of each figure, and which of the two is recomputed by a second route.
+Read SECTION 26's list of outputs neither oracle recomputes, paysForItselfTonnes on the Agbor curve, and the cost per tonne of Tune the fired heaters. Say what the list shows about the status of each figure, and which of the two is on that list.

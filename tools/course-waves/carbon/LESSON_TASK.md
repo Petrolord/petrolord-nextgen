@@ -182,14 +182,4 @@ in the digest you believe is wrong.
    wrong bank key and a lesson fix. Write ONLY what a digest line prints or a
    reading of a printed row, cite the section, and put domain context in one
    clearly framed sentence ("In practice, ...") that no question can key on.
-2. **F1 is being REPAIRED in the engines** (abatementCurve: a claim against a
-   source that did not compute, or was not given, leaves the target verdict
-   unassessed). SECTION 21's "met, as an upper bound" at the Carbon Studio
-   defaults will change to an unassessed verdict. Do not teach the current
-   SECTION 21 verdict as correct; write the lesson around the rule (a claim
-   the curve cannot check against its source gets no verdict) and flag the
-   exact digest lines you depend on in your hand back. F2 (basis label),
-   F3 (refused measure named), F4-F7 (negative inputs refused, condensate
-   target below current refused, choked flow tested) are repaired too: teach
-   none of those behaviours from the current digest; they will print after
-   the re-vendor.
+2. **RETIRED (engines #228 MD45-1 merged as df31f53, re-vendored, digest rebuilt):** F1 to F9 are rules in force. The digest prints them (SECTION 21 unassessed verdicts, SECTION 25 MD45-1 rules table); teach and key them as current behaviour.
