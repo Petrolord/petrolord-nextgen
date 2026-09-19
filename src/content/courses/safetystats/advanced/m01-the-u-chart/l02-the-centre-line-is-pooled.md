@@ -25,7 +25,7 @@ That is why the mean sits above the centre line on this chart. The two highest r
 
 ## What the centre line is for
 
-The centre line is the chart's statement of what an ordinary month looks like on this workforce, pooled across the year. Every limit on the chart is measured from it. The next lesson shows the limits moving with each month's units while the centre stays fixed at 2.893273. When a later lesson sets a month aside and redraws, the first thing that changes is this line, because it is recomputed from the counts and units that remain.
+The centre line is the chart's statement of what an ordinary month looks like on this workforce, pooled across the year. Every limit on the chart is measured from it. The next lesson shows the limits moving with each month's units while the centre stays at 2.893273 for every month. Change any month's count and the centre moves, and every limit with it. When a later lesson sets a month aside and redraws, the first thing that changes is this line, because it is recomputed from the counts and units that remain.
 
 A chart note that quotes only the centre line is still incomplete. It has to say which months the centre was pooled over and on which base, because both change the figure.
 

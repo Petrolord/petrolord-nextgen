@@ -11,7 +11,7 @@ EGBEMA's month 3 reads 8.227913 per 200,000 hours, the highest u on the chart. I
 
 ## Quiet is a statement about the evidence
 
-A point inside its limits means the chart cannot distinguish that month from the ordinary process at that exposure. It does not mean the month was ordinary. Month 3 had 4 events on 0.486150 units, and on that little exposure the chart would have needed a reading above 10.211920 before it could say anything. A real rise in the rate, in a month that thin, could easily stay quiet.
+A point inside its limits means the chart cannot distinguish that month from the ordinary process at that exposure. It does not mean the month was ordinary. Month 3 had 4 events on 0.486150 units, and on that little exposure the chart as drawn set its upper limit at 10.211920, far above the reading. A real rise in the rate, in a month that thin, could easily stay quiet.
 
 A quiet chart can be a chart with too little exposure per point to see anything.
 
@@ -41,4 +41,4 @@ None of this makes a quiet chart worthless. Eleven of EGBEMA's months sit inside
 
 ## Exercise
 
-Month 3 had 0.486150 units and an upper limit of 10.211920. Multiply them to find the count that would have put month 3 exactly on its limit, then find the smallest whole count that would have signalled. Compare it with the 4 events month 3 actually recorded and write one sentence on how close month 3 came, measured in events.
+Month 3 had 0.486150 units and an upper limit of 10.211920. Multiply them to find the count that would have put month 3 exactly on that printed limit, then the smallest whole count that would have signalled against it, and compare it with the 4 events month 3 recorded. Now type that count into the panel. A changed count is a new chart: it moves the pooled centre, so every limit moves, month 3's included, and the panel redraws them. Expect the redrawn chart to need one event more than your answer from the printed limit. Write one sentence on how close month 3 came, measured in events, on each reading.

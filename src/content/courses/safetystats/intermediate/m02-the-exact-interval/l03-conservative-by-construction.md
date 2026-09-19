@@ -24,11 +24,11 @@ This is a measurement of the interval the engine returns. It asks the plain ques
 
 ## Why it cannot be exactly 95
 
-A count is a whole number. At any true mean there is a finite list of counts the site could record, and each one either has an interval that covers the mean or does not. The coverage is a sum over that list, so it moves in steps as the mean changes. No interval built from a whole number count can land on exactly 95 percent at every mean. Something has to give.
+A count is a whole number. A count has no ceiling, but at any true mean only a finite set of counts has an interval that covers the mean. The coverage is the probability of that set. The set changes only when the mean crosses a limit, so the coverage jumps there and drifts smoothly between the jumps. No interval built from a whole number count can land on exactly 95 percent at every mean. Something has to give.
 
 ## What the Garwood construction chooses
 
-The exact interval is built so that the coverage never falls short. Wherever the steps land, they land at or above 0.95. At a true mean of 3.500000 the coverage is 0.990126. At 20.000000 it is 0.956795. The figure above 0.95 in each row is the price of that guarantee, and it is paid in width: a limit that covers more often than asked is a limit set further out than a perfectly tuned one would be.
+The exact interval is built so that the coverage never falls short. Wherever the jumps land, the coverage stays at or above 0.95. At a true mean of 3.500000 the coverage is 0.990126. At 20.000000 it is 0.956795. The figure above 0.95 in each row is the price of that guarantee, and it is paid in width: a limit that covers more often than asked is a limit set further out than a perfectly tuned one would be.
 
 That is what conservative means here. A reader who takes the engine's 95 percent interval gets at least what the label promises, and often a good deal more.
 

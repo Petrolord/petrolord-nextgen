@@ -28,7 +28,7 @@ That is the engine's declared choice. The alternative, reporting the mean of the
 
 ## The same gap in the IOGP figures
 
-IOGP's yearly fatal accident rates from 2020 to 2024 are 0.550271, 0.746540, 1.279566, 0.820324 and 0.769438. Their mean is 0.833228. The five year rate by sum then divide is 0.826095, and that is the figure IOGP computes. The gap is much smaller than KWALE's, because the five years' hours are far less unequal than KWALE's sites. The size of the gap depends on how unequal the hours are.
+IOGP's yearly fatal accident rates from 2020 to 2024 are 0.550271, 0.746540, 1.279566, 0.820324 and 0.769438. Their mean is 0.833228. The five year rate by sum then divide is 0.826095, and that is the figure IOGP computes. The gap is much smaller than KWALE's, because the five years' hours are far less unequal than KWALE's sites. Unequal hours alone make no gap: sites that share one rate read that rate both ways. The gap needs unequal rates as well, and it grows when a high rate sits on few hours.
 
 | year | fatalities | hours | FAR that year |
 | --- | --- | --- | --- |
@@ -44,4 +44,4 @@ A group safety report that averages its sites' rates makes this mistake on every
 
 ## Exercise
 
-Add KWALE's three site rates and divide by three, and check you reach 1.754760. Then divide 1.754760 by the pooled 0.968312 and confirm 1.812185. Finally, divide the jetty's 61480 hours by the field's 2478540 and confirm the share of 0.024805. Write one sentence explaining why that share, set against a weight of 0.333333, is the whole reason the two numbers differ.
+Add KWALE's three site rates and divide by three, and check you reach 1.754760. Then divide 1.754760 by the pooled 0.968312 and confirm 1.812185. Finally, divide the jetty's 61480 hours by the field's 2478540 and confirm the share of 0.024805. Write one sentence explaining how that share, set against a weight of 0.333333, and the jetty's high rate of 3.253090 together make the two numbers differ.

@@ -21,7 +21,7 @@ At 0.950000 half the miss is 2.5 percent, and the count upper limit is 3.6888794
 
 ## Why the lower limit is zero
 
-The lower limit asks for the mean at which zero or more events has probability alpha/2. Zero or more events has probability one at every mean, so no positive mean satisfies it, and the chi-square form agrees: with 2N degrees of freedom and N of zero, the lower quantile is zero. The engine returns 0.000000 at every confidence.
+The lower limit asks for the mean at which zero or more events has probability alpha/2. Zero or more events has probability one at every mean, so no positive mean satisfies it, and the chi-square form has nothing left to solve: with 2N degrees of freedom and N of zero there are no degrees of freedom at all. The engine short-circuits that degenerate case and returns 0 for a zero count before any quantile is taken. The engine returns 0.000000 at every confidence.
 
 ## From the count to the rate
 

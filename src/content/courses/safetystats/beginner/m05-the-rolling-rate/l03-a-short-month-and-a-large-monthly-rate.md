@@ -23,7 +23,7 @@ AKASO's month 11 was short: 18240 hours, with 1 recordable. Its own rate is 10.9
 
 Month 11 had one recordable in a small fraction of a normal month's hours. Its own rate, 10.964912, is several times higher than any other month's. That is what one event over very few hours looks like. It says little about how safe month 11 was, because one event is one event, and the same recordable in a full month such as month 2 reads 1.006289.
 
-In the rolling rate, month 11 counts for its hours. It adds 1 to the window's count and 18240 to the window's hours, and the window's rate barely notices. In the mean of the monthly rates, month 11's rate of 10.964912 enters with the weight of a full month. It is one of eleven rates averaged, and it pulls the mean up hard. That is why the mean of the monthly rates sits above the rolling rate in every window.
+In the rolling rate, month 11 counts for its hours. It adds 18240 to the window's hours, which the window barely notices, and 1 to the window's count, where that event counts like any other in the window. In the mean of the monthly rates, month 11's rate of 10.964912 enters with the weight of a full month. It is one of eleven rates averaged, and it pulls the mean up hard. That is why the mean of the monthly rates sits above the rolling rate in every window.
 
 | window | rolling rate | mean of monthly rates |
 | --- | --- | --- |

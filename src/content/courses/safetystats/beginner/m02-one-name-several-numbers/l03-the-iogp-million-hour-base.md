@@ -22,7 +22,7 @@ That is not a problem as long as each number carries its base. It becomes a prob
 
 The base is only half of what IOGP fixes. It also defines which cases go into each count. IOGP's lost time injury rate counts fatalities plus lost workday cases per million hours. Its total recordable injury rate counts fatalities, lost workday cases, restricted workday cases and medical treatment cases per million hours. So an IOGP TRIR includes fatalities in its count.
 
-The engine does not know any of this. It takes whatever count it is given and puts it over the hours on the base named. If you want a rate that can sit beside an IOGP figure, you have to count the way IOGP counts before you call the engine, and name the IOGP base when you do. UGHELLI states 0 fatalities for its year, so its recordable count is the same under either definition, but that will not hold for every site.
+The engine does not know any of this. It takes whatever count it is given and puts it over the hours on the base named. If you want a rate that can sit beside an IOGP figure, you have to count the way IOGP counts before you call the engine, and name the IOGP base when you do. UGHELLI states 0 fatalities for its year, so the fatality difference cannot change its count of 9, provided its other classes were counted the IOGP way. At a site with a fatality its own count left out, the two counts differ.
 
 ## A larger base, the same information
 

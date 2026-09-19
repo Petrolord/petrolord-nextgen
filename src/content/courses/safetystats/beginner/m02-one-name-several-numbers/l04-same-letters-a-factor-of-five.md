@@ -28,7 +28,7 @@ The refusal forces the choice into the open, and the result then carries its bas
 
 ## The definition matters too
 
-The factor of five is the whole story only when the two counts are the same. They may not be. IOGP's TRIR counts fatalities, lost workday cases, restricted workday cases and medical treatment cases per million hours. A company TRIR on the OSHA base may count differently. UGHELLI has 0 fatalities, so its count of 9 is unchanged by that difference, and dividing by 5 converts it cleanly. At a site with a fatality the conversion is a base change and a count change, and dividing by 5 alone would give the wrong answer.
+The factor of five is the whole story only when the two counts are the same. They may not be. IOGP's TRIR counts fatalities, lost workday cases, restricted workday cases and medical treatment cases per million hours. A company TRIR on the OSHA base may count differently. UGHELLI has 0 fatalities, so that difference cannot change its count of 9, and if its other classes were counted alike, multiplying the OSHA figure by 5 converts it cleanly to the IOGP base. At a site with a fatality that its own count leaves out, the conversion is a base change and a count change, and multiplying by 5 alone would give the wrong answer.
 
 Before comparing any two TRIRs, check two things: the same base, and the same definition of the count. Only then does the comparison mean anything.
 

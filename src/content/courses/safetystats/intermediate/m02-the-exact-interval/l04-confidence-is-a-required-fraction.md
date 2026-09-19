@@ -28,7 +28,7 @@ The same reasoning is behind the Associate rule that the base has no default. OS
 
 ## Why there is no default
 
-A default of 0.95 would be the most common choice, and that is the danger. A report that quotes an interval without saying its confidence invites the reader to assume one. If the engine supplied 0.95 silently, a caller who meant 0.900000 and forgot to pass it would get a wider interval labelled with nothing, and the report would carry the wrong figure with no trace of why. Requiring the value means every interval the engine returns was asked for at a confidence someone chose.
+A default of 0.95 would be the most common choice, and that is the danger. A report that quotes an interval without saying its confidence invites the reader to assume one. If the engine supplied 0.95 silently, a caller who meant 0.900000 and forgot to pass it would get a wider interval nobody asked for, and a report that never says which confidence it carries would print the wrong figure with no trace of why. Requiring the value means every interval the engine returns was asked for at a confidence someone chose.
 
 The choice matters. For a count of 7, the count upper limit is 13.148113802432 at 0.900000 and 14.422675361702 at 0.950000. Those are different claims about the same data.
 

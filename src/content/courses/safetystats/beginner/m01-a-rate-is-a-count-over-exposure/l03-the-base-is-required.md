@@ -28,7 +28,7 @@ The engine exports its three named bases as `RATE_BASES`: `OSHA_200K` is 200000,
 
 ## One exception
 
-There is exactly one rate in this engine where the base is fixed, and that is the fatal accident rate. It is always per 100,000,000 hours, and the FAR function takes no base argument at all. Module three explains why FAR alone gets this treatment. Every other rate, including the severity rate and the process safety event rate, requires the caller to name the base.
+There is exactly one rate in this engine where the base is fixed, and that is the fatal accident rate. In this engine it is always per 100,000,000 hours, and the FAR function takes no base argument at all. Module three explains why FAR alone gets this treatment. Every other rate, including the severity rate and the process safety event rate, requires the caller to name the base.
 
 ## Exercise
 

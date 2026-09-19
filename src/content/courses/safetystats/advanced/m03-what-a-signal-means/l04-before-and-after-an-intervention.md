@@ -20,7 +20,7 @@ The p-value of 1.000000 is the engine's cap. The central p-value is twice the sm
 
 ## The month set aside falls after the intervention
 
-Month 8 is the month the chart flags, and it falls after the intervention. That makes the second row a flattering comparison for the programme: removing the worst month from the after period can only improve the after rate. The rule from the revision lesson applies with extra force here. Month 8 may be set aside only if an investigation found an assignable cause for it, and that cause should have nothing to do with the intervention. If month 8's excess came from the very work the intervention changed, it belongs in the after period.
+Month 8 is the month the chart flags, and it falls after the intervention. That makes the second row a flattering comparison for the programme: removing the worst month from the after period can only improve the after rate. The rule from the revision lesson applies with extra force here. Month 8 may be set aside only if an investigation found an assignable cause for it, and that cause must be one the intervention did not produce. If month 8's excess came from the very work the intervention changed, it belongs in the after period.
 
 Without a found cause the first row is the comparison, and it shows no change.
 

@@ -26,7 +26,7 @@ A rolling rate is a pooled rate over a window. When the window covers the whole 
 
 ## Why the gap is small here
 
-On AKASO the mean of monthly rates sat far above the rolling rate, because one short month had a large rate and the weight of a full month. On the IOGP years the gap between 0.833228 and 0.826095 is much smaller. None of the five years is short. The hours run from 2544201000 in 2020 to 4158877000 in 2024, so 2024 carries more weight in the pooled figure than 2020 does, and its rate of 0.769438 is below the mean. That pulls the pooled figure a little under the mean of rates.
+On AKASO the mean of monthly rates sat far above the rolling rate, because one short month had a large rate and the weight of a full month. On the IOGP years the gap between 0.833228 and 0.826095 is much smaller. None of the five years is short. The pooled figure weights each year by its hours, where the mean gives every year a fifth. The largest pull down is 2022's high rate of 1.279566 on fewer hours than an average year. 2024's 0.769438 on the most hours adds a smaller pull, and 2020's low rate on few hours pushes back up. The net sits a little under the mean of rates.
 
 A small gap is still a gap. Quote the first figure, 0.826095, because it is the rate over every hour worked in the five years, and it is the figure IOGP itself computes. Quote the mean of rates only when you are showing why it differs.
 

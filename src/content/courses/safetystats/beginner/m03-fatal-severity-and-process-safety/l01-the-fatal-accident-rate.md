@@ -14,7 +14,7 @@ The fatal accident rate, FAR, is the number of fatalities per 100,000,000 hours 
 
 ## A very large base for a very rare event
 
-Fatalities are rare. The 2024 figure rests on 32 of them spread across more than four billion hours. On the OSHA base of 200,000 hours that rate would be a long string of zeros after the decimal point, hard to read and easy to misprint. A base of 100,000,000 hours turns it into a number near one, which a reader can hold and compare from year to year.
+Fatalities are rare. The 2024 figure rests on 32 of them spread across more than four billion hours. On the OSHA base of 200,000 hours that rate would sit well under one hundredth, awkward to read and easy to misprint. A base of 100,000,000 hours turns it into a number near one, which a reader can hold and compare from year to year.
 
 The engine's function for this rate is `fatalAccidentRate`, and it takes only two inputs: the fatalities and the exposure hours. It returns fatalities x 100,000,000 / exposureHours. The same count and hours put through the general `incidenceRate` function with a base of 100,000,000 give the same 0.769438.
 

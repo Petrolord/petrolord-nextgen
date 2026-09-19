@@ -29,7 +29,7 @@ Take each field in turn and decide which function it needs before you touch the 
 
 For the two limits on a site's rate, pass the site's count and hours on the 200,000 base at confidence 0.95. Pass the confidence as a fraction: the engine refuses 95 and says so in its own words.
 
-For the zero events crew, pass a count of 0 and its hours on the same base and confidence. The field asks for the central 95 percent upper limit, which is the engine's own output. It is not the rule of three, and the rule of three figure would sit roughly a fifth lower on any hours.
+For the zero events crew, pass a count of 0 and its hours on the same base and confidence. The field asks for the central 95 percent upper limit, which is the engine's own output. The rule of three figure would sit roughly a fifth lower on any hours, so it will not match.
 
 For the comparison, set the two groups in the order the brief gives, because the ratio and its limits depend on which group comes first. Record the lower limit, the upper limit and the central p-value the engine returns. A minlike p-value from R or scipy is a different figure and will not match.
 

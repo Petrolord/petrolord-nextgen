@@ -25,13 +25,13 @@ East recorded 6 of the 17 events against an expected share of 0.210374. The lowe
 
 ## What the p-value is
 
-A p-value is the probability, if the rates were equal, of a split at least as lopsided as the one observed. A small p-value says equal rates would rarely produce a split like this one. A large p-value says equal rates produce splits like this one often. It is never the probability that the rates are equal, and it says nothing about how large a difference might be. The rate-ratio interval answers that second question.
+The engine's central p-value is the probability, if the rates were equal, of a count at least as far out on the observed side as the one recorded, doubled to cover the other side. A small p-value says equal rates would rarely produce a split like this one. It is never the probability that the rates are equal, and it says nothing about how large a difference might be. The rate-ratio interval answers that second question.
 
 ## Why the engine calls it a convention
 
-There is more than one accepted way to turn a two-sided exact test into one number, and they do not always agree. The engine chose the central convention and declares it in its method line. The next lesson shows the other main convention, the one R and scipy use, and the lesson after that shows why the engine's choice is the one that agrees with its own interval.
+There is more than one accepted way to turn a two-sided exact test into one number. The engine chose the central convention and declares it in its method line. The next lesson shows the other main convention, the minlike one R and scipy use, which adds up every split no more likely than the observed one, and the lesson after that shows why the engine's choice is the one that agrees with its own interval.
 
-A reader who meets a p-value from this engine should know that it is central, that it is twice the smaller tail, and that it is capped at 1. With those three facts the figure can be checked by hand from the two tails. Each printed figure is rounded to six decimals on its own, so twice a printed tail can differ from the printed p-value in the last digit, as it does on ERHA; the engine doubles the unrounded tail.
+A reader who meets a p-value from this engine should know that it is central, that it is twice the smaller tail, and that it is capped at 1. With those three facts it can be checked by hand from the two tails. Each printed figure is rounded to six decimals on its own, so twice a printed tail can differ from the printed p-value in the last digit, as it does on ERHA; the engine doubles the unrounded tail.
 
 ## The threshold
 

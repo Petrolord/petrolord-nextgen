@@ -30,4 +30,4 @@ Month 8's margin is not small. Its u of 7.599326 clears its limit of 6.410039 by
 
 ## Exercise
 
-Month 8 has 2.105450 units and an upper limit of 6.410039. Multiply the two to find the count that would put month 8 exactly on its limit. Then find the largest whole number of events month 8 could have recorded without signalling, and the smallest that would signal. Check both in the panel by editing month 8's count.
+Month 8 has 2.105450 units and an upper limit of 6.410039. Multiply the two to find the count that would put month 8 exactly on its limit. Then find the largest whole number of events month 8 could have recorded without signalling, and the smallest that would signal. Check both in the panel by editing month 8's count. Each edit redraws the chart: the pooled centre and every limit move a little, so read month 8's new limit in the panel. Here your answers still hold.
