@@ -226,6 +226,11 @@ export const PANELS = {
   'compliance-register-explorer': React.lazy(() => import('@/components/course/panels/compliance/RegisterExplorer')),
   'compliance-plan-explorer': React.lazy(() => import('@/components/course/panels/compliance/PlanExplorer')),
   'compliance-readiness-explorer': React.lazy(() => import('@/components/course/panels/compliance/ReadinessExplorer')),
+
+  // refinery: Refinery Feasibility & Planning (academy module commercial_trading)
+  'refinery-screen-explorer': React.lazy(() => import('@/components/course/panels/refinery/ScreenExplorer')),
+  'refinery-plan-explorer': React.lazy(() => import('@/components/course/panels/refinery/PlanExplorer')),
+  'refinery-variance-explorer': React.lazy(() => import('@/components/course/panels/refinery/VarianceExplorer')),
 };
 
 export function resolvePanel(id) {
