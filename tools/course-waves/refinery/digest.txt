@@ -1,0 +1,651 @@
+# refinery: Refinery Feasibility & Planning. Teaching digest.
+# Precision: barrels print to two decimals, US dollars to two decimals, US dollars a barrel to four decimals, percents to two decimals, fractions to four decimals, and the screening engine's millions of US dollars to four decimals. Counts are whole numbers.
+# PERIOD START: 2027-03-01, a 31-day period. Every schedule in this digest is cascaded from this one period start, passed to the engine as that YYYY-MM-DD string; the period crosses the North American spring clock change. START YEAR: 2027, passed to every valuation. Nothing below read the machine clock, and the generator refuses to print a line from a call that did not pass them.
+# ENGINES: engines/downstream (refineryPlanning, streamModel, modularRefinery) and lib/lp/simplex at petrolord-engines 60ee266, and engines/economics/screening as NextGen vendors it (an older copy carrying the lossCarryForward option), under packages/engines.
+# CASES: OKORDIA (a modular refinery feasibility screen), ABUA (one month's refinery plan and its schedule), ODIOMA (a month's plan, its actuals and variance, and a conversion expansion valued through the screening engine). All three are invented records. Crude grade names are labels on invented yields and prices, and every price and cost in this digest is illustrative, in US dollars.
+# Built by build_digest.sh from refinery_dump.mjs and refinery_fields.mjs. Never edited by hand.
+
+# SECTION 1: WHAT THE TWO APPS COMPUTE (owned by Associate m01)
+
+Two Suite apps call these modules: the Modular Refinery Feasibility Studio (modularRefinery, and the screening engine through feasibilityEconomics) and the Refinery Planning Studio (refineryPlanning, over lib/lp/simplex and streamModel). The counts below are measured from the modules themselves.
+
+| module | exported functions | exported lists and constants | exports that read the machine clock when an argument is left out |
+| --- | --- | --- | --- |
+| refineryPlanning | 3 | 0 | cascadeToSchedule |
+| streamModel | 7 | 4 | none |
+| modularRefinery | 6 | 4 | feasibilityEconomics |
+| screening | 6 | 1 | calculateEconomics, expandQuickInputs |
+| simplex | 1 | 1 | none |
+
+The clock readers, and the argument that stops each one reading the clock: cascadeToSchedule reads it when periodStart is left out; feasibilityEconomics and calculateEconomics read the year when startYear is left out. This digest passes both every time.
+
+modularRefinery.SCALING_EXPONENT: STICK_BUILT 0.6, MODULAR 0.9
+modularRefinery.CONFIGURATIONS: topping, hydroskimming, conversion
+modularRefinery.SUPPLY_SCENARIOS: firm, tight, disrupted
+modularRefinery.LICENSING_STAGES: Licence to Establish, Licence to Construct, Licence to Operate
+streamModel.LEDGER: plan, schedule, actual
+streamModel.EVENT_TYPE: receipt, delivery, transfer, unit_run, blend, burn, flare, vent, loss
+lib/lp/simplex LP_STATUS: optimal, infeasible, unbounded, iteration_limit
+
+# SECTION 2: A BLANK BOX IS REFUSED (owned by Associate m01)
+
+feasibilityStreams on the OKORDIA plant with one input changed at a time. A money or size box left blank is refused by name, and a utilisation or an on-stream day count outside its range is refused with the range.
+
+| input changed | what the engine returns |
+| --- | --- |
+| crude cost left blank | REFUSED: "Missing crude cost. Enter 0 where the value really is zero." |
+| capital cost left blank | REFUSED: "Missing capital cost. Enter 0 where the value really is zero." |
+| capacity and fixed operating cost left blank | REFUSED: "Missing capacity, fixed operating cost. Enter 0 where the value really is zero." |
+| variable operating cost left blank | REFUSED: "Missing variable operating cost. Enter 0 where the value really is zero." |
+| utilisation typed as 90 | REFUSED: "Utilisation is a fraction between 0 and 1 (0.9 for 90 percent)." |
+| utilisation typed as -0.1 | REFUSED: "Utilisation is a fraction between 0 and 1 (0.9 for 90 percent)." |
+| on-stream days typed as 400 | REFUSED: "On-stream days must be between 1 and 366." |
+| on-stream days typed as 0 | REFUSED: "On-stream days must be between 1 and 366." |
+| utilisation typed as 0 | answered: annual throughput 0.00 bbl |
+
+scaleCapex with a blank or zero input returns no cost at all rather than a zero cost:
+| input | cost | per bpd |
+| --- | --- | --- |
+| capacity 0 | null | null |
+| reference cost blank | null | null |
+| reference capacity blank | null | null |
+
+feasibilityEconomics refuses streams that carry a refusal, and a missing rate:
+| streams refused for a blank crude cost | REFUSED: "Missing crude cost. Enter 0 where the value really is zero." |
+| tax rate left out of the call | REFUSED: "A discount rate and a tax rate are needed to value the project." |
+
+# SECTION 3: THE SCALING LAWS AND THE CROSSOVER (owned by Associate m02)
+
+OKORDIA's reference point: a vendor quotation of 64000000.00 US dollars for a 5000 bpd plant. scaleCapex computes cost = reference cost x (capacity / reference capacity) ^ exponent. scaleComparison prints both laws at each size; ratio is the modular cost over the stick-built cost.
+
+| capacity (bpd) | modular cost (0.9) | modular per bpd | stick-built cost (0.6) | stick-built per bpd | ratio | modular cheaper | the two laws equal |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1000 | 15035122.47 | 15035.12 | 24366770.42 | 24366.77 | 0.6170 | true | false |
+| 2500 | 34296750.80 | 13718.70 | 42224253.14 | 16889.70 | 0.8123 | true | false |
+| 5000 | 64000000.00 | 12800.00 | 64000000.00 | 12800.00 | 1.0000 | false | true |
+| 10000 | 119428222.92 | 11942.82 | 97005860.26 | 9700.59 | 1.2311 | false | false |
+| 20000 | 222860944.20 | 11143.05 | 147033389.44 | 7351.67 | 1.5157 | false | false |
+| 30000 | 321008180.00 | 10700.27 | 187529987.30 | 6251.00 | 1.7118 | false | false |
+
+The same quotation scaled with an exponent of 1 (cost in proportion to capacity) at 10000 bpd: 128000000.00, 12800.00 per bpd.
+The exponents are named, overridable parameters. scaleCapex defaults to the modular exponent when none is passed:
+scaleCapex at 20000 bpd with no exponent passed: cost 222860944.20, exponent 0.9.
+
+# SECTION 4: THE THREE CONFIGURATIONS AND THE PRODUCT SLATE (owned by Associate m03)
+
+| configuration | units | lpg | naphtha | gasoline | kerosene | diesel | fuelOil | loss |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Topping | Crude distillation | 0.0200 | 0.1800 | - | 0.1400 | 0.3000 | 0.3400 | 0.0200 |
+| Hydroskimming | Crude distillation, Naphtha reformer, Diesel hydrotreater | 0.0300 | - | 0.2000 | 0.1300 | 0.3200 | 0.3000 | 0.0200 |
+| Conversion | Crude distillation, Naphtha reformer, Diesel hydrotreater, Fluid catalytic cracker | 0.0500 | - | 0.3400 | 0.1200 | 0.3300 | 0.1400 | 0.0200 |
+
+OKORDIA's illustrative product prices, US dollars a barrel: lpg 52.0000, gasoline 104.0000, naphtha 74.0000, kerosene 97.0000, diesel 101.0000, fuelOil 55.0000.
+productSlate values each product at its yield times its price, per barrel of CRUDE, and carries the loss as a yield with no value:
+
+Topping:
+| product | yield fraction | price | value per barrel of crude |
+| --- | --- | --- | --- |
+| lpg | 0.0200 | 52.0000 | 1.0400 |
+| naphtha | 0.1800 | 74.0000 | 13.3200 |
+| kerosene | 0.1400 | 97.0000 | 13.5800 |
+| diesel | 0.3000 | 101.0000 | 30.3000 |
+| fuelOil | 0.3400 | 55.0000 | 18.7000 |
+gross value per barrel of crude 76.9400; yields total 1.0000; yields close true; unpriced: none
+
+Hydroskimming:
+| product | yield fraction | price | value per barrel of crude |
+| --- | --- | --- | --- |
+| lpg | 0.0300 | 52.0000 | 1.5600 |
+| gasoline | 0.2000 | 104.0000 | 20.8000 |
+| kerosene | 0.1300 | 97.0000 | 12.6100 |
+| diesel | 0.3200 | 101.0000 | 32.3200 |
+| fuelOil | 0.3000 | 55.0000 | 16.5000 |
+gross value per barrel of crude 83.7900; yields total 1.0000; yields close true; unpriced: none
+
+Conversion:
+| product | yield fraction | price | value per barrel of crude |
+| --- | --- | --- | --- |
+| lpg | 0.0500 | 52.0000 | 2.6000 |
+| gasoline | 0.3400 | 104.0000 | 35.3600 |
+| kerosene | 0.1200 | 97.0000 | 11.6400 |
+| diesel | 0.3300 | 101.0000 | 33.3300 |
+| fuelOil | 0.1400 | 55.0000 | 7.7000 |
+gross value per barrel of crude 90.6300; yields total 1.0000; yields close true; unpriced: none
+
+Topping with the naphtha price left blank: gross value 63.6200; unpriced: naphtha. The unpriced product is named and adds nothing to the value.
+Hydroskimming yields typed as lpg 0.0300, gasoline 0.1900, kerosene 0.1300, diesel 0.3100, fuelOil 0.2900, loss 0.0200: yields total 0.9700; yields close false; gross value 81.1900. The engine reports the gap and does not normalise the yields.
+
+# SECTION 5: THROUGHPUT, THE GROSS MARGIN AND THE ANNUAL STREAMS (owned by Associate m04)
+
+OKORDIA: hydroskimming, 5000 bpd, 330 on-stream days, firm supply (utilisation 0.9200, crude premium 0.0000), crude 76.0000 a barrel, fixed operating cost 7500000.00 a year, variable operating cost 3.2000 a barrel, 2 construction years, 20 operating years.
+
+capital (modular law at the reference point): 64000000.00; capital per bpd 12800.00
+annual throughput = capacity x on-stream days x utilisation: 1518000.00 bbl
+gross value per barrel of crude 83.7900; gross margin per barrel = gross value - crude cost - variable operating cost: 4.5900
+The gross margin per barrel leaves the fixed operating cost out; the fixed cost is a yearly figure in the streams.
+
+| year | producing | crude run (bbl) | revenue | crude cost | fixed opex | variable opex | capex |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | false | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 32000000.00 |
+| 1 | false | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 32000000.00 |
+| 2 | true | 1518000.00 | 127193220.00 | 115368000.00 | 7500000.00 | 4857600.00 | 0.00 |
+| 3 | true | 1518000.00 | 127193220.00 | 115368000.00 | 7500000.00 | 4857600.00 | 0.00 |
+| 21 | true | 1518000.00 | 127193220.00 | 115368000.00 | 7500000.00 | 4857600.00 | 0.00 |
+years in the streams: 22 (construction years plus operating years)
+
+The same plant at utilisation 1 (nameplate every on-stream day): annual throughput 1650000.00 bbl.
+With no construction period the capital is spent in year 0, the first operating year: year 0 capex 64000000.00, year 0 crude run 1518000.00 bbl, years in the streams 20.
+With three construction years the capital is spread evenly: 21333333.33, 21333333.33, 21333333.33.
+
+# SECTION 6: CRUDE SUPPLY SCENARIOS (owned by Associate m05)
+
+SUPPLY_SCENARIOS, as the engine exports them. They are named futures and carry no probability:
+| id | name | utilisation | crude premium ($/bbl) | note |
+| --- | --- | --- | --- | --- |
+| firm | Firm supply | 0.9200 | 0.0000 | "A term contract that is honoured, at the market price." |
+| tight | Tight supply | 0.7500 | 3.0000 | "Cargoes are available but contested: the plant runs below nameplate and pays up for barrels." |
+| disrupted | Disrupted supply | 0.5000 | 6.0000 | "Interruptions are routine. Half the nameplate and a hard premium, which is where most of these projects are actually decided." |
+
+OKORDIA under each scenario. The premium is added to the crude cost before the streams are built, and the utilisation replaces the plant's:
+| scenario | crude cost with premium | annual throughput (bbl) | gross margin per bbl | first operating year revenue | first operating year crude cost |
+| --- | --- | --- | --- | --- | --- |
+| firm | 76.0000 | 1518000.00 | 4.5900 | 127193220.00 | 115368000.00 |
+| tight | 79.0000 | 1237500.00 | 1.5900 | 103690125.00 | 97762500.00 |
+| disrupted | 82.0000 | 825000.00 | -1.4100 | 69126750.00 | 67650000.00 |
+
+# SECTION 7: THE LICENSING SEQUENCE (owned by Associate m05)
+
+LICENSING_STAGES, in order. The app tracks where a project has got to; it is a process aid and the regulator's current requirements govern.
+| stage | id | name | typical evidence |
+| --- | --- | --- | --- |
+| 1 | lte | Licence to Establish | Feasibility study; Site title or lease; Evidence of funding; Environmental impact assessment scoping |
+| 2 | ltc | Licence to Construct | Detailed engineering design; Approved environmental impact assessment; Construction HSE plan; Financing close |
+| 3 | lto | Licence to Operate | Mechanical completion and commissioning records; Pre-startup safety review; Operating and emergency procedures; Product quality assurance |
+
+| completed ids | complete count | next stage | out of order |
+| --- | --- | --- | --- |
+| (none) | 0 | Licence to Establish | false |
+| lte | 1 | Licence to Construct | false |
+| ltc | 1 | Licence to Establish | true |
+| lte, ltc | 2 | Licence to Operate | false |
+| lte, ltc, lto | 3 | null | false |
+
+# SECTION 8: THE OKORDIA SCREEN IN ONE TABLE (owned by Associate m06)
+
+OKORDIA at 5000 bpd, capital 64000000.00 (modular law), every configuration under every supply scenario, OKORDIA's prices and costs:
+| configuration | scenario | gross value per bbl | annual throughput (bbl) | gross margin per bbl | first operating year revenue |
+| --- | --- | --- | --- | --- | --- |
+| topping | firm | 76.9400 | 1518000.00 | -2.2600 | 116794920.00 |
+| topping | tight | 76.9400 | 1237500.00 | -5.2600 | 95213250.00 |
+| topping | disrupted | 76.9400 | 825000.00 | -8.2600 | 63475500.00 |
+| hydroskimming | firm | 83.7900 | 1518000.00 | 4.5900 | 127193220.00 |
+| hydroskimming | tight | 83.7900 | 1237500.00 | 1.5900 | 103690125.00 |
+| hydroskimming | disrupted | 83.7900 | 825000.00 | -1.4100 | 69126750.00 |
+| conversion | firm | 90.6300 | 1518000.00 | 11.4300 | 137576340.00 |
+| conversion | tight | 90.6300 | 1237500.00 | 8.4300 | 112154625.00 |
+| conversion | disrupted | 90.6300 | 825000.00 | 5.4300 | 74769750.00 |
+
+# SECTION 9: THE ABUA CONFIGURATION, AND BLANK LIMITS AGAINST TYPED ZEROS (owned by Professional m01)
+
+ABUA, Abua Coastal Refining Ltd: one month's plan. Yields are volume fractions, and a unit's throughput consumes one barrel of its feed stream for each barrel it runs. A unit with no feed is the crude unit.
+
+| crude | cost ($/bbl) | available (bbl) | naphtha yield | reformate yield | kero yield | gasoil yield | ulsd yield | residue yield | offgas yield |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Bonny Light (illustrative) | 81.3000 | 1500000.00 | 0.2300 | - | 0.1500 | 0.3100 | - | 0.2800 | 0.0300 |
+| Forcados (illustrative) | 77.6000 | 1100000.00 | 0.1600 | - | 0.1300 | 0.3400 | - | 0.3500 | 0.0200 |
+| Brass River (illustrative) | 80.4000 | 600000.00 | 0.2600 | - | 0.1600 | 0.2900 | - | 0.2600 | 0.0300 |
+
+| unit | capacity (bbl) | operating cost ($/bbl) | feed | yields |
+| --- | --- | --- | --- | --- |
+| Crude distillation | 2600000.00 | 1.2500 | (none: the crude unit) | (the crude yields) |
+| Naphtha reformer | 420000.00 | 2.9000 | naphtha | reformate 0.8500, offgas 0.1000 |
+| Diesel hydrotreater | 650000.00 | 1.8000 | gasoil | ulsd 0.9700, offgas 0.0200 |
+
+| product | price ($/bbl) | floor (bbl) | ceiling (bbl) | recipe |
+| --- | --- | --- | --- | --- |
+| Gasoline | 111.0000 | 0.00 | 450000.00 | reformate 1.0000 |
+| Naphtha export | 72.5000 | 0.00 | 200000.00 | naphtha 1.0000 |
+| Jet A-1 | 105.5000 | 0.00 | 380000.00 | kero 1.0000 |
+| Diesel (ULSD) | 104.8000 | 0.00 | 750000.00 | ulsd 1.0000 |
+| Gasoil export | 89.5000 | 0.00 | 250000.00 | gasoil 1.0000 |
+| Fuel oil | 59.0000 | 0.00 | 1000000.00 | residue 1.0000 |
+
+A limit left blank is no limit; a limit typed as 0 is a limit of zero. The diesel hydrotreater three ways:
+| hydrotreater capacity | hydrotreater throughput (bbl) | hydrotreater capacity the plan reports | crude run (bbl) | margin |
+| --- | --- | --- | --- | --- |
+| 650000.00 (as typed) | 650000.00 | 650000.00 | 2029032.26 | 7077935.48 |
+| 0 (typed as shut) | 0.00 | 0.00 | 735294.12 | 424264.71 |
+| blank | 666608.70 | no limit | 2082608.70 | 7173508.35 |
+The plan reports the capacity of a unit left blank as the number Infinity, which is what "no limit" means to the solver.
+utilisation the plan reports for a unit with a blank capacity: null; for a unit typed as 0: null. A utilisation needs a finite capacity above zero.
+
+# SECTION 10: REFUSALS, INFEASIBLE AND UNBOUNDED PLANS (owned by Professional m01 and m03)
+
+planRefinery refuses an input it cannot trust and names it. A plan with no answer says so in its status. Each row changes the ABUA configuration as described:
+
+| change | status | what the engine returns |
+| --- | --- | --- |
+| the Forcados cost left blank | invalid | REFUSED: "Missing the cost of Forcados (illustrative). Enter 0 where the value really is zero." |
+| the reformer operating cost and the jet price left blank | invalid | REFUSED: "Missing the operating cost of Naphtha reformer, the price of Jet A-1. Enter 0 where the value really is zero." |
+| the reformer capacity typed as -1 | invalid | REFUSED: "Naphtha reformer capacity must be zero or more; leave it blank for no limit." |
+| a gasoline floor of 500000 above its ceiling of 450000 | invalid | REFUSED: "Gasoline has a minimum demand above its maximum." |
+| a jet floor of 1000000 with its ceiling raised to 1200000 | infeasible | REFUSED: "No plan satisfies these constraints. A product floor is probably beyond what the crudes and units can make." |
+| every crude availability, unit capacity and demand ceiling left blank | unbounded | REFUSED: "The plan is unbounded: a product has a price and no demand ceiling, or a crude has no availability limit and no cost." |
+| no crude at all | invalid | REFUSED: "The plan needs at least one crude." |
+| no product at all | invalid | REFUSED: "The plan needs at least one product to sell." |
+The missing list the engine returns with the blank reformer operating cost and jet price: the operating cost of Naphtha reformer; the price of Jet A-1.
+
+# SECTION 11: THE CRUDE UNIT CARRIES EVERY BARREL (owned by Professional m02)
+
+Every barrel of crude runs through the feedless unit, by an equality row: crude run = crude unit throughput. ABUA's plan:
+
+| crude | volume (bbl) | available (bbl) | cost |
+| --- | --- | --- | --- |
+| Bonny Light (illustrative) | 329032.26 | 1500000.00 | 26750322.58 |
+| Forcados (illustrative) | 1100000.00 | 1100000.00 | 85360000.00 |
+| Brass River (illustrative) | 600000.00 | 600000.00 | 48240000.00 |
+
+| unit | crude unit | throughput (bbl) | capacity (bbl) | utilisation (percent) | operating cost |
+| --- | --- | --- | --- | --- | --- |
+| Crude distillation | true | 2029032.26 | 2600000.00 | 78.04 | 2536290.32 |
+| Naphtha reformer | false | 407677.42 | 420000.00 | 97.07 | 1182264.52 |
+| Diesel hydrotreater | false | 650000.00 | 650000.00 | 100.00 | 1170000.00 |
+
+total crude 2029032.26 bbl; crude unit throughput 2029032.26 bbl; the two agree to the barrel: true
+crude unit operating cost for the month: 2536290.32 (1.2500 a barrel on every barrel of crude)
+
+The row is written only when some unit has no feed. The same configuration with the crude unit given a feed stream that no crude makes, so no unit is feedless:
+crude unit throughput 0.00 bbl beside a crude run of 2029032.26 bbl; crude unit operating cost 0.00; margin 9614225.81 against 7077935.48 for the configuration as typed.
+A configuration whose crude unit is not feedless has no crude unit in the plan, and its capacity and operating cost bind nothing.
+
+# SECTION 12: READING THE PLAN (owned by Professional m03)
+
+margin = product revenue - crude cost - unit operating cost. gross margin per barrel = margin / total crude.
+revenue 172316812.90; crude cost 160350322.58; unit operating cost 4888554.84; margin 7077935.48; total crude 2029032.26 bbl; gross margin per barrel of crude 3.4883
+
+| product | volume (bbl) | ceiling (bbl) | at its ceiling | revenue |
+| --- | --- | --- | --- | --- |
+| Gasoline | 346525.81 | 450000.00 | false | 38464364.52 |
+| Naphtha export | 0.00 | 200000.00 | false | 0.00 |
+| Jet A-1 | 288354.84 | 380000.00 | false | 30421435.48 |
+| Diesel (ULSD) | 630500.00 | 750000.00 | false | 66076400.00 |
+| Gasoil export | 0.00 | 250000.00 | false | 0.00 |
+| Fuel oil | 633129.03 | 1000000.00 | false | 37354612.90 |
+
+The stream balance: made - consumed by units - placed in products = surplus, never below zero. Surplus is the stream nobody found a home for.
+| stream | made (bbl) | consumed (bbl) | placed (bbl) | surplus (bbl) |
+| --- | --- | --- | --- | --- |
+| naphtha | 407677.42 | 407677.42 | 0.00 | 0.00 |
+| reformate | 346525.81 | 0.00 | 346525.81 | 0.00 |
+| kero | 288354.84 | 0.00 | 288354.84 | 0.00 |
+| gasoil | 650000.00 | 650000.00 | 0.00 | 0.00 |
+| ulsd | 630500.00 | 0.00 | 630500.00 | 0.00 |
+| residue | 633129.03 | 0.00 | 633129.03 | 0.00 |
+| offgas | 103638.71 | 0.00 | 0.00 | 103638.71 |
+
+units at capacity: Diesel hydrotreater
+crudes at their availability: Forcados (illustrative), Brass River (illustrative)
+
+# SECTION 13: THE ABUA PLAN UNDER FIVE CHANGES (owned by Professional m01 and m03)
+
+| change | status | total crude (bbl) | crude unit utilisation (percent) | margin | gross margin per bbl | margin change from the plan as typed |
+| --- | --- | --- | --- | --- | --- | --- |
+| the plan as typed | optimal | 2029032.26 | 78.04 | 7077935.48 | 3.4883 | 0.00 |
+| the diesel hydrotreater typed as shut for a turnaround (capacity 0) | optimal | 735294.12 | 28.28 | 424264.71 | 0.5770 | -6653670.78 |
+| the diesel hydrotreater capacity left blank (no limit) | optimal | 2082608.70 | 80.10 | 7173508.35 | 3.4445 | 95572.86 |
+| the crude unit at 1900000 barrels for the month | optimal | 1900000.00 | 100.00 | 6847760.00 | 3.6041 | -230175.48 |
+| the Forcados cargo cancelled (availability typed 0) | optimal | 1747826.09 | 67.22 | 4030705.04 | 2.3061 | -3047230.44 |
+| a jet floor of 300000 and a fuel oil floor of 700000 | optimal | 2267857.14 | 87.23 | 5929846.43 | 2.6147 | -1148089.06 |
+
+# SECTION 14: WHAT ANOTHER BARREL OF EACH STREAM IS WORTH (owned by Professional m04)
+
+marginalValue is the plan's value of one more barrel of a stream arriving from outside, in US dollars a barrel: the negated dual of the stream's balance row. The crude course teaches what a dual is; this course reads the stream values the plan prints.
+
+| stream | marginal value ($/bbl) | surplus (bbl) | products it goes into, at their prices | unit it feeds |
+| --- | --- | --- | --- | --- |
+| naphtha | 91.4500 | 0.00 | Naphtha export 72.5000 | Naphtha reformer |
+| reformate | 111.0000 | 0.00 | Gasoline 111.0000 | (no unit) |
+| kero | 105.5000 | 0.00 | Jet A-1 105.5000 | (no unit) |
+| gasoil | 94.1016 | 0.00 | Gasoil export 89.5000 | Diesel hydrotreater |
+| ulsd | 104.8000 | 0.00 | Diesel (ULSD) 104.8000 | (no unit) |
+| residue | 59.0000 | 0.00 | Fuel oil 59.0000 | (no unit) |
+| offgas | 0.0000 | 103638.71 | (no product) | (no unit) |
+
+The stream values under each change:
+| change | naphtha | reformate | kero | gasoil | ulsd | residue | offgas |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| the plan as typed | 91.4500 | 111.0000 | 105.5000 | 94.1016 | 104.8000 | 59.0000 | 0.0000 |
+| the diesel hydrotreater typed as shut for a turnaround (capacity 0) | 91.4500 | 111.0000 | 105.5000 | 87.8029 | 104.8000 | 59.0000 | 0.0000 |
+| the diesel hydrotreater capacity left blank (no limit) | 83.6941 | 111.0000 | 105.5000 | 99.8560 | 104.8000 | 59.0000 | 0.0000 |
+| the crude unit at 1900000 barrels for the month | 91.4500 | 111.0000 | 105.5000 | 99.8560 | 104.8000 | 59.0000 | 0.0000 |
+| the Forcados cargo cancelled (availability typed 0) | 83.6941 | 111.0000 | 105.5000 | 99.8560 | 104.8000 | 59.0000 | 0.0000 |
+| a jet floor of 300000 and a fuel oil floor of 700000 | 72.5000 | 111.0000 | 105.5000 | 89.5000 | 104.8000 | 79.6607 | 0.0000 |
+
+Pricing a debottleneck: the reformer capacity stepped, everything else as typed. The margin gained per extra barrel of capacity is the change in margin divided by the change in capacity, both printed:
+| reformer capacity (bbl) | reformer utilisation (percent) | margin | change in margin | change in capacity (bbl) | margin gained per extra barrel of capacity |
+| --- | --- | --- | --- | --- | --- |
+| 380000.00 | 100.00 | 6863271.83 | - | - | - |
+| 400000.00 | 100.00 | 7018390.09 | 155118.26 | 20000.00 | 7.7559 |
+| 420000.00 | 97.07 | 7077935.48 | 59545.40 | 20000.00 | 2.9773 |
+| 440000.00 | 92.65 | 7077935.48 | 0.00 | 20000.00 | 0.0000 |
+| 460000.00 | 88.63 | 7077935.48 | 0.00 | 20000.00 | 0.0000 |
+| 480000.00 | 84.93 | 7077935.48 | 0.00 | 20000.00 | 0.0000 |
+
+# SECTION 15: THE SCHEDULE (owned by Professional m05)
+
+ABUA's plan cascaded from period start 2027-03-01, 31 days, cargo size 400000.00 bbl. Crude arrives in whole cargoes evenly spaced; each unit runs and each product lifts in equal weekly events.
+the engine's note: "Crude arrives in evenly spaced cargoes and units and lifts are spread evenly across the period. Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against, not a berth-level schedule."
+
+events: 41 in all; crude receipts 6, unit runs 15, product lifts 20; weeks in the period 5
+
+| id | date | type | material | quantity (bbl) | value | part |
+| --- | --- | --- | --- | --- | --- | --- |
+| rcpt-1 | 2027-03-01 | receipt | bonny_light | 329032.26 | 26750322.58 | 1 of 1 |
+| rcpt-2 | 2027-03-01 | receipt | forcados | 366666.67 | 28453333.33 | 1 of 3 |
+| rcpt-3 | 2027-03-11 | receipt | forcados | 366666.67 | 28453333.33 | 2 of 3 |
+| rcpt-4 | 2027-03-21 | receipt | forcados | 366666.67 | 28453333.33 | 3 of 3 |
+| rcpt-5 | 2027-03-01 | receipt | brass_river | 300000.00 | 24120000.00 | 1 of 2 |
+| rcpt-6 | 2027-03-16 | receipt | brass_river | 300000.00 | 24120000.00 | 2 of 2 |
+| run-7 | 2027-03-01 | unit_run | cdu | 405806.45 | 507258.06 | 1 of 5 |
+| run-8 | 2027-03-08 | unit_run | cdu | 405806.45 | 507258.06 | 2 of 5 |
+| run-9 | 2027-03-15 | unit_run | cdu | 405806.45 | 507258.06 | 3 of 5 |
+| run-10 | 2027-03-22 | unit_run | cdu | 405806.45 | 507258.06 | 4 of 5 |
+| run-11 | 2027-03-29 | unit_run | cdu | 405806.45 | 507258.06 | 5 of 5 |
+| run-12 | 2027-03-01 | unit_run | reformer | 81535.48 | 236452.90 | 1 of 5 |
+| run-13 | 2027-03-08 | unit_run | reformer | 81535.48 | 236452.90 | 2 of 5 |
+| run-14 | 2027-03-15 | unit_run | reformer | 81535.48 | 236452.90 | 3 of 5 |
+| run-15 | 2027-03-22 | unit_run | reformer | 81535.48 | 236452.90 | 4 of 5 |
+| run-16 | 2027-03-29 | unit_run | reformer | 81535.48 | 236452.90 | 5 of 5 |
+| run-17 | 2027-03-01 | unit_run | dht | 130000.00 | 234000.00 | 1 of 5 |
+| run-18 | 2027-03-08 | unit_run | dht | 130000.00 | 234000.00 | 2 of 5 |
+| run-19 | 2027-03-15 | unit_run | dht | 130000.00 | 234000.00 | 3 of 5 |
+| run-20 | 2027-03-22 | unit_run | dht | 130000.00 | 234000.00 | 4 of 5 |
+| run-21 | 2027-03-29 | unit_run | dht | 130000.00 | 234000.00 | 5 of 5 |
+| lift-22 | 2027-03-07 | delivery | gasoline | 69305.16 | 7692872.90 | 1 of 5 |
+| lift-23 | 2027-03-14 | delivery | gasoline | 69305.16 | 7692872.90 | 2 of 5 |
+| lift-24 | 2027-03-21 | delivery | gasoline | 69305.16 | 7692872.90 | 3 of 5 |
+| lift-25 | 2027-03-28 | delivery | gasoline | 69305.16 | 7692872.90 | 4 of 5 |
+| lift-26 | 2027-03-31 | delivery | gasoline | 69305.16 | 7692872.90 | 5 of 5 |
+| lift-27 | 2027-03-07 | delivery | jet | 57670.97 | 6084287.10 | 1 of 5 |
+| lift-28 | 2027-03-14 | delivery | jet | 57670.97 | 6084287.10 | 2 of 5 |
+| lift-29 | 2027-03-21 | delivery | jet | 57670.97 | 6084287.10 | 3 of 5 |
+| lift-30 | 2027-03-28 | delivery | jet | 57670.97 | 6084287.10 | 4 of 5 |
+| lift-31 | 2027-03-31 | delivery | jet | 57670.97 | 6084287.10 | 5 of 5 |
+| lift-32 | 2027-03-07 | delivery | diesel | 126100.00 | 13215280.00 | 1 of 5 |
+| lift-33 | 2027-03-14 | delivery | diesel | 126100.00 | 13215280.00 | 2 of 5 |
+| lift-34 | 2027-03-21 | delivery | diesel | 126100.00 | 13215280.00 | 3 of 5 |
+| lift-35 | 2027-03-28 | delivery | diesel | 126100.00 | 13215280.00 | 4 of 5 |
+| lift-36 | 2027-03-31 | delivery | diesel | 126100.00 | 13215280.00 | 5 of 5 |
+| lift-37 | 2027-03-07 | delivery | fuel_oil | 126625.81 | 7470922.58 | 1 of 5 |
+| lift-38 | 2027-03-14 | delivery | fuel_oil | 126625.81 | 7470922.58 | 2 of 5 |
+| lift-39 | 2027-03-21 | delivery | fuel_oil | 126625.81 | 7470922.58 | 3 of 5 |
+| lift-40 | 2027-03-28 | delivery | fuel_oil | 126625.81 | 7470922.58 | 4 of 5 |
+| lift-41 | 2027-03-31 | delivery | fuel_oil | 126625.81 | 7470922.58 | 5 of 5 |
+
+The plan-ledger totals the schedule carries, material by material, agree with the plan:
+| material | type | scheduled quantity (bbl) | plan quantity (bbl) | scheduled value | plan value |
+| --- | --- | --- | --- | --- | --- |
+| bonny_light | receipt | 329032.26 | 329032.26 | 26750322.58 | 26750322.58 |
+| forcados | receipt | 1100000.00 | 1100000.00 | 85360000.00 | 85360000.00 |
+| brass_river | receipt | 600000.00 | 600000.00 | 48240000.00 | 48240000.00 |
+| cdu | unit_run | 2029032.26 | 2029032.26 | 2536290.32 | 2536290.32 |
+| reformer | unit_run | 407677.42 | 407677.42 | 1182264.52 | 1182264.52 |
+| dht | unit_run | 650000.00 | 650000.00 | 1170000.00 | 1170000.00 |
+| gasoline | delivery | 346525.81 | 346525.81 | 38464364.52 | 38464364.52 |
+| jet | delivery | 288354.84 | 288354.84 | 30421435.48 | 30421435.48 |
+| diesel | delivery | 630500.00 | 630500.00 | 66076400.00 | 66076400.00 |
+| fuel_oil | delivery | 633129.03 | 633129.03 | 37354612.90 | 37354612.90 |
+
+The same plan with a cargo size of 150000 bbl: crude receipts 15; receipt dates for Forcados: 2027-03-01, 2027-03-04, 2027-03-07, 2027-03-10, 2027-03-13, 2027-03-16, 2027-03-19, 2027-03-22.
+An infeasible plan cascades to 0 events, with the note "No optimal plan to cascade."
+
+# SECTION 16: THE SCHEDULE IN SEVEN TIME ZONES (owned by Professional m05)
+
+ABUA's schedule built in seven time zones, each in its own process, with the period start passed as the string "2027-03-01". The first and last event dates, and whether every one of the 41 dates matches the UTC run:
+| time zone | first date | last date | every date matches UTC |
+| --- | --- | --- | --- |
+| UTC | 2027-03-01 | 2027-03-31 | true |
+| Africa/Lagos | 2027-03-01 | 2027-03-31 | true |
+| Pacific/Kiritimati | 2027-03-01 | 2027-03-31 | true |
+| Europe/London | 2027-03-01 | 2027-03-31 | true |
+| America/New_York | 2027-03-01 | 2027-03-31 | true |
+| America/Los_Angeles | 2027-03-01 | 2027-03-31 | true |
+| Pacific/Pago_Pago | 2027-03-01 | 2027-03-31 | true |
+
+The same schedule with the period start handed over as a Date built at LOCAL midnight (new Date(2027, 2, 1)). The engine reads a Date's UTC calendar day, so the answer depends on the zone:
+| time zone | first date | every date matches UTC |
+| --- | --- | --- |
+| UTC | 2027-03-01 | true |
+| Africa/Lagos | 2027-02-28 | false |
+| Pacific/Kiritimati | 2027-02-28 | false |
+| America/New_York | 2027-03-01 | true |
+| Pacific/Pago_Pago | 2027-03-01 | true |
+A period start given as a YYYY-MM-DD string is the same calendar day in every zone. That is how the Suite page passes it and how this digest passes it.
+
+# SECTION 17: THE ABUA PLAN AND SCHEDULE END TO END (owned by Professional m06)
+
+| reading | value |
+| --- | --- |
+| total crude (bbl) | 2029032.26 |
+| crude unit utilisation (percent) | 78.04 |
+| revenue | 172316812.90 |
+| crude cost | 160350322.58 |
+| unit operating cost | 4888554.84 |
+| margin | 7077935.48 |
+| gross margin per barrel of crude | 3.4883 |
+| marginal value of naphtha ($/bbl) | 91.4500 |
+| marginal value of reformate ($/bbl) | 111.0000 |
+| marginal value of kero ($/bbl) | 105.5000 |
+| marginal value of gasoil ($/bbl) | 94.1016 |
+| marginal value of ulsd ($/bbl) | 104.8000 |
+| marginal value of residue ($/bbl) | 59.0000 |
+| marginal value of offgas ($/bbl) | 0.0000 |
+| schedule events | 41 |
+| crude receipts | 6 |
+| first receipt date | 2027-03-01 |
+
+# SECTION 18: ONE SHAPE, THREE LEDGERS (owned by Expert m01)
+
+A plan event, a scheduled event and a recorded actual are the same shape, marked by their ledger. makeEvent takes a quantity that is never negative: direction comes from the event type.
+
+| event type | signedQuantity of 100 bbl | emits by its nature |
+| --- | --- | --- |
+| receipt | 100 | false |
+| delivery | -100 | false |
+| transfer | 0 | false |
+| unit_run | 0 | false |
+| blend | 0 | false |
+| burn | -100 | true |
+| flare | -100 | true |
+| vent | -100 | true |
+| loss | -100 | false |
+
+What makeEvent refuses, each its own message:
+| event | what the engine returns |
+| --- | --- |
+| a quantity of -500 | REFUSED: "Event quantity is unsigned; direction comes from the event type" |
+| a ledger called forecast | REFUSED: "Unknown ledger "forecast"" |
+| an event type called sale | REFUSED: "Unknown event type "sale"" |
+An event recorded with no cost carries cost null, which is different from a cost of 0; the variance marks a line with an uncosted event as costed false.
+
+# SECTION 19: THE ODIOMA PLAN AS A PLAN LEDGER (owned by Expert m01)
+
+ODIOMA, Odioma Petroleum Refining Ltd: two crudes, a crude unit and a reformer, four products. The plan, cascaded from 2027-03-01 over 31 days with a cargo size of 350000.00 bbl, is the plan ledger the actuals are read against.
+
+| crude | cost ($/bbl) | available (bbl) | naphtha yield | reformate yield | kero yield | gasoil yield | residue yield | offgas yield |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Escravos (illustrative) | 78.9000 | 700000.00 | 0.2100 | - | 0.1400 | 0.3300 | 0.2900 | 0.0300 |
+| Forcados (illustrative) | 76.8000 | 400000.00 | 0.1600 | - | 0.1300 | 0.3400 | 0.3500 | 0.0200 |
+| unit | capacity (bbl) | operating cost ($/bbl) | feed |
+| --- | --- | --- | --- |
+| Crude distillation | 1200000.00 | 1.4000 | (none: the crude unit) |
+| Naphtha reformer | 190000.00 | 3.1000 | naphtha |
+| product | price ($/bbl) | ceiling (bbl) |
+| --- | --- | --- |
+| Gasoline | 110.5000 | 200000.00 |
+| Jet A-1 | 104.9000 | 160000.00 |
+| Diesel | 100.6000 | 400000.00 |
+| Fuel oil | 60.2000 | 500000.00 |
+
+plan: total crude 1000000.00 bbl; margin 4776300.00; gross margin per barrel 4.7763
+
+The plan ledger, summed from the scheduled events by material and type (the grain the variance matches on):
+| material | type | events | quantity (bbl) | value | value per bbl |
+| --- | --- | --- | --- | --- | --- |
+| escravos | receipt | 2 | 600000.00 | 47340000.00 | 78.9000 |
+| forcados | receipt | 2 | 400000.00 | 30720000.00 | 76.8000 |
+| cdu | unit_run | 5 | 1000000.00 | 1400000.00 | 1.4000 |
+| reformer | unit_run | 5 | 190000.00 | 589000.00 | 3.1000 |
+| gasoline | delivery | 5 | 163400.00 | 18055700.00 | 110.5000 |
+| jet | delivery | 5 | 136000.00 | 14266400.00 | 104.9000 |
+| diesel | delivery | 5 | 334000.00 | 33600400.00 | 100.6000 |
+| fuel_oil | delivery | 5 | 314000.00 | 18902800.00 | 60.2000 |
+
+# SECTION 20: THE ODIOMA ACTUALS AND THE VARIANCE LINES (owned by Expert m02)
+
+What the month did, one aggregated movement a material and type. A delivery's value is what it sold for; every other event's value is what it cost.
+| material | type | quantity (bbl) | value |
+| --- | --- | --- | --- |
+| escravos | receipt | 735000.00 | 58947000.00 |
+| forcados | receipt | 0.00 | 212000.00 |
+| cdu | unit_run | 735000.00 | 1080450.00 |
+| reformer | unit_run | 131000.00 | 419200.00 |
+| gasoline | delivery | 112660.00 | 12628000.00 |
+| jet | delivery | 101200.00 | 10534900.00 |
+| diesel | delivery | 244000.00 | 24009600.00 |
+| fuel_oil | delivery | 210000.00 | 12810000.00 |
+| lpg | delivery | 9000.00 | 441000.00 |
+
+attributeVariance matches the two ledgers on material and type. volume variance = (actual quantity - plan quantity) x plan unit value; price variance = (actual unit value - plan unit value) x actual quantity; unexplained = total - volume - price, which is zero unless money moved with no barrels. marginEffect is the total with its sign set by what it did to margin: as it is on a revenue line, reversed on a cost line.
+
+| material | type | direction | plan quantity | actual quantity | plan value | actual value | volume variance | price variance | unexplained | total variance | margin effect | costed |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| escravos | receipt | cost | 600000.00 | 735000.00 | 47340000.00 | 58947000.00 | 10651500.00 | 955500.00 | 0.00 | 11607000.00 | -11607000.00 | true |
+| forcados | receipt | cost | 400000.00 | 0.00 | 30720000.00 | 212000.00 | -30720000.00 | 0.00 | 212000.00 | -30508000.00 | 30508000.00 | true |
+| cdu | unit_run | cost | 1000000.00 | 735000.00 | 1400000.00 | 1080450.00 | -371000.00 | 51450.00 | 0.00 | -319550.00 | 319550.00 | true |
+| reformer | unit_run | cost | 190000.00 | 131000.00 | 589000.00 | 419200.00 | -182900.00 | 13100.00 | 0.00 | -169800.00 | 169800.00 | true |
+| gasoline | delivery | revenue | 163400.00 | 112660.00 | 18055700.00 | 12628000.00 | -5606770.00 | 179070.00 | 0.00 | -5427700.00 | -5427700.00 | true |
+| jet | delivery | revenue | 136000.00 | 101200.00 | 14266400.00 | 10534900.00 | -3650520.00 | -80980.00 | 0.00 | -3731500.00 | -3731500.00 | true |
+| diesel | delivery | revenue | 334000.00 | 244000.00 | 33600400.00 | 24009600.00 | -9054000.00 | -536800.00 | 0.00 | -9590800.00 | -9590800.00 | true |
+| fuel_oil | delivery | revenue | 314000.00 | 210000.00 | 18902800.00 | 12810000.00 | -6260800.00 | 168000.00 | 0.00 | -6092800.00 | -6092800.00 | true |
+
+Movements in one ledger and not the other are listed as unmatched and folded into no variance line:
+| material | type | present in | quantity (bbl) | value |
+| --- | --- | --- | --- | --- |
+| lpg | delivery | actual | 9000.00 | 441000.00 |
+
+The Forcados line: no barrels arrived and a bill of 212000.00 did. Its volume variance is -30720000.00, its price variance 0.00, and the unexplained 212000.00 is the money with no barrels, shown on its own.
+
+# SECTION 21: TOTALS ON MARGIN, AND THE UNITS AGAINST PLAN (owned by Expert m03)
+
+The headline total is on margin: "margin: a revenue gap counts as it is, a cost gap with its sign reversed".
+| total | volume variance | price variance | unexplained | total variance |
+| --- | --- | --- | --- | --- |
+| on margin (the headline) | -3949690.00 | -1290760.00 | -212000.00 | -5452450.00 |
+| cost lines, as recorded | -20622400.00 | 1020050.00 | 212000.00 | -19390350.00 |
+| revenue lines, as recorded | -24572090.00 | -270710.00 | 0.00 | -24842800.00 |
+
+Adding every line's total variance as recorded, cost and revenue together, gives -44233150.00; the margin total is -5452450.00. The engine prints the margin total as the headline.
+
+reconcilePeriod reads the margin of each ledger: deliveries less everything else that carries a value.
+plan margin 4776300.00; actual margin -235150.00; margin variance -5011450.00; the plan's own margin 4776300.00; plan gross margin per barrel 4.7763
+margin variance - margin total of the matched lines = 441000.00; the unmatched movements, deliveries counted as revenue and the rest as cost, come to 441000.00. The ledger margins count every movement; the variance lines count only the matched ones.
+
+Each unit against plan. The app reports the gap and does not say why it happened:
+| unit | planned (bbl) | actual (bbl) | difference (bbl) | utilisation of plan (percent) |
+| --- | --- | --- | --- | --- |
+| cdu | 1000000.00 | 735000.00 | -265000.00 | 73.50 |
+| reformer | 190000.00 | 131000.00 | -59000.00 | 68.95 |
+
+# SECTION 22: THE EXPANSION: STREAMS INTO THE SCREENING ENGINE (owned by Expert m04)
+
+ODIOMA's expansion: a conversion plant of 12000 bpd, 340 on-stream days, firm supply, crude 74.0000 a barrel, capital by the modular law from 100000000.00 at 10000 bpd, fixed operating cost 14000000.00 a year, variable 4.2000 a barrel, 2 construction years, 20 operating years, discount rate 12 percent, tax rate 30 percent.
+capital 117831965.35; gross value per barrel of crude 92.2100; annual throughput 3753600.00 bbl; gross margin per barrel 14.0100
+
+What feasibilityEconomics hands the screening engine, in the engine's units (money in millions of US dollars):
+fiscalType TaxRoyalty; royaltyRate 0; taxRate 30; discountRate 12; lossCarryForward true; projectLife 22 years; startYear 2027
+production (oil, bbl) in year 0 and in the first operating year: 0.00, 3753600.00; price (the slate's gross value) in the first operating year 92.2100
+opexFixed in the first operating year (fixed operating cost plus crude cost, millions) 291.7664; opexVariable 15.7651; capex in year 0 58.9160
+Revenue goes in as revenue (barrels at the slate's value), and the royalty rate is 0 because a refinery buys its crude and pays no royalty.
+
+| year | calendar year | gross revenue (MM) | royalty (MM) | opex (MM) | capex (MM) | tax (MM) | tax loss carried forward (MM) | net cash flow (MM) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 2027 | 0.0000 | 0.0000 | 0.0000 | 58.9160 | 0.0000 | 58.9160 | -58.9160 |
+| 1 | 2028 | 0.0000 | 0.0000 | 0.0000 | 58.9160 | 0.0000 | 117.8320 | -58.9160 |
+| 2 | 2029 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 0.0000 | 79.2440 | 38.5879 |
+| 3 | 2030 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 0.0000 | 40.6561 | 38.5879 |
+| 4 | 2031 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 0.0000 | 2.0682 | 38.5879 |
+| 5 | 2032 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 10.9559 | 0.0000 | 27.6320 |
+| 6 | 2033 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 7 | 2034 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 8 | 2035 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 9 | 2036 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 10 | 2037 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 11 | 2038 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 12 | 2039 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 13 | 2040 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 14 | 2041 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 15 | 2042 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 16 | 2043 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 17 | 2044 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 18 | 2045 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 19 | 2046 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 20 | 2047 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+| 21 | 2048 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+
+NPV at 12 percent, mid-year discounting (a flow in year t is discounted at t + 0.5): 88.6345 million US dollars. The Economics courses teach and grade the NPV; this course reads it as the feasibility screen's answer.
+The start year labels the years and moves no figure: with start year 2031 the first calendar year reads 2031, the NPV reads 88.6345 and the total tax 196.1780, against 2027, 88.6345 and 196.1780 with start year 2027. The two agree to the last digit: true.
+
+# SECTION 23: TAX LOSSES CARRIED FORWARD (owned by Expert m05)
+
+The capital is expensed in the years it is spent, before the plant earns, so the construction years make a tax loss. feasibilityEconomics switches on the screening engine's lossCarryForward option: the loss is carried forward and shelters the first operating years. The same inputs with the option off, through calculateEconomics directly:
+
+| year | taxable income before relief (MM) | tax, loss carried forward (MM) | loss carried forward at year end (MM) | tax, option off (MM) |
+| --- | --- | --- | --- | --- |
+| 0 | -58.9160 | 0.0000 | 58.9160 | 0.0000 |
+| 1 | -58.9160 | 0.0000 | 117.8320 | 0.0000 |
+| 2 | 38.5879 | 0.0000 | 79.2440 | 11.5764 |
+| 3 | 38.5879 | 0.0000 | 40.6561 | 11.5764 |
+| 4 | 38.5879 | 0.0000 | 2.0682 | 11.5764 |
+| 5 | 38.5879 | 10.9559 | 0.0000 | 11.5764 |
+| 6 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 7 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 8 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 9 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 10 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 11 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 12 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 13 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 14 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 15 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 16 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 17 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 18 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 19 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 20 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+| 21 | 38.5879 | 11.5764 | 0.0000 | 11.5764 |
+
+first year with tax to pay, loss carried forward: year 5, tax 10.9559 MM
+total tax over the life: 196.1780 MM with the loss carried forward; 231.5276 MM with the option off; the difference 35.3496 MM
+NPV at 12 percent: 88.6345 MM with the loss carried forward; 64.8440 MM with the option off
+feasibilityEconomics passes no capexDepreciationYears, so the screening engine deducts the capital in the year it is spent (its depreciation column equals the capex column in every year): true.
+
+# SECTION 24: HELD, DECIDED, AND WHAT THE ORACLES CHECK (owned by Expert m06)
+
+Owner decisions in force (FINDINGS-refinery.md, 2026-09-19):
+- Loss carry-forward is an option of the screening engine, off by default for every other caller; the refinery switches it on.
+- No royalty on a refinery: feasibilityEconomics passes a royalty rate of 0.
+- A feedless unit is the crude unit and carries every barrel of crude; a plan with no feedless unit writes no crude-unit row.
+
+HELD, taught as stated limits and never graded:
+- H1. The scaling exponents 0.6 and 0.9 are defaults for a vendor's own figures to replace. No published source for them is in the engines repository.
+- H2. The screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case; a fuller allowance model belongs to the Economics module.
+
+Limits the engines state themselves: yields are fixed vectors; quality is not carried through the plan; one period at a time with no inventory between periods; the schedule models no tank capacity, jetty window or turnaround.
+
+| golden file | cases | written by | method |
+| --- | --- | --- | --- |
+| refineryplanning_cases.json | 6 plans, 3 variance lines, 1 schedule | tools/validation/downstream/oracle_refineryplanning.py | exact rational simplex with a duality certificate; stream values by exact re-solve; dates by datetime.date |
+| modularrefinery_cases.json | 8 feasibility cases, 5 scale points | tools/validation/downstream/oracle_modularrefinery.py | annual accounts; a dated tax-loss ledger used oldest first; mid-year NPV restated from the screening engine |
+
+The plan oracle solves each plan in exact rational arithmetic and accepts it only with a duality certificate; it values a stream by re-solving with a small extra supply of it. The feasibility oracle keeps annual accounts and a dated tax-loss ledger used oldest first. Neither oracle checks a refusal's wording, so every refusal sentence in this digest is the engine's own and is quoted.
