@@ -1,0 +1,112 @@
+{
+ "tiers": {
+  "beginner": {
+   "record": "ERIEMU",
+   "prompt": "ERIEMU FLOW STATION. The station flares its associated gas. Every figure is invented and illustrative. The laboratory sheet, as mole fractions with the component figures to use: Methane (C1) 0.7215: 1 carbon per molecule, molar mass 16.043 lb/lbmol, heating value 1010 Btu/scf; Ethane (C2) 0.0968: 2 carbon per molecule, molar mass 30.07 lb/lbmol, heating value 1770 Btu/scf, liquid density 2.971 lb/gal; Propane (C3) 0.0634: 3 carbon per molecule, molar mass 44.096 lb/lbmol, heating value 2516 Btu/scf, liquid density 4.233 lb/gal; Iso-butane (IC4) 0.0142: 4 carbon per molecule, molar mass 58.122 lb/lbmol, heating value 3252 Btu/scf, liquid density 4.695 lb/gal; n-Butane (NC4) 0.0236: 4 carbon per molecule, molar mass 58.122 lb/lbmol, heating value 3263 Btu/scf, liquid density 4.872 lb/gal; Pentanes plus (C5) 0.0127: 5 carbon per molecule, molar mass 72.15 lb/lbmol, heating value 4010 Btu/scf, liquid density 5.253 lb/gal; Nitrogen (N2) 0.0231: 0 carbon per molecule, molar mass 28.014 lb/lbmol, heating value 0 Btu/scf; Carbon dioxide (CO2) 0.0367: 1 carbon per molecule, molar mass 44.01 lb/lbmol, heating value 0 Btu/scf. The sheet is used as reported: scale it to one before using it. Take one lb-mol as 379.49 scf and one kg as 2.20462262 lb. The station flares 12.4 MMscfd on 347 days a year. The flare study gives a destruction efficiency of 0.976 and a combustion efficiency of 0.961, and uses a methane global warming potential of 28.7. Work the flare by 40 CFR 98.233(n) with CO2 at 44.009 and methane at 16.043 kg/kmol. Give six numbers. (1) The gas's gross heating value in Btu/scf. (2) Its liquids content, propane and heavier, in gallons per Mscf. (3) The mass of propane and heavier in one Mscf, in kg. (4) The flare's CO2 in tonnes a year. (5) Its methane in tonnes a year. (6) Its CO2e in tonnes a year. Quote (1) to (3) to 4 decimals and (4) to (6) to 3.",
+   "fields": [
+    {
+     "key": "eriemu_ghv_btu_scf",
+     "source": "ERIEMU: flareToValue.characteriseGas(the sheet).ghvBtuScf (on moles, after scaling to one)",
+     "tol": 0.0001
+    },
+    {
+     "key": "eriemu_gpm_c3plus",
+     "source": "ERIEMU: flareToValue.characteriseGas(...).gpmC3Plus (gal/Mscf of propane and heavier)",
+     "tol": 0.0001
+    },
+    {
+     "key": "eriemu_c3plus_kg_per_mscf",
+     "source": "ERIEMU: flareToValue.characteriseGas(...).c3PlusKgPerMscf",
+     "tol": 0.0001
+    },
+    {
+     "key": "eriemu_flare_co2_t",
+     "source": "ERIEMU: flareToValue.abatement({...both efficiencies}).flareCo2Tonnes",
+     "tol": 0.01
+    },
+    {
+     "key": "eriemu_flare_ch4_t",
+     "source": "ERIEMU: flareToValue.abatement({...}).flareCh4Tonnes",
+     "tol": 0.01
+    },
+    {
+     "key": "eriemu_flare_co2e_t",
+     "source": "ERIEMU: flareToValue.abatement({...}).flareCo2eTonnes",
+     "tol": 0.01
+    }
+   ]
+  },
+  "intermediate": {
+   "record": "ADIBAWA",
+   "prompt": "ADIBAWA GAS PARCEL. A developer bids to take a flared parcel as CNG. Every figure is invented and illustrative. The gas, as mole fractions with the component figures to use: Methane (C1) 0.801: 1 carbon per molecule, molar mass 16.043 lb/lbmol, heating value 1010 Btu/scf; Ethane (C2) 0.071: 2 carbon per molecule, molar mass 30.07 lb/lbmol, heating value 1770 Btu/scf, liquid density 2.971 lb/gal; Propane (C3) 0.041: 3 carbon per molecule, molar mass 44.096 lb/lbmol, heating value 2516 Btu/scf, liquid density 4.233 lb/gal; Iso-butane (IC4) 0.009: 4 carbon per molecule, molar mass 58.122 lb/lbmol, heating value 3252 Btu/scf, liquid density 4.695 lb/gal; n-Butane (NC4) 0.015: 4 carbon per molecule, molar mass 58.122 lb/lbmol, heating value 3263 Btu/scf, liquid density 4.872 lb/gal; Pentanes plus (C5) 0.008: 5 carbon per molecule, molar mass 72.15 lb/lbmol, heating value 4010 Btu/scf, liquid density 5.253 lb/gal; Nitrogen (N2) 0.027: 0 carbon per molecule, molar mass 28.014 lb/lbmol, heating value 0 Btu/scf; Carbon dioxide (CO2) 0.028: 1 carbon per molecule, molar mass 44.01 lb/lbmol, heating value 0 Btu/scf. Take one lb-mol as 379.49 scf and one kg as 2.20462262 lb. The parcel is 16.8 MMscfd on 342 days a year. The flare today has a destruction efficiency of 0.968 and a combustion efficiency of 0.952; use a methane global warming potential of 27.9, CO2 at 44.009 and methane at 16.043 kg/kmol, and 40 CFR 98.233(n). The CNG plant yields 17.2 kg of CNG per Mscf processed and recovers 0.87 of the parcel; CNG sells at 0.43 dollars per kg. A reference plant of 7 MMscfd cost 27000000 dollars; scale it by the modular power law with an exponent of 0.9. Fixed operating cost is 2100000 dollars a year and variable operating cost 0.38 dollars per Mscf of the parcel. The declared counterfactual: cng displacing diesel in port harcourt haulage; burning the CNG emits 236000 tCO2e a year and the diesel it displaces would have emitted 281000 tCO2e a year. The bid team typed credit prices of 30, 10, 20, 15 dollars per tonne, in that order, against a hurdle margin of 39500000 dollars a year. Give six numbers. (1) The plant's capital cost in dollars, to 2 decimals. (2) The CNG it makes in kg a year, to 4 decimals. (3) Its gross margin per Mscf of the parcel in dollars, to 4 decimals. (4) The flare CO2e the plant avoids in tonnes a year, to 3 decimals. (5) The net abatement against the counterfactual in tonnes a year, to 3 decimals. (6) The credit price at which the route just clears the hurdle, in dollars per tonne, to 4 decimals.",
+   "fields": [
+    {
+     "key": "adibawa_capital_usd",
+     "source": "ADIBAWA: flareToValue.routeEconomics({CNG}).capitalCost (the modular power law)",
+     "tol": 0.01
+    },
+    {
+     "key": "adibawa_cng_kg_per_year",
+     "source": "ADIBAWA: flareToValue.routeEconomics({CNG}).productPerYear",
+     "tol": 0.0001
+    },
+    {
+     "key": "adibawa_value_per_mscf",
+     "source": "ADIBAWA: flareToValue.routeEconomics({CNG}).valuePerMscf",
+     "tol": 0.0001
+    },
+    {
+     "key": "adibawa_avoided_co2e_t",
+     "source": "ADIBAWA: flareToValue.abatement({...recoveryFraction of the CNG route}).avoidedFlareCo2eTonnes",
+     "tol": 0.01
+    },
+    {
+     "key": "adibawa_net_abatement_t",
+     "source": "ADIBAWA: flareToValue.abatement({...counterfactual}).netAbatementTonnesCo2ePerYear",
+     "tol": 0.01
+    },
+    {
+     "key": "adibawa_breakeven_credit_usd_per_t",
+     "source": "ADIBAWA: flareToValue.creditSensitivity({...}).breakevenCreditPrice",
+     "tol": 0.0001
+    }
+   ]
+  },
+  "advanced": {
+   "record": "ASABA",
+   "prompt": "ASABA ENERGY HUB. An LPG depot and a CNG station share a site. Every figure is invented and illustrative. The LPG is propane 0.32 by liquid volume (density 506 kg/m3, molar mass 44.096 kg/kmol, latent heat 428 kJ/kg) and butane 0.68 by liquid volume (density 581 kg/m3, molar mass 58.122 kg/kmol, latent heat 383 kJ/kg). The vessel holds 220 m3 of water capacity and its code limit is a filling density of 0.43 of the water capacity by weight, with water at 15 C taken as 999.1 kg/m3. The vaporizer takes 780 kg/h of that LPG entering at 21 C (liquid heat capacity 2.5 kJ/kg K); at the vaporizer's pressure it boils at 41 C, and the vapour leaves at 58 C (vapour heat capacity 1.7 kJ/kg K); add a design margin of 12 percent. The bottling carousel fills 4100 cylinders a day over a 11 hour shift, 2.3 minutes a cylinder, on 20 positions each available 0.93 of the time; run the queue on the positions wholly working. The CNG is gas of specific gravity 0.63 at 34 C, and every pressure below is read on a gauge; the site's atmosphere is 1.013 bar. A storage bank of 3 m3 reads 245 bar. The cascade: Low bank 2.5 m3 at 180 bar, Mid bank 2.5 m3 at 225 bar, High bank 2.5 m3 at 260 bar; each taxi tank is 0.075 m3 and arrives at 15 bar and is filled to 200 bar, isothermally, equalising with the lowest bank first; use real-gas Z by Dranchuk-Abou-Kassem on Sutton pseudo-criticals. A taxi covers 62000 km a year on 11 litres of PMS per 100 km at 820 naira a litre (32.2 MJ a litre); CNG costs 410 naira a kg (47.1 MJ a kg), no measured consumption on CNG exists, and the converted engine turns CNG energy into distance 0.9 times as well as PMS energy. The conversion costs 1350000 naira and adds 72000 naira a year of maintenance. Give six numbers. (1) The usable LPG in the vessel, in tonnes, to 4 decimals. (2) The vaporizer's design duty in kW, to 4 decimals. (3) The average wait of a cylinder for a position, in minutes, to 4 decimals. (4) The gas in the storage bank, in kg, to 4 decimals. (5) The gas left in the three cascade banks when the next taxi can no longer be filled to target, in kg, to 3 decimals. (6) The taxi's simple payback in years, undiscounted, to 4 decimals.",
+   "fields": [
+    {
+     "key": "asaba_usable_lpg_t",
+     "source": "ASABA: lpgCng.lpgStorageSizing({water_capacity_mass}).usableTonnes",
+     "tol": 0.0001
+    },
+    {
+     "key": "asaba_vaporizer_design_kw",
+     "source": "ASABA: lpgCng.vaporizerDuty({latent heat of the blend on mass}).designDutyKW",
+     "tol": 0.0001
+    },
+    {
+     "key": "asaba_carousel_wait_min",
+     "source": "ASABA: lpgCng.bottlingPlant({...}).queue.averageWaitMinutes",
+     "tol": 0.0001
+    },
+    {
+     "key": "asaba_bank_mass_kg",
+     "source": "ASABA: lpgCng.gasMassInVessel({gauge plus atmosphere}).massKg",
+     "tol": 0.0001
+    },
+    {
+     "key": "asaba_left_in_banks_kg",
+     "source": "ASABA: lpgCng.cascadeFills({gauge plus atmosphere}).leftInBanksKg",
+     "tol": 0.001
+    },
+    {
+     "key": "asaba_payback_years",
+     "source": "ASABA: lpgCng.conversionEconomics({...}).simplePaybackYears",
+     "tol": 0.0001
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,895 @@
+# gasvalue: Flare Gas to Value & LPG/CNG. Teaching digest.
+# PRECISION: every computed figure prints to four decimals (Btu/scf, gal/Mscf, kg/Mscf, mole fractions, carbon per mole, lb/lbmol, t/Mscf, MWh/Mscf, dollars per Mscf, dollars per tonne, kg of product a year, tonnes of LPG, m3, days, kg/m3, kJ/kg, kg/kmol, kW, minutes, erlangs, Z, reduced pressure and temperature, kg in a vessel, bar, kg per fill, naira, litres, kg of fuel, years, shares and ratios) except where the engine itself reports a quantity coarser: tonnes of CO2, methane and CO2e a year and kilograms stored, delivered and left in a cascade to three decimals; revenue, operating cost, margin, capital and cash flows in dollars to two. Every input prints exactly as it is typed, in gasvalue_fields.mjs for a case or beside the question in gasvalue_dump.mjs for a probe. Counts print as whole numbers.
+# ENGINES: engines/downstream/flareToValue.js and engines/downstream/lpgCng.js at petrolord-engines f0aef14, with modularRefinery.js for the capital power law, vendored in NextGen under packages/engines.
+# CASES: EGBEMA (a flow station in Imo State flaring associated gas, and the four ways to sell it), KANO (an LPG storage and bottling plant), IBAFO (a CNG mother station on the Lagos-Ibadan expressway and a Lagos bus operator switching to CNG), and beside them the two live apps' own opening examples. EVERY ANALYSIS, EFFICIENCY, GWP, PRICE, COST, FILL LIMIT AND VEHICLE FIGURE IN THIS DIGEST IS INVENTED AND ILLUSTRATIVE: no figure is a published analysis, a measured flare, a market price or a regulation. Place names are real places; the records are not. The component heating values, liquid densities and LPG properties are the engine's own labelled typical tables.
+# NO CLOCK: nothing in scope reads a date or a clock, and the digest is the same bytes in every time zone and at every machine date.
+# Built by build_digest.sh from gasvalue_dump.mjs and gasvalue_fields.mjs. Never edited by hand.
+
+# SECTION 1: WHAT THE TWO MODULES EXPORT (owned by Associate m01)
+
+The Flare Gas to Value Studio calls flareToValue. The LPG & CNG Rollout Studio calls lpgCng, which calls the loading-rack queue in terminalDepot for its carousel and forecourt, the gas Z factor in production/gasProperties and the compressor train in facilities/compression rather than writing its own. flareToValue scales capital with the power law in modularRefinery. The counts below are measured from the modules themselves.
+
+| module | exported functions | exported constants and tables |
+| --- | --- | --- |
+| flareToValue | 7 (abatement, characteriseGas, compareRoutes, creditSensitivity, routeEconomics, screenRoute, yieldCeiling) | 8 (BTU_PER_MWH, GAL_PER_FT3, GAS_COMPONENT_REFERENCE, GAS_REFERENCE_NOTE, LB_PER_KG, ROUTE_TEMPLATES, ROUTE_TEMPLATE_NOTE, SCF_PER_LBMOL) |
+| lpgCng | 10 (assetFloat, bottlingPlant, cascadeFills, cngCompression, cngDispensing, conversionEconomics, gasMassInVessel, lpgBlendProperties, lpgStorageSizing, vaporizerDuty) | 9 (DAK_RANGE, FILL_RATIO_BASIS, KJ_PER_KWH, LPG_PROPERTY_NOTE, LPG_REFERENCE, M3_PER_SCF, PRESSURE_BASIS, PSI_PER_BAR, WATER_KG_M3) |
+
+The questions the two studios answer, each with the function that answers it:
+| question | function |
+| --- | --- |
+| what is in this gas, and how much liquid could it give | characteriseGas |
+| which way of selling it does the gas allow | screenRoute against a route's requirement envelope |
+| what does a route make, earn and cost in a year | routeEconomics |
+| what does the flare emit, and what does recovering it abate | abatement |
+| does the project need carbon credits to clear its hurdle | creditSensitivity |
+| how do the routes compare in a bid | compareRoutes |
+| how much LPG can the vessel hold, and when to reorder | lpgBlendProperties, lpgStorageSizing |
+| how big a vaporizer, how many carousel positions, how many cylinders | vaporizerDuty, bottlingPlant, assetFloat |
+| how much gas is in a bank, and how many vehicles does a cascade fill | gasMassInVessel, cascadeFills |
+| what does the station compressor and forecourt need | cngCompression, cngDispensing |
+| does the customer save by switching fuel | conversionEconomics |
+
+# SECTION 2: A STANDARD CUBIC FOOT IS A COUNT OF MOLES (owned by Associate m01)
+
+A standard cubic foot counts gas at 60 F and 14.696 psia, so a volume of gas is a number of moles. The engine's unit constants, printed from the module:
+
+| constant | value | what it is |
+| --- | --- | --- |
+| SCF_PER_LBMOL | 379.49 | standard cubic feet in one lb-mol |
+| LB_PER_KG | 2.20462262 | pounds in one kilogram |
+| GAL_PER_FT3 | 7.480519 | US gallons in one cubic foot |
+| BTU_PER_MWH | 3412141.6331 | International Table Btu in one megawatt hour |
+| M3_PER_SCF (lpgCng) | 0.02831684659 | cubic metres in one standard cubic foot |
+| KJ_PER_KWH (lpgCng) | 3600 | kilojoules in one kilowatt hour |
+| PSI_PER_BAR (lpgCng) | 14.503773773 | psi in one bar |
+
+Asked about one Mscf of each pure component, characteriseGas gives the mass a thousand standard cubic feet carry. Every row is the same count of moles, so the mass follows the molar mass:
+| pure component | molar mass lb/lbmol (reference) | kgPerMscf |
+| --- | --- | --- |
+| Methane | 16.043 | 19.1757 |
+| Ethane | 30.07 | 35.9417 |
+| Propane | 44.096 | 52.7066 |
+| Nitrogen | 28.014 | 33.4842 |
+| Carbon dioxide | 44.01 | 52.6038 |
+
+# SECTION 3: THE COMPONENT REFERENCE TABLE (owned by Associate m01)
+
+GAS_COMPONENT_REFERENCE, as the engine exports it. The studio fills a gas analysis from these rows; the analysis carries the figures and the engine reads what it is given.
+
+| code | label | carbon per molecule | molar mass lb/lbmol | typical heating value Btu/scf | liquid density lb/gal | recoverable as NGL | inert |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| C1 | Methane | 1 | 16.043 | 1010 | none | false | false |
+| C2 | Ethane | 2 | 30.07 | 1770 | 2.971 | true | false |
+| C3 | Propane | 3 | 44.096 | 2516 | 4.233 | true | false |
+| IC4 | Iso-butane | 4 | 58.122 | 3252 | 4.695 | true | false |
+| NC4 | n-Butane | 4 | 58.122 | 3263 | 4.872 | true | false |
+| C5 | Pentanes plus | 5 | 72.15 | 4010 | 5.253 | true | false |
+| N2 | Nitrogen | 0 | 28.014 | 0 | none | false | true |
+| CO2 | Carbon dioxide | 1 | 44.01 | 0 | none | false | true |
+
+The engine's note on the table: "Molar masses and carbon numbers are definitional. Heating values and liquid densities are typical: the gas analysis and the certificate govern, and a measured value should replace these."
+
+The CO2 row carries one carbon per molecule and is marked inert: its carbon is counted when the carbon per mole is counted, and it is not a fuel.
+
+# SECTION 4: AN ANALYSIS THAT DOES NOT SUM TO ONE (owned by Associate m01)
+
+EGBEMA's laboratory sheet, typed in full: C1 0.742, C2 0.104, C3 0.062, IC4 0.013, NC4 0.021, C5 0.012, N2 0.018, CO2 0.028. The same sheet typed short, with less methane: C1 0.73, C2 0.102, C3 0.061, IC4 0.013, NC4 0.021, C5 0.012, N2 0.018, CO2 0.028.
+
+| sheet | rawMoleFractionSum | normalisationNote |
+| --- | --- | --- |
+| EGBEMA in full | 1.0000 | none |
+| EGBEMA typed short | 0.9850 | The mole fractions summed to 0.985 and were scaled to one. Check the analysis if that was not intended. |
+
+The engine scales a sheet to one and says so. The scaled fractions it works with:
+| code | typed (short sheet) | normalised (short sheet) | typed (full sheet) | normalised (full sheet) |
+| --- | --- | --- | --- | --- |
+| C1 | 0.73 | 0.7411 | 0.742 | 0.7420 |
+| C2 | 0.102 | 0.1036 | 0.104 | 0.1040 |
+| C3 | 0.061 | 0.0619 | 0.062 | 0.0620 |
+| IC4 | 0.013 | 0.0132 | 0.013 | 0.0130 |
+| NC4 | 0.021 | 0.0213 | 0.021 | 0.0210 |
+| C5 | 0.012 | 0.0122 | 0.012 | 0.0120 |
+| N2 | 0.018 | 0.0183 | 0.018 | 0.0180 |
+| CO2 | 0.028 | 0.0284 | 0.028 | 0.0280 |
+
+# SECTION 5: THE GAS BY THE MOLE: HEATING VALUE, INERTS, CARBON AND MASS (owned by Associate m02)
+
+Every property below is a mole-weighted sum over the normalised analysis: the heating value is the mole-weighted heating value, the carbon per mole counts every carbon atom (the CO2's included), the hydrocarbon carbon per mole counts only the carbon that can burn, and the mass in one Mscf is the moles in a thousand standard cubic feet times the molar mass.
+EGBEMA is the associated gas above. OGUTA is a lean non-associated gas beside it: C1 0.925, C2 0.031, C3 0.012, IC4 0.002, NC4 0.003, N2 0.012, CO2 0.015. The studio's opening gas: C1 0.78, C2 0.09, C3 0.05, IC4 0.01, NC4 0.02, C5 0.01, N2 0.02, CO2 0.02.
+
+| gas | ghvBtuScf | inertMoleFraction | co2MoleFraction | methaneMoleFraction | carbonPerMol | hydrocarbonCarbonPerMol | molarMassLbLbmol | kgPerMscf |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| EGBEMA | 1248.4110 | 0.0460 | 0.0280 | 0.7420 | 1.3600 | 1.3320 | 22.3436 | 26.7066 |
+| OGUTA | 1035.6050 | 0.0270 | 0.0150 | 0.9250 | 1.0580 | 1.0430 | 17.5880 | 21.0224 |
+| studio opening gas | 1210.7800 | 0.0400 | 0.0200 | 0.7800 | 1.3000 | 1.2800 | 21.3303 | 25.4954 |
+
+In every row, carbonPerMol minus hydrocarbonCarbonPerMol is the CO2 mole fraction: the only carbon that cannot burn is the carbon already in CO2.
+
+The heating value is blended on moles. Two shortcuts beside it on EGBEMA, each computed from the same reference table:
+| heating value, Btu/scf | value | minus the engine's |
+| --- | --- | --- |
+| the engine, on moles | 1248.4110 | 0.0000 |
+| the same heating values weighted by mass | 1537.2878 | 288.8768 |
+| the engine asked about the hydrocarbons alone (inerts left out and the rest scaled to one) | 1308.6069 | 60.1959 |
+
+Both shortcuts read higher than the engine on this gas.
+
+# SECTION 6: A CARBON NUMBER IS NEVER ASSUMED, AND WHAT THE ANALYSIS REFUSES (owned by Associate m02)
+
+A hydrocarbon typed without a carbon number takes it from the reference by its code. Probe: methane 0.9 and propane 0.1, once with propane's carbon number typed (3) and once with it left blank (null).
+| probe | carbonPerMol | hydrocarbonCarbonPerMol |
+| --- | --- | --- |
+| propane carbon number typed | 1.2000 | 1.2000 |
+| propane carbon number left blank | 1.2000 | 1.2000 |
+
+What characteriseGas refuses, in its own words:
+| probe | engine |
+| --- | --- |
+| an unknown code (XX) with no carbon number | REFUSED: No carbon number for XX. The flare's CO2 is counted atom by atom, so it is not assumed. |
+| a negative mole fraction (methane 1.1, ethane -0.1) | REFUSED: A mole fraction cannot be negative. |
+| a blank mole fraction (methane typed as '') | REFUSED: Every component needs a mole fraction. |
+| every mole fraction zero | REFUSED: The gas composition sums to nothing. |
+
+# SECTION 7: THE LIQUIDS IN THE GAS (owned by Associate m03)
+
+gpmC2Plus and gpmC3Plus are gallons of liquid per thousand standard cubic feet, derived from the composition: the moles in a thousand standard cubic feet, times each component's mole fraction and molar mass, over its liquid density, summed over the recoverable components. The engine's basis sentence:
+"Derived from the composition and the component liquid densities: gallons per Mscf follows from the moles in a thousand cubic feet, the molar mass and the liquid density."
+
+| gas | gpmC2Plus (ethane and heavier) | gpmC3Plus (propane and heavier) | gpmC2Plus minus gpmC3Plus (the ethane) | richness |
+| --- | --- | --- | --- | --- |
+| EGBEMA | 5.9942 | 3.2205 | 2.7737 | rich |
+| OGUTA | 1.3157 | 0.4890 | 0.8268 | lean |
+| studio opening gas | 5.0897 | 2.6894 | 2.4003 | rich |
+
+The richness word is read off gpmC3Plus. The engine was asked where the word changes, by bisection on the propane fraction of a methane and propane mix:
+| word changes | gpmC3Plus where it changes |
+| --- | --- |
+| lean to moderate | 1.0000 |
+| moderate to rich | 2.5000 |
+
+A gas at or above the lower edge reads moderate; at or above the upper edge it reads rich.
+
+# SECTION 8: A MISSING DENSITY IS A MISSING ANSWER (owned by Associate m03)
+
+EGBEMA's analysis with propane's liquid density left blank, and again with n-butane's heating value left blank:
+| probe | gpmC2Plus | gpmC3Plus | richness | missingLiquidDensity | ghvBtuScf | ghvNote |
+| --- | --- | --- | --- | --- | --- | --- |
+| EGBEMA as typed | 5.9942 | 3.2205 | rich | none | 1248.4110 | none |
+| propane density blank | null | null | null | C3 | 1248.4110 | none |
+| n-butane heating value blank | 5.9942 | 3.2205 | rich | none | null | A heating value missing on any component makes the mixture value missing, not partial. |
+
+A blank density leaves the liquids content and the richness word missing (null); a blank heating value leaves the mixture's heating value missing. Neither is a partial sum.
+
+# SECTION 9: THE MASS CEILING ON LIQUIDS (owned by Associate m03)
+
+kgPerMscf is the mass of one Mscf of the gas; c3PlusKgPerMscf is the part of it that is propane and heavier. They are the most any route can take out of a thousand standard cubic feet, by mass.
+
+| gas | kgPerMscf | c3PlusKgPerMscf | c3PlusKgPerMscf over kgPerMscf |
+| --- | --- | --- | --- |
+| EGBEMA | 26.7066 | 6.6647 | 0.2496 |
+| OGUTA | 21.0224 | 0.9798 | 0.0466 |
+| studio opening gas | 25.4954 | 5.5819 | 0.2189 |
+
+# SECTION 10: THE FLARE BY 40 CFR 98.233(n) (owned by Associate m04)
+
+EGBEMA flares 7.5 MMscfd on 355 days a year. The flare study gives a destruction efficiency of 0.97 and a combustion efficiency of 0.955, and the study uses a methane GWP of 29.8.
+
+The engine's basis sentence: "40 CFR 98.233(n): CO2 = the CO2 in the gas plus the combustion efficiency times the hydrocarbon carbon; CH4 = the methane in the gas times one less the destruction efficiency. Unburned ethane and heavier are not methane and carry no GWP here."
+
+The molar masses the flare is weighed at are not exported. Asked about itself (a gas that is all CO2 flared, and one that is all methane flared with next to no destruction), the engine gives:
+| species | molar mass kg/kmol the flare uses |
+| --- | --- |
+| CO2 | 44.009 |
+| methane | 16.043 |
+
+| EGBEMA flare | value |
+| --- | --- |
+| scfPerYear | 2662500000 |
+| flareCo2Tonnes (t/yr) | 182079.024 |
+| flareCh4Tonnes (t/yr) | 1136.490 |
+| flareCo2eTonnes (t/yr) | 215946.438 |
+| methaneShareOfFlareCo2e | 0.1568 |
+| destructionEfficiency | 0.97 |
+| combustionEfficiency | 0.955 |
+
+THE CO2 IN THE GAS PASSES THROUGH. Two probes at EGBEMA's volume and days: a gas that is all CO2, and a gas that is all methane, each flared at EGBEMA's efficiencies.
+| probe | flareCo2Tonnes | flareCh4Tonnes |
+| --- | --- | --- |
+| all CO2, EGBEMA efficiencies | 140054.324 | 0.000 |
+| all CO2, both efficiencies 0.5 | 140054.324 | 0.000 |
+| all methane, EGBEMA efficiencies | 133751.879 | 1531.658 |
+
+The CO2 already in the gas leaves the flare as CO2 at every efficiency, and none of it is methane.
+
+METHANE FROM THE METHANE. The methane that escapes is the methane in the gas times one less the destruction efficiency. Unburned ethane and heavier are not methane and carry no GWP here. Beside the engine, the figure a flare gives if every unburned carbon atom is counted as methane, computed from the engine's own carbon per mole:
+| methane, t/yr | value | over the engine's |
+| --- | --- | --- |
+| the engine (methane in the gas) | 1136.490 | 1.0000 |
+| every unburned carbon counted as methane | 2083.055 | 1.8329 |
+
+# SECTION 11: DESTRUCTION AND COMBUSTION EFFICIENCY (owned by Associate m04)
+
+The rule separates two efficiencies. The DESTRUCTION efficiency is the share of hydrocarbon destroyed and sets the methane. The COMBUSTION efficiency is the share oxidised to CO2 and sets the CO2. A combustion efficiency cannot exceed the destruction efficiency. Left out, the destruction efficiency stands in for it, and the engine says so.
+
+| EGBEMA | combustion efficiency used | flareCo2Tonnes | flareCh4Tonnes | flareCo2eTonnes | combustionEfficiencyNote |
+| --- | --- | --- | --- | --- | --- |
+| both efficiencies given | 0.955 | 182079.024 | 1136.490 | 215946.438 | none |
+| combustion efficiency left out | 0.97 | 184877.310 | 1136.490 | 218744.723 | No combustion efficiency was given, so the destruction efficiency stands in for it. 40 CFR 98.233(n) puts combustion 1.5 points below destruction, so the CO2 here is slightly high. |
+| left out minus given | 0.0150 | 2798.286 | 0.000 | 2798.285 |  |
+
+Rounding note: the engine reports each tonnage to three decimals before the difference is taken, so the CO2e difference and the CO2 difference in the last row can differ in the third decimal though the methane is the same.
+
+The stand-in moves the CO2 and leaves the methane where it was, because the methane is set by the destruction efficiency alone.
+
+The destruction efficiency across a range, combustion left out so it stands in each time:
+| destruction efficiency (input) | flareCo2Tonnes | flareCh4Tonnes | flareCo2eTonnes | methaneShareOfFlareCo2e |
+| --- | --- | --- | --- | --- |
+| 0.9 | 171818.645 | 3788.301 | 284710.023 | 0.3965 |
+| 0.95 | 181146.263 | 1894.151 | 237591.952 | 0.2376 |
+| 0.97 | 184877.310 | 1136.490 | 218744.723 | 0.1548 |
+| 0.99 | 188608.357 | 378.830 | 199897.495 | 0.0565 |
+| 1 | 190473.881 | 0.000 | 190473.881 | 0.0000 |
+
+# SECTION 12: CO2e WITH A STATED GWP, AND THE METHANE SHARE (owned by Associate m05)
+
+The methane GWP is an input with no default: the assessment report it comes from is the study's to choose, and this course does not choose it. CO2e is the CO2 plus the methane times the GWP. EGBEMA's flare at the study's GWP and at two others, for comparison only:
+| GWP (input) | flareCo2eTonnes | methaneShareOfFlareCo2e |
+| --- | --- | --- |
+| 29.8 | 215946.438 | 0.1568 |
+| 20 | 204808.832 | 0.1110 |
+| 40 | 227538.640 | 0.1998 |
+
+With the GWP left blank:
+| field | value |
+| --- | --- |
+| flareCo2Tonnes | 182079.024 |
+| flareCh4Tonnes | 1136.490 |
+| flareCo2eTonnes | null |
+| methaneShareOfFlareCo2e | null |
+| blockedBy | no methane global warming potential supplied |
+
+# SECTION 13: NO EFFICIENCY, NO FLARE: WHAT abatement REFUSES (owned by Associate m05)
+
+What abatement refuses, each probe on EGBEMA's gas with the rest of EGBEMA's parcel:
+| probe | engine |
+| --- | --- |
+| destruction efficiency left blank ('') | REFUSED: A flare destruction efficiency in (0, 1] is required. For a flare it is most of the answer and it is contested, so it is not assumed. |
+| destruction efficiency 1.2 | REFUSED: A flare destruction efficiency in (0, 1] is required. For a flare it is most of the answer and it is contested, so it is not assumed. |
+| combustion efficiency 0.98 above a destruction efficiency of 0.97 | REFUSED: A flare combustion efficiency must lie in (0, 1] and cannot exceed the destruction efficiency. |
+| no volume | REFUSED: A gas volume is required. |
+| on-stream days left blank ('') | REFUSED: On-stream days are required, more than 0 and no more than 366. |
+| on-stream days 367 | REFUSED: On-stream days are required, more than 0 and no more than 366. |
+| a gas the analysis refused | REFUSED: A characterised gas is required. |
+
+On-stream days OMITTED from the call (not typed at all) take the stated default: scfPerYear 2625000000. Typed blank, they are refused, as the table shows.
+
+# SECTION 14: WHAT THE FLARE MODEL LEAVES OUT (owned by Associate m05)
+
+These are stated limits of the engine, taught and never computed with:
+- The efficiencies have no default. 40 CFR 98.233(n)(1) is a United States rule with tiered default pairs; whether a Nigerian flare study defaults to any tier, or to the NUPRC flare regulations' basis, is a regulation reading, and both efficiencies stay inputs.
+- An unlit flare is not modelled. Gas sent to a flare that is not lit is vented, all of it methane; the engine's flare is lit.
+- The methane GWP and any credit price are case inputs; the engine ships neither.
+- The component heating values and liquid densities are typical figures (the engine's own note says the gas analysis and the certificate govern).
+
+The Flare Gas to Value Studio opens with both efficiencies and the GWP blank. On the studio's opening gas with its opening parcel, abatement answers:
+| probe | engine |
+| --- | --- |
+| studio opening gas, 10 MMscfd, 350 days, efficiencies blank | REFUSED: A flare destruction efficiency in (0, 1] is required. For a flare it is most of the answer and it is contested, so it is not assumed. |
+
+# SECTION 15: THE EGBEMA FLARE END TO END, AND THE STUDIO'S OPENING GAS (owned by Associate m06)
+
+EGBEMA, read in one table from the analysis to the CO2e:
+| step | figure |
+| --- | --- |
+| sheet sum | 1.0000 |
+| heating value, Btu/scf | 1248.4110 |
+| inerts, mole fraction | 0.0460 |
+| hydrocarbon carbon per mole | 1.3320 |
+| mass, kg/Mscf | 26.7066 |
+| propane and heavier, kg/Mscf | 6.6647 |
+| liquids, gal/Mscf C3+ | 3.2205 |
+| richness | rich |
+| flare CO2, t/yr | 182079.024 |
+| flare methane, t/yr | 1136.490 |
+| flare CO2e, t/yr | 215946.438 |
+
+The studio's opening gas, read the same way (its flare is refused until the efficiencies are typed, SECTION 14):
+| step | figure |
+| --- | --- |
+| heating value, Btu/scf | 1210.7800 |
+| hydrocarbon carbon per mole | 1.2800 |
+| mass, kg/Mscf | 25.4954 |
+| propane and heavier, kg/Mscf | 5.5819 |
+| liquids, gal/Mscf C3+ | 2.6894 |
+| richness | rich |
+
+# SECTION 16: FOUR ROUTES AND THEIR ENVELOPES (owned by Professional m01)
+
+ROUTE_TEMPLATES, as the engine exports them. Every limit ships unset (null): the envelope is the study's to fill.
+
+| route id | label | yield unit | yield ceiling | requirement | direction | unit | limit |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| cng | Compressed natural gas | kg | gas mass | Minimum volume | min | MMscfd | null |
+| cng | Compressed natural gas | kg | gas mass | Maximum inerts | max | mole fraction | null |
+| cng | Compressed natural gas | kg | gas mass | Minimum heating value | min | Btu/scf | null |
+| mini_lng | Mini LNG | t | gas mass | Minimum volume | min | MMscfd | null |
+| mini_lng | Mini LNG | t | gas mass | Maximum CO2 before treatment | max | mole fraction | null |
+| mini_lng | Mini LNG | t | gas mass | Maximum inerts | max | mole fraction | null |
+| lpg_extraction | LPG and condensate extraction | t | propane and heavier | Minimum volume | min | MMscfd | null |
+| lpg_extraction | LPG and condensate extraction | t | propane and heavier | Minimum liquids content | min | gal/Mscf of C3+ | null |
+| gas_to_power | Gas to power or gas to wire | MWh | heating value | Minimum volume | min | MMscfd | null |
+| gas_to_power | Gas to power or gas to wire | MWh | heating value | Minimum heating value | min | Btu/scf | null |
+| gas_to_power | Gas to power or gas to wire | MWh | heating value | Maximum inerts | max | mole fraction | null |
+
+The engine's note: "Requirement limits are yours to set. They are commercial and technology-specific rather than physical law: a licensor's CO2 limit is a design choice and the minimum viable volume moves with the market."
+
+Notes the templates carry on two requirements:
+- Mini LNG, Maximum CO2 before treatment: "CO2 freezes in a liquefaction train and must be removed first. The limit is the licensor's."
+- LPG and condensate extraction, Minimum liquids content: "Below this the liquids do not pay for the plant, whatever the gas is worth."
+
+# SECTION 17: SCREENING EGBEMA: PASS, FAIL AND NOT FULLY SCREENED (owned by Professional m01)
+
+The EGBEMA study's limits, route by route (a requirement not listed is left unset):
+| route | limits typed |
+| --- | --- |
+| Compressed natural gas | minVolumeMMscfd 5, maxInertFraction 0.06, minGhvBtuScf 1000 |
+| Mini LNG | minVolumeMMscfd 10, maxCo2Fraction 0.02, maxInertFraction 0.06 |
+| LPG and condensate extraction | minVolumeMMscfd 5, minGpmC3Plus 2 |
+| Gas to power or gas to wire | minVolumeMMscfd 3, minGhvBtuScf 950 |
+
+| route | requirement | actual | limit | status | margin |
+| --- | --- | --- | --- | --- | --- |
+| Compressed natural gas | Minimum volume | 7.5000 | 5 | pass | 2.5000 |
+| Compressed natural gas | Maximum inerts | 0.0460 | 0.06 | pass | 0.0140 |
+| Compressed natural gas | Minimum heating value | 1248.4110 | 1000 | pass | 248.4110 |
+| Mini LNG | Minimum volume | 7.5000 | 10 | fail | -2.5000 |
+| Mini LNG | Maximum CO2 before treatment | 0.0280 | 0.02 | fail | -0.0080 |
+| Mini LNG | Maximum inerts | 0.0460 | 0.06 | pass | 0.0140 |
+| LPG and condensate extraction | Minimum volume | 7.5000 | 5 | pass | 2.5000 |
+| LPG and condensate extraction | Minimum liquids content | 3.2205 | 2 | pass | 1.2205 |
+| Gas to power or gas to wire | Minimum volume | 7.5000 | 3 | pass | 4.5000 |
+| Gas to power or gas to wire | Minimum heating value | 1248.4110 | 950 | pass | 298.4110 |
+| Gas to power or gas to wire | Maximum inerts | 0.0460 | unset | unchecked | none |
+
+| route | verdict | failures (requirement: actual against limit, shortfall) | uncheckedRequirements |
+| --- | --- | --- | --- |
+| Compressed natural gas | passes | none | none |
+| Mini LNG | fails | Minimum volume: 7.5000 against 10, short by 2.5000 MMscfd; Maximum CO2 before treatment: 0.0280 against 0.02, short by 0.0080 mole fraction | none |
+| LPG and condensate extraction | passes | none | none |
+| Gas to power or gas to wire | not fully screened | none | Maximum inerts |
+
+Three verdicts appear: passes, fails, and not fully screened. A requirement with no limit is reported unchecked; an unset limit is not a satisfied one.
+
+The same four routes with every limit unset, as the studio opens:
+| route | verdict |
+| --- | --- |
+| Compressed natural gas | not fully screened |
+| Mini LNG | not fully screened |
+| LPG and condensate extraction | not fully screened |
+| Gas to power or gas to wire | not fully screened |
+
+| probe | engine |
+| --- | --- |
+| screenRoute on a gas the analysis refused | REFUSED: A characterised gas is required. |
+
+# SECTION 18: WHAT THE GAS CAN YIELD: THE CEILING ON EACH ROUTE (owned by Professional m02)
+
+Each route's yield is typed per Mscf in the route's own unit, and each carries a basis for the most one Mscf of this gas can make (yieldCeiling): CNG and mini LNG on the whole gas mass, LPG on the propane and heavier, gas to power on the heating value in MWh (the heating value times a thousand over BTU_PER_MWH).
+
+| route | yield unit | ceiling basis | EGBEMA ceiling per Mscf | OGUTA ceiling per Mscf | studio opening gas ceiling per Mscf | EGBEMA yield typed |
+| --- | --- | --- | --- | --- | --- | --- |
+| Compressed natural gas | kg | gas mass | 26.7066 | 21.0224 | 25.4954 | 18.5 |
+| Mini LNG | t | gas mass | 0.0267 | 0.0210 | 0.0255 | 0.0175 |
+| LPG and condensate extraction | t | propane and heavier | 0.0067 | 0.0010 | 0.0056 | 0.0052 |
+| Gas to power or gas to wire | MWh | heating value | 0.3659 | 0.3035 | 0.3548 | 0.085 |
+
+Every EGBEMA yield typed sits at or below its ceiling. A yield above the ceiling is refused, and a yield of zero is refused:
+| probe | engine |
+| --- | --- |
+| studio opening gas, LPG route at 0.02 t/Mscf | REFUSED: Route "LPG and condensate extraction" yields 0.02 t per Mscf, more than the 0.005582 t the gas holds (propane and heavier). A yield above what the gas contains is refused. |
+| EGBEMA, CNG route at 30 kg/Mscf | REFUSED: Route "Compressed natural gas" yields 30 kg per Mscf, more than the 26.706618 kg the gas holds (gas mass). A yield above what the gas contains is refused. |
+| EGBEMA, gas to power at 0 MWh/Mscf | REFUSED: Route "Gas to power or gas to wire" needs a positive product yield per Mscf. |
+
+The studio's LPG route on its opening gas at 0.0045 t/Mscf is within its ceiling of 0.0056 t/Mscf, and the typed yield over the ceiling is 0.8062.
+
+# SECTION 19: A ROUTE'S YEAR: PRODUCT, REVENUE, COST AND MARGIN (owned by Professional m03)
+
+EGBEMA's four routes on 7.5 MMscfd and 355 days. The inputs typed:
+| route | yield per Mscf | recovery | price per unit, dollars | reference capital, dollars | reference capacity MMscfd | fixed opex, dollars a year | variable opex, dollars per Mscf |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Compressed natural gas | 18.5 kg CNG | 0.88 | 0.55 | 24000000 | 6 | 1900000 | 0.35 |
+| Mini LNG | 0.0175 t LNG | 0.86 | 455 | 80000000 | 15 | 5200000 | 0.65 |
+| LPG and condensate extraction | 0.0052 t LPG | 0.82 | 470 | 38000000 | 10 | 2600000 | 0.28 |
+| Gas to power or gas to wire | 0.085 MWh | 0.94 | 58 | 50000000 | 12 | 3600000 | 0.45 |
+
+mscfPerYear is the volume in Mscf a day times the on-stream days; productPerYear is that times the yield times the recovery; revenue is product times price; operating cost is the fixed cost plus the variable cost per Mscf of the whole parcel; valuePerMscf is the margin over mscfPerYear.
+| route | mscfPerYear | productPerYear | revenuePerYear, dollars | operatingCostPerYear, dollars | grossMarginPerYear, dollars | valuePerMscf, dollars |
+| --- | --- | --- | --- | --- | --- | --- |
+| Compressed natural gas | 2662500.0000 | 43345500.0000 kg CNG | 23840025.00 | 2831875.00 | 21008150.00 | 7.8904 |
+| Mini LNG | 2662500.0000 | 40070.6250 t LNG | 18232134.38 | 6930625.00 | 11301509.38 | 4.2447 |
+| LPG and condensate extraction | 2662500.0000 | 11352.9000 t LPG | 5335863.00 | 3345500.00 | 1990363.00 | 0.7476 |
+| Gas to power or gas to wire | 2662500.0000 | 212733.7500 MWh | 12338557.50 | 4798125.00 | 7540432.50 | 2.8321 |
+
+Recovery is a design outcome typed per route. It is refused outside (0, 1]:
+| probe | engine |
+| --- | --- |
+| CNG recovery 0 | REFUSED: Route "Compressed natural gas" needs a recovery fraction in (0, 1]. A recovery assumed at 100 percent is the quiet optimism that sinks these cases. |
+| CNG recovery 1.2 | REFUSED: Route "Compressed natural gas" needs a recovery fraction in (0, 1]. A recovery assumed at 100 percent is the quiet optimism that sinks these cases. |
+| CNG recovery left blank ('') | REFUSED: Route "Compressed natural gas" needs a recovery fraction in (0, 1]. A recovery assumed at 100 percent is the quiet optimism that sinks these cases. |
+| CNG on-stream days left blank ('') | REFUSED: On-stream days are required, more than 0 and no more than 366. |
+
+A BLANK COST IS NAMED. A cost box left blank is taken as zero and named in assumedZero:
+| CNG route | operatingCostPerYear | valuePerMscf | assumedZero |
+| --- | --- | --- | --- |
+| both costs typed | 2831875.00 | 7.8904 | none |
+| variable cost left blank ('') | 1900000.00 | 8.2404 | variable operating cost |
+| fixed cost left blank (null) | 931875.00 | 8.6040 | fixed operating cost |
+
+# SECTION 20: CAPITAL BY THE MODULAR POWER LAW, AND THE CASH FLOW HANDED ON (owned by Professional m03)
+
+Capital is scaled from the route's reference plant: cost = reference cost times (capacity over reference capacity) to the exponent. The exponents modularRefinery exports:
+| SCALING_EXPONENT | value |
+| --- | --- |
+| STICK_BUILT | 0.6 |
+| MODULAR | 0.9 |
+
+| route | capitalCost | scalingExponent | the six-tenths rule on the same plant | modular minus six-tenths |
+| --- | --- | --- | --- | --- |
+| Compressed natural gas | 29337983.06 | 0.9 | 27438303.12 | 1899679.94 |
+| Mini LNG | 42870938.50 | 0.9 | 52780316.43 | -9909377.93 |
+| LPG and condensate extraction | 29331801.26 | 0.9 | 31975721.65 | -2643920.39 |
+| Gas to power or gas to wire | 32753824.67 | 0.9 | 37713602.10 | -4959777.43 |
+
+The engine assembles the cash flow and hands it on; it does not discount it. Year 0 is the capital as a negative, and the recurring figure is the margin:
+| route | cashFlow.year0 | cashFlow.recurring |
+| --- | --- | --- |
+| Compressed natural gas | -29337983.06 | 21008150.00 |
+| Mini LNG | -42870938.50 | 11301509.38 |
+| LPG and condensate extraction | -29331801.26 | 1990363.00 |
+| Gas to power or gas to wire | -32753824.67 | 7540432.50 |
+
+The engine's valuation note: "Capital, operating cost and revenue are assembled here and handed to the sanctioned economics engine. A second discounted cash flow in this module would be a second answer."
+With the reference cost left blank the capital is null and the note reads: "No capital cost: a reference plant cost and capacity are required to scale from."
+
+# SECTION 21: THE COUNTERFACTUAL: ONLY THE RECOVERED SHARE IS AVOIDED (owned by Professional m04)
+
+The CNG route recovers 0.88 of EGBEMA's flare. The gas it does not recover is still flared, so the avoided flare CO2e is the flare's CO2e times the recovery. The net abatement is the avoided flare, less what burning the product emits, plus what the product displaces. Three counterfactuals on the same flare and the same route:
+
+| counterfactual | flareCo2eTonnes | recoveryFraction | avoidedFlareCo2eTonnes | product combustion (input) | displaced fuel (input) | netAbatementTonnesCo2ePerYear | net minus the gross flare |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| CNG displacing diesel in haulage trucks | 215946.438 | 0.88 | 190032.865 | 128000 | 156000 | 218032.865 | 2086.427 |
+| CNG displacing pipeline gas already burned | 215946.438 | 0.88 | 190032.865 | 128000 | 128000 | 190032.865 | -25913.573 |
+| CNG sold into a market that burned nothing | 215946.438 | 0.88 | 190032.865 | 128000 | 0 | 62032.865 | -153913.573 |
+
+One flare, three answers. Displacing diesel, the net abatement is larger than the gross flare; displacing gas already burned, or selling into a market that burned nothing, it is smaller.
+
+Gas to power recovers 0.94. Its counterfactual, "Gas to power for a new load that burned nothing": product combustion 205000, displaced 0. avoidedFlareCo2eTonnes 202989.652, netAbatementTonnesCo2ePerYear -2010.348.
+The net is below zero: this route adds emissions.
+
+BLOCKED UNTIL DECLARED. abatement gives no net without every input it rests on, and says which is missing first (blockedBy):
+| probe | netAbatementTonnesCo2ePerYear | blockedBy |
+| --- | --- | --- |
+| no GWP | null | no methane global warming potential supplied |
+| no recovery fraction | null | no recovery fraction in (0, 1]: gas the plant does not recover is still flared |
+| recovery 1.5 | null | no recovery fraction in (0, 1]: gas the plant does not recover is still flared |
+| no counterfactual label | null | the counterfactual is not declared: what the product displaces, and what burning it emits |
+| no displaced fuel figure | null | the counterfactual is not declared: what the product displaces, and what burning it emits |
+
+The warning printed while the counterfactual is undeclared: "No abatement is reported. The flare's gross emission is not the abatement: recover the gas and somebody burns it, and if that displaces a dirtier fuel the abatement is larger while if it displaces nothing it is smaller. State what the product displaces and what burning it emits."
+
+The flare's gross CO2e is still reported beside a blocked net, as grossClaimIfNoCounterfactual (215946.438 t/yr here): the claim the engine will not make.
+
+# SECTION 22: DOES THE PROJECT NEED CREDITS: THE BREAKEVEN CREDIT PRICE (owned by Professional m05)
+
+The CNG route against the diesel counterfactual: net abatement 218032.865 t/yr, gross margin 21008150.00 a year, hurdle margin 24500000 a year. Credit prices typed in this order: 40, 8, 20, 12 dollars per tonne. Credit prices are case inputs; the engine ships none.
+
+| credit price (input, in the order typed) | creditRevenuePerYear | totalMarginPerYear | clearsHurdle |
+| --- | --- | --- | --- |
+| 40 | 8721314.60 | 29729464.60 | true |
+| 8 | 1744262.92 | 22752412.92 | false |
+| 20 | 4360657.30 | 25368807.30 | true |
+| 12 | 2616394.38 | 23624544.38 | false |
+
+| field | value |
+| --- | --- |
+| standsAloneWithoutCredits | false |
+| breakevenCreditPrice ((hurdle minus margin) over net tonnes) | 16.0152 |
+| lowestTestedClearingPrice | 20 |
+| the first price in the order typed that clears | 40 |
+| verdict | Needs a credit price of 16.02 per tonne to clear the hurdle. This is a bet on the credit price. |
+
+The breakeven is the price at which the route just clears its hurdle, in closed form; the lowest tested price that clears is reported beside it; the first price in the order typed that clears is a third figure again, and it is neither.
+
+At a hurdle of 20000000 the route stands alone: standsAloneWithoutCredits true, breakevenCreditPrice 0.0000, verdict "Clears the hurdle on its own. Credits are upside; the case stands without them."
+
+NO ABATEMENT, NO CREDITS. What creditSensitivity refuses, and what it answers without a verdict:
+| probe | engine |
+| --- | --- |
+| the gas-to-power counterfactual, which adds emissions | REFUSED: The net abatement is -2010.348 tCO2e a year: the project does not abate, so there are no credits to sell. |
+| no net abatement (the counterfactual undeclared) | REFUSED: No net abatement to sell. Declare the counterfactual first: a credit computed from a gross flare figure is a credit that cannot be issued. |
+| a hurdle that is not a number ('x') | REFUSED: The hurdle margin is not a number. |
+| no margin for the route (price missing) | answers with no verdict: breakevenCreditPrice null; "No margin for this route, so whether it needs credits cannot be said. Supply its price and costs." |
+| hurdle left blank ('') | answers with no verdict: breakevenCreditPrice null; "No hurdle margin, so whether it needs credits cannot be said." |
+
+# SECTION 23: THE BID TABLE (owned by Professional m05)
+
+compareRoutes lays the routes side by side. A route that fails screening stays in the table with its failure named. The EGBEMA study, with its limits:
+| route | verdict | capitalCost | revenuePerYear | grossMarginPerYear | valuePerMscf | netAbatementTonnesCo2ePerYear |
+| --- | --- | --- | --- | --- | --- | --- |
+| Compressed natural gas | passes | 29337983.06 | 23840025.00 | 21008150.00 | 7.8904 | 218032.865 |
+| Mini LNG | fails | 42870938.50 | 18232134.38 | 11301509.38 | 4.2447 | none declared |
+| LPG and condensate extraction | passes | 29331801.26 | 5335863.00 | 1990363.00 | 0.7476 | none declared |
+| Gas to power or gas to wire | not fully screened | 32753824.67 | 12338557.50 | 7540432.50 | 2.8321 | none declared |
+
+| field | value |
+| --- | --- |
+| bestByValuePerMscf | cng |
+| leaderNotFullyScreened | null |
+| screenedOut | Mini LNG |
+| notFullyScreened | Gas to power or gas to wire |
+| rankingNote | Ranked on gross margin per Mscf, which ignores the capital. Compare that against the capital column before concluding, and value the shortlist in the sanctioned economics engine. |
+
+The same economics with every limit unset, as the studio opens:
+| field | value |
+| --- | --- |
+| bestByValuePerMscf | null |
+| leaderNotFullyScreened | cng |
+| rankingNote | No route passes screening yet, so none is ranked best. Compressed natural gas leads on value among routes not fully screened; set the limits before relying on it. |
+
+# SECTION 24: THE EGBEMA ROUTES END TO END, AND WHAT THE ORACLE CHECKS ON A PARCEL (owned by Professional m06)
+
+EGBEMA's CNG route, from the gas to the credit test:
+| step | figure |
+| --- | --- |
+| CNG yield ceiling, kg/Mscf | 26.7066 |
+| CNG made, kg/yr | 43345500.0000 |
+| capital, dollars | 29337983.06 |
+| gross margin, dollars a year | 21008150.00 |
+| value per Mscf, dollars | 7.8904 |
+| flare CO2e, t/yr | 215946.438 |
+| avoided flare CO2e at the recovery, t/yr | 190032.865 |
+| net abatement against diesel, t/yr | 218032.865 |
+| breakeven credit price, dollars per tonne | 16.0152 |
+
+What the validation oracle (oracle_flaretovalue.py, in packages/engines/tools/validation/downstream) checks, independently of the engine: the gas in exact rationals carried in kilograms and cubic metres; molar masses rebuilt from atomic weights; the standard molar volume derived from the gas constant; the flare by the rule by moles, cross-checked by the rule's own volumetric route; the route, credit and comparison ledgers. It does not validate the typical heating values and liquid densities: those are pinned, and the engine labels them typical.
+
+# SECTION 25: THE LPG BLEND: THREE PROPERTIES ON THREE BASES (owned by Expert m01)
+
+LPG_REFERENCE, as the engine exports it:
+| code | label | molar mass kg/kmol | typical liquid density kg/m3 | range | typical latent heat kJ/kg | range | typical boiling point C |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| propane | Propane (C3H8) | 44.096 | 508 | 500-515 at 15 C | 425 | 410-430 at atmospheric boiling | -42 |
+| butane | n-Butane (C4H10) | 58.122 | 584 | 575-590 at 15 C | 385 | 370-395 at atmospheric boiling | -0.5 |
+
+The engine's note: "Typical values only, offered as a starting point. Liquid density, latent heat and calorific value vary with the product and the supplier; the certificate of quality is the authority."
+
+KANO's blend by liquid volume: propane 0.35, butane 0.65, on the typical figures. The studio's opening blend: propane 0.4, butane 0.6.
+| blend | densityKgM3 (basis) | latentHeatKJkg (basis) | molarMassKgKmol (basis) | propane mass fraction | butane mass fraction |
+| --- | --- | --- | --- | --- | --- |
+| KANO | 557.4000 (volume) | 397.7592 (mass) | 52.7681 (mole) | 0.3190 | 0.6810 |
+| studio opening blend | 553.6000 (volume) | 399.6821 (mass) | 52.0456 (mole) | 0.3671 | 0.6329 |
+
+Density blends on volume; latent heat per kilogram blends on mass, through the mass fractions the densities give; molar mass blends on moles. KANO's latent heat averaged on the volume fractions instead would be 399.0000 kJ/kg, which is 1.2408 kJ/kg from the engine's.
+
+| probe | engine |
+| --- | --- |
+| a blank butane volume fraction | REFUSED: Every component needs a volume fraction. |
+| a butane liquid density left blank | REFUSED: A liquid density is required for every component; it is not assumed. |
+| a negative volume fraction | REFUSED: A volume fraction cannot be negative. |
+
+# SECTION 26: THE VESSEL: THE FILL LIMIT AND ITS BASIS, COVER AND REORDER (owned by Expert m01)
+
+The fill limit is required and has no default; the code value is the site's. A code states it two ways, and the engine takes the basis explicitly (FILL_RATIO_BASIS: liquid_volume, water_capacity_mass). On the water-capacity basis the engine weighs the water capacity at WATER_KG_M3 = 999.1 kg/m3. KANO's vessel, with two illustrative fill limits (neither is a code value):
+Vessel 150 m3, demand 8 t/day, delivery 20 t, lead time 3 days, safety stock 2 days, liquid density the blend's 557.4000 kg/m3.
+
+| fill limit (input) | fillRatioBasis | usableM3 | usableTonnes | vapourSpaceM3 | coverDays | safetyStockTonnes | reorderAtTonnes | ullageAtReorderTonnes | deliveryFitsUllage | deliveriesPerMonth |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.85 | liquid_volume | 127.5000 | 71.0685 | 22.5000 | 8.8840 | 16.0000 | 40.0000 | 31.0685 | true | 12.0000 |
+| 0.42 | water_capacity_mass | 112.9230 | 62.9433 | 37.0770 | 7.8680 | 16.0000 | 40.0000 | 22.9433 | true | 12.0000 |
+
+The same 0.42 read on the other basis (as a share of the liquid volume) gives 35.1162 t, which is 27.8271 t below the filling density's 62.9433 t. The vapour space is not spare capacity: it is what keeps a vessel of expanding liquid from rupturing.
+
+| probe | engine |
+| --- | --- |
+| fill limit left blank | REFUSED: A maximum fill ratio is required and is not defaulted. It is a code limit for the product and the vessel: LPG expands and a vessel filled liquid-full ruptures hydraulically. |
+| fill limit 1 | REFUSED: The maximum fill ratio must lie between 0 and 1. |
+| basis typed as 'weight' | REFUSED: Unknown fill ratio basis "weight". Use liquid_volume or water_capacity_mass. |
+| a filling density of 0.6 on water capacity at the KANO blend density | REFUSED: At this density the filling density fills the vessel liquid-full. Check the limit and its basis. |
+| no liquid density | REFUSED: A liquid density is required; it is not assumed. |
+
+A BLANK LEAD TIME IS MISSING. With the lead time left blank (''): missingInputs lead time; reorderAtTonnes null; deliveryFitsUllage no verdict. The cover (8.8840 days) does not depend on it and is still given.
+
+# SECTION 27: THE VAPORIZER: THREE TERMS AND THE BOILING POINT AT PRESSURE (owned by Expert m02)
+
+KANO's vaporizer: 650 kg/h of the blend (latent heat 397.7592 kJ/kg, from the blend on mass), liquid in at 18 C (liquid heat capacity 2.45 kJ/kg K), boiling at 38 C at the vaporizer's pressure, vapour out at 55 C (vapour heat capacity 1.68 kJ/kg K), design margin 15 percent.
+
+| term | kW | share of the duty |
+| --- | --- | --- |
+| Warm the liquid to boiling | 8.8472 | 0.1031 |
+| Boil it | 71.8176 | 0.8368 |
+| Superheat the vapour | 5.1567 | 0.0601 |
+| dutyKW | 85.8215 | 1.0000 |
+| designDutyKW (with the margin) | 98.6948 |  |
+
+With the boiling point left blank the engine gives the boil alone: dutyKW 71.8176, missingTerms Warm the liquid to boiling; Superheat the vapour, and the note "Duty covers only the terms supplied. Missing: Warm the liquid to boiling, Superheat the vapour. It is a floor, not the duty."
+
+The boiling point that matters is the one at the vaporizer's pressure. n-butane's typical ATMOSPHERIC boiling point in LPG_REFERENCE is -0.5 C; typed as the boiling point for a liquid entering at 18 C, it is refused:
+| probe | engine |
+| --- | --- |
+| boiling point -0.5 C, liquid in at 18 C | REFUSED: The liquid enters at 18 C, above the boiling point given (-0.5 C). A liquid above its boiling point is not liquid: give the boiling point at the vaporizer's operating pressure. |
+| vapour out at 30 C, below the 38 C boiling point | REFUSED: The vapour leaves at 30 C, below the boiling point given (38 C), so it would condense. Give an outlet above the boiling point at the vaporizer's pressure. |
+| no latent heat | REFUSED: A latent heat of vaporisation is required; it is a property of the product and is not assumed. |
+| a design margin of -5 percent | REFUSED: The design margin cannot be negative. |
+
+# SECTION 28: THE CAROUSEL IS A QUEUE, ON THE POSITIONS WHOLLY WORKING (owned by Expert m02)
+
+KANO fills 3200 cylinders over a 10 hour shift, 2.2 minutes a cylinder, on 18 positions each available 0.92 of the time. The carousel is the loading-rack queue (Erlang C) run on the positions wholly working: the floor of the positions times the availability.
+
+| field | value |
+| --- | --- |
+| arrivalsPerHour | 320.0000 |
+| effectivePositions | 16.5600 |
+| queuePositions | 16 |
+| positionRoundingNote | The queue is computed on 16 working positions, rounded down from 16.56, because a queue has a whole number of servers. The throughput capacity below uses the unrounded figure. |
+| minimumPositionsForThroughput | 13 |
+| queue offered (erlangs) | 11.7333 |
+| queue utilisation | 0.7333 |
+| queue probabilityOfWaiting | 0.1769 |
+| queue averageWaitMinutes | 0.0912 |
+| queue queueLength | 0.4866 |
+| throughputCapacityPerDay | 4516.3600 |
+| meetsDemand | true |
+
+The engine's note: "Availability reduces the positions that are working; utilisation is how busy the working ones are. They are different numbers and a plant sized on one alone comes up short."
+
+The same carousel run on other whole numbers of positions, to show what the count does to the wait (availability set to 1 so the count is the count typed):
+| positions (input) | probabilityOfWaiting | averageWaitMinutes |
+| --- | --- | --- |
+| 16 | 0.1769 | 0.0912 |
+| 17 | 0.1078 | 0.0450 |
+| 18 | 0.0633 | 0.0222 |
+
+The studio's opening carousel (2400 a day, 2.5 minutes, 16 positions at 0.9, 8 hours): effectivePositions 14.4000, queuePositions 14, averageWaitMinutes 0.9850.
+
+| probe | engine |
+| --- | --- |
+| one position at availability 0.4 | REFUSED: Only 0.4 positions are working on average: fewer than one. |
+| shift hours left blank ('') | REFUSED: Shift hours must be positive and availability must lie in (0, 1]. |
+| availability 1.2 | REFUSED: Shift hours must be positive and availability must lie in (0, 1]. |
+| no fill time | REFUSED: Demand, fill time and a position count are required and must be positive. |
+
+# SECTION 29: CYLINDERS AND TRAILERS IN CIRCULATION: LITTLE'S LAW (owned by Expert m02 and m05)
+
+Assets in the system = throughput times time in the system. The fleet is the ceiling of that plus a spares allowance. KANO's cylinders: 3200 a day, spares 0.08. IBAFO's trailers to its daughter stations: 4 trips a day, spares 0.1.
+
+| KANO cylinders: stage (input) | days (input) | share of the cycle |
+| --- | --- | --- |
+| At the customer | 24 | 0.8421 |
+| In transit out | 1.5 | 0.0526 |
+| At the plant | 1.5 | 0.0526 |
+| In transit back | 1.5 | 0.0526 |
+
+| KANO cylinders: field | value |
+| --- | --- |
+| cycleDays | 28.5000 |
+| inCirculation | 91200.0000 |
+| sparesAllowance | 7296.0000 |
+| fleetRequired | 98496 |
+| spareCapacityUnits (what the ceiling adds) | 0.0000 |
+| dominantStage | At the customer |
+
+| IBAFO trailers: stage (input) | days (input) | share of the cycle |
+| --- | --- | --- |
+| Loading | 0.2 | 0.1111 |
+| Run out | 0.3 | 0.1667 |
+| On station | 1 | 0.5556 |
+| Run back | 0.3 | 0.1667 |
+
+| IBAFO trailers: field | value |
+| --- | --- |
+| cycleDays | 1.8000 |
+| inCirculation | 7.2000 |
+| sparesAllowance | 0.7200 |
+| fleetRequired | 8 |
+| spareCapacityUnits (what the ceiling adds) | 0.0800 |
+| dominantStage | On station |
+
+The basis sentence: "Little's Law: assets in the system = throughput x time in the system."
+
+| probe | engine |
+| --- | --- |
+| KANO's cycle with "At the customer" left blank | REFUSED: No duration for At the customer. A stage left out shrinks the fleet by the assets in it, so the fleet is not sized without it. |
+| no stages | REFUSED: At least one cycle stage with a duration is required. |
+| a negative spares allowance | REFUSED: The spares allowance cannot be negative. |
+
+# SECTION 30: GAS IN A BANK: REAL GAS, IDEAL GAS, GAUGE AND ABSOLUTE (owned by Expert m03)
+
+Every pressure in lpgCng is absolute. The engine says so on every CNG result: pressureBasis "absolute (bar(a))". IBAFO's banks hold gas of specific gravity 0.62 at 30 C. The mass is m = P V M over Z R T, with Z by Dranchuk-Abou-Kassem on Sutton pseudo-criticals.
+
+| bank | volume m3 (input) | pressure bar(a) (input) | z | ppr | tpr | correlationInRange | massKg | idealMassKg | realVersusIdeal |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Low | 2 | 230 | 0.8181 | 4.9479 | 1.5266 | true | 400.5918 | 327.7131 | 1.2224 |
+| Mid | 2 | 250 | 0.8369 | 5.3782 | 1.5266 | true | 425.6293 | 356.2099 | 1.1949 |
+| High | 2 | 270 | 0.8584 | 5.8084 | 1.5266 | true | 448.1628 | 384.7067 | 1.1649 |
+
+At these pressures Z is below one, so every bank holds more gas than the ideal gas law says (realVersusIdeal above one).
+
+GAUGE AND ABSOLUTE. A bank reads 249 bar on its gauge; the site's atmosphere is taken as 1.013 bar(a).
+| pressure given to the engine | bar(a) | massKg |
+| --- | --- | --- |
+| the gauge reading typed as if absolute | 249 | 424.4393 |
+| gauge plus atmosphere | 250.0130 | 425.6447 |
+| absolute minus gauge-as-absolute | 1.0130 | 1.2054 |
+
+THE CORRELATION'S RANGE. DAK_RANGE: ppr 0.2 to 30, tpr 1 to 3. Outside it the engine still answers and says so:
+| probe | tpr | correlationInRange | correlationNote |
+| --- | --- | --- | --- |
+| the Low bank at -80 C | 0.9727 | false | Outside the range the Dranchuk-Abou-Kassem correlation was fitted over. The value is an extrapolation and should be checked against measured data. |
+
+| probe | engine |
+| --- | --- |
+| no pressure | REFUSED: A pressure is required. |
+| gas gravity left blank ('') | REFUSED: A gas specific gravity is required. |
+| no temperature | REFUSED: A temperature is required. |
+
+# SECTION 31: THE CASCADE: EQUALISING BANK BY BANK (owned by Expert m04)
+
+IBAFO's cascade: Low 2 m3 at 230 bar(a), Mid 2 m3 at 250 bar(a), High 2 m3 at 270 bar(a). A bus tank of 0.1 m3 arrives at 25 bar(a) and is filled to 200 bar(a). Each vehicle equalises with the lowest bank above it, then the next bank up, until it reaches its target; the engine counts whole fills until the next vehicle cannot reach its target.
+
+| field | value |
+| --- | --- |
+| kgPerFill | 16.0133 |
+| fillsBeforeRecharge | 38 |
+| deliveredKg | 608.505 |
+| storedKg | 1274.384 |
+| leftInBanksKg | 665.879 |
+| storedKg minus deliveredKg minus leftInBanksKg | 0.000 |
+| cascadeEfficiency (delivered over stored) | 0.4775 |
+| nextVehicleReachesBar | 197.7590 |
+| hitFillLimit | false |
+| pressureBasis | absolute (bar(a)) |
+
+The gas is conserved: what the banks held is what was delivered plus what is left in them.
+
+| bank | startBar | endBar |
+| --- | --- | --- |
+| Low | 230.0000 | 58.9110 |
+| Mid | 250.0000 | 118.3350 |
+| High | 270.0000 | 202.6470 |
+
+The first fills and the last, with the banks each one drew on (lowest first):
+| fill | banks used |
+| --- | --- |
+| 1 | Low |
+| 2 | Low |
+| 3 | Low, Mid |
+| 37 | Low, Mid, High |
+| 38 | Low, Mid, High |
+
+The engine's note: "Each vehicle equalises with the lowest bank above it, then the next bank up, until it reaches its target. A bank delivers only while its pressure exceeds the vehicle tank. Isothermal: the heat of a fast fill is not modelled."
+
+WHY THREE BANKS. The same 6.0000 m3 as one bank at 250 bar(a): fillsBeforeRecharge 12, cascadeEfficiency 0.1505, leftInBanksKg 1084.729.
+
+The studio's opening cascade (three 1.5 m3 banks at 250 bar(a), a 0.08 m3 vehicle from 20 to 200, gas 0.6 at 15 C): fillsBeforeRecharge 33, cascadeEfficiency 0.4577, leftInBanksKg 542.689, nextVehicleReachesBar 195.5640.
+
+Both engine and oracle are isothermal: the heat of a fast fill is not modelled, so a real fill settles lower and the count is a ceiling in that one respect.
+
+| probe | engine |
+| --- | --- |
+| a target below the start | REFUSED: A start and a higher target pressure are required. |
+| no banks | REFUSED: At least one bank is required. |
+| a bank with no pressure | REFUSED: Every bank needs a volume and a pressure. |
+| temperature left blank ('') | REFUSED: A temperature is required. |
+
+# SECTION 32: THE COMPRESSOR AS A UNIT BRIDGE (owned by Expert m04)
+
+cngCompression does not compute compression itself. It converts the station's metric inputs to the field units the Facilities compression engine speaks, calls it, and converts the answer back. The thermodynamics belong to the Facilities course and are not graded here. IBAFO's compressor: 400 kg/h of gas 0.62, suction 5 bar(a) at 32 C, discharge 255 bar(a).
+
+| bridge | value |
+| --- | --- |
+| qMMscfd (the throughput as standard volume) | 0.4473 |
+| suction, psia | 72.5189 |
+| stageCount | 4 |
+| pressureBasis | absolute (bar(a)) |
+| basis | Staging, polytropic head and real-gas Z from the Facilities compression engine; this converts units and does not reimplement the thermodynamics. |
+
+| stage | suction bar(a) | discharge bar(a) | ratio |
+| --- | --- | --- | --- |
+| 1 | 5.0000 | 13.3620 | 2.6723 |
+| 2 | 13.3620 | 35.7070 | 2.6723 |
+| 3 | 35.7070 | 95.4220 | 2.6723 |
+| 4 | 95.4220 | 255.0000 | 2.6723 |
+
+| probe | engine |
+| --- | --- |
+| discharge below suction | REFUSED: A suction pressure and a higher discharge pressure are required. |
+| no throughput | REFUSED: A throughput is required. |
+
+# SECTION 33: THE FORECOURT QUEUE (owned by Expert m04)
+
+A CNG forecourt is the same queue as the carousel and the loading rack. IBAFO: 14 buses an hour, 6 minutes a fill, each fill the cascade's 16.0133 kg.
+| dispensers (input) | utilisation | probabilityOfWaiting | averageWaitMinutes | kgPerHour |
+| --- | --- | --- | --- | --- |
+| 2 | 0.7000 | 0.5765 | 5.7647 | 224.1860 |
+| 3 | 0.4667 | 0.2024 | 0.7588 | 224.1860 |
+
+At 25 buses an hour on 2 dispensers the forecourt cannot keep up. The engine gives an answer and no refusal: stable false, utilisation 1.2500, and the queue's message "The rack cannot keep up with arrivals. The queue grows without limit, so no average waiting time exists. Add a bay, load faster, or spread the arrivals."
+
+| probe | engine |
+| --- | --- |
+| 2.5 dispensers | REFUSED: The number of bays must be a whole number, one or more. |
+| no fill time | REFUSED: Arrivals, fill time and a dispenser count are required and must be positive. |
+
+The engine's note: "A CNG fill takes minutes, so a forecourt queues at traffic a liquid-fuel operator would think of as quiet."
+
+# SECTION 34: THE CUSTOMER'S SWITCH: COST PER KILOMETRE AND SIMPLE PAYBACK (owned by Expert m05)
+
+A Lagos bus covering 55000 km a year on 14 litres of PMS per 100 km at 780 naira a litre (32 MJ a litre). CNG at 380 naira a kg (48 MJ a kg); no consumption on CNG is measured, and the converted engine turns CNG energy into distance 0.92 times as well as PMS energy. Conversion 1200000 naira; extra maintenance 60000 naira a year. Emission factors 2.3 kg CO2e a litre of PMS and 2.75 a kg of CNG (illustrative).
+
+| field | value |
+| --- | --- |
+| consumptionSource | derived from energy equivalence |
+| newFuelConsumptionPer100Km (kg) | 10.1449 |
+| PMS litres a year | 7700.0000 |
+| PMS cost a year | 6006000.0000 |
+| PMS cost per km | 109.2000 |
+| CNG kg a year | 5579.7100 |
+| CNG cost a year | 2120289.8600 |
+| CNG cost per km | 38.5507 |
+| annualSaving (after maintenance) | 3825710.1400 |
+| savingPerKm | 69.5584 |
+| simplePaybackYears | 0.3137 |
+| kgCo2eAvoidedPerYear | 2365.8000 |
+| paybackNote | Simple payback is undiscounted. Anything needing a discount rate belongs in the sanctioned economics engine. |
+
+The efficiency ratio moves the answer. The same bus at other ratios:
+| efficiency ratio (input) | newFuelConsumptionPer100Km | annualSaving | simplePaybackYears |
+| --- | --- | --- | --- |
+| 0.8 | 11.6667 | 3507666.6700 | 0.3421 |
+| 0.92 | 10.1449 | 3825710.1400 | 0.3137 |
+| 1 | 9.3333 | 3995333.3300 | 0.3004 |
+
+With a measured CNG consumption of 9.5 kg per 100 km the engine uses it: consumptionSource "as measured", simplePaybackYears 0.3030.
+With CNG at 1100 naira a kg there is no saving: annualSaving -191681.1600, simplePaybackYears null, and the note "The conversion does not save money at these prices, so there is no payback to report."
+
+| probe | engine |
+| --- | --- |
+| no measured consumption and the efficiency ratio left blank | REFUSED: Either a measured consumption on the new fuel, or both fuels' energy content and an efficiency ratio, are required. Neither is assumed. |
+| no annual distance | REFUSED: Annual distance, base consumption and both fuel prices are required. |
+
+The payback is simple and undiscounted. The annual cash flow the engine hands on:
+| annualCashFlow | value |
+| --- | --- |
+| year0 | -1200000.0000 |
+| recurring | 3825710.1400 |
+
+# SECTION 35: HELD LIMITS AND WHAT THE ORACLES CHECK (owned by Expert m06)
+
+HELD, taught as stated limits and never computed with:
+- The flare efficiencies have no default: the rule's tiered defaults are a United States rule, and the basis for a Nigerian study is a regulation reading.
+- An unlit flare is not modelled: gas sent to an unlit flare is vented, all of it methane.
+- Fill limits by code (NFPA 58, EN or NUPRC practice) are not shipped: the limit is a safety code value, typed by the site with its basis.
+- GWP values and credit prices are case inputs.
+
+PINNED, NOT VALIDATED: the component heating values and liquid densities, the typical LPG densities and latent heats, the DAK and Sutton coefficients, the form of the rule's equations as their variable definitions fix it, and water at 15 C for a filling density.
+
+What the validation oracles check, independently of the engines (oracle_flaretovalue.py and oracle_lpgcng.py): the gas in exact rationals in kilograms and cubic metres; the flare by the rule by moles, cross-checked by the rule's volumetric route; Z by bisection on reduced density with a second correlation as a plausibility check; the cascade as a mass ledger with conservation asserted; Erlang C in exact rationals on the positions wholly working; ledgers for the blend, storage, vaporizer, floats and the switch. The compressor train's thermodynamics are the Facilities engine's and are validated there; only the unit bridge is checked here.
+
+# SECTION 36: THE KANO AND IBAFO ROLLOUT END TO END (owned by Expert m06)
+
+| step | figure |
+| --- | --- |
+| KANO blend density, kg/m3 | 557.4000 |
+| KANO usable LPG at a 0.85 liquid fill, t | 71.0685 |
+| KANO cover, days | 8.8840 |
+| KANO vaporizer design duty, kW | 98.6948 |
+| KANO carousel positions wholly working | 16 |
+| KANO carousel average wait, minutes | 0.0912 |
+| KANO cylinders required | 98496 |
+| IBAFO Mid bank, kg | 425.6293 |
+| IBAFO fills before recharge | 38 |
+| IBAFO left in the banks, kg | 665.879 |
+| IBAFO trailers required | 8 |
+| IBAFO bus simple payback, years | 0.3137 |
+
+# Refusals printed in this digest, each asserted against the engine before it was printed: 55.

@@ -1,0 +1,303 @@
+{
+  "app_slug": "gasvalue",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-is-being-flared",
+      "title": "What Is Being Flared",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-two-apps-and-one-gas",
+          "title": "Two apps and one gas",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-standard-cubic-foot-is-a-count-of-moles",
+          "title": "A standard cubic foot is a count of moles",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-component-reference-table",
+          "title": "The component reference table",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-an-analysis-that-does-not-sum-to-one",
+          "title": "An analysis that does not sum to one",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-gas-by-the-mole",
+      "title": "The Gas by the Mole",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-heating-value-blends-on-moles",
+          "title": "Heating value blends on moles",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-inerts-and-the-co2-in-the-gas",
+          "title": "Inerts and the CO2 in the gas",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-carbon-atom-by-atom",
+          "title": "Carbon atom by atom",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-mass-in-a-thousand-cubic-feet",
+          "title": "The mass in a thousand cubic feet",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-carbon-number-is-never-assumed",
+          "title": "A carbon number is never assumed",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-liquids-in-the-gas",
+      "title": "The Liquids in the Gas",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-gallons-per-thousand-cubic-feet",
+          "title": "Gallons per thousand cubic feet",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-ethane-plus-and-propane-plus",
+          "title": "Ethane plus and propane plus",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-rich-moderate-and-lean",
+          "title": "Rich, moderate and lean",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-missing-density-is-a-missing-answer",
+          "title": "A missing density is a missing answer",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-mass-ceiling-on-liquids",
+          "title": "The mass ceiling on liquids",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-flare-by-the-rule",
+      "title": "The Flare by the Rule",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-what-a-flare-emits",
+          "title": "What a flare emits",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-co2-from-the-hydrocarbon-carbon",
+          "title": "CO2 from the hydrocarbon carbon",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-co2-in-the-gas-passes-through",
+          "title": "The CO2 in the gas passes through",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-methane-from-the-methane",
+          "title": "Methane from the methane",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-destruction-and-combustion-efficiency",
+          "title": "Destruction and combustion efficiency",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-co2e-and-its-limits",
+      "title": "CO2e and Its Limits",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-co2e-with-a-stated-gwp",
+          "title": "CO2e with a stated GWP",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-methane-share",
+          "title": "The methane share",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-no-efficiency-no-flare",
+          "title": "No efficiency, no flare",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-flare-model-leaves-out",
+          "title": "What the flare model leaves out",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-egbema-flare-end-to-end",
+          "title": "The Egbema flare end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-studios-opening-gas",
+          "title": "The studio's opening gas",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-flare-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

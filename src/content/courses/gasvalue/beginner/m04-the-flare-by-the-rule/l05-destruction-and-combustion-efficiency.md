@@ -1,0 +1,1 @@
+# Destruction and combustion efficiency
