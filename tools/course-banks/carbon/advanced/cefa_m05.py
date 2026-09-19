@@ -1,0 +1,119 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# carbon Expert m05, Savings into the ledger. Digest SECTIONS 23 and 24
+# (energyEfficiency.priceSaving on the invented AGBOR saving, its hand-over to
+# carbonAbatement.abatementCost, the basis rules and notes; energyEfficiency.
+# energyIntensity with the invented peer) and the SECTION 26 lines the m05
+# lessons quote. The factor is SYNTHETIC; every figure is invented; money is in
+# US dollars. 15 questions.
+
+q(3, "The invented AGBOR saving is priced with no emission factor supplied. What does priceSaving return for the carbon?",
+ "annualTonnesCo2e none, with a note that the carbon figure is absent",
+ ["annualTonnesCo2e 0.000, with the money value returned beside it as usual",
+  "A refusal saying an emission factor is required before any pricing",
+  "annualTonnesCo2e 661.980, read from a factor the engine ships"],
+ "SECTION 23, no emission factor: annualTonnesCo2e none; carbonNote \"No emission factor supplied, so the carbon figure is absent rather than zero.\" SECTION 25: emission factors are inputs and neither engine ships one. 661.980 is the carbon with the SYNTHETIC factor of 56.1 kg CO2e per GJ.")
+
+q(1, "The invented saving is declared on LHV and its emission factor on HHV. What does priceSaving do?",
+ "It refuses: a gigajoule on one basis is a different amount of fuel on the other.",
+ ["It computes and attaches the basisNote asking for all three on the same basis.",
+  "It converts the factor to LHV and returns 661.980 tCO2e with basis LHV.",
+  "It computes and returns basis HHV beside the money and the carbon."],
+ "SECTION 23: REFUSED: The energy saving is on LHV, the emission factor is on HHV. A gigajoule on one heating value basis is a different amount of fuel on the other, so they cannot be multiplied together. The basisNote is the answer when no basis is declared at all.")
+
+q(0, "The invented saving is sent with no heating value basis declared. What does priceSaving do?",
+ "It computes, and attaches a basisNote saying all three must share one basis",
+ ["It refuses: the energy saving is on LHV and the emission factor on HHV",
+  "It reads every quantity as LHV by default and returns basis LHV with no note",
+  "It refuses: an energy saving and a basis are both required to price"],
+ "SECTION 23, no basis declared: basisNote \"No heating value basis declared. The saving, the fuel price and the emission factor must all be on the same one (IPCC default factors are on net calorific value, which is LHV).\" The LHV and HHV refusal needs two bases declared, and the only saving refusal printed is for a blank saving.")
+
+q(2, "The invented saving is priced with no life and no rate. What comes back for the cost per tonne?",
+ "costPerTonneCo2e none, with a note asking for the life and a discount rate",
+ ["A refusal, the one abatementCost gives a measure with capital and no life",
+  "costPerTonneCo2e 183.5403 USD, the whole cost set against one year",
+  "costPerTonneCo2e -74.2270 USD, annualised straight line at a rate of 0"],
+ "SECTION 23, no life and no rate: costPerTonneCo2e none; costPerTonneNote \"A cost per tonne needs the measure life and a discount rate, to annualise the implementation cost against a yearly saving.\" -74.2270 USD is the cost at 8 years and 0.1, and 183.5403 USD is the digest's one-year figure.")
+
+q(1, "The invented saving prints simplePaybackYears 2.372881. What does SECTION 23 say that figure is?",
+ "210000 over 88500.00: undiscounted, with no life and no rate in it",
+ ["210000 over 88500.00, discounted at 0.1 over the 8 year life",
+  "39363.24 over 88500.00, the annualised cost over one year's value",
+  "210000 over 661.980, the implementation cost over a year's tonnes"],
+ "SECTION 23: the simple payback is the implementation cost over one year's value, 210000 / 88500.00 = 2.372881 years (computed here): undiscounted, with no life and no rate in it. 39363.24 USD is the annualised capital of the direct abatementCost call.")
+
+q(3, "priceSaving hands the invented saving to abatementCost. Which argument does the implementation cost of 210000 USD fill?",
+ "The capital",
+ ["The annual cost",
+  "The annual savings",
+  "The tonnes abated a year"],
+ "SECTION 23: the cost per tonne is carbonAbatement.abatementCost called with the implementation cost as capital, the annual value as the saving and the annual tonnes as the abatement. The annual cost is not one of the three arguments SECTION 23 names.")
+
+q(0, "The same invented saving is sent to abatementCost directly, over 8 years at a rate of 0.1. Which net annual cost does it print?",
+ "netAnnualCost -49136.76 USD",
+ ["netAnnualCost 39363.24 USD",
+  "netAnnualCost 88500.00 USD",
+  "netAnnualCost -127251.65 USD, on the curve's first step"],
+ "SECTION 23, the same call made directly: capitalRecoveryFactor 0.18744402, annualisedCapital 39363.24 USD, netAnnualCost -49136.76 USD, costPerTonne -74.2270 USD, paysForItself true. -127251.65 USD is Tune the fired heaters' net annual cost in SECTION 18.")
+
+q(2, "Setting the whole implementation cost against one year's value and one year's tonnes gives which figure, and what is its status?",
+ "183.5403 USD a tonne, computed here by the digest for contrast",
+ ["183.5403 USD a tonne, the engine's costPerTonneCo2e output",
+  "-74.2270 USD a tonne, computed here by the digest for contrast",
+  "2.372881 years, the engine's simplePaybackYears for the saving"],
+ "SECTION 23: setting the whole implementation cost against one year's value and one year's tonnes (computed here) gives 183.5403 USD a tonne. The engine's costPerTonneCo2e is -74.2270 USD, levelised over 8 years at 0.1.")
+
+q(3, "SECTION 26 names what no oracle recomputes. Which of these is on that list?",
+ "The simple payback, 2.372881 years",
+ ["The levelised cost per tonne of the saving, -74.2270 USD",
+  "The excess air, which the oracle solves by bisection",
+  "The steam trap flow, taken as an isentropic nozzle"],
+ "SECTION 26 puts the simple payback on its not-recomputed list. The energyEfficiency oracle does compute a levelised cost per tonne, excess air by bisection and the trap as an isentropic nozzle.")
+
+q(0, "With Purchased power blank, what does energyIntensity return beside an intensity of 629.8387 MJ a tonne?",
+ "complete false, with versus peer none and gap none",
+ ["complete false, versus peer 1.040085 and gap 27.2581",
+  "A refusal: every stream is needed",
+  "complete true, with 781000.000 GJ read as the whole plant"],
+ "SECTION 24, purchased power blank: complete false, total 781000.000 GJ, intensity 629.8387 MJ per tonne, versus peer none, gap none. 1.040085 and 27.2581 belong to the row with all three streams, and the only energyIntensity refusal printed is a throughput required.")
+
+q(1, "What does the peerNote say an intensity with a stream missing is?",
+ "A floor, which would flatter the plant",
+ ["A ceiling, which would penalise the plant",
+  "An upper bound on the streams",
+  "Not reportable, as a line could not be computed"],
+ "SECTION 24, peerNote with a stream missing, verbatim: \"Not compared with the peer: a stream is missing, so the intensity is a floor and would flatter the plant.\" SECTION 25 lists the rule: an intensity with a stream missing is not compared with the peer.")
+
+q(2, "Agbor's invented intensity is 707.2581 MJ a tonne against an invented peer of 680 MJ a tonne. What are versus peer and the gap?",
+ "1.040085, and a gap of 27.2581 MJ a tonne",
+ ["0.843786, and a gap of 27.2581 MJ a tonne",
+  "1.040085, and a gap of 629.8387 MJ a tonne",
+  "27.2581, and a gap of 1.040085 MJ a tonne"],
+ "SECTION 24: versus peer is the intensity over the peer, 1.040085; the gap is the intensity less the peer, 27.2581 MJ a tonne (each computed here and equal to the engine's figure). 0.843786 is the Fuel gas share and 629.8387 MJ a tonne the intensity with Purchased power blank.")
+
+q(0, "What does the energyIntensity disclaimer say the Agbor figure is?",
+ "The plant's own energy per tonne of throughput",
+ ["The Solomon Energy Intensity Index for the plant",
+  "The plant's energy on a standard-energy basis",
+  "A published peer benchmark supplied by the engine"],
+ "SECTION 24, the disclaimer: \"This is the plant's own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use.\"")
+
+q(3, "Which priceSaving call on the invented saving is refused outright?",
+ "The saving left blank",
+ ["No emission factor supplied",
+  "No heating value basis declared",
+  "No life and no rate given"],
+ "SECTION 23: REFUSED: An energy saving is required. No factor returns annualTonnesCo2e none with a carbonNote, no basis returns a basisNote, and no life and no rate returns costPerTonneCo2e none with a costPerTonneNote.")
+
+q(2, "Of Agbor's three invented energy streams, which one carries the share 0.109464?",
+ "Purchased power, 96000.000 GJ",
+ ["Imported steam, 41000.000 GJ",
+  "Fuel gas, 740000.000 GJ",
+  "Purchased power, 41000.000 GJ"],
+ "SECTION 24 prints Purchased power at 96000.000 GJ and a share of 0.109464, Fuel gas at 740000.000 GJ and 0.843786, and Imported steam at 41000.000 GJ and 0.046750, of 877000.000 GJ.")
+
+emit(Q, '/root/wt-et-carbon-nextgen/tools/course-banks/carbon/advanced/cefa_m05.json', expect_n=15)
+finish()
