@@ -35,7 +35,9 @@ import CapstonePrompt from '@/components/course/CapstonePrompt';
 import * as FV from '@petrolord/engines/engines/downstream/flareToValue.js';
 import * as LC from '@petrolord/engines/engines/downstream/lpgCng.js';
 import * as MR from '@petrolord/engines/engines/downstream/modularRefinery.js';
-import * as K from '../../../../../tools/course-waves/gasvalue/gasvalue_fields_capstone.mjs';
+import * as KNS from '../../../../../tools/course-waves/gasvalue/gasvalue_fields_capstone.mjs';
+// A plain object copy, so computed lookups do not trip import/namespace.
+const K = { ...KNS };
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../../../..');
