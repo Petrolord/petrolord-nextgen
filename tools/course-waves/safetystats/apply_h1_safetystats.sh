@@ -90,11 +90,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261003_h1_safetystats_course           ) echo PENDING_course ;;
-    20261003_h1_safetystats_beginner_deep    ) echo PENDING_beginner_deep ;;
-    20261003_h1_safetystats_intermediate_deep) echo PENDING_intermediate_deep ;;
-    20261003_h1_safetystats_advanced_deep    ) echo PENDING_advanced_deep ;;
-    20261003_h1_safetystats_go_live          ) echo PENDING_go_live ;;
+    20261003_h1_safetystats_course           ) echo 3bcf668dccef6ccde553d0fa9d22fc3a994a23d5520ff4992b9d8b19f4f71024 ;;
+    20261003_h1_safetystats_beginner_deep    ) echo 9dda81fa33f4baebbb046dfd411b0d2b968fd4bdd91700bebb9663bf30ed2d62 ;;
+    20261003_h1_safetystats_intermediate_deep) echo 42bef668d2550b56b8d1b54d39036d91b4a392e4f6b7083c8a589ce435e538c4 ;;
+    20261003_h1_safetystats_advanced_deep    ) echo 821ffc51caf5b978c5777322086bd17dccd1b3785c0e7dd2a0655857a37166de ;;
+    20261003_h1_safetystats_go_live          ) echo 7dfa0d0db3141b5a18b4be0fe0cbfbf776670a2a47960636a1a4f2a90cb1cfa4 ;;
     *) echo UNPINNED ;;
   esac
 }

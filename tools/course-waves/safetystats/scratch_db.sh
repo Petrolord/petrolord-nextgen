@@ -10,10 +10,13 @@
 # copies tools/course-waves/producedwater/scratch_db.sh, which cites the
 # migrations each statement comes from). Then production's shape as of
 # 2026-09-19: the forty-four available courses as neighbours at path_order 1 to
-# 38 and 53 to 58, and the eleven seeded coming_soon courses read out of the
+# 38 and 53 to 58, and the eleven FC and Assurance courses read out of the
 # COMMITTED course migrations at REF (FC1 to FC9 at 39 to 47, riskchange at 59,
 # compliance at 60), so the path_order, catalogue and prompt-sweep checks meet
-# real neighbours and real capstone rows of other courses.
+# real neighbours and real capstone rows of other courses. Those eleven sit
+# here as coming_soon, as their course migrations seed them; production has
+# since flipped them, and the rolled-back linked run of 2026-09-19 measured
+# 55 available / 0 coming_soon there.
 #
 # What this cannot prove, said plainly: that production's rows match. That is
 # what `dryrun_h1.sh` with TARGET=linked is for (rolled back, snapshotted
