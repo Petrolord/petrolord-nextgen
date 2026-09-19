@@ -12,15 +12,15 @@ EGBEMA's worst month is month 8: 16 events and a u of 7.599326 per 200,000 hours
 
 ## The fall that nobody caused
 
-A month picked because it was the worst is likely to be followed by a better one even if nothing changed. Month 9 is that better month. It reads 2.067504, close to the ordinary months either side of it, and the chart gives no reason to think the process changed between month 8 and month 9.
+A month picked because it was the worst is likely to be followed by a better one even if nothing changed. Month 9 is that better month. It reads 2.067504, close to the ordinary months either side of it, and the chart gives no reason to think a programme caused the fall.
 
 A programme launched in response to month 8 would see the next month fall from 7.599326 to 2.067504, and it would be tempting to take credit for it. The fall is what an ordinary month looks like after an unusual one.
 
 ## Two reasons the next month is better
 
-The usual explanation is chance. A month is the worst partly because its count came out high by chance, and the next month's count has no reason to repeat that luck. This is regression toward the centre, and it applies to any month chosen for being extreme.
+The general explanation is chance. Part of what makes a month the worst is usually a count that came out high by chance, and the next month's count has no reason to repeat that luck. This is regression toward the centre, and it applies to any month chosen for being extreme.
 
-Month 8 is a stronger case than that. It signals at 3 sigma, so on the chart's own logic chance alone is an unlikely explanation for it, and a cause should be looked for. If a one-off cause is found, the argument still holds: a one-off does not recur, so the next month returns to the process whatever anyone launched. Either way, whether month 8 was bad luck or a one-off, month 9's fall is what the chart predicts with no programme at all.
+Month 8 is a different case. It sits above its three sigma limit, so on the chart's own logic chance alone is an unlikely explanation for it, and a cause should be looked for. The stronger reason to withhold credit is that a one-off cause does not recur: once it has passed, the next month returns to the ordinary run whether or not a programme started. So month 9's fall is what the chart predicts with no programme at all.
 
 ## What the test says
 

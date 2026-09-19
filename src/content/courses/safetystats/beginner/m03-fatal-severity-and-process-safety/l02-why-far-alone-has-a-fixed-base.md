@@ -10,11 +10,11 @@ Call `fatalAccidentRate` with IOGP's 2024 figures, 32 fatalities in 4158877000 h
 | `incidenceRate` | 100000000 passed | 100000000 | 0.769438 |
 | `incidenceRate` | none passed | refused | none |
 
-## One definition, so the engine fixes it
+## The IOGP definition, fixed
 
 Every other rate in this engine has more than one convention in use. A recordable rate may be on 200,000 hours or on 1,000,000, and the two differ by a factor of 5.000000. A severity rate has an OSHA style convention and an older ANSI Z16.1 convention. A process safety event rate may be on either of two bases. For each of those the engine refuses to guess and makes the caller name the base.
 
-FAR is different. It has one definition, fatalities per 100,000,000 hours, and a caller who asks for a FAR means exactly that. The engine's reasoning is short: FAR has one definition, so the engine fixes it, and every other rate has more than one, so the engine refuses to guess. Taking a base argument for FAR would only create a way to get it wrong.
+FAR is different. The engine takes the IOGP definition, fatalities per 100,000,000 hours, and fixes its base. Other bodies use related framings, such as fatalities per worker-year, so a fatal rate quoted from elsewhere needs its definition checked before it is set beside this one. Every other rate in this course is quoted on more than one base, so the engine refuses to guess. Taking a base argument for FAR would only create a way to get it wrong.
 
 ## What the basis block adds
 

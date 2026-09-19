@@ -2,7 +2,7 @@
 
 {{panel:ss-rates-explorer}}
 
-KWALE's mean of site rates was 1.754760 against a pooled 0.968312. IOGP's five yearly FARs average to 0.833228 against a pooled 0.826095. EGBEMA's twelve monthly u values average 3.202958 against a centre line of 2.893273. The same mistake appears at every level.
+KWALE's mean of site rates was 1.754760 against a pooled 0.968312. IOGP pools its five years to a FAR of 0.826095, and averaging its five yearly FARs would give 0.833228. EGBEMA's twelve monthly u values average 3.202958 against a centre line of 2.893273. The same gap opens at every level.
 
 | stream | mean of rates | pooled | what is averaged |
 | --- | --- | --- | --- |

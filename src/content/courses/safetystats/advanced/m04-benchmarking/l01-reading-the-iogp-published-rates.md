@@ -16,7 +16,7 @@ The engine carries no benchmark rates. The IOGP counts and hours above come from
 
 ## How precise a published figure is
 
-The IOGP report prints the TRIR hours to the nearest million. The engine's 0.809223 therefore anchors two things: that the formula is right, and that it reproduces the printed 0.81. It anchors nothing finer. The trailing decimals of 0.809223 rest on an hours figure that was already rounded before it reached the engine, and a benchmark comparison that leans on the fourth decimal is leaning on the rounding.
+The IOGP report gives the TRIR hours to the nearest million and the FAR hours to the nearest thousand. Half a million hours either way moves the TRIR in its fourth decimal, so the engine's 0.809223 is exact for the hours as printed, rounds to the printed 0.81, and is good to about one unit in the fourth decimal for the hours as worked. A benchmark comparison that leans on any finer decimal is leaning on the rounding. The FAR hours are finer: half a thousand hours moves either FAR by about one unit in the seventh decimal.
 
 So quote the IOGP TRIR as IOGP's published figure, 0.81 per 1,000,000 hours, and use the engine's 0.809223 when the arithmetic needs a figure to carry through. Say which is which.
 

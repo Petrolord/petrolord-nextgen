@@ -8,7 +8,7 @@ On EGBEMA an intervention went in at the start of month 7. With every month in, 
 | comparison | rate ratio, after over before | lower 95 | upper 95 | central p-value |
 | --- | --- | --- | --- | --- |
 | all months | 1.028627 | 0.607952 | 1.755328 | 1.000000 |
-| month 8 set aside | 0.677882 | 0.357764 | 1.257771 | 0.241552 |
+| month 8 set aside, valid only with a found cause | 0.677882 | 0.357764 | 1.257771 | 0.241552 |
 
 ## One month turns the ratio over
 

@@ -26,7 +26,7 @@ Pooling five years puts more fatalities under one figure and steadies it. That i
 
 ## What the five year view hides
 
-A five-year figure is steady because it averages. The price is that a real change shows up slowly, diluted by the years before it. The 2022 peak is visible in the yearly column and invisible in 0.826095. A company that sets its own performance against the five-year figure should read the yearly column too, and should know that the most recent year carries the largest share of the hours.
+A five-year figure is steady because it pools five years. The price is that a real change shows up slowly, diluted by the years before it. The 2022 peak is visible in the yearly column and invisible in 0.826095. A company that sets its own performance against the five-year figure should read the yearly column too, and should know that the most recent year carries the largest share of the hours.
 
 The five-year view also inherits everything the previous lesson said about a population figure. It is many companies pooled over many years, and the membership and its hours change from year to year: 2544201000 hours in 2020 and 4158877000 in 2024.
 

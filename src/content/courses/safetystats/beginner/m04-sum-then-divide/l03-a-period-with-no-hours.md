@@ -13,7 +13,7 @@ Add a mothballed fourth site to KWALE, with 0 hours and 0 events. The pooled rat
 
 A site with no hours and no events contributes nothing. It adds 0 to the count and 0 to the hours, so the pooled rate does not move.
 
-## Why null and never zero
+## Why the rate is null
 
 A rate of zero is a statement: people worked, and nothing happened. A site with no hours makes no such statement. Nobody worked there, so there was nothing that could happen, and its rate is undefined. The engine returns null for that period to say exactly that. A zero there would be read as a clean safety record from a site that did no work.
 

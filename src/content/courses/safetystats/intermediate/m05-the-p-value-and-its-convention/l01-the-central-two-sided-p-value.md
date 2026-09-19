@@ -31,7 +31,7 @@ A p-value is the probability, if the rates were equal, of a split at least as lo
 
 There is more than one accepted way to turn a two-sided exact test into one number, and they do not always agree. The engine chose the central convention and declares it in its method line. The next lesson shows the other main convention, the one R and scipy use, and the lesson after that shows why the engine's choice is the one that agrees with its own interval.
 
-A reader who meets a p-value from this engine should know that it is central, that it is twice the smaller tail, and that it is capped at 1. With those three facts the figure can be checked by hand from the two tails.
+A reader who meets a p-value from this engine should know that it is central, that it is twice the smaller tail, and that it is capped at 1. With those three facts the figure can be checked by hand from the two tails. Each printed figure is rounded to six decimals on its own, so twice a printed tail can differ from the printed p-value in the last digit, as it does on ERHA; the engine doubles the unrounded tail.
 
 ## The threshold
 
@@ -39,4 +39,4 @@ This course reads 0.05 as the line for a 95 percent interval, because a central 
 
 ## Exercise
 
-From the ERHA figures, write down the lower tail of 0.951727 and the upper tail of 0.128104, pick the smaller, double it and apply the cap. Compare your answer with the engine's 0.256209. Then state in one sentence what that figure says about east and west, and one thing it does not say.
+From the ERHA figures, write down the lower tail of 0.951727 and the upper tail of 0.128104, pick the smaller, double it and apply the cap. Compare your answer with the engine's 0.256209 and say why the last digit differs. Then state in one sentence what that figure says about east and west, and one thing it does not say.
