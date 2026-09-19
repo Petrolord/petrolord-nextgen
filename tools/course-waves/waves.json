@@ -456,6 +456,45 @@
     },
     "note": "FULL kit. Everything this wave is rebuilt from is committed: the digest and its generator, the teaching streams, the capstone generator, the answer key and its precision declaration, every gate that reads either, the build and re-pin scripts, the structure and scaffold, and all five writer briefs. The gates read /root paths by DEFAULT and every one takes an override, which is what makes the committed copy the thing the vitest suites read on a CI runner."
   },
+  "hygiene": {
+    "course": "H2",
+    "live": "/root/hse-wip-hygiene",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "h2_dump.mjs",
+      "h2_fields.mjs",
+      "h2_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "gate_collisions.mjs",
+      "gate_capstone_leak.py",
+      "gate_copy_rule.py",
+      "gate_claims.mjs",
+      "digest_prose.rules.mjs",
+      "structure.py",
+      "scaffold.py",
+      "lengths.py",
+      "build_digest.sh",
+      "finalise.py",
+      "mirror.sh",
+      "vendor_hygiene.sh",
+      "truth-hygiene.json",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md"
+    ],
+    "pins": {
+      "digest.txt": "9a1262e133b0a1b38a75cf225346b32bf01d68eeed16a24d54548164b6d1aced",
+      "fields.json": "5271e9615617356f27a0febed887f311e5a4cdd4bc94c65644eb6bf0a6ac88a1"
+    },
+    "note": "FULL kit, foundation phase. The digest and its generator, the teaching records, the capstone generator, the answer key and its precision declaration, every wave gate, the build, finalise and mirror scripts, the structure and scaffold, and all five writer briefs. HSE module, path_order 62. The gates read /root paths by DEFAULT and every one takes an override."
+  },
   "metering": {
     "course": "FC8",
     "live": "/root/fc-wip-metering",
