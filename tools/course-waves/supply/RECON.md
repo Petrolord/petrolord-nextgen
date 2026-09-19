@@ -1,7 +1,8 @@
 # `supply` RECON: Terminals, Depots & Fuel Supply
 
-Academy module `downstream` (label "Midstream & Downstream"), path_order 50,
-slug `supply`, the third of the three Commercial & Trading courses. Subject:
+Academy module `supply_chain` (label "Supply Chain & Logistics"), path_order 50,
+slug `supply` (lead ruling 2026-09-19; the engine family stays engines/downstream).
+Built beside the two Commercial & Trading courses, `crude` and `refinery`. Subject:
 `engines/downstream/terminalDepot.js` and `engines/downstream/fuelPricing.js`
 as vendored sha-identical from petrolord-engines **60ee266** (MD3-0, engines PR
 #221) by the shared vendor commit b1f29251; their goldens
@@ -110,7 +111,7 @@ direction balanced) and teaches it in the present tense as the reason the
 opening stock is an input (Associate m05 l03, "A reconciliation that cannot
 fail"). No lesson describes any app as having done it.
 
-### 3b. F-R1, rackQueue accepts a load time of zero minutes. NOT TAUGHT, reported.
+### 3b. F-R1, rackQueue accepted a load time of zero minutes. REPAIRED UPSTREAM IN MD3-1 (engines #224); the refusal is now taught (SECTION 10).
 
     node -e "import('/root/wt-md-supply-nextgen/packages/engines/engines/downstream/terminalDepot.js').then(T=>console.log(T.rackQueue({arrivalsPerHour:9,loadMinutes:0,bays:4})))"
     -> { offered: 0, utilisation: 0, stable: true, probabilityOfWaiting: 0, averageWaitMinutes: 0, ... error: null }
@@ -123,7 +124,7 @@ any graded path (every graded rack has a positive load time). The digest's
 refusal table uses a MISSING load time instead. Lead: repair (refuse a load
 time that is not positive and finite) or hold.
 
-### 3c. F-R2, several money and movement inputs read a blank as zero. NOT TAUGHT, reported.
+### 3c. F-R2, several money and movement inputs read a blank as zero. REPAIRED UPSTREAM IN MD3-1 for throughputEconomics and the turns figure; now taught (SECTIONS 12, 13). reconcileStock's movement defaults are unchanged.
 
 "Missing stays missing" holds for every MEASURED input (dip, table, water cut,
 density, coefficients, opening stock, FOB, every rate, bays, a trucking cost
@@ -145,7 +146,7 @@ engine, and the "turns a year 0" line was removed. None is on a graded path
 (every graded record supplies every input). Lead: F3-style repair (blank named
 as missing) for throughputEconomics and the turns figure, or hold.
 
-### 3d. F-R3, the engine repository's own unit test types a coefficient row. Reported to the engines repo.
+### 3d. F-R3, the engine repository's own unit test typed a coefficient row. REPAIRED UPSTREAM IN MD3-1 (synthetic K0 600).
 
 `__tests__/downstream.terminalDepot.test.js` passes `{ k0: 594.5418, k1: 0, k2: 0 }`
 in five cases. FINDINGS-supply H2 says no published coefficient row is in the
@@ -211,9 +212,9 @@ recomputed by the vendored ORACLES on the capstone records (`oracle_check.py`,
 | pricePerLitre, Government share | oracle_fuelpricing.pump |
 | the breakeven exchange rate | closed form by linearity on the oracle's invoice() and pump() |
 
-**Coverage caveat for the lead:** the day ledger and the farm block live inside
-the oracles' `main()` and cannot be called with other inputs, so
-`oracle_check.py` transcribes those lines (marked in the file). They are
+**Coverage caveat, CLOSED in MD3-1:** the day ledger and the farm block lived inside
+the oracles' `main()`; the oracle now exports `day_ledger()` and `farm_cover()`
+and `oracle_check.py` calls them. What follows is the foundation's note. They are
 one-line identities, and the goldens cover the same exports, but a callable
 oracle function would be stronger. Recommend a small engines PR exporting
 `day_ledger()` and `farm_cover()` from oracle_terminaldepot.py.
@@ -238,3 +239,22 @@ Not re-vendored. The worktree sits on the lead's shared vendor commit b1f29251
 supply suites run green on it: `downstream.supply.golden`,
 `downstream.terminalDepot` and `downstream.fuelPricing`, 3 suites, 135 tests;
 both oracles regenerate their goldens byte-identical.
+
+## 8. The extension round (2026-09-19)
+
+Re-vendored to engines e4d3b10 (f45ce066). Rebuilt on it, the foundation digest
+and all eighteen graded values reproduced byte-identical before any edit. The
+writers' gaps and line fixes in DIGEST-GAPS.md were then closed additively (the
+digest grew from 634 to 712 lines, 24 sections either side). Two existing
+lines changed and REVISE.md lists them: the ENGINES header (60ee266 to
+e4d3b10) and the forecourt and rack comparison (now made on the station's
+unrounded inputs, so it reads true where it read false; the rounding effect is
+printed beside it). One gap is filled with a
+figure the engine does not export and the digest says so: Erlang B, derived
+from the engine's Erlang C by the identity B = C(1 - rho)/(1 - rho C), and the
+wait of a truck that queues, the mean wait over the probability of waiting.
+One gap is NOT filled and is reported: a missing ocean loss is read as zero
+loss by landedCost (`oceanLossPercent = 0`, `num(v, 0)`), a missing value read
+as a zero on a path that understates the cost of a litre sold. It is not
+printed and not graded; it is a candidate MD3-2 finding (F-R4).
+Module ruling: the academy module is `supply_chain`, "Supply Chain & Logistics".

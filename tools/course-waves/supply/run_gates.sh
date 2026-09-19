@@ -43,10 +43,9 @@ run capstone-leak 0 python3 gate_capstone_leak.py
 run capstone-leak-CONTROL 1 python3 gate_capstone_leak.py --plant
 run leakage-digest 0 ./gate_leakage_digest.sh
 run leakage-digest-CONTROL 1 ./gate_leakage_digest.sh --plant
-# The lesson sweep. At the foundation the 78 lessons are title-only
-# placeholders with no number in them, and leakage.mjs REFUSES (exit 2) a sweep
-# that saw no numbers, correctly. Expected 2 here; the lesson phase flips it to 0.
-run kit-leakage-lessons 2 node /root/dc-wavekit/leakage.mjs $W --integers --content-root $REPO/src/content/courses/supply
+# The lesson sweep over the 78 written lessons (the foundation expected a
+# refusal here, exit 2, while the lessons were placeholders).
+run kit-leakage-lessons 0 node /root/dc-wavekit/leakage.mjs $W --integers --content-root $REPO/src/content/courses/supply
 run copy-rule 0 python3 gate_copy_rule.py
 run copy-rule-CONTROL 1 python3 gate_copy_rule.py --plant
 run kit-gradeprecision 0 python3 /root/dc-wavekit/gradeprecision.py $W

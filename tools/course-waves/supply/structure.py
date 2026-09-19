@@ -1,6 +1,7 @@
 # supply: Terminals, Depots & Fuel Supply. Three tiers, six modules each, 26
-# lessons a tier. Academy module `downstream` (label "Midstream & Downstream"),
-# path_order 50, the third of the three Commercial & Trading courses.
+# lessons a tier. Academy module `supply_chain` (label "Supply Chain &
+# Logistics"), path_order 50, built beside the two Commercial & Trading courses
+# (lead ruling 2026-09-19: no `downstream` academy module is created).
 #
 # THE ONE SENTENCE. A terminal's stock, a cargo's cost and a litre's pump price
 # are each a chain of measured inputs walked in a stated order, and the engine
@@ -21,8 +22,9 @@
 # no "X, not Y" contrastive anywhere a learner reads, headings included.
 #
 # Engines: engines/downstream/terminalDepot.js and fuelPricing.js at
-# petrolord-engines 60ee266 (MD3-0, which repaired twelve findings and holds
-# two), vendored sha-identical by the shared vendor commit b1f29251. This
+# petrolord-engines e4d3b10 (MD3-0 repaired twelve findings and holds two;
+# MD3-1 repaired this wave's three), vendored sha-identical by the shared
+# vendor commit 41d88b9f (f45ce066 on this branch). This
 # course grades only terminalDepot and fuelPricing outputs.
 #
 # ---------------------------------------------------------------------------

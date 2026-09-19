@@ -9,7 +9,7 @@ that the oracle reaches the same answer on THESE records, so this gate imports
 the vendored oracles themselves and computes each graded field from the
 capstone conditions, then compares with fields.json.
 
-WHAT IS CALLED AND WHAT IS TRANSCRIBED, said plainly. Most fields go through a
+WHAT IS CALLED, said plainly. Every terminal field goes through a
 FUNCTION the oracle exports:
 
   interp                 strapping-table interpolation by search (both tanks)
@@ -21,17 +21,18 @@ FUNCTION the oracle exports:
   fleet_search           the fleet by integer search
   pump                   the pump price walked element by element
 
-Three computations live INSIDE the oracles' main() rather than in a function,
-so they cannot be called with other inputs: the day ledger (expected close,
-gap, tolerance; oracle_terminaldepot.py main, the `days` loop), the tank farm
-(pumpable stock tank by tank, days of cover; the `farm` block) and the FX
-breakeven (closed form; oracle_fuelpricing.py main). For the first two this
-file TRANSCRIBES the oracle's own lines, marked below, which is the weakest
-kind of coverage and is reported as such in RECON.md. The breakeven is not
-transcribed: it is solved from the oracle's own invoice() and pump() by
-linearity (the pump price is affine in the landed cost, and the landed cost is
-linear in the exchange rate), which is the oracle's closed-form method run on
-its own functions.
+  day_ledger             the day closed as a ledger (exported at MD3-1)
+  farm_cover             pumpable stock tank by tank and days of cover
+                         (exported at MD3-1)
+
+The tolerance is the ledger's throughput x percent / 100; the ledger returns
+its withinTolerance verdict and the throughput it is built on, and the
+tolerance figure is that product (one multiplication, marked below). The FX
+breakeven lives inside oracle_fuelpricing.py main() and is not transcribed:
+it is solved from the oracle's own invoice() and pump() by linearity (the pump
+price is affine in the landed cost, and the landed cost is linear in the
+exchange rate), which is the oracle's closed-form method run on its own
+functions.
 
 THE COMPARISON. The engine rounds several graded figures itself (CIF and the
 landed total to the cent, the landed and pump prices to four decimals, the lane
@@ -70,21 +71,18 @@ tab1, tab2 = K['OKOMU_T1_TABLE'], K['OKOMU_T2_TABLE']
 g1 = OT.interp(tab1, T1['dipMm']) - OT.interp(tab1, T1['waterMm'])
 g2 = OT.interp(tab2, T2['dipMm']) - OT.interp(tab2, T2['waterMm'])
 s1, s2 = g1 * T1['vcfTyped'], g2 * T2['vcfTyped']
-# TRANSCRIBED from oracle_terminaldepot.py main(), the `days` loop:
-#   expected = opening + rec - dlv - known; gap = dipped - expected; through = rec + dlv
-#   tolerance = through * tol / 100
-expected = DY['openingM3'] + DY['receiptsM3'] - DY['deliveriesM3'] - DY['knownLossM3']
-gap = (s1 + s2) - expected
-through = DY['receiptsM3'] + DY['deliveriesM3']
-tolerance = through * DY['tolerancePercentOfThroughput'] / 100
+led = OT.day_ledger('OKOMU', DY['openingM3'], DY['receiptsM3'], DY['deliveriesM3'], DY['knownLossM3'], s1 + s2,
+                    DY['tolerancePercentOfThroughput'])
+expected, gap = led['expectedClosingM3'], led['unaccountedM3']
+# the one multiplication: the ledger's own tolerance rule, through x tol / 100
+tolerance = (led['receiptsM3'] + led['deliveriesM3']) * led['tolerancePercentOfThroughput'] / 100
+assert led['withinTolerance'] == (abs(gap) <= tolerance)
 
 # ----------------------------- OGWASHI ------------------------------
 R = K['OGWASHI_RACK']
 q = OT.erlang_exact(R['arrivalsPerHour'], Fr(60) / Fr(R['loadMinutes']), R['bays'])
-# TRANSCRIBED from oracle_terminaldepot.py main(), the `farm` block:
-#   pumpableStockM3 = sum(max(0, stock - heel)); daysOfCover = pumpable / daily
-pumpable = sum(max(0, t['stockM3'] - t['heelM3']) for t in K['OGWASHI_TANKS'])
-cover = pumpable / K['OGWASHI_LIFTINGS_M3']
+fc = OT.farm_cover(K['OGWASHI_TANKS'], K['OGWASHI_LIFTINGS_M3'])
+pumpable, cover = fc['pumpableStockM3'], fc['daysOfCover']
 lane = OF.lane_ledger(K['OGWASHI_LANE'])
 fleet = OF.fleet_search(K['OGWASHI_DEMAND_L_PER_DAY'], K['OGWASHI_LANE']['payloadLitres'], lane['tripsPerDay'])
 
@@ -112,13 +110,13 @@ ORACLE = {
     'okomu_t1_gross_m3': ('oracle_terminaldepot.interp', g1),
     'okomu_t1_standard_m3': ('oracle_terminaldepot.interp x the typed VCF', s1),
     'okomu_t2_standard_m3': ('oracle_terminaldepot.interp x the typed VCF', s2),
-    'okomu_expected_closing_m3': ('the oracle day ledger (transcribed)', expected),
-    'okomu_unaccounted_m3': ('the oracle day ledger (transcribed) on the interp stocks', gap),
-    'okomu_tolerance_m3': ('the oracle day ledger (transcribed)', tolerance),
+    'okomu_expected_closing_m3': ('oracle_terminaldepot.day_ledger', expected),
+    'okomu_unaccounted_m3': ('oracle_terminaldepot.day_ledger on the interp stocks', gap),
+    'okomu_tolerance_m3': ('oracle_terminaldepot.day_ledger tolerance rule', tolerance),
     'ogwashi_rack_probability_of_waiting': ('oracle_terminaldepot.erlang_exact', q['probabilityOfWaiting']),
     'ogwashi_rack_mean_wait_min': ('oracle_terminaldepot.erlang_exact', q['averageWaitMinutes']),
-    'ogwashi_pumpable_stock_m3': ('the oracle farm block (transcribed)', pumpable),
-    'ogwashi_days_of_cover': ('the oracle farm block (transcribed)', cover),
+    'ogwashi_pumpable_stock_m3': ('oracle_terminaldepot.farm_cover', pumpable),
+    'ogwashi_days_of_cover': ('oracle_terminaldepot.farm_cover', cover),
     'ogwashi_cost_per_litre_delivered_ngn': ('oracle_fuelpricing.lane_ledger', lane['costPerLitreDelivered']),
     'ogwashi_trucks_required': ('oracle_fuelpricing.fleet_search', fleet['trucksRequired']),
     'oron_cif_usd': ('oracle_fuelpricing.invoice, insurance by fixed point', inv['cif']),

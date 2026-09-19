@@ -152,7 +152,7 @@ const priceAtFx = (rate) => {
 out('# supply: Terminals, Depots & Fuel Supply. Teaching digest.');
 out('# PRECISION: volumes print to three decimals of a cubic metre (a litre); VCF to six decimals and its alpha to nine; probabilities and utilisation to six decimals; offered load in erlangs, minutes and queue lengths to four; days of cover and turns to four; money in US dollars to two decimals and dollars per litre to six; local currency per litre to four; percents to four; litres to two; tonnes and barrels to four; kilometres to two; hours to three; trips to six; exchange rates to four. Heights are whole millimetres. Counts are whole numbers.');
 out('# NO CLOCK: neither engine reads a date or a random number, so no figure below depends on when or where the digest was built.');
-out('# ENGINES: engines/downstream/terminalDepot.js and engines/downstream/fuelPricing.js at petrolord-engines 60ee266 (MD3-0), vendored in NextGen under packages/engines.');
+out('# ENGINES: engines/downstream/terminalDepot.js and engines/downstream/fuelPricing.js at petrolord-engines e4d3b10 (MD3-0 and MD3-1), vendored in NextGen under packages/engines.');
 out('# CASES: AKODO (a coastal import terminal: three tanks, their strapping tables, a morning of dips and one day), IBAFO (an inland depot: its loading rack, tank farm, throughput economics, a truck lane, a fleet and a forecourt), BADAGRY (one petrol cargo landed and priced to the nozzle). All three are invented records.');
 out('# RATES: every rate, margin, levy, freight, exchange rate and tax below is INVENTED for this course and is not a published figure. The engine ships no rate and no volume correction coefficient, and the one coefficient row below is SYNTHETIC.');
 out('# Built by build_digest.sh from supply_dump.mjs and supply_fields.mjs. Never edited by hand.');
@@ -166,6 +166,12 @@ for (const [name, mod] of [['terminalDepot', TD], ['fuelPricing', FP]]) {
   const fns = Object.entries(mod).filter(([, v]) => typeof v === 'function').map(([k]) => k);
   const other = Object.entries(mod).filter(([, v]) => typeof v !== 'function').map(([k]) => k);
   row(name, fns.length, other.length, [...fns, ...other].join(', '));
+}
+for (const [name, mod] of [['terminalDepot', TD], ['fuelPricing', FP]]) {
+  const fns = Object.entries(mod).filter(([, v]) => typeof v === 'function').map(([k]) => k);
+  const other = Object.entries(mod).filter(([, v]) => typeof v !== 'function').map(([k]) => k);
+  out(`${name} exported functions (${fns.length}): ${fns.join(', ')}`);
+  out(`${name} exported constants (${other.length}): ${other.length ? other.join(', ') : 'none'}`);
 }
 out('');
 out(`fuelPricing.LITRES_PER_M3: ${FP.LITRES_PER_M3}`);
@@ -189,9 +195,16 @@ FP.PRODUCT_REFERENCE.forEach((p) => row(p.code, p.label, p.typicalDensityKgM3, p
 out('');
 {
   const a = FP.stationSizing({ ...F.IBAFO_STATION });
-  const b = TD.rackQueue({ arrivalsPerHour: a.peakTransactionsPerHour, loadMinutes: a.serviceMinutesPerTransaction, bays: F.IBAFO_STATION.nozzles });
+  // The station rounds the figures it REPORTS (peak to 2 dp, service minutes to
+  // 3 dp) but queues on the unrounded ones, so the comparison is made on the
+  // station's own unrounded inputs: throughput / litres x peak share, and
+  // litres / rate + overhead.
+  const S0 = F.IBAFO_STATION;
+  const b = TD.rackQueue({ arrivalsPerHour: (S0.dailyThroughputLitres / S0.litresPerTransaction) * S0.peakHourShare, loadMinutes: S0.litresPerTransaction / S0.dispenseRateLitresPerMinute + S0.transactionOverheadMinutes, bays: S0.nozzles });
   const sameWait = Math.abs(a.queue.probabilityOfWaiting - b.probabilityOfWaiting) < 1e-12;
+  if (!sameWait) throw new Error('stationSizing and rackQueue disagree on the same unrounded inputs');
   out(`fuelPricing.stationSizing sizes its forecourt by calling terminalDepot.rackQueue, so a forecourt and a loading rack are one queue model: on the IBAFO forecourt the station's probability of waiting and rackQueue's on the same arrivals, service minutes and nozzles agree: ${sameWait}.`);
+  out(`That comparison is made on the station's unrounded arrivals and service minutes. stationSizing REPORTS its peak transactions to two decimals and its service minutes to three (SECTION 16), and rackQueue fed those printed roundings answers a probability of waiting of ${prob(TD.rackQueue({ arrivalsPerHour: a.peakTransactionsPerHour, loadMinutes: a.serviceMinutesPerTransaction, bays: S0.nozzles }).probabilityOfWaiting)} against the station's ${prob(a.queue.probabilityOfWaiting)}.`);
 }
 
 /* ------------------------------------------------------------------ */
@@ -260,6 +273,7 @@ out('');
   head('height mm', 'volumeAtDip on the 100 mm table m3', 'volumeAtDip on the 10 mm table m3', 'the 100 mm table less the 10 mm table m3');
   row(AK3.dipMm, m3(coarse), m3(exact), m3(coarse - exact));
   row(AK3.waterMm, m3(coarseW), m3(exactW), m3(coarseW - exactW));
+  out('The last column is computed from the unrounded volumes, so it can differ in the third decimal from the printed volume less the printed volume beside it. Quote the printed difference; do not recompute it from the rounded columns.');
   const vl = answered(TD.volumeAtDip({ strapping: AK1.table, heightMm: AK1.dipMm }), 'volumeM3', 'AK-01');
   const vf = answered(TD.volumeAtDip({ strapping: F.verticalTable(AK1.diameterM, AK1.topMm, 10), heightMm: AK1.dipMm }), 'volumeM3', 'AK-01 fine');
   out('');
@@ -282,6 +296,13 @@ for (const [d, w] of F.AKODO_PARTIAL_DIPS) {
   const r = TD.dipToStandardVolume({ strapping: F.AKODO_PARTIAL_TABLE, heightMm: d, waterMm: w, vcf: null });
   row(d, w, r.grossM3 === null ? refused(r, `partial ${d}/${w}`) : `gross ${m3(answered(r, 'grossM3', `partial ${d}`))} m3`);
 }
+out('');
+out('The other two tanks dipped just above their own last entries:');
+head('tank', 'last entry mm', 'dip mm (stated)', 'the engine answers');
+for (const t of [AK2, AK3]) {
+  const top = t.table[t.table.length - 1].heightMm;
+  row(t.id, top, top + 10, refused(TD.volumeAtDip({ strapping: t.table, heightMm: top + 10 }), `${t.id} above`, 'volumeM3'));
+}
 
 /* ------------------------------------------------------------------ */
 section('FREE WATER AND THE GROSS VOLUME');
@@ -301,6 +322,7 @@ for (const { t, s } of stocks) {
   row(t.id, t.dipMm, t.waterMm, m3(total), m3(s.waterM3), m3(s.grossM3));
 }
 out(`total gross observed volume: ${m3(closingGross)} m3`);
+out('The engine computes each gross volume, and the total, from the unrounded volumes, so a printed volume at the dip less the printed water can differ in the third decimal from the printed gross (AK-03). Quote the printed gross; no figure here is meant to be recomputed from the rounded columns.');
 out('');
 {
   const byHeight = answered(TD.volumeAtDip({ strapping: AK3.table, heightMm: AK3.dipMm - AK3.waterMm }), 'volumeM3', 'AK-03 by height');
@@ -336,6 +358,7 @@ out('AKODO corrects its stock with a VCF read off its own tables for each tank\'
 head('tank', 'density kg/m3', 'temperature C', 'VCF typed', 'gross observed m3', 'standard m3');
 for (const { t, s } of stocks) row(t.id, t.densityKgM3, t.temperatureC, vcf(s.vcf), m3(s.grossM3), m3(s.standardM3));
 out(`total standard volume, the closing stock the day is closed on: ${m3(closingStd)} m3`);
+out(`The total is summed from the unrounded standard volumes. The three printed standard volumes, each rounded to the litre, add to ${m3(stocks.reduce((a2, { s }) => a2 + Number(m3(s.standardM3)), 0))} m3; the day is closed on the unrounded total, printed above.`);
 
 /* ------------------------------------------------------------------ */
 section('CLOSING THE AKODO DAY');
@@ -354,6 +377,7 @@ row('unaccounted percent of throughput', pct(day.unaccountedPercentOfThroughput)
 row(`tolerance m3 (${DAY.tolerancePercentOfThroughput} percent of throughput)`, m3(day.toleranceM3));
 row('within tolerance', day.withinTolerance);
 row('direction', day.direction);
+out(`throughput, receipts + deliveries: ${m3(DAY.receiptsM3 + DAY.deliveriesM3)} m3. The tolerance above is ${DAY.tolerancePercentOfThroughput} percent of it.`);
 out('');
 out(`With no opening stock: ${refused(TD.reconcileStock({ ...DAY, openingM3: undefined, closingDippedM3: closingStd }), 'no opening')}`);
 out('');
@@ -397,6 +421,13 @@ section('A RUN IN ONE DIRECTION');
   out('');
   const short = TD.trendUnaccounted(F.AKODO_HISTORY.slice(0, 6));
   out(`The first six days alone: run ${short.runLength} days of ${short.runDirection}; prompt: ${plain(short.prompt)}.`);
+  out(`cumulative throughput over the nine days, the denominator of the mean percent: ${m3(tr.rows.reduce((a2, r) => a2 + r.throughputM3, 0))} m3.`);
+  out('The prompt threshold, read off the engine by trimming the history one day at a time:');
+  head('days kept', 'run ending on the last kept day', 'prompt printed');
+  for (const n of [5, 6, 7, 8, 9]) {
+    const t = TD.trendUnaccounted(F.AKODO_HISTORY.slice(0, n));
+    row(n, `${t.runLength} days of ${t.runDirection}`, t.prompt ? 'yes' : 'none');
+  }
   const empty = TD.trendUnaccounted([]);
   out(`No days at all: cumulative ${m3(empty.cumulativeM3)} m3, run ${empty.runLength}, mean percent ${plain(empty.meanPercent)}.`);
 }
@@ -418,6 +449,11 @@ row('mean time on site, minutes', min(rack.averageTimeOnSiteMinutes));
 row('mean queue length, trucks', qlen(rack.queueLength));
 row('trucks per day at this arrival rate', rack.trucksPerDay);
 out('');
+out(`The mean wait of a truck that does queue is the mean wait over the probability of waiting: ${min(rack.averageWaitMinutes)} / ${prob(rack.probabilityOfWaiting)} = ${min(rack.averageWaitMinutes / rack.probabilityOfWaiting)} minutes. The engine's averageWaitMinutes averages over every truck, the ones that load at once included.`);
+{
+  const rho = rack.utilisation; const C = rack.probabilityOfWaiting;
+  out(`Erlang B, the probability that every bay is busy in a rack with NO queue (a truck that finds every bay busy leaves), is not exported by the engine. From the engine's Erlang C by the identity B = C x (1 - utilisation) / (1 - utilisation x C) it is ${prob((C * (1 - rho)) / (1 - rho * C))} on the IBAFO rack, against the Erlang C of ${prob(C)}.`);
+}
 out(`Little's law, queue length = arrivals per hour x mean wait in hours: ${F.IBAFO_RACK.arrivalsPerHour} x ${min(rack.averageWaitMinutes)} / 60 = ${qlen(F.IBAFO_RACK.arrivalsPerHour * rack.averageWaitMinutes / 60)}, the engine's queue length is ${qlen(rack.queueLength)}.`);
 
 /* ------------------------------------------------------------------ */
@@ -433,6 +469,14 @@ out('');
 out('Inputs the engine refuses:');
 head('arrivals per hour (stated)', 'load minutes (stated)', 'bays (stated)', 'the engine answers');
 for (const q of F.IBAFO_RACK_REFUSALS) row(plain(q.arrivalsPerHour), plain(q.loadMinutes), plain(q.bays), refused(TD.rackQueue(q), `rack ${JSON.stringify(q)}`));
+row(F.IBAFO_RACK.arrivalsPerHour, 0, F.IBAFO_RACK.bays, refused(TD.rackQueue({ ...F.IBAFO_RACK, loadMinutes: 0 }), 'rack zero load', 'averageWaitMinutes'));
+out('');
+out(`The IBAFO rack at ${F.IBAFO_RACK.arrivalsPerHour} arrivals an hour on its ${F.IBAFO_RACK.bays} bays, the mean load minutes swept:`);
+head('load minutes (stated)', 'utilisation', 'probability of waiting', 'mean wait minutes', 'Erlang B, derived from the Erlang C');
+for (const lm of [16, 20, 22, 24, 26]) {
+  const r = TD.rackQueue({ ...F.IBAFO_RACK, loadMinutes: lm });
+  row(lm, util(r.utilisation), prob(r.probabilityOfWaiting), min(r.averageWaitMinutes), prob((r.probabilityOfWaiting * (1 - r.utilisation)) / (1 - r.utilisation * r.probabilityOfWaiting)));
+}
 
 /* ------------------------------------------------------------------ */
 section('A RACK THAT CANNOT KEEP UP');
@@ -467,6 +511,11 @@ row('daily throughput (liftings) m3', m3(F.IBAFO_DAILY_M3));
 row('days of cover', days(farm.daysOfCover));
 row('turns a year', turns(farm.turnsPerYear));
 out('');
+out('Ullage is counted the same way: each tank\'s capacity less its stock, never below zero, summed over the tanks.');
+{
+  const nod = TD.tankFarmCover({ tanks: F.IBAFO_TANKS });
+  out(`With no daily throughput the engine gives days of cover ${plain(nod.daysOfCover)} and turns a year ${plain(nod.turnsPerYear)}: both need the throughput.`);
+}
 out(`The farm's stock less the farm's heel is ${m3(farm.stockM3 - farm.heelM3)} m3. That is not pumpable stock: IB-T2 holds ${m3(F.IBAFO_TANKS[1].stockM3)} m3 against a heel of ${m3(F.IBAFO_TANKS[1].heelM3)} m3, and no pump lends one tank's volume to another's heel.`);
 
 /* ------------------------------------------------------------------ */
@@ -487,6 +536,17 @@ out('');
     const r = TD.throughputEconomics(args);
     row(name, usd(r.revenue), usd(r.margin), usd(r.marginPerM3), r.lossTonnes === null ? 'none' : t4(r.lossTonnes),
       r.emissionsKgCo2e === null ? 'none' : kg(r.emissionsKgCo2e), r.kgCo2ePerTonneThroughput === null ? 'none' : share(r.kgCo2ePerTonneThroughput), plain(r.carbonNote));
+  }
+  out('');
+  out('The money answer needs the throughput and the fee; a blank cost or loss is taken as zero and named:');
+  head('what is blank', 'the engine answers');
+  row('the throughput', refused(TD.throughputEconomics({ ...E, throughputM3: '' }), 'blank throughput', 'margin'));
+  row('the fee', refused(TD.throughputEconomics({ ...E, feePerM3: null }), 'blank fee', 'margin'));
+  {
+    const r = TD.throughputEconomics({ ...E, fixedCostPerPeriod: '' });
+    row('the fixed cost', `margin ${usd(r.margin)} USD; assumedZero: ${r.assumedZero.join(', ')}`);
+    const r2 = TD.throughputEconomics({ ...E });
+    row('nothing', `margin ${usd(r2.margin)} USD; assumedZero: ${r2.assumedZero.length ? r2.assumedZero.join(', ') : 'none'}`);
   }
 }
 
@@ -521,11 +581,20 @@ for (const [label, args] of [['typed', F.IBAFO_LANE], ['blank', { ...F.IBAFO_LAN
   out(`With no truck capital cost: complete ${r.complete}, missing ${r.missingInputs.join(', ')}, cost per litre delivered ${locL(r.costPerLitreDelivered)} naira, which is a floor.`);
 }
 out('');
+out(`driverCostPerTrip defaults to 0 in the engine's signature, which is why the row with the driver cost left out of the call reads the same cost a trip as the blank row and still reads complete ${FP.truckingEconomics(Object.fromEntries(Object.entries(F.IBAFO_LANE).filter(([k]) => k !== 'driverCostPerTrip'))).complete}.`);
+out('');
 out('The same lane at three distances:');
 head('distance km', 'cycle hours', 'trips a truck a day', 'cost a trip, naira', 'cost per litre delivered, naira');
 for (const d of [156, 312, 468]) {
   const r = FP.truckingEconomics({ ...F.IBAFO_LANE, distanceKm: d });
   row(km(d), hrs(r.cycleHours), trips(r.tripsPerTruckPerDay), r.costPerTrip.toFixed(2), locL(r.costPerLitreDelivered));
+}
+out('');
+out('The cost lines at each distance, naira a trip:');
+head('distance km', ...lane.components.map((c) => c.label));
+for (const d of [156, 312, 468]) {
+  const r = FP.truckingEconomics({ ...F.IBAFO_LANE, distanceKm: d });
+  row(km(d), ...r.components.map((c) => c.amount.toFixed(2)));
 }
 
 /* ------------------------------------------------------------------ */
@@ -574,6 +643,8 @@ section('THE STATION');
   row('reorder level litres', lit(st.reorderLevelLitres));
   row('ullage at reorder litres', lit(st.ullageAtReorderLitres));
   row('payload fits the ullage', st.payloadFitsUllage);
+  out('cover days = usable tank litres / litres a day. The engine rounds cover days to two decimals, so it prints to two here and not to the four of the header.');
+  out(`The forecourt's delivery of ${lit(S.deliveryPayloadLitres)} litres is the IBAFO lane's payload (SECTION 14), and stationSizing checks the payload loaded. The lane delivers ${lit(lane.deliveredLitresPerTrip)} litres a trip after its transit loss; the station's check does not use that figure.`);
   row('ullage warning', plain(st.ullageWarning));
   out('');
   out('The nozzles swept at the same peak:');
@@ -650,6 +721,10 @@ out('');
   out(`With the duty and the financing rate left blank the build-up is not complete: complete ${floor.complete}; missing ${floor.missingRates.join(', ')}; total ${usd(floor.totalUsd)} USD. ${floor.basisOfTotal}`);
   const none = landed(chargesWith({}, onCif));
   out(`With every rate blank: complete ${none.complete}; ${none.missingRates.length} missing; total ${usd(none.totalUsd)} USD, the FOB alone. ${none.basisOfTotal}`);
+  out(`The full build-up less the floor with the duty and the financing rate blank: ${usd(badLanded.totalUsd)} - ${usd(floor.totalUsd)} = ${usd(Number(usd(badLanded.totalUsd)) - Number(usd(floor.totalUsd)))} USD.`);
+  const zero = landed(chargesWith({ ...F.BADAGRY_RATES, duty: 0 }, onCif));
+  const blankDuty = landed(chargesWith({ ...F.BADAGRY_RATES, duty: '' }, onCif));
+  out(`A rate typed 0 is a rate: with the duty typed 0 the build-up is complete ${zero.complete}, total ${usd(zero.totalUsd)} USD. With the duty left blank it is complete ${blankDuty.complete}, missing ${blankDuty.missingRates.join(', ')}, total ${usd(blankDuty.totalUsd)} USD. ${blankDuty.basisOfTotal}`);
 }
 
 /* ------------------------------------------------------------------ */
@@ -668,6 +743,8 @@ out('');
 {
   const jetty = badLanded.lines.find((l) => l.key === 'jetty'); const storage = badLanded.lines.find((l) => l.key === 'storage');
   out(`HELD (FINDINGS-supply H1): the charges levied at discharge are billed on the bill-of-lading quantity. The jetty line is ${usd(jetty.amount)} USD and the storage line ${usd(storage.amount)} USD, each on ${m3(badLanded.quantities.m3)} m3 on the bill of lading, where the outturn is ${m3(badLanded.outturn.m3)} m3. Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know.`);
+  const reg = badLanded.lines.find((l) => l.key === 'regulator'); const port = badLanded.lines.find((l) => l.key === 'port');
+  out(`Every charge quoted per quantity is charged on the bill-of-lading quantity, the per-litre regulatory line included: ${usd(reg.amount)} USD on ${lit(badLanded.quantities.litres)} bill-of-lading litres, and the port line ${usd(port.amount)} USD on ${t4(badLanded.quantities.tonnes)} bill-of-lading tonnes. H1 names the discharge charges; the same contract question applies to any line charged per quantity, and the engine answers every one on the bill of lading.`);
 }
 
 /* ------------------------------------------------------------------ */
@@ -685,6 +762,7 @@ out(`Against a cap of ${locL(F.BADAGRY_CAP)} naira a litre: shortfall ${locL(bad
   out(`Against a cap of ${locL(F.BADAGRY_LOW_CAP)} naira a litre: shortfall ${locL(low.shortfallPerLitre)} naira a litre; the cap covers the chain: ${low.capCoversChain}.`);
   const vatLanded = FP.buildPumpPrice({ landedPerLitre: badLanded.perLitreLocal, elements: BAD_ELEMENTS.map((e) => (e.id === 'vat' ? { ...e, basis: FP.PRICE_ELEMENT_BASIS.PERCENT_OF_LANDED } : e)) });
   out(`The same ${F.BADAGRY_ELEMENTS.vat} percent typed as a percent of the landed cost instead of the running total: price ${locL(vatLanded.pricePerLitre)} naira a litre.`);
+  out(`That build-up is complete ${vatLanded.complete}: the basis changes the amount, and every rate is still supplied.`);
   const floor = FP.buildPumpPrice({ landedPerLitre: badLanded.perLitreLocal, elements: elementsWith({ ...F.BADAGRY_ELEMENTS, dealer: null, levies: null }) });
   out(`With the dealer margin and the levies left blank: complete ${floor.complete}; missing ${floor.missingRates.join(', ')}; price ${locL(floor.pricePerLitre)} naira a litre. ${floor.basisOfPrice}`);
 }
@@ -715,6 +793,16 @@ out('');
   head('naira to the dollar', 'pump price naira/L', 'shortfall naira/L', 'cap covers');
   s.points.forEach((p) => row(fx(p.value), locL(p.pricePerLitre), locL(p.shortfallPerLitre), p.covered));
   out(`breakeven: found ${s.breakeven.found}, at ${fx(answered(s.breakeven, 'value', 'badagry breakeven'))} naira to the dollar, after ${s.breakeven.iterations} bisection steps.`);
+  out(`The exchange rates swept are invented values for the course. priceSensitivity hands solveCrossing the bracket from the lowest to the highest value swept, here ${fx(Math.min(...F.BADAGRY_FX_VALUES))} to ${fx(Math.max(...F.BADAGRY_FX_VALUES))} naira to the dollar.`);
+  out('');
+  out('The chain at each exchange rate, element by element:');
+  head('naira to the dollar', 'landed naira/L', 'Government naira/L', 'pump price naira/L');
+  for (const v of F.BADAGRY_FX_VALUES) {
+    const l = landed(chargesWith(F.BADAGRY_RATES, onCif), { fxRate: v });
+    const pp = FP.buildPumpPrice({ landedPerLitre: l.perLitreLocal, elements: BAD_ELEMENTS });
+    const g = FP.marginWaterfall(pp).groups.find((x) => x.recipient === 'Government');
+    row(fx(v), locL(l.perLitreLocal), locL(g.amountPerLitre), locL(pp.pricePerLitre));
+  }
   out('');
   const n = FP.priceSensitivity({ price: priceAtFx, values: F.BADAGRY_FX_NARROW, capPerLitre: F.BADAGRY_CAP });
   out(`Searched only from ${F.BADAGRY_FX_NARROW[0]} to ${F.BADAGRY_FX_NARROW[F.BADAGRY_FX_NARROW.length - 1]}: found ${n.breakeven.found}; ${refused(n.breakeven, 'narrow')} The shortfall at the two ends: ${locL(n.breakeven.atLo)} and ${locL(n.breakeven.atHi)} naira a litre.`);
@@ -742,6 +830,11 @@ out('a loss with no density has no weight and no emissions, and the carbon note 
 out(`insurance quoted on CIF is solved in closed form (SECTION 18): CIF ${usd(badLanded.cif)} USD on the BADAGRY cargo.`);
 out('a freight-stage charge on C&F or CIF, and a charge with an unknown stage, are refused (SECTION 18).');
 out('a blank trucking cost is missing and named, and a cost left out of the call takes its stated default (SECTION 14).');
+out('');
+out('Rules the engines keep at e4d3b10 (MD3-1, engines PR #224), each measured in this digest:');
+out(`a load time of zero minutes is refused (SECTION 10): "${TD.rackQueue({ ...F.IBAFO_RACK, loadMinutes: 0 }).error}"`);
+out(`throughputEconomics needs the throughput and the fee (SECTION 13): "${TD.throughputEconomics({ ...F.IBAFO_ECONOMICS, feePerM3: '' }).error}" A blank cost or loss is taken as zero and named in assumedZero.`);
+out(`tankFarmCover with no daily throughput gives no days of cover and no turns (SECTION 12): turns a year ${plain(TD.tankFarmCover({ tanks: F.IBAFO_TANKS }).turnsPerYear)}.`);
 out('an opening stock derived from the day\'s own closing dip balances every day and measures nothing (SECTION 7).');
 
 /* ------------------------------------------------------------------ */

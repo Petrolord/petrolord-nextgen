@@ -18,10 +18,11 @@
 -- reach what the bays can load, and the engine says so instead of printing a
 -- number.
 --
--- THE TRAP THE TIER IS BUILT ON. Averages hide the queue: utilisation below
--- one still leaves most trucks waiting when the rack is nearly full, a heel
--- netted across the farm lends volume no pump can move, and a blank cost box
--- is a missing cost.
+-- THE TRAP THE TIER IS BUILT ON. Averages hide the queue: at a utilisation
+-- below one a nearly full rack still makes a truck wait more often than not
+-- (0.787753 at IBAFO's 0.900000), a heel netted across the farm fills one
+-- tank's heel from another tank's pumpable stock, which no pump can do, and a
+-- blank cost box is a missing cost.
 --
 -- The capstone grades a probability to four decimals (tolerance 0.0001), a
 -- wait in minutes, a pumpable stock in m3 and days of cover to two decimals

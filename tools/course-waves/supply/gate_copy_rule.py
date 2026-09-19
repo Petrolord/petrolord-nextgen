@@ -25,7 +25,7 @@ CONTRAST = re.compile(r"\b\w+, not (a |an |the )?\w+", re.I)
 
 
 def texts():
-    for f in ['LESSON_TASK.md', 'BANK_TASK.md', 'KEY_TRUTH_TASK.md', 'PANELS.md', 'RECON.md',
+    for f in ['LESSON_TASK.md', 'BANK_TASK.md', 'KEY_TRUTH_TASK.md', 'PANELS.md', 'RECON.md', 'REVISE.md',
               'hdr_beginner.txt', 'hdr_intermediate.txt', 'hdr_advanced.txt']:
         yield f, open(os.path.join(W, f), encoding='utf-8').read()
     cap = json.load(open(os.path.join(W, 'capstone.json')))

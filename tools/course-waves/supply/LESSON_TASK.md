@@ -1,8 +1,9 @@
 # supply LESSON TASK. Read every line before you write a word.
 
 You are writing lessons for **`supply`, "Terminals, Depots & Fuel Supply"**,
-the third of the three Commercial & Trading courses in the NextGen `downstream`
-academy module (label "Midstream & Downstream"), path_order 50. The sibling
+a course in the NextGen `supply_chain` academy module (label "Supply Chain &
+Logistics"), path_order 50, built beside the two Commercial & Trading courses
+(module `commercial_trading`). The sibling
 courses `crude` ("Crude Assay & Blending", path_order 48) and `refinery`
 ("Refinery Feasibility & Planning", path_order 49) are being written beside
 you. Read "The seams with crude and refinery" before module one.
@@ -49,8 +50,8 @@ K2 for any commodity group, and do not say the synthetic row resembles one.
 
 ## History on this wave
 
-This digest describes the engines as they are at 60ee266 (MD3-0). It carries NO
-section about what the engine used to do. SECTION 23 states the rules MD3-0 put
+This digest describes the engines as they are at e4d3b10 (MD3-0 and MD3-1). It carries NO
+section about what the engine used to do. SECTION 23 states the rules MD3-0 and MD3-1 put
 in force, each in the present tense with a measured figure. A sentence about
 former behaviour that reads as current behaviour is a defect; do not write
 "used to", "was changed", "before the repair" or anything of that shape. If you

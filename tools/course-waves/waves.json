@@ -657,10 +657,11 @@
       "LESSON_TASK.md",
       "BANK_TASK.md",
       "KEY_TRUTH_TASK.md",
-      "PANELS.md"
+      "PANELS.md",
+      "REVISE.md"
     ],
     "pins": {
-      "digest.txt": "b96f9e6d8809a2dbe3e7de9ac410a2c297eeb477ee3b2f3676bf5ac609f589fe",
+      "digest.txt": "f85d69dabffb592e119d33e35e7219edc6c758cf64658bfc02111cd235ba74aa",
       "fields.json": "e2318d8ea06db86f28ac2496f03a66740ee1fc6664ed56db592ef52ae7a8a971"
     }
   }

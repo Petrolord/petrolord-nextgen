@@ -74,7 +74,7 @@ and a distractor quickly.
 
 ## Held items and the MD3-0 rules
 
-The rules in SECTION 23 are CURRENT RULES at 60ee266 and may be keyed like any
+The rules in SECTION 23 are CURRENT RULES at e4d3b10 and may be keyed like any
 rule: an opening stock is required, a dip below a partial table and an
 unconvertible water cut are refused, bays are whole numbers, pumpable stock is
 tank by tank, a loss with no density has no weight, insurance on CIF is solved

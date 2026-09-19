@@ -5,7 +5,7 @@
 //     /root/md-wip-supply/digest.txt --rules /root/md-wip-supply
 //
 // THIS WAVE'S HISTORY POSITION. The digest teaches the engines as they are at
-// 60ee266 (MD3-0). SECTION 23 names the rules MD3-0 put in force as rules in
+// e4d3b10 (MD3-0 and MD3-1). SECTION 23 names the rules MD3-0 and MD3-1 put in force as rules in
 // force, each in the present tense with a measured figure. Nothing in the
 // digest describes what an engine or a page used to return.
 export default {
@@ -99,5 +99,6 @@ export default {
     { frag: 'litres of ullage at the reorder level. Order earlier or order a part load.', src: 'engines/downstream/fuelPricing.js' },
     { frag: 'Line items only. Every rate is a required input: duties, levies and regulated margins are set by regulation, differ by market and change. Confirm each against the regulation in force.', src: 'engines/downstream/fuelPricing.js' },
     { frag: 'All supplied rates applied.', src: 'engines/downstream/fuelPricing.js' },
+    { frag: 'Throughput and the throughput fee are both needed for the money answer.', src: 'engines/downstream/terminalDepot.js' },
   ],
 };
