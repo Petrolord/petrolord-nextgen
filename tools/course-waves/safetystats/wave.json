@@ -81,8 +81,8 @@
  "digest": {
   "lines": 622,
   "sections": 28,
-  "md5": "5f9677ff5c10ddf69d904cd9870551bf",
-  "sha256": "1591f83cff4d22372aca78a850f0428ddaa2124347d642a3c81feec119e6ae4d"
+  "md5": "0b0c6b0ee70fd34a885f6a8b3b8bcca4",
+  "sha256": "9a8c3b63b699de47a812fd9a5d015197394db42dc67a6e85e2dbd85634232c06"
  },
  "history": {
   "position": "THIS ENGINE HAS NO REPAIR HISTORY: written, oracle-gated and merged in one pull request. No history module, no framed history section; structure.py and digest_prose.rules.mjs refuse any key, title or heading that reads as one."

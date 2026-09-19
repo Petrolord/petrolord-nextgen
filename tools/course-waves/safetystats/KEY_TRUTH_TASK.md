@@ -23,12 +23,16 @@ engine's source comments are PROVENANCE.
    same 9 recordables in 2318640 hours.
 2. Hours measure exposure and headcount does not: two crews of 40 with one
    recordable each read 2.500000 and 1.717033 per 200,000 hours.
-3. FAR is the one rate with a fixed base, 100,000,000 hours, because it has one
-   definition.
-4. The severity rate has no single standard; days per case is a different
-   quantity, and the engine adds no time charges.
+3. FAR is the one rate with a fixed base: the engine takes IOGP's definition,
+   fatalities per 100,000,000 hours, so 32 fatalities in 4158877000 hours read
+   0.769438, and a fatal rate quoted from another body needs its definition
+   checked before it is set beside this one.
+4. The severity rate has no single standard, and the engine adds no time
+   charges: UGHELLI's 96 days read 8.280716 per 200,000 hours, and 48.000000
+   days a case is a different quantity with no hours in it.
 5. The API RP 754 tier is an input, and the PSE rate takes the 200,000 or the
-   1,000,000 base and no other.
+   1,000,000 base and no other: UGHELLI's 1 Tier 1 event reads 0.086257 and
+   0.431287 on those two, and the FAR base is refused.
 6. Sum then divide: KWALE's pooled rate is 0.968312 and the mean of its site
    rates is 1.754760.
 
@@ -41,9 +45,11 @@ engine's source comments are PROVENANCE.
    probes is 0.956795.
 9. Zero events bounds the rate from above: 17.863823 per 200,000 hours on 41300
    hours at 95 percent, against 14.527845 by the rule of three.
-10. Comparing two rates conditions on the total count, and the base cancels.
-11. The engine's central p-value agrees with its own interval; the minlike one
-    of R and scipy can disagree: 0.051759 against 0.025879 on UTOROGU.
+10. Comparing two rates conditions on the total count, and the base cancels:
+    ERHA's 17 events are split as a binomial at east's hour share of 0.210374.
+11. The engine's central p-value agrees with its own interval on all 399
+    comparisons the digest sweeps, and the minlike one of R and scipy disagrees
+    on 14: on UTOROGU they read 0.051759 and 0.025879.
 12. A p-value above 0.05 says the data cannot tell. It does not say two rates are
     equal.
 
@@ -53,13 +59,18 @@ engine's source comments are PROVENANCE.
     monthly u of 3.202958.
 14. Limits move with exposure, so a quiet chart can be too thin to see: EGBEMA's
     month 3 reads 8.227913 under a limit of 10.211920.
-15. A signal is a question, and a month is set aside only for a found cause.
+15. A signal is a question, and a month is set aside only for a found cause:
+    set aside, EGBEMA's month 8 takes the centre from 2.893273 to 2.389523, and
+    the redrawn chart cannot show whether a cause was found.
 16. One month can turn a before-and-after ratio from 1.028627 to 0.677882, and
-    neither is significant at 0.05.
+    neither is significant at 0.05; the second stands only on a found cause for
+    the flagged month.
 17. A benchmark is a population figure: on the IOGP base UGHELLI reads 4.796684
-    times the IOGP 2024 TRIR, and the comparison inherits every difference in
-    definition and reporting.
-18. A rate that falls while the harm does not is a change in counting.
+    times the IOGP 2024 TRIR, with an interval of 2.191251 to 9.117590, and the
+    comparison inherits every difference in definition and reporting.
+18. A rate that falls while the harm does not is a change in counting: AMUKPE's
+    recordable rate falls from 1.161259 to 0.982603 and its severity rate holds
+    at 5.181000.
 
 ## THE RULES
 

@@ -547,7 +547,7 @@ The intervention went in at the start of month 7 (stated). The flagged month, 8,
 | all months | 35, 2389010 | 28, 1965920 | 1.028627 | 0.607952 | 1.755328 | 1.000000 |
 | month 8 set aside, valid only with a found cause | 19, 1967920 | 28, 1965920 | 0.677882 | 0.357764 | 1.257771 | 0.241552 |
 
-The second row stands only if investigation finds a cause for the flagged month, the condition set in the section before this one. The flagged month falls after the intervention, so setting it aside can only lower the after rate, and without a found cause that flatters the programme.
+The second row stands only if investigation finds a cause for the flagged month, the condition set in the section before this one. The flagged month falls after the intervention, so setting it aside can only lower the after rate, and without a found cause that flatters the programme. The found cause must also be one the intervention did not produce: if the excess in the flagged month came from the very work the intervention changed, that excess is part of the effect of the intervention, and setting the month aside would hide the effect the comparison is meant to measure.
 
 With every month in, the after period reads a rate ratio of 1.028627 with a p-value of 1.000000. With month 8 set aside it reads 0.677882 with a p-value of 0.241552. One month turns the ratio from above 1 to below it, and neither comparison is significant at 0.05: the data cannot say the intervention changed the rate in either direction. A before-and-after claim has to say which months it used and why. The p-value of 1.000000 is the cap: twice the smaller tail, derived 1.015454, is above 1.
 

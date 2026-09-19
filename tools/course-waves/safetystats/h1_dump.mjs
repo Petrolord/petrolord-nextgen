@@ -785,7 +785,7 @@ table(['comparison', 'after: count, hours', 'before: count, hours', 'rate ratio 
 must('with month 8 the after rate is not lower', ba1.rateRatio >= 1 || ba1.pValue > 0.05, ba1.rateRatio);
 must('setting the flagged month aside lowers the after rate', c2b / h2b < c2a / h2a, `${c2b / h2b} ${c2a / h2a}`);
 w();
-w('The second row stands only if investigation finds a cause for the flagged month, the condition set in the section before this one. The flagged month falls after the intervention, so setting it aside can only lower the after rate, and without a found cause that flatters the programme.');
+w('The second row stands only if investigation finds a cause for the flagged month, the condition set in the section before this one. The flagged month falls after the intervention, so setting it aside can only lower the after rate, and without a found cause that flatters the programme. The found cause must also be one the intervention did not produce: if the excess in the flagged month came from the very work the intervention changed, that excess is part of the effect of the intervention, and setting the month aside would hide the effect the comparison is meant to measure.');
 must('the two before-and-after comparisons give different p-values', Math.abs(ba1.pValue - ba2.pValue) > 0.01, `${ba1.pValue} ${ba2.pValue}`);
 w();
 must('with month 8 the ratio is above 1 and without it below 1', ba1.rateRatio > 1 && ba2.rateRatio < 1, `${ba1.rateRatio} ${ba2.rateRatio}`);
