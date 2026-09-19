@@ -1,0 +1,26 @@
+-- ============================================================================
+-- crude PROFESSIONAL DEEP SEED: Crude Assay & Blending, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE BLENDED BARREL AND WHAT IT IS WORTH. Yields add on
+-- volume, so the blend has its own curve at every temperature a crude
+-- measured, and temperatures are never averaged; T50 is read off that curve
+-- by interpolation; a refinery draws its own cut points and a moved cut point
+-- moves barrels between two cuts only; the netback takes losses on the product
+-- side before processing and freight, names a blank cost and an unpriced cut,
+-- and reports its differential against a marker.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The blend is worth what its barrels are
+-- worth: its netback and the volume-weighted netbacks of its crudes are the
+-- same figure.
+--
+-- THE TRAP THE TIER IS BUILT ON. A grid reading of T50, a mass-weighted yield
+-- and a loss taken after the costs each give a figure that looks finished.
+--
+-- HELD, taught as a limit and never graded: Watson K taken at T50 (C13).
+-- Every figure is invented and illustrative. The capstone grades six
+-- four-decimal engine figures at a tolerance of 5e-5.
+-- ============================================================================
