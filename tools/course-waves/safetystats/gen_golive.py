@@ -695,6 +695,21 @@ POIS_L = pois_le_sql(nA - 1, f"{V['bonny_alpha_trir_lower95_per_200k']} * {aH!r}
 POIS_U = pois_le_sql(nA, f"{V['bonny_alpha_trir_upper95_per_200k']} * {aH!r} / {B2!r}")
 
 
+ANNUAL = [
+    ('okrika_combined_trir_per_200k', okR, B2, EPS_RATE, 'the recordable cases of both workforces'),
+    ('okrika_combined_ltir_per_1m', O['lostTimeInjuries'], B6, EPS_RATE, 'the lost time injuries'),
+    ('okrika_far_per_100m', O['fatalities'], B8, EPS_RATE * 10, 'the fatality'),
+    ('okrika_severity_rate_per_200k', O['daysLost'], B2, EPS_RATE, 'the days lost'),
+    ('okrika_tier1_pse_rate_per_200k', O['tier1Pse'], B2, EPS_RATE, 'the Tier 1 process safety events'),
+]
+OKRIKA_RATES = ''.join(
+    f"""  v_x := {n} * {base!r} / {okH_sql};
+  if abs({V[k]} - v_x) > {eps!r} then
+    raise exception 'H1 go-live refused: the rate of {what} over the hours of both workforces is % on the {int(base)} hour base, against the seeded %{name(k)}', v_x, {V[k]};
+  end if;
+""" for k, n, base, eps, what in ANNUAL)
+
+
 def xr(var):
     return f'(({var} * {aH!r} / {bH!r}) / (1.0 + {var} * {aH!r} / {bH!r}))'
 
@@ -704,14 +719,7 @@ A(f'''
   -- ASSOCIATE, OKRIKA. Every rate is a count times its base over the hours of
   -- both workforces; the rolling window ending at month 14 is months 3 to 14,
   -- summed and then divided.
-  if abs({V['okrika_combined_trir_per_200k']} - ({okR} * {B2!r} / {okH_sql})) > {EPS_RATE!r}
-     or abs({V['okrika_combined_ltir_per_1m']} - ({O['lostTimeInjuries']} * {B6!r} / {okH_sql})) > {EPS_RATE!r}
-     or abs({V['okrika_far_per_100m']} - ({O['fatalities']} * {B8!r} / {okH_sql})) > {EPS_RATE * 10!r}
-     or abs({V['okrika_severity_rate_per_200k']} - ({O['daysLost']} * {B2!r} / {okH_sql})) > {EPS_RATE!r}
-     or abs({V['okrika_tier1_pse_rate_per_200k']} - ({O['tier1Pse']} * {B2!r} / {okH_sql})) > {EPS_RATE!r} then
-    raise exception 'H1 go-live refused: the second route in SQL does not reproduce the OKRIKA annual rates from the counts and hours in the prompt{name('okrika_combined_trir_per_200k', 'okrika_combined_ltir_per_1m', 'okrika_far_per_100m', 'okrika_severity_rate_per_200k', 'okrika_tier1_pse_rate_per_200k')}';
-  end if;
-  if {OK_SUM(1, 12, 'v_ok_h')} <> {okh_total!r} or {OK_SUM(1, 12, 'v_ok_c')} <> {okR} then
+{OKRIKA_RATES}  if {OK_SUM(1, 12, 'v_ok_h')} <> {okh_total!r} or {OK_SUM(1, 12, 'v_ok_c')} <> {okR} then
     raise exception 'H1 go-live refused: OKRIKA months 1 to 12 do not sum to the annual report the prompt states';
   end if;
   v_s_okrika_rolling12_trir_month14_per_200k := {OK_SUM(3, 14, 'v_ok_c')} * {B2!r} / {OK_SUM(3, 14, 'v_ok_h')};
