@@ -623,7 +623,7 @@
     "course": "MD1",
     "live": "/root/md-wip-crude",
     "kit": "full",
-    "kitNote": "Foundation kit, the first Commercial & Trading course (module downstream). The mirror carries every file the wave is rebuilt and gated from: the digest, its generator and the teaching records; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles (oracle_crudeassay, oracle_productblending) on the capstone; every gate with its negative control (reproducibility across four zones, the clock, the vendor pin, collisions, promptleak, capstone leak, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files. The seed ladder joins it in the lesson phase.",
+    "kitNote": "Foundation kit, the first Commercial & Trading course (module commercial_trading). The mirror carries every file the wave is rebuilt and gated from: the digest, its generator and the teaching records; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles (oracle_crudeassay, oracle_productblending) on the capstone; every gate with its negative control (reproducibility across four zones, the clock, the vendor pin, collisions, promptleak, capstone leak, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files. The seed ladder joins it in the lesson phase.",
     "inputs": [
       "digest.txt",
       "fields.json",
@@ -657,10 +657,11 @@
       "LESSON_TASK.md",
       "BANK_TASK.md",
       "KEY_TRUTH_TASK.md",
-      "PANELS.md"
+      "PANELS.md",
+      "REVISE.md"
     ],
     "pins": {
-      "digest.txt": "5abb54755819bdf2af1a83fc8b605fe31620d6307f77ed80b7b2ade0f22bc9da",
+      "digest.txt": "a6463b84d1ee657846f15999bc239fdad2bd0d02e166ea129266a4703d13c9bc",
       "fields.json": "aa36514e7aaf8017dce9e5436faa56ccd55fcc2508ce8d4e970d507cda9711fc"
     }
   }

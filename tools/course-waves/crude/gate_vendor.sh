@@ -1,11 +1,11 @@
 #!/bin/sh
 # GATE: every file this wave teaches from is vendored sha-identical with the
-# canonical engines commit the shared vendor commit pins (60ee266). This wave
+# canonical engines commit the shared vendor commit pins (e4d3b10, MD1-1). This wave
 # does not re-vendor; it proves the base it stands on. The comparison is against
 # `git show 60ee266:<path>` in /root/petrolord-engines, read-only.
 E=/root/petrolord-engines
 V=${MD_ENGINES:-/root/wt-md-crude-nextgen/packages/engines}
-PIN=60ee266
+PIN=e4d3b10
 fail=0; n=0
 for p in engines/downstream/crudeAssay.js engines/downstream/productBlending.js lib/lp/simplex.js \
   tools/validation/downstream/oracle_crudeassay.py tools/validation/downstream/oracle_productblending.py \

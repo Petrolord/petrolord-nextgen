@@ -8,7 +8,7 @@ Everything here started from a recipe someone chose. Kwale Light and Ughelli Med
 
 A blending terminal faces the reverse problem. It has a pool of components, each with a cost, a quality and an amount on hand. It has a product specification with limits: sulfur at most this, octane at least that, vapour pressure within a band. It has a volume to deliver. The shares are no longer an input. They are the answer, and the question is which shares meet every limit at the least cost.
 
-That is a continuous decision with many variables and many limits at once, and it is solved as a linear programme. This course owns linear programming for the whole downstream module, and the Expert tier teaches it from the start: what an objective, rows and bounds are, why the optimum sits on a vertex, and what optimal, infeasible and unbounded mean.
+That is a continuous decision with many variables and many limits at once, and it is solved as a linear programme. This course owns linear programming for the whole Commercial & Trading module, and the Expert tier teaches it from the start: what an objective, rows and bounds are, why the optimum sits on a vertex, and what optimal, infeasible and unbounded mean.
 
 ## What carries over
 

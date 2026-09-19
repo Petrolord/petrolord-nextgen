@@ -1,7 +1,8 @@
 # `crude` RECON: Crude Assay & Blending
 
-Academy module `downstream` ("Midstream & Downstream"), path_order 48, slug
-`crude`, the first of the three Commercial & Trading courses. Subject:
+Academy module `commercial_trading` ("Commercial & Trading", LEAD RULING
+2026-09-19; the engine family stays engines/downstream), path_order 48, slug
+`crude`, the first Commercial & Trading course. Subject:
 `engines/downstream/crudeAssay.js`, `engines/downstream/productBlending.js` and
 `lib/lp/simplex.js`, vendored sha-identical from petrolord-engines **60ee266**
 by the shared vendor commit b1f29251 (`gate_vendor.sh`: 16 paths, engines,
@@ -125,6 +126,11 @@ the negative control (a planted zone read) moves one line in each of the three
 non-UTC zones.
 
 ## 5. Findings (rule 5)
+
+**UPDATE, extension round: R1, R2 and R3 were REPAIRED UPSTREAM in MD1-1
+(engines #224, e4d3b10; FINDINGS-crude C14 to C16), re-vendored on this branch
+as 030b1c93. The digest now prints each repaired behaviour on a case it already
+showed (SECTIONS 11, 15, 25). The text below is the recon as found.**
 
 Three engine behaviours found in recon. **None is on a graded path, none is
 printed by the digest in the shape that shows the defect, and no lesson may
@@ -275,3 +281,8 @@ b1f29251 (`chore(engines): vendor the downstream family (engines 60ee266)`),
 which pins canonical 60ee266 in VENDOR.json and removes `downstream` from
 `excludedDomains`. `gate_vendor.sh` compares the 16 paths this wave stands on
 against `git show 60ee266:<path>` in /root/petrolord-engines: all identical.
+
+**Extension round:** re-vendored at e4d3b10 (030b1c93, a cherry-pick of the
+shared vendor commit 41d88b9f). `gate_vendor.sh` now pins e4d3b10: the same 16
+paths, all identical. Rebuilt on it, the digest was byte-identical and all
+eighteen graded values unchanged before any extension.

@@ -1,10 +1,12 @@
 # crude LESSON TASK. Read every line before you write a word.
 
-You are writing lessons for **`crude`, "Crude Assay & Blending"**, the first of
-the three Commercial & Trading courses in the NextGen `downstream` module
-("Midstream & Downstream"), path_order 48. Two sibling courses are written
-beside you: `refinery` (Refinery Feasibility & Planning, 49) and `supply`
-(Terminals, Depots & Fuel Supply, 50). Read "The seams" before module one.
+You are writing lessons for **`crude`, "Crude Assay & Blending"**, the first
+course in the NextGen academy module `commercial_trading` ("Commercial &
+Trading"), path_order 48. Two sibling courses are written beside you:
+`refinery` (Refinery Feasibility & Planning, 49, also Commercial & Trading) and
+`supply` (Terminals, Depots & Fuel Supply, 50, in the `supply_chain` module,
+"Supply Chain & Logistics"). The ENGINE family is engines/downstream; that name
+is not the academy module. Read "The seams" before module one.
 
 ## The one sentence the course serves
 
@@ -132,7 +134,7 @@ forward into a later tier's sections.
 
 ## The seams
 
-- **THIS course OWNS linear programming for the whole module.** What an LP is,
+- **THIS course OWNS linear programming for the Commercial & Trading module and for the sibling that uses it.** What an LP is,
   rows and bounds, the vertex, the two phases, binding constraints, shadow
   prices as the value of one unit of relief, the marginal barrel against the
   average, giveaway, and infeasible as an answer. `refinery` will lean on these

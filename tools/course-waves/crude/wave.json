@@ -3,8 +3,8 @@
  "prefix": "cr",
  "name": "Crude Assay & Blending",
  "pathOrder": 48,
- "module": "downstream",
- "moduleLabel": "Midstream & Downstream",
+ "module": "commercial_trading",
+ "moduleLabel": "Commercial & Trading",
  "prerequisite": null,
  "repo": "/root/wt-md-crude-nextgen",
  "branch": "feat/md-crude-course",
@@ -13,13 +13,15 @@
    "slug": "refinery",
    "pathOrder": 49,
    "branch": "feat/md-refinery-course",
-   "repo": "/root/wt-md-refinery-nextgen"
+   "repo": "/root/wt-md-refinery-nextgen",
+   "module": "commercial_trading"
   },
   {
    "slug": "supply",
    "pathOrder": 50,
    "branch": "feat/md-supply-course",
-   "repo": "/root/wt-md-supply-nextgen"
+   "repo": "/root/wt-md-supply-nextgen",
+   "module": "supply_chain"
   }
  ],
  "asOf": null,
@@ -38,7 +40,7 @@
   "tools/validation/downstream/oracle_productblending.py",
   "tools/validation/downstream/oracle_lp.py"
  ],
- "enginesVendoredAt": "NextGen, sha-identical with engines 60ee266 (MD3-0, #221; MD1-0 repaired this scope at 5cbdca5 -> #215). Vendored by the shared vendor commit b1f29251 on feat/md-vendor-downstream (the whole downstream family plus lib/lp, downstream removed from excludedDomains), made by the lead; this wave does not re-vendor.",
+ "enginesVendoredAt": "NextGen, sha-identical with engines e4d3b10 (MD-1, #224; MD1-1 repaired R1, R2 and R3 as FINDINGS-crude C14 to C16). Re-vendored on this branch as 030b1c93, a cherry-pick of the shared vendor commit 41d88b9f; the foundation stood on b1f29251 (60ee266). This wave does not vendor.",
  "plan": {
   "state": "FOUNDATION: recon, structure, digest, eighteen graded fields, gates, scaffold and task files. No lesson, bank, panel or migration is written.",
   "thesis": "Every property of a blend is computed on its own basis (gravity through specific gravity on volume, sulfur and the other per-mass properties on mass, viscosity through an index, yields on volume off the curve), and every least-cost recipe is a linear programme whose binding specifications, value of relief and infeasibility are answers in their own right.",
@@ -64,7 +66,7 @@
   }
  },
  "digest": {
-  "lines": 844,
+  "lines": 942,
   "sections": 27,
   "withheld": null,
   "note": "No section is history. Every repaired MD1-0 rule is taught as how the engine works; SECTION 27 states the three HELD items as limits. Every figure is invented and illustrative, and the preamble says so."
@@ -81,18 +83,18 @@
  "gates": {
   "structure": {
    "file": "structure.py",
-   "md5": "fc918767ae2859068fdafc39cba697a2",
+   "md5": "8d51036143027208650080227180975b",
    "result": "exit 0: panels: 69 of 78 lessons carry one; ids ['crude-assay-explorer', 'crude-recipe-explorer', 'crude-valuation-explorer']"
   },
   "vendor": {
    "file": "gate_vendor.sh",
-   "md5": "719c8c4b81aa402bdf70c46a95372e86",
+   "md5": "82138bf187fd4e7dcbd3ee78fc3c72a2",
    "result": "exit 0: gate_vendor: PASS"
   },
   "engine-jest": {
    "file": "gate_vendor.sh",
-   "md5": "719c8c4b81aa402bdf70c46a95372e86",
-   "result": "exit 0: Tests:       866 passed, 866 total"
+   "md5": "82138bf187fd4e7dcbd3ee78fc3c72a2",
+   "result": "exit 0: Tests:       870 passed, 870 total"
   },
   "digest-repro": {
    "file": "gate_repro.sh",
@@ -112,7 +114,7 @@
   "kit-digestprose": {
    "file": "/root/dc-wavekit/digestprose.mjs",
    "md5": "97dda85819e61737a76d8caf5badb46d",
-   "result": "exit 0: [digestprose] /root/md-wip-crude/digest.txt: 844 line(s), 27 section title(s) and 14 in-body marker(s) swept against their blocks, 32 history framings, 27 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+   "result": "exit 0: [digestprose] /root/md-wip-crude/digest.txt: 942 line(s), 27 section title(s) and 15 in-body marker(s) swept against their blocks, 32 history framings, 27 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
   },
   "kit-digestfigures": {
    "file": "/root/dc-wavekit/digestfigures.py",
@@ -157,7 +159,7 @@
   "kit-leakage-lessons": {
    "file": "/root/dc-wavekit/leakage.mjs",
    "md5": "e1ed8de10de5778302d00d7e5b357287",
-   "result": "exit 2: This gate does not pass on an empty or unreadable sweep."
+   "result": "exit 0: => fatal downward leaks: 0   same-tier answer prints: 0"
   },
   "kit-leakage-digest": {
    "file": "/root/dc-wavekit/leakage.mjs",
@@ -184,13 +186,13 @@
   "kit-sourceprose": {
    "file": "/root/dc-wavekit/sourceprose.mjs",
    "md5": "c370c51a0af6d3f8098ae859fb28ae1e",
-   "result": "exit 0: [sourceprose] 4 source file(s), 213 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
+   "result": "exit 0: [sourceprose] 4 source file(s), 218 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
   }
  },
  "findings": {
-  "R1": "STOPPED FOR THE LEAD. netbackValue reads a cut with no yield (null from cutYields) as a zero-yield cut and reports complete: true; reachable in the live studio (a partial curve or a cut point outside it). Kwale Light + Ebocha partial 50/50 on Kwale's cuts: LPG and naphtha unknown, netback 48.3393, complete true. The oracle's netback_cargo skips a None yield too, so it agrees and cannot catch it. Not graded, not printed by the digest.",
-  "R2": "STOPPED FOR THE LEAD. propertyOfBlend drops a component with no value from the property's denominator, so optimiseBlend prints an achieved value for a SKIPPED specification (Apapa PMS, isomerate sulfur blank: Sulfur achieved 60.5648 ppm with 656 bbl of isomerate left out); live in RecipeResults' Achieved column beside 'not applied'. Not graded, not printed by the digest.",
-  "R3": "STOPPED FOR THE LEAD (copy). screenBlendStability's fallback messages open 'No SARA analysis supplied' when SARA was supplied for some crudes. The digest quotes the message only where no crude carries SARA.",
+  "R1": "REPAIRED UPSTREAM in MD1-1 (C14): netbackValue names a cut with no yield in unyieldedCuts, keeps its yield null and reports complete false. The digest now prints it on the Kwale + Ebocha partial blend (SECTION 15).",
+  "R2": "REPAIRED UPSTREAM in MD1-1 (C15): propertyOfBlend returns null when a stream in the recipe lacks the property. SECTION 25 prints the skipped specification's achieved value as not formed.",
+  "R3": "REPAIRED UPSTREAM in MD1-1 (C16): the fallback message says 'SARA was not supplied for every crude' when some crudes carry it. SECTION 11 prints it.",
   "N1": "API blends linearly on MASS (mass-weighted mean of API numbers equals the blend API to 1e-14): taught as a computed identity in SECTION 4; never modelled as a wrong route. The engine comment 'API gravity does not blend at all' could be softened; not a defect.",
   "N2": "oracle_productblending's RVP relief quotients carry about 6e-5 of float noise (its rvp_index is a float); oracle_check requires the engine's relief between the two quotients and the two within twice the tolerance.",
   "N3": "With no availability bound active the marginal barrel equals the average barrel (every spec row has a zero rhs); ONNE has none active, so marginal-versus-average is taught on APAPA, where butane is at its cap.",
@@ -203,6 +205,9 @@
   "The Expert capstone's alkylate tank is typed as 0 bbl so 'a typed zero read as unlimited' is a live wrong route (alkylate at 91.5 $/bbl enters the recipe when unlimited).",
   "The gravity-screen thresholds, the API constants, the Refutas constants and the Rankine offset are not typed in the digest: each is read back from the engine (probes or inverse calls).",
   "leakage.mjs REFUSES the 78 title-only placeholders (no numeric literal, exit 2, expected at the foundation) and sweeps the digest in the beginner tier's place, clean.",
-  "Teaching cases and the apps' opening examples: the digest prints the studio's default pair and the optimizer's default pool as the app shows them, read from the Suite source into crude_fields.mjs."
- ]
+  "Teaching cases and the apps' opening examples: the digest prints the studio's default pair and the optimizer's default pool as the app shows them, read from the Suite source into crude_fields.mjs.",
+  "Lead confirmed: viscosity and Watson K stay ungraded (C12, C13).",
+  "Extension round: every printed difference is the difference of the two printed four-decimal figures (dfx in crude_dump.mjs). One printed figure moved: SECTION 2's API step at SG 0.95, -8.2749 -> -8.2748."
+ ],
+ "moduleRuling": "LEAD RULING 2026-09-19: crude and refinery are academy module commercial_trading; supply is supply_chain; no downstream module. The engine family stays engines/downstream."
 }

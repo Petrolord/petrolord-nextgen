@@ -1,6 +1,7 @@
 # crude: Crude Assay & Blending. Three tiers, six modules each, 26 lessons a
-# tier. Academy module `downstream` ("Midstream & Downstream"), path_order 48,
-# the first of the three Commercial & Trading courses.
+# tier. Academy module `commercial_trading` ("Commercial & Trading"), path_order
+# 48, the first Commercial & Trading course (LEAD RULING 2026-09-19; the engine
+# family stays engines/downstream).
 #
 # THE ONE SENTENCE. Every property of a blend is computed on its own basis
 # (gravity through specific gravity on volume, sulfur and the other per-mass

@@ -26,7 +26,7 @@ Every word of that contract will matter. The vector x is the recipe. The vector 
 
 ## Why this course owns the method
 
-The same kernel sits under more than one app in the Midstream & Downstream module. This course teaches the method for all of them: rows and bounds, the vertex, binding, the shadow price and infeasible. Later courses lean on this teaching and do not repeat it.
+The same kernel sits under more than one app in the Commercial & Trading module. This course teaches the method for all of them: rows and bounds, the vertex, binding, the shadow price and infeasible. Later courses lean on this teaching and do not repeat it.
 
 ## Exercise
 

@@ -1,12 +1,12 @@
 # Where this course hands over
 
-Crude Assay & Blending is the first of three Commercial & Trading courses in the Midstream & Downstream module. This last lesson says what the course leaves the learner holding and where the next two courses pick up.
+Crude Assay & Blending is the first course in the Commercial & Trading module, and Refinery Feasibility & Planning follows it there. Terminals, Depots & Fuel Supply sits in the Supply Chain & Logistics module. This last lesson says what the course leaves the learner holding and where those two courses pick up.
 
 ## What this course owns
 
 Two things run through all three tiers. The first is that every property of a blend is computed on its own basis: gravity through specific gravity on volume, sulfur and the other per-mass properties on mass, viscosity through an index, yields on volume off the curve. The second is that every least-cost recipe is a linear programme whose binding specifications, value of relief and infeasibility are answers in their own right.
 
-The second belongs to the whole module. This tier taught it once, completely:
+The second belongs to the whole Commercial & Trading module. This tier taught it once, completely:
 
 - a linear programme is an objective, rows and bounds, and its optimum sits on a vertex;
 - the kernel's status is optimal, infeasible or unbounded, and each is an answer;
@@ -24,9 +24,9 @@ The same kernel plans a refinery, and the `refinery` course (Refinery Feasibilit
 
 ## Where supply picks up
 
-The `supply` course (Terminals, Depots & Fuel Supply) owns what happens to a product once it is in a tank: strapping, the volume correction factor, free water, stock reconciliation, queues, landed cost and pump price. The Apapa cargo in this tier is a recipe: which components, in what volumes, at what cost. What happens to it in a terminal's tanks is the next course's material.
+The `supply` course (Terminals, Depots & Fuel Supply) owns what happens to a product once it is in a tank: strapping, the volume correction factor, free water, stock reconciliation, queues, landed cost and pump price. The Apapa cargo in this tier is a recipe: which components, in what volumes, at what cost. What happens to it in a terminal's tanks is that course's material, in the Supply Chain & Logistics module.
 
-## What no course in this group teaches
+## What neither module teaches
 
 Net present value, internal rate of return, Monte Carlo and decision trees belong to the Economics courses. Nothing in this course values a cash flow over time. The netback of the Professional tier and the least-cost recipe of this one are values per barrel and per cargo.
 

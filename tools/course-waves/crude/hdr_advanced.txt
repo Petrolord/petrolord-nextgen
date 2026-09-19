@@ -6,7 +6,7 @@
 -- manifest.json rather than hand typed.
 --
 -- What this tier owns: THE LEAST-COST RECIPE, and linear programming for the
--- whole downstream module. An LP is an objective, rows and bounds; its optimum
+-- Commercial & Trading module. An LP is an objective, rows and bounds; its optimum
 -- sits on a vertex; optimal, infeasible and unbounded are all answers; a limit
 -- on a ratio is a linear row; volume, mass and index are declared bases; a
 -- binding specification is met exactly and the rest give quality away; the
