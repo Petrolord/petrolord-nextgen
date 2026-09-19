@@ -212,6 +212,10 @@ export const PANELS = {
   'fc-chemistry-explorer': React.lazy(() => import('@/components/course/panels/corrosion/ChemistryExplorer')),
   'fc-rate-explorer': React.lazy(() => import('@/components/course/panels/corrosion/RateExplorer')),
   'fc-inhibitor-integrity-explorer': React.lazy(() => import('@/components/course/panels/corrosion/InhibitorIntegrityExplorer')),
+  // H2 Occupational Hygiene: Noise, Chemical & Heat Exposure (academy module hse)
+  'hy-noise-dosimeter': React.lazy(() => import('@/components/course/panels/hygiene/NoiseDosimeterExplorer')),
+  'hy-protection-chemicals': React.lazy(() => import('@/components/course/panels/hygiene/ProtectionChemicalsExplorer')),
+  'hy-heat-stress': React.lazy(() => import('@/components/course/panels/hygiene/HeatStressExplorer')),
   // FC8 Metering, Control Valves & Storage
   'fc-meterrun-explorer': React.lazy(() => import('@/components/course/panels/metering/MeterRunExplorer')),
   'fc-choking-explorer': React.lazy(() => import('@/components/course/panels/metering/ChokingExplorer')),
