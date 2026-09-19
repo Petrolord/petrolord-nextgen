@@ -243,6 +243,10 @@ export const PANELS = {
   'gasvalue-flare-explorer': React.lazy(() => import('@/components/course/panels/gasvalue/FlareExplorer')),
   'gasvalue-route-explorer': React.lazy(() => import('@/components/course/panels/gasvalue/RouteExplorer')),
   'gasvalue-rollout-explorer': React.lazy(() => import('@/components/course/panels/gasvalue/RolloutExplorer')),
+  // MD5 carbon: Carbon & Energy Efficiency (academy module energy_transition)
+  'carbon-inventory-explorer': React.lazy(() => import('@/components/course/panels/carbon/InventoryExplorer')),
+  'carbon-efficiency-explorer': React.lazy(() => import('@/components/course/panels/carbon/EfficiencyExplorer')),
+  'carbon-abatement-explorer': React.lazy(() => import('@/components/course/panels/carbon/AbatementExplorer')),
 };
 
 export function resolvePanel(id) {

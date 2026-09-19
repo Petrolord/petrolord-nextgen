@@ -1,0 +1,203 @@
+{
+ "slug": "carbon",
+ "prefix": "cef",
+ "name": "Carbon & Energy Efficiency",
+ "pathOrder": 52,
+ "module": "energy_transition",
+ "moduleLabel": "Energy Transition",
+ "prerequisite": null,
+ "repo": "/root/wt-et-carbon-nextgen",
+ "branch": "feat/et-carbon-course",
+ "siblings": [
+  {
+   "slug": "gasvalue",
+   "pathOrder": 51,
+   "branch": "feat/et-gasvalue-course",
+   "repo": "/root/wt-et-gasvalue-nextgen"
+  }
+ ],
+ "asOf": null,
+ "goldens": [
+  "downstream/goldens/carbonabatement_cases.json",
+  "downstream/goldens/energyefficiency_cases.json"
+ ],
+ "engines": [
+  "engines/downstream/carbonAbatement.js",
+  "engines/downstream/energyEfficiency.js"
+ ],
+ "enginesVendoredAt": "NextGen, sha-identical with engines df31f53 (engines PR #228, MD45-1) through the lead's re-vendor commit 4b848680 on this branch. The foundation was cut at f0aef14 (shared vendor fe001b52); the extension round rebuilt the digest on df31f53 and moved no graded value.",
+ "gwp": {
+  "source": "GHG Protocol, IPCC Global Warming Potential Values v2.0 (7 August 2024), from IPCC AR6 WG1 ch.7 7.6.1.1 and AR5 WG1 ch.8",
+  "horizon": "100-year (GWP100)",
+  "courseSet": "IPCC AR6 GWP100, fossil methane: CH4 29.8, N2O 273",
+  "printed": [
+   "AR6 fossil 29.8",
+   "AR6 non-fossil 27.0",
+   "AR5 fossil 30",
+   "AR5 non-fossil 28"
+  ],
+  "held": "H1: which report to file on is the owner's decision; taught as a stated limit, never graded"
+ },
+ "plan": {
+  "state": "FOUNDATION, LESSONS AND LAB committed; EXTENSION ROUND on df31f53 done; LESSONS REVISED on the extended digest (REVISE.md applied). No bank or migration.",
+  "thesis": "A tonne of CO2e is carbon counted atom by atom, weighted by a declared GWP set and carried on a record that says where every factor came from, and a tonne saved is priced over the life of the measure that saves it; the engines refuse or name every box nobody filled (a destruction efficiency, a factor, a safe oxygen floor, a discount rate) instead of reading it as the best case.",
+  "tiers": {
+   "beginner": "THE INVENTORY: the atom balance, the flare and its destruction efficiency, escaped carbon as methane, GWP sets and their reports, factors as records, computed against reportable, intensity and its boundary. Graded: six tonnes at 0.01.",
+   "intermediate": "THE HEATER, THE STEAM AND THE PINCH: combustion from the fuel analysis, excess air, stack loss on LHV and HHV, the tuning saving as a ratio, the failed trap, condensate, the problem table. Graded: two percents at 0.0001, a fuel saving at 1 GJ, a steam loss at 0.01 t, two utilities at 0.01 kW.",
+   "advanced": "THE CURVE AND THE PATH: the levelised cost of a tonne, the curve and its weighted average, interactions and over-claims, the target and the path, a saving priced in money and carbon, energy intensity. Graded: four USD per tonne and one USD at 0.01, one gap in tCO2e at 0.01."
+  },
+  "cases": {
+   "teaching": [
+    "IGBOGENE",
+    "ISIOKPO",
+    "AGBOR"
+   ],
+   "capstone": [
+    "OWAZA",
+    "IGRITA",
+    "IKORODU"
+   ]
+  }
+ },
+ "digest": {
+  "lines": 912,
+  "sections": 26,
+  "withheld": null,
+  "note": "No section is history. SECTION 25 states the held items and the MD5-0 and MD45-1 rules in force in the present tense, each with the section that prints it. No clock is read. Lines marked 'computed here' are the generator's arithmetic on engine figures (differences, shares, relations checked against the engine, the percentage-point shortcut, capital against one year). The extension round (REVISE.md) rebuilt it on df31f53 and closed the writers' gaps additively; no graded value moved."
+ },
+ "grading": {
+  "grader": "public.academy_submit_capstone reads expected, tol and the answer as numeric, so every graded field is a number the engine returns; verdicts and refusals are taught and never graded.",
+  "tolerance": "One unit in the last place the prompt asks for. The tuning saving is asked to the whole GJ (tol 1): it is a ratio of two efficiencies the engine rounds to six decimals, and a learner reading them to four lands up to about half a GJ away. One derivation: CLASSES in carbon_capstone.mjs; precision.json is written from it.",
+  "collisionRule": "No graded value within its tolerance of the absolute value of any number token the digest prints (the go-live rule), and no two graded values within the looser of their tolerances."
+ },
+ "findings": {
+  "F1": "REPAIRED UPSTREAM IN MD45-1 (engines #228, df31f53). STOPPED FOR THE LEAD: abatementCurve returns meetsTarget true, 'upper bound: measures interact', when a claim acts on a source absent from sourceEmissions. The MD5-0 Suite page (C11) leaves an uncomputed source out, so at the Carbon Studio's opening defaults (flare efficiency blank) the 9000 t flare recovery claim goes unchecked and the page shows 'met, as an upper bound'. Reproduction recon_pagedefaults.mjs. Taught as printed (SECTION 21 row 3), never graded. Lead: engine repair (unchecked source makes meetsTarget null) or hold.",
+  "F2": "REPAIRED UPSTREAM IN MD45-1 (engines #228, df31f53). stackLossEfficiency computes any basis other than exactly 'HHV' on LHV and labels it with the caller's string ('hhv' returns the LHV 89.821412 labelled hhv). Not live (the pages pass constants). Repair: refuse an unknown basis.",
+  "F3": "REPAIRED UPSTREAM IN MD45-1 (engines #228, df31f53). abatementCurve drops a refused measure without naming it; the Suite path still schedules it. Page lists refused measures. Repair: name them in the curve result.",
+  "F4": "REPAIRED UPSTREAM IN MD45-1 (engines #228, df31f53). emissionLine accepts a negative activity or factor; the inventory stays reportable and the intensity goes negative (C4's shape on the inventory side).",
+  "F5": "REPAIRED UPSTREAM IN MD45-1 (engines #228, df31f53). condensateReturnValue accepts a target return below the current one: a negative saving, complete true, no note.",
+  "F6": "REPAIRED UPSTREAM IN MD45-1 (engines #228, df31f53). steamTrapLoss reports choked true at any pressure (no downstream pressure input); not choked at 1.2 bar a to atmosphere. Course traps at 9 and 8.213 bar a.",
+  "F7": "REPAIRED UPSTREAM IN MD45-1 (engines #228, df31f53). decarbonisationPath allows negative emissions; a blank unburned loss is read as 0 unnamed and a negative radiation loss raises efficiency; makeGwpSet accepts a negative GWP.",
+  "oracle-coverage": "CLOSED IN MD45-1 for the graded set: oracle_energyefficiency.py exports duty_ledger() and oracle_check.py calls it; every graded field goes through an oracle function. carbonIntensity, residualToTargetTonnes, paysForItselfTonnes, compositeCurve and simplePaybackYears remain taught, unrecomputed and ungraded.",
+  "suite-page": "The MD5-0 Suite PR #543 (fix/md5-0-carbon-apps) merged into Suite origin/main as 60871c1e8 during this recon; the page behaviours the course teaches (blank heater efficiency refused, sources in CO2e, blanks passed as missing, partial-inventory warning, verdict labels, trap exponent, basis select) depend on it and on the Suite upload.",
+  "clock": "Neither engine reads a clock or a random number: source read, fake clock and fake random rebuilds byte-identical.",
+  "F8": "REPAIRED UPSTREAM IN MD45-1: a refused combustion is one blocked line through atomBalanceLines (SECTION 9); found by the Associate writer.",
+  "F9": "REPAIRED UPSTREAM IN MD45-1: the stack oxygen refusal states the bound it applies (SECTION 12); found by the Professional writer."
+ },
+ "decisions": [
+  "Course code prefix cef (checked unused in migrations/, tools/course-banks/ and waves.json).",
+  "Every inventory is computed on IPCC AR6 GWP100 with fossil methane (29.8), following the engine's own methaneNote (C10); AR6 non-fossil, AR5 fossil and AR5 non-fossil are printed beside it; the choice of report to file on is H1 and is never graded.",
+  "Every graded field is the engine's full-precision return, graded at one unit in the last place the prompt asks for; the tuning saving to the whole GJ.",
+  "The Associate capstone grades the flare's methane line in CO2e on the stated set, which makes the GWP set a numeric discriminator without grading a choice of set.",
+  "The Professional trap pressure is given on a gauge with the local atmosphere, so a gauge read as absolute is a discriminate route.",
+  "Carbon intensity is taught and not graded: no oracle recomputes it.",
+  "Manifests carry the three panel ids, so courseContent.test.js 'every panel referenced is registered' is red until the panel phase registers them.",
+  "Nothing is added to academyModules.js; the lab phase adds 'energy_transition' to CourseModuleNav MODULE_ORDER after 'supply_chain' on the same line as gasvalue.",
+  "Extension round: the three retired engine sentences (atom balance method, inventory disclaimer, condensate floor) were exempt in gate_copy_rule.py only while written lessons still quoted them; the REVISE.md lesson pass re-pointed every such line and removed the exemption, so the gate now exempts nothing.",
+  "Extension round: SECTION 21 adds a row with every source the inventory computes passed (still unassessed on steam, which has no inventory line of its own). A what-if with the trap repair checked against the heaters was DROPPED by lead ruling (2026-09-19): it paired a steam-saving claim with a different source, the loose bookkeeping F1 repaired, so the course does not model it."
+ ],
+ "gates": {
+  "structure": {
+   "file": "structure.py",
+   "md5": "59b24992b0f163e39ba2b8120606b370",
+   "result": "exit 0: panels: 71 of 78 lessons carry one; ids ['carbon-abatement-explorer', 'carbon-efficiency-explorer', 'carbon-inventory-explorer']"
+  },
+  "engine-suites": {
+   "file": "run_gates.sh",
+   "md5": "09bb8d586320e0bd373408c4e4839b2d",
+   "result": "exit 0: Tests:       232 passed, 232 total"
+  },
+  "digest-repro": {
+   "file": "gate_repro.sh",
+   "md5": "78cf2c65811266ae1f16a9cf20374c5d",
+   "result": "exit 0: gate_repro: PASS"
+  },
+  "kit-digestrepro": {
+   "file": "/root/dc-wavekit/digestrepro.sh",
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "result": "exit 0: NOTE: no truth-*.json in this wave. If numsweep runs here, harvest_digest.py first."
+  },
+  "clock": {
+   "file": "gate_clock.sh",
+   "md5": "65004929de657844812a8b0d41b944ca",
+   "result": "exit 0: gate_clock: PASS"
+  },
+  "kit-digestprose": {
+   "file": "/root/dc-wavekit/digestprose.mjs",
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "result": "exit 0: [digestprose] /root/et-wip-carbon/digest.txt: 913 line(s), 26 section title(s) and 20 in-body marker(s) swept against their blocks, 32 history framings, 109 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+  },
+  "kit-digestfigures": {
+   "file": "/root/dc-wavekit/digestfigures.py",
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "result": "exit 0: [digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "capstone-generator": {
+   "file": "carbon_capstone.mjs",
+   "md5": "01e2b137571acdadb826a3676d89db08",
+   "result": "exit 0: advanced      ikorodu_saving_cost_per_t_usd                -53.313854             tol 0.01"
+  },
+  "oracle-check": {
+   "file": "oracle_check.py",
+   "md5": "ddbe88fd56bfa5bf59c1d06a60a54043",
+   "result": "exit 0: fields compared: 18; disagreements beyond tolerance: 0; largest disagreement 0.0036 of a tolerance (igrita_excess_air_pct)",
+   "control": "exit 1: fields compared: 18; disagreements beyond tolerance: 1; largest disagreement 2.0000 of a tolerance (igrita_trap_t_per_yr)"
+  },
+  "discriminate": {
+   "file": "discriminate.mjs",
+   "md5": "d7a039f6c76bc3fa8d1214812d2dd26b",
+   "result": "exit 0: the closest miss anywhere in the eighteen: igrita_tuning_saving_gj by route hhv_efficiencies, 18.1 tolerances out",
+   "control": "exit 1: the closest miss anywhere in the eighteen: igrita_tuning_saving_gj by route hhv_efficiencies, 18.1 tolerances out"
+  },
+  "collisions": {
+   "file": "gate_collisions.py",
+   "md5": "3b3b25e5dc554fc65c725179435b5505",
+   "result": "exit 0: collisions with the digest: 0; graded pairs sharing a value: 0",
+   "control": "exit 1: collisions with the digest: 1; graded pairs sharing a value: 0"
+  },
+  "kit-collisions": {
+   "file": "/root/dc-wavekit/collisions.py",
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "result": "exit 0: fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "promptleak": {
+   "file": "gate_promptleak.py",
+   "md5": "ee1bfab37d1c026ae9fdb850355a9489",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 2"
+  },
+  "capstone-leak": {
+   "file": "gate_capstone_leak.py",
+   "md5": "f10975f867bf4a87dcdeb8c193df21b5",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 2"
+  },
+  "leakage-digest": {
+   "file": "gate_leakage_digest.sh",
+   "md5": "91154ddecc691277f091d5fb9a94b410",
+   "result": "exit 0: => fatal downward leaks: 0   same-tier answer prints: 0",
+   "control": "exit 1: => fatal downward leaks: 1   same-tier answer prints: 0"
+  },
+  "kit-leakage-lessons": {
+   "file": "/root/dc-wavekit/leakage.mjs",
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "result": "exit 0: => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "copy-rule": {
+   "file": "gate_copy_rule.py",
+   "md5": "59a1612522ae9151a6c1f8d74fcacb0f",
+   "result": "exit 0: violations: 0",
+   "control": "exit 1: violations: 2"
+  },
+  "kit-gradeprecision": {
+   "file": "/root/dc-wavekit/gradeprecision.py",
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "result": "exit 0: [gradeprecision] /root/et-wip-carbon: 18 graded field(s), 18 OF 18 CLASSIFIED against 3 precision clause(s) in the digest header and 6 declared class(es)"
+  },
+  "kit-sourceprose": {
+   "file": "/root/dc-wavekit/sourceprose.mjs",
+   "md5": "c370c51a0af6d3f8098ae859fb28ae1e",
+   "result": "exit 0: [sourceprose] 4 source file(s), 202 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
+  }
+ }
+}
