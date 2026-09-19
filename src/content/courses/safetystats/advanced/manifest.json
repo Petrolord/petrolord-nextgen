@@ -1,0 +1,363 @@
+{
+ "app_slug": "safetystats",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-u-chart",
+   "title": "The u-Chart",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-exposure-units-on-the-chosen-base",
+     "title": "Exposure units on the chosen base",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-centre-line-is-pooled",
+     "title": "The centre line is pooled",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-limits-that-move-with-exposure",
+     "title": "Limits that move with exposure",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-lower-limit-floored-at-zero",
+     "title": "The lower limit floored at zero",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-two-charts-the-engine-will-not-draw",
+     "title": "Two charts the engine will not draw",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-signals",
+   "title": "Signals",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-strictly-outside-its-limits",
+     "title": "A signal lies strictly outside its limits",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-three-sigma-and-what-a-band-costs",
+     "title": "Three sigma, and what a band costs",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-low-point-that-signals",
+     "title": "A low point that signals",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-small-exposure-and-wide-limits",
+     "title": "Small exposure and wide limits",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-what-a-signal-means",
+   "title": "What a Signal Means",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-a-signal-asks-a-question",
+     "title": "A signal asks a question",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-revising-the-limits-after-a-found-cause",
+     "title": "Revising the limits after a found cause",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-no-signal-is-a-weak-reassurance",
+     "title": "No signal is a weak reassurance",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-before-and-after-an-intervention",
+     "title": "Before and after an intervention",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ss-uchart-explorer",
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-benchmarking",
+   "title": "Benchmarking",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-reading-the-iogp-published-rates",
+     "title": "Reading the IOGP published rates",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-same-base-and-same-definition-first",
+     "title": "Same base and same definition first",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-benchmark-is-a-population-figure",
+     "title": "A benchmark is a population figure",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-five-year-view",
+     "title": "The five year view",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-traps",
+   "title": "The Traps",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-denominators-that-move",
+     "title": "Denominators that move",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-contractor-events-and-contractor-hours",
+     "title": "Contractor events and contractor hours",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-reclassification",
+     "title": "Reclassification lowers a rate and leaves the harm",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-rate-chasing",
+     "title": "Rate chasing and the month after the worst",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ss-uchart-explorer",
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-mean-of-rates-one-level-up",
+     "title": "The mean of rates, one level up",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-judgement-end-to-end",
+   "title": "Judgement, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-a-year-on-one-chart",
+     "title": "A year on one chart",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ss-uchart-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-the-engine-does-not-classify",
+     "title": "What the engine does not classify",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-monitoring-note",
+     "title": "Writing the monitoring note",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ss-uchart-explorer",
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ss-uchart-explorer",
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

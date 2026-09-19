@@ -1,0 +1,361 @@
+{
+ "app_slug": "safetystats",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-a-count-is-a-draw",
+   "title": "A Count Is a Draw",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-the-poisson-count-model",
+     "title": "The Poisson count model",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-an-observed-rate-estimates",
+     "title": "What an observed rate estimates",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-small-exposure-and-wide-swings",
+     "title": "Small exposure and wide swings",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-rate-with-no-interval",
+     "title": "A rate with no interval beside it",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-exact-interval",
+   "title": "The Garwood Exact Interval",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-limits-from-the-chi-square-distribution",
+     "title": "Limits from the chi-square distribution",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-half-the-miss-in-each-tail",
+     "title": "Half the miss in each tail",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-conservative-by-construction",
+     "title": "Conservative by construction",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-confidence-is-a-required-fraction",
+     "title": "Confidence is a required fraction",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-upper-tail-solved-directly",
+     "title": "The upper tail, solved directly",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-zero-events",
+   "title": "Zero Events",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-zero-events-is-a-measurement",
+     "title": "Zero events is still a measurement",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-upper-limit-at-zero",
+     "title": "The upper limit at zero",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-rule-of-three-and-where-it-differs",
+     "title": "The rule of three, and where it differs",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-how-much-exposure-it-takes",
+     "title": "How much exposure it takes to say anything",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-comparing-two-rates",
+   "title": "Comparing Two Rates",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-conditioning-on-the-total-count",
+     "title": "Conditioning on the total count",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-expected-proportion-from-the-hours",
+     "title": "The expected proportion from the hours",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-rate-ratio-and-its-interval",
+     "title": "The rate ratio and its interval",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-when-one-group-has-no-events",
+     "title": "When one group has no events",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-both-groups-empty-is-refused",
+     "title": "Both groups empty is refused",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-p-value-and-its-convention",
+   "title": "The p-Value and Its Convention",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-central-two-sided-p-value",
+     "title": "The central two-sided p-value",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-minlike-convention",
+     "title": "The minlike convention, and why it can disagree",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-p-value-and-the-interval-agree",
+     "title": "The p-value and the interval agree",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-no-difference-found-is-a-weak-claim",
+     "title": "No difference found is a weak claim",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-intervals-in-a-report",
+   "title": "Intervals in a Report",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-bls-case-with-its-interval",
+     "title": "The BLS case with its interval",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-iogp-far-with-its-interval",
+     "title": "The IOGP fatal accident rate with its interval",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-a-rate-with-its-uncertainty",
+     "title": "Writing a rate with its uncertainty",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ss-intervals-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
