@@ -84,6 +84,12 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('compliance/PlanExplorer.jsx');
     expect(names).toContain('compliance/ReadinessExplorer.jsx');
   });
+  it('finds the crude (Crude Assay & Blending) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('crude/AssayExplorer.jsx');
+    expect(names).toContain('crude/ValuationExplorer.jsx');
+    expect(names).toContain('crude/RecipeExplorer.jsx');
+  });
   it('finds the FC8 metering, control valve and storage panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('metering/MeterRunExplorer.jsx');

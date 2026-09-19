@@ -226,6 +226,10 @@ export const PANELS = {
   'compliance-register-explorer': React.lazy(() => import('@/components/course/panels/compliance/RegisterExplorer')),
   'compliance-plan-explorer': React.lazy(() => import('@/components/course/panels/compliance/PlanExplorer')),
   'compliance-readiness-explorer': React.lazy(() => import('@/components/course/panels/compliance/ReadinessExplorer')),
+  // crude: Crude Assay & Blending (academy module commercial_trading)
+  'crude-assay-explorer': React.lazy(() => import('@/components/course/panels/crude/AssayExplorer')),
+  'crude-valuation-explorer': React.lazy(() => import('@/components/course/panels/crude/ValuationExplorer')),
+  'crude-recipe-explorer': React.lazy(() => import('@/components/course/panels/crude/RecipeExplorer')),
 };
 
 export function resolvePanel(id) {
