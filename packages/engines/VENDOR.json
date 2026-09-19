@@ -1729,43 +1729,43 @@
       "path": "__tests__/hse.exposure.test.js",
       "kind": "extra",
       "group": "h2-hygiene-course",
-      "vendoredSha": "5c6635d8a01680701e5b9b6957278bae9476e709",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines 870cc8f (PR #217, engines/hse/exposure.js) by the wave's vendor_hygiene.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 870cc8f or later."
+      "vendoredSha": "d3b4c56d74031a4ab9d2900ee6a2327dc83c45d3",
+      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Re-vendored for #220 (nioshHeatAssessment renames its refusal message with its field). Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
     },
     {
       "path": "engines/hse/exposure.js",
       "kind": "extra",
       "group": "h2-hygiene-course",
-      "vendoredSha": "f9d771fe50212ecbe188c4209798e267cf33bd05",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines 870cc8f (PR #217, engines/hse/exposure.js) by the wave's vendor_hygiene.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 870cc8f or later."
+      "vendoredSha": "3495ebf0d4e97bf6e369b7bf1fd4c9a6f8e436b9",
+      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Re-vendored for #220 (nioshHeatAssessment renames its refusal message with its field). Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
     },
     {
       "path": "test-data/hse/goldens/exposure_cases.json",
       "kind": "extra",
       "group": "h2-hygiene-course",
       "vendoredSha": "093b3e617b6e778f59c9ffea3ab0b69478c27129",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines 870cc8f (PR #217, engines/hse/exposure.js) by the wave's vendor_hygiene.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 870cc8f or later."
+      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Byte-identical between 870cc8f and b43f1d9. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
     },
     {
       "path": "tools/validation/hse/FINDINGS-exposure.md",
       "kind": "extra",
       "group": "h2-hygiene-course",
-      "vendoredSha": "e755f1beaf090ea3a36d9353433612c0caec3c1d",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines 870cc8f (PR #217, engines/hse/exposure.js) by the wave's vendor_hygiene.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 870cc8f or later."
+      "vendoredSha": "3e8329d34b36592045e77afc1abd300837b9a4aa",
+      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Re-vendored for #220 (nioshHeatAssessment renames its refusal message with its field). Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
     },
     {
       "path": "tools/validation/hse/negcontrol_exposure.sh",
       "kind": "extra",
       "group": "h2-hygiene-course",
       "vendoredSha": "154de162b147441e4aac96f895011808a8ba081c",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines 870cc8f (PR #217, engines/hse/exposure.js) by the wave's vendor_hygiene.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 870cc8f or later."
+      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Byte-identical between 870cc8f and b43f1d9. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
     },
     {
       "path": "tools/validation/hse/oracle_exposure.py",
       "kind": "extra",
       "group": "h2-hygiene-course",
       "vendoredSha": "beffe81b17738b0c61704441c84983b1b97c5d66",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines 870cc8f (PR #217, engines/hse/exposure.js) by the wave's vendor_hygiene.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 870cc8f or later."
+      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Byte-identical between 870cc8f and b43f1d9. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
     }
   ]
 }

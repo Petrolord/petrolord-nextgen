@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 # VENDOR THE H2 EXPOSURE CLOSURE INTO NEXTGEN, SHA-IDENTICAL, AND PROVE IT.
-# Adapted from FC9 vendor_corrosion.sh. Engines 870cc8f is petrolord-engines
-# main after PR #217 (engines/hse/exposure.js). The canonical pin in
+# Adapted from FC9 vendor_corrosion.sh. First vendored at engines 870cc8f
+# (main after PR #217, engines/hse/exposure.js). RE-VENDORED 2026-09-19 at
+# b43f1d9 (main after #220, #222, #223): #220 renames nioshHeatAssessment's
+# refusal MESSAGE with its field (exposure.js, the jest suite's new guard,
+# FINDINGS-exposure.md section 7); #222 and #223 touch no path of this closure.
+# The golden, the oracle and the negative-control script are byte-identical
+# between the two commits. The canonical pin in
 # VENDOR.json is NOT moved: the six paths are ledgered as extra, group
 # h2-hygiene-course, each pinned to its vendored blob. H1 (safetystats) moves
 # the pin on its own branch; ledger entries keyed by path merge trivially.
@@ -18,7 +23,7 @@
 set -euo pipefail
 ENG=${H2_ENGINES:-/root/wt-h2-engines}
 NG=${H2_NEXTGEN:-/root/wt-h2-nextgen}
-REV=870cc8f
+REV=b43f1d9e6f7cb2cac8142959052b612834c5bc25
 
 cd "$ENG"
 
@@ -118,4 +123,4 @@ printf '%s\n' "$PATHS" | while read -r p; do
   printf '    %-58s %s %s %s\n' "$p" "$mu" "$mv" "$([ "$mu" = "$mv" ] && echo same || echo DIFFERS)"
   [ "$mu" = "$mv" ] || exit 1
 done
-echo "$N paths x 4 checks = $((N*4)) proofs, all IDENTICAL against engines $REV"
+echo "$N paths x 4 checks = $((N*4)) proofs, all IDENTICAL against engines ${REV:0:7}"
