@@ -74,6 +74,7 @@ import ComplianceLearningPage from '@/pages/apps/ComplianceLearningPage';
 import CrudeLearningPage from '@/pages/apps/CrudeLearningPage';
 import RefineryLearningPage from '@/pages/apps/RefineryLearningPage';
 import SupplyLearningPage from '@/pages/apps/SupplyLearningPage';
+import GasvalueLearningPage from '@/pages/apps/GasvalueLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
 import LessonPage from '@/pages/course/LessonPage';
@@ -450,6 +451,7 @@ const DashboardPage = () => {
     <Route path="apps/crude" element={<CrudeLearningPage />} />
     <Route path="apps/refinery" element={<RefineryLearningPage />} />
     <Route path="apps/supply" element={<SupplyLearningPage />} />
+    <Route path="apps/gasvalue" element={<GasvalueLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
            Static segments (quiz/exam/capstone) rank above the :moduleKey
