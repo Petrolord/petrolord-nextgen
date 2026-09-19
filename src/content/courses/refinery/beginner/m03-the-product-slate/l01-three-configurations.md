@@ -12,7 +12,7 @@ A refinery's configuration is the list of units it has, and the list decides wha
 | Hydroskimming | Crude distillation, Naphtha reformer, Diesel hydrotreater |
 | Conversion | Crude distillation, Naphtha reformer, Diesel hydrotreater, Fluid catalytic cracker |
 
-A topping plant has one unit. It separates crude by boiling range and sells what comes off. A hydroskimming plant adds a naphtha reformer, which upgrades naphtha into a gasoline blending stock, and a diesel hydrotreater, which treats the diesel cut. A conversion plant adds a fluid catalytic cracker, which cracks heavy material into lighter products.
+A topping plant has one unit, crude distillation. A hydroskimming plant adds a naphtha reformer and a diesel hydrotreater. A conversion plant adds a fluid catalytic cracker to those three. The screen carries each configuration as that unit list and one yield row.
 
 ## The yields
 
@@ -24,7 +24,7 @@ Each configuration carries one fixed row of yields, as fractions of a barrel of 
 | Hydroskimming | 0.0300 | - | 0.2000 | 0.1300 | 0.3200 | 0.3000 | 0.0200 |
 | Conversion | 0.0500 | - | 0.3400 | 0.1200 | 0.3300 | 0.1400 | 0.0200 |
 
-A dash means the configuration makes none of that product, so the slate for that configuration carries no row for it. Topping sells naphtha and no gasoline. Hydroskimming and conversion sell gasoline and no naphtha, because the reformer takes the naphtha.
+A dash means the configuration makes none of that product, so the slate for that configuration carries no row for it. Topping sells naphtha and no gasoline. Hydroskimming and conversion sell gasoline and no naphtha, and both carry the naphtha reformer.
 
 ## Reading down the columns
 

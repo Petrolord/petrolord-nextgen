@@ -20,7 +20,7 @@ makeEvent takes a quantity that is never negative. Direction comes from the even
 | vent | -100 | true |
 | loss | -100 | false |
 
-Read the table as a rule set. A receipt adds to the site. A delivery, a burn, a flare, a vent and a loss take away. A transfer, a unit_run and a blend sign to 0: each moves material inside the site, so the site as a whole holds the same quantity after the event.
+Read the table as a rule set. A receipt adds to the site. A delivery, a burn, a flare, a vent and a loss take away. A transfer, a unit_run and a blend sign to 0: the table gives each a signedQuantity of 0 for an event of 100 bbl, so none of the three adds to the site or takes from it.
 
 Three types, burn, flare and vent, emit by their nature, and the flag says so on every event of those types. A loss removes barrels and emits nothing by its nature.
 

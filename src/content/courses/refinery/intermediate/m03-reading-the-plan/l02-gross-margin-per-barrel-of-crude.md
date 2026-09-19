@@ -29,11 +29,11 @@ SECTION 13 prints both the margin and the gross margin per barrel for each chang
 
 Look at the third and fourth rows. With the hydrotreater left blank, the margin change is 95572.87, and the gross margin per barrel reads 3.4445 against 3.4883 as typed. With the crude unit held at 1900000 barrels for the month, the margin change is -230175.48, and the gross margin per barrel reads 3.6041.
 
-SECTION 13 also prints the gross margin per barrel's own change from the plan as typed, taken over the printed figures: -0.0438 for the hydrotreater left blank and 0.1158 for the crude unit at 1900000 barrels. Those two rows are the lesson, and the exercise asks you to read them. The total and the ratio need not move together. When a plan runs extra crude, the extra barrels are the ones the plan valued last, and they can add to the total while pulling the average down. When a plan is made to run less crude, it keeps the barrels it values most and drops the rest, and the average can rise while the total falls.
+SECTION 13 also prints the gross margin per barrel's own change from the plan as typed, taken over the printed figures: -0.0438 for the hydrotreater left blank and 0.1158 for the crude unit at 1900000 barrels. Those two rows are the lesson, and the exercise asks you to read them. The total and the ratio need not move together. With the hydrotreater left blank the plan runs 2082608.70 bbl of crude against 2029032.26, and the total rises while the ratio falls. With the crude unit held at 1900000 barrels it runs 1900000.00 bbl, and the ratio rises while the total falls.
 
 ## Which to maximise
 
-The plan maximises the margin, the total. It does not maximise the gross margin per barrel, and a planner should not either within one month. A higher ratio bought by running less crude is a smaller month. The gross margin per barrel is for comparison: between one refinery and another, between a plan and its actuals, between the screen and the plan. Inside one month's plan, the total decides.
+The plan maximises the margin, the total. SECTION 12 prints the solver's sense, maximize: true, and the objective at ABUA's plan equals the margin, 7077935.48. The gross margin per barrel is a reading of the plan, divided out after the plan is found. The crude unit row shows the two parting: a ratio of 3.6041 against 3.4883, on a margin change of -230175.48. The course uses the ratio to compare: the screen with the plan, and the plan with its actuals.
 
 ## Exercise
 

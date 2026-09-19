@@ -10,22 +10,23 @@ That is the right question for a screen, and the OKORDIA screen answers it: 4.59
 
 ## What the Professional tier asks
 
-The Professional tier moves to the Refinery Planning Studio and its module, refineryPlanning, over lib/lp/simplex. The question changes from what a fixed slate is worth to how a month should be run. A plan chooses how much of each crude to buy, how hard to run each unit and how much of each product to make, within the plant's limits, to earn the most margin in the month.
+The Professional tier moves to the second app this tier's first module named: the Refinery Planning Studio, which calls refineryPlanning over lib/lp/simplex and streamModel. The question changes from what a fixed slate is worth to how a month should be run. This lesson only names where the next tier goes; the Professional tier prints and teaches each step.
 
-Four things change as a result.
+Four things change, and each has a Professional module of its own.
 
-The crude unit carries every barrel. In the plan, every barrel of crude the plant buys passes through the crude unit, and the crude unit's own capacity and cost become part of the answer.
+The crude unit carries every barrel. That is the title of the Professional tier's second module, which reads the crude unit inside the month's plan.
 
-Yields become streams. The fixed slate of this tier becomes a network: the crude unit makes intermediate streams, other units take those streams as feed, and products are made from what arrives.
+Yields become streams. The Professional tier's third module reads the plan, and its streams, in place of this tier's fixed slate.
 
-Every stream has a value. The plan prices one more barrel of each stream arriving from outside. Those marginal values are what the Professional tier uses to judge a debottleneck. How the plan finds them is linear programming, and the `crude` course teaches it; this course reads the plan's answers.
+Every stream has a value. The fourth module is titled what another barrel is worth. How the plan finds that value is linear programming, and the `crude` course teaches it; this course reads the plan's answers.
 
-The plan is dated. The Professional tier cascades the month's plan into a schedule of cargoes, unit runs and lifts across the period. That is the first time this course puts a calendar date on a barrel.
+The plan is dated. The fifth module is the schedule. This tier's first module printed the argument that dates it: cascadeToSchedule reads the machine clock when periodStart is left out, so the course always passes a period start. That is the first time this course puts a calendar date on a barrel.
 
 ## What stays the same
 
-The unit of the answer. The plan's headline is still a margin per barrel of crude, read the same way this tier read it: product value, less crude, less the cost of running units. 
-The discipline stays too. The planning module refuses what it cannot answer in its own words, and a blank limit and a typed zero mean different things there as they do here.
+The unit of the answer. The course reads the plan, as it read the screen, as a margin per barrel of crude. The Professional tier prints how the plan builds it.
+
+The discipline stays too. This tier's screen refused a blank box by name, and the Professional tier's first module reads blank limits against typed zeros in the planning module.
 
 ## After that
 

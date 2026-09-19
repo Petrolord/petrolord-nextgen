@@ -29,7 +29,7 @@ q(0, "Leaving the hydrotreater's capacity blank changes ABUA's margin by 95572.8
   "-0.8736, the row with the jet and fuel oil floors."],
  "The blank hydrotreater row prints a margin change of 95572.87 and a gross margin per barrel of 3.4445, a change of -0.0438, so the total rises while the ratio falls. 0.1158, -2.9113 and -0.8736 belong to the crude unit at 1900000 barrels, the hydrotreater shut and the two floors.")
 
-q(2, "Which change lowers ABUA's margin while raising its gross margin per barrel?",
+q(2, "Of ABUA's five plan variants, which one leaves the month earning less in total yet shows each barrel of crude earning more?",
  "The crude unit at 1900000 barrels for the month: margin change -230175.48, gross margin per barrel change 0.1158.",
  ["The hydrotreater capacity left blank: margin change 95572.87, gross margin per barrel change -0.0438.",
   "The Forcados cargo cancelled: margin change -3047230.44, gross margin per barrel change -1.1822.",

@@ -57,25 +57,25 @@ q(0, "How far does the month's margin move from the plan as typed when the hydro
   "-3047230.44 for the typed zero, and 95572.87 for the blank."],
  "The same box, emptied or zeroed, moves the month's margin in opposite directions. -230175.48 belongs to the crude unit at 1900000 barrels and -3047230.44 to the Forcados cargo cancelled.")
 
-q(3, "The cost of Forcados (illustrative) is left blank. What does the engine do?",
- "It refuses: \"Missing the cost of Forcados (illustrative). Enter 0 where the value really is zero.\"",
- ["It reads the blank cost as 0 and runs all 1100000.00 bbl of the free crude.",
-  "It treats the blank cost as no limit and returns the status unbounded for the month.",
-  "It leaves Forcados out and plans with Bonny Light and Brass River on their own."],
- "The rule for limits does not extend to money. A cost left blank is refused by name, with status invalid, and the sentence says to type 0 where a value really is zero.")
+q(3, "A planner forgets to fill in what a barrel of Forcados (illustrative) costs. What status does ABUA's plan come back with?",
+ "Status invalid, with a sentence that names the Forcados cost as the missing input.",
+ ["Status optimal, running all 1100000.00 bbl of Forcados as if it were free.",
+  "Status unbounded, because the empty cost box is read as having no limit.",
+  "Status optimal, with Forcados dropped and Bonny Light and Brass River run alone."],
+ "The rule for limits does not extend to money. The engine refuses with status invalid and the sentence \"Missing the cost of Forcados (illustrative). Enter 0 where the value really is zero.\"")
 
-q(1, "The reformer capacity is typed as -1. What does the engine return?",
+q(1, "What happens to ABUA's plan when a planner enters -1 in the Naphtha reformer's capacity box?",
  "It refuses: \"Naphtha reformer capacity must be zero or more; leave it blank for no limit.\"",
  ["A plan with the reformer shut, since any capacity at or below 0 means no throughput.",
   "A plan with no limit on the reformer, since a negative capacity is read as blank.",
   "The status infeasible, because no throughput can sit below a capacity of -1."],
  "A capacity below zero means nothing, so the input is invalid and refused. The sentence tells the planner to leave the box blank if no limit is meant.")
 
-q(2, "The reformer's operating cost and the jet price are both left blank. What comes back?",
- "One refusal naming both boxes, with the status invalid.",
- ["A refusal naming only the reformer's operating cost.",
-  "A plan that prices Jet A-1 at 0 and charges nothing for reforming, status optimal.",
-  "The status infeasible, since no plan can sell a product that carries no price."],
+q(2, "Which entries does planRefinery's missing list carry when the Naphtha reformer's operating cost and Jet A-1's price are empty together?",
+ "Both of them, in one list: the operating cost of Naphtha reformer and the price of Jet A-1.",
+ ["One entry, the operating cost of Naphtha reformer, as the first empty box it meets.",
+  "No entries: Jet A-1 is priced at 0 and reforming costs nothing, status optimal.",
+  "One entry, the price of Jet A-1, since a product without a price makes the plan infeasible."],
  "The refusal reads \"Missing the operating cost of Naphtha reformer, the price of Jet A-1. Enter 0 where the value really is zero.\" and the engine returns the missing list with both entries.")
 
 q(0, "Read ABUA's recipes and unit feeds. Where can a barrel of naphtha go?",

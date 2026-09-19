@@ -1,6 +1,6 @@
 # Yields are data
 
-A plan is only as good as the numbers it is given, and the numbers that shape a refinery plan most are the yields. This lesson reads ABUA's yields as what they are: data typed into the configuration, which the plan uses exactly as typed.
+A plan is only as good as the numbers it is given, and the numbers that shape a refinery plan most are the yields. This lesson reads ABUA's yields as what they are: data typed into the configuration, as volume fractions.
 
 {{panel:refinery-plan-explorer}}
 
@@ -26,9 +26,9 @@ The crude unit is different. It has no feed stream, and its yields are the crude
 
 ## What "data" means here
 
-The plan does not question a yield. It takes each one as typed and finds the best month it can with them. Change a yield and you have a different configuration, with a different plan and a different margin. That is the whole sense in which yields are data: they are inputs the planner owns, and the plan is an answer to them.
+SECTION 9 prints the yields in the configuration's own tables, beside each crude's cost and availability and each unit's capacity and operating cost. They are inputs the planner types, in the same tables as every limit and price, and the plan is an answer to all of them together.
 
-It also means the plan carries no quality. A stream is a volume with a name. Two barrels of kero from two different crudes are the same kero to the plan. Whether a blend meets a specification is the `crude` course's question, answered by its blending tools, and it is not asked here.
+The stream balance in SECTION 12 counts each stream in barrels: made, consumed, placed and surplus. The kero row is one row, whichever crude made the barrels. Whether a blend meets a specification is the `crude` course's question, answered by its blending tools, and it is not asked here.
 
 Read the offgas column. Every crude makes some, and both units make some too. Hold that in mind: Module 4 finds out what the plan thinks a barrel of it is worth.
 

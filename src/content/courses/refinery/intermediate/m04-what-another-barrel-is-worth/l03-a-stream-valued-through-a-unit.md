@@ -38,13 +38,13 @@ Read three things.
 
 Under the floors, naphtha prints 72.5000 and gasoil 89.5000, the same figures as their export prices.
 
-With the hydrotreater left blank, gasoil prints 99.8560 and naphtha 83.6941. Removing a limit on one unit moved the value of the other unit's feed. A stream's value is a property of the whole plan.
+With the hydrotreater left blank, gasoil prints 99.8560 and naphtha 83.6941. Removing a limit on one unit moved the value of the other unit's feed.
 
-With the hydrotreater shut, gasoil prints 87.8029, which is neither its value as typed nor the export price. A shut unit changes where the next gasoil barrel goes, and the plan prices the new path.
+With the hydrotreater shut, gasoil prints 87.8029, which is neither its value as typed nor the export price. The digest prints no working for that row, so read it as the plan's figure and nothing more.
 
 ## The reading to carry
 
-A stream that feeds a unit is valued through that unit when the unit is the better home and has room, and through whatever the plan rearranges when it does not. It is valued at its export price only when the export is where the plan would send the next barrel, as under the floors. Read the value beside the unit's utilisation, and the unit's utilisation will tell you which case you are in.
+Each value here is a reading of a printed row. In the plan as typed, naphtha's 91.4500 is the reformer's working, with the reformer at 97.07 percent, and gasoil's 94.1016 is Bonny Light's break-even, with the hydrotreater at 100.00 percent. Under the floors the two print their export prices, 72.5000 and 89.5000. Read each value beside its unit's utilisation and beside the working SECTION 14 prints for it, where one is printed.
 
 ## Exercise
 

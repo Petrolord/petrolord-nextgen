@@ -36,9 +36,9 @@ The digest then hands over the same period start a second way: as a Date built a
 
 In Africa/Lagos and Pacific/Kiritimati the schedule starts on 2027-02-28, a day in the wrong month, and none of its dates matches the UTC run. In Europe/London, America/New_York, America/Los_Angeles and Pacific/Pago_Pago it starts on 2027-03-01. Both tables cover the same seven zones, so the only thing that differs between them is the form of the period start.
 
-## Why the east moves and the west does not
+## Which zones move
 
-Local midnight on 1 March in a zone east of Greenwich is a moment that, in UTC, still falls on 28 February. The engine reads the UTC calendar day of that moment, and so it reads 2027-02-28. Local midnight on 1 March in a zone west of Greenwich is, in UTC, a few hours into 1 March, so the UTC calendar day is still 2027-03-01, and the dates survive.
+The digest prints the reason in one line: the engine reads a Date's UTC calendar day. It then prints which zones that moves. Africa/Lagos and Pacific/Kiritimati read 2027-02-28. UTC, Europe/London, America/New_York, America/Los_Angeles and Pacific/Pago_Pago read 2027-03-01, and every date in those five matches UTC.
 
 So the Date form is not wrong everywhere. It is right in some zones and a day early in others, which is worse, because a schedule built and checked in New York can be off by a day when the same code runs in Lagos. Nothing in the output says so.
 
@@ -48,7 +48,7 @@ A page in Lagos that built its period start from a local Date would date ABUA's 
 
 A period start given as a YYYY-MM-DD string is the same calendar day in every zone. That is how the Suite page passes it and how this digest passes it. A string names a day. It carries no clock and no zone, so no clock or zone can shift it.
 
-Two habits follow. When you pass a period start, pass the string. When you check a schedule, check it in a zone east of Greenwich as well as your own, because a bug of this kind is invisible from UTC and from the Americas.
+Two habits follow. When you pass a period start, pass the string. When you check a schedule, check it in Africa/Lagos or Pacific/Kiritimati as well as your own, because the second table reads true in UTC and in the other four zones it prints.
 
 ## Exercise
 

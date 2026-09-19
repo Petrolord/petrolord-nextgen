@@ -43,7 +43,7 @@ The crude unit ran 735000.00 bbl against a plan of 1000000.00 bbl, 73.50 percent
 
 ## The story the figures support
 
-Read in order, the figures describe a month in which one of the two crudes did not arrive. The crude unit ran the one crude that did, 735000.00 bbl of it, and every product line sold fewer barrels than planned. On margin, the crude not bought helped and the products not sold hurt, and the month closed with an actual margin of -235150.00 against a plan margin of 4776300.00. What stopped the Forcados cargo, and what the 212000.00 bill was for, are questions for the planner. The engine's job ends at showing where to look.
+Read in order, the figures describe a month in which one of the two crudes did not arrive. The crude unit ran 735000.00 bbl, the same figure as the Escravos receipt, and every product line sold fewer barrels than planned. On margin, the crude not bought helped and the products not sold hurt, and the month closed with an actual margin of -235150.00 against a plan margin of 4776300.00. What stopped the Forcados cargo, and what the 212000.00 bill was for, are questions for the planner. The engine's job ends at showing where to look.
 
 ## Exercise
 

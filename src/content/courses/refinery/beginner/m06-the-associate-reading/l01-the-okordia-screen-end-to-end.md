@@ -20,7 +20,7 @@ The screen checks its boxes first. A blank crude cost, capital cost, capacity or
 
 ## Capital
 
-OKORDIA is screened at the reference size, so the capital is the quotation itself on either law, and the exponent does not matter here. At any other size it would, and the screen would show both laws with the exponent beside each. The exponents are defaults that a vendor's figures replace. The capital per bpd of 12800.00 is the figure to set against any cost per barrel a day quoted for a similar plant.
+OKORDIA is screened at the reference size, so the capital is the quotation itself on either law, and the exponent does not matter here. At any other size it would, and the screen would show both laws with the exponent beside each. The exponents are defaults that a vendor's figures replace. The screen prints the capital per bpd, 12800.00, beside the capital of 64000000.00.
 
 ## Slate
 

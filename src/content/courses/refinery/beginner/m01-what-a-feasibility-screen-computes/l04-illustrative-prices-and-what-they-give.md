@@ -17,7 +17,7 @@ OKORDIA carries one illustrative price for each product, in US dollars a barrel:
 | diesel | 101.0000 |
 | fuelOil | 55.0000 |
 
-Its crude costs 76.0000 a barrel under firm supply. None of these is a market quotation for any date, and none should be quoted as one. They are chosen so the arithmetic of the screen is easy to follow and the three configurations give visibly different answers.
+Its crude costs 76.0000 a barrel under firm supply. None of these is a market quotation for any date, and none should be quoted as one. The course's records are invented, and every price and cost in them is illustrative, in US dollars.
 
 ## What a price gives
 

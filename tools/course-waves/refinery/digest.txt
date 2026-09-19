@@ -156,6 +156,7 @@ A schedule term left blank or left out reads as the engine's stated default for 
 | utilisation blank | 1530000.00 | 22 | 32000000.00 |
 | project life blank | 1530000.00 | 22 | 32000000.00 |
 | construction years blank | 1530000.00 | 22 | 32000000.00 |
+The defaults themselves, read back from the engine one term at a time (that term blank, the others set so it alone moves the figure): on-stream days 340, utilisation 0.9000, construction years 2, project life 20 operating years. 5000 bpd x 340 days x 0.9000 = 1530000.00 bbl, the table's annual throughput 1530000.00 bbl; 2 construction years + 20 operating years = 22 years in the streams.
 
 # SECTION 6: CRUDE SUPPLY SCENARIOS (owned by Associate m05)
 
@@ -278,10 +279,13 @@ The row is written only when some unit has no feed. The same configuration with 
 crude unit throughput 0.00 bbl beside a crude run of 2029032.26 bbl; crude unit operating cost 0.00; margin 9614225.81 against 7077935.48 for the configuration as typed.
 A configuration whose crude unit is not feedless has no crude unit in the plan, and its capacity and operating cost bind nothing.
 crude unit utilisation in that configuration: 0.00 percent; margin difference from the configuration as typed: 2536290.33. The same configuration with that unit's capacity typed as 0: margin 9614225.81, the same margin: true.
+In that configuration the plan reports the crude unit's capacity as 2600000.00 bbl, so its utilisation is 0.00 / 2600000.00.
+The margin difference 2536290.33 is taken between the two printed margins, 9614225.81 - 7077935.48. The crude unit operating cost 2536290.32 is the engine's own figure, rounded on its own, so the two can differ by a cent: here they differ by 0.01.
 
 # SECTION 12: READING THE PLAN (owned by Professional m03)
 
 margin = product revenue - crude cost - unit operating cost. gross margin per barrel = margin / total crude.
+planRefinery hands its linear programme to the solver with maximize: true, on an objective that counts each product barrel at its price, each crude barrel at minus its cost and each barrel through a unit at minus that unit's operating cost. The plan maximises the margin: the objective at ABUA's plan is 7077935.48, the plan's margin 7077935.48, the same: true.
 revenue 172316812.90; crude cost 160350322.58; unit operating cost 4888554.84; margin 7077935.48; total crude 2029032.26 bbl; gross margin per barrel of crude 3.4883
 
 | product | volume (bbl) | ceiling (bbl) | at its ceiling | revenue |
@@ -431,6 +435,7 @@ The plan-ledger totals the schedule carries, material by material, agree with th
 | jet | delivery | 288354.84 | 288354.84 | 30421435.48 | 30421435.48 |
 | diesel | delivery | 630500.00 | 630500.00 | 66076400.00 | 66076400.00 |
 | fuel_oil | delivery | 633129.03 | 633129.03 | 37354612.90 | 37354612.90 |
+Each scheduled total is summed from the unrounded event figures and rounded once. Each event row above is rounded on its own, so adding the printed event rows can differ from the printed total in the last place.
 
 The same plan with a cargo size of 150000 bbl: crude receipts 15; receipt dates for Forcados: 2027-03-01, 2027-03-04, 2027-03-07, 2027-03-10, 2027-03-13, 2027-03-16, 2027-03-19, 2027-03-22.
 An infeasible plan cascades to 0 events, with the note "No optimal plan to cascade."
@@ -629,6 +634,7 @@ What feasibilityEconomics hands the screening engine, in the engine's units (mon
 fiscalType TaxRoyalty; royaltyRate 0; taxRate 30; discountRate 12; lossCarryForward true; projectLife 22 years; startYear 2027
 production (oil, bbl) in year 0 and in the first operating year: 0.00, 3753600.00; price (the slate's gross value) in the first operating year 92.2100
 opexFixed in the first operating year (fixed operating cost plus crude cost, millions) 291.7664; opexVariable 15.7651; capex in year 0 58.9160
+opexVariable in the first operating year (variable operating cost, millions): the streams' variable opex 15765120.00 / 1000000 = 15.7651
 opex in the cash flow = opexFixed + opexVariable: 291.7664 + 15.7651 = 307.5315; the cash flow's opex 307.5315
 capital 117831965.35 is spread evenly over the 2 construction years: 58915982.67 and 58915982.67 in the streams, each printed to the cent; the engine carries the unrounded halves, which sum to the capital: true.
 Revenue goes in as revenue (barrels at the slate's value), and the royalty rate is 0 because a refinery buys its crude and pays no royalty.
@@ -657,6 +663,7 @@ Revenue goes in as revenue (barrels at the slate's value), and the royalty rate 
 | 19 | 2046 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
 | 20 | 2047 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
 | 21 | 2048 | 346.1195 | 0.0000 | 307.5315 | 0.0000 | 11.5764 | 0.0000 | 27.0116 |
+Each four-decimal figure above is rounded on its own, so subtracting two printed figures can differ from a printed result in the last place.
 
 NPV at 12 percent, mid-year discounting (a flow in year t is discounted at t + 0.5): 88.6345 million US dollars. The Economics courses teach and grade the NPV; this course reads it as the feasibility screen's answer.
 The start year labels the years and moves no figure: with start year 2031 the first calendar year reads 2031, the NPV reads 88.6345 and the total tax 196.1780, against 2027, 88.6345 and 196.1780 with start year 2027. The two agree to the last digit: true.

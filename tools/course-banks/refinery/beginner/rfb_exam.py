@@ -292,7 +292,7 @@ q(1, "Which change moves OKORDIA's gross margin per barrel?",
  ["Going from 2 to 3 construction years",
   "Changing the scaling exponent",
   "Typing a utilisation of 1"],
- "The margin is gross value less crude cost less variable operating cost. Tight supply adds a premium to the crude cost and the margin reads 1.5900. Construction years move when the plant earns, the exponent moves the capital and nothing else, and utilisation moves the throughput.")
+ "The margin is gross value less crude cost less variable operating cost. Tight supply adds a premium to the crude cost and the margin reads 1.5900. Construction years move when the plant earns, the exponent enters scaleCapex (and at OKORDIA's 5000 bpd both laws print 64000000.00), and utilisation moves the throughput.")
 
 q(2, "Which function hands OKORDIA's annual streams on to the screening engine?",
  "feasibilityEconomics",

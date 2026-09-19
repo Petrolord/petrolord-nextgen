@@ -13,7 +13,7 @@ Revenue goes in as revenue: barrels at the slate's value. The production stream 
 | production (oil, bbl) | 0.00 | 3753600.00 |
 | price (the slate's gross value) | | 92.2100 |
 
-The crude bill goes into the cost streams. The opexFixed in the first operating year is 291.7664 million, and it is the fixed operating cost plus the crude cost. The opexVariable is 15.7651 million, the variable operating cost on the year's throughput. The cash flow's opex is their sum, and the digest prints it: 291.7664 + 15.7651 = 307.5315.
+The crude bill goes into the cost streams. The opexFixed in the first operating year is 291.7664 million, and it is the fixed operating cost plus the crude cost. The opexVariable is 15.7651 million: the digest labels it the variable operating cost, in millions, and prints it as the streams' variable opex 15765120.00 / 1000000. The cash flow's opex is their sum, and the digest prints it: 291.7664 + 15.7651 = 307.5315.
 
 ## What comes out
 
@@ -26,13 +26,11 @@ For each operating year the screening engine prints:
 
 The same gross revenue and opex repeat in every operating year to year 21, calendar 2048. The gross revenue of 346.1195 million is the plant's product sales. The net cash flow in year 2, a year with a tax of 0.0000, reads 38.5879 million.
 
-## Why revenue stays gross
+## Revenue goes in as revenue
 
-A refinery's commercial result is a margin: what the products sell for less what the crude costs. One tempting shortcut would be to hand the screening engine only that margin, as if it were the price of the barrel. The engine would then see a business whose revenue is its margin and whose crude bill never appears.
+The digest states the rule in one line: revenue goes in as revenue, barrels at the slate's value. So the gross revenue line reads 346.1195 million of products a year, and the opex line reads 307.5315 million: opexFixed, the fixed operating cost plus the crude cost, and opexVariable, the variable operating cost. The crude bill is in the cash flow as a cost. The gross margin per barrel on the screen, 14.0100, is the gross value less the crude cost less the variable operating cost, which the Associate tier defined.
 
-Feeding revenue as revenue keeps both sides of the business visible. The gross revenue line says the plant sells 346.1195 million of products a year. The opex line says it spends 307.5315 million a year on crude and on running the plant. A reader can see both the money flowing through the plant and the part it keeps. The gross margin per barrel on the screen, 14.0100, is the gross value less the crude cost less the variable operating cost, which the Associate tier defined.
-
-Keeping the crude cost as a cost also keeps each input where a reader expects to change it. A crude price change moves opexFixed. A product price change moves the gross value and the revenue. The two stay apart in the cash flow, as they stay apart in the variance lines of module 3, where a delivery is revenue and a receipt is cost.
+Each input sits where the digest prints it. The crude cost is inside opexFixed. The slate's gross value is the price the engine is handed, 92.2100 in the first operating year. The two stay apart in the cash flow, as they stay apart in the variance lines of module 3, where a delivery is revenue and a receipt is cost.
 
 ## One consequence to read
 

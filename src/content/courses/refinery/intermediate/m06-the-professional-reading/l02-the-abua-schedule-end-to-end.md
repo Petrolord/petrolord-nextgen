@@ -10,7 +10,7 @@ SECTION 17 carries three schedule readings: schedule events 41, crude receipts 6
 
 Every count has a reason you can name. The receipts are the crude cargoes: one for Bonny Light, three for Forcados and two for Brass River at a cargo size of 400000.00 bbl. The runs are five weekly runs for each of the three units. The lifts are five weekly lifts for each of the four products that sell. Naphtha export and Gasoil export sell 0.00 bbl in the plan and have no lifts.
 
-A count that does not match those reasons is the first sign of a schedule built from some other plan or cargo size.
+SECTION 15 prints the cargo rule behind the receipts, and weeks in the period 5 behind the runs and lifts.
 
 ## The crude
 

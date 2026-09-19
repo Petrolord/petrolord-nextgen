@@ -1,6 +1,6 @@
 # What carrying the loss is worth
 
-The previous lessons read the loss pool year by year. This lesson reads the whole life at once: how much tax the ODIOMA expansion pays with the loss carried forward and with it thrown away, and what the screening engine reports for each.
+The previous lessons read the loss pool year by year. This lesson reads the whole life at once: how much tax the ODIOMA expansion pays with the loss carried forward and with the option off, and what the screening engine reports for each.
 
 {{panel:refinery-variance-explorer}}
 
@@ -29,11 +29,11 @@ The screening engine also returns the feasibility NPV under each treatment:
 
 NPV at 12 percent: 88.6345 MM with the loss carried forward; 64.8440 MM with the option off
 
-These are the screen's answers under two tax treatments, and they are read here for one purpose: to see that the treatment of a construction loss is a setting a screen cannot ignore. The Economics courses teach and grade the NPV, and this course does not ask for either figure as an answer.
+These are the screen's answers under two tax treatments, and they are read here for one purpose: to set the two beside each other, 88.6345 with the loss carried forward and 64.8440 with the option off, on the same revenue, opex and capital. The Economics courses teach and grade the NPV, and this course does not ask for either figure as an answer.
 
 ## The trap, stated plainly
 
-Throwing the construction loss away taxes the first operating years. A screen that runs with the option off is not a neutral simplification. It taxes years 2, 3 and 4 in full, and part of year 5, on income the capital spending had already offset. The total tax reads 231.5276 million, and the plant looks worse than it is by the tax on the unused loss.
+Switching the option off taxes the first operating years. With it off the engine taxes years 2, 3 and 4 in full, and part of year 5, on income the construction loss sheltered with it on. The total tax reads 231.5276 million against 196.1780, and the difference the engine prints is 35.3496.
 
 That is why the choice is an owner decision in force: loss carry-forward is an option of the screening engine, off by default for every other caller; the refinery switches it on. Other callers of the screening engine keep their own behaviour. The refinery, whose capital falls before its revenue, has the loss carried.
 

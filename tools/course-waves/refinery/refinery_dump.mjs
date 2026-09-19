@@ -339,6 +339,23 @@ section('THROUGHPUT, THE GROSS MARGIN AND THE ANNUAL STREAMS');
       const r = MR.feasibilityStreams({ capacityBpd: O.capacityBpd, crudeCostPerBbl: O.crudeCostPerBbl, slate, fixedOpexPerYear: O.fixedOpexPerYear, variableOpexPerBbl: O.variableOpexPerBbl, capex: cap.cost, ...patch });
       row(`${label} blank`, bbl(r.annualBbl), r.years.length, usd(r.years[0].capex));
     }
+    // The default VALUES, read back from the engine one term at a time: the
+    // term left blank and every other schedule term set so that it alone moves
+    // the figure read. Cross-checked against the defaults written in the
+    // engine's own signature, so a changed default stops the build.
+    const base = { capacityBpd: O.capacityBpd, crudeCostPerBbl: O.crudeCostPerBbl, slate, fixedOpexPerYear: O.fixedOpexPerYear, variableOpexPerBbl: O.variableOpexPerBbl, capex: cap.cost };
+    const dDays = MR.feasibilityStreams({ ...base, onstreamDays: '', utilisation: 1 }).annualBbl / O.capacityBpd;
+    const dUtil = MR.feasibilityStreams({ ...base, onstreamDays: 1, utilisation: '' }).annualBbl / O.capacityBpd;
+    const bY = MR.feasibilityStreams({ ...base, constructionYears: '' });
+    const dBuild = bY.years.findIndex((y) => y.producing);
+    const dLife = MR.feasibilityStreams({ ...base, constructionYears: 0, projectLife: '' }).years.length;
+    const sig = fs.readFileSync(`${ROOT}/${MODULES.modularRefinery}`, 'utf8').match(/export const feasibilityStreams = \(\{([\s\S]*?)\}\) =>/);
+    if (!sig) throw new Error('DEFAULTS: feasibilityStreams signature not found in the engine source');
+    const srcDefault = (k) => { const m = sig[1].match(new RegExp(`${k} = ([0-9.]+)`)); if (!m) throw new Error(`DEFAULTS: no default for ${k} in the engine signature`); return Number(m[1]); };
+    for (const [k, v] of [['onstreamDays', dDays], ['utilisation', dUtil], ['constructionYears', dBuild], ['projectLife', dLife]]) {
+      if (Math.abs(srcDefault(k) - v) > 1e-9) throw new Error(`DEFAULTS: ${k} reads ${v} from the engine's figures and ${srcDefault(k)} from its signature`);
+    }
+    out(`The defaults themselves, read back from the engine one term at a time (that term blank, the others set so it alone moves the figure): on-stream days ${Math.round(dDays)}, utilisation ${frac(dUtil)}, construction years ${dBuild}, project life ${dLife} operating years. ${O.capacityBpd} bpd x ${Math.round(dDays)} days x ${frac(dUtil)} = ${bbl(O.capacityBpd * Math.round(dDays) * Number(frac(dUtil)))} bbl, the table's annual throughput ${bbl(s0.annualBbl)} bbl; ${dBuild} construction years + ${dLife} operating years = ${dBuild + dLife} years in the streams.`);
   }
 }
 
@@ -465,6 +482,8 @@ section('THE CRUDE UNIT CARRIES EVERY BARREL');
   {
     const shut = RP.planRefinery({ ...planInput(A), units: A.units.map((u) => (u.feed ? u : { ...u, feed: 'crude_feed', capacity: 0 })) });
     out(`crude unit utilisation in that configuration: ${pct(cd2.utilisation)} percent; margin difference from the configuration as typed: ${pdiff(noFeedless.margin, p.margin, usd)}. The same configuration with that unit's capacity typed as 0: margin ${usd(shut.margin)}, the same margin: ${usd(shut.margin) === usd(noFeedless.margin)}.`);
+    out(`In that configuration the plan reports the crude unit's capacity as ${bbl(cd2.capacity)} bbl, so its utilisation is ${bbl(cd2.throughput)} / ${bbl(cd2.capacity)}.`);
+    out(`The margin difference ${pdiff(noFeedless.margin, p.margin, usd)} is taken between the two printed margins, ${usd(noFeedless.margin)} - ${usd(p.margin)}. The crude unit operating cost ${usd(cdu.cost)} is the engine's own figure, rounded on its own, so the two can differ by a cent: here they differ by ${pdiff(Number(pdiff(noFeedless.margin, p.margin, usd)), cdu.cost, usd)}.`);
   }
 }
 
@@ -474,6 +493,19 @@ section('READING THE PLAN');
   const A = F.ABUA;
   const p = RP.planRefinery(planInput(A));
   out('margin = product revenue - crude cost - unit operating cost. gross margin per barrel = margin / total crude.');
+  {
+    // What the plan maximises, read out of the engine source rather than
+    // typed: the solver call's sense and the three objective coefficients.
+    const src = fs.readFileSync(`${ROOT}/${MODULES.refineryPlanning}`, 'utf8');
+    const body = src.slice(src.indexOf('export const planRefinery'), src.indexOf('export const cascadeToSchedule'));
+    const sense = body.match(/solveLP\(\{[^}]*maximize:\s*(true|false)[^}]*\}\)/);
+    const coef = [/c\[idx\.crude\(i\)\] = -num\(cr\.cost\)/, /c\[idx\.unit\(i\)\] = -num\(u\.opex\)/, /c\[idx\.product\(i\)\] = num\(pr\.price\)/].every((re) => re.test(body));
+    if (!sense || sense[1] !== 'true' || !coef) throw new Error('OBJECTIVE: planRefinery no longer maximises price x product - cost x crude - opex x unit; re-read the engine');
+    const obj = p.productMakes.reduce((a, m, i) => a + m.volume * A.products[i].price, 0)
+      - p.crudeRuns.reduce((a, c, i) => a + c.volume * A.crudes[i].cost, 0)
+      - p.unitRuns.reduce((a, u, i) => a + u.throughput * A.units[i].opex, 0);
+    out(`planRefinery hands its linear programme to the solver with maximize: ${sense[1]}, on an objective that counts each product barrel at its price, each crude barrel at minus its cost and each barrel through a unit at minus that unit's operating cost. The plan maximises the margin: the objective at ABUA's plan is ${usd(obj)}, the plan's margin ${usd(p.margin)}, the same: ${usd(obj) === usd(p.margin)}.`);
+  }
   out(`revenue ${usd(p.revenue)}; crude cost ${usd(p.crudeCost)}; unit operating cost ${usd(p.unitCost)}; margin ${usd(p.margin)}; total crude ${bbl(p.totalCrude)} bbl; gross margin per barrel of crude ${pbl(p.grossMarginPerBbl)}`);
   out('');
   head('product', 'volume (bbl)', 'ceiling (bbl)', 'at its ceiling', 'revenue');
@@ -600,6 +632,7 @@ section('THE SCHEDULE');
     r.q += e.quantity; r.c += e.cost; seen.set(k, r);
   }
   for (const r of seen.values()) { const [pq, pc] = planQ(r.m); row(r.m, r.t, bbl(r.q), bbl(pq), usd(r.c), usd(pc)); }
+  out('Each scheduled total is summed from the unrounded event figures and rounded once. Each event row above is rounded on its own, so adding the printed event rows can differ from the printed total in the last place.');
   out('');
   const small = RP.cascadeToSchedule({ plan: p, periodStart: PERIOD, periodDays: F.PERIOD_DAYS, cargoSize: 150000 });
   out(`The same plan with a cargo size of 150000 bbl: crude receipts ${small.events.filter((e) => e.type === 'receipt').length}; receipt dates for Forcados: ${small.events.filter((e) => e.type === 'receipt' && e.materialId === 'forcados').map((e) => e.date).join(', ')}.`);
@@ -810,12 +843,18 @@ const expansion = (() => {
   out(`fiscalType ${i.fiscalType}; royaltyRate ${i.royaltyRate}; taxRate ${i.taxRate}; discountRate ${i.discountRate}; lossCarryForward ${i.lossCarryForward}; projectLife ${i.projectLife} years; startYear ${i.startYear}`);
   out(`production (oil, bbl) in year 0 and in the first operating year: ${bbl(i.production.oil[0])}, ${bbl(i.production.oil[X.constructionYears])}; price (the slate's gross value) in the first operating year ${pbl(i.price.oil[X.constructionYears])}`);
   out(`opexFixed in the first operating year (fixed operating cost plus crude cost, millions) ${mmd(i.opexFixed[X.constructionYears])}; opexVariable ${mmd(i.opexVariable[X.constructionYears])}; capex in year 0 ${mmd(i.capex[0])}`);
+  {
+    const y = st.years[X.constructionYears];
+    if (Math.abs(i.opexVariable[X.constructionYears] - y.variableOpex / 1e6) > 1e-12 || Math.abs(i.opexFixed[X.constructionYears] - (y.fixedOpex + y.crudeCost) / 1e6) > 1e-12) throw new Error('OPEX LABELS: opexFixed or opexVariable is no longer built as the labels say');
+    out(`opexVariable in the first operating year (variable operating cost, millions): the streams' variable opex ${usd(y.variableOpex)} / 1000000 = ${mmd(i.opexVariable[X.constructionYears])}`);
+  }
   out(`opex in the cash flow = opexFixed + opexVariable: ${mmd(i.opexFixed[X.constructionYears])} + ${mmd(i.opexVariable[X.constructionYears])} = ${psum([i.opexFixed[X.constructionYears], i.opexVariable[X.constructionYears]], mmd)}; the cash flow's opex ${mmd(econ.cashflow[X.constructionYears].opex)}`);
   out(`capital ${usd(cap.cost)} is spread evenly over the ${X.constructionYears} construction years: ${st.years.slice(0, X.constructionYears).map((y) => usd(y.capex)).join(' and ')} in the streams, each printed to the cent; the engine carries the unrounded halves, which sum to the capital: ${Math.abs(st.years.slice(0, X.constructionYears).reduce((a, y) => a + y.capex, 0) - cap.cost) < 1e-6}.`);
   out('Revenue goes in as revenue (barrels at the slate\'s value), and the royalty rate is 0 because a refinery buys its crude and pays no royalty.');
   out('');
   head('year', 'calendar year', 'gross revenue (MM)', 'royalty (MM)', 'opex (MM)', 'capex (MM)', 'tax (MM)', 'tax loss carried forward (MM)', 'net cash flow (MM)');
   for (const c of econ.cashflow) row(econ.cashflow.indexOf(c), c.year, mmd(c.grossRevenue), mmd(c.royalty), mmd(c.opex), mmd(c.capex), mmd(c.tax), mmd(c.taxLossCarriedForward), mmd(c.ncf));
+  out('Each four-decimal figure above is rounded on its own, so subtracting two printed figures can differ from a printed result in the last place.');
   out('');
   out(`NPV at ${X.discountRate} percent, mid-year discounting (a flow in year t is discounted at t + 0.5): ${mmd(econ.metrics.npv)} million US dollars. The Economics courses teach and grade the NPV; this course reads it as the feasibility screen's answer.`);
   const shifted = MR.feasibilityEconomics({ streams: st, discountRate: X.discountRate, taxRate: X.taxRate, startYear: F.START_YEAR_CHECK });

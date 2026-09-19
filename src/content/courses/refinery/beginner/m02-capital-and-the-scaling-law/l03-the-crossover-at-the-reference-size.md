@@ -27,15 +27,15 @@ On the rows below 5000 bpd, modular cheaper reads true. On the rows above it, mo
 
 ## What the crossover measures
 
-The crossover is a property of the screen's construction. Two curves drawn through the same point, with different exponents, cross at that point and nowhere else. Move the reference quotation to a different size and the crossover moves with it.
+The crossover is a property of the screen's construction, and the formula shows why. scaleCapex computes cost = reference cost x (capacity / reference capacity) ^ exponent. At the reference capacity the ratio inside the brackets is 1, and 1 raised to any exponent is 1, so each law returns the reference cost there whatever its exponent. Read that way, the formula puts the crossover wherever the reference quotation sits. The table prints one anchor: the quotation of 64000000.00 for a 5000 bpd plant.
 
-That is worth saying plainly because the table invites a stronger reading than it supports. It is tempting to read "modular is cheaper below 5000 bpd" as a finding about refineries. It is a finding about one quotation and two default exponents. If the quotation had been for a stick-built plant at one size and a modular plant at another, the screen would need two reference points, and the crossover would be wherever the two scaled curves happened to meet.
+That is worth saying plainly because the table invites a stronger reading than it supports. It is tempting to read "modular is cheaper below 5000 bpd" as a finding about refineries. It is a finding about one quotation and two exponents, which the engine names as overridable parameters.
 
-So the useful question for a real project is where your own reference points sit. A vendor quotation for a modular plant near the size you are screening is worth more than any exponent, because it moves the anchor to where you need it.
+So the useful question for a real project is where your own reference point sits, and which exponents replace the defaults.
 
 ## Using the panel
 
-Drag the capacity slider through 5000 bpd and watch the ratio and the flags change together. The panel marks the crossover on both curves at the reference size. Then change one exponent. The crossover stays at 5000 bpd, because the anchor has not moved; what changes is how far apart the curves are on either side of it.
+Drag the capacity slider through 5000 bpd and watch the ratio and the flags change together. The panel marks the crossover on both curves at the reference size. Then change one exponent. By the formula, both laws still return the quotation at 5000 bpd, so the crossover stays there; what changes is how far apart the curves are on either side of it.
 
 ## The mistake
 

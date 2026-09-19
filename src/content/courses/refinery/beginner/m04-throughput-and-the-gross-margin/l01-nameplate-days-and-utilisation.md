@@ -25,11 +25,11 @@ Each input answers a different question, and keeping them apart is what makes th
 
 Capacity is nameplate: the barrels a day the plant was built to run. It is also the figure the capital was scaled to in the second module, which is why capital and throughput both start from it.
 
-On-stream days are the days in a year the plant is running at all. The rest of the year it is shut: for planned maintenance, for inspections, for repairs. OKORDIA assumes 330. The engine accepts a figure between 1 and 366 and refuses anything outside that range, as the first module showed.
+On-stream days are the days in a year the plant is running at all. OKORDIA assumes 330. The engine accepts a figure between 1 and 366 and refuses anything outside that range, as the first module showed.
 
-Utilisation is how hard the plant runs on the days it is running, as a fraction of nameplate. It is where the crude supply enters the screen. A plant with a reliable crude supply can run close to nameplate; a plant waiting on cargoes cannot. OKORDIA's firm supply sets it to 0.9200.
+Utilisation is how hard the plant runs on the days it is running, as a fraction of nameplate. It is where the crude supply enters the screen: the supply scenario's utilisation replaces the plant's. OKORDIA's firm supply sets it to 0.9200.
 
-A plant can lose barrels to any one of the three, and the cure is different for each. A design shortfall needs capital. Downtime needs maintenance planning. Low utilisation, on this screen, needs crude.
+A plant can lose barrels to any one of the three, and the screen keeps them apart. Capacity and on-stream days are typed for the plant; utilisation comes with the supply.
 
 ## Nameplate every on-stream day
 
@@ -37,7 +37,7 @@ Set utilisation to 1 and the plant runs at nameplate on every on-stream day. The
 
 ## A blank term takes the engine's default
 
-A schedule term left blank or left out reads as the engine's stated default for that term. With every schedule term left out, the OKORDIA plant prints an annual throughput of 1530000.00 bbl, and so does each case with on-stream days blank or utilisation blank alone. That figure belongs to the defaults. OKORDIA's own inputs give 1518000.00 bbl, so check that each term is typed before reading the throughput.
+A schedule term left blank or left out reads as the engine's stated default for that term. With every schedule term left out, the OKORDIA plant prints an annual throughput of 1530000.00 bbl, and so does each case with one term blank: on-stream days, utilisation, project life or construction years. That figure belongs to the defaults, which the engine prints: on-stream days 340, utilisation 0.9000, construction years 2 and project life 20 operating years. OKORDIA's own inputs give 1518000.00 bbl, so check that each term is typed before reading the throughput.
 
 ## Throughput is barrels of crude
 

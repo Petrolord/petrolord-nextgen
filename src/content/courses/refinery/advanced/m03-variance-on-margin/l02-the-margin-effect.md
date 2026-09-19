@@ -37,7 +37,7 @@ Three cost lines helped. Forcados reads 30508000.00: the planned purchase of tha
 
 ## A helpful figure is not good news
 
-A positive margin effect is not a sign that the month went well on that line. Forcados helps the margin on its own line because the crude never arrived. But a refinery that does not receive its crude does not run it, and the products it would have made are missing from the delivery lines. The margin effect of each line is read on that line. The story of the month is read across all of them.
+A positive margin effect is not a sign that the month went well on that line. Forcados helps the margin on its own line because the crude never arrived. The same month's four product lines read -5427700.00, -3731500.00, -9590800.00 and -6092800.00 on margin, and the crude unit ran 735000.00 bbl against a plan of 1000000.00 bbl. The margin effect of each line is read on that line. The story of the month is read across all of them.
 
 This is why the engine reports each line's effect and leaves the explanation to the reader. The crude unit's 319550.00 is a lower operating bill. It is also a unit that ran 735000.00 bbl against a plan of 1000000.00 bbl.
 

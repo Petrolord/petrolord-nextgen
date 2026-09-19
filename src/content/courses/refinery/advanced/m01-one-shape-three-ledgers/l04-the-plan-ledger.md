@@ -54,7 +54,7 @@ Second, the crude unit line reads 1000000.00 bbl, and the plan's total crude rea
 
 The crude lines are worth reading beside the availability. The plan receives 600000.00 bbl of Escravos, which has 700000.00 bbl available, and 400000.00 bbl of Forcados, which has 400000.00 bbl available. The quantities are the plan's choice for this configuration and these prices. When the month's record arrives, the crude lines are where the actual supply is compared with that choice, and module 2 shows that one of the two crudes did not arrive at all.
 
-Third, the event counts show the schedule's shape. Each crude arrives in 2 cargo events, and each unit run and each product delivery is spread over 5 events across the month. The variance never reads those events one by one. It reads the sum on each line, so a cargo that lands a day late inside the month moves no line.
+Third, the event counts show the schedule's shape. Each crude arrives in 2 cargo events, and each unit run and each product delivery is spread over 5 events across the month. The variance never reads those events one by one. It reads the sum on each line: attributeVariance matches the two ledgers on material and type.
 
 The Professional tier read the plan's margin and its schedule. This tier reads them as a ledger: eight lines, each a material and a type with a quantity and a value, waiting for the month's record to be laid beside them. Nothing in the ledger is recomputed when the actuals arrive; it is the fixed side of every comparison.
 

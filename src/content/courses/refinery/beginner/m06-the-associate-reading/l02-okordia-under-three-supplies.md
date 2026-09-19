@@ -36,15 +36,15 @@ Hydroskimming is positive on firm and tight, at 4.5900 and 1.5900, and negative 
 
 Conversion is positive on all three: 11.4300, 8.4300 and 5.4300. It is the only configuration whose margin survives disrupted supply.
 
-These are the screen's readings at 5000 bpd and one capital figure for every row. The table holds the capital at 64000000.00 across configurations, so it is a reading of margins. A conversion plant with its fluid catalytic cracker would carry its own quotation, and the capital question is a separate step the screen answers with its own reference point.
+These are the screen's readings at 5000 bpd and one capital figure for every row. The table holds the capital at 64000000.00 across configurations, so it is a reading of margins.
 
-## What the table decides
+## What the table shows
 
-It decides which configurations earn a valuation. Topping does not, at these prices. Conversion does under every supply. Hydroskimming does only if the sponsor can show crude supply will not be disrupted, and the disrupted note in the engine says that is where most of these projects are actually decided.
+It shows the sign of each configuration's margin under each supply. Topping is negative on every row at these prices. Conversion is positive on every row. Hydroskimming turns on supply: positive on firm and tight, negative on disrupted. The engine's note on disrupted supply reads "Half the nameplate and a hard premium, which is where most of these projects are actually decided."
 
 ## Working the table on the panel
 
-Set the configuration picker and the supply scenario to each of the nine pairs in turn, and check the panel's gross value, throughput, margin and first year revenue against the row. Then pick hydroskimming under tight supply, at 1.5900, and raise the crude cost a step at a time until the margin changes sign. Note how far you had to move it. A reading whose sign turns on a modest change in one input is a reading that needs its inputs defended before it is reported.
+Set the configuration picker and the supply scenario to each of the nine pairs in turn, and check the panel's gross value, throughput, margin and first year revenue against the row. Then pick hydroskimming under tight supply, at 1.5900, and raise the crude cost a step at a time until the margin changes sign. Note how far you had to move it, and quote that crude cost beside the 1.5900 the table prints.
 
 ## The mistake
 

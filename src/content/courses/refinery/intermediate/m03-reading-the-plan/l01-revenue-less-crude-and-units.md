@@ -37,11 +37,13 @@ The margin is a month's contribution from running the refinery. It leaves things
 
 It carries no fixed cost. Staff, insurance and overheads that the month pays whatever it runs are not terms in the formula. It carries no capital. The plan does not know what the refinery cost to build. It carries no tax and no financing. Each of those belongs to a different reading of the refinery, and the Expert tier takes up the one that values capital.
 
-So a margin of 7077935.48 is the best the month's crude, units and product prices can do together under ABUA's limits, measured against those three terms. It is the number a planner compares between one plan and another. It is not a profit, and nothing in this tier treats it as one.
+So a margin of 7077935.48 is the largest the month's crude, units and product prices give under ABUA's limits, measured against those three terms. It is not a profit, and nothing in this tier treats it as one.
 
-## Why the plan maximises this
+## What the plan maximises
 
-Every choice the plan makes, which crude, how much through which unit, which product gets which stream, moves one of the three terms. Buying a barrel of crude adds crude cost and, through the crude unit, operating cost. Selling its streams adds revenue. The plan is solved for the largest margin those moves allow. How the solution is found is the `crude` course's subject. What it finds is printed here.
+SECTION 12 prints it. planRefinery hands its linear programme to the solver with maximize: true, on an objective that counts each product barrel at its price, each crude barrel at minus its cost and each barrel through a unit at minus that unit's operating cost. The objective at ABUA's plan is 7077935.48, the plan's margin, and the digest prints the same: true.
+
+Every choice the plan makes, which crude, how much through which unit, which product gets which stream, moves one of the three terms. How the solution is found is the `crude` course's subject. What it finds is printed here.
 
 ## The formula under a change
 

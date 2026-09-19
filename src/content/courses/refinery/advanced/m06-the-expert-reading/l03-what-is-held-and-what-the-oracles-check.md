@@ -6,7 +6,7 @@ Every figure in this course comes from an engine, and every engine has limits. S
 
 Three items are held. Each is taught as a stated limit and never graded.
 
-**H1.** The scaling exponents 0.6 and 0.9 are defaults for a vendor's own figures to replace. No published source for them is in the engines repository. When a screen's capital comes from the modular law, as ODIOMA's expansion capital does, the capital is only as good as that exponent. A vendor quotation for the actual plant replaces it.
+**H1.** The scaling exponents 0.6 and 0.9 are defaults for a vendor's own figures to replace. No published source for them is in the engines repository. When a screen's capital comes from the modular law, as ODIOMA's expansion capital does, the capital is only as good as that exponent. H1 names what replaces it: a vendor's own figures.
 
 **H2.** The screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case; a fuller allowance model belongs to the Economics module.
 

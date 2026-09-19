@@ -18,9 +18,9 @@ The screen explorer carries each exponent as a control, labelled as a default a 
 
 ## What replaces a default
 
-A vendor's figures replace it. The best replacement is a second quotation. With quotations at two sizes for the same kind of plant, the exponent stops being an assumption and becomes something the quotations imply. A vendor who builds modular plants in more than one size can often supply that directly.
+A vendor's figures replace it. That is what H1 says the exponents are for: defaults for a vendor's own figures to replace.
 
-Short of that, a screen should show a range: run the capital at the default and at the exponents either side of it that a reviewer would accept, and carry all of them into the margin work. The screen makes this easy, because the exponent changes the capital and nothing else. The product slate, the throughput and the gross margin per barrel do not depend on it.
+Until those figures arrive, read the capital at more than one exponent. The explorer carries each exponent as a control, so the capital at another exponent is one change away. Away from the reference size the exponent moves the capital: at 10000 bpd the table prints 119428222.92 on the 0.9 law and 97005860.26 on the 0.6 law. At the reference size it moves nothing. OKORDIA is screened at 5000 bpd, where both laws print 64000000.00, so its capital is the quotation whichever exponent is chosen.
 
 ## What the hold means for the rest of this tier
 

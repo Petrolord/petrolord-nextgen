@@ -34,7 +34,7 @@ The unexplained also survives into the totals. Module 3 reads the headline on ma
 
 ## The Forcados crude is gone from the month
 
-Read with the other lines, the Forcados row says one of ODIOMA's two crudes did not arrive at all. The escravos receipt reads 735000.00 bbl and the crude unit ran 735000.00 bbl. The unit ran the one crude it was given.
+Read with the other lines, the Forcados row says one of ODIOMA's two crudes did not arrive at all. The escravos receipt reads 735000.00 bbl, the forcados receipt 0.00 bbl, and the crude unit ran 735000.00 bbl. The unit-run line names no crude.
 
 ## Exercise
 

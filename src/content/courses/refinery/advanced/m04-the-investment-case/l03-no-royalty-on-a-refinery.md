@@ -22,9 +22,9 @@ Every year of the ODIOMA expansion reads 0.0000 in the royalty column, from 2027
 
 ## Why this matters
 
-A royalty is charged on gross revenue. For a refinery, gross revenue is the value of the products sold, and that value already contains the price of the crude the refinery bought. The royalty on that crude, where one is due, was paid by the producer who lifted it, and it sits inside the crude price the refinery pays. Charging a royalty again on the refinery's product sales would take a share of a figure that includes bought-in crude.
+The digest gives the reason in one line: the royalty rate is 0 because a refinery buys its crude and pays no royalty. The screening engine's cash flow still carries a royalty column, and feasibilityEconomics hands it royaltyRate 0, so the column reads 0.0000 in every year.
 
-In the ODIOMA cash flow the gross revenue in each operating year is 346.1195 million and the net cash flow in year 2 is 38.5879 million. Any royalty rate above zero would be charged on the first of those figures and come out of the second.
+In the ODIOMA cash flow the gross revenue in each operating year is 346.1195 million, the royalty 0.0000, and the net cash flow in year 2 38.5879 million. The rate is set by feasibilityEconomics itself, beside fiscalType TaxRoyalty, and the refinery's inputs carry no royalty figure to type.
 
 ## Reading the zero
 

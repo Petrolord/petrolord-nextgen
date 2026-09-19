@@ -27,9 +27,9 @@ Now read the exponent of 1 case. Scaled in proportion to capacity to 10000 bpd, 
 
 Against that benchmark, both laws print per bpd figures that change with capacity. The stick-built law, with its lower exponent, carries the stronger economy of scale, and its per bpd figure at 30000 bpd is 6251.00. The modular law at the same size prints 10700.27.
 
-## Why per bpd is the screening currency
+## What per bpd shows
 
-Per bpd figures let a screen be checked against the outside world without a full estimate. If a quoted cost per barrel a day for a similar plant sits far from the screen's figure at the same size, one of the two uses a reference point or an exponent the other would not accept. That is a prompt to look at the inputs.
+Per bpd figures put plants of different sizes on one scale. Down the table, capital per bpd falls at every step as capacity rises, on both laws: modular true, stick-built true. Total capital rises at every step, on both laws as well. The per bpd column is where the economy of scale shows.
 
 Per bpd figures also make the crossover easy to see: at 5000 bpd both columns print 12800.00, and on either side of it they part.
 

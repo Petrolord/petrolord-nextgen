@@ -37,11 +37,11 @@ Revenue 172316812.90, less crude cost 160350322.58, less unit operating cost 488
 
 ## Step four: where the plan stopped
 
-Units at capacity: Diesel hydrotreater. Crudes at their availability: Forcados (illustrative) and Brass River (illustrative). No product reads true for "at its ceiling". Bonny Light runs 329032.26 bbl of 1500000.00 bbl available. The month is held by the hydrotreater. The crude unit has room, the markets have room, and Bonny Light has barrels, and the plan runs no more crude because the gasoil those barrels would make has no room in the hydrotreater and earns too little as Gasoil export.
+Units at capacity: Diesel hydrotreater. Crudes at their availability: Forcados (illustrative) and Brass River (illustrative). No product reads true for "at its ceiling". Bonny Light runs 329032.26 bbl of 1500000.00 bbl available. The hydrotreater is the one unit at capacity. The crude unit has room, no product is at its ceiling, and Bonny Light is the crude only partly run, which is where SECTION 14's gasoil working reads the month.
 
 ## Step five: the stream values
 
-Reformate, kero, ulsd and residue print their product prices, because each has one home with room. Offgas prints 0.0000, because it has no home and leaves 103638.71 bbl of surplus. Naphtha prints 91.4500, valued through a reformer with room. Gasoil prints 94.1016, valued through the full hydrotreater by what the plan can rearrange.
+Reformate, kero, ulsd and residue print their product prices; each goes into one product below its ceiling and feeds no unit. Offgas prints 0.0000, goes into no product, feeds no unit and leaves 103638.71 bbl of surplus. Naphtha prints 91.4500, the reformer's working, with the reformer at 97.07 percent. Gasoil prints 94.1016, Bonny Light's break-even, with the hydrotreater full.
 
 ## Step six: what a planner would do next
 
