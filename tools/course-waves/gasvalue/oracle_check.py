@@ -46,6 +46,10 @@ oracles and are compared with the engine's figures, which are the digest's.
 
 Negative control: --plant moves one oracle answer by ten tolerances and the
 gate must go red on exactly that field.
+
+--json prints the oracle's eighteen answers and the oracle function behind
+each, as one JSON document and nothing else, for the go-live generator's
+oracle route. No comparison is made in that mode.
 """
 import json
 import math
@@ -224,4 +228,35 @@ def main():
     return 0 if ok == 18 and bad_t == 0 else 1
 
 
+# The oracle function behind each graded field, for the go-live's oracle route.
+METHOD = {
+    'eriemu_ghv_btu_scf': 'oracle_flaretovalue.characterise (exact rationals, on moles after scaling to one)',
+    'eriemu_gpm_c3plus': 'oracle_flaretovalue.characterise (liquids from composition and liquid density)',
+    'eriemu_c3plus_kg_per_mscf': 'oracle_flaretovalue.characterise (C3+ mass carried in kg)',
+    'eriemu_flare_co2_t': 'oracle_flaretovalue.flare (40 CFR 98.233(n) by moles, exact pound)',
+    'eriemu_flare_ch4_t': 'oracle_flaretovalue.flare (methane at one less the destruction efficiency)',
+    'eriemu_flare_co2e_t': 'oracle_flaretovalue.flare (CO2 plus methane times the stated GWP)',
+    'adibawa_capital_usd': 'oracle_flaretovalue.economics (the 0.9 power law)',
+    'adibawa_cng_kg_per_year': 'oracle_flaretovalue.economics (product a year)',
+    'adibawa_value_per_mscf': 'oracle_flaretovalue.economics (margin per Mscf of the parcel)',
+    'adibawa_avoided_co2e_t': 'oracle_flaretovalue.flare (the recovered share of the flare CO2e)',
+    'adibawa_net_abatement_t': 'oracle_flaretovalue.net_abatement (avoided, less product combustion, plus displaced fuel)',
+    'adibawa_breakeven_credit_usd_per_t': "oracle_flaretovalue.credits (closed form on the oracle's own margin and net abatement)",
+    'asaba_usable_lpg_t': 'oracle_lpgcng.storage (filling density on water capacity by weight)',
+    'asaba_vaporizer_design_kw': 'oracle_lpgcng.vaporizer (three terms, latent heat of the blend on mass)',
+    'asaba_carousel_wait_min': 'oracle_lpgcng.erlang_c (exact Erlang C in rationals on the floored positions)',
+    'asaba_bank_mass_kg': 'oracle_lpgcng.mass (DAK by bisection on reduced density, gauge plus atmosphere)',
+    'asaba_left_in_banks_kg': 'oracle_lpgcng.cascade (a mass ledger by false position, conservation asserted)',
+    'asaba_payback_years': 'oracle_lpgcng.conversion (undiscounted simple payback)',
+}
+
+if '--json' in sys.argv:
+    # The oracle's eighteen answers and the function each came from, for the
+    # go-live's oracle route (gen_golive.py). No comparison, no verdict, and
+    # nothing else on stdout.
+    _orc = capstone()
+    if set(_orc) != set(METHOD) or len(_orc) != 18:
+        sys.exit('REFUSED: the oracle and its method table name different fields')
+    print(json.dumps({k: {'method': METHOD[k], 'value': float(v)} for k, v in _orc.items()}))
+    sys.exit(0)
 sys.exit(main())

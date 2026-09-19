@@ -787,7 +787,7 @@
     "course": "MD4",
     "live": "/root/et-wip-gasvalue",
     "kit": "full",
-    "kitNote": "Foundation kit, the first Energy Transition course (module energy_transition). The mirror carries every file the wave is rebuilt and gated from: the digest, its generator and the teaching records; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles (oracle_flaretovalue, oracle_lpgcng) on the capstone; every gate with its negative control (reproducibility across four zones, the clock, the vendor pin, collisions, promptleak, capstone leak, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files. discriminate.mjs also reads the pre-MD4-0 engines (petrolord-engines 13f0936) from the live wave directory, where they are unpacked read-only; they are not mirrored.",
+    "kitNote": "Foundation kit, the first Energy Transition course (module energy_transition). The mirror carries every file the wave is rebuilt and gated from: the digest, its generator and the teaching records; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles (oracle_flaretovalue, oracle_lpgcng) on the capstone; every gate with its negative control (reproducibility across four zones, the clock, the vendor pin, collisions, promptleak, capstone leak, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files. discriminate.mjs also reads the pre-MD4-0 engines (petrolord-engines 13f0936) from the live wave directory, where they are unpacked read-only; they are not mirrored. The seed ladder joined it: the course, go-live and seed generators, the SQL verifier, the scratch database, the dry run with its negative controls and block cutter, and the owner's content-addressed apply script; oracle_check.py gained a --json mode and discriminate.mjs's --json now prints the routes alone, which the go-live generator reads its oracle values and traps from. gen_seeds.sh pulls the pre-MD4-0 engines out of the petrolord-engines object store at 13f0936 rather than the wave directory.",
     "inputs": [
       "digest.txt",
       "fields.json",
@@ -822,7 +822,15 @@
       "BANK_TASK.md",
       "KEY_TRUTH_TASK.md",
       "PANELS.md",
-      "REVISE.md"
+      "REVISE.md",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_gv.sh",
+      "cut_block.py",
+      "apply_gv_gasvalue.sh"
     ],
     "pins": {
       "digest.txt": "e4ec4f14bd52c5ce2979a0e478cb037cd7f5cea791e1984efaf66c8a3ef3449e",

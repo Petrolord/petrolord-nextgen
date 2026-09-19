@@ -137,13 +137,13 @@
   },
   "oracle-check": {
    "file": "oracle_check.py",
-   "md5": "0eb0356e125625deed92c6c556763baa",
+   "md5": "4e102a1bd44835ce75f5c55a17e6f17b",
    "result": "exit 0: graded fields the oracle reproduces within tolerance: 18 of 18",
    "control": "exit 1: graded fields the oracle reproduces within tolerance: 17 of 18"
   },
   "discriminate": {
    "file": "discriminate.mjs",
-   "md5": "4d942372f0db7b50727a66a3bd2bc605",
+   "md5": "67f3b8b03809451453d7cd66c1a5faaf",
    "result": "exit 0: WEAK fields: 0",
    "control": "exit 1: WEAK fields: 1"
   },

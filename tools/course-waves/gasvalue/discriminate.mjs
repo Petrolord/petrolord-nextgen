@@ -23,8 +23,9 @@
 //                                    route (the truth itself, renamed) to one
 //                                    field, and the sweep must report exactly
 //                                    one WEAK field
-//   node discriminate.mjs --json     the routes and their values, for a later
-//                                    go-live generator
+//   node discriminate.mjs --json     every numeric route's value and the
+//                                    truth, as ONE JSON document and nothing
+//                                    else, for the go-live generator's traps
 import fs from 'fs';
 import * as K from './gasvalue_fields_capstone.mjs';
 import { components } from './gasvalue_capstone.mjs';
@@ -282,6 +283,17 @@ const WRONG = {
 };
 
 if (process.argv.includes('--plant')) WRONG.asaba_bank_mass_kg.routes.planted_identity = sM.massKg;
+// --json: every NUMERIC wrong route's value and nothing else, for the go-live's
+// traps (gen_golive.py takes the closest miss per field from here, so a trap in
+// the go-live is a route this sweep already ran through the engine). No verdict,
+// and no human report on stdout, so the output parses as one JSON document.
+if (process.argv.includes('--json')) {
+  process.stdout.write(`${JSON.stringify(Object.fromEntries(Object.entries(WRONG).map(([k, w]) => [k, {
+    truth: w.truth,
+    routes: Object.fromEntries(Object.entries(w.routes).filter(([, v]) => v !== null && v !== undefined && Number.isFinite(v))),
+  }])))}\n`);
+  process.exit(0);
+}
 
 let weak = 0; let closest = null;
 const report = {};
@@ -303,7 +315,6 @@ for (const [key, { truth, routes }] of Object.entries(WRONG)) {
   console.log(`${isWeak ? 'WEAK ' : 'ok   '} ${key} = ${graded} (tol ${tol}), ${numeric} numeric routes`);
   lines.forEach((l) => console.log(l));
 }
-if (process.argv.includes('--json')) { process.stdout.write(`${JSON.stringify(report)}\n`); }
 console.log(`closest miss: ${closest.key} via ${closest.name}, ${closest.miss.toExponential(3)} tolerances`);
 console.log(`WEAK fields: ${weak}`);
 process.exit(weak ? 1 : 0);
