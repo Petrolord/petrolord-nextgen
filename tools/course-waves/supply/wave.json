@@ -125,13 +125,13 @@
   },
   "oracle-check": {
    "file": "oracle_check.py",
-   "md5": "dc3ba61a900c56fcfc8978b1ca267cf6",
+   "md5": "bb0c511cecfd1b8cb46b8672e182613b",
    "result": "exit 0: fields compared: 18; disagreements beyond tolerance: 0; largest disagreement 0.3500 of a tolerance (oron_pump_price_ngn)",
    "control": "exit 1: fields compared: 18; disagreements beyond tolerance: 1; largest disagreement 2.0000 of a tolerance (ogwashi_days_of_cover)"
   },
   "discriminate": {
    "file": "discriminate.mjs",
-   "md5": "98cc777fef948c83f283b170558fe2fd",
+   "md5": "62334874fc1fe775224c9d92d606e9f4",
    "result": "exit 0: the closest miss anywhere in the eighteen: ogwashi_trucks_required by route trips_rounded_down, 2.0 tolerances out",
    "control": "exit 1: the closest miss anywhere in the eighteen: ogwashi_trucks_required by route trips_rounded_down, 2.0 tolerances out"
   },

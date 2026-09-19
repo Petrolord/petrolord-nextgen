@@ -161,4 +161,9 @@ def main():
     return 1 if bad else 0
 
 
+if '--json' in sys.argv:
+    # The oracle's eighteen answers and the method each came by, for the
+    # go-live's oracle route (gen_golive.py). No comparison, no verdict.
+    print(json.dumps({k: {'method': m, 'value': float(v)} for k, (m, v) in ORACLE.items()}))
+    sys.exit(0)
 sys.exit(main())

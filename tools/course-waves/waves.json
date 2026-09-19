@@ -623,7 +623,7 @@
     "course": "MD3",
     "live": "/root/md-wip-supply",
     "kit": "full",
-    "kitNote": "Foundation kit. The mirror carries every file the wave is rebuilt and gated from: the digest, its generator and the teaching records; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles on the capstone; every gate with its negative control (reproducibility across five zones, the clock and random source, collisions, promptleak, capstone leak, the kit leakage sweep over the digest by owning tier, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files. No seed ladder yet: the lesson, bank and migration phases add it.",
+    "kitNote": "Foundation kit. The mirror carries every file the wave is rebuilt and gated from: the digest, its generator and the teaching records; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles on the capstone; every gate with its negative control (reproducibility across five zones, the clock and random source, collisions, promptleak, capstone leak, the kit leakage sweep over the digest by owning tier, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files. The seed ladder joined it: the course, go-live and seed generators, the SQL verifier, the scratch database, the dry run with its negative controls and block cutter, and the owner's content-addressed apply script; oracle_check.py and discriminate.mjs gained a --json mode the go-live generator reads its oracle values and traps from.",
     "inputs": [
       "digest.txt",
       "fields.json",
@@ -658,7 +658,15 @@
       "BANK_TASK.md",
       "KEY_TRUTH_TASK.md",
       "PANELS.md",
-      "REVISE.md"
+      "REVISE.md",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_tds.sh",
+      "cut_block.py",
+      "apply_tds_supply.sh"
     ],
     "pins": {
       "digest.txt": "186440d40db46261e26dd39dd7e3b170a67ddb66022a874ad22ee240079257ba",

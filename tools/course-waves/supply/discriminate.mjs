@@ -254,6 +254,13 @@ const WRONG = {
 };
 
 if (process.argv.includes('--plant')) WRONG.ogwashi_trucks_required.routes.planted_identity = WRONG.ogwashi_trucks_required.truth;
+// --json: every wrong route's value and nothing else, for the go-live's traps
+// (gen_golive.py takes the closest miss per field from here, so a trap in the
+// go-live is a route this sweep already ran through the engine). No verdict.
+if (process.argv.includes('--json')) {
+  process.stdout.write(`${JSON.stringify(Object.fromEntries(Object.entries(WRONG).map(([k, w]) => [k, { truth: w.truth, routes: w.routes }])))}\n`);
+  process.exit(0);
+}
 let weak = 0; let routes = 0; let closest = { ratio: Infinity, key: null, name: null };
 console.log('field                                     routes  moved  blind   closest miss (in tolerances)');
 for (const [key, { truth, routes: rs }] of Object.entries(WRONG)) {
