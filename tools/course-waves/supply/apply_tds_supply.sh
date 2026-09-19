@@ -104,11 +104,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261012_tds_supply_course           ) echo UNPINNED ;;
-    20261012_tds_supply_beginner_deep    ) echo UNPINNED ;;
-    20261012_tds_supply_intermediate_deep) echo UNPINNED ;;
-    20261012_tds_supply_advanced_deep    ) echo UNPINNED ;;
-    20261012_tds_supply_go_live          ) echo UNPINNED ;;
+    20261012_tds_supply_course                  ) echo 879cf7e79e9792e77683cedc19e789a49e306e3a0729dced7a1616c57fe4f23b ;;
+    20261012_tds_supply_beginner_deep           ) echo 3618a3a97f3db17f070a3c8fa49aff2660b87fa5e7e33294383a3571ef27b76b ;;
+    20261012_tds_supply_intermediate_deep       ) echo 26cfbeb653401c6e18721741025b77de10dcbe55d5871988b0080cd8488da67f ;;
+    20261012_tds_supply_advanced_deep           ) echo dd14a416a99d4ecb5e56a8bea43443947b9609c5912b875d71959f8a544cc80e ;;
+    20261012_tds_supply_go_live                 ) echo 7cde52365b71417edd695b87e6df108b15d8c8068609687e4f4dad1961f3d098 ;;
     *) echo UNPINNED ;;
   esac
 }
