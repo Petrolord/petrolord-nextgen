@@ -84,8 +84,8 @@ no question may key a "right" choice between AR5 and AR6.
 ## Owner copy rule
 
 No em dashes, no en dashes, no "X, not Y" contrastive in any stem, option or
-explanation. The three engine strings LESSON_TASK.md names may appear inside
-quotation marks as the engine's words.
+explanation. Since MD45-1 no engine string the digest quotes carries a
+contrastive, so none is exempt.
 
 ## Hand back
 

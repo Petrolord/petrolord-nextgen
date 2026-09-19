@@ -58,7 +58,7 @@ the horizon. No field grades a choice of set (held item H1).
 
 | gate | what it proves | negative control |
 |---|---|---|
-| `oracle_check.py` | the vendored Python oracles, called on the capstone records, reproduce all eighteen fields within each field's tolerance; it names the one computation it transcribes from an oracle's main() (the tuning saving's duty ledger) | `--plant` moves one oracle answer by two tolerances and the gate names that field |
+| `oracle_check.py` | the vendored Python oracles, called on the capstone records, reproduce all eighteen fields within each field's tolerance; every field goes through a function the oracles export (the tuning saving through duty_ledger, exported in MD45-1) | `--plant` moves one oracle answer by two tolerances and the gate names that field |
 | `discriminate.mjs` | every field has at least three plausible wrong routes, each the engine asked the wrong question, and none lands inside the tolerance; it prints the closest miss in tolerances | `--plant` adds an identity route and the sweep reports one WEAK field |
 | `gate_collisions.py` | no graded value is within its tolerance of any number token the digest prints (the go-live rule), and no two graded values share one | `--plant` sets one field to a digest number |
 | `gate_promptleak.py` | no prompt prints a graded value of any tier, or an engine-derived intermediate, in any rounding | `--plant` appends both |

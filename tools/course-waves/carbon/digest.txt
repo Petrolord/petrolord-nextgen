@@ -1,7 +1,7 @@
 # carbon: Carbon & Energy Efficiency. Teaching digest.
-# PRECISION: tonnes (of CO2, of methane, of CO2e, of steam) print to three decimals and kilomoles to three; percents (efficiency, excess air, losses) to four; fractions and shares to six; gigajoules to three; kilograms an hour and kilograms per kilomole to four; kilowatts and temperatures to three; money in US dollars to two decimals and US dollars per tonne to four; capital recovery factors to eight; megajoules per tonne to four; carbon intensities to eight. Counts and years are whole numbers.
+# PRECISION: tonnes (of CO2, of methane, of CO2e, of steam) print to three decimals and kilomoles a year to three; kilomoles per kilomole of fuel to six; percents (efficiency, excess air, losses) to four; fractions and shares to six, and a fuel saving fraction to ten; gigajoules to three; kilograms an hour to four; molar masses to three decimals, except ATMOSPHERIC_N2_MOLAR_MASS and a fuel mixture molar mass, which print to four, as do kilograms per kilomole of fuel; kilowatts and temperatures to three; money in US dollars to two decimals and US dollars per tonne to four; capital recovery factors to eight; megajoules per tonne to four; carbon intensities to eight. Counts and years are whole numbers.
 # NO CLOCK: neither engine reads a date or a random number, so no figure below depends on when or where the digest was built. Every year below is an input.
-# ENGINES: engines/downstream/carbonAbatement.js and engines/downstream/energyEfficiency.js at petrolord-engines f0aef14 (MD5-0 repaired both, engines PR #226), vendored in NextGen under packages/engines.
+# ENGINES: engines/downstream/carbonAbatement.js and engines/downstream/energyEfficiency.js at petrolord-engines df31f53 (MD5-0, engines PR #226, and MD45-1, engines PR #228, repaired both), vendored in NextGen under packages/engines.
 # CASES: IGBOGENE (a Niger Delta flow station and gas plant: its fired heaters, its flare, its vented methane and its purchased power, rolled into one inventory), ISIOKPO (a gas plant: one fired heater, a failed steam trap, its condensate system and four process streams), AGBOR (a gas processing and distribution complex: six abatement measures, a curve, a target, a path, one priced saving and the plant energy intensity). All three are invented records.
 # GWP: every global warming potential below is an INPUT the engine ships none of. The values are IPCC 100-year (GWP100) figures as tabulated in GHG Protocol, "IPCC Global Warming Potential Values", version 2.0, 7 August 2024, adapted from IPCC AR6 WG1 chapter 7 (section 7.6.1.1) and IPCC AR5 WG1 chapter 8. The course computes its inventories on the set "IPCC AR6 GWP100, fossil methane" (CH4 29.8, N2O 273) and prints the other three beside it.
 # RATES: every cost, saving, price, emission factor, flow, temperature and destruction efficiency below is INVENTED for this course and is not a published figure. The electricity factor and the fuel emission factor are SYNTHETIC.
@@ -9,12 +9,14 @@
 
 # SECTION 1: WHAT THE TWO APPS COMPUTE, AND WHAT THE ENGINES SHIP (owned by Associate m01)
 
+Engine functions behind this section: carbonAbatement.makeGwpSet, carbonAbatement.makeFactor.
+
 Each module exports its rules as functions and its fixed data as constants. The counts below are measured from the modules themselves.
 
 | module | exported functions | exported constants | names |
 | --- | --- | --- | --- |
-| carbonAbatement | 9 | 4 | abatementCost, abatementCurve, buildInventory, carbonIntensity, combustionCo2FromCarbon, decarbonisationPath, emissionLine, makeFactor, makeGwpSet, MW_C, MW_CH4, MW_CO2, SCOPE |
-| energyEfficiency | 10 | 8 | combustionStoichiometry, compositeCurve, condensateReturnValue, energyIntensity, excessAirFromFlueOxygen, excessAirSaving, pinchTargets, priceSaving, stackLossEfficiency, steamTrapLoss, AIR_MOLAR_MASS, ATMOSPHERIC_N2_MOLAR_MASS, FUEL_REFERENCE, FUEL_REFERENCE_NOTE, HEATING_VALUE_BASIS, O2_MOLAR_MASS, O2_MOLE_FRACTION_DRY_AIR, PROPERTY_REFERENCE |
+| carbonAbatement | 10 | 4 | abatementCost, abatementCurve, atomBalanceLines, buildInventory, carbonIntensity, combustionCo2FromCarbon, decarbonisationPath, emissionLine, makeFactor, makeGwpSet, MW_C, MW_CH4, MW_CO2, SCOPE |
+| energyEfficiency | 10 | 11 | combustionStoichiometry, compositeCurve, condensateReturnValue, energyIntensity, excessAirFromFlueOxygen, excessAirSaving, pinchTargets, priceSaving, stackLossEfficiency, steamTrapLoss, AIR_MOLAR_MASS, ATMOSPHERE_BAR_A, ATMOSPHERIC_N2_MOLAR_MASS, ATOMIC_WEIGHT, FUEL_REFERENCE, FUEL_REFERENCE_NOTE, HEATING_VALUE_BASIS, O2_MOLAR_MASS, O2_MOLE_FRACTION_DRY_AIR, PRODUCT_MOLAR_MASS, PROPERTY_REFERENCE |
 
 The Carbon Footprint & Abatement Studio calls carbonAbatement. The Energy & Utilities Efficiency Studio calls energyEfficiency, and its cost per tonne is carbonAbatement.abatementCost called from inside energyEfficiency.priceSaving.
 
@@ -25,21 +27,25 @@ carbonAbatement.MW_CH4: 16.043
 energyEfficiency.O2_MOLE_FRACTION_DRY_AIR: 0.20946
 energyEfficiency.AIR_MOLAR_MASS: 28.9647
 energyEfficiency.O2_MOLAR_MASS: 31.998
-energyEfficiency.ATMOSPHERIC_N2_MOLAR_MASS: 28.1610 (printed to four decimals; derived by the engine from the two air constants above)
+energyEfficiency.ATMOSPHERIC_N2_MOLAR_MASS: 28.1610 (printed to four decimals; derived by the engine from the three air constants above: (AIR_MOLAR_MASS - O2_MOLE_FRACTION_DRY_AIR x O2_MOLAR_MASS) / (1 - O2_MOLE_FRACTION_DRY_AIR))
 energyEfficiency.HEATING_VALUE_BASIS: LHV, HHV
+energyEfficiency.ATOMIC_WEIGHT: C 12.011, H 1.008, O 15.999, N 14.007, S 32.06 (the IUPAC conventional atomic weights the module's fuel and flue gas molar masses are built from)
+energyEfficiency.PRODUCT_MOLAR_MASS: CO2 44.009, H2O 18.015, SO2 64.058, N2 28.014 (the flue gas products, kg/kmol)
+energyEfficiency.ATMOSPHERE_BAR_A: 1.01325 (one standard atmosphere, the downstream pressure of a trap when none is given)
 
 energyEfficiency.FUEL_REFERENCE, atom counts and typical heating values in MJ per kmol:
 | code | label | C | H | O | S | N | molar mass kg/kmol | typical LHV MJ/kmol | typical HHV MJ/kmol | inert |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | CH4 | Methane | 1 | 4 | 0 | 0 | 0 | 16.043 | 802.6 | 890.8 | no |
 | C2H6 | Ethane | 2 | 6 | 0 | 0 | 0 | 30.070 | 1428.6 | 1560.7 | no |
-| C3H8 | Propane | 3 | 8 | 0 | 0 | 0 | 44.096 | 2043.1 | 2219.2 | no |
-| C4H10 | Butane | 4 | 10 | 0 | 0 | 0 | 58.122 | 2657.3 | 2877.5 | no |
+| C3H8 | Propane | 3 | 8 | 0 | 0 | 0 | 44.097 | 2043.1 | 2219.2 | no |
+| C4H10 | Butane | 4 | 10 | 0 | 0 | 0 | 58.124 | 2657.3 | 2877.5 | no |
 | H2 | Hydrogen | 0 | 2 | 0 | 0 | 0 | 2.016 | 241.8 | 285.8 | no |
-| CO2 | Carbon dioxide (inert) | 1 | 0 | 2 | 0 | 0 | 44.010 | 0 | 0 | yes |
+| CO2 | Carbon dioxide (inert) | 1 | 0 | 2 | 0 | 0 | 44.009 | 0 | 0 | yes |
 | N2 | Nitrogen (inert) | 0 | 0 | 0 | 0 | 2 | 28.014 | 0 | 0 | yes |
 
 energyEfficiency.FUEL_REFERENCE_NOTE: "Atom counts are definitional and drive the stoichiometry. Heating values are typical: the fuel analysis governs, and a measured value should replace these."
+ONE SOURCE OF MOLAR MASSES. Every FUEL_REFERENCE molar mass above equals its atom counts weighted by ATOMIC_WEIGHT, rounded to three decimals (checked here row by row), and the CO2 row, PRODUCT_MOLAR_MASS.CO2 and carbonAbatement.MW_CO2 are one number, 44.009: an inert CO2 in the fuel weighs the same going in as it does in the flue gas.
 
 energyEfficiency.PROPERTY_REFERENCE, typical values a stack loss needs, each labelled as typical:
 | property | typical | range | note |
@@ -60,6 +66,8 @@ A factor typed with a value and nothing else is still a record, and the record s
 
 # SECTION 2: MISSING STAYS MISSING: WHAT THE CARBON ENGINE REFUSES (owned by Associate m01 and m02)
 
+Engine functions behind this section: carbonAbatement.combustionCo2FromCarbon, carbonAbatement.emissionLine, carbonAbatement.carbonIntensity, carbonAbatement.makeGwpSet.
+
 Each row is one call to the engine. A blank box reaches the engine as an empty string or null; an argument left out of the call takes the stated default.
 
 | function | the call | the engine says |
@@ -75,14 +83,18 @@ Each row is one call to the engine. A blank box reaches the engine as an empty s
 | carbonIntensity | no boundary named | REFUSED: A boundary must be named. Tonnes per tonne charged and tonnes per tonne of saleable product are different numbers for the same plant, and an intensity without its boundary cannot be compared with anything. |
 | carbonIntensity | a denominator of 0 | REFUSED: A positive denominator is required. |
 | carbonIntensity | a blank denominator | REFUSED: A positive denominator is required. |
+| makeGwpSet | a methane GWP of -5 (the set then reads declared false) | REFUSED: A global warming potential must be positive. Refused for CH4, so the set is not declared. |
+| makeGwpSet | a methane GWP of 0 (the set then reads declared false) | REFUSED: A global warming potential must be positive. Refused for CH4, so the set is not declared. |
 
 Left out of the call, the destruction efficiency takes its stated default of complete combustion: combustionCo2FromCarbon({ fuelKmolPerYear: 1000, carbonPerKmolFuel: 1 }) answers destructionEfficiencyFraction 1, co2Tonnes 44.009, ch4Tonnes 0.000. A burner is the case that default is for. A flare is asked for its efficiency every time.
 
 # SECTION 3: CARBON IN, CO2 OUT: THE ATOM BALANCE AND ITS MOLAR MASSES (owned by Associate m02)
 
+Engine functions behind this section: carbonAbatement.combustionCo2FromCarbon.
+
 The engine's molar masses come from the IUPAC conventional atomic weights: MW_C 12.011, MW_CO2 44.009 (12.011 plus two oxygens at 15.999), MW_CH4 16.043 (12.011 plus four hydrogens at 1.008). The oxygen and hydrogen weights are read back from the engine's own molar masses (computed here).
 
-The engine's method, verbatim: "Atom balance: carbon in equals CO2 out. This is conservation of mass, not an empirical factor, so it needs no source document."
+The engine's method, verbatim: "Atom balance: carbon in equals CO2 out. This is conservation of mass, so it needs no source document."
 
 One thousand kilomoles of a fuel with one carbon atom a molecule, burned completely and burned at three lower efficiencies:
 | destruction efficiency | carbon kmol | co2Tonnes | ch4Tonnes |
@@ -96,6 +108,8 @@ Each kilomole of carbon that burns leaves as MW_CO2 kilograms of CO2, so 1000 km
 The engine's result carries these keys and no other gas: co2Tonnes, ch4Tonnes. Nitrous oxide from combustion is not computed by the atom balance (FINDINGS-carbon H4); it needs an emission factor line.
 
 # SECTION 4: THE IGBOGENE FIRED HEATERS (owned by Associate m02 and m06)
+
+Engine functions behind this section: carbonAbatement.combustionCo2FromCarbon.
 
 Inputs (invented): fuel 482000 kmol a year, 1.09 kmol of carbon per kmol of fuel, destruction efficiency 1 (complete combustion, typed).
 
@@ -122,6 +136,8 @@ The carbon per kilomole of fuel is the fuel analysis read as carbon atoms: the I
 
 # SECTION 5: THE IGBOGENE FLARE AS AN INVENTORY LINE (owned by Associate m03 and m06)
 
+Engine functions behind this section: carbonAbatement.combustionCo2FromCarbon, carbonAbatement.atomBalanceLines, carbonAbatement.emissionLine.
+
 Inputs (invented): gas to the flare 38500 kmol a year, 1.32 kmol of carbon per kmol. The operator's flare study states a destruction efficiency of 0.98 (invented). The methane line is converted at the course's GWP set (IPCC AR6 GWP100, fossil methane, CH4 29.8).
 
 | destruction efficiency | co2Tonnes | ch4Tonnes | methane line tCO2e | flare tCO2e (CO2 plus methane line) |
@@ -133,6 +149,8 @@ Inputs (invented): gas to the flare 38500 kmol a year, 1.32 kmol of carbon per k
 | 0.9 | 2012.884 | 81.531 | 2429.610 | 4442.493 |
 
 Blank: REFUSED: A destruction efficiency is required. It is not read as 100 percent: for a flare it is the answer, and it is contested.
+carbonKmolPerYear of the flare at every efficiency above: 50820.000. The efficiency splits that carbon between CO2 and methane; it does not change it.
+Handed to atomBalanceLines, the refused flare becomes 1 line labelled "Flaring" that carries the refusal, so an inventory built with it is blocked on the flare (SECTION 9).
 
 At 0.98 the methane line is 485.922 tCO2e of the flare's 2677.729 tCO2e, a share of 0.181468 (computed here from the engine's figures).
 Read as 100 percent, the same flare is 2236.537 tCO2e with no methane line: 441.191 tCO2e below the flare at 0.98 (computed here from the engine's figures).
@@ -143,6 +161,8 @@ HELD, FINDINGS-carbon H3: every carbon atom that escapes is counted as methane. 
 This course teaches the flare as one line of an inventory. The flare as a resource (what the gas is worth, how to recover it) belongs to the sibling course Flare Gas to Value & LPG/CNG.
 
 # SECTION 6: GLOBAL WARMING POTENTIALS: A SET CARRIES ITS REPORT (owned by Associate m04)
+
+Engine functions behind this section: carbonAbatement.makeGwpSet.
 
 The engine ships no GWP. makeGwpSet takes a label and values from the caller. The four sets below are IPCC 100-year (GWP100) values as tabulated in GHG Protocol, "IPCC Global Warming Potential Values", version 2.0, 7 August 2024, adapted from IPCC AR6 WG1 chapter 7 (section 7.6.1.1) and IPCC AR5 WG1 chapter 8.
 
@@ -170,6 +190,8 @@ A set is declared only with a label and at least one value:
 
 # SECTION 7: THE IGBOGENE INVENTORY (owned by Associate m05 and m06)
 
+Engine functions behind this section: carbonAbatement.atomBalanceLines, carbonAbatement.emissionLine, carbonAbatement.makeFactor, carbonAbatement.buildInventory.
+
 Four sources on the course's set (IPCC AR6 GWP100, fossil methane). The atom-balance lines carry a factor of 1 whose source is conservation of mass, as the Carbon Studio builds them. The vented methane line and the purchased electricity line carry registered factors (invented; the electricity factor is SYNTHETIC).
 
 | line | scope | gas | activity | unit | factor | factor unit | GWP | tonnes of gas | tCO2e | source | version | provenance complete |
@@ -186,9 +208,11 @@ Four sources on the course's set (IPCC AR6 GWP100, fossil methane). The atom-bal
 | Scope 2 (purchased energy) | 12915.000 |
 | Total, Scope 1 and Scope 2 | 42945.777 |
 
+Every line above is activity x factor x GWP, in tCO2e (checked here line by line); Scope 1 is the sum of its 4 lines, Scope 2 the sum of its 1 line(s), and the total the two scopes together (checked here).
+
 gwpSetLabel: IPCC AR6 GWP100, fossil methane. computed: true. reportable: true. blocked lines: 0. unsourced lines: 0.
 
-The engine's disclaimer, verbatim: "This is a quantitative inventory, not a regulatory compliance register. Obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree."
+The engine's disclaimer, verbatim: "This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree."
 
 Each line as a share of the total (computed here from the engine's figures):
 | line | share of the total |
@@ -201,6 +225,8 @@ Each line as a share of the total (computed here from the engine's figures):
 ROUNDING NOTE: the shares as printed sum to 1.000001; each is rounded to six decimals from the unrounded quotient, and the unrounded shares sum to 1.
 
 # SECTION 8: ONE INVENTORY ON FOUR GWP SETS (owned by Associate m04)
+
+Engine functions behind this section: carbonAbatement.makeGwpSet, carbonAbatement.buildInventory.
 
 The Igbogene inventory rebuilt on each set. Only the methane lines move; every CO2 line has a GWP of 1 on every set.
 
@@ -223,21 +249,30 @@ An inventory on one set is not comparable with one on another. The engine states
 
 # SECTION 9: COMPUTED AND REPORTABLE (owned by Associate m05)
 
+Engine functions behind this section: carbonAbatement.atomBalanceLines, carbonAbatement.emissionLine, carbonAbatement.buildInventory.
+
 The Igbogene inventory as a first pass: no GWP set declared, the electricity factor box blank, the vented methane survey not yet referenced, the flare's destruction efficiency blank. Then each gap closed in turn. Every row is a buildInventory call.
 
 | step | lines | Scope 1 tCO2e | Scope 2 tCO2e | total tCO2e | computed | reportable | not reportable because |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| as a first pass | 3 | 23121.448 | 0.000 | 23121.448 | true | false | the global warming potential set is not declared; 2 line(s) could not be computed |
-| the GWP set declared | 3 | 27353.048 | 0.000 | 27353.048 | true | false | 1 factor(s) have no source or version; 1 line(s) could not be computed |
+| as a first pass | 4 | 23121.448 | 0.000 | 23121.448 | true | false | the global warming potential set is not declared; 3 line(s) could not be computed |
+| the GWP set declared | 4 | 27353.048 | 0.000 | 27353.048 | true | false | 1 factor(s) have no source or version; 2 line(s) could not be computed |
 | the flare efficiency entered | 5 | 30030.777 | 0.000 | 30030.777 | true | false | 1 factor(s) have no source or version; 1 line(s) could not be computed |
 | the electricity factor entered with its source | 5 | 30030.777 | 12915.000 | 42945.777 | true | false | 1 factor(s) have no source or version |
 | the survey referenced | 5 | 30030.777 | 12915.000 | 42945.777 | true | true | none |
 
-In the first pass the flare contributes no line at all, because the engine refused it (SECTION 2), and the Carbon Studio builds atom-balance lines only from a result that computed. The first pass has 2 blocked line(s) and 0 unsourced line(s); a blocked line is not also counted as unsourced. The blocked lines, as the engine names them:
+In the first pass the flare is refused (SECTION 2), and atomBalanceLines turns the refusal into one blocked line named Flaring. The first pass has 3 blocked line(s) and 0 unsourced line(s); a blocked line is not also counted as unsourced. The blocked lines, as the engine names them:
 | line | blocked by, or missing |
 | --- | --- |
+| Flaring | blocked: A destruction efficiency is required. It is not read as 100 percent: for a flare it is the answer, and it is contested. |
 | Vented and fugitive methane | blocked: no global warming potential for CH4 in the declared set |
 | Purchased electricity | blocked: no factor value |
+
+Every other gap closed and only the flare's efficiency blank:
+| lines | Scope 1 tCO2e | Scope 2 tCO2e | total tCO2e | reportable | not reportable because | blocked line |
+| --- | --- | --- | --- | --- | --- | --- |
+| 4 | 27353.048 | 12915.000 | 40268.048 | false | 1 line(s) could not be computed | Flaring: A destruction efficiency is required. It is not read as 100 percent: for a flare it is the answer, and it is contested. |
+The total leaves out the flare's CO2 and methane lines, and the inventory is not reportable while the flare stands refused. atomBalanceLines with excluded true adds no line at all: 0 lines, for a source left out of the boundary on purpose.
 
 Two more lines added to the complete inventory: one with no registered factor, and one on scope 3. Both are blocked and named, the totals stay the Scope 1 and Scope 2 figures of SECTION 7, and the inventory stops being reportable:
 | line | reason |
@@ -247,7 +282,16 @@ Two more lines added to the complete inventory: one with no registered factor, a
 
 total tCO2e 42945.777; reportable false; not reportable because: 2 line(s) could not be computed.
 
+A negative activity and a negative factor. An emission line cannot remove tonnes, so each is blocked and named:
+| line | activity | factor | tCO2e | blocked by |
+| --- | --- | --- | --- | --- |
+| Vented methane typed as -142 t | -142.000 | 1 | none | a negative activity: an emission line cannot remove tonnes |
+| Purchased electricity at a factor of -0.41 | 31500.000 | -0.41 | none | a negative factor: an emission line cannot remove tonnes |
+That inventory totals 25799.177 tCO2e, reportable false (2 line(s) could not be computed).
+
 # SECTION 10: INTENSITY AND ITS BOUNDARY (owned by Associate m05)
+
+Engine functions behind this section: carbonAbatement.carbonIntensity.
 
 The same Igbogene inventory over two boundaries (both invented):
 | boundary | denominator | unit | Scope 1 intensity | Scope 2 intensity | total intensity | reportable |
@@ -258,9 +302,13 @@ The same Igbogene inventory over two boundaries (both invented):
 The comparability note on the first, verbatim: "Comparable only with an intensity on the same boundary (Igbogene flow station and gas plant, inlet to export) and the same global warming potential set (IPCC AR6 GWP100, fossil methane)."
 
 An intensity inherits its inventory's status. With the electricity factor blank the total intensity is 0.00822761 tCO2e per barrel of oil equivalent produced, reportable false, because: 1 line(s) could not be computed.
+That total intensity 0.00822761 and the complete inventory's Scope 1 intensity 0.00822761 are the same figure (compared here): with the Scope 2 line blocked, the total is Scope 1 alone.
+Each intensity is the inventory's tonnes over the denominator: 42945.777 tCO2e over 3650000 is 0.01176597 (computed here), the engine's total intensity on the first boundary.
 REFUSED: A boundary must be named. Tonnes per tonne charged and tonnes per tonne of saleable product are different numbers for the same plant, and an intensity without its boundary cannot be compared with anything.
 
 # SECTION 11: THE ISIOKPO FUEL GAS: COMBUSTION FROM THE ANALYSIS (owned by Professional m01)
+
+Engine functions behind this section: energyEfficiency.combustionStoichiometry, energyEfficiency.excessAirFromFlueOxygen, energyEfficiency.stackLossEfficiency.
 
 The fuel gas analysis (invented), in mole fractions, with the engine's typical heating values: CH4 0.868, C2H6 0.071, C3H8 0.021, CO2 0.025, N2 0.015.
 
@@ -268,7 +316,7 @@ The fuel gas analysis (invented), in mole fractions, with the engine's typical h
 | --- | --- | --- |
 | o2PerKmolFuel | 2.089500 | kmol O2 per kmol fuel |
 | stoichAirPerKmolFuel | 9.975652 | kmol air per kmol fuel |
-| stoichAirKgPerKgFuel | 15.612760 | kg air per kg fuel |
+| stoichAirKgPerKgFuel | 15.612763 | kg air per kg fuel |
 | fuelMolarMassKgKmol | 18.5068 | kg per kmol |
 | products.co2PerKmolFuel | 1.098000 | kmol per kmol fuel |
 | products.h2oPerKmolFuel | 2.033000 | kmol per kmol fuel |
@@ -276,6 +324,17 @@ The fuel gas analysis (invented), in mole fractions, with the engine's typical h
 | products.fuelN2PerKmolFuel | 0.015000 | kmol per kmol fuel |
 | lhvMJPerKmolFuel | 840.9925 | MJ per kmol fuel |
 | hhvMJPerKmolFuel | 930.6273 | MJ per kmol fuel |
+
+The oxygen demand, component by component (computed here from the FUEL_REFERENCE atom counts; the engine returns only the weighted total):
+| component | mole fraction | c + h/4 + s - o/2 | weighted kmol O2 per kmol fuel |
+| --- | --- | --- | --- |
+| CH4 | 0.868 | 2 | 1.736000 |
+| C2H6 | 0.071 | 3.5 | 0.248500 |
+| C3H8 | 0.021 | 5 | 0.105000 |
+| CO2 | 0.025 | 0 | 0.000000 |
+| N2 | 0.015 | 0 | 0.000000 |
+| sum | 1.000 |  | 2.089500 |
+The weighted sum is the engine's o2PerKmolFuel. The stoichiometric air is that oxygen over O2_MOLE_FRACTION_DRY_AIR: 2.089500 / 0.20946 = 9.975652 (computed here; the engine prints 9.975652), and the air's nitrogen is the rest of that air, 7.886152 (computed here; products.airN2PerKmolFuel 7.886152).
 
 The oxygen demand is c + h/4 + s - o/2 for each component, weighted by its mole fraction. The CO2 in the fuel has c = 1 and o = 2, so it demands no oxygen and passes into the flue gas: the 0.025 kmol of fuel CO2 is inside products.co2PerKmolFuel above. The fuel's nitrogen is carried separately from the air's.
 With the CO2 taken out of the analysis and the rest renormalised, o2PerKmolFuel is 2.143077 and lhvMJPerKmolFuel 862.5564: the inerts dilute the fuel.
@@ -285,9 +344,11 @@ THE MASS BALANCE at 3 percent stack oxygen, per kmol of fuel. Air enters at AIR_
 | --- | --- |
 | fuel plus air in (fuel molar mass plus actual air times AIR_MOLAR_MASS) | 351.0222 |
 | flue gas out (engine dry flue gas plus engine moisture) | 351.0222 |
-| out less in (computed here) | -0.000003 |
+| out less in (computed here) | 0.000001 |
 
 # SECTION 12: EXCESS AIR FROM THE STACK OXYGEN (owned by Professional m02)
+
+Engine functions behind this section: energyEfficiency.excessAirFromFlueOxygen.
 
 The engine's assumption, verbatim: "Complete combustion. An oxygen reading alone cannot see carbon monoxide, so a stack making CO will read as if it had more excess air than it has."
 
@@ -303,17 +364,32 @@ The Isiokpo fuel gas at a range of measured dry stack oxygen readings:
 | 8 | 55.7461 | 15.536691 | 14.560191 | 16.593191 |
 | 12 | 121.0076 | 22.046948 | 21.070448 | 23.103448 |
 
+The same rows as relations (computed here from the engine's figures): the wet flue gas less the dry is the water the hydrogen makes, and the dry flue gas less the actual air is fixed, because each extra kilomole of air leaves as a kilomole of dry flue gas.
+| dry O2 percent | wet less dry | dry flue gas less actual air |
+| --- | --- | --- |
+| 0 | 2.033000 | -0.976500 |
+| 1 | 2.033000 | -0.976500 |
+| 2 | 2.033000 | -0.976500 |
+| 2.8 | 2.033000 | -0.976500 |
+| 4 | 2.033000 | -0.976500 |
+| 5.5 | 2.033000 | -0.976500 |
+| 8 | 2.033000 | -0.976500 |
+| 12 | 2.033000 | -0.976500 |
+products.h2oPerKmolFuel is 2.033000 (SECTION 11).
+
 | the call | the engine says |
 | --- | --- |
-| dry O2 20.946 percent (all air) | REFUSED: Stack oxygen must lie between 0 and 20.95 percent. |
-| dry O2 21 percent | REFUSED: Stack oxygen must lie between 0 and 20.95 percent. |
-| dry O2 -1 percent | REFUSED: Stack oxygen must lie between 0 and 20.95 percent. |
+| dry O2 20.946 percent (all air) | REFUSED: Stack oxygen must be 0 percent or more and below 20.946 percent, the oxygen in dry air. A reading of 20.946 percent is air with no fuel burned. |
+| dry O2 21 percent | REFUSED: Stack oxygen must be 0 percent or more and below 20.946 percent, the oxygen in dry air. A reading of 20.946 percent is air with no fuel burned. |
+| dry O2 -1 percent | REFUSED: Stack oxygen must be 0 percent or more and below 20.946 percent, the oxygen in dry air. A reading of 20.946 percent is air with no fuel burned. |
 | dry O2 blank | REFUSED: A measured dry stack oxygen is required. |
 | no stoichiometry | REFUSED: Valid stoichiometry is required. |
 
 The relation is solved in closed form: with E the excess-air fraction, E times the oxygen demand over (the stoichiometric dry products plus E times the stoichiometric air) equals the measured fraction. The oracle finds the same E by bisection on the full dry flue gas (SECTION 26).
 
 # SECTION 13: STACK LOSS EFFICIENCY ON LHV AND ON HHV (owned by Professional m03 and m06)
+
+Engine functions behind this section: energyEfficiency.stackLossEfficiency.
 
 The Isiokpo heater (invented): stack 238 C, combustion air 28 C, radiation and convection loss 1.8 percent read off the heater vendor's chart (invented), unburned loss 0. Flue gas cp 1.1, vapour cp 1.95 and latent heat 2442 kJ/kg are the engine's typical values.
 
@@ -331,12 +407,21 @@ The moisture note on LHV, verbatim: "On LHV only the sensible heat of the water 
 The moisture note on HHV, verbatim: "On HHV the latent heat of the water made from hydrogen is a loss, because HHV counted it as available."
 The comparison warning on LHV, verbatim: "This efficiency is on LHV. An efficiency on the other basis is a different number for the same heater and the two must not be compared."
 
+In every row the four losses add to the total loss and the efficiency is 100 less the total loss (checked here on all four rows).
+The dry flue gas loss is the same kilojoules on both bases, divided by a different heating value: 9.9883 x 840.9925 / 930.6273 = 9.0262 (computed here), the HHV dry loss at 5.5 percent.
+
 | the call | the engine says |
 | --- | --- |
 | radiation loss blank | REFUSED: A radiation and convection loss is required and is not defaulted. It comes off a published chart against surface area and firing rate, which this module does not reproduce. |
 | HHV with no latent heat | REFUSED: On a higher-heating-value basis the moisture loss needs both the latent heat of water and the vapour specific heat. |
 | stack temperature blank | REFUSED: A stack temperature and a combustion air temperature are required. |
 | flue gas cp blank | REFUSED: A flue gas specific heat is required. |
+| basis "gross" | REFUSED: The heating value basis must be LHV or HHV. "gross" is neither, and an efficiency on an unknown basis cannot be compared with anything. |
+| basis blank | REFUSED: The heating value basis must be LHV or HHV. "" is neither, and an efficiency on an unknown basis cannot be compared with anything. |
+| radiation loss -3 | REFUSED: The radiation and convection loss cannot be negative: a loss below zero would add to the efficiency. |
+| unburned loss -1 | REFUSED: The unburned and other loss cannot be negative: a loss below zero would add to the efficiency. |
+
+The basis is read without regard to case or spaces and reported in capitals: " hhv " returns basis HHV and 77.9288 percent, the HHV row above.
 
 The radiation loss moves the efficiency one for one:
 | radiation and convection loss percent | efficiency percent, LHV, current |
@@ -346,6 +431,8 @@ The radiation loss moves the efficiency one for one:
 | 2.5 | 85.7029 |
 
 # SECTION 14: WHAT TUNING THE EXCESS AIR IS WORTH (owned by Professional m04 and m06)
+
+Engine functions behind this section: energyEfficiency.excessAirSaving, energyEfficiency.stackLossEfficiency.
 
 Current 5.5 percent O2, target 2.8 percent, a minimum safe stack oxygen of 2 percent declared after a combustion test (invented), and 410000 GJ of fuel a year on LHV (invented).
 
@@ -379,6 +466,8 @@ The saving at a sweep of target oxygen readings, every one at or above the decla
 
 # SECTION 15: THE ISIOKPO STEAM TRAP (owned by Professional m05 and m06)
 
+Engine functions behind this section: energyEfficiency.steamTrapLoss.
+
 One trap failed open (invented): orifice 4 mm, 9 bar a upstream, discharge coefficient 0.72, steam density 4.65 kg/m3, isentropic exponent 1.135 (dry saturated steam), 8400 hours in service a year, steam at 22 USD a tonne and 2650 MJ a tonne, a boiler efficiency of 0.83 and a SYNTHETIC fuel emission factor of 56.1 kg CO2e per GJ.
 
 | isentropic exponent | kg an hour | tonnes a year | annual cost USD | annual fuel GJ | annual tCO2e |
@@ -387,7 +476,7 @@ One trap failed open (invented): orifice 4 mm, 9 bar a upstream, discharge coeff
 | 1.3 | 44.4620 | 373.481 | 8216.58 | 1192.439 | 66.896 |
 
 At the superheated exponent the same trap loses 17.724 tonnes a year more, a ratio of 1.049821 to the saturated figure (computed here from the engine's figures).
-The choked-flow note, verbatim: "Choked flow: the loss depends on the upstream pressure and not on what is downstream, so a trap blowing into a condensate header loses much the same steam as one blowing to atmosphere."
+The choked-flow note, verbatim: "Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5774, so the loss depends on the upstream pressure alone."
 
 | the call | the engine says |
 | --- | --- |
@@ -401,7 +490,31 @@ The choked-flow note, verbatim: "Choked flow: the loss depends on the upstream p
 With the boiler efficiency blank the trap still loses 355.757 tonnes a year, and the fuel and carbon are none. fuelNote, verbatim: "Fuel needs a boiler efficiency in (0, 1]. It is not assumed to be 1." carbonNote, verbatim: "Carbon needs the steam energy content, the boiler efficiency and an emission factor. Without them it is absent rather than zero."
 Hours left out of the call take the stated default of 8760: 371.004 tonnes a year.
 
+As relations (computed here from the engine's figures): tonnes a year = kg an hour x hours / 1000 = 42.3520 x 8400 / 1000 = 355.757; annual fuel GJ = tonnes a year x MJ a tonne / 1000 / boiler efficiency = 355.757 x 2650 / 1000 / 0.83 = 1135.851; annual tCO2e = GJ x kg per GJ / 1000 = 63.721.
+
+CHOKED OR SUBSONIC. With no downstream pressure given the trap vents to ATMOSPHERE_BAR_A, 1.01325 bar a. The flow is choked while the downstream pressure over the upstream is at or below the critical ratio (2/(k+1))^(k/(k-1)).
+downstreamNote, verbatim: "No downstream pressure was given, so the trap is taken to vent to atmosphere (1.01325 bar a)."
+The choked-flow note at 1.3, verbatim: "Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5457, so the loss depends on the upstream pressure alone."
+
+| downstream bar a | pressure ratio | critical ratio at 1.135 | choked | kg an hour | tonnes a year |
+| --- | --- | --- | --- | --- | --- |
+| left out (1.01325) | 0.112583 | 0.577430 | true | 42.3520 | 355.757 |
+| 3 | 0.333333 | 0.577430 | true | 42.3520 | 355.757 |
+| 5 | 0.555556 | 0.577430 | true | 42.3520 | 355.757 |
+| 6 | 0.666667 | 0.577430 | false | 41.4785 | 348.419 |
+| 7 | 0.777778 | 0.577430 | false | 37.5765 | 315.643 |
+| 8 | 0.888889 | 0.577430 | false | 29.0510 | 244.029 |
+At or below the critical ratio the loss does not move with the downstream pressure; above it the downstream pressure lowers the loss.
+
+| the call | the engine says |
+| --- | --- |
+| downstream pressure blank | REFUSED: A downstream pressure is required when the box is there. Left out, a trap venting to atmosphere (1.01325 bar a) is the stated default. |
+| downstream pressure 9 bar a (equal to upstream) | REFUSED: The downstream pressure (9 bar a) is not below the upstream pressure (9 bar a), so no steam flows through the trap. |
+| downstream pressure -1 | REFUSED: The downstream pressure must be an absolute pressure of zero or more, in bar a. |
+
 # SECTION 16: CONDENSATE RETURN AND ITS FLOOR (owned by Professional m05)
+
+Engine functions behind this section: energyEfficiency.condensateReturnValue.
 
 Isiokpo raises condensate return (invented): 16 t of steam an hour, return from 0.35 to 0.65, condensate at 92 C against makeup at 27 C, boiler efficiency 0.83, fuel at 7.5 USD a GJ, raw water 0.55 and treatment 1.35 USD a tonne, 8400 hours, a SYNTHETIC factor of 56.1 kg CO2e per GJ.
 
@@ -416,15 +529,18 @@ Isiokpo raises condensate return (invented): 16 t of steam an hour, return from 
 | complete | true | false |
 | annualTonnesCo2e | 742.220 | 742.220 |
 
-valueNote with the treatment blank, verbatim: "A floor, not the value: Treatment not repeated not priced. The treatment cost is the one usually left out."
+valueNote with the treatment blank, verbatim: "A floor on the value: Treatment not repeated not priced. The treatment cost is the one usually left out."
 
 | the call | the engine says |
 | --- | --- |
 | boiler efficiency blank | REFUSED: A boiler efficiency in (0, 1] is required: the fuel saved depends on it and it is not assumed. |
 | hours a year blank | REFUSED: Hours in service a year are required, between 0 and 8784. A blank is not read as a full year. |
 | target return 1.2 | REFUSED: Return fractions must lie between 0 and 1. |
+| target return 0.25, below the current 0.35 | REFUSED: The target return (0.25) is below the current return (0.35). Returning less condensate is a cost, so there is nothing to value. |
 
 # SECTION 17: THE PINCH: MINIMUM UTILITIES BY THE PROBLEM TABLE (owned by Professional m05 and m06)
+
+Engine functions behind this section: energyEfficiency.pinchTargets, energyEfficiency.compositeCurve.
 
 Four Isiokpo process streams (invented). A stream is hot when its supply is above its target.
 
@@ -451,9 +567,29 @@ The problem table at 15 C. Hot streams are shifted down and cold streams up by h
 | 64.500 | 40.500 | 8.850000 | 4.350000 | 108.000 | 204.600 |
 | 40.500 | 39.500 | 5.700000 | 4.350000 | 1.350 | 205.950 |
 | 39.500 | 33.500 | 5.700000 | 0.000000 | 34.200 | 240.150 |
+The cascade rule (checked here on every row): each interval's surplus is (CP hot less CP cold) times its width; the heat flow below an interval is the heat flow above it plus its surplus, starting from the hot utility, 25.950 kW, at the top; the heat flow out of the bottom is the cold utility, 240.150 kW.
 
 The heat flow is zero at shifted 110.500 C, inside the range: the pinch, 118.000 C on the hot side and 103.000 C on the cold side.
 The engine's note, verbatim: "Heat carried across the pinch costs twice: one unit more hot utility and one unit more cold utility. That is what makes the pinch the constraint rather than a curiosity."
+
+The composite curves in real temperatures (compositeCurve; no oracle recomputes them, SECTION 26). Each point is a temperature and the enthalpy the side has given up or taken on from its coldest end:
+| hot composite C | enthalpy kW |
+| --- | --- |
+| 41.000 | 0.000 |
+| 48.000 | 39.900 |
+| 118.000 | 659.400 |
+| 163.000 | 801.150 |
+The hot composite ends at 801.150 kW, the total hot stream duty above.
+
+| cold composite C | enthalpy kW |
+| --- | --- |
+| 32.000 | 0.000 |
+| 57.000 | 108.750 |
+| 104.000 | 426.000 |
+| 141.000 | 586.950 |
+The cold composite ends at 586.950 kW, the total cold stream duty above.
+
+Heat recovered is the hot streams' duty less the cold utility: 801.150 less 240.150 is 561.000 kW. The balance check is (hot utility plus hot stream duty) less (cold utility plus cold stream duty): heat in less heat out, 0.000 when the targets close.
 
 A threshold problem: one hot stream from 200 C to 50 C at 10 kW/K and one cold stream from 30 C to 60 C at 1 kW/K, at 10 C:
 | hot utility kW | cold utility kW | pinch hot C | threshold problem |
@@ -475,6 +611,8 @@ The heat flow is zero only at the top of the cascade, where the hot utility is z
 | no stream changes temperature | REFUSED: No stream changes temperature, so there is nothing to target. |
 
 # SECTION 18: THE COST OF A TONNE ABATED (owned by Expert m01)
+
+Engine functions behind this section: carbonAbatement.abatementCost.
 
 Six Agbor measures (every figure invented, US dollars), annualised at a discount rate of 0.1 (a fraction). A negative cost per tonne means the measure pays for itself and abates carbon as a side effect.
 
@@ -510,6 +648,8 @@ The same measures at a rate of 0 (straight line), and with the whole capital set
 
 # SECTION 19: WHAT THE COST OF A TONNE REFUSES, AND WHAT IT NAMES (owned by Expert m01)
 
+Engine functions behind this section: carbonAbatement.abatementCost, carbonAbatement.abatementCurve.
+
 | the call | the engine says |
 | --- | --- |
 | abatement -500 t a year | REFUSED: Measure "Heat integration project" has a negative abatement. A measure that adds emissions is not an abatement, and its cost per tonne would change sign. |
@@ -517,13 +657,21 @@ The same measures at a rate of 0 (straight line), and with the whole capital set
 | capital cost blank | REFUSED: Measure "Heat integration project" has no capital cost. Enter 0 if it needs none: a blank is not read as free. |
 | discount rate blank | REFUSED: Measure "Heat integration project" has a capital cost, so it needs a discount rate. A blank is not read as 0, which would annualise straight-line and move the measure down the curve. |
 | discount rate 10 (a percentage typed) | REFUSED: The discount rate is a fraction greater than -1 and below 1 (0.1 for ten percent). |
-| life blank | REFUSED: Measure "Heat integration project" has a capital cost, so it needs a life to annualise it over. Comparing a one-off capital cost against a recurring saving makes every measure look expensive. |
+| life blank | REFUSED: Measure "Heat integration project" has a capital cost, so it needs a life to annualise it over. Set against one year's saving, a one-off capital cost overstates the cost per tonne of a capital measure. |
 
 Blank running figures are taken as 0 and NAMED. Heat integration project with the savings and the running cost blank: costPerTonne 106.3391 USD, assumedZero: annual savings, annual cost.
 A capital of 0 typed needs no life and no rate: Heat integration project with capital 0 answers costPerTonne -120.5882 USD and capitalRecoveryFactor 0.00000000.
 An abatement of 0 is accepted and has no cost per tonne: costPerTonne none, paysForItself false.
 
+A refused measure handed to the curve is named, off the curve and out of every total. The six Agbor measures with Heat integration project's capital cost blank: 5 steps, totalAbatementTonnes 12060.000.
+| refusedMeasures label | reason |
+| --- | --- |
+| Heat integration project | Measure "Heat integration project" has no capital cost. Enter 0 if it needs none: a blank is not read as free. |
+refusedNote, verbatim: "A refused measure is off the curve and out of every total until it is costed."
+
 # SECTION 20: THE AGBOR MARGINAL ABATEMENT COST CURVE (owned by Expert m02 and m06)
+
+Engine functions behind this section: carbonAbatement.abatementCurve.
 
 The six measures ranked cheapest first. Each step's width is its tonnes a year and its height its cost per tonne; the steps tile the axis from 0.
 
@@ -544,6 +692,7 @@ The six measures ranked cheapest first. Each step's width is its tonnes a year a
 | netAnnualCostOfAll USD | 290443.84 |
 | weightedAverageCostPerTonne USD | 18.7868 |
 | additive | false |
+| paysForItselfTonnes as a share of totalAbatementTonnes (computed here) | 0.343467 |
 ROUNDING NOTE: the six net annual costs as printed in SECTION 18 sum to 290443.85 USD; the engine sums the net annual costs it holds to four decimals, which gives 290443.84 USD.
 
 The weighted average is the net annual cost of all the measures over the total tonnes. The plain mean of the six costs per tonne (computed here) is -29.7913 USD, which weights a small measure the same as a large one.
@@ -556,6 +705,8 @@ Measures that act on the same source interact:
 The interaction note, verbatim: "Measures listed here act on the same source, so their abatements are NOT additive and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, which is why it is surfaced rather than solved."
 
 # SECTION 21: SOURCES, INTERACTIONS AND OVER-CLAIMS (owned by Expert m03)
+
+Engine functions behind this section: carbonAbatement.combustionCo2FromCarbon, carbonAbatement.atomBalanceLines, carbonAbatement.buildInventory, carbonAbatement.abatementCurve.
 
 The Agbor inventory the measures act on, on the course's set (IPCC AR6 GWP100, fossil methane). Each source's emission is its CO2 plus its methane in CO2e, as the Carbon Studio passes it to the curve.
 
@@ -577,13 +728,43 @@ The target is 30 percent of the inventory total: 16830.083 tCO2e (computed here,
 
 | curve | total abatement t | target t | meetsTarget | targetBasis | residual to target t | over-claims |
 | --- | --- | --- | --- | --- | --- | --- |
-| the six measures as costed | 15460.000 | 16830.083 | false | upper bound: measures interact | 1370.083 | none |
+| the six measures as costed | 15460.000 | 16830.083 | none | not assessed: no computed emission to check the claims on steam, power, vents | 1370.083 | none |
 | flare gas recovery claiming 9400 t | 18660.000 | 16830.083 | none | not assessed: claims exceed what a source emits | 0.000 | flare: claimed 9400.000 against 7562.133 emitted |
-| the same claim, the flare's emission not passed | 18660.000 | 16830.083 | true | upper bound: measures interact | 0.000 | none |
+| the same claim, the flare's emission not passed | 18660.000 | 16830.083 | none | not assessed: no computed emission to check the claims on steam, flare, power, vents | 0.000 | none |
+| the six measures, every source the inventory computes passed | 15460.000 | 16830.083 | none | not assessed: no computed emission to check the claims on steam | 1370.083 | none |
+| the same, with the trap repair checked against the heaters that raise the steam (a what-if) | 15460.000 | 16830.083 | false | upper bound: measures interact | 1370.083 | none |
 
-Where measures only interact, the verdict stands and is labelled an upper bound. Where a claim exceeds what its source emits, the curve adds up tonnes that do not exist, and the verdict is none. A source whose emission is not passed cannot be checked, and the claim against it stands unexamined.
+The unchecked claims of the first row, as the engine lists them:
+| measure | source | reason |
+| --- | --- | --- |
+| Repair failed steam traps | steam | no emission was given for the source |
+| Solar for purchased power | power | no emission was given for the source |
+| Vapour recovery on the storage tanks | vents | no emission was given for the source |
+uncheckedSources: steam, power, vents. With every source the inventory computes passed, uncheckedSources is steam: the Agbor inventory has no line of its own for steam.
+
+The sources added for the curve with every computed source passed and for the what-if, from the inventory table above:
+| source id | emission passed to the curve tCO2e |
+| --- | --- |
+| power | 10988.000 |
+| vents | 2622.400 |
+
+Flare gas recovery claiming 9400 t, costed: net annual cost 484221.51 USD, cost per tonne 51.5129 USD. The cost per tonne falls as the claimed tonnes rise; the over-claim makes the measure look cheaper as well as larger.
+
+Where measures only interact and every claim is checked, the verdict stands and is labelled an upper bound. Where a claim exceeds what its source emits, the curve adds up tonnes that do not exist, and the verdict is none. Where a claim acts on a source whose emission is not passed, it cannot be checked, the verdict is none and the basis names the source.
 
 # SECTION 22: THE TARGET AND THE PATH (owned by Expert m04 and m06)
+
+Engine functions behind this section: carbonAbatement.decarbonisationPath, carbonAbatement.buildInventory.
+
+The start years (inputs, invented):
+| measure | start year | tonnes abated a year |
+| --- | --- | --- |
+| Tune the fired heaters | 2027 | 760.000 |
+| Repair failed steam traps | 2027 | 1150.000 |
+| Heat integration project | 2029 | 3400.000 |
+| Flare gas recovery | 2030 | 6200.000 |
+| Solar for purchased power | 2028 | 2100.000 |
+| Vapour recovery on the storage tanks | 2031 | 1850.000 |
 
 The Agbor baseline is the inventory total, 56100.276 tCO2e. The target falls in a straight line from the baseline in 2026 to 30 percent below it in 2033, as the Carbon Studio draws it. Each measure counts in full from its start year.
 
@@ -598,6 +779,7 @@ The Agbor baseline is the inventory total, 56100.276 tCO2e. The target falls in 
 | 2032 | 15460.000 | 40640.276 | 41674.491 | 0.000 | Tune the fired heaters; Repair failed steam traps; Heat integration project; Flare gas recovery; Solar for purchased power; Vapour recovery on the storage tanks |
 | 2033 | 15460.000 | 40640.276 | 39270.193 | 1370.083 | Tune the fired heaters; Repair failed steam traps; Heat integration project; Flare gas recovery; Solar for purchased power; Vapour recovery on the storage tanks |
 
+In every row (checked here): emissions are the baseline less the tonnes abated, and the unabated gap is emissions less the target where that is positive, else 0.000.
 firstShortfallYear: 2027. finalGapTonnes: 1370.083.
 The gap note, verbatim: "The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan."
 
@@ -606,12 +788,27 @@ ON A PARTIAL INVENTORY. With the electricity factor blank, the inventory totals 
 | --- | --- | --- | --- |
 | the full inventory | 39270.193 | 1370.083 | 2027 |
 | the partial inventory | 31578.593 | 0.000 | 2027 |
+The full baseline less the partial is 10988.000 tCO2e (computed here), the purchased electricity line of SECTION 21: the partial inventory is the full one without it.
 
 A measure with no start year is named and left off the path: unscheduledMeasures Vapour recovery on the storage tanks (no start year); finalGapTonnes 3220.083.
+That gap less the scheduled plan's 1370.083 is 1850.000 t (computed here), the vapour recovery measure's tonnes a year. The path with it unscheduled, year by year:
+| year | abated t | emissions t | target t | unabated gap t |
+| --- | --- | --- | --- | --- |
+| 2026 | 0.000 | 56100.276 | 56100.276 | 0.000 |
+| 2027 | 1910.000 | 54190.276 | 53695.978 | 494.298 |
+| 2028 | 4010.000 | 52090.276 | 51291.681 | 798.595 |
+| 2029 | 7410.000 | 48690.276 | 48887.383 | 0.000 |
+| 2030 | 13610.000 | 42490.276 | 46483.086 | 0.000 |
+| 2031 | 13610.000 | 42490.276 | 44078.788 | 0.000 |
+| 2032 | 13610.000 | 42490.276 | 41674.491 | 815.785 |
+| 2033 | 13610.000 | 42490.276 | 39270.193 | 3220.083 |
+The same six measures against a baseline of 12000 t (a probe, invented): REFUSED: In 2030 the scheduled measures abate 13610 t against a baseline of 12000 t. Emissions cannot fall below zero, so check the measures for double counting or a source outside the baseline. overAbatedYear 2030.
 REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero.
 REFUSED: A baseline and a valid year range are required.
 
 # SECTION 23: ONE SAVING IN MONEY AND IN CARBON (owned by Expert m05)
+
+Engine functions behind this section: energyEfficiency.priceSaving, carbonAbatement.abatementCost.
 
 An Agbor saving (invented): 11800 GJ a year, fuel at 7.5 USD a GJ, a SYNTHETIC factor of 56.1 kg CO2e per GJ, an implementation cost of 210000 USD over 8 years at a rate of 0.1, all three quantities declared on LHV.
 
@@ -623,6 +820,8 @@ An Agbor saving (invented): 11800 GJ a year, fuel at 7.5 USD a GJ, a SYNTHETIC f
 | costPerTonneCo2e USD | -74.2270 |
 | basis | LHV |
 
+The simple payback is the implementation cost over one year's value, 210000 / 88500.00 = 2.372881 years (computed here): undiscounted, with no life and no rate in it.
+priceSaving passes its life (8 years) and rate (0.1) to abatementCost. The same call made directly: capitalRecoveryFactor 0.18744402, annualisedCapital 39363.24 USD, netAnnualCost -49136.76 USD, costPerTonne -74.2270 USD, paysForItself true.
 The cost per tonne is carbonAbatement.abatementCost called with the implementation cost as capital, the annual value as the saving and the annual tonnes as the abatement. Setting the whole implementation cost against one year's value and one year's tonnes (computed here) gives 183.5403 USD a tonne.
 
 | the call | what comes back |
@@ -634,6 +833,8 @@ The cost per tonne is carbonAbatement.abatementCost called with the implementati
 | saving blank | REFUSED: An energy saving is required. |
 
 # SECTION 24: ENERGY INTENSITY AND THE PEER (owned by Expert m05)
+
+Engine functions behind this section: energyEfficiency.energyIntensity.
 
 Agbor's energy (invented): Fuel gas 740000 GJ, Purchased power 96000 GJ, Imported steam 41000 GJ; 1240000 tonnes of throughput; a peer intensity of 680 MJ a tonne that Agbor has the right to use (invented).
 
@@ -648,11 +849,12 @@ Agbor's energy (invented): Fuel gas 740000 GJ, Purchased power 96000 GJ, Importe
 | all three streams | true | 877000.000 | 707.2581 | 1.040085 | 27.2581 |
 | purchased power blank | false | 781000.000 | 629.8387 | none | none |
 
+The intensity is total GJ x 1000 over the throughput in tonnes: 877000.000 x 1000 / 1240000 = 707.2581 MJ a tonne; versus peer is the intensity over the peer, 1.040085; the gap is the intensity less the peer, 27.2581 MJ a tonne (each computed here and equal to the engine's figure).
 peerNote with a stream missing, verbatim: "Not compared with the peer: a stream is missing, so the intensity is a floor and would flatter the plant."
 The disclaimer, verbatim: "This is the plant's own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use."
 REFUSED: A throughput is required.
 
-# SECTION 25: WHAT IS HELD, AND THE MD5-0 RULES IN FORCE (owned by Associate m06 and Expert m06)
+# SECTION 25: WHAT IS HELD, AND THE MD5-0 AND MD45-1 RULES IN FORCE (owned by Associate m06 and Expert m06)
 
 HELD, taught as stated limits and never graded (FINDINGS-carbon):
 | item | the limit |
@@ -682,14 +884,30 @@ THE RULES MD5-0 PUT IN FORCE, each as the engine answers now, with a figure from
 | Air's argon is carried at ATMOSPHERIC_N2_MOLAR_MASS, and the flue gas mass balance closes | SECTION 11 |
 | A saving, its price and its factor declared on different heating value bases are refused | SECTION 23 |
 
+THE RULES MD45-1 PUT IN FORCE (engines PR #228), each as the engine answers now:
+| rule | where it prints |
+| --- | --- |
+| A refused combustion becomes one blocked line through atomBalanceLines, and the inventory is not reportable while it stands; a source excluded on purpose adds no line | SECTIONS 5 and 9 |
+| A negative activity or a negative factor blocks its line | SECTION 9 |
+| A GWP of zero or below is refused and the set is not declared | SECTION 2 |
+| A curve verdict is none while any claim acts on a source with no computed emission passed, and the basis names the sources | SECTION 21 |
+| A refused measure is named in refusedMeasures and kept off the curve | SECTION 19 |
+| A year whose scheduled measures abate more than the baseline is refused | SECTION 22 |
+| A heating value basis other than LHV or HHV is refused; the basis is read without regard to case | SECTION 13 |
+| A negative radiation or unburned loss is refused | SECTION 13 |
+| The stack oxygen refusal states the bound it applies, 20.946 percent | SECTION 12 |
+| A trap is choked only at or below the critical pressure ratio; the downstream pressure left out is one standard atmosphere | SECTION 15 |
+| A target condensate return below the current one is refused | SECTION 16 |
+| Every fuel and flue gas molar mass is built from ATOMIC_WEIGHT, and CO2 is one number in both engines | SECTION 1 |
+
 # SECTION 26: WHAT THE ORACLES CHECK (owned by Expert m06)
 
 Two independent oracles in the engines repository (tools/validation/downstream) recompute these modules by other routes, and their goldens are asserted by the engine test suites:
 | oracle | what it computes, and by which route |
 | --- | --- |
 | oracle_carbonabatement.py | combustion by MASS in exact rationals (kg of carbon times the CO2/C and CH4/C mass ratios, molar masses built from atomic weights); the inventory as a ledger; the cost per tonne LEVELISED from a year-by-year present value ledger where the engine uses a capital recovery factor; the curve by explicit rank; the path as a year ledger |
-| oracle_energyefficiency.py | combustion as a species ledger whose mass balance must close; excess air by BISECTION where the engine solves a closed form; efficiency as a loss ledger; the tuning saving as a duty ledger; the steam trap as an ISENTROPIC NOZZLE where the engine uses the choked-flux formula; the pinch by the LARGEST HEAT DEFICIT with no cascade; a levelised cost per tonne |
+| oracle_energyefficiency.py | combustion as a species ledger whose mass balance must close; excess air by BISECTION where the engine solves a closed form; efficiency as a loss ledger; the tuning saving as a duty ledger (duty_ledger, exported since MD45-1); the steam trap as an ISENTROPIC NOZZLE with its throat at the larger of the downstream and critical pressures, where the engine uses the choked and subsonic flux formulas; the pinch by the LARGEST HEAT DEFICIT with no cascade; a levelised cost per tonne |
 
 Not recomputed by either oracle: carbonIntensity, the curve's residual to target and paysForItselfTonnes, compositeCurve and the simple payback. They are taught from the engine and never graded.
 
-This digest: 64 engine answers asserted and 49 refusals asserted before printing.
+This digest: 73 engine answers asserted and 60 refusals asserted before printing.

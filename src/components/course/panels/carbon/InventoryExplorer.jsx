@@ -252,7 +252,7 @@ export const InventoryMode = ({
         atom-balance lines carry a factor of 1 whose source is conservation of mass; the vented methane and purchased
         electricity lines carry registered factors (invented; the electricity factor is SYNTHETIC).
       </Lead>
-      {!usable(inv.flare) && <Refused label="the flare, so it contributes no line" reason={inv.flare && inv.flare.error} />}
+      {!usable(inv.flare) && <Refused label="the flare, so it stands in the inventory as one blocked line" reason={inv.flare && inv.flare.error} />}
       <Tbl
         head={['line', 'scope', 'gas', 'activity', 'unit', 'factor', 'factor unit', 'GWP', 'tonnes of gas', 'tCO2e', 'source', 'version', 'provenance complete', 'blocked by']}
         rows={(I.lines || []).map(lineRow)}

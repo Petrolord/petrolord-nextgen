@@ -242,7 +242,7 @@ graded output is recomputed by the vendored ORACLES on the capstone records
 | the flare methane line, Scope 1, total | oracle_carbonabatement.inventory (a ledger) |
 | excessAirPercent | oracle_energyefficiency.excess_by_bisection |
 | efficiencyPercent (LHV) | oracle_energyefficiency.efficiency (species ledger, argon at atmospheric N2) |
-| annualEnergySavedGJ | the duty ledger TRANSCRIBED from oracle_energyefficiency.main() on its efficiency() |
+| annualEnergySavedGJ | oracle_energyefficiency.duty_ledger on its efficiency() (exported in MD45-1; the foundation transcribed it from main()) |
 | tonnesPerYear (trap) | oracle_energyefficiency.trap_nozzle (isentropic nozzle) |
 | hotUtilityKW, coldUtilityKW | oracle_energyefficiency.pinch_by_deficit (no cascade) |
 | costPerTonne, netAnnualCost | oracle_carbonabatement.levelised (PV ledger) |
@@ -270,3 +270,31 @@ IRR, Monte Carlo or a decision tree, or a compressor.
 
 Not re-vendored. The worktree sits on the lead's shared vendor commit fe001b52
 (engines f0aef14, `downstream` removed from excludedDomains).
+
+## 8. The extension round (2026-09-19, engines df31f53)
+
+The lead repaired F1 to F7 and the writers' F8 (a refused combustion left no
+trace in the inventory) and F9 (the stack oxygen refusal text) in engines
+#228 (MD45-1, df31f53), and re-vendored in NextGen (4b848680). Rebuilt on it,
+**all eighteen graded values are byte-identical** (fields.json, capstone.json
+and the prompts). None of the moved molar masses reaches a graded path: the
+heater and flare CO2 use MW_CO2, which did not move. The IGRITA fuel's propane
+(44.096 to 44.097) and CO2 (44.010 to 44.009) move only the fuel molar mass and
+the air per kg of fuel, which are not graded. The efficiency weighs products
+at PRODUCT_MOLAR_MASS, the same values as before. The IGRITA trap is choked at
+8.213 bar a against the default atmosphere.
+
+The digest grew from 695 to 913 lines and keeps its 26 sections. Every line
+that changed is in REVISE.md: the engine strings reworded by the copy rule
+sweep, the FUEL_REFERENCE molar masses, the mass-balance residual, the stack
+oxygen refusal, the choked note, the life refusal, the SECTION 9 first steps
+(the refused flare is now a blocked line), and the SECTION 21 verdicts. Rows 1
+and 3 are now "not assessed", and a row with every computed source passed and
+a what-if row show when the verdict returns. The writers' gaps in
+DIGEST-GAPS.md are closed additively, except P5 (a flue gas with carbon
+monoxide), which the engine does not model.
+
+The page layer's F1 behaviour is now the engine's: at the Carbon Studio's
+defaults the curve reads "not assessed" on steam and flare (FINDINGS-carbon
+MD45-1). oracle_check.py now calls the exported `duty_ledger()`, so every
+graded field goes through an oracle function. Nothing is transcribed.

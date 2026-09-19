@@ -99,10 +99,10 @@ Run it over your lessons as well as the digest.
    money in SECTIONS 15, 16, 18 to 23 is US dollars.
 5. **Precision is the digest's.** Quote a figure to the decimals it prints (the
    header states them).
-6. **THREE ENGINE STRINGS BREAK THE COPY RULE AND ARE QUOTED ANYWAY**: the atom
+6. **NO ENGINE STRING IS EXEMPT FROM THE COPY RULE.** Since MD45-1 the atom
    balance method (SECTION 3), the inventory disclaimer (SECTION 7) and the
-   condensate floor note (SECTION 16). You may quote them inside quotation
-   marks as the engine's words. You may not write that shape yourself.
+   condensate floor note (SECTION 16) are reworded in the engine and carry no
+   contrastive; quote them as the digest prints them now.
 7. **Held items are taught as limits, never as figures to compute with.**
    SECTION 25 lists H1 to H4.
 8. **Not every engine output is oracle-checked.** SECTION 26 names what no

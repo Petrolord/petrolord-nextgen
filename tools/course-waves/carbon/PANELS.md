@@ -119,5 +119,5 @@ the detector fires. Match whole tokens, never substrings.
 ## Copy
 
 No em dashes, no en dashes, no "X, not Y" contrastive in any label, tooltip or
-caption. The three engine strings LESSON_TASK.md names may be shown verbatim as
-the engine's words.
+caption. Since MD45-1 no engine string needs an exemption: the engine's
+sentences carry no contrastive and are shown verbatim.

@@ -8,7 +8,7 @@
 // saving, trap loss, condensate value, pinch target, cost per tonne, curve,
 // verdict, path, priced saving and energy intensity below is a return value of
 // engines/downstream/carbonAbatement.js or engines/downstream/energyEfficiency.js
-// as vendored at petrolord-engines f0aef14. This is the ONLY file in the course
+// as vendored at petrolord-engines df31f53. This is the ONLY file in the course
 // that imports either module, and it restates none of their formulas.
 //
 // WHERE A FIGURE IS ARITHMETIC ON ENGINE RETURNS, the digest prints it as
@@ -290,17 +290,13 @@ export const gwpSets = () => {
 // factor of one, exactly as carbon_dump.mjs (and the Carbon Studio) builds them.
 // ---------------------------------------------------------------------------
 
-const atomFactor = (gas) => CA.makeFactor({
-  label: `${gas} from the atom balance`, value: 1, unit: `t${gas}/t${gas}`, gas,
-  source: 'Atom balance (conservation of mass)', version: 'not applicable',
-});
-/** The page's own way of turning an atom-balance result into lines: skipped when absent or zero. */
-export const atomLines = (label, r, g) => {
-  const rows = [];
-  if (r && !r.error && r.co2Tonnes) rows.push(CA.emissionLine({ label: `${label} (CO2)`, scope: 1, activity: r.co2Tonnes, activityUnit: 't CO2', factor: atomFactor('CO2'), gwpSet: g }));
-  if (r && !r.error && r.ch4Tonnes) rows.push(CA.emissionLine({ label: `${label} (unburned CH4)`, scope: 1, activity: r.ch4Tonnes, activityUnit: 't CH4', factor: atomFactor('CH4'), gwpSet: g }));
-  return rows;
-};
+/**
+ * An atom-balance result as inventory lines, by the engine's own
+ * atomBalanceLines (MD45-1), exactly as carbon_dump.mjs builds them: its CO2
+ * and escaped methane through a factor of one, or ONE blocked line carrying
+ * the refusal, so a refused flare keeps the inventory not reportable.
+ */
+export const atomLines = (label, r, g) => CA.atomBalanceLines({ label, combustion: r, gwpSet: g });
 const lineOf = (spec, g, over = {}) => CA.emissionLine({
   label: spec.label, scope: spec.scope, activity: spec.activity, activityUnit: spec.activityUnit,
   factor: CA.makeFactor({ ...spec.factor, ...(over.factor || {}) }), gwpSet: g, ...(over.line || {}),
@@ -406,9 +402,9 @@ export const flareSweep = (setKey = COURSE_SET, inputs = {}) => {
 
 /**
  * The Igbogene inventory on a set, from the heaters and the flare as the caller
- * sets them. A refused atom balance contributes no line (the dump's helper), and
- * the refusal is returned beside the inventory; any line the engine blocks is in
- * the inventory's own blockedLines.
+ * sets them. A refused atom balance is one blocked line (atomBalanceLines, as
+ * the dump builds it), and the refusal is also returned beside the inventory;
+ * every line the engine blocks is in the inventory's own blockedLines.
  */
 export const inventory = ({ setKey = COURSE_SET, heaterInputs = {}, flareInputs = {} } = {}) => {
   const g = gwpSet(setKey);

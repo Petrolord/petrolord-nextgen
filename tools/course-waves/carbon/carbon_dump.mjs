@@ -105,7 +105,7 @@ const structureKeys = (() => {
 })();
 if (structureKeys.size !== 18) throw new Error(`SECTION OWNERS: structure.py yielded ${structureKeys.size} module keys, expected 18`);
 let sectionNo = 0;
-const section = (title) => {
+const section = (title, fns = []) => {
   sectionNo += 1;
   const own = SECTION_OWNERS[sectionNo];
   if (!own) throw new Error(`SECTION OWNERS: section ${sectionNo} has no owner row`);
@@ -117,6 +117,11 @@ const section = (title) => {
   out('');
   out(`# SECTION ${sectionNo}: ${title} (owned by ${owners})`);
   out('');
+  for (const fn of fns) {
+    const [mod, name] = fn.split('.');
+    if (typeof { carbonAbatement: CA, energyEfficiency: EE }[mod]?.[name] !== 'function') throw new Error(`FUNCTION LABEL: ${fn} is not an exported engine function`);
+  }
+  if (fns.length) { out(`Engine functions behind this section: ${fns.join(', ')}.`); out(''); }
 };
 
 /* ------------------------------------------------------------------ *
@@ -129,13 +134,9 @@ const atomFactor = (gas) => CA.makeFactor({
   source: 'Atom balance (conservation of mass)', version: 'not applicable',
 });
 const regFactor = (fc) => CA.makeFactor(fc);
-/** The page's own way of turning an atom-balance result into lines: skipped when absent or zero. */
-const atomLines = (label, r, gwpSet) => {
-  const rows = [];
-  if (r && !r.error && r.co2Tonnes) rows.push(CA.emissionLine({ label: `${label} (CO2)`, scope: 1, activity: r.co2Tonnes, activityUnit: 't CO2', factor: atomFactor('CO2'), gwpSet }));
-  if (r && !r.error && r.ch4Tonnes) rows.push(CA.emissionLine({ label: `${label} (unburned CH4)`, scope: 1, activity: r.ch4Tonnes, activityUnit: 't CH4', factor: atomFactor('CH4'), gwpSet }));
-  return rows;
-};
+// Since MD45-1 the engine builds these lines itself: its CO2 and escaped
+// methane through a factor of one, or ONE blocked line carrying a refusal.
+const atomLines = (label, r, gwpSet) => CA.atomBalanceLines({ label, combustion: r, gwpSet });
 const lineOf = (spec, gwpSet, over = {}) => CA.emissionLine({
   label: spec.label, scope: spec.scope, activity: spec.activity, activityUnit: spec.activityUnit,
   factor: regFactor({ ...spec.factor, ...(over.factor || {}) }), gwpSet, ...(over.line || {}),
@@ -204,16 +205,16 @@ const agPath = pathFor(agInv.totalTonnes);
 
 /* ================================================================== */
 out('# carbon: Carbon & Energy Efficiency. Teaching digest.');
-out('# PRECISION: tonnes (of CO2, of methane, of CO2e, of steam) print to three decimals and kilomoles to three; percents (efficiency, excess air, losses) to four; fractions and shares to six; gigajoules to three; kilograms an hour and kilograms per kilomole to four; kilowatts and temperatures to three; money in US dollars to two decimals and US dollars per tonne to four; capital recovery factors to eight; megajoules per tonne to four; carbon intensities to eight. Counts and years are whole numbers.');
+out('# PRECISION: tonnes (of CO2, of methane, of CO2e, of steam) print to three decimals and kilomoles a year to three; kilomoles per kilomole of fuel to six; percents (efficiency, excess air, losses) to four; fractions and shares to six, and a fuel saving fraction to ten; gigajoules to three; kilograms an hour to four; molar masses to three decimals, except ATMOSPHERIC_N2_MOLAR_MASS and a fuel mixture molar mass, which print to four, as do kilograms per kilomole of fuel; kilowatts and temperatures to three; money in US dollars to two decimals and US dollars per tonne to four; capital recovery factors to eight; megajoules per tonne to four; carbon intensities to eight. Counts and years are whole numbers.');
 out('# NO CLOCK: neither engine reads a date or a random number, so no figure below depends on when or where the digest was built. Every year below is an input.');
-out('# ENGINES: engines/downstream/carbonAbatement.js and engines/downstream/energyEfficiency.js at petrolord-engines f0aef14 (MD5-0 repaired both, engines PR #226), vendored in NextGen under packages/engines.');
+out('# ENGINES: engines/downstream/carbonAbatement.js and engines/downstream/energyEfficiency.js at petrolord-engines df31f53 (MD5-0, engines PR #226, and MD45-1, engines PR #228, repaired both), vendored in NextGen under packages/engines.');
 out('# CASES: IGBOGENE (a Niger Delta flow station and gas plant: its fired heaters, its flare, its vented methane and its purchased power, rolled into one inventory), ISIOKPO (a gas plant: one fired heater, a failed steam trap, its condensate system and four process streams), AGBOR (a gas processing and distribution complex: six abatement measures, a curve, a target, a path, one priced saving and the plant energy intensity). All three are invented records.');
 out(`# GWP: every global warming potential below is an INPUT the engine ships none of. The values are IPCC ${F.GWP_HORIZON} figures as tabulated in ${F.GWP_SOURCE}. The course computes its inventories on the set "${F.GWP_SETS[F.COURSE_SET].label}" (CH4 ${F.GWP_SETS[F.COURSE_SET].values.CH4}, N2O ${F.GWP_SETS[F.COURSE_SET].values.N2O}) and prints the other three beside it.`);
 out('# RATES: every cost, saving, price, emission factor, flow, temperature and destruction efficiency below is INVENTED for this course and is not a published figure. The electricity factor and the fuel emission factor are SYNTHETIC.');
 out('# Built by build_digest.sh from carbon_dump.mjs and carbon_fields.mjs. Never edited by hand.');
 
 /* ------------------------------------------------------------------ */
-section('WHAT THE TWO APPS COMPUTE, AND WHAT THE ENGINES SHIP');
+section('WHAT THE TWO APPS COMPUTE, AND WHAT THE ENGINES SHIP', ['carbonAbatement.makeGwpSet', 'carbonAbatement.makeFactor']);
 out('Each module exports its rules as functions and its fixed data as constants. The counts below are measured from the modules themselves.');
 out('');
 head('module', 'exported functions', 'exported constants', 'names');
@@ -232,14 +233,25 @@ out(`carbonAbatement.MW_CH4: ${CA.MW_CH4}`);
 out(`energyEfficiency.O2_MOLE_FRACTION_DRY_AIR: ${EE.O2_MOLE_FRACTION_DRY_AIR}`);
 out(`energyEfficiency.AIR_MOLAR_MASS: ${EE.AIR_MOLAR_MASS}`);
 out(`energyEfficiency.O2_MOLAR_MASS: ${EE.O2_MOLAR_MASS}`);
-out(`energyEfficiency.ATMOSPHERIC_N2_MOLAR_MASS: ${kg(EE.ATMOSPHERIC_N2_MOLAR_MASS)} (printed to four decimals; derived by the engine from the two air constants above)`);
+out(`energyEfficiency.ATMOSPHERIC_N2_MOLAR_MASS: ${kg(EE.ATMOSPHERIC_N2_MOLAR_MASS)} (printed to four decimals; derived by the engine from the three air constants above: (AIR_MOLAR_MASS - O2_MOLE_FRACTION_DRY_AIR x O2_MOLAR_MASS) / (1 - O2_MOLE_FRACTION_DRY_AIR))`);
 out(`energyEfficiency.HEATING_VALUE_BASIS: ${Object.values(EE.HEATING_VALUE_BASIS).join(', ')}`);
+out(`energyEfficiency.ATOMIC_WEIGHT: ${Object.entries(EE.ATOMIC_WEIGHT).map(([k, v]) => `${k} ${v}`).join(', ')} (the IUPAC conventional atomic weights the module's fuel and flue gas molar masses are built from)`);
+out(`energyEfficiency.PRODUCT_MOLAR_MASS: ${Object.entries(EE.PRODUCT_MOLAR_MASS).map(([k, v]) => `${k} ${v}`).join(', ')} (the flue gas products, kg/kmol)`);
+out(`energyEfficiency.ATMOSPHERE_BAR_A: ${EE.ATMOSPHERE_BAR_A} (one standard atmosphere, the downstream pressure of a trap when none is given)`);
 out('');
 out('energyEfficiency.FUEL_REFERENCE, atom counts and typical heating values in MJ per kmol:');
 head('code', 'label', 'C', 'H', 'O', 'S', 'N', 'molar mass kg/kmol', 'typical LHV MJ/kmol', 'typical HHV MJ/kmol', 'inert');
 EE.FUEL_REFERENCE.forEach((r) => row(r.code, r.label, r.c, r.h, r.o, r.s, r.n, r.molarMassKgKmol.toFixed(3), r.typicalLhvMJKmol, r.typicalHhvMJKmol, r.inert ? 'yes' : 'no'));
 out('');
 out(`energyEfficiency.FUEL_REFERENCE_NOTE: "${EE.FUEL_REFERENCE_NOTE}"`);
+{
+  const co2Ref = EE.FUEL_REFERENCE.find((r) => r.code === 'CO2').molarMassKgKmol;
+  const sameCo2 = co2Ref === CA.MW_CO2 && EE.PRODUCT_MOLAR_MASS.CO2 === CA.MW_CO2;
+  if (!sameCo2) throw new Error('MOLAR MASS CLAIM: the three CO2 molar masses differ');
+  const built = EE.FUEL_REFERENCE.filter((r) => r.code !== 'CO2').every((r) => Math.abs(r.molarMassKgKmol - Math.round((r.c * EE.ATOMIC_WEIGHT.C + r.h * EE.ATOMIC_WEIGHT.H + r.o * EE.ATOMIC_WEIGHT.O + r.s * EE.ATOMIC_WEIGHT.S + r.n * EE.ATOMIC_WEIGHT.N) * 1000) / 1000) < 1e-9);
+  if (!built) throw new Error('MOLAR MASS CLAIM: a FUEL_REFERENCE molar mass is not built from ATOMIC_WEIGHT');
+  out(`ONE SOURCE OF MOLAR MASSES. Every FUEL_REFERENCE molar mass above equals its atom counts weighted by ATOMIC_WEIGHT, rounded to three decimals (checked here row by row), and the CO2 row, PRODUCT_MOLAR_MASS.CO2 and carbonAbatement.MW_CO2 are one number, ${CA.MW_CO2}: an inert CO2 in the fuel weighs the same going in as it does in the flue gas.`);
+}
 out('');
 out('energyEfficiency.PROPERTY_REFERENCE, typical values a stack loss needs, each labelled as typical:');
 head('property', 'typical', 'range', 'note');
@@ -258,7 +270,7 @@ out('');
 }
 
 /* ------------------------------------------------------------------ */
-section('MISSING STAYS MISSING: WHAT THE CARBON ENGINE REFUSES');
+section('MISSING STAYS MISSING: WHAT THE CARBON ENGINE REFUSES', ['carbonAbatement.combustionCo2FromCarbon', 'carbonAbatement.emissionLine', 'carbonAbatement.carbonIntensity', 'carbonAbatement.makeGwpSet']);
 out('Each row is one call to the engine. A blank box reaches the engine as an empty string or null; an argument left out of the call takes the stated default.');
 out('');
 head('function', 'the call', 'the engine says');
@@ -281,6 +293,11 @@ for (const [fn, what, args] of refRows) row(fn, what, refused(CA.combustionCo2Fr
   ci({ denominatorValue: 3650000, denominatorUnit: 'boe' }, 'no boundary named');
   ci({ denominatorValue: 0, denominatorUnit: 'boe', boundaryLabel: 'site' }, 'a denominator of 0');
   ci({ denominatorValue: '', denominatorUnit: 'boe', boundaryLabel: 'site' }, 'a blank denominator');
+  for (const [what, v] of [['a methane GWP of -5', -5], ['a methane GWP of 0', 0]]) {
+    const r = CA.makeGwpSet({ label: 'IPCC AR6 GWP100', values: { CH4: v } });
+    if (r.declared) throw new Error('GWP refusal: a non-positive set was declared');
+    row('makeGwpSet', `${what} (the set then reads declared ${yn(r.declared)})`, refused(r, what));
+  }
 }
 out('');
 {
@@ -289,7 +306,7 @@ out('');
 }
 
 /* ------------------------------------------------------------------ */
-section('CARBON IN, CO2 OUT: THE ATOM BALANCE AND ITS MOLAR MASSES');
+section('CARBON IN, CO2 OUT: THE ATOM BALANCE AND ITS MOLAR MASSES', ['carbonAbatement.combustionCo2FromCarbon']);
 {
   const one = CA.combustionCo2FromCarbon({ fuelKmolPerYear: 1000, carbonPerKmolFuel: 1, destructionEfficiencyFraction: 1 });
   out(`The engine's molar masses come from the IUPAC conventional atomic weights: MW_C ${CA.MW_C}, MW_CO2 ${CA.MW_CO2} (${CA.MW_C} plus two oxygens at ${((CA.MW_CO2 - CA.MW_C) / 2).toFixed(3)}), MW_CH4 ${CA.MW_CH4} (${CA.MW_C} plus four hydrogens at ${((CA.MW_CH4 - CA.MW_C) / 4).toFixed(3)}). The oxygen and hydrogen weights are read back from the engine's own molar masses (computed here).`);
@@ -308,7 +325,7 @@ section('CARBON IN, CO2 OUT: THE ATOM BALANCE AND ITS MOLAR MASSES');
 }
 
 /* ------------------------------------------------------------------ */
-section('THE IGBOGENE FIRED HEATERS');
+section('THE IGBOGENE FIRED HEATERS', ['carbonAbatement.combustionCo2FromCarbon']);
 {
   const h = F.IGBOGENE_HEATERS;
   out(`Inputs (invented): fuel ${h.fuelKmolPerYear} kmol a year, ${h.carbonPerKmolFuel} kmol of carbon per kmol of fuel, destruction efficiency ${h.destructionEfficiencyFraction} (complete combustion, typed).`);
@@ -335,7 +352,7 @@ section('THE IGBOGENE FIRED HEATERS');
 }
 
 /* ------------------------------------------------------------------ */
-section('THE IGBOGENE FLARE AS AN INVENTORY LINE');
+section('THE IGBOGENE FLARE AS AN INVENTORY LINE', ['carbonAbatement.combustionCo2FromCarbon', 'carbonAbatement.atomBalanceLines', 'carbonAbatement.emissionLine']);
 {
   const fl = F.IGBOGENE_FLARE;
   out(`Inputs (invented): gas to the flare ${fl.fuelKmolPerYear} kmol a year, ${fl.carbonPerKmolFuel} kmol of carbon per kmol. The operator's flare study states a destruction efficiency of ${F.IGBOGENE_FLARE_DE} (invented). The methane line is converted at the course's GWP set (${G.label}, CH4 ${G.values.CH4}).`);
@@ -350,6 +367,12 @@ section('THE IGBOGENE FLARE AS AN INVENTORY LINE');
   }
   out('');
   out(`Blank: ${refused(CA.combustionCo2FromCarbon({ ...fl, destructionEfficiencyFraction: '' }), 'flare blank')}`);
+  out(`carbonKmolPerYear of the flare at every efficiency above: ${km(answered(igFlare, 'carbonKmolPerYear', 'flare carbon'))}. The efficiency splits that carbon between CO2 and methane; it does not change it.`);
+  {
+    const blankLines = atomLines('Flaring', CA.combustionCo2FromCarbon({ ...fl, destructionEfficiencyFraction: '' }), G);
+    if (blankLines.length !== 1 || !blankLines[0].error) throw new Error('F8 CLAIM: a refused flare is not one blocked line');
+    out(`Handed to atomBalanceLines, the refused flare becomes ${blankLines.length} line labelled "${blankLines[0].label}" that carries the refusal, so an inventory built with it is blocked on the flare (SECTION 9).`);
+  }
   out('');
   const lines = atomLines('Flaring', igFlare, G);
   const ch4Line = lines.find((l) => l.gas === 'CH4');
@@ -365,7 +388,7 @@ section('THE IGBOGENE FLARE AS AN INVENTORY LINE');
 }
 
 /* ------------------------------------------------------------------ */
-section('GLOBAL WARMING POTENTIALS: A SET CARRIES ITS REPORT');
+section('GLOBAL WARMING POTENTIALS: A SET CARRIES ITS REPORT', ['carbonAbatement.makeGwpSet']);
 {
   out(`The engine ships no GWP. makeGwpSet takes a label and values from the caller. The four sets below are IPCC ${F.GWP_HORIZON} values as tabulated in ${F.GWP_SOURCE}.`);
   out('');
@@ -390,7 +413,7 @@ section('GLOBAL WARMING POTENTIALS: A SET CARRIES ITS REPORT');
 }
 
 /* ------------------------------------------------------------------ */
-section('THE IGBOGENE INVENTORY');
+section('THE IGBOGENE INVENTORY', ['carbonAbatement.atomBalanceLines', 'carbonAbatement.emissionLine', 'carbonAbatement.makeFactor', 'carbonAbatement.buildInventory']);
 {
   out(`Four sources on the course's set (${G.label}). The atom-balance lines carry a factor of 1 whose source is conservation of mass, as the Carbon Studio builds them. The vented methane line and the purchased electricity line carry registered factors (invented; the electricity factor is SYNTHETIC).`);
   out('');
@@ -402,6 +425,14 @@ section('THE IGBOGENE INVENTORY');
   head('total', 'tCO2e');
   for (const s of igInv.byScope) row(s.label, t3(s.tCo2e));
   row('Total, Scope 1 and Scope 2', t3(igInv.totalTonnes));
+  out('');
+  {
+    const bad = igInv.lines.filter((l) => Math.abs(l.tCo2e - l.activity * l.factor * l.gwp) > 1e-6);
+    const s1 = igInv.lines.filter((l) => l.scope === 1).reduce((a, l) => a + l.tCo2e, 0);
+    const s2 = igInv.lines.filter((l) => l.scope === 2).reduce((a, l) => a + l.tCo2e, 0);
+    if (bad.length || Math.abs(s1 - igInv.scope1Tonnes) > 1e-6 || Math.abs(s2 - igInv.scope2Tonnes) > 1e-6 || Math.abs(igInv.scope1Tonnes + igInv.scope2Tonnes - igInv.totalTonnes) > 1e-6) throw new Error('LINE FORMULA CLAIM fails');
+    out(`Every line above is activity x factor x GWP, in tCO2e (checked here line by line); Scope 1 is the sum of its ${igInv.lines.filter((l) => l.scope === 1).length} lines, Scope 2 the sum of its ${igInv.lines.filter((l) => l.scope === 2).length} line(s), and the total the two scopes together (checked here).`);
+  }
   out('');
   out(`gwpSetLabel: ${igInv.gwpSetLabel}. computed: ${yn(igInv.computed)}. reportable: ${yn(igInv.reportable)}. blocked lines: ${igInv.blockedLines.length}. unsourced lines: ${igInv.unsourcedLines.length}.`);
   out('');
@@ -416,7 +447,7 @@ section('THE IGBOGENE INVENTORY');
 }
 
 /* ------------------------------------------------------------------ */
-section('ONE INVENTORY ON FOUR GWP SETS');
+section('ONE INVENTORY ON FOUR GWP SETS', ['carbonAbatement.makeGwpSet', 'carbonAbatement.buildInventory']);
 {
   out('The Igbogene inventory rebuilt on each set. Only the methane lines move; every CO2 line has a GWP of 1 on every set.');
   out('');
@@ -437,7 +468,7 @@ section('ONE INVENTORY ON FOUR GWP SETS');
 }
 
 /* ------------------------------------------------------------------ */
-section('COMPUTED AND REPORTABLE');
+section('COMPUTED AND REPORTABLE', ['carbonAbatement.atomBalanceLines', 'carbonAbatement.emissionLine', 'carbonAbatement.buildInventory']);
 {
   out('The Igbogene inventory as a first pass: no GWP set declared, the electricity factor box blank, the vented methane survey not yet referenced, the flare\'s destruction efficiency blank. Then each gap closed in turn. Every row is a buildInventory call.');
   out('');
@@ -459,10 +490,18 @@ section('COMPUTED AND REPORTABLE');
   }
   out('');
   const first = CA.buildInventory({ lines: steps[0][2](noSet), gwpSet: noSet });
-  out(`In the first pass the flare contributes no line at all, because the engine refused it (SECTION 2), and the Carbon Studio builds atom-balance lines only from a result that computed. The first pass has ${first.blockedLines.length} blocked line(s) and ${first.unsourcedLines.length} unsourced line(s); a blocked line is not also counted as unsourced. The blocked lines, as the engine names them:`);
+  out(`In the first pass the flare is refused (SECTION 2), and atomBalanceLines turns the refusal into one blocked line named Flaring. The first pass has ${first.blockedLines.length} blocked line(s) and ${first.unsourcedLines.length} unsourced line(s); a blocked line is not also counted as unsourced. The blocked lines, as the engine names them:`);
   head('line', 'blocked by, or missing');
   first.blockedLines.forEach((b) => row(b.label, `blocked: ${b.reason}`));
   first.unsourcedLines.forEach((u) => row(u.label, `unsourced: missing ${u.missing.join(' and ')}`));
+  out('');
+  {
+    const onlyFlare = CA.buildInventory({ lines: [...atomLines('Fired heaters', igHeat, G), ...atomLines('Flaring', flareBlank, G), lineOf(F.IGBOGENE_VENT, G), lineOf(F.IGBOGENE_POWER, G)], gwpSet: G });
+    out('Every other gap closed and only the flare\'s efficiency blank:');
+    head('lines', 'Scope 1 tCO2e', 'Scope 2 tCO2e', 'total tCO2e', 'reportable', 'not reportable because', 'blocked line');
+    row(onlyFlare.lines.length, t3(onlyFlare.scope1Tonnes), t3(onlyFlare.scope2Tonnes), t3(onlyFlare.totalTonnes), yn(onlyFlare.reportable), onlyFlare.notReportableBecause.join('; '), onlyFlare.blockedLines.map((b) => `${b.label}: ${b.reason}`).join('; '));
+    out(`The total leaves out the flare's CO2 and methane lines, and the inventory is not reportable while the flare stands refused. atomBalanceLines with excluded true adds no line at all: ${CA.atomBalanceLines({ label: 'Flaring', combustion: flareBlank, gwpSet: G, excluded: true }).length} lines, for a source left out of the boundary on purpose.`);
+  }
   out('');
   const withBad = CA.buildInventory({
     lines: [...igLines(G), CA.emissionLine({ label: 'Diesel generators', scope: 1, activity: 1200, activityUnit: 'GJ', gwpSet: G }),
@@ -474,10 +513,18 @@ section('COMPUTED AND REPORTABLE');
   withBad.blockedLines.forEach((b) => row(b.label, b.reason));
   out('');
   out(`total tCO2e ${t3(withBad.totalTonnes)}; reportable ${yn(withBad.reportable)}; not reportable because: ${withBad.notReportableBecause.join('; ')}.`);
+  out('');
+  const negA = lineOf({ ...F.IGBOGENE_VENT, label: 'Vented methane typed as -142 t', activity: -142 }, G);
+  const negF = lineOf({ ...F.IGBOGENE_POWER, label: 'Purchased electricity at a factor of -0.41' }, G, { factor: { value: -0.41 } });
+  const withNeg = CA.buildInventory({ lines: [...atomLines('Fired heaters', igHeat, G), ...atomLines('Flaring', igFlare, G), negA, negF], gwpSet: G });
+  out('A negative activity and a negative factor. An emission line cannot remove tonnes, so each is blocked and named:');
+  head('line', 'activity', 'factor', 'tCO2e', 'blocked by');
+  for (const l of [negA, negF]) row(l.label, t3(l.activity), l.factor, t3(l.tCo2e), plain(l.blockedBy));
+  out(`That inventory totals ${t3(withNeg.totalTonnes)} tCO2e, reportable ${yn(withNeg.reportable)} (${withNeg.notReportableBecause.join('; ')}).`);
 }
 
 /* ------------------------------------------------------------------ */
-section('INTENSITY AND ITS BOUNDARY');
+section('INTENSITY AND ITS BOUNDARY', ['carbonAbatement.carbonIntensity']);
 {
   const a = CA.carbonIntensity({ inventory: igInv, ...F.IGBOGENE_INTENSITY });
   const b = CA.carbonIntensity({ inventory: igInv, ...F.IGBOGENE_INTENSITY_ALT });
@@ -490,11 +537,15 @@ section('INTENSITY AND ITS BOUNDARY');
   const firstPass = CA.buildInventory({ lines: [...atomLines('Fired heaters', igHeat, G), ...atomLines('Flaring', igFlare, G), lineOf(F.IGBOGENE_VENT, G), lineOf(F.IGBOGENE_POWER, G, { factor: { value: '', source: null, version: null } })], gwpSet: G });
   const c = CA.carbonIntensity({ inventory: firstPass, ...F.IGBOGENE_INTENSITY });
   out(`An intensity inherits its inventory's status. With the electricity factor blank the total intensity is ${inten(c.totalIntensity)} ${c.unit}, reportable ${yn(c.reportable)}, because: ${c.notReportableBecause.join('; ')}.`);
+  out(`That total intensity ${inten(c.totalIntensity)} and the complete inventory's Scope 1 intensity ${inten(a.scope1Intensity)} are ${inten(c.totalIntensity) === inten(a.scope1Intensity) ? 'the same figure' : 'different figures'} (compared here): with the Scope 2 line blocked, the total is Scope 1 alone.`);
+  if (inten(c.totalIntensity) !== inten(a.scope1Intensity)) throw new Error('INTENSITY CLAIM fails');
+  out(`Each intensity is the inventory's tonnes over the denominator: ${t3(igInv.totalTonnes)} tCO2e over ${a.denominatorValue} is ${inten(igInv.totalTonnes / a.denominatorValue)} (computed here), the engine's total intensity on the first boundary.`);
+  if (inten(igInv.totalTonnes / a.denominatorValue) !== inten(a.totalIntensity)) throw new Error('INTENSITY FORMULA fails');
   out(`${refused(CA.carbonIntensity({ inventory: igInv, denominatorValue: 3650000, denominatorUnit: 'boe' }), 'no boundary')}`);
 }
 
 /* ------------------------------------------------------------------ */
-section('THE ISIOKPO FUEL GAS: COMBUSTION FROM THE ANALYSIS');
+section('THE ISIOKPO FUEL GAS: COMBUSTION FROM THE ANALYSIS', ['energyEfficiency.combustionStoichiometry', 'energyEfficiency.excessAirFromFlueOxygen', 'energyEfficiency.stackLossEfficiency']);
 {
   out(`The fuel gas analysis (invented), in mole fractions, with the engine's typical heating values: ${F.ISIOKPO_FUEL.map(([c, y]) => `${c} ${y}`).join(', ')}.`);
   out('');
@@ -509,6 +560,19 @@ section('THE ISIOKPO FUEL GAS: COMBUSTION FROM THE ANALYSIS');
   row('products.fuelN2PerKmolFuel', frac(isSt.products.fuelN2PerKmolFuel), 'kmol per kmol fuel');
   row('lhvMJPerKmolFuel', isSt.lhvMJPerKmolFuel.toFixed(4), 'MJ per kmol fuel');
   row('hhvMJPerKmolFuel', isSt.hhvMJPerKmolFuel.toFixed(4), 'MJ per kmol fuel');
+  out('');
+  out('The oxygen demand, component by component (computed here from the FUEL_REFERENCE atom counts; the engine returns only the weighted total):');
+  head('component', 'mole fraction', 'c + h/4 + s - o/2', 'weighted kmol O2 per kmol fuel');
+  let o2Sum = 0;
+  for (const [code, y] of F.ISIOKPO_FUEL) {
+    const r = ref(code); const d = r.c + r.h / 4 + r.s - r.o / 2;
+    o2Sum += y * d;
+    row(code, y, d, frac(y * d));
+  }
+  row('sum', F.ISIOKPO_FUEL.reduce((a, [, y]) => a + y, 0).toFixed(3), '', frac(o2Sum));
+  if (frac(o2Sum) !== frac(isSt.o2PerKmolFuel)) throw new Error('O2 DEMAND CLAIM fails');
+  out(`The weighted sum is the engine's o2PerKmolFuel. The stoichiometric air is that oxygen over O2_MOLE_FRACTION_DRY_AIR: ${frac(isSt.o2PerKmolFuel)} / ${EE.O2_MOLE_FRACTION_DRY_AIR} = ${frac(isSt.o2PerKmolFuel / EE.O2_MOLE_FRACTION_DRY_AIR)} (computed here; the engine prints ${frac(isSt.stoichAirPerKmolFuel)}), and the air's nitrogen is the rest of that air, ${frac(isSt.stoichAirPerKmolFuel * (1 - EE.O2_MOLE_FRACTION_DRY_AIR))} (computed here; products.airN2PerKmolFuel ${frac(isSt.products.airN2PerKmolFuel)}).`);
+  if (frac(isSt.o2PerKmolFuel / EE.O2_MOLE_FRACTION_DRY_AIR) !== frac(isSt.stoichAirPerKmolFuel)) throw new Error('AIR CLAIM fails');
   out('');
   out(`The oxygen demand is c + h/4 + s - o/2 for each component, weighted by its mole fraction. The CO2 in the fuel has c = 1 and o = 2, so it demands no oxygen and passes into the flue gas: the ${F.ISIOKPO_FUEL.find(([c]) => c === 'CO2')[1]} kmol of fuel CO2 is inside products.co2PerKmolFuel above. The fuel's nitrogen is carried separately from the air's.`);
   const noCo2 = EE.combustionStoichiometry({ components: fuelComponents(F.ISIOKPO_FUEL.filter(([c]) => c !== 'CO2')) });
@@ -526,7 +590,7 @@ section('THE ISIOKPO FUEL GAS: COMBUSTION FROM THE ANALYSIS');
 }
 
 /* ------------------------------------------------------------------ */
-section('EXCESS AIR FROM THE STACK OXYGEN');
+section('EXCESS AIR FROM THE STACK OXYGEN', ['energyEfficiency.excessAirFromFlueOxygen']);
 {
   const ex = EE.excessAirFromFlueOxygen({ stoichiometry: isSt, dryO2Percent: H.currentO2Percent });
   out(`The engine's assumption, verbatim: "${ex.assumption}"`);
@@ -538,6 +602,18 @@ section('EXCESS AIR FROM THE STACK OXYGEN');
     row(o2, pct(answered(r, 'excessAirPercent', `o2 ${o2}`)), frac(r.actualAirPerKmolFuel), frac(r.dryFlueGasPerKmolFuel), frac(r.wetFlueGasPerKmolFuel));
   }
   out('');
+  out('The same rows as relations (computed here from the engine\'s figures): the wet flue gas less the dry is the water the hydrogen makes, and the dry flue gas less the actual air is fixed, because each extra kilomole of air leaves as a kilomole of dry flue gas.');
+  head('dry O2 percent', 'wet less dry', 'dry flue gas less actual air');
+  for (const o2 of F.ISIOKPO_O2_SWEEP) {
+    const r = EE.excessAirFromFlueOxygen({ stoichiometry: isSt, dryO2Percent: o2 });
+    row(o2, frac(r.wetFlueGasPerKmolFuel - r.dryFlueGasPerKmolFuel), frac(r.dryFlueGasPerKmolFuel - r.actualAirPerKmolFuel));
+  }
+  {
+    const diffs = F.ISIOKPO_O2_SWEEP.map((o2) => { const r = EE.excessAirFromFlueOxygen({ stoichiometry: isSt, dryO2Percent: o2 }); return [frac(r.wetFlueGasPerKmolFuel - r.dryFlueGasPerKmolFuel), frac(r.dryFlueGasPerKmolFuel - r.actualAirPerKmolFuel)]; });
+    if (new Set(diffs.map((d) => d.join())).size !== 1 || diffs[0][0] !== frac(isSt.products.h2oPerKmolFuel)) throw new Error('FLUE GAS RELATION CLAIM fails');
+  }
+  out(`products.h2oPerKmolFuel is ${frac(isSt.products.h2oPerKmolFuel)} (SECTION 11).`);
+  out('');
   head('the call', 'the engine says');
   for (const [what, o2] of [['dry O2 20.946 percent (all air)', 20.946], ['dry O2 21 percent', 21], ['dry O2 -1 percent', -1], ['dry O2 blank', '']]) {
     row(what, refused(EE.excessAirFromFlueOxygen({ stoichiometry: isSt, dryO2Percent: o2 }), what));
@@ -548,7 +624,7 @@ section('EXCESS AIR FROM THE STACK OXYGEN');
 }
 
 /* ------------------------------------------------------------------ */
-section('STACK LOSS EFFICIENCY ON LHV AND ON HHV');
+section('STACK LOSS EFFICIENCY ON LHV AND ON HHV', ['energyEfficiency.stackLossEfficiency']);
 {
   out(`The Isiokpo heater (invented): stack ${H.stackTempC} C, combustion air ${H.combustionAirTempC} C, radiation and convection loss ${H.radiationLossPercent} percent read off the heater vendor's chart (invented), unburned loss ${H.unburnedLossPercent}. Flue gas cp ${PR.fluGasCpKJkgK.typical}, vapour cp ${PR.waterVapourCpKJkgK.typical} and latent heat ${PR.waterLatentHeatKJkg.typical} kJ/kg are the engine's typical values.`);
   out('');
@@ -565,11 +641,31 @@ section('STACK LOSS EFFICIENCY ON LHV AND ON HHV');
   out(`The moisture note on HHV, verbatim: "${isCurH.moistureBasisNote}"`);
   out(`The comparison warning on LHV, verbatim: "${isCur.comparisonWarning}"`);
   out('');
+  {
+    const cases = [isCur, isTgt, isCurH, isTgtH];
+    const ok = cases.every((r) => Math.abs(r.losses.reduce((a, x) => a + x.percent, 0) - r.totalLossPercent) < 2e-6 && Math.abs(100 - r.totalLossPercent - r.efficiencyPercent) < 1e-9);
+    if (!ok) throw new Error('LOSS LEDGER CLAIM fails');
+    out('In every row the four losses add to the total loss and the efficiency is 100 less the total loss (checked here on all four rows).');
+    const scaled = (isCur.losses[0].percent * isSt.lhvMJPerKmolFuel) / isSt.hhvMJPerKmolFuel;
+    if (pct(scaled) !== pct(isCurH.losses[0].percent)) throw new Error('BASIS SCALING CLAIM fails');
+    out(`The dry flue gas loss is the same kilojoules on both bases, divided by a different heating value: ${pct(isCur.losses[0].percent)} x ${isSt.lhvMJPerKmolFuel.toFixed(4)} / ${isSt.hhvMJPerKmolFuel.toFixed(4)} = ${pct(scaled)} (computed here), the HHV dry loss at ${H.currentO2Percent} percent.`);
+  }
+  out('');
   head('the call', 'the engine says');
   row('radiation loss blank', refused(heaterAt(H.currentO2Percent, 'LHV', { radiationLossPercent: '' }), 'rad blank'));
   row('HHV with no latent heat', refused(heaterAt(H.currentO2Percent, 'HHV', { waterLatentHeatKJkg: null }), 'hhv latent'));
   row('stack temperature blank', refused(heaterAt(H.currentO2Percent, 'LHV', { stackTempC: '' }), 'stack blank'));
   row('flue gas cp blank', refused(heaterAt(H.currentO2Percent, 'LHV', { flueGasCpKJkgK: '' }), 'cp blank'));
+  row('basis "gross"', refused(heaterAt(H.currentO2Percent, 'gross'), 'basis gross'));
+  row('basis blank', refused(heaterAt(H.currentO2Percent, ''), 'basis blank'));
+  row('radiation loss -3', refused(heaterAt(H.currentO2Percent, 'LHV', { radiationLossPercent: -3 }), 'rad neg'));
+  row('unburned loss -1', refused(heaterAt(H.currentO2Percent, 'LHV', { unburnedLossPercent: -1 }), 'unb neg'));
+  {
+    const lower = heaterAt(H.currentO2Percent, ' hhv ');
+    if (lower.basis !== 'HHV' || lower.efficiencyPercent !== isCurH.efficiencyPercent) throw new Error('BASIS CASE CLAIM fails');
+    out('');
+    out(`The basis is read without regard to case or spaces and reported in capitals: " hhv " returns basis ${lower.basis} and ${pct(answered(lower, 'efficiencyPercent', 'lower hhv'))} percent, the HHV row above.`);
+  }
   out('');
   out('The radiation loss moves the efficiency one for one:');
   head('radiation and convection loss percent', 'efficiency percent, LHV, current');
@@ -577,7 +673,7 @@ section('STACK LOSS EFFICIENCY ON LHV AND ON HHV');
 }
 
 /* ------------------------------------------------------------------ */
-section('WHAT TUNING THE EXCESS AIR IS WORTH');
+section('WHAT TUNING THE EXCESS AIR IS WORTH', ['energyEfficiency.excessAirSaving', 'energyEfficiency.stackLossEfficiency']);
 {
   out(`Current ${H.currentO2Percent} percent O2, target ${H.targetO2Percent} percent, a minimum safe stack oxygen of ${H.minimumSafeO2Percent} percent declared after a combustion test (invented), and ${H.annualFuelEnergyGJ} GJ of fuel a year on LHV (invented).`);
   out('');
@@ -612,7 +708,7 @@ section('WHAT TUNING THE EXCESS AIR IS WORTH');
 }
 
 /* ------------------------------------------------------------------ */
-section('THE ISIOKPO STEAM TRAP');
+section('THE ISIOKPO STEAM TRAP', ['energyEfficiency.steamTrapLoss']);
 {
   const T = F.ISIOKPO_TRAP;
   const tr = EE.steamTrapLoss(T);
@@ -638,10 +734,33 @@ section('THE ISIOKPO STEAM TRAP');
   out(`With the boiler efficiency blank the trap still loses ${t3(noEta.tonnesPerYear)} tonnes a year, and the fuel and carbon are none. fuelNote, verbatim: "${noEta.fuelNote}" carbonNote, verbatim: "${noEta.carbonNote}"`);
   const left = EE.steamTrapLoss({ ...T, hoursPerYear: undefined });
   out(`Hours left out of the call take the stated default of 8760: ${t3(answered(left, 'tonnesPerYear', 'hours left'))} tonnes a year.`);
+  out('');
+  out(`As relations (computed here from the engine's figures): tonnes a year = kg an hour x hours / 1000 = ${kgh(tr.kgPerHour)} x ${T.hoursPerYear} / 1000 = ${t3((tr.kgPerHour * T.hoursPerYear) / 1000)}; annual fuel GJ = tonnes a year x MJ a tonne / 1000 / boiler efficiency = ${t3(tr.tonnesPerYear)} x ${T.steamEnergyMJPerTonne} / 1000 / ${T.boilerEfficiencyFraction} = ${gj((tr.tonnesPerYear * T.steamEnergyMJPerTonne) / 1000 / T.boilerEfficiencyFraction)}; annual tCO2e = GJ x kg per GJ / 1000 = ${t3((tr.annualFuelGJ * T.emissionFactorKgCo2ePerGJ) / 1000)}.`);
+  if (t3((tr.kgPerHour * T.hoursPerYear) / 1000) !== t3(tr.tonnesPerYear) || gj((tr.tonnesPerYear * T.steamEnergyMJPerTonne) / 1000 / T.boilerEfficiencyFraction) !== gj(tr.annualFuelGJ) || t3((tr.annualFuelGJ * T.emissionFactorKgCo2ePerGJ) / 1000) !== t3(tr.annualTonnesCo2e)) throw new Error('TRAP RELATION CLAIM fails');
+  out('');
+  out(`CHOKED OR SUBSONIC. With no downstream pressure given the trap vents to ATMOSPHERE_BAR_A, ${EE.ATMOSPHERE_BAR_A} bar a. The flow is choked while the downstream pressure over the upstream is at or below the critical ratio (2/(k+1))^(k/(k-1)).`);
+  out(`downstreamNote, verbatim: "${tr.downstreamNote}"`);
+  out(`The choked-flow note at 1.3, verbatim: "${tr13.chokedNote}"`);
+  out('');
+  head('downstream bar a', 'pressure ratio', 'critical ratio at 1.135', 'choked', 'kg an hour', 'tonnes a year');
+  for (const p2 of [undefined, 3, 5, 6, 7, 8]) {
+    const r = EE.steamTrapLoss({ ...T, downstreamPressureBarA: p2 });
+    row(p2 === undefined ? `left out (${r.downstreamPressureBarA})` : p2, frac(r.pressureRatio), frac(r.criticalPressureRatio), yn(r.choked), kgh(answered(r, 'kgPerHour', `p2 ${p2}`)), t3(r.tonnesPerYear));
+  }
+  out('At or below the critical ratio the loss does not move with the downstream pressure; above it the downstream pressure lowers the loss.');
+  {
+    const at = (p2) => EE.steamTrapLoss({ ...T, downstreamPressureBarA: p2 }).kgPerHour;
+    if (!(at(3) === at(undefined) && at(5) === at(undefined) && at(6) < at(5) && at(7) < at(6) && at(8) < at(7) && !EE.steamTrapLoss({ ...T, downstreamPressureBarA: 6 }).choked && EE.steamTrapLoss({ ...T, downstreamPressureBarA: 5 }).choked)) throw new Error('CHOKED CLAIM fails');
+  }
+  out('');
+  head('the call', 'the engine says');
+  tq('downstream pressure blank', { downstreamPressureBarA: '' });
+  tq(`downstream pressure ${T.upstreamPressureBarA} bar a (equal to upstream)`, { downstreamPressureBarA: T.upstreamPressureBarA });
+  tq('downstream pressure -1', { downstreamPressureBarA: -1 });
 }
 
 /* ------------------------------------------------------------------ */
-section('CONDENSATE RETURN AND ITS FLOOR');
+section('CONDENSATE RETURN AND ITS FLOOR', ['energyEfficiency.condensateReturnValue']);
 {
   const C = F.ISIOKPO_CONDENSATE;
   const full = EE.condensateReturnValue(C);
@@ -662,10 +781,11 @@ section('CONDENSATE RETURN AND ITS FLOOR');
   row('boiler efficiency blank', refused(EE.condensateReturnValue({ ...C, boilerEfficiencyFraction: '' }), 'cond eta'));
   row('hours a year blank', refused(EE.condensateReturnValue({ ...C, hoursPerYear: '' }), 'cond hours'));
   row('target return 1.2', refused(EE.condensateReturnValue({ ...C, targetReturnFraction: 1.2 }), 'cond 1.2'));
+  row(`target return 0.25, below the current ${C.currentReturnFraction}`, refused(EE.condensateReturnValue({ ...C, targetReturnFraction: 0.25 }), 'cond below'));
 }
 
 /* ------------------------------------------------------------------ */
-section('THE PINCH: MINIMUM UTILITIES BY THE PROBLEM TABLE');
+section('THE PINCH: MINIMUM UTILITIES BY THE PROBLEM TABLE', ['energyEfficiency.pinchTargets', 'energyEfficiency.compositeCurve']);
 {
   out('Four Isiokpo process streams (invented). A stream is hot when its supply is above its target.');
   out('');
@@ -682,9 +802,28 @@ section('THE PINCH: MINIMUM UTILITIES BY THE PROBLEM TABLE');
   out(`The problem table at ${F.ISIOKPO_DTMIN_CASE} C. Hot streams are shifted down and cold streams up by half the minimum approach; the cascade below already carries the hot utility at the top:`);
   head('top shifted C', 'bottom shifted C', 'CP hot kW/K', 'CP cold kW/K', 'surplus kW', 'heat flow below kW');
   p.intervals.forEach((iv) => row(degc(iv.topShiftedC), degc(iv.bottomShiftedC), frac(iv.cpHotKWperK), frac(iv.cpColdKWperK), kw(iv.surplusKW), kw(iv.cascadeKW)));
+  {
+    let flow = p.hotUtilityKW; let okRule = true;
+    for (const iv of p.intervals) { flow += iv.surplusKW; if (Math.abs(flow - iv.cascadeKW) > 1e-6) okRule = false; if (Math.abs(iv.surplusKW - (iv.cpHotKWperK - iv.cpColdKWperK) * (iv.topShiftedC - iv.bottomShiftedC)) > 1e-6) okRule = false; }
+    if (!okRule || Math.abs(flow - p.coldUtilityKW) > 1e-6) throw new Error('CASCADE RULE CLAIM fails');
+    out(`The cascade rule (checked here on every row): each interval's surplus is (CP hot less CP cold) times its width; the heat flow below an interval is the heat flow above it plus its surplus, starting from the hot utility, ${kw(p.hotUtilityKW)} kW, at the top; the heat flow out of the bottom is the cold utility, ${kw(p.coldUtilityKW)} kW.`);
+  }
   out('');
   out(`The heat flow is zero at shifted ${degc(p.pinchShiftedC)} C, inside the range: the pinch, ${degc(p.pinchHotC)} C on the hot side and ${degc(p.pinchColdC)} C on the cold side.`);
   out(`The engine's note, verbatim: "${p.crossPinchNote}"`);
+  out('');
+  out('The composite curves in real temperatures (compositeCurve; no oracle recomputes them, SECTION 26). Each point is a temperature and the enthalpy the side has given up or taken on from its coldest end:');
+  for (const side of ['hot', 'cold']) {
+    const cc = EE.compositeCurve({ streams: F.ISIOKPO_STREAMS, side });
+    head(`${side} composite C`, 'enthalpy kW');
+    cc.points.forEach((pt) => row(degc(pt.temperatureC), kw(pt.enthalpyKW)));
+    const duty = side === 'hot' ? p.totalHotStreamDutyKW : p.totalColdStreamDutyKW;
+    if (kw(cc.totalDutyKW) !== kw(duty)) throw new Error('COMPOSITE DUTY CLAIM fails');
+    out(`The ${side} composite ends at ${kw(cc.totalDutyKW)} kW, the total ${side} stream duty above.`);
+    out('');
+  }
+  if (Math.abs(p.heatRecoveredKW - (p.totalHotStreamDutyKW - p.coldUtilityKW)) > 1e-6 || Math.abs(p.balanceCheck - ((p.hotUtilityKW + p.totalHotStreamDutyKW) - (p.coldUtilityKW + p.totalColdStreamDutyKW))) > 1e-6) throw new Error('PINCH BALANCE CLAIM fails');
+  out(`Heat recovered is the hot streams' duty less the cold utility: ${kw(p.totalHotStreamDutyKW)} less ${kw(p.coldUtilityKW)} is ${kw(p.heatRecoveredKW)} kW. The balance check is (hot utility plus hot stream duty) less (cold utility plus cold stream duty): heat in less heat out, ${kw(p.balanceCheck)} when the targets close.`);
   out('');
   const thr = EE.pinchTargets({ streams: [{ label: 'Hot', supplyC: 200, targetC: 50, cpKWperK: 10 }, { label: 'Cold', supplyC: 30, targetC: 60, cpKWperK: 1 }], minimumApproachC: 10 });
   out('A threshold problem: one hot stream from 200 C to 50 C at 10 kW/K and one cold stream from 30 C to 60 C at 1 kW/K, at 10 C:');
@@ -704,7 +843,7 @@ section('THE PINCH: MINIMUM UTILITIES BY THE PROBLEM TABLE');
 }
 
 /* ------------------------------------------------------------------ */
-section('THE COST OF A TONNE ABATED');
+section('THE COST OF A TONNE ABATED', ['carbonAbatement.abatementCost']);
 {
   out(`Six Agbor measures (every figure invented, US dollars), annualised at a discount rate of ${F.AGBOR_DISCOUNT_RATE} (a fraction). A negative cost per tonne means the measure pays for itself and abates carbon as a side effect.`);
   out('');
@@ -725,7 +864,7 @@ section('THE COST OF A TONNE ABATED');
 }
 
 /* ------------------------------------------------------------------ */
-section('WHAT THE COST OF A TONNE REFUSES, AND WHAT IT NAMES');
+section('WHAT THE COST OF A TONNE REFUSES, AND WHAT IT NAMES', ['carbonAbatement.abatementCost', 'carbonAbatement.abatementCurve']);
 {
   const m = F.AGBOR_MEASURES[2];
   head('the call', 'the engine says');
@@ -743,10 +882,17 @@ section('WHAT THE COST OF A TONNE REFUSES, AND WHAT IT NAMES');
   out(`A capital of 0 typed needs no life and no rate: ${m.label} with capital 0 answers costPerTonne ${usdt(answered(zero, 'costPerTonne', 'zero cap'))} USD and capitalRecoveryFactor ${crf(zero.capitalRecoveryFactor)}.`);
   const none = CA.abatementCost({ ...m, tonnesAbatedPerYear: 0 });
   out(`An abatement of 0 is accepted and has no cost per tonne: costPerTonne ${usdt(none.costPerTonne)}, paysForItself ${yn(none.paysForItself)}.`);
+  out('');
+  const withRefused = CA.abatementCurve({ measures: agCosted.map((x) => (x.label === m.label ? CA.abatementCost({ ...m, discountRate: F.AGBOR_DISCOUNT_RATE, capitalCost: '' }) : x)) });
+  if (withRefused.refusedMeasures.length !== 1) throw new Error('REFUSED MEASURE CLAIM fails');
+  out(`A refused measure handed to the curve is named, off the curve and out of every total. The six Agbor measures with ${m.label}'s capital cost blank: ${withRefused.steps.length} steps, totalAbatementTonnes ${t3(withRefused.totalAbatementTonnes)}.`);
+  head('refusedMeasures label', 'reason');
+  withRefused.refusedMeasures.forEach((x) => row(x.label, x.reason));
+  out(`refusedNote, verbatim: "${withRefused.refusedNote}"`);
 }
 
 /* ------------------------------------------------------------------ */
-section('THE AGBOR MARGINAL ABATEMENT COST CURVE');
+section('THE AGBOR MARGINAL ABATEMENT COST CURVE', ['carbonAbatement.abatementCurve']);
 {
   out('The six measures ranked cheapest first. Each step\'s width is its tonnes a year and its height its cost per tonne; the steps tile the axis from 0.');
   out('');
@@ -761,6 +907,7 @@ section('THE AGBOR MARGINAL ABATEMENT COST CURVE');
   const printedNetSum = agCosted.reduce((a, m) => a + Number(usd(m.netAnnualCost)), 0);
   row('weightedAverageCostPerTonne USD', usdt(agCurve.weightedAverageCostPerTonne));
   row('additive', yn(agCurve.additive));
+  row('paysForItselfTonnes as a share of totalAbatementTonnes (computed here)', share(agCurve.paysForItselfTonnes / agCurve.totalAbatementTonnes));
   if (usd(printedNetSum) !== usd(agCurve.netAnnualCostOfAll)) out(`ROUNDING NOTE: the six net annual costs as printed in SECTION 18 sum to ${usd(printedNetSum)} USD; the engine sums the net annual costs it holds to four decimals, which gives ${usd(agCurve.netAnnualCostOfAll)} USD.`);
   out('');
   const simpleMean = agCosted.reduce((a, m) => a + m.costPerTonne, 0) / agCosted.length;
@@ -774,7 +921,7 @@ section('THE AGBOR MARGINAL ABATEMENT COST CURVE');
 }
 
 /* ------------------------------------------------------------------ */
-section('SOURCES, INTERACTIONS AND OVER-CLAIMS');
+section('SOURCES, INTERACTIONS AND OVER-CLAIMS', ['carbonAbatement.combustionCo2FromCarbon', 'carbonAbatement.atomBalanceLines', 'carbonAbatement.buildInventory', 'carbonAbatement.abatementCurve']);
 {
   out(`The Agbor inventory the measures act on, on the course's set (${G.label}). Each source's emission is its CO2 plus its methane in CO2e, as the Carbon Studio passes it to the curve.`);
   out('');
@@ -794,19 +941,50 @@ section('SOURCES, INTERACTIONS AND OVER-CLAIMS');
   rw('the six measures as costed', agCurve);
   rw(`flare gas recovery claiming ${F.AGBOR_FLARE_OVERCLAIM_T} t`, over);
   rw(`the same claim, the flare's emission not passed`, noSrc);
+  const lineT = (lab) => agInv.lines.find((l) => l.label === lab).tCo2e;
+  const allComputed = { ...agSources, power: lineT('Purchased electricity'), vents: lineT('Vented and fugitive methane') };
+  const allCurve = CA.abatementCurve({ measures: agCosted, sourceEmissions: allComputed, targetTonnes: agTarget });
+  rw('the six measures, every source the inventory computes passed', allCurve);
+  const steamOnHeaters = agCosted.map((x) => (x.label === 'Repair failed steam traps' ? { ...x, actsOn: ['heaters'] } : x));
+  const heatersCurve = CA.abatementCurve({ measures: steamOnHeaters, sourceEmissions: allComputed, targetTonnes: agTarget });
+  rw('the same, with the trap repair checked against the heaters that raise the steam (a what-if)', heatersCurve);
   out('');
-  out('Where measures only interact, the verdict stands and is labelled an upper bound. Where a claim exceeds what its source emits, the curve adds up tonnes that do not exist, and the verdict is none. A source whose emission is not passed cannot be checked, and the claim against it stands unexamined.');
+  out('The unchecked claims of the first row, as the engine lists them:');
+  head('measure', 'source', 'reason');
+  agCurve.uncheckedClaims.forEach((u) => row(u.measure, plain(u.sourceId), u.reason));
+  out(`uncheckedSources: ${agCurve.uncheckedSources.join(', ')}. With every source the inventory computes passed, uncheckedSources is ${allCurve.uncheckedSources.join(', ')}: the Agbor inventory has no line of its own for steam.`);
+  out('');
+  out('The sources added for the curve with every computed source passed and for the what-if, from the inventory table above:');
+  head('source id', 'emission passed to the curve tCO2e');
+  row('power', t3(allComputed.power)); row('vents', t3(allComputed.vents));
+  out('');
+  {
+    const oc = costOf({ ...F.AGBOR_MEASURES[3], tonnesAbatedPerYear: F.AGBOR_FLARE_OVERCLAIM_T });
+    out(`Flare gas recovery claiming ${F.AGBOR_FLARE_OVERCLAIM_T} t, costed: net annual cost ${usd(oc.netAnnualCost)} USD, cost per tonne ${usdt(answered(oc, 'costPerTonne', 'overclaim'))} USD. The cost per tonne falls as the claimed tonnes rise; the over-claim makes the measure look cheaper as well as larger.`);
+    if (!(oc.costPerTonne < agCosted[3].costPerTonne)) throw new Error('OVERCLAIM COST CLAIM fails');
+  }
+  out('');
+  out('Where measures only interact and every claim is checked, the verdict stands and is labelled an upper bound. Where a claim exceeds what its source emits, the curve adds up tonnes that do not exist, and the verdict is none. Where a claim acts on a source whose emission is not passed, it cannot be checked, the verdict is none and the basis names the source.');
 }
 
 /* ------------------------------------------------------------------ */
-section('THE TARGET AND THE PATH');
+section('THE TARGET AND THE PATH', ['carbonAbatement.decarbonisationPath', 'carbonAbatement.buildInventory']);
 {
   const { startYear: y0, endYear: y1 } = F.AGBOR_PLAN;
+  out('The start years (inputs, invented):');
+  head('measure', 'start year', 'tonnes abated a year');
+  F.AGBOR_MEASURES.forEach((m) => row(m.label, plain(m.startYear), t3(m.tonnesAbatedPerYear)));
+  out('');
   out(`The Agbor baseline is the inventory total, ${t3(agInv.totalTonnes)} tCO2e. The target falls in a straight line from the baseline in ${y0} to ${pct30} percent below it in ${y1}, as the Carbon Studio draws it. Each measure counts in full from its start year.`);
   out('');
   head('year', 'abated t', 'emissions t', 'target t', 'unabated gap t', 'measures live');
   agPath.rows.forEach((r) => row(r.year, t3(r.abatedTonnes), t3(r.emissionsTonnes), t3(r.targetTonnes), t3(r.unabatedGapTonnes), r.measuresLive.length ? r.measuresLive.join('; ') : 'none'));
   out('');
+  {
+    const okRows = agPath.rows.every((r) => Math.abs(r.emissionsTonnes - (r.baselineTonnes - r.abatedTonnes)) < 1e-6 && Math.abs(r.unabatedGapTonnes - Math.max(0, r.emissionsTonnes - r.targetTonnes)) < 1e-3);
+    if (!okRows) throw new Error('PATH RELATION CLAIM fails');
+    out('In every row (checked here): emissions are the baseline less the tonnes abated, and the unabated gap is emissions less the target where that is positive, else 0.000.');
+  }
   out(`firstShortfallYear: ${plain(agPath.firstShortfallYear)}. finalGapTonnes: ${t3(agPath.finalGapTonnes)}.`);
   if (agPath.gapNote) out(`The gap note, verbatim: "${agPath.gapNote}"`);
   out('');
@@ -816,15 +994,33 @@ section('THE TARGET AND THE PATH');
   head('baseline', 'target in the end year t', 'finalGapTonnes', 'firstShortfallYear');
   row('the full inventory', t3(agPath.rows[agPath.rows.length - 1].targetTonnes), t3(agPath.finalGapTonnes), plain(agPath.firstShortfallYear));
   row('the partial inventory', t3(pPath.rows[pPath.rows.length - 1].targetTonnes), t3(pPath.finalGapTonnes), plain(pPath.firstShortfallYear));
+  {
+    const d = agInv.totalTonnes - partial.totalTonnes;
+    const pw = agInv.lines.find((l) => l.label === 'Purchased electricity').tCo2e;
+    if (t3(d) !== t3(pw)) throw new Error('PARTIAL DIFFERENCE CLAIM fails');
+    out(`The full baseline less the partial is ${t3(d)} tCO2e (computed here), the purchased electricity line of SECTION 21: the partial inventory is the full one without it.`);
+  }
   out('');
   const uns = pathFor(agInv.totalTonnes, F.AGBOR_MEASURES.map((m) => (m.label === 'Vapour recovery on the storage tanks' ? { ...m, startYear: null } : m)));
   out(`A measure with no start year is named and left off the path: unscheduledMeasures ${uns.unscheduledMeasures.map((u) => `${u.label} (${u.reason})`).join('; ')}; finalGapTonnes ${t3(uns.finalGapTonnes)}.`);
+  {
+    const d = uns.finalGapTonnes - agPath.finalGapTonnes;
+    const vr = F.AGBOR_MEASURES.find((m) => m.label === 'Vapour recovery on the storage tanks').tonnesAbatedPerYear;
+    if (t3(d) !== t3(vr)) throw new Error('UNSCHEDULED DIFFERENCE CLAIM fails');
+    out(`That gap less the scheduled plan's ${t3(agPath.finalGapTonnes)} is ${t3(d)} t (computed here), the vapour recovery measure's tonnes a year. The path with it unscheduled, year by year:`);
+    head('year', 'abated t', 'emissions t', 'target t', 'unabated gap t');
+    uns.rows.forEach((r) => row(r.year, t3(r.abatedTonnes), t3(r.emissionsTonnes), t3(r.targetTonnes), t3(r.unabatedGapTonnes)));
+  }
+  {
+    const over = CA.decarbonisationPath({ baselineTonnes: 12000, measures: F.AGBOR_MEASURES.map((m) => ({ label: m.label, tonnesAbatedPerYear: m.tonnesAbatedPerYear, startYear: m.startYear })), startYear: y0, endYear: y1, targetByYear: {} });
+    out(`The same six measures against a baseline of 12000 t (a probe, invented): ${refused(over, 'over-abated')} overAbatedYear ${plain(over.overAbatedYear)}.`);
+  }
   out(refused(CA.decarbonisationPath({ baselineTonnes: 0, measures: [], startYear: y0, endYear: y1 }), 'zero baseline'));
   out(refused(CA.decarbonisationPath({ baselineTonnes: agInv.totalTonnes, measures: [], startYear: y1, endYear: y0 }), 'reversed years'));
 }
 
 /* ------------------------------------------------------------------ */
-section('ONE SAVING IN MONEY AND IN CARBON');
+section('ONE SAVING IN MONEY AND IN CARBON', ['energyEfficiency.priceSaving', 'carbonAbatement.abatementCost']);
 {
   const S = F.AGBOR_SAVING;
   const ps = EE.priceSaving({ ...S, energyBasis: 'LHV', fuelCostBasis: 'LHV', emissionFactorBasis: 'LHV' });
@@ -837,6 +1033,13 @@ section('ONE SAVING IN MONEY AND IN CARBON');
   row('costPerTonneCo2e USD', usdt(answered(ps, 'costPerTonneCo2e', 'ps')));
   row('basis', ps.basis);
   out('');
+  {
+    const direct = CA.abatementCost({ label: 'saving', capitalCost: S.implementationCost, annualSavings: ps.annualValue, tonnesAbatedPerYear: ps.annualTonnesCo2e, lifeYears: S.lifeYears, discountRate: S.discountRate });
+    if (direct.costPerTonne !== ps.costPerTonneCo2e) throw new Error('PRICESAVING HANDOFF CLAIM fails');
+    if (frac(S.implementationCost / ps.annualValue) !== frac(ps.simplePaybackYears)) throw new Error('PAYBACK CLAIM fails');
+    out(`The simple payback is the implementation cost over one year's value, ${S.implementationCost} / ${usd(ps.annualValue)} = ${frac(S.implementationCost / ps.annualValue)} years (computed here): undiscounted, with no life and no rate in it.`);
+    out(`priceSaving passes its life (${S.lifeYears} years) and rate (${S.discountRate}) to abatementCost. The same call made directly: capitalRecoveryFactor ${crf(direct.capitalRecoveryFactor)}, annualisedCapital ${usd(direct.annualisedCapital)} USD, netAnnualCost ${usd(direct.netAnnualCost)} USD, costPerTonne ${usdt(direct.costPerTonne)} USD, paysForItself ${yn(direct.paysForItself)}.`);
+  }
   out(`The cost per tonne is carbonAbatement.abatementCost called with the implementation cost as capital, the annual value as the saving and the annual tonnes as the abatement. Setting the whole implementation cost against one year's value and one year's tonnes (computed here) gives ${usdt((S.implementationCost - ps.annualValue) / ps.annualTonnesCo2e)} USD a tonne.`);
   out('');
   head('the call', 'what comes back');
@@ -848,7 +1051,7 @@ section('ONE SAVING IN MONEY AND IN CARBON');
 }
 
 /* ------------------------------------------------------------------ */
-section('ENERGY INTENSITY AND THE PEER');
+section('ENERGY INTENSITY AND THE PEER', ['energyEfficiency.energyIntensity']);
 {
   const E = F.AGBOR_ENERGY;
   const en = EE.energyIntensity({ energyStreams: E.streams, throughputTonnes: E.throughputTonnes, peerIntensityMJPerTonne: E.peerIntensityMJPerTonne });
@@ -862,13 +1065,18 @@ section('ENERGY INTENSITY AND THE PEER');
   const miss = EE.energyIntensity({ energyStreams: E.streams.map((s) => (s.label === 'Purchased power' ? { ...s, energyGJ: '' } : s)), throughputTonnes: E.throughputTonnes, peerIntensityMJPerTonne: E.peerIntensityMJPerTonne });
   row('purchased power blank', yn(miss.complete), gj(miss.totalEnergyGJ), mjt(miss.intensityMJPerTonne), frac(miss.versusPeer), mjt(miss.gapMJPerTonne));
   out('');
+  {
+    const i = (en.totalEnergyGJ * 1000) / E.throughputTonnes;
+    if (mjt(i) !== mjt(en.intensityMJPerTonne) || frac(i / E.peerIntensityMJPerTonne) !== frac(en.versusPeer) || mjt(i - E.peerIntensityMJPerTonne) !== mjt(en.gapMJPerTonne)) throw new Error('INTENSITY FORMULA CLAIM fails');
+    out(`The intensity is total GJ x 1000 over the throughput in tonnes: ${gj(en.totalEnergyGJ)} x 1000 / ${E.throughputTonnes} = ${mjt(i)} MJ a tonne; versus peer is the intensity over the peer, ${frac(i / E.peerIntensityMJPerTonne)}; the gap is the intensity less the peer, ${mjt(i - E.peerIntensityMJPerTonne)} MJ a tonne (each computed here and equal to the engine's figure).`);
+  }
   out(`peerNote with a stream missing, verbatim: "${miss.peerNote}"`);
   out(`The disclaimer, verbatim: "${en.disclaimer}"`);
   out(refused(EE.energyIntensity({ energyStreams: E.streams, throughputTonnes: '' }), 'no throughput'));
 }
 
 /* ------------------------------------------------------------------ */
-section('WHAT IS HELD, AND THE MD5-0 RULES IN FORCE');
+section('WHAT IS HELD, AND THE MD5-0 AND MD45-1 RULES IN FORCE');
 {
   out('HELD, taught as stated limits and never graded (FINDINGS-carbon):');
   head('item', 'the limit');
@@ -895,6 +1103,21 @@ section('WHAT IS HELD, AND THE MD5-0 RULES IN FORCE');
   row('An intensity with a stream missing is not compared with the peer', 'SECTION 24');
   row('Air\'s argon is carried at ATMOSPHERIC_N2_MOLAR_MASS, and the flue gas mass balance closes', 'SECTION 11');
   row('A saving, its price and its factor declared on different heating value bases are refused', 'SECTION 23');
+  out('');
+  out('THE RULES MD45-1 PUT IN FORCE (engines PR #228), each as the engine answers now:');
+  head('rule', 'where it prints');
+  row('A refused combustion becomes one blocked line through atomBalanceLines, and the inventory is not reportable while it stands; a source excluded on purpose adds no line', 'SECTIONS 5 and 9');
+  row('A negative activity or a negative factor blocks its line', 'SECTION 9');
+  row('A GWP of zero or below is refused and the set is not declared', 'SECTION 2');
+  row('A curve verdict is none while any claim acts on a source with no computed emission passed, and the basis names the sources', 'SECTION 21');
+  row('A refused measure is named in refusedMeasures and kept off the curve', 'SECTION 19');
+  row('A year whose scheduled measures abate more than the baseline is refused', 'SECTION 22');
+  row('A heating value basis other than LHV or HHV is refused; the basis is read without regard to case', 'SECTION 13');
+  row('A negative radiation or unburned loss is refused', 'SECTION 13');
+  row('The stack oxygen refusal states the bound it applies, 20.946 percent', 'SECTION 12');
+  row('A trap is choked only at or below the critical pressure ratio; the downstream pressure left out is one standard atmosphere', 'SECTION 15');
+  row('A target condensate return below the current one is refused', 'SECTION 16');
+  row('Every fuel and flue gas molar mass is built from ATOMIC_WEIGHT, and CO2 is one number in both engines', 'SECTION 1');
 }
 
 /* ------------------------------------------------------------------ */
@@ -903,7 +1126,7 @@ section('WHAT THE ORACLES CHECK');
   out('Two independent oracles in the engines repository (tools/validation/downstream) recompute these modules by other routes, and their goldens are asserted by the engine test suites:');
   head('oracle', 'what it computes, and by which route');
   row('oracle_carbonabatement.py', 'combustion by MASS in exact rationals (kg of carbon times the CO2/C and CH4/C mass ratios, molar masses built from atomic weights); the inventory as a ledger; the cost per tonne LEVELISED from a year-by-year present value ledger where the engine uses a capital recovery factor; the curve by explicit rank; the path as a year ledger');
-  row('oracle_energyefficiency.py', 'combustion as a species ledger whose mass balance must close; excess air by BISECTION where the engine solves a closed form; efficiency as a loss ledger; the tuning saving as a duty ledger; the steam trap as an ISENTROPIC NOZZLE where the engine uses the choked-flux formula; the pinch by the LARGEST HEAT DEFICIT with no cascade; a levelised cost per tonne');
+  row('oracle_energyefficiency.py', 'combustion as a species ledger whose mass balance must close; excess air by BISECTION where the engine solves a closed form; efficiency as a loss ledger; the tuning saving as a duty ledger (duty_ledger, exported since MD45-1); the steam trap as an ISENTROPIC NOZZLE with its throat at the larger of the downstream and critical pressures, where the engine uses the choked and subsonic flux formulas; the pinch by the LARGEST HEAT DEFICIT with no cascade; a levelised cost per tonne');
   out('');
   out('Not recomputed by either oracle: carbonIntensity, the curve\'s residual to target and paysForItselfTonnes, compositeCurve and the simple payback. They are taught from the engine and never graded.');
   out('');

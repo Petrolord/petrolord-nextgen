@@ -601,10 +601,13 @@ describe('AGREEMENT WITH THE DIGEST, the Expert sections', () => {
 // ---------------------------------------------------------------------------
 
 describe('MISSING STAYS MISSING: a blank box reaches the engine blank', () => {
-  it('a blank flare efficiency is the engine\'s refusal, and the flare leaves the inventory', () => {
+  it('a blank flare efficiency is the engine\'s refusal, and the flare stays in the inventory as one blocked line (MD45-1)', () => {
     const inv = L.inventory({ flareInputs: { destructionEfficiencyFraction: '' } });
     expect(inv.flare.error).toBe(S.flareSweep.blank);
-    expect(inv.inv.lines.some((l) => /^Flaring/.test(l.label))).toBe(false);
+    const flareLines = inv.inv.lines.filter((l) => /^Flaring/.test(l.label));
+    expect(flareLines).toHaveLength(1);
+    expect(inv.inv.blockedLines).toContainEqual({ label: 'Flaring', reason: S.flareSweep.blank });
+    expect(inv.inv.reportable).toBe(false);
     expect(inv.inv.totalTonnes).toBeLessThan(S.inventory.inv.totalTonnes);
     // Typed back in, the flare returns to the digest's inventory.
     expect(L.inventory({ flareInputs: { destructionEfficiencyFraction: '0.98' } }).inv.totalTonnes).toBe(S.inventory.inv.totalTonnes);
@@ -1018,12 +1021,13 @@ const CONTRASTIVE = /,\s+not\s+\w/;
 const breaches = (s) => CONTRASTIVE.test(s) || s.includes(EM) || s.includes(EN) || / -- /.test(s);
 
 /**
- * THE THREE ENGINE SENTENCES THE LESSONS QUOTE VERBATIM, and the only strings
- * exempt from the contrastive check: the atom balance method (SECTION 3), the
- * inventory disclaimer (SECTION 7) and the condensate floor note (SECTION 16).
- * Each is pinned to the digest, and a dead exemption fails.
+ * THE THREE ENGINE SENTENCES THE LESSONS QUOTE VERBATIM: the atom balance
+ * method (SECTION 3), the inventory disclaimer (SECTION 7) and the condensate
+ * floor note (SECTION 16). They were exempt from the contrastive check until
+ * MD45-1 reworded all three in the engine; now none is exempt, each is pinned
+ * to the digest, and each must obey the rule like every other string.
  */
-const EXEMPT = [S.atomUnit.method, S.inventory.inv.disclaimer, S.condensateCases.floor.valueNote];
+const QUOTED = [S.atomUnit.method, S.inventory.inv.disclaimer, S.condensateCases.floor.valueNote];
 
 describe('THE OWNER COPY RULE: no em dash, no en dash and no contrastive', () => {
   it('no source line breaches it', () => {
@@ -1041,17 +1045,17 @@ describe('THE OWNER COPY RULE: no em dash, no en dash and no contrastive', () =>
     expect(breaches('a clean sentence')).toBe(false);
   });
 
-  it('the three exempt engine sentences are the digest\'s verbatim quotes, and each still needs its exemption', () => {
-    expect(EXEMPT).toHaveLength(3);
-    pin(3, [`The engine's method, verbatim: "${EXEMPT[0]}"`]);
-    pin(7, [`The engine's disclaimer, verbatim: "${EXEMPT[1]}"`]);
-    pin(16, [`valueNote with the treatment blank, verbatim: "${EXEMPT[2]}"`]);
-    EXEMPT.forEach((s) => expect(breaches(s), s).toBe(true));
+  it('the three quoted engine sentences are the digest\'s verbatim quotes, and none needs an exemption since MD45-1', () => {
+    expect(QUOTED).toHaveLength(3);
+    pin(3, [`The engine's method, verbatim: "${QUOTED[0]}"`]);
+    pin(7, [`The engine's disclaimer, verbatim: "${QUOTED[1]}"`]);
+    pin(16, [`valueNote with the treatment blank, verbatim: "${QUOTED[2]}"`]);
+    QUOTED.forEach((s) => expect(breaches(s), s).toBe(false));
   });
 
   it('every other string the lab hands a panel obeys it', () => {
     const strings = stringsIn(S);
     expect(strings.length).toBeGreaterThanOrEqual(300);
-    expect(strings.filter(([, s]) => breaches(s) && !EXEMPT.includes(s)).map(([q, s]) => `${q}: ${s}`)).toEqual([]);
+    expect(strings.filter(([, s]) => breaches(s)).map(([q, s]) => `${q}: ${s}`)).toEqual([]);
   });
 });

@@ -315,10 +315,11 @@ export const SteamMode = ({
       {usable(tr) ? (
         <>
           <Tbl
-            head={['kg an hour', 'tonnes a year', 'annual cost USD', 'annual fuel GJ', 'annual tCO2e', 'choked']}
-            rows={[[F.kgh(tr.kgPerHour), F.t(tr.tonnesPerYear), F.usd(tr.annualCost), F.gj(tr.annualFuelGJ), F.t(tr.annualTonnesCo2e), yn(tr.choked)]]}
+            head={['kg an hour', 'tonnes a year', 'annual cost USD', 'annual fuel GJ', 'annual tCO2e', 'pressure ratio', 'critical ratio', 'choked']}
+            rows={[[F.kgh(tr.kgPerHour), F.t(tr.tonnesPerYear), F.usd(tr.annualCost), F.gj(tr.annualFuelGJ), F.t(tr.annualTonnesCo2e), F.frac(tr.pressureRatio), F.frac(tr.criticalPressureRatio), yn(tr.choked)]]}
           />
           {tr.chokedNote && <Verbatim label="The choked-flow note">{tr.chokedNote}</Verbatim>}
+          {tr.downstreamNote && <Verbatim label="The downstream note">{tr.downstreamNote}</Verbatim>}
           {tr.fuelNote && <Verbatim label="fuelNote">{tr.fuelNote}</Verbatim>}
           {tr.carbonNote && <Verbatim label="carbonNote">{tr.carbonNote}</Verbatim>}
         </>

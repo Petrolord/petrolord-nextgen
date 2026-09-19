@@ -52,12 +52,9 @@ const classOf = (key) => {
 /* ---------------------------- shared ---------------------------- */
 export const gwpSet = (values = K.CAP_GWP.values, label = K.CAP_GWP.label) => CA.makeGwpSet({ label, values });
 export const atomFactor = (gas) => CA.makeFactor({ label: `${gas} from the atom balance`, value: 1, unit: `t${gas}/t${gas}`, gas, source: 'Atom balance (conservation of mass)', version: 'not applicable' });
-export const atomLines = (label, r, g) => {
-  const rows = [];
-  if (r && !r.error && r.co2Tonnes) rows.push(CA.emissionLine({ label: `${label} (CO2)`, scope: 1, activity: r.co2Tonnes, activityUnit: 't CO2', factor: atomFactor('CO2'), gwpSet: g }));
-  if (r && !r.error && r.ch4Tonnes) rows.push(CA.emissionLine({ label: `${label} (unburned CH4)`, scope: 1, activity: r.ch4Tonnes, activityUnit: 't CH4', factor: atomFactor('CH4'), gwpSet: g }));
-  return rows;
-};
+// The engine's own atomBalanceLines (MD45-1): CO2 and escaped methane through a
+// factor of one, or one blocked line carrying a refusal.
+export const atomLines = (label, r, g) => CA.atomBalanceLines({ label, combustion: r, gwpSet: g });
 export const specLine = (spec, g) => CA.emissionLine({ label: spec.label, scope: spec.scope, activity: spec.activity, activityUnit: spec.activityUnit, factor: CA.makeFactor(spec.factor), gwpSet: g });
 
 /* ---------------------------- OWAZA ----------------------------- */

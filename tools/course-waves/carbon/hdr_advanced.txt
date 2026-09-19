@@ -18,7 +18,7 @@
 -- source emits gives no verdict.
 --
 -- THE TRAP THE TIER IS BUILT ON. A one-off capital cost set against one year's
--- saving makes every capital measure look expensive.
+-- saving overstates the cost per tonne of a capital measure.
 --
 -- No NPV, IRR, Monte Carlo or decision tree is taught or graded; the levelised
 -- cost per tonne is. The capstone grades four costs in US dollars per tonne and

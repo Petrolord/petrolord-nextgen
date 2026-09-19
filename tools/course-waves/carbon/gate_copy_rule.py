@@ -21,12 +21,16 @@ import sys
 
 W = os.path.dirname(os.path.abspath(__file__))
 REPO = '/root/wt-et-carbon-nextgen/src/content/courses/carbon'
+# Since MD45-1 no engine string the DIGEST quotes carries a contrastive. The
+# three below are RETIRED engine wording that written lessons still quote;
+# every one is listed in REVISE.md for the lesson-fix pass, and this exemption
+# is removed in that pass (the gate then fails on any lesson still quoting it).
 ENGINE_VERBATIM = ['A floor, not the value:', 'quantitative inventory, not a regulatory compliance register', 'conservation of mass, not an empirical factor']
 CONTRAST = re.compile(r"\b\w+, not (a |an |the )?\w+", re.I)
 
 
 def texts():
-    for f in ['LESSON_TASK.md', 'BANK_TASK.md', 'KEY_TRUTH_TASK.md', 'PANELS.md', 'RECON.md',
+    for f in ['LESSON_TASK.md', 'BANK_TASK.md', 'KEY_TRUTH_TASK.md', 'PANELS.md', 'RECON.md', 'REVISE.md',
               'hdr_beginner.txt', 'hdr_intermediate.txt', 'hdr_advanced.txt']:
         yield f, open(os.path.join(W, f), encoding='utf-8').read()
     cap = json.load(open(os.path.join(W, 'capstone.json')))

@@ -105,7 +105,7 @@ const WRONG = {
       destruction_efficiency_read_as_100_percent: oh1.co2Tonnes,
       carbon_mass_times_44_over_12: carbonMass(oh) * 0.995 * MR,
       carbon_per_kmol_ignored: CA.combustionCo2FromCarbon({ ...K.OWAZA_HEATERS, carbonPerKmolFuel: 1 }).co2Tonnes,
-      co2_at_the_fuel_reference_molar_mass: (oh.carbonKmolPerYear * 0.995 * 44.01) / 1000,
+      co2_at_a_rounded_44_01: (oh.carbonKmolPerYear * 0.995 * 44.01) / 1000,
     },
   },
   owaza_flare_co2_t: {

@@ -8,7 +8,7 @@ JavaScript. This gate imports the vendored oracles themselves, computes each
 graded field from the capstone conditions, and compares with fields.json.
 
 WHAT IS CALLED, said plainly. Every field goes through a FUNCTION the oracle
-exports, except one, which is marked:
+exports:
 
   oracle_carbonabatement.combustion      combustion by MASS in exact rationals
   oracle_carbonabatement.inventory       the inventory as a ledger
@@ -22,11 +22,9 @@ exports, except one, which is marked:
   oracle_energyefficiency.pinch_by_deficit     pinch by the largest deficit
   oracle_energyefficiency.levelised      the saving's cost per tonne
 
-  TRANSCRIBED: the tuning saving. The oracle computes it as a DUTY LEDGER
-  inside main() (fuel = duty / efficiency at a fixed duty, then the fuel
-  saved), not in an exported function. This gate runs the same four lines on
-  the oracle's own efficiency() results, marked below. Recommended: export a
-  duty_ledger() from oracle_energyefficiency.py in a small engines PR.
+  oracle_energyefficiency.duty_ledger    the tuning saving as a duty ledger
+                                         (exported in MD45-1; the foundation
+                                         transcribed it from main())
 
 THE COMPARISON. The engine rounds several graded figures itself (tonnes to six
 decimals, percents to six, money to four); the oracle does not. Each field
@@ -83,10 +81,7 @@ heater = {'stackTempC': IH['stackTempC'], 'combustionAirTempC': IH['combustionAi
 excess = OE.excess_by_bisection(st, str(IH['currentO2Percent'])) * 100
 eff_c = OE.efficiency(st, str(IH['currentO2Percent']), heater, 'LHV')['eff']
 eff_t = OE.efficiency(st, str(IH['targetO2Percent']), heater, 'LHV')['eff']
-# TRANSCRIBED from oracle_energyefficiency.main(): the tuning saving as a duty ledger.
-duty = Fr(1000)
-fuel_c, fuel_t = duty / (eff_c / 100), duty / (eff_t / 100)
-saving_gj = Fr(IH['annualFuelEnergyGJ']) * (fuel_c - fuel_t) / fuel_c
+saving_gj = OE.duty_ledger(str(eff_c), str(eff_t), IH['annualFuelEnergyGJ'])['annualEnergySavedGJ']
 T = K['IGRITA_TRAP']
 p_abs = Fr(str(T['upstreamPressureBarG'])) + Fr(str(T['atmosphereBarA']))
 trap = OE.trap_nozzle(T['orificeDiameterMm'], float(p_abs), T['dischargeCoefficient'], T['steamDensityKgM3'], T['specificHeatRatio'], T['hoursPerYear'])
@@ -123,7 +118,7 @@ ORACLE = {
     'owaza_total_tco2e': ('oracle_carbonabatement.inventory', ow_inv['totalTonnes']),
     'igrita_excess_air_pct': ('oracle_energyefficiency.excess_by_bisection', float(excess)),
     'igrita_efficiency_lhv_pct': ('oracle_energyefficiency.efficiency (species ledger)', float(eff_c)),
-    'igrita_tuning_saving_gj': ('duty ledger TRANSCRIBED from oracle_energyefficiency.main on its efficiency()', float(saving_gj)),
+    'igrita_tuning_saving_gj': ('oracle_energyefficiency.duty_ledger on its efficiency()', float(saving_gj)),
     'igrita_trap_t_per_yr': ('oracle_energyefficiency.trap_nozzle', trap['tonnesPerYear']),
     'igrita_pinch_hot_utility_kw': ('oracle_energyefficiency.pinch_by_deficit', pinch['hotUtilityKW']),
     'igrita_pinch_cold_utility_kw': ('oracle_energyefficiency.pinch_by_deficit', pinch['coldUtilityKW']),
