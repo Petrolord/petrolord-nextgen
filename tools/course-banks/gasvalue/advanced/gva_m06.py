@@ -13,7 +13,7 @@ q(1, "What does SECTION 35 hold about the flare efficiencies?",
   "They are pinned and not validated, beside the DAK and Sutton coefficients."],
  "SECTION 35, held: the flare efficiencies have no default: the rule's tiered defaults are a United States rule, and the basis for a Nigerian study is a regulation reading. The pinned list names heating values, densities, latent heats, the DAK and Sutton coefficients, the rule's equation form and water at 15 C.")
 
-q(3, "The vessel's water capacity is weighed with water at 15 C for a filling density. Where does SECTION 35 place that water figure?",
+q(3, "SECTION 35 names water at 15 C for a filling density. In which of its lists does it place that item?",
  "Among the items pinned and not validated",
  ["Among the held limits, as a code value the site types",
   "Among the case inputs, typed with the GWP values",
@@ -80,7 +80,7 @@ q(0, "Which liquid density does KANO's vessel run on in the rollout?",
  ["999.1 kg/m3, the water capacity's",
   "584 kg/m3, n-butane's typical row",
   "553.6000 kg/m3, the studio opening blend's"],
- "The rollout's first step is KANO blend density, 557.4000 kg/m3, which is the liquid density the vessel rows are sized on. Water at 999.1 kg/m3 weighs only the water capacity; 584 kg/m3 is one component's typical density, and 553.6000 kg/m3 is a different blend.")
+ "The rollout's first step is KANO blend density, 557.4000 kg/m3, which is the liquid density the vessel rows are sized on. 999.1 kg/m3 is WATER_KG_M3; 584 kg/m3 is one component's typical density, and 553.6000 kg/m3 is a different blend.")
 
 q(2, "IBAFO's forecourt prints kgPerHour 224.1860. Which mass per fill does it carry?",
  "16.0133 kg, the cascade's kgPerFill",

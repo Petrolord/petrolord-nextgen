@@ -81,7 +81,7 @@ q(3, "At the 0.85 liquid_volume fill, which reorder point and ullage at reorder 
  ["reorderAtTonnes 40.0000, ullageAtReorderTonnes 22.9433",
   "reorderAtTonnes 16.0000, ullageAtReorderTonnes 31.0685",
   "reorderAtTonnes 16.0000, ullageAtReorderTonnes 22.9433"],
- "The 0.85 row prints reorderAtTonnes 40.0000 and ullageAtReorderTonnes 31.0685. 22.9433 is the 0.42 row's ullage; 16.0000 is the safety stock, which is the reorder point only when the lead time is omitted and takes the stated 0.")
+ "The 0.85 row prints reorderAtTonnes 40.0000 and ullageAtReorderTonnes 31.0685. 22.9433 is the 0.42 row's ullage; 16.0000 is the safety stock, the reorder point the engine gives when the lead time is omitted from the call and takes the stated 0.")
 
 q(1, "KANO's lead time is left blank ('') at the 0.85 fill. What does lpgStorageSizing return?",
  "lead time in missingInputs, reorderAtTonnes null, cover still 8.8840 days",

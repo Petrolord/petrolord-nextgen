@@ -28,7 +28,7 @@ q(1, "The studio opens on propane 0.4 and butane 0.6 by liquid volume. What dens
   "999.1 kg/m3"],
  "SECTION 25 prints the studio opening blend at densityKgM3 553.6000 (volume). 557.4000 kg/m3 is KANO's blend, 508 kg/m3 propane's typical row, and 999.1 kg/m3 is WATER_KG_M3 (SECTION 26).")
 
-q(1, "KANO's blend is typed with propane at a volume fraction below zero. Which line comes back?",
+q(1, "lpgBlendProperties is given a negative volume fraction. Which line comes back?",
  "REFUSED: A volume fraction cannot be negative.",
  ["REFUSED: Every component needs a volume fraction.",
   "A blend taken on the components whose fractions are positive.",
@@ -128,7 +128,7 @@ q(0, "The studio's opening carousel runs 16 positions at availability 0.9 for 8 
   "effectivePositions 14, queuePositions 14.4000"],
  "SECTION 28: the studio's opening carousel prints effectivePositions 14.4000, queuePositions 14 and averageWaitMinutes 0.9850. 16.5600 and 16 are KANO's.")
 
-q(3, "KANO's carousel is sized with its fill time left out. Which line comes back?",
+q(3, "KANO's carousel is sized with no fill time. Which line comes back?",
  "REFUSED: Demand, fill time and a position count are required and must be positive.",
  ["REFUSED: Arrivals, fill time and a dispenser count are required and must be positive.",
   "REFUSED: Shift hours must be positive and availability must lie in (0, 1].",
@@ -218,9 +218,9 @@ q(1, "One of IBAFO's banks is given a volume and no pressure. What does cascadeF
 q(2, "Where does IBAFO's stageCount of 4 come from?",
  "The Facilities compression engine that cngCompression calls",
  ["cngCompression's own staging rule on bar(a)",
-  "The three cascade banks, one stage each and one more",
+  "A stage count typed with IBAFO's compressor inputs",
   "The ratio of 255 to 5 bar(a), taken to a whole number"],
- "SECTION 32's basis reads: \"Staging, polytropic head and real-gas Z from the Facilities compression engine; this converts units and does not reimplement the thermodynamics.\"")
+ "SECTION 32's basis reads: \"Staging, polytropic head and real-gas Z from the Facilities compression engine; this converts units and does not reimplement the thermodynamics.\" The staging is the Facilities engine's: cngCompression converts IBAFO's 400 kg/h, suction 5 bar(a) at 32 C and discharge 255 bar(a) to field units, calls that engine and converts the answer back.")
 
 q(1, "Which stage of IBAFO's compressor runs from 35.7070 to 95.4220 bar(a)?",
  "Stage 3",

@@ -22,7 +22,7 @@
   "explanation": "designDutyKW is dutyKW times one plus the margin percent over 100, and SECTION 27 prints it as 98.6948 kW. 85.8215 kW is dutyKW before the margin, 71.8176 kW the boil term alone, and 8.8472 kW the warming term."
  },
  {
-  "prompt": "The vaporizer duty is asked for with no boiling point given. Which result comes back?",
+  "prompt": "KANO's vaporizer duty is asked for with the boiling point left blank. Which result comes back?",
   "options": [
    "dutyKW 71.8176, with warming and superheat named as missing terms",
    "dutyKW 85.8215, on butane's typical boiling point of -0.5 C",

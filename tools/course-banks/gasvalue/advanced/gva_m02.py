@@ -20,7 +20,7 @@ q(3, "KANO's vaporizer takes 650 kg/h with a design margin of 15 percent. What d
   "8.8472 kW"],
  "designDutyKW is dutyKW times one plus the margin percent over 100, and SECTION 27 prints it as 98.6948 kW. 85.8215 kW is dutyKW before the margin, 71.8176 kW the boil term alone, and 8.8472 kW the warming term.")
 
-q(0, "The vaporizer duty is asked for with no boiling point given. Which result comes back?",
+q(0, "KANO's vaporizer duty is asked for with the boiling point left blank. Which result comes back?",
  "dutyKW 71.8176, with warming and superheat named as missing terms",
  ["dutyKW 85.8215, on butane's typical boiling point of -0.5 C",
   "REFUSED: A latent heat of vaporisation is required; it is a property of the product and is not assumed.",
