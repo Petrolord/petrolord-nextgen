@@ -289,7 +289,7 @@ if prompts_compared != 3:
 # ------------------------------------------- the catalogue row against wave.json
 wave = json.loads(show(f'{WAVE}/wave.json'))
 cat = re.search(r"insert into public\.academy_apps \(slug, name, module, path_order, status, prereq_slug\)\s+"
-                r"values \('([a-z]+)', '((?:[^']|'')*)', '([a-z]+)', (\d+), '([a-z_]+)', (null|'[a-z]+')\)", course)
+                r"values \('([a-z]+)', '((?:[^']|'')*)', '([a-z_]+)', (\d+), '([a-z_]+)', (null|'[a-z]+')\)", course)
 if not cat:
     sys.exit('REFUSED: the course migration carries no catalogue row')
 for what, got, want in (('slug', cat.group(1), wave['slug']), ('name', cat.group(2).replace("''", "'"), wave['name']),

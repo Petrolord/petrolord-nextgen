@@ -692,7 +692,7 @@ for k in KEYS:
     rname, val = TRAPS[k]
     why = rname.replace('_', ' ')
     A(f'''  if abs({num(val)} - {V[k]}) <= {num(TOL[k])} then
-    raise exception 'supply go-live refused: the trap "{why}" reads {num(val)}, inside the tolerance of the seeded %, so the field does not discriminate the trap{name(k)}', {V[k]};
+    raise exception 'supply go-live refused: the trap ({why}) reads {num(val)}, inside the tolerance of the seeded %, so the field does not discriminate the trap{name(k)}', {V[k]};
   end if;''')
 
 A(f'''
