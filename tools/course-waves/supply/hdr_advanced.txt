@@ -1,0 +1,30 @@
+-- ============================================================================
+-- supply EXPERT DEEP SEED: Terminals, Depots & Fuel Supply, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE CARGO AND THE PRICE. One cargo in tonnes, cubic
+-- metres, litres and barrels through a required density; the landed cost
+-- walked stage by stage from FOB through C&F and CIF, each charge on the base
+-- it names; insurance quoted on CIF solved in closed form; the ocean loss
+-- dividing the cost over the outturn; the pump price as a waterfall from the
+-- depot gate; the government's share; and the exchange rate at which a cap
+-- stops covering the chain.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The engine ships no rate. Every duty, levy,
+-- margin and tax in this course is invented and says so, and a build-up with
+-- a rate missing is a floor.
+--
+-- THE TRAP THE TIER IS BUILT ON. The order of the build-up is part of the
+-- answer: a percentage bites on the base it names, a charge cannot bite on a
+-- base the walk has not reached, and a loss added as a charge understates
+-- the cost of a litre sold.
+--
+-- HELD, taught as a limit and never graded: charges levied at discharge are
+-- billed on the bill-of-lading quantity, a contract term the engine does not
+-- know (FINDINGS-supply H1). The capstone grades two dollar figures and an
+-- exchange rate to two decimals (tolerance 0.01) and three naira-a-litre
+-- figures to four decimals (tolerance 0.0001).
+-- ============================================================================

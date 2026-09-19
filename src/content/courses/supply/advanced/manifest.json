@@ -1,0 +1,305 @@
+{
+  "app_slug": "supply",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-one-cargo-every-way",
+      "title": "One Cargo Every Way",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-tonnes-cubic-metres-litres-and-barrels",
+          "title": "Tonnes, cubic metres, litres and barrels",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-density-is-required",
+          "title": "Density is required",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-barrel-by-definition",
+          "title": "The barrel by definition",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-templates-carry-line-items",
+          "title": "The templates carry line items",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-landed-cost-walk",
+      "title": "The Landed Cost Walk",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-fob-c-and-f-and-cif",
+          "title": "FOB, C&F and CIF",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-every-charge-names-its-base",
+          "title": "Every charge names its base",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-insurance-quoted-on-cif",
+          "title": "Insurance quoted on CIF",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-base-that-does-not-exist-yet",
+          "title": "A base that does not exist yet",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-missing-rate-makes-a-floor",
+          "title": "A missing rate makes a floor",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-ocean-loss-and-the-litre-sold",
+      "title": "Ocean Loss and the Litre Sold",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-paid-on-the-bill-of-lading",
+          "title": "Paid on the bill of lading",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-divided-by-the-outturn",
+          "title": "Divided by the outturn",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-exchange-rate",
+          "title": "The exchange rate",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-charges-levied-at-discharge",
+          "title": "The charges levied at discharge",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-from-depot-gate-to-nozzle",
+      "title": "From Depot Gate to Nozzle",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-pump-price-as-a-waterfall",
+          "title": "The pump price as a waterfall",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-percent-of-the-running-total",
+          "title": "A percent of the running total",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-who-gets-what",
+          "title": "Who gets what",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-government-share",
+          "title": "The government share",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-cap-and-the-shortfall",
+          "title": "The cap and the shortfall",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-what-breaks-the-price",
+      "title": "What Breaks the Price",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-price-along-the-exchange-rate",
+          "title": "The price along the exchange rate",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-bisection-inside-a-bracket",
+          "title": "Bisection inside a bracket",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-no-crossing-in-the-range",
+          "title": "No crossing in the range",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-sensitivity-table",
+          "title": "The sensitivity table",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-badagry-cargo-end-to-end",
+          "title": "The Badagry cargo end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-is-held-and-what-is-decided",
+          "title": "What is held and what is decided",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "supply-price-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-oracles-check",
+          "title": "What the oracles check",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-where-this-course-hands-over",
+          "title": "Where this course hands over",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

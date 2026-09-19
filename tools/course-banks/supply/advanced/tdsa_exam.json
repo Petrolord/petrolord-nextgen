@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "A wrong density certificate is typed for BADAGRY, whose FOB price of 688.00 USD a tonne is invented. Which printed line of the walk is safe from the mistake?",
+  "options": [
+   "The regulatory line, 109854.60 USD, since the per-litre charge is fixed in the template.",
+   "The storage line, 121297.79 USD, since storage is billed on the tank the cargo fills.",
+   "The jetty line, 54927.30 USD, since the jetty is paid per call and never per volume.",
+   "The FOB cargo value, 23392000.00 USD, since it is a price per tonne on 34000 tonnes."
+  ],
+  "answer": 3,
+  "explanation": "FOB is 688.00 USD a tonne times 34000 tonnes, and no density enters it. The volume lines would all be re-formed from the corrected certificate."
+ },
+ {
+  "prompt": "cargoQuantities returns 45772751.75 litres for BADAGRY. What role does that litre figure play later in the tier?",
+  "options": [
+   "It is the bill-of-lading quantity the per-litre line is levied on and the invented ocean loss is taken from.",
+   "It is the outturn, the litres the importer sells after the invented ocean loss has been taken off the cargo.",
+   "It is the quantity the landed total is divided by to give the cost of each litre that reaches the pump.",
+   "It is the rounded figure typed from a quote, which is why it returns 33999.9616 tonnes when entered."
+  ],
+  "answer": 0,
+  "explanation": "The landed total is spread over what arrives, 45566774.37 litres at the invented 0.45 percent loss. The litres returned by cargoQuantities are what was loaded and paid for."
+ },
+ {
+  "prompt": "Ocean freight typed as a percent of C&F is refused on the invented BADAGRY walk. Which other entry does the digest show refused with the same sentence?",
+  "options": [
+   "A charge with the stage \"customs\".",
+   "Insurance on CIF at 100 percent.",
+   "Import duty typed as a percent of CIF.",
+   "Ocean freight typed as a percent of CIF."
+  ],
+  "answer": 3,
+  "explanation": "Freight on C&F and freight on CIF both read \"Ocean freight is a percentage of a value that is not formed until after freight.\" A customs stage and CIF insurance at 100 percent have sentences of their own, and duty on CIF is the rate BADAGRY prices at 5.75 percent."
+ },
+ {
+  "prompt": "With the invented marine insurance quoted on C&F in place of CIF, what landed total does BADAGRY print?",
+  "options": [
+   "26513943.86 USD",
+   "25114857.82 USD",
+   "24774210.79 USD",
+   "26513877.12 USD"
+  ],
+  "answer": 3,
+  "explanation": "Moving the premium onto C&F lowers it to 38868.80 USD, which lowers CIF and so the duty that reads CIF. The build with the invented premium on CIF closes at 26513943.86 USD."
+ },
+ {
+  "prompt": "The engine labels an incomplete build-up a floor. On the invented BADAGRY pump price, which figure carries that label?",
+  "options": [
+   "1066.7292 naira a litre, with the tax typed on the landed cost.",
+   "1031.3197 naira a litre, with the dealer margin and levies blank.",
+   "24774210.79 USD, with the duty and financing blank.",
+   "1074.8249 naira a litre, with every invented element supplied."
+  ],
+  "answer": 1,
+  "explanation": "The pump sentence is \"A FLOOR, not a price: 2 rate(s) not supplied.\" The walk's floor of 24774210.79 is in US dollars for the cargo, and 1066.7292 is complete true."
+ },
+ {
+  "prompt": "Every invented rate in the BADAGRY import template is supplied. How does landedCost label the build-up?",
+  "options": [
+   "complete true, labelled a floor until a cap is set.",
+   "complete true; All supplied rates applied.",
+   "complete false, since the ocean loss has no row in the template.",
+   "complete true, with the ocean loss named in assumedZero."
+  ],
+  "answer": 1,
+  "explanation": "The full walk prints landed total 26513943.86 USD, complete true and \"All supplied rates applied.\" The ocean loss is stated with the cargo and is not a template rate, and a floor is the label for a build-up with rates missing."
+ },
+ {
+  "prompt": "The invented exchange rate moves while the BADAGRY cargo and every invented import rate stay the same. Which figure is unchanged?",
+  "options": [
+   "The landed total in dollars, 26513943.86 USD.",
+   "The landed cost at the depot gate in naira a litre.",
+   "The Government row of the pump price in naira.",
+   "The shortfall against the invented cap of 1150.0000."
+  ],
+  "answer": 0,
+  "explanation": "Every line of the walk is in dollars, and the exchange rate enters once, at the end. So the naira landed cost, the tax built on it and the shortfall all move with the rate."
+ },
+ {
+  "prompt": "Across the invented exchange rate sweep the Government figure moves with the rate, reaching 97.1210 naira a litre at 2100.0000. Why does the dealer margin stay at its invented 31.2500?",
+  "options": [
+   "The dealer margin is quoted in naira while the levies are quoted in dollars, so only the levies move with the rate.",
+   "The dealer margin is per litre, while the tax in the Government row reads a running total that holds the landed cost.",
+   "The dealer is paid after the tax, so the running total the dealer reads is fixed before the landed cost is added.",
+   "The dealer margin is a share of the price, and a share of the price is held fixed when the price is re-priced."
+  ],
+  "answer": 1,
+  "explanation": "A per-litre element adds its amount, and a percent of the running total adds that percent of everything above it. The invented levies are per litre too; the tax element is what moves the Government row, since its base contains the landed cost."
+ },
+ {
+  "prompt": "How many bisection steps does the engine report for the invented BADAGRY breakeven?",
+  "options": [
+   "9",
+   "24",
+   "18",
+   "12"
+  ],
+  "answer": 2,
+  "explanation": "breakeven: found true, at 1641.7105 naira to the dollar, after 18 bisection steps."
+ },
+ {
+  "prompt": "Which landed cost cases does fuelpricing_cases.json carry?",
+  "options": [
+   "2: full and floor, with insurance on C&F.",
+   "4: one for each insurance and duty basis.",
+   "1: the full BADAGRY build-up alone.",
+   "3: floor, full and insurance on CIF."
+  ],
+  "answer": 3,
+  "explanation": "The pricing golden file carries 3 landed cost cases (floor, full, insuranceOnCif), 1 truck lane, 1 fleet, 1 pump build-up with its breakeven exchange rate, and 1 station."
+ },
+ {
+  "prompt": "What does the fuelPricing constant LITRES_PER_M3 hold, and where is it used?",
+  "options": [
+   "742.8, to turn tonnes into m3 at the BADAGRY density.",
+   "0.158987294928, to turn m3 into barrels of cargo.",
+   "745, to turn tonnes into m3 when no density is typed.",
+   "1000, to turn the cargo's m3 into litres."
+  ],
+  "answer": 3,
+  "explanation": "litres = m3 x 1000. 0.158987294928 is M3_PER_BBL, and 742.8 and 745 are densities, one typed and one from PRODUCT_REFERENCE."
+ },
+ {
+  "prompt": "Why does the course run the same 34000 tonnes through every density in PRODUCT_REFERENCE, 35416.667 m3 at 960 kg/m3 among them?",
+  "options": [
+   "To show which product the BADAGRY cargo is, since the volume identifies the product.",
+   "To give the default the engine applies when the density is left out of a call, as the PMS row does.",
+   "To show what a wrong density moves in the volume, which is why the certificate figure is typed.",
+   "To show that the barrel figure is independent of the density typed."
+  ],
+  "answer": 2,
+  "explanation": "Nothing in the module reads those densities unless a caller passes one in. The same tonnes read 45637.584 m3 at 745 and 35416.667 m3 at 960 kg/m3."
+ },
+ {
+  "prompt": "Quoted on CIF, the course's invented 0.16 percent premium comes to which dollar amount on BADAGRY?",
+  "options": [
+   "38868.80 USD",
+   "52500.00 USD",
+   "38931.09 USD",
+   "54927.30 USD"
+  ],
+  "answer": 2,
+  "explanation": "On CIF the premium is part of the value it is charged on and prints 38931.09 USD. 38868.80 USD is the same invented rate on C&F."
+ },
+ {
+  "prompt": "The invented port and harbour rate is 3.05. Which quantity does it read to print 103700.00 USD?",
+  "options": [
+   "34000 tonnes",
+   "45772.752 m3",
+   "45772751.75 litres",
+   "287901.9470 barrels"
+  ],
+  "answer": 0,
+  "explanation": "103700.00 USD over 34000 tonnes is the invented 3.05 a tonne. A density would reach this line only if it were quoted by volume."
+ },
+ {
+  "prompt": "The invented financing and letter of credit rate of 1.4 prints 340647.04 USD. On which basis is it charged?",
+  "options": [
+   "percent_of_fob",
+   "percent_of_cf",
+   "per_m3",
+   "percent_of_cif"
+  ],
+  "answer": 3,
+  "explanation": "Financing is quoted on CIF, the value frozen at the end of the insurance stage, 24331931.09 USD. It sees no landed line."
+ },
+ {
+  "prompt": "Which naira figure a litre sold goes with the 0.2 percent row of the invented ocean loss sweep?",
+  "options": [
+   "880.6943",
+   "884.6753",
+   "889.5902",
+   "882.4592"
+  ],
+  "answer": 3,
+  "explanation": "The rows run 880.6943 at 0, 882.4592 at 0.2, 884.6753 at 0.45 and 889.5902 at 1 percent, each at the invented 1520.4000 naira to the dollar."
+ },
+ {
+  "prompt": "Why do the invented duty and financing lines sit outside the contract question H1 raises?",
+  "options": [
+   "They are charged before the cargo is discharged, and H1 covers only what happens once the cargo is ashore.",
+   "They are charged on a value, CIF, and H1 is a question about which quantity a per-quantity line is billed on.",
+   "They are paid to the government, and H1 covers only what the importer pays to the terminal it discharges into.",
+   "They are refused when the outturn is typed, so the engine never has to pick between the two quantities for them."
+  ],
+  "answer": 1,
+  "explanation": "H1 asks which quantity a line quoted per tonne, per m3 or per litre is billed on. Duty at the invented 5.75 percent and financing at the invented 1.4 percent read CIF, 24331931.09 USD, and hold no quantity to choose."
+ },
+ {
+  "prompt": "What is the running total on the invented BADAGRY waterfall once the statutory levies are added?",
+  "options": [
+   "999.6253 naira a litre",
+   "1074.8249 naira a litre",
+   "1009.2253 naira a litre",
+   "968.3753 naira a litre"
+  ],
+  "answer": 2,
+  "explanation": "The invented levies of 9.6 add 9.6000 to 999.6253. The tax then reads 1009.2253 and the price is 1074.8249."
+ },
+ {
+  "prompt": "What share of the invented BADAGRY price is the landed cost at the depot gate?",
+  "options": [
+   "0.069965",
+   "0.061033",
+   "0.029075",
+   "0.823088"
+  ],
+  "answer": 3,
+  "explanation": "884.6753 naira a litre is grouped as Product (landed) with a share of 0.823088. 0.069965 is Government, 0.061033 the tax row and 0.029075 the dealer."
+ },
+ {
+  "prompt": "Which recipient does the invented transport to station element of 19.8 naira a litre pay?",
+  "options": [
+   "Chain",
+   "Marketer",
+   "Transporter",
+   "Terminal"
+  ],
+  "answer": 2,
+  "explanation": "PUMP_TEMPLATE gives transport the recipient Transporter. Chain receives the bridging element, Marketer the marketer margin and Terminal the depot margin."
+ },
+ {
+  "prompt": "On the invented sweep against the cap of 1150.0000, on which rows does the verdict read true?",
+  "options": [
+   "The four rows from 1650.0000 to 2100.0000 naira to the dollar.",
+   "Every row, since the price at the invented base rate is below the cap.",
+   "No row, since the cap is below the price at every swept exchange rate.",
+   "The three rows from 1200.0000 to 1500.0000 naira to the dollar."
+  ],
+  "answer": 3,
+  "explanation": "The shortfall is negative at 1200.0000, 1350.0000 and 1500.0000 and positive from 1650.0000, where it is 5.1370 naira a litre."
+ },
+ {
+  "prompt": "The engine's CIF of 24331931.09 USD on BADAGRY, with the invented insurance on CIF, is checked how?",
+  "options": [
+   "An oracle reads it off a published marine insurance table and compares the two to the cent.",
+   "An oracle reaches it by iterating the fixed point, a different road from the engine's closed form.",
+   "The engine solves it twice, once on C&F and once on CIF, and checks that the two agree.",
+   "It is not checked, since insurance on CIF is circular and no second method can reach it."
+  ],
+  "answer": 1,
+  "explanation": "Insurance on CIF by fixed-point iteration is in the fuelpricing oracle's method column. The published source column for that file reads none: every rate is synthetic."
+ },
+ {
+  "prompt": "RATE_DISCLAIMER and held finding H2 describe one decision. What is it?",
+  "options": [
+   "The engine ships one market's regulated rates and asks the user to confirm them before use.",
+   "The engine ships no rate, so every rate is a required input and each one in this course is invented.",
+   "The engine ships typical rates as a starting point, as PRODUCT_REFERENCE does for densities.",
+   "The engine ships rates for the import walk and leaves the pump elements for the user to type."
+  ],
+  "answer": 1,
+  "explanation": "RATE_DISCLAIMER says every rate is a required input, since duties, levies and regulated margins are set by regulation, differ by market and change. H2: every template rate is absent, 9 of 9 on IMPORT_TEMPLATE and 7 of 7 on PUMP_TEMPLATE, and every rate in this course is invented."
+ },
+ {
+  "prompt": "What C&F does landedCost print for the invented BADAGRY cargo?",
+  "options": [
+   "24293000.00 USD",
+   "23392000.00 USD",
+   "24331931.09 USD",
+   "26513943.86 USD"
+  ],
+  "answer": 0,
+  "explanation": "The walk runs FOB, then freight (C&F): 23392000.00 USD of cargo and 901000.00 USD of the invented freight. 24331931.09 USD is CIF, formed after insurance, and 26513943.86 USD the landed total."
+ },
+ {
+  "prompt": "The BADAGRY cost a litre sold prints to six decimals in dollars and to four in naira. Which pair is it at the invented 0.45 percent loss?",
+  "options": [
+   "0.579252 USD and 880.6943 naira",
+   "0.581870 USD and 884.6753 naira",
+   "0.585103 USD and 889.5902 naira",
+   "0.513357 USD and 884.6753 naira"
+  ],
+  "answer": 1,
+  "explanation": "0.581870 USD a litre sold x the invented 1520.4000 is 884.6753 naira. 0.513357 USD is the FOB line alone per outturn litre."
+ },
+ {
+  "prompt": "What share of the invented BADAGRY pump price does the value added tax row carry?",
+  "options": [
+   "0.069965",
+   "0.019538",
+   "0.061033",
+   "0.008932"
+  ],
+  "answer": 2,
+  "explanation": "The share column divides the row's amount by 1074.8249 naira a litre. 0.069965 is the Government row, levies and tax together, and 0.008932 the levies row."
+ },
+ {
+  "prompt": "Over the course's 1300 to 1500 bracket, what do the two negative end shortfalls say about the invented cap?",
+  "options": [
+   "It fails the chain at both ends, so the crossing must lie below 1300 and the bracket must move down.",
+   "It covers the chain at one end and fails it at the other end.",
+   "It sits exactly on the price at 1500, which is the breakeven.",
+   "It covers the chain at both ends, so the price does not meet it anywhere searched."
+  ],
+  "answer": 3,
+  "explanation": "A negative shortfall means the cap sits above the price. -211.7551 and -87.8167 have the same sign, so there is nothing to halve towards."
+ },
+ {
+  "prompt": "Which pair of elements makes up the Government recipient on the invented BADAGRY waterfall?",
+  "options": [
+   "Statutory levies at the pump and Value added tax.",
+   "Value added tax alone.",
+   "Statutory levies at the pump alone.",
+   "Statutory levies at the pump, Value added tax and Bridging or equalisation."
+  ],
+  "answer": 0,
+  "explanation": "The Government row reads 75.1996 naira a litre with the elements Statutory levies at the pump and Value added tax. Bridging or equalisation is paid to Chain, and removing its recipient sends it to Unattributed."
+ },
+ {
+  "prompt": "cargoQuantities refuses the unit \"kg\" and landedCost refuses the stage \"customs\". What do the two refusals share?",
+  "options": [
+   "Both are forward references to a value the walk has not formed, so both carry the same sentence.",
+   "Each names a label the engine does not know and refuses the call.",
+   "Both are density errors, since kilograms and customs charges are each formed from a volume.",
+   "Both are read as zero and named, so the answer is labelled a floor until the label is fixed."
+  ],
+  "answer": 1,
+  "explanation": "The digest prints REFUSED: Unknown quantity unit \"kg\". for cargoQuantities and REFUSED: Customs processing has an unknown stage \"customs\". for landedCost. Neither returns a figure, and neither is a forward reference or a floor."
+ },
+ {
+  "prompt": "Which invented BADAGRY figure changes when the ocean loss changes: the landed total, the bill-of-lading litres, the regulatory line or the outturn?",
+  "options": [
+   "The outturn",
+   "The landed total",
+   "The bill-of-lading litres",
+   "The regulatory line"
+  ],
+  "answer": 0,
+  "explanation": "The landed total reads 26513943.86 USD on every row of the sweep and the bill of lading 45772751.75 litres, and the regulatory line, 109854.60 USD, is charged on those bill-of-lading litres. The outturn is the one figure of the four that falls as the loss rises."
+ },
+ {
+  "prompt": "What is the running total after the invented marketer margin of 18.4 naira a litre?",
+  "options": [
+   "968.3753 naira a litre",
+   "949.9753 naira a litre",
+   "999.6253 naira a litre",
+   "930.1753 naira a litre"
+  ],
+  "answer": 0,
+  "explanation": "The marketer margin takes the running total from 949.9753 to 968.3753. 999.6253 is after the dealer and 930.1753 after bridging."
+ },
+ {
+  "prompt": "What shortfall does the invented sweep print at 1950.0000 naira to the dollar?",
+  "options": [
+   "98.0908 naira a litre",
+   "283.9982 naira a litre",
+   "191.0445 naira a litre",
+   "1341.0445 naira a litre"
+  ],
+  "answer": 2,
+  "explanation": "The price at 1950.0000 is 1341.0445 naira a litre, which is 191.0445 above the invented cap. 98.0908 is the row at 1800.0000 and 283.9982 the row at 2100.0000."
+ },
+ {
+  "prompt": "percent_of_running appears in which of the module's basis lists, and on which invented BADAGRY line?",
+  "options": [
+   "CHARGE_BASIS alone, on the import duty.",
+   "PRICE_ELEMENT_BASIS alone, on the value added tax.",
+   "Both lists, on the duty and the tax, since each is a percentage line.",
+   "PRICE_ELEMENT_BASIS alone, on the levies."
+  ],
+  "answer": 1,
+  "explanation": "The pump template's one percentage line is the tax, on percent_of_running. The levies are per_litre, and the duty is a CHARGE_BASIS line on percent_of_cif."
+ },
+ {
+  "prompt": "884.6753 naira a litre appears in two modules on the invented BADAGRY record. Which two roles does it play?",
+  "options": [
+   "The pump price before tax, and the base the invented value added tax reads.",
+   "The naira cost a litre sold, and the landed cost the pump waterfall starts from.",
+   "The landed total per bill-of-lading litre, and the cap the waterfall is checked on.",
+   "The naira cost a litre at zero loss, and the landed cost at the swept 1500.0000."
+  ],
+  "answer": 1,
+  "explanation": "The walk ends at 0.581870 USD a litre sold, converted once to 884.6753 naira. buildPumpPrice starts from that figure, whose share of the price is 0.823088."
+ },
+ {
+  "prompt": "The invented regulatory line prints 109854.60 USD and 0.002411 USD per outturn litre. Which litres is it levied on, and which is it spread over?",
+  "options": [
+   "Levied on the 45772751.75 bill-of-lading litres, spread over the 45566774.37 outturn litres.",
+   "Levied on the 45566774.37 outturn litres, spread over the 45772751.75 bill-of-lading litres.",
+   "Levied and spread over the 45772751.75 bill-of-lading litres, the one quantity the walk uses.",
+   "Levied and spread over the 45566774.37 outturn litres, since the charge applies to litres sold."
+  ],
+  "answer": 0,
+  "explanation": "Every per-quantity line is charged on the bill of lading. The column in USD per outturn litre spreads every line over the outturn."
+ },
+ {
+  "prompt": "On the final row of the invented element table, 2100.0000 naira to the dollar, which pair of figures is printed?",
+  "options": [
+   "1433.9982 and 97.1210 naira a litre",
+   "1221.9272 and 75.1996 naira a litre",
+   "1221.9272 and 97.1210 naira a litre",
+   "698.2441 and 97.1210 naira a litre"
+  ],
+  "answer": 2,
+  "explanation": "The last row of the element table carries 1221.9272 landed and 97.1210 Government beside a price of 1433.9982. 698.2441 is the first row's landed cost, and 75.1996 the Government row at the invented base rate."
+ },
+ {
+  "prompt": "What do both golden file rows print in their published source column?",
+  "options": [
+   "the published volume correction tables",
+   "the regulation in force",
+   "the engines repository's findings file",
+   "none"
+  ],
+  "answer": 3,
+  "explanation": "No coefficient table is shipped and every rate is synthetic, so no figure is checked against a published source. The terminal row adds that its tanks are geometric or the Suite sample."
+ },
+ {
+  "prompt": "With only the invented duty typed 0 and every other invented rate supplied, what does landedCost report for BADAGRY?",
+  "options": [
+   "complete false, total 25114857.82 USD",
+   "complete true, total 26513943.86 USD",
+   "complete true, total 25114857.82 USD",
+   "complete false, total 24774210.79 USD"
+  ],
+  "answer": 2,
+  "explanation": "A rate typed 0 is a rate. The blank duty prints the same total with complete false and Import duty missing."
+ },
+ {
+  "prompt": "Which recipient does the invented bridging or equalisation element pay in PUMP_TEMPLATE?",
+  "options": [
+   "Chain",
+   "Government",
+   "Terminal",
+   "Unattributed"
+  ],
+  "answer": 0,
+  "explanation": "Bridging's recipient is Chain, and the grouping reports 24.5000 naira a litre against it. Unattributed appears only when the course removes that recipient."
+ },
+ {
+  "prompt": "34000 tonnes read 40476.190 m3 through cargoQuantities. Which PRODUCT_REFERENCE density was used?",
+  "options": [
+   "745 kg/m3, the PMS row",
+   "800 kg/m3, the DPK row",
+   "840 kg/m3, the AGO row",
+   "960 kg/m3, the HFO row"
+  ],
+  "answer": 2,
+  "explanation": "The density sweep prints 40476.190 m3 at 840 kg/m3, AGO. PMS at 745 reads 45637.584 m3, DPK at 800 reads 42500.000 m3 and HFO at 960 reads 35416.667 m3."
+ },
+ {
+  "prompt": "Which method does the terminal oracle, oracle_terminaldepot.py, list for the loading queue?",
+  "options": [
+   "An integer fleet search, one truck at a time.",
+   "Erlang C by the exact factorial form and Little's law.",
+   "Insurance on CIF by fixed-point iteration.",
+   "A closed-form FX breakeven."
+  ],
+  "answer": 1,
+  "explanation": "The terminal oracle lists strapping from tank geometry, Erlang C by the exact factorial form and Little's law, and a day ledger. The integer fleet search, the fixed-point insurance and the closed-form FX breakeven are the fuel pricing oracle's methods."
+ },
+ {
+  "prompt": "The breakeven of 1641.7105 naira to the dollar, an invented exchange rate on an invented record, is reached by the engine and by an oracle. Which statement about it holds?",
+  "options": [
+   "It is the rate at which the invented cap stops covering any chain priced by this engine.",
+   "It is a property of the invented record, found by bisection and matched by a closed form.",
+   "It is graded as the exchange rate the course expects the naira to reach against the cap.",
+   "It is found by closed form in the engine, and the oracle confirms it by bisection."
+  ],
+  "answer": 1,
+  "explanation": "The engine bisects and the oracle solves in closed form, and every rate behind the figure is invented for the course."
+ }
+]
