@@ -13,7 +13,7 @@ Revenue goes in as revenue: barrels at the slate's value. The production stream 
 | production (oil, bbl) | 0.00 | 3753600.00 |
 | price (the slate's gross value) | | 92.2100 |
 
-The crude bill goes into the cost streams. The opexFixed in the first operating year is 291.7664 million, and it is the fixed operating cost plus the crude cost. The opexVariable is 15.7651 million, the variable operating cost on the year's throughput.
+The crude bill goes into the cost streams. The opexFixed in the first operating year is 291.7664 million, and it is the fixed operating cost plus the crude cost. The opexVariable is 15.7651 million, the variable operating cost on the year's throughput. The cash flow's opex is their sum, and the digest prints it: 291.7664 + 15.7651 = 307.5315.
 
 ## What comes out
 
@@ -24,7 +24,7 @@ For each operating year the screening engine prints:
 | 2 | 2029 | 346.1195 | 0.0000 | 307.5315 | 0.0000 |
 | 3 | 2030 | 346.1195 | 0.0000 | 307.5315 | 0.0000 |
 
-The same gross revenue and opex repeat in every operating year to year 21, calendar 2048. The gross revenue of 346.1195 million is the plant's product sales. The opex of 307.5315 million carries the fixed operating cost, the crude and the variable cost together. The net cash flow in year 2, a year with a tax of 0.0000, reads 38.5879 million.
+The same gross revenue and opex repeat in every operating year to year 21, calendar 2048. The gross revenue of 346.1195 million is the plant's product sales. The net cash flow in year 2, a year with a tax of 0.0000, reads 38.5879 million.
 
 ## Why revenue stays gross
 

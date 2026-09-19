@@ -30,7 +30,7 @@ A floor breaks the third. SECTION 14 prints the stream values under a jet floor 
 | the plan as typed | 111.0000 | 105.5000 | 104.8000 | 59.0000 |
 | a jet floor of 300000 and a fuel oil floor of 700000 | 111.0000 | 105.5000 | 104.8000 | 79.6607 |
 
-Residue reads 79.6607 under the floors, and Fuel oil's price is still 59.0000. The plan is being made to sell at least 700000 barrels of Fuel oil. One more barrel of residue arriving from outside counts toward that floor, so it is worth its sale price and also whatever it relieves the plan of doing to meet the floor from crude. The plan prints the whole of that as 79.6607, and the digest prints no split of it into those parts.
+Residue reads 79.6607 under the floors, and Fuel oil's price is still 59.0000. The plan must sell at least 700000 barrels of Fuel oil, and it sells 700000.00: the fuel oil floor is met exactly, true. Bonny Light (illustrative) is the crude only partly run, at 567857.14 bbl, and residue is valued at its break-even: (82.5500 - 0.2300 x 72.5000 - 0.1500 x 105.5000 - 0.3100 x 89.5000 - 0.0300 x 0.0000) / 0.2800 = 79.6607.
 
 That is the general lesson in one row. A stream's value is the plan's value, under the plan's limits. When a floor forces the plan's hand, the stream it forces is valued by what the force costs.
 

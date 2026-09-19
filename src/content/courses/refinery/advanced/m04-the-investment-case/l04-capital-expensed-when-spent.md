@@ -6,7 +6,7 @@ Capital enters a cash flow once as money spent. It enters the tax calculation a 
 
 ## The capital in the cash flow
 
-The modular scaling law gives the expansion a capital of 117831965.35 dollars. The screen spreads capital evenly over the construction years, and the expansion has 2 of them. In the screening engine's millions:
+The modular scaling law gives the expansion a capital of 117831965.35 dollars. The screen spreads capital evenly over the construction years, and the expansion has 2 of them: 58915982.67 in each, printed to the cent, with unrounded halves that sum to the capital: true. In the screening engine's millions:
 
 | year | calendar year | capex (MM) | tax (MM) | net cash flow (MM) |
 | --- | --- | --- | --- | --- |

@@ -26,13 +26,13 @@ Three types, burn, flare and vent, emit by their nature, and the flag says so on
 
 ## Why the type carries the direction
 
-A user typing a signed quantity has two ways to be wrong: the size and the sign. With the sign fixed by the type, a delivery of 100 bbl and a receipt of 100 bbl are typed the same way and read the opposite way. There is one place the direction is decided, and the variance engine relies on it in module 3, where a line's direction decides whether its gap helps or hurts margin.
+A user typing a signed quantity has two ways to be wrong: the size and the sign. With the sign fixed by the type, a delivery of 100 bbl and a receipt of 100 bbl are typed the same way and read the opposite way. The variance engine relies on that direction in module 3, where a line's direction decides whether its gap helps or hurts margin.
 
 ## The value of an event
 
 Every ODIOMA movement carries a value in US dollars. What the value means depends on the type. A delivery's value is what it sold for. Every other event's value is what it cost. So a crude receipt's value is the cost of the crude that arrived, and a unit_run's value is the operating cost of running the unit. In the ODIOMA plan the crude unit runs 1000000.00 bbl at an operating cost of 1.4000 a barrel and carries a value of 1400000.00.
 
-This split is what later lets the engine say which lines are revenue and which are cost. A delivery line is revenue. A receipt line and a unit_run line are cost.
+This split is what later lets the engine say which lines are revenue and which are cost. A delivery line is revenue. A receipt line and a unit_run line are cost. dualLedgerTotals reads a whole ledger the same way: for the ODIOMA plan ledger it prints cost 80049000.00, revenue 84825300.00 and uncosted events 0.
 
 ## A cost left out is null
 

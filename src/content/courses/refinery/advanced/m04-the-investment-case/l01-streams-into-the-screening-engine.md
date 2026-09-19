@@ -17,7 +17,7 @@ The screen returns four figures before any valuation:
 | annual throughput (bbl) | 3753600.00 |
 | gross margin per barrel | 14.0100 |
 
-The capital comes from the modular scaling law, whose exponent of 0.9 is a default a vendor's own figures replace. The gross value is the conversion slate's value per barrel of crude.
+The capital comes from the modular scaling law. The gross value is the conversion slate's value per barrel of crude.
 
 ## What crosses to the screening engine
 
@@ -49,7 +49,7 @@ The project life of 22 years covers the construction years and the operating yea
 
 ## Units change at the boundary
 
-The screen works in dollars and barrels. The screening engine works in millions of dollars, printed to four decimals. The capital prints as 117831965.35 dollars on the screen. The capex prints as 58.9160 million in year 0 and 58.9160 million in year 1 on the cash flow. A reader moving between the two outputs has to keep that change of unit in view.
+The screen works in dollars and barrels. The screening engine works in millions of dollars, printed to four decimals. The capital prints as 117831965.35 dollars on the screen. In the streams the capital is spread evenly as 58915982.67 and 58915982.67, each printed to the cent; the engine carries the unrounded halves, which sum to the capital: true. The capex prints as 58.9160 million in year 0 and 58.9160 million in year 1 on the cash flow.
 
 ## Exercise
 

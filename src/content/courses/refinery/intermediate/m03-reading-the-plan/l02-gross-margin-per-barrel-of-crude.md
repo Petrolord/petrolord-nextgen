@@ -21,15 +21,15 @@ SECTION 13 prints both the margin and the gross margin per barrel for each chang
 | change | total crude (bbl) | margin | gross margin per bbl | margin change from the plan as typed |
 | --- | --- | --- | --- | --- |
 | the plan as typed | 2029032.26 | 7077935.48 | 3.4883 | 0.00 |
-| the diesel hydrotreater typed as shut for a turnaround (capacity 0) | 735294.12 | 424264.71 | 0.5770 | -6653670.78 |
-| the diesel hydrotreater capacity left blank (no limit) | 2082608.70 | 7173508.35 | 3.4445 | 95572.86 |
+| the diesel hydrotreater typed as shut for a turnaround (capacity 0) | 735294.12 | 424264.71 | 0.5770 | -6653670.77 |
+| the diesel hydrotreater capacity left blank (no limit) | 2082608.70 | 7173508.35 | 3.4445 | 95572.87 |
 | the crude unit at 1900000 barrels for the month | 1900000.00 | 6847760.00 | 3.6041 | -230175.48 |
 | the Forcados cargo cancelled (availability typed 0) | 1747826.09 | 4030705.04 | 2.3061 | -3047230.44 |
-| a jet floor of 300000 and a fuel oil floor of 700000 | 2267857.14 | 5929846.43 | 2.6147 | -1148089.06 |
+| a jet floor of 300000 and a fuel oil floor of 700000 | 2267857.14 | 5929846.43 | 2.6147 | -1148089.05 |
 
-Look at the third and fourth rows. With the hydrotreater left blank, the margin change is 95572.86, and the gross margin per barrel reads 3.4445 against 3.4883 as typed. With the crude unit held at 1900000 barrels for the month, the margin change is -230175.48, and the gross margin per barrel reads 3.6041.
+Look at the third and fourth rows. With the hydrotreater left blank, the margin change is 95572.87, and the gross margin per barrel reads 3.4445 against 3.4883 as typed. With the crude unit held at 1900000 barrels for the month, the margin change is -230175.48, and the gross margin per barrel reads 3.6041.
 
-Those two rows are the lesson, and the exercise asks you to read them. The margin change column carries its sign. The gross margin column carries no change at all, so set each figure against 3.4883 yourself and see which way it moved. The total and the ratio need not move together. When a plan runs extra crude, the extra barrels are the ones the plan valued last, and they can add to the total while pulling the average down. When a plan is made to run less crude, it keeps the barrels it values most and drops the rest, and the average can rise while the total falls.
+SECTION 13 also prints the gross margin per barrel's own change from the plan as typed, taken over the printed figures: -0.0438 for the hydrotreater left blank and 0.1158 for the crude unit at 1900000 barrels. Those two rows are the lesson, and the exercise asks you to read them. The total and the ratio need not move together. When a plan runs extra crude, the extra barrels are the ones the plan valued last, and they can add to the total while pulling the average down. When a plan is made to run less crude, it keeps the barrels it values most and drops the rest, and the average can rise while the total falls.
 
 ## Which to maximise
 
@@ -37,4 +37,4 @@ The plan maximises the margin, the total. It does not maximise the gross margin 
 
 ## Exercise
 
-Read the rows for the hydrotreater left blank and the crude unit at 1900000 barrels. For each, give the margin change from the plan as typed (95572.86 and -230175.48) and the gross margin per barrel (3.4445 and 3.6041) beside 3.4883 as typed. Say what the pair shows about why a plan is chosen on its margin, and what the gross margin per barrel is still good for.
+Read the rows for the hydrotreater left blank and the crude unit at 1900000 barrels. For each, give the margin change from the plan as typed (95572.87 and -230175.48) and the change in gross margin per barrel that SECTION 13 prints (-0.0438 and 0.1158). Say what the pair shows about why a plan is chosen on its margin, and what the gross margin per barrel is still good for.

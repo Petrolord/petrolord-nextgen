@@ -31,7 +31,7 @@ What is left, 4.5900, is what each barrel of crude contributes toward everything
 
 ## What the gross margin leaves out
 
-The gross margin per barrel leaves the fixed operating cost out. The fixed cost is a yearly figure in the streams: 7500000.00 a year for OKORDIA, printed in each producing year the streams table shows. It does not belong in a per barrel figure, because how much it costs per barrel depends on how many barrels there are. Put it in the per barrel margin and the margin changes every time the throughput does, which hides the fixed cost's real character.
+The gross margin per barrel leaves the fixed operating cost out. The fixed cost is a yearly figure in the streams: 7500000.00 a year for OKORDIA, starting in the first producing year: year 1 0.00, year 2 7500000.00. It does not belong in a per barrel figure, because how much it costs per barrel depends on how many barrels there are. Put it in the per barrel margin and the margin changes every time the throughput does, which hides the fixed cost's real character.
 
 Capital is also outside the gross margin. It appears in the construction years of the streams as capex, and the screening engine values the whole stream later.
 

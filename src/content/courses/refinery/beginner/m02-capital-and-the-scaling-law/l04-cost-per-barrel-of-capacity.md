@@ -21,7 +21,7 @@ OKORDIA's own screen, at the reference size, prints a capital of 64000000.00 and
 
 ## Where the economy of scale shows
 
-A total cost column mixes two things in every row: the size of the plant and the economy of scale. The economy of scale is hard to see there. It becomes visible per bpd. Read each per bpd column from the smallest plant to the largest and you see how each law spreads its cost over more capacity.
+A total cost column mixes two things in every row: the size of the plant and the economy of scale. The economy of scale is hard to see there. It becomes visible per bpd. Down the table, the screen checks each column for you: capital per bpd falls at every step as capacity rises, modular true, stick-built true. Total capital rises at every step, true under both laws. The plant costs more, and each barrel a day of it costs less.
 
 Now read the exponent of 1 case. Scaled in proportion to capacity to 10000 bpd, the quotation gives 128000000.00, and the per bpd figure is 12800.00: the same per bpd figure the reference row prints. That is what an exponent of 1 means. With no economy of scale, every barrel a day of capacity costs what it cost at the reference size, whatever the size.
 
@@ -29,7 +29,7 @@ Against that benchmark, both laws print per bpd figures that change with capacit
 
 ## Why per bpd is the screening currency
 
-Per bpd figures let a screen be checked against the outside world without a full estimate. If a published or quoted cost per barrel a day for a similar plant sits far from the screen's figure at the same size, one of the two is using a reference point or an exponent the other would not accept. That is a prompt to look at the inputs, and it takes one division to set up.
+Per bpd figures let a screen be checked against the outside world without a full estimate. If a quoted cost per barrel a day for a similar plant sits far from the screen's figure at the same size, one of the two uses a reference point or an exponent the other would not accept. That is a prompt to look at the inputs.
 
 Per bpd figures also make the crossover easy to see: at 5000 bpd both columns print 12800.00, and on either side of it they part.
 

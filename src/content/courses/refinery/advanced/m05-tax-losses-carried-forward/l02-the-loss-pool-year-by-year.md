@@ -34,11 +34,11 @@ From 2033 there is nothing left to set against income, and each year pays 11.576
 
 ## Printed figures and the pool's arithmetic
 
-The pool figures are printed to four decimals from the engine's unrounded values. A reader who subtracts one printed figure from another may land a digit away in the fourth place. That is rounding in the printout. Read the figures as the engine prints them and do not rebuild them by hand.
+Each four-decimal figure is rounded on its own, so subtracting two printed figures can differ from a printed result in the last place. For arithmetic, SECTION 23 prints the same years to nine decimals, with the rule: the loss carried forward = the loss carried in - taxable income, never below zero. In 2029 the loss carried in is 117.831965348 million, the taxable income 38.587936000 million, and the loss carried forward 79.244029348 million. Rebuild the pool from those nine-decimal columns.
 
 ## What the oracle checks
 
-The feasibility oracle keeps annual accounts and a dated tax-loss ledger used oldest first. In the ODIOMA case the order does not change any figure, because both losses come from the construction years and are used in the operating years that follow. The order matters in a project with a loss in a later year as well, such as a year of heavy maintenance spending or a price collapse. A ledger used oldest first uses the earliest loss before the latest, which is the order that matters wherever a loss may be carried for a limited number of years only.
+The feasibility oracle keeps annual accounts and a dated tax-loss ledger used oldest first. In the ODIOMA case both losses come from the construction years and are used in the operating years that follow. The order matters in a project with a loss in a later year as well, such as a year of heavy maintenance spending or a price collapse. A ledger used oldest first uses the earliest loss before the latest, which is the order that matters wherever a loss may be carried for a limited number of years only.
 
 ## The pool and the cash flow
 

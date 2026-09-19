@@ -27,11 +27,21 @@ Read each crude in turn.
 
 **Bonny Light.** The plan runs 329032.26 bbl, and the schedule delivers it as one cargo, part 1 of 1, on 2027-03-01.
 
-**Forcados.** The plan runs 1100000.00 bbl. The schedule delivers it in three equal parts of 366666.67 bbl, dated 2027-03-01, 2027-03-11 and 2027-03-21. Each part carries an equal share of the crude. The digest prints the parts and the cargo size side by side. It does not print the rule that counts the parts, so read the count from the part column.
+**Forcados.** The plan runs 1100000.00 bbl. The schedule delivers it in three equal parts of 366666.67 bbl, dated 2027-03-01, 2027-03-11 and 2027-03-21. Each part carries an equal share of the crude.
 
 **Brass River.** The plan runs 600000.00 bbl, delivered in two parts of 300000.00 bbl on 2027-03-01 and 2027-03-16.
 
 The value of each receipt is its share of that crude's cost. The Forcados receipts carry 28453333.33 each, and the plan's Forcados crude cost is 85360000.00.
+
+## The cargo rule
+
+The digest prints the rule: cargoes = the crude run divided by the cargo size, rounded UP to a whole cargo (at least one); the days between cargoes = the 31 days of the period divided by the cargoes, rounded DOWN.
+
+| crude | crude run / cargo size | cargoes | days between cargoes |
+| --- | --- | --- | --- |
+| Bonny Light (illustrative) | 0.8226 | 1 | 31 |
+| Forcados (illustrative) | 2.7500 | 3 | 10 |
+| Brass River (illustrative) | 1.5000 | 2 | 15 |
 
 ## Evenly spaced
 

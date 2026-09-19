@@ -4,11 +4,13 @@ Every figure in this course comes from an engine, and every engine has limits. S
 
 ## Held items
 
-Two items are held. Each is taught as a stated limit and never graded.
+Three items are held. Each is taught as a stated limit and never graded.
 
 **H1.** The scaling exponents 0.6 and 0.9 are defaults for a vendor's own figures to replace. No published source for them is in the engines repository. When a screen's capital comes from the modular law, as ODIOMA's expansion capital does, the capital is only as good as that exponent. A vendor quotation for the actual plant replaces it.
 
 **H2.** The screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case; a fuller allowance model belongs to the Economics module.
+
+**H3.** materialBalance counts receipts in and deliveries, burns, flares, vents and losses out, and a unit run moves nothing. A refinery's crude leaves its tank through the crude unit and its products arrive from units, so the function cannot close a refinery tank. It serves a tank whose movements are receipts and deliveries. This course prints no material balance.
 
 ## Decisions in force
 
@@ -22,7 +24,7 @@ Three owner decisions stand as rules of the engines:
 
 Yields are fixed vectors. Quality is not carried through the plan. The plan covers one period at a time with no inventory between periods. The schedule models no tank capacity, jetty window or turnaround.
 
-One more limit follows from the event model of module 1. A unit_run signs to 0 for the site: running a unit moves nothing in or out. The stream model's material balance therefore cannot close a refinery's tanks, because the barrels a unit converts from crude into products never appear in it as a movement. This course teaches no material balance as a method and quotes no figure from one. Stock and tank reconciliation belong to the supply course.
+H3 follows from the event model of module 1: a unit_run signs to 0 for the site. Stock and tank reconciliation belong to the supply course.
 
 ## What the oracles check
 
@@ -41,4 +43,4 @@ Neither oracle checks a refusal's wording. So every refusal sentence the course 
 
 ## Exercise
 
-State H1 and H2 in your own words, and say for each what a real project would supply to replace it. Then read the two golden files and the cases each covers, and say which oracle checks the variance split and which checks the tax-loss pool. Finally, say why a unit_run signing to 0 means the stream model's material balance cannot close a refinery's tanks.
+State H1, H2 and H3 in your own words, and say for H1 and H2 what a real project would supply to replace each. Then read the two golden files and the cases each covers, and say which oracle checks the variance split and which checks the tax-loss pool. Finally, say why a unit_run signing to 0 is the reason behind H3.

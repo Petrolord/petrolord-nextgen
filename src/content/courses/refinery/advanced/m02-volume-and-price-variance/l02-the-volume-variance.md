@@ -12,16 +12,18 @@ The plan unit value is the plan line's value per barrel: 78.9000 for Escravos (i
 
 ## The ODIOMA volume variances
 
-| material | type | plan quantity | actual quantity | plan value | volume variance |
-| --- | --- | --- | --- | --- | --- |
-| escravos | receipt | 600000.00 | 735000.00 | 47340000.00 | 10651500.00 |
-| forcados | receipt | 400000.00 | 0.00 | 30720000.00 | -30720000.00 |
-| cdu | unit_run | 1000000.00 | 735000.00 | 1400000.00 | -371000.00 |
-| reformer | unit_run | 190000.00 | 131000.00 | 589000.00 | -182900.00 |
-| gasoline | delivery | 163400.00 | 112660.00 | 18055700.00 | -5606770.00 |
-| jet | delivery | 136000.00 | 101200.00 | 14266400.00 | -3650520.00 |
-| diesel | delivery | 334000.00 | 244000.00 | 33600400.00 | -9054000.00 |
-| fuel_oil | delivery | 314000.00 | 210000.00 | 18902800.00 | -6260800.00 |
+| material | type | plan quantity | actual quantity | quantity gap (bbl) | plan unit value | volume variance |
+| --- | --- | --- | --- | --- | --- | --- |
+| escravos | receipt | 600000.00 | 735000.00 | 135000.00 | 78.9000 | 10651500.00 |
+| forcados | receipt | 400000.00 | 0.00 | -400000.00 | 76.8000 | -30720000.00 |
+| cdu | unit_run | 1000000.00 | 735000.00 | -265000.00 | 1.4000 | -371000.00 |
+| reformer | unit_run | 190000.00 | 131000.00 | -59000.00 | 3.1000 | -182900.00 |
+| gasoline | delivery | 163400.00 | 112660.00 | -50740.00 | 110.5000 | -5606770.00 |
+| jet | delivery | 136000.00 | 101200.00 | -34800.00 | 104.9000 | -3650520.00 |
+| diesel | delivery | 334000.00 | 244000.00 | -90000.00 | 100.6000 | -9054000.00 |
+| fuel_oil | delivery | 314000.00 | 210000.00 | -104000.00 | 60.2000 | -6260800.00 |
+
+SECTION 20 prints the two terms the formula multiplies: quantity gap = actual quantity - plan quantity, and plan unit value = plan value / plan quantity.
 
 ## Reading the signs as recorded
 
@@ -31,7 +33,7 @@ These signs are as recorded. A positive volume variance on a receipt means more 
 
 ## The Forcados line
 
-Forcados (illustrative) planned 400000.00 bbl and received 0.00 bbl. Its volume variance is -30720000.00, and the plan value on the line is 30720000.00. With an actual quantity of 0.00, the formula takes the whole planned quantity away at the plan's price of 76.8000 a barrel. Lesson 4 returns to this line, because something else happened on it.
+Forcados (illustrative) planned 400000.00 bbl and received 0.00 bbl. Its quantity gap is -400000.00 and its volume variance -30720000.00, and the plan value on the line is 30720000.00. With an actual quantity of 0.00, the formula takes the whole planned quantity away at the plan's price of 76.8000 a barrel. Lesson 4 returns to this line, because something else happened on it.
 
 ## The units
 

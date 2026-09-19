@@ -45,7 +45,7 @@ Reformate, kero, ulsd and residue print their product prices, because each has o
 
 ## Step six: what a planner would do next
 
-The stream values and the limits point the same way. The reformer sweep prices another 20000.00 bbl of reformer capacity at 0.0000 a barrel as typed. SECTION 13 prices the hydrotreater left blank at a margin change of 95572.86. If the month is to earn more, the hydrotreater is where to look, and the question of whether it is worth building belongs to a valuation this tier does not do.
+The stream values and the limits point the same way. The reformer sweep prices another 20000.00 bbl of reformer capacity at 0.0000 a barrel as typed. SECTION 13 prices the hydrotreater left blank at a margin change of 95572.87. If the month is to earn more, the hydrotreater is where to look, and the question of whether it is worth building belongs to a valuation this tier does not do.
 
 ## Exercise
 

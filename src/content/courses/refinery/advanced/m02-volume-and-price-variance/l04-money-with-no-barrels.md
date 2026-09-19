@@ -16,7 +16,7 @@ Forcados (illustrative) is a label on an invented crude. The plan received 40000
 
 The volume variance is (actual quantity - plan quantity) x plan unit value. With 0.00 barrels received, it reads -30720000.00: the whole planned purchase priced at the plan's 76.8000.
 
-The price variance is (actual unit value - plan unit value) x actual quantity. An actual unit value needs barrels to divide by, and there are none. The actual quantity is 0.00 in any case, so the price variance reads 0.00.
+The price variance is (actual unit value - plan unit value) x actual quantity. An actual unit value needs barrels to divide by, and there are none, so SECTION 20 prints it as 0.0000, the engine's figure when no barrels arrived, beside a plan unit value of 76.8000 and a quantity gap of -400000.00. The actual quantity is 0.00, so the price variance reads 0.00.
 
 That leaves the 212000.00. The engine's third term is unexplained = total - volume - price, and it is zero unless money moved with no barrels. Here money moved with no barrels. The unexplained reads 212000.00, and the total variance is -30508000.00.
 

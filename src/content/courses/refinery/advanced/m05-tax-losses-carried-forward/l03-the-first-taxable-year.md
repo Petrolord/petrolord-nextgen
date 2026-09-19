@@ -39,13 +39,13 @@ A lender or a sponsor planning the early years of a plant wants to know when tax
 
 The cash flow shows the effect directly. The net cash flow reads 38.5879 million in 2029, 2030 and 2031, then 27.6320 million in 2032, then 27.0116 million from 2033. With the option off, those early years would carry the full tax from 2029.
 
-The first taxable year is set by two things only: the size of the pool the construction years leave, and the taxable income each operating year sets against it. More capital deducted in the construction years makes a larger pool and pushes the first taxable year later. A larger taxable income each year empties the pool sooner. The panel's switch for the loss carry-forward shows the whole effect at once.
+The first taxable year is set by two things only: the size of the pool the construction years leave, and the taxable income each operating year sets against it. More capital deducted in the construction years makes a larger pool and pushes the first taxable year later. A larger taxable income each year empties the pool sooner.
 
 ## Two things the first taxable year is not
 
 It is not the first profitable year. ODIOMA's taxable income before relief is positive from year 2. The plant is profitable before it pays tax, because the pool shelters the profit.
 
-It is not a figure to rebuild by hand from the printed pool. The pool and the tax are printed to four decimals from the engine's unrounded values, and the engine's line naming year 5 and 10.9559 is the answer to read.
+It is not a figure to rebuild from the four-decimal pool, where each figure is rounded on its own. SECTION 23 prints year 5 to nine decimals: the loss carried in 2.068157348 million, taxable income 38.587936000 million, and tax 10.955933596 million, by the rule tax = (taxable income - the loss carried in) x the tax rate of 30 percent once that is above zero.
 
 ## Exercise
 

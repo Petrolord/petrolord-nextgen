@@ -15,13 +15,13 @@ Module 3 found both streams consumed in full by their units, and both export pro
 
 ## Naphtha through the reformer
 
-One more barrel of naphtha arriving from outside can go to the reformer, which in the plan as typed runs at 97.07 percent and has room. Running it there makes reformate 0.8500 and offgas 0.1000, and charges the reformer's operating cost of 2.9000 dollars a barrel. Reformate is worth 111.0000 to the plan. Offgas is worth 0.0000. The plan's value of naphtha, 91.4500, is the value of that path: what the reformer's products are worth to the month, less what the reformer charges to make them. The digest prints the value. It does not print the working, so read it as the plan's answer and let the explorer show you the path.
+One more barrel of naphtha arriving from outside can go to the reformer, which in the plan as typed runs at 97.07 percent and has room. The digest prints the working: what the reformer makes from a barrel at the stream values, less its operating cost, is 0.8500 x 111.0000 + 0.1000 x 0.0000 - 2.9000 = 91.4500, and the plan's naphtha value is 91.4500. Reformate at 111.0000, offgas at 0.0000, and the reformer's 2.9000 a barrel: the value of naphtha is the value of that path.
 
 ## Gasoil through a full unit
 
 Gasoil is harder, and more instructive. The hydrotreater is at capacity. One more barrel of gasoil from outside cannot be hydrotreated, because the unit has no room. Yet its value, 94.1016, is not the Gasoil export price of 89.5000.
 
-The reason is that an outside barrel of gasoil does not have to go where the next crude barrel's gasoil would. It can take a place in the hydrotreater's full feed, and the plan can then run a little less crude to make that feed. The value prints what that rearrangement is worth. How the plan reaches 94.1016 exactly is inside the solution, and the digest prints the figure alone.
+An outside barrel of gasoil takes a place in the hydrotreater's full feed, and the plan runs less of the crude it only partly runs. Bonny Light (illustrative) runs 329032.26 of 1500000.00 bbl. A barrel of it costs 81.3000 + 1.2500 (crude unit) = 82.5500, and at break-even that equals what its streams are worth: (82.5500 - 0.2300 x 91.4500 - 0.1500 x 105.5000 - 0.2800 x 59.0000 - 0.0300 x 0.0000) / 0.3100 = 94.1016, the plan's gasoil value.
 
 ## The two values under the five changes
 
@@ -36,7 +36,7 @@ The reason is that an outside barrel of gasoil does not have to go where the nex
 
 Read three things.
 
-Under the floors, naphtha prints 72.5000 and gasoil 89.5000, the same figures as their export prices. In that plan the next barrel of each is valued as an export sale.
+Under the floors, naphtha prints 72.5000 and gasoil 89.5000, the same figures as their export prices.
 
 With the hydrotreater left blank, gasoil prints 99.8560 and naphtha 83.6941. Removing a limit on one unit moved the value of the other unit's feed. A stream's value is a property of the whole plan.
 

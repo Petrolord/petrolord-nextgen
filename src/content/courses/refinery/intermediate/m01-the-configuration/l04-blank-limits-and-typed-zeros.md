@@ -22,7 +22,7 @@ A typed zero shuts the unit. Its throughput is 0.00, and the rest of the refiner
 
 A blank removes the limit. The hydrotreater runs 666608.70 bbl, the crude run reads 2082608.70 bbl, and the margin 7173508.35. The plan reports the capacity of a blank unit as the number Infinity, which is what "no limit" means to the solver, and the table prints it as no limit.
 
-SECTION 13 prints what each entry did to margin against the plan as typed: the unit typed as shut, -6653670.78; the capacity left blank, 95572.86. The same box, emptied or zeroed, moves the month's margin in opposite directions.
+SECTION 13 prints what each entry did to margin against the plan as typed: the unit typed as shut, -6653670.77; the capacity left blank, 95572.87. The same box, emptied or zeroed, moves the month's margin in opposite directions.
 
 ## Neither one has a utilisation
 
@@ -46,4 +46,4 @@ When you enter a configuration, decide for every limit which of the three you me
 
 ## Exercise
 
-Read the three hydrotreater rows. Give the crude run and the margin for the unit typed as 0 and for the unit left blank, and the margin changes SECTION 13 prints for each, -6653670.78 and 95572.86. Say what the pair shows about the difference between entering 0 and entering nothing, and why the engine can refuse a blank cost but must accept a blank capacity.
+Read the three hydrotreater rows. Give the crude run and the margin for the unit typed as 0 and for the unit left blank, and the margin changes SECTION 13 prints for each, -6653670.77 and 95572.87. Say what the pair shows about the difference between entering 0 and entering nothing, and why the engine can refuse a blank cost but must accept a blank capacity.

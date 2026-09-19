@@ -29,18 +29,20 @@ The digest then hands over the same period start a second way: as a Date built a
 | UTC | 2027-03-01 | true |
 | Africa/Lagos | 2027-02-28 | false |
 | Pacific/Kiritimati | 2027-02-28 | false |
+| Europe/London | 2027-03-01 | true |
 | America/New_York | 2027-03-01 | true |
+| America/Los_Angeles | 2027-03-01 | true |
 | Pacific/Pago_Pago | 2027-03-01 | true |
 
-In Africa/Lagos and Pacific/Kiritimati the schedule starts on 2027-02-28, a day in the wrong month, and none of its dates matches the UTC run. In America/New_York and Pacific/Pago_Pago it starts on 2027-03-01.
+In Africa/Lagos and Pacific/Kiritimati the schedule starts on 2027-02-28, a day in the wrong month, and none of its dates matches the UTC run. In Europe/London, America/New_York, America/Los_Angeles and Pacific/Pago_Pago it starts on 2027-03-01. Both tables cover the same seven zones, so the only thing that differs between them is the form of the period start.
 
 ## Why the east moves and the west does not
 
 Local midnight on 1 March in a zone east of Greenwich is a moment that, in UTC, still falls on 28 February. The engine reads the UTC calendar day of that moment, and so it reads 2027-02-28. Local midnight on 1 March in a zone west of Greenwich is, in UTC, a few hours into 1 March, so the UTC calendar day is still 2027-03-01, and the dates survive.
 
-So the Date form is not wrong everywhere. It is right in some zones and a day early in others, which is worse, because a schedule built and checked in New York can be off by a day when the same code runs in Lagos. Nothing in the output says so. The dates are well formed. They are one day early.
+So the Date form is not wrong everywhere. It is right in some zones and a day early in others, which is worse, because a schedule built and checked in New York can be off by a day when the same code runs in Lagos. Nothing in the output says so.
 
-For a refinery in Lagos this is not an exotic case. A page that built its period start from a local Date would date ABUA's whole March from the last day of February.
+A page in Lagos that built its period start from a local Date would date ABUA's whole March from the last day of February.
 
 ## The rule
 

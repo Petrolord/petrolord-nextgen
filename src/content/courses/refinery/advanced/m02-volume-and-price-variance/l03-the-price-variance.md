@@ -29,9 +29,9 @@ The two formulas split the work cleanly. The volume variance takes the change in
 
 A positive price variance means each barrel carried more money than the plan expected. On a cost line that is a dearer barrel. On a revenue line it is a better sale.
 
-The escravos line reads 955500.00. The crude that arrived cost more per barrel than the plan's 78.9000. The crude unit reads 51450.00 and the reformer 13100.00: each unit cost more per barrel run than its plan operating cost.
+The escravos line reads 955500.00: the actual unit value is 80.2000 against the plan's 78.9000. The crude unit reads 51450.00 at 1.4700 against 1.4000, and the reformer 13100.00 at 3.2000 against 3.1000.
 
-On the revenue side the signs split. Gasoline reads 179070.00 and fuel_oil 168000.00, so those products sold above their plan prices of 110.5000 and 60.2000. Jet reads -80980.00 and diesel -536800.00, so those sold below 104.9000 and 100.6000.
+On the revenue side the signs split. Gasoline reads 179070.00 and fuel_oil 168000.00, with actual unit values of 112.0895 and 61.0000 against plan prices of 110.5000 and 60.2000. Jet reads -80980.00 and diesel -536800.00, at 104.0998 and 98.4000 against 104.9000 and 100.6000.
 
 As in the previous lesson, these signs are as recorded. A positive price variance on escravos adds to cost. A positive price variance on gasoline adds to revenue. Module 3 sets each on the margin.
 
@@ -39,7 +39,7 @@ As in the previous lesson, these signs are as recorded. A positive price varianc
 
 The engine defines the third term as unexplained = total - volume - price. On every line where the unexplained reads 0.00, the volume and price variances together are the total. For escravos the volume variance is 10651500.00, the price variance 955500.00, the unexplained 0.00 and the total 11607000.00. For diesel the four figures are -9054000.00, -536800.00, 0.00 and -9590800.00.
 
-Seven of the eight lines read 0.00 unexplained. The eighth, Forcados (illustrative), reads 0.00 in price and 212000.00 in unexplained. With no barrels in the actual ledger there is no actual unit value to form, so no price variance can be computed, and the money on the line has to go somewhere. The next lesson reads where.
+Seven of the eight lines read 0.00 unexplained. The eighth, Forcados (illustrative), reads 0.00 in price and 212000.00 in unexplained. With no barrels in the actual ledger, the actual unit value reads 0.0000, the figure the engine gives when no barrels arrived, and the price variance is taken on an actual quantity of 0.00. The money on the line has to go somewhere. The next lesson reads where.
 
 ## What the price variance does not say
 

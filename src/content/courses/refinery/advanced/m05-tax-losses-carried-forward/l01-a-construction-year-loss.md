@@ -21,7 +21,7 @@ A negative taxable income pays no tax. The question is what happens to the negat
 
 The screening engine offers a lossCarryForward option. It is off by default for every other caller. The refinery switches it on: feasibilityEconomics passes lossCarryForward true.
 
-With the option on, the loss goes into a pool that is carried to the next year. The pool at the end of year 0 reads 58.9160 million. At the end of year 1 it reads 117.8320 million, holding both construction years' losses. Neither construction year pays tax, and nothing has been used yet.
+With the option on, the loss goes into a pool that is carried to the next year. The pool at the end of year 0 reads 58.9160 million. At the end of year 1 it reads 117.8320 million, holding both construction years' losses. Neither construction year pays tax, and nothing has been used yet. For arithmetic, SECTION 23 prints the same years to nine decimals: capex deducted 58.915982674 million in each, and the pool 117.831965348 million at the end of year 1.
 
 With the option off, the engine taxes each year on its own taxable income, and a negative year simply pays no tax. The loss is not held anywhere. In the option off column the construction years also read 0.0000 in tax.
 

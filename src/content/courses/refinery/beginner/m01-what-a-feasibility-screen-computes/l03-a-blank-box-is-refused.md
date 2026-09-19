@@ -37,7 +37,7 @@ scaleCapex, the function that scales capital from a quotation, behaves different
 
 ## Valuing streams that carry a refusal
 
-feasibilityEconomics, the call that hands the streams to the screening engine, checks what it is given. Streams refused for a blank crude cost come back with the same sentence, "Missing crude cost. Enter 0 where the value really is zero." A call that leaves out the tax rate is refused with "A discount rate and a tax rate are needed to value the project." In both cases the refusal travels forward with its words intact, so the reader of a valuation sees the same sentence the reader of the streams saw, and the box to fix is still named.
+feasibilityEconomics, the call that hands the streams to the screening engine, checks what it is given. Streams refused for a blank crude cost come back with the same sentence, "Missing crude cost. Enter 0 where the value really is zero." A call that leaves out the tax rate is refused with "A discount rate and a tax rate are needed to value the project." A tax rate left blank, and a discount rate typed as null, draw the same sentence. In every case the refusal travels forward with its words intact, so the reader of a valuation sees the same sentence the reader of the streams saw, and the box to fix is still named.
 
 ## The mistake
 
