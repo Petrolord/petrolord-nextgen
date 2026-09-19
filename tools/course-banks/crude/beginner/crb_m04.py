@@ -1,0 +1,117 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# crude Associate m04, The Curve and Its Cuts. Written from digest.txt SECTIONS
+# 9 and 10 as the five lessons of this module teach them: a TBP curve is
+# cumulative, linear between measured points, unknown outside them unless the
+# curve says so itself, a cut is a difference, and a cut set that closes.
+
+q(2, "Obigbo Light's curve carries the point 50 at 548. What does that point say?",
+ "Half the crude by volume has distilled by 548 F.",
+ ["Half the crude by mass has distilled by 548 F.",
+  "50 percent of the crude boils in the band between 390 and 548 F.",
+  "The crude's midpoint cut, centred on 548 F, holds half the barrel."],
+ "A TBP point is cumulative: this volume percent has distilled by this temperature. The band from 390 to 548 F is the difference between the 30 and 50 percent points."),
+
+q(0, "What does volumePercentAt return on Obigbo Light at 300 F, and why?",
+ "20.2703, read on a straight line between 10 at 205 and 30 at 390.",
+ ["20.0000, the midpoint of the two neighbouring measured percentages.",
+  "unknown, because 300 F is not a measured point.",
+  "30.0000, the reading at the next measured point above 300 F."],
+ "The engine is linear between measured points. 300 F sits between 205 and 390 F, and the straight line there gives 20.2703. Only outside the measured range can a reading be unknown."),
+
+q(1, "What temperature does temperatureAtVolumePercent give for Obigbo Light at 25 percent?",
+ "343.7500 F, linear between 10 at 205 and 30 at 390.",
+ ["unknown, because 25 percent was not measured on the curve.",
+  "205.0000 F, the measured point below, since the engine reads down.",
+  "20.2703 F, the reading the curve gives at 300 F turned around."],
+ "temperatureAtVolumePercent is the inverse of volumePercentAt and is linear between points too. At 25 percent, between 10 and 30 percent, it gives 343.7500 F."),
+
+q(3, "The Ebocha partial assay is read at 240 F, between its points 4 at 110 and 25 at 370. What does the engine return?",
+ "14.5000, the same straight-line reading a full curve gets.",
+ ["unknown, since a partial curve is read at its measured points only.",
+  "4.0000, its first measured point, held until the next one.",
+  "14.5000, flagged as a partial reading so that no cut can use it."],
+ "Inside its measured range a partial curve reads exactly like a full one. It is incomplete at its ends, and in the middle it is as good as any other curve."),
+
+q(3, "volumePercentAt gives 100.0000 for Obigbo Light at 1500 F and unknown for Ebocha at 1000 F. Why the difference?",
+ "Obigbo Light's last point is at 100 percent; Ebocha's stops at 88.",
+ ["1500 F lies inside Obigbo Light's measured range, and 1000 F lies outside Ebocha's.",
+  "The engine refuses every reading of a partial curve, inside its range or out.",
+  "The engine extends Obigbo Light's last segment and declines to extend Ebocha's."],
+ "Above a last point at 100 percent everything has distilled, so the curve itself answers. Ebocha's last point is 88 at 920, so above it the value is unknown. Obigbo Light's range ends at 1380 F."),
+
+q(1, "Why does the engine not run Ebocha's last segment, 70 at 760 to 88 at 920, on past 920 F?",
+ "Nothing guarantees the heavy end follows the slope of the segment before it.",
+ ["Past 920 F the slope of that segment turns negative and the curve would fall.",
+  "The engine extends a curve only when the curve carries seven measured points.",
+  "The engine holds the curve at 88.0000 above 920 F, and that is its answer."],
+ "An extrapolated number would rest entirely on one segment's slope, and the heavy end is the most contested part of a valuation. Clamping at 88 would be just as wrong, so the engine returns unknown."),
+
+q(0, "What does temperatureAtVolumePercent return for Ebocha at 80 percent and at 95 percent?",
+ "848.8889 F at 80 percent, and unknown at 95 percent.",
+ ["848.8889 F at 80 percent, and 920.0000 F at 95 percent, its last point.",
+  "unknown at both, since a partial curve has no inverse reading.",
+  "848.8889 F at 80 percent, and 1220.0000 F at 95 percent."],
+ "80 percent sits between the points 70 and 88, so it has a temperature. 95 percent lies past the last point at 88, so the temperature is unknown. 1220.0000 F is Obigbo Light's reading at 95 percent."),
+
+q(2, "How does cutYields form each cut's yield?",
+ "The curve at the cut's upper bound minus the curve at its lower bound.",
+ ["The share of measured points inside the cut's band.",
+  "The cut's temperature span over the curve's whole span.",
+  "The curve read once at the cut's midpoint temperature."],
+ "Each yield is one subtraction, in volume percent of the whole crude, with the same straight-line reading between measured points. It only works because the curve is cumulative."),
+
+q(1, "Egbema Medium's LPG / Light ends yield on the studio's default cuts is 0.0000. What does that zero mean?",
+ "A real answer: its curve starts 0 at 95, above the cut's bound of 90 F.",
+ ["A blank: its curve does not reach down to 90 F, so the yield is printed as zero.",
+  "Its light ends were never measured, so it defaults to 0.0000.",
+  "The cut is inverted for this crude and named in unknownCuts."],
+ "Below a first point at 0 percent the curve says nothing has distilled, so by 90 F nothing has. Obigbo Light, whose curve starts at 85 F, returns 0.4167 in the same cut."),
+
+q(0, "Among the four full crudes, which has the largest Vacuum residue yield on the default cuts?",
+ "Asarama Heavy: 30.0000 of the barrel.",
+ ["Egbema Medium: 23.1429 of the barrel, from its curve's 70 at 880.",
+  "Obigbo Light: 25.7110 of the barrel.",
+  "Asarama Heavy: 35.5556."],
+ "The residue column prints 13.7736, 23.1429, 30.0000 and 0.0000. 35.5556 is Asarama Heavy's Vacuum gasoil and 25.7110 Obigbo Light's."),
+
+q(3, "A cut is drawn backwards on Obigbo Light, from 500 F to 350 F. What does cutYields return for it?",
+ "No yield; it is named in unknownCuts as inverted, 500 to 350 F.",
+ ["A negative yield: the Kerosene / Jet 18.2484 with its sign turned over.",
+  "18.2484, the same band read the right way round.",
+  "A refusal of the whole cut set, until the bounds are fixed."],
+ "A negative yield would be a number with no physical meaning, so the engine returns no yield and names the cut. 18.2484 is the Kerosene / Jet yield from 350 to 500 F."),
+
+q(2, "What does the Ebocha partial assay return on the studio's default cuts?",
+ "Two yields, Kerosene / Jet and Diesel / Gasoil, a total of 33.6742, and closes false.",
+ ["Six yields scaled up to a total of 100.0000, and closes true.",
+  "Two yields and a total of 33.6742, and closes true, since each cut the curve reaches has a yield.",
+  "No yields at all, since a partial curve cannot be cut."],
+ "4 of its 6 studio cuts reach outside the measured range and have no yield: LPG / Light ends, Naphtha, Vacuum gasoil and Vacuum residue. The known cuts are 16.3881 and 17.2861."),
+
+q(2, "Why does the engine not scale Ebocha's known cuts, totalling 33.6742, up to 100?",
+ "Scaling would claim the crude is only kerosene and diesel, which the assay does not say.",
+ ["Scaling is left to the refinery, which applies it later on its own cut set.",
+  "The engine scales only curves whose first point is at 0 percent.",
+  "The total already lies within the closing tolerance, so there is nothing to scale."],
+ "The total is reported as it computes, and the engine does not normalise it. 33.6742 tells the honest story: this much of the barrel is accounted for, and the rest is not."),
+
+q(3, "A cut set drawn inside Ebocha's curve, 110 to 370, 370 to 760 and 760 to 920 F, has every yield. Why does it still not close?",
+ "Its total is 84.0000, and closing needs a total within tolerance of 100 percent.",
+ ["One of its three cuts reaches outside the curve and has no yield.",
+  "Three cuts are too few; the engine closes only a full set of six.",
+  "The cuts overlap at 370 and 760 F, and overlapping cuts cannot close."],
+ "The inner set yields 21.0000, 45.0000 and 18.0000, with nothing unknown. It meets the first condition, every cut a yield, and misses the second, the total."),
+
+q(0, "The Vacuum residue cut has no upper bound. What does it take?",
+ "Everything not yet distilled at its lower bound of 1000 F.",
+ ["The volume between 1000 F and the curve's last point, with the rest unknown.",
+  "Nothing, since a cut with no upper bound has no yield to report.",
+  "Whatever the other five cuts leave over."],
+ "A last cut with no upper bound runs to 100 percent. Asarama Heavy reads 70 at 1000, and its residue cut returns 30.0000; Ubie Condensate ends 100 at 760, and its residue is 0.0000."),
+
+emit(Q, '/root/wt-md-crude-nextgen/tools/course-banks/crude/beginner/crb_m04.json', label='crb_m04', expect_n=15)
+finish()
