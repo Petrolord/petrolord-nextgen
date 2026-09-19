@@ -10,11 +10,11 @@ The Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residu
 
 | cut | from F | to F |
 | --- | --- | --- |
-| LPG / Light ends | start of the curve | 90 |
+| LPG / Light ends | no lower bound (from 0 percent) | 90 |
 | Naphtha | 90 | 330 |
 | Kerosene / DPK | 330 | 480 |
 | Diesel / AGO | 480 | 650 |
-| Atmospheric residue | 650 | end of the curve |
+| Atmospheric residue | 650 | no upper bound (to 100 percent) |
 
 A cut's yield is the curve at its upper bound minus the curve at its lower bound, in volume percent of the whole crude. The Associate tier taught that on single crudes with cutYields. Here the same function runs on the blend's own curve from module 1.
 

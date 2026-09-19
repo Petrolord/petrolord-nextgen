@@ -19,7 +19,25 @@ The engine returns no recipe with an infeasible status. There is no closest reci
 
 ## The 10 ppm template
 
-The 10 ppm gasoline template reads RON at least 95, MON at least 85, Sulfur at most 10 ppm and RVP at most 8.5 psi, with the same density range. The digest reports the pool infeasible against it and does not say which limit or combination of limits closes the region. An infeasible status names no single culprit, because infeasibility is a property of the rows together. A planner finds the culprit by relaxing limits one at a time and re-solving, which the engine's own message invites.
+The 10 ppm gasoline template reads RON at least 95, MON at least 85, Sulfur at most 10 ppm and RVP at most 8.5 psi, with the same density range. An infeasible status names no single culprit, because infeasibility is a property of the rows together. The engine was asked both ways. First, each limit in turn moved back to its 50 ppm value, the rest kept at 10 ppm:
+
+| limit moved back | 10 ppm value | 50 ppm value | status |
+| --- | --- | --- | --- |
+| RON minimum | 95 | 91 | infeasible |
+| MON minimum | 85 | 81 | infeasible |
+| Sulfur maximum | 10 | 50 | infeasible |
+| RVP maximum | 8.5 | 9 | infeasible |
+
+No single limit moved back rescues the pool. Then the 50 ppm template with ONE limit tightened to its 10 ppm value, the rest kept at 50 ppm:
+
+| limit tightened | 50 ppm value | 10 ppm value | status |
+| --- | --- | --- | --- |
+| RON minimum | 91 | 95 | infeasible |
+| MON minimum | 81 | 85 | optimal |
+| Sulfur maximum | 50 | 10 | infeasible |
+| RVP maximum | 9 | 8.5 | optimal |
+
+Tightened one at a time, the RON minimum and the sulfur maximum are each infeasible. MON and RVP are not.
 
 ## The RON minimum of 99
 
@@ -35,7 +53,7 @@ An optimal status tells a planner what to do. An infeasible status tells a plann
 
 {{panel:crude-recipe-explorer}}
 
-In the panel, load the Apapa pool and switch to the 10 ppm template. Relax its limits one at a time back toward the 50 ppm values and watch for the first step that returns a recipe.
+In the panel, load the Apapa pool and switch to the 10 ppm template. Relax its limits back toward the 50 ppm values and watch which combination returns a recipe.
 
 ## Exercise
 

@@ -18,7 +18,7 @@ solveLP returns a status and, when the status is optimal, the point and its valu
 | --- | --- | --- | --- | --- | --- | --- |
 | optimal | 3.0000 | 1.5000 | 21.0000 | 0.7500 | 0.5000 | 2 |
 
-Read it in order. The status is optimal, so a best point exists and was found. The point is x 3.0000 and y 1.5000, and there the objective is 21.0000. Each row carries a shadow price, 0.7500 on row 1 and 0.5000 on row 2, which module four makes the centre of the tier. The kernel reached the answer in 2 iterations.
+Read it in order. The status is optimal, so a best point exists and was found. The point is x 3.0000 and y 1.5000, and there the objective is 21.0000. Each row carries a shadow price, 0.7500 on row 1 and 0.5000 on row 2, which module four makes the centre of the tier. The kernel reached the answer in 2 iterations: iterations counts the pivots the kernel made, phase one and phase two together.
 
 ## Mapping the parts onto a blend
 

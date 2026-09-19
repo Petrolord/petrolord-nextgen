@@ -27,9 +27,9 @@ Read the change column. Three cuts show 0.0000. Diesel / AGO gains 5.0376 and At
 
 ## Why the two changes cancel
 
-Diesel's yield is the curve at its top minus the curve at its bottom. Residue's is the end of the curve minus the curve at its bottom. The moved temperature is diesel's top and residue's bottom. Raising it adds the curve's rise between 650 F and 700 F to diesel and takes the same rise from residue. One quantity is added in one place and subtracted in the other, which is why the change column prints 5.0376 and -5.0376.
+Diesel's yield is the curve at its top minus the curve at its bottom. Residue has no upper bound, so its yield is 100 percent minus the curve at its bottom. The moved temperature is diesel's top and residue's bottom. Raising it adds the curve's rise between 650 F and 700 F to diesel and takes the same rise from residue. One quantity is added in one place and subtracted in the other, which is why the change column prints 5.0376 and -5.0376.
 
-That is also why the total is unmoved. The total is the curve at the last bound minus the curve at the first, and neither end moved.
+That is also why the total is unmoved. The first cut starts at 0 percent and the last runs to 100 percent, and neither end moved.
 
 ## Why a refinery moves a cut point
 

@@ -6,7 +6,7 @@ Before asking what the blend is worth, ask what each of its crudes is worth alon
 
 ## Three valuations, one refinery
 
-The digest runs netbackValue three times against Kwale's marker of 72.5 $/bbl: once on Kwale Light alone, once on Ughelli Medium alone, and once on the blend at 55 and 45. Each crude's cut yields are taken on Kwale's cut set, and the prices, processing cost, freight and loss percent are Kwale's. Only the crude changes.
+The digest runs netbackValue three times against Kwale's marker of 72.5 $/bbl: once on Kwale Light alone, once on Ughelli Medium alone, and once on the blend at 55 and 45. Each crude alone is valued on the same Kwale cut set, product prices, processing cost, freight and losses as the blend. Only the crude changes.
 
 | crude or blend | gross $/bbl | netback $/bbl | differential against the marker $/bbl |
 | --- | --- | --- | --- |

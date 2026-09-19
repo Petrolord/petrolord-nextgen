@@ -12,7 +12,7 @@ The engine's rule is price = rowPrice x sum(d_i v_i) x dIndex/dL, turned into mo
 
 ## The sulfur row at Apapa
 
-The digest prints each piece:
+Each piece:
 
 - rowPrice on the Sulfur maximum row: -0.0914.
 - The sulfur row's scale, sum(SG x volume) over the recipe: 6037.3872.
@@ -37,7 +37,14 @@ The two binding specifications carry positive prices. The non-binding ones carry
 
 ## Per whole unit, and why it matters
 
-The price is per whole unit of the property, however large that unit is against the specification. The AGO cargo makes the point. Its binding rows price at 1159.3909 $ per unit of Cetane number and 852453.4687 $ per kg/l of Density. A whole kg/l of density is not a move any planner makes on a diesel specification. The figure is a rate, stated per the unit the specification is written in: a price per unit of the property is per whole unit of it, so the density relief is dollars per kg/l.
+The price is per whole unit of the property, however large that unit is against the specification. The AGO cargo makes the point. Its binding rows price at 1159.3909 $ per unit of Cetane number and 852453.4687 $ per kg/l of Density. A whole kg/l of density is not a move any planner makes on a diesel specification. The rows behind the two prices:
+
+| row | rowPrice | scale | rowPrice x scale | price (value of one unit of relief) | per |
+| --- | --- | --- | --- | --- | --- |
+| Cetane number minimum | 0.1932 | 6000.0000 | 1159.3909 | 1159.3909 | unit |
+| Density maximum | -142.0756 | 6000.0000 | -852453.4687 | 852453.4687 | kg/l |
+
+Both blend on volume, so each scales by the recipe's 6000.0000 bbl. rowPrice x scale is formed from the unrounded rowPrice. As on sulfur, a maximum's relief is the negative of dCost/dL, so the density row's two figures carry opposite signs.
 
 A rate is also a derivative at the optimum. Lesson five checks what one whole unit of relief actually saves by re-solving, and shows why the two can differ.
 

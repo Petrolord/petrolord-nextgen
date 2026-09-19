@@ -12,13 +12,13 @@ The four field streams in the library carry these viscosities, in cSt: Obigbo Li
 
 The engine's answer and a straight average of the cSt figures on mass, with no index, are printed side by side below. The engine never reports the straight average. It is here to be read against the answer.
 
-| blend (by volume) | blend viscosity cSt, index on mass (the engine) | cSt averaged linearly on mass (no index) |
-| --- | --- | --- |
-| Obigbo export blend, 65 and 35 | 7.4743 | 10.9576 |
-| Asarama Heavy and Ubie Condensate, 50 and 50 | 9.2496 | 339.5596 |
-| Egbema Medium and Asarama Heavy, 50 and 50 | 91.4520 | 324.3561 |
+| blend (by volume) | blend viscosity cSt (the engine) | cSt averaged linearly on mass | linear average minus the engine |
+| --- | --- | --- | --- |
+| Obigbo export blend, 65 and 35 | 7.4743 | 10.9576 | 3.4833 |
+| Asarama Heavy and Ubie Condensate, 50 and 50 | 9.2496 | 339.5596 | 330.3100 |
+| Egbema Medium and Asarama Heavy, 50 and 50 | 91.4520 | 324.3561 | 232.9041 |
 
-For the export blend the engine gives 7.4743 cSt and the straight average gives 10.9576. For Asarama Heavy with Ubie Condensate the engine gives 9.2496 cSt and the straight average gives 339.5596. For Egbema Medium with Asarama Heavy the engine gives 91.4520 and the straight average gives 324.3561.
+Read the last column. The straight average minus the engine is 3.4833 cSt for the export blend, 330.3100 for Asarama Heavy with Ubie Condensate, and 232.9041 for Egbema Medium with Asarama Heavy. For Asarama Heavy with Ubie Condensate the engine gives 9.2496 cSt, and the straight average gives 339.5596.
 
 ## Why the straight average fails
 
@@ -32,4 +32,4 @@ A heavy crude that will not pump at a terminal's temperature is often cut with a
 
 ## Exercise
 
-Read the Asarama Heavy and Ubie Condensate row. Quote the two crudes' viscosities from the library, the engine's blend viscosity and the straight average on mass. Say what the two blend figures show about how a straight average treats a very thick crude in a blend, and explain in one sentence why an index is needed.
+Read the Asarama Heavy and Ubie Condensate row. Quote the two crudes' viscosities from the library, the engine's blend viscosity, the straight average on mass and the linear average minus the engine. Say what the two blend figures show about how a straight average treats a very thick crude in a blend, and explain in one sentence why an index is needed.

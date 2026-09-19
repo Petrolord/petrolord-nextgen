@@ -39,7 +39,7 @@ The digest prints the same recipe's viscosity with the same index blended on vol
 
 The choice between them is a held item, C12. The engine blends the Refutas index on mass fraction, the classic Refutas form. ASTM D7152 blends the same family of index on volume. The two disagree, and the basis is a course and owner decision that this course states as a limit and does not settle. What a reader can say is what the engine does, and what the engine names: "Refutas index on mass fraction".
 
-In this recipe the engine marks Viscosity at 40 C not binding, and its value of one unit of relief is 0.0000 per cSt, a column module four reads. The digest prints no recipe solved with the index on volume, so this course does not say what that recipe would be. What it can say is that on the engine's own basis, viscosity is not one of the limits the least-cost recipe is pressed against. Binding: Cetane number and Density.
+In this recipe the engine marks Viscosity at 40 C not binding, and its value of one unit of relief is 0.0000 per cSt, a column module four reads. Binding: Cetane number and Density. The engine also re-solved the recipe with the viscosity index blended on volume instead. Every component volume comes back the same, the total cost is 594720.9475 $ on both bases, and the binding specifications are again Cetane number and Density. On this pool the basis moves the achieved viscosity and leaves the recipe where it is.
 
 {{panel:crude-recipe-explorer}}
 

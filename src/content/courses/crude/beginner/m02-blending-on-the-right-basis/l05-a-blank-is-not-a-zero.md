@@ -19,7 +19,15 @@ A blank says the value was not measured or not entered, and that is all it says.
 
 ## Why a zero would be dangerous
 
-If a blank were read as zero, the blend would carry Obigbo Light's sulfur diluted by a crude that apparently has none. The result would be a low sulfur figure that looks like a good blend and is a fiction. On a sulfur specification that fiction could clear a cargo that fails at the buyer's laboratory. A blank that stays blank cannot do that.
+A sulfur TYPED as 0 is a real zero, and the engine blends it like any other figure. Only the blank property is not blended; every other property of the same blend is formed as usual:
+
+| blend | SG | API | sulfur wt% | TAN mg KOH/g | vanadium ppm | viscosity cSt |
+| --- | --- | --- | --- | --- | --- | --- |
+| Obigbo export blend, both sulfurs given | 0.8611 | 32.8173 | 0.2642 | 0.3915 | 4.0673 | 7.4743 |
+| Egbema Medium's sulfur left blank | 0.8611 | 32.8173 | not blended | 0.3915 | 4.0673 | 7.4743 |
+| Egbema Medium's sulfur typed as 0 | 0.8611 | 32.8173 | 0.0888 | 0.3915 | 4.0673 | 7.4743 |
+
+With the sulfur blank, API 32.8173, TAN 0.3915 and viscosity 7.4743 still blend. With the sulfur typed as 0, the blend sulfur is 0.0888 on mass and nothing is named missing. If a blank were read as zero, that 0.0888 is the figure a reader would see: Obigbo Light's sulfur diluted by a crude that apparently has none. On a sulfur specification it could clear a cargo that fails at the buyer's laboratory. A blank that stays blank cannot do that.
 
 The same rule holds for the other properties. A blank viscosity leaves the blend without one. With Egbema Medium's viscosity blank, the engine returns viscosity not blended and names the basis "not blended: a component viscosity is missing or outside the index domain". Module three explains the second half of that sentence.
 
@@ -52,4 +60,4 @@ Percentages, a ratio or a count of barrels on a nomination all make the same ble
 
 ## Exercise
 
-Read the two sulfur rows at the top of this lesson. Quote the sulfur returned and the basis the engine names in each. Then read the refusal for Egbema Medium with no gravity. Say what the difference between the not blended answer and the refusal shows about which missing values spoil one property and which spoil the whole blend.
+Read the two sulfur rows at the top of this lesson. Quote the sulfur returned and the basis the engine names in each. Then read the refusal for Egbema Medium with no gravity. Quote the sulfur of the typed-0 row beside them. Say what the difference between the not blended answer and the refusal shows about which missing values spoil one property and which spoil the whole blend.

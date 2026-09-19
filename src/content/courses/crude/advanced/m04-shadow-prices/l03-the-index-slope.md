@@ -29,7 +29,7 @@ This also explains why a whole psi of relief need not save exactly the reported 
 
 ## The same idea on mass
 
-Viscosity in the AGO pool blends through the Refutas index on mass, so its row would carry both scales at once, sum(SG x volume) and the slope of the Refutas index at the limit. At the AGO optimum that row is not binding and its value of relief is 0.0000 per cSt. The rule is the same: price = rowPrice x sum(d_i v_i) x dIndex/dL.
+Viscosity in the AGO pool blends through the Refutas index on mass, so its row would carry both scales at once, sum(SG x volume), which is 5070.0000 on the AGO recipe, and the slope of the Refutas index at the limit. At the AGO optimum that row is not binding and its value of relief is 0.0000 per cSt. The rule is the same: price = rowPrice x sum(d_i v_i) x dIndex/dL.
 
 {{panel:crude-recipe-explorer}}
 

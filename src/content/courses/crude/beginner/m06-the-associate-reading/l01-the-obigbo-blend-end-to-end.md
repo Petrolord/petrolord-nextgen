@@ -46,7 +46,7 @@ The blend's cut yields on the studio's default cuts, from the blend's own curve,
 | Vacuum residue | 17.0528 |
 | total | 100.0000 |
 
-The six yields total 100.0000. Both crudes' curves run from 0 to 100 percent, so every cut on the blend's curve has a yield.
+The six yields total 100.0000. Both crudes' curves run from 0 to 100 percent, so every cut on the blend's curve has a yield. Closes: true. Cuts with no yield: nothing.
 
 ## Reading it as a buyer would
 

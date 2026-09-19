@@ -27,9 +27,14 @@ Contrast the blank cost of the previous lesson. A cost is part of the objective,
 
 ## Reading a skipped result
 
-Read the skipped list before the recipe. The total cost of 695245.0644 $ is the cost of meeting every specification except sulfur. It is not the cost of the Apapa cargo on the 50 ppm template, which is 698701.5605 $ with sulfur applied. A skipped specification also has no achieved value to read here, because the digest prints none for these two cases, and no price of relief, because there is no row to price.
+Read the skipped list before the recipe. The total cost of 695245.0644 $ is the cost of meeting every specification except sulfur. It is not the cost of the Apapa cargo on the 50 ppm template, which is 698701.5605 $ with sulfur applied. A skipped specification has no price of relief, because there is no row to price, and no achieved value:
 
-The skipped list is part of the answer. A recipe with a skipped sulfur row is a recipe for a different question, and it needs the missing figure before it can be offered as a cargo to the template.
+| asked | skipped specification achieved | Density applied | Density achieved kg/l |
+| --- | --- | --- | --- |
+| Isomerate with no sulfur figure | not formed (the engine returns no value) | true | 0.7536 |
+| FCC gasoline with no SG and no API | not formed (the engine returns no value) | true | 0.7536 |
+
+Density blends on volume and needs no SG, so it is applied in both cases and achieved at 0.7536 kg/l. A recipe with a skipped sulfur row is a recipe for a different question, and it needs the missing figure before it can be offered as a cargo to the template.
 
 {{panel:crude-recipe-explorer}}
 

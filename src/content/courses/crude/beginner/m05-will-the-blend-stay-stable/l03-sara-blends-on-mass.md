@@ -24,19 +24,19 @@ Look at the first pair. Asarama Heavy alone has a CII of 0.7668 and Ubie Condens
 
 As with sulfur, the table can be read against the same index formed from SARA blended on volume instead. The engine never reports the volume figure.
 
-| pair (by volume) | CII (the engine, SARA on mass) | CII from SARA blended on volume instead |
-| --- | --- | --- |
-| Asarama Heavy with Ubie Condensate, 50 and 50 | 1.7614 | 1.9718 |
-| Asarama Heavy with Egbema Medium, 70 and 30 | 0.7161 | 0.7141 |
-| Egbema Medium with Obigbo Light, 85 and 15 | 0.6634 | 0.6671 |
+| pair (by volume) | CII (SARA on mass, the engine) | CII from SARA on volume | volume reading minus the engine |
+| --- | --- | --- | --- |
+| Asarama Heavy with Ubie Condensate, 50 and 50 | 1.7614 | 1.9718 | 0.2104 |
+| Asarama Heavy with Egbema Medium, 70 and 30 | 0.7161 | 0.7141 | -0.0020 |
+| Egbema Medium with Obigbo Light, 85 and 15 | 0.6634 | 0.6671 | 0.0037 |
 
-For Asarama Heavy with Ubie Condensate the engine gives 1.7614 and the volume route gives 1.9718. For Asarama Heavy with Egbema Medium the engine gives 0.7161 and the volume route gives 0.7141. For Egbema Medium with Obigbo Light the engine gives 0.6634 and the volume route gives 0.6671.
+Read the last column. The volume reading minus the engine is 0.2104 for Asarama Heavy with Ubie Condensate, -0.0020 for Asarama Heavy with Egbema Medium, and 0.0037 for Egbema Medium with Obigbo Light.
 
 The volume figures are plausible on every row. They are formed on a basis the SARA fractions do not have, so they are the wrong numbers, however close they land.
 
 ## Why the basis matters near a band edge
 
-A screen with thresholds turns a small difference into a different answer when a figure sits near a threshold. The uncertain pair's CII is 0.7161 on mass and 0.7141 on volume, and the lower band edge is 0.7. A blend with a CII near a band edge is exactly the case where the basis must be right. That is why the engine forms the mass shares once and uses them for every per-mass property, SARA included.
+A screen with thresholds turns a small difference into a different answer when a figure sits near a threshold. The uncertain pair's CII is 0.7161 on mass and 0.7141 on volume, a difference of -0.0020, and the lower band edge is 0.7. A blend with a CII near a band edge is exactly the case where the basis must be right. That is why the engine forms the mass shares once and uses them for every per-mass property, SARA included.
 
 ## The same rule, a fourth time
 
@@ -44,4 +44,4 @@ This module repeats a pattern from module two. Gravity goes through specific gra
 
 ## Exercise
 
-Read the three rows of the second table. Quote the engine's CII and the CII from SARA on volume for each pair. Say what the pairs of figures show about whether the volume basis would have moved any of these blends into a different band, using the thresholds 0.7 and 0.9. Then explain why the engine blends the four fractions before forming the index.
+Read the three rows of the second table. Quote the engine's CII, the CII from SARA on volume and the volume reading minus the engine for each pair. Say what the pairs of figures show about whether the volume basis would have moved any of these blends into a different band, using the thresholds 0.7 and 0.9. Then explain why the engine blends the four fractions before forming the index.

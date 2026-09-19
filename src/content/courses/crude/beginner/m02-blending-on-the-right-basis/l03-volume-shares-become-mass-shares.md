@@ -6,7 +6,7 @@ A cargo is measured in barrels, and half the properties of a crude are per unit 
 
 ## The conversion
 
-Each crude's mass share is its volume share times its specific gravity, over the sum of those products. A barrel of a heavy crude weighs more than a barrel of a light one, so the heavier crude carries more of the mass than of the volume.
+Each crude's mass share is its volume share times its specific gravity, over the sum of those products. Which way a share moves is decided against the blend itself. A crude denser than the blend carries more of the mass than of the volume, and a crude lighter than the blend carries less.
 
 | blend | crude | share typed | volume fraction | SG | mass fraction | mass fraction minus volume fraction |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -18,7 +18,7 @@ Each crude's mass share is its volume share times its specific gravity, over the
 
 Read the last column. In the export blend, Obigbo Light loses 0.0154 of share going from volume to mass and Egbema Medium gains 0.0154. The fractions still add to one on both bases, so what one crude loses the other gains.
 
-In the three-crude blend the last column prints -0.0225 for Obigbo Light, 0.0063 for Egbema Medium and 0.0162 for Asarama Heavy. The lightest crude in the blend is the one whose mass fraction sits below its volume fraction.
+In the three-crude blend the last column prints -0.0225 for Obigbo Light, 0.0063 for Egbema Medium and 0.0162 for Asarama Heavy. The engine prints this blend's specific gravity as 0.8804. Egbema Medium's mass fraction gains 0.0063 here. The sign is decided by comparing each crude with the blend as a whole, so read each SG in the table beside 0.8804.
 
 ## Shares typed by mass
 
@@ -30,7 +30,14 @@ A crude can also be given by mass. When every crude carries a mass share and non
 | Egbema Medium | 30 | 0.2931 | 0.3000 |
 | Asarama Heavy | 20 | 0.1846 | 0.2000 |
 
-The same three numbers, 50, 30 and 20, make two different blends depending on which basis they are typed on. The engine gives the blend typed by mass an API of 29.6100 and the blend typed by volume at 50, 30 and 20 an API of 29.2240. A share is a number with a basis, and the basis is part of the recipe. When a nomination says 50, 30 and 20, the first question to ask is whether those are barrels or tonnes.
+The same three numbers, 50, 30 and 20, make two different blends depending on which basis they are typed on. The engine gives the blend typed by mass an API of 29.6100 and the blend typed by volume at 50, 30 and 20 an API of 29.2240. The other properties move with it:
+
+| three crudes, 50, 30 and 20 | blend SG | blend API | blend sulfur wt% |
+| --- | --- | --- | --- |
+| by volume | 0.8804 | 29.2240 | 0.6138 |
+| by mass | 0.8783 | 29.6100 | 0.5840 |
+
+A share is a number with a basis, and the basis is part of the recipe. When a nomination says 50, 30 and 20, the first question to ask is whether those are barrels or tonnes.
 
 ## One basis at a time
 
@@ -42,4 +49,4 @@ The engine forms the mass shares in one place and every per-mass property reads 
 
 ## Exercise
 
-Read the three-crude rows of the first table. Quote each crude's specific gravity and its mass fraction minus volume fraction. Say what these figures show about which crudes gain share when the basis moves from volume to mass. Then quote the two blend APIs for 50, 30 and 20 typed by mass and by volume, and say what they show about typing a share without its basis.
+Read the three-crude rows of the first table. Quote each crude's specific gravity and its mass fraction minus volume fraction. Set them beside the blend's specific gravity of 0.8804 and say what these figures show about which crudes gain share when the basis moves from volume to mass. Then quote the two blend APIs for 50, 30 and 20 typed by mass and by volume, and say what they show about typing a share without its basis.

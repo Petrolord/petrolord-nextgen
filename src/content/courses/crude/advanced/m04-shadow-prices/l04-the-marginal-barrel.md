@@ -8,7 +8,7 @@ The batch row is sum(v_i) = target, with the target in barrels. Its right-hand s
 
 ## Average against margin
 
-The digest sets the two side by side and prints the difference:
+Side by side, with the difference printed:
 
 | figure | $/bbl |
 | --- | --- |
@@ -21,13 +21,13 @@ The last row is the check: solved again at 8001 bbl, the cost rises by 87.5108 $
 
 ## Why the next barrel is not an average barrel
 
-The digest gives the reason. The component at its availability cannot supply the next barrel, so the next barrel is made from the others. At Apapa that component is Butane, at 400.0000 bbl against 400 bbl available, and it costs 54.1 $/bbl. The first 8000 barrels include all 400 of those. Barrel 8001 cannot include any more butane, so it is made from Reformate, FCC gasoline and Isomerate, in whatever proportion still meets sulfur and RVP at the margin.
+The component at its availability cannot supply the next barrel, so the next barrel is made from the others. At Apapa that component is Butane, at 400.0000 bbl against 400 bbl available, and it costs 54.1 $/bbl. The first 8000 barrels include all 400 of those. Barrel 8001 cannot include any more butane, so it is made from Reformate, FCC gasoline and Isomerate, in whatever proportion still meets sulfur and RVP at the margin.
 
 The average spreads the cost of every barrel already blended, butane included, across the cargo. The margin prices only the next barrel, made without it. The difference is a fact about the recipe's bounds.
 
 ## When the two agree
 
-The optimizer's default pool is a gasoline cargo of 1000 bbl on the same 50 ppm template. Its unit cost is 86.1228 $/bbl, and its Total volume row prices at 86.1228 as well. There the marginal barrel and the average barrel print the same figure. The contrast with Apapa is the lesson: the gap is not a property of blending in general. It appears when something in the recipe is at a limit that the next barrel cannot move.
+The optimizer's default pool is a gasoline cargo of 1000 bbl on the same 50 ppm template. Its unit cost is 86.1228 $/bbl, and its Total volume row prices at 86.1228 as well. Components at their availability: nothing. At zero: Isomerate. Marginal barrel minus unit cost: 0.0000 $/bbl. With no availability limit pressing, every row but the volume row has a zero right-hand side, so the cost scales with the batch and the marginal barrel costs what the average one does. At Apapa the gap appears because Butane sits at a limit the next barrel cannot move.
 
 ## What the trader does with it
 
@@ -41,4 +41,4 @@ In the panel, raise Butane's availability until its bound stops binding, and wat
 
 ## Exercise
 
-Read the Apapa table: marginal 87.5108 $/bbl, average 87.3377 $/bbl, marginal minus average 0.1731, and the 8001 bbl re-solve at 87.5108. Then read the default pool's unit cost, 86.1228, and its Total volume price, 86.1228. Say what the Apapa difference shows about Butane's bound, and what the default pool's two figures show about its margin.
+Read the Apapa table: marginal 87.5108 $/bbl, average 87.3377 $/bbl, marginal minus average 0.1731, and the 8001 bbl re-solve at 87.5108. Then read the default pool's unit cost, 86.1228, its Total volume price, 86.1228, and its marginal barrel minus unit cost, 0.0000. Say what the Apapa difference shows about Butane's bound, and what the default pool's two figures show about its margin.

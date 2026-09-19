@@ -1,6 +1,6 @@
 # Where this course hands over
 
-Crude Assay & Blending is the first course in the Commercial & Trading module, and Refinery Feasibility & Planning follows it there. Terminals, Depots & Fuel Supply sits in the Supply Chain & Logistics module. This last lesson says what the course leaves the learner holding and where those two courses pick up.
+Crude Assay & Blending is the first course in the Commercial & Trading module, and Refinery Feasibility & Planning follows it there. Terminals, Depots & Fuel Supply sits in the Supply Chain & Logistics module. This lesson says where those two courses pick up.
 
 ## What this course owns
 
@@ -24,15 +24,15 @@ The same kernel plans a refinery, and the `refinery` course (Refinery Feasibilit
 
 ## Where supply picks up
 
-The `supply` course (Terminals, Depots & Fuel Supply) owns what happens to a product once it is in a tank: strapping, the volume correction factor, free water, stock reconciliation, queues, landed cost and pump price. The Apapa cargo in this tier is a recipe: which components, in what volumes, at what cost. What happens to it in a terminal's tanks is that course's material, in the Supply Chain & Logistics module.
+The `supply` course (Terminals, Depots & Fuel Supply) owns what happens to a product once it is in a tank: strapping, the volume correction factor, free water, stock reconciliation, queues, landed cost and pump price. The Apapa cargo in this tier is a recipe: which components, in what volumes, at what cost. What happens to it in a terminal's tanks is that course's material.
 
 ## What neither module teaches
 
-Net present value, internal rate of return, Monte Carlo and decision trees belong to the Economics courses. Nothing in this course values a cash flow over time. The netback of the Professional tier and the least-cost recipe of this one are values per barrel and per cargo.
+Net present value, internal rate of return, Monte Carlo and decision trees belong to the Economics courses.
 
 ## Reading any recipe from here on
 
-A learner leaving this course can read any least-cost result, from any app on this kernel, in one order: status, skipped, recipe and bounds, binding, giveaway, prices of relief, the marginal barrel, and a re-solve for any move larger than a small step. Each line answers one question, and none of them is read before the status.
+A learner leaving this course can read any least-cost result, from any app on this kernel, in one order: status, skipped, recipe and bounds, binding, giveaway, prices of relief, the marginal barrel, and a re-solve for any move larger than a small step. None of them is read before the status.
 
 ## Exercise
 

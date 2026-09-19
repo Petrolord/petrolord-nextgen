@@ -19,7 +19,14 @@ The digest prints the engine's T50 with the grid reading from lesson 2 and both 
 | Kwale Light and Ughelli Medium, 55 and 45 | 587.3184 | 650 | 584.0000 | 586.0503 |
 | the studio's default pair, 60 and 40 (what the app opens on) | 617.1429 | 690 | 612.0000 | 614.2222 |
 
-The engine's figure is 587.3184 F for the Kwale blend. The volume-weighted mean of the crudes' T50 is 584.0000 F and the mass-weighted mean is 586.0503 F. For the default pair the engine gives 617.1429 F against 612.0000 F and 614.2222 F.
+Each shortcut against the engine, the difference printed:
+
+| blend | grid reading minus the engine F | volume-weighted mean minus the engine F | mass-weighted mean minus the engine F |
+| --- | --- | --- | --- |
+| Kwale Light and Ughelli Medium, 55 and 45 | 62.6816 | -3.3184 | -1.2681 |
+| the studio's default pair, 60 and 40 | 72.8571 | -5.1429 | -2.9207 |
+
+For the Kwale blend the volume-weighted mean minus the engine is -3.3184 F and the mass-weighted mean minus the engine is -1.2681 F. For the default pair the same two columns read -5.1429 F and -2.9207 F.
 
 Four readings are printed. Only one of them is read off the blend's own curve.
 

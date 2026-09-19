@@ -8,14 +8,14 @@ A refinery sells a barrel of crude as cuts: fractions that boil between two temp
 
 | cut | from F | to F |
 | --- | --- | --- |
-| LPG / Light ends | start of the curve | 90 |
+| LPG / Light ends | no lower bound (from 0 percent) | 90 |
 | Naphtha | 90 | 350 |
 | Kerosene / Jet | 350 | 500 |
 | Diesel / Gasoil | 500 | 650 |
 | Vacuum gasoil | 650 | 1000 |
-| Vacuum residue | 1000 | end of the curve |
+| Vacuum residue | 1000 | no upper bound (to 100 percent) |
 
-A first cut with no lower bound starts at nothing distilled. A last cut with no upper bound runs to the end of the curve. Every cut in between has two temperatures, and the curve is read at both.
+A first cut with no lower bound starts at 0 percent, nothing distilled. A last cut with no upper bound runs to 100 percent: it takes everything not yet distilled at its lower bound. Every cut in between has two temperatures, and the curve is read at both.
 
 ## Yields of the four full crudes
 
@@ -28,7 +28,7 @@ A first cut with no lower bound starts at nothing distilled. A last cut with no 
 
 Read the LPG column. Obigbo Light's curve starts at 85 F, so a little of it has distilled by 90 F, and the cut returns 0.4167. Egbema Medium's curve starts at 95 F, above the cut's upper bound of 90, so nothing has distilled by then and the cut returns 0.0000. That zero is a real answer. The curve's first point is at 0 percent, and below it the curve says nothing has distilled.
 
-Read the residue column. Ubie Condensate's curve ends 100 at 760, below the residue cut's lower bound of 1000 F. Everything has distilled by then, so the residue cut returns 0.0000. Asarama Heavy's curve reads 70 at 1000, and its residue cut, which runs from 1000 F to the end of the curve, returns 30.0000.
+Read the residue column. Ubie Condensate's curve ends 100 at 760, below the residue cut's lower bound of 1000 F. Everything has distilled by then, so the residue cut returns 0.0000. Asarama Heavy's curve reads 70 at 1000, and its residue cut, which runs from 1000 F to 100 percent, returns 30.0000.
 
 ## Why yields are differences
 

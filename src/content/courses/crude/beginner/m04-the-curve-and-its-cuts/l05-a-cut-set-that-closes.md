@@ -13,7 +13,7 @@ A set of cuts that covers a whole crude should account for all of it. cutYields 
 | Asarama Heavy | 100.0000 | true | nothing |
 | Ubie Condensate | 100.0000 | true | nothing |
 
-Each of the four full curves runs from 0 to 100 percent, and the studio's six default cuts run from the start of the curve to its end with no gap between them. So every cut has a yield, the six yields total 100.0000, and each set closes.
+Each of the four full curves runs from 0 to 100 percent, and the studio's six default cuts leave no gap between them. The first cut has no lower bound, so it starts at 0 percent. The last has no upper bound, so it runs to 100 percent and takes everything not yet distilled at 1000 F. So every cut has a yield, the six yields total 100.0000, and each set closes.
 
 ## A crude that does not
 

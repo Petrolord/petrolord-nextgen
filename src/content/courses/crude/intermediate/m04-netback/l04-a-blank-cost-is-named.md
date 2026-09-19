@@ -20,6 +20,8 @@ The digest prints the Kwale case with two fields left blank:
 | --- | --- | --- |
 | Kwale, freight and losses left blank | 67.4412 | freight, losses |
 
+Complete: true. A blank cost is named and does not make the valuation incomplete. A missing price or a missing yield does, and the next lesson reads one.
+
 The netback here is 67.4412 $/bbl. The complete Kwale valuation, with every field filled, is 64.9473 $/bbl. Two figures for the same blend, and the only thing that tells a reader which one they are looking at is the list beside it. With assumedZero reading "freight, losses", nobody can mistake the first for a full netback.
 
 ## Losses count as a cost here

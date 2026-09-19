@@ -18,12 +18,12 @@ temperatureAtVolumePercent does not stop at a grid point. It finds the two curve
 
 The digest prints both readings for two blends.
 
-| blend | T50 interpolated (the engine) F | first curve point at or past 50 percent F |
-| --- | --- | --- |
-| Kwale Light and Ughelli Medium, 55 and 45 | 587.3184 | 650 |
-| the studio's default pair, 60 and 40 (what the app opens on) | 617.1429 | 690 |
+| blend | T50 interpolated (the engine) F | first curve point at or past 50 percent F | grid reading minus the engine F |
+| --- | --- | --- | --- |
+| Kwale Light and Ughelli Medium, 55 and 45 | 587.3184 | 650 | 62.6816 |
+| the studio's default pair, 60 and 40 (what the app opens on) | 617.1429 | 690 | 72.8571 |
 
-The grid reading is a temperature from the crudes' measurement grid. In the Kwale blend, 650 F is Ughelli Medium's own 50 percent point, and the blend's curve reads 56.9474 percent there. The grid reading therefore reports the temperature at which the blend has passed 50 percent by whatever amount the grid happens to allow, and calls it the fifty percent point.
+The grid reading is a temperature from the crudes' measurement grid. In the Kwale blend, 650 F is Ughelli Medium's own 50 percent point, and the blend's curve reads 56.9474 percent there. The grid reading therefore reports the temperature at which the blend has passed 50 percent by whatever amount the grid happens to allow, and calls it the fifty percent point. The grid reading minus the engine is 62.6816 F for the Kwale blend and 72.8571 F for the default pair.
 
 ## Why the error is not a fixed size
 

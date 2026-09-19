@@ -1,6 +1,6 @@
 # No gravity, no screen
 
-The stability screen has two routes. With SARA on every crude it forms the colloidal instability index. Without SARA it falls back to the gravity contrast. When a blend has no SARA and a crude with no gravity, neither route is open, and the engine says so plainly.
+The stability screen has two routes. With SARA on every crude it forms the colloidal instability index. Without SARA it falls back to the gravity contrast. When the crudes have no SARA and one of them has no gravity, neither route is open, and the screen says so plainly. That case is reached only by calling screenBlendStability on its own, because blendCrudes refuses a crude with no gravity before any screen is made.
 
 {{panel:crude-assay-explorer}}
 
@@ -8,7 +8,7 @@ The stability screen has two routes. With SARA on every crude it forms the collo
 
 | pair, no SARA supplied | basis | API contrast | stable |
 | --- | --- | --- | --- |
-| a crude with no API and no SG beside one of 30 API | none | not formed | no verdict |
+| a crude with no API and no SG beside one of 30 API (screenBlendStability called on its own) | none | not formed | no verdict |
 
 The basis is none. The API contrast is not formed, because one of the two gravities does not exist. The stable answer is no verdict. The engine's message reads: "No SARA analysis and not every crude has a gravity, so no stability screen was made. Supply SARA for a colloidal instability index."
 
@@ -30,7 +30,7 @@ No verdict comes from three places: a CII in the uncertain band, a gravity scree
 
 ## The blend engine and a missing gravity
 
-blendCrudes, asked to blend a crude with no API and no specific gravity, refuses outright: "No API or specific gravity for Egbema Medium. Every property here is weighted by density." The screen, asked about such a pair, answers with basis none and no verdict. The two answers fit together. Neither returns a number that was not computed from data.
+Inside a blend, the screen never sees such a pair. blendCrudes, asked to blend a crude with no API and no specific gravity, refuses first: "No API or specific gravity for Egbema Medium. Every property here is weighted by density." Nothing is blended and no screen is made. Only screenBlendStability called on its own, outside blendCrudes, reaches the row above, and it answers with basis none and no verdict. Neither function returns a number that was not computed from data.
 
 ## What to do next
 
@@ -38,4 +38,4 @@ A no-screen result is a list of missing data. The first remedy is SARA on every 
 
 ## Exercise
 
-Read the no-gravity row and its message. Quote its basis, its API contrast and its stable answer. Then read the export blend's gravity-screen row from the last lesson, with basis api-contrast and API contrast 10.9000. Say what the two basis cells show about why both rows return no verdict for different reasons.
+Read the no-gravity row and its message. Quote its basis, its API contrast and its stable answer, and say which function returned it and why blendCrudes never reaches it. Then read the export blend's gravity-screen row from the last lesson, with basis api-contrast and API contrast 10.9000. Say what the two basis cells show about why both rows return no verdict for different reasons.

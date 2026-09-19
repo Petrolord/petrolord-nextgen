@@ -34,9 +34,9 @@ When complete reads false, read unpricedCuts before reading the netback. Then lo
 
 A buyer who compared that figure against a marker, as module 5 does, would be comparing part of a crude against the whole of another. The flag is there to stop exactly that.
 
-## Two flags, two meanings
+## Three names, two meanings
 
-Keep assumedZero and unpricedCuts apart. assumedZero names costs the engine took as zero, because a netback without them is a question worth asking. unpricedCuts names products the engine could not value, and the engine reports that valuation incomplete. Both are the engine refusing to let a missing input vanish silently into a total. Only one of them makes the total unfit to use as a netback.
+Keep the lists apart. assumedZero names costs the engine took as zero, because a netback without them is a question worth asking, and the valuation stays complete. unpricedCuts names cuts with no price. unyieldedCuts names cuts with no yield: on the partial Ebocha blend of module 3 it reads LPG / Light ends, Naphtha. A missing price and a missing yield each make the valuation incomplete.
 
 ## Exercise
 

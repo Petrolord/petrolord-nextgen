@@ -6,11 +6,11 @@ SARA is not always available. With no SARA on some crude in the blend, the scree
 
 ## The rule
 
-A wide spread of API with a light paraffinic crude in the blend is the combination that classically drops asphaltenes. So the rule asks two things: is the contrast in API between the lighter and the heavier crude above one threshold, and is the lighter crude above another. A flag needs both at once, and the probes below show each condition failing while the other holds. When the rule flags, the engine returns stable false. When it does not flag, the engine returns stable null, never true.
+A wide spread of API with a light paraffinic crude in the blend is the combination that classically drops asphaltenes. So the rule asks two things: is the contrast in API between the lighter and the heavier crude above one threshold, and is the lighter crude above another. A flag needs both at once. When the rule flags, the engine returns stable false. When it does not flag, the engine returns stable null, never true.
 
 ## Probing the thresholds
 
-The two thresholds are not exported, so the engine is asked about them directly, with two crudes of no SARA.
+The two thresholds are not exported, so the engine is probed with two crudes of no SARA.
 
 | probe | lighter crude API | heavier crude API | API contrast (the engine) | stable |
 | --- | --- | --- | --- | --- |
@@ -22,6 +22,13 @@ The two thresholds are not exported, so the engine is asked about them directly,
 | lighter crude well past it | 36 | 19 | 17.0000 | false |
 
 The first three probes hold the lighter crude at 40 API and move the heavier one. At a contrast of 15.0000 there is no verdict, and at 15.0100 the rule flags. The last three hold the heavier crude at 19 API and move the lighter one. With the lighter crude at 35 there is no verdict even at a contrast of 16.0000, and at 35.01 the rule flags.
+
+Bisection on the engine itself finds the smallest value that raises each flag:
+
+| threshold | value |
+| --- | --- |
+| API contrast, lighter crude at 45 API | 15.0000 |
+| lighter crude API, contrast held at 25 | 35.0000 |
 
 ## Two pairs from the library
 
@@ -42,7 +49,7 @@ The Obigbo export blend shows why this matters. With every SARA supplied, the ex
 
 ## Reading the result
 
-In the assay explorer, remove the SARA from one crude of a blend. The basis changes to api-contrast, and a blend that does not flag shows no verdict as its own state.
+In the assay explorer, remove the SARA from one crude of a blend. The index needs SARA on every crude, so the basis changes to api-contrast. With SARA on Obigbo Light only, the export blend's message begins: "SARA was not supplied for every crude, so this is an API-contrast screen only." A blend that does not flag shows no verdict as its own state.
 
 ## Exercise
 

@@ -6,24 +6,24 @@ The same blend has different yields at different refineries. Nothing about the c
 
 ## Two cut sets on one curve
 
-Kwale is a topping refinery with no vacuum unit. Its cut set ends at atmospheric residue from 650 F to the end of the curve, because it has nowhere to split that material further. The studio's default cut set, which the Associate tier used on the Obigbo library, is a vacuum refinery's: it splits the heavy end at 1000 F into vacuum gasoil and vacuum residue.
+Kwale is a topping refinery with no vacuum unit. Its cut set ends at atmospheric residue, from 650 F with no upper bound, running to 100 percent, because it has nowhere to split that material further. The studio's default cut set, which the Associate tier used on the Obigbo library, is a vacuum refinery's: it splits the heavy end at 1000 F into vacuum gasoil and vacuum residue.
 
 | cut | Kwale from F | Kwale to F |
 | --- | --- | --- |
-| LPG / Light ends | start of the curve | 90 |
+| LPG / Light ends | no lower bound (from 0 percent) | 90 |
 | Naphtha | 90 | 330 |
 | Kerosene / DPK | 330 | 480 |
 | Diesel / AGO | 480 | 650 |
-| Atmospheric residue | 650 | end of the curve |
+| Atmospheric residue | 650 | no upper bound (to 100 percent) |
 
 | cut | default from F | default to F |
 | --- | --- | --- |
-| LPG / Light ends | start of the curve | 90 |
+| LPG / Light ends | no lower bound (from 0 percent) | 90 |
 | Naphtha | 90 | 350 |
 | Kerosene / Jet | 350 | 500 |
 | Diesel / Gasoil | 500 | 650 |
 | Vacuum gasoil | 650 | 1000 |
-| Vacuum residue | 1000 | end of the curve |
+| Vacuum residue | 1000 | no upper bound (to 100 percent) |
 
 ## The Kwale blend on both
 
@@ -48,7 +48,7 @@ The digest prints the Kwale blend, 55 and 45, on each.
 
 ## Reading the two tables
 
-Both sets draw LPG / Light ends from the start of the curve to 90 F, and both tables print 0.7174 for it. Where the bounds are the same, the yield is the same, because it is the same stretch of the same curve.
+Both sets draw LPG / Light ends from 0 percent, with no lower bound, to 90 F, and both tables print 0.7174 for it. Where the bounds are the same, the yield is the same, because it is the same stretch of the same curve.
 
 Everywhere else the bounds differ. Kwale ends naphtha at 330 F; the default set ends it at 350 F. Kwale's kerosene runs 330 to 480 F; the default's runs 350 to 500 F. Kwale's diesel runs 480 to 650 F; the default's runs 500 to 650 F. Each of those cuts covers a different stretch of the curve, so each has its own yield, and the names do not line up either: DPK and Jet, AGO and Gasoil are two refineries' words for their own products.
 

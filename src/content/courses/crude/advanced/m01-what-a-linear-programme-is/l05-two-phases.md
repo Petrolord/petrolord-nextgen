@@ -12,7 +12,7 @@ Phase one solves this by adding an artificial variable to each row that the star
 
 From a feasible vertex, phase two looks for a neighbouring vertex with a better objective. It moves one variable into the set that defines the corner and moves another out, a step called a pivot. Each pivot either improves the objective or leaves it unchanged, and when no neighbour is better the current vertex is the optimum. If some direction improves the objective forever without meeting a constraint, the status is unbounded.
 
-In the textbook case the kernel reports 2 iterations to reach x 3.0000, y 1.5000, objective 21.0000.
+In the textbook case the kernel reports 2 iterations to reach x 3.0000, y 1.5000, objective 21.0000. iterations counts the pivots of both phases together.
 
 ## Why degeneracy matters in blending
 

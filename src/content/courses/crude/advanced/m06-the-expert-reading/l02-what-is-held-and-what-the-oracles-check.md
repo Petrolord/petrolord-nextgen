@@ -9,7 +9,7 @@ Each is a place where the engine makes a choice that a reasonable planner could 
 | item | what the engine does | the limit |
 | --- | --- | --- |
 | L4 | the LP kernel uses absolute tolerances on its pivots and on phase one | right for the barrel-scale problems the two apps pose; a problem scaled in millions is outside what it is shown to handle |
-| C12 | the Refutas index blends on mass fraction ("Refutas index on mass fraction") | ASTM D7152 blends on volume; the two disagree (SECTION 8 prints both), and the basis is a course and owner decision |
+| C12 | the Refutas index blends on mass fraction ("Refutas index on mass fraction") | ASTM D7152 blends on volume; the two disagree (the Obigbo export blend reads 7.4743 cSt on mass and 7.3107 cSt on volume), and the basis is a course and owner decision |
 | C13 | Watson K is taken at the blend's T50 | a screening basis; the strict basis is the mean average boiling point |
 
 **L4 belongs to this tier.** Every result in modules one to five came from a kernel that decides "zero" and "exactly met" by fixed tolerances. The Apapa cargo of 8000 bbl and the AGO cargo of 6000 bbl are the barrel-scale problems the apps pose, and there the tolerances are right. A problem whose coefficients run into millions sits outside what the kernel is shown to handle. The limit is a statement about scale. It does not say such a problem fails, only that nothing here shows it succeeds.

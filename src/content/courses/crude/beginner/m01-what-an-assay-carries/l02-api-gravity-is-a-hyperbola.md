@@ -38,7 +38,7 @@ API is a hyperbola in specific gravity: equal steps of specific gravity are uneq
 | 0.8 | 45.3750 | -11.7917 |
 | 0.85 | 34.9706 | -10.4044 |
 | 0.9 | 25.7222 | -9.2484 |
-| 0.95 | 17.4474 | -8.2749 |
+| 0.95 | 17.4474 | -8.2748 |
 | 1 | 10.0000 | -7.4474 |
 
 Read the last column. Every row moves the specific gravity by the same amount, and the API step printed beside it is a different number each time: -11.7917 on the first step and -7.4474 on the last. A straight line would print one step five times. This table prints five different steps.
