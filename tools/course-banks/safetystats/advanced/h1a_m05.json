@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "AMUKPE's company recorded 4 recordables in 846200 hours. A report divides those 4 events by the company and contractor hours together, 2238950, and prints 0.357310 per 200,000 hours. What is wrong with that figure?",
+  "options": [
+   "Nothing, since adding the contractor hours gives a larger denominator and so a more precise company rate",
+   "Its count and its hours describe different workforces: the contractor hours are in and the contractor events are out",
+   "Its base is wrong, since a rate that includes contractor hours has to be quoted per 1,000,000 hours",
+   "Its count is too high, since the company's 4 events should be shared out across both workforces' hours"
+  ],
+  "answer": 1,
+  "explanation": "Events and hours must come from the same workforce, both in or both out. The row divides the company's events by hours worked mostly by people who could never add to that count, and the rate falls from 0.945403 to 0.357310 with no change on site. More hours only help when their events come with them. The base is the caller's choice for any workforce. The 4 events are the company's and belong over the company's hours."
+ },
+ {
+  "prompt": "Which two AMUKPE rates are fair, and what does each answer?",
+  "options": [
+   "0.357310 for the company and 1.161259 for the site, since both of them divide by the site's full hours",
+   "0.945403 for the company and 0.357310 for the site, since the site rate is the one that uses the site's hours",
+   "1.161259 alone, since a rate that leaves the contractors out is never a fair rate for a site to report",
+   "0.945403 for how the company's own people fared and 1.161259 for everyone exposed on the site"
+  ],
+  "answer": 3,
+  "explanation": "The company row keeps contractors out of both halves; the site row keeps them in both. Both are honest and they answer different questions, which a report must name. 0.357310 is the mismatched row, the company's events over everyone's hours, and describes no workforce. A company-only rate is a fair statement about the company's own employees, and many operators report both."
+ },
+ {
+  "prompt": "AMUKPE's company rate is 0.945403 and its site rate is 1.161259, both per 200,000 hours. What does that tell you about the contractors' own rate, and why?",
+  "options": [
+   "It is higher than 1.161259, because the pooled site rate is an hours-weighted average and must sit between the two groups",
+   "It is lower than 0.945403, because the contractors worked more hours and more hours always give a lower rate",
+   "It is 1.161259 exactly, because the site rate is the rate of the larger workforce once the two are pooled",
+   "It cannot be said without the mean of the two groups' rates, which is the figure the site rate is built on"
+  ],
+  "answer": 0,
+  "explanation": "A pooled rate is a weighted average of the group rates with hours as the weights, so it lies between them. The site rate is above the company's, so the contractors' rate must be above the site's. More hours make a rate more precise and do not push it down. The site rate is sum then divide over both groups, and the mean of the group rates is a different number that plays no part in it."
+ },
+ {
+  "prompt": "The second AMUKPE row, 0.357310, sits below the company rate, the site rate and the contractors' own rate. Why does that position give it away?",
+  "options": [
+   "It does not give anything away, since a rate that divides by the site's hours is always the lowest of the site's recorded rates",
+   "It shows the company improved over the year, since adding the contractor hours reveals the company's own true underlying rate",
+   "A rate that pools real groups must lie between their rates, so a combined figure outside that range has broken the counting",
+   "It shows the contractors were safer than the company, since their hours lowered the rate when they were added in"
+  ],
+  "answer": 2,
+  "explanation": "The pooled rate is an hours-weighted average of the group rates, so it can never fall outside them. When a combined figure lands outside the range of its parts, something in the counting has gone wrong, and here the contractor events are missing from the numerator. Nothing about the company's own performance changed. The contractors' rate is the highest of the three, which is the opposite of safer."
+ },
+ {
+  "prompt": "Two of AMUKPE's 13 site recordables are reclassified to first aid. The recordable rate falls from 1.161259 to 0.982603. What happens to the severity rate on the same hours, and what does that show?",
+  "options": [
+   "It falls in proportion to the recordable rate, because days lost are counted only on recordable cases",
+   "It stays at 5.181000, because the 58 days lost do not move, so the fall is a change in counting",
+   "It rises, because the same 58 days lost now sit on fewer recordables over the same hours",
+   "It cannot be computed after a reclassification, because its base must be restated for the new count"
+  ],
+  "answer": 1,
+  "explanation": "The severity rate is days lost times the base over the hours, and the days belong to the injured people whatever the case is called: 5.181000 before and after. A recordable rate that falls while the severity rate holds still says the injuries are the same and the labels are different. The severity rate does not divide by the number of cases, so moving cases between boxes leaves it alone."
+ },
+ {
+  "prompt": "Which pair of figures, reported side by side, protects a monitoring note against a fall in the rate that is only a change of labels?",
+  "options": [
+   "A recordable rate and a severity rate on the same hours and base, since only one of them responds to a relabelling",
+   "A recordable rate on 200,000 hours and the same rate on 1,000,000 hours, since the second one exposes a relabelling in the first",
+   "A recordable rate and its 95 percent interval, since the interval widens whenever cases are moved across to first aid",
+   "A company rate and a site rate, since a relabelling only ever takes place in the contractor part of a site's register"
+  ],
+  "answer": 0,
+  "explanation": "Two figures that respond differently to a change of labels expose it: when the recordable rate moves and the severity rate does not, the note has to explain why. The same rate on two bases differs by the factor of five and nothing else. An interval reflects the count it is given, relabelled or not. Reclassification can happen anywhere in a register."
+ },
+ {
+  "prompt": "Which pattern of reclassification should make a reader suspicious of a falling recordable rate?",
+  "options": [
+   "Any reclassification at all, since a case first logged as a medical treatment case can never be corrected later",
+   "Reviews that move cases in both directions, since two-way movement shows the register is unstable",
+   "Reviews that only ever move cases down, cluster near the year end, or happen at sites with a target to hit",
+   "Reviews that happen within the month of the injury, since a quick review is always a biased one"
+  ],
+  "answer": 2,
+  "explanation": "Reclassification can be right: a case first logged as medical treatment may on review have needed only first aid, and correcting the record is part of keeping a good register. The trap is the pattern. The test is whether the same review, applied to cases on the other side of the line, would ever move one up; movement in both directions is what an honest review looks like. The timing of a prompt review is no evidence of bias."
+ },
+ {
+  "prompt": "Why can the engine not catch AMUKPE's reclassification?",
+  "options": [
+   "It can, since `incidenceRate` refuses any count that falls by more than 10 percent between two periods",
+   "It can, since the engine compares a recordable count against the days lost and refuses a mismatch",
+   "It can, since the basis block reports a changed count so a reader sees that the count was altered",
+   "It checks that a count is a whole number, zero or more, and that the hours are positive; it cannot check a classification"
+  ],
+  "answer": 3,
+  "explanation": "The count arrives classified. The refusals catch a fractional count, a negative count and zero hours, and nothing in the engine refuses a count that was classified wrongly. It keeps no history between calls, never sets days lost against a count, and its basis block states the base and the formula for whatever count it was handed. The analyst is the only check, so the note reports every reclassification in the period."
+ },
+ {
+  "prompt": "EGBEMA's worst month, month 8, reads 7.599326. The next month reads 2.067504. A programme launched in response to month 8 claims the fall. What does the chart say?",
+  "options": [
+   "The programme worked, since the rate fell to about a quarter of month 8's figure in a single month once it was launched",
+   "The fall is what the chart predicts with no programme at all: month 9 sits inside its limits like the ordinary months",
+   "The programme worked, since month 9 is below the centre line of 2.893273 and month 8 was far above it",
+   "The programme failed, since month 9 recorded 4 events, and a working programme would have brought zero"
+  ],
+  "answer": 1,
+  "explanation": "A month picked because it was the worst is likely to be followed by a better one even if nothing changed. Month 9's 4 events sit below the 5.597615 expected at the centre, as ordinary months do, and the chart gives no reason to think the process changed. Crediting the programme with that fall is rate chasing. Four events is an ordinary month on this chart, and no programme is judged against a zero."
+ },
+ {
+  "prompt": "Month 8 signals at 3 sigma, so on the chart's own logic chance alone is an unlikely explanation for it. Does that rescue the programme's claim to month 9's fall?",
+  "options": [
+   "Yes: once chance is ruled out for month 8, the fall from month 8 to month 9 can only be the effect of the programme itself",
+   "Yes: a signalling month cannot be followed by a return to the centre unless something acted on the process",
+   "No: a signal at 3 sigma shows the chart is wrong about month 8, so both months should be dropped from it",
+   "No: whether month 8 was bad luck or a one-off with a cause, month 9 returns to the ordinary process whatever was launched"
+  ],
+  "answer": 3,
+  "explanation": "Either way the programme gets no credit. If month 8 was partly bad luck, regression toward the centre explains the fall; if a one-off cause is found, the one-off does not repeat and the next month returns to the ordinary process. Ruling out chance for month 8 points to a cause in month 8, and a signal is investigated; it does not invalidate the chart."
+ },
+ {
+  "prompt": "How should a monitoring note guard against rate chasing on a programme launched after a bad month?",
+  "options": [
+   "Fix the start and the months on each side before looking, compare whole periods, and say that the programme started at a peak",
+   "Compare the worst month with the month after it, since that pair of months shows the programme's effect most directly and quickly",
+   "Compare the programme's first month with the site's best month on record, since the best month sets the target it then has to beat",
+   "Leave the launch month out of the note, since a reader who knows it came at a peak will doubt the programme"
+  ],
+  "answer": 0,
+  "explanation": "A single month set against its neighbour proves nothing, and two months chosen after the fact are chosen for their result. The comparison that counts uses periods fixed before the data were read, and on EGBEMA it finds nothing: 1.028627 with every month in. Every reader deserves to know the baseline was the worst month, so the note says so."
+ },
+ {
+  "prompt": "KWALE's three sites give a mean of site rates of 1.754760 against a pooled 0.968312. Which site does most to open that gap?",
+  "options": [
+   "The flow station, whose 1904760 hours make it by far the heaviest of the sites in the mean of the three site rates",
+   "The compression station, whose rate of 1.171189 sits closest to the mean of the three site rates",
+   "The jetty, with 61480 hours, a share of 0.024805 of the pooled hours, yet a third of the weight in the mean",
+   "None of them, since the mean of rates and the pooled rate weight each of the three sites the same"
+  ],
+  "answer": 2,
+  "explanation": "The mean of rates gives each site one third, derived 0.333333, whatever its exposure. The jetty's 3.253090 on 61480 hours carries almost no weight in the pooled rate and a full third in the mean, which is what lifts the mean. The mean is unweighted, so the flow station's hours count for nothing there. Sitting near the mean does not open a gap. Pooling weights by hours."
+ },
+ {
+  "prompt": "An industry body averages its members' reported rates to publish one figure. How does the Expert tier describe that?",
+  "options": [
+   "The correct method for an industry body, since each member is one company and deserves one equal vote in the published figure",
+   "An acceptable shortcut, since averaging rates and pooling them give the same figure once enough member companies report their rates",
+   "The method IOGP uses for its own five-year FAR, which is why its published figure is quoted as 0.833228",
+   "The KWALE mistake one level up: IOGP itself pools, and its five yearly FARs average to 0.833228 against a pooled 0.826095"
+  ],
+  "answer": 3,
+  "explanation": "A group or an industry body that averages rates makes KWALE's mistake at a larger scale: small units with high rates get a full vote. IOGP computes its five-year rolling average as the sum of fatalities over the sum of hours, 0.826095; the mean of 0.833228 is what it would print if it averaged its yearly rates, and it does not. The two methods differ by construction whatever the number of members."
+ },
+ {
+  "prompt": "AKASO's first rolling window reads 1.208038 by sum then divide and 2.026485 as the mean of its monthly rates. Why is the mean so much higher?",
+  "options": [
+   "The shutdown in month 5 enters the mean as a rate of zero, which lowers the pooled figure far more than the mean",
+   "The short month 11, 1 recordable in 18240 hours, has its own rate of 10.964912 and enters the mean with a full month's weight",
+   "The window includes 13 recordables, and the mean divides them by the 11 months with hours in place of the hours",
+   "The rolling rate leaves out the short month as incomplete, while the mean of the monthly rates keeps it in"
+  ],
+  "answer": 1,
+  "explanation": "Every window contains the short month, and its rate of 10.964912 counts as one month among eleven in the mean, while in the pooled rate its 18240 hours carry almost no weight. A month with no hours has no rate and is left out of the mean; it adds nothing to the pooled figure. The mean averages rates, and the rolling rate includes every month in its window."
+ },
+ {
+  "prompt": "Why does the mean of rates keep spreading through group reporting, according to the Expert tier?",
+  "options": [
+   "It is easy: each unit reports one number and head office averages them without ever collecting any hours",
+   "It is the method the OSHA base prescribes for combining sites, so a group quoting per 200,000 must use it",
+   "It is more conservative, since the mean of rates always sits above the pooled rate and so errs toward safety",
+   "It is what the engine returns as its rate, so a group copying the engine's output repeats the mean of rates"
+  ],
+  "answer": 0,
+  "explanation": "Pooling needs counts and hours from every unit, defined the same way, which is more work, and that is exactly why the error spreads. The base says nothing about how to combine sites. The mean sat above the pooled figure on every stream in the course, but it can sit anywhere, and a direction that happens to hold is not a method. The engine returns the pooled rate as its rate and shows the mean beside it, labelled."
+ }
+]

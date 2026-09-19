@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Which line writes the BLS worked example in the house form this course uses?",
+  "options": [
+   "3.500000 per 200,000 hours, with an exact interval of 1.407182 to 7.211338 and no count needed",
+   "3.500000 (7 cases in 400000 hours; exact interval 1.407182 to 7.211338)",
+   "3.500000 per 200,000 hours (7 cases in 400000 hours; 95 percent exact interval 1.407182 to 7.211338)",
+   "3.500000 per 200,000 hours (7 cases in 400000 hours; 95 percent exact interval 2.814363051520 to 14.422675361702)"
+  ],
+  "answer": 2,
+  "explanation": "The house form carries the rate, the base, the count and hours it came from, and the interval with its confidence. One option drops the count and hours, one drops the base and the confidence, and one quotes the count limits where the rate limits belong."
+ },
+ {
+  "prompt": "The BLS rate limits are 1.407182 and 7.211338. Where do they come from?",
+  "options": [
+   "The count limits for 7 at 95 percent, 2.814363051520 and 14.422675361702, times 200,000 over 400000.",
+   "The rate of 3.500000 plus and minus about two standard errors.",
+   "The rate divided by and multiplied by a fixed factor of about two.",
+   "The count limits for 7 at 90 percent, halved."
+  ],
+  "answer": 0,
+  "explanation": "Each Garwood count limit is multiplied by the base over the hours, one half here. A symmetric normal interval would sit evenly around 3.500000, which these limits do not, and the 90 percent count limits would give a narrower pair."
+ },
+ {
+  "prompt": "What does the BLS interval of 1.407182 to 7.211338 tell a reader about the firm's 3.500000?",
+  "options": [
+   "The firm's rate will fall between 1.407182 and 7.211338 in 95 of the next hundred years it reports on the same hours.",
+   "The printed figure is wrong, since the exact interval is centred on a value other than 3.500000.",
+   "The rate is reliable, since BLS publishes the example.",
+   "The true rate could be under half the printed figure or over twice it, and 7 cases cannot tell which."
+  ],
+  "answer": 3,
+  "explanation": "The upper limit is more than twice the rate and the lower limit less than half, because 7 is a small count. The interval is about the true rate of this firm on these hours; it makes no forecast of future observed rates, and a lopsided interval is what an exact interval on a small count looks like."
+ },
+ {
+  "prompt": "A firm with ten times the BLS cases in ten times the hours would print what, compared with the BLS example?",
+  "options": [
+   "A rate ten times higher.",
+   "The same 3.500000 with a far narrower interval.",
+   "The same 3.500000 and the same interval.",
+   "The same 3.500000 with an interval ten times as wide, since the hours are ten times greater."
+  ],
+  "answer": 1,
+  "explanation": "Ten times the cases over ten times the hours is the same rate, and the width relative to the rate is a property of the count: more events, narrower interval, as on the IMO ladder. Nothing widens with more hours."
+ },
+ {
+  "prompt": "IOGP's 2024 observed FAR of 0.769438 rests on 32 fatalities in 4158877000 hours. Why does a figure built on billions of hours still carry an interval of 0.526295 to 1.086218?",
+  "options": [
+   "The hours are rounded to the nearest million by IOGP, and that rounding is what the interval measures.",
+   "The fixed base of 100,000,000 hours introduces uncertainty that a named base would not.",
+   "The events are what the Poisson count model draws, and a fatality is rare even across an industry, so the count stays small.",
+   "The interval is a percentile range of outcomes across IOGP's member companies."
+  ],
+  "answer": 2,
+  "explanation": "The interval comes from the count of fatalities exactly as the interval on a recordable rate comes from the count of recordables. 32 is a modest count, and the upper limit of 1.086218 is more than a third above the observed rate. The base only rescales, and the interval is on an estimated rate, with no percentile meaning."
+ },
+ {
+  "prompt": "The IOGP 2024 upper limit is about twice its lower one; the BLS upper limit is about five times its lower. What sets that difference?",
+  "options": [
+   "The count: 32 against 7.",
+   "The hours: billions against hundreds of thousands, which is where the certainty of a rate comes from.",
+   "The base: 100,000,000 hours against 200,000 hours, as a larger base narrows the interval.",
+   "The confidence, which IOGP sets higher than BLS."
+  ],
+  "answer": 0,
+  "explanation": "What sets the width relative to the rate is the number of events. The hours and base only rescale the count limits, and both intervals are at 95 percent."
+ },
+ {
+  "prompt": "FAR is the one rate with a fixed base. What does the fixed base settle about an observed FAR?",
+  "options": [
+   "Both the scale and the uncertainty, since a standard base leaves nothing to estimate.",
+   "Nothing at all, since the base is still chosen by the caller of `fatalAccidentRate` on each call.",
+   "Its interval, which the engine returns inside `fatalAccidentRate` as part of its basis block.",
+   "What the number is per, and nothing about how sure it is."
+  ],
+  "answer": 3,
+  "explanation": "`fatalAccidentRate` takes no base argument, and its basis.standard reads IOGP safety performance indicators, FAR. The interval on an observed FAR comes from the fatality count through the Garwood construction, like any other rate, and the fixed base only rescales it."
+ },
+ {
+  "prompt": "2024 had 32 fatalities in 21 fatal incidents. The fatal incident rate on the same hours is 0.504944 per 100,000,000. How would its interval compare, relative to its rate, with the FAR's?",
+  "options": [
+   "Narrower, since fatal incidents are counted with less doubt than fatalities.",
+   "Wider, since it rests on the smaller count.",
+   "The same, since both rates share the same hours and the same fixed base.",
+   "It has none, since incidents fall outside the Poisson count model."
+  ],
+  "answer": 1,
+  "explanation": "Each count carries its own interval, and the width relative to the rate is set by the count: 21 against 32. Sharing hours and base only rescales. Fatal incidents are events like any other, so the Poisson count model applies to them too."
+ },
+ {
+  "prompt": "Why does this course use no P label on a confidence interval?",
+  "options": [
+   "P labels are reserved for one-sided limits such as the rule of three, which this course treats as derived.",
+   "The engine returns intervals without names, so any label would have to be invented by the reader.",
+   "A P label belongs to a range of outcomes, and a confidence interval here is on an estimated rate at a stated confidence.",
+   "A P label would imply 90 percent confidence, and the course works at 95 percent."
+  ],
+  "answer": 2,
+  "explanation": "Borrowing a percentile label would dress the Garwood interval up as a percentile of outcomes, which it is not. The house form writes the confidence as a percentage and calls the result an exact interval."
+ },
+ {
+  "prompt": "A report writes the ABO crew as 0 per 200,000 hours (0 recordables in 41300 hours). What does the house form still need?",
+  "options": [
+   "Its limits at a stated confidence: 0.000000 to 17.863823 at 95 percent.",
+   "The rule of three figure, 14.527845, which is how a zero is conventionally bounded in a report.",
+   "Nothing, since a zero rate has no uncertainty to report.",
+   "The central 90 percent limit, 14.507178, labelled as the 95 percent limit."
+  ],
+  "answer": 0,
+  "explanation": "The engine's central 95 percent interval on 0 in 41300 hours is 0.000000 to 17.863823. The rule of three figure answers a one-sided question and 14.507178 is the central 90 percent limit, so labelling either as the 95 percent exact interval misstates it. A zero has an interval like any other count, and the house form puts it beside the rate."
+ },
+ {
+  "prompt": "How does the house form write a comparison of two rates?",
+  "options": [
+   "The p-value alone, since it summarises the whole comparison in one figure.",
+   "Both rates on their bases, leaving the ratio for the reader to work out.",
+   "The ratio and the minlike p-value, which readers in R will recognise.",
+   "The rate ratio and what it compares, both counts and hours, the interval with its confidence, then the central p-value."
+  ],
+  "answer": 3,
+  "explanation": "For ERHA: east over west 2.047326 (6 events in 240500 hours against 11 in 902700 hours; 95 percent interval 0.621694 to 6.039396; central p-value 0.256209). Name the convention whenever a p-value appears, because a reader checking it in R will find a different number on some inputs."
+ },
+ {
+  "prompt": "Why does the house form state the confidence even when it is 95 percent?",
+  "options": [
+   "The engine prints it automatically in every basis block, so leaving it out loses nothing.",
+   "The same count gives different limits at different confidences.",
+   "Only 95 percent intervals are exact.",
+   "Readers assume 90 percent otherwise."
+  ],
+  "answer": 1,
+  "explanation": "For a count of 7 the count upper limit is 13.148113802432 at 0.900000 and 14.422675361702 at 0.950000: different claims about the same data. The engine has no default confidence, so every interval was asked for at a level someone chose, and the report should say which."
+ },
+ {
+  "prompt": "The BLS upper limit of 7.211338 agrees with the golden to 7.39e-16. What does that agreement mean?",
+  "options": [
+   "A disagreement in the seventh decimal, which the six decimal print hides from the reader.",
+   "The golden and the engine share one code path, so agreement is automatic whatever the value.",
+   "Agreement to the limit of double precision.",
+   "The limit is exact to 7.39e-16 of the true rate."
+  ],
+  "answer": 2,
+  "explanation": "A relative difference of 7.39e-16 is at the resolution of a double, so the engine reproduces the independently computed golden. The golden was written by a separate oracle, and agreement with it says nothing about how close the limit is to the firm's unknown true rate."
+ },
+ {
+  "prompt": "The capstone for this tier asks for a zero events crew's central 95 percent upper limit. Which method answers it?",
+  "options": [
+   "The rule of three, 3 events over the crew's hours on the 200,000 base, which the engine does not compute.",
+   "`rateConfidenceInterval` with confidence 0.900000, whose upper limit is the one-sided 95 percent figure.",
+   "`compareRates` against a crew with no events, whose p-value gives the limit.",
+   "`rateConfidenceInterval` with a count of 0, the crew's hours, the 200,000 base and confidence 0.95."
+  ],
+  "answer": 3,
+  "explanation": "The field asks for the engine's own central 95 percent upper limit. The rule of three would sit roughly a fifth lower on any hours, and the central 90 percent limit answers the one-sided question. Two groups with no events are refused by `compareRates`."
+ },
+ {
+  "prompt": "The capstone asks for a rate-ratio interval between two named groups. Why does the order in which they are passed matter?",
+  "options": [
+   "The ratio is the first group's rate over the second's, so swapping inverts the ratio and exchanges its limits.",
+   "It does not matter, since the conditional test is symmetric in its two groups and returns one ratio to the caller.",
+   "The engine sorts the two groups by their hours, so only the p-value depends on the order in which the caller passes them.",
+   "The second group's base is used for both."
+  ],
+  "answer": 0,
+  "explanation": "Set the two groups in the order the brief gives: the engine's rateRatio is count1 over hours1 against count2 over hours2, and passing them the other way round returns one over each figure with the ends exchanged. The p-value is the same either way, and `compareRates` takes no base."
+ }
+]

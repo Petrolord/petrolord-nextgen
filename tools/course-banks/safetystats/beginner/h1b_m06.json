@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Why does this tier's report start by reproducing the BLS worked example through the engine?",
+  "options": [
+   "It sets the benchmark that every site in the report is then measured against as the target to beat each year.",
+   "It shows the tool gets a public, fully stated answer right: 3.500000 against a published 3.5.",
+   "The BLS figure supplies the base the engine would otherwise have to guess for the rest of the pack.",
+   "It is the only case where the engine's formula can be checked."
+  ],
+  "answer": 1,
+  "explanation": "If the engine could not reproduce 3.5 from 7 cases in 400000 hours, nothing else it printed would be worth reading, so the report checks the tool against a published answer first. The engine carries no benchmark rates and never guesses a base, and the IOGP goldens are further published checks."
+ },
+ {
+  "prompt": "Which report line about ABC Company states its recordable and DART results completely enough for a reader to check with a calculator?",
+  "options": [
+   "A TRIR of 3.500000 and a DART rate of 1.500000, both in line with the BLS worked example.",
+   "A TRIR of 3.5 and a DART rate of 1.5 per 400000 hours worked in the year.",
+   "7 recordable cases in 400000 hours, a TRIR of 3.500000 per 200,000 hours, and 3 DART cases, a DART rate of 1.500000 on the same base.",
+   "7 recordables and 3 DART cases in the year, rated at 3.5 and 1.5."
+  ],
+  "answer": 2,
+  "explanation": "A report line says what the number is, what it was built from and on what base, so every figure can be checked. Leaving out the base leaves 3.500000 open to be read on the IOGP base; quoting per 400000 hours confuses the hours worked with the base; and the counts without their hours cannot be divided by anyone."
+ },
+ {
+  "prompt": "The engine prints 3.500000 where the BLS prints 3.5. How should a report treat the two?",
+  "options": [
+   "As the same number at different precisions: quote the engine figure, and the published one beside it labelled as published.",
+   "As a disagreement in the sixth decimal that the report must explain before any other figure can be trusted.",
+   "As two different rates, since the engine's version includes a correction the BLS does not apply to its figure.",
+   "Quote 3.5 only, since the published figure is the authority and the engine's extra digits add nothing a reader could use at all."
+  ],
+  "answer": 0,
+  "explanation": "3.500000 and 3.5 are the same value; the golden case reports a relative difference of 0. The course quotes engine figures to six decimals so a learner can see agreement to the last digit and a copied figure is never a rounded version of what the engine printed. Nothing in the engine corrects the BLS."
+ },
+ {
+  "prompt": "IOGP published a FAR of 0.82 for 2023, from 27 fatalities in 3291382000 hours. What does the engine return?",
+  "options": [
+   "0.769438, the rate the engine gives for the fatalities in the most recent year IOGP has published so far.",
+   "0.820324 on the base the caller names, since the FAR function takes its base from the call like every other rate.",
+   "0.826095, the five year figure that sits behind the published yearly value for 2023 in the IOGP report.",
+   "0.820324, which rounds to 0.82."
+  ],
+  "answer": 3,
+  "explanation": "27 x 100,000,000 / 3291382000 is 0.820324, and rounded to two decimals it matches the published 0.82. 0.769438 is the 2024 FAR and 0.826095 the five year figure. The FAR function takes no base at all; its base is fixed at 100,000,000."
+ },
+ {
+  "prompt": "Your report pack computes the 2024 FAR twice, once with `fatalAccidentRate` and once with `incidenceRate` on a base of 100,000,000. Both read 0.769438. What does that check buy?",
+  "options": [
+   "Confidence the FAR is right in the sense of the population it describes, since two independent methods agree on the same figure.",
+   "Confidence the inputs were typed the same: fed the same numbers the two must agree, so a mismatch means a mistyped input.",
+   "Nothing, since the two functions share one line of code and must return the same figure whatever is typed.",
+   "Proof that 32 is the right count."
+  ],
+  "answer": 1,
+  "explanation": "The fixed base function and the general function, fed the same numbers, must agree, so the check catches a mistyped count or hours. It says nothing about whether 32 fatalities was the right count or about the workforces inside the figure; the engine checks arithmetic and never classification."
+ },
+ {
+  "prompt": "The engine reproduces IOGP's published 0.77 for 2024. What does that reproduction prove, and what does it not?",
+  "options": [
+   "That the engine's formula is the one IOGP used; the figure does not become a target, and nothing is said about any company in it.",
+   "That 0.769438 is the rate a well run company should aim to beat, since it is the published industry figure for the year 2024.",
+   "That every IOGP member reported its fatalities correctly, because the engine rejects any count that fails one of its classification checks.",
+   "That the IOGP figure is exact to six decimals."
+  ],
+  "answer": 0,
+  "explanation": "The engine carries no benchmark rates of its own; the IOGP figures are published inputs in the golden. Landing on the printed rate from the count and hours shows the formula matches. It cannot check anyone's classification, and IOGP prints two decimals, so the engine's six are its own arithmetic on those inputs."
+ },
+ {
+  "prompt": "Which three keys appear in the basis block of every rate function this tier uses, and what question do they answer together?",
+  "options": [
+   "`base`, `standard` and `note`, which name the reporting body behind every rate.",
+   "`count`, `exposureHours` and `formula`, so the division can be repeated.",
+   "`base`, `baseLabel` and `formula`, which together answer the first thing a reader should ask of a rate: per what, and built how?",
+   "`base`, `baseLabel` and `windowPeriods`, which date the rate."
+  ],
+  "answer": 2,
+  "explanation": "Every basis block in this tier carries base, baseLabel and formula. `standard` appears only on the FAR and the PSE rate, `note` only on the severity rate and the pooled and rolling rates, and `windowPeriods` only on the rolling rate. The pooled count and hours are returned beside the rate, outside the basis block."
+ },
+ {
+  "prompt": "Two of the six functions this tier uses carry a `standard` key in their basis block. Which two, and why those?",
+  "options": [
+   "The severity rate and the pooled rate, the two whose results a reader is most likely to misread without help.",
+   "The incidence rate and the FAR, since both can be computed on the 100,000,000 hour base and need the name.",
+   "The rolling rate and the pooled rate, since IOGP's five year rule is a published standard for both of them.",
+   "The FAR and the PSE rate, the two with an outside definition."
+  ],
+  "answer": 3,
+  "explanation": "The FAR's standard reads IOGP safety performance indicators, FAR, and the PSE rate's reads API RP 754, API Guide to Reporting Process Safety Events section 3.3. `incidenceRate` has no standard line, because it cannot know what its count means. The severity rate and the pooled and rolling rates carry a `note` instead."
+ },
+ {
+  "prompt": "The `note` key appears on the severity rate, the pooled rate and the rolling rate results. What do those three notes have in common?",
+  "options": [
+   "Each warns of the misreading a reader is most likely to make: no time charges, and the mean of rates is not the pooled figure.",
+   "Each names the published standard the figure was taken from, so that a reader can trace the definition back to its original source.",
+   "Each records the base the caller chose, since those are the three functions where a base is optional.",
+   "Each flags that the result was rounded."
+  ],
+  "answer": 0,
+  "explanation": "The severity rate's note says no ANSI Z16.1 time charges are added; the pooled rate's says the mean of the period rates is not the pooled rate; the rolling rate's says the mean is for comparison only and leaves out periods with no hours. A standard lives in `standard`, the base in `base`, and none of the three bases is optional."
+ },
+ {
+  "prompt": "UGHELLI's severity rate is recomputed on the IOGP base: 96 days in 2318640 hours now read 41.403581. Which keys of the basis block changed?",
+  "options": [
+   "All four keys, since a new base means a new convention for the severity rate, with its own formula and note.",
+   "`base` and `baseLabel`; the formula and the note on time charges stay the same.",
+   "Only the rate itself; the basis block describes the function and never the call.",
+   "`formula` and `note`, since the IOGP base adds ANSI Z16.1 time charges."
+  ],
+  "answer": 1,
+  "explanation": "The block now reads base 1000000 and the label per 1,000,000 hours (IOGP); the formula is still daysLost x base / exposureHours and the note still says no time charges are added. The basis block describes the call, including the base chosen, and the engine adds time charges on no base at all."
+ },
+ {
+  "prompt": "The capstone's rolling twelve month field names the month its window ends. What does working it take, by this tier's rule?",
+  "options": [
+   "Average the twelve monthly rates in the window, leaving out any month with no hours.",
+   "Take the rate of the month named, as the latest month.",
+   "Add that window's counts and hours and divide once: a month with no hours adds nothing, and a short month counts for its own hours.",
+   "Pool the whole series, since every window agrees."
+  ],
+  "answer": 2,
+  "explanation": "The rolling field grades one sum then divide per window, the rule AKASO's window 1 shows at 1.208038. Averaging the monthly rates gives the mean of rates, which for AKASO reads 2.026485. One month's rate is a monthly rate, and windows over different months read different rates, 1.208038 to 1.306019 on AKASO."
+ },
+ {
+  "prompt": "A draft of an Associate report adds how sure anyone can be of each rate. How does the capstone brief treat that addition?",
+  "options": [
+   "As answering a question nobody asked: this tier states the rate correctly and completely, and how sure it is belongs to the next tier.",
+   "As required, since a rate on its own is incomplete at every tier and the capstone grades the rate together with its spread in every field.",
+   "As optional extra credit, which the capstone grades whenever it is supplied beside the rate and simply ignores whenever it is left out.",
+   "As a reason to drop the base, since how sure a rate is does not depend on the base."
+  ],
+  "answer": 0,
+  "explanation": "The capstone asks this tier's question, what is the rate, and every field is a count times a named base over hours. The brief says a capstone answer that brings in an interval or a limit has answered a question nobody asked. The base is never dropped; it is the first thing a rate needs."
+ },
+ {
+  "prompt": "The capstone brief lists a worked twin for each field. For the lost time rate field, which twin and base apply?",
+  "options": [
+   "UGHELLI's lost time rate, 0.172515 on the OSHA base, since a lost time rate is always quoted per 200,000 hours.",
+   "UGHELLI's DART rate, 1.725149 on the IOGP base, since lost time and DART are pooled in the capstone's own count.",
+   "KWALE's pooled rate, 0.968312, since every capstone field is a pooled rate of the workforce in its separate parts.",
+   "UGHELLI's lost time rate, 0.862575 on the IOGP base."
+  ],
+  "answer": 3,
+  "explanation": "The brief pairs the lost time field with UGHELLI lost time, 0.862575, on the 1,000,000 base, and warns that the same count on the OSHA base is five times smaller. The DART count is a different class, and KWALE's pooled rate is the twin of the field for a workforce in parts."
+ },
+ {
+  "prompt": "The capstone brief says most wrong answers at this tier come from two mistakes that are visible on paper before any division. Which two?",
+  "options": [
+   "Rounding too early and quoting two decimals.",
+   "The wrong base, and pooling the wrong way, which is why the brief says to write down the count, the hours and the base for each field first.",
+   "Forgetting the interval and omitting a limit.",
+   "Using headcount and forgetting the tier."
+  ],
+  "answer": 1,
+  "explanation": "The brief tells the learner to write down, for each field, the count, the hours and the base before computing anything, because a wrong base or a mean of rates is visible at that stage. Intervals are out of scope at this tier, and the engine has no headcount input to misuse."
+ },
+ {
+  "prompt": "When reading any result from the engine, what order does this tier teach, and why?",
+  "options": [
+   "Read the number first, then check it against the published value, since the published value settles the base.",
+   "Read the note first and skip the rest of the block, since only the note can change the meaning of the rate.",
+   "Read the basis block before the number: check the base, then the formula, then any note.",
+   "Read the number and its label only."
+  ],
+  "answer": 2,
+  "explanation": "Checking the base against the base you meant, the formula against the quantity you meant, and the note for the likely misreading takes a few seconds and prevents the factor of five between OSHA TRIR and IOGP TRIR. Many results have no published value to compare against, and a note is only one of several keys."
+ }
+]
