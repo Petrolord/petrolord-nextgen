@@ -239,6 +239,10 @@ export const PANELS = {
   'supply-tank-explorer': React.lazy(() => import('@/components/course/panels/supply/TankExplorer')),
   'supply-depot-explorer': React.lazy(() => import('@/components/course/panels/supply/DepotExplorer')),
   'supply-price-explorer': React.lazy(() => import('@/components/course/panels/supply/PriceExplorer')),
+  // gasvalue: Flare Gas to Value & LPG/CNG (academy module energy_transition)
+  'gasvalue-flare-explorer': React.lazy(() => import('@/components/course/panels/gasvalue/FlareExplorer')),
+  'gasvalue-route-explorer': React.lazy(() => import('@/components/course/panels/gasvalue/RouteExplorer')),
+  'gasvalue-rollout-explorer': React.lazy(() => import('@/components/course/panels/gasvalue/RolloutExplorer')),
   // MD5 carbon: Carbon & Energy Efficiency (academy module energy_transition)
   'carbon-inventory-explorer': React.lazy(() => import('@/components/course/panels/carbon/InventoryExplorer')),
   'carbon-efficiency-explorer': React.lazy(() => import('@/components/course/panels/carbon/EfficiencyExplorer')),
