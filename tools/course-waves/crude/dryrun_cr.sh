@@ -47,6 +47,8 @@
 #              gate_collisions.py's own plant, on the Abiteye mass share).
 #   precision  one tolerance moved to twice what precision.json gives it.
 #   held       a graded label renamed to a viscosity: nothing HELD is graded.
+#   heldvalue  idama_blend_cii moved onto the IDAMA blend's Refutas viscosity,
+#              7.936850956450447 cSt (C12): a held figure under another name.
 #   sibling    a course other than refinery planted at path_order 49.
 # Every moved value was checked clear of the digest, the prompts and the other
 # graded values first, so no earlier sweep can fire in the control's place.
@@ -188,6 +190,8 @@ case "$CONTROL:$CTL" in
    set fields = (select jsonb_agg(case when f->>'key' = 'idama_blend_api' then jsonb_set(f, '{label}', to_jsonb('Viscosity of the cargo'::text)) else f end order by o)
                    from jsonb_array_elements(c.fields) with ordinality x(f, o))
  where c.app_slug = '$SLUG' and c.tier = 'beginner';" ;;
+  --control:heldvalue)
+    move idama_blend_cii beginner 7.936850956450447 ;;
   --control:sibling)
     PRE_GOLIVE="insert into public.academy_apps (slug, name, module, path_order, status)
  values ('cr_control_imposter', 'Imposter', 'commercial_trading', 49, 'coming_soon');" ;;
@@ -267,6 +271,7 @@ if [ -n "$CONTROL" ]; then
     digest) WANT="a number the digest prints" ;;
     precision) WANT="at their precision.json tolerance" ;;
     held) WANT="name a HELD quantity" ;;
+    heldvalue) WANT="are a HELD figure" ;;
     sibling) WANT="the slot of the wave sibling refinery, is held by another course" ;;
   esac
   # The control must fire THROUGH THE CHECK IT IS FOR. A refusal from some
