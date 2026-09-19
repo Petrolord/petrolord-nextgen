@@ -61,6 +61,10 @@ for f in fields.json precision.json digest.txt h1_capstone.mjs hdr_beginner.txt 
 done
 git -C "$REPO" show "$REF:packages/engines/engines/hse/safetyStats.js" > "$STAGE/engines/engines/hse/safetyStats.js"
 git -C "$REPO" show "$REF:src/components/course/panels/$SLUG/gradedTolerance.js" > "$STAGE/gradedTolerance.js"
+# The engine and the tolerance module are ES modules. In the repository their
+# package.json says so; in the stage, this one does, or Node reads them as
+# CommonJS and the engine never runs.
+echo '{"type": "module"}' > "$STAGE/package.json"
 
 for tier in beginner intermediate advanced; do
   case $tier in beginner) L=b;; intermediate) L=i;; advanced) L=a;; esac
