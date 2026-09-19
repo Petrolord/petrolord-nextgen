@@ -828,58 +828,58 @@ begin
   -- lands CLOSEST to the graded value. It must lie outside the tolerance, or
   -- the field does not discriminate the trap it is for.
   if abs(2243.5617549999997 - v_g_okomu_t1_gross_m3) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "dip read at the entry below" reads 2243.5617549999997, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_t1_gross_m3]', v_g_okomu_t1_gross_m3;
+    raise exception 'supply go-live refused: the trap (dip read at the entry below) reads 2243.5617549999997, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_t1_gross_m3]', v_g_okomu_t1_gross_m3;
   end if;
   if abs(2211.0220640344996 - v_g_okomu_t1_standard_m3) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "the other tanks vcf" reads 2211.0220640344996, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_t1_standard_m3]', v_g_okomu_t1_standard_m3;
+    raise exception 'supply go-live refused: the trap (the other tanks vcf) reads 2211.0220640344996, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_t1_standard_m3]', v_g_okomu_t1_standard_m3;
   end if;
   if abs(95.53797113390263 - v_g_okomu_t2_standard_m3) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "the bullet geometry instead of the table" reads 95.53797113390263, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_t2_standard_m3]', v_g_okomu_t2_standard_m3;
+    raise exception 'supply go-live refused: the trap (the bullet geometry instead of the table) reads 95.53797113390263, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_t2_standard_m3]', v_g_okomu_t2_standard_m3;
   end if;
   if abs(2325.85 - v_g_okomu_expected_closing_m3) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "known loss left out" reads 2325.85, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_expected_closing_m3]', v_g_okomu_expected_closing_m3;
+    raise exception 'supply go-live refused: the trap (known loss left out) reads 2325.85, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_expected_closing_m3]', v_g_okomu_expected_closing_m3;
   end if;
   if abs(-8.021841342000243 - v_g_okomu_unaccounted_m3) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "known loss added" reads -8.021841342000243, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_unaccounted_m3]', v_g_okomu_unaccounted_m3;
+    raise exception 'supply go-live refused: the trap (known loss added) reads -8.021841342000243, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_unaccounted_m3]', v_g_okomu_unaccounted_m3;
   end if;
   if abs(4.174610685584399 - v_g_okomu_tolerance_m3) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "on the closing stock" reads 4.174610685584399, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_tolerance_m3]', v_g_okomu_tolerance_m3;
+    raise exception 'supply go-live refused: the trap (on the closing stock) reads 4.174610685584399, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: beginner/okomu_tolerance_m3]', v_g_okomu_tolerance_m3;
   end if;
   if abs(0.8666666666666668 - v_g_ogwashi_rack_probability_of_waiting) <= 0.0001 then
-    raise exception 'supply go-live refused: the trap "utilisation read as the probability" reads 0.8666666666666668, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_rack_probability_of_waiting]', v_g_ogwashi_rack_probability_of_waiting;
+    raise exception 'supply go-live refused: the trap (utilisation read as the probability) reads 0.8666666666666668, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_rack_probability_of_waiting]', v_g_ogwashi_rack_probability_of_waiting;
   end if;
   if abs(16.553378247315216 - v_g_ogwashi_rack_mean_wait_min) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "probability times the load time" reads 16.553378247315216, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_rack_mean_wait_min]', v_g_ogwashi_rack_mean_wait_min;
+    raise exception 'supply go-live refused: the trap (probability times the load time) reads 16.553378247315216, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_rack_mean_wait_min]', v_g_ogwashi_rack_mean_wait_min;
   end if;
   if abs(5608 - v_g_ogwashi_pumpable_stock_m3) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "heel netted across the farm" reads 5608, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_pumpable_stock_m3]', v_g_ogwashi_pumpable_stock_m3;
+    raise exception 'supply go-live refused: the trap (heel netted across the farm) reads 5608, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_pumpable_stock_m3]', v_g_ogwashi_pumpable_stock_m3;
   end if;
   if abs(3.1863636363636365 - v_g_ogwashi_days_of_cover) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "heel netted across the farm" reads 3.1863636363636365, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_days_of_cover]', v_g_ogwashi_days_of_cover;
+    raise exception 'supply go-live refused: the trap (heel netted across the farm) reads 3.1863636363636365, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_days_of_cover]', v_g_ogwashi_days_of_cover;
   end if;
   if abs(12.063042857142857 - v_g_ogwashi_cost_per_litre_delivered_ngn) <= 0.0001 then
-    raise exception 'supply go-live refused: the trap "divided by the payload loaded" reads 12.063042857142857, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_cost_per_litre_delivered_ngn]', v_g_ogwashi_cost_per_litre_delivered_ngn;
+    raise exception 'supply go-live refused: the trap (divided by the payload loaded) reads 12.063042857142857, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_cost_per_litre_delivered_ngn]', v_g_ogwashi_cost_per_litre_delivered_ngn;
   end if;
   if abs(66 - v_g_ogwashi_trucks_required) <= 0.5 then
-    raise exception 'supply go-live refused: the trap "trips rounded down" reads 66, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_trucks_required]', v_g_ogwashi_trucks_required;
+    raise exception 'supply go-live refused: the trap (trips rounded down) reads 66, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: intermediate/ogwashi_trucks_required]', v_g_ogwashi_trucks_required;
   end if;
   if abs(22094748.26 - v_g_oron_cif_usd) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "insurance on c and f" reads 22094748.26, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_cif_usd]', v_g_oron_cif_usd;
+    raise exception 'supply go-live refused: the trap (insurance on c and f) reads 22094748.26, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_cif_usd]', v_g_oron_cif_usd;
   end if;
   if abs(24062987.04 - v_g_oron_landed_total_usd) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "insurance on c and f" reads 24062987.04, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_landed_total_usd]', v_g_oron_landed_total_usd;
+    raise exception 'supply go-live refused: the trap (insurance on c and f) reads 24062987.04, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_landed_total_usd]', v_g_oron_landed_total_usd;
   end if;
   if abs(1056.4798 - v_g_oron_landed_per_litre_ngn) <= 0.0001 then
-    raise exception 'supply go-live refused: the trap "insurance on c and f" reads 1056.4798, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_landed_per_litre_ngn]', v_g_oron_landed_per_litre_ngn;
+    raise exception 'supply go-live refused: the trap (insurance on c and f) reads 1056.4798, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_landed_per_litre_ngn]', v_g_oron_landed_per_litre_ngn;
   end if;
   if abs(1243.708 - v_g_oron_pump_price_ngn) <= 0.0001 then
-    raise exception 'supply go-live refused: the trap "ocean loss added upstream" reads 1243.708, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_pump_price_ngn]', v_g_oron_pump_price_ngn;
+    raise exception 'supply go-live refused: the trap (ocean loss added upstream) reads 1243.708, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_pump_price_ngn]', v_g_oron_pump_price_ngn;
   end if;
   if abs(66.5066 - v_g_oron_government_share_ngn) <= 0.0001 then
-    raise exception 'supply go-live refused: the trap "vat on the landed cost only" reads 66.5066, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_government_share_ngn]', v_g_oron_government_share_ngn;
+    raise exception 'supply go-live refused: the trap (vat on the landed cost only) reads 66.5066, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_government_share_ngn]', v_g_oron_government_share_ngn;
   end if;
   if abs(1700 - v_g_oron_breakeven_fx) <= 0.01 then
-    raise exception 'supply go-live refused: the trap "the first rate in the table the cap fails" reads 1700, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_breakeven_fx]', v_g_oron_breakeven_fx;
+    raise exception 'supply go-live refused: the trap (the first rate in the table the cap fails) reads 1700, inside the tolerance of the seeded %, so the field does not discriminate the trap [graded field: advanced/oron_breakeven_fx]', v_g_oron_breakeven_fx;
   end if;
 
   -- ------------------------------------------------------------- the flip
