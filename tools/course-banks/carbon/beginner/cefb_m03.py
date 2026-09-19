@@ -1,0 +1,114 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# carbon Associate m03, The Flare as an Inventory Line. Digest section 5.
+
+q(2, "Where does the Igbogene flare's destruction efficiency of 0.98 come from?",
+ "The operator's flare study states it, and the figure is invented.",
+ ["It is the engine's default for a flare, applied to a blank box.",
+  "It is read from FUEL_REFERENCE beside the typical heating values.",
+  "It is the complete combustion default, 1, less the methane share."],
+ "SECTION 5: \"The operator's flare study states a destruction efficiency of 0.98 (invented).\" SECTION 2 refuses a blank flare efficiency, and a flare is asked for its efficiency every time.")
+
+q(0, "What is the Igbogene flare's carbonKmolPerYear at a destruction efficiency of 0.9?",
+ "50820.000, the same as at every other efficiency",
+ ["38500, the gas sent to the flare in a year",
+  "525380.000, the same carbon as the heaters count",
+  "Lower than at 1, since less of the carbon burns in the flame"],
+ "SECTION 5 prints carbonKmolPerYear 50820.000 at every efficiency: \"The efficiency splits that carbon between CO2 and methane; it does not change it.\" 38500 kmol is the gas sent to the flare and 525380.000 is the heaters' carbon in SECTION 4.")
+
+q(3, "On the course's set, IPCC AR6 GWP100 fossil methane, what does the flare total at a destruction efficiency of 0.95?",
+ "3339.515 tCO2e",
+ ["2124.711 tCO2e, its CO2 alone",
+  "1214.805 tCO2e, its methane line",
+  "4442.493 tCO2e, the flare at 0.9"],
+ "The 0.95 row of SECTION 5 reads co2Tonnes 2124.711 and a methane line of 1214.805, in a column headed CO2 plus methane line that prints 3339.515. The 0.9 row prints 4442.493.")
+
+q(1, "The Igbogene flare is run at a destruction efficiency of 1. How does its methane appear in the table?",
+ "No methane line at all; the flare is 2236.537 tCO2e.",
+ ["A methane line of 242.961 tCO2e beside 2236.537 t of CO2.",
+  "A methane line of 0.000 tCO2e, printed as a line of its own.",
+  "It is refused, since a flare must lie below complete combustion."],
+ "SECTION 5 prints the row at 1 as co2Tonnes 2236.537, ch4Tonnes 0.000, methane line \"no line (no methane)\" and flare tCO2e 2236.537. The interval (0, 1] includes 1, so the call computes; 242.961 is the methane line at 0.99.")
+
+q(2, "Handed to atomBalanceLines, what does the flare refused for a blank destruction efficiency become?",
+ "1 line labelled Flaring that carries the refusal",
+ ["0 lines, as for a source excluded on purpose",
+  "Two lines computed at complete combustion",
+  "Two lines of 0.000 t each, counted unsourced"],
+ "SECTION 5: handed to atomBalanceLines, the refused flare becomes 1 line labelled Flaring that carries the refusal, so an inventory built with it is blocked on the flare. SECTION 9 prints 0 lines only for a source with excluded true, left out of the boundary on purpose.")
+
+q(1, "Read as 100 percent, the same flare is 2236.537 tCO2e with no methane line. How far below the flare at 0.98 is that?",
+ "441.191 tCO2e",
+ ["485.922 tCO2e",
+  "242.961 tCO2e",
+  "443.257 tCO2e"],
+ "SECTION 5 prints: \"Read as 100 percent, the same flare is 2236.537 tCO2e with no methane line: 441.191 tCO2e below the flare at 0.98 (computed here from the engine's figures).\" 485.922 is the methane line at 0.98, 242.961 the methane line at 0.99 and 443.257 a GWP set difference in SECTION 8.")
+
+q(3, "At 0.98, what share of the flare's 2677.729 tCO2e does the digest print for the methane line?",
+ "0.181468",
+ ["0.011315",
+  "0.051037",
+  "0.098534"],
+ "SECTION 5: \"At 0.98 the methane line is 485.922 tCO2e of the flare's 2677.729 tCO2e, a share of 0.181468 (computed here from the engine's figures).\" The other three are SECTION 7 shares of the whole inventory's total: the flare's methane, the flare's CO2 and the vented methane.")
+
+q(1, "Which methane potential does the engine's note on escaped carbon tell a user to apply?",
+ "The fossil methane potential",
+ ["The non-fossil methane potential",
+  "The CO2 value of 1, as for burned carbon",
+  "The set's N2O value"],
+ "SECTION 5 quotes the engine's note on escaped carbon, and its middle sentence reads: \"Use the fossil methane potential for it.\" The course converts every methane line on IPCC AR6 GWP100, fossil methane.")
+
+q(2, "What does the course hold, as H3, about carbon that escapes a flare?",
+ "Every escaped atom is counted as methane; a method on the gas's own methane content is the owner's decision.",
+ ["Escaped carbon is counted at the gas's own methane content, which each flare study measures and types in.",
+  "Escaped carbon is counted as CO2 at a GWP of 1, the same way the carbon that burns is counted in the line.",
+  "Escaped carbon is left out of the inventory until the operator's flare study has been filed and referenced."],
+ "SECTION 5 and SECTION 25: every carbon atom that escapes is counted as methane, the engine's stated and conservative assumption. A method that uses the gas's own methane content is a different method and is the owner's decision; the course grades nothing that depends on changing it.")
+
+q(0, "Down the flare table from 1 to 0.9, what do co2Tonnes and the flare tCO2e do?",
+ "co2Tonnes falls to 2012.884 while the flare total rises to 4442.493 tCO2e",
+ ["Both fall, co2Tonnes to 2012.884 and the flare total to 2124.711 tCO2e",
+  "co2Tonnes holds at 2236.537 while the methane line rises to 2429.610 tCO2e",
+  "Both rise, co2Tonnes to 2457.133 and the flare total to 4442.493 tCO2e"],
+ "SECTION 5 prints co2Tonnes 2236.537 at 1 and 2012.884 at 0.9, and flare tCO2e 2236.537 at 1 and 4442.493 at 0.9. 2429.610 is the methane line at 0.9, 2124.711 the CO2 at 0.95 and 2457.133 the flare total at 0.99.")
+
+q(3, "The flare's 0.99 row returns 8.153 t CH4. Which methane line in tCO2e sits beside it?",
+ "242.961 tCO2e",
+ ["485.922 tCO2e",
+  "2457.133 tCO2e",
+  "8.153 tCO2e"],
+ "SECTION 5 prints the 0.99 row: ch4Tonnes 8.153, methane line 242.961 tCO2e on IPCC AR6 GWP100, fossil methane (CH4 29.8), and flare tCO2e 2457.133. 485.922 is the methane line at 0.98. 8.153 is tonnes of methane, a different quantity from tCO2e.")
+
+q(1, "At 0.98 the flare's inventory line \"Flaring (unburned CH4)\" shows 16.306 and 485.922. What are they?",
+ "16.306 t of methane, and 485.922 tCO2e on the course's set",
+ ["16.306 tCO2e, and 485.922 t of methane on the course's set",
+  "16.306 t of CO2 burned, and 485.922 tCO2e for the whole flare",
+  "16.306 t of methane, and 485.922 t of CO2 from the flare"],
+ "SECTION 7 prints the line with activity 16.306 t CH4, GWP 29.8, tonnes of gas 16.306 and tCO2e 485.922, on IPCC AR6 GWP100, fossil methane. The whole flare at 0.98 is 2677.729 tCO2e and its CO2 is 2191.807 t.")
+
+q(1, "Which destruction efficiency returns 81.531 t of methane from the Igbogene flare?",
+ "0.9, where the methane line is 2429.610 tCO2e",
+ ["0.95, where the methane line is 1214.805 tCO2e",
+  "0.98, where the methane line is 485.922 tCO2e",
+  "0.99, where the methane line is 242.961 tCO2e"],
+ "SECTION 5 prints ch4Tonnes 81.531 and a methane line of 2429.610 tCO2e on the 0.9 row. The 0.95, 0.98 and 0.99 rows return 40.765, 16.306 and 8.153 t of methane.")
+
+q(0, "Besides its destruction efficiency, which two inputs does the Igbogene flare call carry?",
+ "38500 kmol of gas a year, at 1.32 kmol of carbon per kmol",
+ ["482000 kmol of fuel a year, at 1.09 kmol of carbon per kmol",
+  "38500 kmol of gas a year, at 1.09 kmol of carbon per kmol",
+  "50820.000 kmol of gas a year, at 1.32 kmol of carbon per kmol"],
+ "SECTION 5 prints the flare's inputs (invented): gas to the flare 38500 kmol a year, 1.32 kmol of carbon per kmol. 482000 kmol at 1.09 are the heaters' inputs in SECTION 4, and 50820.000 is the flare's carbonKmolPerYear.")
+
+q(2, "At the stated 0.98, how many tonnes of CO2 does the flare's CO2 line carry?",
+ "2191.807",
+ ["2236.537",
+  "2677.729",
+  "2214.172"],
+ "SECTION 5 prints co2Tonnes 2191.807 at 0.98, and SECTION 7 carries it as Flaring (CO2) at 2191.807 tCO2e. 2236.537 is the CO2 at 1, 2214.172 the CO2 at 0.99, and 2677.729 the flare's CO2 plus its methane line at 0.98.")
+
+emit(Q, '/root/wt-et-carbon-nextgen/tools/course-banks/carbon/beginner/cefb_m03.json', expect_n=15)
+finish()
