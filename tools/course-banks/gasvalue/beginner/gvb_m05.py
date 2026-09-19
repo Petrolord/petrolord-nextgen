@@ -74,7 +74,7 @@ q(0, "What does the digest say about a flare that is not lit?",
  "It is not modelled; the engine's flare is lit.",
  ["It is modelled at destruction efficiency 0.5.",
   "It is modelled with its methane set by the combustion efficiency.",
-  "It is refused with REFUSED: A gas volume is required."],
+  "It is modelled as vented gas, all of it methane."],
  "Among the stated limits: an unlit flare is not modelled. Gas sent to a flare that is not lit is vented, all of it methane; the engine's flare is lit.")
 
 q(1, "40 CFR 98.233(n)(1) is a United States rule with tiered default pairs. What does the engine do with them?",
@@ -103,7 +103,7 @@ q(3, "EGBEMA at a destruction efficiency of 0.97 appears with a methane share of
  ["The GWP: 29.8 against 20",
   "The methane in the flare: 1136.490 against 1531.658 t/yr",
   "The on-stream days: 355 against 350"],
- "With both efficiencies given the combustion efficiency is 0.955 and the share 0.1568; with it left out, 0.97 stands in and the share reads 0.1548. The methane is 1136.490 in both. The share at a GWP of 20 is 0.1110.")
+ "With both efficiencies given the combustion efficiency used is 0.955 and the share 0.1568. In the range, combustion is left out and stands in each time, and its 0.97 row prints 184877.310, 1136.490 and 218744.723, the same tonnes as EGBEMA's call with the combustion efficiency left out, where 0.97 is the efficiency used; its share reads 0.1548. The share at a GWP of 20 is 0.1110.")
 
 q(2, "Which term of CO2e does the methane GWP multiply?",
  "The methane alone",

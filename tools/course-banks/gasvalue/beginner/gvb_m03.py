@@ -40,12 +40,12 @@ q(2, "A gas reads gpmC3Plus of exactly 2.5000. Which richness word does the engi
   "null"],
  "RICHNESS_GPM puts the change from moderate to rich at gpmC3Plus 2.5000, and a gas at or above the upper edge reads rich. The word reads null when gpmC3Plus is itself missing, as with propane's density blank.")
 
-q(0, "Which components carry no liquid density in the reference and are summed in neither liquid cut?",
+q(0, "Which is the full set of components that carry no liquid density in the reference and are summed in neither liquid cut?",
  "Methane, nitrogen and carbon dioxide",
  ["Methane alone",
   "Nitrogen and carbon dioxide",
   "Methane, ethane and nitrogen"],
- "The per-component table reads recoverable false, in neither cut and gal/Mscf none on C1, N2 and CO2. C2 is recoverable and is in gpmC2Plus at 2.7737 gal/Mscf on EGBEMA.")
+ "The per-component table reads recoverable false, in neither cut and gal/Mscf none on C1, N2 and CO2, and the reference prints liquid density none on the same three rows. C2 is recoverable and is in gpmC2Plus at 2.7737 gal/Mscf on EGBEMA.")
 
 q(3, "Which gas reads lean, and on which figure is the word read?",
  "OGUTA, at gpmC3Plus 0.4890",

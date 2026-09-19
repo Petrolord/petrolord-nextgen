@@ -55,7 +55,7 @@
   "explanation": "RICHNESS_GPM puts the change from moderate to rich at gpmC3Plus 2.5000, and a gas at or above the upper edge reads rich. The word reads null when gpmC3Plus is itself missing, as with propane's density blank."
  },
  {
-  "prompt": "Which components carry no liquid density in the reference and are summed in neither liquid cut?",
+  "prompt": "Which is the full set of components that carry no liquid density in the reference and are summed in neither liquid cut?",
   "options": [
    "Methane, nitrogen and carbon dioxide",
    "Methane alone",
@@ -63,7 +63,7 @@
    "Methane, ethane and nitrogen"
   ],
   "answer": 0,
-  "explanation": "The per-component table reads recoverable false, in neither cut and gal/Mscf none on C1, N2 and CO2. C2 is recoverable and is in gpmC2Plus at 2.7737 gal/Mscf on EGBEMA."
+  "explanation": "The per-component table reads recoverable false, in neither cut and gal/Mscf none on C1, N2 and CO2, and the reference prints liquid density none on the same three rows. C2 is recoverable and is in gpmC2Plus at 2.7737 gal/Mscf on EGBEMA."
  },
  {
   "prompt": "Which gas reads lean, and on which figure is the word read?",

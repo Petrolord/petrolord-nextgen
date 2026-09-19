@@ -104,7 +104,7 @@
    "It is not modelled; the engine's flare is lit.",
    "It is modelled at destruction efficiency 0.5.",
    "It is modelled with its methane set by the combustion efficiency.",
-   "It is refused with REFUSED: A gas volume is required."
+   "It is modelled as vented gas, all of it methane."
   ],
   "answer": 0,
   "explanation": "Among the stated limits: an unlit flare is not modelled. Gas sent to a flare that is not lit is vented, all of it methane; the engine's flare is lit."
@@ -151,7 +151,7 @@
    "The combustion efficiency used: 0.955 against 0.97"
   ],
   "answer": 3,
-  "explanation": "With both efficiencies given the combustion efficiency is 0.955 and the share 0.1568; with it left out, 0.97 stands in and the share reads 0.1548. The methane is 1136.490 in both. The share at a GWP of 20 is 0.1110."
+  "explanation": "With both efficiencies given the combustion efficiency used is 0.955 and the share 0.1568. In the range, combustion is left out and stands in each time, and its 0.97 row prints 184877.310, 1136.490 and 218744.723, the same tonnes as EGBEMA's call with the combustion efficiency left out, where 0.97 is the efficiency used; its share reads 0.1548. The share at a GWP of 20 is 0.1110."
  },
  {
   "prompt": "Which term of CO2e does the methane GWP multiply?",
