@@ -4,12 +4,12 @@
  "content_version": 1,
  "modules": [
   {
-   "key": "m01",
+   "key": "m01-the-choking-boundary",
    "title": "The choking boundary",
    "order": 1,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-why-a-valve-equation-stops-working",
      "title": "Why a valve equation stops working when the service gets hard",
      "order": 1,
      "est_minutes": 8,
@@ -19,7 +19,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-the-allowable-drop",
      "title": "The allowable drop, and where it comes from",
      "order": 2,
      "est_minutes": 10,
@@ -31,7 +31,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-marching-the-outlet-pressure-down",
      "title": "Marching the outlet pressure down",
      "order": 3,
      "est_minutes": 12,
@@ -43,7 +43,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-sizing-on-the-stated-drop",
      "title": "What sizing on the stated drop would cost",
      "order": 4,
      "est_minutes": 12,
@@ -53,7 +53,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l05",
+     "key": "l05-the-critical-pressure-ratio-factor",
      "title": "The critical pressure ratio factor",
      "order": 5,
      "est_minutes": 10,
@@ -65,12 +65,12 @@
    ]
   },
   {
-   "key": "m02",
+   "key": "m02-cavitation-and-the-screen",
    "title": "Cavitation, and the screen an empty box switched off",
    "order": 2,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-damage-before-the-flow-chokes",
      "title": "Damage begins long before the flow chokes",
      "order": 1,
      "est_minutes": 10,
@@ -80,7 +80,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-sigma-on-the-drop-the-valve-uses",
      "title": "Sigma is computed on the drop the valve uses",
      "order": 2,
      "est_minutes": 12,
@@ -90,7 +90,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-the-regime-ladder",
      "title": "The regime ladder, rung by rung",
      "order": 3,
      "est_minutes": 10,
@@ -102,7 +102,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-flashing-is-a-different-problem",
      "title": "Flashing is a different problem with a different fix",
      "order": 4,
      "est_minutes": 10,
@@ -114,12 +114,12 @@
    ]
   },
   {
-   "key": "m03",
+   "key": "m03-gas-sizing-and-whose-table",
    "title": "Gas sizing, and whose table the factors are",
    "order": 3,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-the-pressure-drop-ratio",
      "title": "The pressure drop ratio and its terminal value",
      "order": 1,
      "est_minutes": 10,
@@ -129,7 +129,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-the-expansion-factor",
      "title": "The expansion factor and the two thirds floor",
      "order": 2,
      "est_minutes": 12,
@@ -141,7 +141,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-the-specific-heat-ratio-factor",
      "title": "The specific heat ratio factor",
      "order": 3,
      "est_minutes": 8,
@@ -151,7 +151,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-the-style-table",
      "title": "The style table, and that it is this engine own",
      "order": 4,
      "est_minutes": 10,
@@ -161,7 +161,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l05",
+     "key": "l05-a-stated-vendor-figure",
      "title": "A stated vendor figure replaces a table",
      "order": 5,
      "est_minutes": 10,
@@ -173,12 +173,12 @@
    ]
   },
   {
-   "key": "m04",
+   "key": "m04-authority-and-the-characteristic",
    "title": "Authority, and the characteristic it chooses",
    "order": 4,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-what-authority-decides",
      "title": "What authority decides",
      "order": 1,
      "est_minutes": 10,
@@ -188,7 +188,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-the-ladder-and-the-screen",
      "title": "The ladder, and the screen it is read against",
      "order": 2,
      "est_minutes": 10,
@@ -198,7 +198,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-why-equal-percentage-exists",
      "title": "Equal percentage exists to cancel something",
      "order": 3,
      "est_minutes": 12,
@@ -208,7 +208,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-one-vocabulary-two-functions",
      "title": "One vocabulary, two functions",
      "order": 4,
      "est_minutes": 8,
@@ -220,12 +220,12 @@
    ]
   },
   {
-   "key": "m05",
+   "key": "m05-noise-as-an-indication",
    "title": "Noise, as an indication rather than a prediction",
    "order": 5,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-what-a-screening-band-can-tell-you",
      "title": "What a screening band can and cannot tell you",
      "order": 1,
      "est_minutes": 10,
@@ -235,7 +235,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-the-pressure-ratio-sets-the-band",
      "title": "The pressure ratio sets the band",
      "order": 2,
      "est_minutes": 10,
@@ -245,7 +245,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-the-stream-power-caps-and-floors",
      "title": "The stream power caps it and floors it",
      "order": 3,
      "est_minutes": 12,
@@ -255,7 +255,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-what-a-noise-prediction-would-need",
      "title": "What a real noise prediction would need",
      "order": 4,
      "est_minutes": 8,
@@ -267,12 +267,12 @@
    ]
   },
   {
-   "key": "m06",
+   "key": "m06-travel-rangeability-and-the-verdict",
    "title": "Travel, rangeability and a verdict over checks that ran",
    "order": 6,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-a-valve-near-its-seat",
      "title": "A valve near its seat does not control",
      "order": 1,
      "est_minutes": 10,
@@ -282,7 +282,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-equal-percentage-and-linear-travel",
      "title": "Equal percentage travel against linear travel",
      "order": 2,
      "est_minutes": 10,
@@ -292,7 +292,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-beyond-the-valve-and-not-given",
      "title": "Beyond the valve is not the same as not given",
      "order": 3,
      "est_minutes": 12,
@@ -302,7 +302,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-a-verdict-over-checks-that-did-not-run",
      "title": "A verdict over checks that did not run is not a verdict",
      "order": 4,
      "est_minutes": 10,

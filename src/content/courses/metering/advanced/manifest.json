@@ -4,12 +4,12 @@
  "content_version": 1,
  "modules": [
   {
-   "key": "m01",
+   "key": "m01-the-tank-and-its-geometry",
    "title": "The tank, and the geometry three questions share",
    "order": 1,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-shell-venting-and-losses-in-one-module",
      "title": "Why the shell, the venting and the losses are one module",
      "order": 1,
      "est_minutes": 8,
@@ -19,7 +19,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-capacity-and-the-exact-barrel",
      "title": "Capacity, working capacity and the exact barrel",
      "order": 2,
      "est_minutes": 10,
@@ -31,7 +31,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-nominal-against-working",
      "title": "Nominal against working, on one tank",
      "order": 3,
      "est_minutes": 10,
@@ -41,7 +41,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-a-fill-height-that-cannot-be-negative",
      "title": "A fill height that cannot be negative",
      "order": 4,
      "est_minutes": 8,
@@ -53,12 +53,12 @@
    ]
   },
   {
-   "key": "m02",
+   "key": "m02-the-shell-and-what-governs",
    "title": "The shell, and which of three things governs",
    "order": 2,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-the-one-foot-method",
      "title": "The one-foot method, at two conditions",
      "order": 1,
      "est_minutes": 10,
@@ -68,7 +68,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-when-the-water-test-governs",
      "title": "A light product makes the water test govern",
      "order": 2,
      "est_minutes": 12,
@@ -78,7 +78,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-the-minimum-plate",
      "title": "The minimum plate is a stated input",
      "order": 3,
      "est_minutes": 10,
@@ -88,7 +88,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-course-by-course",
      "title": "Course by course, bottom to top",
      "order": 4,
      "est_minutes": 12,
@@ -98,7 +98,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l05",
+     "key": "l05-the-crossovers",
      "title": "The crossovers, found by bisecting a word",
      "order": 5,
      "est_minutes": 12,
@@ -110,12 +110,12 @@
    ]
   },
   {
-   "key": "m03",
+   "key": "m03-normal-venting",
    "title": "Normal venting, and which direction governs",
    "order": 3,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-thermal-and-movement",
      "title": "Thermal and movement, in each direction",
      "order": 1,
      "est_minutes": 10,
@@ -127,7 +127,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-one-predicate-computed-once",
      "title": "One predicate, computed once",
      "order": 2,
      "est_minutes": 10,
@@ -137,7 +137,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-vacuum-destroys-tanks",
      "title": "Vacuum is the case that destroys tanks",
      "order": 3,
      "est_minutes": 12,
@@ -147,7 +147,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-the-factors-the-engine-states",
      "title": "The factors the engine states and does not cite",
      "order": 4,
      "est_minutes": 10,
@@ -159,12 +159,12 @@
    ]
   },
   {
-   "key": "m04",
+   "key": "m04-the-fire-case-and-the-withheld-vent",
    "title": "The fire case, and the vent that is withheld",
    "order": 4,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-the-wetted-area",
      "title": "The wetted area, and the height that counts",
      "order": 1,
      "est_minutes": 10,
@@ -176,7 +176,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-the-heat-input-bands",
      "title": "The heat input bands, edge by edge",
      "order": 2,
      "est_minutes": 12,
@@ -186,7 +186,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-why-the-vent-capacity-is-refused",
      "title": "Why the vent capacity is refused by name",
      "order": 3,
      "est_minutes": 14,
@@ -198,7 +198,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-a-factor-of-about-24",
      "title": "A factor of about 24, and what it would mean",
      "order": 4,
      "est_minutes": 12,
@@ -208,7 +208,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l05",
+     "key": "l05-what-to-do-instead",
      "title": "What to do instead, and what never to do",
      "order": 5,
      "est_minutes": 10,
@@ -220,12 +220,12 @@
    ]
   },
   {
-   "key": "m05",
+   "key": "m05-losses-and-what-control-saves",
    "title": "Losses, and what control saves",
    "order": 5,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-money-and-emissions",
      "title": "The same arithmetic answers money and emissions",
      "order": 1,
      "est_minutes": 10,
@@ -235,7 +235,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-standing-and-working-loss",
      "title": "Standing loss and working loss",
      "order": 2,
      "est_minutes": 10,
@@ -245,7 +245,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-a-product-that-boils-at-ambient",
      "title": "A product that boils at ambient is refused",
      "order": 3,
      "est_minutes": 10,
@@ -255,7 +255,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-an-input-that-fed-nothing",
      "title": "An input that never fed anything",
      "order": 4,
      "est_minutes": 8,
@@ -267,12 +267,12 @@
    ]
   },
   {
-   "key": "m06",
+   "key": "m06-the-register-and-the-refusals",
    "title": "The register, the refusals and the counts",
    "order": 6,
    "lessons": [
     {
-     "key": "l01",
+     "key": "l01-fifteen-things-not-carried",
      "title": "Fifteen things these engines do not carry",
      "order": 1,
      "est_minutes": 12,
@@ -284,7 +284,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l02",
+     "key": "l02-every-refusal",
      "title": "Every refusal, and why a refusal is the useful answer",
      "order": 2,
      "est_minutes": 12,
@@ -294,7 +294,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l03",
+     "key": "l03-a-count-with-no-tree",
      "title": "A count with no tree and no rule is not checkable",
      "order": 3,
      "est_minutes": 10,
@@ -304,7 +304,7 @@
      "max_prose_words": 560
     },
     {
-     "key": "l04",
+     "key": "l04-what-you-may-quote",
      "title": "What you may quote, and what you may never quote",
      "order": 4,
      "est_minutes": 10,

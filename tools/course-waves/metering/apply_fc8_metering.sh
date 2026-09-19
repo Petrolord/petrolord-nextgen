@@ -83,9 +83,9 @@ FILES="
 digest_for() {
   case $1 in
     20260925_fc8_metering_course                ) echo 4f1d4dacb30740435ee7086c3edae7c25a59debedb4b804d5db9b04c35742e14 ;;
-    20260925_fc8_metering_beginner_deep         ) echo 767215a891ddc1afc5055f63c5041ed405704271fd7cddba5185d380b2d51b3a ;;
-    20260925_fc8_metering_intermediate_deep     ) echo 6511c5b91ebb306f7b1a664d3623099cc10d5e0c2027c51beca710882c952ccc ;;
-    20260925_fc8_metering_advanced_deep         ) echo 505d824a2f29d6a3752fc10b52dde224855bb7de3526ec73e195d0cfb251da97 ;;
+    20260925_fc8_metering_beginner_deep         ) echo 511de3e0c59f143221565a0f364ea89f0163b92471b92e0bed34539b8969bbc4 ;;
+    20260925_fc8_metering_intermediate_deep     ) echo 8853ddf91fda6043848bc996ea82f59946f8623f4b49108d3f9ac2388fb47027 ;;
+    20260925_fc8_metering_advanced_deep         ) echo 0c3b0379732a4b39f1410713212e5230a65d7f40fce4b5b0d7d89d179014ac68 ;;
     20260925_fc8_metering_go_live               ) echo 166207f4a608e8574b3853f4b6be8f9da7a06c126b8e2106bb46da236be8ccf8 ;;
     *) echo UNPINNED ;;
   esac
