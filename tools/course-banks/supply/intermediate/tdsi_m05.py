@@ -9,12 +9,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # the lane is in naira and every cost is INVENTED for this course; every stem
 # that quotes a cost says so. Every figure is a string the digest prints.
 
-q(2, "The IBAFO lane's cycle is round trip / average speed + load + discharge + queue hours, 18.065 hours. Which terms are typed allowances at each end of the lane?",
+q(2, "The IBAFO lane's cycle is round trip / average speed + load + discharge + queue hours, 18.065 hours. Which terms of that cycle are typed as hours?",
  "The load, discharge and queueing hours.",
  ["The round trip and the average speed.",
   "The working hours a day and working days a year.",
   "The queueing hours alone, taken from the rack's mean wait."],
- "The 1.5 h to load, 1.25 h to discharge and 1.75 h queueing sit inside every cycle however short the road. The queue hours are this lane's own typed figure for all the waiting in a cycle; the engine does not feed the rack's mean wait into it.")
+ "The lane types 1.5 h to load, 1.25 h to discharge and 1.75 h queueing. The round trip is 624.00 km and the speed 46 km/h, so that term is the driving time. The 12 working hours and 300 days are outside the cycle. The 1.75 h queueing is the lane's own typed figure, and the rack's mean wait is 47.2652 minutes.")
 
 q(0, "On its invented costs, the IBAFO lane moves from 312.00 km to 468.00 km. Which printed pair describes the change?",
  "Cost per litre delivered from 15.0704 naira to 20.6072.",
@@ -35,7 +35,7 @@ q(1, "The IBAFO lane's invented cost a trip is 495830.99 naira. Which litres doe
  ["33000.00 litres, the payload loaded at the rack.",
   "28125.00 litres, the station's ullage at reorder.",
   "11393.64 litres, the fleet's spare litres a day."],
- "The station pays for what arrives, so the cost of a trip is divided by the litres delivered after the 0.3 percent transit loss. A cost per litre on the loaded payload would spread the cost over litres the station never receives, and the engine prints no such figure.")
+ "Cost per litre delivered = cost per trip / the litres delivered after the transit loss: 32901.00 litres from a 33000.00 litre payload at a transit loss of 0.3 percent. 28125.00 litres is the station's ullage at reorder and 11393.64 litres the fleet's spare litres a day.")
 
 q(2, "The IBAFO lane reports 224.64 diesel litres a trip. What does it print for kg CO2e a trip?",
  "none, with a note that no diesel emission factor was supplied.",
@@ -112,7 +112,7 @@ q(0, "The IBAFO station reorders at 0.25 of usable, leaving 28125.00 litres of u
  ["0.15, with 31875.00 litres of ullage at reorder.",
   "0.2, with 30000.00 litres of ullage at reorder.",
   "0.25, once the transit loss brings the load to 32901.00 litres."],
- "Ullage at reorder = capacity less the reorder level, and only 0.1 leaves room for a full load. The engine checks the payload loaded, so the lane's 32901.00 litres delivered does not enter the check. The lower level leaves less stock in hand while the truck is on the road.")
+ "Ullage at reorder = capacity less the reorder level, and only 0.1 leaves room for a full load. The engine checks the payload loaded, so the lane's 32901.00 litres delivered does not enter the check.")
 
 emit(Q, '/root/wt-md-supply-nextgen/tools/course-banks/supply/intermediate/tdsi_m05.json', label='tdsi_m05', expect_n=15)
 finish()

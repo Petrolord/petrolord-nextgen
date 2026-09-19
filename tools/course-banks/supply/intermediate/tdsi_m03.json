@@ -2,13 +2,13 @@
  {
   "prompt": "What is a tank's heel in the IBAFO farm?",
   "options": [
-   "A fixed share of each tank's capacity that the engine takes off every tank.",
+   "A figure the engine takes from PRODUCT_REFERENCE for each product.",
    "The free water below the product, which the dip less the water height removes.",
-   "The volume below the lowest level the outlet can draw, typed for each tank.",
+   "Each tank's own volume below which none of its stock is pumpable.",
    "The room left above the stock, which a receipt must fit into."
   ],
   "answer": 2,
-  "explanation": "Below the heel a suction line would take in vapour, sediment or free water, so the tank is never pumped past it. Its size is set by the outlet height, the floor and the operator's practice, and the engine takes it as a measured input per tank: IB-T4 carries 85.000 m3 and IB-T3 150.000 m3."
+  "explanation": "tankFarmCover counts each tank's pumpable stock as its stock above its own heel, never below zero, and working capacity is capacity less heel. Each tank carries its own heel: IB-T4 85.000 m3 and IB-T3 150.000 m3. PRODUCT_REFERENCE carries typical densities, free water is taken off at the dip, and capacity less stock is the ullage."
  },
  {
   "prompt": "tankFarmCover divides by one farm figure to get turns a year. Which one?",
@@ -19,7 +19,7 @@
    "The pumpable stock, 10123.000 m3."
   ],
   "answer": 0,
-  "explanation": "Turns a year = daily throughput x 365 / working capacity, and working capacity is capacity less heel: 22500.000 m3 less 655.000 m3. The heel never turns, so it is left out of the room the product cycles through."
+  "explanation": "Turns a year = daily throughput x 365 / working capacity, and working capacity is capacity less heel: the farm table prints 22500.000 m3, 655.000 m3 and 21845.000 m3."
  },
  {
   "prompt": "IB-T2 holds 164.700 m3 of petrol against a heel of 210.000 m3. What pumpable stock does the engine give it?",
@@ -30,7 +30,7 @@
    "0.000 m3"
   ],
   "answer": 3,
-  "explanation": "Each tank's pumpable stock is its stock above its own heel, never below zero. IB-T2's product sits below the outlet's reach, so the pumps can draw none of it. 7335.300 m3 is its ullage, the room it has for a receipt."
+  "explanation": "Pumpable stock is counted above each tank's own heel and floored at zero. IB-T2's 164.700 m3 sits under 210.000 m3, so the row reads 0.000 m3; 7335.300 m3 is its ullage."
  },
  {
   "prompt": "Which figure does tankFarmCover report as the IBAFO farm's pumpable stock?",
@@ -88,15 +88,15 @@
   "explanation": "IB-T2 is below its heel and adds nothing until it is filled above it, so the liftable petrol is IB-T1's 5078.400 m3. The farm's pumpable stock pools petrol, gas oil and kerosene, and IB-T3 holds gas oil."
  },
  {
-  "prompt": "A gas oil receipt is due at IBAFO. How much room is there for it?",
+  "prompt": "What ullage does tankFarmCover print for IB-T3, the farm's gas oil tank?",
   "options": [
-   "11767.300 m3, the farm's ullage.",
-   "7335.300 m3, IB-T2's ullage.",
-   "1097.400 m3, IB-T3's ullage.",
-   "3752.600 m3, IB-T3's pumpable stock."
+   "11767.300 m3",
+   "7335.300 m3",
+   "1097.400 m3",
+   "3752.600 m3"
   ],
   "answer": 2,
-  "explanation": "Ullage is useful only tank by tank. A gas oil receipt can go into IB-T3 and nowhere else, so its room is IB-T3's capacity less its stock, 1097.400 m3, however much room the petrol tanks have."
+  "explanation": "IB-T3's row prints 1097.400 m3 of ullage, its capacity less its stock. 11767.300 m3 is the farm's ullage summed over the tanks, 7335.300 m3 is IB-T2's ullage and 3752.600 m3 is IB-T3's pumpable stock."
  },
  {
   "prompt": "IB-T2 reads an ullage of 7335.300 m3 and a pumpable stock of 0.000 m3. What does that pair say?",
@@ -110,26 +110,26 @@
   "explanation": "Ullage is capacity less stock, never below zero; pumpable stock is stock above heel, never below zero. IB-T2 holds 164.700 m3, below its 210.000 m3 heel, and it has room for a receipt. It is a tank waiting for a receipt."
  },
  {
-  "prompt": "IB-T4 is a 2500.000 m3 kerosene tank with a heel of 85.000 m3. Where does tankFarmCover get that heel?",
+  "prompt": "IB-T2 holds 164.700 m3 in a 7500.000 m3 tank. How does its ullage of 7335.300 m3 enter the farm's 11767.300 m3?",
   "options": [
-   "From a fixed fraction of capacity the engine applies to every tank.",
-   "From PRODUCT_REFERENCE's heel list.",
-   "From its strapping table's lowest entry.",
-   "It is a measured input typed for that tank."
+   "It is left out, since IB-T2 sits below its heel.",
+   "It enters less IB-T2's heel of 210.000 m3.",
+   "It enters as IB-T2's capacity less its heel.",
+   "As IB-T2's capacity less its stock, summed with the other tanks."
   ],
   "answer": 3,
-  "explanation": "Nothing in the engine derives a heel from a capacity. Each tank carries its own: 210.000 m3 on each 7500.000 m3 petrol tank, 150.000 m3 on IB-T3 and 85.000 m3 on IB-T4. A tank whose outlet has moved may have a different heel from its drawing."
+  "explanation": "IB-T2's row prints capacity 7500.000 m3, stock 164.700 m3 and ullage 7335.300 m3, and the digest counts the farm's ullage as each tank's capacity less its stock, never below zero, summed over the tanks. The heel appears in no part of that count."
  },
  {
-  "prompt": "What does IBAFO's days of cover of 3.8345 assume?",
+  "prompt": "IBAFO's days of cover of 3.8345 is pumpable stock over daily throughput. Which quantity has no place in that formula?",
   "options": [
-   "Every tank is drawn down to empty, heel included.",
-   "Liftings hold at 2640.000 m3 a day and nothing arrives.",
-   "The rack loads 216 trucks a day at its mean load time.",
-   "Each product is lifted in proportion to its own stock."
+   "The heel of each tank, through the pumpable stock.",
+   "A receipt due into the farm.",
+   "The daily liftings of 2640.000 m3.",
+   "The stock of each tank above its heel."
   ],
   "answer": 1,
-  "explanation": "A cover is a clock that starts now and assumes the rate holds with no receipt. The numerator is the pumpable stock, so no heel is drawn. The farm figure pools three products, so it cannot say how long petrol alone will last."
+  "explanation": "Days of cover = pumpable stock / daily throughput, and the daily throughput is the liftings, 2640.000 m3. Pumpable stock is each tank's stock above its own heel, so the heel and the stock both enter it. No receipt enters the formula."
  },
  {
   "prompt": "Why can the farm's days of cover not tell a manager how long the petrol alone will last?",
@@ -145,13 +145,13 @@
  {
   "prompt": "Where does the daily throughput of 2640.000 m3 in the farm's cover and turns come from?",
   "options": [
-   "The caller supplies it as the depot's measured or planned liftings.",
+   "The caller supplies it as the depot's liftings.",
    "The engine works it out from the rack's 216 trucks a day.",
    "The engine takes it from the farm's working capacity.",
    "The engine sets it from the farm's ullage."
   ],
   "answer": 0,
-  "explanation": "The engine does not infer the daily throughput from the rack. The rack's 216 trucks a day is a count of trucks, and the rack model carries no load volume, so the liftings must be typed."
+  "explanation": "The farm table labels it daily throughput (liftings), and with no daily throughput the engine gives days of cover none and turns a year none, so the engine does not infer it. The rack prints trucks a day and no volume."
  },
  {
   "prompt": "The IBAFO farm's volumes print to three decimals of a cubic metre. How does tankFarmCover treat each tank's stock?",

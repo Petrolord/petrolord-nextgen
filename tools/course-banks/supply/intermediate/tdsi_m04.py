@@ -30,19 +30,19 @@ q(0, "An operator forgets to type IBAFO's invented throughput fee. Which answer 
   "margin 14388.00 USD, since the fee is read as the fixed cost."],
  "The money answer needs the throughput and the fee, and a blank in either is refused. Only a blank cost or loss is taken as zero and named in assumedZero.")
 
-q(2, "Which pair of blank inputs does throughputEconomics refuse outright?",
+q(2, "Which two inputs does throughputEconomics need for its money answer, refusing the call when either is blank?",
  "The throughput and the fee.",
  ["The fee and the fixed cost, the two money inputs of the period.",
   "The throughput and the density, since the loss needs both.",
   "The emission factor and the density, since carbon needs both."],
  "The refusal names the throughput and the throughput fee. A blank cost or loss is taken as zero and named; a missing density or emission factor leaves the carbon side as none while the money side prints.")
 
-q(1, "IBAFO's margin per m3 prints as 1.89 USD. Why can it not be multiplied by another period's throughput to give that period's margin?",
- "It carries one period's fixed cost spread over that period's volume.",
- ["It is rounded to two decimals, so the product drifts.",
-  "It is the fee less the variable cost only, so it leaves out fixed cost.",
-  "It is priced in US dollars, and the next period may be priced in naira."],
- "The margin per m3 is the period's margin over the period's throughput, and the invented fixed cost of 9400.00 USD sits inside it. Spread the same fixed cost over more cubic metres and each carries less of it, so the figure moves with throughput.")
+q(1, "IBAFO's invented revenue is 20592.00 USD and its margin 4988.00 USD. What does throughputEconomics take off the revenue to reach the margin?",
+ "The variable cost on the throughput and the fixed cost.",
+ ["The variable cost on the throughput, and nothing else.",
+  "The fixed cost of 9400.00 USD, and nothing else.",
+  "The fixed cost and the period's loss priced at the fee."],
+ "Margin = revenue - throughput x variable cost - fixed cost, with the invented variable cost of 2.35 USD/m3 and fixed cost of 9400.00 USD. With the fixed cost blank the margin reads 14388.00 USD. The margin formula has no loss in it; the loss is weighed in tonnes for the carbon side.")
 
 q(3, "IBAFO's period loss of petrol, at a density of 745.2 kg/m3, weighs 3.4279 tonnes. Why is there a division by 1000?",
  "It turns kilograms into tonnes.",
@@ -87,11 +87,11 @@ q(0, "With the synthetic 850 kg CO2e a tonne factor, IBAFO prints 1.481061 kg CO
  "It is an intensity: 2913.7320 kg CO2e over the period's throughput in tonnes, so a period can be compared with another at a different volume. It inherits the synthetic factor and is quoted only with the factor beside it.")
 
 q(2, "Why does the engine ship no emission factor?",
- "Factors are published, versioned data, and an invented one would travel unseen.",
+ "Factors are published, versioned data; an invented one would be worse than none.",
  ["Emissions are the Economics courses' ledger, which the depot engine leaves alone.",
   "A factor needs the density first, and the density is never typed.",
   "The throughput fee already carries the cost of carbon in its rate."],
- "A factor comes from a named methodology and version, differs by product and is revised. Built into an engine it would silently become whatever version was copied. The engine's own note says an invented one would be worse than none.")
+ "The engine's own note gives the reason: \"Factors are published, versioned data; an invented one would be worse than none.\" The engine computes emissions from a factor the caller supplies, and IBAFO types its density, 745.2 kg/m3.")
 
 q(3, "Between the IBAFO case with factor and density supplied and the case with no density, which column changes?",
  "Loss tonnes, from 3.4279 to none.",
@@ -100,12 +100,12 @@ q(3, "Between the IBAFO case with factor and density supplied and the case with 
   "Margin per m3, from 1.89 USD to none, as the loss is not weighed."],
  "The money columns are identical in all three cases, because revenue and margin need the throughput, the fee and the costs, and none needs a density. The carbon columns fail from the first link that has no input onward.")
 
-q(0, "A report stretches IBAFO's margin of 4988.00 USD into a value for the depot. What does the course say the margin is?",
- "A period's margin, with no discounting and no capital in it.",
+q(0, "A report stretches IBAFO's margin of 4988.00 USD into a value for the depot. What is the margin, by the engine's formula?",
+ "Revenue less costs for one period, with no discounting in it.",
  ["A valuation once the invented fixed cost is spread over the depot's life.",
   "A present value, since the fee is paid within the period.",
   "The depot's IRR once divided by the throughput."],
- "The throughput margin says whether the invented fee covers the invented costs for the period at the stated volume. It discounts nothing and carries no capital. This course teaches no NPV or IRR, and discounting belongs to the Economics courses.")
+ "Margin = revenue - throughput x variable cost - fixed cost, and the fixed cost is for the period. Nothing in the formula discounts, and no rate of return is formed; this course computes no NPV or IRR.")
 
 q(1, "The pricing module's PRODUCT_REFERENCE lists a typical petrol density. With the density box blank, does throughputEconomics use it?",
  "No. The loss gets no weight.",

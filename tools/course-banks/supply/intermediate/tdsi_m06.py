@@ -10,12 +10,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # figure from a later tier. Money on the lane is in naira and every cost is
 # INVENTED for this course. Every figure is a string the digest prints.
 
-q(1, "A morning report on the IBAFO rack must lead with the figures a driver feels. Which pair should head it?",
- "Probability of waiting 0.787753 and mean wait 47.2652 minutes.",
- ["Utilisation 0.900000 and offered load 3.6000 erlangs, the rack's own view.",
-  "Trucks per day 216 and mean queue 7.0898 trucks.",
-  "Utilisation 0.900000 and the mean time on site."],
- "A report that leads with a utilisation of 0.900000 invites the reader to think the rack has room. An arriving truck finds every bay full with a probability of 0.787753, and averaged over every truck it waits 47.2652 minutes.")
+q(1, "fleetSizing prints 58 IBAFO trucks. Where does its trips a truck a day of 0.664260 come from?",
+ "The IBAFO lane, from its cycle of 18.065 hours.",
+ ["The rack's 216 trucks a day.",
+  "The farm's 44.1108 turns a year, spread over 365 days.",
+  "fleetSizing works it out from the demand and the payload."],
+ "The fleet table labels 0.664260 trips a truck a day (from the lane), and on the lane trips a truck a day = working hours / cycle, with 12 working hours and a cycle of 18.065 hours. fleetSizing refuses without it: \"Demand, payload and trips per truck per day are required and must be positive.\" Demand over payload gives the trips needed, 38.181818.")
 
 q(3, "A manager plans for traffic growth on IBAFO's 4 bays. What do the printed rows say lies one step past 9.5 arrivals an hour?",
  "At 10 arrivals no average wait exists.",
@@ -24,12 +24,12 @@ q(3, "A manager plans for traffic growth on IBAFO's 4 bays. What do the printed 
   "At 10 arrivals the rack keeps up once a fifth bay is typed."],
  "At 9.5 arrivals the mean wait is 106.9703 minutes. At 10 the engine refuses: the rack cannot keep up and the queue grows without limit. 245.7297 minutes belongs to the load minutes sweep at 26 minutes a load.")
 
-q(0, "A morning stock report on the IBAFO farm quotes 10077.700 m3 as pumpable. What has the writer done?",
- "Netted the farm's heel across tanks, lending IB-T2 product from other tanks.",
- ["Counted each tank's stock above its own heel, as tankFarmCover does.",
-  "Left IB-T2 out of the farm entirely, stock and heel together.",
-  "Taken the working capacity less the ullage for each tank."],
- "The farm's stock less its heel is 10077.700 m3, a figure the engine prints only to say it does not use it. Counted tank by tank, with IB-T2's 164.700 m3 below its 210.000 m3 heel contributing 0.000 m3, the pumpable stock is 10123.000 m3.")
+q(0, "The IBAFO morning report sets the farm's pumpable stock of 10123.000 m3 beside its daily liftings of 2640.000 m3. Which printed figure is the first over the second?",
+ "Days of cover, 3.8345.",
+ ["The turns a year, 44.1108.",
+  "Fleet utilisation, 0.991038.",
+  "The rack's utilisation, 0.900000."],
+ "Days of cover = pumpable stock / daily throughput, and the farm table prints 3.8345. Turns a year divide the daily throughput x 365 by the working capacity, 44.1108. The two utilisations belong to the fleet and the rack.")
 
 q(2, "Which IBAFO figure joins the rack's queue to the farm's cover?",
  "None: they are separate engine calls with separate limits.",
@@ -39,18 +39,18 @@ q(2, "Which IBAFO figure joins the rack's queue to the farm's cover?",
  "The rack limits how fast product can leave; the farm limits how long there is product to send and how much room there is for the next receipt. The engine prints no figure that joins them, so a report keeps them in separate tables with their own units.")
 
 q(1, "The IBAFO lane prints complete true on its invented costs. What does that flag rest on?",
- "Every cost box was typed.",
+ "No cost box was left blank.",
  ["The diesel emission factor was supplied.",
   "The payload fits.",
   "The fleet is sized."],
- "complete true says no cost line is missing. The carbon figure reads none because no diesel emission factor was supplied, and the engine says it is absent rather than zero; that does not make the cost answer incomplete.")
+ "complete true says no cost is missing. A blank or null cost box reads complete false with the cost named, and a cost left out of the call takes the default the signature states and still reads complete true. The carbon figure reads none because no diesel emission factor was supplied, and complete stays true. The payload check is the station's and the fleet is fleetSizing's.")
 
-q(3, "On the lane, which input carries the weight of the trips a truck a day, the depreciation a trip and the fleet together?",
- "The cycle, through its typed queue hours and average speed.",
- ["The transit loss of 0.3 percent, through the litres delivered.",
-  "The payload of 33000.00 litres, through the trips needed a day.",
-  "The invented Diesel line, through the cost a trip at each distance."],
- "The cycle sets the trips a truck a day, 0.664260, which sets both the depreciation a trip and the fleet of 58. The queue hours and average speed are typed inputs, so they are the first to check.")
+q(3, "On the lane, which printed figure feeds the trips a truck a day, the depreciation a trip and the fleet together?",
+ "The cycle, 18.065 hours.",
+ ["The litres delivered a trip, 32901.00.",
+  "The payload of 33000.00 litres.",
+  "The Diesel line, 278553.60 naira a trip."],
+ "Trips a truck a day = working hours / cycle, the truck's capital is spread over the trips a year that cycle allows, and fleetSizing takes the lane's trips a truck a day. The payload sets the trips needed and the litres delivered set the cost per litre; the Diesel line is one cost a trip.")
 
 q(0, "The IBAFO fleet of 58 runs at a fleet utilisation of 0.991038. What does that say about breakdowns?",
  "Nothing: the engine sizes for the average cycle and the operator adds any spare.",
@@ -59,12 +59,12 @@ q(0, "The IBAFO fleet of 58 runs at a fleet utilisation of 0.991038. What does t
   "At 0.991038 the fleet is unstable, as a rack is above one."],
  "A fleet utilisation is a figure for an average day. The spare of 0.345262 trips and 11393.64 litres a day is what the ceiling bought. A truck in the workshop changes what the fleet can make, and the engine prints no allowance for it.")
 
-q(2, "At the IBAFO forecourt, which two inputs decide whether the queue is stable and whether a full truck can discharge?",
- "The peak share and the reorder level.",
- ["The litres a transaction and the dead stock.",
-  "Dispense rate and capacity.",
-  "The daily throughput and the delivery size."],
- "The peak share sets the 135.00 transactions an hour the forecourt is sized for, and so whether the queue at 6 nozzles is stable. The reorder level sets the ullage at reorder, 28125.00 litres, into which the delivery must fit.")
+q(2, "At one IBAFO forecourt with 6 nozzles, which utilisation, probability of waiting and mean wait does stationSizing print, in that order?",
+ "0.878289, 0.688546 and 2.2083 minutes.",
+ ["0.900000, 0.787753 and 47.2652 minutes.",
+  "0.878289, 1.000000 and none.",
+  "1.053947, 1.000000 and none."],
+ "The forecourt table prints a utilisation of 0.878289, a probability of waiting of 0.688546 and a mean wait of 2.2083 minutes at 6 nozzles, stable true. 0.900000, 0.787753 and 47.2652 minutes are the rack at 4 bays, and 1.053947 with no mean wait is the forecourt at 5 nozzles, stable false.")
 
 q(3, "The IBAFO lane's payload reappears at the station. What does stationSizing check it against, and with which volume?",
  "The ullage at reorder, with the 33000.00 litres loaded.",
@@ -74,18 +74,18 @@ q(3, "The IBAFO lane's payload reappears at the station. What does stationSizing
  "stationSizing checks the payload loaded against the 28125.00 litres of ullage at the reorder level and warns that a 33000 litre load cannot discharge into it. The lane delivers 32901.00 litres a trip after its transit loss, and the station's check does not use that figure.")
 
 q(1, "Along the IBAFO chain, what does a blank box give at each link?",
- "A refusal, a named missing input or a floor, and never a silent zero.",
+ "A refusal, a none or a named gap, and never a silent zero.",
  ["A typical figure the engine keeps for the link, named in a note.",
   "A zero at every link, with the answer marked complete.",
   "A refusal at the first link, and nothing printed after it."],
- "A blank driver cost reads complete false with Driver named; a blank truck capital reads a floor; a missing demand or nozzle count is refused. The chain holds only while every box was filled by someone who measured it.")
+ "A missing demand or nozzle count is refused. A farm with no daily throughput reads days of cover none. A blank fixed cost is taken as zero and named in assumedZero, a blank driver cost reads complete false with Driver named, and a blank truck capital cost reads a floor with Truck depreciation named.")
 
-q(0, "The farm's days of cover of 3.8345 pools three products. What figure does the course give for the petrol that can be lifted today?",
- "IB-T1's pumpable 5078.400 m3.",
- ["The farm's pumpable 10123.000 m3.",
-  "IB-T2's stock of 164.700 m3.",
-  "IB-T1's stock of 5288.400 m3."],
- "IB-T2 holds petrol below its heel and adds nothing until it is filled above it. The days of cover divide all three products' pumpable stock by all liftings, so the petrol figure comes from the petrol tanks alone.")
+q(0, "The morning report asks which IBAFO tank is below its heel. Which row answers it?",
+ "IB-T2, 164.700 m3 against a heel of 210.000 m3.",
+ ["IB-T4, 1377.000 m3 against a heel of 85.000 m3.",
+  "IB-T3, 3902.600 m3 against a heel of 150.000 m3.",
+  "IB-T1, 5288.400 m3 against a heel of 210.000 m3."],
+ "IB-T2's stock of 164.700 m3 is under its heel of 210.000 m3, and its pumpable stock prints 0.000 m3. The other three tanks hold more than their heels and print a pumpable stock above zero: IB-T1 5078.400 m3, IB-T3 3752.600 m3 and IB-T4 1292.000 m3.")
 
 q(2, "The Expert tier converts one cargo between tonnes, cubic metres, litres and barrels. Which input can a conversion between mass and volume not proceed without?",
  "A density.",
@@ -99,7 +99,7 @@ q(3, "Why is every freight, duty, levy and exchange rate in the Expert tier labe
  ["Rates are hidden from learners.",
   "The rates are published and current, and are rounded for teaching.",
   "Only large rates are invented."],
- "Real rates are set by regulation and contract, differ by market and change. The engine ships no rate for any of them, and the course invents every one, as it invented the throughput fee and the lane's costs in this tier.")
+ "RATE_DISCLAIMER calls every rate a required input, and each line of IMPORT_TEMPLATE and PUMP_TEMPLATE ships its rate as none. The course invents each rate it uses, as it invented the throughput fee and the lane's costs in this tier.")
 
 q(0, "On the lane a transit loss spread the trip's cost over fewer litres. Where does the Expert tier meet the same effect?",
  "On a whole cargo at sea: the importer pays for what was loaded and sells what arrives.",

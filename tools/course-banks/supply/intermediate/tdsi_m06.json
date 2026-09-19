@@ -1,14 +1,14 @@
 [
  {
-  "prompt": "A morning report on the IBAFO rack must lead with the figures a driver feels. Which pair should head it?",
+  "prompt": "fleetSizing prints 58 IBAFO trucks. Where does its trips a truck a day of 0.664260 come from?",
   "options": [
-   "Utilisation 0.900000 and offered load 3.6000 erlangs, the rack's own view.",
-   "Probability of waiting 0.787753 and mean wait 47.2652 minutes.",
-   "Trucks per day 216 and mean queue 7.0898 trucks.",
-   "Utilisation 0.900000 and the mean time on site."
+   "The rack's 216 trucks a day.",
+   "The IBAFO lane, from its cycle of 18.065 hours.",
+   "The farm's 44.1108 turns a year, spread over 365 days.",
+   "fleetSizing works it out from the demand and the payload."
   ],
   "answer": 1,
-  "explanation": "A report that leads with a utilisation of 0.900000 invites the reader to think the rack has room. An arriving truck finds every bay full with a probability of 0.787753, and averaged over every truck it waits 47.2652 minutes."
+  "explanation": "The fleet table labels 0.664260 trips a truck a day (from the lane), and on the lane trips a truck a day = working hours / cycle, with 12 working hours and a cycle of 18.065 hours. fleetSizing refuses without it: \"Demand, payload and trips per truck per day are required and must be positive.\" Demand over payload gives the trips needed, 38.181818."
  },
  {
   "prompt": "A manager plans for traffic growth on IBAFO's 4 bays. What do the printed rows say lies one step past 9.5 arrivals an hour?",
@@ -22,15 +22,15 @@
   "explanation": "At 9.5 arrivals the mean wait is 106.9703 minutes. At 10 the engine refuses: the rack cannot keep up and the queue grows without limit. 245.7297 minutes belongs to the load minutes sweep at 26 minutes a load."
  },
  {
-  "prompt": "A morning stock report on the IBAFO farm quotes 10077.700 m3 as pumpable. What has the writer done?",
+  "prompt": "The IBAFO morning report sets the farm's pumpable stock of 10123.000 m3 beside its daily liftings of 2640.000 m3. Which printed figure is the first over the second?",
   "options": [
-   "Netted the farm's heel across tanks, lending IB-T2 product from other tanks.",
-   "Counted each tank's stock above its own heel, as tankFarmCover does.",
-   "Left IB-T2 out of the farm entirely, stock and heel together.",
-   "Taken the working capacity less the ullage for each tank."
+   "Days of cover, 3.8345.",
+   "The turns a year, 44.1108.",
+   "Fleet utilisation, 0.991038.",
+   "The rack's utilisation, 0.900000."
   ],
   "answer": 0,
-  "explanation": "The farm's stock less its heel is 10077.700 m3, a figure the engine prints only to say it does not use it. Counted tank by tank, with IB-T2's 164.700 m3 below its 210.000 m3 heel contributing 0.000 m3, the pumpable stock is 10123.000 m3."
+  "explanation": "Days of cover = pumpable stock / daily throughput, and the farm table prints 3.8345. Turns a year divide the daily throughput x 365 by the working capacity, 44.1108. The two utilisations belong to the fleet and the rack."
  },
  {
   "prompt": "Which IBAFO figure joins the rack's queue to the farm's cover?",
@@ -47,23 +47,23 @@
   "prompt": "The IBAFO lane prints complete true on its invented costs. What does that flag rest on?",
   "options": [
    "The diesel emission factor was supplied.",
-   "Every cost box was typed.",
+   "No cost box was left blank.",
    "The payload fits.",
    "The fleet is sized."
   ],
   "answer": 1,
-  "explanation": "complete true says no cost line is missing. The carbon figure reads none because no diesel emission factor was supplied, and the engine says it is absent rather than zero; that does not make the cost answer incomplete."
+  "explanation": "complete true says no cost is missing. A blank or null cost box reads complete false with the cost named, and a cost left out of the call takes the default the signature states and still reads complete true. The carbon figure reads none because no diesel emission factor was supplied, and complete stays true. The payload check is the station's and the fleet is fleetSizing's."
  },
  {
-  "prompt": "On the lane, which input carries the weight of the trips a truck a day, the depreciation a trip and the fleet together?",
+  "prompt": "On the lane, which printed figure feeds the trips a truck a day, the depreciation a trip and the fleet together?",
   "options": [
-   "The transit loss of 0.3 percent, through the litres delivered.",
-   "The payload of 33000.00 litres, through the trips needed a day.",
-   "The invented Diesel line, through the cost a trip at each distance.",
-   "The cycle, through its typed queue hours and average speed."
+   "The litres delivered a trip, 32901.00.",
+   "The payload of 33000.00 litres.",
+   "The Diesel line, 278553.60 naira a trip.",
+   "The cycle, 18.065 hours."
   ],
   "answer": 3,
-  "explanation": "The cycle sets the trips a truck a day, 0.664260, which sets both the depreciation a trip and the fleet of 58. The queue hours and average speed are typed inputs, so they are the first to check."
+  "explanation": "Trips a truck a day = working hours / cycle, the truck's capital is spread over the trips a year that cycle allows, and fleetSizing takes the lane's trips a truck a day. The payload sets the trips needed and the litres delivered set the cost per litre; the Diesel line is one cost a trip."
  },
  {
   "prompt": "The IBAFO fleet of 58 runs at a fleet utilisation of 0.991038. What does that say about breakdowns?",
@@ -77,15 +77,15 @@
   "explanation": "A fleet utilisation is a figure for an average day. The spare of 0.345262 trips and 11393.64 litres a day is what the ceiling bought. A truck in the workshop changes what the fleet can make, and the engine prints no allowance for it."
  },
  {
-  "prompt": "At the IBAFO forecourt, which two inputs decide whether the queue is stable and whether a full truck can discharge?",
+  "prompt": "At one IBAFO forecourt with 6 nozzles, which utilisation, probability of waiting and mean wait does stationSizing print, in that order?",
   "options": [
-   "The litres a transaction and the dead stock.",
-   "Dispense rate and capacity.",
-   "The peak share and the reorder level.",
-   "The daily throughput and the delivery size."
+   "0.900000, 0.787753 and 47.2652 minutes.",
+   "0.878289, 1.000000 and none.",
+   "0.878289, 0.688546 and 2.2083 minutes.",
+   "1.053947, 1.000000 and none."
   ],
   "answer": 2,
-  "explanation": "The peak share sets the 135.00 transactions an hour the forecourt is sized for, and so whether the queue at 6 nozzles is stable. The reorder level sets the ullage at reorder, 28125.00 litres, into which the delivery must fit."
+  "explanation": "The forecourt table prints a utilisation of 0.878289, a probability of waiting of 0.688546 and a mean wait of 2.2083 minutes at 6 nozzles, stable true. 0.900000, 0.787753 and 47.2652 minutes are the rack at 4 bays, and 1.053947 with no mean wait is the forecourt at 5 nozzles, stable false."
  },
  {
   "prompt": "The IBAFO lane's payload reappears at the station. What does stationSizing check it against, and with which volume?",
@@ -102,23 +102,23 @@
   "prompt": "Along the IBAFO chain, what does a blank box give at each link?",
   "options": [
    "A typical figure the engine keeps for the link, named in a note.",
-   "A refusal, a named missing input or a floor, and never a silent zero.",
+   "A refusal, a none or a named gap, and never a silent zero.",
    "A zero at every link, with the answer marked complete.",
    "A refusal at the first link, and nothing printed after it."
   ],
   "answer": 1,
-  "explanation": "A blank driver cost reads complete false with Driver named; a blank truck capital reads a floor; a missing demand or nozzle count is refused. The chain holds only while every box was filled by someone who measured it."
+  "explanation": "A missing demand or nozzle count is refused. A farm with no daily throughput reads days of cover none. A blank fixed cost is taken as zero and named in assumedZero, a blank driver cost reads complete false with Driver named, and a blank truck capital cost reads a floor with Truck depreciation named."
  },
  {
-  "prompt": "The farm's days of cover of 3.8345 pools three products. What figure does the course give for the petrol that can be lifted today?",
+  "prompt": "The morning report asks which IBAFO tank is below its heel. Which row answers it?",
   "options": [
-   "IB-T1's pumpable 5078.400 m3.",
-   "The farm's pumpable 10123.000 m3.",
-   "IB-T2's stock of 164.700 m3.",
-   "IB-T1's stock of 5288.400 m3."
+   "IB-T2, 164.700 m3 against a heel of 210.000 m3.",
+   "IB-T4, 1377.000 m3 against a heel of 85.000 m3.",
+   "IB-T3, 3902.600 m3 against a heel of 150.000 m3.",
+   "IB-T1, 5288.400 m3 against a heel of 210.000 m3."
   ],
   "answer": 0,
-  "explanation": "IB-T2 holds petrol below its heel and adds nothing until it is filled above it. The days of cover divide all three products' pumpable stock by all liftings, so the petrol figure comes from the petrol tanks alone."
+  "explanation": "IB-T2's stock of 164.700 m3 is under its heel of 210.000 m3, and its pumpable stock prints 0.000 m3. The other three tanks hold more than their heels and print a pumpable stock above zero: IB-T1 5078.400 m3, IB-T3 3752.600 m3 and IB-T4 1292.000 m3."
  },
  {
   "prompt": "The Expert tier converts one cargo between tonnes, cubic metres, litres and barrels. Which input can a conversion between mass and volume not proceed without?",
@@ -140,7 +140,7 @@
    "The engine ships no rate by design."
   ],
   "answer": 3,
-  "explanation": "Real rates are set by regulation and contract, differ by market and change. The engine ships no rate for any of them, and the course invents every one, as it invented the throughput fee and the lane's costs in this tier."
+  "explanation": "RATE_DISCLAIMER calls every rate a required input, and each line of IMPORT_TEMPLATE and PUMP_TEMPLATE ships its rate as none. The course invents each rate it uses, as it invented the throughput fee and the lane's costs in this tier."
  },
  {
   "prompt": "On the lane a transit loss spread the trip's cost over fewer litres. Where does the Expert tier meet the same effect?",

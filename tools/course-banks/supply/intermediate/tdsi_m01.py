@@ -24,33 +24,33 @@ q(0, "The IBAFO rack is called with 9 arrivals an hour, 4 bays and a load time t
   "No refusal: stable true and a mean wait of none."],
  "A load that takes no time is a missing measurement. The digest's refusal table prints the load time of 0 against 9 arrivals and 4 bays with the sentence about the arrival rate and the load time, the same sentence a blank load time gets.")
 
-q(3, "At IBAFO the offered load is 3.6000 erlangs. What is an erlang in this model?",
- "One bay kept busy for a whole hour.",
- ["One truck arriving in an hour.",
-  "One mean load of 24 minutes.",
-  "The idle share of one bay's hour between loads."],
- "Offered load = arrivals per hour / (60 / load minutes). At 9 arrivals and 24 minutes a load it is 3.6000 erlangs: the arriving work would keep that many bays busy on average if it could be spread perfectly over them.")
+q(3, "At IBAFO the offered load is 3.6000 erlangs. How does rackQueue form it?",
+ "Arrivals per hour / (60 / load minutes).",
+ ["Arrivals per hour / (60 / load minutes) / bays.",
+  "Arrivals per hour x bays / (60 / load minutes).",
+  "Probability of waiting x bays."],
+ "The digest prints offered load (erlangs) = arrivals per hour / (60 / load minutes), and utilisation = offered load / bays. Dividing the offered load by the bays again gives the utilisation, 0.900000. The bay count is not in the offered load, and neither is the probability of waiting, 0.787753.")
 
 q(1, "The bay sweep holds IBAFO's 9 arrivals an hour and 24 minute loads. Going from 4 bays to 5, which printed figure moves, and how?",
  "The utilisation, from 0.900000 to 0.720000.",
  ["The offered load, from 3.6000 to 2.8000 erlangs.",
   "The probability of waiting, from 0.900000 to 0.720000.",
   "Neither ratio; both come from the traffic."],
- "Utilisation = offered load / bays, so it falls from 0.900000 to 0.720000. The offered load is a property of the traffic and the load time and reads 3.6000 erlangs in every row of the bay sweep. The 2.8000 erlangs belong to the arrivals sweep at 7 arrivals an hour, and the probability of waiting at 5 bays is 0.410394.")
+ "Utilisation = offered load / bays, and the bay sweep prints it falling from 0.900000 to 0.720000. The bay sweep prints no offered load, and the offered load formula, arrivals per hour / (60 / load minutes), has no bays in it. The 2.8000 erlangs belong to the arrivals sweep at 7 arrivals an hour, and the probability of waiting moves from 0.787753 to 0.410394.")
 
 q(2, "IBAFO's rack prints a utilisation of 0.900000 and a probability of waiting of 0.787753. What does 0.787753 measure?",
- "The chance that an arriving truck finds every bay busy and queues.",
+ "The chance that an arriving truck has to wait for a bay.",
  ["The share of each bay's hour spent loading, across the 4 bays.",
   "The chance a truck finding every bay busy is turned away.",
   "The share of the day's 216 trucks that load within the mean load minutes."],
- "The probability of waiting is Erlang C, a statement about how often the whole rack is full when a truck arrives. The share of bay time spent loading is the utilisation, 0.900000. A truck turned away belongs to the Erlang B model, which rackQueue does not report.")
+ "The digest names it: the probability that an arriving truck waits is Erlang C. 0.900000 is the utilisation, offered load / bays. Erlang B, the rack where a truck that finds every bay busy leaves, is not exported by the engine, and 216 is the trucks per day at this arrival rate.")
 
-q(3, "Two rows of the engine's sweeps share a utilisation of 0.600000. Which probability of waiting does the rack of 6 bays at 9 arrivals an hour print?",
+q(3, "The 6 bay rack at 9 arrivals an hour and the 4 bay rack at 6 arrivals an hour both print a utilisation of 0.600000. Which probability of waiting does the 6 bay rack print?",
  "0.196566",
  ["0.287043",
   "0.410394",
   "0.600000"],
- "The 6 bay rack at 9 arrivals prints 0.196566. The 4 bay rack at 6 arrivals has the same utilisation and prints 0.287043. A larger rack at the same utilisation pools more bays against the same bunching, so a utilisation limit quoted with no bay count is silent on the difference. 0.410394 is the 5 bay row and 0.600000 is the utilisation itself.")
+ "The bay sweep prints 0.196566 for 6 bays at 9 arrivals. The arrivals sweep prints 0.287043 for 4 bays at 6 arrivals, and the load minutes sweep prints the same 0.287043 for 4 bays at 16 minutes a load, also at 0.600000. The same utilisation prints two different probabilities. 0.410394 is the 5 bay row and 0.600000 is the utilisation itself.")
 
 q(3, "The digest prints an Erlang B of 0.270685 beside the IBAFO rack's Erlang C of 0.787753. Where does that Erlang B come from?",
  "The digest works it out from the engine's Erlang C by an identity.",
@@ -64,7 +64,7 @@ q(1, "What rack does the derived Erlang B of 0.270685 describe?",
  ["The IBAFO rack as it runs, where a truck that finds every bay busy waits in the yard.",
   "A rack where every truck waits in the yard.",
   "A rack of one bay, where B and C agree."],
- "Erlang B is the probability that every bay is busy in a rack with no waiting room, so the cost is a lost lifting. Erlang C, 0.787753, assumes the truck joins a line and loads later. A rack with a truck park is the waiting case, and that is the one rackQueue reports.")
+ "The digest defines this Erlang B for a rack with NO queue, in which a truck that meets every bay busy drives off, and works it out for IBAFO as 0.270685. rackQueue runs the M/M/c queue instead and reports its Erlang C, 0.787753.")
 
 q(2, "The load minutes are swept at 9 arrivals an hour on 4 bays. At 20 minutes a load, which figure is rackQueue's probability of waiting?",
  "0.509434",
@@ -78,14 +78,14 @@ q(3, "The IBAFO rack is called with its 9 arrivals and 24 minute loads and a bay
  ["The engine rounds the bay count up to 3 and prints the unstable row with a wait of none.",
   "REFUSED: Arrival rate and load time are both needed.",
   "The engine runs the Erlang recursion on 2.5 bays and prints a utilisation of 1.200000."],
- "The bay count enters the recursion as a count, and the engine checks it before anything else runs. A rack of 2.5 bays does not exist, and a tool that quietly rounds it up has changed the question without saying so. 1.200000 is the utilisation of a real 3 bay rack.")
+ "The refusal table prints this sentence for 2.5 bays, as for 0 bays and for none. The engine does not round the bay count. 1.200000 is the utilisation of the 3 bay rack in the bay sweep, and the sentence about the arrival rate and the load time belongs to a missing or zero load time.")
 
-q(0, "The bay count is left blank on an otherwise complete IBAFO call. Which answer does the engine give?",
+q(0, "The bay count is passed as none on an otherwise complete IBAFO call. Which answer does the engine give?",
  "The whole number sentence, the same one it gives for 0 bays.",
  ["A run on 4 bays, the typical count it keeps.",
   "The sentence asking for arrival rate and load time.",
   "The offered load alone, with every probability none."],
- "The refusal table prints the same sentence for 0, 2.5 and none: \"The number of bays must be a whole number, one or more.\" A blank bay count is a missing input, and the engine does not fill it with a typical figure.")
+ "The refusal table prints the same sentence for 0, 2.5 and none: \"The number of bays must be a whole number, one or more.\" The engine runs no rack on a typical count.")
 
 q(1, "What does the bay sweep print for the 3 bay rack at 9 arrivals an hour?",
  "Stable false, probability of waiting 1.000000.",
@@ -99,21 +99,21 @@ q(3, "Among the racks the bay sweep prints at 9 arrivals an hour, which is the s
  ["3 bays, at a utilisation of 1.200000, since 3.6000 erlangs rounds down to it.",
   "5 bays, the first row whose probability of waiting falls below 0.787753.",
   "6 bays, where the utilisation of 0.600000 matches the 4 bay rack at 6 arrivals."],
- "Stability needs a utilisation below one. The sweep marks 3 bays false and 4 bays true. Stable is a low bar: at 4 bays an arriving truck still waits with a probability of 0.787753, so keeping up on average and serving promptly are separate standards.")
+ "The bay sweep marks 3 bays stable false at a utilisation of 1.200000 and 4 bays stable true at 0.900000. At 4 bays an arriving truck still waits with a probability of 0.787753, and the mean wait is 47.2652 minutes.")
 
-q(2, "The engine counts 216 trucks a day at IBAFO's arrival rate. What does that count tell a depot manager?",
- "The mean arrival rate multiplied out over the day, with nothing on how trucks bunch.",
+q(2, "The engine counts 216 trucks a day at IBAFO's arrival rate. What is that count?",
+ "The trucks a day at the rack's mean arrival rate of 9 an hour.",
  ["The trucks the 4 bays can load in a day before the rack stops being stable.",
   "The trucks that load without waiting, the day's share not caught by the Erlang C.",
   "The day's liftings in trucks, the divisor the tank farm uses for days of cover."],
- "The day count is a mean rate multiplied out. It says nothing about how the trucks bunch within an hour, and bunching is what builds a queue. The tank farm divides by its daily throughput in m3, which the caller supplies.")
+ "The digest labels it trucks per day at this arrival rate, and the rate is 9 arrivals an hour. The bays do not enter it, and neither does the probability of waiting. The tank farm divides by its daily throughput in m3, 2640.000 m3.")
 
-q(0, "A depot turns trucks away at its gate when the yard is full. Why does the lesson say to note that beside rackQueue's probability of waiting?",
- "The engine models only the waiting case, so its figure describes a rack with a larger yard.",
- ["The engine then switches to the Erlang B model and prints the blocking probability instead.",
-  "A fenced yard lowers the arrival rate, and the engine cannot know the arrivals it lost.",
+q(0, "A depot turns trucks away at its gate when every bay is busy. Why note that beside rackQueue's probability of waiting?",
+ "rackQueue models an M/M/c queue, and the no-queue Erlang B is not exported.",
+ ["The engine then switches to Erlang B and prints the blocking probability instead.",
+  "rackQueue counts the turned away trucks in its mean queue length of 7.0898.",
   "The printed probability counts the turned away trucks twice, once at the gate and once queued."],
- "rackQueue assumes every truck that finds the bays busy joins a line and loads later. A depot that turns trucks away is partly a loss system, and its drivers meet something between the Erlang C of 0.787753 and the derived Erlang B of 0.270685.")
+ "The engine's figure is the Erlang C of an M/M/c queue, 0.787753, in which a truck that finds every bay busy waits. The digest works the no-queue Erlang B, 0.270685, out of it by an identity, and the engine exports none. Little's law gives its queue length of 7.0898 from the arrivals and the mean wait.")
 
 emit(Q, '/root/wt-md-supply-nextgen/tools/course-banks/supply/intermediate/tdsi_m01.json', label='tdsi_m01', expect_n=15)
 finish()

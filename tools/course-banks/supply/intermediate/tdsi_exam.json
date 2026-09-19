@@ -8,7 +8,7 @@
    "Nothing: the engine rounds 3.6000 bays to 4 and runs the rack."
   ],
   "answer": 2,
-  "explanation": "Offered load = arrivals per hour / (60 / load minutes), a property of the traffic and the load time. The bay count is a design decision that enters the recursion as a count, and 2.5 bays is refused with \"The number of bays must be a whole number, one or more.\""
+  "explanation": "Offered load = arrivals per hour / (60 / load minutes), and the bay count is not in it; utilisation = offered load / bays. The bay count must be a whole number: 2.5 bays is refused with \"The number of bays must be a whole number, one or more.\" The engine does not round it."
  },
  {
   "prompt": "Read the load minutes sweep at 26 minutes a load on IBAFO's 4 bays. Which set of figures does it print?",
@@ -41,7 +41,7 @@
    "60.0000 is the wait at 5 bays, 47.2652 the wait at 4."
   ],
   "answer": 1,
-  "explanation": "The digest prints 47.2652 / 0.787753 = 60.0000 minutes. Dividing by the probability of waiting leaves out the trucks that load at once. The time on site adds the load itself, and the 5 bay wait is 7.0353 minutes."
+  "explanation": "The engine's figure takes in the trucks that load at once. The digest divides it by the probability of waiting to reach the trucks that queue. 7.0353 minutes is the 5 bay rack, and the time on site is a separate row of the rack table."
  },
  {
   "prompt": "In the bay sweep at 9 arrivals an hour, the 6 bay row prints a mean wait of 1.9657 minutes. Which mean queue sits beside it?",
@@ -66,15 +66,15 @@
   "explanation": "The refusal table prints \"Arrival rate and load time are both needed.\" for a load time of none and for 0. The engine does not borrow a typical depot's load time."
  },
  {
-  "prompt": "With only 3 bays against IBAFO's traffic, the mean queue column is empty. Why?",
+  "prompt": "With only 3 bays against IBAFO's traffic, the mean queue column reads none. Why?",
   "options": [
-   "The engine prints queues only at 4 bays or more, where it is stable.",
+   "The mean queue at 3 bays is zero, and the engine prints a zero as none.",
    "No truck queues when all 3 bays are loading.",
    "Its Erlang B cannot be derived above one, so no queue can follow.",
    "A queue that grows without limit has no average length."
   ],
   "answer": 3,
-  "explanation": "At 3 bays the utilisation is 1.200000 and the rack is unstable. Just as no average wait exists, no average queue exists, and the engine prints none in both columns."
+  "explanation": "At 3 bays the utilisation is 1.200000, the rack is stable false and the probability of waiting is 1.000000, so every arriving truck waits. The engine prints none for both the mean wait and the mean queue, and where it states the reason it says the queue grows without limit."
  },
  {
   "prompt": "Between the 7 and 8 arrivals rows of the arrivals sweep, how does the chance of queueing move?",
@@ -96,7 +96,7 @@
    "Each tank's capacity less its heel, summed over the tanks."
   ],
   "answer": 2,
-  "explanation": "Ullage is counted the same way as pumpable stock: tank by tank. The farm's ullage is 11767.300 m3, and a receipt can use only the ullage of the tank its product goes into."
+  "explanation": "Ullage is counted the same way as pumpable stock, tank by tank: each tank's capacity less its stock, never below zero, summed over the tanks, 11767.300 m3. The heel is not in the ullage formula; it enters working capacity and pumpable stock."
  },
  {
   "prompt": "Read IB-T1's row: 5288.400 m3 in the tank above a 210.000 m3 heel. Which pumpable figure sits in it?",
@@ -118,7 +118,7 @@
    "Daily throughput x 365 / working capacity."
   ],
   "answer": 3,
-  "explanation": "Turns a year = daily throughput x 365 / working capacity, 2640.000 m3 a day over 21845.000 m3. The heel never turns, so the divisor leaves it out."
+  "explanation": "Turns a year = daily throughput x 365 / working capacity, 2640.000 m3 a day over 21845.000 m3, which is capacity less heel. Pumpable stock over daily throughput is the days of cover, 3.8345."
  },
  {
   "prompt": "On this IBAFO morning, which tank decides that the netted and tank-by-tank stock figures part company?",
@@ -129,18 +129,18 @@
    "IB-T2, below its heel."
   ],
   "answer": 3,
-  "explanation": "IB-T2 holds 164.700 m3 against a heel of 210.000 m3. When every tank stands above its heel the two methods agree; they part on a morning when a tank runs low."
+  "explanation": "The tank-by-tank count gives IB-T2 0.000 m3, since it holds 164.700 m3 against its 210.000 m3 heel. The netted farm figure charges IB-T2's heel against the product in the other three tanks, which the digest rules out: no pump lends one tank's volume to another's heel."
  },
  {
-  "prompt": "Where does the farm total of 655.000 m3 in the heel column come from?",
+  "prompt": "The IBAFO farm prints a working capacity of 21845.000 m3. What does the engine take off the capacity of 22500.000 m3 to reach it?",
   "options": [
-   "A fixed share of the farm's 22500.000 m3 capacity.",
-   "The stock the engine holds back from the daily liftings.",
-   "The sum of the four tanks' typed heels.",
-   "The volume below the lowest dip on the strapping tables."
+   "The farm's ullage, 11767.300 m3.",
+   "The farm's stock, 10732.700 m3.",
+   "The farm's heel, 655.000 m3.",
+   "IB-T2's heel alone, 210.000 m3."
   ],
   "answer": 2,
-  "explanation": "Each tank carries its own heel: 210.000, 210.000, 150.000 and 85.000 m3. The farm's working capacity is its capacity less that heel, 21845.000 m3."
+  "explanation": "The digest defines working capacity as capacity less heel, and the farm rows read 22500.000 m3, 655.000 m3 and 21845.000 m3. 11767.300 m3 is the ullage and 10732.700 m3 the stock; 210.000 m3 is one tank's heel."
  },
  {
   "prompt": "IBAFO's invented costs are 2.35 USD/m3 variable and 9400.00 USD fixed. Which margin does the engine print with both typed?",
@@ -151,7 +151,7 @@
    "1.89 USD"
   ],
   "answer": 0,
-  "explanation": "Margin = revenue - throughput x variable cost - fixed cost, 4988.00 USD. 14388.00 USD is the margin with the fixed cost blank and taken as zero, 20592.00 USD the revenue, and 1.89 USD the margin per m3."
+  "explanation": "The margin takes both invented costs off the revenue, and with both typed assumedZero reads none and the margin 4988.00 USD. Leaving the fixed cost blank lifts it to 14388.00 USD; the other two options are the revenue and a per m3 column."
  },
  {
   "prompt": "What does assumedZero report on a throughputEconomics answer?",
@@ -173,7 +173,7 @@
    "none"
   ],
   "answer": 1,
-  "explanation": "Emissions = loss tonnes x factor: 3.4279 tonnes at the synthetic factor gives 2913.7320 kg CO2e. 1.481061 is the intensity per tonne of throughput, and 3.4279 is the loss in tonnes."
+  "explanation": "The synthetic 850 kg CO2e a tonne multiplies the loss tonnes, and the case with factor and density supplied prints the product as 2913.7320 kg CO2e. The other two numbers are a weight and an intensity."
  },
  {
   "prompt": "The carbon columns of the IBAFO cases fail in a chain. With no density, where does the first none fall?",
@@ -187,15 +187,15 @@
   "explanation": "Each none sits at the first link with no input and at every link after it. Without a density the loss has no weight, so loss tonnes, emissions and the intensity all read none; without a factor the first none is the emissions."
  },
  {
-  "prompt": "Which course owns discounting and investment appraisal, if IBAFO's throughput margin is to be turned into a valuation?",
+  "prompt": "The IBAFO period prints three carbon cases: factor and density supplied, no emission factor, and no density. Which of them print a margin of 4988.00 USD?",
   "options": [
-   "This course's Expert tier, which discounts the margin to a value.",
-   "The refinery course, which owns a refinery's margin and its value.",
-   "The Economics courses; this course teaches no NPV or IRR.",
-   "The crude course, which owns blending and the value of a blend."
+   "Only the case with the factor and the density supplied.",
+   "The two cases with a density, since the loss is priced.",
+   "All three cases, whatever the carbon side reads.",
+   "None of them, since the margin waits on the carbon side."
   ],
   "answer": 2,
-  "explanation": "The throughput margin is a period's margin and never a valuation: it discounts nothing and carries no capital. The Economics courses own discounting and investment appraisal."
+  "explanation": "The digest prints revenue 20592.00 USD and margin 4988.00 USD in all three rows. The margin is revenue less the variable and fixed costs; a missing factor or density leaves the carbon columns none and moves no money figure."
  },
  {
   "prompt": "On the IBAFO lane, why is trips a truck a day 0.664260, below one?",
@@ -250,7 +250,7 @@
    "10.000000 trips needed, 16 trucks, fleet utilisation 0.940897."
   ],
   "answer": 3,
-  "explanation": "The demand sweep prints 10.000000 trips needed, 16 trucks and 0.940897 at 330000.00 litres a day. 0.991038 belongs to 1260000.00 litres, and 0.992594 to 1980000.00."
+  "explanation": "The first row of the demand sweep, 330000.00 litres a day, needs 10.000000 trips, which 16 trucks cover at a fleet utilisation of 0.940897. The other utilisations and 31 trucks belong to larger demands."
  },
  {
   "prompt": "The IBAFO forecourt sells 36000.00 litres a day at 32 litres a transaction with a peak share of 0.12. Which figures does stationSizing print?",
@@ -316,7 +316,7 @@
    "The rack reads the lane's 1.75 hours as its load time."
   ],
   "answer": 1,
-  "explanation": "The lane's queue hours are an allowance for all the waiting in a cycle, at the depot and at the stations, typed by the caller. The rack model prints its own wait, and it is the caller's job to make the lane's figure honest."
+  "explanation": "The lane types its own 1.75 h queueing into the cycle, and the rack's mean wait prints 47.2652 minutes. The cycle is round trip / average speed + load + discharge + queue hours, with no rack figure in it, and the rack's load time is 24 minutes."
  },
  {
   "prompt": "A blank fixed cost in throughputEconomics and a blank driver cost in truckingEconomics are treated how?",
@@ -338,7 +338,7 @@
    "All three are queue figures."
   ],
   "answer": 2,
-  "explanation": "The rack and the forecourt are both rackQueue, with bays or nozzles. The fleet utilisation is the share of the fleet's trip capacity the demand uses, a figure the ceiling sets, and it has nothing to do with a queue."
+  "explanation": "The rack and the forecourt are both rackQueue, with bays or nozzles, and utilisation = offered load / bays. The fleet's trucks are the ceiling of trips needed over trips a truck a day, and fleetSizing reports the spare the ceiling buys; no queue enters it."
  },
  {
   "prompt": "The farm's daily throughput is 2640.000 m3 and the throughput economics period throughput is also 2640.000 m3. What does each call use it for?",
@@ -355,23 +355,23 @@
   "prompt": "The station's dead stock of 2500.00 litres and IB-T3's heel of 150.000 m3 play which common role?",
   "options": [
    "Free water that the dip less the water height removes.",
-   "Ullage kept empty for the next receipt.",
-   "Volume below the suction that cannot be sold, taken off before usable room is counted.",
+   "Ullage kept empty so that the next receipt has room to discharge into the tank.",
+   "Volume taken off the capacity before the usable or working room is counted.",
    "A reserve the operator holds for breakdowns."
   ],
   "answer": 2,
-  "explanation": "The station's usable litres are capacity less dead stock, 37500.00 litres, just as a depot tank's working capacity is capacity less heel. Both are typed for the tank."
+  "explanation": "The station's usable litres are capacity less dead stock, 37500.00 litres, and a depot tank's working capacity is capacity less heel. Room for a receipt is the ullage, capacity less stock, and neither figure is water or a breakdown reserve."
  },
  {
-  "prompt": "Where must a receipt's room be counted, at the depot and at the station alike?",
+  "prompt": "The IBAFO farm prints an ullage, and the IBAFO forecourt prints an ullage at reorder. Which pair does the digest print?",
   "options": [
-   "In the tank the product goes into.",
-   "Across the whole farm or forecourt.",
-   "In the tank with the lowest stock.",
-   "In the tank nearest the rack."
+   "Farm 11767.300 m3; forecourt 28125.00 litres.",
+   "Farm 10123.000 m3; forecourt 28125.00 litres.",
+   "Farm 11767.300 m3; forecourt 11875.00 litres.",
+   "Farm 21845.000 m3; forecourt 37500.00 litres."
   ],
   "answer": 0,
-  "explanation": "A gas oil receipt at IBAFO has IB-T3's 1097.400 m3 of ullage, however much room the petrol tanks have. A station delivery must fit the ullage at reorder, 28125.00 litres at IBAFO's forecourt."
+  "explanation": "The farm's ullage is each tank's capacity less its stock, summed, 11767.300 m3. The forecourt's ullage at reorder is capacity less the reorder level, 28125.00 litres. 10123.000 m3 is the farm's pumpable stock, 11875.00 litres the reorder level, and 21845.000 m3 and 37500.00 litres are the working capacity and the usable tank litres."
  },
  {
   "prompt": "The farm prints 3.8345 days of cover to four decimals; the station prints 1.04 cover days. Why only two decimals at the station?",
@@ -396,7 +396,7 @@
   "explanation": "A bay count is an input that must be a whole number, one or more. The fleet's trucks are computed, and the engine takes the ceiling and reports the spare it buys, 0.345262 trips a day."
  },
  {
-  "prompt": "Which two notes say a carbon figure is absent because the engine ships no factor?",
+  "prompt": "Which two notes say a carbon figure is absent because no emission factor was supplied?",
   "options": [
    "The depot's no-density note and the lane's diesel note, both about factors.",
    "The depot's no-density note and assumedZero.",
@@ -420,13 +420,13 @@
  {
   "prompt": "The daily count of 216 trucks at the rack sits beside days of cover of 3.8345. Why does the farm not use the truck count?",
   "options": [
-   "216 is below the farm's liftings in m3 a day.",
+   "The count is per hour, and the farm needs a day.",
    "The farm counts its liftings in trucks per hour.",
    "The count is an Erlang B figure.",
    "The rack model carries no load volume."
   ],
   "answer": 3,
-  "explanation": "The daily throughput in m3 is a measured or planned rate the caller supplies. The rack's 216 trucks a day is a count of trucks, whose loads the rack model does not carry."
+  "explanation": "The farm table labels its divisor daily throughput (liftings), in m3, and with no daily throughput the farm gives days of cover none. The rack's 216 is labelled trucks per day at this arrival rate, and its inputs are arrivals, load minutes and bays, with no volume."
  },
  {
   "prompt": "Both the lane's floor and the no-density period show the engine stopping at a missing link. What does each still print?",
