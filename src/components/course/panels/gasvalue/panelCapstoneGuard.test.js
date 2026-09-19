@@ -52,7 +52,7 @@ const EXPECTED_SOURCES = [
   'RolloutExplorer.jsx',
   PAGE_FILE,
 ];
-const EXPECTED_TESTS = ['gasvalueLab.test.js', 'panelCapstoneGuard.test.js'];
+const EXPECTED_TESTS = ['capstonePrompt.test.jsx', 'gasvalueLab.test.js', 'panelCapstoneGuard.test.js'];
 const THE_LAB = 'gasvalueLab.js';
 
 const readPage = () => {
