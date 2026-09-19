@@ -108,11 +108,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261010_cr_crude_course                    ) echo UNPINNED ;;
-    20261010_cr_crude_beginner_deep             ) echo UNPINNED ;;
-    20261010_cr_crude_intermediate_deep         ) echo UNPINNED ;;
-    20261010_cr_crude_advanced_deep             ) echo UNPINNED ;;
-    20261010_cr_crude_go_live                   ) echo UNPINNED ;;
+    20261010_cr_crude_course                    ) echo b8ce02702be8e725ee31716c3f1747eda8d8aa8912c76096bd396921f5099686 ;;
+    20261010_cr_crude_beginner_deep             ) echo 79910f752115ae60695d58f49c5651e995b9e0b90ee8c5111cb4d9e07298585b ;;
+    20261010_cr_crude_intermediate_deep         ) echo b7ee7eb76dbdd55f0eb85bc29536eb728ae8a19b1ca80be52de69cf72ab100b4 ;;
+    20261010_cr_crude_advanced_deep             ) echo 59d803811669c59305f0b681f563fc71ae8151a31172fbb464804f89cf30b126 ;;
+    20261010_cr_crude_go_live                   ) echo 3e2c5aba0c7ecac8c90d3711c327b8ca90e2637c94a48471acb3578f05b8e6c5 ;;
     *) echo UNPINNED ;;
   esac
 }
