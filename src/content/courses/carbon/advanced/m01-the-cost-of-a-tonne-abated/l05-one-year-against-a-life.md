@@ -1,1 +1,48 @@
 # One year against a life
+
+This tier is built on one trap. A one-off capital cost set against one year's saving makes every capital measure look expensive. The engine refuses to make that comparison, and the digest prints the result of making it anyway, so that the trap can be seen. Every AGBOR figure here is invented for this course and in US dollars.
+
+{{panel:carbon-abatement-explorer}}
+
+## The engine's refusal
+
+When a measure with capital has no life, the cost of a tonne refuses and says why:
+
+REFUSED: Measure "Heat integration project" has a capital cost, so it needs a life to annualise it over. Comparing a one-off capital cost against a recurring saving makes every measure look expensive.
+
+The life is the box that lets a capital cost be spread across the years that the saving recurs. Without it there is no annualised capital.
+
+## The wrong route, printed for contrast
+
+SECTION 18 computes one more column from the inputs: the whole capital set against one year. It is marked computed here, from the inputs, and the digest says the engine refuses to compare a one-off cost with a recurring saving. It is the digest's figure and it is the wrong route. It is never an answer.
+
+| measure | cost per tonne at 0.1 USD | capital against one year USD per tonne (computed here) |
+| --- | --- | --- |
+| Tune the fired heaters | -167.4364 | -150.0000 |
+| Repair failed steam traps | -156.4390 | -133.0435 |
+| Heat integration project | -14.2492 | 688.2353 |
+| Flare gas recovery | 78.1002 | 764.5161 |
+| Solar for purchased power | 45.8573 | 823.3333 |
+| Vapour recovery on the storage tanks | 35.4193 | 316.7568 |
+
+## Reading the two columns
+
+The Heat integration project carries 2750000 USD of capital over 15 years. Levelised at 0.1 it costs -14.2492 USD a tonne and pays for itself. Set against one year, the same measure reads 688.2353 USD a tonne. One figure has a minus sign and the other does not.
+
+Solar for purchased power carries 1850000 USD over 20 years. Levelised it costs 45.8573 USD a tonne. Against one year it reads 823.3333 USD a tonne.
+
+Tune the fired heaters, with 18000 USD over 5 years, and Repair failed steam traps, with 45000 USD over 3 years, print a minus sign in both columns: -150.0000 and -133.0435 against one year. Their savings are 132000 and 198000 USD a year.
+
+Read the column as a whole. It takes each measure's entire capital into a single year, so a measure that pays for itself over 15 years, the Heat integration project, prints 688.2353 USD a tonne there. That is the shape the engine's sentence names: set a one-off capital cost against a recurring saving and the measure looks expensive. The levelised column is the one this tier teaches and the one the curve is built from.
+
+## The same trap in a saving
+
+The trap returns in module five. A saving priced in money and carbon has an implementation cost, and SECTION 23 prints its levelised cost per tonne as -74.2270 USD beside a figure computed by setting the whole cost against one year's value and one year's tonnes: 183.5403 USD a tonne. The second is the wrong route there too.
+
+## What to carry
+
+Quote the levelised figure. When a capital figure and a one-year saving sit side by side on a page, the engine's refusal sentence is the reason not to divide one by the other. The capital recovery factor exists to put the capital on the same yearly footing as the saving and the tonnes.
+
+## Exercise
+
+Read the levelised cost per tonne and the capital-against-one-year figure for the Heat integration project and for Tune the fired heaters, with each measure's capital and life. Say what the two pairs, read with the capital and the life, show about which measures the one-year route distorts, and why the digest prints that column only for contrast.
