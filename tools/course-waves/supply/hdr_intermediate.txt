@@ -1,0 +1,30 @@
+-- ============================================================================
+-- supply PROFESSIONAL DEEP SEED: Terminals, Depots & Fuel Supply, intermediate
+-- tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE RACK, THE TANK FARM AND THE LANE. A loading rack is
+-- an M/M/c queue, so the probability of waiting is Erlang C and a rack near
+-- full has a queue; bays are whole numbers; pumpable stock is counted tank by
+-- tank above each tank's own heel; a loss has a weight only with a density;
+-- trips a truck a day come from the cycle, and the cost of a litre delivered
+-- is spread over what arrives; a fleet is a ceiling; and a forecourt is the
+-- same queue as a rack.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A queue has no average wait once arrivals
+-- reach what the bays can load, and the engine says so instead of printing a
+-- number.
+--
+-- THE TRAP THE TIER IS BUILT ON. Averages hide the queue: utilisation below
+-- one still leaves most trucks waiting when the rack is nearly full, a heel
+-- netted across the farm lends volume no pump can move, and a blank cost box
+-- is a missing cost.
+--
+-- The capstone grades a probability to four decimals (tolerance 0.0001), a
+-- wait in minutes, a pumpable stock in m3 and days of cover to two decimals
+-- (tolerance 0.01), a cost per litre delivered to four decimals (tolerance
+-- 0.0001) and a whole number of trucks (tolerance 0.5).
+-- ============================================================================

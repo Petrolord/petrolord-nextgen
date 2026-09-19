@@ -1,0 +1,189 @@
+{
+ "slug": "supply",
+ "prefix": "tds",
+ "name": "Terminals, Depots & Fuel Supply",
+ "pathOrder": 50,
+ "module": "downstream",
+ "moduleLabel": "Midstream & Downstream",
+ "prerequisite": null,
+ "repo": "/root/wt-md-supply-nextgen",
+ "branch": "feat/md-supply-course",
+ "siblings": [
+  {
+   "slug": "crude",
+   "pathOrder": 48,
+   "branch": "feat/md-crude-course",
+   "repo": "/root/wt-md-crude-nextgen"
+  },
+  {
+   "slug": "refinery",
+   "pathOrder": 49,
+   "branch": "feat/md-refinery-course",
+   "repo": "/root/wt-md-refinery-nextgen"
+  }
+ ],
+ "asOf": null,
+ "goldens": [
+  "downstream/goldens/terminaldepot_cases.json",
+  "downstream/goldens/fuelpricing_cases.json"
+ ],
+ "engines": [
+  "engines/downstream/terminalDepot.js",
+  "engines/downstream/fuelPricing.js"
+ ],
+ "enginesVendoredAt": "NextGen, sha-identical with engines 60ee266 (MD3-0, engines PR #221) through the lead's shared vendor commit b1f29251 ('chore(engines): vendor the downstream family (engines 60ee266) for the Commercial & Trading courses'). Not re-vendored by this wave.",
+ "plan": {
+  "state": "FOUNDATION: recon, structure, digest, eighteen graded fields, scaffold and task files. No lesson, bank, panel or migration.",
+  "thesis": "A terminal's stock, a cargo's cost and a litre's pump price are each a chain of measured inputs walked in a stated order, and the engine refuses or names every link nobody measured (an opening stock, a strapping entry, a coefficient, a rate) instead of assuming it, because a figure that cannot come out wrong proves nothing.",
+  "tiers": {
+   "beginner": "THE TANK AND THE DAY: strapping, free water, the VCF form, the reconciliation from an opening stock, the trend. Graded: six volumes in m3 at 0.01.",
+   "intermediate": "THE RACK, THE TANK FARM AND THE LANE: Erlang C, pumpable stock tank by tank, throughput economics, the lane, the fleet, the station. Graded: a probability at 0.0001, a wait, a stock and days of cover at 0.01, a cost per litre at 0.0001, a truck count at 0.5.",
+   "advanced": "THE CARGO AND THE PRICE: one cargo every way, the landed cost walk, insurance on CIF, the ocean loss, the pump price waterfall, the government share, the exchange rate that breaks a cap. Graded: two dollar figures and an exchange rate at 0.01, three naira-a-litre figures at 0.0001."
+  },
+  "cases": {
+   "teaching": [
+    "AKODO",
+    "IBAFO",
+    "BADAGRY"
+   ],
+   "capstone": [
+    "OKOMU",
+    "OGWASHI",
+    "ORON"
+   ]
+  }
+ },
+ "digest": {
+  "lines": 634,
+  "sections": 24,
+  "withheld": null,
+  "note": "No section is history. SECTION 23 states the held items and the MD3-0 rules in force in the present tense, each with a measured figure. No clock is read, so the digest carries no as-of date."
+ },
+ "grading": {
+  "grader": "public.academy_submit_capstone reads expected, tol and the answer as numeric, so every graded field is a number the engine returns; verdicts, directions and refusals are taught and never graded.",
+  "tolerance": "One unit in the last place the prompt asks for (0.5 for the one whole number): the engine rounds CIF and the landed total to the cent and the landed and pump prices to four decimals, so a correct reading can sit half a unit from the stored value on each side. One derivation: CLASSES in supply_capstone.mjs; precision.json is written from it and passes gradeprecision.py 18 of 18.",
+  "collisionRule": "No graded value within its tolerance of the absolute value of any number token the digest prints (the go-live rule), and no two graded values within the looser of their tolerances."
+ },
+ "findings": {
+  "T1-page": "TAUGHT as a demonstration (SECTION 7): an opening stock taken from today's dip balances every day. Suite origin/main still does it; the repair is on the unmerged Suite branch fix/md3-0-supply-apps (41a974862 re-vendor 60ee266, 9ea9c63ad opening stock input). Go-live depends on it.",
+  "F-R1": "rackQueue accepts loadMinutes 0 (60/0 = Infinity) and reports a perfect rack. Not taught, not graded, reported for repair or hold.",
+  "F-R2": "throughputEconomics reads a blank fee, cost, throughput or loss as 0 with no note; tankFarmCover with no daily throughput returns daysOfCover null but turnsPerYear 0. Not taught, not graded; SECTION 2's claim scoped to measured inputs.",
+  "F-R3": "the engines repo's own terminalDepot unit test types a coefficient row { k0: 594.5418, k1: 0, k2: 0 } that looks published; the course uses a synthetic row only.",
+  "page": "Suite page (origin/main and 9ea9c63ad): days of cover on receipts plus deliveries, a gain counted as a loss for emissions, one density for the whole terminal. Not taught as app behaviour; the page's cover route is a discriminate wrong route.",
+  "oracle-coverage": "The day ledger and the farm block live in the oracles' main(); oracle_check.py transcribes them and says so. Recommend exporting day_ledger() and farm_cover() from oracle_terminaldepot.py.",
+  "clock": "Neither engine reads a clock or a random number: source read, fake clock and fake random rebuilds byte-identical."
+ },
+ "decisions": [
+  "Every graded field is the engine's full-precision return, graded at one unit in the last place the prompt asks for (0.5 for the truck count).",
+  "Standard volumes are graded from a VCF typed off the depot's own tables (invented), because the oracle pins the ASTM D1250 form without validating it and no coefficient table is shipped; the computed VCF is taught on a SYNTHETIC row and never graded.",
+  "The ORON pump price starts from the landed cost per litre at four decimals, as the Fuel Pricing page passes landed.perLitreLocal, and the prompt says so.",
+  "Days of cover are graded on liftings (the engine's definition); the page's receipts-plus-deliveries figure is a discriminate wrong route.",
+  "The kit leakage sweep of the lessons is REFUSED at the foundation (placeholders carry no number); gate_leakage_digest.sh runs the same kit gate over the digest split by owning tier instead.",
+  "Manifests carry the three panel ids, so courseContent.test.js 'every panel referenced is registered' is red until the panel phase registers them.",
+  "The downstream module is NOT added to src/lib/academyModules.js; the lab agent adds it for all three courses."
+ ],
+ "gates": {
+  "structure": {
+   "file": "structure.py",
+   "md5": "3aec570bce09ba76ef696c9214e07778",
+   "result": "exit 0: panels: 72 of 78 lessons carry one; ids ['supply-depot-explorer', 'supply-price-explorer', 'supply-tank-explorer']"
+  },
+  "engine-suites": {
+   "file": "run_gates.sh",
+   "md5": "213123219a4a92f36f96f923f10425fc",
+   "result": "exit 0: Tests:       135 passed, 135 total"
+  },
+  "digest-repro": {
+   "file": "gate_repro.sh",
+   "md5": "7c4adc86c8be3e02200d42c7e6ca13be",
+   "result": "exit 0: gate_repro: PASS"
+  },
+  "kit-digestrepro": {
+   "file": "/root/dc-wavekit/digestrepro.sh",
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "result": "exit 0: NOTE: no truth-*.json in this wave. If numsweep runs here, harvest_digest.py first."
+  },
+  "clock": {
+   "file": "gate_clock.sh",
+   "md5": "b88b2246ca1e4f190a8eb61b68c2b9cd",
+   "result": "exit 0: gate_clock: PASS"
+  },
+  "kit-digestprose": {
+   "file": "/root/dc-wavekit/digestprose.mjs",
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "result": "exit 0: [digestprose] /root/md-wip-supply/digest.txt: 634 line(s), 24 section title(s) and 11 in-body marker(s) swept against their blocks, 32 history framings, 38 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 4 deferred as verbatim engine strings; 0 failing"
+  },
+  "kit-digestfigures": {
+   "file": "/root/dc-wavekit/digestfigures.py",
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "result": "exit 0: [digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "capstone-generator": {
+   "file": "supply_capstone.mjs",
+   "md5": "9edf1fdfaa4e5a8d003a56f3d8a4626c",
+   "result": "exit 0: advanced      oron_breakeven_fx                        1682.8320980072021     tol 0.01"
+  },
+  "oracle-check": {
+   "file": "oracle_check.py",
+   "md5": "9a4f3a7715224f8b3c35ad354e95f518",
+   "result": "exit 0: fields compared: 18; disagreements beyond tolerance: 0; largest disagreement 0.3500 of a tolerance (oron_pump_price_ngn)",
+   "control": "exit 1: fields compared: 18; disagreements beyond tolerance: 1; largest disagreement 2.0000 of a tolerance (ogwashi_days_of_cover)"
+  },
+  "discriminate": {
+   "file": "discriminate.mjs",
+   "md5": "98cc777fef948c83f283b170558fe2fd",
+   "result": "exit 0: the closest miss anywhere in the eighteen: ogwashi_trucks_required by route trips_rounded_down, 2.0 tolerances out",
+   "control": "exit 1: the closest miss anywhere in the eighteen: ogwashi_trucks_required by route trips_rounded_down, 2.0 tolerances out"
+  },
+  "collisions": {
+   "file": "gate_collisions.py",
+   "md5": "5cde831d2cb5fd2db3ab0169b3b04b65",
+   "result": "exit 0: collisions with the digest: 0; graded pairs sharing a value: 0",
+   "control": "exit 1: collisions with the digest: 1; graded pairs sharing a value: 0"
+  },
+  "kit-collisions": {
+   "file": "/root/dc-wavekit/collisions.py",
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "result": "exit 0: fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "promptleak": {
+   "file": "gate_promptleak.py",
+   "md5": "631065c74665624820a48afbdd202977",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 2"
+  },
+  "capstone-leak": {
+   "file": "gate_capstone_leak.py",
+   "md5": "2d9241c7440731f3b272cf901b121f1b",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 2"
+  },
+  "leakage-digest": {
+   "file": "gate_leakage_digest.sh",
+   "md5": "61d3b1576f24891b63ec9344de68735c",
+   "result": "exit 0: => fatal downward leaks: 0   same-tier answer prints: 0",
+   "control": "exit 1: => fatal downward leaks: 1   same-tier answer prints: 0"
+  },
+  "kit-leakage-lessons": {
+   "file": "/root/dc-wavekit/leakage.mjs",
+   "md5": "7233b8e7bc3842faf645daacbe3a8ddc",
+   "result": "exit 2: This gate does not pass on an empty or unreadable sweep."
+  },
+  "copy-rule": {
+   "file": "gate_copy_rule.py",
+   "md5": "da5dbd33a7a9696d699efd75b88dd6f3",
+   "result": "exit 0: violations: 0",
+   "control": "exit 1: violations: 2"
+  },
+  "kit-gradeprecision": {
+   "file": "/root/dc-wavekit/gradeprecision.py",
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "result": "exit 0: [gradeprecision] /root/md-wip-supply: 18 graded field(s), 18 OF 18 CLASSIFIED against 4 precision clause(s) in the digest header and 8 declared class(es)"
+  },
+  "kit-sourceprose": {
+   "file": "/root/dc-wavekit/sourceprose.mjs",
+   "md5": "c370c51a0af6d3f8098ae859fb28ae1e",
+   "result": "exit 0: [sourceprose] 4 source file(s), 216 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
+  }
+ }
+}
