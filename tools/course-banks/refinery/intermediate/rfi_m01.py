@@ -50,7 +50,7 @@ q(2, "What utilisation does the plan report for the hydrotreater typed as 0, and
   "0.00 percent for both, because neither has a finite capacity to fill."],
  "A utilisation needs a finite capacity above zero. A blank is no limit and a zero cannot be divided into, so the plan prints null in both cases.")
 
-q(0, "What margin change from the plan as typed is printed for the hydrotreater typed as shut, and for its capacity left blank?",
+q(0, "How far does the month's margin move from the plan as typed when the hydrotreater is shut, and when its box is emptied?",
  "-6653670.77 for the typed zero, and 95572.87 for the blank.",
  ["95572.87 for the typed zero, and -6653670.77 for the blank.",
   "-6653670.77 for the typed zero, and -230175.48 for the blank.",
@@ -106,12 +106,12 @@ q(2, "A crude cargo is cancelled for the month. Which entry tells the plan so?",
   "Its cost left blank, so the engine drops the crude from the plan."],
  "A limit typed as 0 is a limit of zero. A blank availability is no limit, and a blank cost is refused by name. The Forcados cargo cancelled is entered the same way, availability typed 0.")
 
-q(3, "The plan is given a yield of 0.3100 gasoil for Bonny Light (illustrative). What does it do with that figure?",
- "It uses it exactly as typed; a changed yield makes a different configuration.",
- ["It normalises each crude's yields to close before it solves the month.",
-  "It checks the yield against the crude's quality and adjusts the stream.",
-  "It swaps in the assay yield held for the grade name in the crude course."],
- "Yields are data typed into the configuration. The plan does not question a yield and carries no quality, and the grade names are labels on invented yields.")
+q(3, "Bonny Light (illustrative) carries a gasoil yield of 0.3100. What kind of figure is that yield?",
+ "A volume fraction: each barrel of Bonny Light run makes 0.3100 of a barrel of gasoil.",
+ ["A mass fraction: 0.3100 of the weight of every barrel of Bonny Light comes out as gasoil.",
+  "The share of the Diesel hydrotreater's gasoil feed that Bonny Light supplies in the month.",
+  "The fraction of each barrel of gasoil that the Diesel hydrotreater turns into ulsd."],
+ "Yields are volume fractions, and Bonny Light (illustrative)'s row prints gasoil 0.3100 beside naphtha 0.2300, kero 0.1500, residue 0.2800 and offgas 0.0300. The hydrotreater's own yield on its gasoil feed is ulsd 0.9700.")
 
 emit(Q, '/root/wt-md-refinery-nextgen/tools/course-banks/refinery/intermediate/rfi_m01.json', label='rfi_m01', expect_n=15)
 finish()

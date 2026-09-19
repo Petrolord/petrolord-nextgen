@@ -58,12 +58,12 @@ q(0, "Where in each week does ABUA's schedule date a unit run, and where a produ
   "Runs on every day of the period, lifts once at the period's end, 2027-03-31."],
  "Runs fall on 2027-03-01, 2027-03-08, 2027-03-15, 2027-03-22 and 2027-03-29. Lifts fall on 2027-03-07, 2027-03-14, 2027-03-21, 2027-03-28 and 2027-03-31, the fifth week cut short by the end of the period.")
 
-q(2, "Why does ABUA's schedule make no events for Naphtha export and Gasoil export?",
- "Both sell 0.00 bbl in the plan, and the schedule moves only what the plan sells.",
- ["Both are export grades, and the schedule dates only products sold at the gate.",
-  "Their streams leave the refinery inside the crude receipts, so need no lifts.",
-  "Their lifts fall after 2027-03-31, outside the 31 days of the period."],
- "The schedule is the plan cut into dated pieces. A product the plan does not sell is a product the schedule does not move, so only four products are lifted, product lifts 20.")
+q(2, "What does ABUA's event table carry for Naphtha export and Gasoil export?",
+ "No lift at all; the table lifts gasoline, jet, diesel and fuel_oil.",
+ ["Five lifts each of 0.00 bbl, dated with the other products.",
+  "One lift each, on 2027-03-31, the last day of the period.",
+  "Five lifts each, valued at 72.5000 and 89.5000 a barrel."],
+ "The product lifts, lift-22 to lift-41, are five each for gasoline, jet, diesel and fuel_oil, product lifts 20. Both exports sell 0.00 bbl in the plan and appear in neither the event table nor the totals table.")
 
 q(1, "The cdu run dated 2027-03-29 falls in a week cut short by the end of March. What quantity does it carry?",
  "405806.45 bbl, the same as each of the four runs before it.",
@@ -91,14 +91,14 @@ q(2, "The period start is handed over as new Date(2027, 2, 1), a Date built at l
  ["America/New_York and America/Los_Angeles.",
   "Pacific/Pago_Pago and Pacific/Kiritimati.",
   "Every zone the digest tried except UTC."],
- "The engine reads a Date's UTC calendar day. Local midnight on 1 March east of Greenwich still falls on 28 February in UTC, so those two zones read 2027-02-28 and none of their dates matches the UTC run.")
+ "Built at local midnight, the Date gives 2027-02-28 as the first date in Africa/Lagos and Pacific/Kiritimati, and every date matches UTC reads false there. The two American zones and Pago Pago keep 2027-03-01.")
 
 q(1, "With the Date built at local midnight, America/New_York starts on 2027-03-01. What does that reading show about the Date form?",
- "It is right west of Greenwich and a day early east of it, so one zone proves nothing.",
+ "It holds in New York and fails in Lagos, so one zone's reading proves nothing.",
  ["It is safe everywhere, since New York already crosses the spring clock change inside the period.",
   "It fails only in zones whose clocks change during the 31 day period.",
   "The engine reads the Date's local calendar day in every zone it runs in."],
- "Local midnight west of Greenwich is a few hours into 1 March in UTC, so the UTC day survives. A schedule checked in New York can be a day off in Lagos, and nothing in the output says so.")
+ "With the Date form, America/New_York reads 2027-03-01 and matches UTC, while Africa/Lagos and Pacific/Kiritimati read 2027-02-28. New York and Los Angeles cross the spring clock change inside the period and still match, and the engine reads the Date's UTC calendar day.")
 
 q(2, "An infeasible plan is cascaded to a schedule. What comes back?",
  "0 events, with the note \"No optimal plan to cascade.\"",

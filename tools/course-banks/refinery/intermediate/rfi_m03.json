@@ -30,7 +30,7 @@
    "-0.8736, the row with the jet and fuel oil floors."
   ],
   "answer": 0,
-  "explanation": "The margin rises by 95572.87 while the gross margin per barrel moves by -0.0438. The extra barrels are the ones the plan valued last, so the total rises as the average falls."
+  "explanation": "The blank hydrotreater row prints a margin change of 95572.87 and a gross margin per barrel of 3.4445, a change of -0.0438, so the total rises while the ratio falls. 0.1158, -2.9113 and -0.8736 belong to the crude unit at 1900000 barrels, the hydrotreater shut and the two floors."
  },
  {
   "prompt": "Which change lowers ABUA's margin while raising its gross margin per barrel?",
@@ -41,18 +41,18 @@
    "The jet and fuel oil floors: margin change -1148089.05, gross margin per barrel change -0.8736."
   ],
   "answer": 2,
-  "explanation": "Made to run less crude, the plan keeps the barrels it values most, so the average rises while the total falls. The blank hydrotreater is the opposite case."
+  "explanation": "The crude unit at 1900000 barrels prints a margin change of -230175.48 and a gross margin per barrel change of 0.1158, the one row where the margin falls and the ratio rises. The blank hydrotreater moves the other way, and the Forcados and floors rows lower both."
  },
  {
-  "prompt": "Within one month's plan, which figure does the plan maximise?",
+  "prompt": "Under which of the five changes does ABUA buy more crude than the plan as typed yet earn a smaller margin?",
   "options": [
-   "The gross margin per barrel.",
-   "The margin.",
-   "The crude unit's utilisation.",
-   "The product revenue."
+   "The diesel hydrotreater capacity left blank, no limit.",
+   "The jet floor of 300000 and the fuel oil floor of 700000.",
+   "The Forcados cargo cancelled, its availability typed as 0.",
+   "The crude unit held at 1900000 barrels for the whole month."
   ],
   "answer": 1,
-  "explanation": "The plan is solved for the largest margin its moves allow. A higher gross margin per barrel bought by running less crude is a smaller month, so the ratio is for comparison."
+  "explanation": "Against 2029032.26 bbl as typed, the floors row prints total crude 2267857.14 bbl and a margin change of -1148089.05. The blank hydrotreater runs 2082608.70 bbl and gains 95572.87, and the Forcados row, 1747826.09 bbl, and the capped crude unit, 1900000.00 bbl, both run less crude."
  },
  {
   "prompt": "What does the offgas row of ABUA's stream balance read?",
@@ -96,7 +96,7 @@
    "The Jet A-1 ceiling of 380000.00 bbl, reached first."
   ],
   "answer": 2,
-  "explanation": "Only the hydrotreater is on the units at capacity list, and no product reads true at its ceiling. More Bonny Light makes gasoil the full hydrotreater cannot take, and Gasoil export at 89.5000 does not pay for it."
+  "explanation": "The plan's lists name one unit at capacity, the Diesel hydrotreater, and two crudes at their availability, Forcados and Brass River. The crude unit is not on the unit list, Bonny Light is not on the crude list, and every product reads false at its ceiling, Jet A-1 at 288354.84 of 380000.00 bbl."
  },
  {
   "prompt": "A jet floor of 1000000 is set with its ceiling raised to 1200000. What status does the plan return?",
@@ -107,7 +107,7 @@
    "optimal, with Jet A-1 held at 380000.00 bbl"
   ],
   "answer": 0,
-  "explanation": "Each number is sound on its own, but the crudes and units cannot make that much kero. The engine returns \"No plan satisfies these constraints. A product floor is probably beyond what the crudes and units can make.\""
+  "explanation": "Each number is sound on its own, and the engine returns the status infeasible: \"No plan satisfies these constraints. A product floor is probably beyond what the crudes and units can make.\" A floor above its own ceiling is the invalid case."
  },
  {
   "prompt": "A gasoline floor of 500000 is typed above its ceiling of 450000. Why is this refused before any plan is attempted?",
@@ -154,14 +154,14 @@
   "explanation": "The product table prints Diesel (ULSD) at 630500.00 bbl and 66076400.00. Gasoline carries the highest price, 111.0000, on a smaller volume."
  },
  {
-  "prompt": "Which of these is a term in ABUA's margin of 7077935.48?",
+  "prompt": "Gasoline sells 346525.81 bbl. Which row of the stream balance accounts for that volume?",
   "options": [
-   "Staff, insurance and overheads the month pays whatever it runs.",
-   "The unit operating cost.",
-   "The capital the refinery cost to build.",
-   "Tax and financing on the month's earnings."
+   "Naphtha: made 407677.42, consumed 407677.42 by the reformer.",
+   "Reformate: made 346525.81, placed 346525.81, surplus 0.00.",
+   "Kero: made 288354.84, placed 288354.84, surplus 0.00.",
+   "Offgas: made 103638.71, placed 0.00, surplus 103638.71."
   ],
   "answer": 1,
-  "explanation": "The margin is revenue less crude cost less unit operating cost. It carries no fixed cost, no capital and no tax or financing, so it is a month's contribution. It is not a profit."
+  "explanation": "Gasoline's recipe is reformate 1.0000, and the reformate row places all 346525.81 bbl it makes. Naphtha goes to the reformer, kero to Jet A-1, and offgas has no home."
  }
 ]

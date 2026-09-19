@@ -63,18 +63,18 @@
    "A refusal naming the crude unit's feed, since no unit in the configuration is feedless."
   ],
   "answer": 0,
-  "explanation": "The row is written only when some unit has no feed. The crude is still bought and its streams still made, but the crude unit runs nothing, costs 0.00, and the plan still solves."
+  "explanation": "The row is written only when some unit has no feed. The crude run still reads 2029032.26 bbl while the crude unit runs 0.00 bbl and costs 0.00, and the plan prints a margin of 9614225.81."
  },
  {
-  "prompt": "Beside the fed-crude-unit configuration's 9614225.81, which margin describes a refinery that could actually run?",
+  "prompt": "The fed-crude-unit configuration prints a margin of 9614225.81. Which printed margin belongs to the same configuration as typed, with its crude unit feedless?",
   "options": [
-   "9614225.81, since the plan still solves and prints it as optimal.",
+   "9614225.81 again, the fed unit with its capacity typed as 0.",
    "7173508.35, the hydrotreater left blank.",
-   "6847760.00, crude unit capped.",
+   "6847760.00, the crude unit capped.",
    "7077935.48, the margin as typed."
   ],
   "answer": 3,
-  "explanation": "In the fed configuration distillation is free, because the crude unit runs 0.00 and charges 0.00. The margin as typed charges every barrel of crude for distillation."
+  "explanation": "The digest prints the fed configuration's margin, 9614225.81, against 7077935.48 for the configuration as typed. 9614225.81 is also the fed configuration with that unit's capacity typed as 0, and 7173508.35 and 6847760.00 are the hydrotreater left blank and the crude unit at 1900000 barrels."
  },
  {
   "prompt": "In the configuration whose crude unit has a feed, that unit's capacity is then typed as 0. What happens to the margin?",
@@ -118,7 +118,7 @@
    "1747826.09 bbl and 67.22 percent."
   ],
   "answer": 3,
-  "explanation": "Forcados, which ran at its full availability, is typed 0, and the plan's total crude reads 1747826.09 bbl with the crude unit at 67.22 percent. Losing a crude changes which barrels are worth running."
+  "explanation": "Forcados, which ran at its full availability, is typed 0, and the plan's total crude reads 1747826.09 bbl with the crude unit at 67.22 percent. 735294.12 and 28.28 belong to the hydrotreater shut, and 1900000.00 and 100.00 to the crude unit at 1900000 barrels."
  },
  {
   "prompt": "A dashboard shows the hydrotreater typed as 0 at 0.00 percent utilisation. What does the plan itself report?",
@@ -154,14 +154,14 @@
   "explanation": "Crude run equals crude unit throughput, so the crude unit's operating cost falls on every barrel of crude. The crude cost column is each volume at its crude's own cost and carries no unit charge."
  },
  {
-  "prompt": "What should a planner check first in the unit table before reading any other figure in a plan?",
+  "prompt": "Read the crude unit column down ABUA's three unit rows. What does it print?",
   "options": [
-   "That the crude unit reads 100.00 percent, the sign of a well-planned month.",
-   "That exactly one row reads crude unit true, on the unit that distils crude.",
-   "That every unit's utilisation is above zero percent.",
-   "That the reformer is listed as at capacity."
+   "True on all three rows, since every unit runs streams made from crude.",
+   "True on Crude distillation, false on the reformer and the hydrotreater.",
+   "True on Crude distillation and the reformer, the two running below capacity.",
+   "False on all three, since the crude unit is written as a row of its own."
   ],
   "answer": 1,
-  "explanation": "If no row reads true, the configuration has no crude unit and every figure downstream is the plan of a refinery whose distillation is free. Utilisation is an output. It is not a target."
+  "explanation": "The unit table prints crude unit true on Crude distillation, the unit with no feed, and false on the Naphtha reformer and the Diesel hydrotreater, whose feeds are naphtha and gasoil."
  }
 ]

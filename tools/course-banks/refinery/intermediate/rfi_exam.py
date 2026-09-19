@@ -43,8 +43,8 @@ q(3, "A planner means the reformer to have no limit this month. What should its 
  "Nothing, since a blank capacity is no limit.",
  ["0, which the plan reads as the absence of a limit.",
   "-1, which the engine takes as an unlimited unit.",
-  "The word Infinity, since that is what the plan reports."],
- "A limit left blank is no limit, and a limit typed as 0 is a limit of zero. A negative capacity is refused with the status invalid, and the plan reports a blank capacity as the number Infinity.")
+  "Its typed 420000.00, which the plan reads as no limit."],
+ "A limit left blank is no limit, and a limit typed as 0 is a limit of zero. A negative capacity is refused with the status invalid, the typed 420000.00 is reported as a capacity of 420000.00, and a blank capacity is reported as the number Infinity.")
 
 q(1, "Which change to ABUA's configuration returns the status unbounded?",
  "Every crude availability, unit capacity and demand ceiling left blank.",
@@ -53,7 +53,7 @@ q(1, "Which change to ABUA's configuration returns the status unbounded?",
   "The cost of Forcados (illustrative) left blank."],
  "With nothing limiting crude and nothing limiting sales there is no best month. The -1 capacity and the blank cost are invalid, and the jet floor of 1000000 is infeasible.")
 
-q(2, "The Forcados cargo is cancelled, availability typed 0. What margin does the plan print?",
+q(2, "Which margin belongs to the row where the Forcados availability is typed 0?",
  "4030705.04",
  ["5929846.43",
   "6847760.00",
@@ -75,7 +75,7 @@ q(3, "What margin difference does the digest print between the configuration as 
   "9614225.81"],
  "The fed configuration prints a margin of 9614225.81 against 7077935.48, and the digest prints the difference as 2536290.33. The crude unit runs 0.00 bbl and charges 0.00 for distillation.")
 
-q(1, "In the configuration whose crude unit has a feed, what utilisation does that unit print?",
+q(1, "When distillation is given a feed, which utilisation is printed for it?",
  "0.00 percent",
  ["null",
   "78.04 percent",
@@ -130,7 +130,7 @@ q(1, "Which of ABUA's products sells 0.00 bbl in the plan as typed?",
  ["Fuel oil",
   "Jet A-1",
   "Gasoline"],
- "Gasoil export and Naphtha export both sell 0.00 bbl, because their streams are consumed in full by the hydrotreater and the reformer.")
+ "The product table prints Gasoil export and Naphtha export at 0.00 bbl, and the stream balance shows gasoil and naphtha consumed in full by the hydrotreater and the reformer.")
 
 q(2, "Which status does each of the five changes in the digest's change table return?",
  "optimal",
@@ -159,7 +159,7 @@ q(1, "How many dollars is one more barrel of ulsd worth to ABUA's month?",
  ["105.5000, the same figure as Jet A-1's price.",
   "94.1016, the figure the plan gives gasoil.",
   "111.0000, the same figure as Gasoline's price."],
- "Ulsd has one home, Diesel (ULSD), no unit and no surplus, and Diesel (ULSD) sells 630500.00 of its 750000.00 bbl ceiling. So the next barrel is sold at 104.8000.")
+ "The stream table prints ulsd at 104.8000 beside its one product, Diesel (ULSD) at 104.8000, with no unit and no surplus. 105.5000 is kero's value, 94.1016 gasoil's and 111.0000 reformate's.")
 
 q(2, "With the crude unit at 1900000 barrels, what do naphtha and gasoil read?",
  "91.4500 and 99.8560.",
@@ -216,7 +216,7 @@ q(1, "What quantity does each reformer run event carry?",
  ["130000.00 bbl",
   "405806.45 bbl",
   "69305.16 bbl"],
- "The reformer runs 407677.42 bbl in the month, in five equal events of 81535.48 bbl. 130000.00 bbl is each dht run, 405806.45 bbl each cdu run and 69305.16 bbl each gasoline lift.")
+ "Each of the five reformer events, run-12 to run-16, prints 81535.48 bbl. 130000.00 bbl is each dht run, 405806.45 bbl each cdu run and 69305.16 bbl each gasoline lift.")
 
 q(2, "What value does each diesel lift carry?",
  "13215280.00",
@@ -268,12 +268,12 @@ q(3, "What first receipt date does ABUA's end to end table print?",
   "2027-02-28, a Lagos Date run."],
  "The first receipt date is the period start, 2027-03-01, where Bonny Light, Forcados and Brass River each land a cargo. 2027-03-07 is the first lift and 2027-02-28 the Date form's first date in Africa/Lagos.")
 
-q(1, "Which figure in ABUA's end to end table do the schedule's unit run events carry between them?",
- "Unit operating cost, 4888554.84.",
- ["Crude cost, 160350322.58.",
-  "Revenue, 172316812.90.",
-  "Margin, 7077935.48."],
- "Each run event carries its share of its own unit's operating cost for the month: cdu 2536290.32, reformer 1182264.52 and dht 1170000.00.")
+q(1, "The hydrotreater's runs are run-17 to run-21. What value does the totals table give them for the month?",
+ "1170000.00, the same as its plan value.",
+ ["1182264.52, the value of the reformer runs.",
+  "234000.00, the value of a single dht run.",
+  "4888554.84, all three units' operating cost."],
+ "The dht row prints 650000.00 bbl and 1170000.00 in both columns, the hydrotreater's operating cost for the month. 1182264.52 is the reformer row, 234000.00 one dht run event and 4888554.84 the plan's unit operating cost.")
 
 q(2, "Which schedule events carry ABUA's revenue?",
  "The product lifts.",

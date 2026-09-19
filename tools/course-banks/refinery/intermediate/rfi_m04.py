@@ -21,14 +21,14 @@ q(0, "Which stream prints a marginal value that is the same figure as its only p
  ["Naphtha, 91.4500, beside Naphtha export at 72.5000.",
   "Gasoil, 94.1016, beside Gasoil export at 89.5000.",
   "Offgas, 0.0000, beside a product priced at 0.0000."],
- "Kero has one home, Jet A-1, no unit and no surplus, so the next barrel is sold as Jet A-1 at 105.5000. Naphtha and gasoil feed units, and offgas has no product at all.")
+ "Kero has one product, Jet A-1, no unit and no surplus, and its value prints 105.5000, Jet A-1's price. Naphtha and gasoil feed units and print 91.4500 and 94.1016, and offgas has no product at all.")
 
 q(3, "Reformate is worth 111.0000, Gasoline's price. Which reading of the plan lets one more barrel of reformate be sold as Gasoline?",
  "Gasoline reads false for at its ceiling, so the plan can sell one more barrel.",
  ["Gasoline's floor of 0.00 obliges the plan to sell every barrel of reformate made.",
-  "The reformer runs at 97.07 percent, so it can make one more barrel of reformate.",
+  "Gasoline reads true for at its ceiling, so the next barrel goes to surplus.",
   "Reformate carries a surplus of 103638.71 bbl waiting to be placed in Gasoline."],
- "A stream is worth its product's price while that product can take another barrel. Gasoline is below its ceiling. The surplus of 103638.71 bbl belongs to offgas, and reformate's surplus is 0.00.")
+ "The value is of one more barrel arriving from outside, and Gasoline, reformate's only product, reads false at its ceiling, selling 346525.81 of 450000.00 bbl. The surplus of 103638.71 bbl belongs to offgas, and reformate's surplus is 0.00.")
 
 q(1, "The plan values naphtha at 91.4500. Which working does the digest print for that figure?",
  "What the reformer makes from a barrel at the stream values, less its 2.9000 operating cost.",
@@ -60,10 +60,10 @@ q(0, "Why does the plan value offgas at 0.0000?",
 
 q(1, "A planner knows offgas is burned in the plant's heaters. What does ABUA's value of 0.0000 say about that use?",
  "Nothing, since the configuration gives offgas no product and no unit to see it through.",
- ["That burning offgas is worth nothing to the refinery in any month it runs.",
-  "That the heaters are already paid for inside the crude unit's 1.2500 a barrel.",
+ ["That the heaters burn it in the plan, as the unit that offgas feeds.",
+  "That the reformer takes it back as its feed, at 2.9000 a barrel.",
   "That the fuel use is priced at Fuel oil's 59.0000 somewhere else in the plan."],
- "A zero marginal value is a statement about this configuration. To see a use for offgas, the configuration needs a product for it with a price, or a use that saves a cost.")
+ "The value is the plan's value of one more barrel arriving from outside. The stream table prints offgas with no product, no unit and 103638.71 bbl of surplus, so the configuration carries no use for it. The reformer's feed is naphtha, and Fuel oil's recipe is residue.")
 
 q(2, "Under a jet floor of 300000 and a fuel oil floor of 700000, residue reads 79.6607 while Fuel oil sells at 59.0000. Which reading accounts for it?",
  "The fuel oil floor is met exactly, and residue is valued at Bonny Light's break-even.",
@@ -77,9 +77,9 @@ q(0, "What do naphtha and gasoil read under the jet floor of 300000 and fuel oil
  ["91.4500 and 94.1016, the same figures as in the plan as typed.",
   "83.6941 and 99.8560, as with the hydrotreater capacity left blank.",
   "91.4500 and 87.8029, as with the hydrotreater typed as shut."],
- "A stream that feeds a unit is valued at its export price only when the export is where the plan would send the next barrel, and under the floors it is.")
+ "Under the floors naphtha prints 72.5000 and gasoil 89.5000, the export prices, and the plan now sells Naphtha export 42607.14 and Gasoil export 74035.71. The other options are the values as typed and under the two hydrotreater rows.")
 
-q(3, "With the diesel hydrotreater typed as shut, which stream value moves, and to what?",
+q(3, "One column of the stream values moves when the diesel hydrotreater is typed as shut. Which stream, and what does it read?",
  "Gasoil, to 87.8029.",
  ["Naphtha, to 83.6941.",
   "Gasoil, to 89.5000.",
@@ -105,7 +105,7 @@ q(0, "The reformer is stepped from its typed 420000.00 bbl to 440000.00 bbl. Wha
  ["2.9773, with the reformer at 97.07 percent.",
   "7.7559, with the reformer at 100.00 percent.",
   "59545.39, with the reformer at 92.65 percent."],
- "The margin reads 7077935.48 at 440000.00 bbl, a change of 0.00, so the gain per extra barrel is 0.0000. The reformer has room it does not use, and the plan's units at capacity list names only the Diesel hydrotreater.")
+ "The margin reads 7077935.48 at 440000.00 bbl, a change of 0.00 over 20000.00 bbl, so the gain per extra barrel is 0.0000, with the reformer at 92.65 percent. 7.7559 and 2.9773 are the two steps up to 420000.00 bbl.")
 
 q(1, "Between 380000.00 and 400000.00 bbl of reformer capacity, the gain per extra barrel is 7.7559. What do the reformer's utilisation readings show at both capacities?",
  "100.00 percent at both, so each extra barrel of room is used.",

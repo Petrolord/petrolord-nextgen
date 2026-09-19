@@ -8,33 +8,33 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # read with SECTIONS 9 to 16 as one plan and one schedule, as the m06 lessons
 # quote them. Nothing reaches into the Expert tier's sections.
 
-q(2, "In ABUA's end to end table, which reading is the figure the course says a refinery is judged on?",
+q(2, "In ABUA's end to end table, which reading is the month's margin divided by its total crude?",
  "Gross margin per barrel of crude, 3.4883.",
  ["Crude unit utilisation, 78.04 percent.",
   "Revenue for the month, 172316812.90.",
   "The marginal value of gasoil, 94.1016."],
- "A refinery is judged on its margin per barrel of crude. The plan's margin, 7077935.48, divided by total crude, 2029032.26 bbl, gives the gross margin per barrel of crude, 3.4883.")
+ "gross margin per barrel = margin / total crude. The table prints margin 7077935.48, total crude 2029032.26 bbl and gross margin per barrel of crude 3.4883.")
 
-q(0, "A plan is handed over to be read end to end. What does the lesson check before reading any figure?",
- "The configuration: every limit typed, every cost and price present, status optimal.",
- ["The margin, since every other reading on the page hangs from that one figure.",
-  "The schedule's first receipt date, which must read 2027-03-01 before any other figure is read.",
-  "The stream values, starting with offgas, since a zero shows a lost home."],
- "Step one is the configuration and its blanks. Every limit ABUA carries is typed, every cost and price is present or the plan would be refused by name, and the status is optimal.")
+q(0, "Before any figure of ABUA's plan is read, what do its configuration and status show?",
+ "Every limit typed, every cost and price present, and the status optimal.",
+ ["One unit capacity left blank for no limit, and the status optimal.",
+  "Every limit typed, the jet price left blank, and the status invalid.",
+  "Every limit typed, every cost present, and the status unbounded."],
+ "Every crude carries a cost and an availability, every unit a capacity and an operating cost, and every product a price and a ceiling, and the plan as typed returns optimal. A blank price is refused with the status invalid.")
 
-q(3, "Had ABUA's status read infeasible, where would the end to end reading stop?",
- "At the status, with the engine's sentence, since there is no plan to read.",
- ["At the stream values, which would each print 0.0000 for the month.",
-  "At the schedule, which would still carry 41 events with no quantities.",
-  "Nowhere, since the margin is printed and read in the usual way."],
- "Had the status read infeasible or unbounded, the reading would stop at step one, with the engine's sentence, because there would be no plan to read. An infeasible plan also cascades to 0 events.")
+q(3, "Suppose ABUA's plan came back infeasible. What would stand where the end to end table's figures now stand?",
+ "The engine's refusal sentence, and a schedule of 0 events.",
+ ["Stream values of 0.0000 on every stream, and 41 events.",
+  "A margin of 0.00, with the schedule still dated from 2027-03-01.",
+  "The last optimal plan, since the table keeps the one before."],
+ "An infeasible plan is refused with \"No plan satisfies these constraints. A product floor is probably beyond what the crudes and units can make.\" and it cascades to 0 events, with the note \"No optimal plan to cascade.\" No margin or stream value comes back.")
 
-q(1, "What does the end to end reading name as holding ABUA's month where it is?",
- "The full hydrotreater, since more Bonny Light makes gasoil it has no room for.",
- ["The crude unit, since it runs 2029032.26 of its 2600000.00 bbl capacity.",
-  "The product ceilings, led by Diesel (ULSD) with its 750000.00 bbl limit.",
-  "Bonny Light's own availability, with 1500000.00 bbl on offer."],
- "Units at capacity: Diesel hydrotreater. The crude unit has room, no product is at its ceiling and Bonny Light has barrels. The gasoil more crude would make has no room in the hydrotreater and earns too little as Gasoil export.")
+q(1, "Four limits sit around ABUA's month. Which one do the plan's lists name as reached?",
+ "The hydrotreater, running 650000.00 of its own 650000.00 bbl.",
+ ["The crude unit, running 2029032.26 of its 2600000.00 bbl.",
+  "The Diesel (ULSD) ceiling, selling 630500.00 of 750000.00 bbl.",
+  "Bonny Light's availability, running 329032.26 of 1500000.00 bbl."],
+ "Only the Diesel hydrotreater reads 100.00 percent, and it is the one unit the plan lists at capacity. The crude unit reads 78.04 percent, Diesel (ULSD) is below its ceiling, and Bonny Light is not among the crudes at their availability.")
 
 q(1, "Which three readings in ABUA's end to end table belong to the schedule?",
  "Schedule events 41, crude receipts 6, first receipt date 2027-03-01.",
@@ -57,54 +57,54 @@ q(0, "At a cargo size of 400000.00 bbl, how do ABUA's three crudes make crude re
   "Forcados 3 and Brass River 3, Bonny Light none."],
  "Bonny Light's 329032.26 bbl arrives as one cargo, Forcados' 1100000.00 bbl as three and Brass River's 600000.00 bbl as two, each count rounded up to a whole cargo.")
 
-q(2, "A schedule's event counts do not match the reasons the plan gives for them. What is that the first sign of?",
- "A schedule built from some other plan or cargo size.",
- ["A period start passed as a Date built at local midnight east of Greenwich.",
-  "A crude unit given a feed stream that none of the three crudes makes.",
-  "A product floor typed above its own ceiling."],
- "Each count has a reason from the plan: the crude cargoes, five weekly runs for each unit and five weekly lifts for each product that sells. A count that does not match points to a different plan or cargo size.")
+q(2, "rcpt-1 carries 329032.26 bbl and 26750322.58. Where does ABUA's plan print the same two figures?",
+ "The crude table: Bonny Light's volume and its cost.",
+ ["The stream balance: naphtha made and consumed.",
+  "The product table: Gasoline's volume and revenue.",
+  "The unit table: the reformer's throughput and cost."],
+ "The crude table prints Bonny Light (illustrative) at 329032.26 bbl costing 26750322.58, and the schedule lands it as one cargo, rcpt-1, part 1 of 1. The reformer runs 407677.42 bbl for 1182264.52, and Gasoline sells 346525.81 bbl for 38464364.52.")
 
-q(2, "In step two of the end to end reading, what would make the reader stop to fix the feed column?",
- "The crude unit column reading false on every row of the unit table.",
+q(2, "Which reading shows a configuration whose crude unit was given a feed?",
+ "A crude unit operating cost of 0.00 on a month of 2029032.26 bbl of crude.",
  ["The crude unit reading 78.04 percent, short of its 2600000.00 bbl capacity.",
   "Total crude and crude unit throughput agreeing to the barrel, printed as true.",
   "The crude unit charging 1.2500 a barrel on every barrel of crude."],
- "If no row reads crude unit true, every figure after that step describes a refinery whose distillation is free. ABUA's Crude distillation row reads true, and the two totals agree: true.")
+ "In the fed configuration the digest prints crude unit operating cost 0.00, and the crude is still run. The three other options read ABUA as typed: 78.04 percent, the agreement flag true, and 2536290.32 at 1.2500 a barrel.")
 
-q(3, "Where does the end to end reading point a planner who wants ABUA's month to earn more?",
- "The hydrotreater, which left blank prints a margin change of 95572.87.",
- ["The reformer, since another 20000.00 bbl of it earns 2.9773 a barrel.",
-  "The crude unit, which at 1900000 barrels prints a change of -230175.48.",
-  "More Bonny Light, which runs 329032.26 of 1500000.00 bbl on offer."],
- "The reformer sweep prices another 20000.00 bbl of reformer capacity beyond 420000.00 bbl at 0.0000 a barrel as typed. The 2.9773 belongs to the step up to 420000.00. The hydrotreater is the unit at capacity.")
+q(3, "Of these changes the digest prices around ABUA's month, which one raises the margin?",
+ "The hydrotreater capacity left blank, for no limit.",
+ ["The reformer stepped from 420000.00 to 440000.00 bbl.",
+  "The crude unit held at 1900000 barrels for the month.",
+  "The jet and fuel oil floors of 300000 and 700000."],
+ "The blank hydrotreater prints a margin change of 95572.87. The reformer step to 440000.00 bbl changes the margin by 0.00, the crude unit at 1900000 barrels by -230175.48, and the two floors by -1148089.05.")
 
-q(0, "Does the Professional tier decide whether a hydrotreater expansion is worth building?",
- "No. That needs capital valued over many months, which the Expert tier does.",
- ["Yes. The margin change of 95572.87 with the hydrotreater left blank is the value of the expansion.",
-  "Yes. The gain per extra barrel of capacity from the sweep is the expansion's return on capital.",
-  "No. Expansions are valued in the Associate tier's modular screen only."],
- "The plan prices one month. Whether an expansion is worth building needs its capital, its life and many months, and the Expert tier values an expansion's streams through the screening engine.")
+q(0, "The hydrotreater left blank prints a margin change of 95572.87. Over what period does that figure run?",
+ "One month's plan, the 31 days from 2027-03-01.",
+ ["A year of plans, since a margin is a yearly figure.",
+  "The hydrotreater's working life, as a return on capital.",
+  "One week, the length of each weekly unit run event."],
+ "ABUA is one month's plan, cascaded from period start 2027-03-01 over 31 days, and each change is that month planned again. Capital is no term in the margin, which is revenue less crude cost less unit operating cost.")
 
-q(1, "Which two objects from ABUA's month does the Expert tier set actuals against?",
+q(1, "streamModel's LEDGER names plan, schedule and actual. Which two does ABUA's month fill?",
  "The plan and the schedule it cascades into.",
  ["The feasibility screen and its licensing sequence.",
   "The stream values and the reformer sweep.",
   "The seven time zone runs of the schedule."],
- "The plan is what the month should do, and the schedule is its shape across the dates. The engine's note calls the schedule \"the shape of the month to read actuals against\".")
+ "streamModel.LEDGER is plan, schedule, actual. ABUA is one month's plan and the schedule cascaded from it; nothing in it is recorded as an actual. The engine's note calls the schedule \"the shape of the month to read actuals against\".")
 
-q(3, "Which habit about the period start does this tier ask a planner to carry into the next?",
+q(3, "Which way of handing cascadeToSchedule its period start keeps ABUA's dates the same in every zone and on every day it runs?",
  "Pass it as a YYYY-MM-DD string, so no clock or zone can move it.",
  ["Leave it out, so the schedule is dated from the day it is built.",
   "Pass it as a Date at local midnight, as the Suite page does.",
-  "Set it to the first cargo date of the crude run in the most parts."],
- "A schedule that moves with the clock or the time zone cannot be read against anything. The Suite page and the digest both pass the period start as a string, 2027-03-01 for ABUA.")
+  "Pass it as a Date, the way the digest's seven zone run does."],
+ "Left out, the period start is read from the machine clock. A YYYY-MM-DD string is the same calendar day in every zone, and that is how the Suite page and the digest pass it, 2027-03-01 for ABUA. A Date built at local midnight starts on 2027-02-28 in Africa/Lagos and Pacific/Kiritimati.")
 
-q(0, "In step five of the end to end reading, which stream is valued through a unit that has room?",
+q(0, "Which of ABUA's streams is valued through a unit that has room?",
  "Naphtha, 91.4500, through the reformer at 97.07 percent.",
  ["Gasoil, 94.1016, through the hydrotreater at 100.00 percent.",
   "Residue, 59.0000, through Fuel oil at its price.",
   "Offgas, 0.0000, leaving 103638.71 bbl of surplus."],
- "Naphtha is valued through a reformer with room. Gasoil is valued through the full hydrotreater by what the plan can rearrange, residue has one home in Fuel oil, and offgas has no home at all.")
+ "Naphtha's working runs through the reformer at 97.07 percent: 0.8500 x 111.0000 + 0.1000 x 0.0000 - 2.9000 = 91.4500. With the hydrotreater at 100.00 percent, gasoil is valued at Bonny Light's break-even; residue has one home in Fuel oil, and offgas has none.")
 
 q(2, "Which ABUA figure does the schedule's totals table print identically in its scheduled and plan columns?",
  "The cdu's 2029032.26 bbl and 2536290.32.",
