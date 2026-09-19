@@ -1,0 +1,351 @@
+{
+ "app_slug": "hygiene",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-wbgt",
+   "title": "The Wet Bulb Globe Temperature",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-three-thermometers",
+     "title": "Three thermometers",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-indoor-and-outdoor-weights",
+     "title": "Indoor and outdoor weights",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-one-hour-average",
+     "title": "The one-hour average",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-the-weights-rest-on",
+     "title": "What the weights rest on",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-metabolic-rate-and-the-niosh-limits",
+   "title": "Metabolic Rate and the NIOSH Limits",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-one-hour-metabolic-average",
+     "title": "The one-hour metabolic average",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-alert-limit-and-the-exposure-limit",
+     "title": "The alert limit and the exposure limit",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-acclimatisation-is-an-input",
+     "title": "Acclimatisation is an input",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-figure-range",
+     "title": "The figure range and extrapolation",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-sixty-minute-rule",
+     "title": "The sixty-minute rule and its refusals",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-how-strong-is-each-equation",
+   "title": "How Strong Is Each Equation",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-published-reproduced-transcribed",
+     "title": "Published, reproduced, transcribed",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-worked-example-that-disagrees",
+     "title": "The worked example that disagrees",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-why-no-heat-limit-is-graded",
+     "title": "Why no heat limit is graded",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-band-summaries-are-not-the-equation",
+     "title": "Band summaries are not the equation",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-errata-in-the-standards",
+   "title": "Errata in the Standards",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-digit-slip-in-a-table",
+     "title": "A digit slip in a table",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-row-its-neighbours-contradict",
+     "title": "A row its neighbours contradict",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-truncation-and-rounding",
+     "title": "Truncation and rounding",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-an-erratum-does-to-a-gate",
+     "title": "What an erratum does to a gate",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-shift-that-is-not-eight-hours",
+   "title": "The Shift That Is Not Eight Hours",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-extended-shift-action-level",
+     "title": "The extended-shift action level",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-noise-dose-over-a-long-shift",
+     "title": "The noise dose over a long shift",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-brief-and-scala-daily",
+     "title": "Brief and Scala, daily",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-weekly-factor-and-which-governs",
+     "title": "The weekly factor and which governs",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-factor-only-lowers-a-limit",
+     "title": "The factor only lowers a limit",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-from-exposures-to-a-sampling-decision",
+   "title": "From Exposures to a Sampling Decision",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-three-hazards-one-crew",
+     "title": "Three hazards and one crew",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter",
+      "hy-protection-chemicals",
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-adjusted-limits-in-a-mixture",
+     "title": "Adjusted limits in a mixture",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-to-measure-next",
+     "title": "What to measure next",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "hy-noise-dosimeter",
+      "hy-protection-chemicals",
+      "hy-heat-stress"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
