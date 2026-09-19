@@ -34,7 +34,7 @@ q(1, "The mass-weighted mean of the API numbers matches the blend API to four de
  ["It forms the mass-weighted mean of the API numbers, which the difference column confirms.",
   "It averages API by volume and then applies the blend API minus that mean as a correction.",
   "It blends the API numbers on mass fractions it has formed from the typed volume shares."],
- "The engine does not use the mass-weighted route, and nothing in its result is formed that way. Its basis for API reads: computed from the volume-blended specific gravity, never averaged directly."),
+ "The engine blends specific gravity on volume and converts it back to API; API itself is never averaged. Its basis for API reads: computed from the volume-blended specific gravity, never averaged directly. The mass-weighted mean is printed beside it, where the difference column reads 0.0000.")
 
 q(1, "In the export blend Obigbo Light is 0.6500 of the volume. What is its mass fraction, and why does it move that way?",
  "0.6346: at 0.8408 it is lighter than the blend, so it carries less of the mass.",
@@ -55,14 +55,14 @@ q(0, "The same numbers 50, 30 and 20 are typed as MASS shares for Obigbo Light, 
  ["29.2240, since a share's basis does not change the blend.",
   "A refusal: a mass share needs a volume share beside it.",
   "29.2240 on volume, beside a mass-basis API of 29.6100."],
- "Typed by mass, the three crudes make a blend of specific gravity 0.8783 and API 29.6100; typed by volume, 0.8804 and 29.2240. A share is a number with a basis, and the basis is part of the recipe."),
+ "Typed by mass, the three crudes make a blend of specific gravity 0.8783 and API 29.6100; typed by volume, 0.8804 and 29.2240. blendCrudes takes every crude by volume or every crude by mass, and the two give different blends.")
 
 q(2, "One crude in a recipe is given a volume share and the other a mass share. What does blendCrudes do?",
  "It refuses: every crude a volume share, or every crude a mass share.",
  ["It converts the mass share to volume through that crude's specific gravity and blends.",
   "It blends the crude with the volume share and names the other crude as missing.",
   "It treats both figures as volume shares and names the blend's basis as mixed."],
- "The refusal reads: Give every crude a volume share, or give every crude a mass share. The two cannot be mixed. The engine will not guess which basis a recipe meant."),
+ "The refusal reads: Give every crude a volume share, or give every crude a mass share. The two cannot be mixed. Nothing is converted and nothing is blended.")
 
 q(0, "What sulfur does blendCrudes give the Obigbo export blend, and on what basis?",
  "0.2642 wt%, on mass.",
@@ -71,19 +71,19 @@ q(0, "What sulfur does blendCrudes give the Obigbo export blend, and on what bas
   "0.0052 wt%, the part of the sulfur the mass basis adds."],
  "Sulfur is per unit mass, so the engine weights it by mass fraction and names the basis mass: 0.2642. 0.2590 is the same property on volume, printed only to be read against the answer; mass minus volume is 0.0052."),
 
-q(2, "On every row of the per-mass table, mass minus volume is a positive number. What is behind that?",
- "The crude richer in sulfur, acid, nitrogen and metals is also the denser one here.",
- ["A mass fraction is larger than a volume fraction for every crude in any blend.",
-  "Blending on mass counts the heavier crude's sulfur a second time in the total.",
-  "The volume column leaves out the lighter crude's contribution to the property."],
- "In each of these blends the richer crude is the denser, and the denser crude carries more of the mass than of the volume, so the volume shortcut understates the property: 0.0052 wt% sulfur in the export blend, 1.5761 ppm vanadium in the three-crude blend."),
+q(2, "Nickel in the three-crude blend: which pair of figures is the engine's and the volume shortcut's?",
+ "14.2202 ppm on mass, and 13.5500 ppm on volume.",
+ ["13.5500 ppm on mass, and 14.2202 ppm on volume.",
+  "14.2202 ppm on mass, and 0.6702 ppm on volume.",
+  "6.5980 ppm on mass, and 6.4550 ppm on volume."],
+ "The per-mass table's nickel row for the three crudes reads 14.2202 on mass, 13.5500 on volume and 0.6702 for the gap. The export blend's nickel rows are 6.5980 and 6.4550.")
 
 q(3, "The export blend is typed as 13 and 7 instead of 65 and 35. What does the engine return?",
  "The same blend, since the shares are normalised before blending.",
  ["A refusal, because the shares do not add to 100.",
   "The same API, with the sulfur rescaled to the smaller total.",
   "The same API, with sulfur not blended until the shares reach 100."],
- "The shares are normalised: 65 and 35, 13 and 7, and 650000 and 350000 all return 32.8173 and 0.2642. The engine refuses only a negative share or a total of zero."),
+ "The shares are normalised: 65 and 35, 13 and 7, and 650000 and 350000 all return 32.8173 and 0.2642. A negative share and shares that add up to zero are refused.")
 
 q(1, "Egbema Medium's sulfur is left blank in the export blend. What does blendCrudes return for the blend's sulfur?",
  "not blended, with the basis: not blended: no value for Egbema Medium.",
@@ -97,14 +97,14 @@ q(3, "A laboratory sheet shows a sulfur of 0, and it is TYPED in for Egbema Medi
  ["not blended, with Egbema Medium named as missing.",
   "0.0888 wt%, with Egbema Medium named as missing.",
   "0.2642 wt%, with the zero skipped."],
- "A typed 0 is a real zero, blended like any other figure: 0.0888 on mass, 0 properties listed as missing. That dilution is exactly why a blank must never be read as a zero."),
+ "A typed 0 is a real zero, blended like any other figure: 0.0888 on mass, 0 properties listed as missing. A blank sulfur comes back not blended, with Egbema Medium named.")
 
 q(0, "With Egbema Medium's sulfur blank, what happens to the export blend's API, TAN and viscosity?",
  "They blend as usual: 32.8173, 0.3915 and 7.4743.",
  ["They are withheld too, as incomplete.",
   "They blend on Obigbo Light alone, the crude with every value.",
   "API blends, and TAN and viscosity are withheld as mass-weighted."],
- "Only the blank property is not blended. Every other property of the same blend is formed as usual, so a partial assay can still be read for the properties every crude carries."),
+ "Only the blank property is not blended. Every other property of the same blend is formed as usual: API 32.8173, TAN 0.3915 and viscosity 7.4743 read the same with the sulfur blank as with both sulfurs given.")
 
 q(2, "A blank sulfur is reported as not blended, yet a crude with no API and no specific gravity is refused. Why the difference?",
  "Every property is weighted by density, so a missing gravity spoils the whole blend.",

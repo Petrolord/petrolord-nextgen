@@ -1,14 +1,14 @@
 [
  {
-  "prompt": "On every blend in the gravity table, blend API minus the volume-weighted mean of the API numbers is negative. What lies behind that?",
+  "prompt": "On every blend in the gravity table, blend API differs from the volume-weighted mean of the API numbers. What lies behind that?",
   "options": [
    "The engine takes a shrinkage allowance off the blend when crudes of different gravity mix.",
    "Volume fractions give the lighter crude too little weight, so the engine adds a correction.",
-   "Each crude's specific gravity is rounded to four decimals before it is blended.",
+   "The engine averages API on mass fractions, which drift from the typed volume shares.",
    "API is a hyperbola in specific gravity, and specific gravity is what blends on volume."
   ],
   "answer": 3,
-  "explanation": "Because API = A / SG - B is curved, a straight average of API numbers on volume misses: -0.6192, -0.1677, -2.0889 and -0.3860 on the four rows. The engine does not model shrinkage; it takes volume as conserved."
+  "explanation": "API = A / SG - B is a hyperbola in specific gravity, and blendCrudes blends specific gravity on volume, taking volume as conserved; API itself is never averaged. The volume-weighted mean misses on every row: -0.6192, -0.1677, -2.0889 and -0.3860."
  },
  {
   "prompt": "For three crudes at 50, 30 and 20, the digest prints the figure 29.6100 in two places. What does it stand for in each?",
@@ -26,11 +26,11 @@
   "options": [
    "The volume shrinks in proportion to the two crudes' API contrast on mixing.",
    "Mass is conserved, and the volume is found from the blend's API.",
-   "Volume is taken as conserved; the engine does not model shrinkage.",
+   "Volume is taken as conserved, as mass is.",
    "Volume is conserved only within 15.0000 API of contrast."
   ],
   "answer": 2,
-  "explanation": "Mass is conserved and volume is taken as conserved, so specific gravity blends on volume. Real crudes of very different gravity can shrink a little on mixing, and the engine states its assumption instead of modelling it."
+  "explanation": "blendCrudes blends specific gravity on volume, and the digest states the assumption: mass is conserved and volume is taken as conserved."
  },
  {
   "prompt": "A recipe types a share of -10 for one of two crudes. What does blendCrudes return?",
@@ -41,7 +41,7 @@
    "REFUSED: The blend shares add up to zero."
   ],
   "answer": 1,
-  "explanation": "The engine refuses a negative share in its own words. A total of zero gets the other refusal, and a blank property is the only thing reported as not blended."
+  "explanation": "A share of -10 gets its own refusal: A blend share must be a number of zero or more."
  },
  {
   "prompt": "Shares of 0 and 0 are typed for a two-crude blend. What does the engine return?",
@@ -52,7 +52,7 @@
    "REFUSED: The blend shares add up to zero."
   ],
   "answer": 3,
-  "explanation": "Shares of zero or more are allowed one by one, and a set that adds to zero cannot be normalised. The engine refuses it in its own words. A share of -10 gets the other refusal."
+  "explanation": "Each zero share is a number of zero or more, and the pair is refused on its total: The blend shares add up to zero."
  },
  {
   "prompt": "Egbema Medium arrives with neither API nor specific gravity, and no crude has SARA. Compare the blend engine and the stand-alone stability screen.",
@@ -66,7 +66,7 @@
   "explanation": "blendCrudes refuses: every property here is weighted by density. Called outside blendCrudes, screenBlendStability reports basis none, because neither the index route nor the gravity route is open."
  },
  {
-  "prompt": "Two blends lose their viscosity for different reasons: in one a component's cSt was never entered, in the other it was entered as 0.1. How does the engine report each?",
+  "prompt": "Two blends lose their viscosity for different reasons: in one a component's cSt is blank, in the other it is typed as 0.1. How does the engine report each?",
   "options": [
    "not blended in both, under one basis sentence for missing or outside the domain.",
    "not blended for the blank, and 0.2000 cSt for the 0.1, clamped to the edge.",
@@ -74,18 +74,18 @@
    "not blended for the blank, and -122.8888 for the 0.1 near the edge."
   ],
   "answer": 0,
-  "explanation": "The basis reads: not blended: a component viscosity is missing or outside the index domain. A missing value is absent, and an impossible value is absent too. -122.8888 is the index at 0.2001, inside the edge."
+  "explanation": "The basis reads: not blended: a component viscosity is missing or outside the index domain. -122.8888 is the index at 0.2001, inside the edge, and 0.2000 is the lowest viscosity the index reaches."
  },
  {
   "prompt": "Which of these is formed on MASS fractions in the engine's result for a blend?",
   "options": [
    "The blend's specific gravity, which API is converted from.",
-   "The Refutas index, as ASTM D7152 averages it.",
+   "The sulfur shortcut printed beside the engine's figure.",
    "The SARA fractions behind the blend's CII.",
    "The cut yields read off the curve."
   ],
   "answer": 2,
-  "explanation": "screenBlendStability blends each SARA fraction on mass, as blendCrudes does sulfur and the metals. Specific gravity blends on volume, ASTM D7152 blends the index on volume, and yields are on volume off the curve."
+  "explanation": "screenBlendStability blends each SARA fraction on mass. Specific gravity blends on volume, the shortcut column weights sulfur by volume fraction, and yields are on volume off the curve."
  },
  {
   "prompt": "The engine puts a half-and-half mix of Egbema Medium with Asarama Heavy at 91.4520 cSt. Which printed gap measures how far a plain linear cSt average overshoots that?",
@@ -154,15 +154,15 @@
   "explanation": "Above a last point at 100 percent everything has distilled, so the residue cut, which takes everything not yet distilled at 1000 F, is a real 0.0000. The set closes at 100.0000 with nothing unknown."
  },
  {
-  "prompt": "Why does a TBP curve only rise as the temperature rises?",
+  "prompt": "Obigbo Light's curve runs from 0 at 85 to 100 at 1380. What does temperatureAtVolumePercent return at 0 percent and at 100 percent?",
   "options": [
-   "Each point counts everything distilled so far, from the lightest molecule up.",
-   "The engine sorts every curve's points into rising order before it reads a single one.",
-   "The heaviest molecules boil first, and the lighter ones follow them over the column.",
-   "The curve is normalised to 100 percent, which forces it to rise."
+   "85.0000 F and 1380.0000 F.",
+   "0.0000 F and 100.0000 F.",
+   "unknown at both ends of the curve.",
+   "85.0000 F, and unknown at 100 percent."
   ],
   "answer": 0,
-  "explanation": "A TBP curve is cumulative. That is what makes a cut possible: the volume that boils between two temperatures is the reading at the upper one minus the reading at the lower one."
+  "explanation": "Both are measured points, and the engine returns 85.0000 F at 0 percent and 1380.0000 F at 100 percent. A reading is unknown only outside a curve's points, as Ebocha's is at 2 and at 95 percent."
  },
  {
   "prompt": "What are the two thresholds of the gravity-contrast rule, as bisection on the engine finds them?",
@@ -187,15 +187,15 @@
   "explanation": "The uncertain message reads: Uncertain. The index sits in the band where blends go either way; spot test to ASTM D7112 or D7157 before commingling."
  },
  {
-  "prompt": "SARA fractions and sulfur are both weighted by mass in a blend. What do they share that makes mass the basis for both?",
+  "prompt": "Obigbo Light is typed at 50 by volume beside Egbema Medium at 30 and Asarama Heavy at 20. What is its mass fraction?",
   "options": [
-   "Both are blended on volume first and then converted to a mass basis at the very end.",
-   "Both are ratios, and a ratio has to be blended on mass to stay physical.",
-   "Both are per unit mass, and both use the mass fractions formed once from the shares.",
-   "Both are measured by weight in the laboratory, while the cargo itself is priced by mass."
+   "0.5000.",
+   "0.5223.",
+   "0.4775.",
+   "0.6346."
   ],
   "answer": 2,
-  "explanation": "Sulfur is weight percent and SARA fractions are weight percent, so both are per unit mass. The engine forms the mass fractions once and every per-mass property, SARA included, reads them."
+  "explanation": "Typed at 50 by volume, Obigbo Light's mass fraction is 0.4775, and mass fraction minus volume fraction prints -0.0225. 0.5000 is its volume fraction here, 0.5223 its volume fraction when 50 is typed by mass, and 0.6346 its mass fraction in the export blend."
  },
  {
   "prompt": "The export blend's CII is 0.9163. Which band edge decides its answer?",
@@ -213,11 +213,11 @@
   "options": [
    "An index past 0.9 is set aside when its crude is under half of the blend.",
    "The engine averages the two crudes' own CII on volume, which lands under 0.7.",
-   "The pair's index is formed from its own blended SARA; a crude's own index describes that crude.",
+   "The pair's index is formed from the pair's SARA, blended on mass.",
    "Obigbo Light's SARA is dropped from the blend, because its own index is already past 0.9 on its own."
   ],
   "answer": 2,
-  "explanation": "screenBlendStability blends the four SARA fractions on mass and forms the CII from them: 0.6634, stable true. Egbema Medium's aromatics and resins, at 42.6 and 19.8 wt%, are what hold asphaltenes in a blend."
+  "explanation": "screenBlendStability blends the four SARA fractions on mass and forms the CII from them: 36.6357, 41.3109, 18.8084 and 3.2450 give 0.6634, stable true. Obigbo Light's 1.1598 is the index of that crude alone."
  },
  {
   "prompt": "In the three-crude blend at 50, 30 and 20 by volume, sulfur on mass is 0.6138 wt%. What is 0.5840?",
@@ -231,26 +231,26 @@
   "explanation": "The per-mass table prints 0.5840 as sulfur on volume for the blend typed by volume, and the side-by-side table prints 0.5840 as the sulfur of the blend typed by mass. The gap for this blend is 0.0298."
  },
  {
-  "prompt": "Which two held conventions has an Associate learner met by the end of the tier?",
+  "prompt": "The gravity fallback is run on the heavy crude and the condensate with no SARA. Which contrast does its row print?",
   "options": [
-   "Sulfur on mass, taught in module two, and the gravity thresholds of the stability rule in module five.",
-   "The Refutas basis, taught in module three, and Watson K at the fifty percent point, announced for the next tier.",
-   "Volume as conserved on mixing, taught in module two, and the closing tolerance of a cut set taught in module four.",
-   "The Refutas basis, taught in module three, and the CII band edges of 0.7 and 0.9 from module five."
+   "10.9000.",
+   "37.4000.",
+   "16.0100.",
+   "15.0000."
   ],
   "answer": 1,
-  "explanation": "Both are taught as limits and never graded. The engine blends the Refutas index on mass while ASTM D7152 blends on volume, and it takes Watson K at the blend's fifty percent point, a screening basis."
+  "explanation": "The gravity-screen row for that pair prints basis api-contrast, contrast 37.4000 and stable false. 10.9000 is the export blend's contrast, 15.0000 the contrast threshold and 16.0100 a probe."
  },
  {
-  "prompt": "What does the Associate tier use from productBlending?",
+  "prompt": "Inside blendCrudes, which function turns the typed volume shares into mass shares?",
   "options": [
-   "Nothing; everything in this tier comes from crudeAssay.",
-   "propertyOfBlend, to report the blend's sulfur on its basis.",
-   "rvpIndex, to blend the lightest crudes such as the condensate.",
-   "valueGiveaway, to price the blend's sulfur against a limit."
+   "resolveFractions.",
+   "blendOnMass.",
+   "sgFromApi.",
+   "screenBlendStability."
   ],
   "answer": 0,
-  "explanation": "productBlending's 5 functions build and solve a least-cost recipe. The optimizer and its kernel, solveLP, wait for the Expert tier."
+  "explanation": "resolveFractions forms each crude's mass share once: volume share times specific gravity, over the sum of those products. The other three are crudeAssay functions with other jobs."
  },
  {
   "prompt": "Which exported table holds the bands the stability screen reads its index against?",
@@ -261,7 +261,7 @@
    "BLEND_BASIS, in productBlending."
   ],
   "answer": 0,
-  "explanation": "crudeAssay exports 18 functions and 1 table, CII_BANDS, which holds the bands of the colloidal instability index."
+  "explanation": "crudeAssay exports 18 functions and 1 table, CII_BANDS. The engines state CII_BANDS.STABLE as 0.7 and CII_BANDS.UNSTABLE as 0.9, the two band edges."
  },
  {
   "prompt": "Where does the 0.8408 that Obigbo Light carries in the mass-share table come from?",
@@ -294,7 +294,7 @@
    "3.2518, the same as the index of 1 cSt."
   ],
   "answer": 0,
-  "explanation": "At 0.1 and 0.2 there is no index. Just inside the edge, at 0.2001, the engine returns -122.8888, and the index heads towards minus infinity as the edge approaches."
+  "explanation": "The probe table puts -122.8888 at 0.2001 cSt, inside the domain; the rows at 0.1 and 0.2 read no index."
  },
  {
   "prompt": "Why do Ebocha's Kerosene / Jet and Diesel / Gasoil cuts have yields when its other four default cuts do not?",
@@ -327,7 +327,7 @@
    "4.0000 F, its first measured percent."
   ],
   "answer": 2,
-  "explanation": "Ebocha's first point is 4 at 110, and its curve does not start at 0 percent, so below 4 percent the temperature is unknown. Clamping would treat the unmeasured light end as if it did not exist."
+  "explanation": "Ebocha's first point is 4 at 110, and its curve does not start at 0 percent, so below 4 percent the temperature is unknown. At 4 percent it returns 110.0000 F."
  },
  {
   "prompt": "When the gravity rule does not flag the export blend, what does the engine's message say about the result?",
@@ -374,15 +374,15 @@
   "explanation": "API itself is never averaged. The column is the shortcut the engine refuses to take, computed so that it can be read beside the right answer."
  },
  {
-  "prompt": "Which of the studio's four questions does the Associate tier leave to the Professional tier?",
+  "prompt": "Which function does the studio name for what a crude is worth against the crude already bought?",
   "options": [
-   "What the barrel turns into, answered by cutYields on the crude's curve.",
-   "What the barrel is worth against the crude already bought, answered by netbackValue.",
-   "What happens to the properties when two crudes mix, answered by blendCrudes.",
-   "Whether the mixture drops asphaltenes, answered by screenBlendStability."
+   "cutYields, on the crude's own curve.",
+   "netbackValue, with its marker differential.",
+   "blendCrudes, with its mass fractions.",
+   "colloidalInstabilityIndex, on the blend."
   ],
   "answer": 1,
-  "explanation": "The fourth question, value, belongs to the Professional tier: netbackValue, with its marker differential."
+  "explanation": "The function table pairs the value question with netbackValue, with its marker differential. cutYields answers what the barrel turns into, and blendCrudes what happens to the properties when two crudes mix."
  },
  {
   "prompt": "Where does the 0.8000 inside the Refutas index come from, in the engine's own reading?",
@@ -418,26 +418,26 @@
   "explanation": "The contrast must be above 15.0000 and the lighter crude above 35.0000. 40 and 25 sits at the contrast threshold, 35 and 19 at the lighter-crude threshold, and both return no verdict."
  },
  {
-  "prompt": "A blank sulfur on Egbema Medium would give the export blend 0.0888 wt% if it were read as zero, against 0.2642 with both given. Why is that dangerous?",
+  "prompt": "What API does apiFromSg give a specific gravity of 0.85?",
   "options": [
-   "The engine would refuse the blend, and a refused cargo cannot be nominated at all.",
-   "The mass fractions would change, which moves the blend's API and its viscosity too.",
-   "A blank read as zero would be named missing, and the cargo would carry that name.",
-   "The diluted figure could clear a sulfur specification that the cargo fails at the buyer's laboratory."
+   "45.3750.",
+   "25.7222.",
+   "36.8000.",
+   "34.9706."
   ],
   "answer": 3,
-  "explanation": "A typed 0 is a real zero, blended on mass to 0.0888. A blank is absent, and the engine returns not blended and names Egbema Medium, so a blank can never clear a cargo that fails."
+  "explanation": "The equal-steps table prints 57.1667 at 0.75, 45.3750 at 0.8, 34.9706 at 0.85 and 25.7222 at 0.9. 36.8000 is Obigbo Light's API returned by the round trip."
  },
  {
   "prompt": "Why can the engine average specific gravity on a straight line and still refuse to average cSt figures that way?",
   "options": [
-   "Density mixes linearly on volume; viscosity is close to linear only after a double log.",
+   "Specific gravity blends on volume, and viscosity mixes nowhere near linearly.",
    "Specific gravity is per unit mass, and viscosity is per unit volume.",
    "cSt figures carry one decimal as typed, and averaging them loses precision.",
    "Viscosity is measured on a different temperature scale from specific gravity."
   ],
   "answer": 0,
-  "explanation": "Total mass over total volume is the volume-weighted average of the densities. Viscosity mixes nowhere near linearly on any fraction, so the engine blends it through the Refutas index."
+  "explanation": "blendCrudes blends specific gravity on volume, taking volume as conserved. Viscosity mixes nowhere near linearly, so it is blended through the Refutas index and inverted."
  },
  {
   "prompt": "Where on the scale does one equal move in specific gravity shift the API furthest?",
@@ -448,7 +448,7 @@
    "Every step, by the same -10.4044."
   ],
   "answer": 1,
-  "explanation": "The light end carries the biggest step: -11.7917 between 0.75 and 0.8, where the water end prints -7.4474 between 0.95 and 1. A hyperbola has no single slope."
+  "explanation": "-11.7917 between 0.75 and 0.8 is the largest step in the table, and -7.4474 between 0.95 and 1 the smallest. Equal steps of specific gravity are unequal steps of API."
  },
  {
   "prompt": "Asarama Heavy's curve reads 70 at 1000. What is its Vacuum residue yield on the default cuts?",

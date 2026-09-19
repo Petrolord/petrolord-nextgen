@@ -16,12 +16,12 @@ q(3, "Asarama Heavy and Ubie Condensate are blended 50 and 50 by volume. What vi
   "6.8074 cSt from the engine, and 9.2496 from the straight average."],
  "The engine gives 9.2496 through the Refutas index. The straight average on mass gives 339.5596, and linear average minus the engine prints 330.3100. 6.8074 is the index averaged on volume fractions."),
 
-q(1, "Why does a straight average of cSt figures fail for a blend of a thick crude and a thin one?",
- "A little thin oil cuts a thick oil's viscosity hard, and the average carries the thick crude's cSt at full size.",
- ["It is taken on volume fractions, and viscosity is a property that belongs on mass.",
-  "It leaves out the 0.8000 offset that sits inside the double logarithm of the index.",
-  "It is taken on mass fractions, which understate the thin crude's share of the barrels."],
- "The physics is that the thin crude thins the whole blend. Viscosity becomes close to linear in blend share only after a double logarithm is taken, so the engine averages an index and transforms the answer back."),
+q(1, "For the Obigbo export blend, 65 and 35, what does linear average minus the engine print for viscosity?",
+ "3.4833 cSt.",
+ ["0.1636 cSt.",
+  "10.9576 cSt.",
+  "330.3100 cSt."],
+ "Linear average minus the engine reads 3.4833 for the export blend. 0.1636 is the gap between the two index bases for the same blend, 10.9576 the linear average itself, and 330.3100 the gap for another pair.")
 
 q(0, "The engine's index is VBI = A x ln(ln(nu + 0.8)) + B, nu in cSt. What values does it give for A and B?",
  "14.5340 for A, and 10.9750 for B.",
@@ -44,12 +44,12 @@ q(2, "Asarama Heavy's 610 cSt gives an index of 37.9879, and viscosityFromBlendI
   "The index is blended on mass, since the trip is exact."],
  "Every crude's viscosity goes into the index and comes back unchanged: 4.6 returns 4.6000, 22 returns 22.0000, 1.1 returns 1.1000."),
 
-q(3, "From 1 cSt to 1000 cSt the index moves from 3.2518 to 39.0657. What does that compression make possible?",
- "Index values that can be averaged close to linearly across a thousandfold range of viscosity.",
- ["Reading the index directly as a viscosity in cSt, with no trip back through viscosityFromBlendIndex.",
-  "A refusal of every viscosity above 1000 cSt as lying outside the index domain.",
-  "Averaging the index on volume and on mass with the same answer on every blend."],
- "Each probe multiplies the viscosity by ten, and the index moves 3.2518, 23.5747, 33.1962, 39.0657. The compression is what makes the index blend close to linearly where the viscosity does not."),
+q(3, "The domain probes run from 1 cSt to 1000 cSt. What does viscosityBlendIndex return at those two ends?",
+ "3.2518 at 1 cSt, and 39.0657 at 1000 cSt.",
+ ["4.5307 at 1 cSt, and 37.9879 at 1000 cSt.",
+  "23.5747 at 1 cSt, and 33.1962 at 1000 cSt.",
+  "3.2518 at 1 cSt, and no index at 1000 cSt."],
+ "The probes print 3.2518 at 1 cSt, 23.5747 at 10, 33.1962 at 100 and 39.0657 at 1000. 4.5307 is Ubie Condensate's index at 1.1 cSt and 37.9879 is Asarama Heavy's at 610 cSt. Of the probes, only 0.1 and 0.2 return no index.")
 
 q(1, "What basis does the engine name for a blend viscosity it returns?",
  "Refutas index on mass fraction.",
@@ -79,19 +79,19 @@ q(3, "Of the three blends printed on both bases, where is the mass basis minus t
   "The Obigbo export blend, at 0.1636 cSt."],
  "The difference column prints 0.1636, 2.4422 and 4.1448. 330.3100 is linear average minus the engine, a different comparison."),
 
-q(0, "What makes the difference column between the two index bases positive on every pair printed?",
- "The thicker crude is also the denser, so it weighs more on mass and its high index pulls the average up.",
- ["An index averaged on mass is always above one averaged on volume, whatever the crudes are.",
-  "The volume basis drops the 0.8000 offset, which lowers every index it averages by that amount.",
-  "Mass fractions add to more than one when the crudes in a blend differ in density."],
- "The mass and volume fractions differ whenever the crudes differ in density. In each pair here the thicker crude is the denser one, so the mass basis gives its high index more weight."),
+q(0, "What Refutas index does viscosityBlendIndex give Egbema Medium's 22 cSt?",
+ "27.5437.",
+ ["23.5747.",
+  "18.5704.",
+  "37.9879."],
+ "Egbema Medium's 22 cSt gives 27.5437, and viscosityFromBlendIndex of it returns 22.0000. 18.5704 is Obigbo Light's index, 37.9879 is Asarama Heavy's, and 23.5747 is the probe at 10 cSt.")
 
-q(2, "A blend must pump below a viscosity limit. The figure with the index on mass clears the limit and the figure on volume does not. What does the course say to do?",
- "Measure the actual blend in a laboratory.",
- ["Take the engine's figure, since it names its basis.",
-  "Take the volume figure, since ASTM D7152 is a standard.",
-  "Average the two figures and compare that with the limit."],
- "When both bases clear a limit the choice does not change the decision. When one clears and the other does not, the decision needs a laboratory measurement of the actual blend, because the basis is a held convention."),
+q(2, "What does viscosityFromBlendIndex return for a very negative index?",
+ "0.2000 cSt, the lowest viscosity the index reaches.",
+ ["0.8000 cSt, the offset inside the double log.",
+  "0.0000 cSt, since the index runs down to nothing.",
+  "No viscosity, as for an index outside the domain."],
+ "Asked about a very negative index, viscosityFromBlendIndex returns 0.2000, the lowest viscosity the index reaches. The offset inside the double log, 0.8000, is 1 minus that figure.")
 
 q(0, "What does viscosityBlendIndex return for a viscosity of 0.2 cSt?",
  "No index: 0.2 lies outside the domain.",
@@ -112,7 +112,7 @@ q(3, "One crude in a blend is typed at 0.1 cSt. What does blendCrudes return for
  ["A refusal of the whole blend, as for a crude with no gravity.",
   "The blend viscosity with the 0.1 cSt clamped to 0.2001.",
   "The other crude's viscosity alone, with the thin crude named."],
- "There is no index for that crude, so there is no blend index. The engine puts no zero, floor or clamp in the gap. Gravity, sulfur and the rest still blend."),
+ "The probe at 0.1 cSt returns no index, and a blend with one viscosity outside the domain is not blended, under that basis sentence. The engine returns no index there rather than a number, so there is nothing to blend.")
 
 emit(Q, '/root/wt-md-crude-nextgen/tools/course-banks/crude/beginner/crb_m03.json', label='crb_m03', expect_n=15)
 finish()

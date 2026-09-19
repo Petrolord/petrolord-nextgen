@@ -8,7 +8,7 @@
    "watsonK, which characterises each crude."
   ],
   "answer": 1,
-  "explanation": "The function table pairs the tank question with screenBlendStability (inside blendCrudes). The index of a crude alone describes that crude, and a blend needs the mixture's answer."
+  "explanation": "The function table pairs the tank question with screenBlendStability (inside blendCrudes). colloidalInstabilityIndex is printed for each crude alone, and neither blendViscosity nor watsonK answers any of the four questions."
  },
  {
   "prompt": "The module table counts what each engine module exports. What does crudeAssay export?",
@@ -22,15 +22,15 @@
   "explanation": "crudeAssay exports 18 functions and 1 table, CII_BANDS. The 5 functions and 4 constants are productBlending's row, and solveLP with LP_STATUS is lib/lp/simplex."
  },
  {
-  "prompt": "productBlending imports the gravity and viscosity rules from crudeAssay instead of restating them. What does that design give?",
+  "prompt": "Which function does productBlending call in lib/lp/simplex, and where do its gravity and viscosity rules come from?",
   "options": [
-   "One copy of each rule, so the studio and the optimizer compute gravity and viscosity the same way.",
-   "A mass-only optimizer that hands every specific gravity back to crudeAssay to convert.",
-   "Rows for solveLP built directly from the Refutas constants of each component in the pool.",
-   "A way for the optimizer to override the studio's basis whenever a specification demands it."
+   "solveLP, with the gravity and viscosity rules imported from crudeAssay.",
+   "solveLP, with its own restated copy of the gravity and viscosity rules.",
+   "optimiseBlend, with the sulfur and SARA rules imported from crudeAssay.",
+   "blendCrudes, with the gravity and viscosity rules taken from lib/lp/simplex."
   ],
   "answer": 0,
-  "explanation": "With the rule in one place, the two apps cannot quietly disagree about the same blend, and a correction to the rule reaches both."
+  "explanation": "The Product Blending Optimizer calls productBlending, which calls the LP kernel solveLP in lib/lp/simplex and imports the gravity and viscosity rules from crudeAssay rather than restating them. optimiseBlend is productBlending's own function, and blendCrudes is crudeAssay's."
  },
  {
   "prompt": "sgFromApi is SG = A / (API + B). What values does the engine give for A and B when they are read back from apiFromSg?",
@@ -52,18 +52,18 @@
    "A step of -11.7917 at the light end, then one constant step for the rest of the way to water."
   ],
   "answer": 2,
-  "explanation": "The table prints five different steps: -11.7917, -10.4044, -9.2484, -8.2748 and -7.4474. A straight line would print one step five times. API is a hyperbola in specific gravity."
+  "explanation": "The table prints five different steps: -11.7917, -10.4044, -9.2484, -8.2748 and -7.4474. API is a hyperbola in specific gravity: equal steps of specific gravity are unequal steps of API."
  },
  {
   "prompt": "Each library API goes into sgFromApi and comes back through apiFromSg to four decimals: 17.2 returns 17.2000, 54.6 returns 54.6000. What does the round trip show?",
   "options": [
-   "The two functions are exact inverses, so moving between API and specific gravity loses nothing.",
-   "The engine rounds each specific gravity to four decimals before converting it back to API.",
+   "apiFromSg is the inverse of sgFromApi: each API comes back as it went in.",
+   "Each API comes back moved a little, and the round trip column prints the drift.",
    "API blends on a straight line, because a round trip through specific gravity is linear.",
    "The library's API figures were themselves computed from measured specific gravities."
   ],
   "answer": 0,
-  "explanation": "Every row returns the API it was given, which proves sgFromApi and apiFromSg are exact inverses. In the library, API is the input and specific gravity is the computed column."
+  "explanation": "sgFromApi is SG = A / (API + B), and apiFromSg is its inverse. Every row of the round trip column returns the API it was given: 10.0000, 17.2000, 54.6000 and the rest. In the library, API is the input and specific gravity is the computed column."
  },
  {
   "prompt": "Which column of the library's property table does the engine compute instead of taking it as typed?",
@@ -96,7 +96,7 @@
    "Obigbo Light, because the gap from 90 at 1060 to its end point is unmeasured."
   ],
   "answer": 0,
-  "explanation": "Four curves run from 0 to 100 percent. The Ebocha curve starts at 4 percent and stops at 88, so the part above 88 percent was never measured."
+  "explanation": "Four curves run from 0 to 100 percent. The Ebocha curve starts at 4 percent and stops at 88, and outside a curve's range the value is unknown except where the curve itself says so, below a first point at 0 percent or above a last point at 100."
  },
  {
   "prompt": "Which library crude carries the most vanadium, and how much?",
@@ -110,7 +110,7 @@
   "explanation": "Asarama Heavy's vanadium is 96 ppm, the largest in the vanadium column (8.7, 1.4 and 0.2 for the others, Ebocha not given). Its 41 ppm is nickel."
  },
  {
-  "prompt": "The lighter the crude, the higher its API. Which library crude has the highest API and the lowest specific gravity?",
+  "prompt": "Which library crude has the highest API and the lowest specific gravity?",
   "options": [
    "Obigbo Light, at 36.8 API and 0.8408, the light crude of the library.",
    "Ubie Condensate, at 54.6 API and 0.7603.",
@@ -129,7 +129,7 @@
    "The studio, through screenBlendStability."
   ],
   "answer": 2,
-  "explanation": "The studio is a reading tool: it tells you what a blend is for the shares you give it. The optimizer returns the least-cost recipe that meets every specification, which the Expert tier teaches."
+  "explanation": "The optimizer's one question is the least-cost recipe that meets every specification, answered by optimiseBlend. None of the studio's four questions asks for a recipe."
  },
  {
   "prompt": "Library inputs such as 4.6 cSt and 22 cSt print with one decimal or none, while specific gravity prints as 0.8408. Why?",
@@ -140,7 +140,7 @@
    "Only specific gravity is blended, so only it carries full precision."
   ],
   "answer": 0,
-  "explanation": "The digest's precision rule: every computed figure prints to four decimals, and every input prints exactly as it is typed. Rounding a computed figure makes a number the engine never returned."
+  "explanation": "The digest's precision rule: every computed figure prints to four decimals, and every input prints exactly as it is typed. Viscosity in the library is typed, and specific gravity is computed from API by sgFromApi."
  },
  {
   "prompt": "Why can a quantity that mixes on a straight line in specific gravity not also mix on a straight line in API?",
@@ -151,7 +151,7 @@
    "API is typed with one decimal and specific gravity with four, so the averages diverge."
   ],
   "answer": 2,
-  "explanation": "API = A / SG - B is curved in specific gravity. That is why the engine blends specific gravity and converts the answer back to API at the end."
+  "explanation": "API = A / SG - B is a hyperbola in specific gravity: equal steps of specific gravity are unequal steps of API. The engine blends specific gravity on volume and converts the blended figure back to API; API itself is never averaged."
  },
  {
   "prompt": "The Ebocha partial assay's TAN reads not given. How does the engine treat it when a blend needs TAN?",

@@ -8,18 +8,18 @@
    "Asphaltenes over resins."
   ],
   "answer": 1,
-  "explanation": "The top of the fraction is what destabilises: the saturates that push asphaltenes out, and the asphaltenes themselves. Aromatics and resins, at the bottom, hold them."
+  "explanation": "CII = (saturates + asphaltenes) / (aromatics + resins). Saturates precipitate asphaltenes; aromatics and resins hold them. Below 0.7 the blend screens stable, and at or above 0.9 unstable."
  },
  {
-  "prompt": "Ubie Condensate carries only 0.2 wt% asphaltenes, yet its CII alone is 8.3458. Where does its danger lie?",
+  "prompt": "What does colloidalInstabilityIndex give for Ubie Condensate alone?",
   "options": [
-   "In its own asphaltenes, which it drops in its own tank once its CII is past the 0.9 edge.",
-   "In its low viscosity of 1.1 cSt, which lets asphaltenes settle out faster.",
-   "Nowhere, since a CII of a crude alone only describes that crude.",
-   "In its 89.1 wt% saturates, which push asphaltenes out of a crude that carries them."
+   "1.1598.",
+   "0.7668.",
+   "1.7614.",
+   "8.3458."
   ],
   "answer": 3,
-  "explanation": "A condensate has almost no asphaltenes of its own to lose. Its danger is as a blend component: its saturates, poured into a crude that carries asphaltenes, are exactly what pushes them out."
+  "explanation": "The crude-alone table prints 1.1598 for Obigbo Light, 0.6026 for Egbema Medium, 0.7668 for Asarama Heavy and 8.3458 for Ubie Condensate. 1.7614 is Asarama Heavy with Ubie Condensate at 50 and 50."
  },
  {
   "prompt": "A blend's CII is 0.7161. What does screenBlendStability return?",
@@ -44,15 +44,15 @@
   "explanation": "0.6634 is below 0.7, so the pair returns stable true. 0.7161 is uncertain, the export blend's 0.9163 is unstable, and 0.6026 is a crude alone, which is no blend verdict."
  },
  {
-  "prompt": "Why must a stable answer of null never be drawn as a tick?",
+  "prompt": "Asarama Heavy with Egbema Medium at 70 and 30: what blended asphaltenes does the screen form on mass?",
   "options": [
-   "Null means the screen cannot decide; a tick turns we do not know into safe.",
-   "Null means the SARA was blank, and the engine treats a blank as absent data.",
-   "Null is a weak yes: the blend may be loaded, with a routine check in the tank.",
-   "Null means no CII was formed, so nothing can be drawn."
+   "9.4791.",
+   "11.9.",
+   "6.7035.",
+   "3.2450."
   ],
   "answer": 0,
-  "explanation": "Stable null is its own answer: the index sits where blends go either way. The engine names the tests that can decide it, ASTM D7112 and D7157, and the assay explorer draws no verdict as its own state."
+  "explanation": "The pair's row prints blended saturates 32.2493, aromatics 38.7563, resins 19.5153 and asphaltenes 9.4791, and its CII is 0.7161. 11.9 is Asarama Heavy's own asphaltenes, 6.7035 belongs to the pair with Ubie Condensate and 3.2450 to Egbema Medium with Obigbo Light."
  },
  {
   "prompt": "Asarama Heavy alone has a CII of 0.7668 and Ubie Condensate alone 8.3458. How does the engine reach the 50 and 50 pair's CII of 1.7614?",
@@ -63,7 +63,7 @@
    "It takes the larger of the two crudes' own CII figures as the conservative screen."
   ],
   "answer": 2,
-  "explanation": "The CII is a ratio, and a ratio of averages differs from an average of ratios. The blend's index comes from the blend's composition, and there is no shortcut from the two single-crude indices to it."
+  "explanation": "screenBlendStability blends each SARA fraction on mass and forms CII = (saturates + asphaltenes) / (aromatics + resins) from the blended fractions: 57.0828, 24.7639, 11.4498 and 6.7035 give 1.7614."
  },
  {
   "prompt": "For Asarama Heavy with Ubie Condensate at 50 and 50, what CII does SARA blended on volume give, beside the engine's figure?",
@@ -77,15 +77,15 @@
   "explanation": "The engine blends SARA on mass: 1.7614. SARA on volume gives 1.9718, and the volume reading minus the engine prints 0.2104. The engine never reports the volume figure."
  },
  {
-  "prompt": "SARA blended on volume gives 1.9718, 0.7141 and 0.6671 for the three pairs, where the engine gives 1.7614, 0.7161 and 0.6634. Would the volume basis have moved any pair into a different band?",
+  "prompt": "For Egbema Medium with Obigbo Light at 85 and 15, what does the CII from SARA on volume minus the engine's CII print?",
   "options": [
-   "Yes: the uncertain pair falls to stable at 0.7141.",
-   "No: each volume figure sits in the same band as the engine's figure.",
-   "Yes: the stable pair rises into uncertain at 0.6671.",
-   "Yes: the unstable pair falls to uncertain at 1.9718."
+   "-0.0020.",
+   "0.0037.",
+   "0.2104.",
+   "0.6671."
   ],
   "answer": 1,
-  "explanation": "Against the thresholds 0.7 and 0.9: 1.9718 is unstable, 0.7141 is uncertain and 0.6671 is stable, the bands the engine gives. The uncertain pair's gap is -0.0020 beside a band edge of 0.7, which is why the basis must be right."
+  "explanation": "The engine's CII is 0.6634 and SARA on volume gives 0.6671, and the difference column prints 0.0037. -0.0020 and 0.2104 are the other two pairs' differences."
  },
  {
   "prompt": "With no SARA, the screen falls back to a gravity-contrast rule. What can that rule return?",
@@ -125,11 +125,11 @@
   "options": [
    "The index is in error, since the gravity screen found nothing wrong with the blend.",
    "The gravity rule is the stricter screen, since it withholds a verdict the index gives.",
-   "An absent flag is no clearance: a true would have called stable a blend the index calls unstable.",
+   "The rule raised no flag and cannot clear one, and the index says unstable.",
    "A contrast of 10.9000 lies inside the range where the gravity rule raises its flag."
   ],
   "answer": 2,
-  "explanation": "The rule captures one known danger, and a blend can drop asphaltenes for reasons the gravity spread does not show. So an absent flag proves nothing, and the engine will not turn it into a stable verdict."
+  "explanation": "The gravity rule can raise a flag and it cannot clear one: when it does not flag, the engine returns stable null, never true. With the SARA taken away, the rule of thumb did not raise its flag, and the index says unstable."
  },
  {
   "prompt": "SARA is supplied for Obigbo Light only, in the export blend. What does the screen do?",
