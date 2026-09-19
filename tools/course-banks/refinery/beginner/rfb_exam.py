@@ -145,10 +145,10 @@ q(1, "Which of these entries does the engine answer with a figure?",
 
 q(2, "Which of these rows makes productSlate print yields close false?",
  "Hydroskimming typed with yields that total 0.9700",
- ["Topping with its naphtha price left blank on the slate",
+ ["Topping at OKORDIA's own prices, naphtha included",
   "Any row carrying a loss yield of 0.0200 in its slate",
   "Conversion at OKORDIA's own prices"],
- "The typed hydroskimming row totals 0.9700 and prints yields close false, valued as typed at 81.1900. A blank price leaves the yields closing and names the product as unpriced, and the loss is part of a row that closes.")
+ "The typed hydroskimming row totals 0.9700 and prints yields close false, valued as typed at 81.1900. The topping and conversion slates at OKORDIA's prices print yields total 1.0000 and yields close true, and the loss of 0.0200 is part of each of those closing rows.")
 
 # m04, SECTION 5
 q(3, "Which multiplication gives OKORDIA's yearly variable opex of 4857600.00?",
@@ -265,12 +265,12 @@ q(2, "A margin of 8.4300 a barrel of crude: which configuration and supply give 
   "Conversion under firm supply"],
  "Conversion reads 11.4300 on firm, 8.4300 on tight and 5.4300 on disrupted. Hydroskimming on firm reads 4.5900.")
 
-q(3, "The chain prints a capital per bpd of 12800.00. What does the lesson say to set it against?",
- "A cost per bpd quoted for a similar plant",
- ["The annual throughput, to cost a barrel refined",
-  "The variable operating cost of 3.2000 a barrel",
-  "The 2 construction years, to spread the capital"],
- "Capital per bpd divides the capital by capacity, so it compares with a cost per barrel a day quoted for a similar plant. Spread over throughput it would tell a different story.")
+q(3, "Under disrupted supply, what crude cost with premium does OKORDIA's scenario table print?",
+ "82.0000",
+ ["79.0000",
+  "76.0000",
+  "6.0000"],
+ "The premium is added to the crude cost before the streams are built: 76.0000 on firm, 79.0000 on tight and 82.0000 on disrupted. 6.0000 is the disrupted premium itself.")
 
 q(1, "What does the Professional tier put on a barrel for the first time in this course?",
  "A calendar date, from a schedule cascaded from the month's plan",

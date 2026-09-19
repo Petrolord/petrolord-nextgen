@@ -43,12 +43,12 @@ q(2, "Which configuration's margin changes sign with the supply scenario?",
   "All three: each positive on firm and negative on disrupted"],
  "Hydroskimming reads 4.5900, 1.5900 and -1.4100. Topping is negative on all three scenarios and conversion positive on all three, so hydroskimming is the one whose reading depends on supply.")
 
-q(0, "The nine-row table holds the capital at 64000000.00 for every configuration. What does that make the table?",
- "A reading of margins, with each plant's capital a separate step",
- ["A valuation of each plant, since the capital is held equal",
-  "A finding that a conversion plant costs what a topping plant does",
-  "A reading taken on the stick-built law in place of the modular"],
- "Holding one capital figure across configurations lets the rows be compared on their margins. A conversion plant with its fluid catalytic cracker would carry its own quotation, and the capital question is answered with its own reference point.")
+q(0, "Which row of the nine-row table prints a first operating year revenue of 63475500.00?",
+ "Topping under disrupted supply",
+ ["Topping under tight supply",
+  "Hydroskimming under disrupted supply",
+  "Conversion under disrupted supply"],
+ "Topping under disrupted supply prints 63475500.00. Topping under tight supply prints 95213250.00, hydroskimming under disrupted supply 69126750.00 and conversion under disrupted supply 74769750.00.")
 
 q(3, "In the OKORDIA chain, which step takes 5000 bpd, 330 on-stream days and a utilisation of 0.9200?",
  "Throughput, returning 1518000.00 bbl a year",
@@ -71,19 +71,19 @@ q(0, "The crude cost in OKORDIA's streams looks wrong. Where does the lesson sen
   "The fixed cost and the count of construction years"],
  "Every step feeds the next, so a surprising figure has its cause at one step. Revenue sends you to the slate and the throughput; capex to the quotation, the capacity, the exponent and the construction years.")
 
-q(3, "What does the lesson say the nine-row table decides?",
- "Which configurations earn a valuation",
- ["Which configuration the sponsor should build",
-  "Which of the three supplies is most likely",
-  "Which capital law each plant is priced on"],
- "Topping does not earn a valuation at these prices, conversion does under every supply, and hydroskimming does only if the sponsor can show crude supply will not be disrupted. The scenarios carry no probability, and the capital is held at one figure.")
+q(3, "Under firm supply, which configuration earns the most per barrel of crude, and at what gross margin?",
+ "Conversion, at 11.4300",
+ ["Hydroskimming, at 4.5900",
+  "Conversion, at 8.4300",
+  "Topping, at -2.2600"],
+ "The three firm rows read topping -2.2600, hydroskimming 4.5900 and conversion 11.4300. 8.4300 is conversion under tight supply.")
 
-q(1, "Hydroskimming under tight supply reads a margin of 1.5900. What does the lesson say about a reading whose sign turns on a modest change in one input?",
- "Its inputs need defending before it is reported.",
- ["It is averaged with the firm row and then reported.",
-  "It is rounded and reported as a break even plant.",
-  "It is left out of the table as an unstable row."],
- "The panel exercise raises the crude cost a step at a time until the tight margin changes sign. A reading that turns on a modest change in one input needs its inputs defended before anyone reports it.")
+q(1, "Hydroskimming under tight supply prints a gross margin per barrel of 1.5900. What first operating year revenue does the same row print?",
+ "103690125.00",
+ ["127193220.00",
+  "69126750.00",
+  "112154625.00"],
+ "Read the hydroskimming tight row: gross margin 1.5900 beside 103690125.00. The firm and disrupted hydroskimming rows carry 127193220.00 and 69126750.00, and 112154625.00 sits on the conversion tight row.")
 
 q(2, "In the Professional tier, what does every barrel of crude the plant buys pass through?",
  "The crude unit, whose capacity and cost join the answer",
@@ -99,12 +99,12 @@ q(0, "Which course teaches how the plan finds each stream's marginal value?",
   "The supply course, with terminals and landed cost"],
  "The plan prices one more barrel of each stream arriving from outside. How it finds those values is linear programming, and the crude course teaches it; this course reads the plan's answers.")
 
-q(3, "Moving from the screen to the monthly plan, what stays the same?",
- "The unit of the answer, a margin per barrel of crude",
- ["One fixed yield row for each configuration",
-  "A single price table and a single utilisation for the year",
-  "The five-line chain from quotation to streams"],
- "The plan's headline is still a margin per barrel of crude: product value, less crude, less the cost of running units. The fixed yield row, the one price table and the one utilisation are what the plan replaces.")
+q(3, "In the OKORDIA chain the capital step returns 64000000.00 and 12800.00 per bpd. What does it use?",
+ "The 64000000.00 quotation for 5000 bpd and the modular law",
+ ["The hydroskimming yields and OKORDIA's prices",
+  "5000 bpd, 330 on-stream days and a utilisation of 0.9200",
+  "The 2 construction years and the 20 operating years"],
+ "The screen prints capital (modular law at the reference point): 64000000.00; capital per bpd 12800.00, from the vendor quotation of 64000000.00 for a 5000 bpd plant. The yields and prices give the slate, the capacity, days and utilisation give the throughput, and the construction and operating years lay out the streams.")
 
 q(1, "In the chain's streams step, what does each producing year from year 2 carry?",
  "Crude run 1518000.00 bbl, revenue 127193220.00, crude cost 115368000.00",

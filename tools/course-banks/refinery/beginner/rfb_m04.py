@@ -29,12 +29,12 @@ q(3, "Utilisation is tried on OKORDIA as 90, as -0.1, as 0 and left blank. Which
   "90, clipped to the top of its range"],
  "90 and -0.1 lie outside 0 to 1 and are refused with the example 0.9 for 90 percent. A blank utilisation reads as the engine's stated default and gives 1530000.00 bbl. A typed 0 is inside the range, so the engine answers it: annual throughput 0.00 bbl."),
 
-q(1, "Which input carries the part of the year a plant is shut for maintenance, inspections and repairs?",
- "On-stream days, which OKORDIA sets at 330",
- ["Utilisation, which firm supply sets at 0.9200",
-  "Capacity, the 5000 bpd of nameplate",
-  "The variable operating cost of 3.2000 a barrel"],
- "On-stream days are the days in a year the plant runs at all. Utilisation is how hard it runs on those days. Folding one into the other counts the downtime twice or not at all.")
+q(1, "OKORDIA's annual throughput of 1518000.00 bbl is built from three inputs. Which of these is not one of them?",
+ "The variable cost of 3.2000 a barrel",
+ ["The capacity of 5000 bpd at nameplate",
+  "The 330 on-stream days in a year",
+  "The firm supply utilisation of 0.9200"],
+ "The engine prints annual throughput = capacity x on-stream days x utilisation: 1518000.00 bbl. The variable operating cost of 3.2000 a barrel enters the gross margin per barrel and the variable opex column.")
 
 q(1, "OKORDIA's gross margin per barrel reads 4.5900. Which figures does the engine take it from?",
  "Gross value 83.7900, less crude 76.0000, less variable cost 3.2000",
@@ -43,12 +43,12 @@ q(1, "OKORDIA's gross margin per barrel reads 4.5900. Which figures does the eng
   "Revenue 127193220.00, less crude cost 115368000.00 and fixed opex"],
  "The engine states gross margin per barrel = gross value - crude cost - variable operating cost, all per barrel of crude. 79.0000 is the crude cost under tight supply, and the fixed cost is a yearly line in the streams.")
 
-q(3, "Why does the screen keep the fixed operating cost of 7500000.00 a year out of the gross margin per barrel?",
- "Its cost per barrel depends on how many barrels there are.",
- ["It is paid in the construction years, before any barrel is run.",
-  "It is folded into the capital's capex rows.",
-  "It is too small beside the crude cost to move a figure at four decimals."],
- "A fixed cost spread per barrel would change every time the throughput did, and a margin that included it would describe one particular throughput. The engine keeps it as a yearly figure in the streams, starting in the first producing year.")
+q(3, "Years 0 and 1 of OKORDIA's streams each carry capex of 32000000.00. What rule gives that figure?",
+ "The capital spread evenly over the 2 construction years",
+ ["The stick-built law's share of the capital in each year",
+  "The capital less a year of fixed opex of 7500000.00",
+  "A vendor quotation made for each construction year"],
+ "The engine spreads the capital evenly over the construction years: capital / construction years. With 2 construction years, years 0 and 1 carry 32000000.00 each; with three they carry 21333333.33 each. The capital itself is 64000000.00, the modular law at the reference point.")
 
 q(0, "The crude cost is raised on the panel and nothing else is touched. Which columns of the streams move?",
  "The crude cost column, while revenue stays still",

@@ -69,7 +69,7 @@ q(3, "scaleCapex is given a capacity of 0. What does it return for the cost and 
  ["0.00 for the cost and 0.00 per bpd",
   "REFUSED: \"Missing capacity, fixed operating cost. Enter 0 where the value really is zero.\"",
   "the reference cost of 64000000.00, unscaled, and 12800.00 per bpd"],
- "scaleCapex returns null, which is no cost at all, for a capacity of 0, a blank reference cost or a blank reference capacity. A null is a different answer from a zero cost, and it cannot scale a quotation it was never given."),
+ "scaleCapex returns null for the cost and for the per bpd figure when the capacity is 0, the reference cost is blank or the reference capacity is blank. That is no cost at all, a different answer from a zero cost of 0.00. The refusal in the options is feasibilityStreams' sentence for a blank capacity and fixed operating cost."),
 
 q(1, "feasibilityEconomics is called with the tax rate left blank. What does it return?",
  "REFUSED: \"A discount rate and a tax rate are needed to value the project.\"",
@@ -93,11 +93,11 @@ q(2, "OKORDIA's inputs include a fixed operating cost of 7500000.00 a year. Wher
  "Annual throughput is capacity times on-stream days times utilisation, and the gross margin per barrel is gross value less crude cost less variable operating cost. The fixed cost appears as fixed opex of 7500000.00 in each producing year."),
 
 q(2, "OKORDIA prices diesel at 101.0000 and gasoline at 104.0000 a barrel. What does the course say these prices are?",
- "Invented figures chosen so the screen's arithmetic is easy to follow.",
+ "Illustrative figures on invented records, set in US dollars.",
  ["Market quotations for a stated date the screen was calibrated on.",
   "The real prices of the crude grades whose names appear on the Studio panel.",
-  "Averages of published product prices that the Studio refreshes itself."],
- "Every price in the course is illustrative, in US dollars. None is a market quotation for any date, and a crude grade name is a label on invented numbers."),
+  "Averages of published prices the Studio refreshes itself."],
+ "The digest's case line says all three records are invented and every price and cost in it is illustrative, in US dollars. None is a market quotation for any date, and a crude grade name is a label on invented yields and prices."),
 
 q(0, "All three configurations are valued against one OKORDIA price table, and give 76.9400, 83.7900 and 90.6300. What differs between them to give three values?",
  "The fixed yield row each configuration carries",

@@ -96,7 +96,7 @@
    "null for the cost and null for the cost per bpd"
   ],
   "answer": 3,
-  "explanation": "scaleCapex returns null, which is no cost at all, for a capacity of 0, a blank reference cost or a blank reference capacity. A null is a different answer from a zero cost, and it cannot scale a quotation it was never given."
+  "explanation": "scaleCapex returns null for the cost and for the per bpd figure when the capacity is 0, the reference cost is blank or the reference capacity is blank. That is no cost at all, a different answer from a zero cost of 0.00. The refusal in the options is feasibilityStreams' sentence for a blank capacity and fixed operating cost."
  },
  {
   "prompt": "feasibilityEconomics is called with the tax rate left blank. What does it return?",
@@ -136,11 +136,11 @@
   "options": [
    "Market quotations for a stated date the screen was calibrated on.",
    "The real prices of the crude grades whose names appear on the Studio panel.",
-   "Invented figures chosen so the screen's arithmetic is easy to follow.",
-   "Averages of published product prices that the Studio refreshes itself."
+   "Illustrative figures on invented records, set in US dollars.",
+   "Averages of published prices the Studio refreshes itself."
   ],
   "answer": 2,
-  "explanation": "Every price in the course is illustrative, in US dollars. None is a market quotation for any date, and a crude grade name is a label on invented numbers."
+  "explanation": "The digest's case line says all three records are invented and every price and cost in it is illustrative, in US dollars. None is a market quotation for any date, and a crude grade name is a label on invented yields and prices."
  },
  {
   "prompt": "All three configurations are valued against one OKORDIA price table, and give 76.9400, 83.7900 and 90.6300. What differs between them to give three values?",

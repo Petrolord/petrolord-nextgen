@@ -45,11 +45,11 @@ q(0, "How does productSlate treat the loss of 0.0200 that every configuration ca
  "The loss sits in the yield row beside the products, so yields total 1.0000 and yields close true. It has no price, so nothing is added to the gross value for it."),
 
 q(3, "The gross margin per barrel has no separate term for the loss. Where does the loss reach the margin?",
- "Inside the gross value, since crude is paid for on every barrel",
- ["In the variable operating cost, charged on each barrel of crude",
+ "Inside the gross value, as a yield that adds nothing",
+ ["In the variable operating cost on each barrel",
   "As a fourth term the margin subtracts after the variable cost",
   "Nowhere, since the loss is dropped once the yields are summed"],
- "The crude cost is paid on every barrel of crude, the loss fraction included, and the gross value counts only the fractions sold. Subtracting the loss again would count it twice."),
+ "productSlate carries the loss as a yield with no value, so it sits in the yield row and adds nothing to the gross value per barrel of crude. The gross margin per barrel is gross value less crude cost less variable operating cost, so the loss reaches the margin through the gross value and has no term of its own."),
 
 q(1, "Topping is valued with the naphtha price left blank. What does productSlate return?",
  "Gross value 63.6200; unpriced: naphtha",
@@ -58,12 +58,12 @@ q(1, "Topping is valued with the naphtha price left blank. What does productSlat
   "Gross value 63.6200; unpriced: none, since the row still closes"],
  "A blank product price is answered, with the product named on the unpriced list and adding nothing. In the full slate naphtha's row carries 13.3200 a barrel of crude."),
 
-q(0, "Why is the unpriced list the first thing to read on a slate, before the gross value?",
- "A figure like 63.6200 looks like any other gross value, and only the list shows a product is missing.",
- ["The gross value is not printed until every product on the unpriced list has a price typed.",
-  "The unpriced list feeds the crude cost, which must be read before the gross value can be.",
-  "The unpriced list shows which yields do not close, and those change the gross value."],
- "63.6200 is in the same unit and at the same precision as 76.9400. Nothing in the figure says naphtha is missing; the unpriced list does."),
+q(0, "Topping is valued with the naphtha price left blank and prints a gross value of 63.6200. What on the slate says a product is missing from that figure?",
+ "The unpriced list, which names naphtha",
+ ["A refusal beside the figure",
+  "A gross value printed as null in its place",
+  "Nothing; 63.6200 is the whole value"],
+ "The engine prints gross value 63.6200; unpriced: naphtha. The unpriced product is named and adds nothing to the value. The figure is in the same unit and at the same precision as the full topping slate's 76.9400, so only the list shows that naphtha is missing."),
 
 q(1, "The hydroskimming yields are typed so they total 0.9700. What does productSlate do with the row?",
  "Values it as typed, prints 81.1900 and sets yields close to false.",
