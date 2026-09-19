@@ -10,7 +10,7 @@ q(3, "Rebuilt on IPCC AR6 GWP100, non-fossil methane, what does the vented and f
  ["4231.600 tCO2e",
   "4260.000 tCO2e",
   "3976.000 tCO2e"],
- "SECTION 8 prints the vented line at 4231.600 on AR6 fossil, 3834.000 on AR6 non-fossil, 4260.000 on AR5 fossil and 3976.000 on AR5 non-fossil. The 142.000 t of methane is the same on every row.")
+ "SECTION 8 prints the vented line at 4231.600 on IPCC AR6 GWP100, fossil methane, 3834.000 on AR6 non-fossil, 4260.000 on AR5 fossil and 3976.000 on AR5 non-fossil. Only the methane lines move from set to set.")
 
 q(1, "The flare's unburned methane line reads 489.183 tCO2e. On which set was it converted?",
  "IPCC AR5 GWP100, fossil methane",
@@ -51,7 +51,7 @@ q(0, "Which makeGwpSet call returns a set the engine reads as declared?",
  "A label with values, such as IPCC AR6 GWP100, fossil methane",
  ["Values given with no label, however complete the values given are",
   "A label given with no values, such as a set name typed on its own",
-  "A label with a methane GWP of 0 and an N2O value of 273"],
+  "A label with values that give methane a GWP of 0"],
  "SECTION 6: a set is declared only with a label and at least one value. Values with no label, and a label with no values, both read declared false. SECTION 2 refuses a methane GWP of 0, and the set then reads declared false.")
 
 q(2, "The engine's note on every GWP set says the set is stated on every result. What reason does the note give?",

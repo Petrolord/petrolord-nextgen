@@ -108,7 +108,7 @@ q(2, "Read as activity x factor x GWP, which row matches Purchased electricity?"
  ["31500.000 MWh at 0.41 tCO2/MWh and a GWP of 29.8: 4231.600 tCO2e",
   "12915.000 MWh at 0.41 tCO2/MWh and a GWP of 1: 31500.000 tCO2e",
   "31500.000 MWh at 1 tCO2/MWh and a GWP of 0.41: 12915.000 tCO2e"],
- "SECTION 7 prints Purchased electricity: activity 31500.000 MWh, factor 0.41 tCO2/MWh (invented and SYNTHETIC), GWP 1, tonnes of gas 12915.000, tCO2e 12915.000. Every line is activity x factor x GWP (checked here). 4231.600 is the vented methane line.")
+ "SECTION 7 prints Purchased electricity: activity 31500.000 MWh, factor 0.41 tCO2/MWh (invented and SYNTHETIC), GWP 1, tonnes of gas 12915.000, tCO2e 12915.000. Every line is activity x factor x GWP (checked here). 4231.600 is the vented methane line, at a GWP of 29.8 on IPCC AR6 GWP100, fossil methane.")
 
 emit(Q, '/root/wt-et-carbon-nextgen/tools/course-banks/carbon/beginner/cefb_m05.json', expect_n=15)
 finish()

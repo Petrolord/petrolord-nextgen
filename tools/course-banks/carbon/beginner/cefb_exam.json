@@ -8,7 +8,7 @@
    "Both take the stated default wherever one exists, and are refused only where none exists."
   ],
   "answer": 2,
-  "explanation": "SECTION 2 opens with this distinction. That is why a blank flare efficiency is refused while the same argument left out of the call becomes complete combustion."
+  "explanation": "SECTION 2 opens with this distinction. It prints a blank or a null flare efficiency refused as required, and the same argument left out of the call answering destructionEfficiencyFraction 1, its stated default of complete combustion."
  },
  {
   "prompt": "Which module does the Carbon Footprint & Abatement Studio call?",
@@ -327,7 +327,7 @@
    "4231.600 t CH4 at a factor of 1 tCH4/t"
   ],
   "answer": 1,
-  "explanation": "SECTION 7 gives the vented line an activity of 142.000 t CH4 and a factor of 1 tCH4/t. 29.8 is its GWP, and 4231.600 its tCO2e."
+  "explanation": "SECTION 7 gives the vented line an activity of 142.000 t CH4 and a factor of 1 tCH4/t. 29.8 is the CH4 value of IPCC AR6 GWP100, fossil methane, the line's GWP; 4231.600 is its tCO2e."
  },
  {
   "prompt": "A blocked electricity line leaves the inlet to export total intensity equal to which figure of the complete inventory?",
@@ -341,15 +341,15 @@
   "explanation": "SECTION 10 compares the two and prints them as the same figure: with the Scope 2 line blocked, the total is Scope 1 alone."
  },
  {
-  "prompt": "Which rule in force does SECTION 25 point to SECTION 10 for?",
+  "prompt": "Held item H2 names the engine's typical heating values for methane. Which pair does it give?",
   "options": [
-   "A GWP of zero or below is refused and the set is not declared",
-   "A negative activity or a negative factor blocks its line",
-   "The GWP set carries a methane note",
-   "An intensity carries its inventory's reportable status"
+   "890.8 LHV and 802.6 HHV MJ per kmol",
+   "1428.6 LHV and 1560.7 HHV MJ per kmol",
+   "241.8 LHV and 285.8 HHV MJ per kmol",
+   "802.6 LHV and 890.8 HHV MJ per kmol"
   ],
   "answer": 3,
-  "explanation": "The MD5-0 rules table in SECTION 25 maps this rule to SECTION 10. The other three map to SECTIONS 2, 9 and 6."
+  "explanation": "SECTION 25, H2: the engine's typical methane heating values are 802.6 LHV and 890.8 HHV MJ per kmol; the pair is labelled typical and the fuel analysis governs. FUEL_REFERENCE prints 1428.6 and 1560.7 for ethane and 241.8 and 285.8 for hydrogen."
  },
  {
   "prompt": "How many lines does the Igbogene first pass build, and how many of them are blocked?",
@@ -448,7 +448,7 @@
    "a negative activity: an emission line cannot remove tonnes"
   ],
   "answer": 2,
-  "explanation": "This is the engine's reason for any line off Scope 1 and Scope 2 (SECTION 9). The factor refusal belongs to Diesel generators, and the last two options block vented methane in other cases."
+  "explanation": "SECTION 9 prints this reason for the scope 3 Business travel line. The factor refusal belongs to Diesel generators, the missing GWP blocks the vented methane in the first pass, and the negative activity blocks the vented methane typed as -142 t."
  },
  {
   "prompt": "Which boundary's intensity is stated in tCO2e per barrel of oil equivalent produced?",

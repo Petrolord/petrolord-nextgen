@@ -162,6 +162,6 @@
    "31500.000 MWh at 1 tCO2/MWh and a GWP of 0.41: 12915.000 tCO2e"
   ],
   "answer": 2,
-  "explanation": "SECTION 7 prints Purchased electricity: activity 31500.000 MWh, factor 0.41 tCO2/MWh (invented and SYNTHETIC), GWP 1, tonnes of gas 12915.000, tCO2e 12915.000. Every line is activity x factor x GWP (checked here). 4231.600 is the vented methane line."
+  "explanation": "SECTION 7 prints Purchased electricity: activity 31500.000 MWh, factor 0.41 tCO2/MWh (invented and SYNTHETIC), GWP 1, tonnes of gas 12915.000, tCO2e 12915.000. Every line is activity x factor x GWP (checked here). 4231.600 is the vented methane line, at a GWP of 29.8 on IPCC AR6 GWP100, fossil methane."
  }
 ]

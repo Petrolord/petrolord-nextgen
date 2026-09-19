@@ -8,7 +8,7 @@
    "3834.000 tCO2e"
   ],
   "answer": 3,
-  "explanation": "SECTION 8 prints the vented line at 4231.600 on AR6 fossil, 3834.000 on AR6 non-fossil, 4260.000 on AR5 fossil and 3976.000 on AR5 non-fossil. The 142.000 t of methane is the same on every row."
+  "explanation": "SECTION 8 prints the vented line at 4231.600 on IPCC AR6 GWP100, fossil methane, 3834.000 on AR6 non-fossil, 4260.000 on AR5 fossil and 3976.000 on AR5 non-fossil. Only the methane lines move from set to set."
  },
  {
   "prompt": "The flare's unburned methane line reads 489.183 tCO2e. On which set was it converted?",
@@ -71,7 +71,7 @@
    "A label with values, such as IPCC AR6 GWP100, fossil methane",
    "Values given with no label, however complete the values given are",
    "A label given with no values, such as a set name typed on its own",
-   "A label with a methane GWP of 0 and an N2O value of 273"
+   "A label with values that give methane a GWP of 0"
   ],
   "answer": 0,
   "explanation": "SECTION 6: a set is declared only with a label and at least one value. Values with no label, and a label with no values, both read declared false. SECTION 2 refuses a methane GWP of 0, and the set then reads declared false."

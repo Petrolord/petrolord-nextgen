@@ -21,9 +21,9 @@ q(0, "What is the Igbogene flare's carbonKmolPerYear at a destruction efficiency
 
 q(3, "On the course's set, IPCC AR6 GWP100 fossil methane, what does the flare total at a destruction efficiency of 0.95?",
  "3339.515 tCO2e",
- ["2124.711 tCO2e, its CO2 alone",
-  "1214.805 tCO2e, its methane line",
-  "4442.493 tCO2e, the flare at 0.9"],
+ ["2124.711 tCO2e",
+  "1214.805 tCO2e",
+  "4442.493 tCO2e"],
  "The 0.95 row of SECTION 5 reads co2Tonnes 2124.711 and a methane line of 1214.805, in a column headed CO2 plus methane line that prints 3339.515. The 0.9 row prints 4442.493.")
 
 q(1, "The Igbogene flare is run at a destruction efficiency of 1. How does its methane appear in the table?",
@@ -44,8 +44,8 @@ q(1, "Read as 100 percent, the same flare is 2236.537 tCO2e with no methane line
  "441.191 tCO2e",
  ["485.922 tCO2e",
   "242.961 tCO2e",
-  "443.257 tCO2e"],
- "SECTION 5 prints: \"Read as 100 percent, the same flare is 2236.537 tCO2e with no methane line: 441.191 tCO2e below the flare at 0.98 (computed here from the engine's figures).\" 485.922 is the methane line at 0.98, 242.961 the methane line at 0.99 and 443.257 a GWP set difference in SECTION 8.")
+  "440.265 tCO2e"],
+ "SECTION 5 prints: \"Read as 100 percent, the same flare is 2236.537 tCO2e with no methane line: 441.191 tCO2e below the flare at 0.98 (computed here from the engine's figures).\" 485.922 is the methane line at 0.98, 242.961 the methane line at 0.99, and 440.265 the flare's methane line on IPCC AR6 GWP100, non-fossil methane (SECTION 8).")
 
 q(3, "At 0.98, what share of the flare's 2677.729 tCO2e does the digest print for the methane line?",
  "0.181468",

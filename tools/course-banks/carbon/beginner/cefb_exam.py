@@ -10,7 +10,7 @@ q(2, "The digest separates a blank box from an argument left out of the call. Ho
  ["Both arrive as 0, and the interval check on the destruction efficiency refuses each of them.",
   "A blank takes the stated default; an argument left out of the call is refused as required.",
   "Both take the stated default wherever one exists, and are refused only where none exists."],
- "SECTION 2 opens with this distinction. That is why a blank flare efficiency is refused while the same argument left out of the call becomes complete combustion.")
+ "SECTION 2 opens with this distinction. It prints a blank or a null flare efficiency refused as required, and the same argument left out of the call answering destructionEfficiencyFraction 1, its stated default of complete combustion.")
 
 q(0, "Which module does the Carbon Footprint & Abatement Studio call?",
  "carbonAbatement",
@@ -213,7 +213,7 @@ q(1, "Which activity and factor does the Vented and fugitive methane line carry?
  ["16.306 t CH4 at a factor of 1 tCH4/tCH4",
   "142.000 t CH4 at a factor of 29.8 tCH4/t",
   "4231.600 t CH4 at a factor of 1 tCH4/t"],
- "SECTION 7 gives the vented line an activity of 142.000 t CH4 and a factor of 1 tCH4/t. 29.8 is its GWP, and 4231.600 its tCO2e.")
+ "SECTION 7 gives the vented line an activity of 142.000 t CH4 and a factor of 1 tCH4/t. 29.8 is the CH4 value of IPCC AR6 GWP100, fossil methane, the line's GWP; 4231.600 is its tCO2e.")
 
 q(0, "A blocked electricity line leaves the inlet to export total intensity equal to which figure of the complete inventory?",
  "Its Scope 1 intensity, 0.00822761",
@@ -222,12 +222,12 @@ q(0, "A blocked electricity line leaves the inlet to export total intensity equa
   "Its crude export Scope 1, 0.01246090"],
  "SECTION 10 compares the two and prints them as the same figure: with the Scope 2 line blocked, the total is Scope 1 alone.")
 
-q(3, "Which rule in force does SECTION 25 point to SECTION 10 for?",
- "An intensity carries its inventory's reportable status",
- ["A GWP of zero or below is refused and the set is not declared",
-  "A negative activity or a negative factor blocks its line",
-  "The GWP set carries a methane note"],
- "The MD5-0 rules table in SECTION 25 maps this rule to SECTION 10. The other three map to SECTIONS 2, 9 and 6.")
+q(3, "Held item H2 names the engine's typical heating values for methane. Which pair does it give?",
+ "802.6 LHV and 890.8 HHV MJ per kmol",
+ ["890.8 LHV and 802.6 HHV MJ per kmol",
+  "1428.6 LHV and 1560.7 HHV MJ per kmol",
+  "241.8 LHV and 285.8 HHV MJ per kmol"],
+ "SECTION 25, H2: the engine's typical methane heating values are 802.6 LHV and 890.8 HHV MJ per kmol; the pair is labelled typical and the fuel analysis governs. FUEL_REFERENCE prints 1428.6 and 1560.7 for ethane and 241.8 and 285.8 for hydrogen.")
 
 q(2, "How many lines does the Igbogene first pass build, and how many of them are blocked?",
  "4 lines, 3 of them blocked",
@@ -290,7 +290,7 @@ q(2, "Which sentence explains a scope 3 line's block?",
  ["A registered emission factor is required.",
   "no global warming potential for CH4 in the declared set",
   "a negative activity: an emission line cannot remove tonnes"],
- "This is the engine's reason for any line off Scope 1 and Scope 2 (SECTION 9). The factor refusal belongs to Diesel generators, and the last two options block vented methane in other cases.")
+ "SECTION 9 prints this reason for the scope 3 Business travel line. The factor refusal belongs to Diesel generators, the missing GWP blocks the vented methane in the first pass, and the negative activity blocks the vented methane typed as -142 t.")
 
 q(1, "Which boundary's intensity is stated in tCO2e per barrel of oil equivalent produced?",
  "Igbogene flow station and gas plant, inlet to export",

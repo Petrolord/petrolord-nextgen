@@ -10,7 +10,7 @@ q(1, "What does the engine's own statement of its combustion method say the atom
  ["A registered emission factor with its source and its version",
   "The declared GWP set, which converts the carbon it counts",
   "The fuel supplier's statement for the year it is run on"],
- "SECTION 3 quotes the method verbatim: \"Atom balance: carbon in equals CO2 out. This is conservation of mass, so it needs no source document.\" That is why an atom-balance line carries the source \"Atom balance (conservation of mass)\" and the version \"not applicable\".")
+ "SECTION 3 quotes the method verbatim: \"Atom balance: carbon in equals CO2 out. This is conservation of mass, so it needs no source document.\" In SECTION 7 each atom-balance line carries the source \"Atom balance (conservation of mass)\" and the version \"not applicable\"; the registered factors carry a source and a version.")
 
 q(3, "One thousand kilomoles of a fuel with one carbon atom a molecule are burned at a destruction efficiency of 0.98. What does the engine return?",
  "co2Tonnes 43.129 and ch4Tonnes 0.321",
@@ -35,7 +35,7 @@ q(2, "Each kilomole of carbon that escapes combustion leaves as how many kilogra
 
 q(1, "The Igbogene fired heaters burn 482000 kmol of fuel a year at 1.09 kmol of carbon per kmol, all invented. What carbonKmolPerYear does the engine return?",
  "525380.000 kmol",
- ["482000 kmol, the fuel itself",
+ ["482000 kmol",
   "50820.000 kmol",
   "23121.448 kmol"],
  "SECTION 4 prints carbonKmolPerYear 525380.000 for the heaters. 482000 is the fuel quantity typed in, 50820.000 is the flare's carbon in SECTION 5, and 23121.448 is the heaters' co2Tonnes, a mass of CO2 in tonnes.")
@@ -73,7 +73,7 @@ q(3, "A flare call leaves the carbon per kilomole of fuel out. What does the eng
  ["REFUSED: A fuel quantity and a carbon content cannot be negative.",
   "REFUSED: The destruction efficiency must lie in (0, 1].",
   "It computes at a stated default of 1 kmol of carbon a kmol of fuel."],
- "SECTION 2 prints \"REFUSED: A fuel quantity and the carbon per kilomole of fuel are required.\" for the carbon per kmol left out and for a blank fuel. Neither input has a default; only the destruction efficiency does.")
+ "SECTION 2 prints \"REFUSED: A fuel quantity and the carbon per kilomole of fuel are required.\" for the carbon per kmol left out and for a blank fuel. The destruction efficiency left out of the call takes its stated default of complete combustion; the carbon per kmol left out is refused.")
 
 q(0, "Fuel typed as -1 kmol on the flare: which refusal follows?",
  "REFUSED: A fuel quantity and a carbon content cannot be negative.",
@@ -87,7 +87,7 @@ q(2, "Which keys does combustionCo2FromCarbon's result carry for the gases it co
  ["co2Tonnes, ch4Tonnes and n2oTonnes",
   "co2Tonnes only, with methane left to a factor line",
   "one key in tCO2e, converted on the declared set"],
- "SECTION 3: \"The engine's result carries these keys and no other gas: co2Tonnes, ch4Tonnes.\" Nitrous oxide from combustion is not computed by the atom balance (H4) and needs an emission factor line. The methane is in tonnes of methane until a GWP set converts it.")
+ "SECTION 3: \"The engine's result carries these keys and no other gas: co2Tonnes, ch4Tonnes.\" Nitrous oxide from combustion is not computed by the atom balance (H4) and needs an emission factor line. In SECTION 7 the flare's 16.306 t CH4 is converted at a GWP of 29.8 on IPCC AR6 GWP100, fossil methane.")
 
 q(1, "carbonAbatement.MW_CO2 reads 44.009. How does the digest say it is built?",
  "12.011 plus two oxygens at 15.999",
@@ -105,7 +105,7 @@ q(2, "The Igbogene heaters' destruction efficiency is 1. How does SECTION 4 reco
 
 q(0, "The digest explains why 1000 kmol of carbon burned completely is 44.009 t of CO2. What is the explanation?",
  "Each kilomole of carbon that burns leaves as MW_CO2 kilograms of CO2.",
- ["A registered factor of 44.009 is applied to each tonne of the fuel.",
+ ["A registered factor of 44.009 is applied to each tonne of the fuel burned.",
   "Each kilomole of carbon that burns leaves as MW_CH4 kilograms of CO2.",
   "The CO2 is weighed at MW_C and then converted at the set's GWP."],
  "SECTION 3 gives this as the reason 1000 kmol burned completely is 44.009 t. The method uses no registered factor, and MW_CH4 is for escaped carbon.")

@@ -52,7 +52,7 @@ q(0, "What factor does SECTION 7 give the atom-balance lines, as the Carbon Stud
  ["The heaters' 1.09 kmol of carbon per kmol of fuel",
   "MW_CO2, 44.009, whose source is the IUPAC weights",
   "The set's CH4 value, 29.8, applied as the factor"],
- "SECTION 7: \"The atom-balance lines carry a factor of 1 whose source is conservation of mass, as the Carbon Studio builds them.\" The GWP column carries 29.8 on the methane line; the factor column reads 1 on all three atom-balance lines.")
+ "SECTION 7: \"The atom-balance lines carry a factor of 1 whose source is conservation of mass, as the Carbon Studio builds them.\" The factor column reads 1 on all three atom-balance lines; 29.8 sits in the GWP column of the methane lines, on IPCC AR6 GWP100, fossil methane.")
 
 q(2, "How many lines make up Scope 1 in the complete Igbogene inventory, and what do they total?",
  "4 lines, 30030.777 tCO2e",
@@ -101,7 +101,7 @@ q(3, "At which step of the Igbogene build does the line count go from 4 to 5?",
  ["The GWP set declared",
   "The electricity factor entered with its source",
   "The survey referenced"],
- "SECTION 9's lines column reads 4, 4, 5, 5, 5. The flare efficiency entered is the step where it moves, since a refused flare is one blocked line and a computed flare is two lines (SECTION 5 and SECTION 7).")
+ "SECTION 9's lines column reads 4, 4, 5, 5, 5, and the flare efficiency entered is the step where it moves. SECTION 5 turns a refused flare into 1 blocked line, and SECTION 7 carries the computed flare as two lines, Flaring (CO2) and Flaring (unburned CH4).")
 
 q(1, "The Igbogene first pass totals 23121.448 tCO2e. What do its computed and reportable flags read?",
  "computed true and reportable false",

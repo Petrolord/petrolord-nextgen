@@ -10,7 +10,7 @@ q(2, "Which function does energyEfficiency.priceSaving call to cost a tonne of c
  ["carbonAbatement.carbonIntensity",
   "carbonAbatement.abatementCurve",
   "energyEfficiency.excessAirSaving"],
- "SECTION 1: the Efficiency Studio's cost per tonne is carbonAbatement.abatementCost called from inside energyEfficiency.priceSaving, so a tonne saved in either app is costed by one carbonAbatement function.")
+ "SECTION 1: the Energy & Utilities Efficiency Studio's cost per tonne is carbonAbatement.abatementCost called from inside energyEfficiency.priceSaving. SECTION 1 lists carbonIntensity and abatementCurve as other carbonAbatement functions, and excessAirSaving as an energyEfficiency function.")
 
 q(0, "What does the constant carbonAbatement.SCOPE hold?",
  "ONE 1 and TWO 2",
@@ -31,7 +31,7 @@ q(1, "A flare call reaches combustionCo2FromCarbon with the destruction efficien
  ["REFUSED: The destruction efficiency must lie in (0, 1].",
   "REFUSED: A fuel quantity and the carbon per kilomole of fuel are required.",
   "REFUSED: A fuel quantity and a carbon content cannot be negative."],
- "SECTION 2 prints the same refusal for a blank and for a null destruction efficiency. The interval refusal is for 0 or for 98 typed as a percentage, and the other two are for a missing or a negative fuel quantity.")
+ "SECTION 2 prints the same refusal for a blank and for a null destruction efficiency. The interval refusal is for 0 or for 98 typed as a percentage, and the other two are the fuel refusals, one for a missing input and one for a negative fuel.")
 
 q(2, "combustionCo2FromCarbon({ fuelKmolPerYear: 1000, carbonPerKmolFuel: 1 }) leaves the destruction efficiency out of the call. What does it answer?",
  "destructionEfficiencyFraction 1, co2Tonnes 44.009, ch4Tonnes 0.000",
@@ -73,7 +73,7 @@ q(0, "What does makeGwpSet({}) return?",
  ["label none, gases 4, declared true",
   "REFUSED, with no set returned at all",
   "the course's set, declared true"],
- "SECTION 1 prints the row for makeGwpSet({}): label none, gases 0, declared false. The engine ships no GWP, so an empty call returns an empty set and fills in nothing.")
+ "SECTION 1 prints the row for makeGwpSet({}): label none, gases 0, declared false. Neither module exports a global warming potential, and SECTION 6 declares a set only with a label and at least one value.")
 
 q(1, "A factor is typed with a value of 2.5 tCO2/t and nothing else. What does its record read?",
  "hasValue true, provenanceComplete false, missingProvenance source, version",
