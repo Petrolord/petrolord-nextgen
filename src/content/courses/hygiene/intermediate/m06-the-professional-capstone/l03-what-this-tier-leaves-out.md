@@ -1,13 +1,36 @@
 # What this tier leaves out
 
-<!-- H2 SCAFFOLD PLACEHOLDER: replace this body. Do not change the H1 or the panel line. -->
+This tier taught four protector methods and grades one of them. It taught the weekly noise exposure level, the 8-hour chemical TWA, the STEL and the mixture index, each against a formula a source prints. What it leaves out is as deliberate as what it keeps, and the reasons are the same reasons the capstone is built the way it is.
 
-This lesson is not written yet. It belongs to intermediate module The Professional Capstone (m06-the-professional-capstone) and must carry between 420 and 560 PROSE WORDS, counted the way lengths.py counts them: front matter, markdown table rows and panel lines are excluded and HEADINGS ARE COUNTED.
+| item | status in this course | why |
+| --- | --- | --- |
+| NIOSH protector derating by type | taught, never graded | oracle only |
+| OSHA dual-protection 5 dB | taught, never graded | oracle only |
+| Brief and Scala weekly factor on its own | Expert tier, never graded | oracle only |
+| any verdict word | never graded | the graded fields are numbers |
+| any ACGIH value or licensed limit | never quoted | licensed |
+| every heat stress limit and margin | Expert tier, never graded | transcription only |
 
-Every figure in it must be quoted from digest.txt at the precision the digest prints, and no figure may come from FINDINGS-exposure.md or the engine source comments, which are provenance rather than teaching truth.
+## Oracle only means untested against print
 
-NOTHING IN THIS COURSE GRADES A NIOSH HEAT LIMIT, a heat margin, a WBGT built from thermometer readings or a verdict word. Digest section 23 gives the reason for each and BRIEF.md records the decision.
+The NIOSH derating by type and the OSHA dual-protection rule agree between the engine and an independent oracle, and no source prints a value that could catch a misreading shared by both. A graded answer that a shared misreading would still pass is not graded on evidence. So both are taught for recognition and neither reaches a graded field.
+
+## Verdict words and licensed values
+
+Exceeds, passes, at or above an action value: none of these is graded anywhere in the course. The graded fields are numbers, and the reader draws the comparison from the number and its named criterion. No ACGIH TLV is quoted, and neither is ISO 9612 or ISO 7243 text. Every limit in this course is typed as an input from a public OSHA or NIOSH value.
+
+## The judgement calls are never at their boundary
+
+The engine's calls are taught by name, and no capstone input sits on one. In this tier that means no protector credit reaches the floor at zero (J5), no record leaves unsampled time undeclared (J6), no mixture index lands exactly on unity (J7), and no weekly LEX is fed a number of days other than five (J10). You learned each boundary so you can recognise it in the field. The capstone does not test you on it.
+
+## What belongs to other courses
+
+Flare and pool-fire thermal radiation, a radiant flux in kW/m2, belongs to the Separation and Relief courses. BTEX as an emission from a glycol unit belongs to the Gas Processing course. Incident and injury rates belong to Safety Performance Statistics, the first course of this module. The 5x5 risk matrix belongs to the Risk, Change and Learning course. Cite them, and stop there.
+
+## What the Expert tier adds
+
+The Expert tier adds heat stress, the shift that is not eight hours, the Brief and Scala reduction factors, and the evidence behind every formula in the course. Where this tier warned that a ten-hour chemical record might need an unusual shift adjustment, the Expert tier teaches the adjustment.
 
 ## Exercise
 
-Not written yet.
+From the table, list the two protector methods this tier taught and never grades, and state the evidence class of each. Then name the four judgement calls this lesson lists and give, for each, the boundary no capstone input sits on. Finally, name the course that owns incident rates.

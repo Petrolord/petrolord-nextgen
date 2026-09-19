@@ -2,14 +2,35 @@
 
 {{panel:hy-protection-chemicals}}
 
-<!-- H2 SCAFFOLD PLACEHOLDER: replace this body. Do not change the H1 or the panel line. -->
+One protector with a label NRR of 27.000000 dB, worn against an A-weighted TWA of 97.600000 dBA, gives four different estimated levels by four named methods: 77.600000, 87.600000, 72.600000 and, for an earmuff, 84.350000 dBA. The label is one number. What it is worth depends on the question you ask of it.
 
-This lesson is not written yet. It belongs to intermediate module Hearing Protector Estimates (m03-hearing-protector-estimates) and must carry between 420 and 560 PROSE WORDS, counted the way lengths.py counts them: front matter, markdown table rows and panel lines are excluded and HEADINGS ARE COUNTED.
+| method | the question | estimated level, dBA |
+| --- | --- | --- |
+| OSHA_APPENDIX_B | is the protector adequate for hearing conservation | 77.600000 |
+| OSHA_FIELD_50 | are engineering controls needed | 87.600000 |
+| OSHA_DUAL | what do two protectors worn together give | 72.600000 |
+| NIOSH_TYPE, earmuff | what does NIOSH credit this type with | 84.350000 |
 
-Every figure in it must be quoted from digest.txt at the precision the digest prints, and no figure may come from FINDINGS-exposure.md or the engine source comments, which are provenance rather than teaching truth.
+## The noise reduction rating
 
-NOTHING IN THIS COURSE GRADES A NIOSH HEAT LIMIT, a heat margin, a WBGT built from thermometer readings or a verdict word. Digest section 23 gives the reason for each and BRIEF.md records the decision.
+The NRR is a single-number rating printed on the package. It is measured in a laboratory and it is stated against C-weighted sound levels. A workplace survey is usually A-weighted. So every method starts by deciding how much of the label to credit and whether to allow for the difference between the two weightings. That is why the door `hearingProtectorEstimate` takes four things: a level, its weighting, the NRR and a method.
+
+## Four methods, four questions
+
+Appendix B of 29 CFR 1910.95 asks whether a protector reduces an employee's noise exposure enough for the hearing conservation programme. The OSHA Technical Manual field derating asks whether the employer must turn to engineering controls. The dual-protection rule asks what a plug and a muff together are worth. The NIOSH derating by type asks what the label is worth given how that kind of protector performs when people wear it. Each lesson in this module takes one of them.
+
+## How strong each method's evidence is
+
+Two methods are published and reproduced. The OSHA Technical Manual worked example gives 98 dBA with an NRR of 25 as 89.000000 dBA under the field derating and 80.000000 dBA under Appendix B, and the engine reproduces both. The NIOSH derating by type and the OSHA dual-protection 5 dB are oracle only: the engine and an independent oracle agree, and no printed value is known to set against either. Neither is ever graded in this course. They are taught so you can recognise them and say what they rest on.
+
+## A method the door does not know
+
+Every call names its method, and the engine refuses one it does not recognise, in its own words:
+
+> method must be one of OSHA_APPENDIX_B, OSHA_FIELD_50, OSHA_DUAL, NIOSH_TYPE
+
+The engine has no door for spectral, octave-band protector methods. A label NRR is the only protector input it takes.
 
 ## Exercise
 
-Not written yet.
+Open the protection panel's protector view with the A-weighted teaching case. Record the estimated level under each of the four methods. Then state which two methods the OSHA Technical Manual worked example reproduces, and give the two levels it prints. Finally, write one sentence saying which method you would use to decide whether engineering controls are needed.
