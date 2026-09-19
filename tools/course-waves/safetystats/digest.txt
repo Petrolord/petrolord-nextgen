@@ -132,7 +132,7 @@ The engine has one function for all three. The case class is the caller's count,
 | IOGP 2024 FAR through incidenceRate on 100,000,000 | 32 | 4158877000 | 0.769438 | 0.769438 | 0.77 | 0 |
 | IOGP 2024 fatal incidents per 100,000,000 hours | 21 | 4158877000 | 0.504944 | 0.504944 | none printed | 0 |
 
-`fatalAccidentRate` takes no base argument; its `basis.base` is 100000000 and its `basis.standard` reads "IOGP safety performance indicators, FAR". FAR has one definition, so the engine fixes it, and every other rate has more than one, so the engine refuses to guess.
+`fatalAccidentRate` takes no base argument; its `basis.base` is 100000000 and its `basis.standard` reads "IOGP safety performance indicators, FAR". The engine takes the IOGP definition of FAR and fixes its base. Other bodies use related framings, such as fatalities per worker-year or the same hours read as a number of working lifetimes, so a fatal rate quoted from elsewhere needs its definition checked before it is set beside this one. Every other rate in this course is quoted on more than one base, so the engine refuses to guess.
 
 A fatality count and a fatal incident count are different counts: 2024 had 32 fatalities in 21 fatal incidents (golden). The first gives the FAR and the second the fatal incident rate, on the same hours.
 
@@ -174,6 +174,8 @@ The engine does not decide whether an event is Tier 1 or Tier 2. That needs the 
 
 # SECTION 10: Sum, then divide: pooling sites (owned by Associate m04 and Expert m05 l05)
 
+KWALE runs three sites (stated):
+
 | site | recordables, stated | hours, stated | site rate per 200,000 |
 | --- | --- | --- | --- |
 | compression station | 3 | 512300 | 1.171189 |
@@ -190,7 +192,7 @@ The engine does not decide whether an event is Tier 1 or Tier 2. That needs the 
 
 The engine note, verbatim: "meanOfPeriodRates is the unweighted mean of the per-period rates over periods with hours; it is NOT the pooled rate". In the mean of rates each site carries a weight of one third, derived 0.333333. In the pooled rate each site carries its share of the hours, and the jetty's share, derived, is 61480 over 2478540, which is 0.024805. The pooled rate is the rate of the whole workforce; the mean of rates weights a jetty crew like a flow station.
 
-A MOTHBALLED SITE with 0 hours and 0 events contributes nothing. With it listed, the pooled rate is 0.968312, its own period rate is null, never zero, `periodsWithoutHours` is 1, and the mean of rates over the sites with hours is 1.754760.
+A MOTHBALLED SITE with 0 hours and 0 events contributes nothing. With it listed, the pooled rate is 0.968312, its own period rate is null, because a site with no hours has no rate to report, `periodsWithoutHours` is 1, and the mean of rates over the sites with hours is 1.754760.
 
 ONE EVENT at a site with no hours is refused as bad data, naming the period:
 
@@ -401,6 +403,8 @@ ERHA east recorded 6 events in 240500 hours and west 11 in 902700 hours (stated)
 | rateRatioUpper, 95 percent | 6.039396 |
 | upperUnbounded | false |
 
+Each number in this table is rounded to six decimals on its own, so twice a printed tail can differ from the printed pValue in the last digit, as it does here. The engine computes the pValue from the unrounded tail.
+
 No base is taken: it cancels in a ratio. The engine's method line: "conditional exact binomial test (Przyborowski and Wilenski 1940), central two-sided p-value (twice the smaller tail, capped at 1), Clopper-Pearson rate-ratio interval".
 
 WHEN ONE GROUP HAS NO EVENTS (goldens):
@@ -410,7 +414,7 @@ WHEN ONE GROUP HAS NO EVENTS (goldens):
 | compare-first-zero | 0, 180000 | 6, 210000 | 0.000000 | 0.000000 | 0.990863 | false | 0.048748 | null |
 | compare-second-zero | 4, 90000 | 0, 150000 | null | 1.100207 | null | true | 0.039551 | count2 is zero: the rate ratio and its upper limit are unbounded |
 
-A ratio with no events underneath it is unbounded, and the engine says so with null and a reason, never with Infinity. Both groups empty is refused (section 4).
+A ratio with no events underneath it is unbounded, and the engine says so with null and a reason in place of Infinity. Both groups empty is refused (section 4).
 
 # SECTION 19: The central p-value, the minlike p-value, and why the engine chose central (owned by Professional m05)
 
@@ -541,18 +545,20 @@ The intervention went in at the start of month 7 (stated). The flagged month, 8,
 | comparison | after: count, hours | before: count, hours | rate ratio after over before | lower 95 | upper 95 | central p-value |
 | --- | --- | --- | --- | --- | --- | --- |
 | all months | 35, 2389010 | 28, 1965920 | 1.028627 | 0.607952 | 1.755328 | 1.000000 |
-| month 8 set aside | 19, 1967920 | 28, 1965920 | 0.677882 | 0.357764 | 1.257771 | 0.241552 |
+| month 8 set aside, valid only with a found cause | 19, 1967920 | 28, 1965920 | 0.677882 | 0.357764 | 1.257771 | 0.241552 |
+
+The second row stands only if investigation finds a cause for the flagged month, the condition set in the section before this one. The flagged month falls after the intervention, so setting it aside can only lower the after rate, and without a found cause that flatters the programme.
 
 With every month in, the after period reads a rate ratio of 1.028627 with a p-value of 1.000000. With month 8 set aside it reads 0.677882 with a p-value of 0.241552. One month turns the ratio from above 1 to below it, and neither comparison is significant at 0.05: the data cannot say the intervention changed the rate in either direction. A before-and-after claim has to say which months it used and why. The p-value of 1.000000 is the cap: twice the smaller tail, derived 1.015454, is above 1.
 
-RATE CHASING. A month picked because it was the worst is likely to be followed by a better one even if nothing changed, because part of what made it the worst was chance. On EGBEMA:
+RATE CHASING. A month picked because it was the worst is likely to be followed by a better one even if nothing changed. In general part of what makes a month the worst is chance; a month made worst by a one-off cause is followed by a better one because the cause does not recur. On EGBEMA:
 
 | month | count | u | expected count at the centre line, derived: centre times units |
 | --- | --- | --- | --- |
 | 8 | 16 | 7.599326 | 6.091641 |
 | 9 | 4 | 2.067504 | 5.597615 |
 
-The month after the worst reads 2.067504 against the worst month's 7.599326, and it sits inside its limits like the other ordinary months. A programme launched at the worst month would take credit for that fall, and the chart gives no reason to think anything changed.
+The month after the worst reads 2.067504 against the worst month's 7.599326, and it sits inside its limits like the other ordinary months. The worst month sits above its three sigma limit, so by the chart's own logic chance alone is an unlikely explanation for it. The stronger reason to withhold credit is that a one-off cause does not recur: once it has passed, the next month returns to the ordinary run whether or not a programme started. A programme launched at the worst month would take credit for that fall, and the chart gives no reason to think the programme caused it.
 
 # SECTION 25: Benchmarking against the IOGP published figures (owned by Expert m04)
 
@@ -562,7 +568,7 @@ The month after the worst reads 2.067504 against the worst month's 7.599326, and
 | FAR 2024 | 32 | 4158877000 | 100000000 | 0.769438 | 0.77 | 0 |
 | FAR 2023 | 27 | 3291382000 | 100000000 | 0.820324 | 0.82 | 0 |
 
-The IOGP report prints the hours to the nearest million, so the engine's 0.809223 anchors the formula and the printed 0.81, and nothing finer.
+HOW FINE THESE FIGURES ARE. The IOGP report gives the TRIR hours to the nearest million and the FAR hours to the nearest thousand. Half a million hours either way moves the TRIR in its fourth decimal, so the engine's 0.809223 is exact for the hours as printed, rounds to the printed 0.81, and is good to about one unit in the fourth decimal for the hours as worked. Half a thousand hours moves either FAR by about one unit in the seventh decimal, which can tip the sixth decimal printed here and no coarser digit.
 
 SAME BASE AND SAME DEFINITION FIRST. UGHELLI's recordable rate is 0.776317 per 200,000 hours (section 2). Set beside the IOGP TRIR of 0.809223 per 1,000,000 it looks lower. On the IOGP base UGHELLI reads 3.881586, which is, derived, 4.796684 times the IOGP figure. The definitions must match too: IOGP's TRIR counts fatalities, lost workday, restricted workday and medical treatment cases.
 
@@ -576,6 +582,8 @@ A BENCHMARK IS A POPULATION FIGURE. Run through the engine as if the IOGP total 
 | expectedProportion, derived from UGHELLI hours over all hours | 0.000611 |
 
 The interval is almost all UGHELLI's uncertainty: the IOGP total rests on 3071 events and UGHELLI on 9. The IOGP figure pools many companies with different work, different reporting and different definitions of a recordable; it is a reference line. The test treats it as one workforce under one rate, and it is many workforces under many. The engine does not know which companies are in it, and a benchmark comparison inherits every one of those differences.
+
+The p-value answers a question nobody asked: whether one site runs at exactly the pooled rate of the whole industry, which no single site is expected to do. A small p-value here says only that one site is not the industry. The weight goes on the ratio and its interval: on this evidence UGHELLI runs at between about two and about nine times the IOGP rate. The rounding of the IOGP hours moves the ratio and its lower limit in the fourth decimal, the upper limit in the third, and the p-value not at all at six decimals.
 
 THE FIVE YEAR VIEW. IOGP's own five-year FAR (section 10) is 0.826095 by sum then divide and 0.833228 by the mean of the five yearly rates. Quote the first.
 
@@ -594,7 +602,7 @@ DENOMINATORS THAT MOVE. The second row adds the contractor hours and leaves out 
 
 RECLASSIFICATION. Moving 2 recordables to first aid lowers the recordable rate from 1.161259 to 0.982603. The 58 days lost do not move, so the severity rate on the same hours is 5.181000 before the reclassification and after it. A rate that falls while the harm does not is a change in counting.
 
-THE MEAN OF RATES, ONE LEVEL UP. A group that averages its sites' rates, or an industry body that averages its members' rates, makes the section 10 mistake at a larger scale. KWALE's mean of site rates was 1.754760 against a pooled 0.968312, and IOGP's five yearly FARs average to 0.833228 against a pooled 0.826095.
+THE MEAN OF RATES, ONE LEVEL UP. A group that averages its sites' rates, or an industry body that averages its members' rates, makes the section 10 mistake at a larger scale. KWALE's mean of site rates was 1.754760 against a pooled 0.968312. IOGP pools, over its members' hours and over the years: averaging its five yearly FARs would give 0.833228, and the figure it computes, the sum of fatalities over the sum of hours, is 0.826095.
 
 # SECTION 27: What the engine does not classify, and where the judgement stays (owned by Expert m06)
 

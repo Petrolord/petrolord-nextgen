@@ -13,7 +13,7 @@ ENGINE TEXT. Every engine message the digest quotes meets the owner copy rule,
 so ENGINE_TEXT below exempts nothing. An exemption added there is BY EXACT
 STRING, and a DEAD exemption fails this gate: a row that clears nothing is a
 claim about work never done. Every writer brief in this wave says: quote the
-message inside backticks as the engine's own words, and never write a
+message in a blockquote as the engine's own words, and never write a
 contrastive of your own.
 
 --plant is THE NEGATIVE CONTROL: it plants a contrastive and an em dash in the

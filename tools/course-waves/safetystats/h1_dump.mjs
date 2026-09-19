@@ -304,7 +304,7 @@ must('FAR and incidenceRate on the FAR base agree exactly', e24.rate === eInc.ra
 must('the 2024 FAR rounds to the published 0.77', e24.rate.toFixed(2) === '0.77', e24.rate);
 must('the 2023 FAR rounds to the published 0.82', e23.rate.toFixed(2) === '0.82', e23.rate);
 w();
-w(`\`fatalAccidentRate\` takes no base argument; its \`basis.base\` is ${e24.basis.base} and its \`basis.standard\` reads "${e24.basis.standard}". FAR has one definition, so the engine fixes it, and every other rate has more than one, so the engine refuses to guess.`);
+w(`\`fatalAccidentRate\` takes no base argument; its \`basis.base\` is ${e24.basis.base} and its \`basis.standard\` reads "${e24.basis.standard}". The engine takes the IOGP definition of FAR and fixes its base. Other bodies use related framings, such as fatalities per worker-year or the same hours read as a number of working lifetimes, so a fatal rate quoted from elsewhere needs its definition checked before it is set beside this one. Every other rate in this course is quoted on more than one base, so the engine refuses to guess.`);
 w();
 w(`A fatality count and a fatal incident count are different counts: 2024 had ${far24.args.fatalities} fatalities in ${fir.args.count} fatal incidents (golden). The first gives the FAR and the second the fatal incident rate, on the same hours.`);
 w();
@@ -357,6 +357,9 @@ table(['golden case', 'tier', 'events', 'hours', 'base', 'rate', 'golden rate', 
 section('pooling', 'Sum, then divide: pooling sites', ['Associate m04', 'Expert m05 l05']);
 const K = T.KWALE;
 const kp = success('KWALE pooledRate', S.pooledRate({ counts: K.counts, exposureHours: K.hours, base: B2 }));
+must('KWALE runs three sites', K.sites.length === 3, K.sites.length);
+w('KWALE runs three sites (stated):');
+w();
 table(['site', 'recordables, stated', 'hours, stated', 'site rate per 200,000'], K.sites.map((s, i) => [s, String(K.counts[i]), String(K.hours[i]), f6(kp.periodRates[i])]));
 w();
 table(['what', 'value'], [
@@ -373,7 +376,7 @@ must('the jetty carries under five percent of the hours', jettyShare < 0.05, jet
 w(`The engine note, verbatim: "${kp.basis.note}". In the mean of rates each site carries a weight of one third, derived ${f6(1 / 3)}. In the pooled rate each site carries its share of the hours, and the jetty's share, derived, is ${K.hours[2]} over ${kp.exposureHours}, which is ${f6(jettyShare)}. The pooled rate is the rate of the whole workforce; the mean of rates weights a jetty crew like a flow station.`);
 w();
 const km = success('KWALE with a mothballed site', S.pooledRate({ counts: K.mothballed.counts, exposureHours: K.mothballed.hours, base: B2 }));
-w(`A MOTHBALLED SITE with 0 hours and 0 events contributes nothing. With it listed, the pooled rate is ${f6(km.rate)}, its own period rate is ${String(km.periodRates[3])}, never zero, \`periodsWithoutHours\` is ${km.periodsWithoutHours}, and the mean of rates over the sites with hours is ${f6(km.meanOfPeriodRates)}.`);
+w(`A MOTHBALLED SITE with 0 hours and 0 events contributes nothing. With it listed, the pooled rate is ${f6(km.rate)}, its own period rate is ${String(km.periodRates[3])}, because a site with no hours has no rate to report, \`periodsWithoutHours\` is ${km.periodsWithoutHours}, and the mean of rates over the sites with hours is ${f6(km.meanOfPeriodRates)}.`);
 must('the mothballed site changes neither the pooled rate nor the mean', km.rate === kp.rate && km.meanOfPeriodRates === kp.meanOfPeriodRates, 'unchanged');
 must('the mothballed site rate is null', km.periodRates[3] === null, km.periodRates[3]);
 const ke = refusal('KWALE with events at a site with no hours', S.pooledRate({ counts: K.eventsWithoutHours.counts, exposureHours: K.eventsWithoutHours.hours, base: B2 }), 'exposureHours[3]');
@@ -599,6 +602,9 @@ table(['what the engine returns', 'value'], [
 ]);
 must('ERHA: expectedProportion is the hours share', rel(ec.expectedProportion, E.east.hours / (E.east.hours + E.west.hours)) < 1e-15, ec.expectedProportion);
 must('ERHA: the p-value is twice the smaller tail', rel(ec.pValue, Math.min(1, 2 * Math.min(ec.lowerTail, ec.upperTail))) < 1e-15, ec.pValue);
+must('ERHA: twice the printed upper tail differs from the printed pValue in the last digit only', (2 * Number(f6(ec.upperTail))).toFixed(6) !== f6(ec.pValue) && Math.abs(2 * Number(f6(ec.upperTail)) - Number(f6(ec.pValue))) < 1.5e-6, `${f6(ec.upperTail)} ${f6(ec.pValue)}`);
+w();
+w('Each number in this table is rounded to six decimals on its own, so twice a printed tail can differ from the printed pValue in the last digit, as it does here. The engine computes the pValue from the unrounded tail.');
 w();
 w(`No base is taken: it cancels in a ratio. The engine's method line: "${ec.basis.method}".`);
 w();
@@ -612,7 +618,7 @@ table(['golden case', 'count1, hours1', 'count2, hours2', 'rateRatio', 'lower', 
 must('first group empty: ratio 0 and lower 0', cz[0].r.rateRatio === 0 && cz[0].r.rateRatioLower === 0, 'zero');
 must('second group empty: ratio and upper null, unbounded, with a reason', cz[1].r.rateRatio === null && cz[1].r.rateRatioUpper === null && cz[1].r.upperUnbounded === true && typeof cz[1].r.reason === 'string', 'null');
 w();
-w(`A ratio with no events underneath it is unbounded, and the engine says so with null and a reason, never with Infinity. Both groups empty is refused (${ref('refusals')}).`);
+w(`A ratio with no events underneath it is unbounded, and the engine says so with null and a reason in place of Infinity. Both groups empty is refused (${ref('refusals')}).`);
 
 /* ============================================================ SECTION 19 */
 
@@ -774,9 +780,12 @@ w(`The intervention went in at the start of month ${G.interventionMonth} (stated
 w();
 table(['comparison', 'after: count, hours', 'before: count, hours', 'rate ratio after over before', 'lower 95', 'upper 95', 'central p-value'], [
   ['all months', `${c2a}, ${h2a}`, `${c1a}, ${h1a}`, f6(ba1.rateRatio), f6(ba1.rateRatioLower), f6(ba1.rateRatioUpper), f6(ba1.pValue)],
-  [`month ${gc.outOfControl[0] + 1} set aside`, `${c2b}, ${h2b}`, `${c1a}, ${h1a}`, f6(ba2.rateRatio), f6(ba2.rateRatioLower), f6(ba2.rateRatioUpper), f6(ba2.pValue)],
+  [`month ${gc.outOfControl[0] + 1} set aside, valid only with a found cause`, `${c2b}, ${h2b}`, `${c1a}, ${h1a}`, f6(ba2.rateRatio), f6(ba2.rateRatioLower), f6(ba2.rateRatioUpper), f6(ba2.pValue)],
 ]);
 must('with month 8 the after rate is not lower', ba1.rateRatio >= 1 || ba1.pValue > 0.05, ba1.rateRatio);
+must('setting the flagged month aside lowers the after rate', c2b / h2b < c2a / h2a, `${c2b / h2b} ${c2a / h2a}`);
+w();
+w('The second row stands only if investigation finds a cause for the flagged month, the condition set in the section before this one. The flagged month falls after the intervention, so setting it aside can only lower the after rate, and without a found cause that flatters the programme.');
 must('the two before-and-after comparisons give different p-values', Math.abs(ba1.pValue - ba2.pValue) > 0.01, `${ba1.pValue} ${ba2.pValue}`);
 w();
 must('with month 8 the ratio is above 1 and without it below 1', ba1.rateRatio > 1 && ba2.rateRatio < 1, `${ba1.rateRatio} ${ba2.rateRatio}`);
@@ -784,7 +793,7 @@ must('neither before-and-after comparison is significant at 0.05', ba1.pValue > 
 must('the all-months p-value is the cap of 1', ba1.pValue === 1 && 2 * Math.min(ba1.lowerTail, ba1.upperTail) > 1, `${ba1.lowerTail} ${ba1.upperTail}`);
 w(`With every month in, the after period reads a rate ratio of ${f6(ba1.rateRatio)} with a p-value of ${f6(ba1.pValue)}. With month ${gc.outOfControl[0] + 1} set aside it reads ${f6(ba2.rateRatio)} with a p-value of ${f6(ba2.pValue)}. One month turns the ratio from above 1 to below it, and neither comparison is significant at 0.05: the data cannot say the intervention changed the rate in either direction. A before-and-after claim has to say which months it used and why. The p-value of ${f6(ba1.pValue)} is the cap: twice the smaller tail, derived ${f6(2 * Math.min(ba1.lowerTail, ba1.upperTail))}, is above 1.`);
 w();
-w('RATE CHASING. A month picked because it was the worst is likely to be followed by a better one even if nothing changed, because part of what made it the worst was chance. On EGBEMA:');
+w('RATE CHASING. A month picked because it was the worst is likely to be followed by a better one even if nothing changed. In general part of what makes a month the worst is chance; a month made worst by a one-off cause is followed by a better one because the cause does not recur. On EGBEMA:');
 w();
 const worst = gc.outOfControl[0];
 const nextP = gc.points[worst + 1];
@@ -795,7 +804,8 @@ table(['month', 'count', 'u', 'expected count at the centre line, derived: centr
 w();
 must('the month after the worst reads lower', nextP.u < gc.points[worst].u, `${nextP.u} ${gc.points[worst].u}`);
 must('the month after the worst sits within its limits', nextP.signal === null, nextP.signal);
-w(`The month after the worst reads ${f6(nextP.u)} against the worst month's ${f6(gc.points[worst].u)}, and it sits inside its limits like the other ordinary months. A programme launched at the worst month would take credit for that fall, and the chart gives no reason to think anything changed.`);
+must('the worst month signals above its three sigma limit', gc.points[worst].signal === 'above' && gc.points[worst].u > gc.points[worst].ucl, gc.points[worst].signal);
+w(`The month after the worst reads ${f6(nextP.u)} against the worst month's ${f6(gc.points[worst].u)}, and it sits inside its limits like the other ordinary months. The worst month sits above its three sigma limit, so by the chart's own logic chance alone is an unlikely explanation for it. The stronger reason to withhold credit is that a one-off cause does not recur: once it has passed, the next month returns to the ordinary run whether or not a programme started. A programme launched at the worst month would take credit for that fall, and the chart gives no reason to think the programme caused it.`);
 
 /* ============================================================ SECTION 25 */
 
@@ -809,7 +819,7 @@ table(['IOGP figure', 'count, golden', 'hours, golden', 'base', 'engine', 'publi
 ]);
 must('the IOGP TRIR rounds to the published 0.81', trr.rate.toFixed(2) === '0.81', trr.rate);
 w();
-w(`The IOGP report prints the hours to the nearest million, so the engine's ${f6(trr.rate)} anchors the formula and the printed ${tr.published.value}, and nothing finer.`);
+w(`HOW FINE THESE FIGURES ARE. The IOGP report gives the TRIR hours to the nearest million and the FAR hours to the nearest thousand. Half a million hours either way moves the TRIR in its fourth decimal, so the engine's ${f6(trr.rate)} is exact for the hours as printed, rounds to the printed ${tr.published.value}, and is good to about one unit in the fourth decimal for the hours as worked. Half a thousand hours moves either FAR by about one unit in the seventh decimal, which can tip the sixth decimal printed here and no coarser digit.`);
 w();
 const ugOsha = uRates[0];
 const ugIogp = uRates[1];
@@ -826,6 +836,8 @@ table(['what', 'value'], [
 ]);
 w();
 w(`The interval is almost all UGHELLI's uncertainty: the IOGP total rests on ${tr.args.count} events and UGHELLI on ${U.recordables}. The IOGP figure pools many companies with different work, different reporting and different definitions of a recordable; it is a reference line. The test treats it as one workforce under one rate, and it is many workforces under many. The engine does not know which companies are in it, and a benchmark comparison inherits every one of those differences.`);
+w();
+w('The p-value answers a question nobody asked: whether one site runs at exactly the pooled rate of the whole industry, which no single site is expected to do. A small p-value here says only that one site is not the industry. The weight goes on the ratio and its interval: on this evidence UGHELLI runs at between about two and about nine times the IOGP rate. The rounding of the IOGP hours moves the ratio and its lower limit in the fourth decimal, the upper limit in the third, and the p-value not at all at six decimals.');
 w();
 w(`THE FIVE YEAR VIEW. IOGP's own five-year FAR (${ref('pooling')}) is ${f6(i5.rate)} by sum then divide and ${f6(i5.meanOfPeriodRates)} by the mean of the five yearly rates. Quote the first.`);
 
@@ -855,7 +867,7 @@ w();
 const sevBefore = success('AMUKPE severity before reclassification', S.severityRate({ daysLost: M.daysLost, exposureHours: all, base: B2 }));
 w(`RECLASSIFICATION. Moving ${M.reclassified} recordables to first aid lowers the recordable rate from ${trap[2][3]} to ${trap[3][3]}. The ${M.daysLost} days lost do not move, so the severity rate on the same hours is ${f6(sevBefore.rate)} before the reclassification and after it. A rate that falls while the harm does not is a change in counting.`);
 w();
-w(`THE MEAN OF RATES, ONE LEVEL UP. A group that averages its sites' rates, or an industry body that averages its members' rates, makes the ${ref('pooling')} mistake at a larger scale. KWALE's mean of site rates was ` + `${f6(kp.meanOfPeriodRates)} against a pooled ${f6(kp.rate)}, and IOGP's five yearly FARs average to ${f6(i5.meanOfPeriodRates)} against a pooled ${f6(i5.rate)}.`);
+w(`THE MEAN OF RATES, ONE LEVEL UP. A group that averages its sites' rates, or an industry body that averages its members' rates, makes the ${ref('pooling')} mistake at a larger scale. KWALE's mean of site rates was ` + `${f6(kp.meanOfPeriodRates)} against a pooled ${f6(kp.rate)}. IOGP pools, over its members' hours and over the years: averaging its five yearly FARs would give ${f6(i5.meanOfPeriodRates)}, and the figure it computes, the sum of fatalities over the sum of hours, is ${f6(i5.rate)}.`);
 
 /* ============================================================ SECTION 27 */
 

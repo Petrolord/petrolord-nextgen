@@ -79,10 +79,10 @@
   "summary": "79 wrong methods over 18 routes, 0 WEAK, closest miss 822.7 tolerances (forcados_before_after_p_value via minlike). Negative control at tolerance x1e9: 18 of 18 WEAK."
  },
  "digest": {
-  "lines": 614,
+  "lines": 622,
   "sections": 28,
-  "md5": "704175bdf725ca1681ee18a5cb08e29c",
-  "sha256": "042a36b12ea3d4d3f3efdadc9b0a574988159e881f24874e3753e0a59acb4053"
+  "md5": "3299a936e5de1f48e5620d82bd0938ee",
+  "sha256": "eb05505eae6b9c53ed1e999a2a5f20765700268fe38cbd273afc6bb1360538ad"
  },
  "history": {
   "position": "THIS ENGINE HAS NO REPAIR HISTORY: written, oracle-gated and merged in one pull request. No history module, no framed history section; structure.py and digest_prose.rules.mjs refuse any key, title or heading that reads as one."
@@ -169,14 +169,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh hse-wip-safetystats",
    "expected": 0,
    "exit": 0,
-   "summary": "h1_dump: 502 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
+   "summary": "h1_dump: 506 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules hse-wip-safetystats",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/hse-wip-safetystats/digest.txt: 614 line(s), 28 section title(s) and 36 in-body marker(s) swept against their blocks, 32 history framings, 17 engine pin(s); 0 warned for a human read and 0 framed as c"
+   "summary": "[digestprose] /root/hse-wip-safetystats/digest.txt: 622 line(s), 28 section title(s) and 37 in-body marker(s) swept against their blocks, 32 history framings, 17 engine pin(s); 0 warned for a human read and 0 framed as c"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -249,42 +249,49 @@
    "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
   },
   "gate_capstone_leak.mjs": {
-   "md5": "6860cd015906bb67d953c07af3fc7d85",
+   "md5": "903110cb1744e6f580295cd906a07234",
    "command": "node gate_capstone_leak.mjs --no-banks",
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
-   "md5": "6860cd015906bb67d953c07af3fc7d85",
+   "md5": "903110cb1744e6f580295cd906a07234",
    "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
-   "md5": "6860cd015906bb67d953c07af3fc7d85",
+   "md5": "903110cb1744e6f580295cd906a07234",
    "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
-   "md5": "6860cd015906bb67d953c07af3fc7d85",
+   "md5": "903110cb1744e6f580295cd906a07234",
    "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
   },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "903110cb1744e6f580295cd906a07234",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
   "gate_copy_rule.py": {
-   "md5": "b121ad0ef74bb77c1d001d7e644e5c9d",
+   "md5": "bd052f80a5ff4b362dce384dbf1166c0",
    "command": "python3 gate_copy_rule.py",
    "expected": 0,
    "exit": 0,
    "summary": "VIOLATIONS: 0"
   },
   "gate_copy_rule.py NEGATIVE CONTROL": {
-   "md5": "b121ad0ef74bb77c1d001d7e644e5c9d",
+   "md5": "bd052f80a5ff4b362dce384dbf1166c0",
    "command": "python3 gate_copy_rule.py --plant",
    "expected": 1,
    "exit": 1,

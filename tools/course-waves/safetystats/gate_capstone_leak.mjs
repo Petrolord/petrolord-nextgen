@@ -32,11 +32,28 @@
 //      <wave>/banks). A missing banks directory is a REFUSAL unless the run
 //      declares --no-banks, which the foundation phase does because no bank
 //      exists yet.
+//  10. THE LESSONS. Every .md file under --lessons (default
+//      <repo>/src/content/courses/safetystats, recursive), front matter
+//      included: no capstone workplace name; no capstone hours figure, written
+//      plain or with thousands commas; no capstone count series; no capstone
+//      scalar count that the digest does not itself print (a count the digest
+//      prints is quotable as a digest figure, and the run says which counts it
+//      excused that way); no graded value at the four renderings; and no
+//      numeric literal within TEN tolerances of a graded value in any of the
+//      five unit shiftings. A missing lessons directory, or one with no .md
+//      file in it, is a REFUSAL unless the run declares --no-lessons.
+//      LESSON_TASK.md has always said this gate covers the lessons; until
+//      direction 10 it read none of them.
 //
-//   node gate_capstone_leak.mjs [--no-banks] [--banks DIR]
+//   node gate_capstone_leak.mjs [--no-banks] [--banks DIR] [--no-lessons] [--lessons DIR]
 //   node gate_capstone_leak.mjs --no-banks --plant-value | --plant-input | --plant-name
 //      THE NEGATIVE CONTROLS: each plants one leak in the digest text in memory
 //      and must exit 1 naming the direction that caught it.
+//   node gate_capstone_leak.mjs --no-banks --plant-lesson
+//      THE LESSONS CONTROL: appends, in memory, to the first lesson file read,
+//      a literal three tolerances off a graded value (a near miss, so no
+//      rendering matches and only the numeric comparison can catch it) and
+//      must exit 1 with a [10 lessons] numeric finding naming that file.
 //
 // Exit 0 clean, 1 a leak, 2 could not run.
 import fs from 'node:fs';
@@ -216,16 +233,89 @@ if (has('--no-banks')) {
   if (bankTexts === 0) die(`the banks directory ${banksDir} holds no readable question text`);
 }
 
+// 10. THE LESSONS
+const lessonsDir = opt('--lessons') || path.join(REPO, 'src/content/courses/safetystats');
+const lessonFiles = [];
+let lessonLits = 0;
+let plantedIn = null;
+const excusedCounts = [];
+const sweptCounts = [];
+if (has('--no-lessons')) {
+  console.log('  direction 10: --no-lessons DECLARED. This run says NOTHING about any lesson.');
+} else if (!fs.existsSync(lessonsDir)) {
+  die(`no lessons directory at ${lessonsDir}; pass --no-lessons to declare that this run does not sweep lessons`);
+} else {
+  const walkMd = (d) => fs.readdirSync(d, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name)).forEach((e) => {
+    const p = path.join(d, e.name);
+    if (e.isDirectory()) walkMd(p);
+    else if (e.name.endsWith('.md')) lessonFiles.push(p);
+  });
+  walkMd(lessonsDir);
+  if (lessonFiles.length === 0) die(`the lessons directory ${lessonsDir} holds no .md file`);
+  const digestLitSet = new Set(digestLits);
+  const scalarCounts = [];
+  Object.entries(INPUTS).forEach(([name, o]) => Object.entries(o).forEach(([k, v]) => {
+    if (typeof v === 'number' && Number.isInteger(v) && v < 1000) scalarCounts.push({ name, k, v });
+  }));
+  scalarCounts.forEach((c) => (digestLitSet.has(c.v) ? excusedCounts : sweptCounts).push(c));
+  const PLANT_FIELD = FIELDS[2];
+  lessonFiles.forEach((p, fi) => {
+    let text = fs.readFileSync(p, 'utf8');
+    const rel = path.relative(lessonsDir, p);
+    if (fi === 0 && has('--plant-lesson')) {
+      text += `\nA planted near miss: ${(PLANT_FIELD[2] - 3 * PLANT_FIELD[3]).toFixed(7)}.\n`;
+      plantedIn = rel;
+    }
+    // Thousands commas removed, so 1,846,220 is read as 1846220.
+    const plain = text.replace(/(\d),(?=\d{3}(?!\d))/g, '$1');
+    count('10 lesson files');
+    const m = plain.match(nameRe);
+    if (m) findings.push(`[10 lessons] ${rel} names the capstone workplace ${m[0]}`);
+    hoursFigures.forEach(({ name, k, v }) => {
+      count('10 lesson hours checks');
+      if (hasWord(plain, String(v))) findings.push(`[10 lessons] ${rel} carries ${name}.${k} = ${v}`);
+    });
+    series.forEach(({ name, k, v }) => {
+      count('10 lesson series checks');
+      if (plain.includes(v.join(', ')) || plain.includes(v.join(','))) findings.push(`[10 lessons] ${rel} carries the ${name}.${k} series`);
+    });
+    sweptCounts.forEach(({ name, k, v }) => {
+      count('10 lesson scalar count checks');
+      if (hasWord(plain, String(v))) findings.push(`[10 lessons] ${rel} carries ${name}.${k} = ${v}, a count the digest never prints`);
+    });
+    FIELDS.forEach(([, key, v]) => renderings(v).forEach((s) => {
+      count('10 lesson renderings searched');
+      if (plain.includes(s)) findings.push(`[10 lessons] ${rel} carries ${key} as ${s}`);
+    }));
+    const lits = literals(plain);
+    lessonLits += lits.length;
+    FIELDS.forEach(([, key, v, tol]) => SCALES.forEach((sc) => {
+      const target = v * sc;
+      const band = 10 * tol * sc;
+      lits.forEach((x) => {
+        count('10 lesson literal comparisons');
+        if (Math.abs(x - target) <= band) findings.push(`[10 lessons numeric] ${rel} literal ${x} is within ten tolerances of ${key} x${sc}`);
+      });
+    }));
+  });
+  console.log(`  direction 10: read ${lessonFiles.length} lesson files under ${lessonsDir}, ${lessonLits} numeric literals; `
+    + `scalar counts swept ${sweptCounts.map((c) => `${c.name}.${c.k}=${c.v}`).join(' ') || 'none'}; `
+    + `excused because the digest prints them ${excusedCounts.map((c) => `${c.name}.${c.k}=${c.v}`).join(' ') || 'none'}`);
+}
+
 console.log(`gate_capstone_leak: ${hoursFigures.length} capstone hours figures, ${series.length} count series, `
   + `${FIELDS.length} graded values, ${digestLits.length} digest literals, ${goldNums.length} golden numbers, `
-  + `${siblings} sibling answer keys, ${APP.length} app sources, ${bankTexts} bank texts`);
+  + `${siblings} sibling answer keys, ${APP.length} app sources, ${bankTexts} bank texts, ${lessonFiles.length} lesson files`);
 Object.entries(counts).sort().forEach(([k, n]) => console.log(`  direction ${k}: ${n}`));
 console.log(`  FINDINGS: ${findings.length}`);
 findings.slice(0, 40).forEach((f) => console.log(`   ${f}`));
-const planted = ['--plant-value', '--plant-input', '--plant-name'].filter(has);
+const planted = ['--plant-value', '--plant-input', '--plant-name', '--plant-lesson'].filter(has);
 if (planted.length) {
-  const want = { '--plant-value': '[2 values]', '--plant-input': '[1 inputs]', '--plant-name': '[4 names]' }[planted[0]];
-  const caught = findings.some((f) => f.startsWith(want));
+  const want = { '--plant-value': '[2 values]', '--plant-input': '[1 inputs]', '--plant-name': '[4 names]', '--plant-lesson': '[10 lessons numeric]' }[planted[0]];
+  const caught = planted[0] === '--plant-lesson'
+    ? plantedIn !== null && findings.some((f) => f.startsWith(`${want} ${plantedIn} `))
+    : findings.some((f) => f.startsWith(want));
+  if (planted[0] === '--plant-lesson') console.log(`  planted in ${plantedIn}`);
   console.log(`  NEGATIVE CONTROL ${planted[0]}: expected a ${want} finding, ${caught ? 'caught' : 'NOT CAUGHT'}`);
   process.exit(caught ? 1 : 2);
 }

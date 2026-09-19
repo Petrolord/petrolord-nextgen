@@ -47,7 +47,10 @@ Expert m03 owns revising the limits (section 23).
 1. **The base is required**, and a missing base is refused with the field named.
    UGHELLI's 9 recordables in 2318640 hours read 0.776317 per 200,000 hours,
    3.881586 per 1,000,000 and 388.158576 per 100,000,000: only the base moved.
-   FAR is the one rate with a fixed base.
+   FAR is the one rate with a fixed base: the engine takes the IOGP
+   definition. Other bodies use related framings, per worker-year or per
+   working lifetime, so a FAR quoted from elsewhere needs its definition
+   checked first.
 2. **The severity rate has no single standard.** Days lost times a required base
    over hours, with no ANSI Z16.1 time charges added. Days per case is a
    different quantity and the engine does not compute it.

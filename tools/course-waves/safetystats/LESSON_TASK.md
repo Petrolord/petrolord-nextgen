@@ -28,9 +28,12 @@ matter, markdown table rows and `{{panel` lines are excluded, and headings are
 counted. A raw word count over the whole file is a different, larger measure.
 
 Keep the H1 that `scaffold.py` writes (the lesson title exactly) and the panel
-line where `structure.py` says one goes. Five short sections, a small table,
-numbers first, and an `## Exercise` that asks the learner to DO something with a
-number the lesson printed, never to recall one.
+line where `structure.py` says one goes. An opening paragraph under the H1,
+then short `##` sections ending in `## Exercise`: the written lessons carry
+four or five `##` headings at Associate and Expert and five or six at
+Professional, the Exercise included. A small table, numbers first, and an
+`## Exercise` that asks the learner to DO something with a number the lesson
+printed, never to recall one.
 
 ## THE TIER LINE, AND WHY IT IS HARD
 

@@ -60,6 +60,7 @@ RUNS = [
     ('gate_capstone_leak.mjs NEGATIVE CONTROL value', f'{HERE}/gate_capstone_leak.mjs', ['node', f'{HERE}/gate_capstone_leak.mjs', '--no-banks', '--plant-value'], 1),
     ('gate_capstone_leak.mjs NEGATIVE CONTROL input', f'{HERE}/gate_capstone_leak.mjs', ['node', f'{HERE}/gate_capstone_leak.mjs', '--no-banks', '--plant-input'], 1),
     ('gate_capstone_leak.mjs NEGATIVE CONTROL name', f'{HERE}/gate_capstone_leak.mjs', ['node', f'{HERE}/gate_capstone_leak.mjs', '--no-banks', '--plant-name'], 1),
+    ('gate_capstone_leak.mjs NEGATIVE CONTROL lesson', f'{HERE}/gate_capstone_leak.mjs', ['node', f'{HERE}/gate_capstone_leak.mjs', '--no-banks', '--plant-lesson'], 1),
     ('gate_copy_rule.py', f'{HERE}/gate_copy_rule.py', ['python3', f'{HERE}/gate_copy_rule.py'], 0),
     ('gate_copy_rule.py NEGATIVE CONTROL', f'{HERE}/gate_copy_rule.py', ['python3', f'{HERE}/gate_copy_rule.py', '--plant'], 1),
     ('gate_typed_literals.py', f'{HERE}/gate_typed_literals.py', ['python3', f'{HERE}/gate_typed_literals.py'], 0),
