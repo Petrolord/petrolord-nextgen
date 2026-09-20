@@ -1,0 +1,18 @@
+{
+ "freq": {
+  "decimals": 12,
+  "match": "^(?:akpo_compressor_mitigated_frequency_with_sif_per_yr|akpo_export_catalogue_sif_mitigated_frequency_per_yr|akpo_separator_unmitigated_frequency_per_yr|akpo_tank_mitigated_frequency_without_sif_per_yr|usan_mitigated_frequency_with_sif_per_yr)$"
+ },
+ "hours": {
+  "decimals": 6,
+  "match": "^(?:yoho_transmitters_2oo3_max_interval_hours|yoho_valve_1oo1_ptc_max_interval_hours|yoho_valves_1oo2_max_interval_hours)$"
+ },
+ "pfd": {
+  "decimals": 12,
+  "match": "^(?:akpo_tank_required_sif_pfdavg|usan_logic_solver_1oo1_pfdavg|usan_proposed_2oo2_transmitters_pfdavg|usan_transmitters_2oo3_pfdavg|usan_valves_1oo2_pfdavg|yoho_transmitter_ptc_floor_pfdavg|yoho_valve_1oo1_ptc_pfdavg)$"
+ },
+ "rrf": {
+  "decimals": 6,
+  "match": "^(?:akpo_separator_required_rrf|usan_sif_rrf|yoho_sif_rrf_at_three_year_interval)$"
+ }
+}

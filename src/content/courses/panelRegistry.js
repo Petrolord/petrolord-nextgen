@@ -199,6 +199,10 @@ export const PANELS = {
   'fc-sizing-explorer': React.lazy(() => import('@/components/course/panels/relief/SizingExplorer')),
   'fc-fire-drum-explorer': React.lazy(() => import('@/components/course/panels/relief/FireDrumExplorer')),
   'fc-blowdown-explorer': React.lazy(() => import('@/components/course/panels/relief/BlowdownExplorer')),
+  // H3 Process Safety: LOPA & SIL Determination (academy module hse)
+  'lp-worksheet': React.lazy(() => import('@/components/course/panels/lopa/WorksheetExplorer')),
+  'lp-sif-builder': React.lazy(() => import('@/components/course/panels/lopa/SifExplorer')),
+  'lp-proof-test': React.lazy(() => import('@/components/course/panels/lopa/ProofTestExplorer')),
 
   // FC6 Heat Exchange & Cooling
   'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),

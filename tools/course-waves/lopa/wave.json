@@ -1,0 +1,359 @@
+{
+ "slug": "lopa",
+ "prefix": "h3",
+ "name": "Process Safety: LOPA & SIL Determination",
+ "pathOrder": 63,
+ "module": "hse",
+ "prerequisite": null,
+ "repo": "/root/wt-h3-nextgen",
+ "branch": "feat/h3-lopa-course",
+ "goldens": [
+  "hse/goldens/lopa_cases.json"
+ ],
+ "engines": [
+  "engines/hse/lopa.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines 6703c00 (engines PR #218; the six lopa paths are byte-identical through main b43f1d9). The canonical pin in VENDOR.json is NOT moved: the six paths are ledgered as kind extra, group h3-lopa-course, each pinned to its vendored blob, inserted before the README entry so the ledger merges cleanly with H1 (which moves the pin) and H2 (which appends its own extras at the end). SIX paths, walked by vendor_lopa.sh from the jest suite as the only seed (the suite, the engine, the golden it reads) plus three NAMED paths (oracle_lopa.py, FINDINGS-lopa.md, negcontrol_lopa.sh, mode 755 as upstream). 6 paths x 4 proofs = 24, zero deviations. Guard clean against canonical 5cbdca5 (660 paths compared); lopa jest suite 91 of 91 against the worktree's own packages/engines; the full vendored runner reports only the 24 allow-listed failures.",
+ "constants": {
+  "$comment": "The engine exports DECADE_SNAP (1e-9), HOURS_PER_YEAR (8760), ARCHITECTURES, LOPA_OUTCOME, PFD_STATE and SIL_BANDS_LOW_DEMAND. Digest section 1 prints them from the export and section 10 prints the band table. None is graded: a SIL number and a state word are never graded fields."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE. Engine vendored at 6703c00, digest built (32 sections), fields.json and precision.json generated from the one tolerance derivation, 18 graded fields discriminating against 94 wrong methods, oracle replay in exact rationals, lab and three panels shipped with vitest, route /dashboard/apps/lopa registered. No lesson, bank, key truth or migration is written yet; scaffold.py and lengths.py are ready and dry-run clean.",
+  "thesis": "A layer of protection analysis finds how much risk reduction a scenario still needs and a SIF has to supply it. Associate owns HOW MUCH IS MISSING, Professional owns WHAT THE SIF ACHIEVES, Expert owns HOW LONG THE PROOF TEST MAY RUN AND WHAT THE ENGINE DOES NOT KNOW. Each capstone grades only its own tier's question.",
+  "tiers": {
+   "beginner": "Associate: LOPA arithmetic. m01 the scenario and its frequency (units, the refusals), m02 enabling conditions and conditional modifiers, m03 IPLs, independence, the auditable flag and one credit per IPL, m04 the TMEL, the required RRF, the required PFDavg as the binding target and the loop through a proposed SIF, m05 six outcome states, the low demand bands, the exact decade and the snap, m06 one worksheet end to end and the risk matrix seam. Digest sections 1 to 13.",
+   "intermediate": "Professional: PFDavg. m01 the simplified forms and the half in 1oo1, m02 the full Annex B form (detected failures and MTTR, tCE and tGE, MRT, proof test coverage), m03 common cause, the beta factor and betaD, no beta factor term in 2oo2, m04 1oo2, 2oo3 and its six, 1oo3, m05 the SIF as a series sum, achieved RRF and SIL, back to the TMEL, m06 the published worked SIF reproduced, the warnings and refusals. Digest sections 14 to 24.",
+   "advanced": "Expert: the proof test and judgement. m01 sensitivity, linear and quadratic growth, the longest interval and its states, m02 coverage, the floor and the lifetime cap, m03 how conservative Annex B is against the time dependent route, m04 the published example's inferred MRT, lifetime and beta factor slip, m05 what the engine does not do (no HFT check, no PFH, no failure-rate data, the credit rules are specification), m06 allocating a budget, stretching an interval, when to redesign, the verification note. Digest sections 25 to 31."
+  }
+ },
+ "fieldsDiscrimination": {
+  "akpo_separator_unmitigated_frequency_per_yr": "enabling condition forgotten, modifiers forgotten, the IEF alone, the credited IPL applied, the probabilities summed",
+  "akpo_separator_required_rrf": "the non-independent IPL credited, enabling condition forgotten, modifiers forgotten, the ratio inverted, no IPL credited",
+  "akpo_tank_mitigated_frequency_without_sif_per_yr": "the shared level transmitter credited, both enabling conditions forgotten, the second enabling condition forgotten, the modifier forgotten, IPLs not applied",
+  "akpo_tank_required_sif_pfdavg": "the required RRF reported, the shared transmitter credited, the band ceiling of the required SIL, the band floor, enabling conditions forgotten",
+  "akpo_compressor_mitigated_frequency_with_sif_per_yr": "the SIF not applied, a SIF at the SIL band ceiling, the required PFDavg used for the SIF, the fatal injury modifier forgotten, gas detection not credited",
+  "akpo_export_catalogue_sif_mitigated_frequency_per_yr": "the exact decade put in the higher SIL, an unsnapped float comparison, the SIF not applied, the non-independent trip credited, the required PFDavg used for the SIF",
+  "usan_transmitters_2oo3_pfdavg": "6 read as 3, no (1 - beta), tGE at T/2, MRT ignored, detected failures ignored, the TR84 simplified form, beta used for betaD",
+  "usan_logic_solver_1oo1_pfdavg": "the half dropped, MRT ignored, detected failures ignored, detected failures treated as undetected",
+  "usan_valves_1oo2_pfdavg": "no (1 - beta), tGE at T/2, MRT ignored, detected failures ignored, the TR84 simplified form, common cause over the full interval",
+  "usan_sif_rrf": "the product of the subsystem PFDavg, the weakest subsystem only, the logic solver left out, the sum of the subsystem RRFs, the valves as 1oo1",
+  "usan_proposed_2oo2_transmitters_pfdavg": "beta applied to 2oo2, (1 - beta) applied to 2oo2, the 1oo2 formula, the 1oo1 formula, the 2oo3 result reused",
+  "usan_mitigated_frequency_with_sif_per_yr": "the SIF not applied, the product of the subsystems, the required PFDavg used, the SIL band ceiling used, the relief not credited, the valves only",
+  "yoho_valves_1oo2_max_interval_hours": "tGE at T/2, no (1 - beta), MRT ignored, common cause over the full interval, the budget read as the band ceiling, linear scaling from one year",
+  "yoho_valve_1oo1_ptc_pfdavg": "coverage ignored, the uncovered part over the full lifetime, MRT ignored, the covered part only, the half dropped",
+  "yoho_valve_1oo1_ptc_max_interval_hours": "coverage ignored, the uncovered part over the full lifetime, MRT ignored, the covered part only, the half dropped",
+  "yoho_transmitter_ptc_floor_pfdavg": "coverage ignored, the uncovered part over the full lifetime, MRT ignored, detected failures left out, the one year PFDavg reported",
+  "yoho_sif_rrf_at_three_year_interval": "the one year RRF divided by three, only the valves stretched, the one year RRF kept, the product of the subsystems, the logic solver left out",
+  "yoho_transmitters_2oo3_max_interval_hours": "6 read as 3, no (1 - beta), tGE at T/2, MRT ignored, detected failures ignored",
+  "summary": "94 wrong methods over 18 routes, 0 WEAK, closest miss 2.277e+5 tolerances (usan_mitigated_frequency_with_sif_per_yr via valves_only). The wrong-method calculator first reproduces the engine on 9 subsystems (1e-12), 3 longest intervals (1e-9) and 1 floor (1e-12). Negative control at tolerance x1e15: 18 of 18 WEAK."
+ },
+ "evidence": {
+  "$comment": "H2's lesson: a formula checked for transcription only carries no graded answer. The position for every graded quantity, read from FINDINGS-lopa.md and re-measured in the digest.",
+  "LOPA frequencies, RRF and PFDavg": "exact arithmetic; the oracle decides every product and boundary in exact rationals; oracle_check.py replays all six Associate fields and the Usan loop exactly",
+  "1oo1, 1oo2, 2oo3 with DD, MTTR and MRT": "two independent sources (Lundteigen and Rausand; the 61508 Association) state the same Annex B equations and the published worked SIF reproduces to three figures with MRT = MTTR; every capstone subsystem with detected failures keeps MRT = MTTR",
+  "2oo2": "the Annex B form the engine prints; the simplified identity holds exactly; graded as the engine's declared convention, with its conservatism taught from the golden's route B",
+  "SIF sum": "Annex B.3.2.1 as the published total reproduces it",
+  "longest interval": "the oracle solves the exact polynomial in T1; oracle_check.py agrees to 1e-10",
+  "proof test coverage": "the 61508 Association statement of Annex B.3.2.5, reproducing four published rows at an inferred T2 of 10 years; every capstone STATES its lifetime",
+  "never graded": "1oo3 (first-order route B only, no published row), route B values, the auditable flag (shared control green), a SIL number or state word on its own, the choice of IEF, TMEL or IPL PFD, HFT, PFH"
+ },
+ "history": {
+  "position": "THIS ENGINE HAS NO REPAIR HISTORY: written, oracle-gated and merged in one pull request. No history module, no framed history section; structure.py and digest_prose.rules.mjs refuse any key, title or heading that reads as one. The published example's inferred inputs (digest section 29) are facts about a published source."
+ },
+ "scopeSeams": {
+  "the 5x5 risk matrix": "OWNED BY riskchange (and EC6's second scale). LOPA is frequency based and this course never grades a matrix band; digest section 13 states the seam and gate_vocabulary.py forbids bare 'severity' and stray 'likelihood'.",
+  "licensed tables": "IEC 61508/61511 and ISA tables are never reproduced; failure rates are inputs, labelled illustrative; the HFT architectural constraint is out of the engine and taught as such.",
+  "consequence modelling": "WILL BE OWNED BY H4 consequence. H3 takes a consequence as described and carried by its TMEL."
+ },
+ "namingCollisions": {
+  "beta": "a vapour fraction (fluid), an orifice diameter ratio (metering) and more (fiscal, welldesign, earthmodel). Always 'beta factor'. Gated.",
+  "PFD": "always PFDavg for a SIF or subsystem, 'IPL PFD' for an IPL. Gated.",
+  "severity": "a risk-matrix category (riskchange, compliance) and other scales. Never used. Gated.",
+  "likelihood": "a matrix likelihood score (riskchange) and a Bayesian likelihood (decision). Only inside the TMEL's name. Gated.",
+  "RRF": "the risk reduction factor; 'risk reduction ratio' is gated."
+ },
+ "openItems": {
+  "engine defects": "None found. Every graded value reproduces through the stdlib oracle in exact rationals to 5.2e-13 relative, and every published row the digest reruns reproduces to its printed three figures.",
+  "FINDINGS wording, provenance only": "FINDINGS-lopa.md section 3 says 'An exact decade belongs to the higher-PFD (lower-SIL) band' while the engine header says the same thing and the band basis string says 'higher-PFD band'; consistent. No change proposed.",
+  "the auditable flag": "taught as specification in Associate m03 l04 and Expert m05 l04; never graded, because the engine's shared negative control shows no independent route validates it.",
+  "1oo3": "taught in Professional m04 l03, never graded: validated against the time dependent route to first order only, with no published row.",
+  "sibling trial merges": "see the wave report: this branch trial-merges cleanly onto H1 and onto H2 separately; H1 and H2 conflict with EACH OTHER in src/pages/DashboardPage.jsx (both insert after CorrosionLearningPage), which is theirs to resolve."
+ },
+ "digest": {
+  "lines": 742,
+  "sections": 32,
+  "md5": "34bf1916226742c46b79514436b80cb9",
+  "sha256": "908293ea1c908bd83bea80b3732e48b6a551cb6660935c1d6d08f776694f66c7"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "c96f1a630822b12a1ca635a4aaef3df981e9878075046272c173cafb45f3483c",
+  "keys": [
+   "akpo_separator_unmitigated_frequency_per_yr",
+   "akpo_separator_required_rrf",
+   "akpo_tank_mitigated_frequency_without_sif_per_yr",
+   "akpo_tank_required_sif_pfdavg",
+   "akpo_compressor_mitigated_frequency_with_sif_per_yr",
+   "akpo_export_catalogue_sif_mitigated_frequency_per_yr",
+   "usan_transmitters_2oo3_pfdavg",
+   "usan_logic_solver_1oo1_pfdavg",
+   "usan_valves_1oo2_pfdavg",
+   "usan_sif_rrf",
+   "usan_proposed_2oo2_transmitters_pfdavg",
+   "usan_mitigated_frequency_with_sif_per_yr",
+   "yoho_valves_1oo2_max_interval_hours",
+   "yoho_valve_1oo1_ptc_pfdavg",
+   "yoho_valve_1oo1_ptc_max_interval_hours",
+   "yoho_transmitter_ptc_floor_pfdavg",
+   "yoho_sif_rrf_at_three_year_interval",
+   "yoho_transmitters_2oo3_max_interval_hours"
+  ]
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "0a161fccc117acd55efa952809ea49a0",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "h3_capstone.mjs": {
+   "md5": "34403c97c6263f595342179d5c6dc401",
+   "command": "node h3_capstone.mjs --json",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h3_capstone: 128 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "e68e760e9890e4599760f5c18b91cd8a",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h3_capstone: 128 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "e68e760e9890e4599760f5c18b91cd8a",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "h3_capstone: 128 label-and-call and scenario assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "f19abb833826d14b7686410baf25c995",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded fields replayed through the vendored oracle, worst relative difference 5.18e-13; 8 decisions checked exactly; 0 problem(s)"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "f19abb833826d14b7686410baf25c995",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: usan_logic_solver_1oo1_pfdavg perturbed by ten tolerances; caught 1"
+  },
+  "discriminate.mjs": {
+   "md5": "60f296434743b54770d710e1eec1cf54",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: usan_mitigated_frequency_with_sif_per_yr via valves_only, 2.277e+5 tolerances away"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "60f296434743b54770d710e1eec1cf54",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh hse-wip-lopa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h3_dump: 706 label-and-call, measurement and claim assertions run, 0 failed; 32 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules hse-wip-lopa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/hse-wip-lopa/digest.txt: 742 line(s), 32 section title(s) and 31 in-body marker(s) swept against their blocks, 32 history framings, 29 engine pin(s); 0 warned for a human read and 0 framed as curricul"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py hse-wip-lopa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py hse-wip-lopa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py hse-wip-lopa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py hse-wip-lopa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py hse-wip-lopa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/hse-wip-lopa: 18 graded field(s), 18 OF 18 CLASSIFIED against 2 precision clause(s) in the digest header and 4 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py hse-wip-lopa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py hse-wip-lopa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "e6b4547dfb6a99cb8d6cdf36837f6edf",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "e6b4547dfb6a99cb8d6cdf36837f6edf",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "e6b4547dfb6a99cb8d6cdf36837f6edf",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "e6b4547dfb6a99cb8d6cdf36837f6edf",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "e6b4547dfb6a99cb8d6cdf36837f6edf",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "8b2344a21a104762b9c22909328616ec",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "8b2344a21a104762b9c22909328616ec",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_vocabulary.py": {
+   "md5": "39378e21cff947a787881ae392359d20",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 16, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "39378e21cff947a787881ae392359d20",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected ['bare PFD', 'bare beta', 'risk reduction ratio', 'severity', 'stray likelihood'] caught; got ['bare PFD', 'bare beta', 'risk reduction ratio', 'severity', 'stray likelihood']"
+  },
+  "gate_claims.mjs": {
+   "md5": "9abb0ef274337b284cd8a71ee317abb0",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "9abb0ef274337b284cd8a71ee317abb0",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 2."
+  },
+  "lengths.py --selftest": {
+   "md5": "ad6fbfb1aa144d539cf0cc8d749b8cbc",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "scaffold.py --dry-run": {
+   "md5": "51b5d87425de9cd8be5dc3163d3a3082",
+   "command": "python3 scaffold.py --dry-run",
+   "expected": 0,
+   "exit": 0,
+   "summary": "manifests: 3"
+  },
+  "check-vendored-engines.mjs": {
+   "md5": "c1d8057c44e495f3662ca7640c368f4d",
+   "command": "node /root/wt-h3-nextgen/tools/check-vendored-engines.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "vendored engines clean against canonical 5cbdca5: 660 path(s) compared byte for byte, 810 canonical, 669 vendored, 267 recorded deviation(s) (0-out-of-scope-domain 76, 1-test-layer-gap 74, 2-copy-pass-held 2, 3-productio"
+  }
+ }
+}
