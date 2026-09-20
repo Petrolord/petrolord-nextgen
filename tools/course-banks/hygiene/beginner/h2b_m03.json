@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Of the four numbers that define the OSHA PEL setup, which two are the same figure?",
+  "options": [
+   "The criterion level and the limit noise dose, both 90.",
+   "The threshold and the decibel exchange rate, both 5.",
+   "The limit noise dose and the threshold, both at 100 percent.",
+   "The criterion level and the threshold, both 90 dBA."
+  ],
+  "answer": 3,
+  "explanation": "The PEL setup is a criterion level of 90.000000000000 dBA, a decibel exchange rate of 5.000000000000 dB, a threshold of 90.000000000000 dBA and a limit noise dose of 100.000000000000 percent. The criterion level and the threshold coincide, which is why the PEL is so selective: a period has to be as loud as the eight-hour level before it counts. The limit noise dose is a percentage and cannot equal a level."
+ },
+ {
+  "prompt": "Moving from the OSHA PEL setup to the OSHA action level setup, which parts of the criterion change?",
+  "options": [
+   "The criterion level drops to 85 dBA and the decibel exchange rate to 3 dB.",
+   "The threshold drops to 80 dBA and the limit noise dose halves to 50 percent.",
+   "Only the limit noise dose halves to 50 percent; the threshold stays at 90 dBA.",
+   "The threshold drops to 80 dBA; the limit noise dose stays at 100 percent."
+  ],
+  "answer": 1,
+  "explanation": "Two numbers change: the threshold becomes 80.000000000000 dBA and the limit noise dose 50.000000000000 percent, while the criterion level stays at 90 and the decibel exchange rate at 5 dB. The tempting 85 dBA and 3 dB belong to the NIOSH noise REL. Changing only the limit would leave the OBEN day at 2 integrated periods; the lower threshold is what lets 5 in."
+ },
+ {
+  "prompt": "On the OSHA action level setup, what noise dose and TWA does the OBEN day give?",
+  "options": [
+   "72.054478 percent and 87.635749 dBA, against a limit of 50 percent and 85 dBA.",
+   "27.748183 percent and 80.752126 dBA, since the action level and the PEL share a criterion level.",
+   "265.610944 percent and 89.242460 dBA, since both use the 80 dBA threshold.",
+   "50.000000 percent and 85.000000 dBA, the limit the action level sets."
+  ],
+  "answer": 0,
+  "explanation": "The action level integrates 5 of the 6 periods, and their contributions add to 72.054478 percent, which restates as 87.635749 dBA with 16.61. The PEL figures of 27.748183 and 80.752126 come from the same criterion level but only 2 integrated periods. The NIOSH noise REL shares the 80 dBA threshold and differs in criterion level and decibel exchange rate."
+ },
+ {
+  "prompt": "Section 1910.95(c)(1) sets the action level at a TWA of 85 dBA \"or, equivalently, a dose of fifty percent\". What noise dose does `noiseDoseFromTwaPct` give for a TWA of 85 on the OSHA scale?",
+  "options": [
+   "50.000000 percent exactly, since the regulation says the two are equivalent.",
+   "100.000000 percent, since 85 dBA is the NIOSH noise REL criterion level.",
+   "50.000750 percent, a hair over 50 because of the printed 16.61.",
+   "25.000750 percent, since the action level is half of the PEL's half."
+  ],
+  "answer": 2,
+  "explanation": "The engine measures 50.000750 percent. With the exact coefficient a TWA of 85 would be exactly half the allowance; the printed 16.61 moves it by a tiny amount, and at the precision the regulation writes the two are the same point. 100.000000 percent is what a TWA of 85 gives on the NIOSH scale. 25.000750 percent is the OSHA noise dose for a TWA of 80."
+ },
+ {
+  "prompt": "What are the criterion level, decibel exchange rate and threshold of the NIOSH noise REL?",
+  "options": [
+   "90 dBA, 5 dB and 80 dBA.",
+   "85 dBA, 5 dB and 85 dBA.",
+   "85 dBA, 3 dB and 85 dBA.",
+   "85 dBA, 3 dB and 80 dBA."
+  ],
+  "answer": 3,
+  "explanation": "Digest sections 3 and 7 give the NIOSH noise REL a criterion level of 85.000000000000 dBA, a decibel exchange rate of 3.000000000000 dB and a threshold of 80.000000000000 dBA. The first distractor is the OSHA action level. Setting the threshold at the criterion level is the PEL's pattern, and NIOSH does not follow it: its threshold is five decibels lower."
+ },
+ {
+  "prompt": "The first OBEN period, 2.600000 h at 84.300000 dBA, carries 27.646683 percent on the NIOSH noise REL and 14.747186 percent on the OSHA action level. Why the larger NIOSH share?",
+  "options": [
+   "NIOSH counts the period's hours twice, once for level and once for time.",
+   "Its NIOSH reference duration is 9.404383 h, against 17.630482 h on OSHA.",
+   "NIOSH rounds the level up to 85 dBA before it finds the reference duration.",
+   "The action level halves every share, since its limit is only 50 percent."
+  ],
+  "answer": 1,
+  "explanation": "Both criteria integrate the period, since 84.300000 dBA is above both 80 dBA thresholds, so only the denominator differs. NIOSH's lower criterion level and 3 dB decibel exchange rate make its allowance at that level last 9.404383 h, against 17.630482 h on OSHA. The action level's limit of 50 percent is only the line the total is read against and changes no share."
+ },
+ {
+  "prompt": "The OBEN NIOSH noise REL noise dose is 265.610944 percent. What TWA does TWA = 10.0 log10(D/100) + 85 give?",
+  "options": [
+   "89.242460 dBA.",
+   "87.635749 dBA, the action level.",
+   "80.752126 dBA, the PEL.",
+   "85 dBA."
+  ],
+  "answer": 0,
+  "explanation": "Ten times log10 of 265.610944 over 100, plus 85, is 89.242460 dBA, above 85 because the noise dose is above 100 percent. 87.635749 dBA is the OSHA action level TWA and 80.752126 dBA the PEL TWA of the same day. 85 dBA is the TWA only at exactly 100 percent."
+ },
+ {
+  "prompt": "The OBEN day is under one criterion and over two. Which of its three noise doses is the real one?",
+  "options": [
+   "The NIOSH figure, since it counts every period at or above 80 dBA on the record.",
+   "The PEL figure, since it is the only one written in a regulation with a limit.",
+   "The action level figure, since it sits between the other two noise doses.",
+   "None of the three alone; each is the noise dose against its own criterion."
+  ],
+  "answer": 3,
+  "explanation": "Digest section 7 says it directly: none of the three is the real noise dose, and a report that quotes a noise dose without naming the criterion has not said anything. The action level also counts every period from 80 dBA and is also written in regulation, so neither of those reasons singles out one figure. Sitting between the others is no reason at all."
+ },
+ {
+  "prompt": "The OBEN action level noise dose is 72.054478 percent and the PEL noise dose 27.748183 percent. Which difference between the two criteria makes that whole gap?",
+  "options": [
+   "The limit noise dose, which halves to 50 percent and so doubles every share on the whole record.",
+   "The criterion level, which moves the reference duration of every integrated period.",
+   "The threshold, which lets in three periods worth 14.747186, 23.100555 and 6.458554 percent.",
+   "The decibel exchange rate, which is steeper on the action level for the louder periods of the day."
+  ],
+  "answer": 2,
+  "explanation": "The two OSHA setups share a criterion level and a decibel exchange rate, so every period they both integrate carries the same share. The whole gap is the three periods the lower threshold lets in. The limit noise dose changes only the line the total is compared with and moves no contribution, which is the tempting mistake."
+ },
+ {
+  "prompt": "The fifth OBEN period, 0.200000 h at 99.100000 dBA, carries 8.827030 percent on OSHA and 64.980192 percent on the NIOSH noise REL. What produces the difference?",
+  "options": [
+   "The threshold, since NIOSH lets the period in at 80 dBA while OSHA admits it only partly.",
+   "The lower criterion level and the 3 dB decibel exchange rate, which shorten its NIOSH reference duration.",
+   "The limit noise dose, since NIOSH divides every contribution by a limit twice as large.",
+   "The NIOSH ceiling of 115 dBA, which adds a penalty to any period louder than 95 dBA."
+  ],
+  "answer": 1,
+  "explanation": "The level and hours are identical, so only the reference duration moves: 2.265768 h on OSHA against 0.307786 h on NIOSH. Both a lower criterion level and a 3 dB step shrink the NIOSH allowance, and the steep step weighs loud short periods most. The period is above both thresholds, so the threshold plays no part here, and 99.100000 dBA is far below the 115 dBA ceiling."
+ },
+ {
+  "prompt": "On the OSHA PEL setup the engine reports `exceedsLimit` false for the OBEN day. What does that flag say?",
+  "options": [
+   "The PEL noise dose is under the PEL limit noise dose of 100 percent, and nothing more.",
+   "The day is under every criterion, since the PEL is the only regulatory limit here.",
+   "No period on the record reached a sound level at or above the PEL threshold of 90 dBA.",
+   "The day needs no action level programme, since the PEL is the stricter of the two."
+  ],
+  "answer": 0,
+  "explanation": "The flag compares one noise dose with one limit. The same record is over the action level and over the NIOSH noise REL, so false on the PEL says nothing about either. Two periods did reach the PEL threshold and made the whole 27.748183 percent. The course never grades a verdict word because a verdict means nothing without its criterion."
+ },
+ {
+  "prompt": "A 117 dBA period on the OSHA PEL setup gives a noise dose of 52.780316 percent, under the PEL limit. What should a report take from the engine's output?",
+  "options": [
+   "That the period is acceptable, since its noise dose is under 100 percent.",
+   "That the engine refused it, since no level over 115 dBA can be integrated.",
+   "That the figure is extrapolated, since 117 dBA is past the top of Table G-16a.",
+   "The warning, since the level is above anything Table G-16 permits."
+  ],
+  "answer": 3,
+  "explanation": "The engine warns \"a level of 117 dBA is above 115 dBA, the highest level Table G-16 permits\" and still integrates it, which is judgement J3. A noise dose under its limit does not clear a level above a ceiling, so the warning comes before the percentage. The extrapolation warning applies only above 130 dBA, the top of Table G-16a."
+ },
+ {
+  "prompt": "A 132 dBA period on the OSHA PEL setup gives 84.448506 percent. How many warnings does the engine attach, and what does it do with the period?",
+  "options": [
+   "1 warning, and it drops the period from the noise dose.",
+   "No warning, since the noise dose is under the PEL limit.",
+   "2 warnings, and it still integrates the period under J3.",
+   "A refusal on the level, since it is past every table."
+  ],
+  "answer": 2,
+  "explanation": "Judgement J3: above 130 dBA and above 115 dBA the result warns and still integrates. At 132 dBA both apply, the Table G-16a extrapolation and the Table G-16 maximum, so there are 2 warnings, and the TWA is 88.780693 dBA. The engine refuses records that cannot be computed; a very loud period can be, so it is reported with its warnings beside it."
+ },
+ {
+  "prompt": "A 117 dBA period is run on the NIOSH noise REL. Which warning, in the engine's own words, does it carry?",
+  "options": [
+   "\"a level of 117 dBA is above 130 dBA, the top of Table G-16a: the formula is extrapolated there\"",
+   "\"a level of 117 dBA exceeds the 115 dBA ceiling of this criterion, whatever the dose\"",
+   "No warning, because the NIOSH noise REL criterion has no ceiling of its own",
+   "A refusal on `levelDbA`, since NIOSH does not integrate levels above 115"
+  ],
+  "answer": 1,
+  "explanation": "The ceiling on the NIOSH noise REL preset is 115 dBA, and the engine's own message for 117 dBA is the one in the key; the noise dose is 2156.290550 percent with 1 warning. The extrapolation message belongs above 130 dBA only, and 117 is below it. The engine never refuses a loud period for its level; it warns and integrates."
+ },
+ {
+  "prompt": "A European colleague asks whether the OBEN action level result is an \"action value\". What is the right answer?",
+  "options": [
+   "No: the action level is the OSHA hearing conservation trigger, while EU action values are LEX,8h levels, a different metric.",
+   "Yes: the action level and the EU action values are two names for the same 85 dBA line, so they compare directly.",
+   "Yes, once the noise dose of 72.054478 percent has been restated as a TWA of 87.635749 dBA.",
+   "No, because EU action values are measured in noise dose percent and the action level is in dBA."
+  ],
+  "answer": 0,
+  "explanation": "Digest section 24 puts the two on the same footing as a misreading: \"Action level\" is the OSHA hearing conservation trigger, and the EU uses action values, which are LEX,8h levels and a different metric. Restating the noise dose as a TWA does not turn it into a LEX,8h, and the EU values are levels in dBA."
+ }
+]

@@ -1,0 +1,119 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H2 Expert m01, The Wet Bulb Globe Temperature.
+# Figures from digest Section 16 (the reading sets, the forms, the teaching hour
+# and the golden's case), Section 2 (evidence classes), Section 3 (unit-impulse
+# weights), Section 10 (refusals), Section 23 and Section 25. Every WBGT built
+# from thermometer readings carries the section 9.3.2 label; no such figure is
+# keyed as something to compute.
+
+q(2, "An instrument reads out a WBGT of 30.800000 C for 40.000000 minutes of work and 25.600000 C for 20.000000 minutes of rest. What does `wbgtTwaC` return for the hour?",
+ "29.066667 C, each readout multiplied by its minutes and the sum divided by 60.000000 minutes",
+ ["28.200000 C, the two readouts added and halved, because each period supplies one reading to the hour",
+  "30.800000 C, the work readout alone, since rest is left out of the hour",
+  "29.066667 C for the first 40.000000 minutes, with the rest period reported beside it as a separate average"],
+ "The door weights each readout by its minutes: 30.800000 times 40.000000 plus 25.600000 times 20.000000, over 60.000000 minutes, is 29.066667 C. The plain mean of 28.200000 C counts a twenty-minute rest as heavily as a forty-minute work period. NIOSH states its limits against the whole hour of work and rest, so dropping the rest overstates it. The door returns one average over every period it is given, with no separate figure for any part of the hour.")
+
+q(0, "The teaching hour's time weighted WBGT is 29.066667 C and the plain mean of its two readouts is 28.200000 C. What accounts for the gap?",
+ "The plain mean weights the twenty-minute rest the same as the forty-minute work period",
+ ["The time weighted figure adds the globe's radiant load, which the plain mean of two readouts leaves out",
+  "The plain mean is taken through the indoor form of section 9.3.2",
+  "The time weighted door rounds each readout before it divides"],
+ "Both figures are built from the same two instrument readouts; only the weighting differs. A long hot period and a short cool one pull the minutes-weighted figure toward the hot reading, which the plain mean ignores. No weights from section 9.3.2 enter either figure, because the readouts are already WBGT values. The engine does not round inputs before averaging.")
+
+q(3, "Which change to the teaching hour would make the plain mean of its two readouts equal its time weighted WBGT?",
+ "Giving the two readouts equal minutes, so that each carries the same share of the hour",
+ ["Moving the rest period to the start of the hour, so the hotter readout closes the hour and counts last",
+  "Taking the readings through the outdoor form, so that the dry bulb enters and balances the globe reading",
+  "Stretching the record to 75 minutes, so that the averaging window is longer than the NIOSH hour"],
+ "A time weighted average and a plain mean agree when every reading carries the same weight, which for two readings means equal minutes. The order of the periods does not enter a sum of reading times minutes. The form belongs to building a WBGT from thermometers, and these are readouts already. A longer window changes the shares without making them equal.")
+
+q(1, "What evidence class does the course give the time weighted door `wbgtTwaC`, whose golden cases are 1 oracle-only and 0 published, and on what ground?",
+ "ARITHMETIC BY DEFINITION: its only constant is the length of its window, so there is nothing to transcribe",
+ ["ORACLE ONLY: the engine and the oracle agree on its single case and no printed value stands against either",
+  "TRANSCRIPTION ONLY: the averaging rule was copied into the engine and the oracle from the same NIOSH page",
+  "PUBLISHED, REPRODUCED: the golden's 29.250000 C case is a figure the NIOSH document prints for the door"],
+ "The course classes `wbgtTwaC` as ARITHMETIC BY DEFINITION: a time weighted average whose only constant is its window. The case count alone would suggest ORACLE ONLY, but a door with nothing to copy has no page two files could misread together, which is a stronger footing. No constant is transcribed, and 29.250000 C is the golden's own case with no printed source behind it.")
+
+q(1, "How do the two NIOSH 2016-106 section 9.3.2 forms split their weights across the thermometers?",
+ "Both give the natural wet bulb 0.7; indoors the globe takes 0.3, and outdoors the globe takes 0.2 and the dry bulb 0.1",
+ ["Both give the globe 0.7; indoors the natural wet bulb takes 0.3, and outdoors it takes 0.2 and the dry bulb 0.1",
+  "Indoors the natural wet bulb takes 0.7 and the globe 0.3; outdoors all three readings take equal weights of a third",
+  "Both give the natural wet bulb 0.7; indoors the dry bulb takes 0.3, and outdoors the dry bulb takes 0.2 and the globe 0.1"],
+ "Indoors, or without solar load, WBGT is 0.7 Tnwb plus 0.3 Tg; outdoors with solar load it is 0.7 Tnwb plus 0.2 Tg plus 0.1 Ta. The wet bulb weight is the same in both, and outdoors the globe gives up 0.1 to the dry bulb. The dry bulb never enters the indoor form, the globe is never the largest weight, and no form weights the three equally. The weights themselves are checked for transcription only.")
+
+q(2, "The outdoor readings give 31.410000 C through the outdoor form and 32.560000 C through the indoor form, both the NIOSH 2016-106 section 9.3.2 weighting, checked for transcription only. Which reading drives the difference?",
+ "The globe, at 45.300000 C well above the 33.800000 C dry bulb, weighted 0.3 indoors against 0.2 outdoors",
+ ["The natural wet bulb, which the indoor form weights more heavily",
+  "The dry bulb, which the indoor form adds on top of the other two where the outdoor form leaves it out of the sum",
+  "None of them: the indoor form adds a fixed solar allowance"],
+ "The wet bulb carries 0.7 in both forms, so it cannot open a gap. What moves is the last 0.3: indoors all of it rides on the sun-loaded globe, outdoors 0.1 of it passes to the cooler dry bulb. Whenever the globe reads above the dry bulb, the indoor form on outdoor data reads high. The dry bulb enters the outdoor form only, and neither form carries a fixed allowance.")
+
+q(0, "The course measures each WBGT weight by a unit impulse and gets 0.700000000000 against a literal typed in the generator. What does that measurement establish?",
+ "That the engine holds the same weights the generator holds, a pin against quiet change to either file",
+ ["That the weights match the NIOSH page, which moves both WBGT doors up to PUBLISHED, REPRODUCED",
+  "That the oracle derived the weights independently, so the engine and the oracle cannot share a misreading",
+  "That the indoor and outdoor forms agree on shaded readings, which is the check a printed case would give"],
+ "A unit impulse returns the weight the engine holds, and comparing it with a literal in a third file shows the two agree. All three copies come from the same page, so the measurement cannot say the page was read correctly, and the class stays TRANSCRIPTION ONLY. The oracle was also typed from that page. The two forms give different results on the same readings by design.")
+
+q(3, "Planting the same error in both the engine and the oracle left the suite green for the WBGT outdoor weights. How does the course read that result?",
+ "As the expected result: a check comparing two copies of one reading cannot catch a misreading both copies share",
+ ["As a defect in the suite, which more oracle-only cases for `wbgtOutdoorC` would repair on the next run",
+  "As proof that the outdoor weights are wrong, since a correct pair of copies would have turned the suite red",
+  "As a sign that the suite skips the WBGT doors, since a planted error in any constant is always detected"],
+ "Engine and oracle agreeing proves only that they hold the same numbers. When both were typed from one page, a shared slip passes every comparison, which is exactly what the plant showed and why the class is TRANSCRIPTION ONLY. More oracle cases compare the same two copies again. The plant says nothing about whether the real weights are right, and the suite does run the WBGT cases.")
+
+q(2, "What would move `wbgtOutdoorC` from TRANSCRIPTION ONLY up to PUBLISHED, REPRODUCED?",
+ "A value a source prints, such as a worked example with readings and an index, reproduced at its printed precision",
+ ["A third copy of the outdoor weights typed into another file and compared with the engine by unit impulse",
+  "More oracle-only cases, so that the agreement between the engine and the oracle covers a wider range of readings",
+  "An agreement between the outdoor and indoor forms on readings where the globe and the dry bulb read the same"],
+ "A door is PUBLISHED, REPRODUCED when the engine reproduces a printed value at the precision printed; two people copying the weights wrongly would then disagree with that printed index. No such value is known for the WBGT forms. The generator literal is already a third copy of the same page, and more oracle cases or a coincidence of forms check the copies against each other again.")
+
+q(1, "Which of these two figures could a graded field in this course carry: 30.090000 C from the indoor readings (the NIOSH 2016-106 section 9.3.2 weighting, checked for transcription only), or the teaching hour's 29.066667 C?",
+ "Only 29.066667 C, a one-hour average of stated readouts whose only constant is its window",
+ ["Both, since the engine returns each from stated inputs",
+  "Only 30.090000 C, since one set of readings needs no averaging and cannot be skewed by a rest period",
+  "Neither, since every heat stress figure passes through a constant the engine copied from NIOSH 2016-106"],
+ "No graded field passes through a WBGT built from thermometer readings, because its weights are checked for transcription only and a shared misreading would still pass. The time weighted average carries no weights at all, so it is ARITHMETIC BY DEFINITION and gradeable. The averaging window is the only constant in it, so not every heat stress figure rests on a copied value.")
+
+q(0, "A learner passes a 45 minute WBGT record to `wbgtTwaC`. What does the door do with it?",
+ "It averages over the 45 minutes it was given; the sixty-minute rule belongs to `nioshHeatAssessment`",
+ ["It refuses on `wbgtPeriods`, because the NIOSH limits apply to a one-hour time weighted average",
+  "It fills the missing 15 minutes with zero and warns, the way the chemical STEL treats a short window",
+  "It refuses on `periods` with the engine's words: the periods total zero minutes: there is nothing to average"],
+ "`wbgtTwaC` averages whatever window it is given and refuses only a record of zero minutes. Judgement J9 puts the sixty-minute requirement on the assessment door, which refuses on `wbgtPeriods` when a record is not an hour. Counting missing minutes as zero is the STEL's choice for a concentration, and a 45 minute record is plainly not a zero-minute one.")
+
+q(3, "Why does the natural wet bulb carry the largest weight in both section 9.3.2 forms?",
+ "Evaporation from its wet wick tracks how well the body can cool itself by sweating",
+ ["It reads the highest of the three wherever there is radiant load from the sun or from hot surfaces",
+  "It is the one shaded air thermometer, so it is the only reading free of any radiant load at the spot",
+  "It responds most slowly, so it carries the hour's average"],
+ "The natural wet bulb sits in a wick open to moving air, reads low in dry moving air and near the air temperature in still humid air, so it carries the body's ability to shed warmth by sweat. The reading that runs highest under radiant load is the globe, and the shaded air thermometer is the dry bulb. No thermometer supplies an hourly average; that is the job of the time weighted door.")
+
+q(1, "A crew works close to a flare, and the globe reads high. Which part of the assessment belongs to this course?",
+ "The WBGT index and the body's metabolic load; the radiant flux in kW/m2 on the spot belongs to Separation and Relief",
+ ["The flare's radiant flux in kW/m2, which the engine converts into a globe temperature before building the index",
+  "An extra flare term in the outdoor form, which the engine adds whenever the globe reads above the dry bulb",
+  "None of it: heat stress near a flare is taught in the Separation and Relief courses and never in this one"],
+ "The course draws the seam: flare and pool-fire radiation, a radiant flux on a surface, is cited here and taught in Separation and Relief. A globe reading near a flare is still a globe reading, and heat stress in this course is a WBGT index and a body's metabolic load. The engine has no door that converts a flux into a temperature and no flare term in either form.")
+
+q(2, "The engine has no door for the ISO 7243 clothing and body-height adjustments. What does that mean for a WBGT the engine returns?",
+ "The index comes back without any such adjustment, and the licensed ISO 7243 text is never quoted",
+ ["The outdoor form applies a standard clothing allowance, while the indoor form leaves the index as read",
+  "The engine refuses a reading set until a clothing ensemble is given",
+  "The engine adds a fixed body-height correction to the globe"],
+ "The ISO 7243 clothing and body-height adjustments are among the things the engine does not provide, and that text is licensed and never quoted. Neither form carries an allowance, no clothing input exists to be refused on, and no correction is added to any reading.")
+
+q(0, "A natural wet bulb of 60 C and a globe of 20 C are passed to `wbgtIndoorC`. How does the engine respond?",
+ "It returns an index: it checks only that each input is a finite temperature above absolute zero",
+ ["It refuses on `naturalWetBulbC`, because a natural wet bulb reading above the globe is physically impossible",
+  "It returns an index with a warning that the readings lie outside the 116 to 580 range the NIOSH figures plot",
+  "It swaps the two readings, on the view that a wet bulb above the globe can only be an input typed the wrong way"],
+ "The WBGT doors refuse a temperature that is not a finite number or is below absolute zero, and nothing else. Judging whether a reading is plausible for a site is left to the hygienist. The 116 to 580 range is in watts and belongs to the metabolic rate on the assessment door. The engine never rearranges inputs.")
+
+emit(Q, '/root/hse-wip-hygiene/banks/h2a_m01.json', expect_n=15)
+finish()

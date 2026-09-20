@@ -1,0 +1,106 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H2 Professional m01, the daily noise exposure level LEX,8h.
+# Figures from digest Section 11 (L108 Figure 26, the EVWRENI survey, the small
+# cases, the points table), Section 3 (T0 and the points pivot), Section 10
+# (the LEX refusals) and Section 24, with Associate recaps from Sections 6 and 7.
+# No capstone site, input or answer appears.
+
+q(2, "HSE L108 Figure 26 works a day of 80 dBA for 5 h, 86 dBA for 2 h and 95 dBA for 45 min. What LEX,8h does the engine return for that day?",
+ "86.613302 dBA",
+ ["84.719713 dBA", "79.979400 dBA", "86.646970 dBA"],
+ "The three tasks are turned into energy terms, each weighted by its hours over 8, summed and turned back into decibels: 86.613302 dBA. The figure 84.719713 dBA is the task LEX of the 95 dBA task alone and 79.979400 dBA the task LEX of the 86 dBA task, so each reads one task as the day. 86.646970 dBA belongs to the EVWRENI eight-hour day, a different survey.")
+
+q(0, "Figure 26 prints the day as 87 dB(A) and 145 points, and the engine returns 86.613302 dBA and 144.987371 points. Why does that count as the engine reproducing the source?",
+ "The source prints whole decibels and whole points, and the engine's figures round to both at that precision.",
+ ["The engine adds a small allowance for instrument uncertainty that closes the gap to the printed figure.",
+  "The source rounds every LEX,8h up to the next whole decibel, so any figure between 86 and 87 would match it.",
+  "The printed figure is taken from the points column, which always reads higher than the level column."],
+ "A reproduction is judged at the precision the source prints: 86.613302 dBA is 87 to the nearest decibel and 144.987371 points is 145 to the nearest point. The engine has no door for an uncertainty budget, no round-up rule is involved (86.613302 simply rounds to 87), and the points and the level restate one another rather than differing.")
+
+q(3, "In Figure 26, which task carries the largest share of the day's noise exposure points?",
+ "The 95 dBA task, with 93.750000 points in 0.750000 h.",
+ ["The 80 dBA task, with 19.764235 points, because it runs longest at 5.000000 h.",
+  "The 86 dBA task, with 31.473135 points, because it sits nearest the 85 dBA pivot.",
+  "None of them, since the points are shared among the tasks in proportion to their hours."],
+ "LEX,8h is an energy average, so a task fifteen decibels louder carries far more energy in a fraction of the time: 93.750000 of the 144.987371 points sit in the last 45 minutes. Longest duration does not win, nearness to the pivot means nothing, and a share by hours is the time weighted arithmetic reading the metric does not use.")
+
+q(1, "The EVWRENI crew works a long day of 10.500000 hours. Which figure is the one to set against the EU action values?",
+ "87.207845 dBA, the day's energy divided by 8 hours",
+ ["86.026852 dBA, the day's energy divided by the 10.500000 hours worked",
+  "86.646970 dBA, the eight-hour day's level, since the sound levels did not change",
+  "85.969100 dBA, the small case for ten hours at 85 dBA"],
+ "LEX,8h divides by a fixed 8 hours whatever the day's length, so the long day reads 87.207845 dBA and the extra hours raise it. Dividing by the hours worked gives 86.026852 dBA, which is the LAeq over the day and hides the extra hours. The eight-hour day's 86.646970 dBA ignores the longer day entirely, and 85.969100 dBA is an unrelated small case.")
+
+q(1, "For the EVWRENI long day the engine gives 87.207845 dBA, and the same energy averaged over its own hours gives 86.026852 dBA. What is the second figure?",
+ "The LAeq over the day as worked, a different quantity from LEX,8h.",
+ ["The LEX,8h corrected for the long shift, which is the figure the regulation prefers.",
+  "The weekly noise exposure level of the crew, spread over five days.",
+  "The task LEX of the loudest task on that day."],
+ "Dividing the day's energy by 10.500000 hours instead of 8 gives the equivalent continuous sound level over the hours worked, the LAeq. It is not a corrected LEX,8h: the regulation keeps the divisor at 8 so that a longer day reads as a larger noise exposure. It involves no weekly averaging, and no single task's LEX is involved.")
+
+q(3, "One task at 85.000000 dBA runs for 10.000000 h. What LEX,8h does the engine return?",
+ "85.969100 dBA",
+ ["85.000000 dBA", "86.760913 dBA", "84.989700 dBA"],
+ "Ten hours over the fixed 8 is 125.000000 points, which is 85.969100 dBA. Reading 85.000000 dBA divides the energy by the ten hours worked, the LAeq, which never moves while the level is constant. 86.760913 dBA is the LEX of 150 points, and 84.989700 dBA is four hours at 88 dBA.")
+
+q(0, "HSE L108 Appendix 3 defines noise exposure points as EP = 100 (t/8) 10^((L - 85)/10). What LEX,8h do 100 points restate?",
+ "85.000000 dBA",
+ ["80.000000 dBA", "87.000000 dBA", "90.000000 dBA"],
+ "Eight hours at 85 dBA is exactly 100 points, so 100 points is LEX,8h 85.000000 dBA; the engine measures that pivot as 85.000000000000 dBA. 80.000000 dBA is the lower action value at 31.622777 points, 87.000000 dBA the EU limit value, and 90.000000 dBA the OSHA criterion level from the Associate tier, which belongs to a different metric.")
+
+q(2, "A job list's tasks add up to 150.000000 noise exposure points. What is the day's LEX,8h?",
+ "86.760913 dBA",
+ ["88.010300 dBA", "81.989700 dBA", "85.969100 dBA"],
+ "LEX,8h is 85 + 10 log10(points/100), and 150 points gives 86.760913 dBA. 88.010300 dBA is the level for 200 points and 81.989700 dBA for 50, so each reads a neighbouring row; 85.969100 dBA is 125 points.")
+
+q(3, "Why can a supervisor add the noise exposure points of several tasks with ordinary arithmetic?",
+ "Points are a linear measure of energy, so they add, and their total restates the day's LEX,8h.",
+ ["Points are a logarithmic measure like the decibel, and the logarithms of separate tasks add as the tasks themselves do.",
+  "Each task's points already include a threshold, so only the loud tasks are left to add.",
+  "The points were designed as a separate limit, so their sum is compared with 145 on its own."],
+ "Points are proportional to energy, which adds; decibels are logarithmic and do not. The EVWRENI day's four tasks carry 45.638640, 16.534419, 82.235865 and 1.706800 points and the engine totals 146.115723, which is the day's LEX,8h restated. Points carry no threshold, and 145 is only Figure 26's printed total, never a limit.")
+
+q(0, "The EVWRENI eight-hour day totals 146.115723 noise exposure points. What LEX,8h does that restate?",
+ "86.646970 dBA",
+ ["84.150613 dBA", "86.613302 dBA", "87.207845 dBA"],
+ "The points and the level are one quantity restated, and the engine reports the eight-hour day at 86.646970 dBA beside 146.115723 points. 84.150613 dBA is the task LEX of the 95.400000 dBA task alone, 86.613302 dBA is the Figure 26 day, and 87.207845 dBA is the same crew's long day.")
+
+q(2, "Four hours at 88.000000 dBA gives LEX,8h 84.989700 dBA. How many noise exposure points does the engine report for it?",
+ "99.763116 points",
+ ["100.000000 points", "50.000000 points", "125.000000 points"],
+ "Half of eight hours at a level three decibels above the pivot is close to, and just under, 100 points: 99.763116, because three decibels is a rounding of the doubling step. Reading 100.000000 treats 3 dB as an exact doubling, 50.000000 halves the hours and forgets the level, and 125.000000 is ten hours at 85 dBA.")
+
+q(1, "The EU exports a limit value of 87.000000 dBA beside its two action values. Why does the engine return no flag against it?",
+ "The limit value applies at the ear with hearing protection taken into account, which the engine does not compute.",
+ ["The limit value is licensed text, so the engine may not quote it or compare a workplace LEX,8h with it in any report it writes.",
+  "A LEX,8h above 87 is refused, so no flag is ever needed.",
+  "The limit value only applies to the weekly noise exposure level."],
+ "LEX,8h is the level in the workplace. The limit value is read at the ear with protection allowed for, and no door computes that, so the engine returns the two action flags and none for the limit. The EU values are exported by the engine and are not licensed, nothing is refused above 87 dBA, and the value is not confined to the week.")
+
+q(0, "A report writes \"above the action level\" for a LEX,8h of 85.969100 dBA. What has it got wrong?",
+ "It names the OSHA action level, a TWA on a decibel exchange rate of 5 dB with a threshold, where the EU upper action value on LEX,8h is meant.",
+ ["Nothing, because the OSHA action level and the EU upper action value both sit at 85 and so measure the same quantity on the same survey sheet.",
+  "It should have compared the figure with the EU limit value of 87.000000 dBA instead.",
+  "LEX,8h can only be compared with the lower action value of 80.000000 dBA."],
+ "Both carry the number 85 and they measure different things: the OSHA action level is a TWA of 85 dBA on a decibel exchange rate of 5 dB with an 80 dBA threshold, and the EU upper action value is a LEX,8h level on the energy relation with no threshold. The limit value is read at the ear, which LEX,8h is not, and LEX,8h is compared with both action values.")
+
+q(3, "On the EVWRENI eight-hour day, what happens to the 73.800000 dBA task that lasts 1.800000 h?",
+ "It carries 1.706800 points and is in the day's LEX,8h, since LEX,8h has no threshold.",
+ ["It is dropped, because every noise metric integrates only periods at or above an 80 dBA threshold.",
+  "It is dropped, because its task LEX of 67.321825 dBA is below the lower action value.",
+  "It is counted for its hours at a level of zero."],
+ "LEX,8h is an energy average with no floor: every task counts, however quiet, and this one adds 1.706800 points. The 80 dBA threshold belongs to the OSHA action level and NIOSH noise REL noise dose, never to LEX,8h. The action values are compared with the day's total and never with a single task, and the task keeps its own sound level.")
+
+q(2, "Someone enters a task list for `lexEightHourDbA` whose hours add up to 25. How does the engine respond?",
+ "A refusal on `periods`: \"the periods total 25 h: a daily exposure covers at most 24 hours\"",
+ ["A LEX,8h computed over the first 24 hours, with a warning that the last hour was trimmed",
+  "A refusal on `periods`: \"the periods total zero hours: there is no exposure to express\"",
+  "A LEX,8h divided by the 25 hours in place of 8, with a warning that the record is longer than a working day"],
+ "A daily noise exposure level covers at most one day, so a record over 24 hours is refused on the field `periods` with the quoted message. The engine never trims a record or changes its divisor; the zero-hours message is the refusal for a record with no time in it at all.")
+
+emit(Q, '/root/hse-wip-hygiene/banks/h2i_m01.json', expect_n=15)
+finish()

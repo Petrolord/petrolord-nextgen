@@ -1,0 +1,115 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H2 Associate m04, Reading a Dosimeter Record.
+# Sources: digest sections 4, 6, 7, 9 and 10 (Associate-owned). Every figure is printed there.
+
+q(0, "The engine's `noiseDose` door returns one contribution per period. What is a contribution?",
+ "The period's hours divided by its reference duration at that level, in percent.",
+ ["The period's hours divided by the 8 hours of the day, weighted by its level.",
+  "The period's sound level less the criterion level, multiplied by the hours it lasted.",
+  "The period's share of the day's TWA, in dBA, before the logarithm."],
+ "Digest section 7 gives each period's reference duration as the denominator of its contribution, and the noise dose is the sum of those shares. Dividing by the 8 hours of the day ignores the level entirely except through a weight the engine does not use. Contributions are percentages of an allowance, and the TWA is computed only from their total.")
+
+q(2, "On the action level, period 1 lasts 2.600000 h and carries 14.747186 percent, while period 2 lasts only 1.900000 h and carries 23.100555 percent. Why does the shorter period carry more?",
+ "Period 2 is louder by more than one 5 dB step, so its reference duration is 8.224911 h against 17.630482 h.",
+ ["Period 2 is nearer the PEL threshold of 90 dBA, so the action level gives it extra weight near that line.",
+  "Period 1 is partly below the action level threshold, so only part of its hours are integrated.",
+  "Period 2 falls later in the shift, and the engine weights later periods more heavily on the day."],
+ "A contribution is hours over reference duration. At 89.800000 dBA the OSHA reference duration is 8.224911 h and at 84.300000 dBA it is 17.630482 h, so the louder period uses its allowance more than twice as fast. Hours matter and level matters more. Both periods are above the 80 dBA threshold in full, and the engine has no position weighting.")
+
+q(1, "The third OBEN period carries 18.921153 percent on both the OSHA PEL and the OSHA action level. Why the same figure?",
+ "Both setups share a criterion level and a decibel exchange rate, so the reference duration is the same.",
+ ["Both setups share the same limit noise dose, so the period is divided by the same figure under each criterion.",
+  "The action level caps the period at the PEL value because it is above 90 dBA.",
+  "The engine copies the PEL contribution into the action level for loud periods."],
+ "A contribution depends on the level, the hours and the reference duration, and the reference duration depends on the criterion level and the decibel exchange rate, which both OSHA setups share. The limit noise dose differs, 100 against 50 percent, and it moves no contribution. The threshold only matters for the quieter periods, which this one is not.")
+
+q(3, "Period 4 of the OBEN record is 1.750000 h at 81.200000 dBA, with an OSHA reference duration of 27.095850 h. What does the OSHA PEL column show for it, and why?",
+ "Not integrated, because 81.200000 dBA is below the PEL threshold.",
+ ["6.458554 percent, its 1.750000 h over its 27.095850 h reference duration.",
+  "9.091664 percent, its hours over the NIOSH reference duration at 81.200000 dBA.",
+  "Not integrated, because its reference duration exceeds 24 h, a whole day."],
+ "Dividing 1.750000 by 27.095850 gives 6.458554 percent, and the action level reports exactly that, but the PEL integrates nothing under 90 dBA, so the division is never made. 9.091664 percent is the NIOSH noise REL share. A reference duration longer than a day is normal and is no reason to leave a period out.")
+
+q(0, "What share of the OBEN day's PEL noise dose does the loudest period, 99.100000 dBA for 0.200000 h, carry?",
+ "31.811200 percent, the smaller of the two terms.",
+ ["64.980192 percent, its share on the NIOSH noise REL.",
+  "8.827030 percent, which is the whole share.",
+  "100 percent, since it is the loudest period."],
+ "The loudest period contributes 8.827030 percent of the allowance, and that is 31.811200 percent of the day's 27.748183 percent. The tempting 8.827030 confuses a contribution to the allowance with a share of the day's total. The larger term belongs to the 94.600000 dBA period, quieter and four times as long.")
+
+q(2, "Why does the 94.600000 dBA period carry more of the PEL noise dose than the 99.100000 dBA period?",
+ "It lasts four times as long while its reference duration is under twice as long, 4.228072 against 2.265768 h.",
+ ["Its sound level is closer to the criterion level, and the PEL weights levels close to 90 dBA most heavily.",
+  "The engine scales each period by the square of its hours before dividing by the reference duration.",
+  "The louder period is past a table top, so the engine trims its contribution to the printed maximum."],
+ "Contribution is hours over reference duration: 0.800000 over 4.228072 h against 0.200000 over 2.265768 h. The louder period costs more per minute and has far fewer minutes. There is no weighting by nearness to 90 dBA and no squaring of hours, and 99.100000 dBA is well under any table top, so nothing is trimmed.")
+
+q(1, "On the NIOSH noise REL, how does the OBEN day's loudest period rank among the three periods that each carry more than half a day's allowance?",
+ "It is the smallest of the three, at 64.980192 percent.",
+ ["It is the largest of the three, at 91.895868 percent.",
+  "It sits in the middle of the three, at 71.996537 percent.",
+  "It is not among them, being worth only 8.827030 percent."],
+ "On NIOSH the three big terms are 91.895868 percent from the 94.600000 dBA period, 71.996537 percent from the 89.800000 dBA period and 64.980192 percent from the 99.100000 dBA period. The loudest reading is the smallest of them. 8.827030 percent is that period's OSHA share, which answers a different criterion.")
+
+q(3, "After the OBEN day, what share of the OSHA PEL allowance remains?",
+ "72.251817 percent.",
+ ["72.054478 percent.",
+  "27.748183 percent.",
+  "50.000000 percent."],
+ "The PEL noise dose after the day is 27.748183 percent, so 100 less that leaves 72.251817 percent. The tempting 72.054478 percent is the day's action level noise dose, a near-identical figure from a different criterion. 27.748183 percent is the share used, and 50.000000 percent is the action level limit noise dose, which belongs to another criterion.")
+
+q(0, "With 72.251817 percent of the PEL allowance left and an OSHA reference duration of 4.000000 h at 95 dBA, how long could the worker spend at 95 dBA for the rest of the day?",
+ "173.404361 minutes, which is 2.890073 h.",
+ ["240.000000 minutes, the whole 4.000000 h.",
+  "2.890073 minutes, the fraction times 4.",
+  "480.000000 minutes, the 8 h at 90 dBA."],
+ "The time left is the fraction remaining times the reference duration: 72.251817 percent of 4.000000 h is 2.890073 h, or 173.404361 minutes. Using the whole 4.000000 h ignores what the day has already used. Writing 2.890073 as minutes forgets the hours unit the reference duration carries.")
+
+q(2, "Why can the 173.404361 minutes at 95 dBA never be quoted on the OSHA action level?",
+ "On the action level the day has already used 72.054478 percent against a limit of 50, so nothing is left.",
+ ["The action level has a different reference duration at 95 dBA, which gives a longer time for the rest of the day.",
+  "The action level is not a daily limit, so time left at a level has no meaning for it at any point in the day.",
+  "The action level uses 16.61 only for the TWA, and the time left depends on the NIOSH coefficient of 10.0."],
+ "The time left belongs to one criterion. The same record has used 72.054478 percent of the action level, whose limit is 50 percent, so there is no remaining allowance on it. The two OSHA setups share a criterion level and a decibel exchange rate, so the reference duration at 95 dBA is 4.000000 h on both; it is the used share that differs.")
+
+q(3, "A supervisor asks for the time left at 85 dBA on the OSHA PEL after the OBEN day. What should the answer be?",
+ "The level is below the PEL threshold, so the question is not framed.",
+ ["16.000000 h times the 72.251817 percent that remains of the PEL.",
+  "Unlimited, since 85 dBA gives a reference duration of 16.000000 h.",
+  "173.404361 minutes, since the remaining share is the same at any level."],
+ "A level under the criterion's threshold never uses PEL allowance, so it has no time left to compute, and the engine's reference duration door reports it as below the threshold. Multiplying by the 16.000000 h OSHA reference duration at 85 dBA would describe the action level, which integrates from 80. The 173.404361 minutes belong to 95 dBA only.")
+
+q(1, "A download runs two shifts together and its periods total 25 hours. What does the engine return?",
+ "A refusal on `periods`: \"the periods total 25 h: a daily dose covers at most 24 hours\".",
+ ["The noise dose of the first 24 hours, with the last hour dropped and a warning about the trim.",
+  "The noise dose of all 25 hours, with a warning that the record is longer than a day.",
+  "A refusal on `periods[0].durationH`, since the first period is where the total is checked."],
+ "That is judgement J4: noise, LEX and chemical periods totalling over 24 hours are refused, on the field `periods`, in the engine's own words quoted in the key. The engine cannot know which hours belong to which day, so it hands the split back rather than trimming or warning. `periods[0].durationH` is the field for a negative first duration.")
+
+q(0, "At 80 dBA the NIOSH reference duration is 25.398417 h. Why does the engine accept that, when it refuses a record of 25 hours?",
+ "A reference duration describes an allowance; a record over 24 hours describes data no single day can hold.",
+ ["It does not accept it: any figure over 24 hours is refused wherever it appears in the engine.",
+  "The NIOSH criterion has no day limit, while the OSHA criteria refuse anything over 24 hours.",
+  "The reference duration is cut to 24 hours before it is used in any contribution."],
+ "A reference duration is how long the allowance would last at that level, and nobody has to work those hours: OSHA gives 32.000000 h at 80 dBA. The 24 hour refusal, judgement J4, is about the periods handed over as one day's record. Nothing is rounded, and the limit is the same whatever the criterion.")
+
+q(3, "Your own sum of a download's PEL contributions disagrees with the engine's noise dose. What is the quickest way to find the cause?",
+ "Compare contributions period by period to find the row you read differently.",
+ ["Recompute the TWA with the exact coefficient and compare the two TWAs you get.",
+  "Re-run the day on the NIOSH noise REL and take the lower of the two totals it gives.",
+  "Round every reference duration to one decimal, as the published table prints them."],
+ "The engine returns each period's contribution beside the total, so a disagreement points at the period that differs, and a missed period shows up as a gap of one whole contribution. The coefficient affects the TWA and never the noise dose. Another criterion gives a different answer to a different question, and rounding reference durations moves the last printed digit.")
+
+q(2, "On the OBEN day, how do the periods sort by sound level against by contribution?",
+ "Into different orders, on every criterion.",
+ ["Into the same order on every criterion.",
+  "Into one order on OSHA, and a reversed one on NIOSH.",
+  "Into the same order once quiet periods are dropped."],
+ "Sorting by level and sorting by contribution give two different orders on the OBEN day on every criterion: on the PEL the 99.100000 dBA period carries 8.827030 percent and the quieter 94.600000 dBA period 18.921153 percent. Dropping the periods below the threshold does not help, because that is exactly the PEL pair. The largest contribution is what a control should reach for first, and the maximum level is only one term.")
+
+emit(Q, '/root/hse-wip-hygiene/banks/h2b_m04.json', expect_n=15)
+finish()
