@@ -1,0 +1,299 @@
+{
+  "app_slug": "carbon",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-an-inventory-counts",
+      "title": "What an Inventory Counts",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-two-apps-and-one-ledger",
+          "title": "Two apps and one ledger",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-scope-1-and-scope-2",
+          "title": "Scope 1 and Scope 2",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-missing-stays-missing",
+          "title": "Missing stays missing",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-engines-will-not-ship",
+          "title": "What the engines will not ship",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-carbon-in-co2-out",
+      "title": "Carbon In, CO2 Out",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-the-atom-balance",
+          "title": "The atom balance",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-molar-masses-from-atomic-weights",
+          "title": "Molar masses from atomic weights",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-carbon-per-kilomole-of-fuel",
+          "title": "Carbon per kilomole of fuel",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-fired-heaters-co2",
+          "title": "A fired heater's CO2",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-atom-balance-refuses",
+          "title": "What the atom balance refuses",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-the-flare-as-an-inventory-line",
+      "title": "The Flare as an Inventory Line",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-destruction-efficiency-is-an-input",
+          "title": "Destruction efficiency is an input",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-blank-box-is-missing",
+          "title": "A blank box is missing",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-escapes-is-counted-as-methane",
+          "title": "What escapes is counted as methane",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-one-flare-at-five-efficiencies",
+          "title": "One flare at five efficiencies",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-global-warming-potentials",
+      "title": "Global Warming Potentials",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-set-carries-its-report",
+          "title": "A set carries its report",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-ar5-and-ar6",
+          "title": "AR5 and AR6",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-fossil-and-non-fossil-methane",
+          "title": "Fossil and non-fossil methane",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-one-inventory-on-four-sets",
+          "title": "One inventory on four sets",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-which-set-to-file-on",
+          "title": "Which set to file on",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-lines-factors-and-provenance",
+      "title": "Lines, Factors and Provenance",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-factor-is-a-record",
+          "title": "A factor is a record",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-blocked-and-unsourced-lines",
+          "title": "Blocked and unsourced lines",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-scope-totals",
+          "title": "The scope totals",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-computed-and-reportable",
+          "title": "Computed and reportable",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-intensity-and-its-boundary",
+          "title": "Intensity and its boundary",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-igbogene-inventory-end-to-end",
+          "title": "The Igbogene inventory end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-inventory-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-is-held-in-the-inventory",
+          "title": "What is held in the inventory",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

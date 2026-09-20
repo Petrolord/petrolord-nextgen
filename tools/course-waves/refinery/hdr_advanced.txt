@@ -1,0 +1,31 @@
+-- ============================================================================
+-- refinery EXPERT DEEP SEED: Refinery Feasibility & Planning, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: ACTUALS, VARIANCE AND THE INVESTMENT CASE. A plan, a
+-- scheduled event and a recorded actual are one shape in three ledgers; the
+-- two ledgers are matched on material and type and each gap splits into a
+-- volume variance, a price variance and an unexplained term; a movement in one
+-- ledger only is unmatched; each line carries its direction and its effect on
+-- margin, and the headline total is on margin. The feasibility streams are
+-- valued through the screening engine with revenue as revenue, no royalty,
+-- capital deducted in the year it is spent and the construction-year tax loss
+-- carried forward.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A positive gap on a delivery helps the
+-- margin and the same gap on a receipt hurts it; the engine signs each line
+-- before it adds.
+--
+-- THE TRAP THE TIER IS BUILT ON. Adding the revenue gaps to the cost gaps as
+-- recorded gives a number with no meaning, and throwing the construction loss
+-- away taxes the first operating years.
+--
+-- HELD, taught as a limit and never graded: capital depreciated in the year
+-- it is spent (H2). The NPV is read here as the screen's answer; the
+-- Economics courses grade it. The capstone grades six numbers, each an
+-- engine return: four variance figures to the whole dollar and two tax
+-- figures in millions to four decimals.
+-- ============================================================================

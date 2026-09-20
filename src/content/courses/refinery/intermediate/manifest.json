@@ -1,0 +1,307 @@
+{
+  "app_slug": "refinery",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-configuration",
+      "title": "The Configuration",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-crudes-units-products-and-streams",
+          "title": "Crudes, units, products and streams",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-yields-are-data",
+          "title": "Yields are data",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-recipe-places-a-stream",
+          "title": "A recipe places a stream",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-blank-limits-and-typed-zeros",
+          "title": "Blank limits and typed zeros",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-crude-unit-carries-every-barrel",
+      "title": "The Crude Unit Carries Every Barrel",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-unit-with-no-feed",
+          "title": "A unit with no feed",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-crude-run-and-crude-unit-throughput",
+          "title": "Crude run and crude unit throughput",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-utilisation-against-capacity",
+          "title": "Utilisation against capacity",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-crude-unit-operating-cost",
+          "title": "The crude unit operating cost",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-reading-the-plan",
+      "title": "Reading the Plan",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-revenue-less-crude-and-units",
+          "title": "Revenue less crude and units",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-gross-margin-per-barrel-of-crude",
+          "title": "Gross margin per barrel of crude",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-stream-balances-and-surplus",
+          "title": "Stream balances and surplus",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-binds-the-plan",
+          "title": "What binds the plan",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-infeasible-and-unbounded-plans",
+          "title": "Infeasible and unbounded plans",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-what-another-barrel-is-worth",
+      "title": "What Another Barrel Is Worth",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-stream-marginal-value",
+          "title": "The stream marginal value",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-stream-worth-its-product-price",
+          "title": "A stream worth its product price",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-stream-valued-through-a-unit",
+          "title": "A stream valued through a unit",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-stream-worth-nothing",
+          "title": "A stream worth nothing",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-pricing-a-debottleneck",
+          "title": "Pricing a debottleneck",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-schedule",
+      "title": "The Schedule",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-cargoes-spaced-across-the-period",
+          "title": "Cargoes spaced across the period",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-weekly-unit-runs-and-lifts",
+          "title": "Weekly unit runs and lifts",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-fixed-period-start",
+          "title": "A fixed period start",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-dates-in-every-time-zone",
+          "title": "Dates in every time zone",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-what-the-schedule-leaves-out",
+          "title": "What the schedule leaves out",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-abua-plan-end-to-end",
+          "title": "The Abua plan end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-abua-schedule-end-to-end",
+          "title": "The Abua schedule end to end",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "refinery-plan-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

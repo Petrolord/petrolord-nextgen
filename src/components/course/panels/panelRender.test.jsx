@@ -84,6 +84,36 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('compliance/PlanExplorer.jsx');
     expect(names).toContain('compliance/ReadinessExplorer.jsx');
   });
+  it('finds the crude (Crude Assay & Blending) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('crude/AssayExplorer.jsx');
+    expect(names).toContain('crude/ValuationExplorer.jsx');
+    expect(names).toContain('crude/RecipeExplorer.jsx');
+  });
+  it('finds the refinery (Refinery Feasibility & Planning) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('refinery/ScreenExplorer.jsx');
+    expect(names).toContain('refinery/PlanExplorer.jsx');
+    expect(names).toContain('refinery/VarianceExplorer.jsx');
+  });
+  it('finds the carbon (Carbon & Energy Efficiency) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('carbon/InventoryExplorer.jsx');
+    expect(names).toContain('carbon/EfficiencyExplorer.jsx');
+    expect(names).toContain('carbon/AbatementExplorer.jsx');
+  });
+  it('finds the supply (Terminals, Depots & Fuel Supply) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('supply/TankExplorer.jsx');
+    expect(names).toContain('supply/DepotExplorer.jsx');
+    expect(names).toContain('supply/PriceExplorer.jsx');
+  });
+  it('finds the gasvalue (Flare Gas to Value & LPG/CNG) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('gasvalue/FlareExplorer.jsx');
+    expect(names).toContain('gasvalue/RouteExplorer.jsx');
+    expect(names).toContain('gasvalue/RolloutExplorer.jsx');
+  });
   it('finds the FC8 metering, control valve and storage panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('metering/MeterRunExplorer.jsx');

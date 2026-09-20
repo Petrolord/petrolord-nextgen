@@ -1,0 +1,305 @@
+{
+  "app_slug": "gasvalue",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-lpg-blend-and-the-vessel",
+      "title": "The LPG Blend and the Vessel",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-three-properties-three-bases",
+          "title": "Three properties, three bases",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-fill-limit-and-its-basis",
+          "title": "The fill limit and its basis",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-usable-stock-and-the-vapour-space",
+          "title": "Usable stock and the vapour space",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-cover-reorder-and-ullage",
+          "title": "Cover, reorder and ullage",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-blank-lead-time-is-missing",
+          "title": "A blank lead time is missing",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-vaporizer-carousel-and-float",
+      "title": "Vaporizer, Carousel and Float",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-three-terms-of-vaporizer-duty",
+          "title": "Three terms of vaporizer duty",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-boiling-point-at-pressure",
+          "title": "The boiling point at pressure",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-carousel-is-a-queue",
+          "title": "The carousel is a queue",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-positions-wholly-working",
+          "title": "Positions wholly working",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-cylinders-in-circulation",
+          "title": "Cylinders in circulation",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-gas-in-a-bank",
+      "title": "Gas in a Bank",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-real-gas-at-storage-pressure",
+          "title": "Real gas at storage pressure",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-ideal-against-real",
+          "title": "Ideal against real",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-gauge-and-absolute",
+          "title": "Gauge and absolute",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-correlations-range",
+          "title": "The correlation's range",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-cascade",
+      "title": "The Cascade",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-equalising-bank-by-bank",
+          "title": "Equalising bank by bank",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-fills-before-recharge",
+          "title": "Fills before recharge",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-is-left-in-the-banks",
+          "title": "What is left in the banks",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-compressor-as-a-unit-bridge",
+          "title": "The compressor as a unit bridge",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-forecourt-queue",
+          "title": "The forecourt queue",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-the-customers-switch",
+      "title": "The Customer's Switch",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-cost-per-kilometre",
+          "title": "Cost per kilometre",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-energy-equivalence-and-its-ratio",
+          "title": "Energy equivalence and its ratio",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-simple-payback-undiscounted",
+          "title": "Simple payback, undiscounted",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-trailers-to-the-daughter-station",
+          "title": "Trailers to the daughter station",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-kano-and-ibafo-rollout-end-to-end",
+          "title": "The Kano and Ibafo rollout end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-rollout-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-is-held-and-what-the-oracles-check",
+          "title": "What is held and what the oracles check",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-this-course-hands-over",
+          "title": "Where this course hands over",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

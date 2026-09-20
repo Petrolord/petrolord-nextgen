@@ -1,0 +1,28 @@
+-- ============================================================================
+-- gasvalue EXPERT DEEP SEED: Flare Gas to Value & LPG/CNG, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: LPG AND CNG ON THE GROUND. The LPG blend on volume,
+-- mass and moles; the fill limit on its stated basis, with the vapour space
+-- kept; the vaporizer's three terms with the boiling point at the vaporizer's
+-- pressure; the carousel and the forecourt as queues on the positions wholly
+-- working; cylinders and trailers by Little's law; gas in a bank as real gas
+-- at absolute pressure; the cascade by equalisation, bank by bank; the
+-- compressor as a unit bridge into the Facilities engine; the customer's
+-- switch on energy with a stated efficiency ratio and an undiscounted payback.
+--
+-- THE ENGINE FACT THIS TIER OWNS. Every CNG pressure is absolute, and the
+-- engine says so on every result.
+--
+-- THE TRAP THE TIER IS BUILT ON. A gauge reading typed as absolute, a filling
+-- density read as a liquid-volume ratio, an atmospheric boiling point for a
+-- liquid under pressure and positions rounded to the nearest whole one each
+-- give a figure that looks finished.
+--
+-- HELD, taught as a limit and never graded: code fill limits (H3). Every
+-- figure is invented and illustrative. The capstone grades six engine figures:
+-- the gas left in the cascade at 1e-3 kg, the rest at 1e-4.
+-- ============================================================================

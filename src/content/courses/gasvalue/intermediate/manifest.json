@@ -1,0 +1,303 @@
+{
+  "app_slug": "gasvalue",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-four-routes-and-their-envelopes",
+      "title": "Four Routes and Their Envelopes",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-four-ways-to-sell-a-flare",
+          "title": "Four ways to sell a flare",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-limit-is-yours-to-set",
+          "title": "A limit is yours to set",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-pass-fail-and-not-fully-screened",
+          "title": "Pass, fail and not fully screened",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-failure-names-its-requirement",
+          "title": "A failure names its requirement",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-what-the-gas-can-yield",
+      "title": "What the Gas Can Yield",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-yield-has-a-basis",
+          "title": "A yield has a basis",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ceiling-on-each-route",
+          "title": "The ceiling on each route",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-megawatt-hours-from-the-heating-value",
+          "title": "Megawatt hours from the heating value",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-yield-above-the-gas-is-refused",
+          "title": "A yield above the gas is refused",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-a-routes-year",
+      "title": "A Route's Year",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-thousand-cubic-feet-a-year",
+          "title": "Thousand cubic feet a year",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-recovery-is-a-design-outcome",
+          "title": "Recovery is a design outcome",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-revenue-cost-and-margin",
+          "title": "Revenue, cost and margin",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-blank-cost-is-named",
+          "title": "A blank cost is named",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-capital-by-the-modular-power-law",
+          "title": "Capital by the modular power law",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-counterfactual",
+      "title": "The Counterfactual",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-gross-flare-is-not-the-abatement",
+          "title": "The gross flare is not the abatement",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-only-the-recovered-share-is-avoided",
+          "title": "Only the recovered share is avoided",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-burning-the-product-emits",
+          "title": "What burning the product emits",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-product-displaces",
+          "title": "What the product displaces",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-blocked-until-declared",
+          "title": "Blocked until declared",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-credits-and-the-bid",
+      "title": "Credits and the Bid",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-does-the-project-need-credits",
+          "title": "Does the project need credits",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-breakeven-credit-price",
+          "title": "The breakeven credit price",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-lowest-tested-price-that-clears",
+          "title": "The lowest tested price that clears",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-no-abatement-no-credits",
+          "title": "No abatement, no credits",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-bid-table",
+          "title": "The bid table",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-egbema-routes-end-to-end",
+          "title": "The Egbema routes end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "gasvalue-route-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-the-oracle-checks-on-a-parcel",
+          "title": "What the oracle checks on a parcel",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
