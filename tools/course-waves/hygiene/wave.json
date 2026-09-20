@@ -202,19 +202,19 @@
    "result": "row rule: 1338 scenario-case pairs, worst 0 shared whole record(s). | CONTROLS FIRED: value control rejected 1 time(s); row control matched 1 record(s). | gate_collisions: 0 collisions."
   },
   "gate_capstone_leak.py --no-banks": {
-   "md5": "244bfc7c216ac174b673868f28262ba5",
+   "md5": "b1ee18529a6ca0d9be4735fd12c05524",
    "exit": 0,
    "expected": 0,
-   "result": "direction 9 briefs: 6 files (wave.json, BRIEF.md, LESSON_TASK.md, BANK_TASK.md, KEY_TRUTH_TASK.md, PANELS.md), 721 numeric literals, 18 graded values and the T6 margin. | CONTROLS FIRED: a planted graded value and a planted condition were both caught. | gate_capstone_leak: 0 finding(s)."
+   "result": "direction 9 briefs: 6 files (wave.json, BRIEF.md, LESSON_TASK.md, BANK_TASK.md, KEY_TRUTH_TASK.md, PANELS.md), 711 numeric literals, 18 graded values and the T6 margin. | CONTROLS FIRED: a planted graded value and a planted condition were both caught. | gate_capstone_leak: 0 finding(s)."
   },
   "gate_capstone_leak.py --no-banks --plant-lesson (negative control, must exit 1)": {
-   "md5": "244bfc7c216ac174b673868f28262ba5",
+   "md5": "b1ee18529a6ca0d9be4735fd12c05524",
    "exit": 1,
    "expected": 1,
    "result": "CONTROLS FIRED: a planted graded value and a planted condition were both caught. | planted in advanced/m01-wbgt/l01-three-thermometers.md: ['[8 lessons numeric] advanced/m01-wbgt/l01-three-thermometers.md carries a literal within 10 tolerances of utorogu_action_level_dose_pct at 1'] | NEGATIVE CONTROL --plant-lesson: expected a [8 lessons numeric] finding, caught"
   },
   "gate_capstone_leak.py --no-banks --plant-brief (negative control, must exit 1)": {
-   "md5": "244bfc7c216ac174b673868f28262ba5",
+   "md5": "b1ee18529a6ca0d9be4735fd12c05524",
    "exit": 1,
    "expected": 1,
    "result": "CONTROLS FIRED: a planted graded value and a planted condition were both caught. | planted in wave.json: ['[9 briefs] wave.json carries osioka_adjusted_limit_ppm at its printed rendering', '[9 briefs numeric] wave.json carries a literal within 10 tolerances of osioka_adjusted_limit_ppm at 1'] | NEGATIVE CONTROL --plant-brief: expected a [9 briefs] finding, caught"

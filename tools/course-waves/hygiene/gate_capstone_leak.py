@@ -86,11 +86,21 @@ if '--lessons' in ARGS:
     LESSONS = ARGS[ARGS.index('--lessons') + 1]
 PLANT_LESSON = '--plant-lesson' in ARGS
 PLANT_BRIEF = '--plant-brief' in ARGS
+# THIS GATE USED TO PRINT THE CAPSTONE CONDITION VALUES IT FOUND, and the whole
+# point of the gate is that nobody outside h2_capstone.mjs may read them. The
+# "table-only coincidences" line printed "<site>.<condition> = <value>" for each
+# one, so a green run wrote a site name and a stated condition into a terminal,
+# a CI log and every transcript that quoted it: the gate leaked exactly what it
+# exists to stop. The line now names the CONDITION KEYS only, with no site and
+# no value, which is all a reader needs to know what coincided. --show-
+# coincidences restores the detail for someone debugging the gate on purpose,
+# and it is never used by finalise.py.
+SHOW_COINCIDENCES = '--show-coincidences' in ARGS
 VALUE_FLAGS = ('--banks', '--lessons')
 for i, a in enumerate(ARGS):
     if i > 0 and ARGS[i - 1] in VALUE_FLAGS:
         continue
-    if a.startswith('--') and a not in ('--banks', '--no-banks', '--lessons', '--no-lessons', '--plant-lesson', '--plant-brief'):
+    if a.startswith('--') and a not in ('--banks', '--no-banks', '--lessons', '--no-lessons', '--plant-lesson', '--plant-brief', '--show-coincidences'):
         print(f'  GATE REFUSES: unknown option {a}')
         sys.exit(2)
 LAB = os.environ.get('H2_LAB', '/root/wt-h2-nextgen/src/components/course/panels/hygiene/hygieneLab.js')
@@ -221,7 +231,7 @@ def sweep(digest, label='digest'):
                 if v in toks or norm(v) in toks:
                     findings.append(f'DIRECTION 1: {name}.{k} = {v} is in {where}')
             if (v in ttoks or norm(v) in ttoks) and not (v in ptoks or norm(v) in ptoks):
-                COINCIDENCES.append(f'{name}.{k} = {v}')
+                COINCIDENCES.append((name, k, v))
     # 1b. whole records as pairs in table rows
     rows = [l for l in digest.split('\n') if l.startswith('|')]
     for name in SITES:
@@ -245,6 +255,21 @@ def sweep(digest, label='digest'):
 
 findings = sweep(DIGEST)
 real_coincidences = sorted(set(COINCIDENCES))
+# Redacted by default: the KEYS, deduplicated, and how many sites they cover.
+# No site name and no value reaches stdout unless --show-coincidences asks.
+coincidence_keys = sorted({k for _n, k, _v in real_coincidences})
+coincidence_sites = len({n for n, _k, _v in real_coincidences})
+if SHOW_COINCIDENCES:
+    coincidence_note = (f'{len(real_coincidences)}: '
+                        + ', '.join(f'{n}.{k} = {v}' for n, k, v in real_coincidences)
+                        + '  (--show-coincidences: these are capstone condition values, '
+                          'do not paste this line anywhere a learner reads)')
+else:
+    coincidence_note = (f'{len(real_coincidences)} across {coincidence_sites} site(s), on the '
+                        f'condition(s) {", ".join(coincidence_keys) if coincidence_keys else "none"}. '
+                        f'The site and the value are WITHHELD, because this gate exists to keep them '
+                        f'out of everything a learner can read and a log is one of those things. '
+                        f'--show-coincidences prints them.')
 # 3. neither file reads the other
 for f, text, banned in (('h2_dump.mjs', DUMP, ['h2_capstone', 'fields.json']), ('h2_fields.mjs', REC, ['h2_capstone', 'fields.json']),
                         ('h2_capstone.mjs', CAP, ['h2_dump', 'h2_fields', 'digest.txt'])):
@@ -443,7 +468,7 @@ nrecs = sum(len(scenario(n)[1]) for n in SITES)
 print(f'gate_capstone_leak EXAMINED: {nconds} stated conditions ({nconds - sum(1 for n in SITES for _, v in scenario(n)[0] if v in SHARED)} distinctive, '
       f'{len(SHARED)} SHARED with a reason, {len(dead)} dead) and {nrecs} input records across 3 sites; '
       f'18 graded values at up to four renderings; digest {len(DIGEST.splitlines())} lines; dump, records and lab sources; banks: {bank_note}.')
-print(f'  table-only coincidences (a condition value printed inside a published or swept table, never in prose, never as a whole record): {len(real_coincidences)}: {", ".join(real_coincidences)}')
+print(f'  table-only coincidences (a condition value printed inside a published or swept table, never in prose, never as a whole record): {coincidence_note}')
 print(f'  direction 8 lessons: {lesson_note}.')
 print(f'  direction 9 briefs: {brief_note}.')
 print(f'  CONTROLS FIRED: a planted graded value and a planted condition were both caught.')
