@@ -1,0 +1,22 @@
+-- ============================================================================
+-- H1 ASSOCIATE DEEP SEED: Safety Performance Statistics & KPIs, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/safetystats/beginner.
+--
+-- What this tier owns: WHAT THE RATE IS. A rate is a count times a base over
+-- exposure hours, and the caller names the base; the engine refuses a missing
+-- base and names the field. TRIR, DART and lost time on the 200,000 and the
+-- 1,000,000 hour bases; the observed FAR, the one rate with a fixed base; the
+-- severity rate, which has no single standard; the API RP 754 process safety
+-- event rate with the tier as an input; sum then divide across sites and
+-- workforces; the rolling rate, one sum-then-divide rate per complete window;
+-- and one report worked end to end. Digest sections 1 to 12, and section 28.
+--
+-- THE TRAP THE TIER IS BUILT ON. The mean of rates is a different number from
+-- the pooled rate, and only the base moves a rate between the headline
+-- figures. The Associate capstone grades six rates on stated bases and a
+-- rolling window, and grades no interval, no test and no chart.
+-- ============================================================================

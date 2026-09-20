@@ -892,5 +892,55 @@
       "digest.txt": "85ff151201e2a641cc7b451092d654f118b041ed5c2087012a1a3426d2c53a8a",
       "fields.json": "da6e741d3873ae8b182356e37fc6e417375dc200d9d4d1eeeaee2e20f17abf18"
     }
+  },
+  "safetystats": {
+    "course": "H1",
+    "live": "/root/hse-wip-safetystats",
+    "kit": "full",
+    "kitNote": "Full kit. The mirror carries everything the wave is rebuilt and gated from: the digest, its generator and the teaching streams; the eighteen graded answers, their generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle cross-check that replays the vendored scipy oracle on the capstone; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the structure; the vendoring script and this mirror script; the five writer briefs; and, with the seed ladder, the three tier headers, the course generator (which runs the engine and renders the prompts from its inputs), the go-live generator (engine ledger, second route in SQL, traps), the seed generator that stages the committed tree, the SQL verifier, the scratch database, the dry run with its negative controls and block cutter, and the owner's content-addressed apply script. The kit became \"full\" with the seed ladder.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "truth-safetystats.json",
+      "h1_dump.mjs",
+      "h1_fields.mjs",
+      "h1_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "oracle_check.py",
+      "structure.py",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "gate_capstone_leak.mjs",
+      "gate_claims.mjs",
+      "gate_copy_rule.py",
+      "gate_typed_literals.py",
+      "gate_vocabulary.py",
+      "run_gates.py",
+      "vendor_safetystats.sh",
+      "mirror.sh",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_h1.sh",
+      "cut_block.py",
+      "apply_h1_safetystats.sh"
+    ],
+    "pins": {
+      "digest.txt": "9a8c3b63b699de47a812fd9a5d015197394db42dc67a6e85e2dbd85634232c06",
+      "fields.json": "301f6ace1451f6c0256f0ebf95a6fb9242481e9195ca13e81ca09f1cf5bb703c"
+    }
   }
 }

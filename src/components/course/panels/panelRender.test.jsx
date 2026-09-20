@@ -127,6 +127,34 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('corrosion/RateExplorer.jsx');
     expect(names).toContain('corrosion/InhibitorIntegrityExplorer.jsx');
   });
+  it('finds the H1 safety statistics panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('safetystats/RatesExplorer.jsx');
+    expect(names).toContain('safetystats/IntervalsExplorer.jsx');
+    expect(names).toContain('safetystats/UChartExplorer.jsx');
+  });
+  it('every H1 safety statistics view renders, not only the default one', async () => {
+    const MODES = {
+      'safetystats/RatesExplorer.jsx': ['rate', 'kinds', 'pool', 'rolling'],
+      'safetystats/IntervalsExplorer.jsx': ['interval', 'zero', 'compare', 'ladder'],
+      'safetystats/UChartExplorer.jsx': ['chart', 'revise', 'beforeafter'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        expect(
+          () => renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode })),
+          `${name} in the ${mode} view`,
+        ).not.toThrow();
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(11);
+  });
   // EVERY MODE, not only the default one. A panel with four views renders one
   // of them with no props, and the other three are exactly where a crash hides:
   // the sweep below mounted eighty panels and touched a quarter of their views.

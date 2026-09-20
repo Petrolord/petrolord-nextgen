@@ -1,0 +1,359 @@
+{
+ "app_slug": "safetystats",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-a-rate-is-a-count-over-exposure",
+   "title": "A Rate Is a Count over Exposure",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-count-over-an-exposure",
+     "title": "A count over an exposure",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-why-hours-and-never-headcount",
+     "title": "Why hours and never headcount",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-base-is-required",
+     "title": "The base is required, and there is no default",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-where-the-osha-base-comes-from",
+     "title": "Where the OSHA base comes from",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-refusals-by-name",
+     "title": "The refusals, each naming its field",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-one-name-several-numbers",
+   "title": "One Name, Several Numbers",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-trir-on-the-osha-base",
+     "title": "TRIR on the OSHA base",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-dart-and-lost-time-cases",
+     "title": "DART and lost time cases",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-iogp-million-hour-base",
+     "title": "The IOGP million hour base",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-same-letters-a-factor-of-five",
+     "title": "Same letters, a factor of five",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-fatal-severity-and-process-safety",
+   "title": "Three More Rates: FAR, Severity Rate, PSE Rate",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-fatal-accident-rate",
+     "title": "The fatal accident rate",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-why-far-alone-has-a-fixed-base",
+     "title": "Why FAR alone has a fixed base",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-severity-rate-has-no-single-standard",
+     "title": "The severity rate has no single standard",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-days-per-hour-and-days-per-case",
+     "title": "Days per hour and days per case",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-process-safety-event-rate",
+     "title": "The process safety event rate",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-sum-then-divide",
+   "title": "Sum, Then Divide",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-pooling-sites",
+     "title": "Pooling sites and workforces",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-mean-of-rates-is-another-number",
+     "title": "The mean of rates is another number",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-period-with-no-hours",
+     "title": "A period with no hours",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-events-with-no-hours-are-refused",
+     "title": "Events with no hours are refused",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-rolling-rate",
+   "title": "The Rolling Rate",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-a-trailing-window",
+     "title": "A trailing twelve month window",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-one-entry-per-complete-window",
+     "title": "One entry per complete window",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-short-month-and-a-large-monthly-rate",
+     "title": "A short month and a large monthly rate",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-iogp-five-year-rule",
+     "title": "The IOGP five year rule",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-one-report-end-to-end",
+   "title": "One Report, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-bls-worked-example",
+     "title": "The BLS worked example",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-iogp-published-figures",
+     "title": "The IOGP published figures",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-the-basis-block-says",
+     "title": "What the basis block tells you",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ss-rates-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

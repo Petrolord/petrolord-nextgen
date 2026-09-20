@@ -247,6 +247,10 @@ export const PANELS = {
   'carbon-inventory-explorer': React.lazy(() => import('@/components/course/panels/carbon/InventoryExplorer')),
   'carbon-efficiency-explorer': React.lazy(() => import('@/components/course/panels/carbon/EfficiencyExplorer')),
   'carbon-abatement-explorer': React.lazy(() => import('@/components/course/panels/carbon/AbatementExplorer')),
+  // H1 Safety Performance Statistics & KPIs (academy module hse)
+  'ss-rates-explorer': React.lazy(() => import('@/components/course/panels/safetystats/RatesExplorer')),
+  'ss-intervals-explorer': React.lazy(() => import('@/components/course/panels/safetystats/IntervalsExplorer')),
+  'ss-uchart-explorer': React.lazy(() => import('@/components/course/panels/safetystats/UChartExplorer')),
 };
 
 export function resolvePanel(id) {

@@ -1,0 +1,25 @@
+-- ============================================================================
+-- H1 PROFESSIONAL DEEP SEED: Safety Performance Statistics & KPIs,
+-- intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/safetystats/intermediate.
+--
+-- What this tier owns: HOW SURE THE RATE IS. A count is a draw from a Poisson
+-- count model; the Garwood exact interval from the chi-square distribution,
+-- conservative by construction; confidence as a required fraction and the
+-- upper tail solved directly; zero events and the upper limit a zero count
+-- still carries; comparing two rates by conditioning on the total; the central
+-- p-value the engine reports beside the minlike convention of R and scipy, and
+-- why the engine chose central; and intervals set beside published rates.
+-- Digest sections 13 to 20, and section 28.
+--
+-- THE TRAP THE TIER IS BUILT ON. The interval is exact and asymmetric, the
+-- zero-event limit is the Garwood limit and sits above the rule of three, and
+-- the p-value convention is the one the engine's own rate-ratio interval
+-- agrees with. The Professional
+-- capstone grades two interval limits, a zero-event limit, a rate-ratio
+-- interval and a p-value, and grades no chart.
+-- ============================================================================

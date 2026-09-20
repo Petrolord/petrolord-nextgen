@@ -1,0 +1,118 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H1 Expert m03, What a Signal Means.
+# Figures from digest Section 23 (revising the limits after a found cause),
+# Section 24 (before and after the intervention, the expected counts) and
+# Section 21. Section 17's zero-count exposure table is recalled for the weak
+# reassurance lesson. Every figure is printed in the digest.
+
+q(3, "EGBEMA's month 8 signals above: a u of 7.599326 against a limit of 6.410039. What does the signal by itself establish?",
+ "That the month's reading is further from the centre than ordinary variation at its exposure explains, which is a reason to go and look",
+ ["That something on site caused the excess in month 8, and the investigation's job is only to put a name to that cause",
+  "That the intervention which started in month 7 failed, since the first signal after it arrived only one month later",
+  "That month 8 must be set aside and the chart redrawn, since a signalling month cannot stay in a pooled centre line"],
+ "A signal is a statement about the numbers and the engine stops there: its result carries no cause field. It asks what was different about month 8, and the investigation may or may not find an assignable cause. A high month after an intervention does not by itself show the intervention failed. Setting a month aside needs a found cause, never the signal alone.")
+
+q(0, "At EGBEMA's centre line of 2.893273, what count would a month with month 8's 2.105450 units be expected to carry?",
+ "6.091641 events, the centre times the month's units",
+ ["16 events, since the expected count of a month is the count it actually recorded",
+  "7.599326 events, the month's own u read as a count for that month's exposure",
+  "2.893273 events, since the centre line is itself the expected count of each month"],
+ "The expected count at the centre is the centre times the units, 2.893273 times 2.105450, printed as 6.091641. Month 8 recorded 16, far above it. u is a rate per 200,000 hours and becomes a count only when multiplied by the units, and the centre is a rate in the same way.")
+
+q(2, "An investigation into month 8 finds that its 421090 hours were understated in the timesheet export. What has the signal turned out to flag?",
+ "A data error in the denominator: with the true hours the month's rate is lower than the chart showed",
+ ["A real rise in harm on site, since the count of 16 events is unaffected by any error in the hours",
+  "Under-reporting of events, since understated hours are the usual sign that cases were left off the register",
+  "Nothing that matters, since an error in the hours changes the units and leaves the month's u where it was"],
+ "u is the count over the units, and the units are the hours over the base, so understated hours make the units too small and u too high. The investigation's families of cause include the hours being wrong, and then the chart has flagged a data error. The count is unchanged, but the rate is what the chart judges. Understated hours inflate a rate, which is the opposite direction to under-reporting.")
+
+q(1, "EGBEMA is redrawn with month 8 set aside. Which result does the engine return for the revised chart?",
+ "11 months, a centre of 2.389523, and no month flagged",
+ ["11 months, a centre of 2.893273, and no month flagged, since the centre was fixed when the chart was first drawn",
+  "12 months, a centre of 2.389523, and month 3 flagged, since month 8 is kept at the centre's value in its place",
+  "11 months, a centre of 2.389523, and month 3 flagged, since tighter limits always push the thin month over the line"],
+ "Removing month 8 takes its 16 events and 2.105450 units out of the totals, and the pooled centre falls from 2.893273 to 2.389523; the revised chart flags nothing. The centre is recomputed from what remains, so it moves. A set-aside month is removed and nothing takes its place. Tighter limits can bring a new flag, which is why the redrawn chart must be read again, but on EGBEMA none appears.")
+
+q(3, "Under what condition may month 8 be set aside and the chart redrawn?",
+ "When an investigation has found an assignable cause for month 8, identified and recorded, that explains its excess",
+ ["When month 8 signals above its upper limit, since a signalling month is outside the ordinary process",
+  "When month 8's count is the largest on the chart, since the largest month always distorts a centre line pooled on it",
+  "When removing month 8 leaves a chart with no signals on it, which confirms that month 8 did not belong with the rest"],
+ "Setting a month aside needs a found cause; setting it aside because it is high is removing the data that disagree. A signal only asks the question. The size of a count proves nothing about a cause. A revised chart that comes out clean is what removing any high month produces, so it cannot be the evidence for removing it.")
+
+q(0, "Two analysts each redraw EGBEMA without month 8. One had a recorded cause; the other removed it because it was high. How can a reader tell the two revised charts apart?",
+ "Only by the note beside the chart, which states the cause and how it was confirmed; both charts show 2.389523",
+ ["By the centre line, since a chart revised without a cause is drawn by the engine around the mean of the monthly u",
+  "By the flags, since the engine marks a month removed without a cause as a signal on the redrawn chart",
+  "By the months list, since the engine refuses to set a month aside unless a cause is passed in its own input field"],
+ "The difference is invisible on the redrawn chart: both give the same centre of 2.389523. A revised chart with no stated cause should be read as the drawn one with a month deleted. The engine draws what it is given; it has no cause input and no way to know why a month is missing, so it neither changes the centre rule nor flags the absence.")
+
+q(2, "EGBEMA's chart has been revised after a found cause for month 8. Why does the Expert tier say the revised chart must be read again from the start?",
+ "Every limit comes down with the lower centre, so a month quiet on the drawn chart could fall outside its revised limit",
+ ["The engine swaps the base on a revised chart, so every figure on it has to be restated on the 200,000 hour base",
+  "The revised chart keeps the drawn chart's limits and moves only its centre, so each month must be checked by hand",
+  "The revised chart will flag month 3 whatever its data, because removing a full month always exposes the thin one"],
+ "Every limit is measured from the centre, and the centre falls from 2.893273 to 2.389523, so the limits tighten and the first chart's clean bill of health does not carry over. On EGBEMA the revised chart flags nothing, which is a result the engine returned and the note quotes. The base is the caller's and does not change. Limits move with the centre. Nothing forces month 3 over its line.")
+
+q(1, "Month 8 is set aside on a found cause. A year later the same cause recurs. What does that do to the revision?",
+ "It undoes it: a cause that recurs was never a one-off, and the month belongs back in the centre",
+ ["Nothing, since a revision is final once the cause has been recorded and the chart has been redrawn",
+  "It justifies setting aside the new month unexamined, since the cause is already on file from month 8",
+  "It shows the intervention in month 7 failed, since the cause survived the change it made on site"],
+ "Revision is a claim, and it has to be tracked as one. The revised centre is the better description of the ordinary process only if the cause was a one-off. A cause that recurs is part of the process, so the months it produced belong in the centre, and setting aside each new occurrence, least of all without investigating it, would keep deleting the process from its own chart. A recurring cause says nothing on its own about the intervention.")
+
+q(3, "Month 8's excess is traced to a single event with several injured workers. While the file is open, the analyst proposes setting aside months 3 and 4 as well, since both read above the centre. What does the Expert tier say?",
+ "Set aside only the month the cause explains; one found cause in month 8 is no licence to remove months 3 and 4",
+ ["Set aside all three, since removing every month above the centre gives the cleanest statement of the process",
+  "Set aside month 3 only, since it is the highest u on the chart and its thin exposure makes it unreliable as data",
+  "Set aside none of them, since a single event with several injured workers is never an assignable cause"],
+ "One cause, one month. The cause found for month 8 explains month 8. Removing months because they are high, or thin, is removing the data that disagree, and month 3's thin exposure is exactly what its wide limit already accounts for. A single event with several injured people is one of the counting changes the tier lists as a possible cause.")
+
+q(0, "Month 3 reads 8.227913, the highest u on EGBEMA, and does not signal. How should the monitoring note treat that quiet month?",
+ "As a weak reassurance: on 97230 hours the chart needed a reading above 10.211920 before it could say anything",
+ ["As a clean result, since a month inside its limits has been shown by the chart to be an ordinary month for the site",
+  "As a hidden signal, since the highest u on a chart is the month that ought to be flagged on any chart",
+  "As bad data, since a month with under a quarter of the usual hours should be removed before charting"],
+ "A point inside its limits means the chart cannot distinguish that month from the ordinary process at that exposure. Month 3 had 4 events on 0.486150 units, and a real rise in a month that thin could easily stay quiet. Each month is judged against its own limit, and a thin month is legitimate data; the remedy, if many points are thin, is a coarser grain stated in advance.")
+
+q(2, "The Professional tier printed the exposure at which zero events bring the 95 percent upper limit down to 2.000000 per 200,000 hours. Why does the Expert tier recall it beside month 3's 97230 hours?",
+ "Because 368887.945411 hours are needed even for that bound, and month 3 sits far below it, so its quiet cannot show much",
+ ["Because 97230 hours are enough for zero events to rule out a rate above 2.000000, which makes month 3's quiet a result",
+  "Because the table shows the u-chart and the interval disagree about month 3, and the interval is the one to trust",
+  "Because month 3's upper limit of 10.211920 is the zero-event bound at 97230 hours, read off the same table row"],
+ "Zero is still a measurement: it bounds the rate from above, and on few hours the bound is high. The table needs 368887.945411 hours before zero events cap the rate at 2.000000, and month 3 had 97230. The chart and the interval make the same point from two sides. The control limit is ubar plus 3 sqrt(ubar / n), a different construction from the zero-event bound.")
+
+q(1, "EGBEMA's intervention started in month 7. With every month in, what does the before-and-after comparison return?",
+ "A rate ratio of 1.028627, a 95 percent interval of 0.607952 to 1.755328, and a central p-value of 1.000000",
+ ["A rate ratio of 0.677882, a 95 percent interval of 0.357764 to 1.257771, and a p-value of 0.241552",
+  "A rate ratio of 1.028627 with a central p-value of 1.015454, twice the smaller tail as the engine reports it",
+  "A rate ratio of 1.028627, and an interval that excludes 1, so the after period is shown to be worse than before"],
+ "After: 35 events in 2389010 hours; before: 28 in 1965920. The engine returns 1.028627, 0.607952 to 1.755328, and 1.000000. The 0.677882 row is the one with month 8 set aside. Twice the smaller tail is a derived 1.015454, and the engine caps the central p-value at 1. The interval runs from 0.607952 to 1.755328, which includes 1.")
+
+q(3, "The before-and-after comparison with month 8 set aside reads 0.677882, p-value 0.241552. When may that row be the one the note leads with?",
+ "Only if an investigation found a cause for month 8, and that cause had nothing to do with the intervention itself",
+ ["Always, since month 8 is the flagged month and a flagged month is removed from any comparison drawn across it",
+  "Whenever it gives the lower ratio, since the programme deserves the comparison that shows its real effect most clearly",
+  "Whenever its p-value is the smaller of the two, since the smaller p-value marks the more informative comparison"],
+ "Month 8 falls after the intervention, so removing it can only improve the after rate: the second row flatters the programme. It is admissible only on a found cause, and if month 8's excess came from the very work the intervention changed, it belongs in the after period. A signal is not a cause. Picking the row by its ratio or its p-value is choosing the result first. Without a found cause the all-months row is the comparison.")
+
+q(2, "Taking both before-and-after rows on EGBEMA together, which statement does the tier support?",
+ "Neither row is significant at 0.05: both intervals include 1, and the data cannot say the rate changed either way",
+ ["The intervention worked, since one of the two rows shows the after rate at about two thirds of the rate before it began",
+  "The intervention failed, since with every month in the after rate is higher than the before rate on the chart",
+  "The rates before and after are equal, since a p-value above 0.05 shows that the intervention changed nothing"],
+ "One month turns the ratio from above 1 to below it, and neither comparison is significant. The favourable row is admissible only with a found cause, and even then its interval, 0.357764 to 1.257771, includes 1. A ratio of 1.028627 with an interval to 1.755328 is no evidence of harm either. A p-value above 0.05 says the data cannot tell; the all-months interval runs from 0.607952 to 1.755328, so large effects in both directions remain possible.")
+
+q(1, "What must a before-and-after claim on a u-chart state, at minimum, according to the Expert tier?",
+ "The start month, the months in each period, any month set aside with its cause, the counts and hours, and the ratio, interval and p-value",
+ ["The rate ratio after over before, since the ratio carries the whole of the finding and the rest is working that can be left out",
+  "The p-value alone, since a reader needs to know only whether the change was significant at 0.05 to judge the programme",
+  "The after rate and the target rate, since the claim is about whether the programme brought the site under its target"],
+ "A before-and-after claim has to say which months it used and why. A reader given only 0.677882 has been handed the favourable half of the table; a reader given both rows, with the reason month 8 was or was not set aside, can judge the claim. The ratio needs its interval, the p-value needs its months, and a target is not part of the comparison.")
+
+emit(Q, '/root/hse-wip-safetystats/banks/h1a_m03.json', expect_n=15)
+finish()
