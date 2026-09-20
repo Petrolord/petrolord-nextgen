@@ -13,7 +13,7 @@
  "engines": [
   "engines/hse/safetyStats.js"
  ],
- "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines f123a575 (engines PR #216). The canonical pin in VENDOR.json moves 5cbdca5 -> f123a57; the only paths that differ between those commits are README.md (ledgered group 7, pinned by vendored sha) and the six hse paths vendored here, so no live course's graded value moves. SIX paths, walked by vendor_safetystats.sh over a git-archive export of the commit with the jest suite as the only seed: the suite, the engine and the golden it reads at runtime; plus three NAMED paths (oracle_safetystats.py, FINDINGS-safetystats.md, negcontrol_safetystats.sh, mode 755 as upstream). 6 paths x 4 proofs (blob hash, sha256, cmp, byte count) = 24, zero deviations. VENDOR.manifest regenerated from the clone (816 paths) and verified; guard clean, 666 paths compared. RE-VENDORED 2026-09-19 from petrolord-engines 980199e (engines PR #222: pseRate base-refusal hint, Garwood upper-tail rationale comment, test, +16 tiny-q golden cases, oracle, FINDINGS) by the same script, now in its keep-the-pin mode: the canonical pin STAYS at f123a57 because f123a57..980199e also moves engines/economics/screening.js, the downstream engines and the H2/H3 hse engines. 6 paths x 4 proofs = 24, all IDENTICAL; the 5 paths that now differ from the f123a57 manifest (suite, engine, golden, oracle, FINDINGS; negcontrol unchanged) are ledgered in VENDOR.json as kind differing, group h1-safetystats-course, pinned to their vendored blobs; guard clean, 666 paths compared, 266 recorded deviations. Digest numbers unchanged: only the header line moved (engine 620 -> 627 lines, golden 321 -> 337 cases, commit f123a57 -> 980199e); fields.json and precision.json byte-identical.",
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines f123a575 (engines PR #216). The canonical pin in VENDOR.json moves 5cbdca5 -> f123a57; the only paths that differ between those commits are README.md (ledgered group 7, pinned by vendored sha) and the six hse paths vendored here, so no live course's graded value moves. SIX paths, walked by vendor_safetystats.sh over a git-archive export of the commit with the jest suite as the only seed: the suite, the engine and the golden it reads at runtime; plus three NAMED paths (oracle_safetystats.py, FINDINGS-safetystats.md, negcontrol_safetystats.sh, mode 755 as upstream). 6 paths x 4 proofs (blob hash, sha256, cmp, byte count) = 24, zero deviations. VENDOR.manifest regenerated from the clone (816 paths) and verified; guard clean, 666 paths compared. RE-VENDORED 2026-09-19 from petrolord-engines 980199e (engines PR #222: pseRate base-refusal hint, Garwood upper-tail rationale comment, test, +16 tiny-q golden cases, oracle, FINDINGS) by the same script, now in its keep-the-pin mode: the canonical pin STAYS at f123a57 because f123a57..980199e also moves engines/economics/screening.js, the downstream engines and the H2/H3 hse engines. 6 paths x 4 proofs = 24, all IDENTICAL; the 5 paths that now differ from the f123a57 manifest (suite, engine, golden, oracle, FINDINGS; negcontrol unchanged) are ledgered in VENDOR.json as kind differing, group h1-safetystats-course, pinned to their vendored blobs; guard clean, 666 paths compared, 266 recorded deviations. Digest numbers unchanged: only the header line moved (engine 620 -> 627 lines, golden 321 -> 337 cases, commit f123a57 -> 980199e); fields.json and precision.json byte-identical. MERGED WITH main 2026-09-20: main had already moved the canonical pin to df31f538 and re-vendored the six hse safetystats paths at exactly these blobs, so the five h1-safetystats-course deviation entries cleared as STALE by their own stated condition and were dropped in the merge. The vendored engine, suite, golden, oracle, FINDINGS and negcontrol are byte-identical on both sides; no graded value, no digest line and no seed moved. Guard clean against df31f53, 747 paths compared.",
  "constants": {
   "$comment": "The engine exports RATE_BASES (200000, 1000000, 100000000) and no other constant a course could grade. Digest section 1 prints them from the export and section 3 checks 100 x 40 x 50 against OSHA_200K. The Lanczos coefficients and the iteration tolerances are implementation, not teaching, and are never graded."
  },
@@ -166,17 +166,17 @@
   },
   "digestrepro.sh": {
    "md5": "dc723d03530192367ddc22937fc0c673",
-   "command": "/root/dc-wavekit/digestrepro.sh hse-wip-safetystats",
+   "command": "/root/dc-wavekit/digestrepro.sh safetystats",
    "expected": 0,
    "exit": 0,
    "summary": "h1_dump: 506 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
-   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules hse-wip-safetystats",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules safetystats",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/hse-wip-safetystats/digest.txt: 622 line(s), 28 section title(s) and 37 in-body marker(s) swept against their blocks, 32 history framings, 17 engine pin(s); 0 warned for a human read and 0 framed as c"
+   "summary": "[digestprose] /root/wt-h1-nextgen/tools/course-waves/safetystats/digest.txt: 622 line(s), 28 section title(s) and 37 in-body marker(s) swept against their blocks, 32 history framings, 17 engine pin(s); 0 warned for a hum"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -187,7 +187,7 @@
   },
   "digestfigures.py": {
    "md5": "f3428a1fab68f45527c0a34f8b51f29c",
-   "command": "python3 /root/dc-wavekit/digestfigures.py hse-wip-safetystats",
+   "command": "python3 /root/dc-wavekit/digestfigures.py safetystats",
    "expected": 0,
    "exit": 0,
    "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (1 sentence(s) cleared by name in wave.json)"
@@ -201,7 +201,7 @@
   },
   "digestpromise.py": {
    "md5": "f22dd5d57795e134faa73d625358eed7",
-   "command": "python3 /root/dc-wavekit/digestpromise.py hse-wip-safetystats",
+   "command": "python3 /root/dc-wavekit/digestpromise.py safetystats",
    "expected": 0,
    "exit": 0,
    "summary": "=> 0 completeness problem(s), all checks applied"
@@ -215,35 +215,35 @@
   },
   "digestleak.py": {
    "md5": "b03f1c2f90ff332d4f54c55995944634",
-   "command": "python3 /root/dc-wavekit/digestleak.py hse-wip-safetystats",
+   "command": "python3 /root/dc-wavekit/digestleak.py safetystats",
    "expected": 0,
    "exit": 0,
    "summary": "=> 0 graded answer(s) reachable from this digest"
   },
   "collisions.py": {
    "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
-   "command": "python3 /root/dc-wavekit/collisions.py hse-wip-safetystats",
+   "command": "python3 /root/dc-wavekit/collisions.py safetystats",
    "expected": 0,
    "exit": 0,
    "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
   },
   "gradeprecision.py": {
    "md5": "1ceee19667cba7d10f293abd0b97f509",
-   "command": "python3 /root/dc-wavekit/gradeprecision.py hse-wip-safetystats",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py safetystats",
    "expected": 0,
    "exit": 0,
-   "summary": "[gradeprecision] /root/hse-wip-safetystats: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 3 declared class(es)"
+   "summary": "[gradeprecision] /root/wt-h1-nextgen/tools/course-waves/safetystats: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 3 declared class(es)"
   },
   "briefleak.py": {
    "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
-   "command": "python3 /root/dc-wavekit/briefleak.py hse-wip-safetystats",
+   "command": "python3 /root/dc-wavekit/briefleak.py safetystats",
    "expected": 0,
    "exit": 0,
    "summary": "0 graded answer(s) reachable from this brief"
   },
   "briefcheck.py": {
    "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
-   "command": "python3 /root/dc-wavekit/briefcheck.py hse-wip-safetystats",
+   "command": "python3 /root/dc-wavekit/briefcheck.py safetystats",
    "expected": 0,
    "exit": 0,
    "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
