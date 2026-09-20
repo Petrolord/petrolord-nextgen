@@ -221,12 +221,12 @@ q(3, "After the OBEN day, how does the time left at 90 dBA on the OSHA PEL compa
   "It is zero, since 90 dBA is below the PEL threshold of 90 dBA."],
  "The time left is the remaining share times the reference duration, and at 90 dBA the OSHA reference duration is 8.000000 h, twice the 4.000000 h at 95 dBA, so the same share buys twice the time. The PEL threshold is inclusive under J2, so 90 dBA is integrated and has time left to compute.")
 
-q(0, "A download spans a night shift and the next day shift, 25 hours in all. What should the hygienist do first?",
- "Split it into days where the work pattern ends a day, then run each.",
- ["Drop the last hour so the record fits in 24 hours, then run it as one.",
-  "Run it as one record and divide the noise dose by the number of days.",
-  "Run it on the NIOSH noise REL, which accepts records past 24 hours."],
- "The engine refuses the record under J4 because it cannot know which hours belong to which day, and splitting them is a decision for the person who knows the work pattern. If a day boundary falls inside a period, that period is split into two. Trimming or averaging invents an answer, and the refusal applies to every criterion.")
+q(0, "How many of the six OBEN periods does the NIOSH noise REL integrate, and which stays out?",
+ "5 of the 6, with only the 76.500000 dBA period left out.",
+ ["All 6, since the NIOSH threshold of 80 dBA is the lowest of the three criteria.",
+  "2 of the 6, the same pair of periods the OSHA PEL setup integrates.",
+  "5 of the 6, with the 81.200000 dBA period left out for being under 85 dBA."],
+ "Digest section 6 counts them: the PEL setup integrates 2 of the 6 periods, the action level 5 and the NIOSH noise REL 5. The NIOSH threshold is 80 dBA, so the 81.200000 dBA period is integrated and carries 9.091664 percent, and only the 76.500000 dBA period falls under every threshold in this tier. The criterion level of 85 dBA sets the allowance and never decides what counts.")
 
 q(1, "One day holds a single period of 16.000000 h at 85 dBA. What share of an allowance does it use on the OSHA action level, and does the engine accept it?",
  "100 percent of one allowance, and yes, since it fits inside 24 hours.",
@@ -300,12 +300,12 @@ q(2, "In what unit does the engine take the duration of each period of a noise d
   "Percent of an 8 hour shift, as a share."],
  "Digest section 25: durations are in hours for the noise dose, LEX and the 8-hour TWA, and in minutes for the STEL and the averages the Expert tier reads. The refusals name `periods[0].durationH`, the hours of a period. NIOSH Table 1-1 prints hours, minutes and seconds, and the golden stores hours.")
 
-q(3, "The capstone asks for the minutes left at a stated level on the OSHA PEL. Which method gives that field?",
+q(3, "A report asks for the minutes left at a stated sound level on the OSHA PEL after a day's record. Which method gives that figure?",
  "The PEL share left, times the reference duration at that level, in minutes.",
  ["The reference duration at the stated level, converted to minutes, in full.",
   "The PEL share already used, times 8 hours, converted into minutes.",
   "The share left on the action level, times its reference duration."],
- "The capstone brief states the method: take the remaining share of the PEL allowance and multiply by the reference duration at the stated level, then convert to minutes, exactly as the OBEN day gives 173.404361 minutes at 95 dBA. The whole reference duration ignores the share the record has used, and the field names the OSHA PEL, so the action level answers another criterion.")
+ "Digest section 9 derives it: after the OBEN day the PEL noise dose stands at 27.748183 percent, so 72.251817 percent of the allowance remains, and the fraction remaining times the reference duration gives 2.890073 h at 95 dBA, which is 173.404361 minutes. The whole reference duration ignores the share the day has already used. The share used times 8 hours answers nothing, and the action level has spent a different share of a different allowance.")
 
 emit(Q, '/root/hse-wip-hygiene/banks/h2b_exam.json', expect_n=42)
 finish()

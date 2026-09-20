@@ -132,15 +132,15 @@
   "explanation": "The golden case dose-negative-duration refuses on `periods[0].durationH` with the message \"periods[0].durationH cannot be negative\". The refusal names the period by position so a hygienist can go straight to the row. `periods` is the field for an empty record or one over 24 hours, and `dosePct` belongs to the TWA door."
  },
  {
-  "prompt": "Why does the engine return a refusal for bad input instead of the nearest number it could compute?",
+  "prompt": "An input a function cannot use arrives. What does the engine return in place of a number?",
   "options": [
-   "A refusal names the field to go back to, while a wrong number would carry no signal into a report.",
-   "A refusal is a verdict that the record exceeds its limit noise dose, so no number needs to be reported.",
-   "Refusals are logged and resent to the dosimeter, which reads the period again automatically.",
-   "A refusal means the criterion has no reference duration at that level, so the answer is zero."
+   "An object carrying `error` and `field`, the name of the input it refused.",
+   "A verdict that the record exceeds its limit noise dose, so no number is needed.",
+   "A logged message resent to the dosimeter, which reads that period again.",
+   "A noise dose of zero, since the criterion cannot integrate that input."
   ],
   "answer": 0,
-  "explanation": "Every function returns a finite result or an object carrying `error` and `field`, the name of the input it refused, so the refusal is information about the input. A number built from a bad row would travel into a report unnoticed. A refusal is no verdict on the worker or the workplace, and the engine does nothing to the instrument."
+  "explanation": "Digest section 1: every function returns a finite result or an object carrying `error` and `field`, the name of the input it refused, so a refusal is a statement about the data handed over. It is no verdict on the worker or the workplace, and the engine does nothing to the instrument. A noise dose of zero is what a real record with nothing above the threshold returns."
  },
  {
   "prompt": "One OBEN record reads 27.748183 percent on the OSHA PEL and 265.610944 percent on the NIOSH noise REL. What is the right reading of the two figures?",

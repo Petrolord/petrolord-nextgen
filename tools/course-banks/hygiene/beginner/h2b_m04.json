@@ -121,15 +121,15 @@
   "explanation": "A level under the criterion's threshold never uses PEL allowance, so it has no time left to compute, and the engine's reference duration door reports it as below the threshold. Multiplying by the 16.000000 h OSHA reference duration at 85 dBA would describe the action level, which integrates from 80. The 173.404361 minutes belong to 95 dBA only."
  },
  {
-  "prompt": "A download runs two shifts together and its periods total 25 hours. What does the engine return?",
+  "prompt": "A download runs two shifts together and its periods total 25 hours. Which field does the engine name, and what does it report?",
   "options": [
-   "The noise dose of the first 24 hours, with the last hour dropped and a warning about the trim.",
-   "A refusal on `periods`: \"the periods total 25 h: a daily dose covers at most 24 hours\".",
-   "The noise dose of all 25 hours, with a warning that the record is longer than a day.",
-   "A refusal on `periods[0].durationH`, since the first period is where the total is checked."
+   "`periods[0].durationH`, the first period, since that is where the total is checked.",
+   "`periods`, the record as a whole, and it reports no noise dose at all.",
+   "`periods`, and it still reports the noise dose of all 25 hours beside a warning.",
+   "No field at all: it reports the first 24 hours and warns that the rest was trimmed."
   ],
   "answer": 1,
-  "explanation": "That is judgement J4: noise, LEX and chemical periods totalling over 24 hours are refused, on the field `periods`, in the engine's own words quoted in the key. The engine cannot know which hours belong to which day, so it hands the split back rather than trimming or warning. `periods[0].durationH` is the field for a negative first duration."
+  "explanation": "Judgement J4 refuses noise, LEX and chemical periods totalling over 24 hours, and the refused field is `periods`, the record taken as a whole. A refusal carries `error` and `field` in place of a result, so no noise dose is reported and no warning stands in for it. `periods[0].durationH` is the field for a negative first duration, which names one period rather than the record."
  },
  {
   "prompt": "At 80 dBA the NIOSH reference duration is 25.398417 h. Why does the engine accept that, when it refuses a record of 25 hours?",

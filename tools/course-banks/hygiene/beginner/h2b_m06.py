@@ -47,28 +47,28 @@ q(3, "The capstone TWAs are graded on which coefficient, and why?",
  ["The exact ones, since a graded answer must use the most precise values.",
   "Either, since the two land within the grading tolerance on both scales.",
   "The exact one on NIOSH and the printed one on OSHA, where tables agree."],
- "The TWAs are graded on the coefficient each source prints: 16.61 on OSHA, as the mandatory Appendix A text writes it, and 10.0 on NIOSH. A TWA worked with the exact coefficient will disagree, and on NIOSH the gap can reach the second decimal, far outside a graded answer. That is judgement J1, the same rule the engine's presets follow.")
+ "The TWAs are graded on the coefficient each source prints: 16.61 on OSHA, as the mandatory Appendix A text writes it, and 10.0 on NIOSH. A TWA worked with the exact coefficient will disagree, and the digest measures how far: eight hours at a constant 100 dBA on the NIOSH preset gives 100.051500 dBA where the exact coefficient gives 100.000000. That is judgement J1, the same rule the engine's presets follow.")
 
-q(2, "Working a capstone record by hand, when should a figure be rounded to the printed six decimals?",
- "Only at the end, after full precision through every step.",
- ["At each step, so that every figure matches the digest.",
-  "Only the reference durations, which print to one decimal.",
-  "Never; the answer is graded at twelve decimals throughout."],
- "The capstone brief says to carry full precision through each step and round only at the end, because a rounded reference duration carried into a sum moves the last printed digit. Rounding at every step is exactly how a correct method loses the sixth decimal. The published tables print a decimal or two, and the course itself prints six.")
+q(2, "To how many decimals does this course print a sound level, a noise dose or a duration?",
+ "Six, while a measured constant prints to twelve and a count is a whole number.",
+ ["One decimal, the precision at which OSHA Table A-1 and Table G-16a print their own rows.",
+  "Twelve throughout, the precision the constants of digest section 3 carry.",
+  "Two, as the printed coefficients 16.61 and 10.0 are written."],
+ "The digest's precision rule: sound levels in dBA, noise doses and percentages, durations in hours and in minutes, concentrations, indices, temperatures and metabolic rates print to six decimals, measured constants print to twelve and counts are whole numbers. One decimal is what the published tables print, which is a property of the sources. Twelve belongs to the measured constants alone, such as the PEL threshold at 90.000000000000 dBA.")
 
 q(1, "Why can judgement J2, the inclusive threshold, never decide a graded capstone answer?",
  "Because no capstone input sits exactly on a threshold.",
  ["Because the capstone only uses the OSHA PEL criterion.",
   "Because the capstone rounds every level to whole decibels.",
   "Because J2 applies only to NIOSH and never to OSHA."],
- "Digest section 23: the judgement calls are taught by name and never tested at their boundary, and no capstone input sits on a threshold. The rule still matters for real records, which do put periods on the line. J2 holds for every criterion, and the capstone names several criteria, one per field.")
+ "Digest section 23: the judgement calls are taught by name and never tested at their boundary, and no capstone input sits on a threshold. The rule still matters for real records, which do put periods on the line. The eighteen graded fields of this course include LEX values and chemical averages, so no capstone rests on the OSHA PEL alone, and levels are stated to six decimals, such as the 84.300000 dBA of the first OBEN period.")
 
 q(0, "Which of these is never graded in this course, in any tier?",
  "A verdict word such as exceeds or passes, standing for the number.",
  ["The TWA of a noise dose on a named criterion, worked from its printed formula.",
   "The noise dose of a record on the OSHA action level, in percent.",
-  "The minutes left at a stated level on the OSHA PEL, from a record."],
- "Digest section 23 lists any verdict word, exceeds, passes or at or above an action value, among the things never graded, because a verdict means nothing without its criterion and the same record gives different verdicts on different criteria. The other three are exactly the kind of number the Associate tier grades.")
+  "The LEX,8h of a day of tasks, in dBA, which the next tier adds."],
+ "Digest section 23 lists any verdict word, exceeds, passes or at or above an action value, among the things never graded, because a verdict means nothing without its criterion and the same record gives different verdicts on different criteria. The other three name quantities the digest counts among the eighteen graded fields of this course: noise doses and TWAs, LEX values, a protector estimate, chemical averages and indices, reduction-factor arithmetic and two one-hour averages.")
 
 q(3, "A site manager asks for the OBEN worker's ACGIH noise limit to set beside the figures. What does this course do?",
  "It never quotes one, since ACGIH values are licensed and every limit is an input.",
@@ -77,19 +77,19 @@ q(3, "A site manager asks for the OBEN worker's ACGIH noise limit to set beside 
   "It asks the engine for the preset 'ACGIH', which returns the licensed limit."],
  "Digest section 25: ACGIH TLVs, ISO 9612 and ISO 7243 text are licensed and never quoted, the engine embeds no limit table, and every limit is typed as an input from a public OSHA or NIOSH value. Asking for the preset 'ACGIH' is refused on `criterion`. Claiming two bodies publish the same value is itself a licensed claim this course does not make.")
 
-q(2, "A question about the same day asks for the incident rate of the crew. Which course owns it?",
- "Safety Performance Statistics, the first course of this module.",
- ["This course's Professional tier, in its chapter on hearing protection.",
-  "Risk, Change and Learning, which owns the 5x5 risk matrix.",
-  "Gas Processing, which owns BTEX as an emission from a glycol unit."],
- "Digest section 25 cites the seams: incident and injury rates belong to Safety Performance Statistics (safetystats), the first course of this module. Risk, Change and Learning owns the risk matrix and Gas Processing owns BTEX as an emission, each a different question. The Professional tier of this course teaches protectors and chemical averages.")
+q(2, "Four subjects sit beside this course and are owned elsewhere. What does this course do with them?",
+ "It cites the owner and stops, since each is a different quantity from a noise dose.",
+ ["It teaches each of them briefly, so that a single report can cover the whole workplace.",
+  "It converts each into a noise exposure figure the engine can then integrate.",
+  "It refers them to the Expert tier, where every seam is taught in full."],
+ "Digest section 25 says to cite and to stop. A radiant flux in kW/m2, an emission from a glycol unit, a rate per hours worked and a matrix of likelihood and consequence are each a different quantity from a noise dose, measured a different way, so this course names the owner beside the figure and computes nothing. No tier of it teaches them, and the engine offers no conversion between them.")
 
-q(1, "The Professional tier's LEX,8h looks like a TWA. Why should it never be set beside an Associate TWA as the same quantity?",
- "It is an energy average with no threshold, a different quantity.",
- ["It is measured in percent, while the TWA is always in dBA.",
-  "It uses a 5 dB decibel exchange rate, and the TWA always uses 3 dB instead.",
-  "It is the same quantity, only rounded to one decimal place."],
- "This tier's closing lesson says it: the LEX,8h is an energy average with no threshold, so a figure from that tier is a different quantity from a noise dose restated as a TWA against a criterion with a threshold. Both are levels in dBA. The OSHA TWA carries a 5 dB decibel exchange rate and the NIOSH one 3 dB, so no single rate separates them.")
+q(1, "Rule 1 of digest section 24 keeps one word from standing on its own here. Which word, and who else claims it?",
+ "The shorter word for a noise dose, claimed by Flow Assurance and Gas Processing.",
+ ["The word for a reading from a meter, claimed by three other courses of the academy.",
+  "The acronym two different NIOSH limits share, which carries a qualifier of its own.",
+  "The words for a decibel exchange rate, claimed by the Economics courses."],
+ "Digest section 24, rule 1: this course writes \"noise dose\" on first use in every lesson and every bank question and never the shorter word on its own in a prompt, an option or a heading, because that word already belongs to inhibitor and methanol work in the Flow Assurance and Gas Processing courses. The reading, the acronym and the decibel exchange rate are rules 3, 4 and the two misreadings that close the section, each a different collision.")
 
 q(0, "A question asks for an octave-band protector estimate or an ISO 9612 uncertainty budget. What is the honest answer from this engine?",
  "It has no door for either, so this engine does not compute them.",
