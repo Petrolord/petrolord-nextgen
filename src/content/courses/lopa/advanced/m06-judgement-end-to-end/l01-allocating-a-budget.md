@@ -4,12 +4,33 @@
 
 {{panel:lp-sif-builder}}
 
-<!-- H3 SCAFFOLD PLACEHOLDER: replace this body. Do not change the H1 or the panel line. -->
+A safety instrumented function is a series sum, so its required PFDavg is a budget to be divided among its subsystems. Once the sensors and the logic solver have taken their share, what is left belongs to the final elements, and that remainder is what decides how long the final element test interval may be. This is the work of an Expert: turning one required figure from a layer of protection analysis into a maintenance schedule that a site can actually run.
 
-This lesson is not written yet. It belongs to advanced module Judgement, End to End (m06-judgement-end-to-end) and must carry between 460 and 560 PROSE WORDS, counted the way lengths.py counts them: front matter, markdown table rows and panel lines are excluded and HEADINGS ARE COUNTED.
+## The requirement and the parts already spent
 
-Every figure in it must be quoted from digest.txt at the precision the digest prints. FINDINGS-lopa.md, the oracle and the engine source comments are provenance rather than teaching truth. Read BRIEF.md and LESSON_TASK.md first.
+The ORONI row at a tolerable mitigated event likelihood of 1e-7 per year requires a PFDavg of 0.007407407407. The IDU function's transmitters and logic solver, both on a one year proof test, take the following.
+
+| part | architecture | PFDavg on a one year test |
+| --- | --- | --- |
+| transmitters | 2oo3 | 0.000369505528 |
+| logic solver | 1oo1 | 0.000136440000 |
+| the requirement | | 0.007407407407 |
+| left for the valves | | 0.006901461880 |
+
+Subtract the two from the requirement and the valves may take 0.006901461880. That single number is the whole brief for the final element: whatever interval, architecture and coverage the valves end up with, their PFDavg has to stay under it.
+
+## Turning the remainder into an interval
+
+Hand that remainder to the longest interval search as the target for the valve subsystem and the answer comes back as 35393.040486 hours, which is 4.040301 years, with the state FOUND. A state of FOUND matters here as much as the number: it says a crossing exists, so the budget is reachable by scheduling alone, with no new hardware.
+
+## Why the valves get the largest share
+
+On this function the valves carry 71.78 percent of the PFDavg at a one year test, the transmitters 20.61 percent and the logic solver 7.61 percent. A mechanical final element being the weakest link is common in practice, and it is why the final element proof test interval is the first lever anybody reaches for. It is also why the budget is best spent in that order: fix the cheap parts of the sum first, then let the expensive part have everything that remains.
+
+## What the budget does not settle
+
+The allocation is arithmetic and the schedule is judgement. An interval of 4.040301 years has to survive contact with the turnaround calendar, the availability of an isolation, the validity of the failure rates over four years and the architectural constraint, which this engine does not check. The budget says what is affordable. It does not say what is wise, and a verification note records both the number and the reasoning that accepted it.
 
 ## Exercise
 
-Not written yet.
+Take the requirement of 0.007407407407 and the remainder of 0.006901461880. Work out what fraction of the whole requirement the valves have been allowed. Then suppose the transmitters were moved to a shorter interval so that their PFDavg fell by half: recompute the remainder, and write one sentence saying whether you would expect the valve interval to rise by more or less than the same proportion.

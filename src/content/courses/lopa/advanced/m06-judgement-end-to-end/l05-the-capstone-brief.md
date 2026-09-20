@@ -4,12 +4,32 @@
 
 {{panel:lp-sif-builder}}
 
-<!-- H3 SCAFFOLD PLACEHOLDER: replace this body. Do not change the H1 or the panel line. -->
+The Expert capstone asks the question this tier owns: how long may the proof test run, and what does the engine not know. It gives a facility, a scenario with its tolerable mitigated event likelihood, and a safety instrumented function with every input stated, including the lifetime wherever coverage is below one. Nothing has to be inferred, and no figure from a published paper is carried in. The work is to compute, to band, to find the interval and to say what was not checked.
 
-This lesson is not written yet. It belongs to advanced module Judgement, End to End (m06-judgement-end-to-end) and must carry between 420 and 560 PROSE WORDS, counted the way lengths.py counts them: front matter, markdown table rows and panel lines are excluded and HEADINGS ARE COUNTED.
+## The method, in order
 
-Every figure in it must be quoted from digest.txt at the precision the digest prints. FINDINGS-lopa.md, the oracle and the engine source comments are provenance rather than teaching truth. Read BRIEF.md and LESSON_TASK.md first.
+Start with the row and get the required PFDavg, because every later step is measured against it. Then compute each subsystem from its own inputs and sum them, because the function is a series sum and a subsystem read in isolation answers nothing. Then compare the achieved figure with the required figure and write the verdict from that comparison. Only then look at the band, as a label beside the numbers. Finally take the interval question: either the longest interval that holds the target, or the effect of a proposed interval on the whole function.
+
+## Where marks are lost
+
+| the mistake | what it looks like |
+| --- | --- |
+| banding in place of comparing | the achieved SIL matches the required SIL and the verdict is called a pass |
+| reading a subsystem alone | a valve meets the requirement and the summed function does not |
+| dropping a state | an interval reported with no FOUND, UNACHIEVABLE, INTERVAL_INDEPENDENT or CAPPED_AT_LIFETIME beside it |
+| shortening the test against a floor | a target below a coverage floor answered with a shorter interval |
+| quoting a band as a target | a search run against a band edge in place of the required PFDavg |
+
+The first of those is the one this tier exists to prevent. The teaching function stretched to 3.5 years misses its tolerable mitigated event likelihood while it is still SIL 2, and it drops to SIL 1 only at 4 years. A candidate who reads the band alone marks that row as passing.
+
+## Precision and units
+
+Frequencies per year, probabilities and PFDavg values are carried to twelve decimals. Risk reduction factors, hours and years are carried to six. Failure rates stay in the exponent form they were given. Intervals are in hours, and the years figure is the hours over 8760. Rounding early is the quiet way to lose a comparison that turns on the fourth figure.
+
+## What to write down
+
+Write the required PFDavg, the achieved PFDavg, the verdict, the interval with its state, and the limits. That is the verification note in miniature, and it is also exactly what the capstone asks for. The limits are part of the answer: the architectural constraint is not checked, the demand mode is assumed low, and every failure rate is an input that somebody has to justify.
 
 ## Exercise
 
-Not written yet.
+Take the IDU function at a one year proof test, an achieved PFDavg of 0.001792971954 against a requirement of 0.007407407407, and the same function at 3.5 years, 0.008382016506. Write the verdict for each and the margin in each case. Then list, in the order above, the five things you would write down for the 3.5 year case.
