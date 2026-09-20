@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "What does blendDistillationCurves hold fixed on each row of the blend's curve, and what does it weight?",
+  "options": [
+   "It holds the temperature fixed and weights the crudes' volume percents there by volume share.",
+   "It holds the volume percent fixed and weights the crudes' temperatures there by volume share.",
+   "It holds the temperature fixed and weights the crudes' volume percents there by mass share.",
+   "It holds the volume percent fixed and weights the temperatures by mass share, since mass is conserved."
+  ],
+  "answer": 0,
+  "explanation": "Yields are additive on volume: at 720 F Kwale Light has distilled 70.0000 percent, Ughelli Medium 56.6667 percent, and the blend at 55 and 45 has distilled 64.0000 percent."
+ },
+ {
+  "prompt": "On the Kwale blend's curve, which crude was measured at 265 F, and what does the blend read there?",
+  "options": [
+   "Kwale Light, measured at 18.3333 percent, with Ughelli Medium read at 10 and the blend at 14.5833 percent.",
+   "Ughelli Medium, measured at 10 percent, with Kwale Light read at 18.3333 and the blend at 25.3953 percent.",
+   "Ughelli Medium, measured at 10 percent, with Kwale Light read at 18.3333 and the blend at 14.5833 percent.",
+   "Both crudes were measured at 265 F, and the blend's 14.5833 percent is their volume-weighted sum on that row."
+  ],
+  "answer": 2,
+  "explanation": "Ughelli Medium's assay carries 10 at 265. Kwale Light has no point there and is read between its own points at 190 and 370 F. The blend at 370 F reads 25.3953 percent."
+ },
+ {
+  "prompt": "A TBP volume percent is weighted by volume share when two crudes are blended. What is the reason?",
+  "options": [
+   "Volume is conserved on mixing and mass is not, so every property of a blend, sulfur included, has to be weighted on volume shares.",
+   "A TBP figure is a volume percent distilled, and the digest's rule is that yields are additive on volume.",
+   "The engine holds no gravity for a crude at the curve step, so a volume share is the only weight it can form for the yields there.",
+   "A volume weighting gives the larger blend yield at every temperature, which is the conservative reading."
+  ],
+  "answer": 1,
+  "explanation": "The digest's rule: yields are additive on volume, so at any temperature the blend has distilled the volume-weighted sum of what each crude has distilled. Sulfur and the other per-mass properties blend on mass. The engine can weight yields on mass too: module 3 prints blendOnMass beside the engine's cut yields."
+ },
+ {
+  "prompt": "How many points does the Kwale blend's curve carry, and where do they come from?",
+  "options": [
+   "11, the temperatures both crudes measured once the ends that neither curve covers are dropped.",
+   "8, the temperatures at which both crudes were measured at round volume percents of their own.",
+   "14, one point per volume percent the two laboratories reported, with the two crudes' temperatures averaged at each.",
+   "14, every temperature either crude measured, from 75 F to 1470 F."
+  ],
+  "answer": 3,
+  "explanation": "blendDistillationCurves forms the blend's curve at every temperature any component measured. Kwale Light was measured at 75, 190, 370, 530, 720, 1030 and 1350 F and Ughelli Medium at 90, 265, 480, 650, 860, 1200 and 1470 F."
+ },
+ {
+  "prompt": "At 90 F Kwale Light has no measured point. What does the engine read for it there, and how?",
+  "options": [
+   "1.3043 percent, read linearly between its own points 0 at 75 and 10 at 190.",
+   "0.0000 percent, because a crude with no point at a temperature is taken as not yet distilled there.",
+   "0.7174 percent, the blend's own figure on that row, carried over to each crude that was not measured.",
+   "5.7143 percent, the figure Ughelli Medium's own curve gives at the next temperature on the blend's grid."
+  ],
+  "answer": 0,
+  "explanation": "volumePercentAt is linear between measured points. The blend at 90 F reads 0.7174 percent, Ughelli Medium reads 0.0000 there because its curve starts at 0 at 90, and 5.7143 is Ughelli Medium at 190 F."
+ },
+ {
+  "prompt": "Ughelli Medium's first TBP point is 0 at 90. What does the engine read for it at 75 F?",
+  "options": [
+   "Unknown, because 75 F lies outside Ughelli Medium's measured range, so the row is left out of the blend.",
+   "0.0000 percent, because below a first point at 0 percent nothing has distilled, and the curve says so itself.",
+   "1.3043 percent, the figure Kwale Light's curve gives at 90 F, taken for the crude that was not measured.",
+   "A value extended back along its first segment from 90 F toward 265 F, which the engine does below any first point."
+  ],
+  "answer": 1,
+  "explanation": "The row at 75 F prints Kwale Light at 0.0000, Ughelli Medium at 0.0000 and the blend at 0.0000. The curve answers outside its range only where it says so itself."
+ },
+ {
+  "prompt": "Why does the Kwale blend's curve start at 75 F and end at 1470 F?",
+  "options": [
+   "Both crudes were measured at 75 F and at 1470 F, so those are the two temperatures their grids have in common.",
+   "The engine draws every blend's curve on one fixed temperature grid from 75 F to 1470 F, whatever the crudes measured.",
+   "75 F is Kwale Light's first point and 1470 F is Ughelli Medium's last, and the blend stands on the union of both grids.",
+   "The engine trims each blend to Ughelli Medium's grid and adds Kwale Light's lightest point as a first row."
+  ],
+  "answer": 2,
+  "explanation": "At 1470 F Kwale Light reads 100.0000 percent: its last point is 100 at 1350, and above a last point at 100 percent everything has distilled. The blend reads 100.0000 there."
+ },
+ {
+  "prompt": "Beside the Kwale blend's curve, the digest prints the blend's properties at 55 and 45. Which set is it?",
+  "options": [
+   "API 32.8173, SG 0.8611 and sulfur 0.2642 wt% on a mass basis.",
+   "API 33.1219, SG 0.8595 and sulfur 0.2268 wt% on a volume basis.",
+   "API 38.4, SG 0.8328 and sulfur 0.11 wt% on a mass basis.",
+   "API 33.1219, SG 0.8595 and sulfur 0.2268 wt% on a mass basis."
+  ],
+  "answer": 3,
+  "explanation": "The digest prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 38.4, 0.8328 and 0.11 are Kwale Light's own figures, and 32.8173, 0.8611 and 0.2642 belong to the Associate tier's Obigbo export blend."
+ },
+ {
+  "prompt": "Kwale Light reaches 50 percent at 530 F and Ughelli Medium at 650 F. What does the blend's curve read at those two temperatures?",
+  "options": [
+   "43.6471 percent at 530 F and 56.9474 percent at 650 F.",
+   "50.0000 percent at both, since each is a crude's own fifty percent point.",
+   "35.8824 percent at 530 F and 62.6316 percent at 650 F.",
+   "43.6471 percent at 530 F and 64.0000 percent at 650 F."
+  ],
+  "answer": 0,
+  "explanation": "Neither crude's own 50 percent temperature is one at which the blend stands at 50 percent. 35.8824 and 62.6316 are the other crude's figures on those rows, and 64.0000 is the blend at 720 F."
+ },
+ {
+  "prompt": "Kwale Light is blended 50 and 50 with the Ebocha partial assay, whose curve says nothing below 110 F or above 920 F. What does the engine do at a temperature where Ebocha is unknown?",
+  "options": [
+   "It takes Ebocha as 0 percent distilled there and keeps the temperature on the blend's curve.",
+   "It leaves that temperature out of the blend's curve, because the blend's value there is not known either.",
+   "It keeps the temperature and carries Kwale Light's figure alone, weighted up to the whole blend.",
+   "It takes Ebocha as 100 percent distilled there, since a partial assay's missing end is taken as boiled off."
+  ],
+  "answer": 1,
+  "explanation": "A volume-weighted sum with one unknown term is unknown. The blend's curve keeps only the temperatures where both crudes are known."
+ },
+ {
+  "prompt": "How many temperatures did Kwale Light and the Ebocha partial assay measure between them, and how many does the 50 and 50 blend's curve keep?",
+  "options": [
+   "14 measured, 8 kept.",
+   "11 measured, 11 kept.",
+   "14 measured, 11 kept.",
+   "11 measured, 8 kept."
+  ],
+  "answer": 3,
+  "explanation": "Of 11 temperatures the two crudes measured between them, the blend's curve keeps 8. The 14 belongs to the Kwale Light and Ughelli Medium blend, whose assays are whole curves."
+ },
+ {
+  "prompt": "Which Kwale Light temperatures are missing from the Kwale Light and Ebocha blend's curve?",
+  "options": [
+   "75, 90 and 1350 F.",
+   "110, 920 and 1350 F.",
+   "75, 1030 and 1350 F.",
+   "1030, 1200 and 1350 F."
+  ],
+  "answer": 2,
+  "explanation": "Each of 75, 1030 and 1350 F lies outside the stretch from 110 F to 920 F where Ebocha says anything. 90 and 1200 F are Ughelli Medium's temperatures, and 110 and 920 F are Ebocha's own and are kept."
+ },
+ {
+  "prompt": "The Kwale Light and Ebocha blend's curve starts at 110 F. What does it read there, and why does it not start at 0 percent?",
+  "options": [
+   "3.5217 percent, because Ebocha's first point is 4 at 110 and how much of it boiled below 110 F is unknown.",
+   "0.0000 percent, because the engine anchors every blend's curve at 0 percent at its first temperature.",
+   "3.5217 percent, because Kwale Light has not started to distil anywhere below 110 F on its own curve.",
+   "10.2308 percent, the blend's figure at 190 F, since 190 F is the first temperature both crudes measured."
+  ],
+  "answer": 0,
+  "explanation": "Kwale Light starts at 0 at 75, so it has distilled below 110 F. Ebocha's curve reads 4 at 110; 25 at 370; 50 at 590; 70 at 760; 88 at 920, so it neither starts at 0 nor ends at 100."
+ },
+ {
+  "prompt": "Why does the Kwale Light and Ebocha blend's curve end at 85.4516 percent instead of running on to 100 percent?",
+  "options": [
+   "Kwale Light's own curve stops distilling at 920 F, so the blend has nothing left to boil above that temperature either.",
+   "The engine ends every blend's curve at the last temperature at which the blend is still below 90 percent distilled.",
+   "Ebocha's missing heavy end is taken as never distilling, so the blend is held at its 920 F figure from there on.",
+   "Ebocha's last point is 88 at 920, and above it the partial assay says nothing, so no hotter blend row can be known."
+  ],
+  "answer": 3,
+  "explanation": "A temperature at which some crude's curve says nothing is left out, because the blend's value there is not known either. Kwale Light's rows at 1030 and 1350 F drop out of the partial blend on that rule."
+ },
+ {
+  "prompt": "Kwale Light and the Ebocha partial assay are blended 50 and 50. What does the blend's curve read at 590 F, and whose measured point is 590 F?",
+  "options": [
+   "46.5909 percent, and 590 F is one of Ebocha's measured points.",
+   "53.1579 percent, and 590 F is one of Kwale Light's measured points.",
+   "53.1579 percent, and 590 F is one of Ebocha's measured points.",
+   "67.6471 percent, and 590 F is one of Ebocha's measured points."
+  ],
+  "answer": 2,
+  "explanation": "The blend's row at 590 F reads 53.1579 percent. Ebocha's curve carries 50 at 590, and Kwale Light was measured at 530 and 720 F. 46.5909 is the blend at 530 F and 67.6471 the blend at 720 F."
+ }
+]

@@ -1,0 +1,303 @@
+{
+  "app_slug": "crude",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-an-assay-carries",
+      "title": "What an Assay Carries",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-four-questions-an-assay-answers",
+          "title": "Four questions an assay answers",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-api-gravity-is-a-hyperbola",
+          "title": "API gravity is a hyperbola",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-crude-library",
+          "title": "The crude library",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-two-modules-and-a-kernel",
+          "title": "Two modules and a kernel",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-blending-on-the-right-basis",
+      "title": "Blending on the Right Basis",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-density-blends-on-volume",
+          "title": "Density blends on volume",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-api-through-specific-gravity",
+          "title": "API through specific gravity",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-volume-shares-become-mass-shares",
+          "title": "Volume shares become mass shares",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-sulfur-blends-on-mass",
+          "title": "Sulfur blends on mass",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-blank-is-not-a-zero",
+          "title": "A blank is not a zero",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-viscosity-through-an-index",
+      "title": "Viscosity Through an Index",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-why-viscosity-needs-an-index",
+          "title": "Why viscosity needs an index",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-refutas-index",
+          "title": "The Refutas index",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-index-blends-on-mass",
+          "title": "The index blends on mass",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-where-the-index-has-no-answer",
+          "title": "Where the index has no answer",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-curve-and-its-cuts",
+      "title": "The Curve and Its Cuts",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-tbp-curve-is-cumulative",
+          "title": "A TBP curve is cumulative",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-between-the-measured-points",
+          "title": "Between the measured points",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-outside-the-measured-points",
+          "title": "Outside the measured points",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-cut-is-a-difference",
+          "title": "A cut is a difference",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-cut-set-that-closes",
+          "title": "A cut set that closes",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-will-the-blend-stay-stable",
+      "title": "Will the Blend Stay Stable",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-saturates-against-aromatics-and-resins",
+          "title": "Saturates against aromatics and resins",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-three-bands-and-three-answers",
+          "title": "Three bands and three answers",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-sara-blends-on-mass",
+          "title": "SARA blends on mass",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-rule-of-thumb-can-raise-a-flag",
+          "title": "A rule of thumb can raise a flag",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-no-gravity-no-screen",
+          "title": "No gravity, no screen",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-obigbo-blend-end-to-end",
+          "title": "The Obigbo blend end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-obigbo-library-crude-by-crude",
+          "title": "The Obigbo library crude by crude",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "crude-assay-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

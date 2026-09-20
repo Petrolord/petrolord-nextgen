@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "On the AKODO day, which figure comes from the ledger and which from the tanks?",
+  "options": [
+   "The dipped closing, 4499.452 m3, is the ledger's; the expected closing, 4508.100 m3, is the tanks'.",
+   "Both come from the tanks, since the ledger only records the opening stock of 4953.700 m3.",
+   "The expected closing, 4508.100 m3, is the ledger's; the dipped closing, 4499.452 m3, is the tanks'.",
+   "Both come from the ledger, which is then checked against the throughput of 6182.500 m3."
+  ],
+  "answer": 2,
+  "explanation": "expected closing = opening + receipts - deliveries - known losses, which is paperwork. The dipped closing is the standard total the tank chain built from tapes and tables."
+ },
+ {
+  "prompt": "The AKODO day reads unaccounted -8.648 m3. What does the negative sign say?",
+  "options": [
+   "A loss: the tanks hold less than the ledger expected.",
+   "A gain: the tanks hold more than the ledger expected.",
+   "A loss outside tolerance, since any negative gap fails the day.",
+   "Nothing yet, since the sign is set only after the run of days is read."
+  ],
+  "answer": 0,
+  "explanation": "unaccounted = dipped closing - expected closing. The dip is below the ledger, so the engine reports direction loss, and within tolerance true against a band of 12.365 m3."
+ },
+ {
+  "prompt": "The AKODO day goes to reconcileStock with everything in place except the figure that starts the ledger. What is the answer?",
+  "options": [
+   "expected closing 4508.100 m3, unaccounted none; note: No closing dip, so the day cannot be closed.",
+   "unaccounted computed from an opening of 0.000 m3, with a note beside it saying the opening stock was assumed to be empty",
+   "unaccounted 0.000 m3, balanced, with the opening taken from today's own closing dip",
+   "REFUSED: No opening stock, so the day cannot be closed. The opening stock is yesterday's closing dip."
+  ],
+  "answer": 3,
+  "explanation": "Without the opening stock the call is refused. The refusal names where the figure comes from: yesterday's closing dip."
+ },
+ {
+  "prompt": "The demonstration takes the opening stock as closing dip - receipts + deliveries + known losses. With a closing dip of 4380.250 m3 it opens on 4825.850 m3. Why does the day read balanced?",
+  "options": [
+   "The closing dip of 4380.250 m3 happens to fall inside the tolerance band of 12.365 m3 on that day.",
+   "The ledger undoes exactly what the derivation did, so the expected closing is the dip itself whatever it reads.",
+   "The engine detects that the opening was derived and switches off the check with the word balanced.",
+   "The derived opening stock is at standard, while the real opening of 4953.700 m3 is gross observed."
+  ],
+  "answer": 1,
+  "explanation": "With the opening taken that way, the expected closing is the dip itself, whatever the dip reads. Every row of the demonstration balances with unaccounted 0.000 m3, so none of them measured anything."
+ },
+ {
+  "prompt": "Both the real AKODO day and the derived day close on 4499.452 m3. The real day opens on 4953.700 m3 and the derived day on 4945.052 m3. Which one measures the terminal?",
+  "options": [
+   "The derived day, because its opening is built from today's own figures and so is more current.",
+   "The real day, because its opening stock was measured before today's dips were taken.",
+   "The derived day, because a balanced reading of 0.000 m3 is the goal of every reconciliation.",
+   "Neither, until the two opening stocks agree to within the tolerance band of the day."
+  ],
+  "answer": 1,
+  "explanation": "The real day opens on yesterday's closing dip and reads unaccounted -8.648 m3, direction loss, within 12.365 m3. The derived day reads 0.000 m3, balanced, and every row of that demonstration balances, so none of them measured anything."
+ },
+ {
+  "prompt": "The AKODO tolerance is 0.2 percent. Of which figure is it a percent?",
+  "options": [
+   "The opening stock, 4953.700 m3",
+   "The expected closing, 4508.100 m3",
+   "The dipped closing at standard, 4499.452 m3",
+   "Throughput, receipts plus deliveries: 6182.500 m3"
+  ],
+  "answer": 3,
+  "explanation": "tolerance = a stated percent of throughput, and throughput = receipts + deliveries. 0.2 percent of 6182.500 m3 is printed as 12.365 m3."
+ },
+ {
+  "prompt": "The tolerance percent is moved from 0.1 to 0.2 on the same AKODO day. What changes?",
+  "options": [
+   "The band goes from 6.183 m3 to 12.365 m3 and the verdict from false to true.",
+   "The unaccounted figure goes from -8.648 m3 to 0.000 m3 and the verdict from false to true.",
+   "The throughput goes from 3.091 m3 to 6.183 m3 while the verdict stays false in both rows.",
+   "The band goes from 6.183 m3 to 12.365 m3 while the verdict stays true in both rows."
+  ],
+  "answer": 0,
+  "explanation": "The unaccounted figure stays -8.648 m3 on the same day. Only the band moves, so the verdict depends on the stated percent."
+ },
+ {
+  "prompt": "A still day: opening 4953.700 m3, no receipts and no deliveries, dipped at 4954.200 m3. Why is it outside tolerance?",
+  "options": [
+   "A gain of 0.500 m3 is outside the 0.2 percent band, which on a still day is set on the opening stock instead.",
+   "The engine refuses a day with no movements and reports the verdict as false.",
+   "No product moved, so there is no throughput and the band is 0.000 m3.",
+   "Any gain is outside, since the band covers losses only."
+  ],
+  "answer": 2,
+  "explanation": "With no receipts and no deliveries there is no throughput, and the band is a stated percent of throughput. The still day prints a band of 0.000 m3 and reads outside it with its 0.500 m3 gain."
+ },
+ {
+  "prompt": "The AKODO day prints unaccounted percent of throughput -0.1399 and a tolerance of 0.2 percent of throughput. How do the two percents differ?",
+  "options": [
+   "The 0.2 is the stated band; the -0.1399 is the day's result on the same base.",
+   "The 0.2 is the day's result; the -0.1399 is the band the terminal stated.",
+   "The two are on different bases: the 0.2 on the opening stock, the -0.1399 on throughput.",
+   "The -0.1399 is the cumulative percent over the nine days recorded."
+  ],
+  "answer": 0,
+  "explanation": "Both percents sit on the throughput of 6182.500 m3. Keep the units apart: one is a band chosen before the day, the other what the day produced."
+ },
+ {
+  "prompt": "How does reconcileStock form the expected closing?",
+  "options": [
+   "opening + receipts - deliveries + known losses",
+   "receipts - deliveries - known losses",
+   "opening + receipts - deliveries - known losses",
+   "dipped closing - receipts + deliveries + known losses"
+  ],
+  "answer": 2,
+  "explanation": "expected closing = opening + receipts - deliveries - known losses, which on the AKODO day is 4508.100 m3. dipped closing - receipts + deliveries + known losses is how the demonstration derives an opening stock from the day's own dip, which balances every day."
+ },
+ {
+  "prompt": "Over nine days, what does trendUnaccounted report for the cumulative gap and the run?",
+  "options": [
+   "cumulative -27.200 m3 and a run of 9 days, since every day is counted",
+   "cumulative -27.200 m3 and a run of 6 days of loss ending on day 9",
+   "cumulative -7.200 m3, the latest day, and a run of 3 days of loss",
+   "cumulative 0.100 m3 at day 4 and a run of 5 days of loss after it"
+  ],
+  "answer": 1,
+  "explanation": "The running total ends at -27.200 m3. From day 4, -2.400 m3, to day 9, -7.200 m3, every day is a loss, so the run ending on the latest day is 6 days."
+ },
+ {
+  "prompt": "The same nine-day record is trimmed to its first six days. What does the engine report?",
+  "options": [
+   "A run of 6 days of loss and the prompt",
+   "A run of 3 days of loss and the prompt",
+   "A run of 0 days and a mean percent of none",
+   "A run of 3 days of loss and no prompt"
+  ],
+  "answer": 3,
+  "explanation": "The first six days alone: run 3 days of loss; prompt: none. Trimmed one day at a time, runs of 2 and 3 days print no prompt and runs of 4, 5 and 6 days print one."
+ },
+ {
+  "prompt": "The nine days' cumulative percent is -0.0494. On what base is that percent taken?",
+  "options": [
+   "The cumulative throughput, printed as 55085.000 m3",
+   "The latest day's throughput alone, 6310.000 m3 on day 9",
+   "The AKODO day's throughput, 6182.500 m3, on the one day closed",
+   "The cumulative gap itself, -27.200 m3, over the nine days"
+  ],
+  "answer": 0,
+  "explanation": "The engine prints the denominator of the mean percent as 55085.000 m3, the nine days' throughput summed. The percent states the whole gap on the whole throughput."
+ },
+ {
+  "prompt": "What three causes does the engine's prompt name for a run in one direction?",
+  "options": [
+   "A wet receipt, a leaking roof seal, or a strapping table cut too coarse",
+   "A negative dip, a water cut above the dip, or a missing opening stock",
+   "A tolerance set too tight, a still day, or a derived opening stock",
+   "A drifting meter, a passing valve, or a temperature effect not being corrected"
+  ],
+  "answer": 3,
+  "explanation": "The prompt reads: 6 days of loss in a row. One day is noise; a run in one direction is worth investigating: a drifting meter, a passing valve, or a temperature effect not being corrected."
+ },
+ {
+  "prompt": "trendUnaccounted is given no days at all. What does it report?",
+  "options": [
+   "REFUSED, since a trend needs at least one day to read",
+   "cumulative 0.000 m3, run 0 and a mean percent of zero",
+   "cumulative 0.000 m3, run 0 and mean percent none",
+   "cumulative none, run none and mean percent none"
+  ],
+  "answer": 2,
+  "explanation": "An empty record has nothing to average, so the mean percent is none. The running total of nothing is 0.000 m3 and there is no run."
+ }
+]

@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Which three terms make up ABUA's margin of 7077935.48?",
+  "options": [
+   "Revenue 172316812.90, less crude cost 160350322.58 and nothing else.",
+   "Revenue 172316812.90, less crude cost 160350322.58, less unit operating cost 4888554.84.",
+   "Revenue 172316812.90, less crude cost, unit operating cost, staff and insurance.",
+   "Revenue less unit operating cost 4888554.84, with crude cost charged in the schedule and the fixed costs of the month."
+  ],
+  "answer": 1,
+  "explanation": "The digest's definition is margin = product revenue - crude cost - unit operating cost. Fixed costs, capital, tax and financing are not terms in it."
+ },
+ {
+  "prompt": "What is the denominator of ABUA's gross margin per barrel of crude, 3.4883?",
+  "options": [
+   "The product volume sold.",
+   "The crude unit's capacity, 2600000.00 bbl.",
+   "The throughputs of all three units, added together.",
+   "The total crude, 2029032.26 bbl."
+  ],
+  "answer": 3,
+  "explanation": "gross margin per barrel = margin / total crude. The denominator is crude and only crude, so the figure speaks for the barrel the refinery bought."
+ },
+ {
+  "prompt": "Leaving the hydrotreater's capacity blank changes ABUA's margin by 95572.87. What change in gross margin per barrel is printed for that row?",
+  "options": [
+   "-0.0438.",
+   "0.1158, the row where the crude unit is held at 1900000 barrels.",
+   "-2.9113, the row where the hydrotreater is typed as shut.",
+   "-0.8736, the row with the jet and fuel oil floors."
+  ],
+  "answer": 0,
+  "explanation": "The blank hydrotreater row prints a margin change of 95572.87 and a gross margin per barrel of 3.4445, a change of -0.0438, so the total rises while the ratio falls. 0.1158, -2.9113 and -0.8736 belong to the crude unit at 1900000 barrels, the hydrotreater shut and the two floors."
+ },
+ {
+  "prompt": "Of ABUA's five plan variants, which one leaves the month earning less in total yet shows each barrel of crude earning more?",
+  "options": [
+   "The hydrotreater capacity left blank: margin change 95572.87, gross margin per barrel change -0.0438.",
+   "The Forcados cargo cancelled: margin change -3047230.44, gross margin per barrel change -1.1822.",
+   "The crude unit at 1900000 barrels for the month: margin change -230175.48, gross margin per barrel change 0.1158.",
+   "The jet and fuel oil floors: margin change -1148089.05, gross margin per barrel change -0.8736."
+  ],
+  "answer": 2,
+  "explanation": "The crude unit at 1900000 barrels prints a margin change of -230175.48 and a gross margin per barrel change of 0.1158, the one row where the margin falls and the ratio rises. The blank hydrotreater moves the other way, and the Forcados and floors rows lower both."
+ },
+ {
+  "prompt": "Under which of the five changes does ABUA buy more crude than the plan as typed yet earn a smaller margin?",
+  "options": [
+   "The diesel hydrotreater capacity left blank, no limit.",
+   "The jet floor of 300000 and the fuel oil floor of 700000.",
+   "The Forcados cargo cancelled, its availability typed as 0.",
+   "The crude unit held at 1900000 barrels for the whole month."
+  ],
+  "answer": 1,
+  "explanation": "Against 2029032.26 bbl as typed, the floors row prints total crude 2267857.14 bbl and a margin change of -1148089.05. The blank hydrotreater runs 2082608.70 bbl and gains 95572.87, and the Forcados row, 1747826.09 bbl, and the capped crude unit, 1900000.00 bbl, both run less crude."
+ },
+ {
+  "prompt": "What does the offgas row of ABUA's stream balance read?",
+  "options": [
+   "Made 103638.71, consumed 0.00, placed 0.00, surplus 103638.71.",
+   "Made 103638.71, consumed 103638.71 by the reformer as fuel, surplus 0.00.",
+   "Made 103638.71, placed 103638.71 in Fuel oil, surplus 0.00.",
+   "Made 103638.71, surplus 0.00, never below zero."
+  ],
+  "answer": 0,
+  "explanation": "made - consumed by units - placed in products = surplus. Offgas has no recipe and no unit, so its whole make is the stream nobody found a home for."
+ },
+ {
+  "prompt": "Naphtha export and Gasoil export both sell 0.00 bbl. What does the stream balance show about why?",
+  "options": [
+   "Their ceilings of 200000.00 and 250000.00 bbl are reached.",
+   "Their floors of 0.00 forbid any sale.",
+   "Neither product has a recipe naming a stream.",
+   "Naphtha 407677.42 and gasoil 650000.00 are made and consumed in full by their units."
+  ],
+  "answer": 3,
+  "explanation": "Naphtha made 407677.42 bbl and the reformer consumed 407677.42 bbl; gasoil made 650000.00 bbl and the hydrotreater consumed 650000.00 bbl. Nothing is left to place in the export products."
+ },
+ {
+  "prompt": "How many of ABUA's six products does the plan show at their ceiling?",
+  "options": [
+   "One, Diesel (ULSD).",
+   "One, Gasoline.",
+   "None: every row reads false.",
+   "Two, Jet A-1 and Fuel oil."
+  ],
+  "answer": 2,
+  "explanation": "The product table's at its ceiling column reads false on all six rows. Diesel (ULSD) sells 630500.00 of 750000.00 bbl and Gasoline 346525.81 of 450000.00 bbl, so no market holds the month back."
+ },
+ {
+  "prompt": "Bonny Light (illustrative) runs 329032.26 of 1500000.00 bbl. Which limit named in the plan's lists holds the crude run there?",
+  "options": [
+   "The crude unit's capacity of 2600000.00 bbl.",
+   "Bonny Light's own availability.",
+   "The Diesel hydrotreater, at capacity.",
+   "The Jet A-1 ceiling of 380000.00 bbl, reached first."
+  ],
+  "answer": 2,
+  "explanation": "The plan's lists name one unit at capacity, the Diesel hydrotreater, and two crudes at their availability, Forcados and Brass River. The crude unit is not on the unit list, Bonny Light is not on the crude list, and every product reads false at its ceiling, Jet A-1 at 288354.84 of 380000.00 bbl."
+ },
+ {
+  "prompt": "A jet floor of 1000000 is set with its ceiling raised to 1200000. What status does the plan return?",
+  "options": [
+   "infeasible",
+   "invalid, for a floor above its ceiling",
+   "unbounded, since the raised ceiling opens the month",
+   "optimal, with Jet A-1 held at 380000.00 bbl"
+  ],
+  "answer": 0,
+  "explanation": "Each number is sound on its own, and the engine returns the status infeasible: \"No plan satisfies these constraints. A product floor is probably beyond what the crudes and units can make.\" A floor above its own ceiling is the invalid case."
+ },
+ {
+  "prompt": "A gasoline floor of 500000 is typed above its ceiling of 450000. Why is this refused before any plan is attempted?",
+  "options": [
+   "No crude mix makes 500000 bbl of reformate, which planning finds out.",
+   "The two numbers alone can never both be met.",
+   "Its ceiling is reset to 500000 first.",
+   "A floor is read only when its ceiling is blank, so the floor is dropped."
+  ],
+  "answer": 1,
+  "explanation": "The engine sees the conflict from the two numbers, so the status is invalid: \"Gasoline has a minimum demand above its maximum.\" The jet case needs the plan to find there is no answer."
+ },
+ {
+  "prompt": "Every crude availability, unit capacity and demand ceiling is left blank. Which sentence does the engine return?",
+  "options": [
+   "\"No plan satisfies these constraints. A product floor is probably beyond what the crudes and units can make.\"",
+   "\"Naphtha reformer capacity must be zero or more; leave it blank for no limit.\"",
+   "\"The plan needs at least one crude.\"",
+   "\"The plan is unbounded: a product has a price and no demand ceiling, or a crude has no availability limit and no cost.\""
+  ],
+  "answer": 3,
+  "explanation": "A blank limit is no limit. With nothing limiting crude and nothing limiting sales, every profitable barrel invites another and there is no best month, so the status is unbounded."
+ },
+ {
+  "prompt": "The configuration carries no product at all. What does the engine return?",
+  "options": [
+   "Status invalid: \"The plan needs at least one product to sell.\"",
+   "Status optimal, with a margin made of crude cost and unit operating cost alone.",
+   "Status unbounded, since no demand ceiling limits the month.",
+   "Status invalid: \"The plan needs at least one crude.\""
+  ],
+  "answer": 0,
+  "explanation": "The engine names what it cannot trust. No product at all and no crude at all are each refused with their own sentence, before any plan is attempted."
+ },
+ {
+  "prompt": "Which product earns ABUA's largest revenue line?",
+  "options": [
+   "Gasoline, 38464364.52, the highest price.",
+   "Fuel oil, 37354612.90.",
+   "Diesel (ULSD), 66076400.00.",
+   "Jet A-1, 30421435.48, sold at 105.5000 a barrel."
+  ],
+  "answer": 2,
+  "explanation": "The product table prints Diesel (ULSD) at 630500.00 bbl and 66076400.00. Gasoline carries the highest price, 111.0000, on a smaller volume."
+ },
+ {
+  "prompt": "Gasoline sells 346525.81 bbl. Which row of the stream balance accounts for that volume?",
+  "options": [
+   "Naphtha: made 407677.42, consumed 407677.42 by the reformer.",
+   "Reformate: made 346525.81, placed 346525.81, surplus 0.00.",
+   "Kero: made 288354.84, placed 288354.84, surplus 0.00.",
+   "Offgas: made 103638.71, placed 0.00, surplus 103638.71."
+  ],
+  "answer": 1,
+  "explanation": "Gasoline's recipe is reformate 1.0000, and the reformate row places all 346525.81 bbl it makes. Naphtha goes to the reformer, kero to Jet A-1, and offgas has no home."
+ }
+]

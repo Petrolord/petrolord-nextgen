@@ -1,0 +1,201 @@
+{
+ "slug": "gasvalue",
+ "prefix": "gv",
+ "name": "Flare Gas to Value & LPG/CNG",
+ "pathOrder": 51,
+ "module": "energy_transition",
+ "moduleLabel": "Energy Transition",
+ "prerequisite": null,
+ "repo": "/root/wt-et-gasvalue-nextgen",
+ "branch": "feat/et-gasvalue-course",
+ "siblings": [
+  {
+   "slug": "carbon",
+   "pathOrder": 52,
+   "branch": "feat/et-carbon-course",
+   "repo": "/root/wt-et-carbon-nextgen",
+   "module": "energy_transition"
+  }
+ ],
+ "asOf": null,
+ "goldens": [
+  "downstream/goldens/flaretovalue_cases.json",
+  "downstream/goldens/lpgcng_cases.json"
+ ],
+ "engines": [
+  "engines/downstream/flareToValue.js",
+  "engines/downstream/lpgCng.js",
+  "engines/downstream/modularRefinery.js (scaleCapex and SCALING_EXPONENT only)"
+ ],
+ "oracles": [
+  "tools/validation/downstream/oracle_flaretovalue.py",
+  "tools/validation/downstream/oracle_lpgcng.py"
+ ],
+ "enginesVendoredAt": "NextGen, sha-identical with engines df31f53 (MD45-1 #228, after MD4-0 #227 and MD5-0 #226). Re-vendored by the lead's commit d39ae319 on this branch; the foundation stood on fe001b52 (f0aef14). This wave does not vendor (gate_vendor.sh compares 15 paths).",
+ "plan": {
+  "state": "FOUNDATION: recon, structure, digest, eighteen graded fields, gates, scaffold and task files. No lesson, bank, panel or migration is written.",
+  "thesis": "A flare is a measured gas before it is an emission or a product: its heating value, its liquids and its carbon come from the analysis by the mole, the flare's CO2 and methane follow the rule's two efficiencies, a route can yield no more than the gas holds and is credited only for the share it recovers against a declared counterfactual, and the LPG vessel, the vaporizer, the carousel, the CNG bank and the cascade are each sized on the basis the engine states.",
+  "tiers": {
+   "beginner": "THE GAS AND THE FLARE: characteriseGas (normalisation, heating value on moles, inerts, carbon atom by atom, mass per Mscf, liquids and richness, the mass ceiling) and the flare by 40 CFR 98.233(n) in abatement (CO2 passes through, methane from the methane, destruction and combustion efficiency, CO2e with a stated GWP). Graded: heating value, gpm C3+, C3+ kg/Mscf, flare CO2, CH4, CO2e.",
+   "intermediate": "ROUTES, RECOVERY AND THE CREDIT: ROUTE_TEMPLATES, screenRoute, yieldCeiling, routeEconomics (capital by the modular power law), abatement's recovered share and counterfactual, creditSensitivity's breakeven, compareRoutes. Graded: capital, CNG a year, value per Mscf, avoided CO2e, net abatement, breakeven credit price.",
+   "advanced": "LPG AND CNG ON THE GROUND: lpgBlendProperties, lpgStorageSizing (fill basis), vaporizerDuty (boiling point at pressure), bottlingPlant (positions wholly working), assetFloat, gasMassInVessel (gauge and absolute, real gas), cascadeFills (equalisation), cngCompression as a unit bridge (never graded), cngDispensing, conversionEconomics. Graded: usable LPG, vaporizer design duty, carousel wait, bank mass, gas left in the cascade, simple payback."
+  },
+  "cases": {
+   "teaching": [
+    "EGBEMA",
+    "OGUTA (a lean gas beside it)",
+    "KANO",
+    "IBAFO",
+    "the Flare Gas to Value Studio's opening gas",
+    "the LPG & CNG Rollout Studio's opening carousel and cascade"
+   ],
+   "capstone": [
+    "ERIEMU",
+    "ADIBAWA",
+    "ASABA"
+   ]
+  }
+ },
+ "digest": {
+  "lines": 1036,
+  "sections": 36,
+  "withheld": null,
+  "note": "No section is history. Every repaired MD4-0 rule is taught as how the engine works; SECTIONS 14 and 35 state the four HELD items as limits. Every figure is invented and illustrative, and the preamble says so. Extension round on df31f53: every section carries a 'function:' line and the writers' gaps are closed as computed rule rows (RECON 8, REVISE.md)."
+ },
+ "grading": {
+  "grader": "public.academy_submit_capstone reads expected, tol and the answer as numeric, so every graded field is a number the engine returns and no basis word, verdict, richness band or status is graded.",
+  "tolerance": "One unit in the last place the digest prints the field's class (precision.json): 1e-4 for the four-decimal classes, 0.01 dollars for capital (the engine rounds dollars to two), 1e-3 kg for the gas left in the cascade (the engine rounds to three), and 0.01 t (ten units) for tonnes of a flare or an abatement, because the engine's LB_PER_KG is the exact reciprocal to nine figures only and on a flare of 300,000 t/yr the oracle and engine part by up to about 1.1e-3 t. One derivation: CLASSES and toleranceOf in gasvalue_capstone.mjs.",
+  "collisionRule": "No graded value within its tolerance of the absolute value of any number token the digest prints (the go-live rule), and no two graded values within tolerance of each other.",
+  "notGraded": "Every refusal, note, verdict, richness word and basis word; the flare efficiencies, GWP, credit prices and fill limits as values (HELD H1, H3, H4 are inputs); the unlit flare (H2, not modelled); compressor power and staging (FC3); any NPV, IRR or Monte Carlo; the counts (fills before recharge, positions wholly working, fleets) because an integer graded at 0.5 collides with the digest's integers; carbonAbatement outputs (the carbon course's)."
+ },
+ "leakScales": [
+  "1"
+ ],
+ "findings": {
+  "P1": "In the lead's Suite PR: the Rollout Studio's vaporizer outlet opens blank. RECON 3a.",
+  "F-R1": "REPAIRED in MD45-1: the four oracle ledgers are exported and oracle_check.py calls them. RECON 3b.",
+  "F-R2": "Tolerance decision: LB_PER_KG 2.20462262 against the oracle's exact pound parts the flare tonnages by up to 1.1e-3 t after the engine's 3-dp rounding; tonnes are graded at 0.01 t. RECON 3c.",
+  "F-R3": "REPAIRED in MD45-1: three engine strings reworded; the digest quotes the new wording and digestprose defers nothing. RECON 3d.",
+  "F-R4": "REPAIRED in MD45-1: FLARE_MOLAR_MASS and RICHNESS_GPM exported and read by the dump, the capstone generator and the lab. RECON 3e.",
+  "clock": "modularRefinery.feasibilityEconomics defaults startYear to the machine year (known from the refinery wave); off this course's path, named in gate_clock.sh.",
+  "fill-basis": "LEAD RULING applied: blank basis refused, omitted basis taken as liquid_volume and named in the output (fillRatioBasis). No engine follow-up needed. RECON 8."
+ },
+ "decisions": {
+  "prefix": "gv (unused in migrations/, tools/course-banks/ and every wave.json)",
+  "tolerance": "one unit in the printed place (not half), tonnes at ten units; see grading.tolerance",
+  "counts": "no count is graded (fills, positions, fleets): an integer at 0.5 collides with the digest's integers",
+  "gauge": "the Expert capstone states every CNG pressure as gauge with the site's atmosphere, so the gauge-as-absolute defect (L7) is a live wrong route; the graded value is the engine's return on gauge plus atmosphere",
+  "pre-md4-engine": "discriminate.mjs calls petrolord-engines 13f0936 (git archive, read-only in this wave dir) to model the pre-repair defects directly",
+  "compression": "cngCompression is taught as a unit bridge (standard volume, psia, stage pressures) and never graded; no compressor power is graded (FC3)",
+  "gwp": "GWP values are case inputs (28.7, 27.9 in the capstones; 29.8 in teaching with 20 and 40 beside it for comparison only); no edition is named or chosen"
+ },
+ "gates": {
+  "structure": {
+   "file": "structure.py",
+   "md5": "4ac1124d9586eb52762f073b96b0c2c8",
+   "result": "exit 0: panels: 70 of 78 lessons carry one; ids ['gasvalue-flare-explorer', 'gasvalue-rollout-explorer', 'gasvalue-route-explorer']"
+  },
+  "vendor": {
+   "file": "gate_vendor.sh",
+   "md5": "606decbaf99bd8dbf65bb230e559325e",
+   "result": "exit 0: gate_vendor: PASS"
+  },
+  "engine-jest": {
+   "file": "gate_vendor.sh",
+   "md5": "606decbaf99bd8dbf65bb230e559325e",
+   "result": "exit 0: Tests:       208 passed, 208 total"
+  },
+  "digest-repro": {
+   "file": "gate_repro.sh",
+   "md5": "b527e21ec4588b628b3615cb33d0d852",
+   "result": "exit 0: gate_repro: PASS"
+  },
+  "kit-digestrepro": {
+   "file": "/root/dc-wavekit/digestrepro.sh",
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "result": "exit 0: NOTE: no truth-*.json in this wave. If numsweep runs here, harvest_digest.py first."
+  },
+  "clock": {
+   "file": "gate_clock.sh",
+   "md5": "aa7180af4a80de3b699b10c536bfee1d",
+   "result": "exit 0: gate_clock: PASS"
+  },
+  "kit-digestprose": {
+   "file": "/root/dc-wavekit/digestprose.mjs",
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "result": "exit 0: [digestprose] /root/et-wip-gasvalue/digest.txt: 1036 line(s), 36 section title(s) and 18 in-body marker(s) swept against their blocks, 32 history framings, 81 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+  },
+  "kit-digestfigures": {
+   "file": "/root/dc-wavekit/digestfigures.py",
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "result": "exit 0: [digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "capstone-generator": {
+   "file": "gasvalue_capstone.mjs",
+   "md5": "907fc635e5b82c6a583762d11563660b",
+   "result": "exit 0: advanced      asaba_payback_years                              0.3975   tol 0.0001   (0.397483)"
+  },
+  "oracle-check": {
+   "file": "oracle_check.py",
+   "md5": "4e102a1bd44835ce75f5c55a17e6f17b",
+   "result": "exit 0: graded fields the oracle reproduces within tolerance: 18 of 18",
+   "control": "exit 1: graded fields the oracle reproduces within tolerance: 17 of 18"
+  },
+  "discriminate": {
+   "file": "discriminate.mjs",
+   "md5": "67f3b8b03809451453d7cd66c1a5faaf",
+   "result": "exit 0: WEAK fields: 0",
+   "control": "exit 1: WEAK fields: 1"
+  },
+  "collisions": {
+   "file": "gate_collisions.py",
+   "md5": "e982bfa270d86707de4cca6c7105b12a",
+   "result": "exit 0: collisions with the digest: 0; graded pairs sharing a value: 0",
+   "control": "exit 1: collisions with the digest: 1; graded pairs sharing a value: 0"
+  },
+  "promptleak": {
+   "file": "gate_promptleak.py",
+   "md5": "c52f9653b8239cba80304cbdcac5bf81",
+   "result": "exit 0: leaks: 0",
+   "control": "exit 1: leaks: 5"
+  },
+  "capstone-leak": {
+   "file": "gate_capstone_leak.py",
+   "md5": "c4d970baf103d1462d12ca46d1c19947",
+   "result": "exit 0: problems: 0",
+   "control": "exit 1: problems: 2"
+  },
+  "kit-leakage-lessons": {
+   "file": "/root/dc-wavekit/leakage.mjs",
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "result": "exit 0: => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "kit-leakage-digest": {
+   "file": "/root/dc-wavekit/leakage.mjs",
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "result": "exit 0: => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "kit-leakage": {
+   "file": "/root/dc-wavekit/leakage.mjs",
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "control": "exit 0: negative control: ALL PASS"
+  },
+  "copy-rule": {
+   "file": "gate_copy_rule.py",
+   "md5": "e4a022c2ac4a5b5937989f4a8e75456d",
+   "result": "exit 0: violations: 0",
+   "control": "exit 1: violations: 2"
+  },
+  "kit-gradeprecision": {
+   "file": "/root/dc-wavekit/gradeprecision.py",
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "result": "exit 0: [gradeprecision] /root/et-wip-gasvalue: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 14 declared class(es)",
+   "control": "exit 0: [gradeprecision] selftest OK: all three FC3 cases are caught with the half-unit computed from the digest's own header, a satisfiable tolerance is not reported, a declared class overrides the header, a digest with no stated precision refuses, and an answer key only PARTLY classified refuses and names every field it could not check"
+  },
+  "kit-sourceprose": {
+   "file": "/root/dc-wavekit/sourceprose.mjs",
+   "md5": "c370c51a0af6d3f8098ae859fb28ae1e",
+   "result": "exit 0: [sourceprose] 4 source file(s), 248 comment line(s) examined against 32 history framings, the owner copy rule, 0 wave comment claim(s) and 0 wave source claim(s); 0 warned; 0 failing"
+  }
+ }
+}

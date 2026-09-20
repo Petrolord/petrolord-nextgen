@@ -1,0 +1,28 @@
+-- ============================================================================
+-- crude ASSOCIATE DEEP SEED: Crude Assay & Blending, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE ASSAY AND THE BLEND. API is a hyperbola in
+-- specific gravity and is never averaged on volume; specific gravity blends on
+-- volume; sulfur, TAN, nitrogen and the metals blend on mass, from mass shares
+-- the engine forms once; viscosity blends through the Refutas index; a TBP
+-- curve answers only between its measured points and where it says so itself,
+-- and a cut is a difference of two readings; the colloidal instability index
+-- screens a blend, and the gravity rule of thumb can raise a flag and never
+-- clear one.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A blank is absent. A property blends only
+-- when every crude carries it, and the engine names the crude that does not.
+--
+-- THE TRAP THE TIER IS BUILT ON. The wrong basis gives a plausible number.
+-- API averaged on volume, sulfur on volume and SARA on volume each land close
+-- to the right figure and are each wrong, and the digest prints them side by
+-- side.
+--
+-- HELD, taught as a limit and never graded: the Refutas index blended on mass
+-- (C12). Every figure is invented and illustrative. The capstone grades six
+-- four-decimal engine figures at a tolerance of 5e-5.
+-- ============================================================================

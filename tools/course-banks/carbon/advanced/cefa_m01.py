@@ -1,0 +1,118 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# carbon Expert m01, The cost of a tonne abated. Digest SECTIONS 18 and 19
+# (carbonAbatement.abatementCost on the six invented AGBOR measures, its
+# refusals, the named zeros and the refused measure on the curve). Every cost,
+# saving and tonne is invented for this course; money is in US dollars.
+# 15 questions.
+
+q(2, "On the invented AGBOR records, the capital box of one measure is left empty (the Heat integration project). What is the engine's answer?",
+ "A refusal telling the user to enter 0 if the measure needs no capital.",
+ ["A refusal asking for a life to annualise the capital cost over.",
+  "A refusal asking for a discount rate, since a blank is not read as 0.",
+  "A cost per tonne of -120.5882 USD, with capital cost named in assumedZero."],
+ "SECTION 19 prints, for the capital cost blank: REFUSED: Measure \"Heat integration project\" has no capital cost. Enter 0 if it needs none: a blank is not read as free. The life and rate refusals belong to other blanks, and assumedZero names only the running figures.")
+
+q(0, "The invented Heat integration project is sent with its annual savings and its annual cost both left blank. What does abatementCost return?",
+ "costPerTonne 106.3391 USD, with assumedZero naming annual savings and annual cost",
+ ["costPerTonne -14.2492 USD, the same figure as with the savings entered",
+  "costPerTonne -120.5882 USD, with assumedZero naming annual savings only",
+  "A refusal asking for the annual savings before any cost is computed"],
+ "SECTION 19: blank running figures are taken as 0 and NAMED; with the savings and the running cost blank the measure answers costPerTonne 106.3391 USD, assumedZero: annual savings, annual cost. -14.2492 USD is the measure as costed in SECTION 18, and -120.5882 USD is the call with capital 0 typed.")
+
+q(3, "A user types the discount rate as 10, meaning ten percent, on a measure with capital. What does abatementCost do?",
+ "It refuses: the rate is a fraction above -1 and below 1, typed 0.1 for ten percent.",
+ ["It accepts it and annualises the capital exactly as a rate of 0.1 would, at ten percent.",
+  "It refuses: a measure with capital needs a rate, and a blank is not read as 0.",
+  "It accepts it and prints the Heat integration project at -14.2492 USD a tonne."],
+ "SECTION 19, discount rate 10 (a percentage typed): REFUSED: The discount rate is a fraction greater than -1 and below 1 (0.1 for ten percent). The blank-rate refusal is a different call, and -14.2492 USD a tonne is the measure costed at a rate of 0.1.")
+
+q(1, "The invented Heat integration project is sent with a capital of 0 typed, and no life and no rate. What comes back?",
+ "costPerTonne -120.5882 USD and capitalRecoveryFactor 0.00000000",
+ ["A refusal asking for a life to annualise the capital over",
+  "A refusal asking for a discount rate to annualise the capital",
+  "costPerTonne 106.3391 USD, with capital cost named in assumedZero"],
+ "SECTION 19: a capital of 0 typed needs no life and no rate: Heat integration project with capital 0 answers costPerTonne -120.5882 USD and capitalRecoveryFactor 0.00000000. 106.3391 USD is the call with the savings and the running cost blank.")
+
+q(1, "A measure is sent with an abatement of 0 tonnes a year. What does abatementCost return?",
+ "costPerTonne none, and paysForItself false.",
+ ["A refusal saying the measure needs an annual abatement.",
+  "A refusal saying the measure has a negative abatement.",
+  "costPerTonne none, and paysForItself true."],
+ "SECTION 19: an abatement of 0 is accepted and has no cost per tonne: costPerTonne none, paysForItself false. The annual abatement refusal is the call with the abatement blank, and the negative abatement refusal is the call with -500 t a year.")
+
+q(3, "The invented Agbor measures are costed at a rate of 0 (straight line) as well as at 0.1. Which measure's cost per tonne carries a minus sign at one rate and none at the other?",
+ "Solar for purchased power, 45.8573 at 0.1 and -13.5714 at 0",
+ ["Flare gas recovery, 78.1002 at 0.1 and 26.8817 at 0",
+  "Vapour recovery on the storage tanks, 35.4193 at 0.1 and 14.5045 at 0",
+  "Heat integration project, -14.2492 at 0.1 and -66.6667 at 0"],
+ "SECTION 18 prints Solar for purchased power at 45.8573 USD a tonne at 0.1 and -13.5714 USD a tonne at a rate of 0. The other three rows keep one sign at both rates: Flare gas recovery and Vapour recovery stay positive, and the Heat integration project stays negative.")
+
+q(0, "The invented Heat integration project and Flare gas recovery both print a capital recovery factor of 0.13147378. What do the two rows share that the factor is built from?",
+ "A life of 15 years, at the same discount rate of 0.1.",
+ ["A capital cost of 2750000 USD, annualised the same way.",
+  "The heaters as their source, so one factor serves both.",
+  "An annual cost of 0 USD, so nothing is added to capital."],
+ "SECTION 18 prints the factor as r(1 + r)^n / ((1 + r)^n - 1): the rate and the life. Both rows carry a life of 15 years at 0.1. Their capital costs are 2750000 and 4900000 USD, they act on heaters and flare, and Flare gas recovery carries an annual cost of 105000 USD.")
+
+q(2, "For the invented Heat integration project, which figure sits in the SECTION 18 column whose header is marked computed here?",
+ "688.2353 USD a tonne, the whole capital set against one year",
+ ["-14.2492 USD a tonne, the cost per tonne at the rate of 0.1",
+  "-66.6667 USD a tonne, the cost per tonne at a rate of 0",
+  "-120.5882 USD a tonne, the cost with a capital of 0 typed"],
+ "Of the two columns in SECTION 18's second table, only the header of the capital-against-one-year column carries (computed here), and the sentence above it says the engine refuses to compare a one-off cost with a recurring saving. -14.2492 USD is the cost per tonne at 0.1, -66.6667 USD the cost per tonne at a rate of 0, and -120.5882 USD the answer with capital 0 typed (SECTION 19).")
+
+q(3, "A capital measure arrives with its life box empty. Apart from asking for the life, which sentence does the refusal carry?",
+ "Set against one year's saving, a one-off capital cost overstates the cost per tonne.",
+ ["A blank life is read as one year, so the whole capital lands in a single year's saving.",
+  "A blank life would annualise straight-line and move the measure down the curve.",
+  "A blank life is not read as free, so 0 must be entered if the measure has none."],
+ "SECTION 19, life blank, second sentence: \"Set against one year's saving, a one-off capital cost overstates the cost per tonne of a capital measure.\" The engine refuses the call; it never reads a blank life as one year.")
+
+q(1, "The six invented Agbor measures are handed to the curve with the Heat integration project's capital cost blank. What does the curve return?",
+ "5 steps and totalAbatementTonnes 12060.000, with the measure named in refusedMeasures",
+ ["6 steps and totalAbatementTonnes 15460.000, the measure placed at a capital of 0",
+  "No curve at all: the whole call is refused until the capital cost is entered",
+  "5 steps and totalAbatementTonnes 15460.000, the refused measure's tonnes still in it"],
+ "SECTION 19: 5 steps, totalAbatementTonnes 12060.000, and refusedMeasures lists Heat integration project with its capital refusal. The refusedNote: \"A refused measure is off the curve and out of every total until it is costed.\" 15460.000 is the curve with all six costed (SECTION 20).")
+
+q(0, "The invented Tune the fired heaters prints a net annual cost of -127251.65 USD. How does SECTION 18 define the net annual cost?",
+ "The annualised capital plus the annual cost less the annual savings.",
+ ["The whole capital, undivided, plus the annual cost less the annual savings.",
+  "The annual savings less the annualised capital and the annual cost together.",
+  "The cost per tonne multiplied by the capital recovery factor and the tonnes."],
+ "SECTION 18: the net annual cost is the annualised capital plus the annual cost less the annual savings; the cost per tonne is that over the tonnes abated a year. For Tune the fired heaters that is 4748.35 USD of annualised capital, an annual cost of 0 and savings of 132000 USD.")
+
+q(2, "Costed at the invented discount rate of 0.1, which of these Agbor measures reads pays for itself true?",
+ "Heat integration project",
+ ["Vapour recovery on the storage tanks",
+  "Solar for purchased power",
+  "Flare gas recovery"],
+ "SECTION 18 prints the Heat integration project at -14.2492 USD a tonne, pays for itself true: a negative cost per tonne means the measure pays for itself and abates carbon as a side effect. Vapour recovery (35.4193), Solar (45.8573) and Flare gas recovery (78.1002) read false.")
+
+q(2, "A measure with capital is sent with its discount rate blank. What does the refusal say reading that blank as 0 would do?",
+ "Annualise straight-line and move the measure down the curve.",
+ ["Overstate the cost per tonne of a capital measure set against one year.",
+  "Set the whole capital against one year of the measure's savings.",
+  "Read the capital cost as free, as a blank capital cost would be."],
+ "SECTION 19, discount rate blank: \"A blank is not read as 0, which would annualise straight-line and move the measure down the curve.\" Overstating is the wording of the life blank, and free is the wording of the capital blank.")
+
+q(3, "Which pair of invented Agbor measures prints a minus sign both at the rate of 0.1 and in the capital-against-one-year column?",
+ "Tune the fired heaters and Repair failed steam traps",
+ ["Tune the fired heaters and the Heat integration project",
+  "Repair failed steam traps and Solar for purchased power",
+  "Heat integration project and Vapour recovery on the storage tanks"],
+ "SECTION 18: Tune the fired heaters prints -167.4364 and -150.0000 USD a tonne, and Repair failed steam traps -156.4390 and -133.0435. The Heat integration project prints 688.2353 against one year, Solar 45.8573 at 0.1 and Vapour recovery 35.4193 at 0.1.")
+
+q(0, "The invented Flare gas recovery prints a net annual cost of 484221.51 USD. Which three printed figures does SECTION 18's definition build it from?",
+ "Annualised capital 644221.51, annual cost 105000 and savings 265000 USD",
+ ["Capital 4900000, annual cost 105000 and annual savings 265000 USD",
+  "Annualised capital 644221.51, annual cost 105000 and 6200 tonnes",
+  "Annualised capital 361552.89, annual cost 105000 and savings 265000 USD"],
+ "SECTION 18 defines the net annual cost as the annualised capital plus the annual cost less the annual savings. Flare gas recovery's row prints annualised capital 644221.51 USD, annual cost 105000 USD and annual savings 265000 USD. 361552.89 USD is the Heat integration project's annualised capital, and the tonnes are the divisor of the cost per tonne.")
+
+emit(Q, '/root/wt-et-carbon-nextgen/tools/course-banks/carbon/advanced/cefa_m01.json', expect_n=15)
+finish()

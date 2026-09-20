@@ -1,0 +1,303 @@
+{
+  "app_slug": "crude",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-blends-own-curve",
+      "title": "The Blend's Own Curve",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-yields-add-on-volume",
+          "title": "Yields add on volume",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-temperatures-do-not-average",
+          "title": "Temperatures do not average",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-every-temperature-a-crude-measured",
+          "title": "Every temperature a crude measured",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-truncated-crude-in-the-blend",
+          "title": "A truncated crude in the blend",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-fifty-percent-point",
+      "title": "The Fifty Percent Point",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-reading-a-temperature-off-the-curve",
+          "title": "Reading a temperature off the curve",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-interpolated-against-the-grid",
+          "title": "Interpolated against the grid",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-component-midpoints-do-not-average",
+          "title": "The component midpoints do not average",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-watson-factor",
+          "title": "The Watson factor",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-screening-basis-for-k",
+          "title": "A screening basis for K",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-cut-yields-of-the-blend",
+      "title": "Cut Yields of the Blend",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-blends-cut-yields",
+          "title": "The blend's cut yields",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-moving-a-cut-point",
+          "title": "Moving a cut point",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-cut-the-curve-cannot-answer",
+          "title": "A cut the curve cannot answer",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-refinery-draws-its-own-cuts",
+          "title": "The refinery draws its own cuts",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-netback",
+      "title": "Netback",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-product-value-per-barrel-of-crude",
+          "title": "Product value per barrel of crude",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-losses-on-the-product-side",
+          "title": "Losses on the product side",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-processing-and-freight",
+          "title": "Processing and freight",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-blank-cost-is-named",
+          "title": "A blank cost is named",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-an-unpriced-cut",
+          "title": "An unpriced cut",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-against-the-marker",
+      "title": "Against the Marker",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-the-differential",
+          "title": "The differential",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-each-crude-on-its-own-netback",
+          "title": "Each crude on its own netback",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-blend-against-its-components",
+          "title": "The blend against its components",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-losses-outside-zero-to-one-hundred",
+          "title": "Losses outside zero to one hundred",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-d86-is-a-product-test",
+          "title": "D86 is a product test",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-kwale-valuation-end-to-end",
+          "title": "The Kwale valuation end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "crude-valuation-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-the-oracle-checks-on-a-cargo",
+          "title": "What the oracle checks on a cargo",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

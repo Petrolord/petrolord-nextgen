@@ -1,0 +1,969 @@
+# crude: Crude Assay & Blending. Teaching digest.
+# PRECISION: every computed figure prints to four decimals (API, specific gravity, wt%, ppm, cSt, index values, volume percent, degrees F, Watson K, CII, dollars, dollars per bbl, barrels, dollars per unit of a property, row prices). Every input prints exactly as it is typed, in crude_fields.mjs for a case or beside the question in crude_dump.mjs for a probe. Counts print as whole numbers.
+# ENGINES: engines/downstream/crudeAssay.js, engines/downstream/productBlending.js and lib/lp/simplex.js at petrolord-engines 60ee266, vendored in NextGen under packages/engines.
+# CASES: OBIGBO (a crude library at a Rivers State export terminal and its export blend), KWALE (a Delta State modular refinery valuing a blend on its own cut set), APAPA (a Lagos blending terminal making a PMS cargo and an AGO cargo), and beside them the two live apps' own opening examples. EVERY CRUDE, STREAM, PRICE AND SPECIFICATION IN THIS DIGEST IS INVENTED AND ILLUSTRATIVE: no figure is a published assay, a market price or a regulation for any real grade or product. Place names are real places; the records are not.
+# NO CLOCK: nothing in scope reads a date or a clock, and the digest is the same bytes in every time zone and at every machine date.
+# Built by build_digest.sh from crude_dump.mjs and crude_fields.mjs. Never edited by hand.
+
+# SECTION 1: WHAT THE TWO MODULES AND THE KERNEL EXPORT (owned by Associate m01)
+
+The Crude Assay & Blending Studio calls crudeAssay. The Product Blending Optimizer calls productBlending, which calls the LP kernel solveLP in lib/lp/simplex and imports the gravity and viscosity rules from crudeAssay rather than restating them. The counts below are measured from the modules themselves.
+
+| module | exported functions | exported constants and tables |
+| --- | --- | --- |
+| crudeAssay | 18 (apiFromSg, blendCrudes, blendDistillationCurves, blendOnMass, blendOnVolume, blendViscosity, colloidalInstabilityIndex, cutYields, d86ToTbp, netbackValue, resolveFractions, screenBlendStability, sgFromApi, temperatureAtVolumePercent, viscosityBlendIndex, viscosityFromBlendIndex, volumePercentAt, watsonK) | 1 (CII_BANDS) |
+| productBlending | 5 (optimiseBlend, propertyOfBlend, rvpFromIndex, rvpIndex, valueGiveaway) | 4 (BINDING_TOLERANCE, BLEND_BASIS, RVP_INDEX_EXPONENT, SPEC_TEMPLATES) |
+| lib/lp/simplex | 1 (solveLP) | 1 (LP_STATUS) |
+
+Four questions the studio answers, each with the function that answers it:
+| question | function |
+| --- | --- |
+| what does this barrel turn into | cutYields, on a crude's curve or on blendDistillationCurves |
+| what happens to the properties when two crudes mix | blendCrudes |
+| will the mixture drop asphaltenes in the tank | screenBlendStability (inside blendCrudes) |
+| what is it worth against the crude already bought | netbackValue, with its marker differential |
+
+One question the optimizer answers: the least-cost recipe that meets every specification (optimiseBlend), with which specifications bind, what each binding one is costing, and the quality handed over on the rest.
+
+# SECTION 2: GRAVITY: API AND SPECIFIC GRAVITY (owned by Associate m01)
+
+sgFromApi is the definition SG = A / (API + B); apiFromSg is its inverse, API = A / SG - B. API is a hyperbola in specific gravity: equal steps of specific gravity are unequal steps of API. The two constants, read back from apiFromSg itself rather than typed:
+
+| constant | how the engine gives it | value |
+| --- | --- | --- |
+| A | apiFromSg(0.5) minus apiFromSg(1) | 141.5000 |
+| B | A minus apiFromSg(1) | 131.5000 |
+
+| API (input) | sgFromApi | apiFromSg(sgFromApi) round trip |
+| --- | --- | --- |
+| 10 | 1.0000 | 10.0000 |
+| 17.2 | 0.9516 | 17.2000 |
+| 20 | 0.9340 | 20.0000 |
+| 25.9 | 0.8990 | 25.9000 |
+| 30 | 0.8762 | 30.0000 |
+| 36.8 | 0.8408 | 36.8000 |
+| 40 | 0.8251 | 40.0000 |
+| 54.6 | 0.7603 | 54.6000 |
+
+Equal steps of specific gravity, and the API each one is:
+| SG (input) | apiFromSg | API step from the row above |
+| --- | --- | --- |
+| 0.75 | 57.1667 | first row |
+| 0.8 | 45.3750 | -11.7917 |
+| 0.85 | 34.9706 | -10.4044 |
+| 0.9 | 25.7222 | -9.2484 |
+| 0.95 | 17.4474 | -8.2748 |
+| 1 | 10.0000 | -7.4474 |
+
+Water (SG 1) is 10.0000 API by the definition.
+
+# SECTION 3: THE OBIGBO LIBRARY (owned by Associate m01 and m06)
+
+Four invented field streams at an invented Rivers State export terminal, and one partial assay. Every figure is illustrative. Specific gravity is computed from API by sgFromApi.
+
+| crude | API | SG (computed) | sulfur wt% | TAN mg KOH/g | nitrogen wt% | nickel ppm | vanadium ppm | viscosity cSt |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Obigbo Light | 36.8 | 0.8408 | 0.14 | 0.26 | 0.07 | 3.2 | 1.4 | 4.6 |
+| Egbema Medium | 25.9 | 0.8990 | 0.48 | 0.62 | 0.16 | 12.5 | 8.7 | 22 |
+| Asarama Heavy | 17.2 | 0.9516 | 1.85 | 1.4 | 0.34 | 41 | 96 | 610 |
+| Ubie Condensate | 54.6 | 0.7603 | 0.03 | 0.05 | 0.01 | 0.4 | 0.2 | 1.1 |
+| Ebocha partial assay | 31.4 | 0.8686 | 0.22 | not given | not given | not given | not given | not given |
+
+SARA analyses, wt%:
+| crude | saturates | aromatics | resins | asphaltenes |
+| --- | --- | --- | --- | --- |
+| Obigbo Light | 52 | 33.5 | 12.8 | 1.7 |
+| Egbema Medium | 34.1 | 42.6 | 19.8 | 3.5 |
+| Asarama Heavy | 31.5 | 37.2 | 19.4 | 11.9 |
+| Ubie Condensate | 89.1 | 9.2 | 1.5 | 0.2 |
+
+TBP distillation curves, volume percent distilled at each temperature (F):
+| crude | points (volume percent at F) |
+| --- | --- |
+| Obigbo Light | 0 at 85; 10 at 205; 30 at 390; 50 at 548; 70 at 742; 90 at 1060; 100 at 1380 |
+| Egbema Medium | 0 at 95; 10 at 280; 30 at 500; 50 at 668; 70 at 880; 90 at 1230; 100 at 1480 |
+| Asarama Heavy | 0 at 120; 10 at 380; 30 at 610; 50 at 790; 70 at 1000; 90 at 1320; 100 at 1560 |
+| Ubie Condensate | 0 at 70; 10 at 140; 30 at 230; 50 at 320; 70 at 430; 90 at 600; 100 at 760 |
+| Ebocha partial assay | 4 at 110; 25 at 370; 50 at 590; 70 at 760; 88 at 920 |
+
+# SECTION 4: DENSITY BLENDS ON VOLUME, AND API GOES THROUGH SPECIFIC GRAVITY (owned by Associate m02)
+
+blendCrudes blends specific gravity on volume (mass is conserved and volume is taken as conserved) and converts the blended specific gravity back to API. API itself is never averaged. The column "volume-weighted mean of the API numbers" is the shortcut the engine refuses to take, computed here with the engine's own blendOnVolume so it can be read beside the right answer.
+
+| blend (by volume) | blend SG | blend API | volume-weighted mean of the API numbers | blend API minus that mean | mass-weighted mean of the API numbers | blend API minus the mass-weighted mean |
+| --- | --- | --- | --- | --- | --- | --- |
+| A 20 API crude and a 40 API crude, 50 and 50 | 0.8795 | 29.3808 | 30.0000 | -0.6192 | 29.3808 | 0.0000 |
+| Obigbo Light and Egbema Medium, 65 and 35 | 0.8611 | 32.8173 | 32.9850 | -0.1677 | 32.8173 | 0.0000 |
+| Asarama Heavy and Ubie Condensate, 50 and 50 | 0.8560 | 33.8111 | 35.9000 | -2.0889 | 33.8111 | 0.0000 |
+| Obigbo Light, Egbema Medium and Asarama Heavy, 50, 30 and 20 | 0.8804 | 29.2240 | 29.6100 | -0.3860 | 29.2240 | 0.0000 |
+
+API = A / SG - B, and 1 / SG is proportional to the volume one unit of mass takes up, which is what blends linearly on MASS. So the mass-weighted mean of the API numbers is the blend API (the last column prints the difference), and the volume-weighted mean is not.
+
+The engine names its basis for API: "computed from the volume-blended specific gravity, never averaged directly".
+
+# SECTION 5: VOLUME SHARES BECOME MASS SHARES (owned by Associate m02)
+
+A cargo is measured in barrels and half the properties blend on mass, so blendCrudes converts once (resolveFractions): each crude's mass share is its volume share times its specific gravity, over the sum of those products. A crude denser than the blend carries more of the mass than of the volume, and a crude lighter than the blend carries less.
+
+| blend | crude | share typed | volume fraction | SG | mass fraction | mass fraction minus volume fraction |
+| --- | --- | --- | --- | --- | --- | --- |
+| Obigbo export blend | Obigbo Light | 65 | 0.6500 | 0.8408 | 0.6346 | -0.0154 |
+| Obigbo export blend | Egbema Medium | 35 | 0.3500 | 0.8990 | 0.3654 | 0.0154 |
+| three crudes, 50, 30 and 20 by volume | Obigbo Light | 50 | 0.5000 | 0.8408 | 0.4775 | -0.0225 |
+| three crudes, 50, 30 and 20 by volume | Egbema Medium | 30 | 0.3000 | 0.8990 | 0.3063 | 0.0063 |
+| three crudes, 50, 30 and 20 by volume | Asarama Heavy | 20 | 0.2000 | 0.9516 | 0.2162 | 0.0162 |
+
+The same three crudes given BY MASS instead (every crude a massFraction, none a volumeFraction), 50, 30 and 20 by mass:
+| crude | mass share typed | volume fraction | mass fraction |
+| --- | --- | --- | --- |
+| Obigbo Light | 50 | 0.5223 | 0.5000 |
+| Egbema Medium | 30 | 0.2931 | 0.3000 |
+| Asarama Heavy | 20 | 0.1846 | 0.2000 |
+Blend API given by mass: 29.6100. Blend API given by volume at 50, 30 and 20: 29.2240.
+
+The same two blends side by side, the blend SG and sulfur beside the API:
+| three crudes, 50, 30 and 20 | blend SG | blend API | blend sulfur wt% |
+| --- | --- | --- | --- |
+| by volume | 0.8804 | 29.2240 | 0.6138 |
+| by mass | 0.8783 | 29.6100 | 0.5840 |
+
+# SECTION 6: SULFUR AND THE OTHER PER-MASS PROPERTIES BLEND ON MASS (owned by Associate m02)
+
+Sulfur, TAN, nitrogen, nickel and vanadium are per unit mass, so blendCrudes weights them by mass fraction. The column "on volume" is the same property weighted by volume fraction with the engine's own blendOnVolume, printed only to be read against the right answer; the engine never reports it.
+
+| blend | property | on mass (the engine) | on volume (the shortcut) | mass minus volume | basis the engine names |
+| --- | --- | --- | --- | --- | --- |
+| Obigbo export blend | sulfur wt% | 0.2642 | 0.2590 | 0.0052 | mass |
+| Obigbo export blend | TAN mg KOH/g | 0.3915 | 0.3860 | 0.0055 | mass |
+| Obigbo export blend | nitrogen wt% | 0.1029 | 0.1015 | 0.0014 | mass |
+| Obigbo export blend | nickel ppm | 6.5980 | 6.4550 | 0.1430 | mass |
+| Obigbo export blend | vanadium ppm | 4.0673 | 3.9550 | 0.1123 | mass |
+| three crudes, 50, 30 and 20 by volume | sulfur wt% | 0.6138 | 0.5840 | 0.0298 | mass |
+| three crudes, 50, 30 and 20 by volume | TAN mg KOH/g | 0.6167 | 0.5960 | 0.0207 | mass |
+| three crudes, 50, 30 and 20 by volume | nitrogen wt% | 0.1559 | 0.1510 | 0.0049 | mass |
+| three crudes, 50, 30 and 20 by volume | nickel ppm | 14.2202 | 13.5500 | 0.6702 | mass |
+| three crudes, 50, 30 and 20 by volume | vanadium ppm | 24.0861 | 22.5100 | 1.5761 | mass |
+
+# SECTION 7: A BLANK IS NOT A ZERO, AND WHAT THE BLEND REFUSES (owned by Associate m02)
+
+A property blends only when every crude in the blend carries it. A blank is absent, never a zero: the property comes back as no value, and the crude without it is named.
+
+| blend | sulfur wt% returned | missing (named by the engine) | basis the engine names |
+| --- | --- | --- | --- |
+| Obigbo export blend, both sulfurs given | 0.2642 | nothing | mass |
+| Obigbo export blend, Egbema Medium's sulfur left blank | not blended | Egbema Medium | not blended: no value for Egbema Medium |
+
+
+Only the blank property is not blended. Every other property of the same blend is formed as usual, and a sulfur TYPED as 0 is a real zero, blended like any other figure:
+| blend | SG | API | sulfur wt% | TAN mg KOH/g | vanadium ppm | viscosity cSt |
+| --- | --- | --- | --- | --- | --- | --- |
+| Obigbo export blend, both sulfurs given | 0.8611 | 32.8173 | 0.2642 | 0.3915 | 4.0673 | 7.4743 |
+| Egbema Medium's sulfur left blank | 0.8611 | 32.8173 | not blended | 0.3915 | 4.0673 | 7.4743 |
+| Egbema Medium's sulfur typed as 0 | 0.8611 | 32.8173 | 0.0888 | 0.3915 | 4.0673 | 7.4743 |
+The typed 0 is blended on mass, and nothing is named missing (0 properties listed).
+
+Viscosity is the same: a blank viscosity leaves the blend without one.
+With Egbema Medium's viscosity blank: viscosity not blended; basis "not blended: a component viscosity is missing or outside the index domain".
+
+What blendCrudes refuses, each in its own words:
+| what was asked | what the engine returned |
+| --- | --- |
+| an empty list | REFUSED: No components to blend. |
+| Egbema Medium with no API and no specific gravity | REFUSED: No API or specific gravity for Egbema Medium. Every property here is weighted by density. |
+| one crude by volume, the other by mass | REFUSED: Give every crude a volume share, or give every crude a mass share. The two cannot be mixed. |
+| one crude with a share, the other with none | REFUSED: Give every crude a volume share or a mass share. |
+| a share of -10 | REFUSED: A blend share must be a number of zero or more. |
+| shares of 0 and 0 | REFUSED: The blend shares add up to zero. |
+
+The shares need not add to 100: they are normalised. 65 and 35, 13 and 7, and 650000 and 350000 barrels are the same blend:
+| shares typed | blend API | blend sulfur wt% |
+| --- | --- | --- |
+| 65 and 35 | 32.8173 | 0.2642 |
+| 13 and 7 | 32.8173 | 0.2642 |
+| 650000 and 350000 | 32.8173 | 0.2642 |
+
+# SECTION 8: VISCOSITY THROUGH THE REFUTAS INDEX (owned by Associate m03)
+
+Viscosity mixes nowhere near linearly, so it is blended through an index: VBI = A x ln(ln(nu + 0.8)) + B, nu in cSt (viscosityBlendIndex). The index is blended by the engine on MASS fraction, the classic Refutas form, and inverted (viscosityFromBlendIndex). ASTM D7152 blends the same family of index on VOLUME; the two disagree, and which basis to use is a HELD decision (FINDINGS C12). The engine names its basis in the result.
+
+| crude | viscosity cSt | Refutas index (viscosityBlendIndex) | viscosityFromBlendIndex of that index |
+| --- | --- | --- | --- |
+| Obigbo Light | 4.6 | 18.5704 | 4.6000 |
+| Egbema Medium | 22 | 27.5437 | 22.0000 |
+| Asarama Heavy | 610 | 37.9879 | 610.0000 |
+| Ubie Condensate | 1.1 | 4.5307 | 1.1000 |
+
+| blend (by volume) | blend viscosity cSt, index on mass (the engine) | index on volume fractions instead | mass basis minus volume basis | cSt averaged linearly on mass (no index) |
+| --- | --- | --- | --- | --- |
+| Obigbo export blend, 65 and 35 | 7.4743 | 7.3107 | 0.1636 | 10.9576 |
+| Asarama Heavy and Ubie Condensate, 50 and 50 | 9.2496 | 6.8074 | 2.4422 | 339.5596 |
+| Egbema Medium and Asarama Heavy, 50 and 50 | 91.4520 | 87.3072 | 4.1448 | 324.3561 |
+
+The engine's blend viscosity against the linear average of the cSt figures, the difference printed:
+| blend (by volume) | blend viscosity cSt (the engine) | cSt averaged linearly on mass | linear average minus the engine |
+| --- | --- | --- | --- |
+| Obigbo export blend, 65 and 35 | 7.4743 | 10.9576 | 3.4833 |
+| Asarama Heavy and Ubie Condensate, 50 and 50 | 9.2496 | 339.5596 | 330.3100 |
+| Egbema Medium and Asarama Heavy, 50 and 50 | 91.4520 | 324.3561 | 232.9041 |
+
+The engine names its basis: "Refutas index on mass fraction".
+
+The two constants, read back from viscosityBlendIndex itself: where ln(nu + 0.8) is e the double log is 1, and where ln(nu + 0.8) is 1 the double log is 0.
+| constant | how the engine gives it | value |
+| --- | --- | --- |
+| B | viscosityBlendIndex(e - 0.8) | 10.9750 |
+| A | viscosityBlendIndex(e^e - 0.8) minus B | 14.5340 |
+| the offset inside the double log | 1 minus viscosityFromBlendIndex of a very negative index | 0.8000 |
+| the lowest viscosity the index reaches | viscosityFromBlendIndex of a very negative index | 0.2000 |
+
+The index has a domain. ln(ln(nu + 0.8)) is undefined where ln(nu + 0.8) is zero or less, and the engine returns no index there rather than a number. Probed:
+| viscosity cSt | viscosityBlendIndex returns |
+| --- | --- |
+| 0.1 | no index (outside the domain) |
+| 0.2 | no index (outside the domain) |
+| 0.2001 | -122.8888 |
+| 1 | 3.2518 |
+| 10 | 23.5747 |
+| 100 | 33.1962 |
+| 1000 | 39.0657 |
+With one crude's viscosity outside the domain (the Obigbo export blend with Egbema Medium's viscosity typed as 0.15 cSt), the blend's viscosity is not blended; basis "not blended: a component viscosity is missing or outside the index domain". The other properties of that blend are formed as usual: API 32.8173, sulfur 0.2642 wt%.
+
+# SECTION 9: THE TBP CURVE BETWEEN AND OUTSIDE ITS MEASURED POINTS (owned by Associate m04)
+
+volumePercentAt reads a TBP curve: the volume percent distilled at a temperature, linear between measured points. Outside the measured range the curve answers only where it says so itself: below a first point at 0 percent nothing has distilled, and above a last point at 100 percent everything has. Anywhere else outside the range the value is unknown. temperatureAtVolumePercent is the inverse: the temperature at which the curve reaches a volume percent, linear between points, unknown outside them.
+
+| crude | temperature F | volumePercentAt |
+| --- | --- | --- |
+| Obigbo Light | 60 | 0.0000 |
+| Obigbo Light | 85 | 0.0000 |
+| Obigbo Light | 300 | 20.2703 |
+| Obigbo Light | 548 | 50.0000 |
+| Obigbo Light | 600 | 55.3608 |
+| Obigbo Light | 1380 | 100.0000 |
+| Obigbo Light | 1500 | 100.0000 |
+| Ebocha partial assay | 60 | unknown |
+| Ebocha partial assay | 110 | 4.0000 |
+| Ebocha partial assay | 240 | 14.5000 |
+| Ebocha partial assay | 590 | 50.0000 |
+| Ebocha partial assay | 920 | 88.0000 |
+| Ebocha partial assay | 1000 | unknown |
+
+| crude | volume percent | temperatureAtVolumePercent F |
+| --- | --- | --- |
+| Obigbo Light | 0 | 85.0000 |
+| Obigbo Light | 10 | 205.0000 |
+| Obigbo Light | 25 | 343.7500 |
+| Obigbo Light | 50 | 548.0000 |
+| Obigbo Light | 95 | 1220.0000 |
+| Obigbo Light | 100 | 1380.0000 |
+| Ebocha partial assay | 2 | unknown |
+| Ebocha partial assay | 4 | 110.0000 |
+| Ebocha partial assay | 50 | 590.0000 |
+| Ebocha partial assay | 80 | 848.8889 |
+| Ebocha partial assay | 88 | 920.0000 |
+| Ebocha partial assay | 95 | unknown |
+
+# SECTION 10: CUT YIELDS OF ONE CRUDE (owned by Associate m04)
+
+cutYields returns each cut's yield in volume percent of the whole crude: the curve at the cut's upper bound minus the curve at its lower bound. A first cut with no lower bound starts at 0 percent, nothing distilled, and a last cut with no upper bound runs to 100 percent: it takes everything not yet distilled at its lower bound. The total is reported as it computes, never normalised, and the set closes only when every cut has a yield and the total is within the engine's closing tolerance of 100 percent. The cut set here is the studio's default:
+
+| cut | from F | to F |
+| --- | --- | --- |
+| LPG / Light ends | no lower bound (from 0 percent) | 90 |
+| Naphtha | 90 | 350 |
+| Kerosene / Jet | 350 | 500 |
+| Diesel / Gasoil | 500 | 650 |
+| Vacuum gasoil | 650 | 1000 |
+| Vacuum residue | 1000 | no upper bound (to 100 percent) |
+
+| crude | LPG / Light ends | Naphtha | Kerosene / Jet | Diesel / Gasoil | Vacuum gasoil | Vacuum residue | total | closes | cuts with no yield |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Obigbo Light | 0.4167 | 25.2590 | 18.2484 | 16.5914 | 25.7110 | 13.7736 | 100.0000 | true | nothing |
+| Egbema Medium | 0.0000 | 16.3636 | 13.6364 | 17.8571 | 29.0000 | 23.1429 | 100.0000 | true | nothing |
+| Asarama Heavy | 0.0000 | 8.8462 | 11.5886 | 14.0097 | 35.5556 | 30.0000 | 100.0000 | true | nothing |
+| Ubie Condensate | 2.8571 | 52.5974 | 22.7807 | 14.8897 | 6.8750 | 0.0000 | 100.0000 | true | nothing |
+| Ebocha partial assay | unknown | unknown | 16.3881 | 17.2861 | unknown | unknown | 33.6742 | false | LPG / Light ends, Naphtha, Vacuum gasoil, Vacuum residue |
+
+The Ebocha partial assay starts at 4 percent and stops at 88, so 4 of its 6 studio cuts have no yield, and its set does not close. Its known cuts total 33.6742 percent.
+
+A cut set drawn inside the partial curve has every yield:
+| crude | 110 to 370 F | 370 to 760 F | 760 to 920 F | total | closes | cuts with no yield |
+| --- | --- | --- | --- | --- | --- | --- |
+| Ebocha partial assay | 21.0000 | 45.0000 | 18.0000 | 84.0000 | false | nothing |
+
+An inverted cut (from 500 F to 350 F) on Obigbo Light has no yield: the engine names it in unknownCuts (inverted, 500 to 350 F).
+
+# SECTION 11: WILL THE BLEND STAY STABLE: THE COLLOIDAL INSTABILITY INDEX AND THE GRAVITY SCREEN (owned by Associate m05)
+
+With a SARA analysis on every crude, screenBlendStability blends each SARA fraction on mass and forms CII = (saturates + asphaltenes) / (aromatics + resins). Saturates precipitate asphaltenes; aromatics and resins hold them. Three bands, three answers: below 0.7 stable (stable true), from 0.7 to below 0.9 uncertain (the engine returns stable null and says spot test), at or above 0.9 unstable (stable false). The bands are screening bands and are not a phase boundary.
+
+| crude alone | CII (colloidalInstabilityIndex) |
+| --- | --- |
+| Obigbo Light | 1.1598 |
+| Egbema Medium | 0.6026 |
+| Asarama Heavy | 0.7668 |
+| Ubie Condensate | 8.3458 |
+
+| pair (by volume) | blended saturates | blended aromatics | blended resins | blended asphaltenes | CII | band | stable | CII from SARA blended on volume instead |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Asarama Heavy with Ubie Condensate, 50 and 50 | 57.0828 | 24.7639 | 11.4498 | 6.7035 | 1.7614 | unstable | false | 1.9718 |
+| Asarama Heavy with Egbema Medium, 70 and 30 | 32.2493 | 38.7563 | 19.5153 | 9.4791 | 0.7161 | uncertain | no verdict | 0.7141 |
+| Egbema Medium with Obigbo Light, 85 and 15 | 36.6357 | 41.3109 | 18.8084 | 3.2450 | 0.6634 | stable | true | 0.6671 |
+
+The CII against the CII from SARA blended on volume, the difference printed:
+| pair (by volume) | CII (SARA on mass, the engine) | CII from SARA on volume | volume reading minus the engine |
+| --- | --- | --- | --- |
+| Asarama Heavy with Ubie Condensate, 50 and 50 | 1.7614 | 1.9718 | 0.2104 |
+| Asarama Heavy with Egbema Medium, 70 and 30 | 0.7161 | 0.7141 | -0.0020 |
+| Egbema Medium with Obigbo Light, 85 and 15 | 0.6634 | 0.6671 | 0.0037 |
+
+The engine's message for each band:
+| pair | message |
+| --- | --- |
+| Asarama Heavy with Ubie Condensate | Screens unstable. The saturate and asphaltene load is high against the aromatics and resins holding it. Do not commingle without a lab test. |
+| Asarama Heavy with Egbema Medium | Uncertain. The index sits in the band where blends go either way; spot test to ASTM D7112 or D7157 before commingling. |
+| Egbema Medium with Obigbo Light | Screens stable on the colloidal instability index. Asphaltenes are held by the aromatics and resins present. |
+
+With no SARA, the screen falls back to a gravity-contrast rule of thumb: a wide spread of API with a light paraffinic crude in the blend is the combination that classically drops asphaltenes. The rule can raise a flag and it cannot clear one: when it does not flag, the engine returns stable null, never true. Its two thresholds are not exported, so the engine is asked about them directly, with two crudes of no SARA:
+
+| probe | lighter crude API | heavier crude API | API contrast (the engine) | stable |
+| --- | --- | --- | --- | --- |
+| contrast at its threshold | 40 | 25 | 15.0000 | no verdict |
+| contrast just past it | 40 | 24.99 | 15.0100 | false |
+| contrast well past it | 40 | 24 | 16.0000 | false |
+| lighter crude at its threshold | 35 | 19 | 16.0000 | no verdict |
+| lighter crude just past it | 35.01 | 19 | 16.0100 | false |
+| lighter crude well past it | 36 | 19 | 17.0000 | false |
+A flag needs a contrast above the one threshold and a lighter crude above the other, both at once.
+The two thresholds, found by bisection on the engine itself with the other condition held well past its own threshold. Each is the edge the flag starts ABOVE: at the threshold itself the engine gives no verdict (the probes above), and every value past it raises the flag.
+| threshold | value |
+| --- | --- |
+| API contrast, lighter crude at 45 API | 15.0000 |
+| lighter crude API, contrast held at 25 | 35.0000 |
+
+| pair, no SARA supplied | basis | API contrast | stable | message |
+| --- | --- | --- | --- | --- |
+| Asarama Heavy and Ubie Condensate, 50 and 50 | api-contrast | 37.4000 | false | No SARA analysis supplied. On gravity contrast alone (37.4 degrees API, with a light paraffinic component) this is the combination that classically drops asphaltenes. Supply SARA for a colloidal instability index, and spot test before commingling. |
+| Obigbo export blend, 65 and 35 | api-contrast | 10.9000 | no verdict | No SARA analysis supplied, so this is an API-contrast screen only. The gravity spread is not the classic heavy-plus-light-paraffinic combination, which is not evidence that the blend is stable. Supply SARA for a real index. |
+| a crude with no API and no SG beside one of 30 API (screenBlendStability called on its own) | none | not formed | no verdict | No SARA analysis and not every crude has a gravity, so no stability screen was made. Supply SARA for a colloidal instability index. |
+The last row calls screenBlendStability on its own, outside blendCrudes: blendCrudes refuses a crude with no gravity before any screen is made (SECTION 7).
+
+SARA on only some of the crudes is not enough for the index: the screen falls back to gravity, and its message says so.
+| pair | basis | stable | message |
+| --- | --- | --- | --- |
+| Obigbo export blend, SARA on Obigbo Light only | api-contrast | no verdict | SARA was not supplied for every crude, so this is an API-contrast screen only. The gravity spread is not the classic heavy-plus-light-paraffinic combination, which is not evidence that the blend is stable. Supply SARA for a real index. |
+
+# SECTION 12: THE OBIGBO EXPORT BLEND END TO END (owned by Associate m06)
+
+Obigbo Light and Egbema Medium, 65 and 35 by volume, as blendCrudes returns it, each property beside the basis the engine names:
+
+| property | value | basis |
+| --- | --- | --- |
+| specific gravity | 0.8611 | volume |
+| API | 32.8173 | computed from the volume-blended specific gravity, never averaged directly |
+| sulfur wt% | 0.2642 | mass |
+| TAN mg KOH/g | 0.3915 | mass |
+| nitrogen wt% | 0.1029 | mass |
+| nickel ppm | 6.5980 | mass |
+| vanadium ppm | 4.0673 | mass |
+| viscosity cSt | 7.4743 | Refutas index on mass fraction |
+| CII | 0.9163 | cii, band unstable, stable false |
+
+With every SARA supplied, the export blend screens unstable on the CII. With the SARA taken away, the gravity screen gives no verdict (SECTION 11): the rule of thumb did not raise its flag, and the index says unstable.
+
+Its cut yields on the studio's default cuts, from the blend's own curve (the Professional tier explains that curve):
+| cut | yield volume percent |
+| --- | --- |
+| LPG / Light ends | 0.2708 |
+| Naphtha | 22.1456 |
+| Kerosene / Jet | 16.6342 |
+| Diesel / Gasoil | 17.0344 |
+| Vacuum gasoil | 26.8621 |
+| Vacuum residue | 17.0528 |
+| total | 100.0000 |
+Closes: true. Cuts with no yield: nothing.
+
+# SECTION 13: THE BLEND'S OWN CURVE (owned by Professional m01)
+
+Yields are additive on volume: at any temperature the blend has distilled the volume-weighted sum of what each crude has distilled. So blendDistillationCurves forms the blend's curve at every temperature any component measured, and never averages temperatures. A temperature at which some crude's curve says nothing is left out, because the blend's value there is not known either.
+
+KWALE: an invented modular (topping) refinery in Delta State is offered Kwale Light and Ughelli Medium, 55 and 45 by volume. Every figure is illustrative.
+
+| crude | API | SG (computed) | sulfur wt% | TBP points (volume percent at F) |
+| --- | --- | --- | --- | --- |
+| Kwale Light | 38.4 | 0.8328 | 0.11 | 0 at 75; 10 at 190; 30 at 370; 50 at 530; 70 at 720; 90 at 1030; 100 at 1350 |
+| Ughelli Medium | 27.1 | 0.8922 | 0.36 | 0 at 90; 10 at 265; 30 at 480; 50 at 650; 70 at 860; 90 at 1200; 100 at 1470 |
+
+Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis).
+
+| temperature F | Kwale Light volume percent | Ughelli Medium volume percent | blend volume percent (blendDistillationCurves) |
+| --- | --- | --- | --- |
+| 75 | 0.0000 | 0.0000 | 0.0000 |
+| 90 | 1.3043 | 0.0000 | 0.7174 |
+| 190 | 10.0000 | 5.7143 | 8.0714 |
+| 265 | 18.3333 | 10.0000 | 14.5833 |
+| 370 | 30.0000 | 19.7674 | 25.3953 |
+| 480 | 43.7500 | 30.0000 | 37.5625 |
+| 530 | 50.0000 | 35.8824 | 43.6471 |
+| 650 | 62.6316 | 50.0000 | 56.9474 |
+| 720 | 70.0000 | 56.6667 | 64.0000 |
+| 860 | 79.0323 | 70.0000 | 74.9677 |
+| 1030 | 90.0000 | 80.0000 | 85.5000 |
+| 1200 | 95.3125 | 90.0000 | 92.9219 |
+| 1350 | 100.0000 | 95.5556 | 98.0000 |
+| 1470 | 100.0000 | 100.0000 | 100.0000 |
+
+The blend's curve has 14 points: every temperature either crude measured.
+
+A partial assay in a blend: Kwale Light with the Ebocha partial assay, 50 and 50. The partial curve says nothing below 110 F or above 920 F, so the blend's curve keeps only the temperatures where both crudes are known:
+| temperature F | blend volume percent |
+| --- | --- |
+| 110 | 3.5217 |
+| 190 | 10.2308 |
+| 370 | 27.5000 |
+| 530 | 46.5909 |
+| 590 | 53.1579 |
+| 720 | 67.6471 |
+| 760 | 71.2903 |
+| 920 | 85.4516 |
+Of 11 temperatures the two crudes measured between them, the blend's curve keeps 8.
+
+# SECTION 14: THE FIFTY PERCENT POINT AND THE WATSON FACTOR (owned by Professional m02)
+
+temperatureAtVolumePercent(curve, 50) reads the temperature at which the blend's own curve reaches 50 percent, interpolated between the curve's points. Three other readings are printed beside it to be read against it: the first point of the blend's curve at or past 50 percent (a grid reading), the volume-weighted mean of the crudes' own 50 percent temperatures, and the mass-weighted mean of the same.
+
+| blend | T50 interpolated (the engine) F | first curve point at or past 50 percent F | volume-weighted mean of the crudes' T50 F | mass-weighted mean of the crudes' T50 F |
+| --- | --- | --- | --- | --- |
+| Kwale Light and Ughelli Medium, 55 and 45 | 587.3184 | 650 | 584.0000 | 586.0503 |
+| the studio's default pair, 60 and 40 (what the app opens on) | 617.1429 | 690 | 612.0000 | 614.2222 |
+
+Each shortcut against the engine, the difference printed:
+| blend | grid reading minus the engine F | volume-weighted mean minus the engine F | mass-weighted mean minus the engine F |
+| --- | --- | --- | --- |
+| Kwale Light and Ughelli Medium, 55 and 45 | 62.6816 | -3.3184 | -1.2681 |
+| the studio's default pair, 60 and 40 | 72.8571 | -5.1429 | -2.9207 |
+
+Other points off the Kwale blend's curve:
+| volume percent | temperature F |
+| --- | --- |
+| 10 | 212.2121 |
+| 30 | 411.6294 |
+| 50 | 587.3184 |
+| 70 | 796.5882 |
+| 90 | 1133.0737 |
+
+watsonK = Tb^(1/3) / SG with Tb in degrees Rankine, F plus an offset the engine gives itself: watsonK at 0 F and SG 1, cubed, is 459.6700. The studio takes Tb as the blend's T50, a SCREENING basis: the strict basis is the mean average boiling point, which the studio does not compute, and the page labels K as the screening figure. That choice is a HELD item (FINDINGS C13), taught here as a stated limit.
+
+| blend | SG | Watson K at T50 interpolated | Watson K at the grid reading |
+| --- | --- | --- | --- |
+| Kwale blend | 0.8595 | 11.8135 | 12.0447 |
+| the studio's default pair | 0.8727 | 11.7452 | 12.0043 |
+
+watsonK declines a non-physical input: at -500 F it returns no value, and at SG 0 it returns no value.
+
+# SECTION 15: CUT YIELDS OF THE BLEND (owned by Professional m03)
+
+The Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residue. It draws its own cut points:
+
+| cut | from F | to F |
+| --- | --- | --- |
+| LPG / Light ends | no lower bound (from 0 percent) | 90 |
+| Naphtha | 90 | 330 |
+| Kerosene / DPK | 330 | 480 |
+| Diesel / AGO | 480 | 650 |
+| Atmospheric residue | 650 | no upper bound (to 100 percent) |
+
+| cut | Kwale Light | Ughelli Medium | the blend (cutYields on the blend's curve) | volume-weighted from the two crudes (blendOnVolume) | the two ways differ by | mass-weighted from the two crudes (blendOnMass) |
+| --- | --- | --- | --- | --- | --- | --- |
+| LPG / Light ends | 1.3043 | 0.0000 | 0.7174 | 0.7174 | 0.0000 | 0.6951 |
+| Naphtha | 24.2512 | 16.0465 | 20.5591 | 20.5591 | 0.0000 | 20.4189 |
+| Kerosene / DPK | 18.1944 | 13.9535 | 16.2860 | 16.2860 | 0.0000 | 16.2136 |
+| Diesel / AGO | 18.8816 | 20.0000 | 19.3849 | 19.3849 | 0.0000 | 19.4040 |
+| Atmospheric residue | 37.3684 | 50.0000 | 43.0526 | 43.0526 | 0.0000 | 43.2685 |
+| total | 100.0000 | 100.0000 | 100.0000 | not formed | not formed | not formed |
+Closes: true.
+
+Moving a cut point moves barrels between two cuts and nowhere else. The diesel end point moved from 650 F to 700 F:
+| cut | yield, diesel to 650 F | yield, diesel to 700 F | change |
+| --- | --- | --- | --- |
+| LPG / Light ends | 0.7174 | 0.7174 | 0.0000 |
+| Naphtha | 20.5591 | 20.5591 | 0.0000 |
+| Kerosene / DPK | 16.2860 | 16.2860 | 0.0000 |
+| Diesel / AGO | 19.3849 | 24.4225 | 5.0376 |
+| Atmospheric residue | 43.0526 | 38.0150 | -5.0376 |
+| total | 100.0000 | 100.0000 | 0.0000 |
+
+The studio's default cuts on the same Kwale blend, for contrast (a vacuum refinery's cut set):
+| cut | yield volume percent |
+| --- | --- |
+| LPG / Light ends | 0.7174 |
+| Naphtha | 22.6185 |
+| Kerosene / Jet | 16.6604 |
+| Diesel / Gasoil | 16.9510 |
+| Vacuum gasoil | 26.6940 |
+| Vacuum residue | 16.3586 |
+
+A cut the curve cannot answer. Kwale Light with the Ebocha partial assay, 50 and 50, on Kwale's cuts: the blend's curve starts at 110 F and stops at 920 F, so a cut with a bound below 110 F or above 920 F has no yield. The open-ended residue cut still has one: it runs from its lower bound to 100 percent, and its lower bound lies inside the curve.
+| cut | yield volume percent |
+| --- | --- |
+| LPG / Light ends | unknown |
+| Naphtha | unknown |
+| Kerosene / DPK | 16.9626 |
+| Diesel / AGO | 19.2202 |
+| Atmospheric residue | 40.1548 |
+unknownCuts: LPG / Light ends, Naphtha. Closes: false. The cuts with a yield total 76.3376 percent.
+Valued on Kwale's prices, costs and losses, netbackValue names the cuts with no yield (unyieldedCuts: LPG / Light ends, Naphtha), keeps their yield and value empty, and reports the valuation complete: false. Its netback over the cuts it can value is 48.3393 $/bbl.
+
+# SECTION 16: NETBACK: WHAT A BARREL OF CRUDE IS WORTH AT THE REFINERY (owned by Professional m04)
+
+netbackValue: netback = sum(cut yield fraction x cut product price) x (1 - loss percent / 100) - processing cost - freight, all per barrel of crude. Losses are a volume shrinkage on the product side, so they come off the product value before the costs. Every term is reported, never only the total.
+
+| cut | yield volume percent | price $/bbl of product | value $/bbl of crude |
+| --- | --- | --- | --- |
+| LPG / Light ends | 0.7174 | 48 | 0.3443 |
+| Naphtha | 20.5591 | 74 | 15.2137 |
+| Kerosene / DPK | 16.2860 | 93 | 15.1460 |
+| Diesel / AGO | 19.3849 | 98 | 18.9972 |
+| Atmospheric residue | 43.0526 | 57 | 24.5400 |
+
+| term | $/bbl of crude |
+| --- | --- |
+| gross product value | 74.2412 |
+| value lost to losses at 0.8 percent | 0.5939 |
+| processing cost | 6.8000 |
+| freight | 1.9000 |
+| netback | 64.9473 |
+Complete: true. Costs taken as zero because they were blank: nothing.
+
+Losses applied the wrong way, computed from the same terms for contrast:
+| reading | netback $/bbl | minus the engine's netback |
+| --- | --- | --- |
+| losses on the product side, before the costs (the engine) | 64.9473 | 0.0000 |
+| losses taken off the netback after the costs | 65.0169 | 0.0696 |
+| losses left out | 65.5412 | 0.5939 |
+
+A blank cost is taken as zero, because a netback with no freight is a legitimate question, and it is NAMED:
+| asked | netback $/bbl | assumedZero (named by the engine) |
+| --- | --- | --- |
+| Kwale, freight and losses left blank | 67.4412 | freight, losses |
+Complete: true. A blank cost is named and does not make the valuation incomplete; a missing price or a missing yield does.
+
+A cut with no price contributes nothing and is named, and the valuation reports itself incomplete:
+| asked | gross $/bbl | netback $/bbl | unpricedCuts | complete |
+| --- | --- | --- | --- | --- |
+| Kwale with the residue price left blank | 49.7012 | 40.6036 | Atmospheric residue | false |
+
+# SECTION 17: AGAINST THE MARKER (owned by Professional m05)
+
+netbackValue takes a marker netback and reports the differential: this crude's netback minus the marker's. Kwale's marker is 72.5 $/bbl.
+
+Each crude alone is valued on the same Kwale cut set, product prices, processing cost, freight and losses as the blend.
+| crude or blend | gross $/bbl | netback $/bbl | differential against the marker $/bbl |
+| --- | --- | --- | --- |
+| Kwale Light alone | 75.2968 | 65.9944 | -6.5056 |
+| Ughelli Medium alone | 72.9512 | 63.6676 | -8.8324 |
+| the blend, 55 and 45 | 74.2412 | 64.9473 | -7.5527 |
+
+The volume-weighted mean of the two crudes' own netbacks is 64.9473 $/bbl; the blend's netback minus that mean is 0.0000. Yields add on volume and every other term is per barrel, so the blend is worth what its barrels are worth.
+
+The differential is formed whether or not the valuation is complete. The Kwale Light and Ebocha partial assay blend of SECTION 15, valued against the same marker, reports complete: false, a netback of 48.3393 $/bbl over the cuts it can value, and a differential of -24.1607 $/bbl.
+
+What netbackValue refuses:
+| asked | what the engine returned |
+| --- | --- |
+| losses of 101 percent | REFUSED: Losses must be between 0 and 100 percent. |
+| losses of -1 percent | REFUSED: Losses must be between 0 and 100 percent. |
+
+D86 is a product test; a crude assay is reported as a TBP distillation. d86ToTbp has the structure of the cut-point-difference conversion (API Technical Data Book Procedure 3A1.1) and ships no coefficient table, because reproducing a published table from memory is what the engines refuse. Called without the table it refuses:
+| asked | what the engine returned |
+| --- | --- |
+| a D86 curve and no coefficients | REFUSED: D86 to TBP conversion needs the API Technical Data Book Procedure 3A1.1 coefficient table, which is not shipped with this package. Supply it, or enter the assay as a TBP distillation, which is how crude assays are reported. |
+| a D86 curve with no 50 percent point, and a table | REFUSED: The D86 curve needs a 50 percent point to anchor the conversion. |
+
+# SECTION 18: THE KWALE VALUATION END TO END, AND THE STUDIO'S DEFAULTS (owned by Professional m06)
+
+The Kwale valuation in one place:
+| figure | value |
+| --- | --- |
+| blend API | 33.1219 |
+| blend T50 F (interpolated) | 587.3184 |
+| Watson K at T50 (screening) | 11.8135 |
+| LPG / Light ends yield volume percent | 0.7174 |
+| Naphtha yield volume percent | 20.5591 |
+| Kerosene / DPK yield volume percent | 16.2860 |
+| Diesel / AGO yield volume percent | 19.3849 |
+| Atmospheric residue yield volume percent | 43.0526 |
+| gross product value $/bbl | 74.2412 |
+| loss value $/bbl | 0.5939 |
+| netback $/bbl | 64.9473 |
+| differential against the marker $/bbl | -7.5527 |
+
+What the Crude Assay & Blending Studio shows with nothing typed: its default pair, 60 and 40, on its default cuts and default valuation.
+| figure | value |
+| --- | --- |
+| blend API | 30.6451 |
+| blend sulfur wt% (basis: mass) | 1.0050 |
+| blend T50 F (interpolated) | 617.1429 |
+| Watson K at T50 (screening) | 11.7452 |
+| LPG / Light ends yield volume percent | 0.4615 |
+| Naphtha yield volume percent | 20.1987 |
+| Kerosene / Jet yield volume percent | 16.1124 |
+| Diesel / Gasoil yield volume percent | 16.7449 |
+| Vacuum gasoil yield volume percent | 27.7681 |
+| Vacuum residue yield volume percent | 18.7143 |
+| gross product value $/bbl | 76.6165 |
+| netback $/bbl | 69.7334 |
+| stability screen basis | api-contrast |
+Crudes in the default pair that carry a SARA analysis: none. So the screen falls back to the gravity contrast (SECTION 11).
+
+WHAT THE ORACLE CHECKS ON A CARGO. The crude assay engine is held to an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules and not from the JavaScript. It loads a cargo in barrels and pounds, inverts the Refutas index by bisection, takes yields by segment overlap, finds T50 by bisection and keeps the netback as a 100,000 bbl account. Its golden cases, counted from the vendored file:
+| golden set | cases |
+| --- | --- |
+| blends | 6 |
+| curve cases | 4 |
+| blended default curve | 1 |
+
+# SECTION 19: WHAT A LINEAR PROGRAMME IS (owned by Expert m01)
+
+solveLP minimises c'x subject to rows A x (<=, =, >=) b and bounds lo <= x <= hi, or maximises when asked. The bounds are passed apart from the rows: the kernel shifts every lower bound to the origin, and it gives a bound no shadow price. Its status is always one of optimal, infeasible or unbounded, and the caller is told which. The optimum of a linear programme, when there is one, is found at a vertex of the feasible region: a point where at least as many constraints and bounds hold exactly as there are variables.
+
+THE TEXTBOOK CASE, before any blending: two products, two shared units. Maximise 5x + 4y subject to 6x + 4y <= 24 and 1x + 2y <= 6, with x and y at least 0.
+| status | x | y | objective | shadow price, row 1 | shadow price, row 2 | iterations |
+| --- | --- | --- | --- | --- | --- | --- |
+| optimal | 3.0000 | 1.5000 | 21.0000 | 0.7500 | 0.5000 | 2 |
+
+A shadow price is the change in the optimum per unit of a row's right-hand side. Re-solved with each right-hand side raised by one unit, by the same kernel:
+| row raised by one | objective | change from the optimum |
+| --- | --- | --- |
+| row 1, rhs 25 | 21.7500 | 0.7500 |
+| row 2, rhs 7 | 21.5000 | 0.5000 |
+
+The same problem at the vertices the two rows and the two bounds make, each point solved by the kernel with both coordinates fixed by bounds:
+| point | objective at the point | feasible (the kernel's status) |
+| --- | --- | --- |
+| x 0.0000, y 0.0000 | 0.0000 | optimal |
+| x 4.0000, y 0.0000 | 20.0000 | optimal |
+| x 0.0000, y 3.0000 | 12.0000 | optimal |
+| x 3.0000, y 1.5000 | 21.0000 | optimal |
+
+Infeasible and unbounded are answers:
+| problem | status |
+| --- | --- |
+| minimise x + y with x + y <= 2 and x + y >= 3 | infeasible |
+| maximise x with x - y <= 1 (y unbounded above) | unbounded |
+| minimise x with a lower bound of 5 above an upper bound of 3 | infeasible |
+| maximise 3x + 2y with x + y <= 2 and y >= 2 | optimal, objective 4.0000 |
+
+The method is two-phase simplex. Phase one finds any point that meets every row (it drives artificial variables to zero); if it cannot, the rows contradict and the answer is infeasible. Phase two moves from vertex to vertex to the optimum. Bland's rule picks the entering variable, which cannot cycle: blending problems are degenerate constantly, because specifications bind exactly at the optimum.
+A malformed problem is not an answer: the kernel throws ("Row 0 has 1 coefficients, expected 2").
+iterations counts the pivots the kernel made, phase one and phase two together: the textbook case took 2.
+
+# SECTION 20: BLENDING RULES AS ROWS (owned by Expert m02)
+
+optimiseBlend turns every specification into a linear row. A limit on a ratio, sum(w_i v_i) / sum(d_i v_i) <= L, is the row sum((w_i - L d_i) v_i) <= 0, linear in the volumes v_i. The volume row sum(v_i) = target makes the batch. Each specification declares how its property blends:
+
+| basis | w_i (numerator weight) | d_i (denominator weight) |
+| --- | --- | --- |
+| volume | the property | 1 |
+| mass | SG x the property | SG |
+| index, on volume (RVP) | the property's index | 1 |
+| index, on mass (viscosity) | SG x the property's index | SG |
+
+RVP blends through an index: RVPI = RVP^n, blended on volume and inverted. RVP_INDEX_EXPONENT is 1.25: an exported constant that is the default exponent of rvpIndex and rvpFromIndex. Each of those two functions takes an exponent argument that replaces the default, and the gasoline templates call them with the default. A specification counts as binding when the achieved value is within BINDING_TOLERANCE (1e-7) times the limit (or 1, if larger) of it.
+
+| RVP psi | rvpIndex | rvpFromIndex of that index |
+| --- | --- | --- |
+| 3.2 | 4.2799 | 3.2000 |
+| 6.2 | 9.7834 | 6.2000 |
+| 9 | 15.5885 | 9.0000 |
+| 12.9 | 24.4477 | 12.9000 |
+| 52.8 | 142.3287 | 52.8000 |
+
+SPEC_TEMPLATES, the optimizer's starting shapes. They are starting points. They are not a compliance source: the regulation in force governs, and every limit is editable.
+| template | specification | basis | min | max | unit |
+| --- | --- | --- | --- | --- | --- |
+| Gasoline, 50 ppm sulfur | RON | volume | 91 | no maximum | no unit |
+| Gasoline, 50 ppm sulfur | MON | volume | 81 | no maximum | no unit |
+| Gasoline, 50 ppm sulfur | Sulfur | mass | no minimum | 50 | ppm |
+| Gasoline, 50 ppm sulfur | RVP | index, on volume | no minimum | 9 | psi |
+| Gasoline, 50 ppm sulfur | Density | volume | 0.72 | 0.775 | kg/l |
+| Gasoline, 10 ppm sulfur | RON | volume | 95 | no maximum | no unit |
+| Gasoline, 10 ppm sulfur | MON | volume | 85 | no maximum | no unit |
+| Gasoline, 10 ppm sulfur | Sulfur | mass | no minimum | 10 | ppm |
+| Gasoline, 10 ppm sulfur | RVP | index, on volume | no minimum | 8.5 | psi |
+| Gasoline, 10 ppm sulfur | Density | volume | 0.72 | 0.775 | kg/l |
+| Automotive gasoil, 50 ppm sulfur | Cetane number | volume | 48 | no maximum | no unit |
+| Automotive gasoil, 50 ppm sulfur | Sulfur | mass | no minimum | 50 | ppm |
+| Automotive gasoil, 50 ppm sulfur | Density | volume | 0.82 | 0.845 | kg/l |
+| Automotive gasoil, 50 ppm sulfur | Viscosity at 40 C | index, on mass | 2 | 4.5 | cSt |
+| Automotive gasoil, 50 ppm sulfur | Flash point | volume | 55 | no maximum | C |
+| Fuel oil, 380 cSt | Viscosity at 50 C | index, on mass | no minimum | 380 | cSt |
+| Fuel oil, 380 cSt | Sulfur | mass | no minimum | 35000 | ppm |
+| Fuel oil, 380 cSt | Density | volume | no minimum | 0.991 | kg/l |
+| Fuel oil, 380 cSt | Flash point | volume | 60 | no maximum | C |
+
+propertyOfBlend recomputes a property from a finished recipe by the specification's own rule, separately from the LP rows, so agreement is a check. The Apapa PMS recipe (SECTION 21), each achieved property by both routes:
+| specification | achieved (optimiseBlend) | propertyOfBlend on the recipe | difference |
+| --- | --- | --- | --- |
+| RON | 94.5010 | 94.5010 | 0.0000 |
+| MON | 84.4928 | 84.4928 | 0.0000 |
+| Sulfur | 50.0000 | 50.0000 | 0.0000 |
+| RVP | 9.0000 | 9.0000 | 0.0000 |
+| Density | 0.7547 | 0.7547 | 0.0000 |
+
+# SECTION 21: THE APAPA PMS RECIPE: BINDING SPECIFICATIONS (owned by Expert m03)
+
+APAPA: an invented Lagos import and blending terminal makes an 8000 bbl PMS cargo to the 50 ppm gasoline template from four bought-in components. Every figure is illustrative.
+
+| component | cost $/bbl | SG | RON | MON | sulfur ppm | RVP psi | available bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Reformate | 93.8 | 0.805 | 98.6 | 87.9 | 4 | 3.2 | 3500 |
+| FCC gasoline | 84.9 | 0.748 | 92.3 | 80.6 | 110 | 6.2 | 4000 |
+| Isomerate | 88.2 | 0.662 | 87.6 | 85.4 | 1 | 12.9 | 1500 |
+| Butane | 54.1 | 0.582 | 93.8 | 89.1 | 1 | 52.8 | 400 |
+
+| component | volume bbl | volume fraction | cost $ |
+| --- | --- | --- | --- |
+| Reformate | 3284.6899 | 0.4106 | 308103.9109 |
+| FCC gasoline | 3531.1221 | 0.4414 | 299792.2634 |
+| Isomerate | 784.1881 | 0.0980 | 69165.3861 |
+| Butane | 400.0000 | 0.0500 | 21640.0000 |
+| total | 8000.0000 | 1.0000 | 698701.5605 |
+Unit cost 87.3377 $/bbl. Status optimal.
+Each component's cost $ is its volume bbl times its cost $/bbl, and the total is their sum.
+Each component also carries its own density in kg/l, which is the figure the Density specification reads; at Apapa each is typed equal to its SG (Reformate 0.805, FCC gasoline 0.748, Isomerate 0.662, Butane 0.582).
+
+| specification | min | max | achieved | giveaway | binding | basis |
+| --- | --- | --- | --- | --- | --- | --- |
+| RON | 91 | no maximum | 94.5010 | 3.5010 | false | volume |
+| MON | 81 | no maximum | 84.4928 | 3.4928 | false | volume |
+| Sulfur | no minimum | 50 | 50.0000 | 0.0000 | true | mass |
+| RVP | no minimum | 9 | 9.0000 | 0.0000 | true | index |
+| Density | 0.72 | 0.775 | 0.7547 | 0.0203 | false | volume |
+Binding: Sulfur and RVP. A binding specification is met exactly; the optimum is pressed against it, and relaxing it lowers the cost (SECTION 23 prices by how much).
+Components at their availability: Butane.
+
+# SECTION 22: GIVEAWAY AND ITS PRICE (owned by Expert m03)
+
+Giveaway is how far inside its limit the blend sits: the limit minus the achieved value for a maximum, the achieved value minus the limit for a minimum, the smaller of the two for a range. Positive giveaway is quality handed over for nothing. It is only worth money where a unit of the property has a price, so valueGiveaway takes a value per unit from the user and values the gap over the volume blended; where no unit value is given the gap is reported without a price.
+
+| specification | giveaway | unit value $ per unit per bbl (typed) | value $ over the batch |
+| --- | --- | --- | --- |
+| RON | 3.5010 | 0.6 | 16804.7174 |
+| MON | 3.4928 | 0.4 | 11176.9355 |
+| Density | 0.0203 | not given | not priced |
+Specifications with no giveaway (binding) are not listed: Sulfur, RVP.
+
+# SECTION 23: SHADOW PRICES AS THE VALUE OF RELIEF (owned by Expert m04)
+
+The LP prices each ROW: the change in cost per unit of the row's right-hand side (rowPrice). For the volume row that is already the cost of one more barrel of product. For a specification row it is not a price per ppm or per psi: the row is sum((w_i - L d_i) v_i) <= 0, so moving the limit L by one unit moves the row by sum(d_i v_i), in index units where the property blends through an index. optimiseBlend therefore reports price = rowPrice x sum(d_i v_i) x dIndex/dL, turned into money SAVED by one unit of relief (raising a maximum, lowering a minimum), positive when relief saves money, per unit of the property. rowPrice is kept beside it.
+
+| row | price (value of one unit of relief) | per | rowPrice |
+| --- | --- | --- | --- |
+| Total volume | 87.5108 | bbl | 87.5108 |
+| RON minimum | 0.0000 | unit | 0.0000 |
+| MON minimum | 0.0000 | unit | 0.0000 |
+| Sulfur maximum | 551.8026 | ppm | -0.0914 |
+| RVP maximum | 4448.9659 | psi | -0.2569 |
+| Density maximum | 0.0000 | kg/l | 0.0000 |
+| Density minimum | 0.0000 | kg/l | 0.0000 |
+
+The Total volume row is the batch's equality row, sum(v_i) = target, and takes no relief sign: its price is its rowPrice as the kernel returns it, the change in cost for one more barrel of target volume.
+The rowPrice column prints to four decimals. The products below use the unrounded rowPrice, so the printed rowPrice times the printed scale does not reproduce them by hand.
+The sulfur row's scale: sum(SG x volume) over the recipe is 6037.3872. rowPrice x that sum is -551.8026; the reported value of relief is 551.8026 $ per ppm (relief on a maximum is the negative of dCost/dL).
+The RVP row is in index units. rowPrice x 8000.0000 bbl is -2054.8893 $ per index point. The reported value of relief is 4448.9659 $ per psi; divided by the negative of the per-index figure, that is 2.1651 index points per psi, the slope of the index at the 9 psi limit. The same slope from the exported exponent, RVP_INDEX_EXPONENT x 9^(RVP_INDEX_EXPONENT - 1), is 2.1651.
+
+CHECKING A PRICE BY RE-SOLVING. The engine re-solved with the limit moved one whole unit each way. A shadow price is the value of relief AT THE MARGIN, a derivative at the optimum; the saving from one whole unit of relief is a different number, and the table prints both.
+| re-solve | total cost $ | saving against the optimum $ | shadow price $ per unit |
+| --- | --- | --- | --- |
+| Sulfur limit 51 | 698149.8809 | 551.6796 | 551.8026 |
+| Sulfur limit 49 | 699253.4861 | -551.9256 | 551.8026 |
+| RVP limit 10 | 695050.1663 | 3651.3942 | 4448.9659 |
+| RVP limit 8 | 703453.0642 | -4751.5037 | 4448.9659 |
+
+What holds at each re-solve, beside the optimum:
+| re-solve | binding | components at their availability |
+| --- | --- | --- |
+| the optimum (Sulfur 50, RVP 9) | Sulfur, RVP | Butane |
+| Sulfur limit 51 | Sulfur, RVP | Butane |
+| Sulfur limit 49 | Sulfur, RVP | Butane |
+| RVP limit 10 | Sulfur | Isomerate, Butane |
+| RVP limit 8 | Sulfur, RVP | Reformate |
+The sulfur re-solves keep the same specifications binding and the same component at its availability, so the optimum stays at the same vertex; the gap between the whole-unit saving and the shadow price comes from the limit itself, which multiplies every volume in the sulfur row (w_i - L d_i), so the cost is not a straight line in L even at one vertex. The RVP re-solves change what holds, so the optimum moves to a different vertex, and the RVP row is in index units, which are not a straight line in psi.
+
+THE MARGINAL BARREL. The volume row's price is the cost of one more barrel of product at the margin. It is not the unit cost (the average): the component at its availability cannot supply the next barrel, so the next barrel is made from the others.
+| figure | $/bbl |
+| --- | --- |
+| volume row price (the marginal barrel) | 87.5108 |
+| unit cost (the average barrel) | 87.3377 |
+| marginal minus average | 0.1731 |
+| re-solved at 8001 bbl, cost minus the optimum | 87.5108 |
+
+A non-binding specification has a price of zero: relieving a limit the blend does not touch saves nothing.
+Non-binding at Apapa: RON, MON, Density.
+
+# SECTION 24: AN INDEX ON MASS: THE APAPA AGO POOL (owned by Expert m02 and m04)
+
+The same terminal makes a 6000 bbl AGO cargo to the 50 ppm diesel template. Viscosity at 40 C blends through the Refutas index on MASS (indexOnMass), the same index as the assay studio; cetane and flash point are treated linearly on volume, which the template notes is a screening approximation.
+
+| component | cost $/bbl | SG | cetane | sulfur ppm | viscosity cSt | flash point C | available bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Straight-run gasoil | 101.5 | 0.846 | 52 | 12 | 3.8 | 74 | 5000 |
+| Kerosene | 107.2 | 0.795 | 44 | 6 | 1.3 | 46 | 1800 |
+| Hydrotreated LCO | 86.4 | 0.921 | 29 | 35 | 2.7 | 66 | 1500 |
+| Light vacuum gasoil | 90.3 | 0.866 | 54 | 85 | 6.9 | 112 | 1200 |
+
+| component | volume bbl | cost $ |
+| --- | --- | --- |
+| Straight-run gasoil | 2670.0508 | 271010.1523 |
+| Kerosene | 1505.9222 | 161434.8562 |
+| Hydrotreated LCO | 624.0271 | 53915.9391 |
+| Light vacuum gasoil | 1200.0000 | 108360.0000 |
+| total | 6000.0000 | 594720.9475 |
+Unit cost 99.1202 $/bbl.
+
+| specification | achieved | giveaway | binding | value of one unit of relief $ | per |
+| --- | --- | --- | --- | --- | --- |
+| Cetane number | 48.0000 | 0.0000 | true | 1159.3909 | unit |
+| Sulfur | 28.1533 | 21.8467 | false | 0.0000 | ppm |
+| Density | 0.8450 | 0.0000 | true | 852453.4687 | kg/l |
+| Viscosity at 40 C | 3.0036 | 1.0036 | false | 0.0000 | cSt |
+| Flash point | 73.7403 | 18.7403 | false | 0.0000 | C |
+Binding: Cetane number and Density. A price per unit of the property is per whole unit of it, so the density relief is dollars per kg/l.
+
+The recipe's viscosity with the index on mass (the engine): 3.0036 cSt. With the same index on volume instead: 2.9518 cSt.
+
+The rows behind the AGO prices. Cetane and density blend on volume, so each row's scale sum(d_i v_i) is the recipe's 6000.0000 bbl; the mass rows (sulfur, viscosity) scale by sum(SG x volume), 5070.0000.
+| row | rowPrice | scale | rowPrice x scale | price (value of one unit of relief) | per |
+| --- | --- | --- | --- | --- | --- |
+| Cetane number minimum | 0.1932 | 6000.0000 | 1159.3909 | 1159.3909 | unit |
+| Density maximum | -142.0756 | 6000.0000 | -852453.4687 | 852453.4687 | kg/l |
+A maximum's relief is the negative of dCost/dL and a minimum's is dCost/dL, which is why the density row prints rowPrice x scale with the opposite sign to its price.
+
+The AGO recipe re-solved with the viscosity index blended on volume instead of mass:
+| component | volume bbl, index on mass (the engine) | volume bbl, index on volume |
+| --- | --- | --- |
+| Straight-run gasoil | 2670.0508 | 2670.0508 |
+| Kerosene | 1505.9222 | 1505.9222 |
+| Hydrotreated LCO | 624.0271 | 624.0271 |
+| Light vacuum gasoil | 1200.0000 | 1200.0000 |
+| total cost $ | 594720.9475 | 594720.9475 |
+Binding with the index on volume: Cetane number and Density.
+
+# SECTION 25: INFEASIBLE, REFUSED AND SKIPPED (owned by Expert m05)
+
+An infeasible blend is a real answer, and the useful one: the specifications cannot be met by the components available.
+
+| asked | status | what the engine returned |
+| --- | --- | --- |
+| Apapa PMS pool to the 10 ppm gasoline template | infeasible | REFUSED: No recipe from these components can meet every specification. Relax a limit, or bring in a component that can. |
+| Apapa PMS pool with a RON minimum of 99 | infeasible | REFUSED: No recipe from these components can meet every specification. Relax a limit, or bring in a component that can. |
+An infeasible result carries the status infeasible, this sentence as its error, and no recipe. The digest prints every sentence the engine returns in place of a recipe after REFUSED:, so these two are counted among the refusals at the end of SECTION 27.
+
+Which limit of the 10 ppm template makes the Apapa pool infeasible: each limit in turn moved back to its 50 ppm template value, the rest kept at 10 ppm:
+| limit moved back | 10 ppm value | 50 ppm value | status |
+| --- | --- | --- | --- |
+| RON minimum | 95 | 91 | infeasible |
+| MON minimum | 85 | 81 | infeasible |
+| Sulfur maximum | 10 | 50 | infeasible |
+| RVP maximum | 8.5 | 9 | infeasible |
+No single limit moved back rescues the pool. The other way round: the 50 ppm template with ONE limit tightened to its 10 ppm value, the rest kept at 50 ppm:
+| limit tightened | 50 ppm value | 10 ppm value | status |
+| --- | --- | --- | --- |
+| RON minimum | 91 | 95 | infeasible |
+| MON minimum | 81 | 85 | optimal |
+| Sulfur maximum | 50 | 10 | infeasible |
+| RVP maximum | 9 | 8.5 | optimal |
+
+AVAILABILITY. A maximum left blank is no limit. A typed number is exactly that number, and a typed 0 is none:
+| butane maximum | status | butane volume bbl | total cost $ | binding |
+| --- | --- | --- | --- | --- |
+| 400 (as typed) | optimal | 400.0000 | 698701.5605 | Sulfur, RVP |
+| 0 (tank empty) | optimal | 0.0000 | 710560.2149 | Sulfur |
+| left blank (no limit) | optimal | 438.1863 | 698569.3341 | Sulfur, RVP |
+
+What optimiseBlend refuses, each in its own words:
+| asked | what the engine returned |
+| --- | --- |
+| no components | REFUSED: No components to blend. |
+| a target volume of 0 | REFUSED: The target volume must be greater than zero. |
+| Isomerate with its cost left blank | REFUSED: No cost for Isomerate. A least-cost recipe needs a price on every component; remove the component or give it one. |
+| Butane with a maximum of -50 | REFUSED: Butane maximum must be a number of zero or more. Leave a maximum blank for no limit. |
+| Reformate with a minimum of 3000 and a maximum of 2000 | REFUSED: Reformate has a minimum above its maximum. |
+Each of these carries the status invalid and no recipe: the engine refuses it before the problem reaches the kernel.
+
+A SPECIFICATION NOT APPLIED. A specification cannot be imposed on components that do not carry the property, and a mass-basis specification needs every density. Neither is dropped silently: the recipe comes back with the specification listed as skipped, with the reason.
+| asked | status | total cost $ | skipped | reason (the engine) |
+| --- | --- | --- | --- | --- |
+| Isomerate with no sulfur figure | optimal | 695245.0644 | Sulfur | Not every component carries this property, so the specification was not applied. |
+| FCC gasoline with no SG and no API | optimal | 695245.0644 | Sulfur | This property blends on mass and not every component has a density (sg or API), so the specification was not applied. |
+
+What each recipe reports as achieved for the skipped specification, and for Density, which blends on volume and needs no SG. Density reads each component's own density figure (SECTION 21), and the probe removes only FCC gasoline's SG and API, so its density of 0.748 kg/l stays in the blend:
+| asked | skipped specification achieved | Density applied | Density achieved kg/l |
+| --- | --- | --- | --- |
+| Isomerate with no sulfur figure | not formed (the engine returns no value) | true | 0.7536 |
+| FCC gasoline with no SG and no API | not formed (the engine returns no value) | true | 0.7536 |
+
+A component floor. A minimum forces barrels into the recipe; every specification row then sits off zero after the kernel shifts the floor to the origin.
+| asked | status | Isomerate bbl | total cost $ | binding | sulfur relief $ per ppm |
+| --- | --- | --- | --- | --- | --- |
+| Isomerate at least 1200 bbl | optimal | 1200.0000 | 698909.5490 | Sulfur, RVP | 537.5403 |
+At that optimum butane is 339.9340 bbl against its availability of 400: inside its availability.
+
+# SECTION 26: THE OPTIMIZER'S DEFAULT POOL (owned by Expert m06)
+
+What the Product Blending Optimizer shows with nothing typed: its default gasoline pool, 1000 bbl, the 50 ppm template.
+
+Its four components are its own, with the same names as Apapa's and different figures:
+| component | cost $/bbl | SG | density kg/l | RON | MON | sulfur ppm | RVP psi | available bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Reformate | 92 | 0.8 | 0.8 | 100 | 89 | 2 | 3 | 600 |
+| FCC gasoline | 84 | 0.75 | 0.75 | 92 | 80 | 120 | 6 | 600 |
+| Isomerate | 89 | 0.66 | 0.66 | 87 | 85 | 1 | 13 | 300 |
+| Butane | 55 | 0.58 | 0.58 | 94 | 89 | 1 | 52 | 80 |
+
+| component | volume bbl |
+| --- | --- |
+| Reformate | 516.0028 |
+| FCC gasoline | 414.8506 |
+| Isomerate | 0.0000 |
+| Butane | 69.1466 |
+Total cost 86122.7710 $, unit cost 86.1228 $/bbl, binding Sulfur and RVP.
+Components at their availability: nothing. At zero: Isomerate. Marginal barrel minus unit cost: 0.0000 $/bbl. With no availability limit pressing, every row but the volume row has a zero right-hand side, so the cost scales with the batch and the marginal barrel costs what the average one does.
+| row | price (value of one unit of relief) | per | rowPrice |
+| --- | --- | --- | --- |
+| Total volume | 86.1228 | bbl | 86.1228 |
+| RON minimum | 0.0000 | unit | 0.0000 |
+| MON minimum | 0.0000 | unit | 0.0000 |
+| Sulfur maximum | 55.0114 | ppm | -0.0720 |
+| RVP maximum | 578.9052 | psi | -0.2674 |
+| Density maximum | 0.0000 | kg/l | 0.0000 |
+| Density minimum | 0.0000 | kg/l | 0.0000 |
+
+# SECTION 27: HELD LIMITS, CONSTANTS, AND WHAT THE ORACLES CHECK (owned by Expert m06)
+
+THREE HELD ITEMS (FINDINGS-crude.md), each taught as a stated limit and never graded:
+| item | what the engine does | the limit |
+| --- | --- | --- |
+| L4 | the LP kernel uses absolute tolerances on its pivots and on phase one | right for the barrel-scale problems the two apps pose; a problem scaled in millions is outside what it is shown to handle |
+| C12 | the Refutas index blends on mass fraction ("Refutas index on mass fraction") | ASTM D7152 blends on volume; the two disagree (the Obigbo export blend reads 7.4743 cSt on mass and 7.3107 cSt on volume), and the basis is a course and owner decision |
+| C13 | Watson K is taken at the blend's T50 | a screening basis; the strict basis is the mean average boiling point |
+
+CONSTANTS THE ENGINES STATE, read from the modules:
+| constant | value |
+| --- | --- |
+| CII_BANDS.STABLE | 0.7 |
+| CII_BANDS.UNSTABLE | 0.9 |
+| RVP_INDEX_EXPONENT, the default exponent of rvpIndex and rvpFromIndex | 1.25 |
+| BINDING_TOLERANCE | 1e-7 |
+| viscosityBlendIndex(1), the Refutas index of 1 cSt | 3.2518 |
+| sgFromApi(10), water | 1.0000 |
+
+WHAT THE ORACLES CHECK. Each engine is held to an independent Python oracle in tools/validation/downstream, written from the rules and not from the JavaScript, and its golden cases are counted here from the vendored golden files:
+| oracle | how it computes | golden cases |
+| --- | --- | --- |
+| oracle_crudeassay.py | loads a cargo in barrels and pounds; Refutas inverted by bisection; yields by segment overlap; T50 by bisection; netback as a 100,000 bbl account | 6 blends, 4 curve cases, 1 blended default curve |
+| oracle_productblending.py | rows built from physical mass balances, solved by exact rational vertex enumeration; properties from physical inventories; relief by exact re-solve with the limit moved by a step of 1/10^7 of a unit each way, an exact one-sided derivative on each side | 9 pools |
+| oracle_lp.py | exact rational vertex enumeration with no simplex at all; shadow prices as exact one-sided derivatives by re-solve | 181 problems (124 optimal, 44 infeasible, 13 unbounded) |
+
+Refusals printed in this digest, each asserted against the engine before it was printed: 17.

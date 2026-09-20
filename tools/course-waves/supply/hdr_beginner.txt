@@ -1,0 +1,29 @@
+-- ============================================================================
+-- supply ASSOCIATE DEEP SEED: Terminals, Depots & Fuel Supply, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE TANK AND THE DAY. Everything starts from a dip read
+-- off a tape; a strapping table turns a height into a volume, linear between
+-- two entries and silent outside its own range; free water is converted
+-- through the same table and taken off; a VCF turns a gross observed volume
+-- into a standard one, and its coefficients are an input the engine never
+-- ships; and the day closes from yesterday's closing stock, with the gap
+-- judged against a tolerance on what moved.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A missing value stays missing. No dip, no
+-- table entry, no coefficient and no opening stock is ever read as a zero,
+-- and each is refused in the engine's own words.
+--
+-- THE TRAP THE TIER IS BUILT ON. A reconciliation whose opening stock is taken
+-- from today's own dip balances every day, so it measures nothing. The gap is
+-- the point of the day.
+--
+-- HELD, taught as a limit and never graded: the VCF coefficient tables are a
+-- published table the engine does not ship (FINDINGS-supply H2); the course
+-- shows the form on SYNTHETIC coefficients and corrects its stocks with a VCF
+-- typed off the terminal's own tables. The capstone grades six volumes in m3,
+-- each to two decimals, at a tolerance of 0.01 m3.
+-- ============================================================================

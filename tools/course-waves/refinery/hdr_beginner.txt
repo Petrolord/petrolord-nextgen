@@ -1,0 +1,30 @@
+-- ============================================================================
+-- refinery ASSOCIATE DEEP SEED: Refinery Feasibility & Planning, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE MODULAR SCREEN. A blank money or size box is
+-- refused by name and a utilisation outside 0 to 1 is refused; capital is
+-- scaled from a vendor quotation on the stick-built and modular laws, which
+-- agree at the reference size; the product slate is valued per barrel of
+-- crude with the loss carried as a yield of no value; annual throughput is
+-- capacity times on-stream days times utilisation, and the gross margin per
+-- barrel is the slate value less crude and variable operating cost; supply
+-- scenarios move the utilisation and the crude premium; the licensing
+-- tracker names the next stage and flags one ticked out of order.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The economy of scale is an exponent, and the
+-- exponent is an input: the screen shows both laws side by side.
+--
+-- THE TRAP THE TIER IS BUILT ON. The scenario changes two things at once, the
+-- run rate and the crude price, and a reader who applies one of them misses
+-- the margin.
+--
+-- HELD, taught as a limit and never graded: the exponents 0.6 and 0.9 are
+-- defaults a vendor's figures replace (H1). The capstone grades six numbers,
+-- each an engine return: two capital costs and a first-year revenue to the
+-- whole dollar, an annual throughput to the whole barrel, and a slate value
+-- and a gross margin to the cent.
+-- ============================================================================

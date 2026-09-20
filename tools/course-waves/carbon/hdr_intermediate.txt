@@ -1,0 +1,27 @@
+-- ============================================================================
+-- carbon PROFESSIONAL DEEP SEED: Carbon & Energy Efficiency, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE HEATER, THE STEAM AND THE PINCH. Combustion from
+-- the fuel analysis by atom counts, with inerts carried and air's argon
+-- carried as atmospheric nitrogen; excess air from the dry stack oxygen; the
+-- stack loss efficiency on a declared basis, LHV or HHV, never compared across
+-- them; the fuel a tuning saves as the ratio of two efficiencies; a failed
+-- trap as choked flow with its isentropic exponent; condensate return and its
+-- floor; minimum utilities by the problem table, the pinch and the threshold.
+--
+-- THE ENGINE FACT THIS TIER OWNS. The basis is declared and carried. A safe
+-- oxygen floor, a radiation loss, a discharge coefficient, an exponent and a
+-- boiler efficiency are asked for and never assumed.
+--
+-- THE TRAP THE TIER IS BUILT ON. Subtracting two efficiency percentages
+-- divides the gap by a hundred instead of by the target efficiency, and
+-- understates what tuning is worth.
+--
+-- The capstone grades two percents at 0.0001, a fuel saving to the whole GJ
+-- at 1 GJ, a steam loss in tonnes a year at 0.01, and two utilities in kW at
+-- 0.01.
+-- ============================================================================

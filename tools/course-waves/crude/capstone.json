@@ -1,0 +1,112 @@
+{
+ "tiers": {
+  "beginner": {
+   "record": "IDAMA",
+   "prompt": "IDAMA EXPORT TERMINAL. Three field streams are commingled into one cargo. Every figure is invented and illustrative. Idama Light: 408000 bbl, API 42.3, sulfur 0.07 wt%, vanadium 1.1 ppm, nickel 1.9 ppm, TAN 0.18 mg KOH/g, viscosity 2.9 cSt, SARA saturates 58.6, aromatics 29.9, resins 10.7, asphaltenes 0.7 wt%, TBP curve 0 percent at 78 F, 10 percent at 175 F, 30 percent at 330 F, 50 percent at 485 F, 70 percent at 665 F, 90 percent at 960 F, 100 percent at 1290 F. Opuama Medium: 263000 bbl, API 28.7, sulfur 0.41 wt%, vanadium 6.3 ppm, nickel 9.6 ppm, TAN 0.55 mg KOH/g, viscosity 13.8 cSt, SARA saturates 41.3, aromatics 38.4, resins 17.1, asphaltenes 3.4 wt%, TBP curve 0 percent at 92 F, 10 percent at 255 F, 30 percent at 465 F, 50 percent at 628 F, 70 percent at 835 F, 90 percent at 1175 F, 100 percent at 1455 F. Abiteye Heavy: 125000 bbl, API 19.6, sulfur 1.62 wt%, vanadium 71.4 ppm, nickel 33.5 ppm, TAN 1.15 mg KOH/g, viscosity 385 cSt, SARA saturates 30.7, aromatics 36.9, resins 22.6, asphaltenes 9.8 wt%, TBP curve 0 percent at 115 F, 10 percent at 355 F, 30 percent at 585 F, 50 percent at 765 F, 70 percent at 975 F, 90 percent at 1295 F, 100 percent at 1545 F. Give six numbers, each to four decimals. (1) The API gravity of the cargo. (2) Its sulfur content in wt%. (3) Its vanadium content in ppm. (4) Abiteye Heavy's share of the cargo by mass, in percent. (5) The cargo's colloidal instability index. (6) The yield of the Kerosene / Jet cut, 350 F to 500 F, from Opuama Medium alone, in volume percent of that crude.",
+   "fields": [
+    {
+     "key": "idama_blend_api",
+     "source": "IDAMA: crudeAssay.blendCrudes(three crudes by barrels).properties.api",
+     "tol": 0.00005
+    },
+    {
+     "key": "idama_blend_sulfur_wtpct",
+     "source": "IDAMA: crudeAssay.blendCrudes(...).properties.sulfurWtPct (mass basis)",
+     "tol": 0.00005
+    },
+    {
+     "key": "idama_blend_vanadium_ppm",
+     "source": "IDAMA: crudeAssay.blendCrudes(...).properties.vanadiumPpm (mass basis)",
+     "tol": 0.00005
+    },
+    {
+     "key": "idama_abiteye_mass_share_pct",
+     "source": "IDAMA: 100 x crudeAssay.blendCrudes(...).fractions[Abiteye Heavy].massFraction",
+     "tol": 0.00005
+    },
+    {
+     "key": "idama_blend_cii",
+     "source": "IDAMA: crudeAssay.blendCrudes(...).stability.cii (SARA on mass)",
+     "tol": 0.00005
+    },
+    {
+     "key": "idama_opuama_kerosene_yield_pct",
+     "source": "IDAMA: crudeAssay.cutYields({curve: Opuama Medium, cuts: [Kerosene / Jet 350 to 500 F]}).cuts[0].yieldVolPercent",
+     "tol": 0.00005
+    }
+   ]
+  },
+  "intermediate": {
+   "record": "OGBELE",
+   "prompt": "OGBELE MODULAR REFINERY. The refinery is offered a blend of two crudes. Every figure is invented and illustrative. Ogbele Light: 62 percent of the blend by volume, API 39.7, TBP curve 0 percent at 72 F, 10 percent at 182 F, 30 percent at 355 F, 50 percent at 515 F, 70 percent at 705 F, 90 percent at 1010 F, 100 percent at 1330 F. Omoku Medium: 38 percent of the blend by volume, API 26.2, TBP curve 0 percent at 98 F, 10 percent at 285 F, 30 percent at 505 F, 50 percent at 675 F, 70 percent at 885 F, 90 percent at 1225 F, 100 percent at 1490 F. The refinery's cut set and product prices: LPG / Light ends up to 90 F, priced at 46.5 dollars per bbl; Naphtha 90 F to 340 F, priced at 71.2 dollars per bbl; Kerosene / DPK 340 F to 470 F, priced at 94.6 dollars per bbl; Diesel / AGO 470 F to 640 F, priced at 99.3 dollars per bbl; Atmospheric residue 640 F to the end of the curve, priced at 54.8 dollars per bbl. Processing costs 7.35 dollars per bbl of crude, freight to the refinery 2.15 dollars per bbl, and losses are 1.1 percent, taken on the product side. Give six numbers, each to four decimals. (1) The temperature at which the blend's own TBP curve reaches 50 percent, in F. (2) The blend's Kerosene / DPK yield, in volume percent. (3) The blend's Diesel / AGO yield, in volume percent. (4) The gross product value per bbl of blend. (5) The value lost to losses per bbl of blend. (6) The netback per bbl of blend.",
+   "fields": [
+    {
+     "key": "ogbele_blend_t50_f",
+     "source": "OGBELE: crudeAssay.temperatureAtVolumePercent(blendDistillationCurves(...), 50)",
+     "tol": 0.00005
+    },
+    {
+     "key": "ogbele_blend_kerosene_yield_pct",
+     "source": "OGBELE: crudeAssay.cutYields({curve: blended, cuts: OGBELE_CUTS}) kerosene yieldVolPercent",
+     "tol": 0.00005
+    },
+    {
+     "key": "ogbele_blend_diesel_yield_pct",
+     "source": "OGBELE: crudeAssay.cutYields({curve: blended, cuts: OGBELE_CUTS}) diesel yieldVolPercent",
+     "tol": 0.00005
+    },
+    {
+     "key": "ogbele_gross_value_per_bbl",
+     "source": "OGBELE: crudeAssay.netbackValue({...}).grossValue",
+     "tol": 0.00005
+    },
+    {
+     "key": "ogbele_loss_value_per_bbl",
+     "source": "OGBELE: crudeAssay.netbackValue({...}).lossValue",
+     "tol": 0.00005
+    },
+    {
+     "key": "ogbele_netback_per_bbl",
+     "source": "OGBELE: crudeAssay.netbackValue({...}).netback",
+     "tol": 0.00005
+    }
+   ]
+  },
+  "advanced": {
+   "record": "ONNE",
+   "prompt": "ONNE BLENDING TERMINAL. A 10000 bbl PMS cargo is to be blended at least cost. Every figure is invented and illustrative. The components: Reformate: 95.3 dollars per bbl, SG 0.812 (density 0.812 kg/l), RON 99.2, MON 88.4, sulfur 3 ppm by mass, RVP 3.4 psi, up to 4600 bbl available. FCC gasoline: 86.2 dollars per bbl, SG 0.742 (density 0.742 kg/l), RON 91.6, MON 80.1, sulfur 140 ppm by mass, RVP 6.8 psi, up to 5000 bbl available. Light naphtha: 76.9 dollars per bbl, SG 0.668 (density 0.668 kg/l), RON 68.5, MON 66.2, sulfur 25 ppm by mass, RVP 11.8 psi, up to 3000 bbl available. Butane: 52.6 dollars per bbl, SG 0.584 (density 0.584 kg/l), RON 93.5, MON 89.6, sulfur 2 ppm by mass, RVP 51.5 psi, up to 650 bbl available. Alkylate: 91.5 dollars per bbl, SG 0.697 (density 0.697 kg/l), RON 95.8, MON 93.2, sulfur 4 ppm by mass, RVP 4.6 psi, tank typed as 0 bbl available. The buyer's specification: RON at least 91 (blends on volume); MON at least 81 (blends on volume); Sulfur at most 50 ppm (blends on mass); RVP at most 9 psi (blends through the RVP index); Density between 0.72 and 0.775 kg/l (blends on volume). Give six numbers, each to four decimals. (1) The least total cost of the cargo, in dollars. (2) The barrels of FCC gasoline in the least-cost recipe. (3) The barrels of butane in it. (4) The value of relief on the sulfur limit at the least-cost recipe, as a shadow price: the cost saved per ppm the limit is relaxed, at the margin, in dollars per ppm. (5) The same for the RVP limit, in dollars per psi. (6) The same for the RON minimum, in dollars per octane number.",
+   "fields": [
+    {
+     "key": "onne_total_cost_usd",
+     "source": "ONNE: productBlending.optimiseBlend({...}).totalCost",
+     "tol": 0.00005
+    },
+    {
+     "key": "onne_fcc_volume_bbl",
+     "source": "ONNE: productBlending.optimiseBlend({...}).recipe[FCC gasoline].volume",
+     "tol": 0.00005
+    },
+    {
+     "key": "onne_butane_volume_bbl",
+     "source": "ONNE: productBlending.optimiseBlend({...}).recipe[Butane].volume",
+     "tol": 0.00005
+    },
+    {
+     "key": "onne_sulfur_relief_usd_per_ppm",
+     "source": "ONNE: productBlending.optimiseBlend({...}).shadowPrices[Sulfur maximum].price",
+     "tol": 0.00005
+    },
+    {
+     "key": "onne_rvp_relief_usd_per_psi",
+     "source": "ONNE: productBlending.optimiseBlend({...}).shadowPrices[RVP maximum].price",
+     "tol": 0.00005
+    },
+    {
+     "key": "onne_ron_relief_usd_per_octane",
+     "source": "ONNE: productBlending.optimiseBlend({...}).shadowPrices[RON minimum].price",
+     "tol": 0.00005
+    }
+   ]
+  }
+ }
+}

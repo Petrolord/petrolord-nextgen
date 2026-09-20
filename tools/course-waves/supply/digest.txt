@@ -1,0 +1,727 @@
+# supply: Terminals, Depots & Fuel Supply. Teaching digest.
+# PRECISION: volumes print to three decimals of a cubic metre (a litre); VCF to six decimals and its alpha to nine; probabilities and utilisation to six decimals; offered load in erlangs, minutes and queue lengths to four; days of cover and turns to four; money in US dollars to two decimals and dollars per litre to six; local currency per litre to four; percents to four; litres to two; tonnes and barrels to four; kilometres to two; hours to three; trips to six; exchange rates to four. Heights are whole millimetres. Counts are whole numbers.
+# NO CLOCK: neither engine reads a date or a random number, so no figure below depends on when or where the digest was built.
+# ENGINES: engines/downstream/terminalDepot.js and engines/downstream/fuelPricing.js at petrolord-engines 13f0936 (MD3-0, MD3-1 and MD3-2), vendored in NextGen under packages/engines.
+# CASES: AKODO (a coastal import terminal: three tanks, their strapping tables, a morning of dips and one day), IBAFO (an inland depot: its loading rack, tank farm, throughput economics, a truck lane, a fleet and a forecourt), BADAGRY (one petrol cargo landed and priced to the nozzle). All three are invented records.
+# RATES: every rate, margin, levy, freight, exchange rate and tax below is INVENTED for this course and is not a published figure. The engine ships no rate and no volume correction coefficient, and the one coefficient row below is SYNTHETIC.
+# Built by build_digest.sh from supply_dump.mjs and supply_fields.mjs. Never edited by hand.
+
+# SECTION 1: WHAT THE TWO APPS COMPUTE, AND WHAT THE ENGINE SHIPS (owned by Associate m01)
+
+Each module exports its rules as functions and its fixed data as constants. The counts below are measured from the modules themselves.
+
+| module | exported functions | exported constants | names |
+| --- | --- | --- | --- |
+| terminalDepot | 8 | 0 | dipToStandardVolume, rackQueue, reconcileStock, tankFarmCover, throughputEconomics, trendUnaccounted, volumeAtDip, volumeCorrectionFactor |
+| fuelPricing | 9 | 8 | buildPumpPrice, cargoQuantities, fleetSizing, landedCost, marginWaterfall, priceSensitivity, solveCrossing, stationSizing, truckingEconomics, CHARGE_BASIS, IMPORT_TEMPLATE, LITRES_PER_M3, M3_PER_BBL, PRICE_ELEMENT_BASIS, PRODUCT_REFERENCE, PUMP_TEMPLATE, RATE_DISCLAIMER |
+terminalDepot exported functions (8): dipToStandardVolume, rackQueue, reconcileStock, tankFarmCover, throughputEconomics, trendUnaccounted, volumeAtDip, volumeCorrectionFactor
+terminalDepot exported constants (0): none
+fuelPricing exported functions (9): buildPumpPrice, cargoQuantities, fleetSizing, landedCost, marginWaterfall, priceSensitivity, solveCrossing, stationSizing, truckingEconomics
+fuelPricing exported constants (8): CHARGE_BASIS, IMPORT_TEMPLATE, LITRES_PER_M3, M3_PER_BBL, PRICE_ELEMENT_BASIS, PRODUCT_REFERENCE, PUMP_TEMPLATE, RATE_DISCLAIMER
+
+fuelPricing.LITRES_PER_M3: 1000
+fuelPricing.M3_PER_BBL: 0.158987294928
+fuelPricing.CHARGE_BASIS: per_tonne, per_m3, per_litre, per_bbl, per_cargo, percent_of_fob, percent_of_cf, percent_of_cif
+fuelPricing.PRICE_ELEMENT_BASIS: per_litre, percent_of_landed, percent_of_running
+
+fuelPricing.IMPORT_TEMPLATE, the line items of an import build-up. Every rate is absent:
+| order | id | label | basis | stage | rate shipped |
+| --- | --- | --- | --- | --- | --- |
+| 1 | freight | Ocean freight | per_tonne | freight | none |
+| 2 | insurance | Marine insurance | percent_of_cf | insurance | none |
+| 3 | duty | Import duty | percent_of_cif | landed | none |
+| 4 | port | Port and harbour charges | per_tonne | landed | none |
+| 5 | regulator | Regulatory and inspection charges | per_litre | landed | none |
+| 6 | jetty | Jetty throughput and discharge | per_m3 | landed | none |
+| 7 | storage | Storage and handling | per_m3 | landed | none |
+| 8 | finance | Financing and letter of credit | percent_of_cif | landed | none |
+| 9 | demurrage | Demurrage provision | per_cargo | landed | none |
+
+fuelPricing.PUMP_TEMPLATE, the line items from the depot gate to the nozzle. Every rate is absent:
+| order | id | label | basis | recipient | rate shipped |
+| --- | --- | --- | --- | --- | --- |
+| 1 | depot | Depot and terminal margin | per_litre | Terminal | none |
+| 2 | bridging | Bridging or equalisation | per_litre | Chain | none |
+| 3 | transport | Transport to station | per_litre | Transporter | none |
+| 4 | marketer | Marketer margin | per_litre | Marketer | none |
+| 5 | dealer | Dealer margin | per_litre | Dealer | none |
+| 6 | levies | Statutory levies at the pump | per_litre | Government | none |
+| 7 | vat | Value added tax | percent_of_running | Government | none |
+
+fuelPricing.RATE_DISCLAIMER: "Line items only. Every rate is a required input: duties, levies and regulated margins are set by regulation, differ by market and change. Confirm each against the regulation in force."
+
+fuelPricing.PRODUCT_REFERENCE, typical densities the engine labels as a starting point. Nothing in the module reads them unless a caller passes one in, and the certificate of quality is the authority:
+| code | label | typical density kg/m3 | range kg/m3 |
+| --- | --- | --- | --- |
+| PMS | Petrol / gasoline | 745 | 720-775 |
+| AGO | Automotive gas oil / diesel | 840 | 820-860 |
+| DPK | Kerosene / jet | 800 | 775-840 |
+| LPG | Liquefied petroleum gas | 545 | 500-580 |
+| HFO | Heavy fuel oil | 960 | 920-1010 |
+
+fuelPricing.stationSizing sizes its forecourt by calling terminalDepot.rackQueue, so a forecourt and a loading rack are one queue model: on the IBAFO forecourt the station's probability of waiting and rackQueue's on the same arrivals, service minutes and nozzles agree: true.
+That comparison is made on the station's unrounded arrivals and service minutes. stationSizing REPORTS its peak transactions to two decimals and its service minutes to three (SECTION 16), and rackQueue fed those printed roundings answers a probability of waiting of 0.688454 against the station's 0.688546.
+
+# SECTION 2: MISSING STAYS MISSING (owned by Associate m01)
+
+Each row is one call with one measured input left blank, null or absent. The engine refuses the call, reports the figure it cannot form as none, or labels its answer incomplete; a refusal prints the engine's own sentence.
+
+| call | what is missing | the engine answers |
+| --- | --- | --- |
+| volumeAtDip | the strapping table | REFUSED: No strapping table for this tank. |
+| volumeAtDip | the dip (null) | REFUSED: No dip reading. |
+| volumeAtDip | the dip (blank) | REFUSED: No dip reading. |
+| dipToStandardVolume | the VCF | gross 3461.489 m3, standard none; note: No volume correction factor supplied, so only the gross observed volume is reported. |
+| volumeCorrectionFactor | the coefficients | REFUSED: The volume correction factor needs the API MPMS Chapter 11.1 coefficients for your commodity group, which are a published table this package does not ship. Supply K0, K1 and K2, or enter a VCF read from your own tables. |
+| volumeCorrectionFactor | the density | REFUSED: Density at 15 C and observed temperature are both needed. |
+| reconcileStock | the opening stock | REFUSED: No opening stock, so the day cannot be closed. The opening stock is yesterday's closing dip. |
+| reconcileStock | the closing dip | expected closing 4508.100 m3, unaccounted none; note: No closing dip, so the day cannot be closed. |
+| rackQueue | the arrival rate | REFUSED: Arrival rate and load time are both needed. |
+| throughputEconomics | the emission factor | margin 4988.00, emissions none; note: No emission factor supplied, so the carbon side is not computed. Factors are published, versioned data; an invented one would be worse than none. |
+| cargoQuantities | the density | REFUSED: Density is required to convert between mass and volume; it is not assumed. |
+| cargoQuantities | the quantity | REFUSED: Cargo quantity is required. |
+| landedCost | the FOB price | REFUSED: An FOB price and its basis are required. |
+| landedCost | every rate in the template | complete false, 9 rates missing, total 23392000.00 USD; A FLOOR, not a cost: 9 rate(s) not supplied. |
+| buildPumpPrice | the landed cost per litre | REFUSED: A landed cost per litre is required. |
+| truckingEconomics | the distance | REFUSED: Distance, payload and average speed are required and must be positive. |
+| fleetSizing | the trips per truck | REFUSED: Demand, payload and trips per truck per day are required and must be positive. |
+| stationSizing | the nozzle count | REFUSED: Throughput, litres per transaction, dispense rate and nozzle count are required. |
+
+# SECTION 3: THE AKODO STRAPPING TABLES (owned by Associate m02)
+
+Each tank's table lists a height in millimetres and a volume in cubic metres. volumeAtDip is linear between two entries. The vertical tanks' tables are built from the tank geometry; the horizontal tank is a bullet whose volume is not linear in height.
+
+| tank | product | shape | size | entries | step mm | first entry | last entry |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| AK-01 | PMS | vertical | diameter 22 m, strapped to 14750 mm | 60 | 250 | 0 mm = 0.000 m3 | 14750 mm = 5606.957 m3 |
+| AK-02 | AGO | vertical | diameter 16 m, strapped to 12000 mm | 49 | 250 | 0 mm = 0.000 m3 | 12000 mm = 2412.743 m3 |
+| AK-03 | DPK | horizontal | diameter 3 m, length 11.5 m | 31 | 100 | 0 mm = 0.000 m3 | 3000 mm = 81.289 m3 |
+
+The table entries that bracket each morning dip, and the volume the engine interpolates between them:
+| tank | dip mm | entry below | entry above | volumeAtDip m3 |
+| --- | --- | --- | --- | --- |
+| AK-01 | 9318 | 9250 mm = 3516.228 m3 | 9500 mm = 3611.261 m3 | 3542.077 |
+| AK-02 | 5406 | 5250 mm = 1055.575 m3 | 5500 mm = 1105.841 m3 | 1086.941 |
+| AK-03 | 1847 | 1800 mm = 50.925 m3 | 1900 mm = 54.279 m3 | 52.501 |
+
+AK-03 is a curve, and volumeAtDip draws a straight line between two entries. The same bullet strapped every 10 mm (301 entries) against its own table every 100 mm:
+| height mm | volumeAtDip on the 100 mm table m3 | volumeAtDip on the 10 mm table m3 | the 100 mm table less the 10 mm table m3 |
+| --- | --- | --- | --- |
+| 1847 | 52.501 | 52.508 | -0.007 |
+| 41 | 0.341 | 0.220 | 0.120 |
+The last column is computed from the unrounded volumes, so it can differ in the third decimal from the printed volume less the printed volume beside it. Quote the printed difference; do not recompute it from the rounded columns.
+
+AK-01 is a vertical cylinder, which is linear in height, so its 250 mm table and the same tank strapped every 10 mm agree at the dip to the litre: 3542.077 m3 and 3542.077 m3.
+
+# SECTION 4: WHERE A TABLE STOPS (owned by Associate m02)
+
+AK-01's table runs from 0 mm to 14750 mm, and its first entry is the empty tank. The dip swept up it:
+
+| dip mm | the engine answers |
+| --- | --- |
+| 0 | 0.000 m3 |
+| 125 | 47.517 m3 |
+| 250 | 95.033 m3 |
+| 9318 | 3542.077 m3 |
+| 9500 | 3611.261 m3 |
+| 14750 | 5606.957 m3 |
+| 14800 | REFUSED: The dip is above the last strapping entry. The table does not cover this height, and extrapolating one invents capacity the tank does not have. |
+| -5 | REFUSED: A dip cannot be negative. |
+| none | REFUSED: No dip reading. |
+| blank | REFUSED: No dip reading. |
+
+A partial calibration: the same tank with a table that starts at 300 mm, where the volume is 114.040 m3 and not the empty tank, and ends at 800 mm. Dips and water cuts put to it through dipToStandardVolume:
+| dip mm (stated) | water mm (stated) | the engine answers |
+| --- | --- | --- |
+| 180 | 0 | REFUSED: The dip is below the first strapping entry. The table does not cover this height; extend it down to the tank floor. |
+| 300 | 0 | gross 114.040 m3 |
+| 640 | 0 | gross 243.285 m3 |
+| 640 | 150 | REFUSED: The water cut cannot be converted: The dip is below the first strapping entry. The table does not cover this height; extend it down to the tank floor. |
+| 640 | 700 | REFUSED: The water cut is above the product dip. Check both readings. |
+| 640 | -10 | REFUSED: A water cut cannot be negative. |
+
+The other two tanks dipped just above their own last entries:
+| tank | last entry mm | dip mm (stated) | the engine answers |
+| --- | --- | --- | --- |
+| AK-02 | 12000 | 12010 | REFUSED: The dip is above the last strapping entry. The table does not cover this height, and extrapolating one invents capacity the tank does not have. |
+| AK-03 | 3000 | 3010 | REFUSED: The dip is above the last strapping entry. The table does not cover this height, and extrapolating one invents capacity the tank does not have. |
+
+# SECTION 5: FREE WATER AND THE GROSS VOLUME (owned by Associate m03)
+
+Free water sits under the product. dipToStandardVolume converts the water cut through the SAME table and takes that volume off the total: gross observed volume = volume at the dip less volume at the water cut.
+
+AK-02 dipped at 5406 mm, with the water cut swept:
+| water mm | the engine answers |
+| --- | --- |
+| 0 | water 0.000 m3, gross 1086.941 m3 |
+| 95 | water 19.101 m3, gross 1067.840 m3 |
+| 400 | water 80.425 m3, gross 1006.516 m3 |
+| 5406 | water 1086.941 m3, gross 0.000 m3 |
+| 5500 | REFUSED: The water cut is above the product dip. Check both readings. |
+| -3 | REFUSED: A water cut cannot be negative. |
+
+The morning at AKODO, tank by tank:
+| tank | dip mm | water mm | volume at the dip m3 | water m3 | gross observed m3 |
+| --- | --- | --- | --- | --- | --- |
+| AK-01 | 9318 | 212 | 3542.077 | 80.588 | 3461.489 |
+| AK-02 | 5406 | 95 | 1086.941 | 19.101 | 1067.840 |
+| AK-03 | 1847 | 41 | 52.501 | 0.341 | 52.161 |
+total gross observed volume: 4581.490 m3
+The engine computes each gross volume, and the total, from the unrounded volumes, so a printed volume at the dip less the printed water can differ in the third decimal from the printed gross (AK-03). Quote the printed gross; no figure here is meant to be recomputed from the rounded columns.
+
+Subtracting heights first and reading the table once gives the volume at 1806 mm. On the bullet AK-03 that reads 51.126 m3 against the gross 52.161 m3, because the water fills the narrow bottom of a curved tank. On the vertical AK-01 the volume at 9106 mm reads 3461.488 m3 against the gross 3461.489 m3.
+
+# SECTION 6: THE VOLUME CORRECTION FACTOR (owned by Associate m04)
+
+volumeCorrectionFactor computes the ASTM D1250 (API MPMS Chapter 11.1) FORM:
+alpha = K0 / rho^2 + K1 / rho + K2, and VCF = exp( -alpha x dT x (1 + 0.8 x alpha x dT) ), with rho the density at 15 C in kg/m3 and dT the observed temperature less 15 C.
+The coefficients K0, K1 and K2 are a published table per commodity group. The engine ships none and has no default, and this digest quotes none.
+
+volumeCorrectionFactor with no coefficients: REFUSED: The volume correction factor needs the API MPMS Chapter 11.1 coefficients for your commodity group, which are a published table this package does not ship. Supply K0, K1 and K2, or enter a VCF read from your own tables.
+
+SYNTHETIC COEFFICIENTS, invented for this course and not any commodity group's published row: K0 = 520, K1 = 0.3, K2 = 0. They show the form only. No stock in this digest is corrected with them.
+
+The synthetic form at a density of 741.6 kg/m3, the temperature swept:
+| temperature C | alpha | VCF (synthetic) |
+| --- | --- | --- |
+| 10 | 0.001350036 | 1.006736 |
+| 15 | 0.001350036 | 1.000000 |
+| 20 | 0.001350036 | 0.993236 |
+| 25 | 0.001350036 | 0.986447 |
+| 31.5 | 0.001350036 | 0.977583 |
+| 35 | 0.001350036 | 0.972793 |
+| 40 | 0.001350036 | 0.965932 |
+
+The synthetic form at 31.5 C, the density swept:
+| density kg/m3 | alpha | VCF (synthetic) |
+| --- | --- | --- |
+| 700 | 0.001489796 | 0.975246 |
+| 741.6 | 0.001350036 | 0.977583 |
+| 796.8 | 0.001195545 | 0.980162 |
+| 846.3 | 0.001080514 | 0.982080 |
+| 900 | 0.000975309 | 0.983832 |
+
+AKODO corrects its stock with a VCF read off its own tables for each tank's density and temperature, typed in. The typed figures are invented for the course. Standard volume = gross observed volume x VCF:
+| tank | density kg/m3 | temperature C | VCF typed | gross observed m3 | standard m3 |
+| --- | --- | --- | --- | --- | --- |
+| AK-01 | 741.6 | 31.5 | 0.980300 | 3461.489 | 3393.298 |
+| AK-02 | 846.3 | 30 | 0.987600 | 1067.840 | 1054.599 |
+| AK-03 | 796.8 | 29 | 0.988400 | 52.161 | 51.556 |
+total standard volume, the closing stock the day is closed on: 4499.452 m3
+The total is summed from the unrounded standard volumes. The three printed standard volumes, each rounded to the litre, add to 4499.453 m3; the day is closed on the unrounded total, printed above.
+
+# SECTION 7: CLOSING THE AKODO DAY (owned by Associate m05 and m06)
+
+reconcileStock: expected closing = opening + receipts - deliveries - known losses; unaccounted = dipped closing - expected closing; tolerance = a stated percent of throughput, and throughput = receipts + deliveries.
+
+| item | value |
+| --- | --- |
+| opening stock (yesterday's closing dip) m3 | 4953.700 |
+| receipts m3 | 2870.000 |
+| deliveries m3 | 3312.500 |
+| known losses m3 | 3.100 |
+| expected closing m3 | 4508.100 |
+| dipped closing (standard) m3 | 4499.452 |
+| unaccounted m3 | -8.648 |
+| unaccounted percent of throughput | -0.1399 |
+| tolerance m3 (0.2 percent of throughput) | 12.365 |
+| within tolerance | true |
+| direction | loss |
+throughput, receipts + deliveries: 6182.500 m3. The tolerance above is 0.2 percent of it.
+
+With no opening stock: REFUSED: No opening stock, so the day cannot be closed. The opening stock is yesterday's closing dip.
+
+A RECONCILIATION THAT CANNOT FAIL. Take the opening stock as today's closing dip less today's net movement, opening = closing dip - receipts + deliveries + known losses, and hand that to reconcileStock. The expected closing is then the dip itself, whatever the dip reads:
+| closing dip m3 | opening taken from it m3 | expected closing m3 | unaccounted m3 | within tolerance | direction |
+| --- | --- | --- | --- | --- | --- |
+| 4499.452 | 4945.052 | 4499.452 | 0.000 | true | balanced |
+| 4380.250 | 4825.850 | 4380.250 | 0.000 | true | balanced |
+| 4600.000 | 5045.600 | 4600.000 | 0.000 | true | balanced |
+| 4855.500 | 5301.100 | 4855.500 | 0.000 | true | balanced |
+Every row balances, so none of them measured anything.
+
+The same day closed on the GROSS closing stock (4581.490 m3) against an opening stock held at standard: unaccounted 73.390 m3, direction gain, within tolerance false.
+
+The tolerance percent swept on the same day:
+| tolerance percent of throughput | tolerance m3 | within tolerance |
+| --- | --- | --- |
+| 0.05 | 3.091 | false |
+| 0.1 | 6.183 | false |
+| 0.2 | 12.365 | true |
+| 0.3 | 18.547 | true |
+| 0.5 | 30.913 | true |
+A day with no receipts and no deliveries has no throughput and so no tolerance: opening 4953.700 m3 dipped at 4954.200 m3 reads unaccounted 0.500 m3, tolerance 0.000 m3, within tolerance false, direction gain.
+
+# SECTION 8: A RUN IN ONE DIRECTION (owned by Associate m05 and m06)
+
+trendUnaccounted keeps a running total of the daily unaccounted figures and counts the run of days in one direction that ends on the latest day.
+
+| day | unaccounted m3 | throughput m3 | cumulative m3 |
+| --- | --- | --- | --- |
+| day 1 | 4.200 | 6105.000 | 4.200 |
+| day 2 | -3.600 | 5870.000 | 0.600 |
+| day 3 | 1.900 | 6240.000 | 2.500 |
+| day 4 | -2.400 | 6010.000 | 0.100 |
+| day 5 | -5.300 | 6395.000 | -5.200 |
+| day 6 | -4.100 | 5925.000 | -9.300 |
+| day 7 | -6.800 | 6180.000 | -16.100 |
+| day 8 | -3.900 | 6050.000 | -20.000 |
+| day 9 | -7.200 | 6310.000 | -27.200 |
+
+cumulative unaccounted: -27.200 m3; cumulative as a percent of cumulative throughput: -0.0494
+run ending on the latest day: 6 days of loss
+prompt: 6 days of loss in a row. One day is noise; a run in one direction is worth investigating: a drifting meter, a passing valve, or a temperature effect not being corrected.
+
+The first six days alone: run 3 days of loss; prompt: none.
+cumulative throughput over the nine days, the denominator of the mean percent: 55085.000 m3.
+The prompt threshold, read off the engine by trimming the history one day at a time:
+| days kept | run ending on the last kept day | prompt printed |
+| --- | --- | --- |
+| 5 | 2 days of loss | none |
+| 6 | 3 days of loss | none |
+| 7 | 4 days of loss | yes |
+| 8 | 5 days of loss | yes |
+| 9 | 6 days of loss | yes |
+No days at all: cumulative 0.000 m3, run 0, mean percent none.
+
+# SECTION 9: THE IBAFO RACK AS A QUEUE (owned by Professional m01)
+
+rackQueue models the loading rack as an M/M/c queue: trucks arrive at random at a mean rate, each takes a random time on the bay with a stated mean, and there are c bays. Offered load (erlangs) = arrivals per hour / (60 / load minutes); utilisation = offered load / bays; the probability that an arriving truck waits is Erlang C, which the engine builds from the Erlang B recursion; mean wait = Erlang C / (bays x service rate - arrivals).
+
+| item | value |
+| --- | --- |
+| arrivals per hour | 9 |
+| mean load minutes | 24 |
+| bays | 4 |
+| offered load, erlangs | 3.6000 |
+| utilisation | 0.900000 |
+| probability of waiting (Erlang C) | 0.787753 |
+| mean wait, minutes | 47.2652 |
+| mean time on site, minutes | 71.2652 |
+| mean queue length, trucks | 7.0898 |
+| trucks per day at this arrival rate | 216 |
+
+The mean wait of a truck that does queue is the mean wait over the probability of waiting: 47.2652 / 0.787753 = 60.0000 minutes. The engine's averageWaitMinutes averages over every truck, the ones that load at once included.
+Erlang B, the probability that every bay is busy in a rack with NO queue (a truck that finds every bay busy leaves), is not exported by the engine. From the engine's Erlang C by the identity B = C x (1 - utilisation) / (1 - utilisation x C) it is 0.270685 on the IBAFO rack, against the Erlang C of 0.787753.
+Little's law, queue length = arrivals per hour x mean wait in hours: 9 x 47.2652 / 60 = 7.0898, the engine's queue length is 7.0898.
+
+# SECTION 10: WAITING TIME AND THE BAY SWEEP (owned by Professional m01 and m02)
+
+The IBAFO rack at 9 arrivals an hour and 24 minutes a load, the bays swept:
+| bays | utilisation | stable | probability of waiting | mean wait minutes | mean queue trucks |
+| --- | --- | --- | --- | --- | --- |
+| 3 | 1.200000 | false | 1.000000 | none | none |
+| 4 | 0.900000 | true | 0.787753 | 47.2652 | 7.0898 |
+| 5 | 0.720000 | true | 0.410394 | 7.0353 | 1.0553 |
+| 6 | 0.600000 | true | 0.196566 | 1.9657 | 0.2948 |
+| 7 | 0.514286 | true | 0.086243 | 0.6088 | 0.0913 |
+
+Inputs the engine refuses:
+| arrivals per hour (stated) | load minutes (stated) | bays (stated) | the engine answers |
+| --- | --- | --- | --- |
+| 9 | 24 | 0 | REFUSED: The number of bays must be a whole number, one or more. |
+| 9 | 24 | 2.5 | REFUSED: The number of bays must be a whole number, one or more. |
+| 9 | 24 | none | REFUSED: The number of bays must be a whole number, one or more. |
+| none | 24 | 4 | REFUSED: Arrival rate and load time are both needed. |
+| 9 | none | 4 | REFUSED: Arrival rate and load time are both needed. |
+| 9 | 0 | 4 | REFUSED: Arrival rate and load time are both needed. |
+
+The IBAFO rack at 9 arrivals an hour on its 4 bays, the mean load minutes swept:
+| load minutes (stated) | utilisation | probability of waiting | mean wait minutes | Erlang B, derived from the Erlang C |
+| --- | --- | --- | --- | --- |
+| 16 | 0.600000 | 0.287043 | 2.8704 | 0.138706 |
+| 20 | 0.750000 | 0.509434 | 10.1887 | 0.206107 |
+| 22 | 0.825000 | 0.642160 | 20.1822 | 0.238991 |
+| 24 | 0.900000 | 0.787753 | 47.2652 | 0.270685 |
+| 26 | 0.975000 | 0.945114 | 245.7297 | 0.300939 |
+
+# SECTION 11: A RACK THAT CANNOT KEEP UP (owned by Professional m02)
+
+The IBAFO rack with its 4 bays and 24 minute loads, the arrivals swept:
+| arrivals per hour | offered load erlangs | utilisation | the engine answers |
+| --- | --- | --- | --- |
+| 6 | 2.4000 | 0.600000 | probability of waiting 0.287043, mean wait 4.3056 minutes |
+| 7 | 2.8000 | 0.700000 | probability of waiting 0.428654, mean wait 8.5731 minutes |
+| 8 | 3.2000 | 0.800000 | probability of waiting 0.596432, mean wait 17.8930 minutes |
+| 9 | 3.6000 | 0.900000 | probability of waiting 0.787753, mean wait 47.2652 minutes |
+| 9.5 | 3.8000 | 0.950000 | probability of waiting 0.891419, mean wait 106.9703 minutes |
+| 10 | 4.0000 | 1.000000 | stable false, probability of waiting 1.000000, mean wait none; REFUSED: The rack cannot keep up with arrivals. The queue grows without limit, so no average waiting time exists. Add a bay, load faster, or spread the arrivals. |
+
+# SECTION 12: THE IBAFO TANK FARM (owned by Professional m03 and m06)
+
+tankFarmCover: working capacity = capacity less heel; pumpable stock and ullage are counted TANK BY TANK, each tank's pumpable stock being its stock above its own heel and never below zero; days of cover = pumpable stock / daily throughput; turns a year = daily throughput x 365 / working capacity.
+
+| tank | capacity m3 | heel m3 | stock m3 | pumpable m3 | ullage m3 |
+| --- | --- | --- | --- | --- | --- |
+| IB-T1 (PMS) | 7500.000 | 210.000 | 5288.400 | 5078.400 | 2211.600 |
+| IB-T2 (PMS) | 7500.000 | 210.000 | 164.700 | 0.000 | 7335.300 |
+| IB-T3 (AGO) | 5000.000 | 150.000 | 3902.600 | 3752.600 | 1097.400 |
+| IB-T4 (DPK) | 2500.000 | 85.000 | 1377.000 | 1292.000 | 1123.000 |
+
+| the farm | value |
+| --- | --- |
+| capacity m3 | 22500.000 |
+| heel m3 | 655.000 |
+| working capacity m3 | 21845.000 |
+| stock m3 | 10732.700 |
+| pumpable stock m3 | 10123.000 |
+| ullage m3 | 11767.300 |
+| daily throughput (liftings) m3 | 2640.000 |
+| days of cover | 3.8345 |
+| turns a year | 44.1108 |
+
+Ullage is counted the same way: each tank's capacity less its stock, never below zero, summed over the tanks.
+With no daily throughput the engine gives days of cover none and turns a year none: both need the throughput.
+The farm's stock less the farm's heel is 10077.700 m3. That is not pumpable stock: IB-T2 holds 164.700 m3 against a heel of 210.000 m3, and no pump lends one tank's volume to another's heel.
+
+# SECTION 13: THROUGHPUT ECONOMICS AND THE CARBON LEDGER (owned by Professional m04)
+
+throughputEconomics: revenue = throughput x fee; margin = revenue - throughput x variable cost - fixed cost. Money here is in US dollars. The loss weighs loss m3 x density / 1000 tonnes, and emissions = loss tonnes x an emission factor the caller supplies. The engine ships no emission factor.
+The factor used below is SYNTHETIC, 850 kg CO2e a tonne, invented for this course and not a published figure.
+
+IBAFO: throughput 2640.000 m3, fee 7.80 USD/m3, variable cost 2.35 USD/m3, fixed cost 9400.00 USD for the period, loss 4.600 m3, density 745.2 kg/m3.
+| case | revenue USD | margin USD | margin USD/m3 | loss tonnes | emissions kg CO2e | kg CO2e per tonne of throughput | carbon note |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| factor and density supplied | 20592.00 | 4988.00 | 1.89 | 3.4279 | 2913.7320 | 1.481061 | none |
+| no emission factor | 20592.00 | 4988.00 | 1.89 | 3.4279 | none | none | No emission factor supplied, so the carbon side is not computed. Factors are published, versioned data; an invented one would be worse than none. |
+| no density | 20592.00 | 4988.00 | 1.89 | none | none | none | No product density supplied, so the loss has no weight and the carbon side is not computed. |
+
+The money answer needs the throughput and the fee; a blank cost or loss is taken as zero and named:
+| what is blank | the engine answers |
+| --- | --- |
+| the throughput | REFUSED: Throughput and the throughput fee are both needed for the money answer. |
+| the fee | REFUSED: Throughput and the throughput fee are both needed for the money answer. |
+| the fixed cost | margin 14388.00 USD; assumedZero: fixed cost |
+| nothing | margin 4988.00 USD; assumedZero: none |
+
+# SECTION 14: THE IBAFO LANE (owned by Professional m05 and m06)
+
+truckingEconomics: the cycle = round trip / average speed + load + discharge + queue hours; trips a truck a day = working hours / cycle; the truck's capital is spread over the trips a year that cycle allows; cost per litre delivered = cost per trip / the litres delivered after the transit loss. Money here is in naira; every cost is invented for this course.
+
+IBAFO to a station cluster 312.00 km away, a 33000.00 litre payload, 46 km/h average, 1.5 h to load, 1.25 h to discharge, 1.75 h queueing, 12 working hours a day and 300 days a year, a transit loss of 0.3 percent.
+| item | value |
+| --- | --- |
+| complete | true |
+| round trip km | 624.00 |
+| cycle hours | 18.065 |
+| trips a truck a day | 0.664260 |
+| trips a truck a year | 199.2780 |
+| Diesel, naira a trip | 278553.60 |
+| Driver, naira a trip | 58000.00 |
+| Maintenance and tyres, naira a trip | 40560.00 |
+| Tolls and levies, naira a trip | 21000.00 |
+| Overhead, naira a trip | 37500.00 |
+| Truck depreciation, naira a trip | 60217.39 |
+| cost a trip, naira | 495830.99 |
+| litres delivered a trip | 32901.00 |
+| cost per litre delivered, naira | 15.0704 |
+| diesel litres a trip | 224.64 |
+| kg CO2e a trip | none |
+| carbon note | No diesel emission factor supplied, so the carbon figure is absent rather than zero. |
+
+A cost box left BLANK is a missing cost and is named; a cost left OUT of the call takes the default the signature states:
+| the driver cost | complete | missing inputs | cost a trip, naira | cost per litre delivered, naira |
+| --- | --- | --- | --- | --- |
+| typed | true | none | 495830.99 | 15.0704 |
+| blank | false | Driver | 437830.99 | 13.3075 |
+| null | false | Driver | 437830.99 | 13.3075 |
+| left out of the call | true | none | 437830.99 | 13.3075 |
+With no truck capital cost: complete false, missing Truck depreciation, cost per litre delivered 13.2401 naira, which is a floor.
+
+driverCostPerTrip defaults to 0 in the engine's signature, which is why the row with the driver cost left out of the call reads the same cost a trip as the blank row and still reads complete true.
+
+The same lane at three distances:
+| distance km | cycle hours | trips a truck a day | cost a trip, naira | cost per litre delivered, naira |
+| --- | --- | --- | --- | --- |
+| 156.00 | 11.283 | 1.063584 | 313665.50 | 9.5336 |
+| 312.00 | 18.065 | 0.664260 | 495830.99 | 15.0704 |
+| 468.00 | 24.848 | 0.482940 | 677996.49 | 20.6072 |
+
+The cost lines at each distance, naira a trip:
+| distance km | Diesel | Driver | Maintenance and tyres | Tolls and levies | Overhead | Truck depreciation |
+| --- | --- | --- | --- | --- | --- | --- |
+| 156.00 | 139276.80 | 58000.00 | 20280.00 | 21000.00 | 37500.00 | 37608.70 |
+| 312.00 | 278553.60 | 58000.00 | 40560.00 | 21000.00 | 37500.00 | 60217.39 |
+| 468.00 | 417830.40 | 58000.00 | 60840.00 | 21000.00 | 37500.00 | 82826.09 |
+
+# SECTION 15: THE FLEET (owned by Professional m05 and m06)
+
+fleetSizing: trips needed a day = demand / payload; trucks = the ceiling of trips needed / trips a truck a day; the spare capacity the ceiling buys is reported.
+
+| item | value |
+| --- | --- |
+| demand litres a day | 1260000.00 |
+| payload litres | 33000.00 |
+| trips a truck a day (from the lane) | 0.664260 |
+| trips needed a day | 38.181818 |
+| trucks required | 58 |
+| fleet trip capacity a day | 38.527080 |
+| fleet utilisation | 0.991038 |
+| spare trips a day | 0.345262 |
+| spare litres a day | 11393.64 |
+
+The demand swept on the same lane:
+| demand litres a day | trips needed a day | trucks required | fleet utilisation |
+| --- | --- | --- | --- |
+| 330000.00 | 10.000000 | 16 | 0.940897 |
+| 660000.00 | 20.000000 | 31 | 0.971248 |
+| 1260000.00 | 38.181818 | 58 | 0.991038 |
+| 1980000.00 | 60.000000 | 91 | 0.992594 |
+With no demand: REFUSED: Demand, payload and trips per truck per day are required and must be positive.
+
+# SECTION 16: THE STATION (owned by Professional m05 and m06)
+
+stationSizing: transactions a day = throughput / litres a transaction; the peak hour carries a stated share of them; service minutes = litres a transaction / dispense rate + an overhead; the forecourt queue is rackQueue with nozzles for bays. Tankage: usable = capacity less dead stock; reorder level = dead stock + usable x the reorder fraction; ullage at reorder = capacity less the reorder level, which a delivery must fit into.
+
+The IBAFO forecourt: 36000.00 litres a day, peak share 0.12, 32 litres a transaction, 38 litres a minute, 1.5 minutes overhead, 6 nozzles, a 40000.00 litre tank with 2500.00 litres dead stock, reorder at 0.25 of usable, deliveries of 33000.00 litres.
+| item | value |
+| --- | --- |
+| transactions a day | 1125.0 |
+| peak transactions an hour | 135.00 |
+| service minutes a transaction | 2.342 |
+| forecourt utilisation | 0.878289 |
+| forecourt probability of waiting | 0.688546 |
+| forecourt mean wait, minutes | 2.2083 |
+| usable tank litres | 37500.00 |
+| cover days | 1.04 |
+| reorder level litres | 11875.00 |
+| ullage at reorder litres | 28125.00 |
+| payload fits the ullage | false |
+cover days = usable tank litres / litres a day. The engine rounds cover days to two decimals, so it prints to two here and not to the four of the header.
+The forecourt's delivery of 33000.00 litres is the IBAFO lane's payload (SECTION 14), and stationSizing checks the payload loaded. The lane delivers 32901.00 litres a trip after its transit loss; the station's check does not use that figure.
+| ullage warning | A 33000 litre load cannot discharge into 28125 litres of ullage at the reorder level. Order earlier or order a part load. |
+
+The nozzles swept at the same peak:
+| nozzles | utilisation | stable | probability of waiting | mean wait minutes |
+| --- | --- | --- | --- | --- |
+| 4 | 1.317434 | false | 1.000000 | none |
+| 5 | 1.053947 | false | 1.000000 | none |
+| 6 | 0.878289 | true | 0.688546 | 2.2083 |
+| 7 | 0.752820 | true | 0.392371 | 0.5311 |
+| 8 | 0.658717 | true | 0.209905 | 0.1801 |
+
+The reorder fraction swept against the same delivery:
+| reorder at fraction of usable | reorder level litres | ullage at reorder litres | payload fits | warning |
+| --- | --- | --- | --- | --- |
+| 0.1 | 6250.00 | 33750.00 | true | none |
+| 0.15 | 8125.00 | 31875.00 | false | A 33000 litre load cannot discharge into 31875 litres of ullage at the reorder level. Order earlier or order a part load. |
+| 0.2 | 10000.00 | 30000.00 | false | A 33000 litre load cannot discharge into 30000 litres of ullage at the reorder level. Order earlier or order a part load. |
+| 0.25 | 11875.00 | 28125.00 | false | A 33000 litre load cannot discharge into 28125 litres of ullage at the reorder level. Order earlier or order a part load. |
+
+# SECTION 17: ONE CARGO EVERY WAY (owned by Expert m01)
+
+cargoQuantities expresses one cargo in m3, litres, tonnes and barrels. m3 = tonnes x 1000 / density; litres = m3 x 1000; barrels = m3 / 0.158987294928. Density is required and never assumed.
+
+The BADAGRY cargo at 742.8 kg/m3, entered in each unit the trade quotes:
+| quantity (stated) | unit (stated) | m3 | litres | tonnes | barrels |
+| --- | --- | --- | --- | --- | --- |
+| 34000 | tonne | 45772.752 | 45772751.75 | 34000.0000 | 287901.9470 |
+| 45772.7 | m3 | 45772.700 | 45772700.00 | 33999.9616 | 287901.6215 |
+| 45772700 | litre | 45772.700 | 45772700.00 | 33999.9616 | 287901.6215 |
+| 287900 | bbl | 45772.442 | 45772442.21 | 33999.7701 | 287900.0000 |
+| 34000 | kg | REFUSED: Unknown quantity unit "kg". |  |  |  |
+
+The same 34000 tonnes at each typical density in PRODUCT_REFERENCE, to show what a wrong density moves:
+| product | density kg/m3 | m3 | litres |
+| --- | --- | --- | --- |
+| PMS | 745 | 45637.584 | 45637583.89 |
+| AGO | 840 | 40476.190 | 40476190.48 |
+| DPK | 800 | 42500.000 | 42500000.00 |
+| LPG | 545 | 62385.321 | 62385321.10 |
+| HFO | 960 | 35416.667 | 35416666.67 |
+A zero quantity: REFUSED: Cargo quantity is required.
+
+# SECTION 18: THE BADAGRY LANDED COST WALK (owned by Expert m02 and m06)
+
+landedCost walks the stages in order: FOB, then freight (C&F), then insurance (CIF), then the landed charges. Each charge names the base it bites on, and a base is frozen when the walk reaches it. Insurance quoted as a percent of CIF is part of the value it is charged on, so the engine solves it in closed form: CIF = (C&F + any other insurance) / (1 - the sum of the CIF rates).
+
+The BADAGRY cargo: 34000 tonnes of PMS at 742.8 kg/m3, FOB 688.00 USD a tonne, ocean loss 0.45 percent, 1520.4000 naira to the dollar. Every rate below is INVENTED for this course:
+| line | basis | rate (invented) |
+| --- | --- | --- |
+| Ocean freight | per_tonne | 26.5 |
+| Marine insurance | percent_of_cif | 0.16 |
+| Import duty | percent_of_cif | 5.75 |
+| Port and harbour charges | per_tonne | 3.05 |
+| Regulatory and inspection charges | per_litre | 0.0024 |
+| Jetty throughput and discharge | per_m3 | 1.2 |
+| Storage and handling | per_m3 | 2.65 |
+| Financing and letter of credit | percent_of_cif | 1.4 |
+| Demurrage provision | per_cargo | 52500 |
+
+Insurance quoted on CIF, the usual marine quote, and the case the rest of this digest prices:
+| stage | line | basis | amount USD | USD per outturn litre |
+| --- | --- | --- | --- | --- |
+| fob | FOB cargo value | per tonne | 23392000.00 | 0.513357 |
+| freight | Ocean freight | per tonne | 901000.00 | 0.019773 |
+| insurance | Marine insurance | % of CIF | 38931.09 | 0.000854 |
+| landed | Import duty | % of CIF | 1399086.04 | 0.030704 |
+| landed | Port and harbour charges | per tonne | 103700.00 | 0.002276 |
+| landed | Regulatory and inspection charges | per litre | 109854.60 | 0.002411 |
+| landed | Jetty throughput and discharge | per m3 | 54927.30 | 0.001205 |
+| landed | Storage and handling | per m3 | 121297.79 | 0.002662 |
+| landed | Financing and letter of credit | % of CIF | 340647.04 | 0.007476 |
+| landed | Demurrage provision | per cargo | 52500.00 | 0.001152 |
+FOB 23392000.00 USD; C&F 24293000.00 USD; CIF 24331931.09 USD; landed total 26513943.86 USD; complete true; All supplied rates applied.
+
+The same rates with insurance quoted on C&F, as the template ships its basis:
+| item | insurance on CIF | insurance on C&F |
+| --- | --- | --- |
+| insurance USD | 38931.09 | 38868.80 |
+| CIF USD | 24331931.09 | 24331868.80 |
+| import duty USD | 1399086.04 | 1399082.46 |
+| landed total USD | 26513943.86 | 26513877.12 |
+
+What the walk refuses:
+| the charge | the engine answers |
+| --- | --- |
+| freight typed as a percent of CIF | REFUSED: Ocean freight is a percentage of a value that is not formed until after freight. |
+| freight typed as a percent of C&F | REFUSED: Ocean freight is a percentage of a value that is not formed until after freight. |
+| a charge with the stage "customs" | REFUSED: Customs processing has an unknown stage "customs". |
+| insurance on CIF at 100 percent | REFUSED: The insurance rates on CIF add up to 100 percent or more. |
+
+With the duty and the financing rate left blank the build-up is not complete: complete false; missing Import duty, Financing and letter of credit; total 24774210.79 USD. A FLOOR, not a cost: 2 rate(s) not supplied.
+With every rate blank: complete false; 9 missing; total 23392000.00 USD, the FOB alone. A FLOOR, not a cost: 9 rate(s) not supplied.
+The full build-up less the floor with the duty and the financing rate blank: 26513943.86 - 24774210.79 = 1739733.07 USD.
+A rate typed 0 is a rate: with the duty typed 0 the build-up is complete true, total 25114857.82 USD. With the duty left blank it is complete false, missing Import duty, total 25114857.82 USD. A FLOOR, not a cost: 1 rate(s) not supplied.
+
+# SECTION 19: OCEAN LOSS AND THE LITRE SOLD (owned by Expert m03 and m06)
+
+The importer pays for the bill-of-lading quantity and sells the outturn: outturn = bill-of-lading x (1 - ocean loss / 100), and cost per litre sold = the landed total / the outturn litres. The loss divides the cost. The landed total stays the same and the litres it is spread over fall.
+
+The BADAGRY cargo, insurance on CIF, the ocean loss swept (bill of lading 45772751.75 litres):
+| ocean loss percent | outturn litres | landed total USD | USD per litre sold | naira per litre sold |
+| --- | --- | --- | --- | --- |
+| 0 | 45772751.75 | 26513943.86 | 0.579252 | 880.6943 |
+| 0.2 | 45681206.25 | 26513943.86 | 0.580413 | 882.4592 |
+| 0.45 | 45566774.37 | 26513943.86 | 0.581870 | 884.6753 |
+| 1 | 45315024.23 | 26513943.86 | 0.585103 | 889.5902 |
+
+An ocean loss left blank is a missing rate, so the build-up is not complete and the landed total is a floor. A loss left out of the call takes the 0 the signature states. A loss of 100 percent or more, or below 0, is refused:
+| ocean loss (stated) | the engine answers |
+| --- | --- |
+| blank | complete false; missing Ocean loss; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; A FLOOR, not a cost: 1 rate(s) not supplied. |
+| null | complete false; missing Ocean loss; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; A FLOOR, not a cost: 1 rate(s) not supplied. |
+| left out of the call | complete true; missing none; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; All supplied rates applied. |
+| 100 | REFUSED: The ocean loss must be at least 0 and under 100 percent. |
+| 120 | REFUSED: The ocean loss must be at least 0 and under 100 percent. |
+| -0.5 | REFUSED: The ocean loss must be at least 0 and under 100 percent. |
+The blank row spreads the landed total over the bill-of-lading litres, as the 0 percent row does: its USD per litre sold equals the 0 percent row's: true. The row left out of the call reads the 0 percent row's USD per litre sold: true, and complete true.
+
+The exchange rate enters once, at the end: naira per litre sold = USD per litre sold x 1520.4000. With no exchange rate the local figure is none.
+
+HELD (FINDINGS-supply H1): the charges levied at discharge are billed on the bill-of-lading quantity. The jetty line is 54927.30 USD and the storage line 121297.79 USD, each on 45772.752 m3 on the bill of lading, where the outturn is 45566.774 m3. Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know.
+Every charge quoted per quantity is charged on the bill-of-lading quantity, the per-litre regulatory line included: 109854.60 USD on 45772751.75 bill-of-lading litres, and the port line 103700.00 USD on 34000.0000 bill-of-lading tonnes. H1 names the discharge charges; the same contract question applies to any line charged per quantity, and the engine answers every one on the bill of lading.
+
+# SECTION 20: THE PUMP PRICE BUILD-UP (owned by Expert m04 and m06)
+
+buildPumpPrice applies each element in order onto a running subtotal, starting from the landed cost per litre at the depot gate, so the result is a waterfall: a per-litre element adds its amount, a percent of the running total adds that percent of everything above it, and the lines reconcile to the price.
+
+The BADAGRY build-up on its landed cost of 884.6753 naira a litre. Every element is INVENTED for this course:
+| element | recipient | basis | rate (invented) | amount naira/L | running naira/L | share of price |
+| --- | --- | --- | --- | --- | --- | --- |
+| Landed cost (depot gate) | none | per litre | none | 884.6753 | 884.6753 | 0.823088 |
+| Depot and terminal margin | Terminal | per litre | 21 | 21.0000 | 905.6753 | 0.019538 |
+| Bridging or equalisation | Chain | per litre | 24.5 | 24.5000 | 930.1753 | 0.022794 |
+| Transport to station | Transporter | per litre | 19.8 | 19.8000 | 949.9753 | 0.018422 |
+| Marketer margin | Marketer | per litre | 18.4 | 18.4000 | 968.3753 | 0.017119 |
+| Dealer margin | Dealer | per litre | 31.25 | 31.2500 | 999.6253 | 0.029075 |
+| Statutory levies at the pump | Government | per litre | 9.6 | 9.6000 | 1009.2253 | 0.008932 |
+| Value added tax | Government | percent_of_running | 6.5 | 65.5996 | 1074.8249 | 0.061033 |
+pump price 1074.8249 naira a litre; complete true; All supplied rates applied.
+
+Against a cap of 1150.0000 naira a litre: shortfall -75.1751 naira a litre (positive would mean the cap is below the chain's cost); the cap covers the chain: true.
+Against a cap of 1040.0000 naira a litre: shortfall 34.8249 naira a litre; the cap covers the chain: false.
+The same 6.5 percent typed as a percent of the landed cost instead of the running total: price 1066.7292 naira a litre.
+That build-up is complete true: the basis changes the amount, and every rate is still supplied.
+With the dealer margin and the levies left blank: complete false; missing Dealer margin, Statutory levies at the pump; price 1031.3197 naira a litre. A FLOOR, not a price: 2 rate(s) not supplied.
+
+# SECTION 21: WHERE THE MONEY IN A LITRE GOES (owned by Expert m04)
+
+marginWaterfall groups the build-up by recipient, largest first. An element with no recipient is grouped as Unattributed.
+
+| recipient | naira per litre | share of price | elements |
+| --- | --- | --- | --- |
+| Product (landed) | 884.6753 | 0.823088 | Landed cost (depot gate) |
+| Government | 75.1996 | 0.069965 | Statutory levies at the pump; Value added tax |
+| Dealer | 31.2500 | 0.029075 | Dealer margin |
+| Chain | 24.5000 | 0.022794 | Bridging or equalisation |
+| Terminal | 21.0000 | 0.019538 | Depot and terminal margin |
+| Transporter | 19.8000 | 0.018422 | Transport to station |
+| Marketer | 18.4000 | 0.017119 | Marketer margin |
+price 1074.8249 naira a litre
+
+The bridging element with its recipient removed is grouped as Unattributed: 24.5000 naira a litre.
+marginWaterfall on a refused build-up: REFUSED: A landed cost per litre is required.
+
+# SECTION 22: WHAT BREAKS THE PRICE (owned by Expert m05 and m06)
+
+priceSensitivity re-prices the whole chain at each value of one driver, here the exchange rate, and solveCrossing bisects for the value at which the price meets the cap. If the price does not cross the cap inside the range searched, the engine says so and returns no value.
+
+The BADAGRY chain against a cap of 1150.0000 naira a litre:
+| naira to the dollar | pump price naira/L | shortfall naira/L | cap covers |
+| --- | --- | --- | --- |
+| 1200.0000 | 876.2757 | -273.7243 | true |
+| 1350.0000 | 969.2294 | -180.7706 | true |
+| 1500.0000 | 1062.1833 | -87.8167 | true |
+| 1650.0000 | 1155.1370 | 5.1370 | false |
+| 1800.0000 | 1248.0908 | 98.0908 | false |
+| 1950.0000 | 1341.0445 | 191.0445 | false |
+| 2100.0000 | 1433.9982 | 283.9982 | false |
+breakeven: found true, at 1641.7105 naira to the dollar, after 18 bisection steps.
+The exchange rates swept are invented values for the course. priceSensitivity hands solveCrossing the bracket from the lowest to the highest value swept, here 1200.0000 to 2100.0000 naira to the dollar.
+
+The chain at each exchange rate, element by element:
+| naira to the dollar | landed naira/L | Government naira/L | pump price naira/L |
+| --- | --- | --- | --- |
+| 1200.0000 | 698.2441 | 63.0816 | 876.2757 |
+| 1350.0000 | 785.5246 | 68.7548 | 969.2294 |
+| 1500.0000 | 872.8052 | 74.4281 | 1062.1833 |
+| 1650.0000 | 960.0857 | 80.1013 | 1155.1370 |
+| 1800.0000 | 1047.3662 | 85.7746 | 1248.0908 |
+| 1950.0000 | 1134.6467 | 91.4478 | 1341.0445 |
+| 2100.0000 | 1221.9272 | 97.1210 | 1433.9982 |
+
+Searched only from 1300 to 1500: found false; REFUSED: No crossing in the range searched. The outcome has the same sign at both ends. The shortfall at the two ends: -211.7551 and -87.8167 naira a litre.
+solveCrossing over a bracket written backwards (2100 to 1200): REFUSED: The search bracket is not a valid interval.
+With no cap there is nothing to cross: breakeven none.
+
+# SECTION 23: WHAT IS HELD AND WHAT IS DECIDED (owned by Expert m06)
+
+Held by the engines repository (FINDINGS-supply), taught as limits and never graded:
+H1: the charges levied at discharge (jetty, storage) are billed on the bill-of-lading quantity; whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know (SECTION 19 prints the two quantities).
+H2: the volume correction coefficient tables and every published rate stay unshipped. volumeCorrectionFactor refuses without coefficients (SECTION 6), and every template rate is absent: IMPORT_TEMPLATE ships 9 of 9 rates as none and PUMP_TEMPLATE 7 of 7.
+
+Rules the engines keep at 13f0936 from MD3-0 (engines PR #221), each measured in this digest:
+a day is not closed without its opening stock (SECTION 7): REFUSED: No opening stock, so the day cannot be closed. The opening stock is yesterday's closing dip.
+a dip below a table that does not start at the empty tank is refused, and so is a negative dip (SECTION 4).
+a water cut the table cannot convert is refused, and so is water above the product dip (SECTIONS 4 and 5).
+bays are a whole number, one or more (SECTION 10): 2.5 bays reads "The number of bays must be a whole number, one or more."
+pumpable stock is counted tank by tank (SECTION 12): IB-T1 and IB-T2 together hold 5453.100 m3 over a combined heel of 420.000 m3 and their pumpable stock is 5078.400 m3.
+a loss with no density has no weight and no emissions, and the carbon note says why (SECTION 13).
+insurance quoted on CIF is solved in closed form (SECTION 18): CIF 24331931.09 USD on the BADAGRY cargo.
+a freight-stage charge on C&F or CIF, and a charge with an unknown stage, are refused (SECTION 18).
+a blank trucking cost is missing and named, and a cost left out of the call takes its stated default (SECTION 14).
+
+Rules the engines keep at 13f0936 from MD3-1 (engines PR #224), each measured in this digest:
+a load time of zero minutes is refused (SECTION 10): "Arrival rate and load time are both needed."
+throughputEconomics needs the throughput and the fee (SECTION 13): "Throughput and the throughput fee are both needed for the money answer." A blank cost or loss is taken as zero and named in assumedZero.
+tankFarmCover with no daily throughput gives no days of cover and no turns (SECTION 12): turns a year none.
+an opening stock derived from the day's own closing dip balances every day and measures nothing (SECTION 7).
+
+Rules the engines keep at 13f0936 from MD3-2 (engines PR #225), each measured in this digest:
+an ocean loss left blank is a missing rate and the landed total is a floor (SECTION 19): complete false; missing Ocean loss; A FLOOR, not a cost: 1 rate(s) not supplied.
+an ocean loss of 100 percent or more is refused (SECTION 19): REFUSED: The ocean loss must be at least 0 and under 100 percent.
+
+# SECTION 24: WHAT THE ORACLES CHECK (owned by Expert m06)
+
+| golden file | oracle | method | published source |
+| --- | --- | --- | --- |
+| terminaldepot_cases.json | tools/validation/downstream/oracle_terminaldepot.py | strapping from tank geometry; Erlang C by the exact factorial form and Little's law; a day ledger | none: no coefficient table is shipped; tanks are geometric or the Suite sample |
+| fuelpricing_cases.json | tools/validation/downstream/oracle_fuelpricing.py | a cargo invoice over outturn litres; insurance on CIF by fixed-point iteration; closed-form FX breakeven; integer fleet search; exact Erlang C | none: every rate is synthetic; the engine ships none and neither does this file |
+
+terminaldepot_cases.json carries 4 dips, 4 refusals, 4 queues, 3 reconciled days and 1 tank farm.
+fuelpricing_cases.json carries 3 landed cost cases (floor, full, insuranceOnCif), 1 truck lane, 1 fleet, 1 pump build-up with its breakeven exchange rate, and 1 station.
+
+Each golden file is written by an independent stdlib Python oracle. A golden figure beside an engine figure is two methods agreeing: the oracle builds a strapping table from tank geometry and computes Erlang C by the exact factorial form in rational arithmetic, where the engine interpolates and recurses; it iterates the insurance fixed point, where the engine uses a closed form; it solves the exchange rate breakeven in closed form, where the engine bisects; and it searches for the fleet one truck at a time, where the engine takes a ceiling. The oracles check figures and verdicts, never the wording of a refusal, so every refusal sentence in this digest is the engine's own and is quoted rather than checked.
+The volume correction FORM is pinned by the tests and not validated against a published table, because no table is shipped: the tests assert the form itself and two invariants that need no coefficient, a VCF of exactly 1 at 15 C and below 1 above it.
+On the synthetic row: VCF at 15 C is 1.000000, exactly one: true.

@@ -1,0 +1,42 @@
+{
+ "api": {
+  "decimals": 4,
+  "match": "^(?:idama_blend_api)$"
+ },
+ "wtpct": {
+  "decimals": 4,
+  "match": "^(?:idama_blend_sulfur_wtpct)$"
+ },
+ "ppm": {
+  "decimals": 4,
+  "match": "^(?:idama_blend_vanadium_ppm)$"
+ },
+ "pct": {
+  "decimals": 4,
+  "match": "^(?:idama_abiteye_mass_share_pct|idama_opuama_kerosene_yield_pct|ogbele_blend_kerosene_yield_pct|ogbele_blend_diesel_yield_pct)$"
+ },
+ "cii": {
+  "decimals": 4,
+  "match": "^(?:idama_blend_cii)$"
+ },
+ "degF": {
+  "decimals": 4,
+  "match": "^(?:ogbele_blend_t50_f)$"
+ },
+ "usdPerBbl": {
+  "decimals": 4,
+  "match": "^(?:ogbele_gross_value_per_bbl|ogbele_loss_value_per_bbl|ogbele_netback_per_bbl)$"
+ },
+ "usd": {
+  "decimals": 4,
+  "match": "^(?:onne_total_cost_usd)$"
+ },
+ "bbl": {
+  "decimals": 4,
+  "match": "^(?:onne_fcc_volume_bbl|onne_butane_volume_bbl)$"
+ },
+ "usdPerUnit": {
+  "decimals": 4,
+  "match": "^(?:onne_sulfur_relief_usd_per_ppm|onne_rvp_relief_usd_per_psi|onne_ron_relief_usd_per_octane)$"
+ }
+}
