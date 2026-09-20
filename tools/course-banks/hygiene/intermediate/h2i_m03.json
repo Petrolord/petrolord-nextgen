@@ -41,18 +41,18 @@
    "It halves the label first and then subtracts 13.500000 dB."
   ],
   "answer": 0,
-  "explanation": "The NRR is itself stated against C-weighted sound, so on C-weighted data Appendix B credits the whole label: 103.200000 less 27.000000 is 76.200000 dBA. Taking the 7 off is the A-weighted rule applied to the wrong weighting. The refusal of C-weighted data belongs to the field derating, and halving the label is neither method."
+  "explanation": "The engine's Appendix B rule is C-weighted minus the NRR, so on C-weighted data the whole label is credited: 103.200000 less 27.000000 is 76.200000 dBA. Taking the 7 off is the A-weighted rule applied to the wrong weighting. The refusal of C-weighted data belongs to the field derating, and halving the label is neither method."
  },
  {
-  "prompt": "Why does Appendix B take 7 dB off the label before crediting it against an A-weighted level?",
+  "prompt": "On the teaching case the same NRR 27.000000 dB protector gives an attenuation of 20.000000 dB against the A-weighted level and 27.000000 dB against the C-weighted one. What accounts for the difference of 7.000000 dB?",
   "options": [
-   "The 7 dB allows for a protector being worn loosely, worn over glasses or removed for part of the shift, as fit in use demands.",
-   "Seven is the number of test frequencies at which the label is measured in the laboratory, one decibel off for each band.",
-   "The NRR is stated against C-weighted sound, and the 7 is a flat allowance for the difference between the weightings.",
-   "It keeps the credit under the 7 dB floor below which the engine says a protector cannot help, so small labels are never overstated."
+   "The engine derates the label by protector type before crediting an A-weighted level.",
+   "The field derating halves every credit whenever the data it is given is A-weighted.",
+   "Appendix B credits (NRR - 7) on A-weighted data and the whole NRR on C-weighted data.",
+   "The floor at zero removes a flat 7 dB from any credit on an A-weighted level."
   ],
   "answer": 2,
-  "explanation": "The label is a C-weighted rating, and subtracting it whole from an A-weighted level would mix the two weightings in one sum; Appendix B allows for that with a single flat 7 dB, which the engine measures as 7.000000000000. Poor fit in use is what the field derating's 50 percent addresses. There is no count of frequencies in the rule, and the floor at zero is a separate matter."
+  "explanation": "The engine's Appendix B rule is A-weighted minus (NRR - 7) and C-weighted minus the NRR, so the two attenuations on one label differ by exactly the 7, which section 3 measures as 7.000000000000 dB by taking 30 less the attenuation at an NRR of 30. Derating by type is the separate NIOSH_TYPE method, halving the credit is the field derating, and the floor applies only where the rule would give a negative attenuation."
  },
  {
   "prompt": "On the A-weighted teaching case, 97.600000 dBA with an NRR of 27.000000 dB, what attenuation does the field derating credit?",
@@ -110,15 +110,15 @@
   "explanation": "The factors 0.750000000000, 0.500000000000 and 0.300000000000 say a type delivers a fraction of its label in use, and the fraction depends on the type. The 7 dB is the same for every type, earmuffs keep the largest share, and the factors apply before the A-weighted 7 is taken. This method is ORACLE ONLY and is taught for recognition."
  },
  {
-  "prompt": "Under the OSHA dual-protection rule, why is the second protector credited with 5 dB whatever its own label?",
+  "prompt": "Under the OSHA dual-protection rule, what does the engine do with the two protectors' labels?",
   "options": [
-   "The second label is always assumed to be 5 dB, the smallest NRR that is sold.",
-   "The rule adds the two labels together and then takes 5 dB off the sum to allow for the poor fit of two devices.",
-   "The rule averages the two labels and then adds 5 dB as a fixed credit for the lower of the two ratings.",
-   "Sound reaches the ear by paths the second protector does not block, so the two ratings do not add."
+   "It adds the two labels together and credits the sum against the level.",
+   "It averages the two labels and credits the mean against the level.",
+   "It credits each label in turn and returns one estimate for each.",
+   "It works from the higher of the two NRRs and never from both."
   ],
   "answer": 3,
-  "explanation": "The rule takes the higher NRR, subtracts 7 if the level is A-weighted, and adds 5, because a second protector cannot stop sound reaching the ear through the other paths. No label is assumed, and the rule neither adds nor averages the two labels. The dual-protection 5 dB is ORACLE ONLY and never graded."
+  "explanation": "The engine's dual-protection method reads the higher NRR, subtracts 7 if the level is A-weighted and adds 5, so only one of the two labels enters the arithmetic. Nothing adds or averages the labels, and the door returns one estimate for the method it is given. The 5 dB this method adds is ORACLE ONLY and is never graded."
  },
  {
   "prompt": "A label NRR of 5 is put on 92 dBA A-weighted under Appendix B. What attenuation does the engine credit?",
@@ -140,7 +140,7 @@
    "`OSHA_DUAL`, the dual-protection rule"
   ],
   "answer": 1,
-  "explanation": "The manual halves the credit when the question is whether protectors may stand in for reducing the sound at source, so engineering controls are judged on the field derating. Appendix B is the adequacy test for hearing conservation; the NIOSH derating by type and dual protection answer other questions and are ORACLE ONLY."
+  "explanation": "The field derating is the method the digest attaches to the engineering-controls question, and it credits (NRR - 7) x 50 percent on A-weighted data. Appendix B carries the adequacy test instead, the NIOSH derating by type says what a kind of protector is worth, and dual protection says what two worn together give."
  },
  {
   "prompt": "What does the engine return when a protector call names a method it does not recognise?",

@@ -52,7 +52,7 @@
    "Arithmetic by definition, because a weekly average has no constant other than its window."
   ],
   "answer": 0,
-  "explanation": "Figure 26 reproduces the energy averaging the week shares with the day, and it says nothing about the divisor of 5. The divisor is the statutory formula and no printed case with other than five days is known, so on such a week the result is ORACLE ONLY. Transcription only is the class of constants two files copied from one page, such as the heat stress equation constants. Arithmetic by definition belongs to averages whose only constant is their window, and the weekly divisor of 5 is a statutory choice that the days averaged do not supply."
+  "explanation": "Figure 26 reproduces the energy averaging the week shares with the day, and it says nothing about the divisor. The evidence table carries `lexWeeklyDbA` as PUBLISHED, REPRODUCED on the strength of one published case, five equal days at 85 dBA, and its note adds that the divisor of 5 is the statutory formula with no printed case of other than five days known, so on such a week the result is ORACLE ONLY. Transcription only is the class of constants two files copied from one page, and arithmetic by definition belongs to averages whose only constant is their own window."
  },
  {
   "prompt": "The weekly LEX has one published case, five equal days at 85 dBA giving 85. Why does that case fix so little?",

@@ -22,15 +22,15 @@
   "explanation": "The record covers 6.750000 h and is still divided by 8, as the regulation writes it: 30.125000 ppm, with a warning. 35.703704 ppm divides the same sum by the 6.750000 hours sampled; 32.468750 ppm is the full-shift record with a fourth sample, and 42.156250 ppm the ten-hour record."
  },
  {
-  "prompt": "Averaged over the 6.750000 hours it covers, the partial record gives 35.703704 ppm. What does that figure assume about the unsampled time?",
+  "prompt": "The IGBOMOTORU partial record covers 6.750000 hours and the full-shift record covers 8.000000 hours. Which of the two carries a warning?",
   "options": [
-   "That the unsampled hours were free of the substance, which the regulation requires.",
-   "That the unsampled hours looked like the hours that were sampled.",
-   "Nothing, because the hours covered are the only hours a TWA may use.",
-   "That the worker's shift was 6.750000 hours long, which the engine reads from the record."
+   "Both of them, because a chemical record is warned until its limit is typed in.",
+   "The partial record only, because a record that is not 8 hours long is warned.",
+   "The full-shift record only, because its fourth sample was added after the rest.",
+   "Neither of them, because the engine divides both by 8 and has nothing to report."
   ],
   "answer": 1,
-  "explanation": "Dividing by the hours covered spreads the sampled average over the whole day, so it assumes the missing time was like the measured time. Counting the missing time as clean is what dividing by 8 assumes, giving 30.125000 ppm. Neither claim is in the record, and the engine reads no shift length from it: it always divides by 8."
+  "explanation": "The table prints 1 warning for the partial record and 0 for the full shift. Judgement call J6 is that the 8-hour chemical TWA always divides by 8 and warns under or over 8 hours, and the full record covers exactly 8.000000 hours, so nothing is assumed about unsampled time and it reads 32.468750 ppm clean. No limit is typed into the door at all, and the fourth sample is what removes the warning."
  },
  {
   "prompt": "What does the engine say, in its own words, when a chemical record covers 6.750000 of the 8 hours?",
@@ -124,12 +124,12 @@
   "prompt": "The engine warns on a STEL record under 15 minutes and refuses one over 15. Why the difference?",
   "options": [
    "Records under 15 minutes are common in the field and records over 15 minutes are rare, so the engine supports only the common case and refuses the rare one.",
-   "Under 15, the missing minutes can be stated as zero within the definition; over 15, the source gives no rule and every option is a guess.",
+   "A shorter record still fits the fifteen-minute window once the remainder counts as zero; a longer record is longer than the window itself.",
    "The source prints a worked example of a short record and none of a long one, so the engine follows the only case that a printed value fixes for it.",
    "A long record would push the STEL above its limit."
   ],
   "answer": 1,
-  "explanation": "The STEL is sum(C t) over fifteen minutes; a short record stays inside that definition once the remainder is stated as zero, and the warning names the assumption. Over fifteen minutes, dividing by 15, dividing by the total or trimming are each a decision nobody wrote. Frequency, a printed example and the limit have nothing to do with it."
+  "explanation": "The STEL is sum(C t) / 15 with t in minutes, so a record under fifteen minutes stays inside that window once the unsampled remainder counts as zero, and the engine warns to name the assumption. A record over fifteen minutes is longer than the window the STEL is defined on, and judgement call J6 records the choice: the STEL divides by 15 and refuses over 15 minutes. The door has no published case of either length, so a printed example fixes nothing here, and frequency and the limit have nothing to do with it."
  },
  {
   "prompt": "How strong is the evidence behind the STEL's arithmetic?",

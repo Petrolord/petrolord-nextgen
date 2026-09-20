@@ -36,11 +36,11 @@ q(0, "Which protector estimate does this tier grade, and what fixes it?",
  "The capstone takes its protector estimate by the field derating, for the engineering controls question, and the manual prints 89.000000 dBA for its worked example, which the engine reproduces. Appendix B is also reproduced, at 80.000000 dBA, and answers the hearing conservation question the capstone does not ask. The NIOSH derating by type and dual protection are ORACLE ONLY, and nothing printed fixes either.")
 
 q(1, "The NIOSH derating by type and the OSHA dual-protection 5 dB are taught and never graded. What is the reason?",
- "They are oracle only, and a graded answer that a shared misreading would still pass is not graded on evidence.",
+ "They are oracle only: an independent oracle agrees with the engine and no printed value is known to set against either.",
  ["They are licensed material, so their factors cannot be typed into the engine or quoted in any lesson of the course.",
   "They give the same figures as Appendix B on every label, so grading them as well would only duplicate a graded field.",
   "They are Expert tier material and are only previewed in this tier."],
- "The engine and an independent oracle agree on both, and no printed value is known to set against either, so a misreading shared by both files would pass every check. Neither is licensed (the engine holds the factors), they give different figures from Appendix B (84.350000 dBA for an earmuff against 77.600000 on the teaching case), and both are taught in full in this tier.")
+ "Section 23 lists both among the items this course never grades, and gives oracle only as the reason for each: nothing a source prints stands outside the engine and its oracle to check them. Neither is licensed, since the engine holds the factors; they give different figures from Appendix B, 84.350000 dBA for an earmuff against 77.600000 dBA on the teaching case; and both are taught in full in this tier.")
 
 q(2, "Under what condition is a weekly LEX graded in this course?",
  "Only where the statutory divisor of 5 equals the number of days given, so no constant the evidence cannot fix moves the answer.",
@@ -57,11 +57,11 @@ q(0, "No capstone input in this tier sits on a judgement call's boundary. Which 
  "J5 floors protector credit at 0 with a warning and refuses C-weighted data for the field derating. Unity is J7, unsampled time is J6, and a week of other than five days is J10. The calls are taught by name so they can be recognised in a real survey, and the capstone keeps clear of all four.")
 
 q(3, "A reviewer asks for a question whose answer is the word \"exceeds\" for the teaching mixture. Why does this course not grade that?",
- "Verdict words are never graded; the graded fields are numbers, and the reader draws the comparison from the number and its named criterion.",
+ "Verdict words are never graded in this course, and section 23 lists them among what it leaves out.",
  ["The teaching mixture does not exceed, so the word would be false.",
   "A verdict needs a licensed limit, which the course never quotes.",
   "Risk, Change and Learning owns verdicts, so the word belongs there."],
- "An index of 1.059500 and an index of 0.925000 each carry a flag, and the flag throws away how close each is to its line, which is the thing a reader needs. The teaching mixture does exceed, its limits are public OSHA values typed as inputs, and the risk matrix is the only thing Risk, Change and Learning owns here.")
+ "Section 23's list of what this course never grades carries any verdict word: exceeds, passes, at or above an action value. The teaching mixture does exceed at an index of 1.059500, its limits are public OSHA values typed as inputs, and the risk matrix is the only thing Risk, Change and Learning owns here.")
 
 q(3, "Where do the exposure limits used in this course come from?",
  "They are typed into the engine as inputs from public OSHA or NIOSH values; no licensed limit is quoted.",
@@ -89,14 +89,14 @@ q(2, "On the teaching case the field derating leaves 87.600000 dBA and Appendix 
  ["None, because the lower estimate is the more accurate of the two, and an accurate estimate settles any question put to it.",
   "They should have quoted the dual-protection estimate instead, which is the lowest of all and so the strongest argument available.",
   "They should have averaged the two estimates, so that neither the harsh rule nor the generous one decides the answer alone."],
- "The field derating is deliberately harsh on a label because reducing the sound at source comes before protecting the ear, so it credits 10.000000 dB where Appendix B credits 20.000000 dB. The lower figure is not more accurate, only more generous, dual protection is ORACLE ONLY and answers a different question, and averaging two methods is no method at all.")
+ "The field derating credits 10.000000 dB where Appendix B credits 20.000000 dB on the same label and the same level, and the digest gives each estimate its own question: the field derating answers whether engineering controls are needed. The lower figure answers the other question rather than answering this one more accurately, dual protection is ORACLE ONLY and answers a third, and averaging two methods is no method at all.")
 
-q(1, "How should intermediate figures be carried when working the capstone?",
- "At full precision throughout, rounding only at the end to the six decimals the course prints.",
- ["Six decimals at every step, so that each intermediate figure matches what the panel prints.",
-  "Whole decibels and whole ppm, as the sources print them.",
-  "To the tolerance of each field, which the capstone brief states beside every single figure it asks for."],
- "Rounding at every step compounds, and combining independently rounded figures can move the last printed digit. The sources print coarser values than the engine reproduces them at, and the tolerance of each field is set in one place in the course and is never stated in a brief.")
+q(1, "Which of these does this course put among its eighteen graded capstone fields?",
+ "Chemical averages and indices",
+ ["A WBGT built from globe, wet bulb and dry bulb readings",
+  "A margin against the NIOSH heat REL at a stated metabolic rate",
+  "The Brief and Scala weekly reduction factor taken on its own"],
+ "The eighteen graded fields are noise doses and TWAs, LEX values, the OSHA engineering-controls protector estimate, chemical averages and indices, reduction-factor arithmetic, and two one-hour averages of readings the capstone states. Section 23 removes the other three by name: no WBGT built from thermometer readings and no margin against a NIOSH heat stress limit, because those constants are checked for transcription only, and the Brief and Scala weekly factor on its own, because it is oracle only.")
 
 q(0, "Which two figures among the tier's teaching cases come back with a warning that unsampled time counts as zero?",
  "The partial IGBOMOTORU record's 8-hour TWA and the short STEL record",

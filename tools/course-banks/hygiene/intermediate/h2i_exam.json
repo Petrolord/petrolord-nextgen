@@ -129,7 +129,7 @@
    "the mean of the two estimates"
   ],
   "answer": 0,
-  "explanation": "The manual halves the credit when the question is whether protectors may replace reducing the sound at source, so the engineering controls decision uses the field derating's 89.000000 dBA. Appendix B's 80.000000 dBA answers the hearing conservation question. Taking the lower figure picks the generous rule, and a mean of two methods is no method."
+  "explanation": "The digest labels the two estimates by their questions: 89.000000 dBA under the field derating is the engineering-controls answer and 80.000000 dBA under Appendix B the hearing-conservation one, from one example with one protector. Taking the lower figure answers the other question, and a mean of two methods is no method."
  },
  {
   "prompt": "Move the teaching protector's label up to 30.000000 dB. Under `OSHA_FIELD_50`, what level is left on 97.600000 dBA?",
@@ -154,15 +154,15 @@
   "explanation": "Appendix B takes (10 - 7) off the A-weighted level: 94.600000 dBA. 96.100000 dBA halves that credit, which is the field derating; 84.600000 dBA is Appendix B read on the 20.000000 dB row; 97.600000 dBA would mean no credit at all, which is what a label of 7 or less gets."
  },
  {
-  "prompt": "On the teaching case an NRR of exactly 7.000000 dB is entered under Appendix B. What does the engine return?",
+  "prompt": "In the NRR sweep on the A-weighted teaching case, what does Appendix B leave at labels of 0.000000, 5.000000 and 7.000000 dB?",
   "options": [
-   "92.600000 dBA, the dual-protection row",
-   "97.600000 dBA, with a warning that the credit was floored",
-   "97.600000 dBA, a credit of zero with no warning",
-   "a refusal, since the label is too small"
+   "97.600000, 94.600000 and 92.600000 dBA, falling as the label rises",
+   "0.000000, 92.600000 and 97.600000 dBA, rising as the label rises",
+   "97.600000 dBA at all three, the unprotected level",
+   "A refusal at 0.000000 dB and 97.600000 dBA at the other two labels"
   ],
   "answer": 2,
-  "explanation": "NRR - 7 is exactly zero, so the estimate equals the level and nothing needs flooring; the floor and its warning apply only when the rule would give a negative attenuation, as an NRR of 5 does. 92.600000 dBA is the dual-protection figure at 7, and a label of zero or more is accepted."
+  "explanation": "Appendix B credits (NRR - 7) on A-weighted data, so a label of 7 or less leaves nothing to credit and the sweep prints 97.600000 dBA on all three rows. The falling figures 97.600000, 94.600000 and 92.600000 dBA are the dual-protection column of the same three rows. A label of zero or more is accepted, since the door refuses only an NRR that is negative or not a number."
  },
  {
   "prompt": "Which two hearing protector methods does this course class as published and reproduced?",
@@ -173,7 +173,7 @@
    "All four, since the engine reproduces each of them from its own source"
   ],
   "answer": 1,
-  "explanation": "The manual's example prints 89.000000 dBA under the field derating and 80.000000 dBA under Appendix B, and the engine reproduces both. The NIOSH derating by type and the dual-protection 5 dB agree between engine and oracle with no printed value to catch a shared misreading, so they are ORACLE ONLY."
+  "explanation": "The manual's example prints 89.000000 dBA under the field derating and 80.000000 dBA under Appendix B and the engine reproduces both, which is what PUBLISHED, REPRODUCED means. The NIOSH derating by type and the dual-protection 5 dB agree between the engine and an independent oracle with no printed value known to set against either, so section 23 records both as oracle only."
  },
  {
   "prompt": "A report states: \"NIOSH earmuff estimate 84.350000 dBA, reproduced from NIOSH's printed tables.\" What is wrong with it?",
@@ -231,26 +231,26 @@
   "explanation": "The engine's warning is \"the periods cover 11 min of 15: the remainder counts as zero exposure\", so the figure rests on an assumption about four unsampled minutes and the report must say how much of the window was measured. The warning says nothing about a peak, the shift adjustment belongs to the ten-hour TWA warning, and a warning is part of the result."
  },
  {
-  "prompt": "The full STEL window holds a five-minute peak of 240.000000 ppm inside a STEL of 153.333333 ppm. Why is the STEL reported beside the 8-hour TWA?",
+  "prompt": "The full STEL window returns 153.333333 ppm and the IGBOMOTORU full shift returns 32.468750 ppm. What makes the two different quantities?",
   "options": [
-   "It restates the 8-hour TWA for a fifteen-minute shift, so the two must always agree.",
-   "Because the STEL corrects the 8-hour TWA for the unsampled time that a partial shift record leaves out.",
-   "A substance can harm in minutes at a concentration that the eight-hour average dilutes away.",
-   "The STEL is always the larger figure and so decides compliance on its own."
+   "One is an energy average and the other an arithmetic one, so the two can never be compared.",
+   "One divides by the minutes it covers and the other by the hours it covers.",
+   "One is a time weighted average over fifteen minutes and the other over eight hours, each set against its own limit.",
+   "One is a peak reading and the other an average, so only the peak can pass a limit."
   ],
   "answer": 2,
-  "explanation": "Averaged into a shift, five minutes at 240.000000 ppm would barely register; the fifteen-minute window keeps them visible, and each average is compared with its own limit. The STEL is not a restated TWA, corrects nothing, and is compared with a short-term limit, so its size alone decides nothing."
+  "explanation": "The STEL is sum(C t) / 15 with t in minutes and the 8-hour TWA is the concentration-hours over 8, so the two average different windows and each is set against its own limit. Both are arithmetic averages of concentrations and neither uses an energy relation; both divide by a fixed reference rather than by the time covered; and the STEL averages its window, since the full record holds a 240.000000 ppm sample inside a STEL of 153.333333 ppm."
  },
  {
-  "prompt": "Why does the chemical TWA accept a ten-hour record with a warning while the STEL refuses a sixteen-minute one?",
+  "prompt": "Which of this tier's doors takes its durations in minutes?",
   "options": [
-   "Ten hours still fits inside a day, while sixteen minutes breaks the STEL's limit value.",
-   "The TWA's 8 is a normaliser the regulation writes for any shift; the STEL's 15 is the definition of its window.",
-   "The TWA is published and reproduced, while the STEL is oracle only and so is handled more strictly.",
-   "The engine refuses only records whose extra time is under an hour, which it treats as a typing slip."
+   "Every door in the tier, because the engine turns the hours it is given into minutes.",
+   "`chemicalStel15Min` alone; the daily level and the 8-hour TWA both take hours.",
+   "`chemicalStel15Min` and `lexWeeklyDbA`, because both of them read a short record.",
+   "None of them, because a duration on any of this tier's records is typed in hours."
   ],
   "answer": 1,
-  "explanation": "1910.1000(d)(1) divides by 8 whatever the shift, so a longer record is still inside the rule and is warned. A STEL is sum(C t) over fifteen minutes by definition, and sixteen minutes of samples has no rule for fitting it in, so J6 refuses. A record's length says nothing about a limit value, the STEL is arithmetic by definition, and the engine has no typing-slip rule."
+  "explanation": "The units rule is durations in hours for noise dose, LEX and the 8-hour chemical TWA, and in minutes for the STEL, and the doors take exactly that: `lexEightHourDbA` and `chemicalTwa8h` take periods of hours and `chemicalStel15Min` takes periods of minutes. The engine converts nothing it is given, and `lexWeeklyDbA` takes daily LEX,8h values with no durations in them at all."
  },
  {
   "prompt": "In the published (d)(2) example, what term does 45.000000 against a limit of 200.000000 give?",
@@ -418,15 +418,15 @@
   "explanation": "Section 24 binds the two qualified forms because the NIOSH recommended exposure limit for noise, met in the Associate tier, and the one for heat stress, met in the Expert tier, share the letters. The acronym names no licensed document, the NIOSH noise REL is a live criterion the engine presets, and a decibel exchange rate is stated on its own beside a figure."
  },
  {
-  "prompt": "Why does this course not grade a verdict word such as \"at or above the upper action value\"?",
+  "prompt": "A LEX,8h of exactly 85.000000 dBA is read against the EU values. What do the engine's two action flags say?",
   "options": [
-   "The engine does not return the action flags at all, only the level itself.",
-   "The number is the finding; a flag throws away how close a figure is to its line.",
-   "Because the EU action values are licensed text and cannot be named in the course.",
-   "Flags are true for every day in the tier's worked cases, so they test nothing."
+   "Lower true and upper false, because a figure sitting on a value has not passed it",
+   "Both true, because each flag reads at or above its value",
+   "Both false, because the engine raises a flag only above the value itself",
+   "Lower true and upper absent, because the upper flag needs the limit value too"
   ],
   "answer": 1,
-  "explanation": "84.989700 dBA and 0.000000 dBA both read false against the upper action value and share nothing else, so the flag alone hides what matters. The engine does return both action flags, the EU values are exported and not licensed, and the flags differ across the tier's cases."
+  "explanation": "The small cases print eight hours at 85 dBA as 85.000000 dBA and 100.000000 points with the lower action flag true and the upper action flag true, and the digest states that the two flags are at or above. A figure sitting on a value has reached it. The limit value of 87.000000 dBA carries no flag at all, because it applies at the ear with protection taken into account, which the engine does not compute."
  },
  {
   "prompt": "Which statement about the engine's limits for chemicals is right?",
@@ -451,14 +451,14 @@
   "explanation": "J6 is the engine's stated choice for the chemical averages, named with J5, J7 and J10 in this tier. The NIOSH factors are ORACLE ONLY with no printed value behind them, the index is a sum, and LEX,8h has no threshold at all."
  },
  {
-  "prompt": "Why does the Professional capstone give five days for its weekly LEX?",
+  "prompt": "This course writes \"sound level\" for an instrument reading. Which courses make that rule necessary?",
   "options": [
-   "The engine refuses a week of any other length.",
-   "The weekly LEX is published and reproduced only for weeks at 85 dBA.",
-   "With five days the divisor of 5 equals the day count, so the oracle-only divisor cannot move the answer.",
-   "Five days make the weekly level equal the arithmetic mean of the days."
+   "The Economics courses, where the short word already means a currency rate",
+   "Flow Assurance and Gas Processing, where the short word means an inhibitor or a methanol charge",
+   "Decline Curve Analysis, Well Test and Seismolord, where the short word means scatter in data",
+   "Field Development Planning and Well Cost, where the short word means money that is at risk"
   ],
   "answer": 2,
-  "explanation": "The capstone keeps clear of J10's boundary: on five days the statutory divisor and the count agree, so nothing the evidence cannot fix enters the graded figure. The engine accepts one to seven days, the published case happens to be five days at 85 dBA and fixes no divisor, and the five-day week's 85.461288 dBA still differs from its 84.860000 dBA mean."
+  "explanation": "Section 24 rule 3 names those three courses, where the short word already means scatter in data, so this course says sound level for a reading. The Economics collision is the one that forces \"decibel exchange rate\", the Flow Assurance and Gas Processing collision forces \"noise dose\", and the Field Development Planning and Well Cost collision forces a qualified \"noise exposure\" or \"chemical exposure\"."
  }
 ]

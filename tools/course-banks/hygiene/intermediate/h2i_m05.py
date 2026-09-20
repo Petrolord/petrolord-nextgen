@@ -34,11 +34,11 @@ q(2, "The worked example of 1910.1000(d)(2) is 500.000000 against 1000.000000, 4
  "Each concentration over its limit gives 0.500000, 0.225000 and 0.200000, and they add to 0.925000, which the engine reproduces from the regulation's own example. The largest term is not the index, 1.059500 belongs to the teaching mixture, and the engine always reports each term.")
 
 q(3, "Why does the engine reproducing the printed (d)(2) example matter, when an additive index is so simple to code?",
- "It checks the rule against something a person other than the engine's author wrote down, which turns 'almost anyone would code it right' into a measured result.",
+ "It sets the rule against a value the source itself prints, so a misreading shared by the engine and its oracle would be caught.",
  ["It is the only way to know which of the limits in the example are licensed.",
   "It proves the additive model is right for every mixture the engine will see.",
   "It fixes the tolerance the capstone grades the mixture index at."],
- "A printed case reproduced at the precision it prints makes the mixture index PUBLISHED, REPRODUCED: a misreading of the rule would miss it. It says nothing about licensing, it cannot prove that additivity suits a given mixture, and grading tolerances are set in one place in the course and never derived from an example.")
+ "A printed case reproduced at the precision it prints is what this course calls PUBLISHED, REPRODUCED: two people copying the same page wrongly would be caught by that value. It says nothing about which limits are licensed, it cannot prove that additivity suits a given mixture, and a printed example fixes a rule's arithmetic and says nothing about how any answer is scored.")
 
 q(0, "The published example has a largest term of 0.500000 and an index of 0.925000; the teaching mixture has a largest term of 0.385000 and an index of 1.059500. What does the comparison teach?",
  "The index depends only on the sum, so the mixture with the larger single term can be the one that stays under unity.",
@@ -61,12 +61,12 @@ q(1, "A mixture's terms add to exactly 1.000000. What does the engine report, an
   "A refusal, since an index on the boundary is undefined."],
  "The regulation says the index \"shall not exceed unity\", and an index equal to unity has not exceeded it, so exceeds is true only above 1. The call is J7. J2 is the Associate tier's inclusive noise threshold, a different call on a different boundary, and nothing is refused at 1.")
 
-q(0, "Why does a boundary rule such as J7 mostly matter through record keeping rather than chemistry?",
- "An index lands exactly on 1.000000 mostly when rounded figures are used, so carrying the terms at full precision makes the boundary unlikely.",
- ["Chemistry never produces mixtures near unity, so the rule only matters in classroom examples.",
-  "The engine rounds every term to two decimals, which often puts an index exactly on 1.",
-  "Inspectors round the index to the nearest whole number, so the boundary decides every case."],
- "In field measurement an index rarely hits the boundary by chance; rounded concentrations can put it there, in either direction. The engine does not round terms to two decimals, mixtures near unity are ordinary, and nothing in the regulation rounds the index to a whole number.")
+q(0, "The teaching mixture's terms are 0.362500, 0.312000 and 0.385000 against limits of 200.000000, 100.000000 and 1000.000000 ppm. What happens if a different limit is typed for one component?",
+ "That component's term changes with its own limit and the other two are untouched.",
+ ["Every term is rescaled, since the index divides its sum by the largest limit.",
+  "Nothing moves until the index passes 1, where the engine reads the limits again.",
+  "The door refuses the mixture, because its first limits are the ones it holds."],
+ "Each term is one component's concentration over that component's own limit, so a limit belongs to one term alone: change the 1000.000000 ppm acetone limit and only the 0.385000 term moves, while toluene's 0.362500 and xylene's 0.312000 stay as they are. There is no shared divisor in the sum, the engine holds no limit table to read again, and every limit is an input the caller types.")
 
 q(1, "If the three components of the teaching mixture acted on different organs independently, what should be compared with what?",
  "Each term against 1 on its own, where the largest is 0.385000.",
