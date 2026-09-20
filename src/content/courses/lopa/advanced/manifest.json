@@ -1,0 +1,361 @@
+{
+ "app_slug": "lopa",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-proof-test-interval",
+   "title": "The Proof Test Interval",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-pfdavg-grows-with-the-interval",
+     "title": "PFDavg grows with the interval",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-sensitivity-table",
+     "title": "The sensitivity table",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-linear-and-quadratic-growth",
+     "title": "Linear and quadratic growth",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-longest-interval",
+     "title": "The longest interval for a target",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-states-with-no-finite-answer",
+     "title": "States with no finite answer",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-imperfect-proof-testing",
+   "title": "Imperfect Proof Testing",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-coverage-and-the-lifetime",
+     "title": "Coverage and the lifetime",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-floor-no-interval-reaches",
+     "title": "The floor no interval reaches",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-capped-at-the-lifetime",
+     "title": "Capped at the lifetime",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-a-partial-test-buys",
+     "title": "What a partial test buys",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-how-conservative-annex-b-is",
+   "title": "How Conservative Annex B Is",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-time-dependent-route",
+     "title": "The time dependent route",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-where-the-forms-depart",
+     "title": "Where the forms depart",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-rare-event-warning",
+     "title": "The rare event warning and the refusal",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-two-out-of-two-and-common-cause",
+     "title": "Two out of two and common cause",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "lp-proof-test",
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-published-example-and-its-inferences",
+   "title": "The Published Example and Its Inferences",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-reproducing-a-printed-table",
+     "title": "Reproducing a printed table",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-mrt-equal-to-the-mttr",
+     "title": "MRT equal to the MTTR, inferred",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-lifetime-inferred",
+     "title": "The lifetime, inferred from four rows",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-printing-slip-in-the-beta-factor",
+     "title": "A printing slip in the beta factor",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "lp-proof-test"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-what-the-engine-does-not-do",
+   "title": "What the Engine Does Not Do",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-no-hardware-fault-tolerance-check",
+     "title": "No hardware fault tolerance check",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-no-high-demand-mode",
+     "title": "No high demand mode",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-no-failure-rate-data",
+     "title": "No failure rate data, and no licensed tables",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-the-credit-rules-rest-on",
+     "title": "What the credit rules rest on",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-judgement-end-to-end",
+   "title": "Judgement, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-allocating-a-budget",
+     "title": "Allocating a PFDavg budget",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-proof-test",
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-stretching-an-interval",
+     "title": "Stretching an interval",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "lp-proof-test",
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-when-to-redesign",
+     "title": "When to redesign",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet",
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-writing-the-verification-note",
+     "title": "Writing the verification note",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "lp-proof-test",
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "lp-proof-test",
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

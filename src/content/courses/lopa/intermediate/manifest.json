@@ -1,0 +1,363 @@
+{
+ "app_slug": "lopa",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-pfdavg-and-the-simplified-forms",
+   "title": "PFDavg and the Simplified Forms",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-what-pfdavg-averages",
+     "title": "What PFDavg averages",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-dangerous-undetected-failures",
+     "title": "Dangerous undetected failures",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-one-out-of-one-and-the-half",
+     "title": "One out of one, and the half",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-redundant-simplified-forms",
+     "title": "The redundant simplified forms",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-where-the-simplified-forms-stop",
+     "title": "Where the simplified forms stop",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-full-annex-b-form",
+   "title": "The Full Annex B Form",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-detected-failures-and-the-mttr",
+     "title": "Detected failures and the MTTR",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-channel-equivalent-down-time",
+     "title": "The channel equivalent down time",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-group-equivalent-down-time",
+     "title": "The group equivalent down time",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-mean-repair-time-after-a-test",
+     "title": "Mean repair time after a proof test",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-imperfect-proof-test-coverage",
+     "title": "Imperfect proof test coverage",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-common-cause-and-the-beta-factor",
+   "title": "Common Cause and the Beta Factor",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-one-cause-several-channels",
+     "title": "One cause, several channels",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-beta-factor-on-both-failure-kinds",
+     "title": "The beta factor on undetected and detected failures",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-when-common-cause-dominates",
+     "title": "When common cause dominates",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-no-beta-factor-term-in-two-out-of-two",
+     "title": "No beta factor term in two out of two",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-architectures",
+   "title": "The Architectures",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-one-out-of-two",
+     "title": "One out of two",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-two-out-of-three-and-its-six",
+     "title": "Two out of three and its six",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-one-out-of-three",
+     "title": "One out of three",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-voting-for-availability",
+     "title": "Voting for availability, and its price",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-sif-is-a-sum",
+   "title": "The SIF Is a Sum",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-sensor-logic-solver-final-element",
+     "title": "Sensor, logic solver, final element",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-series-sum",
+     "title": "The series sum",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-achieved-rrf-and-achieved-sil",
+     "title": "Achieved RRF and achieved SIL",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder",
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-back-to-the-tmel",
+     "title": "Back to the TMEL",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "lp-sif-builder",
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-a-published-sif-reproduced",
+   "title": "A Published SIF, Reproduced",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-worked-sif-subsystem-by-subsystem",
+     "title": "The worked SIF, subsystem by subsystem",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-total-and-its-rrf",
+     "title": "The total and its RRF",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-refusals-and-the-warnings",
+     "title": "The refusals and the warnings",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "lp-sif-builder"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
