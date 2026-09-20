@@ -64,7 +64,7 @@ q(2, "Why does `nioshHeatAssessment` refuse the word yes typed for acclimatized,
  ["The engine infers acclimatisation from the metabolic record, so a typed word would overrule a better input",
   "A default of acclimatized is already built in, and the refusal only fires when the input disagrees with it",
   "The word is accepted for the NIOSH heat REL and refused for the RAL, since only the RAL needs the field set"],
- "The engine demands a boolean and refuses anything else on `acclimatized`, in its own words: \"acclimatized must be true (REL) or false (RAL)\". Nothing in a WBGT or metabolic record says whether a body has adapted, and the choice moves the limit by the whole gap between the two equations, so a silent default would carry the most consequential decision in the assessment. The engine infers nothing and holds no default, and the rule is the same whichever limit applies.")
+ "The engine demands a boolean and refuses anything else on `acclimatized`, in its own words: \"acclimatized must be true (REL) or false (RAL)\". Acclimatisation is an input the engine cannot infer, and the choice moves the limit by the whole gap between the two equations, 3.240515 C at 300.000000 W by the section 8.1 equation, checked for transcription only. The engine holds no default, and the rule is the same whichever limit applies.")
 
 q(1, "The engine's `exceeds` flag reads true on both rows of the teaching hour, assessed acclimatized and unacclimatized. How does this course treat that flag?",
  "As a verdict word shown so a learner sees what the engine returns, and never graded",
@@ -102,18 +102,18 @@ q(0, "Warning outside the figure range and still evaluating follows the same pat
  "Both J3 and the figure range warning report what the formula gives and tell the reader that the source stops there. J4 refuses outright, the opposite choice. J2 settles which periods count, and J7 settles a boundary of the mixture index, which is a chemical question.")
 
 q(1, "The assessment door refuses a 75 minute metabolic record in the engine's words: \"metabolicPeriods total 75 min: the NIOSH limits apply to a 1-hour TWA\". Why refuse it instead of averaging it?",
- "A longer average smooths a hot hour with a cooler quarter, so it reads below the worst hour inside it",
- ["The engine can hold at most 60 periods in a metabolic record, and a longer record overflows the count",
+ "NIOSH states its limits against a one-hour time weighted average, so a figure over any other window is not the quantity they apply to",
+ ["The engine can hold at most 60 periods in a metabolic record, and a record that runs to 75 minutes overflows the count it keeps for them",
   "A record over an hour counts the work twice, since each quarter overlaps the next in a rolling average",
   "The NIOSH limits are written for a fifteen-minute window, and 75 minutes is five of those windows"],
- "NIOSH writes its limits for one hour, and the worst hour is the one they are about. An average over 75 minutes dilutes it, so the hygienist chooses which sixty minutes to assess and says so. The engine counts minutes, whatever the number of periods, and it averages no rolling windows. The fifteen-minute window is the chemical STEL.")
+ "NIOSH states its limits against a one-hour time weighted WBGT, and M is the one-hour time weighted metabolic rate, so judgement J9 requires 60 minutes of periods in each record and the engine says so in the refusal itself. The engine counts minutes, whatever the number of periods, and it averages no rolling windows. The fifteen-minute window is the chemical STEL.")
 
-q(2, "The chemical STEL counts the missing minutes of a short record as zero and warns. Why does the heat stress assessment refuse a 45 minute WBGT record instead?",
- "A zero concentration is a real reading of clean air; a WBGT of zero degrees says nothing about a missing quarter hour",
- ["The STEL refuses short records as well, and both doors refuse any window that is shorter than their own",
-  "A WBGT of zero would put the average below absolute zero, which the WBGT doors already refuse on their inputs",
-  "The heat stress assessment needs a whole number of quarter hours, and 45 minutes is only three of them"],
- "Filling missing minutes with zero is a defensible guess for a concentration, because clean air has none; for a WBGT it is an arbitrary temperature, and filling with the average is a guess too. So the assessment door refuses on `wbgtPeriods`. The STEL warns on a short record and refuses only a long one. A zero-degree reading is well above absolute zero, and the rule is simply 60 minutes.")
+q(2, "A chemical STEL record covers 11.000000 minutes of its fifteen, and a WBGT record covers 45 minutes of the assessment's sixty. What does each door do with its short record?",
+ "The STEL divides by 15 with the missing minutes counted as zero and warns; the assessment refuses on `wbgtPeriods`",
+ ["Both refuse, since neither door will average a window that is shorter than the one its own limit is written for in the source",
+  "Both average over the minutes they hold and warn that the window they were given was short",
+  "The STEL refuses its short record, and the assessment averages the 45 minutes it holds and warns"],
+ "The short STEL record of 11.000000 minutes gives 92.333333 ppm with 1 warning, in the engine's words: \"the periods cover 11 min of 15: the remainder counts as zero exposure\". The heat stress assessment makes the other choice and refuses: \"wbgtPeriods total 45 min: the NIOSH limits apply to a 1-hour TWA\". The STEL refuses a record only when it runs over 15 minutes.")
 
 emit(Q, '/root/hse-wip-hygiene/banks/h2a_m02.json', expect_n=15)
 finish()

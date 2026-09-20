@@ -87,12 +87,12 @@ q(0, "A learner passes a 45 minute WBGT record to `wbgtTwaC`. What does the door
   "It refuses on `periods` with the engine's words: the periods total zero minutes: there is nothing to average"],
  "`wbgtTwaC` averages whatever window it is given and refuses only a record of zero minutes. Judgement J9 puts the sixty-minute requirement on the assessment door, which refuses on `wbgtPeriods` when a record is not an hour. Counting missing minutes as zero is the STEL's choice for a concentration, and a 45 minute record is plainly not a zero-minute one.")
 
-q(3, "Why does the natural wet bulb carry the largest weight in both section 9.3.2 forms?",
- "Evaporation from its wet wick tracks how well the body can cool itself by sweating",
- ["It reads the highest of the three wherever there is radiant load from the sun or from hot surfaces",
-  "It is the one shaded air thermometer, so it is the only reading free of any radiant load at the spot",
-  "It responds most slowly, so it carries the hour's average"],
- "The natural wet bulb sits in a wick open to moving air, reads low in dry moving air and near the air temperature in still humid air, so it carries the body's ability to shed warmth by sweat. The reading that runs highest under radiant load is the globe, and the shaded air thermometer is the dry bulb. No thermometer supplies an hourly average; that is the job of the time weighted door.")
+q(3, "Which readings does each of the two section 9.3.2 doors take?",
+ "`wbgtIndoorC` takes a natural wet bulb and a globe; `wbgtOutdoorC` takes a natural wet bulb, a globe and a dry bulb",
+ ["Both doors take all three readings, and the indoor one carries the dry bulb at a weight of zero",
+  "`wbgtIndoorC` takes a globe alone, and `wbgtOutdoorC` adds a natural wet bulb and a dry bulb to it",
+  "Both doors take a natural wet bulb and a globe, and the outdoor one reads its solar load off the globe"],
+ "The engine gives `wbgtIndoorC` a natural wet bulb and a globe temperature and `wbgtOutdoorC` a natural wet bulb, a globe and a dry bulb, which is the reading the outdoor form adds. The indoor form carries no dry bulb term, so there is no weight of zero to set, and the natural wet bulb stands in both. A globe reading on its own builds neither index.")
 
 q(1, "A crew works close to a flare, and the globe reads high. Which part of the assessment belongs to this course?",
  "The WBGT index and the body's metabolic load; the radiant flux in kW/m2 on the spot belongs to Separation and Relief",

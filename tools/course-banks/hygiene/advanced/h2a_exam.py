@@ -23,7 +23,7 @@ q(0, "`wbgtOutdoorC` is called with a natural wet bulb and a dry bulb and no glo
  ["An index built from the indoor form, since without a globe the solar term cannot be weighted",
   "An index with the globe taken as equal to the dry bulb, with a warning that the reading was missing",
   "A refusal on `dryBulbC`, the last reading checked"],
- "The outdoor form needs all three readings, and the engine refuses and names the missing one. It never switches forms on its own: the form is fixed by the door that was called, which is why a report can always say which it used. It fills in no missing reading, and it checks the natural wet bulb, then the globe, then the dry bulb.")
+ "The outdoor form needs all three readings, and the engine refuses and names the missing one on `globeC`. It never switches forms on its own: the form is fixed by the door that was called, which is why a report can always say which it used. It fills in no missing reading, and `dryBulbC` was given.")
 
 q(3, "Which words belong beside a WBGT of 31.410000 C built from the outdoor thermometer readings?",
  "The NIOSH 2016-106 section 9.3.2 weighting, checked for transcription only",
@@ -116,12 +116,12 @@ q(2, "On the PEL setup, what noise dose does the OLOMORO shift of 86.100000, 83.
   "Zero, since the PEL is read against a TWA of 90 dBA and no period sits above 90 dBA for 8 hours"],
  "The PEL setup's threshold is 90 dBA, so three of the four periods are not integrated, and the 90.800000 dBA period contributes 16.759307 percent, the same figure it gives under the action level. 57.350093 percent is the action-level noise dose with its 80 dBA threshold. The noise dose is never rescaled to eight hours, and a period counts by its own time over its reference duration.")
 
-q(1, "In the Brief and Scala weekly factor, (40/h) x (168 - h)/128, what is the 128?",
- "The hours of recovery a 40 hour week leaves out of the 168 hours in a week",
- ["A double shift pattern, 16 hours for 8 days",
-  "The daily denominator of 16 multiplied by 8, the hours of a standard working day",
-  "A fitted constant from Brief and Scala's data, chosen so that 40 hours gives a factor of 1"],
- "168 less 40 is 128: the weekly factor scales the hours of breathing the air against a 40 hour week, and the recovery time against the 128 hours such a week leaves. The coincidence with 16 times 8 is arithmetic and not the reason. At 40 hours both parts are 1, which follows from the structure. The weekly factor itself is ORACLE ONLY and is never graded on its own.")
+q(1, "What does the engine return for the Brief and Scala weekly factor at 30.000000 hours a week, and what does it keep beside it?",
+ "A factor of 1.000000, with the raw 1.437500 kept beside it",
+ ["A factor of 1.437500, since the cap applies to the daily factor alone",
+  "A refusal on `weeklyHours`, since a week under 40 hours has no adjustment to make",
+  "A factor of 0.781250, the value the engine holds for every week below the 48 hour row"],
+ "Judgement J8 caps the factor at 1 and keeps `rawRf`, so a 30.000000 hour week returns 1.000000 with a raw 1.437500 behind it. The cap covers both factors: a 40.000000 hour week gives a raw 1.000000 and needs none. A week is refused only at zero hours or above 168, and 0.781250 is the factor at 48.000000 hours.")
 
 q(1, "`briefScalaAdjustedLimit` is given a limit and neither a shift length nor a weekly total. What does it return?",
  "A refusal on `shiftHours`, in the engine's words: \"give shiftHours, weeklyHours or both\"",
@@ -191,7 +191,7 @@ q(3, "A reviewer wants the teaching crew's toluene figure compared with a glycol
  ["The two can be compared directly once both are converted to ppm, since BTEX includes toluene",
   "The emission should be read against the toluene limit adjusted by Brief and Scala for the crew's schedule",
   "The comparison belongs to the 5x5 risk matrix, which the Risk, Change and Learning course applies to both"],
- "The course draws the seam: BTEX as an emission from a glycol unit is owned by Gas Processing, and a personal air sample with its 8-hour TWA is a different measurement of a different quantity. Sharing a substance and a unit does not make an emission rate a breathing-zone concentration. The risk matrix ranks hazards and has no part in this comparison.")
+ "Section 25 puts BTEX from a glycol unit with the Gas Processing course. A personal air sample read as an 8-hour TWA measures what a worker breathed, and an emission rate measures what left a unit, so the two figures answer different questions even where they share a substance and a unit. The 5x5 matrix ranks hazards and takes no part in this comparison.")
 
 q(1, "What does every one of the golden's 57 refusal cases return?",
  "An `error` and a `field` naming the input refused, with the message in the engine's own words",
@@ -242,12 +242,12 @@ q(0, "What does `oshaActionLevelForShiftDbA` need, and what does it not know?",
   "The shift hours and the weekly hours"],
  "The closed form's only input is the shift length, so the door answers a question about the schedule. The noise dose over the actual record comes from `noiseDose` on the action-level criterion. The PEL is never reduced, so the door serves the action level alone, and the daily and weekly factors are Brief and Scala's, for chemical limits.")
 
-q(1, "The teaching hour's metabolic average is 300.000000 W. What limits how far that figure can be trusted?",
- "The rate assigned to each period, usually an estimate from tables of activities",
- ["The averaging window, since a sixty-minute window is a constant copied from the NIOSH page",
-  "The figure range of 116 to 580 W",
-  "The golden's single oracle-only case"],
- "The arithmetic is exact: the door is ARITHMETIC BY DEFINITION. What deserves scrutiny is the input, a metabolic rate usually estimated from activity tables and not measured on the worker, and a scenario that states the rates has already made that judgement. The window is the definition of the average, the figure range concerns the equations, and the door's single oracle case is all an average with nothing to copy needs.")
+q(1, "What does `metabolicRateTwaW` take, and what constant is there in it?",
+ "Periods of watts and minutes, with no constant in it but the length of the window it averages",
+ ["Periods of watts and minutes, and the acclimatisation of the worker the rates belong to",
+  "Periods in watts or in kcal/h, which the door converts to watts before it averages them",
+  "Periods of watts and minutes, with the 116 to 580 W range enforced on each period it is given"],
+ "The door takes periods of watts and minutes and returns their time weighted average, which is why the course classes it ARITHMETIC BY DEFINITION: a time weighted average whose only constant is the length of its window. Acclimatisation is an input of the assessment door. The engine takes no kcal/h input, in watts only, and the 116 to 580 W figure range is a range for the equation's rate and warns rather than binds.")
 
 q(2, "A hygienist wants to compare a short peak concentration with a chemical ceiling. What does the engine offer?",
  "No door: chemical ceiling comparisons are among the things it does not provide",

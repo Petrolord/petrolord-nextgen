@@ -123,13 +123,13 @@
  {
   "prompt": "Why does the course give the teaching crew no single combined figure across noise, chemical and heat stress?",
   "options": [
-   "The engine has no door that combines hazards, although the three ratios could be added by hand",
+   "The engine has no door that combines hazards, although the three figures are ratios that could be added by hand",
    "A combined figure is owned by the Risk, Change and Learning course, which ranks each hazard on its matrix",
    "A noise dose, a mixture index and a WBGT use different criteria and units, so a sum would mean nothing",
    "The heat stress row is transcription only, and without it the other two could be summed as ratios"
   ],
   "answer": 2,
-  "explanation": "The crew's record is three readings, each against its own line, each with its own evidence, and a report lists them side by side. Adding a noise dose to an index is meaningless whatever door computes it. The risk matrix ranks hazards and never adds them. The noise and chemical rows are measured in different units against different criteria even without the heat stress row."
+  "explanation": "The crew's record is three readings, each against its own line, each with its own evidence, and a report lists them side by side. The three are not three ratios: the heat stress row is a one-hour WBGT in degrees C, set against an equation in degrees C, while the noise row is a percentage of an allowance and the chemical row a dimensionless index. The risk matrix ranks hazards and never adds them, and the noise and chemical rows are already in different units against different criteria."
  },
  {
   "prompt": "A reviewer asks to rank the teaching crew's three hazards on a 5x5 risk matrix and to add its incident rates. Where does this course send each request?",

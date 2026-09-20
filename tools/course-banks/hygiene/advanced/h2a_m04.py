@@ -25,11 +25,11 @@ q(0, "Which check shows that 102.0 dBA at 50000 percent is a slip in Table 1-2 a
  "The 45000 percent row agrees with its formula value of 111.532125 dBA and the 60000 percent row prints 112.800000 against 112.781513, so a printed TWA that drops to 102.0 between them as the noise dose rises is impossible for a formula that only rises. Being outside tolerance says the two disagree without saying which is wrong. Authority alone diagnoses nothing: the formula wins here because the neighbours confirm it. Table 1-2 prints many rows above 100 dBA.")
 
 q(1, "An engine that copied the 102.0 dBA row of Table 1-2 would report that noise dose how far from the formula?",
- "Nearly ten decibels low, which understates the noise exposure by a factor of about ten in energy",
- ["Nearly ten decibels high, which overstates the noise exposure by a factor of about ten in energy",
+ "Nearly ten decibels low, so every noise exposure built on it would be understated",
+ ["Nearly ten decibels high, so every noise exposure built on it would be overstated",
   "Within the table's 0.050000 printed tolerance, so the noise exposure it reports would be unchanged",
   "Two decibels low, the difference between the leading digits of 102.0 and of 112.0 on the table"],
- "The formula gives 111.989700 dBA and the printed row 102.0, so the copy sits 9.989700 dB below, 199.794001 tolerances away. Ten decibels is a factor of ten in energy, and the copy errs on the low side, so it would understate the noise exposure. The miss is about two hundred tolerances wide, far outside one, and comparing leading digits is not how a TWA difference is read.")
+ "The formula gives 111.989700 dBA and the printed row 102.0, so the copy sits 9.989700 dB below the formula, 199.794001 tolerances away. The copy errs on the low side, so every figure built on it would come back short. The miss is about two hundred tolerances wide, far outside one, and comparing leading digits is not how a TWA difference is read.")
 
 q(3, "NIOSH Table 1-1 prints 18 min 59 s at 99 dBA, where the formula gives 18 min 53.9 s. Why is that row an erratum and no mere rounding habit?",
  "It sits 5.071055 tolerances of one printed second off while its neighbours reproduce",
@@ -74,11 +74,11 @@ q(0, "What tolerance does the golden hold NIOSH Table 1-1 to, and why that one?"
  "At its 124 and 127 dBA rows Table 1-1 drops the fraction of a second where it rounds elsewhere, so its own printing moves by up to one unit. Engine minus printed is 0.000143 h at 124 dBA and 0.000211 h at 127 dBA, both inside 0.000278 h. Half a second would fail the table on its own habits. Each source is gated at its own precision, and a gate demanding every digit of an inconsistent source fails on the source.")
 
 q(1, "A reviewer objects that setting Table 1-1's tolerance at one printed second is widening a gate to hide failures. What answers the objection?",
- "The tolerance comes from the table's printed unit and its known habits, and it was set before any row was compared",
- ["The tolerance was chosen after the comparison, at the smallest value that let every row of the table pass",
+ "The table's own printing moves by up to one second at 124 and 127 dBA, and the 99 dBA row still fails at 5.071055 tolerances",
+ ["The tolerance was picked after the comparison, at the smallest value that let every row of the table pass",
   "The objection is right, and the golden should gate Table 1-1 at every printed digit whatever that costs",
   "The tolerance does not matter, since the engine is checked against the oracle and never against a table"],
- "A tolerance fixed from the source's precision before any comparison is a fact about the table; one tuned afterwards to make rows pass is the defect the reviewer fears. The 99 dBA row still fails at 5.071055 tolerances, which shows the gate still convicts real slips. A gate demanding every digit would fail on the table's own truncation, and 372 golden cases are checked against printed values.")
+ "NIOSH Table 1-1 truncates at its 124 and 127 dBA rows where it rounds elsewhere, so its own printing moves by up to one unit, and the golden gates it at one printed second. That gate still convicts: the 99 dBA row misses by 0.001409 h against 0.000278 h. A tolerance that let every row pass would have taken that row with it. A gate demanding every digit would fail on the table's own truncation, and 372 golden cases are checked against printed values.")
 
 q(3, "HSE L108 Figure 26 prints 6:21 for 6 h 20.97 min and 2:00 for 2 h 0.57 min. How does the golden read those prints?",
  "As rounding to the minute, gated at one minute",
@@ -94,19 +94,19 @@ q(2, "Of the five errata the golden pins, which sits nearest its printed toleran
   "The Table 1-2 row at 50000 percent, 199.794001 tolerances away, since a transposed digit is the smallest kind of slip"],
  "Ranked by tolerances away the five are 1.836177, 1.904167, 5.071055, 6.821223 and 199.794001. The A-1 row is closest, with the RAL example just behind. The distance is the miss over the printed tolerance, so neither the size of the miss alone nor the size of the unit settles it, and a transposed digit sits furthest of all.")
 
-q(2, "Why is a pin that sits close to its tolerance worth more to a gate than one that sits far away?",
- "An honest-looking edit could slip the engine inside it",
- ["A pin near its tolerance is closer to being a reproduction, so it adds to the published evidence",
-  "A pin far from its tolerance can never fail, so the golden reports it as a warning and moves on",
-  "A near pin tests the oracle as well as the engine, since both are checked against the printed value"],
- "A small drift in `noiseTwaFromDoseDbA` could bring the engine within 0.050000 of the printed 91.1, and the pin would go red; nothing plausible brings it near 102.0. An erratum pin is a case to miss, never evidence of reproduction. A far pin still runs and would fail on a gross edit. Pins test the engine, and the oracle agreeing says nothing about a printed value.")
+q(2, "What would be lost by dropping a known misprinted row from the golden instead of pinning it as a case the engine must miss?",
+ "The typo would go invisible, and a later edit would be free to match it",
+ ["Nothing, since the engine computes from the formula whatever rows the golden happens to hold",
+  "The door would go untested at that argument, since a dropped case is a value the engine is never asked for",
+  "The rest of the table would need a wider printed tolerance before any of its rows could pass"],
+ "Pinning a typo as a case the engine must MISS turns the typo into a test, and an engine edited to agree with the printed value fails. Dropping the row instead leaves nothing to fail. The engine does compute from the formula, which is the point: the pin guards that against a later edit. The other rows of a table are gated on their own, and a dropped row changes no tolerance.")
 
 q(0, "What does the erratum pin on the NIOSH heat REL worked example leave untested?",
  "Whether 56.7 and 11.5 are the numbers section 8.1 prints; they stay the section 8.1 equation, checked for transcription only",
  ["Whether the engine follows the figure reading, since a pin only checks that the engine stays within tolerance of it",
   "Whether the engine returns a finite limit at 348.900000 W, since a pin is only run on rates inside the figures",
   "Whether 27.800000 C is really printed in section 1.1.3, since a pin takes the printed value on trust from the oracle"],
- "The pin shows the engine does not follow NIOSH's figure reading: it must stay outside 0.050000 C of 27.800000 C. It cannot show that the equation's constants were copied correctly, because the example was never computed from them. A pin checks that the engine is far from the printed value, the reverse of staying within it; 348.900000 W is inside the figure range; and the printed value is the golden's own reading of the source.")
+ "The pin shows the engine does not follow NIOSH's figure reading: it must stay outside 0.050000 C of 27.800000 C. It cannot show that the equation's constants were copied correctly, because the example was read off Figure 8-2 rather than computed from the equation. A pin checks that the engine is far from the printed value, the reverse of staying within it; 348.900000 W is inside the figure range; and the printed value is the golden's own reading of the source.")
 
 q(1, "Where do the five published errata this module studies live?",
  "In the published sources as printed today, which every reader of those pages meets",

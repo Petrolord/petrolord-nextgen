@@ -73,12 +73,12 @@ q(0, "The teaching crew works 10 hour shifts and 50 hours a week. Toluene's limi
   "200.000000 ppm, since Brief and Scala leave a limit alone until a shift reaches 12 hours"],
  "The daily factor is (8/10) x (24 - 10)/16, 0.700000, and the weekly factor at 50 hours is 0.737500; the smaller governs, so the limit is 200.000000 times 0.700000, 140.000000 ppm. Scaling by 8 over 10 alone drops the recovery term, the reduction for fewer hours away from the air. The weekly factor is the larger here and does not govern. The factor falls below 1 for any shift over 8 hours.")
 
-q(1, "What does the (24 - h)/16 part of the Brief and Scala daily factor account for?",
- "The recovery time away from the air, against the 16 hours an 8 hour day leaves",
- ["The hours of breathing the air, scaled against an eight-hour day of intake at the limit",
-  "The hours of the working week that fall outside a 40 hour standard week",
-  "The fraction of the day spent at rest inside the workplace between tasks"],
- "RF = (8/h) x (24 - h)/16: the first part scales intake by the longer time breathing the air, the second scales recovery, since an eight-hour day leaves 16 hours to clear what was taken in and a longer shift leaves fewer. The 40 hour week belongs to the weekly factor, and rest breaks inside the shift are still time at work.")
+q(1, "The course measures a denominator out of each Brief and Scala factor. Which two values come back, and from what question?",
+ "16.000000 hours for the daily factor, from the raw factor at 4 hours, and 128.000000 for the weekly, from the raw factor at 20 hours",
+ ["24.000000 hours for the daily factor and 168 for the weekly, the hours of a day and of a week",
+  "8.000000 hours for the daily factor and 40.000000 for the weekly, the standard shift and the standard week",
+  "16.000000 hours for both, since the weekly factor reuses the daily denominator once a week is given"],
+ "DAILY RF is (8/h) x (24 - h)/16 and WEEKLY RF is (40/h) x (168 - h)/128, and each denominator is measured by asking the engine for a raw factor whose value is that constant and nothing else: 16.000000000000 hours from the raw daily factor at 4 hours, 128.000000000000 from the raw weekly factor at 20 hours. Each matches a literal typed in the generator with a relative difference of 0. The 24 and the 168 sit in the numerators, and the 8 and the 40 scale the hours of breathing the air.")
 
 q(2, "The BC Occupational Health and Safety Regulation prints daily factors of 0.700000, 0.500000, 0.250000 and 0.100000 at 10, 12, 16 and 20 hours, and the engine reproduces all four. What does that prove?",
  "That the constants 8, 24 and 16 are tested by something outside the two files that hold them",
@@ -99,7 +99,7 @@ q(3, "On a 6.000000 hour shift the raw daily factor is 1.500000. What does `brie
  ["It raises the limit to 150.000000, since a shorter shift leaves more recovery time",
   "It refuses on `shiftHours`, since Brief and Scala apply only to shifts over 8 hours",
   "It keeps 100.000000 and drops the raw factor, since a value above 1 is meaningless"],
- "Judgement J8 caps the factor at 1 so the adjusted limit is never above the limit it started from, and keeps `rawRf` so the reader can see what the formula gave. A reduction factor reduces: the model argues a longer shift needs a lower limit and gives no grounds to relax one, since a short shift may still carry peaks. The door accepts any shift from above zero to 24 hours, and the raw value is reported.")
+ "Judgement J8 caps the factor at 1 so the adjusted limit is never above the limit it started from, and keeps `rawRf` so the reader can see what the formula gave. Each factor lowers a limit and never raises one, which is the engine's rule at 6 hours: rf 1.000000 with rawRf 1.500000. The door accepts any shift from above zero to 24 hours, and the raw value is reported rather than dropped.")
 
 q(1, "The ESTA 12-hour example adjusts a limit of 10.000000 for 12.000000 hour shifts and 60.000000 hours a week. What adjusted limit results?",
  "5.000000, since the daily 0.500000 is the smaller factor and is the one applied",
@@ -108,12 +108,12 @@ q(1, "The ESTA 12-hour example adjusts a limit of 10.000000 for 12.000000 hour s
   "The limit times the product of both factors, since a schedule carries both a long day and a long week"],
  "The daily factor at 12 hours is 0.500000 and the weekly factor at 60 hours is 0.562500; the smaller governs, so 10.000000 becomes 5.000000. Because the daily factor governs by a clear margin, the ORACLE ONLY weekly formula never enters the adjusted limit. Neither factor is capped here, since both are below 1, and the engine applies one factor and never their product.")
 
-q(2, "A hygienist proposes applying the Brief and Scala daily factor to the 85 dBA action level for a 10 hour noise shift. What does the course say?",
- "Brief and Scala adjust chemical limits; noise has its own rule, the OSHA extended-shift action level",
- ["That is correct, and it gives the same 83.390216 dBA as Table IV-3 for a 10 hour shift",
-  "That is correct for the PEL only, since the action level already has its own extended-shift form",
-  "The factor applies to noise through the noise dose, so the 50 percent line is multiplied by the factor of 0.700000"],
- "The Brief and Scala factor adjusts an eight-hour chemical exposure limit, and the course says it is never applied to a noise dose. Noise on a longer shift is handled by `oshaActionLevelForShiftDbA`, which gives 83.390216 dBA at 10 hours from its own closed form. The PEL is not reduced for any shift, and no rule scales the 50 percent line.")
+q(2, "In the teaching crew's table the three chemical limits are adjusted for the 10 hour schedule by the daily factor. What is the noise row of the same table read against?",
+ "50 percent, the action-level limit noise dose, which the shift's 57.350093 percent is set beside",
+ ["The 85 dBA action level multiplied by the daily factor of 0.700000, as the chemical limits are",
+  "200.000000 ppm adjusted by the daily factor, since one schedule adjusts every limit the crew carries",
+  "The ten-hour action level, with the noise dose itself lowered by the daily factor before it is compared"],
+ "The crew's noise row is the action-level noise dose over the shift, 57.350093 percent against 50, and the three chemical rows are the toluene, xylene and acetone limits adjusted to 140.000000, 70.000000 and 700.000000 ppm. The daily factor appears on the chemical limits alone. The action-level limit noise dose is 50 percent measured out of the engine, a ppm limit is no noise line, and nothing in the table lowers a noise dose.")
 
 emit(Q, '/root/hse-wip-hygiene/banks/h2a_m05.json', expect_n=15)
 finish()

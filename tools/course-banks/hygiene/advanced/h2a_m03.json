@@ -88,15 +88,15 @@
   "explanation": "Tolerances away is the difference over the printed tolerance: 0.952084 over 0.500000 is 1.904167, and 0.341061 over 0.050000 is 6.821223. Both examples are at 348.900000 W, both are in degrees C WBGT, and the comparison divides by the tolerance and never by the value. The equation values themselves are the section 8.1 equation, checked for transcription only."
  },
  {
-  "prompt": "The NIOSH document offers two routes to its heat stress limits, the section 8.1 equation and Figures 8-1 and 8-2. Which does the engine follow, and why?",
+  "prompt": "The NIOSH document offers two routes to its heat stress limits, the section 8.1 equation and Figures 8-1 and 8-2. Which route does the engine take, and what tests that choice?",
   "options": [
-   "The equation: it is the stated criterion, reproducible at any rate, and a figure can only approximate it",
-   "The figures: they carry the document's own worked example, so they are the more tested route of the two NIOSH gives",
-   "The equation at rates inside the figures and the figures outside them, where the equation is extrapolated",
+   "The equation, and the golden pins both figure readings as errata the engine must stay outside the printed tolerance of",
+   "The figures: they carry the document's own worked example, so they are the better tested of the two routes the document prints",
+   "The equation at rates inside the figure range and the figures outside it, where the equation would otherwise be extrapolated",
    "The figures: reading a curve avoids the transcription risk that copying the constants carries"
   ],
   "answer": 0,
-  "explanation": "The engine evaluates the equation and the golden pins both worked example values as errata it must stay outside of. That pin tests the engine's choice; the constants 56.7, 11.5, 59.9 and 14.1 remain the section 8.1 equation, checked for transcription only. The figures stop at 116 and 580 W, so they have nothing to offer outside them, and a figure reading has a resolution problem of its own."
+  "explanation": "The engine evaluates the section 8.1 equation, and the golden pins niosh-heat-example-rel at 27.800000 C and niosh-heat-example-ral at 25.000000 C as cases the engine must miss, by 6.821223 and 1.904167 tolerances. An engine that followed the figures would turn the suite red. The constants 56.7, 11.5, 59.9 and 14.1 remain the section 8.1 equation, checked for transcription only, and the figures stop at 116 and 580 W."
  },
  {
   "prompt": "Three reasons keep every heat stress limit out of grading. Which one explains why the one-hour averages can be graded?",
@@ -136,7 +136,7 @@
   "options": [
    "The band, which sits 0.524593 C above the equation, so an hour between the two reads under the band only",
    "The equation, which sits 0.524593 C below the band, so it lets through WBGT hours that the band summary would stop",
-   "Neither, since a band summary is the equation rounded to the nearest degree at the rate that it names",
+   "Neither, since a band summary is only the equation rounded to the nearest whole degree at the rate that the band names",
    "The equation, since a curve at a point always allows more than a band that covers a range of work"
   ],
   "answer": 0,
@@ -145,13 +145,13 @@
  {
   "prompt": "Why does the golden not gate NIOSH 2016 Table 5-1 against the engine?",
   "options": [
-   "Table 5-1 is licensed text, like the ACGIH tables, so its values can be neither quoted nor gated by the course",
-   "A band summary prints one round value for a range of work, and a band and a curve were never meant to agree at a point",
-   "Table 5-1 carries the RAL only, and the golden gates only the NIOSH heat REL equation against printed values",
+   "Table 5-1 is licensed text, like the ACGIH tables, so none of its values may be quoted by the course or gated by the golden against the engine",
+   "Table 5-1 summarises the limits in bands of one round value, and the band differs from the equation at each of its four rates",
+   "Table 5-1 carries the RAL alone, and the golden gates only the NIOSH heat REL equation against the values a source prints",
    "Table 5-1 is one of the five errata, and an erratum is pinned as a miss rather than gated as a reproduction"
   ],
   "answer": 1,
-  "explanation": "A band differs from the equation at almost every rate inside it by construction, so comparing them at a point would test nothing. The course quotes the four bands, 30, 28, 26 and 25 C, as band summaries. Table 5-1 is a NIOSH table and quoted freely; its bands are compared here with the NIOSH heat REL equation; and it is absent from the five errata, which are specific printed values the formula refutes."
+  "explanation": "The course prints the four band values, 30, 28, 26 and 25 C, beside the equation at the band rates, and the differences are 0.524593, 0.542492, -0.024291 and 0.079422 C. A summary that differs at every rate it covers would fail a gate at a point without saying anything about the engine, so the golden does not gate the table. Table 5-1 is a NIOSH table and quoted freely, its bands are compared with the NIOSH heat REL equation, and it is absent from the five errata."
  },
  {
   "prompt": "A site procedure quotes 28.000000 C for work at 349.000000 W. The equation at 349.000000 W gives 27.457508 C and the worked example prints 27.800000 C. What must a report using the procedure's number say?",
