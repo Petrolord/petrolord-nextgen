@@ -27,6 +27,10 @@
 //   node h2_capstone.mjs              the human table, with the evidence report
 //   node h2_capstone.mjs --json       the rows make_fields.mjs writes
 //   node h2_capstone.mjs --evidence   the evidence and clearance ledger as JSON
+//   node h2_capstone.mjs --inputs     the three frozen scenarios, so the course
+//                                     migration RENDERS its prompts from the
+//                                     conditions the engine was actually run on
+//                                     rather than from a retyped copy of them
 //
 // NOTHING HERE READS THE DIGEST OR THE DIGEST GENERATOR, and the digest
 // generator reads nothing here. gate_capstone_leak.py proves both directions.
@@ -439,6 +443,11 @@ process.stderr.write(`h2_capstone: ${ASSERTS.length} label-and-call, evidence an
 
 if (process.argv.includes('--json')) {
   process.stdout.write(`${JSON.stringify(ROWS)}\n`);
+} else if (process.argv.includes('--inputs')) {
+  // The three frozen scenarios EXACTLY as the engine was called on them. Nothing
+  // is reshaped here: gen_course.py renders every prompt from this object, so a
+  // condition can never drift from the condition that was graded.
+  process.stdout.write(`${JSON.stringify({ UTOROGU, AMUKPE, OSIOKA })}\n`);
 } else if (process.argv.includes('--evidence')) {
   process.stdout.write(`${JSON.stringify({ items: ITEMS, clearances: CLEAR, evidence: EVIDENCE, t6MarginRf: T6_MARGIN }, null, 1)}\n`);
 } else {

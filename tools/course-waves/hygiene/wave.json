@@ -166,7 +166,7 @@
    "result": "panels declared: ['hy-noise-dosimeter', 'hy-protection-chemicals', 'hy-heat-stress'] | history module: none (the engine has no repair history) | PROBLEMS: 0"
   },
   "h2_capstone.mjs": {
-   "md5": "6f30be35cc073d955c347d1cd500640a",
+   "md5": "b0a746318d05c40590deae488961e982",
    "exit": 0,
    "expected": 0,
    "result": "by mechanism: BOUNDARY 11, CONSTRUCTION 5, EXCLUSION 68, MARGIN 2 | T6 margin: weekly factor minus daily factor is above 0.2, asserted (the figure is in --evidence only) | h2_capstone: 114 label-and-call, evidence and clearance assertions run, 0 failed"
