@@ -89,12 +89,12 @@ q(2, "Three studios on this platform use the phrase corrosion allowance. How do 
   "This studio and the Storage Tank studio both consume one, while the Pipeline and Line Sizing studio is the only one of the three that sizes a wall around it."],
  "There is no link between them and no minimum thickness anywhere in this module, so the wall this studio is eating is not the wall either of the other two sized. That is recorded, it is stated in the studio's help, and it is deliberately left unwired.")
 
-q(0, "This module cannot say what the corrosion allowance is being taken off. Which course owns the calculation that would say?",
- "The Pipeline Network course at its Associate tier, which owns the Barlow thin-wall relation with a design factor.",
- ["The Torque and Drag course at its Expert tier, which owns wall loss taken to a derated burst pressure and therefore owns the wall the allowance sits on.",
-  "The Well Integrity and Plug and Abandonment course, which owns the barrier envelope the allowance is measured inside on any line in service.",
-  "The Casing and Tubing Design course at its Expert tier, which owns the erosional velocity criterion and the wall thickness that criterion is applied to."],
- "This module has no minimum thickness, so it cannot say what the allowance is taken off. Wall loss to a derated burst pressure is a separate owner again, and this module consumes an allowance and never computes a pressure, so that comparison is a pivot rather than a derivation. This engine has no erosional-velocity criterion of its own either.")
+q(0, "This course never writes the bare word erosion when it means wall loss. What does it write instead, and why?",
+ "Mechanical erosion or erosional wall loss, because in the Basin Modelling course erosion is a geological process.",
+ ["Erosion corrosion, because the Casing and Tubing Design course owns the erosional velocity criterion and keeps the bare word for its own limit.",
+  "Film stripping, because above the 100 Pa threshold the wall shear strips the inhibitor film, and that is the only erosion this module models.",
+  "Erosional velocity, because the one quantity the word could name in this studio is a velocity limit, and naming the limit avoids implying a wall loss."],
+ "In the Basin Modelling course erosion is material removed from a sedimentary column over geological time, and nothing in that is about steel. This module models no mechanical erosion and has no erosional-velocity criterion, and every use of the term carries that statement. Film stripping is a chemistry verdict about a film.")
 
 q(3, "The Well Integrity and Plug and Abandonment course is the one live course that points at this one. What does it say, and what follows?",
  "It states in its own scope that it carries no corrosion model, no wall loss and no remaining life, and this course fills exactly that refusal.",
