@@ -32,7 +32,7 @@ This matters for two reasons. The first is that a regulator's due date is a day,
 
 ## The count is the engine's
 
-Throughout this course the day counts come from the engine and are quoted from the engine's output. You are not asked to count days on a calendar yourself, and the lessons never do. The course's precision rule states the form every figure takes: whole numbers, with day counts, counts and percents the engine has already rounded, and dates printed as YYYY-MM-DD.
+In the lessons the day counts come from the engine and are quoted from the engine's output. The capstone is different: it hands you dates the lessons never count, and you count the whole calendar days from the as-of date to each one yourself, the way the engine does. Count from the as-of date forward, so a date ahead is positive, the as-of date itself is 0, and a date that has passed is negative. Check your method against the table above before you trust it on a new date. The course's precision rule states the form every figure takes: whole numbers, with day counts, counts and percents the engine has already rounded, and dates printed as YYYY-MM-DD.
 
 ## Exercise
 

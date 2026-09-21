@@ -16,7 +16,7 @@ There are two numbers called P in a multi-shell question and they are different 
 
 The same discipline applies to the two coefficients. U clean leaves the fouling allowances out and U dirty includes them, and the surface a plant buys is sized on the dirty one.
 
-There is a free check available on one of the six answers. The fouling penalty in percent is the same number as the two fouling terms taken as a share of the total, so it can be reached twice by two routes from one stack. If the two disagree, something upstream of both is wrong, and it is usually an inside term put into the stack without the diameter ratio on it.
+There is a free check available on one of the six answers. The fouling penalty in percent is the same number as the two fouling terms taken as a share of the total, so it can be reached twice by two routes from one stack. Taken from one stack, the two routes are equal by construction, so they agree to the six decimals the engine prints. The only gap you should see is rounding: two shares each printed to six decimals can add to one in the sixth decimal away from the penalty. On the studio case 9.211035 plus 22.284762 gives 31.495797, against a penalty of 31.495796. A gap larger than 0.000001 means the two routes were not worked from the same stack, and the usual cause is an inside term put into one of them without the diameter ratio on it. On the studio case, leaving the ratio off the inside fouling puts the share route at 28.743372 percent, 2.75 points below the penalty, so the slip is far too large to pass for rounding.
 
 ## Check the units and the precision
 
