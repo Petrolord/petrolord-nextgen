@@ -281,7 +281,7 @@ const HeatTransferLearningPage = () => {
                 One shell-and-tube exchanger at the live app&apos;s own shipped defaults, one four-pass exchanger with its
                 own loop, one air cooler bay with a hot afternoon to hold, and the published golden cases, on the vendored
                 heat transfer engine. Every number on this page and inside every panel is a return value from that
-                engine, pinned by a test file against the teaching digest. Duties, capacity rates and UA are in Btu an
+                engine, pinned by a test file against the figures the lessons quote. Duties, capacity rates and UA are in Btu an
                 hour, temperatures and log means in degF, areas in ft2, coefficients in Btu an hour per ft2 per degF,
                 resistances in hr.ft2.F per Btu, and diameters in inches. Nothing in this course is a distribution, so no
                 percentile label belongs anywhere in it: the letter P here is the dimensionless temperature group and

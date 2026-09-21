@@ -196,8 +196,8 @@ const QraLearningPage = () => {
               <CardTitle className="text-white flex items-center gap-2"><BookOpen className="h-5 w-5 text-[#BFFF00]" /> Lessons</CardTitle>
               <CardDescription>
                 The teaching streams and the published cases, on the vendored QRA engine. Every number on this page
-                and inside every panel is a return value from that engine, pinned by a test file against the teaching
-                digest. Frequencies and individual risks are per year. Every probability of death is a stated input,
+                and inside every panel is a return value from that engine, pinned by a test file against the figures the
+                lessons quote. Frequencies and individual risks are per year. Every probability of death is a stated input,
                 taken from the consequence course.
               </CardDescription>
             </CardHeader>

@@ -448,7 +448,7 @@ const SlugExplorer = ({ initialMode = 'segments' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored sizing engine on the teaching vessels, printed to the
-        precision the teaching digest prints. Lengths and diameters are in feet, areas in square feet, velocities in feet
+        precision the lessons use. Lengths and diameters are in feet, areas in square feet, velocities in feet
         per second, residence and settling times in seconds, and slug volumes in barrels.
       </Note>
     </PanelShell>

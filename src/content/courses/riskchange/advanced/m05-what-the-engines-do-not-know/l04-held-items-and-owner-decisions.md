@@ -1,10 +1,10 @@
 # Held items and owner decisions
 
-Every engine has edges where its rule stops. This lesson reads two lists from the digest: the held items, which are limits these engines state or show and that no owner has decided, and the owner decisions, which are rules somebody with the authority to decide has decided. A held item is taught as a limit and graded nowhere.
+Every engine has edges where its rule stops. This lesson reads two lists this course keeps: the held items, which are limits these engines state or show and that no owner has decided, and the owner decisions, which are rules somebody with the authority to decide has decided. A held item is taught as a limit and graded nowhere.
 
 ## The held items
 
-The digest lists nine, in this order, with the section it names where it names one:
+The course lists nine, in this order, with the section it names where it names one:
 
 1. A band is found by its lower edge alone, so any positive score bands, including a score no cell of the grid holds (Section 2).
 2. countByBand counts whatever it is handed (Section 5).
@@ -16,7 +16,7 @@ The digest lists nine, in this order, with the section it names where it names o
 8. The application counts in the lessons summary include applications on lessons that are not visible.
 9. An invalid as-of date makes daysUntil answer NaN rather than refuse, and a comparison on NaN is false either way, so every date rule reads as not due. Nothing in this course passes one.
 
-Items five and three are tied in the digest's own words: a comment counts "as an MOC action with an unknown change does".
+Items five and three are tied in the course's own words: a comment counts "as an MOC action with an unknown change does".
 
 ## The owner decisions
 
@@ -35,4 +35,4 @@ An owner decision is policy, and an engine that disagrees with it is wrong. A he
 
 ## Exercise
 
-Record the nine held items in the digest's order, and beside each write the digest section it names, or "none named". Record the two items the digest ties to each other in its own words. Then record the four owner decisions taken on 2026-09-18 under AS15 and the section or sections the digest names for each, and the decision AS13-0 took. Say what separates a held item from an owner decision.
+Record the nine held items in the course's order, and beside each write the section this lesson names, or "none named". Record the two items the course ties to each other in its own words. Then record the four owner decisions taken on 2026-09-18 under AS15 and the section or sections this lesson names for each, and the decision AS13-0 took. Say what separates a held item from an owner decision.

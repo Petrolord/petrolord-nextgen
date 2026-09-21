@@ -23,7 +23,7 @@ Everything else is held at the AFIESERE conditions. Only the orifice moves, whic
 
 The time does not scale with the diameter. Doubling the orifice from 1.000000 in to 2.000000 in takes the time from 419.404662 s to 104.851242 s, a ratio of 0.250000182473.
 
-That is the only ratio on this page you may quote, because it is the only one the digest computes. The temptation with a table like this is to form ratios all the way down it, and every one you form yourself is a number nothing stands behind. If you want the relationship, the printed ratio is where it is, and it tells you the time runs with the area of the hole rather than its diameter, since the mass rate through a choked throat goes with the throat area.
+That is the only ratio on this page you may quote, because it is the only one the course computes. The temptation with a table like this is to form ratios all the way down it, and every one you form yourself is a number nothing stands behind. If you want the relationship, the printed ratio is where it is, and it tells you the time runs with the area of the hole rather than its diameter, since the mass rate through a choked throat goes with the throat area.
 
 Read the rest of the table for direction. The time falls as the orifice grows, monotonically, across the whole range, and the row at 1.250000 in is the AFIESERE case the rest of the module is written on. The step count falls with the time, because the step size is fixed here and a shorter march needs fewer steps to cover the same pressure drop. The substep column stays at zero on every row, which is a statement about the step size rather than about the orifice, and the next module is where it becomes interesting.
 

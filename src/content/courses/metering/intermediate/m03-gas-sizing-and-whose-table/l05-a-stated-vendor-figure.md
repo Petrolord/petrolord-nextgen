@@ -4,7 +4,7 @@ The last lesson ended on an instruction: a certified vendor figure for the speci
 
 ## The same service, sized twice
 
-The digest runs one service at an outlet pressure of 60.000000 psia, first on the table figure and then on a stated one. On the table FL of 0.900000 the coefficient is 19.148480. On a stated FL of 0.970000 the coefficient is 18.750935. The difference, the first less the second, is 0.397545, and the ratio, the first over the second, is 1.021201.
+The course runs one service at an outlet pressure of 60.000000 psia, first on the table figure and then on a stated one. On the table FL of 0.900000 the coefficient is 19.148480. On a stated FL of 0.970000 the coefficient is 18.750935. The difference, the first less the second, is 0.397545, and the ratio, the first over the second, is 1.021201.
 
 Sit with those four numbers for a moment. They are the whole argument for stating a certified figure. The change is real and it is reportable, and it came from one input that a project either has on a datasheet or does not.
 
@@ -24,4 +24,4 @@ This is also why the boundary itself has to be restated whenever FL is. The cros
 
 ## Exercise
 
-Write down the coefficient at an outlet of 60.000000 psia on the table FL of 0.900000 and on a stated FL of 0.970000, with the difference and the ratio the digest prints between them. Then say why the same substitution would leave the coefficient unmoved on a service operating above the crossing at 67.679968 psia.
+Write down the coefficient at an outlet of 60.000000 psia on the table FL of 0.900000 and on a stated FL of 0.970000, with the difference and the ratio the lesson prints between them. Then say why the same substitution would leave the coefficient unmoved on a service operating above the crossing at 67.679968 psia.

@@ -24,8 +24,8 @@ This tier meets several more of these, and one of them refuses to convert a figu
 
 ## Where it is counted
 
-This refusal is not a one-off. The digest counts the refusals it calls and proves across all three engines, and tankCapacity contributes one of them, listed as the refusal on a fill height below zero. The final module of this tier reads that register function by function.
+This refusal is not a one-off. The course counts the refusals it calls and proves across all three engines, and tankCapacity contributes one of them, listed as the refusal on a fill height below zero. The final module of this tier reads that register function by function.
 
 ## Exercise
 
-Find the tankCapacity entry in the refusal list in digest SECTION 30 and state, in the engine's own terms, what condition raises it. Then say what a downstream report would show if the engine returned a value instead.
+Find the tankCapacity entry in the refusal list in the final module and state, in the engine's own terms, what condition raises it. Then say what a downstream report would show if the engine returned a value instead.

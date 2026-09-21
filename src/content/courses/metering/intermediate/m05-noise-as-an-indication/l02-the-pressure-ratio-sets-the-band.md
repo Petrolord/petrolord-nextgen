@@ -10,7 +10,7 @@ The reasoning behind using the ratio is sound and simple. Noise from a throttlin
 
 ## The three probes
 
-The digest runs three probes through the indication. A one scfh bleed at a pressure ratio near twelve has a ratio of 12.000000, and its ratio band is severe. A hundred million scfh at a pressure ratio near two has a ratio of 1.898734, and its ratio band is low. A moderate station flow at a pressure ratio near six has a ratio of 6.000000, and its ratio band is high.
+The course runs three probes through the indication. A one scfh bleed at a pressure ratio near twelve has a ratio of 12.000000, and its ratio band is severe. A hundred million scfh at a pressure ratio near two has a ratio of 1.898734, and its ratio band is low. A moderate station flow at a pressure ratio near six has a ratio of 6.000000, and its ratio band is high.
 
 Read those three ratio bands against the exported thresholds and you can see the ladder working. A ratio of 12.000000 sits above the severe threshold of 10.000000. A ratio of 6.000000 sits above the high threshold of 4.000000. A ratio of 1.898734 sits below the moderate threshold of 2.000000.
 

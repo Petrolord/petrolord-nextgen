@@ -501,7 +501,7 @@ const SuctionExplorer = ({ initialMode = 'npsh' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored Pump Station Designer engine on the teaching pump,
-        printed to the precision the teaching digest prints. Heads are in feet, flows in gpm, pressures in psia and
+        printed to the precision the lessons use. Heads are in feet, flows in gpm, pressures in psia and
         viscosity in centistokes.
       </Note>
     </PanelShell>

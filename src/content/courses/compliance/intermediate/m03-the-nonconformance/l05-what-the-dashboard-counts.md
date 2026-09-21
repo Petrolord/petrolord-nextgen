@@ -15,15 +15,15 @@ summarise prints: NCRs 6, open 3, overdue 2, serious and open 2, concessions 2, 
 | serious and open | 2 | NCR-2026-031 Major, NCR-2026-019 Critical |
 | concessions | 2 | NCR-2026-022 Use as is, NCR-2026-006 Regrade |
 
-The digest prints the ages the mean is taken over: 43, 64 and 117, their sum 224 over 3. The mean open age, 75 days, is a mean of open NCRs alone. The closed ages, 8, 2 and 48 days, are not in it. Oldest open, 117 days, is NCR-2026-019.
+The engine prints the ages the mean is taken over: 43, 64 and 117, their sum 224 over 3. The mean open age, 75 days, is a mean of open NCRs alone. The closed ages, 8, 2 and 48 days, are not in it. Oldest open, 117 days, is NCR-2026-019.
 
 ## The action counts
 
 For the actions, summarise prints: 6 in total, open 2, overdue 1, awaiting an effectiveness check 1, verified effective 1, found ineffective 1. The open two are k2 and k6, and the overdue one is k2, the preventive action on NCR-2026-031, due 2026-10-05.
 
-k5 is the case to read closely. It is a corrective action on NCR-2026-011, which is Voided. The digest prints: "isCapaOpen reads true and isCapaOverdue reads true, and summarise leaves it out of the open and overdue counts." Asked about k5 alone, the engine says the action is open and overdue. Asked for the dashboard, it leaves k5 out. The digest names the one fact that separates the two answers: the NCR k5 sits on is Voided.
+k5 is the case to read closely. It is a corrective action on NCR-2026-011, which is Voided. The course puts it plainly: "isCapaOpen reads true and isCapaOverdue reads true, and summarise leaves it out of the open and overdue counts." Asked about k5 alone, the engine says the action is open and overdue. Asked for the dashboard, it leaves k5 out. The course names the one fact that separates the two answers: the NCR k5 sits on is Voided.
 
-The digest then runs the same actions through summarise with no NCRs supplied, and the counts read open 3, overdue 2. Its line on this: "A child whose parent is not supplied counts." Without the NCRs the engine has no way to know that k5's parent is Voided, so k5 is counted. A dashboard that summarises actions without their NCRs reports a figure the full register does not support.
+The course then runs the same actions through summarise with no NCRs supplied, and the counts read open 3, overdue 2. Its line on this: "A child whose parent is not supplied counts." Without the NCRs the engine has no way to know that k5's parent is Voided, so k5 is counted. A dashboard that summarises actions without their NCRs reports a figure the full register does not support.
 
 ## Sorted by urgency
 

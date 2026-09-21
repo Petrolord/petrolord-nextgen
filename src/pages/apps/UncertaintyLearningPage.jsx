@@ -224,7 +224,7 @@ const UncertaintyLearningPage = () => {
                 One screening case and its range, percentiles done properly, and one convention with the
                 numbers to distrust, on the vendored NPV Scenario Builder and Probabilistic Breakeven
                 Analyzer engines. Every number on this page and inside every panel is a return value from
-                those engines, pinned by a test file against the teaching digest. {lab.words.definition}
+                those engines, pinned by a test file against the figures the lessons quote. {lab.words.definition}
                 {' '}A breakeven price and every input take {lab.words.breakevenPrice.join(', ')} and never a
                 P-label. And a triangle cannot honour every belief: the narrow opex belief of
                 {' '}{lab.narrow.stated.join(', ')} has a shape ratio of {fmt(lab.narrow.shapeRatioDerived, 6)}, outside the band

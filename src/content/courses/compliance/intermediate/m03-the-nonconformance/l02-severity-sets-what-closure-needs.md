@@ -1,6 +1,6 @@
 # Severity sets what closure needs
 
-An NCR carries one of four severities: Critical, Major, Minor or Observation. The severity decides how much canCloseNcr asks for once the disposition is agreed. The digest walks the same closure at all four severities, and the walks part company at the root cause.
+An NCR carries one of four severities: Critical, Major, Minor or Observation. The severity decides how much canCloseNcr asks for once the disposition is agreed. This lesson walks the same closure at all four severities, and the walks part company at the root cause.
 
 {{panel:compliance-plan-explorer}}
 

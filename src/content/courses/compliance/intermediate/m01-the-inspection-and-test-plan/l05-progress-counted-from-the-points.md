@@ -42,4 +42,4 @@ Module two walks the plan to a closure the engine allows. At that point planProg
 
 ## Exercise
 
-Read two lines from the digest: planProgress at the as-of date, resolved 6 with percent 50, and planProgress after the closure walk, resolved 9 of 12 with percent 75. Name the points that moved between them and their type. Then say what the pair shows about which points a plan can close with still open, and what percent 75 does and does not tell a reader about W-09, S-10 and R-12.
+Read two lines from this lesson: planProgress at the as-of date, resolved 6 with percent 50, and planProgress after the closure walk, resolved 9 of 12 with percent 75. Name the points that moved between them and their type. Then say what the pair shows about which points a plan can close with still open, and what percent 75 does and does not tell a reader about W-09, S-10 and R-12.

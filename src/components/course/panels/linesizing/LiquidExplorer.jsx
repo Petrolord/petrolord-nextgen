@@ -345,7 +345,7 @@ const LiquidExplorer = ({ initialMode = 'regime' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored line-hydraulics engine on the teaching line, printed
-        to the precision the teaching digest prints. Liquid work is in bpd, inches of bore and FEET of length; the gas
+        to the precision the lessons use. Liquid work is in bpd, inches of bore and FEET of length; the gas
         tier works in miles, because that is the unit the published transmission forms are stated in.
       </Note>
     </PanelShell>

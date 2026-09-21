@@ -197,7 +197,7 @@ const SupplyLearningPage = () => {
                 Three invented records read by the vendored downstream engines: a coastal import terminal&apos;s tanks and
                 its day, an inland depot&apos;s rack, farm, lane, fleet and forecourt, and one petrol cargo landed and priced
                 to the nozzle. Every volume, queue figure, cost and price on this page and inside every panel is a return
-                value from those engines, pinned by a test file against the teaching digest. Every refusal is the
+                value from those engines, pinned by a test file against the figures the lessons quote. Every refusal is the
                 engine&apos;s own sentence.
               </CardDescription>
             </CardHeader>

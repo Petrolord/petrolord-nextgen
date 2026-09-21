@@ -6,7 +6,7 @@ This lesson is about the engine as it ships and about where the rest of the subj
 
 The Associate tier could say, of any sizing route, which correction the engine computed and which one somebody typed. The Professional tier could say what a stated fraction is a fraction of. This tier asked the harder question: of every number an answer rests on, is there anything in this package that would notice if it moved.
 
-For most of this engine there is, and the digest names the route that would notice. For the viscosity fit and the sphere-drag correlation there is not, because both are shared with the checking side on purpose, and the honest form of that statement is the one you met: move either of them in both files and every published case still passes.
+For most of this engine there is, and the course names the route that would notice. For the viscosity fit and the sphere-drag correlation there is not, because both are shared with the checking side on purpose, and the honest form of that statement is the one you met: move either of them in both files and every published case still passes.
 
 That is not a flaw to be embarrassed about. It is a limit that has been located, written down, and kept out of everything graded. An unlocated limit is the dangerous kind.
 

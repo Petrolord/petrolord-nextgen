@@ -515,7 +515,7 @@ const CoefficientExplorer = ({ initialMode = 'stack' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored heat transfer engine through the teaching lab,
-        printed to the precision the teaching digest prints. Resistances are in hr.ft2.F per Btu to nine decimals,
+        printed to the precision the lessons use. Resistances are in hr.ft2.F per Btu to nine decimals,
         coefficients in Btu an hour per ft2 per degF, diameters in inches, and the P and R groups and F are plain
         numbers. Every refusal shown is the engine's own message, with whatever evidence the same return carried.
       </Note>

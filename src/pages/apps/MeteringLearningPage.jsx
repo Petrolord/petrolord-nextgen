@@ -291,7 +291,7 @@ const MeteringLearningPage = () => {
                 One orifice meter run, one control valve marched across its choking boundary and one fixed-roof tank
                 breathing in both directions, on the vendored metering, control valve and storage tank engines. Every
                 number on this page and inside every panel is a return value from those engines, pinned by a test file
-                against the teaching digest. Bores and plate are in inches, differentials in inches of water and psi,
+                against the figures the lessons quote. Bores and plate are in inches, differentials in inches of water and psi,
                 pressures in psia, rates in gpm and scfh, tank volumes in barrels, venting in scfh of air and fire
                 duties in Btu an hour. Every comparison between two figures is printed as both values, their difference
                 and their ratio, because a comparison that is not computed is not asserted. Nothing in this course is a

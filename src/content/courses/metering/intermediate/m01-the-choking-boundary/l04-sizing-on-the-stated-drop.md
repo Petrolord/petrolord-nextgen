@@ -4,7 +4,7 @@ A common error in this subject is the right equation handed the wrong pressure d
 
 ## The size of the error, printed rather than described
 
-The digest prints this comparison rather than leaving it to be described. At an outlet of 40.000000 psia the engine, sizing on the drop the valve can use, returns a coefficient of 19.148480. A sizing on the full stated drop returns 17.821626. The difference, the first less the second, is 1.326854. The ratio, the first over the second, is 1.074452.
+This lesson prints the comparison rather than leaving it to be described. At an outlet of 40.000000 psia the engine, sizing on the drop the valve can use, returns a coefficient of 19.148480. A sizing on the full stated drop returns 17.821626. The difference, the first less the second, is 1.326854. The ratio, the first over the second, is 1.074452.
 
 Those four figures are the lesson. The hand calculation does not fail loudly. It produces a coefficient that looks entirely reasonable, sits in the same range as the engine's, and would be accepted by any reviewer reading the number alone. It is simply the coefficient for a pressure drop the valve cannot take.
 
@@ -26,4 +26,4 @@ When a vendor quotation and your own calculation disagree on a choked service, t
 
 ## Exercise
 
-Write down the coefficient the engine returns at an outlet of 40.000000 psia and the coefficient a sizing on the full stated drop returns, then write down the difference and the ratio the digest prints between them. Say in one sentence which of the two numbers you would put on a requisition and why the other one exists.
+Write down the coefficient the engine returns at an outlet of 40.000000 psia and the coefficient a sizing on the full stated drop returns, then write down the difference and the ratio the lesson prints between them. Say in one sentence which of the two numbers you would put on a requisition and why the other one exists.

@@ -29,7 +29,7 @@ to a document in this repository, so a published table replaces them.
 
 ## The row that is refused
 
-One row comes back withheld at every beta. The digest counts it over the five
+One row comes back withheld at every beta. The lab counts it over the five
 fitting names, each asked at all six betas, with the rule that a fitting counts
 as refused when the engine returns withheld true at every beta asked:
 

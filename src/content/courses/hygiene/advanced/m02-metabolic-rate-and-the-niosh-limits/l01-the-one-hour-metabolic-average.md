@@ -19,7 +19,7 @@ The engine's door is `metabolicRateTwaW`. It takes periods of watts and minutes 
 
 The golden classes this door ARITHMETIC BY DEFINITION, with 0 published cases, 1 oracle-only case and 1 refusal. Its only constant is the window, so nothing in it could be misread off a page. That is the second reason, beside the WBGT average, that a one-hour metabolic average can be graded when every limit built on it cannot.
 
-The input deserves the scrutiny the arithmetic does not need. A metabolic rate in the field is usually an estimate rather than a measurement taken on the worker, and the published tables a hygienist would reach for are licensed material this course never quotes. What the digest prints is what the door takes, which is periods of watts and minutes. The rest is practice: the average is only as good as the rate assigned to each period, and a scenario that states the rates has already made that judgement for you.
+The input deserves the scrutiny the arithmetic does not need. A metabolic rate in the field is usually an estimate rather than a measurement taken on the worker, and the published tables a hygienist would reach for are licensed material this course never quotes. What the course prints is what the door takes, which is periods of watts and minutes. The rest is practice: the average is only as good as the rate assigned to each period, and a scenario that states the rates has already made that judgement for you.
 
 ## Watts only
 

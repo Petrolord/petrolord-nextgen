@@ -54,4 +54,4 @@ A banded relation is a place where a small change in an input can move which rel
 
 ## Exercise
 
-Take the band edge table in digest SECTION 28 and say which edge you would expect a tank to sit near if its returned band changed after a small change in liquid level. Then say what the band name in the result tells you that the duty alone does not.
+Take the band edge table in this lesson and say which edge you would expect a tank to sit near if its returned band changed after a small change in liquid level. Then say what the band name in the result tells you that the duty alone does not.

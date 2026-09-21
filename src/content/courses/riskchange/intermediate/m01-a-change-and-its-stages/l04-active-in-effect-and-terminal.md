@@ -29,7 +29,7 @@ In the ESANMI register, read on 2026-10-01, 5 changes are in "Implementation" an
 
 ## Finished decides whether actions are open work
 
-Actions belong to a change. When the change is finished and locked, its actions stop counting as open work. In the ESANMI register the summary skips AC-06 on ES-06, which is in the Closed stage, and AC-07 on ES-09, which is "Cancelled". Both are terminal stages. The register carries no action on its one "Rejected" change, so the digest shows this rule on two of the three terminal stages. Module four reads that count in full.
+Actions belong to a change. When the change is finished and locked, its actions stop counting as open work. In the ESANMI register the summary skips AC-06 on ES-06, which is in the Closed stage, and AC-07 on ES-09, which is "Cancelled". Both are terminal stages. The register carries no action on its one "Rejected" change, so this lesson shows this rule on two of the three terminal stages. Module four reads that count in full.
 
 ## Active is the live workload
 

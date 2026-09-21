@@ -29,7 +29,7 @@ Nothing graded in this course reads a fire duty or a fire relief load, which is 
 | drainage answered true | 4434115.2612 |
 | drainage answered false | 7284617.9291 |
 
-One field, and the duty changes by the drainage factor above. Be exact about how big a lever that is, because it is easy to overstate: the digest ranks the single-input changes to this case by what each does to the duty, and the drainage answer comes third of six at 1.642857142857, behind the environment factor at 0.300000 on 3.333333333333 and reading the vessel standing up on 3.318423022984.
+One field, and the duty changes by the drainage factor above. Be exact about how big a lever that is, because it is easy to overstate: the course ranks the single-input changes to this case by what each does to the duty, and the drainage answer comes third of six at 1.642857142857, behind the environment factor at 0.300000 on 3.333333333333 and reading the vessel standing up on 3.318423022984.
 
 What makes it worth a lesson is its shape rather than its size. It is no measurement, but a judgment about a plot: whether a spill drains away, and whether firefighting keeps the pool from establishing itself.
 

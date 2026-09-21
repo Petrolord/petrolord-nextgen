@@ -37,7 +37,7 @@ The same module derives the prefix of a document number from its department and 
 - 'QA', 'ITP' gives QA-ITP
 - '', '' gives GEN-DOC
 
-Two letters of 'QA' stay two letters. An empty department and category give the general prefix GEN-DOC. The IKORO numbers you have been reading, HSE-PRO-0007 and OPS-PLA-0002, are numbers as they stand in the library, and the digest does not say how they were issued. Read documentPrefix as the rule for the prefix, and read a number on the record as what it says.
+Two letters of 'QA' stay two letters. An empty department and category give the general prefix GEN-DOC. The IKORO numbers you have been reading, HSE-PRO-0007 and OPS-PLA-0002, are numbers as they stand in the library, and this course does not say how they were issued. Read documentPrefix as the rule for the prefix, and read a number on the record as what it says.
 
 ## Classification
 

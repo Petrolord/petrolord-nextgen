@@ -4,7 +4,7 @@ A One-off obligation is due once. Once it has been filed, it is done, and there 
 
 ## Two One-off rows
 
-The digest reads two IKORO One-off obligations side by side at the as-of date of 2026-10-15. Both due dates have passed.
+This lesson reads two IKORO One-off obligations side by side at the as-of date of 2026-10-15. Both due dates have passed.
 
 | obligation | last filed | status | days until |
 | --- | --- | --- | --- |
@@ -25,7 +25,7 @@ The difference between the two rows is the filing. A passed due date with a fili
 
 Everywhere else in the register, a negative days until on an Active obligation goes with Overdue or Expired. The right of way consent is the exception, and the reason sentence is there to explain it. Without the words "nothing further is due", a reader seeing Compliant beside -62 could reasonably wonder whether the status was stale. With them, the row explains itself: the obligation was met, it does not recur, and the passed date is the date it was met against.
 
-This is one of the five rules the engine keeps under ASC-0, the one the digest calls R4: a filed One-off says it is discharged. The Expert tier reads all five. The status is Compliant, and the reason carries the words that make the status readable.
+This is one of the five rules the engine keeps under ASC-0, the one the course calls R4: a filed One-off says it is discharged. The Expert tier reads all five. The status is Compliant, and the reason carries the words that make the status readable.
 
 ## Where the two sit in the sorted register
 

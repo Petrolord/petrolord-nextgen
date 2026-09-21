@@ -382,7 +382,7 @@ const MeterRunExplorer = ({ initialMode = 'run' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored metering engine, reached through the teaching lab,
-        printed to the precision the teaching digest prints its class to. Beta ratios, differentials in psi and
+        printed to the precision the lessons use for its class. Beta ratios, differentials in psi and
         percentages to six decimals; Reynolds numbers, mass flows and volumes to four.
       </Note>
     </PanelShell>

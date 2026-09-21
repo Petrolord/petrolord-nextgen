@@ -8,7 +8,7 @@ Publishing a lesson puts it in front of everyone in the organisation. The engine
 
 ON-05 is "Validated" on the ONNE register. It has substance, the organisation has accepted it, and it is not yet visible. The legal next statuses from "Validated" are "Published", "Submitted" and "Archived".
 
-The digest asks the engine to publish it twice:
+This lesson asks the engine to publish it twice:
 
 - REFUSED, ON-05 moved to Published after its validation record is removed: This lesson has not been validated. Somebody other than its author has to accept it before it is published to everyone.
 - ALLOWED, ON-05, validated by u-grace, moved to Published.
@@ -27,7 +27,7 @@ ON-05 shows the edge on 2026-10-01. Its review date is 2026-10-06, inside the le
 
 ## A stated limit
 
-The engine checks that a validation record exists. The digest lists, among the held items, that publishing does not check again who validated it. The independence rule is enforced when the validation is recorded, and the second and third lessons of this module read that rule in full. Publishing relies on it having been enforced there.
+The engine checks that a validation record exists. The course lists, among the held items, that publishing does not check again who validated it. The independence rule is enforced when the validation is recorded, and the second and third lessons of this module read that rule in full. Publishing relies on it having been enforced there.
 
 ## The route back
 

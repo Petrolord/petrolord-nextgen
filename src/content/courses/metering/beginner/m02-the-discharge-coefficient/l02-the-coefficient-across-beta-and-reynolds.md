@@ -31,7 +31,7 @@ quoting half a number.
 ## Which cells count as published
 
 Not every cell in the table is inside the correlation's published band of beta.
-The digest counts the ones that are, over the cross product of the nine betas
+The lab counts the ones that are, over the cross product of the nine betas
 and the five Reynolds numbers, with the rule that a cell counts when the engine
 returns `betaInPublishedRange` true for it:
 
@@ -72,6 +72,6 @@ that run, the table above is how you show them what they have done.
 ## Exercise
 
 Pick the row at beta 0.500000 and the row at beta 0.750000. Without asserting
-anything the digest has not printed, describe what you would have to compute
+anything the lesson has not printed, describe what you would have to compute
 before you could tell a colleague which of the two plates has a coefficient more
 sensitive to a change in throughput.

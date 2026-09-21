@@ -8,13 +8,13 @@ Two coefficients sit in the mass flow through the blowdown orifice. One is yours
 
 Walk the discharge coefficient and hold everything else. A coefficient of 0.600000 gives 366.839286 s, 0.820000 gives 268.419002 s, and 1.000000 gives 220.103588 s.
 
-Now the check the digest prints, which is the only comparison this sweep entitles you to. The ratio of the first time to the last is 1.666666542759, against a coefficient ratio of 1.666666666667. Those two figures are the same quantity read two ways, and the departure between them is the march's own step error rather than anything in how the coefficient is handled. The time runs inversely with the coefficient and with nothing else.
+Now the check the lab prints, which is the only comparison this sweep entitles you to. The ratio of the first time to the last is 1.666666542759, against a coefficient ratio of 1.666666666667. Those two figures are the same quantity read two ways, and the departure between them is the march's own step error rather than anything in how the coefficient is handled. The time runs inversely with the coefficient and with nothing else.
 
 That is what it looks like when a caller's figure is used once and nothing multiplies it. Any input worth typing should be able to survive this test, and the audit module turns it into a general procedure: walk the input across its whole declared range, print the spread of the answer, and compare that spread with the precision the answer prints at.
 
 ## The coefficient beside it, and how it is caught
 
-C never appears on the screen. It is computed inside the mass flux from k, and a reader has no direct sight of it. So the digest checks it a different way.
+C never appears on the screen. It is computed inside the mass flux from k, and a reader has no direct sight of it. So the course checks it a different way.
 
 With the compressibility held constant and the flow choked throughout, the mass balance is separable: the rate of mass loss goes as the mass raised to (k+1)/2, so the time between two masses integrates exactly. Build that closed form from the engine's own C, the gas constant recovered from the start mass, and the stated geometry, and compare.
 

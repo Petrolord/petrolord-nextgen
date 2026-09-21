@@ -197,7 +197,7 @@ const LopaLearningPage = () => {
               <CardDescription>
                 The teaching streams and the published worked SIF, on the vendored LOPA engine. Every number on this
                 page and inside every panel is a return value from that engine, pinned by a test file against the
-                teaching digest. Frequencies are per year, failure rates per hour and times in hours. Failure rates are
+                figures the lessons quote. Frequencies are per year, failure rates per hour and times in hours. Failure rates are
                 illustrative, never data, and no licensed IEC or ISA table is reproduced.
               </CardDescription>
             </CardHeader>

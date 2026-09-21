@@ -10,7 +10,7 @@ In this lesson "overdue" means a visible lesson whose review date has passed. It
 
 ## Two statuses and a lead
 
-A visible lesson reads "review due soon" from REVIEW_LEAD_DAYS, 30 days, before its review date, both ends counted. It reads "review overdue" once the date has passed. The digest moves one review date across the as-of date to show the edges:
+A visible lesson reads "review due soon" from REVIEW_LEAD_DAYS, 30 days, before its review date, both ends counted. It reads "review overdue" once the date has passed. The lab moves one review date across the as-of date to show the edges:
 
 | review due | days until | overdue | due soon |
 | --- | --- | --- | --- |
@@ -45,7 +45,7 @@ The summary counts reviewsOverdue 1 and reviewsDueSoon 2.
 
 ## What the app does with them
 
-The digest records an app finding beside these counts: the Lessons Learned dashboard computes reviewsOverdue and reviewsDueSoon and does not display either. The engine answers the question. Whether a user sees the answer is the app's part, and RECON.md records that gap.
+The course records an app finding beside these counts: the Lessons Learned dashboard computes reviewsOverdue and reviewsDueSoon and does not display either. The engine answers the question. Whether a user sees the answer is the app's part, and RECON.md records that gap.
 
 Every answer here was also replayed through the independent oracle for lessonsLearned, so each is two methods agreeing.
 

@@ -22,8 +22,8 @@ The obvious shortcut is to stop after one pass. Take the inviscid area, get a Re
 
 Done that way, using the measured leading constants and the engine's own correction function, the answer is 1.867601 in2 at a Kv of 0.984858 and a Reynolds number of 17546.394776. The converged answer is 1.867758 in2 at a Kv of 0.984776 and a Reynolds number of 17412.317969.
 
-The ratio of the converged area to the one pass area is 1.000083905751. That figure is quoted because the digest computes it. It is also the honest answer to the question of whether the loop was worth building: on this case, the loop moves the area by less than one part in ten thousand, and yet the loop is the correct construction and the single pass is an approximation to it. Knowing the size of an approximation is not the same as being allowed to ignore it.
+The ratio of the converged area to the one pass area is 1.000083905751. That figure is quoted because the lab computes it. It is also the honest answer to the question of whether the loop was worth building: on this case, the loop moves the area by less than one part in ten thousand, and yet the loop is the correct construction and the single pass is an approximation to it. Knowing the size of an approximation is not the same as being allowed to ignore it.
 
 ## Exercise
 
-State the circular dependency in the liquid route in one sentence, naming the three quantities involved. Then write down the converged area and the one pass area for AKASO and the ratio between them, and say which of the three figures the digest computed for you.
+State the circular dependency in the liquid route in one sentence, naming the three quantities involved. Then write down the converged area and the one pass area for AKASO and the ratio between them, and say which of the three figures the lab computed for you.

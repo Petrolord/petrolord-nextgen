@@ -34,7 +34,7 @@ A designer with only the design column cannot see this. The thickness looks like
 
 ## Where the word flips
 
-The digest bisects the engine's own governing word on this tank and reports the gravity at which it changes:
+The course bisects the engine's own governing word on this tank and reports the gravity at which it changes:
 
 > on this tank the water test takes the bottom course below a gravity of 0.931727
 
@@ -44,4 +44,4 @@ That is a method you can use on any engine that returns a word. You do not need 
 
 ## Exercise
 
-Take the gravity sweep in digest SECTION 26 and name the two adjacent rows the reported crossover gravity must lie between. Say how you would confirm it lies there using only the governing word the engine returns.
+Take the gravity sweep in this lesson and name the two adjacent rows the reported crossover gravity must lie between. Say how you would confirm it lies there using only the governing word the engine returns.

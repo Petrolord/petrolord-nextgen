@@ -10,7 +10,7 @@ Brief and Scala give a second factor for a working week longer than 40 hours:
 
 RF = (40/h) x (168 - h)/128
 
-It has the same two parts as the daily one, and the reading of those parts is background rather than anything the digest prints: the first scaled against a 40 hour week, the second against the 128 hours a 40 hour week leaves out of 168. The engine's door is `briefScalaWeeklyRf`.
+It has the same two parts as the daily one, and the reading of those parts is background rather than anything the course prints: the first scaled against a 40 hour week, the second against the 128 hours a 40 hour week leaves out of 168. The engine's door is `briefScalaWeeklyRf`.
 
 | week, hours | weekly factor |
 | --- | --- |

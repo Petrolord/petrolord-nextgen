@@ -16,7 +16,7 @@ Its due date is 2027-03-31, the date the obligation is next due under its annual
 
 ## The reader who counts to the due date
 
-Now read the row the way a busy person reads it: find the due date and count to that. The digest carries the count to 2027-03-31 on another row. REG-2026-004, the annual environmental monitoring report, is due on 2027-03-31 as well, and its days until at 2026-10-15 reads 167, status On track.
+Now read the row the way a busy person reads it: find the due date and count to that. The course carries the count to 2027-03-31 on another row. REG-2026-004, the annual environmental monitoring report, is due on 2027-03-31 as well, and its days until at 2026-10-15 reads 167, status On track.
 
 So the same date, 2027-03-31, reads 167 days away. A reader who looked only at the permit's due date would see a date 167 days off, file it mentally as fine, and miss the permit lapsing on 2026-11-20. The engine's figure for the permit is 36, and its status is Due soon. That gap between what the reader counted and what the engine counted is the trap this tier is built on.
 
@@ -26,7 +26,7 @@ The status comes from the same date as the count. The permit's lead time is 60 d
 
 ## When the due date is the earlier one
 
-The rule works the other way round as well. The digest moves the expiry of REG-2026-005, the radioactive source licence, out to 2027-09-30. Its due date is 2026-12-31, and with the expiry moved the row reads On track with a days until of 77. The next action date is now the due date, because the due date is now the earlier of the two. The same rule picks whichever date comes first.
+The rule works the other way round as well. The course moves the expiry of REG-2026-005, the radioactive source licence, out to 2027-09-30. Its due date is 2026-12-31, and with the expiry moved the row reads On track with a days until of 77. The next action date is now the due date, because the due date is now the earlier of the two. The same rule picks whichever date comes first.
 
 ## What to take from it
 

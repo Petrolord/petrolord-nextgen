@@ -12,7 +12,7 @@ The later tiers add more: wetted areas in ft2, duties in Btu/hr, velocities in f
 
 ## The leading constants, measured rather than typed
 
-Each published equation carries a leading constant, and none of them is exported. The digest behind this course recovers each one by asking the engine a question whose only possible answer is that constant.
+Each published equation carries a leading constant, and none of them is exported. The work behind this course recovers each one by asking the engine a question whose only possible answer is that constant.
 
 | constant | measured |
 | --- | --- |

@@ -191,7 +191,7 @@ const CarbonLearningPage = () => {
                 Three invented cases read by the vendored engines: a Bayelsa flow station and gas plant rolled into one
                 inventory, a Rivers State gas plant&apos;s heater, steam trap, condensate and process streams, and a Delta State
                 complex costing six abatement measures against a target. Every figure on this page and inside every panel is a
-                return value from those engines, pinned by a test file against the teaching digest. Every refusal is the
+                return value from those engines, pinned by a test file against the figures the lessons quote. Every refusal is the
                 engine&apos;s own sentence.
               </CardDescription>
             </CardHeader>

@@ -21,7 +21,7 @@ Walked across the range the standard covers, C looks like this.
 
 The direction is the whole reading. A stiffer gas, meaning one with a larger isentropic exponent, has a larger C, and a larger C gives a smaller required area for the same load. The column is monotonic across every row printed, which is a property of the closed form rather than a fit to measurements.
 
-Do not divide one of those figures by another. The digest behind this course prints a ratio wherever one is entitled to exist, and it prints none between these rows. Two values of a function evaluated at two inputs are not in a relationship this engine computes, and a learner who forms the quotient produces a number nothing stands behind.
+Do not divide one of those figures by another. Every lesson in this course prints a ratio wherever one is entitled to exist, and it prints none between these rows. Two values of a function evaluated at two inputs are not in a relationship this engine computes, and a learner who forms the quotient produces a number nothing stands behind.
 
 ## Where the 520 comes from
 
@@ -33,7 +33,7 @@ The validation oracle behind this route does not restate the equation. For the c
 
 ## The exponent is an input, and it is yours
 
-C is computed, so nothing about it is held for literature. The exponent it is computed from is a different matter: it is stated by the caller, and it is a property of the gas at relieving conditions rather than a constant of the valve. ORUBIRI states an exponent of 1.270000. The digest walks the table at the stated values above and prints no C at 1.270000, so this lesson prints none either. A figure that is not in the digest does not get invented into a lesson, however easy it would be to interpolate one.
+C is computed, so nothing about it is held for literature. The exponent it is computed from is a different matter: it is stated by the caller, and it is a property of the gas at relieving conditions rather than a constant of the valve. ORUBIRI states an exponent of 1.270000. The course walks the table at the stated values above and prints no C at 1.270000, so this lesson prints none either. A figure the course never printed does not get invented into a lesson, however easy it would be to interpolate one.
 
 ## Exercise
 

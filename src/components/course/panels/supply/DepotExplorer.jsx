@@ -62,7 +62,7 @@ export const RackMode = ({ rack, curve, baySweep, arrivalSweep, inputs, onInput 
       )}
       {rack.refusal && <Refusal message={rack.refusal} />}
       {rack.stable && (
-        <Labelled tag="the digest's arithmetic on the engine's figures">
+        <Labelled tag="the course's arithmetic on the engine's figures">
           <p className="text-xs text-slate-300 mb-0">
             The wait of a truck that does queue, the mean wait over the probability of waiting:
             {' '}{fmt.min(rack.waitIfQueuedDerivedMinutes)} minutes. Erlang B, every bay busy in a rack with no queue, from

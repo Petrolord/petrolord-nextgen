@@ -35,7 +35,7 @@ The engine allows the author responding to C-01, and the author closing out C-02
 
 This is the owner decision D1 of 2026-09-18, segregation of duties, the same rule that keeps a change's originator from approving it, applied to peer review at ASC-0 in the engine. The engine enforces it now. The app and the database follow it with the Suite pull request that ships ASC-0, so this lesson teaches the engine's rule.
 
-The rule has a stated limit. A reviewer named by display name only cannot be matched to the author, so the rule allows one, and a review with no author recorded cannot be checked either. The digest lists both among the held items.
+The rule has a stated limit. A reviewer named by display name only cannot be matched to the author, so the rule allows one, and a review with no author recorded cannot be checked either. The course lists both among the held items.
 
 ## Exercise
 

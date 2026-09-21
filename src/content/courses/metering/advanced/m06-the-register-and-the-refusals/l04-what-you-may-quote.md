@@ -8,7 +8,7 @@ A figure the engine returns, at the precision it is printed, is a figure you can
 
 ## A message is quoted exactly
 
-A refusal, a warning or a note is quoted verbatim, inside backticks, as the engine's own words. The digest pins fifty engine strings verbatim and each was asserted to contain a fragment of its own text when the file was built, so a reworded engine message fails the build rather than quietly teaching wording a learner will never see on the screen.
+A refusal, a warning or a note is quoted verbatim, inside backticks, as the engine's own words. The course pins fifty engine strings verbatim and each was asserted to contain a fragment of its own text when the file was built, so a reworded engine message fails the build rather than quietly teaching wording a learner will never see on the screen.
 
 Some of those messages are phrased in a way a house style guide would change. They are still quoted unchanged, because the words a learner meets on the screen are the words worth learning.
 
@@ -26,4 +26,4 @@ The test is simple. Can you make the package produce this figure, right now, by 
 
 ## Exercise
 
-Take any figure you have quoted from this tier and name the digest section and row it came from. Then say which of the three rules above you would be breaking if you wrote a sentence comparing it with a figure from a different section.
+Take any figure you have quoted from this tier and name the lesson and the row it came from. Then say which of the three rules above you would be breaking if you wrote a sentence comparing it with a figure from a different section.

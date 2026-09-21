@@ -32,4 +32,4 @@ Three refusals in this tier are three different kinds. A fill height below zero 
 
 ## Exercise
 
-Read the boils at ambient refusal in digest SECTION 29 and say which of the two loss halves carries the denominator that fails. Then say what a package returning only the total would show for the same case.
+Read the boils at ambient refusal quoted in this lesson and say which of the two loss halves carries the denominator that fails. Then say what a package returning only the total would show for the same case.

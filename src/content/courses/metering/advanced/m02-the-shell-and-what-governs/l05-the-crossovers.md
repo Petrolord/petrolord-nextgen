@@ -14,7 +14,7 @@ Take two inputs you know return different words. Ask the engine at the midpoint.
 
 ## The two crossovers on this tank
 
-The digest reports both of the tank crossovers this way, and says how each was found.
+The course reports both of the tank crossovers this way, and says how each was found.
 
 > on this tank the water test takes the bottom course below a gravity of 0.931727
 
@@ -34,4 +34,4 @@ So the order of questions matters. First ask whether the engine answers at all. 
 
 ## Exercise
 
-Pick either crossover quoted above and name the two sweep rows in digest SECTION 26 or SECTION 27 that bracket it. Then say what the engine returns at each of those two rows that proves the boundary lies between them.
+Pick either crossover quoted above and name the two sweep rows in the gravity or the draw rate sweep that bracket it. Then say what the engine returns at each of those two rows that proves the boundary lies between them.

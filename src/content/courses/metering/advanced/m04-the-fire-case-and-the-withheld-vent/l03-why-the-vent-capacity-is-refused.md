@@ -42,4 +42,4 @@ Nothing in this course grades a required emergency vent capacity in any tier. An
 
 ## Exercise
 
-Read the withholding message in digest SECTION 28 and list the two routes it gives for getting a vent capacity. Then say which returned figure from the same result each of those routes would start from.
+Read the withholding message quoted in this lesson and list the two routes it gives for getting a vent capacity. Then say which returned figure from the same result each of those routes would start from.

@@ -22,7 +22,7 @@ The refusal gives the instruction and leaves the choice open. The audit can keep
 
 The check compares people. u-kelechi and u-boma are two accounts, and the engine allows the pairing. Named as both roles, u-boma is one account on both sides of the audit, and the engine refuses.
 
-The digest's third row names one in text, with no account, and the engine answers ALLOWED. An external auditor has no area inside the organisation to audit, so there is nothing for the check to find.
+This lesson's third row names one in text, with no account, and the engine answers ALLOWED. An external auditor has no area inside the organisation to audit, so there is nothing for the check to find.
 
 ## Somebody has to lead
 

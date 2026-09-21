@@ -6,7 +6,7 @@ This last lesson draws the boundaries of the four engines in this course: what t
 
 Each engine decides a state from a record: a band and an appetite verdict for a risk, a stage move and an expiry state for a change, a closure verdict for a review, an acceptance and an embedding verdict for a lesson. None of them stores anything. The app stores the record and asks the engine what it means.
 
-That split puts two things outside the engine. The first is what the app shows. The digest records one case in this tier's register: the Lessons Learned dashboard computes reviewsOverdue and reviewsDueSoon and does not display either. On the ONNE register on 2026-10-01 they read 1 and 2. The engine answers, and whether a user sees the answer is the app's part.
+That split puts two things outside the engine. The first is what the app shows. The course records one case in this tier's register: the Lessons Learned dashboard computes reviewsOverdue and reviewsDueSoon and does not display either. On the ONNE register on 2026-10-01 they read 1 and 2. The engine answers, and whether a user sees the answer is the app's part.
 
 The second is what the app and the database enforce. Segregation of duties in peer review, the author never reviewing the work, is held in the engine. The app and the database follow it with the Suite pull request that ships ASC-0. Until that ships, the rule this course teaches is the engine's rule.
 
@@ -28,4 +28,4 @@ In assurance a status is earned by a rule over scores, dates and independent sig
 
 ## Exercise
 
-Record the two dashboard counts the digest says the Lessons Learned dashboard computes and does not display. Record which course owns audit independence, and the one way this course reads an audit finding. Then name three judgements the engines in this tier hand to a person, and say which rules in this tier make sure the person is independent.
+Record the two dashboard counts the course says the Lessons Learned dashboard computes and does not display. Record which course owns audit independence, and the one way this course reads an audit finding. Then name three judgements the engines in this tier hand to a person, and say which rules in this tier make sure the person is independent.

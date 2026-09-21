@@ -36,4 +36,4 @@ From the area come a band and a duty, which the next lesson walks. After the dut
 
 ## Exercise
 
-Read the fire case block in digest SECTION 28 and say which two returned figures let you check that the height cap is binding on this tank. Then say what the returned effective wetted height would be on a tank with a liquid column shorter than the cap.
+Read the fire case block in the withheld explorer and say which two returned figures let you check that the height cap is binding on this tank. Then say what the returned effective wetted height would be on a tank with a liquid column shorter than the cap.

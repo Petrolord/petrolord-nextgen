@@ -28,15 +28,15 @@ The third thing is on the fourth and fifth rows. Each route has exactly one fact
 
 ## What is the same and what is different
 
-The loads are not comparable with each other. A rate in gpm and a mass flow in lb/hr are different quantities, so the three columns cannot be ranked by load, and nothing in the digest offers a conversion between them.
+The loads are not comparable with each other. A rate in gpm and a mass flow in lb/hr are different quantities, so the three columns cannot be ranked by load, and nothing in the course offers a conversion between them.
 
-The required areas are comparable, because they are the same quantity in the same unit, and they can be read in order. What cannot be read is a ratio between them, because the digest prints none, and two required areas for two unrelated cases are not in a relationship this engine works out.
+The required areas are comparable, because they are the same quantity in the same unit, and they can be read in order. What cannot be read is a ratio between them, because the course prints none, and two required areas for two unrelated cases are not in a relationship this engine works out.
 
 Two of the three streams end at the same letter from different required areas. That is the ladder at work rather than a coincidence about the plant.
 
 ## One train, three answers, no ranking
 
-There is no largest case here and no governing case. The digest states only that these are three relief cases on one train, and it ranks nothing among them. Choosing between scenarios happens within one protected item, across the contingencies that item can face. That is the work the next tier begins, where a load stops being an input and starts being something computed from a vessel, a fire and a geometry.
+There is no largest case here and no governing case. The course states only that these are three relief cases on one train, and it ranks nothing among them. Choosing between scenarios happens within one protected item, across the contingencies that item can face. That is the work the next tier begins, where a load stops being an input and starts being something computed from a vessel, a fire and a geometry.
 
 ## Exercise
 

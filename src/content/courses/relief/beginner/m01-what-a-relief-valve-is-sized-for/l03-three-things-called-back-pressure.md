@@ -10,7 +10,7 @@ Here back pressure means the pressure at the relief valve outlet, in the header 
 
 ## Three renderings of one quantity
 
-Even inside this one sense, the same outlet pressure reaches the engine in three different renderings, and the digest prints all three for ORUBIRI.
+Even inside this one sense, the same outlet pressure reaches the engine in three different renderings, and the table below prints all three for ORUBIRI.
 
 | rendering | ORUBIRI |
 | --- | --- |

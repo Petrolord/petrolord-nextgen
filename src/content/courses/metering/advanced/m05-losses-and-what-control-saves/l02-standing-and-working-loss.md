@@ -11,7 +11,7 @@ The total loss is the sum of two mechanisms with different causes. Separating th
 | difference (first less second) | -70067.5951 |
 | ratio (first over second) | 0.048062 |
 
-The standing loss is 3537.6108 lb/yr and the working loss is 73605.2059 lb/yr, and the digest prints their difference as -70067.5951 and their ratio as 0.048062. Both of those figures are quoted from the relation line rather than worked out here, which is the rule this course applies to every comparison it makes.
+The standing loss is 3537.6108 lb/yr and the working loss is 73605.2059 lb/yr, and the table above prints their difference as -70067.5951 and their ratio as 0.048062. Both of those figures are quoted from the relation line rather than worked out here, which is the rule this course applies to every comparison it makes.
 
 The total the engine returns is 77142.8167 lb/yr.
 
@@ -46,4 +46,4 @@ Control equipment does not treat the two halves alike. Something that reduces th
 
 ## Exercise
 
-Read the relation block for the two halves in digest SECTION 29 and say what its ratio row tells you about the loss on this tank. Then say which returned figure in that section the two halves add to.
+Read the relation block for the two halves in this lesson and say what its ratio row tells you about the loss on this tank. Then say which returned figure in the lesson the two halves add to.

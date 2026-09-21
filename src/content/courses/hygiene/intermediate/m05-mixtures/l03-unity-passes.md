@@ -19,7 +19,7 @@ The Associate tier met the same kind of choice at a noise dose threshold, where 
 
 ## Why a boundary needs a named rule
 
-The digest states J7 and prints no reason for stating it, so read this paragraph as the instructor's. A boundary rule matters only for inputs that land exactly on the boundary, and in field measurement that almost never happens by chance. It happens when figures are rounded, since an index computed from rounded concentrations can land on 1.000000 where the unrounded figures would not, in either direction. Carrying the terms at full precision makes that outcome negligible.
+The course states J7 and prints no reason for stating it, so read this paragraph as the instructor's. A boundary rule matters only for inputs that land exactly on the boundary, and in field measurement that almost never happens by chance. It happens when figures are rounded, since an index computed from rounded concentrations can land on 1.000000 where the unrounded figures would not, in either direction. Carrying the terms at full precision makes that outcome negligible.
 
 ## What the flag does and does not tell you
 

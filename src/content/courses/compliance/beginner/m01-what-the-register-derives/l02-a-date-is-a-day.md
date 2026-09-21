@@ -4,9 +4,9 @@ A due date on a permit has no hour in it. It names a day. The calendar module un
 
 ## Reading a date
 
-The calendar's parseDateOnly reads the leading YYYY-MM-DD of a string and builds the day it names at local midnight. Its partner toDateOnlyString prints that day back in the same YYYY-MM-DD shape. Every date in the digest is printed through toDateOnlyString, so the date you read in a table is the day the engine holds.
+The calendar's parseDateOnly reads the leading YYYY-MM-DD of a string and builds the day it names at local midnight. Its partner toDateOnlyString prints that day back in the same YYYY-MM-DD shape. Every date in this course is printed through toDateOnlyString, so the date you read in a table is the day the engine holds.
 
-The third function you need is daysUntil. It counts whole days from the as-of date to a date. The digest's as-of date is 2026-10-15, and these rows are read against it:
+The third function you need is daysUntil. It counts whole days from the as-of date to a date. The course's as-of date is 2026-10-15, and these rows are read against it:
 
 | input | parseDateOnly, printed by toDateOnlyString | daysUntil against the as-of date |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ The third function you need is daysUntil. It counts whole days from the as-of da
 
 ## What the sign tells you
 
-A positive count is a day still ahead. 2026-11-30 is 46 days after the as-of date. A negative count is a day already behind: 2026-09-30 reads -15, fifteen days gone at 2026-10-15. The as-of date itself reads 0. The digest prints that last one on its own line as well, daysUntil of the as-of date itself: 0. A due date that reads 0 falls on the as-of date itself.
+A positive count is a day still ahead. 2026-11-30 is 46 days after the as-of date. A negative count is a day already behind: 2026-09-30 reads -15, fifteen days gone at 2026-10-15. The as-of date itself reads 0. This lesson prints that last one on its own line as well, daysUntil of the as-of date itself: 0. A due date that reads 0 falls on the as-of date itself.
 
 Every "days until" column in the register is this count, and every status that talks about a passed date is reading its sign. When you meet "The due date passed 5 days ago." in the next module, the 5 is a daysUntil of -5 said in words.
 
@@ -32,7 +32,7 @@ This matters for two reasons. The first is that a regulator's due date is a day,
 
 ## The count is the engine's
 
-Throughout this course the day counts come from the engine and are quoted from the digest. You are not asked to count days on a calendar yourself, and the lessons never do. The digest header states the form every figure takes: whole numbers, with day counts, counts and percents the engine has already rounded, and dates printed as YYYY-MM-DD.
+Throughout this course the day counts come from the engine and are quoted from the engine's output. You are not asked to count days on a calendar yourself, and the lessons never do. The course's precision rule states the form every figure takes: whole numbers, with day counts, counts and percents the engine has already rounded, and dates printed as YYYY-MM-DD.
 
 ## Exercise
 

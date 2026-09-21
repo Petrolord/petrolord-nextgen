@@ -375,7 +375,7 @@ const BlowdownExplorer = ({ initialMode = 'march' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored pressure relief engine on the teaching stream,
-        printed to the precision the teaching digest prints. Volumes are in ft3, pressures in psia, temperatures in degR,
+        printed to the precision the lessons use. Volumes are in ft3, pressures in psia, temperatures in degR,
         masses in lb, times in s, orifices in in, heat release in kW, distances in m and radiant flux in kW/m2. The two
         model decisions behind the march are stated rather than hidden: a constant compressibility along the path, and
         choked flow throughout, with the engine naming the pressure below which the second stops holding.

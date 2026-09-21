@@ -29,8 +29,8 @@ That is a habit worth carrying into every tool you use. A conversion a package h
 
 The two capacities answer different questions and they are not interchangeable. A venting question is asked against the nominal capacity, because the thermal rate in this package is carried per barrel of capacity and the engine returns a thermal inbreathing of 19608.4845 scfh for this tank. An inventory or a custody question is asked against the working capacity of 18845.9323 bbl, because nobody fills a fixed-roof tank to the top of the shell.
 
-The mistake this distinction exists to prevent is a quiet one. Nothing in a spreadsheet flags it, because the wrong choice is still a capacity of the right tank in the right units. Both figures are volumes in barrels, both are plausible, and a result that used the wrong one still looks like a tank. The next lesson takes the two side by side and quotes the one relation the digest computes between them.
+The mistake this distinction exists to prevent is a quiet one. Nothing in a spreadsheet flags it, because the wrong choice is still a capacity of the right tank in the right units. Both figures are volumes in barrels, both are plausible, and a result that used the wrong one still looks like a tank. The next lesson takes the two side by side and quotes the one relation the lab computes between them.
 
 ## Exercise
 
-Using only the capacity block in digest SECTION 25, describe how you would confirm the nominal capacity in barrels from two other returned figures in that same block. Say which two figures you would use and in which direction.
+Using only the capacity table in this lesson, describe how you would confirm the nominal capacity in barrels from two other returned figures in that same table. Say which two figures you would use and in which direction.

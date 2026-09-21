@@ -19,7 +19,7 @@ One divided by the correction is the sum of three terms in the Reynolds number. 
 
 The last column is the whole lesson. The steepest term carries most of the sum at a Reynolds number of 10.000000 and is worth almost nothing by 3000.000000. So the fit has a band it does real work in, and outside that band the steepest of its three coefficients could move a long way without changing an answer.
 
-That is also the reason the published liquid set includes a row at a Reynolds number of 92.428866. Without a case down there, the steepest term of the fit would never be exercised by any published case at all, and the nearest printed term row, at 92.000000, puts that term at 0.230929 of the sum. The digest prints no term row at 92.428866 itself, so this lesson quotes none.
+That is also the reason the published liquid set includes a row at a Reynolds number of 92.428866. Without a case down there, the steepest term of the fit would never be exercised by any published case at all, and the nearest printed term row, at 92.000000, puts that term at 0.230929 of the sum. The course prints no term row at 92.428866 itself, so this lesson quotes none.
 
 ## Why a band has to be shown rather than asserted
 

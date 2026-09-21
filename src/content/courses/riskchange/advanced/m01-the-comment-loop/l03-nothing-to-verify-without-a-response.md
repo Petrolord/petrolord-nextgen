@@ -8,7 +8,7 @@ The table of legal moves says a "Responded" comment may go to "Verified". The en
 
 A comment in the Peer Review Manager carries a status and, separately, the author's response text. The engine is handed both, and the two can disagree: a comment can arrive with its status reading "Responded" and no response text on it at all. If the engine looked only at the status, a reviewer could verify a response nobody wrote, and the record would claim a question had been answered with nothing to show for it.
 
-So the move to "Verified" checks the text as well. The digest records the probe, a comment set to "Responded" with no response text on it, asked to move to "Verified":
+So the move to "Verified" checks the text as well. This lesson records the probe, a comment set to "Responded" with no response text on it, asked to move to "Verified":
 
 - REFUSED, Responded to Verified with no response text on the comment: A comment cannot be verified before the author has responded to it.
 
@@ -20,7 +20,7 @@ Verifying is the reviewer's statement that the author's response answers the com
 
 ## A comment with no status
 
-The engine also has an answer for the opposite gap, a comment row with no status at all. It reads as "Open". The digest records the probe:
+The engine also has an answer for the opposite gap, a comment row with no status at all. It reads as "Open". This lesson records the probe:
 
 - REFUSED, a comment with no status, which reads as Open, moved to Closed: An open comment can only go to Responded or Withdrawn.
 

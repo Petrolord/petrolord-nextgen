@@ -193,7 +193,7 @@ const CrudeLearningPage = () => {
                 Three invented cases read by the vendored downstream engines: a Rivers State crude library and its export
                 blend, a Delta State modular refinery valuing a blend on its own cut set, and a Lagos terminal blending PMS
                 and AGO at least cost. Every figure on this page and inside every panel is a return value from those
-                engines, pinned by a test file against the teaching digest. Every refusal is the engine&apos;s own sentence.
+                engines, pinned by a test file against the figures the lessons quote. Every refusal is the engine&apos;s own sentence.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

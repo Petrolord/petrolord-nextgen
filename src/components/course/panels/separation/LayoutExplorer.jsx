@@ -312,7 +312,7 @@ const LayoutExplorer = ({ initialMode = 'distances' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored layout engine on the teaching site, printed to the
-        precision the teaching digest prints. Distances and setbacks are in metres, areas in square metres, heat release
+        precision the lessons use. Distances and setbacks are in metres, areas in square metres, heat release
         in kilowatts, and intensities in kilowatts per square metre.
       </Note>
     </PanelShell>

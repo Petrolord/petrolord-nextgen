@@ -8,7 +8,7 @@ A gas expands as it passes through a valve, so the density in the throat is lowe
 
 The expansion factor falls with the pressure drop ratio. It reads 0.966464 at an outlet pressure of 230.000000 psia, 0.906933 at 200.000000 psia, 0.849982 at 171.300000 psia, 0.787872 at 140.000000 psia, 0.728341 at 110.000000 psia and 0.688654 at 90.000000 psia.
 
-Then it stops falling. On the rows at outlet pressures of 70.000000, 50.000000 and 30.000000 psia it reads 0.666667. The digest records what that figure is: the expansion factor on every choked row is 0.666667, which is two thirds to within one unit in the last place of a double. The engine forms it as one less a quotient, and on this gas that lands one unit in the last place above the double nearest two thirds, which the panel measures.
+Then it stops falling. On the rows at outlet pressures of 70.000000, 50.000000 and 30.000000 psia it reads 0.666667. The lab records what that figure is: the expansion factor on every choked row is 0.666667, which is two thirds to within one unit in the last place of a double. The engine forms it as one less a quotient, and on this gas that lands one unit in the last place above the double nearest two thirds, which the panel measures.
 
 ## Why the floor is exactly two thirds
 

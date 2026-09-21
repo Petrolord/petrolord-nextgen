@@ -6,7 +6,7 @@ Sometimes a planned check turns out not to apply to the job, and the plan record
 
 ## Three requirements, one at a time
 
-H-11 is the pre-commissioning release on QAP-2026-014, a Hold point, Pending at the as-of date 2026-10-15, planned for 2026-11-05. The digest walks a request to set it Not applicable from an empty record to an allowed one.
+H-11 is the pre-commissioning release on QAP-2026-014, a Hold point, Pending at the as-of date 2026-10-15, planned for 2026-11-05. This lesson walks a request to set it Not applicable from an empty record to an allowed one.
 
 | request | canDecideCheckpoint |
 | --- | --- |

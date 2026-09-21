@@ -17,7 +17,7 @@ The method `OSHA_FIELD_50` is the OSHA Technical Manual Appendix E field deratin
 
 ## Why a second derating
 
-The digest prints the rule and the question each method answers, and no reason for the halving, so take this section as background. Laboratory ratings are measured on fitted protectors under ideal conditions, while in the field protectors are worn loosely, removed for part of a shift, or worn with glasses or hair under the seal. The printed part is that this method credits (NRR - 7) at 50 percent and is the OSHA engineering-controls protector estimate.
+The course prints the rule and the question each method answers, and no reason for the halving, so take this section as background. Laboratory ratings are measured on fitted protectors under ideal conditions, while in the field protectors are worn loosely, removed for part of a shift, or worn with glasses or hair under the seal. The printed part is that this method credits (NRR - 7) at 50 percent and is the OSHA engineering-controls protector estimate.
 
 ## Reading the two columns together
 

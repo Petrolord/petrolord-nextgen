@@ -17,7 +17,7 @@ The critical pressure ratio is the single number that decides which of the two g
 | 1.600000 | 0.496765 |
 | 1.800000 | 0.469042 |
 
-The direction runs the opposite way to C. A larger exponent gives a smaller critical pressure ratio, so a stiffer gas stays choked down to a lower outlet pressure. As always, read the direction and do not form a quotient of two rows, because the digest prints no ratio between them.
+The direction runs the opposite way to C. A larger exponent gives a smaller critical pressure ratio, so a stiffer gas stays choked down to a lower outlet pressure. As always, read the direction and do not form a quotient of two rows, because the course prints no ratio between them.
 
 ## How the decision is actually made
 

@@ -32,7 +32,7 @@ Not applicable is an obligation that does not bind this operator. The night nois
 
 ## The lifecycle is checked first
 
-The digest takes one obligation and changes one field at a time to show the order the engine checks things. REG-2026-005, the radioactive source licence, reads Expired as recorded, with a count of -15. Set its lifecycle to Superseded and nothing else, and it reads Superseded with the same -15. The lapsed expiry that made it the worst row in the register no longer counts, because the lifecycle is read first.
+This lesson takes one obligation and changes one field at a time to show the order the engine checks things. REG-2026-005, the radioactive source licence, reads Expired as recorded, with a count of -15. Set its lifecycle to Superseded and nothing else, and it reads Superseded with the same -15. The lapsed expiry that made it the worst row in the register no longer counts, because the lifecycle is read first.
 
 One more variant is worth knowing. Give the same licence a lifecycle word the list does not have, Archived, and it reads Expired, the same status as the licence as recorded. A word outside the four does not switch the countdown off. Only Draft, Superseded and Not applicable do that.
 

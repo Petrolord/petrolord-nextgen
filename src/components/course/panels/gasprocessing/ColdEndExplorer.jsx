@@ -406,7 +406,7 @@ const ColdEndExplorer = ({ initialMode = 'coefficient' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored Gas Processing engine on the teaching stream AGBADA,
-        printed to the precision the teaching digest prints. Pressures are in psia, temperatures in degF, the
+        printed to the precision the lessons use. Pressures are in psia, temperatures in degF, the
         coefficient in degF per psi and per 100 psi, water in lb per MMscf and vessels in feet.
       </Note>
     </PanelShell>

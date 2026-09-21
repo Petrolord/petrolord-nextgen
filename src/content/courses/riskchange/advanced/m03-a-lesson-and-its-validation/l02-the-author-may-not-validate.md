@@ -22,7 +22,7 @@ The author writes and submits. Somebody else validates. Only then can the lesson
 
 ## ON-01 read as if it were still Submitted
 
-ON-01 is "Published" on the ONNE register, and it was written by u-musa. The digest asks the engine to validate it as if it were still "Submitted":
+ON-01 is "Published" on the ONNE register, and it was written by u-musa. This lesson asks the engine to validate it as if it were still "Submitted":
 
 - REFUSED, its author validating it: The author of a lesson cannot validate it, and that includes recording somebody else's name. Ask a colleague who was not involved in writing it to validate it.
 - ALLOWED, u-grace, who did not write it, validating it.
@@ -37,7 +37,7 @@ This is the same idea that runs through the whole of this course. The originator
 
 ## An owner decision held in the engine
 
-The rule on who validates is owner policy, decided on 2026-09-18 under AS15 as Q10, validation by typed name. The next lesson reads the typed-name half of it. The digest records Q10 among the owner decisions held in the engine, the app and, where it matters, the database.
+The rule on who validates is owner policy, decided on 2026-09-18 under AS15 as Q10, validation by typed name. The next lesson reads the typed-name half of it. The course records Q10 among the owner decisions held in the engine, the app and, where it matters, the database.
 
 ## What validation does not check
 

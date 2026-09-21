@@ -1,6 +1,6 @@
 # Refusals a user can act on
 
-Of the 36 ordered pairs of comment statuses, 7 are legal moves. The digest asks the engine for every one of the others, and every refusal comes back with a sentence. This lesson reads those sentences for what they tell the person who asked.
+Of the 36 ordered pairs of comment statuses, 7 are legal moves. This lesson asks the engine for every one of the others, and every refusal comes back with a sentence. This lesson reads those sentences for what they tell the person who asked.
 
 {{panel:rc-review-explorer}}
 

@@ -21,7 +21,7 @@ finishes by telling you which two inputs to go and look at.
 
 The alternative is an engine that carries on and falls over somewhere further
 down. Left unnamed, this case falls through the arithmetic to a message about
-the Reynolds number, which is where the digest says it would land. That message is true and it is useless, because the Reynolds number is not where
+the Reynolds number, which is where the course found it would land. That message is true and it is useless, because the Reynolds number is not where
 the fault lies. Somebody then spends an afternoon on fluid properties when the
 real fault is a transmitter range typed in the wrong units or a static pressure
 entered in gauge where the equation wants absolute.

@@ -39,7 +39,7 @@ With every outstanding audit reported, the answer is ALLOWED. With the last one 
 
 A cancellation with no written reason leaves the audit outstanding. The status may read Cancelled, and the engine still names AUD-2026-008 among the audits not dealt with.
 
-One rule decides outstanding, and the digest proves it on four audits: Reported, Cancelled with no reason, Cancelled with a reason, and Planned. programmeProgress counts 2 outstanding, summarise counts 2, and canCompleteProgramme refuses on "2 audits in this programme have not been reported or cancelled." All three readings use the same rule. The reason is what turns a missing audit into a decision on the record, and lesson one showed the gate that asks for it.
+One rule decides outstanding, and the course proves it on four audits: Reported, Cancelled with no reason, Cancelled with a reason, and Planned. programmeProgress counts 2 outstanding, summarise counts 2, and canCompleteProgramme refuses on "2 audits in this programme have not been reported or cancelled." All three readings use the same rule. The reason is what turns a missing audit into a decision on the record, and lesson one showed the gate that asks for it.
 
 ## Approving the programme
 

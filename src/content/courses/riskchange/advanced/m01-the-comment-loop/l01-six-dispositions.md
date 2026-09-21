@@ -31,7 +31,7 @@ The word "Closed" appears twice in peer review. It is one of the six comment sta
 
 ## Seven moves out of thirty-six
 
-With six statuses there are 36 ordered pairs of a status and a status to move to. The digest records that 7 of them are legal moves, and those seven are the entries in the table. Every other pair is refused, and the engine explains each refusal in its own words, which is the subject of the fourth lesson in this module.
+With six statuses there are 36 ordered pairs of a status and a status to move to. The lab prints that 7 of them are legal moves, and those seven are the entries in the table. Every other pair is refused, and the engine explains each refusal in its own words, which is the subject of the fourth lesson in this module.
 
 Every engine answer quoted in this module was also replayed through the independent Python oracle for peerReview, so each is two methods agreeing.
 

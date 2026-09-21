@@ -155,8 +155,7 @@ const ProtectionChemicalsExplorer = ({ initialMode = 'protectors' }) => {
         {mode === 'reduction' && <ReductionMode b={b} />}
       </div>
       <Note>
-        Every number on this page is a return value of the vendored exposure engine, printed to the precision the teaching digest
-        prints. Every exposure limit is an input typed from a public OSHA value; no licensed limit is quoted.
+        Every number on this page is a return value of the vendored exposure engine, printed to the precision the lessons use. Every exposure limit is an input typed from a public OSHA value; no licensed limit is quoted.
       </Note>
     </PanelShell>
   );

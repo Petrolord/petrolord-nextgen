@@ -1,6 +1,6 @@
 # Overdue reviews and live stages
 
-A peer review carries a due date, and the engine answers whether it is overdue. That answer depends on the date it is asked, so every status in this lesson is the status on 2026-10-01, the as-of date the digest hands the engine on every call.
+A peer review carries a due date, and the engine answers whether it is overdue. That answer depends on the date it is asked, so every status in this lesson is the status on 2026-10-01, the as-of date the course hands the engine on every call.
 
 {{panel:rc-review-explorer}}
 
@@ -60,7 +60,7 @@ The summary over all five reviews and all 12 comments reads totalComments 12, op
 
 ## A limit the summary states
 
-A comment whose review is missing from the list handed to the summary still counts as open work. The digest lists that among the held limits, and the fifth module reads it there.
+A comment whose review is missing from the list handed to the summary still counts as open work. The course lists that among the held limits, and the fifth module reads it there.
 
 These answers were also replayed through the independent oracle for peerReview.
 

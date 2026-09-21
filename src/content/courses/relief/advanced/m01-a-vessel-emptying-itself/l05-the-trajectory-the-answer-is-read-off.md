@@ -30,7 +30,7 @@ Those rows are taken from the listing of every tenth station, whose rows stand t
 
 The stations carry no mass. The march reports the mass at the two ends only: 3469.2925 lb at the start, 648.7449 lb remaining, a fraction of 0.813004 of the inventory removed.
 
-That is a real limit of the return, because an inventory profile is a thing people want and you cannot read one off this call. What you can do is call the march repeatedly at different end pressures, which is how the digest builds its end-pressure table, and which is also the honest way to get any quantity a route does not return.
+That is a real limit of the return, because an inventory profile is a thing people want and you cannot read one off this call. What you can do is call the march repeatedly at different end pressures, which is how the lab builds its end-pressure table, and which is also the honest way to get any quantity a route does not return.
 
 ## The reading habit this module wants
 

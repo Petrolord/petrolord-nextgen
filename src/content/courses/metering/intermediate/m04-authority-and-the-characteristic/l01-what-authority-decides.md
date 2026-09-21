@@ -6,7 +6,7 @@ A valve that is correctly sized for the flow can still be incapable of controlli
 
 Valve authority is the fraction of the system's total pressure drop that the valve itself takes at design flow. The rest of the drop is taken by the pipe, the fittings, the exchangers and everything else in the circuit.
 
-The digest works one system with a total drop of 120.000000 psi and asks what the authority is as the valve's own share changes. A valve drop of 10.000000 psi gives an authority of 0.083333. A valve drop of 40.000000 psi gives 0.333333. A valve drop of 70.000000 psi gives 0.583333. A valve drop of 100.000000 psi gives 0.833333.
+This lesson works one system with a total drop of 120.000000 psi and asks what the authority is as the valve's own share changes. A valve drop of 10.000000 psi gives an authority of 0.083333. A valve drop of 40.000000 psi gives 0.333333. A valve drop of 70.000000 psi gives 0.583333. A valve drop of 100.000000 psi gives 0.833333.
 
 ## Why the fraction decides whether control is possible
 

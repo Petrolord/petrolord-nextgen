@@ -187,7 +187,7 @@ export const LeadMode = ({ sweep, curve, lead, onLead }) => {
         </ResponsiveContainer>
       </div>
       <Note>The edge is where the status the engine returns first differs from its status at a lead time of zero.</Note>
-      <Lead>The digest's own sweep, including the lead times the engine cannot use:</Lead>
+      <Lead>The sweep the lessons quote, including the lead times the engine cannot use:</Lead>
       <Tbl head={['lead_time_days given', 'status']} rows={sweep.rows.map((r) => [r.given, <Status key="s" word={r.status} />])} />
       <Note>With no usable lead time the engine uses DEFAULT_LEAD_TIME_DAYS, {txt(sweep.defaultLeadTimeDays)}.</Note>
     </>
@@ -375,7 +375,7 @@ const RegisterExplorer = ({ initialMode = 'register' }) => {
   return (
     <PanelShell
       title="Register explorer"
-      subtitle={`The IKORO obligation register and document library, read by the engine against an as-of date you move. At ${AS_OF_YMD}, the digest's own date, every row is the one the lessons quote.`}
+      subtitle={`The IKORO obligation register and document library, read by the engine against an as-of date you move. At ${AS_OF_YMD}, the as-of date every lesson reads at, every row is the one the lessons quote.`}
     >
       <FieldGrid>
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />

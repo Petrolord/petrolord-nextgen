@@ -34,7 +34,7 @@ Holding the gas fixed and walking the ratio instead gives the second direction. 
 
 F2 rises as the ratio rises, and the required area rises with it. That pairing surprises people who expect a larger factor to shrink an area, and the resolution is in the shape of the published form. The subcritical equation divides by the square root of the relieving pressure multiplied by the differential across the valve, and that differential shrinks as the outlet pressure climbs. So two things move at once, and the shrinking differential moves the answer harder than the rising factor does.
 
-Read the two columns as two readings of one call rather than as cause and effect. The digest prints no relation between them, and a quotient formed here would be a number nothing computed.
+Read the two columns as two readings of one call rather than as cause and effect. The course prints no relation between them, and a quotient formed here would be a number nothing computed.
 
 ## Where the 735 came from
 

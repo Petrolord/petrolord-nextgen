@@ -1,6 +1,6 @@
 # What reporting an audit needs
 
-Reporting is the move that turns an audit into a deliverable, and canReportAudit asks for everything a report must stand on. The digest walks AUD-2026-007 from its record at the as-of date 2026-10-15 to a report the engine allows, one requirement at a time.
+Reporting is the move that turns an audit into a deliverable, and canReportAudit asks for everything a report must stand on. This lesson walks AUD-2026-007 from its record at the as-of date 2026-10-15 to a report the engine allows, one requirement at a time.
 
 {{panel:compliance-plan-explorer}}
 
@@ -40,7 +40,7 @@ The checklist and the findings are the evidence. The conclusion is the auditor's
 
 ## The lead auditor
 
-The digest also asks the question from the other side. The same audit with no lead auditor named at all is refused:
+The course also asks the question from the other side. The same audit with no lead auditor named at all is refused:
 
 "Name the lead auditor."
 
@@ -50,7 +50,7 @@ A report is somebody's report, and the lead auditor is the person answerable for
 
 The four requirements come in a fixed order. The engine asks for a complete checklist before it asks about findings, and it asks for the findings before the conclusion. Each refusal names only the next thing missing, so the auditor works through the record in the order the refusals arrive.
 
-The walk also shows what the gate does not ask for. A digest probe reports a three-item checklist with a Major item and a Minor item answered Nonconformant and no finding raised: canReportAudit answers ALLOWED. The engine has no rule that a Major or Minor nonconformance must raise a finding before the audit is reported. Reporting needs every question answered and every failed critical question covered. It does not need the site to have conformed.
+The walk also shows what the gate does not ask for. A course probe reports a three-item checklist with a Major item and a Minor item answered Nonconformant and no finding raised: canReportAudit answers ALLOWED. The engine has no rule that a Major or Minor nonconformance must raise a finding before the audit is reported. Reporting needs every question answered and every failed critical question covered. It does not need the site to have conformed.
 
 ## Exercise
 

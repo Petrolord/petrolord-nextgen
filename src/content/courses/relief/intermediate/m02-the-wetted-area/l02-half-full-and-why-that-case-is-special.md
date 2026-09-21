@@ -43,7 +43,7 @@ What the column cannot tell you is where it rises fastest, because its levels ar
 
 ## What a foot of level buys
 
-So the digest walks it again in equal bands of a tenth of the diameter.
+So the course walks it again in equal bands of a tenth of the diameter.
 
 | band ft | horizontal wetted gained ft2 | gained per foot ft2 |
 | --- | --- | --- |

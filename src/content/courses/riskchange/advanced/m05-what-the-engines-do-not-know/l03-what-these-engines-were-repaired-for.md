@@ -1,10 +1,10 @@
 # What these engines were repaired for
 
-This lesson is repair history, and says so first. It sets what these engines used to do beside the rule each holds today, drawn from the one digest section whose subject is repair history.
+This lesson is repair history, and says so first. It sets what these engines used to do beside the rule each holds today, drawn from the one course record whose subject is repair history.
 
 ## Repair history, and how each defect was found
 
-Each repair marker in the golden files is a defect an independent oracle, written from the stated rule, found and pinned as failing, then repaired and kept as a case that fails if the defect returns. The digest lists them for all five modules. The two this tier owns:
+Each repair marker in the golden files is a defect an independent oracle, written from the stated rule, found and pinned as failing, then repaired and kept as a case that fails if the defect returns. The course lists them for all five modules. The two this tier owns:
 
 - peerReview: CAL-1, PR-1, PR-2, RC-4a, RC-4b, RC-9.
 - lessonsLearned: AS15-Q10, ASC0-12, CAL-1, LL-1, RC-9.
@@ -31,4 +31,4 @@ Several refusals used to read "A archived", "level 2 and 3 has" and "1 critical 
 
 ## Exercise
 
-Choose two repairs from the AS12 to AS15 history and two from ASC-0. For each, record what the engine used to do, the rule the engine holds today and the digest figure or sentence that shows it. Then record the repair markers in the peerReview golden file, and say which kind of check found every defect in this lesson.
+Choose two repairs from the AS12 to AS15 history and two from ASC-0. For each, record what the engine used to do, the rule the engine holds today and the engine figure or sentence that shows it. Then record the repair markers in the peerReview golden file, and say which kind of check found every defect in this lesson.

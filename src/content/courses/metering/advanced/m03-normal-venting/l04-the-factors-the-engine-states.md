@@ -39,4 +39,4 @@ When a venting figure matters, write down which factors were applied and where e
 
 ## Exercise
 
-Find the two stated thermal factors the engine returns in digest SECTION 27 and say what the thermal inbreathing of this tank would be keyed to if both were left at the values shown. Then name the one figure in SECTION 25 they are applied to.
+Find the two stated thermal factors the engine returns in this lesson and say what the thermal inbreathing of this tank would be keyed to if both were left at the values shown. Then name the one figure in the capacity result they are applied to.

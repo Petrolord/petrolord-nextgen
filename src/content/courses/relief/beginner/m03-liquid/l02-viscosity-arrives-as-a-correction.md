@@ -8,7 +8,7 @@ Viscosity does not appear in the liquid sizing equation. It appears in a correct
 
 Left out entirely, the AKASO area is 1.839323 in2 at a Kv of 1.000000, with no Reynolds number and no iterations. Put the stated 85.000000 cp back in and the engine returns an area of 1.867758 in2 at a Kv of 0.984776, with a Reynolds number of 17412.317969, reached in six passes, reported as converged, on a residual of 0.000000000000.
 
-The ratio of the two areas is 1.015459516779. That figure is quoted here because the digest computes and prints it. Nothing else in this lesson divides one area by another. Where the digest prints no ratio, the two figures are not in a relationship this engine works out.
+The ratio of the two areas is 1.015459516779. That figure is quoted here because the lab computes and prints it. Nothing else in this lesson divides one area by another. Where the course prints no ratio, the two figures are not in a relationship this engine works out.
 
 ## The whole span of it
 

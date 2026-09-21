@@ -6,7 +6,7 @@ Not every obligation on a register has its lead time filled in, and some have so
 
 complianceStatus.DEFAULT_LEAD_TIME_DAYS is 30. With no usable lead time the engine uses it.
 
-The digest shows this on the same obligation as the last lesson, REG-2026-003, the quarterly flare and venting return, due 2026-10-31, 16 days after the as-of date of 2026-10-15. Only the lead time is varied:
+The table shows this on the same obligation as the last lesson, REG-2026-003, the quarterly flare and venting return, due 2026-10-31, 16 days after the as-of date of 2026-10-15. Only the lead time is varied:
 
 | lead_time_days given | status |
 | --- | --- |
@@ -22,7 +22,7 @@ The digest shows this on the same obligation as the last lesson, REG-2026-003, t
 
 Every one of the first five rows reads Due soon, the same status the return carries with a lead time of 30. A null, an empty string, a negative number, a word typed where a number belongs and a field left out altogether all give the same answer.
 
-Now look at the last row. A lead time of 0 reads On track. Zero is a number the engine can use, and a lead time of zero days means the obligation asked for no advance warning at all. The digest shows the difference directly: 0 gives On track and 30 gives Due soon, so the engine is applying the 0 it was given.
+Now look at the last row. A lead time of 0 reads On track. Zero is a number the engine can use, and a lead time of zero days means the obligation asked for no advance warning at all. The table shows the difference directly: 0 gives On track and 30 gives Due soon, so the engine is applying the 0 it was given.
 
 ## Why a default and never a blank
 

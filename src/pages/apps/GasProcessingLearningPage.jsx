@@ -274,7 +274,7 @@ const GasProcessingLearningPage = () => {
               <CardDescription>
                 One dehydration train, one sour gas train, one dew point skid and the published golden cases, on the
                 vendored Gas Processing engine. Every number on this page and inside every panel is a return value from
-                that engine, pinned by a test file against the teaching digest. Gas is in MMscfd, pressures in psia,
+                that engine, pinned by a test file against the figures the lessons quote. Gas is in MMscfd, pressures in psia,
                 temperatures in degF, water in lb per MMscf, solvent in gal per lb and gpm, and heat in Btu a gallon and
                 MMBtu an hour. Nothing in this course is a distribution, so no percentile label belongs anywhere in it.
               </CardDescription>

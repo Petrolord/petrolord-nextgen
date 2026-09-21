@@ -197,7 +197,7 @@ const HygieneLearningPage = () => {
               <CardDescription>
                 Teaching dosimeter records, task surveys, air samples and heat readings, plus the published tables the
                 engine reproduces, on the vendored exposure engine. Every number on this page and inside every panel is a
-                return value from that engine, pinned by a test file against the teaching digest. Every exposure limit is an
+                return value from that engine, pinned by a test file against the figures the lessons quote. Every exposure limit is an
                 input typed from a public OSHA or NIOSH value, and no licensed limit is quoted.
               </CardDescription>
             </CardHeader>

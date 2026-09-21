@@ -47,4 +47,4 @@ It is also a sentence with a stated basis, and every part of that basis is an in
 
 ## Exercise
 
-Take the draw rate sweep in digest SECTION 27 and name the two adjacent rows the crossover draw rate lies between. Then say what happens to that crossover if the fill rate rises, and which column of the table tells you.
+Take the draw rate sweep in this lesson and name the two adjacent rows the crossover draw rate lies between. Then say what happens to that crossover if the fill rate rises, and which column of the table tells you.

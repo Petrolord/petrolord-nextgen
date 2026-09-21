@@ -17,7 +17,7 @@ Brief and Scala written out for a short shift gives a number above one. Read lit
 
 ## Why a limit is never raised
 
-An eight-hour limit is set with the eight-hour day in mind, and the model behind Brief and Scala is a simple one. What the digest prints is the rule: each factor lowers a limit and never raises one, the engine caps the factor at 1 and keeps the raw value, and that is judgement J8. The reason offered for the cap is the instructor's. The model is good enough to argue that a longer shift needs a lower limit, and it gives no grounds to relax a limit for a shorter one. A reduction factor reduces, and nothing else.
+An eight-hour limit is set with the eight-hour day in mind, and the model behind Brief and Scala is a simple one. What the course prints is the rule: each factor lowers a limit and never raises one, the engine caps the factor at 1 and keeps the raw value, and that is judgement J8. The reason offered for the cap is the instructor's. The model is good enough to argue that a longer shift needs a lower limit, and it gives no grounds to relax a limit for a shorter one. A reduction factor reduces, and nothing else.
 
 ## Two things the cap keeps
 

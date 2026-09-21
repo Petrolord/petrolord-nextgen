@@ -34,4 +34,4 @@ That is the discipline of the tier in one sentence. A comparison you cannot comp
 
 ## Exercise
 
-Using digest SECTION 28, say which figure in the fire result would be handed to API 2000 to obtain a vent capacity. Then explain, in the engine's own terms, why the package does not pick one of the two plausible forms and note the uncertainty.
+Using this module's figures, say which figure in the fire result would be handed to API 2000 to obtain a vent capacity. Then explain, in the engine's own terms, why the package does not pick one of the two plausible forms and note the uncertainty.

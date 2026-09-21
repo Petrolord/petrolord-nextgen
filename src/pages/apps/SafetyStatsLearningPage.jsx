@@ -195,7 +195,7 @@ const SafetyStatsLearningPage = () => {
               <CardDescription>
                 The teaching streams, the BLS worked example and the IOGP published figures, on the vendored safety
                 statistics engine. Every number on this page and inside every panel is a return value from that
-                engine, pinned by a test file against the teaching digest. Rates are per 200,000, 1,000,000 or
+                engine, pinned by a test file against the figures the lessons quote. Rates are per 200,000, 1,000,000 or
                 100,000,000 exposure hours, always named. A confidence interval here is an interval on an estimated
                 rate, and no percentile label is used anywhere in this course.
               </CardDescription>

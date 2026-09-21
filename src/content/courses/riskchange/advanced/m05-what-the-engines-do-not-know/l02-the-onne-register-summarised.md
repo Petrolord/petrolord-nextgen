@@ -44,7 +44,7 @@ Age carries no status of its own. ON-02, at 254 days, reads overdue because its 
 | reviewsOverdue | 1 |
 | reviewsDueSoon | 2 |
 
-Two kinds of count sit in the same table, and the digest separates them. lessonsApplied and lessonsUnapplied count LESSONS, visible ones only. applied, rejected, intoRiskRegister and intoMoc count APPLICATIONS.
+Two kinds of count sit in the same table, and this lesson separates them. lessonsApplied and lessonsUnapplied count LESSONS, visible ones only. applied, rejected, intoRiskRegister and intoMoc count APPLICATIONS.
 
 So lessonsApplied 3 is ON-01, ON-02 and ON-10, the visible lessons with at least one adoption or adaptation. lessonsUnapplied 2 is ON-03 and ON-04, the two rows reading "applied nowhere" above. Beside them, applied 4 counts the adopting and adapting applications themselves, two of which belong to ON-01. The two kinds of count answer two different questions, and a dashboard tile that showed "applied" without saying which would invite the wrong reading.
 

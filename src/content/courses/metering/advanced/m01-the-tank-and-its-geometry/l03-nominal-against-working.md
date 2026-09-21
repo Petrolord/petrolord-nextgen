@@ -1,10 +1,10 @@
 # Nominal against working, on one tank
 
-Two capacities come back from one tank and both of them are honest. Reading a result means knowing which question each one answers, and it means saying nothing about the size of the gap between them that the digest has not computed for you.
+Two capacities come back from one tank and both of them are honest. Reading a result means knowing which question each one answers, and it means saying nothing about the size of the gap between them that the course has not computed for you.
 
 ## The two figures, and the one relation that is printed
 
-The digest prints the pair as a relation, with both values, their difference and their ratio:
+This lesson prints the pair as a relation, with both values, their difference and their ratio:
 
 | RELATION: the nominal and the working capacity of this tank | value |
 | --- | --- |
@@ -33,4 +33,4 @@ Take the two lessons of this module together. Quote figures at the precision the
 
 ## Exercise
 
-Read the relation block for the two capacities in digest SECTION 25 and write one sentence about the gap between them that stays inside what the block prints. Then write the sentence you would have written on your own arithmetic and say which rule it breaks.
+Read the relation block for the two capacities in this lesson and write one sentence about the gap between them that stays inside what the block prints. Then write the sentence you would have written on your own arithmetic and say which rule it breaks.

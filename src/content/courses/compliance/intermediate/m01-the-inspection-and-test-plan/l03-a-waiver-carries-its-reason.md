@@ -24,7 +24,7 @@ A reason alone is not enough. Asked to waive W-09 with a reason and no date or v
 
 "Record the date this was decided and who decided it."
 
-So a waiver needs three things on the record: the date, who decided it, and why. The digest walks the same request on a hold point. H-08, the hydrostatic test, waived with a date, a verifier and a reason, is ALLOWED. H-08 waived with a date and a verifier and no reason is refused with the same waiver sentence W-09 met.
+So a waiver needs three things on the record: the date, who decided it, and why. The course walks the same request on a hold point. H-08, the hydrostatic test, waived with a date, a verifier and a reason, is ALLOWED. H-08 waived with a date and a verifier and no reason is refused with the same waiver sentence W-09 met.
 
 Read the allowed row plainly. canDecideCheckpoint has no rule that forbids waiving a hold point. A waived hold point with its record and reason is resolved, the same as a waived point of any other type. The engine asks a hold point waiver for its record and its reason, and it asks nothing more.
 

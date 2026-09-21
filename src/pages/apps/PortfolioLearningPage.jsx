@@ -216,7 +216,7 @@ const PortfolioLearningPage = () => {
               <CardDescription>
                 One capital inventory, one well AFE and one portfolio risk summary, on the vendored Capital Portfolio
                 Studio and AFE Cost Control Manager engines. Every number on this page and inside every panel is a return
-                value from those engines, pinned by a test file against the teaching digest. {EXCEEDANCE_DEFINITION}
+                value from those engines, pinned by a test file against the figures the lessons quote. {EXCEEDANCE_DEFINITION}
                 {' '}Only a portfolio NPV outcome carries one: its low case is {OUTCOME_LABELS.p90} and its high case {OUTCOME_LABELS.p10}.
                 A capex, a budget, a forecast, a cost or a probability never does.
               </CardDescription>

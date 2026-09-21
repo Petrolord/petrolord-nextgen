@@ -12,7 +12,7 @@ Its due date is still ahead. That does not rescue it. The passed expiry decides 
 
 ## One field at a time
 
-The digest varies this one obligation, changing a single field in each row:
+The table below varies this one obligation, changing a single field in each row:
 
 | variant | status | days until |
 | --- | --- | --- |

@@ -25,7 +25,7 @@ The coordinator runs the review. The coordinator's one move is "Closed", from "V
 | "Verified" | "Closed" | Closed by the coordinator |
 | "Rejected" | "Responded", "Withdrawn" | Responded by the author, Withdrawn by the reviewer |
 
-Count the moves by owner and the shape of the loop shows. The author has "Responded" from two statuses. The reviewer has "Withdrawn" from two statuses, and "Verified" and "Rejected" from one. The coordinator has "Closed" from one. That is the 7 legal moves the digest counts, split so that the person being reviewed answers and the person reviewing decides.
+Count the moves by owner and the shape of the loop shows. The author has "Responded" from two statuses. The reviewer has "Withdrawn" from two statuses, and "Verified" and "Rejected" from one. The coordinator has "Closed" from one. That is the 7 legal moves the lab counts, split so that the person being reviewed answers and the person reviewing decides.
 
 ## Why the split matters
 

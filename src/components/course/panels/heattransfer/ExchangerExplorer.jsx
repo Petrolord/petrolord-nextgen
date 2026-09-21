@@ -390,7 +390,7 @@ const ExchangerExplorer = ({ initialMode = 'balance' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored heat transfer engine through the teaching lab,
-        printed to the precision the teaching digest prints. Duties, capacity rates and UA are in Btu an hour,
+        printed to the precision the lessons use. Duties, capacity rates and UA are in Btu an hour,
         temperatures and log means in degF, areas in ft2, coefficients in Btu an hour per ft2 per degF, and diameters in
         inches. Every refusal shown is the engine's own message, with whatever evidence the same return carried.
       </Note>

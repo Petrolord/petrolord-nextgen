@@ -26,7 +26,7 @@ That is the design choice this module turns on. A lesson's value is shown by whe
 
 ## Last applied is the last change
 
-ON-01's last applied date is 2026-07-14, the date of AA-02, its "Adapted" application into a procedure. Its "Rejected" application, AA-03 on 2026-08-01, is later and does not move that date, because a rejection applied nothing. The digest prints this directly: ON-01 was last applied on the date of its Adapted application.
+ON-01's last applied date is 2026-07-14, the date of AA-02, its "Adapted" application into a procedure. Its "Rejected" application, AA-03 on 2026-08-01, is later and does not move that date, because a rejection applied nothing. The engine returns this directly: ON-01 was last applied on the date of its Adapted application.
 
 ON-03 has one application and a last applied date of null. Its only application is a rejection, so there is no date on which it was applied to anything. ON-04 has no application at all, and reads null for the same reason with nothing behind it. ON-02 and ON-10 are the simple cases: each has 1 application, an adoption, and each was last applied on the date of that adoption, 2026-06-10 and 2026-08-20.
 
@@ -38,7 +38,7 @@ The last column lists the targets the lesson actually changed. ON-01 changed the
 
 ## What the record cannot say
 
-The reuse record counts applications. It cannot say whether an adoption was done well, or whether the risk register row the lesson changed is now better managed. The digest carries no quality measure for an application, and neither does this lesson. What the count gives a reader is the trail: which records to open to check.
+The reuse record counts applications. It cannot say whether an adoption was done well, or whether the risk register row the lesson changed is now better managed. The engine carries no quality measure for an application, and neither does this lesson. What the count gives a reader is the trail: which records to open to check.
 
 Every figure here was also replayed through the independent oracle for lessonsLearned.
 

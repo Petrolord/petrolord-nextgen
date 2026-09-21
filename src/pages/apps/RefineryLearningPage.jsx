@@ -199,7 +199,7 @@ const RefineryLearningPage = () => {
                 refinery screened for a site in Bayelsa, one month&apos;s plan and schedule at a coastal refinery, and a
                 month&apos;s actuals and a conversion expansion at a third. Crude grade names are labels on invented yields
                 and prices, and every price and cost is illustrative, in US dollars. Every figure on this page and inside
-                every panel is a return value of those engines, pinned by a test file against the teaching digest.
+                every panel is a return value of those engines, pinned by a test file against the figures the lessons quote.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

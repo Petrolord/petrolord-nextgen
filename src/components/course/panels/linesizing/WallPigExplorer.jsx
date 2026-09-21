@@ -412,8 +412,8 @@ const WallPigExplorer = ({ initialMode = 'wall' }) => {
         {mode === 'held' && <HeldMode h={h} />}
       </div>
       <Note>
-        Every number on this page is a return value of the vendored engines, printed to the precision the teaching
-        digest prints. Walls and bores are in inches, lengths in feet, volumes in barrels, and every refusal shown is
+        Every number on this page is a return value of the vendored engines, printed to the precision the lessons
+        use. Walls and bores are in inches, lengths in feet, volumes in barrels, and every refusal shown is
         the engine's own message rather than a description of one.
       </Note>
     </PanelShell>

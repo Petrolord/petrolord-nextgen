@@ -95,7 +95,7 @@ export const CostMode = ({
             usable(x.atZero) ? F.usdt(x.atZero.costPerTonne) : 'refused', F.usdt(x.computedHere.oneYear)]
           : [x.m.label, `REFUSED: ${x.r && x.r.error}`, '', '', '', '', '', usable(x.atZero) ? F.usdt(x.atZero.costPerTonne) : 'refused', F.usdt(x.computedHere.oneYear)]))}
       />
-      <Note>The capital set against one year is the digest&apos;s contrast figure, computed here from the inputs; the engine refuses to compare a one-off cost with a recurring saving.</Note>
+      <Note>The capital set against one year is the course&apos;s contrast figure, computed here from the inputs; the engine refuses to compare a one-off cost with a recurring saving.</Note>
       {usable(refusals) && Array.isArray(refusals.rows) && (
         <>
           <Lead>What the cost of a tonne refuses and names, on {refusals.label}:</Lead>
@@ -395,7 +395,7 @@ const AbatementExplorer = ({ initialMode = 'curve' }) => {
       </div>
       <Note>
         Every figure, verdict and refusal on this page is a return value of the vendored carbonAbatement and energyEfficiency
-        modules through the teaching lab, printed at the digest&apos;s precision. The measures you edit in the first view carry
+        modules through the teaching lab, printed at the lessons&apos; precision. The measures you edit in the first view carry
         into the curve, the target and the path. Every cost, saving and factor is invented; the fuel factor is SYNTHETIC.
       </Note>
     </PanelShell>

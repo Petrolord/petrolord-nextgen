@@ -8,7 +8,7 @@ A flare radiates, and the screening model for how much of that reaches a distanc
 
 The heat release spreads over a sphere, a stated fraction of it goes out as radiation, and a stated fraction of that survives the air between the flame and the receiver. That leaves one geometric constant, the solid angle, and it is not exported.
 
-So the digest measures it. Rearrange one returned intensity against its own stated release, radiated fraction, transmissivity and distance and the only number left over is 12.566370614359.
+So the course measures it. Rearrange one returned intensity against its own stated release, radiated fraction, transmissivity and distance and the only number left over is 12.566370614359.
 
 That is a computed quantity rather than a held one. The validation oracle finds the sphere area by quadrature, which is an independent route to the same figure, so this is one of the constants in the module that something actually checks.
 
@@ -33,7 +33,7 @@ At the stated 140.000000 m the intensity is 1.427138 kW/m2.
 
 ## The one comparison you are invited to make
 
-The intensity falls with the square of the distance, and the digest says so and tells you how to see it: read any two rows of the sweep and form the ratio of the intensities against the ratio of the squared distances. That is an unusual licence in this course and it is granted because the relation is exact and stated. Take it, on a pair of rows of your own choosing, and watch the two ratios meet.
+The intensity falls with the square of the distance, and the course says so and tells you how to see it: read any two rows of the sweep and form the ratio of the intensities against the ratio of the squared distances. That is an unusual licence in this course and it is granted because the relation is exact and stated. Take it, on a pair of rows of your own choosing, and watch the two ratios meet.
 
 ## What the call returns
 
@@ -43,4 +43,4 @@ That contrast is worth holding. The size of a return is a statement about how mu
 
 ## Exercise
 
-Name the four inputs the intensity relation takes and record the solid angle measured out of it, saying what checks it. Record the flare's stated rate, heating value, radiated fraction and transmissivity, and the heat release derived from the first two. Record the intensity at 140.000000 m. Then pick two rows of the sweep, form both ratios the digest invites, and say what the point source route returns.
+Name the four inputs the intensity relation takes and record the solid angle measured out of it, saying what checks it. Record the flare's stated rate, heating value, radiated fraction and transmissivity, and the heat release derived from the first two. Record the intensity at 140.000000 m. Then pick two rows of the sweep, form both ratios the course invites, and say what the point source route returns.

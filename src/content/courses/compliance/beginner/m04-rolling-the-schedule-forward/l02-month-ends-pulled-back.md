@@ -4,7 +4,7 @@ Many regulatory deadlines fall on the last day of a month, and months are not th
 
 ## One due date, every frequency
 
-The digest rolls a due date of 2026-08-31 forward by each frequency and counts the days to the result from the as-of date of 2026-10-15:
+This lesson rolls a due date of 2026-08-31 forward by each frequency and counts the days to the result from the as-of date of 2026-10-15:
 
 | frequency | next due date | days until it |
 | --- | --- | --- |
@@ -26,7 +26,7 @@ That matters because a deadline set as the last day of the month is a promise ab
 
 ## Three more month ends
 
-The digest prints three further cases chosen to test the rule at its hardest:
+The course prints three further cases chosen to test the rule at its hardest:
 
 | due date | frequency | next due date |
 | --- | --- | --- |
@@ -46,7 +46,7 @@ One rule applied in all three places means a due date, the period it closes and 
 
 ## Rolling on from a pulled-back date
 
-The digest also rolls a pulled-back date on a second time:
+The course also rolls a pulled-back date on a second time:
 
 | from | frequency | next due date | and the roll after that |
 | --- | --- | --- | --- |

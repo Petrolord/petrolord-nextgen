@@ -4,7 +4,7 @@ A learner who has never seen an engine refuse has not really met it. This course
 
 ## The counts
 
-The digest calls and proves twenty eight distinct refusals across the three engines. The tree it counts over is the assertion list the generator built while it ran, filtered to the ones labelled a refusal, and the rule is one count per distinct assertion text, every one of which asserted that the engine returned an error key.
+This course calls and proves twenty eight distinct refusals across the three engines. The tree it counts over is the assertion list the generator built while it ran, filtered to the ones labelled a refusal, and the rule is one count per distinct assertion text, every one of which asserted that the engine returned an error key.
 
 It also calls and proves two hundred and thirty eight successes, over the same assertion list filtered the other way, where the rule is one count per distinct assertion text and every one asserted no error key and no non-finite number in the result.
 
@@ -41,4 +41,4 @@ That is the value of the refusal. It converts a silent wrong answer into a loud 
 
 ## Exercise
 
-Read the refusal list in digest SECTION 30 and pick lossControl or thermalVenting, the two tank functions with two refusals each. Say what distinguishes its two cases, and which of them is an impossible input rather than an absent one.
+Read the refusal table in this lesson and pick lossControl or thermalVenting, the two tank functions with two refusals each. Say what distinguishes its two cases, and which of them is an impossible input rather than an absent one.

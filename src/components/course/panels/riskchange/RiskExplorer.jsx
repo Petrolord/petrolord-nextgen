@@ -299,7 +299,7 @@ const RiskExplorer = ({ initialMode = 'matrix' }) => {
       </div>
       <Note>
         Every score, band, verdict and count on this page is a return value of the vendored risk scoring engine through
-        the teaching lab, printed the way the teaching digest prints it: statuses, bands and verdicts in double quotes
+        the teaching lab, printed the way the lessons quote it: statuses, bands and verdicts in double quotes
         exactly as the engine spells them, and dates as YYYY-MM-DD.
       </Note>
     </PanelShell>

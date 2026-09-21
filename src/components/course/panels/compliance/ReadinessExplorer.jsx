@@ -77,7 +77,7 @@ export const ClauseMode = ({ reg, tries, choice, onChoice, flags, onFlag }) => {
       <Verdict v={live} />
       {tries && Array.isArray(tries.tries) && (
         <>
-          <Lead>The digest&apos;s tries, and the Not applicable refusal under three standards and none:</Lead>
+          <Lead>The tries the lessons quote, and the Not applicable refusal under three standards and none:</Lead>
           {tries.tries.map((v) => <Verdict key={v.label} v={v} />)}
           {tries.byStandard.map((v) => <Verdict key={`std ${v.label}`} v={v} />)}
         </>

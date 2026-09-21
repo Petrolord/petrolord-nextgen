@@ -13,7 +13,7 @@ One protector with a label NRR of 27.000000 dB, worn against an A-weighted TWA o
 
 ## The noise reduction rating
 
-The NRR is a single-number rating printed on the package. It is measured in a laboratory and, as background rather than as anything the digest prints, it is stated against C-weighted sound levels, while a workplace survey is usually A-weighted. What the digest does print is that the engine's Appendix B subtraction on A-weighted data measures 7.000000000000 dB. So every method starts by deciding how much of the label to credit and whether to allow for the difference between the two weightings. That is why the door `hearingProtectorEstimate` takes four things: a level, its weighting, the NRR and a method.
+The NRR is a single-number rating printed on the package. It is measured in a laboratory and, as background rather than as anything the course prints, it is stated against C-weighted sound levels, while a workplace survey is usually A-weighted. What the course does print is that the engine's Appendix B subtraction on A-weighted data measures 7.000000000000 dB. So every method starts by deciding how much of the label to credit and whether to allow for the difference between the two weightings. That is why the door `hearingProtectorEstimate` takes four things: a level, its weighting, the NRR and a method.
 
 ## Four methods, four questions
 

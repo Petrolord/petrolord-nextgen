@@ -47,7 +47,7 @@ derived budget rather than a typed one.
 
 There is a temptation, looking at a column of rising percentages, to summarise it
 in a sentence about how fast it rises or where it rises fastest. Resist it. The
-only comparison available on this span is the one the digest computed between
+only comparison available on this span is the one the lab computes between
 the top and the bottom, which is the difference of -7.425000 and the ratio of
 0.010000 you met in the previous lesson. Anything else about the shape of the
 column is arithmetic you did yourself, and arithmetic you did yourself is the

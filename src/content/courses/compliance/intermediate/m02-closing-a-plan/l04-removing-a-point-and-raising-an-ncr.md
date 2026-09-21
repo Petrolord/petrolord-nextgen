@@ -6,7 +6,7 @@ A plan changes in two further ways besides a decision on a point. A point can be
 
 ## Removing a point
 
-The digest asks to remove points from the plan at three stages of its life.
+The course asks to remove points from the plan at three stages of its life.
 
 | request | plan status | answer |
 | --- | --- | --- |

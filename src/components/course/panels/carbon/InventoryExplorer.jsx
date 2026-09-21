@@ -378,7 +378,7 @@ const InventoryExplorer = ({ initialMode = 'inventory' }) => {
       </div>
       <Note>
         Every figure, flag and refusal on this page is a return value of the vendored carbonAbatement module through the
-        teaching lab, printed at the digest&apos;s precision. Every flow, factor and efficiency is invented; the electricity
+        teaching lab, printed at the lessons&apos; precision. Every flow, factor and efficiency is invented; the electricity
         factor is SYNTHETIC.
       </Note>
     </PanelShell>

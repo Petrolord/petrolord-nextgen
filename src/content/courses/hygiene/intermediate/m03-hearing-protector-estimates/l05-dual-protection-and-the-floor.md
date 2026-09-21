@@ -13,7 +13,7 @@ A plug and a muff worn together, the higher NRR 27.000000 dB, on the A-weighted 
 
 ## The dual-protection rule
 
-The method `OSHA_DUAL` takes the higher of the two NRRs, subtracts 7 if the level is A-weighted, and adds 5. The engine measures the addition as 5.000000000000 dB, the attenuation less (NRR less 7) at an NRR of 30. The second protector is credited with five decibels whatever its own label says. The digest prints that rule and no physical reason for it, so take what follows as background: two protectors do not add their ratings, because sound reaches the ear by paths the second protector does not block.
+The method `OSHA_DUAL` takes the higher of the two NRRs, subtracts 7 if the level is A-weighted, and adds 5. The engine measures the addition as 5.000000000000 dB, the attenuation less (NRR less 7) at an NRR of 30. The second protector is credited with five decibels whatever its own label says. The course prints that rule and no physical reason for it, so take what follows as background: two protectors do not add their ratings, because sound reaches the ear by paths the second protector does not block.
 
 ## How strong the evidence is
 

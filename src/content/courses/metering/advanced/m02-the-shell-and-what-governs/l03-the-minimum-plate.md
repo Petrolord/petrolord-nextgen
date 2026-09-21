@@ -32,4 +32,4 @@ So on this tank one course is governed by the hydrostatic test and four by a val
 
 ## Exercise
 
-Find the two notes quoted above in digest SECTION 26. Say which of them would still be returned if the minimum plate thickness in force were lowered until no course was governed by it, and which would stop appearing.
+Find the two notes quoted above in this lesson. Say which of them would still be returned if the minimum plate thickness in force were lowered until no course was governed by it, and which would stop appearing.

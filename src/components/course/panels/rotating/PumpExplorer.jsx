@@ -409,7 +409,7 @@ const PumpExplorer = ({ initialMode = 'curves' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored Pump Station Designer engine on the teaching pump,
-        printed to the precision the teaching digest prints. Flows are in gpm, heads in feet, pressures in psi and power
+        printed to the precision the lessons use. Flows are in gpm, heads in feet, pressures in psi and power
         in horsepower and kilowatts.
       </Note>
     </PanelShell>

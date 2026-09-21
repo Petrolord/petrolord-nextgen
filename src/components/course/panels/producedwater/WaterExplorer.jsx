@@ -331,7 +331,7 @@ const WaterExplorer = ({ initialMode = 'fluids' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored Produced Water Treatment engine on the teaching
-        stream UZERE, printed to the precision the teaching digest prints. Six of this module&apos;s quantities are HELD
+        stream UZERE, printed to the precision the lessons use. Six of this module&apos;s quantities are HELD
         FOR LITERATURE and are taught as absences rather than as answers: {held.map((h) => h.title).join('; ')}.
       </Note>
     </PanelShell>

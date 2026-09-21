@@ -30,7 +30,7 @@ Above the critical ratio the area does move. The last critical row sits at 0.551
 
 Two practical readings come out of that flatness. The first is that on a choked case, arguing about the header pressure is arguing about something the size does not depend on. The second is the reverse, and it catches people: once a case is subcritical the header pressure is part of the sizing answer, so a header modification can invalidate a valve that was adequate.
 
-Do not divide one subcritical area by another and call the quotient how the branch behaves. The digest prints no ratio between those rows, so nothing stands behind such a number.
+Do not divide one subcritical area by another and call the quotient how the branch behaves. The course prints no ratio between those rows, so nothing stands behind such a number.
 
 ## A typed factor that is ignored, and the engine says so
 

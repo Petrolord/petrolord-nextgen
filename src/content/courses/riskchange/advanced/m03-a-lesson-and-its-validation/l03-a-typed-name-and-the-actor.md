@@ -12,7 +12,7 @@ That rule is owner policy, decided on 2026-09-18 under AS15 as Q10, validation b
 
 ## The author typing a colleague's name
 
-ON-01 was written by u-musa. Read as if it were still "Submitted", the digest asks the engine what happens when the author validates it while typing a colleague name as the validator:
+ON-01 was written by u-musa. Read as if it were still "Submitted", this lesson asks the engine what happens when the author validates it while typing a colleague name as the validator:
 
 - REFUSED, its author validating it while typing a colleague name as the validator: The author of a lesson cannot validate it, and that includes recording somebody else's name. Ask a colleague who was not involved in writing it to validate it.
 
@@ -20,7 +20,7 @@ The sentence is the one the author gets without a typed name. The engine looks a
 
 ## What a typed name is for
 
-A typed name has a legitimate use. Some lessons are checked by somebody who has no account in the app: a specialist from a contractor, a reviewer from another company in a joint venture. The digest records the case:
+A typed name has a legitimate use. Some lessons are checked by somebody who has no account in the app: a specialist from a contractor, a reviewer from another company in a joint venture. This lesson records the case:
 
 - ALLOWED, u-grace recording an external reviewer by name.
 
@@ -32,7 +32,7 @@ A name in a text field proves nothing about who typed it. If the engine accepted
 
 ## A limit at the next step
 
-The rule protects the validation step itself. The digest records a held limit one step later: publishing a lesson checks that a validation record exists and does not check again who validated it. The protection therefore sits where the validation is recorded, and the fifth module of this tier reads that limit with the other held items.
+The rule protects the validation step itself. The course records a held limit one step later: publishing a lesson checks that a validation record exists and does not check again who validated it. The protection therefore sits where the validation is recorded, and the fifth module of this tier reads that limit with the other held items.
 
 Every answer here was also replayed through the independent oracle for lessonsLearned, so each is two methods agreeing.
 

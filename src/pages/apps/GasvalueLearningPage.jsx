@@ -205,8 +205,8 @@ const GasvalueLearningPage = () => {
                 Three invented records read by the vendored downstream engines: a flow station flaring its associated gas
                 and the four ways to sell it, an LPG storage and bottling plant, and a CNG mother station with a bus
                 operator switching to CNG. Every heating value, tonnage, margin, duty, queue and bank figure on this page
-                and inside every panel is a return value from those engines, pinned by a test file against the teaching
-                digest. Every refusal is the engine&apos;s own sentence.
+                and inside every panel is a return value from those engines, pinned by a test file against the figures the
+                lessons quote. Every refusal is the engine&apos;s own sentence.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
