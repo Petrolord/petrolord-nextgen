@@ -1,0 +1,239 @@
+{
+ "migration": "20261021b_b4_fix_hydraulics.sql",
+ "title": "hydraulics: explanation tightening and four duplicate rewrites",
+ "items": [
+  {
+   "app_slug": "hydraulics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "category": "other",
+   "flag": "explanation mostly about the distractor and never restates why \"it is a plan\" is right; tighten explanation",
+   "verdict": "fixed",
+   "reason": "explanation now states the key (the calculation is a speed-limit plan; the trip tank measurement detects a kick) and why the pore-pressure option is wrong",
+   "changes": {
+    "explanation": {
+     "old": "It has no pore pressure either, and that is why it cannot say whether a given swab is dangerous without one being supplied.",
+     "new": "The surge and swab calculation is a plan: it gives the trip speed that avoids causing a kick. Detecting one is a measurement, made by comparing the volume the hole takes against the computed displacement at every stand, and that is the trip tank's job. A missing pore pressure limits what the plan can say; a kick is recognised against a computed volume."
+    }
+   }
+  },
+  {
+   "app_slug": "hydraulics",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 13,
+   "category": "other",
+   "flag": "\"the first is the frame\" wording; check that it refers to the explanation list and is unambiguous",
+   "verdict": "fixed",
+   "reason": "\"the first\" pointed at nothing (the key is option 2); explanation now names the window idea explicitly",
+   "changes": {
+    "explanation": {
+     "old": "All three are worth carrying. The first is the frame the Expert tier puts the other two into.",
+     "new": "The three distractors are all worth carrying, but the frame is the window: pore and fracture pressure bound four pressures, and this tier computed two of them, the static mud weight and the equivalent circulating density. The Expert tier adds surge and swab and puts everything else into that window."
+    }
+   }
+  },
+  {
+   "app_slug": "hydraulics",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 15,
+   "category": "other",
+   "flag": "\"the first is the frame\" wording; check that it refers to the explanation list and is unambiguous",
+   "verdict": "fixed",
+   "reason": "explanation was oblique; now restates the lesson line behind the key",
+   "changes": {
+    "explanation": {
+     "old": "Two models, one missing mechanism, and the way to see it is to watch both of them drift at once.",
+     "new": "The cuttings beds this course cannot model are the largest single thing the torque and drag friction factor absorbs. The two courses look at the same missing mechanism from opposite sides, which is why both of them drift at once when a bed builds."
+    }
+   }
+  },
+  {
+   "app_slug": "hydraulics",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-the-flow-rate-decision",
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "editor-flagged duplicate: beginner m04 ord 11 = intermediate m04 ord 11 (both key \"The nozzle total flow area\"; intermediate final 19 also asks it)",
+   "verdict": "fixed",
+   "reason": "kept the beginner module question; rewrote this one to test the size of the nozzle lever from the same lesson (l05, inverse-square law, 2.33 in area buys 5.4 in bit pressure)",
+   "changes": {
+    "prompt": {
+     "old": "What is the one lever that relieves the pump constraint alone?",
+     "new": "On the slant well at 0.025 m3/s, opening the nozzles from 0.0003 to 0.0007 m2 cuts the bit pressure by roughly what factor?"
+    },
+    "explanation": {
+     "old": "It leaves the pipe loss, the annulus loss, the ECD and the cleaning all exactly unchanged.",
+     "new": "The bit pressure drop is inversely proportional to the square of the total flow area: 5540166.204986151 Pa at 0.0003 m2 against 1017581.5478545991 Pa at 0.0007 m2, a factor of 5.4 for a factor of 2.33 in area. The pipe loss, the annulus loss and the equivalent circulating density are exactly unchanged."
+    },
+    "options": {
+     "0": {
+      "old": "The mud weight, through its density.",
+      "new": "About 2.33, in step with the area ratio."
+     },
+     "1": {
+      "old": "The nozzle total flow area.",
+      "new": "About 5.4, the inverse square."
+     },
+     "2": {
+      "old": "The flow rate, since reducing it lowers the pump pressure faster than it lowers the equivalent circulating density.",
+      "new": "None, because the bit pressure is set by the flow rate, and the flow rate has not moved at all."
+     },
+     "3": {
+      "old": "The rate of penetration, since drilling more slowly reduces the cuttings load and therefore the annular pressure.",
+      "new": "About 5.4, and the equivalent circulating density falls with it, since the pump pressure is lower along the whole string."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  },
+  {
+   "app_slug": "hydraulics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 27,
+   "category": "duplicate",
+   "flag": "editor-flagged duplicate: advanced final 27 = intermediate final 29 (same 58 in a 60 kg/m3 window, same key)",
+   "verdict": "fixed",
+   "reason": "kept intermediate final 29 (its example is taught in intermediate m04 l04); rewrote this one to test where the static weight sits in the window (advanced m02 l02)",
+   "changes": {
+    "prompt": {
+     "old": "A window is 60 kg/m3 wide and the circulating uplift is 58. What is the finding?",
+     "new": "The static mud weight is placed toward the pore side of the window instead of at its middle. Why?"
+    },
+    "explanation": {
+     "old": "Halving the rate does help by that much and it also halves the cleaning. Lowering the mud weight that far would go below the pore pressure.",
+     "new": "The equivalent circulating density and the surge both go up from the static weight and only the swab goes down, so the weight is offset toward the pore side to leave room above it. On the slant well the equivalent circulating density is the largest of the four, 58.33 kg/m3 above the mud weight."
+    },
+    "options": {
+     "0": {
+      "old": "There is adequate margin, since the uplift is smaller than the window and the well stays inside it.",
+      "new": "Because the swab is the largest of the four pressures, so the pore side needs the most room left."
+     },
+     "1": {
+      "old": "The mud weight should be lowered by 58 kg/m3, which places the ECD at the middle of the window.",
+      "new": "Because the fracture limit only applies while circulating, so the static weight can sit well away from it."
+     },
+     "2": {
+      "old": "Circulating at all takes the well essentially to the fracture gradient.",
+      "new": "Because two of the four pressures rise above it and only one falls below it."
+     },
+     "3": {
+      "old": "The flow rate should be halved, which by the 0.75 exponent would take the uplift to about 35 kg/m3.",
+      "new": "Because the equivalent circulating density falls below the mud weight, as friction unloads the column."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  },
+  {
+   "app_slug": "hydraulics",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-bit",
+   "ord": 6,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate final 35 (bit share vs annulus share as rate rises)",
+   "verdict": "judged fine",
+   "reason": "opposite elements and opposite answers (bit share rises, annulus share falls); the same exponent idea from two genuinely different angles"
+  },
+  {
+   "app_slug": "hydraulics",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-pump-pressure",
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate final 22 (oracle value count and tolerance vs worst disagreement)",
+   "verdict": "judged fine",
+   "reason": "one asks the tolerance the goldens ask for, the other the disagreement achieved; the lesson draws that distinction, and the distractors differ"
+  },
+  {
+   "app_slug": "hydraulics",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-against-the-oracle",
+   "ord": 7,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner m05 ord 11 (identical key: pump pressure is the longest chain); intermediate final 23 also asks it",
+   "verdict": "fixed",
+   "reason": "kept beginner m05 11; rewrote this one to test the rheology residual from the same lesson (l01: 1e-10 is the rounding of the published nine-decimal values)",
+   "changes": {
+    "prompt": {
+     "old": "Why is the pump pressure the largest disagreement?",
+     "new": "Why do the rheology fits agree only to about 1e-10 when the surge and swab agree at machine precision?"
+    },
+    "explanation": {
+     "old": "About 1e-7 over that chain is what a long floating-point calculation looks like, and it is a function of the length rather than of a choice.",
+     "new": "The lesson reads it directly: the rheology fits agree to about 1e-10, which is the rounding of the published nine-decimal values rather than a real disagreement. The fit is a short calculation; the pump pressure is the longest chain and carries the largest residual, about 1e-7."
+    },
+    "options": {
+     "0": {
+      "old": "Because it is the largest number.",
+      "new": "Because the fits are least-squares."
+     },
+     "1": {
+      "old": "Because it is the longest chain: a fit, a local power law per element, a Reynolds number, a friction factor, a sum.",
+      "new": "Because 1e-10 is the rounding of the published nine-decimal values, so it is no real disagreement between the two codes."
+     },
+     "2": {
+      "old": "Because the two implementations use different blend widths, and the pipe elements sit inside the transition band.",
+      "new": "Because the fits are a long chain of per-element steps, and rounding builds up along it as it does for the pump."
+     },
+     "3": {
+      "old": "Because it includes the surface loss, which one implementation sets to zero and the other omits entirely.",
+      "new": "Because the rheology is read at surface temperature and the two codes correct it to downhole conditions."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  },
+  {
+   "app_slug": "hydraulics",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 8,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate m02 ord 2 (where is annular velocity lowest; same key)",
+   "verdict": "fixed",
+   "reason": "kept the intermediate module question; rewrote this final question to test why the annulus loss is small (beginner m03 l05)",
+   "changes": {
+    "prompt": {
+     "old": "Where in this course's well is the annular velocity lowest?",
+     "new": "Why is the annulus loss so much smaller than the pipe loss on this well?"
+    },
+    "explanation": {
+     "old": "Velocity is flow rate over area, so the widest annulus is the slowest, and it is the shallowest part of the hole.",
+     "new": "The space between a 0.127 m drill pipe and a 0.2159 m hole has about four times the area of the pipe's bore, so the velocity is a quarter and the velocity squared is a sixteenth. The annular flow is also largely laminar, which partly cancels the velocity dependence."
+    },
+    "options": {
+     "0": {
+      "old": "Around the collars in open hole.",
+      "new": "The annulus is shorter than the pipe."
+     },
+     "1": {
+      "old": "At total depth, where the annulus has the most cuttings in it and the effective flow area is therefore smallest.",
+      "new": "Because the annular flow is turbulent, and a turbulent friction factor is far lower than a laminar one at the same velocity."
+     },
+     "2": {
+      "old": "It is the same everywhere, because the flow rate is constant and the annulus is a single continuous path.",
+      "new": "Because the mud is thicker in the annulus, where the shear rate is low, and a higher viscosity lowers the friction loss."
+     },
+     "3": {
+      "old": "In the cased section, which is the widest annulus.",
+      "new": "Its area is about four times the bore, so its velocity is a quarter."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  }
+ ]
+}
