@@ -1,0 +1,29 @@
+{
+ "migration": "20261021b_b4_fix_earthmodel.sql",
+ "title": "earthmodel: one distractor that printed the correct easting",
+ "items": [
+  {
+   "app_slug": "earthmodel",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-minimum-curvature",
+   "ord": 13,
+   "category": "double-key",
+   "flag": "intermediate module m02-minimum-curvature ord 13: distractor 0 prints the same x value as the correct option",
+   "verdict": "fixed",
+   "reason": "Distractor 0 printed the correct x 1794.719681048036 (only its stated reasoning was wrong, and 300 m was not even the hold length); it now prints the station TVD, a real column-misread mistake.",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "x 1794.719681048036, adding the 300 m hold length as easting.",
+      "new": "x 1752.9376073217509, the TVD column read as easting."
+     }
+    },
+    "explanation": {
+     "old": "The 400 m hold contributes 400/sqrt 2 = 282.84 m east. Doubling the build increment or equating x with MD are both real mistakes the numbers punish.",
+     "new": "The 400 m hold contributes 400/sqrt 2 = 282.84 m east. Reading the TVD column as easting, doubling the build increment or equating x with MD are all real mistakes the numbers punish."
+    }
+   }
+  }
+ ]
+}
