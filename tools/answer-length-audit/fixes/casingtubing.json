@@ -1,0 +1,220 @@
+{
+ "migration": "20261021b_b4_fix_casingtubing.sql",
+ "title": "B4 follow-on: casingtubing double-key distractor fixes",
+ "items": [
+  {
+   "app_slug": "casingtubing",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "category": "double-key",
+   "flag": "beginner final ord 28: option 2 restates correct option 3",
+   "verdict": "fixed",
+   "reason": "Option 2 named the same omission (wear) with a similar reason; replaced with a sour service distractor that the lesson says the grade name does reveal.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "The wear, because the wall removed depends on rotating hours and side force alone.",
+      "new": "The sour service rating, because a grade name says nothing about whether it suits hydrogen sulphide."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "casingtubing",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-buckling",
+   "ord": 11,
+   "category": "double-key",
+   "flag": "advanced module m04 ord 11: option 2 close to correct",
+   "verdict": "fixed",
+   "reason": "Option 2 restated the lesson (floor stops an infinite limit) and option 0 was also literally in the lesson (division by zero); both replaced with misapplied mechanisms (couplings, which the lesson says are ignored; ovality tolerance).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "To avoid a division by zero in the square root.",
+      "new": "To allow for the tubing couplings that narrow the gap."
+     },
+     "2": {
+      "old": "Because a zero or negative clearance would give an infinite limit, and the floor converts that into a large but finite one instead.",
+      "new": "Because below a millimetre the clearance is smaller than the ovality tolerance of the casing, so the computed limit would carry no meaning."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "casingtubing",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-reading-a-rating-table",
+   "ord": 14,
+   "category": "double-key",
+   "flag": "beginner module m05 ord 14: option 2 matches the explanation",
+   "verdict": "fixed",
+   "reason": "Option 2 was the lesson claim (narrows a hundred rows to two or three); rewritten so it claims screening signs off the survivors, which the lesson says it does not.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because it narrows a hundred rows to two or three, and the elimination it performs is what the later verification needs.",
+      "new": "Because it narrows a hundred rows to two or three, and the survivors can then be signed off directly because every formula is published."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "casingtubing",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-a-load-case-is-two-columns",
+   "ord": 7,
+   "category": "double-key",
+   "flag": "intermediate module m01 ord 7: option 2 matches the correct option",
+   "verdict": "fixed",
+   "reason": "Option 2 (naming advisory, engine cannot tie a name to a check) paraphrased the lesson; replaced with a wrong mechanism (a second run with the columns swapped).",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because the naming convention is advisory only, and the engine has no way to associate a case name with a particular check.",
+      "new": "Because the engine evaluates every case a second time with the two columns swapped, so a collapse case always yields a burst run."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "casingtubing",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-axial-and-triaxial",
+   "ord": 9,
+   "category": "double-key",
+   "flag": "intermediate module m04 ord 9: option 2 essentially the correct option 3",
+   "verdict": "fixed",
+   "reason": "Option 2 restated the lesson reason; replaced with connection efficiency, which the lesson applies explicitly through joint strength and not through the factor.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because parting a string is unrecoverable, and because the real running load contains shock and drag that none of this captures.",
+      "new": "Because the connection efficiency cuts the usable tension rating below the body yield, and the larger factor exists to absorb that loss."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "casingtubing",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-axial-and-triaxial",
+   "ord": 15,
+   "category": "double-key",
+   "flag": "intermediate module m04 ord 15: option 2 is the correct reasoning",
+   "verdict": "fixed",
+   "reason": "Option 2 listed the lesson peak locations, which is the correct reasoning; replaced with a false different-grids claim (the lesson walks every grid point once for all four).",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because tension peaks at the top and collapse at the bottom, and burst can do either by case.",
+      "new": "Because the four checks are sampled on different grids, so each minimum sits on points the others skip."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "casingtubing",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-reading-a-string-check",
+   "ord": 9,
+   "category": "double-key",
+   "flag": "intermediate module m05 ord 9: option 2 arguably correct",
+   "verdict": "fixed",
+   "reason": "Option 2 (three things acting at once) was the lesson explanation; replaced with the false claim that no pipe change can clear the warning (the lesson says a grade or wall would).",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because the triaxial number is low from three things acting at once, and only one of them is a property of the pipe.",
+      "new": "Because a triaxial WARNING cannot be cleared by any change of grade or wall, so only the test pressure or the dogleg can be revisited."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "casingtubing",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 7,
+   "category": "double-key",
+   "flag": "intermediate module m06 ord 7: option 2 same as correct option 3",
+   "verdict": "fixed",
+   "reason": "Option 2 gave the correct location and the lesson reason; replaced with an upper-section answer resting on friction loss, which contradicts the same-force-everywhere model.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "On the lower section, since the overpull is a larger fraction of its total axial load than of the upper section's.",
+      "new": "On the upper section, since the pull is applied at surface and part of it is lost to wall friction before it reaches the lower section."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "casingtubing",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "category": "double-key",
+   "flag": "intermediate final ord 41: option 2 essentially correct",
+   "verdict": "fixed",
+   "reason": "Option 2 (columns cross inside the upper section) is true (crossing near 464 m); replaced with a top-of-cement mechanism that does not apply to this case.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because the two columns cross at a depth inside the upper section, so the differential changes sign partway down it.",
+      "new": "Because the heavy outside column only acts below the top of cement, so above it the upper section sees the inside column alone."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "casingtubing",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "category": "double-key",
+   "flag": "intermediate final ord 34: option 1 partly true as physics",
+   "verdict": "fixed",
+   "reason": "A lower internal pressure does raise the collapse differential, so option 1 was defensible; replaced with the false claim that the test pressure also acts in the annulus.",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "The collapse number, as a lower internal pressure raises the external differential there.",
+      "new": "The collapse number, because the test pressure also acts in the annulus and sets its column."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "casingtubing",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "category": "other",
+   "flag": "beginner final ord 21: option 2 (Poisson ratio barely varies between grades) borderline",
+   "verdict": "fixed",
+   "reason": "Poisson ratio does enter the elastic ring buckling solution and is grade independent, so it was defensible; replaced with the yield to tensile ratio, a strength property that does not enter elastic collapse.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "The Poisson ratio, which appears in the elastic buckling solution and barely varies between grades.",
+      "new": "The yield to tensile ratio, which sets the elastic buckling solution and is alike for every grade."
+     }
+    }
+   }
+  }
+ ],
+ "inserts": []
+}
