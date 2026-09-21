@@ -1,0 +1,281 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "0.33077027444818546, unchanged because polymer only delays water.",
+  "new": "0.33077027444818546, unchanged because polymer only delays the arrival of water."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "All three were measured directly on Ekene core plugs in the laboratory.",
+  "new": "All three were measured directly on Ekene core plugs in the laboratory and entered into the report unaltered."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "The mobility ratio 1.2, to weight the average by flow capacity.",
+  "new": "The mobility ratio 1.2, to weight the average by flow capacity so the mobile oil dominates."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "A rel-perm table with krw positive at its lowest saturation.",
+  "new": "A rel-perm table with krw positive at its lowest saturation, implying water is mobile at the connate point."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "Corey parameters whose Swc and Sor leave no mobile saturation range.",
+  "new": "Corey parameters whose Swc and Sor sum to one or more, leaving no mobile saturation range to displace."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-fitting-the-lab",
+  "ord": 12,
+  "option": 0,
+  "old": "Quote the fitted exponents with widened tolerances",
+  "new": "Quote the fitted exponents with widened tolerances so the reported uncertainty absorbs the poor match"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-fitting-the-lab",
+  "ord": 12,
+  "option": 1,
+  "old": "Rerun the fit with a smaller krFloor to admit more points",
+  "new": "Rerun the fit with a smaller krFloor to admit more points near the endpoints and stabilise the exponents"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-normalization-and-transfer",
+  "ord": 13,
+  "option": 2,
+  "old": "Same wettability, since drainage experiments alter the surface chemistry",
+  "new": "Same wettability, since drainage experiments alter the surface chemistry and leave the plug more oil-wet"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-normalization-and-transfer",
+  "ord": 13,
+  "option": 3,
+  "old": "None: the branches differ only in endpoints, which scaling replaces anyway",
+  "new": "None: the branches differ only in endpoints, which scaling replaces anyway through the normalized saturation axis"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-normalization-and-transfer",
+  "ord": 15,
+  "option": 1,
+  "old": "The exponents are reliable but the endpoints are not",
+  "new": "The exponents are reliable but the endpoints are not, since one plug pins down shape better than saturation limits"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-polymer-and-the-design-space",
+  "ord": 11,
+  "option": 0,
+  "old": "Polymer adsorption onto the rock",
+  "new": "Polymer adsorption and retention on the rock surface"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "How many significant figures the learner can transcribe without error",
+  "new": "How many significant figures the learner can transcribe from the printed report without error"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 1,
+  "old": "Whether the learner's calculator carries full double precision",
+  "new": "Whether the learner's calculator carries full double precision rather than a truncated display value"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "They read the front saturation 0.6372 off the tangent chart and reported it as if it were a recovery",
+  "new": "They reported the tangent chart's front saturation 0.6372 as a recovery"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-two-phases-one-rock",
+  "ord": 14,
+  "option": 0,
+  "old": "Field measurements of movable oil are accurate to the last barrel",
+  "new": "Field measurements of movable oil are accurate to the last barrel, so rounding would discard real information"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-two-phases-one-rock",
+  "ord": 14,
+  "option": 3,
+  "old": "Rounded values would understate the reserves of the field",
+  "new": "Rounded values would understate the reserves of the field, since rounding down trims barrels from the booking"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-two-phases-one-rock",
+  "ord": 15,
+  "option": 2,
+  "old": "0.35, because water occupies the rest of the pore space",
+  "new": "0.35, because water occupies the rest of the pore space, which caps how much oil the flood can exchange for it"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-recovery-and-time",
+  "ord": 14,
+  "option": 0,
+  "old": "In this course's module on the Welge tangent",
+  "new": "In this course's module on the Welge tangent, where sweep follows from the front saturation"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-recovery-and-time",
+  "ord": 14,
+  "option": 2,
+  "old": "In the Material Balance course, through the drive index decomposition",
+  "new": "In the Material Balance course, through the drive index decomposition of the reservoir energy"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-recovery-and-time",
+  "ord": 15,
+  "option": 0,
+  "old": "It is the fraction of the oil originally in place that has been recovered at the moment of breakthrough",
+  "new": "It is the fraction of the oil originally in place recovered at the moment of breakthrough"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 1,
+  "old": "The ultimate displacement efficiency would fall, because layering raises the average residual oil saturation",
+  "new": "The ultimate displacement efficiency would fall, as layering raises residual oil saturation"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "Because brine salinity, and therefore brine density, increases with depth",
+  "new": "Because brine salinity, and therefore brine density, increases with depth, shifting the gradients that locate the contact"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "Because the mapping grid smooths the picked contact upward structurally",
+  "new": "Because the mapping grid smooths the picked contact upward structurally, lifting it off the level where the pressures cross"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-leverett-collapse",
+  "ord": 14,
+  "option": 0,
+  "old": "The two plugs are duplicates cut from the same core barrel, and one of them should be discarded from the family",
+  "new": "The two plugs are duplicates cut from the same core barrel, and one of them should be discarded from the family to avoid double counting"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-nameless-field",
+  "ord": 6,
+  "option": 3,
+  "old": "The lab chain, dividing the lab Pc by the lab factor",
+  "new": "The lab chain, dividing each measured lab Pc row by the lab factor directly"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-nameless-field",
+  "ord": 13,
+  "option": 3,
+  "old": "The printed table contains a typographical error at Sw 0.8",
+  "new": "The printed table contains a typographical error at Sw 0.8 that transposed two digits of the J value"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-fitting-and-averaging",
+  "ord": 14,
+  "option": 2,
+  "old": "That the original plate carried four decimal places of precision",
+  "new": "That the original plate carried four decimal places of precision along the J axis"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-fitting-and-averaging",
+  "ord": 15,
+  "option": 3,
+  "old": "The figure reads were taken at too coarse a tolerance to fix b",
+  "new": "The figure reads were taken at too coarse a tolerance to constrain the exponent b"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 2,
+  "old": "The two systems sample different pore networks that happen to compensate",
+  "new": "The two systems sample different pore networks whose size contrasts happen to compensate exactly"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "J is normalized by its own maximum for each sample",
+  "new": "J is normalized by its own maximum for each sample, which removes any constant pressure scale"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 3,
+  "old": "A leave-one-out re-run over the samples, dropping each plug from the average in turn",
+  "new": "A leave-one-out re-run over the samples, dropping each plug from the average in turn and comparing the refits"
+ }
+]
