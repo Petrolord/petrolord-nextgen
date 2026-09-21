@@ -13,14 +13,17 @@
 # eight closure paths are vendored at the same blob as 16fd6c9 and the pin.
 #
 # The engines clone is read-only: the tree is read from a `git archive`
-# export of REV inside the wave directory, and the blob hashes from the clone.
+# export of REV into a throwaway directory, and the blob hashes from the clone.
 #
 # Four independent proofs per copied path, because one hash function agreeing
 # with itself is one proof repeated: the git blob hash, a sha256 over the
 # bytes, a byte-for-byte cmp, and a byte COUNT on both sides.
 set -euo pipefail
-ENG=${H5_ENGINES_SRC:-/root/hse-wip-qra/engines-16fd6c9}
 GITDIR=${H5_ENGINES_GIT:-/root/petrolord-engines}
+if [ -n "${H5_ENGINES_SRC:-}" ]; then ENG=$H5_ENGINES_SRC; else
+  ENG=$(mktemp -d /tmp/h5eng.XXXXXX); trap 'rm -rf "$ENG"' EXIT
+  git -C "$GITDIR" archive 16fd6c96dcb91f372d2d76b4ecd2c7fa4cbd4b4f | tar -x -C "$ENG"
+fi
 NG=${H5_NEXTGEN:-/root/wt-h5-nextgen}
 REV=16fd6c96dcb91f372d2d76b4ecd2c7fa4cbd4b4f
 PIN=16fd6c96dcb91f372d2d76b4ecd2c7fa4cbd4b4f
