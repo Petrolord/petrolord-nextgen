@@ -15,7 +15,7 @@ import {
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
 import {
-  defaultParams, computeWorkflow, capstoneAnswers, chartRows, ZONES,
+  defaultParams, computeWorkflow, chartRows, ZONES,
 } from '@/lib/petrophysicsTeaching';
 import PorosityLab from '@/components/course/panels/petrophysics/PorosityLab';
 import PickettExplorer from '@/components/course/panels/petrophysics/PickettExplorer';
@@ -25,6 +25,7 @@ import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
   getCourseProgress,
 } from '@/services/academyService';
+import { buildCapstoneAnswers } from '@/lib/capstoneAnswer';
 import { useRole } from '@/contexts/RoleContext';
 import { hasDeepCourse } from '@/lib/courseContent';
 import DeepCourseBanner from '@/components/course/DeepCourseBanner';
@@ -123,15 +124,26 @@ const PetrophysicsLearningPage = () => {
   const setP = (k) => (e) => setParams((p) => ({ ...p, [k]: e.target.value }));
   const watermark = gate.quota?.export_watermark;
 
+  // Every tier submits what the learner TYPED. The beginner tier used to send
+  // capstoneAnswers(workflow), computed from the pre-filled parameters, so one
+  // click passed without a figure being read (B5 finding 4).
+  const answerBoxes = (
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {(capstone?.fields || []).map((f) => (
+        <div key={f.key}>
+          <Label htmlFor={`capstone-${f.key}`} className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
+          <Input id={`capstone-${f.key}`} type="text" inputMode="decimal" autoComplete="off" value={answers[f.key] ?? ''}
+            onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
+            className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
+        </div>
+      ))}
+    </div>
+  );
+
   const submit = async () => {
-    if (!workflow) return;
     setSubmitting(true);
     try {
-      const payload = tier === 'beginner'
-        ? capstoneAnswers(workflow)
-        : Object.fromEntries((capstone?.fields || []).map((f) => [
-            f.key, answers[f.key] === '' || answers[f.key] === undefined ? null : Number(answers[f.key]),
-          ]));
+      const payload = buildCapstoneAnswers(capstone?.fields, answers);
       const res = await submitCapstone(APP, tier, payload);
       setResult(res);
       if (res.passed && res.certificate_number) {
@@ -334,16 +346,7 @@ const PetrophysicsLearningPage = () => {
                 <CardDescription>{capstone?.prompt}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {(capstone?.fields || []).map((f) => (
-                    <div key={f.key}>
-                      <Label className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
-                      <Input type="number" step="any" value={answers[f.key] ?? ''}
-                        onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
-                        className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
-                    </div>
-                  ))}
-                </div>
+                {answerBoxes}
                 <Button onClick={submit} disabled={submitting || !capstone}
                   className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
                   {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
@@ -371,7 +374,7 @@ const PetrophysicsLearningPage = () => {
           <Card className="bg-[#1E293B] border-gray-700">
             <CardHeader>
               <CardTitle className="text-white">Net-pay summary</CardTitle>
-              <CardDescription>Computed live from your parameters — this is what the capstone grades.</CardDescription>
+              <CardDescription>Computed live from your parameters. The capstone grades the figures you type below.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="overflow-x-auto">
@@ -406,7 +409,9 @@ const PetrophysicsLearningPage = () => {
               <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4">
                 <p className="text-white font-medium">{capstone?.title || 'Capstone'}</p>
                 <p className="text-sm text-gray-400 mt-1">{capstone?.prompt}</p>
-                <Button onClick={submit} disabled={submitting || !workflow}
+                <p className="text-sm text-gray-400 mt-1">Type each figure you have worked. Nothing is filled in for you.</p>
+                <div className="mt-3">{answerBoxes}</div>
+                <Button onClick={submit} disabled={submitting || !capstone}
                   className="mt-3 bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
                   {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
                   Submit for grading

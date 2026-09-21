@@ -58,18 +58,6 @@ export function computeWorkflow(params) {
   };
 }
 
-// Map the workflow result to the capstone answer fields.
-export function capstoneAnswers(result) {
-  return {
-    sand_a_net_m: result.zones.SAND_A.net_m,
-    sand_a_phi_avg: result.zones.SAND_A.phi_avg,
-    sand_a_sw_avg: result.zones.SAND_A.sw_avg,
-    sand_b_net_m: result.zones.SAND_B.net_m,
-    sand_b_phi_avg: result.zones.SAND_B.phi_avg,
-    sand_b_sw_avg: result.zones.SAND_B.sw_avg,
-  };
-}
-
 // Downsample a curve for charting (the log has ~hundreds of samples).
 export function chartRows(depth, curves, step = 2) {
   const rows = [];
