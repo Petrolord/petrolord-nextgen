@@ -264,35 +264,35 @@
    "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
   },
   "gate_capstone_leak.mjs": {
-   "md5": "840bc750c642a115f848d75808238b30",
+   "md5": "3e3dfd982f54929883712f59161f3751",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons",
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
-   "md5": "840bc750c642a115f848d75808238b30",
+   "md5": "3e3dfd982f54929883712f59161f3751",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-value",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
-   "md5": "840bc750c642a115f848d75808238b30",
+   "md5": "3e3dfd982f54929883712f59161f3751",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-input",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
-   "md5": "840bc750c642a115f848d75808238b30",
+   "md5": "3e3dfd982f54929883712f59161f3751",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-name",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
-   "md5": "840bc750c642a115f848d75808238b30",
+   "md5": "3e3dfd982f54929883712f59161f3751",
    "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
    "expected": 1,
    "exit": 1,
@@ -355,7 +355,7 @@
    "summary": "manifests: 3"
   },
   "gate_capstone_leak.mjs full": {
-   "md5": "840bc750c642a115f848d75808238b30",
+   "md5": "3e3dfd982f54929883712f59161f3751",
    "command": "node gate_capstone_leak.mjs",
    "expected": 0,
    "exit": 0,
@@ -478,7 +478,7 @@
    "command": "node /root/wt-h4-nextgen/tools/check-vendored-engines.mjs",
    "expected": 0,
    "exit": 0,
-   "summary": "vendored engines clean against canonical df31f53: 747 path(s) compared byte for byte, 874 canonical, 750 vendored, 240 recorded deviation(s) (0-out-of-scope-domain 54, 1-test-layer-gap 73, 2-copy-pass-held 2, 3-productio"
+   "summary": "vendored engines clean against canonical 16fd6c9: 753 path(s) compared byte for byte, 881 canonical, 756 vendored, 243 recorded deviation(s) (0-out-of-scope-domain 54, 1-test-layer-gap 74, 2-copy-pass-held 6, 3-productio"
   }
  }
 }
