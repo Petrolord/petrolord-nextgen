@@ -1,0 +1,1964 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 3,
+  "old": "The first, since it sits far above 1.6 and the optimum is a floor rather than a target.",
+  "new": "The first, since it sits far above 1.6 and the optimum is a floor rather than a target, so any higher ratio only adds to the productivity."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 3,
+  "old": "The ratio rises through the pack permeability, which improves when less gel is left behind.",
+  "new": "The ratio rises through the pack permeability, which improves when less gel is left behind to plug the pore throats of the pack."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "Doubling the length, but only by a factor of two, since width and length cancel in the ratio.",
+  "new": "Doubling the length, but only by a factor of two, since width and length cancel in the ratio and only the added length in the denominator remains."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 3,
+  "old": "The naive pad fraction was used, which is the usual reason a ratio falls short.",
+  "new": "The naive pad fraction was used, which is the usual reason a ratio falls short because it starves the ramp of mass."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 1,
+  "old": "The propped width, since it is the pack the well actually keeps.",
+  "new": "The propped width, since it is the pack the well actually keeps and a nodal model can turn that thickness straight into inflow."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 3,
+  "old": "The dimensionless conductivity, which carries pack and formation together.",
+  "new": "The dimensionless conductivity, which carries pack and formation together and so lets the nodal model rebuild the skin itself."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "Yes, the effective radius should be visible from the first hour.",
+  "new": "Yes, the effective radius should be visible from the first hour, since a propped fracture behaves as an enlarged borehole at once."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "No, but only because a week is too soon for the gel to have broken in the pack.",
+  "new": "No, but only because a week is too soon for the gel to have broken in the pack and for the design conductivity to be established."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 2,
+  "old": "It raises the effective radius in proportion to the skin, so a move from five to six units gains about a fifth.",
+  "new": "It raises the effective radius in proportion to the skin, so one more unit gains a fifth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "They differ only in the wellbore radius used, because f takes the logarithm of the length ratio as its argument.",
+  "new": "They differ only in the wellbore radius, because f takes the logarithm of the length ratio."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 0,
+  "old": "Acid is applied to a smaller interval than a fracture.",
+  "new": "Acid is applied to a smaller interval than a fracture, so its skin is averaged over less of the pay and reads smaller."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "Acid raises permeability and a fracture raises porosity, which counts for more.",
+  "new": "Acid raises permeability and a fracture raises porosity, which counts for more because storage dominates the inflow equation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "It has doubled the drainage area the well can reach within the same reservoir.",
+  "new": "It has doubled the drainage area the well can reach within the same reservoir, so the well now draws on twice the rock."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "The proppant has flowed back and the fracture has closed.",
+  "new": "The proppant has flowed back and the fracture has closed, since opening the well so soon drags the pack out with the returns."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "The damage factor of 0.5 was too generous and should have been set lower in design.",
+  "new": "The damage factor of 0.5 was too generous and should have been set lower in design to reflect grain crushing at the closure stress."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "The discrete sweep, whose best row of 1.8471799468076697 confirms the target exactly.",
+  "new": "The discrete sweep, whose best row of 1.8471799468076697 confirms the target exactly without any search being needed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "It would move the optimum itself, because a denser grid changes the proppant volume each row has to spread over the face.",
+  "new": "It would move the optimum itself, since a denser grid changes the proppant each row spreads."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "Very strong, because the job is outside the correlation range as it stands.",
+  "new": "Very strong, because the job is outside the correlation range as it stands and a shorter design brings it back inside."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "Very strong, since the effective radius would more than double on the same proppant.",
+  "new": "Very strong, since the effective radius would more than double on the same proppant once the pack is spread over less face."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "No, because with proppant no longer fixed the pseudo-skin has no minimum to find at any length.",
+  "new": "No, because with proppant no longer fixed the pseudo-skin has no minimum to find at any length, so no target ratio can exist."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "Steady radial flow, since height growth keeps the well in a transient regime for longer.",
+  "new": "Steady radial flow, since height growth keeps the well in a transient regime for longer than the design allows."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "It behaves uniformly, which is why one damage factor is a sufficient description.",
+  "new": "It behaves uniformly, which is why one damage factor is a sufficient description of the pack from the well to the tip."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "Nothing important, because the correlation was fitted to the transient solution too.",
+  "new": "Nothing important, because the correlation was fitted to the transient solution too and so prices the early period in full."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "The treating pressure record, which is the measurement the skin was fitted against.",
+  "new": "The treating pressure record, which is the measurement the skin was fitted against during the history match of the job."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "The skin, because a three-dimensional model computes the pseudo-skin directly and no longer needs the fitted correlation.",
+  "new": "The skin, since a three-dimensional model computes the pseudo-skin without the fitted correlation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "It would raise the number, since transport recovers what damage removed.",
+  "new": "It would raise the number, since transport recovers what damage removed by carrying the proppant evenly out to the tip."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "It would replace the damage factor with a measured value from the treating record.",
+  "new": "It would replace the damage factor with a measured value from the treating record, read off the pressure during the ramp."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "The fracture height and the formation permeability, which the injection resolves directly.",
+  "new": "The fracture height and the formation permeability, which the injection resolves directly while it is being pumped."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "The number of blender stages, since the staircase sets how much of the ramp is spent below the design concentration.",
+  "new": "The number of blender stages, as the staircase sets how much ramp runs below design concentration."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "The skin is obtained independently of the width, so width is carried through the calculation only as a check on the placed mass.",
+  "new": "The skin is independent of the width, so width is carried only as a check on the placed mass."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-pad-and-the-ramp",
+  "ord": 7,
+  "option": 3,
+  "old": "The exponent climbs towards 1.5589231771218184 as the efficiency falls to 0.05.",
+  "new": "The exponent climbs towards 1.5589231771218184 as the efficiency falls to 0.05, just as the factor does in the tier below."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-pad-and-the-ramp",
+  "ord": 8,
+  "option": 0,
+  "old": "A straight line from zero up to the end of job concentration.",
+  "new": "A straight line from zero up to the end of job concentration, since the blender raises its setting by equal steps each stage."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-pad-and-the-ramp",
+  "ord": 8,
+  "option": 2,
+  "old": "Concave over the first half of the ramp and convex over the second half of it.",
+  "new": "Concave over the first half of the ramp and convex over the second half of it, giving the S shape of a smoothed staircase."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-pad-and-the-ramp",
+  "ord": 10,
+  "option": 0,
+  "old": "It converts the slurry volume into a clean fluid volume.",
+  "new": "It converts the slurry volume into a clean fluid volume by removing the space the proppant grains occupy in the slurry."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-pad-and-the-ramp",
+  "ord": 10,
+  "option": 3,
+  "old": "It accounts for the eight stages the blender holds during the ramp.",
+  "new": "It accounts for the eight stages the blender holds during the ramp, spreading the mass evenly across each of those steps."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-pad-and-the-ramp",
+  "ord": 11,
+  "option": 2,
+  "old": "It errs either way, depending on whether the efficiency sits above or below the value of the exponent itself.",
+  "new": "It errs either way, depending on whether the efficiency sits above or below the exponent itself."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-pad-and-the-ramp",
+  "ord": 12,
+  "option": 3,
+  "old": "Roughly half the pump time, since the two forms differ by 0.12190512835186529.",
+  "new": "Roughly half the pump time, since the two forms differ by 0.12190512835186529 and that gap is split between pad and ramp."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-pad-and-the-ramp",
+  "ord": 13,
+  "option": 2,
+  "old": "The gap grows steadily as efficiency falls and is widest at the lowest efficiency.",
+  "new": "The gap grows steadily as efficiency falls and is widest at the lowest efficiency, where leakoff is doing most of the damage."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-pad-and-the-ramp",
+  "ord": 14,
+  "option": 1,
+  "old": "The extra clean fluid raised the net pressure enough to grow height into the bounding layers above and below the pay.",
+  "new": "The extra clean fluid raised the net pressure enough to grow height into the bounding layers around the pay."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-pad-and-the-ramp",
+  "ord": 15,
+  "option": 3,
+  "old": "The naive form happens to be correct whenever the leakoff coefficient exceeds 0.0002.",
+  "new": "The naive form happens to be correct whenever the leakoff coefficient exceeds 0.0002, which is where the exponent reaches its limit."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 7,
+  "option": 1,
+  "old": "A retained permeability of 250 darcy, the catalogue value at 2 thousand psi held constant to higher stress.",
+  "new": "A retained 250 darcy, the catalogue value at 2 thousand psi held constant to higher stress."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 8,
+  "option": 3,
+  "old": "The grain density divided by one minus the pack porosity, which is larger than either of them.",
+  "new": "The grain density divided by one minus the pack porosity, which is larger than either of them and so allows for the voids."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 9,
+  "option": 3,
+  "old": "It is about the same as the average created width, because the pack fills the whole aperture.",
+  "new": "It is about the same as the average created width, because the pack fills the whole aperture that the pumped fluid opened."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 10,
+  "option": 2,
+  "old": "Gas that came out of solution as the fracture pressure fell below the bubble point.",
+  "new": "Gas that came out of solution as the fracture pressure fell below the bubble point in the fluid lining the fracture faces."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 11,
+  "option": 3,
+  "old": "It understates the width only where the pack porosity differs from the catalogue value.",
+  "new": "It understates the width only where the pack porosity differs from the catalogue value that the grain density assumes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 12,
+  "option": 0,
+  "old": "It affects only proppants whose porosity is above 0.35.",
+  "new": "It affects only proppants whose porosity is above 0.35, and those are rarely pumped in a routine design."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 12,
+  "option": 3,
+  "old": "It is smaller than the rounding the engine applies to the propped width.",
+  "new": "It is smaller than the rounding the engine applies to the propped width, so it never shows in the output."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 13,
+  "option": 0,
+  "old": "It is not needed, and the engine carries it only for reporting.",
+  "new": "It is not needed, and the engine carries it only for reporting, since the voids are already counted inside the permeability."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 13,
+  "option": 3,
+  "old": "Porosity corrects the permeability for the closure stress bearing on the pack.",
+  "new": "Porosity corrects the permeability for the closure stress bearing on the pack, which squeezes the voids shut as it rises."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 14,
+  "option": 3,
+  "old": "Only the retained permeability changes, and the conductivity is left unaffected.",
+  "new": "Only the retained permeability changes, and the conductivity is left unaffected because the width carries it alone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-from-slurry-to-pack",
+  "ord": 15,
+  "option": 1,
+  "old": "It is derived from the closure stress by the same log-linear interpolation that supplies the pack permeability.",
+  "new": "It is derived from closure stress by the log-linear interpolation that supplies the pack permeability."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-conductivity",
+  "ord": 8,
+  "option": 1,
+  "old": "It holds near 250 darcy until the last row, because a ceramic proppant is manufactured to resist crushing entirely.",
+  "new": "It holds near 250 darcy until the last row, because a ceramic is made to resist crushing entirely."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-conductivity",
+  "ord": 9,
+  "option": 1,
+  "old": "The grains dissolve slowly in the produced formation water.",
+  "new": "The grains dissolve slowly in the produced formation water, which widens the pore throats at first and then lets the pack collapse."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-conductivity",
+  "ord": 9,
+  "option": 3,
+  "old": "The propped width falls because the fracture faces embed into the pack.",
+  "new": "The propped width falls because the fracture faces embed into the pack, and that loss of width is what the table records as permeability."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-conductivity",
+  "ord": 10,
+  "option": 3,
+  "old": "The share of the created fracture height that ends up propped rather than closed.",
+  "new": "The share of the created fracture height that ends up propped rather than closed, once the pack has settled to the base."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-conductivity",
+  "ord": 12,
+  "option": 1,
+  "old": "Any positive value at all, since a factor above one simply represents a pack improved by an effective breaker system.",
+  "new": "Any positive value, since a factor above one simply represents a pack improved by a good breaker."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-conductivity",
+  "ord": 13,
+  "option": 2,
+  "old": "The gain stays constant, because the pseudo-skin depends on the logarithm of the length ratio and on nothing else.",
+  "new": "The gain stays constant, because the pseudo-skin depends on the logarithm of the length ratio alone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-conductivity",
+  "ord": 14,
+  "option": 3,
+  "old": "440 m at 0.07728387174143661, where the fracture contacts the most reservoir face.",
+  "new": "440 m at 0.07728387174143661, where the fracture contacts the most reservoir face and so gathers the most inflow overall."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-conductivity",
+  "ord": 15,
+  "option": 0,
+  "old": "The correlation is clamped once the ratio passes the top of its band.",
+  "new": "The correlation is clamped once the ratio passes the top of its band, so the printed skin simply stops responding."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-conductivity",
+  "ord": 15,
+  "option": 3,
+  "old": "The half-length drops out of the pseudo-skin expression above a ratio of 1.6.",
+  "new": "The half-length drops out of the pseudo-skin expression above a ratio of 1.6, leaving nothing further for width to improve."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-fracture-as-a-skin",
+  "ord": 9,
+  "option": 2,
+  "old": "By Newton iteration on the pseudo-skin until the assumed and computed dimensionless conductivities agree to tolerance.",
+  "new": "By Newton iteration on the pseudo-skin until the assumed and computed conductivities agree."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-fracture-as-a-skin",
+  "ord": 10,
+  "option": 3,
+  "old": "The closure stress in thousands of psi taken from the proppant table.",
+  "new": "The closure stress in thousands of psi taken from the proppant table, since that load sets the pack permeability."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-fracture-as-a-skin",
+  "ord": 11,
+  "option": 0,
+  "old": "It returns zero, at a dimensionless conductivity of 1.6.",
+  "new": "It returns zero, at a dimensionless conductivity of 1.6, which is why that ratio is carried as the optimum of the design."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-fracture-as-a-skin",
+  "ord": 11,
+  "option": 2,
+  "old": "It returns 0.116, the coefficient on the squared term above the line.",
+  "new": "It returns 0.116, the coefficient on the squared term above the line, because the other numerator terms are multiplied away."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-fracture-as-a-skin",
+  "ord": 12,
+  "option": 3,
+  "old": "The logarithm of the length ratio equals the pseudo-skin itself by definition.",
+  "new": "The logarithm of the length ratio equals the pseudo-skin itself by definition, so f plays no part in forming the term."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-fracture-as-a-skin",
+  "ord": 13,
+  "option": 1,
+  "old": "Both terms rise together, so the pseudo-skin always improves.",
+  "new": "Both terms rise together, so the pseudo-skin always improves and the longest fracture the proppant can reach is the best."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-fracture-as-a-skin",
+  "ord": 13,
+  "option": 3,
+  "old": "Both terms fall, so the pseudo-skin becomes less negative at once.",
+  "new": "Both terms fall, so the pseudo-skin becomes less negative at once, since the thinner pack cancels any benefit from the length."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-fracture-as-a-skin",
+  "ord": 14,
+  "option": 2,
+  "old": "The fracture half-length is added to the drilled radius, since the fracture doubles the contact area on each of its wings.",
+  "new": "The fracture half-length is added to the drilled radius, as the fracture extends the contact on each wing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-unified-design-optimum",
+  "ord": 8,
+  "option": 0,
+  "old": "It falls outside the stated range of the skin correlation.",
+  "new": "It falls outside the stated range of the skin correlation, so the pseudo-skin printed for that short row cannot be trusted at all."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-unified-design-optimum",
+  "ord": 8,
+  "option": 1,
+  "old": "It has ample reach but too little conductivity to bring the collected oil back to the well.",
+  "new": "It has ample reach but too little conductivity to bring the collected oil back to the well, so the pack is the bottleneck there."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-unified-design-optimum",
+  "ord": 9,
+  "option": 2,
+  "old": "The propped width of 0.0005152988864257336 m falls under the grain diameter of the proppant, so no pack forms out at the tip.",
+  "new": "The propped width of 0.0005152988864257336 m falls under the grain diameter, so no pack forms at the tip."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-unified-design-optimum",
+  "ord": 10,
+  "option": 0,
+  "old": "Quoting it is fine, since the engine computed it from the same correlation.",
+  "new": "Quoting it is fine, since the engine computed it from the same correlation that every other row of the sweep was run through."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-unified-design-optimum",
+  "ord": 10,
+  "option": 1,
+  "old": "It lies above the correlation ceiling of 1000, so the skin is extrapolated.",
+  "new": "It lies above the correlation ceiling of 1000, so the skin is extrapolated beyond the band the correlation was originally fitted on."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-unified-design-optimum",
+  "ord": 11,
+  "option": 3,
+  "old": "Towards a lower closure stress, that being the one lever which raises retained pack permeability.",
+  "new": "Towards a lower closure stress, that being the one lever which raises retained pack permeability and so the ratio itself."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-unified-design-optimum",
+  "ord": 13,
+  "option": 1,
+  "old": "Steady linear flow into the fracture face, leaving out the radial convergence close to the wellbore.",
+  "new": "Steady linear flow into the fracture face, leaving out the radial convergence close to the wellbore where the flow lines crowd."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-unified-design-optimum",
+  "ord": 14,
+  "option": 1,
+  "old": "Longer fractures call for a higher injection rate, and rate is the term which sets the bounding stress contrast.",
+  "new": "Longer fractures call for a higher injection rate, and rate is the term which sets the bounding stress contrast that holds the fracture in zone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-unified-design-optimum",
+  "ord": 15,
+  "option": 3,
+  "old": "It fixes the proppant volume to buy, leaving the placement of that proppant to the pumping schedule.",
+  "new": "It fixes the proppant volume to buy, leaving the placement of that proppant to the pumping schedule and the blender."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 0,
+  "old": "Non-Darcy flow, which lowers the effective permeability at high rates.",
+  "new": "Non-Darcy flow, which lowers the effective permeability at high rates once inertial losses build up in the pore throats of the pack."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "Closure creep, which keeps narrowing the pack for years after the job.",
+  "new": "Closure creep, which keeps narrowing the pack for years after the job as the grains slowly embed into the two faces of the fracture."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "The placed mass, since the slope tracks how much proppant has entered the fracture at any moment during the treatment.",
+  "new": "The placed mass, since the slope tracks how much proppant has entered the fracture at each moment."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "Predicting the treating pressure a job will record at surface.",
+  "new": "Predicting the treating pressure a job will record at surface, since the tier carries net pressure and pipe friction through every stage of the schedule."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "It takes twice the acid, since skin follows pumped volume.",
+  "new": "It takes twice the acid, since skin follows pumped volume in direct proportion once the wormholes are established."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 2,
+  "old": "It takes about four times the acid, matching the square root sitting in the radius expression.",
+  "new": "It takes about four times the acid, matching the square root sitting in the radius expression that links volume to reach."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "The wormhole radius reaches a plateau, so the spreadsheet ought to have stopped where that curve flattened.",
+  "new": "The wormhole radius reaches a plateau, so the spreadsheet ought to have stopped where that curve flattened out completely."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "It is the outer edge of the damaged ring after treatment, measured from the centre of the hole rather than from its wall.",
+  "new": "It is the outer edge of the damaged ring after treatment, measured from the centre of the hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "The damage skin should be subtracted instead, since the channels bypass the damaged shell entirely.",
+  "new": "The damage skin should be subtracted instead, since the channels bypass the damaged shell entirely and cancel its effect."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "Downward, in direct proportion to the open height.",
+  "new": "Downward, in direct proportion to the open height, since fewer metres of rock leave fewer channels for the acid to grow."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 3,
+  "old": "Downward, since a shorter interval reduces the number of channels the instability is able to start.",
+  "new": "Downward, since a shorter interval reduces the number of channels the instability is able to start at the wellbore wall."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "The ceiling is unaffected, since viscosity cancels out.",
+  "new": "The ceiling is unaffected, since viscosity cancels out between the injection rate and the pressure margin."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 2,
+  "old": "The ceiling falls with the square of the viscosity, so the treatment becomes impractical.",
+  "new": "The ceiling falls with the square of the viscosity, so the treatment becomes impractical at any useful rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "It leaves the ceiling untouched, because the fracturing pressure is set by earth stress and follows the reservoir upward.",
+  "new": "It leaves the ceiling untouched, since fracturing pressure is set by stress and follows the reservoir."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "No, because the well is quietly fracturing and will show that on the pressure record a little later.",
+  "new": "No, because the well is quietly fracturing and will show that on the pressure record a little later in the job."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "It halves the ceiling, but the choice can be reversed on the day by opening a few more perforations.",
+  "new": "It halves the ceiling, but the choice can be reversed on the day by opening a few more perforations in the casing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "Well, since enlarging the hole removes the damaged ring itself and takes the skin term out of the denominator entirely.",
+  "new": "Well, since enlarging the hole removes the damaged ring and takes the skin term out entirely."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "Rather less time, because the more damaged well carries the larger pressure margin and therefore accepts fluid faster.",
+  "new": "Rather less time, since the more damaged well has the larger pressure margin and takes fluid faster."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "The drainage radius, because a longer job drains a wider area and improves the economics of the well.",
+  "new": "The drainage radius, because a longer job drains a wider area and improves the economics of the well once it is back on."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "The residual skin, since every later step is measured against what the treatment has left behind.",
+  "new": "The residual skin, since every later step is measured against what the treatment has left behind in the damaged ring."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "Wellbore 0.108 m, then the acid front at 0.6 m, then the wormhole radius, and the damaged radius last of all.",
+  "new": "Wellbore 0.108 m, then the acid front at 0.6 m, then the wormhole radius, then the damaged radius."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "Every result, since porosity enters all of the steps.",
+  "new": "Every result, since porosity enters all of the steps from the damage skin through to the ceiling on the pump rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "Only the damage skin, since Hawkins works on the pore space inside the damaged ring.",
+  "new": "Only the damage skin, since Hawkins works on the pore space inside the damaged ring rather than on its permeability."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "The measured skin from the well test, which the residual has to be subtracted from before the number means anything.",
+  "new": "The measured skin from the well test, which the residual must be taken from before it means anything."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Drilling Fluids for the acid blend and for its strength.",
+  "new": "Drilling Fluids for the acid blend and for its strength, since the mud programme sets the chemistry the damage came from."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "Perforating and Sand Control, which supplies the damaged radius the Hawkins step works from.",
+  "new": "Perforating and Sand Control, which supplies the damaged radius the Hawkins step works from and the contrast behind it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "How acid strength is chosen for a given mineralogy.",
+  "new": "How acid strength is chosen for a given mineralogy, so that the blend dissolves the damage without sludging."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "How the pore volumes to breakthrough might be predicted without any laboratory work.",
+  "new": "How the pore volumes to breakthrough might be predicted without any laboratory work on core from the well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 12,
+  "option": 0,
+  "old": "From the measured permeability contrast across the damaged ring.",
+  "new": "From the measured permeability contrast across the damaged ring, read off the well test beforehand."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 14,
+  "option": 2,
+  "old": "The published case uses a contrast of 5, and values far away from the published case fall outside the range over which the correlation was fitted.",
+  "new": "The published case uses a contrast of 5, and values far from it lie outside the fitted range."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 15,
+  "option": 1,
+  "old": "A pseudo skin for a propped fracture, because turning geometry back into one number is a reservoir engineering step performed elsewhere.",
+  "new": "A pseudo skin for a propped fracture, left to other tools."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-damage-and-what-it-costs",
+  "ord": 10,
+  "option": 3,
+  "old": "A shallow ring is always worse than a deep one once the contrast rises above about 4.",
+  "new": "A shallow ring is always worse than a deep one once the contrast rises above about 4, whatever the permeability."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-damage-and-what-it-costs",
+  "ord": 11,
+  "option": 2,
+  "old": "A relationship that is linear at low contrast but bends over above a value of about 8, which is where the sweep table starts to show diminishing steps.",
+  "new": "A relationship that is linear at low contrast but bends over above about 8, where the steps shrink."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-damage-and-what-it-costs",
+  "ord": 13,
+  "option": 0,
+  "old": "On the damaged radius, which is the harder number to measure.",
+  "new": "On the damaged radius, which is the harder number to measure and so carries the larger share of the error."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-damage-and-what-it-costs",
+  "ord": 13,
+  "option": 3,
+  "old": "On the drainage radius, which sets the logarithm the skin is added to.",
+  "new": "On the drainage radius, which sets the logarithm the skin is added to and so scales every skin reported."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-damage-and-what-it-costs",
+  "ord": 14,
+  "option": 1,
+  "old": "The pore volume factor rises with distance from the wellbore, which is why the second front needs a disproportionate share of the total pumped volume.",
+  "new": "The pore volume factor rises with distance from the wellbore, so the second front needs an outsized volume."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-damage-and-what-it-costs",
+  "ord": 15,
+  "option": 3,
+  "old": "Formation damage and the drainage logarithm, which the test reports as a combined resistance term.",
+  "new": "Formation damage and the drainage logarithm, which the test reports as a combined resistance term for the whole radial flow path."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-acid-route",
+  "ord": 11,
+  "option": 0,
+  "old": "The volume rises from 29.55 m3 to about 44 m3.",
+  "new": "The volume rises from 29.55 m3 to about 44 m3, in step with the radius of the acid front itself."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-acid-route",
+  "ord": 12,
+  "option": 1,
+  "old": "Reaction products that the acid leaves in the pore throats.",
+  "new": "Reaction products that the acid leaves behind, precipitated in the pore throats as it spends."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-acid-route",
+  "ord": 13,
+  "option": 1,
+  "old": "Once the residual skin falls below 1.62, at which point the remaining damage is treated as negligible.",
+  "new": "Once the residual skin falls below 1.62, when the remaining damage counts as trivial."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-acid-route",
+  "ord": 13,
+  "option": 3,
+  "old": "Progressively, in proportion to the fraction of the damaged annulus the front has swept through.",
+  "new": "Progressively, in proportion to the share of the damaged annulus the front has swept."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-carbonates-and-wormholes",
+  "ord": 11,
+  "option": 0,
+  "old": "As the Hawkins expression with the contrast set to 5.",
+  "new": "As the Hawkins expression with the contrast set to 5, applied from the wellbore out to the wormhole radius."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-carbonates-and-wormholes",
+  "ord": 12,
+  "option": 0,
+  "old": "A decrement that doubles with each row of the table.",
+  "new": "A decrement that doubles with each row of the table, just as the volume pumped doubles from row to row."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-carbonates-and-wormholes",
+  "ord": 13,
+  "option": 2,
+  "old": "The model is unreliable at large volumes, which is why the tabulated sweep stops at 32 m3 of acid.",
+  "new": "The model is unreliable at large volumes, which is why the sweep stops at 32 m3 of acid."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-carbonates-and-wormholes",
+  "ord": 14,
+  "option": 2,
+  "old": "It reports an optimum injection rate instead, so volume is left to be fixed by the pumping time available on site.",
+  "new": "It reports an optimum injection rate instead, leaving volume to the pumping time on site."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-carbonates-and-wormholes",
+  "ord": 14,
+  "option": 3,
+  "old": "The optimum lies at the volume where the wormhole radius equals the damage radius, which is not modelled here.",
+  "new": "The optimum lies where the wormhole radius equals the damage radius, which is not modelled here."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-carbonates-and-wormholes",
+  "ord": 15,
+  "option": 1,
+  "old": "The two skins can be added to give a single treated skin of 0.33 for a damaged carbonate reservoir.",
+  "new": "The two skins can be added to give a single treated skin of 0.33 for a damaged carbonate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-matrix-ceiling",
+  "ord": 10,
+  "option": 0,
+  "old": "Because the drainage radius cancels against the wellbore radius.",
+  "new": "Because the drainage radius cancels against the wellbore radius, leaving only the skin to set the denominator."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-matrix-ceiling",
+  "ord": 11,
+  "option": 2,
+  "old": "Because a damaged well is usually completed with smaller tubing, which chokes the rate available at the perforations.",
+  "new": "Because a damaged well is usually completed with smaller tubing, which chokes the available rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-matrix-ceiling",
+  "ord": 11,
+  "option": 3,
+  "old": "Because the damaged zone holds a higher pore pressure than the rest of the reservoir, cutting the margin available.",
+  "new": "Because the damaged zone holds a higher pore pressure than the reservoir, cutting the margin."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-matrix-ceiling",
+  "ord": 12,
+  "option": 1,
+  "old": "It is exactly equal to the geometric term, which is why the published ceiling comes out at half of the clean value.",
+  "new": "It is exactly equal to the geometric term, so the published ceiling is half the clean value."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-matrix-ceiling",
+  "ord": 12,
+  "option": 3,
+  "old": "It is smaller than the geometric term, so most of the resistance in a damaged well is still radial flow geometry.",
+  "new": "It is smaller than the geometric term, so most resistance in a damaged well is still geometry."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-matrix-ceiling",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the permeability improves as the pore pressure falls and the grain framework carries more of the load.",
+  "new": "Because permeability improves as pore pressure falls and the grain framework carries more load."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-matrix-ceiling",
+  "ord": 14,
+  "option": 2,
+  "old": "It implies that the volume must be cut in half, because no matrix job may exceed eight hours of continuous pumping.",
+  "new": "It implies the volume must be cut in half, because no matrix job may exceed eight hours of pumping."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-matrix-ceiling",
+  "ord": 15,
+  "option": 0,
+  "old": "It is a laboratory value that needs a field correction factor.",
+  "new": "It is a laboratory value that needs a field correction factor before it can be used to set the rate on the pump truck."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "Reading a measured well test skin and splitting it into its damage, perforation, deviation and turbulence components.",
+  "new": "Reading a well test skin and splitting it into its damage, perforation, deviation and turbulence components."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "Net pressure is measured at surface and closure at depth.",
+  "new": "Net pressure is measured at surface and closure at depth, so the two figures cannot be set side by side."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "The wider model always places more proppant, so the choice should instead be settled on the mass the schedule can carry.",
+  "new": "The wider model always places more proppant, so the choice should rest on the mass the schedule carries."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 2,
+  "old": "Just over a sixth of the fluid leaks away, so the planner's budget is sound and needs no revision before the job.",
+  "new": "Just over a sixth of the fluid leaks away, so the planner's budget is sound and needs no revision."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "How closure stress is read from a leakoff test.",
+  "new": "How closure stress is read from a leakoff test, the first number any fracture design asks for."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 2,
+  "old": "The volume comes out too small, because the annular area is measured outward from the front rather than from the wellbore.",
+  "new": "The volume comes out too small, since the annulus is measured from the front rather than the hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "The volume is right but the residual skin is wrong, since the omitted term belongs to the Hawkins expression instead.",
+  "new": "The volume is right but the residual skin is wrong, as the omitted term belongs to Hawkins."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 3,
+  "old": "The design is safe once the pad is enlarged, as extra clean fluid lowers the pressure at the boundary of the pay.",
+  "new": "The design is safe once the pad is enlarged, as extra clean fluid lowers the pressure at the boundary of the pay and keeps the fracture inside it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 0,
+  "old": "The maximum width multiplied by the face area of one wing.",
+  "new": "The maximum width multiplied by the face area of one wing, since the widest opening is what the pumped fluid has to fill first."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "The average width multiplied by the full tip to tip length and the height.",
+  "new": "The average width multiplied by the full tip to tip length and the height, and that product then doubled again to count the two wings."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 2,
+  "old": "The propped width governs it, as that is what the grains occupy once the job has finished.",
+  "new": "The propped width governs it, as that is what the grains occupy once the job has finished and the fracture has closed down on the pack."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 3,
+  "old": "The Nolte factor doubles alongside the coefficient, which multiplies the two effects together.",
+  "new": "The Nolte factor doubles alongside the coefficient, which multiplies the two effects together into a fourfold loss overall."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "As a reason to raise the proppant concentration, so the job places its mass in less time.",
+  "new": "As a reason to raise the proppant concentration, so the job places its mass in less time and the pad shrinks along with it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "The quadratic was solved for the negative root, which throws the three quantities out of step.",
+  "new": "The quadratic was solved for the negative root, which throws the three quantities out of step with one another on the sheet."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "The leakoff coefficient was set to zero, which is the case that never converges.",
+  "new": "The leakoff coefficient was set to zero, which is the case that never converges because the loop has nothing to balance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "Correct, as the two expressions agree at every efficiency.",
+  "new": "Correct, as the two expressions agree at every efficiency and differ only in how the fraction is written down on the sheet."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "Too large by a factor of two, which is the widest the two can ever be apart.",
+  "new": "Too large by a factor of two, which is the widest the two can ever be apart since the ramp claims half of the fluid lost."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 3,
+  "old": "Fracture length, since the fracture volume grows with the pump time.",
+  "new": "Fracture length, since the fracture volume grows with the pump time and the extra hour extends the tip outward."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 1,
+  "old": "The rock, because only an unusually stiff formation can carry a surplus that far above what the elasticity solution allows for.",
+  "new": "The rock, because only an unusually stiff formation can carry a surplus that far above the elastic solution."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 0,
+  "old": "Nothing, as the two lengths coincide once the pad is correct.",
+  "new": "Nothing, as the two lengths coincide once the pad is correct and the last of the slurry has reached the very tip of the fracture."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "Leakoff, which shortens the created length before any proppant arrives.",
+  "new": "Leakoff, which shortens the created length before any proppant arrives, so that the created figure quoted already describes the pack."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "Because the pack is thicker than the fracture, having been compressed during placement.",
+  "new": "Because the pack is thicker than the fracture, having been compressed during placement into a denser layer of grains."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "A rerun of the geometry at several heights, keeping whichever height reproduces the pump time that the job actually took to place.",
+  "new": "A rerun of the geometry at several heights, keeping whichever height reproduces the pump time the job took."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "There is no defence, and the tier presents these models only for historical interest.",
+  "new": "There is no defence, and the tier presents these models only for historical interest before moving on to full simulation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "In the thin fluid they stay suspended because the flow is turbulent, and in the viscous fluid they drop straight out near the wellbore.",
+  "new": "In the thin fluid they stay suspended because the flow is turbulent, and in the viscous fluid they drop out near the well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "The pump time falls, because the taller fracture fills at the same rate over a shorter path.",
+  "new": "The pump time falls, because the taller fracture fills at the same rate over a shorter path from the perforations out to the tip."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "Because the leakoff coefficient is measured rather than assumed.",
+  "new": "Because the leakoff coefficient is measured rather than assumed, and a measured input has to be matched by trial and error."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "Because the Nolte factor is nonlinear in efficiency and cannot be inverted.",
+  "new": "Because the Nolte factor is nonlinear in efficiency and cannot be inverted, so it has to be found by repeated guessing."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "No, but the plane strain modulus can be reused, as it is a property of the tier rather than of the well.",
+  "new": "No, but the plane strain modulus can be reused, as it is a property of the tier rather than of the well being designed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "The height became an output instead of an input.",
+  "new": "The height became an output instead of an input, solved from the stress contrast rather than handed to the model at the start."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Net pressure lost its dependence on the plane strain modulus.",
+  "new": "Net pressure lost its dependence on the plane strain modulus, which dropped out once the quarter power was taken on the widths."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "It gave up the closure stress, which is now assumed rather than read.",
+  "new": "It gave up the closure stress, which is now assumed rather than read, since the modulus replaces the stress profile in the sum."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "It gave up the distinction between confined and unconfined response.",
+  "new": "It gave up the distinction between confined and unconfined response, which is why both width models now share one equation form."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "That the design should aim for the widest possible fracture, because conductivity always rewards width more than it rewards length.",
+  "new": "That the design should aim for the widest possible fracture, because conductivity always rewards width over length."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "They are handled by lowering the assumed proppant mass before the schedule is built.",
+  "new": "They are handled by lowering the assumed proppant mass before the schedule is built, so that less pack is ever expected."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "Because clean fluid leaks off more slowly than slurry and therefore raises the efficiency of the job.",
+  "new": "Because clean fluid leaks off more slowly than slurry and therefore raises the efficiency of the job before any proppant is added."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-fracture-is-a-pressure-problem",
+  "ord": 8,
+  "option": 1,
+  "old": "It refuses the whole calculation, since a fracture model cannot produce a width without a stress to open against.",
+  "new": "It refuses the whole calculation, since a fracture model cannot give a width without a stress."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-fracture-is-a-pressure-problem",
+  "ord": 9,
+  "option": 2,
+  "old": "Against the average of the three principal stresses, with the plane set by the perforation phasing at the wellbore.",
+  "new": "Against the average of the three principal stresses, with the plane set by perforation phasing."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-fracture-is-a-pressure-problem",
+  "ord": 10,
+  "option": 0,
+  "old": "Because charts are quoted in imperial units and need conversion.",
+  "new": "Because charts are quoted in imperial units and need conversion before they can be entered in the engine."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-fracture-is-a-pressure-problem",
+  "ord": 12,
+  "option": 3,
+  "old": "It is too high by more, since the width calculation feeds the error back into the net pressure a second time.",
+  "new": "It is too high by more, since the width calculation feeds the error back into net pressure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-fracture-is-a-pressure-problem",
+  "ord": 13,
+  "option": 0,
+  "old": "Young's modulus is multiplied by the Poisson ratio of 0.28.",
+  "new": "Young's modulus is multiplied by the Poisson ratio of 0.28, which scales the stiffness to the confined state."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-fracture-is-a-pressure-problem",
+  "ord": 14,
+  "option": 1,
+  "old": "Because the correction grows without limit as the Poisson ratio rises, so it can dominate at high ratios in shale.",
+  "new": "Because the correction grows without limit as the Poisson ratio rises, dominating in shale."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-two-two-dimensional-models",
+  "ord": 7,
+  "option": 0,
+  "old": "Use KGD for all cased and perforated completions.",
+  "new": "Use KGD for all cased and perforated completions, since perforations confine the fracture to a short radial shape near the well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-two-two-dimensional-models",
+  "ord": 8,
+  "option": 0,
+  "old": "KGD, because the height is small in absolute terms.",
+  "new": "KGD, because the height is small in absolute terms and a thin interval behaves as a short fracture regardless of length."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-two-two-dimensional-models",
+  "ord": 8,
+  "option": 1,
+  "old": "Neither, since the two dimensions are within a factor of two of one another.",
+  "new": "Neither, since the two dimensions are within a factor of two of one another and the rule gives no clear preference here."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-two-two-dimensional-models",
+  "ord": 9,
+  "option": 2,
+  "old": "Because the comparison uses a height that is itself an assumption, which is the only weakness the rule has.",
+  "new": "Because the comparison uses a height that is itself an assumption, which is the only weakness the rule has and one a log would cure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-two-two-dimensional-models",
+  "ord": 10,
+  "option": 0,
+  "old": "It rejects a KGD run whenever half-length exceeds height.",
+  "new": "It rejects a KGD run whenever half-length exceeds height, since that pairing breaks the plane strain assumption."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-two-two-dimensional-models",
+  "ord": 10,
+  "option": 3,
+  "old": "It silently substitutes PKN whenever the geometry looks contained.",
+  "new": "It silently substitutes PKN whenever the geometry looks contained, so a mismatched model name is corrected for you."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-two-two-dimensional-models",
+  "ord": 11,
+  "option": 3,
+  "old": "KGD is wider by a fixed offset of about six millimetres that holds at every half-length in the published sweep.",
+  "new": "KGD is wider by a fixed offset of about six millimetres at every half-length in the sweep."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-two-two-dimensional-models",
+  "ord": 15,
+  "option": 0,
+  "old": "Only the treating pressure estimate, which is out by a small margin.",
+  "new": "Only the treating pressure estimate, which is out by a small margin that any closure check will absorb."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 7,
+  "option": 2,
+  "old": "Viscosity dominates because crosslinked fluids raise it by orders of magnitude.",
+  "new": "Viscosity dominates because crosslinked fluids raise it by orders of magnitude, far beyond any practical change in rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 8,
+  "option": 1,
+  "old": "Both rise by the full factor of 7.5, since width is proportional to length in each model.",
+  "new": "Both rise by the full factor of 7.5, since width is proportional to length in each model and the two brackets scale alike here."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 9,
+  "option": 3,
+  "old": "Only viscosity is damped, so rate remains the practical lever for widening a fracture on location.",
+  "new": "Only viscosity is damped, so rate remains the practical lever for widening a fracture on location by adding more pumps."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 10,
+  "option": 3,
+  "old": "PKN divides by twice the height while KGD divides by the product of height and half-length, which is why its net pressure is so much lower.",
+  "new": "PKN divides by twice the height while KGD divides by height times half-length, so its net pressure is lower."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 11,
+  "option": 0,
+  "old": "Because the two models assume different closure stresses.",
+  "new": "Because the two models assume different closure stresses, and the KGD closure falls away as the crack reaches further out."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 11,
+  "option": 1,
+  "old": "Because KGD loses more fluid to leakoff as the fracture extends.",
+  "new": "Because KGD loses more fluid to leakoff as the fracture extends, which bleeds its pressure down far faster than in the PKN case."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 12,
+  "option": 0,
+  "old": "It indicates a screenout in progress.",
+  "new": "It indicates a screenout in progress, with proppant bridging near the tip and the pumps working against it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 12,
+  "option": 1,
+  "old": "It shows the fluid viscosity degrading downhole.",
+  "new": "It shows the fluid viscosity degrading downhole, which the pumps answer by working harder to hold the rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 13,
+  "option": 3,
+  "old": "It is returned as an output alongside the two widths.",
+  "new": "It is returned as an output alongside the two widths, solved from the balance between rate and leakoff."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 14,
+  "option": 3,
+  "old": "The width halves and the net pressure is unchanged, since PKN carries the height inside the width bracket instead.",
+  "new": "The width halves and the net pressure is unchanged, since PKN carries the height inside the width bracket instead of the pressure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-width-net-pressure-and-height",
+  "ord": 15,
+  "option": 3,
+  "old": "Whether the injection rate stays inside the fracture extension pressure limit for the whole of the pumping schedule as designed.",
+  "new": "Whether the injection rate stays inside the fracture extension pressure limit for the whole schedule."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-material-balance",
+  "ord": 8,
+  "option": 1,
+  "old": "Between one and three, widening steadily as the fracture lengthens, which is why a long job needs a much larger correction.",
+  "new": "Between one and three, widening as the fracture lengthens, so a long job needs a larger correction."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-material-balance",
+  "ord": 9,
+  "option": 3,
+  "old": "The leakoff coefficient itself rises as efficiency falls, and the factor carries that rise through.",
+  "new": "The leakoff coefficient itself rises as efficiency falls, and the factor carries that rise through into the lost volume."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-material-balance",
+  "ord": 10,
+  "option": 0,
+  "old": "It dominates the error, so it should be measured on every site.",
+  "new": "It dominates the error, so it should be measured on every site before the balance can be trusted for any design."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-material-balance",
+  "ord": 10,
+  "option": 2,
+  "old": "It is exact, so a mismatch against a measured pump time must come from the injection rate.",
+  "new": "It is exact, so a mismatch against a measured pump time must come from the injection rate recorded on the job."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-material-balance",
+  "ord": 11,
+  "option": 1,
+  "old": "Lost volume over injected volume, which comes to about one sixth.",
+  "new": "Lost volume over injected volume, which comes to about one sixth of all the fluid pumped on the published job."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-material-balance",
+  "ord": 11,
+  "option": 3,
+  "old": "Injected volume over fracture volume, which is 5.7851397133124625 on this job.",
+  "new": "Injected volume over fracture volume, which is 5.7851397133124625 on this job and reads higher for a better job."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-material-balance",
+  "ord": 13,
+  "option": 3,
+  "old": "Eta over one plus eta, which puts the pad a little under a sixth of the total volume.",
+  "new": "Eta over one plus eta, which puts the pad a little under a sixth of the total volume pumped on the job."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-material-balance",
+  "ord": 14,
+  "option": 1,
+  "old": "Because two fracture volumes satisfy the balance, and the engine has to select the one giving a positive net pressure.",
+  "new": "Because two fracture volumes fit the balance, and the one with positive net pressure is used."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-material-balance",
+  "ord": 15,
+  "option": 3,
+  "old": "A guess of one for efficiency is stepped down, reaching the answer after the full 200 passes.",
+  "new": "A guess of one for efficiency is stepped down, reaching the answer only after the full 200 passes of the loop."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-models-stop",
+  "ord": 7,
+  "option": 3,
+  "old": "It rescales the height once net pressure is known, which is why the reported height can differ.",
+  "new": "It rescales the height once net pressure is known, which is why the reported height can differ from the input."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-models-stop",
+  "ord": 9,
+  "option": 2,
+  "old": "Nothing measurable, because the extra height contributes conductive fracture area that offsets the loss in half-length.",
+  "new": "Nothing measurable, since the extra height adds fracture area that offsets the lost half-length."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-models-stop",
+  "ord": 10,
+  "option": 3,
+  "old": "The slurry density, which rises once the fracture reaches a bounding layer.",
+  "new": "The slurry density, which rises once the fracture reaches a bounding layer and the pack starts to dehydrate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-models-stop",
+  "ord": 11,
+  "option": 2,
+  "old": "Toughness is a laboratory quantity that cannot be measured downhole, so the engine deliberately excludes it from the design workflow.",
+  "new": "Toughness is a laboratory quantity that cannot be measured downhole, so the engine excludes it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-models-stop",
+  "ord": 12,
+  "option": 1,
+  "old": "Spurt loss into the tip, and the settling of proppant against the crack front.",
+  "new": "Spurt loss into the tip, and the settling of proppant against the crack front as the slurry slows down there."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-models-stop",
+  "ord": 13,
+  "option": 0,
+  "old": "That KGD is the more accurate model for long fractures.",
+  "new": "That KGD is the more accurate model for long fractures, where the pressure ought to fall as the crack opens wider."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-models-stop",
+  "ord": 13,
+  "option": 2,
+  "old": "That the fracture has begun to grow in height, which relieves pressure.",
+  "new": "That the fracture has begun to grow in height, which relieves the pressure as the crack breaks out of the pay zone."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-models-stop",
+  "ord": 14,
+  "option": 0,
+  "old": "By switching from PKN to KGD, whichever fits the measurement.",
+  "new": "By switching from PKN to KGD, whichever fits the measurement, and then carrying that model through the whole job."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-models-stop",
+  "ord": 14,
+  "option": 3,
+  "old": "By adding a toughness term to the width equation before the main treatment.",
+  "new": "By adding a toughness term to the width equation before the main treatment, so the model carries the tip resistance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 0,
+  "old": "A missing closure stress and a model name the routine cannot recognise.",
+  "new": "A missing closure stress and a model name the routine cannot recognise, both of which it refuses on sight before running."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "A negative leakoff coefficient and an efficiency guess that started outside the range.",
+  "new": "A negative leakoff coefficient and an efficiency guess that started outside the range the loop is allowed to search."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "PKN, with no justification needed, since PKN is the industry default.",
+  "new": "PKN, with no justification needed, since PKN is the industry default and covers most of the fractures pumped around the world today."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 1,
+  "old": "Whichever model gives the narrower width, so that the design errs on the side of caution.",
+  "new": "Whichever model gives the narrower width, so that the design errs on the side of caution when the proppant comes to be placed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "Quote a propped half-length and the skin it produces, since the width and the balance between them already fix what the well will deliver.",
+  "new": "Quote a propped half-length and the skin it produces, since the width and the balance already fix the well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "The plane strain modulus, because the pad is sized from the stiffness of the rock and the rate at which the fluid enters it.",
+  "new": "The plane strain modulus, because the pad is sized from the stiffness of the rock and the fluid rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 1,
+  "old": "Yes, because calibrating against a minifrac in the Expert tier removes the need for any of those assumptions.",
+  "new": "Yes, because calibrating against a minifrac in the Expert tier removes the need for any of those assumptions at all."
+ }
+]
