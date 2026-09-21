@@ -1555,6 +1555,48 @@
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
+      "path": "__tests__/hse.qra.test.js",
+      "kind": "extra",
+      "group": "h5-qra-course",
+      "vendoredSha": "a31ad5f3a2bd20bb5d8488c0ead3902fa2615a0b",
+      "reason": "H5 qra course: vendored sha-identical from petrolord-engines 16fd6c9 (engines PR #230, merged as abb41c3; unchanged through #231). The canonical pin df31f53 predates it; this entry clears as stale when the pin moves to 16fd6c9 or later."
+    },
+    {
+      "path": "engines/hse/qra.js",
+      "kind": "extra",
+      "group": "h5-qra-course",
+      "vendoredSha": "be1b26d301c5a9a7c4682e2289c8b0d50e1e4748",
+      "reason": "H5 qra course: vendored sha-identical from petrolord-engines 16fd6c9 (engines PR #230, merged as abb41c3; unchanged through #231). The canonical pin df31f53 predates it; this entry clears as stale when the pin moves to 16fd6c9 or later."
+    },
+    {
+      "path": "test-data/hse/goldens/qra_cases.json",
+      "kind": "extra",
+      "group": "h5-qra-course",
+      "vendoredSha": "a722e6d698dca7e24d64de51d5fe4107819d2655",
+      "reason": "H5 qra course: vendored sha-identical from petrolord-engines 16fd6c9 (engines PR #230, merged as abb41c3; unchanged through #231). The canonical pin df31f53 predates it; this entry clears as stale when the pin moves to 16fd6c9 or later."
+    },
+    {
+      "path": "tools/validation/hse/FINDINGS-qra.md",
+      "kind": "extra",
+      "group": "h5-qra-course",
+      "vendoredSha": "cc9fe951989a0a5413f3c000bd6ce4d41a5e6fba",
+      "reason": "H5 qra course: vendored sha-identical from petrolord-engines 16fd6c9 (engines PR #230, merged as abb41c3; unchanged through #231). The canonical pin df31f53 predates it; this entry clears as stale when the pin moves to 16fd6c9 or later."
+    },
+    {
+      "path": "tools/validation/hse/negcontrol_qra.sh",
+      "kind": "extra",
+      "group": "h5-qra-course",
+      "vendoredSha": "d36c97046aee18e98bc8859f97c346d9141a31ed",
+      "reason": "H5 qra course: vendored sha-identical from petrolord-engines 16fd6c9 (engines PR #230, merged as abb41c3; unchanged through #231). The canonical pin df31f53 predates it; this entry clears as stale when the pin moves to 16fd6c9 or later."
+    },
+    {
+      "path": "tools/validation/hse/oracle_qra.py",
+      "kind": "extra",
+      "group": "h5-qra-course",
+      "vendoredSha": "e48e9a2352626ae2788372b24ae5ee0203b24c7e",
+      "reason": "H5 qra course: vendored sha-identical from petrolord-engines 16fd6c9 (engines PR #230, merged as abb41c3; unchanged through #231). The canonical pin df31f53 predates it; this entry clears as stale when the pin moves to 16fd6c9 or later."
+    },
+    {
       "path": "README.md",
       "kind": "differing",
       "group": "7-vendor-readme",
