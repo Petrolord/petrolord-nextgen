@@ -41,7 +41,7 @@
    "complete false with the price reported as none, since the tax cannot read a running total with gaps in it."
   ],
   "answer": 2,
-  "explanation": "The engine keeps both missing elements visible, reports complete false and prints \"A FLOOR, not a price: 2 rate(s) not supplied.\" beside 1031.3197 naira a litre."
+  "explanation": "The engine keeps both missing elements visible, reports complete false and prints \"A FLOOR: 2 rate(s) not supplied, so the full price is at least this.\" beside 1031.3197 naira a litre."
  },
  {
   "prompt": "Against the course's invented cap of 1040.0000 naira a litre, the complete BADAGRY price of 1074.8249 gives which answer?",

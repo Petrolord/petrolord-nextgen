@@ -16,7 +16,9 @@
 -- exactly (already applied, left alone). Anything else raises and the whole
 -- transaction rolls back. Every update must touch exactly 1 row, and the course
 -- must still hold its question count at the end. SAFE TO RE-RUN.
--- Published text was read from a replay of every question migration at origin/main
+-- Published text was read from a replay of every question migration at origin/main,
+-- FC9's recut (#181) and the B3 engine-strings recut (#184) included, so a row either
+-- of those rewrote is expected to carry THEIR text: apply them first.
 -- (docs/digest-recut/RECUT-riskchange.json carries OLD and NEW for every row).
 -- ==========================================================================
 

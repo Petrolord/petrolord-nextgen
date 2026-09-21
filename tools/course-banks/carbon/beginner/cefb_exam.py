@@ -199,7 +199,7 @@ q(3, "The inventory disclaimer warns against keeping a second copy of obligation
  ["A blocked line for each obligation",
   "A total that counts each tonne twice",
   "An unsourced factor in the register"],
- "The disclaimer in the inventory ends: keeping a second copy of them here would create two records that could disagree.")
+ "The disclaimer ends: a second copy here would create two records that could disagree.")
 
 q(2, "Which share of the complete total belongs to the vented and fugitive methane?",
  "0.098534",

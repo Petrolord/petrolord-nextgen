@@ -9,14 +9,16 @@
 -- module key, no scope, no row count. Option lengths keep their rank.
 --
 -- SOURCE of the new text: the regenerated bank JSON under tools/course-banks/gasvalue, built from its committed .py sources.
--- Rows: 206 (beginner 47, intermediate 56, advanced 103).
+-- Rows: 203 (beginner 47, intermediate 55, advanced 101).
 --
 -- GUARDS. Each row is addressed by (app_slug, tier, scope, module_key, ord) and must
 -- carry EITHER its published text exactly (then it is updated) OR the recut text
 -- exactly (already applied, left alone). Anything else raises and the whole
 -- transaction rolls back. Every update must touch exactly 1 row, and the course
 -- must still hold its question count at the end. SAFE TO RE-RUN.
--- Published text was read from a replay of every question migration at origin/main
+-- Published text was read from a replay of every question migration at origin/main,
+-- FC9's recut (#181) and the B3 engine-strings recut (#184) included, so a row either
+-- of those rewrote is expected to carry THEIR text: apply them first.
 -- (docs/digest-recut/RECUT-gasvalue.json carries OLD and NEW for every row).
 -- ==========================================================================
 
@@ -948,15 +950,15 @@ begin
 
   -- intermediate final ord 32
   select case
-           when prompt = 'creditSensitivity is run on a route with its price missing, so it has no margin. What does it answer?' and options = '["REFUSED: The hurdle margin is not a number.", "A breakeven worked on a margin of zero, with the price named in assumedZero.", "No verdict and a null breakeven; it reports that no hurdle margin was given.", "No verdict and a null breakeven; it asks the study to supply its price and costs."]'::jsonb and answer_index = 3 and explanation is not distinct from 'With the price missing there is no margin. The digest prints the answer as having no verdict, a null breakevenCreditPrice and a request to supply the price and costs. A hurdle typed as ''x'' is the refused probe.' then 'old'
-           when prompt = 'creditSensitivity is run on a route with its price missing, so it has no margin. What does it answer?' and options = '["REFUSED: The hurdle margin is not a number.", "A breakeven worked on a margin of zero, with the price named in assumedZero.", "No verdict and a null breakeven; it reports that no hurdle margin was given.", "No verdict and a null breakeven; it asks the study to supply its price and costs."]'::jsonb and answer_index = 3 and explanation is not distinct from 'With the price missing there is no margin. The course prints the answer as having no verdict, a null breakevenCreditPrice and a request to supply the price and costs. A hurdle typed as ''x'' is the refused probe.' then 'new'
+           when prompt = 'creditSensitivity is run on a route with its price missing, so it has no margin. What does it answer?' and options = '["REFUSED: The hurdle margin must be a number.", "A breakeven worked on a margin of zero, with the price named in assumedZero.", "No verdict and a null breakeven; it reports that no hurdle margin was given.", "No verdict and a null breakeven; it asks the study to supply its price and costs."]'::jsonb and answer_index = 3 and explanation is not distinct from 'With the price missing there is no margin. The digest prints the answer as having no verdict, a null breakevenCreditPrice and a request to supply the price and costs. A hurdle typed as ''x'' is the refused probe.' then 'old'
+           when prompt = 'creditSensitivity is run on a route with its price missing, so it has no margin. What does it answer?' and options = '["REFUSED: The hurdle margin must be a number.", "A breakeven worked on a margin of zero, with the price named in assumedZero.", "No verdict and a null breakeven; it reports that no hurdle margin was given.", "No verdict and a null breakeven; it asks the study to supply its price and costs."]'::jsonb and answer_index = 3 and explanation is not distinct from 'With the price missing there is no margin. The course prints the answer as having no verdict, a null breakevenCreditPrice and a request to supply the price and costs. A hurdle typed as ''x'' is the refused probe.' then 'new'
            else 'other' end
     into v_state
     from public.academy_quiz_questions where app_slug = 'gasvalue' and tier = 'intermediate' and scope = 'final' and module_key is not distinct from null and ord = 32;
   if v_state is null then raise exception 'digest-copy recut, gasvalue refused: no row for intermediate final ord 32'; end if;
   if v_state = 'other' then raise exception 'digest-copy recut, gasvalue refused: intermediate final ord 32 matches neither its published nor its recut text'; end if;
   if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'creditSensitivity is run on a route with its price missing, so it has no margin. What does it answer?', options = '["REFUSED: The hurdle margin is not a number.", "A breakeven worked on a margin of zero, with the price named in assumedZero.", "No verdict and a null breakeven; it reports that no hurdle margin was given.", "No verdict and a null breakeven; it asks the study to supply its price and costs."]'::jsonb, explanation = 'With the price missing there is no margin. The course prints the answer as having no verdict, a null breakevenCreditPrice and a request to supply the price and costs. A hurdle typed as ''x'' is the refused probe.'
+    update public.academy_quiz_questions set prompt = 'creditSensitivity is run on a route with its price missing, so it has no margin. What does it answer?', options = '["REFUSED: The hurdle margin must be a number.", "A breakeven worked on a margin of zero, with the price named in assumedZero.", "No verdict and a null breakeven; it reports that no hurdle margin was given.", "No verdict and a null breakeven; it asks the study to supply its price and costs."]'::jsonb, explanation = 'With the price missing there is no margin. The course prints the answer as having no verdict, a null breakevenCreditPrice and a request to supply the price and costs. A hurdle typed as ''x'' is the refused probe.'
      where app_slug = 'gasvalue' and tier = 'intermediate' and scope = 'final' and module_key is not distinct from null and ord = 32;
     get diagnostics v_count = row_count;
     if v_count <> 1 then raise exception 'digest-copy recut, gasvalue refused: intermediate final ord 32 updated % rows', v_count; end if;
@@ -1645,49 +1647,32 @@ begin
 
   -- intermediate m05-credits-and-the-bid ord 10
   select case
-           when prompt = 'creditSensitivity is run with the counterfactual undeclared, so there is no net abatement. What does it answer?' and options = '["It prices credits on the gross flare of 215946.438 t/yr.", "It answers with no verdict and a null breakeven.", "REFUSED: The hurdle margin is not a number.", "REFUSED: No net abatement to sell."]'::jsonb and answer_index = 3 and explanation is not distinct from 'The digest: REFUSED: No net abatement to sell. Declare the counterfactual first: a credit computed from a gross flare figure is a credit that cannot be issued. The hurdle refusal is for a hurdle typed as ''x''.' then 'old'
-           when prompt = 'creditSensitivity is run with the counterfactual undeclared, so there is no net abatement. What does it answer?' and options = '["It prices credits on the gross flare of 215946.438 t/yr.", "It answers with no verdict and a null breakeven.", "REFUSED: The hurdle margin is not a number.", "REFUSED: No net abatement to sell."]'::jsonb and answer_index = 3 and explanation is not distinct from 'The course states: REFUSED: No net abatement to sell. Declare the counterfactual first: a credit computed from a gross flare figure is a credit that cannot be issued. The hurdle refusal is for a hurdle typed as ''x''.' then 'new'
+           when prompt = 'creditSensitivity is run with the counterfactual undeclared, so there is no net abatement. What does it answer?' and options = '["It prices credits on the gross flare of 215946.438 t/yr.", "It answers with no verdict and a null breakeven.", "REFUSED: The hurdle margin must be a number.", "REFUSED: No net abatement to sell."]'::jsonb and answer_index = 3 and explanation is not distinct from 'The digest: REFUSED: No net abatement to sell. Declare the counterfactual first: a credit computed from a gross flare figure is a credit that cannot be issued. The hurdle refusal is for a hurdle typed as ''x''.' then 'old'
+           when prompt = 'creditSensitivity is run with the counterfactual undeclared, so there is no net abatement. What does it answer?' and options = '["It prices credits on the gross flare of 215946.438 t/yr.", "It answers with no verdict and a null breakeven.", "REFUSED: The hurdle margin must be a number.", "REFUSED: No net abatement to sell."]'::jsonb and answer_index = 3 and explanation is not distinct from 'The course states: REFUSED: No net abatement to sell. Declare the counterfactual first: a credit computed from a gross flare figure is a credit that cannot be issued. The hurdle refusal is for a hurdle typed as ''x''.' then 'new'
            else 'other' end
     into v_state
     from public.academy_quiz_questions where app_slug = 'gasvalue' and tier = 'intermediate' and scope = 'module' and module_key is not distinct from 'm05-credits-and-the-bid' and ord = 10;
   if v_state is null then raise exception 'digest-copy recut, gasvalue refused: no row for intermediate m05-credits-and-the-bid ord 10'; end if;
   if v_state = 'other' then raise exception 'digest-copy recut, gasvalue refused: intermediate m05-credits-and-the-bid ord 10 matches neither its published nor its recut text'; end if;
   if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'creditSensitivity is run with the counterfactual undeclared, so there is no net abatement. What does it answer?', options = '["It prices credits on the gross flare of 215946.438 t/yr.", "It answers with no verdict and a null breakeven.", "REFUSED: The hurdle margin is not a number.", "REFUSED: No net abatement to sell."]'::jsonb, explanation = 'The course states: REFUSED: No net abatement to sell. Declare the counterfactual first: a credit computed from a gross flare figure is a credit that cannot be issued. The hurdle refusal is for a hurdle typed as ''x''.'
+    update public.academy_quiz_questions set prompt = 'creditSensitivity is run with the counterfactual undeclared, so there is no net abatement. What does it answer?', options = '["It prices credits on the gross flare of 215946.438 t/yr.", "It answers with no verdict and a null breakeven.", "REFUSED: The hurdle margin must be a number.", "REFUSED: No net abatement to sell."]'::jsonb, explanation = 'The course states: REFUSED: No net abatement to sell. Declare the counterfactual first: a credit computed from a gross flare figure is a credit that cannot be issued. The hurdle refusal is for a hurdle typed as ''x''.'
      where app_slug = 'gasvalue' and tier = 'intermediate' and scope = 'module' and module_key is not distinct from 'm05-credits-and-the-bid' and ord = 10;
     get diagnostics v_count = row_count;
     if v_count <> 1 then raise exception 'digest-copy recut, gasvalue refused: intermediate m05-credits-and-the-bid ord 10 updated % rows', v_count; end if;
     v_updated := v_updated + 1;
   end if;
 
-  -- intermediate m05-credits-and-the-bid ord 11
-  select case
-           when prompt = 'The hurdle margin is typed as ''x''. What does creditSensitivity answer?' and options = '["No verdict: breakevenCreditPrice null; \"No hurdle margin, so whether it needs credits cannot be said.\"", "It takes the hurdle as zero, and the route stands alone.", "REFUSED: The hurdle margin is not a number.", "REFUSED: No net abatement to sell."]'::jsonb and answer_index = 2 and explanation is not distinct from 'The digest''s probe "a hurdle that is not a number (''x'')" prints REFUSED: The hurdle margin is not a number. The answer with no verdict and the no hurdle sentence belong to the hurdle left blank ('''').' then 'old'
-           when prompt = 'The hurdle margin is typed as ''x''. What does creditSensitivity answer?' and options = '["No verdict: breakevenCreditPrice null; \"No hurdle margin, so whether it needs credits cannot be said.\"", "It takes the hurdle as zero, and the route stands alone.", "REFUSED: The hurdle margin is not a number.", "REFUSED: No net abatement to sell."]'::jsonb and answer_index = 2 and explanation is not distinct from 'The course''s probe "a hurdle that is not a number (''x'')" prints REFUSED: The hurdle margin is not a number. The answer with no verdict and the no hurdle sentence belong to the hurdle left blank ('''').' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'gasvalue' and tier = 'intermediate' and scope = 'module' and module_key is not distinct from 'm05-credits-and-the-bid' and ord = 11;
-  if v_state is null then raise exception 'digest-copy recut, gasvalue refused: no row for intermediate m05-credits-and-the-bid ord 11'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, gasvalue refused: intermediate m05-credits-and-the-bid ord 11 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'The hurdle margin is typed as ''x''. What does creditSensitivity answer?', options = '["No verdict: breakevenCreditPrice null; \"No hurdle margin, so whether it needs credits cannot be said.\"", "It takes the hurdle as zero, and the route stands alone.", "REFUSED: The hurdle margin is not a number.", "REFUSED: No net abatement to sell."]'::jsonb, explanation = 'The course''s probe "a hurdle that is not a number (''x'')" prints REFUSED: The hurdle margin is not a number. The answer with no verdict and the no hurdle sentence belong to the hurdle left blank ('''').'
-     where app_slug = 'gasvalue' and tier = 'intermediate' and scope = 'module' and module_key is not distinct from 'm05-credits-and-the-bid' and ord = 11;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, gasvalue refused: intermediate m05-credits-and-the-bid ord 11 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
   -- intermediate m05-credits-and-the-bid ord 12
   select case
-           when prompt = 'A study leaves the hurdle box empty (''''). Which answer comes back from the credit test?' and options = '["No verdict: breakevenCreditPrice null, with \"No hurdle margin, so whether it needs credits cannot be said.\"", "REFUSED: The hurdle margin is not a number, as a blank is not a figure.", "standsAloneWithoutCredits true, with the hurdle taken as zero.", "No verdict: breakevenCreditPrice null, with \"Supply its price and costs.\""]'::jsonb and answer_index = 0 and explanation is not distinct from 'The digest''s probe "hurdle left blank ('''')" answers with no verdict: breakevenCreditPrice null; "No hurdle margin, so whether it needs credits cannot be said." The other answer with no verdict belongs to a route whose price is missing.' then 'old'
-           when prompt = 'A study leaves the hurdle box empty (''''). Which answer comes back from the credit test?' and options = '["No verdict: breakevenCreditPrice null, with \"No hurdle margin, so whether it needs credits cannot be said.\"", "REFUSED: The hurdle margin is not a number, as a blank is not a figure.", "standsAloneWithoutCredits true, with the hurdle taken as zero.", "No verdict: breakevenCreditPrice null, with \"Supply its price and costs.\""]'::jsonb and answer_index = 0 and explanation is not distinct from 'The course''s probe "hurdle left blank ('''')" answers with no verdict: breakevenCreditPrice null; "No hurdle margin, so whether it needs credits cannot be said." The other answer with no verdict belongs to a route whose price is missing.' then 'new'
+           when prompt = 'A study leaves the hurdle box empty (''''). Which answer comes back from the credit test?' and options = '["No verdict: breakevenCreditPrice null, with \"No hurdle margin, so whether it needs credits cannot be said.\"", "REFUSED: The hurdle margin must be a number, as a blank is not a figure.", "standsAloneWithoutCredits true, with the hurdle taken as zero.", "No verdict: breakevenCreditPrice null, with \"Supply its price and costs.\""]'::jsonb and answer_index = 0 and explanation is not distinct from 'The digest''s probe "hurdle left blank ('''')" answers with no verdict: breakevenCreditPrice null; "No hurdle margin, so whether it needs credits cannot be said." The other answer with no verdict belongs to a route whose price is missing.' then 'old'
+           when prompt = 'A study leaves the hurdle box empty (''''). Which answer comes back from the credit test?' and options = '["No verdict: breakevenCreditPrice null, with \"No hurdle margin, so whether it needs credits cannot be said.\"", "REFUSED: The hurdle margin must be a number, as a blank is not a figure.", "standsAloneWithoutCredits true, with the hurdle taken as zero.", "No verdict: breakevenCreditPrice null, with \"Supply its price and costs.\""]'::jsonb and answer_index = 0 and explanation is not distinct from 'The course''s probe "hurdle left blank ('''')" answers with no verdict: breakevenCreditPrice null; "No hurdle margin, so whether it needs credits cannot be said." The other answer with no verdict belongs to a route whose price is missing.' then 'new'
            else 'other' end
     into v_state
     from public.academy_quiz_questions where app_slug = 'gasvalue' and tier = 'intermediate' and scope = 'module' and module_key is not distinct from 'm05-credits-and-the-bid' and ord = 12;
   if v_state is null then raise exception 'digest-copy recut, gasvalue refused: no row for intermediate m05-credits-and-the-bid ord 12'; end if;
   if v_state = 'other' then raise exception 'digest-copy recut, gasvalue refused: intermediate m05-credits-and-the-bid ord 12 matches neither its published nor its recut text'; end if;
   if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'A study leaves the hurdle box empty (''''). Which answer comes back from the credit test?', options = '["No verdict: breakevenCreditPrice null, with \"No hurdle margin, so whether it needs credits cannot be said.\"", "REFUSED: The hurdle margin is not a number, as a blank is not a figure.", "standsAloneWithoutCredits true, with the hurdle taken as zero.", "No verdict: breakevenCreditPrice null, with \"Supply its price and costs.\""]'::jsonb, explanation = 'The course''s probe "hurdle left blank ('''')" answers with no verdict: breakevenCreditPrice null; "No hurdle margin, so whether it needs credits cannot be said." The other answer with no verdict belongs to a route whose price is missing.'
+    update public.academy_quiz_questions set prompt = 'A study leaves the hurdle box empty (''''). Which answer comes back from the credit test?', options = '["No verdict: breakevenCreditPrice null, with \"No hurdle margin, so whether it needs credits cannot be said.\"", "REFUSED: The hurdle margin must be a number, as a blank is not a figure.", "standsAloneWithoutCredits true, with the hurdle taken as zero.", "No verdict: breakevenCreditPrice null, with \"Supply its price and costs.\""]'::jsonb, explanation = 'The course''s probe "hurdle left blank ('''')" answers with no verdict: breakevenCreditPrice null; "No hurdle margin, so whether it needs credits cannot be said." The other answer with no verdict belongs to a route whose price is missing.'
      where app_slug = 'gasvalue' and tier = 'intermediate' and scope = 'module' and module_key is not distinct from 'm05-credits-and-the-bid' and ord = 12;
     get diagnostics v_count = row_count;
     if v_count <> 1 then raise exception 'digest-copy recut, gasvalue refused: intermediate m05-credits-and-the-bid ord 12 updated % rows', v_count; end if;
@@ -3020,40 +3005,6 @@ begin
     v_updated := v_updated + 1;
   end if;
 
-  -- advanced m04-the-cascade ord 14
-  select case
-           when prompt = 'IBAFO''s forecourt is run at 25 buses an hour on 2 dispensers. What does cngDispensing return?' and options = '["REFUSED: The number of bays must be a whole number, one or more.", "An average wait that grows with the 1.2500 utilisation", "An answer: stable false and utilisation 1.2500", "REFUSED: Arrivals, fill time and a dispenser count are required and must be positive."]'::jsonb and answer_index = 2 and explanation is not distinct from 'SECTION 33: at 25 buses an hour on 2 dispensers the engine gives an answer and no refusal: stable false, utilisation 1.2500, and the message that no average waiting time exists.' then 'old'
-           when prompt = 'IBAFO''s forecourt is run at 25 buses an hour on 2 dispensers. What does cngDispensing return?' and options = '["REFUSED: The number of bays must be a whole number, one or more.", "An average wait that grows with the 1.2500 utilisation", "An answer: stable false and utilisation 1.2500", "REFUSED: Arrivals, fill time and a dispenser count are required and must be positive."]'::jsonb and answer_index = 2 and explanation is not distinct from 'The forecourt lesson: at 25 buses an hour on 2 dispensers the engine gives an answer and no refusal: stable false, utilisation 1.2500, and the message that no average waiting time exists.' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'gasvalue' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm04-the-cascade' and ord = 14;
-  if v_state is null then raise exception 'digest-copy recut, gasvalue refused: no row for advanced m04-the-cascade ord 14'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, gasvalue refused: advanced m04-the-cascade ord 14 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'IBAFO''s forecourt is run at 25 buses an hour on 2 dispensers. What does cngDispensing return?', options = '["REFUSED: The number of bays must be a whole number, one or more.", "An average wait that grows with the 1.2500 utilisation", "An answer: stable false and utilisation 1.2500", "REFUSED: Arrivals, fill time and a dispenser count are required and must be positive."]'::jsonb, explanation = 'The forecourt lesson: at 25 buses an hour on 2 dispensers the engine gives an answer and no refusal: stable false, utilisation 1.2500, and the message that no average waiting time exists.'
-     where app_slug = 'gasvalue' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm04-the-cascade' and ord = 14;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, gasvalue refused: advanced m04-the-cascade ord 14 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
-  -- advanced m04-the-cascade ord 15
-  select case
-           when prompt = 'cngDispensing is asked for 2.5 dispensers. What comes back?' and options = '["The queue on 2 dispensers, with 2.5 rounded down to a whole number of bays.", "REFUSED: The number of bays must be a whole number, one or more.", "The queue on 3 dispensers, with 2.5 rounded to the nearest whole bay.", "A queue on 2.5 dispensers, the count taken exactly as it was typed."]'::jsonb and answer_index = 1 and explanation is not distinct from 'SECTION 33''s probe table prints "REFUSED: The number of bays must be a whole number, one or more." for 2.5 dispensers.' then 'old'
-           when prompt = 'cngDispensing is asked for 2.5 dispensers. What comes back?' and options = '["The queue on 2 dispensers, with 2.5 rounded down to a whole number of bays.", "REFUSED: The number of bays must be a whole number, one or more.", "The queue on 3 dispensers, with 2.5 rounded to the nearest whole bay.", "A queue on 2.5 dispensers, the count taken exactly as it was typed."]'::jsonb and answer_index = 1 and explanation is not distinct from 'The forecourt lesson''s probe table prints "REFUSED: The number of bays must be a whole number, one or more." for 2.5 dispensers.' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'gasvalue' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm04-the-cascade' and ord = 15;
-  if v_state is null then raise exception 'digest-copy recut, gasvalue refused: no row for advanced m04-the-cascade ord 15'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, gasvalue refused: advanced m04-the-cascade ord 15 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'cngDispensing is asked for 2.5 dispensers. What comes back?', options = '["The queue on 2 dispensers, with 2.5 rounded down to a whole number of bays.", "REFUSED: The number of bays must be a whole number, one or more.", "The queue on 3 dispensers, with 2.5 rounded to the nearest whole bay.", "A queue on 2.5 dispensers, the count taken exactly as it was typed."]'::jsonb, explanation = 'The forecourt lesson''s probe table prints "REFUSED: The number of bays must be a whole number, one or more." for 2.5 dispensers.'
-     where app_slug = 'gasvalue' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm04-the-cascade' and ord = 15;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, gasvalue refused: advanced m04-the-cascade ord 15 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
   -- advanced m05-the-customers-switch ord 1
   select case
            when prompt = 'No CNG consumption is measured for the Lagos bus. What consumption on CNG does conversionEconomics use, and from what source?' and options = '["9.5 kg per 100 km, as measured", "11.6667 kg per 100 km, derived from energy equivalence", "10.1449 kg per 100 km, derived from energy equivalence", "9.3333 kg per 100 km, derived from energy equivalence"]'::jsonb and answer_index = 2 and explanation is not distinct from 'SECTION 34 prints consumptionSource derived from energy equivalence and newFuelConsumptionPer100Km 10.1449 kg at the efficiency ratio of 0.92. 11.6667 kg is the ratio of 0.8 and 9.3333 kg the ratio of 1; 9.5 kg is the measured consumption of the separate probe.' then 'old'
@@ -3532,5 +3483,5 @@ begin
 
   select count(*) into v_total from public.academy_quiz_questions where app_slug = 'gasvalue';
   if v_total <> 396 then raise exception 'digest-copy recut, gasvalue refused: the course holds % questions, expected 396', v_total; end if;
-  raise notice 'digest-copy recut, gasvalue: % of 206 rows updated, the rest already carried the recut text', v_updated;
+  raise notice 'digest-copy recut, gasvalue: % of 203 rows updated, the rest already carried the recut text', v_updated;
 end $$;

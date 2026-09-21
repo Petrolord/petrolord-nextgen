@@ -15,7 +15,7 @@ q(1, "The course prints the engine's method for the saving from tuning the inven
  ["(target - current) / current",
   "(target - current) / a hundred",
   "(target - current) / (target + current)"],
- "The method, verbatim: \"Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. Subtracting the efficiency percentages divides by a hundred instead of by the target efficiency, and understates the saving.\"")
+ "The method, verbatim: \"Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. The divisor is the target efficiency. Subtracting the efficiency percentages divides by a hundred and understates the saving.\"")
 
 q(3, "The course works the percentage-point shortcut on the invented Isiokpo figures, 410000 GJ a year on LHV. What does it print for it?",
  "5923.008 GJ a year, 819.363 GJ below the engine's saving.",

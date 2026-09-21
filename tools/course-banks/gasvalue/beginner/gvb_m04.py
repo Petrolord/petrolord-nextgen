@@ -28,11 +28,11 @@ q(1, "What does the course print for EGBEMA's methane if every unburned carbon a
  "The shortcut row reads 2083.055 t/yr and 1.8329 in the \"over the engine's\" column; the engine's row reads 1136.490 and 1.0000. 3788.301 is the engine's methane at a destruction efficiency of 0.9, and 1531.658 is the all-methane probe.")
 
 q(1, "What does the engine's basis sentence say of unburned ethane and heavier?",
- "They are not methane and carry no GWP here.",
+ "They carry no GWP here; only the methane does.",
  ["They are counted as methane, one molecule a carbon atom.",
   "They carry the methane GWP.",
   "They pass through the flare as the CO2 in the gas does."],
- "The basis sentence closes: \"Unburned ethane and heavier are not methane and carry no GWP here.\" Only the methane in the gas enters the CH4 half of the rule.")
+ "The basis sentence closes: \"Unburned ethane and heavier carry no GWP here.\" Only the methane in the gas enters the CH4 half of the rule.")
 
 q(3, "A gas that is all CO2 is flared at EGBEMA's volume and days, with both efficiencies set to 0.5. What tonnes a year does the engine report?",
  "CO2 140054.324, methane 0.000",

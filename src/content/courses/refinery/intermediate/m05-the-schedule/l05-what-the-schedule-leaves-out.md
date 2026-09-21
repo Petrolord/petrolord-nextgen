@@ -8,7 +8,7 @@ A schedule built by spreading a plan evenly across a month is useful and limited
 
 Every schedule the engine cascades carries a note. For ABUA it reads:
 
-"Crude arrives in evenly spaced cargoes and units and lifts are spread evenly across the period. Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against, not a berth-level schedule."
+"Crude arrives in evenly spaced cargoes and units and lifts are spread evenly across the period. Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against. Berth-level scheduling needs those constraints and a scheduling tool."
 
 Those are the engine's words, quoted as the engine's words. Read them phrase by phrase.
 
@@ -22,9 +22,9 @@ Those are the engine's words, quoted as the engine's words. Read them phrase by 
 
 ## What it is for
 
-The note's last clause says what the schedule is: the shape of the month to read actuals against. The shape is the plan's volumes and values spread over the dates they would fall on if the month ran evenly. When the month is over, what actually arrived, ran and lifted is set beside that shape, and every gap can be read for what it did to margin. That reading is the Expert tier's.
+The clause after the note's colon says what the schedule is: the shape of the month to read actuals against. The shape is the plan's volumes and values spread over the dates they would fall on if the month ran evenly. When the month is over, what actually arrived, ran and lifted is set beside that shape, and every gap can be read for what it did to margin. That reading is the Expert tier's.
 
-A berth-level schedule is a different product. It belongs to the terminal and the shipping desk, and it answers questions about tanks, jetties and ships that this engine does not ask. The `supply` course takes up terminals and depots.
+The note's last sentence names what a berth-level schedule needs: those constraints and a scheduling tool. It is a different product. It belongs to the terminal and the shipping desk, and it answers questions about tanks, jetties and ships that this engine does not ask. The `supply` course takes up terminals and depots.
 
 ## No plan, no shape
 

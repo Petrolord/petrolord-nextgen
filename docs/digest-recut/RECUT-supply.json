@@ -1,6 +1,6 @@
 {
  "app_slug": "supply",
- "rows": 44,
+ "rows": 43,
  "old_text_source": "replay of every question migration at origin/main in a local scratch database",
  "new_text_source": "the regenerated bank JSON under tools/course-banks/supply, built from its committed .py sources",
  "edits": [
@@ -447,18 +447,6 @@
     "explanation": {
      "old": "The digest prints the zero quantity case as the refusal \"Cargo quantity is required.\" The engine forms no volume for a cargo it has not been given.",
      "new": "The engine answers the zero quantity case with the refusal \"Cargo quantity is required.\" The engine forms no volume for a cargo it has not been given."
-    }
-   }
-  },
-  {
-   "tier": "advanced",
-   "scope": "module",
-   "module_key": "m02-the-landed-cost-walk",
-   "ord": 10,
-   "fields": {
-    "explanation": {
-     "old": "The engine adds what it was given, names what it was not and labels the sum. The digest prints \"A FLOOR, not a cost: 2 rate(s) not supplied.\" beside 24774210.79 USD.",
-     "new": "The engine adds what it was given, names what it was not and labels the sum. The engine returns \"A FLOOR, not a cost: 2 rate(s) not supplied.\" beside 24774210.79 USD."
     }
    }
   },

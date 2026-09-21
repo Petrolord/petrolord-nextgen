@@ -61,8 +61,8 @@ export default {
   // comes from, so an upstream engine edit turns this gate RED instead of
   // letting a stale quote pass as current behaviour.
   pinned: [
-    { frag: 'A FLOOR, not a cost: ', src: 'engines/downstream/fuelPricing.js' },
-    { frag: 'A FLOOR, not a price: ', src: 'engines/downstream/fuelPricing.js' },
+    { frag: 'rate(s) not supplied, so the full landed cost is at least this.', src: 'engines/downstream/fuelPricing.js' },
+    { frag: 'rate(s) not supplied, so the full price is at least this.', src: 'engines/downstream/fuelPricing.js' },
     { frag: 'A dip cannot be negative.', src: 'engines/downstream/terminalDepot.js' },
     { frag: 'A landed cost per litre is required.', src: 'engines/downstream/fuelPricing.js' },
     { frag: 'A water cut cannot be negative.', src: 'engines/downstream/terminalDepot.js' },
@@ -84,7 +84,7 @@ export default {
     { frag: 'The insurance rates on CIF add up to 100 percent or more', src: 'engines/downstream/fuelPricing.js' },
     { frag: 'The number of bays must be a whole number, one or more.', src: 'engines/downstream/terminalDepot.js' },
     { frag: 'The rack cannot keep up with arrivals. The queue grows without limit, so no average waiting time exists. Add a bay, load faster, or spread the arrivals.', src: 'engines/downstream/terminalDepot.js' },
-    { frag: 'The search bracket is not a valid interval.', src: 'engines/downstream/fuelPricing.js' },
+    { frag: 'The search bracket must be a valid interval.', src: 'engines/downstream/fuelPricing.js' },
     { frag: 'The volume correction factor needs the API MPMS Chapter 11.1 coefficients for your commodity group, which are a published table this package does not ship.', src: 'engines/downstream/terminalDepot.js' },
     { frag: 'The water cut cannot be converted: ', src: 'engines/downstream/terminalDepot.js' },
     { frag: 'The water cut is above the product dip. Check both readings.', src: 'engines/downstream/terminalDepot.js' },
@@ -94,7 +94,7 @@ export default {
     { frag: 'No emission factor supplied, so the carbon side is not computed. Factors are published, versioned data; an invented one would be worse than none.', src: 'engines/downstream/terminalDepot.js' },
     { frag: 'No product density supplied, so the loss has no weight and the carbon side is not computed.', src: 'engines/downstream/terminalDepot.js' },
     { frag: 'No volume correction factor supplied, so only the gross observed volume is reported.', src: 'engines/downstream/terminalDepot.js' },
-    { frag: 'No diesel emission factor supplied, so the carbon figure is absent rather than zero.', src: 'engines/downstream/fuelPricing.js' },
+    { frag: 'No diesel emission factor supplied, so the carbon figure is left blank.', src: 'engines/downstream/fuelPricing.js' },
     { frag: 'One day is noise; a run in one direction is worth investigating: a drifting meter, a passing valve, or a temperature effect not being corrected.', src: 'engines/downstream/terminalDepot.js' },
     { frag: 'litres of ullage at the reorder level. Order earlier or order a part load.', src: 'engines/downstream/fuelPricing.js' },
     { frag: 'Line items only. Every rate is a required input: duties, levies and regulated margins are set by regulation, differ by market and change. Confirm each against the regulation in force.', src: 'engines/downstream/fuelPricing.js' },

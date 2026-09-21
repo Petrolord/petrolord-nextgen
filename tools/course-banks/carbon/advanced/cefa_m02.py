@@ -63,7 +63,7 @@ q(1, "The Agbor curve prints additive false. Which entry in the curve table goes
  ["An over-claims entry naming the flare: Flare gas recovery claiming more than it emits",
   "A refusedMeasures entry naming the Heat integration project, whose capital was blank",
   "A paysForItselfMeasures entry naming Tune the fired heaters and Repair failed steam traps"],
- "The curve prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that measures acting on the same source are NOT additive. The costed curve carries no refused measure, over-claims belong to the 9400 t claim of the target checks, and paysForItselfMeasures names three measures.")
+ "The curve prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that the abatements of measures acting on the same source overlap. The costed curve carries no refused measure, over-claims belong to the 9400 t flare gas recovery claim, and paysForItselfMeasures names three measures.")
 
 q(0, "Which of these does the course list as recomputed by neither oracle?",
  "paysForItselfTonnes on the curve",

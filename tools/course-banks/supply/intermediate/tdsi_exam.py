@@ -273,7 +273,7 @@ q(2, "Which two notes say a carbon figure is absent because no emission factor w
  ["The depot's no-density note and the lane's diesel note, both about factors.",
   "The depot's no-density note and assumedZero.",
   "The lane's floor and the station's warning."],
- "throughputEconomics: \"No emission factor supplied, so the carbon side is not computed.\" truckingEconomics: \"No diesel emission factor supplied, so the carbon figure is absent rather than zero.\" The no-density note is about the loss's weight.")
+ "throughputEconomics: \"No emission factor supplied, so the carbon side is not computed.\" truckingEconomics: \"No diesel emission factor supplied, so the carbon figure is left blank.\" The no-density note is about the loss's weight.")
 
 q(0, "At the forecourt the mean wait is 2.2083 minutes at 6 nozzles. Which cars does it average over?",
  "Every car, including the ones that drive straight to a free nozzle.",

@@ -334,11 +334,11 @@
   "options": [
    "That the blend screens stable on gravity contrast, pending a SARA analysis.",
    "That the blend is uncertain and needs a spot test to ASTM D7112 or D7157.",
-   "That the spread is not the classic combination, which is no evidence the blend is stable.",
+   "That the spread falls outside the classic combination, and that alone says nothing of stability.",
    "That no stability screen was made because not every crude has a gravity."
   ],
   "answer": 2,
-  "explanation": "The message reads, in part: The gravity spread is not the classic heavy-plus-light-paraffinic combination, which is not evidence that the blend is stable. Supply SARA for a real index."
+  "explanation": "The message reads, in part: The gravity spread falls outside the classic heavy-plus-light-paraffinic combination, and that alone says nothing about whether the blend is stable. Supply SARA for a real index."
  },
  {
   "prompt": "Which basis does the export blend's screen carry when its SARA is removed?",

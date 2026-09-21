@@ -6,7 +6,7 @@ Lesson one read the first sentence of the engine's method. This lesson reads the
 
 ## The second sentence
 
-SECTION 14 prints the method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. Subtracting the efficiency percentages divides by a hundred instead of by the target efficiency, and understates the saving."
+The engine prints the method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. The divisor is the target efficiency. Subtracting the efficiency percentages divides by a hundred and understates the saving."
 
 The shortcut it describes is tempting because the heater's efficiencies arrive as percents. The invented Isiokpo heater moves from 86.4029 percent to 87.8476 percent on LHV (SECTION 13), and a reader who subtracts one from the other gets a difference in percentage points and reads it as the percent of fuel saved. The engine's sentence says what that subtraction does: it divides the gap by a hundred, where the ratio divides it by the target efficiency.
 

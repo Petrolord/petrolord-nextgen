@@ -25,7 +25,7 @@ The same measure is still on the curve. It still has a cost per tonne of 35.4193
 
 The path engine refuses these calls:
 
-REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero.
+REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing leaves the baseline unknown.
 
 REFUSED: A baseline and a valid year range are required.
 

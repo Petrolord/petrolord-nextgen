@@ -79,19 +79,19 @@ q(3, "creditSensitivity is run with the counterfactual undeclared, so there is n
  "REFUSED: No net abatement to sell.",
  ["It prices credits on the gross flare of 215946.438 t/yr.",
   "It answers with no verdict and a null breakeven.",
-  "REFUSED: The hurdle margin is not a number."],
+  "REFUSED: The hurdle margin must be a number."],
  "The course states: REFUSED: No net abatement to sell. Declare the counterfactual first: a credit computed from a gross flare figure is a credit that cannot be issued. The hurdle refusal is for a hurdle typed as 'x'.")
 
 q(2, "The hurdle margin is typed as 'x'. What does creditSensitivity answer?",
- "REFUSED: The hurdle margin is not a number.",
+ "REFUSED: The hurdle margin must be a number.",
  ["No verdict: breakevenCreditPrice null; \"No hurdle margin, so whether it needs credits cannot be said.\"",
   "It takes the hurdle as zero, and the route stands alone.",
   "REFUSED: No net abatement to sell."],
- "The course's probe \"a hurdle that is not a number ('x')\" prints REFUSED: The hurdle margin is not a number. The answer with no verdict and the no hurdle sentence belong to the hurdle left blank ('').")
+ "The probe \"a hurdle that is not a number ('x')\" prints REFUSED: The hurdle margin must be a number. The answer with no verdict and the no hurdle sentence belong to the hurdle left blank ('').")
 
 q(0, "A study leaves the hurdle box empty (''). Which answer comes back from the credit test?",
  "No verdict: breakevenCreditPrice null, with \"No hurdle margin, so whether it needs credits cannot be said.\"",
- ["REFUSED: The hurdle margin is not a number, as a blank is not a figure.",
+ ["REFUSED: The hurdle margin must be a number, as a blank is not a figure.",
   "standsAloneWithoutCredits true, with the hurdle taken as zero.",
   "No verdict: breakevenCreditPrice null, with \"Supply its price and costs.\""],
  "The course's probe \"hurdle left blank ('')\" answers with no verdict: breakevenCreditPrice null; \"No hurdle margin, so whether it needs credits cannot be said.\" The other answer with no verdict belongs to a route whose price is missing.")

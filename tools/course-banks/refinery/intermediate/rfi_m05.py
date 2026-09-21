@@ -112,7 +112,7 @@ q(3, "Which three things does the engine's note on ABUA's schedule name as not m
  ["Cargo sizes, unit runs and lifts.",
   "Crude costs, product prices and unit operating costs.",
   "Time zones, the clock change and the period start."],
- "The note reads \"Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against, not a berth-level schedule.\" A turnaround is entered in the plan, as a unit typed as shut.")
+ "The note reads \"Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against. Berth-level scheduling needs those constraints and a scheduling tool.\" A turnaround is entered in the plan, as a unit typed as shut.")
 
 emit(Q, '/root/wt-md-refinery-nextgen/tools/course-banks/refinery/intermediate/rfi_m05.json', label='rfi_m05', expect_n=15)
 finish()

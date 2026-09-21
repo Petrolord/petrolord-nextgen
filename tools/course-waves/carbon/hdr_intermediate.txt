@@ -18,8 +18,8 @@
 -- boiler efficiency are asked for and never assumed.
 --
 -- THE TRAP THE TIER IS BUILT ON. Subtracting two efficiency percentages
--- divides the gap by a hundred instead of by the target efficiency, and
--- understates what tuning is worth.
+-- divides the gap by a hundred, where the divisor is the target efficiency,
+-- and understates what tuning is worth.
 --
 -- The capstone grades two percents at 0.0001, a fuel saving to the whole GJ
 -- at 1 GJ, a steam loss in tonnes a year at 0.01, and two utilities in kW at

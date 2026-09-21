@@ -60,7 +60,7 @@ The lane also reports its diesel:
 
 with the engine's note:
 
-> No diesel emission factor supplied, so the carbon figure is absent rather than zero.
+> No diesel emission factor supplied, so the carbon figure is left blank.
 
 This is the rule module four taught for the depot's losses, applied to the truck's fuel. The engine ships no factor. The diesel volume is computed; its emissions wait for a factor with a source.
 

@@ -404,7 +404,7 @@
    "The lane's floor and the station's warning."
   ],
   "answer": 2,
-  "explanation": "throughputEconomics: \"No emission factor supplied, so the carbon side is not computed.\" truckingEconomics: \"No diesel emission factor supplied, so the carbon figure is absent rather than zero.\" The no-density note is about the loss's weight."
+  "explanation": "throughputEconomics: \"No emission factor supplied, so the carbon side is not computed.\" truckingEconomics: \"No diesel emission factor supplied, so the carbon figure is left blank.\" The no-density note is about the loss's weight."
  },
  {
   "prompt": "At the forecourt the mean wait is 2.2083 minutes at 6 nozzles. Which cars does it average over?",

@@ -10,7 +10,7 @@ A credit is sold on a net abatement. creditSensitivity refuses when there is non
 | --- | --- |
 | the gas-to-power counterfactual, which adds emissions | REFUSED: The net abatement is -2010.348 tCO2e a year: the project does not abate, so there are no credits to sell. |
 | no net abatement (the counterfactual undeclared) | REFUSED: No net abatement to sell. Declare the counterfactual first: a credit computed from a gross flare figure is a credit that cannot be issued. |
-| a hurdle that is not a number ('x') | REFUSED: The hurdle margin is not a number. |
+| a hurdle that is not a number ('x') | REFUSED: The hurdle margin must be a number. |
 | no margin for the route (price missing) | answers with no verdict: breakevenCreditPrice null; "No margin for this route, so whether it needs credits cannot be said. Supply its price and costs." |
 | hurdle left blank ('') | answers with no verdict: breakevenCreditPrice null; "No hurdle margin, so whether it needs credits cannot be said." |
 
@@ -32,7 +32,7 @@ The gross flare, 215946.438 t/yr on EGBEMA, is still printed beside a blocked ne
 
 ## A hurdle that is not a number, and a hurdle left blank
 
-The hurdle is typed two wrong ways in the probes. Typed as 'x', it is refused: "The hurdle margin is not a number." Left blank (''), it is answered with no verdict, a null breakeven, and "No hurdle margin, so whether it needs credits cannot be said."
+The hurdle is typed two wrong ways in the probes. Typed as 'x', it is refused: "The hurdle margin must be a number." Left blank (''), it is answered with no verdict, a null breakeven, and "No hurdle margin, so whether it needs credits cannot be said."
 
 The two probes print two different answers. A value that is not a number is refused. A blank box is answered with no verdict. Neither gives a breakeven.
 

@@ -1,6 +1,6 @@
 {
  "app_slug": "carbon",
- "rows": 334,
+ "rows": 327,
  "old_text_source": "replay of every question migration at origin/main in a local scratch database",
  "new_text_source": "the regenerated bank JSON under tools/course-banks/carbon, built from its committed .py sources",
  "edits": [
@@ -309,18 +309,6 @@
     "explanation": {
      "old": "The two boundary rows of SECTION 10 carry 3650000 in barrels of oil equivalent produced and 2410000 in barrels of oil exported, both invented.",
      "new": "The two boundary rows of the lab carry 3650000 in barrels of oil equivalent produced and 2410000 in barrels of oil exported, both invented."
-    }
-   }
-  },
-  {
-   "tier": "beginner",
-   "scope": "final",
-   "module_key": null,
-   "ord": 28,
-   "fields": {
-    "explanation": {
-     "old": "The disclaimer in SECTION 7 ends: keeping a second copy of them here would create two records that could disagree.",
-     "new": "The disclaimer in the inventory ends: keeping a second copy of them here would create two records that could disagree."
     }
    }
   },
@@ -1417,18 +1405,6 @@
     "explanation": {
      "old": "SECTION 10: with the electricity factor blank the total intensity is 0.00822761 tCO2e per barrel of oil equivalent produced, reportable false, because 1 line(s) could not be computed. An intensity inherits its inventory's status. 0.01176597 is the complete inventory's total intensity.",
      "new": "The course: with the electricity factor blank the total intensity is 0.00822761 tCO2e per barrel of oil equivalent produced, reportable false, because 1 line(s) could not be computed. An intensity inherits its inventory's status. 0.01176597 is the complete inventory's total intensity."
-    }
-   }
-  },
-  {
-   "tier": "beginner",
-   "scope": "module",
-   "module_key": "m05-lines-factors-and-provenance",
-   "ord": 13,
-   "fields": {
-    "explanation": {
-     "old": "SECTION 7 quotes it: \"This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree.\" The inventory itself carries each line's factor, source and version, its totals and its blocked lines.",
-     "new": "The course quotes it: \"This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree.\" The inventory itself carries each line's factor, source and version, its totals and its blocked lines."
     }
    }
   },
@@ -3621,10 +3597,6 @@
     "prompt": {
      "old": "The Agbor curve prints additive false. Which entry in SECTION 20 goes with that flag?",
      "new": "The Agbor curve prints additive false. Which entry in the curve table goes with that flag?"
-    },
-    "explanation": {
-     "old": "SECTION 20 prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that measures acting on the same source are NOT additive. The costed curve carries no refused measure, over-claims belong to the 9400 t claim of SECTION 21, and paysForItselfMeasures names three measures.",
-     "new": "The curve prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that measures acting on the same source are NOT additive. The costed curve carries no refused measure, over-claims belong to the 9400 t claim of the target checks, and paysForItselfMeasures names three measures."
     }
    }
   },
@@ -3850,18 +3822,6 @@
    "tier": "advanced",
    "scope": "module",
    "module_key": "m03-interactions-and-over-claims",
-   "ord": 9,
-   "fields": {
-    "explanation": {
-     "old": "SECTION 20 prints both measures at 760.000 and 3400.000 t, additive false, and the note: \"Measures listed here act on the same source, so their abatements are NOT additive and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, which is why it is surfaced rather than solved.\" The costed curve prints over-claims none.",
-     "new": "The curve prints both measures at 760.000 and 3400.000 t, additive false, and the note: \"Measures listed here act on the same source, so their abatements are NOT additive and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, which is why it is surfaced rather than solved.\" The costed curve prints over-claims none."
-    }
-   }
-  },
-  {
-   "tier": "advanced",
-   "scope": "module",
-   "module_key": "m03-interactions-and-over-claims",
    "ord": 10,
    "fields": {
     "prompt": {
@@ -3982,18 +3942,6 @@
    "tier": "advanced",
    "scope": "module",
    "module_key": "m04-targets-and-the-path",
-   "ord": 4,
-   "fields": {
-    "explanation": {
-     "old": "SECTION 22, the gap note: \"The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan.\" The path prints finalGapTonnes 1370.083 and no refusal.",
-     "new": "The path's gap note: \"The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan.\" The path prints finalGapTonnes 1370.083 and no refusal."
-    }
-   }
-  },
-  {
-   "tier": "advanced",
-   "scope": "module",
-   "module_key": "m04-targets-and-the-path",
    "ord": 5,
    "fields": {
     "explanation": {
@@ -4039,18 +3987,6 @@
     "explanation": {
      "old": "SECTION 22: REFUSED: In 2030 the scheduled measures abate 13610 t against a baseline of 12000 t. Emissions cannot fall below zero, so check the measures for double counting or a source outside the baseline. overAbatedYear 2030.",
      "new": "The engine returns REFUSED: In 2030 the scheduled measures abate 13610 t against a baseline of 12000 t. Emissions cannot fall below zero, so check the measures for double counting or a source outside the baseline. overAbatedYear 2030."
-    }
-   }
-  },
-  {
-   "tier": "advanced",
-   "scope": "module",
-   "module_key": "m04-targets-and-the-path",
-   "ord": 9,
-   "fields": {
-    "explanation": {
-     "old": "SECTION 22: REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero. SECTION 25 lists it: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank.",
-     "new": "The engine returns REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero. The course lists it: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank."
     }
    }
   },
@@ -4115,18 +4051,6 @@
     "explanation": {
      "old": "SECTION 22, the path with the measure unscheduled: 2032, abated 13610.000 t, emissions 42490.276 t, target 41674.491 t, gap 815.785 t. 3220.083 t is its 2033 gap, and 15460.000 t is the scheduled path's abated column.",
      "new": "The path with the measure unscheduled: 2032, abated 13610.000 t, emissions 42490.276 t, target 41674.491 t, gap 815.785 t. 3220.083 t is its 2033 gap, and 15460.000 t is the scheduled path's abated column."
-    }
-   }
-  },
-  {
-   "tier": "advanced",
-   "scope": "module",
-   "module_key": "m05-savings-into-the-ledger",
-   "ord": 1,
-   "fields": {
-    "explanation": {
-     "old": "SECTION 23, no emission factor: annualTonnesCo2e none; carbonNote \"No emission factor supplied, so the carbon figure is absent rather than zero.\" SECTION 25: emission factors are inputs and neither engine ships one. 661.980 is the carbon with the SYNTHETIC factor of 56.1 kg CO2e per GJ.",
-     "new": "The saving with no emission factor: annualTonnesCo2e none; carbonNote \"No emission factor supplied, so the carbon figure is absent rather than zero.\" The course states that emission factors are inputs and neither engine ships one. 661.980 is the carbon with the SYNTHETIC factor of 56.1 kg CO2e per GJ."
     }
    }
   },
@@ -4281,18 +4205,6 @@
     "explanation": {
      "old": "SECTION 24: versus peer is the intensity over the peer, 1.040085; the gap is the intensity less the peer, 27.2581 MJ a tonne (each computed here and equal to the engine's figure). 0.843786 is the Fuel gas share and 629.8387 MJ a tonne the intensity with Purchased power blank.",
      "new": "In the course, versus peer is the intensity over the peer, 1.040085; the gap is the intensity less the peer, 27.2581 MJ a tonne (each computed here and equal to the engine's figure). 0.843786 is the Fuel gas share and 629.8387 MJ a tonne the intensity with Purchased power blank."
-    }
-   }
-  },
-  {
-   "tier": "advanced",
-   "scope": "module",
-   "module_key": "m05-savings-into-the-ledger",
-   "ord": 13,
-   "fields": {
-    "explanation": {
-     "old": "SECTION 24, the disclaimer: \"This is the plant's own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use.\"",
-     "new": "The course's disclaimer: \"This is the plant's own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use.\""
     }
    }
   },

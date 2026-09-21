@@ -26,7 +26,7 @@
   "options": [
    "found false; REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.",
    "found true at 1500, the end of the bracket nearer the crossing, after 18 bisection steps.",
-   "REFUSED: The search bracket is not a valid interval, since the crossing lies above it.",
+   "REFUSED: The search bracket must be a valid interval, since the crossing lies above it.",
    "found true at 1641.7105, since the engine widens the bracket until the sign changes."
   ],
   "answer": 0,
@@ -37,7 +37,7 @@
   "options": [
    "It swaps the ends and finds 1641.7105.",
    "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.",
-   "REFUSED: The search bracket is not a valid interval.",
+   "REFUSED: The search bracket must be a valid interval.",
    "It halves from the high end and reports none."
   ],
   "answer": 2,

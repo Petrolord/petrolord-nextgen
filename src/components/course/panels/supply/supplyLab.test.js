@@ -33,8 +33,9 @@
 //   THE REFUSAL LITERAL GATE  no engine refusal sentence is typed into a source.
 //   THE COPY RULE      no em dash, no en dash, no double hyphen and no "X, not Y"
 //                      in any source line or any string the lab hands a panel,
-//                      with the engine's two FLOOR sentences exempt by exact prefix
-//                      and pinned to the vendored engine, and a dead exemption fails.
+//                      with nothing exempt: the engine's two FLOOR sentences, once
+//                      contrastives, were recast by engines #232 and a row naming
+//                      them fails if the lab stops returning them.
 import {
   describe, it, expect, afterEach, vi,
 } from 'vitest';
@@ -878,11 +879,13 @@ const CONTRASTIVE = /,\s+not\s+\w/;
 const breaches = (s) => CONTRASTIVE.test(s) || s.includes(EM) || s.includes(EN) || / -- /.test(s);
 
 /**
- * THE ENGINE SENTENCES THAT BREACH THE OWNER COPY RULE, exempt by exact prefix
- * and pinned to the vendored engine. PANELS.md names them: the engine's "A FLOOR"
- * sentences may be shown verbatim as the engine's words. A dead exemption fails.
+ * The engine's two FLOOR sentences. They used to breach the owner copy rule and
+ * were exempt from it; engines #232 recast both, so nothing is exempt now. They
+ * stay listed so the sweep is shown to cover them: each must still be a prefix
+ * of a string the lab returns and a sentence in the vendored engine, and a row
+ * that matches nothing FAILS.
  */
-const COPY_RULE_EXEMPTIONS = ['A FLOOR, not a cost: ', 'A FLOOR, not a price: '];
+const RECAST_ENGINE_SENTENCES = ['A FLOOR: ', ' rate(s) not supplied, so the full landed cost is at least this.', ' rate(s) not supplied, so the full price is at least this.'];
 
 describe('THE OWNER COPY RULE: no em dash, no en dash and no contrastive', () => {
   it('no source line breaches it', () => {
@@ -900,19 +903,18 @@ describe('THE OWNER COPY RULE: no em dash, no en dash and no contrastive', () =>
     expect(breaches('a clean sentence')).toBe(false);
   });
 
-  it('every string the lab hands a panel obeys it, except the engine\'s FLOOR sentences', () => {
+  it('every string the lab hands a panel obeys it, with nothing exempt', () => {
     const strings = stringsIn(S);
     expect(strings.length).toBeGreaterThanOrEqual(500);
     const offenders = strings.filter(([, s]) => breaches(s));
-    const unexcused = offenders.filter(([, s]) => !COPY_RULE_EXEMPTIONS.some((ex) => s.startsWith(ex)));
-    expect(unexcused.map(([p, s]) => `${p}: ${s}`)).toEqual([]);
+    expect(offenders.map(([p, s]) => `${p}: ${s}`)).toEqual([]);
   });
 
-  it('A DEAD EXEMPTION FAILS: each exempt sentence is still returned and still in the engine', () => {
+  it('A DEAD ROW FAILS: each recast FLOOR sentence is still returned, still in the engine and obeys the rule', () => {
     const strings = stringsIn(S).map(([, s]) => s);
-    COPY_RULE_EXEMPTIONS.forEach((ex) => {
-      expect(strings.some((s) => s.startsWith(ex)), `"${ex}" matches nothing the lab returns`).toBe(true);
-      expect(breaches(ex)).toBe(true);
+    RECAST_ENGINE_SENTENCES.forEach((ex) => {
+      expect(strings.some((s) => s.includes(ex)), `"${ex}" matches nothing the lab returns`).toBe(true);
+      expect(breaches(ex)).toBe(false);
       expect(ENGINE_SRC, `"${ex}" is no longer in the vendored engine`).toContain(ex.trim());
     });
   });

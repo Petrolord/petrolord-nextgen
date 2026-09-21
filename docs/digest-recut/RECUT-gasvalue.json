@@ -1,6 +1,6 @@
 {
  "app_slug": "gasvalue",
- "rows": 206,
+ "rows": 203,
  "old_text_source": "replay of every question migration at origin/main in a local scratch database",
  "new_text_source": "the regenerated bank JSON under tools/course-banks/gasvalue, built from its committed .py sources",
  "edits": [
@@ -1210,18 +1210,6 @@
    "tier": "intermediate",
    "scope": "module",
    "module_key": "m05-credits-and-the-bid",
-   "ord": 11,
-   "fields": {
-    "explanation": {
-     "old": "The digest's probe \"a hurdle that is not a number ('x')\" prints REFUSED: The hurdle margin is not a number. The answer with no verdict and the no hurdle sentence belong to the hurdle left blank ('').",
-     "new": "The course's probe \"a hurdle that is not a number ('x')\" prints REFUSED: The hurdle margin is not a number. The answer with no verdict and the no hurdle sentence belong to the hurdle left blank ('')."
-    }
-   }
-  },
-  {
-   "tier": "intermediate",
-   "scope": "module",
-   "module_key": "m05-credits-and-the-bid",
    "ord": 12,
    "fields": {
     "explanation": {
@@ -2187,30 +2175,6 @@
     "explanation": {
      "old": "SECTION 33 prints averageWaitMinutes 5.7647 on 2 dispensers and 0.7588 on 3. 0.5765 and 0.2024 are the probabilityOfWaiting on 2 and on 3.",
      "new": "The forecourt lesson prints averageWaitMinutes 5.7647 on 2 dispensers and 0.7588 on 3. 0.5765 and 0.2024 are the probabilityOfWaiting on 2 and on 3."
-    }
-   }
-  },
-  {
-   "tier": "advanced",
-   "scope": "module",
-   "module_key": "m04-the-cascade",
-   "ord": 14,
-   "fields": {
-    "explanation": {
-     "old": "SECTION 33: at 25 buses an hour on 2 dispensers the engine gives an answer and no refusal: stable false, utilisation 1.2500, and the message that no average waiting time exists.",
-     "new": "The forecourt lesson: at 25 buses an hour on 2 dispensers the engine gives an answer and no refusal: stable false, utilisation 1.2500, and the message that no average waiting time exists."
-    }
-   }
-  },
-  {
-   "tier": "advanced",
-   "scope": "module",
-   "module_key": "m04-the-cascade",
-   "ord": 15,
-   "fields": {
-    "explanation": {
-     "old": "SECTION 33's probe table prints \"REFUSED: The number of bays must be a whole number, one or more.\" for 2.5 dispensers.",
-     "new": "The forecourt lesson's probe table prints \"REFUSED: The number of bays must be a whole number, one or more.\" for 2.5 dispensers."
     }
    }
   },

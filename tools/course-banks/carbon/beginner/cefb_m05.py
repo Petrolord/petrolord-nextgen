@@ -94,7 +94,7 @@ q(3, "The engine's disclaimer on the inventory names three things that belong in
  ["Factors, sources and versions of each line",
   "Scope 1, Scope 2 and the total, in tCO2e",
   "Blocked lines, their reasons and the set"],
- "The course quotes it: \"This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree.\" The inventory itself carries each line's factor, source and version, its totals and its blocked lines.")
+ "The disclaimer reads: \"This is a quantitative inventory of tonnes. Obligations, evidence and deadlines belong in the compliance register, which keeps the one record of them; a second copy here would create two records that could disagree.\" The inventory itself carries each line's factor, source and version, its totals and its blocked lines.")
 
 q(0, "In the first pass, Scope 2 reads 0.000 tCO2e. What does the lab show behind that figure?",
  "Its one line, Purchased electricity, is blocked: no factor value.",

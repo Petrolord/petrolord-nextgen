@@ -24,7 +24,7 @@ The breakeven the previous lesson found, 1641.7105 naira to the dollar, lies out
 
 A bracket written backwards, from 2100 to 1200, is not an interval at all, and the engine refuses it:
 
-> REFUSED: The search bracket is not a valid interval.
+> REFUSED: The search bracket must be a valid interval.
 
 The engine does not swap the ends. The bracket goes back to the person who typed it.
 

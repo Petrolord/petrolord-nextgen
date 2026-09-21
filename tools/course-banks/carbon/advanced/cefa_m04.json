@@ -41,7 +41,7 @@
    "As unabated, with no measure identified"
   ],
   "answer": 3,
-  "explanation": "The path's gap note: \"The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan.\" The path prints finalGapTonnes 1370.083 and no refusal."
+  "explanation": "The gap note: \"The gap is reported as unabated with no measure identified. A wedge is drawn only for an identified measure, because a plan needs a named measure behind every wedge.\" The path prints finalGapTonnes 1370.083 and no refusal."
  },
  {
   "prompt": "In 2029 the Agbor path prints emissions of 48690.276 t against a target of 48887.383 t. What does the unabated gap column print?",
@@ -96,7 +96,7 @@
    "It names the inventory in unscheduledMeasures and goes on."
   ],
   "answer": 0,
-  "explanation": "The engine returns REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero. The course lists it: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank."
+  "explanation": "REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing leaves the baseline unknown. It is a rule in force: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank."
  },
  {
   "prompt": "Which invented Agbor measure joins the path in 2028?",

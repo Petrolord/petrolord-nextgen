@@ -20,7 +20,7 @@ The lane runs 312.00 km to a station cluster, with a 33000.00 litre payload, an 
 | cost per litre delivered, naira | 15.0704 |
 | kg CO2e a trip | none |
 
-The answer reads complete true, a flag that names a cost box left blank or null. A cost left out of the call takes the default its signature states and still reads complete true: with the driver cost left out, the lane reads 437830.99 naira a trip, complete true. The carbon figure is none, because no diesel emission factor was supplied, and the engine says the figure is absent rather than zero. The cost per litre is spread over the litres delivered after the transit loss.
+The answer reads complete true, a flag that names a cost box left blank or null. A cost left out of the call takes the default its signature states and still reads complete true: with the driver cost left out, the lane reads 437830.99 naira a trip, complete true. The carbon figure is none, because no diesel emission factor was supplied, and the engine says the carbon figure is left blank. The cost per litre is spread over the litres delivered after the transit loss.
 
 ## The fleet
 

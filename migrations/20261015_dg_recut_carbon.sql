@@ -9,14 +9,16 @@
 -- module key, no scope, no row count. Option lengths keep their rank.
 --
 -- SOURCE of the new text: the regenerated bank JSON under tools/course-banks/carbon, built from its committed .py sources.
--- Rows: 334 (beginner 130, intermediate 96, advanced 108).
+-- Rows: 327 (beginner 128, intermediate 96, advanced 103).
 --
 -- GUARDS. Each row is addressed by (app_slug, tier, scope, module_key, ord) and must
 -- carry EITHER its published text exactly (then it is updated) OR the recut text
 -- exactly (already applied, left alone). Anything else raises and the whole
 -- transaction rolls back. Every update must touch exactly 1 row, and the course
 -- must still hold its question count at the end. SAFE TO RE-RUN.
--- Published text was read from a replay of every question migration at origin/main
+-- Published text was read from a replay of every question migration at origin/main,
+-- FC9's recut (#181) and the B3 engine-strings recut (#184) included, so a row either
+-- of those rewrote is expected to carry THEIR text: apply them first.
 -- (docs/digest-recut/RECUT-carbon.json carries OLD and NEW for every row).
 -- ==========================================================================
 
@@ -450,23 +452,6 @@ begin
      where app_slug = 'carbon' and tier = 'beginner' and scope = 'final' and module_key is not distinct from null and ord = 27;
     get diagnostics v_count = row_count;
     if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: beginner final ord 27 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
-  -- beginner final ord 28
-  select case
-           when prompt = 'The inventory disclaimer warns against keeping a second copy of obligations in the inventory. What would the copy create?' and options = '["A blocked line for each obligation", "A total that counts each tonne twice", "An unsourced factor in the register", "Two records that could disagree"]'::jsonb and answer_index = 3 and explanation is not distinct from 'The disclaimer in SECTION 7 ends: keeping a second copy of them here would create two records that could disagree.' then 'old'
-           when prompt = 'The inventory disclaimer warns against keeping a second copy of obligations in the inventory. What would the copy create?' and options = '["A blocked line for each obligation", "A total that counts each tonne twice", "An unsourced factor in the register", "Two records that could disagree"]'::jsonb and answer_index = 3 and explanation is not distinct from 'The disclaimer in the inventory ends: keeping a second copy of them here would create two records that could disagree.' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'carbon' and tier = 'beginner' and scope = 'final' and module_key is not distinct from null and ord = 28;
-  if v_state is null then raise exception 'digest-copy recut, carbon refused: no row for beginner final ord 28'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, carbon refused: beginner final ord 28 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'The inventory disclaimer warns against keeping a second copy of obligations in the inventory. What would the copy create?', options = '["A blocked line for each obligation", "A total that counts each tonne twice", "An unsourced factor in the register", "Two records that could disagree"]'::jsonb, explanation = 'The disclaimer in the inventory ends: keeping a second copy of them here would create two records that could disagree.'
-     where app_slug = 'carbon' and tier = 'beginner' and scope = 'final' and module_key is not distinct from null and ord = 28;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: beginner final ord 28 updated % rows', v_count; end if;
     v_updated := v_updated + 1;
   end if;
 
@@ -1932,23 +1917,6 @@ begin
     v_updated := v_updated + 1;
   end if;
 
-  -- beginner m05-lines-factors-and-provenance ord 13
-  select case
-           when prompt = 'The engine''s disclaimer on the inventory names three things that belong in the compliance register. Which three?' and options = '["Factors, sources and versions of each line", "Scope 1, Scope 2 and the total, in tCO2e", "Blocked lines, their reasons and the set", "Obligations, evidence and deadlines"]'::jsonb and answer_index = 3 and explanation is not distinct from 'SECTION 7 quotes it: "This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree." The inventory itself carries each line''s factor, source and version, its totals and its blocked lines.' then 'old'
-           when prompt = 'The engine''s disclaimer on the inventory names three things that belong in the compliance register. Which three?' and options = '["Factors, sources and versions of each line", "Scope 1, Scope 2 and the total, in tCO2e", "Blocked lines, their reasons and the set", "Obligations, evidence and deadlines"]'::jsonb and answer_index = 3 and explanation is not distinct from 'The course quotes it: "This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree." The inventory itself carries each line''s factor, source and version, its totals and its blocked lines.' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'carbon' and tier = 'beginner' and scope = 'module' and module_key is not distinct from 'm05-lines-factors-and-provenance' and ord = 13;
-  if v_state is null then raise exception 'digest-copy recut, carbon refused: no row for beginner m05-lines-factors-and-provenance ord 13'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, carbon refused: beginner m05-lines-factors-and-provenance ord 13 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'The engine''s disclaimer on the inventory names three things that belong in the compliance register. Which three?', options = '["Factors, sources and versions of each line", "Scope 1, Scope 2 and the total, in tCO2e", "Blocked lines, their reasons and the set", "Obligations, evidence and deadlines"]'::jsonb, explanation = 'The course quotes it: "This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree." The inventory itself carries each line''s factor, source and version, its totals and its blocked lines.'
-     where app_slug = 'carbon' and tier = 'beginner' and scope = 'module' and module_key is not distinct from 'm05-lines-factors-and-provenance' and ord = 13;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: beginner m05-lines-factors-and-provenance ord 13 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
   -- beginner m05-lines-factors-and-provenance ord 14
   select case
            when prompt = 'In the first pass, Scope 2 reads 0.000 tCO2e. What does the digest show behind that figure?' and options = '["Its one line, Purchased electricity, is blocked: no factor value.", "Igbogene bought no electricity in the year the first pass covers.", "The electricity line is on scope 3, which the inventory never totals.", "The factor 0.41 is present with no source, so it is counted as zero."]'::jsonb and answer_index = 0 and explanation is not distinct from 'SECTION 9 lists Purchased electricity among the first pass blocked lines, "blocked: no factor value". Once the factor is entered with its source, Scope 2 reads 12915.000. SECTION 7 prints the line on scope 2 with an activity of 31500.000 MWh.' then 'old'
@@ -3243,15 +3211,15 @@ begin
 
   -- intermediate m04-what-tuning-is-worth ord 1
   select case
-           when prompt = 'SECTION 14 prints the engine''s method for the saving from tuning the invented Isiokpo heater. Which ratio does it give?' and options = '["(target - current) / current", "(target - current) / target", "(target - current) / a hundred", "(target - current) / (target + current)"]'::jsonb and answer_index = 1 and explanation is not distinct from 'The method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. Subtracting the efficiency percentages divides by a hundred instead of by the target efficiency, and understates the saving."' then 'old'
-           when prompt = 'The course prints the engine''s method for the saving from tuning the invented Isiokpo heater. Which ratio does it give?' and options = '["(target - current) / current", "(target - current) / target", "(target - current) / a hundred", "(target - current) / (target + current)"]'::jsonb and answer_index = 1 and explanation is not distinct from 'The method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. Subtracting the efficiency percentages divides by a hundred instead of by the target efficiency, and understates the saving."' then 'new'
+           when prompt = 'SECTION 14 prints the engine''s method for the saving from tuning the invented Isiokpo heater. Which ratio does it give?' and options = '["(target - current) / current", "(target - current) / target", "(target - current) / a hundred", "(target - current) / (target + current)"]'::jsonb and answer_index = 1 and explanation is not distinct from 'The method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. The divisor is the target efficiency. Subtracting the efficiency percentages divides by a hundred and understates the saving."' then 'old'
+           when prompt = 'The course prints the engine''s method for the saving from tuning the invented Isiokpo heater. Which ratio does it give?' and options = '["(target - current) / current", "(target - current) / target", "(target - current) / a hundred", "(target - current) / (target + current)"]'::jsonb and answer_index = 1 and explanation is not distinct from 'The method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. The divisor is the target efficiency. Subtracting the efficiency percentages divides by a hundred and understates the saving."' then 'new'
            else 'other' end
     into v_state
     from public.academy_quiz_questions where app_slug = 'carbon' and tier = 'intermediate' and scope = 'module' and module_key is not distinct from 'm04-what-tuning-is-worth' and ord = 1;
   if v_state is null then raise exception 'digest-copy recut, carbon refused: no row for intermediate m04-what-tuning-is-worth ord 1'; end if;
   if v_state = 'other' then raise exception 'digest-copy recut, carbon refused: intermediate m04-what-tuning-is-worth ord 1 matches neither its published nor its recut text'; end if;
   if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'The course prints the engine''s method for the saving from tuning the invented Isiokpo heater. Which ratio does it give?', options = '["(target - current) / current", "(target - current) / target", "(target - current) / a hundred", "(target - current) / (target + current)"]'::jsonb, explanation = 'The method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. Subtracting the efficiency percentages divides by a hundred instead of by the target efficiency, and understates the saving."'
+    update public.academy_quiz_questions set prompt = 'The course prints the engine''s method for the saving from tuning the invented Isiokpo heater. Which ratio does it give?', options = '["(target - current) / current", "(target - current) / target", "(target - current) / a hundred", "(target - current) / (target + current)"]'::jsonb, explanation = 'The method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. The divisor is the target efficiency. Subtracting the efficiency percentages divides by a hundred and understates the saving."'
      where app_slug = 'carbon' and tier = 'intermediate' and scope = 'module' and module_key is not distinct from 'm04-what-tuning-is-worth' and ord = 1;
     get diagnostics v_count = row_count;
     if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: intermediate m04-what-tuning-is-worth ord 1 updated % rows', v_count; end if;
@@ -4586,15 +4554,15 @@ begin
 
   -- advanced m02-the-marginal-abatement-cost-curve ord 8
   select case
-           when prompt = 'The Agbor curve prints additive false. Which entry in SECTION 20 goes with that flag?' and options = '["An over-claims entry naming the flare: Flare gas recovery claiming more than it emits", "An interaction table naming heaters: Tune the fired heaters and the Heat integration project", "A refusedMeasures entry naming the Heat integration project, whose capital was blank", "A paysForItselfMeasures entry naming Tune the fired heaters and Repair failed steam traps"]'::jsonb and answer_index = 1 and explanation is not distinct from 'SECTION 20 prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that measures acting on the same source are NOT additive. The costed curve carries no refused measure, over-claims belong to the 9400 t claim of SECTION 21, and paysForItselfMeasures names three measures.' then 'old'
-           when prompt = 'The Agbor curve prints additive false. Which entry in the curve table goes with that flag?' and options = '["An over-claims entry naming the flare: Flare gas recovery claiming more than it emits", "An interaction table naming heaters: Tune the fired heaters and the Heat integration project", "A refusedMeasures entry naming the Heat integration project, whose capital was blank", "A paysForItselfMeasures entry naming Tune the fired heaters and Repair failed steam traps"]'::jsonb and answer_index = 1 and explanation is not distinct from 'The curve prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that measures acting on the same source are NOT additive. The costed curve carries no refused measure, over-claims belong to the 9400 t claim of the target checks, and paysForItselfMeasures names three measures.' then 'new'
+           when prompt = 'The Agbor curve prints additive false. Which entry in SECTION 20 goes with that flag?' and options = '["An over-claims entry naming the flare: Flare gas recovery claiming more than it emits", "An interaction table naming heaters: Tune the fired heaters and the Heat integration project", "A refusedMeasures entry naming the Heat integration project, whose capital was blank", "A paysForItselfMeasures entry naming Tune the fired heaters and Repair failed steam traps"]'::jsonb and answer_index = 1 and explanation is not distinct from 'The curve prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that the abatements of measures acting on the same source overlap. The costed curve carries no refused measure, over-claims belong to the 9400 t flare gas recovery claim, and paysForItselfMeasures names three measures.' then 'old'
+           when prompt = 'The Agbor curve prints additive false. Which entry in the curve table goes with that flag?' and options = '["An over-claims entry naming the flare: Flare gas recovery claiming more than it emits", "An interaction table naming heaters: Tune the fired heaters and the Heat integration project", "A refusedMeasures entry naming the Heat integration project, whose capital was blank", "A paysForItselfMeasures entry naming Tune the fired heaters and Repair failed steam traps"]'::jsonb and answer_index = 1 and explanation is not distinct from 'The curve prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that the abatements of measures acting on the same source overlap. The costed curve carries no refused measure, over-claims belong to the 9400 t flare gas recovery claim, and paysForItselfMeasures names three measures.' then 'new'
            else 'other' end
     into v_state
     from public.academy_quiz_questions where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm02-the-marginal-abatement-cost-curve' and ord = 8;
   if v_state is null then raise exception 'digest-copy recut, carbon refused: no row for advanced m02-the-marginal-abatement-cost-curve ord 8'; end if;
   if v_state = 'other' then raise exception 'digest-copy recut, carbon refused: advanced m02-the-marginal-abatement-cost-curve ord 8 matches neither its published nor its recut text'; end if;
   if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'The Agbor curve prints additive false. Which entry in the curve table goes with that flag?', options = '["An over-claims entry naming the flare: Flare gas recovery claiming more than it emits", "An interaction table naming heaters: Tune the fired heaters and the Heat integration project", "A refusedMeasures entry naming the Heat integration project, whose capital was blank", "A paysForItselfMeasures entry naming Tune the fired heaters and Repair failed steam traps"]'::jsonb, explanation = 'The curve prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that measures acting on the same source are NOT additive. The costed curve carries no refused measure, over-claims belong to the 9400 t claim of the target checks, and paysForItselfMeasures names three measures.'
+    update public.academy_quiz_questions set prompt = 'The Agbor curve prints additive false. Which entry in the curve table goes with that flag?', options = '["An over-claims entry naming the flare: Flare gas recovery claiming more than it emits", "An interaction table naming heaters: Tune the fired heaters and the Heat integration project", "A refusedMeasures entry naming the Heat integration project, whose capital was blank", "A paysForItselfMeasures entry naming Tune the fired heaters and Repair failed steam traps"]'::jsonb, explanation = 'The curve prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that the abatements of measures acting on the same source overlap. The costed curve carries no refused measure, over-claims belong to the 9400 t flare gas recovery claim, and paysForItselfMeasures names three measures.'
      where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm02-the-marginal-abatement-cost-curve' and ord = 8;
     get diagnostics v_count = row_count;
     if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: advanced m02-the-marginal-abatement-cost-curve ord 8 updated % rows', v_count; end if;
@@ -4856,23 +4824,6 @@ begin
     v_updated := v_updated + 1;
   end if;
 
-  -- advanced m03-interactions-and-over-claims ord 9
-  select case
-           when prompt = 'Tune the fired heaters and the Heat integration project both act on heaters. What does the engine do with their tonnes on the curve?' and options = '["It keeps the larger claim, 3400.000 t, and drops Tune the fired heaters from the total.", "It refuses the curve until the user sequences the two measures on the one source.", "It counts both in full, 760.000 and 3400.000 t, and calls the cumulative curve an upper bound.", "It counts both in full and names heaters in the over-claims column of the curve."]'::jsonb and answer_index = 2 and explanation is not distinct from 'SECTION 20 prints both measures at 760.000 and 3400.000 t, additive false, and the note: "Measures listed here act on the same source, so their abatements are NOT additive and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, which is why it is surfaced rather than solved." The costed curve prints over-claims none.' then 'old'
-           when prompt = 'Tune the fired heaters and the Heat integration project both act on heaters. What does the engine do with their tonnes on the curve?' and options = '["It keeps the larger claim, 3400.000 t, and drops Tune the fired heaters from the total.", "It refuses the curve until the user sequences the two measures on the one source.", "It counts both in full, 760.000 and 3400.000 t, and calls the cumulative curve an upper bound.", "It counts both in full and names heaters in the over-claims column of the curve."]'::jsonb and answer_index = 2 and explanation is not distinct from 'The curve prints both measures at 760.000 and 3400.000 t, additive false, and the note: "Measures listed here act on the same source, so their abatements are NOT additive and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, which is why it is surfaced rather than solved." The costed curve prints over-claims none.' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm03-interactions-and-over-claims' and ord = 9;
-  if v_state is null then raise exception 'digest-copy recut, carbon refused: no row for advanced m03-interactions-and-over-claims ord 9'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, carbon refused: advanced m03-interactions-and-over-claims ord 9 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'Tune the fired heaters and the Heat integration project both act on heaters. What does the engine do with their tonnes on the curve?', options = '["It keeps the larger claim, 3400.000 t, and drops Tune the fired heaters from the total.", "It refuses the curve until the user sequences the two measures on the one source.", "It counts both in full, 760.000 and 3400.000 t, and calls the cumulative curve an upper bound.", "It counts both in full and names heaters in the over-claims column of the curve."]'::jsonb, explanation = 'The curve prints both measures at 760.000 and 3400.000 t, additive false, and the note: "Measures listed here act on the same source, so their abatements are NOT additive and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, which is why it is surfaced rather than solved." The costed curve prints over-claims none.'
-     where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm03-interactions-and-over-claims' and ord = 9;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: advanced m03-interactions-and-over-claims ord 9 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
   -- advanced m03-interactions-and-over-claims ord 10
   select case
            when prompt = 'Every SECTION 21 curve is checked against a target of 16830.083 tCO2e. What is that target?' and options = '["30 percent of the inventory total of 56100.276 tCO2e", "30 percent of the curve''s total abatement of 15460.000 t", "The purchased electricity line of 10988.000 tCO2e", "The path''s target in its end year, 39270.193 t"]'::jsonb and answer_index = 0 and explanation is not distinct from 'SECTION 21: the target is 30 percent of the inventory total: 16830.083 tCO2e (computed here, as the Carbon Studio computes it). The inventory total is 56100.276 tCO2e. 39270.193 t is the path''s target in 2033 (SECTION 22).' then 'old'
@@ -5026,23 +4977,6 @@ begin
     v_updated := v_updated + 1;
   end if;
 
-  -- advanced m04-targets-and-the-path ord 4
-  select case
-           when prompt = 'How does decarbonisationPath report the Agbor gap of 1370.083 t in the end year?' and options = '["As a wedge of future measures that closes it by 2033", "As a cost, at the curve''s weighted average of 18.7868 USD a tonne", "As a refusal until a measure is named to close it", "As unabated, with no measure identified"]'::jsonb and answer_index = 3 and explanation is not distinct from 'SECTION 22, the gap note: "The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan." The path prints finalGapTonnes 1370.083 and no refusal.' then 'old'
-           when prompt = 'How does decarbonisationPath report the Agbor gap of 1370.083 t in the end year?' and options = '["As a wedge of future measures that closes it by 2033", "As a cost, at the curve''s weighted average of 18.7868 USD a tonne", "As a refusal until a measure is named to close it", "As unabated, with no measure identified"]'::jsonb and answer_index = 3 and explanation is not distinct from 'The path''s gap note: "The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan." The path prints finalGapTonnes 1370.083 and no refusal.' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm04-targets-and-the-path' and ord = 4;
-  if v_state is null then raise exception 'digest-copy recut, carbon refused: no row for advanced m04-targets-and-the-path ord 4'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, carbon refused: advanced m04-targets-and-the-path ord 4 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'How does decarbonisationPath report the Agbor gap of 1370.083 t in the end year?', options = '["As a wedge of future measures that closes it by 2033", "As a cost, at the curve''s weighted average of 18.7868 USD a tonne", "As a refusal until a measure is named to close it", "As unabated, with no measure identified"]'::jsonb, explanation = 'The path''s gap note: "The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan." The path prints finalGapTonnes 1370.083 and no refusal.'
-     where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm04-targets-and-the-path' and ord = 4;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: advanced m04-targets-and-the-path ord 4 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
   -- advanced m04-targets-and-the-path ord 5
   select case
            when prompt = 'In 2029 the Agbor path prints emissions of 48690.276 t against a target of 48887.383 t. What does the unabated gap column print?' and options = '["494.298 t, carried on from 2027", "798.595 t, carried on from 2028", "815.785 t, the gap before 2033", "0.000 t, by the rule in every row"]'::jsonb and answer_index = 3 and explanation is not distinct from 'SECTION 22: in every row the unabated gap is emissions less the target where that is positive, else 0.000. The 2029 row prints 0.000. Each row is read on its own emissions and target: 494.298 t is the 2027 row and 798.595 t the 2028 row, and 815.785 t is the 2032 row of the unscheduled path.' then 'old'
@@ -5108,23 +5042,6 @@ begin
      where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm04-targets-and-the-path' and ord = 8;
     get diagnostics v_count = row_count;
     if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: advanced m04-targets-and-the-path ord 8 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
-  -- advanced m04-targets-and-the-path ord 9
-  select case
-           when prompt = 'An inventory that computed nothing is handed to decarbonisationPath as a baseline of 0. What does the engine say?' and options = '["It refuses: the baseline must be a positive tonnage.", "It draws the path from 0 and prints every gap as 0.000.", "It builds the path on the partial total of 45112.276 tCO2e.", "It names the inventory in unscheduledMeasures and goes on."]'::jsonb and answer_index = 0 and explanation is not distinct from 'SECTION 22: REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero. SECTION 25 lists it: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank.' then 'old'
-           when prompt = 'An inventory that computed nothing is handed to decarbonisationPath as a baseline of 0. What does the engine say?' and options = '["It refuses: the baseline must be a positive tonnage.", "It draws the path from 0 and prints every gap as 0.000.", "It builds the path on the partial total of 45112.276 tCO2e.", "It names the inventory in unscheduledMeasures and goes on."]'::jsonb and answer_index = 0 and explanation is not distinct from 'The engine returns REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero. The course lists it: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank.' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm04-targets-and-the-path' and ord = 9;
-  if v_state is null then raise exception 'digest-copy recut, carbon refused: no row for advanced m04-targets-and-the-path ord 9'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, carbon refused: advanced m04-targets-and-the-path ord 9 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'An inventory that computed nothing is handed to decarbonisationPath as a baseline of 0. What does the engine say?', options = '["It refuses: the baseline must be a positive tonnage.", "It draws the path from 0 and prints every gap as 0.000.", "It builds the path on the partial total of 45112.276 tCO2e.", "It names the inventory in unscheduledMeasures and goes on."]'::jsonb, explanation = 'The engine returns REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero. The course lists it: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank.'
-     where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm04-targets-and-the-path' and ord = 9;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: advanced m04-targets-and-the-path ord 9 updated % rows', v_count; end if;
     v_updated := v_updated + 1;
   end if;
 
@@ -5210,23 +5127,6 @@ begin
      where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm04-targets-and-the-path' and ord = 15;
     get diagnostics v_count = row_count;
     if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: advanced m04-targets-and-the-path ord 15 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
-  -- advanced m05-savings-into-the-ledger ord 1
-  select case
-           when prompt = 'The invented AGBOR saving is priced with no emission factor supplied. What does priceSaving return for the carbon?' and options = '["annualTonnesCo2e 0.000, with the money value returned beside it as usual", "A refusal saying an emission factor is required before any pricing", "annualTonnesCo2e 661.980, read from a factor the engine ships", "annualTonnesCo2e none, with a note that the carbon figure is absent"]'::jsonb and answer_index = 3 and explanation is not distinct from 'SECTION 23, no emission factor: annualTonnesCo2e none; carbonNote "No emission factor supplied, so the carbon figure is absent rather than zero." SECTION 25: emission factors are inputs and neither engine ships one. 661.980 is the carbon with the SYNTHETIC factor of 56.1 kg CO2e per GJ.' then 'old'
-           when prompt = 'The invented AGBOR saving is priced with no emission factor supplied. What does priceSaving return for the carbon?' and options = '["annualTonnesCo2e 0.000, with the money value returned beside it as usual", "A refusal saying an emission factor is required before any pricing", "annualTonnesCo2e 661.980, read from a factor the engine ships", "annualTonnesCo2e none, with a note that the carbon figure is absent"]'::jsonb and answer_index = 3 and explanation is not distinct from 'The saving with no emission factor: annualTonnesCo2e none; carbonNote "No emission factor supplied, so the carbon figure is absent rather than zero." The course states that emission factors are inputs and neither engine ships one. 661.980 is the carbon with the SYNTHETIC factor of 56.1 kg CO2e per GJ.' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm05-savings-into-the-ledger' and ord = 1;
-  if v_state is null then raise exception 'digest-copy recut, carbon refused: no row for advanced m05-savings-into-the-ledger ord 1'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, carbon refused: advanced m05-savings-into-the-ledger ord 1 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'The invented AGBOR saving is priced with no emission factor supplied. What does priceSaving return for the carbon?', options = '["annualTonnesCo2e 0.000, with the money value returned beside it as usual", "A refusal saying an emission factor is required before any pricing", "annualTonnesCo2e 661.980, read from a factor the engine ships", "annualTonnesCo2e none, with a note that the carbon figure is absent"]'::jsonb, explanation = 'The saving with no emission factor: annualTonnesCo2e none; carbonNote "No emission factor supplied, so the carbon figure is absent rather than zero." The course states that emission factors are inputs and neither engine ships one. 661.980 is the carbon with the SYNTHETIC factor of 56.1 kg CO2e per GJ.'
-     where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm05-savings-into-the-ledger' and ord = 1;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: advanced m05-savings-into-the-ledger ord 1 updated % rows', v_count; end if;
     v_updated := v_updated + 1;
   end if;
 
@@ -5414,23 +5314,6 @@ begin
      where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm05-savings-into-the-ledger' and ord = 12;
     get diagnostics v_count = row_count;
     if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: advanced m05-savings-into-the-ledger ord 12 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
-  -- advanced m05-savings-into-the-ledger ord 13
-  select case
-           when prompt = 'What does the energyIntensity disclaimer say the Agbor figure is?' and options = '["The plant''s own energy per tonne of throughput", "The Solomon Energy Intensity Index for the plant", "The plant''s energy on a standard-energy basis", "A published peer benchmark supplied by the engine"]'::jsonb and answer_index = 0 and explanation is not distinct from 'SECTION 24, the disclaimer: "This is the plant''s own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use."' then 'old'
-           when prompt = 'What does the energyIntensity disclaimer say the Agbor figure is?' and options = '["The plant''s own energy per tonne of throughput", "The Solomon Energy Intensity Index for the plant", "The plant''s energy on a standard-energy basis", "A published peer benchmark supplied by the engine"]'::jsonb and answer_index = 0 and explanation is not distinct from 'The course''s disclaimer: "This is the plant''s own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use."' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm05-savings-into-the-ledger' and ord = 13;
-  if v_state is null then raise exception 'digest-copy recut, carbon refused: no row for advanced m05-savings-into-the-ledger ord 13'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, carbon refused: advanced m05-savings-into-the-ledger ord 13 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'What does the energyIntensity disclaimer say the Agbor figure is?', options = '["The plant''s own energy per tonne of throughput", "The Solomon Energy Intensity Index for the plant", "The plant''s energy on a standard-energy basis", "A published peer benchmark supplied by the engine"]'::jsonb, explanation = 'The course''s disclaimer: "This is the plant''s own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use."'
-     where app_slug = 'carbon' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm05-savings-into-the-ledger' and ord = 13;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, carbon refused: advanced m05-savings-into-the-ledger ord 13 updated % rows', v_count; end if;
     v_updated := v_updated + 1;
   end if;
 
@@ -5708,5 +5591,5 @@ begin
 
   select count(*) into v_total from public.academy_quiz_questions where app_slug = 'carbon';
   if v_total <> 396 then raise exception 'digest-copy recut, carbon refused: the course holds % questions, expected 396', v_total; end if;
-  raise notice 'digest-copy recut, carbon: % of 334 rows updated, the rest already carried the recut text', v_updated;
+  raise notice 'digest-copy recut, carbon: % of 327 rows updated, the rest already carried the recut text', v_updated;
 end $$;

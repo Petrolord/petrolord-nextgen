@@ -343,7 +343,7 @@
  {
   "prompt": "creditSensitivity is run on a route with its price missing, so it has no margin. What does it answer?",
   "options": [
-   "REFUSED: The hurdle margin is not a number.",
+   "REFUSED: The hurdle margin must be a number.",
    "A breakeven worked on a margin of zero, with the price named in assumedZero.",
    "No verdict and a null breakeven; it reports that no hurdle margin was given.",
    "No verdict and a null breakeven; it asks the study to supply its price and costs."

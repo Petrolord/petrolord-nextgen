@@ -11,11 +11,11 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # US dollars. 15 questions.
 
 q(3, "The invented AGBOR saving is priced with no emission factor supplied. What does priceSaving return for the carbon?",
- "annualTonnesCo2e none, with a note that the carbon figure is absent",
+ "annualTonnesCo2e none, with a note that the carbon figure is left blank",
  ["annualTonnesCo2e 0.000, with the money value returned beside it as usual",
   "A refusal saying an emission factor is required before any pricing",
   "annualTonnesCo2e 661.980, read from a factor the engine ships"],
- "The saving with no emission factor: annualTonnesCo2e none; carbonNote \"No emission factor supplied, so the carbon figure is absent rather than zero.\" The course states that emission factors are inputs and neither engine ships one. 661.980 is the carbon with the SYNTHETIC factor of 56.1 kg CO2e per GJ.")
+ "No emission factor: annualTonnesCo2e none; carbonNote \"No emission factor supplied, so the carbon figure is left blank.\" Emission factors are inputs and neither engine ships one. 661.980 is the carbon with the SYNTHETIC factor of 56.1 kg CO2e per GJ.")
 
 q(1, "The invented saving is declared on LHV and its emission factor on HHV. What does priceSaving do?",
  "It refuses: a gigajoule on one basis is a different amount of fuel on the other.",
@@ -99,7 +99,7 @@ q(0, "What does the energyIntensity disclaimer say the Agbor figure is?",
  ["The Solomon Energy Intensity Index for the plant",
   "The plant's energy on a standard-energy basis",
   "A published peer benchmark supplied by the engine"],
- "The course's disclaimer: \"This is the plant's own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use.\"")
+ "The disclaimer: \"This is the plant's own energy per tonne of throughput. It is independent of the Solomon Energy Intensity Index, a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use.\"")
 
 q(3, "Which priceSaving call on the invented saving is refused outright?",
  "The saving left blank",

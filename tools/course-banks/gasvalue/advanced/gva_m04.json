@@ -145,23 +145,23 @@
  {
   "prompt": "IBAFO's forecourt is run at 25 buses an hour on 2 dispensers. What does cngDispensing return?",
   "options": [
-   "REFUSED: The number of bays must be a whole number, one or more.",
+   "REFUSED: The number of dispensers must be a whole number, one or more.",
    "An average wait that grows with the 1.2500 utilisation",
    "An answer: stable false and utilisation 1.2500",
    "REFUSED: Arrivals, fill time and a dispenser count are required and must be positive."
   ],
   "answer": 2,
-  "explanation": "The forecourt lesson: at 25 buses an hour on 2 dispensers the engine gives an answer and no refusal: stable false, utilisation 1.2500, and the message that no average waiting time exists."
+  "explanation": "At 25 buses an hour on 2 dispensers the engine gives an answer and no refusal: stable false, utilisation 1.2500, and the message that no average waiting time exists."
  },
  {
   "prompt": "cngDispensing is asked for 2.5 dispensers. What comes back?",
   "options": [
-   "The queue on 2 dispensers, with 2.5 rounded down to a whole number of bays.",
-   "REFUSED: The number of bays must be a whole number, one or more.",
-   "The queue on 3 dispensers, with 2.5 rounded to the nearest whole bay.",
+   "The queue on 2 dispensers, with 2.5 rounded down to a whole number of dispensers.",
+   "REFUSED: The number of dispensers must be a whole number, one or more.",
+   "The queue on 3 dispensers, with 2.5 rounded to the nearest whole dispenser.",
    "A queue on 2.5 dispensers, the count taken exactly as it was typed."
   ],
   "answer": 1,
-  "explanation": "The forecourt lesson's probe table prints \"REFUSED: The number of bays must be a whole number, one or more.\" for 2.5 dispensers."
+  "explanation": "The probe table prints \"REFUSED: The number of dispensers must be a whole number, one or more.\" for 2.5 dispensers."
  }
 ]

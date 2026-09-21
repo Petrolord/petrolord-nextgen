@@ -101,7 +101,7 @@ digest_for() {
     20261007_h5_qra_beginner_deep    ) echo 7f555dc0c28a5101f312292cc54e3e88d45cad4f122cb3c7ab72a033fd19dcf2 ;;
     20261007_h5_qra_intermediate_deep) echo 7cd80890e4174460bc52321874dd70dbabd526d4b40f615ede7223d66fb7c923 ;;
     20261007_h5_qra_advanced_deep    ) echo 87fec3be4a4788b4952623d27a6337042adb5d2f2ab31d1b7ed7ed1ff5674369 ;;
-    20261007_h5_qra_go_live          ) echo f695cc8b2ee3809a46ce7b596faaac534357741756ffef168ffabbc81e5de349 ;;
+    20261007_h5_qra_go_live          ) echo 37d5a89bae0d8eb101f7a5bb7a9d5d6244028be6d62d717bef5ac830c4b4f5ea ;;
     *) echo UNPINNED ;;
   esac
 }

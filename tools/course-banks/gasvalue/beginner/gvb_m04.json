@@ -36,12 +36,12 @@
   "prompt": "What does the engine's basis sentence say of unburned ethane and heavier?",
   "options": [
    "They are counted as methane, one molecule a carbon atom.",
-   "They are not methane and carry no GWP here.",
+   "They carry no GWP here; only the methane does.",
    "They carry the methane GWP.",
    "They pass through the flare as the CO2 in the gas does."
   ],
   "answer": 1,
-  "explanation": "The basis sentence closes: \"Unburned ethane and heavier are not methane and carry no GWP here.\" Only the methane in the gas enters the CH4 half of the rule."
+  "explanation": "The basis sentence closes: \"Unburned ethane and heavier carry no GWP here.\" Only the methane in the gas enters the CH4 half of the rule."
  },
  {
   "prompt": "A gas that is all CO2 is flared at EGBEMA's volume and days, with both efficiencies set to 0.5. What tonnes a year does the engine report?",

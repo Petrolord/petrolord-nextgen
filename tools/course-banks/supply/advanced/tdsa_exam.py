@@ -48,7 +48,7 @@ q(1, "The engine labels an incomplete build-up a floor. On the invented BADAGRY 
  ["1066.7292 naira a litre, with the tax typed on the landed cost.",
   "24774210.79 USD, with the duty and financing blank.",
   "1074.8249 naira a litre, with every invented element supplied."],
- "The pump sentence is \"A FLOOR, not a price: 2 rate(s) not supplied.\" The walk's floor of 24774210.79 is in US dollars for the cargo, and 1066.7292 is complete true.")
+ "The pump sentence is \"A FLOOR: 2 rate(s) not supplied, so the full price is at least this.\" The walk's floor of 24774210.79 is in US dollars for the cargo, and 1066.7292 is complete true.")
 
 # 6 m03+m04
 # audit-advanced: REPLACED: hypothetical build from the 1 percent row, key rested on inference

@@ -103,7 +103,7 @@
   "options": [
    "It prices credits on the gross flare of 215946.438 t/yr.",
    "It answers with no verdict and a null breakeven.",
-   "REFUSED: The hurdle margin is not a number.",
+   "REFUSED: The hurdle margin must be a number.",
    "REFUSED: No net abatement to sell."
   ],
   "answer": 3,
@@ -114,17 +114,17 @@
   "options": [
    "No verdict: breakevenCreditPrice null; \"No hurdle margin, so whether it needs credits cannot be said.\"",
    "It takes the hurdle as zero, and the route stands alone.",
-   "REFUSED: The hurdle margin is not a number.",
+   "REFUSED: The hurdle margin must be a number.",
    "REFUSED: No net abatement to sell."
   ],
   "answer": 2,
-  "explanation": "The course's probe \"a hurdle that is not a number ('x')\" prints REFUSED: The hurdle margin is not a number. The answer with no verdict and the no hurdle sentence belong to the hurdle left blank ('')."
+  "explanation": "The probe \"a hurdle that is not a number ('x')\" prints REFUSED: The hurdle margin must be a number. The answer with no verdict and the no hurdle sentence belong to the hurdle left blank ('')."
  },
  {
   "prompt": "A study leaves the hurdle box empty (''). Which answer comes back from the credit test?",
   "options": [
    "No verdict: breakevenCreditPrice null, with \"No hurdle margin, so whether it needs credits cannot be said.\"",
-   "REFUSED: The hurdle margin is not a number, as a blank is not a figure.",
+   "REFUSED: The hurdle margin must be a number, as a blank is not a figure.",
    "standsAloneWithoutCredits true, with the hurdle taken as zero.",
    "No verdict: breakevenCreditPrice null, with \"Supply its price and costs.\""
   ],

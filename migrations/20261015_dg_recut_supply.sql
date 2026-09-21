@@ -9,14 +9,16 @@
 -- module key, no scope, no row count. Option lengths keep their rank.
 --
 -- SOURCE of the new text: the regenerated bank JSON under tools/course-banks/supply, built from its committed .py sources.
--- Rows: 44 (beginner 5, intermediate 25, advanced 14).
+-- Rows: 43 (beginner 5, intermediate 25, advanced 13).
 --
 -- GUARDS. Each row is addressed by (app_slug, tier, scope, module_key, ord) and must
 -- carry EITHER its published text exactly (then it is updated) OR the recut text
 -- exactly (already applied, left alone). Anything else raises and the whole
 -- transaction rolls back. Every update must touch exactly 1 row, and the course
 -- must still hold its question count at the end. SAFE TO RE-RUN.
--- Published text was read from a replay of every question migration at origin/main
+-- Published text was read from a replay of every question migration at origin/main,
+-- FC9's recut (#181) and the B3 engine-strings recut (#184) included, so a row either
+-- of those rewrote is expected to carry THEIR text: apply them first.
 -- (docs/digest-recut/RECUT-supply.json carries OLD and NEW for every row).
 -- ==========================================================================
 
@@ -606,23 +608,6 @@ begin
     v_updated := v_updated + 1;
   end if;
 
-  -- advanced m02-the-landed-cost-walk ord 10
-  select case
-           when prompt = 'The invented duty and financing rates are left blank on BADAGRY. What does landedCost report?' and options = '["complete false, missing Import duty and Financing and letter of credit, total 24774210.79 USD, labelled a floor.", "A refusal naming the duty, since a percent of CIF with no rate leaves the walk unable to form CIF.", "complete true, total 24774210.79 USD, with the two blank rates read as zero and listed in assumedZero.", "complete false with a total of 26513943.86 USD, the last complete build, until the two rates are typed."]'::jsonb and answer_index = 0 and explanation is not distinct from 'The engine adds what it was given, names what it was not and labels the sum. The digest prints "A FLOOR, not a cost: 2 rate(s) not supplied." beside 24774210.79 USD.' then 'old'
-           when prompt = 'The invented duty and financing rates are left blank on BADAGRY. What does landedCost report?' and options = '["complete false, missing Import duty and Financing and letter of credit, total 24774210.79 USD, labelled a floor.", "A refusal naming the duty, since a percent of CIF with no rate leaves the walk unable to form CIF.", "complete true, total 24774210.79 USD, with the two blank rates read as zero and listed in assumedZero.", "complete false with a total of 26513943.86 USD, the last complete build, until the two rates are typed."]'::jsonb and answer_index = 0 and explanation is not distinct from 'The engine adds what it was given, names what it was not and labels the sum. The engine returns "A FLOOR, not a cost: 2 rate(s) not supplied." beside 24774210.79 USD.' then 'new'
-           else 'other' end
-    into v_state
-    from public.academy_quiz_questions where app_slug = 'supply' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm02-the-landed-cost-walk' and ord = 10;
-  if v_state is null then raise exception 'digest-copy recut, supply refused: no row for advanced m02-the-landed-cost-walk ord 10'; end if;
-  if v_state = 'other' then raise exception 'digest-copy recut, supply refused: advanced m02-the-landed-cost-walk ord 10 matches neither its published nor its recut text'; end if;
-  if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'The invented duty and financing rates are left blank on BADAGRY. What does landedCost report?', options = '["complete false, missing Import duty and Financing and letter of credit, total 24774210.79 USD, labelled a floor.", "A refusal naming the duty, since a percent of CIF with no rate leaves the walk unable to form CIF.", "complete true, total 24774210.79 USD, with the two blank rates read as zero and listed in assumedZero.", "complete false with a total of 26513943.86 USD, the last complete build, until the two rates are typed."]'::jsonb, explanation = 'The engine adds what it was given, names what it was not and labels the sum. The engine returns "A FLOOR, not a cost: 2 rate(s) not supplied." beside 24774210.79 USD.'
-     where app_slug = 'supply' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm02-the-landed-cost-walk' and ord = 10;
-    get diagnostics v_count = row_count;
-    if v_count <> 1 then raise exception 'digest-copy recut, supply refused: advanced m02-the-landed-cost-walk ord 10 updated % rows', v_count; end if;
-    v_updated := v_updated + 1;
-  end if;
-
   -- advanced m02-the-landed-cost-walk ord 13
   select case
            when prompt = 'The digest prints 26513943.86 - 24774210.79 = 1739733.07 USD for BADAGRY, every rate invented. Which lines does the floor build leave out of its total?' and options = '["The invented import duty and the invented financing line, both percents of CIF.", "The invented port and jetty lines, both levied on the bill-of-lading quantity of the cargo.", "The invented insurance and freight lines, both formed before CIF is frozen.", "The invented storage and demurrage lines, both booked at the landed stage."]'::jsonb and answer_index = 0 and explanation is not distinct from 'The floor build is the one with the duty and financing rates blank. The full build prints them at 1399086.04 and 340647.04 USD, and the floor names both as missing.' then 'old'
@@ -727,15 +712,15 @@ begin
 
   -- advanced m05-what-breaks-the-price ord 4
   select case
-           when prompt = 'solveCrossing is handed the invented exchange rate bracket written backwards, 2100 to 1200. Which answer does it give?' and options = '["It swaps the ends and finds 1641.7105.", "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.", "REFUSED: The search bracket is not a valid interval.", "It halves from the high end and reports none."]'::jsonb and answer_index = 2 and explanation is not distinct from 'The digest prints the bracket written backwards, 2100 to 1200, as that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500.' then 'old'
-           when prompt = 'solveCrossing is handed the invented exchange rate bracket written backwards, 2100 to 1200. Which answer does it give?' and options = '["It swaps the ends and finds 1641.7105.", "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.", "REFUSED: The search bracket is not a valid interval.", "It halves from the high end and reports none."]'::jsonb and answer_index = 2 and explanation is not distinct from 'The engine answers the bracket written backwards, 2100 to 1200, with that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500.' then 'new'
+           when prompt = 'solveCrossing is handed the invented exchange rate bracket written backwards, 2100 to 1200. Which answer does it give?' and options = '["It swaps the ends and finds 1641.7105.", "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.", "REFUSED: The search bracket must be a valid interval.", "It halves from the high end and reports none."]'::jsonb and answer_index = 2 and explanation is not distinct from 'The digest prints the bracket written backwards, 2100 to 1200, as that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500.' then 'old'
+           when prompt = 'solveCrossing is handed the invented exchange rate bracket written backwards, 2100 to 1200. Which answer does it give?' and options = '["It swaps the ends and finds 1641.7105.", "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.", "REFUSED: The search bracket must be a valid interval.", "It halves from the high end and reports none."]'::jsonb and answer_index = 2 and explanation is not distinct from 'The engine answers the bracket written backwards, 2100 to 1200, with that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500.' then 'new'
            else 'other' end
     into v_state
     from public.academy_quiz_questions where app_slug = 'supply' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm05-what-breaks-the-price' and ord = 4;
   if v_state is null then raise exception 'digest-copy recut, supply refused: no row for advanced m05-what-breaks-the-price ord 4'; end if;
   if v_state = 'other' then raise exception 'digest-copy recut, supply refused: advanced m05-what-breaks-the-price ord 4 matches neither its published nor its recut text'; end if;
   if v_state = 'old' then
-    update public.academy_quiz_questions set prompt = 'solveCrossing is handed the invented exchange rate bracket written backwards, 2100 to 1200. Which answer does it give?', options = '["It swaps the ends and finds 1641.7105.", "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.", "REFUSED: The search bracket is not a valid interval.", "It halves from the high end and reports none."]'::jsonb, explanation = 'The engine answers the bracket written backwards, 2100 to 1200, with that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500.'
+    update public.academy_quiz_questions set prompt = 'solveCrossing is handed the invented exchange rate bracket written backwards, 2100 to 1200. Which answer does it give?', options = '["It swaps the ends and finds 1641.7105.", "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.", "REFUSED: The search bracket must be a valid interval.", "It halves from the high end and reports none."]'::jsonb, explanation = 'The engine answers the bracket written backwards, 2100 to 1200, with that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500.'
      where app_slug = 'supply' and tier = 'advanced' and scope = 'module' and module_key is not distinct from 'm05-what-breaks-the-price' and ord = 4;
     get diagnostics v_count = row_count;
     if v_count <> 1 then raise exception 'digest-copy recut, supply refused: advanced m05-what-breaks-the-price ord 4 updated % rows', v_count; end if;
@@ -778,5 +763,5 @@ begin
 
   select count(*) into v_total from public.academy_quiz_questions where app_slug = 'supply';
   if v_total <> 396 then raise exception 'digest-copy recut, supply refused: the course holds % questions, expected 396', v_total; end if;
-  raise notice 'digest-copy recut, supply: % of 44 rows updated, the rest already carried the recut text', v_updated;
+  raise notice 'digest-copy recut, supply: % of 43 rows updated, the rest already carried the recut text', v_updated;
 end $$;

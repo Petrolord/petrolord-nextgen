@@ -101,7 +101,7 @@ digest_for() {
     20261005_h3_lopa_beginner_deep    ) echo a43d6435cdae6d5b66ac2ef23522e187c7d7c5eeb06f8000d8560f239f77bac2 ;;
     20261005_h3_lopa_intermediate_deep) echo be9b774fceecc9677d23800b7be6dc430b0804a5c4286c5845ee908c62400716 ;;
     20261005_h3_lopa_advanced_deep    ) echo 73ee16143d18b516e147a99d078dbf5a133a881b5b749b83475f70a5cbd93382 ;;
-    20261005_h3_lopa_go_live          ) echo 2e465a12e1049dc51f875cd25902f8c41f5d78e1217fd29241a903a59a38ed3b ;;
+    20261005_h3_lopa_go_live          ) echo fc962a75d8b9e4d41ea2dacfd7c0ef695da591acb9ea028c3ac22a074608b1b7 ;;
     *) echo UNPINNED ;;
   esac
 }

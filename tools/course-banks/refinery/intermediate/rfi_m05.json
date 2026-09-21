@@ -162,6 +162,6 @@
    "Tank capacity, jetty windows and turnarounds."
   ],
   "answer": 3,
-  "explanation": "The note reads \"Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against, not a berth-level schedule.\" A turnaround is entered in the plan, as a unit typed as shut."
+  "explanation": "The note reads \"Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against. Berth-level scheduling needs those constraints and a scheduling tool.\" A turnaround is entered in the plan, as a unit typed as shut."
  }
 ]

@@ -20,6 +20,10 @@
 # PR #181) to be in place first: three rows are touched by both, and this
 # recut's published text for them is FC9's recut text. Run against a database
 # without it, the corrosion file refuses and nothing moves.
+# Likewise the B3 engine-strings recut (20261015_b3_recut_*, PR #184) goes
+# first: for the rows it touches in crude, refinery, supply, gasvalue and
+# carbon, this recut's published text IS B3's recut text, so without it those
+# files refuse and nothing moves. The file names sort after b3 for that reason.
 #
 #   verify            resolve and check the pins. Touches no database.
 #   pin <ref>         reprint the digest table at <ref>.
@@ -71,31 +75,31 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261015_dg_recut_carbon          ) echo a2060e39227370b344a1ca2633d056eef2eca5b33fbb94fa8ab5479237c584df ;;
-    20261015_dg_recut_cashflow        ) echo 85c02e7448c1625971737d6c9b3772d4065ad51a39143e22e119c4b43d3b2382 ;;
-    20261015_dg_recut_compliance      ) echo 917ce9be29b92bcebd9ee6468aa89b100a9efd493cd0da69486a99ac3e59ba25 ;;
-    20261015_dg_recut_corrosion       ) echo 6826ee985b9da1b9082ccf7bceef003172c8ae531c39e06638d2de00f6fbb81f ;;
-    20261015_dg_recut_crude           ) echo 272b3abb6bbb228540af49a6dd1697f3fec11d1d14aa557a670584c2130a17a3 ;;
-    20261015_dg_recut_gasprocessing   ) echo 1aeec6fada48c84cfd8f425223dd32a44341c5e255d92ee6224d8529c73ab0e1 ;;
-    20261015_dg_recut_gasvalue        ) echo 994d84f3979cb4b40bafdb67439e1c036a3859adcf4f947fa794638f09578012 ;;
-    20261015_dg_recut_heattransfer    ) echo da9e97131d824ae8e7dbc986d10e917a6dbd9b34a45bcf360793b4365ba455da ;;
-    20261015_dg_recut_integrity       ) echo 4e87db522317fa4943a2de2b8e3e432ee9d136d6427f971171dd78d9e89214ce ;;
-    20261015_dg_recut_intervention    ) echo ec977738d0988dc60c6bf7cb87403b27d2ffcfd109d74324e9e46ba0cbf7fb9e ;;
-    20261015_dg_recut_linesizing      ) echo 2f11fc9da19e2a3b0afc7a853ca1010a1de7ee5fe085593c1775873c399dfb93 ;;
-    20261015_dg_recut_metering        ) echo ee74b81e3fb8994aaa19fd4e1525c4c6510cc1c219d09a5f6e1f184260f129b4 ;;
-    20261015_dg_recut_network         ) echo 70b0447b187dbd17863c607cefcdc740b072c17aaa1d354458a402a2627fd9e8 ;;
-    20261015_dg_recut_portfolio       ) echo 091eaadaa15dfa914088eb09cdcbe6fde7b22e28dcef009d2f166761f1bb67fb ;;
-    20261015_dg_recut_producedwater   ) echo db0a4b8e3d56bde1fbf5cc40a5c2eefa98b8be892babfd11713e673a6efd88c5 ;;
-    20261015_dg_recut_refinery        ) echo c6cf0381fa6b7c1dcdccbd733c7794da3298d1430a6a13d5a4c270abf26f3465 ;;
-    20261015_dg_recut_relief          ) echo 2af9b44fe59f1a0606f3f4dc8aaa89a1874bb65c268aeaa8ec022a59c68afaa7 ;;
-    20261015_dg_recut_riskchange      ) echo 42bccae032a37b14f677333add9d8d8183c52ad55b7c0fc36b228f2b8e4d43fc ;;
-    20261015_dg_recut_rotating        ) echo 2985d8a8be8a6ed2a4896c56aa449017b7e0699766b1f63e406658c7ac13471d ;;
-    20261015_dg_recut_sim             ) echo f8494dcf52dca076a287f2a44dd044c4b651a3928f342ce9c56a6679802533e1 ;;
-    20261015_dg_recut_stimulation     ) echo 814d23c272e786d08256850ddff64aea66f642d45632dd746840c6f2c1fd8e2a ;;
-    20261015_dg_recut_supply          ) echo a6266870219b12789cb03ac102f683c5224152217dea5bdda1ab6aef1460eb84 ;;
-    20261015_dg_recut_surveillance    ) echo 23f7b1d7612d15a96d027eab1434004a27d8a851aff6633fecc056cbfad1c9b3 ;;
-    20261015_dg_recut_uncertainty     ) echo d7ebc3743eb5d0285d46f6eb5f3ca4651e1d8029ebbecc4869c74648dffcdd8d ;;
-    20261015_dg_recut_waterflood      ) echo 4f651ecf1532a266214c9c8676a07d27610f47b6a9c0d250866d96e1b2a61262 ;;
+    20261015_dg_recut_carbon          ) echo 1feaa0c59a6fdcf33580cf7a440408e0dda9c48db236296de9fb1340cc395671 ;;
+    20261015_dg_recut_cashflow        ) echo 22be3f8d5173102f2def4bc684746cc913f02eebf929af9d25d585dafa12f0eb ;;
+    20261015_dg_recut_compliance      ) echo 29faf363b731f49a49aeb97feb1e7f39fe84d3eca29a5d215606322492079a9e ;;
+    20261015_dg_recut_corrosion       ) echo 46bfd8dc7152c3beccaab31c452837408124815a8a53a0487c8ad2b9afaa4eac ;;
+    20261015_dg_recut_crude           ) echo e0a89e94337b454094e69b30309089be30bad644f9d86b08ad38d8ebb2497551 ;;
+    20261015_dg_recut_gasprocessing   ) echo 637626818a63107a023db210e3dd91cf1ac649f22b129b50fbce6c75fd768180 ;;
+    20261015_dg_recut_gasvalue        ) echo ff809eda82b82636964cb1094fe5ecfa84e4fa95164987f7a907cbf5eeda11b5 ;;
+    20261015_dg_recut_heattransfer    ) echo 3720db67dc62939c5c27389111b445f46a9c09f4370ebe760baf581607b6b6e4 ;;
+    20261015_dg_recut_integrity       ) echo e750061a2f5d502ed8fda97af71c0df3f1d6a4f7e7dfbaa9d173e0b58f8d1359 ;;
+    20261015_dg_recut_intervention    ) echo aa5f48afc59f5527a9976e9ab6d3987e8c3d867c15af5b7781faf9929dc8081c ;;
+    20261015_dg_recut_linesizing      ) echo 25e1adc384cb23bd32fbd2537121fd86c3cebe338a83707c99aea33505d7b1ca ;;
+    20261015_dg_recut_metering        ) echo e8d3530a37d3c265cc01a20138fbff646e3db28c6f74d476a054b37afb1d79e3 ;;
+    20261015_dg_recut_network         ) echo 5e2760608ad7e2a439c8a5db3a1e2cf6dd370422f90eed08cd48dada79a2db71 ;;
+    20261015_dg_recut_portfolio       ) echo baa22a37b3678063eb7f714ea9efd820892663ecd0cc85786249ad3647ab27f1 ;;
+    20261015_dg_recut_producedwater   ) echo e095c996aab76a622d2daed2c41dc0d57739100963e3260524fe4555ce9e41f3 ;;
+    20261015_dg_recut_refinery        ) echo 8339a142ffb8b7b48648d1d6acdd2d7c58c1c93d8844e16290a18604c02313bd ;;
+    20261015_dg_recut_relief          ) echo 610da67ff86119e9963a2b201ac20c1477957a787c372a0382674d32dd8cbb2c ;;
+    20261015_dg_recut_riskchange      ) echo b450fd87dbd6ede191d33844b5f8cb3025112ffeacaf0fbd328d78c3b878aa7f ;;
+    20261015_dg_recut_rotating        ) echo 961087d77fa6d1744c78218e5da57e6b744e87c43d60e90169cfdac4bd1ae4ef ;;
+    20261015_dg_recut_sim             ) echo 9e157c341d90f0fc738c86d88a18b49b563398e52d45f2f5e1f22abca8192a4c ;;
+    20261015_dg_recut_stimulation     ) echo b713c65ecfb44de6c0fc6df7ece1ea2b705b34ceb7cd15da46241dc8b04aa255 ;;
+    20261015_dg_recut_supply          ) echo dcbe21d5d7bdc3212928b94af4812c14a88b4fa8aa39bd3070df874390002444 ;;
+    20261015_dg_recut_surveillance    ) echo c8365d83fd5be3a107601c3a08c2e5a06a6e76990c523aee03d1d07f43fc0974 ;;
+    20261015_dg_recut_uncertainty     ) echo 846581059a21682c93cb1d314d70c373cc96fe9e23d96059002444035560f4d7 ;;
+    20261015_dg_recut_waterflood      ) echo 9eea90b5e27b2a9ef6a445513b6989073626ad5a382309d860701ac0f534c290 ;;
     *) echo UNPINNED ;;
   esac
 }
