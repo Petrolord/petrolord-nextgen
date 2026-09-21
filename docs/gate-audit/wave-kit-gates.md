@@ -429,3 +429,33 @@ python3 docs/gate-audit/crosspair.py     <wave_dir> --content <course dir>
 
 Exit codes: 0 clean, 1 findings, 2 refused. **A 2 is not a pass.** If a wave log
 records a 2 as success, the defect this audit exists to remove has come back.
+
+## 8. Follow-up, 2026-09-21: two more gates, the H1 scratch catalogue and CI
+
+Copies of the repaired kit gates sit beside the others here (`litsweep.py`,
+`digestself.mjs`, and the kit's `BANK_TASK.md`); the kit master stays in
+`/root/dc-wavekit`, with each pre-fix file kept as `<name>.preFU`.
+
+* **`digestself.mjs` read a commit sha as a figure.** H1's header line
+  "vendored sha-identical with petrolord-engines 980199e" failed as the prose
+  literal 980199. Hex ids (7 to 40 hex characters with a digit and a-f), UUIDs
+  and 0x literals are blanked before numbers are read. Controls: a sha alone
+  passes (it failed before); a wrong figure beside a sha still fails; a
+  rounded right figure beside a sha passes; a pure-digit 7-figure number is
+  still read. It also passed an EMPTY digest ("agrees with itself", exit 0);
+  it now refuses with exit 2. Over all 34 committed digests the only change is
+  H1 going from 1 disagreement to 0 (and supply's generated set losing the
+  spurious value 13, read out of the sha 13f0936).
+* **`litsweep.py` compared |value|.** A signed literal now resolves only
+  against a same-signed digest occurrence (`--selftest` carries the planted
+  -7.5 against 7.5). Positive literals may still resolve against a signed
+  figure, since prose states magnitudes. Re-run over every course in
+  `tools/course-waves/*/`, it found 50 new items; they are listed in the pull
+  request that made this change and are left for the course owners.
+* **H1 `scratch_db.sh` loaded 11 neighbour courses, not 16.** The pattern
+  missed the five C&T and ET courses at path_order 48 to 52 and the count was
+  hard-coded to 11. It now loads 16, and refuses on any path_order hole in 1 to
+  60 (planted: dropping carbon refuses naming 52) and on an empty ref (0 found).
+* **CI ran `vitest run src/components/course/panels` only.** Six suites outside
+  it never ran. CI now runs the whole suite; vitest itself exits 1 on "No test
+  files found", so an empty sweep cannot pass.
