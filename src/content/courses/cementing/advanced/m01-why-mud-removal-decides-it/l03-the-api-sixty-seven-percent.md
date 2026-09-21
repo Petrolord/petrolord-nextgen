@@ -38,7 +38,7 @@ So the 0.67 in the spring rate and the 0.67 in the acceptance criterion are the 
 
 ## The checklist item
 
-    Minimum standoff 60% vs the API 67% target.
+    Minimum standoff 59.92% vs the API 67% target.
 
 Reported as a percentage against the target, with the target named. Not a pass mark, a comparison.
 
