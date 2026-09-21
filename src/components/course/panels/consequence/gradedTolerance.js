@@ -42,11 +42,17 @@ export const PRINTED_DECIMALS = {
   deg: 6,
   wPerM2: 6,
   pa: 6,
-  probit: 6,
-  dose: 6,
   viewFactor: 12,
   probability: 6,
 };
+
+// NO INVERSE OF THE NORMAL CDF IS GRADED. probabilityToProbit and
+// probitDoseForProbability invert the engine's Abramowitz and Stegun CDF by
+// bisection, and at a one percent probability the dose they return differs from
+// the exact inverse by about one part in a million (0.14 on a dose near 1.5e5).
+// That is a thousand times any printed-precision tolerance, so a learner with an
+// exact inverse normal would be marked wrong. The inverse is taught and never
+// graded; the forward probabilities agree with an exact CDF to six decimals.
 
 /**
  * The eighteen graded fields in their published order: tier, key, quantity
@@ -75,9 +81,9 @@ export const GRADED_FIELDS = [
   ['advanced', 'pennington_blast_overpressure_pa', 'pa', 1e-12],
   ['advanced', 'pennington_blast_distance_for_overpressure_m', 'm', 1e-9],
   ['advanced', 'pennington_overpressure_fatality_probability', 'probability', 1e-12],
-  ['advanced', 'pennington_thermal_probit', 'probit', 1e-12],
+  ['advanced', 'pennington_thermal_lethality_probability', 'probability', 1e-12],
   ['advanced', 'pennington_toxic_lethality_probability', 'probability', 1e-12],
-  ['advanced', 'pennington_toxic_dose_for_one_percent', 'dose', 1e-9],
+  ['advanced', 'pennington_ammonia_lethality_probability', 'probability', 1e-12],
 ];
 
 /**

@@ -942,5 +942,45 @@
       "digest.txt": "9a8c3b63b699de47a812fd9a5d015197394db42dc67a6e85e2dbd85634232c06",
       "fields.json": "301f6ace1451f6c0256f0ebf95a6fb9242481e9195ca13e81ca09f1cf5bb703c"
     }
+  },
+  "consequence": {
+    "course": "H4",
+    "live": "/root/hse-wip-consequence",
+    "kit": "foundation",
+    "kitNote": "Foundation kit: everything the wave is rebuilt and gated from before a lesson is written. The digest, its generator and the teaching streams; the eighteen graded answers, their generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle replay through the vendored Python oracle; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the structure, scaffold and lengths tools; the vendoring proof script and this mirror script; and the five writer briefs. HSE module, path_order 64. The seed ladder joins it with the migrations.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "truth-consequence.json",
+      "h4_dump.mjs",
+      "h4_fields.mjs",
+      "h4_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "oracle_check.py",
+      "structure.py",
+      "scaffold.py",
+      "lengths.py",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "gate_capstone_leak.mjs",
+      "gate_claims.mjs",
+      "gate_copy_rule.py",
+      "gate_vocabulary.py",
+      "run_gates.py",
+      "vendor_consequence.sh",
+      "mirror.sh",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md"
+    ],
+    "pins": {
+      "digest.txt": "6aaed9c79a91df348f88f21baf13fd5f006b91648228a1887a50aeb060f00456",
+      "fields.json": "af9717b1a6f661a5084b805911b8ed4a047f5a0ea6354a91eea333199bc5ec62"
+    }
   }
 }

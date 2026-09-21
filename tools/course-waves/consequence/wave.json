@@ -1,0 +1,363 @@
+{
+ "slug": "consequence",
+ "prefix": "h4",
+ "name": "Consequence Modelling",
+ "pathOrder": 64,
+ "module": "hse",
+ "prerequisite": null,
+ "repo": "/root/wt-h4-nextgen",
+ "branch": "feat/h4-consequence-course",
+ "goldens": [
+  "hse/goldens/consequence_cases.json"
+ ],
+ "engines": [
+  "engines/hse/consequence.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines main 16fd6c9 (engines PR #223 H4 consequence, plus PR #231 own-property preset lookups; no golden or numeric output moved). NextGen main fdca1bf40 already carried the consequence closure at the canonical pin df31f53 (nextgen #165); #231 touched two closure paths, engines/hse/consequence.js and tools/validation/hse/FINDINGS-consequence.md, and this wave re-vendored exactly those two from 16fd6c9, ledgered in VENDOR.json as kind differing, group 8-h4-consequence-revendor, each pinned to its vendored blob. The canonical pin is NOT moved (its move carries the other 80 paths of #231). vendor_consequence.sh walks the closure from the jest suite (the suite, the engine, the golden, and the three helpers the engine imports: engines/facilities/relief.js, engines/facilities/spacing.js, lib/stats/stats.js) plus three NAMED paths (oracle_consequence.py, FINDINGS-consequence.md, negcontrol_consequence.sh): 9 paths x 4 proofs = 36, all IDENTICAL against 16fd6c9. The re-vendor from abb41c3 moved nothing: fields.json rebuilt byte-identical and the digest differs only in its engine pin line (the sha and the line count, 1278 to 1285). Guard clean against canonical df31f53 (747 paths compared, 240 recorded deviations); consequence jest suite 206 of 206. No re-vendor is owed.",
+ "constants": {
+  "$comment": "The engine exports G_M_S2, R_J_MOL_K, ATM_PA, PA_PER_PSI, MACKAY_MATSUGU_C, STABILITY_CLASSES, BRIGGS_RURAL, BRIGGS_ADVISORY_RANGE_M, BAGSTER_RANGE_PA_M, KINNEY_GRAHAM_Z_RANGE, POOL_FIRE_FUELS, THERMAL_PROBITS, TOXIC_PROBITS, OVERPRESSURE_PROBITS and CONSEQUENCE_SOURCES. Digest section 1 prints the scalar constants from the export. None is graded."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE. Engine vendored at 16fd6c9 (the #231 re-vendor of two paths, ledgered), digest built (34 sections), fields.json and precision.json generated from the one tolerance derivation, 18 graded fields discriminating against 105 wrong methods, oracle replay through the vendored Python oracle with three second routes, lab and three panels shipped with vitest, route /dashboard/apps/consequence registered. No lesson, bank, key truth or migration is written yet.",
+  "thesis": "A consequence model turns a loss of containment into physical effects. Associate owns HOW MUCH GETS OUT AND WHERE DOES IT GO (source terms and the Gaussian plume), Professional owns WHAT DOES THE FIRE RADIATE (the solid flame chain), Expert owns WHO IS HURT AND WHAT DOES THE ENGINE NOT KNOW (blast, probits, dropped scope, judgement). Each capstone grades only its own tier question.",
+  "tierSplitDecision": "The dispatch proposed Associate = source terms, Professional = dispersion, Expert = fire, explosion and probits. The engine structure argues otherwise and the split was adjusted: the fire section is the largest (burning rate, two flame lengths, tilt, three surface emissive powers, the view factor, transmissivity, the composite and a distance search) and is one chain from pool to heat flux, so it is one tier; dispersion takes its release rate from a source term, so the two are one question; blast and probits both end at harm to a person and the probits read every other section, so they close the course with the dropped scope. Expert with fire, blast and probits together would have carried three engine sections in six modules.",
+  "tiers": {
+   "beginner": "Associate: m01 what a consequence model computes (units, results and refusals, sources), m02 liquid through a hole, m03 gas through a hole (choked, subsonic, the critical ratio), m04 pools and evaporation (single route), m05 the Gaussian plume (Briggs sigmas, reflection, ppm and mg/m3), m06 how far the plume reaches (off axis, distance to a concentration, three states). Digest sections 1 to 13.",
+   "intermediate": "Professional: m01 burning rate (Babrauskas, Burgess), m02 flame length (Thomas still air and with wind), m03 tilt and surface emissive power, m04 the view factor (the overhang refusal), m05 transmissivity and the heat flux (Bagster single route, the distance search, the point source seam), m06 the Yellow Book pool fire reproduced with its errata. Digest sections 14 to 22.",
+   "advanced": "Expert: m01 TNT and Kinney and Graham, m02 the blast field and its inverse, m03 probits (thermal, overpressure), m04 toxic probits (two sources, two units, a changing concentration), m05 what the engine does not do (dropped scope, single route quantities, the approximate inverse probit), m06 judgement end to end and the seams. Digest sections 23 to 33."
+  }
+ },
+ "fieldsDiscrimination": {
+  "okan_condensate_leak_mass_rate_kg_s": "static head forgotten, ullage pressure forgotten, ambient not subtracted, the two dropped from bernoulli, hole diameter used as a radius, torricelli on the head alone",
+  "okan_gas_riser_choked_mass_rate_kg_s": "worked subsonic, critical pressure ratio inverted, density taken at ambient, the gamma group dropped, bernoulli used for a gas, hole diameter used as a radius",
+  "okan_vent_subsonic_mass_rate_kg_s": "worked choked, psi exponent one over gamma, psi squared used as psi, density taken at ambient, bernoulli used for a gas",
+  "okan_deck_spill_equivalent_diameter_m": "radius reported, the four dropped, thickness ignored, area reported as a diameter, thickness read in millimetres",
+  "okan_plume_receptor_concentration_ppm": "ground reflection dropped, read on the centreline, release height ignored, receptor taken at ground level, two pi read as pi, molar volume at zero celsius, the neighbouring stability class",
+  "okan_plume_far_distance_m": "the near root reported, the peak distance reported, ground level release assumed, ground reflection dropped, the neighbouring stability class, receptor taken at ground level",
+  "yokri_flame_length_with_wind_m": "the still air thomas form, wind ratio inverted, the still air exponent kept, characteristic wind speed without its cube root, scaled wind exponent positive, the constant read as fifty",
+  "yokri_flame_tilt_deg": "reynolds exponent read as point one seven, froude number without the diameter, the worked examples printed viscosity, the tilt parameter read as a tangent, froude exponent read as a half",
+  "yokri_surface_emissive_power_mudan_w_m2": "exponent sign flipped, radius used for the diameter, the smoky term dropped, the two weights swapped, decay constant read as point two",
+  "yokri_surface_emissive_power_actual_w_m2": "the clear flame value reported, soot fraction and its complement swapped, the four dropped from the length ratio, radiative fraction omitted, the still air flame length used, the soot emissive power read as the clear flame maximum",
+  "yokri_view_factor_max": "the vertical view factor alone, the horizontal view factor alone, the two added rather than squared, the tilt ignored, the tilt taken away from the target, the garbled c of the extracted text, the distance taken from the pool edge",
+  "yokri_solid_flame_heat_flux_w_m2": "the diameter correlation surface emissive power used, the vertical view factor used, transmissivity omitted, the clear flame surface emissive power used, the tilt ignored, the still air flame length used",
+  "pennington_blast_overpressure_pa": "the papers printed constants, square root scaling, the ratio reported as a pressure, the charge mass not cube rooted, the third break read as one point three, the numerator rise term dropped",
+  "pennington_blast_distance_for_overpressure_m": "the forward distance reported, the papers printed constants, square root scaling, the target read as an absolute pressure, the scaled distance reported",
+  "pennington_overpressure_fatality_probability": "phi of the probit itself, the overpressure left in pascals, the overpressure read in bar, a base ten logarithm, the probit reported as a probability",
+  "pennington_thermal_lethality_probability": "the tsao and perry coefficients, the lees coefficients, the intensity left in watts, the four thirds power dropped, a base ten logarithm, the exposure time in minutes, phi of the probit itself",
+  "pennington_toxic_lethality_probability": "the toxic load exponent ignored, the exposure time in seconds, the other sources coefficients for the same substance, phi of the probit itself, a base ten logarithm",
+  "pennington_ammonia_lethality_probability": "the mg fed straight into a ppm preset, the conversion turned upside down, the molar volume at twenty five c, the molar volume at zero c, the other sources mg coefficients, the toxic load exponent ignored, phi of the probit itself",
+  "summary": "routes swept: 18  plausible wrong methods aimed at them: 105  WEAK routes: 0. CLOSEST MISS ACROSS THE WHOLE SWEEP: pennington_thermal_lethality_probability via the_lees_coefficients, 7.923e+3 tolerances away. The wrong-method calculator first reproduces the engine on all 18 routes (1e-12 relative, 1e-9 on the two root searches) and writes the Abramowitz and Stegun 7.1.26 erf out itself. Negative control at tolerance x1e15: 18 of 18 WEAK."
+ },
+ "evidence": {
+  "$comment": "A formula checked for transcription only carries no graded answer. The position for every graded quantity, read from FINDINGS-consequence.md section 8 and re-measured in digest section 32.",
+  "liquid and gas outflow": "the Yellow Book worked cases (acrylonitrile, hydrogen) and the oracle route B nozzle maximisation; oracle_check.py re-runs route B on the choked riser",
+  "pool of stated thickness": "the Yellow Book 6.6.3 pool diameter",
+  "plume and distance to a concentration": "the oracle mass flux integral (a lost reflection returns a half) and ALOHA Table 13 read exactly; oracle_check.py re-runs the mass flux integral on the capstone release and solves the far root with brentq",
+  "Thomas with wind, tilt, both surface emissive powers": "the Yellow Book 6.6.3 pool fire, every step within its stated tolerance (digest section 21)",
+  "view factor and heat flux": "the 400 x 400 Gauss-Legendre surface integral; oracle_check.py re-runs it on the capstone flame; the heat flux uses a STATED transmissivity",
+  "Kinney and Graham": "the CBU conference column, which follows 808 and 0.048",
+  "thermal, overpressure and Lees toxic probits": "the OSD/30 Table 17 lethal doses, the Equation 4 printed points and the Table 2 columns; the four graded probabilities agree with an exact CDF to six decimals",
+  "never graded": "Mackay and Matsugu, Bagster, Burgess, the TNT equivalence, Thomas still air (single route); Purple Book toxic presets (one published case, CO, only); any inverse of the normal CDF (the engine inverts its approximate CDF: at one percent the lethal toxic load moves by 0.139897, digest section 30); dropped scope; point source heat radiation, setbacks, frequencies, risk"
+ },
+ "history": {
+  "position": "THIS ENGINE HAS NO REPAIR HISTORY: written, oracle-gated and merged in one pull request (engines #223); #231 added own-property preset lookups with no numeric output moved. No history module, no framed history section. The errata the course teaches are facts about published sources (Yellow Book 6.6.3 Froude number, viscosity and distances; Table 2.8 at time zero; Table 6.A.1 misprints; OSD/30 TNO row and Equation 4; the CBU printed constants)."
+ },
+ "scopeSeams": {
+  "point source heat radiation and setbacks": "OWNED BY the live FC1 (layout, spacing.js) and FC5 (relief and flare, relief.js) courses. The engine does not export them (a test asserts it); this course grades only the solid flame, and gate_vocabulary.py allows the words only in the declared seam lessons and never the API 521 level figures.",
+  "QRA: individual risk, PLL, F-N, ALARP, ICAF": "OWNED BY the later H5 course. Named only in the seam lessons; never computed or graded.",
+  "risk matrices": "OWNED BY riskchange (and EC6).",
+  "BTEX, oil in water, tank venting": "OWNED BY FC4, FC7 and FC8.",
+  "GHG and emissions": "OWNED BY MD5."
+ },
+ "namingCollisions": {
+  "flux": "heat flux (W/m2), burning flux (kg/(m2 s)), evaporation flux and mass flux all appear here; always qualified. Gated.",
+  "beta": "a vapour fraction, an orifice diameter ratio and a beta factor elsewhere; here only inside \"k beta\". Gated.",
+  "dose": "a radiation dose in occupational hygiene; always thermal dose, toxic load, toxic dose or lethal dose. Gated.",
+  "severity and likelihood": "matrix words; never used. Gated.",
+  "radiation": "ionising radiation elsewhere; always heat or thermal radiation. Gated.",
+  "gamma": "the heat capacity ratio Cp/Cv here; a gas specific gravity in production courses. Written \"heat capacity ratio\" in prose."
+ },
+ "openItems": {
+  "engine defects": "None found in the graded paths. The oracle replay agrees to 4.07e-13 relative on closed forms and roots, and every published value the digest reruns reproduces within its stated tolerance.",
+  "engine doubt: the inverse probit": "probabilityToProbit and probitDoseForProbability bisect on the lib/stats Abramowitz and Stegun CDF (|error| <= 1.5e-7), so a dose read back from one percent is off the exact inverse by about one part in a million (0.139897 on the lees-chlorine one percent toxic load). Not a defect for a lethality band; it is why no inverse is graded. An exact inverse (Acklam or a Newton step on erfc) would remove it; owner decision, not needed for this course.",
+  "engine doubt: sourcing weaknesses taught as such": "the Kinney and Graham Z range is borrowed from Kingery-Bulmash (FINDINGS 5); the Briggs advisory range is from memory of textbooks; the hydrogen golden gamma 1.405 is inferred; the CBU table is secondary. Each is taught as a judgement or an inference and none carries a graded answer beyond Kinney and Graham inside its range.",
+  "capstone design decisions": "the dispatch proposed grading the one percent toxic dose; replaced by a Lees ammonia probability fed in mg/m3 at a stated temperature (the dose inherits the approximate inverse); the thermal probit value was replaced by the thermal lethality probability because every sibling integer count from 1 to 12 sits at a 0.5 tolerance and blocks a probit value in that range; the Purple Book ammonia preset was replaced by the Lees one because only Lees presets have an independent published check."
+ },
+ "digest": {
+  "lines": 1065,
+  "sections": 34,
+  "md5": "304fb44e8c1a006c3d7e4784930f5111",
+  "sha256": "6aaed9c79a91df348f88f21baf13fd5f006b91648228a1887a50aeb060f00456"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "af9717b1a6f661a5084b805911b8ed4a047f5a0ea6354a91eea333199bc5ec62",
+  "keys": [
+   "okan_condensate_leak_mass_rate_kg_s",
+   "okan_gas_riser_choked_mass_rate_kg_s",
+   "okan_vent_subsonic_mass_rate_kg_s",
+   "okan_deck_spill_equivalent_diameter_m",
+   "okan_plume_receptor_concentration_ppm",
+   "okan_plume_far_distance_m",
+   "yokri_flame_length_with_wind_m",
+   "yokri_flame_tilt_deg",
+   "yokri_surface_emissive_power_mudan_w_m2",
+   "yokri_surface_emissive_power_actual_w_m2",
+   "yokri_view_factor_max",
+   "yokri_solid_flame_heat_flux_w_m2",
+   "pennington_blast_overpressure_pa",
+   "pennington_blast_distance_for_overpressure_m",
+   "pennington_overpressure_fatality_probability",
+   "pennington_thermal_lethality_probability",
+   "pennington_toxic_lethality_probability",
+   "pennington_ammonia_lethality_probability"
+  ]
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "258873763384bde361a63f51831994fb",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "h4_capstone.mjs": {
+   "md5": "7cbb190b5596d2e79839294d473d5629",
+   "command": "node h4_capstone.mjs --json",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h4_capstone: 144 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "5f91740117093658387bf3047d6c69d3",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h4_capstone: 144 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "5f91740117093658387bf3047d6c69d3",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "h4_capstone: 144 label-and-call and scenario assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "37248f85d2c0a322595d2bc0e9653bb3",
+   "command": "/root/hseenv/bin/python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded fields replayed through the vendored oracle, worst relative difference 4.07e-13 on the closed forms and roots; 4 probabilities within 2e-7 absolute and identical at six decimals; 8 decisions and s"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "37248f85d2c0a322595d2bc0e9653bb3",
+   "command": "/root/hseenv/bin/python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: yokri_view_factor_max perturbed by ten tolerances; caught 1"
+  },
+  "discriminate.mjs": {
+   "md5": "c59a1d15d08536b137effe9c51743127",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: pennington_thermal_lethality_probability via the_lees_coefficients, 7.923e+3 tolerances away"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "c59a1d15d08536b137effe9c51743127",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh hse-wip-consequence",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h4_dump: 1252 label-and-call, measurement and claim assertions run, 0 failed; 34 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules hse-wip-consequence",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/hse-wip-consequence/digest.txt: 1065 line(s), 34 section title(s) and 67 in-body marker(s) swept against their blocks, 32 history framings, 28 engine pin(s); 0 warned for a human read and 0 framed as "
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py hse-wip-consequence",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py hse-wip-consequence",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py hse-wip-consequence",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py hse-wip-consequence",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py hse-wip-consequence",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/hse-wip-consequence: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 8 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py hse-wip-consequence",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py hse-wip-consequence",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "b0ad045fdde06820ae05fe5801d3a77d",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "b0ad045fdde06820ae05fe5801d3a77d",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "b0ad045fdde06820ae05fe5801d3a77d",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "b0ad045fdde06820ae05fe5801d3a77d",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "b0ad045fdde06820ae05fe5801d3a77d",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "67e6cf549faf6775b513ae69e9fa072d",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "67e6cf549faf6775b513ae69e9fa072d",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_vocabulary.py": {
+   "md5": "76e50d2307759011b90dc5af9e47ef80",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 3, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "76e50d2307759011b90dc5af9e47ef80",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected ['bare beta', 'bare dose', 'bare flux', 'bare radiation', 'leak: an API 521 level figure', 'leak: quantitative risk', 'likelihood', 'severity'] caught; got ['bare beta', 'bare dose', 'bare flux"
+  },
+  "gate_claims.mjs": {
+   "md5": "11f174289cc25750cda97088b29c0f0d",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "11f174289cc25750cda97088b29c0f0d",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 2."
+  },
+  "lengths.py --selftest": {
+   "md5": "185ebcd9c8d5a7935e14fa34739ca9ab",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "scaffold.py --dry-run": {
+   "md5": "3bac048d26480e7bf55d3c7dd9699f7f",
+   "command": "python3 scaffold.py --dry-run",
+   "expected": 0,
+   "exit": 0,
+   "summary": "manifests: 3"
+  },
+  "check-vendored-engines.mjs": {
+   "md5": "c1d8057c44e495f3662ca7640c368f4d",
+   "command": "node /root/wt-h4-nextgen/tools/check-vendored-engines.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "vendored engines clean against canonical df31f53: 747 path(s) compared byte for byte, 874 canonical, 750 vendored, 240 recorded deviation(s) (0-out-of-scope-domain 54, 1-test-layer-gap 73, 2-copy-pass-held 2, 3-productio"
+  }
+ }
+}

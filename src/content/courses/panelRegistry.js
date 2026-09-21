@@ -199,6 +199,10 @@ export const PANELS = {
   'fc-sizing-explorer': React.lazy(() => import('@/components/course/panels/relief/SizingExplorer')),
   'fc-fire-drum-explorer': React.lazy(() => import('@/components/course/panels/relief/FireDrumExplorer')),
   'fc-blowdown-explorer': React.lazy(() => import('@/components/course/panels/relief/BlowdownExplorer')),
+  // H4 Consequence Modelling (academy module hse)
+  'cq-release': React.lazy(() => import('@/components/course/panels/consequence/ReleaseExplorer')),
+  'cq-fire': React.lazy(() => import('@/components/course/panels/consequence/FireExplorer')),
+  'cq-harm': React.lazy(() => import('@/components/course/panels/consequence/HarmExplorer')),
 
   // FC6 Heat Exchange & Cooling
   'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),
