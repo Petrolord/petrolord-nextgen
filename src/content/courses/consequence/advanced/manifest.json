@@ -1,0 +1,359 @@
+{
+ "app_slug": "consequence",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-tnt-and-the-scaled-distance",
+   "title": "TNT and the Scaled Distance",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-the-tnt-equivalent-mass",
+     "title": "The TNT equivalent mass",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-cube-root-scaling",
+     "title": "Cube root scaling",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-kinney-and-graham-overpressure",
+     "title": "The Kinney and Graham overpressure",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-range-the-fit-is-used-over",
+     "title": "The range the fit is used over",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-blast-field",
+   "title": "The Blast Field",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-overpressure-against-distance",
+     "title": "Overpressure against distance",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-distance-for-an-overpressure",
+     "title": "The distance for an overpressure",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-printed-constants-and-a-computed-column",
+     "title": "Printed constants and a computed column",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-a-free-air-burst-leaves-out",
+     "title": "What a free air burst leaves out",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-probits",
+   "title": "Probits",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-a-probit-and-a-probability",
+     "title": "A probit and a probability",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-printed-probit-table",
+     "title": "The printed probit table",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-thermal-probits-and-the-four-thirds",
+     "title": "Thermal probits and the four thirds",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-four-thermal-presets-that-disagree",
+     "title": "Four thermal presets that disagree",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-overpressure-probit",
+     "title": "The overpressure probit",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-toxic-probits",
+   "title": "Toxic Probits",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-toxic-load",
+     "title": "The toxic load",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-two-sources-for-one-substance",
+     "title": "Two sources for one substance",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-preset-in-the-other-unit",
+     "title": "A preset in the other unit",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm",
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-concentration-that-changes",
+     "title": "A concentration that changes",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-what-the-engine-does-not-do",
+   "title": "What the Engine Does Not Do",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-releases-it-does-not-model",
+     "title": "Releases and plumes it does not model",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-fires-and-blasts-it-does-not-model",
+     "title": "Fires and blasts it does not model",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-harm-it-does-not-model",
+     "title": "Harm it does not model",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-single-route-quantities",
+     "title": "The single route quantities",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "cq-fire",
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-inverse-probit-is-approximate",
+     "title": "The inverse probit is approximate",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-judgement-end-to-end",
+   "title": "Judgement, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-from-release-to-harm",
+     "title": "From release to harm",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "cq-release",
+      "cq-fire",
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-belongs-to-other-courses",
+     "title": "What belongs to other courses",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-consequence-note",
+     "title": "Writing the consequence note",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "cq-harm"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
