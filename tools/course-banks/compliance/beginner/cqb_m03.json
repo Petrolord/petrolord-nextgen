@@ -8,10 +8,10 @@
    "On track, because the recorded lead time of 14 wins over a new one."
   ],
   "answer": 2,
-  "explanation": "The digest prints 17 as Due soon. Only the lead time changed, and that alone turned On track into Due soon: the window now reaches the 16 days that remain."
+  "explanation": "The course prints 17 as Due soon. Only the lead time changed, and that alone turned On track into Due soon: the window now reaches the 16 days that remain."
  },
  {
-  "prompt": "In the digest's lead time table for REG-2026-003, what is the largest lead time that still leaves the return On track?",
+  "prompt": "In the course's lead time table for REG-2026-003, what is the largest lead time that still leaves the return On track?",
   "options": [
    "15",
    "14",
@@ -30,7 +30,7 @@
    "Due soon, so the edge belongs inside the window."
   ],
   "answer": 3,
-  "explanation": "The digest prints 15 On track and 16 Due soon. A lead time equal to the 16 days that remain puts the return inside its window, and the row reads Due soon."
+  "explanation": "The course prints 15 On track and 16 Due soon. A lead time equal to the 16 days that remain puts the return inside its window, and the row reads Due soon."
  },
  {
   "prompt": "REG-2026-003 is given the word 'ten' as its lead time. What does it read, and where does its window come from?",
@@ -63,7 +63,7 @@
    "On track, the status it carries with a lead time of 0."
   ],
   "answer": 0,
-  "explanation": "The digest prints -5 as Due soon. With no usable lead time the engine uses DEFAULT_LEAD_TIME_DAYS, and a negative number is not usable."
+  "explanation": "The course prints -5 as Due soon. With no usable lead time the engine uses DEFAULT_LEAD_TIME_DAYS, and a negative number is not usable."
  },
  {
   "prompt": "REG-2026-012, the annual concession rental, is Due soon at 25 days. Its reason names a lead time. What is recorded as its lead time on the register?",
@@ -118,7 +118,7 @@
    "Overdue as recorded, and On track with the filing dated 2026-03-31."
   ],
   "answer": 0,
-  "explanation": "Dated 2026-03-30 the filing belongs to the earlier period. Dated 2026-03-31, the first day of the period, it counts, and the digest prints status Compliant. The first day of the period is inside the period."
+  "explanation": "Dated 2026-03-30 the filing belongs to the earlier period. Dated 2026-03-31, the first day of the period, it counts, and the course prints status Compliant. The first day of the period is inside the period."
  },
  {
   "prompt": "REG-2026-002, the monthly water quality return, was due 2026-10-10 and was last filed 2026-09-09. Its period starts 2026-09-10. What does it read, and why?",

@@ -8,7 +8,7 @@
    "The due date, 2026-12-11, which has not yet arrived."
   ],
   "answer": 2,
-  "explanation": "The digest prints the correction refusal for ISF-2026-005: \"Record the correction: what was done about the thing that was found. A corrective action deals with the cause, and this is the other half.\" The correction is the first thing the gate asks for."
+  "explanation": "The course prints the correction refusal for ISF-2026-005: \"Record the correction: what was done about the thing that was found. A corrective action deals with the cause, and this is the other half.\" The correction is the first thing the gate asks for."
  },
  {
   "prompt": "A Minor nonconformity has its correction recorded and no actions at all. What does canCloseFinding answer?",
@@ -19,7 +19,7 @@
    "ALLOWED only once an effectiveness check is recorded on the correction."
   ],
   "answer": 0,
-  "explanation": "The digest prints: a Minor nonconformity with its correction and no actions: ALLOWED. isoCompliance.EFFECTIVENESS_REQUIRED_TYPES holds Major nonconformity alone, and the root cause refusal is written for a major nonconformity."
+  "explanation": "The course prints: a Minor nonconformity with its correction and no actions: ALLOWED. isoCompliance.EFFECTIVENESS_REQUIRED_TYPES holds Major nonconformity alone, and the root cause refusal is written for a major nonconformity."
  },
  {
   "prompt": "On the Major nonconformity walk, the record holds a correction, a root cause and only a preventive action. Which requirement refuses it?",
@@ -52,7 +52,7 @@
    "The correction refusal, since a preventive action carries no correction."
   ],
   "answer": 1,
-  "explanation": "The digest prints: \"1 action still open against this finding.\" The refusal names the first thing missing on the walk, and ac1 is it."
+  "explanation": "The course prints: \"1 action still open against this finding.\" The refusal names the first thing missing on the walk, and ac1 is it."
  },
  {
   "prompt": "Suppose ac1 on ISF-2026-004 were completed and never checked. What would the record still lack before the finding could close?",
@@ -74,7 +74,7 @@
    "ac3, Corrective, on ISF-2026-005, Open with no verdict"
   ],
   "answer": 0,
-  "explanation": "The digest names ac4 as the one Complete action with no effectiveness verdict recorded. ac1 and ac3 are still open, and ac2 reads verified effective true."
+  "explanation": "The course names ac4 as the one Complete action with no effectiveness verdict recorded. ac1 and ac3 are still open, and ac2 reads verified effective true."
  },
  {
   "prompt": "Which root cause categories appear only in the ISO list?",
@@ -96,7 +96,7 @@
    "The ISO list less Management system, a category kept for ISO registers."
   ],
   "answer": 2,
-  "explanation": "The digest prints: auditManagement.ROOT_CAUSE_CATEGORIES is the same list object as isoCompliance's: true. One list, so nothing can drift apart. auditManagement.canCloseFinding is the same function as isoCompliance's as well."
+  "explanation": "The course prints: auditManagement.ROOT_CAUSE_CATEGORIES is the same list object as isoCompliance's: true. One list, so nothing can drift apart. auditManagement.canCloseFinding is the same function as isoCompliance's as well."
  },
  {
   "prompt": "isoCompliance.isActionOverdue is the same function as qualityAssurance.isCapaOverdue. What follows?",

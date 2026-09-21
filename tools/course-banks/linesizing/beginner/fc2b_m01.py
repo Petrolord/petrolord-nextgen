@@ -10,7 +10,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 q(0, "A gathering system has four flowlines arriving at one header, and how the flow divides between them is unknown. What does this engine do with that problem?",
  "Nothing, because it sizes one line and nothing in it knows another line exists. A system of lines sharing a header is a network solve and lives in engines/production/networkSolve.js.",
  ["It sizes the four in turn and then balances them, iterating over the four rates until the pressures the four lines report at the shared header agree with each other to a stated tolerance.",
-  "It refuses, returning an object carrying an error string, because a shared header is one of the eighteen states Section 1 lists as having no answer in this method.",
+  "It refuses, returning an object carrying an error string, because a shared header is one of the eighteen states listed as having no answer in this method.",
   "It sizes the four separately and adds the four pressure drops together, and that sum is the header pressure a network solve would have returned for the same system."],
  "The engine takes a rate per line and returns what that one pipe spends. On OGBIA that is 25.660631 psi at 2.244621 ft/s, and every input on the call describes the one pipe."),
 
@@ -29,7 +29,7 @@ q(1, "A caller needs to know whether a liquid line call succeeded. What does thi
  "The engine returns { error: \"liquid line drop needs positive rate, bore, length, density and viscosity\" } rather than raising anything, so one code path carries both a result and a refusal."),
 
 q(3, "A liquid line call comes back with the message that it needs positive rate, bore, length, density and viscosity. How much has the caller been told about which input was at fault?",
- "Nothing about which one. Five of the eighteen states Section 1 lists produce that identical string, and it states the contract the five inputs share rather than pointing at the offender.",
+ "Nothing about which one. Five of the eighteen states the course lists produce that identical string, and it states the contract the five inputs share rather than pointing at the offender.",
  ["That the rate was at fault, since the message lists the five inputs in the order the guard tests them and the offending one is always named first.",
   "That exactly one of the five was missing, since a value that arrived negative produces a separate message naming the sign rather than this one.",
   "That the bore, the length and the density were all usable, since the message names only the inputs the guard could not accept and leaves out the ones it could."],
@@ -56,18 +56,18 @@ q(3, "Liquid work in this engine is stated in feet and gas work in miles. What d
   "It converts miles to feet on the liquid side as well, so a liquid line handed 5280.000000000 ft and one handed 1.000000 mile both come back with the same 25.660631 psi."],
  "The mile is a measured boundary in the code rather than a note beside it. The OGBIA liquid line is stated as 26400.000000 ft, and the engine wants feet there."),
 
-q(1, "gc is reported as 32.174000 lbm ft per lbf s2. How was that figure obtained for this digest?",
+q(1, "gc is reported as 32.174000 lbm ft per lbf s2. How was that figure obtained for this course?",
  "By measuring it out of the engine, as the density times the velocity squared over twice 144 times the fittings loss at a resistance sum of one, from 2.244621 ft/s and 0.029634 psi.",
  ["By reading it off the module, which exports gc along with the other constants the chain needs so that a caller can reproduce any step of the arithmetic by hand.",
   "By typing the published value, since gc is a definition of the pound rather than anything an engine computes, so no question that could be put to the engine would ever return the figure itself.",
   "By dividing the friction loss of 25.660631 psi by the velocity head at a resistance sum of one, which cancels the length and the friction factor between them and leaves gc standing on its own."],
  "gc reconciles the pound as a mass with the pound as a force. Isolating it needs a call whose only loss is the fittings term, which is why the resistance sum of one is used."),
 
-q(2, "Why does this digest measure gc, the centipoise, the barrel and the day out of the engine rather than printing their published values?",
+q(2, "Why does this course measure gc, the centipoise, the barrel and the day out of the engine rather than printing their published values?",
  "Because the module keeps those constants to itself, so a number typed into a teaching file would not be an engine return.",
  ["Because the engine's own values differ slightly from the published ones, and what the chain actually used is what a reader has to be given to reproduce any figure in it.",
   "Because each of the four is a derived group with no published value behind it anywhere, so measuring it out of the engine is the only route to any figure at all.",
-  "Because the module exports them under names this digest has no way to import, so asking the engine a question about itself is how a present but unreachable value is recovered."],
+  "Because the module exports them under names this course has no way to import, so asking the engine a question about itself is how a present but unreachable value is recovered."],
  "One centipoise comes back as 6.7197000000e-4 lbm per ft per s and one barrel as 5.6145833333333 cubic feet, each recovered by choosing inputs that isolate it."),
 
 q(0, "Working the OGBIA chain from the bore to the loss, which single step waits on anything, and what does that mean for the rest?",
@@ -84,7 +84,7 @@ q(3, "A report quotes 25.660631 psi for OGBIA crude. What is wrong with carrying
   "It needs rescaling by the ratio of the two bores and by nothing else, since the bore reaches the friction loss exactly once, through the length over bore factor that stands in front of the velocity head."],
  "12000.000000 bpd through 7.981000 in spends 25.660631 psi and through 6.065000 in spends 97.306913 psi. The method travels between lines and the numbers do not."),
 
-q(1, "On the liquid side, one of the states Section 1 lists is about the shape of the input rather than about a physical impossibility. Which is it, and how does it arrive?",
+q(1, "On the liquid side, one of the states the course lists is about the shape of the input rather than about a physical impossibility. Which is it, and how does it arrive?",
  "A traverse handed no profile segment, and it arrives exactly as the others do, as an object carrying { error: \"a traverse needs at least one profile segment\" }.",
  ["A liquid line handed a negative rate, and it arrives as a thrown exception, because a sign error is a fault in the calling code rather than a state the method has no answer for.",
   "A wall specified to a design code that does not exist, and it arrives as a null return so that a caller can test for it without having to read and compare a message string.",

@@ -26,7 +26,7 @@ q(0, "AK-01's 250 mm table and the same tank strapped every 10 mm both read 3542
   "Both volumes are rounded to the litre, which hides what a coarse step costs."],
  "Every millimetre of a vertical cylinder adds the same slice, so a coarser step costs nothing at the dip: 3542.077 m3 and 3542.077 m3.")
 
-q(2, "At 41 mm on AK-03 the 100 mm table reads 0.341 m3 and the 10 mm table 0.220 m3. Which figure does the digest print for the 100 mm table less the 10 mm table?",
+q(2, "At 41 mm on AK-03 the 100 mm table reads 0.341 m3 and the 10 mm table 0.220 m3. Which figure does the course print for the 100 mm table less the 10 mm table?",
  "0.120 m3",
  ["-0.007 m3, the difference at that tank's morning dip",
   "0.341 m3, since the finer table reads no water",

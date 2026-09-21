@@ -66,7 +66,7 @@
   "explanation": "A loss of 0.8 percent is a volume shrinkage on the product side. 0.0696 is how far the after-the-costs reading lands from the engine's netback of 64.9473."
  },
  {
-  "prompt": "If the loss percent is taken off the netback after processing and freight, what does the digest print?",
+  "prompt": "If the loss percent is taken off the netback after processing and freight, what does the course print?",
   "options": [
    "65.5412 $/bbl, which is 0.5939 above the engine's netback.",
    "64.9473 $/bbl, which is 0.0000 from the engine's netback.",
@@ -74,7 +74,7 @@
    "65.0169 $/bbl, which is 0.0696 above the engine's netback."
   ],
   "answer": 3,
-  "explanation": "The engine takes losses off the product value before the costs, and this reading takes them off a figure that already has processing and freight removed. The digest prints it at 65.0169, 0.0696 from the engine's 64.9473. 65.5412 is the reading with losses left out."
+  "explanation": "The engine takes losses off the product value before the costs, and this reading takes them off a figure that already has processing and freight removed. The course prints it at 65.0169, 0.0696 from the engine's 64.9473. 65.5412 is the reading with losses left out."
  },
  {
   "prompt": "Why are processing cost and freight not reduced by the product losses?",
@@ -96,7 +96,7 @@
    "The processing cost, 6.8000 $/bbl of crude, taken off before freight."
   ],
   "answer": 2,
-  "explanation": "The losses left out reading is 65.5412 against the engine's 64.9473, and the digest prints that difference as 0.5939, the figure it also prints as the value lost to losses at 0.8 percent."
+  "explanation": "The losses left out reading is 65.5412 against the engine's 64.9473, and the course prints that difference as 0.5939, the figure it also prints as the value lost to losses at 0.8 percent."
  },
  {
   "prompt": "The engine can return assumedZero, unpricedCuts and unyieldedCuts. Which of them leaves the valuation complete?",

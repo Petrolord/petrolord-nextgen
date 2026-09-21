@@ -140,7 +140,7 @@
    "Nothing: a rejection changes nothing, so the engine records it as it stands with no reason attached to it."
   ],
   "answer": 0,
-  "explanation": "A rejection must carry its reason. With the reason, the digest records the rejection as ALLOWED. The question about adopted, adapted or rejected is the refusal for an outcome the register does not know."
+  "explanation": "A rejection must carry its reason. With the reason, the course records the rejection as ALLOWED. The question about adopted, adapted or rejected is the refusal for an outcome the register does not know."
  },
  {
   "prompt": "The ONNE summary counts applications 6, applied 4 and rejected 2. Which applications make up the 4?",

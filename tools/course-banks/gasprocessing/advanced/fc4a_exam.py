@@ -212,7 +212,7 @@ q(0, "Of 180.000000 ppmv, an absorbed fraction of 0.150000, 405.8358 lb a day an
 
 # --- computed, chosen and kept (m05) ---
 
-q(1, "Digest Section 20 is the one section whose subject is what this engine used to do, and it says so in its title and its first line. What does the course require of a sentence drawn from it?",
+q(1, "One section of this course is about what this engine used to do, and it says so in its title and its first line. What does the course require of a sentence drawn from it?",
  "That it say plainly that this is what the engine used to do.",
  ["That it name the finding number the repair recorded it under, so a reader can trace it.",
   "That it be quoted verbatim, because a paraphrase of a historical claim cannot be checked against the source.",

@@ -16,11 +16,11 @@ q(1, "The saturation routine used at the cold end is the same one the Associate 
   "It is corrected for the real-gas departure before the two answers are subtracted."],
  "Nothing about the routine changes. Two reads of one routine at two states is the whole of the cold separator arithmetic.")
 
-q(2, "What does the digest print for the cold water content read against the warm one, and what kind of quantity is it?",
+q(2, "What does the course print for the cold water content read against the warm one, and what kind of quantity is it?",
  "0.555085832, a dimensionless ratio of the two saturated contents.",
  ["0.555085832 lb per MMscf, the content the gas leaves the separator with.",
   "15.038835973, the free water that appears in the boot, expressed against the inlet.",
-  "0.916066108, which is the ratio the digest prints between two of the march's own coefficients."],
+  "0.916066108, which is the ratio the course prints between two of the march's own coefficients."],
  "Both contents are in lb per MMscf, so their ratio carries no units at all. A figure that is a ratio and a figure that is a content answer different questions.")
 
 q(0, "The engine's second answer is a saturated water content at the cold state. What does calling it the water the gas carries onward assume?",
@@ -70,7 +70,7 @@ q(2, "What does the shape of that four-row table recommend as a method, wherever
  ["Hold the input with the larger effect fixed and sweep the other, since a two-way sweep costs more calls than the answer is worth.",
   "Form the ratio of the two single-change answers, which is the figure that says how the two effects trade against one another.",
   "Take the combined answer and subtract each single change in turn, which leaves the interaction between the two inputs as a residual."],
- "The second and third rows are a designed comparison rather than two unrelated answers. Where the digest prints a table and no ratio between the rows, forming one produces a figure nothing stands behind.")
+ "The second and third rows are a designed comparison rather than two unrelated answers. Where the course prints a table and no ratio between the rows, forming one produces a figure nothing stands behind.")
 
 q(1, "Why is what a dew point skid sells described as a depression rather than as an outlet water content?",
  "The cooling is the property of the unit and the water content is the property of the state the gas ends at, which is a pressure as well as a temperature.",

@@ -107,7 +107,7 @@
    "It counts as half an audit, between reported and outstanding."
   ],
   "answer": 1,
-  "explanation": "Reported 3 counts AUD-2026-001, AUD-2026-002 and AUD-2026-003, and AUD-2026-004 sits in cancelled 1, in neither reported nor outstanding. A programme is delivered when its audits are reported, and the digest records that the programme counts reported audits only, which is why a complete programme that contains a cancelled audit reads below one hundred percent by design."
+  "explanation": "Reported 3 counts AUD-2026-001, AUD-2026-002 and AUD-2026-003, and AUD-2026-004 sits in cancelled 1, in neither reported nor outstanding. A programme is delivered when its audits are reported, and the course records that the programme counts reported audits only, which is why a complete programme that contains a cancelled audit reads below one hundred percent by design."
  },
  {
   "prompt": "What does the Expert tier put in place of this tier's percents when it reads certification readiness?",

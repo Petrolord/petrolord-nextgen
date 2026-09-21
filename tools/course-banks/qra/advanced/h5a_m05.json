@@ -8,7 +8,7 @@
    "No integral of any kind, the expected value sum of f times N included, because no published worked F-N example was available to test one."
   ],
   "answer": 2,
-  "explanation": "The digest says the engine has no aversion weighted risk integral because no source it read defines one, and it implements the expected value sum of f times N instead. The alpha of 2 is the slope of a criterion line, which is no weighting of the curve, and the engine takes no weighting input at all. The expected value sum is computed and reported with the curve."
+  "explanation": "The course says the engine has no aversion weighted risk integral because no source it read defines one, and it implements the expected value sum of f times N instead. The alpha of 2 is the slope of a criterion line, which is no weighting of the curve, and the engine takes no weighting input at all. The expected value sum is computed and reported with the curve."
  },
  {
   "prompt": "An analyst wants the single R2P2 societal point extended into a line so the whole F-N curve can be compared with it. What does the engine provide?",
@@ -41,7 +41,7 @@
    "Bevi exists only as an unpublished draft, so the analyst treats the three points as the engine's own estimate of the Dutch values."
   ],
   "answer": 1,
-  "explanation": "The digest says Bevi was repealed on 1 January 2024 and the engine did not read its successor, so the analyst treats the Dutch line as a historical published comparison. Nothing is known about the successor's points or slope, so neither claim about it can be made. The three Bevi points are published and lie on the Purple Book line."
+  "explanation": "The course says Bevi was repealed on 1 January 2024 and the engine did not read its successor, so the analyst treats the Dutch line as a historical published comparison. Nothing is known about the successor's points or slope, so neither claim about it can be made. The three Bevi points are published and lie on the Purple Book line."
  },
  {
   "prompt": "Which of these is a published, reproduced check on the societal side of the engine, where the F-N curve itself has no published worked example?",
@@ -52,7 +52,7 @@
    "The Fd fractions indoors and outdoors, reproduced against the numeric example that the Purple Book prints beside Table 5.3."
   ],
   "answer": 2,
-  "explanation": "The digest says what IS published and reproduced is the criterion side: the Bevi points on the line and the printed R2P2 point. The CCPS and HSE worked examples were not available. The area identity is a self-consistency check with no published source behind it, and the Purple Book prints no numeric example for the Fd fractions."
+  "explanation": "The course says what IS published and reproduced is the criterion side: the Bevi points on the line and the printed R2P2 point. The CCPS and HSE worked examples were not available. The area identity is a self-consistency check with no published source behind it, and the Purple Book prints no numeric example for the Fd fractions."
  },
  {
   "prompt": "No published worked F-N example was available to the engine. How is its F-N curve checked, and what may an ALARP note therefore claim?",
@@ -63,7 +63,7 @@
    "It is not checked at all, so the note must leave the societal picture out and report the individual risk of the most exposed person only."
   ],
   "answer": 0,
-  "explanation": "The digest lists the three self-consistency checks and says the course never presents an F-N figure as a published reproduction. The Purple Book prints no worked F-N curve. A criterion line is a comparison, which verifies nothing about the curve's own arithmetic. The curve is checked, so the societal picture belongs in the note, with its checks stated."
+  "explanation": "The course lists the three self-consistency checks and says it never presents an F-N figure as a published reproduction. The Purple Book prints no worked F-N curve. A criterion line is a comparison, which verifies nothing about the curve's own arithmetic. The curve is checked, so the societal picture belongs in the note, with its checks stated."
  },
  {
   "prompt": "What does the area identity check on the JISIKE off-site curve, and what does it return?",
@@ -85,7 +85,7 @@
    "Their owner: each belongs to the facilities courses, so the analyst must fetch the values from there and never state them."
   ],
   "answer": 1,
-  "explanation": "The digest says each is a single transcription with no published example to test it, and the analyst states the values used and their source; a capstone states every ignition probability and the split for the same reason. They are probabilities and fractions, which carry no per year unit and no price year. They are part of this engine, stated by the analyst, and no other course supplies them."
+  "explanation": "The course says each is a single transcription with no published example to test it, and the analyst states the values used and their source; a capstone states every ignition probability and the split for the same reason. They are probabilities and fractions, which carry no per year unit and no price year. They are part of this engine, stated by the analyst, and no other course supplies them."
  },
  {
   "prompt": "The engine's own validation planted a wrong clothing factor in both the engine and its oracle, and the suite stayed green. What does the course conclude about the Fd fractions?",
@@ -96,7 +96,7 @@
    "That the suite is broken, so the analyst runs the oracle alone and quotes its fractions in place of the engine's figures."
   ],
   "answer": 2,
-  "explanation": "The digest records the planted factor as the reason the course never grades a number that passes through the Fd rules: a wrong value shared by the engine and its oracle agrees with itself. It says nothing is wrong with today's factor. The fractions are for societal risk and are not a vulnerability factor, and the oracle shares the same transcription, so it is no escape."
+  "explanation": "The course records the planted factor as the reason it never grades a number that passes through the Fd rules: a wrong value shared by the engine and its oracle agrees with itself. It says nothing is wrong with today's factor. The fractions are for societal risk and are not a vulnerability factor, and the oracle shares the same transcription, so it is no escape."
  },
  {
   "prompt": "Where does every probability of death this engine uses come from, and what does the engine do about it?",
@@ -107,7 +107,7 @@
    "From the risk matrix, which this course never scores, but whose category the engine converts to a probability of death."
   ],
   "answer": 0,
-  "explanation": "The digest says a probability of death is the output of consequence modelling in the consequence course, and this course takes it as a stated input and records its source. Table 5.3 gives fractions of a population indoors. A leaf probability is the probability of a path, never of death. The risk matrix belongs to the risk and change course, and no matrix category becomes a Pd here."
+  "explanation": "The course says a probability of death is the output of consequence modelling in the consequence course, and this course takes it as a stated input and records its source. Table 5.3 gives fractions of a population indoors. A leaf probability is the probability of a path, never of death. The risk matrix belongs to the risk and change course, and no matrix category becomes a Pd here."
  },
  {
   "prompt": "A full assessment needs a grid of points, a wind rose and a population map. What does the engine do with them?",
@@ -118,7 +118,7 @@
    "Nothing: the caller supplies each scenario frequency and Pd, so the analyst does that bookkeeping and records it."
   ],
   "answer": 3,
-  "explanation": "The digest says the engine does no grid or wind rose bookkeeping; the caller supplies each scenario frequency and probability of death. The 12 wind sectors of Appendix 6.B are that worked example's stated inputs, which are no engine default. The Fd fractions are for societal risk, never a vulnerability factor for individual risk."
+  "explanation": "The course says the engine does no grid or wind rose bookkeeping; the caller supplies each scenario frequency and probability of death. The 12 wind sectors of Appendix 6.B are that worked example's stated inputs, which are no engine default. The Fd fractions are for societal risk, never a vulnerability factor for individual risk."
  },
  {
   "prompt": "The Purple Book limits exposure to a fire to 20 s and to a toxic cloud to 30 minutes. What does the engine do when an exposure runs longer?",
@@ -129,7 +129,7 @@
    "It scales the probability of death down in proportion, so a toxic exposure of 60 minutes counts at half its stated probability of death."
   ],
   "answer": 1,
-  "explanation": "The digest says the engine applies the cap without refusing and states the time used: a toxic exposure of 60 minutes is computed at 30, and the toxic case belongs to the consequence side of the seam. No refusal is raised, the cap is applied by the engine itself, and nothing rescales a stated probability of death."
+  "explanation": "The course says the engine applies the cap without refusing and states the time used: a toxic exposure of 60 minutes is computed at 30, and the toxic case belongs to the consequence side of the seam. No refusal is raised, the cap is applied by the engine itself, and nothing rescales a stated probability of death."
  },
  {
   "prompt": "Purple Book Appendix 6.B prints Pd = 0.381, where the whole chain, as the golden records it, gives 0.380294556093. What explains the gap, and what should a reproduction do?",
@@ -140,7 +140,7 @@
    "The gap comes from the probit, a stated input that belongs to the consequence course, so the gap is left unexplained in the note."
   ],
   "answer": 2,
-  "explanation": "The digest says the whole chain gives 0.380294556093, which rounds to 0.380, and the printed 0.381 follows only from the rounded ECW of 86.2; both routes reproduce the printed contribution of 7e-9 to two significant figures. The gap describes the SOURCE. It is the source that uses R = 361 m for a point at 360.555 m, and the gap is fully explained."
+  "explanation": "The course says the whole chain gives 0.380294556093, which rounds to 0.380, and the printed 0.381 follows only from the rounded ECW of 86.2; both routes reproduce the printed contribution of 7e-9 to two significant figures. The gap describes the SOURCE. It is the source that uses R = 361 m for a point at 360.555 m, and the gap is fully explained."
  },
  {
   "prompt": "Which of these does the engine decline to do, by its own design?",
@@ -151,7 +151,7 @@
    "Re-grade anything the consequence course or the facilities courses own: it exports none of their functions, and the jest suite asserts so."
   ],
   "answer": 3,
-  "explanation": "The digest lists re-grading nothing the consequence or facilities courses own among what the engine does not do: it exports none of their functions. A zero Pd simply contributes zero, the curve is compared with the R2P2 point at N = 50, and a VPF is refused only when it is missing or not above 0."
+  "explanation": "The course lists re-grading nothing the consequence or facilities courses own among what the engine does not do: it exports none of their functions. A zero Pd simply contributes zero, the curve is compared with the R2P2 point at N = 50, and a VPF is refused only when it is missing or not above 0."
  },
  {
   "prompt": "An analyst wants to apply the Purple Book indoor fractions as a vulnerability factor on the EREMOR operator's individual risk. What does the engine's position say?",
@@ -162,6 +162,6 @@
    "The engine computes a vulnerability factor from the operator's hours, so the analyst supplies no factor and the fractions are never used."
   ],
   "answer": 0,
-  "explanation": "The digest says no source the engine read gives a vulnerability factor for individual risk, the Purple Book indoor and outdoor fractions are for societal risk, the default is 1, and the basis records what was supplied. The fractions are no default factor. A factor from 0 to 1 is accepted when the analyst supplies one, and the engine derives nothing from hours beyond the occupancy."
+  "explanation": "The course says no source the engine read gives a vulnerability factor for individual risk, the Purple Book indoor and outdoor fractions are for societal risk, the default is 1, and the basis records what was supplied. The fractions are no default factor. A factor from 0 to 1 is accepted when the analyst supplies one, and the engine derives nothing from hours beyond the occupancy."
  }
 ]

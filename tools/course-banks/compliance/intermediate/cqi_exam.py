@@ -92,7 +92,7 @@ q(0, "An open NCR reaches an age of 31 days. What does ageBand read?",
  ["0 to 30 days, since 31 is its first day past the edge.",
   "61 to 90 days, the band the next month opens.",
   "null, since an edge day belongs to no band."],
- "The digest's edge rows print 30 days in 0 to 30 days and 31 days in 31 to 60 days.")
+ "The course's edge rows print 30 days in 0 to 30 days and 31 days in 31 to 60 days.")
 
 q(3, "NCR-2026-011 was raised on 2026-05-11 and voided on 2026-05-13. What is its age?",
  "2 days.",
@@ -220,7 +220,7 @@ q(3, "canCloseNcr is asked to close NCR-2026-022, which already reads Closed. Wh
  ["ALLOWED, since closing it again changes nothing on it.",
   "REFUSED: Agree the disposition first.",
   "ALLOWED, since its disposition is Use as is."],
- "The digest prints the same refusal for NCR-2026-006, also Closed, and \"This non-conformance is already voided.\" for NCR-2026-011.")
+ "The course prints the same refusal for NCR-2026-006, also Closed, and \"This non-conformance is already voided.\" for NCR-2026-011.")
 
 q(0, "TWO MODULES. What two rules about the lead auditor does this tier read?",
  "There must be one, and it may not also be the auditee.",
@@ -277,7 +277,7 @@ q(1, "A plan has 23 of its 40 points resolved. What percent does planProgress pr
  ["38, the figure for 3 of 8.",
   "13, the figure for 1 of 8.",
   "63, the figure for 5 of 8."],
- "Half up on the exact fraction gives 58 here, and that is the line the digest carries.")
+ "Half up on the exact fraction gives 58 here, and that is the line the course carries.")
 
 q(0, "At the as-of date canCloseNcr allows NCR-2026-019, a Critical NCR. Which record meets the last requirement of the Critical walk?",
  "k4, verified effective.",

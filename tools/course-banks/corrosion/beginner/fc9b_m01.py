@@ -21,7 +21,7 @@ q(3, "Ask this studio for a sour service severity region and for the material ch
   "A severity region in words with no material recommendation attached, because the second was withdrawn and the first was not."],
  "The absence is published as a value of its own. A caller reading a missing property cannot tell a deliberate refusal from an unset one, so both flags come back false on every screening."),
 
-q(0, "The digest proves the withdrawn severity region is genuinely gone three separate ways. Which of these is one of them?",
+q(0, "The course proves the withdrawn severity region is genuinely gone three separate ways. Which of these is one of them?",
  "None of the three material guidance strings and neither standard name appears anywhere in the 783 lines of the engine source.",
  ["The function is still exported, and every call to it now returns an error object that names the standard it is no longer willing to cite.",
   "The vendored golden carries no row for the region, so a case that asked for one would fail the suite.",
@@ -49,7 +49,7 @@ q(0, "A colleague quotes the sour screening threshold as a round 0.05 psia. What
   "Nothing is wrong with it, since the threshold value is held and a held number carries no precision claim."],
  "As a fraction of the smaller number the gap is 1.526417 percent. Measured against the threshold the engine actually uses, a threshold of exactly 0.05 psia is 1.503467 percent below it. Both are right, and each needs its basis stated beside it."),
 
-q(1, "Digest section 3 measures every held constant out of the engine's behaviour and also prints what the engine exports. Why print both columns?",
+q(1, "The course's pin table measures every held constant out of the engine's behaviour and also prints what the engine exports. Why print both columns?",
  "An export says what the module declares and a measurement says what it actually uses, so the two disagreeing would itself be a finding.",
  ["A measurement only reaches a constant that appears in a returned field, so the export column covers the rest.",
   "One column is what the studio prints behind its disclosure and the other is what the oracle carries.",
@@ -61,14 +61,14 @@ q(3, "A paired experiment moved constants in the engine and in the vendored orac
  ["Every one of the 17 was caught by the suite exactly as written, which is the reason the vendored oracle is treated throughout as an independent second derivation of the engine's own answers.",
   "Only the constants that appear in a returned field were caught, so the experiment showed that the suite tests outputs rather than internals.",
   "The suite failed on all 17, but each failure named the wrong constant."],
- "That is why section 3 compares each measured value against a literal in a THIRD file, and why the golden's own copy of the constants is treated as a FOURTH. Any two of them agreeing is no longer enough."),
+ "That is why the pin table compares each measured value against a literal in a THIRD file, and why the golden's own copy of the constants is treated as a FOURTH. Any two of them agreeing is no longer enough."),
 
-q(2, "How many held constants does the digest pin, how many does the engine export by name, and how many does the vendored golden carry in its own block?",
+q(2, "How many held constants does the course pin, how many does the engine export by name, and how many does the vendored golden carry in its own block?",
  "30 pinned, 15 exported and 28 in the golden's own block.",
  ["11 pinned, 8 exported and 17 in the golden, which are the sizes of the two exported lists and of the case block beside them.",
   "30 pinned, 30 exported and 30 carried in the golden, since the whole point of a pin is to force all three independent copies to hold exactly the same entries.",
-  "28 pinned, 15 exported and 30 in the golden, so the generator is the widest of the three copies and the golden the narrowest."],
- "30 constants are pinned in section 3, the engine exports 15 of them by name, and the golden's `heldConstants` block carries 28 that are re-measured against the engine's behaviour."),
+  "28 pinned, 15 exported and 30 in the golden, so the pin table is the widest of the three copies and the golden the narrowest."],
+ "30 constants are pinned in the course, the engine exports 15 of them by name, and the golden's `heldConstants` block carries 28 that are re-measured against the engine's behaviour."),
 
 q(0, "What kind of quantity is the single rate this engine returns?",
  "A general uniform rate, which the engine states in its own list of absences by naming a localised attack rate as something it does not provide.",
@@ -96,12 +96,12 @@ q(2, "One of the studio's unit conversions is truncated far more coarsely than t
  ["The rate conversion to mils a year, where a division by 25.4 and a multiplication by a thousand round before the engine's own figure does.",
   "The density conversion, where 16.0185 stands in for a factor the engine exports to twelve figures and carries into the Reynolds number.",
   "The allowance conversion, where a multiplication by 25.4 loses the definition of the inch that the remaining life arithmetic then divides by."],
- "The definitions of the bar and of the pound force give 14.503773773021, and the engine's factor sits 1.910e-9 above that. The digest measures the engine's factor out of the psia it reports for a partial pressure of exactly 1 bar."),
+ "The definitions of the bar and of the pound force give 14.503773773021, and the engine's factor sits 1.910e-9 above that. The course measures the engine's factor out of the psia it reports for a partial pressure of exactly 1 bar."),
 
 q(0, "What is that truncated divisor worth on the shipped case, and what follows for this course?",
  "Two rates that differ by 1.434e-6 as a fraction, which is why no graded field in this course is converted through the studio.",
  ["Two rates that differ in the second decimal, which is enough to move the band label and is the reason the label is never graded.",
-  "Nothing measurable, because the difference falls below the precision the digest prints and the two conversions give the same double.",
+  "Nothing measurable, because the difference falls below the precision the course prints and the two conversions give the same double.",
   "Two rates that differ by 1.806e-6 as a fraction, which is the same figure as the divisor gap because the rate is linear in the pressure."],
  "Through the studio's divisor the shipped case gives 0.754523654262 mm/yr and through the engine's factor 0.754524736514 mm/yr. All three capstones therefore state their conditions in the engine's units."),
 

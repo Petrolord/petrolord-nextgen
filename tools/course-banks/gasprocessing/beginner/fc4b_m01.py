@@ -36,7 +36,7 @@ q(3, "Which of these figures arrives as an input carrying a default rather than 
   "The mole fraction of water in the gas at line conditions, which the module forms from a vapour pressure and a total pressure."],
  "The overhead is a declared value and an input with 1100.000000 as its default. The other three are computed or derived, so no reader has to accept them on trust."),
 
-q(1, "For four of its constants the digest asks the engine a question whose answer is that constant and nothing else, then divides the measurement by the export. Every one of the four comes back at 1.000000000000. What does that establish?",
+q(1, "For four of its constants the course asks the engine a question whose answer is that constant and nothing else, then divides the measurement by the export. Every one of the four comes back at 1.000000000000. What does that establish?",
  "That the name on the page and the number actually in use are the same number, and nothing whatever about whether the value is right.",
  ["That the constant has a publication behind it, since a figure can only be measured against something that was measured first.",
   "That the constant is a derived one rather than a declared one, because a declared value has no route out of a return value.",
@@ -60,7 +60,7 @@ q(0, "A reviewer proposes moving the glycol density away from 9.300000 lb a gall
 q(3, "The dehydration balance and the vessel sizing are shown to use one glycol density, at a ratio of 1.000000000000 between the two figures the module exports. What does that rule out?",
  "One fluid carrying two numbers, so that nothing downstream can tell which of them it is holding.",
  ["Any future edit to the density, because a value a gate has pinned is one that cannot be moved again without the gate failing on the arithmetic.",
-  "The density being a declared value, since a figure the digest has checked against a second route has stopped being a value with nothing behind it.",
+  "The density being a declared value, since a figure the course has checked against a second route has stopped being a value with nothing behind it.",
   "An error in 9.300000 lb a gallon itself, which two agreeing routes would catch."],
  "Two numbers for one glycol is a defect whatever its size, and the ratio of 1.000000000000 says this module does not have one. It says nothing at all about whether 9.300000 is correct."),
 

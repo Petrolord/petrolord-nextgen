@@ -20,7 +20,7 @@ q(3, "The invented value added tax of 6.5 percent is typed as a percent of the l
  ["A pump price of 1074.8249 naira a litre, since a rate that is supplied gives the same amount on any basis.",
   "A pump price of 1031.3197 naira a litre, labelled a floor because the tax no longer reads the margins.",
   "A refusal, since percent_of_landed is a basis for the import walk and not a pump price element."],
- "The digest prints price 1066.7292 naira a litre for that build and says it is complete true: the basis changes the amount, and every rate is still supplied.")
+ "The engine returns price 1066.7292 naira a litre for that build and says it is complete true: the basis changes the amount, and every rate is still supplied.")
 
 q(0, "The invented depot and terminal margin is 21 naira a litre. What does it do to the running total on BADAGRY?",
  "It takes it from 884.6753 to 905.6753 naira a litre.",
@@ -86,7 +86,7 @@ q(0, "marginWaterfall is handed a build-up that the engine refused. What does it
  ["Every share reported as none.",
   "The refusal landedCost gives with no FOB: An FOB price and its basis are required.",
   "One Unattributed row holding the price."],
- "The digest prints marginWaterfall on a refused build-up as REFUSED: A landed cost per litre is required., the sentence buildPumpPrice gives when it has no landed cost.")
+ "The engine answers marginWaterfall on a refused build-up with REFUSED: A landed cost per litre is required., the sentence buildPumpPrice gives when it has no landed cost.")
 
 q(2, "In the invented BADAGRY grouping, which recipient row comes first, and why?",
  "Product (landed) at 884.6753 naira a litre, because the grouping runs largest first.",

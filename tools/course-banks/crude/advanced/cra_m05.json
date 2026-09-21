@@ -41,7 +41,7 @@
    "The refusal for a missing cost, since no component's cost can buy a RON of 99."
   ],
   "answer": 1,
-  "explanation": "A RON minimum of 99 sits in the digest's infeasible table beside the 10 ppm template, with the same message. An infeasible blend is a real answer: the specifications cannot be met by the components available."
+  "explanation": "A RON minimum of 99 sits in the course's infeasible table beside the 10 ppm template, with the same message. An infeasible blend is a real answer: the specifications cannot be met by the components available."
  },
  {
   "prompt": "Butane's maximum is typed as 0 because the tank is empty. What does the engine return?",

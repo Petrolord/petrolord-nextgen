@@ -54,7 +54,7 @@ q(0,
   ["The outcome of the leaf just above it on the same branch set, carried down so that every leaf in the tree has a named outcome.",
    "Nothing: a leaf with no outcome is left out of the totals and its frequency is dropped from the tree without a message.",
    "The word 'unnamed', with a note in the basis that a name was missing when the tree was read."],
-  "The digest says a leaf with no `outcome` of its own takes its branch name. Nothing is borrowed from a neighbouring leaf, no frequency is dropped, and the engine writes no placeholder name. A branch with no name at all is a different matter: the engine refuses it.")
+  "The course says a leaf with no `outcome` of its own takes its branch name. Nothing is borrowed from a neighbouring leaf, no frequency is dropped, and the engine writes no placeholder name. A branch with no name at all is a different matter: the engine refuses it.")
 
 q(3,
   "A branch set is typed as 0.6 and 0.3. What does the engine say, in its own words?",
@@ -70,7 +70,7 @@ q(1,
   ["It refuses it, since 0.9999999999999999 falls short of exactly 1.",
    "It accepts it after rounding each probability to twelve decimals.",
    "It refuses it and names the third branch as the one that falls short."],
-  "BRANCH_SUM_TOLERANCE is 1e-9, absolute, and the digest's table shows 0.7, 0.2 and 0.1 accepted although they sum to 0.9999999999999999 in double. Demanding an exact 1 in double would refuse a set that is exact on paper. The engine rounds no input, and it names no single branch for a sum.")
+  "BRANCH_SUM_TOLERANCE is 1e-9, absolute, and the course's table shows 0.7, 0.2 and 0.1 accepted although they sum to 0.9999999999999999 in double. Demanding an exact 1 in double would refuse a set that is exact on paper. The engine rounds no input, and it names no single branch for a sum.")
 
 q(0,
   "Someone enters 0.4000001 and 0.6 as the two probabilities under one node. How is that handled, and why?",
@@ -86,7 +86,7 @@ q(3,
   ["It names only `tree.branches`, the top of the tree, and leaves the analyst to search every lower set for the one that failed.",
    "It names the initiating frequency, since a tree that does not close cannot give leaves that sum back to it.",
    "It names none: a lower set is closed for the analyst by the engine."],
-  "The digest says a refusal names the branch set by its path, so a deep tree says which node failed; the refusal table shows `tree.branches[0].next.branches` with the sum of 0.5. The engine does not stop at the top of the tree, it does not blame the initiating frequency, and it closes no set on the analyst's behalf.")
+  "The course says a refusal names the branch set by its path, so a deep tree says which node failed; the refusal table shows `tree.branches[0].next.branches` with the sum of 0.5. The engine does not stop at the top of the tree, it does not blame the initiating frequency, and it closes no set on the analyst's behalf.")
 
 q(1,
   "One branch set holds two branches both named 'fire'. What does the engine return?",

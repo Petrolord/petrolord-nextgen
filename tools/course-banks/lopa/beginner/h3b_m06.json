@@ -66,7 +66,7 @@
   "explanation": "The golden table gives beyond-sil3-sil4-band 20000.000000 and beyond-sil4-band 200000.000000, both BEYOND_SIL3_REDESIGN. rrf-exactly-10000 at 10000.000000 is SIL3, on the inclusive edge of that band, and sif-just-short at 300.000000 is SIL2."
  },
  {
-  "prompt": "How many golden LOPA scenarios does the digest run through the engine, and on what do they all agree with the golden?",
+  "prompt": "How many golden LOPA scenarios does the course run through the engine, and on what do they all agree with the golden?",
   "options": [
    "13 of them, agreeing on the outcome alone, since the required RRF is computed in double by the engine and in rationals by the oracle behind it.",
    "5 of them, agreeing on the outcome, the required RRF and `meetsTmel`, which is the count of decade cases the golden was written to cover.",
@@ -74,7 +74,7 @@
    "13 of them, agreeing on the outcome, the required RRF and `meetsTmel`."
   ],
   "answer": 3,
-  "explanation": "The digest says all 13 agree with the golden on the outcome, the required RRF and `meetsTmel`. The relative difference column shows how close the two arithmetics come, and its largest entry is 1.82e-16, which is why the agreement extends to the figures as well as to the words."
+  "explanation": "The course says all 13 agree with the golden on the outcome, the required RRF and `meetsTmel`. The relative difference column shows how close the two arithmetics come, and its largest entry is 1.82e-16, which is why the agreement extends to the figures as well as to the words."
  },
  {
   "prompt": "How does the oracle behind the golden decide a boundary, and why does that matter for the cases sitting on a decade?",
@@ -85,21 +85,21 @@
    "By reading the outcome the engine returned."
   ],
   "answer": 1,
-  "explanation": "The digest says the oracle decides every boundary in exact rationals with no snap, so the golden cases that sit on a decade are a check on the snap. An oracle that shared the engine's tolerance, or that read the engine's own answer, would check nothing at all."
+  "explanation": "The course says the oracle decides every boundary in exact rationals with no snap, so the golden cases that sit on a decade are a check on the snap. An oracle that shared the engine's tolerance, or that read the engine's own answer, would check nothing at all."
  },
  {
-  "prompt": "The digest has a WHAT IS NOT HERE note about the golden LOPA scenarios. What does it say?",
+  "prompt": "The course has a WHAT IS NOT HERE note about the golden LOPA scenarios. What does it say?",
   "options": [
    "The golden cases are the book's continuing example, renamed.",
-   "The golden cases carry no source line at all, so the digest cannot say where the illustrative numbers in any one of them came from.",
+   "The golden cases carry no source line at all, so the course cannot say where the illustrative numbers in any one of them came from.",
    "The golden holds no case sitting exactly on a decade.",
    "The CCPS continuing example from the book is not reproduced, and no golden claims to be it."
   ],
   "answer": 3,
-  "explanation": "The digest says the CCPS continuing example from the book is not reproduced, that the engine's validation record reports no copy of the book was available to check its worksheet numbers against, and that no golden claims to be that example. Every golden LOPA scenario is oracle derived and its source line says so."
+  "explanation": "The course says the CCPS continuing example from the book is not reproduced, that the engine's validation record reports no copy of the book was available to check its worksheet numbers against, and that no golden claims to be that example. Every golden LOPA scenario is oracle derived and its source line says so."
  },
  {
-  "prompt": "What does the digest mean by saying every golden LOPA scenario is ORACLE-DERIVED?",
+  "prompt": "What does the course mean by saying every golden LOPA scenario is ORACLE-DERIVED?",
   "options": [
    "It follows the CCPS method with illustrative numbers, and the golden's source line says so.",
    "It reproduces a published worksheet to the figures that worksheet prints.",
@@ -107,7 +107,7 @@
    "It carries failure rate data this course recommends."
   ],
   "answer": 0,
-  "explanation": "The digest says every golden LOPA scenario follows the CCPS method with illustrative numbers and that the golden says so in its source line. No published worksheet is reproduced on the determination side, the golden was written by the stdlib oracle in exact rational arithmetic, independently of the engine, and every rate in this course is illustrative and never recommended data."
+  "explanation": "The course says every golden LOPA scenario follows the CCPS method with illustrative numbers and that the golden says so in its source line. No published worksheet is reproduced on the determination side, the golden was written by the stdlib oracle in exact rational arithmetic, independently of the engine, and every rate in this course is illustrative and never recommended data."
  },
  {
   "prompt": "A LOPA row is frequency based. What does the engine take for the consequence?",
@@ -118,7 +118,7 @@
    "A matrix band, which the engine compares with the band the required PFDavg falls in."
   ],
   "answer": 1,
-  "explanation": "The digest's seam is explicit: a LOPA row multiplies a frequency per year by probabilities and compares the result with a TMEL per year, and nothing in this engine takes a consequence category, a matrix score or a matrix band. The consequence is described in words and carried into the row through the tolerable frequency attached to it."
+  "explanation": "The course's seam is explicit: a LOPA row multiplies a frequency per year by probabilities and compares the result with a TMEL per year, and nothing in this engine takes a consequence category, a matrix score or a matrix band. The consequence is described in words and carried into the row through the tolerable frequency attached to it."
  },
  {
   "prompt": "Which academy courses own the risk matrices this course leaves alone?",
@@ -129,7 +129,7 @@
    "Neither: the matrices belong to this course and are graded here."
   ],
   "answer": 2,
-  "explanation": "The digest names both: the risk and change course grades the five by five matrix on its own bands, and the field development course teaches a second scale. Both rank a risk on scored bands, and this course never re-grades either of them."
+  "explanation": "The course names both: the risk and change course grades the five by five matrix on its own bands, and the field development course teaches a second scale. Both rank a risk on scored bands, and this course never re-grades either of them."
  },
  {
   "prompt": "Which line does the engine print for its units?",
@@ -151,7 +151,7 @@
    "A hardware fault tolerance check, and a high demand or continuous mode."
   ],
   "answer": 3,
-  "explanation": "The digest lists both as absent: the engine has no hardware fault tolerance check, because that requirement is a normative table in a licensed standard, and it has no high demand or continuous mode, so every band here is low demand. The other items are real obligations on the analyst, and this engine makes no claim to check them."
+  "explanation": "The course lists both as absent: the engine has no hardware fault tolerance check, because that requirement is a normative table in a licensed standard, and it has no high demand or continuous mode, so every band here is low demand. The other items are real obligations on the analyst, and this engine makes no claim to check them."
  },
  {
   "prompt": "How does a LOPA consequence reach the arithmetic of the row?",
@@ -162,6 +162,6 @@
    "It is described in words on the worksheet and plays no part in the arithmetic at all."
   ],
   "answer": 1,
-  "explanation": "The digest says a LOPA consequence is described in words, a fatality or a release reaching the jetty, and carried into the row through its TMEL. That single frequency is what separates a row whose consequence is a fatality from a row whose consequence is a small release, so the description does reach the arithmetic, through the tolerance alone."
+  "explanation": "The course says a LOPA consequence is described in words, a fatality or a release reaching the jetty, and carried into the row through its TMEL. That single frequency is what separates a row whose consequence is a fatality from a row whose consequence is a small release, so the description does reach the arithmetic, through the tolerance alone."
  }
 ]

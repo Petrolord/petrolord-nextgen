@@ -8,7 +8,7 @@
    "3834.000 tCO2e"
   ],
   "answer": 3,
-  "explanation": "SECTION 8 prints the vented line at 4231.600 on IPCC AR6 GWP100, fossil methane, 3834.000 on AR6 non-fossil, 4260.000 on AR5 fossil and 3976.000 on AR5 non-fossil. Only the methane lines move from set to set."
+  "explanation": "The lab prints the vented line at 4231.600 on IPCC AR6 GWP100, fossil methane, 3834.000 on AR6 non-fossil, 4260.000 on AR5 fossil and 3976.000 on AR5 non-fossil. Only the methane lines move from set to set."
  },
  {
   "prompt": "The flare's unburned methane line reads 489.183 tCO2e. On which set was it converted?",
@@ -19,10 +19,10 @@
    "IPCC AR5 GWP100, non-fossil methane"
   ],
   "answer": 1,
-  "explanation": "SECTION 8 prints Flaring (unburned CH4) at 485.922 on AR6 fossil, 440.265 on AR6 non-fossil, 489.183 on AR5 fossil and 456.571 on AR5 non-fossil."
+  "explanation": "The lab prints Flaring (unburned CH4) at 485.922 on AR6 fossil, 440.265 on AR6 non-fossil, 489.183 on AR5 fossil and 456.571 on AR5 non-fossil."
  },
  {
-  "prompt": "Which total does SECTION 8 print for the inventory on IPCC AR5 GWP100, non-fossil methane?",
+  "prompt": "Which total does the lab print for the inventory on IPCC AR5 GWP100, non-fossil methane?",
   "options": [
    "42660.826 tCO2e",
    "42945.777 tCO2e",
@@ -30,7 +30,7 @@
    "42977.438 tCO2e"
   ],
   "answer": 0,
-  "explanation": "SECTION 8 prints the totals: 42945.777 on AR6 fossil, 42502.520 on AR6 non-fossil, 42977.438 on AR5 fossil and 42660.826 on AR5 non-fossil. Scope 2 is 12915.000 under all four."
+  "explanation": "The lab prints the totals: 42945.777 on AR6 fossil, 42502.520 on AR6 non-fossil, 42977.438 on AR5 fossil and 42660.826 on AR5 non-fossil. Scope 2 is 12915.000 under all four."
  },
  {
   "prompt": "When the Igbogene inventory is rebuilt on another GWP set, which lines move?",
@@ -41,7 +41,7 @@
    "Only the flare's two lines, since vented methane carries a factor of 1 in its line"
   ],
   "answer": 2,
-  "explanation": "SECTION 8: \"Only the methane lines move; every CO2 line has a GWP of 1 on every set.\" Scope 2 reads 12915.000 on all four sets, and the vented line moves with the set as the flare's methane line does."
+  "explanation": "The lab: \"Only the methane lines move; every CO2 line has a GWP of 1 on every set.\" Scope 2 reads 12915.000 on all four sets, and the vented line moves with the set as the flare's methane line does."
  },
  {
   "prompt": "Which two methane values does AR6 give in the sets the course prints?",
@@ -52,7 +52,7 @@
    "29.8 for fossil methane and 273 for non-fossil"
   ],
   "answer": 1,
-  "explanation": "SECTION 6 prints AR6 fossil CH4 29.8 and AR6 non-fossil CH4 27; AR5 gives 30 and 28. 273 is the AR6 value for N2O."
+  "explanation": "The course prints AR6 fossil CH4 29.8 and AR6 non-fossil CH4 27; AR5 gives 30 and 28. 273 is the AR6 value for N2O."
  },
  {
   "prompt": "What N2O value do both AR5 sets carry?",
@@ -63,7 +63,7 @@
    "265"
   ],
   "answer": 3,
-  "explanation": "SECTION 6 prints N2O 265 on both AR5 sets and 273 on both AR6 sets. 28 and 30 are the AR5 methane values, non-fossil and fossil."
+  "explanation": "The course prints N2O 265 on both AR5 sets and 273 on both AR6 sets. 28 and 30 are the AR5 methane values, non-fossil and fossil."
  },
  {
   "prompt": "Which makeGwpSet call returns a set the engine reads as declared?",
@@ -74,7 +74,7 @@
    "A label with values that give methane a GWP of 0"
   ],
   "answer": 0,
-  "explanation": "SECTION 6: a set is declared only with a label and at least one value. Values with no label, and a label with no values, both read declared false. SECTION 2 refuses a methane GWP of 0, and the set then reads declared false."
+  "explanation": "The engine: a set is declared only with a label and at least one value. Values with no label, and a label with no values, both read declared false. The engine refuses a methane GWP of 0, and the set then reads declared false."
  },
  {
   "prompt": "The engine's note on every GWP set says the set is stated on every result. What reason does the note give?",
@@ -85,7 +85,7 @@
    "The difference from the course set is computed on each result."
   ],
   "answer": 2,
-  "explanation": "SECTION 6 quotes the note: \"Global warming potentials differ between IPCC assessment reports. An inventory on one report is not comparable with one on another, so the set is stated on every result.\" Every CO2 line has a GWP of 1 on every set, and which report to file on is held (H1)."
+  "explanation": "The course quotes the note: \"Global warming potentials differ between IPCC assessment reports. An inventory on one report is not comparable with one on another, so the set is stated on every result.\" Every CO2 line has a GWP of 1 on every set, and which report to file on is held (H1)."
  },
  {
   "prompt": "For which methane does the engine's methane note call the fossil value the consistent one?",
@@ -96,10 +96,10 @@
    "Vented methane only; flare methane is counted as CO2"
   ],
   "answer": 1,
-  "explanation": "SECTION 6 quotes the methane note on every set. It closes: \"the fossil value is the consistent one for vented, fugitive and unburned fossil methane alike.\""
+  "explanation": "The course quotes the methane note on every set. It closes: \"the fossil value is the consistent one for vented, fugitive and unburned fossil methane alike.\""
  },
  {
-  "prompt": "Measured from the course set, what does SECTION 8 print for the AR6 non-fossil total?",
+  "prompt": "Measured from the course set, what does the lab print for the AR6 non-fossil total?",
   "options": [
    "-284.951 tCO2e",
    "31.661 tCO2e",
@@ -107,15 +107,15 @@
    "-443.257 tCO2e"
   ],
   "answer": 3,
-  "explanation": "SECTION 8 prints the total less the course set as 0.000 on AR6 fossil, -443.257 on AR6 non-fossil, 31.661 on AR5 fossil and -284.951 on AR5 non-fossil (computed here)."
+  "explanation": "The lab prints the total less the course set as 0.000 on AR6 fossil, -443.257 on AR6 non-fossil, 31.661 on AR5 fossil and -284.951 on AR5 non-fossil (computed here)."
  },
  {
   "prompt": "What does the course state about which IPCC report a Nigerian operator should file on?",
   "options": [
    "It is a regulatory reading and the owner's decision; the course grades no choice between them.",
    "AR6, since every inventory in the course is computed on IPCC AR6 GWP100, fossil methane, as a rule.",
-   "AR5, since the digest states that UNFCCC reporting has required it of operators until now.",
-   "Whichever report gives the lower Igbogene total, which the digest prints for all four of the sets."
+   "AR5, since the course states that UNFCCC reporting has required it of operators until now.",
+   "Whichever report gives the lower Igbogene total, which the course prints for all four of the sets."
   ],
   "answer": 0,
   "explanation": "H1 holds the filing choice as a regulatory reading, with any recommended default left to the owner. Both reports are taught, and neither is graded as the answer."
@@ -129,7 +129,7 @@
    "The supplier statement (invented), 2025, as for the factors"
   ],
   "answer": 2,
-  "explanation": "SECTION 6: the four sets are IPCC 100-year values as tabulated in GHG Protocol, \"IPCC Global Warming Potential Values\", version 2.0, 7 August 2024, adapted from IPCC AR6 WG1 chapter 7 and IPCC AR5 WG1 chapter 8. The engine ships no GWP."
+  "explanation": "The course: the four sets are IPCC 100-year values as tabulated in GHG Protocol, \"IPCC Global Warming Potential Values\", version 2.0, 7 August 2024, adapted from IPCC AR6 WG1 chapter 7 and IPCC AR5 WG1 chapter 8. The engine ships no GWP."
  },
  {
   "prompt": "Why does the course compute every inventory on IPCC AR6 GWP100, fossil methane?",
@@ -137,10 +137,10 @@
    "AR6 is the report an operator must file on, as the course recommends.",
    "The engine counts escaped carbon as methane, as its methane note states.",
    "It is the set the engine applies when no set has been declared at all.",
-   "It gives the lowest Igbogene total of the four sets the digest prints."
+   "It gives the lowest Igbogene total of the four sets the course prints."
   ],
   "answer": 1,
-  "explanation": "SECTION 6: \"Every inventory in this course is computed on 'IPCC AR6 GWP100, fossil methane', because the engine counts escaped carbon as methane\" (the methane note). With no set declared, SECTION 9 blocks the vented line, and SECTION 8 prints a lower total, 42502.520, on AR6 non-fossil."
+  "explanation": "The course: \"Every inventory in this course is computed on 'IPCC AR6 GWP100, fossil methane', because the engine counts escaped carbon as methane\" (the methane note). With no set declared, the engine blocks the vented line, and the lab prints a lower total, 42502.520, on AR6 non-fossil."
  },
  {
   "prompt": "Where does the engine record which GWP set an inventory was converted on?",
@@ -151,7 +151,7 @@
    "In gwpSetLabel on every result, and an intensity carries it too"
   ],
   "answer": 3,
-  "explanation": "SECTION 8: \"The engine states its set on every result (gwpSetLabel), and an intensity carries it too (SECTION 10).\" SECTION 7 prints gwpSetLabel: IPCC AR6 GWP100, fossil methane on the complete inventory, and the factor records name sources such as the supplier statement (invented)."
+  "explanation": "The course: \"The engine states its set on every result (gwpSetLabel), and an intensity carries it too.\" The lab prints gwpSetLabel: IPCC AR6 GWP100, fossil methane on the complete inventory, and the factor records name sources such as the supplier statement (invented)."
  },
  {
   "prompt": "What horizon do all four of the course's GWP sets share?",
@@ -162,6 +162,6 @@
    "None is stated beside the values"
   ],
   "answer": 2,
-  "explanation": "SECTION 6 prints the horizon column as 100-year (GWP100) on all four sets, AR6 and AR5, fossil and non-fossil."
+  "explanation": "The lab prints the horizon column as 100-year (GWP100) on all four sets, AR6 and AR5, fossil and non-fossil."
  }
 ]

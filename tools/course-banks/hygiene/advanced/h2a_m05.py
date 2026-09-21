@@ -78,7 +78,7 @@ q(1, "The course measures a denominator out of each Brief and Scala factor. Whic
  ["24.000000 hours for the daily factor and 168 for the weekly, the hours of a day and of a week",
   "8.000000 hours for the daily factor and 40.000000 for the weekly, the standard shift and the standard week",
   "16.000000 hours for both, since the weekly factor reuses the daily denominator once a week is given"],
- "DAILY RF is (8/h) x (24 - h)/16 and WEEKLY RF is (40/h) x (168 - h)/128, and each denominator is measured by asking the engine for a raw factor whose value is that constant and nothing else: 16.000000000000 hours from the raw daily factor at 4 hours, 128.000000000000 from the raw weekly factor at 20 hours. Each matches a literal typed in the generator with a relative difference of 0. The 24 and the 168 sit in the numerators, and the 8 and the 40 scale the hours of breathing the air.")
+ "DAILY RF is (8/h) x (24 - h)/16 and WEEKLY RF is (40/h) x (168 - h)/128, and each denominator is measured by asking the engine for a raw factor whose value is that constant and nothing else: 16.000000000000 hours from the raw daily factor at 4 hours, 128.000000000000 from the raw weekly factor at 20 hours. Each matches a literal the course records with a relative difference of 0. The 24 and the 168 sit in the numerators, and the 8 and the 40 scale the hours of breathing the air.")
 
 q(2, "The BC Occupational Health and Safety Regulation prints daily factors of 0.700000, 0.500000, 0.250000 and 0.100000 at 10, 12, 16 and 20 hours, and the engine reproduces all four. What does that prove?",
  "That the constants 8, 24 and 16 are tested by something outside the two files that hold them",

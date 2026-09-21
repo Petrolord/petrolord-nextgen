@@ -55,7 +55,7 @@ q(1, "At a gravity of 5.070000 the engine refuses with a message about the DAK v
   "One comes from the compressibility routine and the other from the water routine, and the two guards were written to different conventions."],
  "At 5.080000 the message names a pseudo-critical temperature of 35.0 degR and a pseudo-critical pressure of -1.6 psia, so a reader can see that the pressure has gone negative.")
 
-q(3, "The march across the AGBADA let-down reports 0.061607962 at the inlet, 0.071833233 at the last half step and 0.067252747 as the mean. Which of the three belongs beside the arrival temperature, and what does the digest print for the inlet against it?",
+q(3, "The march across the AGBADA let-down reports 0.061607962 at the inlet, 0.071833233 at the last half step and 0.067252747 as the mean. Which of the three belongs beside the arrival temperature, and what does the course report for the inlet against it?",
  "The mean, and the inlet coefficient is 0.916066108 of it.",
  ["The last half step, because that is the state the gas actually leaves in, and the inlet coefficient is 0.916066108 of the last half step.",
   "The inlet coefficient, because it is the state the caller supplied, and the last half step is 0.916066108 of the mean.",

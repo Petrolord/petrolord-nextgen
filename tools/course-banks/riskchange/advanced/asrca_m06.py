@@ -27,7 +27,7 @@ q(0, "AA-01 records ON-01 going into the risk register. What must that applicati
  ["Only its outcome, since a risk register target is a Suite register the engine already knows.",
   "The residual score of the risk at the time the lesson was applied.",
   "A reference to a procedure, as every application outside the Suite needs."],
- "The digest records an application into the risk register that names the risk as ALLOWED, and refuses one that names no risk. Both ends carry a key: the lesson names the row, and the row is a record with its own state.")
+ "The course records an application into the risk register that names the risk as ALLOWED, and refuses one that names no risk. Both ends carry a key: the lesson names the row, and the row is a record with its own state.")
 
 q(2, "The ONNE summary reads intoRiskRegister 1 and intoMoc 1. Which applications are they?",
  "AA-01 and AA-04, the two applications into Suite registers.",
@@ -90,7 +90,7 @@ q(1, "Segregation of duties in peer review, the author never reviewing the work,
  ["In the app and the database already, with the engine following later.",
   "In the database only, as a constraint on who can be put on a review.",
   "Nowhere yet: it is listed among the held items as a limit."],
- "The engine enforces the rule now, from ASC-0, as owner decision D1 applied to peer review. A lesson that told a learner the app already refuses the author would be teaching something the digest does not say.")
+ "The engine enforces the rule now, from ASC-0, as owner decision D1 applied to peer review. A lesson that told a learner the app already refuses the author would be teaching something the course does not say.")
 
 q(0, "Which of these does the peerReview engine hand to a person rather than decide itself?",
  "Whether the author's response is good enough to accept.",
@@ -99,12 +99,12 @@ q(0, "Which of these does the peerReview engine hand to a person rather than dec
   "Whether a comment with no response text may be verified by the reviewer."],
  "The engine checks that the right people acted and that the record is complete. It decides blocking, refuses the author a reviewer's move and refuses a verification with no response text. Whether a response deserves to be accepted it leaves to a person, in its own words: \"A reviewer independent of the work decides it.\"")
 
-q(1, "The Lessons Learned dashboard and the ONNE register on 2026-10-01: what does the digest record about reviewsOverdue and reviewsDueSoon?",
+q(1, "The Lessons Learned dashboard and the ONNE register on 2026-10-01: what does the course record about reviewsOverdue and reviewsDueSoon?",
  "They read 1 and 2; the dashboard computes both and shows neither.",
  ["The dashboard displays them, and the engine leaves both uncomputed on this register.",
   "The engine computes them as 2 and 1, and the dashboard shows only the first of the two.",
   "Neither is computed, because the dashboard reads lessons one at a time."],
- "The engine's summary reads reviewsOverdue 1 and reviewsDueSoon 2 on the ONNE register. The digest records beside them that the dashboard computes both and displays neither: the engine answers, and whether a user sees the answer is the app's part.")
+ "The engine's summary reads reviewsOverdue 1 and reviewsDueSoon 2 on the ONNE register. The course records beside them that the dashboard computes both and displays neither: the engine answers, and whether a user sees the answer is the app's part.")
 
 q(3, "Across the three tiers of this course, the same kind of rule keeps the person with most interest in a yes from giving it. Which set of three refusals shows that rule?",
  "The originator approving a change, the author reviewing their own work, the author validating their own lesson.",

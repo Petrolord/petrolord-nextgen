@@ -66,7 +66,7 @@
   "explanation": "The duty has not changed. The flow, the pressure drop, the fluid and the required coefficient are all the same on both, and only the shape of the relationship between travel and coefficient has changed."
  },
  {
-  "prompt": "The digest sets those two travels against each other. What ratio does it print, the first over the second?",
+  "prompt": "The course sets those two travels against each other. What ratio does it print, the first over the second?",
   "options": [
    "1.021201",
    "1.074452",

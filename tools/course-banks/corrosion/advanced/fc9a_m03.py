@@ -19,7 +19,7 @@ q(0, "How many band words does the door return, how many edges separate them, an
   "Three band words with three edges between them, since the highest edge is open ended and the word above it is the same word the door returns at the edge itself."],
  "The four bands are low, moderate, high and severe. The extra word is negligible and it is what the door returns at zero and below rather than a band it reaches by being small.")
 
-q(3, "The digest names a fourth boundary in this door. Where is it?",
+q(3, "The course names a fourth boundary in this door. Where is it?",
  "At zero itself, which the golden pins from both sides.",
  ["At 4.200000 mm/yr, where the golden's highest category row sits and the severe band is taken to run out of meaning altogether.",
   "At 0.000000001 mm/yr, which is the smallest positive rate the golden carries and the value the door first stops calling a rate negligible at.",
@@ -30,7 +30,7 @@ q(1, "One row of the golden's category table is printed past six decimals while 
  "At six decimals it would read 0.000000 and a reader would see the row above it twice.",
  ["It is the only row where the golden and the engine disagree, so the extra digits are there to show the size of the gap between the two of them.",
   "It sits on an edge, and every row on an edge is printed at the precision the edge is measured to so that the comparison can be checked by hand.",
-  "It is the row the vendored jest suite pins, and a pin is printed at the full precision of the double rather than at the digest's own precision."],
+  "It is the row the vendored jest suite pins, and a pin is printed at the full precision of the double rather than at the course's own precision."],
  "It is the smallest positive rate the golden carries, and it is one of the two rows that pin the zero boundary. The row above it is the rate of exactly zero.")
 
 q(2, "Each of the three edges between the bands is applied in one direction. Which, and how is it pinned?",

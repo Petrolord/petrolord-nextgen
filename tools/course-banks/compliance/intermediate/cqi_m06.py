@@ -77,7 +77,7 @@ q(1, "The programme reads reported 3, cancelled 1 and percent 38. What does AUD-
  ["It counts as delivered, the same as a reported audit.",
   "It counts as delivered once its cancellation reason is on the record.",
   "It counts as half an audit, between reported and outstanding."],
- "Reported 3 counts AUD-2026-001, AUD-2026-002 and AUD-2026-003, and AUD-2026-004 sits in cancelled 1, in neither reported nor outstanding. A programme is delivered when its audits are reported, and the digest records that the programme counts reported audits only, which is why a complete programme that contains a cancelled audit reads below one hundred percent by design.")
+ "Reported 3 counts AUD-2026-001, AUD-2026-002 and AUD-2026-003, and AUD-2026-004 sits in cancelled 1, in neither reported nor outstanding. A programme is delivered when its audits are reported, and the course records that the programme counts reported audits only, which is why a complete programme that contains a cancelled audit reads below one hundred percent by design.")
 
 q(0, "What does the Expert tier put in place of this tier's percents when it reads certification readiness?",
  "A list of blockers, each one named.",

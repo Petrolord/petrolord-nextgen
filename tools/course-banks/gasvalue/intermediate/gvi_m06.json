@@ -30,7 +30,7 @@
    "By moles, cross-checked against a measured flare's figures."
   ],
   "answer": 2,
-  "explanation": "The digest: \"the flare by the rule by moles, cross-checked by the rule's own volumetric route\". The oracle checks independently of the engine, and the digest's preamble says no figure in it is a published analysis or a measured flare."
+  "explanation": "The course states: \"the flare by the rule by moles, cross-checked by the rule's own volumetric route\". The oracle checks independently of the engine, and the course states that none of its figures is a published analysis or a measured flare."
  },
  {
   "prompt": "The oracle leaves the component heating values and liquid densities unvalidated. What is said of them?",
@@ -52,7 +52,7 @@
    "In exact rationals, in kilograms and cubic metres"
   ],
   "answer": 3,
-  "explanation": "The digest: \"the gas in exact rationals carried in kilograms and cubic metres\". Among the engine's own constants is SCF_PER_LBMOL, 379.49 standard cubic feet in one lb-mol."
+  "explanation": "The course states: \"the gas in exact rationals carried in kilograms and cubic metres\". Among the engine's own constants is SCF_PER_LBMOL, 379.49 standard cubic feet in one lb-mol."
  },
  {
   "prompt": "Which ledgers does the oracle check on a parcel?",
@@ -63,7 +63,7 @@
    "The discounted cash flow and payback ledgers"
   ],
   "answer": 1,
-  "explanation": "The digest lists \"the route, credit and comparison ledgers\" among the oracle's checks. The engine assembles its cash flow and hands it on; it does not discount it."
+  "explanation": "The course lists \"the route, credit and comparison ledgers\" among the oracle's checks. The engine assembles its cash flow and hands it on; it does not discount it."
  },
  {
   "prompt": "In the end-to-end reading, the diesel counterfactual takes the avoided flare of 190032.865 t/yr to a net of 218032.865 t/yr. By which two typed figures, and how?",
@@ -162,6 +162,6 @@
    "Against the typical heating values"
   ],
   "answer": 2,
-  "explanation": "The digest: \"What the validation oracle (oracle_flaretovalue.py ...) checks, independently of the engine\". Every analysis is invented and illustrative, and the typical heating values are what it does not validate."
+  "explanation": "The course states: \"What the validation oracle (oracle_flaretovalue.py ...) checks, independently of the engine\". Every analysis is invented and illustrative, and the typical heating values are what it does not validate."
  }
 ]

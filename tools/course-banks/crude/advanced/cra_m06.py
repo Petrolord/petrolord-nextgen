@@ -59,7 +59,7 @@ q(0, "Of the three held items, which one concerns the LP kernel, and what does t
  ["C12: absolute tolerances on the pivots.",
   "C13: a binding test of 1e-7 times the limit on each row.",
   "L4: the Refutas index taken on mass fraction in the AGO rows."],
- "SECTION 27 lists three held items: L4, the LP kernel's absolute tolerances on its pivots and on phase one; C12, the Refutas index on mass fraction; C13, Watson K taken at the blend's T50.")
+ "The course lists three held items: L4, the LP kernel's absolute tolerances on its pivots and on phase one; C12, the Refutas index on mass fraction; C13, Watson K taken at the blend's T50.")
 q(2, "oracle_lp.py checks the kernel on 181 problems (124 optimal, 44 infeasible, 13 unbounded) by exact rational vertex enumeration with no simplex at all. What fact from the first module makes that route possible?",
  "The optimum of a linear programme, when there is one, sits at a vertex.",
  ["The kernel's absolute tolerances make every problem exact once its coefficients are written as rational numbers.",
@@ -85,7 +85,7 @@ q(0, "The engines state RVP_INDEX_EXPONENT 1.25 and BINDING_TOLERANCE 1e-7 in th
  ["A regulation, since each constant is the limit the regulation in force sets.",
   "A graded value the capstone checks to four decimals.",
   "A default price per unit of relief for every binding row."],
- "The digest lists the constants the engines state, read from the modules: CII_BANDS.STABLE 0.7, CII_BANDS.UNSTABLE 0.9, RVP_INDEX_EXPONENT 1.25 and BINDING_TOLERANCE 1e-7. SPEC_TEMPLATES are starting points; the regulation in force governs.")
+ "The course lists the constants the engines state, read from the modules: CII_BANDS.STABLE 0.7, CII_BANDS.UNSTABLE 0.9, RVP_INDEX_EXPONENT 1.25 and BINDING_TOLERANCE 1e-7. SPEC_TEMPLATES are starting points; the regulation in force governs.")
 q(2, "oracle_lp.py holds the kernel to 181 problems. How does it compute shadow prices?",
  "As exact one-sided derivatives, by re-solve.",
  ["By rescaling the kernel's duals.",
@@ -100,12 +100,12 @@ q(1, "Reading the Apapa pool and the default pool side by side, which reading ho
  "Both pools bind on Sulfur and RVP. The marginal barrel differs from the average at Apapa by 0.1731 and matches it in the default pool, where nothing sits at its availability.")
 
 # target rank 2
-q(0, "The digest counts the refusals it prints: 17. What stands behind that count?",
+q(0, "The course counts the refusals it prints: 17. What stands behind that count?",
  "Each was asserted against the engine before it was printed.",
  ["Each was written by the course from the engine's rules, so the wording is the course's own paraphrase.",
   "Each is a status the kernel returns from phase one.",
   "Each is graded against the capstone's own figures."],
- "The digest closes: \"Refusals printed in this digest, each asserted against the engine before it was printed: 17.\"")
+ "The course closes on its count of refusals, each asserted against the engine before it was printed: 17.")
 
 emit(Q, '/root/wt-md-crude-nextgen/tools/course-banks/crude/advanced/cra_m06.json', label='cra_m06', expect_n=15)
 finish()

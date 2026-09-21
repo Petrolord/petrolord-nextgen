@@ -69,7 +69,7 @@ q(2, "How many functions and frozen tables does the engine behind this course ex
  ["3 functions, one for each criterion this tier reads the record against.",
   "57 functions, one for each of the refusal cases the vendored golden carries.",
   "26 functions and a licensed limit table for every criterion in use."],
- "Digest section 1: the engine exports 26 functions and 8 frozen tables, and every result names the criterion or source it was computed against. 57 is the number of refusal cases in the golden. The engine embeds no limit table of its own; every exposure limit is an input.")
+ "The course records it: the engine exports 26 functions and 8 frozen tables, and every result names the criterion or source it was computed against. 57 is the number of refusal cases in the golden. The engine embeds no limit table of its own; every exposure limit is an input.")
 
 # m02: noise dose to TWA
 q(0, "ORONI's OSHA PEL noise dose of 25.000000 percent restates as a TWA of 79.999784 dBA. Why is that a hair under 80?",
@@ -105,7 +105,7 @@ q(0, "How does the engine measure the TWA coefficient each preset carries?",
  ["It reads the coefficient from the source text and stores it without ever checking it.",
   "It fits a line through the rows of Table A-1 and takes the slope of that fitted line.",
   "It asks for the level giving a 4 hour reference duration and divides by log10 2."],
- "Digest section 3: the coefficient is measured as the TWA of a 1000 percent noise dose less the criterion level, since log10 of 10 is one. That returns 16.610000000000 for both OSHA presets and 10.000000000000 for NIOSH, each pinned against a literal. The 4 hour question measures the decibel exchange rate.")
+ "In the course, the coefficient is measured as the TWA of a 1000 percent noise dose less the criterion level, since log10 of 10 is one. That returns 16.610000000000 for both OSHA presets and 10.000000000000 for NIOSH, each pinned against a literal. The 4 hour question measures the decibel exchange rate.")
 
 q(3, "What TWA does the last row of OSHA Table A-1, a noise dose of 999.000000 percent, give with 16.61?",
  "106.602783 dBA.",
@@ -134,14 +134,14 @@ q(0, "The NIOSH noise REL limit noise dose is measured at 100.000000000001 perce
  ["NIOSH publishes its limit a trillionth above 100 on purpose.",
   "The printed 10.0 adds that excess to every limit it touches.",
   "It is rounded up from the NIOSH ceiling of 115 dBA each time."],
- "Digest section 3 measures each limit noise dose by bisecting on `exceedsLimit` over one 8 hour period, so the measured figure carries the bisection's last-place error. The literal it is pinned against is 100.000000000000 and the relative difference is 6.679e-15. The coefficient affects TWAs and never the limit, and the ceiling is a level.")
+ "The course measures each limit noise dose by bisecting on `exceedsLimit` over one 8 hour period, so the measured figure carries the bisection's last-place error. The literal it is pinned against is 100.000000000000 and the relative difference is 6.679e-15. The coefficient affects TWAs and never the limit, and the ceiling is a level.")
 
 q(3, "Which measurement pins the PEL threshold at 90.000000000000 dBA and the other two at 80.000000000000?",
  "By bisecting on its `belowThreshold` flag.",
  ["By reading the lowest row of the table.",
   "By subtracting 10 dB from the criterion level.",
   "By bisecting on the `exceedsLimit` flag."],
- "Digest section 3: thresholds are bisected on `belowThreshold`, giving 90.000000000000 dBA for the PEL and 80.000000000000 for the action level and the NIOSH noise REL. Subtracting 10 dB would give 80 on the PEL, which is wrong. `exceedsLimit` is the flag bisected for the limit noise dose.")
+ "In the course, thresholds are bisected on `belowThreshold`, giving 90.000000000000 dBA for the PEL and 80.000000000000 for the action level and the NIOSH noise REL. Subtracting 10 dB would give 80 on the PEL, which is wrong. `exceedsLimit` is the flag bisected for the limit noise dose.")
 
 q(1, "One period at 117 dBA, scored against NIOSH's recommendation: which figures and warning count come back?",
  "2156.290550 percent and 98.337073 dBA, with 1 warning.",
@@ -155,7 +155,7 @@ q(2, "The engine exports `OSHA_TABLE_G16A_MAX_DBA` and `OSHA_TABLE_G16_MAX_DBA`.
  ["115 marks where Table G-16a ends; 130 is Table G-16's maximum permitted level.",
   "130 and 115, the ceilings of the NIOSH noise REL and of the OSHA PEL.",
   "90 and 80, the PEL threshold and the action level threshold in dBA."],
- "Digest section 8: `OSHA_TABLE_G16A_MAX_DBA` is 130 and `OSHA_TABLE_G16_MAX_DBA` is 115. The swapped pairing is the tempting slip; above 130 the warning says the formula is extrapolated, and above 115 it says the level is above anything Table G-16 permits. The NIOSH ceiling of 115 dBA is a separate warning on the NIOSH noise REL preset.")
+ "The engine states it: `OSHA_TABLE_G16A_MAX_DBA` is 130 and `OSHA_TABLE_G16_MAX_DBA` is 115. The swapped pairing is the tempting slip; above 130 the warning says the formula is extrapolated, and above 115 it says the level is above anything Table G-16 permits. The NIOSH ceiling of 115 dBA is a separate warning on the NIOSH noise REL preset.")
 
 q(3, "ORONI's OSHA action level TWA is 82.296991 dBA, under 85. Which noise dose comparison says the same thing?",
  "34.375000 percent against the action level limit noise dose of 50 percent.",
@@ -169,7 +169,7 @@ q(0, "Where does the NIOSH noise REL criterion come from, and what kind of docum
  ["29 CFR 1910.95 Appendix A, a mandatory regulation from OSHA.",
   "HSE L108, the UK guidance on the Control of Noise at Work Regulations.",
   "A licensed limit table that the engine keeps for this preset."],
- "Digest section 1 names the source: NIOSH 98-126 Criteria for a Recommended Standard: Occupational Noise Exposure (1998), section 1.1 and Appendix. It is a recommendation rather than a regulation. 1910.95 Appendix A is the OSHA text that writes 16.61, and the engine embeds no licensed limit table.")
+ "The course names the source: NIOSH 98-126 Criteria for a Recommended Standard: Occupational Noise Exposure (1998), section 1.1 and Appendix. It is a recommendation rather than a regulation. 1910.95 Appendix A is the OSHA text that writes 16.61, and the engine embeds no licensed limit table.")
 
 q(1, "The three OBEN TWAs, 80.752126, 87.635749 and 89.242460 dBA, sit much closer together than the three noise doses. Why is it wrong to read them as three estimates of one sound level?",
  "Each restates its own noise dose on its own criterion; the log only compresses them.",
@@ -183,7 +183,7 @@ q(2, "Which document writes TWA = 16.61 log10(D/100) + 90 and sets the OSHA PEL 
  ["NIOSH 98-126, the criteria document from 1998.",
   "OSHA Table G-16a, the table of reference hours.",
   "The OSHA Technical Manual chapter on protectors."],
- "Digest section 5: the mandatory Appendix A of 29 CFR 1910.95 writes the formula with 16.61, and the engine uses the coefficient the regulation writes. NIOSH 98-126 is the source of the NIOSH noise REL with 10.0. Table G-16a tabulates reference durations and holds no TWA formula.")
+ "As the course says, the mandatory Appendix A of 29 CFR 1910.95 writes the formula with 16.61, and the engine uses the coefficient the regulation writes. NIOSH 98-126 is the source of the NIOSH noise REL with 10.0. Table G-16a tabulates reference durations and holds no TWA formula.")
 
 # m04: reading a record
 q(3, "The fifth OBEN period lasts 0.200000 h and its NIOSH reference duration at 99.100000 dBA is 0.307786 h. What does it contribute on the NIOSH noise REL?",
@@ -205,7 +205,7 @@ q(1, "Judgement J4 refuses periods that total more than 24 hours. Which records 
  ["Noise dosimeter records alone, and nothing else.",
   "Only records on the OSHA presets, PEL and action level.",
   "Only records with a period over 8 h."],
- "Digest section 1: noise, LEX and chemical periods totalling over 24 hours are refused, on the field `periods`. The rule is about the data being one day, so it does not depend on the criterion or on any single period's length; a shift longer than 8 hours that fits in a day is accepted.")
+ "The engine's rule: noise, LEX and chemical periods totalling over 24 hours are refused, on the field `periods`. The rule is about the data being one day, so it does not depend on the criterion or on any single period's length; a shift longer than 8 hours that fits in a day is accepted.")
 
 q(2, "A worker spends exactly the 173.404361 minutes left at 95 dBA after the OBEN day. Where does the OSHA PEL noise dose then stand?",
  "At 100 percent, the whole allowance used exactly.",
@@ -226,7 +226,7 @@ q(0, "How many of the six OBEN periods does the NIOSH noise REL integrate, and w
  ["All 6, since the NIOSH threshold of 80 dBA is the lowest of the three criteria.",
   "2 of the 6, the same pair of periods the OSHA PEL setup integrates.",
   "5 of the 6, with the 81.200000 dBA period left out for being under 85 dBA."],
- "Digest section 6 counts them: the PEL setup integrates 2 of the 6 periods, the action level 5 and the NIOSH noise REL 5. The NIOSH threshold is 80 dBA, so the 81.200000 dBA period is integrated and carries 9.091664 percent, and only the 76.500000 dBA period falls under every threshold in this tier. The criterion level of 85 dBA sets the allowance and never decides what counts.")
+ "The worked example counts them: the PEL setup integrates 2 of the 6 periods, the action level 5 and the NIOSH noise REL 5. The NIOSH threshold is 80 dBA, so the 81.200000 dBA period is integrated and carries 9.091664 percent, and only the 76.500000 dBA period falls under every threshold in this tier. The criterion level of 85 dBA sets the allowance and never decides what counts.")
 
 q(1, "One day holds a single period of 16.000000 h at 85 dBA. What share of an allowance does it use on the OSHA action level, and does the engine accept it?",
  "100 percent of one allowance, and yes, since it fits inside 24 hours.",
@@ -283,7 +283,7 @@ q(0, "NIOSH Table 1-1 prints the reference duration from 80 dBA upward. How much
  ["It reproduces all 51 rows, the same count as OSHA Table G-16a.",
   "It reproduces none of them, since NIOSH prints hours and minutes.",
   "It reproduces 83 rows, one for each row of NIOSH Table 1-2."],
- "Digest section 4: 49 rows are reproduced, plus one printed row the formula refutes, which is an erratum in the source and is read in a later tier. 51 is the row count of Table G-16a, and 83 belongs to Table 1-2, the noise dose to TWA table. The golden stores hours, which the engine compares against.")
+ "The course records it: 49 rows are reproduced, plus one printed row the formula refutes, which is an erratum in the source and is read in a later tier. 51 is the row count of Table G-16a, and 83 belongs to Table 1-2, the noise dose to TWA table. The golden stores hours, which the engine compares against.")
 
 # m06: the capstone and the words
 q(1, "A hygiene report mentions flare radiation near the work area. How does this course treat it?",
@@ -291,21 +291,21 @@ q(1, "A hygiene report mentions flare radiation near the work area. How does thi
  ["It teaches flare radiation as a form of heat stress in this tier.",
   "It converts the radiant flux to a WBGT with the published weights.",
   "It treats it as a noise source, since flares are loud equipment."],
- "Digest section 25: flare and pool-fire thermal radiation, in kW/m2, is owned by the Separation and Relief courses. It is a radiant flux on a surface, and heat stress here is a WBGT index and a body's metabolic load, taught in the Expert tier. The course cites the seam and does not convert one quantity into the other.")
+ "As the course states, flare and pool-fire thermal radiation, in kW/m2, is owned by the Separation and Relief courses. It is a radiant flux on a surface, and heat stress here is a WBGT index and a body's metabolic load, taught in the Expert tier. The course cites the seam and does not convert one quantity into the other.")
 
 q(2, "In what unit does the engine take the duration of each period of a noise dose record?",
  "Hours, as `durationH` on each period.",
  ["Minutes, as the NIOSH table prints.",
   "Seconds, as a dosimeter logs them.",
   "Percent of an 8 hour shift, as a share."],
- "Digest section 25: durations are in hours for the noise dose, LEX and the 8-hour TWA, and in minutes for the STEL and the averages the Expert tier reads. The refusals name `periods[0].durationH`, the hours of a period. NIOSH Table 1-1 prints hours, minutes and seconds, and the golden stores hours.")
+ "The course's unit rule: durations are in hours for the noise dose, LEX and the 8-hour TWA, and in minutes for the STEL and the averages the Expert tier reads. The refusals name `periods[0].durationH`, the hours of a period. NIOSH Table 1-1 prints hours, minutes and seconds, and the golden stores hours.")
 
 q(3, "A report asks for the minutes left at a stated sound level on the OSHA PEL after a day's record. Which method gives that figure?",
  "The PEL share left, times the reference duration at that level, in minutes.",
  ["The reference duration at the stated level, converted to minutes, in full.",
   "The PEL share already used, times 8 hours, converted into minutes.",
   "The share left on the action level, times its reference duration."],
- "Digest section 9 derives it: after the OBEN day the PEL noise dose stands at 27.748183 percent, so 72.251817 percent of the allowance remains, and the fraction remaining times the reference duration gives 2.890073 h at 95 dBA, which is 173.404361 minutes. The whole reference duration ignores the share the day has already used. The share used times 8 hours answers nothing, and the action level has spent a different share of a different allowance.")
+ "The worked example derives it: after the OBEN day the PEL noise dose stands at 27.748183 percent, so 72.251817 percent of the allowance remains, and the fraction remaining times the reference duration gives 2.890073 h at 95 dBA, which is 173.404361 minutes. The whole reference duration ignores the share the day has already used. The share used times 8 hours answers nothing, and the action level has spent a different share of a different allowance.")
 
 emit(Q, '/root/hse-wip-hygiene/banks/h2b_exam.json', expect_n=42)
 finish()

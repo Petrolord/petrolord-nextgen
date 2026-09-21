@@ -8,7 +8,7 @@
    "The crude's availability divided by the cargo size, rounded up to a whole cargo."
   ],
   "answer": 1,
-  "explanation": "The digest prints the rule: cargoes = the crude run divided by the cargo size, rounded UP to a whole cargo (at least one). The days between cargoes are the 31 days divided by the cargoes, rounded DOWN."
+  "explanation": "The course prints the rule: cargoes = the crude run divided by the cargo size, rounded UP to a whole cargo (at least one). The days between cargoes are the 31 days divided by the cargoes, rounded DOWN."
  },
  {
   "prompt": "Forcados (illustrative) runs 1100000.00 bbl at a cargo size of 400000.00 bbl, from period start 2027-03-01. What receipts does the schedule make?",
@@ -44,7 +44,7 @@
   "explanation": "The value of a receipt is its share of that crude's cost. The plan's Forcados crude cost is 85360000.00, and each of the three parts, rcpt-2, rcpt-3 and rcpt-4, carries 28453333.33."
  },
  {
-  "prompt": "The same plan is cascaded again at a cargo size of 150000 bbl. What does the digest show changing?",
+  "prompt": "The same plan is cascaded again at a cargo size of 150000 bbl. What does the course show changing?",
   "options": [
    "The crude receipts stay at 6, and each carries a smaller share of its crude.",
    "The crude receipts become 15, and the plan's volumes and margin stay as they were.",
@@ -107,10 +107,10 @@
    "It reads the machine clock and dates the schedule from that day."
   ],
   "answer": 3,
-  "explanation": "The digest names the argument: cascadeToSchedule reads it when periodStart is left out. The same plan cascaded on two different days would then give two different schedules."
+  "explanation": "The course names the argument: cascadeToSchedule reads it when periodStart is left out. The same plan cascaded on two different days would then give two different schedules."
  },
  {
-  "prompt": "ABUA's schedule is built in seven time zones with the period start passed as the string \"2027-03-01\". What does the digest print?",
+  "prompt": "ABUA's schedule is built in seven time zones with the period start passed as the string \"2027-03-01\". What does the course print?",
   "options": [
    "Every zone's 41 dates match the UTC run, from 2027-03-01 to 2027-03-31.",
    "Africa/Lagos and Pacific/Kiritimati start one day early, on 2027-02-28, and the rest match.",
@@ -118,7 +118,7 @@
    "Only UTC and Europe/London match; the other five shift by a day."
   ],
   "answer": 0,
-  "explanation": "A period start given as a YYYY-MM-DD string is the same calendar day in every zone. That is how the Suite page passes it and how this digest passes it."
+  "explanation": "A period start given as a YYYY-MM-DD string is the same calendar day in every zone. That is how the Suite page passes it and how this course passes it."
  },
  {
   "prompt": "The period start is handed over as new Date(2027, 2, 1), a Date built at local midnight. In which zones does the schedule start on 2027-02-28?",
@@ -126,7 +126,7 @@
    "America/New_York and America/Los_Angeles.",
    "Pacific/Pago_Pago and Pacific/Kiritimati.",
    "Africa/Lagos and Pacific/Kiritimati.",
-   "Every zone the digest tried except UTC."
+   "Every zone the course tried except UTC."
   ],
   "answer": 2,
   "explanation": "Built at local midnight, the Date gives 2027-02-28 as the first date in Africa/Lagos and Pacific/Kiritimati, and every date matches UTC reads false there. The two American zones and Pago Pago keep 2027-03-01."

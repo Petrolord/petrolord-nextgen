@@ -2,7 +2,7 @@
  {
   "prompt": "A depressuring study is run to ask whether a vessel is down inside the customary fifteen minutes. What does this engine hold about that figure?",
   "options": [
-   "It holds it as the limit the march refuses at, which the digest bisects out at 7199.999985603571 s.",
+   "It holds it as the limit the march refuses at, which the course bisects out at 7199.999985603571 s.",
    "Nothing at all. There is no constant for it, no returned flag and no verdict of any kind.",
    "It holds it as a warning edge, so a run past 900.000000 s returns a note.",
    "It holds it as the default stopping point of a march, so a call with no end pressure stated runs to fifteen minutes."
@@ -30,7 +30,7 @@
    "The pressure ratio, which the orifice moves by the same factor that it moves the clock."
   ],
   "answer": 0,
-  "explanation": "That is the only ratio the digest computes anywhere on this sweep, which is why it is the only one you may quote from it. Every ratio you form yourself down a printed table is a figure nothing stands behind."
+  "explanation": "That is the only ratio the course computes anywhere on this sweep, which is why it is the only one you may quote from it. Every ratio you form yourself down a printed table is a figure nothing stands behind."
  },
  {
   "prompt": "The substep column reads 0 on every row of the orifice sweep, from 0.500000 in through to 3.000000 in. What is that column a statement about?",
@@ -44,7 +44,7 @@
   "explanation": "At the same step size the small-vessel and large-orifice cases in the next module subdivide every step they take. The column is about what a fixed step has to work with rather than about the orifice on its own."
  },
  {
-  "prompt": "The design question runs backwards: which orifice meets a stated time. The engine has no route for it. How does the digest fill that gap, and why that way?",
+  "prompt": "The design question runs backwards: which orifice meets a stated time. The engine has no route for it. How does the course fill that gap, and why that way?",
   "options": [
    "By rearranging the closed form of the march for the diameter, since that closed form and the marched time agree to about a part in a million anyway.",
    "By interpolating between the sweep rows at 0.500000 in and at 0.750000 in, since the time falls monotonically right across that whole interval.",
@@ -66,7 +66,7 @@
   "explanation": "A bisection needs its answer inside its bracket and cannot tell you when it is not. Reading the result back against the sweep is the cheap confirmation that it was."
  },
  {
-  "prompt": "Across eight orifices the final temperature column reads 340.807983 degR on every row, and the digest counts the distinct values at 1. Why is the count worth more than the column?",
+  "prompt": "Across eight orifices the final temperature column reads 340.807983 degR on every row, and the course counts the distinct values at 1. Why is the count worth more than the column?",
   "options": [
    "It proves the temperature right, since eight runs agreed on it.",
    "It shows the march converged, since one end state comes back whatever the step.",
@@ -85,7 +85,7 @@
    "The choked floor of 26.758009 psia, which is the coldest state this march can reach."
   ],
   "answer": 0,
-  "explanation": "The orifice decides only how long the vessel takes to get there, which is harder to hold than it looks because the orifice is the one thing a designer can change. What does move the end state is the end pressure, and the digest walks seven of them."
+  "explanation": "The orifice decides only how long the vessel takes to get there, which is harder to hold than it looks because the orifice is the one thing a designer can change. What does move the end state is the end pressure, and the course walks seven of them."
  },
  {
   "prompt": "Taken to 600.000000 psia the vessel finishes at 464.976597 degR with 0.432854 of the inventory gone; taken to 25.000000 psia it finishes at 232.011700 degR with 0.952641 gone. What may be said about that table?",
@@ -126,7 +126,7 @@
    "The vessel, since the orifice that empties it in a stated time is fixed once the volume and the two pressures are.",
    "This march on this vessel, at these gas properties, this discharge coefficient and this step size, reaching 145.000000 psia in 900.000000 s.",
    "The standard ladder, since it is the area below which a blowdown restriction has to be doubled up.",
-   "The closed form, since the digest solved that integral for the diameter that lands on 900.000000 s."
+   "The closed form, since the course solved that integral for the diameter that lands on 900.000000 s."
   ],
   "answer": 1,
   "explanation": "It is not an orifice anybody can buy, and turning it into hardware is a separate step. The API 526 ladder the Associate tier worked through is a table for pressure relief valves rather than for blowdown restrictions."

@@ -41,7 +41,7 @@
    "0.000000000000 per year, because its stated probability of death there is zero: the control room lies outside the flammable cloud."
   ],
   "answer": 3,
-  "explanation": "A scenario whose probability of death is zero at a place contributes zero there, and the digest says the flash fire at the control room, which lies outside the flammable cloud, adds 0.000000000000. A frequency adds only through its probability of death, which is a stated input. 0.000006545000 is the whole control room LSIR, which comes from the other three outcomes, and occupancy belongs to the individual risk per annum of a person."
+  "explanation": "A scenario whose probability of death is zero at a place contributes zero there, and the course says the flash fire at the control room, which lies outside the flammable cloud, adds 0.000000000000. A frequency adds only through its probability of death, which is a stated input. 0.000006545000 is the whole control room LSIR, which comes from the other three outcomes, and occupancy belongs to the individual risk per annum of a person."
  },
  {
   "prompt": "What share of the EREMOR process deck LSIR does the flash fire carry, and what is its contribution?",
@@ -96,7 +96,7 @@
    "A worst case LSIR, larger than the engine's figure."
   ],
   "answer": 1,
-  "explanation": "The digest says summing the probabilities of death without their frequencies gives a number with no unit at all, and that the LSIR is the SUM of f times Pd. A probability of death is a conditional probability given the scenario, so it carries no frequency. The engine reports no yearly probability of death beside the LSIR, and a sum with no unit is no bound on an LSIR, however large it looks."
+  "explanation": "The course says summing the probabilities of death without their frequencies gives a number with no unit at all, and that the LSIR is the SUM of f times Pd. A probability of death is a conditional probability given the scenario, so it carries no frequency. The engine reports no yearly probability of death beside the LSIR, and a sum with no unit is no bound on an LSIR, however large it looks."
  },
  {
   "prompt": "Why does an LSIR describe a PLACE rather than a person?",
@@ -118,7 +118,7 @@
    "At the centreline probability of death, taken as given, because the concentration, the probit and the probability integral before it are consequence modelling and belong to the consequence course."
   ],
   "answer": 3,
-  "explanation": "The digest says the early steps, the concentration, the probit and the probability integral, are consequence modelling and belong to the consequence course; from the effective cloud width onward the steps are QRA arithmetic, and this course starts there. The earlier steps are never run here, and the course does reproduce the later ones, from the probability of death through to the contribution."
+  "explanation": "The course says the early steps, the concentration, the probit and the probability integral, are consequence modelling and belong to the consequence course; from the effective cloud width onward the steps are QRA arithmetic, and this course starts there. The earlier steps are never run here, and the course does reproduce the later ones, from the probability of death through to the contribution."
  },
  {
   "prompt": "The whole Appendix 6.B chain, as the golden records it, gives a probability of death of 0.380294556093, and the source prints 0.381. What explains the gap?",
@@ -129,7 +129,7 @@
    "The engine rounds each step to three decimals and so loses the last digit."
   ],
   "answer": 2,
-  "explanation": "The digest says the whole chain gives 0.380294556093, which rounds to 0.380, and that the printed 0.381 follows only from the rounded effective cloud width of 86.2 m. The source is internally rounded, which is a fact about the SOURCE, and both routes reproduce its printed contribution of 7e-9 per year to two significant figures. No hours enter this chain, and the engine rounds no step."
+  "explanation": "The course says the whole chain gives 0.380294556093, which rounds to 0.380, and that the printed 0.381 follows only from the rounded effective cloud width of 86.2 m. The source is internally rounded, which is a fact about the SOURCE, and both routes reproduce its printed contribution of 7e-9 per year to two significant figures. No hours enter this chain, and the engine rounds no step."
  },
  {
   "prompt": "Step 6 of Appendix 6.B is run through `locationIndividualRisk` with f PM Pphi of 1.84e-8 per year and the printed probability of death of 0.381. What does the engine return?",
@@ -143,7 +143,7 @@
   "explanation": "Through `locationIndividualRisk` the product 1.84e-8 times 0.381 is 0.000000007010 per year, and the source prints 7e-9. 0.000000006997 is the whole chain's contribution, which uses the engine's own probability of death; this call uses the printed one as stated. The engine drops no contribution for being small, and the probability of death still multiplies the frequency."
  },
  {
-  "prompt": "What inputs does the digest give for the Appendix 6.B chain, and how is the coverage probability formed?",
+  "prompt": "What inputs does the course give for the Appendix 6.B chain, and how is the coverage probability formed?",
   "options": [
    "A frequency f of 5e-7 per year, 12 wind sectors and R = 361 m; the coverage probability is ECW / R, with the sector count used later.",
    "A frequency f of 1.84e-8 per year, 12 wind sectors and R = 86.2 m; the coverage probability is nws ECW / (2 pi R).",

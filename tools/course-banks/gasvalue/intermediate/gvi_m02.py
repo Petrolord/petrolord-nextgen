@@ -29,7 +29,7 @@ q(0, "How does yieldCeiling turn a heating value into the gas to power ceiling?"
  ["The heating value over BTU_PER_MWH, with no thousand.",
   "The heating value times BTU_PER_MWH over a thousand.",
   "The gas mass times the heating value over BTU_PER_MWH."],
- "The digest states the gas to power ceiling as the heating value in MWh: \"the heating value times a thousand over BTU_PER_MWH\". The heating value is per standard cubic foot and the yield is per Mscf, and BTU_PER_MWH is 3412141.6331.")
+ "The course states the gas to power ceiling as the heating value in MWh: \"the heating value times a thousand over BTU_PER_MWH\". The heating value is per standard cubic foot and the yield is per Mscf, and BTU_PER_MWH is 3412141.6331.")
 
 q(2, "What does yieldCeiling print as the CNG ceiling per Mscf on EGBEMA?",
  "26.7066 kg, on the gas mass basis",
@@ -50,7 +50,7 @@ q(2, "The studio's LPG route on its opening gas is typed at 0.0045 t/Mscf. What 
  ["Refused, above the ceiling of 0.0056 t/Mscf it would need.",
   "Within a ceiling of 0.0067 t/Mscf; typed over ceiling 0.8062.",
   "Within a ceiling of 0.0255 t/Mscf; typed over ceiling 0.8062."],
- "The digest: \"The studio's LPG route on its opening gas at 0.0045 t/Mscf is within its ceiling of 0.0056 t/Mscf, and the typed yield over the ceiling is 0.8062.\" 0.0067 is EGBEMA's LPG ceiling and 0.0255 the studio gas's mini LNG ceiling.")
+ "The course states: \"The studio's LPG route on its opening gas at 0.0045 t/Mscf is within its ceiling of 0.0056 t/Mscf, and the typed yield over the ceiling is 0.8062.\" 0.0067 is EGBEMA's LPG ceiling and 0.0255 the studio gas's mini LNG ceiling.")
 
 q(3, "The studio's opening gas is typed with an LPG yield of 0.02 t/Mscf. Which ceiling and basis does the refusal print?",
  "0.005582 t on the propane and heavier basis",
@@ -64,14 +64,14 @@ q(1, "EGBEMA's CNG yield is typed at 30 kg/Mscf. What does the engine answer?",
  ["A year on 30 kg, flagged as above the ceiling of 26.7066 kg.",
   "A year on 26.7066 kg, the yield cut back to the ceiling.",
   "REFUSED: more than the 6.6647 kg the gas holds (propane and heavier)."],
- "The digest prints: REFUSED: Route \"Compressed natural gas\" yields 30 kg per Mscf, more than the 26.706618 kg the gas holds (gas mass). A yield above what the gas contains is refused. No year is printed at 30 kg or at the ceiling.")
+ "The course prints: REFUSED: Route \"Compressed natural gas\" yields 30 kg per Mscf, more than the 26.706618 kg the gas holds (gas mass). A yield above what the gas contains is refused. No year is printed at 30 kg or at the ceiling.")
 
 q(3, "EGBEMA's gas to power yield is typed at 0 MWh/Mscf, below its ceiling of 0.3659. What does the engine answer?",
  "REFUSED: the route needs a positive product yield per Mscf.",
  ["A year with productPerYear of zero and a margin below zero.",
   "It takes the ceiling of 0.3659 MWh as the yield.",
   "It takes a zero yield and names it in assumedZero."],
- "The digest: EGBEMA, gas to power at 0 MWh/Mscf gives REFUSED: Route \"Gas to power or gas to wire\" needs a positive product yield per Mscf. A yield above the ceiling is refused, and a yield of zero is refused.")
+ "The course states: EGBEMA, gas to power at 0 MWh/Mscf gives REFUSED: Route \"Gas to power or gas to wire\" needs a positive product yield per Mscf. A yield above the ceiling is refused, and a yield of zero is refused.")
 
 q(0, "Which function issues the refusal of a yield above what the gas holds?",
  "routeEconomics",
@@ -85,7 +85,7 @@ q(1, "EGBEMA's gas to power ceiling is 0.3659 MWh per Mscf. Which EGBEMA heating
  ["1537.2878 Btu/scf, the heating values weighted by mass",
   "1308.6069 Btu/scf, the hydrocarbons alone scaled to one",
   "1035.6050 Btu/scf, the ghvBtuScf of the lean OGUTA gas"],
- "The ceiling is the heating value times a thousand over BTU_PER_MWH, and EGBEMA's heating value is ghvBtuScf 1248.4110, blended on moles. The digest prints 1537.2878 and 1308.6069 as two shortcuts beside the engine's figure, and 1035.6050 is OGUTA's.")
+ "The ceiling is the heating value times a thousand over BTU_PER_MWH, and EGBEMA's heating value is ghvBtuScf 1248.4110, blended on moles. The course prints 1537.2878 and 1308.6069 as two shortcuts beside the engine's figure, and 1035.6050 is OGUTA's.")
 
 q(2, "Mini LNG's yield unit is the tonne. Which ceiling does its row carry for the associated gas?",
  "0.0267 t",
@@ -99,7 +99,7 @@ q(0, "Where do the EGBEMA yields the study typed sit against their ceilings?",
  ["The LPG yield of 0.0052 t sits above the 0.0010 t ceiling.",
   "The CNG yield of 18.5 kg sits above the 0.3659 ceiling.",
   "The mini LNG yield of 0.0175 t sits above its 0.0056 t."],
- "The digest: \"Every EGBEMA yield typed sits at or below its ceiling.\" 0.0010 is OGUTA's LPG ceiling, 0.3659 is EGBEMA's gas to power ceiling in MWh, and 0.0056 is the studio gas's LPG ceiling. EGBEMA's own ceilings are 26.7066, 0.0267, 0.0067 and 0.3659.")
+ "The course states: \"Every EGBEMA yield typed sits at or below its ceiling.\" 0.0010 is OGUTA's LPG ceiling, 0.3659 is EGBEMA's gas to power ceiling in MWh, and 0.0056 is the studio gas's LPG ceiling. EGBEMA's own ceilings are 26.7066, 0.0267, 0.0067 and 0.3659.")
 
 q(3, "Which exported constant does the gas to power ceiling divide by?",
  "BTU_PER_MWH",

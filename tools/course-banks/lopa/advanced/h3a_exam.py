@@ -181,7 +181,7 @@ q(1,
  ["The common cause term and the independent term, since both of them are carried by every redundant subsystem whatever interval is chosen for it.",
   "The detected failures over the MTTR alone, since the restoration time after a test is charged only when a test has found something.",
   "Nothing, since every part of the PFDavg grows with T1."],
- "The digest names the three pieces: detected failures over the MTTR, the MRT, and the uncovered part under partial coverage. The independent term and the undetected common cause term both carry T1 and shrink as T1 goes to zero, and the MRT is charged on every undetected failure however often the test runs, which is why a perfect test still leaves the OBAGI valve a floor of 0.000021600000."),
+ "The course names the three pieces: detected failures over the MTTR, the MRT, and the uncovered part under partial coverage. The independent term and the undetected common cause term both carry T1 and shrink as T1 goes to zero, and the MRT is charged on every undetected failure however often the test runs, which is why a perfect test still leaves the OBAGI valve a floor of 0.000021600000."),
 
 # ---- the published example and its inferences ----
 
@@ -231,7 +231,7 @@ q(0,
  ["Every whole number of years from five to fifteen.",
   "Ten and twenty years, which bracket the ordinary assumed life.",
   "Eight, ten and twelve years, the three closest to the ordinary assumed life."],
- "The sweep covers five, eight, ten, twelve and fifteen years. That it tried only five lifetimes is part of why the digest calls the result strong evidence short of proof, so a sweep of every year or of only two or three values would each misstate what was done."),
+ "The sweep covers five, eight, ten, twelve and fifteen years. That it tried only five lifetimes is part of why the course calls the result strong evidence short of proof, so a sweep of every year or of only two or three values would each misstate what was done."),
 
 q(3,
  "Which of these is a fact about the published SOURCE alone?",

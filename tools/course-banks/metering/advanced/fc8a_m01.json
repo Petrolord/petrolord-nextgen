@@ -55,7 +55,7 @@
   "explanation": "The engine returns 19608.4845 bbl and 18845.9323 bbl side by side and both are honest answers to different questions, which is why the result carries a name against each."
  },
  {
-  "prompt": "The digest prints a relation between the two capacities of this tank. What does it actually give a writer permission to say?",
+  "prompt": "The course prints a relation between the two capacities of this tank. What does it actually give a writer permission to say?",
   "options": [
    "That the working capacity is the larger of the two by 762.5522 bbl, which is the difference printed as the first value less the second.",
    "That the ratio of 1.040462 is the working capacity over the nominal, so the working figure is what the line divides by.",

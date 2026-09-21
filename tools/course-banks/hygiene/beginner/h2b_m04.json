@@ -8,7 +8,7 @@
    "The period's share of the day's TWA, in dBA, before the logarithm."
   ],
   "answer": 0,
-  "explanation": "Digest section 7 gives each period's reference duration as the denominator of its contribution, and the noise dose is the sum of those shares. Dividing by the 8 hours of the day ignores the level entirely except through a weight the engine does not use. Contributions are percentages of an allowance, and the TWA is computed only from their total."
+  "explanation": "The lesson gives each period's reference duration as the denominator of its contribution, and the noise dose is the sum of those shares. Dividing by the 8 hours of the day ignores the level entirely except through a weight the engine does not use. Contributions are percentages of an allowance, and the TWA is computed only from their total."
  },
  {
   "prompt": "On the action level, period 1 lasts 2.600000 h and carries 14.747186 percent, while period 2 lasts only 1.900000 h and carries 23.100555 percent. Why does the shorter period carry more?",

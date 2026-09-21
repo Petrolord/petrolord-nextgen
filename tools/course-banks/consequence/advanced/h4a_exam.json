@@ -41,7 +41,7 @@
    "It matches the conference paper's printed constants"
   ],
   "answer": 1,
-  "explanation": "Section 23: the TNT blast energy is refused outside 4.0e6 to 5.0e6 J/kg to catch a units slip, and the refusal message itself cites the Yellow Book's 4.19e6 to 4.65e6. The yield is its own input, a heat of combustion goes in as Emf, and the conference paper's constants belong to the overpressure fit."
+  "explanation": "The course explains: the TNT blast energy is refused outside 4.0e6 to 5.0e6 J/kg to catch a units slip, and the refusal message itself cites the Yellow Book's 4.19e6 to 4.65e6. The yield is its own input, a heat of combustion goes in as Emf, and the conference paper's constants belong to the overpressure fit."
  },
  {
   "prompt": "Which constants appear in the engine's Kinney and Graham model string?",
@@ -63,7 +63,7 @@
    "The Yellow Book TNT equivalence, Q_TNT = alpha_e Qf Emf / Em_TNT"
   ],
   "answer": 1,
-  "explanation": "Section 24 quotes the model string \"Hopkinson-Cranz cube-root scaling, Z = R / W^(1/3)\". Kinney and Graham is the overpressure fit that takes Z, a square root law would be the wrong scaling, Kingery-Bulmash lent only the range, and Q_TNT is the model string of `tntEquivalentMass`."
+  "explanation": "The course quotes the model string \"Hopkinson-Cranz cube-root scaling, Z = R / W^(1/3)\". Kinney and Graham is the overpressure fit that takes Z, a square root law would be the wrong scaling, Kingery-Bulmash lent only the range, and Q_TNT is the model string of `tntEquivalentMass`."
  },
  {
   "prompt": "A charge and a distance give Z below 0.05 m/kg^(1/3). What does `kinneyGrahamOverpressure` do?",
@@ -129,7 +129,7 @@
    "The Yellow Book prints the same distances"
   ],
   "answer": 0,
-  "explanation": "Section 25 says every row round trips through the forward fit, and section 24 says the forward fit reproduces the published column, so Kinney and Graham forward and inverse is graded. Kingery-Bulmash is not in the engine, the inverse is a bisection on Z, and the Yellow Book prints no BONGA distances."
+  "explanation": "The course says every row round trips through the forward fit, and the course says the forward fit reproduces the published column, so Kinney and Graham forward and inverse is graded. Kingery-Bulmash is not in the engine, the inverse is a bisection on Z, and the Yellow Book prints no BONGA distances."
  },
  {
   "prompt": "Under P = Phi(Y - 5), what probability does a probit of 3 stand for?",
@@ -195,7 +195,7 @@
    "1.666556"
   ],
   "answer": 1,
-  "explanation": "Section 27 gives 5.092979 for the Purple Book form, next to Tsao and Perry's 5.094507, because the Purple Book's -36.38 is Tsao and Perry's -36.378 rounded. 2.994507 is Eisenberg, and 1.666556 is Eisenberg in W/m2 at 10000 W/m2 for 30 s."
+  "explanation": "The course gives 5.092979 for the Purple Book form, next to Tsao and Perry's 5.094507, because the Purple Book's -36.38 is Tsao and Perry's -36.378 rounded. 2.994507 is Eisenberg, and 1.666556 is Eisenberg in W/m2 at 10000 W/m2 for 30 s."
  },
  {
   "prompt": "`probabilityToProbit` is called with a probability of 1. What does the engine return, in its own words?",
@@ -217,7 +217,7 @@
    "In W/m2 for every preset; each preset converts it to the unit its source prints"
   ],
   "answer": 3,
-  "explanation": "Section 27: each preset is fed the heat flux in W/m2 and converts it to its own unit, which is how the kW/m2 presets and the W/m2 Purple Book form can be compared on one exposure. The caller never converts, and (kW/m2)^(4/3) s is the unit of the thermal dose."
+  "explanation": "The course explains: each preset is fed the heat flux in W/m2 and converts it to its own unit, which is how the kW/m2 presets and the W/m2 Purple Book form can be compared on one exposure. The caller never converts, and (kW/m2)^(4/3) s is the unit of the thermal dose."
  },
  {
   "prompt": "Ten minutes in 100 ppm of chlorine: what fraction harmed does the Lees preset predict?",
@@ -272,7 +272,7 @@
    "4.431141"
   ],
   "answer": 2,
-  "explanation": "At 293.15 K the concentration is 1133.397113 mg/m3 and the probit 4.570702, for a probability of 0.333853. 4.538569 is the default 298.15 K result, 5.967660 the carbon monoxide worked case and 4.431141 the carbon monoxide chain of section 33."
+  "explanation": "At 293.15 K the concentration is 1133.397113 mg/m3 and the probit 4.570702, for a probability of 0.333853. 4.538569 is the default 298.15 K result, 5.967660 the carbon monoxide worked case and 4.431141 the carbon monoxide chain in the course's worked note."
  },
  {
   "prompt": "Appendix 6.B step 4.3 of the Purple Book prints Pr 5.97. What does the engine's own probit come to?",
@@ -283,7 +283,7 @@
    "5.092979"
   ],
   "answer": 1,
-  "explanation": "The engine computes 5.967660, which rounds to the printed figure. 5.97 is the book's value itself, 4.431141 comes from a far weaker exposure in section 33, and 5.092979 belongs to the heat probits."
+  "explanation": "The engine computes 5.967660, which rounds to the printed figure. 5.97 is the book's value itself, 4.431141 comes from a far weaker exposure in the chained worked note, and 5.092979 belongs to the heat probits."
  },
  {
   "prompt": "Which Lees preset shares b = 3.008 and n = 1.43 with lees-hydrogen-sulphide?",
@@ -305,7 +305,7 @@
    "Only when a molar mass is given; `ppmToMgM3` and `mgM3ToPpm` are exact inverses at the same temperature and pressure"
   ],
   "answer": 3,
-  "explanation": "Section 12: the plume returns mg/m3, and ppm only when a molar mass is given; the two functions are exact inverses at the same temperature and pressure. The engine computes R T / P and 24.45 is only the rounding of 24.465404 L/mol, every class prints both columns, and ppm is the unit of the Lees presets."
+  "explanation": "The course explains: the plume returns mg/m3, and ppm only when a molar mass is given; the two functions are exact inverses at the same temperature and pressure. The engine computes R T / P and 24.45 is only the rounding of 24.465404 L/mol, every class prints both columns, and ppm is the unit of the Lees presets."
  },
  {
   "prompt": "In the table of engine against exact probits, what difference is printed at a probability of 0.5?",
@@ -319,7 +319,7 @@
   "explanation": "At one half the engine's probit is 5.000000 and the table prints a difference of -1.78e-14, effectively none, because the CDF is symmetric there. 8.59e-7 and -8.59e-7 are the 0.01 and 0.99 rows and -3.91e-7 the 0.1 row."
  },
  {
-  "prompt": "A spill has no bund. What does section 31 record about unconfined pool spreading?",
+  "prompt": "A spill has no bund. What does the course record about unconfined pool spreading?",
   "options": [
    "It is computed from the Mackay and Matsugu evaporation rate until the pool stops growing",
    "The Yellow Book spreading model is a differential equation for a fed pool, so only a stated thickness is implemented, and the analyst says where it came from",
@@ -327,7 +327,7 @@
    "The engine confines it on a default bund floor of 400 m2, the teaching stream's bund"
   ],
   "answer": 1,
-  "explanation": "Section 31: unconfined pool spreading is out of the engine because the Yellow Book model is a differential equation for a fed pool; `poolFromSpill` takes a stated thickness, and the note says where it came from. Evaporation does not size the pool, 0.005 m is only one row of a teaching sweep, and the engine carries no default bund, refusing only when neither a bund nor a thickness is given."
+  "explanation": "The course explains: unconfined pool spreading is out of the engine because the Yellow Book model is a differential equation for a fed pool; `poolFromSpill` takes a stated thickness, and the note says where it came from. Evaporation does not size the pool, 0.005 m is only one row of a teaching sweep, and the engine carries no default bund, refusing only when neither a bund nor a thickness is given."
  },
  {
   "prompt": "Why is the TNO multi-energy method not in the engine?",
@@ -338,7 +338,7 @@
    "It needs a Kingery-Bulmash fit to run"
   ],
   "answer": 0,
-  "explanation": "Section 31 gives the reason quoted and the remedy. The multi-energy method is a blast method for congestion and carries no frequency; nothing in the digest equates it with Kinney and Graham at any yield; and its absence has nothing to do with Kingery-Bulmash."
+  "explanation": "The course gives the reason quoted and the remedy. The multi-energy method is a blast method for congestion and carries no frequency; nothing in the course equates it with Kinney and Graham at any yield; and its absence has nothing to do with Kingery-Bulmash."
  },
  {
   "prompt": "Mackay and Matsugu evaporation is taught in this course. Why is it never a graded answer?",
@@ -349,7 +349,7 @@
    "It is a single route quantity: nothing catches a mistake copied into engine and oracle except the transcription"
   ],
   "answer": 3,
-  "explanation": "Section 32 lists Mackay and Matsugu with 'nothing: the transcription alone' and 'no'. The calm air refusal is part of its form, 0.004786 is the constant as exported with no erratum recorded, and `poolEvaporationMackayMatsugu` is an engine function."
+  "explanation": "The course lists Mackay and Matsugu with 'nothing: the transcription alone' and 'no'. The calm air refusal is part of its form, 0.004786 is the constant as exported with no erratum recorded, and `poolEvaporationMackayMatsugu` is an engine function."
  },
  {
   "prompt": "Thomas's flame length is in the engine twice. Which of the two is graded, and why?",
@@ -360,7 +360,7 @@
    "Neither"
   ],
   "answer": 2,
-  "explanation": "Section 32: Thomas with wind, tilt and the surface emissive power are backed by the Yellow Book pool fire and graded; Thomas in still air reads 'nothing: the transcription alone'. Being imported does not make a second route, and the two forms disagree at no wind, 35.746382 m against 37.101102 m for ERHA."
+  "explanation": "The course explains: Thomas with wind, tilt and the surface emissive power are backed by the Yellow Book pool fire and graded; Thomas in still air reads 'nothing: the transcription alone'. Being imported does not make a second route, and the two forms disagree at no wind, 35.746382 m against 37.101102 m for ERHA."
  },
  {
   "prompt": "How does the engine's validation record decide which quantities can be graded?",
@@ -371,7 +371,7 @@
    "It grades what the Yellow Book prints"
   ],
   "answer": 1,
-  "explanation": "Section 32 describes the planted mistake test: a mistake copied into both engine and oracle is caught only by a second route or a published worked number. Agreement between engine and oracle cannot catch a shared mistake, which is the point, and the Yellow Book stands behind only some rows."
+  "explanation": "The course describes the planted mistake test: a mistake copied into both engine and oracle is caught only by a second route or a published worked number. Agreement between engine and oracle cannot catch a shared mistake, which is the point, and the Yellow Book stands behind only some rows."
  },
  {
   "prompt": "Which of these belongs in a consequence note for the chain's first step, the AMENAM gas line?",
@@ -382,7 +382,7 @@
    "The Facilities courses' setback for that line"
   ],
   "answer": 0,
-  "explanation": "Section 33 opens the note's list with the release case and its hole, pressure and temperature, then the regime. The regime is reported and stated. A frequency belongs to the later quantitative risk course and a setback to the Facilities courses, and this course computes neither."
+  "explanation": "The course opens the note's list with the release case and its hole, pressure and temperature, then the regime. The regime is reported and stated. A frequency belongs to the later quantitative risk course and a setback to the Facilities courses, and this course computes neither."
  },
  {
   "prompt": "A client asks for the potential loss of life implied by the chain's probability of 0.284726. What does this course do?",
@@ -393,7 +393,7 @@
    "Names PLL as belonging to the later quantitative risk course and computes none; the probability is an effect given the release"
   ],
   "answer": 3,
-  "explanation": "Section 22 places individual risk, the potential loss of life and the F-N curve in the later quantitative risk course; this course never computes or grades one. A probit is not a PLL, and building an F-N point needs frequencies the engine never has."
+  "explanation": "The course places individual risk, the potential loss of life and the F-N curve in the later quantitative risk course; this course never computes or grades one. A probit is not a PLL, and building an F-N point needs frequencies the engine never has."
  },
  {
   "prompt": "The Gaussian plume step of a chain carries its basis. At 500 m in class D, which citation does the plume report?",
@@ -404,7 +404,7 @@
    "CCOHS, Converting occupational exposure limits from mg/m3 to ppm (24.45 L/mol at 25 C, 760 torr)"
   ],
   "answer": 2,
-  "explanation": "Section 4 quotes this basis for the plume at 500 m in class D, so the result carries its own citation. The Purple Book's Appendix 6.B is the published check, the Yellow Book fixes the source terms and fires, and CCOHS fixes the ppm conversion."
+  "explanation": "The course quotes this basis for the plume at 500 m in class D, so the result carries its own citation. The Purple Book's Appendix 6.B is the published check, the Yellow Book fixes the source terms and fires, and CCOHS fixes the ppm conversion."
  },
  {
   "prompt": "Why does a consequence note state the TNT yield it used?",
@@ -415,10 +415,10 @@
    "The yield sets the ambient pressure that the overpressure fit multiplies its ratio by"
   ],
   "answer": 1,
-  "explanation": "Section 33 lists a TNT yield among the stated inputs that are not the engine's own, and section 32 lists the TNT equivalence as single route, which is why a graded blast states its TNT mass. The engine carries no yield default, the Yellow Book reports 0.02 to 0.2 in use, and the ambient is its own input, 101325 Pa unless stated."
+  "explanation": "The course lists a TNT yield among the stated inputs that are not the engine's own, and the course lists the TNT equivalence as single route, which is why a graded blast states its TNT mass. The engine carries no yield default, the Yellow Book reports 0.02 to 0.2 in use, and the ambient is its own input, 101325 Pa unless stated."
  },
  {
-  "prompt": "A note reports a thermal lethality of 0.953436 on Eisenberg for 35000 W/m2 for 40 s. What does section 33 ask it to show beside that figure?",
+  "prompt": "A note reports a thermal lethality of 0.953436 on Eisenberg for 35000 W/m2 for 40 s. What does the course ask it to show beside that figure?",
   "options": [
    "The other presets for the same exposure, such as Lees at 0.858677, with the reason for the choice",
    "Nothing, since Eisenberg is the only thermal preset the capstones grade",
@@ -426,7 +426,7 @@
    "The thermal dose in W/m2"
   ],
   "answer": 0,
-  "explanation": "Section 33 asks a note to name the method it used and why, and to show the other beside it, since the disagreement is information; the preset table prints Lees at 0.858677 and Tsao and Perry at 0.999921 for this exposure. Societal risk belongs to the later quantitative risk course, and the thermal dose is in s (kW/m2)^(4/3) for Eisenberg."
+  "explanation": "The course asks a note to name the method it used and why, and to show the other beside it, since the disagreement is information; the preset table prints Lees at 0.858677 and Tsao and Perry at 0.999921 for this exposure. Societal risk belongs to the later quantitative risk course, and the thermal dose is in s (kW/m2)^(4/3) for Eisenberg."
  },
  {
   "prompt": "The chain treated a methane line's release as carbon monoxide in the UBIT wind. What must its note state about the receptor?",
@@ -437,7 +437,7 @@
    "Its height and whether it is on the centreline, since the chain's 4582.243793 mg/m3 is a ground level centreline value"
   ],
   "answer": 3,
-  "explanation": "Section 33 lists the receptor height and whether it is on the centreline among what a note states, and the chain's value is at ground level on the centreline 200 m downwind. The concentration changes with height and with crosswind distance, and individual risk belongs to the later quantitative risk course."
+  "explanation": "The course lists the receptor height and whether it is on the centreline among what a note states, and the chain's value is at ground level on the centreline 200 m downwind. The concentration changes with height and with crosswind distance, and individual risk belongs to the later quantitative risk course."
  },
  {
   "prompt": "Which of these words may appear in this course only where a seam to another course is named?",
@@ -448,7 +448,7 @@
    "k beta"
   ],
   "answer": 2,
-  "explanation": "Section 34's row on risk says individual risk, PLL, F-N and ALARP appear only where the seam is named. Thermal dose, toxic load and lethal dose are the qualified words the course requires, heat flux and burning flux are required forms too, and k beta is the Babrauskas product."
+  "explanation": "The course's row on risk says individual risk, PLL, F-N and ALARP appear only where the seam is named. Thermal dose, toxic load and lethal dose are the qualified words the course requires, heat flux and burning flux are required forms too, and k beta is the Babrauskas product."
  },
  {
   "prompt": "Why is the chain's second step, 4582.243793 mg/m3 in class F, an effect this course may state while a frequency of that release is not?",
@@ -459,6 +459,6 @@
    "Because a frequency needs the TNT equivalence"
   ],
   "answer": 1,
-  "explanation": "Section 1 and section 22: the engine computes effects and never frequencies, and the analyst takes frequencies from a risk study, which the later quantitative risk course teaches. The engine records no weather frequency, a frequency is neither taught nor graded here, and the TNT equivalence has nothing to do with it."
+  "explanation": "The course explains: the engine computes effects and never frequencies, and the analyst takes frequencies from a risk study, which the later quantitative risk course teaches. The engine records no weather frequency, a frequency is neither taught nor graded here, and the TNT equivalence has nothing to do with it."
  }
 ]

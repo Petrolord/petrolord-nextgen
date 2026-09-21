@@ -33,14 +33,14 @@ q(2, "The severity region is gone from this engine today. How permanent is that,
  ["It is provisional. Both fields come back false while a source is being sought, and the engine will serve the region again once a standard has been vendored beside it.",
   "It is permanent and silent. The two fields were removed with the function, so a caller discovers the absence by finding no such key on the returned object.",
   "It is permanent for the region and provisional for the material guidance."],
- "The absence arrives as a field, so a caller cannot read the gap as an unset property. The digest section that states it says in its own second line that it is not repair history.")
+ "The absence arrives as a field, so a caller cannot read the gap as an unset property. The course section that states it says in its own second line that it is not repair history.")
 
 q(0, "The absence of the severity region is proved three ways. What are they?",
  "The region function is not exported so its type is undefined, neither standard name appears in the 783 lines of source, and no returned string in three whole screenings names either standard.",
  ["The region function throws when it is called, the two standard names appear only inside comments, and the studio renders the absence behind the same disclosure as the held list.",
   "The engine exports two false flags, the golden carries no region row among its 110, and the vendored jest suite asserts that a region request refuses with a message naming the standard.",
   "The held list omits the region, the not-provided list names it twice, and the pin table has no row for the boundary constants of the region expression."],
- "Each is a separate check. The two flags are how the engine states the absence, and the three proofs are how the digest established that the function and its strings have actually gone rather than been hidden.")
+ "Each is a separate check. The two flags are how the engine states the absence, and the three proofs are how the course established that the function and its strings have actually gone rather than been hidden.")
 
 q(3, "The screening threshold the sour door still uses stayed exactly where it was at 0.003500000000 bar. Why was it left alone?",
  "Changing a live number without a source would have been the same mistake with the sign flipped.",
@@ -68,7 +68,7 @@ q(3, "How does the pH correction behave in this engine today?",
  ["The rate is strictly monotonic across the whole band from pH 0 to pH 14, and the reference is now only the point at which the factor is exactly one by definition rather than by a clamp.",
   "The rate is monotonic above the reference and the engine returns a factor of one below it, which is the least limiting answer and is flagged in the clamps field beside the other inputs it moved.",
   "The rate is monotonic above the reference and the engine refuses above pH 9.000000 as well, which is where the swept band the correction was fitted on runs out."],
- "The span is a factor of 316.227766 and every step down the column is smaller than the one above it, which the digest generator asserts on every rebuild. The refusal names the reference so that a caller can print the boundary.")
+ "The span is a factor of 316.227766 and every step down the column is smaller than the one above it, which the course asserts on every rebuild. The refusal names the reference so that a caller can print the boundary.")
 
 q(0, "Before the repair a blank velocity or a blank line diameter made the mass-transfer term infinite. How far did the consequence travel?",
  "An infinite transport capacity makes the series combination equal the reaction term, so the engine named reaction kinetics as controlling from an input nobody had supplied.",

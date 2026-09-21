@@ -7,7 +7,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(1, "A depressuring study is run to ask whether a vessel is down inside the customary fifteen minutes. What does this engine hold about that figure?",
  "Nothing at all. There is no constant for it, no returned flag and no verdict of any kind.",
- ["It holds it as the limit the march refuses at, which the digest bisects out at 7199.999985603571 s.",
+ ["It holds it as the limit the march refuses at, which the course bisects out at 7199.999985603571 s.",
   "It holds it as a warning edge, so a run past 900.000000 s returns a note.",
   "It holds it as the default stopping point of a march, so a call with no end pressure stated runs to fifteen minutes."],
  "The march returns 268.419002 s on AFIESERE, which is 4.473650 min, and stops there. Comparing that against a limit is your act, on a limit you stated, for a case you chose.")
@@ -24,7 +24,7 @@ q(0, "Doubling the orifice from 1.000000 in to 2.000000 in takes the time from 4
  ["The diameter of the hole, which the two rows quoted show halving the time as the diameter doubles.",
   "The cube of the diameter, which is what the printed ratio works out to across a doubling.",
   "The pressure ratio, which the orifice moves by the same factor that it moves the clock."],
- "That is the only ratio the digest computes anywhere on this sweep, which is why it is the only one you may quote from it. Every ratio you form yourself down a printed table is a figure nothing stands behind.")
+ "That is the only ratio the course computes anywhere on this sweep, which is why it is the only one you may quote from it. Every ratio you form yourself down a printed table is a figure nothing stands behind.")
 
 q(2, "The substep column reads 0 on every row of the orifice sweep, from 0.500000 in through to 3.000000 in. What is that column a statement about?",
  "The step size against these geometries, since no step here would have removed more than a twentieth of the inventory.",
@@ -33,7 +33,7 @@ q(2, "The substep column reads 0 on every row of the orifice sweep, from 0.50000
   "Convergence, since a march that has converged subdivides nothing by definition."],
  "At the same step size the small-vessel and large-orifice cases in the next module subdivide every step they take. The column is about what a fixed step has to work with rather than about the orifice on its own.")
 
-q(3, "The design question runs backwards: which orifice meets a stated time. The engine has no route for it. How does the digest fill that gap, and why that way?",
+q(3, "The design question runs backwards: which orifice meets a stated time. The engine has no route for it. How does the course fill that gap, and why that way?",
  "By bisecting on the engine's own returned time, because that answers the question about the engine rather than about a formula beside it.",
  ["By rearranging the closed form of the march for the diameter, since that closed form and the marched time agree to about a part in a million anyway.",
   "By interpolating between the sweep rows at 0.500000 in and at 0.750000 in, since the time falls monotonically right across that whole interval.",
@@ -47,7 +47,7 @@ q(1, "The bisected answer is 0.682646 in, where the march returns 900.000000 s. 
   "0.500000 in at 1677.618587 s and 0.682646 in at 900.000000 s, the bracket the bisection finally closed on."],
  "A bisection needs its answer inside its bracket and cannot tell you when it is not. Reading the result back against the sweep is the cheap confirmation that it was.")
 
-q(2, "Across eight orifices the final temperature column reads 340.807983 degR on every row, and the digest counts the distinct values at 1. Why is the count worth more than the column?",
+q(2, "Across eight orifices the final temperature column reads 340.807983 degR on every row, and the course counts the distinct values at 1. Why is the count worth more than the column?",
  "It turns a plausible claim about the model into a measurement made on the engine.",
  ["It proves the temperature right, since eight runs agreed on it.",
   "It shows the march converged, since one end state comes back whatever the step.",
@@ -59,7 +59,7 @@ q(0, "What is the AFIESERE final temperature of 340.807983 degR fixed by?",
  ["The orifice and the discharge coefficient, which together set how fast the expansion happens.",
   "The start temperature of 545.000000 degR and the 268.419002 s the march took to get down.",
   "The choked floor of 26.758009 psia, which is the coldest state this march can reach."],
- "The orifice decides only how long the vessel takes to get there, which is harder to hold than it looks because the orifice is the one thing a designer can change. What does move the end state is the end pressure, and the digest walks seven of them.")
+ "The orifice decides only how long the vessel takes to get there, which is harder to hold than it looks because the orifice is the one thing a designer can change. What does move the end state is the end pressure, and the course walks seven of them.")
 
 q(3, "Taken to 600.000000 psia the vessel finishes at 464.976597 degR with 0.432854 of the inventory gone; taken to 25.000000 psia it finishes at 232.011700 degR with 0.952641 gone. What may be said about that table?",
  "The directions only. A deeper blowdown runs longer, ends colder and removes more, and no ratio between any pair is printed.",
@@ -86,7 +86,7 @@ q(1, "What is 0.682646 in a property of?",
  "This march on this vessel, at these gas properties, this discharge coefficient and this step size, reaching 145.000000 psia in 900.000000 s.",
  ["The vessel, since the orifice that empties it in a stated time is fixed once the volume and the two pressures are.",
   "The standard ladder, since it is the area below which a blowdown restriction has to be doubled up.",
-  "The closed form, since the digest solved that integral for the diameter that lands on 900.000000 s."],
+  "The closed form, since the course solved that integral for the diameter that lands on 900.000000 s."],
  "It is not an orifice anybody can buy, and turning it into hardware is a separate step. The API 526 ladder the Associate tier worked through is a table for pressure relief valves rather than for blowdown restrictions.")
 
 q(3, "This module treats a time, an orifice and a final temperature as three different kinds of object. Which grouping is the module's?",

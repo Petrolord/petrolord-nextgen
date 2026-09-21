@@ -35,7 +35,7 @@ q(3, "Which input limits the result on the 80.000000 percent availability row, i
  ["Efficiency limits it, because the datasheet figure sets the ceiling on protection.",
   "The two limit it equally, since the protection is their product.",
   "Neither limits it, because the corrosion inhibitor credit is removed at that shortfall."],
- "The engine's own warning on that case reads that a 95 percent inhibitor at 80 percent availability gives 76.0 percent effective protection, which is 4.80 times the metal loss of the datasheet number, and it names availability as what limits it. Those are the engine's words and they are quoted verbatim in the digest.")
+ "The engine's own warning on that case reads that a 95 percent inhibitor at 80 percent availability gives 76.0 percent effective protection, which is 4.80 times the metal loss of the datasheet number, and it names availability as what limits it. Those are the engine's words and they are quoted verbatim in the course.")
 
 q(2, "Against what does the metal loss ratio compare?",
  "Against the datasheet row, which is the same chemical at one hundred percent availability.",

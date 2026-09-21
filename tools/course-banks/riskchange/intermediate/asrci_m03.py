@@ -105,7 +105,7 @@ q(1, "Searching the engine's 34 exports, how many functions have a name that men
   "0, so reassignment is refused by the engine as illegal."],
  "The engine holds no rule for moving an approval. It still refuses the originator at the decision, even when somebody assigned the approval to them.")
 
-q(2, "A report says: \"The engine lets a decided approval be reopened by the assignee.\" What does the digest support?",
+q(2, "A report says: \"The engine lets a decided approval be reopened by the assignee.\" What does the course support?",
  "None of it. The engine holds no rule for reopening, and a decided approval is refused as already decided.",
  ["The report is right for Rejected rows, which the assignee can reopen once to answer the objection that was raised.",
   "The report is right, because only the assignee decides.",

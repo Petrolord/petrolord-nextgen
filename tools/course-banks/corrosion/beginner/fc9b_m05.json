@@ -22,7 +22,7 @@
   "explanation": "At 4.500000 the factor is 0.562341 and at 5.500000 it is 0.177828, so the half unit steps fill the same pattern in. Above the reference the factor falls below one, which reduces the rate."
  },
  {
-  "prompt": "What is the scale free property of the pH correction, and what did the digest measure for it?",
+  "prompt": "What is the scale free property of the pH correction, and what did the course measure for it?",
   "options": [
    "One decade per pH unit, and the measured ratio came out at 0.100000000000 at every step of the swept band.",
    "A halving per pH unit, and the measured ratio came out at 0.562341 four times, which is the factor at the shipped in situ pH.",
@@ -41,7 +41,7 @@
    "1.741101126592, which is the ratio a doubling produces anywhere in this engine."
   ],
   "answer": 0,
-  "explanation": "The rate falls at every step of that column and each step down is smaller than the one above it. The generator asserts that on every rebuild rather than printing it once and trusting it."
+  "explanation": "The rate falls at every step of that column and each step down is smaller than the one above it. The course asserts that on every rebuild rather than printing it once and trusting it."
  },
  {
   "prompt": "The decade ratio is measured out of the engine rather than compared against a figure prepared in advance. Why does this course prefer that?",
@@ -81,7 +81,7 @@
   "options": [
    "It is the most limiting answer available, so it would report a rate above anything the correlation could support at that acidity.",
    "It is the least limiting answer available, and it would make an input inert across a whole range while the box still accepted values.",
-   "It would break the one decade per two pH units property, which is asserted across the whole swept band and would fail on the first rebuild of the digest.",
+   "It would break the one decade per two pH units property, which is asserted across the whole swept band and would fail on the first rebuild of the course.",
    "It would disagree with the boundary value the engine returns at exactly 4.000000, where a factor above one is what the correction gives instead."
   ],
   "answer": 1,

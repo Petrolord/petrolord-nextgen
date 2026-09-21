@@ -78,7 +78,7 @@ q(0, "Which of the module's identities is the one a bin set has to satisfy befor
  ["The grade efficiency at the cut size is exactly one, since a cut size removes everything above it.",
   "The flotation cell count moves the cut size in proportion to the total gas fed to the unit.",
   "A plate pack cut is proportional to the channel height the pack is sliced into."],
- "On the UZERE inlet it returns 26.000000 micron against a typed 26, on every grid in the digest.")
+ "On the UZERE inlet it returns 26.000000 micron against a typed 26, on every grid in the course.")
 
 q(1, "Two rows of the published grid group differ in nothing but their bin count, one at 60 and one at 30. What is identical across them, and what does that pin?",
  "Both the median at 30.000000 micron and the truncated tail at 0.000063342484, which pins the bin count as moving neither of them.",
@@ -191,7 +191,7 @@ q(3, "How large is the golden file this course prints from?",
 
 q(0, "At least one row per device in that file states NONE of that device's own defaults. Why is that a rule rather than an accident?",
  "Because a suite whose every case runs at the defaults cannot tell a default from a derivation.",
- ["Because a row at the defaults would duplicate the row the digest already prints for that device.",
+ ["Because a row at the defaults would duplicate the row the course already prints for that device.",
   "Because the defaults are pinned by literal in the jest suite, so a case running at them checks nothing new.",
   "Because a golden row has to straddle a threshold, and no default sits on a threshold."],
  "A golden file has to be built to that rule. A case that runs at the defaults lets the code recall rather than compute.")

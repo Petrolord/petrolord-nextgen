@@ -12,14 +12,14 @@ q(2, "compression.js takes its two power packagings from one module, and pumps.j
  ["engines/production/gasProperties.js, which already holds the gas constant and the molecular weight of air and is therefore where the shared packagings live.",
   "engines/facilities/separatorSizing.js, which already supplies the compressibility window and is the nearest shared facilities module.",
   "Neither module reads a shared units file. Each one writes its own kilowatt and Btu factors inline at the point of use."],
- "The digest names lib/units/fieldUnits.js as the source of the two power packagings, read by compression.js and by pumps.js."),
+ "The course names lib/units/fieldUnits.js as the source of the two power packagings, read by compression.js and by pumps.js."),
 
 q(0, "compression.js takes its compressibility validity window from another module. Which one, and what does that tell you about the window?",
  "engines/facilities/separatorSizing.js, so the same declared range governs a separator and a compressor stage rather than each module carrying a range of its own.",
  ["engines/production/gasProperties.js, which is also where the Rankine offset and the molecular weight of air come from.",
   "lib/units/fieldUnits.js, on the grounds that a validity range is a unit-level statement about the correlation.",
   "It declares its own window internally, which is why the refusal message can quote the limits back at the caller."],
- "The digest preamble lists three sources for compression.js: gasProperties.js for the gas constant, the molecular weight of air and the Rankine offset, separatorSizing.js for the compressibility validity window, and fieldUnits.js for the two power packagings."),
+ "The course lists three sources for compression.js: gasProperties.js for the gas constant, the molecular weight of air and the Rankine offset, separatorSizing.js for the compressibility validity window, and fieldUnits.js for the two power packagings."),
 
 q(3, "A caller wraps every call into these two modules in a try block so that no bad input can stop a batch. What has that caller misread about the contract?",
  "Neither module throws. Every refusal is a returned object carrying an error string, so the try block will never fire and the unchecked result will travel on.",

@@ -30,7 +30,7 @@ q(3,
   ["0.200000000000, and it means the row has been refused.",
    "0.020000000000, and it means some reduction is needed and less than a SIL 1 function supplies, which the engine reports as a state on the row.",
    "null, and it means no target can be given for a demand below the table."],
-  "A demand of 5 sits on the ladder with 0.200000000000 printed beside it. The digest's gloss on that word is that some reduction is needed and less than a SIL 1 SIF provides by definition, and the gap can be closed by a function or by one more independent protection layer. Nothing about the state refuses anything. The figure 0.020000000000 sits further down the same ladder, at 50.")
+  "A demand of 5 sits on the ladder with 0.200000000000 printed beside it. The course's gloss on that word is that some reduction is needed and less than a SIL 1 SIF provides by definition, and the gap can be closed by a function or by one more independent protection layer. Nothing about the state refuses anything. The figure 0.020000000000 sits further down the same ladder, at 50.")
 
 q(1,
   "Which required PFDavg does the engine return at a demand of 100, and which band is that?",
@@ -62,7 +62,7 @@ q(3,
   ["Because clipping would change the outcome state on the row.",
    "Because the required PFDavg is the only figure returned for such a row.",
    "Because the table has a SIL 4 band and a row past SIL 3 is placed in it."],
-  "The digest says beyond SIL 3 is never clipped: the state carries the required PFDavg intact, so a worksheet shows how far beyond the table the row sits. The engine returns the required RRF and the state alongside that figure, and the process sector reads a demand of this size as a signal to change the process.")
+  "The course says beyond SIL 3 is never clipped: the state carries the required PFDavg intact, so a worksheet shows how far beyond the table the row sits. The engine returns the required RRF and the state alongside that figure, and the process sector reads a demand of this size as a signal to change the process.")
 
 q(2,
   "The low demand band table gives SIL 2 which bounds?",
@@ -110,21 +110,21 @@ q(0,
   ["It rounds every result to nine decimals before printing it.",
    "It widens each band by that fraction at both of its ends.",
    "It refuses any figure that falls within that distance of a decade."],
-  "The digest says a value within that RELATIVE distance of a power of ten is treated as the power of ten, for the band and for the comparison of a mitigated frequency with the TMEL. The snap rounds nothing for display, widens no band, refuses nothing, and touches only values within one part in a billion of a decade.")
+  "The course says a value within that RELATIVE distance of a power of ten is treated as the power of ten, for the band and for the comparison of a mitigated frequency with the TMEL. The snap rounds nothing for display, widens no band, refuses nothing, and touches only values within one part in a billion of a decade.")
 
 q(1,
   "Five frequency products whose exact value is a decade are computed in double. How many land strictly above 100, and at what seventeen digit figure?",
   "3 of the 5, at 100.00000000000001.",
-  ["3 of the 5, at 100.00000000000000, which is the figure the digest prints for those products in its column of seventeen significant digits.",
+  ["3 of the 5, at 100.00000000000000, which is the figure the course shows for those products in its column of seventeen significant digits.",
    "5 of the 5, at 100.00000000000001, because a product of decimal fractions can never be represented exactly in an IEEE double at any size.",
    "2 of the 5, at 100.000001, which is the figure printed beside them."],
-  "The digest says 3 of the 5 products land strictly above 100 in double, and the column of seventeen significant digits shows 100.00000000000001 for those three. The other two read 100.00000000000000 and so need no snap. 100.000001 belongs to the table of how wide the snap is, where it bands SIL2.")
+  "The course says 3 of the 5 products land strictly above 100 in double, and the column of seventeen significant digits shows 100.00000000000001 for those three. The other two read 100.00000000000000 and so need no snap. 100.000001 belongs to the table of how wide the snap is, where it bands SIL2.")
 
 q(3,
   "An analyst types a required risk reduction factor of 100.0000001 and then one of 100.000001. What does the engine report for each?",
   "100.0000001 gives decadeOf 2 and SIL1, and 100.000001 gives decadeOf null and SIL2.",
   ["Both give decadeOf 2 and the outcome SIL1, because each figure sits close enough to a power of ten for the engine to read it as that power.",
-   "100.0000001 gives decadeOf null and SIL2, and 100.000001 gives decadeOf 2 and SIL1, which is the pair the digest prints for those two entries.",
+   "100.0000001 gives decadeOf null and SIL2, and 100.000001 gives decadeOf 2 and SIL1, which is the pair the course shows for those two entries.",
    "Both give decadeOf null and the outcome SIL2."],
   "The table of how wide the snap is puts 100.0000001 at a relative distance of 1.00e-9 from 100, inside the snap, so decadeOf is 2 and the outcome is SIL1. 100.000001 sits at 1.00e-8, which is already outside it, so decadeOf is null and the outcome is SIL2. One part in a hundred million is outside the snap.")
 

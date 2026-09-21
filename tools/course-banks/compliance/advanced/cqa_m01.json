@@ -8,7 +8,7 @@
    "It allows the status and lists 7.2 under missingEvidenceParts for the rest."
   ],
   "answer": 1,
-  "explanation": "The digest prints REFUSED for Conformant with an evidence reference only, in the words it uses for Conformant with nothing else: name the evidence, the date it was assessed and who assessed it. The shorter sentence belongs to a Nonconformant request with no date."
+  "explanation": "The course prints REFUSED for Conformant with an evidence reference only, in the words it uses for Conformant with nothing else: name the evidence, the date it was assessed and who assessed it. The shorter sentence belongs to a Nonconformant request with no date."
  },
  {
   "prompt": "Clause 7.2 has nothing recorded. Which of these requests on it does canSetClauseStatus ALLOW?",
@@ -33,7 +33,7 @@
   "explanation": "The refusal reads: \"A clause determined not applicable cannot also carry a conformity verdict. Set both together, or neither.\" The justification rule arises once both fields read Not applicable, and Not applicable is one of the five words in CLAUSE_STATUSES."
  },
  {
-  "prompt": "Both fields of a clause are set to Not applicable with no justification. Of the four refusals the digest prints for this request, which one cites a numbered clause of the standard?",
+  "prompt": "Both fields of a clause are set to Not applicable with no justification. Of the four refusals the course prints for this request, which one cites a numbered clause of the standard?",
   "options": [
    "The ISO 14001:2015 refusal, which cites §9.2 of the standard the ORASHI register is kept against.",
    "The ISO 45001:2018 refusal, which cites §4.3 in the same words the ISO 9001:2015 sentence uses.",
@@ -52,7 +52,7 @@
    "A refusal saying the call is missing its standard, returned before any justification is read."
   ],
   "answer": 2,
-  "explanation": "The digest prints: \"Say why this requirement does not apply. A requirement determined not applicable keeps its justification on record.\" The verdict is the same refusal for all three standards and for none; only the wording follows the standard passed."
+  "explanation": "The course prints: \"Say why this requirement does not apply. A requirement determined not applicable keeps its justification on record.\" The verdict is the same refusal for all three standards and for none; only the wording follows the standard passed."
  },
  {
   "prompt": "Asked to set clause 7.2 to Compliant, the gate answers \"Compliant is not a clause status.\" Where does the word Compliant belong in this course?",
@@ -151,7 +151,7 @@
    "Neither: it is refused unless the clause's applicability is changed in the same request."
   ],
   "answer": 0,
-  "explanation": "The digest prints Partially conformant, nothing else: REFUSED, with the sentence Conformant meets, and ALLOWED with evidence, a date and an assessor. Clause 6.1.2 reads Partially conformant with claims conformity, evidence record and assessed all true."
+  "explanation": "The course prints Partially conformant, nothing else: REFUSED, with the sentence Conformant meets, and ALLOWED with evidence, a date and an assessor. Clause 6.1.2 reads Partially conformant with claims conformity, evidence record and assessed all true."
  },
  {
   "prompt": "The readiness counts print evidenced 9 and conformant 9. Do the two counts cover the same nine clauses?",

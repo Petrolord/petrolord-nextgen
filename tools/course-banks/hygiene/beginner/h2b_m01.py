@@ -18,7 +18,7 @@ q(3, "Which statement defines the reference duration the engine returns from `no
  ["The time the dosimeter actually recorded at that sound level during the shift being assessed.",
   "The 8 hours of a standard shift, against which every period is divided whatever its level.",
   "The time left at a level once the periods already on the record have been subtracted."],
- "Digest section 4 defines it as the time at a level that gives exactly 100 percent noise dose, so it belongs to the criterion and the level and not to the record. The recorded hours are the numerator of a contribution and the reference duration is its denominator; mixing them up inverts the arithmetic. The time left at a level is a later derived quantity.")
+ "The lesson defines it as the time at a level that gives exactly 100 percent noise dose, so it belongs to the criterion and the level and not to the record. The recorded hours are the numerator of a contribution and the reference duration is its denominator; mixing them up inverts the arithmetic. The time left at a level is a later derived quantity.")
 
 q(0, "On the OSHA criterion, T = 8 / 2^((L - 90)/5) hours. What reference duration does the engine give at 100.000000 dBA?",
  "2.000000 h, two steps of 5 dB above the 90 dBA criterion level.",
@@ -32,14 +32,14 @@ q(2, "OSHA Table G-16a prints 0.063 at 125 dBA, while the engine returns 0.06250
  ["The engine is off by 0.000500 h and needs the printed row pasted into its tables.",
   "OSHA used a 3 dB decibel exchange rate for the loud rows at the top of the table.",
   "Above 115 dBA the table stops following the formula and prints measured values."],
- "Digest section 4 says it: the formula gives exactly 0.062500 h and the table prints 0.063, a round-half-up of the fourth decimal. The difference is the table's rounding, so treating the printed figure as the true one takes the rounding for the physics. Every other G-16a row sits inside its printed tolerance in the same way.")
+ "The lesson says it: the formula gives exactly 0.062500 h and the table prints 0.063, a round-half-up of the fourth decimal. The difference is the table's rounding, so treating the printed figure as the true one takes the rounding for the physics. Every other G-16a row sits inside its printed tolerance in the same way.")
 
 q(2, "The OSHA criteria carry a decibel exchange rate of 5.000000000000 dB. How does the engine measure it?",
  "It asks for the level giving a 4 hour reference duration, 95.000000 dBA, and subtracts the 90 dBA criterion level.",
  ["It asks for the level giving a 2 hour reference duration, 100.000000 dBA, and subtracts the 90 dBA criterion level.",
   "It reads the step between two adjacent rows of Table G-16a and averages the 51 steps across the whole table.",
   "It takes the printed TWA coefficient 16.61 and divides it by the 8 hours of the standard shift."],
- "Digest section 3 gives the method: the level for a 4 hour reference duration less the criterion level. On OSHA that is 95.000000 less 90.000000, so 5 dB halves the time. The 2 hour level is two halvings away and would read 10 dB, twice the rate, and G-16a rows are one decibel apart, so their steps measure nothing about the rate.")
+ "The lesson gives the method: the level for a 4 hour reference duration less the criterion level. On OSHA that is 95.000000 less 90.000000, so 5 dB halves the time. The 2 hour level is two halvings away and would read 10 dB, twice the rate, and G-16a rows are one decibel apart, so their steps measure nothing about the rate.")
 
 q(0, "Using only each criterion's decibel exchange rate, at what level does the NIOSH reference duration reach 1.000000 h?",
  "94.000000 dBA, three 3 dB steps above 85.",
@@ -95,7 +95,7 @@ q(0, "An input a function cannot use arrives. What does the engine return in pla
  ["A verdict that the record exceeds its limit noise dose, so no number is needed.",
   "A logged message resent to the dosimeter, which reads that period again.",
   "A noise dose of zero, since the criterion cannot integrate that input."],
- "Digest section 1: every function returns a finite result or an object carrying `error` and `field`, the name of the input it refused, so a refusal is a statement about the data handed over. It is no verdict on the worker or the workplace, and the engine does nothing to the instrument. A noise dose of zero is what a real record with nothing above the threshold returns.")
+ "The course states it: every function returns a finite result or an object carrying `error` and `field`, the name of the input it refused, so a refusal is a statement about the data handed over. It is no verdict on the worker or the workplace, and the engine does nothing to the instrument. A noise dose of zero is what a real record with nothing above the threshold returns.")
 
 q(1, "One OBEN record reads 27.748183 percent on the OSHA PEL and 265.610944 percent on the NIOSH noise REL. What is the right reading of the two figures?",
  "Both are correct, since each is a fraction of its own criterion's allowance.",

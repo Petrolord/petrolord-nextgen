@@ -43,7 +43,7 @@ q(1, "Clause 4.3 was last examined 2023-09-20 by ISA-2023-002, and clause 7.2 ha
   "4.3 covered false and stale false; 7.2 covered false and stale true"],
  "A clause can be stale only if it was once examined by a counting audit. 4.3 was, before the cycle began, at -1121 days. 7.2 has no counting examination, so it gets its own outcome, never, with stale false.")
 
-q(2, "Across the four cycle lengths the digest prints for the ORASHI register, which column never changes?",
+q(2, "Across the four cycle lengths the course prints for the ORASHI register, which column never changes?",
  "never examined, at 3 in every row",
  ["stale, at 3 in every row",
   "covered, at 8 in every row",
@@ -62,7 +62,7 @@ q(3, "At cycle lengths of 1 and 2 years the table prints the same pair, covered 
  ["That the cycle has no effect below 3 years for any register at all.",
   "That the 3 stale clauses at those lengths are the 3 never examined.",
   "That 3 years is the shortest cycle the engine reads."],
- "The table shows this register at the four lengths printed and nothing more. Never examined also reads 3 at those lengths, a separate count from stale. Quote only the rows the digest prints.")
+ "The table shows this register at the four lengths printed and nothing more. Never examined also reads 3 at those lengths, a separate count from stale. Quote only the rows the course prints.")
 
 q(0, "clauseCoverageByStandard reads ISO 14001:2015 clause 8.1 and ISO 45001:2018 clause 6.1.2, both last examined 2025-10-14. Why do they give two answers?",
  "Each is read against its own standard's cycle: 3 years and 1 year.",
@@ -90,7 +90,7 @@ q(3, "canReportAudit is called on ISA-2026-002, which has three clauses in scope
  ["A refusal naming 5.2, the one clause the audit has examined so far",
   "ALLOWED, because an audit in progress may report the results it already holds",
   "A refusal saying the audit has no clauses in its scope to report on"],
- "The digest prints: \"2 clauses in scope have no result yet (7.2, 8.1).\" The sentence about an audit with no clauses in its scope belongs to an empty scope, a separate row.")
+ "The course prints: \"2 clauses in scope have no result yet (7.2, 8.1).\" The sentence about an audit with no clauses in its scope belongs to an empty scope, a separate row.")
 
 q(2, "What has to happen, in order, before ISA-2026-002 can move any clause's last examined date?",
  "Every clause in its scope gets a result, and then the audit is reported.",

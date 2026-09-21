@@ -8,19 +8,19 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # one as-of date, a date is a day, an unreadable date is no date, and the as-of
 # date is an input the engine is given.
 
-q(2, "The digest counts, for each module, the exports that read a date against today. Which module has the most of them?",
+q(2, "The course counts, for each module, the exports that read a date against today. Which module has the most of them?",
  "isoCompliance, with 10 of them.",
  ["qualityAssurance, with 7.",
   "documentControl, which exports 14 functions.",
   "complianceStatus, with 4."],
  "The export table prints 10 for isoCompliance, 7 for qualityAssurance and 4 each for complianceStatus, documentControl and auditManagement. The 14 is documentControl's count of exported functions, which is a different column."),
 
-q(0, "Every figure in the digest is stated as true at 2026-10-15. What makes that statement safe to make?",
+q(0, "Every figure in the course is stated as true at 2026-10-15. What makes that statement safe to make?",
  "Every call that reads a date against today is passed that one date, and no line comes from a call that read the machine clock.",
- ["The digest was generated on 2026-10-15, so the machine clock and the as-of date agreed on the day it ran.",
+ ["The course was produced on 2026-10-15, so the machine clock and the as-of date agreed on the day it ran.",
   "Each module stores the date it was last run with, and reads it back on the next call.",
   "The records themselves carry 2026-10-15 as a field, which the engine copies into each status."],
- "The as-of date is an argument. The generator refuses to print a line from a call that did not pass it, so the same inputs give the same answers on any machine on any day."),
+ "The as-of date is an argument. The course refuses to print a line from a call that did not pass it, so the same inputs give the same answers on any machine on any day."),
 
 q(1, "At the as-of date, daysUntil of 2026-09-30 prints -15. What does the minus sign tell a reader?",
  "The day is already behind the as-of date, by 15 days.",
@@ -76,14 +76,14 @@ q(0, "documentControl.reviewState is asked about a published document whose revi
  ["That the review has been booked for a date the engine chose in place of the unreadable one.",
   "That the document is in force and its review date of 2020-01-06 lies ahead.",
   "That the document has been reviewed, because a passed review date with no today is read as done."],
- "The digest records this as a held limit. reviewState answers as though nothing were due, and the course teaches it as a limit and never as a figure."),
+ "The course records this as a held limit. reviewState answers as though nothing were due, and the course teaches it as a limit and never as a figure."),
 
 q(2, "An open NCR was due 2020-01-06. qualityAssurance.isNcrOverdue is handed a today it cannot read. What is its answer?",
  "false",
  ["true, because 2020-01-06 is before any date the NCR could be read against.",
   "It throws a RangeError, as deriveStatus does.",
   "null, the value the calendar gives for an unreadable date."],
- "false says the NCR is not overdue, which no reader can rely on here. deriveStatus is the one export that throws; this answer is recorded in SECTION 2 as a limit."),
+ "false says the NCR is not overdue, which no reader can rely on here. deriveStatus is the one export that throws; this answer is recorded in the course as a limit."),
 
 q(3, "documentControl.reviewState is passed today as the STRING 2026-10-15. What happens?",
  "It throws TypeError: d.getFullYear is not a function.",
@@ -97,20 +97,20 @@ q(1, "What does owner decision AS15 Q1 state?",
  ["An unreadable today makes every module answer as though nothing were due.",
   "A today passed as a string is read at local midnight.",
   "An unreadable record date reads as today."],
- "Q1 is the refusal the digest prints for deriveStatus: RangeError: deriveStatus needs a valid date for today. The two other modules answering as though nothing were due is a held limit, and a string today makes reviewState throw a TypeError."),
+ "Q1 is the refusal the course prints for deriveStatus: RangeError: deriveStatus needs a valid date for today. The two other modules answering as though nothing were due is a held limit, and a string today makes reviewState throw a TypeError."),
 
 q(2, "The panel lets you move the as-of date. When you move it, statuses change. What was edited on the records in between?",
  "Nothing. The same records read against another date give other statuses.",
  ["Each record's status field, rewritten by the panel.",
   "Each record's due date, shifted by the panel.",
   "The lead time on each record, shortened by the panel."],
- "That is what derived means in this course. A status is never typed, so moving the date back to 2026-10-15 makes every row match the digest again."),
+ "That is what derived means in this course. A status is never typed, so moving the date back to 2026-10-15 makes every row match the course tables again."),
 
-q(0, "The digest's header says in what form it prints every figure. Which form is that?",
+q(0, "The course says in what form it prints every figure. Which form is that?",
  "Whole numbers: day counts, counts, and percents the engine has already rounded.",
  ["Days and fractions of a day, so a late evening time reads short of the plain date.",
   "Working days, so a weekend that falls between two dates is left out of a count.",
   "Whole weeks, with each day count rounded to the nearest week before it prints."],
- "The header reads: every figure is a whole number, days from daysUntil and ages, counts, and percents the engine has already rounded. 2026-11-30 reads 46 and 2027-02-28 reads 136, and the lessons quote those figures as printed."),
+ "The course states it: every figure is a whole number, days from daysUntil and ages, counts, and percents the engine has already rounded. 2026-11-30 reads 46 and 2027-02-28 reads 136, and the lessons quote those figures as printed."),
 emit(Q, '/root/wt-as-compliance-nextgen/tools/course-banks/compliance/beginner/cqb_m01.json', expect_n=15)
 finish()

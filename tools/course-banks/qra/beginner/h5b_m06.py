@@ -39,7 +39,7 @@ q(2,
   ["At 0 m, where every transect starts on its highest contour.",
    "At 126.982958 m, the 1e-5 crossing.",
    "At 50 m, the point nearest to 1e-4."],
-  "The digest's table says none on this transect: the largest LSIR is 0.000070000000 per year at 0 m, below 1e-4, so no crossing exists. The engine reports only real crossings, never a starting point or a nearest point. 126.982958 m is the 1e-5 crossing alone.")
+  "The course's table says none on this transect: the largest LSIR is 0.000070000000 per year at 0 m, below 1e-4, so no crossing exists. The engine reports only real crossings, never a starting point or a nearest point. 126.982958 m is the 1e-5 crossing alone.")
 
 q(0,
   "The 1e-8 crossing sits at exactly 350.000000 m. What rule puts it there?",
@@ -55,7 +55,7 @@ q(3,
   ["It is graded at six decimals, since the Purple Book fixes the log10 interpolation between points in its section on contours.",
    "It is graded only for the 1e-5 contour, which is the one the Purple Book asks for on every plot plan it describes.",
    "It is reported only as a band, never as a distance."],
-  "The digest says the interpolation is a PRESENTATION rule the engine chose; nothing published fixes it, so a crossing distance is never graded. The Purple Book asks for the contours to be shown and prescribes no interpolation, and it asks for five levels rather than one. The engine reports each crossing as a distance in metres.")
+  "The course says the interpolation is a PRESENTATION rule the engine chose; nothing published fixes it, so a crossing distance is never graded. The Purple Book asks for the contours to be shown and prescribes no interpolation, and it asks for five levels rather than one. The engine reports each crossing as a distance in metres.")
 
 q(1,
   "Which contour levels does the engine export as PB_IR_CONTOURS_PER_YR, the ones the Purple Book asks to be shown?",
@@ -66,12 +66,12 @@ q(1,
   "The constants table gives PB_IR_CONTOURS_PER_YR as 1e-4, 1e-5, 1e-6, 1e-7 and 1e-8 per year, and the Purple Book asks for those contours to be shown. Two or three levels are too few, and no set runs in steps of 5: the engine's contour set is the five decades from 1e-4 down to 1e-8.")
 
 q(2,
-  "The digest runs eight golden cases through the engine. What do they rest on?",
+  "The course runs eight golden cases through the engine. What do they rest on?",
   "All are ORACLE-DERIVED: no published source prints an event tree or an IRPA worked example.",
   ["Each reproduces a worked example printed in the Purple Book, one case for each figure of its chapter on event trees.",
    "Each is a capstone facility, reused as a golden record.",
    "Each was typed from a textbook by the engine's authors, then checked by the oracle against the same textbook."],
-  "The digest says every golden case in that table is ORACLE-DERIVED, and that no published source prints an event tree or an IRPA worked example. They are no reproduction of a printed example, no capstone and no textbook transcription: they were written by the engine's independent oracle.")
+  "The course says every golden case in that table is ORACLE-DERIVED, and that no published source prints an event tree or an IRPA worked example. They are no reproduction of a printed example, no capstone and no textbook transcription: they were written by the engine's independent oracle.")
 
 q(1,
   "The golden case flammable-default is run through `eventTree`. What explosion frequency does the engine return?",
@@ -103,7 +103,7 @@ q(2,
   ["It refuses the branch, since a probability of zero means the branch can never be taken and has no place in the tree.",
    "It removes the branch and its leaf without a message, since a zero leaf adds nothing to any outcome total in the tree.",
    "It raises the branch to 1e-9, the tolerance."],
-  "The digest says a branch of probability zero is allowed; it carries a leaf of frequency zero, and the set still sums to one, which is why the case returns a 0.000000000000 and b 0.000400000000. A probability of zero lies inside [0, 1], so nothing is refused, removed or raised.")
+  "The course says a branch of probability zero is allowed; it carries a leaf of frequency zero, and the set still sums to one, which is why the case returns a 0.000000000000 and b 0.000400000000. A probability of zero lies inside [0, 1], so nothing is refused, removed or raised.")
 
 q(3,
   "The EREMOR operator carries an IRPA of 0.000017541379 per year. What does that figure NOT tell a reader?",

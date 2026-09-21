@@ -39,7 +39,7 @@ q(3, "What are the criterion level, decibel exchange rate and threshold of the N
  ["90 dBA, 5 dB and 80 dBA.",
   "85 dBA, 5 dB and 85 dBA.",
   "85 dBA, 3 dB and 85 dBA."],
- "Digest sections 3 and 7 give the NIOSH noise REL a criterion level of 85.000000000000 dBA, a decibel exchange rate of 3.000000000000 dB and a threshold of 80.000000000000 dBA. The first distractor is the OSHA action level. Setting the threshold at the criterion level is the PEL's pattern, and NIOSH does not follow it: its threshold is five decibels lower.")
+ "The course's tables give the NIOSH noise REL a criterion level of 85.000000000000 dBA, a decibel exchange rate of 3.000000000000 dB and a threshold of 80.000000000000 dBA. The first distractor is the OSHA action level. Setting the threshold at the criterion level is the PEL's pattern, and NIOSH does not follow it: its threshold is five decibels lower.")
 
 q(1, "The first OBEN period, 2.600000 h at 84.300000 dBA, carries 27.646683 percent on the NIOSH noise REL and 14.747186 percent on the OSHA action level. Why the larger NIOSH share?",
  "Its NIOSH reference duration is 9.404383 h, against 17.630482 h on OSHA.",
@@ -60,7 +60,7 @@ q(3, "The OBEN day is under one criterion and over two. Which of its three noise
  ["The NIOSH figure, since it counts every period at or above 80 dBA on the record.",
   "The PEL figure, since it is the only one written in a regulation with a limit.",
   "The action level figure, since it sits between the other two noise doses."],
- "Digest section 7 says it directly: none of the three is the real noise dose, and a report that quotes a noise dose without naming the criterion has not said anything. The action level also counts every period from 80 dBA and is also written in regulation, so neither of those reasons singles out one figure. Sitting between the others is no reason at all.")
+ "The lesson says it directly: none of the three is the real noise dose, and a report that quotes a noise dose without naming the criterion has not said anything. The action level also counts every period from 80 dBA and is also written in regulation, so neither of those reasons singles out one figure. Sitting between the others is no reason at all.")
 
 q(2, "The OBEN action level noise dose is 72.054478 percent and the PEL noise dose 27.748183 percent. Which difference between the two criteria makes that whole gap?",
  "The threshold, which lets in three periods worth 14.747186, 23.100555 and 6.458554 percent.",
@@ -109,7 +109,7 @@ q(0, "A European colleague asks whether the OBEN action level result is an \"act
  ["Yes: the action level and the EU action values are two names for the same 85 dBA line, so they compare directly.",
   "Yes, once the noise dose of 72.054478 percent has been restated as a TWA of 87.635749 dBA.",
   "No, because EU action values are measured in noise dose percent and the action level is in dBA."],
- "Digest section 24 puts the two on the same footing as a misreading: \"Action level\" is the OSHA hearing conservation trigger, and the EU uses action values, which are LEX,8h levels and a different metric. Restating the noise dose as a TWA does not turn it into a LEX,8h, and the EU values are levels in dBA.")
+ "The course's naming rules put the two on the same footing as a misreading: \"Action level\" is the OSHA hearing conservation trigger, and the EU uses action values, which are LEX,8h levels and a different metric. Restating the noise dose as a TWA does not turn it into a LEX,8h, and the EU values are levels in dBA.")
 
 emit(Q, '/root/hse-wip-hygiene/banks/h2b_m03.json', expect_n=15)
 finish()

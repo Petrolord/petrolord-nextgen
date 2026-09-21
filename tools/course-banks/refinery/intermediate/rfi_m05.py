@@ -14,7 +14,7 @@ q(1, "How does ABUA's schedule decide how many cargoes a crude arrives in?",
  ["The crude run divided by the cargo size, rounded down, with any part cargo dropped.",
   "One cargo for each week in the period, so five cargoes whatever the crude run.",
   "The crude's availability divided by the cargo size, rounded up to a whole cargo."],
- "The digest prints the rule: cargoes = the crude run divided by the cargo size, rounded UP to a whole cargo (at least one). The days between cargoes are the 31 days divided by the cargoes, rounded DOWN.")
+ "The course prints the rule: cargoes = the crude run divided by the cargo size, rounded UP to a whole cargo (at least one). The days between cargoes are the 31 days divided by the cargoes, rounded DOWN.")
 
 q(3, "Forcados (illustrative) runs 1100000.00 bbl at a cargo size of 400000.00 bbl, from period start 2027-03-01. What receipts does the schedule make?",
  "Three cargoes, 10 days apart, on 2027-03-01, 2027-03-11 and 2027-03-21.",
@@ -37,7 +37,7 @@ q(2, "What value does each of the three Forcados receipts carry?",
   "85360000.00, the whole Forcados crude cost on each part."],
  "The value of a receipt is its share of that crude's cost. The plan's Forcados crude cost is 85360000.00, and each of the three parts, rcpt-2, rcpt-3 and rcpt-4, carries 28453333.33.")
 
-q(1, "The same plan is cascaded again at a cargo size of 150000 bbl. What does the digest show changing?",
+q(1, "The same plan is cascaded again at a cargo size of 150000 bbl. What does the course show changing?",
  "The crude receipts become 15, and the plan's volumes and margin stay as they were.",
  ["The crude receipts stay at 6, and each carries a smaller share of its crude.",
   "The plan runs less Forcados, since each smaller cargo holds less of the crude.",
@@ -77,20 +77,20 @@ q(3, "What does cascadeToSchedule do when it is called with periodStart left out
  ["It refuses and names the missing period start, as a blank cost is refused.",
   "It dates the schedule from 2027-03-01, the default period start it carries.",
   "It returns a schedule of 0 events."],
- "The digest names the argument: cascadeToSchedule reads it when periodStart is left out. The same plan cascaded on two different days would then give two different schedules.")
+ "The course names the argument: cascadeToSchedule reads it when periodStart is left out. The same plan cascaded on two different days would then give two different schedules.")
 
-q(0, "ABUA's schedule is built in seven time zones with the period start passed as the string \"2027-03-01\". What does the digest print?",
+q(0, "ABUA's schedule is built in seven time zones with the period start passed as the string \"2027-03-01\". What does the course print?",
  "Every zone's 41 dates match the UTC run, from 2027-03-01 to 2027-03-31.",
  ["Africa/Lagos and Pacific/Kiritimati start one day early, on 2027-02-28, and the rest match.",
   "The zones west of Greenwich start one day early, on 2027-02-28.",
   "Only UTC and Europe/London match; the other five shift by a day."],
- "A period start given as a YYYY-MM-DD string is the same calendar day in every zone. That is how the Suite page passes it and how this digest passes it.")
+ "A period start given as a YYYY-MM-DD string is the same calendar day in every zone. That is how the Suite page passes it and how this course passes it.")
 
 q(2, "The period start is handed over as new Date(2027, 2, 1), a Date built at local midnight. In which zones does the schedule start on 2027-02-28?",
  "Africa/Lagos and Pacific/Kiritimati.",
  ["America/New_York and America/Los_Angeles.",
   "Pacific/Pago_Pago and Pacific/Kiritimati.",
-  "Every zone the digest tried except UTC."],
+  "Every zone the course tried except UTC."],
  "Built at local midnight, the Date gives 2027-02-28 as the first date in Africa/Lagos and Pacific/Kiritimati, and every date matches UTC reads false there. The two American zones and Pago Pago keep 2027-03-01.")
 
 q(1, "With the Date built at local midnight, America/New_York starts on 2027-03-01. What does that reading show about the Date form?",

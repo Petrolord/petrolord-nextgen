@@ -20,7 +20,7 @@ q(2, "Across the gravity sweep on the bottom course the test thickness sits at 0
   "Because the sweep holds the head constant at 34.600000 ft, and holding the head fixed fixes both of the computed thicknesses on the row."],
  "The design column climbs from 0.129233 in at a gravity of 0.550000 to 0.270214 in at 1.150000 while the test column stays at 0.218926 in throughout.")
 
-q(1, "The digest reports that the water test takes the bottom course of this tank below a gravity of 0.931727. How was that figure obtained?",
+q(1, "The course reports that the water test takes the bottom course of this tank below a gravity of 0.931727. How was that figure obtained?",
  "By bisecting the governing word the engine returns, narrowing the interval until the word changed.",
  ["By reading it from the API 650 band table the package carries for the diameter of this tank.",
   "By interpolating linearly between the design thickness at a gravity of 0.912400 and the design thickness at 1.000000, which is the pair of rows the crossover falls between on the sweep.",

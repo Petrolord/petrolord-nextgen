@@ -31,7 +31,7 @@ q(1, "What remaining life does the shipped case report?",
  "4.207953 yr.",
  ["0.242737 yr, which the same case reaches at 60 ft per second.",
   "20.000000 yr, which is the design life the case was given.",
-  "36.112878 yr, which one of the digest's own streams carries."],
+  "36.112878 yr, which one of the course's own streams carries."],
  "That is the remaining allowance divided by the rate, and nothing else. A remaining life of that size does not say when to inspect and it does not say what thickness to retire at.")
 
 q(3, "The shipped case carries a design life of 20.000000 yr. What verdict does the screening return against it?",

@@ -112,7 +112,7 @@ q(0,
   ["The condition multiplied by the conditional modifiers, which on this row brings the key to 0.100000000000 before the layers are applied to it.",
    "One, because a single entry leaves the product of the list at its neutral value until a second condition has been added to the row.",
    "0.045000000000, the condition itself."],
-  "With one condition on the row the product is simply that condition, and the digest prints `enablingProduct` as 0.300000000000 for it. 0.100000000000 is `modifierProduct`, which is the other list, and 0.045000000000 per year is the frequency this row reports when the condition is left off altogether.")
+  "With one condition on the row the product is simply that condition, and the engine returns `enablingProduct` as 0.300000000000 for it. 0.100000000000 is `modifierProduct`, which is the other list, and 0.045000000000 per year is the frequency this row reports when the condition is left off altogether.")
 
 q(3,
   "In the table of the same row run five ways, what does the derived column read for the line with nothing left out?",
@@ -168,7 +168,7 @@ q(2,
   ["From 0.013500000000 per year to 0.000013500000 per year, which is the step the two layers the engine does credit already make on this row.",
    "From 0.000013500000 to 0.000001000000 per year.",
    "From 0.000013500000 per year to 0.000000067500 per year."],
-  "The digest says with all four IPLs credited the mitigated frequency reads 0.000000135000 per year against 0.000013500000. The first alternative is the effect of the two layers already credited, 0.000001000000 per year is the TMEL, and 0.000000067500 per year is a frequency from the table of proposed functions.")
+  "The course says with all four IPLs credited the mitigated frequency reads 0.000000135000 per year against 0.000013500000. The first alternative is the effect of the two layers already credited, 0.000001000000 per year is the TMEL, and 0.000000067500 per year is a frequency from the table of proposed functions.")
 
 q(1,
   "A row is sent with no TMEL at all. Which field does the engine name, and does it supply a default?",
@@ -200,7 +200,7 @@ q(2,
   ["Because a datasheet quotes an RRF and the row demands a PFDavg, read the other way.",
    "Because a datasheet bands on the high demand table and the engine on the low.",
    "Because a datasheet figure is an average and a required figure is not."],
-  "The digest says a SIL is a band ten times wide, the required PFDavg is one number inside it, and a SIF anywhere in the band above that number misses the TMEL. A required RRF and a required PFDavg are reciprocals and both are reported, and every band in this engine is low demand.")
+  "The course says a SIL is a band ten times wide, the required PFDavg is one number inside it, and a SIF anywhere in the band above that number misses the TMEL. A required RRF and a required PFDavg are reciprocals and both are reported, and every band in this engine is low demand.")
 
 q(1,
   "A function of 0.02 is proposed against a row requiring 0.007407407407. What does the table of proposals show?",
@@ -219,12 +219,12 @@ q(3,
   "The table gives the proposal at 0.0005 an own band of 3 and a mitigated frequency of 0.000000006750 per year, meeting the tolerance. The proposal at 0.005 leaves 0.000000067500 per year, the one at 0.009 leaves 0.000000121500 per year and the one at 0.02 leaves 0.000000270000 per year.")
 
 q(0,
-  "What does the digest conclude from the proposal that is banded correctly and still misses?",
+  "What does the course conclude from the proposal that is banded correctly and still misses?",
   "The band is a label and the required PFDavg is the target.",
   ["The band and the target agree whenever a function has been verified, so a correctly banded function that misses has not been verified properly.",
    "The band should be tightened by one step whenever a row sits near the middle of it, which is how a specification leaves itself some margin.",
    "The band should be quoted and the required PFDavg left out of the specification."],
-  "The digest states it in two sentences after the proposal at 0.009: the band is a label and the required PFDavg is the target. Both figures go into the record, because the band drives the requirements the standards attach to it and the number is what a function is checked against.")
+  "The course states it in two sentences after the proposal at 0.009: the band is a label and the required PFDavg is the target. Both figures go into the record, because the band drives the requirements the standards attach to it and the number is what a function is checked against.")
 
 q(2,
   "A row reports RISK_REDUCTION_BELOW_SIL1. How can its gap be closed?",
@@ -232,7 +232,7 @@ q(2,
   ["Only by a SIF, because the engine reports a required PFDavg for this state and a required PFDavg is a figure that only a safety instrumented function can supply.",
    "It needs no closing: the layers already meet the TMEL.",
    "Only by redesigning the process."],
-  "The digest says RISK_REDUCTION_BELOW_SIL1 means some reduction is needed and less than a SIL 1 SIF provides by definition, and that the gap can be closed by a SIF or by another IPL. The engine returns the required PFDavg so the gap has a size, and either kind of layer can supply it. A row whose layers already meet the TMEL is NO_SIF_REQUIRED, and a redesign is the answer to a demand beyond SIL 3.")
+  "The course says RISK_REDUCTION_BELOW_SIL1 means some reduction is needed and less than a SIL 1 SIF provides by definition, and that the gap can be closed by a SIF or by another IPL. The engine returns the required PFDavg so the gap has a size, and either kind of layer can supply it. A row whose layers already meet the TMEL is NO_SIF_REQUIRED, and a redesign is the answer to a demand beyond SIL 3.")
 
 q(1,
   "`decadeOf` is handed zero, then a negative number, then a string. What comes back each time?",
@@ -240,7 +240,7 @@ q(1,
   ["A refusal each time, naming the field `x`, because none of the three is a number above zero.",
    "0 for zero and a refusal for the other two, which the engine names by the field `x` in its message.",
    "null for zero, and a refusal otherwise."],
-  "The digest says `decadeOf` refuses nothing: it returns null for zero, for a negative number, for a string and for anything off a decade. It has no row in the table of 29 refusals, and zero sits on no power of ten, so it cannot come back as a decade either.")
+  "The engine's `decadeOf` refuses nothing: it returns null for zero, for a negative number, for a string and for anything off a decade. It has no row in the table of 29 refusals, and zero sits on no power of ten, so it cannot come back as a decade either.")
 
 q(3,
   "On the ladder of TMELs from 1e-4 down to 1e-10 per year, how many lines report BEYOND_SIL3_REDESIGN?",
@@ -293,7 +293,7 @@ q(2,
 q(0,
   "One of the five decade products is 0.3 x 0.1 against a stated tolerable frequency of 3e-4. What does it come to in double, and how would a plain comparison band it?",
   "100.00000000000000, and a plain comparison would band it SIL1.",
-  ["100.00000000000001, and a plain comparison would band it SIL2, which is the pair of readings the digest prints for this product in its table.",
+  ["100.00000000000001, and a plain comparison would band it SIL2, which is the pair of readings the course shows for this product in its table.",
    "100.00000000000000, and a plain comparison bands it SIL2.",
    "100.000001, and a plain comparison would band it SIL2."],
   "The table of decade products gives 0.3 x 0.1 at 3e-4 the double 100.00000000000000, with decadeOf 2, the outcome SIL1 with the snap, and SIL1 from a plain comparison as well. This is one of the two products that needs no snap. 100.000001 belongs to the table of how wide the snap is.")
@@ -344,7 +344,7 @@ q(1,
   ["76 records, written by the engine itself and stored beside it.",
    "13 records, written by the stdlib oracle in exact arithmetic.",
    "76 records, taken from a published table."],
-  "The digest's engine note says the vendored golden carries 76 records, written by the stdlib oracle in exact rational arithmetic. 13 is the number of LOPA scenarios among them. A golden written by the engine would check nothing, and only some of the records come from a published source.")
+  "The course's engine note says the vendored golden carries 76 records, written by the stdlib oracle in exact rational arithmetic. 13 is the number of LOPA scenarios among them. A golden written by the engine would check nothing, and only some of the records come from a published source.")
 
 emit(Q, '/root/hse-wip-lopa/banks/h3b_exam.json', expect_n=42)
 finish()

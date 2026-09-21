@@ -41,7 +41,7 @@
    "2026-10-01, a Friday"
   ],
   "answer": 2,
-  "explanation": "The digest's first line fixes the as-of date at 2026-10-01, a Thursday, and every engine call that takes a date was handed that one explicitly. None of them read a clock."
+  "explanation": "The course fixes the as-of date at 2026-10-01, a Thursday, and every engine call that takes a date was handed that one explicitly. None of them read a clock."
  },
  {
   "prompt": "A caller hands isReviewOverdue a risk and leaves the date argument out. Which date does the function answer for?",
@@ -63,7 +63,7 @@
    "It takes no date, and reads the status only"
   ],
   "answer": 0,
-  "explanation": "The digest reads every signature: riskScoring's isReviewOverdue takes its date as argument 2, and so does daysUntil in calendar. Both default that argument to the machine clock."
+  "explanation": "The course reads every signature: riskScoring's isReviewOverdue takes its date as argument 2, and so does daysUntil in calendar. Both default that argument to the machine clock."
  },
  {
   "prompt": "Two analysts open the same risk register a day apart. One reports a review as overdue and the other reports it on time, and neither wrote down a date. Which reading does this module give?",
@@ -77,7 +77,7 @@
   "explanation": "A report that does not state its as-of date cannot be checked by anybody, including its author the next morning. Handing the date in explicitly makes the answer a property of two named inputs."
  },
  {
-  "prompt": "How many of managementOfChange's functions take a date, as the digest reads them from the engine's signatures?",
+  "prompt": "How many of managementOfChange's functions take a date, as the course reads them from the engine's signatures?",
   "options": [
    "4 functions",
    "7 functions",
@@ -85,7 +85,7 @@
    "1 function"
   ],
   "answer": 1,
-  "explanation": "managementOfChange has 7 date-taking functions, peerReview has 4, lessonsLearned has 6, and riskScoring and calendar have 1 each. The digest reads them from each signature, a parameter that defaults to the machine clock."
+  "explanation": "managementOfChange has 7 date-taking functions, peerReview has 4, lessonsLearned has 6, and riskScoring and calendar have 1 each. The course reads them from each signature, a parameter that defaults to the machine clock."
  },
  {
   "prompt": "When an engine in this course refuses a verdict, what shape does the answer take?",

@@ -77,7 +77,7 @@ q(0, "The engine carries four fire heat input bands. What was that count taken o
   "The wetted areas in the sweep, with one count for each area that returned a duty."],
  "A count is not checkable without its tree and its rule, and the rule here is what explains why ten swept rows produce four bands rather than ten.")
 
-q(1, "At the edge where the 1000 to 2800 ft2 band gives way to the band above it, the digest prints a duty of 14091137.6199 Btu/hr below the edge and 14089282.6189 Btu/hr above it. Why print both?",
+q(1, "At the edge where the 1000 to 2800 ft2 band gives way to the band above it, the course prints a duty of 14091137.6199 Btu/hr below the edge and 14089282.6189 Btu/hr above it. Why print both?",
  "So the behaviour of the duty across a change of relation can be read rather than assumed.",
  ["So a reader can interpolate between the two and recover the duty at any area inside either band without calling the engine again for it.",
   "So the edge itself can be located, since the wetted area at which the change happens is not returned by the engine and has to be inferred from the two duties.",
@@ -91,7 +91,7 @@ q(3, "What does the engine say about an environment factor above 1?",
   "That it moves the tank into the band above its own wetted area band."],
  "The bound is the engine's own sentence: the relation carries a credit and does not carry a penalty.")
 
-q(2, "The digest prints the fire duty on this tank with and without a stated drainage credit. What does that relation carry?",
+q(2, "The course prints the fire duty on this tank with and without a stated drainage credit. What does that relation carry?",
  "25892440.2513 Btu/hr with no credit, 7767732.0754 Btu/hr at a factor of 0.300000, a difference of 18124708.1759 and a ratio of 3.333333.",
  ["A ratio of 0.300000, since that factor is what produced the second value.",
   "A difference of 18124708.1759 Btu/hr against the duty at the top of the band.",

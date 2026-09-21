@@ -48,7 +48,7 @@ q(1, "Before the repair a train that removed nothing showed its droplet median f
   "The truncated tail was absorbed into the outlet distribution alone, which dragged its median towards the fine end of the grid."],
  "THE LESSON IS THE BASIS: two numbers a reader will compare must be measured the same way, and the module should say on its own return that they are.")
 
-q(0, "This course found a defect of its own in the media filter while building the digest against the already repaired engine. What was it, and what did the second repair put in its place?",
+q(0, "This course found a defect of its own in the media filter while building its worked tables against the already repaired engine. What was it, and what did the second repair put in its place?",
  "It clamped its own loading rate up to a floor and said nothing, so beds of completely different area reported the same filter coefficient and the same cut size to every digit, and the repair is to REFUSE by name.",
  ["It refused every bed below its reference loading of 10 m/hr, and the repair lowered that floor to 1 m/hr.",
   "It warned below the floor and answered anyway, and the repair turned that warning into a clamp reported on the return.",
@@ -85,7 +85,7 @@ q(3, "How large is the planting battery this course was built beside, and what d
 
 q(1, "A defect planted in the engine and the oracle at the same time is the hard case, because a golden regenerated from a bent oracle agrees with a bent engine perfectly. What catches those now?",
  "Three things: a route with no place to type the constant, the identities that need no source, and an explicit pin with the value typed by hand in the test file.",
- ["The measured gap table printed in this digest, since a bent pair of files will agree with itself very much more closely than two genuinely independent routes ever should.",
+ ["The measured gap table printed in this course, since a bent pair of files will agree with itself very much more closely than two genuinely independent routes ever should.",
   "The negative controls carried by every single family in the whole suite, each of which is asserted to stay green on every row of the family it belongs to.",
   "The straddled warning fields in the golden file, since a bent pair of files moves a threshold and a straddle on both sides of it will detect that move at once."],
  "None of those three is a comparison between the engine and its golden. They are the checks that step outside the pair.")

@@ -33,7 +33,7 @@
   "explanation": "At 20 the share column prints 0.1110. 0.1998 sits at 40, 0.1568 at the study's 29.8, and 0.1548 is the stand-in row at 0.97."
  },
  {
-  "prompt": "How does the digest form methaneShareOfFlareCo2e?",
+  "prompt": "How does the course form methaneShareOfFlareCo2e?",
   "options": [
    "flareCh4Tonnes over flareCo2eTonnes",
    "flareCh4Tonnes times the GWP over flareCo2Tonnes",
@@ -99,7 +99,7 @@
   "explanation": "The refusal table prints that sentence for a gas the analysis refused. No volume gets \"REFUSED: A gas volume is required.\", blank days get the on-stream days sentence, and a blank GWP is answered with the CO2e null."
  },
  {
-  "prompt": "What does the digest say about a flare that is not lit?",
+  "prompt": "What does the course say about a flare that is not lit?",
   "options": [
    "It is not modelled; the engine's flare is lit.",
    "It is modelled at destruction efficiency 0.5.",
@@ -121,7 +121,7 @@
   "explanation": "The stated limit: the efficiencies have no default. Whether a Nigerian flare study defaults to any tier, or to the NUPRC flare regulations' basis, is a regulation reading, and both efficiencies stay inputs. The studio opens with both blank and abatement refuses."
  },
  {
-  "prompt": "The digest shows the on-stream days default by asking one function with the days omitted. Which, and what does it report?",
+  "prompt": "The course shows the on-stream days default by asking one function with the days omitted. Which, and what does it report?",
   "options": [
    "abatement, onstreamDays 355",
    "routeEconomics, onstreamDays 366",
@@ -129,7 +129,7 @@
    "characteriseGas, onstreamDays 350"
   ],
   "answer": 2,
-  "explanation": "SECTION 13: routeEconomics, asked with the days omitted, reports onstreamDays 350, and 7.5 MMscfd times a million times 350 is the omitted call's scfPerYear."
+  "explanation": "The refusals lesson: routeEconomics, asked with the days omitted, reports onstreamDays 350, and 7.5 MMscfd times a million times 350 is the omitted call's scfPerYear."
  },
  {
   "prompt": "Which of these does the engine ship?",
@@ -140,7 +140,7 @@
    "A default flare destruction efficiency"
   ],
   "answer": 0,
-  "explanation": "The digest: the methane GWP and any credit price are case inputs, and the engine ships neither; the efficiencies have no default. The component heating values and liquid densities are the engine's own labelled typical tables."
+  "explanation": "The course states: the methane GWP and any credit price are case inputs, and the engine ships neither; the efficiencies have no default. The component heating values and liquid densities are the engine's own labelled typical tables."
  },
  {
   "prompt": "EGBEMA at a destruction efficiency of 0.97 appears with a methane share of 0.1568 and of 0.1548. What separates the two rows?",

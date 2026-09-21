@@ -57,7 +57,7 @@ q(3, "The course measures the RAL at 1 W as 59.900000000000 and the RAL at 1 W l
  ["1 W is the bottom of the NIOSH figure range, where the plotted curve meets the axis at its intercept",
   "The engine stores both constants as a table and returns them unchanged whenever the rate is 1 W or 10 W",
   "The engine differentiates the equation at 1 W and reports that local slope as the drop per decade"],
- "At M of 1 W the term 14.1 log10 M vanishes and 59.9 is what remains; moving to 10 W adds one to log10 M, so the drop is exactly the slope. The equation is linear in log10 M, so a decade is the natural step, and no derivative is taken anywhere. The figure range starts at 116 W, and the engine evaluates the equation at every rate without special cases. The measurement shows the engine holds what the generator holds; it cannot reach the page.")
+ "At M of 1 W the term 14.1 log10 M vanishes and 59.9 is what remains; moving to 10 W adds one to log10 M, so the drop is exactly the slope. The equation is linear in log10 M, so a decade is the natural step, and no derivative is taken anywhere. The figure range starts at 116 W, and the engine evaluates the equation at every rate without special cases. The measurement shows the engine holds what the course records; it cannot reach the page.")
 
 q(2, "Why does `nioshHeatAssessment` refuse the word yes typed for acclimatized, instead of settling on a default?",
  "Acclimatisation is a fact about the worker that no record carries, and a default would hide the choice",

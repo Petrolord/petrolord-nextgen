@@ -22,7 +22,7 @@ q(1, "A routeEconomics call on the CNG route carries no on-stream days field at 
  ["REFUSED: On-stream days are required, more than 0 and no more than 366.",
   "It takes onstreamDays 355: mscfPerYear 2662500.0000.",
   "It takes the days as zero and names them in assumedZero."],
- "The digest: \"On-stream days OMITTED from routeEconomics take the stated default: onstreamDays 350, mscfPerYear 2625000.0000 on the CNG route.\" The refusal is what a days box typed blank gets, and 355 is the figure the EGBEMA study typed.")
+ "The course states: \"On-stream days OMITTED from routeEconomics take the stated default: onstreamDays 350, mscfPerYear 2625000.0000 on the CNG route.\" The refusal is what a days box typed blank gets, and 355 is the figure the EGBEMA study typed.")
 
 q(0, "EGBEMA's CNG route is called with its on-stream days typed blank (''). What does routeEconomics answer?",
  "REFUSED: On-stream days are required, more than 0 and no more than 366.",
@@ -36,42 +36,42 @@ q(2, "How does routeEconomics form productPerYear?",
  ["mscfPerYear times the yield ceiling times the recovery",
   "mscfPerYear times the yield, with no recovery in it",
   "mscfPerYear times the yield times the price"],
- "The digest: \"productPerYear is that times the yield times the recovery\", where that is mscfPerYear. On CNG, 2662500.0000 Mscf, 18.5 kg and 0.88 give 43345500.0000 kg of CNG. Revenue is product times price, and the yield ceiling is no term of the rule.")
+ "The course states: \"productPerYear is that times the yield times the recovery\", where that is mscfPerYear. On CNG, 2662500.0000 Mscf, 18.5 kg and 0.88 give 43345500.0000 kg of CNG. Revenue is product times price, and the yield ceiling is no term of the rule.")
 
 q(2, "A study clears the recovery box on the CNG route and runs the year. What happens?",
  "It refuses: the route needs a recovery fraction in (0, 1].",
  ["It takes the recovery as 1 and names it in assumedZero.",
   "It takes the recovery as zero and prints a product of none.",
   "It takes the stated default recovery and prints a full year."],
- "The digest prints \"CNG recovery left blank ('')\" with REFUSED: Route \"Compressed natural gas\" needs a recovery fraction in (0, 1]. A recovery assumed at 100 percent is the quiet optimism that sinks these cases. The recoveries 0 and 1.2 draw the same refusal.")
+ "The course prints \"CNG recovery left blank ('')\" with REFUSED: Route \"Compressed natural gas\" needs a recovery fraction in (0, 1]. A recovery assumed at 100 percent is the quiet optimism that sinks these cases. The recoveries 0 and 1.2 draw the same refusal.")
 
 q(0, "How does routeEconomics form a route's operating cost a year?",
  "The fixed cost plus the variable cost per Mscf of the whole parcel.",
  ["The fixed cost plus the variable cost per Mscf recovered.",
   "The fixed cost plus the variable cost per unit of product.",
   "The variable cost per Mscf, with the fixed in capital."],
- "The digest: \"operating cost is the fixed cost plus the variable cost per Mscf of the whole parcel\". On CNG the fixed 1900000 and 0.35 dollars per Mscf print an operating cost of 2831875.00.")
+ "The course states: \"operating cost is the fixed cost plus the variable cost per Mscf of the whole parcel\". On CNG the fixed 1900000 and 0.35 dollars per Mscf print an operating cost of 2831875.00.")
 
 q(3, "Which rule gives valuePerMscf, the last figure of a route's year?",
  "The margin over mscfPerYear",
  ["The margin over the Mscf the route recovers",
   "Revenue over mscfPerYear",
   "Margin over productPerYear"],
- "The digest: \"valuePerMscf is the margin over mscfPerYear.\" On CNG, a gross margin of 21008150.00 over 2662500.0000 Mscf prints 7.8904.")
+ "The course states: \"valuePerMscf is the margin over mscfPerYear.\" On CNG, a gross margin of 21008150.00 over 2662500.0000 Mscf prints 7.8904.")
 
 q(1, "The CNG route's variable cost box is left blank (''). Which row does routeEconomics print?",
  "operating cost 1900000.00, valuePerMscf 8.2404, assumedZero variable operating cost",
  ["operating cost 931875.00, valuePerMscf 8.6040, assumedZero variable operating cost",
   "operating cost 2831875.00, valuePerMscf 7.8904, assumedZero none",
   "REFUSED: the variable operating cost is required"],
- "The digest's blank cost table: variable cost left blank ('') gives 1900000.00, 8.2404 and variable operating cost. A cost box left blank is taken as zero and named in assumedZero. 931875.00 and 8.6040 belong to the fixed cost left blank, and 2831875.00 and 7.8904 to both costs typed.")
+ "The course's blank cost table: variable cost left blank ('') gives 1900000.00, 8.2404 and variable operating cost. A cost box left blank is taken as zero and named in assumedZero. 931875.00 and 8.6040 belong to the fixed cost left blank, and 2831875.00 and 7.8904 to both costs typed.")
 
 q(0, "The CNG route's fixed cost is left blank (null). What does assumedZero read, and what operating cost prints?",
  "fixed operating cost; 931875.00",
  ["variable operating cost; 1900000.00",
   "none; 2831875.00, as both are typed",
   "fixed operating cost; 1900000.00"],
- "The digest's row for the fixed cost left blank (null) prints operatingCostPerYear 931875.00, valuePerMscf 8.6040 and assumedZero fixed operating cost. 1900000.00 is the operating cost with the variable cost blank.")
+ "The course's row for the fixed cost left blank (null) prints operatingCostPerYear 931875.00, valuePerMscf 8.6040 and assumedZero fixed operating cost. 1900000.00 is the operating cost with the variable cost blank.")
 
 q(3, "Which row does routeEconomics print for EGBEMA's LPG and condensate extraction route?",
  "revenue 5335863.00, margin 1990363.00, value per Mscf 0.7476",
@@ -99,14 +99,14 @@ q(3, "A study clears the scaling exponent box on the CNG route. Which exponent a
  ["STICK_BUILT: 0.6, capitalCost 27438303.12.",
   "No exponent: a null capital and a note.",
   "REFUSED: a scaling exponent is required."],
- "The digest: \"With the scaling exponent typed blank ('') routeEconomics takes the MODULAR exponent: scalingExponent 0.9, capitalCost 29337983.06 on the CNG route.\" 27438303.12 is the six-tenths reading on the same plant.")
+ "The course states: \"With the scaling exponent typed blank ('') routeEconomics takes the MODULAR exponent: scalingExponent 0.9, capitalCost 29337983.06 on the CNG route.\" 27438303.12 is the six-tenths reading on the same plant.")
 
 q(0, "A route's reference plant cost is left blank. What does routeEconomics give for capital?",
  "Capital null, with the note \"No capital cost: a reference plant cost and capacity are required to scale from.\"",
  ["Capital zero, named in assumedZero beside the operating costs.",
   "REFUSED: a reference plant cost is required to scale from.",
   "Capital scaled from the MODULAR default plant for the route."],
- "The digest: \"With the reference cost left blank the capital is null and the note reads: No capital cost: a reference plant cost and capacity are required to scale from.\" A blank cost box is the one taken as zero in assumedZero, and no default plant is printed.")
+ "The course states: \"With the reference cost left blank the capital is null and the note reads: No capital cost: a reference plant cost and capacity are required to scale from.\" A blank cost box is the one taken as zero in assumedZero, and no default plant is printed.")
 
 q(2, "What cash flow does routeEconomics hand on for EGBEMA's gas to power route?",
  "year0 -32753824.67, recurring 7540432.50",

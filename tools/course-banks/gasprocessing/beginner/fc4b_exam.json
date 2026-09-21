@@ -74,7 +74,7 @@
    "So a gate can re-derive each one from the publication it came from."
   ],
   "answer": 1,
-  "explanation": "Naming a constant is what makes the difference between the three kinds visible at all, and it is what lets the digest measure four of them back out of return values."
+  "explanation": "Naming a constant is what makes the difference between the three kinds visible at all, and it is what lets the course measure four of them back out of return values."
  },
  {
   "prompt": "At 1000.000000 psia the water content reads 12.144308 lb per MMscf at 60.000000 degF. What does it read at 140.000000 degF?",

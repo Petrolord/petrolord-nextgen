@@ -25,12 +25,12 @@
   "prompt": "A TBP volume percent is weighted by volume share when two crudes are blended. What is the reason?",
   "options": [
    "Volume is conserved on mixing and mass is not, so every property of a blend, sulfur included, has to be weighted on volume shares.",
-   "A TBP figure is a volume percent distilled, and the digest's rule is that yields are additive on volume.",
+   "A TBP figure is a volume percent distilled, and the course's rule is that yields are additive on volume.",
    "The engine holds no gravity for a crude at the curve step, so a volume share is the only weight it can form for the yields there.",
    "A volume weighting gives the larger blend yield at every temperature, which is the conservative reading."
   ],
   "answer": 1,
-  "explanation": "The digest's rule: yields are additive on volume, so at any temperature the blend has distilled the volume-weighted sum of what each crude has distilled. Sulfur and the other per-mass properties blend on mass. The engine can weight yields on mass too: module 3 prints blendOnMass beside the engine's cut yields."
+  "explanation": "The course's rule: yields are additive on volume, so at any temperature the blend has distilled the volume-weighted sum of what each crude has distilled. Sulfur and the other per-mass properties blend on mass. The engine can weight yields on mass too: module 3 prints blendOnMass beside the engine's cut yields."
  },
  {
   "prompt": "How many points does the Kwale blend's curve carry, and where do they come from?",
@@ -77,7 +77,7 @@
   "explanation": "At 1470 F Kwale Light reads 100.0000 percent: its last point is 100 at 1350, and above a last point at 100 percent everything has distilled. The blend reads 100.0000 there."
  },
  {
-  "prompt": "Beside the Kwale blend's curve, the digest prints the blend's properties at 55 and 45. Which set is it?",
+  "prompt": "Beside the Kwale blend's curve, the course prints the blend's properties at 55 and 45. Which set is it?",
   "options": [
    "API 32.8173, SG 0.8611 and sulfur 0.2642 wt% on a mass basis.",
    "API 33.1219, SG 0.8595 and sulfur 0.2268 wt% on a volume basis.",
@@ -85,7 +85,7 @@
    "API 33.1219, SG 0.8595 and sulfur 0.2268 wt% on a mass basis."
   ],
   "answer": 3,
-  "explanation": "The digest prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 38.4, 0.8328 and 0.11 are Kwale Light's own figures, and 32.8173, 0.8611 and 0.2642 belong to the Associate tier's Obigbo export blend."
+  "explanation": "The course prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 38.4, 0.8328 and 0.11 are Kwale Light's own figures, and 32.8173, 0.8611 and 0.2642 belong to the Associate tier's Obigbo export blend."
  },
  {
   "prompt": "Kwale Light reaches 50 percent at 530 F and Ughelli Medium at 650 F. What does the blend's curve read at those two temperatures?",

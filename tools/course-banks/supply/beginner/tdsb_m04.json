@@ -129,7 +129,7 @@
    "4499.453 m3, since a stock is always quoted to the litre it prints"
   ],
   "answer": 2,
-  "explanation": "The engine sums the unrounded standard volumes and the digest prints that total as 4499.452 m3. The sum of the printed rows is not the figure the day closes on."
+  "explanation": "The engine sums the unrounded standard volumes and the course prints that total as 4499.452 m3. The sum of the printed rows is not the figure the day closes on."
  },
  {
   "prompt": "The morning has two totals, 4581.490 m3 and 4499.452 m3. Which can be set against an opening stock held at standard?",

@@ -19,7 +19,7 @@
    "REFUSED: Cargo quantity is required."
   ],
   "answer": 0,
-  "explanation": "The digest prints this row as REFUSED: Unknown quantity unit \"kg\". The cargo table converts entries in tonne, m3, litre and bbl, and kg is none of them, so the row returns no figure."
+  "explanation": "The course prints this row as REFUSED: Unknown quantity unit \"kg\". The cargo table converts entries in tonne, m3, litre and bbl, and kg is none of them, so the row returns no figure."
  },
  {
   "prompt": "A quantity of zero is put to cargoQuantities with a valid unit and the density of 742.8 kg/m3. What comes back?",
@@ -30,7 +30,7 @@
    "REFUSED: Cargo quantity is required."
   ],
   "answer": 3,
-  "explanation": "The digest prints the zero quantity case as the refusal \"Cargo quantity is required.\" The engine forms no volume for a cargo it has not been given."
+  "explanation": "The engine answers the zero quantity case with the refusal \"Cargo quantity is required.\" The engine forms no volume for a cargo it has not been given."
  },
  {
   "prompt": "34000 tonnes of the invented BADAGRY petrol cargo are entered at its certificate density of 742.8 kg/m3. How many cubic metres does the engine return?",

@@ -415,7 +415,7 @@
    "12, one for each door that takes a named-argument object."
   ],
   "answer": 2,
-  "explanation": "Section 20 reads the held register itself rather than quoting a count from the module's header sentence, which is how the disagreement between 7 and six was found."
+  "explanation": "The course reads the held register itself rather than quoting a count from the module's header sentence, which is how the disagreement between 7 and six was found."
  },
  {
   "prompt": "Which habit does this tier end on?",

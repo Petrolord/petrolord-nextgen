@@ -59,7 +59,7 @@
   "options": [
    "The engine, which returns a sensitivity beside each answer so a reader can see how the balance responds.",
    "The oracle, which publishes the ratio as a case of its own.",
-   "The digest dividing two rows of the printed table by one another.",
+   "The lesson dividing two rows of the printed table by one another.",
    "An assumption about what a mole balance ought to do."
   ],
   "answer": 2,
@@ -99,7 +99,7 @@
   "explanation": "Both come from the same mole balance and neither is a conversion a reader has to perform. Handing over one and asking the reader to convert is how a factor of the wrong size gets introduced."
  },
  {
-  "prompt": "The digest prints 0.182500000000 for the still overhead. What is that figure?",
+  "prompt": "The course prints 0.182500000000 for the still overhead. What is that figure?",
   "options": [
    "The short tons a year at an absorbed fraction of one, which is the basis every other fraction scales from.",
    "The fraction of the aromatics in the inlet gas that the still overhead actually carries out of the plant.",
@@ -121,7 +121,7 @@
   "explanation": "What can be measured from outside is their ratio, by taking one answer of a call over another answer of the same call. A group cannot say which of its parts is wrong when the group is."
  },
  {
-  "prompt": "A constant is measured out of the engine and the digest prints a ratio of 1.000000000000 between the measurement and the exported name. What has that established?",
+  "prompt": "A constant is measured out of the engine and the course prints a ratio of 1.000000000000 between the measurement and the exported name. What has that established?",
   "options": [
    "That the constant is correct, since a measurement agreeing with an export to twelve decimals is as close to a proof as a constant gets.",
    "That the constant is derived rather than declared.",
@@ -146,7 +146,7 @@
   "prompt": "Which of the three kinds of constant is that molecular weight, and what does its kind allow?",
   "options": [
    "Declared, so pinning it is all any gate can do.",
-   "Measured, so the digest can ask the engine a question whose answer is the molecular weight and nothing else.",
+   "Measured, so the course can ask the engine a question whose answer is the molecular weight and nothing else.",
    "Derived, so it cannot be wrong unless the thing it is computed from is wrong as well.",
    "Declared, so the published cases check it against the golden every time they are run."
   ],

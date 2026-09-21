@@ -19,7 +19,7 @@
    "The time at a sound level that gives exactly 100 percent noise dose on the named criterion."
   ],
   "answer": 3,
-  "explanation": "Digest section 4 defines it as the time at a level that gives exactly 100 percent noise dose, so it belongs to the criterion and the level and not to the record. The recorded hours are the numerator of a contribution and the reference duration is its denominator; mixing them up inverts the arithmetic. The time left at a level is a later derived quantity."
+  "explanation": "The lesson defines it as the time at a level that gives exactly 100 percent noise dose, so it belongs to the criterion and the level and not to the record. The recorded hours are the numerator of a contribution and the reference duration is its denominator; mixing them up inverts the arithmetic. The time left at a level is a later derived quantity."
  },
  {
   "prompt": "On the OSHA criterion, T = 8 / 2^((L - 90)/5) hours. What reference duration does the engine give at 100.000000 dBA?",
@@ -41,7 +41,7 @@
    "Above 115 dBA the table stops following the formula and prints measured values."
   ],
   "answer": 2,
-  "explanation": "Digest section 4 says it: the formula gives exactly 0.062500 h and the table prints 0.063, a round-half-up of the fourth decimal. The difference is the table's rounding, so treating the printed figure as the true one takes the rounding for the physics. Every other G-16a row sits inside its printed tolerance in the same way."
+  "explanation": "The lesson says it: the formula gives exactly 0.062500 h and the table prints 0.063, a round-half-up of the fourth decimal. The difference is the table's rounding, so treating the printed figure as the true one takes the rounding for the physics. Every other G-16a row sits inside its printed tolerance in the same way."
  },
  {
   "prompt": "The OSHA criteria carry a decibel exchange rate of 5.000000000000 dB. How does the engine measure it?",
@@ -52,7 +52,7 @@
    "It takes the printed TWA coefficient 16.61 and divides it by the 8 hours of the standard shift."
   ],
   "answer": 2,
-  "explanation": "Digest section 3 gives the method: the level for a 4 hour reference duration less the criterion level. On OSHA that is 95.000000 less 90.000000, so 5 dB halves the time. The 2 hour level is two halvings away and would read 10 dB, twice the rate, and G-16a rows are one decibel apart, so their steps measure nothing about the rate."
+  "explanation": "The lesson gives the method: the level for a 4 hour reference duration less the criterion level. On OSHA that is 95.000000 less 90.000000, so 5 dB halves the time. The 2 hour level is two halvings away and would read 10 dB, twice the rate, and G-16a rows are one decibel apart, so their steps measure nothing about the rate."
  },
  {
   "prompt": "Using only each criterion's decibel exchange rate, at what level does the NIOSH reference duration reach 1.000000 h?",
@@ -140,7 +140,7 @@
    "A noise dose of zero, since the criterion cannot integrate that input."
   ],
   "answer": 0,
-  "explanation": "Digest section 1: every function returns a finite result or an object carrying `error` and `field`, the name of the input it refused, so a refusal is a statement about the data handed over. It is no verdict on the worker or the workplace, and the engine does nothing to the instrument. A noise dose of zero is what a real record with nothing above the threshold returns."
+  "explanation": "The course states it: every function returns a finite result or an object carrying `error` and `field`, the name of the input it refused, so a refusal is a statement about the data handed over. It is no verdict on the worker or the workplace, and the engine does nothing to the instrument. A noise dose of zero is what a real record with nothing above the threshold returns."
  },
  {
   "prompt": "One OBEN record reads 27.748183 percent on the OSHA PEL and 265.610944 percent on the NIOSH noise REL. What is the right reading of the two figures?",

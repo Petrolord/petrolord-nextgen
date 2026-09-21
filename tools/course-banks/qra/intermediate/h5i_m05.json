@@ -19,7 +19,7 @@
    "The engine infers the slope from the Dutch line and so needs none of its own"
   ],
   "answer": 0,
-  "explanation": "The digest says R2P2 defers extrapolation to other N to a reference the engine did not read, so the engine gives the point NO SLOPE and compares the curve at N = 50 only. R2P2 prints no slope at all, flat or otherwise. The engine has no aversion weighting of its own; aversion enters only through the slope of a line a caller or preset gives. It borrows nothing from the Dutch line, which is a separate preset from another source."
+  "explanation": "The course says R2P2 defers extrapolation to other N to a reference the engine did not read, so the engine gives the point NO SLOPE and compares the curve at N = 50 only. R2P2 prints no slope at all, flat or otherwise. The engine has no aversion weighting of its own; aversion enters only through the slope of a line a caller or preset gives. It borrows nothing from the Dutch line, which is a separate preset from another source."
  },
  {
   "prompt": "Set against the R2P2 point, how does the JISIKE off-site curve come out?",
@@ -52,7 +52,7 @@
    "As the preset r2p2-line, which the engine keeps beside the published point"
   ],
   "answer": 0,
-  "explanation": "The digest says the slope minus one line is common practice but is not in R2P2 and is not a preset, so the analyst gives it as their own criterion, C = 0.01 and alpha = 1, from N = 1 by default. The R2P2 preset has no slope flag. The Dutch preset has fixed constants. The name r2p2-line is refused as an unknown preset."
+  "explanation": "The course says the slope minus one line is common practice but is not in R2P2 and is not a preset, so the analyst gives it as their own criterion, C = 0.01 and alpha = 1, from N = 1 by default. The R2P2 preset has no slope flag. The Dutch preset has fixed constants. The name r2p2-line is refused as an unknown preset."
  },
  {
   "prompt": "An analyst supplies C = 0.01 and alpha = 1. Where is the worst corner of the JISIKE curve against that line, and what is the state?",
@@ -63,7 +63,7 @@
    "BELOW, worst ratio 0.014910 at N = 300.000000"
   ],
   "answer": 2,
-  "explanation": "The digest prints BELOW with a worst ratio of 0.014910 at N = 3.000000 against that line, which runs from N = 1 and so checks the corner at 3 as well. 0.001000 at N = 50 is the published point. 1.396800 at N = 12 is the first exceeding corner against the Dutch line. The worst ratio sits at N = 3, where F is largest against the line, and the corner at 300 is not it."
+  "explanation": "The course shows BELOW with a worst ratio of 0.014910 at N = 3.000000 against that line, which runs from N = 1 and so checks the corner at 3 as well. 0.001000 at N = 50 is the published point. 1.396800 at N = 12 is the first exceeding corner against the Dutch line. The worst ratio sits at N = 3, where F is largest against the line, and the corner at 300 is not it."
  },
  {
   "prompt": "When an analyst supplies their own line, what source does the engine's basis name?",
@@ -74,7 +74,7 @@
    "criterion as given"
   ],
   "answer": 3,
-  "explanation": "The digest says the basis then names the source as \"criterion as given\", so the result shows the line is the analyst's own. The R2P2 paragraph is the source of the preset point, and the Purple Book figure is a source of the Dutch line. The engine never claims to extrapolate R2P2, which is exactly why the line must be supplied."
+  "explanation": "The course says the basis then names the source as \"criterion as given\", so the result shows the line is the analyst's own. The R2P2 paragraph is the source of the preset point, and the Purple Book figure is a source of the Dutch line. The engine never claims to extrapolate R2P2, which is exactly why the line must be supplied."
  },
  {
   "prompt": "A curve is built from a touching scenario at 1e-5 per year with N = 10 and a small scenario at 2e-5 per year with N = 1. What does the engine return against the Dutch line?",
@@ -96,7 +96,7 @@
    "The expected fatalities per year exceed the line's value at N = 1"
   ],
   "answer": 0,
-  "explanation": "The digest defines EXCEEDS as at least one corner strictly above. A single corner is enough, so every corner above is not needed. A corner on the line within the snap is AT_LINE and leaves the curve at TOUCHES, so a ratio of exactly one does not count. The state compares frequencies at corners and never uses the expected fatalities."
+  "explanation": "The course defines EXCEEDS as at least one corner strictly above. A single corner is enough, so every corner above is not needed. A corner on the line within the snap is AT_LINE and leaves the curve at TOUCHES, so a ratio of exactly one does not count. The state compares frequencies at corners and never uses the expected fatalities."
  },
  {
   "prompt": "The golden case r2p2-touch has F(50) = 1.5e-4 + 5e-5, which is 0.00019999999999999998 in double. What does the engine return, and why?",
@@ -107,7 +107,7 @@
    "TOUCHES, because a corner within 1e-9 relative of the point counts as on it"
   ],
   "answer": 3,
-  "explanation": "The digest prints ratio 0.9999999999999999 and state TOUCHES: within 1e-9 relative of the criterion counts as on it. Without the snap a plain comparison would call the curve BELOW, although on paper it sits exactly on the point. The engine rounds nothing up. Scenario frequencies are rates per year and are never required to sum to one."
+  "explanation": "The course shows ratio 0.9999999999999999 and state TOUCHES: within 1e-9 relative of the criterion counts as on it. Without the snap a plain comparison would call the curve BELOW, although on paper it sits exactly on the point. The engine rounds nothing up. Scenario frequencies are rates per year and are never required to sum to one."
  },
  {
   "prompt": "fnCriterionComparison is given the criterion 'r2p2-line'. Which message does the engine return, in its own words?",
@@ -129,7 +129,7 @@
    "It raises an exception inside the engine, since an inherited name cannot be looked up at all by any function"
   ],
   "answer": 1,
-  "explanation": "The digest says a preset name is looked up only among the names the engine itself defines, and the refusal table shows 'valueOf' refused with the engine's own words: criterion: unknown preset 'valueOf'. No fallback preset is ever substituted. A result with no checks would read as a real comparison. The engine returns an error and a field, which is data, and throws nothing."
+  "explanation": "The course says a preset name is looked up only among the names the engine itself defines, and the refusal table shows 'valueOf' refused with the engine's own words: criterion: unknown preset 'valueOf'. No fallback preset is ever substituted. A result with no checks would read as a real comparison. The engine returns an error and a field, which is data, and throws nothing."
  },
  {
   "prompt": "How wide is the snap that decides whether a corner is on the line?",
@@ -140,7 +140,7 @@
    "One per cent of the line value"
   ],
   "answer": 0,
-  "explanation": "The digest says a corner within 1e-9 relative of the line is AT_LINE, the same width as BOUNDARY_SNAP. An absolute 1e-9 per year would swallow the whole of a line near 1e-9 at N = 1000. 1e-6 would call corners on the line that are measurably off it. One per cent is no figure the engine uses."
+  "explanation": "The course says a corner within 1e-9 relative of the line is AT_LINE, the same width as BOUNDARY_SNAP. An absolute 1e-9 per year would swallow the whole of a line near 1e-9 at N = 1000. 1e-6 would call corners on the line that are measurably off it. One per cent is no figure the engine uses."
  },
  {
   "prompt": "A comparison comes back BELOW. Which condition held at the checks the engine made?",
@@ -151,7 +151,7 @@
    "No corner in range reached the criterion; each sat strictly under it"
   ],
   "answer": 3,
-  "explanation": "The digest defines BELOW as every checked corner strictly below the line or point. One corner above makes the curve EXCEED, and one on the line makes it TOUCH. The corner with the largest N is only one of the checks. N = 1 lies outside the Dutch line's range, and the state reads every corner in range."
+  "explanation": "The course defines BELOW as every checked corner strictly below the line or point. One corner above makes the curve EXCEED, and one on the line makes it TOUCH. The corner with the largest N is only one of the checks. N = 1 lies outside the Dutch line's range, and the state reads every corner in range."
  },
  {
   "prompt": "Which pair of words does the engine use for a corner on the line and for a curve with no exceedance and at least one such corner?",
@@ -162,6 +162,6 @@
    "AT_LINE for the corner and EXCEEDS for the curve"
   ],
   "answer": 2,
-  "explanation": "The digest's state words table gives AT_LINE as the state of one corner on the line and TOUCHES as the overall state when no corner is above and at least one is on the line. Swapping them misreads the table. ON_LINE is no state word. A curve with no corner above cannot EXCEED, since EXCEEDS needs a corner strictly above."
+  "explanation": "The course's state words table gives AT_LINE as the state of one corner on the line and TOUCHES as the overall state when no corner is above and at least one is on the line. Swapping them misreads the table. ON_LINE is no state word. A curve with no corner above cannot EXCEED, since EXCEEDS needs a corner strictly above."
  }
 ]

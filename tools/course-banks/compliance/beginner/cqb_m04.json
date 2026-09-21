@@ -19,7 +19,7 @@
    "The next due date then follows the old one, whatever day the filing came in."
   ],
   "answer": 3,
-  "explanation": "The digest prints rollForward(2026-10-10, Monthly) = 2026-11-10. The same call on the filing date would give 2026-11-14, so a roll from the filing would move the schedule later with each late filing."
+  "explanation": "The course prints rollForward(2026-10-10, Monthly) = 2026-11-10. The same call on the filing date would give 2026-11-14, so a roll from the filing would move the schedule later with each late filing."
  },
  {
   "prompt": "Once the late filing of REG-2026-002 is recorded and its due date rolled, what does the return read?",
@@ -52,7 +52,7 @@
    "It treats a lead time of 0 as missing."
   ],
   "answer": 1,
-  "explanation": "The digest states it: deriveStatus asks whether the next action date is inside the lead time before it asks about the filing. The open window is what keeps the row at Due soon."
+  "explanation": "The course states it: deriveStatus asks whether the next action date is inside the lead time before it asks about the filing. The open window is what keeps the row at Due soon."
  },
  {
   "prompt": "rollForward is given a due date of 2026-08-31 and the frequency Monthly. What next due date does it give?",

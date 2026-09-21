@@ -294,7 +294,7 @@
    "2033"
   ],
   "answer": 2,
-  "explanation": "Year 0 takes the start year as its label. The money in every row is unchanged, which the digest confirms by printing the same NPV and total tax for both runs."
+  "explanation": "Year 0 takes the start year as its label. The money in every row is unchanged, which the course confirms by printing the same NPV and total tax for both runs."
  },
  {
   "prompt": "How much loss is left in the pool at the end of 2029?",
@@ -327,7 +327,7 @@
    "(taxable income - the loss carried in) x 30 percent, once above zero"
   ],
   "answer": 3,
-  "explanation": "The digest states: the tax = (taxable income - the loss carried in) x the tax rate of 30 percent once that is above zero. The loss is set against income before the rate is applied."
+  "explanation": "The course states: the tax = (taxable income - the loss carried in) x the tax rate of 30 percent once that is above zero. The loss is set against income before the rate is applied."
  },
  {
   "prompt": "What difference in total tax over the life does carrying the loss forward make?",

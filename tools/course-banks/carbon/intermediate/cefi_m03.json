@@ -74,7 +74,7 @@
    "85.7029 percent"
   ],
   "answer": 3,
-  "explanation": "The radiation table prints 87.2029 at 1.0, 86.4029 at 1.8 and 85.7029 at 2.5 percent; 87.8476 is the target LHV row at 2.8 percent oxygen. The digest's sentence over the table is that the radiation loss moves the efficiency one for one."
+  "explanation": "The radiation table prints 87.2029 at 1.0, 86.4029 at 1.8 and 85.7029 at 2.5 percent; 87.8476 is the target LHV row at 2.8 percent oxygen. The course's sentence over the table is that the radiation loss moves the efficiency one for one."
  },
  {
   "prompt": "A radiation and convection loss of -3 is typed for the invented Isiokpo heater. What comes back?",
@@ -85,7 +85,7 @@
    "No refusal: a negative loss is read as 0 and the unburned loss of 0.0000 is carried instead."
   ],
   "answer": 1,
-  "explanation": "The stack loss section prints the call with -3 refused: \"The radiation and convection loss cannot be negative: a loss below zero would add to the efficiency.\" SECTION 25 lists it among the rules in force: a negative radiation or unburned loss is refused."
+  "explanation": "The stack loss section prints the call with -3 refused: \"The radiation and convection loss cannot be negative: a loss below zero would add to the efficiency.\" The course lists it among the rules in force: a negative radiation or unburned loss is refused."
  },
  {
   "prompt": "stackLossEfficiency is called with the heating value basis \"gross\". What does the engine answer?",
@@ -129,7 +129,7 @@
    "Stack 28 C, combustion air 238 C"
   ],
   "answer": 1,
-  "explanation": "The stack loss section: stack 238 C, combustion air 28 C, both invented. 25 C is the reference temperature of the typical latent heat and 400 C the top of the typical flue gas cp range (SECTION 1). The last pairing, 28 C for the stack and 238 C for the air, swaps the two."
+  "explanation": "The stack loss section: stack 238 C, combustion air 28 C, both invented. 25 C is the reference temperature of the typical latent heat and 400 C the top of the typical flue gas cp range in the course's constants. The last pairing, 28 C for the stack and 238 C for the air, swaps the two."
  },
  {
   "prompt": "Read the tuned line on LHV: which total loss and efficiency sit together there?",

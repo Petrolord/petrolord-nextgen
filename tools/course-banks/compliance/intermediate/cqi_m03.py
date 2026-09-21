@@ -34,7 +34,7 @@ q(2, "One corrective action is complete and has never been checked. At which sev
  ["Critical alone.",
   "Critical, Major and Minor.",
   "Every severity, Observation included."],
- "NCR_EFFECTIVENESS_REQUIRED holds Critical and Major. On a Minor NCR the digest prints ALLOWED for one corrective action complete and never checked.")
+ "NCR_EFFECTIVENESS_REQUIRED holds Critical and Major. On a Minor NCR the course prints ALLOWED for one corrective action complete and never checked.")
 
 q(1, "What may a Minor NCR close without, once its disposition and date are recorded?",
  "A root cause and any action at all.",
@@ -97,21 +97,21 @@ q(0, "summarise prints mean open age 75 days. What is it taken over?",
  ["All six ages, the closed and voided ones included.",
   "The two serious NCRs.",
   "The two overdue NCRs."],
- "The digest prints the ages the mean is taken over: 43, 64 and 117, their sum 224 over 3. The closed ages 8, 2 and 48 are not in it.")
+ "The course prints the ages the mean is taken over: 43, 64 and 117, their sum 224 over 3. The closed ages 8, 2 and 48 are not in it.")
 
 q(3, "isCapaOpen reads true for k5, the corrective action on NCR-2026-011. Is k5 in the action summarise's open 2?",
  "No. Its NCR is Voided, and summarise leaves it out.",
  ["Yes. summarise counts every open action.",
   "Yes, and in overdue 1 as well.",
   "No. open 2 counts Preventive actions only."],
- "The open two are k2 and k6, and the overdue one is k2. The digest prints that summarise leaves k5 out of the open and overdue counts because it sits on NCR-2026-011, which is Voided.")
+ "The open two are k2 and k6, and the overdue one is k2. The course prints that summarise leaves k5 out of the open and overdue counts because it sits on NCR-2026-011, which is Voided.")
 
 q(1, "The same actions summarised with no NCRs supplied print open 3 and overdue 2. What changed?",
  "k5 is counted, since its Voided parent was not supplied.",
  ["k1 is counted, never having been checked.",
   "k6 turns overdue with no NCR to hold it.",
   "k3 counts as open again."],
- "The digest's line reads \"A child whose parent is not supplied counts.\" Without the NCRs the engine cannot know that k5's parent is Voided, so the counts move from open 2 and overdue 1.")
+ "The course's line reads \"A child whose parent is not supplied counts.\" Without the NCRs the engine cannot know that k5's parent is Voided, so the counts move from open 2 and overdue 1.")
 
 emit(Q, '/root/wt-as-compliance-nextgen/tools/course-banks/compliance/intermediate/cqi_m03.json', label='cqi_m03', expect_n=15)
 finish()

@@ -228,7 +228,7 @@
    "Nothing, since every part of the PFDavg grows with T1."
   ],
   "answer": 1,
-  "explanation": "The digest names the three pieces: detected failures over the MTTR, the MRT, and the uncovered part under partial coverage. The independent term and the undetected common cause term both carry T1 and shrink as T1 goes to zero, and the MRT is charged on every undetected failure however often the test runs, which is why a perfect test still leaves the OBAGI valve a floor of 0.000021600000."
+  "explanation": "The course names the three pieces: detected failures over the MTTR, the MRT, and the uncovered part under partial coverage. The independent term and the undetected common cause term both carry T1 and shrink as T1 goes to zero, and the MRT is charged on every undetected failure however often the test runs, which is why a perfect test still leaves the OBAGI valve a floor of 0.000021600000."
  },
  {
   "prompt": "Read the processor row of the lifetime sweep, printed at 6.12E-07, in its five year column. What stands there?",
@@ -294,7 +294,7 @@
    "Eight, ten and twelve years, the three closest to the ordinary assumed life."
   ],
   "answer": 0,
-  "explanation": "The sweep covers five, eight, ten, twelve and fifteen years. That it tried only five lifetimes is part of why the digest calls the result strong evidence short of proof, so a sweep of every year or of only two or three values would each misstate what was done."
+  "explanation": "The sweep covers five, eight, ten, twelve and fifteen years. That it tried only five lifetimes is part of why the course calls the result strong evidence short of proof, so a sweep of every year or of only two or three values would each misstate what was done."
  },
  {
   "prompt": "Which of these is a fact about the published SOURCE alone?",

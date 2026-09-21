@@ -11,7 +11,7 @@ q(0, "The engine's `noiseDose` door returns one contribution per period. What is
  ["The period's hours divided by the 8 hours of the day, weighted by its level.",
   "The period's sound level less the criterion level, multiplied by the hours it lasted.",
   "The period's share of the day's TWA, in dBA, before the logarithm."],
- "Digest section 7 gives each period's reference duration as the denominator of its contribution, and the noise dose is the sum of those shares. Dividing by the 8 hours of the day ignores the level entirely except through a weight the engine does not use. Contributions are percentages of an allowance, and the TWA is computed only from their total.")
+ "The lesson gives each period's reference duration as the denominator of its contribution, and the noise dose is the sum of those shares. Dividing by the 8 hours of the day ignores the level entirely except through a weight the engine does not use. Contributions are percentages of an allowance, and the TWA is computed only from their total.")
 
 q(2, "On the action level, period 1 lasts 2.600000 h and carries 14.747186 percent, while period 2 lasts only 1.900000 h and carries 23.100555 percent. Why does the shorter period carry more?",
  "Period 2 is louder by more than one 5 dB step, so its reference duration is 8.224911 h against 17.630482 h.",

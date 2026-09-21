@@ -22,7 +22,7 @@
   "explanation": "The scale is sum(d_i v_i), fixed by the declared basis. RVP also needs the index slope at the limit, 2.1651 index points per psi, because its limit sits in the row as an index."
  },
  {
-  "prompt": "Three Apapa requests: a target volume of 0, Reformate with a minimum of 3000 and a maximum of 2000, and the 10 ppm gasoline template. Which one does the digest print with the status infeasible?",
+  "prompt": "Three Apapa requests: a target volume of 0, Reformate with a minimum of 3000 and a maximum of 2000, and the 10 ppm gasoline template. Which one does the course print with the status infeasible?",
   "options": [
    "The target volume of 0, which comes back infeasible.",
    "The crossed Reformate bounds, which come back infeasible.",
@@ -30,7 +30,7 @@
    "The 10 ppm gasoline template asked of the Apapa PMS pool."
   ],
   "answer": 3,
-  "explanation": "The digest prints the 10 ppm template with the status infeasible and \"REFUSED: No recipe from these components can meet every specification. Relax a limit, or bring in a component that can.\" The other two are among what optimiseBlend refuses, each in its own words: \"REFUSED: The target volume must be greater than zero.\" and \"REFUSED: Reformate has a minimum above its maximum.\""
+  "explanation": "The course prints the 10 ppm template with the status infeasible and \"REFUSED: No recipe from these components can meet every specification. Relax a limit, or bring in a component that can.\" The other two are among what optimiseBlend refuses, each in its own words: \"REFUSED: The target volume must be greater than zero.\" and \"REFUSED: Reformate has a minimum above its maximum.\""
  },
  {
   "prompt": "The MON giveaway of 3.4928, priced at a typed 0.4, is worth 11176.9355 $ over the batch. What would lowering the MON minimum below 81 save on the Apapa cargo?",
@@ -129,7 +129,7 @@
    "Apapa blends 8000 bbl, and the default pool's 1000 bbl is too small for a gap to print."
   ],
   "answer": 1,
-  "explanation": "Both pools are on the 50 ppm template and both bind on Sulfur and RVP. What the digest prints differently is availability: Butane at 400.0000 bbl at Apapa, and nothing in the default pool."
+  "explanation": "Both pools are on the 50 ppm template and both bind on Sulfur and RVP. What the course prints differently is availability: Butane at 400.0000 bbl at Apapa, and nothing in the default pool."
  },
  {
   "prompt": "What does the Apapa PMS recipe take of Isomerate?",
@@ -217,7 +217,7 @@
    "Density does not bind, so its signs need not agree."
   ],
   "answer": 1,
-  "explanation": "Cetane is a minimum: lowering it is the relief, and its dual already reads as a saving. Density is a maximum, and for a maximum the digest's rule turns the sign between the dual and the value of relief."
+  "explanation": "Cetane is a minimum: lowering it is the relief, and its dual already reads as a saving. Density is a maximum, and for a maximum the course's rule turns the sign between the dual and the value of relief."
  },
  {
   "prompt": "On the AGO recipe sulfur gives away 21.8467 ppm. What is sulfur relief worth there, and why?",
@@ -286,7 +286,7 @@
   "explanation": "The oracle_crudeassay.py row lists T50 by bisection and Refutas inverted by bisection. It is written from the rules and not from the JavaScript."
  },
  {
-  "prompt": "Given held item C12, which report of the AGO viscosity matches what the digest prints?",
+  "prompt": "Given held item C12, which report of the AGO viscosity matches what the course prints?",
   "options": [
    "2.9518 cSt alone, the volume figure, as the course keys volume as the correct basis.",
    "The engine's 3.0036 cSt, stated as the Refutas index blended on mass fraction.",
@@ -308,7 +308,7 @@
   "explanation": "Marginal minus average is 0.1731: the volume row's price, 87.5108 $/bbl, is the marginal barrel, and the unit cost, 87.3377 $/bbl, is the average barrel."
  },
  {
-  "prompt": "The digest solves each textbook corner with both coordinates fixed by bounds, and all four print the status optimal. Why optimal at every one?",
+  "prompt": "The course solves each textbook corner with both coordinates fixed by bounds, and all four print the status optimal. Why optimal at every one?",
   "options": [
    "Each corner is the optimum of the full problem, so all four report one objective.",
    "Optimal is reported whenever phase two runs, met rows or not.",
@@ -385,7 +385,7 @@
   "explanation": "Relief is raising a maximum or lowering a minimum, and the price is the money saved by one unit of it. The Cetane number minimum prints rowPrice 0.1932, scale 6000.0000 and price 1159.3909 per unit."
  },
  {
-  "prompt": "Suppose the Apapa sulfur row had been built with volume weights in place of SG weights. Where would the digest's two-route check show it?",
+  "prompt": "Suppose the Apapa sulfur row had been built with volume weights in place of SG weights. Where would the course's two-route check show it?",
   "options": [
    "Nowhere: both routes read the same row, so they share any error made in building it.",
    "As an infeasible status for the whole pool, reported by the kernel's phase one.",
@@ -396,7 +396,7 @@
   "explanation": "propertyOfBlend recomputes a property from a finished recipe by the specification's own rule, separately from the LP rows, so agreement is a check. Both routes print 50.0000 for Sulfur, with a difference of 0.0000."
  },
  {
-  "prompt": "Moving the RVP limit to 10 prints a saving of 3651.3942 $, and moving it to 8 prints -4751.5037 $, around 4448.9659 $ per psi. Which causes does the digest name for that spread?",
+  "prompt": "Moving the RVP limit to 10 prints a saving of 3651.3942 $, and moving it to 8 prints -4751.5037 $, around 4448.9659 $ per psi. Which causes does the course name for that spread?",
   "options": [
    "Rounding in the rowPrice of -0.2569, printed to four decimals and so drifting over a psi.",
    "The Butane bound, which the re-solves remove before moving the limit.",
@@ -404,7 +404,7 @@
    "The optimum moves to a different vertex, and the RVP row's index units are not a straight line in psi."
   ],
   "answer": 3,
-  "explanation": "The RVP re-solves change what holds (at 10 psi only Sulfur binds; at 8 psi Reformate sits at its availability), so the optimum moves to a different vertex, and the RVP row is in index units, which are not a straight line in psi. Rounding is not among the causes the digest names."
+  "explanation": "The RVP re-solves change what holds (at 10 psi only Sulfur binds; at 8 psi Reformate sits at its availability), so the optimum moves to a different vertex, and the RVP row is in index units, which are not a straight line in psi. Rounding is not among the causes the course names."
  },
  {
   "prompt": "What does the Apapa recipe achieve for MON, and what does it give away?",
@@ -426,7 +426,7 @@
    "$ per bbl, the cost of one more barrel"
   ],
   "answer": 2,
-  "explanation": "The digest prints: rowPrice x 8000.0000 bbl is -2054.8893 $ per index point. The RVP row is in index units."
+  "explanation": "The course prints: rowPrice x 8000.0000 bbl is -2054.8893 $ per index point. The RVP row is in index units."
  },
  {
   "prompt": "How does solveLP carry a tank limit such as Butane's 400 bbl at Apapa?",
@@ -451,7 +451,7 @@
   "explanation": "The blank cost returns the refusal that begins \"No cost for Isomerate\". The blank sulfur figure returns optimal at 695245.0644 $, with Sulfur listed as skipped and its reason."
  },
  {
-  "prompt": "The digest counts the LP oracle's golden cases as 181 problems. How does its method stand against the kernel's absolute tolerances?",
+  "prompt": "The course counts the LP oracle's golden cases as 181 problems. How does its method stand against the kernel's absolute tolerances?",
   "options": [
    "The kernel's own absolute tolerances, shared by running a simplex with Bland's rule.",
    "A larger tolerance than the kernel's, sized for problems scaled in millions.",

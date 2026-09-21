@@ -74,7 +74,7 @@
    "log10 of 1 is zero, leaving the intercept alone, and log10 of 10 is one, so the difference is the slope"
   ],
   "answer": 3,
-  "explanation": "At M of 1 W the term 14.1 log10 M vanishes and 59.9 is what remains; moving to 10 W adds one to log10 M, so the drop is exactly the slope. The equation is linear in log10 M, so a decade is the natural step, and no derivative is taken anywhere. The figure range starts at 116 W, and the engine evaluates the equation at every rate without special cases. The measurement shows the engine holds what the generator holds; it cannot reach the page."
+  "explanation": "At M of 1 W the term 14.1 log10 M vanishes and 59.9 is what remains; moving to 10 W adds one to log10 M, so the drop is exactly the slope. The equation is linear in log10 M, so a decade is the natural step, and no derivative is taken anywhere. The figure range starts at 116 W, and the engine evaluates the equation at every rate without special cases. The measurement shows the engine holds what the course records; it cannot reach the page."
  },
  {
   "prompt": "Why does `nioshHeatAssessment` refuse the word yes typed for acclimatized, instead of settling on a default?",

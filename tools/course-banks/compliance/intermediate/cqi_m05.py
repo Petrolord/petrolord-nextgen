@@ -78,7 +78,7 @@ q(0, "An external lead auditor is named in text, with no account. What does audi
  ["REFUSED, since there is no account to test.",
   "REFUSED: Name the lead auditor.",
   "ALLOWED only once an account is made for them."],
- "The digest prints ALLOWED for an external lead auditor named in text with no account. \"Name the lead auditor.\" is the reporting refusal for an audit with no lead auditor named at all.")
+ "The course prints ALLOWED for an external lead auditor named in text with no account. \"Name the lead auditor.\" is the reporting refusal for an audit with no lead auditor named at all.")
 
 q(3, "u-boma is named as both lead auditor and auditee, and auditIndependence refuses. What does the refusal leave to the person fixing it?",
  "Which of the two roles gets somebody else.",

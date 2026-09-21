@@ -83,7 +83,7 @@ q(0, "The coefficient sweep is evaluated at beta 0.500000 and Reynolds 5e+5. Wha
   "0.601691"],
  "Every cell belongs to one beta and one Reynolds number, and a coefficient quoted without both of them is half a number."),
 
-q(0, "Two cells of the coefficient sweep bound the span the digest prints. What is the difference between them and what is their ratio?",
+q(0, "Two cells of the coefficient sweep bound the span the course prints. What is the difference between them and what is their ratio?",
  "A difference of 0.072666 and a ratio of 1.122048.",
  ["A difference of 0.084375 and a ratio of 1.092173.",
   "A difference of 0.000036 and a ratio of 0.999941.",
@@ -120,14 +120,14 @@ q(3, "Where are the two edges of the published beta band, and what is the engine
  "The edges were measured by bisecting the engine's own flag, and the warning above the upper edge names the beta and the band."),
 
 
-q(1, "At what beta does the digest show the extrapolation warning firing?",
+q(1, "At what beta does the course show the extrapolation warning firing?",
  "0.841",
  ["0.950",
   "0.800000",
   "0.750000"],
  "The message names the beta it was asked about and the 0.1 to 0.75 band it sits outside, which is what makes it specific to the run."),
 
-q(2, "What are the two ends of the expansibility span the digest prints?",
+q(2, "What are the two ends of the expansibility span the course prints?",
  "0.999779 at dP/P1 0.001000 with k 1.66, and 0.915403 at dP/P1 0.250000 with k 1.1.",
  ["0.999779 at dP/P1 0.001000 with k 1.1, and 0.915403 at dP/P1 0.250000 with k 1.66, since the factor falls as the specific heat ratio rises.",
   "0.999181 at the ABOH conditions, and 0.915403 at the bottom corner of the sweep.",

@@ -78,7 +78,7 @@ q(0, "The invented duty and financing rates are left blank on BADAGRY. What does
  ["A refusal naming the duty, since a percent of CIF with no rate leaves the walk unable to form CIF.",
   "complete true, total 24774210.79 USD, with the two blank rates read as zero and listed in assumedZero.",
   "complete false with a total of 26513943.86 USD, the last complete build, until the two rates are typed."],
- "The engine adds what it was given, names what it was not and labels the sum. The digest prints \"A FLOOR, not a cost: 2 rate(s) not supplied.\" beside 24774210.79 USD.")
+ "The engine adds what it was given, names what it was not and labels the sum. The engine returns \"A FLOOR, not a cost: 2 rate(s) not supplied.\" beside 24774210.79 USD.")
 
 # audit-advanced: explanation gloss "a statement about a regime" unprinted
 q(2, "On BADAGRY the course's invented duty is typed 0 in one build and left blank in another. Both totals print 25114857.82 USD. What tells them apart?",
@@ -96,7 +96,7 @@ q(1, "With every invented rate left blank, landedCost prints a total of 23392000
   "The CIF value, formed before any landed charge applies."],
  "It is the same figure as the FOB line of the full build. The engine prints it with complete false, 9 rates missing and \"A FLOOR, not a cost: 9 rate(s) not supplied.\"")
 
-q(0, "The digest prints 26513943.86 - 24774210.79 = 1739733.07 USD for BADAGRY, every rate invented. Which lines does the floor build leave out of its total?",
+q(0, "The course prints 26513943.86 - 24774210.79 = 1739733.07 USD for BADAGRY, every rate invented. Which lines does the floor build leave out of its total?",
  "The invented import duty and the invented financing line, both percents of CIF.",
  ["The invented port and jetty lines, both levied on the bill-of-lading quantity of the cargo.",
   "The invented insurance and freight lines, both formed before CIF is frozen.",

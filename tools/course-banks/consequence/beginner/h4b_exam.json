@@ -8,7 +8,7 @@
    "The frequency is the mass rate divided by the inventory."
   ],
   "answer": 1,
-  "explanation": "Section 1: the engine computes effects and never frequencies, and a consequence model says what happens if the release occurs; how often it occurs belongs elsewhere. The basis block carries the model, its source and its units, and no frequency. Nothing in the engine turns a hole size or a mass rate into a frequency."
+  "explanation": "The course explains: the engine computes effects and never frequencies, and a consequence model says what happens if the release occurs; how often it occurs belongs elsewhere. The basis block carries the model, its source and its units, and no frequency. Nothing in the engine turns a hole size or a mass rate into a frequency."
  },
  {
   "prompt": "A vessel pressure is known in bar gauge. The engine never converts a unit it was not asked to. What must the analyst do before typing it?",
@@ -30,7 +30,7 @@
    "101325 Pa, added to every upstream pressure."
   ],
   "answer": 2,
-  "explanation": "Section 1 prints `ATM_PA` as 101325, and section 2 says ambient is `ATM_PA`, 101325 Pa, unless a call states otherwise. 9.80665 is `G_M_S2`. 100000 is the upper end of `BAGSTER_RANGE_PA_M`, which has nothing to do with ambient. Every pressure is typed absolute, so nothing is added to it."
+  "explanation": "The course shows `ATM_PA` as 101325, and the course says ambient is `ATM_PA`, 101325 Pa, unless a call states otherwise. 9.80665 is `G_M_S2`. 100000 is the upper end of `BAGSTER_RANGE_PA_M`, which has nothing to do with ambient. Every pressure is typed absolute, so nothing is added to it."
  },
  {
   "prompt": "Which statement about a refusal from this engine is true?",
@@ -41,7 +41,7 @@
    "It carries no number: it holds the engine's message and the field it names."
   ],
   "answer": 3,
-  "explanation": "Section 3 says each refusal is the engine's `error` string with the field it names, and that a refusal carries no number. Nothing is computed at a nearby input, nothing is flagged and returned, and no partial result is kept."
+  "explanation": "The course says each refusal is the engine's `error` string with the field it names, and that a refusal carries no number. Nothing is computed at a nearby input, nothing is flagged and returned, and no partial result is kept."
  },
  {
   "prompt": "Which of the engine's named sources fixes the pool diameter and the Mackay and Matsugu evaporation?",
@@ -63,7 +63,7 @@
    "The subsonic outflow coefficient psi used in the gas outflow model once the flow stops being choked."
   ],
   "answer": 1,
-  "explanation": "Section 4 lists a worked carbon monoxide plume among what the Purple Book fixes, the case section 11 reproduces at 21.260627 g/m3. The Briggs coefficients come from ALOHA, the molar volume from CCOHS, and psi from the Yellow Book."
+  "explanation": "The course lists a worked carbon monoxide plume among what the Purple Book fixes, the case the engine reproduces at 21.260627 g/m3. The Briggs coefficients come from ALOHA, the molar volume from CCOHS, and psi from the Yellow Book."
  },
  {
   "prompt": "The exported constant `BRIGGS_ADVISORY_RANGE_M` holds 100 to 10000. What happens to a plume asked for outside it?",
@@ -118,7 +118,7 @@
    "18.730307 kg/s; the rate is linear in the discharge coefficient."
   ],
   "answer": 3,
-  "explanation": "The coefficient sweep prints 18.730307 kg/s at 0.6, and section 5 says the rate is linear in the discharge coefficient. The engine uses the typed coefficient and replaces nothing. 24.973743 kg/s is the 0.8 row, larger because a larger coefficient passes more. The square root holds the driving pressure and the density."
+  "explanation": "The coefficient sweep prints 18.730307 kg/s at 0.6, and the course says the rate is linear in the discharge coefficient. The engine uses the typed coefficient and replaces nothing. 24.973743 kg/s is the 0.8 row, larger because a larger coefficient passes more. The square root holds the driving pressure and the density."
  },
  {
   "prompt": "At what ullage pressure does the AMENAM line reach 48.888640 kg/s with its 6 m head?",
@@ -129,7 +129,7 @@
    "10000000 Pa, where the gas line reaches its highest choked rate."
   ],
   "answer": 2,
-  "explanation": "The ullage sweep prints 48.888640 kg/s at 1000000 Pa, with a driving pressure of 948688.915000 Pa. 500000 Pa gives 33.621626 kg/s, and the rate follows the square root of the driving pressure. 200000 Pa gives 19.354651 kg/s. 10000000 Pa is a row of the methane line in section 6, a different model."
+  "explanation": "The ullage sweep prints 48.888640 kg/s at 1000000 Pa, with a driving pressure of 948688.915000 Pa. 500000 Pa gives 33.621626 kg/s, and the rate follows the square root of the driving pressure. 200000 Pa gives 19.354651 kg/s. 10000000 Pa is a row of the methane line of the gas outflow lesson, a different model."
  },
  {
   "prompt": "An analyst has a hole measured as an area and no diameter. What does the liquid outflow function accept?",
@@ -151,7 +151,7 @@
    "The ullage times the density over the head."
   ],
   "answer": 0,
-  "explanation": "Section 5: P = rhoL g hL + PaL is the absolute pressure at the hole, the static head plus the pressure above the liquid. The ullage is stated absolute, so no atmosphere is added. The driving pressure is P minus ambient, 148688.915000 Pa, and it already contains the head. The last formula is not the model."
+  "explanation": "The course explains: P = rhoL g hL + PaL is the absolute pressure at the hole, the static head plus the pressure above the liquid. The ullage is stated absolute, so no atmosphere is added. The driving pressure is P minus ambient, 148688.915000 Pa, and it already contains the head. The last formula is not the model."
  },
  {
   "prompt": "With the methane line held at 150000 Pa the pressure ratio reads 0.675500. How does the engine classify the flow, and at what rate?",
@@ -195,7 +195,7 @@
    "The discharge coefficient is doubled."
   ],
   "answer": 2,
-  "explanation": "Section 6: both rows are CHOKED, and once choked the mass rate is LINEAR in the upstream pressure; doubling it doubles the rate, as the upstream density doubles from 1.607640 to 3.215281 kg/m3. Psi is 1.000000 on both rows. The pressure has doubled and the rate with it. The discharge coefficient is held at 0.62."
+  "explanation": "The course explains: both rows are CHOKED, and once choked the mass rate is LINEAR in the upstream pressure; doubling it doubles the rate, as the upstream density doubles from 1.607640 to 3.215281 kg/m3. Psi is 1.000000 on both rows. The pressure has doubled and the rate with it. The discharge coefficient is held at 0.62."
  },
  {
   "prompt": "Of the two air cases straddling the boundary, the one with the smaller ratio, 0.52773437499999998, is air-barely-choked. How does the engine label it?",
@@ -217,7 +217,7 @@
    "15.311760 kg/s from both, CHOKED, a relative difference of 5.80e-16."
   ],
   "answer": 3,
-  "explanation": "Section 6 prints the yb-hydrogen-t0 row: CHOKED, the engine 15.311760 kg/s and route B 15.311760 kg/s, relative difference 5.80e-16. Nothing is rounded to the book's digits. 15.292930 kg/s is what the engine gives at a heat capacity ratio of 1.4 and is no route B figure. The two routes agree on the regime."
+  "explanation": "The course shows the yb-hydrogen-t0 row: CHOKED, the engine 15.311760 kg/s and route B 15.311760 kg/s, relative difference 5.80e-16. Nothing is rounded to the book's digits. 15.292930 kg/s is what the engine gives at a heat capacity ratio of 1.4 and is no route B figure. The two routes agree on the regime."
  },
  {
   "prompt": "Which upstream pressure puts the AMENAM GAS line exactly at its critical pressure ratio of 0.543927?",
@@ -228,7 +228,7 @@
    "208201.258009 Pa, where a gas with a heat capacity ratio of 1.67 chokes into the atmosphere."
   ],
   "answer": 1,
-  "explanation": "Section 7 derives 186284.176006 Pa for the AMENAM line and reports CHOKED there with psi 1.000000000000. 250000 Pa and 180000 Pa are table rows on either side of the boundary. 208201.258009 Pa belongs to a heat capacity ratio of 1.67; the methane line's is 1.31."
+  "explanation": "The course derives 186284.176006 Pa for the AMENAM line and reports CHOKED there with psi 1.000000000000. 250000 Pa and 180000 Pa are table rows on either side of the boundary. 208201.258009 Pa belongs to a heat capacity ratio of 1.67; the methane line's is 1.31."
  },
  {
   "prompt": "The 30 m3 spill is given a stated thickness of 0.02 m. What area and equivalent diameter come back?",
@@ -250,7 +250,7 @@
    "The depth of the pool times the area, 0.075000 m times 400 m2."
   ],
   "answer": 2,
-  "explanation": "Section 8 gives the model string \"pool covers the bund floor; D = sqrt(4 A / pi)\": the equivalent diameter is that of a circle of the bund's area. The bund's shape is not an input, and the engine models no run of liquid across the floor: the pool simply covers it. Depth times area is the volume, 30 m3."
+  "explanation": "The course gives the model string \"pool covers the bund floor; D = sqrt(4 A / pi)\": the equivalent diameter is that of a circle of the bund's area. The bund's shape is not an input, and the engine models no run of liquid across the floor: the pool simply covers it. Depth times area is the volume, 30 m3."
  },
  {
   "prompt": "What comparison decides whether `poolFromSpill` refuses a spill as overtopping its bund?",
@@ -305,7 +305,7 @@
    "The Schmidt number, which defaults to 0.8 when none is typed."
   ],
   "answer": 2,
-  "explanation": "Section 9: the model string is \"km = 0.004786 u10^0.78 (2r)^-0.11 Sc^-0.67; q = km Pv mu / (R T) x A\", and `massTransferCoefficientMS` carries m/s in its name. km times Pv mu / (R T) is the evaporation flux, 0.005749887804 kg/(m2 s), and times the area the rate. The Schmidt number is an input to km, defaulting to 0.8."
+  "explanation": "The course explains: the model string is \"km = 0.004786 u10^0.78 (2r)^-0.11 Sc^-0.67; q = km Pv mu / (R T) x A\", and `massTransferCoefficientMS` carries m/s in its name. km times Pv mu / (R T) is the evaporation flux, 0.005749887804 kg/(m2 s), and times the area the rate. The Schmidt number is an input to km, defaulting to 0.8."
  },
  {
   "prompt": "What crosswind and vertical spreads does class D give at 300 m?",
@@ -382,7 +382,7 @@
    "The image source at minus h: the ground reflects what reaches it."
   ],
   "answer": 3,
-  "explanation": "Section 11: the second exponential is the IMAGE SOURCE at minus h, and the ground reflects what reaches it. It is added to the first term, and total reflection absorbs nothing. The crosswind term is exp(-y^2 / 2 sy^2), a separate factor. The image sits below the ground at minus h for every release height, including a ground level one."
+  "explanation": "The course explains: the second exponential is the IMAGE SOURCE at minus h, and the ground reflects what reaches it. It is added to the first term, and total reflection absorbs nothing. The crosswind term is exp(-y^2 / 2 sy^2), a separate factor. The image sits below the ground at minus h for every release height, including a ground level one."
  },
  {
   "prompt": "Under a clear night sky the UBIT gas drifts from the ground. How far downwind does the ground reading still exceed 100 mg/m3?",
@@ -426,7 +426,7 @@
    "Every target in the table is REACHED."
   ],
   "answer": 0,
-  "explanation": "Section 13 prints the same maximum beside targets of 500, 100, 20 and 5000 mg/m3: the ground curve under a 25 m stack is fixed before any target is named, and the target only picks the crossings, two for 100 and 20 and none for 500 and 5000. Nothing is copied between rows, rounding hides no change because there is none, and two of the four rows are NOT_REACHED."
+  "explanation": "The course shows the same maximum beside targets of 500, 100, 20 and 5000 mg/m3: the ground curve under a 25 m stack is fixed before any target is named, and the target only picks the crossings, two for 100 and 20 and none for 500 and 5000. Nothing is copied between rows, rounding hides no change because there is none, and two of the four rows are NOT_REACHED."
  },
  {
   "prompt": "Someone stands 20 m off the plume axis, half a kilometre downwind of UBIT in neutral weather. What reading do they get?",
@@ -448,7 +448,7 @@
    "The engine refused the call."
   ],
   "answer": 0,
-  "explanation": "Section 13: NOT_REACHED leaves both distances null, as the stack does at 500 mg/m3, and BEYOND_SEARCH_RANGE returns a far distance of null, as class F to 20 mg/m3 capped at 2000 m does. From the ground the NEAR distance is the null one, and the far distance carries the answer. A refusal returns no distances at all."
+  "explanation": "The course explains: NOT_REACHED leaves both distances null, as the stack does at 500 mg/m3, and BEYOND_SEARCH_RANGE returns a far distance of null, as class F to 20 mg/m3 capped at 2000 m does. From the ground the NEAR distance is the null one, and the far distance carries the answer. A refusal returns no distances at all."
  },
  {
   "prompt": "What does `plumeDistanceToConcentration` vary, and what does it hold fixed, while it searches?",
@@ -459,6 +459,6 @@
    "It varies the stability class from A to F at a fixed distance and reports the first class that meets the target."
   ],
   "answer": 1,
-  "explanation": "Section 13: it finds the downwind distances at which the centreline concentration at the receptor height equals a target, by bisection. The crosswind offset is zero because the distance is always a centreline distance. The release height and the class are inputs to the search, and neither is searched over."
+  "explanation": "The course explains: it finds the downwind distances at which the centreline concentration at the receptor height equals a target, by bisection. The crosswind offset is zero because the distance is always a centreline distance. The release height and the class are inputs to the search, and neither is searched over."
  }
 ]

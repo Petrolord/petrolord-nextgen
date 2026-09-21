@@ -8,7 +8,7 @@
    "None: every input the reproduction used is printed in the source table."
   ],
   "answer": 0,
-  "explanation": "The digest states that three inputs had to be INFERRED. Stopping at the lifetime and the beta factor leaves out the restoration time after a proof test, which the valve row needs. Stopping at the lifetime alone leaves out two. The reproduction is the reason the inferences were needed at all, so none is not an option."
+  "explanation": "The course states that three inputs had to be INFERRED. Stopping at the lifetime and the beta factor leaves out the restoration time after a proof test, which the valve row needs. Stopping at the lifetime alone leaves out two. The reproduction is the reason the inferences were needed at all, so none is not an option."
  },
  {
   "prompt": "The published valve subsystem is computed with the restoration time after a proof test set equal to its detected restoration time of 120 hours. Does the row reproduce, and what does that settle?",
@@ -38,10 +38,10 @@
    "The golden's source lines record all three of them, so the count is three and the engine's validation record adds nothing at all to what the golden already carries in its own lines.",
    "The golden records two of them and the engine's validation record holds a third item which is no inference at all, so the count of genuinely inferred inputs comes to two.",
    "The golden's source lines record two of them and the engine's validation record holds the restoration time inference, and the count of inferred inputs is still three.",
-   "The engine's source comments record all three, which is why the digest re-measures them."
+   "The engine's source comments record all three, which is why the course re-measures them."
   ],
   "answer": 2,
-  "explanation": "The digest says the golden's source lines record the lifetime and the beta factor slip, while the restoration time inference sits in the engine's validation record and is shown by running the row both ways. Where a record lives does not change what was inferred, so the count is three. The engine's own comments are provenance and record none of this."
+  "explanation": "The course says the golden's source lines record the lifetime and the beta factor slip, while the restoration time inference sits in the engine's validation record and is shown by running the row both ways. Where a record lives does not change what was inferred, so the count is three. The engine's own comments are provenance and record none of this."
  },
  {
   "prompt": "Why does the restoration time inference show on the valve subsystem in particular?",
@@ -52,7 +52,7 @@
    "It is the only subsystem whose proof test interval differs from the one year used elsewhere."
   ],
   "answer": 1,
-  "explanation": "The valve row carries an MTTR and an MRT of 120 hours, which is long, and the digest computes the row both ways to show the effect. The published table uses a proof test interval of one year throughout, and several of its subsystems carry detected failures, so neither of those makes the valve special. A redundant architecture does not double charge a restoration time."
+  "explanation": "The valve row carries an MTTR and an MRT of 120 hours, which is long, and the course computes the row both ways to show the effect. The published table uses a proof test interval of one year throughout, and several of its subsystems carry detected failures, so neither of those makes the valve special. A redundant architecture does not double charge a restoration time."
  },
  {
   "prompt": "The coverage table's lifetime is not printed. What did the sweep of lifetimes show, and what is the honest label for the result?",
@@ -151,7 +151,7 @@
    "The summed total, which rounds to its printed value at either beta factor."
   ],
   "answer": 2,
-  "explanation": "The golden leaves out the analogue input card in the raised table, because it reproduces only with a detected common cause figure that looks like a rounded print. A reproduction argument is built from the rows that are clean, and the ambiguous row is named and set aside in the open. The other three are not what the digest records as left out."
+  "explanation": "The golden leaves out the analogue input card in the raised table, because it reproduces only with a detected common cause figure that looks like a rounded print. A reproduction argument is built from the rows that are clean, and the ambiguous row is named and set aside in the open. The other three are not what the course records as left out."
  },
  {
   "prompt": "What is a published table evidence for, once a reproduction has needed an inferred input?",
@@ -162,6 +162,6 @@
    "It is evidence that the inferred input is the correct one for any similar subsystem."
   ],
   "answer": 0,
-  "explanation": "The digest's lesson for a verification note is that a reproduction which needs an inferred input says which input and why, and that a published table is evidence about the equations only for the rows it reproduces. The rates are the source's own example values, the inference is about the source and travels no further, and an inference that is declared still supports the rows that reproduce."
+  "explanation": "The course's lesson for a verification note is that a reproduction which needs an inferred input says which input and why, and that a published table is evidence about the equations only for the rows it reproduces. The rates are the source's own example values, the inference is about the source and travels no further, and an inference that is declared still supports the rows that reproduce."
  }
 ]

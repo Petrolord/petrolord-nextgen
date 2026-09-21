@@ -19,7 +19,7 @@ q(0, "AK-02's strapping table ends at 12000 mm with 2412.743 m3. Over which heig
  ["From 0 mm upward, with heights past 12000 mm carried on the slope of the last step.",
   "Only at the entries themselves, one every 250 mm, since a dip must land on one.",
   "From 250 mm up to 12000 mm, since a dip of 0 mm counts as no reading."],
- "AK-02's table starts at the empty tank and stops at 12000 mm. Between the two it interpolates; the digest's dip at 12010 mm gets the refusal for a dip above the last strapping entry.")
+ "AK-02's table starts at the empty tank and stops at 12000 mm. Between the two it interpolates; the course's dip at 12010 mm gets the refusal for a dip above the last strapping entry.")
 
 q(2, "On the partial table with the dip held at 640 mm, the water cut is raised from 0 mm to 150 mm. What happens to the answer?",
  "gross 243.285 m3 gives way to a refusal, because 150 mm lies below the table's first entry at 300 mm.",
@@ -49,7 +49,7 @@ q(1, "Which of these calls prints one figure and gives another as none?",
   "reconcileStock with no opening stock"],
  "With no closing dip the expected closing, 4508.100 m3, still prints and the unaccounted figure reads none. The other three calls refuse outright.")
 
-q(0, "The digest straps two AKODO tanks a second time at 10 mm. On which of them does the step change the reading at the dip?",
+q(0, "The course straps two AKODO tanks a second time at 10 mm. On which of them does the step change the reading at the dip?",
  "AK-03, the bullet",
  ["AK-01, the vertical tank",
   "Both of them, by the same amount",
@@ -190,7 +190,7 @@ q(2, "With no days of history, which of trendUnaccounted's three figures reads n
   "All three of them"],
  "With no days the engine prints cumulative 0.000 m3, run 0 and mean percent none. Two of the three are figures at zero, and only the percent, whose denominator is the cumulative throughput, reads none.")
 
-q(2, "In the trimmed record, what is the shortest run of loss the digest shows printing the prompt?",
+q(2, "In the trimmed record, what is the shortest run of loss the course shows printing the prompt?",
  "4 days of loss",
  ["3 days of loss",
   "6 days of loss",

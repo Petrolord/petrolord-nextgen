@@ -23,12 +23,12 @@ q(1, "What new correlation was written to remove the corrosion inhibitor credit?
   "A second mass-transfer term that applies once the film has gone."],
  "That is why the relationship between the two rates stays arithmetic rather than becoming a second model. Both rates run through the same chain with the same inputs and differ in one factor.")
 
-q(2, "For the one digest stream whose film is stripped, the stripped rate is how many times the credited rate?",
+q(2, "For the one course stream whose film is stripped, the stripped rate is how many times the credited rate?",
  "4.699248 times.",
  ["1.000000 times, as it is on every other stream in that table.",
   "6.896552 times, which is the figure the shipped case reaches at 60 ft per second.",
   "2.189815 times, which is the jump across the friction branch switch."],
- "That factor is exactly the reciprocal of the fraction of the metal loss the corrosion inhibitor programme leaves behind. The digest asserts the property to twelve figures on every rebuild.")
+ "That factor is exactly the reciprocal of the fraction of the metal loss the corrosion inhibitor programme leaves behind. The course asserts the property to twelve figures on every rebuild.")
 
 q(0, "What quantity does the ratio of the stripped rate to the credited rate equal?",
  "The reciprocal of the fraction of the metal loss the corrosion inhibitor programme leaves.",
@@ -46,14 +46,14 @@ q(1, "Why can a graded capstone field in this course be a ratio of two lives?",
 
 q(3, "Take the shipped studio case and raise the velocity from 10 to 60 ft per second. What is the ratio between the rate and the credited rate there?",
  "6.896552.",
- ["4.699248, the same figure the stripped digest stream carries.",
+ ["4.699248, the same figure the stripped course stream carries.",
   "1.45, which the shipped warning names on the default case.",
   "1.000000, because the chemistry was not altered between the two screens."],
  "The two stripped cases in this course have different temperatures, different pressures, different chemistry and different lines. Their ratios differ because the two corrosion inhibitor programmes differ, and for no other reason.")
 
 q(0, "At 60 ft per second on the shipped case, what happens to the remaining life?",
  "It falls from 4.207953 yr to 0.242737 yr.",
- ["It falls from 4.207953 yr to 0.760876 yr, which is the stripped digest stream's credited life.",
+ ["It falls from 4.207953 yr to 0.760876 yr, which is the stripped course stream's credited life.",
   "It is withheld, because the corrosion inhibitor credit is no longer being taken on that case.",
   "It is unchanged, because the allowance and the design life were not altered."],
  "Nothing about the chemistry moved between those two screens. One flow input moved and the module changed which rate it was willing to stand behind, and the life follows the rate.")
@@ -70,7 +70,7 @@ q(1, "On a stream whose film survives, what do the rate column and the credited 
  ["Two different figures, the credited one smaller.",
   "One figure and one blank, the credited column being filled only when it differs.",
   "Two figures whose ratio is the availability."],
- "Five of the digest's six streams are in that position and on each of them the two rate columns agree and the two life columns agree. Printing a figure twice looks redundant until you meet the case where they differ.")
+ "Five of the course's six streams are in that position and on each of them the two rate columns agree and the two life columns agree. Printing a figure twice looks redundant until you meet the case where they differ.")
 
 q(0, "Why does the engine report the credited rate even when the credit was taken in full?",
  "Because it is the rate a reader working from a datasheet efficiency already has in their head.",
@@ -107,7 +107,7 @@ q(1, "Which four blank boxes produce the screening incomplete message?",
   "The wetting regime, the water cut, the efficiency and the availability."],
  "Each of those four reaches the wall shear door, and each message has two halves: the first says the film survival check did not run, and the second names the box. A reader gets the cause and the fix from one sentence.")
 
-q(2, "On the stripped digest stream the binding constraint names the wall shear. What does the engine say to change first?",
+q(2, "On the stripped course stream the binding constraint names the wall shear. What does the engine say to change first?",
  "Slowing the line, which changes this answer before anything else does.",
  ["Raising the corrosion inhibitor efficiency quoted on the chemical's datasheet.",
   "Increasing the corrosion allowance that the line was originally built with.",

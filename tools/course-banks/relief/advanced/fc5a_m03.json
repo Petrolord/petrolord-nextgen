@@ -99,7 +99,7 @@
   "explanation": "The message on both is `the time step must be a finite number above zero`. The third refusal in that family is the time limit itself at 7199.999985603571 s, which names the orifice as the likely cause."
  },
  {
-  "prompt": "Each row of the refinement study carries a ratio in its last column, and the digest computes nothing between rows. What follows for a reader?",
+  "prompt": "Each row of the refinement study carries a ratio in its last column, and the course computes nothing between rows. What follows for a reader?",
   "options": [
    "The column can be read downward as a rate of convergence, since each entry is the previous one halved.",
    "The ratios may be divided into each other to recover the order of the method.",
@@ -107,7 +107,7 @@
    "Any statement about how the column behaves is a reading you take rather than a figure you were handed."
   ],
   "answer": 3,
-  "explanation": "Each entry is that row's time over the time at the finest step. Take the reading deliberately and say you took it, which is a different act from quoting a figure the digest computed."
+  "explanation": "Each entry is that row's time over the time at the finest step. Take the reading deliberately and say you took it, which is a different act from quoting a figure the course computed."
  },
  {
   "prompt": "The step count runs 336 at 0.800000 s, 2685 at 0.100000 s and 21474 at 0.012500 s. What is that column recording?",

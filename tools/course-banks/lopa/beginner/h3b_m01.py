@@ -15,7 +15,7 @@ q(1,
   ["The PFDavg a safety instrumented function achieves, by the IEC 61508-6 Annex B low demand equations, which is the engine's other half entirely.",
    "The longest proof test interval at which a subsystem still meets a target PFDavg, together with the state that says why there is no such interval.",
    "A consequence category and a scored band for the scenario, taken from a matrix."],
-  "The digest states the halves in one line: the determination half is a layer of protection analysis, a scenario frequency, the risk reduction still missing against a tolerable frequency, and the SIL band that missing reduction falls in. The Annex B PFDavg belongs to the verification half and to the next tier. The longest interval is a separate call again. Nothing in this engine takes a consequence category or a scored band.")
+  "The course states the halves in one line: the determination half is a layer of protection analysis, a scenario frequency, the risk reduction still missing against a tolerable frequency, and the SIL band that missing reduction falls in. The Annex B PFDavg belongs to the verification half and to the next tier. The longest interval is a separate call again. Nothing in this engine takes a consequence category or a scored band.")
 
 q(3,
   "`lopaScenario` is handed an initiating event frequency, enabling conditions, conditional modifiers, a list of IPLs and a tolerable frequency. Which set of results comes back?",
@@ -47,7 +47,7 @@ q(1,
   ["A generic initiating event frequency is supplied when the field is left empty, and everything else on the row is typed by the analyst.",
    "A table of IPL PFDs by layer type is held inside the engine and the matching figure is applied.",
    "The TMEL follows from the consequence described on the row."],
-  "The digest lists the inputs one by one: the initiating event frequency, every enabling condition and conditional modifier probability, every IPL PFD, every failure rate and the TMEL. The engine carries no failure rate data and no library of generic frequencies, so nothing is supplied for an empty field, no IPL PFD is looked up by layer type, and the TMEL is chosen by the organisation and typed in.")
+  "The course lists the inputs one by one: the initiating event frequency, every enabling condition and conditional modifier probability, every IPL PFD, every failure rate and the TMEL. The engine carries no failure rate data and no library of generic frequencies, so nothing is supplied for an empty field, no IPL PFD is looked up by layer type, and the TMEL is chosen by the organisation and typed in.")
 
 q(0,
   "The engine's exported names are given in full. Which of these is not one of them?",
@@ -55,7 +55,7 @@ q(0,
   ["`outcomeFromRequiredRrf`, which returns the outcome state that a required risk reduction factor demands of the row.",
    "`silFromPfdAvg`, which returns the low demand band an achieved PFDavg falls in, read from the band table.",
    "`decadeOf`, which returns a power of ten or null."],
-  "The exported names are given in full in the digest and `outcomeFromRequiredRrf`, `silFromPfdAvg` and `decadeOf` are all on the list. No name on it scores a consequence, because nothing in this engine takes a consequence category or a scored band at all.")
+  "The exported names are given in full in the course and `outcomeFromRequiredRrf`, `silFromPfdAvg` and `decadeOf` are all on the list. No name on it scores a consequence, because nothing in this engine takes a consequence category or a scored band at all.")
 
 q(3,
   "A LOPA row multiplies ONE frequency by probabilities. Which two fields on the determination row are the frequencies?",
@@ -71,7 +71,7 @@ q(2,
   ["It accepts both, since the engine reads each field as a plain number and checks only that it is above zero before forming the product for the row.",
    "It refuses both, because no field anywhere in the determination half of the engine will take a value above one from the analyst who typed it.",
    "It accepts both and warns on the second."],
-  "The digest says an IEF of 2.5 per year is accepted, because a frequency is a count per year and can exceed one. The same number typed as an enabling condition probability is refused, because that field is a probability above 0 and no more than 1. So one is taken and one is refused, and the refusal replaces the result and is not a warning beside it.")
+  "The course says an IEF of 2.5 per year is accepted, because a frequency is a count per year and can exceed one. The same number typed as an enabling condition probability is refused, because that field is a probability above 0 and no more than 1. So one is taken and one is refused, and the refusal replaces the result and is not a warning beside it.")
 
 q(0,
   "A row is submitted with an initiating event frequency of zero. What does the engine return?",
@@ -106,12 +106,12 @@ q(3,
   "The refusal table gives the field as `pfdAvg`, with the engine's message that it must be a probability above 0 and no more than 1. `sifPfdAvg` is the proposed function's field on `lopaScenario` and belongs to a different call. The field named is always the offending input and never the function's own name or a target.")
 
 q(1,
-  "How many refusals does the digest table, across how many functions, and which function refuses none of them?",
+  "How many refusals does the course table, across how many functions, and which function refuses none of them?",
   "29 refusals across 7 functions, and `decadeOf` refuses nothing at all.",
   ["29 refusals across 7 functions, and `lopaScenario` refuses nothing, since every check it makes returns a warning beside the result.",
    "29 refusals across 7 functions, and `silFromPfdAvg` refuses nothing, because any figure it is handed can be placed somewhere on the band table.",
    "29 refusals across 3 functions, and `outcomeFromRequiredRrf` refuses nothing."],
-  "The digest says 29 refusals are tabled across 7 functions. `decadeOf` refuses nothing: it returns null for zero, for a negative number, for a string and for anything off a decade. `lopaScenario`, `silFromPfdAvg` and `outcomeFromRequiredRrf` each carry refusal rows of their own in that table.")
+  "The course says 29 refusals are tabled across 7 functions. `decadeOf` refuses nothing: it returns null for zero, for a negative number, for a string and for anything off a decade. `lopaScenario`, `silFromPfdAvg` and `outcomeFromRequiredRrf` each carry refusal rows of their own in that table.")
 
 q(2,
   "The ORONI separator overfill row starts from a level control valve failing open. What is its stated initiating event frequency, and what does the engine's method string multiply it by?",

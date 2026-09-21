@@ -74,7 +74,7 @@
    "7077935.48, the margin as typed."
   ],
   "answer": 3,
-  "explanation": "The digest prints the fed configuration's margin, 9614225.81, against 7077935.48 for the configuration as typed. 9614225.81 is also the fed configuration with that unit's capacity typed as 0, and 7173508.35 and 6847760.00 are the hydrotreater left blank and the crude unit at 1900000 barrels."
+  "explanation": "The course prints the fed configuration's margin, 9614225.81, against 7077935.48 for the configuration as typed. 9614225.81 is also the fed configuration with that unit's capacity typed as 0, and 7173508.35 and 6847760.00 are the hydrotreater left blank and the crude unit at 1900000 barrels."
  },
  {
   "prompt": "In the configuration whose crude unit has a feed, that unit's capacity is then typed as 0. What happens to the margin?",

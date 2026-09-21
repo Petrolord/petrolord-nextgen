@@ -34,7 +34,7 @@ q(2, "Every date-dependent status this course quotes is true on one as-of date. 
  ["2026-09-30, a Wednesday",
   "Whatever date the machine clock reads when the page is opened",
   "2026-10-01, a Friday"],
- "The digest's first line fixes the as-of date at 2026-10-01, a Thursday, and every engine call that takes a date was handed that one explicitly. None of them read a clock."),
+ "The course fixes the as-of date at 2026-10-01, a Thursday, and every engine call that takes a date was handed that one explicitly. None of them read a clock."),
 
 q(2, "A caller hands isReviewOverdue a risk and leaves the date argument out. Which date does the function answer for?",
  "The date on the machine clock of whatever is running it.",
@@ -48,7 +48,7 @@ q(0, "In which argument position does isReviewOverdue in riskScoring take its da
  ["Argument 1",
   "Argument 3",
   "It takes no date, and reads the status only"],
- "The digest reads every signature: riskScoring's isReviewOverdue takes its date as argument 2, and so does daysUntil in calendar. Both default that argument to the machine clock."),
+ "The course reads every signature: riskScoring's isReviewOverdue takes its date as argument 2, and so does daysUntil in calendar. Both default that argument to the machine clock."),
 
 q(3, "Two analysts open the same risk register a day apart. One reports a review as overdue and the other reports it on time, and neither wrote down a date. Which reading does this module give?",
  "Both can be right, because a function that defaults to the clock answers a different question each day, and neither report can be checked.",
@@ -57,12 +57,12 @@ q(3, "Two analysts open the same risk register a day apart. One reports a review
   "The earlier reading is the right one, because the engine locks a status on the first day it is asked."],
  "A report that does not state its as-of date cannot be checked by anybody, including its author the next morning. Handing the date in explicitly makes the answer a property of two named inputs."),
 
-q(1, "How many of managementOfChange's functions take a date, as the digest reads them from the engine's signatures?",
+q(1, "How many of managementOfChange's functions take a date, as the course reads them from the engine's signatures?",
  "7 functions",
  ["4 functions",
   "6 functions",
   "1 function"],
- "managementOfChange has 7 date-taking functions, peerReview has 4, lessonsLearned has 6, and riskScoring and calendar have 1 each. The digest reads them from each signature, a parameter that defaults to the machine clock."),
+ "managementOfChange has 7 date-taking functions, peerReview has 4, lessonsLearned has 6, and riskScoring and calendar have 1 each. The course reads them from each signature, a parameter that defaults to the machine clock."),
 
 q(1, "When an engine in this course refuses a verdict, what shape does the answer take?",
  "An object whose ok field is false, carrying a reason a user can act on.",

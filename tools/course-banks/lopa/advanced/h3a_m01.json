@@ -52,7 +52,7 @@
    "The MTTR is charged once per interval, so a longer interval charges it fewer times."
   ],
   "answer": 1,
-  "explanation": "The digest gives the mechanism: these subsystems are common cause dominated at one year, the common cause term is linear in T1, and the independent term grows with the square of T1 and takes a larger share as T1 grows, so the ratio climbs toward four without reaching it here. The sweep is not produced by bisection, the beta factor is a held input, and the MTTR is not recharged per interval."
+  "explanation": "The course gives the mechanism: these subsystems are common cause dominated at one year, the common cause term is linear in T1, and the independent term grows with the square of T1 and takes a larger share as T1 grows, so the ratio climbs toward four without reaching it here. The sweep is not produced by bisection, the beta factor is a held input, and the MTTR is not recharged per interval."
  },
  {
   "prompt": "The IDU valves are SIL 3 at 2190 hours and SIL 2 at 8760 hours. Which band does the engine report for them at 70080 hours?",
@@ -63,7 +63,7 @@
    "SIL 1"
   ],
   "answer": 3,
-  "explanation": "The digest lists the band for every row of the valve column, and 70080 hours is SIL 1. The valves hold SIL 2 at 8760, 17520 and 35040 hours, so stopping at SIL 2 stops one row short, and SIL 3 holds only at 2190 and 4380 hours. A figure of 0.018095929431 sits inside the table, so no band at all is wrong too."
+  "explanation": "The course lists the band for every row of the valve column, and 70080 hours is SIL 1. The valves hold SIL 2 at 8760, 17520 and 35040 hours, so stopping at SIL 2 stops one row short, and SIL 3 holds only at 2190 and 4380 hours. A figure of 0.018095929431 sits inside the table, so no band at all is wrong too."
  },
  {
   "prompt": "This course legislates how a credited protection layer's figure and a subsystem's averaged figure are each written. Which pair is correct?",
@@ -118,7 +118,7 @@
    "No figure at all, because a state carrying no interval carries no number either."
   ],
   "answer": 2,
-  "explanation": "The digest prints a floor of 0.014400000000 for this channel, above the target of 0.01, so no interval however short meets it. 0.000008000000 is what the INTERVAL_INDEPENDENT channel reports. The engine never echoes a target back, and the state does carry the floor, which is what makes it a design finding a note can quote."
+  "explanation": "The engine returns a floor of 0.014400000000 for this channel, above the target of 0.01, so no interval however short meets it. 0.000008000000 is what the INTERVAL_INDEPENDENT channel reports. The engine never echoes a target back, and the state does carry the floor, which is what makes it a design finding a note can quote."
  },
  {
   "prompt": "A longest interval search comes back with the state INTERVAL_INDEPENDENT. What has the engine found, and what does it report?",

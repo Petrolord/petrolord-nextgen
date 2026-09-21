@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "The digest separates a blank box from an argument left out of the call. How does each reach the engine?",
+  "prompt": "The course separates a blank box from an argument left out of the call. How does each reach the engine?",
   "options": [
    "Both arrive as 0, and the interval check on the destruction efficiency refuses each of them.",
    "A blank takes the stated default; an argument left out of the call is refused as required.",
@@ -8,7 +8,7 @@
    "Both take the stated default wherever one exists, and are refused only where none exists."
   ],
   "answer": 2,
-  "explanation": "SECTION 2 opens with this distinction. It prints a blank or a null flare efficiency refused as required, and the same argument left out of the call answering destructionEfficiencyFraction 1, its stated default of complete combustion."
+  "explanation": "The course opens with this distinction. It prints a blank or a null flare efficiency refused as required, and the same argument left out of the call answering destructionEfficiencyFraction 1, its stated default of complete combustion."
  },
  {
   "prompt": "Which module does the Carbon Footprint & Abatement Studio call?",
@@ -19,7 +19,7 @@
    "energyEfficiency for its fuel table"
   ],
   "answer": 0,
-  "explanation": "SECTION 1 pairs each studio with one module: the Carbon Footprint & Abatement Studio with carbonAbatement, the Efficiency Studio with energyEfficiency."
+  "explanation": "The course pairs each studio with one module: the Carbon Footprint & Abatement Studio with carbonAbatement, the Efficiency Studio with energyEfficiency."
  },
  {
   "prompt": "Which label does the Scope 2 total carry in buildInventory's output?",
@@ -30,7 +30,7 @@
    "Scope 2 (purchased energy)"
   ],
   "answer": 3,
-  "explanation": "The SECTION 7 totals table reads Scope 1 (direct), Scope 2 (purchased energy) and Total, Scope 1 and Scope 2."
+  "explanation": "The lab's totals table reads Scope 1 (direct), Scope 2 (purchased energy) and Total, Scope 1 and Scope 2."
  },
  {
   "prompt": "Refusing an intensity with no boundary, the engine names two figures that differ for one plant. Which two?",
@@ -41,7 +41,7 @@
    "tCO2e on the AR6 sets and tCO2e on the AR5 sets of one year"
   ],
   "answer": 1,
-  "explanation": "The carbonIntensity refusal in SECTION 2 names tonnes per tonne charged and tonnes per tonne of saleable product. The Igbogene boundaries are per barrel, and they are inputs to the call."
+  "explanation": "The carbonIntensity refusal the engine returns names tonnes per tonne charged and tonnes per tonne of saleable product. The Igbogene boundaries are per barrel, and they are inputs to the call."
  },
  {
   "prompt": "Which factor unit does the Purchased electricity line carry?",
@@ -52,7 +52,7 @@
    "tCH4/tCH4"
   ],
   "answer": 1,
-  "explanation": "SECTION 7 prints the factor unit tCO2/MWh on Purchased electricity, beside Igbogene's invented factor of 0.41. tCO2/tCO2 and tCH4/tCH4 belong to the atom-balance lines and tCH4/t to the vented line."
+  "explanation": "The lab prints the factor unit tCO2/MWh on Purchased electricity, beside Igbogene's invented factor of 0.41. tCO2/tCO2 and tCH4/tCH4 belong to the atom-balance lines and tCH4/t to the vented line."
  },
  {
   "prompt": "Typing 98 as the flare's efficiency, meant as a percentage, produces what?",
@@ -63,7 +63,7 @@
    "REFUSED: The destruction efficiency must lie in (0, 1]."
   ],
   "answer": 3,
-  "explanation": "SECTION 2 prints this refusal for 98 typed as a percentage, the same sentence it prints for 0. The flare's stated efficiency is typed as the fraction 0.98."
+  "explanation": "The engine returns this refusal for 98 typed as a percentage, the same sentence it returns for 0. The flare's stated efficiency is typed as the fraction 0.98."
  },
  {
   "prompt": "Which pair does the 1000 kmol table print at 0.99?",
@@ -74,7 +74,7 @@
    "43.569 t of CO2 and 0.802 t of methane"
   ],
   "answer": 0,
-  "explanation": "Row 0.99 of the SECTION 3 table: co2Tonnes 43.569, ch4Tonnes 0.160. 44.009 belongs to complete combustion, and 0.321 and 0.802 are the methane at 0.98 and 0.95."
+  "explanation": "Row 0.99 of the lesson's table: co2Tonnes 43.569, ch4Tonnes 0.160. 44.009 belongs to complete combustion, and 0.321 and 0.802 are the methane at 0.98 and 0.95."
  },
  {
   "prompt": "Typed at 1.15 kmol of carbon per kmol, with the fuel unchanged, what do the Igbogene heaters emit?",
@@ -85,7 +85,7 @@
    "25799.177 t"
   ],
   "answer": 2,
-  "explanation": "The carbon per kmol table in SECTION 4 gives 24394.189 at 1.15. 25799.177 is not a heater figure; it is an inventory total with two blocked lines."
+  "explanation": "The carbon per kmol table in the course gives 24394.189 at 1.15. 25799.177 is not a heater figure; it is an inventory total with two blocked lines."
  },
  {
   "prompt": "Which pair is the Igbogene heaters' 0.999 row?",
@@ -96,7 +96,7 @@
    "co2Tonnes 23098.327, ch4Tonnes 8.429"
   ],
   "answer": 3,
-  "explanation": "SECTION 4's lower-efficiency table: 0.999 gives 23098.327 and 8.429; 0.995 gives 23005.841 and 42.143."
+  "explanation": "The course's lower-efficiency table: 0.999 gives 23098.327 and 8.429; 0.995 gives 23005.841 and 42.143."
  },
  {
   "prompt": "Which carbonAbatement constant reads 12.011?",
@@ -107,7 +107,7 @@
    "SCOPE, beside ONE 1 and TWO 2"
   ],
   "answer": 1,
-  "explanation": "The constants block of SECTION 1 lists MW_C as 12.011, beside MW_CO2 44.009 and MW_CH4 16.043."
+  "explanation": "The course's constants block lists MW_C as 12.011, beside MW_CO2 44.009 and MW_CH4 16.043."
  },
  {
   "prompt": "Which FUEL_REFERENCE row is marked inert and still carries one carbon atom?",
@@ -129,7 +129,7 @@
    "2191.807"
   ],
   "answer": 2,
-  "explanation": "The flare row at 0.9 in SECTION 5 reads co2Tonnes 2012.884, beside 81.531 t of methane."
+  "explanation": "The flare row at 0.9 in the lab reads co2Tonnes 2012.884, beside 81.531 t of methane."
  },
  {
   "prompt": "Which row of the flare table totals 2457.133 tCO2e?",
@@ -140,7 +140,7 @@
    "0.99, with 8.153 t of methane"
   ],
   "answer": 3,
-  "explanation": "In SECTION 5 the 0.99 row prints a flare total of 2457.133 and ch4Tonnes 8.153. Rows 0.98, 0.95 and 0.9 total 2677.729, 3339.515 and 4442.493."
+  "explanation": "In the lab the 0.99 row prints a flare total of 2457.133 and ch4Tonnes 8.153. Rows 0.98, 0.95 and 0.9 total 2677.729, 3339.515 and 4442.493."
  },
  {
   "prompt": "Read the 0.95 row of the Igbogene flare table. What is ch4Tonnes?",
@@ -151,7 +151,7 @@
    "1214.805 t of methane"
   ],
   "answer": 1,
-  "explanation": "SECTION 5, row 0.95: ch4Tonnes 40.765. Its methane line, 1214.805, is in tCO2e and is a different quantity."
+  "explanation": "The lab's flare table, row 0.95: ch4Tonnes 40.765. Its methane line, 1214.805, is in tCO2e and is a different quantity."
  },
  {
   "prompt": "The escaped-carbon note ends with an instruction for a user holding a measurement. What is it?",
@@ -162,7 +162,7 @@
    "Leave the flare efficiency blank until refused"
   ],
   "answer": 2,
-  "explanation": "The last sentence of the escaped-carbon note in SECTION 5 is \"Override it if you have measured otherwise.\""
+  "explanation": "The last sentence of the escaped-carbon note the course quotes is \"Override it if you have measured otherwise.\""
  },
  {
   "prompt": "A source is kept outside the boundary on purpose, excluded true. How many lines does atomBalanceLines hand the inventory?",
@@ -173,7 +173,7 @@
    "1 unsourced line"
   ],
   "answer": 0,
-  "explanation": "SECTION 9 prints 0 lines for excluded true. A refused flare, by contrast, arrives as one blocked line labelled Flaring."
+  "explanation": "The course prints 0 lines for excluded true. A refused flare, by contrast, arrives as one blocked line labelled Flaring."
  },
  {
   "prompt": "On the AR5 non-fossil set, the flare's escaped carbon becomes a line of how many tCO2e?",
@@ -184,10 +184,10 @@
    "456.571 tCO2e"
   ],
   "answer": 3,
-  "explanation": "456.571 is the AR5 non-fossil entry in the SECTION 8 methane table; 440.265 and 489.183 are AR6 non-fossil and AR5 fossil."
+  "explanation": "456.571 is the AR5 non-fossil entry in the lab's methane table; 440.265 and 489.183 are AR6 non-fossil and AR5 fossil."
  },
  {
-  "prompt": "How far above or below the course set does the digest place the Igbogene total on AR5 fossil methane?",
+  "prompt": "How far above or below the course set does the course place the Igbogene total on AR5 fossil methane?",
   "options": [
    "-443.257 tCO2e",
    "31.661 tCO2e",
@@ -195,7 +195,7 @@
    "0.000 tCO2e"
   ],
   "answer": 1,
-  "explanation": "SECTION 8 reads 42977.438 for AR5 fossil, and its computed-here column puts that 31.661 above the course set's 42945.777."
+  "explanation": "The lab reads 42977.438 for AR5 fossil, and its computed-here column puts that 31.661 above the course set's 42945.777."
  },
  {
   "prompt": "The held item H1 records where AR5 and AR6 each stand. What does it say?",
@@ -217,7 +217,7 @@
    "27"
   ],
   "answer": 0,
-  "explanation": "The course's set is CH4 29.8 and N2O 273 (SECTION 6). The AR5 sets carry 265."
+  "explanation": "The course's set is CH4 29.8 and N2O 273. The AR5 sets carry 265."
  },
  {
   "prompt": "makeGwpSet is given a label and no values. What does the set read?",
@@ -228,7 +228,7 @@
    "declared false"
   ],
   "answer": 3,
-  "explanation": "The SECTION 6 declared table reads false for a label with no values and false for values with no label."
+  "explanation": "The course's declared table reads false for a label with no values and false for values with no label."
  },
  {
   "prompt": "The flare efficiency is entered with the GWP set already declared. What reasons for not being reportable does buildInventory then give?",
@@ -239,7 +239,7 @@
    "none, and reportable reads true"
   ],
   "answer": 1,
-  "explanation": "That is the \"flare efficiency entered\" row of SECTION 9: 5 lines, Scope 1 30030.777, and the electricity factor still blank."
+  "explanation": "That is the \"flare efficiency entered\" row of the lab's steps: 5 lines, Scope 1 30030.777, and the electricity factor still blank."
  },
  {
   "prompt": "At which step does the Igbogene Scope 2 total first read 12915.000 tCO2e?",
@@ -250,7 +250,7 @@
    "The first pass"
   ],
   "answer": 0,
-  "explanation": "SECTION 9 gives Scope 2 as 0.000 on the first three rows; the electricity factor entered with its source brings in the 12915.000."
+  "explanation": "The lab gives Scope 2 as 0.000 on the first three rows; the electricity factor entered with its source brings in the 12915.000."
  },
  {
   "prompt": "Across the five Igbogene steps, what does the computed flag read?",
@@ -261,7 +261,7 @@
    "true once the set is declared"
   ],
   "answer": 2,
-  "explanation": "Every row of the SECTION 9 step table reads computed true. The reportable flag is the one that turns, on the last row."
+  "explanation": "Every row of the lab's step table reads computed true. The reportable flag is the one that turns, on the last row."
  },
  {
   "prompt": "The vented activity is typed as -142 t and the electricity factor as -0.41. What does that inventory return?",
@@ -272,7 +272,7 @@
    "a total of 25799.177 tCO2e with reportable false"
   ],
   "answer": 3,
-  "explanation": "SECTION 9 blocks both negative lines and prints the inventory at 25799.177, reportable false, with 2 line(s) that could not be computed."
+  "explanation": "The engine blocks both negative lines and prints the inventory at 25799.177, reportable false, with 2 line(s) that could not be computed."
  },
  {
   "prompt": "Which Scope 2 intensity does the inlet to export boundary carry?",
@@ -283,7 +283,7 @@
    "0.01176597"
   ],
   "answer": 1,
-  "explanation": "SECTION 10's inlet to export row: Scope 1 0.00822761, Scope 2 0.00353836, total 0.01176597. 0.00535892 is the crude export only Scope 2."
+  "explanation": "The lab's inlet to export row: Scope 1 0.00822761, Scope 2 0.00353836, total 0.01176597. 0.00535892 is the crude export only Scope 2."
  },
  {
   "prompt": "Which denominator and unit sit under the boundary \"Igbogene crude export only\"?",
@@ -294,7 +294,7 @@
    "3650000 barrels of oil equivalent produced"
   ],
   "answer": 0,
-  "explanation": "The two boundary rows of SECTION 10 carry 3650000 in barrels of oil equivalent produced and 2410000 in barrels of oil exported, both invented."
+  "explanation": "The two boundary rows of the lab carry 3650000 in barrels of oil equivalent produced and 2410000 in barrels of oil exported, both invented."
  },
  {
   "prompt": "The inventory disclaimer warns against keeping a second copy of obligations in the inventory. What would the copy create?",
@@ -305,7 +305,7 @@
    "Two records that could disagree"
   ],
   "answer": 3,
-  "explanation": "The disclaimer in SECTION 7 ends: keeping a second copy of them here would create two records that could disagree."
+  "explanation": "The disclaimer in the inventory ends: keeping a second copy of them here would create two records that could disagree."
  },
  {
   "prompt": "Which share of the complete total belongs to the vented and fugitive methane?",
@@ -316,7 +316,7 @@
    "0.011315"
   ],
   "answer": 2,
-  "explanation": "From the SECTION 7 share table (computed here): 0.098534 for vented methane, 0.300728 for electricity, 0.538387 for the heaters."
+  "explanation": "From the lab's share table (computed here): 0.098534 for vented methane, 0.300728 for electricity, 0.538387 for the heaters."
  },
  {
   "prompt": "Which activity and factor does the Vented and fugitive methane line carry?",
@@ -327,7 +327,7 @@
    "4231.600 t CH4 at a factor of 1 tCH4/t"
   ],
   "answer": 1,
-  "explanation": "SECTION 7 gives the vented line an activity of 142.000 t CH4 and a factor of 1 tCH4/t. 29.8 is the CH4 value of IPCC AR6 GWP100, fossil methane, the line's GWP; 4231.600 is its tCO2e."
+  "explanation": "The lab gives the vented line an activity of 142.000 t CH4 and a factor of 1 tCH4/t. 29.8 is the CH4 value of IPCC AR6 GWP100, fossil methane, the line's GWP; 4231.600 is its tCO2e."
  },
  {
   "prompt": "A blocked electricity line leaves the inlet to export total intensity equal to which figure of the complete inventory?",
@@ -338,7 +338,7 @@
    "Its crude export Scope 1, 0.01246090"
   ],
   "answer": 0,
-  "explanation": "SECTION 10 compares the two and prints them as the same figure: with the Scope 2 line blocked, the total is Scope 1 alone."
+  "explanation": "The course compares the two and prints them as the same figure: with the Scope 2 line blocked, the total is Scope 1 alone."
  },
  {
   "prompt": "Held item H2 names the engine's typical heating values for methane. Which pair does it give?",
@@ -349,7 +349,7 @@
    "802.6 LHV and 890.8 HHV MJ per kmol"
   ],
   "answer": 3,
-  "explanation": "SECTION 25, H2: the engine's typical methane heating values are 802.6 LHV and 890.8 HHV MJ per kmol; the pair is labelled typical and the fuel analysis governs. FUEL_REFERENCE prints 1428.6 and 1560.7 for ethane and 241.8 and 285.8 for hydrogen."
+  "explanation": "The course, H2: the engine's typical methane heating values are 802.6 LHV and 890.8 HHV MJ per kmol; the pair is labelled typical and the fuel analysis governs. FUEL_REFERENCE prints 1428.6 and 1560.7 for ethane and 241.8 and 285.8 for hydrogen."
  },
  {
   "prompt": "How many lines does the Igbogene first pass build, and how many of them are blocked?",
@@ -360,7 +360,7 @@
    "5 lines, none of them blocked"
   ],
   "answer": 2,
-  "explanation": "SECTION 9 counts the first pass at 4 lines, with 3 blocked and 0 unsourced."
+  "explanation": "The lab counts the first pass at 4 lines, with 3 blocked and 0 unsourced."
  },
  {
   "prompt": "21212.338 t of CO2 is the heaters' figure at which carbon per kilomole of fuel?",
@@ -371,7 +371,7 @@
    "1.15"
   ],
   "answer": 1,
-  "explanation": "In SECTION 4, 1.00 is the row at 21212.338; 1.09 is the Igbogene input."
+  "explanation": "In the course's table, 1.00 is the row at 21212.338; 1.09 is the Igbogene input."
  },
  {
   "prompt": "Which co2Tonnes figure belongs to the flare's 0.99 row?",
@@ -382,7 +382,7 @@
    "2457.133"
   ],
   "answer": 0,
-  "explanation": "Flare row 0.99 in SECTION 5 reads co2Tonnes 2214.172; 2457.133 on that row is the total in tCO2e."
+  "explanation": "Flare row 0.99 in the lab reads co2Tonnes 2214.172; 2457.133 on that row is the total in tCO2e."
  },
  {
   "prompt": "How does the engine's note describe counting escaped carbon as methane?",
@@ -393,7 +393,7 @@
    "As the usual and conservative assumption"
   ],
   "answer": 3,
-  "explanation": "The SECTION 5 note calls it \"the usual and conservative assumption\" and says to override it if you have measured otherwise. H3 holds it as the engine's stated assumption."
+  "explanation": "The course's note calls it \"the usual and conservative assumption\" and says to override it if you have measured otherwise. H3 holds it as the engine's stated assumption."
  },
  {
   "prompt": "Typed at 0.95 in place of the stated 0.98, where does the flare's unburned methane line go?",
@@ -404,7 +404,7 @@
    "Nowhere; only the CO2 line moves"
   ],
   "answer": 2,
-  "explanation": "From the 0.98 row to the 0.95 row of SECTION 5 the methane line goes from 485.922 to 1214.805 tCO2e. 16.306 and 40.765 are tonnes of methane."
+  "explanation": "From the 0.98 row to the 0.95 row of the lab's flare table the methane line goes from 485.922 to 1214.805 tCO2e. 16.306 and 40.765 are tonnes of methane."
  },
  {
   "prompt": "Switched from the AR6 fossil set to the AR6 non-fossil set, where does the flare's unburned methane line go?",
@@ -415,7 +415,7 @@
    "Nowhere; it stays 485.922"
   ],
   "answer": 1,
-  "explanation": "SECTION 8 lists the flare's methane line as 485.922 on AR6 fossil and 440.265 on AR6 non-fossil; the AR5 figures are 489.183 and 456.571."
+  "explanation": "The lab lists the flare's methane line as 485.922 on AR6 fossil and 440.265 on AR6 non-fossil; the AR5 figures are 489.183 and 456.571."
  },
  {
   "prompt": "Which Igbogene figure holds still across all four GWP sets?",
@@ -426,7 +426,7 @@
    "Scope 2, 12915.000 tCO2e"
   ],
   "answer": 3,
-  "explanation": "Scope 2 is a CO2 line with a GWP of 1 whatever the set, so SECTION 8 prints 12915.000 four times."
+  "explanation": "Scope 2 is a CO2 line with a GWP of 1 whatever the set, so the lab prints 12915.000 four times."
  },
  {
   "prompt": "Which flare tCO2e sits on the stated 0.98 row?",
@@ -437,7 +437,7 @@
    "3339.515 tCO2e"
   ],
   "answer": 0,
-  "explanation": "The SECTION 5 row at 0.98 prints a flare total of 2677.729, of which 2191.807 is CO2."
+  "explanation": "The lab's flare row at 0.98 prints a flare total of 2677.729, of which 2191.807 is CO2."
  },
  {
   "prompt": "Which sentence explains a scope 3 line's block?",
@@ -448,7 +448,7 @@
    "a negative activity: an emission line cannot remove tonnes"
   ],
   "answer": 2,
-  "explanation": "SECTION 9 prints this reason for the scope 3 Business travel line. The factor refusal belongs to Diesel generators, the missing GWP blocks the vented methane in the first pass, and the negative activity blocks the vented methane typed as -142 t."
+  "explanation": "The lab prints this reason for the scope 3 Business travel line. The factor refusal belongs to Diesel generators, the missing GWP blocks the vented methane in the first pass, and the negative activity blocks the vented methane typed as -142 t."
  },
  {
   "prompt": "Which boundary's intensity is stated in tCO2e per barrel of oil equivalent produced?",
@@ -459,6 +459,6 @@
    "Igbogene Scope 1 lines only"
   ],
   "answer": 1,
-  "explanation": "SECTION 10 gives the inlet to export boundary in barrels of oil equivalent produced and crude export only in barrels of oil exported."
+  "explanation": "The lab gives the inlet to export boundary in barrels of oil equivalent produced and crude export only in barrels of oil exported."
  }
 ]

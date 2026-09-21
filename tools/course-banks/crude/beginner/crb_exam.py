@@ -15,7 +15,7 @@ q(3, "On every blend in the gravity table, blend API differs from the volume-wei
   "The engine averages API on mass fractions, which drift from the typed volume shares."],
  "API = A / SG - B is a hyperbola in specific gravity, and blendCrudes blends specific gravity on volume, taking volume as conserved; API itself is never averaged. The volume-weighted mean misses on every row: -0.6192, -0.1677, -2.0889 and -0.3860.")
 
-q(3, "For three crudes at 50, 30 and 20, the digest prints the figure 29.6100 in two places. What does it stand for in each?",
+q(3, "For three crudes at 50, 30 and 20, the course prints the figure 29.6100 in two places. What does it stand for in each?",
  "The volume-weighted mean of the API numbers for the blend typed by volume, and the engine's API for the blend typed by mass.",
  ["The engine's API for the blend typed by volume, and the mass-weighted mean of the API numbers for the same blend.",
   "The engine's API for the blend typed by mass, and a rounding of the 29.2240 typed by volume.",
@@ -27,7 +27,7 @@ q(2, "What does the engine assume about volume when two crudes of different grav
  ["The volume shrinks in proportion to the two crudes' API contrast on mixing.",
   "Mass is conserved, and the volume is found from the blend's API.",
   "Volume is conserved only within 15.0000 API of contrast."],
- "blendCrudes blends specific gravity on volume, and the digest states the assumption: mass is conserved and volume is taken as conserved.")
+ "blendCrudes blends specific gravity on volume, and the course states the assumption: mass is conserved and volume is taken as conserved.")
 
 q(1, "A recipe types a share of -10 for one of two crudes. What does blendCrudes return?",
  "REFUSED: A blend share must be a number of zero or more.",
@@ -239,7 +239,7 @@ q(0, "Which of these is the export blend's nickel as the engine reports it?",
   "14.2202 ppm, on mass, for three crudes."],
  "Nickel is per unit mass, so the engine gives 6.5980 on mass. 6.4550 is the volume shortcut, 0.1430 is mass minus volume, and 14.2202 is the three-crude blend's nickel."),
 
-q(2, "Why does the digest print a column called the volume-weighted mean of the API numbers when the engine never reports it?",
+q(2, "Why does the course print a column called the volume-weighted mean of the API numbers when the engine never reports it?",
  "So the shortcut can be read beside the answer, computed with the engine's own blendOnVolume.",
  ["Because the engine reports it as a check figure whenever the blend API is formed.",
   "Because contracts quote it, and the engine converts it to specific gravity later.",

@@ -52,7 +52,7 @@
    "85 dBA, 3 dB and 80 dBA."
   ],
   "answer": 3,
-  "explanation": "Digest sections 3 and 7 give the NIOSH noise REL a criterion level of 85.000000000000 dBA, a decibel exchange rate of 3.000000000000 dB and a threshold of 80.000000000000 dBA. The first distractor is the OSHA action level. Setting the threshold at the criterion level is the PEL's pattern, and NIOSH does not follow it: its threshold is five decibels lower."
+  "explanation": "The course's tables give the NIOSH noise REL a criterion level of 85.000000000000 dBA, a decibel exchange rate of 3.000000000000 dB and a threshold of 80.000000000000 dBA. The first distractor is the OSHA action level. Setting the threshold at the criterion level is the PEL's pattern, and NIOSH does not follow it: its threshold is five decibels lower."
  },
  {
   "prompt": "The first OBEN period, 2.600000 h at 84.300000 dBA, carries 27.646683 percent on the NIOSH noise REL and 14.747186 percent on the OSHA action level. Why the larger NIOSH share?",
@@ -85,7 +85,7 @@
    "None of the three alone; each is the noise dose against its own criterion."
   ],
   "answer": 3,
-  "explanation": "Digest section 7 says it directly: none of the three is the real noise dose, and a report that quotes a noise dose without naming the criterion has not said anything. The action level also counts every period from 80 dBA and is also written in regulation, so neither of those reasons singles out one figure. Sitting between the others is no reason at all."
+  "explanation": "The lesson says it directly: none of the three is the real noise dose, and a report that quotes a noise dose without naming the criterion has not said anything. The action level also counts every period from 80 dBA and is also written in regulation, so neither of those reasons singles out one figure. Sitting between the others is no reason at all."
  },
  {
   "prompt": "The OBEN action level noise dose is 72.054478 percent and the PEL noise dose 27.748183 percent. Which difference between the two criteria makes that whole gap?",
@@ -162,6 +162,6 @@
    "No, because EU action values are measured in noise dose percent and the action level is in dBA."
   ],
   "answer": 0,
-  "explanation": "Digest section 24 puts the two on the same footing as a misreading: \"Action level\" is the OSHA hearing conservation trigger, and the EU uses action values, which are LEX,8h levels and a different metric. Restating the noise dose as a TWA does not turn it into a LEX,8h, and the EU values are levels in dBA."
+  "explanation": "The course's naming rules put the two on the same footing as a misreading: \"Action level\" is the OSHA hearing conservation trigger, and the EU uses action values, which are LEX,8h levels and a different metric. Restating the noise dose as a TWA does not turn it into a LEX,8h, and the EU values are levels in dBA."
  }
 ]

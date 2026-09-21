@@ -19,7 +19,7 @@
    "From 250 mm up to 12000 mm, since a dip of 0 mm counts as no reading."
   ],
   "answer": 0,
-  "explanation": "AK-02's table starts at the empty tank and stops at 12000 mm. Between the two it interpolates; the digest's dip at 12010 mm gets the refusal for a dip above the last strapping entry."
+  "explanation": "AK-02's table starts at the empty tank and stops at 12000 mm. Between the two it interpolates; the course's dip at 12010 mm gets the refusal for a dip above the last strapping entry."
  },
  {
   "prompt": "On the partial table with the dip held at 640 mm, the water cut is raised from 0 mm to 150 mm. What happens to the answer?",
@@ -66,7 +66,7 @@
   "explanation": "With no closing dip the expected closing, 4508.100 m3, still prints and the unaccounted figure reads none. The other three calls refuse outright."
  },
  {
-  "prompt": "The digest straps two AKODO tanks a second time at 10 mm. On which of them does the step change the reading at the dip?",
+  "prompt": "The course straps two AKODO tanks a second time at 10 mm. On which of them does the step change the reading at the dip?",
   "options": [
    "AK-03, the bullet",
    "AK-01, the vertical tank",
@@ -297,7 +297,7 @@
   "explanation": "With no days the engine prints cumulative 0.000 m3, run 0 and mean percent none. Two of the three are figures at zero, and only the percent, whose denominator is the cumulative throughput, reads none."
  },
  {
-  "prompt": "In the trimmed record, what is the shortest run of loss the digest shows printing the prompt?",
+  "prompt": "In the trimmed record, what is the shortest run of loss the course shows printing the prompt?",
   "options": [
    "3 days of loss",
    "6 days of loss",

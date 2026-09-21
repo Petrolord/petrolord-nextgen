@@ -16,7 +16,7 @@ q(3,
   ["Jet fire, pool fire, flash fire and explosion, since every release that reaches the tree is taken to ignite in the end.",
    "Immediate ignition, delayed ignition and no ignition, with the flash fire and the explosion left for the analyst to split.",
    "Fire, toxic cloud, explosion and safe dispersal, the last taken as a stated input from the consequence course."],
-  "The digest names the four: immediate ignition gives a jet or pool fire; without it, delayed ignition gives a vapour cloud that burns as a flash fire or explodes; without either, nothing ignites. Jet and pool fire are one outcome here and 'no ignition' is always a leaf. The engine does the split itself with the preset or a stated one, and a toxic cloud is no outcome of this tree.")
+  "The course names the four: immediate ignition gives a jet or pool fire; without it, delayed ignition gives a vapour cloud that burns as a flash fire or explodes; without either, nothing ignites. Jet and pool fire are one outcome here and 'no ignition' is always a leaf. The engine does the split itself with the preset or a stated one, and a toxic cloud is no outcome of this tree.")
 
 q(1,
   "EREMOR's gas release runs at 5e-4 per year with immediate ignition 0.1, delayed ignition 0.3 given no immediate ignition, and the preset split. What explosion frequency does the engine return?",
@@ -48,7 +48,7 @@ q(1,
   ["It treats it as the probability of delayed ignition for the whole release, and adds it to the immediate ignition probability.",
    "It treats it as unconditional and multiplies it straight into the initiating frequency, which is what the 0.000060000000 figure is.",
    "It treats it as the flash fire share of the vapour cloud, and gives the explosion one minus that share of it."],
-  "The digest says the delayed ignition probability is CONDITIONAL on no immediate ignition, and the engine multiplies it by one minus the immediate ignition probability. Taking it as unconditional is exactly the wrong build that gives 0.000060000000 per year for the explosion. Adding it to the immediate probability double counts the release, and the flash fire share is a separate input, the split.")
+  "The course says the delayed ignition probability is CONDITIONAL on no immediate ignition, and the engine multiplies it by one minus the immediate ignition probability. Taking it as unconditional is exactly the wrong build that gives 0.000060000000 per year for the explosion. Adding it to the immediate probability double counts the release, and the flash fire share is a separate input, the split.")
 
 q(3,
   "What split does the engine use between flash fire and explosion when the caller gives none, and what does its basis say?",
@@ -64,7 +64,7 @@ q(0,
   ["The four frequencies, which move in the last decimal because a stated split is rounded differently from the preset one.",
    "Nothing at all, since the engine ignores a stated split whenever it matches the preset split to the last digit.",
    "The explosion frequency, which is recomputed as unconditional once a split is stated by hand."],
-  "The digest says stating the split as { flashFire: 0.6, explosion: 0.4 } gives the same four frequencies to the last bit, and that the basis then says \"as given\". The engine records what it was given, so the basis does change. Stating a split has no bearing on how delayed ignition is treated; it stays conditional on no immediate ignition.")
+  "The course says stating the split as { flashFire: 0.6, explosion: 0.4 } gives the same four frequencies to the last bit, and that the basis then says \"as given\". The engine records what it was given, so the basis does change. Stating a split has no bearing on how delayed ignition is treated; it stays conditional on no immediate ignition.")
 
 q(2,
   "The EREMOR explosion frequency is built with the split swapped, 0.4 flash fire and 0.6 explosion. By what factor does the result sit above the engine's own?",
@@ -72,7 +72,7 @@ q(2,
   ["1.111111, giving 0.000060000000 per year in place of 0.000054000000 for the same explosion outcome of the tree.",
    "2.500000, giving 0.000135000000 per year in place of 0.000054000000 for the same explosion outcome of the tree.",
    "1.000000, since the engine refuses a swapped split and returns its own figure instead."],
-  "The digest's table puts the swapped split at 0.000081000000 per year, 1.500000 times the right one. 1.111111 is the factor for delayed ignition taken as unconditional, and 2.500000 the factor for every delayed ignition counted as an explosion. A swapped split closes, so the engine runs it without complaint and cannot know the numbers were typed the wrong way round.")
+  "The course's table puts the swapped split at 0.000081000000 per year, 1.500000 times the right one. 1.111111 is the factor for delayed ignition taken as unconditional, and 2.500000 the factor for every delayed ignition counted as an explosion. A swapped split closes, so the engine runs it without complaint and cannot know the numbers were typed the wrong way round.")
 
 q(0,
   "Why does the engine run a wrongly built tree, such as one with delayed ignition taken as unconditional, without complaint?",
@@ -80,7 +80,7 @@ q(0,
   ["It checks every tree against the Purple Book structure and runs the wrong one only because the sum of its branches happens to match.",
    "It does complain: a basis note is added whenever an explosion frequency sits above the flash fire frequency of the same tree.",
    "It refuses any delayed ignition that is not typed as conditional."],
-  "The digest says each wrong build is a real tree and the engine runs it without complaint: a tree that closes is valid arithmetic whatever it means, and the engine cannot know that a branch belongs under another. There is no structural check against a source and no basis note about the order of two frequencies, and the engine cannot tell how an analyst meant a probability.")
+  "The course says each wrong build is a real tree and the engine runs it without complaint: a tree that closes is valid arithmetic whatever it means, and the engine cannot know that a branch belongs under another. There is no structural check against a source and no basis note about the order of two frequencies, and the engine cannot tell how an analyst meant a probability.")
 
 q(3,
   "A continuous release of exactly 10 kg/s of a gas of average to high reactivity is looked up in Purple Book Table 4.5. What does the engine return?",
@@ -99,12 +99,12 @@ q(1,
   "The engine's lookups print 0.065 for k1-liquid at every continuous rate and every instantaneous mass, each in its own band. 0.02, 0.04 and 0.09 are the gas-low-reactivity column, and 0.2, 0.5 and 0.7 the gas-average-high-reactivity column. k1-liquid is one of the three substance classes the engine accepts.")
 
 q(2,
-  "What does the digest say the direct ignition table and the 0.6 and 0.4 split rest on, and what follows for a capstone?",
+  "What does the course say the direct ignition table and the 0.6 and 0.4 split rest on, and what follows for a capstone?",
   "A single transcription of one source, read once and never checked against a second reading, so every capstone STATES the ignition probabilities and the split.",
   ["A second independent reading made by the oracle, so a capstone may ask for any cell of the table to be looked up and graded.",
    "The golden records, which print every cell with the answer beside it, so each capstone grades the lookup against the golden.",
    "A worked example printed in the source."],
-  "The digest says the table cells and the split are transcriptions of one source, read once, and nothing in the engine's validation checks them against a second reading. So this course teaches them and every capstone states the ignition probabilities and the split it uses rather than asking for a lookup. No second reading exists and the digest cites no worked example of the table.")
+  "The course says the table cells and the split are transcriptions of one source, read once, and nothing in the engine's validation checks them against a second reading. So this course teaches them and every capstone states the ignition probabilities and the split it uses rather than asking for a lookup. No second reading exists and the course cites no worked example of the table.")
 
 q(3,
   "A caller states a vapour cloud split of 0.6 flash fire and 0.3 explosion. Which field does the engine name in its refusal?",
@@ -123,7 +123,7 @@ q(0,
   "Those are the engine's own words from the refusal table, naming `massRateKgS`. The engine does not switch a continuous call to an instantaneous one, and it assumes no band. The release type message is real engine text for a type the table does not have, and here the type was valid.")
 
 q(2,
-  "Among the release sizes the digest's lookup table prints, which does the engine place in the large band for gas-low-reactivity, and with what probability?",
+  "Among the release sizes the course's lookup table prints, which does the engine place in the large band for gas-low-reactivity, and with what probability?",
   "A continuous 200 kg/s or an instantaneous 20000 kg, at 0.09.",
   ["A continuous 100 kg/s or an instantaneous 10000 kg, at 0.09, since the top edge of the middle band opens into the large band.",
    "A continuous 50 kg/s or an instantaneous 5000 kg, at 0.04, the value the column gives to every release of middle size or more.",

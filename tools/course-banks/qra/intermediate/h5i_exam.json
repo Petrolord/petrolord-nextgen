@@ -19,7 +19,7 @@
    "0.000685000000"
   ],
   "answer": 0,
-  "explanation": "Summing 5e-4, 4e-5, 3e-3 and 6e-3 with N ignored gives 0.009540000000, which the digest prints as a wrong build: it counts a spill that kills nobody as heavily as a fall. 0.006421666667 is a different wrong build, f over N. 0.002420000000 is the engine's f times N. 0.000685000000 is the golden fractional-and-zero-N case."
+  "explanation": "Summing 5e-4, 4e-5, 3e-3 and 6e-3 with N ignored gives 0.009540000000, which the course shows as a wrong build: it counts a spill that kills nobody as heavily as a fall. 0.006421666667 is a different wrong build, f over N. 0.002420000000 is the engine's f times N. 0.000685000000 is the golden fractional-and-zero-N case."
  },
  {
   "prompt": "Which of these scenarios would potentialLossOfLife accept as typed?",
@@ -52,7 +52,7 @@
    "Exposed hours of 8760 for each person when none are given"
   ],
   "answer": 2,
-  "explanation": "The digest reads from the engine's header that it invents no number: every scenario frequency, probability of death, occupancy and the rest is an input. An assumed N, an assumed frequency or an assumed year of exposure would each be a number the engine made up, and it makes none. Exposed hours belong to the FAR call anyway."
+  "explanation": "The course reads from the engine's header that it invents no number: every scenario frequency, probability of death, occupancy and the rest is an input. An assumed N, an assumed frequency or an assumed year of exposure would each be a number the engine made up, and it makes none. Exposed hours belong to the FAR call anyway."
  },
  {
   "prompt": "What is the expected fatalities figure of 0.000336000000 per year for the JISIKE off-site scenarios, in PLL terms?",
@@ -63,7 +63,7 @@
    "A rate: deaths per 100,000,000 hours spent beyond the fence by the whole town"
   ],
   "answer": 0,
-  "explanation": "The expected fatalities per year the F-N call returns is the sum of f times N, and the digest says that for the off-site set it is also the off-site PLL. The frequency of 3 or more deaths is F(3), 0.000049700000. PLL is never a probability. A rate per 100,000,000 hours is a FAR, which would need exposed hours this set does not state."
+  "explanation": "The expected fatalities per year the F-N call returns is the sum of f times N, and the course says that for the off-site set it is also the off-site PLL. The frequency of 3 or more deaths is F(3), 0.000049700000. PLL is never a probability. A rate per 100,000,000 hours is a FAR, which would need exposed hours this set does not state."
  },
  {
   "prompt": "The JISIKE crew FAR is 2.016667 per 100,000,000 exposed hours. What does that figure say in words?",
@@ -140,7 +140,7 @@
    "0.000008000000 per year, the flash fire alone"
   ],
   "answer": 2,
-  "explanation": "The digest reads the step: F(12.5) = F(40) = 0.000001700000 per year, because the next scenarios with 12.5 or more deaths are the explosion at 40 and the toxic cloud at 300. F(12) includes the flash fire, which kills 12, fewer than 12.5. A curve of N or more is not zero between corners. The flash fire alone is the exactly N reading at 12."
+  "explanation": "The course reads the step: F(12.5) = F(40) = 0.000001700000 per year, because the next scenarios with 12.5 or more deaths are the explosion at 40 and the toxic cloud at 300. F(12) includes the flash fire, which kills 12, fewer than 12.5. A curve of N or more is not zero between corners. The flash fire alone is the exactly N reading at 12."
  },
  {
   "prompt": "Under the introduction's strict wording, what frequency would 300 deaths carry for the off-site set?",
@@ -151,7 +151,7 @@
    "0.000000011111 per year, the Dutch line at that corner"
   ],
   "answer": 0,
-  "explanation": "The digest's comparison prints 0.000000000000 for \"more than N\" at 300, because the only scenario there has exactly 300 deaths and the strict reading drops it. The engine's N or more reading keeps it at 0.000000200000. 0.000001700000 is F(40). 0.000000011111 is the criterion at 300, the other side of a comparison."
+  "explanation": "The course's comparison prints 0.000000000000 for \"more than N\" at 300, because the only scenario there has exactly 300 deaths and the strict reading drops it. The engine's N or more reading keeps it at 0.000000200000. 0.000001700000 is F(40). 0.000000011111 is the criterion at 300, the other side of a comparison."
  },
  {
   "prompt": "At the JISIKE corner N = 3, what do the scenarios with exactly 3 deaths contribute on their own?",
@@ -162,7 +162,7 @@
    "0.000010000000"
   ],
   "answer": 1,
-  "explanation": "The two jet fires at the fence, 3e-5 and 1e-5 per year, have exactly 3 deaths each and sum to 0.000040000000, the digest's exactly N column at that corner. 0.000049700000 is F(3), which adds every scenario with more deaths too. 0.000009700000 is what \"more than 3\" leaves. 0.000010000000 is the second jet fire alone, which leaves out its twin."
+  "explanation": "The two jet fires at the fence, 3e-5 and 1e-5 per year, have exactly 3 deaths each and sum to 0.000040000000, the course's exactly N column at that corner. 0.000049700000 is F(3), which adds every scenario with more deaths too. 0.000009700000 is what \"more than 3\" leaves. 0.000010000000 is the second jet fire alone, which leaves out its twin."
  },
  {
   "prompt": "What frequency sits at the last corner of the JISIKE off-site curve?",
@@ -195,7 +195,7 @@
    "Zero, since no scenario sits between"
   ],
   "answer": 0,
-  "explanation": "The model string calls the curve a left-continuous step function, and the digest reads F(5) as F(12) and F(12.5) as F(40): between corners F takes the value at the next corner up, because every scenario with at least that many deaths lies at or beyond it. The left corner's value includes scenarios with too few deaths. Nothing averages, and an N or more curve is never zero merely because no scenario sits at that N."
+  "explanation": "The model string calls the curve a left-continuous step function, and the course reads F(5) as F(12) and F(12.5) as F(40): between corners F takes the value at the next corner up, because every scenario with at least that many deaths lies at or beyond it. The left corner's value includes scenarios with too few deaths. Nothing averages, and an N or more curve is never zero merely because no scenario sits at that N."
  },
  {
   "prompt": "Why does the area identity count as a check on the F-N curve?",
@@ -206,7 +206,7 @@
    "Two separate routes, the area under the steps and the sum of f times N, must land on the same 0.000336000000"
   ],
   "answer": 3,
-  "explanation": "The digest sums the area step by step as F at each corner times the width of its step, derived, and gets 0.000336000000, equal to the expected fatalities computed directly; two routes agreeing is a self-consistency check. No published worked F-N example exists. The line at N = 10 is a criterion value unrelated to the area. The frequency of no deaths is 0.000050000000, a different number."
+  "explanation": "The course sums the area step by step as F at each corner times the width of its step, derived, and gets 0.000336000000, equal to the expected fatalities computed directly; two routes agreeing is a self-consistency check. No published worked F-N example exists. The line at N = 10 is a criterion value unrelated to the area. The frequency of no deaths is 0.000050000000, a different number."
  },
  {
   "prompt": "Evaluate 1e-3 over N squared at 40 deaths. What frequency results?",
@@ -250,7 +250,7 @@
    "Compare the group risk with them, calling them an orientation value"
   ],
   "answer": 3,
-  "explanation": "The digest says Bevi article 13 asks for the group risk to be COMPARED with the same three points, calling them an orientation value, while the Purple Book caption calls the line a recommended limit for establishments. The digest says nothing of permits or a workforce split. The three points lie on a line of slope minus two, alpha 2, and the slope minus one line belongs to the R2P2 discussion."
+  "explanation": "The course says Bevi article 13 asks for the group risk to be COMPARED with the same three points, calling them an orientation value, while the Purple Book caption calls the line a recommended limit for establishments. The course says nothing of permits or a workforce split. The three points lie on a line of slope minus two, alpha 2, and the slope minus one line belongs to the R2P2 discussion."
  },
  {
   "prompt": "How does the Purple Book Figure 6.8 caption describe the Dutch line?",
@@ -261,7 +261,7 @@
    "As a line the analyst must derive per plant"
   ],
   "answer": 1,
-  "explanation": "The digest says the Figure 6.8 caption prints the line as a recommended limit for establishments. The engine did not read Bevi's successor, and the caption predates the repeal by decades. Fifty or more is the R2P2 point. The constants are fixed by the source, so no one derives them per plant."
+  "explanation": "The course says the Figure 6.8 caption prints the line as a recommended limit for establishments. The engine did not read Bevi's successor, and the caption predates the repeal by decades. Fifty or more is the R2P2 point. The constants are fixed by the source, so no one derives them per plant."
  },
  {
   "prompt": "Two criterion lines share C. What does a larger alpha do to the line?",
@@ -272,7 +272,7 @@
    "It leaves the line where it is and only moves its start"
   ],
   "answer": 0,
-  "explanation": "The line is F = C / N^alpha, so a larger alpha makes the allowed frequency fall faster as N grows; the digest says 1 is called risk neutral and 2 risk averse. No positive alpha makes the line rise. C scales the line, and alpha shapes it. The start of the line is a separate smallest N, set by its own input."
+  "explanation": "The line is F = C / N^alpha, so a larger alpha makes the allowed frequency fall faster as N grows; the course says 1 is called risk neutral and 2 risk averse. No positive alpha makes the line rise. C scales the line, and alpha shapes it. The start of the line is a separate smallest N, set by its own input."
  },
  {
   "prompt": "With the Dutch constants capped at N = 100, what ratio does the corner at N = 12 still report?",
@@ -283,7 +283,7 @@
    "1.396800, unchanged, since the cap moves only the top of the range"
   ],
   "answer": 3,
-  "explanation": "The digest prints the capped comparison as N 12.000000 ratio 1.396800, N 40.000000 ratio 2.720000 and N 100.000000 ratio 2.000000, so the corners inside the range are checked as before. Only the out-of-range corner at 300 is replaced by a check at 100. No corner is skipped, and each corner keeps its own ratio."
+  "explanation": "The course shows the capped comparison as N 12.000000 ratio 1.396800, N 40.000000 ratio 2.720000 and N 100.000000 ratio 2.000000, so the corners inside the range are checked as before. Only the out-of-range corner at 300 is replaced by a check at 100. No corner is skipped, and each corner keeps its own ratio."
  },
  {
   "prompt": "Why is the worst ratio no longer at the top corner when the Dutch line is capped at N = 100?",
@@ -316,7 +316,7 @@
    "An accident killing 50 or more is intolerable if more frequent than 1e-3 over the square of its N"
   ],
   "answer": 0,
-  "explanation": "The digest says an accident killing 50 or more people in one event should be regarded as intolerable if its frequency is more than one in five thousand a year, which the preset holds as N = 50 at 0.000200000000. R2P2 prints no acceptability point at one in ten thousand. A point with no frequency would not be a point. 1e-3 over N squared is the Dutch line."
+  "explanation": "The course says an accident killing 50 or more people in one event should be regarded as intolerable if its frequency is more than one in five thousand a year, which the preset holds as N = 50 at 0.000200000000. R2P2 prints no acceptability point at one in ten thousand. A point with no frequency would not be a point. 1e-3 over N squared is the Dutch line."
  },
  {
   "prompt": "Against the analyst's line of C = 0.01 and alpha = 1, why is the JISIKE corner at N = 3 checked at all?",
@@ -327,7 +327,7 @@
    "The line runs from N = 1 by default, so a corner at 3 lies inside its range"
   ],
   "answer": 3,
-  "explanation": "The digest says an analyst's line runs from N = 1 by default, so the corner at 3 is inside it, and it is where the worst ratio of 0.014910 sits. Against the Dutch line, which runs from 10, the same corner is left out, so ranges do matter. No convention starts a line at 3. A shared corner is checked or skipped by its N like any other."
+  "explanation": "The course says an analyst's line runs from N = 1 by default, so the corner at 3 is inside it, and it is where the worst ratio of 0.014910 sits. Against the Dutch line, which runs from 10, the same corner is left out, so ranges do matter. No convention starts a line at 3. A shared corner is checked or skipped by its N like any other."
  },
  {
   "prompt": "For the golden case r2p2-touch, what ratio does the engine compute at N = 50 before the snap places the corner?",
@@ -349,7 +349,7 @@
    "It depends on the analyst, since the engine leaves a touching curve to be judged"
   ],
   "answer": 2,
-  "explanation": "The digest defines TOUCHES as no corner above and at least one on the line within the snap, and EXCEEDS as at least one corner strictly above, so a touching curve has not exceeded. The position of the touching corner makes no difference. The engine returns a definite state word for every comparison and leaves nothing undecided."
+  "explanation": "The course defines TOUCHES as no corner above and at least one on the line within the snap, and EXCEEDS as at least one corner strictly above, so a touching curve has not exceeded. The position of the touching corner makes no difference. The engine returns a definite state word for every comparison and leaves nothing undecided."
  },
  {
   "prompt": "What problem is the 1e-9 relative snap there to solve?",
@@ -393,7 +393,7 @@
    "A result computed with a default in place of the refused input value"
   ],
   "answer": 2,
-  "explanation": "The digest says a refusal carries no number of its own, and every function returns either a result with a basis or an object with error and field. The engine suggests no nearest value and computes nothing with a default, since it invents no number. Any number inside a quoted message, such as the 0 in \"must be above 0\", is part of the engine's words."
+  "explanation": "The course says a refusal carries no number of its own, and every function returns either a result with a basis or an object with error and field. The engine suggests no nearest value and computes nothing with a default, since it invents no number. Any number inside a quoted message, such as the 0 in \"must be above 0\", is part of the engine's words."
  },
  {
   "prompt": "Under the Purple Book explosion rules, what happens in a cell at 40000 Pa gauge?",
@@ -415,7 +415,7 @@
    "Everyone dies, since any value on a printed edge takes the upper rule"
   ],
   "answer": 0,
-  "explanation": "The digest's rows show zero at 5000 and at 10000 Pa gauge, and says a value at a threshold falls in the lower rule. Only above 10000 Pa do some of those indoors die. No rule kills those outdoors below 30000 Pa. An edge value always takes the rule below it, which is the same convention as exactly 30000 Pa."
+  "explanation": "The course's rows show zero at 5000 and at 10000 Pa gauge, and says a value at a threshold falls in the lower rule. Only above 10000 Pa do some of those indoors die. No rule kills those outdoors below 30000 Pa. An edge value always takes the rule below it, which is the same convention as exactly 30000 Pa."
  },
  {
   "prompt": "From which Purple Book table do the day and night fractions of people indoors come?",
@@ -426,7 +426,7 @@
    "Figure 6.8"
   ],
   "answer": 2,
-  "explanation": "The digest cites Table 5.3 for the fractions of the population indoors by period, and the refusal for an unknown period names it too. Table 4.5 is the direct ignition probability table and Table 4.7 classifies reactivity, both Associate lookups. Figure 6.8 is the Dutch line."
+  "explanation": "The course cites Table 5.3 for the fractions of the population indoors by period, and the refusal for an unknown period names it too. Table 4.5 is the direct ignition probability table and Table 4.7 classifies reactivity, both Associate lookups. Figure 6.8 is the Dutch line."
  },
  {
   "prompt": "For the same stated toxic PE, why does the night case give a smaller Fd than the day case?",
@@ -437,7 +437,7 @@
    "The toxic rule applies only to people outdoors, who are fewer by night"
   ],
   "answer": 1,
-  "explanation": "The digest's toxic rows share PE 0.4 and FE,in 0.040000, and only the fraction indoors changes, 0.93 by day and 0.99 by night, so more weight falls on the smaller indoor fraction. PE is a stated input from the consequence course, and the engine never alters it. A period of night is accepted as it stands. The rule counts deaths indoors as well as outdoors. These figures teach the rule and are graded nowhere."
+  "explanation": "The course's toxic rows share PE 0.4 and FE,in 0.040000, and only the fraction indoors changes, 0.93 by day and 0.99 by night, so more weight falls on the smaller indoor fraction. PE is a stated input from the consequence course, and the engine never alters it. A period of night is accepted as it stands. The rule counts deaths indoors as well as outdoors. These figures teach the rule and are graded nowhere."
  },
  {
   "prompt": "What must pbFatalityFractions be given for a toxic cloud?",

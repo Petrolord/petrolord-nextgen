@@ -74,7 +74,7 @@
    "Gross revenue 346.1195 less the tax of 38.5879."
   ],
   "answer": 0,
-  "explanation": "The digest prints the sum: 291.7664 + 15.7651 = 307.5315, and the cash flow's opex reads 307.5315. The crude cost sits inside opexFixed, so a fixed and variable cost alone would leave the crude out."
+  "explanation": "The course prints the sum: 291.7664 + 15.7651 = 307.5315, and the cash flow's opex reads 307.5315. The crude cost sits inside opexFixed, so a fixed and variable cost alone would leave the crude out."
  },
  {
   "prompt": "In the screening engine's units, what capex does year 0 carry?",

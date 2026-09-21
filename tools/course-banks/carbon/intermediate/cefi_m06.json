@@ -19,10 +19,10 @@
    "The pinch targets with the minimum approach blank"
   ],
   "answer": 1,
-  "explanation": "The treatment-blank condensate case still prints a total and flags it as a floor (SECTION 16). The other three calls get no answer at all: SECTION 16 refuses a blank boiler efficiency, SECTION 15 a blank exponent, and SECTION 17 a blank minimum approach."
+  "explanation": "The treatment-blank condensate case still prints a total and flags it as a floor. The other three calls get no answer at all: condensateReturnValue refuses a blank boiler efficiency, steamTrapLoss a blank exponent, and the pinch targets a blank minimum approach."
  },
  {
-  "prompt": "A blank boiler efficiency reaches both the invented Isiokpo trap and the Isiokpo condensate case. What do SECTIONS 15 and 16 print?",
+  "prompt": "A blank boiler efficiency reaches both the invented Isiokpo trap and the Isiokpo condensate case. What do the two lessons print?",
   "options": [
    "The trap keeps its steam figure and leaves fuel and carbon none; the condensate call is refused.",
    "Both are refused, each with the message that a boiler efficiency in (0, 1] is required.",
@@ -30,10 +30,10 @@
    "Both take a boiler efficiency of 1 and name it in a note beside the fuel and the carbon."
   ],
   "answer": 0,
-  "explanation": "The trap row with no boiler efficiency keeps its 355.757 tonnes a year and prints fuel and carbon as none (SECTION 15). For condensateReturnValue the same blank is one of SECTION 16's four refusals, so no value prints."
+  "explanation": "The trap row with no boiler efficiency keeps its 355.757 tonnes a year and prints fuel and carbon as none. For condensateReturnValue the same blank is one of its four refusals, so no value prints."
  },
  {
-  "prompt": "Across the invented Isiokpo steam calls, which of these gaps does SECTION 15 or 16 answer with a stated default?",
+  "prompt": "Across the invented Isiokpo steam calls, which of these gaps does the course answer with a stated default?",
   "options": [
    "The trap's hours box left blank, taken at 8760",
    "The condensate case's hours box left blank, taken at 8400",
@@ -41,10 +41,10 @@
    "The trap's discharge coefficient left blank, taken at 1"
   ],
   "answer": 2,
-  "explanation": "Of these gaps only one draws a default: the trap's hours absent from the call, which SECTION 15 answers with 8760 and 371.004 tonnes a year. Both hours boxes, the trap's and the condensate case's, are refused when present but blank (SECTIONS 15 and 16), and the discharge coefficient refusal says it is not defaulted."
+  "explanation": "Of these gaps only one draws a default: the trap's hours absent from the call, which the course answers with 8760 and 371.004 tonnes a year. Both hours boxes, the trap's and the condensate case's, are refused when present but blank, and the discharge coefficient refusal says it is not defaulted."
  },
  {
-  "prompt": "Which of these Isiokpo figures is an engine output, where the digest marks the other three computed here?",
+  "prompt": "Which of these Isiokpo figures is an engine output, where the course marks the other three computed here?",
   "options": [
    "The 8.4741 point LHV and HHV gap",
    "The trap's extra 17.724 tonnes a year",
@@ -52,10 +52,10 @@
    "annualEnergySavedGJ 6742.370"
   ],
   "answer": 3,
-  "explanation": "SECTION 14's output table prints annualEnergySavedGJ 6742.370. The stack loss section marks the 8.4741 point gap computed here, SECTION 15 the 17.724 tonnes a year between exponents, and SECTION 14 the shortcut's 5923.008 GJ, which the engine does not return."
+  "explanation": "The tuning lesson's output table prints annualEnergySavedGJ 6742.370. The stack loss section marks the 8.4741 point gap computed here, the steam trap lesson the 17.724 tonnes a year between exponents, and the tuning lesson the shortcut's 5923.008 GJ, which the engine does not return."
  },
  {
-  "prompt": "The invented Isiokpo trap's downstream table in SECTION 15 ends with one sentence. Which?",
+  "prompt": "The invented Isiokpo trap's downstream table in the course ends with one sentence. Which?",
   "options": [
    "At or below the critical ratio the downstream pressure lowers the loss; above it the loss does not move with the downstream pressure.",
    "At or below the critical ratio the loss does not move with the downstream pressure; above it the downstream pressure lowers the loss.",
@@ -63,10 +63,10 @@
    "At every ratio the loss moves with the downstream pressure, and the critical ratio only marks where the flow note changes its words."
   ],
   "answer": 1,
-  "explanation": "SECTION 15 prints that sentence under the table: 42.3520 kg an hour at 1.01325, 3 and 5 bar a, all choked, then 41.4785, 37.5765 and 29.0510 at 6, 7 and 8 bar a, choked false."
+  "explanation": "The course prints that sentence under the table: 42.3520 kg an hour at 1.01325, 3 and 5 bar a, all choked, then 41.4785, 37.5765 and 29.0510 at 6, 7 and 8 bar a, choked false."
  },
  {
-  "prompt": "SECTION 14 prints a saving fraction for the invented Isiokpo tuning on HHV. Which two efficiencies is it computed from?",
+  "prompt": "The course prints a saving fraction for the invented Isiokpo tuning on HHV. Which two efficiencies is it computed from?",
   "options": [
    "86.4029 and 87.8476, both on LHV",
    "77.9288 on HHV and 87.8476 percent on LHV",
@@ -74,10 +74,10 @@
    "86.4029 on LHV and 79.2343 on HHV"
   ],
   "answer": 2,
-  "explanation": "SECTION 14: on HHV the same tuning is a saving fraction of 0.0164763814, computed from the two HHV efficiencies of the stack loss section, the current 77.9288 and the target 79.2343. A pair on mixed bases is refused: \"The two efficiencies are on different bases (LHV and HHV) and cannot be compared.\""
+  "explanation": "In the course, on HHV the same tuning is a saving fraction of 0.0164763814, computed from the two HHV efficiencies of the stack loss section, the current 77.9288 and the target 79.2343. A pair on mixed bases is refused: \"The two efficiencies are on different bases (LHV and HHV) and cannot be compared.\""
  },
  {
-  "prompt": "Four Isiokpo figures from SECTIONS 14 to 16 are set side by side. Which of them is an amount of carbon?",
+  "prompt": "Four Isiokpo figures from the tuning, trap and condensate lessons are set side by side. Which of them is an amount of carbon?",
   "options": [
    "742.220 tCO2e a year from the condensate",
    "6742.370 GJ a year saved by tuning",
@@ -85,7 +85,7 @@
    "13230.304 GJ a year from condensate"
   ],
   "answer": 0,
-  "explanation": "SECTION 16 prints annualTonnesCo2e 742.220 on the SYNTHETIC factor. 6742.370 GJ is SECTION 14's LHV energy saved, 355.757 tonnes a year is steam lost by the trap in SECTION 15, and 13230.304 GJ is SECTION 16's energySavedGJPerYear."
+  "explanation": "The condensate lesson prints annualTonnesCo2e 742.220 on the SYNTHETIC factor. 6742.370 GJ is the tuning's LHV energy saved, 355.757 tonnes a year is steam lost by the trap, and 13230.304 GJ is the condensate case's energySavedGJPerYear."
  },
  {
   "prompt": "The stack loss section gives the invented Isiokpo heater a radiation and convection loss of 1.8 percent. Where does that figure come from?",
@@ -118,10 +118,10 @@
    "A saving, its price and its factor may sit on different heating value bases if each is named."
   ],
   "answer": 2,
-  "explanation": "SECTION 25 lists \"The cost per tonne of a saving is the levelised abatementCost, and needs a life and a rate\" and \"A saving, its price and its factor declared on different heating value bases are refused\"."
+  "explanation": "The course's rules in force list \"The cost per tonne of a saving is the levelised abatementCost, and needs a life and a rate\" and \"A saving, its price and its factor declared on different heating value bases are refused\"."
  },
  {
-  "prompt": "SECTION 17 prints the invented Isiokpo pinch at approaches of 10, 15 and 20 C. What does the pinch do across those rows?",
+  "prompt": "The course prints the invented Isiokpo pinch at approaches of 10, 15 and 20 C. What does the pinch do across those rows?",
   "options": [
    "The hot side stays at 118.000 C while the cold side reads 108.000, 103.000 and 98.000 C.",
    "Both sides stay put, 118.000 C on the hot side and 103.000 C on the cold side, at each row.",
@@ -132,7 +132,7 @@
   "explanation": "The three target rows print pinch hot 118.000 C each time and pinch cold 108.000, 103.000 and 98.000 C, with threshold problem false in every row. 110.500 is the shifted temperature of the 15 C zero."
  },
  {
-  "prompt": "In the heater chain from stack oxygen to tuning, which input does SECTION 14 say is declared after a combustion test?",
+  "prompt": "In the heater chain from stack oxygen to tuning, which input does the course say is declared after a combustion test?",
   "options": [
    "The current dry stack oxygen, 5.5 percent at Isiokpo.",
    "The target stack oxygen, 2.8 percent at Isiokpo.",
@@ -140,7 +140,7 @@
    "The minimum safe stack oxygen, 2 percent at Isiokpo."
   ],
   "answer": 3,
-  "explanation": "SECTION 14 prints a minimum safe stack oxygen of 2 percent declared after a combustion test (invented), and refuses it blank: \"A minimum safe stack oxygen is required and is not defaulted.\" SECTION 12 asks for a measured dry stack oxygen, the 2.8 percent target is checked against the declared floor, and the 238 C stack is an invented input of the stack loss section."
+  "explanation": "The tuning lesson prints a minimum safe stack oxygen of 2 percent declared after a combustion test (invented), and refuses it blank: \"A minimum safe stack oxygen is required and is not defaulted.\" The excess air lesson asks for a measured dry stack oxygen, the 2.8 percent target is checked against the declared floor, and the 238 C stack is an invented input of the stack loss section."
  },
  {
   "prompt": "A failed steam trap has its own rule in force. According to that row, what must a trap be given?",
@@ -151,10 +151,10 @@
    "An emission factor, an orifice diameter and a year of 8760 hours in service."
   ],
   "answer": 1,
-  "explanation": "SECTION 25: \"A trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year\", pointing at SECTION 15. The safe floor belongs to the tuning of SECTION 14 and the radiation loss to the stack loss section; 8760 hours is the stated default when hours are left out of the call."
+  "explanation": "The course's rules in force: \"A trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year\", pointing at the steam trap lesson. The safe floor belongs to the tuning lesson and the radiation loss to the stack loss section; 8760 hours is the stated default when hours are left out of the call."
  },
  {
-  "prompt": "Every SECTION 17 target row for the four invented Isiokpo streams prints a balance check of 0.000. How does the digest define it?",
+  "prompt": "Every pinch target row for the four invented Isiokpo streams prints a balance check of 0.000. How does the course define it?",
   "options": [
    "(hot utility plus cold utility) less (hot stream duty plus cold stream duty)",
    "(hot utility plus cold stream duty) less (cold utility plus hot stream duty)",
@@ -162,6 +162,6 @@
    "(hot stream duty plus cold utility) less (hot utility plus cold stream duty)"
   ],
   "answer": 2,
-  "explanation": "SECTION 17: the balance check is (hot utility plus hot stream duty) less (cold utility plus cold stream duty): heat in less heat out, 0.000 when the targets close. Heat recovered is the hot streams' duty less the cold utility, 801.150 less 240.150 is 561.000 kW at 15 C."
+  "explanation": "In the course, the balance check is (hot utility plus hot stream duty) less (cold utility plus cold stream duty): heat in less heat out, 0.000 when the targets close. Heat recovered is the hot streams' duty less the cold utility, 801.150 less 240.150 is 561.000 kW at 15 C."
  }
 ]

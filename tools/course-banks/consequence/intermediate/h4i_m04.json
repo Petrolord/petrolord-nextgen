@@ -30,7 +30,7 @@
    "As their vector sum, sqrt(Fv^2 + Fh^2), the most exposed target orientation"
   ],
   "answer": 3,
-  "explanation": "Both model strings end \"Fmax the vector sum\", and section 18 writes Fmax = sqrt(Fv^2 + Fh^2) as the most exposed orientation. At 15 m upright that turns 0.332171054250 and 0.222949619043 into 0.400055173586, which is neither their larger member, their plain sum nor their average."
+  "explanation": "Both model strings end \"Fmax the vector sum\", and the course writes Fmax = sqrt(Fv^2 + Fh^2) as the most exposed orientation. At 15 m upright that turns 0.332171054250 and 0.222949619043 into 0.400055173586, which is neither their larger member, their plain sum nor their average."
  },
  {
   "prompt": "The stated flame is tilted 20 degrees toward a target standing 20 m from its axis. What does the engine return?",
@@ -96,7 +96,7 @@
    "The Yellow Book states no domain for the formula, so the limit is the engine's call"
   ],
   "answer": 3,
-  "explanation": "Section 18 closes the probe table with it: the refusal is the engine's judgement, because the Yellow Book states no domain for the formula. No printed limit at a fixed X/R exists, a golden is evidence and never a rule the engine reads, and no tilt bound from the source is named."
+  "explanation": "The course closes the probe table with it: the refusal is the engine's judgement, because the Yellow Book states no domain for the formula. No printed limit at a fixed X/R exists, a golden is evidence and never a rule the engine reads, and no tilt bound from the source is named."
  },
  {
   "prompt": "What does the engine do with a target placed at or inside the base of the flame?",
@@ -140,7 +140,7 @@
    "a is the tilt in radians and b is the height of the target above the ground divided by the radius R"
   ],
   "answer": 1,
-  "explanation": "Section 18 defines a = L / R and b = X / R, with X the distance from the axis of the flame base to a small target at ground level. The path from the flame surface is the Bagster path length, a different distance. The target is at ground level, so no height enters b, and the tilt is its own argument."
+  "explanation": "The course defines a = L / R and b = X / R, with X the distance from the axis of the flame base to a small target at ground level. The path from the flame surface is the Bagster path length, a different distance. The target is at ground level, so no height enters b, and the tilt is its own argument."
  },
  {
   "prompt": "With the stated flame tilted 40 degrees toward a target 30 m from the axis, what does the horizontal target's view factor come to?",
@@ -162,6 +162,6 @@
    "303 cells, one for each figure the printed table carries"
   ],
   "answer": 0,
-  "explanation": "Section 18 tabulates 9 golden cases, from yb-pool-example-vf to slender-far, with engine and route B equal in both Fv and Fh as printed. The three probes are targets under the flame, where Fv differs and Fh agrees. The 303 cells and the 2 odd Fmax cells belong to the printed Table 6.A.1, a separate check."
+  "explanation": "The course lists 9 golden cases, from yb-pool-example-vf to slender-far, with engine and route B equal in both Fv and Fh as printed. The three probes are targets under the flame, where Fv differs and Fh agrees. The 303 cells and the 2 odd Fmax cells belong to the printed Table 6.A.1, a separate check."
  }
 ]

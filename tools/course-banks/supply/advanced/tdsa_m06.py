@@ -72,7 +72,7 @@ q(1, "Among the rules the engines keep, IB-T1 and IB-T2 together hold 5453.100 m
  ["The pair's stock less the pair's heel, taken as one pool.",
   "Pumpable stock is corrected to standard volume, while the stock is gross observed.",
   "A reserve above the heel is held back on every tank before it counts as pumpable."],
- "The rule reads: pumpable stock is counted tank by tank, and the digest measures it on IB-T1 and IB-T2 as 5078.400 m3 of pumpable stock. Each tank's pumpable stock is its stock above its own heel and never below zero, and no pump lends one tank's volume to another's heel.")
+ "The rule reads: pumpable stock is counted tank by tank, and the course measures it on IB-T1 and IB-T2 as 5078.400 m3 of pumpable stock. Each tank's pumpable stock is its stock above its own heel and never below zero, and no pump lends one tank's volume to another's heel.")
 
 # audit-advanced: key 0.89 against tdsi_m01 Q2 (same refusal asked the same way); now asks which rule the sentence enforces
 q(2, "Among the rules the engines keep, which one does the sentence \"Arrival rate and load time are both needed.\" enforce?",
@@ -80,7 +80,7 @@ q(2, "Among the rules the engines keep, which one does the sentence \"Arrival ra
  ["Bays are a whole number, one or more.",
   "throughputEconomics needs the throughput and the fee.",
   "A day is not closed without its opening stock."],
- "The digest lists the rule \"a load time of zero minutes is refused\" with that sentence. The bays rule prints \"The number of bays must be a whole number, one or more.\", the money rule \"Throughput and the throughput fee are both needed for the money answer.\" and the opening stock rule \"No opening stock, so the day cannot be closed.\"")
+ "The course lists the rule \"a load time of zero minutes is refused\" with that sentence. The bays rule prints \"The number of bays must be a whole number, one or more.\", the money rule \"Throughput and the throughput fee are both needed for the money answer.\" and the opening stock rule \"No opening stock, so the day cannot be closed.\"")
 
 q(3, "throughputEconomics takes a blank cost as zero and names it in assumedZero. How does landedCost treat a blank rate?",
  "It leaves the line out, names it as missing and labels the total a floor.",

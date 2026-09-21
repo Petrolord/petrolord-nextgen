@@ -11,7 +11,7 @@
   "explanation": "The blend at 55 and 45 is the volume-weighted sum of the two at a fixed temperature. 92.9219 is the blend at 1200 F and 74.9677 the blend at 860 F."
  },
  {
-  "prompt": "The studio opens on its default pair, 60 and 40. What does the digest print for the two crudes' own fifty percent points averaged by volume share, minus the engine's interpolated T50?",
+  "prompt": "The studio opens on its default pair, 60 and 40. What does the course print for the two crudes' own fifty percent points averaged by volume share, minus the engine's interpolated T50?",
   "options": [
    "-2.9207 F.",
    "-3.3184 F.",
@@ -96,7 +96,7 @@
    "30 percent."
   ],
   "answer": 2,
-  "explanation": "The digest reads the Kwale blend at 10, 30, 50, 70 and 90 percent: 212.2121, 411.6294, 587.3184, 796.5882 and 1133.0737 F. 8.0714 is the blend at 190 F and 14.5833 at 265 F."
+  "explanation": "The course reads the Kwale blend at 10, 30, 50, 70 and 90 percent: 212.2121, 411.6294, 587.3184, 796.5882 and 1133.0737 F. 8.0714 is the blend at 190 F and 14.5833 at 265 F."
  },
  {
   "prompt": "The Kwale blend's curve is read at 10, 30, 50, 70 and 90 percent. Why is each of those five temperatures an interpolation?",
@@ -176,7 +176,7 @@
   "explanation": "The default set splits the heavy end at 1000 F. 26.6940 is the blend's Vacuum gasoil, 43.0526 its Atmospheric residue on Kwale's cuts, and 18.7143 the default pair's Vacuum residue."
  },
  {
-  "prompt": "Which cut set does the digest call a vacuum refinery's?",
+  "prompt": "Which cut set does the course call a vacuum refinery's?",
   "options": [
    "Kwale's own cuts, with a single heavy cut from 650 F upward.",
    "The cut set drawn inside the Ebocha partial curve, from 110 F to 920 F.",
@@ -275,7 +275,7 @@
   "explanation": "Every term is reported beside the total: gross product value 74.2412, value lost to losses at 0.8 percent 0.5939, processing cost 6.8000 and freight 1.9000 $/bbl of crude. 0.0696 is how far the after-the-costs reading lands from the engine."
  },
  {
-  "prompt": "Under the complete Kwale valuation the digest prints: Costs taken as zero because they were blank: nothing. What does that line confirm?",
+  "prompt": "Under the complete Kwale valuation the course prints: Costs taken as zero because they were blank: nothing. What does that line confirm?",
   "options": [
    "assumedZero is empty, so the netback of 64.9473 carries no assumed zero.",
    "Every cut had a price, so unpricedCuts is empty and the valuation is complete.",
@@ -330,7 +330,7 @@
   "explanation": "netbackValue takes a marker netback and reports the differential: this crude's netback minus the marker's. Like every figure in the course, 72.5 is invented. 64.9473 is the volume-weighted mean of the two crudes' netbacks and 74.2412 the blend's gross."
  },
  {
-  "prompt": "What does the digest print as the first point of the default pair's blend curve at or past 50 percent?",
+  "prompt": "What does the course print as the first point of the default pair's blend curve at or past 50 percent?",
   "options": [
    "650 F.",
    "617.1429 F.",
@@ -360,7 +360,7 @@
    "D86 is a crude assay test that d86ToTbp converts with its own table."
   ],
   "answer": 1,
-  "explanation": "The digest: D86 is a product test; a crude assay is reported as a TBP distillation. d86ToTbp ships no coefficient table, and called without one it refuses."
+  "explanation": "The course: D86 is a product test; a crude assay is reported as a TBP distillation. d86ToTbp ships no coefficient table, and called without one it refuses."
  },
  {
   "prompt": "Why does d86ToTbp ship no coefficient table for API Technical Data Book Procedure 3A1.1?",
@@ -459,6 +459,6 @@
    "0.8922."
   ],
   "answer": 0,
-  "explanation": "The digest prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 0.8727 is the studio's default pair's SG, 0.8328 Kwale Light's and 0.8922 Ughelli Medium's."
+  "explanation": "The course prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 0.8727 is the studio's default pair's SG, 0.8328 Kwale Light's and 0.8922 Ughelli Medium's."
  }
 ]

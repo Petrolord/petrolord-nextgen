@@ -22,7 +22,7 @@
   "explanation": "The landed total is spread over what arrives, 45566774.37 litres at the invented 0.45 percent loss. The litres returned by cargoQuantities are what was loaded and paid for."
  },
  {
-  "prompt": "Ocean freight typed as a percent of C&F is refused on the invented BADAGRY walk. Which other entry does the digest show refused with the same sentence?",
+  "prompt": "Ocean freight typed as a percent of C&F is refused on the invented BADAGRY walk. Which other entry does the course show refused with the same sentence?",
   "options": [
    "A charge with the stage \"customs\".",
    "Insurance on CIF at 100 percent.",
@@ -316,7 +316,7 @@
    "Both are read as zero and named, so the answer is labelled a floor until the label is fixed."
   ],
   "answer": 1,
-  "explanation": "The digest prints REFUSED: Unknown quantity unit \"kg\". for cargoQuantities and REFUSED: Customs processing has an unknown stage \"customs\". for landedCost. Neither returns a figure, and neither is a forward reference or a floor."
+  "explanation": "The engine returns REFUSED: Unknown quantity unit \"kg\". for cargoQuantities and REFUSED: Customs processing has an unknown stage \"customs\". for landedCost. Neither returns a figure, and neither is a forward reference or a floor."
  },
  {
   "prompt": "Which invented BADAGRY figure changes when the ocean loss changes: the landed total, the bill-of-lading litres, the regulatory line or the outturn?",

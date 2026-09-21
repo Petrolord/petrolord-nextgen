@@ -41,7 +41,7 @@ q(0, "The small bore correction turns on below a pipe bore of 2.800000 in. How w
   "By taking the smallest bore in the sweep and the largest and halving the gap once."],
  "Nothing was read from the source and nothing was typed. A threshold found by bisecting a returned flag stays true when the engine is rebuilt and turns false loudly if the engine changes."),
 
-q(2, "What is the only statement the digest licenses about the size of the small bore step in the coefficient?",
+q(2, "What is the only statement the course licenses about the size of the small bore step in the coefficient?",
  "That at beta 0.500000 and Reynolds 1e+6 the coefficient is 0.603040 where the correction is applied and 0.603075 where it is not, a difference of -0.000036 and a ratio of 0.999941.",
  ["That the step is small enough at every beta and every Reynolds number to be left out of an ordinary flow calculation without any consequence for the answer.",
   "That the correction raises the coefficient, since an extra term in the equation can only add to it.",

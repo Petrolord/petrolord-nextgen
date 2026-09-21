@@ -43,7 +43,7 @@ q(1, "This tier has two properties that the next one does not. Name them.",
 
 q(3, "Nothing in the OGBIA line compresses, so a barrel entering it is a barrel leaving it. What would change if it did compress?",
  "The density would depend on the pressure, which is the quantity being solved for.",
- ["The engine would refuse the line, since a density that varies along the run is one of the eighteen states Section 1 lists as having no answer at all in this method.",
+ ["The engine would refuse the line, since a density that varies along the run is one of the eighteen states the course lists as having no answer at all in this method.",
   "Only the erosional ceiling would move, since it is the one figure in the tier built from the density, and the friction chain reads the density solely through the Reynolds number.",
   "Nothing in the reported numbers, since the density is taken at the inlet and the loss is reported over the whole line, so compressibility would reach the answer only through the gradient."],
  "The velocity of 2.244621 ft/s stands at both ends because the density of 54.500000 lb/ft3 does. Let the fluid compress and the whole method changes shape."),

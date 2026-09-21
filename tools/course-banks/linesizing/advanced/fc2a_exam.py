@@ -132,7 +132,7 @@ q(2, "Two loops in this module return their last iterate with no flag. The outle
  ["The outlet solve reports the number of iterations it ran, so a caller can see whether it converged, and the two loops report neither a count nor a residual.",
   "The outlet solve returns the bracket it searched beside its answer, so a caller can see the interval the outlet was found in, and the two loops return no interval at all.",
   "The outlet solve returns a NaN when it cannot answer, which a caller can test for, and the two loops return a plausible number that no test can distinguish."],
- "Both loops converge everywhere this digest looked. What is absent is the evidence, and a second run cannot supply it because nothing here reads a clock or a random number.")
+ "Both loops converge everywhere this course looked. What is absent is the evidence, and a second run cannot supply it because nothing here reads a clock or a random number.")
 
 q(3, "What is the contract every refusal in this engine keeps to, and why is the shape the useful part?",
  "An object carrying an error string, arriving where the answer would have arrived, which cannot be confused with a pressure or a rate and carries a sentence naming what was missing.",
@@ -281,7 +281,7 @@ q(0, "The wall chain and the volume chain both start from a pipe. What do they a
   "The corrosion allowance, since it thickens the required wall and thins the bore the volume is taken over, so one figure appears in both chains with opposite signs."],
  "Not one of the three Expert readings can be derived from the other two. Each needs inputs the others never ask for.")
 
-q(3, "Section 16 closes on two things the engine still accepts and arguably should not. What are they, and what does this course grade on either of them?",
+q(3, "The course's account of refusals closes on two things the engine still accepts and arguably should not. What are they, and what does this course grade on either of them?",
  "The catalogue that answers an unknown service under the wrong label and the rating called without its allowance, and nothing graded in this course rests on either of the two.",
  ["Colebrook answering past the roughness it was fitted for and the band between the branches, both of which are graded through the friction factor a sizing sweep uses.",
   "The two iterations that never report convergence and the three returns outside the refusal contract, both of which are graded through the gas rates that depend on them.",

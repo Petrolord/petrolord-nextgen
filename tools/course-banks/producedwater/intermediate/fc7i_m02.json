@@ -77,7 +77,7 @@
   "explanation": "The turndown is the flow through one liner over its design flow, and neither of those carries a bore. That is what makes the race in this sweep a race between the residence and the travel and nothing else."
  },
  {
-  "prompt": "The digest prints a derived column beside the bore sweep, the cut size multiplied by the square root of the bore. What does it read?",
+  "prompt": "The course prints a derived column beside the bore sweep, the cut size multiplied by the square root of the bore. What does it read?",
   "options": [
    "0.828906 on the declared bore alone, and it drifts away from that figure at the two extremes of the span.",
    "1.000000 on every row, because the column is normalised against the module's own declared bore of 0.035 m.",

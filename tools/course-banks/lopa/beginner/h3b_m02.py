@@ -14,7 +14,7 @@ q(2,
   ["A protective layer that acts after the initiating event, entered with its own figure and independence flag.",
    "A probability that the consequence follows once the initiating event has happened and the plant was in the state.",
    "A frequency per year that the enabling equipment fails."],
-  "The digest defines an enabling condition as a state that must hold for the initiating event to lead anywhere, and gives the separator on the high pressure manifold as the one on this row. A probability that the consequence follows once the event has happened is a conditional modifier. A protective layer is an IPL and carries its own flags. An enabling condition is a probability and never a frequency.")
+  "The course defines an enabling condition as a state that must hold for the initiating event to lead anywhere, and gives the separator on the high pressure manifold as the one on this row. A probability that the consequence follows once the event has happened is a conditional modifier. A protective layer is an IPL and carries its own flags. An enabling condition is a probability and never a frequency.")
 
 q(0,
   "What does a conditional modifier describe?",
@@ -30,7 +30,7 @@ q(3,
   ["Because the enabling conditions are applied to the initiating event frequency and the conditional modifiers are applied afterwards to the credited layers on the row.",
    "Because a conditional modifier is allowed above one and an enabling condition is held to a probability, so the two lists carry different admissible ranges.",
    "Because only the conditional modifiers are named, and an enabling condition is entered as a bare figure with no name beside it on the worksheet."],
-  "The digest says the engine treats both the same way, as factors in one product, and that the difference is in how the analyst justifies them, so the engine keeps them in two lists to show which is which. Both are applied at the same place in the product, both are held to a probability above 0 and no more than 1, and every entry of either kind needs a name.")
+  "The course says the engine treats both the same way, as factors in one product, and that the difference is in how the analyst justifies them, so the engine keeps them in two lists to show which is which. Both are applied at the same place in the product, both are held to a probability above 0 and no more than 1, and every entry of either kind needs a name.")
 
 q(1,
   "ORONI's enabling condition is the separator being on the high pressure manifold. What is its stated probability and what does the engine report as `enablingProduct`?",
@@ -91,7 +91,7 @@ q(0,
 q(1,
   "The blast zone modifier is dropped from the row and nothing else changes. Which frequency does the engine report, and what is the derived figure over the full row?",
   "0.067500000000 per year, derived 5.000000 over the full row.",
-  ["0.067500000000 per year, derived 2.000000 over the full row, which is the figure the digest prints beside that omission in its own table.",
+  ["0.067500000000 per year, derived 2.000000 over the full row, which is the figure the course shows beside that omission in its own table.",
    "0.027000000000 per year, derived 5.000000 over the full row, because the modifier dropped is the larger of the two the row carries in its list.",
    "0.013500000000 per year, derived 1.000000 over the full row."],
   "The table prints the blast zone modifier left out at 0.067500000000 per year with a derived 5.000000 over the full row, which is the reciprocal of the 0.2 that was dropped. The derived 2.000000 belongs to ignition left out at 0.027000000000 per year, and 1.000000 is the row with nothing left out at 0.013500000000 per year.")
@@ -99,13 +99,13 @@ q(1,
 q(3,
   "Every conditional modifier is left off the row at once. Where does the unmitigated frequency land, and by what derived factor?",
   "10.000000, reaching 0.135000000000 per year.",
-  ["3.333333, reaching 0.135000000000 per year, which is the pair of figures the digest prints against this omission in its table of five rows.",
+  ["3.333333, reaching 0.135000000000 per year, which is the pair of figures the course shows against this omission in its table of five rows.",
    "10.000000, reaching 0.045000000000 per year, because between them the two modifiers carry a whole decade of the product this row forms.",
    "10.000000, reaching 0.067500000000 per year."],
   "Every modifier left out gives 0.135000000000 per year with a derived 10.000000, which is the reciprocal of 0.5 times 0.2. The derived 3.333333 belongs to the enabling condition left out at 0.045000000000 per year, and 0.067500000000 per year is the blast zone modifier left out on its own.")
 
 q(2,
-  "What derived figure does the digest print beside the enabling condition left out, and what does it mean?",
+  "What derived figure does the course print beside the enabling condition left out, and what does it mean?",
   "3.333333, the factor by which the frequency rises over the full row when that one condition is dropped.",
   ["3.333333, the factor by which the required risk reduction factor falls when the enabling condition is dropped from the product the engine forms.",
    "0.300000000000, the enabling product printed again in the derived column.",
@@ -113,12 +113,12 @@ q(2,
   "The table's derived column is the frequency over the full row, and the enabling condition left out reads 3.333333 there against 0.045000000000 per year. A larger frequency demands more risk reduction and never less. 0.300000000000 is `enablingProduct` and belongs to a different column, and 1.000000 is the row with nothing left out.")
 
 q(0,
-  "Why does the digest say a forgotten factor is never harmless?",
+  "Why does the course say a forgotten factor is never harmless?",
   "Because leaving out a real enabling condition overstates the frequency and the reduction demanded, and typing one the analyst cannot justify understates it.",
   ["Because the engine always errs high when a factor is missing, so the row is left conservative and the only cost of the omission is money.",
    "Because a missing factor is caught by the engine, which refuses the row and names the field the analyst failed to fill in on it.",
    "Because the engine recomputes the row with a default factor in place."],
-  "The digest says a forgotten factor is never harmless in the direction of safety or of cost, and it gives both directions: leaving out a real enabling condition overstates the frequency and so the risk reduction demanded, and typing a factor the analyst cannot justify understates it. The engine has no way to know a factor is missing, so it refuses nothing and defaults nothing.")
+  "The course says a forgotten factor is never harmless in the direction of safety or of cost, and it gives both directions: leaving out a real enabling condition overstates the frequency and so the risk reduction demanded, and typing a factor the analyst cannot justify understates it. The engine has no way to know a factor is missing, so it refuses nothing and defaults nothing.")
 
 q(1,
   "Why does the engine keep the name the analyst gave to each factor on the row?",
@@ -126,7 +126,7 @@ q(1,
   ["Because the engine looks the factor up by name in its own table of generic enabling conditions and conditional modifiers before it applies the figure.",
    "Because the credit rule compares factor names against the credited layers.",
    "Because a factor with no name is silently dropped from the product."],
-  "The digest closes the forgotten factor section with the reason: every factor on the row has to be defended in writing, which is why the engine keeps each one with its name. The engine holds no table to look a factor up in, the duplicate check on names belongs to the IPL list, and an entry with no name is refused and never dropped in silence.")
+  "The course closes the forgotten factor lesson with the reason: every factor on the row has to be defended in writing, which is why the engine keeps each one with its name. The engine holds no table to look a factor up in, the duplicate check on names belongs to the IPL list, and an entry with no name is refused and never dropped in silence.")
 
 emit(Q, '/root/hse-wip-lopa/banks/h3b_m02.json', expect_n=15)
 finish()

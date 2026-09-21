@@ -60,7 +60,7 @@
    "To hold the values the published cases compare against, so that changing one breaks a case rather than an answer.",
    "To collect the inputs whose defaults a caller is most likely to leave alone, so that a reader can see them in one place.",
    "To say which numbers no check in this package can reach.",
-   "To separate the constants the module derives from the constants it measures, which is the distinction the digest is built on."
+   "To separate the constants the module derives from the constants it measures, which is the distinction the course is built on."
   ],
   "answer": 2,
   "explanation": "Its own comment says that pinning them is the honest best available rather than a validation. A course that presented a pinned constant as a verified one would be making exactly the claim that export exists to refuse."
@@ -70,7 +70,7 @@
   "options": [
    "A limit is a guard that refuses an input, and an absence is a guard that warns and answers anyway.",
    "A limit is a number this package holds and cannot check, and an absence is a subject this engine does not contain.",
-   "A limit is a figure the digest prints without a source, and an absence is a figure the digest does not print at all.",
+   "A limit is a figure the course prints without a source, and an absence is a figure the course does not print at all.",
    "A limit belongs to this engine and an absence belongs to another one, so an absence is always a course boundary."
   ],
   "answer": 1,

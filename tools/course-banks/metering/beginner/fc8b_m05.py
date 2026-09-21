@@ -13,7 +13,7 @@ q(2, "A transmitter is spanned at 200.000000 in H2O with an accuracy of 0.075000
   "The repeatability between two readings taken at the same differential."],
  "The accuracy is quoted on the span. The reading falls and the band does not, so the same fixed band becomes a larger share of a smaller number."),
 
-q(0, "What does the digest print for the transmitter contribution at the top and the bottom of this span?",
+q(0, "What does the course print for the transmitter contribution at the top and the bottom of this span?",
  "0.075000 percent of reading at a reading of 200.000000 in H2O against 7.500000 percent at a reading of 2.000000 in H2O, a difference of -7.425000 and a ratio of 0.010000.",
  ["0.075000 percent at 200.000000 in H2O against 3.000000 percent at 5.000000 in H2O, which are the two rows the engine holds its limits at.",
   "0.235110 percent at 63.800000 in H2O against 7.500000 percent at 2.000000 in H2O, which is the span from the design reading down.",
@@ -48,12 +48,12 @@ q(2, "A differential turndown and a flow turndown describe the same operating po
   "The differential turndown is the ratio the transmitter reports and the flow turndown is that ratio after the discharge coefficient has been applied to it."],
  "Both columns are returned for every reading, and a rule quoted without saying which quantity it is written in is ambiguous by a factor this module measures."),
 
-q(1, "The engine holds two turndown limits. What are they, and what is the relationship the digest prints between them?",
+q(1, "The engine holds two turndown limits. What are they, and what is the relationship the course prints between them?",
  "A flow turndown limit of 3.000000 and a differential turndown limit of 9.000000, a difference of 6.000000 and a ratio of 3.000000.",
  ["A flow turndown limit of 9.000000 and a differential turndown limit of 3.000000, a difference of 6.000000 and a ratio of 3.000000, because the differential is the quantity that moves less.",
   "A single limit of 3.000000 applied to whichever turndown the caller asks for.",
   "A flow limit of 3.000000 and a differential limit of 9.000000, with no relationship printed."],
- "They are the same rule written in two quantities, and the digest prints the relationship rather than leaving a reader to work it out."),
+ "They are the same rule written in two quantities, and the course prints the relationship rather than leaving a reader to work it out."),
 
 q(3, "Which of the two turndowns does the engine's warning fire on, and why does the choice matter?",
  "The flow turndown, because the figure a warning is about should be the figure the rule is written in.",

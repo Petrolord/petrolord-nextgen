@@ -11,7 +11,7 @@
   "explanation": "modularRefinery hands its annual streams to the screening engine through feasibilityEconomics. The Refinery Planning Studio runs refineryPlanning over lib/lp/simplex and streamModel, and neither of those reaches the screening engine in this tier."
  },
  {
-  "prompt": "Some exports read the machine clock when an argument is left out. Which pairing of function and missing argument does the digest print?",
+  "prompt": "Some exports read the machine clock when an argument is left out. Which pairing of function and missing argument does the course print?",
   "options": [
    "feasibilityEconomics reads the year when startYear is left out.",
    "cascadeToSchedule reads the year whenever startYear is left out of the call.",
@@ -22,7 +22,7 @@
   "explanation": "cascadeToSchedule reads the clock when periodStart is missing, and feasibilityEconomics and calculateEconomics read the year when startYear is missing. The course passes both every time, with start year 2027 for every valuation."
  },
  {
-  "prompt": "The digest counts each module's exports. Which count belongs to modularRefinery?",
+  "prompt": "The course counts each module's exports. Which count belongs to modularRefinery?",
   "options": [
    "3 exported functions and 0 exported lists and constants.",
    "7 exported functions and 4 exported lists and constants, as measured.",
@@ -140,7 +140,7 @@
    "Averages of published prices the Studio refreshes itself."
   ],
   "answer": 2,
-  "explanation": "The digest's case line says all three records are invented and every price and cost in it is illustrative, in US dollars. None is a market quotation for any date, and a crude grade name is a label on invented yields and prices."
+  "explanation": "The course's case line says all three records are invented and every price and cost in it is illustrative, in US dollars. None is a market quotation for any date, and a crude grade name is a label on invented yields and prices."
  },
  {
   "prompt": "All three configurations are valued against one OKORDIA price table, and give 76.9400, 83.7900 and 90.6300. What differs between them to give three values?",
