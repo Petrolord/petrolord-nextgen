@@ -133,7 +133,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Frequencies, individual risks and PLL per year, and probabilities, print to TWELVE decimals; FAR values, ratios and fatality counts that need not be whole print to SIX decimals; money prints to TWO decimals; hours and years are whole numbers as stated; stated inputs print as typed.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 16fd6c9, ${engineLines} lines. It imports the H4 consequence engine, the H1 FAR base, the H3 hours in a year and the canonical year-end present value of engines/economics/cashflow.ts. The vendored golden test-data/hse/goldens/qra_cases.json carries ${goldCount} records this digest counts, written by the engine's independent oracle.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines e972ae7, ${engineLines} lines. It imports the H4 consequence engine, the H1 FAR base, the H3 hours in a year and the canonical year-end present value of engines/economics/cashflow.ts. The vendored golden test-data/hse/goldens/qra_cases.json carries ${goldCount} records this digest counts, written by the engine's independent oracle.`);
 w();
 w('# EVERY PROBABILITY OF DEATH IS AN INPUT. The teaching streams state each one. Producing a probability of death from a release belongs to the consequence course, and no section below runs a consequence model to make a number a lesson teaches.');
 w();

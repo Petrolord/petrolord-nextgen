@@ -256,7 +256,7 @@ q(1, "At 25 buses an hour on 2 dispensers, what does the queue's message say of 
  ["It is 5.7647 minutes, as at 14 buses an hour.",
   "It is the 6 minutes of one fill.",
   "It is 1.2500 times the fill time."],
- "The message: \"The rack cannot keep up with arrivals. The queue grows without limit, so no average waiting time exists. Add a bay, load faster, or spread the arrivals.\"")
+ "The message: \"The dispensers cannot keep up with arriving vehicles. The forecourt queue grows without limit, so no average waiting time exists. Add a dispenser, shorten the fill, or spread the arrivals.\"")
 
 q(3, "Two dispensers serve IBAFO's 14 buses an hour. How likely is a bus to wait, by the engine?",
  "0.5765",

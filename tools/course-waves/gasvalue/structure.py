@@ -113,7 +113,7 @@ TIERS = {
     ('l05-capital-by-the-modular-power-law', 'Capital by the modular power law', 14, [R]),
   ]),
   ('m04-the-counterfactual', 'The Counterfactual', [
-    ('l01-the-gross-flare-is-not-the-abatement', 'The gross flare is not the abatement', 13, [R]),
+    ('l01-the-gross-flare-is-not-the-abatement', 'The gross flare is the starting point', 13, [R]),
     ('l02-only-the-recovered-share-is-avoided', 'Only the recovered share is avoided', 14, [R]),
     ('l03-what-burning-the-product-emits', 'What burning the product emits', 13, [R]),
     ('l04-what-the-product-displaces', 'What the product displaces', 13, [R]),

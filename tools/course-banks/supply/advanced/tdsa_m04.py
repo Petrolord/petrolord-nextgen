@@ -35,7 +35,7 @@ q(2, "Two pump elements, the invented dealer margin and the statutory levies, ar
  ["complete true at 1031.3197 naira a litre, with the two blank elements taken as zero and named in assumedZero.",
   "REFUSED: A landed cost per litre is required, since the chain cannot be walked with two elements missing.",
   "complete false with the price reported as none, since the tax cannot read a running total with gaps in it."],
- "The engine keeps both missing elements visible, reports complete false and prints \"A FLOOR, not a price: 2 rate(s) not supplied.\" beside 1031.3197 naira a litre.")
+ "The engine keeps both missing elements visible, reports complete false and prints \"A FLOOR: 2 rate(s) not supplied, so the full price is at least this.\" beside 1031.3197 naira a litre.")
 
 q(1, "Against the course's invented cap of 1040.0000 naira a litre, the complete BADAGRY price of 1074.8249 gives which answer?",
  "A shortfall of 34.8249 naira a litre, and the cap covers the chain: false.",

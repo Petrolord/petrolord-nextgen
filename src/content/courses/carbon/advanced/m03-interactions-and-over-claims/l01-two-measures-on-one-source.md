@@ -27,11 +27,11 @@ SECTION 20 prints the curve's interaction table and one flag:
 | --- | --- |
 | heaters | Tune the fired heaters; Heat integration project |
 
-The flag is additive false. The engine's note, verbatim: "Measures listed here act on the same source, so their abatements are NOT additive and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, which is why it is surfaced rather than solved."
+The flag is additive false. The engine's note, verbatim: "Measures listed here act on the same source, so their abatements overlap and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, so the overlap is flagged here and the sequencing is left to that judgement."
 
 ## Reading the note
 
-The note makes three statements. The two heater measures' abatements are not additive. Because they are counted in full on the axis, the cumulative curve is an upper bound: the 15460.000 t the curve ends at is the most the six measures could give together, as costed. And the engine does not resolve the overlap: it names the source and the measures and leaves the sequencing to an engineering judgement.
+The note makes three statements. The two heater measures' abatements overlap. Because they are counted in full on the axis, the cumulative curve is an upper bound: the 15460.000 t the curve ends at is the most the six measures could give together, as costed. And the engine does not resolve the overlap: it names the source and the measures and leaves the sequencing to an engineering judgement.
 
 The engine does not reduce either measure's tonnes. Tune the fired heaters still prints 760.000 t a year on the curve and the Heat integration project 3400.000 t a year. What changes is the label on the total. The step widths, the cumulative ends and totalAbatementTonnes carry both heater measures at their full tonnes, and the flag and the note tell a reader how to read them.
 

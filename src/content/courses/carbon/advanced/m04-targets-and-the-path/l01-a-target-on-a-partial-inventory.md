@@ -25,7 +25,7 @@ The partial inventory computed. It printed a total, 45112.276 tCO2e, and the pat
 
 The engine refuses the case where nothing computed:
 
-REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero.
+REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing leaves the baseline unknown.
 
 A partial inventory is not refused. It is a number, and its reportable status is the warning a reader has to carry across to the target.
 

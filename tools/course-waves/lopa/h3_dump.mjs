@@ -151,7 +151,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Frequencies per year, probabilities, IPL PFDs and PFDavg values print to TWELVE decimals; risk reduction factors, hours and years print to SIX decimals; failure rates per hour print in exponent form as stated; counts and SIL numbers are whole numbers; relative differences print in exponent form.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 6703c00, ${engineLines} lines, importing nothing. The vendored golden test-data/hse/goldens/lopa_cases.json carries ${goldCount} records, written by the stdlib oracle in exact rational arithmetic.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines e972ae7, ${engineLines} lines, importing nothing. The vendored golden test-data/hse/goldens/lopa_cases.json carries ${goldCount} records, written by the stdlib oracle in exact rational arithmetic.`);
 w();
 w('# FAILURE RATES ARE ILLUSTRATIVE. Every lambda below is a stated teaching input or a value read from the golden, never data this course recommends. No licensed IEC or ISA table is reproduced.');
 w();
@@ -428,7 +428,10 @@ must('PFDavg 0.001 is SIL 2', bands.find((b) => b.p === 0.001).r.sil === 2, 'SIL
 must('PFDavg 0.1 is not SIL rated', bands.find((b) => b.p === 0.1).r.state === 'NOT_SIL_RATED', 'not rated');
 must('PFDavg 5e-6 is below the SIL 4 floor', bands.find((b) => b.p === 5e-6).r.state === 'BELOW_SIL4_TABLE_FLOOR', 'floor');
 w();
-w(`The engine's band convention, verbatim: "${L.silFromPfdAvg(0.01).basis}".`);
+{
+  const bandBasis = L.silFromPfdAvg(0.01).basis;
+  w(`The engine's band convention, verbatim: "${bandBasis}"${bandBasis.endsWith('.') ? '' : '.'}`);
+}
 w();
 w('AN EXACT DECADE BELONGS TO THE LOWER SIL. A PFDavg of exactly 0.01 is SIL 1 and exactly 0.001 is SIL 2, because each band includes its lower PFDavg bound and excludes its upper one. In RRF terms, an RRF of exactly 100 is SIL 1 and exactly 10 is below SIL 1. A value that has just crossed a decade does not reach the higher band until it is strictly past it.');
 const floorNote = L.silFromPfdAvg(5e-6).note;

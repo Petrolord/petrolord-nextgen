@@ -5,9 +5,9 @@ wave that the kit's digestprose does not already sweep.
 No em dash, no en dash, and no "X, not Y" contrastive, in: the task files and
 tier headers, the three draft capstone prompts, every module and lesson title in
 structure.py, the three tier manifests and the 78 placeholder lessons in the
-worktree. The digest itself is swept by digestprose.mjs, which defers the one
-verbatim engine string that carries the contrastive; the same string is allowed
-here only inside quotation marks and only verbatim.
+worktree. The digest itself is swept by digestprose.mjs. Nothing is exempt: the
+one engine string that carried a contrastive (the schedule note) was recast by
+engines #232 and meets the rule.
 
 Negative control: --plant adds one em dash and one contrastive to the swept
 text and the gate must name both.
@@ -15,7 +15,6 @@ text and the gate must name both.
 import glob, json, os, re, sys
 W = os.path.dirname(os.path.abspath(__file__))
 REPO = '/root/wt-md-refinery-nextgen/src/content/courses/refinery'
-ENGINE_VERBATIM = 'this is the shape of the month to read actuals against, not a berth-level schedule.'
 CONTRAST = re.compile(r"\b\w+, not (a |an |the )?\w+", re.I)
 
 def texts():
@@ -42,12 +41,11 @@ def main():
             if '\u2014' in line or '\u2013' in line:
                 bad.append(f'{name}:{i} dash: {line.strip()[:100]}')
         # A contrastive can wrap across a line break, so it is read per
-        # paragraph with the lines joined. Two things are exempt BY TEXT: the
-        # rule's own name, "X, not Y", where the task files state the rule, and
-        # the one verbatim engine refusal, inside quotation marks.
+        # paragraph with the lines joined. One thing is exempt BY TEXT: the
+        # rule's own name, "X, not Y", where the task files state the rule.
         for para in re.split(r'\n\s*\n', text):
             flat = re.sub(r'\s+', ' ', para)
-            probe = re.sub(r'"[^"]*' + re.escape(ENGINE_VERBATIM) + r'"', '', flat).replace('"X, not Y"', '')
+            probe = flat.replace('"X, not Y"', '')
             m = CONTRAST.search(probe)
             if m:
                 bad.append(f'{name} contrastive: ...{probe[max(0, m.start() - 40):m.end() + 20]}...')

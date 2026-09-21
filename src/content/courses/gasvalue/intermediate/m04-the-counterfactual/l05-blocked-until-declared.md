@@ -30,7 +30,7 @@ abatement says which input is missing first. Each of the five probes above leave
 
 While the counterfactual is undeclared, the warning prints:
 
-"No abatement is reported. The flare's gross emission is not the abatement: recover the gas and somebody burns it, and if that displaces a dirtier fuel the abatement is larger while if it displaces nothing it is smaller. State what the product displaces and what burning it emits."
+"No abatement is reported. The flare's gross emission is the starting point, and the abatement depends on what the recovered product displaces: recover the gas and somebody burns it, and if that displaces a dirtier fuel the abatement is larger while if it displaces nothing it is smaller. State what the product displaces and what burning it emits."
 
 Beside the blocked net, the flare's gross CO2e is still reported, as grossClaimIfNoCounterfactual: 215946.438 t/yr on EGBEMA, the claim the engine will not make.
 

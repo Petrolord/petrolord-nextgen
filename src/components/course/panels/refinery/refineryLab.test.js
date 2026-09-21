@@ -38,8 +38,9 @@
 //                      on real data.
 //   THE COPY RULE      no em dash, no en dash, no double hyphen and no "X, not Y"
 //                      over the sources and over every string the lab hands a
-//                      panel, with ONE engine sentence exempt by exact string and
-//                      pinned to the vendored engine, and a dead exemption fails.
+//                      panel, with nothing exempt: the schedule note, once a
+//                      contrastive, was recast by engines #232, and a row naming
+//                      it fails if the lab stops returning it.
 //   THE REFUSAL LITERAL GATE  no engine refusal sentence is typed into the lab, a
 //                      panel or the page.
 import {
@@ -898,11 +899,13 @@ const CONTRASTIVE = /,\s+not\s+\w/;
 const breaches = (s) => CONTRASTIVE.test(s) || s.includes(EM) || s.includes(EN) || / -- /.test(s);
 
 /**
- * THE ONE LIVE ENGINE SENTENCE THAT BREACHES THE OWNER COPY RULE, exempt by exact
- * string and pinned to the vendored engine. PANELS.md names it: the schedule
- * note, shown verbatim as the engine's words. A dead exemption fails.
+ * The schedule note, the one engine sentence that used to breach the owner copy
+ * rule and was exempt from it. Engines #232 recast it, so nothing is exempt now.
+ * It stays listed so the sweep is shown to cover it: it must still be returned
+ * by the lab and still be in the vendored engine, and a row that matches nothing
+ * FAILS.
  */
-const COPY_RULE_EXEMPTIONS = ['this is the shape of the month to read actuals against, not a berth-level schedule.'];
+const RECAST_ENGINE_SENTENCES = ['this is the shape of the month to read actuals against. Berth-level scheduling needs those constraints and a scheduling tool.'];
 
 describe('THE OWNER COPY RULE: no em dash, no en dash and no contrastive', () => {
   it('no source line breaches it', () => {
@@ -920,19 +923,18 @@ describe('THE OWNER COPY RULE: no em dash, no en dash and no contrastive', () =>
     expect(breaches('a clean sentence')).toBe(false);
   });
 
-  it('every string the lab hands a panel obeys it, except the one exempt engine sentence', () => {
+  it('every string the lab hands a panel obeys it, with nothing exempt', () => {
     const strings = stringsIn(S);
     expect(strings.length).toBeGreaterThanOrEqual(500);
     const offenders = strings.filter(([, s]) => breaches(s));
-    const unexcused = offenders.filter(([, s]) => !COPY_RULE_EXEMPTIONS.some((ex) => s.includes(ex)));
-    expect(unexcused.map(([p, s]) => `${p}: ${s}`)).toEqual([]);
+    expect(offenders.map(([p, s]) => `${p}: ${s}`)).toEqual([]);
   });
 
-  it('A DEAD EXEMPTION FAILS: the exempt sentence is still returned and still in the engine', () => {
+  it('A DEAD ROW FAILS: the recast sentence is still returned, still in the engine and obeys the rule', () => {
     const strings = stringsIn(S).map(([, s]) => s);
-    COPY_RULE_EXEMPTIONS.forEach((ex) => {
+    RECAST_ENGINE_SENTENCES.forEach((ex) => {
       expect(strings.some((s) => s.includes(ex)), `"${ex}" matches nothing the lab returns`).toBe(true);
-      expect(breaches(ex)).toBe(true);
+      expect(breaches(ex)).toBe(false);
       expect(ENGINE_SRC.refineryPlanning, `"${ex}" is no longer in the vendored engine`).toContain(ex);
     });
   });

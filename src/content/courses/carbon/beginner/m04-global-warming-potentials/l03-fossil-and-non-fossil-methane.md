@@ -8,7 +8,7 @@ Each assessment report the course prints gives methane two 100-year values. On A
 
 The engine attaches a methane note to every set it builds. It is quoted here in full, verbatim:
 
-"AR6 gives methane two 100-year values: fossil (29.8) and non-fossil (27.0). This set holds one. The atom balance here counts carbon that escapes a burner or a flare as methane and NOT as CO2, so the oxidation CO2 is counted nowhere else and the fossil value is the consistent one for vented, fugitive and unburned fossil methane alike."
+"AR6 gives methane two 100-year values: fossil (29.8) and non-fossil (27.0). This set holds one. The atom balance here counts carbon that escapes a burner or a flare as methane, so the oxidation CO2 is counted nowhere else and the fossil value is the consistent one for vented, fugitive and unburned fossil methane alike."
 
 ## Reading the note
 

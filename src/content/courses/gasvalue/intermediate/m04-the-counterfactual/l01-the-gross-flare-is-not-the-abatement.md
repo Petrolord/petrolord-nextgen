@@ -1,4 +1,4 @@
-# The gross flare is not the abatement
+# The gross flare is the starting point
 
 The Associate tier weighed EGBEMA's flare. This module asks what recovering it abates. abatement answers that question, and it gives no net until a counterfactual is declared.
 
@@ -20,7 +20,7 @@ That flareCo2eTonnes is the flare's gross emission. A flare is also a line in an
 
 While the counterfactual is undeclared, the engine prints no net abatement, and it prints this warning:
 
-"No abatement is reported. The flare's gross emission is not the abatement: recover the gas and somebody burns it, and if that displaces a dirtier fuel the abatement is larger while if it displaces nothing it is smaller. State what the product displaces and what burning it emits."
+"No abatement is reported. The flare's gross emission is the starting point, and the abatement depends on what the recovered product displaces: recover the gas and somebody burns it, and if that displaces a dirtier fuel the abatement is larger while if it displaces nothing it is smaller. State what the product displaces and what burning it emits."
 
 The warning names the two figures a counterfactual declares: what the product displaces, and what burning it emits.
 

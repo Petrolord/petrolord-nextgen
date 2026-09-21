@@ -234,7 +234,7 @@ q(0, "Of the credit prices typed on EGBEMA's CNG route, which print clearsHurdle
 
 q(3, "creditSensitivity is run on a route with its price missing, so it has no margin. What does it answer?",
  "No verdict and a null breakeven; it asks the study to supply its price and costs.",
- ["REFUSED: The hurdle margin is not a number.",
+ ["REFUSED: The hurdle margin must be a number.",
   "A breakeven worked on a margin of zero, with the price named in assumedZero.",
   "No verdict and a null breakeven; it reports that no hurdle margin was given."],
  "With the price missing there is no margin. The digest prints the answer as having no verdict, a null breakevenCreditPrice and a request to supply the price and costs. A hurdle typed as 'x' is the refused probe.")

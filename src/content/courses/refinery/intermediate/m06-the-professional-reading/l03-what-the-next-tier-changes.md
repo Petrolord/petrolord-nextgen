@@ -6,7 +6,7 @@ This tier has read one month's plan and the schedule it cascades into. The cours
 
 The plan stays. The Expert tier works with a plan of the same kind: crudes, units, products and streams, a feedless crude unit carrying every barrel, a margin of revenue less crude and unit operating cost, and a gross margin per barrel of crude. What this tier said about blanks, refusals and stream values still holds.
 
-The schedule stays too. Its shape, spread evenly across a period and dated from a fixed period start passed as a string, is the object the Expert tier reads actuals against. The engine's note says so in its own words: "this is the shape of the month to read actuals against, not a berth-level schedule."
+The schedule stays too. Its shape, spread evenly across a period and dated from a fixed period start passed as a string, is the object the Expert tier reads actuals against. The engine's note says so in its own words: "this is the shape of the month to read actuals against. Berth-level scheduling needs those constraints and a scheduling tool."
 
 ## What changes
 

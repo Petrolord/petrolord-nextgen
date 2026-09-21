@@ -1,7 +1,7 @@
 # carbon: Carbon & Energy Efficiency. Teaching digest.
 # PRECISION: tonnes (of CO2, of methane, of CO2e, of steam) print to three decimals and kilomoles a year to three; kilomoles per kilomole of fuel to six; percents (efficiency, excess air, losses) to four; fractions and shares to six, and a fuel saving fraction to ten; gigajoules to three; kilograms an hour to four; molar masses to three decimals, except ATMOSPHERIC_N2_MOLAR_MASS and a fuel mixture molar mass, which print to four, as do kilograms per kilomole of fuel; kilowatts and temperatures to three; money in US dollars to two decimals and US dollars per tonne to four; capital recovery factors to eight; megajoules per tonne to four; carbon intensities to eight. Counts and years are whole numbers.
 # NO CLOCK: neither engine reads a date or a random number, so no figure below depends on when or where the digest was built. Every year below is an input.
-# ENGINES: engines/downstream/carbonAbatement.js and engines/downstream/energyEfficiency.js at petrolord-engines df31f53 (MD5-0, engines PR #226, and MD45-1, engines PR #228, repaired both), vendored in NextGen under packages/engines.
+# ENGINES: engines/downstream/carbonAbatement.js and engines/downstream/energyEfficiency.js at petrolord-engines e972ae7 (MD5-0, engines PR #226, and MD45-1, engines PR #228, repaired both; engines PR #232 recast their notes), vendored in NextGen under packages/engines.
 # CASES: IGBOGENE (a Niger Delta flow station and gas plant: its fired heaters, its flare, its vented methane and its purchased power, rolled into one inventory), ISIOKPO (a gas plant: one fired heater, a failed steam trap, its condensate system and four process streams), AGBOR (a gas processing and distribution complex: six abatement measures, a curve, a target, a path, one priced saving and the plant energy intensity). All three are invented records.
 # GWP: every global warming potential below is an INPUT the engine ships none of. The values are IPCC 100-year (GWP100) figures as tabulated in GHG Protocol, "IPCC Global Warming Potential Values", version 2.0, 7 August 2024, adapted from IPCC AR6 WG1 chapter 7 (section 7.6.1.1) and IPCC AR5 WG1 chapter 8. The course computes its inventories on the set "IPCC AR6 GWP100, fossil methane" (CH4 29.8, N2O 273) and prints the other three beside it.
 # RATES: every cost, saving, price, emission factor, flow, temperature and destruction efficiency below is INVENTED for this course and is not a published figure. The electricity factor and the fuel emission factor are SYNTHETIC.
@@ -155,7 +155,7 @@ Handed to atomBalanceLines, the refused flare becomes 1 line labelled "Flaring" 
 At 0.98 the methane line is 485.922 tCO2e of the flare's 2677.729 tCO2e, a share of 0.181468 (computed here from the engine's figures).
 Read as 100 percent, the same flare is 2236.537 tCO2e with no methane line: 441.191 tCO2e below the flare at 0.98 (computed here from the engine's figures).
 
-The engine's note on the escaped carbon, verbatim: "Carbon that escaped combustion is counted as methane, which is the usual and conservative assumption, and not as CO2. Use the fossil methane potential for it. Override it if you have measured otherwise."
+The engine's note on the escaped carbon, verbatim: "Carbon that escaped combustion is counted as methane, which is the usual and conservative assumption. Use the fossil methane potential for it. Override it if you have measured otherwise."
 
 HELD, FINDINGS-carbon H3: every carbon atom that escapes is counted as methane. That is the engine's stated and conservative assumption. A method that uses the gas's own methane content is a different method and is the owner's decision; this course teaches the assumption as the assumption it is and grades nothing that depends on changing it.
 This course teaches the flare as one line of an inventory. The flare as a resource (what the gas is worth, how to recover it) belongs to the sibling course Flare Gas to Value & LPG/CNG.
@@ -175,9 +175,9 @@ The engine ships no GWP. makeGwpSet takes a label and values from the caller. Th
 
 The engine's note on every set, verbatim: "Global warming potentials differ between IPCC assessment reports. An inventory on one report is not comparable with one on another, so the set is stated on every result."
 
-The engine's methane note on every set, verbatim: "AR6 gives methane two 100-year values: fossil (29.8) and non-fossil (27.0). This set holds one. The atom balance here counts carbon that escapes a burner or a flare as methane and NOT as CO2, so the oxidation CO2 is counted nowhere else and the fossil value is the consistent one for vented, fugitive and unburned fossil methane alike."
+The engine's methane note on every set, verbatim: "AR6 gives methane two 100-year values: fossil (29.8) and non-fossil (27.0). This set holds one. The atom balance here counts carbon that escapes a burner or a flare as methane, so the oxidation CO2 is counted nowhere else and the fossil value is the consistent one for vented, fugitive and unburned fossil methane alike."
 
-THE COURSE'S SET. Every inventory in this course is computed on "IPCC AR6 GWP100, fossil methane", because the engine counts escaped carbon as methane and not as CO2 (the methane note above). The other three sets are printed beside it in SECTION 8.
+THE COURSE'S SET. Every inventory in this course is computed on "IPCC AR6 GWP100, fossil methane", because the engine counts escaped carbon as methane (the methane note above). The other three sets are printed beside it in SECTION 8.
 
 HELD, FINDINGS-carbon H1: which assessment report an operator should file on. AR5 is what UNFCCC reporting has required and AR6 is what the GHG Protocol now recommends; which one a Nigerian operator files on is a regulatory reading, and a recommended default is the owner's decision. The course teaches both sets and grades no choice between them.
 
@@ -212,7 +212,7 @@ Every line above is activity x factor x GWP, in tCO2e (checked here line by line
 
 gwpSetLabel: IPCC AR6 GWP100, fossil methane. computed: true. reportable: true. blocked lines: 0. unsourced lines: 0.
 
-The engine's disclaimer, verbatim: "This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree."
+The engine's disclaimer, verbatim: "This is a quantitative inventory of tonnes. Obligations, evidence and deadlines belong in the compliance register, which keeps the one record of them; a second copy here would create two records that could disagree."
 
 Each line as a share of the total (computed here from the engine's figures):
 | line | share of the total |
@@ -445,7 +445,7 @@ Current 5.5 percent O2, target 2.8 percent, a minimum safe stack oxygen of 2 per
 | fuelSavingPercent | 1.6445 |
 | annualEnergySavedGJ | 6742.370 |
 
-The engine's method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. Subtracting the efficiency percentages divides by a hundred instead of by the target efficiency, and understates the saving."
+The engine's method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. The divisor is the target efficiency. Subtracting the efficiency percentages divides by a hundred and understates the saving."
 The percentage-point shortcut on the same figures (computed here from the engine's efficiencies; the engine does not return it): a saving fraction of 0.0144463600, which is 5923.008 GJ a year, 819.363 GJ below the engine's saving.
 On HHV the same tuning is a saving fraction of 0.0164763814 (fuelSavingPercent 1.6476), computed from the two HHV efficiencies of SECTION 13. The engine multiplies a saving fraction by the annual fuel it is given, and the basis of that fuel figure is the caller's to match.
 
@@ -487,7 +487,7 @@ The choked-flow note, verbatim: "Choked flow: the pressure ratio 0.1126 is at or
 | discharge coefficient blank | REFUSED: A discharge coefficient in (0, 1] is required and is not defaulted: it depends on the orifice and on how the trap failed. |
 | orifice blank | REFUSED: An orifice diameter, an upstream pressure and a steam density are required. |
 
-With the boiler efficiency blank the trap still loses 355.757 tonnes a year, and the fuel and carbon are none. fuelNote, verbatim: "Fuel needs a boiler efficiency in (0, 1]. It is not assumed to be 1." carbonNote, verbatim: "Carbon needs the steam energy content, the boiler efficiency and an emission factor. Without them it is absent rather than zero."
+With the boiler efficiency blank the trap still loses 355.757 tonnes a year, and the fuel and carbon are none. fuelNote, verbatim: "Fuel needs a boiler efficiency in (0, 1]. It is not assumed to be 1." carbonNote, verbatim: "Carbon needs the steam energy content, the boiler efficiency and an emission factor. Without them the carbon figure is left blank."
 Hours left out of the call take the stated default of 8760: 371.004 tonnes a year.
 
 As relations (computed here from the engine's figures): tonnes a year = kg an hour x hours / 1000 = 42.3520 x 8400 / 1000 = 355.757; annual fuel GJ = tonnes a year x MJ a tonne / 1000 / boiler efficiency = 355.757 x 2650 / 1000 / 0.83 = 1135.851; annual tCO2e = GJ x kg per GJ / 1000 = 63.721.
@@ -570,7 +570,7 @@ The problem table at 15 C. Hot streams are shifted down and cold streams up by h
 The cascade rule (checked here on every row): each interval's surplus is (CP hot less CP cold) times its width; the heat flow below an interval is the heat flow above it plus its surplus, starting from the hot utility, 25.950 kW, at the top; the heat flow out of the bottom is the cold utility, 240.150 kW.
 
 The heat flow is zero at shifted 110.500 C, inside the range: the pinch, 118.000 C on the hot side and 103.000 C on the cold side.
-The engine's note, verbatim: "Heat carried across the pinch costs twice: one unit more hot utility and one unit more cold utility. That is what makes the pinch the constraint rather than a curiosity."
+The engine's note, verbatim: "Heat carried across the pinch costs twice: one unit more hot utility and one unit more cold utility. That double cost is what makes the pinch the constraint on the design."
 
 The composite curves in real temperatures (compositeCurve; no oracle recomputes them, SECTION 26). Each point is a temperature and the enthalpy the side has given up or taken on from its coldest end:
 | hot composite C | enthalpy kW |
@@ -652,7 +652,7 @@ Engine functions behind this section: carbonAbatement.abatementCost, carbonAbate
 
 | the call | the engine says |
 | --- | --- |
-| abatement -500 t a year | REFUSED: Measure "Heat integration project" has a negative abatement. A measure that adds emissions is not an abatement, and its cost per tonne would change sign. |
+| abatement -500 t a year | REFUSED: Measure "Heat integration project" has a negative abatement. A measure that adds emissions has no place on an abatement curve, and its cost per tonne would change sign. |
 | abatement blank | REFUSED: Measure "Heat integration project" needs an annual abatement. |
 | capital cost blank | REFUSED: Measure "Heat integration project" has no capital cost. Enter 0 if it needs none: a blank is not read as free. |
 | discount rate blank | REFUSED: Measure "Heat integration project" has a capital cost, so it needs a discount rate. A blank is not read as 0, which would annualise straight-line and move the measure down the curve. |
@@ -702,7 +702,7 @@ Measures that act on the same source interact:
 | --- | --- |
 | heaters | Tune the fired heaters; Heat integration project |
 
-The interaction note, verbatim: "Measures listed here act on the same source, so their abatements are NOT additive and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, which is why it is surfaced rather than solved."
+The interaction note, verbatim: "Measures listed here act on the same source, so their abatements overlap and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, so the overlap is flagged here and the sequencing is left to that judgement."
 
 # SECTION 21: SOURCES, INTERACTIONS AND OVER-CLAIMS (owned by Expert m03)
 
@@ -780,7 +780,7 @@ The Agbor baseline is the inventory total, 56100.276 tCO2e. The target falls in 
 
 In every row (checked here): emissions are the baseline less the tonnes abated, and the unabated gap is emissions less the target where that is positive, else 0.000.
 firstShortfallYear: 2027. finalGapTonnes: 1370.083.
-The gap note, verbatim: "The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan."
+The gap note, verbatim: "The gap is reported as unabated with no measure identified. A wedge is drawn only for an identified measure, because a plan needs a named measure behind every wedge."
 
 ON A PARTIAL INVENTORY. With the electricity factor blank, the inventory totals 45112.276 tCO2e and is reportable false (1 line(s) could not be computed). A target and a path built on that total:
 | baseline | target in the end year t | finalGapTonnes | firstShortfallYear |
@@ -802,7 +802,7 @@ That gap less the scheduled plan's 1370.083 is 1850.000 t (computed here), the v
 | 2032 | 13610.000 | 42490.276 | 41674.491 | 815.785 |
 | 2033 | 13610.000 | 42490.276 | 39270.193 | 3220.083 |
 The same six measures against a baseline of 12000 t (a probe, invented): REFUSED: In 2030 the scheduled measures abate 13610 t against a baseline of 12000 t. Emissions cannot fall below zero, so check the measures for double counting or a source outside the baseline. overAbatedYear 2030.
-REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero.
+REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing leaves the baseline unknown.
 REFUSED: A baseline and a valid year range are required.
 
 # SECTION 23: ONE SAVING IN MONEY AND IN CARBON (owned by Expert m05)
@@ -826,7 +826,7 @@ The cost per tonne is carbonAbatement.abatementCost called with the implementati
 | the call | what comes back |
 | --- | --- |
 | no life and no rate | costPerTonneCo2e none; costPerTonneNote "A cost per tonne needs the measure life and a discount rate, to annualise the implementation cost against a yearly saving." |
-| no emission factor | annualTonnesCo2e none; carbonNote "No emission factor supplied, so the carbon figure is absent rather than zero." |
+| no emission factor | annualTonnesCo2e none; carbonNote "No emission factor supplied, so the carbon figure is left blank." |
 | no basis declared | basisNote "No heating value basis declared. The saving, the fuel price and the emission factor must all be on the same one (IPCC default factors are on net calorific value, which is LHV)." |
 | saving on LHV, factor on HHV | REFUSED: The energy saving is on LHV, the emission factor is on HHV. A gigajoule on one heating value basis is a different amount of fuel on the other, so they cannot be multiplied together. |
 | saving blank | REFUSED: An energy saving is required. |
@@ -850,7 +850,7 @@ Agbor's energy (invented): Fuel gas 740000 GJ, Purchased power 96000 GJ, Importe
 
 The intensity is total GJ x 1000 over the throughput in tonnes: 877000.000 x 1000 / 1240000 = 707.2581 MJ a tonne; versus peer is the intensity over the peer, 1.040085; the gap is the intensity less the peer, 27.2581 MJ a tonne (each computed here and equal to the engine's figure).
 peerNote with a stream missing, verbatim: "Not compared with the peer: a stream is missing, so the intensity is a floor and would flatter the plant."
-The disclaimer, verbatim: "This is the plant's own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use."
+The disclaimer, verbatim: "This is the plant's own energy per tonne of throughput. It is independent of the Solomon Energy Intensity Index, a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use."
 REFUSED: A throughput is required.
 
 # SECTION 25: WHAT IS HELD, AND THE MD5-0 AND MD45-1 RULES IN FORCE (owned by Associate m06 and Expert m06)

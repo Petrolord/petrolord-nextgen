@@ -42,7 +42,7 @@ q(2, "The IBAFO lane reports 224.64 diesel litres a trip. What does it print for
  ["0, since a missing factor is read as a zero emission.",
   "A figure from the synthetic 850 kg CO2e a tonne factor.",
   "A refusal, with the lane left uncosted until a factor is typed."],
- "The engine ships no factor, so the diesel volume is computed and its emissions wait for a factor with a source. In the engine's words the carbon figure \"is absent rather than zero\". The rest of the lane still prints complete true.")
+ "The engine ships no factor, so the diesel volume is computed and its emissions wait for a factor with a source. In the engine's words the carbon figure \"is left blank\". The rest of the lane still prints complete true.")
 
 q(3, "The IBAFO lane is run with the invented driver cost box left blank. What does the engine print?",
  "complete false, missing Driver, 13.3075 naira a litre delivered.",

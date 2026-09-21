@@ -28,7 +28,7 @@ None of those is in the engine's result. They are here so you recognise them whe
 
 ## Stability: the index and the rule of thumb
 
-With every SARA supplied, the export blend screens unstable on the CII, at 0.9163, with stable false. With the SARA taken away, the gravity screen gives no verdict: the API contrast is 10.9000, the rule of thumb did not raise its flag, and the engine says that this is not evidence that the blend is stable.
+With every SARA supplied, the export blend screens unstable on the CII, at 0.9163, with stable false. With the SARA taken away, the gravity screen gives no verdict: the API contrast is 10.9000, the rule of thumb did not raise its flag, and the engine says that this alone says nothing about whether the blend is stable.
 
 The two answers are the clearest lesson in the tier. A screen that turned an absent flag into a clearance would have shipped a blend its own index calls unstable. The engine's CII route and its fallback agree with each other in the only way they can: the fallback declines to decide, and the index decides.
 

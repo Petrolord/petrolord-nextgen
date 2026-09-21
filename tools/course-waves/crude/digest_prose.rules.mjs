@@ -108,7 +108,7 @@ export default {
     { frag: 'spot test to ASTM D7112 or D7157 before commingling.', src: 'engines/downstream/crudeAssay.js' },
     { frag: 'Do not commingle without a lab test.', src: 'engines/downstream/crudeAssay.js' },
     { frag: 'this is the combination that classically drops asphaltenes.', src: 'engines/downstream/crudeAssay.js' },
-    { frag: 'which is not evidence that the blend is stable. Supply SARA for a real index.', src: 'engines/downstream/crudeAssay.js' },
+    { frag: 'and that alone says nothing about whether the blend is stable. Supply SARA for a real index.', src: 'engines/downstream/crudeAssay.js' },
     { frag: 'No SARA analysis and not every crude has a gravity, so no stability screen was made.', src: 'engines/downstream/crudeAssay.js' },
     { frag: 'Losses must be between 0 and 100 percent.', src: 'engines/downstream/crudeAssay.js' },
     { frag: 'D86 to TBP conversion needs the API Technical Data Book Procedure 3A1.1 coefficient table', src: 'engines/downstream/crudeAssay.js' },

@@ -219,11 +219,11 @@ q(2, "Ebocha's curve is asked for the temperature where 2 percent has come over.
  "Ebocha's first point is 4 at 110, and its curve does not start at 0 percent, so below 4 percent the temperature is unknown. At 4 percent it returns 110.0000 F.")
 
 q(2, "When the gravity rule does not flag the export blend, what does the engine's message say about the result?",
- "That the spread is not the classic combination, which is no evidence the blend is stable.",
+ "That the spread falls outside the classic combination, and that alone says nothing of stability.",
  ["That the blend screens stable on gravity contrast, pending a SARA analysis.",
   "That the blend is uncertain and needs a spot test to ASTM D7112 or D7157.",
   "That no stability screen was made because not every crude has a gravity."],
- "The message reads, in part: The gravity spread is not the classic heavy-plus-light-paraffinic combination, which is not evidence that the blend is stable. Supply SARA for a real index."),
+ "The message reads, in part: The gravity spread falls outside the classic heavy-plus-light-paraffinic combination, and that alone says nothing about whether the blend is stable. Supply SARA for a real index."),
 
 q(0, "Which basis does the export blend's screen carry when its SARA is removed?",
  "api-contrast, with a contrast of 10.9000.",
