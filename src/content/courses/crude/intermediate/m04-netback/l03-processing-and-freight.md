@@ -22,13 +22,13 @@ The netback, 64.9473 $/bbl of crude, is what a barrel of the Kwale blend is wort
 
 ## Processing cost
 
-Processing cost is what it costs the refinery to run one barrel of crude through its units. It is per barrel of crude charged, because a refinery pays to process the whole barrel, including the part that ends up lost. That is why it is subtracted after the loss and is not itself scaled by the loss.
+Processing cost is an input per barrel of crude, 6.8000 $/bbl of crude for the Kwale blend. In the formula it is subtracted after the loss factor, so the loss does not scale it.
 
-This course takes processing cost as one number the refinery supplies. How a refinery builds that number, from its units, its utilities and its throughput, is refinery planning, which is taught in the `refinery` course. Here it is an input, invented like every price in the digest, and the lesson is only where it sits in the chain.
+This course takes processing cost as one number the refinery supplies. How a refinery builds that number is taught in the `refinery` course. Here it is an input, invented like every price in the digest, and the lesson is only where it sits in the chain.
 
 ## Freight
 
-Freight is the cost of bringing a barrel of crude from where it is bought to the refinery. It is also per barrel of crude. The digest's heading for this module names what a netback is: what a barrel of crude is worth at the refinery. Freight comes off in the formula as a figure per barrel, after the losses.
+Freight is the other cost input, and it is also per barrel of crude. The digest's heading for this module names what a netback is: what a barrel of crude is worth at the refinery. Freight comes off in the formula as a figure per barrel, after the losses.
 
 What freight is made of, and the terminal side of moving a cargo, belongs to the `supply` course. Here, as with processing, freight is one figure per barrel of crude.
 
