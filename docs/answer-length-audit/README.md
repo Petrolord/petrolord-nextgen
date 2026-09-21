@@ -105,7 +105,9 @@ claim intact; the validator warns if a cut drops words the explanation relies
 on (none remain). Six courses (fluid, petrophysics, seismolord,
 wellcorrelation, welldata, welltest) needed no shortening at all.
 
-## Pre-existing question defects found while editing (NOT fixed here)
+## Pre-existing question defects found while editing
+
+FIXED in the follow-on (see "Follow-on" below and `FIXES.md`); this list is kept as the record of what was flagged.
 Reported by the editors; each needs an owner or author decision because the
 fix would touch a prompt, a correct option or an explanation.
 
@@ -148,3 +150,146 @@ fix would touch a prompt, a correct option or an explanation.
   raises and rolls back. Re-running writes nothing.
 * Owner apply: `/root/b4-apply/apply.sh` (README alongside): verify, scratch
   dryrun, prod-status, apply --prod.
+
+## Follow-on: question fixes (owner instructions 2026-09-21)
+
+After B4 was applied, the owner asked for every flagged item above to be
+resolved, plus near-duplicates, the seismolord beginner correct options, tier
+parity and anything else the editors had noted. Each item was checked against
+its explanation, the course's lessons and, where a number or mechanism was at
+stake, the engine. Each item now has one verdict and a one-line reason.
+`FIXES.md` lists every item with its old and new text.
+
+| Course | Fixed | Judged fine | Owner decision |
+|---|---|---|---|
+| cashflow | 1 | 0 | 0 |
+| casingtubing | 11 | 0 | 0 |
+| cementing | 16 | 0 | 0 |
+| completion | 5 | 0 | 0 |
+| corrosion | 2 | 0 | 0 |
+| dca | 1 | 0 | 0 |
+| decision | 1 | 0 | 0 |
+| earthmodel | 1 | 0 | 0 |
+| fdp | 1 | 0 | 0 |
+| fluid | 42 | 0 | 0 |
+| gasprocessing | 1 | 0 | 0 |
+| gaswell | 1 | 0 | 0 |
+| geomech | 8 | 4 | 0 |
+| heattransfer | 1 | 0 | 0 |
+| hydraulics | 8 | 3 | 0 |
+| integrity | 2 | 0 | 0 |
+| mapping | 1 | 0 | 0 |
+| mbal | 0 | 1 | 0 |
+| perfsand | 3 | 0 | 0 |
+| petrophysics | 17 | 5 | 0 |
+| porepressure | 1 | 0 | 0 |
+| qra | 1 | 0 | 0 |
+| reservoircalc | 34 | 0 | 0 |
+| rockphysics | 72 | 8 | 0 |
+| rotating | 1 | 0 | 0 |
+| scal | 2 | 0 | 0 |
+| seismolord | 63 | 2 | 0 |
+| sim | 35 | 0 | 0 |
+| stimulation | 7 | 0 | 0 |
+| torquedrag | 11 | 4 | 0 |
+| uncertainty | 1 | 0 | 0 |
+| waterflood | 1 | 1 | 0 |
+| wellcontrol | 5 | 0 | 0 |
+| wellcorrelation | 27 | 21 | 0 |
+| wellcost | 3 | 0 | 0 |
+| welldata | 5 | 3 | 0 |
+| welltest | 1 | 0 | 0 |
+| **total (37 courses)** | **393** | **52** | **0** |
+
+By category (fixed / judged fine / owner decision):
+
+| Category | Result |
+|---|---|
+| the four owner-named defects | 4 / 0 / 0 |
+| further defects found while fixing (reservoircalc tolerance, torquedrag sliding torque) | 2 / 1 / 0 |
+| arguably-correct distractors (the README list plus ones found on the way) | 52 / 0 / 0 |
+| near-duplicates | 258 / 43 / 0 |
+| seismolord beginner tightening | 61 / 0 / 0 |
+| bare-number and file-name options (review only) | 0 / 6 / 0 |
+| tier parity (petrophysics beginner final 40 to 42) | 2 inserts |
+| other editor notes | 14 / 2 / 0 |
+
+### The four named defects
+* stimulation advanced m02-from-slurry-to-pack ord 14: the key said halving the
+  damage factor halves the pseudo-skin. The engine (`fracDesign.js`
+  fracProductivity, Cinco-Ley and Samaniego) passes the dimensionless
+  conductivity through a logarithmic correlation. On the published case the
+  pseudo-skin moves from -5.31 to about -4.77, so it rises toward zero and
+  does not halve. The key and explanation are corrected, and so is the lesson
+  (m02 l05), which made the same claim. answer_index is unchanged.
+* wellcontrol advanced m02-kick-tolerance ord 7: the explanation now gives the
+  lesson's mechanism for why the shut-in case binds on the slant well. The key
+  is unchanged.
+* perfsand beginner m01 ord 12: the prompt now asks which condition the engine
+  refuses outright, which is what its options and explanation were about. The
+  key is unchanged.
+* hydraulics beginner m06 ord 13: the explanation no longer points at "the
+  first" option by stored order. The key is unchanged.
+
+### Where the correct option or prompt changed
+The correct option or the prompt changed in these cases, and each item
+carries its reason:
+* the stimulation key above;
+* every rewritten duplicate, since each is a new question at the same
+  answer_index and the same length rank;
+* the 58 tightened seismolord beginner correct options, under the owner's
+  authority for that bank only;
+* prompt sharpenings where that was the honest single-answer fix: completion
+  advanced final 35 and beginner final 29, geomech beginner final 41 and
+  beginner m06 9, integrity advanced final 42, sim beginner and intermediate
+  m06 4, and torquedrag beginner final 34.
+
+No answer_index moved anywhere.
+
+### Lessons corrected alongside
+Lesson copy ships in the NextGen bundle, so these three need an upload:
+* stimulation advanced m02 l05: the lesson said halving the damage factor
+  halves the pseudo-skin, the same error as the key.
+* reservoircalc intermediate m03 l05: the lesson said "the gap has widened
+  from twelve points to ten".
+* wellcorrelation beginner m06 l03: the lesson said four answers are graded to
+  0.01 m where the capstone grades five.
+
+### Tier parity
+The petrophysics beginner final held 40 questions and every other final holds
+42. Ords 41 and 42 are added, written from the beginner lessons and kept in
+band. All 18 petrophysics module banks already held 15 questions each.
+`academy_serve_quiz` draws 25 questions at random from the active pool and
+grades against the attempt's stored question_ids, so a larger pool changes
+nothing else. Nothing in the repo hard-codes 40.
+
+### Attempts
+Attempts store `question_ids`, and a submitted attempt keeps the score it was
+graded with. An OPEN attempt is graded at submit against the row as it stands
+then. So a learner midway through a quiz that holds a rewritten question would
+answer the old text and be graded against the new key. No answer_index moved,
+so this only matters for rewritten questions. The scratch mirror holds no
+learner data, so it cannot count them. `apply.sh attempts` runs a read-only
+count on production; run it before applying.
+
+### Owner decisions raised (not fixed here)
+* **Finals that restate module questions.** The duplicate heuristic caught the
+  closest pairs. The editors found that in several courses (sim, fluid,
+  rockphysics, reservoircalc, geomech, wellcorrelation, corrosion) most final
+  questions restate a module question in new words. They fixed the ones listed
+  and any clear same-concept, same-answer copy they met; in rockphysics and
+  wellcorrelation that became a sweep. Whether finals should be module
+  reprises at all is a curriculum decision. A full rewrite of every final is a
+  programme of its own.
+* completion beginner m02 l02 says casing drift mandrels are "twelve inches
+  long for most sizes". API 5CT uses 6 in below 9-5/8 in and 12 in from
+  9-5/8 in up. Check this against the spec before editing the lesson. The
+  question no longer depends on it.
+* seismolord beginner lessons print 3603.96 and 8189.64 where the unrounded
+  values give 3603.95 and 8189.63. The questions mix both, and every key is
+  still unambiguous.
+* heattransfer capstone lesson: the "two routes usually disagree" wording
+  could be sharpened.
+* earthmodel intermediate m02 ord 13 option 3: its arithmetic does not match
+  its own description. It is still wrong, and the correct figure is not
+  printed in the lessons.

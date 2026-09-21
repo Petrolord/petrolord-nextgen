@@ -1,0 +1,86 @@
+{
+ "migration": "20261021b_b4_fix_corrosion.sql",
+ "title": "corrosion: duplicate question rewritten into a new question",
+ "items": [
+  {
+   "app_slug": "corrosion",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "duplicate of advanced final 7 (near p0.71 k1.00): both ask which set is made up entirely of range guards, same key",
+   "verdict": "fixed",
+   "reason": "True duplicate across the two finals and of the beginner m02 range-guard question; kept the advanced final and rewrote this copy to test the m02 lesson point on the mole percent box.",
+   "changes": {
+    "prompt": {
+     "old": "Which set is made up entirely of range guards this module enforces on what a caller types, rather than published validity bands it holds?",
+     "new": "A partial pressure on the screen looks about a hundred times too large. What does the course tell a reader to check before anything else, and why there?"
+    },
+    "explanation": {
+     "old": "Every published validity band of every correlation is held, so a screening well outside one still returns a number and says nothing about it.",
+     "new": "Carbon dioxide typed as 3 mol% is a mole fraction of 0.030000, and the conversion is a division by a hundred. A partial pressure is the total pressure times that fraction with no correlation constant in it, so a factor lost at the box shows straight through to the screen."
+    },
+    "options": {
+     "0": {
+      "old": "The published validity band of each correlation, the fugacity cap, the pH reference and the film stripping threshold.",
+      "new": "The fugacity coefficient, because it falls with pressure and is the one step between a mole fraction and the partial pressure."
+     },
+     "1": {
+      "old": "Nought to one on every fraction, the fugacity pressure cap, the pH reference and a positive velocity on the transport term.",
+      "new": "The total pressure box, since the engine reads psia there and a figure typed in bar inflates every partial pressure."
+     },
+     "2": {
+      "old": "Nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial pressure sum against the total.",
+      "new": "The mole percent box, because the studio takes mol% and the division by a hundred to a mole fraction is the commonest place to lose a factor of ten."
+     },
+     "3": {
+      "old": "A temperature above absolute zero, a positive total pressure, and the published validity band of the transport term on velocity and line size.",
+      "new": "The hydrogen sulphide flag, since an uncorrected partial pressure reads high against a fugacity at any line pressure the engine is handed and never says so."
+     }
+    }
+   },
+   "correct_change_reason": "True duplicate rewritten into a new question on a different point, so the key is new text for the new question."
+  },
+  {
+   "app_slug": "corrosion",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-what-the-module-does-not-have",
+   "ord": 13,
+   "category": "duplicate",
+   "flag": "duplicate of intermediate module m05-the-allowance 9 (near p0.73 k0.80): both ask which course owns the calculation that says what the allowance is taken off, key Pipeline Network Associate / Barlow",
+   "verdict": "fixed",
+   "reason": "True duplicate across tiers; kept the intermediate m05 question and rewrote this copy to test the m02 vocabulary rule on the word erosion.",
+   "changes": {
+    "prompt": {
+     "old": "This module cannot say what the corrosion allowance is being taken off. Which course owns the calculation that would say?",
+     "new": "This course never writes the bare word erosion when it means wall loss. What does it write instead, and why?"
+    },
+    "explanation": {
+     "old": "This module has no minimum thickness, so it cannot say what the allowance is taken off. Wall loss to a derated burst pressure is a separate owner again, and this module consumes an allowance and never computes a pressure, so that comparison is a pivot rather than a derivation. This engine has no erosional-velocity criterion of its own either.",
+     "new": "In the Basin Modelling course erosion is material removed from a sedimentary column over geological time, and nothing in that is about steel. This module models no mechanical erosion and has no erosional-velocity criterion, and every use of the term carries that statement. Film stripping is a chemistry verdict about a film."
+    },
+    "options": {
+     "0": {
+      "old": "The Pipeline Network course at its Associate tier, which owns the Barlow thin-wall relation with a design factor.",
+      "new": "Mechanical erosion or erosional wall loss, because in the Basin Modelling course erosion is a geological process."
+     },
+     "1": {
+      "old": "The Torque and Drag course at its Expert tier, which owns wall loss taken to a derated burst pressure and therefore owns the wall the allowance sits on.",
+      "new": "Erosion corrosion, because the Casing and Tubing Design course owns the erosional velocity criterion and keeps the bare word for its own limit."
+     },
+     "2": {
+      "old": "The Well Integrity and Plug and Abandonment course, which owns the barrier envelope the allowance is measured inside on any line in service.",
+      "new": "Film stripping, because above the 100 Pa threshold the wall shear strips the inhibitor film, and that is the only erosion this module models."
+     },
+     "3": {
+      "old": "The Casing and Tubing Design course at its Expert tier, which owns the erosional velocity criterion and the wall thickness that criterion is applied to.",
+      "new": "Erosional velocity, because the one quantity the word could name in this studio is a velocity limit, and naming the limit avoids implying a wall loss."
+     }
+    }
+   },
+   "correct_change_reason": "True duplicate rewritten into a new question on a different point, so the key is new text for the new question."
+  }
+ ]
+}

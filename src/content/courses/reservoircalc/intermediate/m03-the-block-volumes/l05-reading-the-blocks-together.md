@@ -48,7 +48,7 @@ Set the fault to 2000 m. The cells split 142 west and 27 east; the barrels split
 
 Sum check: 169 cells, 12.139208 MMstb. Good.
 
-Shares: the west holds 84.0 percent of the cells and 94.3 percent of the barrels. The gap has widened from twelve points to ten, and the east block is now a marginal sliver.
+Shares: the west holds 84.0 percent of the cells and 94.3 percent of the barrels. The barrel share runs about ten points ahead of the cell share, and the east block is now a marginal sliver.
 
 Mean columns: the west block's mean has fallen slightly, because it has absorbed thin flank cells, while the east block's mean has fallen sharply, because the cells it kept are the thinnest in the field.
 

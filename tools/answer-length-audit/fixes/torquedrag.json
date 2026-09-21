@@ -1,0 +1,385 @@
+{
+ "migration": "20261021b_b4_fix_torquedrag.sql",
+ "title": "torquedrag: six double-keyed distractors rewritten, two duplicate final questions replaced",
+ "items": [
+  {
+   "app_slug": "torquedrag",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "category": "double-key",
+   "flag": "explanation says options 2 and 3 also make it optimistic",
+   "verdict": "fixed",
+   "reason": "A factor fitted on the vertical section and a sparse survey both genuinely understate lateral loads, as the old explanation admitted; they now name a factor fitted on the lateral itself (already carries its cuttings) and rotation while tripping (lowers real drag), both wrong but tempting.",
+   "changes": {
+    "explanation": {
+     "old": "A friction factor fitted elsewhere and a survey with too few stations would also make it optimistic, and the buckling one is the only one the model itself flags.",
+     "new": "A buckled string presses on the wall harder than soft string assumes, and the model flags it. A factor fitted on the same lateral already carries that lateral's cuttings, rotating while tripping lowers the real drag, and a finer step only moves the answer toward its converged value."
+    },
+    "options": {
+     "2": {
+      "old": "A friction factor fitted on the vertical section, missing lateral cuttings.",
+      "new": "A friction factor fitted on the same lateral, which absorbs its cuttings."
+     },
+     "3": {
+      "old": "A survey with too few stations, understating curvature and side force.",
+      "new": "Rotating while tripping, which moves part of the friction out of the drag."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 10,
+   "category": "double-key",
+   "flag": "explanation opens \"All three are true\"; option 1 true per other questions",
+   "verdict": "fixed",
+   "reason": "All three distractors were true statements from the tier (no drag on a vertical well, step matters in compression, pick up always largest); each now states the tier's point wrongly in a tempting way.",
+   "changes": {
+    "explanation": {
+     "old": "All three are true. The first is the one that changes how you read every report the model produces.",
+     "new": "Every number in this tier is a geometry you can check times a friction factor somebody chose, and that constant is the subject of the next tier. The vertical well has no drag at any friction factor, the step matters where the string is in compression, and pick up is always the largest of the three hookloads."
+    },
+    "options": {
+     "1": {
+      "old": "That the vertical well has no drag, whatever friction factor the model is set to use.",
+      "new": "That the vertical well's drag grows with the friction factor, just as every other well's does."
+     },
+     "2": {
+      "old": "That the step size matters most where the string is in compression, which is where the model is least reliable anyway.",
+      "new": "That the step size matters most where the string is in tension, which is where the friction accumulates fastest."
+     },
+     "3": {
+      "old": "That pick up is always larger than slack off, which is the ordering the sign of the axial friction produces.",
+      "new": "That rotating off bottom always gives the largest of the three hookloads, since rotation adds friction."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "category": "double-key",
+   "flag": "explanation says heavier mud \"does help\", undercuts option 2",
+   "verdict": "fixed",
+   "reason": "A heavier mud does lower the buoyed weight and so the side force, which the explanation conceded; the distractor now proposes a lighter mud with the buoyancy mechanism misapplied (a higher buoyancy factor makes the string heavier).",
+   "changes": {
+    "explanation": {
+     "old": "A heavier mud reduces the buoyed weight and therefore the side force, so it does help, and it also raises the equivalent circulating density.",
+     "new": "Torque is friction acting at the contact radius, so the levers are the friction factor, through mud or torque reduction subs, the pipe's contact radius, and a rotary steerable in place of sliding. A lighter mud raises the buoyancy factor, which makes the buoyed string heavier and raises the side force, and the step is a numerical setting that changes no physical load."
+    },
+    "options": {
+     "2": {
+      "old": "A heavier mud, which raises the buoyancy factor and lightens the string.",
+      "new": "A lighter mud, which raises the buoyancy factor and so lightens the string."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "double-key",
+   "flag": "explanation calls refitting \"a real consequence\"; option 3 arguably correct",
+   "verdict": "fixed",
+   "reason": "Refitting a factor that was fitted at the coarse step is a legitimate consequence; the distractor now proposes tuning the friction factor to make the coarse run reproduce the finer answer, which hides a numerical error inside the factor.",
+   "changes": {
+    "explanation": {
+     "old": "The refitting point is a real consequence if a calibration was done at the coarse step, and it follows from the first.",
+     "new": "A kilonewton of movement under refinement is discretisation, so the default step is too coarse for that case and should be refined until the answer stops moving. Tuning the friction factor to cover it would make the factor absorb a numerical error, and the oracle is converging too."
+    },
+    "options": {
+     "3": {
+      "old": "The friction factor should be refitted at the finer step, as the fit used a coarse run.",
+      "new": "The friction factor should be tuned until the 10 m run matches the finer answer."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-casing-wear",
+   "ord": 14,
+   "category": "double-key",
+   "flag": "options 1 and 2 nearly the same field calibration",
+   "verdict": "fixed",
+   "reason": "Backing a wear factor out of an offset caliper log is taught in m04 l04 and keyed correct in advanced final 19, so both caliper options were defensible; they now name a friction-factor scaling and a derivation from the T&D run itself, neither of which yields the constant.",
+   "changes": {
+    "explanation": {
+     "old": "Fitting to a caliper log is a real and better option when one exists, and it is the field-calibrated version of the same number.",
+     "new": "The wear factor is measured by running a joint against a casing sample in a laboratory rig and measuring the volume removed. It is a separate constant from the friction factor, and the side force and sliding distance are what it multiplies. A caliper log can later calibrate it, which is a second step on top of the laboratory number."
+    },
+    "options": {
+     "1": {
+      "old": "By fitting it to a caliper log.",
+      "new": "By scaling the friction factor."
+     },
+     "2": {
+      "old": "By back-analysis of wells with a caliper log, the way friction factors are obtained.",
+      "new": "From the torque and drag run itself, as side force times the sliding distance."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-torque",
+   "ord": 15,
+   "category": "double-key",
+   "flag": "explanation says downhole measurement is \"genuinely better\"",
+   "verdict": "fixed",
+   "reason": "A near-bit downhole torque tool does separate the two where it exists, so option 2 was defensible; it now proposes comparing two on-bottom readings at different weights on bit, which fails because weight on bit changes the side force and so the friction torque (m02 l04).",
+   "changes": {
+    "explanation": {
+     "old": "A downhole measurement is genuinely better where it exists. The pick-up-and-read comparison is what a driller can do on every connection.",
+     "new": "An off-bottom reading and an on-bottom reading at the same depth minutes apart is what a driller can take on every connection. Going on bottom changes the side force as well as adding the bit torque, so the two are coupled, and the engine takes the bit torque as an input rather than computing it."
+    },
+    "options": {
+     "2": {
+      "old": "Measure the torque with a downhole tool near the bit, which is the only method that separates the two directly.",
+      "new": "Compare two on-bottom readings at different weights on bit, as friction torque does not depend on it."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m02-torque ord 9 (friction share of surface torque)",
+   "verdict": "fixed",
+   "reason": "Same question and answer as the Professional module question, kept there; the beginner final copy now tests a point of beginner m02 l04 no question covered: why piston, ballooning and thermal effects can be left out of a drill string.",
+   "changes": {
+    "prompt": {
+     "old": "How much of a deviated well's surface torque is friction rather than bit torque?",
+     "new": "Why can the model leave out piston forces, ballooning and thermal length change on a drill string?"
+    },
+    "explanation": {
+     "old": "That high friction share is why torque is a better hole-condition indicator than hookload on a long well.",
+     "new": "Pressure inside and outside the string produces piston forces and ballooning, and temperature changes its length. For a drill string both are second order, so one mud density and a single buoyancy factor serve; for a completion string they are first order, which is why completion analysis uses a different model."
+    },
+    "options": {
+     "0": {
+      "old": "About half.",
+      "new": "They cancel along the string."
+     },
+     "1": {
+      "old": "Around 80 to 90 percent on the wells in this course.",
+      "new": "Because for a drill string they are second order effects."
+     },
+     "2": {
+      "old": "Nearly all of it, since bit torque is applied at the bit and is attenuated to nothing by the time it reaches surface.",
+      "new": "Because the buoyancy factor already includes them, as it is computed from the pressure of the mud on the string."
+     },
+     "3": {
+      "old": "It depends on the rate of penetration, which sets the bit torque, and cannot be stated without knowing it.",
+      "new": "Because the midpoint predictor corrects each interval for pressure and temperature as the recursion marches up."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index stays 1."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-torque",
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner final ord 15",
+   "verdict": "judged fine",
+   "reason": "Kept as the module question; the beginner final copy was rewritten to a different point."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 27,
+   "category": "duplicate",
+   "flag": "same key as intermediate module m05-against-the-oracle ord 12 (what the vertical case does not settle); prompt also dangles on \"that case\"",
+   "verdict": "fixed",
+   "reason": "Same concept and identical key as the Professional module question, kept there; the advanced final copy now asks, self-contained, what makes the weight integral the plausible source of the small residual (advanced m05 l04), a point no question tested.",
+   "changes": {
+    "prompt": {
+     "old": "What does that case NOT settle?",
+     "new": "What makes it plausible that the small residual between the engine and its oracle comes from the weight integral?"
+    },
+    "explanation": {
+     "old": "It exercises the weight integral, the buoyancy factor, the composition lookup and the grid, and none of the friction machinery.",
+     "new": "The residual settles at a few tens of newtons on every well, including the least deviated, and the oracle is 42.6 N off the vertical well's closed form, which has no friction in it. That points at the weight integral. It is plausible and not proved, because the vertical well never exercises the friction terms."
+    },
+    "options": {
+     "0": {
+      "old": "Whether the buoyancy factor is right.",
+      "new": "It halves each time the step is halved."
+     },
+     "1": {
+      "old": "Whether the engine is right on the friction, curvature and direction-cosine terms.",
+      "new": "The residual appears on every well, including the least deviated of them."
+     },
+     "2": {
+      "old": "Whether the string composition lookup is right, as all three occur.",
+      "new": "It is largest on the horizontal well, where friction is highest."
+     },
+     "3": {
+      "old": "Whether the integration grid is right, since the recursion walks it all.",
+      "new": "It vanishes on the vertical well, which has no friction terms."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index stays 1."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-against-the-oracle",
+   "ord": 12,
+   "category": "duplicate",
+   "flag": "same key as advanced final ord 27",
+   "verdict": "judged fine",
+   "reason": "Kept as the module question; the advanced final copy was rewritten to a different point."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "category": "duplicate",
+   "flag": "lead review: intermediate final 33 duplicates intermediate module m02-torque ord 10 (why going on bottom adds less than the bit torque)",
+   "verdict": "fixed",
+   "reason": "Same concept and answer as the module question, kept there; the final copy now asks for the catch in using surface torque as the hole-condition signal (intermediate m02 l03), a point no question tested.",
+   "changes": {
+    "prompt": {
+     "old": "Going on bottom raises the torque by less than the bit torque on three of five wells. Why?",
+     "new": "Torque is the better hole-condition signal on a long well. What is the catch?"
+    },
+    "explanation": {
+     "old": "On the horizontal well the effect reverses and the torque rises by more, because a buckling string presses outward.",
+     "new": "The better signal comes through a worse instrument. Top drive torque is noisy, affected by the drive's own losses and swings hard in stick-slip, so both readings are watched and a downhole measurement near the bit is better than either. The friction share grows with the lateral, and the tool joint radius carries the moment."
+    },
+    "options": {
+     "0": {
+      "old": "The bit torque is partly absorbed by the mud motor before it reaches the drill string above.",
+      "new": "Its friction share falls as the lateral lengthens, so the signal weakens on exactly the wells where it matters."
+     },
+     "1": {
+      "old": "The rotary speed falls when weight is applied, which changes the tangential share of the friction.",
+      "new": "It needs a friction factor fitted to torque, because a factor fitted to a hookload cannot be used to predict it."
+     },
+     "2": {
+      "old": "The engine applies the bit torque as a boundary condition rather than adding it to the surface value.",
+      "new": "It is set by the pipe body radius, which wear changes, so the same friction reads differently over time."
+     },
+     "3": {
+      "old": "The compression it adds reduces the side force in the curved sections near the bit.",
+      "new": "It comes through the top drive, a noisy instrument with its own losses that swings in stick-slip."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index is unchanged."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-torque",
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "lead review: duplicate of intermediate final 33",
+   "verdict": "judged fine",
+   "reason": "Kept as the module question; the final copy was rewritten to a different point."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "lead review: intermediate module m06 ord 15 duplicates intermediate module m02-torque ord 9 (friction share of surface torque)",
+   "verdict": "fixed",
+   "reason": "Same fact as the teaching module question, kept there; the summary-module copy now asks for the units of the capstone side force and why they matter (intermediate m06 l02 traps), a point no question tested.",
+   "changes": {
+    "prompt": {
+     "old": "What is the friction share of surface torque on a deviated well, and why does it matter?",
+     "new": "The capstone asks for a maximum side force. What units does the engine report it in, and why does that matter?"
+    },
+    "explanation": {
+     "old": "The signal comes through a noisier instrument, which is why both are watched and a downhole measurement beats either.",
+     "new": "The engine reports side force as force per unit length of string, so the capstone field is in N/m. A total force over an interval would be a much bigger number, and the maximum is a summary of the whole profile rather than the value at one depth."
+    },
+    "options": {
+     "0": {
+      "old": "Around 83 to 90 percent, which is why torque is the better hole-condition indicator.",
+      "new": "Newtons per metre, since side force is per unit length of string, and a total over an interval is far larger."
+     },
+     "1": {
+      "old": "About half, so both signals are equal.",
+      "new": "Newtons, as a total contact force."
+     },
+     "2": {
+      "old": "Nearly nothing, since the bit torque dominates the surface reading.",
+      "new": "Newton-metres, since it is a moment about the pipe axis."
+     },
+     "3": {
+      "old": "It depends on the rate of penetration, so no general statement is possible.",
+      "new": "Newtons per square metre, as a contact pressure on the wall."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index is unchanged."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "category": "defect",
+   "flag": "lead review: prompt \"why is torque zero while sliding above the motor\" contradicts beginner m04 l04 and module m04 ord 5 (surface torque is exactly the bit torque, 2700 N.m)",
+   "verdict": "fixed",
+   "reason": "The engine starts the torque at the bit torque and adds no tangential friction with ft = 0, so the torque along the string while sliding is the bit torque (l04 table: 2700 N.m on every well); it is the FRICTION torque that is zero. The prompt now asks that, the key stands, and the explanation agrees; module m04 ord 5 was already right.",
+   "changes": {
+    "prompt": {
+     "old": "Why is torque zero while sliding above the motor?",
+     "new": "Why does sliding add no friction torque anywhere above the motor?"
+    },
+    "explanation": {
+     "old": "The surface torque equals the bit torque exactly, and that is true on every well in this course.",
+     "new": "With no rotation above the motor the tangential direction cosine is zero, so no friction torque accumulates. The surface torque is the bit torque alone, 2700 N.m on every well in this course, which is why sliding is not a zero-torque operation at surface."
+    }
+   }
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-operations",
+   "ord": 5,
+   "category": "defect",
+   "flag": "lead review: checked against beginner final 34 on sliding torque",
+   "verdict": "judged fine",
+   "reason": "Matches beginner m04 l04 and the engine (torque starts at the bit torque, ft = 0 while sliding): surface torque is exactly the bit torque; the contradiction was in final 34, now fixed."
+  }
+ ]
+}

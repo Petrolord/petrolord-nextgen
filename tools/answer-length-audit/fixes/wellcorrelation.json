@@ -1,0 +1,1317 @@
+{
+ "migration": "20261021b_b4_fix_wellcorrelation.sql",
+ "title": "wellcorrelation: 27 beginner duplicates rewritten to new points (5 final copies first, then a whole-tier sweep); 21 related pairs judged fine",
+ "items": [
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 4,
+   "category": "duplicate",
+   "flag": "near duplicate of module m03-the-structural-section ord 2 (same 167 m span from the same two picks)",
+   "verdict": "fixed",
+   "reason": "trivial reword of the module question, which is kept; rewritten to m05 l03: reading the flattened TOP_A line as the TOP_A to TOP_SAND interval (deepest point = thinnest interval).",
+   "changes": {
+    "prompt": {
+     "old": "In the structural view of the Ekene fixture the shallowest pick is Ekene-3 TOP_A at 1495 m and the deepest is Ekene-2 TOP_B at 1662 m. What is the displayed depth span of that view?",
+     "new": "On the panel flattened on TOP_SAND at 1500 m, TOP_A displays at 1452, 1447, 1454 and 1440 m in Ekene-1 to Ekene-4. What does the deepest of those four points tell you?"
+    },
+    "options": {
+     "0": {
+      "old": "150 m",
+      "new": "Ekene-3 is the structurally lowest well on TOP_A, since its point hangs deepest on the panel"
+     },
+     "1": {
+      "old": "157 m",
+      "new": "Ekene-3 has the thickest TOP_A to TOP_SAND interval, since its line sits deepest there"
+     },
+     "2": {
+      "old": "162 m",
+      "new": "Ekene-3 carries the largest flattening shift, so it moved furthest of the four to reach the datum"
+     },
+     "3": {
+      "old": "167 m",
+      "new": "Ekene-3 has the thinnest TOP_A to TOP_SAND interval, 1500 minus 1454 giving 46 m"
+     }
+    },
+    "explanation": {
+     "old": "1662 minus 1495 is 167 m. In the structural view every shift is zero, so the displayed span equals the true measured depth span of the picks.",
+     "new": "With TOP_SAND pinned at 1500 m, each flattened TOP_A depth is 1500 minus that well's TOP_A to TOP_SAND interval, so the deeper the point sits the thinner the interval. Ekene-3 at 1454 m has 46 m, the thinnest. Structurally it is the highest well, and its shift of -41 m is the smallest of the four."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "category": "duplicate",
+   "flag": "near duplicate of module m03-the-structural-section ord 7 (same TOP_A picks, same 35 m key)",
+   "verdict": "fixed",
+   "reason": "trivial reword of the module question, which is kept; rewritten to m03 l04: the SAND thickness ranking differs from the structural ranking, so the thickest well is the third highest.",
+   "changes": {
+    "prompt": {
+     "old": "TOP_A is picked at 1500 m in Ekene-1, 1512 m in Ekene-2, 1495 m in Ekene-3 and 1530 m in Ekene-4. What is the structural relief on TOP_A across the four wells?",
+     "new": "Structurally the Ekene wells rank Ekene-3, Ekene-1, Ekene-2, Ekene-4 from high to low. How does their ranking by SAND gross thickness compare?"
+    },
+    "options": {
+     "0": {
+      "old": "17 m",
+      "new": "They match, since the structurally highest well on a structure always holds the thickest sand of the section"
+     },
+     "1": {
+      "old": "35 m",
+      "new": "They differ: Ekene-2 is thickest and Ekene-4 thinnest, so the thickest is only third highest"
+     },
+     "2": {
+      "old": "30 m",
+      "new": "They run exactly in reverse, with the lowest well holding the thickest sand"
+     },
+     "3": {
+      "old": "45 m",
+      "new": "They cannot be compared, since thickness is only defined on a flattened section"
+     }
+    },
+    "explanation": {
+     "old": "Relief is the deepest pick minus the shallowest pick on that surface, so 1530 minus 1495 gives 35 m. Ekene-4 is the structurally lowest well on TOP_A and Ekene-3 the highest.",
+     "new": "By SAND gross thickness the wells rank Ekene-2 at 36 m, Ekene-1 at 32 m, Ekene-3 at 29 m and Ekene-4 at 25 m, a different order from the structural one, so the thickest well is the third highest. Thickness comes from the pick table in either view; the pattern is simply hard to see on the structural panel."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "near duplicate of module m03-the-structural-section ord 6 (same TOP_SAND picks, same 49 m key; also a capstone-graded value)",
+   "verdict": "fixed",
+   "reason": "trivial reword of the module question, which is kept; rewritten to m05 l04: an interpolated TOP_B depth for Ekene-4 is inference, kept in the report and never entered as a pick.",
+   "changes": {
+    "prompt": {
+     "old": "TOP_SAND is picked at 1548, 1565, 1541 and 1590 m in Ekene-1 to Ekene-4. What is the structural relief on TOP_SAND?",
+     "new": "TOP_B sits about 60 m below BASE_SAND in Ekene-1 to Ekene-3, so in Ekene-4, whose BASE_SAND is at 1615 m, it would be expected near 1675 m. What should be done with that estimate?"
+    },
+    "options": {
+     "0": {
+      "old": "49 m",
+      "new": "Keep it in the report labelled as inference, and leave Ekene-4 with no TOP_B pick on the section"
+     },
+     "1": {
+      "old": "42 m",
+      "new": "Enter it as the Ekene-4 TOP_B pick, so the correlation line can reach all four wells"
+     },
+     "2": {
+      "old": "25 m",
+      "new": "Enter it as a provisional pick, so TOP_B relief can be quoted as a four-well number"
+     },
+     "3": {
+      "old": "0 m",
+      "new": "Discard it, since a missing top is itself evidence that TOP_B was faulted out there"
+     }
+    },
+    "explanation": {
+     "old": "1590 minus 1541 is 49 m. Relief must be read in the structural view, where all shifts are zero. In a section flattened on TOP_SAND the same surface displays flat, which would wrongly suggest zero relief.",
+     "new": "About 1675 m is a reasonable geological expectation and it is not a pick. Typing it into the tops table turns an expectation into data that nobody will later tell apart from a real pick, so the line stays short and the estimate stays in the report as inference. Nothing points to faulting: Ekene-4 simply ended above TOP_B."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "category": "duplicate",
+   "flag": "near duplicate of module m04-flattening-and-datums ord 3 (same Ekene-2 shift, same -65 m key; also a capstone-graded value)",
+   "verdict": "fixed",
+   "reason": "trivial reword of the module question, which is kept; rewritten to m04 l03 'reliably picked': an uncertain datum pick moves every other surface in that well by the same amount.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene-2 has TOP_SAND at a measured depth of 1565 m. The section is flattened on TOP_SAND with a datum of 1500 m. What shift is applied to Ekene-2?",
+     "new": "The datum pick in one well is uncertain by 10 m. What does that uncertainty do to that well on the flattened panel?"
+    },
+    "options": {
+     "0": {
+      "old": "+65 m",
+      "new": "It spreads across all four wells, since the shifts are solved together as one set"
+     },
+     "1": {
+      "old": "-65 m",
+      "new": "It moves every other surface in that well by the same 10 m on the display"
+     },
+     "2": {
+      "old": "-1500 m",
+      "new": "It changes the zone thicknesses in that well, since the shift reaches only one end of each zone"
+     },
+     "3": {
+      "old": "+1565 m",
+      "new": "It moves only the datum top, since the other picks in that well keep their own depths"
+     }
+    },
+    "explanation": {
+     "old": "The shift is datum minus the measured depth of the flattening top, so 1500 minus 1565 gives -65 m. The sign is negative because the pick sits below the datum and must be lifted to reach it.",
+     "new": "The datum pick sets that well's shift, and the shift is applied to every top in the well, so a 10 m error in the anchor moves every other surface in the well by 10 m on the display. Thicknesses inside the well are unaffected because both ends take the same shift, and the other wells keep their own shifts. That is why the datum should be a reliably picked top."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "category": "duplicate",
+   "flag": "near duplicate of module m05-zones-and-correlation-lines ord 5 (same Ekene-3 picks, same 29 m key; also a capstone-graded value)",
+   "verdict": "fixed",
+   "reason": "trivial reword of the module question, which is kept; rewritten to m05 l01: BASE_SAND is an ordinary pick and the interpreter decides which pair of picks bounds a zone.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene-3 has TOP_SAND at 1541 m and BASE_SAND at 1570 m. What is the gross thickness of the SAND zone in Ekene-3?",
+     "new": "In the data model BASE_SAND is stored exactly like TOP_SAND, as a named pick with a measured depth. What makes it the base of the SAND zone?"
+    },
+    "options": {
+     "0": {
+      "old": "32 m",
+      "new": "A base flag stored with the pick that marks it as closing a zone"
+     },
+     "1": {
+      "old": "36 m",
+      "new": "Its name, since the engine pairs any BASE_ pick with the TOP_ pick of the same name"
+     },
+     "2": {
+      "old": "29 m",
+      "new": "The interpreter's choice of which two picked surfaces bound the SAND zone"
+     },
+     "3": {
+      "old": "25 m",
+      "new": "Its depth, since the engine treats the next pick below any top as that top's base"
+     }
+    },
+    "explanation": {
+     "old": "1570 minus 1541 is 29 m. A zone spans between its two bounding tops in a single well, so its gross thickness is simply the difference of those two measured depths.",
+     "new": "Software treats every picked surface the same way. The engine's zoneSpan is handed the names of the upper and lower bounding tops, so it is the interpreter who decides which pair bounds a zone. There is no base flag, and no automatic pairing by name or by depth."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 8,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m02-formation-tops ord 1 (the three things a top carries: name, well, measured depth)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m02 l01: why tops are versioned, attributable and challengeable (a top is an interpretation).",
+   "changes": {
+    "prompt": {
+     "old": "A formation top has been picked. What is the minimum set of information that makes it a usable record?",
+     "new": "Tops are described as versioned, attributable and challengeable. Why?"
+    },
+    "options": {
+     "0": {
+      "old": "A depth and a log curve name",
+      "new": "Because each one is a tool reading, reproduced whenever the same log is run down the hole again"
+     },
+     "1": {
+      "old": "A name and a depth, with the well inferred from context",
+      "new": "Because the engine keeps several depths under each name and averages them when it draws a line"
+     },
+     "2": {
+      "old": "A name, a depth and the interpreter's confidence score",
+      "new": "Because a second interpreter must approve each top before it is drawn"
+     },
+     "3": {
+      "old": "A name, the well it belongs to, and a measured depth",
+      "new": "Because each one records an interpreter's argument, which can change and has an author"
+     }
+    },
+    "explanation": {
+     "old": "A top is an interpretation that carries a surface name, the well it was picked in, and the measured depth of the pick. Without all three the pick cannot be placed on a section or joined to picks in other wells.",
+     "new": "A top is an interpretation: it records a belief about where a surface is penetrated, and competent interpreters can differ by a metre or two. So tops change as understanding changes, it matters who picked them and when, and a correlation resting on a weak pick can be challenged. A log reading is the thing a tool reproduces."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m02-formation-tops ord 10 (a mistyped sand name adds a phantom surface and splits the line)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m02 l04 'missing is not zero': an absent top is excluded or reported, never treated as zero.",
+   "changes": {
+    "prompt": {
+     "old": "An interpreter types the Ekene-2 sand pick as TOP_SND instead of TOP_SAND. What happens on the section?",
+     "new": "Ekene-4 has no TOP_B. How should a calculation that touches TOP_B treat that missing top?"
+    },
+    "options": {
+     "0": {
+      "old": "The pick is rejected, because only known surface names are accepted",
+      "new": "As a top at depth zero, so the well still adds a value to every TOP_B statistic"
+     },
+     "1": {
+      "old": "A phantom surface appears with a single pick, and the real TOP_SAND line now joins only three wells",
+      "new": "As absent information, so the calculation either excludes Ekene-4 or reports that it did"
+     },
+     "2": {
+      "old": "The pick is silently corrected to the nearest matching name",
+      "new": "As a zero thickness for any zone bounded by TOP_B, keeping zone averages four-well"
+     },
+     "3": {
+      "old": "Nothing changes, because lines are drawn from depth order rather than from names",
+      "new": "As the average of the neighbouring picks, so the line reaches all four wells"
+     }
+    },
+    "explanation": {
+     "old": "Correlation lines are built by matching names. A typo produces a new surface that owns exactly one pick, and it simultaneously removes that well from the real surface's line. Name consistency is a QC item for this reason.",
+     "new": "Missing is not zero. An absent top is neither a top at depth zero nor a zero thickness: it is the absence of information, so every calculation that touches it should exclude that well or say that it did. Filling it with an estimate turns an observation into a guess."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m01-correlation-and-the-section ord 4 and m03-the-structural-section ord 1 (structural view = zero shift, true measured depth)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m03 l01: depths quoted against different reference points are not comparable until converted.",
+   "changes": {
+    "prompt": {
+     "old": "What defines the structural view of a section?",
+     "new": "One well's depths are quoted from the kelly bushing and another's from mean sea level. What follows for the correlation?"
+    },
+    "options": {
+     "0": {
+      "old": "Every well is shifted so its shallowest top lines up with the others",
+      "new": "Nothing, since measured depth is distance along the hole from any starting point"
+     },
+     "1": {
+      "old": "Every well is shifted so the section span is minimised",
+      "new": "They compare directly once both are converted to true vertical depth"
+     },
+     "2": {
+      "old": "The shift is zero in every well, so displayed depth equals true measured depth",
+      "new": "They are not comparable until one well's depths are converted to the other's reference"
+     },
+     "3": {
+      "old": "Depths are converted to true vertical depth before display",
+      "new": "They compare directly, since both record depth in metres along the hole"
+     }
+    },
+    "explanation": {
+     "old": "The structural view applies a shift of zero everywhere. What you see is measured depth, which makes it the only view where depths can be read off and quoted directly.",
+     "new": "Measured depth is counted from a surface reference point, so the reference must always be stated. Two wells quoted against different references are not comparable until one is converted, and a survey conversion to vertical depth does not change the reference. The Ekene wells share one datum, so their depths compare as they stand."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m03-the-structural-section ord 9 (TOP_B relief reported as 34 m over three wells)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to the m06 l01 exercise: a new question about the TOP_A to TOP_SAND interval changes only the datum step.",
+   "changes": {
+    "prompt": {
+     "old": "TOP_B is picked at 1640 m in Ekene-1, 1662 m in Ekene-2 and 1628 m in Ekene-3, and is not picked in Ekene-4. What is the structural relief on TOP_B, and over how many wells is it measured?",
+     "new": "The Ekene section is now asked how the TOP_A to TOP_SAND interval varies across the wells. Which step of the workflow changes?"
+    },
+    "options": {
+     "0": {
+      "old": "22 m over three wells",
+      "new": "The structural look, which is skipped since relief no longer matters to the question"
+     },
+     "1": {
+      "old": "34 m over four wells",
+      "new": "The interval reading, since thickness now depends on the datum chosen for it"
+     },
+     "2": {
+      "old": "102 m over three wells",
+      "new": "Every step, since a new question needs a new section"
+     },
+     "3": {
+      "old": "34 m over three wells",
+      "new": "Only the datum choice, which moves to TOP_A for the new question"
+     }
+    },
+    "explanation": {
+     "old": "1662 minus 1628 gives 34 m, and only Ekene-1, Ekene-2 and Ekene-3 contribute because Ekene-4 has no TOP_B pick. Reporting the relief over four wells overstates the well control behind the number.",
+     "new": "Only step three changes: the question is now about the interval below TOP_A, so TOP_A becomes the sensible datum. The structural view is still read first and still shows 49 m of relief on TOP_SAND, and the thicknesses read in step four do not depend on the datum."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m04-flattening-and-datums ord 4 (Ekene-4 BASE_SAND displays at 1525 m under a -90 m shift)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m04 l02: moving the datum to 1600 m gives Ekene-1 a positive shift of +52 m, sliding it down.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene-4 has TOP_SAND at 1590 m and BASE_SAND at 1615 m. The section is flattened on TOP_SAND at a datum of 1500 m. What shift does Ekene-4 receive, and where does its BASE_SAND display?",
+     "new": "The section stays flattened on TOP_SAND but the datum moves from 1500 m to 1600 m. What shift does Ekene-1, with TOP_SAND at 1548 m, now take?"
+    },
+    "options": {
+     "0": {
+      "old": "Shift +90 m, BASE_SAND displays at 1705 m",
+      "new": "A shift of -52 m, moving it up the display to reach the datum"
+     },
+     "1": {
+      "old": "Shift -90 m, BASE_SAND displays at 1615 m",
+      "new": "Its shift of -48 m, since a shift belongs to the well and stays put"
+     },
+     "2": {
+      "old": "Shift -90 m, BASE_SAND displays at 1525 m",
+      "new": "A shift of +52 m, sliding it down the display"
+     },
+     "3": {
+      "old": "Shift -115 m, BASE_SAND displays at 1500 m",
+      "new": "A shift of +48 m, the capstone shift with its sign flipped"
+     }
+    },
+    "explanation": {
+     "old": "The shift is 1500 minus 1590, which is -90 m. BASE_SAND then displays at 1615 plus -90, which is 1525 m. Its true measured depth is still 1615 m; only the display has moved.",
+     "new": "Shift is datum minus the datum-top depth, so 1600 minus 1548 gives +52 m. A positive shift adds depth, so the column slides down the display. The sign follows entirely from where the datum line sits relative to the picks."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m04-flattening-and-datums ord 7 (why a thickness inside a well is unchanged: the shift cancels)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m05 l02: a difference between two different wells is what flattening changes.",
+   "changes": {
+    "prompt": {
+     "old": "Why is gross zone thickness described as view independent?",
+     "new": "The Ekene section is flattened on TOP_SAND at 1500 m. Which of these quantities changes from its structural value?"
+    },
+    "options": {
+     "0": {
+      "old": "Both bounding tops in a well receive the same shift, so their difference is unchanged in any view",
+      "new": "The depth difference between TOP_SAND in Ekene-2 and TOP_SAND in Ekene-4"
+     },
+     "1": {
+      "old": "Thickness is stored separately from the tops and is never recomputed",
+      "new": "The gross thickness of the SAND zone in Ekene-2, as measured on the flattened panel"
+     },
+     "2": {
+      "old": "Thickness is measured in true vertical depth, which flattening does not touch",
+      "new": "The TOP_A to TOP_SAND interval in Ekene-4"
+     },
+     "3": {
+      "old": "Flattening rescales the depth axis of each well column, so every zone thickness is stretched back to its structural value",
+      "new": "The true measured depth stored for Ekene-4's BASE_SAND"
+     }
+    },
+    "explanation": {
+     "old": "A flattening shift is one number per well applied to every pick in that well. Subtracting two shifted depths cancels the shift, so thickness is identical in the structural view and in any flattened view.",
+     "new": "Any quantity that subtracts depths from two different wells changes under flattening, because the wells carry different shifts and nothing cancels. Within one well both ends take the same shift, so thicknesses survive, and stored depths never change because flattening changes the display and never the data."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m01-correlation-and-the-section ord 11 (thickest TOP_A to TOP_SAND interval: Ekene-4, 60 m)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m03 l02: interval thickening toward the low side, with relief growing downward, is the growth signature.",
+   "changes": {
+    "prompt": {
+     "old": "The TOP_A to TOP_SAND interval measures 48 m in Ekene-1, 53 m in Ekene-2, 46 m in Ekene-3 and 60 m in Ekene-4. Which well has the thickest interval, and by how much does it exceed the thinnest?",
+     "new": "TOP_SAND carries 14 m more relief than TOP_A, and the TOP_A to TOP_SAND interval is thickest in Ekene-4, the structurally low well. What does that pattern classically indicate?"
+    },
+    "options": {
+     "0": {
+      "old": "Ekene-2, by 7 m",
+      "new": "A rigid slab tilted after deposition, since the deeper surface always takes more relief"
+     },
+     "1": {
+      "old": "Ekene-4, by 14 m",
+      "new": "Deposition while the structure grew, with more sediment where it was subsiding"
+     },
+     "2": {
+      "old": "Ekene-4, which is 12 m thicker than the thinnest",
+      "new": "A mistyped TOP_A pick in Ekene-4, since relief ought to be equal on every surface of a section"
+     },
+     "3": {
+      "old": "Ekene-3, exceeding the thinnest by 14 m",
+      "new": "Erosion at Ekene-3, where the structure sits highest"
+     }
+    },
+    "explanation": {
+     "old": "Ekene-4 at 60 m is the thickest and Ekene-3 at 46 m is the thinnest, so the spread is 14 m. This same 14 m spread is what the Professional view flattened on TOP_A makes visible as the scatter of displayed TOP_SAND depths.",
+     "new": "An interval that thickens toward the structurally low side is the classic signature of growth: sediment accumulated preferentially where there was more room, on the sinking side, so the structure grew as the rocks were laid down. A rigidly tilted slab would show equal relief on every surface."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m06-the-correlation-workflow ord 11 (the six quantities the capstone grades)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m06 l03: the capstone grants the Associate certification, which gates the tier above.",
+   "changes": {
+    "prompt": {
+     "old": "Which six quantities does the DC6 capstone grade?",
+     "new": "What does passing the Associate capstone for this course grant?"
+    },
+    "options": {
+     "0": {
+      "old": "Four structural reliefs, one each for TOP_A, TOP_SAND, BASE_SAND and TOP_B, plus the structural span and the flattened span of the whole section, since the capstone is built around reading relief rather than shifts",
+      "new": "Direct entry to the Expert tier, skipping the Professional tier"
+     },
+     "1": {
+      "old": "The four SAND gross thicknesses, one per well, plus the datum surface used for flattening and the section well count, because the capstone is treated as a pure test of the view independence of thickness",
+      "new": "A pass on the final exam, which the capstone replaces for this course"
+     },
+     "2": {
+      "old": "Ekene-2 flattening shift, Ekene-3 SAND thickness, Ekene-4 BASE_SAND displayed depth, TOP_SAND structural relief, the number of wells the TOP_B line reaches, and Ekene-1 TOP_B displayed depth",
+      "new": "The Associate certification, the gate on the tier above"
+     },
+     "3": {
+      "old": "Ekene-2 flattening shift, Ekene-3 SAND thickness, Ekene-4 BASE_SAND true depth, TOP_SAND flattened relief, the total pick count across all wells, and the datum value chosen for the flattened section display",
+      "new": "Edit rights on the Ekene tops table, so later tiers can move picks"
+     }
+    },
+    "explanation": {
+     "old": "The capstone grades one shift, one thickness, two displayed depths, one relief and one well count. Together they test shift arithmetic, view independence of thickness, displayed versus true depth, reading relief in the structural view, and partial correlation lines.",
+     "new": "Passing the capstone grants the Associate certification for this course, and that certification is the gate on the tier above. The final exam is not replaced: it comes first and must be passed at 70 percent before the capstone opens."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m04-flattening-and-datums ord 5 (Ekene-1 TOP_B displays at 1592 m under a -48 m shift)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m04 l04: the same pick displays differently under different datums, so every flattened reading carries its datum.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene-1 has TOP_SAND at 1548 m and TOP_B at 1640 m. In the capstone view, flattened on TOP_SAND at a datum of 1500 m, where does Ekene-1 TOP_B display?",
+     "new": "Ekene-1's TOP_SAND displays at 1500 m under the capstone datum and at 1498 m under the TOP_A datum at 1450 m. What does that show?"
+    },
+    "options": {
+     "0": {
+      "old": "1688 m",
+      "new": "One of the two views was built wrongly, since a pick has only one displayed depth on any panel"
+     },
+     "1": {
+      "old": "1592 m",
+      "new": "A displayed depth means nothing without its datum, so the datum must be stated"
+     },
+     "2": {
+      "old": "1640 m",
+      "new": "Ekene-1's TOP_SAND pick was moved by 2 m between the views"
+     },
+     "3": {
+      "old": "1548 m",
+      "new": "The TOP_A view is the true one, since its reading is off the datum"
+     }
+    },
+    "explanation": {
+     "old": "The shift is 1500 minus 1548, which is -48 m, and 1640 plus -48 gives 1592 m. Adding the shift with the wrong sign gives 1688 m, and leaving the pick at 1640 m ignores the shift entirely.",
+     "new": "The same surface displays at different numbers under different datums, so a displayed depth without its datum is meaningless. The pick itself is still 1548 m in both views; only the view changed."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m06-the-correlation-workflow ord 14 (the server gates: lessons, module quizzes at 75 percent, final at 70 percent)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m06 l04: two disagreeing Expert estimates are reported with their spread as the uncertainty.",
+   "changes": {
+    "prompt": {
+     "old": "Which statement matches the assessment gates for this course?",
+     "new": "The Expert tier predicts Ekene-4's missing TOP_B in two independent ways, and the two estimates disagree. What should be done with them?"
+    },
+    "options": {
+     "0": {
+      "old": "Module quizzes need 70 percent, the final exam needs 75 percent, and the capstone may be taken at any time",
+      "new": "Average them, since splitting the difference cancels the error in each method"
+     },
+     "1": {
+      "old": "Module quizzes need 75 percent with no retry limit or cooldown of any kind, and the final exam becomes optional once the capstone has been passed",
+      "new": "Keep the layer-cake one, as TOP_A is best picked"
+     },
+     "2": {
+      "old": "Module quizzes and the final exam both need 70 percent, with a 24 hour cooldown after a single fail",
+      "new": "Enter the deeper one as the Ekene-4 pick"
+     },
+     "3": {
+      "old": "Module quizzes need 75 percent with a 24 hour cooldown after three fails, the final exam needs 70 percent, and the capstone comes last",
+      "new": "Report the spread between them as the uncertainty on the prediction"
+     }
+    },
+    "explanation": {
+     "old": "The module gate is 75 percent, three failed attempts trigger a 24 hour cooldown, the final exam gate is 70 percent, and the capstone is the last item in the course.",
+     "new": "The two methods lean on different reference surfaces, and with growth in the section those surfaces are not parallel. The spread between the estimates is the uncertainty on the prediction and the most honest number in the exercise; averaging throws it away."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-the-structural-section",
+   "ord": 1,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m01-correlation-and-the-section ord 4 (structural view: every well hung on its true measured depth with no shift)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m03 l01: a deviated well's structural depths need a directional survey.",
+   "changes": {
+    "prompt": {
+     "old": "In the engine's terms, what shift does the structural view apply to each well?",
+     "new": "A deviated well is added to the Ekene section. Where must its structural depths come from?"
+    },
+    "options": {
+     "0": {
+      "old": "A shift equal to the depth of the chosen datum surface in that well",
+      "new": "The log header, since measured depth equals vertical depth once the well is logged"
+     },
+     "1": {
+      "old": "A shift that lines up the shallowest surface across all wells",
+      "new": "The flattened view, which removes the extra depth"
+     },
+     "2": {
+      "old": "A shift of zero to every well, so displayed depth equals true depth",
+      "new": "A directional survey, integrated by a method such as minimum curvature"
+     },
+     "3": {
+      "old": "A shift equal to the average depth of all wells on the panel",
+      "new": "The measured depths just as they were logged"
+     }
+    },
+    "explanation": {
+     "old": "The structural mode is the special case where every well gets a shift of zero. Displayed depth equals true depth for all four wells at every point on the panel. Non-zero shifts are what flattening introduces.",
+     "new": "In a deviated well measured and true vertical depth diverge; at 60 degrees from vertical the hole gains two metres of measured depth for every metre of vertical depth. Structural depths must then come from a directional survey, integrated by a method such as minimum curvature, and a section built on raw measured depth shows structure that does not exist."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-the-structural-section",
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m01-correlation-and-the-section ord 9 (structural range 1495 to 1662 m, span 167 m)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m03 l04: an 11 m thickness story fills about seven percent of a 167 m panel.",
+   "changes": {
+    "prompt": {
+     "old": "The shallowest pick in the Ekene dataset is TOP_A in Ekene-3 at 1495 m and the deepest is TOP_B in Ekene-2 at 1662 m. What is the displayed span of the structural section?",
+     "new": "On the structural panel the SAND thickness varies by 11 m while the panel spans 167 m. Why is the thickness story hard to read there?"
+    },
+    "options": {
+     "0": {
+      "old": "167 m",
+      "new": "The 11 m fills only about seven percent of the panel height, a few pixels at that scale"
+     },
+     "1": {
+      "old": "150 m",
+      "new": "The structural view shifts each well, which distorts every thickness drawn"
+     },
+     "2": {
+      "old": "135 m",
+      "new": "Thickness cannot be computed until the section is flattened"
+     },
+     "3": {
+      "old": "49 m",
+      "new": "The panel is scaled to the 49 m of TOP_SAND relief, which swamps smaller changes"
+     }
+    },
+    "explanation": {
+     "old": "1662 minus 1495 is 167 m. The panel has to accommodate every pick, so its vertical extent is set by the two most extreme values in the whole dataset, not by any single surface.",
+     "new": "The panel is scaled to the full 167 m between the shallowest and deepest picks, so the 11 m thickness spread takes about seven percent of its height and draws as a sliver. Thickness is computed the same way in either view; flattening only makes it visible."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-the-structural-section",
+   "ord": 6,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m01-correlation-and-the-section ord 7 (TOP_SAND relief 49 m)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m03 l02: relief depends on which wells are on the panel, so a fifth well can widen it.",
+   "changes": {
+    "prompt": {
+     "old": "TOP_SAND sits at 1548 m in Ekene-1, 1565 m in Ekene-2, 1541 m in Ekene-3 and 1590 m in Ekene-4. What is its structural relief?",
+     "new": "A fifth well is added to the Ekene section. What can happen to the structural relief on TOP_SAND?"
+    },
+    "options": {
+     "0": {
+      "old": "42 m",
+      "new": "Nothing, since relief is a fixed property of the surface"
+     },
+     "1": {
+      "old": "49 m",
+      "new": "It can grow, because relief is measured across the wells on the panel"
+     },
+     "2": {
+      "old": "25 m",
+      "new": "It can only shrink, since more wells average out the extreme picks on the surface"
+     },
+     "3": {
+      "old": "17 m",
+      "new": "It turns into a dip, since five wells measure a gradient"
+     }
+    },
+    "explanation": {
+     "old": "The shallowest is 1541 m in Ekene-3 and the deepest is 1590 m in Ekene-4, so the relief is 1590 minus 1541, which is 49 m. This is one of the six numbers the Associate capstone grades.",
+     "new": "Relief is the deepest occurrence minus the shallowest across the wells that carry the surface, so it depends on which wells are on the panel. A fifth well deeper than 1590 m or shallower than 1541 m would widen it; adding a well can never shrink it, and relief is never a dip because it ignores the distance between wells."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-flattening-and-datums",
+   "ord": 6,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m01-correlation-and-the-section ord 6 (Ekene-2 gross sand 36 m) and ord 12 (gross sand unchanged by flattening)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one m04 ord 6 repeated the flattening-invariance question of m01 ord 12 on m01 ord 6's 36 m; rewritten to the m04 l03 exercise: a BASE_SAND datum flattens all four wells but the interval covers three.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene-2's gross sand is 36 m thick in the structural view. What is its gross sand thickness on the panel flattened on TOP_SAND at 1500 m?",
+     "new": "To compare the BASE_SAND to TOP_B interval, the section is flattened on BASE_SAND at 1550 m. Which wells can that comparison cover?"
+    },
+    "options": {
+     "0": {
+      "old": "1500 m, because the top lands on the datum",
+      "new": "All four, since every well flattens cleanly on BASE_SAND"
+     },
+     "1": {
+      "old": "101 m, the shift added to the thickness",
+      "new": "None until TOP_B is chosen as the datum instead"
+     },
+     "2": {
+      "old": "36 m, unchanged",
+      "new": "Ekene-1, Ekene-2 and Ekene-3 only"
+     },
+     "3": {
+      "old": "It cannot be read from a flattened panel",
+      "new": "Only Ekene-4, which takes the largest shift"
+     }
+    },
+    "explanation": {
+     "old": "Both ends take the same shift: the top displays at 1565 - 65 = 1500 and the base at 1601 - 65 = 1536, so 1536 - 1500 = 36 m. Thickness is a property of the well, not of the view.",
+     "new": "All four wells carry BASE_SAND, so all four flatten cleanly, with shifts of -30, -51, -20 and -65 m. The interval comparison still covers only three wells, because Ekene-4 has no TOP_B to measure down to."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-flattening-and-datums",
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m02-formation-tops ord 15 (a well lacking the datum top is drawn at true depth and flagged)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m04 l03 and l05: a datum should be a surface that was near level when laid down, such as a flooding surface.",
+   "changes": {
+    "prompt": {
+     "old": "A well in the section has no pick for the chosen datum top. What does the engine do with that well?",
+     "new": "On the geological-meaning criterion, which kind of surface makes the most defensible flattening datum?"
+    },
+    "options": {
+     "0": {
+      "old": "It interpolates the missing top from the neighbouring wells and flattens normally.",
+      "new": "The pick quickest to see, since speed keeps picks consistent"
+     },
+     "1": {
+      "old": "It removes the well from the section until the top is picked.",
+      "new": "An erosional unconformity, since it marks one sharp moment across the whole field"
+     },
+     "2": {
+      "old": "It applies the average shift of the other wells to keep the panel tidy.",
+      "new": "The deepest surface, since it carries the most relief"
+     },
+     "3": {
+      "old": "It gives the well a null shift, draws it at true measured depth, and flags it.",
+      "new": "A marine flooding surface or widespread shale, near level when laid down"
+     }
+    },
+    "explanation": {
+     "old": "The engine never guesses. It returns a null shift, marks the well as lacking the datum top, and draws it unflattened with a flag, so nobody mistakes a true-depth column for a flattened one.",
+     "new": "Flattening asserts that the datum surface was near enough level at one moment. A marine flooding surface or a widespread shale supports that claim. An unconformity records removal that varies from place to place, and a pick chosen only because it was easy to see carries no such meaning."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-zones-and-correlation-lines",
+   "ord": 5,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m02-formation-tops ord 8 (Ekene-1 32 m and Ekene-3 29 m gross sand)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m05 l01: a zone has no identity of its own beyond its two bounding names.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene-3 has TOP_SAND at 1541 and BASE_SAND at 1570. What is its gross SAND thickness?",
+     "new": "Why does naming discipline matter as much for zones as it does for tops?"
+    },
+    "options": {
+     "0": {
+      "old": "25 m",
+      "new": "Because the engine stores each zone as a separate object with its own name and its own thickness"
+     },
+     "1": {
+      "old": "26 m",
+      "new": "Because zone thickness is read from the log curve, which the engine looks up by the name of the top"
+     },
+     "2": {
+      "old": "29 m",
+      "new": "Because a zone takes its identity from its two bounding names, so drifting names move it"
+     },
+     "3": {
+      "old": "32 m",
+      "new": "Because the engine computes no zone until every name is in capitals"
+     }
+    },
+    "explanation": {
+     "old": "1570 minus 1541 is 29 m. This is one of the six numbers the capstone asks you to reproduce.",
+     "new": "There is no separate zone object in the data: a zone is the interval between two correlated tops and takes its identity from them. If TOP_SAND means the same surface in every well, the SAND zone is comparable across wells; if the names drift, the zone drifts with them and every quoted thickness is quietly wrong."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-zones-and-correlation-lines",
+   "ord": 6,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m04-flattening-and-datums ord 7 (thickness unchanged because the shift cancels)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m05 l02: state the thickness observation cleanly; four wells cannot settle its cause.",
+   "changes": {
+    "prompt": {
+     "old": "Why is gross thickness the same in the structural view and in any flattened view?",
+     "new": "The SAND zone thickens toward Ekene-2 and thins into Ekene-4. What can a four-well beginner correlation claim about it?"
+    },
+    "options": {
+     "0": {
+      "old": "Both ends of the zone carry the same per-well shift, so the shift cancels in the subtraction",
+      "new": "The observation itself, stated cleanly, with its cause left as an open question"
+     },
+     "1": {
+      "old": "The engine recomputes thickness from measured depth and ignores the displayed depths entirely",
+      "new": "That structure has removed section at Ekene-4, since it is the deepest well on every surface"
+     },
+     "2": {
+      "old": "Flattening only moves the datum top and leaves the other tops at their true depths",
+      "new": "That the sand thickens depositionally toward Ekene-2"
+     },
+     "3": {
+      "old": "Thickness is rounded to the nearest metre, which hides the difference the shift makes",
+      "new": "Nothing, since an 11 m spread is measurement noise"
+     }
+    },
+    "explanation": {
+     "old": "Flattening adds one shift s to every depth in a well, so (base + s) minus (top + s) equals base minus top. The shift appears once with a plus and once with a minus and cancels.",
+     "new": "Four wells cannot settle whether the pattern is depositional thickening toward Ekene-2 or something structural removing section at Ekene-4. The habit is to state the observation cleanly before reaching for an explanation. The 11 m spread on a mean near 30.5 m is roughly a third of the average thickness, well beyond noise."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-zones-and-correlation-lines",
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m04-flattening-and-datums ord 15 (the flat TOP_SAND line is flat by construction)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m05 l03: the non-datum lines show geometry relative to the datum.",
+   "changes": {
+    "prompt": {
+     "old": "In the capstone flattened view the TOP_SAND correlation line is dead flat at 1500 in every well. What does that tell you?",
+     "new": "On the capstone panel flattened on TOP_SAND, what do the correlation lines other than TOP_SAND show?"
+    },
+    "options": {
+     "0": {
+      "old": "That TOP_SAND is a genuinely flat surface across the area",
+      "new": "The structure of each surface, with the datum's own relief added back in"
+     },
+     "1": {
+      "old": "That the four wells were drilled from the same structural elevation",
+      "new": "True measured depths, since only the datum line has been moved"
+     },
+     "2": {
+      "old": "That the section has no structural relief worth discussing",
+      "new": "Nothing useful, since every line on a flattened panel is flat"
+     },
+     "3": {
+      "old": "Nothing at all, because the shifts were computed precisely to produce that flat line",
+      "new": "Geometry relative to the datum, close to how the layers lay when it was deposited"
+     }
+    },
+    "explanation": {
+     "old": "A flat datum line is a construction, never an observation. Structural statements must be made from the structural view, where TOP_SAND reads 1548, 1565, 1541 and 1590.",
+     "new": "Only the datum line is forced flat and carries no information. The other lines no longer show structure; they show geometry relative to the datum surface, close to what the layers looked like when it was deposited, which is why the flattened BASE_SAND line reads as a thickness plot."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-zones-and-correlation-lines",
+   "ord": 13,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m02-formation-tops ord 14 (the TOP_B line reaches 3 wells and does not extend to Ekene-4)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m05 l04: drawing a line through a well asserts a pick nobody made.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene-4 has no TOP_B pick. How many wells does the TOP_B correlation line reach, and what does the engine do about the gap?",
+     "new": "Why is drawing the TOP_B line straight through Ekene-4 to the next well wrong?"
+    },
+    "options": {
+     "0": {
+      "old": "3 wells, because the engine simply skips a well that lacks the top",
+      "new": "It asserts a TOP_B pick in Ekene-4 that nobody made"
+     },
+     "1": {
+      "old": "4 wells, because the engine draws through to the next well that has the top",
+      "new": "It changes the TOP_B relief, which is read off the drawn line"
+     },
+     "2": {
+      "old": "4 wells, because the engine interpolates a position from the neighbouring wells",
+      "new": "It drags the Ekene-4 BASE_SAND pick onto the line of TOP_B"
+     },
+     "3": {
+      "old": "0 wells, because a line is only drawn when every well carries the top",
+      "new": "It breaks the flattening, since the engine needs TOP_B in every well"
+     }
+    },
+    "explanation": {
+     "old": "correlationPolyline skips wells where the lookup returns null, so the line reaches 3 wells. Drawing through would assert a pick nobody made, and interpolating would invent data.",
+     "new": "A line drawn through a well is a visual assertion that the top was picked there. TOP_B was not picked in Ekene-4, so the engine skips that well and the line stops: what was observed stays on the section and anything inferred stays in the report, labelled as inference."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-zones-and-correlation-lines",
+   "ord": 14,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m03-the-structural-section ord 9 (TOP_B relief reported as 34 m over three wells)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m04 l04 and m05 l04: the flattened 10 m TOP_B spread shows the interval below the sand is uniform.",
+   "changes": {
+    "prompt": {
+     "old": "TOP_B is at 1640, 1662 and 1628 in Ekene-1, Ekene-2 and Ekene-3, and is absent in Ekene-4. How should its structural relief be reported?",
+     "new": "Under the capstone datum TOP_B displays with a spread of 10 m, against 34 m in true depth. What does the difference show?"
+    },
+    "options": {
+     "0": {
+      "old": "As 34 m, with no qualifier, since relief is a property of the surface and does not depend on well count",
+      "new": "The TOP_B relief is really 10 m, since the flattened view strips out the errors in every pick"
+     },
+     "1": {
+      "old": "As 10 m over 3 wells, taken from the flattened displayed depths",
+      "new": "Flattening has compressed the interval below the sand by 24 m"
+     },
+     "2": {
+      "old": "As 34 m over 3 wells, so a reader knows the statistic comes from a partial line",
+      "new": "Once the sand's structure is removed, the interval below the sand is far more uniform"
+     },
+     "3": {
+      "old": "As 34 m over 4 wells, since the section contains four wells",
+      "new": "The 34 m covered four wells, while the flattened 10 m covers three"
+     }
+    },
+    "explanation": {
+     "old": "1662 minus 1628 is 34 m, but it describes only the wells that carry the top. Quoting the well count alongside any statistic from a partial line stops a reader assuming Ekene-4 was covered.",
+     "new": "Relief is a structural quantity and stays 34 m over three wells in the structural view. The flattened spread describes geometry relative to TOP_SAND: once the sand's structure is removed, the interval below it is far more uniform than the structural section suggested. Both figures are three-well numbers."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-correlation-workflow",
+   "ord": 6,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m02-formation-tops ord 12 (a negative gross thickness means the tops were swapped)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to the m06 l02 exercise: a negative thickness and a line crossing are one swap seen twice.",
+   "changes": {
+    "prompt": {
+     "old": "A quality control run computes a zone thickness of -7 m in one well. What does that tell you?",
+     "new": "One well's zone thickness computes to -7 m, and a correlation line crosses another between that well and its neighbour. What is the most likely cause?"
+    },
+    "options": {
+     "0": {
+      "old": "The well was flattened on a datum it does not carry",
+      "new": "A fault between the two wells, which both the crossing and the negative interval record"
+     },
+     "1": {
+      "old": "The zone is genuinely absent in that well",
+      "new": "Two separate errors, a mistyped pick and a misdrawn line"
+     },
+     "2": {
+      "old": "The top and base picks in that well were entered swapped",
+      "new": "A single swap of the top and base picks in that well, which explains both"
+     },
+     "3": {
+      "old": "The section was read in the structural view instead of the flattened one",
+      "new": "A datum pick error, which moves every surface in the well"
+     }
+    },
+    "explanation": {
+     "old": "A negative thickness is impossible geology, not an unusual case. Base minus top must be positive in every well, so a negative result means the two picks are reversed in the tops table.",
+     "new": "A negative thickness means the top and base picks were entered swapped, and with those two picks reversed in one well the two lines must trade places between it and its neighbour. One data-entry error explains both symptoms. Fix the picks, then rerun every check."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-correlation-workflow",
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "same concept and same answer as module m01-correlation-and-the-section ord 8 (TOP_B reaches three wells because Ekene-4 stopped above it)",
+   "verdict": "fixed",
+   "reason": "true duplicate; the earlier question is kept and this one rewritten to m06 l02: an extreme thickness must be explained out loud.",
+   "changes": {
+    "prompt": {
+     "old": "Why is every TOP_B statistic on the Ekene section reported as a three-well number?",
+     "new": "One well's sand reads 300 m where its neighbours read 25 to 36 m. What does the thickness plausibility check require?"
+    },
+    "options": {
+     "0": {
+      "old": "Because TOP_B is the deepest surface and deep picks are less reliable",
+      "new": "Rejecting the well outright, since the check forbids any thickness that sits far from the mean"
+     },
+     "1": {
+      "old": "Because one well never reached TOP_B, so no pick exists there",
+      "new": "An explanation out loud, such as a stacked sequence or a base pick on the wrong surface"
+     },
+     "2": {
+      "old": "Because the correlation line for TOP_B is drawn only in the structural view",
+      "new": "Nothing more, since gross thickness is view-independent and so needs no further plausibility check"
+     },
+     "3": {
+      "old": "Because TOP_B lies below the flattening datum",
+      "new": "Averaging it with its neighbours, so the spread stays believable"
+     }
+    },
+    "explanation": {
+     "old": "Ekene-4 stopped above TOP_B, so the surface has no pick in that well and the correlation line stops short of it. Quoting a TOP_B figure as a four-well number claims data that does not exist.",
+     "new": "Extreme numbers are not forbidden, but they must be accounted for out loud. Three hundred metres might be a stacked sequence or a base pick that landed on the wrong surface; ordinary values such as the Ekene range of 25 to 36 m need no explanation."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "category": "duplicate",
+   "flag": "final 28 against module m01 ord 9 and m04 ord 13 (167 m structural span, 157 m flattened span)",
+   "verdict": "judged fine",
+   "reason": "tests why the span narrows by 10 m under flattening, a different point from reading either span; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "category": "duplicate",
+   "flag": "final 41 against module m01 ord 7 and m06 ord 12 (TOP_SAND relief 49 m, read in the structural view)",
+   "verdict": "judged fine",
+   "reason": "tests the method trap of reading relief on a panel flattened on that same surface; kept as a different angle."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 19,
+   "category": "duplicate",
+   "flag": "final 19 against module m01 ord 7 (relief values across the surfaces)",
+   "verdict": "judged fine",
+   "reason": "compares four given reliefs to name the largest; no module question asks that; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-correlation-and-the-section",
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "module m01 ord 15 against module m03 ord 9 (TOP_B relief is a three-well number)",
+   "verdict": "judged fine",
+   "reason": "m01 asks for the caveat and m03 for the reporting form; related but distinct; kept both."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 32,
+   "category": "duplicate",
+   "flag": "final 32 against module m02 ord 14 (TOP_B line reaches 3 wells)",
+   "verdict": "judged fine",
+   "reason": "adds the segment count (two), which no module question tests; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-zones-and-correlation-lines",
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "module m05 ord 15 against module m01 ord 8 (Ekene-4 stopped above TOP_B)",
+   "verdict": "judged fine",
+   "reason": "m05 asks which of the four missing-top reasons the section alone can establish, a different point; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "final 11 against module m01 ord 8 (Ekene-4 absence of TOP_B)",
+   "verdict": "judged fine",
+   "reason": "tests that the absence is not evidence the surface is missing there; a different angle; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "category": "duplicate",
+   "flag": "final 31 against module m01 ord 6 (Ekene-2 gross sand 36 m)",
+   "verdict": "judged fine",
+   "reason": "reads the thickness from the displayed pair 1536 minus 1500 on the flattened panel; kept as the only displayed-pair thickness item."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-zones-and-correlation-lines",
+   "ord": 8,
+   "category": "duplicate",
+   "flag": "module m05 ord 8 against module m03 ord 14 and final 18 (the 11 m thickness spread)",
+   "verdict": "judged fine",
+   "reason": "m05 asks for the mean, m03 compares with relief, final 18 asks what the ratio says about the structural view; distinct; kept all three."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "category": "duplicate",
+   "flag": "final 23 against module m04 ord 2 (the shift formula)",
+   "verdict": "judged fine",
+   "reason": "final asks for both formulas, adding displayed = md + shift; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-correlation-workflow",
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "module m06 ord 9 against module m02 ord 15 (a well lacking the datum top is drawn at true depth)",
+   "verdict": "judged fine",
+   "reason": "m06 asks for the diagnosis from the symptom on a flattened panel; a different direction of reasoning; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 12,
+   "category": "duplicate",
+   "flag": "final 12 against module m02 ord 10 (a name typo splits the line)",
+   "verdict": "judged fine",
+   "reason": "tests case sensitivity (Top_Sand) and the resulting well count; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-correlation-workflow",
+   "ord": 5,
+   "category": "duplicate",
+   "flag": "module m06 ord 5 against module m02 ord 10 and ord 11 (typo becomes a phantom surface)",
+   "verdict": "judged fine",
+   "reason": "m06 is the QC diagnosis from a surface count; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "category": "duplicate",
+   "flag": "final 33 against module m05 ord 10 (what a correlation line connects)",
+   "verdict": "judged fine",
+   "reason": "m05 asks the mechanics, final 33 what the line asserts; both lesson points; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "category": "duplicate",
+   "flag": "final 36 against module m06 ord 1 (the workflow order)",
+   "verdict": "judged fine",
+   "reason": "m06 asks the step after gathering, final 36 the full sequence; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "category": "duplicate",
+   "flag": "final 13 against module m01 ord 14 (log character guides picks)",
+   "verdict": "judged fine",
+   "reason": "final asks what guides a pick (log character and marker beds), m01 what the curve on the panel is for; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 25,
+   "category": "duplicate",
+   "flag": "final 25 against module m04 ord 11 and ord 12 (TOP_A datum at 1450 m)",
+   "verdict": "judged fine",
+   "reason": "different well (Ekene-4) and a different answer (1510 m); kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 7,
+   "category": "duplicate",
+   "flag": "final 7 against module m01 ord 9 (1495 to 1662 m)",
+   "verdict": "judged fine",
+   "reason": "asks which picks set the extremes, not the span; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 26,
+   "category": "duplicate",
+   "flag": "final 26 against module m04 ord 5 (Ekene-1 TOP_B displays at 1592 m)",
+   "verdict": "judged fine",
+   "reason": "asks which depth goes in the database (true 1640 m); a different point; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 1,
+   "category": "duplicate",
+   "flag": "final 1 against module m01 ord 3 and m03 ord 3 (horizontal axis is well order)",
+   "verdict": "judged fine",
+   "reason": "an applied scenario with a reviewer measuring screen gaps; kept."
+  },
+  {
+   "app_slug": "wellcorrelation",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-zones-and-correlation-lines",
+   "ord": 3,
+   "category": "duplicate",
+   "flag": "module m05 ord 3 against module m02 ord 12 (swapped top and base)",
+   "verdict": "judged fine",
+   "reason": "m05 tests the engine's ordered span, m02 the negative thickness from plain subtraction; kept."
+  }
+ ]
+}

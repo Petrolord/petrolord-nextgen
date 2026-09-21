@@ -246,12 +246,12 @@ q(0,
 # ---- what the engine does not know ----
 
 q(1,
- "Purple Book Appendix 6.B's last step is run through `locationIndividualRisk` with f PM Pphi = 1.84e-8 per year and the printed Pd of 0.381. What comes back, and what does the source print?",
- "0.000000007010 per year, which the source prints as 7e-9.",
- ["0.000000006997 per year, which the source prints as 7e-9 and which follows from the printed Pd alone.",
-  "0.000000007010 per year, which the source prints as 7.0104e-9 exactly, matching the engine to five figures.",
-  "0.380294556093 per year, which is the whole chain's Pd reported as though it were the contribution."],
- "Through `locationIndividualRisk`, 1.84e-8 times 0.381 is 0.000000007010, and the source prints 7e-9. 0.000000006997 is the whole chain's contribution, which rests on the golden whole-chain Pd of 0.380294556093. 7.0104e-9 is the step by step value from the printed figures, and the source prints only 7e-9. The last figure is a probability of death, which has no unit per year at all."),
+ "Purple Book Appendix 6.B works one individual risk contribution at one grid point. Where does its chain pass from consequence modelling into QRA arithmetic?",
+ "At the effective cloud width: the steps before it are consequence modelling, and from it onward the chain is QRA arithmetic.",
+ ["At the release rate: only the source term belongs to the consequence course, and the dispersion, the cloud width and the Pd are QRA arithmetic worked here.",
+  "At the probability of death: every step up to the printed Pd of 0.381 is QRA arithmetic this course grades, and only the contribution belongs elsewhere.",
+  "At the contribution of 7e-9 per year: every step before it, the cloud width and the Pd included, is consequence modelling this course takes as stated."],
+ "The early steps of Appendix 6.B are consequence modelling and belong to the consequence course; from the effective cloud width onward they are QRA arithmetic. The probability of death that comes out is an input to the contribution, which the source prints as 7e-9 per year."),
 
 q(2,
  "Besides the rounded Pd, what else in Purple Book Appendix 6.B does the course flag as rounded or inconsistent in the source?",

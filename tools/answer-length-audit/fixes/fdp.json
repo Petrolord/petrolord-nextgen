@@ -1,0 +1,46 @@
+{
+ "migration": "20261021b_b4_fix_fdp.sql",
+ "title": "fdp: duplicate question rewritten into a new question",
+ "items": [
+  {
+   "app_slug": "fdp",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "category": "duplicate",
+   "flag": "duplicate of beginner module m02-reserves-per-fluid 2 (near p0.60 k0.73): both ask why the gas row count of 1 matters, key one reservoir estimate carried through",
+   "verdict": "fixed",
+   "reason": "True duplicate of the m02 question; kept the module question and rewrote the final copy to test the m02 lesson point that a barrel of oil equivalent total is a decision left to a person.",
+   "changes": {
+    "prompt": {
+     "old": "The gas total reads 70.0000 Bcf on a row count of 1. Why does that row count matter as much as the total beside it?",
+     "new": "A manager asks the studio for EGINA's reserves as one total on a barrel of oil equivalent basis. Why does the reserves table leave that figure to a person?"
+    },
+    "explanation": {
+     "old": "The oil P50 of 130.0000 MMbbl is two rows added and the gas P50 of 70.0000 Bcf is one row carried through, and the row count is what tells the two apart.",
+     "new": "Gas can be expressed on a barrel of oil equivalent basis, and the factor is a commercial assumption about heating value and price. The table keeps oil in MMbbl and gas in Bcf, returns one total per fluid, and leaves the combining to a person who will say what factor they used. Condensate is kept apart from oil too."
+    },
+    "options": {
+     "0": {
+      "old": "A count of 1 means the engine could not aggregate the distributions it was given, so the gas figure is a sum of low cases in the way the oil column of 80.0000 MMbbl is.",
+      "new": "Because the gas row count of 1 is too few rows for the engine to aggregate into a converted total."
+     },
+     "1": {
+      "old": "The count decides the unit: one gas row stays in Bcf, while two or more would be totalled onto a barrel of oil equivalent basis.",
+      "new": "Because the engine converts only condensate to oil equivalent, and gas needs a recovery factor below 0.650000 before it can be put on a barrel basis."
+     },
+     "2": {
+      "old": "A fluid with one row has no aggregation in it, so 70.0000 Bcf is a single reservoir estimate carried through rather than a sum of anything.",
+      "new": "Because converting gas to barrels equivalent is a commercial assumption about heating value and price, which somebody has to make and defend."
+     },
+     "3": {
+      "old": "A count of 1 marks the fluid as unverified, because the engine will not label a column P50 until it has at least two independent estimates of the same volume to read it from.",
+      "new": "Because a barrel equivalent is a P50 quantity only, and the table also carries P90 and P10 columns that no conversion factor can be applied to at all."
+     }
+    }
+   },
+   "correct_change_reason": "True duplicate rewritten into a new question on a different point, so the key is new text for the new question."
+  }
+ ]
+}

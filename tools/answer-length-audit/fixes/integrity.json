@@ -1,0 +1,56 @@
+{
+ "migration": "20261021b_b4_fix_integrity.sql",
+ "title": "integrity: two defensible distractors in the Expert final replaced",
+ "items": [
+  {
+   "app_slug": "integrity",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "category": "double-key",
+   "flag": "option 3 (excess fraction for the next plug) close to partly right",
+   "verdict": "fixed",
+   "reason": "Advanced m02 l05 says the tag-minus-calculation gap is the best hole enlargement estimate and is worth carrying into the next plug in the section, so informing the next plug's excess was half right; the distractor now claims a settle rate to carry between wells, which the same lesson calls a per-well number.",
+   "changes": {
+    "explanation": {
+     "old": "The gap between the tag and the calculated settled top is the best hole enlargement estimate that job will ever produce.",
+     "new": "The settled top is a prediction that assumes the hole is the size you told it, and the tag is the measurement. The gap between them is the best hole enlargement estimate that job will ever produce. A tag cannot prove balance or bond, and the settle rate is fixed by one well's hole and stinger."
+    },
+    "options": {
+     "3": {
+      "old": "The excess fraction that the next plug in the section should be pumped with.",
+      "new": "A settle rate to carry to the next well, since the drop is the same on every job."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "integrity",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "category": "double-key",
+   "flag": "distractor 0 (override to a default length) arguably worth looking for",
+   "verdict": "fixed",
+   "reason": "Overriding a default such as plugMinLengthM does change an answer with the well unchanged (m03 l01, l05), so option 0 was defensible; the prompt now fixes the rule set between the two runs and option 0 now blames the excess, which cannot move a rule check because the checks read the proposed interval (as advanced module m05 ord 13 and final 10 teach).",
+   "changes": {
+    "prompt": {
+     "old": "A rule in this engine changes its answer while the well in front of you has not changed at all. What should you go looking for?",
+     "new": "Between two runs on the same rule set, a rule in this engine changes its answer while the well in front of you has not changed at all. What should you go looking for?"
+    },
+    "explanation": {
+     "old": "Foundation on a plug, verifiedByLog on annular cement and element status on an envelope each move a threshold in the same way.",
+     "new": "Foundation on a plug, verifiedByLog on annular cement and element status on an envelope each move a threshold in the same way, and each is a claim a person entered by hand. The rule checks read the proposed plug interval rather than the settled top, so the excess cannot move them."
+    },
+    "options": {
+     "0": {
+      "old": "An override applied to one of the default lengths, since a changed rule set moves every threshold that reads from it.",
+      "new": "A change in the excess, since excess moves the settled top and every length check in the rule set reads from it."
+     }
+    }
+   }
+  }
+ ]
+}

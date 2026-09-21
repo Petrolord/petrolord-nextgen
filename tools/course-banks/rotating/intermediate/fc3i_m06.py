@@ -50,12 +50,12 @@ q(2, "The margin check refuses an available head it cannot read, and the machine
   "Each names the same input, since a count and an available head are both read through the finiteness test."],
  "One needs a finite available NPSH and the other a whole number of machines. Where the engine declines, the decline is the answer.")
 
-q(3, "The tier is built on the idea that a duty point which works on paper fails in three ways. What are they?",
- "On suction, on change and on the fluid.",
- ["On suction, on power and on the fluid.",
-  "On change, on the fluid and on the count of machines.",
-  "On suction, on change and on the region the duty lands in."],
- "The suction side, the affinity laws and the trim, and the fact that a catalogue curve is a water curve.")
+q(3, "A pump station's machine count and a compressor's stage count are both whole numbers. How does the onward lesson say they differ?",
+ "The machine count is an input, and the stage count is an answer out of two limits at once.",
+ ["Neither is an input: both are solved from the duty flow.",
+  "The stage count is an input the user types, and the machine count is solved from the system curve crossing.",
+  "Both are inputs, but the stage count is capped by the 300 degF default discharge limit before the train is run."],
+ "Everything in this tier had a curve to work with, and the machine count was typed in. A compressor's stage count is discovered from two limits at once, the engine names which one governed, and the stages then chain into a train with a real cooling duty between them.")
 
 q(1, "What is true of every one of the items this course holds for the literature?",
  "Each is used by the engine, each is printed in the course, and none of them decides a graded answer.",

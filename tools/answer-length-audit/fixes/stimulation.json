@@ -1,0 +1,128 @@
+{
+ "migration": "20261021b_b4_fix_stimulation.sql",
+ "title": "B4 follow-on: stimulation double-key distractors rewritten",
+ "items": [
+  {
+   "app_slug": "stimulation",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 10,
+   "category": "double-key",
+   "flag": "distractors 0 and 3 also absent from bookkeeping, each arguably correct",
+   "verdict": "fixed",
+   "reason": "Non-Darcy flow and long-term creep are genuinely absent from the tier; replaced with closure crushing and gel residue/fines, which the tier does carry (catalogue interpolation at closure, damage factor 0.5).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Non-Darcy flow, which lowers the effective permeability at high rates once inertial losses build up in the pore throats of the pack.",
+      "new": "Closure stress crushing, which this tier never applied, so the pack keeps the full catalogue permeability however hard the faces close."
+     },
+     "3": {
+      "old": "Closure creep, which keeps narrowing the pack for years after the job as the grains slowly embed into the two faces of the fracture.",
+      "new": "Gel residue and fines in the pack, which this tier ignored entirely, so the conductivity is credited with the whole laboratory figure."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "stimulation",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-two-two-dimensional-models",
+   "ord": 10,
+   "category": "double-key",
+   "flag": "option 2 restates the correct answer",
+   "verdict": "fixed",
+   "reason": "Option 2 was a longer paraphrase of the key; rewritten to misstate the half-length/height and model-name refusals (the lesson says all are refused).",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "It refuses non-positive rate, viscosity, half-length, height or modulus, and refuses a model name it does not recognise, yet it will not refuse a badly matched model and geometry.",
+      "new": "It refuses a non-positive rate, viscosity or modulus, but it clamps a non-positive half-length or height to a small positive value and runs, and it falls back to PKN on a model name it does not know."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "stimulation",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-width-net-pressure-and-height",
+   "ord": 14,
+   "category": "double-key",
+   "flag": "option 2 same as correct",
+   "verdict": "fixed",
+   "reason": "Option 2 paraphrased the key; rewritten to apply the KGD height dependence (inverse, under the quarter power) to PKN. Explanation, which described volume and leakoff area rather than the keyed quantities, now explains the key.",
+   "changes": {
+    "explanation": {
+     "old": "Fracture volume and leaking area both scale with height directly, so they halve alongside it.",
+     "new": "The PKN width bracket holds rate, viscosity, half-length and modulus and no height, so the width stays put, while PKN net pressure is E' w_max over twice the height, so halving the height doubles it."
+    },
+    "options": {
+     "2": {
+      "old": "The width is untouched since no height appears in its bracket, and the net pressure doubles because height divides it directly.",
+      "new": "The width grows by the quarter power of two, since height sits inversely under the quarter power, and the net pressure doubles with it."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "stimulation",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-where-the-models-stop",
+   "ord": 12,
+   "category": "double-key",
+   "flag": "option 3 restates the correct option",
+   "verdict": "fixed",
+   "reason": "Option 3 paraphrased the key; rewritten to name viscous pressure drop and elastic compliance, which the models do contain (width from elasticity and viscous flow).",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "Dilatancy in the damaged rock at the tip, together with a lag region ahead of the fluid front that sits at very low pressure.",
+      "new": "The viscous pressure drop in the fluid running up to the tip, and the elastic compliance of the rock that holds the crack faces apart."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "stimulation",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 10,
+   "category": "double-key",
+   "flag": "option 2 restates the correct option",
+   "verdict": "fixed",
+   "reason": "Option 2 paraphrased the key; rewritten to two conditions the engine does not refuse (bad model/geometry pairing, zero leakoff treated as no loss).",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "A modulus that is not positive and a Poisson ratio outside the open interval from zero to one half, which is what a value entered in field units rather than strict SI produces.",
+      "new": "A half-length shorter than the height and a leakoff coefficient of exactly zero, which is what a value entered in field units rather than strict SI tends to produce."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "stimulation",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 15,
+   "category": "double-key",
+   "flag": "option 3 arguably correct",
+   "verdict": "fixed",
+   "reason": "Option 3 was the lesson statement (downstream of the same geometry, limits carried forward) and so also correct; rewritten to the false claim that the Expert tier replaces the geometry.",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "No, because the extra work of the Expert tier happens downstream of the same geometry, so every limit listed in module five is carried forward unchanged.",
+      "new": "No, because the Expert tier sets the PKN and KGD geometry aside and builds the fracture from the pack outward, so the limits of module five no longer bind it."
+     }
+    }
+   }
+  }
+ ]
+}

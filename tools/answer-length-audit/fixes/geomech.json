@@ -1,0 +1,309 @@
+{
+ "migration": "20261021b_b4_fix_geomech.sql",
+ "title": "geomech: two on-trust prompts sharpened, one soft prompt tightened, four duplicate final questions replaced",
+ "items": [
+  {
+   "app_slug": "geomech",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "category": "double-key",
+   "flag": "\"taken entirely on trust\": friction angle and Poisson ratio arguably also on trust",
+   "verdict": "fixed",
+   "reason": "The friction angle and Poisson ratio are unmeasured seeds, so \"on trust\" alone could fit them; the prompt now says the inputs arrive from upstream of the engine, which the seeds (the engine's own lithology table) do not, and the explanation says so.",
+   "changes": {
+    "prompt": {
+     "old": "The Associate tier takes two of its six inputs entirely on trust. Which, and from where?",
+     "new": "The Associate tier takes two of its six inputs entirely on trust from upstream of the engine. Which, and from where?"
+    },
+    "explanation": {
+     "old": "Neither can be checked from inside this course, and an error in either propagates everywhere.",
+     "new": "Both arrive with the profile from upstream and neither can be checked from inside this course, so an error in either propagates everywhere. The friction angle and Poisson ratio are seeds from the engine's own lithology table, and the horizontal stresses are estimated by the engine itself."
+    }
+   }
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 9,
+   "category": "double-key",
+   "flag": "\"taken entirely on trust\": friction angle and Poisson ratio arguably also on trust",
+   "verdict": "fixed",
+   "reason": "Same ambiguity as beginner final 41; the prompt now asks what arrived on trust from upstream of the engine, which excludes the seeded friction angle and Poisson ratio (m04 l05: the engine carries that table and imports nothing from another domain).",
+   "changes": {
+    "prompt": {
+     "old": "What did this tier take entirely on trust?",
+     "new": "Which inputs did this tier take entirely on trust from upstream of the engine?"
+    },
+    "explanation": {
+     "old": "The engine deliberately does not compute the pore pressure, so a geomechanics answer cannot contain a circular argument about it.",
+     "new": "The overburden and the pore pressure arrive with the profile from upstream, and the engine deliberately does not compute the pore pressure, so no circular argument can hide in it. The friction angle and Poisson ratio are seeds from the engine's own lithology table, starting values that a sensitivity run tests."
+    }
+   }
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 27,
+   "category": "other",
+   "flag": "\"which line is nearly always absent\": soft prompt",
+   "verdict": "fixed",
+   "reason": "\"Nearly always absent\" from \"a real stability summary\" was loose; the prompt now anchors it to the collapse number being unlabelled, as advanced m04 l01 and l04 put it.",
+   "changes": {
+    "prompt": {
+     "old": "One line is nearly always absent from a real stability summary. Which?",
+     "new": "A stability summary quotes a collapse gradient with nothing said about it. Which missing line would label that number?"
+    }
+   }
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "category": "duplicate",
+   "flag": "editor-flagged: advanced final 31 = advanced m04-using-it-in-a-well-plan ord 9 (same options)",
+   "verdict": "fixed",
+   "reason": "Same question and options as the module question, kept there; the final copy now asks the learner to diagnose losses on a fast trip in as surge (advanced m04 l03), a point no question tested.",
+   "changes": {
+    "prompt": {
+     "old": "Everything a hole actually experiences has to sit in one range. List it.",
+     "new": "Returns are lost while running in fast, with a static mud weight comfortably inside the window. What mechanism fits?"
+    },
+    "explanation": {
+     "old": "Four numbers in one window, and this course computes none of the transient three.",
+     "new": "Running pipe in surges the well, a transient pressure on top of the static mud weight, and a fast trip can exceed the fracture gradient with a mud weight comfortably inside the static window. Swab comes from pulling pipe and lowers the pressure, circulating density needs the pumps on, and thermal cooling builds over hours of circulation."
+    },
+    "options": {
+     "0": {
+      "old": "Only the static mud weight.",
+      "new": "Thermal cooling of the wall."
+     },
+     "1": {
+      "old": "The static mud weight, plus the circulating uplift, plus the surge, and minus the swab.",
+      "new": "Surge from running pipe, added on top of the static mud weight, pushing past the fracture gradient."
+     },
+     "2": {
+      "old": "The static mud weight and circulating density, both from the hydraulics course.",
+      "new": "Swab from running pipe, which adds to the bottom hole pressure at the fracture end."
+     },
+     "3": {
+      "old": "The kill mud weight and the trip margin from the well control calculation.",
+      "new": "Circulating density, since the pumps add annulus friction on every trip."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index is unchanged."
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-using-it-in-a-well-plan",
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "editor-flagged duplicate of advanced final 31",
+   "verdict": "judged fine",
+   "reason": "Kept as the module question; the final copy was rewritten to a different point."
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "category": "duplicate",
+   "flag": "editor-flagged: advanced final 38 = advanced m05-the-edges-of-the-model ord 11 (same key)",
+   "verdict": "fixed",
+   "reason": "Same concept and key as the module question, kept there; the final copy now asks what the isothermal assumption makes of the fracture gradient in a cooled hole (advanced m05 l03, \"the honest position\"), a point no question tested.",
+   "changes": {
+    "prompt": {
+     "old": "Returns disappear after six hours of steady circulation. What mechanism fits?",
+     "new": "The model is isothermal. What does that make its fracture gradient in a hole cooled by circulation?"
+    },
+    "explanation": {
+     "old": "The cooling penetrates further the longer it goes on, and the effective fracture gradient falls with it.",
+     "new": "Cooling the wall reduces the hoop stress and brings it closer to tension, so an isothermal fracture gradient is an upper estimate in a cooled hole. The error grows with depth, where mud and rock differ most in temperature, and with circulating time, as the cooling penetrates further. The benefit against collapse is on the other bound."
+    },
+    "options": {
+     "0": {
+      "old": "Losses starting the moment the pumps come on, as the circulating pressure is added to the static column at once.",
+      "new": "A lower estimate, because cooling raises the hoop stress, so the wall can carry more mud before it splits."
+     },
+     "1": {
+      "old": "Losses that stop when the pumps are shut down, which is the signature of an equivalent circulating density problem.",
+      "new": "An exact answer at the wall, since the cooling only reaches a thin skin that the Kirsch solution ignores."
+     },
+     "2": {
+      "old": "Losses starting after hours of trouble-free circulation with nothing else having changed.",
+      "new": "An upper estimate, with the error growing with depth and with circulating time."
+     },
+     "3": {
+      "old": "Losses that only happen while tripping, which is the signature of a surge exceeding the fracture gradient.",
+      "new": "A conservative number, because the thermal stress helps against collapse and the model leaves that out."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index is unchanged."
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-the-edges-of-the-model",
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "editor-flagged duplicate of advanced final 38",
+   "verdict": "judged fine",
+   "reason": "Kept as the module question; the final copy was rewritten to a different point."
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "category": "duplicate",
+   "flag": "editor-flagged and near p0.70 k0.93: intermediate final 33 = intermediate m04-against-the-oracle ord 7 (vertical collapse closed form)",
+   "verdict": "fixed",
+   "reason": "Same closed form as the module question, kept there; the final copy now asks which wall stresses are largest and smallest at the breakout in the two-line derivation (intermediate m04 l03), a step no question tested.",
+   "changes": {
+    "prompt": {
+     "old": "Write the vertical closed-form collapse pressure.",
+     "new": "In the vertical fixture's two-line collapse derivation, which wall stresses are the largest and the smallest at the breakout?"
+    },
+    "explanation": {
+     "old": "One plus q is the amplification: the largest wall stress falls by one and the smallest rises by one per unit of pressure.",
+     "new": "At theta of 90 degrees the hoop stress is 95000000 Pa less dP, the axial is 42500000 Pa and the radial is dP, so for small dP the hoop is the largest and the radial the smallest. Mohr-Coulomb with q of 3 then gives dP of 13750000 Pa and a collapse pressure of 33750000 Pa."
+    },
+    "options": {
+     "0": {
+      "old": "Pore pressure plus UCS divided by q.",
+      "new": "Hoop largest, axial smallest."
+     },
+     "1": {
+      "old": "Three times effective Shmin less effective SHmax, less the strength, plus the pore pressure.",
+      "new": "The axial is the largest, as at ninety degrees it gains the Poisson term from the stress difference."
+     },
+     "2": {
+      "old": "Pore pressure plus three times effective SHmax less effective Shmin less UCS, all over one plus q.",
+      "new": "The hoop stress is the largest and the radial stress, which is just dP, is the smallest, while dP is small."
+     },
+     "3": {
+      "old": "The effective overburden over the frictional ratio, plus the pore pressure and the UCS.",
+      "new": "The radial stress is the largest, because the mud pressure pushes straight on the wall there."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index is unchanged."
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-against-the-oracle",
+   "ord": 7,
+   "category": "duplicate",
+   "flag": "duplicate of intermediate final 33",
+   "verdict": "judged fine",
+   "reason": "Kept as the module question; the final copy was rewritten to a different point."
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "near p0.64 k0.67: intermediate final 15 vs advanced m05-the-edges-of-the-model ord 13 (upper bound in fractured ground); prompt also dangles on \"instead\"",
+   "verdict": "fixed",
+   "reason": "Same concept and answer as the Expert module question (and advanced final 40), kept there; the Professional final copy now tests the tensile strength point of intermediate m02 l03, which no question tested, with a self-contained prompt.",
+   "changes": {
+    "prompt": {
+     "old": "In a naturally fractured formation, what should the upper bound be instead?",
+     "new": "Setting the tensile strength to zero, as is often done, changes the fracture initiation pressure how?"
+    },
+    "explanation": {
+     "old": "A hole meeting a natural fracture does not have to split anything: it only has to open a plane that already exists.",
+     "new": "The criterion is least wall stress no lower than minus T0, so taking T0 as zero lowers the fracture initiation pressure by exactly T0. Rock is weak in tension and microcracked rock is effectively zero, so zero is the conservative choice. The slope q belongs to the shear criterion."
+    },
+    "options": {
+     "0": {
+      "old": "The fracture initiation pressure, unchanged.",
+      "new": "It raises it by exactly T0."
+     },
+     "1": {
+      "old": "The minimum horizontal stress, or a measured loss pressure.",
+      "new": "It lowers it by exactly T0, which is the conservative choice."
+     },
+     "2": {
+      "old": "The overburden gradient, since a fracture cannot propagate against a stress larger than the vertical one in a normal regime.",
+      "new": "It changes nothing, because tensile strength only matters for propagation, which the minimum horizontal stress governs."
+     },
+     "3": {
+      "old": "The pore pressure plus the tensile strength, which is the pressure at which a pre-existing fracture would first open.",
+      "new": "It lowers it by T0 times q, because the tensile strength enters through the slope of the failure line."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index is unchanged."
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-the-edges-of-the-model",
+   "ord": 13,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate final 15",
+   "verdict": "judged fine",
+   "reason": "Kept as the module question; the intermediate final copy was rewritten to a different point."
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "duplicate",
+   "flag": "lead review: advanced final 40 duplicates advanced module m05-the-edges-of-the-model ord 13 (same key)",
+   "verdict": "fixed",
+   "reason": "Same concept and key as the module question, kept there; the final copy now asks what evidence says the intact-rock upper bound may not be operative (advanced m05 l04, image logs and offset losses), a point no question tested.",
+   "changes": {
+    "prompt": {
+     "old": "In a formation full of existing planes, what number should cap the mud weight?",
+     "new": "Without a fracture network model, what tells you the intact-rock upper bound may not be the operative one?"
+    },
+    "explanation": {
+     "old": "Using the minimum horizontal stress is a cheap and defensible conservatism.",
+     "new": "Fracture orientation and density are directly observable on image logs, and a field with losses at low equivalent circulating densities is telling you the intact-rock upper bound is not the operative one. The quality score and the collapse gradient say nothing about natural fractures."
+    },
+    "options": {
+     "0": {
+      "old": "The computed fracture initiation pressure, since it already includes the tensile strength of the wall.",
+      "new": "A quality score below 100, which flags that the stress model has stopped believing itself at that depth."
+     },
+     "1": {
+      "old": "The overburden gradient, since a fracture cannot propagate against a stress larger than the vertical in a normal regime.",
+      "new": "A collapse gradient above the pore pressure, which shows the rock at the wall is already failing in shear."
+     },
+     "2": {
+      "old": "The pore pressure plus the intact tensile strength, which is when the first natural fracture would begin to open.",
+      "new": "A wide static window at the tightest point, which leaves room for any natural fracture to stay closed."
+     },
+     "3": {
+      "old": "A measured leak-off, a loss history, or the minimum horizontal stress.",
+      "new": "Image logs of fracture density, and offset losses at low circulating densities."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index is unchanged."
+  }
+ ]
+}

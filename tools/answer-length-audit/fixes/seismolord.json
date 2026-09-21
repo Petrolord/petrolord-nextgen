@@ -1,0 +1,1581 @@
+{
+ "migration": "20261021b_b4_fix_seismolord.sql",
+ "title": "seismolord: tighten beginner correct options, trim B4-padded distractors, re-band; rewrite two duplicate final questions",
+ "items": [
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 1,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 119 to 73 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "A depth to time relationship, so the precise well depths can be compared directly against the broad seismic reflections",
+      "new": "A depth to time relationship that places well tops on seismic reflections"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 130 to 56 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Essentially nothing, because seismic responds to contrasts in impedance at interfaces rather than to the value of impedance itself",
+      "new": "Essentially nothing, as only impedance contrasts reflect"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 7,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 103 to 68 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Wells are precise and recorded in depth, while seismic is vertically broad and recorded in two way time",
+      "new": "Wells are precise and in depth; seismic is broad and in two way time"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 12,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 143 to 44 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "Because reflections are produced by contrasts in acoustic impedance, so the impedance log is exactly the input the reflection calculation needs",
+      "new": "Because impedance contrasts make reflections"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 123 to 64 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "That the section holds real contrasts in rock properties, so a non trivial reflection coefficient series should be expected",
+      "new": "That real contrasts exist, so non zero coefficients are expected"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 100 to 64 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "Because TWT = 2z / 2000 s means two way time in milliseconds is numerically equal to depth in metres",
+      "new": "Because two way time in milliseconds then equals depth in metres"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 20,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 94 to 61 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "Because the seismic data the synthetic has to be compared against lives on a two way time axis",
+      "new": "Because the seismic it is compared with lives in two way time"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 98 to 57 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The log occupies 1500 ms to 1650 ms, so it sits inside the grid with empty time above and below it",
+      "new": "The log occupies 1500 ms to 1650 ms, well inside the grid"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 25,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 120 to 80 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The layer below has lower acoustic impedance than the layer above, so the reflected pulse returns with reversed polarity",
+      "new": "The layer below has lower impedance, so the pulse returns with reversed polarity"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 27,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 143 to 86 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "It is the peak of a run of similar negative coefficients, so the impedance drop is spread over several samples rather than being one sharp step",
+      "new": "A run of similar negative values, so the impedance drop is spread over several samples"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 70 to 38 chars, same meaning; B4-padded distractor(s) 0,1 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "RC = +1, and the synthetic shows a full amplitude peak, as it would at a perfect mirror",
+      "new": "RC = +1, and the synthetic shows a full amplitude peak"
+     },
+     "1": {
+      "old": "RC = -1, and the synthetic shows a full amplitude trough, because the wave comes back inverted",
+      "new": "RC = -1, and the synthetic shows a full amplitude trough"
+     },
+     "3": {
+      "old": "RC = 0, and that interface contributes nothing at all to the synthetic",
+      "new": "RC = 0, and the interface adds nothing"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 119 to 69 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The shape of the pulse the seismic source sends into the ground, a scaled copy of which comes back from every reflector",
+      "new": "The source pulse, a scaled copy of which returns from every reflector"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 32,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 128 to 54 chars, same meaning; B4-padded distractor(s) 1,2 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "Taking the difference between neighbouring reflection coefficients, so that the synthetic trace becomes the time derivative of the reflectivity series",
+      "new": "Taking the difference between neighbouring reflection coefficients"
+     },
+     "2": {
+      "old": "Stretching one wavelet so that it spans the whole logged interval, then scaling that single stretched wavelet by the average reflection coefficient",
+      "new": "Stretching one wavelet so that it spans the whole logged interval"
+     },
+     "3": {
+      "old": "Placing a copy of the wavelet at every reflection coefficient, scaling each copy by that coefficient, and summing all the copies",
+      "new": "Scaling a wavelet copy by each coefficient and summing"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 189 to 73 chars, same meaning; B4-padded distractor(s) 1,2,3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Because the long 15 Hz wavelet reaches across several closely spaced coefficients of the same sign and sums them constructively, while the shorter high frequency wavelet keeps them separate",
+      "new": "Because the long 15 Hz wavelet sums several nearby same sign coefficients"
+     },
+     "1": {
+      "old": "Because a low frequency Ricker wavelet has a larger peak value than a high frequency one, so every event on the low frequency synthetic is scaled up before any summing takes place along the trace",
+      "new": "Because a low frequency Ricker wavelet has a larger peak value than a high frequency one"
+     },
+     "2": {
+      "old": "Because the reflection coefficients themselves become larger when the frequency is lowered, since the impedance contrasts are averaged over a longer window and the averaged interfaces then reflect more strongly",
+      "new": "Because the reflection coefficients themselves become larger when the frequency is lowered"
+     },
+     "3": {
+      "old": "Because 15 Hz shifts every reflector to a shallower two way time, where the overburden is thinner and the impedance contrasts between the shallower layers on this well are much sharper than they are deeper down",
+      "new": "Because 15 Hz shifts every reflector to a shallower two way time"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 134 to 74 chars, same meaning; B4-padded distractor(s) 0,2,3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Two clearly separated events, each at its own correct time, because the convolution keeps every reflection coefficient on its own sample of the time grid",
+      "new": "Two clearly separated events, each at its own correct time"
+     },
+     "1": {
+      "old": "The two wavelet copies overlap and interfere, giving one composite event whose amplitude and timing match neither interface on its own",
+      "new": "The copies overlap into one composite event that matches neither interface"
+     },
+     "2": {
+      "old": "The shallower of the two interfaces is dropped from the calculation, since the engine keeps only one coefficient per wavelet length and retains the deeper one",
+      "new": "The shallower of the two interfaces is dropped from the calculation"
+     },
+     "3": {
+      "old": "An amplitude equal to the sum of the two impedances, because the synthetic adds the rock properties on either side of each interface into a single composite value",
+      "new": "An amplitude equal to the sum of the two impedances"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 130 to 65 chars, same meaning; B4-padded distractor(s) 0,1,3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Resolution falls but amplitudes rise, because the shorter wavelet blurs neighbouring reflectors together while its sharper peak carries more energy into every event",
+      "new": "Resolution falls but amplitudes rise"
+     },
+     "1": {
+      "old": "Both resolution and amplitude rise together, since a higher frequency wavelet is both shorter in time and brighter at its peak, so every event gains on both counts",
+      "new": "Both resolution and amplitude rise together"
+     },
+     "2": {
+      "old": "Resolution improves, because the shorter wavelet separates closely spaced reflectors, but each event carries less summed amplitude",
+      "new": "Resolution improves, but each event carries less summed amplitude"
+     },
+     "3": {
+      "old": "Nothing changes, because the reflection coefficients are the same either way and the synthetic is fully determined by the reflectivity series whatever the wavelet",
+      "new": "Nothing changes, because the reflection coefficients are the same either way"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 220 to 99 chars, same meaning; B4-padded distractor(s) 0,1,2 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Mean gamma ray over the logged interval, mean neutron porosity over the same interval, mean bulk density from the RHOB curve, mean sonic transit time from the DT curve, the count of finite samples used, and the depth step of the log",
+      "new": "Mean gamma ray, mean neutron porosity, mean density, mean sonic, sample count and log step"
+     },
+     "1": {
+      "old": "Wavelet frequency in hertz, wavelet length in milliseconds, the side lobe value of the Ricker, its central peak value, the sample rate of the time grid and the total grid length, all read from the wavelet and time grid settings",
+      "new": "Wavelet frequency, wavelet length, side lobe value, peak value, sample rate and grid length"
+     },
+     "2": {
+      "old": "Mean velocity over the interval, mean density over the interval, mean acoustic impedance, the mean reflection coefficient across all interfaces, the mean synthetic amplitude along the trace and the count of finite samples behind them",
+      "new": "Mean velocity, mean density, mean impedance, mean reflection coefficient, mean amplitude and sample count"
+     },
+     "3": {
+      "old": "Mean sonic velocity, two way time at the log top, maximum impedance, the strongest reflection coefficient by absolute value, the two way time of that coefficient, and the two way time of the strongest synthetic amplitude",
+      "new": "Mean sonic velocity, log top TWT, maximum impedance, strongest RC, its TWT, strongest amplitude TWT"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "B4-padded distractor(s) 3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "They should be used to mark the top and the base of the logged interval when the depth range is set",
+      "new": "They should be used to mark the top and the base of the logged interval"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 214 to 64 chars, same meaning; B4-padded distractor(s) 0,1,2 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The synthetic was accidentally shifted by 60 ms during the depth to time conversion, so every event on the trace now sits later than the interface that produced it and a bulk shift of the same size would simply realign them all",
+      "new": "The synthetic was accidentally shifted by 60 ms during the depth to time conversion"
+     },
+     "1": {
+      "old": "The reflection coefficient at 1642 ms must be larger than the one at 1582 ms, since the strongest amplitude on a synthetic always sits on the strongest single interface and the reported coefficient ranking has to be wrong",
+      "new": "The reflection coefficient at 1642 ms must be larger than the one at 1582 ms"
+     },
+     "2": {
+      "old": "One of the two numbers is a reporting error, which the capstone tolerance absorbs, because a synthetic amplitude cannot peak anywhere except at the time of the largest reflection coefficient that drives it on the synthetic trace",
+      "new": "One of the two numbers is a reporting error, which the capstone tolerance absorbs"
+     },
+     "3": {
+      "old": "The synthetic amplitude at any time is the sum of wavelet copies from every nearby reflector, so a cluster of moderate coefficients near 1642 ms can add up to more than the single strongest coefficient near 1582 ms",
+      "new": "Coefficients near 1642 ms add up to more than the one at 1582 ms"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 122 to 77 chars, same meaning; B4-padded distractor(s) 1 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "That a tie can be systematically early or late, so the shift has to be measured and applied rather than assumed to be zero",
+      "new": "That a tie can be systematically early or late, so its shift must be measured"
+     },
+     "1": {
+      "old": "That the wavelet frequency must always be raised to 40 Hz before tying, because a sharper wavelet removes the lag and lets the events line up by eye",
+      "new": "That the wavelet frequency must always be raised to 40 Hz before tying"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 133 to 90 chars, same meaning; B4-padded distractor(s) 2 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "Module quizzes at 75 percent with a 24 hour cooldown after three failed attempts, the final exam at 70 percent, and the capstone last",
+      "new": "Quizzes at 75 percent, 24 hour cooldown after three fails, final 70 percent, capstone last"
+     },
+     "2": {
+      "old": "Module quizzes at 75 percent with no cooldown, the final exam at 75 percent, and the capstone first, so the graded numbers are read before any module quiz is attempted",
+      "new": "Module quizzes at 75 percent with no cooldown, the final exam at 75 percent, and the capstone first"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-seismic-and-the-well-tie",
+   "ord": 3,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 96 to 56 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "A seismic trace is approximately the earth's reflectivity series convolved with a source wavelet",
+      "new": "A seismic trace is reflectivity convolved with a wavelet"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-seismic-and-the-well-tie",
+   "ord": 13,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 99 to 78 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "Several moderate coefficients near 1642 ms interfere constructively once convolved with the wavelet",
+      "new": "Several moderate coefficients near 1642 ms interfere constructively in the sum"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-seismic-and-the-well-tie",
+   "ord": 15,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 89 to 68 chars, same meaning; B4-padded distractor(s) 0,2,3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Seismic amplitudes are always too weak to pick without a well to boost them into a usable event",
+      "new": "Seismic amplitudes are always too weak to pick without a well to boost them"
+     },
+     "1": {
+      "old": "Only the tie establishes which seismic reflection corresponds to which geological surface",
+      "new": "Only the tie shows which reflection carries which geological surface"
+     },
+     "2": {
+      "old": "Seismic surveys record depth directly, so the tie merely confirms the depths already on the section",
+      "new": "Seismic surveys record depth directly, so the tie merely confirms the depths"
+     },
+     "3": {
+      "old": "Horizon mapping is done in the well domain, so seismic contributes nothing to it between the wells",
+      "new": "Horizon mapping is done in the well domain, so seismic contributes nothing to it"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-velocity-and-impedance",
+   "ord": 1,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 96 to 34 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "Interval transit time, or slowness, the time a wave takes to cross a fixed distance of formation",
+      "new": "Interval transit time, or slowness"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-velocity-and-impedance",
+   "ord": 7,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 120 to 52 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "The curve must be converted, because feeding a foot-based DT into the metre formula yields a velocity in the wrong units",
+      "new": "It must be converted to microseconds per metre first"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-velocity-and-impedance",
+   "ord": 10,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 133 to 55 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "Because reflections respond to impedance, which is the product of the two, so a velocity increase can be offset by a density decrease",
+      "new": "Because reflections respond to their product, impedance"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-velocity-and-impedance",
+   "ord": 11,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "B4-padded distractor(s) 0,1 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The difference between velocity and density at each sample",
+      "new": "The difference between velocity and density"
+     },
+     "1": {
+      "old": "The ratio of velocity to density, measured in the rock matrix",
+      "new": "The ratio of velocity to density"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-depth-to-time",
+   "ord": 2,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 116 to 88 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "Because converting to depth needs a velocity model, which is one of the things interpretation is supposed to produce",
+      "new": "Because converting to depth needs a velocity model, which interpretation itself produces"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-depth-to-time",
+   "ord": 3,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 111 to 75 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Depth to time is straightforward given a velocity model, while time to depth inherits every error in that model",
+      "new": "Depth to time is straightforward, while time to depth inherits model errors"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-depth-to-time",
+   "ord": 5,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 103 to 71 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "Because the source and receiver are on the same side of the target, so the energy travels down and back",
+      "new": "Because the energy travels down to the reflector and then back up again"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-depth-to-time",
+   "ord": 7,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 87 to 63 chars, same meaning; B4-padded distractor(s) 1,3 returned to pre-B4 wording; distractor(s) 2 trimmed to clear the correct option's length; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Halving the two-way time and multiplying by velocity returns the depth you started with",
+      "new": "Half the two-way time times velocity gives back the start depth"
+     },
+     "1": {
+      "old": "The two-way time in milliseconds is always larger than the depth in metres on the teaching well at every depth",
+      "new": "The two-way time in milliseconds is always larger than the depth in metres"
+     },
+     "2": {
+      "old": "The computed depth falls somewhere inside the 0 to 1798 ms grid",
+      "new": "The computed depth falls inside the 0 to 1798 ms grid"
+     },
+     "3": {
+      "old": "Multiplying the full two-way time by velocity returns the depth you started with at the well",
+      "new": "Multiplying the two-way time by velocity returns the depth you started with"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-depth-to-time",
+   "ord": 11,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 143 to 72 chars, same meaning; B4-padded distractor(s) 1,2 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The 2000 m/s places the log on the time axis, while the 3145.29 m/s is measured rock velocity that builds impedance and reflection coefficients",
+      "new": "The 2000 m/s positions the log in time; the 3145.29 m/s builds impedance"
+     },
+     "1": {
+      "old": "The 2000 m/s is the measured rock velocity, and the 3145.29 m/s is the assumed overburden average used only to hang the log on the time axis at the well",
+      "new": "The 2000 m/s is the measured rock velocity, and the 3145.29 m/s is the assumed overburden average"
+     },
+     "2": {
+      "old": "They are two estimates of the same quantity, and the more precise one should be preferred, which makes the measured sonic average the one to carry through both the time axis and the impedance",
+      "new": "They are two estimates of the same quantity, and the more precise one should be preferred"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-depth-to-time",
+   "ord": 12,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 103 to 64 chars, same meaning; B4-padded distractor(s) 0,1 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "By assuming the seismic sample interval matches the log sample interval, so each log sample can be assigned the time of its matching seismic sample",
+      "new": "By assuming the seismic sample interval matches the log sample interval"
+     },
+     "1": {
+      "old": "By reading the two-way time straight off the seismic display at the well location, where the strongest event is taken as the target top",
+      "new": "By reading the two-way time straight off the seismic display at the well location"
+     },
+     "3": {
+      "old": "By a checkshot survey or a vertical seismic profile, with the sonic log then drift corrected against it",
+      "new": "By a checkshot or VSP, with the sonic drift corrected against it"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-depth-to-time",
+   "ord": 14,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 99 to 51 chars, same meaning; B4-padded distractor(s) 0,2 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Because the sonic log is recorded at exactly 2 ms intervals in the borehole, so the synthetic has to inherit that step",
+      "new": "Because the sonic log is recorded at exactly 2 ms intervals in the borehole"
+     },
+     "1": {
+      "old": "Because discrete convolution requires a constant spacing, and real seismic is recorded that way too",
+      "new": "Because discrete convolution needs constant spacing"
+     },
+     "2": {
+      "old": "Because uneven spacing would make the well tops land at odd millisecond values that the display cannot label",
+      "new": "Because uneven spacing would make the well tops land at odd millisecond values"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-reflection-coefficients",
+   "ord": 12,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 97 to 63 chars, same meaning; B4-padded distractor(s) 0,2,3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Because positive coefficients paint as peaks only above about 0.1 in magnitude, with weaker ones shown as troughs",
+      "new": "Because positive coefficients paint as peaks only above about 0.1 in magnitude"
+     },
+     "1": {
+      "old": "Because recording, processing and display polarity conventions differ between surveys and regions",
+      "new": "Because polarity conventions differ between surveys and regions"
+     },
+     "2": {
+      "old": "Because the sign of the coefficient changes with the depth of the interface as the overburden compacts it",
+      "new": "Because the sign of the coefficient changes with the depth of the interface"
+     },
+     "3": {
+      "old": "Because peaks and troughs are assigned at random by interpretation software each time a section is loaded",
+      "new": "Because peaks and troughs are assigned at random by interpretation software"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-reflection-coefficients",
+   "ord": 13,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 69 to 63 chars, same meaning; B4-padded distractor(s) 1 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "At 1582 ms, which is 1582 m under the teaching time to depth function",
+      "new": "At 1582 ms, which is 1582 m on the teaching time-depth function"
+     },
+     "1": {
+      "old": "At 1580 ms, which is 1580 m under the teaching time to depth function on this well",
+      "new": "At 1580 ms, which is 1580 m under the teaching time to depth function"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-reflection-coefficients",
+   "ord": 14,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 92 to 60 chars, same meaning; B4-padded distractor(s) 0 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The peak is a noise spike, because five consecutive samples share the same sign and a real event would change sign",
+      "new": "The peak is a noise spike, because five consecutive samples share the same sign"
+     },
+     "2": {
+      "old": "The peak is a genuine event, because the values rise and fall smoothly around a single crest",
+      "new": "A genuine event, rising and falling smoothly about one crest"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-reflection-coefficients",
+   "ord": 15,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 77 to 47 chars, same meaning; B4-padded distractor(s) 0 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Zero, so the trace stays continuous through the missing interval and the convolution can run unbroken",
+      "new": "Zero, so the trace stays continuous through the missing interval"
+     },
+     "1": {
+      "old": "A no-data value, because zero would falsely claim that nothing reflects there",
+      "new": "A no-data value, since zero means no reflection"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 1,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 109 to 71 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "The short band limited oscillating pulse the source emits, a scaled copy of which appears at every reflection",
+      "new": "The short pulse the source emits, copied and scaled at every reflection"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 6,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 158 to 57 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "Sampling: the continuous minimum is minus 0.4463 at any frequency, and the 2 ms grid happens to land almost on it at 15 Hz but between samples at 25 and 40 Hz",
+      "new": "Sampling: the 2 ms grid lands nearer the minimum at 15 Hz"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 7,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 109 to 62 chars, same meaning; B4-padded distractor(s) 0 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "It guarantees the synthetic and the seismic have the same amplitude scale, so the two traces can be compared without any normalisation",
+      "new": "It guarantees the synthetic and the seismic have the same amplitude scale"
+     },
+     "1": {
+      "old": "The wavelet is symmetric with its peak at the centre, so the event sits on the boundary rather than beside it",
+      "new": "The peak sits at the centre, so the event sits on the boundary"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 8,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 129 to 48 chars, same meaning; B4-padded distractor(s) 1,3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "Replace each wavelet sample with the nearest reflection coefficient, so the wavelet shape is resampled onto the reflectivity time grid before it is displayed",
+      "new": "Replace each wavelet sample with the nearest reflection coefficient"
+     },
+     "2": {
+      "old": "Place a copy of the wavelet at every reflection coefficient, scaled by that coefficient, then add all the copies sample by sample",
+      "new": "Add up wavelet copies scaled by each coefficient"
+     },
+     "3": {
+      "old": "Average the reflectivity series over a window as long as the wavelet, which smooths the coefficients into a band limited trace at the seismic frequency",
+      "new": "Average the reflectivity series over a window as long as the wavelet"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 9,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 68 to 39 chars, same meaning; B4-padded distractor(s) 1 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "A trough of about minus 0.02 with positive side lobes on either side",
+      "new": "A trough of about minus 0.02 at 1600 ms"
+     },
+     "1": {
+      "old": "A peak of about plus 0.02 with negative side lobes on either side, as for any Ricker",
+      "new": "A peak of about plus 0.02 with negative side lobes on either side"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 10,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 113 to 51 chars, same meaning; B4-padded distractor(s) 2 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "Higher frequency gives a shorter wavelet and finer resolution, lower frequency gives a longer wavelet that smears",
+      "new": "Higher frequency: shorter wavelet, finer resolution"
+     },
+     "2": {
+      "old": "Frequency changes the amplitude of the wavelet but not its length, so resolution stays the same whichever frequency is chosen",
+      "new": "Frequency changes the amplitude of the wavelet but not its length"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 11,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 121 to 86 chars, same meaning; B4-padded distractor(s) 3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The lowest frequency gives the largest peak, because its longer wavelet sums more neighbouring reflections constructively",
+      "new": "The lowest frequency gives the largest peak, as its long wavelet sums more reflections"
+     },
+     "3": {
+      "old": "The 15 Hz result must be a processing error, since higher frequency should always be brighter for the same underlying reflectivity series",
+      "new": "The 15 Hz result must be a processing error, since higher frequency should always be brighter"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 12,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 153 to 70 chars, same meaning; B4-padded distractor(s) 0,1,3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The time to depth function is 60 ms out and the synthetic needs a bulk shift, after which the strongest amplitude would land back on the strongest coefficient where it belongs",
+      "new": "The time to depth function is 60 ms out and the synthetic needs a bulk shift"
+     },
+     "1": {
+      "old": "The strongest coefficient was excluded from the convolution because it is negative, and the engine only convolves positive coefficients, so its wavelet copy never reaches the trace",
+      "new": "The strongest coefficient was excluded from the convolution because it is negative"
+     },
+     "2": {
+      "old": "A cluster of moderate coefficients near 1642 ms reinforces constructively and sums to more than the isolated larger coefficient at 1582 ms produces alone",
+      "new": "Moderate coefficients near 1642 ms sum to more than the one at 1582 ms"
+     },
+     "3": {
+      "old": "The wavelet peak is offset from its centre by 60 ms, so every event on the synthetic appears later than the interface that produced it and the brightest one inherits that delay",
+      "new": "The wavelet peak is offset from its centre by 60 ms"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 13,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 164 to 90 chars, same meaning; B4-padded distractor(s) 0,1,2 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Because the wavelet delays every event by half its length, so the brightest point of the synthetic always lands later than the coefficient that caused it by that same fixed amount",
+      "new": "Because the wavelet delays every event by half its length"
+     },
+     "1": {
+      "old": "Because reflection coefficients are computed in depth and amplitudes in time, so the two maxima are reported on different axes and only agree once the depth scale is converted",
+      "new": "Because reflection coefficients are computed in depth and amplitudes in time"
+     },
+     "2": {
+      "old": "Because negative coefficients are plotted at the following sample, which pushes the brightest amplitude one step later than the coefficient whenever the strongest reflection is negative",
+      "new": "Because negative coefficients are plotted at the following sample"
+     },
+     "3": {
+      "old": "Because each amplitude sample is a sum of overlapping wavelet copies, so a reinforcing group of moderate coefficients can outproduce one larger isolated coefficient",
+      "new": "Because overlapping copies from a group of moderate coefficients can outsum one larger one"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 14,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 122 to 45 chars, same meaning; B4-padded distractor(s) 1 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "Only the 15 Hz result is trustworthy, because its peak matches a real interface, so the higher frequency run should be discarded before any tie is attempted",
+      "new": "Only the 15 Hz result is trustworthy, because its peak matches a real interface"
+     },
+     "2": {
+      "old": "Where the trace is brightest depends on the wavelet as well as the earth, since the reflectivity is identical in both runs",
+      "new": "The brightest time depends on the wavelet too"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-wavelets-and-convolution",
+   "ord": 15,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 156 to 70 chars, same meaning; B4-padded distractor(s) 2,3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "A bright amplitude is not automatically a strong interface, since it can also be constructive summing, tuning, or a long wavelet smearing a package together",
+      "new": "A bright event may be summing or tuning rather than a strong interface"
+     },
+     "2": {
+      "old": "Amplitude should be ignored, since only the reflectivity series is meaningful and everything the wavelet adds on top of it is an artefact of the chosen wavelet frequency",
+      "new": "Amplitude should be ignored, since only the reflectivity series is meaningful"
+     },
+     "3": {
+      "old": "Destructive interference is harmless because cancelled events reappear at higher frequency, so any dim interval can be recovered simply by rerunning with a sharper wavelet",
+      "new": "Destructive interference is harmless because cancelled events reappear at higher frequency"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 4,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 124 to 72 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "It comes from the convolved trace, and only samples inside the valid window are searched because the rest are marked as gaps",
+      "new": "It comes from the convolved trace, searched only inside the valid window"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 5,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 108 to 67 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "A zero asserts an amplitude nobody measured, while a gap asserts nothing, and the panel statistics skip gaps",
+      "new": "A zero asserts an unmeasured amplitude, while a gap asserts nothing"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 7,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 101 to 56 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Every reported time is exactly halved, so the top of the teaching log reads 750 ms instead of 1500 ms",
+      "new": "Every time is halved, so the top of the log reads 750 ms"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 8,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 164 to 57 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "Because polarity is a display convention, so two interpreters using opposite conventions tie the same well half a loop apart with nothing in the display to show why",
+      "new": "Because opposite conventions tie a well half a loop apart"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 9,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 202 to 80 chars, same meaning; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "It corrupts that velocity, then the impedance, then the reflection coefficients that sample takes part in, and the wavelet then spreads the error across a band of the synthetic tens of milliseconds wide",
+      "new": "It corrupts the velocity, impedance and coefficients, then the wavelet smears it"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 10,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "B4-padded distractor(s) 3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "A polarity convention problem that will disappear once the sign is flipped on the seismic display",
+      "new": "A polarity convention problem that will disappear when the sign is flipped"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 11,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 199 to 144 chars, same meaning; B4-padded distractor(s) 1 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "Mean sonic velocity, TWT at the top of the log, maximum impedance, the strongest reflection coefficient, the strongest synthetic amplitude and the recovered bulk shift from the cross-correlation scan against the seismic",
+      "new": "Mean sonic velocity, TWT at the top of the log, maximum impedance, the strongest reflection coefficient, the strongest synthetic amplitude and the recovered bulk shift"
+     },
+     "2": {
+      "old": "Mean sonic velocity, TWT at the top of the log, maximum impedance, the strongest reflection coefficient in absolute value, the TWT of that coefficient and the TWT of the strongest synthetic amplitude",
+      "new": "Mean sonic velocity, TWT at the log top, maximum impedance, the strongest reflection coefficient, its TWT and the TWT of the strongest amplitude"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 12,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 197 to 133 chars, same meaning; B4-padded distractor(s) 0,2 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Pass the final exam at 75 percent, then the module quizzes at 70 percent, then the capstone, so that the exam acts as the entry test and the module quizzes follow it as revision before the final gate opens",
+      "new": "Pass the final exam at 75 percent, then the module quizzes at 70 percent, then the capstone"
+     },
+     "2": {
+      "old": "Read every lesson, pass each module quiz at 70 percent, then the capstone, with no final exam involved, since the capstone itself stands in for the exam and grants the certification once the quizzes are cleared",
+      "new": "Read every lesson, pass each module quiz at 70 percent, then the capstone, with no final exam involved"
+     },
+     "3": {
+      "old": "Read every lesson, pass each module quiz at 75 percent with a 24 hour cooldown after three failures, clear all six modules, pass the final exam at 70 percent, and only then does the capstone unlock",
+      "new": "Every lesson, each module quiz at 75 percent with a 24 hour cooldown after three failures, the final at 70 percent, then the capstone"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 13,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 170 to 93 chars, same meaning; B4-padded distractor(s) 0,3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Nothing, because the two always coincide when the wavelet is zero phase, since a symmetric wavelet centres every copy on its own coefficient and the brightest point must fall on the largest one",
+      "new": "Nothing, because the two always coincide when the wavelet is zero phase"
+     },
+     "1": {
+      "old": "That the trace is a sum of overlapping wavelet copies, so its largest excursion need not sit at the largest single coefficient; on this well the two times are 60 ms apart",
+      "new": "That the trace sums overlapping copies, so its peak can sit away from the largest coefficient"
+     },
+     "3": {
+      "old": "That the two-way factor has to be applied twice, once to each entry, because the coefficient time comes from the depth to time conversion while the amplitude time is read off the trace separately",
+      "new": "That the two-way factor has to be applied twice, once to each entry"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 14,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 159 to 47 chars, same meaning; B4-padded distractor(s) 3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "So the shift recovered by the cross-correlation scan can be checked against a known truth, which shows that a tie is a measurement rather than an eye judgement",
+      "new": "So the recovered shift has a known right answer"
+     },
+     "3": {
+      "old": "Because the capstone grades the recovered lag alongside the other numbers, so the planted value has to be fixed in advance for every learner to be marked against the same answer",
+      "new": "Because the capstone grades the recovered lag alongside the other numbers"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-reading-the-synthetic",
+   "ord": 15,
+   "category": "tighten",
+   "flag": "BEGINNER tier: correct options ran far longer than distractors and B4 padded distractors to compensate; tighten the correct option, trim the padded distractors, re-band",
+   "verdict": "fixed",
+   "reason": "correct option tightened from 183 to 44 chars, same meaning; B4-padded distractor(s) 0,1,3 returned to pre-B4 wording; key and explanation unchanged",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "A second sonic curve so the velocity can be averaged for redundancy, which reduces the noise in the impedance log and therefore in every reflection coefficient and synthetic amplitude built from it",
+      "new": "A second sonic curve so the velocity can be averaged for redundancy"
+     },
+     "1": {
+      "old": "An automatic depth conversion of the whole seismic volume, using the tied time to depth function from the well to move every trace from two way time into depth so the horizons can be mapped in metres",
+      "new": "An automatic depth conversion of the whole seismic volume"
+     },
+     "2": {
+      "old": "Wedge modelling of a reflection pair with equal and opposite coefficients, to find the tuning thickness where amplitude peaks and to compare it against the classical theoretical value",
+      "new": "Wedge modelling to find the tuning thickness"
+     },
+     "3": {
+      "old": "A null handling pass over the input curves before the impedance is formed, so that gaps in DT and RHOB are filled by interpolation and the reflectivity series runs unbroken through the whole logged interval",
+      "new": "A null handling pass over the input curves before the impedance is formed"
+     }
+    }
+   },
+   "correct_change_reason": "owner: tighten seismolord beginner correct options"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 19,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m03-depth-to-time ord 13 (same 900 x 2 ms last-sample question, same key 1798 ms)",
+   "verdict": "fixed",
+   "reason": "true duplicate; module copy kept, final copy rewritten into a new question on the m03 time grid lesson (grid quantisation vs exact arithmetic in the capstone tolerances), answer_index kept at 2",
+   "correct_change_reason": "duplicate rewritten into a new question from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "The synthetic is computed on a regular 2 ms grid of 900 samples starting at 0 ms. What is the time of the last sample?",
+     "new": "The capstone allows 2 ms of tolerance on the two peak times but only 0.5 ms on the two way time at the log top. Why the difference?"
+    },
+    "explanation": {
+     "old": "With the first sample at 0 ms there are 899 steps of 2 ms after it, so the last sample sits at 899 times 2 = 1798 ms. Multiplying 900 by 2 gives 1800 ms, which counts one step too many.",
+     "new": "The two peak times are grid search results, so they can only land on multiples of 2 ms, and one sample either way is the smallest difference the grid can show. The log top time comes straight from the time-depth function applied to 1500 m, so it is exact arithmetic and can be held to 0.5 ms. The capstone runs at a fixed 25 Hz and uses no checkshot."
+    },
+    "options": {
+     "0": {
+      "old": "1800 ms",
+      "new": "The log top time is measured by a checkshot, while the peak times are estimated from the sonic"
+     },
+     "1": {
+      "old": "1802 ms",
+      "new": "The peak times shift with wavelet frequency, so they need room for whichever frequency is chosen"
+     },
+     "2": {
+      "old": "1798 ms",
+      "new": "Peak times come from the 2 ms grid, while the log top time is exact arithmetic"
+     },
+     "3": {
+      "old": "900 ms",
+      "new": "Deeper events carry more velocity error, so their times are looser"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m05-theory-and-the-grid ord 14 (which error the check against theory would not detect, same key)",
+   "verdict": "fixed",
+   "reason": "true duplicate, and the final copy was also double keyed (its radians-per-second distractor is, per the lesson and its own explanation, also undetected); module copy kept, final rewritten into a new question on the three checks named in the same lesson, answer_index kept at 3",
+   "correct_change_reason": "duplicate rewritten into a new question from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which error would the check against theory NOT detect?",
+     "new": "Besides checking the tuning thickness against theory, which two checks does this tier use so that together the three pin the wedge model at unrelated points?"
+    },
+    "explanation": {
+     "old": "The theoretical value does not involve the coefficients, so it agrees just as well with a wrong pair; the thick end check catches that. A frequency unit error moves both routes together, which is a reminder that a check catches process errors rather than input errors.",
+     "new": "The lesson names three checks: the tuning thickness against theory, the isolated amplitude against the reflection coefficient, and the zero at zero thickness against exact cancellation. The rules of thumb and the resolution conventions are values to compare against the exact expression, and they test nothing about whether the model itself is behaving."
+    },
+    "options": {
+     "0": {
+      "old": "A base coefficient entered with the wrong sign, which moves the argmax to zero thickness.",
+      "new": "The rule of thumb against the exact expression, and the overshoot against 2.6 percent"
+     },
+     "1": {
+      "old": "A frequency entered as radians per second rather than hertz.",
+      "new": "The quarter wavelength rule against 20 m, and the Widess limit against detection"
+     },
+     "2": {
+      "old": "A search window too narrow to reach the peak on the thinnest beds.",
+      "new": "The peak time against the top of the bed, and the trace length against 91 samples"
+     },
+     "3": {
+      "old": "A reflection pair of plus and minus 0.20 rather than 0.08.",
+      "new": "The isolated amplitude against the coefficient, and zero at zero thickness"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "category": "number-options",
+   "flag": "bare number options: review only, fix only if defective",
+   "verdict": "judged fine",
+   "reason": "3145.29 m/s is the lesson mean; 2501.65 and 3603.95 are single-sample velocities and 317.94 is its reciprocal as a transit time; one defensible key, explanation matches"
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-depth-to-time",
+   "ord": 13,
+   "category": "number-options",
+   "flag": "bare number options: review only, fix only if defective; also the kept half of the duplicate pair with final ord 19",
+   "verdict": "judged fine",
+   "reason": "1798 ms is the lesson value (899 x 2 ms); 1800, 1802 and 900 are the classic off-by-one and forgot-the-spacing slips; kept as the module copy of the duplicate pair"
+  }
+ ]
+}

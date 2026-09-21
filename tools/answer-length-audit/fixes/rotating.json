@@ -1,0 +1,46 @@
+{
+ "migration": "20261021b_b4_fix_rotating.sql",
+ "title": "rotating: duplicate question rewritten into a new question",
+ "items": [
+  {
+   "app_slug": "rotating",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 7,
+   "category": "duplicate",
+   "flag": "duplicate of beginner module m06-the-associate-reading 13 (near p0.65 k1.00): both ask for the three ways a duty point fails, same key",
+   "verdict": "fixed",
+   "reason": "True duplicate across tiers; kept the beginner m06 question and rewrote this copy to test the m06 onward point on a machine count against a stage count.",
+   "changes": {
+    "prompt": {
+     "old": "The tier is built on the idea that a duty point which works on paper fails in three ways. What are they?",
+     "new": "A pump station's machine count and a compressor's stage count are both whole numbers. How does the onward lesson say they differ?"
+    },
+    "explanation": {
+     "old": "The suction side, the affinity laws and the trim, and the fact that a catalogue curve is a water curve.",
+     "new": "Everything in this tier had a curve to work with, and the machine count was typed in. A compressor's stage count is discovered from two limits at once, the engine names which one governed, and the stages then chain into a train with a real cooling duty between them."
+    },
+    "options": {
+     "0": {
+      "old": "On suction, on power and on the fluid.",
+      "new": "Neither is an input: both are solved from the duty flow."
+     },
+     "1": {
+      "old": "On change, on the fluid and on the count of machines.",
+      "new": "The stage count is an input the user types, and the machine count is solved from the system curve crossing."
+     },
+     "2": {
+      "old": "On suction, on change and on the region the duty lands in.",
+      "new": "Both are inputs, but the stage count is capped by the 300 degF default discharge limit before the train is run."
+     },
+     "3": {
+      "old": "On suction, on change and on the fluid.",
+      "new": "The machine count is an input, and the stage count is an answer out of two limits at once."
+     }
+    }
+   },
+   "correct_change_reason": "True duplicate rewritten into a new question on a different point, so the key is new text for the new question."
+  }
+ ]
+}

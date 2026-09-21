@@ -1,0 +1,85 @@
+{
+ "migration": "20261021a_b4_fix_defects.sql",
+ "title": "four owner-approved question defects (stimulation, wellcontrol, perfsand, hydraulics)",
+ "items": [
+  {
+   "app_slug": "stimulation",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-from-slurry-to-pack",
+   "ord": 14,
+   "category": "defect",
+   "flag": "the correct option said the pseudo-skin halves with the damage factor; it passes through the logarithmic Cinco-Ley and Samaniego correlation, so it does not",
+   "verdict": "fixed",
+   "reason": "correct option and explanation now say conductivity and dimensionless conductivity halve while the pseudo-skin worsens less than proportionally (engine fracDesign.js fracProductivity; halving the published case moves it from -5.31 to about -4.77)",
+   "correct_change_reason": "owner 2026-09-21: the keyed statement was physically wrong",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The conductivity, the dimensionless conductivity and the pseudo-skin all halve along with the factor.",
+      "new": "Conductivity and dimensionless conductivity halve, and the pseudo-skin rises toward zero without halving."
+     }
+    },
+    "explanation": {
+     "old": "Because it carries straight through, the factor should be quoted beside the answer rather than buried in the inputs.",
+     "new": "The factor multiplies the retained permeability, so conductivity and dimensionless conductivity halve with it. The pseudo-skin passes through a logarithmic correlation, so it rises toward zero and does not halve. Quote the factor beside the answer."
+    }
+   }
+  },
+  {
+   "app_slug": "wellcontrol",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-kick-tolerance",
+   "ord": 7,
+   "category": "defect",
+   "flag": "the explanation ended \"so the shut-in limit is generous\", which contradicts the keyed shut-in case (lesson m02 l04: on the slant well the shut-in case binds)",
+   "verdict": "fixed",
+   "reason": "explanation rewritten to the lesson mechanism; key and options unchanged",
+   "changes": {
+    "explanation": {
+     "old": "A large gap means the influx can be tall at the bottom before the shoe notices, so the shut-in limit is generous.",
+     "new": "A large gap lets the influx rise and expand a long way before its top reaches the shoe, so the circulated case comes out the larger. The shut-in headroom is the tighter limit, and the smaller case wins."
+    }
+   }
+  },
+  {
+   "app_slug": "perfsand",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-this-course-decides",
+   "ord": 12,
+   "category": "defect",
+   "flag": "the prompt asked what happens to a thirty degree phasing while the options list four conditions and the explanation classifies result, warning and null",
+   "verdict": "fixed",
+   "reason": "prompt now asks which condition the engine refuses outright (lesson m01 l04 \"What it will refuse\"); explanation names why; key unchanged",
+   "changes": {
+    "prompt": {
+     "old": "Somebody enters a thirty degree phasing. What happens, and why?",
+     "new": "Which of these does the engine refuse outright, where the others come back as a result, a warning or a null?"
+    },
+    "explanation": {
+     "old": "A positive skin is a result, an out-of-range group is a warning, and a short sieve returns nulls.",
+     "new": "A phasing outside the six published angles, thirty degrees for one, is refused. A positive skin is a result, an out-of-range group is a warning, and a short sieve returns nulls."
+    }
+   }
+  },
+  {
+   "app_slug": "hydraulics",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 13,
+   "category": "defect",
+   "flag": "the explanation said \"The first is the one the whole next tier is built on\", but option 0 in stored order is the bit square law and the key is option 2",
+   "verdict": "fixed",
+   "reason": "explanation now names the keyed idea instead of an order reference (lesson m06 l03: the next tier is about the one loss that reaches the rock)",
+   "changes": {
+    "explanation": {
+     "old": "All three are true. The first is the one the whole next tier is built on.",
+     "new": "All four are true of this system. Only the annulus loss reaches the rock, and the next tier is about what the rock feels."
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,2974 @@
+{
+ "migration": "20261021b_b4_fix_rockphysics.sql",
+ "title": "rockphysics: rewrite 72 final exam questions that duplicated module questions (2026-09-16 audit plus follow-up similarity pass)",
+ "items": [
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m01-from-a-rock-to-an-interface 1: 'What does this tier add to the tier below?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m01-from-a-rock-to-an-interface 1 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does this tier add to the tier below?",
+     "new": "Why is forward modelling the right boundary for this tier's work?"
+    },
+    "explanation": {
+     "old": "A reflection is a property of a boundary rather than of a rock, and the tier below produced rocks.",
+     "new": "The forward model is what an interpretation is compared against, and if it is wrong the comparison is meaningless whatever the data quality. The tier therefore models what the data should look like, given two rocks, and leaves processing and inversion aside."
+    },
+    "options": {
+     "0": {
+      "old": "A property model across the field.",
+      "new": "Real gathers carry no fluid information at all."
+     },
+     "1": {
+      "old": "An overburden, turning two rocks into two interfaces.",
+      "new": "An interpretation is only as good as the model it is compared against."
+     },
+     "2": {
+      "old": "A saturation height model for the reservoir.",
+      "new": "Inversion of a gather needs no rock model."
+     },
+     "3": {
+      "old": "A processing sequence turning reflectivity into a trace.",
+      "new": "Forward models remove the need for well control and for seismic processing alike."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 3,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m01-from-a-rock-to-an-interface 2: 'What are the Ekene shale's logged properties?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m01-from-a-rock-to-an-interface 2 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What are the Ekene shale's logged properties?",
+     "new": "Why does the step down in velocity ratio across the Ekene interface matter for AVO?"
+    },
+    "explanation": {
+     "old": "The other two triples are the gas sand and the logged brine sand. The same shale sits over both, so every difference between the responses is a fluid difference.",
+     "new": "The shale's velocity ratio of 1.968 steps down to 1.778 in the brine sand and 1.537 in the gas sand. Poisson's ratio is a function of the velocity ratio, and the AVO gradient is essentially a contrast in it, so that step is where the gradient comes from."
+    },
+    "options": {
+     "0": {
+      "old": "2743 m/s, 1394 m/s, 2450 kg/m3.",
+      "new": "The gradient is essentially a contrast in Poisson's ratio."
+     },
+     "1": {
+      "old": "2905.6972280296195 m/s, 1890.9758806113214 m/s, 2038.7104517793223 kg/m3.",
+      "new": "The intercept is set by the contrast in velocity ratio across the interface alone."
+     },
+     "2": {
+      "old": "3200 m/s, 1800 m/s, 2250 kg/m3.",
+      "new": "It sets the critical angle."
+     },
+     "3": {
+      "old": "2743 m/s, 1800 m/s, 2250 kg/m3.",
+      "new": "It decides the tuning thickness."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 4,
+   "category": "duplicate",
+   "flag": "near p0.83 k0.86 duplicate of advanced module m01-from-a-rock-to-an-interface 5: 'Is the Ekene gas sand faster or slower than the shale?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m01-from-a-rock-to-an-interface 5 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Is the Ekene gas sand faster or slower than the shale?",
+     "new": "By how much does the Ekene gas sand's impedance fall short of the shale's?"
+    },
+    "explanation": {
+     "old": "The velocity contrast stays positive. The reflection is negative anyway, because the density falls by 411.29 kg/m3 across the interface.",
+     "new": "The gas sand is 5.9 percent faster and 16.8 percent lighter than the shale, and impedance is the product, so 5,923,875 sits 11.9 percent below 6,720,350. The brine sand sits 7.1 percent above the shale."
+    },
+    "options": {
+     "0": {
+      "old": "Slower, by 162.69722802961946 m/s.",
+      "new": "16.8 percent, which is the density deficit alone."
+     },
+     "1": {
+      "old": "Faster, by 162.69722802961946 m/s.",
+      "new": "11.9 percent, from the product of the two."
+     },
+     "2": {
+      "old": "The same speed, within a metre per second.",
+      "new": "7.1 percent, the same margin as the brine sand has."
+     },
+     "3": {
+      "old": "Slower, by 457 m/s.",
+      "new": "5.9 percent."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 5,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m01-from-a-rock-to-an-interface 6: 'What flips the sign of the Ekene reflection?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m01-from-a-rock-to-an-interface 6 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What flips the sign of the Ekene reflection?",
+     "new": "Why is the density change behind the Ekene sign flip a robust result?"
+    },
+    "explanation": {
+     "old": "The gas sand is 5.9 percent faster and 16.8 percent lighter than the shale, and impedance is the product.",
+     "new": "The density change is mass bookkeeping that depends only on the porosity and the two fluid densities, and involves none of Gassmann's assumptions about pore connectivity, frequency or anisotropy. It does depend on the porosity, and there was no gas zone log to read it from."
+    },
+    "options": {
+     "0": {
+      "old": "The shear contrast reversing between the fluid cases.",
+      "new": "It is read directly from the density log in the gas zone."
+     },
+     "1": {
+      "old": "The velocity contrast reversing across the interface.",
+      "new": "It follows from the shear modulus, which is fluid blind."
+     },
+     "2": {
+      "old": "The density contrast outweighing the velocity.",
+      "new": "It needs no Gassmann assumptions."
+     },
+     "3": {
+      "old": "The critical angle falling inside the recorded range.",
+      "new": "It does not depend on the assumed porosity of the sand."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 6,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m01-from-a-rock-to-an-interface 8: 'What are the exact normal incidence reflections at Ekene?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m01-from-a-rock-to-an-interface 8 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What are the exact normal incidence reflections at Ekene?",
+     "new": "A sand and its shale have equal impedance when the sand holds brine. What does gas do to the normal incidence reflection?"
+    },
+    "explanation": {
+     "old": "The second pair is the Shuey intercepts, which are the linearised versions and differ in the fourth decimal.",
+     "new": "With equal impedances the brine case reflects nothing. Gas lowers the sand's impedance, so the reflection turns negative and the interface appears: the cleanest possible direct hydrocarbon indicator, and a warning that an absent reflection is not evidence of an absent interface."
+    },
+    "options": {
+     "0": {
+      "old": "0.076897 brine and 0.028803 gas.",
+      "new": "It stays at zero, since the two impedances still match exactly."
+     },
+     "1": {
+      "old": "0.03434399848203321 brine and -0.06282494068620303 gas.",
+      "new": "It becomes positive, since the sand gets faster."
+     },
+     "2": {
+      "old": "0.034457 brine and -0.124566 gas.",
+      "new": "It vanishes."
+     },
+     "3": {
+      "old": "0.034457 brine and -0.0629911815139045 gas.",
+      "new": "It goes from zero to negative, so the interface appears."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 7,
+   "category": "duplicate",
+   "flag": "near p0.90 k0.67 duplicate of advanced module m01-from-a-rock-to-an-interface 9: 'Could any porosity make the Ekene gas reflection positive?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m01-from-a-rock-to-an-interface 9 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Could any porosity make the Ekene gas reflection positive?",
+     "new": "Over porosities of 0.20 to 0.30, how does the Ekene gas contrast against the shale change?"
+    },
+    "explanation": {
+     "old": "It rises with porosity to a maximum near 0.41 and falls again, never reaching 6,720,350. The sign is robust; the impedance sits 16.1 percent below the shale's at a porosity of 0.20 and 9.9 percent below it at 0.30.",
+     "new": "The gas impedance rises with porosity, so the contrast shrinks from 16.1 percent at 0.20 to 9.9 percent at 0.30. The sign is robust, since the impedance peaks near a porosity of 0.413 still below the shale's, but the magnitude varies by a factor of 1.6."
+    },
+    "options": {
+     "0": {
+      "old": "No. The gas impedance peaks below the shale's.",
+      "new": "It shrinks from 16.1 to 9.9 percent, a factor of 1.6."
+     },
+     "1": {
+      "old": "Yes, below a porosity of about 0.10.",
+      "new": "It stays at 11.9 percent at every porosity."
+     },
+     "2": {
+      "old": "Yes, above a porosity of about 0.40.",
+      "new": "It grows as the porosity rises."
+     },
+     "3": {
+      "old": "Yes, but only outside the range the engine accepts.",
+      "new": "It reverses sign as the porosity approaches 0.30, where the gas impedance peaks."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 8,
+   "category": "duplicate",
+   "flag": "near p0.67 k1.00 duplicate of advanced module m02-intercept-and-gradient 1: 'What did Shuey's rewrite achieve?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m02-intercept-and-gradient 1 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What did Shuey's rewrite achieve?",
+     "new": "Shuey's form comes from linearising the exact solution. Which two limitations does that bring?"
+    },
+    "explanation": {
+     "old": "Three coefficients from the rocks and three functions of angle. That separation is what lets a gather be fitted for two rock properties.",
+     "new": "The linearisation assumes small contrasts and small angles, so the form degrades when the two rocks are very different and past about 30 degrees, which is inside the range modern surveys record."
+    },
+    "options": {
+     "0": {
+      "old": "It extended the exact solution past the critical angle.",
+      "new": "Low frequencies and a noise free recorded gather."
+     },
+     "1": {
+      "old": "It separated the rocks from the angle.",
+      "new": "Small contrasts and small angles."
+     },
+     "2": {
+      "old": "It removed the shear velocity from the problem.",
+      "new": "A fixed velocity ratio and no density contrast."
+     },
+     "3": {
+      "old": "It made the exact solution faster to evaluate.",
+      "new": "Elastic isotropy and a zero phase wavelet."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m02-intercept-and-gradient 4: 'Which property is absent from the intercept?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m02-intercept-and-gradient 4 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which property is absent from the intercept?",
+     "new": "Which Shuey coefficient controls the response over the roughly 0 to 35 degree range a survey records?"
+    },
+    "explanation": {
+     "old": "At normal incidence there is no shear motion at the interface. The shear velocity appears twice in the gradient instead, which is why the gradient carries fluid information.",
+     "new": "The intercept fixes the value at zero angle, the gradient controls the behaviour over the recorded range of roughly 0 to 35 degrees, and the curvature only matters at large angles where the tangent pulls away from the sine."
+    },
+    "options": {
+     "0": {
+      "old": "The compressional velocity.",
+      "new": "The curvature term, C, throughout the range."
+     },
+     "1": {
+      "old": "The density.",
+      "new": "All three equally."
+     },
+     "2": {
+      "old": "The shear velocity.",
+      "new": "The gradient, B, above all."
+     },
+     "3": {
+      "old": "The porosity.",
+      "new": "The intercept, A."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "EXACT/diffkey duplicate of advanced module m02-intercept-and-gradient 6: 'What are the two halves of the Ekene gas intercept?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m02-intercept-and-gradient 6 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What are the two halves of the Ekene gas intercept?",
+     "new": "Which inputs move the Ekene gas intercept most directly?"
+    },
+    "explanation": {
+     "old": "The velocity half is positive because the gas sand is faster than the shale, and the density half is more than three times larger.",
+     "new": "For this rock the intercept is a density observation more than a velocity one, so anything that changes the density prediction moves it directly. A gas density computed at the wrong pressure moves the intercept, while the shear velocity does not appear in it at all."
+    },
+    "options": {
+     "0": {
+      "old": "Both about -0.0314, contributing equally.",
+      "new": "The shear velocities of the sand and of the shale that sits above it."
+     },
+     "1": {
+      "old": "Velocity -0.09162755152933573, density +0.028802610843132695.",
+      "new": "The threshold and wavelet frequency."
+     },
+     "2": {
+      "old": "Velocity +0.076897, density -0.042553.",
+      "new": "The curvature and the angle range."
+     },
+     "3": {
+      "old": "Velocity +0.028802610843132695, density -0.09162755152933573.",
+      "new": "The porosity and the gas density at reservoir conditions."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "near p0.75 k0.60 duplicate of advanced module m02-intercept-and-gradient 7: 'Change only the density from the brine case. What is the intercept?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m02-intercept-and-gradient 7 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Change only the density from the brine case. What is the intercept?",
+     "new": "Changing density and velocity one at a time from the brine case, what work does each do to the Ekene intercept?"
+    },
+    "explanation": {
+     "old": "The velocity half stays at +0.076897 and the density half becomes -0.091628. The velocity change then more than quadruples the negative value.",
+     "new": "The density change alone takes the intercept from +0.034344 to -0.014730, flipping its sign, and the velocity change then more than quadruples the negative value. The shear velocity plays no part in the intercept."
+    },
+    "options": {
+     "0": {
+      "old": "-0.014730, so density alone flips it.",
+      "new": "Density does the qualitative work and velocity the quantitative."
+     },
+     "1": {
+      "old": "-0.06282494068620303, the full gas value.",
+      "new": "Velocity flips the sign and density sets the size."
+     },
+     "2": {
+      "old": "+0.034344, unchanged.",
+      "new": "Each supplies half of the change."
+     },
+     "3": {
+      "old": "-0.091628, the density half alone.",
+      "new": "Density sets the size of the change and the shear contrast flips its sign."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 12,
+   "category": "duplicate",
+   "flag": "EXACT/samekey duplicate of advanced module m02-intercept-and-gradient 8: 'What are the two Ekene gradients?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m02-intercept-and-gradient 8 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What are the two Ekene gradients?",
+     "new": "Between the brine and gas cases, which gradient contributions push toward a shallower gradient?"
+    },
+    "explanation": {
+     "old": "Brine first, gas second. Both are negative and the gas case is 53 percent steeper; -0.409318 is the gas case's shear term alone.",
+     "new": "The compressional contrast shrinks and the density contrast grows more negative, both making the gradient less negative, while the growing shear contrast makes it steeper. The shear term wins, so the gas gradient is steeper overall."
+    },
+    "options": {
+     "0": {
+      "old": "+0.16766246414664518 and -0.2565633444602355.",
+      "new": "The shear and density contrasts, acting together."
+     },
+     "1": {
+      "old": "-0.16766246414664518 and -0.2565633444602355.",
+      "new": "The density and compressional contrasts."
+     },
+     "2": {
+      "old": "-0.2565633444602355 and -0.16766246414664518.",
+      "new": "All three, offset by w."
+     },
+     "3": {
+      "old": "-0.409318 and -0.256563.",
+      "new": "The shear contrast alone."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "category": "duplicate",
+   "flag": "EXACT/samekey duplicate of advanced module m02-intercept-and-gradient 10: 'What are the three terms of the Ekene gas gradient?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m02-intercept-and-gradient 10 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What are the three terms of the Ekene gas gradient?",
+     "new": "Which order of influence holds for the intercept at a shale over sand interface?"
+    },
+    "explanation": {
+     "old": "The shear term is 2.7 times the other two combined, and the density term is positive, pushing the gradient up rather than down.",
+     "new": "The intercept contains only the compressional and density contrasts, with density leading. Shear, then density, then compressional is the ranking for the gradient, and the two lists differing is why two coefficients carry more information than one."
+    },
+    "options": {
+     "0": {
+      "old": "-0.028803 velocity, +0.123952 density, -0.409318 shear.",
+      "new": "Shear first, then density, then compressional velocity."
+     },
+     "1": {
+      "old": "+0.028803 velocity, -0.123952 density, +0.409318 shear.",
+      "new": "Compressional velocity, then density, then shear last."
+     },
+     "2": {
+      "old": "+0.028803 velocity, +0.123952 density, -0.409318 shear.",
+      "new": "Density, then compressional, with shear absent."
+     },
+     "3": {
+      "old": "+0.123952 velocity, +0.028803 density, -0.409318 shear.",
+      "new": "Density and shear equally."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "category": "duplicate",
+   "flag": "near p0.73 k1.00 duplicate of advanced module m02-intercept-and-gradient 11: 'Why is the density term positive in the gradient?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m02-intercept-and-gradient 11 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why is the density term positive in the gradient?",
+     "new": "What happens to the gradient where the sand and the shale share the same shear velocity?"
+    },
+    "explanation": {
+     "old": "Intercept and gradient respond to density in opposite directions, which is part of why crossplotting the two separates fluid effects.",
+     "new": "With no shear contrast only the compressional and density terms remain, which for a typical shale over sand interface leaves the gradient small and possibly positive. A very shaly sand can approach this, which is one reason it can show a muted or reversed response."
+    },
+    "options": {
+     "0": {
+      "old": "The gradient uses the reciprocal of the density contrast.",
+      "new": "It becomes exactly zero, the shear term being all of it."
+     },
+     "1": {
+      "old": "The density contrast is positive across this interface.",
+      "new": "It steepens, as the density term then dominates it."
+     },
+     "2": {
+      "old": "The weighting factor is negative for a shale over sand pair.",
+      "new": "Nothing, since the weighting factor absorbs it."
+     },
+     "3": {
+      "old": "It enters as $-2w\\Delta\\rho/\\bar\\rho$ rather than $+\\tfrac{1}{2}\\Delta\\rho/\\bar\\rho$.",
+      "new": "The shear term vanishes, leaving it small and possibly positive."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m02-intercept-and-gradient 14: 'Where do the two Ekene cases sit on a crossplot?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m02-intercept-and-gradient 14 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Where do the two Ekene cases sit on a crossplot?",
+     "new": "On the intercept and gradient crossplot, what does changing the class II threshold move?"
+    },
+    "explanation": {
+     "old": "The fluid displacement is -0.097169 in intercept and -0.088901 in gradient, at 42.4 degrees below the negative intercept direction.",
+     "new": "Setting the threshold to 0.04 changes no coefficient, so neither point moves. The crossplot position is a property of the rocks, and only the label attached to a region of the plane is a convention."
+    },
+    "options": {
+     "0": {
+      "old": "Brine lower left, gas lower right.",
+      "new": "Both Ekene points, toward the origin."
+     },
+     "1": {
+      "old": "Brine lower right, gas lower left.",
+      "new": "Only the labels."
+     },
+     "2": {
+      "old": "Both lower left, separated along the gradient axis.",
+      "new": "The brine point, into the class II region."
+     },
+     "3": {
+      "old": "Both lower right, separated along the intercept axis.",
+      "new": "The background trend of ordinary interfaces."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "category": "duplicate",
+   "flag": "near p0.67 k0.86 duplicate of advanced module m02-intercept-and-gradient 15: 'What is a crossplot anomaly measured against?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m02-intercept-and-gradient 15 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What is a crossplot anomaly measured against?",
+     "new": "When are fluid and lithology confounded on an intercept and gradient crossplot?"
+    },
+    "explanation": {
+     "old": "Shale over shale, shale over brine sand and sand over shale interfaces all fall along a trend, and a displacement from it in the fluid direction is the candidate.",
+     "new": "Where the fluid direction and the background trend are close together, a fluid displacement looks like a lithology change and AVO does not discriminate. Where they are near perpendicular it discriminates well. At Ekene the fluid vector points down and to the left, a favourable geometry."
+    },
+    "options": {
+     "0": {
+      "old": "The fluid vector from the substitution.",
+      "new": "When the fluid vector points down and to the left."
+     },
+     "1": {
+      "old": "The origin of the crossplot.",
+      "new": "When both fluid cases share one class."
+     },
+     "2": {
+      "old": "The local background trend of interfaces.",
+      "new": "When the fluid direction lies close to the background trend."
+     },
+     "3": {
+      "old": "The class boundaries at the threshold.",
+      "new": "When the two cases have equal intercepts."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 18,
+   "category": "duplicate",
+   "flag": "near p0.86 k0.67 duplicate of advanced module m03-the-class-flip 1: 'What is a class I response?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m03-the-class-flip 1 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What is a class I response?",
+     "new": "Which Rutherford-Williams class is hardest to see on a stack?"
+    },
+    "explanation": {
+     "old": "The sand is harder than the shale, so the near offsets are positive and the reflection often changes polarity within the gather.",
+     "new": "In class II the impedances nearly match, so the near offsets show almost nothing and the response is dominated by the gradient. These are the cases AVO was invented for. Class III stacks well because every offset has the same sign."
+    },
+    "options": {
+     "0": {
+      "old": "Negative intercept, positive gradient.",
+      "new": "Class III, negative at every recorded offset."
+     },
+     "1": {
+      "old": "Negative intercept, negative gradient.",
+      "new": "Class IV, dimming steadily as the offset grows."
+     },
+     "2": {
+      "old": "Intercept near zero.",
+      "new": "Class I, from a hard sand."
+     },
+     "3": {
+      "old": "Positive intercept, negative gradient.",
+      "new": "Class II, with an intercept near zero."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 19,
+   "category": "duplicate",
+   "flag": "EXACT/diffkey duplicate of advanced module m03-the-class-flip 3: 'What is a class IV response and why does it matter?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m03-the-class-flip 3 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What is a class IV response and why does it matter?",
+     "new": "A prospect models at A = -0.05 and B = +0.02. What is its class?"
+    },
+    "explanation": {
+     "old": "It occurs where the sand's shear velocity is barely above the shale's, and it breaks the rule of thumb that a gas sand brightens with offset.",
+     "new": "The intercept is below -0.02, so the sign of the gradient decides, and a positive gradient gives class IV. The gather is negative at the near offsets and weakens with offset, which an interpreter using the class III rule of thumb could dismiss."
+    },
+    "options": {
+     "0": {
+      "old": "Negative intercept with a positive gradient, dimming with offset.",
+      "new": "Class IV, negative and dimming with offset."
+     },
+     "1": {
+      "old": "Positive intercept with a positive gradient, brightening with offset.",
+      "new": "Class III, negative and brightening as offset grows."
+     },
+     "2": {
+      "old": "An intercept of exactly zero, invisible on a stack.",
+      "new": "Class II, the gradient being small."
+     },
+     "3": {
+      "old": "A response that changes polarity twice across the gather.",
+      "new": "Class I, the gradient being positive."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 20,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m03-the-class-flip 8: 'How robust are the two Ekene class calls?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m03-the-class-flip 8 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "How robust are the two Ekene class calls?",
+     "new": "What would it take to move the Ekene gas case into class II?"
+    },
+    "explanation": {
+     "old": "The gas intercept is more than three times the widest band and the brine intercept only 1.72 times the default. The two calls are not equally informed.",
+     "new": "The intercept would have to rise above -0.02, which means a gas case density near 2222 kg/m3, needing a porosity of about 0.033 or a pore fluid far denser than gas. Widening the band to 0.05 still leaves the case outside it, and the shear velocity does not enter the intercept."
+    },
+    "options": {
+     "0": {
+      "old": "Both robust at every threshold tried.",
+      "new": "A shear velocity error of about 10 percent in the sand."
+     },
+     "1": {
+      "old": "Gas robust throughout; brine class II at 0.04.",
+      "new": "A porosity near 0.033, which is no reservoir."
+     },
+     "2": {
+      "old": "Brine robust; gas becomes class IV at a wider threshold.",
+      "new": "Widening the band to 0.05."
+     },
+     "3": {
+      "old": "Neither, since both intercepts are near the boundary.",
+      "new": "A gas density computed at the wrong reservoir pressure."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m03-the-class-flip 10: 'Where does the class II band come from?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m03-the-class-flip 10 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Where does the class II band come from?",
+     "new": "Why does the class II threshold matter more than its size suggests?"
+    },
+    "explanation": {
+     "old": "It reflects a judgement about what counts as a small intercept, made when the classification was introduced, and it travels invisibly with the label unless stated.",
+     "new": "The class is what gets communicated, into prospect summaries and portfolio reviews, and the convention travels invisibly with it. Two teams using thresholds of 0.02 and 0.04 describe the same rock differently, while the coefficients themselves do not change."
+    },
+    "options": {
+     "0": {
+      "old": "The range over which Shuey's form is valid.",
+      "new": "It changes the intercept and gradient values that are reported."
+     },
+     "1": {
+      "old": "The noise level of a typical modern survey.",
+      "new": "It sets the angle of the polarity crossing."
+     },
+     "2": {
+      "old": "A convention with no derivation, usually 0.02.",
+      "new": "The class travels into summaries without its threshold."
+     },
+     "3": {
+      "old": "The intercept uncertainty from a standard inversion.",
+      "new": "It controls Shuey's error at wide angles."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "category": "duplicate",
+   "flag": "near p0.86 k1.00 duplicate of advanced module m03-the-class-flip 11: 'Which is larger at Ekene: the threshold's effect or Shuey's error?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m03-the-class-flip 11 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which is larger at Ekene: the threshold's effect or Shuey's error?",
+     "new": "How far would the brine sand's velocity have to fall to put the Ekene brine intercept on the default class boundary?"
+    },
+    "explanation": {
+     "old": "A convention with no derivation has a larger effect on the reported result than the difference between an approximate theory and an exact one.",
+     "new": "The intercept must fall by 0.014344, so the sum of the fractional contrasts must fall by 0.028688, which a velocity drop of about 85 m/s supplies. That is within the uncertainty of a velocity log calibration, so the class is a plausible measurement error away from changing."
+    },
+    "options": {
+     "0": {
+      "old": "Neither, both being below the intercept uncertainty.",
+      "new": "About 457 m/s, all of it."
+     },
+     "1": {
+      "old": "The approximation error, at 0.002175.",
+      "new": "About 200 m/s, matching its density deficit."
+     },
+     "2": {
+      "old": "They are comparable in size.",
+      "new": "Under 1 m/s."
+     },
+     "3": {
+      "old": "The threshold, which renames a case entirely.",
+      "new": "About 85 m/s, from 3200 to 3115."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "category": "duplicate",
+   "flag": "EXACT/samekey duplicate of advanced module m03-the-class-flip 13: 'Where does the Ekene brine reflection change polarity?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m03-the-class-flip 13 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Where does the Ekene brine reflection change polarity?",
+     "new": "Had the Ekene brine gradient been half as steep, what would have changed?"
+    },
+    "explanation": {
+     "old": "All three angles are correct for their own method and the question asks for the exact one. They are spread over three degrees, which is large for a quantity used to design a stack.",
+     "new": "The class call uses only the intercept, so it would stay class I. What changes is the gather: the polarity flip would move beyond the recorded offsets and the interface would look like a simple weakening positive reflection. Same class, different gather."
+    },
+    "options": {
+     "0": {
+      "old": "29.870555217606523 degrees, on the exact solution.",
+      "new": "The polarity flip would fall outside the recorded range."
+     },
+     "1": {
+      "old": "26.92 degrees, on the two term form.",
+      "new": "The class would change from I to II, at the default threshold."
+     },
+     "2": {
+      "old": "29.293564554985373 degrees, on the three term form.",
+      "new": "The intercept would halve as well."
+     },
+     "3": {
+      "old": "It does not, within 40 degrees.",
+      "new": "The reflection would brighten with offset."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "category": "duplicate",
+   "flag": "near p0.89 k0.67 duplicate of advanced module m03-the-class-flip 14: 'Why is a polarity crossing hard to locate?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m03-the-class-flip 14 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why is a polarity crossing hard to locate?",
+     "new": "How is the polarity crossing used in stack design?"
+    },
+    "explanation": {
+     "old": "It applies to any quantity located by a zero crossing, and it implies the crossing should be found with the exact solution rather than an approximation.",
+     "new": "A full offset stack averages the positive near and negative far contributions and partially cancels, so stacking only the offsets inside the crossing preserves the amplitude. Misplacing the crossing by three degrees includes or excludes offsets of the opposite sign."
+    },
+    "options": {
+     "0": {
+      "old": "The exact solution goes complex near the crossing.",
+      "new": "Stacking only beyond it doubles the far offset amplitude."
+     },
+     "1": {
+      "old": "The reflection is near zero there.",
+      "new": "Stacking inside it preserves amplitude."
+     },
+     "2": {
+      "old": "The wavelet changes phase at the crossing.",
+      "new": "It sets the far offset mute for the gas case."
+     },
+     "3": {
+      "old": "The gradient is undefined where the reflection is zero.",
+      "new": "It fixes the offset at which the intercept is measured."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 25,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m03-the-class-flip 15: 'What does a full offset stack do to the Ekene brine reflection?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m03-the-class-flip 15 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does a full offset stack do to the Ekene brine reflection?",
+     "new": "At 30 degrees, how do Shuey and the exact solution compare for the Ekene brine reflection?"
+    },
+    "explanation": {
+     "old": "Averaging the five tabulated exact values to 20 degrees gives 0.026711 and all five to 40 gives 0.014671, so a full stack is about 55 percent of a limited one.",
+     "new": "Shuey gives -0.001164 and the exact solution -0.000190. Both are small, they agree in sign, and their ratio is six. The exact crossing is at 29.87 degrees, so the reflection is already negative at 30."
+    },
+    "options": {
+     "0": {
+      "old": "Leaves it unchanged, the crossing being beyond 40 degrees.",
+      "new": "Opposite in sign, Shuey positive and exact negative."
+     },
+     "1": {
+      "old": "Doubles it, since every offset adds with the same sign.",
+      "new": "Both positive, the crossing lying beyond 30 degrees."
+     },
+     "2": {
+      "old": "Cancels about half of it, from 0.026711 to 0.014671.",
+      "new": "Both small and negative, six times apart."
+     },
+     "3": {
+      "old": "Reverses its polarity, the far offsets dominating.",
+      "new": "Identical at -0.000190."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 26,
+   "category": "duplicate",
+   "flag": "near p0.78 k1.00 duplicate of advanced module m04-approximation-and-exact 1: 'What does Zoeppritz give that Shuey does not?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m04-approximation-and-exact 1 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does Zoeppritz give that Shuey does not?",
+     "new": "What happens to the exact solution past the critical angle?"
+    },
+    "explanation": {
+     "old": "What it cannot do is be inverted, since a curve cannot determine six independent rock properties. Shuey's approximation buys invertibility.",
+     "new": "Past the critical angle the transmitted compressional wave stops propagating, the reflection coefficient acquires a phase as well as an amplitude, and the transmitted wave becomes evanescent. At Ekene that angle is 70.7 degrees, far outside the recorded range."
+    },
+    "options": {
+     "0": {
+      "old": "A form that stays real past the critical angle.",
+      "new": "It reduces to the plain impedance contrast."
+     },
+     "1": {
+      "old": "Two coefficients a gather can be fitted for.",
+      "new": "It matches Shuey's three term form exactly."
+     },
+     "2": {
+      "old": "A separation of the rocks from the geometry.",
+      "new": "It stops depending on the shear velocity."
+     },
+     "3": {
+      "old": "An exact answer at any contrast and angle.",
+      "new": "It turns complex and gains a phase."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 27,
+   "category": "duplicate",
+   "flag": "EXACT/diffkey duplicate of advanced module m04-approximation-and-exact 4: 'Where is the Ekene critical angle for the gas case?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m04-approximation-and-exact 4 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Where is the Ekene critical angle for the gas case?",
+     "new": "Why does the complexity of the exact solution not matter in practice?"
+    },
+    "explanation": {
+     "old": "$\\arcsin(2743/2905.6972)$. The imaginary part of the solution is zero throughout 0 to 40 degrees, which is not always the case.",
+     "new": "The usual reason given for avoiding it is that it is complicated, which is true and irrelevant to a computer. The real obstacle is that it cannot be inverted, since a curve cannot determine six rock properties."
+    },
+    "options": {
+     "0": {
+      "old": "70.7 degrees, far outside the recorded range.",
+      "new": "A computer evaluates it as easily as Shuey."
+     },
+     "1": {
+      "old": "30 degrees, which is why the capstone uses that angle.",
+      "new": "Its imaginary part is zero at every possible angle."
+     },
+     "2": {
+      "old": "40 degrees, at the edge of the modelled range.",
+      "new": "It reduces to Shuey's three term form below 30 degrees."
+     },
+     "3": {
+      "old": "There is none, the gas sand being slower than the shale.",
+      "new": "Only its real part is ever recorded by a seismic survey."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "category": "duplicate",
+   "flag": "near p0.93 k0.60 duplicate of advanced module m04-approximation-and-exact 7: 'How wrong is the two term form at 40 degrees for the gas case?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m04-approximation-and-exact 7 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "How wrong is the two term form at 40 degrees for the gas case?",
+     "new": "At 30 degrees, what does the third Shuey term add to the Ekene gas reflection?"
+    },
+    "explanation": {
+     "old": "The third term is worth a factor of 35 in accuracy at the far offsets, and it is still the two term form that should be fitted to a real gather.",
+     "new": "The contribution is C times the bracket, 0.0288 times 0.0833, which is 0.002400 or 2 percent of the reflection. At 20 degrees it is 0.000444 and at 40 degrees 0.008379, so the term starts to matter around 25 to 30 degrees."
+    },
+    "options": {
+     "0": {
+      "old": "0.000246, against 0.008625 for three terms.",
+      "new": "0.008379, about 5 percent."
+     },
+     "1": {
+      "old": "0.008625, against 0.000246 for three terms.",
+      "new": "0.002400, which is about 2 percent of it."
+     },
+     "2": {
+      "old": "0.002175, the same as at 30 degrees.",
+      "new": "Nothing, since the term vanishes below 40 degrees."
+     },
+     "3": {
+      "old": "It is exact there.",
+      "new": "0.000444, or 0.5 percent."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m04-approximation-and-exact 8: 'Which form for modelling and which for inversion?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m04-approximation-and-exact 8 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which form for modelling and which for inversion?",
+     "new": "Why is the two term form a weaker approximation now than when it was introduced?"
+    },
+    "explanation": {
+     "old": "There is no reason to approximate when the inputs are known, and a noisy gather over a limited angle range cannot resolve three coefficients stably.",
+     "new": "The third term starts to matter around 25 to 30 degrees, which is exactly the range modern wide azimuth surveys record. The two term form was a good approximation for the offset ranges available when it was introduced."
+    },
+    "options": {
+     "0": {
+      "old": "Three for both.",
+      "new": "Modern gathers are noisier at far offsets."
+     },
+     "1": {
+      "old": "Two to model, three to invert.",
+      "new": "Rocks in modern plays have larger contrasts."
+     },
+     "2": {
+      "old": "Three terms to model, two to invert.",
+      "new": "Modern surveys record the 25 to 30 degree range where the third term starts to matter."
+     },
+     "3": {
+      "old": "Two for both.",
+      "new": "Computers now evaluate Zoeppritz cheaply."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "category": "duplicate",
+   "flag": "near p0.93 k0.78 duplicate of advanced module m04-approximation-and-exact 10: 'What is the gap between Shuey and exact at 30 degrees for the gas case?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m04-approximation-and-exact 10 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What is the gap between Shuey and exact at 30 degrees for the gas case?",
+     "new": "Why is the Ekene gas gap between Shuey and exact smaller at 40 degrees than at 20?"
+    },
+    "explanation": {
+     "old": "That is why the capstone asks for the exact value at 30 degrees rather than the Shuey one.",
+     "new": "The gas gap grows to 30 degrees and then shrinks again, because the three term form happens to bend back toward the exact curve at wide angle for this contrast. That is luck rather than design, and the brine gap does the opposite."
+    },
+    "options": {
+     "0": {
+      "old": "Zero, Shuey being exact at 30 degrees.",
+      "new": "The critical angle is approached and the errors cancel."
+     },
+     "1": {
+      "old": "0.000166, the same as at zero degrees.",
+      "new": "The curvature term vanishes at wide angles."
+     },
+     "2": {
+      "old": "0.008625, the two term error at 40 degrees.",
+      "new": "The gas contrast weakens with angle."
+     },
+     "3": {
+      "old": "0.0021746462042847164, 2.17 times the tolerance.",
+      "new": "The three term form happens to bend back toward the exact curve, which is luck."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "category": "duplicate",
+   "flag": "EXACT/samekey duplicate of advanced module m04-approximation-and-exact 11: 'Do Shuey and the exact solution agree at normal incidence?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m04-approximation-and-exact 11 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Do Shuey and the exact solution agree at normal incidence?",
+     "new": "What is the largest Shuey error on the Ekene brine curve, as a share of its intercept?"
+    },
+    "explanation": {
+     "old": "The intercept is the linearised impedance contrast rather than the contrast itself. The gas gap also peaks near 30 degrees and shrinks again by 40.",
+     "new": "The largest brine error is 0.005972 against an intercept of 0.0343, which is 17.4 percent. The gas error of 0.002192 is 3.5 percent of its intercept. Quoting errors relative to the intercept is what makes the difference visible."
+    },
+    "options": {
+     "0": {
+      "old": "No. They differ by 0.000166 for the gas case.",
+      "new": "17.4 percent, a large systematic error."
+     },
+     "1": {
+      "old": "Yes, exactly, since the angle terms vanish.",
+      "new": "3.5 percent, the same share as for the gas case."
+     },
+     "2": {
+      "old": "Yes, to machine precision.",
+      "new": "0.5 percent."
+     },
+     "3": {
+      "old": "No, and the gap grows monotonically with angle.",
+      "new": "Under 1 percent, so negligible."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 32,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m04-approximation-and-exact 12: 'Which case does Shuey approximate worse at Ekene?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m04-approximation-and-exact 12 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which case does Shuey approximate worse at Ekene?",
+     "new": "The square law predicts an Ekene Shuey error ratio of about 8 between the brine and gas cases. What is observed?"
+    },
+    "explanation": {
+     "old": "Shuey's error depends on how different the two rocks are rather than how large the reflection is, and the brine sand differs from the shale by 16.7 percent in velocity against 5.9.",
+     "new": "Squaring the 16.7 and 5.9 percent velocity contrasts gives a ratio of about 8, while the observed maximum error ratio is 2.7. The direction is right and the size is over-estimated, so the size should be checked against the exact solution."
+    },
+    "options": {
+     "0": {
+      "old": "The gas case, at 0.005972 against 0.002192.",
+      "new": "8, confirming the square law to the last digit."
+     },
+     "1": {
+      "old": "The brine case, 0.005972 against 0.002192.",
+      "new": "2.7, so the square law over-estimates."
+     },
+     "2": {
+      "old": "Both equally.",
+      "new": "0.5, the gas case being worse."
+     },
+     "3": {
+      "old": "The brine case, but only beyond 40 degrees.",
+      "new": "35, the third term's accuracy factor at 40 degrees."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "category": "duplicate",
+   "flag": "EXACT/samekey duplicate of advanced module m04-approximation-and-exact 14: 'What cheap diagnostic predicts where Shuey will be weak?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m04-approximation-and-exact 14 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What cheap diagnostic predicts where Shuey will be weak?",
+     "new": "Which Ekene case should be modelled with the exact solution, or at least checked against it?"
+    },
+    "explanation": {
+     "old": "At Ekene the curvature ratio is 2.6698 and the maximum error ratio 2.7246, agreeing to within 2 percent.",
+     "new": "The wet case is where the approximation is weakest, and it is also the baseline the anomaly is measured against, so an error in it propagates into the apparent difference between wet and gas before any data are involved."
+    },
+    "options": {
+     "0": {
+      "old": "The gradient, measuring the shear contrast.",
+      "new": "The gas case, since it is the louder anomaly."
+     },
+     "1": {
+      "old": "The intercept, measuring the impedance contrast.",
+      "new": "Neither, since Shuey is within the tolerance."
+     },
+     "2": {
+      "old": "The curvature coefficient, in one line.",
+      "new": "The wet case, the baseline."
+     },
+     "3": {
+      "old": "The critical angle, bounding the valid range.",
+      "new": "Only a case beyond its critical angle."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "category": "duplicate",
+   "flag": "EXACT/diffkey duplicate of advanced module m04-approximation-and-exact 15: 'What should be reported as a value and what as a coefficient?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m04-approximation-and-exact 15 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What should be reported as a value and what as a coefficient?",
+     "new": "Which item of the reflectivity report for a forward model is rarely included?"
+    },
+    "explanation": {
+     "old": "The coefficients are the common currency between a model and an inversion. Quoting a Shuey evaluation as the reflection coefficient introduces an avoidable error.",
+     "new": "It is one number per case and it is cheap. At Ekene it would read 0.006 for the brine case and 0.002 for the gas case, and it stops a reader over-interpreting a small mismatch between a Shuey model and an exact one."
+    },
+    "options": {
+     "0": {
+      "old": "Both as Shuey.",
+      "new": "The class for each case with its threshold."
+     },
+     "1": {
+      "old": "Shuey values as values, exact results as coefficients.",
+      "new": "The exact value at one or two angles."
+     },
+     "2": {
+      "old": "Both as exact.",
+      "new": "The intercept and the gradient for each case, as Shuey coefficients."
+     },
+     "3": {
+      "old": "Exact as values, Shuey as coefficients.",
+      "new": "The largest approximation error over the modelled range."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "category": "duplicate",
+   "flag": "EXACT/samekey duplicate of advanced module m05-resolution 8: 'What happens to the tuning thickness if the reflection coefficients double?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m05-resolution 8 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What happens to the tuning thickness if the reflection coefficients double?",
+     "new": "Why does the engine's tuning thickness differ slightly from the Ricker theory value?"
+    },
+    "explanation": {
+     "old": "Plus and minus 0.08 gives 16 ms and a peak of 0.1155947595834732; plus and minus 0.1 gives 16 ms and 0.1444934457540512. The ratio is 1.25, exactly 0.1 over 0.08.",
+     "new": "The engine evaluates the tuning curve on a 1 ms grid, so it reports an integer number of milliseconds, the theoretical value rounded up. At 25 Hz that is 16 ms against 15.593936024673521, a discretisation artefact rather than a disagreement with theory."
+    },
+    "options": {
+     "0": {
+      "old": "It doubles too.",
+      "new": "It uses the Kallweit and Wood relation."
+     },
+     "1": {
+      "old": "Nothing. Only the amplitude doubles.",
+      "new": "It samples the curve on a 1 ms grid and rounds up."
+     },
+     "2": {
+      "old": "It halves.",
+      "new": "Its reflection pair is unequal."
+     },
+     "3": {
+      "old": "It moves to the next grid sample.",
+      "new": "The 0.1 pair broadens the wavelet."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m05-resolution 9: 'Which course established that tuning belongs to the wavelet?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m05-resolution 9 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which course established that tuning belongs to the wavelet?",
+     "new": "Once the bed thickness is accounted for, what does the tuning amplitude still carry?"
+    },
+    "explanation": {
+     "old": "It derived the law that a Ricker depends on frequency and thickness only through their product. This tier confirms it on a different fixture rather than re-deriving it.",
+     "new": "The tuning thickness is a property of the wavelet, while the tuning amplitude scales directly with the interface reflection coefficient. That separation is what makes a tuning correction possible at all."
+    },
+    "options": {
+     "0": {
+      "old": "The Rock Physics Associate tier.",
+      "new": "Only the frequency content of the survey's own wavelet."
+     },
+     "1": {
+      "old": "This tier, on the plus and minus 0.1 pair.",
+      "new": "The bed thickness in metres, and nothing about the rocks."
+     },
+     "2": {
+      "old": "The Seismolord Expert tier.",
+      "new": "Rock information, scaling with the coefficient."
+     },
+     "3": {
+      "old": "The Mapping Expert tier.",
+      "new": "Only noise."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m05-resolution 10: 'What are the frequency and thickness products at Ekene?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m05-resolution 10 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What are the frequency and thickness products at Ekene?",
+     "new": "Using the product law, what tuning thickness does a 35 Hz survey give?"
+    },
+    "explanation": {
+     "old": "The three at 400 share an identical peak and the 15 Hz case is higher, because 390 is nearer the ideal 389.8484.",
+     "new": "The peak occurs where f T is about 390, so T = 390/35 = 11.1 ms. No reflection coefficients, rocks or fluid are needed, which is why a tuning thickness belongs in a survey's specification. 19.5 ms is the 20 Hz answer."
+    },
+    "options": {
+     "0": {
+      "old": "They depend on the reflection coefficients too.",
+      "new": "It cannot be predicted without the reflection coefficients."
+     },
+     "1": {
+      "old": "400 at every frequency.",
+      "new": "16 ms, as at 25 Hz."
+     },
+     "2": {
+      "old": "390 at every frequency.",
+      "new": "About 19.5 ms."
+     },
+     "3": {
+      "old": "400 at 25, 40 and 50 Hz, and 390 at 15 Hz.",
+      "new": "About 11.1 ms, from 390 divided by 35."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m05-resolution 11: 'What is the Ekene tuning thickness in metres?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m05-resolution 11 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What is the Ekene tuning thickness in metres?",
+     "new": "What is the tuning thickness at 30 Hz for a sand at 2900 m/s, in metres?"
+    },
+    "explanation": {
+     "old": "$16 \\times 2905.6972280296195/2000$, using two way time. Many producing sands are thinner than that.",
+     "new": "389.8484/30 = 13.0 ms, and h = 13.0 x 2900/2000 = 18.8 m, using two way time. A sand thinner than about 19 m would be at or below tuning in that survey. 23.2 m is the Ekene figure at 25 Hz."
+    },
+    "options": {
+     "0": {
+      "old": "23.2 m at 25 Hz.",
+      "new": "About 18.8 m, from 13.0 ms two way."
+     },
+     "1": {
+      "old": "16 m at 25 Hz.",
+      "new": "About 23.2 m."
+     },
+     "2": {
+      "old": "46.5 m at 25 Hz.",
+      "new": "About 13.0 m."
+     },
+     "3": {
+      "old": "11.6 m at 25 Hz.",
+      "new": "About 26 m."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "duplicate",
+   "flag": "EXACT/diffkey duplicate of advanced module m05-resolution 12: 'Why is an amplitude map not a fluid map?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m05-resolution 12 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why is an amplitude map not a fluid map?",
+     "new": "Why are amplitude maps usually accompanied by isochron maps?"
+    },
+    "explanation": {
+     "old": "A prospect thinning from 40 m to 5 m would show a strong centre fading to nothing with identical rock throughout, and reading that as a fluid map implies a different volume and different wells.",
+     "new": "A reservoir passing through tuning thickness produces a bright rim or arc with nothing to do with fluid. Mapping the isochron shows whether the bright feature coincides with the contour where thickness equals tuning thickness."
+    },
+    "options": {
+     "0": {
+      "old": "It is recorded at one offset rather than stacked.",
+      "new": "To remove residual moveout from the gathers."
+     },
+     "1": {
+      "old": "It mixes the contrast with the thickness.",
+      "new": "To catch tuning artefacts."
+     },
+     "2": {
+      "old": "It has not been corrected for wavelet phase.",
+      "new": "To correct amplitudes for the wavelet phase."
+     },
+     "3": {
+      "old": "It measures the base rather than the top reflection.",
+      "new": "To locate a flat spot at the fluid contact."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of advanced module m05-resolution 15: 'How does tuning affect the intercept and gradient differently?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of advanced module m05-resolution 15 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "How does tuning affect the intercept and gradient differently?",
+     "new": "For a bed below the vertical tuning thickness, what does tuning do to the measured gradient?"
+    },
+    "explanation": {
+     "old": "The path grows as $1/\\cos\\theta$, 1.155 at 30 degrees, so a bed at vertical tuning is 15 percent above tuning for a far ray. Since class is decided by the sign of the gradient, a thickness bias can change a class.",
+     "new": "Below tuning the far offsets see a thicker bed that is closer to tuning, so they are boosted more than the near offsets and the gradient steepens. Above tuning the effect reverses and the gradient flattens."
+    },
+    "options": {
+     "0": {
+      "old": "It affects the intercept only, being an amplitude effect.",
+      "new": "It flattens it, the far offsets being boosted less."
+     },
+     "1": {
+      "old": "It affects the gradient only, the intercept being at zero offset.",
+      "new": "Nothing, since the gradient is an interface property."
+     },
+     "2": {
+      "old": "A far offset ray travels further through the bed.",
+      "new": "It steepens it."
+     },
+     "3": {
+      "old": "It affects both identically, preserving their ratio.",
+      "new": "It flips its sign in every case."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m01-putting-the-fluid-in-the-rock 1: 'What single input changes between the Associate booking and this tier's?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m01-putting-the-fluid-in-the-rock 1 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What single input changes between the Associate booking and this tier's?",
+     "new": "Why is a fluid substitution worth doing before a well is drilled?"
+    },
+    "explanation": {
+     "old": "The conditions, the fluid properties and the mineral frame are all reused unchanged from the tier below. What is new is a logged rock to put them into.",
+     "new": "Knowing what the reservoir rock looks like wet, and predicting what it would look like charged, says what the seismic ought to show in each case, which can be checked against a survey before drilling."
+    },
+    "options": {
+     "0": {
+      "old": "The conditions at which the fluids are computed.",
+      "new": "It measures the saturation of the undrilled prospect directly."
+     },
+     "1": {
+      "old": "The ingredients go into a rock with porosity.",
+      "new": "It predicts what seismic should show for each fluid."
+     },
+     "2": {
+      "old": "The mineral mixing rule used for the frame.",
+      "new": "It replaces the need for a shear log in every offset well."
+     },
+     "3": {
+      "old": "The saturation at which the pore fluid is mixed.",
+      "new": "It fixes the porosity."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 6,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m02-the-dry-frame 2: 'How much of the Ekene saturated bulk modulus does the brine supply?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m02-the-dry-frame 2 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "How much of the Ekene saturated bulk modulus does the brine supply?",
+     "new": "An inverse Gassmann result comes out above the saturated modulus. What does that mean?"
+    },
+    "explanation": {
+     "old": "If the fluid contributed only a few percent there would be no such thing as a direct hydrocarbon indicator. It contributes nearly half, which is why fluid changes show up on seismic.",
+     "new": "Adding a fluid can only stiffen a rock in compression, so the saturated modulus must always exceed the dry one. A dry frame above the saturated value means the inputs are inconsistent and the answer is meaningless."
+    },
+    "options": {
+     "0": {
+      "old": "4.8 percent, since fluids are soft.",
+      "new": "The fluid is stiffer than the frame."
+     },
+     "1": {
+      "old": "80 percent, matching the Biot coefficient.",
+      "new": "The rock is fluid sensitive, with Biot near 1."
+     },
+     "2": {
+      "old": "25 percent, matching the porosity.",
+      "new": "The frame has been cemented since logging."
+     },
+     "3": {
+      "old": "44.8 percent, or 5.9697 GPa.",
+      "new": "The inputs are inconsistent."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 7,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m02-the-dry-frame 3: 'Why is the dry frame far softer than the mineral frame?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m02-the-dry-frame 3 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why is the dry frame far softer than the mineral frame?",
+     "new": "How would a tight cemented limestone at 25 percent porosity compare with the Ekene sand?"
+    },
+    "explanation": {
+     "old": "7.350343061720982 against 30.87940062475596 GPa. Porosity removes material and the contacts, not the grain interiors, control the frame stiffness.",
+     "new": "Cement welds the grains, so the dry frame might be around 30 GPa against calcite near 71 GPa, giving a Biot coefficient of 0.577. The stiffer the frame relative to its mineral, the less a fluid substitution does."
+    },
+    "options": {
+     "0": {
+      "old": "Grains touch only at contacts, which carry the load.",
+      "new": "Biot near 0.577, so a weaker fluid effect."
+     },
+     "1": {
+      "old": "The dry frame is computed at reservoir pressure and the mineral frame at surface.",
+      "new": "Biot near 0.80, so the same fluid effect as Ekene."
+     },
+     "2": {
+      "old": "The Voigt Reuss Hill average is an upper bound rather than an estimate.",
+      "new": "Biot near 0.95, so an even stronger fluid effect."
+     },
+     "3": {
+      "old": "The dry frame still contains irreducible water.",
+      "new": "No fluid effect."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 8,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m02-the-dry-frame 4: 'What is the Ekene Biot coefficient and what does it say?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m02-the-dry-frame 4 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What is the Ekene Biot coefficient and what does it say?",
+     "new": "In which rocks do direct hydrocarbon indicators work best?"
+    },
+    "explanation": {
+     "old": "$1 - 7.350343061720982/37$. A value near 1 means most of the fluid's stiffness is transmitted, and a tight cemented rock at 0.4 would show a much weaker fluid effect.",
+     "new": "The stiffer the frame relative to its mineral, the less a fluid substitution does, so direct hydrocarbon indicators work well in soft young sandstones and poorly in tight cemented rocks. The Biot coefficient says which you have."
+    },
+    "options": {
+     "0": {
+      "old": "0.20, since the frame is nearly as stiff as its mineral.",
+      "new": "Tight cemented rocks, whose frames are stiff."
+     },
+     "1": {
+      "old": "0.80, so the frame is compliant and the rock is fluid sensitive.",
+      "new": "Soft young sandstones, whose frames are compliant against their mineral."
+     },
+     "2": {
+      "old": "0.55, the ratio of dry to saturated modulus.",
+      "new": "Carbonates, whose mineral modulus is high."
+     },
+     "3": {
+      "old": "0.25, equal to the porosity.",
+      "new": "Any rock at 25 percent porosity."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m02-the-dry-frame 6: 'Why can a fluid not change the shear modulus?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m02-the-dry-frame 6 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why can a fluid not change the shear modulus?",
+     "new": "How does a rock behave at sonic log frequencies compared with Gassmann's prediction?"
+    },
+    "explanation": {
+     "old": "The value is exactly zero rather than small, so $\\mu_{sat} = \\mu_{dry}$ is exact within Gassmann's assumptions rather than an approximation.",
+     "new": "Gassmann assumes loading slow enough for pore pressure to equilibrate. At a sonic log's 10 kHz the fluid cannot equilibrate between pores during a cycle, so the rock is stiffer than predicted and the shear modulus can move a little, usually upward."
+    },
+    "options": {
+     "0": {
+      "old": "Shear waves do not enter the pore space at all.",
+      "new": "Softer, since the pore fluid escapes during a cycle."
+     },
+     "1": {
+      "old": "Its shear modulus is small compared with the frame's.",
+      "new": "Exactly as predicted, at any frequency."
+     },
+     "2": {
+      "old": "A fluid at rest has no restoring force against a change of shape.",
+      "new": "Stiffer, since the fluid cannot equilibrate, which is called dispersion."
+     },
+     "3": {
+      "old": "Gassmann's relation neglects the fluid's shear stiffness.",
+      "new": "Its shear modulus drops to zero."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m03-substituting-the-fluid 9: 'How much Gassmann arithmetic does the substituted shear velocity need?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m03-substituting-the-fluid 9 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "How much Gassmann arithmetic does the substituted shear velocity need?",
+     "new": "How large is the Ekene shear velocity rise compared with the compressional fall?"
+    },
+    "explanation": {
+     "old": "The whole of Gassmann's relation is spent on the compressional velocity. The shear velocity follows from a quantity that did not change and a density that is bookkeeping.",
+     "new": "The shear velocity moves about 5 percent while the compressional velocity moves 9 percent. It is the sign of the shear change that carries the information, and the faster shear velocity is no evidence that gas stiffens the rock."
+    },
+    "options": {
+     "0": {
+      "old": "None at all.",
+      "new": "About 5 percent against 9."
+     },
+     "1": {
+      "old": "The forward relation only.",
+      "new": "The same, 9 percent each, in opposite directions."
+     },
+     "2": {
+      "old": "The inverse relation only.",
+      "new": "Larger, 13.6 percent against 9 percent."
+     },
+     "3": {
+      "old": "Both, since the shear modulus is recomputed.",
+      "new": "About 1 percent against 17.7 percent."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 12,
+   "category": "duplicate",
+   "flag": "near p0.62 k1.00 duplicate of intermediate module m01-putting-the-fluid-in-the-rock 8: 'How is the substituted density computed?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m01-putting-the-fluid-in-the-rock 8 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "How is the substituted density computed?",
+     "new": "Why is the density change the first thing to verify in someone else's substitution?"
+    },
+    "explanation": {
+     "old": "$2250 + 0.25(172.66679461728904 - 1017.8249875) = 2038.7104517793223$. It involves none of Gassmann's assumptions, which is why it is the robust half of the answer.",
+     "new": "The density change is exact bookkeeping, so a 25 percent porosity sand losing brine for gas must lose about 211 kg/m3. If it has not, either the porosity or a fluid density is wrong."
+    },
+    "options": {
+     "0": {
+      "old": "From the forward Gassmann relation alongside the modulus.",
+      "new": "It is the only step that uses Gassmann's relation."
+     },
+     "1": {
+      "old": "$\\rho + \\phi(\\rho_{fl}' - \\rho_{fl})$, which is mass bookkeeping.",
+      "new": "It is large and predictable, about 211 kg/m3 at 25 percent porosity."
+     },
+     "2": {
+      "old": "By scaling the logged density by the fluid modulus ratio.",
+      "new": "It carries no information about the porosity."
+     },
+     "3": {
+      "old": "From the substituted velocities and the shear modulus.",
+      "new": "It is graded to the tightest tolerance."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m03-substituting-the-fluid 6: 'What does the grain density check test, and what does it give at Ekene?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m03-substituting-the-fluid 6 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does the grain density check test, and what does it give at Ekene?",
+     "new": "A sand logs 2300 kg/m3 at an assumed porosity of 0.30 with brine at 1020 kg/m3. What does the grain density check give?"
+    },
+    "explanation": {
+     "old": "$(\\rho - \\phi\\rho_{fl})/(1-\\phi)$, consistent with a 70/30 quartz and clay mixture. The value 2629 is the Associate tier's mineral frame density, which is a different quantity.",
+     "new": "(2300 - 0.30 x 1020)/0.70 = 2848.6 kg/m3, which is high for a quartz rich sand. Either the porosity is too high, the density log reads high, or the lithology is not what the model assumes."
+    },
+    "options": {
+     "0": {
+      "old": "The fluid density, and it gives 1017.8 kg/m3.",
+      "new": "2660.7 kg/m3, consistent with a quartz and clay mix."
+     },
+     "1": {
+      "old": "The mineral modulus, and it gives 2629 kg/m3.",
+      "new": "2467 kg/m3, which is below every clastic mineral."
+     },
+     "2": {
+      "old": "The porosity, and it gives 2660.7 kg/m3.",
+      "new": "2848.6 kg/m3, high for a quartz rich sand."
+     },
+     "3": {
+      "old": "The dry frame, and it gives 2250 kg/m3.",
+      "new": "2300 kg/m3."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m03-substituting-the-fluid 7: 'A 2250 kg/m3 sand assumed at 0.15 porosity gives what grain density?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m03-substituting-the-fluid 7 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "A 2250 kg/m3 sand assumed at 0.15 porosity gives what grain density?",
+     "new": "Why is a shear log without a density log not enough to get the moduli?"
+    },
+    "explanation": {
+     "old": "The porosity is rejected on density grounds alone. That same porosity would give a dry frame of 1.36 GPa, and below 0.14 the calculation refuses outright.",
+     "new": "The shear modulus is the density times the shear velocity squared, and the bulk modulus needs the density times the compressional velocity squared less the shear term. Both conversions need the density."
+    },
+    "options": {
+     "0": {
+      "old": "2661 kg/m3, unchanged from the 0.25 case.",
+      "new": "The density fixes the porosity used in Gassmann's relation, which needs it first."
+     },
+     "1": {
+      "old": "2661 kg/m3, which is quartz to within logging accuracy.",
+      "new": "Shear logs are unreliable in slow rocks."
+     },
+     "2": {
+      "old": "2849 kg/m3, high but possible.",
+      "new": "Density sets the fluid modulus."
+     },
+     "3": {
+      "old": "2467 kg/m3, below every common clastic mineral.",
+      "new": "Both conversions multiply the density by a squared velocity."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m03-substituting-the-fluid 10: 'What is the Ekene impedance drop on gas substitution?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m03-substituting-the-fluid 10 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What is the Ekene impedance drop on gas substitution?",
+     "new": "A sand shows a 10 percent impedance drop between two wells and no change in its velocity ratio. What is the most likely cause?"
+    },
+    "explanation": {
+     "old": "Impedance is the product of the two, so a 9.2 percent velocity fall and a 9.4 percent density fall compound rather than add.",
+     "new": "A porosity increase lowers both velocities in similar proportion and lowers the density, so the impedance drops while the ratio barely moves. Gas would have moved the ratio substantially, by 13.6 percent for a full substitution at Ekene."
+    },
+    "options": {
+     "0": {
+      "old": "17.72 percent, from 7.200e6 to 5.923875e6.",
+      "new": "A porosity increase."
+     },
+     "1": {
+      "old": "9.2 percent, matching the velocity fall alone.",
+      "new": "Gas, which lowers the impedance the most."
+     },
+     "2": {
+      "old": "9.4 percent, matching the density fall alone.",
+      "new": "More clay in the sand, raising the ratio."
+     },
+     "3": {
+      "old": "13.6 percent, matching the velocity ratio fall.",
+      "new": "Oil, which leaves the ratio alone."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m03-substituting-the-fluid 11: 'Which contributes more to that drop?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m03-substituting-the-fluid 11 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which contributes more to that drop?",
+     "new": "What does more clay do to the velocity ratio?"
+    },
+    "explanation": {
+     "old": "Velocity alone gives 6,537,819 and density alone 6,523,873, against 7,200,000. Half of a gas anomaly's impedance signature is bookkeeping about what the pores weigh.",
+     "new": "Clays have low shear stiffness, so more clay raises the velocity ratio. Gas lowers it sharply and porosity barely moves it, which is why impedance against velocity ratio separates fluid from lithology."
+    },
+    "options": {
+     "0": {
+      "old": "The velocity, by a factor of two.",
+      "new": "Lowers it sharply, as gas does."
+     },
+     "1": {
+      "old": "The density, marginally.",
+      "new": "Raises it."
+     },
+     "2": {
+      "old": "The velocity, marginally.",
+      "new": "Leaves it unchanged, like porosity."
+     },
+     "3": {
+      "old": "Neither. They are equal by construction.",
+      "new": "Lowers it slightly."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "category": "duplicate",
+   "flag": "near p0.90 k1.00 duplicate of intermediate module m03-substituting-the-fluid 12: 'What happens to the Ekene velocity ratio on substitution?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m03-substituting-the-fluid 12 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What happens to the Ekene velocity ratio on substitution?",
+     "new": "What does gas substitution do to the Ekene Poisson's ratio?"
+    },
+    "explanation": {
+     "old": "The two velocities move in opposite directions so the ratio falls 13.6 percent, more than either velocity moved. The value 1.968 is the overlying shale's.",
+     "new": "Poisson's ratio is a one to one function of the velocity ratio, so it falls with it, from 0.268571 to 0.132671. The 13.6 percent fall is the velocity ratio's own. The Expert tier's AVO gradient is essentially a contrast in this quantity."
+    },
+    "options": {
+     "0": {
+      "old": "It is unchanged, since both velocities scale together.",
+      "new": "It rises, since the shear velocity rises."
+     },
+     "1": {
+      "old": "It rises, since the shear velocity rises.",
+      "new": "It is unchanged, being a frame property."
+     },
+     "2": {
+      "old": "It falls from 1.7777777777777777 to 1.5366125278606173.",
+      "new": "It falls from 0.268571 to 0.132671, a factor of 2.02."
+     },
+     "3": {
+      "old": "It falls from 1.968 to 1.778.",
+      "new": "It falls by 13.6 percent."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 18,
+   "category": "duplicate",
+   "flag": "near p0.92 k0.82 duplicate of intermediate module m03-substituting-the-fluid 13: 'Why is the velocity ratio a better fluid discriminator than either velocity?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m03-substituting-the-fluid 13 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why is the velocity ratio a better fluid discriminator than either velocity?",
+     "new": "Which mechanism raises the shear velocity while lowering the compressional one?"
+    },
+    "explanation": {
+     "old": "A porosity increase lowers both velocities in proportion and barely moves the ratio, more clay raises it, and gas lowers it sharply. That is why the standard crossplot is impedance against ratio.",
+     "new": "Higher porosity, a shale and overpressure all lower both velocities. Only a lighter pore fluid with the frame intact raises the shear velocity while lowering the compressional one, which is why a simultaneous shear rise is such a specific signature."
+    },
+    "options": {
+     "0": {
+      "old": "It needs no density log to compute.",
+      "new": "A porosity increase in the same rock."
+     },
+     "1": {
+      "old": "It has a smaller measurement uncertainty.",
+      "new": "More clay in the frame."
+     },
+     "2": {
+      "old": "Both velocities come from the same tool, so the ratio cancels what they share.",
+      "new": "Overpressure, which softens the grain contacts of the frame."
+     },
+     "3": {
+      "old": "Porosity and lithology move it much less than gas does.",
+      "new": "A drop in pore fluid density with the frame intact."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 19,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m03-substituting-the-fluid 14: 'Where does an oil substitution land at Ekene?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m03-substituting-the-fluid 14 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Where does an oil substitution land at Ekene?",
+     "new": "To a compressional velocity, what does an Ekene oil sand resemble?"
+    },
+    "explanation": {
+     "old": "The drop from brine to oil is 191.62 m/s and the further drop to gas only 102.68, which is why oil and gas are the hard pair to distinguish.",
+     "new": "The oil case velocity is 3008.4 m/s, and a brine and gas mixture reaches that near a water saturation of 0.99, since one percent of gas already drops the velocity to 3078.9. That equivalence is why a bright spot can come from worthless residual gas."
+    },
+    "options": {
+     "0": {
+      "old": "3008.378760376558 m/s, two thirds of the way.",
+      "new": "A brine sand with one to two percent free gas."
+     },
+     "1": {
+      "old": "2905.6972280296195 m/s, the same as gas.",
+      "new": "A full gas sand."
+     },
+     "2": {
+      "old": "3100 m/s, one third of the way to gas.",
+      "new": "A dry frame with no fluid."
+     },
+     "3": {
+      "old": "3008.378760376558 m/s, one third of the way to gas.",
+      "new": "A sand holding half brine and half gas throughout its pores."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 20,
+   "category": "duplicate",
+   "flag": "near p0.71 k0.86 duplicate of intermediate module m03-substituting-the-fluid 15: 'Why can an amplitude not separate oil from gas at Ekene?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m03-substituting-the-fluid 15 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why can an amplitude not separate oil from gas at Ekene?",
+     "new": "Why is oil so much stiffer than gas at the Ekene conditions?"
+    },
+    "explanation": {
+     "old": "A porosity range of plus or minus 0.05 moves the predicted velocity by over 300 m/s, three times the 103 m/s oil to gas separation. Either can still be separated from brine.",
+     "new": "Compressing a liquid means pushing molecules against their repulsive cores, while a gas at 25 MPa still has space between its molecules to remove. Dissolved gas softens a live oil, and neither fluid has any shear stiffness."
+    },
+    "options": {
+     "0": {
+      "old": "Oil and gas have the same density once substituted.",
+      "new": "Oil carries a small shear stiffness that the gas lacks."
+     },
+     "1": {
+      "old": "They differ by 10 percent in impedance, less than the porosity uncertainty.",
+      "new": "A liquid's molecules are already close packed."
+     },
+     "2": {
+      "old": "Gassmann returns the same saturated modulus for both, since both are hydrocarbons.",
+      "new": "Dissolved gas stiffens the live oil."
+     },
+     "3": {
+      "old": "Their bulk moduli are within one percent of each other.",
+      "new": "Gas at 25 MPa has no bulk modulus."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "category": "duplicate",
+   "flag": "EXACT/diffkey duplicate of intermediate module m04-the-gas-effect 1: 'What does one percent of gas do to the Ekene velocity?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m04-the-gas-effect 1 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does one percent of gas do to the Ekene velocity?",
+     "new": "How much of the full Ekene impedance anomaly does one percent of gas produce?"
+    },
+    "explanation": {
+     "old": "Five percent delivers 77.01 percent, and the full drop to the minimum is 369.72080941195463 m/s. That saturation is why amplitude cannot count gas.",
+     "new": "At Sw 0.99 the impedance is 6,920,944 against 7,200,000, a fall of 3.9 percent against 17.7 percent at full gas. That is roughly a fifth, rather than the third seen in velocity, because the density is linear in saturation and has barely moved."
+    },
+    "options": {
+     "0": {
+      "old": "Takes it to 3190 m/s, roughly one percent down.",
+      "new": "A third, the same share it produces in velocity."
+     },
+     "1": {
+      "old": "Takes it to 3078.87 m/s, which is a tenth of the available drop.",
+      "new": "Nothing measurable."
+     },
+     "2": {
+      "old": "Takes it to 3078.87 m/s, a third of the available drop.",
+      "new": "About a fifth, a fall of 3.9 percent."
+     },
+     "3": {
+      "old": "Nothing detectable, since it is below the noise.",
+      "new": "All of it, 17.7 percent."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "category": "duplicate",
+   "flag": "EXACT/diffkey duplicate of intermediate module m04-the-gas-effect 2: 'Why does so little gas do so much?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m04-the-gas-effect 2 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why does so little gas do so much?",
+     "new": "Why does gas beyond the first few percent change the velocity so little?"
+    },
+    "explanation": {
+     "old": "$1/K_{mix} = S_w/K_{brine} + (1-S_w)/K_{gas}$ with gas 48 times more compliant, so one percent already supplies a third of the mixture's compliance.",
+     "new": "Once the fluid modulus is far below the frame's contribution, lowering it further changes almost nothing, since the fluid's contribution cannot go below zero. The density keeps falling linearly, which is what turns the velocity back up."
+    },
+    "options": {
+     "0": {
+      "old": "Gas displaces brine from the load bearing pores first.",
+      "new": "The density stops falling past five percent gas."
+     },
+     "1": {
+      "old": "Gassmann's relation is quadratic in the fluid modulus.",
+      "new": "Wood's equation caps the mixture modulus at the brine value once gas enters."
+     },
+     "2": {
+      "old": "One percent of gas already lowers the mixture density enough to slow the rock.",
+      "new": "The frame softens to match the gas."
+     },
+     "3": {
+      "old": "Wood's equation adds compliances, so the soft phase dominates.",
+      "new": "The fluid's share of the stiffness is already near zero."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m04-the-gas-effect 3: 'Where is the Ekene velocity minimum, and what is it?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m04-the-gas-effect 3 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Where is the Ekene velocity minimum, and what is it?",
+     "new": "What moves the Ekene velocity minimum toward pure gas?"
+    },
+    "explanation": {
+     "old": "The slowest rock holds 27 percent gas, and pure gas is 75.42 m/s faster. The curve is not monotonic in saturation.",
+     "new": "The position of the minimum depends on the frame stiffness, the porosity and the fluid contrast. A stiffer frame or a lower porosity moves it toward pure gas and a very soft frame moves it toward pure brine."
+    },
+    "options": {
+     "0": {
+      "old": "Sw 0.73 at 2830.2791905880454 m/s.",
+      "new": "A stiffer frame or a lower porosity than Ekene's."
+     },
+     "1": {
+      "old": "Sw 0.00 at 2905.6972280296195 m/s.",
+      "new": "A softer frame."
+     },
+     "2": {
+      "old": "Sw 0.50 at 2844.3861 m/s.",
+      "new": "More brine in the pores."
+     },
+     "3": {
+      "old": "Sw 0.95 at 2915.2644777573832 m/s.",
+      "new": "A higher gas density."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m04-the-gas-effect 4: 'Why does the velocity turn back up before pure gas?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m04-the-gas-effect 4 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why does the velocity turn back up before pure gas?",
+     "new": "Why is the velocity minimum rarely noticed in real data?"
+    },
+    "explanation": {
+     "old": "The numerator effect is complete within a few percent and the denominator effect is linear in gas fraction all the way, so with nothing left to soften the lightening wins.",
+     "new": "From Sw 0.73 to Sw 0.00 the velocity moves 75 m/s, which is 2.6 percent, and real data carry more scatter than that. The practical shape is a cliff followed by a nearly flat floor."
+    },
+    "options": {
+     "0": {
+      "old": "The dry frame stiffens as the last of the brine leaves the pore space.",
+      "new": "It lies beyond the range of saturations any real reservoir can hold."
+     },
+     "1": {
+      "old": "The density keeps falling after the fluid modulus has collapsed.",
+      "new": "The rise beyond it is only 2.6 percent, within the scatter."
+     },
+     "2": {
+      "old": "Wood's equation reverses above 50 percent gas.",
+      "new": "The shear velocity masks it."
+     },
+     "3": {
+      "old": "The shear modulus rises at high gas saturation.",
+      "new": "It exists only at sonic frequencies."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 25,
+   "category": "duplicate",
+   "flag": "near p0.92 k0.67 duplicate of intermediate module m04-the-gas-effect 7: 'What separates five percent gas from a full gas column in velocity?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m04-the-gas-effect 7 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What separates five percent gas from a full gas column in velocity?",
+     "new": "How do residual gas saturations of a few percent commonly arise in an undrilled trap?"
+    },
+    "explanation": {
+     "old": "2915.2644777573832 against 2905.6972280296195. In impedance the separation is better, at 9.26 percent, and still not measurable against the porosity uncertainty.",
+     "new": "They occur where a trap once held gas and leaked, where gas has come out of solution near a fault, and where a small charge arrived and stopped. None is worth drilling, and all look much like a full column on amplitude alone."
+    },
+    "options": {
+     "0": {
+      "old": "75 m/s, the size of the turn.",
+      "new": "Gas exsolving into the borehole while the well is logged."
+     },
+     "1": {
+      "old": "294 m/s, the full gas effect.",
+      "new": "A gas cap thinner than the seismic wavelet above oil."
+     },
+     "2": {
+      "old": "9.6 m/s, or 0.33 percent.",
+      "new": "Leakage, exsolution, or a small charge."
+     },
+     "3": {
+      "old": "185 m/s, half the full drop.",
+      "new": "Gas released from the oil by production drawdown."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 26,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m04-the-gas-effect 8: 'What is fizz gas and why does it matter?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m04-the-gas-effect 8 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What is fizz gas and why does it matter?",
+     "new": "Which is the strongest statement the tier supports about a bright Ekene amplitude?"
+    },
+    "explanation": {
+     "old": "Residual saturations of a few percent are common and none is worth drilling, yet all look much like a full column on amplitude alone. It is a standard cause of a dry hole on a bright spot.",
+     "new": "The modelled brine and gas cases give 7.200e6 and 5.924e6, so a full column should produce a 17.7 percent contrast. The amplitude does not discriminate saturation, and a porosity uncertainty of plus or minus 0.05 outweighs the oil to gas separation."
+    },
+    "options": {
+     "0": {
+      "old": "A saturation too low to show on an amplitude map but high enough to log.",
+      "new": "The prospect holds gas rather than oil, since the amplitude is so bright."
+     },
+     "1": {
+      "old": "Gas exsolving in the borehole during logging.",
+      "new": "The gas saturation is above 50 percent."
+     },
+     "2": {
+      "old": "A gas cap thinner than the seismic wavelet.",
+      "new": "The porosity is 0.25."
+     },
+     "3": {
+      "old": "A residual saturation producing nearly the full anomaly.",
+      "new": "A full gas column should produce a 17.7 percent impedance contrast."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 27,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m04-the-gas-effect 10: 'Which observation best distinguishes a column from residual gas?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m04-the-gas-effect 10 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which observation best distinguishes a column from residual gas?",
+     "new": "Which anomaly geometry points to a column rather than residual gas?"
+    },
+    "explanation": {
+     "old": "Residual gas produces no contact reflection. Conformance to structure is good supporting evidence, and the other two are consistent with a few percent of gas.",
+     "new": "An amplitude conforming to structure, with its base at a consistent depth across the prospect, is evidence of a column. A patchy anomaly that ignores structure is not."
+    },
+    "options": {
+     "0": {
+      "old": "A flat spot, reflecting from the contact.",
+      "new": "Conformance to structure."
+     },
+     "1": {
+      "old": "A bright amplitude conforming to the closure.",
+      "new": "A patchy anomaly that ignores the structure."
+     },
+     "2": {
+      "old": "A strongly negative intercept at the near offsets.",
+      "new": "A bright ring around a dimmer centre."
+     },
+     "3": {
+      "old": "A low velocity ratio measured on the gather.",
+      "new": "The brightest amplitude at the crest alone."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "category": "duplicate",
+   "flag": "near p0.60 k0.90 duplicate of intermediate module m05-when-there-is-no-shear-log 1: 'Why do many wells lack a shear log?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m05-when-there-is-no-shear-log 1 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why do many wells lack a shear log?",
+     "new": "Where a dipole tool was run, why can a shear log still be missing?"
+    },
+    "explanation": {
+     "old": "A monopole tool needs the shear velocity to exceed the mud velocity, which fails in most shallow sands and nearly all shales. Dipole tools record it and are more recent.",
+     "new": "The interval may not have been logged, the data may be unusable from cycle skipping or a washed out hole, or the log may miss the specific bed. Recording shear only in fast formations is the limitation of monopole tools."
+    },
+    "options": {
+     "0": {
+      "old": "Shear is only logged when a study requires it.",
+      "new": "Dipole tools record shear only in fast formations."
+     },
+     "1": {
+      "old": "Monopole tools record no usable shear in slow formations.",
+      "new": "Poor hole conditions, cycle skipping, or the wrong interval logged."
+     },
+     "2": {
+      "old": "The shear arrival is discarded during processing.",
+      "new": "The flexural mode never propagates in shales."
+     },
+     "3": {
+      "old": "Shear cannot be measured in a fluid filled borehole.",
+      "new": "Shear is discarded unless a study asks for it."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "category": "duplicate",
+   "flag": "near p0.80 k0.73 duplicate of intermediate module m05-when-there-is-no-shear-log 2: 'What can be computed with a compressional velocity and a density but no shear?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m05-when-there-is-no-shear-log 2 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What can be computed with a compressional velocity and a density but no shear?",
+     "new": "Why does a missing shear log stop inverse Gassmann for the Ekene sand?"
+    },
+    "explanation": {
+     "old": "One measured quantity and two unknown moduli, so they cannot be separated. An estimate of the shear velocity unlocks everything, which is why the module exists.",
+     "new": "With only the compressional velocity and density you have 23.04 GPa, which is K plus four thirds of the shear modulus, and not either of them. Without the shear modulus there is no saturated bulk modulus, so inverse Gassmann has nothing to work on."
+    },
+    "options": {
+     "0": {
+      "old": "The saturated bulk modulus, given the porosity.",
+      "new": "Inverse Gassmann takes the shear velocity as a direct input."
+     },
+     "1": {
+      "old": "The shear modulus, from an empirical relation only.",
+      "new": "The density log cannot be trusted without shear."
+     },
+     "2": {
+      "old": "Impedance, and the combination $K + \\tfrac{4}{3}\\mu$.",
+      "new": "Without a shear modulus the saturated bulk modulus cannot be separated out."
+     },
+     "3": {
+      "old": "Neither modulus, and not the impedance either.",
+      "new": "The porosity is derived from the shear log."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "category": "duplicate",
+   "flag": "EXACT/diffkey duplicate of intermediate module m05-when-there-is-no-shear-log 7: 'What is the Greenberg-Castagna mixing rule?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m05-when-there-is-no-shear-log 7 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What is the Greenberg-Castagna mixing rule?",
+     "new": "What mixing geometry does the harmonic mean represent in Greenberg-Castagna?"
+    },
+    "explanation": {
+     "old": "At Ekene the arithmetic mean is 1522.136 and the harmonic 1520.2585531342977, giving the graded 1521.197276567149. It is the Voigt Reuss Hill idea applied to velocities.",
+     "new": "The arithmetic mean is the stiffest plausible mixture, the components acting in parallel, and the harmonic mean the softest, acting in series. Averaging the two splits the difference when the geometry is unknown, the same idea as Voigt Reuss Hill."
+    },
+    "options": {
+     "0": {
+      "old": "The mean of the arithmetic and harmonic means.",
+      "new": "Components acting in series, the softest mixture."
+     },
+     "1": {
+      "old": "The volume weighted arithmetic mean of the estimates.",
+      "new": "Components acting in parallel, the stiffest possible mixture."
+     },
+     "2": {
+      "old": "The harmonic mean weighted by volume fraction.",
+      "new": "The dominant lithology on its own."
+     },
+     "3": {
+      "old": "The estimate for the dominant lithology alone.",
+      "new": "A random pack between the two bounds."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 32,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m05-when-there-is-no-shear-log 9: 'How does the composite compare with the mudrock line at 3000 m/s?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m05-when-there-is-no-shear-log 9 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "How does the composite compare with the mudrock line at 3000 m/s?",
+     "new": "What is ten percent of clay volume worth in the Greenberg-Castagna estimate at 3000 m/s?"
+    },
+    "explanation": {
+     "old": "Choosing a lithology aware method matters about ten times more than getting the split exactly right, which is worth 11.6 m/s for a ten percent change in clay volume.",
+     "new": "A 60/40 split gives a composite near 1509.6 against 1521.20 for 70/30, about 11.6 m/s. Choosing a lithology aware method, worth 107 m/s, matters about ten times more than getting the split exactly right."
+    },
+    "options": {
+     "0": {
+      "old": "213.68 m/s higher, or about 13 percent.",
+      "new": "About 107 m/s, as large as the mudrock line gap."
+     },
+     "1": {
+      "old": "107.29727656714931 m/s higher, or about 7 percent.",
+      "new": "About 11.6 m/s, moving it near 1509.6."
+     },
+     "2": {
+      "old": "11.6 m/s higher, the same as a lithology split error.",
+      "new": "About 115 m/s, the full sand to shale difference."
+     },
+     "3": {
+      "old": "Identical, since both are fitted to brine clastics.",
+      "new": "About 1.88 m/s."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m05-when-there-is-no-shear-log 10: 'What does Greenberg-Castagna predict at the Ekene sand's own logged velocity?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m05-when-there-is-no-shear-log 10 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does Greenberg-Castagna predict at the Ekene sand's own logged velocity?",
+     "new": "Used as a baseline, where do gas sands plot against the mudrock line?"
+    },
+    "explanation": {
+     "old": "It is 120.05415453482057 m/s low, or 6.7 percent, because this sand sits at the stiff edge of the population the regression passes through.",
+     "new": "Plotting a measured shear log against the mudrock line shows departures from the clastic brine trend: carbonates and gas sands plot above it and very clay rich rocks plot below. That baseline use is its best one."
+    },
+    "options": {
+     "0": {
+      "old": "1890.9758806113214 m/s, which is the shear velocity of the gas case.",
+      "new": "Below it, along with very clay rich rocks."
+     },
+     "1": {
+      "old": "1800 m/s, matching the measurement.",
+      "new": "On it, like any clastic."
+     },
+     "2": {
+      "old": "1679.9458454651794 m/s, under-predicting the measured 1800.",
+      "new": "Above it, along with the carbonates."
+     },
+     "3": {
+      "old": "1556.6 m/s, the sandstone only curve at 3000 m/s.",
+      "new": "Below it."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "category": "duplicate",
+   "flag": "near p0.69 k0.71 duplicate of intermediate module m05-when-there-is-no-shear-log 11: 'What does that test say about the graded estimate at 3000 m/s?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m05-when-there-is-no-shear-log 11 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does that test say about the graded estimate at 3000 m/s?",
+     "new": "Calibrating on the Ekene well, what is the corrected shear estimate at 3000 m/s?"
+    },
+    "explanation": {
+     "old": "If the same 6.7 percent bias applies, the true value at 3000 m/s would be nearer 1630 m/s. Knowing whether you have a method output or a rock property is the point.",
+     "new": "The ratio of measured to estimated shear at the logged velocity is 1800 over 1679.95, and applying it to the 1521.20 m/s estimate gives 1629.906764680661 m/s. That rests on the lithology and cementation at 3000 m/s matching the calibration depth."
+    },
+    "options": {
+     "0": {
+      "old": "It is wrong and needs correcting before submission.",
+      "new": "1521.20 m/s, since calibration leaves the estimate unchanged."
+     },
+     "1": {
+      "old": "It should be replaced by this well's own measured 1800 m/s.",
+      "new": "1413.90 m/s, the mudrock line value."
+     },
+     "2": {
+      "old": "It is more reliable than the check itself, since 3000 m/s is nearer the fit centre.",
+      "new": "1800 m/s, the calibration well's own shear."
+     },
+     "3": {
+      "old": "It is the method's correct output rather than the rock's shear velocity.",
+      "new": "1629.906764680661 m/s, from the calibration ratio."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "category": "duplicate",
+   "flag": "near p0.83 k0.75 duplicate of intermediate module m05-when-there-is-no-shear-log 14: 'In what order must shear estimation and substitution be done, and why?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m05-when-there-is-no-shear-log 14 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "In what order must shear estimation and substitution be done, and why?",
+     "new": "A gas bearing pay with no shear log is to be modelled as brine. What breaks the deadlock?"
+    },
+    "explanation": {
+     "old": "Applying Greenberg-Castagna to the Ekene gas case velocity gives 1446.343832922053 against a true 1890.98, out by 23.5 percent, because the rock no longer lies on the brine trend.",
+     "new": "The estimator cannot be applied to a gas bearing rock, and with no shear the substitution to brine cannot run. Breaking it needs an external input, such as an offset well's shear in the same rock at brine conditions, a frame model, or a shear log from elsewhere in the unit."
+    },
+    "options": {
+     "0": {
+      "old": "Estimate on the brine case first.",
+      "new": "An external shear input."
+     },
+     "1": {
+      "old": "Substitute first, since the estimate needs the final density.",
+      "new": "Estimating shear from the gas sand's own compressional velocity."
+     },
+     "2": {
+      "old": "Either, since the two are independent operations.",
+      "new": "Substituting to brine first, then estimating shear."
+     },
+     "3": {
+      "old": "Estimate, substitute, then re-estimate to converge.",
+      "new": "Running the round trip to recover the shear."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "category": "duplicate",
+   "flag": "near p0.80 k0.75 duplicate of intermediate module m06-the-substitution-workflow 5: 'Which quality control check tests the whole chain at once?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m06-the-substitution-workflow 5 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which quality control check tests the whole chain at once?",
+     "new": "A substitution gives almost no velocity change in a rock with a Biot coefficient of 0.8. What does that indicate?"
+    },
+    "explanation": {
+     "old": "It exercises both Gassmann directions, the density bookkeeping and both conversions, and at Ekene returns 3200.0000, 1800.0000 and 2250.0000 exactly.",
+     "new": "The Biot coefficient says whether the answer should be fluid sensitive at all. Near 1 the fluid matters greatly, so a near zero velocity change at 0.8 means an error, as would a huge change in a rock at 0.3."
+    },
+    "options": {
+     "0": {
+      "old": "The grain density from the log and porosity.",
+      "new": "Correct behaviour, the Biot coefficient being irrelevant to velocity."
+     },
+     "1": {
+      "old": "The round trip back to the original fluid.",
+      "new": "An error, since that rock should be fluid sensitive."
+     },
+     "2": {
+      "old": "The Biot coefficient from the two moduli.",
+      "new": "A stiff frame, which is what a coefficient of 0.8 implies."
+     },
+     "3": {
+      "old": "The four direction checks on the substitution.",
+      "new": "A gas case, which always changes little."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "category": "duplicate",
+   "flag": "near p0.70 k0.71 duplicate of intermediate module m06-the-substitution-workflow 6: 'What does the round trip check fail to test?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m06-the-substitution-workflow 6 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does the round trip check fail to test?",
+     "new": "Why is the recovered dry frame not an independent measurement of the rock?"
+    },
+    "explanation": {
+     "old": "It passes at every porosity, because it tests internal consistency rather than the truth of an assumption. The grain density check is the one that tests the porosity.",
+     "new": "The frame cannot be recovered without the porosity, so it inherits whatever porosity was assumed. That is why steps four and six of the workflow have a fixed order."
+    },
+    "options": {
+     "0": {
+      "old": "Whether the density bookkeeping is right.",
+      "new": "It is computed from the shear log alone."
+     },
+     "1": {
+      "old": "Whether the forward relation is implemented right.",
+      "new": "It changes with each substituted fluid."
+     },
+     "2": {
+      "old": "Whether the assumed porosity is right.",
+      "new": "It inherits the assumed porosity."
+     },
+     "3": {
+      "old": "Whether the conversion to moduli is right.",
+      "new": "It is copied straight from the mineral frame."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m06-the-substitution-workflow 8: 'Which two failures pass every check in this tier?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m06-the-substitution-workflow 8 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which two failures pass every check in this tier?",
+     "new": "Why should the round trip check be automated rather than performed by hand?"
+    },
+    "explanation": {
+     "old": "Both are established outside the substitution. The negative frame and the frame above the mineral modulus are exactly what the engine's guards catch.",
+     "new": "The round trip is the strongest check in the tier and also the one people skip, because the answer is known in advance. Automating it removes the temptation. Its result does not change with porosity, which is why it cannot test the porosity."
+    },
+    "options": {
+     "0": {
+      "old": "An uncalibrated shear estimate, and a transposed fluid pair.",
+      "new": "It needs more numerical precision than any calculator can hold."
+     },
+     "1": {
+      "old": "A wrong porosity, and a wrong mineral modulus.",
+      "new": "Its result drifts with every change to the assumed porosity."
+     },
+     "2": {
+      "old": "A negative dry frame, and a frame above the mineral modulus.",
+      "new": "It is too slow by hand."
+     },
+     "3": {
+      "old": "A wrong fluid state, and a violated Gassmann assumption.",
+      "new": "Its answer is known in advance, so it gets skipped."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m02-the-dry-frame 12: 'At which end of the porosity range does inverse Gassmann refuse for this rock?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m02-the-dry-frame 12 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "At which end of the porosity range does inverse Gassmann refuse for this rock?",
+     "new": "If inverse Gassmann drives the dry frame negative, what is the likely input error?"
+    },
+    "explanation": {
+     "old": "Explaining 13.32 GPa with almost no fluid needs a frame stiffer than the mineral. The frame rises with porosity and reaches only 12.0 GPa at 0.95, nowhere near 37.",
+     "new": "Too high an assumed porosity with a soft log can drive the computed frame negative. A frame above the mineral modulus points the other way, to a porosity that is too low, which is what fires the guard for the Ekene sand."
+    },
+    "options": {
+     "0": {
+      "old": "At low porosity, below about 0.14.",
+      "new": "The porosity is too high."
+     },
+     "1": {
+      "old": "At high porosity, above about 0.45.",
+      "new": "The saturation control is set to 0.00."
+     },
+     "2": {
+      "old": "At both ends, outside 0.15 to 0.40.",
+      "new": "The wavelet frequency is set too high."
+     },
+     "3": {
+      "old": "At neither, for any porosity between 0 and 1.",
+      "new": "The assumed porosity is too low for the log."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "category": "duplicate",
+   "flag": "similarity pass (lead follow-up) duplicate of intermediate module m06-the-substitution-workflow 14: 'What does the Expert tier add, and which result of this tier feeds it most?'",
+   "verdict": "fixed",
+   "reason": "final exam copy of intermediate module m06-the-substitution-workflow 14 (module question kept); rewritten into a new question on a different point from the same lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does the Expert tier add, and which result of this tier feeds it most?",
+     "new": "Across this course's tiers, where do the errors mostly live?"
+    },
+    "explanation": {
+     "old": "The AVO gradient is dominated by the shear contrast, so an uncalibrated shear estimate can change the predicted class. The intercept is driven by the density instead.",
+     "new": "Each tier is a thin layer of new arithmetic on top of a thick stack of inherited assumptions. The conversion between velocities and moduli is exact in both directions."
+    },
+    "options": {
+     "0": {
+      "old": "A probabilistic treatment; the porosity range feeds the distribution.",
+      "new": "In the new arithmetic each tier adds on top."
+     },
+     "1": {
+      "old": "A property model across the field; the porosity feeds the volumes.",
+      "new": "In the conversion between velocities and moduli."
+     },
+     "2": {
+      "old": "A saturation height model; the density feeds the contacts.",
+      "new": "In rounding."
+     },
+     "3": {
+      "old": "A shale above the sand; the shear velocity feeds the gradient.",
+      "new": "In the stack of inherited assumptions."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question, so the correct option is new text; answer_index unchanged"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "similarity pass: pair with advanced module m02-intercept-and-gradient 13: 'What happens to the gradient with an uncalibrated shear estimate?'",
+   "verdict": "judged fine",
+   "reason": "different scenario and answer: the uncalibrated 23.5 percent low estimate turning the gradient positive (class IV) against a 10 percent error that leaves it negative"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "category": "duplicate",
+   "flag": "similarity pass: pair with advanced module m05-resolution 7: 'What is the Ekene tuning thickness and the amplitude there?'",
+   "verdict": "judged fine",
+   "reason": "asks the capstone pair of tuning thickness and peak amplitude at 25 Hz; the module question lists thicknesses at four frequencies and never the peak value"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 3,
+   "category": "duplicate",
+   "flag": "similarity pass: pair with intermediate module m01-putting-the-fluid-in-the-rock 4: 'Compute the shear modulus of a rock at 2250 kg/m3 and 1800 m/s.'",
+   "verdict": "judged fine",
+   "reason": "same calculation on different data (the Ekene point, 7.29 GPa, against a 2200 kg/m3, 1500 m/s rock, 4.95 GPa); a different answer"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 4,
+   "category": "duplicate",
+   "flag": "similarity pass: pair with intermediate module m01-putting-the-fluid-in-the-rock 15: 'How is the saturated bulk modulus obtained from a log?'",
+   "verdict": "judged fine",
+   "reason": "asks for the formula; the module question applies it to a different rock and asks for the number"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "similarity pass: pair with intermediate module m03-substituting-the-fluid 8: 'What is the Ekene gas case shear velocity?'",
+   "verdict": "judged fine",
+   "reason": "asks for the value 1890.98 m/s; the module question asks why the shear velocity rises"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "category": "duplicate",
+   "flag": "similarity pass: pair with intermediate module m05-when-there-is-no-shear-log 3: 'What does the Castagna mudrock line give at 3000 m/s?'",
+   "verdict": "judged fine",
+   "reason": "asks for the mudrock value at 3000 m/s; the module question asks for the relation itself"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "duplicate",
+   "flag": "similarity pass: pair with intermediate module m02-the-dry-frame 9: 'Rank these Ekene sensitivities from largest to smallest.'",
+   "verdict": "judged fine",
+   "reason": "ranks three sensitivities together (porosity, oil to gas, mineral modulus); the module questions each give a single sweep"
+  },
+  {
+   "app_slug": "rockphysics",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-the-class-flip",
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "near p0.75 k0.83 pair with advanced module m03-the-class-flip 1: 'What is a class I AVO response?' / 'What is a class III AVO response?'",
+   "verdict": "judged fine",
+   "reason": "parallel definitions of two different classes (I and III) with different correct answers; the similarity is the shared prompt template only"
+  }
+ ]
+}

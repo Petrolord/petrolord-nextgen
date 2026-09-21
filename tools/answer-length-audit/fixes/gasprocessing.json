@@ -1,0 +1,46 @@
+{
+ "migration": "20261021b_b4_fix_gasprocessing.sql",
+ "title": "gasprocessing: duplicate question rewritten into a new question",
+ "items": [
+  {
+   "app_slug": "gasprocessing",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "category": "duplicate",
+   "flag": "duplicate of beginner module m01-what-this-engine-conditions 6 (near p0.64 k0.89): both ask how the standard cubic feet in a pound mole was measured out of the engine, same key",
+   "verdict": "fixed",
+   "reason": "True duplicate of the beginner m01 question; kept the module question and rewrote the final copy to ask how a different measured constant, the water overhead, was measured.",
+   "changes": {
+    "prompt": {
+     "old": "How was the standard cubic feet in a pound mole measured out of the engine rather than read from an export?",
+     "new": "How was the water overhead of 1100.000000000000 Btu a lb measured out of the engine rather than read from its export?"
+    },
+    "explanation": {
+     "old": "To measure a constant, ask the engine a question whose answer is that constant and nothing else, then print the ratio of the measurement to the export. The saturation route is how the molecular weight of water was measured.",
+     "new": "To measure a constant, ask the engine a question whose answer is that constant and nothing else. At one gallon per pound a gallon carries one pound of water, and with no reflux the overhead is charged once, so the term reads the Btu a lb directly. A reflux ratio of 0.250000 adds a quarter on top, and the BTEX still overhead is aromatics."
+    },
+    "options": {
+     "0": {
+      "old": "By dividing the gas constant by the standard pressure and multiplying by the standard temperature, which are all exported.",
+      "new": "By dividing the overhead term at a reflux ratio of 0.250000 by the water a gallon carries, which leaves the constant alone."
+     },
+     "1": {
+      "old": "By taking the saturation answer over the mole fraction the same call returns, which leaves the constant alone.",
+      "new": "By running the BTEX mole balance at a unit absorbed fraction, where the still overhead in pounds a day is the constant."
+     },
+     "2": {
+      "old": "By running the BTEX mole balance at one MMscfd, a million ppmv, a unit absorbed fraction and a unit molecular weight, where the answer is a million over the constant and nothing else.",
+      "new": "By running the reboiler at a circulation ratio of one gallon per pound with no reflux, where the vaporization term is the overhead alone and nothing else."
+     },
+     "3": {
+      "old": "By comparing the engine's water content against the golden's, since the golden builds the same volume from the SI gas constant.",
+      "new": "By comparing the reboiler duty against the golden's, since the golden builds the same overhead from a steam table value."
+     }
+    }
+   },
+   "correct_change_reason": "True duplicate rewritten into a new question on a different point, so the key is new text for the new question."
+  }
+ ]
+}

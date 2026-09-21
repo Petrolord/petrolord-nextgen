@@ -18,7 +18,7 @@ The Associate capstone is a reading exercise, not a memory test. It puts the Eke
 
 ## Tolerances
 
-The four depth and thickness answers are marked to 0.01 m, which means the arithmetic has to be right but there is no rounding trap: every one of these numbers is a whole number of metres. The well count is marked exactly. There is no partial credit on a count of three.
+The five depth, thickness and relief answers are marked to 0.01 m, which means the arithmetic has to be right but there is no rounding trap: every one of these numbers is a whole number of metres. The well count is marked exactly. There is no partial credit on a count of three.
 
 ## What has to happen before the capstone opens
 

@@ -1,0 +1,352 @@
+{
+ "migration": "20261021b_b4_fix_cementing.sql",
+ "title": "B4 follow-on: cementing double-key distractors and one duplicate",
+ "items": [
+  {
+   "app_slug": "cementing",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-centralizer",
+   "ord": 14,
+   "category": "double-key",
+   "flag": "options 1 and 2 both algebraically equal to the correct formula",
+   "verdict": "fixed",
+   "reason": "Both distractors were the same ratio rewritten; replaced with the post-sag standoff and the washout case, both wrong for the reported number.",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "The blade less the casing, over twice the clearance between the casing and the bore.",
+      "new": "The standoff at mid-span, after the sag between two centralizers is subtracted."
+     },
+     "2": {
+      "old": "The ratio of the two annular gaps, blade to casing and bore to casing.",
+      "new": "The blade ratio worked on the effective bore of a washed-out hole."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-choosing-a-spacing",
+   "ord": 15,
+   "category": "double-key",
+   "flag": "option 2 is correct",
+   "verdict": "fixed",
+   "reason": "Option 2 restated the sag-only ceiling; now uses the deflection term, which the ceiling excludes. Option 1 lengthened slightly to keep a 6-character gap to the key.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "One less the sag over the clearance, which caps what any spring can achieve at that spacing.",
+      "new": "One less the spring deflection over the clearance, which caps what any spacing can achieve."
+     },
+     "1": {
+      "old": "The standoff a rigid centralizer with a blade equal to the bore would reach, which is the theoretical maximum for the geometry.",
+      "new": "The standoff a rigid centralizer with a blade equal to the bore would reach, which is the theoretical maximum for the geometry of the hole."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-the-checklist-and-its-edges",
+   "ord": 11,
+   "category": "double-key",
+   "flag": "option 2 nearly restates the correct option",
+   "verdict": "fixed",
+   "reason": "Option 2 restated the lesson's reasons; now claims booleans cannot be weighted, which the lesson shows other software doing.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because the weights are unmeasured, a score hides which item failed, and no log gives one.",
+      "new": "Because the five items are booleans, and a boolean cannot be weighted into a percentage."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "category": "double-key",
+   "flag": "option 2 (float collar depth difference times bore capacity) is the correct explanation",
+   "verdict": "fixed",
+   "reason": "Option 2 was the key reworded; now uses the shoe depths and the annular capacity, the wrong capacity for displacement.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Their float collars are at different depths, times the casing bore capacity.",
+      "new": "Their casing shoes are 200 m apart, times the annular capacity of the open hole."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "category": "double-key",
+   "flag": "options 2 and 3 both true",
+   "verdict": "fixed",
+   "reason": "Both were true statements; option 2 now claims the survey converts rows to vertical height, option 3 claims a deviated hole needs less cement at the same measured depth, both contradicted by the lesson.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "The true vertical depth has to be computed separately for the hydrostatic head.",
+      "new": "The survey is used to convert each annulus row to its vertical height first."
+     },
+     "3": {
+      "old": "A deviated well needs more cement than a vertical one to the same true vertical depth.",
+      "new": "A deviated well needs less cement than a vertical one of the same measured depth."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-a-primary-cement-job-is",
+   "ord": 12,
+   "category": "double-key",
+   "flag": "option 2 arguably correct",
+   "verdict": "fixed",
+   "reason": "Option 2 paraphrased the lesson's two-levers point; now claims the engine answer is an upper bound, the reverse of the lesson and the explanation.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because it is one of the two biggest levers, and the model can only quantify the other one.",
+      "new": "Because without it the engine's answer is an upper bound on what a good job achieves."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-open-hole-excess",
+   "ord": 12,
+   "category": "double-key",
+   "flag": "option 2 answers the same as the correct option",
+   "verdict": "fixed",
+   "reason": "Option 2 gave the same answer (one); now counts the top of cement as a guess, which the lesson treats as a design decision. Option 1 lengthened to keep a 6-character gap to the key.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "One, the open hole excess, and every other input is either a measurement or a design choice.",
+      "new": "Two, the open hole excess and the top of cement, because neither can be measured before the job."
+     },
+     "1": {
+      "old": "Two, the excess and the slurry yield, since the yield is measured on a laboratory blend rather than on the field mix.",
+      "new": "Two, the excess and the slurry yield, since the yield is measured on a laboratory blend rather than on the actual field mix."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-volumes",
+   "ord": 9,
+   "category": "double-key",
+   "flag": "option 2 essentially correct",
+   "verdict": "fixed",
+   "reason": "The lesson gives option 2's reason as part of the geometric reason; now claims the casing above needs strong tail to carry its weight, where the lesson calls the lead a filler there.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because it is the deepest point protected by the casing above, so strong cement goes in open hole.",
+      "new": "Because the casing string above that depth needs the strong tail behind it to carry its weight."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 19,
+   "category": "double-key",
+   "flag": "option 2 matches the correct option",
+   "verdict": "fixed",
+   "reason": "Option 2 restated the key and option 1 was also defensible; option 2 now says nothing changes until the plug bumps, option 1 points at the constant denominator, neither of which explains the flat stretch.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because nothing above that shoe changes until cement or spacer crosses it going up.",
+      "new": "Because the annulus sees no change at all until the top plug bumps at the end."
+     },
+     "1": {
+      "old": "Because the friction above the shoe is constant at a constant rate, and the head there is fixed by the mud density.",
+      "new": "Because it is divided by the true vertical depth of the previous shoe, which stays the same all through the job."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-the-job-over-time",
+   "ord": 7,
+   "category": "double-key",
+   "flag": "option 2 matches the correct option",
+   "verdict": "fixed",
+   "reason": "Option 2 restated the key; now claims cement stays inside the casing, whereas the lesson has it in the annulus below the previous shoe by then.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Because the annulus above that shoe holds only mud until cement or spacer crosses it.",
+      "new": "Because the whole cement column stays inside the casing until the last third of the job."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "category": "double-key",
+   "flag": "option 2 is the correct answer",
+   "verdict": "fixed",
+   "reason": "Option 2 restated the key; now includes friction, which is the end pump pressure relation.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "The annulus head less the inside head at the last step, with the friction term excluded.",
+      "new": "The annulus head plus friction less the inside head, at the step where the plug bumps."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "category": "double-key",
+   "flag": "option 2 matches the correct order",
+   "verdict": "fixed",
+   "reason": "Option 2 gave the same four steps in the same order; now puts the rate window before the fluid programme that sets it.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "The top of cement, then the fluid programme, then the rate window, and the rate last.",
+      "new": "The top of cement, then the rate window, then a fluid programme to fit inside it."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-two-programmes-one-well",
+   "ord": 15,
+   "category": "double-key",
+   "flag": "option 2 matches the correct order",
+   "verdict": "fixed",
+   "reason": "Option 2 gave the same order; now swaps the density profile and the rate window.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "The top of cement, then the fluid programme, then the rate window, and the rate last.",
+      "new": "The top of cement, then the rate window, then the density profile, and the rate last."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-the-job-over-time",
+   "ord": 15,
+   "category": "double-key",
+   "flag": "option 2 correct",
+   "verdict": "fixed",
+   "reason": "Option 2 was a true statement from the lesson about the rest; now names a free-fall deficit, which the slant well never has.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "Friction at the last step, which is why the bump falls when the final rate is reduced.",
+      "new": "The free-fall deficit at the last step, which the pumps have to make up at the bump."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-reading-a-placement-result",
+   "ord": 11,
+   "category": "double-key",
+   "flag": "option 2 essentially correct",
+   "verdict": "fixed",
+   "reason": "Option 2 restated the key; now claims the heads are unknown, but the densities are known and only the rate is lost.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "The rate is unknown, and so is all computed from it, so that stretch has no numbers.",
+      "new": "The hydrostatic heads, because the fluid densities cannot be tracked while it falls."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "cementing",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m03-the-job-over-time ord 9 (same ECD at the casing shoe question, same key)",
+   "verdict": "fixed",
+   "reason": "True duplicate; kept the module question and rewrote the final copy to test the null previous-shoe ECD case from the same lesson (ECD at the shoe).",
+   "changes": {
+    "prompt": {
+     "old": "The horizontal well's ECD at the CASING shoe is 1837.9218199066345 kg/m3 before anything is pumped. Why?",
+     "new": "When is the ECD at the previous shoe reported as null for the whole run?"
+    },
+    "options": {
+     "0": {
+      "old": "Its mud is heavier than the slant well's.",
+      "new": "When no fracture limit is supplied as an input."
+     },
+     "1": {
+      "old": "It divides the friction of a 1600 m lateral by 1214.859173174059 m of true vertical depth.",
+      "new": "When no cased section sits above the casing shoe, as on a conductor or a surface string."
+     },
+     "2": {
+      "old": "Its annulus is narrower, so the same rate gives a higher velocity and more friction.",
+      "new": "When cement never reaches the previous shoe, so the annulus there holds only mud."
+     },
+     "3": {
+      "old": "Its previous shoe is shallower, so its head gives a higher equivalent density.",
+      "new": "When the previous shoe is shallower than the top of cement on the well."
+     }
+    },
+    "explanation": {
+     "old": "The friction is generated along the hole and the depth is measured vertically.",
+     "new": "With no cased section above the casing shoe there is no shallower shoe to protect, so the peak ECD at the previous shoe is null as well."
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question; the key is the new question's answer at the same index."
+  }
+ ],
+ "inserts": []
+}

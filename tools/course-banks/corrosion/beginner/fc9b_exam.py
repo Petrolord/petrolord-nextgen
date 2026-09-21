@@ -82,12 +82,12 @@ q(3, "At a total pressure of 1.000000 bar the fugacity coefficient is 0.997465. 
   "That the two quantities can be used interchangeably at any pressure at all, since the correction never leaves the sixth decimal on any stream."],
  "Here the fugacity is 0.029924 bar against a partial pressure of 0.030000 bar, and at 200.000000 bar it is 3.611511 bar against 6.000000 bar. The constants behind the coefficient are held for literature like the rest."),
 
-q(2, "Which set is made up entirely of range guards this module enforces on what a caller types, rather than published validity bands it holds?",
- "Nought to one on every fraction, nought to fourteen on pH, a temperature above absolute zero, and the partial pressure sum against the total.",
- ["The published validity band of each correlation, the fugacity cap, the pH reference and the film stripping threshold.",
-  "Nought to one on every fraction, the fugacity pressure cap, the pH reference and a positive velocity on the transport term.",
-  "A temperature above absolute zero, a positive total pressure, and the published validity band of the transport term on velocity and line size."],
- "Every published validity band of every correlation is held, so a screening well outside one still returns a number and says nothing about it."),
+q(2, "A partial pressure on the screen looks about a hundred times too large. What does the course tell a reader to check before anything else, and why there?",
+ "The mole percent box, because the studio takes mol% and the division by a hundred to a mole fraction is the commonest place to lose a factor of ten.",
+ ["The fugacity coefficient, because it falls with pressure and is the one step between a mole fraction and the partial pressure.",
+  "The total pressure box, since the engine reads psia there and a figure typed in bar inflates every partial pressure.",
+  "The hydrogen sulphide flag, since an uncorrected partial pressure reads high against a fugacity at any line pressure the engine is handed and never says so."],
+ "Carbon dioxide typed as 3 mol% is a mole fraction of 0.030000, and the conversion is a division by a hundred. A partial pressure is the total pressure times that fraction with no correlation constant in it, so a factor lost at the box shows straight through to the screen."),
 
 q(1, "Which quantity does the hydrogen sulphide screening comparison use, and how does the engine make that visible?",
  "An uncorrected partial pressure, and the engine declares it by returning a flag saying no fugacity correction was applied.",

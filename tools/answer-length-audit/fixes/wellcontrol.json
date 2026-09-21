@@ -1,0 +1,145 @@
+{
+ "migration": "20261021b_b4_fix_wellcontrol.sql",
+ "title": "wellcontrol: one distractor and two duplicate rewrites",
+ "items": [
+  {
+   "app_slug": "wellcontrol",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "category": "other",
+   "flag": "distractor \"The theoretical liner displacement\" arguably partly correct to \"what kind of quantity\"",
+   "verdict": "fixed",
+   "reason": "the theoretical displacement is also a volume a liner change alters; replaced it with the volumetric efficiency, a dimensionless ratio the engine has no term for (m02 l03)",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "The theoretical liner displacement, before any allowance for leakage or compressibility.",
+      "new": "A dimensionless efficiency: the fraction of the swept volume the pump delivers."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "wellcontrol",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner final 39 (identical key: the two shut-in gauge readings and the pit gain; intermediate m01 ord 2 asks it too)",
+   "verdict": "fixed",
+   "reason": "kept beginner final 39; rewrote this one to test what the kill sheet does NOT output (intermediate m01 l01: whether the shoe will hold is the separate kick tolerance call)",
+   "changes": {
+    "prompt": {
+     "old": "Which three inputs come only from the kick?",
+     "new": "All four outputs of the kill sheet are filled in. Which question about the well does the sheet still leave unanswered?"
+    },
+    "explanation": {
+     "old": "Everything else belongs to the standing part and is kept current between events.",
+     "new": "Formation pressure, kill mud density and the two circulating pressures are the outputs, with the schedule and the stroke counts between them. Whether the shoe will hold is the kick tolerance calculation, a separate call; the casing pressure history and the choice of method are not outputs either."
+    },
+    "options": {
+     "0": {
+      "old": "The pump output, the mud weight and the bit depth.",
+      "new": "What the string gauge should read once the kill mud has reached the bit and beyond."
+     },
+     "1": {
+      "old": "The two shut-in gauge readings and the pit gain.",
+      "new": "Whether the shoe will hold, which is a separate call."
+     },
+     "2": {
+      "old": "The slow circulating rate pressure at both rates, together with the volumetric efficiency measured at the same time.",
+      "new": "How heavy the kill mud has to be to balance the formation at the bit, since that needs the influx density first."
+     },
+     "3": {
+      "old": "The fracture gradient, the pore pressure and the temperature, all of which change as the section is drilled.",
+      "new": "How many strokes it takes to get kill mud from surface to the bit, which depends on the pump rate chosen."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  },
+  {
+   "app_slug": "wellcontrol",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-the-edges-of-the-model",
+   "ord": 1,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner m01 ord 12 (BOP at surface with no riser and no choke line; beginner final 41 asks it as well)",
+   "verdict": "fixed",
+   "reason": "kept the beginner module question; rewrote this one to test what the surface-BOP assumption leaves out of the volumes (advanced m05 l01)",
+   "changes": {
+    "prompt": {
+     "old": "What does this engine assume about the blowout preventer's position?",
+     "new": "On a floating rig, which volumes are absent from this engine's span walk altogether?"
+    },
+    "explanation": {
+     "old": "Every number the engine produces is correct for a land or jack-up well and needs correcting on a floater.",
+     "new": "The engine assumes the annulus runs from the bit to a surface gauge. On a floater the returns come up a riser or, during a kill, a choke line from the seabed stack, and those volumes are not in the span walk at all, so the volumes and stroke counts need a correction along with every casing pressure."
+    },
+    "options": {
+     "0": {
+      "old": "That it sits on the seabed, with the choke line friction measured and removed.",
+      "new": "The string above the seabed, since the walk starts its annulus at the stack."
+     },
+     "1": {
+      "old": "That it is close enough to surface for the choke line friction to be negligible at the rates used during a kill.",
+      "new": "The open hole below the last shoe, since the walk treats the whole annulus as cased to total depth on a floater."
+     },
+     "2": {
+      "old": "That it sits at surface, with no riser and no choke line below it.",
+      "new": "The riser and the choke line, which run from the seabed to the rig."
+     },
+     "3": {
+      "old": "That its position does not matter, because the calculation works from true vertical depths rather than from geometry.",
+      "new": "The annulus around the collars, since on a floater the walk uses one average capacity for the whole open hole."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  },
+  {
+   "app_slug": "wellcontrol",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "category": "duplicate",
+   "flag": "lead follow-up: near duplicate of beginner m01 ord 12 (BOP at surface with no riser and no choke line; same key, same tier)",
+   "verdict": "fixed",
+   "reason": "true duplicate within the tier; kept the module question and rewrote the final copy to test what closing the BOP achieves (m01 l01: secondary barrier, buys time, does not kill the well)",
+   "changes": {
+    "prompt": {
+     "old": "Where is the stack taken to be, and what lies between it and the gauges?",
+     "new": "The well is shut in on a kick. What has closing the blowout preventer achieved?"
+    },
+    "explanation": {
+     "old": "The Expert tier states the assumption formally and supplies the offshore correction.",
+     "new": "The blowout preventer is the secondary barrier. It holds the influx back from surface while the primary barrier, the mud column, is repaired: it buys time to read the formation pressure and to build a mud that balances it. Closing it does not kill the well."
+    },
+    "options": {
+     "0": {
+      "old": "That it is at surface, with no riser and no choke line between it and the gauges.",
+      "new": "It has bought time to find the formation pressure and build kill mud; the well is not yet killed."
+     },
+     "1": {
+      "old": "That it is a subsea stack on a floater.",
+      "new": "It has killed the well by sealing off the formation."
+     },
+     "2": {
+      "old": "That it is rated well above any pressure the well can develop, so its rating never appears in the arithmetic.",
+      "new": "It has restored the primary barrier, since the trapped pressure now stands in for the missing mud weight for good."
+     },
+     "3": {
+      "old": "That it is kept closed for the whole operation, including the period while the kill mud is being circulated round.",
+      "new": "It lets the influx be bled off at the choke, after which drilling simply carries on at the same mud weight."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  }
+ ]
+}
