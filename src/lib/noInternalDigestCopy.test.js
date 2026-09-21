@@ -56,7 +56,7 @@ const SECTION_POINTER = /\bSECTIONS? \d|\((?:SECTIONS?|[Ss]ections?) \d+(?:(?:,|
 // random number generator, a seeded generator, a deck generator or a data
 // set's generator is something the learner meets in the engine or the studio,
 // and passes.
-const AUTHORS_GENERATOR = /\b(?:the|a) generator (?:now )?(?:asserts|types|holds|built|builds|measures)\b|\b(?:course's|capstone) generator\b|\bgenerator behind (?:this|the) course\b|\bthe generator's own\b/i;
+const AUTHORS_GENERATOR = /\b(?:the|a) generator (?:now )?(?:asserts|types|holds|measures|built while)\b|\b(?:course's|capstone) generator\b|\bgenerator behind (?:this|the) course\b|\bthe generator's own\b/i;
 const LESSON_PATTERNS = [LESSON_WORD, SECTION_POINTER, AUTHORS_GENERATOR];
 
 // Legitimate lines the generator pattern would otherwise catch, by exact
@@ -259,6 +259,8 @@ describe('the digest gate itself (negative controls)', () => {
     expect(lessonHits('That proves the engine holds what the generator holds.')).toHaveLength(1);
     expect(lessonHits('Every random draw goes through an injectable generator, so a seeded run repeats.')).toHaveLength(0);
     expect(lessonHits('The old engine called an unseeded generator.')).toHaveLength(0);
+    expect(lessonHits('A generator built from an integer seed you supply.')).toHaveLength(0);
+    expect(lessonHits('The tree it counts over is the assertion list the generator built while it ran.')).toHaveLength(1);
     expect(lessonHits("The generator's next three draws are 0.732031, 0.064278 and 0.391443.")).toHaveLength(0);
     expect(lessonHits('On planar data the trend IS the generator, so the gap is small.')).toHaveLength(0);
   });
