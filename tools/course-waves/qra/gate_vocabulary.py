@@ -16,7 +16,10 @@ that is, a sentence that also says where the thing belongs or that this course
 takes it as given. Each owner has its own words and its own seam markers:
 
   H4 consequence   probit, dose, dispersion, source term, plume, view factor,
-                   solid flame, toxic load, emissive power, TNT, Gaussian
+                   solid flame, toxic load, emissive power, TNT, Gaussian,
+                   thermal or heat radiation, heat flux, overpressure, blast
+                   wave, release rate, discharge coefficient (symmetric with
+                   H4's own gate, which keeps the QRA words seam-only there)
                    -> "consequence course", "consequence modelling", "H4",
                       "input", "stated", "given", "belongs"
   H3 LOPA          LOPA, SIL, PFDavg, IPL, TMEL, safety instrumented
@@ -75,7 +78,7 @@ WORDS = [
     ('risk score', re.compile(r'\brisk (score|rating)s?\b', re.I)),
 ]
 SEAMS = [
-    ('H4 consequence', re.compile(r'\b(probits?|doses?|dispersion|source terms?|plumes?|view factors?|solid flame|toxic load|emissive power|TNT|gaussian)\b', re.I),
+    ('H4 consequence', re.compile(r'\b(probits?|doses?|dispersion|source terms?|plumes?|view factors?|solid flame|toxic load|emissive power|TNT|gaussian|thermal radiation|heat radiation|heat flux(es)?|overpressures?|blast wave|release rate|discharge coefficient)\b', re.I),
      re.compile(r'consequence (course|modelling|engine|model)|\bH4\b|\binputs?\b|\bstated\b|\bgiven\b|\bbelongs?\b', re.I)),
     ('H3 LOPA', re.compile(r'\b(LOPA|SIL|SILs|PFDavg|IPLs?|TMEL|safety instrumented)\b'),
      re.compile(r'LOPA course|\bH3\b|\bbelongs?\b', re.I)),

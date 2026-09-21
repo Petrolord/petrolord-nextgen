@@ -38,8 +38,8 @@
 //   6. THE GOLDEN. No graded value within ten tolerances of any golden number.
 //   7. SIBLINGS AND LIVE COURSES. No graded value within the LOOSER of its own
 //      and the other field's tolerance of: any committed sibling answer key
-//      (tools/course-waves/*/fields.json), the H4 consequence answer key from
-//      its live wave directory (unmerged when this wave was cut), and
+//      (tools/course-waves/*/fields.json), H4 consequence's among them since
+//      nextgen #177 (H5_LIVE_SIBLINGS may still name an unmerged one), and
 //      EVERY LIVE COURSE's answer key harvested from the capstone field
 //      objects in the repository's migrations/*.sql, the last definition of a
 //      key winning. Six significant digits printing alike is also a finding.
@@ -61,7 +61,7 @@
 //      is a REFUSAL unless the run declares --no-lessons.
 //  11. THE SEAM, REVERSED: ANOTHER COURSE'S GRADED ANSWERS IN THIS COURSE'S
 //      TEXT. This course must not grade, and so must not TEACH TO, the graded
-//      answers of the courses that own its seams: H4 consequence (live wave),
+//      answers of the courses that own its seams: H4 consequence (merged in #177),
 //      H3 lopa, the risk and change and compliance courses, the facilities
 //      courses whose radiation and setbacks sit beside a QRA (separation FC1,
 //      relief FC5), H1 safety statistics (the FAR base) and the economics
@@ -96,7 +96,7 @@ const ENG = process.env.H5_ENGINES || path.join(REPO, 'packages/engines');
 const WAVES = process.env.H5_WAVES || path.join(REPO, 'tools/course-waves');
 const MIGRATIONS = process.env.H5_MIGRATIONS || path.join(REPO, 'migrations');
 const LIVE_SIBLINGS = (process.env.H5_LIVE_SIBLINGS
-  || 'consequence=/root/hse-wip-consequence/fields.json')
+  || '')
   .split(',').filter(Boolean).map((s) => s.split('='));
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
@@ -446,7 +446,7 @@ if (has('--no-lessons') && !PLANT_LESSON) {
 }
 
 // 11. THE SEAM, REVERSED: another course's graded answers in this course's text
-const SEAM_WAVES = ['lopa', 'riskchange', 'compliance', 'separation', 'relief', 'safetystats',
+const SEAM_WAVES = ['consequence', 'lopa', 'riskchange', 'compliance', 'separation', 'relief', 'safetystats',
   'fiscal', 'uncertainty', 'decision', 'portfolio', 'fdp'];
 const seamFields = [];
 SEAM_WAVES.forEach((wv) => {
@@ -456,7 +456,7 @@ SEAM_WAVES.forEach((wv) => {
 });
 LIVE_SIBLINGS.forEach(([wv, f]) => JSON.parse(fs.readFileSync(f, 'utf8')).forEach(([, k, v]) => seamFields.push({ at: `${wv}(live)/${k}`, v })));
 if (seamFields.length < 150) die(`only ${seamFields.length} seam answers read; the seam direction would check almost nothing`);
-if (has('--plant-seam')) DIGEST += `\nA planted seam answer: ${seamFields.find((x) => x.at.startsWith('consequence')).v}.\n`;
+if (has('--plant-seam')) DIGEST += `\nA planted seam answer: ${seamFields.find((x) => x.at.startsWith('consequence/')).v}.\n`;
 const seamRenderings = seamFields.flatMap(({ at, v }) => (typeof v !== 'number' || !Number.isFinite(v) ? []
   : [...new Set([String(v), trim(v.toPrecision(12)), trim(v.toPrecision(9))])]
     .filter((x) => x.includes('.') && !x.includes('e') && x.length >= 7).map((x) => ({ at, x }))));

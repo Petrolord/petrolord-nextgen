@@ -2,7 +2,7 @@
 
 {{panel:qr-event-tree}}
 
-A vapour cloud that ignites late can burn in two ways. It can burn through as a flash fire, killing mainly those inside the cloud, or it can explode and throw an overpressure wave beyond it. The last branch set of the flammable release tree divides a delayed ignition between the two. That set is the vapour cloud split, and the engine has a preset for it and accepts a split you state instead.
+A vapour cloud that ignites late can burn in two ways. It can burn through as a flash fire, killing mainly those inside the cloud, or it can explode, and the overpressure of that explosion belongs to the consequence course. The last branch set of the flammable release tree divides a delayed ignition between the two. That set is the vapour cloud split, and the engine has a preset for it and accepts a split you state instead.
 
 ## The preset split
 

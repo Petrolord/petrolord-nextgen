@@ -67,7 +67,7 @@
   "position": "THE ENGINE HAS ONE PIECE OF DEVELOPMENT HISTORY AND THE COURSE DOES NOT TEACH IT. FINDINGS-qra.md section 9 records six fail-opens (preset names walking the prototype chain) found and closed before #230 merged; it is provenance. The digest shows the engine's CURRENT behaviour (such a name is refused, section 3) and never frames former behaviour; structure.py and digest_prose.rules.mjs refuse any key, title or heading that reads as history."
  },
  "scopeSeams": {
-  "H4 consequence": "OWNS source terms, dispersion, radiation, overpressure and every probit dose calculation (being built in parallel, feat/h4-consequence-course). H5 takes Pd and every frequency as STATED inputs; the three engine functions that call H4 are named and never taught; gate_vocabulary.py confines the H4 words to the seam lessons and gate_capstone_leak.mjs direction 11 keeps H4's graded answers out of every H5 text.",
+  "H4 consequence": "OWNS source terms, dispersion, radiation, overpressure and every probit dose calculation (merged as nextgen #177, 20261006_h4_consequence_*). H5 takes Pd and every frequency as STATED inputs; the three engine functions that call H4 are named and never taught. gate_vocabulary.py confines the H4 words (probit, dose, dispersion, plume, radiation, heat flux, overpressure, release rate and the rest) to sentences that name the seam, symmetric with H4's own gate; gate_capstone_leak.mjs direction 7 keeps H5's graded values off H4's and direction 11 keeps every H4 graded answer out of every H5 text.",
   "the risk matrix": "OWNED BY riskchange. Never scored here; 'severity' and 'likelihood' are gated.",
   "LOPA and SIL": "OWNED BY H3 lopa. Named only at the seam; 'SIL', 'PFDavg', 'IPL' and 'LOPA' confined to the seam lessons.",
   "API 521 point-source radiation and setbacks": "OWNED BY FC1 and FC5. Never used; gated.",
@@ -122,7 +122,7 @@
    "summary": "PROBLEMS: 0"
   },
   "h5_capstone.mjs": {
-   "md5": "2290d36df06f63a614a8b672f751f94b",
+   "md5": "8dbd3a832082e8d20e2c3e5c961aa094",
    "command": "node h5_capstone.mjs --json",
    "expected": 0,
    "exit": 0,
@@ -262,42 +262,42 @@
    "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
   },
   "gate_capstone_leak.mjs": {
-   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "md5": "4fccea1560743276efa89470a156139f",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons",
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
-   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "md5": "4fccea1560743276efa89470a156139f",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-value",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
-   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "md5": "4fccea1560743276efa89470a156139f",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-input",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
-   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "md5": "4fccea1560743276efa89470a156139f",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-name",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
-   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "md5": "4fccea1560743276efa89470a156139f",
    "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL seam": {
-   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "md5": "4fccea1560743276efa89470a156139f",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-seam",
    "expected": 1,
    "exit": 1,
@@ -318,14 +318,14 @@
    "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
   },
   "gate_vocabulary.py": {
-   "md5": "9205386eb8719a0d8075c7f392147e9f",
+   "md5": "acbc70a245564a3043885293359b6b82",
    "command": "python3 gate_vocabulary.py",
    "expected": 0,
    "exit": 0,
    "summary": "exemptions declared: 1, dead: []"
   },
   "gate_vocabulary.py NEGATIVE CONTROL": {
-   "md5": "9205386eb8719a0d8075c7f392147e9f",
+   "md5": "acbc70a245564a3043885293359b6b82",
    "command": "python3 gate_vocabulary.py --plant",
    "expected": 1,
    "exit": 1,

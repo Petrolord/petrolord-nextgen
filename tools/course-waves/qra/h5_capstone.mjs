@@ -187,7 +187,7 @@ const OGINI = Object.freeze({
   village: Object.freeze([
     Object.freeze({ name: 'LPG sphere BLEVE', frequencyPerYr: 3.74e-7, fatalities: 140 }),
     Object.freeze({ name: 'propane cloud flash fire reaching the village', frequencyPerYr: 4.53e-6, fatalities: 55 }),
-    Object.freeze({ name: 'H2S plume reaching the village', frequencyPerYr: 1.31e-5, fatalities: 10 }),
+    Object.freeze({ name: 'H2S cloud reaching the village', frequencyPerYr: 1.31e-5, fatalities: 10 }),
     Object.freeze({ name: 'jet fire at the fence', frequencyPerYr: 4.4e-5, fatalities: 2.5 }),
     Object.freeze({ name: 'small release, no one reached', frequencyPerYr: 9.1e-5, fatalities: 0 }),
   ]),
