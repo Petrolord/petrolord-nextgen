@@ -1,0 +1,86 @@
+{
+ "migration": "20261021b_b4_fix_scal.sql",
+ "title": "scal: two duplicate rewrites",
+ "items": [
+  {
+   "app_slug": "scal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner m04-the-welge-tangent ord 3 (Ekene front saturation Swf; same key 0.6372)",
+   "verdict": "fixed",
+   "reason": "kept the module question; rewrote the final copy to test how far through the mobile window the front sits (m04 l03: 72 percent, the mark of a favorable displacement)",
+   "changes": {
+    "prompt": {
+     "old": "What is the Ekene front saturation Swf?",
+     "new": "The mobile saturation window on the Ekene sand runs from 0.35 to 0.75. How far through it has the front saturation already come?"
+    },
+    "explanation": {
+     "old": "The tangency lands at 0.6372. The 0.6807702744481854 figure is the AVERAGE saturation behind the front at breakthrough, which always exceeds the front value; 0.5964 is the front for the no 3.0 sensitivity case; 0.75 is the top of the mobile range.",
+     "new": "The front at 0.6372 has covered 0.2872 of the window's width of 0.40, about 72 percent. That is what a favorable displacement at a mobility ratio of 1.2 looks like: water builds a thick bank before it moves. 0.2872 is the size of the saturation jump itself, and 0.33077027444818546 is the pore volumes injected at breakthrough."
+    },
+    "options": {
+     "0": {
+      "old": "0.6372",
+      "new": "About 72 percent of it"
+     },
+     "1": {
+      "old": "0.6807702744481854",
+      "new": "About 33 percent"
+     },
+     "2": {
+      "old": "0.5964",
+      "new": "0.2872, the jump"
+     },
+     "3": {
+      "old": "0.75",
+      "new": "About 64 percent of it, the front value read directly as a fraction of the window"
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  },
+  {
+   "app_slug": "scal",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced m04-gravity-and-the-dip-term ord 3 (designed-case gravity coefficient; same key 0.019367108489507776)",
+   "verdict": "fixed",
+   "reason": "kept the module question; rewrote the final copy to test the gravity-stable warning threshold on the designed geometry (m04 l05: about 34 rb/d, where G reaches 1.1334444444444445 at the first sample)",
+   "changes": {
+    "prompt": {
+     "old": "For the designed Ekene dip case (k 250 md, A 20000 ft2, qt 2000 rb/d, dip 10 degrees updip, gammaW 1.03, gammaO 0.8654434250764526), what gravity coefficient does makeFwFunction report?",
+     "new": "Lowering the rate on the designed dip geometry, at about what total rate does the gravity-stable warning first fire?"
+    },
+    "explanation": {
+     "old": "At the designed rate the coefficient is 0.019367108489507776. The larger value belongs to the 500 rb/d case, the smaller to 8000 rb/d, and the negated value is the downdip case at the design rate; the coefficient scales as one over qt and flips sign with the dip.",
+     "new": "G scales as one over qt from 0.019367108489507776 at 2000 rb/d. The clamp must reach the first sample above connate, where kro is 0.8822664444662288, so the threshold is G of 1.1334444444444445, crossed near 34 rb/d. At 35 rb/d G is 1.1066919136861587, above 1 but under the threshold, and the warning stays silent; at 30 it fires."
+    },
+    "options": {
+     "0": {
+      "old": "0.0774684339580311",
+      "new": "About 50 rb/d, once G passes three quarters."
+     },
+     "1": {
+      "old": "0.004841777122376944",
+      "new": "About 35 rb/d, the first rate on the ladder at which G has already climbed above 1."
+     },
+     "2": {
+      "old": "-0.019367108489507776",
+      "new": "Never, because kro stays below 0.9 above connate, so G times kro cannot reach 1 at any rate."
+     },
+     "3": {
+      "old": "0.019367108489507776",
+      "new": "About 34 rb/d, when G reaches 1.1334444444444445 at the first sampled point."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  }
+ ]
+}
