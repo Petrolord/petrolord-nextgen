@@ -1,0 +1,46 @@
+{
+ "migration": "20261021b_b4_fix_uncertainty.sql",
+ "title": "uncertainty: duplicate question rewritten into a new question",
+ "items": [
+  {
+   "app_slug": "uncertainty",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "category": "duplicate",
+   "flag": "duplicate of beginner module m06-the-associate-reading 12 (near p0.63 k0.72): both ask how the sampled breakeven percentiles are named, same key",
+   "verdict": "fixed",
+   "reason": "True duplicate of the m06 question; kept the module question and rewrote the final copy to test the m06 story-so-far point on how many ledger years pay tax.",
+   "changes": {
+    "prompt": {
+     "old": "ISIALA's sampled breakeven over 5000 iterations returns 62.1713, 73.3297 and 85.5912 USD per bbl. How are they reported?",
+     "new": "Across ISIALA's twenty ledger rows tax is positive in some years and 0.0000 in others. How many years pay tax, and what sets the others to 0.0000?"
+    },
+    "explanation": {
+     "old": "A breakeven price takes no P-label at all, which two of the wrong readings apply; the base case at the stated medians is 71.6277, a single run and not a percentile.",
+     "new": "Capex is expensed in the year it is spent, so revenue less royalty, capex and opex is negative in 2027 and 2028 and tax is 0.0000 there. No loss is carried forward, so 2029 pays 35 percent of its own positive base, 19.3660, and tax is positive in 18 of 20 years."
+    },
+    "options": {
+     "0": {
+      "old": "As a Low case P90 of 62.1713, a Best case P50 of 73.3297 and a High case P10 of 85.5912, as for any outcome of a model.",
+      "new": "20 of 20: capex is split half and half over 2027 and 2028, and an even split keeps both years' taxable income above zero."
+     },
+     "1": {
+      "old": "As P10 62.1713, P50 73.3297 and P90 85.5912, since for a price the labels simply follow the sorted order of the sample.",
+      "new": "18 of 20: the last two years pay 0.0000, because by then the declined volume no longer covers the opex and the royalty."
+     },
+     "2": {
+      "old": "As a Base of 62.1713, a median of 73.3297 and an upside of 85.5912, spread around the stated-median breakeven of 71.6277.",
+      "new": "16 of 20: the losses of 2027 and 2028 are carried forward and shelter 2029 and 2030 as well, before tax resumes in 2031."
+     },
+     "3": {
+      "old": "As the 10th percentile, median and 90th percentile of breakeven price, because a higher breakeven is worse.",
+      "new": "18 of 20: capex is expensed in 2027 and 2028, so taxable income is negative there and those two years pay 0.0000."
+     }
+    }
+   },
+   "correct_change_reason": "True duplicate rewritten into a new question on a different point, so the key is new text for the new question."
+  }
+ ]
+}
