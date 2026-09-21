@@ -2,7 +2,7 @@
   "$comment": "Vendoring contract for packages/engines. Checked by tools/check-vendored-engines.mjs; see that file for the model. Every deviation from canonical is enumerated below with a reason, and every differing or extra path is pinned to the blob currently vendored, so a second drift on an already-known path still fails.",
   "canonical": {
     "repo": "git@github.com:Petrolord/petrolord-engines.git",
-    "commit": "df31f538ecbb76aba6bb32a06582968025cbfd38",
+    "commit": "16fd6c96dcb91f372d2d76b4ecd2c7fa4cbd4b4f",
     "manifest": "VENDOR.manifest"
   },
   "floors": {
@@ -806,6 +806,12 @@
       "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
     },
     {
+      "path": "__tests__/prototypeChainLookups.test.js",
+      "kind": "missing",
+      "group": "1-test-layer-gap",
+      "reason": "Engines #231's 47-case own-property probe. NOT vendored: the one suite imports every repaired file, including the excluded wellsite domain (tops, descriptionVocabulary, shows, events, abbreviations) and the held differing paths that still carry the pre-#231 lookups (production, waterflood, fdp, mbal, earthmodeling, welldata, gridding, facilities/corrosion, hse/exposure), so it cannot load or pass here until those paths reach canonical."
+    },
+    {
       "path": "engines/drilling/cementing.js",
       "kind": "differing",
       "group": "2-copy-pass-held",
@@ -817,7 +823,35 @@
       "kind": "differing",
       "group": "2-copy-pass-held",
       "vendoredSha": "94fea91a5a5027ba28d96cc494a045f258ec0166",
-      "reason": "Printed precision only (allocation sums toFixed(3) to (6)) plus two reworded withheld reasons, but waterflood/intermediate m01-allocation lesson prose quotes 'allocation fractions sum to 1.200 (> 1)' and 'fractions sum to 0.900; the remaining 0.100' verbatim, which canonical prints at six decimals. REJECTED from the zero-risk wave: it needs a lesson copy pass in the same commit."
+      "reason": "Printed precision only (allocation sums toFixed(3) to (6)) plus two reworded withheld reasons, but waterflood/intermediate m01-allocation lesson prose quotes 'allocation fractions sum to 1.200 (> 1)' and 'fractions sum to 0.900; the remaining 0.100' verbatim, which canonical prints at six decimals. REJECTED from the zero-risk wave: it needs a lesson copy pass in the same commit. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+    },
+    {
+      "path": "engines/facilities/corrosion.js",
+      "kind": "differing",
+      "group": "2-copy-pass-held",
+      "vendoredSha": "5a5b7fb1eed49bbff68f21628d1b77a5d6659ecf",
+      "reason": "Engines #231 (16fd6c9) changes no value here, but its one repair adds a two-line comment ('constructor' used to come back as a regime), and the LIVE FC9 Corrosion course quotes the engine source itself: the advanced exam asks how many past-tense comment lines the module carries (answer 'Five, in a module of 783 lines', 'roughly one line in 157'), and fc9a_m01, fc9a_m06, fc9b_m01 and the m06 l01 lesson quote '783 lines'. At canonical the fc9 digest prints 785 lines and 6 comment lines. REJECTED from the re-vendor: it needs a FC9 bank and lesson copy pass, and its recut, in the same commit."
+    },
+    {
+      "path": "tools/validation/facilities/FINDINGS-corrosion.md",
+      "kind": "differing",
+      "group": "2-copy-pass-held",
+      "vendoredSha": "e8029de882ab373406f13a013e6da10ab450419b",
+      "reason": "Held with engines/facilities/corrosion.js: canonical 16fd6c9 appends the #231 own-property section describing a repair the held engine blob does not carry. Lands with corrosion.js and its FC9 copy pass."
+    },
+    {
+      "path": "engines/hse/exposure.js",
+      "kind": "differing",
+      "group": "2-copy-pass-held",
+      "vendoredSha": "3495ebf0d4e97bf6e369b7bf1fd4c9a6f8e436b9",
+      "reason": "Engines #231 (16fd6c9) moves no H2 value (every hygiene fields.json regenerates byte-identical on it), but its helper adds six lines, and the H2 Hygiene digest prints the engine's line count and provenance ('sha-identical with petrolord-engines b43f1d9, 708 lines'). Rebuilding the digest to 714 lines changes the digest-number sweep baked into the H2 go-live migration (1632 to 1631 numbers), so gen_seeds.sh stops agreeing with the committed ladder. REJECTED from the re-vendor: it needs the digest rebuild and a go-live recut in the same commit."
+    },
+    {
+      "path": "tools/validation/hse/FINDINGS-exposure.md",
+      "kind": "differing",
+      "group": "2-copy-pass-held",
+      "vendoredSha": "3e8329d34b36592045e77afc1abd300837b9a4aa",
+      "reason": "Held with engines/hse/exposure.js: canonical 16fd6c9 appends the #231 own-property section describing a repair the held engine blob does not carry."
     },
     {
       "path": "engines/production/allocation.js",
@@ -873,7 +907,7 @@
       "kind": "differing",
       "group": "3-production-revendor",
       "vendoredSha": "8088ee1f9294216cd08ff20c18aeb2efe525f094",
-      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
     },
     {
       "path": "engines/production/hydrateInhibition.js",
@@ -908,7 +942,7 @@
       "kind": "differing",
       "group": "3-production-revendor",
       "vendoredSha": "68d450394a179fd2b3c6846b64fa20668b078a45",
-      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
     },
     {
       "path": "engines/production/nodal.js",
@@ -957,7 +991,7 @@
       "kind": "differing",
       "group": "3-production-revendor",
       "vendoredSha": "c5104183e614e3177fd53ea1dbe70a8bcd37e39a",
-      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window."
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
     },
     {
       "path": "engines/economics/afe.js",
@@ -978,7 +1012,7 @@
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "42363da0f2ca7e6f919d29c58ed8d50d99902f1a",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
     },
     {
       "path": "engines/economics/fdp/facilitiesCalculations.js",
@@ -1006,7 +1040,7 @@
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "a35fc3034598dbbe9419e5058931d63d796d6cd1",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
     },
     {
       "path": "engines/economics/montecarlo.ts",
@@ -1048,7 +1082,7 @@
       "kind": "differing",
       "group": "5-unaudited-difference",
       "vendoredSha": "6358e51349f81218a8639f3122ad1d1a8dc75696",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
     },
     {
       "path": "engines/mapping/surface.js",
@@ -1062,7 +1096,7 @@
       "kind": "differing",
       "group": "5-unaudited-difference",
       "vendoredSha": "233b930e736558c0eeb1e7693356f35b8a2f9e93",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
     },
     {
       "path": "engines/petrophysics/crossplot.js",
@@ -1083,7 +1117,7 @@
       "kind": "differing",
       "group": "5-unaudited-difference",
       "vendoredSha": "cd8f62364211f23819b6a2f0dc635c5c4a3e2f9e",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
     },
     {
       "path": "engines/welltest/derivative.js",
@@ -1104,14 +1138,14 @@
       "kind": "differing",
       "group": "5-unaudited-difference",
       "vendoredSha": "99ce518e1db185d71fe8b37f01cea606e0e16e2e",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
     },
     {
       "path": "lib/gridding/surfaceImport.js",
       "kind": "differing",
       "group": "5-unaudited-difference",
       "vendoredSha": "a7ada422163167a2fae84c6cf1a1ab1250201463",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave."
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
     },
     {
       "path": "__tests__/drilling.cementing.test.js",
