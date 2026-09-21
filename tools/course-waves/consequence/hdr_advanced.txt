@@ -1,0 +1,24 @@
+-- ============================================================================
+-- H4 EXPERT DEEP SEED: Consequence Modelling, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/consequence/advanced.
+--
+-- What this tier owns: WHO IS HURT, AND WHAT DOES THE ENGINE NOT KNOW. The
+-- TNT equivalent mass as a single route quantity; cube root scaling and the
+-- Kinney and Graham free air overpressure over a judged range, forward and
+-- inverse; probits and the printed table; thermal probits and the four thirds,
+-- with four presets named by source; the overpressure probit in psig; toxic
+-- probits in two sources and two units, and a concentration that changes; the
+-- dropped scope, the single route quantities and the approximate inverse
+-- probit; and judgement from release to harm, with the seams to the Facilities
+-- and quantitative risk courses. Digest sections 23 to 33, and section 34.
+--
+-- THE TRAP THE TIER IS BUILT ON. Two presets can read one exposure as a few
+-- percent or as most of the people exposed. The Expert capstone grades a
+-- stated TNT mass forward and inverse and four probabilities, each on a
+-- preset an independent published check stands behind, and no inverse of the
+-- normal CDF.
+-- ============================================================================

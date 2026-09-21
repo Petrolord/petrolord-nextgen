@@ -293,7 +293,10 @@ LIVE_SIBLINGS.forEach(([w, f]) => {
 // a recut migration supersedes the course migration before it.
 const harvested = new Map();
 if (!fs.existsSync(MIGRATIONS)) die(`no migrations directory at ${MIGRATIONS}`);
-const migFiles = fs.readdirSync(MIGRATIONS).filter((f) => f.endsWith('.sql')).sort();
+// This course's OWN ladder is not a sibling: once the seeds are written into
+// migrations/ its capstone fields would match themselves. Excluded by name.
+const OWN = /_h4_consequence_/;
+const migFiles = fs.readdirSync(MIGRATIONS).filter((f) => f.endsWith('.sql') && !OWN.test(f)).sort();
 migFiles.forEach((f) => {
   const t = fs.readFileSync(path.join(MIGRATIONS, f), 'utf8');
   for (const m of t.matchAll(/\{[^{}]*"expected"[^{}]*\}/g)) {

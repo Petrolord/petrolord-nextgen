@@ -68,7 +68,8 @@ LEAK = [
 ]
 LEVELS = ('leak: an API 521 level figure', re.compile(r'(?<![\d.])(1\.58|4\.73|6\.31|9\.46)(?!\d)'))
 SIL4 = re.compile(r'(?!x)x')
-# Lessons (relative to the course directory, without .md) and banks where a seam
+# Lessons (relative to the course directory, without .md) and banks (by file name
+# prefix) where a seam
 # may be NAMED. A figure from LEVELS is a breach even here.
 SEAM_LESSONS = [
     'beginner/m01-what-a-consequence-model-computes/l01-effects-before-frequencies',
@@ -78,7 +79,7 @@ SEAM_LESSONS = [
     'advanced/m06-judgement-end-to-end/l02-what-belongs-to-other-courses',
     'advanced/m06-judgement-end-to-end/l03-writing-the-consequence-note',
 ]
-SEAM_BANKS = ['intermediate-m05', 'advanced-m05', 'advanced-m06']
+SEAM_BANKS = ['h4i_m05', 'h4i_exam', 'h4a_m05', 'h4a_m06', 'h4a_exam']
 SEAM_SECTIONS = (1, 22, 31, 34)
 
 # VERBATIM ENGINE TEXT, blanked before matching. A DEAD entry fails the gate.

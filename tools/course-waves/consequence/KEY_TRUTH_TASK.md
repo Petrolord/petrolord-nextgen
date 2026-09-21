@@ -24,7 +24,7 @@ engine's source comments are PROVENANCE.
 3. A ratio exactly at the critical value is choked, and the mass rate does not
    jump across it.
 4. A pool is a bund floor or a stated thickness: 30 m3 on 400 m2 stands 0.075000 m
-   deep, and in a 50 m2 bund it would overtop and is refused.
+   deep, and in a 50 m2 bund behind its 0.5 m wall it would overtop and is refused.
 5. The ground reflects the plume: at ground level on the centreline from a ground
    release the concentration is Q / (pi sy sz u).
 6. The stable night class carries a plume furthest: class F reaches 100 mg/m3 at
@@ -37,7 +37,8 @@ engine's source comments are PROVENANCE.
 8. Above the characteristic wind speed the flame shortens; below it every wind
    gives the same length, 35.746382 m for ERHA.
 9. The three surface emissive power methods disagree for one fire, so a heat flux
-   is quoted with its method.
+   is quoted with its method: ERHA at 4 m/s gives 30886.154395 by Mudan,
+   180128.456236 for the clear flame and 52025.691247 with soot.
 10. Tilt toward the target raises the view factor: at 50 m Fmax goes from
     0.073136774631 upright to 0.118733812581 at 40 degrees.
 11. A flame over the target is refused, because the closed form's Fv is wrong

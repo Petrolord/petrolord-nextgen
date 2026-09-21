@@ -437,7 +437,7 @@ The engine's model string, verbatim: "mg/m3 = ppm x M / Vm, Vm = R T / P (ideal 
 | 293.15 | 24.055117 |
 | 298.15 | 24.465404 |
 
-At 298.15 K the molar volume is 24.465404 L/mol; the CCOHS and NIOSH figure of 24.45 is its rounding, which the golden gates at one part in a thousand.
+At 298.15 K the molar volume is 24.465404 L/mol; the CCOHS and NIOSH figure of 24.45 approximates it, and the golden gates the two within one part in a thousand.
 
 | substance | ppm, stated | mg/m3 at 273.15 K | mg/m3 at 293.15 K | mg/m3 at 298.15 K |
 | --- | --- | --- | --- | --- |

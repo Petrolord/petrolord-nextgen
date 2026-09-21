@@ -554,7 +554,7 @@ w();
 const vms = T.CONVERT_TEMPERATURES_K.map((t) => ({ t, vm: C.molarVolumeM3Mol(t) * 1000 }));
 table(['temperature K, stated', 'molar volume L/mol at 101325 Pa'], vms.map(({ t, vm }) => [String(t), f6(vm)]));
 w();
-w(`At 298.15 K the molar volume is ${f6(vms[2].vm)} L/mol; the CCOHS and NIOSH figure of 24.45 is its rounding, which the golden gates at one part in a thousand.`);
+w(`At 298.15 K the molar volume is ${f6(vms[2].vm)} L/mol; the CCOHS and NIOSH figure of 24.45 approximates it, and the golden gates the two within one part in a thousand.`);
 w();
 table(['substance', 'ppm, stated', ...T.CONVERT_TEMPERATURES_K.map((t) => `mg/m3 at ${t} K`)],
   [['carbon monoxide', T.UBIT.molarMassGMol], ['hydrogen sulphide', T.H2S_MOLAR_MASS]].flatMap(([name, mw]) => T.CONVERT_PPM.map((c) => [
