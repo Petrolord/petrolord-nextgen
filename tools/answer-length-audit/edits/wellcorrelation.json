@@ -1,0 +1,371 @@
+[
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "Flattening rescales the depth axis so thickness is restored to its structural value",
+  "new": "Flattening rescales the depth axis of each well column, so every zone thickness is stretched back to its structural value"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "Ekene-4, by 12 m",
+  "new": "Ekene-4, which is 12 m thicker than the thinnest"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "Ekene-3, by 14 m",
+  "new": "Ekene-3, exceeding the thinnest by 14 m"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "61 m, in three wells",
+  "new": "61 m, measurable in three wells"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "45 m, in three wells",
+  "new": "45 m, and the zone is present in three wells"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "Flatten on a datum, then pick tops onto the flattened display, then read structure",
+  "new": "Flatten on a datum first, then pick every top directly onto the flattened display so the picks line up, and only then read the structure from it"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "Define zones first, then pick the tops that bound them, then load the wells",
+  "new": "Define the zones first from the expected stratigraphy, then pick the tops that bound each of them, and load the wells last to check the picks against the logs"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "Every well carrying the same number of picks, and every zone the same thickness",
+  "new": "Every well carrying the same number of picks, and every zone showing the same gross thickness in each well so the correlation is proven consistent"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "Four structural reliefs plus the structural span and the flattened span",
+  "new": "Four structural reliefs, one each for TOP_A, TOP_SAND, BASE_SAND and TOP_B, plus the structural span and the flattened span of the whole section, since the capstone is built around reading relief rather than shifts"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "The four SAND thicknesses plus the datum and the section well count",
+  "new": "The four SAND gross thicknesses, one per well, plus the datum surface used for flattening and the section well count, because the capstone is treated as a pure test of the view independence of thickness"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Ekene-2 flattening shift, Ekene-3 SAND thickness, Ekene-4 BASE_SAND true depth, TOP_SAND flattened relief, the total pick count, and the datum value",
+  "new": "Ekene-2 flattening shift, Ekene-3 SAND thickness, Ekene-4 BASE_SAND true depth, TOP_SAND flattened relief, the total pick count across all wells, and the datum value chosen for the flattened section display"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "Module quizzes need 75 percent with no retry limit, and the final exam is optional once the capstone is passed",
+  "new": "Module quizzes need 75 percent with no retry limit or cooldown of any kind, and the final exam becomes optional once the capstone has been passed"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "That the Professional tier replaces measured depth with true vertical depth and abandons formation tops",
+  "new": "That the Professional tier replaces measured depth with true vertical depth and abandons formation tops in favour of correlating on continuous log curves alone"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "That the capstone score is carried forward as the starting score for the next tier",
+  "new": "That the capstone score is carried forward as the starting score for the next tier, so a strong beginner result shortens the Professional and Expert assessments"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-correlation-and-the-section",
+  "ord": 14,
+  "option": 1,
+  "old": "It sets the horizontal spacing between the well columns",
+  "new": "It sets the horizontal spacing between the well columns, so wider curve swings push neighbouring wells further apart"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-correlation-and-the-section",
+  "ord": 14,
+  "option": 2,
+  "old": "It acts as the datum that the section is flattened on",
+  "new": "It acts as the datum that the section is flattened on, so each column is hung from a fixed value of the curve"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-correlation-and-the-section",
+  "ord": 15,
+  "option": 1,
+  "old": "It was measured on the flattened section rather than the structural one",
+  "new": "It was measured on the flattened section rather than the structural one, so the datum shift has distorted it"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-formation-tops",
+  "ord": 11,
+  "option": 1,
+  "old": "It compares each name against a fixed dictionary of standard surface names",
+  "new": "It compares each name against a fixed dictionary of standard surface names, and any top with no exact match is rejected with an error before the section is drawn"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-formation-tops",
+  "ord": 11,
+  "option": 2,
+  "old": "It flags any top whose depth differs by more than 30 m from its neighbours",
+  "new": "It flags any top whose depth differs by more than 30 m from its neighbours, on the reasoning that a mistyped name usually sits on a pick at the wrong depth"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-formation-tops",
+  "ord": 11,
+  "option": 3,
+  "old": "It refuses to draw any correlation line until every well carries every name",
+  "new": "It refuses to draw any correlation line until every well carries every name, so a single misspelling blocks the whole section until the user tracks it down"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-formation-tops",
+  "ord": 12,
+  "option": 2,
+  "old": "The interval was eroded, so the thickness is genuinely negative",
+  "new": "The interval was eroded after deposition, so the gross thickness recorded at that well is genuinely negative"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-formation-tops",
+  "ord": 13,
+  "option": 0,
+  "old": "The well reached total depth above the surface",
+  "new": "The well reached total depth above the surface, so the bit never got deep enough to penetrate it"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-formation-tops",
+  "ord": 13,
+  "option": 1,
+  "old": "The section was faulted out",
+  "new": "The section containing the surface was faulted out, so the well never penetrated that interval"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-formation-tops",
+  "ord": 15,
+  "option": 0,
+  "old": "It applies the average shift of the other wells so the display stays consistent",
+  "new": "It applies the average shift of the other wells so the display stays consistent across the whole section"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-structural-section",
+  "ord": 13,
+  "option": 1,
+  "old": "That the interval thicknesses must be constant across the field",
+  "new": "That the interval thicknesses must be constant across the field, since every surface moves together"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-structural-section",
+  "ord": 14,
+  "option": 1,
+  "old": "7 m, which is about the same as the TOP_SAND relief",
+  "new": "7 m, which is roughly the same size as the structural relief on TOP_SAND"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-structural-section",
+  "ord": 14,
+  "option": 2,
+  "old": "32 m, which is larger than the TOP_SAND relief",
+  "new": "32 m, which is larger than the TOP_SAND relief across the four wells"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-flattening-and-datums",
+  "ord": 15,
+  "option": 0,
+  "old": "Nothing, since a flat line on the section means a flat surface in the ground.",
+  "new": "Nothing, since a flat line on any correlation panel means a flat surface in the ground, whatever view it is drawn in."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-flattening-and-datums",
+  "ord": 15,
+  "option": 2,
+  "old": "The line is flat because all four sand picks happen to share the same measured depth.",
+  "new": "The line is flat because all four sand picks happen to share the same measured depth in their respective wells."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-zones-and-correlation-lines",
+  "ord": 12,
+  "option": 2,
+  "old": "Because Ekene-2 carries the largest flattening shift of the four wells",
+  "new": "Because Ekene-2 carries the largest flattening shift of the four wells, which pushes its whole column down"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-zones-and-correlation-lines",
+  "ord": 14,
+  "option": 0,
+  "old": "As 34 m, with no qualifier, since relief does not depend on well count",
+  "new": "As 34 m, with no qualifier, since relief is a property of the surface and does not depend on well count"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-zones-and-correlation-lines",
+  "ord": 15,
+  "option": 2,
+  "old": "That the top was eroded before the overlying section was deposited",
+  "new": "That the top was eroded before the overlying section was deposited, which the missing pick on its own demonstrates"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-zones-and-correlation-lines",
+  "ord": 15,
+  "option": 3,
+  "old": "That the top exists in the data but has simply not been picked yet",
+  "new": "That the top exists in the data but has simply not been picked yet, since the curves continue below the deepest pick"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-correlation-workflow",
+  "ord": 13,
+  "option": 1,
+  "old": "Only TOP_SAND, since that is the surface the datum was set on",
+  "new": "Only TOP_SAND, since that is the surface the datum was set on and the one the shift was computed from"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-correlation-workflow",
+  "ord": 13,
+  "option": 3,
+  "old": "Only the tops shared by all wells on the section",
+  "new": "Only the tops shared by all wells on the section, since partial surfaces carry no shift"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-correlation-workflow",
+  "ord": 14,
+  "option": 0,
+  "old": "Passing the final exam at 75 percent, with the capstone available at any point afterwards",
+  "new": "Passing the final exam at 75 percent on its own, with the capstone available at any point afterwards and the module quizzes treated as practice"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-correlation-workflow",
+  "ord": 14,
+  "option": 1,
+  "old": "Reading every lesson in all six modules, with quizzes and the exam optional",
+  "new": "Reading every lesson in all six modules, with the module quizzes and the final exam optional because the server only tracks lesson completion"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-correlation-workflow",
+  "ord": 14,
+  "option": 3,
+  "old": "Passing any four of the six module quizzes and then the final exam at 70 percent",
+  "new": "Passing any four of the six module quizzes and then the final exam at 70 percent, with the remaining lessons left as optional background reading"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-correlation-workflow",
+  "ord": 15,
+  "option": 0,
+  "old": "It limits how much load the grading engine handles in a day",
+  "new": "It limits how much load the grading engine handles in a day, spreading repeated quiz submissions out so the server is never overloaded"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-correlation-workflow",
+  "ord": 15,
+  "option": 2,
+  "old": "It gives the server time to regrade the earlier attempts",
+  "new": "It gives the server time to regrade the earlier attempts overnight, in case one of the three failures came from a marking error in the answer key"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-correlation-workflow",
+  "ord": 15,
+  "option": 3,
+  "old": "It resets the pass mark for that quiz to a lower threshold",
+  "new": "It resets the pass mark for that quiz to a lower threshold once the day has passed, so a learner who keeps failing is eventually let through"
+ }
+]
