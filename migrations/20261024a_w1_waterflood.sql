@@ -35,6 +35,7 @@ declare
   v_written  integer := 0;
   v_ids      jsonb;
   v_extra    jsonb;
+  v_idtxt    text;
   v_allow    jsonb := '{}'::jsonb;  -- D5 allowlist: 'course/tier' -> attempt ids signed off
   v_s0       text;
 begin
@@ -79,11 +80,13 @@ begin
         select coalesce(jsonb_agg(x), '[]'::jsonb) into v_extra
           from jsonb_array_elements(v_ids) x where not (v_allow->'waterflood/intermediate') @> jsonb_build_array(x);
         if jsonb_array_length(v_extra) > 0 then
-          raise exception 'w1 waterflood refused: waterflood/intermediate holds % attempt(s) outside its D5 allowlist: %', jsonb_array_length(v_extra), v_extra;
+          select string_agg(x #>> '{}', ', ') into v_idtxt from jsonb_array_elements(v_extra) x;
+          raise exception 'w1 waterflood refused: waterflood/intermediate holds % attempt(s) outside its D5 allowlist: %', jsonb_array_length(v_extra), v_idtxt;
         end if;
         raise notice 'w1 waterflood: waterflood/intermediate holds % allowlisted attempt(s) (D5 sign-off); their stored scores are not touched', jsonb_array_length(v_ids);
       else
-        raise exception 'w1 waterflood refused: waterflood/intermediate holds % capstone attempt(s) (%) and this file moves its graded key or tolerance; sign the tier off under D5 (allowlist with these ids) or hold it', jsonb_array_length(v_ids), v_ids;
+        select string_agg(x #>> '{}', ', ') into v_idtxt from jsonb_array_elements(v_ids) x;
+        raise exception 'w1 waterflood refused: waterflood/intermediate holds % capstone attempt(s) (%) and this file moves its graded key or tolerance; sign the tier off under D5 (allowlist with these ids) or hold it', jsonb_array_length(v_ids), v_idtxt;
       end if;
     end if;
   end if;

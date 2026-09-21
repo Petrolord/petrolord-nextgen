@@ -260,7 +260,7 @@ def file_sql(tag, header, tiers, sent, guard):
     """tiers: list of (course, tier, old_prompt, old_fields_text, new_prompt, new_fields_text, moves_fields)."""
     n = len(tiers)
     decl = ['  v_n        integer;', '  v_count    integer;', '  v_written  integer := 0;', '  v_ids      jsonb;',
-            '  v_extra    jsonb;', f"  v_allow    jsonb := {q(json.dumps(ALLOW, sort_keys=True))}::jsonb;  -- D5 allowlist: 'course/tier' -> attempt ids signed off"]
+            '  v_extra    jsonb;', '  v_idtxt    text;', f"  v_allow    jsonb := {q(json.dumps(ALLOW, sort_keys=True))}::jsonb;  -- D5 allowlist: 'course/tier' -> attempt ids signed off"]
     decl += [f'  v_s{i}       text;' for i in range(n)]
     body = []
     for i, (course, tier, op, of, np_, nf, mv, later) in enumerate(tiers):
@@ -299,11 +299,13 @@ def file_sql(tag, header, tiers, sent, guard):
         select coalesce(jsonb_agg(x), '[]'::jsonb) into v_extra
           from jsonb_array_elements(v_ids) x where not (v_allow->'{course}/{tier}') @> jsonb_build_array(x);
         if jsonb_array_length(v_extra) > 0 then
-          raise exception '{tag} refused: {course}/{tier} holds % attempt(s) outside its D5 allowlist: %', jsonb_array_length(v_extra), v_extra;
+          select string_agg(x #>> '{{}}', ', ') into v_idtxt from jsonb_array_elements(v_extra) x;
+          raise exception '{tag} refused: {course}/{tier} holds % attempt(s) outside its D5 allowlist: %', jsonb_array_length(v_extra), v_idtxt;
         end if;
         raise notice '{tag}: {course}/{tier} holds % allowlisted attempt(s) (D5 sign-off); their stored scores are not touched', jsonb_array_length(v_ids);
       else
-        raise exception '{tag} refused: {course}/{tier} holds % capstone attempt(s) (%) and this file moves its graded key or tolerance; sign the tier off under D5 (allowlist with these ids) or hold it', jsonb_array_length(v_ids), v_ids;
+        select string_agg(x #>> '{{}}', ', ') into v_idtxt from jsonb_array_elements(v_ids) x;
+        raise exception '{tag} refused: {course}/{tier} holds % capstone attempt(s) (%) and this file moves its graded key or tolerance; sign the tier off under D5 (allowlist with these ids) or hold it', jsonb_array_length(v_ids), v_idtxt;
       end if;
     end if;
   end if;""")
