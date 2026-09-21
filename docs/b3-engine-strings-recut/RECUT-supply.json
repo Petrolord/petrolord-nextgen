@@ -1,0 +1,321 @@
+{
+ "course": "Terminals, Depots & Fuel Supply (supply)",
+ "slug": "supply",
+ "engines": "petrolord-engines e972ae7 (engines PR #232, the copy pass and the queue vocabularies)",
+ "old_ref": "78d0a3290",
+ "new_ref": "dec51d243",
+ "method": "OLD is the row the APPLIED deep seed migrations/20261012_tds_supply_<tier>_deep.sql wrote: the generator rebuilds the 132 VALUES lines from the banks at 78d0a3290 and requires them to be that file's VALUES block byte for byte. NEW is what the same generator writes from the banks at dec51d243. No production access: OLD was not compared with a dump of the live rows; each migration refuses a row matching neither OLD nor NEW, and the owner-run rolled-back dry run is that comparison.",
+ "tiers": {
+  "beginner": [],
+  "intermediate": [
+   {
+    "scope": "module",
+    "module_key": "m04-throughput-economics",
+    "ord": 7,
+    "fields": [
+     "options"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 2,
+    "answer_index_new": 2,
+    "keyed_length_rank_old": 1,
+    "keyed_length_rank_new": 1,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "Density is missing from the IBAFO period. Which note explains the gap in the carbon columns?",
+     "options": [
+      "No emission factor supplied, so the carbon side is not computed. Factors are published, versioned data; an invented one would be worse than none.",
+      "No diesel emission factor supplied, so the carbon figure is absent rather than zero.",
+      "No product density supplied, so the loss has no weight and the carbon side is not computed.",
+      "REFUSED: Density is required to convert between mass and volume; it is not assumed."
+     ],
+     "explanation": "throughputEconomics does not refuse the call; it prints the money side and names why the carbon side is missing. The refusal about mass and volume belongs to cargoQuantities, and the diesel note to the truck lane."
+    },
+    "new": {
+     "prompt": "Density is missing from the IBAFO period. Which note explains the gap in the carbon columns?",
+     "options": [
+      "No emission factor supplied, so the carbon side is not computed. Factors are published, versioned data; an invented one would be worse than none.",
+      "No diesel emission factor supplied, so the carbon figure is left blank.",
+      "No product density supplied, so the loss has no weight and the carbon side is not computed.",
+      "REFUSED: Density is required to convert between mass and volume; it is not assumed."
+     ],
+     "explanation": "throughputEconomics does not refuse the call; it prints the money side and names why the carbon side is missing. The refusal about mass and volume belongs to cargoQuantities, and the diesel note to the truck lane."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m05-the-lane-the-fleet-and-the-station",
+    "ord": 5,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 2,
+    "answer_index_new": 2,
+    "keyed_length_rank_old": 1,
+    "keyed_length_rank_new": 1,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "The IBAFO lane reports 224.64 diesel litres a trip. What does it print for kg CO2e a trip?",
+     "options": [
+      "0, since a missing factor is read as a zero emission.",
+      "A figure from the synthetic 850 kg CO2e a tonne factor.",
+      "none, with a note that no diesel emission factor was supplied.",
+      "A refusal, with the lane left uncosted until a factor is typed."
+     ],
+     "explanation": "The engine ships no factor, so the diesel volume is computed and its emissions wait for a factor with a source. In the engine's words the carbon figure \"is absent rather than zero\". The rest of the lane still prints complete true."
+    },
+    "new": {
+     "prompt": "The IBAFO lane reports 224.64 diesel litres a trip. What does it print for kg CO2e a trip?",
+     "options": [
+      "0, since a missing factor is read as a zero emission.",
+      "A figure from the synthetic 850 kg CO2e a tonne factor.",
+      "none, with a note that no diesel emission factor was supplied.",
+      "A refusal, with the lane left uncosted until a factor is typed."
+     ],
+     "explanation": "The engine ships no factor, so the diesel volume is computed and its emissions wait for a factor with a source. In the engine's words the carbon figure \"is left blank\". The rest of the lane still prints complete true."
+    }
+   },
+   {
+    "scope": "final",
+    "module_key": null,
+    "ord": 37,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 2,
+    "answer_index_new": 2,
+    "keyed_length_rank_old": 1,
+    "keyed_length_rank_new": 1,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "Which two notes say a carbon figure is absent because no emission factor was supplied?",
+     "options": [
+      "The depot's no-density note and the lane's diesel note, both about factors.",
+      "The depot's no-density note and assumedZero.",
+      "The depot's no-emission-factor note and the lane's diesel note.",
+      "The lane's floor and the station's warning."
+     ],
+     "explanation": "throughputEconomics: \"No emission factor supplied, so the carbon side is not computed.\" truckingEconomics: \"No diesel emission factor supplied, so the carbon figure is absent rather than zero.\" The no-density note is about the loss's weight."
+    },
+    "new": {
+     "prompt": "Which two notes say a carbon figure is absent because no emission factor was supplied?",
+     "options": [
+      "The depot's no-density note and the lane's diesel note, both about factors.",
+      "The depot's no-density note and assumedZero.",
+      "The depot's no-emission-factor note and the lane's diesel note.",
+      "The lane's floor and the station's warning."
+     ],
+     "explanation": "throughputEconomics: \"No emission factor supplied, so the carbon side is not computed.\" truckingEconomics: \"No diesel emission factor supplied, so the carbon figure is left blank.\" The no-density note is about the loss's weight."
+    }
+   }
+  ],
+  "advanced": [
+   {
+    "scope": "module",
+    "module_key": "m02-the-landed-cost-walk",
+    "ord": 10,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 0,
+    "answer_index_new": 0,
+    "keyed_length_rank_old": 0,
+    "keyed_length_rank_new": 0,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "The invented duty and financing rates are left blank on BADAGRY. What does landedCost report?",
+     "options": [
+      "complete false, missing Import duty and Financing and letter of credit, total 24774210.79 USD, labelled a floor.",
+      "A refusal naming the duty, since a percent of CIF with no rate leaves the walk unable to form CIF.",
+      "complete true, total 24774210.79 USD, with the two blank rates read as zero and listed in assumedZero.",
+      "complete false with a total of 26513943.86 USD, the last complete build, until the two rates are typed."
+     ],
+     "explanation": "The engine adds what it was given, names what it was not and labels the sum. The digest prints \"A FLOOR, not a cost: 2 rate(s) not supplied.\" beside 24774210.79 USD."
+    },
+    "new": {
+     "prompt": "The invented duty and financing rates are left blank on BADAGRY. What does landedCost report?",
+     "options": [
+      "complete false, missing Import duty and Financing and letter of credit, total 24774210.79 USD, labelled a floor.",
+      "A refusal naming the duty, since a percent of CIF with no rate leaves the walk unable to form CIF.",
+      "complete true, total 24774210.79 USD, with the two blank rates read as zero and listed in assumedZero.",
+      "complete false with a total of 26513943.86 USD, the last complete build, until the two rates are typed."
+     ],
+     "explanation": "The engine adds what it was given, names what it was not and labels the sum. It prints \"A FLOOR: 2 rate(s) not supplied, so the full landed cost is at least this.\" beside 24774210.79 USD."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m02-the-landed-cost-walk",
+    "ord": 12,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 1,
+    "answer_index_new": 1,
+    "keyed_length_rank_old": 2,
+    "keyed_length_rank_new": 2,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "With every invented rate left blank, landedCost prints a total of 23392000.00 USD. What is that figure?",
+     "options": [
+      "The landed cost, complete true, with every blank rate read as zero.",
+      "The FOB alone, labelled as a floor with 9 rates missing.",
+      "The C&F value, since freight is formed from the FOB price.",
+      "The CIF value, formed before any landed charge applies."
+     ],
+     "explanation": "It is the same figure as the FOB line of the full build. The engine prints it with complete false, 9 rates missing and \"A FLOOR, not a cost: 9 rate(s) not supplied.\""
+    },
+    "new": {
+     "prompt": "With every invented rate left blank, landedCost prints a total of 23392000.00 USD. What is that figure?",
+     "options": [
+      "The landed cost, complete true, with every blank rate read as zero.",
+      "The FOB alone, labelled as a floor with 9 rates missing.",
+      "The C&F value, since freight is formed from the FOB price.",
+      "The CIF value, formed before any landed charge applies."
+     ],
+     "explanation": "It is the same figure as the FOB line of the full build. The engine prints it with complete false, 9 rates missing and \"A FLOOR: 9 rate(s) not supplied, so the full landed cost is at least this.\""
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m04-from-depot-gate-to-nozzle",
+    "ord": 4,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 2,
+    "answer_index_new": 2,
+    "keyed_length_rank_old": 3,
+    "keyed_length_rank_new": 3,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "Two pump elements, the invented dealer margin and the statutory levies, are blank. Which answer does the waterfall engine give?",
+     "options": [
+      "complete true at 1031.3197 naira a litre, with the two blank elements taken as zero and named in assumedZero.",
+      "REFUSED: A landed cost per litre is required, since the chain cannot be walked with two elements missing.",
+      "complete false, both elements named as missing, price 1031.3197 naira a litre, labelled a floor.",
+      "complete false with the price reported as none, since the tax cannot read a running total with gaps in it."
+     ],
+     "explanation": "The engine keeps both missing elements visible, reports complete false and prints \"A FLOOR, not a price: 2 rate(s) not supplied.\" beside 1031.3197 naira a litre."
+    },
+    "new": {
+     "prompt": "Two pump elements, the invented dealer margin and the statutory levies, are blank. Which answer does the waterfall engine give?",
+     "options": [
+      "complete true at 1031.3197 naira a litre, with the two blank elements taken as zero and named in assumedZero.",
+      "REFUSED: A landed cost per litre is required, since the chain cannot be walked with two elements missing.",
+      "complete false, both elements named as missing, price 1031.3197 naira a litre, labelled a floor.",
+      "complete false with the price reported as none, since the tax cannot read a running total with gaps in it."
+     ],
+     "explanation": "The engine keeps both missing elements visible, reports complete false and prints \"A FLOOR: 2 rate(s) not supplied, so the full price is at least this.\" beside 1031.3197 naira a litre."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m05-what-breaks-the-price",
+    "ord": 3,
+    "fields": [
+     "options"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 0,
+    "answer_index_new": 0,
+    "keyed_length_rank_old": 0,
+    "keyed_length_rank_new": 0,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "solveCrossing is run against the invented cap over a bracket from 1300 to 1500 naira to the dollar. What does it return?",
+     "options": [
+      "found false; REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.",
+      "found true at 1500, the end of the bracket nearer the crossing, after 18 bisection steps.",
+      "REFUSED: The search bracket is not a valid interval, since the crossing lies above it.",
+      "found true at 1641.7105, since the engine widens the bracket until the sign changes."
+     ],
+     "explanation": "Both end shortfalls, -211.7551 and -87.8167 naira a litre, are negative. The engine does not search outside the bracket it was handed and returns no value."
+    },
+    "new": {
+     "prompt": "solveCrossing is run against the invented cap over a bracket from 1300 to 1500 naira to the dollar. What does it return?",
+     "options": [
+      "found false; REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.",
+      "found true at 1500, the end of the bracket nearer the crossing, after 18 bisection steps.",
+      "REFUSED: The search bracket must be a valid interval, since the crossing lies above it.",
+      "found true at 1641.7105, since the engine widens the bracket until the sign changes."
+     ],
+     "explanation": "Both end shortfalls, -211.7551 and -87.8167 naira a litre, are negative. The engine does not search outside the bracket it was handed and returns no value."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m05-what-breaks-the-price",
+    "ord": 4,
+    "fields": [
+     "options"
+    ],
+    "keyed_answer_text_changed": true,
+    "answer_index_old": 2,
+    "answer_index_new": 2,
+    "keyed_length_rank_old": 1,
+    "keyed_length_rank_new": 1,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "solveCrossing is handed the invented exchange rate bracket written backwards, 2100 to 1200. Which answer does it give?",
+     "options": [
+      "It swaps the ends and finds 1641.7105.",
+      "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.",
+      "REFUSED: The search bracket is not a valid interval.",
+      "It halves from the high end and reports none."
+     ],
+     "explanation": "The digest prints the bracket written backwards, 2100 to 1200, as that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500."
+    },
+    "new": {
+     "prompt": "solveCrossing is handed the invented exchange rate bracket written backwards, 2100 to 1200. Which answer does it give?",
+     "options": [
+      "It swaps the ends and finds 1641.7105.",
+      "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.",
+      "REFUSED: The search bracket must be a valid interval.",
+      "It halves from the high end and reports none."
+     ],
+     "explanation": "The digest prints the bracket written backwards, 2100 to 1200, as that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500."
+    }
+   },
+   {
+    "scope": "final",
+    "module_key": null,
+    "ord": 5,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 1,
+    "answer_index_new": 1,
+    "keyed_length_rank_old": 0,
+    "keyed_length_rank_new": 0,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "The engine labels an incomplete build-up a floor. On the invented BADAGRY pump price, which figure carries that label?",
+     "options": [
+      "1066.7292 naira a litre, with the tax typed on the landed cost.",
+      "1031.3197 naira a litre, with the dealer margin and levies blank.",
+      "24774210.79 USD, with the duty and financing blank.",
+      "1074.8249 naira a litre, with every invented element supplied."
+     ],
+     "explanation": "The pump sentence is \"A FLOOR, not a price: 2 rate(s) not supplied.\" The walk's floor of 24774210.79 is in US dollars for the cargo, and 1066.7292 is complete true."
+    },
+    "new": {
+     "prompt": "The engine labels an incomplete build-up a floor. On the invented BADAGRY pump price, which figure carries that label?",
+     "options": [
+      "1066.7292 naira a litre, with the tax typed on the landed cost.",
+      "1031.3197 naira a litre, with the dealer margin and levies blank.",
+      "24774210.79 USD, with the duty and financing blank.",
+      "1074.8249 naira a litre, with every invented element supplied."
+     ],
+     "explanation": "The pump sentence is \"A FLOOR: 2 rate(s) not supplied, so the full price is at least this.\" The walk's floor of 24774210.79 is in US dollars for the cargo, and 1066.7292 is complete true."
+    }
+   }
+  ]
+ }
+}
