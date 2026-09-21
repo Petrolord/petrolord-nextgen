@@ -1,0 +1,2171 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 0,
+  "old": "Half a metre, the standard value.",
+  "new": "Half a metre, the standard value, since every surface fix is treated as a modern satellite position."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 2,
+  "old": "The distance the assembly can be pushed by a bent housing, and the amount the hole can wash out during drilling.",
+  "new": "How far a bent housing pushes the assembly, and how far the hole washes out."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 3,
+  "old": "The uncertainty of the last surveyed station, and the projection of the plan ahead of it to the next station.",
+  "new": "The uncertainty of the last surveyed station and the projection ahead of it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 2,
+  "old": "It is a statistical term, added in quadrature with the two wells' position uncertainties before scaling by k.",
+  "new": "A statistical term, added in quadrature with both position uncertainties."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 3,
+  "old": "It is both, since it covers a physical offset and an allowance for how far the assembly might have moved.",
+  "new": "Both: a physical offset plus an allowance for how far the assembly moved."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 0,
+  "old": "It gives the correct combined uncertainty.",
+  "new": "It gives the correct combined uncertainty, since each well's error is counted once."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 1,
+  "old": "Yes, because the inflated sigma pushes negative separation factors toward zero and makes them read as acceptable.",
+  "new": "Yes: inflated sigma makes negative factors read as acceptable."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 3,
+  "old": "It depends on the geometry: pessimistic for parallel wells and optimistic where the two wells cross.",
+  "new": "It depends: pessimistic for parallel wells, optimistic where they cross."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 1,
+  "old": "The last common casing shoe.",
+  "new": "The last common casing shoe, below which the two surveys are run separately."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "Declination depends on the map projection and convergence on the geodetic datum, so both are cartographic.",
+  "new": "Declination on the projection, convergence on the datum: both cartographic."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "Declination depends on latitude alone and convergence on longitude alone, which is why they are independent.",
+  "new": "Declination depends on latitude alone and convergence on longitude alone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 1,
+  "old": "An inflated uncertainty, since the error model's declination source will absorb the discrepancy into the covariance.",
+  "new": "An inflated uncertainty, absorbed into the covariance by the declination term."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 2,
+  "old": "A vertical error, since the azimuth reference affects the true vertical depth accumulation through the inclination.",
+  "new": "A vertical error, since the azimuth reference feeds true vertical depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "Because the coefficients are truncated.",
+  "new": "Because the coefficients are truncated, and truncation error grows through the release."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "About 3 m.",
+  "new": "About 3 m, as the reach barely matters."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "Because the model treats it as global.",
+  "new": "Because the model treats it as global, applying one shared value to every survey in the field."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "Because it is proportional to depth.",
+  "new": "Because it is proportional to depth, so the error grows fastest along the deepest part of the well."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "No: the sharp V is worse, because a crossing carries a collision risk that a parallel approach does not.",
+  "new": "No: the sharp V is worse, since a crossing carries risk a parallel approach lacks."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "At the minimum of every case.",
+  "new": "At the minimum of every case, where the separation factor is most sensitive to error."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "Because it may indicate a defect that will grow into a material one as the implementation is extended.",
+  "new": "Because it may signal a defect that grows as the implementation is extended."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "It can scale the magnetic result.",
+  "new": "It can scale the magnetic result by the ratio of the two tools' published accuracies."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "It records them in a documentation table.",
+  "new": "It records them in a documentation table that the course catalogue reads."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "Because the standard publishes values at both 3.5 and 5.0, so the pair can be checked against two oracles.",
+  "new": "Because the standard publishes values at 3.5 and 5.0, so two oracles check the pair."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "The minimum's measured depth and the hole radii used, which are the only two inputs that vary between operators.",
+  "new": "The minimum's measured depth and the hole radii, the inputs operators vary."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "The oracle values for the same pair, so that the implementation can be checked before the number is relied on.",
+  "new": "The oracle values for the same pair, to check the implementation first."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "The thresholds change with depth, so a factor must be compared against the line at its own depth.",
+  "new": "The thresholds change with depth, so each factor is compared at its own depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "Because probabilities cannot be negative.",
+  "new": "Because probabilities cannot be negative, and a separation factor can be."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "Using the pedal-curve method.",
+  "new": "Using the pedal-curve method, since the other combination rules understate the ellipse."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 7,
+  "option": 0,
+  "old": "Two hole radii and the surface position sigma.",
+  "new": "Two hole radii and the surface position sigma, both as geometry."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 8,
+  "option": 2,
+  "old": "Nothing, because the radii and the allowance are applied to the uncertainty rather than to the distance.",
+  "new": "Nothing: radii and allowance are applied to the uncertainty instead."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 9,
+  "option": 2,
+  "old": "Because the radius varies along the well, so a single value has to be chosen for each section by the planner.",
+  "new": "Because the radius varies along the well, section by section."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 9,
+  "option": 3,
+  "old": "Because different operators use different conventions for whether the radius is the bit size or the casing size.",
+  "new": "Because operators disagree on whether it is the bit or casing size."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 10,
+  "option": 0,
+  "old": "The closest approach solver failed.",
+  "new": "The closest approach solver failed to converge between stations."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 11,
+  "option": 1,
+  "old": "Nothing, because the separation factor depends only on the relative geometry and not on the common origin.",
+  "new": "Nothing, because the factor depends only on relative geometry."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 12,
+  "option": 0,
+  "old": "The declination, typically a few degrees.",
+  "new": "The declination, typically a few degrees of azimuth applied to one well only."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 13,
+  "option": 2,
+  "old": "Their magnetic headers, since the two rigs were on location at different dates and the declination will have drifted.",
+  "new": "Their magnetic headers, taken on different dates."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 13,
+  "option": 3,
+  "old": "Their survey intervals, since a scan compares stations and the two lists must be sampled at the same depths.",
+  "new": "Their survey intervals, sampled at the same depths."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 14,
+  "option": 0,
+  "old": "Because attitudes are not published.",
+  "new": "Because attitudes are not published for the standard's test wells."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-two-wells-in-one-frame",
+  "ord": 15,
+  "option": 0,
+  "old": "A separation factor below 1.0.",
+  "new": "A separation factor below 1.0 on a well that is in the offset list."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 7,
+  "option": 0,
+  "old": "Because the standard requires eleven.",
+  "new": "Because the standard requires eleven, one per category in its conformance checklist."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 8,
+  "option": 0,
+  "old": "Only the confidence factor, k 3.5.",
+  "new": "Only the confidence factor, k 3.5, since the remaining terms are left to the implementer's judgement."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 9,
+  "option": 2,
+  "old": "3.5, the confidence factor, since a factor below its own k means the wells are within one standard deviation.",
+  "new": "3.5, the confidence factor, since below k the wells are too close."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 9,
+  "option": 3,
+  "old": "Zero, since a positive separation factor means the wells do not overlap at any confidence.",
+  "new": "Zero, since a positive factor means the wells never overlap."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 10,
+  "option": 3,
+  "old": "Because the separation factor is computed at stations and the true minimum lies between them.",
+  "new": "Because the factor is computed at stations and the true minimum lies between."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 11,
+  "option": 3,
+  "old": "The confidence factor is reduced until the factor rises above 1.5, which is the documented remedy.",
+  "new": "The confidence factor is reduced until the factor clears 1.5, as documented."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 12,
+  "option": 1,
+  "old": "It reproduces ten of the eleven; the kicked-off case differs on its minimum and is excluded from the comparison.",
+  "new": "Ten of the eleven; the kicked-off case differs on its minimum and is excluded."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 12,
+  "option": 2,
+  "old": "It agrees to about one percent on all eleven, which is the tolerance the standard states for a conforming implementation.",
+  "new": "About one percent on all eleven, the tolerance the standard sets for conformance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 13,
+  "option": 1,
+  "old": "Because k can be chosen negative.",
+  "new": "Because k can be chosen negative when the operator wants a one-sided confidence bound."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 14,
+  "option": 0,
+  "old": "They are closer than the review threshold.",
+  "new": "They are closer than the review threshold but still physically clear of each other."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-separation-factor",
+  "ord": 15,
+  "option": 1,
+  "old": "Because the pedal radius is undefined when the two ellipses overlap, so the denominator loses its meaning.",
+  "new": "Because the pedal radius is undefined when the ellipses overlap, so the denominator fails."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-it-moves-with",
+  "ord": 12,
+  "option": 0,
+  "old": "It makes the wells look further apart.",
+  "new": "It makes the wells look further apart, since independence lets the errors cancel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-it-moves-with",
+  "ord": 13,
+  "option": 2,
+  "old": "The tie-on depth of the sidetrack's own survey, which is where its independent error accumulation begins.",
+  "new": "The tie-on depth of the sidetrack's own survey run."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-it-moves-with",
+  "ord": 13,
+  "option": 3,
+  "old": "The surface, since only the wellhead position is genuinely common to the two wells.",
+  "new": "The surface, where only the wellhead is truly shared."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-it-moves-with",
+  "ord": 14,
+  "option": 2,
+  "old": "That the pedal-curve method and the radial method converge as the confidence factor is increased.",
+  "new": "That pedal-curve and radial methods converge as k is increased."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-it-moves-with",
+  "ord": 15,
+  "option": 0,
+  "old": "Raise it until the plan clears.",
+  "new": "Raise it until the plan clears the review line."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 7,
+  "option": 0,
+  "old": "A few thousandths of a degree.",
+  "new": "A few thousandths of a degree, the precision to which its coefficients are printed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 8,
+  "option": 0,
+  "old": "Because the coefficients are rounded.",
+  "new": "Because the coefficients are rounded, and the rounding error compounds yearly."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 9,
+  "option": 1,
+  "old": "Their grid convergences.",
+  "new": "Their grid convergences, since the map projection was revised between the two dates."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 10,
+  "option": 2,
+  "old": "No, never: a survey must always be preserved with the correction that was applied when it was taken.",
+  "new": "No, never: a survey keeps the correction applied at the time."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 10,
+  "option": 3,
+  "old": "Only if the well is an offset in an anti-collision scan, where both wells must share a single reference epoch.",
+  "new": "Only if it is an offset in a scan, so both wells share one epoch."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 11,
+  "option": 1,
+  "old": "The longitude difference from the central meridian, divided by the cosine of the latitude, in a transverse Mercator.",
+  "new": "The longitude difference divided by the cosine of the latitude."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 11,
+  "option": 3,
+  "old": "The angle subtended at the pole by the arc from the central meridian to the point, measured along the parallel.",
+  "new": "The angle at the pole subtended by the arc from the central meridian."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 12,
+  "option": 0,
+  "old": "Never more than half a degree.",
+  "new": "Never more than half a degree, whatever the latitude or position in the zone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 13,
+  "option": 3,
+  "old": "A vertical shift, since the reference error changes the datum the azimuths are measured against.",
+  "new": "A vertical shift, since the reference error moves the azimuth datum."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 14,
+  "option": 0,
+  "old": "About 5 m.",
+  "new": "About 5 m, small at that reach."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-reference-frame",
+  "ord": 15,
+  "option": 3,
+  "old": "Because it changes the true vertical depth, which is what casing points and pressure calculations are quoted in.",
+  "new": "Because it changes true vertical depth, which casing points are quoted in."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 7,
+  "option": 3,
+  "old": "All eleven agree to about one percent, which is the tolerance the standard states for conformance.",
+  "new": "All eleven agree to about one percent, the standard's conformance tolerance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 8,
+  "option": 1,
+  "old": "In the shallow section above the kickoff, where the two wells share the same hole and the sharing logic applies.",
+  "new": "Above the kickoff, where the wells share one hole and the sharing logic applies."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 8,
+  "option": 2,
+  "old": "In the centre-to-centre distances, which differ because the two implementations find different closest approaches.",
+  "new": "In the centre-to-centre distances, from finding different closest approaches."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 9,
+  "option": 1,
+  "old": "A difference in the confidence factor, since the two implementations use the same published value of 3.5.",
+  "new": "A difference in confidence factor, though both use the published 3.5."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 9,
+  "option": 3,
+  "old": "A rounding difference, since both implementations carry the same double precision throughout the calculation.",
+  "new": "A rounding difference, though both carry double precision throughout."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 10,
+  "option": 1,
+  "old": "Because it is under one percent.",
+  "new": "Because it is under one percent, which is inside what the standard calls conforming."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 11,
+  "option": 0,
+  "old": "Because the standard requires a scope statement.",
+  "new": "Because the drilling standard requires a written scope statement for every certified course."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 12,
+  "option": 3,
+  "old": "Because gyro runs are made inside casing, where the anti-collision problem does not arise.",
+  "new": "Because gyro runs are made inside casing, where collision cannot arise."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 13,
+  "option": 0,
+  "old": "A full implementation of the analysis.",
+  "new": "A full implementation of the analysis, run on every survey."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 14,
+  "option": 1,
+  "old": "The minimum separation factor alone.",
+  "new": "The minimum separation factor alone, since it summarises the whole scan."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reporting-and-its-limits",
+  "ord": 15,
+  "option": 0,
+  "old": "Because relief wells are rare.",
+  "new": "Because relief wells are rare, so the demand does not justify certifying the method."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "About 5 m, which is within the ellipse.",
+  "new": "About 5 m, which is within the ellipse, since one degree is a small angle at any plausible reach."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 9,
+  "option": 0,
+  "old": "The survey error model's weighting functions.",
+  "new": "The survey error model's weighting functions, term by term."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 2,
+  "old": "The six numbers the professional tier computed, recomputed with the clearance parameter set rather than the survey one.",
+  "new": "The professional tier's six numbers, recomputed with the clearance parameter set."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "A complete anti-collision report for the reference well, with a ladder plot and a violation list at every station.",
+  "new": "A full anti-collision report for the reference well, with ladder and violation list."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 11,
+  "option": 2,
+  "old": "Because the pedal radius grows faster than linearly in k, so the factor approaches zero from below asymptotically.",
+  "new": "Because the pedal radius grows faster than linearly in k, approaching zero from below."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 11,
+  "option": 3,
+  "old": "Because the two wells' shared uncertainty is removed at higher confidence, which reduces the combined sigma.",
+  "new": "Because the shared uncertainty is removed at higher confidence, shrinking the sigma."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 0,
+  "old": "Always use the radial distance.",
+  "new": "Always use the radial distance instead of the pedal-curve projection."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "Report only the minimum separation factor.",
+  "new": "Report only the minimum separation factor, for a clean summary."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 2,
+  "old": "A measured distance between two wellbores, expressed as a multiple of the survey tools' stated accuracy.",
+  "new": "A measured distance between two wellbores, as a multiple of the tools' stated accuracy."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 3,
+  "old": "That both start at the same measured depth, so the rows can be compared against each other one for one.",
+  "new": "That both start at the same measured depth, so rows compare one for one."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 0,
+  "old": "The inclination and azimuth directly.",
+  "new": "The inclination and azimuth directly, dialled in as targets from the surface console."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "The dogleg severity falls, because the build has more measured depth available to achieve the same angle change.",
+  "new": "The dogleg severity falls, as the build has more depth to work with."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "Nothing changes downhole, since the target displacement is fixed and the geometry adjusts the hold length only.",
+  "new": "Nothing changes downhole; the geometry adjusts the hold length only."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 0,
+  "old": "The well is heading 042 at total depth.",
+  "new": "The well is heading 042 at total depth, which is the bearing recorded at its last survey station."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 3,
+  "old": "Because grading a difference removes any dependence on the units the two calculations were performed in.",
+  "new": "Because grading a difference removes any dependence on the units used."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "The reference azimuth is undefined.",
+  "new": "The reference azimuth is undefined, because no vertical section plane was ever chosen."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 1,
+  "old": "A tighter dogleg severity limit.",
+  "new": "A tighter dogleg severity limit, since the completion must pass through it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 1,
+  "old": "Drilling an S-profile, in which the drop section brings the well back up before the final hold to target depth.",
+  "new": "Drilling an S-profile, where the drop brings the well back up before target."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "Sidetracking, which restarts the depth reference and produces a discontinuity in the true vertical depth column.",
+  "new": "Sidetracking, which restarts the depth reference and breaks the TVD column."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "Because service companies use proprietary algorithms whose details are not disclosed to the operator on delivery.",
+  "new": "Because service companies use proprietary algorithms they do not disclose."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 0,
+  "old": "Does the file have the right number of rows.",
+  "new": "Does the output file have the right number of rows for the station interval you requested."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "The measured depth at which the two wells are 500 ft apart, since the distance changes along the well path.",
+  "new": "The measured depth where they are 500 ft apart, since the distance varies."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 3,
+  "old": "Whether the two positions were computed with the same survey calculation method and the same station interval.",
+  "new": "Whether both positions used the same calculation method and interval."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "Because the ratio factor is truncated.",
+  "new": "Because the ratio factor is truncated, so each interval's correction is systematically understated."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "The compiler may apply the ratio factor, which will push the reported severity above the limit in the output list.",
+  "new": "The compiler may apply the ratio factor and push reported severity over the limit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "The limit applies to the completion rather than to drilling, so it can be exceeded during drilling without consequence.",
+  "new": "The limit applies to the completion, so drilling can exceed it freely."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "The position of the hole centre.",
+  "new": "The position of the hole centre, which surveys leave for the logging contractor to supply."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "The station interval, since a finer interval lets the compiler resolve the closure condition more precisely.",
+  "new": "The station interval, so the compiler resolves closure more finely."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "The reference azimuth, because the closure condition is evaluated in the vertical section plane the azimuth defines.",
+  "new": "The reference azimuth, which defines the plane closure is tested in."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "Because formation tops are correlated between wells in TVD, so a casing point set in TVD is transferable.",
+  "new": "Because tops are correlated in TVD, so a TVD casing point transfers."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "The dogleg severity column entirely, since severity is only defined over an interval of standard course length.",
+  "new": "The dogleg severity column, which needs a standard course length."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "Because the survey tool has an inclination limit.",
+  "new": "Because the survey tool has an inclination limit beyond which its sensor readings fail."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "It means the arc is always longer than the chord, which is the definition of the ratio the factor expresses.",
+  "new": "It means the arc is always longer than the chord, which the factor expresses."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "The dogleg severity, which is a design parameter and cannot be recovered from positions alone without the method.",
+  "new": "The dogleg severity, which cannot be recovered from positions alone."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "The target definition, since a station list ends at total depth rather than at the geological target it was aimed at.",
+  "new": "The target definition, since the list ends at total depth instead."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "Because the north reference changes.",
+  "new": "Because the north reference changes with the map grid zone of each surface location."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "Which service company set it.",
+  "new": "Which service company set it, and under which of their standard contracts."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "The minimum curvature calculation itself.",
+  "new": "The minimum curvature calculation itself, which the associate tier only introduces."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "That the well was drilled correctly.",
+  "new": "That the well was drilled correctly, since the published example is a real well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-survey-is",
+  "ord": 14,
+  "option": 1,
+  "old": "Because the raw readings are proprietary to the survey contractor and are not delivered.",
+  "new": "Because raw readings are proprietary to the contractor and never delivered."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-minimum-curvature",
+  "ord": 14,
+  "option": 3,
+  "old": "In the vertical section, where the dogleg is smallest and the guard threshold applies.",
+  "new": "In the vertical section, where the guard threshold applies."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-minimum-curvature",
+  "ord": 15,
+  "option": 1,
+  "old": "Recomputing in the other depth unit and confirming the two answers agree exactly.",
+  "new": "Recomputing in the other depth unit and confirming the two answers agree exactly to the foot."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-reading-the-survey-table",
+  "ord": 8,
+  "option": 2,
+  "old": "The planned position and the actual position side by side, so the difference is visible.",
+  "new": "The planned and actual positions side by side, so the difference shows."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-reading-the-survey-table",
+  "ord": 10,
+  "option": 1,
+  "old": "Because a steerable assembly cannot exceed a given severity, so it is a capability limit.",
+  "new": "Because a steerable assembly cannot exceed a given severity."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-reading-the-survey-table",
+  "ord": 10,
+  "option": 3,
+  "old": "Because the limit is written into the drilling contract rather than the well plan.",
+  "new": "Because the limit is written into the drilling contract instead."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-reading-the-survey-table",
+  "ord": 12,
+  "option": 1,
+  "old": "Because a severity with no length is dimensionless.",
+  "new": "Because a severity with no length is dimensionless and cannot be compared at all."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-designing-a-trajectory",
+  "ord": 8,
+  "option": 0,
+  "old": "The S-profile, always.",
+  "new": "The S-profile, always, because its drop section adds extra reach."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-designing-a-trajectory",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the rig's top drive can only initiate a deviation once the string weight exceeds a threshold value.",
+  "new": "Because the top drive can only start a deviation above a threshold string weight."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-designing-a-trajectory",
+  "ord": 10,
+  "option": 3,
+  "old": "The heel of the well, which is by convention the point where the completion's first production port sits.",
+  "new": "The heel, by convention where the completion's first production port sits."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-designing-a-trajectory",
+  "ord": 11,
+  "option": 0,
+  "old": "Because stations are shorter.",
+  "new": "Because stations are shorter to store than the design's analytic curves."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-designing-a-trajectory",
+  "ord": 12,
+  "option": 3,
+  "old": "The build rate divided by the sine of the average inclination, which is how the azimuth term is normalised.",
+  "new": "The build rate divided by the sine of the average inclination."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-designing-a-trajectory",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the compiler applies a smoothing filter that can reduce the design's stated rates below the drilled values.",
+  "new": "Because the compiler smooths the rates below the drilled values."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-designing-a-trajectory",
+  "ord": 13,
+  "option": 3,
+  "old": "Because dogleg severity is only defined between two survey stations, so it cannot be evaluated on a continuous curve.",
+  "new": "Because dogleg is defined only between two stations of a list."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-designing-a-trajectory",
+  "ord": 14,
+  "option": 2,
+  "old": "The true vertical depth at any point, which requires a survey listing rather than the design parameters.",
+  "new": "The true vertical depth at any point, which needs a survey listing instead."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-designing-a-trajectory",
+  "ord": 15,
+  "option": 0,
+  "old": "Near vertical, at low angle.",
+  "new": "Near vertical, at low angle, where the hole has the least displacement."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 7,
+  "option": 3,
+  "old": "That the station interval is fine enough to resolve the joins between the design's sections.",
+  "new": "That the station interval is fine enough to resolve the section joins."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 8,
+  "option": 0,
+  "old": "Because publication is required.",
+  "new": "Because publication is required by the standard before any compiled design can be used."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 9,
+  "option": 2,
+  "old": "The station interval is too fine at that point, so numerical noise in the interpolation has been amplified.",
+  "new": "The station interval is too fine there, so interpolation noise is amplified."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 10,
+  "option": 0,
+  "old": "Because it is a smaller file.",
+  "new": "Because it is a smaller file, and downstream software has strict size limits."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 11,
+  "option": 2,
+  "old": "It inserts a short blending arc whose curvature is the average of the two adjoining sections' curvatures.",
+  "new": "It inserts a blending arc with the average curvature of the two sections."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 11,
+  "option": 3,
+  "old": "It refuses to continue unless the two sections' attitudes match to within the tolerance the design specified.",
+  "new": "It refuses to continue unless the two attitudes match within tolerance."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 12,
+  "option": 0,
+  "old": "Accept it and drill.",
+  "new": "Accept it and drill, since the limit is a guideline the assembly can safely exceed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the mud column follows the hole, so its weight is proportional to the measured depth along that hole.",
+  "new": "Because the mud column follows the hole, so weight scales with measured depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 13,
+  "option": 3,
+  "old": "Because formation tops are correlated between wells using measured depth, which makes TVD the comparison depth.",
+  "new": "Because tops are correlated in measured depth, so TVD is the comparison depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 14,
+  "option": 0,
+  "old": "It must be finely sampled.",
+  "new": "It must be finely sampled, with a station at least every few feet along the entire hole length."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-compiling-and-checking",
+  "ord": 15,
+  "option": 0,
+  "old": "Because the design expires.",
+  "new": "Because the design expires once the rig moves on and the plan has to be reissued."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 7,
+  "option": 0,
+  "old": "A surface reference position.",
+  "new": "A surface reference position to measure from."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 8,
+  "option": 1,
+  "old": "A separation factor between two wells, computed at the point where they come closest together.",
+  "new": "A separation factor between two wells, at the point where they come closest."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 2,
+  "old": "Because the tangential result on its own cannot be checked without knowing the reference method used alongside it.",
+  "new": "Because the tangential result cannot be checked without the reference method."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the error is more precisely defined than the depth itself, which depends on the reference datum chosen.",
+  "new": "Because the error is better defined than the depth, which depends on the datum."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 0,
+  "old": "That the well can be drilled.",
+  "new": "That the well can be drilled with the assembly and rig that are specified."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "Recompute every column yourself.",
+  "new": "Recompute every column yourself from the three measured columns at each station."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "The minimum curvature method.",
+  "new": "The minimum curvature method, which is left to the planning course that follows."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the calculation is sensitive to the order in which the stations are processed through the interval loop.",
+  "new": "Because the result depends on the order the stations are processed in."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "Because position depends on the inclination convention, and some listings measure inclination from horizontal.",
+  "new": "Because some listings measure inclination from horizontal instead."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "It removes the need for surveys.",
+  "new": "It removes the need for surveys, since the design already fixes where the hole goes."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 2,
+  "old": "That the tangential method should never be used, since its error is systematic rather than random in nature.",
+  "new": "That the tangential method should never be used, as its error is systematic."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 2,
+  "old": "It is the worst case only in the lateral direction, which is the one anti-collision is concerned with.",
+  "new": "It is the worst case only laterally, which is the direction anti-collision cares about."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "That the ellipse describes the real well.",
+  "new": "That the ellipse describes the real well, since the workbook was built from field data."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 3,
+  "old": "That the difference is within the model's own uncertainty, so neither can be preferred over the other.",
+  "new": "That the difference is within the model's own uncertainty, so neither is preferred."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "A better estimate of the depth scale factor, since the range of attitudes exercises the stretch term over its full span.",
+  "new": "A better depth scale factor, since the stretch term is exercised fully."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "A direct measurement of the declination, since the field direction is sampled from several hole orientations.",
+  "new": "A direct measurement of declination, from several hole orientations."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 1,
+  "old": "The vertical inclination limit, which switches formulation where the horizontal field projection becomes small.",
+  "new": "The vertical inclination limit, where the formulation switches."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 2,
+  "old": "The depth-only flag, which excludes the depth sources from any azimuth-dependent part of the calculation.",
+  "new": "The depth-only flag, which excludes depth sources from azimuth terms."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 0,
+  "old": "Because it is corrected at surface.",
+  "new": "Because it is corrected at surface after every run, using the tool's calibration certificate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 1,
+  "old": "The well's ellipse can be ignored.",
+  "new": "The well's ellipse can be ignored, since the target term swamps it entirely."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "In the vertical section above kickoff.",
+  "new": "In the vertical section above kickoff, where most of the measured depth is usually drilled."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "Because it is a random source, unlike the other inclination terms, which are systematic over the run.",
+  "new": "Because it is random, unlike the other inclination terms, which are systematic."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "No, and the two give the same ranking, since the lateral component dominates the trace on a horizontal well.",
+  "new": "No, and both rank alike, since lateral dominates the trace on a horizontal well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "The second, because fewer stations means fewer opportunities for a gross error to enter the survey.",
+  "new": "The second, since fewer stations give a gross error fewer chances to enter."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "That the north variance is smaller.",
+  "new": "That the north variance is smaller than the east variance at that particular survey station."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "Because azimuth errors are horizontal.",
+  "new": "Because azimuth errors are horizontal, and lateral is built from azimuth terms alone."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 0,
+  "old": "Nothing, the plan view is standard.",
+  "new": "Nothing, the plan view is standard, and it is how every clearance report judges wells passing by."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "A name beginning with the letter D, which the standard's coding scheme reserves for the depth sources.",
+  "new": "A name beginning with D, which the coding scheme reserves for depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "A weighting function whose value does not change with inclination or azimuth at any station in the survey.",
+  "new": "A weighting function unchanged by inclination or azimuth at every station."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "Because depth error is not modelled.",
+  "new": "Because depth error is not modelled for vertical wells, only for the deviated ones."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "The correlation between inclination and azimuth errors at the same station, which arises from the shared accelerometers.",
+  "new": "The inclination-azimuth correlation from the shared accelerometers."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "The contribution of the ratio factor, which couples each interval to the dogleg it shares with its neighbour.",
+  "new": "The ratio factor, coupling each interval to the dogleg it shares."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "Compute the horizontal ellipse.",
+  "new": "Compute the horizontal ellipse from the total."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "Because the magnetic weighting functions are defined against true north, so the conversion must precede them.",
+  "new": "Because the magnetic weighting functions are defined against true north."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "Because the declination is a global source and is therefore applied once at the start rather than per station.",
+  "new": "Because declination is global, so it is applied once at the start."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "Additional non-magnetic collars.",
+  "new": "Additional non-magnetic collars, since they are already on the rig's inventory."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "The number is meaningless without a direction, since the ellipse is nine times longer than it is wide.",
+  "new": "Meaningless without a direction, as the ellipse is nine times longer than wide."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "Because a horizontal well is the only geometry in which the borehole frame is fully defined and unambiguous.",
+  "new": "Because only a horizontal well has a fully defined, unambiguous borehole frame."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Because the published workbook only reports values for wells that reach horizontal, so no other geometry can be checked.",
+  "new": "Because the workbook only reports values for wells that reach horizontal."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "An error in the propagation mode assignment, which affects systematic sources more strongly at greater depth.",
+  "new": "An error in the propagation mode assignment, which bites systematic sources deeper."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "Compare against the map-frame diagonal.",
+  "new": "Compare against the map-frame diagonal, entry by entry, at each station."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "The covariance is a worst case, so a well inside its ellipse can be treated as safe without further analysis.",
+  "new": "The covariance is a worst case, so a well inside its ellipse can be treated as safe."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "The floating point precision used.",
+  "new": "The floating point precision used, since the capstone fields need sixteen digits."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-a-position-is-uncertain",
+  "ord": 7,
+  "option": 0,
+  "old": "East-west at low dip.",
+  "new": "East-west at low dip, across the field lines."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-a-position-is-uncertain",
+  "ord": 9,
+  "option": 1,
+  "old": "Linearly with the number of stations.",
+  "new": "Linearly with the number of stations in the survey run."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-a-position-is-uncertain",
+  "ord": 10,
+  "option": 0,
+  "old": "As the square root of the count.",
+  "new": "As the square root of the count, since each station's value is independent."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-a-position-is-uncertain",
+  "ord": 11,
+  "option": 1,
+  "old": "It is a property of the tool that is fixed for the duration of one survey run but differs between runs.",
+  "new": "It is a property of the tool, fixed for one run but differing between runs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-a-position-is-uncertain",
+  "ord": 12,
+  "option": 3,
+  "old": "Because the minimum curvature assumption is the dominant error, and it does not improve as the interval shortens.",
+  "new": "Because the minimum curvature assumption dominates and does not improve with interval."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-a-position-is-uncertain",
+  "ord": 13,
+  "option": 0,
+  "old": "Declination and grid convergence.",
+  "new": "Declination and grid convergence for the well's location."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-a-position-is-uncertain",
+  "ord": 14,
+  "option": 2,
+  "old": "Because the dip angle is subtracted from the measured inclination to give the true angle relative to the earth's field.",
+  "new": "Because dip is subtracted from the measured inclination to give the true angle."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-a-position-is-uncertain",
+  "ord": 14,
+  "option": 3,
+  "old": "Because dip determines the declination, which is the correction applied to convert magnetic azimuth into true azimuth.",
+  "new": "Because dip determines the declination used to convert to true azimuth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-a-position-is-uncertain",
+  "ord": 15,
+  "option": 1,
+  "old": "A corrected position, obtained by subtracting the estimated bias of each error source from the computed position.",
+  "new": "A corrected position, with each source's estimated bias removed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-a-position-is-uncertain",
+  "ord": 15,
+  "option": 2,
+  "old": "A confidence interval on measured depth, inclination, and azimuth separately, which the user then combines.",
+  "new": "Separate confidence intervals on depth, inclination, and azimuth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 7,
+  "option": 3,
+  "old": "The bias contribution and the scale factor contribution, which are propagated under different rules.",
+  "new": "The bias and scale factor contributions, propagated under different rules."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 8,
+  "option": 2,
+  "old": "A single scalar variance at each station, which the model then sums across sources to give the total.",
+  "new": "A single scalar variance per station, which the model sums across sources."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 9,
+  "option": 1,
+  "old": "Because true north is easier to compute.",
+  "new": "Because true north is easier to compute, needing no field model once the survey is prepared."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 10,
+  "option": 0,
+  "old": "The model refuses to run.",
+  "new": "The model refuses to run, since the reference is checked against the location."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 11,
+  "option": 1,
+  "old": "A synthetic well generated at random, used to confirm that the model produces finite output over the full range.",
+  "new": "A random synthetic well, confirming finite output over the full range."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 11,
+  "option": 3,
+  "old": "The operator's own offset well data, against which the service company calibrates its tool error parameters.",
+  "new": "The operator's own offset data, used to calibrate tool error parameters."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 12,
+  "option": 1,
+  "old": "Because the weighting functions cannot be derived analytically, so the reference values are the only definition available.",
+  "new": "Because the weighting functions cannot be derived, so values define them."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 12,
+  "option": 2,
+  "old": "Because the model's parameters vary by tool, and the case fixes one parameter set that everybody can use.",
+  "new": "Because parameters vary by tool, and the case fixes one set for everyone."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 13,
+  "option": 1,
+  "old": "To about one percent, which is typical.",
+  "new": "To about one percent, which is typical of two independent implementations of the same published paper."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 14,
+  "option": 0,
+  "old": "Because both used the same code.",
+  "new": "Because both used the same code, copied from the maintaining group's reference workbook."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-iscwsa-model",
+  "ord": 15,
+  "option": 0,
+  "old": "That the code is free of defects.",
+  "new": "That the code is free of defects, since every source was checked at every single station."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-covariance",
+  "ord": 7,
+  "option": 1,
+  "old": "Azimuth errors, since highside is perpendicular to the hole and azimuth controls the perpendicular directions.",
+  "new": "Azimuth errors, which control the perpendicular directions."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-covariance",
+  "ord": 7,
+  "option": 3,
+  "old": "The declination, which is a global source and therefore contributes to every direction equally at every station.",
+  "new": "The declination, a global source hitting every direction."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-covariance",
+  "ord": 8,
+  "option": 0,
+  "old": "Because it sets the lateral length.",
+  "new": "Because it sets the lateral length the geosteering team is allowed to drill in pay."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-covariance",
+  "ord": 10,
+  "option": 0,
+  "old": "Because the vertical error is small.",
+  "new": "Because the vertical error is small next to the horizontal error on most wells."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-covariance",
+  "ord": 11,
+  "option": 0,
+  "old": "The azimuth of the major axis.",
+  "new": "The azimuth of the major axis entirely."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-covariance",
+  "ord": 12,
+  "option": 2,
+  "old": "Because the eigenvalue decomposition returns the axes in order, and the along-hole variance is always the second one.",
+  "new": "Because the eigen-decomposition returns axes in order, along hole always second."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-covariance",
+  "ord": 15,
+  "option": 1,
+  "old": "Because different confidence factors correspond to different error models, and the model must be identifiable.",
+  "new": "Because each confidence factor implies a different error model."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-covariance",
+  "ord": 15,
+  "option": 3,
+  "old": "Because the factor differs between the semi-major and semi-minor axes, so both must be quoted separately.",
+  "new": "Because the factor differs between the two axes, so both are quoted."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-budget",
+  "ord": 7,
+  "option": 2,
+  "old": "It scales every position by a constant factor, which grows the whole trajectory outward from the surface location.",
+  "new": "It scales every position by a constant, growing the trajectory outward."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-budget",
+  "ord": 7,
+  "option": 3,
+  "old": "It affects only the true vertical depth column, since measured depth does not enter the horizontal accumulation.",
+  "new": "It affects only the TVD column, since measured depth skips the horizontal sum."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-budget",
+  "ord": 8,
+  "option": 0,
+  "old": "Evenly across all three directions.",
+  "new": "Evenly across all three directions, since depth has no preferred axis."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-budget",
+  "ord": 9,
+  "option": 1,
+  "old": "Because vertical wells are surveyed less often.",
+  "new": "Because vertical wells are surveyed less often, so depth error has less to act on."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-budget",
+  "ord": 10,
+  "option": 0,
+  "old": "A more accurate magnetometer.",
+  "new": "A more accurate magnetometer, calibrated for the local magnetic field."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-budget",
+  "ord": 11,
+  "option": 3,
+  "old": "Runs the error model at every station and selects the parameter set that minimises the total covariance.",
+  "new": "Runs the model at every station and picks the set minimising the covariance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-budget",
+  "ord": 12,
+  "option": 1,
+  "old": "The dependence on magnetic north entirely, since the surface magnetometer provides an independent true azimuth.",
+  "new": "The dependence on magnetic north entirely, via a surface azimuth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-budget",
+  "ord": 12,
+  "option": 2,
+  "old": "The accelerometer sag term, by giving an independent measurement of the tool's attitude at the surface.",
+  "new": "The accelerometer sag term, via an independent surface attitude."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-budget",
+  "ord": 13,
+  "option": 1,
+  "old": "The report should use the deepest station.",
+  "new": "The report should use the deepest station, where the total covariance is largest."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-budget",
+  "ord": 15,
+  "option": 3,
+  "old": "Because different sources use different propagation modes, which cannot be combined into a single matrix.",
+  "new": "Because different propagation modes cannot be combined into one matrix."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-using-the-number",
+  "ord": 10,
+  "option": 0,
+  "old": "Because percentages are rounded.",
+  "new": "Because percentages are rounded, so the factor behind them cannot be recovered exactly."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-using-the-number",
+  "ord": 11,
+  "option": 0,
+  "old": "A source whose magnitude exceeds its bound.",
+  "new": "A source whose magnitude exceeds its bound, which the model flags and rescales automatically."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-using-the-number",
+  "ord": 12,
+  "option": 0,
+  "old": "It includes it as a global source.",
+  "new": "It includes it as a global source shared by every well at the site."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-using-the-number",
+  "ord": 13,
+  "option": 1,
+  "old": "Because the radius is a source of error.",
+  "new": "Because the radius is a source of error, added in quadrature with the other survey error sources."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-using-the-number",
+  "ord": 14,
+  "option": 2,
+  "old": "Because the model's parameter magnitudes are chosen conservatively, so the true spread is usually smaller than reported.",
+  "new": "Because the magnitudes are conservative, so the true spread is usually smaller."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-using-the-number",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the confidence factor is a choice, and any ellipse can be enlarged by choosing a larger one.",
+  "new": "Because k is a choice, and any ellipse grows with a larger one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-using-the-number",
+  "ord": 15,
+  "option": 1,
+  "old": "The difference between the model's answer and the answer a competing model gives on the same well and tool.",
+  "new": "The difference between this model's answer and a competing model's."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-using-the-number",
+  "ord": 15,
+  "option": 3,
+  "old": "The residual after the published validation workbook has been reproduced to machine precision at every station.",
+  "new": "The residual left after the workbook has been reproduced exactly."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 8,
+  "option": 2,
+  "old": "The non-magnetic spacing required for a given hole section at a stated inclination and azimuth.",
+  "new": "The non-magnetic spacing needed for a given hole section."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "option": 1,
+  "old": "Because the azimuth is measured, not derived.",
+  "new": "Because the azimuth is measured directly, not derived."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "It must state a total field and dip that match the model's default values rather than the fixture's.",
+  "new": "It must use the model's default field and dip rather than the fixture's."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "Twelve, of which one is depth-only.",
+  "new": "Twelve, of which one is depth-only, the scale factor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 1,
+  "old": "Always quote the budget as percentages rather than absolute variances, since percentages are comparable between wells.",
+  "new": "Always quote it as percentages, since percentages compare between wells."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 2,
+  "old": "Always compute the budget at the shallowest station, where the sources are most nearly independent of geometry.",
+  "new": "Always budget at the shallowest station, where geometry matters least."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "Always report at k equal to one.",
+  "new": "Always report at k equal to one, so the numbers are plain standard deviations."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "A more accurate error model revision.",
+  "new": "A more accurate error model revision, with updated sources."
+ }
+]
