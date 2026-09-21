@@ -45,6 +45,12 @@
  * pressure psia, temperature degR, area ft2, rate Mscf/d.
  */
 
+/** Own-property preset lookup. `TABLE[key]` walks the prototype chain, so
+ *  'constructor', 'toString', 'valueOf', 'hasOwnProperty' and '__proto__'
+ *  are "found" in every object literal and walk through a falsy guard. */
+const ownPreset = (table, key) => (typeof key === 'string' || typeof key === 'number') && Object.prototype.hasOwnProperty.call(table, key);
+
+
 /** Standard conditions the gas industry meters at. */
 export const P_STANDARD_PSIA = 14.7;
 export const T_STANDARD_R = 519.67;
@@ -150,7 +156,7 @@ export const criticalVelocity = ({
   correlation = 'turner', sigmaDyneCm, rhoLiquidLbFt3, pPsia, tempR, z, gasSg,
   dragCoefficient, criticalWeber,
 }) => {
-  const adjustment = LOADING_ADJUSTMENT[correlation];
+  const adjustment = ownPreset(LOADING_ADJUSTMENT, correlation) ? LOADING_ADJUSTMENT[correlation] : undefined;
   if (!adjustment) {
     return { ok: false, error: `Unknown loading correlation "${correlation}". Use turner or coleman.` };
   }

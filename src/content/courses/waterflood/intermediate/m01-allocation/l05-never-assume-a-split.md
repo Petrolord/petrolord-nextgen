@@ -2,7 +2,7 @@
 
 Ask the engine for injection advice on a pattern that has no allocation routed to it and it returns this:
 
-> withheld: true, reason: "No allocation factors route injection to this pattern. Define the injector-producer split first; even splits are never assumed."
+> withheld: true, reason: 'No allocation factors route injection to "this pattern" , so define the injector-producer split first; even splits are never assumed.'
 
 Not a number. Not a null that a spreadsheet will render as zero. A refusal with a reason. This lesson is about why that is the right design, because it is a design decision that costs something and it is worth knowing what it buys.
 
