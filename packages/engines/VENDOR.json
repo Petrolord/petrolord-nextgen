@@ -866,7 +866,7 @@
       "kind": "differing",
       "group": "3-production-revendor",
       "vendoredSha": "ea589c2507e31dbc584fc3a8bb5def5e4fa7d1b5",
-      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/production/hydrateInhibition.js",
@@ -901,7 +901,7 @@
       "kind": "differing",
       "group": "3-production-revendor",
       "vendoredSha": "a25a5a2ff1132d01f0561fb264ea317547524be5",
-      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/production/nodal.js",
@@ -950,7 +950,7 @@
       "kind": "differing",
       "group": "3-production-revendor",
       "vendoredSha": "f06289fff8d8c95b97f09cb3f5e7d8f492f6f380",
-      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/economics/afe.js",
@@ -971,7 +971,7 @@
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "94675046e9e8f909a69776532a435a40a7f629ce",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/economics/fdp/facilitiesCalculations.js",
@@ -999,7 +999,7 @@
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "91e8eada5637361a5e9107ac49f26e67d864c386",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/economics/montecarlo.ts",
@@ -1041,7 +1041,7 @@
       "kind": "differing",
       "group": "5-unaudited-difference",
       "vendoredSha": "10ceb0585b78234a6e54d6e82e2ae13fd967d16d",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/mapping/surface.js",
@@ -1055,7 +1055,7 @@
       "kind": "differing",
       "group": "5-unaudited-difference",
       "vendoredSha": "3596975cc551af2d8b4c138e695f3a42f27b4b3b",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/petrophysics/crossplot.js",
@@ -1097,14 +1097,14 @@
       "kind": "differing",
       "group": "5-unaudited-difference",
       "vendoredSha": "250c3f8691b68dceb10f95d5e925241cdc8adcff",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "lib/gridding/surfaceImport.js",
       "kind": "differing",
       "group": "5-unaudited-difference",
       "vendoredSha": "235557414546bedae566ed9e357a01a4626fff2a",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "__tests__/drilling.cementing.test.js",
