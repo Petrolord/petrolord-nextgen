@@ -12,7 +12,7 @@ Two reasons sit in that row and both matter. The requirement lives in a normativ
 
 ## The scope question underneath it
 
-The routes people argue about, the one that starts from failure mode data and the one that starts from proven in use evidence, are defined in IEC 61508-2. This engine works to IEC 61511 scope for the process sector, so the route argument is out of scope here even before the licensing question arises. Both reasons point the same way, and the engine takes the same action for either.
+The routes people argue about, the one that starts from failure mode data and the one that starts from proven in use evidence, sit in the same normative material, IEC 61511-1 and IEC 61508-2, with no public source to check an implementation against. The engine leaves them alone for the same reason it leaves the rest of the check alone.
 
 ## What a learner must carry away
 

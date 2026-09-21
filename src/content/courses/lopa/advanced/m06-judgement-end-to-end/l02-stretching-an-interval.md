@@ -28,7 +28,7 @@ From one year to two years the PFDavg grows from 0.001792971954 to 0.00406221864
 
 ## Stretching everything together
 
-Notice what was stretched. Every proof test interval in the function moved at once, which is what a deferred turnaround actually does. That is a harsher change than stretching one subsystem, because all three shares of the sum grow together, and the share that grows fastest is the one that was already largest. A planner who asks about the valves alone is asking a narrower question, and the answer to it will be longer than the answer above. Both questions are legitimate and they have different answers, so a note records which one was asked.
+Notice what was stretched. Every proof test interval in the function moved at once, which is what a deferred turnaround actually does. That is a harsher change than stretching one subsystem, because all three shares of the sum grow together, and the two redundant subsystems each grow by more than double. A planner who asks about the valves alone is asking a narrower question, and the answer to it will be longer than the answer above. Both questions are legitimate and they have different answers, so a note records which one was asked.
 
 ## How to answer the request
 

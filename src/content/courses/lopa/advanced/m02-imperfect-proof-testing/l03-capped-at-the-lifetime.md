@@ -18,7 +18,7 @@ The engine already refuses a lifetime shorter than the proof test interval, in i
 
 ## Reading a capped answer in a plan
 
-A capped answer is not a licence to stop testing until the overhaul. It says that the target does not constrain the interval on this subsystem, so the interval will be set by something else: a regulatory schedule, a turnaround window, a manufacturer's requirement, or the simple wish to find a failure before it has been there for ten years. The engine has answered the question it was asked and has left the rest of the decision where it belongs. A verification note records the state alongside the number, so a later reader can see that 87600.000000 hours was the boundary of the model and not the boundary of good practice.
+A capped answer is not a licence to stop testing until the overhaul. It says that the target does not constrain the interval on this subsystem, so the interval will be set by something else: a regulatory schedule, a turnaround window, a manufacturer's requirement, or the simple wish to find a failure before it has been there for ten years. The engine has answered the question it was asked and has left the rest of the decision where it belongs. A verification note records the state alongside the number, so a later reader can see that 87600.000000 hours was the boundary of the model, which says nothing about good practice.
 
 ## Exercise
 

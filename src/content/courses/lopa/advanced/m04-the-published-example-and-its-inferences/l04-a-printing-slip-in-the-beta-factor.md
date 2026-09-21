@@ -15,9 +15,9 @@ The printed value is 6.76E-04. At the printed beta factor the engine returns 0.0
 
 ## Why 15 percent is the value the table meant
 
-The table is headed as one that applies the MooN multiplication to the beta factor. That multiplication raises the base beta factor by half for the voted architectures, which takes 10 percent to 15 percent. So the heading of the table describes an operation that turns the printed figure into the reproducing figure. The same conclusion is confirmed elsewhere in the paper's own material: the pressure transmitter row without coverage, computed at a beta factor of 0.15, returns 0.000344085754 and reproduces its own printed 3.44E-04.
+The table is headed as one that applies the MooN multiplication to the beta factor. That multiplication raises the base beta factor by half for the voted architectures, which takes 10 percent to 15 percent. So the heading of the table describes an operation that turns the printed figure into the reproducing figure. The same conclusion is confirmed elsewhere in the paper's own material: the pressure transmitter row of the raised beta factor table, computed with the beta factor and betaD at 0.15, returns 0.000344085754 and reproduces its own printed 3.44E-04.
 
-Two independent rows reproduce at 15 percent. Neither reproduces at 10 percent. The heading names the operation that produces 15 percent from 10 percent. The reading that the printed 10 percent is a slip in the SOURCE is the one the golden records.
+Two independent rows reproduce at 15 percent. Neither printed figure reproduces at 10 percent. The heading names the operation that produces 15 percent from 10 percent. The reading that the printed 10 percent is a slip in the SOURCE is the one the golden records.
 
 ## One row that was left out
 

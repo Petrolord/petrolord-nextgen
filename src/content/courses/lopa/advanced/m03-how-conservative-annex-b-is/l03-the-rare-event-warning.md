@@ -16,7 +16,7 @@ The first is the rare event warning. The other two say that an input the analyst
 
 ## Where the warning threshold sits
 
-The warning fires when the undetected failure rate times the interval goes above 0.1. That is not a boundary between right and wrong; it is where the overstatement becomes large enough to mention. The golden's longest interval case shows the size of it. Its failure rate times interval is 0.438000, and its engine PFDavg of 0.219000000000 sits 15.12 percent above the time dependent value of 0.190241513373. Past the threshold the answer is still an answer, and it is still the number a site is assessed against, but a verification note should carry the warning text with it so a reader knows the conservatism was flagged by the tool and not discovered later.
+The warning fires when the undetected failure rate times the interval goes above 0.1 on a perfectly tested subsystem; below full coverage the engine uses the lifetime in place of the interval. That is not a boundary between right and wrong; it is where the overstatement becomes large enough to mention. The golden's longest interval case shows the size of it. Its failure rate times interval is 0.438000, and its engine PFDavg of 0.219000000000 sits 15.12 percent above the time dependent value of 0.190241513373. Past the threshold the answer is still an answer, and it is still the number a site is assessed against, but a verification note should carry the warning text with it so a reader knows the conservatism was flagged by the tool before anyone had to discover it.
 
 ## Past the warning is the refusal
 

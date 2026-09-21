@@ -20,7 +20,7 @@ Everything this tier teaches ends in a document. The verification note is what a
 
 ## Why the target appears twice
 
-The required PFDavg and the band are two different facts and the note carries both. The IDU function achieves 0.001792971954 with a risk reduction factor of 557.733208, which is SIL 2. The ORONI row at its tolerable mitigated event likelihood requires 0.007407407407, which is also SIL 2. Writing only the two bands would say the function matches the requirement and would leave out the comparison that actually settles it. Writing both numbers lets a reader see that 0.001792971954 is comfortably below 0.007407407407 and by how much.
+The required PFDavg and the band are two different facts and the note carries both. The IDU function achieves 0.001792971954 with a risk reduction factor of 557.733208, which is SIL 2. The ORONI row at a tolerable mitigated event likelihood of 1e-7 per year requires 0.007407407407, which is also SIL 2. Writing only the two bands would say the function matches the requirement and would leave out the comparison that actually settles it. Writing both numbers lets a reader see that 0.001792971954 is comfortably below 0.007407407407 and by how much.
 
 ## Why every rate needs a source line
 

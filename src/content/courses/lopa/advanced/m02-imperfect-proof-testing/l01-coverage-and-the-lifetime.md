@@ -2,7 +2,7 @@
 
 {{panel:lp-proof-test}}
 
-A proof test that finds every dangerous undetected failure is an idealisation. A real test strokes a valve part way, or tests the trip without the final element, or exercises a transmitter without proving the impulse line. The fraction it does reveal is the proof test coverage. The failures it leaves behind stay in the equipment until the item is restored as new, which happens at the lifetime T2 and not at the next proof test. Coverage and the lifetime therefore arrive together, and the engine will not accept one without the other.
+A proof test that finds every dangerous undetected failure is an idealisation. A real test strokes a valve part way, or tests the trip without the final element, or exercises a transmitter without proving the impulse line. The fraction it does reveal is the proof test coverage. The failures it leaves behind stay in the equipment until the item is restored as new, which happens at the lifetime T2, however many proof tests come first. Coverage and the lifetime therefore arrive together, and the engine will not accept one without the other.
 
 ## The split the engine makes
 

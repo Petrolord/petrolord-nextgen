@@ -24,7 +24,7 @@ FOURTH, a 2oo2 takes no credit for common cause. Annex B carries no beta factor 
 | dolan-valve-1oo2-ptc85 | 0.002713783083 | 0.002638288099 | 2.862e-2 |
 | tr84-2oo2 | 0.017520000000 | 0.017317146501 | 1.171e-2 |
 
-Compare each pressure transmitter row with the coverage version of itself. The 2oo3 with a perfect test departs by 8.000e-4; the same subsystem at a coverage of 0.9 departs by 9.482e-3. The valve goes from 4.770e-3 to 2.862e-2 when its coverage drops. The third departure is doing that, and it is the largest single effect in the set once the rare event assumption is respected.
+Compare each pressure transmitter row with the coverage version of itself. The 2oo3 with a perfect test departs by 8.000e-4; the same subsystem at a coverage of 0.9 departs by 9.482e-3. The valve goes from 4.770e-3 to 2.862e-2 when its coverage drops. The third departure is doing that.
 
 ## What to do with this knowledge
 

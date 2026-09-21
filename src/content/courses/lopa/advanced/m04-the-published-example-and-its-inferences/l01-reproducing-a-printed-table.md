@@ -30,7 +30,7 @@ A reproduction is also a check on the series sum. The five subsystem figures add
 
 ## The table did not print everything it used
 
-Three inputs had to be INFERRED before the printed figures came back. One is the restoration time after a proof test, taken equal to the restoration time of a detected failure. One is the lifetime in the coverage table, which the paper does not print. One is a common cause figure where the printed value and the reproducing value disagree. Each of the three is a fact about the published SOURCE, and the next three lessons take them one at a time. The golden records the two of them that its source lines cover as INFERRED, so a reader of the evidence can see the judgement and weigh it.
+Three inputs had to be INFERRED before the printed figures came back. One is the restoration time after a proof test, taken equal to the restoration time of a detected failure. One is the lifetime in the coverage table, which the paper does not print. One is a common cause figure where the printed value and the reproducing value disagree. Each of the three is a fact about the published SOURCE, and the next three lessons take them one at a time. The golden's source lines record two of them, the lifetime as INFERRED and the beta factor as a slip, so a reader of the evidence can see the judgement and weigh it.
 
 ## What was not reproduced
 

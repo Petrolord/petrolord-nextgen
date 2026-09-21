@@ -22,7 +22,7 @@ The last column is the check on the first. At 3609.141022 hours the valves achie
 
 ## The target is the required figure, never the band
 
-Notice what was typed into the search. A target of 0.005 gives 27640.443736 hours and a target of 0.01 gives 46473.426980 hours, so the answer moves by more than sixteen thousand hours between two figures that sit in the same decade. A SIL band is a decade wide, so a planner who searched against a band ceiling would be searching against the loosest number the band allows. The required PFDavg from the layer of protection analysis is the number that goes in, and the interval that comes out is only as defensible as the target that produced it.
+Notice what was typed into the search. A target of 0.005 gives 27640.443736 hours and a target of 0.01 gives 46473.426980 hours, so the answer moves by more than eighteen thousand hours between two targets only a factor of two apart. A SIL band is a decade wide, so a planner who searched against a band ceiling would be searching against the loosest number the band allows. The required PFDavg from the layer of protection analysis is the number that goes in, and the interval that comes out is only as defensible as the target that produced it.
 
 ## What the interval does not license
 
