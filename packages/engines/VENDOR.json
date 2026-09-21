@@ -2,7 +2,7 @@
   "$comment": "Vendoring contract for packages/engines. Checked by tools/check-vendored-engines.mjs; see that file for the model. Every deviation from canonical is enumerated below with a reason, and every differing or extra path is pinned to the blob currently vendored, so a second drift on an already-known path still fails.",
   "canonical": {
     "repo": "git@github.com:Petrolord/petrolord-engines.git",
-    "commit": "16fd6c96dcb91f372d2d76b4ecd2c7fa4cbd4b4f",
+    "commit": "e972ae755ed8599031e430968b95853a9e163f86",
     "manifest": "VENDOR.manifest"
   },
   "floors": {
