@@ -38,4 +38,4 @@ A heat flux without its chain is hard to check. A consequence note gives the hea
 
 ## Exercise
 
-Take the 60 m row. Multiply the surface emissive power, the Fmax and the stated transmissivity of 0.8 on your calculator, keeping every digit, and compare your product with the engine's 3699.568657. Then work the fire panel on ERHA at 60 m and change the surface emissive power method to Mudan. Record the new heat flux and explain its change using the product.
+Take the 60 m row. Multiply the surface emissive power, the Fmax and the stated transmissivity of 0.8 on your calculator, keeping every digit, and compare your product with the engine's 3699.568657. The heat flux view runs the sooty method only, so make the Mudan case by hand: read ERHA's Mudan power in the panel's first view, multiply it by the same Fmax and 0.8, and explain the change in the heat flux using the product.

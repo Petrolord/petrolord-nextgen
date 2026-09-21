@@ -2,7 +2,7 @@
 
 {{panel:cq-fire}}
 
-Every function in the engine returns a result or a refusal. A refusal names the field that caused it and says why in the engine's own words, and it carries no number. The fire half of the engine has its own set, and each one guards a place where a formula would otherwise return a plausible number that means nothing. This lesson gathers the six a professional meets most often, quoted exactly as the engine returns them.
+Every function in the engine returns a result or a refusal. A refusal names the field that caused it and says why in the engine's own words, and it carries no number. The fire half of the engine has its own set, and most of them guard a place where a formula would otherwise return a plausible number that means nothing. This lesson gathers the six a professional meets most often, quoted exactly as the engine returns them.
 
 ## A boiling point below ambient
 
@@ -52,4 +52,4 @@ The way forward is written into the message: state your own asymptote and k beta
 
 ## Exercise
 
-Work the fire panel to produce each of the six refusals above, one at a time, starting from ERHA or the stated view factor flame. For each, write down the input you changed, the field the panel named, and one sentence on what you would state in a consequence note to proceed.
+Work the fire panel to produce four of the refusals above, one at a time, starting from ERHA or the stated view factor flame: the viscosity, the overhang, the Bagster band and the distance search. For each, write down the input you changed, the field the panel named, and one sentence on what you would state in a consequence note to proceed. The panel offers neither the Burgess method nor a fuel outside its list, so for those two write down the call that would draw each refusal instead.

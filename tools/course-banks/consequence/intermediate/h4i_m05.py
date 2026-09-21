@@ -21,7 +21,7 @@ q(3,
  ["A transmissivity just above 0.850165, extrapolated from the 10 m row and flagged as a warning",
   "A transmissivity of exactly one, because the engine caps the fit wherever it would exceed one",
   "A refusal naming transmissivity, because the distance search needs a fixed value to run on"],
- "The engine refuses outside 1e4 to 1e5 N/m in its own words: \"pathLengthM: pw x lies outside 1e4 to 1e5 N/m, where the YB advises against the Bagster fit: supply a transmissivity from another source\". It neither extrapolates nor caps: below about 2.5e3 N/m the fit would exceed one, which is part of why the band exists. The refusal naming transmissivity belongs to the distance search.")
+ "The engine refuses outside 1e4 to 1e5 N/m in its own words: \"pathLengthM: pw x lies outside 1e4 to 1e5 N/m, where the YB advises against the Bagster fit: supply a transmissivity from another source\". It neither extrapolates nor caps: the band is where the Yellow Book advises the fit, and below about 2.5e3 N/m the fit would even exceed one. The refusal naming transmissivity belongs to the distance search.")
 
 q(0,
  "In the Bagster fit, what is the path length x measured between?",
@@ -79,7 +79,7 @@ q(0,
  ["Bagster needs a humidity input the distance search function has no argument for, so it cannot be used",
   "The transmissivity is fixed at 0.8 inside the search, so any value a caller supplies is rejected outright",
   "The search runs on the point source form, which carries its own transmissivity and needs no stated one"],
- "Section 20 gives the reason: a root search would walk out of the Bagster band, so the engine refuses in its own words, \"transmissivity: a fixed transmissivity in (0, 1] is required for a distance search\". The 0.8 in the ERHA chain is a stated teaching input, never a built in value. The search is on the solid flame heat flux; the engine exports no point source model at all.")
+ "Section 20 gives the reason: a root search would walk out of the Bagster band, so the engine refuses in its own words, \"transmissivity: a fixed transmissivity in (0, 1] is required for a distance search\". The search passes every argument of the chain through, a water vapour partial pressure included, so no humidity argument is missing. The 0.8 in the ERHA chain is a stated teaching input, never a built in value. The search is on the solid flame heat flux; the engine exports no point source model at all.")
 
 q(2,
  "What flame base radius does the solid flame chain use in wind, and how does that compare with the Yellow Book's worked step?",

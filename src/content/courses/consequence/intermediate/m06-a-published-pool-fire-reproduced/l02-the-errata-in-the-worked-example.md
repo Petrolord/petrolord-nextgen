@@ -37,4 +37,4 @@ An erratum here is a printing error in a published source, found by computing th
 
 ## Exercise
 
-Using the example's wind of 5 m/s and the engine's gravity constant, 9.80665, work out on your calculator what pool diameter makes u10^2 / (g D) equal 0.060060. Then open the fire panel's Yellow Book view, change the viscosity to 0.000015 m2/s and record the tilt. Write two sentences on how far the tilt moved and why.
+Using the example's wind of 5 m/s and the engine's gravity constant, 9.80665, work out on your calculator what pool diameter makes u10^2 / (g D) equal 0.060060. Then open the fire panel's first view, enter the diameter you found, a wind of 5 m/s and the printed viscosity, and read the tilt against 50.828697. Change the viscosity to 0.000015 m2/s and read the tilt again. Write two sentences on how far the tilt moved and why.

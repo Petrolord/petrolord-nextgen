@@ -6,7 +6,7 @@ The scaled wind speed u* has a floor. The Yellow Book writes it as u* = max(1, u
 
 ## The floor in the formula
 
-The wind factor in Thomas is u* raised to the power minus 0.21. If u* could fall below one, a light wind would make that factor larger than one and the flame longer than in no wind at all. The printed form prevents that: whenever the wind at 10 m is below uc, u* is set to one, the factor becomes one, and the wind drops out of the calculation.
+The wind factor in Thomas is u* raised to the power minus 0.21. If u* could fall below one, a light wind would make that factor larger than one and the flame longer than the held length, growing without limit as the wind fell toward zero. The printed form prevents that: whenever the wind at 10 m is below uc, u* is set to one, the factor becomes one, and the wind drops out of the calculation.
 
 ## ERHA below and above uc
 

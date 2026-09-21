@@ -49,7 +49,7 @@ q(1,
  ["X/R below one while the tilt is zero",
   "L/R above 3 with any tilt of the flame at all",
   "A tilt above 40 degrees at any distance"],
- "The engine's refusal reads \"tiltDeg: the tilted flame reaches over the target (1 + (L/R) sin(tilt) >= X/R): the closed form does not apply to a target under the flame\". A target at or inside the base, X/R at or below one, is a different refusal naming distanceFromAxisM. No fixed L/R or tilt limit exists: the 40 degree table returns view factors from 30 m outward.")
+ "The engine's refusal reads \"tiltDeg: the tilted flame reaches over the target (1 + (L/R) sin(tilt) >= X/R): the closed form does not apply to a target under the flame\". A target at or inside the base, X/R at or below one, is a different refusal naming distanceFromAxisM. Neither a fixed L/R nor a 40 degree tilt draws the line: the 40 degree table returns view factors from 30 m outward, and the condition turns on L/R, X/R and the tilt together.")
 
 q(3,
  "For the probe a 2, b 1.5 at a 30 degree tilt, a target under the flame, what vertical view factor does the numerical surface integral (route B) give?",
@@ -82,7 +82,7 @@ q(1,
  "The engine's words: \"distanceFromAxisM: the target is at or inside the flame base: a view factor model needs the target outside the flame\". It never invents a view factor of one or relocates a target. tiltDeg is the overhang refusal, which concerns a tilted flame reaching over a target that lies outside the base.")
 
 q(0,
- "The Yellow Book's Table 6.A.1 prints Fmax 210 (times 1000) at X/R 1.2 and L/R 0.1. What does the computation from the cell's own Fh and Fv give, times 1000?",
+ "The Yellow Book's Table 6.A.1 prints Fmax 210 (times 1000) at X/R 1.2 and L/R 0.1. What does the engine compute for that cell, times 1000?",
  "201.303914",
  ["177.287465","117","210"],
  "303 cells of the table reproduce to the last printed digit, and 2 Fmax cells do not follow from their own Fh and Fv. This one computes to 201.303914 against the printed 210. 177.287465 is the computed value of the other odd cell, X/R 1.4 and L/R 0.2, whose printed figure is 117. 210 is the printed value itself.")

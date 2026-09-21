@@ -63,7 +63,7 @@
    "Changing it would move the printed heat flux by more than the tolerance the golden allows"
   ],
   "answer": 1,
-  "explanation": "Air at 15 C is about twice the printed value, which makes this an erratum in the source. The golden uses the printed value because the printed tilt depends on it, and its effect is small because Re enters as a power of 0.117. The engine has no default viscosity at all, and the reason given is the tilt, with no claim about the heat flux tolerance."
+  "explanation": "Air at 15 C is about twice the printed value, which makes this an erratum in the source. The golden uses the printed value because the printed tilt depends on it, and its effect is small because Re enters as a power of 0.117. The engine has no default viscosity at all. Run at the physical value, the heat flux would still sit inside its 0.001; the printed tilt is the step that needs the printed viscosity."
  },
  {
   "prompt": "Three steps of the example speak of a target \"50 m from the flame surface\". What distance do those steps actually compute with?",

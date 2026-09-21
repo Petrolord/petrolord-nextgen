@@ -12,7 +12,7 @@ The facilities pool fire setback states that it does not provide the solid flame
 
 ## Frequencies, risk and matrices belong elsewhere
 
-A consequence model answers what happens if the release occurs. How often it occurs, and the risk a person or a population carries as a result, belong to the later quantitative risk course. Individual risk, the potential loss of life (PLL) and the F-N curve are computed and graded there, together with the ALARP argument that weighs them. This engine computes no frequency of any kind, and this course never computes or grades a risk figure. The academy's risk matrices, with their categories and scores, belong to the risk and change course. This course reports physical effects in physical units and places nothing on a risk matrix.
+A consequence model answers what happens if the release occurs. How often it occurs, and the risk a person or a population carries as a result, belong to the later quantitative risk course. Individual risk, the potential loss of life (PLL), the F-N curve and the ALARP argument all belong there. This engine computes no frequency of any kind, and this course never computes or grades a risk figure. The academy's risk matrices, with their categories and scores, belong to the risk and change course. This course reports physical effects in physical units and places nothing on a risk matrix.
 
 ## Emissions and routine releases belong elsewhere too
 

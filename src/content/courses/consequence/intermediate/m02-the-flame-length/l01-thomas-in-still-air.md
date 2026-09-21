@@ -17,7 +17,7 @@ ERHA is a heptane bund fire with a stated diameter of 20 m and a stated air dens
 | L/D | 1.855055 |
 | flame length m | 37.101102 |
 
-A flame nearly twice as tall as the pool is wide is typical of a large hydrocarbon bund fire.
+ERHA's flame stands nearly twice as tall as its pool is wide.
 
 ## One expression, imported
 
@@ -33,4 +33,4 @@ The wind form, which the next lesson takes up, gives ERHA a flame length of 35.7
 
 ## Exercise
 
-In the fire panel, load ERHA and choose the still air flame length. Confirm the panel returns 37.101102 m and an L/D of 1.855055. Then switch to the wind form with the wind set to zero and record the length it returns. Write two sentences for a colleague explaining why the two numbers differ, and which one a graded answer in this course would use.
+The fire panel computes the wind form only, so work the still air form on your calculator: put ERHA's burning flux, air density, gravity and diameter into the correlation and confirm an L/D of 1.855055 and a length of 37.101102 m. Then load ERHA in the fire panel with the wind set to zero and record the length the wind form returns. Write two sentences for a colleague explaining why the two numbers differ, and which one a graded answer in this course would use.

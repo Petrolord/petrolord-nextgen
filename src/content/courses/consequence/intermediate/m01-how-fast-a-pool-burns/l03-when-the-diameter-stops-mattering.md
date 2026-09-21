@@ -2,7 +2,7 @@
 
 {{panel:cq-fire}}
 
-The Babrauskas form has an asymptote. As the diameter grows, the exponential term dies away and the burning flux settles at m"inf. For most pools a process plant would worry about, that happens well before the pool reaches its full size, and this lesson shows where.
+The Babrauskas form has an asymptote. As the diameter grows, the exponential term dies away and the burning flux settles at m"inf. How soon that happens depends on the fuel's k beta product, and this lesson shows where it happens for six fuels.
 
 ## The burning flux against the diameter
 
@@ -20,7 +20,7 @@ The engine swept six fuels over seven stated diameters:
 
 ## A small pool burns slowly
 
-At 0.5 m heptane burns at 0.042728 kg/(m2 s), which the digest derives as 42.31 percent of its asymptote. A small pool loses heat at its rim and its flame is thin, so less heat returns to the liquid surface to evaporate fresh fuel. The exponential term in the formula is the correlation's way of carrying that loss. The same is true of the other fuels at 0.5 m: lpg reads 0.049838 against its 0.099, and gasoline 0.035753 against its 0.055. A burning flux read from a small pool therefore understates what the same fuel does in a large bund, and the formula corrects for exactly that.
+At 0.5 m heptane burns at 0.042728 kg/(m2 s), which the digest derives as 42.31 percent of its asymptote. The exponential term in the formula carries that shortfall: the smaller the product k beta D, the further below m"inf the pool burns, and for heptane at 0.5 m that product is small enough to leave more than half of the asymptote unreached. The same is true of the other fuels at 0.5 m: lpg reads 0.049838 against its 0.099, and gasoline 0.035753 against its 0.055. A burning flux read from a small pool therefore understates what the same fuel does in a large bund, and the formula corrects for exactly that.
 
 ## The k beta product sets the pace
 

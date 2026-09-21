@@ -35,4 +35,4 @@ ERHA is a heptane bund fire, 20 m across, with air at 1.2 kg/m3 (stated). With a
 
 ## Exercise
 
-Open the fire panel on the ERHA stream with a 4 m/s wind. Step through the views and write down each value the panel returns, from the burning flux to the heat flux at 40 m. Then multiply the surface emissive power, the Fmax and the stated transmissivity yourself and set your product beside the engine's heat flux. Name the one factor in the chain that you, the analyst, supplied.
+Open the fire panel on the ERHA stream with a 4 m/s wind. Step through the views and write down each value the panel returns, from the burning flux to the heat flux at 40 m. Then multiply the surface emissive power, the Fmax and the stated transmissivity yourself and set your product beside the engine's heat flux. Name the one of the three factors that you, the analyst, stated.

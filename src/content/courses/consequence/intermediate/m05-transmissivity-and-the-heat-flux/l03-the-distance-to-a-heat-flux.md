@@ -24,7 +24,7 @@ REACHED means the heat flux falls to the target within the search, and the engin
 
 ## Why 35000 W/m2 is never reached
 
-ERHA's surface emissive power is 52025.691247 W/m2, and the stated transmissivity is 0.8. The heat flux can never exceed the surface emissive power times the transmissivity, and the view factor of a ground target outside the flame holds it lower still. For this fire the heat flux never climbs to 35000 W/m2, and the engine reports the largest it found. A NOT_REACHED result is information: this fire, with these choices, cannot deliver that heat flux to a ground target anywhere downwind.
+ERHA's surface emissive power is 52025.691247 W/m2, and the stated transmissivity is 0.8. The heat flux can never exceed the surface emissive power times the transmissivity, and the view factor of a ground target outside the flame holds it lower still. For this fire the heat flux never climbs to 35000 W/m2, and the engine reports the largest it found. A NOT_REACHED result is information: this fire, with these choices, delivers that heat flux to no ground target the closed form can assess, from just beyond the flame's reach outward.
 
 ## A search needs a fixed transmissivity
 
@@ -36,4 +36,4 @@ The reason is the Bagster band. As the search moves the target, the path through
 
 ## Exercise
 
-In the fire panel's heat flux view, load ERHA with the stated transmissivity and search for 12500 and 5000 W/m2, confirming both rows. Then search for 35000 W/m2 and record the largest heat flux the panel reports. Finally clear the transmissivity, run the search once more and copy the refusal with its field.
+In the fire panel's heat flux view, load ERHA with the stated transmissivity and search for 12500 and 5000 W/m2, confirming both rows. Then search for 35000 W/m2 and record the state the panel reports. Finally clear the transmissivity, run the search once more and copy the refusal with its field.

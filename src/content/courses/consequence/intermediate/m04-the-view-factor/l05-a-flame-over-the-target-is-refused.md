@@ -6,7 +6,7 @@ Tilt a flame far enough toward a target close to the pool and the top of the fla
 
 ## Where the line is
 
-The flame's top lies downwind of the base centre by the flame length times the sine of the tilt, and the base edge lies one radius out. In the ratios of this module, the flame reaches over the target when 1 + a sin(tilt) is at or above b, with a = L / R and b = X / R. The engine checks that condition before it computes anything. For the stated flame of radius 10 m and length 30 m, the sweep shows the refusal rows:
+The centre of the flame's top lies downwind of the base centre by the flame length times the sine of the tilt, and the top's far edge lies one radius beyond that. In the ratios of this module, the flame reaches over the target when 1 + a sin(tilt) is at or above b, with a = L / R and b = X / R. The engine checks that condition before it computes anything. For the stated flame of radius 10 m and length 30 m, the sweep shows the refusal rows:
 
 | distance from axis m, stated | at 20 degrees | at 40 degrees |
 | --- | --- | --- |

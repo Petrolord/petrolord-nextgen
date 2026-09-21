@@ -44,7 +44,7 @@ q(1,
  "Table 6.5 lists methanol with no k beta product. Which value comes back for a half metre methanol pool?",
  "0.015000",
  ["0.032998","0.032223","0.035753"],
- "A k beta of none means Table 6.5 says the burning rate is independent of the diameter in the turbulent regime, so methanol prints 0.015000 at every diameter in the sweep, 0.5 m included. 0.032998 is lng at 0.5 m, 0.032223 is kerosene there and 0.035753 is gasoline, all fuels whose small pools burn well below their asymptotes.")
+ "A k beta of none means Table 6.5 says the burning rate is independent of the diameter in the turbulent regime, so methanol prints 0.015000 at every diameter in the sweep, 0.5 m included. 0.032998 is lng at 0.5 m, 0.032223 is kerosene there and 0.035753 is gasoline, all fuels whose half metre pools burn below their asymptotes.")
 
 q(0,
  "Heptane at a diameter of 0.5 m burns well below its large pool value. What share of the asymptote does section 14 derive for it?",

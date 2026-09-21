@@ -29,7 +29,7 @@ The unit sits in the argument name, `burningFluxKgM2S`, as it does for every inp
 
 ## Fuels whose diameter does not matter
 
-Methanol and ethanol carry no k beta product. The table says their burning rate is independent of the diameter in the turbulent regime, so the engine returns 0.015000 kg/(m2 s) for either alcohol at every diameter it is given. A clean flame of this kind has no sooty core to build up as the pool grows.
+Methanol and ethanol carry no k beta product. The table says their burning rate is independent of the diameter in the turbulent regime, so the engine returns 0.015000 kg/(m2 s) for either alcohol at every diameter it is given. For these two fuels the table carries no approach to an asymptote at all: the burning flux of a small pool and a large one is the same number.
 
 ## A fuel the table does not carry
 

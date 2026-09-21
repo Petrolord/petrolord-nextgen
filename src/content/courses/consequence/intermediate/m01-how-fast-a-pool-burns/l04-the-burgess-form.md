@@ -42,4 +42,4 @@ Burgess is a single route quantity. The engine's validation record plants a mist
 
 ## Exercise
 
-In the fire panel, choose the Burgess method and enter the five stated n-hexane inputs. Confirm the panel returns 0.100300. Now lower the boiling point below the stated ambient of 293.15 K and copy the refusal the panel shows, including its field. In two sentences, explain what would have happened to the denominator had the engine calculated anyway.
+The fire panel offers the Babrauskas route only, so work Burgess on your calculator. Put the five stated n-hexane inputs into the formula and confirm 0.100300. Then choose hexane in the fire panel, set a 50 m pool and read its Babrauskas burning flux, and set it beside your Burgess figure. Finally, redo the denominator with a boiling point below the stated ambient of 293.15 K, say which field the engine's refusal would name, and explain in two sentences what would have happened to the burning flux had the engine calculated anyway.

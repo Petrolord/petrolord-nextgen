@@ -33,11 +33,11 @@ The engine column is what the engine returns at full precision. The printed colu
 
 ## How the chain flows
 
-Each step feeds the next, exactly as the earlier modules taught. The characteristic wind speed scales the wind; the scaled wind speed sets the flame length through Thomas with wind; the Froude and Reynolds numbers set the tilt; the flame length and the burning flux set the surface emissive power; the flame length, the tilt and the distance set Fv, Fh and Fmax; and the sooty power, Fmax and the printed transmissivity multiply into the heat flux. A mistake early in the chain would show up in every later row. None does. The heat flux at the end, 4582.518673 W/m2 against the printed 4581, carries every step before it, so its small relative difference of 3.32e-4 is the strongest single piece of evidence in the table.
+Each step feeds the next, exactly as the earlier modules taught. The characteristic wind speed scales the wind; the scaled wind speed sets the flame length through Thomas with wind; the Froude and Reynolds numbers set the tilt; the flame length and the burning flux set the surface emissive power; the flame length, the tilt and the distance set Fv, Fh and Fmax; and the sooty power, Fmax and the printed transmissivity multiply into the heat flux. A mistake early in the chain would show up in the later rows that read it. None does. The heat flux at the end, 4582.518673 W/m2 against the printed 4581, carries every step before it, yet agreement at the end alone would prove little: small departures in the steps can offset one another. That is why the golden sets every step against its own printed value.
 
 ## Why this example carries the grading
 
-A capstone grades a quantity only where something independent could catch a mistake copied into both the engine and its oracle. For Thomas with wind, the tilt, both radiative fraction powers, the tilted view factor and the heat flux, this worked example is that independent check. Each row is a published number the engine had to meet.
+A capstone grades a quantity only where something independent could catch a mistake copied into both the engine and its oracle. For Thomas with wind, the tilt, the surface emissive powers, the tilted view factor and the heat flux, this worked example is that independent check. Each row is a published number the engine had to meet.
 
 The example uses the flame base radius D/2 with no stretch in the wind, and the engine does the same. It also carries three errata in its printed text, which the next lesson sets out. They are facts about the published source.
 
