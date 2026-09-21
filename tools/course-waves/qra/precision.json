@@ -1,0 +1,22 @@
+{
+ "far": {
+  "decimals": 6,
+  "match": "^(?:ogini_crew_far)$"
+ },
+ "fatalities": {
+  "decimals": 6,
+  "match": "^(?:ogini_village_exceedance_from_fatalities)$"
+ },
+ "gbp": {
+  "decimals": 2,
+  "match": "^(?:ebughu_blast_wall_icaf_gbp|ebughu_deluge_icaf_gbp|ebughu_deluge_maximum_reasonably_practicable_cost_gbp)$"
+ },
+ "peryr": {
+  "decimals": 12,
+  "match": "^(?:ogini_crew_pll_per_yr|ogini_village_frequency_ten_or_more_per_yr|ukpokiti_camp_exposure_frequency_per_yr|ukpokiti_compressor_deck_lsir_per_yr|ukpokiti_compressor_explosion_frequency_per_yr|ukpokiti_control_room_lsir_per_yr|ukpokiti_operator_irpa_per_yr|ukpokiti_technician_irpa_per_yr)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:ebughu_blast_wall_cost_to_benefit_ratio|ebughu_deluge_cost_to_benefit_ratio|ebughu_gas_detection_cost_to_benefit_ratio|ogini_village_r2p2_point_ratio|ogini_village_vrom_max_ratio)$"
+ }
+}

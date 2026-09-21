@@ -1,0 +1,133 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H5 Professional m06: Societal Risk, End to End.
+# Digest section 24 (the fractions of deaths indoors and outdoors, their rules
+# by effect, and what they rest on), then the societal picture end to end from
+# sections 15 to 23. The Fd fractions are single transcriptions: this bank
+# teaches their RULES and never keys an answer on a number through them.
+
+q(1,
+ "How does the Purple Book count the fraction of a population cell that dies, Fd, for societal risk?",
+ "Fd = FE,in x fpop,in + FE,out x (1 - fpop,in), weighting the indoor and outdoor fractions by who is indoors",
+ ["Fd = FE,in x FE,out, the chance of dying indoors times the chance of dying outdoors, for everyone in the cell",
+  "Fd = the larger of FE,in and FE,out, since each person in the cell is counted at the worse of the two places",
+  "Fd = FE,out alone, since a person outdoors and unprotected is the case every societal count is built on"],
+ "The digest gives Fd = FE,in x fpop,in + FE,out x (1 - fpop,in), where fpop,in is the fraction of the population indoors, so each fraction dying is weighted by the share of people it applies to. A product of the two fractions has no meaning for one population. Taking the worse of the two overcounts the people indoors. Outdoors and unprotected is the LSIR convention, which the societal count deliberately refines.")
+
+q(3,
+ "What are the Purple Book fractions of deaths indoors and outdoors for?",
+ "Societal risk: the expected deaths in a population cell are Fd times the people in it",
+ ["Individual risk: they are the vulnerability factor applied at each place of one person's IRPA",
+  "Both, since the same fraction scales an LSIR and a head count by exactly the same amount",
+  "Neither on their own: they only adjust the frequency of each outcome of the event tree above"],
+ "The digest says the fractions are for SOCIETAL risk, so the expected number of deaths in a cell is Fd times the people in it, and that they are not a vulnerability factor for individual risk. The vulnerability factor of an IRPA is the analyst's own, with a default of 1. An event tree outcome frequency is untouched by where people shelter.")
+
+q(0,
+ "Why does this course teach the Fd rules and never grade a number that passes through them?",
+ "The factors and the day and night fractions are single transcriptions with no printed numeric example to test them against",
+ ["The engine computes them from a probit of its own, and the probit belongs to the consequence course, so no figure is stable",
+  "The Purple Book withdrew the indoor fractions, so the engine carries them only for comparison with older studies",
+  "The fractions change with each weather class, so no single value is ever returned for a given effect and period"],
+ "The digest says the factors 0.1 for toxic indoors, 0.14 for fire outdoors, 0.025 for explosion indoors and the Table 5.3 fractions are single transcriptions of the Purple Book, which prints no numeric example for them, so the course teaches the rules and grades nothing through them. A probit belongs to the consequence course, and this function takes the probability of death as a stated input. Nothing says the Purple Book withdrew anything, and the period is day or night, with no weather class.")
+
+q(2,
+ "What does the digest record about the engine's own validation of the Fd factors?",
+ "A wrong clothing factor planted in both the engine and its oracle left the suite green",
+ ["Every factor was matched against a second edition of the same source at twelve decimals",
+  "The oracle found one transcription error in the explosion rules and flagged the suite red",
+  "The factors were checked against a worked Fd example the Purple Book prints for every effect"],
+ "The digest says the engine's own validation planted a wrong clothing factor in both the engine and its oracle, and the suite stayed green, which is why no number through the fractions is graded. There is no second reading of the source behind them. No error was found and flagged, because a planted error in both places cannot be seen. The Purple Book prints no numeric example for these factors, so there was nothing to check them against.")
+
+q(1,
+ "For an explosion, which rule does the engine apply at exactly 30000 Pa gauge?",
+ "The lower rule, in which only a fraction of those indoors die and no one outdoors",
+ ["The upper rule, in which everyone dies indoors and outdoors alike, since the threshold is reached",
+  "Neither rule, since exactly 30000 Pa is refused as a value that sits on a printed edge",
+  "The rule for 10000 Pa or less, in which nobody indoors or outdoors dies at all"],
+ "The explosion rows follow Figure 5.5: above 30000 Pa gauge everyone dies, above 10000 Pa only those indoors die in part, and exactly 30000 Pa falls in the lower rule. Everyone dies only strictly above 30000 Pa. A value on a printed edge is accepted and placed, never refused. The rule with no deaths applies only at or below 10000 Pa.")
+
+q(3,
+ "A fire exposes a cell at 35000 W/m2 or more. What does the Purple Book rule, as the engine applies it, say?",
+ "Everyone dies, indoors or out, as Figure 5.4 prints for Q >= 35 kW/m2",
+ ["Only those outdoors die, since a building shields everyone inside it",
+  "Everyone outdoors dies and a tenth of those indoors, as for a toxic cloud",
+  "The cell is refused, since fluxes over the ignition value are unsupported"],
+ "The digest says a fire at 35000 W/m2 or more kills everyone indoors or out, following Figure 5.4. Below that flux the probability of death comes from a heat probit, which is consequence modelling and belongs to the consequence course. At or above it the rule gives no shelter indoors, so neither the outdoor-only reading nor the toxic cloud's tenth indoors applies, and the engine accepts the flux without refusing it.")
+
+q(2,
+ "For a toxic cloud with a stated probability of death PE outdoors, how does the rule treat the people indoors?",
+ "A smaller fraction of them dies than outdoors, since the rule credits shelter indoors",
+ ["The same fraction dies as outdoors, since the cloud enters every building in the cell",
+  "None of them dies at all, since a building keeps the whole of the cloud outside",
+  "A larger fraction dies than outdoors, since the cloud collects inside the buildings"],
+ "The engine's rule for a toxic cloud is FE,in = 0.1 PE and FE,out = PE, with PE a stated input from the consequence course, so those indoors carry a smaller fraction. Equal fractions would credit buildings with nothing. Zero indoors would claim a perfect seal, which the rule never does. A larger fraction indoors reverses the rule. The factor itself is a single transcription, so the course teaches its direction and grades no figure through it.")
+
+q(0,
+ "A societal call asks pbFatalityFractions for the fractions at 'dusk'. What refusal comes back, word for word?",
+ "period: must be 'day' or 'night' (PB Table 5.3), or give fractionIndoors",
+ ["effect: must be 'toxic', 'fire', 'flash-fire' or 'explosion'",
+  "exposedHoursPerYr: must be above 0 hours: a rate over no exposure is undefined",
+  "locations[0].vulnerabilityFactor: 'deck' must be a factor in [0, 1]"],
+ "The refusal table gives this exact string for a period the table does not have, naming the field period. The effect message is the same function refusing an effect it does not have. The exposed hours message belongs to the FAR. The vulnerability factor message belongs to the IRPA, whose factor is the analyst's own and separate from these fractions.")
+
+q(3,
+ "What does the engine do with a flash fire at night?",
+ "Everyone inside the envelope dies and no one outside it does, indoors or out",
+ ["Those indoors are spared inside the envelope, since the walls stop the flame front",
+  "Only the fraction of people indoors at night dies inside the envelope",
+  "It weights the envelope by the night fraction indoors before any count"],
+ "The digest runs a flash fire inside the envelope at night to an Fd of everyone and outside it to none, with the same fraction indoors and outdoors in each case. Buildings give no shelter from a flash fire inside the envelope in this rule. The night fraction indoors still enters Fd, but with equal fractions in and out it changes nothing.")
+
+q(2,
+ "For the JISIKE off-site set, which pair belongs together in one societal picture?",
+ "Expected fatalities 0.000336000000 per year and a curve that EXCEEDS the Dutch line yet sits BELOW the R2P2 point",
+ ["Expected fatalities 0.002420000000 per year and a curve that TOUCHES the Dutch line at the single corner of 10 deaths",
+  "Expected fatalities 0.000049700000 per year and a curve that EXCEEDS both the Dutch line and the published R2P2 point",
+  "Expected fatalities 0.000050000000 per year and a curve that stays BELOW every criterion the engine carries"],
+ "The off-site set gives expected fatalities of 0.000336000000 per year, EXCEEDS against the Dutch line with a worst ratio of 18.000000, and BELOW against the R2P2 point at 0.001000. 0.002420000000 is the crew PLL, and the touching curve is a separate built case. 0.000049700000 is F(3), a frequency. 0.000050000000 is the frequency kept out of the curve.")
+
+q(1,
+ "Which order builds a societal picture in this course?",
+ "Take each scenario's frequency and stated N, sum f times N for the PLL, divide by exposed hours for the FAR, and build F(N) as N or more to compare at the corners",
+ ["Compute N from each scenario's Pd and head count, sum f over N for the PLL, then read the FAR off the F-N curve at N = 1",
+  "Build F(N) as more than N, compare it with the line at every N on a grid, and then sum the corner values for the PLL",
+  "Sum the frequencies for the PLL, band each scenario against the line, and divide by 8760 hours to get the FAR"],
+ "The Professional tier runs from stated inputs: N comes from the consequence course, PLL is the sum of f times N, FAR is PLL times 100,000,000 over the exposed hours, and the curve is N or more, compared at its corners. Computing N is the consequence course's work, and f over N is a wrong build. \"More than N\" drops corner scenarios, and a grid is unnecessary since corners decide. Summing frequencies ignores N, and 8760 is one person's year.")
+
+q(0,
+ "The JISIKE crew and the JISIKE off-site sets are both run. Which figures, PLL in fatalities per year and FAR per 100,000,000 exposed hours, belong to the crew?",
+ "A PLL of 0.002420000000 and a FAR of 2.016667",
+ ["A PLL of 0.000336000000 and a FAR of 121.000000",
+  "A PLL of 0.002420000000 and a worst ratio of 18.000000",
+  "A PLL of 0.009540000000 and a FAR of only 0.020167"],
+ "The crew set gives a PLL of 0.002420000000 and, over 120000 exposed hours, a FAR of 2.016667. 0.000336000000 is the off-site expected fatalities, and 121.000000 is the crew over one person's hours. The ratio of 18.000000 belongs to the off-site curve against the Dutch line. 0.009540000000 ignores N, and 0.020167 uses the wrong base.")
+
+q(3,
+ "Which part of a societal risk assessment can be cited as published and reproduced?",
+ "The criterion side: the Bevi points lie on the Purple Book line, and the R2P2 point is printed",
+ ["The F-N curve of the JISIKE off-site set, reproduced from the Purple Book's own worked example",
+  "The Fd fractions, reproduced at every tabled case against the Purple Book's own printed figures",
+  "The PLL of the JISIKE crew, taken from an HSE worked example and matched to the last bit"],
+ "The digest says what IS published and reproduced is the criterion side, the three Bevi points on the Purple Book line and the printed R2P2 point. No published worked F-N curve exists, so the curve is checked by self-consistency. The Purple Book prints no numeric example of the Fd fractions. The JISIKE streams are teaching inputs, and no HSE worked example was available.")
+
+q(2,
+ "The JISIKE off-site set has a PLL of 0.000336000000 per year. Why does a societal picture carry the F-N curve as well?",
+ "The PLL is one expected value, and the curve shows how that total is spread between frequent small events and rare large ones",
+ ["The PLL counts only the crew on board, so the people beyond the fence need a separate curve of their own to be seen",
+  "The PLL leaves out every scenario whose N is not whole, and the curve puts those fractional scenarios back into view",
+  "The PLL is a probability, and the curve converts it into a frequency per year that a criterion line can be read against"],
+ "The area under the step curve equals the expected fatalities, 0.000336000000 per year for this set, so the curve carries the same total and also shows at which N it sits, which is what a criterion line is compared with at the corners. The off-site PLL already counts the people beyond the fence. A fractional N stays in the PLL. PLL is expected fatalities per year and never a probability.")
+
+q(1,
+ "An Fd call names an effect outside the four the engine knows. What does it say back?",
+ "effect: must be 'toxic', 'fire', 'flash-fire' or 'explosion'",
+ ["substance: must be one of k1-liquid, gas-low-reactivity, gas-average-high-reactivity (PB Table 4.7 classifies reactivity)",
+  "criterion: unknown preset 'valueOf'; one of vrom-establishments, r2p2-para-136, or give { constantC, exponentAlpha } or { points }",
+  "releaseType: must be 'continuous' or 'instantaneous'"],
+ "The refusal table gives this exact string for an effect the engine does not have, naming the field effect and listing the four it does. The substance and release type messages are the direct ignition lookup refusing inputs of its own. The criterion message is fnCriterionComparison refusing a name every object inherits.")
+
+emit(Q, '/root/hse-wip-qra/banks/h5i_m06.json', expect_n=15)
+finish()

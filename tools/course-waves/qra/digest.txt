@@ -1,0 +1,705 @@
+# H5 TEACHING DIGEST: Quantitative Risk Assessment
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The engine FINDINGS record, the oracle and the engine source comments are PROVENANCE only.
+
+# PRECISION. Frequencies, individual risks and PLL per year, and probabilities, print to TWELVE decimals; FAR values, ratios and fatality counts that need not be whole print to SIX decimals; money prints to TWO decimals; hours and years are whole numbers as stated; stated inputs print as typed.
+
+# ENGINE. engines/hse/qra.js, vendored sha-identical with petrolord-engines 16fd6c9, 1038 lines. It imports the H4 consequence engine, the H1 FAR base, the H3 hours in a year and the canonical year-end present value of engines/economics/cashflow.ts. The vendored golden test-data/hse/goldens/qra_cases.json carries 138 records this digest counts, written by the engine's independent oracle.
+
+# EVERY PROBABILITY OF DEATH IS AN INPUT. The teaching streams state each one. Producing a probability of death from a release belongs to the consequence course, and no section below runs a consequence model to make a number a lesson teaches.
+
+# WHAT IS NEVER IN THIS FILE. No capstone facility, no capstone input and no graded answer. The capstones run their own facilities and the digest never names them.
+
+# SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Professional m01 and Expert m05)
+
+The engine does the bookkeeping of a quantitative risk assessment. It takes scenario frequencies and probabilities of death as inputs and returns event tree outcome frequencies, location-specific individual risk (LSIR), individual risk per annum (IRPA), potential loss of life (PLL), the fatal accident rate (FAR), the F-N curve and its comparison with a criterion, the ALARP region of an individual risk, and the gross disproportion test of a risk reduction measure. Every function returns either a result object carrying a `basis` block or an object with `error` and `field`, where `field` names the offending input.
+
+| function | what it needs | what it returns |
+| --- | --- | --- |
+| `eventTree` | initiatingFrequencyPerYr, tree | every leaf with its path, probability and frequency, and the total per outcome |
+| `flammableReleaseEventTree` | initiatingFrequencyPerYr, immediateIgnitionProbability, delayedIgnitionProbability, vapourCloudSplit | the four outcomes of a continuous flammable release |
+| `pbDirectIgnitionProbability` | releaseType, massRateKgS or massKg, substance | the Purple Book Table 4.5 direct ignition probability and its band |
+| `locationIndividualRisk` | scenarios with frequencyPerYr and fatalityProbability | LSIR and each scenario contribution |
+| `individualRiskPerAnnum` | locations with lsirPerYr and occupancyFraction or hoursPerYr | IRPA and each location contribution |
+| `potentialLossOfLife` | scenarios with frequencyPerYr and fatalities | PLL and each scenario contribution |
+| `fatalAccidentRateFromPll` | pllPerYr, exposedHoursPerYr | FAR per 100,000,000 exposed hours |
+| `fnCurve` | scenarios with frequencyPerYr and fatalities | the F-N points, the expected fatalities per year and the frequency of scenarios with no fatality |
+| `fnCriterionComparison` | scenarios, criterion | the state against a criterion line or point, the checks at every corner and the worst ratio |
+| `alarpBand` | individualRiskPerYr, thresholds | the tolerability region, the boundary touched and the ratios to both thresholds |
+| `costBenefit` | deltaPllPerYr, vpf, otherHarms, lifetimeYears, capitalCost, annualCost, disproportionFactor and three rates | present values, the cost to benefit ratio, the ICAF, the largest reasonably practicable cost and the verdict |
+| `pbFatalityFractions` | effect and its input, period or fractionIndoors | the probability of death and the fractions dying indoors and outdoors |
+| `lsirTransect` | distancesM, scenarios with fatalityProbabilities, contourLevelsPerYr | LSIR at each distance and where it crosses each contour level |
+
+Three further functions, `toxicPlumeGridPointRisk`, `thermalFatalityTransect`, `poolFireFatalityTransect`, run the H4 consequence engine's plume, probits and solid flame to MAKE a probability of death. This course does not teach their inputs; section 4 says where the seam runs.
+
+The constants it exports:
+
+| name | value |
+| --- | --- |
+| `BOUNDARY_SNAP` | 1e-9 |
+| `BRANCH_SUM_TOLERANCE` | 1e-9 |
+| `PB_VAPOUR_CLOUD_SPLIT` | flash fire 0.6, explosion 0.4 |
+| `PB_FRACTION_INDOORS` | day 0.93, night 0.99 |
+| `PB_IGNITION_FLUX_WM2` | 35000 |
+| `PB_VCE_OVERPRESSURE_PA` | lethal 30000, indoorOnly 10000 |
+| `PB_MAX_FIRE_EXPOSURE_S` | 20 |
+| `PB_IR_CONTOURS_PER_YR` | 1e-4, 1e-5, 1e-6, 1e-7, 1e-8 |
+| `TOLERABILITY_PRESETS` | r2p2-workers, r2p2-public |
+| `FN_CRITERIA` | vrom-establishments, r2p2-para-136 |
+| `HSE_ILLUSTRATIVE_VALUES` | vpfGbp2001 1000000, vpfGbp2003Q3 1336800 |
+
+The sources the engine names in every `basis`, verbatim from its export `QRA_SOURCES`:
+
+| key | source |
+| --- | --- |
+| PB | TNO Purple Book CPR 18E (1999) |
+| R2P2 | UK HSE, Reducing risks, protecting people (2001) |
+| CBA | UK HSE, Cost Benefit Analysis (CBA) checklist (2003 values) |
+| BEVI | Besluit externe veiligheid inrichtingen (2004, repealed 1 January 2024) art. 13(1)(b) |
+| NPV | engines/economics/cashflow.ts npv (year-end discounting) |
+
+WHAT THE ENGINE DOES NOT DO, read from its own header and checked here against its exports:
+- It invents no number. Every scenario frequency, branch probability, probability of death, occupancy, value of preventing a fatality (VPF), disproportion factor (DF) and rate is an input. VPF has no default.
+- It has no aversion weighted risk integral. No source the engine read defines one; the expected value sum of f times N is implemented instead.
+- It gives the single R2P2 societal point no slope. R2P2 prints one point and defers extrapolation to a reference the engine did not read.
+- It does no grid or wind rose bookkeeping of a full assessment. The caller supplies each scenario frequency and probability of death.
+- It re-grades nothing the consequence course or the facilities courses own. It exports none of their functions, and the jest suite asserts so.
+- Its exported names are, in full: BOUNDARY_SNAP, BRANCH_SUM_TOLERANCE, FN_CRITERIA, HSE_ILLUSTRATIVE_VALUES, PB_DIRECT_IGNITION_STATIONARY, PB_FRACTION_INDOORS, PB_IGNITION_FLUX_WM2, PB_IR_CONTOURS_PER_YR, PB_MAX_FIRE_EXPOSURE_S, PB_VAPOUR_CLOUD_SPLIT, PB_VCE_OVERPRESSURE_PA, QRA_SOURCES, TOLERABILITY_PRESETS, alarpBand, costBenefit, eventTree, fatalAccidentRateFromPll, flammableReleaseEventTree, fnCriterionComparison, fnCurve, individualRiskPerAnnum, locationIndividualRisk, lsirTransect, pbDirectIgnitionProbability, pbFatalityFractions, poolFireFatalityTransect, potentialLossOfLife, thermalFatalityTransect, toxicPlumeGridPointRisk.
+
+# SECTION 2: Frequencies per year, probabilities, hours, and the units the engine takes (owned by Associate m01)
+
+A quantitative risk assessment multiplies FREQUENCIES PER YEAR by PROBABILITIES. A frequency counts events per year and may exceed one; a probability lies from zero to one. The engine carries the unit in every input name.
+
+| quantity | unit | allowed range, from the engine |
+| --- | --- | --- |
+| initiating or scenario frequency | per year | above 0 for an event tree root; 0 or more for a scenario |
+| branch probability | probability | 0 to 1, and every branch set sums to 1 |
+| probability of death, fatalityProbability | probability | 0 to 1 |
+| occupancy | fraction of the year, or hours per year | 0 to 1, or 0 to 8760 hours, and no more than the whole year in total |
+| fatalities, N | expected deaths of one scenario | 0 or more, need not be whole |
+| exposed hours | hours per year | above 0 |
+| individual risk | per year | 0 or more |
+| VPF, costs | currency of the inputs | VPF above 0; costs 0 or more |
+| DF | dimensionless | 1 or more |
+| rates of discount and growth | per year | above -1 (0.035 for 3.5 percent) |
+| lifetime | whole years | 1 or more |
+
+Hours convert to a fraction of the year at 8760 hours a year, the H3 engine's HOURS_PER_YEAR: 8760 hours at one place is an occupancy of 1.000000, and 8760 hours at an LSIR of 1e-5 per year (stated) is an IRPA of 0.000010000000.
+
+A frequency of 1e-4 per year is one event in ten thousand years on average. It is a rate, never a probability, and the engine keeps the two in different inputs.
+
+# SECTION 3: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l04 and Professional m01 and Expert m01)
+
+Each row is a real call. The message column is the engine's `error` string, verbatim. A refusal carries no number of its own.
+
+| function | what was passed | field named | the engine's message |
+| --- | --- | --- | --- |
+| `eventTree` | no initiating frequency | `initiatingFrequencyPerYr` | initiatingFrequencyPerYr: must be a frequency above 0 per year |
+| `eventTree` | an empty branch set | `tree.branches` | tree.branches: must be a non-empty list of { name, probability, next? } |
+| `eventTree` | a branch with no name | `tree.branches[0].name` | tree.branches[0].name: every branch needs a name |
+| `eventTree` | one name twice in a branch set | `tree.branches[1].name` | tree.branches[1].name: 'fire' appears twice in one branch set |
+| `eventTree` | a branch probability above one | `tree.branches[0].probability` | tree.branches[0].probability: 'fire' must be a probability in [0, 1] |
+| `eventTree` | a branch set that sums below one | `tree.branches` | tree.branches: the branch probabilities sum to 0.8999999999999999, not 1 (tolerance 1e-9): every branch set must be exhaustive and exclusive |
+| `eventTree` | a lower branch set that does not close | `tree.branches[0].next.branches` | tree.branches[0].next.branches: the branch probabilities sum to 0.5, not 1 (tolerance 1e-9): every branch set must be exhaustive and exclusive |
+| `flammableReleaseEventTree` | no delayed ignition probability | `delayedIgnitionProbability` | delayedIgnitionProbability: must be the probability of delayed ignition GIVEN no immediate ignition, in [0, 1] |
+| `flammableReleaseEventTree` | a split that does not close | `vapourCloudSplit` | vapourCloudSplit: tree.branches[1].next.branches[0].next.branches: the branch probabilities sum to 0.8999999999999999, not 1 (tolerance 1e-9): every branch set must be exhaustive and exclusive |
+| `pbDirectIgnitionProbability` | a substance class the table does not have | `substance` | substance: must be one of k1-liquid, gas-low-reactivity, gas-average-high-reactivity (PB Table 4.7 classifies reactivity) |
+| `pbDirectIgnitionProbability` | a name every object inherits | `substance` | substance: must be one of k1-liquid, gas-low-reactivity, gas-average-high-reactivity (PB Table 4.7 classifies reactivity) |
+| `pbDirectIgnitionProbability` | a continuous release with no rate | `massRateKgS` | massRateKgS: a continuous release needs a rate above 0 kg/s |
+| `pbDirectIgnitionProbability` | a release type the table does not have | `releaseType` | releaseType: must be 'continuous' or 'instantaneous' |
+| `locationIndividualRisk` | no scenarios | `scenarios` | scenarios: must be a non-empty list of scenarios |
+| `locationIndividualRisk` | a negative frequency | `scenarios[0].frequencyPerYr` | scenarios[0].frequencyPerYr: 'fire' must have a frequency of 0 or more per year |
+| `locationIndividualRisk` | a probability of death above one | `scenarios[0].fatalityProbability` | scenarios[0].fatalityProbability: 'fire' must be a probability of death in [0, 1] |
+| `individualRiskPerAnnum` | both a fraction and hours | `locations[0].occupancyFraction` | locations[0].occupancyFraction: 'deck': give exactly one of occupancyFraction and hoursPerYr |
+| `individualRiskPerAnnum` | more hours than a year holds | `locations[0].hoursPerYr` | locations[0].hoursPerYr: 'deck' must lie in [0, 8760] hours |
+| `individualRiskPerAnnum` | fractions that sum above one | `locations` | locations: the occupancy fractions sum to 1.1: one person cannot spend more than the whole year across locations |
+| `individualRiskPerAnnum` | a vulnerability factor above one | `locations[0].vulnerabilityFactor` | locations[0].vulnerabilityFactor: 'deck' must be a factor in [0, 1] |
+| `potentialLossOfLife` | negative fatalities | `scenarios[0].fatalities` | scenarios[0].fatalities: 'fire' must have 0 or more fatalities (an expected number need not be whole) |
+| `fatalAccidentRateFromPll` | no exposed hours | `exposedHoursPerYr` | exposedHoursPerYr: must be above 0 hours: a rate over no exposure is undefined |
+| `fnCurve` | a scenario with no name | `scenarios[0].name` | scenarios[0].name: every scenario needs a name |
+| `fnCriterionComparison` | a criterion preset the engine does not have | `criterion` | criterion: unknown preset 'r2p2-line'; one of vrom-establishments, r2p2-para-136, or give { constantC, exponentAlpha } or { points } |
+| `fnCriterionComparison` | a name every object inherits | `criterion` | criterion: unknown preset 'valueOf'; one of vrom-establishments, r2p2-para-136, or give { constantC, exponentAlpha } or { points } |
+| `fnCriterionComparison` | a line with no slope | `criterion.exponentAlpha` | criterion.exponentAlpha: must be above 0 (1 is risk neutral, 2 risk averse) |
+| `alarpBand` | no thresholds | `thresholds` | thresholds: a preset name or { unacceptableAbovePerYr, broadlyAcceptableAtOrBelowPerYr } is required |
+| `alarpBand` | a name every object inherits | `thresholds` | thresholds: unknown preset 'constructor'; one of r2p2-workers, r2p2-public, or give { unacceptableAbovePerYr, broadlyAcceptableAtOrBelowPerYr } |
+| `alarpBand` | thresholds in the wrong order | `thresholds.broadlyAcceptableAtOrBelowPerYr` | thresholds.broadlyAcceptableAtOrBelowPerYr: must lie below unacceptableAbovePerYr |
+| `costBenefit` | no VPF | `vpf` | vpf: the value of preventing a fatality is required, above 0; HSE figures are illustrative only (HSE_ILLUSTRATIVE_VALUES) |
+| `costBenefit` | a DF below one | `disproportionFactor` | disproportionFactor: must be 1 or more: HSE, "DFs that may be considered gross vary from upwards of 1" |
+| `costBenefit` | a lifetime that is not whole years | `lifetimeYears` | lifetimeYears: must be a whole number of years, 1 or more (flows are year-end) |
+| `costBenefit` | a measure that raises the PLL | `deltaPllPerYr` | deltaPllPerYr: must be the reduction in PLL, 0 or more fatalities per year (a measure that raises risk has no benefit to weigh) |
+| `costBenefit` | a measure that prevents nothing | `deltaPllPerYr` | deltaPllPerYr: the measure prevents nothing (no PLL reduction and no other harm): there is no benefit to weigh the cost against |
+| `pbFatalityFractions` | a period the table does not have | `period` | period: must be 'day' or 'night' (PB Table 5.3), or give fractionIndoors |
+| `pbFatalityFractions` | a period and a fraction indoors both | `fractionIndoors` | fractionIndoors: give a period ('day' or 'night') or fractionIndoors, not both |
+| `pbFatalityFractions` | an effect the engine does not have | `effect` | effect: must be 'toxic', 'fire', 'flash-fire' or 'explosion' |
+| `lsirTransect` | distances that do not increase | `distancesM[2]` | distancesM[2]: distances must increase strictly |
+| `lsirTransect` | one probability short | `scenarios[0].fatalityProbabilities` | scenarios[0].fatalityProbabilities: 'fire' needs one probability of death per distance (2) |
+
+39 refusals are tabled above, across 13 functions.
+
+A preset name is looked up only among the names the engine itself defines. A name such as `constructor` or `valueOf`, which every JavaScript object carries, is refused like any other unknown name, as three rows above show.
+
+# SECTION 4: Where a probability of death comes from, and where this course stops (owned by Associate m01 l03 and Expert m05 l04)
+
+Every individual risk in this course is a sum of FREQUENCY times PROBABILITY OF DEATH. Both are inputs here. A probability of death for a fire, a toxic cloud or an explosion is the output of consequence modelling: a source term, dispersion or a flame model, then a dose and a probit. That work belongs to the consequence course (H4), whose engine this engine imports and does not restate.
+
+| what a QRA needs | where it comes from | what this course does with it |
+| --- | --- | --- |
+| a scenario frequency | a release frequency and an event tree | computes it (section 5 onwards) |
+| a probability of death at a place, Pd | a consequence model and a probit, in the consequence course | takes it as a STATED input |
+| who is where, and for how long | the roster and the plot plan | takes it as a stated occupancy |
+| the expected number of deaths of a scenario, N | Pd over the population, cell by cell | takes it as a stated input |
+| a tolerability criterion, VPF, DF and rates | published guidance and the duty holder | takes each as a stated input |
+
+The same line runs through the other seams. The risk matrix and its scoring belong to the risk and change course. LOPA, IPL credit and SIL determination belong to the LOPA course (H3). Point source flare radiation and setback distances belong to the facilities courses. Present value mechanics belong to the economics courses; this course uses the canonical year-end present value only inside the gross disproportion test (section 29).
+
+The engine exposes the consequence linkage as three functions that call the consequence engine (section 1). This course never asks for their inputs. The one published chain it prints, Purple Book Appendix 6.B, is read from the golden and taught from its probability of death onward (section 11).
+
+# SECTION 5: An event tree: branches, leaves and the leaf frequency (owned by Associate m02)
+
+The EREMOR tank overfill tree starts from an overfill at 2e-3 per year (stated). Each branch set is exhaustive and exclusive, so its probabilities sum to one. A leaf's frequency is the initiating frequency times the product of the probabilities on its path.
+
+| path | outcome | path probability | leaf frequency per year |
+| --- | --- | --- | --- |
+| high level alarm answered | no release | 0.950000000000 | 0.001900000000 |
+| high level alarm missed then bund contains the spill then ignited in the bund | pool fire | 0.003500000000 | 0.000007000000 |
+| high level alarm missed then bund contains the spill then not ignited in the bund | no fire | 0.031500000000 | 0.000063000000 |
+| high level alarm missed then bund overtopped then ignited outside the bund | pool fire | 0.003750000000 | 0.000007500000 |
+| high level alarm missed then bund overtopped then not ignited outside the bund | no fire | 0.011250000000 | 0.000022500000 |
+
+| outcome | total frequency per year |
+| --- | --- |
+| no release | 0.001900000000 |
+| pool fire | 0.000014500000 |
+| no fire | 0.000085500000 |
+
+The two pool fire leaves (0.000007000000 and 0.000007500000) pool into one outcome at 0.000014500000 per year. A leaf with no `outcome` of its own takes its branch name. The leaves sum back to the initiating frequency, 0.002000000000.
+
+The engine's model string, verbatim: "event tree: leaf frequency = f0 x product of the branch probabilities on its path; each branch set sums to 1".
+
+Reading only the first pool fire leaf gives 0.000007000000 per year, derived, which misses the leaf through the overtopped bund.
+
+# SECTION 6: Every branch set sums to one, within a tolerance (owned by Associate m02 l02 and Associate m02 l05)
+
+| branch probabilities, stated | their sum in double precision | what the engine did |
+| --- | --- | --- |
+| 0.6, 0.3 | 0.8999999999999999 | refused: tree.branches: the branch probabilities sum to 0.8999999999999999, not 1 (tolerance 1e-9): every branch set must be exhaustive and exclusive |
+| 0.7, 0.2, 0.1 | 0.9999999999999999 | accepted |
+| 0.4000001, 0.6 | 1.0000001 | refused: tree.branches: the branch probabilities sum to 1.0000001, not 1 (tolerance 1e-9): every branch set must be exhaustive and exclusive |
+
+BRANCH_SUM_TOLERANCE is 1e-9, absolute. Three probabilities that sum to one exactly on paper, 0.7, 0.2 and 0.1, sum to 0.9999999999999999 in IEEE double, and the tolerance lets them through; a set a tenth of a millionth over one is a typing error and is refused. A refusal names the branch set by its path, so a deep tree says which node failed.
+
+# SECTION 7: The flammable release tree: immediate ignition, delayed ignition and the split (owned by Associate m03)
+
+A continuous flammable release has four outcomes. Immediate ignition gives a jet or pool fire. Without it, delayed ignition gives a vapour cloud that burns as a flash fire or explodes, split by the Purple Book section 4.8 fractions unless the caller gives a split. Without either, nothing ignites. EREMOR's gas release (stated): 5e-4 per year, immediate ignition 0.1, delayed ignition 0.3 GIVEN no immediate ignition, the preset split.
+
+| outcome | path | frequency per year |
+| --- | --- | --- |
+| jet or pool fire | immediate ignition | 0.000050000000 |
+| flash fire | no immediate ignition then delayed ignition then flash fire | 0.000081000000 |
+| explosion | no immediate ignition then delayed ignition then explosion | 0.000054000000 |
+| no ignition | no immediate ignition then no ignition | 0.000315000000 |
+
+The preset split is flash fire 0.6 and explosion 0.4. The basis says, verbatim: "flash fire 0.6, explosion 0.4 (TNO Purple Book CPR 18E (1999) section 4.8)".
+
+Stating the split as { flashFire: 0.6, explosion: 0.4 } gives the same four frequencies to the last bit, and the basis then says "as given". A capstone states every ignition probability and the split it uses, so its answer rests on the stated numbers alone.
+
+The delayed ignition probability is CONDITIONAL on no immediate ignition: the engine multiplies it by one minus the immediate ignition probability. The engine's refusal says so in its own words when the input is missing (section 3).
+
+# SECTION 8: Forgetting a branch: the explosion frequency built wrongly (owned by Associate m03 l05)
+
+| how the explosion frequency was built | explosion frequency per year | over the right one, derived |
+| --- | --- | --- |
+| the tree as the engine builds it | 0.000054000000 | 1.000000 |
+| the split swapped, 0.4 flash fire and 0.6 explosion | 0.000081000000 | 1.500000 |
+| delayed ignition taken as unconditional | 0.000060000000 | 1.111111 |
+| every delayed ignition counted as an explosion | 0.000135000000 | 2.500000 |
+
+Each wrong build is a real tree, and the engine runs it without complaint: a tree that closes is valid arithmetic whatever it means. The engine cannot know that a branch belongs under another; the analyst draws the tree.
+
+# SECTION 9: The direct ignition table, and what it rests on (owned by Associate m03 l04 and Expert m05 l03)
+
+Purple Book Table 4.5 gives the probability of direct ignition for stationary installations by substance class and release size. The engine's lookups, both sides of every printed band edge:
+
+| release | k1-liquid | gas-low-reactivity | gas-average-high-reactivity |
+| --- | --- | --- | --- |
+| continuous 5 kg/s | 0.065 (small) | 0.02 (small) | 0.2 (small) |
+| continuous 10 kg/s | 0.065 (medium) | 0.04 (medium) | 0.5 (medium) |
+| continuous 50 kg/s | 0.065 (medium) | 0.04 (medium) | 0.5 (medium) |
+| continuous 100 kg/s | 0.065 (medium) | 0.04 (medium) | 0.5 (medium) |
+| continuous 200 kg/s | 0.065 (large) | 0.09 (large) | 0.7 (large) |
+| instantaneous 500 kg | 0.065 (small) | 0.02 (small) | 0.2 (small) |
+| instantaneous 1000 kg | 0.065 (medium) | 0.04 (medium) | 0.5 (medium) |
+| instantaneous 5000 kg | 0.065 (medium) | 0.04 (medium) | 0.5 (medium) |
+| instantaneous 10000 kg | 0.065 (medium) | 0.04 (medium) | 0.5 (medium) |
+| instantaneous 20000 kg | 0.065 (large) | 0.09 (large) | 0.7 (large) |
+
+The printed middle band is "10 - 100 kg/s", and the engine reads it as CLOSED at both ends: exactly 10 kg/s and exactly 100 kg/s fall in the middle band. The basis says, verbatim: "table lookup; the middle band is closed at both ends". The engine's validation record labels the band-edge cells as its own reading and the interior cells as published.
+
+WHAT THE TABLE RESTS ON. The table cells and the 0.6 and 0.4 split are transcriptions of one source, read once. Nothing in the engine's validation checks them against a second reading. So this course teaches them, and every capstone STATES the ignition probabilities and the split it uses rather than asking for a lookup.
+
+# SECTION 10: Location-specific individual risk: the sum of f times Pd at one place (owned by Associate m04)
+
+LSIR is the individual risk of a person present at one place all the time, outdoors and unprotected: the sum over scenarios of the scenario frequency times the probability of death there. EREMOR runs the release tree of section 7 and the pool fire of section 5 against three places, with a probability of death per outcome for each (stated):
+
+| outcome | frequency per year | Pd at the process deck, stated | Pd at the control room, stated | Pd at the accommodation, stated |
+| --- | --- | --- | --- | --- |
+| jet or pool fire | 0.000050000000 | 0.5 | 0.02 | 0 |
+| flash fire | 0.000081000000 | 1 | 0 | 0 |
+| explosion | 0.000054000000 | 0.7 | 0.1 | 0.002 |
+| pool fire | 0.000014500000 | 0.3 | 0.01 | 0 |
+
+| place | LSIR per year | largest contribution | its fraction |
+| --- | --- | --- | --- |
+| process deck | 0.000148150000 | flash fire | 0.546743 |
+| control room | 0.000006545000 | explosion | 0.825057 |
+| accommodation | 0.000000108000 | explosion | 1.000000 |
+
+| process deck contribution | f x Pd per year | fraction of the LSIR |
+| --- | --- | --- |
+| jet or pool fire | 0.000025000000 | 0.168748 |
+| flash fire | 0.000081000000 | 0.546743 |
+| explosion | 0.000037800000 | 0.255147 |
+| pool fire | 0.000004350000 | 0.029362 |
+
+The engine's model string, verbatim: "LSIR = sum f_i x Pd_i, a person present at the location all the time, outdoors and unprotected". A scenario whose probability of death is zero at a place contributes zero there: the flash fire at the control room, which lies outside the flammable cloud, adds 0.000000000000.
+
+Taking only the largest process deck contribution gives 0.000081000000 per year, derived, and summing the probabilities of death without their frequencies gives a number with no unit at all. The LSIR is the SUM of f times Pd.
+
+# SECTION 11: A published contribution reproduced: Purple Book Appendix 6.B (owned by Associate m04 l04 and Expert m05)
+
+Purple Book Appendix 6.B works one individual risk contribution at one grid point for one toxic release, one weather class and one wind sector. Its early steps (the concentration, the probit, the probability integral) are consequence modelling and belong to the consequence course. From the effective cloud width onward the steps are QRA arithmetic, and this section starts there. Values golden: as printed in the source, and as the engine's independent oracle recorded the whole chain in the golden, which the engine reproduces within its tested tolerance.
+
+| step | printed in the source | the whole chain, golden |
+| --- | --- | --- |
+| probability of death on the centreline, Pcl | 0.835 | 0.832930245430 |
+| effective cloud width ECW, m | 86.2 | 86.301293 |
+| coverage probability Pci = nws ECW / (2 pi R) | 0.456 | 0.456574314811 |
+| probability of death Pd = Pcl Pci | 0.381 | 0.380294556093 |
+| weather and direction probability PM Pphi | 0.0368 | 0.0368 |
+| contribution dIR = f PM Pphi Pd, per year | 7e-9 | 0.000000006997 |
+
+The inputs, golden: a loss of containment frequency f of 5e-7 per year, 12 wind sectors, R = 361 m.
+
+Step 6 through `locationIndividualRisk`, with f PM Pphi = 1.84e-8 per year and the printed Pd of 0.381 (golden): 0.000000007010 per year, which the source prints as 7e-9.
+
+STEP BY STEP FROM THE PRINTED VALUES (golden): from the printed ECW of 86.2 m the coverage probability is 0.456038429735, Pd = 0.835 x 0.456 = 0.380760, and the contribution 7.0104e-9 per year.
+
+TWO ROUTES, TWO THIRD DECIMALS. The whole chain, as the golden records it, gives Pd = 0.380294556093, which rounds to 0.380; the printed 0.381 follows only from the rounded ECW of 86.2. The source is internally rounded, and both routes reproduce its printed contribution of 7e-9 per year to two significant figures (section 32 returns to this).
+
+# SECTION 12: Individual risk per annum: one person over the places they occupy (owned by Associate m05)
+
+IRPA is the risk one person carries over a year: the sum over the places they occupy of the LSIR there times the fraction of the year spent there, times a vulnerability factor the analyst may supply (default 1). The EREMOR operator (hours stated):
+
+| place | LSIR per year | hours a year, stated | occupancy fraction | contribution per year |
+| --- | --- | --- | --- | --- |
+| process deck | 0.000148150000 | 1000 | 0.114155251142 | 0.000016912100 |
+| control room | 0.000006545000 | 800 | 0.091324200913 | 0.000000597717 |
+| accommodation | 0.000000108000 | 2560 | 0.292237442922 | 0.000000031562 |
+
+IRPA 0.000017541379 per year, over a total occupancy of 0.497716894977 of the year. The engine's model string, verbatim: "IRPA = sum LSIR_j x occupancy_j x v_j (v as supplied, default 1)".
+
+The EREMOR supervisor, given as fractions of the year (stated process deck 0.05, control room 0.2, accommodation 0.25): IRPA 0.000008743500 per year.
+
+| how the operator IRPA was built | IRPA per year |
+| --- | --- |
+| as the engine builds it, hours over 8760 | 0.000017541379 |
+| the LSIRs summed with no occupancy, derived | 0.000154803000 |
+| hours over 8766, derived | 0.000017529373 |
+| the process deck alone, derived | 0.000016912100 |
+
+ONE PLACE AT A TIME. A person is in one place at a time, so the fractions may not exceed one at any place or in total. A roster of 0.6 and 0.5 of the year is refused (section 3). The occupancy check allows the total to reach one exactly.
+
+THE VULNERABILITY FACTOR is the analyst's own. With 0.5 applied in the accommodation (stated) the operator IRPA is 0.000017525598 per year. No source the engine read gives a vulnerability factor for individual risk: the Purple Book indoor and outdoor fractions are for societal risk (section 24), so the default is 1 and the result returns the factor used beside each place's contribution.
+
+# SECTION 13: LSIR along a transect, and where it crosses the contours (owned by Associate m06)
+
+Along a line from the release, the LSIR at each distance is the sum over scenarios of f times the probability of death at that distance (stated per scenario):
+
+| distance m | Pd jet fire, stated | Pd explosion, stated | LSIR per year |
+| --- | --- | --- | --- |
+| 0 | 1 | 1 | 0.000070000000 |
+| 50 | 0.9 | 0.8 | 0.000061000000 |
+| 100 | 0.35 | 0.4 | 0.000025500000 |
+| 150 | 0.05 | 0.1 | 0.000004500000 |
+| 200 | 0.004 | 0.02 | 0.000000600000 |
+| 300 | 0 | 0.001 | 0.000000020000 |
+| 400 | 0 | 0 | 0.000000000000 |
+
+The frequencies, stated: jet fire 5e-5 per year, explosion 2e-5 per year. The Purple Book asks for the individual risk contours 1e-4, 1e-5, 1e-6, 1e-7, 1e-8 per year to be shown. Where the transect crosses each:
+
+| contour level per year | crossings, m from the release |
+| --- | --- |
+| 1e-4 | none on this transect |
+| 1e-5 | 126.982958 |
+| 1e-6 | 187.323816 |
+| 1e-7 | 252.680255 |
+| 1e-8 | 350.000000 |
+
+A crossing is interpolated in log10 of the LSIR between the two points that bracket the level, and linearly where one side is zero. The basis says, verbatim: "LSIR(x) = sum f_i P_i(x); contour crossings interpolated in log10(IR) between bracketing points (linear in IR when one side is 0)". The interpolation is a PRESENTATION rule the engine chose; nothing published fixes it, so a crossing distance is never graded.
+
+# SECTION 14: The golden event trees and individual risk cases, run through the engine (owned by Associate m06)
+
+Each row runs a golden case through the engine and compares with the golden value (golden: expected). All are ORACLE-DERIVED: no published source prints an event tree or an IRPA worked example.
+
+| golden case | function | engine result |
+| --- | --- | --- |
+| flammable-default | eventTree | jet or pool fire 0.000200000000; flash fire 0.000240000000; explosion 0.000160000000; no ignition 0.000400000000 |
+| flammable-pb-table-4.5-large-gas | eventTree | jet or pool fire 0.000017500000; flash fire 0.000001350000; explosion 0.000000900000; no ignition 0.000005250000 |
+| three-way-with-pooled-outcome | eventTree | fire 0.000858000000; safe 0.011752000000; escalation 0.000390000000 |
+| zero-probability-branch | eventTree | a 0.000000000000; b 0.000400000000 |
+| three-scenarios | locationIndividualRisk | LSIR 0.000303200000 |
+| with-zero-frequency | locationIndividualRisk | LSIR 0.000000007010 |
+| operator-two-areas | individualRiskPerAnnum | IRPA 0.000041195890, occupancy 0.236986301370 |
+| full-occupancy | individualRiskPerAnnum | IRPA 0.000022000000, occupancy 1.000000000000 |
+
+The case zero-probability-branch shows that a branch of probability zero is allowed: it carries a leaf of frequency zero, and the set still sums to one.
+
+# SECTION 15: Potential loss of life: expected deaths per year (owned by Professional m01)
+
+Individual risk follows one person. Societal risk asks how many people die at once, and PLL is its expected value: the sum over scenarios of the frequency times the expected number of deaths N. N need not be whole. The JISIKE crew (stated):
+
+| scenario | frequency per year, stated | N, stated | f x N per year |
+| --- | --- | --- | --- |
+| process fire | 5e-4 | 1.2 | 0.000600000000 |
+| module explosion | 4e-5 | 8 | 0.000320000000 |
+| fall from height | 3e-3 | 0.5 | 0.001500000000 |
+| spill with no one near | 6e-3 | 0 | 0.000000000000 |
+
+PLL 0.002420000000 fatalities per year. The engine's model string, verbatim: "PLL = sum f_i x N_i; N the expected number of deaths of the scenario (PB 6.3, 6.4: not necessarily whole)".
+
+| how PLL was built | value per year |
+| --- | --- |
+| sum of f x N, the engine | 0.002420000000 |
+| sum of f over N, derived | 0.006421666667 |
+| sum of f with N ignored, derived | 0.009540000000 |
+
+PLL is an expected number of deaths per year. It is never a probability, and it can exceed one for a large enough population.
+
+The golden case fractional-and-zero-N (fractional N and one N of zero) gives 0.000685000000 per year through the engine.
+
+# SECTION 16: The fatal accident rate from PLL (owned by Professional m02)
+
+FAR is the number of fatalities per 100,000,000 exposed hours: FAR = PLL x 100,000,000 / exposed hours a year. The JISIKE crew is 60 people, each exposed 2000 hours a year (stated), so 120000 exposed hours a year, derived. FAR 2.016667.
+
+The engine's model string, verbatim: "FAR = PLL x 100,000,000 / exposed hours per year". The base is imported from the safety statistics engine, "engines/hse/safetyStats.js RATE_BASES.FAR_100M (IOGP: fatalities per 100,000,000 hours)".
+
+| how FAR was built | FAR |
+| --- | --- |
+| PLL over the crew's exposed hours, the engine | 2.016667 |
+| PLL over one person's hours | 121.000000 |
+| a base of 1,000,000 hours, derived | 0.020167 |
+
+THE SAME FAR AS THE SAFETY STATISTICS COURSE. A PLL of 2 over 4e+7 hours (stated) gives 5.000000 here, and the safety statistics engine's fatal accident rate of 2 fatalities over the same hours gives 5.000000: the same number to the last bit. That course counts deaths that happened; this one counts deaths expected.
+
+The golden FAR cases through the engine: platform 1.312785; whole-count 12.000000.
+
+# SECTION 17: The F-N curve: the frequency of N or more deaths (owned by Professional m03)
+
+The F-N curve plots, against N, the cumulative frequency F(N) of all scenarios with N OR MORE deaths. It is a step function: F is constant between two consecutive values of N and falls at each. Scenarios with no deaths are kept out of the curve, and their frequency is reported. The JISIKE off-site scenarios (stated):
+
+| scenario | frequency per year, stated | N, stated |
+| --- | --- | --- |
+| toxic cloud over the town | 2e-7 | 300 |
+| vapour cloud explosion | 1.5e-6 | 40 |
+| flash fire at the road | 8e-6 | 12 |
+| jet fire at the fence | 3e-5 | 3 |
+| second jet fire at the fence | 1e-5 | 3 |
+| release that reaches no one | 5e-5 | 0 |
+
+| N | F(N), N or more, per year |
+| --- | --- |
+| 3.000000 | 0.000049700000 |
+| 12.000000 | 0.000009700000 |
+| 40.000000 | 0.000001700000 |
+| 300.000000 | 0.000000200000 |
+
+Expected fatalities per year, sum f N: 0.000336000000. Frequency of scenarios with no deaths, kept out of the curve: 0.000050000000 per year.
+
+Two scenarios share N = 3; they make ONE corner, carrying both frequencies. The engine's model string, verbatim: "F(N) = sum of f_i with N_i >= N, at each distinct N_i > 0 (left-continuous step function)".
+
+Reading the step: F(5) = F(12) = 0.000009700000 per year, because no scenario has N between 3 and 12, and F(12.5) = F(40) = 0.000001700000 per year.
+
+# SECTION 18: Reading the curve wrongly: more than N, and one N alone (owned by Professional m03 l04)
+
+| N | F(N), N or more (the engine) | more than N, derived | only scenarios with exactly N, derived |
+| --- | --- | --- | --- |
+| 3.000000 | 0.000049700000 | 0.000009700000 | 0.000040000000 |
+| 12.000000 | 0.000009700000 | 0.000001700000 | 0.000008000000 |
+| 40.000000 | 0.000001700000 | 0.000000200000 | 0.000001500000 |
+| 300.000000 | 0.000000200000 | 0.000000000000 | 0.000000200000 |
+
+THE SOURCE CONTRADICTS ITSELF. The Purple Book's introduction to societal risk says "the cumulative frequency of having more than N deaths"; its equation 6.6 and section 6.3 say "N or more". The engine follows the equation, and so does this course. Reading "more than N" drops the scenario sitting exactly at each corner, as the middle column shows.
+
+# SECTION 19: What the F-N curve is checked against: self-consistency, and no published example (owned by Professional m03 l05 and Expert m05)
+
+THE AREA IDENTITY. The area under the step curve, summed step by step as F at each corner times the width of its step, derived, is 0.000336000000 per year, equal to the expected fatalities per year, 0.000336000000. For the JISIKE off-site set that is also the off-site PLL.
+
+NO PUBLISHED WORKED EXAMPLE. No source the engine read prints a worked F-N curve or a worked societal risk calculation, and the CCPS and HSE worked examples were not available. The curve is checked by SELF-CONSISTENCY ONLY: a brute force count at every corner, a second route on a grid of N, and the area identity above. This course never presents an F-N figure as a published reproduction.
+
+What IS published, and reproduced, is the criterion side: the three Bevi points lie on the Purple Book line (section 20), and the R2P2 point is printed in the source (section 22).
+
+# SECTION 20: Criterion lines: F = C over N to the alpha, and the Dutch line (owned by Professional m04)
+
+A criterion line has the form F = C / N^alpha between a smallest and a largest N. Alpha of 1 is called risk neutral and 2 risk averse. The engine's one line preset, `vrom-establishments`: C = 1e-3, alpha = 2, from N = 10, no upper end. Its source, verbatim: "TNO Purple Book CPR 18E (1999) Figure 6.8; Besluit externe veiligheid inrichtingen (2004, repealed 1 January 2024) art. 13(1)(b)".
+
+| N, golden | Bevi value, printed | the line C / N^alpha, engine constants |
+| --- | --- | --- |
+| 10 | 1e-5 | 1e-5 |
+| 100 | 1e-7 | 1e-7 |
+| 1000 | 1e-9 | 1e-9 |
+
+The Purple Book Figure 6.8 caption prints the line as a recommended limit for establishments; Bevi article 13 asks for the group risk to be COMPARED with the same three points, calling them an orientation value. Bevi was repealed on 1 January 2024, and the engine did not read its successor. The line is therefore a published comparison the analyst chooses to make, and the engine reports a state against it (section 21).
+
+CORNERS DECIDE EVERYTHING. F is flat on each step and the line falls with N, so on each step the ratio of F to the line is largest at the step's right corner, which the curve attains. The engine compares only at the corners inside the line's range, and that is exact. The JISIKE off-site curve against the Dutch line:
+
+| corner N | F(N) per year | line per year | ratio F / line | state |
+| --- | --- | --- | --- | --- |
+| 12.000000 | 0.000009700000 | 0.000006944444 | 1.396800 | EXCEEDS |
+| 40.000000 | 0.000001700000 | 0.000000625000 | 2.720000 | EXCEEDS |
+| 300.000000 | 0.000000200000 | 0.000000011111 | 18.000000 | EXCEEDS |
+
+The corner at N = 3 lies below the line's smallest N of 10 and is not checked.
+
+# SECTION 21: Where a curve exceeds, and the worst ratio (owned by Professional m04)
+
+State EXCEEDS, worst ratio 18.000000 at N = 300.000000.
+
+| exceeding step ends at N | F above the line from N | to N |
+| --- | --- | --- |
+| 12.000000 | 10.153462 | 12.000000 |
+| 40.000000 | 24.253563 | 40.000000 |
+| 300.000000 | 70.710678 | 300.000000 |
+
+For each exceeding step the engine reports the range of N over which F lies above the line: from the largest of the previous corner, the smallest N of the line, and the N where the line falls to F, which is (C / F)^(1 / alpha); to the corner itself.
+
+On the step ending at N = 40, F is 0.000001700000 per year, the line falls to it at N = (1e-3 / F)^(1/2) = 24.253563, derived, and the previous corner is 12, so F lies above the line from 24.253563 to 40.
+
+A LINE WITH AN UPPER END. With the same constants capped at N = 100 (stated), the corner at N = 300 is out of range, and the engine evaluates F at N = 100 itself, where the curve still has a step: N 12.000000 ratio 1.396800 EXCEEDS; N 40.000000 ratio 2.720000 EXCEEDS; N 100.000000 ratio 2.000000 EXCEEDS.
+
+# SECTION 22: The one published R2P2 point, and a line the analyst supplies (owned by Professional m05)
+
+R2P2 paragraph 136 gives a single POINT: an accident killing 50 or more people in one event should be regarded as intolerable if its frequency is more than one in five thousand a year. The preset `r2p2-para-136` is that one point, N = 50 at 0.000200000000 per year. R2P2 defers extrapolation to other N to a reference the engine did not read, so the engine gives the point NO SLOPE.
+
+| N | F(N) per year | point per year | ratio | state |
+| --- | --- | --- | --- | --- |
+| 50.000000 | 0.000000200000 | 0.000200000000 | 0.001000 | BELOW |
+
+Against the point, the JISIKE off-site curve is BELOW. F(50) is the frequency of 50 OR MORE deaths, the scenarios at N = 300 alone here.
+
+A LINE THE ANALYST SUPPLIES. A line of slope minus one through the point is common practice, but it is not in R2P2 and it is not a preset. An analyst who wants it gives it as their own criterion, C = 0.01 and alpha = 1, from N = 1 by default. The JISIKE curve against it: BELOW, worst ratio 0.014910 at N = 3.000000. The basis then says the source is "criterion as given".
+
+# SECTION 23: Touching the line, and the state words (owned by Professional m05)
+
+A curve built to sit exactly on the Dutch line at N = 10 (stated: touching scenario 1e-5 per year at N = 10; small scenario 2e-5 per year at N = 1):
+
+| N | F(N) per year | line per year | ratio | state |
+| --- | --- | --- | --- | --- |
+| 10.000000 | 0.000010000000 | 0.000010000000 | 1.000000 | AT_LINE |
+
+Overall state TOUCHES. EXCEEDS means strictly above the line at some corner; a corner within 1e-9 relative of the line is AT_LINE, and a curve with no exceedance and at least one AT_LINE corner TOUCHES. The basis says, verbatim: "within 1e-9 relative of the criterion counts as on it (AT_LINE / TOUCHES), not above it".
+
+The golden case r2p2-touch: F(50) = 1.5e-4 + 5e-5, which is 0.00019999999999999998 in double, ratio 0.9999999999999999, state TOUCHES. Without the snap a plain comparison would call this curve BELOW, although on paper it sits exactly on the point.
+
+| state word | meaning |
+| --- | --- |
+| BELOW | every checked corner strictly below the line or point |
+| TOUCHES | no corner above, and at least one on the line within the snap |
+| EXCEEDS | at least one corner strictly above |
+| AT_LINE | the state of one corner on the line |
+
+# SECTION 24: Fractions of deaths indoors and outdoors, and what they rest on (owned by Professional m06 and Expert m05 l03)
+
+For SOCIETAL risk the Purple Book counts deaths indoors and outdoors separately: Fd = FE,in x fpop,in + FE,out x (1 - fpop,in), where fpop,in is the fraction of the population indoors (Table 5.3: day 0.93, night 0.99). The rules by effect, run through the engine:
+
+| case | PE | FE,in | FE,out | fpop,in | Fd |
+| --- | --- | --- | --- | --- | --- |
+| toxic, PE 0.4 stated, day | 0.400000 | 0.040000 | 0.400000 | 0.930000 | 0.065200000000 |
+| toxic, PE 0.4 stated, night | 0.400000 | 0.040000 | 0.400000 | 0.990000 | 0.043600000000 |
+| explosion, 5000 Pa gauge, day | 0.000000 | 0.000000 | 0.000000 | 0.930000 | 0.000000000000 |
+| explosion, 10000 Pa gauge, day | 0.000000 | 0.000000 | 0.000000 | 0.930000 | 0.000000000000 |
+| explosion, 20000 Pa gauge, day | 0.000000 | 0.025000 | 0.000000 | 0.930000 | 0.023250000000 |
+| explosion, 30000 Pa gauge, day | 0.000000 | 0.025000 | 0.000000 | 0.930000 | 0.023250000000 |
+| explosion, 40000 Pa gauge, day | 1.000000 | 1.000000 | 1.000000 | 0.930000 | 1.000000000000 |
+| flash fire, inside the envelope, night | 1.000000 | 1.000000 | 1.000000 | 0.990000 | 1.000000000000 |
+| flash fire, outside the envelope, night | 0.000000 | 0.000000 | 0.000000 | 0.990000 | 0.000000000000 |
+| fire at 35000 W/m2, day | 1.000000 | 1.000000 | 1.000000 | 0.930000 | 1.000000000000 |
+
+The explosion rows follow Figure 5.5: above 30000 Pa gauge everyone dies; above 10000 Pa only 0.025 of those indoors; at or below either threshold, the lower rule. Exactly 30000 Pa falls in the lower rule. A fire at 35000 W/m2 or more kills everyone, indoors or out (Figure 5.4 prints "Q >= 35 kW/m2"). Below that flux the fire's probability of death comes from a heat probit, which is consequence modelling and belongs to the consequence course.
+
+WHAT THE FRACTIONS REST ON. The factors 0.1 (toxic indoors), 0.14 (fire outdoors), 0.025 (explosion indoors) and the Table 5.3 fractions are single transcriptions of the Purple Book, which prints no numeric example for them. The engine's own validation planted a wrong clothing factor in both the engine and its oracle, and the suite stayed green. So this course teaches the rules and NEVER grades a number that passes through them.
+
+The fractions are for SOCIETAL risk: the expected number of deaths in a population cell is Fd times the people in it. They are not a vulnerability factor for individual risk (section 12).
+
+# SECTION 25: The ALARP regions of an individual risk (owned by Expert m01)
+
+R2P2 divides individual risk into three regions. Above the upper limit a risk is UNACCEPTABLE whatever the benefit. At or below the lower limit it is BROADLY_ACCEPTABLE. Between, it is TOLERABLE only if reduced as low as reasonably practicable (ALARP), and the engine sets `alarpDemonstrationRequired`. The presets: workers unacceptable above 1e-3 and broadly acceptable at or below 1e-6 per year; the public above 1e-4 and at or below 1e-6. R2P2 says the limits are guidelines, to be applied with judgement.
+
+| individual risk per year, stated | workers band | workers boundary | ALARP demonstration required (workers) | public band | public boundary |
+| --- | --- | --- | --- | --- | --- |
+| 1e-2 | UNACCEPTABLE | null | false | UNACCEPTABLE | null |
+| 2e-3 | UNACCEPTABLE | null | false | UNACCEPTABLE | null |
+| 1e-3 | TOLERABLE | unacceptable | true | UNACCEPTABLE | null |
+| 5e-4 | TOLERABLE | null | true | UNACCEPTABLE | null |
+| 1e-4 | TOLERABLE | null | true | TOLERABLE | unacceptable |
+| 2e-5 | TOLERABLE | null | true | TOLERABLE | null |
+| 1e-6 | BROADLY_ACCEPTABLE | broadly-acceptable | false | BROADLY_ACCEPTABLE | broadly-acceptable |
+| 5e-7 | BROADLY_ACCEPTABLE | null | false | BROADLY_ACCEPTABLE | null |
+| 0 | BROADLY_ACCEPTABLE | null | false | BROADLY_ACCEPTABLE | null |
+
+The ratios the engine returns beside the band, for 2e-5 per year against the worker preset: 0.020000 of the upper limit and 20.000000 times the lower. The basis model, verbatim: "UNACCEPTABLE if IR > upper; BROADLY_ACCEPTABLE if IR <= lower; TOLERABLE (reduce ALARP) between".
+
+The R2P2 box of industry rates (golden, published), each banded against the preset its source names:
+
+| golden case | individual risk per year | preset | engine band | what the source says |
+| --- | --- | --- | --- | --- |
+| agriculture 1999/00, 1 in 12 984 | 0.000077017868 | r2p2-workers | TOLERABLE | UK HSE R2P2 (2001) para 128 box: worker rates "normally well below the upper limit" of 1 in 1000 |
+| construction 1999/00, 1 in 21 438 | 0.000046646142 | r2p2-workers | TOLERABLE | UK HSE R2P2 (2001) para 128 box |
+| mining and quarrying 1999/00, 1 in 14 564 | 0.000068662455 | r2p2-workers | TOLERABLE | UK HSE R2P2 (2001) para 128 box |
+| service sector 1999/00, 1 in 388 565 | 0.000002573572 | r2p2-workers | TOLERABLE | UK HSE R2P2 (2001) para 128 box (still above 1 in a million) |
+| public, gas 1994/5-1998/9, 1 in 1 510 000 | 0.000000662252 | r2p2-public | BROADLY_ACCEPTABLE | UK HSE R2P2 (2001) para 128 box: "below the limit of what is often regarded as broadly acceptable" |
+
+# SECTION 26: A threshold belongs to the lower band, and the boundary snap (owned by Expert m01)
+
+THE OWNER'S DECISION. A value exactly at a threshold belongs to the LOWER band. An individual risk exactly at 1e-3 is TOLERABLE for workers; exactly at 1e-6 it is BROADLY_ACCEPTABLE; a cost exactly DF times the benefit is NOT grossly disproportionate (section 31); a curve exactly on a line TOUCHES it (section 23). Every source the engine read words its threshold this way: R2P2 paragraph 136 says "more than", Bevi says "ten hoogste" (at most), and the checklist says costs over benefits "greater than" the DF. The Purple Book Figure 6.8 caption, "F < 1e-3 N^-2", reads the other way at equality, and R2P2's bias to safety could argue for the other convention. The result says which boundary was touched.
+
+| product, stated | in IEEE double | threshold it means | preset | engine band | boundary |
+| --- | --- | --- | --- | --- | --- |
+| 0.1 x 0.1 x 0.1 | 0.0010000000000000002 | 1e-3 | r2p2-workers | TOLERABLE | unacceptable |
+| 0.1 x 0.1 x 0.01 | 0.00010000000000000002 | 1e-4 | r2p2-public | TOLERABLE | unacceptable |
+| 0.2 x 0.000005 | 0.0000010000000000000002 | 1e-6 | r2p2-public | BROADLY_ACCEPTABLE | broadly-acceptable |
+
+THE SNAP. BOUNDARY_SNAP is 1e-9 relative: a computed value within that distance of a threshold IS the threshold, and `atBoundary` names it. Without it, 0.1 x 0.1 x 0.1 = 0.0010000000000000002 in double would be UNACCEPTABLE for workers, although the exact product is the threshold itself.
+
+The snap is narrow: 1.0000001e-6 per year, one part in ten million above the lower limit, is TOLERABLE for the public with boundary null.
+
+# SECTION 27: The benefit of a measure: a fatality prevented and its value (owned by Expert m02)
+
+A risk reduction measure lowers the PLL by deltaPLL fatalities a year. Its yearly benefit is deltaPLL times the value of preventing a fatality (VPF), plus the value of the injuries and ill health it prevents: B = deltaPLL x VPF + the sum of expected cases a year times the value per case. Over the measure's life the benefit is the present value of B each year, uprated by a growth rate if one is given.
+
+| illustrative value | figure | source, verbatim |
+| --- | --- | --- |
+| VPF, 2001 | 1000000 | UK HSE, Reducing risks, protecting people (2001) Appendix 3 para 13 ("about GBP 1 000 000 (2001 prices)") |
+| VPF, 2003 Q3 | 1336800 | UK HSE, Cost Benefit Analysis (CBA) checklist (2003 values): fatality GBP 1,336,800 (times 2 for cancer) |
+| DF |  | DFs "vary from upwards of 1"; in the checklist example "a DF of more than 10 is unlikely" |
+
+VPF HAS NO DEFAULT. Both figures are exported for illustration only, in GBP at their price year, and a call without a VPF is refused (section 3). Current HSE figures were not found on a live page, so neither is a recommendation.
+
+The EDIKAN firewall (stated): deltaPLL 2e-3 per year, VPF 1000000, a life of 20 years, capital 250000 at year 0 and 5000 a year, DF 3. Undiscounted, the fatality benefit is 2000.00 a year and the present value of the benefit 40000.00.
+
+R2P2 Appendix 3 paragraph 13 (golden, published): with a VPF of 1000000, a reduction of one in 100,000 in the risk of one person is worth about 10. Through the engine, deltaPLL 1e-5 for 1 year gives a benefit of 10.00.
+
+# SECTION 28: The published CBA checklist example, and a rounded print (owned by Expert m02)
+
+The HSE CBA checklist works one explosion measure over 25 years, undiscounted (golden, published). Its inputs: deltaPLL 2e-4, VPF 1336800, and three injury lines.
+
+| line | cases a year, golden | value per case, golden | benefit over the life, engine |
+| --- | --- | --- | --- |
+| fatalities | 0.0002 | 1336800 | 6684.00 |
+| permanently incapacitating injury | 0.0004 | 207200 | 2072.00 |
+| serious injury | 0.001 | 20500 | 512.50 |
+| slight injury | 0.002 | 300 | 15.00 |
+
+| figure | printed | engine |
+| --- | --- | --- |
+| fatalities | 6684 | 6684.00 |
+| permanent incapacity | 2072 | 2072.00 |
+| serious injury | 512 | 512.50 |
+| slight injury | 15 | 15.00 |
+| total benefit | 9283 | 9283.50 |
+| largest reasonable cost at DF 10 | 93000 | 92835.00 |
+
+A ROUNDED PRINT AND ITS VERDICT. The serious injury line is 512.50 and is printed 512; the total is 9283.50 and is printed 9283; the limit is printed 93000 against a computed 92835.00. At exactly the printed 93000, the engine returns GROSSLY_DISPROPORTIONATE, by 165.00. The checklist meant "in the region of", and the verdict is an artefact of its rounding. The lesson for an ALARP note: compute from the inputs, never from a rounded figure.
+
+The checklist table also prints a permanent incapacity value as "207,2000"; its own worked example uses 207,200, as the golden does.
+
+# SECTION 29: Year-end present values, and two HSE discounting conventions (owned by Expert m03)
+
+Every present value in the engine goes through the canonical year-end present value of the economics engine. Capital is spent at year 0; each annual cost and each year's benefit fall at the END of years 1 to n. The rates default to zero, which is undiscounted, as in the checklist example.
+
+THE TWO HSE SOURCES DISAGREE. R2P2 (2001) discounts at 6 percent real and uprates benefits by 4 percent a year. The CBA checklist (2003) discounts benefits at no more than 1.5 percent and costs at no less than 3.5 percent. All three rates are inputs. The EDIKAN firewall under each:
+
+| convention | benefit rate | cost rate | benefit growth | present value of the benefit | present value of the cost | cost / benefit | verdict at DF 3 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| undiscounted | 0 | 0 | 0 | 40000.00 | 350000.00 | 8.750000 | GROSSLY_DISPROPORTIONATE |
+| the 2003 checklist limits | 0.015 | 0.035 | 0 | 34337.28 | 321062.02 | 9.350247 | GROSSLY_DISPROPORTIONATE |
+| R2P2 Appendix 3 | 0.06 | 0.06 | 0.04 | 32946.93 | 307349.61 | 9.328625 | GROSSLY_DISPROPORTIONATE |
+
+The basis says, for the checklist row, verbatim: "engines/economics/cashflow.ts npv (year-end discounting); benefits at 0.015 growing at 0, costs at 0.035; discounted".
+
+The golden R2P2 case through the engine: present value of the benefit 22635.17, of the cost 214412.08.
+
+The present value mechanics themselves belong to the economics courses. This course uses them only to put a cost and a benefit on the same footing for the gross disproportion test.
+
+# SECTION 30: The implied cost of averting a fatality, counted undiscounted (owned by Expert m03)
+
+The ICAF, the implied cost of averting a fatality, is what the engine calls the cost per fatality prevented (CPF, R2P2 Appendix 3 paragraph 15): the present value of the cost over the number of fatalities prevented, where fatalities prevented = deltaPLL x the life in years, UNDISCOUNTED.
+
+| convention | fatalities prevented | present value of the cost | ICAF |
+| --- | --- | --- | --- |
+| undiscounted | 0.040000 | 350000.00 | 8750000.00 |
+| the 2003 checklist limits | 0.040000 | 321062.02 | 8026550.41 |
+| R2P2 Appendix 3 | 0.040000 | 307349.61 | 7683740.15 |
+
+The fatalities prevented stay at 0.040000 whatever the rate; only the cost is discounted. Dividing instead by the DISCOUNTED fatalities (the present value of the benefit over VPF, 0.034337, derived) gives 9350246.71, a different number the engine never returns.
+
+An ICAF can be read against the VPF: a measure whose ICAF is below VPF times the DF passes the gross disproportion test when injuries add nothing. With injuries in the benefit, compare the cost to benefit ratio with the DF (section 31); the ICAF alone leaves them out.
+
+# SECTION 31: The gross disproportion test (owned by Expert m04)
+
+The HSE checklist's test: a measure is not reasonably practicable when its costs divided by its benefits are GREATER than the disproportion factor, cost > DF x benefit. The engine returns the ratio, the verdict and the largest reasonably practicable cost, DF times the present value of the benefit. DFs "vary from upwards of 1", and the checklist's example says a DF above 10 is unlikely; a DF below 1 is refused.
+
+| DF, stated | cost / benefit | largest reasonably practicable cost | present value of the cost | verdict |
+| --- | --- | --- | --- | --- |
+| 1 | 8.750000 | 40000.00 | 350000.00 | GROSSLY_DISPROPORTIONATE |
+| 2 | 8.750000 | 80000.00 | 350000.00 | GROSSLY_DISPROPORTIONATE |
+| 3 | 8.750000 | 120000.00 | 350000.00 | GROSSLY_DISPROPORTIONATE |
+| 5 | 8.750000 | 200000.00 | 350000.00 | GROSSLY_DISPROPORTIONATE |
+| 10 | 8.750000 | 400000.00 | 350000.00 | NOT_GROSSLY_DISPROPORTIONATE |
+
+The cost to benefit ratio does not depend on the DF; only the verdict and the largest reasonable cost do.
+
+STRICTLY GREATER. The golden case exactly-at-df: a cost of 9000.000000000002 against DF 3 times a benefit of 3000.00, derived as exactly equal on paper. The engine returns NOT_GROSSLY_DISPROPORTIONATE with atBoundary true: at the boundary the measure is still reasonably practicable, and the duty to adopt it stands.
+
+The basis model string, verbatim: "grossly disproportionate when cost / benefit > DF; benefit = (dPLL x VPF + other harms) per year over the life; CPF = cost / (dPLL x years)".
+
+# SECTION 32: What the engine does not know (owned by Expert m05)
+
+| what the engine does not know | why, from its record | what the analyst does instead |
+| --- | --- | --- |
+| an aversion weighted risk integral | no source it read defines one | reports the expected value sum f N and the F-N curve, and argues aversion in words |
+| a slope for the R2P2 point | R2P2 gives one point and defers the slope to a reference not read | supplies a line of their own and says it is theirs (section 22) |
+| the successor to the Bevi values | Bevi was repealed on 1 January 2024 and its successor was not read | treats the Dutch line as a historical published comparison |
+| current HSE VPF and injury values | the checklist values are 2003 figures and none is a default | states the VPF and its year, and justifies it |
+| a check of the Table 4.5 cells, the 0.6 and 0.4 split and the Fd factors | each is one transcription with no published example to test it | states the values used and their source |
+| a published F-N worked example | none was available; the curve is checked by self-consistency | never cites an F-N figure as published-verified |
+| a probability of death | it comes from the consequence course | takes Pd as an input and records where it came from |
+| a grid, a wind rose, a population map | the caller supplies each scenario frequency and Pd | does that bookkeeping and records it |
+
+EXPOSURE CAPS ARE APPLIED AND STATED. The Purple Book limits exposure to a fire to 20 s and to a toxic cloud to 30 minutes. The engine applies the cap without refusing and states the time it used; a toxic exposure of 60 minutes is computed at 30. The toxic case belongs to the consequence side of the seam.
+
+THE PUBLISHED EXAMPLE IS ROUNDED. Purple Book Appendix 6.B prints Pd = 0.381 where the whole chain, as the golden records it, gives 0.380294556093 (section 11). It also uses R = 361 m for a point whose distance computes to 360.555 m, derived from its coordinates (200, 300), and one step names the point (100, 200). A reproduction that needs a rounded intermediate says which one.
+
+# SECTION 33: Judgement: ordering measures and the ALARP demonstration (owned by Expert m06)
+
+ORDERING MEASURES. The EDIKAN firewall at the three conventions and the DF sweep show that the verdict can turn on choices the analyst makes: the discounting convention, the DF, the VPF and its year. An ALARP demonstration states each choice and why, and shows the verdict at the other defensible choices.
+
+AN INDIVIDUAL RISK BANDED. The EREMOR supervisor's IRPA of 0.000008743500 per year (section 12) is TOLERABLE against the worker preset, 8.743500 times the lower limit, so an ALARP demonstration is required.
+
+AN ALARP NOTE, in the shape this course grades at Expert: the individual risk of the most exposed person and its region; the societal picture if the population warrants it; each measure considered, with its deltaPLL, costs, life, VPF, other harms, discounting convention and DF, each with its source; the cost to benefit ratio and the verdict; the ICAF beside the VPF; the measures adopted and the ones rejected as grossly disproportionate; and what the engine did not know.
+
+WHEN THE NUMBERS ARE NOT ENOUGH. A verdict at the boundary is still reasonably practicable (section 31). An individual risk in the TOLERABLE region is not acceptable until the demonstration is made. A measure rejected on cost is still weighed against good practice, which the engine does not know.
+
+# SECTION 34: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+Several words in this course already mean something else elsewhere in the academy, or are easy to shorten wrongly. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| word | what it already means elsewhere | the rule here |
+| --- | --- | --- |
+| risk | a matrix score in the risk and change course, a cost in the economics courses | always qualified: individual risk, LSIR, IRPA or societal risk |
+| severity | a consequence category on a risk matrix in the risk and compliance courses | never used |
+| likelihood | a likelihood score on a risk matrix, and a Bayesian likelihood in the decision analysis course | never used: a frequency is per year, a probability is a probability |
+| FAR | the same rate in the safety statistics course | always per 100,000,000 exposed hours |
+| PLL | nothing else, and easy to misread as a probability | expected fatalities per year, never a probability |
+| ICAF | called CPF, cost per fatality prevented, in R2P2 | the implied cost of averting a fatality: the present value of the cost over the undiscounted fatalities prevented |
+| NPV, IRR | the economics courses' measures | never used: this course says present value |
+| probit, dose | the consequence course's models | named only to say where a probability of death comes from; never computed |

@@ -1098,5 +1098,58 @@
       "digest.txt": "8c59f39964df531e1e939db0a3f7f6a2865f0ac9094228c2b2739984f4bdc80b",
       "fields.json": "af9717b1a6f661a5084b805911b8ed4a047f5a0ea6354a91eea333199bc5ec62"
     }
+  },
+  "qra": {
+    "course": "H5",
+    "live": "/root/hse-wip-qra",
+    "kit": "full",
+    "kitNote": "Full kit. The mirror carries everything the wave is rebuilt and gated from: the digest, its generator and the teaching streams; the eighteen graded answers, their generator, the precision declaration and the tolerance derivation's writer; the engine loader and its TypeScript hook (qra.js imports cashflow.ts); the discriminate sweep and the oracle replay; every wave gate with its negative control (the capstone leak gate with its seam direction 11) and the runner that pins every gate's md5 into wave.json; the prose rules; the structure, scaffold and lengths tools; the vendoring script and this mirror script; the five writer briefs; and, with the seed ladder, the three tier headers, the course generator (which runs the engine and renders the prompts from its inputs), the go-live generator (engine ledger, a second route in SQL, 91 traps checked against discriminate.mjs), the seed generator that stages the committed tree, the SQL verifier, the scratch database, the dry run with its negative controls and block cutter, and the owner's content-addressed apply script. HSE module, path_order 65.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "truth-qra.json",
+      "h5_dump.mjs",
+      "h5_fields.mjs",
+      "h5_capstone.mjs",
+      "qra_engine.mjs",
+      "ts_loader.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "oracle_check.py",
+      "structure.py",
+      "scaffold.py",
+      "lengths.py",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "gate_capstone_leak.mjs",
+      "gate_claims.mjs",
+      "gate_copy_rule.py",
+      "gate_vocabulary.py",
+      "run_gates.py",
+      "vendor_qra.sh",
+      "mirror.sh",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_h5.sh",
+      "cut_block.py",
+      "apply_h5_qra.sh"
+    ],
+    "pins": {
+      "digest.txt": "d1503e742b48e2aa5db340a11f901230b972300afd6502c3b4951431f1133ab3",
+      "fields.json": "17cb9d2bebf9b7bff6e5978d8c9e74cfb370f1470ade5286f3390d97817837f9"
+    }
   }
 }

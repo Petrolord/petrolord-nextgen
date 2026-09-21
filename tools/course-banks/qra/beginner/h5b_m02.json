@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The engine's model string for an event tree gives one rule for a leaf. What is it?",
+  "options": [
+   "leaf frequency = f0 x sum of the branch probabilities on its path",
+   "leaf frequency = f0 x product of the branch probabilities on its path; each branch set sums to 1",
+   "leaf frequency = f0 x the probability of the last branch on its path",
+   "leaf frequency = product of the branch probabilities on its path, f0 left out"
+  ],
+  "answer": 1,
+  "explanation": "The engine's model string, verbatim, is \"event tree: leaf frequency = f0 x product of the branch probabilities on its path; each branch set sums to 1\". Summing the probabilities on a path has no meaning, and the engine scales nothing. Every branch on the path multiplies in, the last one included, and the initiating frequency multiplies every leaf."
+ },
+ {
+  "prompt": "The EREMOR tank overfill starts at 2e-3 per year (stated). On the path high level alarm missed then bund contains the spill then ignited in the bund, what leaf frequency does the engine return?",
+  "options": [
+   "0.000014500000 per year, the pool fire total, since this leaf already carries every pool fire in the tree with it.",
+   "0.000007500000 per year, which is the leaf through the overtopped bund, ignited outside the bund.",
+   "0.000063000000 per year, the leaf not ignited in the bund.",
+   "0.000007000000 per year, from a path probability of 0.003500000000."
+  ],
+  "answer": 3,
+  "explanation": "The engine gives this leaf a path probability of 0.003500000000 and a frequency of 0.000007000000 per year, the initiating frequency times the product of the three branch probabilities on its path. 0.000007500000 is the other pool fire leaf, through the overtopped bund, and 0.000014500000 is the two pooled together. 0.000063000000 is the neighbouring leaf where the spill in the bund does not ignite."
+ },
+ {
+  "prompt": "Two leaves of the overfill tree carry the outcome 'pool fire'. What total does the engine report for that outcome?",
+  "options": [
+   "0.000014500000 per year, the two leaves of 0.000007000000 and 0.000007500000 pooled into one outcome.",
+   "0.000007000000 per year, the first pool fire leaf, the second dropped as a duplicate.",
+   "0.000007500000 per year, the larger of the two pool fire leaves, since one outcome keeps only its worst leaf in the total.",
+   "0.000085500000 per year, the fire leaves added to the leaves never ignited."
+  ],
+  "answer": 0,
+  "explanation": "The engine totals every leaf that shares an outcome, so the two pool fire leaves, 0.000007000000 and 0.000007500000, pool into 0.000014500000 per year. Reading only the first leaf gives 0.000007000000 and misses the leaf through the overtopped bund, and keeping the larger alone drops the other. 0.000085500000 is the separate 'no fire' total."
+ },
+ {
+  "prompt": "What do all the leaves of the EREMOR overfill tree sum back to?",
+  "options": [
+   "0.001900000000 per year, since the leaf where the high level alarm is answered releases nothing and falls out of the tree.",
+   "0.000085500000 per year, since only the leaves with no fire count.",
+   "0.002000000000 per year, the initiating frequency, because each branch set sums to one.",
+   "0.000014500000 per year, since only the leaves that end in a fire are counted as outcomes of the tree."
+  ],
+  "answer": 2,
+  "explanation": "Every branch set is exhaustive and exclusive, so the leaves sum back to the initiating frequency, 0.002000000000 per year. The 'no release' leaf is a leaf like any other, 0.001900000000 per year, and it is kept. The pool fire total of 0.000014500000 and the 'no fire' total of 0.000085500000 are each one outcome among three."
+ },
+ {
+  "prompt": "On the overfill path high level alarm missed then bund overtopped then ignited outside the bund, what path probability does the engine print?",
+  "options": [
+   "0.003500000000, which the engine prints for the path through the bund that contains the spill and then ignites inside it",
+   "0.011250000000, which the engine prints for the path on which the spill overtops the bund and is never ignited",
+   "0.003750000000",
+   "0.031500000000, the path contained in the bund and never ignited"
+  ],
+  "answer": 2,
+  "explanation": "The engine prints 0.003750000000 for this path, the product of the branch probabilities on it, and its leaf frequency is 0.000007500000 per year. 0.003500000000 belongs to the contained path that ignites in the bund, 0.011250000000 to the overtopped path that never ignites, and 0.031500000000 to the contained path that never ignites."
+ },
+ {
+  "prompt": "A leaf in a tree is given no `outcome` of its own. What does the engine call it in the totals?",
+  "options": [
+   "Its branch name.",
+   "The outcome of the leaf just above it on the same branch set, carried down so that every leaf in the tree has a named outcome.",
+   "Nothing: a leaf with no outcome is left out of the totals and its frequency is dropped from the tree without a message.",
+   "The word 'unnamed', with a note in the basis that a name was missing when the tree was read."
+  ],
+  "answer": 0,
+  "explanation": "The digest says a leaf with no `outcome` of its own takes its branch name. Nothing is borrowed from a neighbouring leaf, no frequency is dropped, and the engine writes no placeholder name. A branch with no name at all is a different matter: the engine refuses it."
+ },
+ {
+  "prompt": "A branch set is typed as 0.6 and 0.3. What does the engine say, in its own words?",
+  "options": [
+   "tree.branches: the missing 0.1 has been added to the last branch in the set so that the branch probabilities sum to 1 as every branch set must",
+   "tree.branches[1].probability: the second branch must be a probability in [0, 1], and the branch set has been scaled to close",
+   "tree.branches: a branch set of two must be exhaustive, so the second branch probability is read as one minus the first",
+   "tree.branches: the branch probabilities sum to 0.8999999999999999, not 1 (tolerance 1e-9): every branch set must be exhaustive and exclusive"
+  ],
+  "answer": 3,
+  "explanation": "These are the engine's own words, from the refusal table, and the branch set is refused. The engine alters no input, so it neither adds the gap to a branch, scales the set nor reads a second branch as one minus the first. Each probability here lies inside [0, 1]; the fault is the sum."
+ },
+ {
+  "prompt": "0.7, 0.2 and 0.1 sum to one on paper and to 0.9999999999999999 in IEEE double. What does the engine do with that branch set?",
+  "options": [
+   "It refuses it, since 0.9999999999999999 falls short of exactly 1.",
+   "It accepts it, because the absolute tolerance of 1e-9 covers the gap left by double arithmetic.",
+   "It accepts it after rounding each probability to twelve decimals.",
+   "It refuses it and names the third branch as the one that falls short."
+  ],
+  "answer": 1,
+  "explanation": "BRANCH_SUM_TOLERANCE is 1e-9, absolute, and the digest's table shows 0.7, 0.2 and 0.1 accepted although they sum to 0.9999999999999999 in double. Demanding an exact 1 in double would refuse a set that is exact on paper. The engine rounds no input, and it names no single branch for a sum."
+ },
+ {
+  "prompt": "Someone enters 0.4000001 and 0.6 as the two probabilities under one node. How is that handled, and why?",
+  "options": [
+   "Refuses it: the sum is 1.0000001, a tenth of a millionth over one, which is a typing error far outside the tolerance of 1e-9.",
+   "Accepts it, since a sum a tenth of a millionth over one is the same kind of gap as the double rounding in 0.7, 0.2 and 0.1.",
+   "Accepts it after trimming the first branch back to 0.4, so that the branch set closes and the tree can be run.",
+   "Refuses it for the first branch alone, since 0.4000001 carries more decimals than a branch probability may be typed with."
+  ],
+  "answer": 0,
+  "explanation": "The sum is 1.0000001, and the engine refuses the set in its own words: the branch probabilities sum to 1.0000001, not 1 (tolerance 1e-9). A gap of a tenth of a millionth is far wider than the 1e-9 that covers double arithmetic, so it is a typing error. The engine trims no branch, and it sets no limit on the decimals a probability may carry."
+ },
+ {
+  "prompt": "A lower branch set, two levels down a tree, sums to 0.5. How does the refusal say which node failed?",
+  "options": [
+   "It names only `tree.branches`, the top of the tree, and leaves the analyst to search every lower set for the one that failed.",
+   "It names the initiating frequency, since a tree that does not close cannot give leaves that sum back to it.",
+   "It names none: a lower set is closed for the analyst by the engine.",
+   "It names the branch set by its path, `tree.branches[0].next.branches`, and says the probabilities sum to 0.5."
+  ],
+  "answer": 3,
+  "explanation": "The digest says a refusal names the branch set by its path, so a deep tree says which node failed; the refusal table shows `tree.branches[0].next.branches` with the sum of 0.5. The engine does not stop at the top of the tree, it does not blame the initiating frequency, and it closes no set on the analyst's behalf."
+ },
+ {
+  "prompt": "One branch set holds two branches both named 'fire'. What does the engine return?",
+  "options": [
+   "A tree in which the two 'fire' branches are merged into one, their probabilities added before any leaf is formed",
+   "tree.branches[1].name: 'fire' appears twice in one branch set",
+   "A tree in which the second 'fire' leaf is renamed with a number so that both leaves can be carried into the totals",
+   "tree.branches[0].name: every branch needs a name"
+  ],
+  "answer": 1,
+  "explanation": "Those are the engine's own words from the refusal table, naming the second branch, `tree.branches[1].name`. The engine merges nothing and renames nothing: a repeated name within one branch set is refused. The missing name message is real engine text for a branch that has no name at all."
+ },
+ {
+  "prompt": "A branch named 'fire' is typed with a probability above one. What does the engine say?",
+  "options": [
+   "tree.branches: the branch probabilities sum to more than 1, and the branch named 'fire' has been capped at 1 to close the set",
+   "tree.branches[0].frequencyPerYr: 'fire' must have a frequency of 0 or more per year",
+   "tree.branches[0].probability: 'fire' must be a probability in [0, 1]",
+   "tree.branches: every branch set must be exhaustive and exclusive"
+  ],
+  "answer": 2,
+  "explanation": "Those are the engine's own words, from the refusal table: the field is `tree.branches[0].probability` and the message is that 'fire' must be a probability in [0, 1]. The engine caps no input. A branch carries a probability, so no branch field is a frequency per year, and the bare line about exhaustive and exclusive sets is only the tail of the sum refusal."
+ },
+ {
+  "prompt": "An event tree is called with an initiating frequency of zero. What happens?",
+  "options": [
+   "It runs and returns every leaf at a frequency of zero, since a tree with a zero root is valid arithmetic that simply gives no events.",
+   "It runs with an initiating frequency of 1 per year in its place, so that the leaves read as conditional probabilities.",
+   "It is refused on `tree.branches`, because a zero root leaves no branch set with anything to share out between its branches.",
+   "It is refused: initiatingFrequencyPerYr: must be a frequency above 0 per year"
+  ],
+  "answer": 3,
+  "explanation": "The refusal table gives the engine's own words for a missing or zero root: initiatingFrequencyPerYr: must be a frequency above 0 per year. The units table asks for a root above 0, although a single scenario may carry a frequency of 0. The engine substitutes no value, and the field it names is the initiating frequency itself."
+ },
+ {
+  "prompt": "Why must every branch set in an event tree be exhaustive and exclusive?",
+  "options": [
+   "So that the branch probabilities sum to one and the leaves share out exactly the frequency that reached the node.",
+   "So that each leaf frequency comes out below its branch probability, which lets a reviewer tell frequencies and probabilities apart.",
+   "So that the engine can take the last branch of every set as one minus the others and save the analyst typing it in.",
+   "So that two leaves never share an outcome name, which would pool them into a single total."
+  ],
+  "answer": 0,
+  "explanation": "An exhaustive and exclusive set covers every case once, so its probabilities sum to one and the leaves below a node share out exactly the frequency that reached it; that is why the overfill leaves sum back to 0.002000000000 per year. The engine computes no branch for the analyst, and leaves may share an outcome: the two pool fire leaves pool by design."
+ },
+ {
+  "prompt": "In the overfill tree, what frequency does the engine give the outcome 'no release'?",
+  "options": [
+   "0.002000000000 per year, the whole initiating frequency.",
+   "0.001900000000 per year, the leaf where the high level alarm is answered.",
+   "0.000085500000 per year, the 'no fire' total.",
+   "0.000063000000 per year, the leaf in which the spill stays in the bund and is never ignited."
+  ],
+  "answer": 1,
+  "explanation": "The alarm answered path has a probability of 0.950000000000, so the 'no release' leaf is 0.001900000000 per year. The whole 0.002000000000 is the sum of every leaf, 'no release' included. 0.000085500000 is the separate 'no fire' total, and 0.000063000000 is the single leaf where the spill stays in the bund and is never ignited."
+ }
+]

@@ -1,0 +1,133 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H5 qra, Expert tier, module 06 "Judgement, End to End".
+# Digest sections drawn on: 33 (ordering measures, an individual risk banded,
+# the ALARP note, when the numbers are not enough), with the Expert figures of
+# 25 to 31, the lower tier figures of 10, 12, 20 and 22 that an ALARP note
+# quotes, the limits of 32, and section 34.
+
+q(1,
+ "The EREMOR supervisor's IRPA is 0.000008743500 per year. Banded against the worker preset, what does the engine say, and what follows for the duty holder?",
+ "TOLERABLE, 8.743500 times the lower limit, so an ALARP demonstration is required before the individual risk can be accepted.",
+ ["BROADLY_ACCEPTABLE, because it lies more than a hundred times below the worker upper limit, so no demonstration is needed at all.",
+  "TOLERABLE, 20.000000 times the lower limit, the ratio the engine returns for every individual risk in the middle region.",
+  "UNACCEPTABLE, because a supervisor is a member of the public while in the accommodation, and the public limit is exceeded there."],
+ "The digest bands the supervisor at TOLERABLE, 8.743500 times the lower limit of 1e-6, and says an ALARP demonstration is required. Being well below the upper limit is not being broadly acceptable. 20.000000 is the ratio for 2e-5 per year, since the ratio moves with the individual risk, and a worker on site is banded as a worker in every place of the roster."),
+
+q(3,
+ "An ALARP note must band the individual risk of the most exposed person. For EREMOR, which figure is that, and why that one?",
+ "The operator's IRPA, 0.000017541379 per year, because it is what one person carries over the places occupied, and it exceeds the supervisor's 0.000008743500.",
+ ["The process deck LSIR, 0.000148150000 per year, because the note bands a place and the deck is the most dangerous place on the installation.",
+  "The supervisor's IRPA, 0.000008743500 per year, because the supervisor is the senior person on the roster and the note bands them first.",
+  "The LSIRs summed with no occupancy, 0.000154803000 per year, because the most exposed person is assumed to be everywhere at once."],
+ "The note bands a person's IRPA, and the operator's 0.000017541379 is higher than the supervisor's 0.000008743500. An LSIR assumes someone present at the place all the time, outdoors and unprotected, which describes no one on the roster. Seniority is irrelevant, and summing the LSIRs with no occupancy has one person in three places at once."),
+
+q(0,
+ "The EDIKAN verdict turns on choices the analyst makes. What does an ALARP demonstration do about that?",
+ "It states each choice and why (the discounting convention, the DF, the VPF and its year) and shows the verdict at the other defensible choices.",
+ ["It picks the convention and DF that give the most favourable verdict for the duty holder, and records that choice in the ALARP note.",
+  "It quotes the undiscounted verdict only, since the checklist example is undiscounted and every other convention is a matter of opinion for the reader.",
+  "It averages the three conventions' ratios and compares the average with the DF, so that no single choice decides the verdict."],
+ "The digest says an ALARP demonstration states each choice and why, and shows the verdict at the other defensible choices. Choosing for the most favourable verdict is not a method. Rates are inputs with two HSE conventions behind them, so the undiscounted row alone hides the choice, and no source averages the conventions."),
+
+q(2,
+ "Which of these does the ALARP note, in the shape this course grades at Expert, leave out?",
+ "A score from a risk matrix, which this course never scores, since the matrix belongs to the risk and change course.",
+ ["The ICAF of each measure set beside the VPF the analyst chose, with its year and its source as the checklist and R2P2 name it.",
+  "What the engine did not know, such as current HSE values or a published F-N worked example for the societal picture of the site.",
+  "Each measure's deltaPLL, costs, life, VPF, other harms, discounting convention and DF, each with its source as the note states it."],
+ "The digest's ALARP note carries the individual risk of the most exposed person and its region, the societal picture if warranted, each measure with its inputs and sources, the ratio and verdict, the ICAF beside the VPF, the measures adopted and rejected, and what the engine did not know. A risk matrix score is not part of it: the matrix belongs to the risk and change course."),
+
+q(1,
+ "An individual risk comes back TOLERABLE. Is it acceptable?",
+ "Not yet: an individual risk in the TOLERABLE region is not acceptable until the ALARP demonstration is made.",
+ ["Yes, since TOLERABLE is the engine's word for acceptable, and the demonstration flag is advisory only for the duty holder.",
+  "Yes, if it lies below the public upper limit of 1e-4, which every worker individual risk must also meet on site.",
+  "No, never, since a TOLERABLE result must be reduced until it is BROADLY_ACCEPTABLE before work continues on the installation."],
+ "The digest says an individual risk in the TOLERABLE region is not acceptable until the demonstration is made; the engine sets `alarpDemonstrationRequired` there. TOLERABLE is no synonym for acceptable, the public limit is not the worker test, and ALARP asks for reduction as low as reasonably practicable, which need not reach the broadly acceptable region."),
+
+q(3,
+ "The EDIKAN firewall is GROSSLY_DISPROPORTIONATE at its stated DF of 3 under every convention. How does the ALARP note treat a measure rejected on cost?",
+ "It lists it among the measures rejected as grossly disproportionate, and still weighs it against good practice, which the engine does not know.",
+ ["It drops the measure from the note entirely, since a grossly disproportionate measure has no further bearing on the ALARP case or on the duty holder's decision.",
+  "It raises the DF to 10 so that the measure passes, since the checklist allows a DF up to that figure for any measure it covers.",
+  "It records the measure as adopted in part, spending the largest reasonably practicable cost of 120000.00 on a cheaper version."],
+ "The digest's note lists the measures adopted and the ones rejected as grossly disproportionate, and says a measure rejected on cost is still weighed against good practice, which the engine does not know. Dropping it hides the decision. The DF is a stated choice to be justified, never tuned to pass a measure, and the largest reasonable cost is a limit, which prescribes no spend."),
+
+q(2,
+ "Each measure in the ALARP note carries its deltaPLL, costs, life, VPF, other harms, discounting convention and DF. Why must the note give a source for every one of them?",
+ "Because each is a stated input the engine never invents, so the verdict is only as defensible as the source behind each figure.",
+ ["Because the engine checks each figure against its source before it computes, and refuses any input that arrives with no source attached.",
+  "Because a reviewer needs the sources to repeat the arithmetic by hand, the engine's figures being illustrative until they are checked.",
+  "Because only the VPF and the DF are stated inputs, and the sources show that the other figures were computed by the engine itself."],
+ "The engine invents no number: deltaPLL, VPF, DF, the costs, the life and every rate are inputs, so the note's defence of a verdict rests on where each came from. The engine takes no source field and refuses nothing for lacking one. Its arithmetic is exact and needs no hand check, and every one of these figures is stated by the analyst."),
+
+q(0,
+ "Undiscounted, the EDIKAN ICAF of 8750000.00 over the VPF of 1000000 equals the ratio of 8.750000. At the 2003 checklist limits the ICAF of 8026550.41 and the ratio of 9.350247 differ. Why?",
+ "Because the ICAF divides the discounted cost by fatalities prevented counted UNDISCOUNTED, while the ratio divides it by a benefit that is discounted.",
+ ["Because the checklist limits discount the fatalities prevented at 0.015, which lowers the ICAF below the VPF times the ratio whatever the life of the measure being weighed.",
+  "Because the ICAF leaves out the injury lines, and the EDIKAN firewall carries injury lines that only the ratio's benefit counts.",
+  "Because the ratio is computed at the DF of 3 while the ICAF is formed at a DF of 1, so the two are never meant to agree."],
+ "With no injuries and zero rates, the benefit is deltaPLL times the life times the VPF, so the ICAF over the VPF equals the ratio. At the checklist limits the cost is discounted in both, but the benefit is discounted and the fatalities prevented stay at 0.040000, so the two part company. The fatalities are never discounted, the firewall states no injury lines, and neither figure involves the DF."),
+
+q(3,
+ "The note's societal picture for the JISIKE off-site curve reports it against the Dutch line and against the R2P2 point. What does each comparison return, and with what caution?",
+ "EXCEEDS with a worst ratio of 18.000000 at N = 300.000000 against the Dutch line, a historical comparison since Bevi's repeal, and BELOW at 0.001000 against the R2P2 point.",
+ ["BELOW against both, with a worst ratio of 0.014910 at N = 3.000000, since the Dutch line and the R2P2 point are the same criterion drawn two ways.",
+  "EXCEEDS against both, with a worst ratio of 18.000000 at N = 300.000000, since the R2P2 point is extended along the Dutch slope of minus two.",
+  "TOUCHES against the Dutch line at N = 10 and EXCEEDS against the R2P2 point at N = 50, so the note reports the curve as marginal overall."],
+ "The digest prints EXCEEDS, worst ratio 18.000000 at N = 300 against the Dutch line, and BELOW at 0.001000 against the R2P2 point, which has no slope. The Dutch line is a historical published comparison because Bevi was repealed. 0.014910 is the worst ratio against the analyst's own slope minus one line, and the TOUCHES case is a different curve built to sit on the line."),
+
+q(1,
+ "R2P2 says its individual risk limits are guidelines. How should an ALARP note use the band the engine returns?",
+ "As a guideline applied with judgement: the band says where the individual risk sits, and the demonstration and the note carry the judgement.",
+ ["As a legal limit: a band word is a verdict in its own right, and the note needs nothing beyond it to settle the ALARP case for the installation and its people.",
+  "As a starting point only, to be replaced by a risk matrix score, which the risk and change course owns and which settles the case for the duty holder.",
+  "As an estimate the analyst may round to the nearest band edge before quoting it, since the limits are only guidelines."],
+ "The digest says R2P2's limits are guidelines, to be applied with judgement, and the note carries the judgement: the region, the measures weighed and what the engine did not know. A band word alone settles nothing. The risk matrix belongs to the risk and change course and this course never scores one, and rounding a figure toward a band edge is the opposite of computing from the inputs."),
+
+q(2,
+ "An analyst weighs the EDIKAN firewall at a VPF of 1000000. What must the ALARP note say about that choice?",
+ "State the VPF and its year, 2001 prices from R2P2, and justify it, since the engine has no default and current HSE values were not found.",
+ ["Nothing, since 1000000 is the engine's default VPF and a default needs no justification in the note beside the verdict.",
+  "That 1000000 is the current HSE value, which every ALARP note in the United Kingdom is required to apply to a fatality prevented by the measure.",
+  "That the 2003 figure of 1336800 was rejected as too high, since the lower VPF always gives the more cautious verdict on a measure being weighed."],
+ "The digest says the analyst states the VPF and its year and justifies it: the engine has no default VPF, and current HSE figures were not found on a live page, so neither exported value is a recommendation. A lower VPF lowers the benefit, which makes a measure look worse value, so it is the less cautious choice for the people protected."),
+
+q(0,
+ "Which line belongs in the 'what the engine did not know' section of an ALARP note that also carries a societal picture?",
+ "That no published F-N worked example was available, so the curve rests on self-consistency checks and no F-N figure is cited as published-verified.",
+ ["That the engine could not compute a PLL for scenarios whose N is not a whole number, so fractional deaths were rounded before the curve was built from them.",
+  "That the engine could not band an individual risk exactly at a threshold, so the analyst assigned it to the lower band by hand in the note.",
+  "That the engine could not discount a benefit growing at a rate, so the R2P2 convention was approximated by the undiscounted row."],
+ "The digest lists no published F-N worked example among what the engine does not know, and the analyst never cites an F-N figure as published-verified. The other three describe gaps that do not exist: N need not be whole, a threshold value is banded by the engine's own lower band rule, and the engine takes a benefit growth rate as an input."),
+
+q(3,
+ "A draft note argues that construction workers in the R2P2 box carried 0.000046646142 per year, so the EREMOR operator's 0.000017541379 needs no ALARP demonstration. What is wrong with the argument?",
+ "Both figures are TOLERABLE against the worker preset, and a published industry rate in the same region makes nothing acceptable, so the demonstration is still required.",
+ ["Nothing is wrong: an individual risk below a published industry rate is broadly acceptable by comparison, which is how R2P2 builds its box of rates.",
+  "The construction rate is a public figure and must be banded against `r2p2-public`, where it is UNACCEPTABLE and so no comparison can be drawn.",
+  "The operator's figure is UNACCEPTABLE against the worker preset, so the note should skip the demonstration and stop the work at once."],
+ "Against the worker preset both lie between 1e-6 and 1e-3, so both are TOLERABLE, and a TOLERABLE individual risk is not acceptable until the demonstration is made. The box shows where industry rates sit; it lowers no one's duty. The construction rate is a worker rate banded against the worker preset, and 0.000017541379 is far below the upper limit of 1e-3."),
+
+q(1,
+ "An analyst has banded the individual risk, weighed each measure and written the verdicts. Which item of the ALARP note do the numbers alone NOT settle?",
+ "Whether a measure rejected on cost is still required as good practice, which the engine does not know and the analyst must weigh.",
+ ["Whether the most exposed person's IRPA lies in the TOLERABLE region, which the engine cannot tell from the thresholds that it is given.",
+  "Whether the cost to benefit ratio exceeds the DF, which the engine leaves to the analyst to compute by hand after the call has returned.",
+  "Whether the ICAF is formed over undiscounted fatalities, which the engine leaves as a choice for the analyst in each call to its cost function."],
+ "The digest says a measure rejected on cost is still weighed against good practice, which the engine does not know. The engine bands the individual risk against the stated thresholds, returns the ratio and the verdict, and always forms the ICAF over undiscounted fatalities prevented, which is its declared choice."),
+
+q(2,
+ "The EDIKAN firewall passes only at a DF of 10 in the undiscounted sweep. What must a note that adopts it at DF 10 add?",
+ "Why a DF of 10 is justified, since DFs vary from upwards of 1, a DF above 10 is unlikely, and the verdict turns between DF 5 and DF 10.",
+ ["Nothing further, since the checklist's example uses a DF of 10 and that figure therefore needs no justification in any ALARP note.",
+  "A statement that the ratio of 8.750000 was reduced by the DF to below one, which is the condition the checklist sets for adoption of a measure.",
+  "The discounted verdict at DF 10, since only a discounted verdict counts and the undiscounted sweep is shown to the reader for interest only."],
+ "The digest says the verdict can turn on the DF, and a demonstration states each choice and why: DFs vary from upwards of 1, the checklist's example says above 10 is unlikely, and EDIKAN is GROSSLY_DISPROPORTIONATE at DF 5 and NOT_GROSSLY_DISPROPORTIONATE at DF 10. The ratio is never divided by the DF, and the undiscounted row is a defensible convention in its own right."),
+
+emit(Q, '/root/hse-wip-qra/banks/h5a_m06.json', expect_n=15)
+finish()

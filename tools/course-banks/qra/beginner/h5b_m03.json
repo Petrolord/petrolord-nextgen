@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "A continuous flammable release goes through `flammableReleaseEventTree`. Which four outcomes come back?",
+  "options": [
+   "Jet fire, pool fire, flash fire and explosion, since every release that reaches the tree is taken to ignite in the end.",
+   "Immediate ignition, delayed ignition and no ignition, with the flash fire and the explosion left for the analyst to split.",
+   "Fire, toxic cloud, explosion and safe dispersal, the last taken as a stated input from the consequence course.",
+   "Jet or pool fire, flash fire, explosion and no ignition."
+  ],
+  "answer": 3,
+  "explanation": "The digest names the four: immediate ignition gives a jet or pool fire; without it, delayed ignition gives a vapour cloud that burns as a flash fire or explodes; without either, nothing ignites. Jet and pool fire are one outcome here and 'no ignition' is always a leaf. The engine does the split itself with the preset or a stated one, and a toxic cloud is no outcome of this tree."
+ },
+ {
+  "prompt": "EREMOR's gas release runs at 5e-4 per year with immediate ignition 0.1, delayed ignition 0.3 given no immediate ignition, and the preset split. What explosion frequency does the engine return?",
+  "options": [
+   "0.000060000000 per year, the figure a tree gives when the delayed ignition probability is taken as unconditional",
+   "0.000054000000",
+   "0.000081000000 per year, the figure a tree gives when the split is swapped to 0.4 flash fire and 0.6 explosion",
+   "0.000135000000 per year, the figure a tree gives when every delayed ignition is counted as an explosion"
+  ],
+  "answer": 1,
+  "explanation": "The engine multiplies 5e-4 by 0.9 for no immediate ignition, by 0.3 for delayed ignition and by 0.4 for the explosion share, giving 0.000054000000 per year. Taking delayed ignition as unconditional gives 0.000060000000, swapping the split gives 0.000081000000, and counting every delayed ignition as an explosion gives 0.000135000000. Each is a real tree that closes, so the engine runs it without complaint."
+ },
+ {
+  "prompt": "On the same EREMOR release, what flash fire frequency does the engine return?",
+  "options": [
+   "0.000081000000 per year, on the path no immediate ignition then delayed ignition then flash fire.",
+   "0.000054000000 per year, since the flash fire takes the 0.4 share of every delayed ignition and the explosion takes the 0.6.",
+   "0.000050000000 per year, the fire that follows an immediate ignition.",
+   "0.000135000000 per year, every delayed ignition burning as a flash fire."
+  ],
+  "answer": 0,
+  "explanation": "The flash fire path is no immediate ignition then delayed ignition then flash fire, at 0.000081000000 per year with the preset share of 0.6. 0.000054000000 is the explosion, which takes the 0.4 share, and reading them the other way round swaps the split. 0.000050000000 is the jet or pool fire from immediate ignition, and 0.000135000000 is every delayed ignition before the split."
+ },
+ {
+  "prompt": "How often per year does the EREMOR release end with nothing ignited at all?",
+  "options": [
+   "0.000054000000 per year, the release that ignites late and explodes.",
+   "0.000050000000 per year, the release that ignites at once, since the tree reads each probability as the chance of not igniting.",
+   "0.000315000000, the release that escapes both immediate and delayed ignition.",
+   "0.000135000000 per year, the release that ignites late."
+  ],
+  "answer": 2,
+  "explanation": "The engine returns 0.000315000000 per year for no immediate ignition then no ignition: of the release that escapes immediate ignition, only the share that also escapes delayed ignition is left with no fire at all. The part that ignites late burns as a flash fire or explodes, so it is never 'no ignition': 0.000135000000 is every delayed ignition and 0.000054000000 its explosion share. 0.000050000000 is the jet or pool fire from immediate ignition."
+ },
+ {
+  "prompt": "What does the engine do with the delayed ignition probability that it is given?",
+  "options": [
+   "It treats it as the probability of delayed ignition for the whole release, and adds it to the immediate ignition probability.",
+   "It treats it as CONDITIONAL on no immediate ignition, and multiplies it by one minus the immediate ignition probability.",
+   "It treats it as unconditional and multiplies it straight into the initiating frequency, which is what the 0.000060000000 figure is.",
+   "It treats it as the flash fire share of the vapour cloud, and gives the explosion one minus that share of it."
+  ],
+  "answer": 1,
+  "explanation": "The digest says the delayed ignition probability is CONDITIONAL on no immediate ignition, and the engine multiplies it by one minus the immediate ignition probability. Taking it as unconditional is exactly the wrong build that gives 0.000060000000 per year for the explosion. Adding it to the immediate probability double counts the release, and the flash fire share is a separate input, the split."
+ },
+ {
+  "prompt": "What split does the engine use between flash fire and explosion when the caller gives none, and what does its basis say?",
+  "options": [
+   "Flash fire 0.4 and explosion 0.6, and the basis says \"explosion 0.6, flash fire 0.4 (TNO Purple Book CPR 18E (1999) section 4.8)\".",
+   "Flash fire 0.5 and explosion 0.5, with the basis saying the split was set even because no split was given by the caller.",
+   "None: the engine refuses the call until the caller states a split for the vapour cloud.",
+   "Flash fire 0.6 and explosion 0.4, and the basis says \"flash fire 0.6, explosion 0.4 (TNO Purple Book CPR 18E (1999) section 4.8)\"."
+  ],
+  "answer": 3,
+  "explanation": "The preset split is flash fire 0.6 and explosion 0.4, and the basis quotes it verbatim with its source, Purple Book section 4.8. Swapping it to 0.4 flash fire and 0.6 explosion is one of the wrong builds, and it moves the explosion frequency by a factor of 1.500000. The engine sets no even split of its own, and with the preset available it runs the call."
+ },
+ {
+  "prompt": "An analyst states the split as { flashFire: 0.6, explosion: 0.4 } for the EREMOR release. What changes in the result?",
+  "options": [
+   "Only the basis, which now says \"as given\"; the four frequencies are the same to the last bit.",
+   "The four frequencies, which move in the last decimal because a stated split is rounded differently from the preset one.",
+   "Nothing at all, since the engine ignores a stated split whenever it matches the preset split to the last digit.",
+   "The explosion frequency, which is recomputed as unconditional once a split is stated by hand."
+  ],
+  "answer": 0,
+  "explanation": "The digest says stating the split as { flashFire: 0.6, explosion: 0.4 } gives the same four frequencies to the last bit, and that the basis then says \"as given\". The engine records what it was given, so the basis does change. Stating a split has no bearing on how delayed ignition is treated; it stays conditional on no immediate ignition."
+ },
+ {
+  "prompt": "The EREMOR explosion frequency is built with the split swapped, 0.4 flash fire and 0.6 explosion. By what factor does the result sit above the engine's own?",
+  "options": [
+   "1.111111, giving 0.000060000000 per year in place of 0.000054000000 for the same explosion outcome of the tree.",
+   "2.500000, giving 0.000135000000 per year in place of 0.000054000000 for the same explosion outcome of the tree.",
+   "1.500000, giving 0.000081000000 per year in place of 0.000054000000.",
+   "1.000000, since the engine refuses a swapped split and returns its own figure instead."
+  ],
+  "answer": 2,
+  "explanation": "The digest's table puts the swapped split at 0.000081000000 per year, 1.500000 times the right one. 1.111111 is the factor for delayed ignition taken as unconditional, and 2.500000 the factor for every delayed ignition counted as an explosion. A swapped split closes, so the engine runs it without complaint and cannot know the numbers were typed the wrong way round."
+ },
+ {
+  "prompt": "Why does the engine run a wrongly built tree, such as one with delayed ignition taken as unconditional, without complaint?",
+  "options": [
+   "A tree that closes is valid arithmetic whatever it means; the engine cannot know that a branch belongs under another, and the analyst draws the tree.",
+   "It checks every tree against the Purple Book structure and runs the wrong one only because the sum of its branches happens to match.",
+   "It does complain: a basis note is added whenever an explosion frequency sits above the flash fire frequency of the same tree.",
+   "It refuses any delayed ignition that is not typed as conditional."
+  ],
+  "answer": 0,
+  "explanation": "The digest says each wrong build is a real tree and the engine runs it without complaint: a tree that closes is valid arithmetic whatever it means, and the engine cannot know that a branch belongs under another. There is no structural check against a source and no basis note about the order of two frequencies, and the engine cannot tell how an analyst meant a probability."
+ },
+ {
+  "prompt": "A continuous release of exactly 10 kg/s of a gas of average to high reactivity is looked up in Purple Book Table 4.5. What does the engine return?",
+  "options": [
+   "0.2, in the small band, because the printed band edge of 10 kg/s belongs to the band that sits below it in the table.",
+   "0.7, in the large band, because a release at a band edge is always placed in the larger band on the side of safety.",
+   "It refuses, since 10 kg/s is an edge that the printed table does not say how to place.",
+   "0.5, in the medium band, because the engine reads the printed middle band as closed at both ends."
+  ],
+  "answer": 3,
+  "explanation": "The printed middle band is \"10 - 100 kg/s\" and the engine reads it as CLOSED at both ends, so exactly 10 kg/s is medium, 0.5 for this class; the basis says \"table lookup; the middle band is closed at both ends\". 0.2 is the small band cell at 5 kg/s and 0.7 the large band at 200 kg/s. The engine answers at the edge with its declared reading."
+ },
+ {
+  "prompt": "In the engine's lookups of Table 4.5, what does the k1-liquid column give across every release size?",
+  "options": [
+   "0.02 for a small release, 0.04 for a medium one and 0.09 for a large one, rising with the release size.",
+   "0.065 at every size, in the small, medium or large band that the size falls in.",
+   "0.2 for a small release, 0.5 for a medium one and 0.7 for a large one, the same values as the reactive gases.",
+   "No value: a liquid has no row in a table that classifies gases."
+  ],
+  "answer": 1,
+  "explanation": "The engine's lookups print 0.065 for k1-liquid at every continuous rate and every instantaneous mass, each in its own band. 0.02, 0.04 and 0.09 are the gas-low-reactivity column, and 0.2, 0.5 and 0.7 the gas-average-high-reactivity column. k1-liquid is one of the three substance classes the engine accepts."
+ },
+ {
+  "prompt": "What does the digest say the direct ignition table and the 0.6 and 0.4 split rest on, and what follows for a capstone?",
+  "options": [
+   "A second independent reading made by the oracle, so a capstone may ask for any cell of the table to be looked up and graded.",
+   "The golden records, which print every cell with the answer beside it, so each capstone grades the lookup against the golden.",
+   "A single transcription of one source, read once and never checked against a second reading, so every capstone STATES the ignition probabilities and the split.",
+   "A worked example printed in the source."
+  ],
+  "answer": 2,
+  "explanation": "The digest says the table cells and the split are transcriptions of one source, read once, and nothing in the engine's validation checks them against a second reading. So this course teaches them and every capstone states the ignition probabilities and the split it uses rather than asking for a lookup. No second reading exists and the digest cites no worked example of the table."
+ },
+ {
+  "prompt": "A caller states a vapour cloud split of 0.6 flash fire and 0.3 explosion. Which field does the engine name in its refusal?",
+  "options": [
+   "The field `delayedIgnitionProbability`, since the split sits under the delayed ignition branch of the tree the engine builds.",
+   "No field at all: the engine closes the split by giving the explosion the 0.4 that the preset would have given it.",
+   "The field `tree.branches`, the top of the tree, since a split that fails leaves the whole tree open.",
+   "The field `vapourCloudSplit`, with the failing set named by its path inside the tree the engine builds for the release."
+  ],
+  "answer": 3,
+  "explanation": "The refusal table names `vapourCloudSplit`, and the engine's own words are: vapourCloudSplit: tree.branches[1].next.branches[0].next.branches: the branch probabilities sum to 0.8999999999999999, not 1 (tolerance 1e-9): every branch set must be exhaustive and exclusive. The field is the input the caller typed, and the path inside the message points to the set that failed, so it is neither the delayed ignition input nor the top of the tree. The engine alters no input and falls back to no preset once a split is given."
+ },
+ {
+  "prompt": "A continuous release is sent to `pbDirectIgnitionProbability` with no mass rate. What does the engine say?",
+  "options": [
+   "massRateKgS: a continuous release needs a rate above 0 kg/s",
+   "massKg: an instantaneous release needs a mass above 0 kg, and the call has been read as instantaneous in its place",
+   "releaseType: must be 'continuous' or 'instantaneous'",
+   "massRateKgS: no rate was given, so the small band has been taken as the most cautious reading of the table"
+  ],
+  "answer": 0,
+  "explanation": "Those are the engine's own words from the refusal table, naming `massRateKgS`. The engine does not switch a continuous call to an instantaneous one, and it assumes no band. The release type message is real engine text for a type the table does not have, and here the type was valid."
+ },
+ {
+  "prompt": "Among the release sizes the digest's lookup table prints, which does the engine place in the large band for gas-low-reactivity, and with what probability?",
+  "options": [
+   "A continuous 100 kg/s or an instantaneous 10000 kg, at 0.09, since the top edge of the middle band opens into the large band.",
+   "A continuous 50 kg/s or an instantaneous 5000 kg, at 0.04, the value the column gives to every release of middle size or more.",
+   "A continuous 200 kg/s or an instantaneous 20000 kg, at 0.09.",
+   "A continuous 200 kg/s or an instantaneous 20000 kg, at 0.7."
+  ],
+  "answer": 2,
+  "explanation": "The engine's lookups put gas-low-reactivity at 0.09 in the large band for a continuous 200 kg/s and an instantaneous 20000 kg. Exactly 100 kg/s and 10000 kg stay in the medium band at 0.04, because the middle band is closed at both ends. 0.7 is the large band value of the average to high reactivity gases."
+ }
+]

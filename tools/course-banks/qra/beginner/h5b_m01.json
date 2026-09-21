@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Every function in the QRA engine answers a call in one of two shapes. Which two?",
+  "options": [
+   "A result object carrying a `basis` block, or the same result with the offending input quietly replaced by a default the engine holds for it.",
+   "A result object with a list of warnings attached whenever an input looks doubtful, so that a figure always comes back to the analyst.",
+   "A result object carrying a `basis` block, or an object with `error` and `field`, where `field` names the offending input.",
+   "A bare number per year for the quantity asked, or zero whenever an input cannot be used at all."
+  ],
+  "answer": 2,
+  "explanation": "The digest says every function returns either a result object carrying a `basis` block or an object with `error` and `field`, and `field` names the offending input. The engine invents no number, so it has no default to slip in. It never hands back a figure with a warning beside it, and a refused call never comes back as zero, which a reader would take for a real frequency."
+ },
+ {
+  "prompt": "Which inputs does the engine fill in by itself when the analyst leaves them out?",
+  "options": [
+   "None: every scenario frequency, branch probability, probability of death and occupancy is an input the analyst supplies.",
+   "The probability of death at each place, which it works out from the scenario frequency and the distance to the release point.",
+   "A generic initiating frequency for each kind of release, from failure data it carries.",
+   "The occupancy of each place, which it takes as the whole year of 8760 hours whenever the roster is left blank."
+  ],
+  "answer": 0,
+  "explanation": "The engine invents no number: every scenario frequency, branch probability, probability of death, occupancy, VPF, DF and rate is an input. A probability of death is a stated input that belongs to the consequence course, so the engine never derives one from a distance. It carries no failure data, and 8760 only converts stated hours into a fraction of the year; it is never an occupancy the engine assumes."
+ },
+ {
+  "prompt": "The engine exports three functions, `toxicPlumeGridPointRisk`, `thermalFatalityTransect` and `poolFireFatalityTransect`, that run the consequence engine. What does this course do with them?",
+  "options": [
+   "It teaches their inputs at Associate level, so that each learner can produce every probability of death that an LSIR sum needs.",
+   "It runs them behind every capstone, so that no probability of death in any capstone is ever typed in by the person working it.",
+   "It uses the toxic one alone, since a toxic cloud is the only effect that a quantitative risk assessment has to model for itself at every place it studies.",
+   "It never asks for their inputs, because making a probability of death is consequence modelling and belongs to the consequence course."
+  ],
+  "answer": 3,
+  "explanation": "The digest says the three functions MAKE a probability of death and that this course does not teach their inputs; that work is consequence modelling and belongs to the consequence course. So no Associate lesson teaches them, and a capstone states each probability of death it uses. A fire or an explosion is modelled in the consequence course just as a toxic cloud is, so none of the three effects is special here."
+ },
+ {
+  "prompt": "An analyst types 2 as a scenario frequency per year and 2 as a probability of death for the same scenario, named 'fire', at one place. What does the engine do with each?",
+  "options": [
+   "It accepts both, since it checks only that each number is 0 or more before it forms the product for the place.",
+   "It accepts the frequency, which counts events per year and may exceed one, and refuses the probability of death, which must lie from 0 to 1.",
+   "It refuses both, since no input anywhere in the engine may take a value above one, frequencies included.",
+   "It caps the probability of death at one and refuses the frequency as more than one event a year at a single place."
+  ],
+  "answer": 1,
+  "explanation": "The units table says a frequency counts events per year and may exceed one, while a probability lies from zero to one. So the frequency is accepted and the probability of death is refused in the engine's own words: 'fire' must be a probability of death in [0, 1]. The engine never checks only for a sign, never caps a value it cannot use, and never limits a frequency to one."
+ },
+ {
+  "prompt": "How does the digest read a frequency of 1e-4 per year?",
+  "options": [
+   "The probability that the event happens in any single year, which is the same number written in a different unit.",
+   "One event in ten thousand years on average: a rate, kept in a different input from any probability.",
+   "The probability of death of a person standing at the release point for one year.",
+   "One event in a thousand years on average, the exponent counting the zeros in the number of years between events."
+  ],
+  "answer": 1,
+  "explanation": "The digest says a frequency of 1e-4 per year is one event in ten thousand years on average, and that it is a rate and never a probability, which the engine keeps in different inputs. A probability of death is a separate stated input that belongs to the consequence course. Reading the exponent as a thousand years miscounts it by a factor of ten."
+ },
+ {
+  "prompt": "The engine turns hours spent at a place into a fraction of the year. What does it divide by?",
+  "options": [
+   "8766, the hours of an average calendar year, so that the leap years in a working life are counted in every person's occupancy.",
+   "Nothing, since the hours are carried straight into the individual risk per annum as hours with no conversion made.",
+   "The hours on that person's own roster, whatever the calendar says.",
+   "8760, the H3 engine's HOURS_PER_YEAR, so 8760 hours at one place is an occupancy of 1.000000."
+  ],
+  "answer": 3,
+  "explanation": "Hours convert at 8760 hours a year, the H3 engine's HOURS_PER_YEAR, and 8760 hours at one place is an occupancy of 1.000000. Dividing by 8766 is a wrong method the digest measures: it moves the EREMOR operator's figure away from the engine's. Occupancy is always a fraction of the calendar year, so hours are never carried unconverted, and a roster is never the denominator."
+ },
+ {
+  "prompt": "An event tree is passed with an empty branch set. What does the engine return, in its own words?",
+  "options": [
+   "tree.branches: must be a non-empty list of { name, probability, next? }",
+   "tree: an event tree needs at least one outcome before a leaf frequency can be formed from the initiating frequency",
+   "initiatingFrequencyPerYr: must be a frequency above 0 per year",
+   "tree.branches[0].name: every branch needs a name"
+  ],
+  "answer": 0,
+  "explanation": "That is the engine's own message for an empty branch set, from the refusal table, and it names the field `tree.branches`. The initiating frequency message and the missing name message are real engine words for two other calls in that table. No refusal in the table speaks of an outcome needed before a leaf frequency."
+ },
+ {
+  "prompt": "A scenario named 'fire' reaches `locationIndividualRisk` with a probability of death above one. Which field does the engine name?",
+  "options": [
+   "`scenarios[0].frequencyPerYr`, saying 'fire' must have a frequency of 0 or more per year before any product is formed.",
+   "`scenarios`, saying the list must be a non-empty list of scenarios once the bad scenario is taken out of it.",
+   "`scenarios[0].fatalityProbability`, the position of the offending scenario and the input within it.",
+   "`fatalityProbability`, after capping it at one and adding a note to the basis."
+  ],
+  "answer": 2,
+  "explanation": "The refusal table names `scenarios[0].fatalityProbability` and quotes the engine: 'fire' must be a probability of death in [0, 1]. The frequency message belongs to a negative frequency and the non-empty list message to a call with no scenarios. A refusal names the offending input down to its position, and the engine never caps an input and carries on."
+ },
+ {
+  "prompt": "A roster row for 'deck' gives both an occupancy fraction and hours per year. What comes back?",
+  "options": [
+   "An individual risk per annum built from the hours alone, since hours are the more exact of the two ways of stating a roster.",
+   "An individual risk per annum built from the fraction alone, with the hours kept in the result for the reviewer to compare.",
+   "locations[0].hoursPerYr: 'deck' must lie in [0, 8760] hours",
+   "locations[0].occupancyFraction: 'deck': give exactly one of occupancyFraction and hoursPerYr"
+  ],
+  "answer": 3,
+  "explanation": "Those are the engine's own words for both a fraction and hours on one row, from the refusal table. The engine does not choose between the two, so no figure is built from either. The message about [0, 8760] hours is real engine text for a different call, where more hours are given than a year holds."
+ },
+ {
+  "prompt": "A roster puts one person at 0.6 of the year on the process deck and 0.5 of it in the control room. What does the engine do?",
+  "options": [
+   "It refuses on `locations`: the occupancy fractions sum to 1.1, and one person cannot spend more than the whole year across locations.",
+   "It scales both fractions down in proportion until they sum to one, and reports in the basis that it has done so for the reviewer.",
+   "It accepts the roster, since each fraction on its own lies inside 0 to 1 and the engine checks each place separately.",
+   "It keeps 0.6 for the process deck and trims the control room to 0.4, the part of the year left over."
+  ],
+  "answer": 0,
+  "explanation": "The refusal table quotes the engine: the occupancy fractions sum to 1.1, and one person cannot spend more than the whole year across locations. A person is in one place at a time, so the total is checked as well as each place. The engine alters no input, so it neither rescales the fractions nor trims one of them."
+ },
+ {
+  "prompt": "How many refusals does the digest table, across how many functions, and what number does a refusal carry?",
+  "options": [
+   "138 refusals across 13 functions, one for each golden record the independent oracle wrote.",
+   "39 refusals across 12 functions, and each carries the partial result formed before the bad input was read.",
+   "39 refusals across 13 functions, and a refusal carries no number of its own.",
+   "39 refusals across 13 functions, each carrying the offending value rounded to twelve decimals."
+  ],
+  "answer": 2,
+  "explanation": "The digest says 39 refusals are tabled across 13 functions, and that a refusal carries no number of its own. 138 is the count of golden records, which are cases the oracle wrote and are no refusals. A refusal returns only `error` and `field`, so it carries neither a partial result nor a rounded copy of the input."
+ },
+ {
+  "prompt": "An analyst passes `constructor` as the substance class to `pbDirectIgnitionProbability`. What does the engine do?",
+  "options": [
+   "It returns the lookup of the first class in its table, since a name that every JavaScript object carries is found on the lookup.",
+   "It refuses on `substance` with the message any unknown class gets, listing k1-liquid, gas-low-reactivity and gas-average-high-reactivity.",
+   "It returns a probability of 0 and a band of null, since the name it was handed has no row of its own in Table 4.5.",
+   "It refuses on `releaseType`, reading a name that every object carries as a release type."
+  ],
+  "answer": 1,
+  "explanation": "A preset or class name is looked up only among the names the engine itself defines, so `constructor` is refused like any other unknown name, and the refusal table shows the same `substance` message for it. The engine returns no lookup and no zero for a name it does not define, and the field it names is the substance, where the bad name was typed."
+ },
+ {
+  "prompt": "Which of these does this course COMPUTE, as the seam table puts it?",
+  "options": [
+   "A scenario frequency, from a release frequency and an event tree.",
+   "A probability of death at a place, from a consequence model that this course builds for each fire and explosion.",
+   "Who is where and for how long, read by the engine from the plot plan and the roster.",
+   "A value of preventing a fatality, taken from published guidance that the engine holds as its own default figure."
+  ],
+  "answer": 0,
+  "explanation": "The seam table says this course computes a scenario frequency from a release frequency and an event tree. A probability of death at a place comes from a consequence model and belongs to the consequence course, so it is a stated input here. Occupancy is a stated input too, and VPF has no default at all."
+ },
+ {
+  "prompt": "The vocabulary section legislates how the word \"risk\" is written in this course. What is the rule?",
+  "options": [
+   "Written bare for the product of a frequency and a probability of death, since that is what the word means in this course.",
+   "Written as it is in the risk and change course, where the word names a cell score on a matrix that this course takes over.",
+   "Left bare whenever the same sentence already gives a unit per year, since the unit qualifies the word by itself.",
+   "Always qualified: individual risk, LSIR, IRPA or societal risk."
+  ],
+  "answer": 3,
+  "explanation": "The vocabulary section says the word is always qualified: individual risk, LSIR, IRPA or societal risk. It already means a matrix score in the risk and change course and a cost in the economics courses, and this course never scores a matrix cell, so a bare word would carry the wrong meaning. A unit per year does not name which quantity is meant."
+ },
+ {
+  "prompt": "Which job does the digest say the engine does NOT do?",
+  "options": [
+   "Summing each scenario frequency times its probability of death at one place to give the LSIR there.",
+   "Converting the hours a person spends at a place into a fraction of the year, at 8760 hours a year.",
+   "Grid or wind rose bookkeeping of a full assessment; the caller supplies each scenario frequency and probability of death.",
+   "Refusing a branch set whose probabilities fail to sum to one within its tolerance of 1e-9, and naming the failing set by its path."
+  ],
+  "answer": 2,
+  "explanation": "The digest lists what the engine does not do, and grid or wind rose bookkeeping is on that list: the caller supplies each scenario frequency and probability of death. The LSIR sum, the conversion of hours at 8760 hours a year and the branch sum check within BRANCH_SUM_TOLERANCE of 1e-9 are all things the engine does."
+ }
+]

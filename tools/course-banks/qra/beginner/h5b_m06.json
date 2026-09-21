@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Along the EREMOR transect the jet fire runs at 5e-5 per year and the explosion at 2e-5 per year (stated), with probabilities of death of 0.35 and 0.4 stated at 100 m. What LSIR does the engine return at 100 m?",
+  "options": [
+   "0.000061000000 per year, which is the LSIR the engine returns at 50 m, nearer the release on the same transect",
+   "0.000025500000",
+   "0.000004500000 per year, the figure at 150 m",
+   "0.000017500000 per year, the jet fire contribution alone, since only the largest scenario sets the LSIR at a distance"
+  ],
+  "answer": 1,
+  "explanation": "At 100 m the engine sums f times the probability of death over both scenarios, 5e-5 times 0.35 plus 2e-5 times 0.4, and returns 0.000025500000 per year. 0.000061000000 is the LSIR at 50 m and 0.000004500000 at 150 m. The jet fire's share alone drops the explosion, and the LSIR is always the sum over scenarios."
+ },
+ {
+  "prompt": "On the same transect, why is the LSIR at 0 m exactly 0.000070000000 per year?",
+  "options": [
+   "Both stated probabilities of death are 1 there, so the LSIR is the two frequencies added: 5e-5 plus 2e-5 per year.",
+   "The engine caps the LSIR at the release point at the largest contour it knows, and 0.000070000000 is that cap.",
+   "It is the jet fire frequency alone, since an explosion has no effect at its own centre.",
+   "It is the 50 m figure of 0.000061000000 carried back to the release, since the engine sets no LSIR at a distance of zero from the release point itself."
+  ],
+  "answer": 0,
+  "explanation": "At 0 m both stated probabilities of death are 1, so each scenario adds its whole frequency and the LSIR is 5e-5 plus 2e-5, 0.000070000000 per year. The engine caps nothing, and the 1e-4 contour sits above this figure. The explosion's probability of death at 0 m is stated as 1, and the engine computes the LSIR at 0 m like any other distance."
+ },
+ {
+  "prompt": "Where does the EREMOR transect cross the 1e-5 per year contour?",
+  "options": [
+   "At 150 m, the first printed distance whose LSIR lies below the level, since the engine reports only the distances it was given.",
+   "At 187.323816 m, which is where the transect crosses the 1e-6 contour.",
+   "Midway between 100 m and 150 m, since a crossing is taken at the midpoint of the two bracketing points on the transect.",
+   "At 126.982958 m, interpolated in log10 of the LSIR between the points at 100 m and 150 m."
+  ],
+  "answer": 3,
+  "explanation": "The LSIR is 0.000025500000 at 100 m and 0.000004500000 at 150 m, so the level lies between them, and the engine interpolates in log10 of the LSIR to put the crossing at 126.982958 m. It interpolates, so it does not snap to a printed distance or to the midpoint. 187.323816 m is the 1e-6 crossing."
+ },
+ {
+  "prompt": "The highest level the Purple Book asks for is 1e-4 per year. What crossing does the engine report for it on the EREMOR line?",
+  "options": [
+   "At 0 m, where every transect starts on its highest contour.",
+   "At 126.982958 m, the 1e-5 crossing.",
+   "Nowhere: the LSIR peaks at 0.000070000000 per year at 0 m, below 1e-4.",
+   "At 50 m, the point nearest to 1e-4."
+  ],
+  "answer": 2,
+  "explanation": "The digest's table says none on this transect: the largest LSIR is 0.000070000000 per year at 0 m, below 1e-4, so no crossing exists. The engine reports only real crossings, never a starting point or a nearest point. 126.982958 m is the 1e-5 crossing alone."
+ },
+ {
+  "prompt": "The 1e-8 crossing sits at exactly 350.000000 m. What rule puts it there?",
+  "options": [
+   "The LSIR is 0.000000020000 at 300 m and zero at 400 m, and with one side zero the crossing is interpolated linearly.",
+   "The engine rounds every crossing to the nearest 50 m.",
+   "It interpolates in log10 of the LSIR as it does everywhere, and the log of zero at 400 m pulls the crossing to the midpoint.",
+   "It takes the last distance with an LSIR above zero, 300 m, and adds half the spacing between the printed distances after it."
+  ],
+  "answer": 0,
+  "explanation": "The basis says the crossing is interpolated in log10 of the LSIR between bracketing points, and linearly in the LSIR when one side is zero. Between 0.000000020000 at 300 m and 0.000000000000 at 400 m the linear rule gives 350.000000 m. The log of zero is undefined, which is why the engine switches rule. It rounds no crossing and adds no spacing."
+ },
+ {
+  "prompt": "What status does a contour crossing distance have in this course, and why?",
+  "options": [
+   "It is graded at six decimals, since the Purple Book fixes the log10 interpolation between points in its section on contours.",
+   "It is graded only for the 1e-5 contour, which is the one the Purple Book asks for on every plot plan it describes.",
+   "It is reported only as a band, never as a distance.",
+   "It is never graded: the log10 interpolation is a presentation rule the engine chose, and nothing published fixes it."
+  ],
+  "answer": 3,
+  "explanation": "The digest says the interpolation is a PRESENTATION rule the engine chose; nothing published fixes it, so a crossing distance is never graded. The Purple Book asks for the contours to be shown and prescribes no interpolation, and it asks for five levels rather than one. The engine reports each crossing as a distance in metres."
+ },
+ {
+  "prompt": "Which contour levels does the engine export as PB_IR_CONTOURS_PER_YR, the ones the Purple Book asks to be shown?",
+  "options": [
+   "1e-5 and 1e-6 per year only, the two levels a plot plan must show whatever else it carries.",
+   "1e-4, 1e-5, 1e-6, 1e-7 and 1e-8 per year.",
+   "1e-4, 1e-5 and 1e-6 per year, the three levels that sit inside the range an LSIR at a place usually takes.",
+   "1e-4 to 1e-8 in steps of 5."
+  ],
+  "answer": 1,
+  "explanation": "The constants table gives PB_IR_CONTOURS_PER_YR as 1e-4, 1e-5, 1e-6, 1e-7 and 1e-8 per year, and the Purple Book asks for those contours to be shown. Two or three levels are too few, and no set runs in steps of 5: the engine's contour set is the five decades from 1e-4 down to 1e-8."
+ },
+ {
+  "prompt": "The digest runs eight golden cases through the engine. What do they rest on?",
+  "options": [
+   "Each reproduces a worked example printed in the Purple Book, one case for each figure of its chapter on event trees.",
+   "Each is a capstone facility, reused as a golden record.",
+   "All are ORACLE-DERIVED: no published source prints an event tree or an IRPA worked example.",
+   "Each was typed from a textbook by the engine's authors, then checked by the oracle against the same textbook."
+  ],
+  "answer": 2,
+  "explanation": "The digest says every golden case in that table is ORACLE-DERIVED, and that no published source prints an event tree or an IRPA worked example. They are no reproduction of a printed example, no capstone and no textbook transcription: they were written by the engine's independent oracle."
+ },
+ {
+  "prompt": "The golden case flammable-default is run through `eventTree`. What explosion frequency does the engine return?",
+  "options": [
+   "0.000240000000 per year, the figure the case returns for the flash fire outcome",
+   "0.000160000000",
+   "0.000200000000 per year, which is the jet or pool fire outcome of the same golden case",
+   "0.000054000000 per year, the EREMOR explosion carried over"
+  ],
+  "answer": 1,
+  "explanation": "The engine returns jet or pool fire 0.000200000000, flash fire 0.000240000000, explosion 0.000160000000 and no ignition 0.000400000000 per year for flammable-default. 0.000240000000 and 0.000200000000 are its flash fire and jet or pool fire. 0.000054000000 belongs to the EREMOR release, a different set of inputs."
+ },
+ {
+  "prompt": "The golden case three-way-with-pooled-outcome returns three outcomes. What does the engine give the pooled 'fire' outcome?",
+  "options": [
+   "0.011752000000 per year, the figure the case returns for its 'safe' outcome",
+   "0.000390000000 per year, which is the 'escalation' outcome of the same case",
+   "0.000160000000 per year, from another case",
+   "0.000858000000"
+  ],
+  "answer": 3,
+  "explanation": "The engine returns fire 0.000858000000, safe 0.011752000000 and escalation 0.000390000000 per year for this case. The 'fire' total pools every leaf that carries that outcome, as the two pool fire leaves of the overfill tree pool. The other two figures belong to the case's other outcomes, and 0.000160000000 is the explosion of the flammable-default case."
+ },
+ {
+  "prompt": "Which IRPA and occupancy come back for the full-occupancy golden record?",
+  "options": [
+   "IRPA 0.000022000000 per year at an occupancy of 1.000000000000.",
+   "0.000041195890 per year at 0.236986301370.",
+   "A refusal, since the year is full.",
+   "IRPA 0.000022000000 at an occupancy of 0.497716894977."
+  ],
+  "answer": 0,
+  "explanation": "For full-occupancy the engine returns IRPA 0.000022000000 per year at an occupancy of 1.000000000000: the occupancy check allows the total to reach one exactly. 0.000041195890 at 0.236986301370 is the operator-two-areas case, 0.497716894977 is the EREMOR operator's total, and a total of one exactly is accepted, never refused."
+ },
+ {
+  "prompt": "The golden case zero-probability-branch holds a branch of probability zero. What does the engine do?",
+  "options": [
+   "It refuses the branch, since a probability of zero means the branch can never be taken and has no place in the tree.",
+   "It removes the branch and its leaf without a message, since a zero leaf adds nothing to any outcome total in the tree.",
+   "It allows it: the branch carries a leaf of frequency zero, and the set still sums to one.",
+   "It raises the branch to 1e-9, the tolerance."
+  ],
+  "answer": 2,
+  "explanation": "The digest says a branch of probability zero is allowed; it carries a leaf of frequency zero, and the set still sums to one, which is why the case returns a 0.000000000000 and b 0.000400000000. A probability of zero lies inside [0, 1], so nothing is refused, removed or raised."
+ },
+ {
+  "prompt": "The EREMOR operator carries an IRPA of 0.000017541379 per year. What does that figure NOT tell a reader?",
+  "options": [
+   "What one person carries over a year across the places they occupy.",
+   "The sum of each place's LSIR times the fraction of the year the operator spends there.",
+   "Which places add most to the operator's individual risk per annum, since the engine returns each contribution.",
+   "How many people might die at once in one event, which is societal risk and the next tier's question."
+  ],
+  "answer": 3,
+  "explanation": "An IRPA follows one person: it says what that person carries over a year, as the sum of each LSIR times the occupancy there, and the engine returns each contribution. It says nothing of how many people might die at once in one event, which is societal risk and belongs to the Professional tier."
+ },
+ {
+  "prompt": "A capstone asks for one person's individual risk per annum from a release. In what order does the method run, as this tier teaches it?",
+  "options": [
+   "The IRPA first from the roster, then the LSIR at each place, then the event tree, run backwards to find the release frequency.",
+   "Event tree outcome frequencies, then the LSIR at each place from stated probabilities of death, then the IRPA over the person's occupancy.",
+   "The direct ignition probability looked up in Table 4.5, then the IRPA straight from the lookup with no LSIR in between.",
+   "The probability of death computed from a probit, then the IRPA; the event tree is a step belonging to the consequence course."
+  ],
+  "answer": 1,
+  "explanation": "The chain this tier teaches runs forward: the event tree gives each outcome's frequency, the LSIR at each place sums f times the stated probability of death, and the IRPA weights each LSIR by the person's occupancy. A capstone states every ignition probability and the split rather than asking for a lookup, and the probability of death is a stated input that belongs to the consequence course."
+ },
+ {
+  "prompt": "An `lsirTransect` call gives two distances but only one probability of death for a scenario named 'fire'. What does the engine say?",
+  "options": [
+   "scenarios[0].fatalityProbabilities: 'fire' needs one probability of death per distance (2)",
+   "scenarios[0].fatalityProbabilities: the missing probability of death has been taken as zero at the far distance",
+   "distancesM[2]: distances must increase strictly",
+   "scenarios[0].fatalityProbability: 'fire' must be a probability of death in [0, 1]"
+  ],
+  "answer": 0,
+  "explanation": "Those are the engine's own words from the refusal table, and the (2) is the number of distances given. The engine fills in no missing probability of death. The strictly increasing distances message and the [0, 1] probability of death message are real engine text for two other calls."
+ }
+]

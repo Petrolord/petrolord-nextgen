@@ -1,0 +1,363 @@
+{
+ "app_slug": "qra",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-potential-loss-of-life",
+   "title": "Potential Loss of Life",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-from-one-person-to-many",
+     "title": "From one person to many",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-pll-as-a-sum",
+     "title": "PLL as a sum",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-expected-deaths-need-not-be-whole",
+     "title": "Expected deaths need not be whole",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-scenarios-with-no-fatality",
+     "title": "Scenarios with no fatality",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-fatal-accident-rate",
+   "title": "The Fatal Accident Rate",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-far-from-pll",
+     "title": "FAR from PLL",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-exposed-hours",
+     "title": "Exposed hours",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-far-and-the-safety-statistics-course",
+     "title": "FAR and the safety statistics course",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-far-against-individual-risk",
+     "title": "FAR against individual risk",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "qr-societal",
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-the-f-n-curve",
+   "title": "The F-N Curve",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-n-or-more",
+     "title": "N or more",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-step-function",
+     "title": "A step function",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-area-under-the-curve",
+     "title": "The area under the curve",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-reading-it-wrongly",
+     "title": "Reading it wrongly",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-no-published-worked-example",
+     "title": "No published worked example",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-criterion-lines",
+   "title": "Criterion Lines",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-line-through-the-plane",
+     "title": "A line through the plane",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-dutch-line-and-its-points",
+     "title": "The Dutch line and its points",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-corners-decide-everything",
+     "title": "Corners decide everything",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-where-a-curve-exceeds",
+     "title": "Where a curve exceeds",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-worst-ratio",
+     "title": "The worst ratio",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-one-published-point-and-the-boundary",
+   "title": "One Published Point and the Boundary",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-one-point-and-no-slope",
+     "title": "One point and no slope",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-caller-line",
+     "title": "A line the analyst supplies",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-touching-the-line",
+     "title": "Touching the line",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-state-words",
+     "title": "The state words",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-societal-risk-end-to-end",
+   "title": "Societal Risk, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-fractions-indoors-and-outdoors",
+     "title": "Fractions indoors and outdoors",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-the-fractions-rest-on",
+     "title": "What the fractions rest on",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-societal-picture",
+     "title": "The societal picture",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal",
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

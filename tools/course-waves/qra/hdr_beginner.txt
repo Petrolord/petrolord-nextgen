@@ -1,0 +1,23 @@
+-- ============================================================================
+-- H5 ASSOCIATE DEEP SEED: Quantitative Risk Assessment, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/qra/beginner.
+--
+-- What this tier owns: HOW OFTEN, AND WHAT IS ONE PERSON'S INDIVIDUAL RISK. An
+-- event tree's leaf frequency is the initiating frequency times the branch
+-- probabilities on its path, and every branch set sums to one within a
+-- tolerance; delayed ignition is conditional on no immediate ignition; the
+-- direct ignition table and the flash fire and explosion split are taught and
+-- always stated in a capstone; location-specific individual risk is the sum of
+-- frequency times a STATED probability of death; individual risk per annum
+-- spreads it over the year one person spends at each place. Digest sections 1
+-- to 14, and section 34.
+--
+-- THE TRAP THE TIER IS BUILT ON. A tree that closes is valid arithmetic
+-- whatever it means. The Associate capstone grades two outcome frequencies,
+-- two LSIRs and two IRPAs, and grades no PLL, FAR, F-N figure, ALARP band or
+-- cost-benefit figure.
+-- ============================================================================
