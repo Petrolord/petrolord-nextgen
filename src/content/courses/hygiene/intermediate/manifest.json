@@ -1,0 +1,359 @@
+{
+ "app_slug": "hygiene",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-lex-eight-hour",
+   "title": "The Daily Noise Exposure Level",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-an-energy-average",
+     "title": "An energy average",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-eight-hour-normaliser",
+     "title": "The eight-hour normaliser",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-exposure-points",
+     "title": "Exposure points",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-action-values-and-the-limit",
+     "title": "Action values and the limit",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-no-threshold-in-this-metric",
+     "title": "No threshold in this metric",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-week",
+   "title": "The Week",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-weekly-level",
+     "title": "The weekly level",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-divisor-of-five",
+     "title": "The divisor of five",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-one-loud-day-dominates",
+     "title": "One loud day dominates",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-time-to-reach-a-target",
+     "title": "The time to reach a target",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-hearing-protector-estimates",
+   "title": "Hearing Protector Estimates",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-label-on-the-box",
+     "title": "The label on the box",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-appendix-b-and-the-seven",
+     "title": "Appendix B and the seven",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-field-derating",
+     "title": "The field derating for engineering controls",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-derating-by-protector-type",
+     "title": "Derating by protector type",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-dual-protection-and-the-floor",
+     "title": "Dual protection and the floor at zero",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-chemical-averages",
+   "title": "Chemical Averages",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-eight-hour-twa",
+     "title": "The eight-hour chemical TWA",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-unsampled-time-counts-as-zero",
+     "title": "Unsampled time counts as zero",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-short-term-window",
+     "title": "The short-term window",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-window-over-fifteen-minutes",
+     "title": "A window over fifteen minutes is refused",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-mixtures",
+   "title": "Mixtures",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-additive-index",
+     "title": "The additive index",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-published-example",
+     "title": "The published example",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-unity-passes",
+     "title": "Unity passes",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-when-additivity-is-the-wrong-model",
+     "title": "When additivity is the wrong model",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-the-professional-capstone",
+   "title": "The Professional Capstone",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-noise-and-chemicals-together",
+     "title": "Noise and chemicals together",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter",
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-a-protector-estimate-is-for",
+     "title": "What a protector estimate is for",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-this-tier-leaves-out",
+     "title": "What this tier leaves out",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "hy-noise-dosimeter",
+      "hy-protection-chemicals"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

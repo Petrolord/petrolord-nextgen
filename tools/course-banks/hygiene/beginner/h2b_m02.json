@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The OBEN day gives an OSHA PEL noise dose of 27.748183 percent. What TWA does the engine report beside it?",
+  "options": [
+   "87.635749 dBA, the TWA the OSHA action level reports for that day.",
+   "89.242460 dBA, the NIOSH noise REL TWA for the very same record.",
+   "80.752126 dBA, from 16.61 log10(D/100) + 90 on that noise dose.",
+   "90.000000 dBA, the PEL criterion level, as the TWA of any day."
+  ],
+  "answer": 2,
+  "explanation": "The TWA is the constant level that would give the same noise dose over 8 hours: 16.61 times log10 of 27.748183 over 100, plus 90, is 80.752126 dBA. It sits below 90 because the noise dose sits below 100 percent. The tempting 87.635749 dBA belongs to the action level, which integrates more periods and so restates a larger noise dose."
+ },
+ {
+  "prompt": "At a noise dose of exactly 100 percent, what TWA do OSHA Table A-1 and NIOSH Table 1-2 give?",
+  "options": [
+   "90.000000 dBA on OSHA and 85.000000 dBA on NIOSH, each its own criterion level.",
+   "85.000000 dBA on both, since 100 percent is the same allowance on either scale.",
+   "90.000000 dBA on both, since the TWA is always stated on the OSHA scale of 90.",
+   "80.000000 dBA on both, the level where the two tables' thresholds begin."
+  ],
+  "answer": 0,
+  "explanation": "At 100 percent the logarithm term is zero and the TWA equals the criterion level Lc, which is 90 for OSHA and 85 for NIOSH. The tempting answer treats the two scales as one; they have different criterion levels, so the same percentage restates as different levels. 80 dBA is a threshold and plays no part in the TWA formula."
+ },
+ {
+  "prompt": "Which coefficient does the engine's OSHA PEL preset use in TWA = K log10(D/100) + 90, and why?",
+  "options": [
+   "16.609640474437, because the engine always prefers the exact coefficient to a printed one.",
+   "10.0, because the engine uses one printed coefficient for all three presets alike.",
+   "16.61 on the PEL and the exact coefficient on the action level of the same record.",
+   "16.61, because judgement J1 has each preset use the coefficient its source prints."
+  ],
+  "answer": 3,
+  "explanation": "Judgement J1: each preset uses the coefficient its source prints, 16.61 for OSHA and 10.0 for NIOSH, and only a criterion typed by hand defaults to the exact decibel exchange rate over log10 2. The exact 16.609640474437 is what the custom default would use. The PEL and action level presets both measure 16.610000000000."
+ },
+ {
+  "prompt": "OSHA Table A-1 does not separate 16.61 from the exact coefficient. What, then, fixes 16.61 for OSHA?",
+  "options": [
+   "Table A-1, whose rows reject the exact coefficient wherever the two disagree.",
+   "The text of the mandatory Appendix A, which writes TWA = 16.61 log10(D/100) + 90.",
+   "NIOSH Table 1-2, whose 49 rejecting rows settle the coefficient for both agencies.",
+   "The engine's bisection on its own output, which finds 16.61 as a best fit."
+  ],
+  "answer": 1,
+  "explanation": "The two OSHA coefficients differ by 0.000359525563 dB and the table prints one decimal, so 0 of its 150 rows reject the exact one. The regulation's text is what writes 16.61, and the course records that as a decision grounded in the text. Table 1-2 speaks only for NIOSH's 10.0, so it cannot settle the OSHA coefficient."
+ },
+ {
+  "prompt": "Of the 83 rows of NIOSH Table 1-2, how many fall outside their printed tolerance when the exact coefficient replaces 10.0?",
+  "options": [
+   "0, since both coefficients round to the same printed decimal.",
+   "150, every row, since the exact coefficient is refuted.",
+   "49, which is why this table supports the printed 10.0.",
+   "83, since the table was typed from the exact values."
+  ],
+  "answer": 2,
+  "explanation": "Digest section 5: with the exact coefficient 49 of the 83 printed rows fall outside their printed tolerance, so the table was computed with the coefficient NIOSH prints. The tempting 0 is the OSHA Table A-1 result, 0 of 150, because the OSHA gap is too small to move a printed decimal. Some NIOSH rows, such as 20.000000 percent, cannot tell the two apart."
+ },
+ {
+  "prompt": "Eight hours at a constant 100 dBA on the NIOSH preset: what TWA does the engine report?",
+  "options": [
+   "100.051500 dBA, a little above the level, the cost of the printed 10.0.",
+   "100.000000 dBA, since a constant level always returns itself as its TWA.",
+   "97.000000 dBA, since the NIOSH scale sits 3 dB below the OSHA scale.",
+   "85.000000 dBA, since a TWA on NIOSH is stated at its criterion level."
+  ],
+  "answer": 0,
+  "explanation": "Digest section 5 measures 100.051500 dBA on the NIOSH preset, where the level itself is 100. The tempting 100.000000 dBA is what a custom criterion with the exact coefficient returns for the same record. The printed 10.0 sits 0.034215715338 dB above the exact coefficient, and that excess is what lifts the TWA above the constant level."
+ },
+ {
+  "prompt": "A criterion typed by hand, with no coefficient given, has a 4 dB decibel exchange rate. Which TWA coefficient does the engine default to?",
+  "options": [
+   "16.61, the OSHA printed value used for every criterion.",
+   "10.0, the NIOSH printed value used for every criterion.",
+   "No coefficient: it refuses on `twaCoefficientDb` instead.",
+   "The exact one, the decibel exchange rate over log10 2."
+  ],
+  "answer": 3,
+  "explanation": "Judgement J1 says a custom criterion defaults to the exact decibel exchange rate over log10 2; only the presets use a printed coefficient. The printed 16.61 and 10.0 belong to the OSHA and NIOSH presets. `twaCoefficientDb` is refused only when a coefficient is supplied and is not a finite number above zero, which is a different case."
+ },
+ {
+  "prompt": "Eight hours at 85 dBA are run on the OSHA PEL setup. What does `noiseDose` return?",
+  "options": [
+   "A noise dose of 0.000000 percent and a TWA of 0 dBA for the day.",
+   "A noise dose of 0.000000 percent and a TWA reported as absent, null.",
+   "A refusal on `dosePct`, since a zero noise dose has no TWA to give.",
+   "A noise dose of 50.000750 percent and a TWA of 85.000000 dBA."
+  ],
+  "answer": 1,
+  "explanation": "Nothing in the record reaches the PEL threshold of 90 dBA, so nothing is integrated, and the engine returns a noise dose of zero with a TWA of null. A record with nothing above the threshold is a legitimate day, so `noiseDose` does not refuse. A TWA of 0 dBA would claim a sound level nobody measured. 50.000750 percent is the OSHA noise dose for a TWA of 85."
+ },
+ {
+  "prompt": "A script asks `noiseTwaFromDoseDbA` for the TWA of a noise dose of 0. What comes back?",
+  "options": [
+   "A TWA of null with a noise dose of zero, the same answer `noiseDose` gives for a quiet day.",
+   "A TWA equal to the criterion's threshold, the lowest level the criterion can integrate.",
+   "A refusal on `dosePct`: \"dosePct must be a finite percentage above zero: a zero dose has no TWA\".",
+   "A TWA of negative infinity, since the logarithm of zero tends to it as the noise dose falls."
+  ],
+  "answer": 2,
+  "explanation": "This door is asked a direct question with an impossible input, so it refuses on `dosePct` in the engine's own words quoted in the key. The null TWA belongs to `noiseDose`, which is reading a real record and so reports what it found. The logarithm of zero is not a number, and the engine will not invent one."
+ },
+ {
+  "prompt": "OSHA Table A-1 turns a noise dose of 10.000000 percent into 73.390000 dBA, which is below the PEL threshold. What does that TWA mean?",
+  "options": [
+   "It is an error, since a TWA can never sit below its threshold.",
+   "It is the sound level of the quietest period on that record.",
+   "It shows that record's noise dose should have been refused.",
+   "The level that, held for 8 hours, gives that same noise dose."
+  ],
+  "answer": 3,
+  "explanation": "A TWA is a restatement of the percentage, the constant level over 8 hours that gives the same noise dose, and it can sit below the threshold whenever the percentage is small. The OBEN PEL TWA of 80.752126 dBA sits below 90 for the same reason. Nothing about it describes one period, and the engine refuses only a noise dose of zero or below."
+ },
+ {
+  "prompt": "NIOSH Table 1-2 prints 121.500000 dBA for a noise dose of 450000.000000 percent. The engine gives 121.532125 with 10.0 and 121.407128 with the exact coefficient. What does the row show?",
+  "options": [
+   "It rejects the exact coefficient, whose 121.407128 rounds to a decimal the table does not print.",
+   "It cannot separate them, since both engine columns round to the printed 121.500000 dBA.",
+   "It rejects 10.0, since 121.532125 is further from the printed figure than the exact one.",
+   "It shows the table was typed with a 5 dB decibel exchange rate for the top of its range."
+  ],
+  "answer": 0,
+  "explanation": "At one decimal the printed 10.0 gives the table's own figure, and the exact coefficient's 121.407128 rounds one decimal lower, to a figure the table does not print. That makes the row one of the 49 that reject the exact coefficient. A row such as 20.000000 percent is the kind that cannot separate them, because both columns round to the printed 78.000000 dBA."
+ },
+ {
+  "prompt": "On OSHA Table A-1 at a noise dose of 45.000000 percent, the engine gives 84.239860 with 16.61 and 84.239985 with the exact coefficient; the table prints 84.200000. Which coefficient does the row support?",
+  "options": [
+   "16.61, since 84.239860 is the nearer of the two to 84.200000.",
+   "Neither over the other: both round to the printed 84.200000.",
+   "The exact one, since it is the larger of the two and so rounds up.",
+   "Neither, since the row sits outside its printed tolerance under both."
+  ],
+  "answer": 1,
+  "explanation": "Rounded to the table's one decimal, both engine columns land on the printed 84.200000, so the row is consistent with either coefficient. Being a little nearer the printed value decides nothing when the table cannot resolve the difference, which is exactly why the text of Appendix A fixes 16.61 and Table A-1 cannot. The row sits inside its tolerance under both."
+ },
+ {
+  "prompt": "On OSHA Table A-1, doubling the noise dose to 200.000000 percent gives 95.000108 dBA. Why is it a little above 95?",
+  "options": [
+   "Because Table A-1 adds a rounding margin at each whole doubling.",
+   "Because 200 percent crosses the PEL limit and triggers a correction.",
+   "Because the printed 16.61 sits slightly above the exact coefficient.",
+   "Because the threshold of 90 dBA shifts the TWA by a small offset."
+  ],
+  "answer": 2,
+  "explanation": "Doubling the noise dose adds the coefficient times log10 2 to the TWA. With the exact coefficient that is exactly 5 dB, and Table A-1's exact column gives 95.000000; with 16.61 it is slightly more, so the engine gives 95.000108 dBA. The table prints 95.000000 either way. No correction is applied at the limit and the threshold plays no part in the TWA formula."
+ },
+ {
+  "prompt": "How far above its exact value does each printed TWA coefficient sit?",
+  "options": [
+   "OSHA by 0.000359525563 dB and NIOSH by 0.034215715338 dB.",
+   "OSHA by 0.034215715338 dB and NIOSH by 0.000359525563 dB.",
+   "Both by 0.000359525563 dB, since both round to two decimals.",
+   "Both by exactly 0.034215715338 dB, the NIOSH gap on both."
+  ],
+  "answer": 0,
+  "explanation": "The exact coefficients are 16.609640474437 for 5 dB and 9.965784284662 for 3 dB, so 16.61 sits 0.000359525563 dB above its exact value and 10.0 sits 0.034215715338 dB above its own. The swapped pairing is the tempting error; the NIOSH gap is the larger one, which is why NIOSH Table 1-2 can tell its coefficients apart and OSHA Table A-1 cannot."
+ },
+ {
+  "prompt": "Four times the OSHA allowance, 400.000000 percent, restates as 100.000216 dBA with the printed coefficient and 100.000000 dBA with the exact one. What figure does Table A-1 print for it?",
+  "options": [
+   "100.000216 dBA, the figure the printed 16.61 gives there.",
+   "100.000000 dBA, which both engine columns round to.",
+   "95.000000 dBA, one decibel exchange rate below that level.",
+   "90.000000 dBA, the criterion level of the PEL."
+  ],
+  "answer": 1,
+  "explanation": "Four times the allowance is two doublings, so the TWA is two 5 dB steps above 90, near 100 dBA. The printed row is 100.000000 dBA and both engine columns round to it, so this row, like every row of Table A-1, cannot separate the two OSHA coefficients. 95.000000 is the row for 200.000000 percent, one doubling."
+ }
+]

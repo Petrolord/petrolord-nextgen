@@ -1,0 +1,34 @@
+-- ============================================================================
+-- H2 EXPERT DEEP SEED: Occupational Hygiene: Noise, Chemical & Heat Exposure,
+-- advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/hygiene/advanced.
+--
+-- What this tier owns: HEAT STRESS, THE LONG SHIFT, AND READING THE EVIDENCE.
+-- The wet bulb globe temperature indoors and outdoors and the one-hour time
+-- weighted averages of NIOSH 2016-106 sections 1.1.1 and 1.1.3; metabolic
+-- rate in watts and the NIOSH heat RAL and REL equations, presented as
+-- published equations CHECKED FOR TRANSCRIPTION ONLY; how strong the evidence
+-- behind each formula in this course is, published against oracle only
+-- against transcription; the published errata, including the NIOSH worked
+-- example that disagrees with the NIOSH equation beside it; the shift that is
+-- not eight hours, where the OSHA action level moves with the shift length
+-- while the permissible exposure limit does not and the noise dose is summed
+-- whole with no rescaling; the Brief and Scala daily and weekly reduction
+-- factors and which of the two governs; and combining noise, chemical and
+-- heat exposures into a sampling decision. Digest sections 16 to 23, and
+-- section 24.
+--
+-- THE TRAP THE TIER IS BUILT ON. A long shift moves the trigger and not the
+-- limit, and an adjusted limit can turn a mixture that passes into one that
+-- fails without a single concentration changing. The Expert capstone grades
+-- the two one-hour averages of STATED readouts, the extended-shift action
+-- level, the whole-shift noise dose, one Brief and Scala adjusted limit and
+-- the mixture index against the adjusted limits. It grades no NIOSH heat RAL,
+-- no NIOSH heat REL, no margin against either, no exceedance verdict and no
+-- wet bulb globe temperature built from thermometer readings: those are
+-- taught as transcription-checked equations and graded nowhere.
+-- ============================================================================
