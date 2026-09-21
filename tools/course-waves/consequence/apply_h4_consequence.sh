@@ -98,9 +98,9 @@ FILES="
 digest_for() {
   case $1 in
     20261006_h4_consequence_course           ) echo a64bffdb4abbc0c65821900f8034fed68ea51ef31a1fd9b6fcfd6586054d0265 ;;
-    20261006_h4_consequence_beginner_deep    ) echo c2f3a91c7ca46b9b803fd46fd87c043b4a83f32b560d667396f579fadca7f991 ;;
-    20261006_h4_consequence_intermediate_deep) echo 9b7e369734f1163bd189384f2b2f499ad22d7e4caccd7bce467a23624f839c3a ;;
-    20261006_h4_consequence_advanced_deep    ) echo 02abbfc227978c315afde13b18378114bbe05d006ab23c6a0197c7eb3a12a98a ;;
+    20261006_h4_consequence_beginner_deep    ) echo 7b861996a966b2a3e1771b0a818f8a4276277e1e3e492d1a516230aaf51adbb7 ;;
+    20261006_h4_consequence_intermediate_deep) echo 21d0d68d6168d1612ba7738015c2c7337bf243bcf403c6c8b607417144130f7c ;;
+    20261006_h4_consequence_advanced_deep    ) echo fa8d0f25b892a153bb73d5fdbeb2063ae48bae8e9c45234e9c2ac04ead7d26a3 ;;
     20261006_h4_consequence_go_live          ) echo fb5655ac12c8b02f6526ceda3c506d67ed8b0bb2bc93bfc568adad7e79d0281a ;;
     *) echo UNPINNED ;;
   esac
