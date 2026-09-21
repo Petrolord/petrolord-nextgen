@@ -1,6 +1,6 @@
 # Every charge names its base
 
-A rate is half a charge. The other half is the quantity or the value it is levied on, and in an import build-up that base differs from line to line. A port authority bills by the tonne, a jetty by the cubic metre, a regulator by the litre, a customs duty on the insured value and a demurrage provision once for the whole cargo. The engine asks every line to name its base, and it applies each rate to exactly that base.
+A rate is half a charge. The other half is the quantity or the value it is levied on, and in an import build-up that base differs from line to line. On the BADAGRY record the port and harbour charges are per tonne, the jetty per m3, the regulatory and inspection charges per litre, the import duty a percent of CIF and the demurrage provision once for the cargo. The engine asks every line to name its base, and it applies each rate to exactly that base.
 
 {{panel:supply-price-explorer}}
 

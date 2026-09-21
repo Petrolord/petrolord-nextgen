@@ -12,7 +12,7 @@ A held item is a limit the engines repository records and does not resolve. The 
 
 **H2.** The volume correction coefficient tables and every published rate stay unshipped. `volumeCorrectionFactor` refuses without coefficients, and every template rate is absent: `IMPORT_TEMPLATE` ships 9 of 9 rates as none and `PUMP_TEMPLATE` 7 of 7. That is why every rate in this tier is invented and says so, and why every stock in the Associate tier is corrected with a VCF read off a terminal's own invented tables.
 
-H2 is a limit, and it is also a decision. A library that shipped a duty, a levy or a coefficient table would be quoting authority it cannot keep current. The engine leaves the rate column empty and refuses or labels what depends on it.
+H2 is a limit, and it is also a decision. The engine leaves the rate column empty and refuses or labels what depends on it.
 
 ## The rules the engines keep
 
@@ -46,7 +46,7 @@ The bay row quotes the engine's own sentence for 2.5 bays.
 
 ## Reading the table as one idea
 
-Read together, the rows are the course's one sentence applied to different inputs. An opening stock, a strapping entry, a water cut, a bay count, a density, a rate and a stage are each a measured or stated link, and the engine refuses or names the link nobody supplied. The last rule is the reason the first exists. A figure built so that it cannot come out wrong, like a reconciliation whose opening stock is taken from its own closing dip, proves nothing, and the engine's answer to that is to make the opening stock an input.
+Read together, the rows are the course's one sentence applied to different inputs. An opening stock, a strapping entry, a water cut, a bay count, a density, a rate and a stage are each a measured or stated link, and the engine refuses or names the link nobody supplied. A reconciliation whose opening stock is taken from its own closing dip balances on every row, and the engine makes the opening stock an input.
 
 ## Exercise
 

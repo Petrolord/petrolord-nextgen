@@ -40,7 +40,7 @@ A build-up the engine refused has no price, and marginWaterfall answers it with 
 
 ## Why this view matters
 
-A pump price is argued about in public by parties who each see their own line. A dealer sees the dealer margin, a regulator the levies, a transporter the transport element. The grouping puts them all on one page in one unit, naira a litre, with their shares of one price. Any disagreement about who takes what has to be an argument about a rate on a row, because the rows reconcile to the price.
+The grouping puts every recipient on one page in one unit, naira a litre, with their shares of one price. The seven rows add to 1074.8249 naira a litre, the price the waterfall reached. Any disagreement about who takes what has to be an argument about a rate on a row, because the rows reconcile to the price.
 
 The engine only groups what it was given. Every recipient name except Product (landed) comes from the template, and every rate from this course's invented record.
 
