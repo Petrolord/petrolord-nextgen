@@ -13,7 +13,7 @@ q(2, "The coefficient C in the critical gas equation is what kind of number in t
  ["A chart value the caller types in, with its published reference named beside it.",
   "A closed form evaluated on every call, from the exponent and the pressure ratio.",
   "A table the engine carries, interpolated between the exponents it lists."],
- "C is computed from the exponent and nothing else, which is why the digest can walk it across a column of stated exponents. The factor needing two inputs is F2, and the typed factor on this route is Kb."),
+ "C is computed from the exponent and nothing else, which is why the course can walk it across a column of stated exponents. The factor needing two inputs is F2, and the typed factor on this route is Kb."),
 
 q(0, "Walked from an exponent of 1.050000 to one of 1.800000, C runs from 321.187587 to 387.182334. What does that direction mean for a fixed load?",
  "A stiffer gas has a larger C, and a larger C gives a smaller required area.",

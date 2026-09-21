@@ -28,8 +28,8 @@ q(1, "Thermal outbreathing comes back as 11765.0907 scfh for a low volatility pr
  "The engine states the basis: one scfh of air per barrel of capacity for an uninsulated tank at a latitude factor of 1, with the low-volatility outbreathing at 0.6 of it.")
 
 q(3, "At the stated rates the engine returns a total outbreathing of 25689.2574 scfh and a total inbreathing of 23201.8178 scfh. What may a writer say about the pair?",
- "That the difference is 2487.4395 scfh and the ratio is 1.107209, both quoted from the relation line the digest prints.",
- ["That the outbreathing stands at twice the inbreathing, since 2.000000 is the ratio this pair is printed at on the relation line the digest carries for the two directions.",
+ "That the difference is 2487.4395 scfh and the ratio is 1.107209, both quoted from the relation line the course prints.",
+ ["That the outbreathing stands at twice the inbreathing, since 2.000000 is the ratio this pair is printed at on the relation line the course carries for the two directions.",
   "That the two are close enough to be treated as one figure, which is why the engine forms a single predicate rather than reporting each direction separately.",
   "That the inbreathing is the larger of the two by 2487.4395 scfh, since the relation prints the difference as the first value less the second."],
  "The relation carries the two values, their difference and their ratio, and a comparison is only ever stated where a relation line states it.")
@@ -69,7 +69,7 @@ q(2, "A crossover draw rate of 1083.0319 bbl/hr is quoted in a report on another
   "It was found by bisection, so only the bracketing rows may be quoted."],
  "The outbreathing total of 25689.2574 scfh is what the inbreathing has to overtake, and that total is set by the fill rate and the thermal terms of this tank.")
 
-q(0, "What does the digest print about the thermal inbreathing of this tank with insulation applied?",
+q(0, "What does the course print about the thermal inbreathing of this tank with insulation applied?",
  "A relation giving 19608.4845 scfh uninsulated, 4902.1211 scfh insulated, a difference of 14706.3634 and a ratio of 4.000000.",
  ["That insulation removes the thermal term altogether, so an insulated tank breathes on its movement terms alone and the inbreathing falls to 3593.3333 scfh.",
   "That insulation is applied as a latitude factor below 1.000000, so the credit shows up in the same field the latitude factor is returned in.",

@@ -23,7 +23,7 @@ q(3,
   ["0.000154803000 per year, the three LSIRs of the places added together with no occupancy applied",
    "0.000017529373 per year, with every hour count divided by 8766 hours to make the fraction",
    "0.000016912100 per year, the process deck alone"],
-  "The engine converts each hour count at 8760 hours a year, multiplies each LSIR by its fraction and sums, giving 0.000017541379 per year. Summing the LSIRs with no occupancy gives 0.000154803000, dividing by 8766 gives 0.000017529373, and the process deck alone gives 0.000016912100. Each is a wrong method the digest measures.")
+  "The engine converts each hour count at 8760 hours a year, multiplies each LSIR by its fraction and sums, giving 0.000017541379 per year. Summing the LSIRs with no occupancy gives 0.000154803000, dividing by 8766 gives 0.000017529373, and the process deck alone gives 0.000016912100. Each is a wrong method the course measures.")
 
 q(1,
   "What occupancy fraction does the engine give the operator's 1000 hours on the process deck?",
@@ -63,7 +63,7 @@ q(0,
   ["Each fraction may not exceed one, and the total across places is left unchecked so long as each place is inside 0 to 1.",
    "The total must equal one exactly, so a roster that leaves part of the year unaccounted for is refused by the engine.",
    "The total may reach 1.1, a margin for overtime."],
-  "The digest says the fractions may not exceed one at any place or in total, and that the occupancy check allows the total to reach one exactly. A roster of 0.6 and 0.5 is refused although each is below one, so the total is checked. A roster need not fill the year; the operator's total is 0.497716894977. The engine allows no margin over the whole year.")
+  "The course says the fractions may not exceed one at any place or in total, and that the occupancy check allows the total to reach one exactly. A roster of 0.6 and 0.5 is refused although each is below one, so the total is checked. A roster need not fill the year; the operator's total is 0.497716894977. The engine allows no margin over the whole year.")
 
 q(1,
   "A roster gives 'deck' more hours than a year holds. What does the engine say, in its own words?",
@@ -87,7 +87,7 @@ q(0,
   ["It is the Purple Book's: the indoor and outdoor fractions set it, and the engine takes the indoor figure for any building.",
    "It is the engine's own estimate: it lowers the factor for any place with a stated probability of death below one half.",
    "It is fixed at 1 and cannot be supplied."],
-  "The digest says the vulnerability factor is the analyst's own, that no source the engine read gives one for individual risk, and so the default is 1 and the result returns the factor used at each place. The Purple Book indoor and outdoor fractions are for societal risk, and they are no vulnerability factor. The engine estimates nothing, and a factor can be supplied, as the accommodation example shows.")
+  "The course says the vulnerability factor is the analyst's own, that no source the engine read gives one for individual risk, and so the default is 1 and the result returns the factor used at each place. The Purple Book indoor and outdoor fractions are for societal risk, and they are no vulnerability factor. The engine estimates nothing, and a factor can be supplied, as the accommodation example shows.")
 
 q(3,
   "A vulnerability factor above one is supplied for 'deck'. What does the engine return?",
@@ -103,7 +103,7 @@ q(1,
   ["The engine converts hours at 8766 to allow for leap years, so dividing by 8766 is right and gives the engine's 0.000017541379.",
    "The engine takes hours with no conversion, so any divisor is wrong, and dividing by 8766 gives 0.000154803000 per year.",
    "It gives 0.000016912100 per year, the process deck alone."],
-  "Hours convert at 8760 hours a year, the H3 engine's HOURS_PER_YEAR, and the digest measures the 8766 route at 0.000017529373 per year against the engine's 0.000017541379. 0.000154803000 is the no occupancy sum and 0.000016912100 the process deck alone, which are two other wrong methods.")
+  "Hours convert at 8760 hours a year, the H3 engine's HOURS_PER_YEAR, and the course measures the 8766 route at 0.000017529373 per year against the engine's 0.000017541379. 0.000154803000 is the no occupancy sum and 0.000016912100 the process deck alone, which are two other wrong methods.")
 
 q(2,
   "How much of the operator's yearly figure comes from the hours in the accommodation block?",

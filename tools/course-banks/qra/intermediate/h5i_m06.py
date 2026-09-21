@@ -15,7 +15,7 @@ q(1,
  ["Fd = FE,in x FE,out, the chance of dying indoors times the chance of dying outdoors, for everyone in the cell",
   "Fd = the larger of FE,in and FE,out, since each person in the cell is counted at the worse of the two places",
   "Fd = FE,out alone, since a person outdoors and unprotected is the case every societal count is built on"],
- "The digest gives Fd = FE,in x fpop,in + FE,out x (1 - fpop,in), where fpop,in is the fraction of the population indoors, so each fraction dying is weighted by the share of people it applies to. A product of the two fractions has no meaning for one population. Taking the worse of the two overcounts the people indoors. Outdoors and unprotected is the LSIR convention, which the societal count deliberately refines.")
+ "The course gives Fd = FE,in x fpop,in + FE,out x (1 - fpop,in), where fpop,in is the fraction of the population indoors, so each fraction dying is weighted by the share of people it applies to. A product of the two fractions has no meaning for one population. Taking the worse of the two overcounts the people indoors. Outdoors and unprotected is the LSIR convention, which the societal count deliberately refines.")
 
 q(3,
  "What are the Purple Book fractions of deaths indoors and outdoors for?",
@@ -23,7 +23,7 @@ q(3,
  ["Individual risk: they are the vulnerability factor applied at each place of one person's IRPA",
   "Both, since the same fraction scales an LSIR and a head count by exactly the same amount",
   "Neither on their own: they only adjust the frequency of each outcome of the event tree above"],
- "The digest says the fractions are for SOCIETAL risk, so the expected number of deaths in a cell is Fd times the people in it, and that they are not a vulnerability factor for individual risk. The vulnerability factor of an IRPA is the analyst's own, with a default of 1. An event tree outcome frequency is untouched by where people shelter.")
+ "The course says the fractions are for SOCIETAL risk, so the expected number of deaths in a cell is Fd times the people in it, and that they are not a vulnerability factor for individual risk. The vulnerability factor of an IRPA is the analyst's own, with a default of 1. An event tree outcome frequency is untouched by where people shelter.")
 
 q(0,
  "Why does this course teach the Fd rules and never grade a number that passes through them?",
@@ -31,15 +31,15 @@ q(0,
  ["The engine computes them from a probit of its own, and the probit belongs to the consequence course, so no figure is stable",
   "The Purple Book withdrew the indoor fractions, so the engine carries them only for comparison with older studies",
   "The fractions change with each weather class, so no single value is ever returned for a given effect and period"],
- "The digest says the factors 0.1 for toxic indoors, 0.14 for fire outdoors, 0.025 for explosion indoors and the Table 5.3 fractions are single transcriptions of the Purple Book, which prints no numeric example for them, so the course teaches the rules and grades nothing through them. A probit belongs to the consequence course, and this function takes the probability of death as a stated input. Nothing says the Purple Book withdrew anything, and the period is day or night, with no weather class.")
+ "The course says the factors 0.1 for toxic indoors, 0.14 for fire outdoors, 0.025 for explosion indoors and the Table 5.3 fractions are single transcriptions of the Purple Book, which prints no numeric example for them, so the course teaches the rules and grades nothing through them. A probit belongs to the consequence course, and this function takes the probability of death as a stated input. Nothing says the Purple Book withdrew anything, and the period is day or night, with no weather class.")
 
 q(2,
- "What does the digest record about the engine's own validation of the Fd factors?",
+ "What does the course record about the engine's own validation of the Fd factors?",
  "A wrong clothing factor planted in both the engine and its oracle left the suite green",
  ["Every factor was matched against a second edition of the same source at twelve decimals",
   "The oracle found one transcription error in the explosion rules and flagged the suite red",
   "The factors were checked against a worked Fd example the Purple Book prints for every effect"],
- "The digest says the engine's own validation planted a wrong clothing factor in both the engine and its oracle, and the suite stayed green, which is why no number through the fractions is graded. There is no second reading of the source behind them. No error was found and flagged, because a planted error in both places cannot be seen. The Purple Book prints no numeric example for these factors, so there was nothing to check them against.")
+ "The course says the engine's own validation planted a wrong clothing factor in both the engine and its oracle, and the suite stayed green, which is why no number through the fractions is graded. There is no second reading of the source behind them. No error was found and flagged, because a planted error in both places cannot be seen. The Purple Book prints no numeric example for these factors, so there was nothing to check them against.")
 
 q(1,
  "For an explosion, which rule does the engine apply at exactly 30000 Pa gauge?",
@@ -55,7 +55,7 @@ q(3,
  ["Only those outdoors die, since a building shields everyone inside it",
   "Everyone outdoors dies and a tenth of those indoors, as for a toxic cloud",
   "The cell is refused, since fluxes over the ignition value are unsupported"],
- "The digest says a fire at 35000 W/m2 or more kills everyone indoors or out, following Figure 5.4. Below that flux the probability of death comes from a heat probit, which is consequence modelling and belongs to the consequence course. At or above it the rule gives no shelter indoors, so neither the outdoor-only reading nor the toxic cloud's tenth indoors applies, and the engine accepts the flux without refusing it.")
+ "The course says a fire at 35000 W/m2 or more kills everyone indoors or out, following Figure 5.4. Below that flux the probability of death comes from a heat probit, which is consequence modelling and belongs to the consequence course. At or above it the rule gives no shelter indoors, so neither the outdoor-only reading nor the toxic cloud's tenth indoors applies, and the engine accepts the flux without refusing it.")
 
 q(2,
  "For a toxic cloud with a stated probability of death PE outdoors, how does the rule treat the people indoors?",
@@ -79,7 +79,7 @@ q(3,
  ["Those indoors are spared inside the envelope, since the walls stop the flame front",
   "Only the fraction of people indoors at night dies inside the envelope",
   "It weights the envelope by the night fraction indoors before any count"],
- "The digest runs a flash fire inside the envelope at night to an Fd of everyone and outside it to none, with the same fraction indoors and outdoors in each case. Buildings give no shelter from a flash fire inside the envelope in this rule. The night fraction indoors still enters Fd, but with equal fractions in and out it changes nothing.")
+ "The course runs a flash fire inside the envelope at night to an Fd of everyone and outside it to none, with the same fraction indoors and outdoors in each case. Buildings give no shelter from a flash fire inside the envelope in this rule. The night fraction indoors still enters Fd, but with equal fractions in and out it changes nothing.")
 
 q(2,
  "For the JISIKE off-site set, which pair belongs together in one societal picture?",
@@ -111,7 +111,7 @@ q(3,
  ["The F-N curve of the JISIKE off-site set, reproduced from the Purple Book's own worked example",
   "The Fd fractions, reproduced at every tabled case against the Purple Book's own printed figures",
   "The PLL of the JISIKE crew, taken from an HSE worked example and matched to the last bit"],
- "The digest says what IS published and reproduced is the criterion side, the three Bevi points on the Purple Book line and the printed R2P2 point. No published worked F-N curve exists, so the curve is checked by self-consistency. The Purple Book prints no numeric example of the Fd fractions. The JISIKE streams are teaching inputs, and no HSE worked example was available.")
+ "The course says what IS published and reproduced is the criterion side, the three Bevi points on the Purple Book line and the printed R2P2 point. No published worked F-N curve exists, so the curve is checked by self-consistency. The Purple Book prints no numeric example of the Fd fractions. The JISIKE streams are teaching inputs, and no HSE worked example was available.")
 
 q(2,
  "The JISIKE off-site set has a PLL of 0.000336000000 per year. Why does a societal picture carry the F-N curve as well?",

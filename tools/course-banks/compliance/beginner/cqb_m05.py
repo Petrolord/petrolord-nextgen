@@ -48,7 +48,7 @@ q(0, "nextReviewDate is called for an issue date of 2025-03-14 with the review p
  ["2027-03-14, because the function applies DEFAULT_REVIEW_PERIOD_MONTHS itself.",
   "A refusal naming the missing review period as a required field.",
   "The issue date itself, so the document comes up for review at once."],
- "The digest prints none for a period of null and for a period of 0. It prints 2027-03-14 only when the caller passes 24, DEFAULT_REVIEW_PERIOD_MONTHS. The owner's recorded position is that the default is the caller's to apply, and the course teaches it as a limit."),
+ "The course prints none for a period of null and for a period of 0. It prints 2027-03-14 only when the caller passes 24, DEFAULT_REVIEW_PERIOD_MONTHS. The owner's recorded position is that the default is the caller's to apply, and the course teaches it as a limit."),
 
 q(3, "nextRevisionNumber is given the current revision '7'. What does it return?",
  "'08'",

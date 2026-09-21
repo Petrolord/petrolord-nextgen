@@ -36,7 +36,7 @@ q(3,
  "The worked example prints a Froude number of 0.0545. What does u10^2 / (g D) actually come to with the example's inputs?",
  "0.060060",
  ["0.0545","0.081577","0.020394"],
- "Section 21 records it as an erratum in the source: u10^2 / (g D) is 0.060060, and the printed tilt parameter and tilt follow only from that value. 0.0545 is the misprint itself. 0.081577 and 0.020394 are ERHA's Froude numbers at 4 m/s and 2 m/s.")
+ "The course records it as an erratum in the source: u10^2 / (g D) is 0.060060, and the printed tilt parameter and tilt follow only from that value. 0.0545 is the misprint itself. 0.081577 and 0.020394 are ERHA's Froude numbers at 4 m/s and 2 m/s.")
 
 q(1,
  "The example prints an air viscosity of 0.0000075133 m2/s \"for air at 15 C\". Why does the golden keep that printed value?",
@@ -52,7 +52,7 @@ q(0,
  ["50 m from the flame surface, exactly as the wording says it does",
   "50 m from the pool centre, the printed figure read as a centre distance",
   "The flame length of 46.7725 m added onto the 50 m printed in the text"],
- "Section 21 lists this among the errata of the published source: the steps compute with 100 m, the distance from the pool centre given in the inputs. The 50 m wording matches no step's arithmetic, whether read from the surface or the centre, and nothing adds the flame length onto it.")
+ "The course lists this among the errata of the published source: the steps compute with 100 m, the distance from the pool centre given in the inputs. The 50 m wording matches no step's arithmetic, whether read from the surface or the centre, and nothing adds the flame length onto it.")
 
 q(2,
  "Which step of the reproduction shows the largest relative difference between engine and print?",
@@ -88,7 +88,7 @@ q(1,
  ["As bugs the engine carried in an earlier version and has since fixed in a later release",
   "As rounding the engine itself introduced, since it prints six decimals throughout",
   "As tolerances the golden widened after the engine first failed the example"],
- "The digest states the engine has no repair history and that the errata it teaches belong to published sources. The Froude number, the viscosity and the 50 m wording are misprints in the book, and each golden tolerance was stated for its step. A sentence about former engine behaviour would be a defect.")
+ "The course states the engine has no repair history and that the errata it teaches belong to published sources. The Froude number, the viscosity and the 50 m wording are misprints in the book, and each golden tolerance was stated for its step. A sentence about former engine behaviour would be a defect.")
 
 q(3,
  "A caller asks the view factor function for a target the tilted flame reaches over. Which words does the engine refuse with?",
@@ -96,7 +96,7 @@ q(3,
  ["distanceFromAxisM: the target is at or inside the flame base: a view factor model needs the target outside the flame",
   "pathLengthM: pw x lies outside 1e4 to 1e5 N/m, where the YB advises against the Bagster fit: supply a transmissivity from another source",
   "fuel: must be one of liquid-hydrogen, lng, lpg, butane, hexane, heptane, benzene, xylene, gasoline, kerosene, jp-5, methanol, ethanol, or give massBurningFluxInfKgM2S and kBetaPerM"],
- "Section 3 tables the overhang refusal verbatim as the tiltDeg message. The other three are real engine messages for other calls: distanceFromAxisM for a target inside the flame base, pathLengthM for a Bagster path outside its band, and fuel for a burning rate asked of a fuel Table 6.5 does not carry.")
+ "The course lists the overhang refusal verbatim as the tiltDeg message. The other three are real engine messages for other calls: distanceFromAxisM for a target inside the flame base, pathLengthM for a Bagster path outside its band, and fuel for a burning rate asked of a fuel Table 6.5 does not carry.")
 
 q(0,
  "Which refusal does the engine give a distance search that was called with no fixed transmissivity?",

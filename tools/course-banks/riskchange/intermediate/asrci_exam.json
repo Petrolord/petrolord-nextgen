@@ -294,7 +294,7 @@
    "The approval level."
   ],
   "answer": 0,
-  "explanation": "The engine holds the rule in its assignment and deciding checks, and the digest records that the database enforces the same rule."
+  "explanation": "The engine holds the rule in its assignment and deciding checks, and the course records that the database enforces the same rule."
  },
  {
   "prompt": "ES-01's level 2 approval has been decided \"Rejected\". Can the same row be decided \"Approved\" later so the change can go in?",

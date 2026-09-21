@@ -15,7 +15,7 @@ q(2,
   ["A result object carrying a `basis` block, or the same result with the offending input quietly replaced by a default the engine holds for it.",
    "A result object with a list of warnings attached whenever an input looks doubtful, so that a figure always comes back to the analyst.",
    "A bare number per year for the quantity asked, or zero whenever an input cannot be used at all."],
-  "The digest says every function returns either a result object carrying a `basis` block or an object with `error` and `field`, and `field` names the offending input. The engine invents no number, so it has no default to slip in. It never hands back a figure with a warning beside it, and a refused call never comes back as zero, which a reader would take for a real frequency.")
+  "The course says every function returns either a result object carrying a `basis` block or an object with `error` and `field`, and `field` names the offending input. The engine invents no number, so it has no default to slip in. It never hands back a figure with a warning beside it, and a refused call never comes back as zero, which a reader would take for a real frequency.")
 
 q(0,
   "Which inputs does the engine fill in by itself when the analyst leaves them out?",
@@ -31,7 +31,7 @@ q(3,
   ["It teaches their inputs at Associate level, so that each learner can produce every probability of death that an LSIR sum needs.",
    "It runs them behind every capstone, so that no probability of death in any capstone is ever typed in by the person working it.",
    "It uses the toxic one alone, since a toxic cloud is the only effect that a quantitative risk assessment has to model for itself at every place it studies."],
-  "The digest says the three functions MAKE a probability of death and that this course does not teach their inputs; that work is consequence modelling and belongs to the consequence course. So no Associate lesson teaches them, and a capstone states each probability of death it uses. A fire or an explosion is modelled in the consequence course just as a toxic cloud is, so none of the three effects is special here.")
+  "The course says the three functions MAKE a probability of death and that this course does not teach their inputs; that work is consequence modelling and belongs to the consequence course. So no Associate lesson teaches them, and a capstone states each probability of death it uses. A fire or an explosion is modelled in the consequence course just as a toxic cloud is, so none of the three effects is special here.")
 
 q(1,
   "An analyst types 2 as a scenario frequency per year and 2 as a probability of death for the same scenario, named 'fire', at one place. What does the engine do with each?",
@@ -42,12 +42,12 @@ q(1,
   "The units table says a frequency counts events per year and may exceed one, while a probability lies from zero to one. So the frequency is accepted and the probability of death is refused in the engine's own words: 'fire' must be a probability of death in [0, 1]. The engine never checks only for a sign, never caps a value it cannot use, and never limits a frequency to one.")
 
 q(1,
-  "How does the digest read a frequency of 1e-4 per year?",
+  "How does the course read a frequency of 1e-4 per year?",
   "One event in ten thousand years on average: a rate, kept in a different input from any probability.",
   ["The probability that the event happens in any single year, which is the same number written in a different unit.",
    "The probability of death of a person standing at the release point for one year.",
    "One event in a thousand years on average, the exponent counting the zeros in the number of years between events."],
-  "The digest says a frequency of 1e-4 per year is one event in ten thousand years on average, and that it is a rate and never a probability, which the engine keeps in different inputs. A probability of death is a separate stated input that belongs to the consequence course. Reading the exponent as a thousand years miscounts it by a factor of ten.")
+  "The course says a frequency of 1e-4 per year is one event in ten thousand years on average, and that it is a rate and never a probability, which the engine keeps in different inputs. A probability of death is a separate stated input that belongs to the consequence course. Reading the exponent as a thousand years miscounts it by a factor of ten.")
 
 q(3,
   "The engine turns hours spent at a place into a fraction of the year. What does it divide by?",
@@ -55,7 +55,7 @@ q(3,
   ["8766, the hours of an average calendar year, so that the leap years in a working life are counted in every person's occupancy.",
    "Nothing, since the hours are carried straight into the individual risk per annum as hours with no conversion made.",
    "The hours on that person's own roster, whatever the calendar says."],
-  "Hours convert at 8760 hours a year, the H3 engine's HOURS_PER_YEAR, and 8760 hours at one place is an occupancy of 1.000000. Dividing by 8766 is a wrong method the digest measures: it moves the EREMOR operator's figure away from the engine's. Occupancy is always a fraction of the calendar year, so hours are never carried unconverted, and a roster is never the denominator.")
+  "Hours convert at 8760 hours a year, the H3 engine's HOURS_PER_YEAR, and 8760 hours at one place is an occupancy of 1.000000. Dividing by 8766 is a wrong method the course measures: it moves the EREMOR operator's figure away from the engine's. Occupancy is always a fraction of the calendar year, so hours are never carried unconverted, and a roster is never the denominator.")
 
 q(0,
   "An event tree is passed with an empty branch set. What does the engine return, in its own words?",
@@ -90,12 +90,12 @@ q(0,
   "The refusal table quotes the engine: the occupancy fractions sum to 1.1, and one person cannot spend more than the whole year across locations. A person is in one place at a time, so the total is checked as well as each place. The engine alters no input, so it neither rescales the fractions nor trims one of them.")
 
 q(2,
-  "How many refusals does the digest table, across how many functions, and what number does a refusal carry?",
+  "How many refusals does the course table, across how many functions, and what number does a refusal carry?",
   "39 refusals across 13 functions, and a refusal carries no number of its own.",
   ["138 refusals across 13 functions, one for each golden record the independent oracle wrote.",
    "39 refusals across 12 functions, and each carries the partial result formed before the bad input was read.",
    "39 refusals across 13 functions, each carrying the offending value rounded to twelve decimals."],
-  "The digest says 39 refusals are tabled across 13 functions, and that a refusal carries no number of its own. 138 is the count of golden records, which are cases the oracle wrote and are no refusals. A refusal returns only `error` and `field`, so it carries neither a partial result nor a rounded copy of the input.")
+  "The course says 39 refusals are tabled across 13 functions, and that a refusal carries no number of its own. 138 is the count of golden records, which are cases the oracle wrote and are no refusals. A refusal returns only `error` and `field`, so it carries neither a partial result nor a rounded copy of the input.")
 
 q(1,
   "An analyst passes `constructor` as the substance class to `pbDirectIgnitionProbability`. What does the engine do?",
@@ -122,12 +122,12 @@ q(3,
   "The vocabulary section says the word is always qualified: individual risk, LSIR, IRPA or societal risk. It already means a matrix score in the risk and change course and a cost in the economics courses, and this course never scores a matrix cell, so a bare word would carry the wrong meaning. A unit per year does not name which quantity is meant.")
 
 q(2,
-  "Which job does the digest say the engine does NOT do?",
+  "Which job does the course say the engine does NOT do?",
   "Grid or wind rose bookkeeping of a full assessment; the caller supplies each scenario frequency and probability of death.",
   ["Summing each scenario frequency times its probability of death at one place to give the LSIR there.",
    "Converting the hours a person spends at a place into a fraction of the year, at 8760 hours a year.",
    "Refusing a branch set whose probabilities fail to sum to one within its tolerance of 1e-9, and naming the failing set by its path."],
-  "The digest lists what the engine does not do, and grid or wind rose bookkeeping is on that list: the caller supplies each scenario frequency and probability of death. The LSIR sum, the conversion of hours at 8760 hours a year and the branch sum check within BRANCH_SUM_TOLERANCE of 1e-9 are all things the engine does.")
+  "The course lists what the engine does not do, and grid or wind rose bookkeeping is on that list: the caller supplies each scenario frequency and probability of death. The LSIR sum, the conversion of hours at 8760 hours a year and the branch sum check within BRANCH_SUM_TOLERANCE of 1e-9 are all things the engine does.")
 
 emit(Q, '/root/hse-wip-qra/banks/h5b_m01.json', expect_n=15)
 finish()

@@ -15,14 +15,14 @@ q(2, "Two Suite apps call the refinery modules. Which app reaches the screening 
   "The Refinery Planning Studio, through the plan, schedule and actual ledgers."],
  "modularRefinery hands its annual streams to the screening engine through feasibilityEconomics. The Refinery Planning Studio runs refineryPlanning over lib/lp/simplex and streamModel, and neither of those reaches the screening engine in this tier."),
 
-q(0, "Some exports read the machine clock when an argument is left out. Which pairing of function and missing argument does the digest print?",
+q(0, "Some exports read the machine clock when an argument is left out. Which pairing of function and missing argument does the course print?",
  "feasibilityEconomics reads the year when startYear is left out.",
  ["cascadeToSchedule reads the year whenever startYear is left out of the call.",
   "feasibilityEconomics reads the date when periodStart is left out.",
   "scaleCapex reads the clock when no exponent is passed to it at all."],
  "cascadeToSchedule reads the clock when periodStart is missing, and feasibilityEconomics and calculateEconomics read the year when startYear is missing. The course passes both every time, with start year 2027 for every valuation."),
 
-q(3, "The digest counts each module's exports. Which count belongs to modularRefinery?",
+q(3, "The course counts each module's exports. Which count belongs to modularRefinery?",
  "6 exported functions and 4 exported lists and constants.",
  ["3 exported functions and 0 exported lists and constants.",
   "7 exported functions and 4 exported lists and constants, as measured.",
@@ -97,7 +97,7 @@ q(2, "OKORDIA prices diesel at 101.0000 and gasoline at 104.0000 a barrel. What 
  ["Market quotations for a stated date the screen was calibrated on.",
   "The real prices of the crude grades whose names appear on the Studio panel.",
   "Averages of published prices the Studio refreshes itself."],
- "The digest's case line says all three records are invented and every price and cost in it is illustrative, in US dollars. None is a market quotation for any date, and a crude grade name is a label on invented yields and prices."),
+ "The course's case line says all three records are invented and every price and cost in it is illustrative, in US dollars. None is a market quotation for any date, and a crude grade name is a label on invented yields and prices."),
 
 q(0, "All three configurations are valued against one OKORDIA price table, and give 76.9400, 83.7900 and 90.6300. What differs between them to give three values?",
  "The fixed yield row each configuration carries",

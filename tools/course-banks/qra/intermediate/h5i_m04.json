@@ -8,7 +8,7 @@
    "C = 1e-3 and alpha = 2, from N = 10, with no upper end"
   ],
   "answer": 3,
-  "explanation": "The digest gives the preset as C = 1e-3, alpha = 2, from N = 10 with no upper end, citing Purple Book Figure 6.8 and Bevi article 13(1)(b). An alpha of 1 is the slope the digest calls risk neutral, which the Dutch line does not use. C = 0.01 with alpha 1 is a line an analyst may supply through the R2P2 point, and it is no preset. The cap at N = 100 is a variant the digest builds on purpose, and the preset has none."
+  "explanation": "The course gives the preset as C = 1e-3, alpha = 2, from N = 10 with no upper end, citing Purple Book Figure 6.8 and Bevi article 13(1)(b). An alpha of 1 is the slope the course calls risk neutral, which the Dutch line does not use. C = 0.01 with alpha 1 is a line an analyst may supply through the R2P2 point, and it is no preset. The cap at N = 100 is a variant the course builds on purpose, and the preset has none."
  },
  {
   "prompt": "On the Dutch line, what criterion frequency stands at the JISIKE corner N = 12?",
@@ -19,7 +19,7 @@
    "0.000000625000"
   ],
   "answer": 1,
-  "explanation": "The line is 1e-3 over 12 squared, which the digest prints as 0.000006944444 per year at that corner. 0.000009700000 is the curve's own F(12), the other side of the comparison. 0.000010000000 is the line at N = 10, where it starts. 0.000000625000 is the line at the next corner, N = 40."
+  "explanation": "The line is 1e-3 over 12 squared, which the course shows as 0.000006944444 per year at that corner. 0.000009700000 is the curve's own F(12), the other side of the comparison. 0.000010000000 is the line at N = 10, where it starts. 0.000000625000 is the line at the next corner, N = 40."
  },
  {
   "prompt": "Dividing the curve by the line at the first checked JISIKE corner gives which ratio?",
@@ -41,7 +41,7 @@
    "TOUCHES, worst ratio 1.000000 at N = 10.000000"
   ],
   "answer": 2,
-  "explanation": "The digest prints state EXCEEDS with a worst ratio of 18.000000 at N = 300.000000, the largest of the three checked corners. 2.720000 at N = 40 is the worst only when the line is capped at N = 100, which pulls the last check back to N = 100. BELOW at 0.001000 is the curve against the R2P2 point. TOUCHES at 1.000000 is a curve built to sit on the line at N = 10."
+  "explanation": "The course shows state EXCEEDS with a worst ratio of 18.000000 at N = 300.000000, the largest of the three checked corners. 2.720000 at N = 40 is the worst only when the line is capped at N = 100, which pulls the last check back to N = 100. BELOW at 0.001000 is the curve against the R2P2 point. TOUCHES at 1.000000 is a curve built to sit on the line at N = 10."
  },
  {
   "prompt": "Why does the engine compare the curve with a criterion line only at the curve's corners?",
@@ -52,7 +52,7 @@
    "F is flat on each step while the line falls with N, so the ratio on a step is largest at its right corner, which the curve attains."
   ],
   "answer": 3,
-  "explanation": "The digest says corners decide everything: F is flat on each step and the line falls with N, so on each step the ratio of F to the line is largest at the right corner, which the curve attains, and the comparison is exact. The curve is defined everywhere as a step. The Bevi points sit at N of 10, 100 and 1000, which are not the JISIKE corners. Nothing here is an approximation."
+  "explanation": "The course says corners decide everything: F is flat on each step and the line falls with N, so on each step the ratio of F to the line is largest at the right corner, which the curve attains, and the comparison is exact. The curve is defined everywhere as a step. The Bevi points sit at N of 10, 100 and 1000, which are not the JISIKE corners. Nothing here is an approximation."
  },
  {
   "prompt": "Why is the JISIKE corner at N = 3 left out of the comparison with the Dutch line?",
@@ -63,7 +63,7 @@
    "Its frequency is the largest on the curve, so it is set aside as an outlier to the line"
   ],
   "answer": 1,
-  "explanation": "The digest says the corner at N = 3 lies below the line's smallest N of 10 and is not checked, since the preset runs from N = 10. The engine checks every corner inside the range whatever its ratio. A shared corner is an ordinary corner. No corner is ever discarded as an outlier."
+  "explanation": "The course says the corner at N = 3 lies below the line's smallest N of 10 and is not checked, since the preset runs from N = 10. The engine checks every corner inside the range whatever its ratio. A shared corner is an ordinary corner. No corner is ever discarded as an outlier."
  },
  {
   "prompt": "On the JISIKE step ending at N = 40, from what N does F lie above the Dutch line?",
@@ -85,7 +85,7 @@
    "The midpoint of the step, since the line crosses a flat step halfway between its two corners"
   ],
   "answer": 2,
-  "explanation": "The digest states the rule as the largest of the three candidates, running to the corner itself. The previous corner alone would claim the step ending at 40 exceeds from 12, where the line still lies above F. The line's smallest N alone would start every range at 10. Nothing makes the crossing fall at a midpoint, since the line is a power law."
+  "explanation": "The course states the rule as the largest of the three candidates, running to the corner itself. The previous corner alone would claim the step ending at 40 exceeds from 12, where the line still lies above F. The line's smallest N alone would start every range at 10. Nothing makes the crossing fall at a midpoint, since the line is a power law."
  },
  {
   "prompt": "Between the corners at 3 and 12 deaths, at what N does the JISIKE curve first rise above the Dutch line?",
@@ -129,7 +129,7 @@
    "They are the points where the JISIKE off-site curve crosses the line at each N"
   ],
   "answer": 2,
-  "explanation": "The digest tables the printed Bevi values 1e-5, 1e-7 and 1e-9 beside C / N^alpha with the engine's constants, and they match, which is the published side the course can cite. No factor of ten separates them. The engine has one line preset, with alpha 2. The Bevi points are criterion values, and the JISIKE curve crosses the line elsewhere, as the exceeding ranges show."
+  "explanation": "The course tables the printed Bevi values 1e-5, 1e-7 and 1e-9 beside C / N^alpha with the engine's constants, and they match, which is the published side the course can cite. No factor of ten separates them. The engine has one line preset, with alpha 2. The Bevi points are criterion values, and the JISIKE curve crosses the line elsewhere, as the exceeding ranges show."
  },
  {
   "prompt": "What standing does the Dutch line have in this course, given that Bevi was repealed on 1 January 2024?",
@@ -140,7 +140,7 @@
    "A line no longer offered, since the engine drops any preset with a repealed source"
   ],
   "answer": 1,
-  "explanation": "The digest says Bevi was repealed on 1 January 2024 and the engine did not read its successor, so the line is a published comparison the analyst chooses to make, and the engine reports a state against it. Bevi itself called the points an orientation value. The engine carries no successor values. The preset remains, with its repeal named in the source string."
+  "explanation": "The course says Bevi was repealed on 1 January 2024 and the engine did not read its successor, so the line is a published comparison the analyst chooses to make, and the engine reports a state against it. Bevi itself called the points an orientation value. The engine carries no successor values. The preset remains, with its repeal named in the source string."
  },
  {
   "prompt": "An analyst supplies their own line with a slope exponent of 0. How does the comparison refuse it?",
@@ -162,6 +162,6 @@
    "All four, since the corner at N = 3 exceeds by the largest ratio"
   ],
   "answer": 0,
-  "explanation": "The digest's corner table marks EXCEEDS at 12 with ratio 1.396800, at 40 with 2.720000 and at 300 with 18.000000. The corner at 12 is above the line, since its ratio exceeds one. The worst ratio names one corner, which is not the count. The corner at N = 3 lies below the line's smallest N and is never checked."
+  "explanation": "The course's corner table marks EXCEEDS at 12 with ratio 1.396800, at 40 with 2.720000 and at 300 with 18.000000. The corner at 12 is above the line, since its ratio exceeds one. The worst ratio names one corner, which is not the count. The corner at N = 3 lies below the line's smallest N and is never checked."
  }
 ]

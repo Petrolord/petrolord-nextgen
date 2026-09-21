@@ -15,7 +15,7 @@ q(2, "How does ROUTE_TEMPLATES ship the limit on each of its route requirements?
  ["Set to each licensor's published figure.",
   "Set to the EGBEMA study's limits, which the studio opens with.",
   "Set on physical law for volume, and left null on composition."],
- "The digest prints ROUTE_TEMPLATES with a limit column that reads null on every requirement: \"Every limit ships unset (null): the envelope is the study's to fill.\" The studio opens with every limit unset, and every route then reads not fully screened.")
+ "The course prints ROUTE_TEMPLATES with a limit column that reads null on every requirement: \"Every limit ships unset (null): the envelope is the study's to fill.\" The studio opens with every limit unset, and every route then reads not fully screened.")
 
 q(0, "One requirement appears in the envelope of all four routes in ROUTE_TEMPLATES. Which is it?",
  "Minimum volume, in MMscfd.",
@@ -29,21 +29,21 @@ q(3, "A template note reads: \"CO2 freezes in a liquefaction train and must be r
  ["CNG, on Minimum heating value.",
   "Gas to power, on Maximum inerts.",
   "LPG and condensate extraction, on Minimum liquids content."],
- "The digest lists the notes the templates carry on two requirements, and this one sits on Mini LNG, Maximum CO2 before treatment. The LPG route's Minimum liquids content carries the other note, about the liquids paying for the plant. Neither note gives a number.")
+ "The course lists the notes the templates carry on two requirements, and this one sits on Mini LNG, Maximum CO2 before treatment. The LPG route's Minimum liquids content carries the other note, about the liquids paying for the plant. Neither note gives a number.")
 
 q(1, "Which requirement carries the template note \"Below this the liquids do not pay for the plant, whatever the gas is worth.\"?",
  "Minimum liquids content, in gal/Mscf of C3+, on the LPG route.",
  ["Minimum volume, in MMscfd, on the LPG and condensate route.",
   "Maximum CO2 before treatment, a mole fraction, on mini LNG.",
   "Minimum heating value, in Btu/scf, on gas to power or gas to wire."],
- "The digest prints the note on LPG and condensate extraction, Minimum liquids content, whose unit in the template is gal/Mscf of C3+. The mini LNG CO2 requirement carries the other note, and the Minimum volume and heating value rows carry none.")
+ "The course prints the note on LPG and condensate extraction, Minimum liquids content, whose unit in the template is gal/Mscf of C3+. The mini LNG CO2 requirement carries the other note, and the Minimum volume and heating value rows carry none.")
 
 q(1, "screenRoute forms a margin on every checked requirement. How is it formed on a MAXIMUM requirement?",
  "The limit minus the actual; a negative margin is a failure.",
  ["The actual minus the limit; a negative margin is a failure.",
   "The limit minus the actual; a positive margin is a failure.",
   "The actual over the limit; a ratio above one is a failure."],
- "The digest: \"The margin column is the actual minus the limit on a minimum requirement and the limit minus the actual on a maximum; a negative margin is a failure, and the shortfall is its size.\" The CNG inerts, 0.0460 against a limit of 0.06, print a margin of 0.0140 and a pass.")
+ "The course states: \"The margin column is the actual minus the limit on a minimum requirement and the limit minus the actual on a maximum; a negative margin is a failure, and the shortfall is its size.\" The CNG inerts, 0.0460 against a limit of 0.06, print a margin of 0.0140 and a pass.")
 
 q(3, "EGBEMA's mini LNG route checks its CO2 mole fraction of 0.0280 against the study's Maximum CO2 before treatment of 0.02. Which status and margin does the check table print?",
  "fail, with a margin of -0.0080",
@@ -64,7 +64,7 @@ q(2, "On gas to power, the study typed minVolumeMMscfd 3 and minGhvBtuScf 950 an
  ["Actual 0.0460, limit 0.06, status pass, margin 0.0140.",
   "Actual 0.0280, limit unset, status fail, margin -0.0080.",
   "Actual 0.0460, limit unset, status pass, margin none."],
- "The digest prints the gas to power Maximum inerts row as 0.0460, unset, unchecked, none: \"A requirement with no limit is reported unchecked; an unset limit is not a satisfied one.\" The 0.06 limit with a 0.0140 margin is the CNG and mini LNG inerts row, where a limit was typed.")
+ "The course prints the gas to power Maximum inerts row as 0.0460, unset, unchecked, none: \"A requirement with no limit is reported unchecked; an unset limit is not a satisfied one.\" The 0.06 limit with a 0.0140 margin is the CNG and mini LNG inerts row, where a limit was typed.")
 
 q(3, "Both of gas to power's checked requirements pass on EGBEMA, with margins of 4.5000 and 298.4110. Which verdict does screenRoute give the route?",
  "not fully screened, with Maximum inerts in uncheckedRequirements",
@@ -85,7 +85,7 @@ q(2, "How does mini LNG's failures field print the volume requirement it breaks?
  ["7.5000 against a limit of 5, short by 2.5000 MMscfd",
   "10 against 7.5000, a shortfall of 4.5000 MMscfd",
   "7.5000 against 10, short by 0.0080 mole fraction"],
- "The digest's failures entry: \"Minimum volume: 7.5000 against 10, short by 2.5000 MMscfd\". The limit of 5 is the CNG and LPG volume limit, where 7.5000 passes, 4.5000 is the gas to power volume margin, and 0.0080 mole fraction is the shortfall on the CO2 requirement.")
+ "The course's failures entry: \"Minimum volume: 7.5000 against 10, short by 2.5000 MMscfd\". The limit of 5 is the CNG and LPG volume limit, where 7.5000 passes, 4.5000 is the gas to power volume margin, and 0.0080 mole fraction is the shortfall on the CO2 requirement.")
 
 q(1, "The CNG and gas to power routes both check EGBEMA's heating value of 1248.4110 Btu/scf. Which margins does the check table print?",
  "248.4110 on CNG and 298.4110 on gas to power",
@@ -99,21 +99,21 @@ q(0, "The Flare Gas to Value Studio opens with every requirement limit unset. Wh
  ["passes, on all four, as nothing is breached",
   "fails, on all four, as no requirement is met",
   "passes on three, with mini LNG left failing"],
- "The digest prints the same four routes with every limit unset, as the studio opens: Compressed natural gas, Mini LNG, LPG and condensate extraction, and Gas to power or gas to wire all read not fully screened. An unset limit is not a satisfied one.")
+ "The course prints the same four routes with every limit unset, as the studio opens: Compressed natural gas, Mini LNG, LPG and condensate extraction, and Gas to power or gas to wire all read not fully screened. An unset limit is not a satisfied one.")
 
 q(3, "screenRoute is asked to screen a gas the analysis refused. What does it answer?",
  "It refuses: a characterised gas is required.",
  ["Every requirement reads unchecked, and each route reads not fully screened.",
   "Every requirement reads fail, and mini LNG is listed in screenedOut.",
   "The routes are screened on the gas as typed, with each status printed."],
- "The digest's probe table for screenRoute: a gas the analysis refused gives \"REFUSED: A characterised gas is required.\" No check table and no verdict are printed for it.")
+ "The course's probe table for screenRoute: a gas the analysis refused gives \"REFUSED: A characterised gas is required.\" No check table and no verdict are printed for it.")
 
 q(2, "Beside the notes two of its requirements carry, the engine prints one note on ROUTE_TEMPLATES as a whole. Which sentence opens that note?",
  "\"Requirement limits are yours to set.\"",
  ["\"The limit is the licensor's.\" on every row of the table.",
   "\"Below this the liquids do not pay for the plant.\"",
   "\"An unset limit is a pass.\""],
- "The engine's note on the templates opens \"Requirement limits are yours to set.\" The licensor sentence is the note on mini LNG's CO2 requirement alone, the liquids sentence is the note on the LPG route's liquids content, and the digest reports a requirement with no limit unchecked.")
+ "The engine's note on the templates opens \"Requirement limits are yours to set.\" The licensor sentence is the note on mini LNG's CO2 requirement alone, the liquids sentence is the note on the LPG route's liquids content, and the course reports a requirement with no limit unchecked.")
 
 emit(Q, '/root/wt-et-gasvalue-nextgen/tools/course-banks/gasvalue/intermediate/gvi_m01.json', label='gvi_m01', expect_n=15)
 finish()

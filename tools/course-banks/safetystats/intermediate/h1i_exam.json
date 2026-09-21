@@ -2,7 +2,7 @@
  {
   "prompt": "On the IMO ladder, the row for 2 events in 200000 hours reads 0.242209 to 7.224688 per 200,000 hours, and the Garwood table's count limits for 2 are 0.242209278544 and 7.224687667724. Why do the digits match?",
   "options": [
-   "The ladder is computed on a base of 1 over 1 hour, the same base the Garwood table itself is printed on in the digest.",
+   "The ladder is computed on a base of 1 over 1 hour, the same base the Garwood table itself is printed on in the course.",
    "At 2 events the Poisson distribution is symmetric about its mean, so the rate limits and count limits coincide.",
    "The base over the hours is 200,000 over 200000, which is one, so scaling leaves the count limits as they are.",
    "The ladder rounds every limit to the nearest count limit printed in the Garwood table."
@@ -19,7 +19,7 @@
    "The count of 5 divided by the square root of the hours on the row."
   ],
   "answer": 0,
-  "explanation": "4.667333 minus 0.649395, over 2.000000, is the width over rate the digest prints as 2.008969. The upper over the lower is a different column, 7.187207 on that row, and the ladder has no square root column."
+  "explanation": "4.667333 minus 0.649395, over 2.000000, is the width over rate the course gives as 2.008969. The upper over the lower is a different column, 7.187207 on that row, and the ladder has no square root column."
  },
  {
   "prompt": "The Garwood count limits for 1 event are 0.025317807984 and 5.571643390939. The IMO ladder row for 1 event in 100000 hours reads 0.050636 to 11.143287. What links them?",
@@ -74,7 +74,7 @@
    "`regularizedGammaQ` for both."
   ],
   "answer": 0,
-  "explanation": "The engine solves the smaller tail directly. The lower limit has alpha/2 below it, which `chiSquareQuantile` asks for as it stands, and the upper has alpha/2 above it, which `chiSquareQuantileUpper` asks for directly. Asking the lower-tail function for 1 minus alpha/2 is the route the digest shows losing digits as the tail probability shrinks. At a count of zero the lower limit is 0 and needs no quantile."
+  "explanation": "The engine solves the smaller tail directly. The lower limit has alpha/2 below it, which `chiSquareQuantile` asks for as it stands, and the upper has alpha/2 above it, which `chiSquareQuantileUpper` asks for directly. Asking the lower-tail function for 1 minus alpha/2 is the route the course shows losing digits as the tail probability shrinks. At a count of zero the lower limit is 0 and needs no quantile."
  },
  {
   "prompt": "Which confidence value does `rateConfidenceInterval` accept?",
@@ -99,7 +99,7 @@
   "explanation": "0.050000000000000044 differs from 0.05 by less than one part in ten to the fifteen, and at a tail of 0.025 the two routes agree to the last digit printed, 7.377758908228. The coverage excess comes from the whole-number count, and the upper-tail route is chosen for small tail probabilities, where the lower-tail route loses digits and at 1e-17 cannot be asked at all."
  },
  {
-  "prompt": "The digest's last row asks both quantile routes for a tail of 1e-17. What becomes of the route that works through 1 minus q?",
+  "prompt": "The course's last row asks both quantile routes for a tail of 1e-17. What becomes of the route that works through 1 minus q?",
   "options": [
    "It returns 78.287893161798, the same as the upper-tail route, to the last digit.",
    "It returns a relative error of 2.32e-5, the same as it does at 1e-15.",
@@ -426,7 +426,7 @@
    "The engine's p-value is only valid with its name."
   ],
   "answer": 0,
-  "explanation": "The engine's p-value is central; R's poisson.test and scipy's binomtest are minlike, and on 14 of the 399 comparisons the digest swept they disagree with the engine's interval. Naming the convention lets a reader compare like with like."
+  "explanation": "The engine's p-value is central; R's poisson.test and scipy's binomtest are minlike, and on 14 of the 399 comparisons the course swept they disagree with the engine's interval. Naming the convention lets a reader compare like with like."
  },
  {
   "prompt": "UTOROGU's comparison rests on 7 events against 6. How does the IMO ladder help explain why it found no clear difference?",

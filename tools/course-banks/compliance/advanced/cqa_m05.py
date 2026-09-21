@@ -16,7 +16,7 @@ q(3, "certificationReadiness for ISO 14001:2015 at ORASHI returns ready false. W
  ["A readiness percentage weighted by severity, with the items that pulled it down.",
   "A single blocking reason, the first requirement that fails, as the earlier gates do.",
   "A score for each clause, with the certificate as a gate the rest of the list sits behind."],
- "The list has eleven items across blocking, serious and watch, and a table of counts beside it. The digest prints no percentage and no score for it, and ready false stands beside four blocking items.")
+ "The list has eleven items across blocking, serious and watch, and a table of counts beside it. The course prints no percentage and no score for it, and ready false stands beside four blocking items.")
 
 q(1, "Under which severity does the item \"3 applicable clauses have never been examined by an internal audit.\" sit?",
  "blocking, beside the open major nonconformity",
@@ -107,7 +107,7 @@ q(0, "A report wants to state ORASHI's readiness from covered 8 and applicable 1
  ["Quote a percentage covered, rounded half up on the exact fraction as the engine does it.",
   "Quote covered on its own, since applicable follows from the certification cycle.",
   "Quote covered less the stale clause, as the effective coverage of the register."],
- "The digest prints no percentage from these counts and neither does the engine. The list already says 3 uncovered clauses are never examined and blocking and 1 is stale and serious; a percentage would average that away.")
+ "The course prints no percentage from these counts and neither does the engine. The list already says 3 uncovered clauses are never examined and blocking and 1 is stale and serious; a percentage would average that away.")
 
 q(2, "The readiness counts print partial 1 and nonconformant 1. Which clause is behind each?",
  "6.1.2 is the partial clause and 6.1.3 the nonconformant one",

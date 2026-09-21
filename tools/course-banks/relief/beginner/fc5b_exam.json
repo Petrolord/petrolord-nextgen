@@ -96,7 +96,7 @@
    "The first is the correction on the converged area and the second the correction on the inviscid one."
   ],
   "answer": 1,
-  "explanation": "Each figure carries its own Reynolds number, 17546.394776 for the shortcut and 17412.317969 for the loop. The shortcut is what a hand calculation usually does, and the digest prints the ratio between the two areas they imply."
+  "explanation": "Each figure carries its own Reynolds number, 17546.394776 for the shortcut and 17412.317969 for the loop. The shortcut is what a hand calculation usually does, and the course prints the ratio between the two areas they imply."
  },
  {
   "prompt": "Which pair below is a computed figure standing beside the typed figure on the same route?",
@@ -132,7 +132,7 @@
   "explanation": "Reading the source and reading the behaviour are two different claims, and only the second one catches a name attached to a different number. Three separate arrangements agree on the atmospheric constant of 14.700000000000 psia."
  },
  {
-  "prompt": "The digest recovers only three of the four published Napier coefficients. Why?",
+  "prompt": "The course recovers only three of the four published Napier coefficients. Why?",
   "options": [
    "Because the fourth is the threshold pressure, which is a published boundary rather than a coefficient.",
    "Because the fourth is only active above the exported crossing, where the published range has ended.",
@@ -312,7 +312,7 @@
   "options": [
    "A tolerance that the validation suite allows itself on a fit it cannot derive independently.",
    "The step that the correction takes at its published threshold, caught between the two evaluations.",
-   "One published fit evaluated twice, which is why the digest prints both columns side by side.",
+   "One published fit evaluated twice, which is why the course prints both columns side by side.",
    "The superheat factor on that row, which the published answer applies and the re-run of it does not."
   ],
   "answer": 2,
@@ -321,13 +321,13 @@
  {
   "prompt": "A published set is described as agreeing with the engine to better than two parts in a thousand. Where does that figure come from?",
   "options": [
-   "A relative difference column the digest computes between the published answer and the re-run answer.",
+   "A relative difference column the course computes between the published answer and the re-run answer.",
    "A tolerance the validation suite declares before any case is run against it.",
-   "The precision the digest prints each quantity at, which sets the smallest difference visible.",
+   "The precision the course prints each quantity at, which sets the smallest difference visible.",
    "The residual the loop stopped on, which bounds how far the re-run answer can be from the published one."
   ],
   "answer": 0,
-  "explanation": "It is one of the very few two figure relationships in this course that a lesson may quote, because the digest works it out rather than a reader forming it. A residual belongs to an iteration and is a statement about the loop."
+  "explanation": "It is one of the very few two figure relationships in this course that a lesson may quote, because the course works it out rather than a reader forming it. A residual belongs to an iteration and is a statement about the loop."
  },
  {
   "prompt": "A gauge pressure is fed to the gas route where an absolute one was wanted. What does the engine do?",
@@ -404,7 +404,7 @@
    "A stated load, a set pressure, an outlet pressure, a branch, one computed factor, an area and a letter."
   ],
   "answer": 1,
-  "explanation": "Nothing in the tier ranks one of the three against another, and the digest prints no relation between them. Choosing between scenarios happens within one protected item."
+  "explanation": "Nothing in the tier ranks one of the three against another, and the course prints no relation between them. Choosing between scenarios happens within one protected item."
  },
  {
   "prompt": "A candidate reports a branch as 0.551208 rather than as a word. What has gone wrong?",

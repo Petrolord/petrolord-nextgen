@@ -107,7 +107,7 @@
    "ALLOWED only once an account is made for them."
   ],
   "answer": 0,
-  "explanation": "The digest prints ALLOWED for an external lead auditor named in text with no account. \"Name the lead auditor.\" is the reporting refusal for an audit with no lead auditor named at all."
+  "explanation": "The course prints ALLOWED for an external lead auditor named in text with no account. \"Name the lead auditor.\" is the reporting refusal for an audit with no lead auditor named at all."
  },
  {
   "prompt": "u-boma is named as both lead auditor and auditee, and auditIndependence refuses. What does the refusal leave to the person fixing it?",

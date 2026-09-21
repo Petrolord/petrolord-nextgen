@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "SECTION 15 prints the engine's choked-flow note for the invented Isiokpo trap at an isentropic exponent of 1.3. Which critical ratio does it name?",
+  "prompt": "The course prints the engine's choked-flow note for the invented Isiokpo trap at an isentropic exponent of 1.3. Which critical ratio does it name?",
   "options": [
    "0.5774",
    "0.1126",
@@ -11,7 +11,7 @@
   "explanation": "The note at 1.3, verbatim: \"Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5457, so the loss depends on the upstream pressure alone.\" At 1.135 the note names the critical 0.5774. 0.555556 is the pressure ratio of a trap discharging at 5 bar a."
  },
  {
-  "prompt": "5 bar a sits downstream of the invented 9 bar a trap at an exponent of 1.135. Which choked flag and hourly loss does SECTION 15 pair with it?",
+  "prompt": "5 bar a sits downstream of the invented 9 bar a trap at an exponent of 1.135. Which choked flag and hourly loss does the course pair with it?",
   "options": [
    "Choked true, 42.3520 kg an hour",
    "Choked false, 41.4785 kg an hour",
@@ -22,7 +22,7 @@
   "explanation": "The 5 bar a row prints a pressure ratio of 0.555556 against a critical 0.577430, choked true and 42.3520 kg an hour, the same as the trap venting to atmosphere. 41.4785 and 37.5765 are the 6 and 7 bar a rows; 44.4620 is the trap at the superheated exponent of 1.3."
  },
  {
-  "prompt": "At a downstream pressure of 8 bar a, how many tonnes of steam a year does SECTION 15 print the invented Isiokpo trap losing?",
+  "prompt": "At a downstream pressure of 8 bar a, how many tonnes of steam a year does the course print the invented Isiokpo trap losing?",
   "options": [
    "315.643",
    "348.419",
@@ -41,10 +41,10 @@
    "REFUSED: The downstream pressure must be an absolute pressure of zero or more, in bar a."
   ],
   "answer": 1,
-  "explanation": "SECTION 15 prints the 9 bar a call refused with that sentence. The required-box refusal answers a blank downstream box, the absolute-pressure refusal a downstream pressure of -1, and 29.0510 kg an hour is the 8 bar a row."
+  "explanation": "The course prints the 9 bar a call refused with that sentence. The required-box refusal answers a blank downstream box, the absolute-pressure refusal a downstream pressure of -1, and 29.0510 kg an hour is the 8 bar a row."
  },
  {
-  "prompt": "steamTrapLoss is called for the invented Isiokpo trap with an isentropic exponent of 1. What does SECTION 15 print?",
+  "prompt": "steamTrapLoss is called for the invented Isiokpo trap with an isentropic exponent of 1. What does the course print?",
   "options": [
    "No refusal: an exponent of 1 is read as dry saturated steam and the loss prints at 42.3520 kg an hour.",
    "REFUSED: A discharge coefficient in (0, 1] is required and is not defaulted: it depends on the orifice and on how the trap failed.",
@@ -52,7 +52,7 @@
    "REFUSED: An orifice diameter, an upstream pressure and a steam density are required."
   ],
   "answer": 2,
-  "explanation": "SECTION 15 prints the same refusal for a blank exponent and for an exponent of 1. The discharge coefficient and orifice refusals answer those boxes left blank. 42.3520 kg an hour is the loss at the stated 1.135."
+  "explanation": "The course prints the same refusal for a blank exponent and for an exponent of 1. The discharge coefficient and orifice refusals answer those boxes left blank. 42.3520 kg an hour is the loss at the stated 1.135."
  },
  {
   "prompt": "No boiler efficiency is typed for the invented Isiokpo trap. Which result comes back?",
@@ -63,10 +63,10 @@
    "355.757 tonnes of steam a year, with the fuel and the carbon none."
   ],
   "answer": 3,
-  "explanation": "SECTION 15: with the boiler efficiency blank the trap still loses 355.757 tonnes a year, and the fuel and carbon are none. fuelNote: \"Fuel needs a boiler efficiency in (0, 1]. It is not assumed to be 1.\" carbonNote names what carbon needs and calls it absent without them. The refusal quoted is condensateReturnValue's, in SECTION 16."
+  "explanation": "In the course, with the boiler efficiency blank the trap still loses 355.757 tonnes a year, and the fuel and carbon are none. fuelNote: \"Fuel needs a boiler efficiency in (0, 1]. It is not assumed to be 1.\" carbonNote names what carbon needs and calls it absent without them. The refusal quoted is condensateReturnValue's, in the condensate lesson."
  },
  {
-  "prompt": "The hours argument is left out of the call entirely for the invented Isiokpo trap. What does SECTION 15 print?",
+  "prompt": "The hours argument is left out of the call entirely for the invented Isiokpo trap. What does the course print?",
   "options": [
    "The stated default of 8760 hours, 371.004 tonnes a year.",
    "REFUSED: Hours in service a year are required, between 0 and 8784. A blank is not read as a full year.",
@@ -74,10 +74,10 @@
    "The superheated row's figure, 373.481 tonnes of steam a year."
   ],
   "answer": 0,
-  "explanation": "SECTION 15: hours left out of the call take the stated default of 8760, 371.004 tonnes a year. A blank hours box and a call with 9000 hours are refused: \"Hours in service a year are required, between 0 and 8784. A blank is not read as a full year.\" 373.481 is the 1.3 exponent row at 8400 hours."
+  "explanation": "In the course, hours left out of the call take the stated default of 8760, 371.004 tonnes a year. A blank hours box and a call with 9000 hours are refused: \"Hours in service a year are required, between 0 and 8784. A blank is not read as a full year.\" 373.481 is the 1.3 exponent row at 8400 hours."
  },
  {
-  "prompt": "SECTION 16 prices raising the invented Isiokpo condensate return from 0.35 to 0.65 with the treatment cost left blank. What does it print?",
+  "prompt": "The course prices raising the invented Isiokpo condensate return from 0.35 to 0.65 with the treatment cost left blank. What does it print?",
   "options": [
    "annualValue 175835.28 USD, complete true, and no note.",
    "annualValue 121403.28 USD, complete false, and a floor note.",
@@ -85,7 +85,7 @@
    "annualValue 175835.28 USD, complete false, and a floor note."
   ],
   "answer": 1,
-  "explanation": "With the treatment blank SECTION 16 prints annualValue 121403.28, complete false and the valueNote \"A floor on the value: Treatment not repeated not priced. The treatment cost is the one usually left out.\" With treatment priced it prints 175835.28 and complete true."
+  "explanation": "With the treatment blank the course prints annualValue 121403.28, complete false and the valueNote \"A floor on the value: Treatment not repeated not priced. The treatment cost is the one usually left out.\" With treatment priced it prints 175835.28 and complete true."
  },
  {
   "prompt": "What carbon does the invented Isiokpo condensate case report once the treatment price is left blank?",
@@ -96,7 +96,7 @@
    "742.220, the same as with the treatment priced"
   ],
   "answer": 3,
-  "explanation": "SECTION 16 prints annualTonnesCo2e 742.220 in both columns, on the SYNTHETIC factor of 56.1 kg CO2e per GJ. The treatment line, annualValue and complete differ between the columns. 63.721 tCO2e is the trap of SECTION 15."
+  "explanation": "The course prints annualTonnesCo2e 742.220 in both columns, on the SYNTHETIC factor of 56.1 kg CO2e per GJ. The treatment line, annualValue and complete differ between the columns. 63.721 tCO2e is the trap in the steam trap lesson."
  },
  {
   "prompt": "The invented Isiokpo condensate case is called with a target return of 0.25 against the current 0.35. What does condensateReturnValue answer?",
@@ -107,10 +107,10 @@
    "REFUSED: A boiler efficiency in (0, 1] is required: the fuel saved depends on it and it is not assumed."
   ],
   "answer": 2,
-  "explanation": "SECTION 16 prints the 0.25 target refused with that sentence, and SECTION 25 lists a target condensate return below the current one as refused. No negative annualValue is printed. A target of 1.2 draws the return-fraction refusal, and a blank boiler efficiency the boiler refusal."
+  "explanation": "The course prints the 0.25 target refused with that sentence, and its rules in force list a target condensate return below the current one as refused. No negative annualValue is printed. A target of 1.2 draws the return-fraction refusal, and a blank boiler efficiency the boiler refusal."
  },
  {
-  "prompt": "At a minimum approach of 20 C, which utility targets does SECTION 17 print for the four invented Isiokpo streams?",
+  "prompt": "At a minimum approach of 20 C, which utility targets does the course print for the four invented Isiokpo streams?",
   "options": [
    "25.950 kW hot and 240.150 kW cold",
    "59.700 kW hot and 273.900 kW cold",
@@ -121,7 +121,7 @@
   "explanation": "The 20 C row prints hot utility 59.700 kW and cold utility 273.900 kW. The 15 C row prints 25.950 and 240.150, and the 10 C row 1.800 and 216.000."
  },
  {
-  "prompt": "SECTION 17 prints a threshold problem: one hot stream at 10 kW/K and one cold at 1 kW/K, at 10 C. Its heat flow is zero only at the top of the cascade. What does the engine report?",
+  "prompt": "The course prints a threshold problem: one hot stream at 10 kW/K and one cold at 1 kW/K, at 10 C. Its heat flow is zero only at the top of the cascade. What does the engine report?",
   "options": [
    "No pinch, with threshold problem true.",
    "A pinch at shifted 195.000 C, threshold false.",
@@ -129,10 +129,10 @@
    "No pinch, with threshold problem false."
   ],
   "answer": 0,
-  "explanation": "SECTION 17 prints hot utility 0.000, cold utility 1470.000, pinch hot none and threshold problem true. The engine reports no pinch there: a zero at either end of the cascade is a threshold, and naming it a pinch would invent a constraint. SECTION 25: only an interior zero of the cascade is a pinch."
+  "explanation": "The course prints hot utility 0.000, cold utility 1470.000, pinch hot none and threshold problem true. The engine reports no pinch there: a zero at either end of the cascade is a threshold, and naming it a pinch would invent a constraint. The course's rules: only an interior zero of the cascade is a pinch."
  },
  {
-  "prompt": "SECTION 17 prints the engine's note on the pinch. What does it say heat carried across the pinch costs?",
+  "prompt": "The course prints the engine's note on the pinch. What does it say heat carried across the pinch costs?",
   "options": [
    "One unit more hot utility, the cold utility unchanged.",
    "One unit more cold utility, the hot utility unchanged.",
@@ -154,7 +154,7 @@
   "explanation": "The 10 C row prints heat recovered 585.150 kW. 561.000 is the 15 C row, 527.250 the 20 C row and 586.950 the total cold stream duty."
  },
  {
-  "prompt": "In the SECTION 17 problem table at 15 C for the invented Isiokpo streams, where does the heat flow reach zero, and how is the pinch reported?",
+  "prompt": "In the course's problem table at 15 C for the invented Isiokpo streams, where does the heat flow reach zero, and how is the pinch reported?",
   "options": [
    "At shifted 155.500 C, the top of the cascade: 163.000 C hot side, 148.500 C cold side.",
    "At shifted 110.500 C, inside the range: 118.000 C hot side, 103.000 C cold side.",
@@ -162,6 +162,6 @@
    "At shifted 111.500 C, inside the range: 118.000 C hot side, 108.000 C cold side."
   ],
   "answer": 1,
-  "explanation": "SECTION 17: the heat flow is zero at shifted 110.500 C, inside the range: the pinch, 118.000 C on the hot side and 103.000 C on the cold side. The cascade starts at 155.500 with the hot utility 25.950 and ends at 33.500 with the cold utility 240.150. 108.000 C is the cold side pinch at 10 C."
+  "explanation": "In the course, the heat flow is zero at shifted 110.500 C, inside the range: the pinch, 118.000 C on the hot side and 103.000 C on the cold side. The cascade starts at 155.500 with the hot utility 25.950 and ends at 33.500 with the cold utility 240.150. 108.000 C is the cold side pinch at 10 C."
  }
 ]

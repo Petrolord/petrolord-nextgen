@@ -52,7 +52,7 @@
    "No: the close waits until the coordinator has closed out C-02 and C-08 first."
   ],
   "answer": 0,
-  "explanation": "Only \"Critical\" and \"Major\" block. The digest records the close as ALLOWED with a Minor, an Editorial and an unrated comment still Open. Verified comments waiting on the coordinator hold nothing open either, because they are resolved."
+  "explanation": "Only \"Critical\" and \"Major\" block. The course records the close as ALLOWED with a Minor, an Editorial and an unrated comment still Open. Verified comments waiting on the coordinator hold nothing open either, because they are resolved."
  },
  {
   "prompt": "summarise is run over IK-01 and its own log. What are totalComments, openComments and blockingComments?",
@@ -157,11 +157,11 @@
   "prompt": "An external reviewer is put on IK-01 named only by display name. What does the engine do, and what does that show about the independence rule?",
   "options": [
    "It refuses, because every reviewer has to be a signed-in user of the app.",
-   "It allows the reviewer, since a display name alone cannot be matched to the author, and the digest holds that as a limit.",
+   "It allows the reviewer, since a display name alone cannot be matched to the author, and the course holds that as a limit.",
    "It refuses with \"Choose the reviewer.\", because a display name alone names nobody.",
    "It allows the reviewer as an Observer only, so nothing on the review can be judged by them."
   ],
   "answer": 1,
-  "explanation": "The digest records the external reviewer as ALLOWED and lists the limit among the held items: a reviewer named by display name only cannot be matched to the author, and a review with no author recorded cannot be checked either."
+  "explanation": "The course records the external reviewer as ALLOWED and lists the limit among the held items: a reviewer named by display name only cannot be matched to the author, and a review with no author recorded cannot be checked either."
  }
 ]

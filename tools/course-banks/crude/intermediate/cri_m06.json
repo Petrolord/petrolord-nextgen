@@ -22,7 +22,7 @@
   "explanation": "That choice is held item C13, a stated limit. The page labels K as the screening figure and nothing is graded on it."
  },
  {
-  "prompt": "Which set of four checks does the digest show the Kwale valuation passing?",
+  "prompt": "Which set of four checks does the course show the Kwale valuation passing?",
   "options": [
    "The yields close; nothing is assumed zero; the loss comes off before the costs; the blend's netback matches its crudes' volume-weighted mean.",
    "The yields close; the blend API matches the volume-weighted mean of the API numbers; the Watson K sits in a paraffinic band; the differential is positive.",
@@ -66,15 +66,15 @@
   "explanation": "The default table prints the blend T50 F (interpolated) as 617.1429 and Watson K at T50 (screening) as 11.7452. 587.3184 and 11.8135 are the Kwale blend's."
  },
  {
-  "prompt": "How is oracle_crudeassay.py written, by the digest's account?",
+  "prompt": "How is oracle_crudeassay.py written, by the course's account?",
   "options": [
    "From the rules, independently of the JavaScript engine.",
    "From the JavaScript engine, translated line for line into Python.",
    "From the golden files, fitted to reproduce each case.",
-   "From the digest's own tables, read back as its inputs."
+   "From the course's own tables, read back as its inputs."
   ],
   "answer": 0,
-  "explanation": "The digest describes an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules, and counts its golden cases from the vendored file."
+  "explanation": "The course describes an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules, and counts its golden cases from the vendored file."
  },
  {
   "prompt": "How does oracle_crudeassay.py reach a blend's T50, and how does that road differ from the engine's?",
@@ -118,7 +118,7 @@
    "As volume shares normalised to 100."
   ],
   "answer": 0,
-  "explanation": "The digest's oracle line begins with the load: a cargo in barrels and pounds. The engine itself converts volume shares to mass shares with resolveFractions."
+  "explanation": "The course's oracle line begins with the load: a cargo in barrels and pounds. The engine itself converts volume shares to mass shares with resolveFractions."
  },
  {
   "prompt": "Which Kerosene / Jet and Diesel / Gasoil yields does the studio's default table print for its default pair?",

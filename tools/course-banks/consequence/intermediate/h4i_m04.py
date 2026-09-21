@@ -27,7 +27,7 @@ q(3,
  ["As the larger of the two, since a target can only ever face one way at any one time",
   "As their plain sum Fv + Fh, capped at one by the refusal on view factors",
   "As their average, weighting the vertical and the horizontal plane equally"],
- "Both model strings end \"Fmax the vector sum\", and section 18 writes Fmax = sqrt(Fv^2 + Fh^2) as the most exposed orientation. At 15 m upright that turns 0.332171054250 and 0.222949619043 into 0.400055173586, which is neither their larger member, their plain sum nor their average.")
+ "Both model strings end \"Fmax the vector sum\", and the course writes Fmax = sqrt(Fv^2 + Fh^2) as the most exposed orientation. At 15 m upright that turns 0.332171054250 and 0.222949619043 into 0.400055173586, which is neither their larger member, their plain sum nor their average.")
 
 q(2,
  "The stated flame is tilted 20 degrees toward a target standing 20 m from its axis. What does the engine return?",
@@ -71,7 +71,7 @@ q(3,
  ["The Yellow Book sets the limit at X/R equal to two, and the engine copies it",
   "The golden sets the limit, and the engine refuses whatever the golden omits",
   "Mudan's paper bounds the tilt at 40 degrees, and the engine extends it a little"],
- "Section 18 closes the probe table with it: the refusal is the engine's judgement, because the Yellow Book states no domain for the formula. No printed limit at a fixed X/R exists, a golden is evidence and never a rule the engine reads, and no tilt bound from the source is named.")
+ "The course closes the probe table with it: the refusal is the engine's judgement, because the Yellow Book states no domain for the formula. No printed limit at a fixed X/R exists, a golden is evidence and never a rule the engine reads, and no tilt bound from the source is named.")
 
 q(1,
  "What does the engine do with a target placed at or inside the base of the flame?",
@@ -101,7 +101,7 @@ q(1,
  ["a = D / L and b = X / D, with X measured along the ground from the flame surface out to the target",
   "a = L / D and b = R / X, with X measured from the downwind edge to the target",
   "a is the tilt in radians and b is the height of the target above the ground divided by the radius R"],
- "Section 18 defines a = L / R and b = X / R, with X the distance from the axis of the flame base to a small target at ground level. The path from the flame surface is the Bagster path length, a different distance. The target is at ground level, so no height enters b, and the tilt is its own argument.")
+ "The course defines a = L / R and b = X / R, with X the distance from the axis of the flame base to a small target at ground level. The path from the flame surface is the Bagster path length, a different distance. The target is at ground level, so no height enters b, and the tilt is its own argument.")
 
 q(2,
  "With the stated flame tilted 40 degrees toward a target 30 m from the axis, what does the horizontal target's view factor come to?",
@@ -115,7 +115,7 @@ q(0,
  ["Three probes, and all three of them agree on Fv but differ in Fh",
   "Two cells, the Fmax cells the printed table got wrong",
   "303 cells, one for each figure the printed table carries"],
- "Section 18 tabulates 9 golden cases, from yb-pool-example-vf to slender-far, with engine and route B equal in both Fv and Fh as printed. The three probes are targets under the flame, where Fv differs and Fh agrees. The 303 cells and the 2 odd Fmax cells belong to the printed Table 6.A.1, a separate check.")
+ "The course lists 9 golden cases, from yb-pool-example-vf to slender-far, with engine and route B equal in both Fv and Fh as printed. The three probes are targets under the flame, where Fv differs and Fh agrees. The 303 cells and the 2 odd Fmax cells belong to the printed Table 6.A.1, a separate check.")
 
 emit(Q, '/root/hse-wip-consequence/banks/h4i_m04.json', expect_n=15)
 finish()

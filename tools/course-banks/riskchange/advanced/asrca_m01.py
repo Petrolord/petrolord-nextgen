@@ -18,7 +18,7 @@ q(0, "With six comment statuses there are 36 ordered pairs of a status and a sta
  ["6, one legal move out of each of the six statuses.",
   "12, two legal moves out of each of the six statuses in turn.",
   "9, because \"Open\", \"Responded\" and \"Rejected\" have two exits each and \"Verified\" has three."],
- "\"Closed\" and \"Withdrawn\" have no exit at all. \"Open\" and \"Rejected\" each have two, \"Responded\" has two and \"Verified\" has one: 2 + 2 + 2 + 1 gives the 7 legal moves the digest counts.")
+ "\"Closed\" and \"Withdrawn\" have no exit at all. \"Open\" and \"Rejected\" each have two, \"Responded\" has two and \"Verified\" has one: 2 + 2 + 2 + 1 gives the 7 legal moves the course counts.")
 
 q(3, "A comment is \"Open\". Which statuses may it legally move to next?",
  "\"Responded\", by the author, or \"Withdrawn\", by the reviewer.",

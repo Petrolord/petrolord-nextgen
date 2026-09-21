@@ -41,7 +41,7 @@
    "Availability limits it and efficiency does not, once the chemical is good."
   ],
   "answer": 3,
-  "explanation": "The engine's own warning on that case reads that a 95 percent inhibitor at 80 percent availability gives 76.0 percent effective protection, which is 4.80 times the metal loss of the datasheet number, and it names availability as what limits it. Those are the engine's words and they are quoted verbatim in the digest."
+  "explanation": "The engine's own warning on that case reads that a 95 percent inhibitor at 80 percent availability gives 76.0 percent effective protection, which is 4.80 times the metal loss of the datasheet number, and it names availability as what limits it. Those are the engine's words and they are quoted verbatim in the course."
  },
  {
   "prompt": "Against what does the metal loss ratio compare?",

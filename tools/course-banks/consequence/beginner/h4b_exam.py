@@ -15,7 +15,7 @@ q(1,
   ["The engine reports a leak frequency in the basis block of every outflow result, beside the model and the source.",
    "The engine derives the frequency from the hole diameter, since a larger hole is a rarer event on any line.",
    "The frequency is the mass rate divided by the inventory."],
-  "Section 1: the engine computes effects and never frequencies, and a consequence model says what happens if the release occurs; how often it occurs belongs elsewhere. The basis block carries the model, its source and its units, and no frequency. Nothing in the engine turns a hole size or a mass rate into a frequency.")
+  "The course explains: the engine computes effects and never frequencies, and a consequence model says what happens if the release occurs; how often it occurs belongs elsewhere. The basis block carries the model, its source and its units, and no frequency. Nothing in the engine turns a hole size or a mass rate into a frequency.")
 
 q(0,
   "A vessel pressure is known in bar gauge. The engine never converts a unit it was not asked to. What must the analyst do before typing it?",
@@ -31,7 +31,7 @@ q(2,
   ["9.80665, the gravitational acceleration.",
    "100000 Pa, one bar, which the engine takes as ambient whenever no pressure is typed for it.",
    "101325 Pa, added to every upstream pressure."],
-  "Section 1 prints `ATM_PA` as 101325, and section 2 says ambient is `ATM_PA`, 101325 Pa, unless a call states otherwise. 9.80665 is `G_M_S2`. 100000 is the upper end of `BAGSTER_RANGE_PA_M`, which has nothing to do with ambient. Every pressure is typed absolute, so nothing is added to it.")
+  "The course shows `ATM_PA` as 101325, and the course says ambient is `ATM_PA`, 101325 Pa, unless a call states otherwise. 9.80665 is `G_M_S2`. 100000 is the upper end of `BAGSTER_RANGE_PA_M`, which has nothing to do with ambient. Every pressure is typed absolute, so nothing is added to it.")
 
 q(3,
   "Which statement about a refusal from this engine is true?",
@@ -39,7 +39,7 @@ q(3,
   ["It carries the result at the nearest valid input.",
    "It carries a number flagged as unreliable.",
    "It carries a partial result."],
-  "Section 3 says each refusal is the engine's `error` string with the field it names, and that a refusal carries no number. Nothing is computed at a nearby input, nothing is flagged and returned, and no partial result is kept.")
+  "The course says each refusal is the engine's `error` string with the field it names, and that a refusal carries no number. Nothing is computed at a nearby input, nothing is flagged and returned, and no partial result is kept.")
 
 q(3,
   "Which of the engine's named sources fixes the pool diameter and the Mackay and Matsugu evaporation?",
@@ -55,7 +55,7 @@ q(1,
   ["The Briggs rural sigma coefficients for the six Pasquill-Gifford classes.",
    "The molar volume of 24.45 L/mol used to convert between the two concentration units.",
    "The subsonic outflow coefficient psi used in the gas outflow model once the flow stops being choked."],
-  "Section 4 lists a worked carbon monoxide plume among what the Purple Book fixes, the case section 11 reproduces at 21.260627 g/m3. The Briggs coefficients come from ALOHA, the molar volume from CCOHS, and psi from the Yellow Book.")
+  "The course lists a worked carbon monoxide plume among what the Purple Book fixes, the case the engine reproduces at 21.260627 g/m3. The Briggs coefficients come from ALOHA, the molar volume from CCOHS, and psi from the Yellow Book.")
 
 q(0,
   "The exported constant `BRIGGS_ADVISORY_RANGE_M` holds 100 to 10000. What happens to a plume asked for outside it?",
@@ -96,7 +96,7 @@ q(3,
   ["19.354651 kg/s, replacing any coefficient below 0.62.",
    "24.973743 kg/s, since a smaller coefficient passes more.",
    "18.730307 kg/s, since the rate goes as the square root of the coefficient, the same as it does for the driving pressure."],
-  "The coefficient sweep prints 18.730307 kg/s at 0.6, and section 5 says the rate is linear in the discharge coefficient. The engine uses the typed coefficient and replaces nothing. 24.973743 kg/s is the 0.8 row, larger because a larger coefficient passes more. The square root holds the driving pressure and the density.")
+  "The coefficient sweep prints 18.730307 kg/s at 0.6, and the course says the rate is linear in the discharge coefficient. The engine uses the typed coefficient and replaces nothing. 24.973743 kg/s is the 0.8 row, larger because a larger coefficient passes more. The square root holds the driving pressure and the density.")
 
 q(2,
   "At what ullage pressure does the AMENAM line reach 48.888640 kg/s with its 6 m head?",
@@ -104,7 +104,7 @@ q(2,
   ["500000 Pa, a driving pressure of 448688.915000 Pa, since the rate is linear in the ullage above ambient.",
    "200000 Pa, the stated blanket.",
    "10000000 Pa, where the gas line reaches its highest choked rate."],
-  "The ullage sweep prints 48.888640 kg/s at 1000000 Pa, with a driving pressure of 948688.915000 Pa. 500000 Pa gives 33.621626 kg/s, and the rate follows the square root of the driving pressure. 200000 Pa gives 19.354651 kg/s. 10000000 Pa is a row of the methane line in section 6, a different model.")
+  "The ullage sweep prints 48.888640 kg/s at 1000000 Pa, with a driving pressure of 948688.915000 Pa. 500000 Pa gives 33.621626 kg/s, and the rate follows the square root of the driving pressure. 200000 Pa gives 19.354651 kg/s. 10000000 Pa is a row of the methane line of the gas outflow lesson, a different model.")
 
 q(0,
   "An analyst has a hole measured as an area and no diameter. What does the liquid outflow function accept?",
@@ -120,7 +120,7 @@ q(0,
   ["The 200000 Pa ullage plus one atmosphere, 101325 Pa, since the ullage is typed as gauge.",
    "The driving pressure 148688.915000 Pa plus the static head.",
    "The ullage times the density over the head."],
-  "Section 5: P = rhoL g hL + PaL is the absolute pressure at the hole, the static head plus the pressure above the liquid. The ullage is stated absolute, so no atmosphere is added. The driving pressure is P minus ambient, 148688.915000 Pa, and it already contains the head. The last formula is not the model.")
+  "The course explains: P = rhoL g hL + PaL is the absolute pressure at the hole, the static head plus the pressure above the liquid. The ullage is stated absolute, so no atmosphere is added. The driving pressure is P minus ambient, 148688.915000 Pa, and it already contains the head. The last formula is not the model.")
 
 # ---------------------------------------------------------------- m03
 q(1,
@@ -153,7 +153,7 @@ q(2,
   ["The outflow coefficient psi doubles between the two rows, from 0.5 at 250000 Pa to one at 500000 Pa, and the rate follows it.",
    "The ratio has quadrupled, and the rate follows its square root.",
    "The discharge coefficient is doubled."],
-  "Section 6: both rows are CHOKED, and once choked the mass rate is LINEAR in the upstream pressure; doubling it doubles the rate, as the upstream density doubles from 1.607640 to 3.215281 kg/m3. Psi is 1.000000 on both rows. The pressure has doubled and the rate with it. The discharge coefficient is held at 0.62.")
+  "The course explains: both rows are CHOKED, and once choked the mass rate is LINEAR in the upstream pressure; doubling it doubles the rate, as the upstream density doubles from 1.607640 to 3.215281 kg/m3. Psi is 1.000000 on both rows. The pressure has doubled and the rate with it. The discharge coefficient is held at 0.62.")
 
 q(3,
   "Of the two air cases straddling the boundary, the one with the smaller ratio, 0.52773437499999998, is air-barely-choked. How does the engine label it?",
@@ -169,7 +169,7 @@ q(3,
   ["15.31 kg/s from both, since the golden rounds each route to the printed digits of the Yellow Book before comparing them.",
    "15.292930 kg/s from the engine against 15.311760 kg/s from route B, the gap the inferred heat capacity ratio closes.",
    "SUBSONIC in the engine and CHOKED by route B."],
-  "Section 6 prints the yb-hydrogen-t0 row: CHOKED, the engine 15.311760 kg/s and route B 15.311760 kg/s, relative difference 5.80e-16. Nothing is rounded to the book's digits. 15.292930 kg/s is what the engine gives at a heat capacity ratio of 1.4 and is no route B figure. The two routes agree on the regime.")
+  "The course shows the yb-hydrogen-t0 row: CHOKED, the engine 15.311760 kg/s and route B 15.311760 kg/s, relative difference 5.80e-16. Nothing is rounded to the book's digits. 15.292930 kg/s is what the engine gives at a heat capacity ratio of 1.4 and is no route B figure. The two routes agree on the regime.")
 
 q(1,
   "Which upstream pressure puts the AMENAM GAS line exactly at its critical pressure ratio of 0.543927?",
@@ -177,7 +177,7 @@ q(1,
   ["250000 Pa, the first choked row of the table.",
    "180000 Pa, the last subsonic row, since the boundary lies at the last subsonic entry.",
    "208201.258009 Pa, where a gas with a heat capacity ratio of 1.67 chokes into the atmosphere."],
-  "Section 7 derives 186284.176006 Pa for the AMENAM line and reports CHOKED there with psi 1.000000000000. 250000 Pa and 180000 Pa are table rows on either side of the boundary. 208201.258009 Pa belongs to a heat capacity ratio of 1.67; the methane line's is 1.31.")
+  "The course derives 186284.176006 Pa for the AMENAM line and reports CHOKED there with psi 1.000000000000. 250000 Pa and 180000 Pa are table rows on either side of the boundary. 208201.258009 Pa belongs to a heat capacity ratio of 1.67; the methane line's is 1.31.")
 
 # ---------------------------------------------------------------- m04
 q(2,
@@ -194,7 +194,7 @@ q(2,
   ["The longest side of the bund, measured along its wall at the height the spill reaches.",
    "The distance the spill runs from the hole to the far wall of the bund before it comes to rest.",
    "The depth of the pool times the area, 0.075000 m times 400 m2."],
-  "Section 8 gives the model string \"pool covers the bund floor; D = sqrt(4 A / pi)\": the equivalent diameter is that of a circle of the bund's area. The bund's shape is not an input, and the engine models no run of liquid across the floor: the pool simply covers it. Depth times area is the volume, 30 m3.")
+  "The course gives the model string \"pool covers the bund floor; D = sqrt(4 A / pi)\": the equivalent diameter is that of a circle of the bund's area. The bund's shape is not an input, and the engine models no run of liquid across the floor: the pool simply covers it. Depth times area is the volume, 30 m3.")
 
 q(1,
   "What comparison decides whether `poolFromSpill` refuses a spill as overtopping its bund?",
@@ -234,7 +234,7 @@ q(2,
   ["A rate in kg/s, which the pool area divides to give the evaporation flux of the pool.",
    "A dimensionless fraction of the pool that evaporates each second.",
    "The Schmidt number, which defaults to 0.8 when none is typed."],
-  "Section 9: the model string is \"km = 0.004786 u10^0.78 (2r)^-0.11 Sc^-0.67; q = km Pv mu / (R T) x A\", and `massTransferCoefficientMS` carries m/s in its name. km times Pv mu / (R T) is the evaporation flux, 0.005749887804 kg/(m2 s), and times the area the rate. The Schmidt number is an input to km, defaulting to 0.8.")
+  "The course explains: the model string is \"km = 0.004786 u10^0.78 (2r)^-0.11 Sc^-0.67; q = km Pv mu / (R T) x A\", and `massTransferCoefficientMS` carries m/s in its name. km times Pv mu / (R T) is the evaporation flux, 0.005749887804 kg/(m2 s), and times the area the rate. The Schmidt number is an input to km, defaulting to 0.8.")
 
 # ---------------------------------------------------------------- m05
 q(0,
@@ -291,7 +291,7 @@ q(3,
   ["A correction for the stack's own height, subtracted from the first term to account for the gas absorbed by the ground below the release.",
    "The crosswind spread of the plume, which the engine adds to the vertical term to widen the plume sideways.",
    "A second release of the same size above the first, used only for a stack."],
-  "Section 11: the second exponential is the IMAGE SOURCE at minus h, and the ground reflects what reaches it. It is added to the first term, and total reflection absorbs nothing. The crosswind term is exp(-y^2 / 2 sy^2), a separate factor. The image sits below the ground at minus h for every release height, including a ground level one.")
+  "The course explains: the second exponential is the IMAGE SOURCE at minus h, and the ground reflects what reaches it. It is added to the first term, and total reflection absorbs nothing. The crosswind term is exp(-y^2 / 2 sy^2), a separate factor. The image sits below the ground at minus h for every release height, including a ground level one.")
 
 # ---------------------------------------------------------------- m06
 q(3,
@@ -324,7 +324,7 @@ q(0,
   ["The engine computes the maximum on the first row only and copies it to the other rows, which saves running a second search.",
    "It does move, but the six decimal print rounds away every change between the rows of the table.",
    "Every target in the table is REACHED."],
-  "Section 13 prints the same maximum beside targets of 500, 100, 20 and 5000 mg/m3: the ground curve under a 25 m stack is fixed before any target is named, and the target only picks the crossings, two for 100 and 20 and none for 500 and 5000. Nothing is copied between rows, rounding hides no change because there is none, and two of the four rows are NOT_REACHED.")
+  "The course shows the same maximum beside targets of 500, 100, 20 and 5000 mg/m3: the ground curve under a 25 m stack is fixed before any target is named, and the target only picks the crossings, two for 100 and 20 and none for 500 and 5000. Nothing is copied between rows, rounding hides no change because there is none, and two of the four rows are NOT_REACHED.")
 
 q(2,
   "Someone stands 20 m off the plume axis, half a kilometre downwind of UBIT in neutral weather. What reading do they get?",
@@ -340,7 +340,7 @@ q(0,
   ["The target is met at the source, which the plume cannot evaluate at a downwind distance of 0 m.",
    "The release is at ground level, where the far distance is always null and the near distance carries the answer.",
    "The engine refused the call."],
-  "Section 13: NOT_REACHED leaves both distances null, as the stack does at 500 mg/m3, and BEYOND_SEARCH_RANGE returns a far distance of null, as class F to 20 mg/m3 capped at 2000 m does. From the ground the NEAR distance is the null one, and the far distance carries the answer. A refusal returns no distances at all.")
+  "The course explains: NOT_REACHED leaves both distances null, as the stack does at 500 mg/m3, and BEYOND_SEARCH_RANGE returns a far distance of null, as class F to 20 mg/m3 capped at 2000 m does. From the ground the NEAR distance is the null one, and the far distance carries the answer. A refusal returns no distances at all.")
 
 q(1,
   "What does `plumeDistanceToConcentration` vary, and what does it hold fixed, while it searches?",
@@ -348,7 +348,7 @@ q(1,
   ["It varies the crosswind distance at a fixed downwind distance until the reading equals the target.",
    "It varies the release height until the ground level reading equals the target.",
    "It varies the stability class from A to F at a fixed distance and reports the first class that meets the target."],
-  "Section 13: it finds the downwind distances at which the centreline concentration at the receptor height equals a target, by bisection. The crosswind offset is zero because the distance is always a centreline distance. The release height and the class are inputs to the search, and neither is searched over.")
+  "The course explains: it finds the downwind distances at which the centreline concentration at the receptor height equals a target, by bisection. The crosswind offset is zero because the distance is always a centreline distance. The release height and the class are inputs to the search, and neither is searched over.")
 
 emit(Q, '/root/hse-wip-consequence/banks/h4b_exam.json', expect_n=42)
 finish()

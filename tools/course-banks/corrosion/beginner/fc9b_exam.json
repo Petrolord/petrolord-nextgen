@@ -77,7 +77,7 @@
   "explanation": "The message names the sum it formed. A sum of exactly one is accepted, and the screening runs with a partial pressure sum of 51.000427 bar against a total of 51.000427 bar."
  },
  {
-  "prompt": "At a total pressure of 100.000000 bar with the digest's fixed composition, what are the three chemistry figures?",
+  "prompt": "At a total pressure of 100.000000 bar with the course's fixed composition, what are the three chemistry figures?",
   "options": [
    "A coefficient of 0.775834, a partial pressure of 2.327502 bar and a fugacity of 3.000000 bar.",
    "A coefficient of 0.880814, a partial pressure of 3.000000 bar and a fugacity of 2.327502 bar.",
@@ -165,7 +165,7 @@
   "explanation": "Where transport controls, velocity and line size move this rate and the chemistry does not. Where the reaction controls, temperature and carbon dioxide move it and the flow does not."
  },
  {
-  "prompt": "One exponent of the transport term is described in the digest as a property rather than as a typed constant. Which, and why?",
+  "prompt": "One exponent of the transport term is described in the course as a property rather than as a typed constant. Which, and why?",
   "options": [
    "The velocity exponent, measured at 0.800000000000, because it can be reached entirely from the outside by doubling the velocity at a fixed line diameter.",
    "The fugacity exponent, measured at 1.000000000000, because the term is exactly linear in fugacity and nothing needs to be typed to make it so.",
@@ -176,7 +176,7 @@
   "explanation": "The base two log of the doubling ratio in fugacity comes out at exactly one. The other three are held for literature and pinned against a literal in a third file."
  },
  {
-  "prompt": "In the digest's sweep of the transport term against velocity at four line diameters, both ratio columns are constant down the table and equal to each other. Why is that the claim being made?",
+  "prompt": "In the course's sweep of the transport term against velocity at four line diameters, both ratio columns are constant down the table and equal to each other. Why is that the claim being made?",
   "options": [
    "It is what a linear term means, since a doubling in a term that is linear produces a fixed difference in the answer rather than a fixed ratio.",
    "It is what agreement with the vendored oracle means, since the oracle reaches exactly the same ratio through a route of its own that shares nothing.",
@@ -206,7 +206,7 @@
    "That the correlation has been run outside its published validity band, which the engine cannot detect and does not report."
   ],
   "answer": 1,
-  "explanation": "The series identity is checked on every row the digest prints and held to twelve figures. Find the smaller term, and the printed combination should be near it and below it."
+  "explanation": "The series identity is checked on every row the course prints and held to twelve figures. Find the smaller term, and the printed combination should be near it and below it."
  },
  {
   "prompt": "At its own computed onset the film multiplier is exactly 1.000000000000 at every fugacity in the sweep. What kind of check is that?",
@@ -330,7 +330,7 @@
   "explanation": "They are measured out of the engine's behaviour and pinned against a literal in a third file, so the module is using what it declares. No source here says whether the declared values are the published ones."
  },
  {
-  "prompt": "At the pH reference the factor is exactly 1.000000, and the digest says that is by definition rather than by a clamp. What does that mean?",
+  "prompt": "At the pH reference the factor is exactly 1.000000, and the course says that is by definition rather than by a clamp. What does that mean?",
   "options": [
    "The engine tests the pH against the reference and substitutes one whenever the two agree, which is what a clamp at a boundary does.",
    "The factor is clamped at one from above in the same way the film multiplier is, so no correction anywhere can ever raise a rate.",

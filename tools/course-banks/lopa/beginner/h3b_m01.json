@@ -8,7 +8,7 @@
    "A consequence category and a scored band for the scenario, taken from a matrix."
   ],
   "answer": 1,
-  "explanation": "The digest states the halves in one line: the determination half is a layer of protection analysis, a scenario frequency, the risk reduction still missing against a tolerable frequency, and the SIL band that missing reduction falls in. The Annex B PFDavg belongs to the verification half and to the next tier. The longest interval is a separate call again. Nothing in this engine takes a consequence category or a scored band."
+  "explanation": "The course states the halves in one line: the determination half is a layer of protection analysis, a scenario frequency, the risk reduction still missing against a tolerable frequency, and the SIL band that missing reduction falls in. The Annex B PFDavg belongs to the verification half and to the next tier. The longest interval is a separate call again. Nothing in this engine takes a consequence category or a scored band."
  },
  {
   "prompt": "`lopaScenario` is handed an initiating event frequency, enabling conditions, conditional modifiers, a list of IPLs and a tolerable frequency. Which set of results comes back?",
@@ -52,7 +52,7 @@
    "The TMEL follows from the consequence described on the row."
   ],
   "answer": 1,
-  "explanation": "The digest lists the inputs one by one: the initiating event frequency, every enabling condition and conditional modifier probability, every IPL PFD, every failure rate and the TMEL. The engine carries no failure rate data and no library of generic frequencies, so nothing is supplied for an empty field, no IPL PFD is looked up by layer type, and the TMEL is chosen by the organisation and typed in."
+  "explanation": "The course lists the inputs one by one: the initiating event frequency, every enabling condition and conditional modifier probability, every IPL PFD, every failure rate and the TMEL. The engine carries no failure rate data and no library of generic frequencies, so nothing is supplied for an empty field, no IPL PFD is looked up by layer type, and the TMEL is chosen by the organisation and typed in."
  },
  {
   "prompt": "The engine's exported names are given in full. Which of these is not one of them?",
@@ -63,7 +63,7 @@
    "`decadeOf`, which returns a power of ten or null."
   ],
   "answer": 0,
-  "explanation": "The exported names are given in full in the digest and `outcomeFromRequiredRrf`, `silFromPfdAvg` and `decadeOf` are all on the list. No name on it scores a consequence, because nothing in this engine takes a consequence category or a scored band at all."
+  "explanation": "The exported names are given in full in the course and `outcomeFromRequiredRrf`, `silFromPfdAvg` and `decadeOf` are all on the list. No name on it scores a consequence, because nothing in this engine takes a consequence category or a scored band at all."
  },
  {
   "prompt": "A LOPA row multiplies ONE frequency by probabilities. Which two fields on the determination row are the frequencies?",
@@ -85,7 +85,7 @@
    "It accepts both and warns on the second."
   ],
   "answer": 2,
-  "explanation": "The digest says an IEF of 2.5 per year is accepted, because a frequency is a count per year and can exceed one. The same number typed as an enabling condition probability is refused, because that field is a probability above 0 and no more than 1. So one is taken and one is refused, and the refusal replaces the result and is not a warning beside it."
+  "explanation": "The course says an IEF of 2.5 per year is accepted, because a frequency is a count per year and can exceed one. The same number typed as an enabling condition probability is refused, because that field is a probability above 0 and no more than 1. So one is taken and one is refused, and the refusal replaces the result and is not a warning beside it."
  },
  {
   "prompt": "A row is submitted with an initiating event frequency of zero. What does the engine return?",
@@ -132,7 +132,7 @@
   "explanation": "The refusal table gives the field as `pfdAvg`, with the engine's message that it must be a probability above 0 and no more than 1. `sifPfdAvg` is the proposed function's field on `lopaScenario` and belongs to a different call. The field named is always the offending input and never the function's own name or a target."
  },
  {
-  "prompt": "How many refusals does the digest table, across how many functions, and which function refuses none of them?",
+  "prompt": "How many refusals does the course table, across how many functions, and which function refuses none of them?",
   "options": [
    "29 refusals across 7 functions, and `lopaScenario` refuses nothing, since every check it makes returns a warning beside the result.",
    "29 refusals across 7 functions, and `decadeOf` refuses nothing at all.",
@@ -140,7 +140,7 @@
    "29 refusals across 3 functions, and `outcomeFromRequiredRrf` refuses nothing."
   ],
   "answer": 1,
-  "explanation": "The digest says 29 refusals are tabled across 7 functions. `decadeOf` refuses nothing: it returns null for zero, for a negative number, for a string and for anything off a decade. `lopaScenario`, `silFromPfdAvg` and `outcomeFromRequiredRrf` each carry refusal rows of their own in that table."
+  "explanation": "The course says 29 refusals are tabled across 7 functions. `decadeOf` refuses nothing: it returns null for zero, for a negative number, for a string and for anything off a decade. `lopaScenario`, `silFromPfdAvg` and `outcomeFromRequiredRrf` each carry refusal rows of their own in that table."
  },
  {
   "prompt": "The ORONI separator overfill row starts from a level control valve failing open. What is its stated initiating event frequency, and what does the engine's method string multiply it by?",

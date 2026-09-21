@@ -107,7 +107,7 @@
    "It allows it and records the external reviewer as the actor, with u-grace as a witness beside the name."
   ],
   "answer": 1,
-  "explanation": "The digest records u-grace recording an external reviewer by name as ALLOWED. The actor is independent of the lesson, and the typed name adds who else looked at it, which is the legitimate use of the field."
+  "explanation": "The course records u-grace recording an external reviewer by name as ALLOWED. The actor is independent of the lesson, and the typed name adds who else looked at it, which is the legitimate use of the field."
  },
  {
   "prompt": "ON-05's validation record is removed and it is then asked to move to \"Published\". What does the engine return?",
@@ -132,7 +132,7 @@
   "explanation": "The author writes and submits, somebody else validates, and only then can it be published. A submitted lesson can also go back to \"Draft\" if a gap is found, or be archived."
  },
  {
-  "prompt": "Publishing a lesson checks for a validation record. Which limit does the digest list among the held items for that step?",
+  "prompt": "Publishing a lesson checks for a validation record. Which limit does the course list among the held items for that step?",
   "options": [
    "Publishing does not check that a validation record exists at all.",
    "Publishing does not check a second time who validated the lesson.",
@@ -140,7 +140,7 @@
    "Publishing checks the validator again and refuses the author."
   ],
   "answer": 1,
-  "explanation": "The independence check sits where the validation is recorded. Publishing relies on it having been enforced there, and the digest lists that as a stated limit of the engine."
+  "explanation": "The independence check sits where the validation is recorded. Publishing relies on it having been enforced there, and the course lists that as a stated limit of the engine."
  },
  {
   "prompt": "Read ON-01 as if it were still \"Submitted\". Its author, u-musa, is refused at validation. What does the owner decision on validation by typed name require before ON-01 can be validated?",

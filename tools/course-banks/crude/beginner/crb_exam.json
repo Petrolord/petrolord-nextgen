@@ -11,7 +11,7 @@
   "explanation": "API = A / SG - B is a hyperbola in specific gravity, and blendCrudes blends specific gravity on volume, taking volume as conserved; API itself is never averaged. The volume-weighted mean misses on every row: -0.6192, -0.1677, -2.0889 and -0.3860."
  },
  {
-  "prompt": "For three crudes at 50, 30 and 20, the digest prints the figure 29.6100 in two places. What does it stand for in each?",
+  "prompt": "For three crudes at 50, 30 and 20, the course prints the figure 29.6100 in two places. What does it stand for in each?",
   "options": [
    "The engine's API for the blend typed by volume, and the mass-weighted mean of the API numbers for the same blend.",
    "The engine's API for the blend typed by mass, and a rounding of the 29.2240 typed by volume.",
@@ -30,7 +30,7 @@
    "Volume is conserved only within 15.0000 API of contrast."
   ],
   "answer": 2,
-  "explanation": "blendCrudes blends specific gravity on volume, and the digest states the assumption: mass is conserved and volume is taken as conserved."
+  "explanation": "blendCrudes blends specific gravity on volume, and the course states the assumption: mass is conserved and volume is taken as conserved."
  },
  {
   "prompt": "A recipe types a share of -10 for one of two crudes. What does blendCrudes return?",
@@ -363,7 +363,7 @@
   "explanation": "Nickel is per unit mass, so the engine gives 6.5980 on mass. 6.4550 is the volume shortcut, 0.1430 is mass minus volume, and 14.2202 is the three-crude blend's nickel."
  },
  {
-  "prompt": "Why does the digest print a column called the volume-weighted mean of the API numbers when the engine never reports it?",
+  "prompt": "Why does the course print a column called the volume-weighted mean of the API numbers when the engine never reports it?",
   "options": [
    "Because the engine reports it as a check figure whenever the blend API is formed.",
    "Because contracts quote it, and the engine converts it to specific gravity later.",

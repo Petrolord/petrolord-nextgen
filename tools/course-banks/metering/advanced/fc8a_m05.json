@@ -22,7 +22,7 @@
   "explanation": "The standing half depends on the size of the vapour space and how much product vapour it holds, and the working half depends on throughput."
  },
  {
-  "prompt": "The digest prints a relation over the two halves of the annual loss. What does it carry?",
+  "prompt": "The course prints a relation over the two halves of the annual loss. What does it carry?",
   "options": [
    "A difference of 70067.5951 lb/yr, since a difference between two losses is printed as a magnitude and the sign is carried by the order of the two rows.",
    "A ratio of 0.048062 formed as the working loss over the standing loss.",

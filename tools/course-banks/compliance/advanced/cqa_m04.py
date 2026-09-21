@@ -13,14 +13,14 @@ q(2, "canCloseFinding is asked to close ISF-2026-005, a Minor nonconformity with
  ["The open action: ac3 is still Open against the finding.",
   "The effectiveness check a Minor nonconformity needs before it closes.",
   "The due date, 2026-12-11, which has not yet arrived."],
- "The digest prints the correction refusal for ISF-2026-005: \"Record the correction: what was done about the thing that was found. A corrective action deals with the cause, and this is the other half.\" The correction is the first thing the gate asks for.")
+ "The course prints the correction refusal for ISF-2026-005: \"Record the correction: what was done about the thing that was found. A corrective action deals with the cause, and this is the other half.\" The correction is the first thing the gate asks for.")
 
 q(0, "A Minor nonconformity has its correction recorded and no actions at all. What does canCloseFinding answer?",
  "ALLOWED, because a Minor nonconformity closes on its correction alone.",
  ["REFUSED until a corrective action is raised against the cause.",
   "REFUSED until its root cause is recorded, as for any nonconformity.",
   "ALLOWED only once an effectiveness check is recorded on the correction."],
- "The digest prints: a Minor nonconformity with its correction and no actions: ALLOWED. isoCompliance.EFFECTIVENESS_REQUIRED_TYPES holds Major nonconformity alone, and the root cause refusal is written for a major nonconformity.")
+ "The course prints: a Minor nonconformity with its correction and no actions: ALLOWED. isoCompliance.EFFECTIVENESS_REQUIRED_TYPES holds Major nonconformity alone, and the root cause refusal is written for a major nonconformity.")
 
 q(3, "On the Major nonconformity walk, the record holds a correction, a root cause and only a preventive action. Which requirement refuses it?",
  "At least one action of type Corrective, which a preventive action cannot stand in for.",
@@ -41,7 +41,7 @@ q(1, "ISF-2026-004 holds ac1, Corrective, In progress, and ac4, Preventive, Comp
  ["The root cause refusal, since ac4 was aimed at a cause nobody wrote down.",
   "The unchecked action refusal, since ac4 is Complete with no effectiveness verdict.",
   "The correction refusal, since a preventive action carries no correction."],
- "The digest prints: \"1 action still open against this finding.\" The refusal names the first thing missing on the walk, and ac1 is it.")
+ "The course prints: \"1 action still open against this finding.\" The refusal names the first thing missing on the walk, and ac1 is it.")
 
 q(3, "Suppose ac1 on ISF-2026-004 were completed and never checked. What would the record still lack before the finding could close?",
  "a corrective action verified effective",
@@ -55,7 +55,7 @@ q(0, "The register summary prints awaiting an effectiveness check 1. Which actio
  ["ac1, Corrective, on ISF-2026-004, In progress and past its due date",
   "ac2, Corrective, on ISF-2026-001, Complete and verified effective",
   "ac3, Corrective, on ISF-2026-005, Open with no verdict"],
- "The digest names ac4 as the one Complete action with no effectiveness verdict recorded. ac1 and ac3 are still open, and ac2 reads verified effective true.")
+ "The course names ac4 as the one Complete action with no effectiveness verdict recorded. ac1 and ac3 are still open, and ac2 reads verified effective true.")
 
 q(2, "Which root cause categories appear only in the ISO list?",
  "Measurement or monitoring, and Management system",
@@ -69,7 +69,7 @@ q(2, "A Major nonconformity is raised in the Audit & Findings Manager. Which roo
  ["The quality list of 9, since the Audit & Findings Manager is a quality app.",
   "A list of its own, kept in step with the ISO list by a copy that is refreshed.",
   "The ISO list less Management system, a category kept for ISO registers."],
- "The digest prints: auditManagement.ROOT_CAUSE_CATEGORIES is the same list object as isoCompliance's: true. One list, so nothing can drift apart. auditManagement.canCloseFinding is the same function as isoCompliance's as well.")
+ "The course prints: auditManagement.ROOT_CAUSE_CATEGORIES is the same list object as isoCompliance's: true. One list, so nothing can drift apart. auditManagement.canCloseFinding is the same function as isoCompliance's as well.")
 
 q(0, "isoCompliance.isActionOverdue is the same function as qualityAssurance.isCapaOverdue. What follows?",
  "An action is overdue by one rule, on an NCR or on a finding.",

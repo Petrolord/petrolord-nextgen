@@ -45,10 +45,10 @@ q(3, 'What does netbackValue take from the caller in order to report a different
  "netbackValue takes a marker netback and reports this crude's netback minus the marker's. Kwale Light alone reports -6.5056 against the same 72.5.")
 
 q(1, "Kwale Light and Ughelli Medium each have a netback of their own. Weighted 55 and 45 on volume, where do they land against the blend's netback?",
- 'The mean is 64.9473 $/bbl, and the digest prints the difference as 0.0000.',
- ['The mean is 65.0169 $/bbl, and the digest prints the difference as 0.0696.',
-  'The mean is 64.9473 $/bbl, and the digest prints the difference as -7.5527.',
-  'The mean is 65.5412 $/bbl, and the digest prints the difference as 0.5939.'],
+ 'The mean is 64.9473 $/bbl, and the course prints the difference as 0.0000.',
+ ['The mean is 65.0169 $/bbl, and the course prints the difference as 0.0696.',
+  'The mean is 64.9473 $/bbl, and the course prints the difference as -7.5527.',
+  'The mean is 65.5412 $/bbl, and the course prints the difference as 0.5939.'],
  'The blend is worth what its barrels are worth: its netback and the volume-weighted netbacks of its crudes are the same figure.')
 
 q(0, "Why does the netback of the Kwale blend equal the volume-weighted mean of its crudes' netbacks?",
@@ -58,12 +58,12 @@ q(0, "Why does the netback of the Kwale blend equal the volume-weighted mean of 
   "Netbacks blend on mass, and at 55 and 45 the mass and volume shares of these two crudes coincide."],
  "The blend's netback is computed from the blend's own curve, its own cut yields and the full chain. The mean is formed from the two single-crude netbacks, 65.9944 and 63.6676.")
 
-q(2, "What does the digest say d86ToTbp has the structure of?",
+q(2, "What does the course say d86ToTbp has the structure of?",
  "The cut-point-difference conversion, API Technical Data Book Procedure 3A1.1.",
  ["A fixed offset added at every point of the D86 curve, with no coefficient table needed.",
   "A bisection on the D86 curve for the temperature of each TBP point in turn.",
   "The Refutas index form, blended on volume fraction the way ASTM D7152 blends it."],
- "The digest: d86ToTbp has the structure of the cut-point-difference conversion (API Technical Data Book Procedure 3A1.1) and ships no coefficient table. Called without the table, it refuses.")
+ "The course: d86ToTbp has the structure of the cut-point-difference conversion (API Technical Data Book Procedure 3A1.1) and ships no coefficient table. Called without the table, it refuses.")
 
 q(1, "Against Kwale's marker of 72.5 $/bbl, what differential does netbackValue report for Ughelli Medium valued alone, and what does its sign say?",
  "-8.8324 $/bbl: valued alone on Kwale's cut set and prices, Ughelli Medium nets back below the marker.",
@@ -77,7 +77,7 @@ q(3, 'On this valuation, does blending Kwale Light and Ughelli Medium create or 
  ["It destroys netback, because the blend's Watson K at T50 of 11.8135 marks it as a poorer feed than either crude.",
   "It destroys netback, because the blend's loss of 0.5939 is taken on a mixed barrel.",
   "It creates netback, because the blend's curve has 14 points where each crude's assay has fewer."],
- "The digest prints the blend's netback minus the volume-weighted mean of its crudes' netbacks as 0.0000, with every row on the same cut set, prices, costs and losses.")
+ "The course prints the blend's netback minus the volume-weighted mean of its crudes' netbacks as 0.0000, with every row on the same cut set, prices, costs and losses.")
 
 q(0, 'What does netbackValue return when asked to value with losses of 101 percent?',
  'REFUSED: Losses must be between 0 and 100 percent.',
@@ -86,7 +86,7 @@ q(0, 'What does netbackValue return when asked to value with losses of 101 perce
   'A netback on losses of 0.8 percent, the last valid figure it was given.'],
  'The engine refuses the input and returns no netback. The Kwale figure of 0.8 percent lies inside the range and is valued.')
 
-q(2, "Which loss percents does the digest show netbackValue refusing?",
+q(2, "Which loss percents does the course show netbackValue refusing?",
  "101 percent and -1 percent, each refused with the same sentence.",
  ["101 percent only; -1 percent is taken as zero and named in assumedZero.",
   "-1 percent only; 101 percent is capped at 100 and valued.",
@@ -98,7 +98,7 @@ q(3, "A blank loss is taken as zero and named. A loss of 101 percent is refused.
  ["A blank loss is named in unpricedCuts, and 101 percent is capped at 100 percent.",
   "A blank loss makes the valuation incomplete, and 101 percent is valued with complete: false.",
   "Both are refused in the engine; the blank is taken as zero by the studio alone."],
- "The digest prints Kwale with freight and losses left blank at 67.4412 $/bbl, assumedZero naming freight, losses, and complete: true. Losses of 101 percent return REFUSED: Losses must be between 0 and 100 percent.")
+ "The course prints Kwale with freight and losses left blank at 67.4412 $/bbl, assumedZero naming freight, losses, and complete: true. Losses of 101 percent return REFUSED: Losses must be between 0 and 100 percent.")
 
 q(0, 'A crude arrives with only a D86 curve. What does d86ToTbp return when called without a coefficient table?',
  'REFUSED: D86 to TBP conversion needs the API Technical Data Book Procedure 3A1.1 coefficient table, which is not shipped with this package. Supply it, or enter the assay as a TBP distillation, which is how crude assays are reported.',

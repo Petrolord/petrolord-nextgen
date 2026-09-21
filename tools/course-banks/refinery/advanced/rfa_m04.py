@@ -54,7 +54,7 @@ q(0, "The cash flow's opex in each operating year reads 307.5315. How is that fi
  ["The fixed cost of 14000000.00 plus 4.2000 a barrel.",
   "opexFixed 291.7664 plus the tax of 15.7651.",
   "Gross revenue 346.1195 less the tax of 38.5879."],
- "The digest prints the sum: 291.7664 + 15.7651 = 307.5315, and the cash flow's opex reads 307.5315. The crude cost sits inside opexFixed, so a fixed and variable cost alone would leave the crude out.")
+ "The course prints the sum: 291.7664 + 15.7651 = 307.5315, and the cash flow's opex reads 307.5315. The crude cost sits inside opexFixed, so a fixed and variable cost alone would leave the crude out.")
 
 q(2, "In the screening engine's units, what capex does year 0 carry?",
  "58.9160 million",

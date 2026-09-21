@@ -9,7 +9,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(2, "This module is the one place in the course whose subject is what the engine used to do. Four other places carry the same history without a frame. Which are they?",
  "Engine comments, the wave's recon and findings records, and the repair's findings file.",
- ["The digest's audit section, the published golden file, and the validation oracle's header.",
+ ["The course's audit section, the published golden file, and the validation oracle's header.",
   "The lesson exercises, the teaching lab, and the three explorer panels that are built on it.",
   "The refusal messages, the warning texts, and the notes the engine returns on a successful call."],
  "All four are provenance. A sentence lifted out of one arrives with no frame around it, and nobody can frame what they did not know was history. Counted by reading the module, 12 comment lines carry the repair marker and 16 are written in a past tense about former behaviour.")
@@ -96,9 +96,9 @@ q(0, "Where has that former state been left today?",
  ["Every route now has an independent oracle, so no published case in the set is unable to discriminate.",
   "The two shared routes were dropped from the published set, so nothing green in it is green for the wrong reason.",
   "The tolerances were tightened until the twenty planted defects all went red, which is the standing form of the check."],
- "Naming the two is the honest statement of the limit. Sections 27 and 28 are the standing form of that lesson, about the engine as it is now, and nothing graded in this course rests on either of the two shared fits.")
+ "Naming the two is the honest statement of the limit. The previous module's audit lessons are the standing form of that lesson, about the engine as it is now, and nothing graded in this course rests on either of the two shared fits.")
 
-q(3, "The digest counts the history that sits in the engine source: 12 comment lines carrying the repair marker and 16 written in a past tense, in a module 619 lines long. What is that count for?",
+q(3, "The course counts the history that sits in the engine source: 12 comment lines carrying the repair marker and 16 written in a past tense, in a module 619 lines long. What is that count for?",
  "It puts a size on an unframed source, at roughly one line in 39 of the file.",
  ["It measures how much of the repair is still outstanding, as a tally of lines yet to be cleared.",
   "It is the tally the copy-rule gate runs against every lesson body in this wave.",

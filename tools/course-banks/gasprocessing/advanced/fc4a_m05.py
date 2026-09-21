@@ -14,7 +14,7 @@ q(1, "This engine was repaired after a recon found 49 findings. Before that repa
   "The discrepancy grew with the heat capacity, which is the one input a caller is most likely to leave at its default."],
  "Ask of any candidate error where it would be smallest and check somewhere else. That is the general lesson, and this engine's former factor of one over the compressibility is the example it happens to have.")
 
-q(0, "Before its repair this routine carried an error of exactly one over the compressibility. Reading the repaired engine's own compressibilities of 0.997251744 at 20.000000 psia and 0.789943160 at 2500.000000 psia, the digest prints 1.002755830 and 1.265913867 beside them. What is that last column, and why is it printed on current figures?",
+q(0, "Before its repair this routine carried an error of exactly one over the compressibility. Reading the repaired engine's own compressibilities of 0.997251744 at 20.000000 psia and 0.789943160 at 2500.000000 psia, the course prints 1.002755830 and 1.265913867 beside them. What is that last column, and why is it printed on current figures?",
  "One over each compressibility, printed so the shape of the error this routine used to carry can be read off numbers that are current.",
  ["The correction the engine now applies at each state, which is the repair expressed as a multiplier on the earlier answer.",
   "The ratio of the coefficient to the coefficient at the reference state, which is how the growth with pressure is measured today.",
@@ -40,19 +40,19 @@ q(1, "Among the repair items is one fluid carrying two densities and one module 
  ["Both gaps grew with pressure, so a difference that was small on the teaching stream would not have stayed small on a plant stream.",
   "Both numbers were declared rather than derived, and a declared constant that appears twice cannot be pinned by any gate.",
   "Both appeared in the published cases, so the goldens would move."],
- "Section 2 now shows one of each and shows the derived ones being derived. A defect of this kind is a defect whatever its size.")
+ "The course now shows one of each and shows the derived ones being derived. A defect of this kind is a defect whatever its size.")
 
-q(0, "The digest counts 9 repair-history comment lines in gasProcessing.js by three phrases, and states that rule beside the count. It also declines to quote any count across the whole vendored tree, and gives a reason. What is that reason?",
+q(0, "The course counts 9 repair-history comment lines in gasProcessing.js by three phrases, and states that rule beside the count. It also declines to quote any count across the whole vendored tree, and gives a reason. What is that reason?",
  "A tree-wide count answers to which engines NextGen happens to vendor, so it can move without anything in this engine changing.",
  ["A tree-wide count would have to be taken over the canonical engines repository rather than the vendored subset, and that repository is not present here.",
   "The three phrases are the only ones the authors were permitted to use, so a wider tree would need a wider rule and the two counts would not compare.",
-  "A count over more than one module cannot be reproduced from this course's own generators, which read one file each."],
+  "A count over more than one module cannot be reproduced from this course's own runs, which read one file each."],
  "Widen the rule to the nine keywords the same file also sweeps with and this module alone reads 18, which is the same lesson from the rule's side: a count means nothing without the tree it was taken over and the rule it was taken with. The tree-wide figure is worse than uninformative, because a reader cannot tell from the number whether it moved for a reason that concerns them.")
 
 q(2, "What must a writer establish about a sentence found in an engine source comment before putting it in front of a learner?",
  "Whether it describes what the engine does now.",
  ["Whether the comment is still present in the module it came from, since a quote that has moved is the defect a pin exists to catch.",
-  "Whether the sentence names a figure the digest also prints, since a comment that carries no number cannot mislead a reader.",
+  "Whether the sentence names a figure the course also prints, since a comment that carries no number cannot mislead a reader.",
   "Whether the comment was written by the same author as the routine beneath it, since only that author can vouch for the claim."],
  "Engine source comments are provenance. A sentence lifted out of one arrives with no frame around it, and a writer cannot frame what they did not know was history.")
 
@@ -80,7 +80,7 @@ q(0, "The refusal a capped absorption factor produces hands back three fields of
 q(2, "The water fit answers at exactly -49.000000000 degF and at exactly 140.000000000 degF, while the lean glycol strength refuses at exactly 90 and at exactly 100 weight percent. Why do the two guards behave differently at their own edges?",
  "The fit holds at its stated limits, and a strength of 100 weight percent is unreachable while a loop below 90 is a different kind of loop.",
  ["The water fit is exported and the strength is declared, and only an exported band can be enforced at the value it states.",
-  "The water fit is read from both sides in the digest and the strength is read from one, so the two tables are not comparable at their edges.",
+  "The water fit is read from both sides in the course and the strength is read from one, so the two tables are not comparable at their edges.",
   "The water guard protects a correlation and the strength guard protects a balance, and a balance is always guarded more tightly than a fit."],
  "A guard that refused its own stated limit would be as wrong as one that accepted anything. Each edge is read from both sides for exactly that reason.")
 

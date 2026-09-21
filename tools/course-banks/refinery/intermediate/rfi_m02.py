@@ -55,7 +55,7 @@ q(3, "The fed-crude-unit configuration prints a margin of 9614225.81. Which prin
  ["9614225.81 again, the fed unit with its capacity typed as 0.",
   "7173508.35, the hydrotreater left blank.",
   "6847760.00, the crude unit capped."],
- "The digest prints the fed configuration's margin, 9614225.81, against 7077935.48 for the configuration as typed. 9614225.81 is also the fed configuration with that unit's capacity typed as 0, and 7173508.35 and 6847760.00 are the hydrotreater left blank and the crude unit at 1900000 barrels.")
+ "The course prints the fed configuration's margin, 9614225.81, against 7077935.48 for the configuration as typed. 9614225.81 is also the fed configuration with that unit's capacity typed as 0, and 7173508.35 and 6847760.00 are the hydrotreater left blank and the crude unit at 1900000 barrels.")
 
 q(1, "In the configuration whose crude unit has a feed, that unit's capacity is then typed as 0. What happens to the margin?",
  "It stays at 9614225.81.",

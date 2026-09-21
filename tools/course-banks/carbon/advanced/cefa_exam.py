@@ -17,35 +17,35 @@ q(2, "Which invented AGBOR measure carries the capital recovery factor 0.4021148
  ["Tune the fired heaters, over 5 years",
   "Vapour recovery on the storage tanks, over 12 years",
   "Solar for purchased power, 20 years"],
- "Keyed from the factor column of SECTION 18: 0.40211480 sits on the 3 year row. Five years gives 0.26379748, twelve 0.14676332 and twenty 0.11745962.")
+ "Keyed from the factor column of the cost table: 0.40211480 sits on the 3 year row. Five years gives 0.26379748, twelve 0.14676332 and twenty 0.11745962.")
 
-q(0, "Which net annual cost and cost per tonne does SECTION 18 print for Solar for purchased power at 0.1?",
+q(0, "Which net annual cost and cost per tonne does the cost table print for Solar for purchased power at 0.1?",
  "96300.31 net, 45.8573 per tonne",
  ["217300.31 net, 45.8573 per tonne",
   "96300.31 net, -13.5714 per tonne",
   "65525.62 net, 35.4193 per tonne"],
  "Solar's row: net 96300.31, per tonne 45.8573, both in USD. Its annualised capital is 217300.31; -13.5714 is its straight-line figure; 65525.62 with 35.4193 is the vapour recovery row.")
 
-q(3, "Vapour recovery on the storage tanks appears in SECTION 18 at 35.4193, 14.5045 and 316.7568 USD a tonne. Which figure does the curve rank it by?",
+q(3, "Vapour recovery on the storage tanks appears in the cost table at 35.4193, 14.5045 and 316.7568 USD a tonne. Which figure does the curve rank it by?",
  "35.4193, levelised at the rate of 0.1",
  ["14.5045, straight line at a rate of 0",
   "316.7568, its capital against one year",
   "-29.7913, the plain mean of the curve"],
- "SECTION 20 ranks the measures cheapest first and prints order 4 at 35.4193, the cost per tonne at 0.1 in SECTION 18. 14.5045 is the rate-0 column, 316.7568 the capital-against-one-year column marked computed here, and -29.7913 the plain mean (computed here).")
+ "The curve ranks the measures cheapest first and prints order 4 at 35.4193, the cost per tonne at 0.1 in the cost table. 14.5045 is the rate-0 column, 316.7568 the capital-against-one-year column marked computed here, and -29.7913 the plain mean (computed here).")
 
 q(1, "What does the curve's refusedNote say of a measure abatementCost refused?",
  "It is off the curve and out of every total until it is costed.",
  ["It is placed last on the curve at a cost per tonne of 0 USD.",
   "It stays in totalAbatementTonnes and leaves the weighted average.",
   "It is costed at a capital of 0 and named in the assumedZero field."],
- "SECTION 19, the refusedNote verbatim: \"A refused measure is off the curve and out of every total until it is costed.\" assumedZero names blank running figures only, and a refused measure is not placed on the curve at any cost.")
+ "The engine's refusedNote verbatim: \"A refused measure is off the curve and out of every total until it is costed.\" assumedZero names blank running figures only, and a refused measure is not placed on the curve at any cost.")
 
 q(0, "An invented abatement of -500 t a year is sent for the Heat integration project. Which reasons does the refusal give?",
  "A measure that adds emissions is no abatement, and its cost per tonne would change sign.",
  ["A blank abatement is not read as 0, which would move the measure down the curve.",
   "An abatement of -500 t exceeds what the heaters emit, so the claim is an over-claim.",
   "A negative abatement is read as 0, and the field is named in the assumedZero list."],
- "SECTION 19 gives two grounds: adding emissions is no abatement, and the sign of the per-tonne figure would flip. Over-claims are a curve check in SECTION 21, and assumedZero covers only running figures.")
+ "The course gives two grounds: adding emissions is no abatement, and the sign of the per-tonne figure would flip. Over-claims are a check made on the curve, and assumedZero covers only running figures.")
 
 # --- the curve (SECTION 20)
 q(2, "Which step on the Agbor curve runs from 7160.000 t to 9260.000 t?",
@@ -55,7 +55,7 @@ q(2, "Which step on the Agbor curve runs from 7160.000 t to 9260.000 t?",
   "The third step, 3400.000 t a year wide"],
  "Order 5 starts where order 4 stops, at 7160.000, and stops at 9260.000; its width is Solar's 2100.000 t a year.")
 
-q(1, "The Agbor curve's summary cost per tonne and the digest's plain mean carry opposite signs. Which one does the engine return?",
+q(1, "The Agbor curve's summary cost per tonne and the course's plain mean carry opposite signs. Which one does the engine return?",
  "weightedAverageCostPerTonne, 18.7868 USD",
  ["The plain mean, -29.7913 USD",
   "netAnnualCostOfAll, 18.7868 USD",
@@ -63,7 +63,7 @@ q(1, "The Agbor curve's summary cost per tonne and the digest's plain mean carry
  "Only the weighted figure is an engine output. The unweighted -29.7913 is marked computed here, and netAnnualCostOfAll is a money total of 290443.84 USD.")
 
 # --- sources and over-claims (SECTION 21)
-q(3, "Suppose every claim on a curve were checked and the only issue were two measures on one source. What does SECTION 21 say of the verdict?",
+q(3, "Suppose every claim on a curve were checked and the only issue were two measures on one source. What does the course say of the verdict?",
  "It stands, and is labelled an upper bound.",
  ["It is none, as the claims are not additive.",
   "It is none, and the basis names the source.",
@@ -77,7 +77,7 @@ q(3, "The 9400 t claim is run with the flare's emission not passed. Which source
   "steam"],
  "With the flare's emission left out, the flare joins the sources the basis names, four in all. Three are named on the six as costed, and one, steam, once every computed source is passed.")
 
-q(0, "In the digest's own words, what does raising a claim beyond its source's emission do to how a measure looks?",
+q(0, "In the course's own words, what does raising a claim beyond its source's emission do to how a measure looks?",
  "It makes the measure look cheaper as well as larger.",
  ["It leaves the cost per tonne at 78.1002 USD a tonne.",
   "It raises the net annual cost to match the new tonnes.",
@@ -133,7 +133,7 @@ q(1, "When priceSaving calls abatementCost for the invented Agbor saving, which 
  ["The energy saving, 11800 GJ",
   "annualValue, 88500.00 USD a year",
   "The SYNTHETIC factor, 56.1 kg CO2e per GJ"],
- "The hand-over maps tonnes to the abatement slot. Money, 88500.00, fills the savings slot; the gigajoules and the factor are not among the three arguments the digest names.")
+ "The hand-over maps tonnes to the abatement slot. Money, 88500.00, fills the savings slot; the gigajoules and the factor are not among the three arguments the course names.")
 
 q(3, "In the direct abatementCost call for the invented saving, over 8 years at 0.1, which pair is the capital recovery factor and the annualised capital?",
  "0.18744402 and 39363.24 USD",
@@ -168,20 +168,20 @@ q(0, "Which heating value basis does priceSaving return for the invented Agbor s
  ["HHV, the basis the factor would need",
   "None, with the basisNote attached",
   "LHV for money and HHV for carbon"],
- "SECTION 23: the saving, the fuel price and the factor are all declared on LHV, and the output table reads basis LHV. The basisNote is the no-basis-declared row, and a saving on LHV with a factor on HHV is refused.")
+ "In the course, the saving, the fuel price and the factor are all declared on LHV, and the output table reads basis LHV. The basisNote is the no-basis-declared row, and a saving on LHV with a factor on HHV is refused.")
 
 q(2, "The flare's emission is left out and the over-claims column on the 9400 t curve comes back empty. How is that empty column read?",
  "The flare's claim was not checked, and the basis names the flare.",
  ["The flare's 9400 t claim fits within what the flare emits.",
   "The curve found no over-claim, so it gives a verdict on the target.",
   "The flare's claim was refused and taken off the curve and totals."],
- "SECTION 21: \"Where a claim acts on a source whose emission is not passed, it cannot be checked, the verdict is none and the basis names the source.\" That row prints the basis naming steam, flare, power, vents and a total abatement of 18660.000 t, so the claim stays on the curve.")
-q(1, "What does SECTION 18 print for Solar for purchased power with the whole capital set against one year?",
+ "The course states: \"Where a claim acts on a source whose emission is not passed, it cannot be checked, the verdict is none and the basis names the source.\" That row prints the basis naming steam, flare, power, vents and a total abatement of 18660.000 t, so the claim stays on the curve.")
+q(1, "What does the cost table print for Solar for purchased power with the whole capital set against one year?",
  "823.3333 USD a tonne, in the one-year column",
  ["764.5161 USD a tonne, in the one-year column",
   "-13.5714 USD a tonne, at a rate of 0",
   "45.8573 USD a tonne, at a rate of 0.1"],
- "Of SECTION 18's two columns, the capital-against-one-year column is the one marked computed here: 823.3333 for Solar and 764.5161 for flare recovery. -13.5714 is Solar's cost per tonne at a rate of 0 and 45.8573 its cost per tonne at 0.1.")
+ "Of the cost table's two columns, the capital-against-one-year column is the one marked computed here: 823.3333 for Solar and 764.5161 for flare recovery. -13.5714 is Solar's cost per tonne at a rate of 0 and 45.8573 its cost per tonne at 0.1.")
 
 q(3, "On a measure with capital, which box left blank draws the refusal that speaks of setting a one-off capital cost against one year's saving?",
  "The life",
@@ -225,14 +225,14 @@ q(1, "With the electricity factor blank, what does the Agbor inventory print?",
   "A refusal naming purchased electricity"],
  "The inventory still totals, one line short, and says so: 45112.276 with reportable false and one line that could not be computed.")
 
-q(2, "Which set of inputs does SECTION 18 print for Tune the fired heaters?",
+q(2, "Which set of inputs does the cost table print for Tune the fired heaters?",
  "Capital 18000 USD over 5 years, factor 0.26379748",
  ["Capital 18000 USD over 3 years, factor 0.40211480",
   "Capital 45000 USD over 5 years, factor 0.26379748",
   "Capital 18000 USD over 5 years, factor 0.13147378"],
  "Heater tuning: 18000 of capital, a 5 year life, 0.26379748. The 3 year life and 45000 of capital belong to trap repair, and 0.13147378 to the two 15 year measures.")
 
-q(0, "What annual cost does SECTION 18 print for Vapour recovery on the storage tanks?",
+q(0, "What annual cost does the cost table print for Vapour recovery on the storage tanks?",
  "14000 USD a year",
  ["21000 USD a year",
   "105000 USD a year",
@@ -244,28 +244,28 @@ q(3, "Which of these abatementCost calls returns costPerTonne none without refus
  ["The abatement left blank",
   "An abatement of -500 t a year",
   "The capital cost left blank"],
- "The typed zero is the one call of the four that SECTION 19 prints as accepted, and it answers costPerTonne none with paysForItself false. The blank abatement, the -500 t and the blank capital are each refused.")
+ "The typed zero is the one call of the four that the course prints as accepted, and it answers costPerTonne none with paysForItself false. The blank abatement, the -500 t and the blank capital are each refused.")
 
 q(2, "The 9400 t curve prints a residual to target of 0.000 t. Which meetsTarget does the same row print?",
  "none, beside that residual of 0.000 t",
  ["true, as the residual to target is 0.000 t",
   "true, and labelled an upper bound",
   "false, with a residual of 1370.083 t"],
- "SECTION 21 prints meetsTarget none on that row, and says where a claim exceeds what its source emits the curve adds up tonnes that do not exist. The residual of 1370.083 t is the six measures as costed, whose basis names sources with no computed emission.")
+ "The course prints meetsTarget none on that row, and says where a claim exceeds what its source emits the curve adds up tonnes that do not exist. The residual of 1370.083 t is the six measures as costed, whose basis names sources with no computed emission.")
 
-q(1, "What does SECTION 18 print as the Heat integration project's cost per tonne at a rate of 0 (straight line)?",
+q(1, "What does the cost table print as the Heat integration project's cost per tonne at a rate of 0 (straight line)?",
  "-66.6667 USD a tonne",
  ["-14.2492, at 0.1",
   "-120.5882, capital 0 typed",
   "688.2353 USD, one year"],
- "Straight line, the rate-0 column: -66.6667. The 0.1 column gives -14.2492, capital 0 typed gives -120.5882 (SECTION 19), and 688.2353 sits in the one-year column marked computed here.")
+ "Straight line, the rate-0 column: -66.6667. The 0.1 column gives -14.2492, capital 0 typed gives -120.5882, and 688.2353 sits in the one-year column marked computed here.")
 
-q(0, "Which of these does SECTION 25 list as a rule in force for the path?",
+q(0, "Which of these does the course list as a rule in force for the path?",
  "A measure with no start year is named.",
  ["A measure with no start year starts in the baseline year.",
   "A baseline of zero is accepted from an inventory that computed nothing.",
   "A year whose measures abate more than the baseline is drawn at zero."],
- "SECTION 25 places three path rules in SECTION 22: a baseline that is not positive is refused, a measure with no start year is named, and a year whose scheduled measures abate more than the baseline is refused. SECTION 22 prints the unscheduled measure left off the path.")
+ "The course lists three path rules: a baseline that is not positive is refused, a measure with no start year is named, and a year whose scheduled measures abate more than the baseline is refused. The path prints the unscheduled measure left off it.")
 
 q(3, "Name the curve's costliest step and the year it joins the path.",
  "Flare gas recovery, 2030",
@@ -295,14 +295,14 @@ q(0, "What share of Agbor's 877000.000 GJ does Imported steam carry?",
   "1.040085"],
  "Imported steam's 41000.000 GJ is 0.046750 of the total. The other shares are purchased power and fuel gas, and 1.040085 is a ratio to the peer.")
 
-q(3, "707.2581 MJ a tonne: which arithmetic does SECTION 24 show for it?",
+q(3, "707.2581 MJ a tonne: which arithmetic does the course show for it?",
  "Total GJ x 1000 over the throughput in tonnes",
  ["Total GJ over the peer intensity of 680",
   "Fuel gas GJ x 1000 over the throughput",
   "Total GJ x 1000 over 781000.000 GJ"],
  "877000.000 x 1000 / 1240000 = 707.2581, marked computed here and equal to the engine. Dividing by the peer gives the ratio 1.040085, a different output.")
 
-q(2, "The Heat integration project: which figure is its net annual cost in SECTION 18?",
+q(2, "The Heat integration project: which figure is its net annual cost in the cost table?",
  "-48447.11 USD",
  ["361552.89 USD",
   "-127251.65 USD",

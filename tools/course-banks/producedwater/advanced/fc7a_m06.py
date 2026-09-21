@@ -30,7 +30,7 @@ q(2, "What does this module state about the dissolved and soluble oil floor?",
  "That there is one under any outlet a train can reach, and that no value for it is stated here, so the value is the caller's own.",
  ["That it is the outlet concentration below which no device in this module removes anything at all, and that it is reported back on the return as the truncated tail.",
   "That it is declared in the frozen constants object and applied to every train return without being asked for.",
-  "That it exists, and that it customarily falls between the two figures the verdict block of the digest prints."],
+  "That it exists, and that it customarily falls between the two figures the verdict block of the course prints."],
  "The existence is stated on every train return. The floor only matters where a train's DISPERSED prediction falls below it.")
 
 q(3, "Every API 421 return that carries the horizontal velocity check also carries velocityRuleComplete false. What is missing?",

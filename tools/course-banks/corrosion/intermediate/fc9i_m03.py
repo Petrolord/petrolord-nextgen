@@ -23,12 +23,12 @@ q(0, "Which course on this platform owns the erosional velocity criterion?",
   "The Well Integrity and P and A course, in the Drilling module."],
  "This course cites the owner and states that this engine has no erosional-velocity limit, which is a pivot between two courses rather than a derivation you can run here. The repair deliberately did not add one.")
 
-q(3, "One of the digest's streams runs at a Reynolds number of 3.3754. Which branch does this module's friction factor take there?",
+q(3, "One of the course's streams runs at a Reynolds number of 3.3754. Which branch does this module's friction factor take there?",
  "The laminar branch.",
  ["The turbulent branch, since every production stream is turbulent.",
   "Neither, because the engine refuses a Reynolds number below the switch.",
   "Both, because the engine blends the two branches near the switch."],
- "That stream is viscous, small and slow, and it is in the digest so a lesson has one laminar case. Its friction factor comes from the other expression entirely.")
+ "That stream is viscous, small and slow, and it is in the course so a lesson has one laminar case. Its friction factor comes from the other expression entirely.")
 
 q(1, "At what Reynolds number does this module's friction factor change branch, and how was that figure established?",
  "At 4000.000000, bisected on the branch NAME the engine returns.",
@@ -109,7 +109,7 @@ q(0, "Inside this module, which of the two quantities is a definition rather tha
 
 q(1, "On the studio's shipped default case, what is this module's Reynolds number?",
  "416686.8569.",
- ["313781.4400, which is the figure the first of the digest's streams carries.",
+ ["313781.4400, which is the figure the first of the course's streams carries.",
   "1063231.0691, the figure carried by the one stream whose film is stripped.",
   "63287.5636, which is the swept row at one metre a second."],
  "Reynolds numbers print to four decimals in this course, because a number in the hundreds of thousands carries no information in its millionths. That case is turbulent and its wall shear is 14.408065 Pa.")

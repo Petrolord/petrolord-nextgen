@@ -40,7 +40,7 @@ q(2, "On the teaching case the same NRR 27.000000 dB protector gives an attenuat
  ["The engine derates the label by protector type before crediting an A-weighted level.",
   "The field derating halves every credit whenever the data it is given is A-weighted.",
   "The floor at zero removes a flat 7 dB from any credit on an A-weighted level."],
- "The engine's Appendix B rule is A-weighted minus (NRR - 7) and C-weighted minus the NRR, so the two attenuations on one label differ by exactly the 7, which section 3 measures as 7.000000000000 dB by taking 30 less the attenuation at an NRR of 30. Derating by type is the separate NIOSH_TYPE method, halving the credit is the field derating, and the floor applies only where the rule would give a negative attenuation.")
+ "The engine's Appendix B rule is A-weighted minus (NRR - 7) and C-weighted minus the NRR, so the two attenuations on one label differ by exactly the 7, which the course measures as 7.000000000000 dB by taking 30 less the attenuation at an NRR of 30. Derating by type is the separate NIOSH_TYPE method, halving the credit is the field derating, and the floor applies only where the rule would give a negative attenuation.")
 
 q(0, "On the A-weighted teaching case, 97.600000 dBA with an NRR of 27.000000 dB, what attenuation does the field derating credit?",
  "10.000000 dB",
@@ -94,7 +94,7 @@ q(1, "Which method answers whether an employer must turn to engineering controls
  ["`OSHA_APPENDIX_B`, the adequacy test of 1910.95",
   "`NIOSH_TYPE`, the derating by protector type",
   "`OSHA_DUAL`, the dual-protection rule"],
- "The field derating is the method the digest attaches to the engineering-controls question, and it credits (NRR - 7) x 50 percent on A-weighted data. Appendix B carries the adequacy test instead, the NIOSH derating by type says what a kind of protector is worth, and dual protection says what two worn together give.")
+ "The field derating is the method the course attaches to the engineering-controls question, and it credits (NRR - 7) x 50 percent on A-weighted data. Appendix B carries the adequacy test instead, the NIOSH derating by type says what a kind of protector is worth, and dual protection says what two worn together give.")
 
 q(0, "What does the engine return when a protector call names a method it does not recognise?",
  "A refusal on `method`: \"method must be one of OSHA_APPENDIX_B, OSHA_FIELD_50, OSHA_DUAL, NIOSH_TYPE\"",

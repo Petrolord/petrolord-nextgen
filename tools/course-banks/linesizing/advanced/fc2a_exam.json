@@ -195,7 +195,7 @@
    "The outlet solve returns a NaN when it cannot answer, which a caller can test for, and the two loops return a plausible number that no test can distinguish."
   ],
   "answer": 2,
-  "explanation": "Both loops converge everywhere this digest looked. What is absent is the evidence, and a second run cannot supply it because nothing here reads a clock or a random number."
+  "explanation": "Both loops converge everywhere this course looked. What is absent is the evidence, and a second run cannot supply it because nothing here reads a clock or a random number."
  },
  {
   "prompt": "What is the contract every refusal in this engine keeps to, and why is the shape the useful part?",
@@ -429,7 +429,7 @@
   "explanation": "Not one of the three Expert readings can be derived from the other two. Each needs inputs the others never ask for."
  },
  {
-  "prompt": "Section 16 closes on two things the engine still accepts and arguably should not. What are they, and what does this course grade on either of them?",
+  "prompt": "The course's account of refusals closes on two things the engine still accepts and arguably should not. What are they, and what does this course grade on either of them?",
   "options": [
    "Colebrook answering past the roughness it was fitted for and the band between the branches, both of which are graded through the friction factor a sizing sweep uses.",
    "The two iterations that never report convergence and the three returns outside the refusal contract, both of which are graded through the gas rates that depend on them.",

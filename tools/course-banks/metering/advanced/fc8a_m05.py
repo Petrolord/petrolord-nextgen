@@ -20,7 +20,7 @@ q(3, "What is the difference in mechanism between the standing loss and the work
   "Standing loss is what evaporates and working loss is what wets the shell."],
  "The standing half depends on the size of the vapour space and how much product vapour it holds, and the working half depends on throughput.")
 
-q(2, "The digest prints a relation over the two halves of the annual loss. What does it carry?",
+q(2, "The course prints a relation over the two halves of the annual loss. What does it carry?",
  "The standing loss at 3537.6108 lb/yr, the working loss at 73605.2059 lb/yr, a difference of -70067.5951 and a ratio of 0.048062.",
  ["A difference of 70067.5951 lb/yr, since a difference between two losses is printed as a magnitude and the sign is carried by the order of the two rows.",
   "A ratio of 0.048062 formed as the working loss over the standing loss.",

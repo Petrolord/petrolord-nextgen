@@ -1,0 +1,670 @@
+{
+ "app_slug": "relief",
+ "rows": 42,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/relief, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "fields": {
+    "explanation": {
+     "old": "Each figure carries its own Reynolds number, 17546.394776 for the shortcut and 17412.317969 for the loop. The shortcut is what a hand calculation usually does, and the digest prints the ratio between the two areas they imply.",
+     "new": "Each figure carries its own Reynolds number, 17546.394776 for the shortcut and 17412.317969 for the loop. The shortcut is what a hand calculation usually does, and the course prints the ratio between the two areas they imply."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "fields": {
+    "prompt": {
+     "old": "The digest recovers only three of the four published Napier coefficients. Why?",
+     "new": "The course recovers only three of the four published Napier coefficients. Why?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "fields": {
+    "options": {
+     "old": [
+      "A tolerance that the validation suite allows itself on a fit it cannot derive independently.",
+      "The step that the correction takes at its published threshold, caught between the two evaluations.",
+      "One published fit evaluated twice, which is why the digest prints both columns side by side.",
+      "The superheat factor on that row, which the published answer applies and the re-run of it does not."
+     ],
+     "new": [
+      "A tolerance that the validation suite allows itself on a fit it cannot derive independently.",
+      "The step that the correction takes at its published threshold, caught between the two evaluations.",
+      "One published fit evaluated twice, which is why the course prints both columns side by side.",
+      "The superheat factor on that row, which the published answer applies and the re-run of it does not."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "fields": {
+    "options": {
+     "old": [
+      "A relative difference column the digest computes between the published answer and the re-run answer.",
+      "A tolerance the validation suite declares before any case is run against it.",
+      "The precision the digest prints each quantity at, which sets the smallest difference visible.",
+      "The residual the loop stopped on, which bounds how far the re-run answer can be from the published one."
+     ],
+     "new": [
+      "A relative difference column the course computes between the published answer and the re-run answer.",
+      "A tolerance the validation suite declares before any case is run against it.",
+      "The precision the course prints each quantity at, which sets the smallest difference visible.",
+      "The residual the loop stopped on, which bounds how far the re-run answer can be from the published one."
+     ]
+    },
+    "explanation": {
+     "old": "It is one of the very few two figure relationships in this course that a lesson may quote, because the digest works it out rather than a reader forming it. A residual belongs to an iteration and is a statement about the loop.",
+     "new": "It is one of the very few two figure relationships in this course that a lesson may quote, because the course works it out rather than a reader forming it. A residual belongs to an iteration and is a statement about the loop."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "fields": {
+    "explanation": {
+     "old": "Nothing in the tier ranks one of the three against another, and the digest prints no relation between them. Choosing between scenarios happens within one protected item.",
+     "new": "Nothing in the tier ranks one of the three against another, and the course prints no relation between them. Choosing between scenarios happens within one protected item."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-a-relief-valve-is-sized-for",
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "This digest never types a number the engine keeps to itself. It arranges a call whose only possible answer is that constant and says which call, and here three separate arrangements agree, one of them in the blowdown march own choked flow floor.",
+     "new": "This course never types a number the engine keeps to itself. It arranges a call whose only possible answer is that constant and says which call, and here three separate arrangements agree, one of them in the blowdown march own choked flow floor."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-gas-and-vapour",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "C is computed from the exponent and nothing else, which is why the digest can walk it across a column of stated exponents. The factor needing two inputs is F2, and the typed factor on this route is Kb.",
+     "new": "C is computed from the exponent and nothing else, which is why the course can walk it across a column of stated exponents. The factor needing two inputs is F2, and the typed factor on this route is Kb."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-liquid",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints 1.015459516779 for AKASO. What is that figure?",
+     "new": "The course prints 1.015459516779 for AKASO. What is that figure?"
+    },
+    "explanation": {
+     "old": "It is the viscous area over the inviscid one, and it is quoted only because the digest computes and prints it. The converged area over the one pass area is a separate printed ratio of 1.000083905751.",
+     "new": "It is the viscous area over the inviscid one, and it is quoted only because the course computes and prints it. The converged area over the one pass area is a separate printed ratio of 1.000083905751."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-liquid",
+   "ord": 4,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the ratio of the converged area to the one pass area as 1.000083905751. The single pass answer is the smaller of the two, and knowing the size of an approximation is not the same as being allowed to ignore it.",
+     "new": "The course prints the ratio of the converged area to the one pass area as 1.000083905751. The single pass answer is the smaller of the two, and knowing the size of an approximation is not the same as being allowed to ignore it."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-liquid",
+   "ord": 14,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints that field as absent on the inviscid row rather than as a figure. A caller doing arithmetic on it gets zero, which is a perfectly plausible looking Reynolds number, so the absence has to be handled as an absence.",
+     "new": "The course prints that field as absent on the inviscid row rather than as a figure. A caller doing arithmetic on it gets zero, which is a perfectly plausible looking Reynolds number, so the absence has to be handled as an absence."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-from-an-area-to-a-letter",
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "Read the exported table top to bottom: D, E, F, G, H, J, K, L, M, N, P, Q, R and T. Fourteen letters are printed across a span of seventeen, and the three absent ones are what is left. Why the published table leaves them out is not something the engine or the digest says.",
+     "new": "Read the exported table top to bottom: D, E, F, G, H, J, K, L, M, N, P, Q, R and T. Fourteen letters are printed across a span of seventeen, and the three absent ones are what is left. Why the published table leaves them out is not something the engine or the course says."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "A load and a set of conditions arrive, a relieving pressure is worked out, one factor is computed and one is typed, a coefficient is stated, and out comes an area, a letter and a margin. The digest states only that these are three relief cases on one train, and it ranks nothing among them.",
+     "new": "A load and a set of conditions arrive, a relieving pressure is worked out, one factor is computed and one is typed, a coefficient is stated, and out comes an area, a letter and a margin. The course states only that these are three relief cases on one train, and it ranks nothing among them."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 5,
+   "fields": {
+    "explanation": {
+     "old": "The three columns cannot be ranked by load and nothing in the digest offers a conversion between them. The required areas are comparable, because they are the same quantity in the same unit.",
+     "new": "The three columns cannot be ranked by load and nothing in the course offers a conversion between them. The required areas are comparable, because they are the same quantity in the same unit."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 1,
+   "fields": {
+    "options": {
+     "old": [
+      "A time, a pressure and a temperature. No mass, so an inventory profile cannot be read off the call.",
+      "A time, a pressure and a mass. No temperature, which is reported only for the end state.",
+      "A time and a pressure. No temperature at all, which the digest derives from the pressure ratio instead.",
+      "A time, a pressure, a temperature and a mass, which is why the return needs 270 of them."
+     ],
+     "new": [
+      "A time, a pressure and a temperature. No mass, so an inventory profile cannot be read off the call.",
+      "A time, a pressure and a mass. No temperature, which is reported only for the end state.",
+      "A time and a pressure. No temperature at all, which the course derives from the pressure ratio instead.",
+      "A time, a pressure, a temperature and a mass, which is why the return needs 270 of them."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "The digest compares the march against a closed form at the stated case, at a 2.0 in orifice, at a discharge coefficient of 0.60 and from 1800 psia. What is varied across those four rows, and what is not?",
+     "new": "The course compares the march against a closed form at the stated case, at a 2.0 in orifice, at a discharge coefficient of 0.60 and from 1800 psia. What is varied across those four rows, and what is not?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 6,
+   "fields": {
+    "explanation": {
+     "old": "It is the caller's own figure at the top of the range the engine admits for it, and the march applies it once. The time at that value, 220.103588 s, is the shortest of the three the digest walks.",
+     "new": "It is the caller's own figure at the top of the range the engine admits for it, and the march applies it once. The time at that value, 220.103588 s, is the shortest of the three the course walks."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "That inversion is worth holding onto because it cuts against the intuition the Associate tier builds. Across eight orifices the digest counts the distinct final temperatures at 1.",
+     "new": "That inversion is worth holding onto because it cuts against the intuition the Associate tier builds. Across eight orifices the course counts the distinct final temperatures at 1."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "fields": {
+    "options": {
+     "old": [
+      "The step count, because a count that large means the march has spent its budget on this row.",
+      "The minutes, because the conversion is the digest's arithmetic rather than an engine return.",
+      "The time, because it is the reading the study rests on and it carries every stated input with it.",
+      "None of the three, because all three of them come back from the same call and stand or fall together."
+     ],
+     "new": [
+      "The step count, because a count that large means the march has spent its budget on this row.",
+      "The minutes, because the conversion is the course's arithmetic rather than an engine return.",
+      "The time, because it is the reading the study rests on and it carries every stated input with it.",
+      "None of the three, because all three of them come back from the same call and stand or fall together."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "fields": {
+    "prompt": {
+     "old": "Across the sixty-four-fold refinement the time moves by 0.002015907907 s in total, and the digest prints a time to six decimals. What does setting one beside the other show?",
+     "new": "Across the sixty-four-fold refinement the time moves by 0.002015907907 s in total, and the course prints a time to six decimals. What does setting one beside the other show?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "fields": {
+    "explanation": {
+     "old": "Every threshold in the audit is measured the same way, by asking the engine a question whose answer is that edge and nothing else. Where a constant is not exported, this digest measures it and says which question it asked.",
+     "new": "Every threshold in the audit is measured the same way, by asking the engine a question whose answer is that edge and nothing else. Where a constant is not exported, this course measures it and says which question it asked."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "fields": {
+    "prompt": {
+     "old": "One section of the digest has former behaviour as its subject, and nothing follows it. What is the reason for that placement?",
+     "new": "One section of the course has former behaviour as its subject, and nothing follows it. What is the reason for that placement?"
+    },
+    "options": {
+     "old": [
+      "Every sentence above it is about the engine as it ships, so the boundary is visible to a reader.",
+      "The section is the newest and was appended when the repair landed, so it sits where it was added.",
+      "The material is ordered by tier, and the reading module of the last tier is the final one.",
+      "A digest ends with its provenance, and the repair record is the provenance of this one."
+     ],
+     "new": [
+      "Every sentence above it is about the engine as it ships, so the boundary is visible to a reader.",
+      "The section is the newest and was appended when the repair landed, so it sits where it was added.",
+      "The material is ordered by tier, and the reading module of the last tier is the final one.",
+      "A course ends with its provenance, and the repair record is the provenance of this one."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "fields": {
+    "options": {
+     "old": [
+      "A refusal message quoted verbatim inside backticks as the engine's own wording.",
+      "A sentence about former behaviour that reads as current behaviour.",
+      "A figure quoted at the precision the digest prints that quantity class at.",
+      "A statement that a figure is held for literature and is never graded here."
+     ],
+     "new": [
+      "A refusal message quoted verbatim inside backticks as the engine's own wording.",
+      "A sentence about former behaviour that reads as current behaviour.",
+      "A figure quoted at the precision the course prints that quantity class at.",
+      "A statement that a figure is held for literature and is never graded here."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "fields": {
+    "explanation": {
+     "old": "For most of this engine the answer is yes and the digest names the route that would notice. For the viscosity fit and the sphere-drag correlation the answer is no, and the digest names those too.",
+     "new": "For most of this engine the answer is yes and the course names the route that would notice. For the viscosity fit and the sphere-drag correlation the answer is no, and the course names those too."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-a-vessel-emptying-itself",
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "Section 2 measures the same 14.700000000000 three separate ways and this is the third of them. Asking a routine a question whose answer is one constant and nothing else is how a figure it never exports gets measured.",
+     "new": "The course measures the same 14.700000000000 three separate ways and this is the third of them. Asking a routine a question whose answer is one constant and nothing else is how a figure it never exports gets measured."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-a-vessel-emptying-itself",
+   "ord": 6,
+   "fields": {
+    "prompt": {
+     "old": "The digest builds a closed-form time from the engine's own gas coefficient, the recovered gas constant and the stated geometry, then prints the ratio of the marched time to it. What can that column catch?",
+     "new": "The course builds a closed-form time from the engine's own gas coefficient, the recovered gas constant and the stated geometry, then prints the ratio of the marched time to it. What can that column catch?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-a-vessel-emptying-itself",
+   "ord": 9,
+   "fields": {
+    "prompt": {
+     "old": "AFIESERE returns 3469.2925 lb and 648.7449 lb, and the digest prints 0.813004 beside them. Which question does 0.813004 answer?",
+     "new": "AFIESERE returns 3469.2925 lb and 648.7449 lb, and the course prints 0.813004 beside them. Which question does 0.813004 answer?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-a-vessel-emptying-itself",
+   "ord": 15,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints 4.473650 min and -118.862017 degF on the AFIESERE row and marks both as derived. What does that label mean here?",
+     "new": "The course prints 4.473650 min and -118.862017 degF on the AFIESERE row and marks both as derived. What does that label mean here?"
+    },
+    "options": {
+     "old": [
+      "The engine returned both, and the label records only which of its fields carry a unit at all.",
+      "Both came from the closed form rather than from the march, and are printed beside the marched figures for comparison.",
+      "Both were read off the last station of the trajectory rather than off the top-level fields of the return.",
+      "The engine returned a time in s and a temperature in degR, and the digest converted each into a second unit."
+     ],
+     "new": [
+      "The engine returned both, and the label records only which of its fields carry a unit at all.",
+      "Both came from the closed form rather than from the march, and are printed beside the marched figures for comparison.",
+      "Both were read off the last station of the trajectory rather than off the top-level fields of the return.",
+      "The engine returned a time in s and a temperature in degR, and the course converted each into a second unit."
+     ]
+    },
+    "explanation": {
+     "old": "A derived figure is arithmetic on an engine return and the digest says so. What the engine handed back is 268.419002 s and 340.807983 degR, and those are the figures an answer should be recorded at.",
+     "new": "A derived figure is arithmetic on an engine return and the course says so. What the engine handed back is 268.419002 s and 340.807983 degR, and those are the figures an answer should be recorded at."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-customary-depressuring-time",
+   "ord": 1,
+   "fields": {
+    "options": {
+     "old": [
+      "It holds it as the limit the march refuses at, which the digest bisects out at 7199.999985603571 s.",
+      "Nothing at all. There is no constant for it, no returned flag and no verdict of any kind.",
+      "It holds it as a warning edge, so a run past 900.000000 s returns a note.",
+      "It holds it as the default stopping point of a march, so a call with no end pressure stated runs to fifteen minutes."
+     ],
+     "new": [
+      "It holds it as the limit the march refuses at, which the course bisects out at 7199.999985603571 s.",
+      "Nothing at all. There is no constant for it, no returned flag and no verdict of any kind.",
+      "It holds it as a warning edge, so a run past 900.000000 s returns a note.",
+      "It holds it as the default stopping point of a march, so a call with no end pressure stated runs to fifteen minutes."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-customary-depressuring-time",
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "That is the only ratio the digest computes anywhere on this sweep, which is why it is the only one you may quote from it. Every ratio you form yourself down a printed table is a figure nothing stands behind.",
+     "new": "That is the only ratio the course computes anywhere on this sweep, which is why it is the only one you may quote from it. Every ratio you form yourself down a printed table is a figure nothing stands behind."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-customary-depressuring-time",
+   "ord": 5,
+   "fields": {
+    "prompt": {
+     "old": "The design question runs backwards: which orifice meets a stated time. The engine has no route for it. How does the digest fill that gap, and why that way?",
+     "new": "The design question runs backwards: which orifice meets a stated time. The engine has no route for it. How does the course fill that gap, and why that way?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-customary-depressuring-time",
+   "ord": 7,
+   "fields": {
+    "prompt": {
+     "old": "Across eight orifices the final temperature column reads 340.807983 degR on every row, and the digest counts the distinct values at 1. Why is the count worth more than the column?",
+     "new": "Across eight orifices the final temperature column reads 340.807983 degR on every row, and the course counts the distinct values at 1. Why is the count worth more than the column?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-customary-depressuring-time",
+   "ord": 8,
+   "fields": {
+    "explanation": {
+     "old": "The orifice decides only how long the vessel takes to get there, which is harder to hold than it looks because the orifice is the one thing a designer can change. What does move the end state is the end pressure, and the digest walks seven of them.",
+     "new": "The orifice decides only how long the vessel takes to get there, which is harder to hold than it looks because the orifice is the one thing a designer can change. What does move the end state is the end pressure, and the course walks seven of them."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-customary-depressuring-time",
+   "ord": 12,
+   "fields": {
+    "options": {
+     "old": [
+      "The vessel, since the orifice that empties it in a stated time is fixed once the volume and the two pressures are.",
+      "This march on this vessel, at these gas properties, this discharge coefficient and this step size, reaching 145.000000 psia in 900.000000 s.",
+      "The standard ladder, since it is the area below which a blowdown restriction has to be doubled up.",
+      "The closed form, since the digest solved that integral for the diameter that lands on 900.000000 s."
+     ],
+     "new": [
+      "The vessel, since the orifice that empties it in a stated time is fixed once the volume and the two pressures are.",
+      "This march on this vessel, at these gas properties, this discharge coefficient and this step size, reaching 145.000000 psia in 900.000000 s.",
+      "The standard ladder, since it is the area below which a blowdown restriction has to be doubled up.",
+      "The closed form, since the course solved that integral for the diameter that lands on 900.000000 s."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-a-step-size-is-an-answer",
+   "ord": 10,
+   "fields": {
+    "prompt": {
+     "old": "Each row of the refinement study carries a ratio in its last column, and the digest computes nothing between rows. What follows for a reader?",
+     "new": "Each row of the refinement study carries a ratio in its last column, and the course computes nothing between rows. What follows for a reader?"
+    },
+    "explanation": {
+     "old": "Each entry is that row's time over the time at the finest step. Take the reading deliberately and say you took it, which is a different act from quoting a figure the digest computed.",
+     "new": "Each entry is that row's time over the time at the finest step. Take the reading deliberately and say you took it, which is a different act from quoting a figure the course computed."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-point-source-twice",
+   "ord": 1,
+   "fields": {
+    "prompt": {
+     "old": "The solid angle in the point-source relation is not exported, and the digest recovers 12.566370614359 from one returned intensity against its own stated inputs. Which class does that figure fall into?",
+     "new": "The solid angle in the point-source relation is not exported, and the course recovers 12.566370614359 from one returned intensity against its own stated inputs. Which class does that figure fall into?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-point-source-twice",
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "The AFIESERE flare is stated as 210000.0000 lb/hr at 19400.0000 Btu/lb, and the digest derives a heat release of 1193971.5392 kW. Who owns that derivation?",
+     "new": "The AFIESERE flare is stated as 210000.0000 lb/hr at 19400.0000 Btu/lb, and the course derives a heat release of 1193971.5392 kW. Who owns that derivation?"
+    },
+    "options": {
+     "old": [
+      "The engine, which converts the rate and the heating value on the way into the intensity relation.",
+      "The caller. The engine takes a heat release in kW and knows nothing about rates or heating values.",
+      "The oracle, which carries the unit packaging so the engine can work in kW throughout.",
+      "The digest alone, since the engine refuses a release stated in any unit other than Btu/hr."
+     ],
+     "new": [
+      "The engine, which converts the rate and the heating value on the way into the intensity relation.",
+      "The caller. The engine takes a heat release in kW and knows nothing about rates or heating values.",
+      "The oracle, which carries the unit packaging so the engine can work in kW throughout.",
+      "The course alone, since the engine refuses a release stated in any unit other than Btu/hr."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-point-source-twice",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "At 40.000000 m the intensity is 17.482435 kW/m2 and at 80.000000 m it is 4.370609 kW/m2. Which comparison does the digest invite you to make on those rows?",
+     "new": "At 40.000000 m the intensity is 17.482435 kW/m2 and at 80.000000 m it is 4.370609 kW/m2. Which comparison does the course invite you to make on those rows?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-point-source-twice",
+   "ord": 9,
+   "fields": {
+    "options": {
+     "old": [
+      "A setback needs a flame height, which this engine has no route for and the digest never prints.",
+      "The four customary intensities are held for literature, so no distance solved against one may be reported.",
+      "The point source is a screening model, and a setback has to come from a solid-flame model instead.",
+      "The setback, the pool fire behind it and the customary allowable intensities are owned by a merged sibling course."
+     ],
+     "new": [
+      "A setback needs a flame height, which this engine has no route for and the course never prints.",
+      "The four customary intensities are held for literature, so no distance solved against one may be reported.",
+      "The point source is a screening model, and a setback has to come from a solid-flame model instead.",
+      "The setback, the pool fire behind it and the customary allowable intensities are owned by a merged sibling course."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-what-the-method-does-not-know",
+   "ord": 4,
+   "fields": {
+    "options": {
+     "old": [
+      "The exponent of 0.820000000000, which falls straight out of the log ratio of two duties taken at 100 and at 1000 ft2 respectively.",
+      "The credit between the two constants, which the digest measures as a drainage factor of 1.642857142857.",
+      "The unit packaging, by checking the USC pair against the published SI pair with the exponent carried through the conversion.",
+      "The physics, since the same duty comes back from a second correlation the oracle carries in SI."
+     ],
+     "new": [
+      "The exponent of 0.820000000000, which falls straight out of the log ratio of two duties taken at 100 and at 1000 ft2 respectively.",
+      "The credit between the two constants, which the course measures as a drainage factor of 1.642857142857.",
+      "The unit packaging, by checking the USC pair against the published SI pair with the exponent carried through the conversion.",
+      "The physics, since the same duty comes back from a second correlation the oracle carries in SI."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-what-was-repaired-and-what-was-not",
+   "ord": 1,
+   "fields": {
+    "options": {
+     "old": [
+      "The digest's audit section, the published golden file, and the validation oracle's header.",
+      "The lesson exercises, the teaching lab, and the three explorer panels that are built on it.",
+      "Engine comments, the wave's recon and findings records, and the repair's findings file.",
+      "The refusal messages, the warning texts, and the notes the engine returns on a successful call."
+     ],
+     "new": [
+      "The course's audit section, the published golden file, and the validation oracle's header.",
+      "The lesson exercises, the teaching lab, and the three explorer panels that are built on it.",
+      "Engine comments, the wave's recon and findings records, and the repair's findings file.",
+      "The refusal messages, the warning texts, and the notes the engine returns on a successful call."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-what-was-repaired-and-what-was-not",
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "Naming the two is the honest statement of the limit. Sections 27 and 28 are the standing form of that lesson, about the engine as it is now, and nothing graded in this course rests on either of the two shared fits.",
+     "new": "Naming the two is the honest statement of the limit. The previous module's audit lessons are the standing form of that lesson, about the engine as it is now, and nothing graded in this course rests on either of the two shared fits."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-what-was-repaired-and-what-was-not",
+   "ord": 14,
+   "fields": {
+    "prompt": {
+     "old": "The digest counts the history that sits in the engine source: 12 comment lines carrying the repair marker and 16 written in a past tense, in a module 619 lines long. What is that count for?",
+     "new": "The course counts the history that sits in the engine source: 12 comment lines carrying the repair marker and 16 written in a past tense, in a module 619 lines long. What is that count for?"
+    }
+   }
+  }
+ ]
+}

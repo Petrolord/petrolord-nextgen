@@ -36,12 +36,12 @@ q(1, "Which figure does tankFarmCover report as the IBAFO farm's pumpable stock?
   "21845.000 m3"],
  "10123.000 m3 is the sum of each tank's stock above its own heel. 10077.700 m3 is the farm's stock less the farm's heel in one step, 10732.700 m3 the stock with no heel taken off, and 21845.000 m3 the working capacity.")
 
-q(1, "The digest prints the farm's stock less the farm's heel as 10077.700 m3 and says it is not pumpable stock. What is wrong with it?",
+q(1, "The course prints the farm's stock less the farm's heel as 10077.700 m3 and says it is not pumpable stock. What is wrong with it?",
  "It fills IB-T2's heel shortfall with product from the other tanks.",
  ["It counts IB-T2's 164.700 m3 as pumpable, since the whole stock is netted in one step.",
   "It takes the heel off twice, once per tank and once again for the farm.",
   "It leaves the heel of IB-T4 out, since kerosene is netted apart from petrol."],
- "Netting across the farm lets IB-T2's missing heel volume be made good from other tanks' product. In the digest's words, \"no pump lends one tank's volume to another's heel\". Counted tank by tank the pumpable stock is 10123.000 m3.")
+ "Netting across the farm lets IB-T2's missing heel volume be made good from other tanks' product. In the course's words, \"no pump lends one tank's volume to another's heel\". Counted tank by tank the pumpable stock is 10123.000 m3.")
 
 q(0, "The IBAFO farm prints 3.8345 days of cover. Which two figures does the engine divide to get it?",
  "Pumpable stock 10123.000 m3 by daily throughput 2640.000 m3.",
@@ -83,7 +83,7 @@ q(3, "IB-T2 holds 164.700 m3 in a 7500.000 m3 tank. How does its ullage of 7335.
  ["It is left out, since IB-T2 sits below its heel.",
   "It enters less IB-T2's heel of 210.000 m3.",
   "It enters as IB-T2's capacity less its heel."],
- "IB-T2's row prints capacity 7500.000 m3, stock 164.700 m3 and ullage 7335.300 m3, and the digest counts the farm's ullage as each tank's capacity less its stock, never below zero, summed over the tanks. The heel appears in no part of that count.")
+ "IB-T2's row prints capacity 7500.000 m3, stock 164.700 m3 and ullage 7335.300 m3, and the course counts the farm's ullage as each tank's capacity less its stock, never below zero, summed over the tanks. The heel appears in no part of that count.")
 
 q(1, "IBAFO's days of cover of 3.8345 is pumpable stock over daily throughput. Which quantity has no place in that formula?",
  "A receipt due into the farm.",

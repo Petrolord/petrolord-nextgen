@@ -97,7 +97,7 @@ q(0, "Library inputs such as 4.6 cSt and 22 cSt print with one decimal or none, 
  ["The engine rounds each input to its measured precision.",
   "Viscosity is stored in whole cSt, and specific gravity needs four decimals for API.",
   "Only specific gravity is blended, so only it carries full precision."],
- "The digest's precision rule: every computed figure prints to four decimals, and every input prints exactly as it is typed. Viscosity in the library is typed, and specific gravity is computed from API by sgFromApi.")
+ "The course's precision rule: every computed figure prints to four decimals, and every input prints exactly as it is typed. Viscosity in the library is typed, and specific gravity is computed from API by sgFromApi.")
 
 q(2, "Why can a quantity that mixes on a straight line in specific gravity not also mix on a straight line in API?",
  "API is a hyperbola in specific gravity, so equal steps of one are unequal steps of the other.",

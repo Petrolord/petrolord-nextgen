@@ -14,56 +14,56 @@ q(2, "On the invented AGBOR inventory (IPCC AR6 GWP100, fossil methane), which e
  ["6189.848 tCO2e, the Flaring (CO2) line alone",
   "1372.285 tCO2e, the unburned CH4 line alone",
   "9400.000 t, the claim of Flare gas recovery on it"],
- "SECTION 21: each source's emission is its CO2 plus its methane in CO2e, as the Carbon Studio passes it to the curve; the flare source is passed as 7562.133 tCO2e. 6189.848 and 1372.285 tCO2e are its two inventory lines, and 9400 t is the enlarged claim of the second curve.")
+ "In the target checks, each source's emission is its CO2 plus its methane in CO2e, as the Carbon Studio passes it to the curve; the flare source is passed as 7562.133 tCO2e. 6189.848 and 1372.285 tCO2e are its two inventory lines, and 9400 t is the enlarged claim of the second curve.")
 
 q(0, "Flare gas recovery's invented claim is raised to 9400 t a year with the flare's emission passed. What does the over-claims column print?",
  "flare: claimed 9400.000 against 7562.133 emitted",
  ["flare: claimed 9400.000 against 6189.848 emitted",
   "flare: claimed 6200.000 against 7562.133 emitted",
   "none, since the flare's emission was passed to the curve"],
- "SECTION 21, the curve with flare gas recovery claiming 9400 t: over-claims flare: claimed 9400.000 against 7562.133 emitted. 6189.848 tCO2e is the flare's CO2 line alone, and at its costed 6200 t the first curve prints over-claims none.")
+ "The curve with flare gas recovery claiming 9400 t prints over-claims flare: claimed 9400.000 against 7562.133 emitted. 6189.848 tCO2e is the flare's CO2 line alone, and at its costed 6200 t the first curve prints over-claims none.")
 
-q(3, "Which targetBasis does SECTION 21 print on the curve where Flare gas recovery claims 9400 t with the flare's emission passed?",
+q(3, "Which targetBasis does the course print on the curve where Flare gas recovery claims 9400 t with the flare's emission passed?",
  "not assessed: claims exceed what a source emits",
  ["not assessed: no computed emission to check the claims on steam, power, vents",
   "not assessed: no computed emission to check the claims on steam, flare, power, vents",
   "not assessed: no computed emission to check the claims on steam"],
- "SECTION 21 prints \"not assessed: claims exceed what a source emits\" on that row. The steam, power, vents basis is the six measures as costed, the basis naming the flare is the same claim with the flare's emission not passed, and the steam-only basis is the curve with every computed source passed.")
+ "The course prints \"not assessed: claims exceed what a source emits\" on that row. The steam, power, vents basis is the six measures as costed, the basis naming the flare is the same claim with the flare's emission not passed, and the steam-only basis is the curve with every computed source passed.")
 
 q(1, "Rerun that 9400 t curve, this time giving it no flare emission. What do the over-claims column and the targetBasis print?",
  "none, and the targetBasis names the flare among the sources it could not check",
  ["flare: claimed 9400.000 against 7562.133 emitted, found as on the row before",
   "flare: claimed 9400.000 against 0.000 emitted, since no emission was passed",
   "none, and the targetBasis reads claims exceed what a source emits"],
- "SECTION 21, the same claim with the flare's emission not passed: over-claims none, meetsTarget none, targetBasis \"not assessed: no computed emission to check the claims on steam, flare, power, vents\". With nothing passed for the flare there is nothing to check the claim against.")
+ "The same claim with the flare's emission not passed prints over-claims none, meetsTarget none, targetBasis \"not assessed: no computed emission to check the claims on steam, flare, power, vents\". With nothing passed for the flare there is nothing to check the claim against.")
 
 q(0, "On the six invented Agbor measures as costed, which measures does the engine list among the unchecked claims?",
  "Repair failed steam traps, Solar for purchased power and Vapour recovery on the storage tanks",
  ["Tune the fired heaters, Solar for purchased power and Vapour recovery on the storage tanks",
   "Repair failed steam traps, Flare gas recovery and Vapour recovery on the storage tanks",
   "Repair failed steam traps, Solar for purchased power and the Heat integration project"],
- "SECTION 21 lists the unchecked claims of the first row: Repair failed steam traps (steam), Solar for purchased power (power) and Vapour recovery on the storage tanks (vents), each with the reason no emission was given for the source. Heaters and flare are the two sources passed.")
+ "The course lists the unchecked claims of the first row: Repair failed steam traps (steam), Solar for purchased power (power) and Vapour recovery on the storage tanks (vents), each with the reason no emission was given for the source. Heaters and flare are the two sources passed.")
 
 q(2, "Every source the Agbor inventory computes is passed to the curve. Which source does uncheckedSources still name?",
  "steam, which has no line of its own in the Agbor inventory",
  ["power, the Purchased electricity line on Scope 2",
   "vents, the vented and fugitive methane line",
   "flare, as its emission is passed as its CO2 line alone"],
- "SECTION 21: with every source the inventory computes passed, uncheckedSources is steam: the Agbor inventory has no line of its own for steam. Power (10988.000 tCO2e) and vents (2622.400 tCO2e) join heaters and flare, and the flare is passed as its CO2 plus its methane.")
+ "In the target checks, with every source the inventory computes passed, uncheckedSources is steam: the Agbor inventory has no line of its own for steam. Power (10988.000 tCO2e) and vents (2622.400 tCO2e) join heaters and flare, and the flare is passed as its CO2 plus its methane.")
 
-q(3, "SECTION 21 costs Flare gas recovery at its 9400 t claim. Against the costed 6200 t, what moves?",
+q(3, "The course costs Flare gas recovery at its 9400 t claim. Against the costed 6200 t, what moves?",
  "The net annual cost stays at 484221.51 USD and the cost per tonne falls",
  ["The net annual cost falls to 290443.84 USD and the cost per tonne holds",
   "The net annual cost stays at 484221.51 USD and the cost per tonne rises",
   "Both hold, at 484221.51 USD and 78.1002 USD a tonne, since no cost moves"],
- "SECTION 21 costs the 9400 t claim at a net annual cost of 484221.51 USD, the figure SECTION 18 prints for the measure at 6200 t and 78.1002 USD a tonne, and reads it: \"The cost per tonne falls as the claimed tonnes rise; the over-claim makes the measure look cheaper as well as larger.\" 290443.84 USD is the curve's netAnnualCostOfAll.")
+ "The course costs the 9400 t claim at a net annual cost of 484221.51 USD, the figure the cost table prints for the measure at 6200 t and 78.1002 USD a tonne, and reads it: \"The cost per tonne falls as the claimed tonnes rise; the over-claim makes the measure look cheaper as well as larger.\" 290443.84 USD is the curve's netAnnualCostOfAll.")
 
-q(1, "SECTION 21 closes with its rules for a target verdict. In which case does the verdict stand, labelled an upper bound?",
+q(1, "The course closes the target checks with its rules for a verdict. In which case does the verdict stand, labelled an upper bound?",
  "Where measures only interact and every claim is checked.",
  ["Where a claim exceeds what its source emits.",
   "Where a claim acts on a source whose emission is not passed.",
   "Where every source the inventory computes is passed to it."],
- "SECTION 21: \"Where measures only interact and every claim is checked, the verdict stands and is labelled an upper bound.\" A claim above its source's emission gives none, a claim on a source not passed gives none, and the curve with every computed source passed still prints none, on steam.")
+ "The course states: \"Where measures only interact and every claim is checked, the verdict stands and is labelled an upper bound.\" A claim above its source's emission gives none, a claim on a source not passed gives none, and the curve with every computed source passed still prints none, on steam.")
 
 q(2, "Tune the fired heaters and the Heat integration project both act on heaters. What does the engine do with their tonnes on the curve?",
  "It counts both in full, 760.000 and 3400.000 t, and calls the cumulative curve an upper bound.",
@@ -72,47 +72,47 @@ q(2, "Tune the fired heaters and the Heat integration project both act on heater
   "It counts both in full and names heaters in the over-claims column of the curve."],
  "The curve prints both measures at 760.000 and 3400.000 t, additive false, and the note: \"Measures listed here act on the same source, so their abatements overlap and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, so the overlap is flagged here and the sequencing is left to that judgement.\" The costed curve prints over-claims none.")
 
-q(0, "Every SECTION 21 curve is checked against a target of 16830.083 tCO2e. What is that target?",
+q(0, "Every target-check curve is checked against a target of 16830.083 tCO2e. What is that target?",
  "30 percent of the inventory total of 56100.276 tCO2e",
  ["30 percent of the curve's total abatement of 15460.000 t",
   "The purchased electricity line of 10988.000 tCO2e",
   "The path's target in its end year, 39270.193 t"],
- "SECTION 21: the target is 30 percent of the inventory total: 16830.083 tCO2e (computed here, as the Carbon Studio computes it). The inventory total is 56100.276 tCO2e. 39270.193 t is the path's target in 2033 (SECTION 22).")
+ "In the course, the target is 30 percent of the inventory total: 16830.083 tCO2e (computed here, as the Carbon Studio computes it). The inventory total is 56100.276 tCO2e. 39270.193 t is the path's target in 2033.")
 
-q(3, "The six measures as costed print a residual to target of 1370.083 t beside meetsTarget none. How does SECTION 26 treat the curve's residual?",
+q(3, "The six measures as costed print a residual to target of 1370.083 t beside meetsTarget none. How does the course treat the curve's residual?",
  "Recomputed by neither oracle; taught from the engine and never graded",
  ["Recomputed by oracle_carbonabatement.py as part of its year ledger",
   "Recomputed by oracle_energyefficiency.py as a levelised cost per tonne",
   "Recomputed by both oracles, and its goldens asserted by the test suites"],
- "The residual is on SECTION 26's list of outputs no oracle recomputes, so it is taught from the engine and never graded. A year ledger is the oracle's route for the path, a different output.")
+ "The residual is on the course's list of outputs no oracle recomputes, so it is taught from the engine and never graded. A year ledger is the oracle's route for the path, a different output.")
 
 q(1, "With every source the inventory computes passed, which two sources join heaters and flare, and at what emissions?",
  "power 10988.000 and vents 2622.400 tCO2e",
  ["steam 10988.000 and vents 2622.400 tCO2e",
   "power 10988.000 and steam 2622.400 tCO2e",
   "power 1372.285 and vents 2622.400 tCO2e"],
- "SECTION 21, the sources added with every computed source passed: power 10988.000 tCO2e and vents 2622.400 tCO2e, from the Purchased electricity and the Vented and fugitive methane lines. Steam has no inventory line, and 1372.285 tCO2e is the flare's unburned CH4 line.")
+ "In the target checks, the sources added with every computed source passed: power 10988.000 tCO2e and vents 2622.400 tCO2e, from the Purchased electricity and the Vented and fugitive methane lines. Steam has no inventory line, and 1372.285 tCO2e is the flare's unburned CH4 line.")
 
 q(0, "Flare gas recovery's invented claim is raised from 6200 t to 9400 t. Which curve figure moves, and to what?",
  "Total abatement, from 15460.000 to 18660.000 t",
  ["The target, from 16830.083 to 18660.000 t",
   "The residual to target, from 0.000 to 1370.083 t",
   "The flare's emission passed, from 7562.133 to 9400.000"],
- "SECTION 21 prints total abatement 15460.000 t on the six as costed and 18660.000 t with the 9400 t claim. The target is 16830.083 t on both rows, the residual moves from 1370.083 to 0.000 t, and the flare's emission passed stays 7562.133 tCO2e.")
+ "The course prints total abatement 15460.000 t on the six as costed and 18660.000 t with the 9400 t claim. The target is 16830.083 t on both rows, the residual moves from 1370.083 to 0.000 t, and the flare's emission passed stays 7562.133 tCO2e.")
 
-q(2, "Of the curves SECTION 21 prints, which returns a verdict on the target?",
+q(2, "Of the curves the course checks, which returns a verdict on the target?",
  "None of them: every row prints meetsTarget none.",
  ["The six measures as costed, labelled an upper bound.",
   "The curve with every source the inventory computes.",
   "The 9400 t claim, whose total passes the target."],
- "SECTION 21 prints meetsTarget none on all four rows, each with a targetBasis beginning \"not assessed\": three on sources with no computed emission, one on claims that exceed what a source emits.")
+ "The course prints meetsTarget none on all four rows, each with a targetBasis beginning \"not assessed\": three on sources with no computed emission, one on claims that exceed what a source emits.")
 
 q(3, "On the six measures as costed, what reason does the engine give for Solar for purchased power's unchecked claim?",
  "no emission was given for the source",
  ["claims exceed what a source emits on power",
   "measures act on the same source as solar",
   "the power line could not be computed"],
- "SECTION 21's unchecked claims of the first row: Solar for purchased power, power, no emission was given for the source. The over-claim wording belongs to the 9400 t row, and the shared-source wording to SECTION 20's interaction note on heaters.")
+ "The target check's unchecked claims of the first row: Solar for purchased power, power, no emission was given for the source. The over-claim wording belongs to the 9400 t row, and the shared-source wording to the curve's interaction note on heaters.")
 
 emit(Q, '/root/wt-et-carbon-nextgen/tools/course-banks/carbon/advanced/cefa_m03.json', expect_n=15)
 finish()

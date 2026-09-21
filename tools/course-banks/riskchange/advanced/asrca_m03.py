@@ -75,7 +75,7 @@ q(1, "u-grace, signed in and not the author of ON-01, records an external review
  ["It refuses, because a typed name is only accepted when the author records it.",
   "It refuses, because an external reviewer has to be signed in to the app to be recorded.",
   "It allows it and records the external reviewer as the actor, with u-grace as a witness beside the name."],
- "The digest records u-grace recording an external reviewer by name as ALLOWED. The actor is independent of the lesson, and the typed name adds who else looked at it, which is the legitimate use of the field.")
+ "The course records u-grace recording an external reviewer by name as ALLOWED. The actor is independent of the lesson, and the typed name adds who else looked at it, which is the legitimate use of the field.")
 
 q(0, "ON-05's validation record is removed and it is then asked to move to \"Published\". What does the engine return?",
  "Refused: \"This lesson has not been validated. Somebody other than its author has to accept it before it is published to everyone.\"",
@@ -91,12 +91,12 @@ q(3, "Once an author submits a lesson, where can the lesson go from \"Submitted\
   "\"Published\", \"Draft\" or \"Archived\", with validation recorded along the way."],
  "The author writes and submits, somebody else validates, and only then can it be published. A submitted lesson can also go back to \"Draft\" if a gap is found, or be archived.")
 
-q(1, "Publishing a lesson checks for a validation record. Which limit does the digest list among the held items for that step?",
+q(1, "Publishing a lesson checks for a validation record. Which limit does the course list among the held items for that step?",
  "Publishing does not check a second time who validated the lesson.",
  ["Publishing does not check that a validation record exists at all.",
   "Publishing does not check whether the lesson has substance.",
   "Publishing checks the validator again and refuses the author."],
- "The independence check sits where the validation is recorded. Publishing relies on it having been enforced there, and the digest lists that as a stated limit of the engine.")
+ "The independence check sits where the validation is recorded. Publishing relies on it having been enforced there, and the course lists that as a stated limit of the engine.")
 
 q(2, "Read ON-01 as if it were still \"Submitted\". Its author, u-musa, is refused at validation. What does the owner decision on validation by typed name require before ON-01 can be validated?",
  "A colleague who was not involved in writing it validates it, signed in as themselves.",

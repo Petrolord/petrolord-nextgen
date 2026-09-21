@@ -142,7 +142,7 @@ q(1, "An arrangement of crossflow is asked for. What does the message say, and w
   "It names counter, parallel and shell1 and states that cross flow belongs to the air cooler, which is a cross-flow machine."],
  "A defaulted input is worse than a refused one, because a default answers a question the caller did not ask and never says it did."),
 
-q(3, "The teaching digest lists the states this balance will not compute. How many are there, and what do they have in common?",
+q(3, "The course lists the states this balance will not compute. How many are there, and what do they have in common?",
  "Six, and every one of them is a state a saved study can carry, with each refusal naming the box rather than the physics.",
  ["Three, and every one of them is a temperature that moved in the wrong direction on one of the two streams.",
   "Twelve, one for each door of the module, since each door carries exactly one guard of its own.",

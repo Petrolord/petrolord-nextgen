@@ -53,7 +53,7 @@ q(3, "What is the standing of the cap itself and of the behaviour above it?",
  ["The cap is a published validity limit and only the behaviour above it is held, which is why the engine is willing to report a number there.",
   "Both are measured by bisection, so the value above the cap is a measurement.",
   "The cap is held and anything above it is refused."],
- "Section 21 lists the 250 bar fugacity cap and what the correlation does above it as one held item. No graded field in this course sits above the cap for that reason."),
+ "The course lists the 250 bar fugacity cap and what the correlation does above it as one held item. No graded field in this course sits above the cap for that reason."),
 
 q(1, "A user types 3 into the box that wants a carbon dioxide mole fraction. What does the engine do?",
  "It refuses and quotes the value back, saying the CO2 mole fraction must be between 0 and 1: 3 is outside it.",

@@ -1,0 +1,820 @@
+{
+ "app_slug": "compliance",
+ "rows": 64,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/compliance, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "The register's refusal is the RangeError deriveStatus throws. The library's Review scheduled is an answer given as though nothing were due, a held limit of the digest, and it says nothing about the document.",
+     "new": "The register's refusal is the RangeError deriveStatus throws. The library's Review scheduled is an answer given as though nothing were due, a held limit of the course, and it says nothing about the document."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "An empty string is not a usable lead time, so the engine applies DEFAULT_LEAD_TIME_DAYS. The digest prints '' (empty) as Due soon, beside null, -5, 'ten' and a field left out.",
+     "new": "An empty string is not a usable lead time, so the engine applies DEFAULT_LEAD_TIME_DAYS. The course prints '' (empty) as Due soon, beside null, -5, 'ten' and a field left out."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "fields": {
+    "prompt": {
+     "old": "Which next due date, and which day count, does the digest print for the Biennial roll from 2026-08-31?",
+     "new": "Which next due date, and which day count, does the course print for the Biennial roll from 2026-08-31?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 19,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints 2026-08-31, 2027-02-28 and then 2027-08-28 for Semi-annual. The second step starts from the twenty-eighth it landed on in February. 2027-08-31 is the Annual roll from 2026-08-31, 2028-08-31 the Biennial one, and 2027-02-28 is the first step itself.",
+     "new": "The course prints 2026-08-31, 2027-02-28 and then 2027-08-28 for Semi-annual. The second step starts from the twenty-eighth it landed on in February. 2027-08-31 is the Annual roll from 2026-08-31, 2028-08-31 the Biennial one, and 2027-02-28 is the first step itself."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 20,
+   "fields": {
+    "explanation": {
+     "old": "documentPrefix takes the first three letters of each. OPS-PLA-0002 is a number as it stands in the library, and the digest does not say how it was issued. GEN-DOC is what an empty department and category give.",
+     "new": "documentPrefix takes the first three letters of each. OPS-PLA-0002 is a number as it stands in the library, and the course does not say how it was issued. GEN-DOC is what an empty department and category give."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "fields": {
+    "explanation": {
+     "old": "atLeastConfidential answers true at the floor or above it. The digest prints Public false, Internal false, Confidential true and Restricted true.",
+     "new": "atLeastConfidential answers true at the floor or above it. The course prints Public false, Internal false, Confidential true and Restricted true."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "fields": {
+    "prompt": {
+     "old": "HSE-PRO-0007 was issued 2024-09-30 on a 24 month period. Its recorded next review is 2026-09-30. What does the digest's recomputation show?",
+     "new": "HSE-PRO-0007 was issued 2024-09-30 on a 24 month period. Its recorded next review is 2026-09-30. What does the course's recomputation show?"
+    },
+    "explanation": {
+     "old": "nextReviewDate from 2024-09-30 on 24 months gives 2026-09-30, and the digest prints true for the two agreeing. OPS-PLA-0002 and ENG-STD-0011 agree as well.",
+     "new": "nextReviewDate from 2024-09-30 on 24 months gives 2026-09-30, and the course prints true for the two agreeing. OPS-PLA-0002 and ENG-STD-0011 agree as well."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "fields": {
+    "explanation": {
+     "old": "The digest names four documents with no issue date recorded: OPS-PHI-0001, OPS-PRO-0004, HSE-PRO-0012 and ENG-PRO-0019. OPS-PHI-0001 is Published and in force, and reads No review scheduled.",
+     "new": "The course names four documents with no issue date recorded: OPS-PHI-0001, OPS-PRO-0004, HSE-PRO-0012 and ENG-PRO-0019. OPS-PHI-0001 is Published and in force, and reads No review scheduled."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "fields": {
+    "options": {
+     "old": [
+      "It is the date the IKORO records were last edited by hand.",
+      "Each is derived against that date and is true at no other.",
+      "It is the date the regulator fixed for every return in the register.",
+      "It is the date the machine clock read when the digest was built, which the engine records."
+     ],
+     "new": [
+      "It is the date the IKORO records were last edited by hand.",
+      "Each is derived against that date and is true at no other.",
+      "It is the date the regulator fixed for every return in the register.",
+      "It is the date the machine clock read when the course was built, which the engine records."
+     ]
+    },
+    "explanation": {
+     "old": "Move the as-of date and the same record reads differently with nobody having edited it. The digest never read the machine clock.",
+     "new": "Move the as-of date and the same record reads differently with nobody having edited it. The course never read the machine clock."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "fields": {
+    "explanation": {
+     "old": "As recorded it reads Overdue. After the filing and the roll the digest prints status Due soon, so it leaves Overdue and joins Due soon, which is still an attention status.",
+     "new": "As recorded it reads Overdue. After the filing and the roll the course prints status Due soon, so it leaves Overdue and joins Due soon, which is still an attention status."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-the-register-derives",
+   "ord": 1,
+   "fields": {
+    "prompt": {
+     "old": "The digest counts, for each module, the exports that read a date against today. Which module has the most of them?",
+     "new": "The course counts, for each module, the exports that read a date against today. Which module has the most of them?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-the-register-derives",
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "Every figure in the digest is stated as true at 2026-10-15. What makes that statement safe to make?",
+     "new": "Every figure in the course is stated as true at 2026-10-15. What makes that statement safe to make?"
+    },
+    "options": {
+     "old": [
+      "Every call that reads a date against today is passed that one date, and no line comes from a call that read the machine clock.",
+      "The digest was generated on 2026-10-15, so the machine clock and the as-of date agreed on the day it ran.",
+      "Each module stores the date it was last run with, and reads it back on the next call.",
+      "The records themselves carry 2026-10-15 as a field, which the engine copies into each status."
+     ],
+     "new": [
+      "Every call that reads a date against today is passed that one date, and no line comes from a call that read the machine clock.",
+      "The course was produced on 2026-10-15, so the machine clock and the as-of date agreed on the day it ran.",
+      "Each module stores the date it was last run with, and reads it back on the next call.",
+      "The records themselves carry 2026-10-15 as a field, which the engine copies into each status."
+     ]
+    },
+    "explanation": {
+     "old": "The as-of date is an argument. The generator refuses to print a line from a call that did not pass it, so the same inputs give the same answers on any machine on any day.",
+     "new": "The as-of date is an argument. The course refuses to print a line from a call that did not pass it, so the same inputs give the same answers on any machine on any day."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-the-register-derives",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "The digest records this as a held limit. reviewState answers as though nothing were due, and the course teaches it as a limit and never as a figure.",
+     "new": "The course records this as a held limit. reviewState answers as though nothing were due, and the course teaches it as a limit and never as a figure."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-the-register-derives",
+   "ord": 11,
+   "fields": {
+    "explanation": {
+     "old": "false says the NCR is not overdue, which no reader can rely on here. deriveStatus is the one export that throws; this answer is recorded in SECTION 2 as a limit.",
+     "new": "false says the NCR is not overdue, which no reader can rely on here. deriveStatus is the one export that throws; this answer is recorded in the course as a limit."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-the-register-derives",
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "Q1 is the refusal the digest prints for deriveStatus: RangeError: deriveStatus needs a valid date for today. The two other modules answering as though nothing were due is a held limit, and a string today makes reviewState throw a TypeError.",
+     "new": "Q1 is the refusal the course prints for deriveStatus: RangeError: deriveStatus needs a valid date for today. The two other modules answering as though nothing were due is a held limit, and a string today makes reviewState throw a TypeError."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-the-register-derives",
+   "ord": 14,
+   "fields": {
+    "explanation": {
+     "old": "That is what derived means in this course. A status is never typed, so moving the date back to 2026-10-15 makes every row match the digest again.",
+     "new": "That is what derived means in this course. A status is never typed, so moving the date back to 2026-10-15 makes every row match the course tables again."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-the-register-derives",
+   "ord": 15,
+   "fields": {
+    "prompt": {
+     "old": "The digest's header says in what form it prints every figure. Which form is that?",
+     "new": "The course says in what form it prints every figure. Which form is that?"
+    },
+    "explanation": {
+     "old": "The header reads: every figure is a whole number, days from daysUntil and ages, counts, and percents the engine has already rounded. 2026-11-30 reads 46 and 2027-02-28 reads 136, and the lessons quote those figures as printed.",
+     "new": "The course states it: every figure is a whole number, days from daysUntil and ages, counts, and percents the engine has already rounded. 2026-11-30 reads 46 and 2027-02-28 reads 136, and the lessons quote those figures as printed."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-an-obligations-status",
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "The digest varies REG-2026-005 one field at a time. Which single variant makes the licence read Overdue?",
+     "new": "The course varies REG-2026-005 one field at a time. Which single variant makes the licence read Overdue?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-an-obligations-status",
+   "ord": 14,
+   "fields": {
+    "prompt": {
+     "old": "The digest's variant sets REG-2026-005's lifecycle to Superseded. Of these summarise counts, which one would lose the licence?",
+     "new": "The course's variant sets REG-2026-005's lifecycle to Superseded. Of these summarise counts, which one would lose the licence?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-lead-time-and-the-current-period",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints 17 as Due soon. Only the lead time changed, and that alone turned On track into Due soon: the window now reaches the 16 days that remain.",
+     "new": "The course prints 17 as Due soon. Only the lead time changed, and that alone turned On track into Due soon: the window now reaches the 16 days that remain."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-lead-time-and-the-current-period",
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "In the digest's lead time table for REG-2026-003, what is the largest lead time that still leaves the return On track?",
+     "new": "In the course's lead time table for REG-2026-003, what is the largest lead time that still leaves the return On track?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-lead-time-and-the-current-period",
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints 15 On track and 16 Due soon. A lead time equal to the 16 days that remain puts the return inside its window, and the row reads Due soon.",
+     "new": "The course prints 15 On track and 16 Due soon. A lead time equal to the 16 days that remain puts the return inside its window, and the row reads Due soon."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-lead-time-and-the-current-period",
+   "ord": 6,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints -5 as Due soon. With no usable lead time the engine uses DEFAULT_LEAD_TIME_DAYS, and a negative number is not usable.",
+     "new": "The course prints -5 as Due soon. With no usable lead time the engine uses DEFAULT_LEAD_TIME_DAYS, and a negative number is not usable."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-lead-time-and-the-current-period",
+   "ord": 11,
+   "fields": {
+    "explanation": {
+     "old": "Dated 2026-03-30 the filing belongs to the earlier period. Dated 2026-03-31, the first day of the period, it counts, and the digest prints status Compliant. The first day of the period is inside the period.",
+     "new": "Dated 2026-03-30 the filing belongs to the earlier period. Dated 2026-03-31, the first day of the period, it counts, and the course prints status Compliant. The first day of the period is inside the period."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-rolling-the-schedule-forward",
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints rollForward(2026-10-10, Monthly) = 2026-11-10. The same call on the filing date would give 2026-11-14, so a roll from the filing would move the schedule later with each late filing.",
+     "new": "The course prints rollForward(2026-10-10, Monthly) = 2026-11-10. The same call on the filing date would give 2026-11-14, so a roll from the filing would move the schedule later with each late filing."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-rolling-the-schedule-forward",
+   "ord": 5,
+   "fields": {
+    "explanation": {
+     "old": "The digest states it: deriveStatus asks whether the next action date is inside the lead time before it asks about the filing. The open window is what keeps the row at Due soon.",
+     "new": "The course states it: deriveStatus asks whether the next action date is inside the lead time before it asks about the filing. The open window is what keeps the row at Due soon."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-controlled-documents",
+   "ord": 6,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints none for a period of null and for a period of 0. It prints 2027-03-14 only when the caller passes 24, DEFAULT_REVIEW_PERIOD_MONTHS. The owner's recorded position is that the default is the caller's to apply, and the course teaches it as a limit.",
+     "new": "The course prints none for a period of null and for a period of 0. It prints 2027-03-14 only when the caller passes 24, DEFAULT_REVIEW_PERIOD_MONTHS. The owner's recorded position is that the default is the caller's to apply, and the course teaches it as a limit."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "The digest's edge rows print 30 days in 0 to 30 days and 31 days in 31 to 60 days.",
+     "new": "The course's edge rows print 30 days in 0 to 30 days and 31 days in 31 to 60 days."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the same refusal for NCR-2026-006, also Closed, and \"This non-conformance is already voided.\" for NCR-2026-011.",
+     "new": "The course prints the same refusal for NCR-2026-006, also Closed, and \"This non-conformance is already voided.\" for NCR-2026-011."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "fields": {
+    "explanation": {
+     "old": "Half up on the exact fraction gives 58 here, and that is the line the digest carries.",
+     "new": "Half up on the exact fraction gives 58 here, and that is the line the course carries."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-inspection-and-test-plan",
+   "ord": 4,
+   "fields": {
+    "explanation": {
+     "old": "The refusal for this request is \"Record the date this was decided and who decided it.\" and the refusal for a waiver with no reason is the waiver sentence. Only with all three does the digest print ALLOWED.",
+     "new": "The refusal for this request is \"Record the date this was decided and who decided it.\" and the refusal for a waiver with no reason is the waiver sentence. Only with all three does the course print ALLOWED."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-inspection-and-test-plan",
+   "ord": 5,
+   "fields": {
+    "explanation": {
+     "old": "H-08 waived with a date, a verifier and a reason is ALLOWED. The digest states that canDecideCheckpoint has no rule that forbids waiving a hold point, and a waived hold point with its record and reason is resolved like any waived point.",
+     "new": "H-08 waived with a date, a verifier and a reason is ALLOWED. The course states that canDecideCheckpoint has no rule that forbids waiving a hold point, and a waived hold point with its record and reason is resolved like any waived point."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-inspection-and-test-plan",
+   "ord": 7,
+   "fields": {
+    "explanation": {
+     "old": "A surveillance point stops nothing, and the digest prints ALLOWED for S-10 with nothing recorded: no date, no name and no reason. Not applicable is one of the three statuses in CHECKPOINT_RESOLVED_STATUSES. The same request on H-11, a hold point, is refused until a date, a name and a reason are on the record.",
+     "new": "A surveillance point stops nothing, and the course prints ALLOWED for S-10 with nothing recorded: no date, no name and no reason. Not applicable is one of the three statuses in CHECKPOINT_RESOLVED_STATUSES. The same request on H-11, a hold point, is refused until a date, a name and a reason are on the record."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-inspection-and-test-plan",
+   "ord": 10,
+   "fields": {
+    "prompt": {
+     "old": "SECTION 11 prints four cases of how a planProgress percent rounds. Which pairing is one of them?",
+     "new": "The course prints four cases of how a planProgress percent rounds. Which pairing is one of them?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-closing-a-plan",
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "The digest fails W-09, R-04, M-07 and S-10 one at a time and each is refused with \"1 checkpoint has failed and has not been resolved.\" A failed point blocks closure whatever its type, including the types whose stops work column reads false.",
+     "new": "The course fails W-09, R-04, M-07 and S-10 one at a time and each is refused with \"1 checkpoint has failed and has not been resolved.\" A failed point blocks closure whatever its type, including the types whose stops work column reads false."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-closing-a-plan",
+   "ord": 15,
+   "fields": {
+    "prompt": {
+     "old": "SECTION 12 prints overdue 3 and hold points outstanding 3 for the plan. Which point sits in both lists?",
+     "new": "The course prints overdue 3 and hold points outstanding 3 for the plan. Which point sits in both lists?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-the-nonconformance",
+   "ord": 4,
+   "fields": {
+    "explanation": {
+     "old": "NCR_EFFECTIVENESS_REQUIRED holds Critical and Major. On a Minor NCR the digest prints ALLOWED for one corrective action complete and never checked.",
+     "new": "NCR_EFFECTIVENESS_REQUIRED holds Critical and Major. On a Minor NCR the course prints ALLOWED for one corrective action complete and never checked."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-the-nonconformance",
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the ages the mean is taken over: 43, 64 and 117, their sum 224 over 3. The closed ages 8, 2 and 48 are not in it.",
+     "new": "The course prints the ages the mean is taken over: 43, 64 and 117, their sum 224 over 3. The closed ages 8, 2 and 48 are not in it."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-the-nonconformance",
+   "ord": 14,
+   "fields": {
+    "explanation": {
+     "old": "The open two are k2 and k6, and the overdue one is k2. The digest prints that summarise leaves k5 out of the open and overdue counts because it sits on NCR-2026-011, which is Voided.",
+     "new": "The open two are k2 and k6, and the overdue one is k2. The course prints that summarise leaves k5 out of the open and overdue counts because it sits on NCR-2026-011, which is Voided."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-the-nonconformance",
+   "ord": 15,
+   "fields": {
+    "explanation": {
+     "old": "The digest's line reads \"A child whose parent is not supplied counts.\" Without the NCRs the engine cannot know that k5's parent is Voided, so the counts move from open 2 and overdue 1.",
+     "new": "The course's line reads \"A child whose parent is not supplied counts.\" Without the NCRs the engine cannot know that k5's parent is Voided, so the counts move from open 2 and overdue 1."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-the-checklist",
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints that items 10 (Not applicable, a blank note) and 11 (Not applicable, no note) have a recorded row that is not an answer, and that items 13 and 14 have no row at all. Item 13 is Minor and item 14 Major.",
+     "new": "The course prints that items 10 (Not applicable, a blank note) and 11 (Not applicable, no note) have a recorded row that is not an answer, and that items 13 and 14 have no row at all. Item 13 is Minor and item 14 Major."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-the-checklist",
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "The digest walks canRaiseFinding through three refusals before it reaches the stop-work rows. What do those three ask for?",
+     "new": "The course walks canRaiseFinding through three refusals before it reaches the stop-work rows. What do those three ask for?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-the-checklist",
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "The digest names the findings summarise counts: AF-2026-018 alone. One finding is behind open findings 1, open major 1 and stop-work open 1.",
+     "new": "The course names the findings summarise counts: AF-2026-018 alone. One finding is behind open findings 1, open major 1 and stop-work open 1."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-the-audit-and-the-programme",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints ALLOWED for an external lead auditor named in text with no account. \"Name the lead auditor.\" is the reporting refusal for an audit with no lead auditor named at all.",
+     "new": "The course prints ALLOWED for an external lead auditor named in text with no account. \"Name the lead auditor.\" is the reporting refusal for an audit with no lead auditor named at all."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "Reported 3 counts AUD-2026-001, AUD-2026-002 and AUD-2026-003, and AUD-2026-004 sits in cancelled 1, in neither reported nor outstanding. A programme is delivered when its audits are reported, and the digest records that the programme counts reported audits only, which is why a complete programme that contains a cancelled audit reads below one hundred percent by design.",
+     "new": "Reported 3 counts AUD-2026-001, AUD-2026-002 and AUD-2026-003, and AUD-2026-004 sits in cancelled 1, in neither reported nor outstanding. A programme is delivered when its audits are reported, and the course records that the programme counts reported audits only, which is why a complete programme that contains a cancelled audit reads below one hundred percent by design."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints Nonconformant with a date and an assessor: ALLOWED. Partially conformant asks for all three, as Conformant does. A problem needs less on the record than a claim of conformity.",
+     "new": "The course prints Nonconformant with a date and an assessor: ALLOWED. Partially conformant asks for all three, as Conformant does. A problem needs less on the record than a claim of conformity."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "fields": {
+    "explanation": {
+     "old": "The summary's open actions 2 are ac1 and ac3, and overdue actions 1 is ac1. ac4 reads open false and overdue false, and the digest names it as the action awaiting an effectiveness check.",
+     "new": "The summary's open actions 2 are ac1 and ac3, and overdue actions 1 is ac1. ac4 reads open false and overdue false, and the course names it as the action awaiting an effectiveness check."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-a-claim-is-evidence",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints REFUSED for Conformant with an evidence reference only, in the words it uses for Conformant with nothing else: name the evidence, the date it was assessed and who assessed it. The shorter sentence belongs to a Nonconformant request with no date.",
+     "new": "The course prints REFUSED for Conformant with an evidence reference only, in the words it uses for Conformant with nothing else: name the evidence, the date it was assessed and who assessed it. The shorter sentence belongs to a Nonconformant request with no date."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-a-claim-is-evidence",
+   "ord": 4,
+   "fields": {
+    "prompt": {
+     "old": "Both fields of a clause are set to Not applicable with no justification. Of the four refusals the digest prints for this request, which one cites a numbered clause of the standard?",
+     "new": "Both fields of a clause are set to Not applicable with no justification. Of the four refusals the course prints for this request, which one cites a numbered clause of the standard?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-a-claim-is-evidence",
+   "ord": 5,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints: \"Say why this requirement does not apply. A requirement determined not applicable keeps its justification on record.\" The verdict is the same refusal for all three standards and for none; only the wording follows the standard passed.",
+     "new": "The course prints: \"Say why this requirement does not apply. A requirement determined not applicable keeps its justification on record.\" The verdict is the same refusal for all three standards and for none; only the wording follows the standard passed."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-a-claim-is-evidence",
+   "ord": 14,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints Partially conformant, nothing else: REFUSED, with the sentence Conformant meets, and ALLOWED with evidence, a date and an assessor. Clause 6.1.2 reads Partially conformant with claims conformity, evidence record and assessed all true.",
+     "new": "The course prints Partially conformant, nothing else: REFUSED, with the sentence Conformant meets, and ALLOWED with evidence, a date and an assessor. Clause 6.1.2 reads Partially conformant with claims conformity, evidence record and assessed all true."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-independence",
+   "ord": 6,
+   "fields": {
+    "prompt": {
+     "old": "u-obinna owns clauses 5.2, 7.2 and 7.5.3, and none of the four in the planned audit's scope. What does the digest print for u-obinna as its lead auditor?",
+     "new": "u-obinna owns clauses 5.2, 7.2 and 7.5.3, and none of the four in the planned audit's scope. What does the course print for u-obinna as its lead auditor?"
+    },
+    "explanation": {
+     "old": "The five printed rows are u-chidi, u-kalu, u-nneka, u-tari and an external lead named in text. A verdict the digest does not print is one this course does not state, however likely it looks from the ownership table.",
+     "new": "The five printed rows are u-chidi, u-kalu, u-nneka, u-tari and an external lead named in text. A verdict the course does not print is one it does not state, however likely it looks from the ownership table."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-independence",
+   "ord": 15,
+   "fields": {
+    "prompt": {
+     "old": "Among the candidates for lead of the planned audit who hold an account, which one does the digest allow?",
+     "new": "Among the candidates for lead of the planned audit who hold an account, which one does the course allow?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-coverage-over-the-cycle",
+   "ord": 6,
+   "fields": {
+    "prompt": {
+     "old": "Across the four cycle lengths the digest prints for the ORASHI register, which column never changes?",
+     "new": "Across the four cycle lengths the course prints for the ORASHI register, which column never changes?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-coverage-over-the-cycle",
+   "ord": 8,
+   "fields": {
+    "explanation": {
+     "old": "The table shows this register at the four lengths printed and nothing more. Never examined also reads 3 at those lengths, a separate count from stale. Quote only the rows the digest prints.",
+     "new": "The table shows this register at the four lengths printed and nothing more. Never examined also reads 3 at those lengths, a separate count from stale. Quote only the rows the course prints."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-coverage-over-the-cycle",
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints: \"2 clauses in scope have no result yet (7.2, 8.1).\" The sentence about an audit with no clauses in its scope belongs to an empty scope, a separate row.",
+     "new": "The course prints: \"2 clauses in scope have no result yet (7.2, 8.1).\" The sentence about an audit with no clauses in its scope belongs to an empty scope, a separate row."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-findings-and-root-causes",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the correction refusal for ISF-2026-005: \"Record the correction: what was done about the thing that was found. A corrective action deals with the cause, and this is the other half.\" The correction is the first thing the gate asks for.",
+     "new": "The course prints the correction refusal for ISF-2026-005: \"Record the correction: what was done about the thing that was found. A corrective action deals with the cause, and this is the other half.\" The correction is the first thing the gate asks for."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-findings-and-root-causes",
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints: a Minor nonconformity with its correction and no actions: ALLOWED. isoCompliance.EFFECTIVENESS_REQUIRED_TYPES holds Major nonconformity alone, and the root cause refusal is written for a major nonconformity.",
+     "new": "The course prints: a Minor nonconformity with its correction and no actions: ALLOWED. isoCompliance.EFFECTIVENESS_REQUIRED_TYPES holds Major nonconformity alone, and the root cause refusal is written for a major nonconformity."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-findings-and-root-causes",
+   "ord": 5,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints: \"1 action still open against this finding.\" The refusal names the first thing missing on the walk, and ac1 is it.",
+     "new": "The course prints: \"1 action still open against this finding.\" The refusal names the first thing missing on the walk, and ac1 is it."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-findings-and-root-causes",
+   "ord": 7,
+   "fields": {
+    "explanation": {
+     "old": "The digest names ac4 as the one Complete action with no effectiveness verdict recorded. ac1 and ac3 are still open, and ac2 reads verified effective true.",
+     "new": "The course names ac4 as the one Complete action with no effectiveness verdict recorded. ac1 and ac3 are still open, and ac2 reads verified effective true."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-findings-and-root-causes",
+   "ord": 9,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints: auditManagement.ROOT_CAUSE_CATEGORIES is the same list object as isoCompliance's: true. One list, so nothing can drift apart. auditManagement.canCloseFinding is the same function as isoCompliance's as well.",
+     "new": "The course prints: auditManagement.ROOT_CAUSE_CATEGORIES is the same list object as isoCompliance's: true. One list, so nothing can drift apart. auditManagement.canCloseFinding is the same function as isoCompliance's as well."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-certification-readiness",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "The list has eleven items across blocking, serious and watch, and a table of counts beside it. The digest prints no percentage and no score for it, and ready false stands beside four blocking items.",
+     "new": "The list has eleven items across blocking, serious and watch, and a table of counts beside it. The course prints no percentage and no score for it, and ready false stands beside four blocking items."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-certification-readiness",
+   "ord": 14,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints no percentage from these counts and neither does the engine. The list already says 3 uncovered clauses are never examined and blocking and 1 is stale and serious; a percentage would average that away.",
+     "new": "The course prints no percentage from these counts and neither does the engine. The list already says 3 uncovered clauses are never examined and blocking and 1 is stale and serious; a percentage would average that away."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "Every refusal sentence in the digest is the engine's own and is quoted rather than checked. That is why this course quotes a refusal verbatim or describes it, and never rewords one inside quotation marks.",
+     "new": "Every refusal sentence in the course is the engine's own and is quoted rather than checked. That is why this course quotes a refusal verbatim or describes it, and never rewords one inside quotation marks."
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "app_slug": "sim",
+ "rows": 3,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "hand edits in the recut generator (this course has no committed bank source)",
+ "edits": [
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 25,
+   "fields": {
+    "explanation": {
+     "old": "The two rules depend on the same field. The generator asserts that no case raises more than two errors, so a future case that cascades fails the build rather than being described as isolated.",
+     "new": "The two rules depend on the same field. The course's build asserts that no case raises more than two errors, so a future case that cascades fails the build rather than being described as isolated."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-validation",
+   "ord": 5,
+   "fields": {
+    "explanation": {
+     "old": "That coupling is real rather than an artifact: the two rules genuinely depend on the same field. The generator asserts that no case raises more than two errors, so a future case that cascades fails the build.",
+     "new": "That coupling is real rather than an artifact: the two rules genuinely depend on the same field. The course's build asserts that no case raises more than two errors, so a future case that cascades fails the build."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "A case that raises 180 errors teaches the opposite of what it is for. The generator now asserts that no case raises more than two, so a future case that cascades fails the build rather than being described as isolated.",
+     "new": "A case that raises 180 errors teaches the opposite of what it is for. The course's build now asserts that no case raises more than two, so a future case that cascades fails the build rather than being described as isolated."
+    }
+   }
+  }
+ ]
+}

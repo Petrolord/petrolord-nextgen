@@ -11,12 +11,12 @@
   "explanation": "Nothing about the routine changes. Two reads of one routine at two states is the whole of the cold separator arithmetic."
  },
  {
-  "prompt": "What does the digest print for the cold water content read against the warm one, and what kind of quantity is it?",
+  "prompt": "What does the course print for the cold water content read against the warm one, and what kind of quantity is it?",
   "options": [
    "0.555085832 lb per MMscf, the content the gas leaves the separator with.",
    "15.038835973, the free water that appears in the boot, expressed against the inlet.",
    "0.555085832, a dimensionless ratio of the two saturated contents.",
-   "0.916066108, which is the ratio the digest prints between two of the march's own coefficients."
+   "0.916066108, which is the ratio the course prints between two of the march's own coefficients."
   ],
   "answer": 2,
   "explanation": "Both contents are in lb per MMscf, so their ratio carries no units at all. A figure that is a ratio and a figure that is a content answer different questions."
@@ -96,7 +96,7 @@
    "Take the combined answer and subtract each single change in turn, which leaves the interaction between the two inputs as a residual."
   ],
   "answer": 2,
-  "explanation": "The second and third rows are a designed comparison rather than two unrelated answers. Where the digest prints a table and no ratio between the rows, forming one produces a figure nothing stands behind."
+  "explanation": "The second and third rows are a designed comparison rather than two unrelated answers. Where the course prints a table and no ratio between the rows, forming one produces a figure nothing stands behind."
  },
  {
   "prompt": "Why is what a dew point skid sells described as a depression rather than as an outlet water content?",

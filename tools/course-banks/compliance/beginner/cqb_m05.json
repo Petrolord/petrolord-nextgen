@@ -63,7 +63,7 @@
    "The issue date itself, so the document comes up for review at once."
   ],
   "answer": 0,
-  "explanation": "The digest prints none for a period of null and for a period of 0. It prints 2027-03-14 only when the caller passes 24, DEFAULT_REVIEW_PERIOD_MONTHS. The owner's recorded position is that the default is the caller's to apply, and the course teaches it as a limit."
+  "explanation": "The course prints none for a period of null and for a period of 0. It prints 2027-03-14 only when the caller passes 24, DEFAULT_REVIEW_PERIOD_MONTHS. The owner's recorded position is that the default is the caller's to apply, and the course teaches it as a limit."
  },
  {
   "prompt": "nextRevisionNumber is given the current revision '7'. What does it return?",

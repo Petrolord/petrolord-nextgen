@@ -43,12 +43,12 @@ q(1, "Which owner decision puts the independence check on every examiner, beyond
   "AS15 Q6, through the readiness list"],
  "Q5 reads: every examiner is checked for independence, through canExamineClause. Q4 is the coverage rule, D1 keeps an author off their own review, and Q6 sets the certificate's severity.")
 
-q(3, "u-obinna owns clauses 5.2, 7.2 and 7.5.3, and none of the four in the planned audit's scope. What does the digest print for u-obinna as its lead auditor?",
+q(3, "u-obinna owns clauses 5.2, 7.2 and 7.5.3, and none of the four in the planned audit's scope. What does the course print for u-obinna as its lead auditor?",
  "No row at all, so no verdict is stated for u-obinna.",
  ["ALLOWED, in the row printed for u-chidi.",
   "REFUSED, naming 7.2 as the clause u-obinna has left unassessed.",
   "REFUSED, because u-obinna owns the unevidenced claim on clause 5.2."],
- "The five printed rows are u-chidi, u-kalu, u-nneka, u-tari and an external lead named in text. A verdict the digest does not print is one this course does not state, however likely it looks from the ownership table.")
+ "The five printed rows are u-chidi, u-kalu, u-nneka, u-tari and an external lead named in text. A verdict the course does not print is one it does not state, however likely it looks from the ownership table.")
 
 q(2, "In the Audit & Findings Manager, auditIndependence refuses u-boma named as both lead auditor and auditee. Which name does that rule check the lead against?",
  "The auditee named on the audit, one person against one person",
@@ -106,7 +106,7 @@ q(0, "Why is the lead auditor check on its own not enough to keep an owner from 
   "The lead check reads the auditee and never reads the owners of the clauses in scope."],
  "With u-chidi leading, the lead check reads ALLOWED, and u-kalu on the team could still record 8.1. canExamineClause closes that gap one result at a time, refusing u-kalu on 8.1 and allowing u-chidi.")
 
-q(2, "Among the candidates for lead of the planned audit who hold an account, which one does the digest allow?",
+q(2, "Among the candidates for lead of the planned audit who hold an account, which one does the course allow?",
  "u-chidi, who owns none of the four clauses in scope",
  ["u-tari, whose one clause inside the audit's scope is 9.1.1",
   "u-nneka, whose clause 9.2 is Conformant with evidence",

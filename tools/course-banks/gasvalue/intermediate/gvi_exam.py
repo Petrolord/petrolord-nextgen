@@ -44,14 +44,14 @@ q(1, "Which limits did the EGBEMA study type on the Compressed natural gas route
  ["minVolumeMMscfd 3, minGhvBtuScf 950, with the inerts left unset",
   "minVolumeMMscfd 10, maxCo2Fraction 0.02, maxInertFraction 0.06",
   "minVolumeMMscfd 5, minGpmC3Plus 2, with no heating value limit"],
- "The digest's limits table: Compressed natural gas, minVolumeMMscfd 5, maxInertFraction 0.06, minGhvBtuScf 1000. The others are the gas to power, mini LNG and LPG rows.")
+ "The course's limits table: Compressed natural gas, minVolumeMMscfd 5, maxInertFraction 0.06, minGhvBtuScf 1000. The others are the gas to power, mini LNG and LPG rows.")
 
 q(3, "Which three verdicts does screenRoute give a ROUTE?",
  "passes, fails and not fully screened",
  ["pass, fail and unchecked",
   "passes, fails and unchecked, as each check reads",
   "passes, fails and screened out of the comparison"],
- "The digest: \"Three verdicts appear: passes, fails, and not fully screened.\" pass, fail and unchecked are the statuses of a single requirement's check, and screenedOut is a compareRoutes field.")
+ "The course states: \"Three verdicts appear: passes, fails, and not fully screened.\" pass, fail and unchecked are the statuses of a single requirement's check, and screenedOut is a compareRoutes field.")
 
 # ---- the yield and its ceiling (SECTION 18)
 q(0, "The associated gas holds propane and heavier. Which LPG ceiling does the table give it?",
@@ -109,7 +109,7 @@ q(2, "How does grossMarginPerYear relate to the two figures printed before it in
  ["revenuePerYear minus operatingCostPerYear minus the capital",
   "revenuePerYear minus the variable cost of the recovered gas",
   "revenuePerYear minus operatingCostPerYear, over mscfPerYear"],
- "The digest: \"grossMarginPerYear is revenuePerYear minus operatingCostPerYear, on every row.\" The margin over mscfPerYear is valuePerMscf, and the capital sits in the cash flow's year 0.")
+ "The course states: \"grossMarginPerYear is revenuePerYear minus operatingCostPerYear, on every row.\" The margin over mscfPerYear is valuePerMscf, and the capital sits in the cash flow's year 0.")
 
 q(0, "What productPerYear does routeEconomics print for gas to power?",
  "212733.7500 MWh",
@@ -137,7 +137,7 @@ q(2, "What is cashFlow.year0 on every route routeEconomics hands on?",
  ["The first year's gross margin, as a positive",
   "The capitalCost less the recurring margin",
   "The capitalCost discounted to year 0"],
- "The digest: \"Year 0 is the capital as a negative, and the recurring figure is the margin\", so CNG's year0 is -29337983.06 beside a capitalCost of 29337983.06. The engine assembles the cash flow and hands it on; it does not discount it.")
+ "The course states: \"Year 0 is the capital as a negative, and the recurring figure is the margin\", so CNG's year0 is -29337983.06 beside a capitalCost of 29337983.06. The engine assembles the cash flow and hands it on; it does not discount it.")
 
 q(0, "What does flareToValue's valuation note say a discounted cash flow in the module would be?",
  "\"a second answer\"",
@@ -187,7 +187,7 @@ q(1, "Which recovery gives gas to power its avoided flare of 202989.652 t/yr?",
  ["0.88",
   "0.82",
   "0.86"],
- "The digest: \"Gas to power recovers 0.94.\" avoidedFlareCo2eTonnes 202989.652. 0.88 is CNG's recovery, 0.82 LPG's and 0.86 mini LNG's.")
+ "The course states: \"Gas to power recovers 0.94.\" avoidedFlareCo2eTonnes 202989.652. 0.88 is CNG's recovery, 0.82 LPG's and 0.86 mini LNG's.")
 
 q(2, "abatement's warning, printed while the counterfactual is undeclared, says which way the abatement moves against the flare's gross emission. What does it print?",
  "Larger if the product displaces a dirtier fuel; smaller if it displaces nothing.",
@@ -208,7 +208,7 @@ q(3, "Which counterfactual label does the gas to power route carry on EGBEMA?",
  ["\"CNG sold into a market that burned nothing\"",
   "\"Gas to power displacing diesel generators\"",
   "\"Gas to power displacing pipeline gas\""],
- "The digest: Gas to power's counterfactual, \"Gas to power for a new load that burned nothing\": product combustion 205000, displaced 0. The CNG label is the CNG route's third counterfactual.")
+ "The course states: Gas to power's counterfactual, \"Gas to power for a new load that burned nothing\": product combustion 205000, displaced 0. The CNG label is the CNG route's third counterfactual.")
 
 # ---- credits and the bid (SECTIONS 22, 23)
 q(1, "The study's first typed price is 40 dollars per tonne. Which credit revenue, total margin and outcome follow?",
@@ -223,7 +223,7 @@ q(2, "How does creditSensitivity decide whether a typed price clears?",
  ["Its credit revenue alone reaches the hurdle margin the study typed.",
   "Its price reaches the lowest tested price in the order typed.",
   "Its total margin, less the capital, reaches the hurdle margin."],
- "The digest: \"totalMarginPerYear is the route's gross margin plus that; a point clears when its total margin reaches the hurdle.\" The capital is no term of the credit test.")
+ "The course states: \"totalMarginPerYear is the route's gross margin plus that; a point clears when its total margin reaches the hurdle.\" The capital is no term of the credit test.")
 
 q(0, "Of the credit prices typed on EGBEMA's CNG route, which print clearsHurdle true?",
  "40 and 20",
@@ -237,7 +237,7 @@ q(3, "creditSensitivity is run on a route with its price missing, so it has no m
  ["REFUSED: The hurdle margin must be a number.",
   "A breakeven worked on a margin of zero, with the price named in assumedZero.",
   "No verdict and a null breakeven; it reports that no hurdle margin was given."],
- "With the price missing there is no margin. The digest prints the answer as having no verdict, a null breakevenCreditPrice and a request to supply the price and costs. A hurdle typed as 'x' is the refused probe.")
+ "With the price missing there is no margin. The course prints the answer as having no verdict, a null breakevenCreditPrice and a request to supply the price and costs. A hurdle typed as 'x' is the refused probe.")
 
 q(1, "What does the bid table print in the net abatement column for its four EGBEMA routes?",
  "218032.865 on CNG, and none declared on the other three",
@@ -251,7 +251,7 @@ q(2, "What happens to the failing mini LNG route when compareRoutes lays out the
  ["It drops the row and names the route in screenedOut.",
   "It keeps its row and names it in notFullyScreened.",
   "It keeps its row and ranks it best on its capital."],
- "The digest: \"A route that fails screening stays in the table with its failure named.\" Mini LNG keeps capital 42870938.50 and value per Mscf 4.2447 beside its verdict, and screenedOut reads Mini LNG. notFullyScreened names gas to power.")
+ "The course states: \"A route that fails screening stays in the table with its failure named.\" Mini LNG keeps capital 42870938.50 and value per Mscf 4.2447 beside its verdict, and screenedOut reads Mini LNG. notFullyScreened names gas to power.")
 
 q(3, "The rankingNote's second sentence tells the reader what to do. What?",
  "Compare against the capital column, and value the shortlist in the sanctioned economics engine.",
@@ -272,7 +272,7 @@ q(1, "Where do the credit prices creditSensitivity tests come from?",
  ["The engine's table of market credit prices.",
   "The engine's default list, 40, 8, 20 and 12.",
   "The hurdle margin over the net abatement."],
- "The digest: \"Credit prices are case inputs; the engine ships none.\" 40, 8, 20 and 12 are the prices the EGBEMA case typed. The hurdle minus the margin over the net tonnes is the breakeven.")
+ "The course states: \"Credit prices are case inputs; the engine ships none.\" 40, 8, 20 and 12 are the prices the EGBEMA case typed. The hurdle minus the margin over the net tonnes is the breakeven.")
 
 # ---- the tier read as one parcel (SECTION 24 with 16 to 23)
 q(2, "The breakeven's numerator, the hurdle minus the margin, is 3491850.00 a year. Over which figure does creditSensitivity divide it?",

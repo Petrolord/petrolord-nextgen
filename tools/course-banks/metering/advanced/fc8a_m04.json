@@ -110,7 +110,7 @@
   "explanation": "A count is not checkable without its tree and its rule, and the rule here is what explains why ten swept rows produce four bands rather than ten."
  },
  {
-  "prompt": "At the edge where the 1000 to 2800 ft2 band gives way to the band above it, the digest prints a duty of 14091137.6199 Btu/hr below the edge and 14089282.6189 Btu/hr above it. Why print both?",
+  "prompt": "At the edge where the 1000 to 2800 ft2 band gives way to the band above it, the course prints a duty of 14091137.6199 Btu/hr below the edge and 14089282.6189 Btu/hr above it. Why print both?",
   "options": [
    "So a reader can interpolate between the two and recover the duty at any area inside either band without calling the engine again for it.",
    "So the behaviour of the duty across a change of relation can be read rather than assumed.",
@@ -132,7 +132,7 @@
   "explanation": "The bound is the engine's own sentence: the relation carries a credit and does not carry a penalty."
  },
  {
-  "prompt": "The digest prints the fire duty on this tank with and without a stated drainage credit. What does that relation carry?",
+  "prompt": "The course prints the fire duty on this tank with and without a stated drainage credit. What does that relation carry?",
   "options": [
    "A ratio of 0.300000, since that factor is what produced the second value.",
    "A difference of 18124708.1759 Btu/hr against the duty at the top of the band.",

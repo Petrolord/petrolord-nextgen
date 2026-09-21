@@ -26,7 +26,7 @@ q(0, "cargoQuantities returns 45772751.75 litres for BADAGRY. What role does tha
 
 # 3 m02
 # audit-advanced: key 1.00 against m02 Q1 (the same refusal re-asked in the exam); now asks which other entry meets the same sentence
-q(3, "Ocean freight typed as a percent of C&F is refused on the invented BADAGRY walk. Which other entry does the digest show refused with the same sentence?",
+q(3, "Ocean freight typed as a percent of C&F is refused on the invented BADAGRY walk. Which other entry does the course show refused with the same sentence?",
  "Ocean freight typed as a percent of CIF.",
  ["A charge with the stage \"customs\".",
   "Insurance on CIF at 100 percent.",
@@ -247,7 +247,7 @@ q(1, "cargoQuantities refuses the unit \"kg\" and landedCost refuses the stage \
  ["Both are forward references to a value the walk has not formed, so both carry the same sentence.",
   "Both are density errors, since kilograms and customs charges are each formed from a volume.",
   "Both are read as zero and named, so the answer is labelled a floor until the label is fixed."],
- "The digest prints REFUSED: Unknown quantity unit \"kg\". for cargoQuantities and REFUSED: Customs processing has an unknown stage \"customs\". for landedCost. Neither returns a figure, and neither is a forward reference or a floor.")
+ "The engine returns REFUSED: Unknown quantity unit \"kg\". for cargoQuantities and REFUSED: Customs processing has an unknown stage \"customs\". for landedCost. Neither returns a figure, and neither is a forward reference or a floor.")
 
 # 30 m03
 # audit-advanced: CIF and duty distractors were refuted only by inference (neither is printed across the loss sweep)

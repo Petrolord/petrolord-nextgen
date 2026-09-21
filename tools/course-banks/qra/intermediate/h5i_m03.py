@@ -33,7 +33,7 @@ q(1,
  ["They read \"more than 12\", which the introduction of the Purple Book prints",
   "They added in the release that reaches no one, at 5e-5 per year",
   "They divided F(12) by the 12 deaths at that corner, as a frequency per death"],
- "The digest's table prints 0.000008000000 as the frequency of the scenarios with exactly N at the corner of 12, which is the flash fire alone. Reading \"more than 12\" gives 0.000001700000. Adding the release that reaches no one would raise the figure, and that scenario is kept out of the curve anyway. Dividing a corner by its N has no meaning on a curve of frequencies and gives no figure the digest prints.")
+ "The course's table prints 0.000008000000 as the frequency of the scenarios with exactly N at the corner of 12, which is the flash fire alone. Reading \"more than 12\" gives 0.000001700000. Adding the release that reaches no one would raise the figure, and that scenario is kept out of the curve anyway. Dividing a corner by its N has no meaning on a curve of frequencies and gives no figure the course shows.")
 
 q(0,
  "Reading the JISIKE off-site curve as a step function, what is F(5)?",
@@ -41,7 +41,7 @@ q(0,
  ["0.000049700000 per year, the value it takes at F(3)",
   "0.000000000000 per year, since no scenario has an N of 5",
   "0.000040000000 per year, the jet fires carried forward"],
- "F(5) is the frequency of 5 or more deaths, and no scenario has an N between 3 and 12, so F(5) = F(12) = 0.000009700000 per year, as the digest reads the step. F(3) includes the two jet fires, whose 3 deaths are fewer than 5. A curve of N or more is never zero merely because no scenario sits at that N. The jet fires sum to 0.000040000000, and they have fewer than 5 deaths.")
+ "F(5) is the frequency of 5 or more deaths, and no scenario has an N between 3 and 12, so F(5) = F(12) = 0.000009700000 per year, as the course reads the step. F(3) includes the two jet fires, whose 3 deaths are fewer than 5. A curve of N or more is never zero merely because no scenario sits at that N. The jet fires sum to 0.000040000000, and they have fewer than 5 deaths.")
 
 q(3,
  "Two JISIKE jet fires share N = 3. How does the engine place them on the curve?",
@@ -49,7 +49,7 @@ q(3,
  ["As two corners at N = 3, drawn one above the other",
   "As one corner carrying the larger of the two frequencies",
   "As one corner at N = 6, the sum of their two N values"],
- "The digest says two scenarios sharing N = 3 make ONE corner, carrying both frequencies, since the curve takes a value at each distinct N. Two corners at one N is not a step function. Taking only the larger frequency drops the 1e-5 per year of the second jet fire. Adding their N values would claim a single event killing six, which neither scenario describes.")
+ "The course says two scenarios sharing N = 3 make ONE corner, carrying both frequencies, since the curve takes a value at each distinct N. Two corners at one N is not a step function. Taking only the larger frequency drops the 1e-5 per year of the second jet fire. Adding their N values would claim a single event killing six, which neither scenario describes.")
 
 q(2,
  "What does the engine do with the release that reaches no one, stated at 5e-5 per year with N of 0?",
@@ -71,7 +71,7 @@ q(3,
  ["F at the first corner, 0.000049700000, since each later step sits under it",
   "The sum of the four corner values, since every step is one death wide",
   "The frequency kept out of the curve, 0.000050000000, since it closes the area"],
- "The digest calls it the area identity: summed step by step, the area is 0.000336000000 per year, equal to the expected fatalities per year, and for the off-site set also the off-site PLL. It is one of the self-consistency checks of the curve. The first corner is a height and no area. The steps are wider than one death, so the corners do not simply add. The release that reaches no one adds no area, since its N is 0.")
+ "The course calls it the area identity: summed step by step, the area is 0.000336000000 per year, equal to the expected fatalities per year, and for the off-site set also the off-site PLL. It is one of the self-consistency checks of the curve. The first corner is a height and no area. The steps are wider than one death, so the corners do not simply add. The release that reaches no one adds no area, since its N is 0.")
 
 q(0,
  "The Purple Book's introduction to societal risk speaks of \"more than N\", while its equation 6.6 and section 6.3 say \"N or more\". Which reading does the engine follow?",
@@ -79,7 +79,7 @@ q(0,
  ["More than N, following the introduction, since it comes first",
   "Either one, chosen by a flag the caller sets on each call",
   "N or more at small N and more than N above the line's range"],
- "The digest says the source contradicts itself and that the engine follows the equation, \"N or more\", as does this course. The engine exposes no flag for the other reading. Switching reading with N has no basis in the source. Reading \"more than N\" drops the scenarios sitting exactly at each corner, which is why the choice matters.")
+ "The course says the source contradicts itself and that the engine follows the equation, \"N or more\", as does this course. The engine exposes no flag for the other reading. Switching reading with N has no basis in the source. Reading \"more than N\" drops the scenarios sitting exactly at each corner, which is why the choice matters.")
 
 q(2,
  "What does reading \"more than N\" do to the JISIKE off-site curve at every corner?",
@@ -87,7 +87,7 @@ q(2,
  ["It adds the scenarios just below the corner, so each corner rises",
   "It changes nothing, since no two scenarios share one value of N",
   "It removes only the release that reaches no one from the curve"],
- "The digest's comparison shows \"more than N\" below \"N or more\" at every corner: at 3 it reads 0.000009700000 against 0.000049700000, and at 300 it reads 0.000000000000. The corner's own scenarios are dropped, and nothing is added. Two jet fires do share N = 3, and the release that reaches no one is outside the curve under either reading.")
+ "The course's comparison shows \"more than N\" below \"N or more\" at every corner: at 3 it reads 0.000009700000 against 0.000049700000, and at 300 it reads 0.000000000000. The corner's own scenarios are dropped, and nothing is added. Two jet fires do share N = 3, and the release that reaches no one is outside the curve under either reading.")
 
 q(1,
  "Since no published worked F-N example exists, how is the engine's curve checked?",
@@ -95,7 +95,7 @@ q(1,
  ["A worked F-N example printed in the Purple Book, reproduced at every corner to twelve decimals",
   "The CCPS and HSE worked societal examples, which the engine reproduces within their rounding",
   "The R2P2 point, which fixes the curve at N = 50 and so pins every other corner of it"],
- "The digest says no source the engine read prints a worked F-N curve or a worked societal calculation, and the CCPS and HSE worked examples were not available. The curve is therefore checked by self-consistency only, through the three routes named in the key. The R2P2 point is a criterion the curve is compared with, which fixes nothing about the curve itself.")
+ "The course says no source the engine read prints a worked F-N curve or a worked societal calculation, and the CCPS and HSE worked examples were not available. The curve is therefore checked by self-consistency only, through the three routes named in the key. The R2P2 point is a criterion the curve is compared with, which fixes nothing about the curve itself.")
 
 q(3,
  "An analyst writes up the JISIKE off-site F(12) of 0.000009700000 per year. How may the write-up describe that figure?",
@@ -111,7 +111,7 @@ q(0,
  ["F(N) = sum of f_i with N_i > N, at each distinct N_i >= 0 (right-continuous step function)",
   "F(N) = sum of f_i x N_i over every scenario, at each distinct N_i > 0 (a cumulative sum)",
   "F(N) = f_i at N_i alone, at each distinct N_i > 0, joined by straight lines between corners"],
- "The digest quotes the model string in the key word for word: N or more, corners only at N above zero, a left-continuous step. The strict inequality is the \"more than N\" reading, and counting N of zero would put the release that reaches no one on the curve. A sum of f times N is the expected fatalities. A frequency at one N alone is the exactly N reading, and the curve holds steps with no straight lines.")
+ "The course quotes the model string in the key word for word: N or more, corners only at N above zero, a left-continuous step. The strict inequality is the \"more than N\" reading, and counting N of zero would put the release that reaches no one on the curve. A sum of f times N is the expected fatalities. A frequency at one N alone is the exactly N reading, and the curve holds steps with no straight lines.")
 
 q(2,
  "One scenario in an F-N call carries no name. What error string comes back from fnCurve?",

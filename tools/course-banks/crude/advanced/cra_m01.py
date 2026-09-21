@@ -10,7 +10,7 @@ q(2, "Two rows, x + y <= 2 and x + y >= 3, sit under the objective minimise x + 
  ["optimal, objective 3.0000, where x + y >= 3 holds",
   "unbounded, since x + y has no floor",
   "it throws, as the rows contradict each other"],
- "Infeasible and unbounded are answers, and the digest prints this problem's status as infeasible. The kernel throws only on a malformed problem.")
+ "Infeasible and unbounded are answers, and the course prints this problem's status as infeasible. The kernel throws only on a malformed problem.")
 
 q(0, "In the kernel's own terms, what is the 400 bbl of Butane the Apapa terminal holds?",
  "A bound on one variable, the upper limit on Butane's volume.",

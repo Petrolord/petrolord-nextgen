@@ -1,0 +1,30 @@
+{
+ "app_slug": "network",
+ "rows": 1,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "hand edits in the recut generator (this course has no committed bank source)",
+ "edits": [
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-cusps-and-rankings",
+   "ord": 14,
+   "fields": {
+    "options": {
+     "old": [
+      "Every real case in the digest ranks exactly as the header says, and a relative floor at one part in ten thousand of the largest branch mass would close it and change no ranking here.",
+      "Because the whisper leg is a constructed fixture, and a leg carrying a millionth of a pound a day cannot occur on a solved network.",
+      "Because the ranking is never read by a caller, since diagnose is a reporting function and no field in it feeds the solve.",
+      "Because the independent oracle ranks a bottleneck too and agrees with the engine on every published case."
+     ],
+     "new": [
+      "Every real case in the course ranks exactly as the header says, and a relative floor at one part in ten thousand of the largest branch mass would close it and change no ranking here.",
+      "Because the whisper leg is a constructed fixture, and a leg carrying a millionth of a pound a day cannot occur on a solved network.",
+      "Because the ranking is never read by a caller, since diagnose is a reporting function and no field in it feeds the solve.",
+      "Because the independent oracle ranks a bottleneck too and agrees with the engine on every published case."
+     ]
+    }
+   }
+  }
+ ]
+}

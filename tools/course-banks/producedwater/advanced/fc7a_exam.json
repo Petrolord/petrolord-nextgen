@@ -107,7 +107,7 @@
    "A plate pack cut is proportional to the channel height the pack is sliced into."
   ],
   "answer": 0,
-  "explanation": "On the UZERE inlet it returns 26.000000 micron against a typed 26, on every grid in the digest."
+  "explanation": "On the UZERE inlet it returns 26.000000 micron against a typed 26, on every grid in the course."
  },
  {
   "prompt": "Two rows of the published grid group differ in nothing but their bin count, one at 60 and one at 30. What is identical across them, and what does that pin?",
@@ -278,7 +278,7 @@
   "prompt": "At least one row per device in that file states NONE of that device's own defaults. Why is that a rule rather than an accident?",
   "options": [
    "Because a suite whose every case runs at the defaults cannot tell a default from a derivation.",
-   "Because a row at the defaults would duplicate the row the digest already prints for that device.",
+   "Because a row at the defaults would duplicate the row the course already prints for that device.",
    "Because the defaults are pinned by literal in the jest suite, so a case running at them checks nothing new.",
    "Because a golden row has to straddle a threshold, and no default sits on a threshold."
   ],

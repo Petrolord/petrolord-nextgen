@@ -30,7 +30,7 @@
    "REFUSED, with the failed checkpoint sentence H-05 met."
   ],
   "answer": 3,
-  "explanation": "The digest fails W-09, R-04, M-07 and S-10 one at a time and each is refused with \"1 checkpoint has failed and has not been resolved.\" A failed point blocks closure whatever its type, including the types whose stops work column reads false."
+  "explanation": "The course fails W-09, R-04, M-07 and S-10 one at a time and each is refused with \"1 checkpoint has failed and has not been resolved.\" A failed point blocks closure whatever its type, including the types whose stops work column reads false."
  },
  {
   "prompt": "The third refusal reads \"3 non-conformances raised against this plan are still open.\" Which NCR statuses does the plan gate treat as open?",
@@ -154,7 +154,7 @@
   "explanation": "The allowed step comes after H-05, H-08 and H-11 are resolved and every NCR is closed or voided. A witness point, a surveillance point and a review point stand unresolved, because the gate asks only about failed points, hold points and NCRs."
  },
  {
-  "prompt": "SECTION 12 prints overdue 3 and hold points outstanding 3 for the plan. Which point sits in both lists?",
+  "prompt": "The course prints overdue 3 and hold points outstanding 3 for the plan. Which point sits in both lists?",
   "options": [
    "H-08 and H-11.",
    "S-10 and R-12.",

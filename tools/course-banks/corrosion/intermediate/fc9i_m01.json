@@ -85,7 +85,7 @@
    "Towards the most limiting answer, because a wetting factor of 1.000000 is the largest value the regime can take."
   ],
   "answer": 3,
-  "explanation": "A direct caller that omits the key entirely gets a wetting factor of 1.000000, which is the water-wet answer, and the digest records that direction as conservative. A water cut typed as not-a-number refuses instead, and not-a-number is what the studio layer produces from a blank box."
+  "explanation": "A direct caller that omits the key entirely gets a wetting factor of 1.000000, which is the water-wet answer, and the course records that direction as conservative. A water cut typed as not-a-number refuses instead, and not-a-number is what the studio layer produces from a blank box."
  },
  {
   "prompt": "Inside the intermittent regime a water cut arrives as not-a-number. What does the engine return?",

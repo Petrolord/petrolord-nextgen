@@ -69,9 +69,9 @@ q(2, "Which reading shows a configuration whose crude unit was given a feed?",
  ["The crude unit reading 78.04 percent, short of its 2600000.00 bbl capacity.",
   "Total crude and crude unit throughput agreeing to the barrel, printed as true.",
   "The crude unit charging 1.2500 a barrel on every barrel of crude."],
- "In the fed configuration the digest prints crude unit operating cost 0.00, and the crude is still run. The three other options read ABUA as typed: 78.04 percent, the agreement flag true, and 2536290.32 at 1.2500 a barrel.")
+ "In the fed configuration the course prints crude unit operating cost 0.00, and the crude is still run. The three other options read ABUA as typed: 78.04 percent, the agreement flag true, and 2536290.32 at 1.2500 a barrel.")
 
-q(3, "Of these changes the digest prices around ABUA's month, which one raises the margin?",
+q(3, "Of these changes the course prices around ABUA's month, which one raises the margin?",
  "The hydrotreater capacity left blank, for no limit.",
  ["The reformer stepped from 420000.00 to 440000.00 bbl.",
   "The crude unit held at 1900000 barrels for the month.",
@@ -96,8 +96,8 @@ q(3, "Which way of handing cascadeToSchedule its period start keeps ABUA's dates
  "Pass it as a YYYY-MM-DD string, so no clock or zone can move it.",
  ["Leave it out, so the schedule is dated from the day it is built.",
   "Pass it as a Date at local midnight, as the Suite page does.",
-  "Pass it as a Date, the way the digest's seven zone run does."],
- "Left out, the period start is read from the machine clock. A YYYY-MM-DD string is the same calendar day in every zone, and that is how the Suite page and the digest pass it, 2027-03-01 for ABUA. A Date built at local midnight starts on 2027-02-28 in Africa/Lagos and Pacific/Kiritimati.")
+  "Pass it as a Date, the way the course's seven zone run does."],
+ "Left out, the period start is read from the machine clock. A YYYY-MM-DD string is the same calendar day in every zone, and that is how the Suite page and the course pass it, 2027-03-01 for ABUA. A Date built at local midnight starts on 2027-02-28 in Africa/Lagos and Pacific/Kiritimati.")
 
 q(0, "Which of ABUA's streams is valued through a unit that has room?",
  "Naphtha, 91.4500, through the reformer at 97.07 percent.",
@@ -111,7 +111,7 @@ q(2, "Which ABUA figure does the schedule's totals table print identically in it
  ["The margin, 7077935.48, dated 2027-03-31.",
   "The crude unit capacity, 2600000.00 bbl.",
   "The offgas surplus of 103638.71 bbl, lifted weekly."],
- "The digest sets the schedule's totals beside the plan's for all ten materials, and every row agrees. The cdu row reads 2029032.26 bbl and 2536290.32 in both, so the schedule adds no barrels and loses none.")
+ "The course sets the schedule's totals beside the plan's for all ten materials, and every row agrees. The cdu row reads 2029032.26 bbl and 2536290.32 in both, so the schedule adds no barrels and loses none.")
 
 emit(Q, '/root/wt-md-refinery-nextgen/tools/course-banks/refinery/intermediate/rfi_m06.json', label='rfi_m06', expect_n=15)
 finish()

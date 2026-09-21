@@ -12,7 +12,7 @@ q(1, "Clause 7.2 of the ORASHI register has nothing recorded. A request sets it 
  ["It allows the status, because the evidence reference is what a conformity claim stands on.",
   "It refuses with the shorter sentence asking only for the date and the assessor.",
   "It allows the status and lists 7.2 under missingEvidenceParts for the rest."],
- "The digest prints REFUSED for Conformant with an evidence reference only, in the words it uses for Conformant with nothing else: name the evidence, the date it was assessed and who assessed it. The shorter sentence belongs to a Nonconformant request with no date.")
+ "The course prints REFUSED for Conformant with an evidence reference only, in the words it uses for Conformant with nothing else: name the evidence, the date it was assessed and who assessed it. The shorter sentence belongs to a Nonconformant request with no date.")
 
 q(3, "Clause 7.2 has nothing recorded. Which of these requests on it does canSetClauseStatus ALLOW?",
  "Nonconformant, with the date it was assessed and the assessor.",
@@ -28,7 +28,7 @@ q(0, "A request sets clause 7.2's status to Not applicable while its applicabili
   "Not applicable is a word the clause vocabulary does not carry, so the status itself is refused."],
  "The refusal reads: \"A clause determined not applicable cannot also carry a conformity verdict. Set both together, or neither.\" The justification rule arises once both fields read Not applicable, and Not applicable is one of the five words in CLAUSE_STATUSES.")
 
-q(2, "Both fields of a clause are set to Not applicable with no justification. Of the four refusals the digest prints for this request, which one cites a numbered clause of the standard?",
+q(2, "Both fields of a clause are set to Not applicable with no justification. Of the four refusals the course prints for this request, which one cites a numbered clause of the standard?",
  "The ISO 9001:2015 refusal, which cites §4.3 of that standard.",
  ["The ISO 14001:2015 refusal, which cites §9.2 of the standard the ORASHI register is kept against.",
   "The ISO 45001:2018 refusal, which cites §4.3 in the same words the ISO 9001:2015 sentence uses.",
@@ -40,7 +40,7 @@ q(2, "The same Not applicable request, with no justification, is sent with no st
  ["An allowed verdict, because without a standard there is no requirement left to justify.",
   "A refusal naming ISO 14001:2015, the standard of the register the clause sits in.",
   "A refusal saying the call is missing its standard, returned before any justification is read."],
- "The digest prints: \"Say why this requirement does not apply. A requirement determined not applicable keeps its justification on record.\" The verdict is the same refusal for all three standards and for none; only the wording follows the standard passed.")
+ "The course prints: \"Say why this requirement does not apply. A requirement determined not applicable keeps its justification on record.\" The verdict is the same refusal for all three standards and for none; only the wording follows the standard passed.")
 
 q(1, "Asked to set clause 7.2 to Compliant, the gate answers \"Compliant is not a clause status.\" Where does the word Compliant belong in this course?",
  "In the obligation register, where it is one of the complianceStatus words.",
@@ -103,7 +103,7 @@ q(0, "Partially conformant sits between Conformant and Nonconformant. Which of t
  ["Nonconformant: a date and an assessor are enough, and no evidence reference is asked for.",
   "Neither: it needs an evidence reference alone, since a partial claim carries no assessment.",
   "Neither: it is refused unless the clause's applicability is changed in the same request."],
- "The digest prints Partially conformant, nothing else: REFUSED, with the sentence Conformant meets, and ALLOWED with evidence, a date and an assessor. Clause 6.1.2 reads Partially conformant with claims conformity, evidence record and assessed all true.")
+ "The course prints Partially conformant, nothing else: REFUSED, with the sentence Conformant meets, and ALLOWED with evidence, a date and an assessor. Clause 6.1.2 reads Partially conformant with claims conformity, evidence record and assessed all true.")
 
 q(3, "The readiness counts print evidenced 9 and conformant 9. Do the two counts cover the same nine clauses?",
  "No. Clause 5.2 is Conformant without evidence, and clause 6.1.2 is evidenced without being Conformant.",

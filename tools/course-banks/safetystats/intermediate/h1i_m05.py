@@ -52,7 +52,7 @@ q(3, "Why did the engine choose the central convention?",
   "It needs no binomial, only the two tails of a normal curve."],
  "The p-value and the interval come from one construction, so they agree by design. The minlike convention is the one R and scipy use, and on UTOROGU the central figure is the larger of the two, 0.051759 against 0.025879.")
 
-q(1, "The digest sweeps every pair of counts from 0 to 15 north and 0 to 24 south on the UTOROGU hours, except both zero. How often does each p-value disagree with the engine's interval at 0.05?",
+q(1, "The course sweeps every pair of counts from 0 to 15 north and 0 to 24 south on the UTOROGU hours, except both zero. How often does each p-value disagree with the engine's interval at 0.05?",
  "Central on 0 of the 399 comparisons, minlike on 14.",
  ["Central on 14 of the 399, minlike on 0, since minlike is the convention in R and scipy.",
   "Both on 14, since the disagreements come from rounding to six decimals.",

@@ -29,7 +29,7 @@ q(3, "unansweredItems lists 10, 11, 13 and 14. What separates items 13 and 14 fr
  ["Items 13 and 14 are Critical questions, and 10 and 11 are Minor ones.",
   "Items 13 and 14 carry a blank note, and 10 and 11 carry no note.",
   "Items 13 and 14 read Observation, and 10 and 11 read Not applicable."],
- "The digest prints that items 10 (Not applicable, a blank note) and 11 (Not applicable, no note) have a recorded row that is not an answer, and that items 13 and 14 have no row at all. Item 13 is Minor and item 14 Major.")
+ "The course prints that items 10 (Not applicable, a blank note) and 11 (Not applicable, no note) have a recorded row that is not an answer, and that items 13 and 14 have no row at all. Item 13 is Minor and item 14 Major.")
 
 q(1, "Items 2 and 6 are answered Nonconformant. What do they do to checklistProgress's percent 71?",
  "They raise it, exactly as a Conformant answer would.",
@@ -59,7 +59,7 @@ q(2, "A three-item checklist has a Major item and a Minor item answered Nonconfo
   "ALLOWED only once the Major item has a finding raised."],
  "criticalAnswersWithoutFindings lists 0 items and the report is ALLOWED. The finding rule applies to Critical items only, and the engine has no rule that a Major or Minor nonconformance must raise a finding before the audit is reported.")
 
-q(1, "The digest walks canRaiseFinding through three refusals before it reaches the stop-work rows. What do those three ask for?",
+q(1, "The course walks canRaiseFinding through three refusals before it reaches the stop-work rows. What do those three ask for?",
  "A finding type, a one-line statement and objective evidence.",
  ["A finding type, an owner and a due date.",
   "A one-line statement, a correction and a root cause.",
@@ -99,7 +99,7 @@ q(3, "The programme summarise prints open findings 1, open major 1 and stop-work
  ["Three, one behind each of the three counts.",
   "Two: AF-2026-018 and a finding raised from item 6.",
   "One: AF-2026-018, a Minor nonconformity that stopped work."],
- "The digest names the findings summarise counts: AF-2026-018 alone. One finding is behind open findings 1, open major 1 and stop-work open 1.")
+ "The course names the findings summarise counts: AF-2026-018 alone. One finding is behind open findings 1, open major 1 and stop-work open 1.")
 
 q(0, "With every item answered and items 10 and 11 given reasons, canReportAudit refuses on critical item 6 alone. Why is item 2 not named?",
  "Item 2 is covered by AF-2026-018.",

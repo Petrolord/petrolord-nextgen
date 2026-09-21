@@ -45,7 +45,7 @@ q(0, "What kind of operation is every step in the chain from a concentration in 
  "A concentration in parts per million by volume is a mole fraction. Multiply by the moles the plant handles, by the fraction the glycol absorbs and by a molecular weight, and convert the bases. No step solves anything, iterates or looks anything up.")
 
 q(2, "Tripling the concentration from 60 to 180 ppmv at a fixed absorbed fraction multiplies the pounds a day by 3.000000000000, and doubling the fraction from 0.1 to 0.2 at a fixed concentration multiplies it by 2.000000000000. Where do those two figures come from?",
- "The digest dividing two rows of the printed table by one another.",
+ "The lesson dividing two rows of the printed table by one another.",
  ["The engine, which returns a sensitivity beside each answer so a reader can see how the balance responds.",
   "The oracle, which publishes the ratio as a case of its own.",
   "An assumption about what a mole balance ought to do."],
@@ -72,7 +72,7 @@ q(0, "Why does the engine report the still overhead in two units at once rather 
   "Because the annual figure carries the absorbed fraction and the daily figure does not, so a reader can see the effect of the fraction by comparing them."],
  "Both come from the same mole balance and neither is a conversion a reader has to perform. Handing over one and asking the reader to convert is how a factor of the wrong size gets introduced.")
 
-q(2, "The digest prints 0.182500000000 for the still overhead. What is that figure?",
+q(2, "The course prints 0.182500000000 for the still overhead. What is that figure?",
  "The days in a year over the pounds in a short ton, measured as one BTEX answer over another from the same call.",
  ["The short tons a year at an absorbed fraction of one, which is the basis every other fraction scales from.",
   "The fraction of the aromatics in the inlet gas that the still overhead actually carries out of the plant.",
@@ -86,7 +86,7 @@ q(1, "Why can that pair of constants only be measured as a group?",
   "Because the days in a year is not exported under a name of its own."],
  "What can be measured from outside is their ratio, by taking one answer of a call over another answer of the same call. A group cannot say which of its parts is wrong when the group is.")
 
-q(3, "A constant is measured out of the engine and the digest prints a ratio of 1.000000000000 between the measurement and the exported name. What has that established?",
+q(3, "A constant is measured out of the engine and the course prints a ratio of 1.000000000000 between the measurement and the exported name. What has that established?",
  "That the exported name and the number the arithmetic actually uses are the same number.",
  ["That the constant is correct, since a measurement agreeing with an export to twelve decimals is as close to a proof as a constant gets.",
   "That the constant is derived rather than declared.",
@@ -102,7 +102,7 @@ q(2, "The mole balance carries a molecular weight with a default of 92.000000. W
 
 q(0, "Which of the three kinds of constant is that molecular weight, and what does its kind allow?",
  "Declared, so pinning it is all any gate can do.",
- ["Measured, so the digest can ask the engine a question whose answer is the molecular weight and nothing else.",
+ ["Measured, so the course can ask the engine a question whose answer is the molecular weight and nothing else.",
   "Derived, so it cannot be wrong unless the thing it is computed from is wrong as well.",
   "Declared, so the published cases check it against the golden every time they are run."],
  "The module exports it in one place under its own name and its own comment says that pinning it is all any gate can do. Pinning records that a change would be a reviewed act rather than an edit nobody noticed.")

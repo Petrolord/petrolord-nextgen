@@ -278,7 +278,7 @@ q(2, "This module exports 17 names in all. How many of them are frozen tables ra
  ["2, which are the declared constants and the held register.",
   "7, one for each entry the held register carries.",
   "12, one for each door that takes a named-argument object."],
- "Section 20 reads the held register itself rather than quoting a count from the module's header sentence, which is how the disagreement between 7 and six was found.")
+ "The course reads the held register itself rather than quoting a count from the module's header sentence, which is how the disagreement between 7 and six was found.")
 
 q(3, "Which habit does this tier end on?",
  "Compute one number on a result sheet from the others.",

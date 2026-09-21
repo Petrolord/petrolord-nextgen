@@ -8,7 +8,7 @@
    "Capital spread evenly over the life, and each benefit at the end of its year, so that the cost and the benefit fall in step."
   ],
   "answer": 1,
-  "explanation": "The digest says every present value goes through the canonical year-end present value: capital at year 0, each annual cost and benefit at the end of years 1 to n. The checklist example is undiscounted, so it prints no timing convention of its own. Start of year and mid-year flows are other conventions, and the engine never spreads capital over the life."
+  "explanation": "The course says every present value goes through the canonical year-end present value: capital at year 0, each annual cost and benefit at the end of years 1 to n. The checklist example is undiscounted, so it prints no timing convention of its own. Start of year and mid-year flows are other conventions, and the engine never spreads capital over the life."
  },
  {
   "prompt": "The discount and growth rates of a `costBenefit` call are all left out. What does the engine do with them?",
@@ -30,7 +30,7 @@
    "R2P2 (2001) and the CBA checklist (2003) both at 6 percent real, differing only in whether benefits are uprated by 4 percent or held flat over the life."
   ],
   "answer": 0,
-  "explanation": "The digest says the two sources disagree: R2P2 discounts at 6 percent real and uprates benefits by 4 percent a year, and the checklist discounts benefits at no more than 1.5 percent and costs at no less than 3.5 percent. Giving R2P2 the 1.5 and 3.5 percent limits swaps the two sources, and the remaining pairs describe conventions neither source states."
+  "explanation": "The course says the two sources disagree: R2P2 discounts at 6 percent real and uprates benefits by 4 percent a year, and the checklist discounts benefits at no more than 1.5 percent and costs at no less than 3.5 percent. Giving R2P2 the 1.5 and 3.5 percent limits swaps the two sources, and the remaining pairs describe conventions neither source states."
  },
  {
   "prompt": "The EDIKAN firewall (deltaPLL 2e-3, VPF 1000000, 20 years, capital 250000 and 5000 a year) is weighed at the 2003 checklist limits. What present values and ratio does the engine return?",
@@ -52,7 +52,7 @@
    "9.328625, from present values of 32946.93 and 307349.61."
   ],
   "answer": 3,
-  "explanation": "The R2P2 row of the digest prints 32946.93, 307349.61 and 9.328625. 9.350247 belongs to the checklist limits and 8.750000 to the undiscounted row. Growth of 0.04 against a discount of 0.06 does not cancel, so the benefit is not left at its undiscounted 40000.00."
+  "explanation": "The R2P2 row of the course's table shows 32946.93, 307349.61 and 9.328625. 9.350247 belongs to the checklist limits and 8.750000 to the undiscounted row. Growth of 0.04 against a discount of 0.06 does not cancel, so the benefit is not left at its undiscounted 40000.00."
  },
  {
   "prompt": "The engine's ICAF for the EDIKAN firewall at the 2003 checklist limits is 8026550.41. How is it built?",
@@ -85,7 +85,7 @@
    "The discounted fatalities, 0.034337, because the engine discounts the fatalities once at the checklist limits and holds them."
   ],
   "answer": 2,
-  "explanation": "The digest says the fatalities prevented stay at 0.040000 whatever the rate, and only the cost is discounted, which is why the ICAF falls as the cost rate rises. The cost moves from 350000.00 to 321062.02 to 307349.61. The ratio moves too, from 8.750000 to 9.350247 and 9.328625, and 0.034337 is a derived figure the engine never uses as its denominator."
+  "explanation": "The course says the fatalities prevented stay at 0.040000 whatever the rate, and only the cost is discounted, which is why the ICAF falls as the cost rate rises. The cost moves from 350000.00 to 321062.02 to 307349.61. The ratio moves too, from 8.750000 to 9.350247 and 9.328625, and 0.034337 is a derived figure the engine never uses as its denominator."
  },
  {
   "prompt": "What is the ICAF of the EDIKAN firewall under R2P2 Appendix 3's convention?",
@@ -107,7 +107,7 @@
    "The incremental cost of avoiding a fire, which R2P2 calls the CPF."
   ],
   "answer": 1,
-  "explanation": "The digest defines the ICAF as the engine's cost per fatality prevented, CPF in R2P2 Appendix 3 paragraph 15: the present value of the cost over the undiscounted fatalities prevented. The VPF is a value set by the analyst, a different quantity. FAR is the fatal accident rate, and the acronym does not stand for a cost of avoiding fires."
+  "explanation": "The course defines the ICAF as the engine's cost per fatality prevented, CPF in R2P2 Appendix 3 paragraph 15: the present value of the cost over the undiscounted fatalities prevented. The VPF is a value set by the analyst, a different quantity. FAR is the fatal accident rate, and the acronym does not stand for a cost of avoiding fires."
  },
  {
   "prompt": "When can the EDIKAN firewall's ICAF be read straight against the VPF to decide the gross disproportion test, and when must the analyst read the cost to benefit ratio against the DF instead?",
@@ -118,7 +118,7 @@
    "Only when every rate is zero, because at any other convention the ICAF and the verdict are guaranteed to disagree about the measure."
   ],
   "answer": 0,
-  "explanation": "The digest says an ICAF below VPF times the DF passes when injuries add nothing, and with injuries in the benefit the ratio against the DF is the test, since the ICAF leaves them out. The ICAF counts fatalities only. It can be read against the VPF at any convention, and nothing guarantees a disagreement away from zero rates."
+  "explanation": "The course says an ICAF below VPF times the DF passes when injuries add nothing, and with injuries in the benefit the ratio against the DF is the test, since the ICAF leaves them out. The ICAF counts fatalities only. It can be read against the VPF at any convention, and nothing guarantees a disagreement away from zero rates."
  },
  {
   "prompt": "The golden R2P2 case with 6 percent on both sides and a 4 percent uprating of benefits runs through the engine. What present values does it return?",
@@ -129,7 +129,7 @@
    "A cost of 22635.17, a benefit of 214412.08."
   ],
   "answer": 2,
-  "explanation": "The digest prints the golden R2P2 case through the engine as a benefit of 22635.17 and a cost of 214412.08. 32946.93 and 307349.61 are the EDIKAN firewall under the same convention, a different measure. 9283.50 and 92835.00 are the checklist benefit and its largest reasonable cost, and the reversed pair swaps the two present values."
+  "explanation": "The course shows the golden R2P2 case through the engine as a benefit of 22635.17 and a cost of 214412.08. 32946.93 and 307349.61 are the EDIKAN firewall under the same convention, a different measure. 9283.50 and 92835.00 are the checklist benefit and its largest reasonable cost, and the reversed pair swaps the two present values."
  },
  {
   "prompt": "A `costBenefit` call gives the firewall a life of twenty and a half years. What does the engine return, in its own words?",
@@ -151,7 +151,7 @@
    "engines/economics/cashflow.ts npv (year-end discounting); benefits at 0 growing at 0, costs at 0; undiscounted"
   ],
   "answer": 1,
-  "explanation": "The digest quotes the checklist row's basis verbatim, with benefits at 0.015 growing at 0 and costs at 0.035. The mid-year string swaps the rates and names a convention the engine does not use. The 0.06 string is the R2P2 row's and the zero string the undiscounted row's, each a real string for a different convention."
+  "explanation": "The course quotes the checklist row's basis verbatim, with benefits at 0.015 growing at 0 and costs at 0.035. The mid-year string swaps the rates and names a convention the engine does not use. The 0.06 string is the R2P2 row's and the zero string the undiscounted row's, each a real string for a different convention."
  },
  {
   "prompt": "Why does this course use a present value at all, when present value mechanics belong to the economics courses?",
@@ -162,6 +162,6 @@
    "To discount the fatalities prevented so that a death in year 20 of the life counts for less than one prevented in the first year."
   ],
   "answer": 0,
-  "explanation": "The digest says this course uses present value mechanics only to put a cost and a benefit on the same footing for the gross disproportion test, and the ICAF uses the present value of the cost. No financial ranking is made, the VPF stays a stated input, and the fatalities prevented are counted undiscounted."
+  "explanation": "The course says it uses present value mechanics only to put a cost and a benefit on the same footing for the gross disproportion test, and the ICAF uses the present value of the cost. No financial ranking is made, the VPF stays a stated input, and the fatalities prevented are counted undiscounted."
  }
 ]

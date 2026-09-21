@@ -63,7 +63,7 @@ q(2, "Down the scaleComparison table, what does the screen check about capital p
  ["Per bpd falls under stick-built only; modular per bpd holds at 12800.00.",
   "Per bpd rises at every step and total rises at every step, under both laws.",
   "Total rises under the modular law only, and per bpd goes unchecked."],
- "The digest prints: capital per bpd falls at every step as capacity rises, modular true, stick-built true; total capital rises at every step, modular true, stick-built true. The plant costs more and each bpd of it costs less."),
+ "The course prints: capital per bpd falls at every step as capacity rises, modular true, stick-built true; total capital rises at every step, modular true, stick-built true. The plant costs more and each bpd of it costs less."),
 
 q(0, "Read the modular cheaper flags in scaleComparison. Which exponent gives the lower capital above the reference size of 5000 bpd, and which below it?",
  "0.6 above it, and 0.9 below it",

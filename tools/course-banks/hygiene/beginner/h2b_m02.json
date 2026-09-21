@@ -52,7 +52,7 @@
    "83, since the table was typed from the exact values."
   ],
   "answer": 2,
-  "explanation": "Digest section 5: with the exact coefficient 49 of the 83 printed rows fall outside their printed tolerance, so the table was computed with the coefficient NIOSH prints. The tempting 0 is the OSHA Table A-1 result, 0 of 150, because the OSHA gap is too small to move a printed decimal. Some NIOSH rows, such as 20.000000 percent, cannot tell the two apart."
+  "explanation": "The course records it: with the exact coefficient 49 of the 83 printed rows fall outside their printed tolerance, so the table was computed with the coefficient NIOSH prints. The tempting 0 is the OSHA Table A-1 result, 0 of 150, because the OSHA gap is too small to move a printed decimal. Some NIOSH rows, such as 20.000000 percent, cannot tell the two apart."
  },
  {
   "prompt": "Eight hours at a constant 100 dBA on the NIOSH preset: what TWA does the engine report?",
@@ -63,7 +63,7 @@
    "85.000000 dBA, since a TWA on NIOSH is stated at its criterion level."
   ],
   "answer": 0,
-  "explanation": "Digest section 5 measures 100.051500 dBA on the NIOSH preset, where the level itself is 100. The tempting 100.000000 dBA is what a custom criterion with the exact coefficient returns for the same record. The printed 10.0 sits 0.034215715338 dB above the exact coefficient, and that excess is what lifts the TWA above the constant level."
+  "explanation": "The course measures 100.051500 dBA on the NIOSH preset, where the level itself is 100. The tempting 100.000000 dBA is what a custom criterion with the exact coefficient returns for the same record. The printed 10.0 sits 0.034215715338 dB above the exact coefficient, and that excess is what lifts the TWA above the constant level."
  },
  {
   "prompt": "A criterion typed by hand, with no coefficient given, has a 4 dB decibel exchange rate. Which TWA coefficient does the engine default to?",

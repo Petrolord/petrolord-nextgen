@@ -204,7 +204,7 @@ q(0, "Besides the engine, what enforces decision D1?",
  ["Nothing: it is advice to the app.",
   "The originator.",
   "The approval level."],
- "The engine holds the rule in its assignment and deciding checks, and the digest records that the database enforces the same rule.")
+ "The engine holds the rule in its assignment and deciding checks, and the course records that the database enforces the same rule.")
 
 # two modules: m02 rejection stops the gate, m03 a decision is made once
 q(3, "ES-01's level 2 approval has been decided \"Rejected\". Can the same row be decided \"Approved\" later so the change can go in?",

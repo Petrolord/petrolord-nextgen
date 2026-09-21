@@ -285,7 +285,7 @@ q(0, "The implied water density of the pump packagings is held for literature, y
   "The conversions are graded against the published golden cases rather than against the packagings."],
  "What is held is the comparison to a published water density. What is measurable is what the engine carries, and the two questions are not the same question.")
 
-q(2, "The Hydraulic Institute viscosity correction is held, and the digest names a further simplification inside it. What is it?",
+q(2, "The Hydraulic Institute viscosity correction is held, and the course names a further simplification inside it. What is it?",
  "The head factor is taken equal to the flow factor at best efficiency.",
  ["The efficiency factor is taken equal to the flow factor at best efficiency.",
   "The correlating parameter is evaluated at the shutoff head rather than at the duty.",

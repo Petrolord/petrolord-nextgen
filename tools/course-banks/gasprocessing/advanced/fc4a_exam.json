@@ -308,7 +308,7 @@
   "explanation": "The concentration is a property of the gas the caller states and the absorbed fraction is an operating value the caller supplies. What the engine does with them is a mole balance and nothing else."
  },
  {
-  "prompt": "Digest Section 20 is the one section whose subject is what this engine used to do, and it says so in its title and its first line. What does the course require of a sentence drawn from it?",
+  "prompt": "One section of this course is about what this engine used to do, and it says so in its title and its first line. What does the course require of a sentence drawn from it?",
   "options": [
    "That it name the finding number the repair recorded it under, so a reader can trace it.",
    "That it say plainly that this is what the engine used to do.",

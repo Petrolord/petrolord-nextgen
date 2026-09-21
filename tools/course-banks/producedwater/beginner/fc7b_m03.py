@@ -56,7 +56,7 @@ q(1, "What happens to the volume the grid leaves outside its span?",
   "It is refused when it grows past a declared fraction, since a grid that throws away that much of the oil cannot be integrated against."],
  "Reporting the tail is what lets a reader judge the grid. At the default span the truncated fraction is 0.000063372072, and the grid is reported back on the answer rather than kept as an implementation detail."),
 
-q(2, "On the bin count sweep the digest divides the reported tail by twice the module's own cdf below the span edge, and the column reads 1.000000000000 on every row. What does that rule out?",
+q(2, "On the bin count sweep the course divides the reported tail by twice the module's own cdf below the span edge, and the column reads 1.000000000000 on every row. What does that rule out?",
  "That the truncated tail is a binning artefact, since it is exactly the analytic tail of the distribution instead.",
  ["That the bin count moves the answer, since a column of ones across four resolutions is what an invariance looks like.",
   "That the module takes its cdf on the diameter rather than the volume, putting the tail on the wrong variable.",
@@ -79,7 +79,7 @@ q(0, "Read the outlet median column of that same sigma sweep: 15.793311 micron a
 
 q(1, "Where does this module warn on the droplet spread, and where does it stop answering?",
  "It warns outside 0.5 to 1 and refuses above 2, because a wider spread than that is not what produced water carries.",
- ["It warns outside 0.5 to 1 and refuses above 1.5, which is the widest row the digest sweeps and the last one that answers.",
+ ["It warns outside 0.5 to 1 and refuses above 1.5, which is the widest row the course sweeps and the last one that answers.",
   "It warns above 1 only, since a tight distribution is always within what the log-normal form can describe.",
   "It refuses outside 0.5 to 1, because a spread outside the customary band would carry volume beyond the span the grid reaches."],
  "The sigma of 1.5 answers and carries the warning, which is the ordinary pattern here: doubt is reported and the number still arrives, while a value the method has nothing to say about is declined by name."),

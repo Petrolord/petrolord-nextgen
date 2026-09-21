@@ -42,7 +42,7 @@ q(1,
   ["All of them, so that a learner can check a stated probability of death against the consequence course's own figure.",
    "Only the flare radiation calls, which belong to the facilities courses.",
    "Only the plume call, which belongs to the consequence course."],
-  "The digest says the engine re-grades nothing the consequence course or the facilities courses own, exports none of their functions, and that the jest suite asserts so. Flare radiation belongs to the facilities courses and is never used here. A toxic cloud, like a fire or an explosion, is modelled in the consequence course, and this engine takes the probability of death as a stated input.")
+  "The course says the engine re-grades nothing the consequence course or the facilities courses own, exports none of their functions, and that the jest suite asserts so. Flare radiation belongs to the facilities courses and is never used here. A toxic cloud, like a fire or an explosion, is modelled in the consequence course, and this engine takes the probability of death as a stated input.")
 
 q(0,
   "What range does the units table allow for an occupancy?",
@@ -122,7 +122,7 @@ q(1,
   ["Nothing: a pool fire can only happen inside a bund, so the leaf outside the bund belongs to a separate outcome altogether.",
    "The initiating frequency was typed as 2e-3 where the tree needs it per hour.",
    "The path probability was used in place of the frequency, which would give a number without a unit per year."],
-  "The digest says reading only the first pool fire leaf gives 0.000007000000 per year, which misses the leaf through the overtopped bund. Both leaves carry the outcome 'pool fire', so they pool into 0.000014500000. The initiating frequency of 2e-3 is per year as stated, and a path probability such as 0.003500000000 is a different number from the leaf frequency.")
+  "The course says reading only the first pool fire leaf gives 0.000007000000 per year, which misses the leaf through the overtopped bund. Both leaves carry the outcome 'pool fire', so they pool into 0.000014500000. The initiating frequency of 2e-3 is per year as stated, and a path probability such as 0.003500000000 is a different number from the leaf frequency.")
 
 q(3,
   "Is BRANCH_SUM_TOLERANCE absolute or relative, and how large is it?",
@@ -130,7 +130,7 @@ q(3,
   ["Relative, 1e-9 of the largest probability in the set, so a set of small branches gets a smaller allowance than a large one.",
    "Absolute, 1e-6, wide enough to let a tenth of a millionth through as ordinary rounding.",
    "Relative, one part in ten million of the sum."],
-  "The digest says BRANCH_SUM_TOLERANCE is 1e-9, absolute. That covers the double rounding of 0.7, 0.2 and 0.1, which sum to 0.9999999999999999, and refuses a set such as 0.4000001 and 0.6 a tenth of a millionth over one. A tolerance of 1e-6 would pass that typing error, and no relative allowance applies to a branch sum.")
+  "The course says BRANCH_SUM_TOLERANCE is 1e-9, absolute. That covers the double rounding of 0.7, 0.2 and 0.1, which sum to 0.9999999999999999, and refuses a set such as 0.4000001 and 0.6 a tenth of a millionth over one. A tolerance of 1e-6 would pass that typing error, and no relative allowance applies to a branch sum.")
 
 q(2,
   "An analyst counts every delayed ignition of the EREMOR release as an explosion. What explosion frequency does that tree give?",
@@ -170,7 +170,7 @@ q(3,
   ["Every cell as published, since the table is printed in full in the Purple Book and needs no reading of its own.",
    "Every cell as checked against a second reading, which is why a capstone may ask for any lookup to be graded.",
    "Every cell as the engine's own reading."],
-  "The digest says the validation record labels the band-edge cells as the engine's own reading and the interior cells as published. The edges are a reading because the printed band \"10 - 100 kg/s\" says nothing about which band its end points join. Nothing checks the table against a second reading, so every capstone states its ignition probabilities rather than asking for a lookup.")
+  "The course says the validation record labels the band-edge cells as the engine's own reading and the interior cells as published. The edges are a reading because the printed band \"10 - 100 kg/s\" says nothing about which band its end points join. Nothing checks the table against a second reading, so every capstone states its ignition probabilities rather than asking for a lookup.")
 
 q(0,
   "Which substance classes does `pbDirectIgnitionProbability` accept, and what does its refusal say classifies them?",
@@ -194,7 +194,7 @@ q(2,
   ["86.301293 m printed; 86.2 m through the chain.",
    "86.2 m in both.",
    "361 m in both."],
-  "The digest's table prints the effective cloud width as 86.2 m in the source and 86.301293 m through the engine's whole chain. The engine rounds no step, and on the whole chain the engine computes the width itself. 361 m is R, the distance to the grid point, which enters the coverage probability beside the width.")
+  "The course's table prints the effective cloud width as 86.2 m in the source and 86.301293 m through the engine's whole chain. The engine rounds no step, and on the whole chain the engine computes the width itself. 361 m is R, the distance to the grid point, which enters the coverage probability beside the width.")
 
 q(1,
   "What weather and direction probability, PM Pphi, does Appendix 6.B use?",
@@ -202,15 +202,15 @@ q(1,
   ["0.456, the printed coverage probability.",
    "0.835, the centreline probability of death printed in the source, which the weather and direction term is taken to scale.",
    "1.84e-8, the step 6 frequency."],
-  "The digest's table gives PM Pphi as 0.0368 printed and 0.0368 through the engine. 0.456 is the printed coverage probability Pci and 0.835 the printed centreline probability of death Pcl. 1.84e-8 per year is the product f PM Pphi carried into step 6, which already has the frequency folded in.")
+  "The course's table gives PM Pphi as 0.0368 printed and 0.0368 through the engine. 0.456 is the printed coverage probability Pci and 0.835 the printed centreline probability of death Pcl. 1.84e-8 per year is the product f PM Pphi carried into step 6, which already has the frequency folded in.")
 
 q(0,
-  "Working Appendix 6.B step by step from the PRINTED values, what does the digest get?",
+  "Working Appendix 6.B step by step from the PRINTED values, what does the course get?",
   "A coverage probability of 0.456038429735 from the printed width of 86.2 m, Pd = 0.835 x 0.456 = 0.380760, and a contribution of 7.0104e-9 per year.",
   ["A coverage probability of 0.456574314811, Pd = 0.380294556093 and a contribution of 0.000000006997 per year.",
    "A coverage probability of 0.456, Pd = 0.381 and a contribution of 7e-9 per year, the printed values with nothing recomputed.",
    "A Pd of 0.832930245430 and a contribution of 0.000000007010 per year."],
-  "From the printed values the digest gets a coverage probability of 0.456038429735 from the printed 86.2 m, Pd = 0.835 x 0.456 = 0.380760, and a contribution of 7.0104e-9 per year. 0.456574314811, 0.380294556093 and 0.000000006997 are the whole chain's values. The bare printed values recompute nothing, and 0.832930245430 is the whole chain's centreline value.")
+  "From the printed values the course gets a coverage probability of 0.456038429735 from the printed 86.2 m, Pd = 0.835 x 0.456 = 0.380760, and a contribution of 7.0104e-9 per year. 0.456574314811, 0.380294556093 and 0.000000006997 are the whole chain's values. The bare printed values recompute nothing, and 0.832930245430 is the whole chain's centreline value.")
 
 q(3,
   "Which pair gives the centreline probability of death that Appendix 6.B prints, then the value its full recomputation in the golden file reaches?",
@@ -218,7 +218,7 @@ q(3,
   ["0.381 in the source; 0.380294556093 in the golden recomputation, which are the two values of the centreline probability of death.",
    "0.835 in both.",
    "0.456 in the source; 0.456574314811 in the golden."],
-  "The digest's golden table gives Pcl as 0.835 printed and 0.832930245430 through the whole chain. 0.381 and 0.380294556093 are the two values of Pd = Pcl Pci, after coverage. 0.456 and 0.456574314811 are the coverage probability Pci. The whole chain computes Pcl; this course starts its own steps at the probability of death onward.")
+  "The course's golden table gives Pcl as 0.835 printed and 0.832930245430 through the whole chain. 0.381 and 0.380294556093 are the two values of Pd = Pcl Pci, after coverage. 0.456 and 0.456574314811 are the coverage probability Pci. The whole chain computes Pcl; this course starts its own steps at the probability of death onward.")
 
 q(3,
   "What contribution per year does the engine's whole Appendix 6.B chain give, against the source's printed 7e-9?",
@@ -245,7 +245,7 @@ q(2,
   "The process deck contributes 0.000016912100 of the 0.000017541379 per year. The accommodation has the most hours, 2560, but the lowest LSIR, so it adds only 0.000000031562. The control room adds 0.000000597717, and nothing counts double. The IRPA is a weighted sum, never an average.")
 
 q(0,
-  "An analyst wants to reuse the Purple Book indoor and outdoor fractions as a vulnerability factor in an IRPA. Why does the digest say that is the wrong use?",
+  "An analyst wants to reuse the Purple Book indoor and outdoor fractions as a vulnerability factor in an IRPA. Why does the course say that is the wrong use?",
   "Those fractions are for societal risk, counting deaths in a population; the vulnerability factor for individual risk is the analyst's own.",
   ["The fractions are right for the IRPA, and the engine applies them by default whenever a place is marked as being indoors.",
    "The fractions are for the ignition table, where they set how much of a release reaches an ignition source inside a building.",
@@ -274,7 +274,7 @@ q(0,
   ["LSIR(x) = max f_i P_i(x); contour crossings taken at the nearest printed distance to each level",
    "LSIR(x) = sum f_i P_i(x); contour crossings interpolated linearly in IR between bracketing points throughout",
    "LSIR = sum f_i x Pd_i, a person present at the location all the time, outdoors and unprotected"],
-  "The digest quotes the basis verbatim: LSIR(x) = sum f_i P_i(x); contour crossings interpolated in log10(IR) between bracketing points (linear in IR when one side is 0). The LSIR at a distance is a sum and never a maximum, and interpolation is in log10 except where one side is zero. The last string is the `locationIndividualRisk` model, for one place.")
+  "The course quotes the basis verbatim: LSIR(x) = sum f_i P_i(x); contour crossings interpolated in log10(IR) between bracketing points (linear in IR when one side is 0). The LSIR at a distance is a sum and never a maximum, and interpolation is in log10 except where one side is zero. The last string is the `locationIndividualRisk` model, for one place.")
 
 q(1,
   "The EREMOR transect gives 0.000000020000 per year at 300 m. Where does that come from?",
@@ -321,8 +321,8 @@ q(2,
   "The LOPA course, H3.",
   ["This course, at the Associate tier, since both reduce a scenario frequency before it reaches the LSIR.",
    "The consequence course, H4, which also makes each probability of death that this course is handed as an input.",
-   "The facilities courses, which the digest says also own flare radiation."],
-  "The digest says LOPA, IPL credit and SIL determination belong to the LOPA course (H3), and this course names them only at the seam. The consequence course owns the probability of death, and point source flare radiation and setback distances belong to the facilities courses, so neither owns IPL credit.")
+   "The facilities courses, which the course says also own flare radiation."],
+  "The course says LOPA, IPL credit and SIL determination belong to the LOPA course (H3), and this course names them only at the seam. The consequence course owns the probability of death, and point source flare radiation and setback distances belong to the facilities courses, so neither owns IPL credit.")
 
 q(3,
   "Point source flare radiation and setback distances: which courses do they belong to?",
@@ -338,7 +338,7 @@ q(1,
   ["This course, at the Associate tier, where each LSIR is placed in a cell before an IRPA can be formed from it.",
    "The consequence course, which also makes each probability of death that this course is handed as a stated input.",
    "The LOPA course, beside IPL credit."],
-  "The digest says the risk matrix and its scoring belong to the risk and change course, and this course never scores a matrix cell. An LSIR is a frequency per year and an IRPA a weighted sum, and neither passes through a cell. The consequence course owns the probability of death, and the LOPA course owns IPL credit.")
+  "The course says the risk matrix and its scoring belong to the risk and change course, and this course never scores a matrix cell. An LSIR is a frequency per year and an IRPA a weighted sum, and neither passes through a cell. The consequence course owns the probability of death, and the LOPA course owns IPL credit.")
 
 q(0,
   "The EREMOR process deck LSIR is 0.000148150000 per year and the control room's is 0.000006545000. The four outcome frequencies are the same at both places. What makes the difference?",

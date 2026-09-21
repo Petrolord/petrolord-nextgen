@@ -8,7 +8,7 @@
    "Neither module reads a shared units file. Each one writes its own kilowatt and Btu factors inline at the point of use."
   ],
   "answer": 2,
-  "explanation": "The digest names lib/units/fieldUnits.js as the source of the two power packagings, read by compression.js and by pumps.js."
+  "explanation": "The course names lib/units/fieldUnits.js as the source of the two power packagings, read by compression.js and by pumps.js."
  },
  {
   "prompt": "compression.js takes its compressibility validity window from another module. Which one, and what does that tell you about the window?",
@@ -19,7 +19,7 @@
    "It declares its own window internally, which is why the refusal message can quote the limits back at the caller."
   ],
   "answer": 0,
-  "explanation": "The digest preamble lists three sources for compression.js: gasProperties.js for the gas constant, the molecular weight of air and the Rankine offset, separatorSizing.js for the compressibility validity window, and fieldUnits.js for the two power packagings."
+  "explanation": "The course lists three sources for compression.js: gasProperties.js for the gas constant, the molecular weight of air and the Rankine offset, separatorSizing.js for the compressibility validity window, and fieldUnits.js for the two power packagings."
  },
  {
   "prompt": "A caller wraps every call into these two modules in a try block so that no bad input can stop a batch. What has that caller misread about the contract?",

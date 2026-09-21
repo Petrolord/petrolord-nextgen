@@ -89,7 +89,7 @@ q(2, "The three printed standard volumes, each rounded to the litre, add to 4499
  ["4499.453 m3, the sum of the three printed standard volumes",
   "4581.490 m3, the total gross observed volume of the three tanks",
   "4499.453 m3, since a stock is always quoted to the litre it prints"],
- "The engine sums the unrounded standard volumes and the digest prints that total as 4499.452 m3. The sum of the printed rows is not the figure the day closes on.")
+ "The engine sums the unrounded standard volumes and the course prints that total as 4499.452 m3. The sum of the printed rows is not the figure the day closes on.")
 
 q(3, "The morning has two totals, 4581.490 m3 and 4499.452 m3. Which can be set against an opening stock held at standard?",
  "4499.452 m3",

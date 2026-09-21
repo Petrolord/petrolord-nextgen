@@ -19,7 +19,7 @@
    "A pump price of 1066.7292 naira a litre, complete true."
   ],
   "answer": 3,
-  "explanation": "The digest prints price 1066.7292 naira a litre for that build and says it is complete true: the basis changes the amount, and every rate is still supplied."
+  "explanation": "The engine returns price 1066.7292 naira a litre for that build and says it is complete true: the basis changes the amount, and every rate is still supplied."
  },
  {
   "prompt": "The invented depot and terminal margin is 21 naira a litre. What does it do to the running total on BADAGRY?",
@@ -118,7 +118,7 @@
    "One Unattributed row holding the price."
   ],
   "answer": 0,
-  "explanation": "The digest prints marginWaterfall on a refused build-up as REFUSED: A landed cost per litre is required., the sentence buildPumpPrice gives when it has no landed cost."
+  "explanation": "The engine answers marginWaterfall on a refused build-up with REFUSED: A landed cost per litre is required., the sentence buildPumpPrice gives when it has no landed cost."
  },
  {
   "prompt": "In the invented BADAGRY grouping, which recipient row comes first, and why?",

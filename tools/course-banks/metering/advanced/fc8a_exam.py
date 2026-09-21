@@ -115,7 +115,7 @@ q(1, "A product whose true vapour pressure is at or above atmospheric is submitt
   "It converts the refusal into a warning above a stated throughput."],
  "A fixed-roof tank sits at very close to atmospheric pressure, and a product boiling at ambient will not sit quietly in one.")
 
-q(3, "What would it take for this digest to print a row labelled a refusal under numbers from a call that actually succeeded?",
+q(3, "What would it take for this course to print a row labelled a refusal under numbers from a call that actually succeeded?",
  "Nothing would print at all, because the file is not written if any label disagrees with its call.",
  ["A rebuild in another timezone, which is the drift the reproducibility check over five timezones and four locales exists to catch.",
   "A count whose tree and rule disagreed, which is the check that stands between a label and the evidence printed under it.",

@@ -28,7 +28,7 @@ q(3, "Read at the comparison GWP of 20, what share of EGBEMA's flare CO2e is met
   "0.1548"],
  "At 20 the share column prints 0.1110. 0.1998 sits at 40, 0.1568 at the study's 29.8, and 0.1548 is the stand-in row at 0.97.")
 
-q(2, "How does the digest form methaneShareOfFlareCo2e?",
+q(2, "How does the course form methaneShareOfFlareCo2e?",
  "flareCh4Tonnes times the GWP over flareCo2eTonnes",
  ["flareCh4Tonnes over flareCo2eTonnes",
   "flareCh4Tonnes times the GWP over flareCo2Tonnes",
@@ -70,7 +70,7 @@ q(3, "Which of these calls does abatement answer with \"REFUSED: A characterised
   "A call with the methane GWP blank"],
  "The refusal table prints that sentence for a gas the analysis refused. No volume gets \"REFUSED: A gas volume is required.\", blank days get the on-stream days sentence, and a blank GWP is answered with the CO2e null.")
 
-q(0, "What does the digest say about a flare that is not lit?",
+q(0, "What does the course say about a flare that is not lit?",
  "It is not modelled; the engine's flare is lit.",
  ["It is modelled at destruction efficiency 0.5.",
   "It is modelled with its methane set by the combustion efficiency.",
@@ -84,19 +84,19 @@ q(1, "40 CFR 98.233(n)(1) is a United States rule with tiered default pairs. Wha
   "It uses EGBEMA's 0.97 and 0.955 as the defaults."],
  "The stated limit: the efficiencies have no default. Whether a Nigerian flare study defaults to any tier, or to the NUPRC flare regulations' basis, is a regulation reading, and both efficiencies stay inputs. The studio opens with both blank and abatement refuses.")
 
-q(2, "The digest shows the on-stream days default by asking one function with the days omitted. Which, and what does it report?",
+q(2, "The course shows the on-stream days default by asking one function with the days omitted. Which, and what does it report?",
  "routeEconomics, onstreamDays 350",
  ["abatement, onstreamDays 355",
   "routeEconomics, onstreamDays 366",
   "characteriseGas, onstreamDays 350"],
- "SECTION 13: routeEconomics, asked with the days omitted, reports onstreamDays 350, and 7.5 MMscfd times a million times 350 is the omitted call's scfPerYear.")
+ "The refusals lesson: routeEconomics, asked with the days omitted, reports onstreamDays 350, and 7.5 MMscfd times a million times 350 is the omitted call's scfPerYear.")
 
 q(0, "Which of these does the engine ship?",
  "Typical component heating values and liquid densities",
  ["A methane GWP, taken whenever the GWP box is left blank",
   "A credit price for the tonnes a route abates",
   "A default flare destruction efficiency"],
- "The digest: the methane GWP and any credit price are case inputs, and the engine ships neither; the efficiencies have no default. The component heating values and liquid densities are the engine's own labelled typical tables.")
+ "The course states: the methane GWP and any credit price are case inputs, and the engine ships neither; the efficiencies have no default. The component heating values and liquid densities are the engine's own labelled typical tables.")
 
 q(3, "EGBEMA at a destruction efficiency of 0.97 appears with a methane share of 0.1568 and of 0.1548. What separates the two rows?",
  "The combustion efficiency used: 0.955 against 0.97",

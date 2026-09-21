@@ -56,7 +56,7 @@ q(0, "A learner asks for 95 percent on a count of 7 but puts the whole 5 percent
  ["2.814363051520 and 14.422675361702, the central 95 percent limits.",
   "2.037337478700 and 17.133593268913, the central 0.990000 limits.",
   "3.894766804876 and 11.770914461548, the central 0.800000 limits, where 10 percent sits in each tail."],
- "Five percent in each tail is a central 90 percent interval, which the digest prints for 7 as 3.285315691895 to 13.148113802432. The engine's 95 percent interval halves alpha and reads 2.814363051520 to 14.422675361702. The tempting mistake is to forget the halving, and the result is an interval that is too narrow for the label it carries.")
+ "Five percent in each tail is a central 90 percent interval, which the course gives for 7 as 3.285315691895 to 13.148113802432. The engine's 95 percent interval halves alpha and reads 2.814363051520 to 14.422675361702. The tempting mistake is to forget the halving, and the result is an interval that is too narrow for the label it carries.")
 
 q(2, "For a count of 7, the upper limit climbs from 11.770914461548 to 17.133593268913 between 0.800000 and 0.990000, while the lower falls only from 3.894766804876 to 2.037337478700. Why does the upper side move further?",
  "A count cannot fall below zero and has no ceiling, so the Poisson distribution is skewed to the right.",
@@ -65,7 +65,7 @@ q(2, "For a count of 7, the upper limit climbs from 11.770914461548 to 17.133593
   "Floating point rounding grows with the size of the limit."],
  "The right skew gives the upper tail further to stretch as the miss is squeezed, which is also why the interval is lopsided around the count. The extra degrees of freedom come from the gamma shape, add no fixed width, and the lower limit of 7 is well above zero at every level in the table.")
 
-q(3, "At every true mean the digest probes, the coverage of the 95 percent interval is at or above 0.95. Why can it never be exactly 95 percent at every mean?",
+q(3, "At every true mean the course probes, the coverage of the 95 percent interval is at or above 0.95. Why can it never be exactly 95 percent at every mean?",
  "A count is a whole number, so coverage jumps each time the mean crosses a limit.",
  ["The engine adds a margin with 2N + 2 on both limits.",
   "Alpha in floating point is 0.050000000000000044, so the target itself sits slightly off 95 percent.",
@@ -100,12 +100,12 @@ q(0, "Why does `rateConfidenceInterval` have no default confidence?",
   "The default was left out to keep the function signature short."],
  "Requiring the value means every interval the engine returns was asked for at a confidence someone chose. The choice matters: the count upper limit for 7 is 13.148113802432 at 0.900000 and 14.422675361702 at 0.950000. The engine refuses a missing value with the same message it gives for 95.")
 
-q(3, "The engine solves the Garwood upper limit on the upper tail at alpha/2, with `chiSquareQuantileUpper`. What reason does the digest measure for that choice?",
+q(3, "The engine solves the Garwood upper limit on the upper tail at alpha/2, with `chiSquareQuantileUpper`. What reason does the course measure for that choice?",
  "The lower-tail route must form 1 minus q, which loses digits as q shrinks and at 1e-17 rounds to exactly 1.",
  ["In double precision 1 minus 0.025 is not exactly 0.975, so the lower-tail route misses at 95 percent.",
   "The upper-tail route converges in fewer iterations at every confidence level that the engine accepts.",
   "Alpha at 0.95 is 0.050000000000000044, and the lower-tail route cannot represent that value."],
- "Section 16 prints that 1 minus 0.025 IS the double 0.975, and at q of 0.025 both routes give 7.377758908228. The reason is the rest of the table: the lower-tail route's error grows to 2.32e-5 at 1e-15, and at 1e-17 the number 1 minus q is 1 and the question cannot be posed. Solve the smaller tail directly.")
+ "The course shows that 1 minus 0.025 IS the double 0.975, and at q of 0.025 both routes give 7.377758908228. The reason is the rest of the table: the lower-tail route's error grows to 2.32e-5 at 1e-15, and at 1e-17 the number 1 minus q is 1 and the question cannot be posed. Solve the smaller tail directly.")
 
 q(1, "On 2 degrees of freedom at q of 1e-12, the lower-tail route returns 55.262086475787 against an exact 55.262042231857. What does that show?",
  "A relative error of 8.01e-7, lost to forming 1 minus a tiny q.",

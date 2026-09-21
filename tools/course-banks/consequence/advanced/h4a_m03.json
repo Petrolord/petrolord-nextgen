@@ -30,7 +30,7 @@
    "Probability 0.1 and 0.9, both dropped from the golden"
   ],
   "answer": 2,
-  "explanation": "Section 26 names 0.12 and 0.88: their values, 3.825013 and 6.174987, sit on a rounding edge within 0.006 of the printed digits, so the golden keeps them apart. The 0.01, 0.99, 0.25 and 0.75 cells reproduce to two decimals and are in the 97, and the 0.1 and 0.9 cells are there too."
+  "explanation": "The course names 0.12 and 0.88: their values, 3.825013 and 6.174987, sit on a rounding edge within 0.006 of the printed digits, so the golden keeps them apart. The 0.01, 0.99, 0.25 and 0.75 cells reproduce to two decimals and are in the 97, and the 0.1 and 0.9 cells are there too."
  },
  {
   "prompt": "`probit` computes Y = a + b ln(V) for any coefficients. What does ln mean here?",
@@ -41,7 +41,7 @@
    "The logarithm to base 2"
   ],
   "answer": 0,
-  "explanation": "Section 26 says the logarithm is NATURAL. A base 10 log would change every coefficient's meaning, and the division by 1e4 belongs only to the W/m2 form of Eisenberg, where it converts the unit of the intensity. No base 2 form appears."
+  "explanation": "The course says the logarithm is NATURAL. A base 10 log would change every coefficient's meaning, and the division by 1e4 belongs only to the W/m2 form of Eisenberg, where it converts the unit of the intensity. No base 2 form appears."
  },
  {
   "prompt": "What coefficients and intensity unit does the engine's eisenberg thermal preset carry?",
@@ -85,7 +85,7 @@
    "The TNO row of OSD/30 Table 17, a = -15.3 and b = 3.02"
   ],
   "answer": 1,
-  "explanation": "Section 27: NOT EVERY TNO HEAT PROBIT IS EISENBERG. Shifting Tsao and Perry into W/m2 subtracts 2.56 ln(1e4) from -12.8 and gives -36.378, the Purple Book's constant; that is why its probability at 20000 W/m2 for 20 s, 0.537040, sits beside Tsao and Perry's 0.537647. Lees has b = 1.99, and the TNO row is an erratum that is no preset."
+  "explanation": "The course explains: NOT EVERY TNO HEAT PROBIT IS EISENBERG. Shifting Tsao and Perry into W/m2 subtracts 2.56 ln(1e4) from -12.8 and gives -36.378, the Purple Book's constant; that is why its probability at 20000 W/m2 for 20 s, 0.537040, sits beside Tsao and Perry's 0.537647. Lees has b = 1.99, and the TNO row is an erratum that is no preset."
  },
  {
   "prompt": "OSD/30 also writes Eisenberg as -14.9 + 2.56 ln(t q^(4/3) / 1e4) with q in W/m2. At 10000 W/m2 for 30 s the engine gives 1.666556. Why is that the same probit as the kW/m2 form?",
@@ -118,7 +118,7 @@
    "It reproduces exactly but duplicates Eisenberg, so it was merged into that preset"
   ],
   "answer": 2,
-  "explanation": "Section 27 records the erratum: from the row's coefficients the golden computes 384.344943 and 830.355817 against the printed 389 and 841, so the row is not a preset. Asked for it by name the engine refuses: \"coefficients: unknown preset 'tno'; one of eisenberg, tsao-perry, lees, purple-book, or give { a, b } explicitly\". The Purple Book form is Tsao and Perry, the purple-book preset takes W/m2 itself, and the row does not reproduce."
+  "explanation": "The course records the erratum: from the row's coefficients the golden computes 384.344943 and 830.355817 against the printed 389 and 841, so the row is not a preset. Asked for it by name the engine refuses: \"coefficients: unknown preset 'tno'; one of eisenberg, tsao-perry, lees, purple-book, or give { a, b } explicitly\". The Purple Book form is Tsao and Perry, the purple-book preset takes W/m2 itself, and the row does not reproduce."
  },
  {
   "prompt": "The hsc overpressure probit is Y = 1.47 + 1.37 ln(P) with P in psig. What probability does the engine give at 20 psig?",
@@ -140,7 +140,7 @@
    "The engine refuses on `overpressurePa` with the message it uses for a target outside the fit's range"
   ],
   "answer": 0,
-  "explanation": "Section 28: fed Pa where psig is due, the probit reads a number `PA_PER_PSI` times too large, and with b = 1.37 on a natural log that raises Y by a large fixed amount. The logarithm shifts the result; it does not remove the error. 101325 is `ATM_PA`, and the `overpressurePa` refusal belongs to `distanceForOverpressure`."
+  "explanation": "The course explains: fed Pa where psig is due, the probit reads a number `PA_PER_PSI` times too large, and with b = 1.37 on a natural log that raises Y by a large fixed amount. The logarithm shifts the result; it does not remove the error. 101325 is `ATM_PA`, and the `overpressurePa` refusal belongs to `distanceForOverpressure`."
  },
  {
   "prompt": "OSD/30 Equation 4 prints 43.5 psig as the overpressure for a probability of 0.95. The engine gives 43.696383 psig. How does the validation record read that gap?",
@@ -151,10 +151,10 @@
    "As an erratum in the source: the ninety-five percent point prints lower than the probit gives"
   ],
   "answer": 3,
-  "explanation": "Section 28 says the ninety-five percent point prints lower than the probit gives, which the validation record lists as an erratum in the source; its relative difference is 4.51e-3. The one percent and fifty percent points, 2.407476 and 13.152901 psig against 2.4 and 13.1, stand as printed evidence and the overpressure probit is graded."
+  "explanation": "The course says the ninety-five percent point prints lower than the probit gives, which the validation record lists as an erratum in the source; its relative difference is 4.51e-3. The one percent and fifty percent points, 2.407476 and 13.152901 psig against 2.4 and 13.1, stand as printed evidence and the overpressure probit is graded."
  },
  {
-  "prompt": "Digest section 34 legislates the words for t I^(4/3) and for the sum of C^n dt. Which pair does this course use?",
+  "prompt": "The course fixes the words for t I^(4/3) and for the sum of C^n dt. Which pair does it use?",
   "options": [
    "The heat exposure for t I^(4/3) and the toxic concentration for the sum of C^n dt, as the probit presets print them",
    "The thermal dose for t I^(4/3) and the toxic load for the sum of C^n dt",
@@ -162,6 +162,6 @@
    "The heat product for t I^(4/3) and the concentration time for the sum of C^n dt"
   ],
   "answer": 1,
-  "explanation": "Section 27 calls t I^(4/3) the thermal dose, and section 29 calls the sum of C^n dt the toxic load; section 34 binds every lesson and bank to those qualified words, because the bare word already means an occupational hygiene quantity elsewhere in the academy. The other pairs are not the course's terms."
+  "explanation": "The course calls t I^(4/3) the thermal dose, and the course calls the sum of C^n dt the toxic load; it holds every lesson and question to those qualified words, because the bare word already means an occupational hygiene quantity elsewhere in the academy. The other pairs are not the course's terms."
  }
 ]

@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "In the SECTION 11 demand table, what unweighted c + h/4 + s - o/2 term does the C3H8 row of the invented Isiokpo fuel carry?",
+  "prompt": "In the course's demand table, what unweighted c + h/4 + s - o/2 term does the C3H8 row of the invented Isiokpo fuel carry?",
   "options": [
    "3.5",
    "2",
@@ -11,7 +11,7 @@
   "explanation": "The C3H8 row reads 5 in the c + h/4 + s - o/2 column. CH4 reads 2, C2H6 3.5, and both inerts 0."
  },
  {
-  "prompt": "SECTION 11 says the air's nitrogen is the rest of the stoichiometric air. Which figure does it print for it, in kmol per kmol fuel?",
+  "prompt": "The course says the air's nitrogen is the rest of the stoichiometric air. Which figure does it print for it, in kmol per kmol fuel?",
   "options": [
    "9.975652",
    "8.999152",
@@ -19,10 +19,10 @@
    "0.015000"
   ],
   "answer": 2,
-  "explanation": "SECTION 11: the air's nitrogen is the rest of that air, 7.886152 (computed here; products.airN2PerKmolFuel 7.886152). 9.975652 is the stoichiometric air itself, 8.999152 the dry flue gas at 0 percent oxygen in SECTION 12, and 0.015000 the fuel's own nitrogen."
+  "explanation": "In the course, the air's nitrogen is the rest of that air, 7.886152 (computed here; products.airN2PerKmolFuel 7.886152). 9.975652 is the stoichiometric air itself, 8.999152 the dry flue gas at 0 percent oxygen in the oxygen table, and 0.015000 the fuel's own nitrogen."
  },
  {
-  "prompt": "Which heating values does SECTION 11 print for the invented Isiokpo fuel gas as analysed, inerts included?",
+  "prompt": "Which heating values does the course print for the invented Isiokpo fuel gas as analysed, inerts included?",
   "options": [
    "862.5564 LHV and 930.6273 HHV MJ per kmol",
    "802.6 LHV and 890.8 HHV MJ per kmol",
@@ -30,10 +30,10 @@
    "840.9925 LHV and 930.6273 HHV MJ per kmol"
   ],
   "answer": 3,
-  "explanation": "SECTION 11 prints lhvMJPerKmolFuel 840.9925 and hhvMJPerKmolFuel 930.6273. 862.5564 is the LHV with the CO2 taken out and the rest renormalised; 802.6 and 890.8 are FUEL_REFERENCE's typical methane pair, held as H2."
+  "explanation": "The course prints lhvMJPerKmolFuel 840.9925 and hhvMJPerKmolFuel 930.6273. 862.5564 is the LHV with the CO2 taken out and the rest renormalised; 802.6 and 890.8 are FUEL_REFERENCE's typical methane pair, held as H2."
  },
  {
-  "prompt": "At which stack oxygen does SECTION 11 strike its flue gas mass balance, and what does each side weigh?",
+  "prompt": "At which stack oxygen does the course strike its flue gas mass balance, and what does each side weigh?",
   "options": [
    "5.5 percent; 351.0222 kg per kmol of fuel on each side",
    "3 percent; 351.0222 kg per kmol of fuel on each side",
@@ -41,7 +41,7 @@
    "3 percent; 351.0222 kg in, and less out once argon is dropped"
   ],
   "answer": 1,
-  "explanation": "SECTION 11 strikes THE MASS BALANCE at 3 percent stack oxygen, per kmol of fuel: 351.0222 in, 351.0222 out, out less in 0.000001 (computed here). Air's argon leaves inside the atmospheric nitrogen."
+  "explanation": "The course strikes THE MASS BALANCE at 3 percent stack oxygen, per kmol of fuel: 351.0222 in, 351.0222 out, out less in 0.000001 (computed here). Air's argon leaves inside the atmospheric nitrogen."
  },
  {
   "prompt": "Which rows of energyEfficiency.FUEL_REFERENCE carry the flag inert yes?",
@@ -52,7 +52,7 @@
    "CH4 and H2"
   ],
   "answer": 2,
-  "explanation": "SECTION 1 prints inert yes on the Carbon dioxide (inert) and Nitrogen (inert) rows, each with 0 typical LHV and HHV. H2, Hydrogen, prints no with 241.8 LHV and 285.8 HHV MJ/kmol."
+  "explanation": "The course prints inert yes on the Carbon dioxide (inert) and Nitrogen (inert) rows, each with 0 typical LHV and HHV. H2, Hydrogen, prints no with 241.8 LHV and 285.8 HHV MJ/kmol."
  },
  {
   "prompt": "The oxygen table's top reading is 12 percent. How much excess air goes with it?",
@@ -179,15 +179,15 @@
   "prompt": "Held item H2 sets two computed-here figures beside the engine's typical methane pair. Which?",
   "options": [
    "A difference of 87.985, and 88.2 MJ for two moles of water condensed at the engine's latent heat",
-   "A corrected methane HHV that replaces 890.8 in FUEL_REFERENCE from this digest onward, graded",
+   "A corrected methane HHV that replaces 890.8 in FUEL_REFERENCE from this course onward, graded",
    "A difference of 88.2, and 87.985 MJ for two moles of water condensed at the engine's latent heat",
    "A difference of 88.2 that the course grades, and an ISO 6976 value of 87.985 to be filed instead"
   ],
   "answer": 2,
-  "explanation": "SECTION 25 prints both as computed here: 88.2 between the typical LHV and HHV, and 87.985 MJ from 2 x 18.015 kg at 2442 kJ/kg. H2 is a stated limit; nothing in it is graded or corrected."
+  "explanation": "The course prints both as computed here: 88.2 between the typical LHV and HHV, and 87.985 MJ from 2 x 18.015 kg at 2442 kJ/kg. H2 is a stated limit; nothing in it is graded or corrected."
  },
  {
-  "prompt": "In the SECTION 14 sweep for the invented Isiokpo heater, how much fuel a year does a 4.5 percent target save on LHV?",
+  "prompt": "In the course's sweep for the invented Isiokpo heater, how much fuel a year does a 4.5 percent target save on LHV?",
   "options": [
    "5214.422 GJ",
    "2782.362 GJ",
@@ -217,7 +217,7 @@
    "It understates the saving."
   ],
   "answer": 3,
-  "explanation": "The second sentence ends on the word understates, and names the cause: a divisor of a hundred where the target efficiency belongs. On the Isiokpo figures the digest's shortcut lands 819.363 GJ a year short."
+  "explanation": "The second sentence ends on the word understates, and names the cause: a divisor of a hundred where the target efficiency belongs. On the Isiokpo figures the course's shortcut lands 819.363 GJ a year short."
  },
  {
   "prompt": "The engine's tuning method opens by holding one thing fixed while fuel scales inversely with efficiency. What is it?",
@@ -231,7 +231,7 @@
   "explanation": "The method's first sentence says fuel scales inversely with efficiency at the same duty."
  },
  {
-  "prompt": "The invented Isiokpo trap is called with no downstream pressure at all. Where does SECTION 15 say it is taken to discharge?",
+  "prompt": "The invented Isiokpo trap is called with no downstream pressure at all. Where does the course say it is taken to discharge?",
   "options": [
    "At 5 bar a downstream, still choked.",
    "At its critical ratio, 0.5774 of 9 bar a.",
@@ -239,7 +239,7 @@
    "Nowhere: the call is refused as blank."
   ],
   "answer": 2,
-  "explanation": "SECTION 15: with no downstream pressure given the trap vents to ATMOSPHERE_BAR_A, 1.01325 bar a. A downstream box present but blank is refused; a box left out takes the atmosphere default."
+  "explanation": "In the course, with no downstream pressure given the trap vents to ATMOSPHERE_BAR_A, 1.01325 bar a. A downstream box present but blank is refused; a box left out takes the atmosphere default."
  },
  {
   "prompt": "Raise the invented Isiokpo trap's downstream pressure to 6 bar a. What happens to choked, and to the year's loss?",
@@ -253,7 +253,7 @@
   "explanation": "Its ratio, 0.666667, is above the critical 0.577430, so choked is false and the loss falls to 41.4785 kg an hour. Choked rows lose 355.757 tonnes; 315.643 goes with 7 bar a."
  },
  {
-  "prompt": "SECTION 15 states the critical pressure ratio at or below which a trap's flow is choked. Which expression is it?",
+  "prompt": "The course states the critical pressure ratio at or below which a trap's flow is choked. Which expression is it?",
   "options": [
    "(2/(k+1))^((k-1)/k)",
    "(2/(k-1))^(k/(k+1))",
@@ -261,7 +261,7 @@
    "(2/(k+1))^(k/(k-1))"
   ],
   "answer": 3,
-  "explanation": "SECTION 15: the flow is choked while the downstream pressure over the upstream is at or below the critical ratio (2/(k+1))^(k/(k-1)). The digest prints it as 0.577430 at k = 1.135 and 0.5457 at 1.3."
+  "explanation": "In the course, the flow is choked while the downstream pressure over the upstream is at or below the critical ratio (2/(k+1))^(k/(k-1)). The course prints it as 0.577430 at k = 1.135 and 0.5457 at 1.3."
  },
  {
   "prompt": "The trap's discharge coefficient is not given. Which answer does the engine give?",
@@ -272,10 +272,10 @@
    "No refusal: the coefficient is read as 1, and the fuel and carbon are marked as absent."
   ],
   "answer": 0,
-  "explanation": "SECTION 15 prints the blank discharge coefficient refused with that sentence. 0.72 is the Isiokpo trap's typed coefficient (invented). The orifice refusal answers a blank orifice."
+  "explanation": "The course prints the blank discharge coefficient refused with that sentence. 0.72 is the Isiokpo trap's typed coefficient (invented). The orifice refusal answers a blank orifice."
  },
  {
-  "prompt": "At the stated exponent of 1.135 and an invented 22 USD a tonne, what annual cost does SECTION 15 print for the trap's lost steam?",
+  "prompt": "At the stated exponent of 1.135 and an invented 22 USD a tonne, what annual cost does the course print for the trap's lost steam?",
   "options": [
    "8216.58 USD",
    "22176.00 USD",
@@ -283,10 +283,10 @@
    "54432.00 USD"
   ],
   "answer": 2,
-  "explanation": "The 1.135 row prints 355.757 tonnes a year and 7826.65 USD. 8216.58 is the 1.3 row, and 22176.00 and 54432.00 are SECTION 16's raw water and treatment lines."
+  "explanation": "The 1.135 row prints 355.757 tonnes a year and 7826.65 USD. 8216.58 is the 1.3 row, and 22176.00 and 54432.00 are the condensate case's raw water and treatment lines."
  },
  {
-  "prompt": "SECTION 15 prints the trap's carbon chain as relations. How is its 63.721 tCO2e a year formed?",
+  "prompt": "The course prints the trap's carbon chain as relations. How is its 63.721 tCO2e a year formed?",
   "options": [
    "355.757 t x 56.1 kg CO2e per GJ / 1000",
    "1135.851 GJ x 56.1 kg CO2e per GJ / 1000",
@@ -294,10 +294,10 @@
    "1192.439 GJ x 56.1 kg CO2e per GJ / 1000"
   ],
   "answer": 1,
-  "explanation": "SECTION 15: annual tCO2e = GJ x kg per GJ / 1000 = 63.721, on the annual fuel 1135.851 GJ and the SYNTHETIC 56.1 kg CO2e per GJ. The boiler efficiency 0.83 enters one step earlier, in the fuel. 1192.439 GJ is the fuel of the 1.3 row."
+  "explanation": "In the course, annual tCO2e = GJ x kg per GJ / 1000 = 63.721, on the annual fuel 1135.851 GJ and the SYNTHETIC 56.1 kg CO2e per GJ. The boiler efficiency 0.83 enters one step earlier, in the fuel. 1192.439 GJ is the fuel of the 1.3 row."
  },
  {
-  "prompt": "Switch the trap's steam to superheated, exponent 1.3. What carbon a year does SECTION 15 then print, in tCO2e?",
+  "prompt": "Switch the trap's steam to superheated, exponent 1.3. What carbon a year does the course then print, in tCO2e?",
   "options": [
    "63.721",
    "56.1",
@@ -308,7 +308,7 @@
   "explanation": "The 1.3 row prints 44.4620 kg an hour, 373.481 tonnes a year, 8216.58 USD, 1192.439 GJ and 66.896 tCO2e. 63.721 is the 1.135 row, 56.1 the SYNTHETIC kg CO2e per GJ, and 742.220 the condensate case."
  },
  {
-  "prompt": "What does SECTION 15 compute from the engine's figures for the gap between the 1.3 and 1.135 exponent rows of the trap?",
+  "prompt": "What does the course compute from the engine's figures for the gap between the 1.3 and 1.135 exponent rows of the trap?",
   "options": [
    "17.724 tonnes a year less at 1.3, a ratio of 1.049821",
    "1.049821 tonnes a year more at 1.3, a ratio of 17.724",
@@ -316,7 +316,7 @@
    "355.757 tonnes a year more at 1.3, a ratio of 0.5457"
   ],
   "answer": 2,
-  "explanation": "SECTION 15: at the superheated exponent the same trap loses 17.724 tonnes a year more, a ratio of 1.049821 to the saturated figure (computed here). 373.481 against 355.757 tonnes a year."
+  "explanation": "In the course, at the superheated exponent the same trap loses 17.724 tonnes a year more, a ratio of 1.049821 to the saturated figure (computed here). 373.481 against 355.757 tonnes a year."
  },
  {
   "prompt": "The choked-flow note for the invented Isiokpo trap names a pressure ratio of 0.1126. Which call is that ratio from?",
@@ -327,7 +327,7 @@
    "The call at 8 bar a downstream"
   ],
   "answer": 2,
-  "explanation": "The trap's record gives no downstream pressure, and with none given SECTION 15 takes it to vent to atmosphere, 1.01325 bar a; the choked-flow note printed for it names 0.1126. The downstream table prints 3 bar a at 0.333333 and 8 bar a at 0.888889, and the same note names the critical 0.5774 at 1.135."
+  "explanation": "The trap's record gives no downstream pressure, and with none given the course takes it to vent to atmosphere, 1.01325 bar a; the choked-flow note printed for it names 0.1126. The downstream table prints 3 bar a at 0.333333 and 8 bar a at 0.888889, and the same note names the critical 0.5774 at 1.135."
  },
  {
   "prompt": "Someone types 9000 into the trap's hours box. Which answer comes back?",
@@ -338,10 +338,10 @@
    "REFUSED: An isentropic exponent above 1 is required: about 1.3 for superheated steam and about 1.135 for dry saturated steam."
   ],
   "answer": 1,
-  "explanation": "9000 is above the 8784 bound the refusal states, and the digest prints it refused in the blank's words. Only hours left out of the call entirely reach the 8760 default."
+  "explanation": "9000 is above the 8784 bound the refusal states, and the course prints it refused in the blank's words. Only hours left out of the call entirely reach the 8760 default."
  },
  {
-  "prompt": "With the treatment cost priced on the invented Isiokpo condensate case, which line does SECTION 16 print as 54432.00 USD?",
+  "prompt": "With the treatment cost priced on the invented Isiokpo condensate case, which line does the course print as 54432.00 USD?",
   "options": [
    "Raw water not bought",
    "Fuel not burned reheating makeup",
@@ -349,7 +349,7 @@
    "Treatment not repeated"
   ],
   "answer": 3,
-  "explanation": "SECTION 16 prints Fuel not burned reheating makeup 99227.28, Raw water not bought 22176.00 and Treatment not repeated 54432.00 USD. The trap's cost, 7826.65 USD, is SECTION 15."
+  "explanation": "The course prints Fuel not burned reheating makeup 99227.28, Raw water not bought 22176.00 and Treatment not repeated 54432.00 USD. The trap's cost, 7826.65 USD, is the steam trap lesson's."
  },
  {
   "prompt": "A return fraction of 1.2 is typed as the target of the invented condensate case. Which answer comes back?",
@@ -360,10 +360,10 @@
    "REFUSED: A boiler efficiency in (0, 1] is required: the fuel saved depends on it and it is not assumed."
   ],
   "answer": 0,
-  "explanation": "SECTION 16 prints the target of 1.2 refused with \"Return fractions must lie between 0 and 1.\" The target-below-current refusal answers a target of 0.25 against 0.35, and the boiler efficiency refusal a blank boiler efficiency."
+  "explanation": "The course prints the target of 1.2 refused with \"Return fractions must lie between 0 and 1.\" The target-below-current refusal answers a target of 0.25 against 0.35, and the boiler efficiency refusal a blank boiler efficiency."
  },
  {
-  "prompt": "pinchTargets is handed streams whose supply and target temperatures are all equal. What does SECTION 17 print?",
+  "prompt": "pinchTargets is handed streams whose supply and target temperatures are all equal. What does the course print?",
   "options": [
    "No refusal: both utilities print 0.000 kW and threshold problem prints true.",
    "REFUSED: A minimum approach temperature is required and must not be negative.",
@@ -371,10 +371,10 @@
    "No refusal: every stream is read as cold, and the cold utility is 0.000 kW."
   ],
   "answer": 2,
-  "explanation": "SECTION 17 prints that refusal for a set of streams where nothing changes temperature. The minimum approach refusal answers a blank approach."
+  "explanation": "The course prints that refusal for a set of streams where nothing changes temperature. The minimum approach refusal answers a blank approach."
  },
  {
-  "prompt": "Which pair of condensate figures does SECTION 16 print the same with the treatment cost priced and with it left blank?",
+  "prompt": "Which pair of condensate figures does the course print the same with the treatment cost priced and with it left blank?",
   "options": [
    "40320.000 t of extra condensate and 13230.304 GJ saved a year",
    "175835.28 USD annualValue and complete true in both columns",
@@ -385,7 +385,7 @@
   "explanation": "Both columns print extraCondensateTonnesPerYear 40320.000 and energySavedGJPerYear 13230.304, and annualTonnesCo2e 742.220. Treatment not repeated is 54432.00 priced and none blank, and annualValue is 175835.28 against 121403.28, complete true against false."
  },
  {
-  "prompt": "Four invented Isiokpo streams are printed in SECTION 17. Which one is cold, by the digest's rule?",
+  "prompt": "Four invented Isiokpo streams are printed in the pinch lesson. Which one is cold, by the course's rule?",
   "options": [
    "H2 lean oil cooler, 118 C to 41 C: its supply is above its target.",
    "C2 stabiliser feed, 57 C to 104 C: its supply is below its target.",
@@ -393,10 +393,10 @@
    "H2 lean oil cooler, 118 C to 41 C: its CP is 5.7 kW/K."
   ],
   "answer": 1,
-  "explanation": "SECTION 17: a stream is hot when its supply is above its target. C2 goes from 57 to 104 C, so it is cold, as C1 is. H1 and H2 have supplies above their targets and are hot, whatever their CP."
+  "explanation": "In the course, a stream is hot when its supply is above its target. C2 goes from 57 to 104 C, so it is cold, as C1 is. H1 and H2 have supplies above their targets and are hot, whatever their CP."
  },
  {
-  "prompt": "In the SECTION 17 problem table at 15 C for the invented Isiokpo streams, what surplus does the interval from shifted 148.500 C to 111.500 C carry?",
+  "prompt": "In the course's problem table at 15 C for the invented Isiokpo streams, what surplus does the interval from shifted 148.500 C to 111.500 C carry?",
   "options": [
    "22.050 kW",
    "-3.600 kW",
@@ -418,7 +418,7 @@
   "explanation": "The cascade starts from the hot utility, 25.950 kW, at the top; the first interval's surplus is 22.050 kW, and the heat flow below it prints 48.000 kW. 3.600 kW is the heat flow below the second interval."
  },
  {
-  "prompt": "A stream with a heat capacity flowrate of -2 is passed to pinchTargets. What does SECTION 17 print?",
+  "prompt": "A stream with a heat capacity flowrate of -2 is passed to pinchTargets. What does the course print?",
   "options": [
    "No refusal: a CP of -2 marks the stream as cold, and it is cascaded at 2 kW/K on the cold side of the table.",
    "REFUSED: A minimum approach temperature is required and must not be negative.",
@@ -426,10 +426,10 @@
    "REFUSED: No stream changes temperature, so there is nothing to target."
   ],
   "answer": 2,
-  "explanation": "SECTION 17 prints the CP of -2 refused with that sentence, and SECTION 25 lists it among the rules in force. The approach refusal answers a blank minimum approach, and the last refusal a set of streams that never change temperature."
+  "explanation": "The course prints the CP of -2 refused with that sentence, and lists it among the rules in force. The approach refusal answers a blank minimum approach, and the last refusal a set of streams that never change temperature."
  },
  {
-  "prompt": "SECTION 17's threshold problem runs one hot and one cold stream at a 10 C minimum approach. What cold utility does it print?",
+  "prompt": "The course's threshold problem runs one hot and one cold stream at a 10 C minimum approach. What cold utility does it print?",
   "options": [
    "1480.000 kW",
    "1470.000 kW",
@@ -440,7 +440,7 @@
   "explanation": "The threshold row prints hot utility 0.000, cold utility 1470.000, pinch hot none and threshold problem true. 1480.000 and 1300.000 are points on its heat flow table, and 240.150 kW is the Isiokpo cold utility at 15 C."
  },
  {
-  "prompt": "How does SECTION 17 say the streams are shifted before the problem table is cascaded?",
+  "prompt": "How does the course say the streams are shifted before the problem table is cascaded?",
   "options": [
    "Hot streams up and cold streams down, by half the minimum approach.",
    "Hot streams down and cold streams up, by the whole minimum approach.",
@@ -448,7 +448,7 @@
    "Hot streams down and cold streams up, by half the minimum approach."
   ],
   "answer": 3,
-  "explanation": "SECTION 17: hot streams are shifted down and cold streams up by half the minimum approach; the cascade below already carries the hot utility at the top. At 15 C the heat flow is zero at shifted 110.500 C, reported as 118.000 C hot and 103.000 C cold."
+  "explanation": "In the course, hot streams are shifted down and cold streams up by half the minimum approach; the cascade below already carries the hot utility at the top. At 15 C the heat flow is zero at shifted 110.500 C, reported as 118.000 C hot and 103.000 C cold."
  },
  {
   "prompt": "Tighten the minimum approach to 10 C. How much hot utility do the four invented Isiokpo streams then need?",

@@ -41,7 +41,7 @@ q(2, "At an elevation change of 0.000000 ft both e to the s and the equivalent l
   "Because both columns are exponentials of s and an exponential of zero is one, so the check confirms that s was computed in the right units before anything else is examined."],
  "At an elevation change of 0.000000 ft, s is 0.0000000000 and the adjustment collapses. An elevation term leaving a residue at zero is wrong on every flat line it will be given.")
 
-q(0, "The coefficient inside s is reported as 0.037500000000, and the digest says it was measured rather than typed. How was it obtained?",
+q(0, "The coefficient inside s is reported as 0.037500000000, and the course says it was measured rather than typed. How was it obtained?",
  "The engine was asked for s at a gravity of one, a rise of 1000.000000 ft, an absolute temperature of one and a compressibility of one, and the 37.500000 it returned was divided by the thousand feet.",
  ["The engine was asked for s at the SOKU conditions and at 1500.000000 ft of rise, and 0.0795976556 was divided by the gravity, the temperature and the compressibility in turn until only the elevation remained.",
   "The coefficient was read off the ratio of the two equivalent length factors at 1500.000000 ft of rise and 1500.000000 ft of fall, which isolates it from everything else in the group.",

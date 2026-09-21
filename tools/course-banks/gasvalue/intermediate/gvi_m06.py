@@ -28,7 +28,7 @@ q(2, "How does the oracle check the flare by the rule?",
  ["By mass, cross-checked by the engine's own flare figure.",
   "By the rule's volumetric route alone, with no second route.",
   "By moles, cross-checked against a measured flare's figures."],
- "The digest: \"the flare by the rule by moles, cross-checked by the rule's own volumetric route\". The oracle checks independently of the engine, and the digest's preamble says no figure in it is a published analysis or a measured flare.")
+ "The course states: \"the flare by the rule by moles, cross-checked by the rule's own volumetric route\". The oracle checks independently of the engine, and the course states that none of its figures is a published analysis or a measured flare.")
 
 q(0, "The oracle leaves the component heating values and liquid densities unvalidated. What is said of them?",
  "They are pinned, and the engine labels them typical.",
@@ -42,14 +42,14 @@ q(3, "In what form does the oracle carry the gas?",
  ["In floating point, in pounds and standard cubic feet",
   "In exact rationals, in pounds and standard cubic feet",
   "In the engine's own figures, to four decimals"],
- "The digest: \"the gas in exact rationals carried in kilograms and cubic metres\". Among the engine's own constants is SCF_PER_LBMOL, 379.49 standard cubic feet in one lb-mol.")
+ "The course states: \"the gas in exact rationals carried in kilograms and cubic metres\". Among the engine's own constants is SCF_PER_LBMOL, 379.49 standard cubic feet in one lb-mol.")
 
 q(1, "Which ledgers does the oracle check on a parcel?",
  "The route, credit and comparison ledgers",
  ["The route and credit ledgers, leaving comparison",
   "The carbon inventory and the MAC curve ledgers",
   "The discounted cash flow and payback ledgers"],
- "The digest lists \"the route, credit and comparison ledgers\" among the oracle's checks. The engine assembles its cash flow and hands it on; it does not discount it.")
+ "The course lists \"the route, credit and comparison ledgers\" among the oracle's checks. The engine assembles its cash flow and hands it on; it does not discount it.")
 
 q(0, "In the end-to-end reading, the diesel counterfactual takes the avoided flare of 190032.865 t/yr to a net of 218032.865 t/yr. By which two typed figures, and how?",
  "Less a product combustion of 128000, plus a displaced fuel of 156000.",
@@ -112,7 +112,7 @@ q(2, "How is the validation oracle said to check flareToValue's figures?",
  ["By re-running the engine on a second machine",
   "Against measured flares",
   "Against the typical heating values"],
- "The digest: \"What the validation oracle (oracle_flaretovalue.py ...) checks, independently of the engine\". Every analysis is invented and illustrative, and the typical heating values are what it does not validate.")
+ "The course states: \"What the validation oracle (oracle_flaretovalue.py ...) checks, independently of the engine\". Every analysis is invented and illustrative, and the typical heating values are what it does not validate.")
 
 emit(Q, '/root/wt-et-gasvalue-nextgen/tools/course-banks/gasvalue/intermediate/gvi_m06.json', label='gvi_m06', expect_n=15)
 finish()

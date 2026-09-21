@@ -13,7 +13,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # 1 TWO-MODULE m01 + m02
 q(2, "On the IMO ladder, the row for 2 events in 200000 hours reads 0.242209 to 7.224688 per 200,000 hours, and the Garwood table's count limits for 2 are 0.242209278544 and 7.224687667724. Why do the digits match?",
  "The base over the hours is 200,000 over 200000, which is one, so scaling leaves the count limits as they are.",
- ["The ladder is computed on a base of 1 over 1 hour, the same base the Garwood table itself is printed on in the digest.",
+ ["The ladder is computed on a base of 1 over 1 hour, the same base the Garwood table itself is printed on in the course.",
   "At 2 events the Poisson distribution is symmetric about its mean, so the rate limits and count limits coincide.",
   "The ladder rounds every limit to the nearest count limit printed in the Garwood table."],
  "A rate limit is the count limit times the base over the hours. With 200000 hours on the 200,000 base that multiplier is one, so the rate limits are the count limits printed to six decimals. The ladder uses the 200,000 base, and the Poisson distribution is skewed at every small count.")
@@ -24,7 +24,7 @@ q(0, "On the IMO ladder at 5 events, the width over rate column reads 2.008969. 
  ["The upper limit divided by the lower limit, 4.667333 over 0.649395.",
   "The upper limit divided by the rate, which measures how far the interval reaches above the estimate.",
   "The count of 5 divided by the square root of the hours on the row."],
- "4.667333 minus 0.649395, over 2.000000, is the width over rate the digest prints as 2.008969. The upper over the lower is a different column, 7.187207 on that row, and the ladder has no square root column.")
+ "4.667333 minus 0.649395, over 2.000000, is the width over rate the course gives as 2.008969. The upper over the lower is a different column, 7.187207 on that row, and the ladder has no square root column.")
 
 # 3 TWO-MODULE m01 + m02
 q(3, "The Garwood count limits for 1 event are 0.025317807984 and 5.571643390939. The IMO ladder row for 1 event in 100000 hours reads 0.050636 to 11.143287. What links them?",
@@ -64,7 +64,7 @@ q(0, "For a count above zero, which exported function does the engine use for ea
  ["`chiSquareQuantileUpper` for both limits, since each one leaves alpha/2 in a tail.",
   "`chiSquareQuantile` for both limits, at alpha/2 and at 1 minus alpha/2.",
   "`regularizedGammaQ` for both."],
- "The engine solves the smaller tail directly. The lower limit has alpha/2 below it, which `chiSquareQuantile` asks for as it stands, and the upper has alpha/2 above it, which `chiSquareQuantileUpper` asks for directly. Asking the lower-tail function for 1 minus alpha/2 is the route the digest shows losing digits as the tail probability shrinks. At a count of zero the lower limit is 0 and needs no quantile.")
+ "The engine solves the smaller tail directly. The lower limit has alpha/2 below it, which `chiSquareQuantile` asks for as it stands, and the upper has alpha/2 above it, which `chiSquareQuantileUpper` asks for directly. Asking the lower-tail function for 1 minus alpha/2 is the route the course shows losing digits as the tail probability shrinks. At a count of zero the lower limit is 0 and needs no quantile.")
 
 # 8
 q(1, "Which confidence value does `rateConfidenceInterval` accept?",
@@ -83,7 +83,7 @@ q(2, "With confidence 0.95 the engine forms alpha as 0.050000000000000044. What 
  "0.050000000000000044 differs from 0.05 by less than one part in ten to the fifteen, and at a tail of 0.025 the two routes agree to the last digit printed, 7.377758908228. The coverage excess comes from the whole-number count, and the upper-tail route is chosen for small tail probabilities, where the lower-tail route loses digits and at 1e-17 cannot be asked at all.")
 
 # 10
-q(3, "The digest's last row asks both quantile routes for a tail of 1e-17. What becomes of the route that works through 1 minus q?",
+q(3, "The course's last row asks both quantile routes for a tail of 1e-17. What becomes of the route that works through 1 minus q?",
  "1 minus q rounds to exactly 1, so it cannot be asked the question at all.",
  ["It returns 78.287893161798, the same as the upper-tail route, to the last digit.",
   "It returns a relative error of 2.32e-5, the same as it does at 1e-15.",
@@ -320,7 +320,7 @@ q(0, "A comparison line in a report quotes a p-value without naming its conventi
  ["None, since every exact test gives the same p-value on the same counts once the hours are fixed.",
   "The p-value will be read as a percentile.",
   "The engine's p-value is only valid with its name."],
- "The engine's p-value is central; R's poisson.test and scipy's binomtest are minlike, and on 14 of the 399 comparisons the digest swept they disagree with the engine's interval. Naming the convention lets a reader compare like with like.")
+ "The engine's p-value is central; R's poisson.test and scipy's binomtest are minlike, and on 14 of the 399 comparisons the course swept they disagree with the engine's interval. Naming the convention lets a reader compare like with like.")
 
 # 40 TWO-MODULE m01 + m05
 q(1, "UTOROGU's comparison rests on 7 events against 6. How does the IMO ladder help explain why it found no clear difference?",

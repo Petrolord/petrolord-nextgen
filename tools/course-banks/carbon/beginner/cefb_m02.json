@@ -8,7 +8,7 @@
    "The fuel supplier's statement for the year it is run on"
   ],
   "answer": 1,
-  "explanation": "SECTION 3 quotes the method verbatim: \"Atom balance: carbon in equals CO2 out. This is conservation of mass, so it needs no source document.\" In SECTION 7 each atom-balance line carries the source \"Atom balance (conservation of mass)\" and the version \"not applicable\"; the registered factors carry a source and a version."
+  "explanation": "The course quotes the method verbatim: \"Atom balance: carbon in equals CO2 out. This is conservation of mass, so it needs no source document.\" In the lab's inventory each atom-balance line carries the source \"Atom balance (conservation of mass)\" and the version \"not applicable\"; the registered factors carry a source and a version."
  },
  {
   "prompt": "One thousand kilomoles of a fuel with one carbon atom a molecule are burned at a destruction efficiency of 0.98. What does the engine return?",
@@ -19,7 +19,7 @@
    "co2Tonnes 43.129 and ch4Tonnes 0.321"
   ],
   "answer": 3,
-  "explanation": "SECTION 3 prints the 0.98 row as carbon kmol 1000.000, co2Tonnes 43.129, ch4Tonnes 0.321. The other pairs are the rows for 0.99, 0.95 and complete combustion at 1."
+  "explanation": "The lesson's table gives the 0.98 row as carbon kmol 1000.000, co2Tonnes 43.129, ch4Tonnes 0.321. The other pairs are the rows for 0.99, 0.95 and complete combustion at 1."
  },
  {
   "prompt": "In the 1000 kmol table, what does the carbon kmol column do as the destruction efficiency falls from 1 to 0.95?",
@@ -30,7 +30,7 @@
    "It is blank below 1, as escaped carbon is not counted."
   ],
   "answer": 0,
-  "explanation": "SECTION 3 prints carbon kmol 1000.000 on all four rows. The destruction efficiency divides that carbon between CO2 and methane: co2Tonnes falls from 44.009 to 41.809 and ch4Tonnes rises from 0.000 to 0.802."
+  "explanation": "The lesson's table prints carbon kmol 1000.000 on all four rows. The destruction efficiency divides that carbon between CO2 and methane: co2Tonnes falls from 44.009 to 41.809 and ch4Tonnes rises from 0.000 to 0.802."
  },
  {
   "prompt": "Each kilomole of carbon that escapes combustion leaves as how many kilograms of methane?",
@@ -41,7 +41,7 @@
    "The C2H6 molar mass, 30.070"
   ],
   "answer": 2,
-  "explanation": "SECTION 3: \"Each kilomole that escapes leaves as MW_CH4 kilograms of methane.\" SECTION 1 prints carbonAbatement.MW_CH4: 16.043. MW_CO2 weighs the carbon that burns, and 30.070 is ethane's row in FUEL_REFERENCE."
+  "explanation": "The course: \"Each kilomole that escapes leaves as MW_CH4 kilograms of methane.\" The engine returns carbonAbatement.MW_CH4: 16.043. MW_CO2 weighs the carbon that burns, and 30.070 is ethane's row in FUEL_REFERENCE."
  },
  {
   "prompt": "The Igbogene fired heaters burn 482000 kmol of fuel a year at 1.09 kmol of carbon per kmol, all invented. What carbonKmolPerYear does the engine return?",
@@ -52,7 +52,7 @@
    "23121.448 kmol"
   ],
   "answer": 1,
-  "explanation": "SECTION 4 prints carbonKmolPerYear 525380.000 for the heaters. 482000 is the fuel quantity typed in, 50820.000 is the flare's carbon in SECTION 5, and 23121.448 is the heaters' co2Tonnes, a mass of CO2 in tonnes."
+  "explanation": "The engine returns carbonKmolPerYear 525380.000 for the heaters. 482000 is the fuel quantity typed in, 50820.000 is the flare's carbon in the flare lesson, and 23121.448 is the heaters' co2Tonnes, a mass of CO2 in tonnes."
  },
  {
   "prompt": "The same Igbogene heaters are run with a lower destruction efficiency typed, 0.995. What does the engine return?",
@@ -63,7 +63,7 @@
    "co2Tonnes 23005.841 and ch4Tonnes 42.143"
   ],
   "answer": 3,
-  "explanation": "SECTION 4 prints the 0.995 row as 23005.841 t of CO2 and 42.143 t of methane. The 0.999 row is 23098.327 and 8.429, and at the typed 1 the heaters return 23121.448 and 0.000. 22272.955 is the heaters' co2Tonnes in the row for a carbon per kmol of 1.05."
+  "explanation": "The course prints the 0.995 row as 23005.841 t of CO2 and 42.143 t of methane. The 0.999 row is 23098.327 and 8.429, and at the typed 1 the heaters return 23121.448 and 0.000. 22272.955 is the heaters' co2Tonnes in the row for a carbon per kmol of 1.05."
  },
  {
   "prompt": "The heaters' fuel stays at 482000 kmol a year and the carbon per kilomole of fuel is typed as 1.05. What is co2Tonnes?",
@@ -74,10 +74,10 @@
    "24394.189"
   ],
   "answer": 2,
-  "explanation": "SECTION 4 prints the carbon per kmol table: 1.00 gives 21212.338, 1.05 gives 22272.955, the Igbogene 1.09 gives 23121.448 and 1.15 gives 24394.189 t of CO2."
+  "explanation": "The course prints the carbon per kmol table: 1.00 gives 21212.338, 1.05 gives 22272.955, the Igbogene 1.09 gives 23121.448 and 1.15 gives 24394.189 t of CO2."
  },
  {
-  "prompt": "How does the digest describe the Igbogene heaters' carbon per kilomole of fuel, 1.09?",
+  "prompt": "How does the course describe the Igbogene heaters' carbon per kilomole of fuel, 1.09?",
   "options": [
    "The fuel analysis read as carbon atoms, typed in as an input",
    "A default the engine applies when that box is left out",
@@ -85,7 +85,7 @@
    "The supplier statement (invented), version 2025"
   ],
   "answer": 0,
-  "explanation": "SECTION 4: \"The carbon per kilomole of fuel is the fuel analysis read as carbon atoms: the Igbogene figure is an input.\" SECTION 2 refuses a call with the carbon per kmol left out, so there is no default, and the supplier statement is the source of the electricity factor in SECTION 7."
+  "explanation": "The course: \"The carbon per kilomole of fuel is the fuel analysis read as carbon atoms: the Igbogene figure is an input.\" The engine refuses a call with the carbon per kmol left out, so there is no default, and the supplier statement is the source of the electricity factor in the inventory."
  },
  {
   "prompt": "Which two flare calls get the same refusal, \"The destruction efficiency must lie in (0, 1].\"?",
@@ -96,7 +96,7 @@
    "A destruction efficiency of 1 and one of 98"
   ],
   "answer": 1,
-  "explanation": "SECTION 2 prints the interval refusal for 0 and for 98 typed as a percentage. A blank is refused as required, a fuel of -1 kmol is refused as negative, and 1 lies inside (0, 1], so it computes: SECTION 3 prints a row at 1."
+  "explanation": "The engine returns the interval refusal for 0 and for 98 typed as a percentage. A blank is refused as required, a fuel of -1 kmol is refused as negative, and 1 lies inside (0, 1], so it computes: the lesson's table has a row at 1."
  },
  {
   "prompt": "A flare call leaves the carbon per kilomole of fuel out. What does the engine say?",
@@ -107,7 +107,7 @@
    "REFUSED: A fuel quantity and the carbon per kilomole of fuel are required."
   ],
   "answer": 3,
-  "explanation": "SECTION 2 prints \"REFUSED: A fuel quantity and the carbon per kilomole of fuel are required.\" for the carbon per kmol left out and for a blank fuel. The destruction efficiency left out of the call takes its stated default of complete combustion; the carbon per kmol left out is refused."
+  "explanation": "The engine returns \"REFUSED: A fuel quantity and the carbon per kilomole of fuel are required.\" for the carbon per kmol left out and for a blank fuel. The destruction efficiency left out of the call takes its stated default of complete combustion; the carbon per kmol left out is refused."
  },
  {
   "prompt": "Fuel typed as -1 kmol on the flare: which refusal follows?",
@@ -118,7 +118,7 @@
    "REFUSED: A registered emission factor is required."
   ],
   "answer": 0,
-  "explanation": "SECTION 2 prints the negative refusal for a fuel of -1 kmol. The \"are required\" refusal is for a blank fuel or a carbon per kmol left out, the interval refusal is for the efficiency, and the factor refusal belongs to emissionLine."
+  "explanation": "The engine returns the negative refusal for a fuel of -1 kmol. The \"are required\" refusal is for a blank fuel or a carbon per kmol left out, the interval refusal is for the efficiency, and the factor refusal belongs to emissionLine."
  },
  {
   "prompt": "Which keys does combustionCo2FromCarbon's result carry for the gases it computes?",
@@ -129,10 +129,10 @@
    "one key in tCO2e, converted on the declared set"
   ],
   "answer": 2,
-  "explanation": "SECTION 3: \"The engine's result carries these keys and no other gas: co2Tonnes, ch4Tonnes.\" Nitrous oxide from combustion is not computed by the atom balance (H4) and needs an emission factor line. In SECTION 7 the flare's 16.306 t CH4 is converted at a GWP of 29.8 on IPCC AR6 GWP100, fossil methane."
+  "explanation": "The course: \"The engine's result carries these keys and no other gas: co2Tonnes, ch4Tonnes.\" Nitrous oxide from combustion is not computed by the atom balance (H4) and needs an emission factor line. In the lab's inventory the flare's 16.306 t CH4 is converted at a GWP of 29.8 on IPCC AR6 GWP100, fossil methane."
  },
  {
-  "prompt": "carbonAbatement.MW_CO2 reads 44.009. How does the digest say it is built?",
+  "prompt": "carbonAbatement.MW_CO2 reads 44.009. How does the course say it is built?",
   "options": [
    "12.011 plus four hydrogens at 1.008",
    "12.011 plus two oxygens at 15.999",
@@ -140,10 +140,10 @@
    "The carbon atom alone, at 12.011"
   ],
   "answer": 1,
-  "explanation": "SECTION 3: MW_CO2 44.009 is 12.011 plus two oxygens at 15.999, and MW_CH4 16.043 is 12.011 plus four hydrogens at 1.008. MW_C, 12.011, is the carbon atom alone."
+  "explanation": "The course: MW_CO2 44.009 is 12.011 plus two oxygens at 15.999, and MW_CH4 16.043 is 12.011 plus four hydrogens at 1.008. MW_C, 12.011, is the carbon atom alone."
  },
  {
-  "prompt": "The Igbogene heaters' destruction efficiency is 1. How does SECTION 4 record it?",
+  "prompt": "The Igbogene heaters' destruction efficiency is 1. How does the course record it?",
   "options": [
    "Left out of the call, so the stated default applied",
    "Taken from the operator's flare study",
@@ -151,10 +151,10 @@
    "Set by the engine for every burner call"
   ],
   "answer": 2,
-  "explanation": "SECTION 4 lists the inputs as \"destruction efficiency 1 (complete combustion, typed)\". The stated default applies only to an argument left out of the call (SECTION 2), and the flare study states the flare's 0.98."
+  "explanation": "The course lists the inputs as \"destruction efficiency 1 (complete combustion, typed)\". The stated default applies only to an argument left out of the call, and the flare study states the flare's 0.98."
  },
  {
-  "prompt": "The digest explains why 1000 kmol of carbon burned completely is 44.009 t of CO2. What is the explanation?",
+  "prompt": "The course explains why 1000 kmol of carbon burned completely is 44.009 t of CO2. What is the explanation?",
   "options": [
    "Each kilomole of carbon that burns leaves as MW_CO2 kilograms of CO2.",
    "A registered factor of 44.009 is applied to each tonne of the fuel burned.",
@@ -162,6 +162,6 @@
    "The CO2 is weighed at MW_C and then converted at the set's GWP."
   ],
   "answer": 0,
-  "explanation": "SECTION 3 gives this as the reason 1000 kmol burned completely is 44.009 t. The method uses no registered factor, and MW_CH4 is for escaped carbon."
+  "explanation": "The course gives this as the reason 1000 kmol burned completely is 44.009 t. The method uses no registered factor, and MW_CH4 is for escaped carbon."
  }
 ]

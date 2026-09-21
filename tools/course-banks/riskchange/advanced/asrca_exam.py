@@ -87,7 +87,7 @@ q(0, "Can the person whose work IK-01 examines sit in on it purely to watch?",
  ["No: \"The author of the work under review cannot review it.\" covers every role.",
   "No: \"Choose the reviewer.\"",
   "Yes, and while observing u-efe may also verify comments."],
- "The author, u-efe, is refused as a Reviewer, as the Lead Reviewer and with no role given, and is refused every reviewer move on a comment. Watching judges nothing, so the digest records the author as an Observer as ALLOWED.")
+ "The author, u-efe, is refused as a Reviewer, as the Lead Reviewer and with no role given, and is refused every reviewer move on a comment. Watching judges nothing, so the course records the author as an Observer as ALLOWED.")
 
 q(2, "The coordinator tries to add a reviewer to IK-01 without naming anybody. What is the answer?",
  "It refuses: \"Choose the reviewer.\"",
@@ -101,7 +101,7 @@ q(0, "u-kemi, independent of the work, asks to verify C-03 on IK-01, a \"Respond
  ["Refuses it, because only the coordinator may verify a comment on a review in \"Verification\".",
   "Refuses it, because u-kemi was not the reviewer who raised C-03 on the log.",
   "Refuses it with \"A comment cannot be verified before the author has responded to it.\""],
- "The move is legal from \"Responded\", a response exists, and the actor is independent of the work, so the digest records it as ALLOWED. The author verifying the same comment is refused.")
+ "The move is legal from \"Responded\", a response exists, and the actor is independent of the work, so the course records it as ALLOWED. The author verifying the same comment is refused.")
 
 q(3, "C-03 on IK-01 has been answered by the author and reads \"Responded\". Which of IK-01's summary counts does it sit in?",
  "totalComments, openComments and blockingComments, since the reviewer has not accepted the response.",
@@ -159,7 +159,7 @@ q(1, "Who may validate ON-01, which u-musa wrote?",
  ["u-musa, provided a colleague's name is typed in the validator field.",
   "Anybody signed in, since the lesson is already \"Published\".",
   "Only an external reviewer named by display name."],
- "The digest records u-grace validating ON-01, read as if it were still \"Submitted\", as ALLOWED, and refuses u-musa with or without a typed colleague name.")
+ "The course records u-grace validating ON-01, read as if it were still \"Submitted\", as ALLOWED, and refuses u-musa with or without a typed colleague name.")
 
 q(3, "A lesson is \"Embedded\". Which moves are still open to it?",
  "It can still be superseded by a successor, or archived.",
@@ -256,26 +256,26 @@ q(1, "In the ONNE summary, which lessons are awaitingValidation 1 and drafts 1?"
   "ON-07 awaiting validation, ON-06 the draft."],
  "ON-06 is \"Submitted\" and waits for somebody other than its author to validate it. ON-07 is the \"Draft\". ON-05 is already \"Validated\" and waits to be published.")
 
-q(1, "What does the digest hold happens when an invalid as-of date reaches daysUntil?",
+q(1, "What does the course hold happens when an invalid as-of date reaches daysUntil?",
  "It answers NaN, and every date rule then reads as not due.",
  ["It refuses with a reason the user can act on, in the usual refusal shape.",
   "It falls back to the machine clock and answers for today.",
   "It answers 0, so every date reads as due on the as-of date."],
- "A comparison on NaN is false either way, so every date rule reads as not due. The digest lists this among the held items; nothing in this course passes an invalid date.")
+ "A comparison on NaN is false either way, so every date rule reads as not due. The course lists this among the held items; nothing in this course passes an invalid date.")
 
-q(3, "How many golden cases does the digest measure across the five files this course reads, and in how many time zones does the gate replay each?",
+q(3, "How many golden cases does the course measure across the five files this course reads, and in how many time zones does the gate replay each?",
  "1037, and every case is replayed in five time zones.",
- ["1037, in one time zone, the one the digest was built in.",
+ ["1037, in one time zone, the one the course was built in.",
   "345, the lessonsLearned file, in five time zones.",
   "1037, in two time zones, Lagos and UTC."],
  "The five files hold 77, 140, 291, 184 and 345 cases. The other five assurance golden files belong to Compliance, Audit & Quality.")
 
-q(3, "How many held items does the digest list, and how is each one taught?",
+q(3, "How many held items does the course list, and how is each one taught?",
  "Nine, each taught as a stated limit and graded nowhere.",
  ["Four, each an owner decision taken on 2026-09-18 and held in the engine.",
   "Nine, each graded in a capstone field so that a learner proves the limit.",
   "Five, one for each golden file."],
- "A held item is a rule the engines state that no owner has decided, or a behaviour that is a limit of the engine, and the digest lists nine. Each is taught as a stated limit and graded nowhere. The owner decisions are the other list: rules an owner has decided, which an engine must follow.")
+ "A held item is a rule the engines state that no owner has decided, or a behaviour that is a limit of the engine, and the course lists nine. Each is taught as a stated limit and graded nowhere. The owner decisions are the other list: rules an owner has decided, which an engine must follow.")
 
 q(1, "On 2026-10-01 the ONNE summary reads lessonsUnapplied 2. Which lessons are they?",
  "ON-03 and ON-04, the visible lessons with no adoption or adaptation.",
@@ -296,7 +296,7 @@ q(0, "Agreement between an engine and its independent oracle proves what, and le
  ["That the rule is the right rule, since two methods reached it by different routes.",
   "That the held items are closed, since both methods agree on them.",
   "That the app displays what the engine computes."],
- "Agreement shows two methods reading the stated rule the same way on those inputs. Whether a rule is right is for the owner to decide, and the digest keeps the rules an owner has decided apart from the held items nobody has ruled on. A limit both methods share is still a limit, and what the app shows is the app's part.")
+ "Agreement shows two methods reading the stated rule the same way on those inputs. Whether a rule is right is for the owner to decide, and the course keeps the rules an owner has decided apart from the held items nobody has ruled on. A limit both methods share is still a limit, and what the app shows is the app's part.")
 
 # ---- one loop across four registers (section 19)
 

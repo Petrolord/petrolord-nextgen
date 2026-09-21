@@ -31,7 +31,7 @@ q(1, "The Apapa pool is posed with a RON minimum of 99. What does the engine ret
  ["An optimal recipe with RON at 94.5010, since RON gives away 3.5010 at the Apapa optimum.",
   "An optimal recipe with the RON specification listed as skipped, with its reason.",
   "The refusal for a missing cost, since no component's cost can buy a RON of 99."],
- "A RON minimum of 99 sits in the digest's infeasible table beside the 10 ppm template, with the same message. An infeasible blend is a real answer: the specifications cannot be met by the components available.")
+ "A RON minimum of 99 sits in the course's infeasible table beside the 10 ppm template, with the same message. An infeasible blend is a real answer: the specifications cannot be met by the components available.")
 
 q(2, "Butane's maximum is typed as 0 because the tank is empty. What does the engine return?",
  "Optimal, with Butane at 0.0000 bbl, a cost of 710560.2149 $, and Sulfur alone binding.",

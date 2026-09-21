@@ -122,7 +122,7 @@ q(2, "Only one of the six screened streams falls outside the turbulent branch. N
   "Etelebou, at a Reynolds number of 313781.4400."],
  "Every other stream in that table sits in the hundreds of thousands or above. This one is small, slow and viscous, so it lands on a branch of its own.")
 
-q(0, "The digest's swept branch table carries seven rows. How many of them are flagged as near the switch?",
+q(0, "The course's swept branch table carries seven rows. How many of them are flagged as near the switch?",
  "Four.",
  ["Seven, every row on the table being inside the flagged band.",
   "One, which is the row sitting exactly on the switch itself.",
@@ -157,7 +157,7 @@ q(0, "The velocity box is blank and the shear door is called. What is the engine
   "The velocity must be finite."],
  "Four inputs reach that door and each of the four refusals names its own box. The longer sentences belong to other doors on the same engine, and quoting the wrong one attributes a message to a call that never produced it.")
 
-q(3, "One digest stream has a friction factor of 4.740191 and another has 0.002867. Why are they so far apart?",
+q(3, "One course stream has a friction factor of 4.740191 and another has 0.002867. Why are they so far apart?",
  "They come from two different expressions, one on each branch.",
  ["One is a Fanning factor and the other is a Darcy factor.",
   "One was measured on the engine and the other read from its export.",
@@ -166,7 +166,7 @@ q(3, "One digest stream has a friction factor of 4.740191 and another has 0.0028
 
 # --- m04, the shear acting on the rate ----------------------------------------
 
-q(1, "Of the six streams the digest screens, how many have their corrosion inhibitor film stripped?",
+q(1, "Of the six streams the course screens, how many have their corrosion inhibitor film stripped?",
  "One.",
  ["None, every one of the six sitting below the threshold.",
   "Three, being the three with the highest wall shear figures.",
@@ -231,7 +231,7 @@ q(3, "Put a consumed depth into the box on a case that had none. Which fields mo
   "The wall shear and the film verdict, which are taken on the reduced bore."],
  "The allowance a design life demands is the rate multiplied by that design life. It is the allowance a new line would need, so it takes no account of what has already been consumed.")
 
-q(0, "Two of the digest's streams report remaining lives of 36.112878 yr and 192.123424 yr. What does a life of that size tell you?",
+q(0, "Two of the course's streams report remaining lives of 36.112878 yr and 192.123424 yr. What does a life of that size tell you?",
  "How long the typed allowance lasts at the computed rate, and nothing more.",
  ["When the line should next be inspected, counted in years from today's date onwards.",
   "How long before the wall reaches its retirement thickness.",
@@ -268,7 +268,7 @@ q(0, "What does this module hold that would let it say how much wall sits under 
 
 # --- m06, which film governs --------------------------------------------------
 
-q(2, "One digest stream sits at an H2S to CO2 ratio of 0.140495867769. What does the engine report for it?",
+q(2, "One course stream sits at an H2S to CO2 ratio of 0.140495867769. What does the engine report for it?",
  "The sulphide regime, with the band label and the life both null.",
  ["The mixed regime, with the rate flagged as an upper bound.",
   "The carbonate regime, the CO2 rate model applying in full.",

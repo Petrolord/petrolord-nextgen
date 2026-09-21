@@ -13,7 +13,7 @@ q(1, "The permanent loss table carries a loss fraction column beside a loss in i
   "The discharge coefficient expressed as a fraction of unity, which is what makes it move row by row."],
  "Every row is at the ABOH differential, so the last column is the same differential scale the transmitter works in and the fraction is what is gone."),
 
-q(2, "What does the digest print about the permanent loss at the two ends of the published beta range?",
+q(2, "What does the course print about the permanent loss at the two ends of the published beta range?",
  "63.043643 in H2O at beta 0.100000 against 28.839688 in H2O at beta 0.750000, a difference of 34.203954 and a ratio of 2.186003.",
  ["63.043643 in H2O at beta 0.100000 against 35.079209 in H2O at beta 0.670000, which are the two ends of the range the flange-tap correlation is published over.",
   "0.988145 against 0.452033, which are the loss fractions at the two ends and are the figures a loss comparison has to be made in because the inches of water carry the differential with them.",
@@ -32,7 +32,7 @@ q(3, "The loss on the ABOH run was computed twice, once with the run's own coeff
  ["47.865230 in H2O against 46.794924 in H2O, which is the loss table row at beta 0.500000 and is what an assumed coefficient lands on.",
   "The engine refused the second calculation, so only the figure with the run's own coefficient exists and the cost of the assumption cannot be printed at all.",
   "A difference of 0.072666, which is the span of the coefficient across the published cells carried into the loss."],
- "The engine itself refuses to assume a coefficient. The digest performed the second calculation deliberately so that the cost of the assumption is printed rather than asserted."),
+ "The engine itself refuses to assume a coefficient. The course performed the second calculation deliberately so that the cost of the assumption is printed rather than asserted."),
 
 q(2, "Why is the size of that difference the wrong thing to take away from the comparison?",
  "It is one run at one beta and one Reynolds number, and a single assumed value is being compared against a quantity that moves across a whole surface.",

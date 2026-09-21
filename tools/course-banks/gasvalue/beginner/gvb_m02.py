@@ -10,7 +10,7 @@ q(1, "On what basis does characteriseGas blend a gas's heating value?",
  ["Mass-weighted over the normalised analysis, inerts included",
   "Mole-weighted over the hydrocarbons alone, rescaled to one",
   "Weighted by liquid volume over the recoverable components"],
- "Every property in SECTION 5 is a mole-weighted sum over the normalised analysis, and the heating value is the mole-weighted heating value. The mass weighting (1537.2878 Btu/scf on EGBEMA) and the hydrocarbons alone (1308.6069) are the two shortcuts the digest prints beside the engine's 1248.4110.")
+ "Every property in the gas lesson is a mole-weighted sum over the normalised analysis, and the heating value is the mole-weighted heating value. The mass weighting (1537.2878 Btu/scf on EGBEMA) and the hydrocarbons alone (1308.6069) are the two shortcuts the course prints beside the engine's 1248.4110.")
 
 q(3, "What heating value, in Btu/scf, does characteriseGas return for EGBEMA?",
  "1248.4110",
@@ -31,9 +31,9 @@ q(2, "EGBEMA's inertMoleFraction is 0.0460. Which normalised fractions does the 
  ["carbon dioxide at 0.0280 plus pentanes plus at 0.0120",
   "nitrogen at 0.0180 plus pentanes plus at 0.0120",
   "nitrogen, carbon dioxide and methane at 0.7420"],
- "inertMoleFraction is the sum of the normalised fractions of the components the reference marks inert, nitrogen and CO2. The digest's table prints N2 0.0180, CO2 0.0280, N2 plus CO2 0.0460 and the engine's 0.0460. C5 and C1 are not marked inert.")
+ "inertMoleFraction is the sum of the normalised fractions of the components the reference marks inert, nitrogen and CO2. The course's table prints N2 0.0180, CO2 0.0280, N2 plus CO2 0.0460 and the engine's 0.0460. C5 and C1 are not marked inert.")
 
-q(0, "OGUTA's carbonPerMol is 1.0580 and its hydrocarbonCarbonPerMol is 1.0430. What does the digest say carbonPerMol minus hydrocarbonCarbonPerMol is, in every row?",
+q(0, "OGUTA's carbonPerMol is 1.0580 and its hydrocarbonCarbonPerMol is 1.0430. What does the course say carbonPerMol minus hydrocarbonCarbonPerMol is, in every row?",
  "The CO2 mole fraction",
  ["The inert mole fraction",
   "The nitrogen mole fraction",
@@ -61,7 +61,7 @@ q(1, "One Mscf of EGBEMA carries 26.7066 kg and one Mscf of OGUTA 21.0224 kg. By
   "Its methane fraction: 0.7420 and 0.9250"],
  "The mass in one Mscf is the moles in a thousand standard cubic feet times the molar mass. EGBEMA's molarMassLbLbmol is 22.3436 and OGUTA's is 17.5880.")
 
-q(3, "The digest probes a gas of methane 0.9 and propane 0.1, with propane's carbon number left blank. What carbonPerMol does the engine report?",
+q(3, "The course probes a gas of methane 0.9 and propane 0.1, with propane's carbon number left blank. What carbonPerMol does the engine report?",
  "1.2000, as with 3 typed",
  ["A refusal naming C3, since no carbon number was typed",
   "None: carbonPerMol is left null and named missing",
@@ -87,16 +87,16 @@ q(1, "What methaneMoleFraction does characteriseGas report for OGUTA?",
  ["0.7420",
   "0.7800",
   "0.7411"],
- "SECTION 5 prints OGUTA's methane at 0.9250; the other three belong to EGBEMA, the studio gas and the short sheet as scaled.")
+ "The gas lesson prints OGUTA's methane at 0.9250; the other three belong to EGBEMA, the studio gas and the short sheet as scaled.")
 
-q(3, "The engine is asked about EGBEMA's hydrocarbons alone, inerts left out and the rest scaled to one. What does the digest print for that heating value?",
+q(3, "The engine is asked about EGBEMA's hydrocarbons alone, inerts left out and the rest scaled to one. What does the course print for that heating value?",
  "1308.6069 Btu/scf, 60.1959 above the engine's",
  ["1308.6069 Btu/scf, 60.1959 below the engine's",
   "1537.2878 Btu/scf, 288.8768 above the engine's",
   "1248.4110 Btu/scf, the same as the engine's"],
- "The hydrocarbons-alone row reads 1308.6069 with 60.1959 in the \"minus the engine's\" column, and the digest says both shortcuts read higher than the engine on this gas. 1537.2878 with 288.8768 is the mass-weighted row, and 1248.4110 is the engine on moles.")
+ "The hydrocarbons-alone row reads 1308.6069 with 60.1959 in the \"minus the engine's\" column, and the course says both shortcuts read higher than the engine on this gas. 1537.2878 with 288.8768 is the mass-weighted row, and 1248.4110 is the engine on moles.")
 
-q(0, "Which gas does the digest print with carbonPerMol 1.3000 and hydrocarbonCarbonPerMol 1.2800?",
+q(0, "Which gas does the course print with carbonPerMol 1.3000 and hydrocarbonCarbonPerMol 1.2800?",
  "The studio's opening gas, with CO2 0.0200",
  ["EGBEMA, with CO2 0.0280",
   "OGUTA, with its CO2 mole fraction at 0.0150",

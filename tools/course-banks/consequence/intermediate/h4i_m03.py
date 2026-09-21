@@ -13,7 +13,7 @@ q(2,
  "ERHA (20 m, heptane) is tilted by a 4 m/s wind at 10 m, with a stated air viscosity of 0.000015 m2/s. How many degrees from the vertical does the engine lean the flame?",
  "49.174202",
  ["38.746229","50.828697","58.130517"],
- "The tilt table prints 49.174202 degrees at 4 m/s. 38.746229 is the 2 m/s row and 58.130517 the 8 m/s row. 50.828697 is the tilt of the Yellow Book benzene fire in section 21, a different pool, wind and viscosity.")
+ "The tilt table prints 49.174202 degrees at 4 m/s. 38.746229 is the 2 m/s row and 58.130517 the 8 m/s row. 50.828697 is the tilt of the Yellow Book benzene fire, a different pool, wind and viscosity.")
 
 q(0,
  "In ERHA's tilt table, which Froude number Fr10 = u10^2 / (g D) stands against a wind of 8 m/s?",
@@ -67,7 +67,7 @@ q(3,
  ["A larger pool burns at a lower burning flux, so less fuel per square metre reaches the flame to be radiated",
   "The view factor of a larger flame is smaller, and the engine folds that reduction into the emissive power",
   "Transmissivity falls with the pool diameter, so the engine lowers the emissive power to allow for the air"],
- "Section 17 gives the reason: a large sooty fire hides its bright core behind smoke, so the power falls toward 20e3 W/m2. The Babrauskas burning flux rises toward its asymptote with the diameter, never falls. The view factor and the transmissivity are separate factors in q = SEP x F x tau, never folded into the emissive power.")
+ "The course gives the reason: a large sooty fire hides its bright core behind smoke, so the power falls toward 20e3 W/m2. The Babrauskas burning flux rises toward its asymptote with the diameter, never falls. The view factor and the transmissivity are separate factors in q = SEP x F x tau, never folded into the emissive power.")
 
 q(2,
  "ERHA at a 4 m/s wind has a flame length of 32.511563 m, a heat of combustion of 44600000 J/kg and a stated radiative fraction of 0.3. What clear flame SEPmax in W/m2 does the engine compute?",
@@ -87,7 +87,7 @@ q(1,
  ["It averages the three methods and reports the mean as the surface emissive power",
   "It picks the largest of the three, so that the heat flux is always a conservative one",
   "It refuses any fire on which the three methods disagree by more than its tolerance"],
- "Section 17 says the three methods give three answers for one fire, 30886.154395, 180128.456236 and 52025.691247 W/m2, and that is why every call names its method and why a heat flux is quoted with its method. The engine never averages methods, never picks one silently and has no refusal for disagreement between them.")
+ "The course says the three methods give three answers for one fire, 30886.154395, 180128.456236 and 52025.691247 W/m2, and that is why every call names its method and why a heat flux is quoted with its method. The engine never averages methods, never picks one silently and has no refusal for disagreement between them.")
 
 q(3,
  "A caller passes surfaceEmissivePower a radiative fraction above one. Which range does the engine's refusal quote from the Yellow Book?",
@@ -109,7 +109,7 @@ q(1,
  ["A tilt of 38.746229 degrees, with a Froude number of 0.020394",
   "A refusal naming the field windSpeed10mMS for the calm air",
   "A tilt of 62.577136 degrees, the maximum the correlation allows"],
- "Section 16 prints the zero wind row as all zeros: no wind, no tilt. 38.746229 degrees with 0.020394 is the 2 m/s row. The calm air refusal naming windSpeed10mMS belongs to Mackay and Matsugu evaporation, and the tilt function does not refuse zero wind. 62.577136 degrees is simply the 12 m/s row.")
+ "The course shows the zero wind row as all zeros: no wind, no tilt. 38.746229 degrees with 0.020394 is the 2 m/s row. The calm air refusal naming windSpeed10mMS belongs to Mackay and Matsugu evaporation, and the tilt function does not refuse zero wind. 62.577136 degrees is simply the 12 m/s row.")
 
 emit(Q, '/root/hse-wip-consequence/banks/h4i_m03.json', expect_n=15)
 finish()

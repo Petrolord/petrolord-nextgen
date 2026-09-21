@@ -12,11 +12,11 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 q(0, "A station of the AFIESERE trajectory at 100.000000 s reads 524.991018 psia and 451.589391 degR. What does a station carry, and what is missing from it?",
  "A time, a pressure and a temperature. No mass, so an inventory profile cannot be read off the call.",
  ["A time, a pressure and a mass. No temperature, which is reported only for the end state.",
-  "A time and a pressure. No temperature at all, which the digest derives from the pressure ratio instead.",
+  "A time and a pressure. No temperature at all, which the course derives from the pressure ratio instead.",
   "A time, a pressure, a temperature and a mass, which is why the return needs 270 of them."],
  "The march reports the mass at the two ends only, 3469.2925 lb and 648.7449 lb. Getting a quantity a route does not return means calling it repeatedly, which is how the end-pressure table was built.")
 
-q(2, "The digest compares the march against a closed form at the stated case, at a 2.0 in orifice, at a discharge coefficient of 0.60 and from 1800 psia. What is varied across those four rows, and what is not?",
+q(2, "The course compares the march against a closed form at the stated case, at a 2.0 in orifice, at a discharge coefficient of 0.60 and from 1800 psia. What is varied across those four rows, and what is not?",
  "The geometry and the start pressure move; the ratio stays within a part in a million of one.",
  ["The isentropic exponent moves; the time stays inside the printing precision.",
   "The step size moves across the four; the closed-form time stays fixed because it does not use one.",
@@ -49,7 +49,7 @@ q(0, "A blowdown discharge coefficient of 1.000000 returns 220.103588 s. What do
  ["A default the engine applies when the caller states nothing, which is why the time is the shortest of the three.",
   "An ideal nozzle, which the engine treats as a limiting case and flags with a warning on the return.",
   "A coefficient the march computes for itself from the isentropic exponent at that geometry."],
- "It is the caller's own figure at the top of the range the engine admits for it, and the march applies it once. The time at that value, 220.103588 s, is the shortest of the three the digest walks.")
+ "It is the caller's own figure at the top of the range the engine admits for it, and the march applies it once. The time at that value, 220.103588 s, is the shortest of the three the course walks.")
 
 # --- the customary time, section 22 ---
 q(3, "At an orifice of 0.750000 in the march returns 745.608268 s, which is 12.426804 min. What does the engine make of that figure?",
@@ -78,12 +78,12 @@ q(0, "On a relief valve a larger orifice is a larger answer to the same question
  ["Only the cold end, since a larger hole expands the gas faster and takes it further down.",
   "Both the clock and the cold end, in the same proportion, which is what the orifice sweep prints out.",
   "Only the step count, since the march adjusts its step to the rate the orifice permits."],
- "That inversion is worth holding onto because it cuts against the intuition the Associate tier builds. Across eight orifices the digest counts the distinct final temperatures at 1.")
+ "That inversion is worth holding onto because it cuts against the intuition the Associate tier builds. Across eight orifices the course counts the distinct final temperatures at 1.")
 
 q(2, "An orifice of 0.500000 in gives 1677.618587 s, which is 27.960310 min, over 16777 steps. Which of those three figures would a reviewer challenge first?",
  "The time, because it is the reading the study rests on and it carries every stated input with it.",
  ["The step count, because a count that large means the march has spent its budget on this row.",
-  "The minutes, because the conversion is the digest's arithmetic rather than an engine return.",
+  "The minutes, because the conversion is the course's arithmetic rather than an engine return.",
   "None of the three, because all three of them come back from the same call and stand or fall together."],
  "The curve is a property of the vessel and the assumptions together. Move the volume, either pressure, the gas properties, the discharge coefficient or the step and the whole curve moves with it.")
 
@@ -123,7 +123,7 @@ q(2, "Two columns of the refinement study never move: the substeps and the final
   "No. The substeps are fixed by the end pressure, while the temperature is fixed by the step size."],
  "A convergence table with several columns looks like a convergence statement about all of them. It is only a statement about the columns that moved, and reading a constant column as confirmation is reading an absence of evidence as evidence.")
 
-q(0, "Across the sixty-four-fold refinement the time moves by 0.002015907907 s in total, and the digest prints a time to six decimals. What does setting one beside the other show?",
+q(0, "Across the sixty-four-fold refinement the time moves by 0.002015907907 s in total, and the course prints a time to six decimals. What does setting one beside the other show?",
  "That the step shows in a printed time, since the movement is thousands of half-units in the sixth decimal.",
  ["That the step has dropped out of every printed time, since the whole movement sits below the sixth decimal.",
   "That the engine returns its time at six decimals, so any movement smaller than that cannot be represented at all.",
@@ -241,7 +241,7 @@ q(2, "The internal time limit of 7199.999985603571 s was bisected out of the eng
  ["A figure at twelve decimals, which is the precision a measured constant prints at.",
   "A figure the oracle can check, since a bisected edge is an independent derivation of it.",
   "A figure the caller can override, since a measured limit is an input."],
- "Every threshold in the audit is measured the same way, by asking the engine a question whose answer is that edge and nothing else. Where a constant is not exported, this digest measures it and says which question it asked.")
+ "Every threshold in the audit is measured the same way, by asking the engine a question whose answer is that edge and nothing else. Where a constant is not exported, this course measures it and says which question it asked.")
 
 q(1, "A refusal, a warning and a note are three different things this module returns. What separates them?",
  "A refusal returns no answer, a warning comes with a usable one, and a note names a decision left to you.",
@@ -250,11 +250,11 @@ q(1, "A refusal, a warning and a note are three different things this module ret
   "A refusal stops the call, a warning stops the march, and a note stops the answer being graded."],
  "Read them in that order of severity. The clearest note is the one on the fire duty, where the engine cannot know the plot elevation and so states the rule and hands the truncation back.")
 
-q(0, "One section of the digest has former behaviour as its subject, and nothing follows it. What is the reason for that placement?",
+q(0, "One section of the course has former behaviour as its subject, and nothing follows it. What is the reason for that placement?",
  "Every sentence above it is about the engine as it ships, so the boundary is visible to a reader.",
  ["The section is the newest and was appended when the repair landed, so it sits where it was added.",
   "The material is ordered by tier, and the reading module of the last tier is the final one.",
-  "A digest ends with its provenance, and the repair record is the provenance of this one."],
+  "A course ends with its provenance, and the repair record is the provenance of this one."],
  "A sentence about former behaviour that reads as current behaviour is a defect, and the frame for that material is its heading and its opening paragraph. Everywhere else in this course, such a sentence would be the defect.")
 
 q(3, "Before the repair, three whole routes had no published case and no oracle route at all. Which kind of empty gate is that?",
@@ -267,7 +267,7 @@ q(3, "Before the repair, three whole routes had no published case and no oracle 
 q(1, "Which of these would be a defect if it appeared in a lesson of this course outside this one module?",
  "A sentence about former behaviour that reads as current behaviour.",
  ["A refusal message quoted verbatim inside backticks as the engine's own wording.",
-  "A figure quoted at the precision the digest prints that quantity class at.",
+  "A figure quoted at the precision the course prints that quantity class at.",
   "A statement that a figure is held for literature and is never graded here."],
  "Framing comes from the heading above a passage or the line immediately before it. This module carries the frame in its own title and in its opening paragraph, and nothing in the course after it describes a former state.")
 
@@ -297,7 +297,7 @@ q(1, "What did the Expert tier add to a course whose thesis is that the engine n
  ["The question of which correction the engine computed and which one somebody had copied off a chart.",
   "The question of what a stated fraction is a fraction of, which the drum and the segment both settle.",
   "The question of which scenario governs, which the fire case answers from geometry."],
- "For most of this engine the answer is yes and the digest names the route that would notice. For the viscosity fit and the sphere-drag correlation the answer is no, and the digest names those too.")
+ "For most of this engine the answer is yes and the course names the route that would notice. For the viscosity fit and the sphere-drag correlation the answer is no, and the course names those too.")
 
 q(2, "A limit that has been located, written down and kept out of everything graded is treated here as acceptable. Why?",
  "Because an unlocated limit is the dangerous kind, and naming one is what stops a reader resting on it.",

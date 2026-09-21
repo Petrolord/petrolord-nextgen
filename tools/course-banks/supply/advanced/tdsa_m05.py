@@ -34,7 +34,7 @@ q(2, "solveCrossing is handed the invented exchange rate bracket written backwar
  ["It swaps the ends and finds 1641.7105.",
   "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.",
   "It halves from the high end and reports none."],
- "The digest prints the bracket written backwards, 2100 to 1200, as that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500.")
+ "The engine answers the bracket written backwards, 2100 to 1200, with that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500.")
 
 q(2, "The breakeven search is run on the invented BADAGRY chain with no cap. What does the engine report?",
  "breakeven none",

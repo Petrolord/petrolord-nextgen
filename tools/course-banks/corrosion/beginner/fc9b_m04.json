@@ -33,7 +33,7 @@
   "explanation": "The computed onset is teachable because it is measured out of the engine's own behaviour by bisection and cross checked against a closed form. What the published correlation turns at is a separate question and it is held."
  },
  {
-  "prompt": "The digest sweeps the onset across seven carbon dioxide fugacities. What do those figures show?",
+  "prompt": "The course sweeps the onset across seven carbon dioxide fugacities. What do those figures show?",
   "options": [
    "It rises as the fugacity rises, from 35.853960 C at 0.050000 bar to 132.297731 C at 60.000000 bar, which is why a high pressure line credits no film.",
    "It falls as the fugacity rises, from 132.297731 C at 0.050000 bar to 35.853960 C at 60.000000 bar.",
@@ -44,7 +44,7 @@
   "explanation": "At 0.200000 bar the onset is 108.978001 C, at 1.000000 bar 85.058955 C, at 2.000000 bar 75.655878 C, at 5.000000 bar 63.957912 C and at 20.000000 bar 47.679108 C."
  },
  {
-  "prompt": "Across the fugacities the digest sweeps, how far does the onset move?",
+  "prompt": "Across the fugacities the course sweeps, how far does the onset move?",
   "options": [
    "Nothing measurable, because the onset is a constant of the scale expression and the sweep is there to demonstrate that it does not move.",
    "10.000000 percent, the engine's own reporting margin.",
@@ -140,7 +140,7 @@
    "The engine refuses to apply the factor below the onset, so a scenario there is graded on a chain the factor never entered."
   ],
   "answer": 2,
-  "explanation": "It is an identity rather than a tolerance, which is why it is worth stating as the reason. The capstone generator asserts it rather than assuming it."
+  "explanation": "It is an identity rather than a tolerance, which is why it is worth stating as the reason. The course asserts it rather than assuming it."
  },
  {
   "prompt": "Which of these is held for literature in the film part of this module?",

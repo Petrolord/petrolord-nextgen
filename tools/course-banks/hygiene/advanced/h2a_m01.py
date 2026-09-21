@@ -52,8 +52,8 @@ q(2, "The outdoor readings give 31.410000 C through the outdoor form and 32.5600
   "None of them: the indoor form adds a fixed solar allowance"],
  "The wet bulb carries 0.7 in both forms, so it cannot open a gap. What moves is the last 0.3: indoors all of it rides on the sun-loaded globe, outdoors 0.1 of it passes to the cooler dry bulb. Whenever the globe reads above the dry bulb, the indoor form on outdoor data reads high. The dry bulb enters the outdoor form only, and neither form carries a fixed allowance.")
 
-q(0, "The course measures each WBGT weight by a unit impulse and gets 0.700000000000 against a literal typed in the generator. What does that measurement establish?",
- "That the engine holds the same weights the generator holds, a pin against quiet change to either file",
+q(0, "The course measures each WBGT weight by a unit impulse and gets 0.700000000000 against a literal the course records. What does that measurement establish?",
+ "That the engine holds the same weights the course records, a pin against quiet change to either copy",
  ["That the weights match the NIOSH page, which moves both WBGT doors up to PUBLISHED, REPRODUCED",
   "That the oracle derived the weights independently, so the engine and the oracle cannot share a misreading",
   "That the indoor and outdoor forms agree on shaded readings, which is the check a printed case would give"],
@@ -71,7 +71,7 @@ q(2, "What would move `wbgtOutdoorC` from TRANSCRIPTION ONLY up to PUBLISHED, RE
  ["A third copy of the outdoor weights typed into another file and compared with the engine by unit impulse",
   "More oracle-only cases, so that the agreement between the engine and the oracle covers a wider range of readings",
   "An agreement between the outdoor and indoor forms on readings where the globe and the dry bulb read the same"],
- "A door is PUBLISHED, REPRODUCED when the engine reproduces a printed value at the precision printed; two people copying the weights wrongly would then disagree with that printed index. No such value is known for the WBGT forms. The generator literal is already a third copy of the same page, and more oracle cases or a coincidence of forms check the copies against each other again.")
+ "A door is PUBLISHED, REPRODUCED when the engine reproduces a printed value at the precision printed; two people copying the weights wrongly would then disagree with that printed index. No such value is known for the WBGT forms. The course's literal is already a third copy of the same page, and more oracle cases or a coincidence of forms check the copies against each other again.")
 
 q(1, "Which of these two figures could a graded field in this course carry: 30.090000 C from the indoor readings (the NIOSH 2016-106 section 9.3.2 weighting, checked for transcription only), or the teaching hour's 29.066667 C?",
  "Only 29.066667 C, a one-hour average of stated readouts whose only constant is its window",

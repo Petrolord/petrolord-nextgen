@@ -8,7 +8,7 @@
    "A cut set that splits the residue cannot close on a two crude blend, so the engine joins it."
   ],
   "answer": 1,
-  "explanation": "The digest gives the reason in one line: the Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residue. Kwale draws its own cut points."
+  "explanation": "The course gives the reason in one line: the Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residue. Kwale draws its own cut points."
  },
  {
   "prompt": "What is the Kwale blend's Naphtha yield on Kwale's cut set?",
@@ -22,7 +22,7 @@
   "explanation": "Kwale's naphtha runs from 90 F to 330 F. 20.4189 is the mass-weighted reading, 22.6185 is the default set's naphtha from 90 F to 350 F, and 24.2512 is Kwale Light alone."
  },
  {
-  "prompt": "On Kwale's cuts, what Diesel / AGO figures does the digest print for the Kwale blend by cutYields on its curve, by blendOnVolume and by blendOnMass?",
+  "prompt": "On Kwale's cuts, what Diesel / AGO figures does the course print for the Kwale blend by cutYields on its curve, by blendOnVolume and by blendOnMass?",
   "options": [
    "19.3849, 19.3849 and 19.4040.",
    "19.3849, 19.4040 and 19.4040.",
@@ -85,7 +85,7 @@
    "The Diesel / AGO gain is small enough that the total rounds back to 100.0000."
   ],
   "answer": 2,
-  "explanation": "The digest prints the rule with the table: moving a cut point moves barrels between two cuts and nowhere else. Diesel / AGO changes by 5.0376, Atmospheric residue by -5.0376 and the total by 0.0000. The total is reported as it computes and is never normalised."
+  "explanation": "The course prints the rule with the table: moving a cut point moves barrels between two cuts and nowhere else. Diesel / AGO changes by 5.0376, Atmospheric residue by -5.0376 and the total by 0.0000. The total is reported as it computes and is never normalised."
  },
  {
   "prompt": "In the cut table, which Naphtha and Kerosene / DPK figures stand in the Kwale Light column?",
@@ -129,7 +129,7 @@
    "They total 76.3376 percent, and the engine scales them only when unknownCuts is empty."
   ],
   "answer": 1,
-  "explanation": "The digest prints: the cuts with a yield total 76.3376 percent, and the total is reported as it computes and is never normalised. 33.6742 belongs to the Ebocha partial assay alone on the studio's cuts."
+  "explanation": "The course prints: the cuts with a yield total 76.3376 percent, and the total is reported as it computes and is never normalised. 33.6742 belongs to the Ebocha partial assay alone on the studio's cuts."
  },
  {
   "prompt": "On the Kwale Light and Ebocha blend cut on Kwale's set, what do unknownCuts and Closes read?",
@@ -140,7 +140,7 @@
    "unknownCuts: LPG / Light ends, Naphtha, Vacuum gasoil, Vacuum residue. Closes: false."
   ],
   "answer": 0,
-  "explanation": "The digest prints unknownCuts: LPG / Light ends, Naphtha. Closes: false. Atmospheric residue has a yield, 40.1548, because it runs from 650 F to 100 percent. Four cuts with no yield belong to the Ebocha partial assay alone on the studio's cuts."
+  "explanation": "The course prints unknownCuts: LPG / Light ends, Naphtha. Closes: false. Atmospheric residue has a yield, 40.1548, because it runs from 650 F to 100 percent. Four cuts with no yield belong to the Ebocha partial assay alone on the studio's cuts."
  },
  {
   "prompt": "Kwale Light and the Ebocha partial assay are valued as a blend on the Kwale refinery's prices, costs and losses. What comes back?",
@@ -151,7 +151,7 @@
    "A netback of 48.3393 $/bbl over the cuts it can value, with unyieldedCuts naming LPG / Light ends and Naphtha and complete: false."
   ],
   "answer": 3,
-  "explanation": "The digest prints unyieldedCuts: LPG / Light ends, Naphtha beside the 48.3393 $/bbl, and complete: false. Both cuts keep an empty yield and an empty value."
+  "explanation": "The course prints unyieldedCuts: LPG / Light ends, Naphtha beside the 48.3393 $/bbl, and complete: false. Both cuts keep an empty yield and an empty value."
  },
  {
   "prompt": "The Kwale blend yields 0.7174 percent LPG / Light ends on Kwale's cuts and on the studio's default cuts. Why do the two tables agree on that row?",

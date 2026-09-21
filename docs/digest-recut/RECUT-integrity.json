@@ -1,0 +1,20 @@
+{
+ "app_slug": "integrity",
+ "rows": 1,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "hand edits in the recut generator (this course has no committed bank source)",
+ "edits": [
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-annular-cement",
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "What figure does the digest put on the value of running a cement evaluation log?",
+     "new": "What figure does the course put on the value of running a cement evaluation log?"
+    }
+   }
+  }
+ ]
+}

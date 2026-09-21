@@ -57,14 +57,14 @@ q(3, "The invented Isiokpo radiation and convection loss is raised from 1.8 to 2
  ["87.2029 percent",
   "86.4029 percent",
   "87.8476 percent"],
- "The radiation table prints 87.2029 at 1.0, 86.4029 at 1.8 and 85.7029 at 2.5 percent; 87.8476 is the target LHV row at 2.8 percent oxygen. The digest's sentence over the table is that the radiation loss moves the efficiency one for one.")
+ "The radiation table prints 87.2029 at 1.0, 86.4029 at 1.8 and 85.7029 at 2.5 percent; 87.8476 is the target LHV row at 2.8 percent oxygen. The course's sentence over the table is that the radiation loss moves the efficiency one for one.")
 
 q(1, "A radiation and convection loss of -3 is typed for the invented Isiokpo heater. What comes back?",
  "REFUSED: The radiation and convection loss cannot be negative: a loss below zero would add to the efficiency.",
  ["No refusal: the loss enters the ledger as typed, and the current LHV efficiency prints above the 87.2029 percent of the 1.0 row.",
   "REFUSED: A radiation and convection loss is required and is not defaulted. It comes off a published chart against surface area and firing rate, which this module does not reproduce.",
   "No refusal: a negative loss is read as 0 and the unburned loss of 0.0000 is carried instead."],
- "The stack loss section prints the call with -3 refused: \"The radiation and convection loss cannot be negative: a loss below zero would add to the efficiency.\" SECTION 25 lists it among the rules in force: a negative radiation or unburned loss is refused.")
+ "The stack loss section prints the call with -3 refused: \"The radiation and convection loss cannot be negative: a loss below zero would add to the efficiency.\" The course lists it among the rules in force: a negative radiation or unburned loss is refused.")
 
 q(0, "stackLossEfficiency is called with the heating value basis \"gross\". What does the engine answer?",
  "REFUSED: The heating value basis must be LHV or HHV. \"gross\" is neither, and an efficiency on an unknown basis cannot be compared with anything.",
@@ -92,7 +92,7 @@ q(1, "Which stack and combustion air temperatures does the stack loss section gi
  ["Stack 238 C, combustion air 25 C",
   "Stack 400 C, combustion air 28 C",
   "Stack 28 C, combustion air 238 C"],
- "The stack loss section: stack 238 C, combustion air 28 C, both invented. 25 C is the reference temperature of the typical latent heat and 400 C the top of the typical flue gas cp range (SECTION 1). The last pairing, 28 C for the stack and 238 C for the air, swaps the two.")
+ "The stack loss section: stack 238 C, combustion air 28 C, both invented. 25 C is the reference temperature of the typical latent heat and 400 C the top of the typical flue gas cp range in the course's constants. The last pairing, 28 C for the stack and 238 C for the air, swaps the two.")
 
 q(0, "Read the tuned line on LHV: which total loss and efficiency sit together there?",
  "Total loss 12.1524 percent, efficiency 87.8476 percent",

@@ -8,7 +8,7 @@
    "58.130517"
   ],
   "answer": 2,
-  "explanation": "The tilt table prints 49.174202 degrees at 4 m/s. 38.746229 is the 2 m/s row and 58.130517 the 8 m/s row. 50.828697 is the tilt of the Yellow Book benzene fire in section 21, a different pool, wind and viscosity."
+  "explanation": "The tilt table prints 49.174202 degrees at 4 m/s. 38.746229 is the 2 m/s row and 58.130517 the 8 m/s row. 50.828697 is the tilt of the Yellow Book benzene fire, a different pool, wind and viscosity."
  },
  {
   "prompt": "In ERHA's tilt table, which Froude number Fr10 = u10^2 / (g D) stands against a wind of 8 m/s?",
@@ -96,7 +96,7 @@
    "A large sooty fire hides its bright core behind smoke, so less of the flame surface shows its full emissive power"
   ],
   "answer": 3,
-  "explanation": "Section 17 gives the reason: a large sooty fire hides its bright core behind smoke, so the power falls toward 20e3 W/m2. The Babrauskas burning flux rises toward its asymptote with the diameter, never falls. The view factor and the transmissivity are separate factors in q = SEP x F x tau, never folded into the emissive power."
+  "explanation": "The course gives the reason: a large sooty fire hides its bright core behind smoke, so the power falls toward 20e3 W/m2. The Babrauskas burning flux rises toward its asymptote with the diameter, never falls. The view factor and the transmissivity are separate factors in q = SEP x F x tau, never folded into the emissive power."
  },
  {
   "prompt": "ERHA at a 4 m/s wind has a flame length of 32.511563 m, a heat of combustion of 44600000 J/kg and a stated radiative fraction of 0.3. What clear flame SEPmax in W/m2 does the engine compute?",
@@ -129,7 +129,7 @@
    "It refuses any fire on which the three methods disagree by more than its tolerance"
   ],
   "answer": 1,
-  "explanation": "Section 17 says the three methods give three answers for one fire, 30886.154395, 180128.456236 and 52025.691247 W/m2, and that is why every call names its method and why a heat flux is quoted with its method. The engine never averages methods, never picks one silently and has no refusal for disagreement between them."
+  "explanation": "The course says the three methods give three answers for one fire, 30886.154395, 180128.456236 and 52025.691247 W/m2, and that is why every call names its method and why a heat flux is quoted with its method. The engine never averages methods, never picks one silently and has no refusal for disagreement between them."
  },
  {
   "prompt": "A caller passes surfaceEmissivePower a radiative fraction above one. Which range does the engine's refusal quote from the Yellow Book?",
@@ -162,6 +162,6 @@
    "A tilt of 62.577136 degrees, the maximum the correlation allows"
   ],
   "answer": 1,
-  "explanation": "Section 16 prints the zero wind row as all zeros: no wind, no tilt. 38.746229 degrees with 0.020394 is the 2 m/s row. The calm air refusal naming windSpeed10mMS belongs to Mackay and Matsugu evaporation, and the tilt function does not refuse zero wind. 62.577136 degrees is simply the 12 m/s row."
+  "explanation": "The course shows the zero wind row as all zeros: no wind, no tilt. 38.746229 degrees with 0.020394 is the 2 m/s row. The calm air refusal naming windSpeed10mMS belongs to Mackay and Matsugu evaporation, and the tilt function does not refuse zero wind. 62.577136 degrees is simply the 12 m/s row."
  }
 ]

@@ -1,0 +1,30 @@
+{
+ "app_slug": "uncertainty",
+ "rows": 1,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "hand edits in the recut generator (this course has no committed bank source)",
+ "edits": [
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 7,
+   "fields": {
+    "options": {
+     "old": [
+      "It cannot, since the graded values are numbers, and a number correct to four decimals carries the whole of its mark.",
+      "By writing a breakeven price with a P-label, by showing the High case first, or by quoting a median without its seed.",
+      "By rounding, since each value must be quoted at the four decimals of the digest to be read as the correct value.",
+      "By quoting the base breakeven at all, since 71.6277 is not sampled and only the three percentiles belong in a probabilistic answer."
+     ],
+     "new": [
+      "It cannot, since the graded values are numbers, and a number correct to four decimals carries the whole of its mark.",
+      "By writing a breakeven price with a P-label, by showing the High case first, or by quoting a median without its seed.",
+      "By rounding, since each value must be quoted at the four decimals of the course to be read as the correct value.",
+      "By quoting the base breakeven at all, since 71.6277 is not sampled and only the three percentiles belong in a probabilistic answer."
+     ]
+    }
+   }
+  }
+ ]
+}

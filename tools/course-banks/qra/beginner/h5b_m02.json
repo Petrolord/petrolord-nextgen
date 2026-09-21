@@ -63,7 +63,7 @@
    "The word 'unnamed', with a note in the basis that a name was missing when the tree was read."
   ],
   "answer": 0,
-  "explanation": "The digest says a leaf with no `outcome` of its own takes its branch name. Nothing is borrowed from a neighbouring leaf, no frequency is dropped, and the engine writes no placeholder name. A branch with no name at all is a different matter: the engine refuses it."
+  "explanation": "The course says a leaf with no `outcome` of its own takes its branch name. Nothing is borrowed from a neighbouring leaf, no frequency is dropped, and the engine writes no placeholder name. A branch with no name at all is a different matter: the engine refuses it."
  },
  {
   "prompt": "A branch set is typed as 0.6 and 0.3. What does the engine say, in its own words?",
@@ -85,7 +85,7 @@
    "It refuses it and names the third branch as the one that falls short."
   ],
   "answer": 1,
-  "explanation": "BRANCH_SUM_TOLERANCE is 1e-9, absolute, and the digest's table shows 0.7, 0.2 and 0.1 accepted although they sum to 0.9999999999999999 in double. Demanding an exact 1 in double would refuse a set that is exact on paper. The engine rounds no input, and it names no single branch for a sum."
+  "explanation": "BRANCH_SUM_TOLERANCE is 1e-9, absolute, and the course's table shows 0.7, 0.2 and 0.1 accepted although they sum to 0.9999999999999999 in double. Demanding an exact 1 in double would refuse a set that is exact on paper. The engine rounds no input, and it names no single branch for a sum."
  },
  {
   "prompt": "Someone enters 0.4000001 and 0.6 as the two probabilities under one node. How is that handled, and why?",
@@ -107,7 +107,7 @@
    "It names the branch set by its path, `tree.branches[0].next.branches`, and says the probabilities sum to 0.5."
   ],
   "answer": 3,
-  "explanation": "The digest says a refusal names the branch set by its path, so a deep tree says which node failed; the refusal table shows `tree.branches[0].next.branches` with the sum of 0.5. The engine does not stop at the top of the tree, it does not blame the initiating frequency, and it closes no set on the analyst's behalf."
+  "explanation": "The course says a refusal names the branch set by its path, so a deep tree says which node failed; the refusal table shows `tree.branches[0].next.branches` with the sum of 0.5. The engine does not stop at the top of the tree, it does not blame the initiating frequency, and it closes no set on the analyst's behalf."
  },
  {
   "prompt": "One branch set holds two branches both named 'fire'. What does the engine return?",

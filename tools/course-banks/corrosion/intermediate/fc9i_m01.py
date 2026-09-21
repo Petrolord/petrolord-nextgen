@@ -63,7 +63,7 @@ q(3, "The water cut argument carries a default parameter of one in the engine si
  ["Towards the least limiting answer, because the wetting factor it supplies is the smallest the regime can take.",
   "Neither way, because a default parameter is never reached from the studio layer or from a direct caller.",
   "Towards the least limiting answer, because it silently switches the branch to oil wet."],
- "A direct caller that omits the key entirely gets a wetting factor of 1.000000, which is the water-wet answer, and the digest records that direction as conservative. A water cut typed as not-a-number refuses instead, and not-a-number is what the studio layer produces from a blank box.")
+ "A direct caller that omits the key entirely gets a wetting factor of 1.000000, which is the water-wet answer, and the course records that direction as conservative. A water cut typed as not-a-number refuses instead, and not-a-number is what the studio layer produces from a blank box.")
 
 q(2, "Inside the intermittent regime a water cut arrives as not-a-number. What does the engine return?",
  "A refusal naming the input: the intermittent regime needs a finite water cut fraction.",

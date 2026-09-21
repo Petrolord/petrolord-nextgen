@@ -132,7 +132,7 @@
   "explanation": "It is the same figure as the FOB line of the full build. The engine prints it with complete false, 9 rates missing and \"A FLOOR: 9 rate(s) not supplied, so the full landed cost is at least this.\""
  },
  {
-  "prompt": "The digest prints 26513943.86 - 24774210.79 = 1739733.07 USD for BADAGRY, every rate invented. Which lines does the floor build leave out of its total?",
+  "prompt": "The course prints 26513943.86 - 24774210.79 = 1739733.07 USD for BADAGRY, every rate invented. Which lines does the floor build leave out of its total?",
   "options": [
    "The invented import duty and the invented financing line, both percents of CIF.",
    "The invented port and jetty lines, both levied on the bill-of-lading quantity of the cargo.",

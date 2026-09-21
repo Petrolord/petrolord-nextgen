@@ -209,7 +209,7 @@
   "explanation": "A defaulted input is worse than a refused one, because a default answers a question the caller did not ask and never says it did."
  },
  {
-  "prompt": "The teaching digest lists the states this balance will not compute. How many are there, and what do they have in common?",
+  "prompt": "The course lists the states this balance will not compute. How many are there, and what do they have in common?",
   "options": [
    "Three, and every one of them is a temperature that moved in the wrong direction on one of the two streams.",
    "Twelve, one for each door of the module, since each door carries exactly one guard of its own.",

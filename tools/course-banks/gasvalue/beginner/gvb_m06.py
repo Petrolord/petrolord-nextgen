@@ -12,7 +12,7 @@ q(0, "Which two lines of EGBEMA's end-to-end table are the most any route can ta
  ["liquids, gal/Mscf C3+ and richness",
   "heating value, Btu/scf and inerts, mole fraction",
   "flare CO2, t/yr and flare methane, t/yr"],
- "SECTION 9 says of kgPerMscf and c3PlusKgPerMscf: they are the most any route can take out of a thousand standard cubic feet, by mass. On EGBEMA they read 26.7066 and 6.6647.")
+ "The mass ceiling lesson says of kgPerMscf and c3PlusKgPerMscf: they are the most any route can take out of a thousand standard cubic feet, by mass. On EGBEMA they read 26.7066 and 6.6647.")
 
 q(2, "Which line of the EGBEMA end-to-end table needs the methane GWP of 29.8?",
  "flare CO2e, 215946.438 t/yr",
@@ -21,7 +21,7 @@ q(2, "Which line of the EGBEMA end-to-end table needs the methane GWP of 29.8?",
   "hydrocarbon carbon per mole, 1.3320"],
  "CO2e is the CO2 plus the methane times the GWP. With the GWP left blank the engine still reports flareCo2Tonnes 182079.024 and flareCh4Tonnes 1136.490, and flareCo2eTonnes reads null.")
 
-q(3, "The digest reads the studio's opening gas the same way as EGBEMA. At which line does its table end?",
+q(3, "The course reads the studio's opening gas the same way as EGBEMA. At which line does its table end?",
  "richness, which reads rich",
  ["flare CO2, t/yr",
   "flare CO2e, t/yr",
@@ -35,7 +35,7 @@ q(1, "What do the studio opening gas's liquids line and richness line read?",
   "3.2205 gal/Mscf C3+, rich"],
  "The studio's table prints liquids 2.6894 and richness rich; 2.6894 is at or above the upper edge of 2.5000. 5.0897 is its gpmC2Plus and 3.2205 is EGBEMA's liquids line.")
 
-q(3, "Beside its analysis, which flare inputs does the digest give EGBEMA?",
+q(3, "Beside its analysis, which flare inputs does the course give EGBEMA?",
  "7.5 MMscfd, 355 days, 0.97, 0.955 and a GWP of 29.8",
  ["10 MMscfd, 350 days, 0.97, 0.955 and a GWP of 29.8",
   "7.5 MMscfd, 355 days, 0.97, 0.955 and a GWP of 20",
@@ -54,7 +54,7 @@ q(1, "The studio gas's end-to-end table opens on its heating value. Which figure
  ["1248.4110",
   "1035.6050",
   "1308.6069"],
- "SECTION 15's studio table opens at 1210.7800; 1248.4110 opens EGBEMA's.")
+ "The end-to-end lesson's studio table opens at 1210.7800; 1248.4110 opens EGBEMA's.")
 
 q(2, "Line one of EGBEMA's table reads sheet sum 1.0000. What does the same sheet typed short report?",
  "0.9850, with a note that the fractions were scaled to one",
@@ -98,12 +98,12 @@ q(0, "Which input of EGBEMA's flare enters the flare CO2e line and neither the f
   "The methane mole fraction, 0.7420"],
  "CO2e is the CO2 plus the methane times the GWP; the destruction efficiency sets the methane and the combustion efficiency sets the CO2. With the GWP left blank the CO2 and the methane are still reported.")
 
-q(3, "EGBEMA is analysed with propane's liquid density left blank. Which two end-to-end lines does the digest print as null on that probe?",
+q(3, "EGBEMA is analysed with propane's liquid density left blank. Which two end-to-end lines does the course print as null on that probe?",
  "The liquids line and the richness line",
  ["The liquids line and the propane and heavier kg/Mscf",
   "The heating value line and the liquids line",
   "The richness line and the mass, kg/Mscf line"],
- "SECTION 8's probe row prints gpmC3Plus null and richness null beside ghvBtuScf 1248.4110. SECTION 9 prints c3PlusKgPerMscf 6.6647 and kgPerMscf 26.7066 on the same probe.")
+ "The density lesson's probe row prints gpmC3Plus null and richness null beside ghvBtuScf 1248.4110. The mass ceiling lesson prints c3PlusKgPerMscf 6.6647 and kgPerMscf 26.7066 on the same probe.")
 
 q(1, "On the studio's opening gas, which figure counts only the carbon that can burn, per mole?",
  "1.2800",

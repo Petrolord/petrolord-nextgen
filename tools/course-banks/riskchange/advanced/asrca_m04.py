@@ -97,7 +97,7 @@ q(0, "Somebody logs that a lesson was turned down for a procedure, names the pro
  ["\"Was the lesson adopted, adapted, or rejected?\", because a rejection with no reason is an outcome the register does not know.",
   "\"Pick what this lesson was applied to.\", since a rejection has no target in the engine's reading of it.",
   "Nothing: a rejection changes nothing, so the engine records it as it stands with no reason attached to it."],
- "A rejection must carry its reason. With the reason, the digest records the rejection as ALLOWED. The question about adopted, adapted or rejected is the refusal for an outcome the register does not know.")
+ "A rejection must carry its reason. With the reason, the course records the rejection as ALLOWED. The question about adopted, adapted or rejected is the refusal for an outcome the register does not know.")
 
 q(1, "The ONNE summary counts applications 6, applied 4 and rejected 2. Which applications make up the 4?",
  "AA-01, AA-02, AA-04 and AA-06.",

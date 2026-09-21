@@ -29,7 +29,7 @@ q(3, "How does the engine form the cost of a litre sold on BADAGRY, with every r
  "The importer pays the landed total and sells the outturn. At the invented 0.45 percent that is 26513943.86 USD over 45566774.37 litres, printed as 0.581870 USD a litre sold.")
 
 # audit-advanced: stem called a digest statement "the engine's own sentence"; explanation unprinted ("nobody is paid")
-q(1, "The digest's rule for the ocean loss reads \"The loss divides the cost.\" Which reading of BADAGRY does that statement rule out?",
+q(1, "The course's rule for the ocean loss reads \"The loss divides the cost.\" Which reading of BADAGRY does that statement rule out?",
  "Adding the loss to the build-up as a charge in dollars.",
  ["Spreading the total over the litres that arrived.",
   "Holding the landed total the same on every row of the sweep.",
@@ -65,7 +65,7 @@ q(1, "The invented exchange rate is left out of the BADAGRY call. What does the 
  ["A refusal of the whole landed cost.",
   "The naira figure at 1520.4000, carried over as the last rate the record used.",
   "Both figures in dollars, the naira column copied from the dollar one."],
- "The dollar cost a litre sold needs no exchange rate. The naira figure is the dollar figure x the exchange rate, and with no exchange rate the digest prints the local figure as none.")
+ "The dollar cost a litre sold needs no exchange rate. The naira figure is the dollar figure x the exchange rate, and with no exchange rate the engine returns the local figure as none.")
 
 q(2, "Which figure does the pump price build-up of the next module start from, on the course's invented BADAGRY record?",
  "884.6753 naira a litre, the row at the invented 0.45 percent loss",
@@ -95,7 +95,7 @@ q(1, "Why is H1 taught as a limit and never graded?",
  ["The engine bills the discharge lines on the outturn, and the course prints no outturn figure.",
   "The jetty and storage lines are left out of the BADAGRY landed total until the basis is settled.",
   "The engine refuses the jetty and storage lines until the contract basis is typed."],
- "The digest lists H1 among the items held by the engines repository in FINDINGS-supply, taught as limits and never graded. Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know, and the engine answers every per-quantity line on the bill of lading.")
+ "The course lists H1 among the items held by the engines repository in FINDINGS-supply, taught as limits and never graded. Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know, and the engine answers every per-quantity line on the bill of lading.")
 
 q(2, "H1 names the jetty and storage lines. Which other invented BADAGRY lines does the same contract question reach?",
  "Every per-quantity line: regulatory 109854.60 USD on 45772751.75 litres and port 103700.00 USD on 34000.0000 tonnes.",

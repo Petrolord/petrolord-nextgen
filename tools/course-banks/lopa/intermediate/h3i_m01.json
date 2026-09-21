@@ -140,7 +140,7 @@
    "Always the dependent failure factor, abbreviated after first use."
   ],
   "answer": 1,
-  "explanation": "The vocabulary section rules that the bare word already means a vapour fraction in the fluid course and an orifice diameter ratio in the metering course, so this course writes the beta factor every time, with betaD for detected failures. The three other wordings are invented here and appear nowhere in the engine or its digest."
+  "explanation": "The vocabulary section rules that the bare word already means a vapour fraction in the fluid course and an orifice diameter ratio in the metering course, so this course writes the beta factor every time, with betaD for detected failures. The three other wordings are invented here and appear nowhere in the engine or the course."
  },
  {
   "prompt": "How does this course write the probability of failure on demand of a subsystem, and how does it write the credited figure of an individual protection layer?",

@@ -86,7 +86,7 @@ q(0,
  ["The achieved band, the verdict, and the date of the calculation.",
   "The achieved PFDavg and the required PFDavg, with nothing else needed.",
   "The inputs and the outputs of every engine call made, in the order they were made."],
- "The digest lists the shape of the note item by item, and every one of them is there so a reader who disagrees can recompute the answer. A band and a verdict cannot be audited, a pair of figures leaves out the rates and the states, and a log of calls in order records the work without making the verification argument."),
+ "The course lists the shape of the note item by item, and every one of them is there so a reader who disagrees can recompute the answer. A band and a verdict cannot be audited, a pair of figures leaves out the rates and the states, and a log of calls in order records the work without making the verification argument."),
 
 q(1,
  "Why does the note carry the required PFDavg as well as the band it falls in?",
@@ -126,7 +126,7 @@ q(0,
  ["The valve interval alone, with the other two subsystems held at one year.",
   "The lifetime of every subsystem, with the proof test intervals held at one year.",
   "The interval of whichever subsystem carried the largest share of the sum."],
- "The digest states that the function is re-verified with every proof test interval stretched together. Holding two subsystems still, moving a lifetime or moving only the largest share would each be a different and narrower question, with a different answer, which is why the note records which question was asked."),
+ "The course states that the function is re-verified with every proof test interval stretched together. Holding two subsystems still, moving a lifetime or moving only the largest share would each be a different and narrower question, with a different answer, which is why the note records which question was asked."),
 
 emit(Q, '/root/hse-wip-lopa/banks/h3a_m06.json', expect_n=15)
 finish()

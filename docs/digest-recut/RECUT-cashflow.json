@@ -1,0 +1,76 @@
+{
+ "app_slug": "cashflow",
+ "rows": 4,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "hand edits in the recut generator (this course has no committed bank source)",
+ "edits": [
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 4,
+   "fields": {
+    "prompt": {
+     "old": "Under the 2021 Act the worked example pays TET of 25999871.36 and under the 2025 framework a development levy of 41599794.17, with royalty, HCT and CIT unchanged. Why does the digest call the levy 1.6 x TET?",
+     "new": "Under the 2021 Act the worked example pays TET of 25999871.36 and under the 2025 framework a development levy of 41599794.17, with royalty, HCT and CIT unchanged. Why does the course call the levy 1.6 x TET?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "fields": {
+    "options": {
+     "old": [
+      "The engine's default, conservative_zero, which the digest records as a finding of the extraction.",
+      "The terrain string, which carries the reading with it and settles the rate once the terrain is entered.",
+      "The owner of the discount rate, since the two readings differ only in the rate at which the HCT is discounted.",
+      "Counsel; a ledger that reports one without the other has taken a legal position without saying so."
+     ],
+     "new": [
+      "The engine's default, conservative_zero, which the course records as a finding of the extraction.",
+      "The terrain string, which carries the reading with it and settles the rate once the terrain is entered.",
+      "The owner of the discount rate, since the two readings differ only in the rate at which the HCT is discounted.",
+      "Counsel; a ledger that reports one without the other has taken a legal position without saying so."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-levies-and-losses",
+   "ord": 1,
+   "fields": {
+    "prompt": {
+     "old": "On the published PIA worked example the tertiary education tax is 25999871.36 under pia_only and the development levy is 41599794.17 under nta_2025, and the digest calls the levy 1.6 x TET. What makes the ratio exactly the ratio of the rates?",
+     "new": "On the published PIA worked example the tertiary education tax is 25999871.36 under pia_only and the development levy is 41599794.17 under nta_2025, and the course calls the levy 1.6 x TET. What makes the ratio exactly the ratio of the rates?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 11,
+   "fields": {
+    "options": {
+     "old": [
+      "The conservative one, which the digest records as conservative_zero and which is a finding of the extraction rather than a default.",
+      "Neither: the choice belongs to counsel, and a ledger that reports one without the other has taken a legal position without saying so.",
+      "The aggressive one, because the engine prefers the reading that collects more tax when the law is unsettled.",
+      "The one that agrees with the terrain string, since deep offshore under the 2025 framework carries a fixed rate of 0.300000 in the table."
+     ],
+     "new": [
+      "The conservative one, which the course records as conservative_zero and which is a finding of the extraction rather than a default.",
+      "Neither: the choice belongs to counsel, and a ledger that reports one without the other has taken a legal position without saying so.",
+      "The aggressive one, because the engine prefers the reading that collects more tax when the law is unsettled.",
+      "The one that agrees with the terrain string, since deep offshore under the 2025 framework carries a fixed rate of 0.300000 in the table."
+     ]
+    }
+   }
+  }
+ ]
+}

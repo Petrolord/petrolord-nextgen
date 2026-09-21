@@ -8,7 +8,7 @@
    "Revenue less unit operating cost 4888554.84, with crude cost charged in the schedule and the fixed costs of the month."
   ],
   "answer": 1,
-  "explanation": "The digest's definition is margin = product revenue - crude cost - unit operating cost. Fixed costs, capital, tax and financing are not terms in it."
+  "explanation": "The course's definition is margin = product revenue - crude cost - unit operating cost. Fixed costs, capital, tax and financing are not terms in it."
  },
  {
   "prompt": "What is the denominator of ABUA's gross margin per barrel of crude, 3.4883?",

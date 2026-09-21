@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "SECTION 11 states the oxygen demand of each component of the invented Isiokpo fuel gas. Which rule does it print?",
+  "prompt": "The course states the oxygen demand of each component of the invented Isiokpo fuel gas. Which rule does it print?",
   "options": [
    "c + h/2 + s - o/2, weighted by the component's mole fraction.",
    "c + h/4 + s - o/2, weighted by the component's mole fraction.",
@@ -8,10 +8,10 @@
    "2c + h/4 + s - o, weighted by the component's typical LHV."
   ],
   "answer": 1,
-  "explanation": "SECTION 11: the oxygen demand is c + h/4 + s - o/2 for each component, weighted by its mole fraction, with the letters read off the FUEL_REFERENCE atom counts. The weighted sum is o2PerKmolFuel, 2.089500 kmol O2 per kmol fuel."
+  "explanation": "In the course, the oxygen demand is c + h/4 + s - o/2 for each component, weighted by its mole fraction, with the letters read off the FUEL_REFERENCE atom counts. The weighted sum is o2PerKmolFuel, 2.089500 kmol O2 per kmol fuel."
  },
  {
-  "prompt": "In the SECTION 11 oxygen demand table for the invented Isiokpo fuel gas, which weighted figure belongs to C2H6 at a mole fraction of 0.071?",
+  "prompt": "In the course's oxygen demand table for the invented Isiokpo fuel gas, which weighted figure belongs to C2H6 at a mole fraction of 0.071?",
   "options": [
    "1.736000",
    "0.105000",
@@ -22,18 +22,18 @@
   "explanation": "The C2H6 row prints c + h/4 + s - o/2 as 3.5 and a weighted 0.248500. 1.736000 is the CH4 row, 0.105000 the C3H8 row and 2.089500 the sum, which is the engine's o2PerKmolFuel."
  },
  {
-  "prompt": "SECTION 11 prints a row by row oxygen demand for the invented Isiokpo fuel gas. Where do those per component rows come from?",
+  "prompt": "The lesson prints a row by row oxygen demand for the invented Isiokpo fuel gas. Where do those per component rows come from?",
   "options": [
-   "The digest computes them from the FUEL_REFERENCE atom counts; the engine returns only the weighted total.",
-   "combustionStoichiometry returns one weighted row per component; the digest sums them.",
+   "The course computes them from the FUEL_REFERENCE atom counts; the engine returns only the weighted total.",
+   "combustionStoichiometry returns one weighted row per component; the course sums them.",
    "The oracle's bisection returns them, and the engine checks its 2.089500 against their sum.",
    "They are typed into the record with the fuel gas analysis, beside each mole fraction."
   ],
   "answer": 0,
-  "explanation": "SECTION 11 labels the table \"computed here from the FUEL_REFERENCE atom counts; the engine returns only the weighted total\". The weighted total is o2PerKmolFuel, 2.089500. The bisection SECTION 12 names is how the oracle finds the excess air."
+  "explanation": "The course labels the table \"computed here from the FUEL_REFERENCE atom counts; the engine returns only the weighted total\". The weighted total is o2PerKmolFuel, 2.089500. The bisection the next lesson names is how the oracle finds the excess air."
  },
  {
-  "prompt": "The invented Isiokpo fuel gas prints o2PerKmolFuel 2.089500 and stoichAirPerKmolFuel 9.975652. How does SECTION 11 relate the second to the first?",
+  "prompt": "The invented Isiokpo fuel gas prints o2PerKmolFuel 2.089500 and stoichAirPerKmolFuel 9.975652. How does the course relate the second to the first?",
   "options": [
    "2.089500 x 28.9647, the oxygen times AIR_MOLAR_MASS, in kg of air.",
    "2.089500 / 31.998, the oxygen over O2_MOLAR_MASS.",
@@ -41,10 +41,10 @@
    "2.089500 x 18.5068, the oxygen times fuelMolarMassKgKmol, per kmol."
   ],
   "answer": 2,
-  "explanation": "SECTION 11: the stoichiometric air is that oxygen over O2_MOLE_FRACTION_DRY_AIR, 2.089500 / 0.20946 = 9.975652. AIR_MOLAR_MASS 28.9647 and O2_MOLAR_MASS 31.998 weigh air and oxygen; 18.5068 is fuelMolarMassKgKmol."
+  "explanation": "In the course, the stoichiometric air is that oxygen over O2_MOLE_FRACTION_DRY_AIR, 2.089500 / 0.20946 = 9.975652. AIR_MOLAR_MASS 28.9647 and O2_MOLAR_MASS 31.998 weigh air and oxygen; 18.5068 is fuelMolarMassKgKmol."
  },
  {
-  "prompt": "Which SECTION 11 figure is the stoichiometric air for the invented Isiokpo fuel gas stated on a mass basis?",
+  "prompt": "Which course figure is the stoichiometric air for the invented Isiokpo fuel gas stated on a mass basis?",
   "options": [
    "9.975652 kmol air per kmol fuel",
    "15.612763 kg air per kg fuel",
@@ -52,10 +52,10 @@
    "7.886152 kmol N2 per kmol fuel"
   ],
   "answer": 1,
-  "explanation": "SECTION 11 prints stoichAirKgPerKgFuel 15.612763 kg air per kg fuel beside stoichAirPerKmolFuel 9.975652 kmol air per kmol fuel. 18.5068 is fuelMolarMassKgKmol, and 7.886152 is products.airN2PerKmolFuel."
+  "explanation": "The course prints stoichAirKgPerKgFuel 15.612763 kg air per kg fuel beside stoichAirPerKmolFuel 9.975652 kmol air per kmol fuel. 18.5068 is fuelMolarMassKgKmol, and 7.886152 is products.airN2PerKmolFuel."
  },
  {
-  "prompt": "The invented Isiokpo fuel gas carries CO2 at a mole fraction of 0.025. Where does SECTION 11 put that 0.025 kmol in the combustion products?",
+  "prompt": "The invented Isiokpo fuel gas carries CO2 at a mole fraction of 0.025. Where does the course put that 0.025 kmol in the combustion products?",
   "options": [
    "Inside products.fuelN2PerKmolFuel, beside the fuel's nitrogen.",
    "Inside products.airN2PerKmolFuel, 7.886152.",
@@ -63,10 +63,10 @@
    "Nowhere in the products: the analysis drops inerts before burning."
   ],
   "answer": 2,
-  "explanation": "SECTION 11: the CO2 in the fuel has c = 1 and o = 2, so it demands no oxygen and passes into the flue gas; the 0.025 kmol of fuel CO2 is inside products.co2PerKmolFuel above. The fuel's nitrogen leaves as products.fuelN2PerKmolFuel 0.015000."
+  "explanation": "In the course, the CO2 in the fuel has c = 1 and o = 2, so it demands no oxygen and passes into the flue gas; the 0.025 kmol of fuel CO2 is inside products.co2PerKmolFuel above. The fuel's nitrogen leaves as products.fuelN2PerKmolFuel 0.015000."
  },
  {
-  "prompt": "SECTION 11 takes the CO2 out of the invented Isiokpo analysis and renormalises the rest. What does it print?",
+  "prompt": "The course takes the CO2 out of the invented Isiokpo analysis and renormalises the rest. What does it print?",
   "options": [
    "o2PerKmolFuel 2.089500 and lhvMJPerKmolFuel 862.5564",
    "o2PerKmolFuel 2.143077 and lhvMJPerKmolFuel 840.9925",
@@ -74,10 +74,10 @@
    "o2PerKmolFuel 2.143077 and lhvMJPerKmolFuel 862.5564"
   ],
   "answer": 3,
-  "explanation": "With the CO2 taken out and the rest renormalised, SECTION 11 prints o2PerKmolFuel 2.143077 and lhvMJPerKmolFuel 862.5564, and reads the pair as: the inerts dilute the fuel. The analysis as given prints 2.089500 and 840.9925; 930.6273 is its hhvMJPerKmolFuel."
+  "explanation": "With the CO2 taken out and the rest renormalised, the course prints o2PerKmolFuel 2.143077 and lhvMJPerKmolFuel 862.5564, and reads the pair as: the inerts dilute the fuel. The analysis as given prints 2.089500 and 840.9925; 930.6273 is its hhvMJPerKmolFuel."
  },
  {
-  "prompt": "The invented Isiokpo analysis carries N2 at 0.015. How does SECTION 11 report that nitrogen in the flue gas?",
+  "prompt": "The invented Isiokpo analysis carries N2 at 0.015. How does the course report that nitrogen in the flue gas?",
   "options": [
    "As products.fuelN2PerKmolFuel 0.015000, carried separately from the air's nitrogen.",
    "Inside products.airN2PerKmolFuel 7.886152, weighed with the air's own nitrogen.",
@@ -85,10 +85,10 @@
    "Not at all: the engine drops every inert row of FUEL_REFERENCE before it burns."
   ],
   "answer": 0,
-  "explanation": "SECTION 11 prints products.fuelN2PerKmolFuel 0.015000 and states that the fuel's nitrogen is carried separately from the air's. products.airN2PerKmolFuel 7.886152 is the air's nitrogen and 2.033000 is the water. The inert CO2 row is kept too: it passes into products.co2PerKmolFuel."
+  "explanation": "The course prints products.fuelN2PerKmolFuel 0.015000 and states that the fuel's nitrogen is carried separately from the air's. products.airN2PerKmolFuel 7.886152 is the air's nitrogen and 2.033000 is the water. The inert CO2 row is kept too: it passes into products.co2PerKmolFuel."
  },
  {
-  "prompt": "energyEfficiency.ATMOSPHERIC_N2_MOLAR_MASS prints 28.1610. What do SECTION 1 and SECTION 11 say it is?",
+  "prompt": "energyEfficiency.ATMOSPHERIC_N2_MOLAR_MASS prints 28.1610. What does the course say it is?",
   "options": [
    "The N2 row of FUEL_REFERENCE, 28.014 kg/kmol, printed to four decimals after rounding.",
    "The air's non-oxygen part, argon included, derived by the engine from three air constants.",
@@ -96,10 +96,10 @@
    "A typed constant for air's nitrogen alone, with argon carried in AIR_MOLAR_MASS 28.9647."
   ],
   "answer": 1,
-  "explanation": "SECTION 1 prints it as derived by the engine from the three air constants above it. SECTION 11: the air's non-oxygen part leaves as atmospheric nitrogen at ATMOSPHERIC_N2_MOLAR_MASS, which carries air's argon. FUEL_REFERENCE's N2 row is 28.014."
+  "explanation": "The course's constants table prints it as derived by the engine from the three air constants above it. The stoichiometry lesson: the air's non-oxygen part leaves as atmospheric nitrogen at ATMOSPHERIC_N2_MOLAR_MASS, which carries air's argon. FUEL_REFERENCE's N2 row is 28.014."
  },
  {
-  "prompt": "Which formula does SECTION 1 print for how the engine derives ATMOSPHERIC_N2_MOLAR_MASS?",
+  "prompt": "Which formula does the course print for how the engine derives ATMOSPHERIC_N2_MOLAR_MASS?",
   "options": [
    "(AIR_MOLAR_MASS - O2_MOLE_FRACTION_DRY_AIR x O2_MOLAR_MASS) / O2_MOLE_FRACTION_DRY_AIR",
    "(AIR_MOLAR_MASS - O2_MOLAR_MASS) / (1 - O2_MOLE_FRACTION_DRY_AIR)",
@@ -107,10 +107,10 @@
    "AIR_MOLAR_MASS - O2_MOLE_FRACTION_DRY_AIR x O2_MOLAR_MASS"
   ],
   "answer": 2,
-  "explanation": "SECTION 1 prints that formula beside 28.1610. Each wrong option moves one term: the divisor cut to the oxygen fraction alone, the O2 molar mass dropped from the product, or the whole product taken off with no divisor."
+  "explanation": "The course prints that formula beside 28.1610. Each wrong option moves one term: the divisor cut to the oxygen fraction alone, the O2 molar mass dropped from the product, or the whole product taken off with no divisor."
  },
  {
-  "prompt": "SECTION 11 prints a mass balance at 3 percent stack oxygen for the invented Isiokpo fuel. What makes up its in side?",
+  "prompt": "The course prints a mass balance at 3 percent stack oxygen for the invented Isiokpo fuel. What makes up its in side?",
   "options": [
    "The fuel molar mass plus the actual air times AIR_MOLAR_MASS.",
    "The engine dry flue gas plus the engine moisture, both per kmol of fuel.",
@@ -118,18 +118,18 @@
    "The stoichiometric air times ATMOSPHERIC_N2_MOLAR_MASS, argon and all."
   ],
   "answer": 0,
-  "explanation": "SECTION 11: fuel plus air in (fuel molar mass plus actual air times AIR_MOLAR_MASS) 351.0222 kg per kmol of fuel. The engine dry flue gas plus engine moisture is the out side, also 351.0222."
+  "explanation": "The course's balance: fuel plus air in (fuel molar mass plus actual air times AIR_MOLAR_MASS) 351.0222 kg per kmol of fuel. The engine dry flue gas plus engine moisture is the out side, also 351.0222."
  },
  {
-  "prompt": "The SECTION 11 mass balance at 3 percent stack oxygen prints out less in as 0.000001 kg per kmol of fuel. What is that figure?",
+  "prompt": "The course's mass balance at 3 percent stack oxygen prints out less in as 0.000001 kg per kmol of fuel. What is that figure?",
   "options": [
    "An output combustionStoichiometry returns.",
    "The weight of argon the engine drops from the flue gas.",
    "The fuel CO2 counted on both sides of the balance.",
-   "The digest's own arithmetic on the engine's two sides."
+   "The course's own arithmetic on the engine's two sides."
   ],
   "answer": 3,
-  "explanation": "SECTION 11 marks the out less in row computed here: the generator's arithmetic on the engine's in side and out side, 351.0222 each. The same section says air's argon is carried at ATMOSPHERIC_N2_MOLAR_MASS, and SECTION 25 lists the balance as closing."
+  "explanation": "The course marks the out less in row computed here: the course's own arithmetic on the engine's in side and out side, 351.0222 each. The same lesson says air's argon is carried at ATMOSPHERIC_N2_MOLAR_MASS, and the course's rules in force list the balance as closing."
  },
  {
   "prompt": "energyEfficiency.FUEL_REFERENCE carries atom counts and typical heating values. Which does FUEL_REFERENCE_NOTE say drives the stoichiometry?",
@@ -140,10 +140,10 @@
    "The typical HHV column, which a measured value replaces."
   ],
   "answer": 1,
-  "explanation": "FUEL_REFERENCE_NOTE, verbatim: \"Atom counts are definitional and drive the stoichiometry. Heating values are typical: the fuel analysis governs, and a measured value should replace these.\" The inert rows are kept: SECTION 11 passes the fuel CO2 into products.co2PerKmolFuel."
+  "explanation": "FUEL_REFERENCE_NOTE, verbatim: \"Atom counts are definitional and drive the stoichiometry. Heating values are typical: the fuel analysis governs, and a measured value should replace these.\" The inert rows are kept: the course passes the fuel CO2 into products.co2PerKmolFuel."
  },
  {
-  "prompt": "SECTION 1 prints the CO2 row of FUEL_REFERENCE, PRODUCT_MOLAR_MASS.CO2 and carbonAbatement.MW_CO2. What does it say about their molar masses?",
+  "prompt": "The course prints the CO2 row of FUEL_REFERENCE, PRODUCT_MOLAR_MASS.CO2 and carbonAbatement.MW_CO2. What does it say about their molar masses?",
   "options": [
    "They are one number, 44.009, going into the fuel and out in the flue gas.",
    "The fuel row prints 44.097 and the flue gas products print 44.009.",
@@ -151,7 +151,7 @@
    "Each module rounds its own, so 44.009 and 44.097 both appear."
   ],
   "answer": 0,
-  "explanation": "SECTION 1: the CO2 row, PRODUCT_MOLAR_MASS.CO2 and carbonAbatement.MW_CO2 are one number, 44.009, and an inert CO2 in the fuel weighs the same going in as it does in the flue gas. 44.097 is propane's molar mass and 28.014 is N2."
+  "explanation": "In the course, the CO2 row, PRODUCT_MOLAR_MASS.CO2 and carbonAbatement.MW_CO2 are one number, 44.009, and an inert CO2 in the fuel weighs the same going in as it does in the flue gas. 44.097 is propane's molar mass and 28.014 is N2."
  },
  {
   "prompt": "How much water does each kmol of the invented Isiokpo fuel gas make when burned, as products.h2oPerKmolFuel?",
@@ -162,6 +162,6 @@
    "2.089500"
   ],
   "answer": 2,
-  "explanation": "SECTION 11 prints products.h2oPerKmolFuel 2.033000. 1.098000 is products.co2PerKmolFuel, 0.015000 products.fuelN2PerKmolFuel, and 2.089500 the oxygen demand o2PerKmolFuel."
+  "explanation": "The course prints products.h2oPerKmolFuel 2.033000. 1.098000 is products.co2PerKmolFuel, 0.015000 products.fuelN2PerKmolFuel, and 2.089500 the oxygen demand o2PerKmolFuel."
  }
 ]

@@ -22,7 +22,7 @@
   "explanation": "The correction sits below one and the loop reports itself converged in six passes. The 1.015459516779 is the ratio of the two areas and 17546.394776 is the Reynolds number a single pass would have used."
  },
  {
-  "prompt": "The digest prints 1.015459516779 for AKASO. What is that figure?",
+  "prompt": "The course prints 1.015459516779 for AKASO. What is that figure?",
   "options": [
    "The ratio of the inviscid area to the viscous one.",
    "The ratio of the viscous area to the inviscid one.",
@@ -30,7 +30,7 @@
    "The reciprocal of the correction the loop settled on."
   ],
   "answer": 1,
-  "explanation": "It is the viscous area over the inviscid one, and it is quoted only because the digest computes and prints it. The converged area over the one pass area is a separate printed ratio of 1.000083905751."
+  "explanation": "It is the viscous area over the inviscid one, and it is quoted only because the course computes and prints it. The converged area over the one pass area is a separate printed ratio of 1.000083905751."
  },
  {
   "prompt": "A single pass through the liquid loop gives 1.867601 in2 at a Kv of 0.984858. What does the converged answer of 1.867758 in2 say about the shortcut?",
@@ -41,7 +41,7 @@
    "On this case the loop moves the area by about one part in ten thousand, and the single pass remains an approximation to the correct construction."
   ],
   "answer": 3,
-  "explanation": "The digest prints the ratio of the converged area to the one pass area as 1.000083905751. The single pass answer is the smaller of the two, and knowing the size of an approximation is not the same as being allowed to ignore it."
+  "explanation": "The course prints the ratio of the converged area to the one pass area as 1.000083905751. The single pass answer is the smaller of the two, and knowing the size of an approximation is not the same as being allowed to ignore it."
  },
  {
   "prompt": "At 1.000000 cp and at 5.000000 cp the engine returns the inviscid area of 1.839323 in2, although a Reynolds number was computed on both rows. Why?",
@@ -151,7 +151,7 @@
    "The value the clamp acts at, since the correction comes back at one."
   ],
   "answer": 2,
-  "explanation": "The digest prints that field as absent on the inviscid row rather than as a figure. A caller doing arithmetic on it gets zero, which is a perfectly plausible looking Reynolds number, so the absence has to be handled as an absence."
+  "explanation": "The course prints that field as absent on the inviscid row rather than as a figure. A caller doing arithmetic on it gets zero, which is a perfectly plausible looking Reynolds number, so the absence has to be handled as an absence."
  },
  {
   "prompt": "AKASO states a Kd of 0.650000 while the gas and steam streams state 0.975000. What kind of figure is that?",

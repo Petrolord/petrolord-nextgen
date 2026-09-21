@@ -51,7 +51,7 @@ q(3, "apiSeparator, plateInterceptor and hydrocyclone come out at 3.75e-14, 4.24
  "Nothing. Both sides are exact arguments about one geometry, so the gap is floating point noise and anything materially larger would be a real disagreement to go and find.",
  ["A tolerance of 1e-12, which is the figure the jest suite asserts the cyclone group to.",
   "The oracle's own bisection step, which stops once its bracket is narrower than the gap shown.",
-  "The six decimal print of this digest, which is where two figures stop being comparable."],
+  "The six decimal print of this course, which is where two figures stop being comparable."],
  "The engine inverts a balance and the oracle marches a droplet through the vessel and bisects on the size that just clears. Two closed arguments for one number should land on the same float.")
 
 q(2, "The train rows carry gaps of 3.47e-3 on the outlet concentration and 1.80e-3 on the outlet median. Why is tightening those the wrong move?",
@@ -63,7 +63,7 @@ q(2, "The train rows carry gaps of 3.47e-3 on the outlet concentration and 1.80e
 
 q(0, "What would it mean if the train golden ever matched the engine to machine precision?",
  "That the oracle had stopped being independent, because that is what two copies of one calculation produce.",
- ["That the particle count had been raised until the sampling noise in the golden fell well under the precision this digest prints at.",
+ ["That the particle count had been raised until the sampling noise in the golden fell well under the precision this course prints at.",
   "That the quadrature over the bins had converged, which is the property the default grid of 60 bins is chosen to deliver.",
   "That the engine had been rewritten to track particles, which is the route the golden takes on those rows."],
  "IDENTICAL TO TWELVE DECIMALS WOULD BE THE WEAKER RESULT on those rows. A gap is evidence in two directions.")
@@ -72,7 +72,7 @@ q(3, "A reviewer finds a gap far SMALLER than the two methods being compared cou
  "That the two sides are sharing something they were meant to derive separately, which is the quiet failure that lets a bent engine and a bent oracle agree perfectly.",
  ["That the tolerance on that whole family of published cases is far too loose and ought to be tightened until it sits exactly at the gap the reviewer has just observed.",
   "That the case sits inside a band both methods are stated to, where agreement is expected and carries no information.",
-  "That the comparison is being made at the print precision of the digest rather than at full float."],
+  "That the comparison is being made at the print precision of the course rather than at full float."],
  "Before quoting any agreement, ask what the two routes were and what noise each of them carries.")
 
 q(2, "The golden carries expectVelocityWarning, expectStarvedWarning, expectOverloadWarning, expectResidenceWarning, expectHoldupWarning and expectBreakthroughWarning as values of its own. What does that buy?",

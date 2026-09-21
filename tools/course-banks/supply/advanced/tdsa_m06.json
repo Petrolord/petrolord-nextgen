@@ -96,7 +96,7 @@
    "A reserve above the heel is held back on every tank before it counts as pumpable."
   ],
   "answer": 1,
-  "explanation": "The rule reads: pumpable stock is counted tank by tank, and the digest measures it on IB-T1 and IB-T2 as 5078.400 m3 of pumpable stock. Each tank's pumpable stock is its stock above its own heel and never below zero, and no pump lends one tank's volume to another's heel."
+  "explanation": "The rule reads: pumpable stock is counted tank by tank, and the course measures it on IB-T1 and IB-T2 as 5078.400 m3 of pumpable stock. Each tank's pumpable stock is its stock above its own heel and never below zero, and no pump lends one tank's volume to another's heel."
  },
  {
   "prompt": "Among the rules the engines keep, which one does the sentence \"Arrival rate and load time are both needed.\" enforce?",
@@ -107,7 +107,7 @@
    "A day is not closed without its opening stock."
   ],
   "answer": 2,
-  "explanation": "The digest lists the rule \"a load time of zero minutes is refused\" with that sentence. The bays rule prints \"The number of bays must be a whole number, one or more.\", the money rule \"Throughput and the throughput fee are both needed for the money answer.\" and the opening stock rule \"No opening stock, so the day cannot be closed.\""
+  "explanation": "The course lists the rule \"a load time of zero minutes is refused\" with that sentence. The bays rule prints \"The number of bays must be a whole number, one or more.\", the money rule \"Throughput and the throughput fee are both needed for the money answer.\" and the opening stock rule \"No opening stock, so the day cannot be closed.\""
  },
  {
   "prompt": "throughputEconomics takes a blank cost as zero and names it in assumedZero. How does landedCost treat a blank rate?",

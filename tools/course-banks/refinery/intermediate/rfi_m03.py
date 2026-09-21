@@ -13,7 +13,7 @@ q(1, "Which three terms make up ABUA's margin of 7077935.48?",
  ["Revenue 172316812.90, less crude cost 160350322.58 and nothing else.",
   "Revenue 172316812.90, less crude cost, unit operating cost, staff and insurance.",
   "Revenue less unit operating cost 4888554.84, with crude cost charged in the schedule and the fixed costs of the month."],
- "The digest's definition is margin = product revenue - crude cost - unit operating cost. Fixed costs, capital, tax and financing are not terms in it.")
+ "The course's definition is margin = product revenue - crude cost - unit operating cost. Fixed costs, capital, tax and financing are not terms in it.")
 
 q(3, "What is the denominator of ABUA's gross margin per barrel of crude, 3.4883?",
  "The total crude, 2029032.26 bbl.",
