@@ -9,7 +9,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # crediting everything would have done, and the specification statement).
 
 q(2,
-  "What is the engine's credit rule, in its own words?",
+  "Which sentence is the engine's credit rule, quoted in its own words?",
   "An IPL is credited once, and only when flagged independent === true and not flagged auditable === false.",
   ["An IPL is credited for every entry carrying a name and an admissible figure.",
    "An IPL is credited when any affirmative value sits in the independence field.",
@@ -78,7 +78,7 @@ q(2,
   ["10.000000 times lower, which is the factor a single further credited layer at its stated figure would have carried the frequency by on this row.",
    "1000.000000 times lower, because the two layers left out of the product carry figures that multiply to a whole three decades between them.",
    "3.333333 times lower."],
-  "The digest prints the comparison as derived, 100.000000 times lower, from 0.000013500000 per year to 0.000000135000 per year. The two layers set aside carry 0.1 and 0.1, whose product is two decades and not one or three. 3.333333 is the derived factor for a forgotten enabling condition, which is a different table entirely.")
+  "The digest prints the comparison as derived, 100.000000 times lower, from 0.000013500000 per year to 0.000000135000 per year. The two layers set aside carry 0.1 and 0.1, whose product is two decades. 3.333333 is the derived factor for a forgotten enabling condition, which is a different table entirely.")
 
 q(0,
   "Crediting all four layers changes the required risk reduction factor how?",
@@ -110,7 +110,7 @@ q(3,
   ["They are validated by the oracle in exact rational arithmetic.",
    "They are validated against a published worked example, whose credited layers the engine reproduces to the three significant figures the source prints.",
    "They are derived from a normative table the engine restates."],
-  "The digest says plainly that these rules are specification and that the engine's own validation record reports no independent route validating them. They are the engine's contract, pinned by behaviour tests. The oracle decides arithmetic boundaries and not credit policy, no published example is claimed for them, and the engine restates no licensed table.")
+  "The digest says plainly that these rules are specification and that the engine's own validation record reports no independent route validating them. They are the engine's contract, pinned by behaviour tests. The oracle decides arithmetic boundaries and has no say in credit policy, no published example is claimed for them, and the engine restates no licensed table.")
 
 q(0,
   "What happened when the shared negative control removed the auditable exclusion from both the engine and the oracle?",

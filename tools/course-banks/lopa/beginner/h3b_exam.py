@@ -99,12 +99,12 @@ q(0,
   "An enabling condition is a state that must hold for the initiating event to lead anywhere, so it is defended by the fraction of time the plant is in that state. A conditional modifier is the probability that the consequence follows, so it is defended by an argument about ignition or about somebody being in reach. Audit records and proof tests belong to the layers.")
 
 q(2,
-  "A LOPA row is frequency based. Which comparison does the method make?",
+  "What quantity does a LOPA row hold up against its TMEL?",
   "A frequency per year formed from probabilities, compared with a TMEL per year.",
   ["A consequence category compared with the bands of a corporate matrix.",
    "A frequency per year compared with the row's own uncredited frequency.",
    "A matrix score compared with a matrix band."],
-  "The seam says it plainly: a LOPA row multiplies a frequency per year by probabilities and compares the result with a TMEL per year. Nothing in this engine takes a consequence category, a matrix score or a matrix band. The unmitigated frequency is a reporting figure and is never the thing the tolerance is compared with.")
+  "The row forms one frequency per year out of an initiating event and a chain of probabilities, and it is that frequency the TMEL per year is set against. The uncredited frequency is reported on the way and never serves as the yardstick, and matrix categories, scores and bands have no place anywhere in the calculation.")
 
 q(0,
   "With exactly one enabling condition on a row, what does `enablingProduct` come to?",
@@ -123,20 +123,20 @@ q(3,
   "The first line of that table reads nothing left out, 0.013500000000 per year, derived 1.000000, because the derived column is each frequency over the full row and the full row is one times itself. 0.000013500000 per year is the mitigated frequency, further down the chain, and the other two pairs are other lines of the same table.")
 
 q(1,
-  "Which figure in the forgotten factor table is reached by dropping the term that describes the plant's configuration?",
-  "0.045000000000 per year.",
-  ["0.027000000000 per year, which is where the row lands when the first of its two conditional modifiers is the term left off the worksheet.",
-   "0.135000000000 per year, because the configuration term is the largest single factor and dropping it carries the row to the top of the table.",
-   "0.013500000000 per year."],
-  "The configuration term is the enabling condition, the separator on the high pressure manifold, and the table gives the enabling condition left out as 0.045000000000 per year. 0.027000000000 per year is ignition left out, 0.135000000000 per year is every modifier left out, and 0.013500000000 per year is the full row.")
+  "An enabling condition named 'mode' is typed as 2.5. Does the engine's message differ from the one it gives when the same entry is typed as zero?",
+  "No: the same field, `enablingConditions[0].probability`, and the same words.",
+  ["Yes: at 2.5 the message says the figure exceeds one and drops the clause about a scenario that cannot happen, which only fits a zero.",
+   "Yes: at 2.5 the field named is `initiatingEventFrequencyPerYr`, because a figure above one is read as a frequency.",
+   "No, because 2.5 is accepted as a frequency."],
+  "The refusal table gives both calls the field `enablingConditions[0].probability` and one message, word for word, ending with the bracketed clause about a scenario that cannot happen. The engine checks one range and says one thing whichever side of it the figure falls. Only the initiating event frequency may exceed one, and the entry typed here is a probability, so it is refused.")
 
 q(2,
-  "Which omission carries the derived figure 2.000000 in that table?",
-  "Ignition left out.",
-  ["The blast zone modifier left out, whose stated probability is the smaller of the two the row carries and so the larger factor when dropped.",
-   "The enabling condition left out, which is the only single term in the table whose derived figure is not a whole number at all.",
-   "Every modifier left out at once."],
-  "Ignition left out reads 0.027000000000 per year with a derived 2.000000, the reciprocal of its stated 0.5. The blast zone modifier left out reads 5.000000, the enabling condition left out reads 3.333333, and every modifier left out reads 10.000000.")
+  "`silFromPfdAvg` is handed 0.00005 and then 0.00001. What band and state does each come back with?",
+  "SIL 4 and the state SIL, both times.",
+  ["SIL 4 for the first, and BELOW_SIL4_TABLE_FLOOR for the second, because 1e-5 is the bottom of the table and a figure on it has left the table.",
+   "SIL 3 for the first and SIL 4 for the second, since a value on a decade is carried into the band below it on the table.",
+   "No SIL for either, because SIL 4 is never claimed."],
+  "The table of achieved figures gives both 0.00005 and 0.00001 the band SIL 4 with the state SIL. The SIL 4 row runs from 1e-5 inclusive, so a figure of exactly 1e-5 is still on the table, and only a figure below it, such as 0.000005, earns BELOW_SIL4_TABLE_FLOOR. Here SIL 4 is simply the band an achieved figure falls in.")
 
 q(1,
   "What stated IPL PFD does the relief valve sized for the blocked outlet case carry, and how does it compare with the other three entries?",
@@ -152,7 +152,7 @@ q(3,
   ["It is credited, because the credit rule only removes credit from a layer whose independence has been actively denied by the analyst who typed it.",
    "The call is refused and the engine names the field, since the credit rule cannot be applied to an entry whose independence flag is absent.",
    "It is credited at the figure entered, with a warning."],
-  "The digest says the test is on the value true itself, that an IPL whose independent is the string yes is not credited, and that a missing flag is treated the same way. Credit is given only when the analyst has asserted independence in the one form the engine accepts. Nothing here is refused and no warning is returned.")
+  "Only the literal value true earns credit. An entry whose `independent` field is left empty lands in `notCredited` with exactly the reason a string flag gets, so an absent claim counts as no claim. The call still runs, the other layers are judged on their own flags, and the engine attaches no warning.")
 
 q(0,
   "Which two stated figures multiply to the credited product on the ORONI row?",
@@ -171,12 +171,12 @@ q(2,
   "The digest says with all four IPLs credited the mitigated frequency reads 0.000000135000 per year against 0.000013500000. The first alternative is the effect of the two layers already credited, 0.000001000000 per year is the TMEL, and 0.000000067500 per year is a frequency from the table of proposed functions.")
 
 q(1,
-  "The credit rule opens with a clause about counting. What does that clause say and why is it there?",
-  "An IPL is credited once, because one piece of hardware counted twice would halve the frequency twice.",
-  ["An IPL is credited once for each scenario it protects on a worksheet.",
-   "An IPL is credited once for each flag it carries, so twice if both are set.",
-   "An IPL is credited once per proof test interval."],
-  "The rule begins with the words that an IPL is credited once, and the digest gives the reason under ONE CREDIT PER IPL: a layer counted twice would halve the frequency twice for one piece of hardware. The rule is about one row and one layer, and it has nothing to do with the number of flags or with any interval.")
+  "A row is sent with no TMEL at all. Which field does the engine name, and does it supply a default?",
+  "`tmelPerYr`, and no default: the TMEL is always an input.",
+  ["`tmelPerYr`, and it supplies 1e-6 per year.",
+   "`requiredRrf`, since no ratio can be formed.",
+   "No field: the row runs with no tolerance."],
+  "The refusal table names `tmelPerYr`, and the engine's own message says the tolerable mitigated event likelihood must be a frequency above 0 per year. The engine holds no default tolerance to fall back on, because the TMEL is the frequency the organisation will tolerate and the engine does not choose it. The field named is the missing input itself, never a result further down the row, and a refusal replaces the result.")
 
 q(3,
   "Tighten this row's tolerance to 1e-8 per year. Which three figures does the engine report?",
@@ -187,12 +187,12 @@ q(3,
   "The ladder gives 1e-8 per year a required RRF of 1350.000000, the outcome SIL3 and a required PFDavg of 0.000740740741. A demand of 1350.000000 is above 1000, so it is past the SIL2 band. The other two triples are the lines above and below it on the same ladder.")
 
 q(0,
-  "The last line of the ladder of tolerances is 1e-10 per year. What does the row report there?",
-  "135000.000000, BEYOND_SIL3_REDESIGN and a required PFDavg of 0.000007407407.",
-  ["135000.000000, BEYOND_SIL3_REDESIGN and a required PFDavg of null.",
-   "13500.000000, BEYOND_SIL3_REDESIGN and a required PFDavg of 0.000074074074.",
-   "135000.000000, SIL3 and 0.000007407407."],
-  "The ladder's last line gives 1e-10 per year a required RRF of 135000.000000, the outcome BEYOND_SIL3_REDESIGN and a required PFDavg of 0.000007407407. The state carries its required PFDavg intact and never returns null, and the triple with 13500.000000 is the line above.")
+  "The function table lists `outcomeFromRequiredRrf` and `silFromPfdAvg` side by side. What does each take and return?",
+  "`outcomeFromRequiredRrf` takes a required RRF and returns the outcome state it demands; `silFromPfdAvg` takes an achieved PFDavg and returns its low demand band.",
+  ["`outcomeFromRequiredRrf` takes an achieved PFDavg and returns its band; `silFromPfdAvg` takes a required RRF and returns an outcome state.",
+   "Both take a required RRF, and they differ only in whether the answer is written as a state or as a band number.",
+   "Both take a PFDavg."],
+  "The function table gives `outcomeFromRequiredRrf` the input `rrf` and the return the outcome state a required RRF demands, and `silFromPfdAvg` the input `pfdAvg` and the return the low demand band an achieved PFDavg falls in. One decides what a row demands and the other bands a verified figure, which is why their inputs differ and their words are kept apart.")
 
 q(2,
   "Why can a function carrying the correct SIL on its datasheet still miss the tolerance?",
@@ -227,44 +227,44 @@ q(0,
   "The digest states it in two sentences after the proposal at 0.009: the band is a label and the required PFDavg is the target. Both figures go into the record, because the band drives the requirements the standards attach to it and the number is what a function is checked against.")
 
 q(2,
-  "A demand of 10000 is put to `outcomeFromRequiredRrf`. Which line of the ladder is that?",
-  "SIL3, with a required PFDavg of 0.000100000000.",
-  ["BEYOND_SIL3_REDESIGN, with a required PFDavg of 0.000100000000, since this demand has passed the last band the low demand table carries.",
-   "SIL3, with a PFDavg of 0.000200000000.",
-   "SIL2, with a required PFDavg of 0.000100000000."],
-  "The ladder gives a demand of 10000 the outcome SIL3 and a required PFDavg of 0.000100000000. The band table gives SIL 3 a risk reduction factor above 1000 and up to 10000 inclusive, so this demand sits on the inclusive edge of that band. 0.000200000000 belongs to a demand of 5000.")
+  "A row reports RISK_REDUCTION_BELOW_SIL1. How can its gap be closed?",
+  "By a SIF or by another IPL, whichever the analyst can defend.",
+  ["Only by a SIF, because the engine reports a required PFDavg for this state and a required PFDavg is a figure that only a safety instrumented function can supply.",
+   "It needs no closing: the layers already meet the TMEL.",
+   "Only by redesigning the process."],
+  "The digest says RISK_REDUCTION_BELOW_SIL1 means some reduction is needed and less than a SIL 1 SIF provides by definition, and that the gap can be closed by a SIF or by another IPL. The engine returns the required PFDavg so the gap has a size, and either kind of layer can supply it. A row whose layers already meet the TMEL is NO_SIF_REQUIRED, and a redesign is the answer to a demand beyond SIL 3.")
 
 q(1,
-  "Which required PFDavg belongs to a demand of 50, and what band is it?",
-  "0.020000000000, in SIL1.",
-  ["0.020000000000, in RISK_REDUCTION_BELOW_SIL1, because a demand of this size is smaller than the lowest banded function covers on the table.",
-   "0.002000000000, in SIL2, which is the line the ladder of demands gives to a required risk reduction factor of exactly this size.",
-   "0.200000000000, in SIL1."],
-  "The ladder gives a demand of 50 the outcome SIL1, a required SIL of 1 and a required PFDavg of 0.020000000000. RISK_REDUCTION_BELOW_SIL1 runs up to a demand of 10, 0.002000000000 belongs to a demand of 500 and 0.200000000000 to a demand of 5.")
+  "`decadeOf` is handed zero, then a negative number, then a string. What comes back each time?",
+  "null each time, because decadeOf refuses nothing.",
+  ["A refusal each time, naming the field `x`, because none of the three is a number above zero.",
+   "0 for zero and a refusal for the other two, which the engine names by the field `x` in its message.",
+   "null for zero, and a refusal otherwise."],
+  "The digest says `decadeOf` refuses nothing: it returns null for zero, for a negative number, for a string and for anything off a decade. It has no row in the table of 29 refusals, and zero sits on no power of ten, so it cannot come back as a decade either.")
 
 q(3,
-  "A row demands 500. Which outcome and required PFDavg does the engine give?",
-  "SIL2, with a required PFDavg of 0.002000000000.",
-  ["SIL1, with a required PFDavg of 0.002000000000, because the demand has not yet passed the top of the lowest band the table names for a row.",
-   "SIL2, with a required PFDavg of 0.020000000000, which is the pair the ladder of demands prints for a required risk reduction factor of this size.",
-   "SIL3, with a required PFDavg of 0.000200000000."],
-  "The ladder gives a demand of 500 the outcome SIL2, a required SIL of 2 and a required PFDavg of 0.002000000000. The SIL2 band runs above a risk reduction factor of 100 and up to 1000, so a demand of 500 is inside it. 0.020000000000 belongs to a demand of 50 and 0.000200000000 to 5000.")
+  "On the ladder of TMELs from 1e-4 down to 1e-10 per year, how many lines report BEYOND_SIL3_REDESIGN?",
+  "Two: 1e-9 and 1e-10.",
+  ["Three: 1e-8, 1e-9 and 1e-10, because a demand of 1350.000000 is already past the top of the SIL 3 band on the table.",
+   "One: 1e-10 alone, since a demand of 13500.000000 at 1e-9 still sits inside the band the table gives to SIL 3.",
+   "None, since SIL 4 always has room."],
+  "The ladder gives BEYOND_SIL3_REDESIGN at 1e-9 per year, with 13500.000000, and at 1e-10, with 135000.000000. At 1e-8 the demand of 1350.000000 is SIL3, inside the band above 1000 and up to 10000. The state signals a redesign; no SIL 4 band is ever assigned to the row.")
 
 q(0,
-  "At a demand of 100000 the engine returns a note. What does it say, and what is the required PFDavg?",
-  "It says the required PFDavg lies in the SIL 4 band, and the figure is 0.000010000000.",
-  ["It says no function can supply the figure, and the figure is 0.000010000000.",
-   "It says the demand is past the last band, and the figure is returned as null.",
-   "It says the PFDavg lies in the SIL 4 band, and the figure is 0.000002000000."],
-  "The ladder gives a demand of 100000 the note that the required PFDavg lies in the SIL 4 band, with a required PFDavg of 0.000010000000 and the SIL 4 column reading true. The note about no function being able to supply the figure belongs to a demand of 500000, whose required PFDavg is 0.000002000000.")
+  "The engine's method string ends by giving the required PFDavg as a ratio. Which one?",
+  "TMEL / f: the tolerable frequency over the mitigated frequency, the reciprocal of RRF = f / TMEL.",
+  ["f / TMEL: the mitigated frequency over the tolerable frequency, the same ratio as the RRF.",
+   "IEF / TMEL: the initiating event frequency over the tolerable frequency.",
+   "TMEL x f."],
+  "The method string reads, in the engine's own words, RRF = f / TMEL; required PFDavg = TMEL / f. The two are reciprocals. f is the frequency after the enabling conditions, the modifiers and the credited IPLs, so the initiating event frequency on its own is never the numerator, and the two frequencies are divided and never multiplied.")
 
 q(2,
-  "Which bounds does the band table give SIL 3?",
-  "A PFDavg from 1e-4 up to 1e-3, and a risk reduction factor above 1000 and up to 10000.",
-  ["A PFDavg from 1e-5 up to 1e-4, and a risk reduction factor above 10000 to 100000.",
-   "A PFDavg from 1e-3 up to 1e-2, and a risk reduction factor above 100 to 1000.",
-   "A PFDavg from 1e-4 up to 1e-3, and a risk reduction factor above 100."],
-  "The band table gives SIL 3 a PFDavg from 1e-4 inclusive up to 1e-3 exclusive, with a risk reduction factor above 1000 and up to 10000 inclusive. The first alternative is the SIL 4 row and the second is the SIL 2 row.")
+  "The golden cases rrf-exactly-1000 and rrf-exactly-10000 each sit on a decade. Which outcomes does the engine give them?",
+  "SIL2 for rrf-exactly-1000 and SIL3 for rrf-exactly-10000, since an exact decade belongs to the lower SIL.",
+  ["SIL3 for rrf-exactly-1000 and BEYOND_SIL3_REDESIGN for the other, as each has reached a decade.",
+   "SIL2 for both, since the second sits inside the snap of the first.",
+   "SIL3 for both."],
+  "The golden table gives rrf-exactly-1000 the required RRF 1000.000000 and the outcome SIL2, and rrf-exactly-10000 the required RRF 10000.000000 and the outcome SIL3. Each exact decade stays with the lower SIL, and the engine agrees with the oracle's exact rationals on both, with relative differences of 1.14e-16 and 1.82e-16.")
 
 q(1,
   "The band table has a row for SIL 4. What risk reduction factors does it cover?",
@@ -315,7 +315,7 @@ q(2,
   "The table of how wide the snap is gives 99.9999999 a relative distance of 1.00e-9 from 100, with decadeOf 2 and the outcome SIL1. The snap works on a relative distance in either direction, so a figure just below a decade is read as that decade in the same way as one just above it.")
 
 q(0,
-  "The golden case rrf-exactly-10 is run through the engine. What does it report?",
+  "Which outcome does the engine give the golden scenario whose exact rational is 10/1?",
   "10.000000 with the outcome RISK_REDUCTION_BELOW_SIL1.",
   ["10.000000 with the outcome SIL1, because an exact decade belongs to the band that has the decade as its own inclusive upper bound.",
    "10.000000 with the outcome NO_SIF_REQUIRED.",
@@ -323,12 +323,12 @@ q(0,
   "The golden table gives rrf-exactly-10 a required RRF of 10.000000, the rational 10/1 and the outcome RISK_REDUCTION_BELOW_SIL1, with `meetsTmel` false. Read in risk reduction factors an exact decade belongs to the lower SIL, so 10 is below SIL 1. 1.000000 belongs to the golden case f-equals-tmel.")
 
 q(1,
-  "What does the golden case non-independent-not-credited show?",
-  "A required RRF of 100.000000 with the outcome SIL1 and a relative difference of 0.",
-  ["A required RRF of 100.000000 with SIL2, a band higher for the uncredited layer.",
-   "A required RRF of 90.000000 with the outcome SIL1 and a relative difference of 0.",
-   "A required RRF of 100.000010 with SIL2."],
-  "The golden table gives non-independent-not-credited a required RRF of 100.000000, the outcome SIL1, `meetsTmel` false and a relative difference of 0. 90.000000 belongs to enabling-and-sif and 100.000010 to rrf-just-above-100.")
+  "`outcomeFromRequiredRrf` is handed a negative number. What does the engine return?",
+  "rrf: must be a finite number above 0",
+  ["rrf: must be at least 1",
+   "requiredRrf: must be above 0",
+   "pfdAvg: must be above 0"],
+  "That is the engine's own message from the refusal table, and the field it names is `rrf`, the function's own input. A demand at or below one is a valid input that returns NO_SIF_REQUIRED, so one is no lower limit. `requiredRrf` is a key of the result of `lopaScenario`, and `pfdAvg` is the input of `silFromPfdAvg`.")
 
 q(3,
   "Which golden case is named for a proposed function that does not quite close its row, and what does it report?",

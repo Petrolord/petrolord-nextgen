@@ -118,7 +118,7 @@
    "The engine warns and then credits the second entry only."
   ],
   "answer": 2,
-  "explanation": "The refusal table carries this call: the field is `ipls[1].name` and the message is the engine's own, that 'relief valve' appears twice and one credit is given per IPL. A refusal replaces the result, so nothing is credited, nothing is listed under `notCredited` and no warning is returned. A layer counted twice would divide the frequency by its IPL PFD twice for one piece of hardware."
+  "explanation": "The refusal table carries this call: the field is `ipls[1].name` and the message is the engine's own, that the second spelling of the name appears twice and one credit is given per IPL. A refusal replaces the result, so nothing is credited, nothing is listed under `notCredited` and no warning is returned. A layer counted twice would take two credits for one piece of hardware."
  },
  {
   "prompt": "`silFromPfdAvg` is called with a PFDavg of zero. What is the field named in the answer?",
@@ -162,6 +162,6 @@
    "Shorten the beta factor the way the fluid and metering courses shorten it."
   ],
   "answer": 0,
-  "explanation": "The vocabulary table binds five words. The bare form of the beta factor already means a vapour fraction in the fluid course and an orifice diameter ratio in the metering course, so this course always writes it in full. A consequence category belongs to the academy's risk matrices and this course scores none. PFDavg is the word for a function or a subsystem, and a credited layer's figure is an IPL PFD, which is the other way round from the option above."
+  "explanation": "The vocabulary table binds five words. The bare form of the beta factor already means a vapour fraction in the fluid course and an orifice diameter ratio in the metering course, so this course always writes it in full. A consequence category belongs to the academy's risk matrices and this course scores none. PFDavg is the word for a function or a subsystem, and a credited layer's figure is an IPL PFD, so the option that swaps the two has them reversed."
  }
 ]

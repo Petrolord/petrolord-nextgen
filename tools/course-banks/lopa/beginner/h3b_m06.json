@@ -107,7 +107,7 @@
    "It carries failure rate data this course recommends."
   ],
   "answer": 0,
-  "explanation": "The digest says every golden LOPA scenario follows the CCPS method with illustrative numbers and that the golden says so in its source line. No published worksheet is reproduced on the determination side, the golden was written by the stdlib oracle in exact rational arithmetic and not by the engine, and every rate in this course is illustrative and never recommended data."
+  "explanation": "The digest says every golden LOPA scenario follows the CCPS method with illustrative numbers and that the golden says so in its source line. No published worksheet is reproduced on the determination side, the golden was written by the stdlib oracle in exact rational arithmetic, independently of the engine, and every rate in this course is illustrative and never recommended data."
  },
  {
   "prompt": "A LOPA row is frequency based. What does the engine take for the consequence?",
@@ -151,7 +151,7 @@
    "A hardware fault tolerance check, and a high demand or continuous mode."
   ],
   "answer": 3,
-  "explanation": "The digest lists both as absent: the engine has no hardware fault tolerance check, because that requirement is a normative table in a licensed standard, and it has no high demand or continuous mode, so every band here is low demand. The other items are real obligations on the analyst and were never checks this engine claimed to make."
+  "explanation": "The digest lists both as absent: the engine has no hardware fault tolerance check, because that requirement is a normative table in a licensed standard, and it has no high demand or continuous mode, so every band here is low demand. The other items are real obligations on the analyst, and this engine makes no claim to check them."
  },
  {
   "prompt": "How does a LOPA consequence reach the arithmetic of the row?",

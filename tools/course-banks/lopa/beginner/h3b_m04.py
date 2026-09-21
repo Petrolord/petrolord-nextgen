@@ -30,7 +30,7 @@ q(0,
   ["The TMEL divided by the mitigated frequency without a SIF, giving 13.500000.",
    "The unmitigated frequency divided by the mitigated frequency without a SIF, giving 13.500000 once the credited layers have been applied to the row.",
    "One divided by the required PFDavg, giving 0.074074074074."],
-  "The engine's key table names `requiredRrf` as the first over the second: the mitigated frequency without a SIF over the TMEL, 0.000013500000 per year over 0.000001000000 per year, which is 13.500000. Taking the division the other way up would give the required PFDavg instead, and the unmitigated over the mitigated frequency is the credited product and no tolerance at all.")
+  "The engine's key table names `requiredRrf` as the first over the second: the mitigated frequency without a SIF over the TMEL, 0.000013500000 per year over 0.000001000000 per year, which is 13.500000. Taking the division the other way up would give the required PFDavg instead, and the unmitigated over the mitigated frequency is one over the credited product, which involves no tolerance at all.")
 
 q(2,
   "What is the required SIF PFDavg on the ORONI row at its own tolerable frequency, and how is it obtained?",
@@ -102,7 +102,7 @@ q(0,
   ["The function meets the tolerance, because it sits inside the required band.",
    "The engine refuses the call and names `sifPfdAvg`, because a proposed figure above the required target cannot be carried through the rest of the row.",
    "The function misses, because it falls in the band below the one required."],
-  "This is the point of the proposal table: a SIF of 0.009 sits in the SIL 2 band the row requires and still misses, because 0.009 is above the required 0.007407407407. The band is a label and the required PFDavg is the target. Nothing is refused, and the proposal is inside the required band and not below it.")
+  "This is the point of the proposal table: a SIF of 0.009 sits in the SIL 2 band the row requires and still misses, because 0.009 is above the required 0.007407407407. The band is a label and the required PFDavg is the target. Nothing is refused, and the proposal sits inside the required band.")
 
 q(2,
   "Which mitigated frequency with the SIF does the engine report for the proposal at 0.009, and does it meet the tolerance?",

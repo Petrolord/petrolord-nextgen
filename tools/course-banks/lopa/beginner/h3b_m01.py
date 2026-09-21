@@ -95,7 +95,7 @@ q(2,
   ["The engine credits both entries, because the two names differ in case and the credit rule looks only at the independence flag on each entry.",
    "The engine credits the first entry and lists the second under `notCredited` with the reason that it is a duplicate of a layer already credited.",
    "The engine warns and then credits the second entry only."],
-  "The refusal table carries this call: the field is `ipls[1].name` and the message is the engine's own, that 'relief valve' appears twice and one credit is given per IPL. A refusal replaces the result, so nothing is credited, nothing is listed under `notCredited` and no warning is returned. A layer counted twice would divide the frequency by its IPL PFD twice for one piece of hardware.")
+  "The refusal table carries this call: the field is `ipls[1].name` and the message is the engine's own, that the second spelling of the name appears twice and one credit is given per IPL. A refusal replaces the result, so nothing is credited, nothing is listed under `notCredited` and no warning is returned. A layer counted twice would take two credits for one piece of hardware.")
 
 q(3,
   "`silFromPfdAvg` is called with a PFDavg of zero. What is the field named in the answer?",
@@ -127,7 +127,7 @@ q(0,
   ["Write a consequence category beside every row, so that a reviewer can rank what is being tolerated.",
    "Write IPL PFD for a whole safety instrumented function and PFDavg for one credited layer.",
    "Shorten the beta factor the way the fluid and metering courses shorten it."],
-  "The vocabulary table binds five words. The bare form of the beta factor already means a vapour fraction in the fluid course and an orifice diameter ratio in the metering course, so this course always writes it in full. A consequence category belongs to the academy's risk matrices and this course scores none. PFDavg is the word for a function or a subsystem, and a credited layer's figure is an IPL PFD, which is the other way round from the option above.")
+  "The vocabulary table binds five words. The bare form of the beta factor already means a vapour fraction in the fluid course and an orifice diameter ratio in the metering course, so this course always writes it in full. A consequence category belongs to the academy's risk matrices and this course scores none. PFDavg is the word for a function or a subsystem, and a credited layer's figure is an IPL PFD, so the option that swaps the two has them reversed.")
 
 emit(Q, '/root/hse-wip-lopa/banks/h3b_m01.json', expect_n=15)
 finish()

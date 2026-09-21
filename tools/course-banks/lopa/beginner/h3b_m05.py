@@ -62,7 +62,7 @@ q(3,
   ["Because clipping would change the outcome state on the row.",
    "Because the required PFDavg is the only figure returned for such a row.",
    "Because the table has a SIL 4 band and a row past SIL 3 is placed in it."],
-  "The digest says beyond SIL 3 is never clipped: the state carries the required PFDavg intact, so a worksheet shows how far beyond the table the row sits. The engine returns the required RRF and the state alongside that figure, and the process sector reads a demand of this size as a signal to change the process and not as a band to be assigned.")
+  "The digest says beyond SIL 3 is never clipped: the state carries the required PFDavg intact, so a worksheet shows how far beyond the table the row sits. The engine returns the required RRF and the state alongside that figure, and the process sector reads a demand of this size as a signal to change the process.")
 
 q(2,
   "The low demand band table gives SIL 2 which bounds?",
@@ -89,7 +89,7 @@ q(3,
   "Below 1e-5 the table has no row, so the engine reports SIL 4 with the state BELOW_SIL4_TABLE_FLOOR and the note that a PFDavg below 1e-5 is off the table and no claim beyond SIL 4 exists. The state NOT_SIL_RATED belongs to a figure above the top of the table, and the state SIL belongs to a figure inside a band.")
 
 q(1,
-  "The engine prints a band convention line beside every banded result. Which line is it?",
+  "`silFromPfdAvg` returns its band convention as one line in its basis. Which line is it?",
   "IEC 61508-1 Table 2 / IEC 61511-1 low demand: SIL n holds 10^-(n+1) <= PFDavg < 10^-n; an exact decade belongs to the higher-PFD band.",
   ["Each band excludes its lower bound and includes its upper one.",
    "Each band is decided by rounding the figure to the nearest decade first.",
@@ -110,7 +110,7 @@ q(0,
   ["It rounds every result to nine decimals before printing it.",
    "It widens each band by that fraction at both of its ends.",
    "It refuses any figure that falls within that distance of a decade."],
-  "The digest says a value within that RELATIVE distance of a power of ten is treated as the power of ten, for the band and for the comparison of a mitigated frequency with the TMEL. The snap rounds nothing for display, widens no band, refuses nothing, and touches only values whose exact arithmetic already sits on a decade.")
+  "The digest says a value within that RELATIVE distance of a power of ten is treated as the power of ten, for the band and for the comparison of a mitigated frequency with the TMEL. The snap rounds nothing for display, widens no band, refuses nothing, and touches only values within one part in a billion of a decade.")
 
 q(1,
   "Five frequency products whose exact value is a decade are computed in double. How many land strictly above 100, and at what seventeen digit figure?",

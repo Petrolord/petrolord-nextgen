@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "What is the engine's credit rule, in its own words?",
+  "prompt": "Which sentence is the engine's credit rule, quoted in its own words?",
   "options": [
    "An IPL is credited for every entry carrying a name and an admissible figure.",
    "An IPL is credited when any affirmative value sits in the independence field.",
@@ -96,7 +96,7 @@
    "3.333333 times lower."
   ],
   "answer": 2,
-  "explanation": "The digest prints the comparison as derived, 100.000000 times lower, from 0.000013500000 per year to 0.000000135000 per year. The two layers set aside carry 0.1 and 0.1, whose product is two decades and not one or three. 3.333333 is the derived factor for a forgotten enabling condition, which is a different table entirely."
+  "explanation": "The digest prints the comparison as derived, 100.000000 times lower, from 0.000013500000 per year to 0.000000135000 per year. The two layers set aside carry 0.1 and 0.1, whose product is two decades. 3.333333 is the derived factor for a forgotten enabling condition, which is a different table entirely."
  },
  {
   "prompt": "Crediting all four layers changes the required risk reduction factor how?",
@@ -140,7 +140,7 @@
    "They are specification: the validation record says no independent route validates them."
   ],
   "answer": 3,
-  "explanation": "The digest says plainly that these rules are specification and that the engine's own validation record reports no independent route validating them. They are the engine's contract, pinned by behaviour tests. The oracle decides arithmetic boundaries and not credit policy, no published example is claimed for them, and the engine restates no licensed table."
+  "explanation": "The digest says plainly that these rules are specification and that the engine's own validation record reports no independent route validating them. They are the engine's contract, pinned by behaviour tests. The oracle decides arithmetic boundaries and has no say in credit policy, no published example is claimed for them, and the engine restates no licensed table."
  },
  {
   "prompt": "What happened when the shared negative control removed the auditable exclusion from both the engine and the oracle?",
