@@ -28,7 +28,7 @@ The form is the gravity constant over one plus the rate over a lightening consta
 
 Adding rate REDUCES the pressure the tubing needs: positive feedback with no restoring force. A small fall in rate raises the demand, which suppresses the rate further, until the column loads up and the well dies. It looks attractive, BONNY-7 asking 1508.355629 psia at 484.34 stb/d against 2545.501142 at its loaded end.
 
-At the far left the demand is the dead column, and against reservoir pressure that settles whether the well starts itself. BONNY-7 stands 170 psi below, so the digest's verdict is that the column does not outweigh the reservoir at low rate. FORCADOS-3 stands 590 psi above: yes.
+At the far left the demand is the dead column, and against reservoir pressure that settles whether the well starts itself. BONNY-7 stands 170 psi below, so the lab's verdict is that the column does not outweigh the reservoir at low rate. FORCADOS-3 stands 590 psi above: yes.
 
 ## The dry gas exception
 

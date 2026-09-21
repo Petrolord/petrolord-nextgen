@@ -32,7 +32,7 @@ The engine does not take one price and scale it. At each exchange rate it builds
 
 The first is the percentage element. The value added tax is a percent of the running total, and the running total contains the landed cost. A shortcut that moved only the landed cost and kept the tax amount fixed would misprice each row away from the base rate. Rebuilding the chain applies the tax to each row's own running total.
 
-The second is honesty about what moves. The per-litre margins and the per-litre levies are the same invented amounts on every row. The digest prints the chain at each rate, element by element:
+The second is honesty about what moves. The per-litre margins and the per-litre levies are the same invented amounts on every row. The table prints the chain at each rate, element by element:
 
 | naira to the dollar | landed naira/L | Government naira/L | pump price naira/L |
 | --- | --- | --- | --- |

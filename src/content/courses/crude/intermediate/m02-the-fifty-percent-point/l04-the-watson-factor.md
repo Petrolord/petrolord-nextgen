@@ -4,9 +4,9 @@ The Watson characterisation factor takes two figures the blend already has, a bo
 
 {{panel:crude-valuation-explorer}}
 
-## What the digest says about K
+## What the course says about K
 
-The digest says three things about K and no more. It gives the formula. It says the studio takes Tb as the blend's T50, "a SCREENING basis: the strict basis is the mean average boiling point, which the studio does not compute". And it says "the page labels K as the screening figure". It prints no bands on K and no reading of what a given K means, so this course sets none.
+The course says three things about K and no more. It gives the formula. It says the studio takes Tb as the blend's T50, "a SCREENING basis: the strict basis is the mean average boiling point, which the studio does not compute". And it says "the page labels K as the screening figure". It prints no bands on K and no reading of what a given K means, so this course sets none.
 
 ## The formula the engine uses
 
@@ -14,7 +14,7 @@ watsonK = Tb^(1/3) / SG, with Tb in degrees Rankine.
 
 SG is the blend's specific gravity, blended on volume. Tb is a boiling temperature on the absolute Rankine scale.
 
-The engine converts from Fahrenheit by adding an offset, and it gives that offset itself. The digest reads it back from the function: watsonK at 0 F and SG 1, cubed, is 459.6700. At SG 1 the division does nothing, so the cube of K is Tb in Rankine, and at 0 F that is the offset.
+The engine converts from Fahrenheit by adding an offset, and it gives that offset itself. The course reads it back from the function: watsonK at 0 F and SG 1, cubed, is 459.6700. At SG 1 the division does nothing, so the cube of K is Tb in Rankine, and at 0 F that is the offset.
 
 ## The Kwale blend's K
 
@@ -29,13 +29,13 @@ Each figure uses the blend's own T50, interpolated off the blend's own curve, an
 
 ## What the engine declines
 
-The formula has a cube root of an absolute temperature and a division by a specific gravity. Neither makes sense for every input. The digest prints two probes: watsonK declines a non-physical input: at -500 F it returns no value, and at SG 0 it returns no value.
+The formula has a cube root of an absolute temperature and a division by a specific gravity. Neither makes sense for every input. The course runs two probes: watsonK declines a non-physical input: at -500 F it returns no value, and at SG 0 it returns no value.
 
 Tb is F plus the offset of 459.6700, and at -500 F that is below zero on the Rankine scale. An SG of 0 is the divisor of the formula. In both cases the engine returns no value, and no figure is printed for K.
 
 ## What K is not asked to do here
 
-The digest's rules for the valuation leave K out. Cut yields are the curve at the cut's upper bound minus the curve at its lower bound. The netback formula in module 4 is written in cut yields, product prices, losses, processing cost and freight, and K is not among its terms. Lesson 5 is about the basis it is taken on, which the studio itself marks as a screening basis.
+The engine's rules for the valuation leave K out. Cut yields are the curve at the cut's upper bound minus the curve at its lower bound. The netback formula in module 4 is written in cut yields, product prices, losses, processing cost and freight, and K is not among its terms. Lesson 5 is about the basis it is taken on, which the studio itself marks as a screening basis.
 
 ## Exercise
 

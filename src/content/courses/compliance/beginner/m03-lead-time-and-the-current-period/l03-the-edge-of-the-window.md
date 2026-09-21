@@ -1,6 +1,6 @@
 # The edge of the window
 
-Every warning window has an edge, and a rule that is vague about its edge will be argued about on exactly the day it matters. This lesson reads the edge of the Due soon window from the digest's own rows, and it is careful to read only what the rows print.
+Every warning window has an edge, and a rule that is vague about its edge will be argued about on exactly the day it matters. This lesson reads the edge of the Due soon window from the engine's own rows, and it is careful to read only what the rows print.
 
 ## The rows either side of the edge
 
@@ -21,7 +21,7 @@ The row above it has a lead time of 15 and reads On track. The row below has 17 
 
 ## One day either side
 
-The digest prints the row for a lead time of 15, one day short of the 16 days remaining, and it reads On track. So the two rows either side of the line are printed, and nothing at the edge has to be filled in by reasoning. A lead time of 15 leaves the return On track. A lead time of 16, equal to the days remaining, makes it Due soon. That is the one fact a user needs at the edge. For any lead time the table does not print, move the control in the panel and read the status the engine gives.
+The table prints the row for a lead time of 15, one day short of the 16 days remaining, and it reads On track. So the two rows either side of the line are printed, and nothing at the edge has to be filled in by reasoning. A lead time of 15 leaves the return On track. A lead time of 16, equal to the days remaining, makes it Due soon. That is the one fact a user needs at the edge. For any lead time the table does not print, move the control in the panel and read the status the engine gives.
 
 ## The same edge on the documents side
 

@@ -1,6 +1,6 @@
 # An objective, rows and bounds
 
-Before any blending, the digest poses the textbook case, because a problem in two variables can be drawn and every part of it can be seen. Two products, x and y, share two units of plant. Each unit of x earns 5 and each unit of y earns 4. The first unit has 24 hours and x takes 6 of them while y takes 4. The second unit has 6 hours and x takes 1 while y takes 2.
+Before any blending, the course poses the textbook case, because a problem in two variables can be drawn and every part of it can be seen. Two products, x and y, share two units of plant. Each unit of x earns 5 and each unit of y earns 4. The first unit has 24 hours and x takes 6 of them while y takes 4. The second unit has 6 hours and x takes 1 while y takes 2.
 
 ## The three parts
 
@@ -8,7 +8,7 @@ Before any blending, the digest poses the textbook case, because a problem in tw
 
 **The rows** are the shared constraints: 6x + 4y <= 24 and 1x + 2y <= 6. Each row is a linear expression, a sense (<=, = or >=) and a right-hand side. A row ties the variables together, because it limits what they do jointly.
 
-**The bounds** belong to one variable each: here x and y are at least 0. The digest says how the kernel takes them: "The bounds are passed apart from the rows: the kernel shifts every lower bound to the origin, and it gives a bound no shadow price." In a blend every component has a floor and a tank limit, and a component held at its limit reports as a component at its availability, which module three reads at Apapa.
+**The bounds** belong to one variable each: here x and y are at least 0. The course says how the kernel takes them: "The bounds are passed apart from the rows: the kernel shifts every lower bound to the origin, and it gives a bound no shadow price." In a blend every component has a floor and a tank limit, and a component held at its limit reports as a component at its availability, which module three reads at Apapa.
 
 ## The answer and how it is reported
 

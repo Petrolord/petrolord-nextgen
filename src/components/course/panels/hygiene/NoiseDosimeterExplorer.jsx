@@ -205,7 +205,7 @@ const NoiseDosimeterExplorer = ({ initialMode = 'criteria' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored exposure engine on the teaching records and the published
-        tables, printed to the precision the teaching digest prints. Sound levels are A-weighted, in dBA.
+        tables, printed to the precision the lessons use. Sound levels are A-weighted, in dBA.
       </Note>
     </PanelShell>
   );

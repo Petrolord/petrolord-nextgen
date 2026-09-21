@@ -10,7 +10,7 @@ TEBIDABA is a saturated case, so its stated factor is 1.000000 and it changes no
 
 A factor below one makes the required area larger. Superheated steam at the same pressure is less dense than saturated steam, so the same hole passes less mass, and the valve has to grow. That direction is worth holding onto, because the factor arrives as a number with no explanation attached to it and a typed number is easy to enter the wrong way round.
 
-Do not divide the two areas. The digest prints no ratio between them, so the size of the effect is not a figure this course carries.
+The explorer above prints the ratio of the two areas. It equals one over the typed factor, because the factor divides the area and does nothing else to it.
 
 ## The published set makes the same point twice
 

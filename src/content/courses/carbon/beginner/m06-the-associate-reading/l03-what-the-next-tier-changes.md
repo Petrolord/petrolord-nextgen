@@ -8,7 +8,7 @@ Its record is ISIOKPO, and like Igbogene it is invented: a gas plant with one fi
 
 ## The functions it reads
 
-energyEfficiency exports ten functions: combustionStoichiometry, compositeCurve, condensateReturnValue, energyIntensity, excessAirFromFlueOxygen, excessAirSaving, pinchTargets, priceSaving, stackLossEfficiency and steamTrapLoss. The digest's headings for the next tier name what they are used for: the Isiokpo fuel gas and combustion from the analysis, excess air from the stack oxygen, stack loss efficiency on LHV and on HHV, what tuning the excess air is worth, the Isiokpo steam trap, condensate return and its floor, and the pinch by the problem table.
+energyEfficiency exports ten functions: combustionStoichiometry, compositeCurve, condensateReturnValue, energyIntensity, excessAirFromFlueOxygen, excessAirSaving, pinchTargets, priceSaving, stackLossEfficiency and steamTrapLoss. The course's headings for the next tier name what they are used for: the Isiokpo fuel gas and combustion from the analysis, excess air from the stack oxygen, stack loss efficiency on LHV and on HHV, what tuning the excess air is worth, the Isiokpo steam trap, condensate return and its floor, and the pinch by the problem table.
 
 ## What carries over
 
@@ -16,7 +16,7 @@ Three things from this tier carry straight across.
 
 The atom counts. The fuel reference table you read for carbon per kilomole sits in energyEfficiency, and its note says what its atom counts do: "Atom counts are definitional and drive the stoichiometry. Heating values are typical: the fuel analysis governs, and a measured value should replace these."
 
-The rule that a missing value stays missing. The digest's list of rules in force includes several for the next tier: "A target oxygen is required and checked against the declared floor"; "A trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year"; "Only an interior zero of the cascade is a pinch". Each one is a box the engine will not fill for you.
+The rule that a missing value stays missing. The course's list of rules in force includes several for the next tier: "A target oxygen is required and checked against the declared floor"; "A trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year"; "Only an interior zero of the cascade is a pinch". Each one is a box the engine will not fill for you.
 
 The basis on every figure. energyEfficiency exports HEATING_VALUE_BASIS with two values, LHV and HHV. A GWP set in this tier is stated on every result. In the next tier the heating value basis travels with the figures, and the rules in force include one for it: "A saving, its price and its factor declared on different heating value bases are refused".
 
@@ -30,6 +30,6 @@ In practice, a fired heater's fuel is where efficiency and carbon meet: fuel sav
 
 ## Exercise
 
-Read the digest's rule for the trap and the rule for the target oxygen. Say what the relationship between those rules and the flare's destruction efficiency in this tier shows about how both modules treat an input nobody filled.
+Read the course's rule for the trap and the rule for the target oxygen. Say what the relationship between those rules and the flare's destruction efficiency in this tier shows about how both modules treat an input nobody filled.
 
 Self check: the flare's destruction efficiency is refused when blank, because it is not read as 100 percent. The trap needs a boiler efficiency, an isentropic exponent and hours a year, and a target oxygen is required and checked against the declared floor. Both modules treat a missing input as missing and name what they need.

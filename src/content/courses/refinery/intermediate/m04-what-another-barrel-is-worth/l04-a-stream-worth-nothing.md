@@ -18,7 +18,7 @@ The value is the plan's value of one more barrel arriving from outside. Ask wher
 
 The surplus column and the value column say the same thing twice. A stream left over at the end of the month is a stream whose next barrel has nowhere to go, and a stream whose next barrel has nowhere to go is worth nothing to that month.
 
-It holds across every change. SECTION 14 prints offgas at 0.0000 in all six rows: the plan as typed, the hydrotreater shut and left blank, the crude unit at 1900000 barrels, the Forcados cargo cancelled, and the two floors. Nothing in those changes gives offgas a home, so nothing moves its value.
+It holds across every change. The lab prints offgas at 0.0000 in all six rows: the plan as typed, the hydrotreater shut and left blank, the crude unit at 1900000 barrels, the Forcados cargo cancelled, and the two floors. Nothing in those changes gives offgas a home, so nothing moves its value.
 
 ## What zero does not mean
 

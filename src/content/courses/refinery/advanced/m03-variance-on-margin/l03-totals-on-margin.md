@@ -24,7 +24,7 @@ The month's variance on margin is -5452450.00. That is what the gaps, taken toge
 - price variance on margin: -1290760.00, the price per barrel differing from the plan on the barrels that moved;
 - unexplained on margin: -212000.00, the money that moved with no barrels.
 
-SECTION 21 prints the three parts and their total. The lines of SECTION 20 show which line each part came from: the unexplained -212000.00 is the Forcados bill, the money with no barrels.
+The lab prints the three parts and their total. The lines in the lab show which line each part came from: the unexplained -212000.00 is the Forcados bill, the money with no barrels.
 
 ## The number with no meaning
 

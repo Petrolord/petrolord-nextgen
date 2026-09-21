@@ -4,7 +4,7 @@ The characteristic module recommended a trim. This lesson shows what that recomm
 
 ## The same duty, two curves
 
-The digest takes the normal duty on one valve and computes the travel it corresponds to on each characteristic. Equal percentage trim at a rangeability of 50 puts that duty at 74.737770 percent open. Linear trim puts it at 37.222222 percent open. The difference, the first less the second, is 37.515548, and the ratio, the first over the second, is 2.007880.
+The course takes the normal duty on one valve and computes the travel it corresponds to on each characteristic. Equal percentage trim at a rangeability of 50 puts that duty at 74.737770 percent open. Linear trim puts it at 37.222222 percent open. The difference, the first less the second, is 37.515548, and the ratio, the first over the second, is 2.007880.
 
 ## What those numbers are saying
 
@@ -26,4 +26,4 @@ It also explains a common site observation. A valve that operates around three q
 
 ## Exercise
 
-Write down the normal duty travel on equal percentage trim and on linear trim, with the difference and the ratio the digest prints between them. Then say which two attributes must be quoted alongside any travel percentage, and why a plug sitting around three quarters open is unremarkable on one of the two curves.
+Write down the normal duty travel on equal percentage trim and on linear trim, with the difference and the ratio the lesson prints between them. Then say which two attributes must be quoted alongside any travel percentage, and why a plug sitting around three quarters open is unremarkable on one of the two curves.

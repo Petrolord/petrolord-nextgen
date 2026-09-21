@@ -280,7 +280,7 @@ const ProducedWaterLearningPage = () => {
               <CardDescription>
                 One gravity front end, one de-oiling train, one four stage train and the published golden cases, on the
                 vendored Produced Water Treatment engine. Every number on this page and inside every panel is a return
-                value from that engine, pinned by a test file against the teaching digest. Water is in bwpd and m3/s,
+                value from that engine, pinned by a test file against the figures the lessons quote. Water is in bwpd and m3/s,
                 temperatures in degrees C, salinity in ppm of total dissolved solids, oil gravity in degrees API,
                 droplets and bubbles in micron, oil in water in ppm, and removals in percent. Nothing in this course is
                 a distribution a percentile would describe, so no percentile label belongs anywhere in it.

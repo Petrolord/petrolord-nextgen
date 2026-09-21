@@ -45,7 +45,7 @@ The first taxable year is set by two things only: the size of the pool the const
 
 It is not the first profitable year. ODIOMA's taxable income before relief is positive from year 2. The plant is profitable before it pays tax, because the pool shelters the profit.
 
-It is not a figure to rebuild from the four-decimal pool, where each figure is rounded on its own. SECTION 23 prints year 5 to nine decimals: the loss carried in 2.068157348 million, taxable income 38.587936000 million, and tax 10.955933596 million, by the rule tax = (taxable income - the loss carried in) x the tax rate of 30 percent once that is above zero.
+It is not a figure to rebuild from the four-decimal pool, where each figure is rounded on its own. The course prints year 5 to nine decimals: the loss carried in 2.068157348 million, taxable income 38.587936000 million, and tax 10.955933596 million, by the rule tax = (taxable income - the loss carried in) x the tax rate of 30 percent once that is above zero.
 
 ## Exercise
 

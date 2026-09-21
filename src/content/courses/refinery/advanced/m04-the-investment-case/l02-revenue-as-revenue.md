@@ -13,7 +13,7 @@ Revenue goes in as revenue: barrels at the slate's value. The production stream 
 | production (oil, bbl) | 0.00 | 3753600.00 |
 | price (the slate's gross value) | | 92.2100 |
 
-The crude bill goes into the cost streams. The opexFixed in the first operating year is 291.7664 million, and it is the fixed operating cost plus the crude cost. The opexVariable is 15.7651 million: the digest labels it the variable operating cost, in millions, and prints it as the streams' variable opex 15765120.00 / 1000000. The cash flow's opex is their sum, and the digest prints it: 291.7664 + 15.7651 = 307.5315.
+The crude bill goes into the cost streams. The opexFixed in the first operating year is 291.7664 million, and it is the fixed operating cost plus the crude cost. The opexVariable is 15.7651 million: the course labels it the variable operating cost, in millions, and prints it as the streams' variable opex 15765120.00 / 1000000. The cash flow's opex is their sum, and the course prints it: 291.7664 + 15.7651 = 307.5315.
 
 ## What comes out
 
@@ -28,9 +28,9 @@ The same gross revenue and opex repeat in every operating year to year 21, calen
 
 ## Revenue goes in as revenue
 
-The digest states the rule in one line: revenue goes in as revenue, barrels at the slate's value. So the gross revenue line reads 346.1195 million of products a year, and the opex line reads 307.5315 million: opexFixed, the fixed operating cost plus the crude cost, and opexVariable, the variable operating cost. The crude bill is in the cash flow as a cost. The gross margin per barrel on the screen, 14.0100, is the gross value less the crude cost less the variable operating cost, which the Associate tier defined.
+The course states the rule in one line: revenue goes in as revenue, barrels at the slate's value. So the gross revenue line reads 346.1195 million of products a year, and the opex line reads 307.5315 million: opexFixed, the fixed operating cost plus the crude cost, and opexVariable, the variable operating cost. The crude bill is in the cash flow as a cost. The gross margin per barrel on the screen, 14.0100, is the gross value less the crude cost less the variable operating cost, which the Associate tier defined.
 
-Each input sits where the digest prints it. The crude cost is inside opexFixed. The slate's gross value is the price the engine is handed, 92.2100 in the first operating year. The two stay apart in the cash flow, as they stay apart in the variance lines of module 3, where a delivery is revenue and a receipt is cost.
+Each input sits where the course prints it. The crude cost is inside opexFixed. The slate's gross value is the price the engine is handed, 92.2100 in the first operating year. The two stay apart in the cash flow, as they stay apart in the variance lines of module 3, where a delivery is revenue and a receipt is cost.
 
 ## One consequence to read
 

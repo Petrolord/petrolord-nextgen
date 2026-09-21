@@ -15,7 +15,7 @@ you are looking at is a particular beta at a particular Reynolds number.
 
 This module implements the Reader-Harris/Gallagher equation for a flange-tapped
 orifice and evaluates it. Across the cells of the sweep in the next lesson that
-sit inside the published beta range, the digest prints the span:
+sit inside the published beta range, this lesson prints the span:
 
    largest, at beta 0.750000 and Reynolds 5e+3                0.668050
    smallest, at beta 0.750000 and Reynolds 5e+7               0.595385

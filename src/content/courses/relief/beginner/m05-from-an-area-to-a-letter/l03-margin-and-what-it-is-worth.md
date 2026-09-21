@@ -20,11 +20,11 @@ A margin is an artefact of the ladder. It is no safety factor, no design allowan
 
 That is why nothing graded here is a margin or an orifice letter. Both are downstream of a published table this package cannot derive, so grading them would be grading a lookup.
 
-Do not divide one margin by another, and do not read the spread of the margin column as saying anything about the three cases. The digest prints the margin returned on each row and no relation between the rows, and a quotient of two margins is a number about the ladder wearing the clothes of a number about the plant.
+Do not divide one margin by another, and do not read the spread of the margin column as saying anything about the three cases. The course prints the margin returned on each row and no relation between the rows, and a quotient of two margins is a number about the ladder wearing the clothes of a number about the plant.
 
 ## What it takes to move a letter
 
-The obvious follow on question is how much the load must change before the letter does, and the digest answers it with a measurement rather than an interpolation off the ladder.
+The obvious follow on question is how much the load must change before the letter does, and the course answers it with a measurement rather than an interpolation off the ladder.
 
 At its stated 68000.0000 lb/hr the ORUBIRI selection is L. The search grows its bracket rather than assuming one: the load is multiplied by 1.050000 until the letter changes, which takes 6 steps and ends at 91126.5036 lb/hr at M. Bisected inside that bracket, the letter changes at 87240.6737 lb/hr, where the required area is 2.853000 in2, the L orifice area itself. The ratio of that load to the stated one is 1.282951083345.
 

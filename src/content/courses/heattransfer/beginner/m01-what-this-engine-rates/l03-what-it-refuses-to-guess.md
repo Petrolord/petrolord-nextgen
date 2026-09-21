@@ -12,9 +12,9 @@ In each case the message names the input that is wrong, quotes the value it was 
 
 ## Three doors hand back more than a message
 
-On the probes the teaching digest runs, three of the twelve doors handed back more than a message: they returned the numbers that produced the state they refused. A refusal that carries its evidence lets an interface show why a state is impossible rather than only that it is.
+On the probes this course runs, three of the twelve doors handed back more than a message: they returned the numbers that produced the state they refused. A refusal that carries its evidence lets an interface show why a state is impossible rather than only that it is.
 
-The clearest pair is on the balance. A duty that crosses the two streams comes back with the two temperatures that duty implies, labelled `thOutIfReached` and `tcOutIfReached`, sitting beside the message. That is the whole argument in two numbers. The log mean carries evidence of its own in the same spirit: asked for a driving force across streams that have crossed, it hands back the two end differences it found, which are 0.000000 and 0.000000 degF on the case the digest shows.
+The clearest pair is on the balance. A duty that crosses the two streams comes back with the two temperatures that duty implies, labelled `thOutIfReached` and `tcOutIfReached`, sitting beside the message. That is the whole argument in two numbers. The log mean carries evidence of its own in the same spirit: asked for a driving force across streams that have crossed, it hands back the two end differences it found, which are 0.000000 and 0.000000 degF on the case this course probes.
 
 Three is what those probes measured rather than a property of the engine, so read it as a floor rather than a ceiling.
 

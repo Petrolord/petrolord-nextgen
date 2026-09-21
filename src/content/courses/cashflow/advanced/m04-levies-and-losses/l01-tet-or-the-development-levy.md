@@ -6,7 +6,7 @@ Two levies, one base, never both. The framework string on the row says which one
 
 ## The base they share
 
-The published PIA worked example earns a CIT assessable profit of 1039994854.24 USD in 2025. Under the 2021 Act the tertiary education tax is charged on that profit at 2.5 percent, and the row reads tet_tax 25999871.36 with dev_levy_tax 0.00. Under the 2025 framework the same profit carries a development levy at 4 percent instead: dev_levy_tax 41599794.17 with tet_tax 0.00. The digest puts the ratio in one line: the levy is 1.6 x TET.
+The published PIA worked example earns a CIT assessable profit of 1039994854.24 USD in 2025. Under the 2021 Act the tertiary education tax is charged on that profit at 2.5 percent, and the row reads tet_tax 25999871.36 with dev_levy_tax 0.00. Under the 2025 framework the same profit carries a development levy at 4 percent instead: dev_levy_tax 41599794.17 with tet_tax 0.00. The course puts the ratio in one line: the levy is 1.6 x TET.
 
 Nothing else on the row moves: royalty 217405145.76, HCT 284810956.27 and CIT 293998456.27 in both runs. Only the last line of the cascade changes, and total tax goes from 604809283.90 to 620409206.71.
 
@@ -27,7 +27,7 @@ The levy also ignores the loss pool: on pia_loss_relief the 2026 TET is 5755415.
 
 ## The mistake
 
-The careful mistake is charging both. A reader who knows the Act and has heard of the framework adds TET and the levy to the same year and reports a total tax no run of the engine produces. One of tet_tax and dev_levy_tax is 0.00 on every row in the digest, and the fiscal_framework column says which.
+The careful mistake is charging both. A reader who knows the Act and has heard of the framework adds TET and the levy to the same year and reports a total tax no run of the engine produces. One of tet_tax and dev_levy_tax is 0.00 on every row the engine returns, and the fiscal_framework column says which.
 
 ## What the engine refuses
 

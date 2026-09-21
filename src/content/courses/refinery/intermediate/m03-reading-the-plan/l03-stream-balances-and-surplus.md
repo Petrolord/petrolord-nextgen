@@ -6,11 +6,11 @@ Module 1 said the plan sees a refinery as a set of streams. This lesson reads th
 
 ## The balance
 
-The digest gives it in one line:
+The engine gives it in one line:
 
 made - consumed by units - placed in products = surplus, never below zero.
 
-**Made** is every barrel of the stream that crudes and units yield. **Consumed** is every barrel a unit takes as feed. **Placed** is every barrel a product's recipe takes. **Surplus** is what is left, and the digest names it plainly: surplus is the stream nobody found a home for.
+**Made** is every barrel of the stream that crudes and units yield. **Consumed** is every barrel a unit takes as feed. **Placed** is every barrel a product's recipe takes. **Surplus** is what is left, and the course names it plainly: surplus is the stream nobody found a home for.
 
 The balance can never go below zero. The plan cannot consume or sell a barrel that was not made. It can leave barrels unused, and those are the surplus.
 
@@ -44,7 +44,7 @@ A surplus on a stream that does have a product is worth a second look. It means 
 
 ## The balance under the changes
 
-The same balance is struck for every change in SECTION 13. When the hydrotreater is shut, it consumes no gasoil. Gasoil must then find its home in Gasoil export, whose ceiling is 250000.00 bbl, or be left as surplus. The crude run in that change, 735294.12 bbl, is the plan's answer to how much gasoil the month can place.
+The same balance is struck for every change the lab runs. When the hydrotreater is shut, it consumes no gasoil. Gasoil must then find its home in Gasoil export, whose ceiling is 250000.00 bbl, or be left as surplus. The crude run in that change, 735294.12 bbl, is the plan's answer to how much gasoil the month can place.
 
 ## Exercise
 

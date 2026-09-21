@@ -198,7 +198,7 @@ export const AsOfMode = ({ table, asOf, onAsOf }) => {
     <>
       {onAsOf && (
         <FieldGrid>
-          <SelectField label="As of (the digest's dates only)" value={row.asOf} onChange={onAsOf} options={OFON_AS_OF.map((d) => [d, d])} />
+          <SelectField label="As of (the lessons' dates only)" value={row.asOf} onChange={onAsOf} options={OFON_AS_OF.map((d) => [d, d])} />
         </FieldGrid>
       )}
       <div className="mt-3">

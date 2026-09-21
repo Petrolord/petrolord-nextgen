@@ -10,7 +10,7 @@ H-08 is the hydrostatic test, a Hold point, Pending at the as-of date 2026-10-15
 
 "A hold point needs the date it was verified and who verified it. Without those it has not been held."
 
-Asked to pass it with a date and a verifier, the engine answers ALLOWED. Those are the two rows the digest prints for H-08, and the difference between them is the record. What the gate reads is whether the plan will show when the hold was released and by whom. A pass with neither is an assertion nobody can check later.
+Asked to pass it with a date and a verifier, the engine answers ALLOWED. Those are the two rows the engine prints for H-08, and the difference between them is the record. What the gate reads is whether the plan will show when the hold was released and by whom. A pass with neither is an assertion nobody can check later.
 
 ## Passing a witness point
 
@@ -40,4 +40,4 @@ The plan records who took responsibility for a check and when, and the name on t
 
 ## Exercise
 
-In the plan explorer, ask to pass H-08 with nobody named, then with a date and a verifier, and do the same for W-09. Read the four answers against the digest's rows in SECTION 10. Say what the pair of refusals shows: what the hold point and the witness point both ask for, which words differ between the two sentences, and whether H-08's status moved after the refused request.
+In the plan explorer, ask to pass H-08 with nobody named, then with a date and a verifier, and do the same for W-09. Read the four answers against the engine's rows quoted above. Say what the pair of refusals shows: what the hold point and the witness point both ask for, which words differ between the two sentences, and whether H-08's status moved after the refused request.

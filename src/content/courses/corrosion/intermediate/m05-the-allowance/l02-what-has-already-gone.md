@@ -8,7 +8,7 @@ mm, so the corrosion allowance of 3.175000 mm and the remaining allowance of
 3.175000 mm are the same figure, and a reader can go a long way without
 noticing that they are two separate quantities.
 
-Put a consumed depth into the box and they separate. The digest carries the
+Put a consumed depth into the box and they separate. The table below carries the
 shipped case with 1.270000 mm typed into that box, which is 0.05 in against the
 studio's own 0.125 in allowance, and nothing else changed:
 

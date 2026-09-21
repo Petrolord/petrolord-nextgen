@@ -47,7 +47,7 @@ The last two rows answer the other cases. A reported audit with a minor nonconfo
 
 ## Reading the programme dashboard
 
-The programme summarise in SECTION 17 carries these same kinds of finding: open findings 1, open major 1 and stop-work open 1. Those are the counts a programme manager reads to see which reported audits cannot yet close. A reported audit that cannot close is waiting on a finding, and the dashboard names which kind.
+The programme summarise from the engine carries these same kinds of finding: open findings 1, open major 1 and stop-work open 1. Those are the counts a programme manager reads to see which reported audits cannot yet close. A reported audit that cannot close is waiting on a finding, and the dashboard names which kind.
 
 ## Exercise
 

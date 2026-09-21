@@ -1,6 +1,6 @@
 # Applicability and its justification
 
-The Expert tier reads one management system from end to end: the ORASHI register for ISO 14001:2015. The digest records it as Certified, with a certification cycle of 3 years and a certificate that expires 2027-01-08. Every status, count and verdict in this tier is read at the digest's as-of date, 2026-10-15, and at no other date.
+The Expert tier reads one management system from end to end: the ORASHI register for ISO 14001:2015. The lab shows it as Certified, with a certification cycle of 3 years and a certificate that expires 2027-01-08. Every status, count and verdict in this tier is read at the course's as-of date, 2026-10-15, and at no other date.
 
 Before a clause can be conformant or nonconformant, the register has to say whether it applies at all.
 
@@ -26,7 +26,7 @@ With the justification written, the same request is ALLOWED. An exclusion is a d
 
 ## The refusal names the register's standard
 
-The gate takes the register's standard record as its fourth argument, and the sentence it returns names that standard. The digest prints the same Not applicable refusal four ways:
+The gate takes the register's standard record as its fourth argument, and the sentence it returns names that standard. The engine returns the same Not applicable refusal four ways:
 
 - for ISO 14001:2015 it names ISO 14001:2015, in the sentence quoted above;
 - for ISO 9001:2015 it reads: "ISO 9001:2015 §4.3 requires the justification for a requirement determined not applicable to be kept. Say why this one does not apply.";

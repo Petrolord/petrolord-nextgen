@@ -14,7 +14,7 @@ Each app is backed by one engine module, and a sixth module, the calendar, sits 
 | Audit & Findings Manager | auditManagement | audits, checklists, findings and audit programmes |
 | ISO Compliance | isoCompliance | a clause register for a standard, its audits and its findings |
 
-The digest this course is built on measures each module directly. It counts what the module exports and how many of those exports read a date against the as-of date:
+This course measures each module of the engine directly. It counts what the module exports and how many of those exports read a date against the as-of date:
 
 | module | exported functions | exported lists and constants | exports that read a date against today |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ Each module owns its words as a frozen list, and a status in these apps is alway
 
 ## One date for everything
 
-The digest is built at one as-of date, 2026-10-15. Every day count, every status and every overdue flag in it is true at 2026-10-15 and at no other date. Move the date and the same record reads differently, with nobody having edited it. That is what "derived" means here, and it is the first thing to hold on to.
+This course is built at one as-of date, 2026-10-15. Every day count, every status and every overdue flag in it is true at 2026-10-15 and at no other date. Move the date and the same record reads differently, with nobody having edited it. That is what "derived" means here, and it is the first thing to hold on to.
 
 ## The three cases
 

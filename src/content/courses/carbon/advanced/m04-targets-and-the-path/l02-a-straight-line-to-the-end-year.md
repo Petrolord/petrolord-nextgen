@@ -1,6 +1,6 @@
 # A straight line to the end year
 
-`carbonAbatement.decarbonisationPath` sets a year-by-year target against the emissions the measures leave. SECTION 22 prints it for the invented AGBOR records: the target falls in a straight line from the baseline in 2026 to 30 percent below it in 2033, as the Carbon Studio draws it, and each measure counts in full from its start year.
+`carbonAbatement.decarbonisationPath` sets a year-by-year target against the emissions the measures leave. The lab prints it for the invented AGBOR records: the target falls in a straight line from the baseline in 2026 to 30 percent below it in 2033, as the Carbon Studio draws it, and each measure counts in full from its start year.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -36,7 +36,7 @@ The emissions line does not fall in a straight line. It falls in steps, one each
 
 ## Which measures are live when
 
-SECTION 22 prints the start years as inputs, invented for this course, and the measures-live column follows them. Tune the fired heaters and Repair failed steam traps are live from 2027. Solar for purchased power joins in 2028, the Heat integration project in 2029, Flare gas recovery in 2030, and Vapour recovery on the storage tanks in 2031. The path follows the start years. It does not follow the cheapest-first rank of the curve: Solar for purchased power, fifth on the curve, is live a year before the Heat integration project, third.
+The lab prints the start years as inputs, invented for this course, and the measures-live column follows them. Tune the fired heaters and Repair failed steam traps are live from 2027. Solar for purchased power joins in 2028, the Heat integration project in 2029, Flare gas recovery in 2030, and Vapour recovery on the storage tanks in 2031. The path follows the start years. It does not follow the cheapest-first rank of the curve: Solar for purchased power, fifth on the curve, is live a year before the Heat integration project, third.
 
 ## A step line against a straight line
 
@@ -44,7 +44,7 @@ The target keeps falling after 2031, and the emissions do not, because no new me
 
 ## Where the tonnes come from
 
-The abated figure in 2031, 15460.000 t, is the same figure as the curve's totalAbatementTonnes. The path counts every measure in full from its start year, including the two heater measures that SECTION 20 names as acting on one source, whose abatements the interaction note calls not additive. The path is recomputed by the carbonAbatement oracle as a year ledger, and its goldens are asserted by the engine test suites (SECTION 26).
+The abated figure in 2031, 15460.000 t, is the same figure as the curve's totalAbatementTonnes. The path counts every measure in full from its start year, including the two heater measures that module two names as acting on one source, whose abatements the interaction note calls not additive. The path is recomputed by the carbonAbatement oracle as a year ledger, and its goldens are asserted by the engine test suites (module six).
 
 ## Reading a year
 

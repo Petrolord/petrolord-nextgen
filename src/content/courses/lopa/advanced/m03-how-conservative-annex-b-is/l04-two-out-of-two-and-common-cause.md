@@ -19,7 +19,7 @@ The two rows return the same PFDavg to the last digit, and the common cause cont
 
 A 2oo2 trips only when BOTH channels work, so it fails on the FIRST dangerous failure of either channel. Its PFDavg is twice one channel's. Now consider a failure that takes out both channels at once. It fails the 2oo2 exactly as thoroughly as one channel failing would have done, so it should be counted once. Annex B, having no common cause term, has already counted that failure twice, once in each channel. Common cause makes a real 2oo2 slightly better than two independent channels, and the published form does not take the credit.
 
-The counting fixes the direction of the error and this course stops there. A closed form for the size of the double counting is not something the engine returns or the digest prints, so no such formula is taught here and none is graded. What the counting does settle is that every common cause failure is charged twice where it should be charged once, so the published form sits above the exact average wherever common cause is present. The one number this course attaches to the effect is the measurement below.
+The counting fixes the direction of the error and this course stops there. A closed form for the size of the double counting is not something the engine returns or the course prints, so no such formula is taught here and none is graded. What the counting does settle is that every common cause failure is charged twice where it should be charged once, so the published form sits above the exact average wherever common cause is present. The one number this course attaches to the effect is the measurement below.
 
 ## What the measurement says
 

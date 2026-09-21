@@ -23,7 +23,7 @@ Those relative differences are at the size of floating-point rounding. On this r
 
 The published blowdown rows carry relative differences of 1.062e-3, 1.060e-3 and 1.062e-3 on three rows and 2.654e-4 on two, against an oracle that solves the same march in closed form in SI.
 
-Both sets of figures above are relative differences the digest prints, and the digest computes no comparison between them. Do not divide one by the other. The two numbers are answering different questions: one is how closely a quadrature reproduces a closed form, the other is how closely an explicit march reproduces the exact integral of its own balance. A quotient of the two would be a figure about nothing.
+Both sets of figures above are relative differences this course prints, and the course computes no comparison between them. Do not divide one by the other. The two numbers are answering different questions: one is how closely a quadrature reproduces a closed form, the other is how closely an explicit march reproduces the exact integral of its own balance. A quotient of the two would be a figure about nothing.
 
 What you may say about each is what it means. A departure of that size on the march is step error, and the refinement study in the third module measured exactly that. A departure at the size of rounding on the point source means the two implementations differ only in their arithmetic order.
 
@@ -37,7 +37,7 @@ The blowdown block is the second kind. A march and a closed-form integral have a
 
 When a published case agrees exactly, ask not how close it came but how far apart the two sides were to begin with. Then ask the question this module has been circling all the way through: if the number under test moved, is there anything here that would go red.
 
-For most of this engine the answer is yes and the digest names the route. For the Kv fit and the sphere-drag correlation the answer is no, and the digest names those too.
+For most of this engine the answer is yes and the course names the route. For the Kv fit and the sphere-drag correlation the answer is no, and the course names those too.
 
 ## Exercise
 

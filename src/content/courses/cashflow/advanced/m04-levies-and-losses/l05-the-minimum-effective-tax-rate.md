@@ -31,7 +31,7 @@ The second is to look for the column when the floor does not bind. There is no m
 
 ## What the engine refuses
 
-It refuses to apply the floor unless pia_apply_minimum_etr is true; the default is false, and every other published PIA case in the digest runs with it off. It refuses to report a zero top-up. And it refuses to cap the top-up at the year's cash, so a floor set high enough turns a profitable year into a loss.
+It refuses to apply the floor unless pia_apply_minimum_etr is true; the default is false, and every other published PIA case in this course runs with it off. It refuses to report a zero top-up. And it refuses to cap the top-up at the year's cash, so a floor set high enough turns a profitable year into a loss.
 
 ## Exercise
 

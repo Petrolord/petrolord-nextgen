@@ -17,7 +17,7 @@ With the restoration time after a proof test taken equal to the detected restora
 
 ## This is a fact about the published source
 
-The paper prints one restoration time and uses it in a form that takes two. That is a property of the SOURCE, recorded when the golden was built and shown here by computing the row both ways. The engine itself takes both times as separate inputs and refuses a call that has detected failures and no MTTR. The engine's validation record holds this inference; the digest re-measures it by running the row.
+The paper prints one restoration time and uses it in a form that takes two. That is a property of the SOURCE, recorded when the golden was built and shown here by computing the row both ways. The engine itself takes both times as separate inputs and refuses a call that has detected failures and no MTTR. The engine's validation record holds this inference; this lesson re-measures it by running the row.
 
 ## What it means for a graded answer
 

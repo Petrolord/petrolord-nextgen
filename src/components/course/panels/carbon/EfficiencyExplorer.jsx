@@ -255,7 +255,7 @@ export const TuningMode = ({
           {sc && (
             <div className="mt-2 rounded-md border border-slate-700 p-2">
               <p className="text-xs text-slate-400 mb-0">
-                The percentage-point shortcut, the digest&apos;s contrast figure and never the answer: a saving fraction of {f10(sc.fraction)},
+                The percentage-point shortcut, the course&apos;s contrast figure and never the answer: a saving fraction of {f10(sc.fraction)},
                 which is {F.gj(sc.gj)} GJ a year, {F.gj(sc.belowEngine)} GJ below the engine&apos;s saving (computed here from the
                 engine&apos;s two efficiencies; the engine does not return it).
               </p>
@@ -479,7 +479,7 @@ const EfficiencyExplorer = ({ initialMode = 'losses' }) => {
       </div>
       <Note>
         Every figure, basis and refusal on this page is a return value of the vendored energyEfficiency module through the
-        teaching lab, printed at the digest&apos;s precision. Every flow, temperature, price and cost is invented; the fuel
+        teaching lab, printed at the lessons&apos; precision. Every flow, temperature, price and cost is invented; the fuel
         emission factor is SYNTHETIC. Money is in US dollars.
       </Note>
     </PanelShell>

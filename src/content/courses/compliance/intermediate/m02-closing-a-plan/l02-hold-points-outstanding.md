@@ -16,7 +16,7 @@ The refusal names its points. H-08 is the hydrostatic test and H-11 is the pre-c
 
 Neither hold point is overdue at the as-of date, and both block the plan. The gate reads resolved, and it does not read the planned date. A plan whose hold points are all on schedule is still a plan with work that has not been released.
 
-The overdue reading lives elsewhere. SECTION 12 prints the plan's summarise at the as-of date: checkpoints 12, outstanding 6, overdue 3, hold points outstanding 3, failed 1. The overdue three are H-05, S-10 and R-12. Of those, H-05 is the only hold point. S-10 and R-12 are overdue, and the closure gate does not stop on either of them.
+The overdue reading lives elsewhere. The engine prints the plan's summarise at the as-of date: checkpoints 12, outstanding 6, overdue 3, hold points outstanding 3, failed 1. The overdue three are H-05, S-10 and R-12. Of those, H-05 is the only hold point. S-10 and R-12 are overdue, and the closure gate does not stop on either of them.
 
 | point | type | status at 2026-10-15 | overdue | stops closure |
 | --- | --- | --- | --- | --- |
@@ -39,4 +39,4 @@ The stops work column is true for hold points alone, and the closure gate asks a
 
 ## Exercise
 
-Read two figures from SECTION 12: overdue 3 and hold points outstanding 3. Name the points behind each. Then read the hold point refusal's count, 2, and its two names. Say what the three readings show: which points appear in both lists, which appear in only one, and whether a point being overdue decides whether it stops the plan from closing.
+Read two figures from that summarise: overdue 3 and hold points outstanding 3. Name the points behind each. Then read the hold point refusal's count, 2, and its two names. Say what the three readings show: which points appear in both lists, which appear in only one, and whether a point being overdue decides whether it stops the plan from closing.

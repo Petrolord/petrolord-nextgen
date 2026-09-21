@@ -22,7 +22,7 @@ The same sentence opens the Major nonconformity walk in lesson 2. Whatever else 
 
 ## What each type asks for
 
-The digest prints canCloseFinding for the four types:
+The engine returns canCloseFinding for the four types:
 
 | finding | recorded | verdict |
 | --- | --- | --- |

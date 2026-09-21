@@ -16,7 +16,7 @@ Both return their last iterate with no flag beside it.
 
 There is no converged field, no iteration count and no residual. A caller receives the same shape of answer whether the loop settled on the third pass or ran to its limit still moving.
 
-Be precise about the size of this. Both loops do converge everywhere this digest looked, across every published case, every bore, every roughness and every duty in the tables. No wrong number has been produced by it. What is absent is the evidence, which is exactly what makes the absence easy to miss.
+Be precise about the size of this. Both loops do converge everywhere this course looked, across every published case, every bore, every roughness and every duty in the tables. No wrong number has been produced by it. What is absent is the evidence, which is exactly what makes the absence easy to miss.
 
 ## Why a second run does not help
 
@@ -38,4 +38,4 @@ The second mistake is over-correcting. These loops are not suspect and their res
 
 ## Exercise
 
-Name the two iterations in this module and say what each one solves for. Then state exactly what the digest establishes about whether they converge, explain why repeating a call cannot test it, and contrast both with the way the outlet-pressure solve handles a case it cannot answer.
+Name the two iterations in this module and say what each one solves for. Then state exactly what the course establishes about whether they converge, explain why repeating a call cannot test it, and contrast both with the way the outlet-pressure solve handles a case it cannot answer.

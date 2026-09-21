@@ -1,6 +1,6 @@
 # Which finding comes first
 
-A register of findings is read in an order. findingByUrgency sorts the ORASHI findings so the one that most needs attention is read first. This lesson reads the order the digest prints at the as-of date 2026-10-15, what it shows, and the rule that places each row.
+A register of findings is read in an order. findingByUrgency sorts the ORASHI findings so the one that most needs attention is read first. This lesson reads the order the engine prints at the as-of date 2026-10-15, what it shows, and the rule that places each row.
 
 {{panel:compliance-readiness-explorer}}
 

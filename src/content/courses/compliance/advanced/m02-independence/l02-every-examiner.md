@@ -6,11 +6,11 @@ An audit is more than its lead. Other people on the audit record results against
 
 ## The owner decision
 
-Owner decision AS15 Q5 reads, in SECTION 23 of the digest: every examiner is checked for independence, through canExamineClause. The check is made for each clause result as it is recorded. It asks one question: does the person recording this result own this clause?
+Owner decision AS15 Q5 reads, as this course records it: every examiner is checked for independence, through canExamineClause. The check is made for each clause result as it is recorded. It asks one question: does the person recording this result own this clause?
 
 ## The two rows
 
-The digest prints canExamineClause for clause 8.1, which u-kalu owns:
+The lab prints canExamineClause for clause 8.1, which u-kalu owns:
 
 - u-kalu recording 8.1: REFUSED.
 - u-chidi recording 8.1: ALLOWED.
@@ -31,7 +31,7 @@ canExamineClause closes that gap one result at a time. The team may include some
 
 The two checks read different things:
 
-| check | what it reads | the case the digest prints |
+| check | what it reads | the case the engine prints |
 | --- | --- | --- |
 | lead auditor | the lead against every clause in scope | a planned internal audit |
 | canExamineClause | the person recording against one clause | a clause result being recorded |
@@ -40,7 +40,7 @@ The first check's refusal offers a change of scope or of auditor. The second off
 
 ## What the rule reads and what it does not
 
-Both checks read the clause owner recorded in the register. SECTION 19 prints the owners of the four clauses in scope, 8.1 u-kalu, 8.2 u-kalu, 9.1.1 u-tari and 9.2 u-nneka, and every verdict in it follows from those four names. u-kalu is refused for 8.1 because the register names u-kalu as its owner, and u-chidi is allowed because the register names u-chidi against none of them.
+Both checks read the clause owner recorded in the register. The lab prints the owners of the four clauses in scope, 8.1 u-kalu, 8.2 u-kalu, 9.1.1 u-tari and 9.2 u-nneka, and every verdict in it follows from those four names. u-kalu is refused for 8.1 because the register names u-kalu as its owner, and u-chidi is allowed because the register names u-chidi against none of them.
 
 ## Exercise
 

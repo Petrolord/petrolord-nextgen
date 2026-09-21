@@ -30,7 +30,7 @@ On every row of the table the verdict follows the sign of the shortfall. The ver
 
 ## What the table holds fixed
 
-The table moves one input. Every other input is held at its BADAGRY value: the FOB price, the ocean loss, every invented import rate, every invented margin, the invented levies and the invented value added tax. Held inputs are not held amounts. The digest prints the chain at each rate, element by element:
+The table moves one input. Every other input is held at its BADAGRY value: the FOB price, the ocean loss, every invented import rate, every invented margin, the invented levies and the invented value added tax. Held inputs are not held amounts. The table prints the chain at each rate, element by element:
 
 | naira to the dollar | landed naira/L | Government naira/L | pump price naira/L |
 | --- | --- | --- | --- |

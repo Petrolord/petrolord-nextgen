@@ -272,7 +272,7 @@ const RiskChangeLearningPage = () => {
                 Four invented registers on the vendored assurance engines: a crude export terminal&apos;s risks, a gas
                 plant&apos;s changes, a water injection project&apos;s peer reviews and a supply base&apos;s lessons.
                 Every status on this page and inside every panel is a return value from those engines, pinned by a test
-                file against the teaching digest. Statuses, bands and verdicts print in double quotes exactly as the
+                file against the figures the lessons quote. Statuses, bands and verdicts print in double quotes exactly as the
                 engine spells them, and dates print as YYYY-MM-DD. {lab ? `Every one is read on ${lab.a.asOfIso}.` : ''}
               </CardDescription>
             </CardHeader>

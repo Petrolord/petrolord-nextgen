@@ -1,12 +1,12 @@
 # Capital recovery
 
-A tonne of CO2e saved is priced over the life of the measure that saves it. The Expert tier opens with the rule that does the pricing. `carbonAbatement.abatementCost` spreads a one-off capital cost over the measure's life with a capital recovery factor, then sets the yearly figure against the tonnes the measure abates each year (SECTIONS 18 and 23).
+A tonne of CO2e saved is priced over the life of the measure that saves it. The Expert tier opens with the rule that does the pricing. `carbonAbatement.abatementCost` spreads a one-off capital cost over the measure's life with a capital recovery factor, then sets the yearly figure against the tonnes the measure abates each year, here and in module five.
 
 {{panel:carbon-abatement-explorer}}
 
 ## The factor and its two inputs
 
-SECTION 18 prints the factor as r(1 + r)^n / ((1 + r)^n - 1), with r the discount rate and n the life in years. At a rate of 0 it is 1/n, straight line. Two inputs set the factor: the rate and the life. The capital cost is multiplied by the factor to give the annualised capital.
+The engine computes the factor as r(1 + r)^n / ((1 + r)^n - 1), with r the discount rate and n the life in years. At a rate of 0 it is 1/n, straight line. Two inputs set the factor: the rate and the life. The capital cost is multiplied by the factor to give the annualised capital.
 
 ## The Agbor measures at a rate of 0.1
 
@@ -27,15 +27,15 @@ Read the Heat integration project and Flare gas recovery rows together. Both car
 
 Tune the fired heaters carries 18000 USD of capital, 132000 USD of annual savings, an annual cost of 0 and 760 tonnes abated a year, over a life of 5 years. The engine prints a capital recovery factor of 0.26379748, annualised capital of 4748.35 USD, a net annual cost of -127251.65 USD and a cost per tonne of -167.4364 USD.
 
-SECTION 18 states the arithmetic that joins those figures. The net annual cost is the annualised capital plus the annual cost less the annual savings. The cost per tonne is the net annual cost over the tonnes abated a year. Every figure in that chain is printed, so the chain can be read end to end without working anything out on paper.
+The course states the arithmetic that joins those figures. The net annual cost is the annualised capital plus the annual cost less the annual savings. The cost per tonne is the net annual cost over the tonnes abated a year. Every figure in that chain is printed, so the chain can be read end to end without working anything out on paper.
 
 ## Precision travels with the figure
 
-The digest prints capital recovery factors to eight decimals, money to two and US dollars per tonne to four. Quote each at the precision it prints: 0.26379748, 4748.35 USD and -167.4364 USD a tonne are three different kinds of figure, and each carries its own unit.
+The course prints capital recovery factors to eight decimals, money to two and US dollars per tonne to four. Quote each at the precision it prints: 0.26379748, 4748.35 USD and -167.4364 USD a tonne are three different kinds of figure, and each carries its own unit.
 
 ## What the factor carries into the curve
 
-Every cost per tonne in this tier, and every step of the curve in the next module, rests on a factor built from a rate and a life. SECTION 18 also prints the six measures at a rate of 0, and every cost per tonne in that column differs from its value at 0.1. Lesson four reads that column. The next two lessons take the sign of the cost and the blank box.
+Every cost per tonne in this tier, and every step of the curve in the next module, rests on a factor built from a rate and a life. The lab also prints the six measures at a rate of 0, and every cost per tonne in that column differs from its value at 0.1. Lesson four reads that column. The next two lessons take the sign of the cost and the blank box.
 
 ## Exercise
 

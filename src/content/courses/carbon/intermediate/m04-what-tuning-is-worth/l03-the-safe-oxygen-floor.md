@@ -1,12 +1,12 @@
 # The safe oxygen floor
 
-A lower stack oxygen gives a higher efficiency and a bigger saving, and the SECTION 14 sweep prints that for the invented Isiokpo heater. So the question every tuning faces is how low the target may go. The engine does not answer it. It asks for the answer, and this lesson reads how.
+A lower stack oxygen gives a higher efficiency and a bigger saving, and the lab's tuning sweep prints that for the invented Isiokpo heater. So the question every tuning faces is how low the target may go. The engine does not answer it. It asks for the answer, and this lesson reads how.
 
 {{panel:carbon-efficiency-explorer}}
 
 ## A floor that is declared
 
-SECTION 14 prints the Isiokpo tuning with a minimum safe stack oxygen of 2 percent, declared after a combustion test. The test and the figure are both invented for this course. Leave the box empty and the engine refuses, verbatim:
+The lab prints the Isiokpo tuning with a minimum safe stack oxygen of 2 percent, declared after a combustion test. The test and the figure are both invented for this course. Leave the box empty and the engine refuses, verbatim:
 
 REFUSED: A minimum safe stack oxygen is required and is not defaulted. Below some excess air a burner makes carbon monoxide, and where that point sits depends on the burner, the fuel and the draught control.
 
@@ -20,15 +20,15 @@ The target is required too, and its refusal says why:
 
 REFUSED: The target stack oxygen is required, so that it can be checked against the declared safe floor.
 
-And the check is real. SECTION 14 prints the answer for a target of 1.5 percent against the 2 percent floor:
+And the check is real. The lab prints the answer for a target of 1.5 percent against the 2 percent floor:
 
 REFUSED: A target of 1.5 percent oxygen is below the 2 percent declared safe for this burner. Raise the target or re-declare the floor after a combustion test.
 
-The refusal names both figures and offers two ways forward. Neither of them is to accept the target. SECTION 25 lists the rule among those in force: a target oxygen is required and checked against the declared floor.
+The refusal names both figures and offers two ways forward. Neither of them is to accept the target. The course lists the rule among those in force: a target oxygen is required and checked against the declared floor.
 
 ## The sweep, every row at or above the floor
 
-SECTION 14 prints the saving at four targets, every one at or above the declared floor:
+The lab prints the saving at four targets, every one at or above the declared floor:
 
 | target O2 percent | target efficiency percent LHV | fuelSavingPercent | annualEnergySavedGJ |
 | --- | --- | --- | --- |
@@ -43,4 +43,4 @@ The table stops at the floor. The engine prints no saving for a target below 2 p
 
 ## Exercise
 
-Read the sweep table and the refusal for a target of 1.5 percent in SECTION 14. Say which target in the sweep sits on the declared floor and what it saves, what the engine answers when a target is set below that floor, and which two actions the refusal offers the caller.
+Read the sweep table and the refusal for a target of 1.5 percent in the lab. Say which target in the sweep sits on the declared floor and what it saves, what the engine answers when a target is set below that floor, and which two actions the refusal offers the caller.

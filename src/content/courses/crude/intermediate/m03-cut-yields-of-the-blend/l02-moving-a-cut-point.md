@@ -12,7 +12,7 @@ A cut's yield is the curve at its upper bound minus the curve at its lower bound
 
 ## The diesel end point, moved
 
-The digest moves the diesel end point from 650 F to 700 F on the Kwale blend and prints every cut before and after.
+The course moves the diesel end point from 650 F to 700 F on the Kwale blend and prints every cut before and after.
 
 | cut | yield, diesel to 650 F | yield, diesel to 700 F | change |
 | --- | --- | --- | --- |
@@ -35,12 +35,12 @@ LPG / Light ends reads 0.7174 in both columns, Naphtha 20.5591 and Kerosene / DP
 
 ## What the lesson fixes
 
-This lesson fixes the accounting and nothing more. The digest gives no reason for moving a cut point, only what the move does. This course prices the cuts in module 4, and the planning of a refinery's cut points is the subject of the `refinery` course. On the Kwale blend, the barrels come from one neighbour and go to the other, no cut further away changes, and the total changes by 0.0000.
+This lesson fixes the accounting and nothing more. This lesson gives no reason for moving a cut point, only what the move does. This course prices the cuts in module 4, and the planning of a refinery's cut points is the subject of the `refinery` course. On the Kwale blend, the barrels come from one neighbour and go to the other, no cut further away changes, and the total changes by 0.0000.
 
 ## Reading the change column
 
-The Kwale table is the one the digest prints, and it reads this way: two nonzero entries of opposite sign, 5.0376 on Diesel / AGO and -5.0376 on Atmospheric residue, the two cuts that share the moved boundary, and a total change of 0.0000. The panel lets you drag Kwale's cut points and watch the same check hold on every move.
+The Kwale table is the one printed above, and it reads this way: two nonzero entries of opposite sign, 5.0376 on Diesel / AGO and -5.0376 on Atmospheric residue, the two cuts that share the moved boundary, and a total change of 0.0000. The panel lets you drag Kwale's cut points and watch the same check hold on every move.
 
 ## Exercise
 
-Read the change column. Name the two cuts whose yields changed and the two figures, and name the three that did not. Then say which single temperature both changed cuts share as a bound, and quote the digest's sentence that describes what moving a cut point does.
+Read the change column. Name the two cuts whose yields changed and the two figures, and name the three that did not. Then say which single temperature both changed cuts share as a bound, and quote this lesson's sentence that describes what moving a cut point does.

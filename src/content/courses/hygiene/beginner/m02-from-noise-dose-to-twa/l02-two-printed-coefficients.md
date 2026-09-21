@@ -4,7 +4,7 @@
 
 OSHA prints the TWA coefficient as 16.61 and NIOSH prints it as 10.0. The exact values, the decibel exchange rate over log10 2, are 16.609640474437 for 5 dB and 9.965784284662 for 3 dB. The printed OSHA coefficient sits 0.000359525563 dB above its exact one. The printed NIOSH coefficient sits 0.034215715338 dB above its exact one, a gap large enough to show in a published table.
 
-The engine measures the coefficient each preset carries by asking for the TWA of a 1000 percent noise dose and subtracting the criterion level. The OSHA PEL and the OSHA action level both return 16.610000000000, and the NIOSH noise REL returns 10.000000000000, each matching the literal typed in the digest generator.
+The engine measures the coefficient each preset carries by asking for the TWA of a 1000 percent noise dose and subtracting the criterion level. The OSHA PEL and the OSHA action level both return 16.610000000000, and the NIOSH noise REL returns 10.000000000000, each matching the literal coefficient printed in its standard.
 
 ## Judgement J1
 

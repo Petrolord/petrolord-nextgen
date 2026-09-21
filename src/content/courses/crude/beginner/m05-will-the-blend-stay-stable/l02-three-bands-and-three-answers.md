@@ -38,7 +38,7 @@ Asarama Heavy carries 11.9 wt% asphaltenes, and Ubie Condensate 89.1 wt% saturat
 
 The middle band is the one to understand best. Stable null is its own answer. It is not a weak yes and it is not a weak no. It says the index sits where blends go either way, and the screen cannot decide. The engine's message names the tests: "spot test to ASTM D7112 or D7157 before commingling."
 
-The engine returns stable null for this band, and the digest's tables print it as no verdict, beside true for the stable pair and false for the unstable one. Three values come back, and a reader who quotes the screen quotes the one that came back. In the assay explorer, no verdict is drawn as its own state.
+The engine returns stable null for this band, and the table above prints it as no verdict, beside true for the stable pair and false for the unstable one. Three values come back, and a reader who quotes the screen quotes the one that came back. In the assay explorer, no verdict is drawn as its own state.
 
 ## Reading the third pair
 
@@ -46,7 +46,7 @@ Blended at 85 with 15 of Obigbo Light, the blend's CII is 0.6634, in the stable 
 
 ## What the screen is for
 
-The digest says what kind of answer the screen gives: "The bands are screening bands and are not a phase boundary." What each band asks for is in the engine's own messages. The unstable pair's ends "Do not commingle without a lab test." The uncertain pair's asks for a spot test "before commingling". The stable pair's says the asphaltenes "are held by the aromatics and resins present". Two of the three messages name a laboratory test.
+This course says what kind of answer the screen gives: "The bands are screening bands and are not a phase boundary." What each band asks for is in the engine's own messages. The unstable pair's ends "Do not commingle without a lab test." The uncertain pair's asks for a spot test "before commingling". The stable pair's says the asphaltenes "are held by the aromatics and resins present". Two of the three messages name a laboratory test.
 
 ## Exercise
 

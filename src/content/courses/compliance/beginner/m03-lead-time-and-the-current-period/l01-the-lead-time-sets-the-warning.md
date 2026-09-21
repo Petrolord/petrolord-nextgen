@@ -4,7 +4,7 @@ Due soon is a warning, and a warning is only useful if it comes early enough to 
 
 ## One obligation, one field varied
 
-The digest takes REG-2026-003, the IKORO quarterly flare and venting return, and changes nothing but its lead time. The return is due 2026-10-31, which is 16 days after the as-of date of 2026-10-15. Its recorded lead time is 14.
+This lesson takes REG-2026-003, the IKORO quarterly flare and venting return, and changes nothing but its lead time. The return is due 2026-10-31, which is 16 days after the as-of date of 2026-10-15. Its recorded lead time is 14.
 
 | lead_time_days given | status |
 | --- | --- |

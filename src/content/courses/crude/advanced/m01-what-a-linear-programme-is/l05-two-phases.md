@@ -24,7 +24,7 @@ The kernel uses Bland's rule to pick the entering variable, which cannot cycle.
 
 Every result is the product of both phases. An optimal status says phase one found a feasible corner and phase two found the best one. An infeasible status says phase one could not begin. An unbounded status says phase two found a direction with no end.
 
-The kernel works with absolute tolerances on its pivots and on phase one, and module six states them as a limit: the digest calls them right for the barrel-scale problems the two apps pose.
+The kernel works with absolute tolerances on its pivots and on phase one, and module six states them as a limit: the course calls them right for the barrel-scale problems the two apps pose.
 
 {{panel:crude-recipe-explorer}}
 
@@ -32,4 +32,4 @@ In the panel, step the textbook case one pivot at a time and watch the point mov
 
 ## Exercise
 
-Read the textbook result: status optimal, objective 21.0000, iterations 2. Then read the digest's statement that phase one drives artificial variables to zero and, if it cannot, the rows contradict. Say which phase decides the infeasible verdict in the digest's problem with x + y <= 2 and x + y >= 3, and say which phase's work the textbook result's optimal status reports.
+Read the textbook result: status optimal, objective 21.0000, iterations 2. Then read this lesson's statement that phase one drives artificial variables to zero and, if it cannot, the rows contradict. Say which phase decides the infeasible verdict in lesson four's problem with x + y <= 2 and x + y >= 3, and say which phase's work the textbook result's optimal status reports.

@@ -35,7 +35,7 @@ The size of the gap depends on the blend. For sulfur in the export blend it is 0
 
 ## What the volume column is
 
-The digest says what the volume column is for: it is the same property weighted by volume fraction with the engine's own blendOnVolume, "printed only to be read against the right answer; the engine never reports it." Sulfur, TAN, nitrogen, nickel and vanadium are per unit mass, so blendCrudes weights them by mass fraction. The volume column is a different quantity, formed on a basis the digest does not give these properties. The engine's answer is the mass column, and its basis cell says so.
+This course says what the volume column is for: it is the same property weighted by volume fraction with the engine's own blendOnVolume, "printed only to be read against the right answer; the engine never reports it." Sulfur, TAN, nitrogen, nickel and vanadium are per unit mass, so blendCrudes weights them by mass fraction. The volume column is a different quantity, formed on a basis the engine does not give these properties. The engine's answer is the mass column, and its basis cell says so.
 
 ## The one conversion
 

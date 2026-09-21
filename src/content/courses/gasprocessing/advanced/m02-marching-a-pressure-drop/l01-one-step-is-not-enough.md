@@ -34,4 +34,4 @@ Two questions follow a marched answer and neither is optional. The first is how 
 
 ## Exercise
 
-Record the cooling and the arrival temperature at one step, at two steps and at twenty steps, and the reference cooling the converged march reports. Record the ratio the digest prints for each of those three against the reference. Then say, in one sentence, what a single multiplication of a coefficient by a pressure drop assumes about the coefficient.
+Record the cooling and the arrival temperature at one step, at two steps and at twenty steps, and the reference cooling the converged march reports. Record the ratio the lab prints for each of those three against the reference. Then say, in one sentence, what a single multiplication of a coefficient by a pressure drop assumes about the coefficient.

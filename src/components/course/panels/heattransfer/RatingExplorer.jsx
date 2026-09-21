@@ -493,7 +493,7 @@ const RatingExplorer = ({ initialMode = 'surface' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored heat transfer engine through the teaching lab,
-        printed to the precision the teaching digest prints. Duties and UA are in Btu an hour, temperatures in degF, air
+        printed to the precision the lessons use. Duties and UA are in Btu an hour, temperatures in degF, air
         densities in lb per ft3 to nine decimals, fan and motor power in horsepower, and effectiveness, NTU and the
         capacity ratio are plain numbers. Every refusal shown is the engine's own message, with whatever evidence the
         same return carried.

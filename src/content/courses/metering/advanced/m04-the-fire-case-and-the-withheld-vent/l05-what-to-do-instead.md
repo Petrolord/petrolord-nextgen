@@ -39,4 +39,4 @@ Withholding beats guessing whenever the plausible alternatives differ by more th
 
 ## Exercise
 
-Read the environment factor relation and its note in digest SECTION 28 and say what a factor above 1 would represent physically. Then name the provision a facility would have to have in place before a credit of the size shown could be claimed.
+Read the environment factor relation and its note in this lesson and say what a factor above 1 would represent physically. Then name the provision a facility would have to have in place before a credit of the size shown could be claimed.

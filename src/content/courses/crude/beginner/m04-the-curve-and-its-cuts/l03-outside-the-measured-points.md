@@ -41,7 +41,7 @@ At 60 F and at 1000 F the engine returns unknown. At 2 percent and at 95 percent
 
 ## The rule the engine follows
 
-The digest states the rule in two sentences. "Outside the measured range the curve answers only where it says so itself: below a first point at 0 percent nothing has distilled, and above a last point at 100 percent everything has. Anywhere else outside the range the value is unknown."
+This course states the rule in two sentences. "Outside the measured range the curve answers only where it says so itself: below a first point at 0 percent nothing has distilled, and above a last point at 100 percent everything has. Anywhere else outside the range the value is unknown."
 
 Read Obigbo Light against it. Its first point is 0 at 85, so at 60 F the curve says 0.0000 of its own accord. Its last point is 100 at 1380, so at 1500 F it says 100.0000. Read Ebocha against it. Its first point is 4 at 110 and its last is 88 at 920. Neither end is at 0 or 100 percent, so neither end says anything past itself, and at 60 F and at 1000 F the value is unknown.
 
@@ -53,4 +53,4 @@ An unknown marks where the data stops. Any cut that reaches into those regions h
 
 ## Exercise
 
-Read the Obigbo Light reading at 1500 F and the Ebocha reading at 1000 F. Quote both. Say what the two answers show about the difference between a curve whose last point is at 100 percent and a curve whose last point is at 88 percent. Then quote the digest's rule for reading outside the measured range, and use it to say why the engine returns unknown for Ebocha at 60 F and 0.0000 for Obigbo Light at the same temperature.
+Read the Obigbo Light reading at 1500 F and the Ebocha reading at 1000 F. Quote both. Say what the two answers show about the difference between a curve whose last point is at 100 percent and a curve whose last point is at 88 percent. Then quote this lesson's rule for reading outside the measured range, and use it to say why the engine returns unknown for Ebocha at 60 F and 0.0000 for Obigbo Light at the same temperature.

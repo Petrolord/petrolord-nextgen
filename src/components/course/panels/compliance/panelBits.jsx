@@ -137,7 +137,7 @@ export const AsOfSlider = ({ offset, onChange, min = -60, max = 240 }) => {
       min={min}
       max={max}
       onChange={onChange}
-      shown={offset === 0 ? `${shown}, the digest's own date` : shown}
+      shown={offset === 0 ? `${shown}, the date the lessons use` : shown}
     />
   );
 };

@@ -25,21 +25,21 @@ The opening stock is an input, and it is yesterday's closing dip. The expected c
 
 ## Three ways to spoil the day
 
-The digest measures three ways of closing the same day badly, and each teaches one rule.
+This lesson measures three ways of closing the same day badly, and each teaches one rule.
 
 **Leave the opening stock out.** The engine refuses: "No opening stock, so the day cannot be closed. The opening stock is yesterday's closing dip." It does not start from zero, and it prints no unaccounted figure for a day with no opening stock.
 
-**Take the opening stock from today's dip.** Opening = closing dip less receipts plus deliveries plus known losses gives 4945.052 m3 on this day, and the day reads unaccounted 0.000 m3, balanced. Every closing dip the digest tries, from 4380.250 m3 to 4855.500 m3, reads balanced in the same way. Every row balances, so none of them measured anything. That is why the opening stock is an input taken from before the day began.
+**Take the opening stock from today's dip.** Opening = closing dip less receipts plus deliveries plus known losses gives 4945.052 m3 on this day, and the day reads unaccounted 0.000 m3, balanced. Every closing dip the course tries, from 4380.250 m3 to 4855.500 m3, reads balanced in the same way. Every row balances, so none of them measured anything. That is why the opening stock is an input taken from before the day began.
 
 **Close on the gross.** Close the same day on the gross closing stock, 4581.490 m3, against an opening stock held at standard, and the engine reads unaccounted 73.390 m3, direction gain, within tolerance false. Nothing in the tanks changed: gross observed m3 at three observed temperatures was set against m3 at standard. The rule: both ends of the ledger at standard.
 
 ## The band and the still day
 
-The verdict depends on the stated percent. At 0.1 percent the band is 6.183 m3 and the same -8.648 m3 reads outside it; at 0.2 percent it reads within. The percent is fixed before the day is closed. A day with no receipts and no deliveries has no throughput and no band: the digest's still day reads unaccounted 0.500 m3, tolerance 0.000 m3, within tolerance false, direction gain.
+The verdict depends on the stated percent. At 0.1 percent the band is 6.183 m3 and the same -8.648 m3 reads outside it; at 0.2 percent it reads within. The percent is fixed before the day is closed. A day with no receipts and no deliveries has no throughput and no band: the course's still day reads unaccounted 0.500 m3, tolerance 0.000 m3, within tolerance false, direction gain.
 
 ## Nine days
 
-Across nine days the unaccounted figures sum to -27.200 m3, or -0.0494 percent of cumulative throughput, and the run ending on the latest day is 6 days of loss. The engine prompts: "6 days of loss in a row. One day is noise; a run in one direction is worth investigating: a drifting meter, a passing valve, or a temperature effect not being corrected." The percent is taken on the cumulative throughput, printed as 55085.000 m3. The digest trims the history one day at a time: kept to 5 or 6 days, the run is 2 or 3 days of loss and the prompt is none; kept to 7, 8 or 9 days, the run is 4, 5 or 6 days of loss and the prompt is printed.
+Across nine days the unaccounted figures sum to -27.200 m3, or -0.0494 percent of cumulative throughput, and the run ending on the latest day is 6 days of loss. The engine prompts: "6 days of loss in a row. One day is noise; a run in one direction is worth investigating: a drifting meter, a passing valve, or a temperature effect not being corrected." The percent is taken on the cumulative throughput, printed as 55085.000 m3. The course trims the history one day at a time: kept to 5 or 6 days, the run is 2 or 3 days of loss and the prompt is none; kept to 7, 8 or 9 days, the run is 4, 5 or 6 days of loss and the prompt is printed.
 
 ## Exercise
 

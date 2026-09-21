@@ -15,7 +15,7 @@ The carbonAbatement functions are abatementCost, abatementCurve, atomBalanceLine
 
 ## Where the two apps meet
 
-The two apps are separate pages. The Energy & Utilities Efficiency Studio prices a saving in carbon as well as in money, and the digest prints where its cost per tonne comes from: it "is carbonAbatement.abatementCost called from inside energyEfficiency.priceSaving." The function that costs a tonne saved by an efficiency measure is carbonAbatement's own abatementCost, a function of the module the Carbon Footprint & Abatement Studio calls.
+The two apps are separate pages. The Energy & Utilities Efficiency Studio prices a saving in carbon as well as in money, and the course states where its cost per tonne comes from: it "is carbonAbatement.abatementCost called from inside energyEfficiency.priceSaving." The function that costs a tonne saved by an efficiency measure is carbonAbatement's own abatementCost, a function of the module the Carbon Footprint & Abatement Studio calls.
 
 ## Three invented records
 

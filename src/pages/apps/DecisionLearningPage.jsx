@@ -210,8 +210,8 @@ const DecisionLearningPage = () => {
               <CardDescription>
                 One prospect rolled back, one survey priced, and the judgement to know when a printed value is not
                 one, on the vendored Decision Tree Builder engine and VOI Analyzer. Every number on this page and
-                inside every panel is a return value from those engines, pinned by a test file against the teaching
-                digest.
+                inside every panel is a return value from those engines, pinned by a test file against the figures the
+                lessons quote.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2">

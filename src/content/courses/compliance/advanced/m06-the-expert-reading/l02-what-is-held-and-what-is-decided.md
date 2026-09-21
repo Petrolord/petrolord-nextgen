@@ -1,6 +1,6 @@
 # What is held and what is decided
 
-SECTION 23 of the digest lists the owner decisions in force, the ambiguities recorded and left as they are, five rules the engine keeps from ASC-0 and three more from ASC-1. None of it is a graded field. This lesson reads it as stated policy and as limits.
+This course lists the owner decisions in force, the ambiguities recorded and left as they are, five rules the engine keeps from ASC-0 and three more from ASC-1. None of it is a graded field. This lesson reads it as stated policy and as limits.
 
 {{panel:compliance-readiness-explorer}}
 
@@ -42,9 +42,9 @@ The last limit matters most: an app that shows no overdue review has told you no
 From ASC-1:
 
 - An audit is overdue only while it is undelivered, in both modules. Both modules read false for a Reported audit whose planned end has passed.
-- A readiness sentence names what an unevidenced claim lacks. SECTION 22 prints it for clause 5.2, which lacks evidence reference.
+- A readiness sentence names what an unevidenced claim lacks. The engine prints it for clause 5.2, which lacks evidence reference.
 - The Due soon reason says when the default lead time applies, as REG-2026-012's reason does.
 
 ## Exercise
 
-Read SECTION 23. For each of Q4, Q5 and Q6, name the module of this tier where you met the rule at work and one figure or verdict from that module that shows it. Then take the four held limits and, for each, say what a reader of the app's screen could wrongly conclude if they did not know the limit.
+Reread this lesson. For each of Q4, Q5 and Q6, name the module of this tier where you met the rule at work and one figure or verdict from that module that shows it. Then take the four held limits and, for each, say what a reader of the app's screen could wrongly conclude if they did not know the limit.

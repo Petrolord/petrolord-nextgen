@@ -6,7 +6,7 @@ This lesson reads QAP-2026-014 and its NCRs as one record at the as-of date 2026
 
 ## The plan in one line
 
-SECTION 12 prints the plan's reading: 6 of 12 points resolved, 50 percent. Hold points: H-01 Passed, H-03 Passed, H-05 Failed, H-08 Pending, H-11 Pending. Overdue points at the as-of date: H-05, S-10, R-12. summarise: checkpoints 12, outstanding 6, overdue 3, hold points outstanding 3, failed 1.
+The engine prints the plan's reading: 6 of 12 points resolved, 50 percent. Hold points: H-01 Passed, H-03 Passed, H-05 Failed, H-08 Pending, H-11 Pending. Overdue points at the as-of date: H-05, S-10, R-12. summarise: checkpoints 12, outstanding 6, overdue 3, hold points outstanding 3, failed 1.
 
 Read those counts against the types. The plan prints hold points 5 and hold points outstanding 3, and the outstanding three are H-05, H-08 and H-11. H-05 is failed and overdue. H-08 and H-11 are pending, overdue false, and they still hold the plan.
 

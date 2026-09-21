@@ -10,7 +10,7 @@ That is judgement J4: noise, LEX and chemical periods totalling over 24 hours ar
 
 ## Why refuse instead of trimming
 
-The engine could quietly keep the first 24 hours and drop the rest. The digest prints the refusal and judgement J4 and no remedy beside them. The reading behind it is the instructor's: nothing in the record says which hours belong to which day. A download spanning two shifts, or an instrument left running overnight, holds two days' worth of periods, and splitting them is a decision for the person who knows the work pattern. The refusal hands that decision back with the field named.
+The engine could quietly keep the first 24 hours and drop the rest. The course prints the refusal and judgement J4 and no remedy beside them. The reading behind it is the instructor's: nothing in the record says which hours belong to which day. A download spanning two shifts, or an instrument left running overnight, holds two days' worth of periods, and splitting them is a decision for the person who knows the work pattern. The refusal hands that decision back with the field named.
 
 | golden id | refused field | message |
 | --- | --- | --- |
@@ -28,7 +28,7 @@ So a reference duration over 24 hours is normal and useful. A record over 24 hou
 
 ## What to do with a long download
 
-The digest stops at the refusal, so this section is practice. Split the download into days at the points the work pattern says a day ends, and run each day as its own record. If the periods are in the right order and the day boundary falls inside a period, split that period into two with the hours on each side. Then report one noise dose per day and per criterion. Shifts that run longer than eight hours but still fit inside a day are accepted by this door; the Expert tier looks at what the regulations say about them.
+The engine stops at the refusal, so this section is practice. Split the download into days at the points the work pattern says a day ends, and run each day as its own record. If the periods are in the right order and the day boundary falls inside a period, split that period into two with the hours on each side. Then report one noise dose per day and per criterion. Shifts that run longer than eight hours but still fit inside a day are accepted by this door; the Expert tier looks at what the regulations say about them.
 
 ## The field tells you where to look
 

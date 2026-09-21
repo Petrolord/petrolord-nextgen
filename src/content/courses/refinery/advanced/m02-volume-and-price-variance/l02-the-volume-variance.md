@@ -23,7 +23,7 @@ The plan unit value is the plan line's value per barrel: 78.9000 for Escravos (i
 | diesel | delivery | 334000.00 | 244000.00 | -90000.00 | 100.6000 | -9054000.00 |
 | fuel_oil | delivery | 314000.00 | 210000.00 | -104000.00 | 60.2000 | -6260800.00 |
 
-SECTION 20 prints the two terms the formula multiplies: quantity gap = actual quantity - plan quantity, and plan unit value = plan value / plan quantity.
+The lab prints the two terms the formula multiplies: quantity gap = actual quantity - plan quantity, and plan unit value = plan value / plan quantity.
 
 ## Reading the signs as recorded
 

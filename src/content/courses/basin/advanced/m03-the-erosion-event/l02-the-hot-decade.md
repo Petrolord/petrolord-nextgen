@@ -6,7 +6,7 @@ Between 20 and 10 Ma the reference basin ran hotter at the source than at any ot
 
 ## The competition for hottest moment
 
-Without the erosion event, the source's temperature history peaks early: 165.60511032656453 degC at 76 Ma, just after the Upper Shale's arrival has been digested, when the heat-flow history still supplies about 67.7 mW/m2. From there to the present the basin cools 16 degrees, geometry fixed, purely because the basal supply decays to 60. The early basin is hotter than the deep basin: the Associate tier's onward lesson promised this tier would need transient thinking, and here is the payoff.
+Without the erosion event, the source's temperature history peaks early: 165.60511032656453 degC at 76 Ma, just after the Upper Shale's arrival has been absorbed, when the heat-flow history still supplies about 67.7 mW/m2. From there to the present the basin cools 16 degrees, geometry fixed, purely because the basal supply decays to 60. The early basin is hotter than the deep basin: the Associate tier's onward lesson promised this tier would need transient thinking, and here is the payoff.
 
 With the event, the competition has a second entrant. The phantom decade drives the source to 168.51433459340572 degC at 18 Ma, hotter than the 76 Ma peak by 2.9 degrees, at an age when the heat flow is down to about 61. Extra depth beat fading supply, but barely: 328.79 m of extra burial bought less than three degrees net, because it arrived when the basal flux was weakest. The same phantom placed at 76 Ma would have pushed past 180.
 

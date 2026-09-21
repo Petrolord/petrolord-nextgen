@@ -12,7 +12,7 @@ What the move asks for is evidence that the lesson was applied somewhere and cha
 
 ## Three lessons asked to embed
 
-The digest asks the engine to mark three published lessons "Embedded":
+The lab asks the engine to mark three published lessons "Embedded":
 
 - ALLOWED, ON-01 marked Embedded.
 - REFUSED, ON-03 marked Embedded, its one application a rejection: This lesson has been considered 1 time and adopted nowhere. Record where it was applied before calling it embedded.

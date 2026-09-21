@@ -10,7 +10,7 @@ Once the two totals exist, one question remains: which direction governs. The en
 | total inbreathing, scfh | 23201.8178 |
 | governing case | pressure (outbreathing) |
 
-The digest prints the pair as a relation:
+This lesson prints the pair as a relation:
 
 | RELATION: the two directions on this tank at its stated rates | value |
 | --- | --- |
@@ -43,4 +43,4 @@ When an engine returns a verdict word, find out whether the number, the word and
 
 ## Exercise
 
-Read the governing case line and the relation block in digest SECTION 27 and say which of the two totals a vent would be sized against at these stated rates. Then state what would have to become true of the two totals for the other word to be returned.
+Read the governing case line and the relation block in this lesson and say which of the two totals a vent would be sized against at these stated rates. Then state what would have to become true of the two totals for the other word to be returned.

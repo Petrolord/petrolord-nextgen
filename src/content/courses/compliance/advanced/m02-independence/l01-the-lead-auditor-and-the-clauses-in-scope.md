@@ -1,12 +1,12 @@
 # The lead auditor and the clauses in scope
 
-Module 1 put a name on every clause: its owner. This module uses that name. ISO 19011 asks that an auditor not audit their own work, and the isoCompliance module checks it the only way a register can, by comparing the auditor with the owners of the clauses being audited. This lesson reads the check on the lead auditor, over one planned internal audit printed in the digest.
+Module 1 put a name on every clause: its owner. This module uses that name. ISO 19011 asks that an auditor not audit their own work, and the isoCompliance module checks it the only way a register can, by comparing the auditor with the owners of the clauses being audited. This lesson reads the check on the lead auditor, over one planned internal audit printed in the lab.
 
 {{panel:compliance-readiness-explorer}}
 
 ## The audit and its scope
 
-The digest prints a planned internal audit with four clauses in scope: 8.1, 8.2, 9.1.1 and 9.2. The owners of those clauses are:
+The lab prints a planned internal audit with four clauses in scope: 8.1, 8.2, 9.1.1 and 9.2. The owners of those clauses are:
 
 | clause | owner |
 | --- | --- |
@@ -35,7 +35,7 @@ Look again at u-nneka. In the ORASHI register u-nneka owns five clauses: 4.1, 4.
 
 That is why the refusal offers two ways out. Either the scope changes, so the lead does not audit a clause they own, or the auditor changes. The engine does not choose between them. It names the clauses so that whoever plans the audit can.
 
-u-chidi owns none of the four clauses in scope, and is allowed. The digest prints no row for u-obinna, who owns clauses 5.2, 7.2 and 7.5.3 in the register and none of the four in this scope. This course does not state a verdict for a row the digest does not print.
+u-chidi owns none of the four clauses in scope, and is allowed. The engine prints no row for u-obinna, who owns clauses 5.2, 7.2 and 7.5.3 in the register and none of the four in this scope. This course does not state a verdict for a row the engine does not print.
 
 ## Why the named clauses matter
 

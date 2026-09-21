@@ -32,4 +32,4 @@ The register does not only assert its two refusals. Both are called and shown re
 
 ## Exercise
 
-Read the register in digest SECTION 31 and pick the two rows marked as refusals. For each one, say what a package that did not refuse would have had to put in the field instead.
+Read the register in the withheld explorer and pick the two rows marked as refusals. For each one, say what a package that did not refuse would have had to put in the field instead.

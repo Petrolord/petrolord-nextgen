@@ -9,7 +9,7 @@ else. The whole de Waard-Milliams chain, every held constant in it, the fugacity
 coefficient, the protective-film factor, the pH factor and the wetting factor
 all appear identically in both rates and divide out exactly.
 
-The generator behind this course's digest asserts that property to twelve
+The build behind this course's figures asserts that property to twelve
 figures on every rebuild.
 
 ## Two cases, two ratios

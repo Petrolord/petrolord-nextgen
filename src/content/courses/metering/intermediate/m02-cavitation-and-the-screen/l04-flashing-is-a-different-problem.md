@@ -4,7 +4,7 @@ Cavitation and flashing look alike on a datasheet and behave nothing alike in a 
 
 ## Where the engine draws the line
 
-The line is the outlet pressure against the vapour pressure. The digest states the case directly: an outlet pressure of 26.740000 psia and a vapour pressure of 28.740000 psia. The engine returns flashing true, the regime word `flashing`, and a coefficient of 19.148480.
+The line is the outlet pressure against the vapour pressure. The course states the case directly: an outlet pressure of 26.740000 psia and a vapour pressure of 28.740000 psia. The engine returns flashing true, the regime word `flashing`, and a coefficient of 19.148480.
 
 The crossing is printed rather than inferred. The outlet pressure where the engine turns the flashing flag on is 28.740000 psia and the stated vapour pressure is 28.740000 psia. The difference, the first less the second, is 0.000000, and the ratio, the first over the second, is 1.000000.
 
@@ -27,4 +27,4 @@ A last point on where this sits in the march. The last two rows of the BELEMA ma
 
 ## Exercise
 
-Write down the outlet pressure and the vapour pressure of the flashing case, and the difference and the ratio the digest prints between the flashing crossing and the stated vapour pressure. Then say, in one sentence each, what an anti-cavitation trim does for a cavitating service and what it does for a flashing one.
+Write down the outlet pressure and the vapour pressure of the flashing case, and the difference and the ratio the lesson prints between the flashing crossing and the stated vapour pressure. Then say, in one sentence each, what an anti-cavitation trim does for a cavitating service and what it does for a flashing one.

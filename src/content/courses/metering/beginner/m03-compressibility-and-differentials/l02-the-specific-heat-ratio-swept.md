@@ -15,7 +15,7 @@ which lands on none of the five columns exactly.
 
 Reading across a row of that table is asking one question: if this were a
 different gas at the same pressure ratio, what would the expansibility be? The
-span the digest computed across the whole table is the only comparison available
+span the course computed across the whole table is the only comparison available
 on it:
 
    largest, at dP/P1 0.001000 and k 1.66                      0.999779

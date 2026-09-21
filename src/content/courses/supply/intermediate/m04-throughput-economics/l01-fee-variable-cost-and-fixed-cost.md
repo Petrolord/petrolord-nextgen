@@ -32,7 +32,7 @@ For IBAFO:
 | margin | 4988.00 |
 | margin per m3 | 1.89 |
 
-Money prints to two decimals of a dollar. The digest prints the margin per m3, 1.89 USD/m3, beside the margin and gives it no formula of its own, so quote it as printed and with its period.
+Money prints to two decimals of a dollar. The lab prints the margin per m3, 1.89 USD/m3, beside the margin and gives it no formula of its own, so quote it as printed and with its period.
 
 ## Three kinds of number
 

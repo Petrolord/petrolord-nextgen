@@ -376,7 +376,7 @@ const WaterExplorer = ({ initialMode = 'surface' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored Gas Processing engine on the teaching stream OBIAFU,
-        printed to the precision the teaching digest prints. Gas is in MMscfd, pressures in psia, temperatures in degF,
+        printed to the precision the lessons use. Gas is in MMscfd, pressures in psia, temperatures in degF,
         water in lb per MMscf, solvent in gal per lb and gpm, and heat in Btu a gallon and MMBtu an hour.
       </Note>
     </PanelShell>

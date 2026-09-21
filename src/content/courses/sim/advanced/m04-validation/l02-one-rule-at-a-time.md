@@ -34,7 +34,7 @@ Breaking a well by replacing the whole wells list with a single modified well le
 
 The fix was to mutate one well IN PLACE and leave the others alone. The same problem hit the layer count case: changing the layer count by changing nz also invalidated every completion, so the fix was to drop a layer entry and leave nz alone.
 
-The generator now asserts that no case raises more than two errors, so a future case that cascades fails the build rather than being described as isolated.
+The course's build now asserts that no case raises more than two errors, so a future case that cascades fails the build rather than being described as isolated.
 
 ## The lesson beyond this fixture
 

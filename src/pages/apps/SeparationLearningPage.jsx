@@ -272,7 +272,7 @@ const SeparationLearningPage = () => {
                 Two vessels on one stream, a three-phase separator, one flow station and the published golden cases, on
                 the vendored Separator & Slug Catcher Designer and Facility Layout Mapper engines. Every number on this
                 page and inside every panel is a return value from those engines, pinned by a test file against the
-                teaching digest. Vessel work is in field units, and site work is in metres. Nothing in this course is a
+                figures the lessons quote. Vessel work is in field units, and site work is in metres. Nothing in this course is a
                 distribution, so no percentile label belongs anywhere in it.
               </CardDescription>
             </CardHeader>

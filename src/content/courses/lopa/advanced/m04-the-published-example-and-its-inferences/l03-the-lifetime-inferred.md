@@ -19,7 +19,7 @@ Each row is the paper's printed value, then the engine's value at five stated li
 
 One row matching at a lifetime of ten years would prove little, because a single figure can be hit by accident. Four rows match, and they are four different subsystems with three different coverages and failure rates more than two orders of magnitude apart. Look along any other column and at least one row misses the printed value at the third figure. The valve at eight years gives 2.31E-03 against a printed 2.71E-03; at twelve years it gives 3.13E-03. The transmitters behave the same way. Only the ten year column reproduces all four.
 
-A ten year lifetime is also a round figure, which is worth saying plainly. The digest makes no claim that it is the value the paper's authors used; the golden labels it INFERRED because it is the one lifetime that brings all four rows back at once. A verification note that relies on it should say so.
+A ten year lifetime is also a round figure, which is worth saying plainly. This course makes no claim that it is the value the paper's authors used; the golden labels it INFERRED because it is the one lifetime that brings all four rows back at once. A verification note that relies on it should say so.
 
 ## Strong evidence and its honest label
 

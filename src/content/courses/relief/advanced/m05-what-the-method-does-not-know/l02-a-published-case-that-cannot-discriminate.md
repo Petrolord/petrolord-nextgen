@@ -23,7 +23,7 @@ A route whose oracle is an INDEPENDENT DERIVATION goes red when the engine moves
 
 The Kv viscosity fit and the sphere-drag correlation are shared between the engine and its oracle on purpose, because no route in this package can derive either. Move one of them in both files and every published case still passes.
 
-Read that again, because it is the whole lesson. Every case green is the reported result, and the green IS the finding rather than a reassurance. A gate that stays green while the thing it guards has changed is not a gate, and the only honest response is to say so where a reader will look. The digest says it in plain words and calls it the honest statement of the limit.
+Read that again, because it is the whole lesson. Every case green is the reported result, and the green IS the finding rather than a reassurance. A gate that stays green while the thing it guards has changed is not a gate, and the only honest response is to say so where a reader will look. The course says it in plain words and calls it the honest statement of the limit.
 
 Nothing graded in this course rests on either of them. That is the practical half of the same decision: a figure nothing can check is a figure nobody should be marked right or wrong about, and the way to respect that is to teach it as a stated limit and then keep it out of every answer key.
 

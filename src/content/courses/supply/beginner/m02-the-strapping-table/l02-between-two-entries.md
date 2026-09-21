@@ -24,7 +24,7 @@ The AK-02 and AK-03 rows read the same way. AK-02's dip of 5406 mm lies between 
 
 ## When the straight line is exact
 
-A straight line between two entries is exact only when the tank's volume really does rise in a straight line with height between them. A vertical cylinder does exactly that: every millimetre of height adds the same slice. For AK-01 the digest shows it directly. Its 250 mm table and the same tank strapped every 10 mm agree at the dip to the litre: 3542.077 m3 and 3542.077 m3. On a vertical tank, a coarser step costs nothing at the dip.
+A straight line between two entries is exact only when the tank's volume really does rise in a straight line with height between them. A vertical cylinder does exactly that: every millimetre of height adds the same slice. For AK-01 this lesson shows it directly. Its 250 mm table and the same tank strapped every 10 mm agree at the dip to the litre: 3542.077 m3 and 3542.077 m3. On a vertical tank, a coarser step costs nothing at the dip.
 
 A horizontal cylinder does not rise in a straight line, and lesson five shows what interpolation does to AK-03.
 

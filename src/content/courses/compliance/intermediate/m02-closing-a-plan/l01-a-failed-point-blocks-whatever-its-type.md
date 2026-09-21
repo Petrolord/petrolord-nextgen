@@ -1,6 +1,6 @@
 # A failed point blocks whatever its type
 
-Closing a plan is a request like any other, and canClosePlan answers it one requirement at a time. The digest walks QAP-2026-014 from the plan as recorded at the as-of date 2026-10-15 to a plan the engine allows to close. Each refusal names the first thing still in the way, and the first thing it checks is failure.
+Closing a plan is a request like any other, and canClosePlan answers it one requirement at a time. This lesson walks QAP-2026-014 from the plan as recorded at the as-of date 2026-10-15 to a plan the engine allows to close. Each refusal names the first thing still in the way, and the first thing it checks is failure.
 
 {{panel:compliance-plan-explorer}}
 
@@ -12,7 +12,7 @@ Asked to close the plan as recorded, the engine refuses:
 
 The failed point is H-05, the radiography of the tie-in welds, a Hold point that reads Failed, resolved false and overdue true against its planned date of 2026-09-10. planProgress counts it in failed 1.
 
-Read the words of the refusal. It counts checkpoints, and the hold point rule is a separate sentence the engine gives only once the failure is cleared. On this plan the one failed point happens to be a hold point, so the digest tries the other types too. It takes the same plan with every hold point Passed and every NCR closed, and fails one other point at a time:
+Read the words of the refusal. It counts checkpoints, and the hold point rule is a separate sentence the engine gives only once the failure is cleared. On this plan the one failed point happens to be a hold point, so the course tries the other types too. It takes the same plan with every hold point Passed and every NCR closed, and fails one other point at a time:
 
 | failed point | type | canClosePlan |
 | --- | --- | --- |
@@ -39,8 +39,8 @@ Lesson two reads that refusal. Notice that the count in it is 2, while planProgr
 
 ## A failure is still counted after closure
 
-SECTION 14 prints one more reading of the same points. Summarised under the plan marked Closed, they read outstanding 0, overdue 0 and failed 1. The closed status stops the engine from reporting anything as still outstanding or overdue on the plan, and the failure count survives it. A plan's history of failure stays visible on a closed plan.
+The engine prints one more reading of the same points. Summarised under the plan marked Closed, they read outstanding 0, overdue 0 and failed 1. The closed status stops the engine from reporting anything as still outstanding or overdue on the plan, and the failure count survives it. A plan's history of failure stays visible on a closed plan.
 
 ## Exercise
 
-Read three figures from the digest: failed 1 from planProgress at the as-of date, the count 2 in the refusal after H-05 is re-inspected and Passed, and hold points outstanding 3 at the as-of date. Say what the three together show about which point the re-inspection resolved, and then read the Closed summarise line, outstanding 0, overdue 0 and failed 1, and say what it keeps that the other two counts give up.
+Read three figures from this lesson: failed 1 from planProgress at the as-of date, the count 2 in the refusal after H-05 is re-inspected and Passed, and hold points outstanding 3 at the as-of date. Say what the three together show about which point the re-inspection resolved, and then read the Closed summarise line, outstanding 0, overdue 0 and failed 1, and say what it keeps that the other two counts give up.

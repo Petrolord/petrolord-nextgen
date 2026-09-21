@@ -23,7 +23,7 @@ Take an envelope where every element is verified, then re-rate exactly one eleme
 
 Look at the middle two rows. **`not-verified` and `degraded` give the identical envelope verdict and the identical category.** The engine even returns the same sentence for both: `Barrier degradation (or unverified elements); no failure.`
 
-The digest records this directly. With one element not verified the envelope is degraded, with one element degraded the envelope is degraded, and the flag saying those agree is set to true.
+The lab records this directly. With one element not verified the envelope is degraded, with one element degraded the envelope is degraded, and the flag saying those agree is set to true.
 
 ## Where the two do differ
 

@@ -39,11 +39,11 @@ Module 5 set it against Kwale's marker of 72.5 $/bbl. The differential, this cru
 
 ## Four checks on the chain
 
-The engine's reports make each step checkable. Do the yields close? Here they do. Is the valuation complete, with nothing assumed zero? Here it is. Was the loss taken on the product side, before the costs? The loss appears as its own term directly after gross. Does the blend's netback match the volume-weighted netbacks of its crudes? The digest prints 0.0000.
+The engine's reports make each step checkable. Do the yields close? Here they do. Is the valuation complete, with nothing assumed zero? Here it is. Was the loss taken on the product side, before the costs? The loss appears as its own term directly after gross. Does the blend's netback match the volume-weighted netbacks of its crudes? The lab prints 0.0000.
 
 ## What the studio shows with nothing typed
 
-The Crude Assay & Blending Studio opens on a default pair, 60 and 40, on its default cuts and default valuation. The digest prints what it shows:
+The Crude Assay & Blending Studio opens on a default pair, 60 and 40, on its default cuts and default valuation. The course prints what it shows:
 
 | figure | value |
 | --- | --- |
@@ -61,10 +61,10 @@ The Crude Assay & Blending Studio opens on a default pair, 60 and 40, on its def
 | netback $/bbl | 69.7334 |
 | stability screen basis | api-contrast |
 
-Its cut set is the vacuum refinery's, so its yields run to vacuum gasoil and vacuum residue. Its sulfur carries the basis the engine names for it, mass. Its stability screen basis reads api-contrast, and the digest says why: "Crudes in the default pair that carry a SARA analysis: none." With no SARA, the screen falls back to the gravity rule of thumb the Associate tier taught, which can raise a flag and cannot clear one.
+Its cut set is the vacuum refinery's, so its yields run to vacuum gasoil and vacuum residue. Its sulfur carries the basis the engine names for it, mass. Its stability screen basis reads api-contrast, and the course says why: "Crudes in the default pair that carry a SARA analysis: none." With no SARA, the screen falls back to the gravity rule of thumb the Associate tier taught, which can raise a flag and cannot clear one.
 
-A learner who opens the studio sees this table first. The digest's caption names what it rests on: the default pair, 60 and 40, on the default cuts and the default valuation. Before reading any figure on the page, read which pair, which cut set and which prices it rests on.
+A learner who opens the studio sees this table first. The course names what the table rests on: the default pair, 60 and 40, on the default cuts and the default valuation. Before reading any figure on the page, read which pair, which cut set and which prices it rests on.
 
 ## Exercise
 
-Read the Kwale table from blend API to differential. For each of these five figures, the T50, the Naphtha yield, the gross product value, the loss value and the differential, name the module that built it and the basis or rule it was built on. Then quote the digest's line on which crudes in the default pair carry SARA, and say what it explains in the default table.
+Read the Kwale table from blend API to differential. For each of these five figures, the T50, the Naphtha yield, the gross product value, the loss value and the differential, name the module that built it and the basis or rule it was built on. Then quote this lesson's line on which crudes in the default pair carry SARA, and say what it explains in the default table.

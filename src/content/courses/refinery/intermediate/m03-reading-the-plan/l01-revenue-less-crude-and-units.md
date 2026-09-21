@@ -1,6 +1,6 @@
 # Revenue less crude and units
 
-A refinery plan answers one question first: what does the month earn? The plan's answer is its margin, and the digest gives its definition in one line:
+A refinery plan answers one question first: what does the month earn? The plan's answer is its margin, and the course gives its definition in one line:
 
 margin = product revenue - crude cost - unit operating cost.
 
@@ -41,13 +41,13 @@ So a margin of 7077935.48 is the largest the month's crude, units and product pr
 
 ## What the plan maximises
 
-SECTION 12 prints it. planRefinery hands its linear programme to the solver with maximize: true, on an objective that counts each product barrel at its price, each crude barrel at minus its cost and each barrel through a unit at minus that unit's operating cost. The objective at ABUA's plan is 7077935.48, the plan's margin, and the digest prints the same: true.
+The engine shows it. planRefinery hands its linear programme to the solver with maximize: true, on an objective that counts each product barrel at its price, each crude barrel at minus its cost and each barrel through a unit at minus that unit's operating cost. The objective at ABUA's plan is 7077935.48, the plan's margin, and the course prints the same: true.
 
 Every choice the plan makes, which crude, how much through which unit, which product gets which stream, moves one of the three terms. How the solution is found is the `crude` course's subject. What it finds is printed here.
 
 ## The formula under a change
 
-SECTION 13 prints the margin under each of five changes, with its change from the plan as typed. The row for the Forcados cargo cancelled reads margin 4030705.04, a change of -3047230.44. Every figure in that row is a new balance of the same three terms, struck by a plan that has lost one of its crudes.
+The lab prints the margin under each of five changes, with its change from the plan as typed. The row for the Forcados cargo cancelled reads margin 4030705.04, a change of -3047230.44. Every figure in that row is a new balance of the same three terms, struck by a plan that has lost one of its crudes.
 
 ## Exercise
 

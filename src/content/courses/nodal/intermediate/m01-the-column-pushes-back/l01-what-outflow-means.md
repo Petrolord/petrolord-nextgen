@@ -15,7 +15,7 @@ Hand the tubing a rate and a wellhead pressure and it hands back the bottomhole 
 | BONNY-7 | 420 | 2150 | 2570 | 2740 |
 | FORCADOS-3 | 960 | 3350 | 4310 | 3720 |
 
-BONNY-7's dead column stands 170 psi below its reservoir pressure, so the well starts itself. FORCADOS-3's stands 590 psi above, and the digest's verdict is that the column outweighs the reservoir at low rate. One subtraction, no curve.
+BONNY-7's dead column stands 170 psi below its reservoir pressure, so the well starts itself. FORCADOS-3's stands 590 psi above, and the lab's verdict is that the column outweighs the reservoir at low rate. One subtraction, no curve.
 
 ## Not a number, a function of rate
 
@@ -40,7 +40,7 @@ FORCADOS-3 runs from a loaded end of 4293.189726 psia at 4.135950 stb/d to a fri
 | 11076.6285 | 1627.613595 |
 | 13289.2963 | 1842.190804 |
 
-It only rises, and its reported minimum of 13.289296 Mscf/d at 952.986300 psia is the sampling window's left edge, which the digest states outright. Nothing in a dry gas column gets lighter when flowed faster. The bend is a liquid phenomenon.
+It only rises, and its reported minimum of 13.289296 Mscf/d at 952.986300 psia is the sampling window's left edge, which the course states outright. Nothing in a dry gas column gets lighter when flowed faster. The bend is a liquid phenomenon.
 
 ## What it refuses
 

@@ -6,9 +6,9 @@ Lesson five found the heat flow of the Isiokpo cascade reaching 0.000 at shifted
 
 ## A zero inside the range
 
-SECTION 17 prints the reading of the Isiokpo cascade at a minimum approach of 15 C: the heat flow is zero at shifted 110.500 C, inside the range, and that is the pinch, 118.000 C on the hot side and 103.000 C on the cold side. The four streams are invented for this course.
+The lab prints the reading of the Isiokpo cascade at a minimum approach of 15 C: the heat flow is zero at shifted 110.500 C, inside the range, and that is the pinch, 118.000 C on the hot side and 103.000 C on the cold side. The four streams are invented for this course.
 
-The words inside the range carry the rule. The cascade runs from 155.500 shifted at the top to 33.500 at the bottom, and 110.500 is between them. SECTION 25 lists the rule among those in force: only an interior zero of the cascade is a pinch.
+The words inside the range carry the rule. The cascade runs from 155.500 shifted at the top to 33.500 at the bottom, and 110.500 is between them. The course lists the rule among those in force: only an interior zero of the cascade is a pinch.
 
 The engine's note on the pinch, verbatim: "Heat carried across the pinch costs twice: one unit more hot utility and one unit more cold utility. That double cost is what makes the pinch the constraint on the design."
 
@@ -16,7 +16,7 @@ In practice, the part of the plant above the pinch is short of heat and the part
 
 ## The pinch against the approach
 
-SECTION 17 prints the Isiokpo pinch at all three approaches:
+The lab prints the Isiokpo pinch at all three approaches:
 
 | minimum approach C | hot utility kW | cold utility kW | pinch hot C | pinch cold C |
 | --- | --- | --- | --- | --- |
@@ -28,7 +28,7 @@ The pinch on the hot side prints 118.000 C at every approach. The cold side prin
 
 ## A zero at the end is a threshold
 
-SECTION 17 prints a second case to show the other kind of zero: one hot stream from 200 C to 50 C at 10 kW/K and one cold stream from 30 C to 60 C at 1 kW/K, at a minimum approach of 10 C.
+The lab prints a second case to show the other kind of zero: one hot stream from 200 C to 50 C at 10 kW/K and one cold stream from 30 C to 60 C at 1 kW/K, at a minimum approach of 10 C.
 
 | hot utility kW | cold utility kW | pinch hot C | threshold problem |
 | --- | --- | --- | --- |
@@ -43,13 +43,13 @@ Its heat flow down the shifted temperatures:
 | 45.000 | 1480.000 |
 | 35.000 | 1470.000 |
 
-The heat flow is zero only at the top of the cascade, where the hot utility is zero. The digest states the reading: the engine reports no pinch there, because a zero at either end of the cascade is a threshold, and naming it a pinch would invent a constraint.
+The heat flow is zero only at the top of the cascade, where the hot utility is zero. The course states the reading: the engine reports no pinch there, because a zero at either end of the cascade is a threshold, and naming it a pinch would invent a constraint.
 
 The threshold case prints a hot utility of 0.000 kW and a cold utility of 1470.000 kW, and pinch hot none. The engine reports a threshold problem of true beside it, where every Isiokpo row reports false.
 
 ## What the engine refuses
 
-SECTION 17 prints three refusals for the pinch targets:
+The lab prints three refusals for the pinch targets:
 
 | the call | the engine says |
 | --- | --- |

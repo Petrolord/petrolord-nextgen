@@ -26,7 +26,7 @@ The zero leakoff case is the one exception. There is nothing to correct, so the 
 
 Three things.
 
-First, you cannot differentiate the balance to get a sensitivity. There is no single expression to differentiate. If you want to know how efficiency responds to the leakoff coefficient, you sweep it and read the table, which is exactly what the digest for this course does.
+First, you cannot differentiate the balance to get a sensitivity. There is no single expression to differentiate. If you want to know how efficiency responds to the leakoff coefficient, you sweep it and read the table, which is exactly what the lab for this course does.
 
 Second, the outputs are a consistent set or they are nothing. Efficiency, pump time and injected volume satisfy each other by construction. If a design sheet quotes numbers that do not close, someone has edited one of them by hand after the fact, and that is a real and common defect to look for.
 

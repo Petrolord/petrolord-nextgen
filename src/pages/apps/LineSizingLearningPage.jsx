@@ -272,7 +272,7 @@ const LineSizingLearningPage = () => {
               <CardDescription>
                 One crude export line, one gas trunk, one pipe read three ways, and the published golden cases, on the
                 vendored line-hydraulics, choke and pipe-schedule engines. Every number on this page and inside every
-                panel is a return value from those engines, pinned by a test file against the teaching digest. Liquid
+                panel is a return value from those engines, pinned by a test file against the figures the lessons quote. Liquid
                 work is in bpd, inches of bore and feet of length; gas work is in scfd and miles, because that is the
                 unit the published transmission forms are stated in. Nothing in this course is a distribution, so no
                 percentile label belongs anywhere in it.

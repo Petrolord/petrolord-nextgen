@@ -311,7 +311,7 @@ const SeparatorExplorer = ({ initialMode = 'conditions' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored sizing engine on the teaching streams, printed to the
-        precision the teaching digest prints. Vessel work is in feet, rates in MMscfd and bpd, pressures in psig and psia,
+        precision the lessons use. Vessel work is in feet, rates in MMscfd and bpd, pressures in psig and psia,
         and temperatures in degF.
       </Note>
     </PanelShell>

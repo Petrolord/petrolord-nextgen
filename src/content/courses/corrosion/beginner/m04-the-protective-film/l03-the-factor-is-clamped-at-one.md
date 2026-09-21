@@ -10,7 +10,7 @@ The clamp is what makes the multiplier safe to apply everywhere. It states a dir
 
 Of the six worked streams in this course's source material, 5 have a multiplier of exactly one, which means no film credit is in their rates at all. The shipped studio case sits below its onset as well, at 60.000000 C with a computed onset of 80.984504 C.
 
-That has a consequence worth carrying into the next lesson. Where the multiplier is exactly one, multiplying by it changes nothing at all, so a question about where in the chain it should be applied cannot move the answer by a single bit. Every capstone scenario in this course is deliberately set below its own computed onset for that reason, and the generator behind them asserts it rather than assuming it.
+That has a consequence worth carrying into the next lesson. Where the multiplier is exactly one, multiplying by it changes nothing at all, so a question about where in the chain it should be applied cannot move the answer by a single bit. Every capstone scenario in this course is deliberately set below its own computed onset for that reason, and the build behind them asserts it rather than assuming it.
 
 ## Reading the clamp on the screen
 

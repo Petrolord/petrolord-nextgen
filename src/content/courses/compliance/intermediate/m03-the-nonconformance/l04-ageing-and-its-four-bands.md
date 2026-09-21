@@ -25,7 +25,7 @@ A voided NCR stops ageing too. NCR-2026-011, pipe ovality out of tolerance, was 
 
 ## Four bands and their edges
 
-ageBand sorts an age into one of four bands. The digest prints the edges:
+ageBand sorts an age into one of four bands. The lab prints the edges:
 
 | age in days | ageBand |
 | --- | --- |

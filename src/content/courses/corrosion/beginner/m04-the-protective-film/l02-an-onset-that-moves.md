@@ -22,4 +22,4 @@ What the published correlation turns at is a separate question and it is held fo
 
 ## Exercise
 
-Set the fugacity to 0.200000 bar, then to 5.000000 bar, then to 60.000000 bar, and record the computed onset at each against the 108.978001 C, 63.957912 C and 35.853960 C above. Take the smallest and the largest of the seven onsets in this lesson and form their difference yourself, then compare it with the 96.443771 degrees Celsius the digest reports. Now hold a temperature of 60.000000 C and say at which of those fugacities a film credit is being taken.
+Set the fugacity to 0.200000 bar, then to 5.000000 bar, then to 60.000000 bar, and record the computed onset at each against the 108.978001 C, 63.957912 C and 35.853960 C above. Take the smallest and the largest of the seven onsets in this lesson and form their difference yourself, then compare it with the 96.443771 degrees Celsius the lab reports. Now hold a temperature of 60.000000 C and say at which of those fugacities a film credit is being taken.

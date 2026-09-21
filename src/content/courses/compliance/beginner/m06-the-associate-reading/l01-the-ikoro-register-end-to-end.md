@@ -44,7 +44,7 @@ The waste consignment register has no due date and no expiry, and reads No date 
 
 ## By regime
 
-countBy regime counts the obligations by regime: Environmental 5, Reporting 3, Health & Safety 2, Licensing 1, Operational 1 and Financial 1. The digest prints the regime of each obligation, which is what countBy groups:
+countBy regime counts the obligations by regime: Environmental 5, Reporting 3, Health & Safety 2, Licensing 1, Operational 1 and Financial 1. The table prints the regime of each obligation, which is what countBy groups:
 
 | code | regime | obligation type |
 | --- | --- | --- |

@@ -26,7 +26,7 @@ The envelope rollup is a chain and the worst status present decides the whole, s
 
 ## What that trade actually costs
 
-Five of the nine swept annular lengths pass with a log and fail without one, and the digest prices the log at 70 m of cement. That is slurry, rig time, and a longer interval you may not have room for above the source.
+Five of the nine swept annular lengths pass with a log and fail without one, and the lab prices the log at 70 m of cement. That is slurry, rig time, and a longer interval you may not have room for above the source.
 
 The point is not that logging is cheap. It is that the standard has already decided evidence is worth 70 m, so a skipped log should be skipped deliberately, with the cement taken to 100 m, rather than skipped in the hope that 40 m is accepted.
 

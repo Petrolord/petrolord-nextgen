@@ -8,7 +8,7 @@ The blend's curve needs temperatures to stand on. The engine takes them from the
 
 Kwale Light was measured at 75, 190, 370, 530, 720, 1030 and 1350 F. Ughelli Medium was measured at 90, 265, 480, 650, 860, 1200 and 1470 F. The two assays share no temperature.
 
-blendDistillationCurves does not pick one crude's grid and throw the other away. It forms the blend's curve at every temperature any component measured. The digest prints the count: the blend's curve has 14 points, every temperature either crude measured.
+blendDistillationCurves does not pick one crude's grid and throw the other away. It forms the blend's curve at every temperature any component measured. The lab prints the count: the blend's curve has 14 points, every temperature either crude measured.
 
 | temperature F | Kwale Light volume percent | Ughelli Medium volume percent | blend volume percent (blendDistillationCurves) |
 | --- | --- | --- | --- |

@@ -28,7 +28,7 @@ The correction is exactly one up to a published threshold pressure, so at any re
 
 The direction is the one you would expect and the reason is worth saying out loud. The required area falls as the relieving pressure rises, because a higher pressure pushes more mass through the same hole, so less hole is needed for the same flow. Every row above has a correction of exactly 1.000000, so nothing in that column confounds the reading.
 
-Do not divide one of those three areas by another. The digest prints no ratio between them, so a quotient formed here rests on nothing.
+Do not divide one of those three areas by another. The course prints no ratio between them, so a quotient formed here rests on nothing.
 
 ## Which return fields to read
 

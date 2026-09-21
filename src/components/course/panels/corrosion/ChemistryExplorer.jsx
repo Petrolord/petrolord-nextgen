@@ -315,7 +315,7 @@ const ChemistryExplorer = ({ initialMode = 'fugacity' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored Corrosion & Integrity engine on the teaching streams
-        and the studio's shipped defaults, printed to the precision the teaching digest prints. Pressures are in bar and
+        and the studio's shipped defaults, printed to the precision the lessons use. Pressures are in bar and
         in psia, and every ratio is a plain number.
       </Note>
     </PanelShell>

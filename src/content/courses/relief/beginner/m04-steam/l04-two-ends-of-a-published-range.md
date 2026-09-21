@@ -14,7 +14,7 @@ Five steam rows are published for this route, and they were chosen to sit at dif
 | 150000.0000 | 3100.000000 | 1.000000 | 1.167438 | 1.167370 | 0.825349 | 0.825485 | 1.645e-4 |
 | 120000.0000 | 1550.000000 | 1.000000 | 0.998366 | 0.998342 | 1.544193 | 1.544395 | 1.306e-4 |
 
-Every row agrees to better than two parts in ten thousand on the relative difference the digest computes. That column is a comparison the digest works out, so it is one a lesson may quote.
+Every row agrees to better than two parts in ten thousand on the relative difference the table above prints. That column is a comparison the course works out, so it is one a lesson may quote.
 
 ## What the set covers
 

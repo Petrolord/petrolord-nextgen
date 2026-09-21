@@ -20,7 +20,7 @@ The denominator is a sum of positive weights times volumes that are zero or more
 
 sum(w_i v_i) <= L x sum(d_i v_i)
 
-Gathering everything on one side gives the row the digest states:
+Gathering everything on one side gives the row the course states:
 
 sum((w_i - L d_i) v_i) <= 0
 

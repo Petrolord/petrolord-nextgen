@@ -18,7 +18,7 @@ The Igbogene flare sends 38500 kmol of gas a year to the flame at 1.32 kmol of c
 
 Start with co2Tonnes. It is 2236.537 at 1 and falls down the table to 2012.884 at 0.9. As the efficiency drops, less of the carbon burns, and less CO2 leaves the flame.
 
-Now ch4Tonnes. It is 0.000 at 1 and rises down the table to 81.531 at 0.9. The carbon that does not leave as CO2 leaves as methane. Both columns are tonnes of gas, and they are tonnes of different gases. SECTION 5 prints the flare's carbonKmolPerYear as 50820.000 at every efficiency in the table: the efficiency splits that carbon between CO2 and methane; it does not change it.
+Now ch4Tonnes. It is 0.000 at 1 and rises down the table to 81.531 at 0.9. The carbon that does not leave as CO2 leaves as methane. Both columns are tonnes of gas, and they are tonnes of different gases. The engine returns the flare's carbonKmolPerYear as 50820.000 at every efficiency in the table: the efficiency splits that carbon between CO2 and methane; it does not change it.
 
 The methane line converts ch4Tonnes on the course's set. At 1 there is no methane and so no line. At 0.99 the line is 242.961 tCO2e, at 0.98 it is 485.922, at 0.95 it is 1214.805 and at 0.9 it is 2429.610 tCO2e.
 
@@ -28,7 +28,7 @@ The last column adds the CO2 and the methane line. It is 2236.537 tCO2e at 1, 24
 
 The CO2 column falls as the efficiency drops, and the flare's total rises. Each row's total is its CO2 plus its methane line, and the two are weighted differently: CO2 carries a GWP of 1 on every set, and the methane is converted at 29.8 on the course's set. On this flare, a lower destruction efficiency makes the CO2 smaller and the total larger.
 
-That is why the efficiency is an input. The digest measures two rows against each other: read as 100 percent, the same flare is 2236.537 tCO2e with no methane line, 441.191 tCO2e below the flare at 0.98. And at 0.98 the methane line is a share of 0.181468 of the flare. Both figures are the digest's arithmetic on the engine's figures.
+That is why the efficiency is an input. The lab measures two rows against each other: read as 100 percent, the same flare is 2236.537 tCO2e with no methane line, 441.191 tCO2e below the flare at 0.98. And at 0.98 the methane line is a share of 0.181468 of the flare. Both figures are the course's arithmetic on the engine's figures.
 
 ## The row the inventory uses
 

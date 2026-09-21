@@ -44,7 +44,7 @@ The programme summarise brings the audits and the checklist together: audits out
 
 ## Two counts of outstanding answers
 
-checklistProgress prints outstanding 4, and summarise prints answers outstanding 2. The digest says what summarise was given: the programme, the 8 audits, the 12 recorded answers and the finding. The digest names the items. Items 10 (Not applicable, a blank note) and 11 (Not applicable, no note) have a recorded row that is not an answer, and those are the answers outstanding 2. Items 13 and 14 have no row at all, so they are not among the 12. checklistProgress reads all 14 questions and counts all four.
+checklistProgress prints outstanding 4, and summarise prints answers outstanding 2. The course says what summarise was given: the programme, the 8 audits, the 12 recorded answers and the finding. The course names the items. Items 10 (Not applicable, a blank note) and 11 (Not applicable, no note) have a recorded row that is not an answer, and those are the answers outstanding 2. Items 13 and 14 have no row at all, so they are not among the 12. checklistProgress reads all 14 questions and counts all four.
 
 Neither figure is wrong. Both are engine readings of the same audit at the same as-of date. They count different things, and a reader who puts one beside the other has to know which records each was given.
 

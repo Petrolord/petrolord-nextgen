@@ -202,7 +202,7 @@ const ComplianceLearningPage = () => {
                 and document library, a flowline tie-in&apos;s quality plan, NCRs, contractor audit and audit programme, and a
                 gas plant&apos;s ISO 14001:2015 clause register. Every status, count, age and verdict on this page and inside
                 every panel is a return value from those engines at a stated as-of date, pinned by a test file against the
-                teaching digest. Every refusal is the engine&apos;s own sentence.
+                figures the lessons quote. Every refusal is the engine&apos;s own sentence.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,6 +1,6 @@
 # The Apapa pool end to end
 
-This lesson reads the Apapa PMS result once, in one fixed order of eight steps, and then reads the optimizer's own default pool the same way. The order is this lesson's device: the digest prints the lines, and the lesson puts them in sequence.
+This lesson reads the Apapa PMS result once, in one fixed order of eight steps, and then reads the optimizer's own default pool the same way. The order is this lesson's device: the engine prints the lines, and the lesson puts them in sequence.
 
 ## 1. The status
 
@@ -8,7 +8,7 @@ Optimal. A recipe exists that meets every specification inside every tank limit,
 
 ## 2. What was skipped
 
-Nothing. Every specification was applied. Had the sulfur row been skipped, as it is when Isomerate carries no sulfur figure, the recipe would meet the other specifications only, and the digest prints its total cost as 695245.0644 $.
+Nothing. Every specification was applied. Had the sulfur row been skipped, as it is when Isomerate carries no sulfur figure, the recipe would meet the other specifications only, and the lab prints its total cost as 695245.0644 $.
 
 ## 3. The recipe and its bounds
 
@@ -36,7 +36,7 @@ At a sulfur limit of 51 ppm the saving is 551.6796 $; at an RVP limit of 10 psi 
 
 ## The default pool, the same way
 
-The Product Blending Optimizer opens on its own gasoline pool, 1000 bbl on the 50 ppm template, with components the digest calls "its own, with the same names as Apapa's and different figures". Read in the same order:
+The Product Blending Optimizer opens on its own gasoline pool, 1000 bbl on the 50 ppm template, with components the course calls "its own, with the same names as Apapa's and different figures". Read in the same order:
 
 | component | volume bbl |
 | --- | --- |

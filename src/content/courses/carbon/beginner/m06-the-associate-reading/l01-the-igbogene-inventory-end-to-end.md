@@ -54,4 +54,4 @@ Walk the panel through the same order: heaters, flare, set, lines, totals, flags
 
 Read the flare's two lines and the total. Say what the relationship between the flare's lines and the total shows about how much of the Igbogene inventory rests on the one typed destruction efficiency.
 
-Self check: at the stated 0.98 the flare's lines are 2191.807 tCO2e of CO2 and 485.922 tCO2e of methane, inside a total of 42945.777 tCO2e. The digest prints their shares of the total as 0.051037 and 0.011315. Both lines move with the destruction efficiency, and the engine refuses a blank one because, in its words, for a flare it is the answer, and it is contested.
+Self check: at the stated 0.98 the flare's lines are 2191.807 tCO2e of CO2 and 485.922 tCO2e of methane, inside a total of 42945.777 tCO2e. The lab prints their shares of the total as 0.051037 and 0.011315. Both lines move with the destruction efficiency, and the engine refuses a blank one because, in its words, for a flare it is the answer, and it is contested.

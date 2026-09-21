@@ -6,20 +6,20 @@ This lesson reads the rest of the Isiokpo plant as a chain: one failed trap, one
 
 ## The trap
 
-SECTION 15 prints the trap failed open: a 4 mm orifice, 9 bar a upstream, a discharge coefficient of 0.72, a steam density of 4.65 kg/m3 and 8400 hours a year.
+The lab prints the trap failed open: a 4 mm orifice, 9 bar a upstream, a discharge coefficient of 0.72, a steam density of 4.65 kg/m3 and 8400 hours a year.
 
 | isentropic exponent | kg an hour | tonnes a year | annual cost USD | annual fuel GJ | annual tCO2e |
 | --- | --- | --- | --- | --- | --- |
 | 1.135 | 42.3520 | 355.757 | 7826.65 | 1135.851 | 63.721 |
 | 1.3 | 44.4620 | 373.481 | 8216.58 | 1192.439 | 66.896 |
 
-The stated exponent is 1.135, for dry saturated steam. At the superheated exponent the digest computes 17.724 tonnes a year more. The flow is choked. The engine's note, verbatim: "Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5774, so the loss depends on the upstream pressure alone."
+The stated exponent is 1.135, for dry saturated steam. At the superheated exponent the lab computes 17.724 tonnes a year more. The flow is choked. The engine's note, verbatim: "Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5774, so the loss depends on the upstream pressure alone."
 
 The trap refuses a blank exponent, discharge coefficient or hours. It reports the steam without a boiler efficiency and leaves the fuel and carbon absent, with the fuel note that a boiler efficiency is "not assumed to be 1". Hours left out of the call take the stated default of 8760, 371.004 tonnes a year.
 
 ## The condensate
 
-SECTION 16 raises the return from 0.35 to 0.65 on 16 t of steam an hour, with condensate at 92 C and makeup at 27 C.
+The record raises the return from 0.35 to 0.65 on 16 t of steam an hour, with condensate at 92 C and makeup at 27 C.
 
 | output | with treatment priced | with treatment left blank |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ With the treatment cost blank the value is a floor, and the engine says so in it
 
 ## The streams
 
-SECTION 17 targets the four streams:
+The engine targets the four streams:
 
 | minimum approach C | hot utility kW | cold utility kW | pinch hot C | pinch cold C | heat recovered kW |
 | --- | --- | --- | --- | --- | --- |
@@ -53,8 +53,8 @@ It answers in part and names the gap. A trap with no boiler efficiency reports i
 
 It applies a stated default only where one is stated. Hours left out of the trap's call take 8760. Hours left blank are refused.
 
-SECTION 25 lists the trap's rule and the two pinch rules among those in force: a trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year; only an interior zero of the cascade is a pinch; a negative heat capacity flowrate is refused. Its MD45-1 table adds that a trap is choked only at or below the critical pressure ratio.
+The course lists the trap's rule and the two pinch rules among those in force: a trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year; only an interior zero of the cascade is a pinch; a negative heat capacity flowrate is refused. Its MD45-1 table adds that a trap is choked only at or below the critical pressure ratio.
 
 ## Exercise
 
-Read the three calls of this lesson. For each, name one box the engine refuses when blank. For the trap and the condensate system, name one figure the engine still reports when a different box is blank. Then say what the engine attaches to the condensate total of 121403.28 USD, and what the digest's zero at shifted 110.500 C lets the engine name.
+Read the three calls of this lesson. For each, name one box the engine refuses when blank. For the trap and the condensate system, name one figure the engine still reports when a different box is blank. Then say what the engine attaches to the condensate total of 121403.28 USD, and what the cascade's zero at shifted 110.500 C lets the engine name.

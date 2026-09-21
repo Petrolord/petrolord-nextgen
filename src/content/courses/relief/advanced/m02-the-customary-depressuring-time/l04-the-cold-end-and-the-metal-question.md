@@ -24,7 +24,7 @@ The end pressure does, and here is the same vessel taken to seven of them.
 | 40.000000 | 462.482817 | 257.134963 | -202.535037 | 0.931629 |
 | 25.000000 | 540.397236 | 232.011700 | -227.658300 | 0.952641 |
 
-Every column moves down the table and the digest prints no ratio between any pair of them, so read the directions and stop there. Deeper blowdown, longer clock, colder gas, more inventory gone. A reader who divides the temperature at one end pressure by the temperature at another has produced a figure this engine never computed, and the fact that both figures are real engine output does not make the quotient anything. Ask first whether two quantities are entitled to be compared, and only then compare them.
+Every column moves down the table and the lab prints no ratio between any pair of them, so read the directions and stop there. Deeper blowdown, longer clock, colder gas, more inventory gone. A reader who divides the temperature at one end pressure by the temperature at another has produced a figure this engine never computed, and the fact that both figures are real engine output does not make the quotient anything. Ask first whether two quantities are entitled to be compared, and only then compare them.
 
 ## Where the bottom rows stop being trustworthy
 

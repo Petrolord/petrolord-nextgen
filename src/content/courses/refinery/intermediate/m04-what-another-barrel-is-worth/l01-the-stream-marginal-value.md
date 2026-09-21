@@ -6,7 +6,7 @@ Module 3 read where the plan stopped. This module reads what the plan thinks a b
 
 ## The definition
 
-The digest defines it exactly, and the words matter:
+The engine defines it exactly, and the words matter:
 
 marginalValue is the plan's value of one more barrel of a stream arriving from outside, in US dollars a barrel: the negated dual of the stream's balance row.
 
@@ -54,4 +54,4 @@ The value is also a map of the month. A stream worth more than any product it co
 
 ## Exercise
 
-Read the naphtha row, marginal value 91.4500, surplus 0.00, Naphtha export at 72.5000, feeds the Naphtha reformer. Then read the offgas row, marginal value 0.0000, surplus 103638.71, no product and no unit. Say what each row's value is the value of, in the digest's words, and what the offgas surplus has to do with its value.
+Read the naphtha row, marginal value 91.4500, surplus 0.00, Naphtha export at 72.5000, feeds the Naphtha reformer. Then read the offgas row, marginal value 0.0000, surplus 103638.71, no product and no unit. Say what each row's value is the value of, in the engine's words, and what the offgas surplus has to do with its value.

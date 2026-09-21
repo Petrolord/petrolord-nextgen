@@ -24,7 +24,7 @@ Five gas rows are published for this route, and every one was re-run through the
 | 80000.0000 | 514.700000 | 400.000000 | 0.975000 | 1.000000 | 1.000000 | 2.693414 | 2.691988 | 5.295e-4 | subcritical |
 | 25000.0000 | 214.700000 | 30.000000 | 0.900000 | 0.880000 | 0.900000 | 2.030426 | 2.028271 | 1.061e-3 | critical |
 
-The relative difference column is a comparison the digest computes, so it is one of the very few two figure relationships in this course that a lesson may quote. Every row agrees to better than two parts in a thousand. Of the two values printed in that column the subcritical rows carry the smaller one, and that is as much as the column supports saying.
+The relative difference column is a comparison the course computes, so it is one of the very few two figure relationships in this course that a lesson may quote. Every row agrees to better than two parts in a thousand. Of the two values printed in that column the subcritical rows carry the smaller one, and that is as much as the column supports saying.
 
 ## The load was handed over
 

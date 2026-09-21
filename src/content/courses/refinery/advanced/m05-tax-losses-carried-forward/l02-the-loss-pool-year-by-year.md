@@ -34,7 +34,7 @@ From 2033 there is nothing left to set against income, and each year pays 11.576
 
 ## Printed figures and the pool's arithmetic
 
-Each four-decimal figure is rounded on its own, so subtracting two printed figures can differ from a printed result in the last place. For arithmetic, SECTION 23 prints the same years to nine decimals, with the rule: the loss carried forward = the loss carried in - taxable income, never below zero. In 2029 the loss carried in is 117.831965348 million, the taxable income 38.587936000 million, and the loss carried forward 79.244029348 million. Rebuild the pool from those nine-decimal columns.
+Each four-decimal figure is rounded on its own, so subtracting two printed figures can differ from a printed result in the last place. For arithmetic, the course prints the same years to nine decimals, with the rule: the loss carried forward = the loss carried in - taxable income, never below zero. In 2029 the loss carried in is 117.831965348 million, the taxable income 38.587936000 million, and the loss carried forward 79.244029348 million. Rebuild the pool from those nine-decimal columns.
 
 ## What the oracle checks
 

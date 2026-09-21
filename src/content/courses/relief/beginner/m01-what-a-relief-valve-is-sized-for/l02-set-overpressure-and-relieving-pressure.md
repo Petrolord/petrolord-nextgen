@@ -8,7 +8,7 @@ Three pressures stand behind every area this engine returns, and only one of the
 
 ORUBIRI is the gas stream this tier follows. It states a set pressure of 420.000000 psig and an overpressure of 10.000000 percent. The relieving pressure is the set pressure raised by the overpressure fraction and then converted to absolute, using the atmospheric constant of 14.700000000000 psia. That gives 476.700000 psia.
 
-The atmospheric figure is worth a note. It is not exported, so the digest behind this course recovers it by asking the engine three separate questions whose answer is that constant and nothing else, and all three return 14.700000000000. A number nobody can read off the module can still be measured out of its behaviour, and that habit runs through this whole course.
+The atmospheric figure is worth a note. It is not exported, so the work behind this course recovers it by asking the engine three separate questions whose answer is that constant and nothing else, and all three return 14.700000000000. A number nobody can read off the module can still be measured out of its behaviour, and that habit runs through this whole course.
 
 ## What a larger allowance buys
 
@@ -23,7 +23,7 @@ The overpressure a case is allowed changes the relieving pressure, and the relie
 
 Read the direction and stop there. A larger allowance raises the relieving pressure, and a higher relieving pressure needs a smaller area for the same load. Every one of the four rows stays on the same flow branch, so nothing in the table is confounded by a change of regime partway down it.
 
-Do not divide one of those areas by another. The digest behind this course prints a ratio wherever one is entitled to exist, and it prints none between these four rows, which means the relationship between them is not something this engine computes. A ratio nobody worked out reads on the page exactly like one somebody did, and that is how a plausible sentence about a table turns out to be wrong by a factor.
+Do not divide one of those areas by another. Every lesson in this course prints a ratio wherever one is entitled to exist, and it prints none between these four rows, which means the relationship between them is not something this engine computes. A ratio nobody worked out reads on the page exactly like one somebody did, and that is how a plausible sentence about a table turns out to be wrong by a factor.
 
 ## Why the allowance is a decision rather than a number
 

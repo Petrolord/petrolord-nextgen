@@ -6,7 +6,7 @@ Sometimes a planned check turns out not to apply to the job, and the plan record
 
 ## Three requirements, one at a time
 
-H-11 is the pre-commissioning release on QAP-2026-014, a Hold point, Pending at the as-of date 2026-10-15, planned for 2026-11-05. The digest walks a request to set it Not applicable from an empty record to an allowed one.
+H-11 is the pre-commissioning release on QAP-2026-014, a Hold point, Pending at the as-of date 2026-10-15, planned for 2026-11-05. This lesson walks a request to set it Not applicable from an empty record to an allowed one.
 
 | request | canDecideCheckpoint |
 | --- | --- |
@@ -46,4 +46,4 @@ Once H-11 is set aside with all three, it counts as resolved under CHECKPOINT_RE
 
 ## Exercise
 
-In the plan explorer, set H-11 Not applicable three times: with nothing, with a date and a name, then with a date, a name and a reason. Then set S-10 Not applicable with nothing recorded. Read the four answers against SECTION 10. Say what they show about the relationship between a point's type and what the gate asks for before the same status can be recorded.
+In the plan explorer, set H-11 Not applicable three times: with nothing, with a date and a name, then with a date, a name and a reason. Then set S-10 Not applicable with nothing recorded. Read the four answers the lab returns. Say what they show about the relationship between a point's type and what the gate asks for before the same status can be recorded.

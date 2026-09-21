@@ -4,7 +4,7 @@ The rules in this module are strict. An approval is decided only by its assignee
 
 ## The owner decision
 
-Decision D1, taken on 2026-09-18 under AS15, is recorded in the digest as: an approval is decided only by the member it is assigned to, never by the change originator, and an absence is covered by reassigning the approval. The database enforces the same rule.
+Decision D1, taken on 2026-09-18 under AS15, is recorded in the course as: an approval is decided only by the member it is assigned to, never by the change originator, and an absence is covered by reassigning the approval. The database enforces the same rule.
 
 Covering an absence is part of the decision, the answer to the objection that strict assignment would leave changes stuck whenever somebody is on leave.
 

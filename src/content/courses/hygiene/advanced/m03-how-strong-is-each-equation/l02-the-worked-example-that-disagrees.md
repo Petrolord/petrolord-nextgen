@@ -25,7 +25,7 @@ A learner who opens section 1.1.3 and follows the figure gets 27.800000 C. A lea
 
 ## Which one the engine follows
 
-The engine evaluates the equation. What the digest prints is the test rather than a reason for it: the golden pins both example values as errata, cases the engine must stay OUTSIDE the printed tolerance of. An engine edited to agree with the figure's 27.800000 C would turn the suite red.
+The engine evaluates the equation. What the course prints is the test rather than a reason for it: the golden pins both example values as errata, cases the engine must stay OUTSIDE the printed tolerance of. An engine edited to agree with the figure's 27.800000 C would turn the suite red.
 
 That pin tests the engine's behaviour. It leaves the constants where they were. The equation's own inputs, 56.7 and 11.5 for the NIOSH heat REL, 59.9 and 14.1 for the RAL, are still the NIOSH 2016-106 section 8.1 equation, checked for transcription only, and the worked example cannot rescue them, since it disagrees with the equation printed beside it.
 

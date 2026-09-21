@@ -340,7 +340,7 @@ const AbsorberExplorer = ({ initialMode = 'kremser' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored Gas Processing engine, printed to the precision the
-        teaching digest prints. Gas is in MMscfd, pressures in psia, temperatures in degF, acid gas in mol percent and
+        lessons use. Gas is in MMscfd, pressures in psia, temperatures in degF, acid gas in mol percent and
         lbmol a day, solution in gpm, heat in MMBtu an hour and vessels in feet.
       </Note>
     </PanelShell>

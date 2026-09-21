@@ -4,7 +4,7 @@
 
 ## The second input
 
-combustionCo2FromCarbon needs two quantities before it can count anything: a fuel quantity in kilomoles a year and the carbon per kilomole of fuel. The digest states what the second one is: "The carbon per kilomole of fuel is the fuel analysis read as carbon atoms". It is an input. The engine does not look it up and does not assume one.
+combustionCo2FromCarbon needs two quantities before it can count anything: a fuel quantity in kilomoles a year and the carbon per kilomole of fuel. The course states what the second one is: "The carbon per kilomole of fuel is the fuel analysis read as carbon atoms". It is an input. The engine does not look it up and does not assume one.
 
 ## Atom counts are definitional
 
@@ -28,7 +28,7 @@ Every Igbogene figure is invented for this course. The fired heaters burn 482000
 
 ## The same heaters at four carbon contents
 
-Because the carbon per kilomole is an input, the heaters' CO2 moves with it. The digest runs the same fuel quantity at four values:
+Because the carbon per kilomole is an input, the heaters' CO2 moves with it. This lesson runs the same fuel quantity at four values:
 
 | carbon per kmol of fuel | co2Tonnes |
 | --- | --- |

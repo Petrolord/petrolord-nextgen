@@ -1,6 +1,6 @@
 # Only reported results count
 
-Lesson 1 read the type condition. This lesson reads the status condition. isoCompliance.COVERAGE_COUNTING_STATUSES holds two words: Reported and Closed. An internal audit counts towards coverage only when it has reached one of them. Owner decision AS15 Q4 states the same rule in SECTION 23: ISO coverage counts only Reported or Closed audits. The as-of date is 2026-10-15.
+Lesson 1 read the type condition. This lesson reads the status condition. isoCompliance.COVERAGE_COUNTING_STATUSES holds two words: Reported and Closed. An internal audit counts towards coverage only when it has reached one of them. Owner decision AS15 Q4 states the same rule in this course: ISO coverage counts only Reported or Closed audits. The as-of date is 2026-10-15.
 
 {{panel:compliance-readiness-explorer}}
 

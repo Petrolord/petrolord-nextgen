@@ -1,12 +1,12 @@
 # Condensate return and its floor
 
-A failed trap loses steam. In practice, a condensate system that returns too little of its condensate loses hot, treated water that is replaced with colder makeup. This lesson reads condensateReturnValue, one of the energyEfficiency functions SECTION 1 lists, on the Isiokpo condensate system.
+A failed trap loses steam. In practice, a condensate system that returns too little of its condensate loses hot, treated water that is replaced with colder makeup. This lesson reads condensateReturnValue, one of the energyEfficiency functions this course lists, on the Isiokpo condensate system.
 
 {{panel:carbon-efficiency-explorer}}
 
 ## The Isiokpo case
 
-SECTION 16 prints Isiokpo raising its condensate return. Every figure is invented for this course and the emission factor is SYNTHETIC: 16 t of steam an hour, return raised from 0.35 to 0.65, condensate at 92 C against makeup at 27 C, a boiler efficiency of 0.83, fuel at 7.5 USD a GJ, raw water at 0.55 and treatment at 1.35 USD a tonne, 8400 hours, and a factor of 56.1 kg CO2e per GJ.
+The lab prints Isiokpo raising its condensate return. Every figure is invented for this course and the emission factor is SYNTHETIC: 16 t of steam an hour, return raised from 0.35 to 0.65, condensate at 92 C against makeup at 27 C, a boiler efficiency of 0.83, fuel at 7.5 USD a GJ, raw water at 0.55 and treatment at 1.35 USD a tonne, 8400 hours, and a factor of 56.1 kg CO2e per GJ.
 
 The engine prints the result twice, once with the treatment cost priced and once with it left blank:
 
@@ -39,7 +39,7 @@ The same rule runs through this tier: a box nobody filled is named. Here the box
 
 ## What the engine refuses
 
-SECTION 16 prints four refusals:
+The engine returns four refusals:
 
 | the call | the engine says |
 | --- | --- |
@@ -52,4 +52,4 @@ The boiler efficiency here is refused outright, where the trap of lesson three a
 
 ## Exercise
 
-Read the two columns of the SECTION 16 table and the floor note. Say which lines are the same in both columns, which one money line separates them, what complete false beside 121403.28 USD tells a reader, and why the engine calls that figure a floor.
+Read the two columns of the output table and the floor note. Say which lines are the same in both columns, which one money line separates them, what complete false beside 121403.28 USD tells a reader, and why the engine calls that figure a floor.

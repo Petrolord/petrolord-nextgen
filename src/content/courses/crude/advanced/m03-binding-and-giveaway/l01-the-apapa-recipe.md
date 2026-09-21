@@ -25,7 +25,7 @@ The template sets five specifications: RON at least 91, MON at least 81, Sulfur 
 | Butane | 400.0000 | 0.0500 | 21640.0000 |
 | total | 8000.0000 | 1.0000 | 698701.5605 |
 
-The status is optimal. The unit cost is 87.3377 $/bbl. The digest states the rule for the cost column: "Each component's cost $ is its volume bbl times its cost $/bbl, and the total is their sum." The total cost of the cargo is 698701.5605 $.
+The status is optimal. The unit cost is 87.3377 $/bbl. The course states the rule for the cost column: "Each component's cost $ is its volume bbl times its cost $/bbl, and the total is their sum." The total cost of the cargo is 698701.5605 $.
 
 ## What to read first
 

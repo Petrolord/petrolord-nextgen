@@ -6,7 +6,7 @@ A plan says how much crude the month runs. It does not say when the crude arrive
 
 ## The cascade
 
-The digest cascades ABUA's plan from period start 2027-03-01, a period of 31 days, with a cargo size of 400000.00 bbl. The engine's rule, in the digest's words: crude arrives in whole cargoes evenly spaced; each unit runs and each product lifts in equal weekly events.
+The lab cascades ABUA's plan from period start 2027-03-01, a period of 31 days, with a cargo size of 400000.00 bbl. The engine's rule, in its own words: crude arrives in whole cargoes evenly spaced; each unit runs and each product lifts in equal weekly events.
 
 Every date in this module is counted from that period start. None of them is the reader's own date, and none depends on when the schedule is built. Lesson 3 explains why that is a rule and how it is kept.
 
@@ -35,7 +35,7 @@ The value of each receipt is its share of that crude's cost. The Forcados receip
 
 ## The cargo rule
 
-The digest prints the rule: cargoes = the crude run divided by the cargo size, rounded UP to a whole cargo (at least one); the days between cargoes = the 31 days of the period divided by the cargoes, rounded DOWN.
+The course prints the rule: cargoes = the crude run divided by the cargo size, rounded UP to a whole cargo (at least one); the days between cargoes = the 31 days of the period divided by the cargoes, rounded DOWN.
 
 | crude | crude run / cargo size | cargoes | days between cargoes |
 | --- | --- | --- | --- |
@@ -49,7 +49,7 @@ Each crude's cargoes start on the period start and are spread across the 31 days
 
 ## The cargo size is a control
 
-The digest runs the same plan with a cargo size of 150000 bbl: crude receipts 15, and Forcados arrives on 2027-03-01, 2027-03-04, 2027-03-07, 2027-03-10, 2027-03-13, 2027-03-16, 2027-03-19 and 2027-03-22. The crude is the same. At 400000.00 bbl the cascade made crude receipts 6. At 150000 bbl it makes crude receipts 15, and the Forcados dates list above is its answer for one crude.
+The lab runs the same plan with a cargo size of 150000 bbl: crude receipts 15, and Forcados arrives on 2027-03-01, 2027-03-04, 2027-03-07, 2027-03-10, 2027-03-13, 2027-03-16, 2027-03-19 and 2027-03-22. The crude is the same. At 400000.00 bbl the cascade made crude receipts 6. At 150000 bbl it makes crude receipts 15, and the Forcados dates list above is its answer for one crude.
 
 The cargo size changes the schedule and leaves the plan alone. The plan's crude volumes, costs and margin are the same whatever cargo size is chosen, because the schedule is built from the plan and never feeds back into it.
 

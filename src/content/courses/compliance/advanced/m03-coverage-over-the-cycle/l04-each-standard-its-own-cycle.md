@@ -17,7 +17,7 @@ Nothing in the register changes between these rows. The audits, their statuses a
 
 Read the never examined column. It prints 3 in every row. The cycle decides how far back an examination may fall and still count. It cannot create an examination that does not exist, so no cycle length touches clauses 6.1.2, 7.2 and 7.5.3.
 
-Read the covered and stale columns at 1 and 2 years. They print the same pair, 6 and 3. Do not infer from two identical rows that the cycle has no effect below 3 years in general. The table shows this register, and only the four lengths printed. The panel lets you move the cycle yourself; quote only the rows the digest prints.
+Read the covered and stale columns at 1 and 2 years. They print the same pair, 6 and 3. Do not infer from two identical rows that the cycle has no effect below 3 years in general. The table shows this register, and only the four lengths printed. The panel lets you move the cycle yourself; quote only the rows the table prints.
 
 ## Why the cycle is part of the answer
 
@@ -27,7 +27,7 @@ The cycle belongs to the standard. The ORASHI record states the cycle for ISO 14
 
 ## Two standards on the same day
 
-clauseCoverageByStandard reads each clause against its own standard's cycle. The digest prints ISO 14001:2015 at 3 years and ISO 45001:2018 at 1 year, and one clause from each, both last examined on the same day:
+clauseCoverageByStandard reads each clause against its own standard's cycle. The lab prints ISO 14001:2015 at 3 years and ISO 45001:2018 at 1 year, and one clause from each, both last examined on the same day:
 
 | standard | clause | last examined | covered | stale |
 | --- | --- | --- | --- | --- |

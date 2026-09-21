@@ -1,6 +1,6 @@
 # Three independence rules in three apps
 
-Independence is not only an ISO rule in this course. Three of the five apps check that a person does not pass judgement on their own work, and each checks it against a different name on the record. The digest says so in SECTION 19: the Audit & Findings Manager checks the lead auditor against the auditee, and Document Control checks a reviewer against the author. This lesson lays the three side by side.
+Independence is not only an ISO rule in this course. Three of the five apps check that a person does not pass judgement on their own work, and each checks it against a different name on the record. This course records it in one place: the Audit & Findings Manager checks the lead auditor against the auditee, and Document Control checks a reviewer against the author. This lesson lays the three side by side.
 
 {{panel:compliance-readiness-explorer}}
 
@@ -40,7 +40,7 @@ When the author was assigned by mistake and tries to decide the task, it refuses
 
 The principle is one sentence: nobody passes judgement on their own work. What differs is where the engine finds the person's own work. In the ISO register it is a clause ownership, so the check can name several clauses. In the Audit & Findings Manager it is a single named auditee. In Document Control it is the author of one revision.
 
-Each rule compares two names its own record holds. The ISO register compares the examiner with the clause owner, the Audit & Findings Manager compares the lead auditor with the auditee, and Document Control compares the reviewer with the author of the revision. SECTION 19 prints the first comparison, and it points to SECTION 16 and SECTION 8 for the other two.
+Each rule compares two names its own record holds. The ISO register compares the examiner with the clause owner, the Audit & Findings Manager compares the lead auditor with the auditee, and Document Control compares the reviewer with the author of the revision. The lab prints the first comparison, and the Professional and Associate tiers of this course teach the other two.
 
 ## Where the principle continues
 

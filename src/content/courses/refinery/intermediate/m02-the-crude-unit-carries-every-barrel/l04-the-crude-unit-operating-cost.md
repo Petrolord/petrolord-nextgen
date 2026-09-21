@@ -24,7 +24,7 @@ The plan's unit operating cost for the month is 4888554.84. It is the total of t
 
 ## Why the plan cares
 
-Operating cost enters the margin. The digest's formula is margin = product revenue - crude cost - unit operating cost. So the plan weighs every barrel of crude it might buy against three things: the crude's own price, the value of the streams it yields, and the 1.2500 dollars a barrel the crude unit charges to separate it. A crude barrel that would just pay for itself at its purchase price does not pay once the crude unit's charge is added. The plan knows that because the equality row puts the charge on the barrel.
+Operating cost enters the margin. The engine's formula is margin = product revenue - crude cost - unit operating cost. So the plan weighs every barrel of crude it might buy against three things: the crude's own price, the value of the streams it yields, and the 1.2500 dollars a barrel the crude unit charges to separate it. A crude barrel that would just pay for itself at its purchase price does not pay once the crude unit's charge is added. The plan knows that because the equality row puts the charge on the barrel.
 
 The same is true of the downstream units. A barrel of naphtha sent through the reformer is charged 2.9000, and a barrel of gasoil through the hydrotreater 1.8000. Those charges are part of why a stream's value through a unit is what Module 4 prints.
 

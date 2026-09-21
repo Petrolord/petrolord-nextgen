@@ -20,15 +20,15 @@ The grade names are labels. These yields are invented. Where a real crude's yiel
 
 ## Unit yields
 
-A unit's yields are volume fractions of its feed. The digest states the rule plainly: a unit's throughput consumes one barrel of its feed stream for each barrel it runs. So the Naphtha reformer, running one barrel, consumes one barrel of naphtha and makes reformate 0.8500 and offgas 0.1000. The Diesel hydrotreater consumes one barrel of gasoil for each barrel it runs and makes ulsd 0.9700 and offgas 0.0200.
+A unit's yields are volume fractions of its feed. The engine states the rule plainly: a unit's throughput consumes one barrel of its feed stream for each barrel it runs. So the Naphtha reformer, running one barrel, consumes one barrel of naphtha and makes reformate 0.8500 and offgas 0.1000. The Diesel hydrotreater consumes one barrel of gasoil for each barrel it runs and makes ulsd 0.9700 and offgas 0.0200.
 
 The crude unit is different. It has no feed stream, and its yields are the crude yields. Whatever crude runs through it yields in that crude's own proportions.
 
 ## What "data" means here
 
-SECTION 9 prints the yields in the configuration's own tables, beside each crude's cost and availability and each unit's capacity and operating cost. They are inputs the planner types, in the same tables as every limit and price, and the plan is an answer to all of them together.
+The lab prints the yields in the configuration's own tables, beside each crude's cost and availability and each unit's capacity and operating cost. They are inputs the planner types, in the same tables as every limit and price, and the plan is an answer to all of them together.
 
-The stream balance in SECTION 12 counts each stream in barrels: made, consumed, placed and surplus. The kero row is one row, whichever crude made the barrels. Whether a blend meets a specification is the `crude` course's question, answered by its blending tools, and it is not asked here.
+The stream balance in the lab counts each stream in barrels: made, consumed, placed and surplus. The kero row is one row, whichever crude made the barrels. Whether a blend meets a specification is the `crude` course's question, answered by its blending tools, and it is not asked here.
 
 Read the offgas column. Every crude makes some, and both units make some too. Hold that in mind: Module 4 finds out what the plan thinks a barrel of it is worth.
 

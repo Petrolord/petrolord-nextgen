@@ -26,7 +26,7 @@ The count tried is there for the same reason. It says the search ran to its boun
 
 ## One refusal, and the four faults it is not
 
-Four other faults reach this same function, and Section 15 puts each of them beside the refusal that names its own input. That is the difference between being told something is wrong and being told what is wrong, and it is why a refusal here means the cap and not one of those four.
+Four other faults reach this same function, and module five puts each of them beside the refusal that names its own input. That is the difference between being told something is wrong and being told what is wrong, and it is why a refusal here means the cap and not one of those four.
 
 ## The mistake
 

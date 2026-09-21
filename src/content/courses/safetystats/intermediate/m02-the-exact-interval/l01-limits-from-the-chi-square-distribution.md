@@ -11,7 +11,7 @@ For a count of 7 at 95 percent, the engine reads two chi-square quantiles, halve
 | chi-square upper quantile, 16 degrees of freedom | 28.845350723405 |
 | half of it, the count upper limit | 14.422675361702 |
 
-The engine's own countLower is 2.814363051520 and its countUpper is 14.422675361702, the same figures to all twelve decimals the digest prints.
+The engine's own countLower is 2.814363051520 and its countUpper is 14.422675361702, the same figures to all twelve decimals the table above prints.
 
 ## The formula and the method line
 

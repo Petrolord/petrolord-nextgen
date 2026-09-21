@@ -30,7 +30,7 @@ The one out of one PFDavg is the product of those two quantities, so the answer 
 | EKULAMA with detected failures | 0.005288000000 |
 | EKULAMA, undetected failures only | 0.005256000000 |
 
-The two are close, and the channel with diagnostics reads slightly higher. That happens because this channel was given additional dangerous failures when the detected rate was added, so the comparison is between two different channels. The comparison channel also carries no MRT, where this one carries 8 hours. What diagnostics that reclassify an existing rate would buy is a different question, and the digest does not measure it.
+The two are close, and the channel with diagnostics reads slightly higher. That happens because this channel was given additional dangerous failures when the detected rate was added, so the comparison is between two different channels. The comparison channel also carries no MRT, where this one carries 8 hours. What diagnostics that reclassify an existing rate would buy is a different question, and this course does not measure it.
 
 ## The MTTR must be typed
 

@@ -20,7 +20,7 @@ The step is halved seven times over a contiguous sequence. That contiguity is pa
 
 ## What the last column says
 
-Each row's last entry is that row's time over the time at the finest step. The digest computes one such ratio per row and computes nothing between rows, so any statement about how the column behaves is a reading you take rather than a figure you were handed.
+Each row's last entry is that row's time over the time at the finest step. The lab computes one such ratio per row and computes nothing between rows, so any statement about how the column behaves is a reading you take rather than a figure you were handed.
 
 Take the reading deliberately. Across the whole sixty-four-fold refinement the time moves by 0.002015907907 s, which is 0.000007510303 of the time at the finest step. A time prints to six decimals, and that movement is 4031.815814 times half a unit in the sixth decimal, so the step shows in the printed figure. At the stated step of 0.100000 s the time sits 0.000027894862 s above the finest-step time. A time quoted to six decimals carries its step with it, and the step is stated beside the answer.
 

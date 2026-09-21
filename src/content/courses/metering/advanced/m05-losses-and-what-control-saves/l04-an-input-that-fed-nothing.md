@@ -44,4 +44,4 @@ That is the same discipline as the stated venting factors two modules back. The 
 
 ## Exercise
 
-Read the two lossControl refusals in digest SECTION 29 and say which one fires on an input that is present and which on an input that is absent. Then say what the engine would have to do differently for a missing efficiency to become a silent zero.
+Read the two lossControl refusals quoted in this lesson and say which one fires on an input that is present and which on an input that is absent. Then say what the engine would have to do differently for a missing efficiency to become a silent zero.

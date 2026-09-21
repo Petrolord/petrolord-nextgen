@@ -16,7 +16,7 @@ Doing it that way rather than on paper keeps every clamp and every guard in the 
 
 Several of the eighteen graded fields in this course rest on this arithmetic, and the reason is worth stating precisely. Effective protection, the shortfall, the retained fraction and the metal-loss ratio are arithmetic over two typed percentages. No correlation constant is anywhere in the chain. There is no fugacity coefficient in it, no held threshold and no band edge.
 
-Two of those quantities are ratios of engine rates rather than pure arithmetic, and they stay clean for a different reason. The two rates share the whole correlation chain, so the chain divides out exactly and only the corrosion inhibitor arithmetic is left. The capstone generator measures that invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap and checking that the ratio does not move.
+Two of those quantities are ratios of engine rates rather than pure arithmetic, and they stay clean for a different reason. The two rates share the whole correlation chain, so the chain divides out exactly and only the corrosion inhibitor arithmetic is left. The capstone checks measure that invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap and checking that the ratio does not move.
 
 Read the shipped case with that in mind. The rate is 0.754524 mm/yr and the uninhibited rate on the same conditions is 5.203611 mm/yr. Every held constant in the module is in both of those numbers, and every one of them cancels in their ratio.
 

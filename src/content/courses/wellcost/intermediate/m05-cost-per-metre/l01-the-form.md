@@ -31,7 +31,7 @@ The rig is paid for 120 hours, and the answer is 770 USD/m.
 
 ## What that fixture is, and is not
 
-It is a standalone worked example. It is not a section of the golden programme, and the digest flags it as such.
+It is a standalone worked example. It is not a section of the golden programme, and the course flags it as such.
 
 The giveaway is the 16 hour trip. No trip in the golden schedule takes 16 hours. The deepest one, the round trip at total depth, is 12 productive hours, and the trip at 2,000 m is 8. So the fixture describes a section of a well that is not the well the rest of this course is about.
 

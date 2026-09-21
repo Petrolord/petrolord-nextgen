@@ -22,9 +22,9 @@ That is the exchange rate at which the invented chain's pump price meets the inv
 
 ## Two methods for one breakeven
 
-The oracle that checks this engine solves the breakeven in closed form. The engine bisects instead. The digest prints that split and no reason for it.
+The oracle that checks this engine solves the breakeven in closed form. The engine bisects instead. The course records that split and no reason for it.
 
-What the digest does print is how the engine's search behaves. priceSensitivity re-prices the whole chain at each value of the driver and hands solveCrossing the bracket from the lowest to the highest value swept. If the price does not cross the cap inside that range, the engine says so and returns no value.
+What the course does record is how the engine's search behaves. priceSensitivity re-prices the whole chain at each value of the driver and hands solveCrossing the bracket from the lowest to the highest value swept. If the price does not cross the cap inside that range, the engine says so and returns no value.
 
 The two methods reaching the same exchange rate is what the oracle's check is for.
 

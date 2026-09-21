@@ -271,7 +271,7 @@ const RotatingLearningPage = () => {
               <CardDescription>
                 One injection pump, one gas booster train and the published golden cases, on the vendored Pump Station
                 Designer and Compressor Station Designer engines. Every number on this page and inside every panel is a
-                return value from those engines, pinned by a test file against the teaching digest. Pump work is in gpm
+                return value from those engines, pinned by a test file against the figures the lessons quote. Pump work is in gpm
                 and feet of head, gas work in MMscfd and psia and degF, and power in horsepower and kilowatts. Nothing
                 in this course is a distribution, so no percentile label belongs anywhere in it.
               </CardDescription>

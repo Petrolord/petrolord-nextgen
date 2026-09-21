@@ -21,7 +21,7 @@ Read the two columns as a description of what each style does with pressure. A s
 
 ## The spread in the recovery factor
 
-The digest prints the spread rather than leaving it to be described. The largest FL in the table is 0.970000 and the smallest is 0.550000. The difference, the first less the second, is 0.420000, and the ratio, the first over the second, is 1.763636.
+This lesson prints the spread rather than leaving it to be described. The largest FL in the table is 0.970000 and the smallest is 0.550000. The difference, the first less the second, is 0.420000, and the ratio, the first over the second, is 1.763636.
 
 That spread is why the style is a sizing decision. The allowable drop is built from FL, so the same service on two styles with different FL chokes at two different outlet pressures, and a valve type chosen for cost or for space can move a boundary that the process never asked to move.
 
@@ -37,4 +37,4 @@ Nothing in this course is graded on a number that rests on these table values, a
 
 ## Exercise
 
-Write down the FL and the xT the table carries for the cage guided globe and for the full bore ball, then write down the largest and the smallest FL in the table with the difference and the ratio the digest prints between them. Say in one sentence what you would ask a vendor for before trusting either row.
+Write down the FL and the xT the table carries for the cage guided globe and for the full bore ball, then write down the largest and the smallest FL in the table with the difference and the ratio the lesson prints between them. Say in one sentence what you would ask a vendor for before trusting either row.

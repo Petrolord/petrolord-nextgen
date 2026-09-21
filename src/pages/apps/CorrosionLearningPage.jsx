@@ -282,7 +282,7 @@ const CorrosionLearningPage = () => {
               <CardDescription>
                 Six teaching streams, the published golden and the live studio&apos;s own shipped defaults, on the
                 vendored Corrosion & Integrity engine. Every number on this page and inside every panel is a return
-                value from that engine, pinned by a test file against the teaching digest. The engine works in the units
+                value from that engine, pinned by a test file against the figures the lessons quote. The engine works in the units
                 its correlations are published in: degrees Celsius, bar, millimetres a year, metres a second, metres,
                 kilograms a cubic metre and pascal seconds. Nothing in this course is a distribution, so no percentile
                 label belongs anywhere in it.

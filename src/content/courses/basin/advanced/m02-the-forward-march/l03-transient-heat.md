@@ -16,7 +16,7 @@ At 80 Ma the Upper Shale lands and the source drops to 3000 m centre depth. Its 
 
 At 120 Ma the Mid Sand's arrival ran the other way: 96.99499328861161 at the step, relaxing down through 94.67786299953347 to 94.04446278867474. There the basal-gradient extrapolation overshot, because the sand conducts well and the true new steady profile is cooler at the source than the old gradient predicted.
 
-Neither direction is an artefact to fix; both are the honest physics of a column digesting a geometry change, resolved at 1 Ma. The Associate tier's fourth omission, remember, was precisely that a steady solver has nothing to say during these episodes.
+Neither direction is an artefact to fix; both are the honest physics of a column absorbing a geometry change, resolved at 1 Ma. The Associate tier's fourth omission, remember, was precisely that a steady solver has nothing to say during these episodes.
 
 ## Why it matters for maturity
 

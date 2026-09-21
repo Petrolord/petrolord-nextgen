@@ -32,7 +32,7 @@ The reason matters here specifically. The factor multiplies the duty and the rel
 
 ## What it does to the letter
 
-At an environment factor of 0.300000 the chain lands on orifice G where at 1.000000 it lands on K, which is 3 rungs. The digest's ranking of the single-input changes puts the factor first of six on the duty at 3.333333333333 and joint first on the letter at 3 rungs, while the drainage answer, the other credit in the fire case, moves the duty by 1.642857142857 and the letter by 1 rung.
+At an environment factor of 0.300000 the chain lands on orifice G where at 1.000000 it lands on K, which is 3 rungs. The course's ranking of the single-input changes puts the factor first of six on the duty at 3.333333333333 and joint first on the letter at 3 rungs, while the drainage answer, the other credit in the fire case, moves the duty by 1.642857142857 and the letter by 1 rung.
 
 So the factor reaches further than the drainage answer on both rankings, and, like that answer, it is a judgment leaving no trace in the number it produces. Meet a low factor and a drainage credit together and you are looking at both credits this case allows, the longer-reaching of them typed off a table.
 

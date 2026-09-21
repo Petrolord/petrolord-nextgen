@@ -12,7 +12,7 @@ On a blend, the curve it reads is the blend's own curve from blendDistillationCu
 
 ## The Kwale blend, read at five points
 
-The digest prints the Kwale blend, Kwale Light and Ughelli Medium at 55 and 45, read at five volume percents.
+The lab prints the Kwale blend, Kwale Light and Ughelli Medium at 55 and 45, read at five volume percents.
 
 | volume percent | temperature F |
 | --- | --- |
@@ -32,7 +32,7 @@ For the Kwale blend, the engine's T50 is 587.3184 F. For the studio's default pa
 
 ## What interpolation assumes
 
-Linear interpolation takes the curve as a straight line between two of its points. That is the rule the digest states for both functions, and it prints nothing about how far any real curve departs from a straight line between its points, so this course does not either. What it does print is where the straight stretches run: between the 14 points of the Kwale blend's curve.
+Linear interpolation takes the curve as a straight line between two of its points. That is the rule the engine states for both functions, and it prints nothing about how far any real curve departs from a straight line between its points, so this course does not either. What it does print is where the straight stretches run: between the 14 points of the Kwale blend's curve.
 
 The approximation is stated, and it is the same one used everywhere in the engine. volumePercentAt reads linearly between points to build the blend's curve, and temperatureAtVolumePercent reads linearly between points to get a temperature back from it. One rule, both directions.
 

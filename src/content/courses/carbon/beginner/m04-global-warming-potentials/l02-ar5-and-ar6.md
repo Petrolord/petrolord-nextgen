@@ -21,14 +21,14 @@ The two fossil sets hold the same gas on the same horizon and differ only in the
 
 ## The Igbogene inventory on the two fossil sets
 
-The digest rebuilds the Igbogene inventory on each set. Here are the two fossil sets:
+The lab rebuilds the Igbogene inventory on each set. Here are the two fossil sets:
 
 | set | Scope 1 tCO2e | Scope 2 tCO2e | total tCO2e | total less the course set |
 | --- | --- | --- | --- | --- |
 | IPCC AR6 GWP100, fossil methane | 30030.777 | 12915.000 | 42945.777 | 0.000 |
 | IPCC AR5 GWP100, fossil methane | 30062.438 | 12915.000 | 42977.438 | 31.661 |
 
-The same Igbogene, with the same activity on every line, totals 42945.777 tCO2e on AR6 and 42977.438 tCO2e on AR5. The digest's arithmetic puts the AR5 total 31.661 tCO2e above the course set. Scope 2 is 12915.000 on both, because it is a CO2 line with a GWP of 1 on every set.
+The same Igbogene, with the same activity on every line, totals 42945.777 tCO2e on AR6 and 42977.438 tCO2e on AR5. The course's arithmetic puts the AR5 total 31.661 tCO2e above the course set. Scope 2 is 12915.000 on both, because it is a CO2 line with a GWP of 1 on every set.
 
 The methane lines are where the two reports part:
 
@@ -51,4 +51,4 @@ Switch the panel between the two fossil sets. The CO2 lines hold still and the t
 
 Read the two fossil rows of the inventory table and the methane lines on each. Say what the relationship between the two totals shows about what changes when the same inventory is converted on a different report.
 
-Self check: the total is 42945.777 tCO2e on AR6 fossil and 42977.438 tCO2e on AR5 fossil, 31.661 tCO2e apart by the digest's arithmetic. The activity on every line is the same and Scope 2 is 12915.000 on both. Only the methane lines move, from 485.922 to 489.183 for the flare and from 4231.600 to 4260.000 for the vented methane, because the methane lines are the only Igbogene lines whose GWP differs between the two sets.
+Self check: the total is 42945.777 tCO2e on AR6 fossil and 42977.438 tCO2e on AR5 fossil, 31.661 tCO2e apart by the course's arithmetic. The activity on every line is the same and Scope 2 is 12915.000 on both. Only the methane lines move, from 485.922 to 489.183 for the flare and from 4231.600 to 4260.000 for the vented methane, because the methane lines are the only Igbogene lines whose GWP differs between the two sets.

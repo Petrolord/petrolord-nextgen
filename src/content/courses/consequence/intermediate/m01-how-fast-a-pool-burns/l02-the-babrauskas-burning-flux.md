@@ -41,4 +41,4 @@ The refusal tells you the way forward: supply your own m"inf and k beta product,
 
 ## Exercise
 
-In the fire panel, set a 2 m pool and read the burning flux for heptane, gasoline and methanol. Check the three values against the digest row at 2 m (0.089809, 0.054175 and 0.015000). Then explain, from the k beta products in the table, why gasoline at 2 m sits closer to its own m"inf than heptane does to its own.
+In the fire panel, set a 2 m pool and read the burning flux for heptane, gasoline and methanol. Check the three values against the engine's figures at 2 m (0.089809, 0.054175 and 0.015000). Then explain, from the k beta products in the table, why gasoline at 2 m sits closer to its own m"inf than heptane does to its own.

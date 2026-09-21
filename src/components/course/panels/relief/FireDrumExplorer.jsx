@@ -474,7 +474,7 @@ const FireDrumExplorer = ({ initialMode = 'wetted' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored pressure relief engine on the teaching streams,
-        printed to the precision the teaching digest prints. Wetted areas are in ft2, duties in Btu/hr, loads in lb/hr,
+        printed to the precision the lessons use. Wetted areas are in ft2, duties in Btu/hr, loads in lb/hr,
         velocities in ft/s, lengths in ft and droplets in micron. The vessel in a fire and the drum behind the valve do
         not share a number: the drum takes a rate at drum conditions, which this engine is handed rather than deriving
         from a relief case.

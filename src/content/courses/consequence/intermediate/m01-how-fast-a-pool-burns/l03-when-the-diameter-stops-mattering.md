@@ -20,7 +20,7 @@ The engine swept six fuels over seven stated diameters:
 
 ## A small pool burns slowly
 
-At 0.5 m heptane burns at 0.042728 kg/(m2 s), which the digest derives as 42.31 percent of its asymptote. The exponential term in the formula carries that shortfall: the smaller the product k beta D, the further below m"inf the pool burns, and for heptane at 0.5 m that product is small enough to leave more than half of the asymptote unreached. The same is true of the other fuels at 0.5 m: lpg reads 0.049838 against its 0.099, and gasoline 0.035753 against its 0.055. A burning flux read from a small pool therefore understates what the same fuel does in a large bund, and the formula corrects for exactly that.
+At 0.5 m heptane burns at 0.042728 kg/(m2 s), which the course derives as 42.31 percent of its asymptote. The exponential term in the formula carries that shortfall: the smaller the product k beta D, the further below m"inf the pool burns, and for heptane at 0.5 m that product is small enough to leave more than half of the asymptote unreached. The same is true of the other fuels at 0.5 m: lpg reads 0.049838 against its 0.099, and gasoline 0.035753 against its 0.055. A burning flux read from a small pool therefore understates what the same fuel does in a large bund, and the formula corrects for exactly that.
 
 ## The k beta product sets the pace
 

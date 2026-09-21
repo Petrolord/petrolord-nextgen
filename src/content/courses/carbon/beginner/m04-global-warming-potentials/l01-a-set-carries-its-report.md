@@ -23,7 +23,7 @@ Every set's label names its report, its horizon and which methane value it holds
 
 The inventory carries the set's label as gwpSetLabel. The complete Igbogene inventory reports gwpSetLabel: IPCC AR6 GWP100, fossil methane. An intensity built from it carries the set too, in its comparability note: "Comparable only with an intensity on the same boundary (Igbogene flow station and gas plant, inlet to export) and the same global warming potential set (IPCC AR6 GWP100, fossil methane)."
 
-The digest puts the rule in one line: an inventory on one set is not comparable with one on another.
+The course puts the rule in one line: an inventory on one set is not comparable with one on another.
 
 ## A set is declared or it is not
 
@@ -41,7 +41,7 @@ An undeclared set stops the methane. In the Igbogene first pass, with no set dec
 
 ## The course's set
 
-Every inventory in this course is computed on "IPCC AR6 GWP100, fossil methane", CH4 29.8 and N2O 273. Every lesson that converts methane names it. The other three sets are printed beside it, and the digest rebuilds the Igbogene inventory on each.
+Every inventory in this course is computed on "IPCC AR6 GWP100, fossil methane", CH4 29.8 and N2O 273. Every lesson that converts methane names it. The other three sets are printed beside it, and the lab rebuilds the Igbogene inventory on each.
 
 In practice, GWP values are revised between IPCC assessment reports, so the same tonne of methane has more than one published potential.
 

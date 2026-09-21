@@ -27,11 +27,11 @@ The blend's value at a temperature is the volume-weighted sum of what each crude
 | 760 | 71.2903 |
 | 920 | 85.4516 |
 
-The digest prints the count: of 11 temperatures the two crudes measured between them, the blend's curve keeps 8. The three Kwale Light temperatures missing from the table are 75, 1030 and 1350 F, each outside the stretch from 110 F to 920 F where Ebocha says anything.
+The lab prints the count: of 11 temperatures the two crudes measured between them, the blend's curve keeps 8. The three Kwale Light temperatures missing from the table are 75, 1030 and 1350 F, each outside the stretch from 110 F to 920 F where Ebocha says anything.
 
-## The reason the digest gives
+## The reason the course gives
 
-The digest gives the reason in one sentence: "A temperature at which some crude's curve says nothing is left out, because the blend's value there is not known either." Ebocha's curve says nothing at 75, 1030 or 1350 F. Its first point is 4 at 110, which is not 0 percent, and its last is 88 at 920, which is not 100 percent, so the Associate tier's rule gives it no reading outside that stretch: the value is unknown. The engine does not read Ebocha as 0 percent below 110 F or as 100 percent above 920 F.
+The course gives the reason in one sentence: "A temperature at which some crude's curve says nothing is left out, because the blend's value there is not known either." Ebocha's curve says nothing at 75, 1030 or 1350 F. Its first point is 4 at 110, which is not 0 percent, and its last is 88 at 920, which is not 100 percent, so the Associate tier's rule gives it no reading outside that stretch: the value is unknown. The engine does not read Ebocha as 0 percent below 110 F or as 100 percent above 920 F.
 
 Leaving the temperature out keeps the blend's curve to what is known. The blend's curve here starts at 110 F with 3.5217 percent and stops at 920 F with 85.4516 percent.
 
@@ -41,4 +41,4 @@ A shorter curve has consequences for every question asked of it. Module 3 of thi
 
 ## Exercise
 
-Read the Ebocha partial assay's first and last TBP points, 4 at 110 and 88 at 920, and the blend's first and last points in the table. Say why the blend's curve starts and stops at those two temperatures, and quote the digest's reason for leaving out the rows at 75, 1030 and 1350 F.
+Read the Ebocha partial assay's first and last TBP points, 4 at 110 and 88 at 920, and the blend's first and last points in the table. Say why the blend's curve starts and stops at those two temperatures, and quote this lesson's reason for leaving out the rows at 75, 1030 and 1350 F.

@@ -304,7 +304,7 @@ const ReliefLearningPage = () => {
                 One gas case, one liquid case, one steam case, one vessel in a pool fire, one flare knockout drum, one
                 vessel depressuring into a flare, and the published golden cases, on the vendored pressure relief engine.
                 Every number on this page and inside every panel is a return value from that engine, pinned by a test
-                file against the teaching digest. Flows are in lb/hr for gas and steam and gpm for liquid, pressures in
+                file against the figures the lessons quote. Flows are in lb/hr for gas and steam and gpm for liquid, pressures in
                 psia except where a row says psig, temperatures in degR, areas in in2, wetted areas in ft2, duties in
                 Btu/hr, lengths in ft, times in s, distances in m and radiant flux in kW/m2. Back pressure here always
                 means the pressure at the relief valve OUTLET. Nothing in this course is a distribution, so no percentile

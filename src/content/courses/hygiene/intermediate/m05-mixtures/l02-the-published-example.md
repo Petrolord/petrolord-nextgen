@@ -13,7 +13,7 @@ The worked example of 29 CFR 1910.1000(d)(2) is 500.000000 against 1000.000000, 
 
 ## Why a printed example matters
 
-The regulation prints the rule and a case worked through it. The evidence class for the mixture index is published and reproduced, and the digest defines the class exactly: at least one value a source prints is reproduced by the engine at the precision the source prints it, so two people copying the same page wrongly would be caught by that value. That is what the printed case buys here.
+The regulation prints the rule and a case worked through it. The evidence class for the mixture index is published and reproduced, and the course defines the class exactly: at least one value a source prints is reproduced by the engine at the precision the source prints it, so two people copying the same page wrongly would be caught by that value. That is what the printed case buys here.
 
 The rest is the instructor's point. An additive index is simple enough that a careful coder would very likely get it right, and the printed case is what turns a likelihood into a measured result. It is also the case to rerun first whenever you doubt a tool.
 

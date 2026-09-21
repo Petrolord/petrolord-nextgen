@@ -22,4 +22,4 @@ One answer in this tier, the fire vent capacity, is refused by the engine and is
 
 ## Exercise
 
-Read the geometry block in digest SECTION 25 and say which of the three tank answers in this tier would move if the design liquid level changed while the diameter and the shell height stayed as they are. Name the returned figure in that block that would move with it.
+Read the capacity view of the venting explorer and say which of the three tank answers in this tier would move if the design liquid level changed while the diameter and the shell height stayed as they are. Name the returned figure in that view that would move with it.

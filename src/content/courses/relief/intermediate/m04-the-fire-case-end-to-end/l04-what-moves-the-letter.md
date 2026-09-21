@@ -24,7 +24,7 @@ The table is as useful for the columns that stay still. The drainage answer, the
 
 ## The same table, ranked
 
-A ranking is an answer, so the digest computes this one rather than leaving it to be read off the rows above by eye.
+A ranking is an answer, so the course computes this one rather than leaving it to be read off the rows above by eye.
 
 | changed input | duty factor against the stated case | direction | orifice | rungs moved on the ladder |
 | --- | --- | --- | --- | --- |

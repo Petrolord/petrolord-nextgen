@@ -20,7 +20,7 @@ The two heat stress rows are the NIOSH 2016-106 section 8.1 equation, checked fo
 
 ## The margin of each pin
 
-Each pin sits a different distance from its tolerance. The transposed digit sits 199.794001 tolerances away and no plausible edit brings the engine near it. The Table A-1 row sits 1.836177 tolerances away and the RAL example 1.904167, so a small drift in either door would bring the engine inside the printed tolerance and the case would go red. That is the pin doing its job: what the digest states of pinning is that it turns the typo into a test, and that dropping the row would leave the typo invisible.
+Each pin sits a different distance from its tolerance. The transposed digit sits 199.794001 tolerances away and no plausible edit brings the engine near it. The Table A-1 row sits 1.836177 tolerances away and the RAL example 1.904167, so a small drift in either door would bring the engine inside the printed tolerance and the case would go red. That is the pin doing its job: what the course states of pinning is that it turns the typo into a test, and that dropping the row would leave the typo invisible.
 
 ## What a pin cannot do
 

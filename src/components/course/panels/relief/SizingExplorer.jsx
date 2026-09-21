@@ -486,7 +486,7 @@ const SizingExplorer = ({ initialMode = 'routes' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored pressure relief engine on the teaching streams,
-        printed to the precision the teaching digest prints. Flows are in lb/hr for gas and steam and gpm for liquid,
+        printed to the precision the lessons use. Flows are in lb/hr for gas and steam and gpm for liquid,
         pressures in psia except where a row says psig, temperatures in degR, and areas in in2. Back pressure here always
         means the pressure at the relief valve OUTLET, which is not what that phrase means anywhere else on this
         platform.

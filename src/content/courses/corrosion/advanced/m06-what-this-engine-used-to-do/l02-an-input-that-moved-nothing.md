@@ -16,7 +16,7 @@ A factor of one was also the least limiting possible answer to a question the mo
 
 ## Where it stands now
 
-The rate is strictly monotonic in pH across the whole band above the reference: from 4.724817 mm/yr at pH 4.000000 down to 0.014941 mm/yr at pH 9.000000, a factor of 316.227766, with every step down the column smaller than the one above it. The generator asserts that ordering on every rebuild rather than quoting it.
+The rate is strictly monotonic in pH across the whole band above the reference: from 4.724817 mm/yr at pH 4.000000 down to 0.014941 mm/yr at pH 9.000000, a factor of 316.227766, with every step down the column smaller than the one above it. The course asserts that ordering on every rebuild rather than quoting it.
 
 Below the reference the engine refuses, and the refusal names the reference so a caller can print the boundary:
 

@@ -12,11 +12,11 @@ You can read that pair as "at 530 F, the volume percent is 50", holding the temp
 
 ## Amounts add
 
-A volume percent on the curve is a share of the barrels distilled. The digest states the engine's rule for it: "Yields are additive on volume: at any temperature the blend has distilled the volume-weighted sum of what each crude has distilled." So at a fixed temperature, the blend's volume percent is the volume-weighted sum of the crudes' volume percents.
+A volume percent on the curve is a share of the barrels distilled. The course states the engine's rule for it: "Yields are additive on volume: at any temperature the blend has distilled the volume-weighted sum of what each crude has distilled." So at a fixed temperature, the blend's volume percent is the volume-weighted sum of the crudes' volume percents.
 
 ## Temperatures do not add
 
-The rule the digest gives is a rule for volume percents at a fixed temperature. It gives no rule that weights temperatures, and the engine applies none. In the digest's words, blendDistillationCurves forms the blend's curve "at every temperature any component measured". It does not average temperatures.
+The rule the course states is a rule for volume percents at a fixed temperature. It gives no rule that weights temperatures, and the engine applies none. In the engine's words, blendDistillationCurves forms the blend's curve "at every temperature any component measured". It does not average temperatures.
 
 So blendDistillationCurves forms the blend's curve at every temperature any component measured, weights the volume percents at each one, and leaves the temperatures exactly as the crudes reported them.
 
@@ -37,7 +37,7 @@ Module 2 reads that temperature. It prints the engine's reading off the blend's 
 
 ## Where the cuts come from
 
-A cut's yield is read off a curve at two temperatures: in the Associate tier's words, the curve at the cut's upper bound minus the curve at its lower bound. Both readings are volume percents at fixed temperatures, which is the form in which the blend's curve is built. Module 3 of this tier takes the Kwale blend's cut yields off that curve, and the digest prints them beside the same yields weighted on volume from the two crudes.
+A cut's yield is read off a curve at two temperatures: in the Associate tier's words, the curve at the cut's upper bound minus the curve at its lower bound. Both readings are volume percents at fixed temperatures, which is the form in which the blend's curve is built. Module 3 of this tier takes the Kwale blend's cut yields off that curve, and the lab prints them beside the same yields weighted on volume from the two crudes.
 
 ## Exercise
 

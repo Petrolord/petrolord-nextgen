@@ -1,6 +1,6 @@
 # The unabated gap
 
-The path prints one more column beside the emissions and the target: the unabated gap. SECTION 22 prints it for every year on the invented AGBOR records, and the engine says in its own words what the gap is and what it is not. Every figure here is invented for this course, on the course's set, IPCC AR6 GWP100, fossil methane.
+The path prints one more column beside the emissions and the target: the unabated gap. The lab prints it for every year on the invented AGBOR records, and the engine says in its own words what the gap is and what it is not. Every figure here is invented for this course, on the course's set, IPCC AR6 GWP100, fossil methane.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -17,7 +17,7 @@ The path prints one more column beside the emissions and the target: the unabate
 | 2032 | 40640.276 | 41674.491 | 0.000 |
 | 2033 | 40640.276 | 39270.193 | 1370.083 |
 
-Three years print a positive gap: 2027 at 494.298 t, 2028 at 798.595 t and 2033 at 1370.083 t. The other five print 0.000. SECTION 22 states the rule, checked in every row: emissions are the baseline less the tonnes abated, and the unabated gap is emissions less the target where that is positive, else 0.000. The engine prints finalGapTonnes 1370.083, the gap in the end year, and firstShortfallYear 2027.
+Three years print a positive gap: 2027 at 494.298 t, 2028 at 798.595 t and 2033 at 1370.083 t. The other five print 0.000. The course states the rule, checked in every row: emissions are the baseline less the tonnes abated, and the unabated gap is emissions less the target where that is positive, else 0.000. The engine prints finalGapTonnes 1370.083, the gap in the end year, and firstShortfallYear 2027.
 
 ## The engine's note
 
@@ -33,11 +33,11 @@ The emissions stay at 40640.276 t from 2031 to 2033 while the target keeps falli
 
 ## A gap on an upper bound
 
-The 15460.000 t the path counts from 2031 includes both heater measures in full, and SECTION 20's interaction note calls a cumulative total built that way an upper bound. The emissions in the path rest on that total. In practice, if the two heater measures overlap, the emissions they leave are higher than the path shows, and the gap with them.
+The 15460.000 t the path counts from 2031 includes both heater measures in full, and the curve's interaction note calls a cumulative total built that way an upper bound. The emissions in the path rest on that total. In practice, if the two heater measures overlap, the emissions they leave are higher than the path shows, and the gap with them.
 
 ## Every measure at its whole claim
 
-Each measure on the path counts in full from its start year (SECTION 22). So the gap of 1370.083 t in 2033 is what remains with every measure counted at its whole claim, Flare gas recovery at 6200 t a year and the others as costed. The path has no row in which a measure delivers part of its claim.
+Each measure on the path counts in full from its start year (lesson two). So the gap of 1370.083 t in 2033 is what remains with every measure counted at its whole claim, Flare gas recovery at 6200 t a year and the others as costed. The path has no row in which a measure delivers part of its claim.
 
 ## Where the gap goes next
 

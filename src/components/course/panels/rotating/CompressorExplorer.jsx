@@ -628,7 +628,7 @@ const CompressorExplorer = ({ initialMode = 'stage' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored Compressor Station Designer engine on the teaching
-        train, printed to the precision the teaching digest prints. Rates are in MMscfd, pressures in psia, temperatures
+        train, printed to the precision the lessons use. Rates are in MMscfd, pressures in psia, temperatures
         in degF, head in ft lbf per lbm, power in horsepower and cooling duty in Btu per hr.
       </Note>
     </PanelShell>

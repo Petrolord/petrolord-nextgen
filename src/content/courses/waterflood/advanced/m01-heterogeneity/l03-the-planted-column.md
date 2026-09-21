@@ -44,7 +44,7 @@ The design value is exactly 250. The fit returns a value one ulp above it.
 
 The reason is that $k_{50}$ comes from the regression INTERCEPT, exponentiated. The intercept is a sum of products of quantiles and logarithms, each rounded to a double, and $\exp(\ln 250)$ is not exactly 250 in binary arithmetic. Five layers of that and the last bit moves.
 
-The right response is to report $k_{50}$ as 250, record the raw double in the digest, and never key an assessment on the trailing digit. The wrong response is to look for a bug. Knowing which of those you are looking at is the skill.
+The right response is to report $k_{50}$ as 250, record the raw double in your notes, and never key an assessment on the trailing digit. The wrong response is to look for a bug. Knowing which of those you are looking at is the skill.
 
 ## The layer column as built
 

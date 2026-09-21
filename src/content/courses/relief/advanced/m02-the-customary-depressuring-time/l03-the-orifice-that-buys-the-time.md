@@ -10,13 +10,13 @@ The first way is to rearrange. Take the closed form of the march, solve it for t
 
 The second way is to bisect on the engine's own output. Guess a diameter, run the march, read the time, and narrow the bracket until the time is the one you asked for. It is slower, and it answers the question you actually asked.
 
-The digest takes the second way. The orifice at which the AFIESERE vessel takes exactly fifteen minutes, bisected on the engine's own time, is 0.682646 in, where the march returns 900.000000 s.
+The lab takes the second way. The orifice at which the AFIESERE vessel takes exactly fifteen minutes, bisected on the engine's own time, is 0.682646 in, where the march returns 900.000000 s.
 
 ## Why the second way is worth the cost
 
 Read that result against the sweep. An orifice of 0.750000 in gives 745.608268 s and an orifice of 0.500000 in gives 1677.618587 s, so the answer had to lie between them and the bisection put it at 0.682646 in.
 
-Anything you could have got wrong in a rearrangement is now impossible to get wrong, because the answer is defined as a diameter at which the engine returned the target. The digest says it bisects, and names the function it bisected on, so a reader can repeat it. A figure produced by a solve against the engine and a figure produced by algebra beside the engine are different kinds of claim, and only one of them can be reproduced by running the thing under test.
+Anything you could have got wrong in a rearrangement is now impossible to get wrong, because the answer is defined as a diameter at which the engine returned the target. The lab says it bisects, and names the function it bisected on, so a reader can repeat it. A figure produced by a solve against the engine and a figure produced by algebra beside the engine are different kinds of claim, and only one of them can be reproduced by running the thing under test.
 
 ## What the answer is and is not
 
@@ -30,4 +30,4 @@ Whenever a route answers a question in one direction and you need the other, ask
 
 ## Exercise
 
-Describe the two ways of answering an inverse question and say which one the digest uses. Record the orifice that gives exactly fifteen minutes and the time the march returns at it, then record the two sweep rows that bracket it. Write one sentence on what that diameter is a property of, and one on why the standard orifice ladder does not apply to it.
+Describe the two ways of answering an inverse question and say which one the lab uses. Record the orifice that gives exactly fifteen minutes and the time the march returns at it, then record the two sweep rows that bracket it. Write one sentence on what that diameter is a property of, and one on why the standard orifice ladder does not apply to it.

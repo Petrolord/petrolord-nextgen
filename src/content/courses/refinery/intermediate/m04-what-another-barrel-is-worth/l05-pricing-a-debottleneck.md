@@ -1,12 +1,12 @@
 # Pricing a debottleneck
 
-A stream value prices one more barrel of a stream. A planner also asks the same question of a unit: what is one more barrel of capacity worth? That is the price of a debottleneck, and the digest answers it for the Naphtha reformer by solving ABUA again at six capacities.
+A stream value prices one more barrel of a stream. A planner also asks the same question of a unit: what is one more barrel of capacity worth? That is the price of a debottleneck, and the lab answers it for the Naphtha reformer by solving ABUA again at six capacities.
 
 {{panel:refinery-plan-explorer}}
 
 ## The sweep
 
-The reformer's capacity is stepped and everything else stays as typed. The digest prints the margin at each step, the change in margin and the change in capacity, and divides one by the other:
+The reformer's capacity is stepped and everything else stays as typed. The lab prints the margin at each step, the change in margin and the change in capacity, and divides one by the other:
 
 | reformer capacity (bbl) | reformer utilisation (percent) | margin | change in margin | change in capacity (bbl) | margin gained per extra barrel of capacity |
 | --- | --- | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ This is why a debottleneck is priced from the plan and never from the unit on it
 
 ## A step is an average
 
-The gain per extra barrel is a change over a step of 20000.00 bbl. When the reformer fills partway through a step, as between 400000.00 and 420000.00, the figure averages a stretch where extra room earns and a stretch where it does not. Finer steps give a sharper figure. The digest's steps are the ones it prints, and the lesson quotes those.
+The gain per extra barrel is a change over a step of 20000.00 bbl. When the reformer fills partway through a step, as between 400000.00 and 420000.00, the figure averages a stretch where extra room earns and a stretch where it does not. Finer steps give a sharper figure. The lab's steps are the ones it prints, and the lesson quotes those.
 
 ## From a figure to a decision
 

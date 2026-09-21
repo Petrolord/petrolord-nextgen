@@ -217,7 +217,7 @@ const FdpLearningPage = () => {
               <CardDescription>
                 One development plan, one project schedule and the published golden cases, on the vendored FDP Accelerator
                 and Project Management Pro engines. Every number on this page and inside every panel is a return value from
-                those engines, pinned by a test file against the teaching digest. {EXCEEDANCE_DEFINITION}
+                those engines, pinned by a test file against the figures the lessons quote. {EXCEEDANCE_DEFINITION}
                 {' '}Only a reserves distribution carries one, and only one fluid at a time: that fluid&apos;s low case is
                 {' '}{OUTCOME_LABELS.p90} and its high case {OUTCOME_LABELS.p10}. A capex, a rate of return, a cost, a duration,
                 a schedule index and a ratio never do.

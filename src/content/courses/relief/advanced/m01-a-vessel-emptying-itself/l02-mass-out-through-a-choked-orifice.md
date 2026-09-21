@@ -12,7 +12,7 @@ It also earns the march an assumption, which the engine states rather than hides
 
 ## The floor the assumption has
 
-Every blowdown call returns the pressure below which the choked assumption stops holding. On AFIESERE that floor is 26.758009 psia. The digest recovers the engine's default outlet pressure from it: the floor times the engine's own critical pressure ratio is 14.700000000000, which is how a constant this route never exports was measured.
+Every blowdown call returns the pressure below which the choked assumption stops holding. On AFIESERE that floor is 26.758009 psia. The course recovers the engine's default outlet pressure from it: the floor times the engine's own critical pressure ratio is 14.700000000000, which is how a constant this route never exports was measured.
 
 AFIESERE ends at 145.000000 psia, well above the floor, and its warning field reads `null`. Take the same vessel down to 25.000000 psia instead and the call still succeeds, still marches, still returns a time, and attaches this warning: `the march assumes choked flow throughout, and it stops being choked below 26.8 psia against a 14.7 psia back pressure: the time below that is optimistic`. Those are the engine's own words.
 
@@ -28,4 +28,4 @@ Do that habitually. A number you recovered is a number you can check. A number y
 
 ## Exercise
 
-State in one sentence why the downstream pressure does not enter the rate while the flow is choked. Record the AFIESERE choked floor, the default outlet pressure the digest recovers from it, the start mass, the mass remaining and the fraction removed. Then quote the warning the engine attaches at an end pressure of 25.000000 psia and say which way the resulting time is wrong.
+State in one sentence why the downstream pressure does not enter the rate while the flow is choked. Record the AFIESERE choked floor, the default outlet pressure the course recovers from it, the start mass, the mass remaining and the fraction removed. Then quote the warning the engine attaches at an end pressure of 25.000000 psia and say which way the resulting time is wrong.

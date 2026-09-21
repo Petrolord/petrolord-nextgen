@@ -51,7 +51,7 @@ total when you are stating what the meter is worth.
    difference (first less second)                     62.198316
    ratio (first over second)                           6.250000
 
-That is the comparison the digest computed between the two largest shares on
+That is the comparison the lab computes between the two largest shares on
 this run at this reading, and it is the one to quote.
 
 ## The total is a percent of flow

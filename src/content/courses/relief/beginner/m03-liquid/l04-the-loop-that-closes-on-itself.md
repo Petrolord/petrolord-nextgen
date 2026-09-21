@@ -31,7 +31,7 @@ That is a useful diagnostic to carry into a plant. A liquid relief case that tak
 
 The residual is the amount the correction moved on the final pass. It is not an error bar on the area, and it is not a distance from any true answer. It says only that the loop has stopped moving to within that much, which is a statement about the loop rather than about the valve.
 
-On AKASO the residual is 0.000000000000 at the precision this course prints residuals at, and the call is reported as converged. The digest behind this course asserts that flag against what each call actually did, so a row calling itself converged came from a loop the engine reported as converged.
+On AKASO the residual is 0.000000000000 at the precision this course prints residuals at, and the call is reported as converged. The checking behind this course asserts that flag against what each call actually did, so a row calling itself converged came from a loop the engine reported as converged.
 
 ## The edge where the method stops claiming anything
 

@@ -19,7 +19,7 @@ The engine's nextReviewDate takes an issue date and a review period in months. R
 
 {{panel:compliance-register-explorer}}
 
-The first two rows are IKORO documents. The digest recomputes each library document that has an issue date, from that date and its own review period:
+The first two rows are IKORO documents. This lesson recomputes each library document that has an issue date, from that date and its own review period:
 
 | number | issue date | review period in months | nextReviewDate | next_review_date recorded | the two agree |
 | --- | --- | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ The next three rows show the month end rule from module four at work again. An i
 
 ## A correction does not buy time
 
-The digest prints the case that makes this rule matter. A document issued 2025-03-14 on a 24 month review period is corrected and re-published on 2026-10-01.
+The lab prints the case that makes this rule matter. A document issued 2025-03-14 on a 24 month review period is corrected and re-published on 2026-10-01.
 
 Counted from the issue date, the review falls on 2027-03-14. Counted from the correction, it would fall on 2028-10-01.
 
@@ -49,4 +49,4 @@ So a none from nextReviewDate has two possible meanings: the period was genuinel
 
 ## Exercise
 
-Read the correction case: the issue date, the period, the correction date and the two review dates the digest prints. Say which review date Document Control uses and what would happen to a library if corrections reset the review clock. Then read the rows with a period of 0 and null, and the row where DEFAULT_REVIEW_PERIOD_MONTHS is passed by the caller, and say who is responsible for applying the default.
+Read the correction case: the issue date, the period, the correction date and the two review dates the lab prints. Say which review date Document Control uses and what would happen to a library if corrections reset the review clock. Then read the rows with a period of 0 and null, and the row where DEFAULT_REVIEW_PERIOD_MONTHS is passed by the caller, and say who is responsible for applying the default.

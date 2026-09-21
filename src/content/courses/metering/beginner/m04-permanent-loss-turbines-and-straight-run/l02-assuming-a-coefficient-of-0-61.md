@@ -18,7 +18,7 @@ the ABOH beta and differential:
 That is the whole comparison, and it is the only one you may quote here. The
 engine never assumes a coefficient, so both figures come from the same loss
 relation with the coefficient handed in: once the run's own, once 0.610000 typed
-explicitly. The digest ran the second deliberately so that the cost of the
+explicitly. The course ran the second deliberately so that the cost of the
 assumption is printed rather than asserted.
 
 ## Why the answer is not the point

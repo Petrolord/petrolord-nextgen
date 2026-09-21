@@ -196,7 +196,7 @@ const ConsequenceLearningPage = () => {
               <CardDescription>
                 The teaching streams and the published worked cases, on the vendored consequence engine. Every number on
                 this page and inside every panel is a return value from that engine, pinned by a test file against the
-                teaching digest. Every input carries its unit in its name, and pressures are absolute. Properties are
+                figures the lessons quote. Every input carries its unit in its name, and pressures are absolute. Properties are
                 illustrative, never data.
               </CardDescription>
             </CardHeader>

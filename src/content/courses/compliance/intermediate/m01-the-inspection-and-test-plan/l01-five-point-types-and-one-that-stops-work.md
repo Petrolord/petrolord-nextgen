@@ -6,7 +6,7 @@ An inspection and test plan lists the moments at which a piece of work is checke
 
 ## The Abam plan
 
-QAP-2026-014 is the quality plan for the Abam flowline tie-in. Its status is Active and it carries twelve points. The digest reads every point against one as-of date, 2026-10-15, so each status and each overdue flag quoted in this tier is true at that date and at no other. In this plan every item code starts with the letter of its type.
+QAP-2026-014 is the quality plan for the Abam flowline tie-in. Its status is Active and it carries twelve points. The course reads every point against one as-of date, 2026-10-15, so each status and each overdue flag quoted in this tier is true at that date and at no other. In this plan every item code starts with the letter of its type.
 
 | type | items | stops work |
 | --- | --- | --- |

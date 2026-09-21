@@ -10,7 +10,7 @@ Brief and Scala (1975), Am Ind Hyg Assoc J 36:467, adjust an eight-hour chemical
 
 RF = (8/h) x (24 - h)/16
 
-The digest prints that formula and measures its denominators, and it prints no reading of the two parts, so take this as background. The first part is usually read as scaling the amount taken in, since a worker on a longer shift breathes the air for more hours. The second is read as scaling the recovery time, since an eight-hour day leaves 16 hours away from the air and a longer shift leaves fewer. The factor multiplies the eight-hour limit. The engine's door is `briefScalaDailyRf`, and the golden classes it PUBLISHED, REPRODUCED, with 4 published cases, 3 oracle-only ones and 2 refusals.
+The course prints that formula and measures its denominators, and it prints no reading of the two parts, so take this as background. The first part is usually read as scaling the amount taken in, since a worker on a longer shift breathes the air for more hours. The second is read as scaling the recovery time, since an eight-hour day leaves 16 hours away from the air and a longer shift leaves fewer. The factor multiplies the eight-hour limit. The engine's door is `briefScalaDailyRf`, and the golden classes it PUBLISHED, REPRODUCED, with 4 published cases, 3 oracle-only ones and 2 refusals.
 
 | shift, hours | daily factor | adjusted limit for a limit of 100 |
 | --- | --- | --- |

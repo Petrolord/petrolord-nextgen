@@ -4,15 +4,15 @@ Every status in the register is a comparison between a date on the record and on
 
 ## Given a date, never reading a clock
 
-The digest behind this course passes one as-of date, 2026-10-15, into every call that reads a date against today. Nothing in it read the machine clock, and its generator refuses to print a line from a call that did not pass the as-of date. That is why every figure in it can be quoted as true at 2026-10-15: the date is on the page, and the same inputs give the same answers on any machine on any day.
+The engine runs behind this course pass one as-of date, 2026-10-15, into every call that reads a date against today. None of them read the machine clock, and the course quotes no line from a call that did not pass the as-of date. That is why every figure in the course can be quoted as true at 2026-10-15: the date is on the page, and the same inputs give the same answers on any machine on any day.
 
 {{panel:compliance-register-explorer}}
 
-The panel works the same way. It holds an as-of date you can move. When you move it, the statuses move with it, and when you put it back at 2026-10-15 every row matches the digest again. Nothing on the record was edited in between.
+The panel works the same way. It holds an as-of date you can move. When you move it, the statuses move with it, and when you put it back at 2026-10-15 every row matches the lessons again. Nothing on the record was edited in between.
 
 ## A bad as-of date
 
-The digest prints what the modules do when the date they are given as today cannot be read. These rows are the contract and no caller should ever pass such a date.
+This lesson prints what the modules do when the date they are given as today cannot be read. These rows are the contract and no caller should ever pass such a date.
 
 complianceStatus.deriveStatus with an unreadable Date as today throws RangeError: deriveStatus needs a valid date for today.
 
@@ -23,7 +23,7 @@ Two other modules answer instead of refusing:
 - documentControl.reviewState of a published document whose review date is 2020-01-06, with an unreadable Date as today, returns Review scheduled.
 - qualityAssurance.isNcrOverdue of an open NCR due 2020-01-06, with an unreadable Date as today, returns false.
 
-Both of those answers read as though nothing were due. The digest records this as a held limit: an unreadable today is refused by complianceStatus alone. This course teaches it as a limit and never asks you to compute with it. The lesson to take from it is that a Review scheduled or a false beside an unreadable as-of date tells you nothing about the record.
+Both of those answers read as though nothing were due. The course records this as a held limit: an unreadable today is refused by complianceStatus alone. This course teaches it as a limit and never asks you to compute with it. The lesson to take from it is that a Review scheduled or a false beside an unreadable as-of date tells you nothing about the record.
 
 ## The wrong kind of date
 

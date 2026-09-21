@@ -30,4 +30,4 @@ What it tells you is how much free water arrives at a cold spot whose temperatur
 
 ## Exercise
 
-Record the two water contents and the difference between them, and say which of the three the digest computes for you. Say where the liquid goes and what state the gas leaves the separator in. Then list three questions this figure does not answer, and name the engine or course that owns each of them.
+Record the two water contents and the difference between them, and say which of the three the lab computes for you. Say where the liquid goes and what state the gas leaves the separator in. Then list three questions this figure does not answer, and name the engine or course that owns each of them.

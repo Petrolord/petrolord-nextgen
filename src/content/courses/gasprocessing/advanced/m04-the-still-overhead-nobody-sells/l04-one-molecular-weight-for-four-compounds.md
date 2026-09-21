@@ -12,7 +12,7 @@ The engine is explicit about it. The value sits in the module's declared constan
 
 ## Declared, and what that word carries
 
-This module sorts its constants into three kinds. Some are derived, which means they are computed from something else the module exports and there is nothing independent to check. Some are measured, which means the digest can ask the engine a question whose answer is the constant and nothing else. The rest are declared.
+This module sorts its constants into three kinds. Some are derived, which means they are computed from something else the module exports and there is nothing independent to check. Some are measured, which means the course can ask the engine a question whose answer is the constant and nothing else. The rest are declared.
 
 A declared constant is a customary or chart value with no publication anywhere in this repository to check it against. The BTEX molecular weight is one, and so is the absorbed fraction it is multiplied by. The module exports them under their own names and its own comment says that pinning them is all any gate can do.
 

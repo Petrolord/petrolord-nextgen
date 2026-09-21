@@ -37,7 +37,7 @@ The two binding specifications carry positive prices. The non-binding ones carry
 
 ## Per whole unit, and why it matters
 
-The price is per whole unit of the property. The AGO cargo makes the point. Its binding rows price at 1159.3909 $ per unit of Cetane number and 852453.4687 $ per kg/l of Density. The digest says it under the AGO table: "A price per unit of the property is per whole unit of it, so the density relief is dollars per kg/l." The rows behind the two prices:
+The price is per whole unit of the property. The AGO cargo makes the point. Its binding rows price at 1159.3909 $ per unit of Cetane number and 852453.4687 $ per kg/l of Density. The course says it under the AGO table: "A price per unit of the property is per whole unit of it, so the density relief is dollars per kg/l." The rows behind the two prices:
 
 | row | rowPrice | scale | rowPrice x scale | price (value of one unit of relief) | per |
 | --- | --- | --- | --- | --- | --- |

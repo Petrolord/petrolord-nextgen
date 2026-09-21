@@ -38,4 +38,4 @@ A tank is not usually thought of as a process unit, because nothing happens in i
 
 ## Exercise
 
-Read the loss block in digest SECTION 29 and name the returned figure that would be used in an emissions inventory and the one that would be used in a cost estimate. Then say what makes those two rows the same quantity.
+Read the loss table in this lesson and name the returned figure that would be used in an emissions inventory and the one that would be used in a cost estimate. Then say what makes those two rows the same quantity.

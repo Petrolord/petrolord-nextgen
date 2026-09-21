@@ -6,7 +6,7 @@ When a recurring obligation is filed, the register has to move its due date on t
 
 REG-2026-002 is the IKORO monthly produced water quality return. It was due 2026-10-10. At the as-of date of 2026-10-15 it reads Overdue, and its reason says "The due date passed 5 days ago."
 
-The digest then records a filing on 2026-10-14, late. The app passes the due date to rollForward when a filing is recorded:
+The course then records a filing on 2026-10-14, late. The app passes the due date to rollForward when a filing is recorded:
 
 rollForward(2026-10-10, Monthly) = 2026-11-10
 
@@ -20,7 +20,7 @@ After the filing is recorded and the due date rolled, the return reads Due soon,
 
 A regulator's monthly return is due on the same day each month. Filing late in October does not move November's deadline. If the schedule rolled from the filing, the next due date would be 2026-11-14, and the register would show a deadline that the regulator does not recognise. The operator would believe it had until the fourteenth when the return is due on the tenth.
 
-The digest prints both calls. rollForward(2026-10-10, Monthly) gives 2026-11-10, and the same call on the filing date of 2026-10-14 would give 2026-11-14. The Regulatory Compliance app passes the due date to rollForward when a filing is recorded, so the next due date it walks to is 2026-11-10.
+The lab prints both calls. rollForward(2026-10-10, Monthly) gives 2026-11-10, and the same call on the filing date of 2026-10-14 would give 2026-11-14. The Regulatory Compliance app passes the due date to rollForward when a filing is recorded, so the next due date it walks to is 2026-11-10.
 
 ## What the panel shows
 
@@ -34,4 +34,4 @@ The same rolled row with lead_time_days 0, so no window is open, reads Compliant
 
 ## Exercise
 
-Read the date REG-2026-002 was due, the date it was filed, and the two next due dates the digest prints for it: the one the app uses and the one it would give by rolling from the filing. Say which date the regulator's calendar agrees with and why. Then read the status, next action date and days until the return carries once the filing is recorded, and the status the same row reads with lead_time_days 0. Say what the two statuses show about the order in which deriveStatus asks its questions.
+Read the date REG-2026-002 was due, the date it was filed, and the two next due dates the lab prints for it: the one the app uses and the one it would give by rolling from the filing. Say which date the regulator's calendar agrees with and why. Then read the status, next action date and days until the return carries once the filing is recorded, and the status the same row reads with lead_time_days 0. Say what the two statuses show about the order in which deriveStatus asks its questions.

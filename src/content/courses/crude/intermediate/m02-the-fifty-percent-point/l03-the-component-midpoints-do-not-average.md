@@ -12,7 +12,7 @@ Both are the same kind of operation: an average along the temperature axis. The 
 
 ## The four readings
 
-The digest prints the engine's T50 with the grid reading from lesson 2 and both averages.
+The lab prints the engine's T50 with the grid reading from lesson 2 and both averages.
 
 | blend | T50 interpolated (the engine) F | first curve point at or past 50 percent F | volume-weighted mean of the crudes' T50 F | mass-weighted mean of the crudes' T50 F |
 | --- | --- | --- | --- | --- |
@@ -36,7 +36,7 @@ Each average takes one figure from each crude, its own 50 percent temperature, a
 
 ## The mass average beside the engine
 
-The Associate tier read a case where the digest prints a mass-weighted mean minus the engine of 0.0000: the mass-weighted mean of the API numbers is the blend API, and the digest gives the reason, that 1 / SG blends linearly on mass. For T50 the digest prints the same column as -1.2681 F for the Kwale blend and -2.9207 F for the default pair. The Kwale row prints the mass-weighted mean of the crudes' T50 as 586.0503 F beside the engine's 587.3184 F, and only the second is read off a curve.
+The Associate tier read a case where the course prints a mass-weighted mean minus the engine of 0.0000: the mass-weighted mean of the API numbers is the blend API, and the course gives the reason, that 1 / SG blends linearly on mass. For T50 the table above prints the same column as -1.2681 F for the Kwale blend and -2.9207 F for the default pair. The Kwale row prints the mass-weighted mean of the crudes' T50 as 586.0503 F beside the engine's 587.3184 F, and only the second is read off a curve.
 
 ## The trap in one sentence
 

@@ -18,7 +18,7 @@ The Igbogene first pass is built with no GWP set declared, the electricity facto
 
 The flare is refused, and atomBalanceLines turns the refusal into one blocked line named Flaring. The vented methane line is blocked because no set is declared, so there is no GWP for CH4 to convert it with. The electricity line is blocked because its factor has no value.
 
-The survey is not referenced in the first pass either, yet the first pass counts 0 unsourced lines. The digest gives the rule: a blocked line is not also counted as unsourced. The vented line is already blocked, so it is counted once, as blocked.
+The survey is not referenced in the first pass either, yet the first pass counts 0 unsourced lines. The course gives the rule: a blocked line is not also counted as unsourced. The vented line is already blocked, so it is counted once, as blocked.
 
 ## Unsourced lines
 
@@ -28,7 +28,7 @@ An unsourced line is in the totals. A blocked line is not.
 
 ## Lines added to a complete inventory
 
-The digest takes the complete Igbogene inventory and adds two more lines, one with no registered factor and one on scope 3:
+The lab takes the complete Igbogene inventory and adds two more lines, one with no registered factor and one on scope 3:
 
 | line | reason |
 | --- | --- |
@@ -37,7 +37,7 @@ The digest takes the complete Igbogene inventory and adds two more lines, one wi
 
 Both are blocked and named. The diesel line has no registered factor. The business travel line is on a scope the inventory does not total. The totals stay the Scope 1 and Scope 2 figures of the complete inventory, total tCO2e 42945.777, and the inventory stops being reportable: reportable false, because "2 line(s) could not be computed".
 
-SECTION 9 prints two more blocked lines, a vented methane activity typed as -142 t and an electricity factor of -0.41, each blocked because an emission line cannot remove tonnes.
+The engine returns two more blocked lines, a vented methane activity typed as -142 t and an electricity factor of -0.41, each blocked because an emission line cannot remove tonnes.
 
 In practice, an inventory is often assembled from many contributors, and a line that vanished without a trace would be indistinguishable from a source that does not exist.
 

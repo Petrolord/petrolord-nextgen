@@ -25,9 +25,9 @@ A required area is a continuous number and a valve you can buy is not. The bridg
 
 ## The ladder is not geometric
 
-That third column is the reason it is printed. A reader who assumes a constant step between orifices will be wrong, and the ratios say so: the smallest printed step is 1.205556 and the largest is 1.781818, and they do not move in any tidy direction as you go up the ladder. The engine computes each of those ratios from the two areas either side of it, which is why this course is allowed to quote them. They are comparisons the digest works out.
+That third column is the reason it is printed. A reader who assumes a constant step between orifices will be wrong, and the ratios say so: the smallest printed step is 1.205556 and the largest is 1.781818, and they do not move in any tidy direction as you go up the ladder. The engine computes each of those ratios from the two areas either side of it, which is why this course is allowed to quote them. They are comparisons the lab works out.
 
-Notice also what the letters do. Between D and T the sequence skips I, O and S. Read the exported table and count: fourteen letters are printed across a span of seventeen. Why those three are absent is not a question the engine or the digest answers, and this course does not invent a reason. The letters are a convention of the published table rather than anything the engine decided.
+Notice also what the letters do. Between D and T the sequence skips I, O and S. Read the exported table and count: fourteen letters are printed across a span of seventeen. Why those three are absent is not a question the engine or the course answers, and this course does not invent a reason. The letters are a convention of the published table rather than anything the engine decided.
 
 ## The table is typed, a published input
 

@@ -22,7 +22,7 @@ The engine holds both limits and returns both:
    difference (first less second)                      6.000000
    ratio (first over second)                           3.000000
 
-Those are the same rule written in two quantities, and the digest prints the
+Those are the same rule written in two quantities, and this lesson prints the
 relationship between them rather than leaving you to work it out.
 
 ## The engine says it in words too

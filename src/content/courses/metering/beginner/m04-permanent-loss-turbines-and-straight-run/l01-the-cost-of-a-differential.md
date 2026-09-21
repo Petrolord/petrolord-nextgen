@@ -22,7 +22,7 @@ computed for that beta rather than an assumed figure. The loss fraction is the
 share of the measured differential that never comes back, and the last column is
 that share expressed in the same inches of water the transmitter reads.
 
-The digest prints the comparison across the two ends of the published range:
+This lesson prints the comparison across the two ends of the published range:
 
    at beta 0.100000, in H2O                                  63.043643
    at beta 0.750000, in H2O                                  28.839688

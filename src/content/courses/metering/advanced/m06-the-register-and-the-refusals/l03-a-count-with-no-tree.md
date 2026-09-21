@@ -16,7 +16,7 @@ Written without their rules, those two numbers are just a one and a four attache
 
 ## Counts in this file
 
-This course prints nineteen counts in all. The tree of that count is the counts the generator built while it ran, plus the count itself, and its rule is one per call to the counting helper, which is the only way a count reaches the file at all.
+This course prints nineteen counts in all. The tree of that count is the counts the course's build made while it ran, plus the count itself, and its rule is one per call to the counting helper, which is the only way a count reaches the file at all.
 
 That last clause is what makes the total meaningful. A count of counts is only checkable if there is exactly one route by which a count can be created, and naming the route is what tells a reader that no count reached the page some other way.
 
@@ -26,4 +26,4 @@ When you write a count in a report, write what you counted over and what made so
 
 ## Exercise
 
-Find any count in digest SECTION 32 and write out its tree and its rule in your own words. Then describe a plausible alternative rule that would give a different answer over the same tree.
+Find any count in this course and write out its tree and its rule in your own words. Then describe a plausible alternative rule that would give a different answer over the same tree.

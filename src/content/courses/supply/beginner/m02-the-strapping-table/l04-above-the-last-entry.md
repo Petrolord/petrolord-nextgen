@@ -25,7 +25,7 @@ So a dip above the last entry stops the chain at its first link. Either the read
 
 ## The top of the other two tables
 
-AK-02's table stops at 12000 mm with 2412.743 m3. AK-03's table stops at 3000 mm with 81.289 m3, and on a bullet of diameter 3 m that last entry is the full shell. Each last entry marks the top of what that table covers, whatever the shape of the tank above it. The digest dips both tanks 10 mm above their last entries, AK-02 at 12010 mm and AK-03 at 3010 mm, and the engine gives each the same refusal it gives AK-01 at 14800 mm.
+AK-02's table stops at 12000 mm with 2412.743 m3. AK-03's table stops at 3000 mm with 81.289 m3, and on a bullet of diameter 3 m that last entry is the full shell. Each last entry marks the top of what that table covers, whatever the shape of the tank above it. The course dips both tanks 10 mm above their last entries, AK-02 at 12010 mm and AK-03 at 3010 mm, and the engine gives each the same refusal it gives AK-01 at 14800 mm.
 
 ## Both ends together
 

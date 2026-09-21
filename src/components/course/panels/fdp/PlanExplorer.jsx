@@ -235,7 +235,7 @@ export const ScenariosMode = ({ sc, price, onPrice }) => {
       />
       {onPrice && (
         <FieldGrid>
-          <SelectField label="Price ladder (the digest's prices only)" value={String(row.price)} onChange={onPrice}
+          <SelectField label="Price ladder (the lessons' prices only)" value={String(row.price)} onChange={onPrice}
             options={PRICE_LADDER.map((p) => [String(p), `${four(p)} USD a barrel`])} />
         </FieldGrid>
       )}

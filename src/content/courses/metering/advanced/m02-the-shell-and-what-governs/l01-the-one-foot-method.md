@@ -33,4 +33,4 @@ Read that note as an instruction about scope. The answer is good inside the meth
 
 ## Exercise
 
-Read the bottom course row in the course table in digest SECTION 26 and say which of the three candidates set the required thickness there. Then say which figure in that row would have to change, and in which direction, for a different candidate to govern.
+Read the bottom course row in the shell view of the venting explorer and say which of the three candidates set the required thickness there. Then say which figure in that row would have to change, and in which direction, for a different candidate to govern.

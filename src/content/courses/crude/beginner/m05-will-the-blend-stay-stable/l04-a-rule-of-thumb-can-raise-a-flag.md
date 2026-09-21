@@ -43,7 +43,7 @@ The export blend does not flag, and the engine's message is careful about what t
 
 ## Why the rule cannot clear a blend
 
-The digest says it once: "The rule can raise a flag and it cannot clear one." An absent flag comes back as stable null.
+The course says it once: "The rule can raise a flag and it cannot clear one." An absent flag comes back as stable null.
 
 The Obigbo export blend shows why this matters. With every SARA supplied, the export blend screens unstable on the CII, at 0.9163. With the SARA taken away, the gravity screen gives no verdict. Had the engine returned true on the absent flag, it would have called a blend stable that its own index calls unstable.
 

@@ -1,6 +1,6 @@
 # The Orashi register end to end
 
-This lesson reads the ORASHI management system once, from the first clause to the readiness list, the way an internal auditor preparing for recertification would read it. Every figure is the digest's, and every one is true at the as-of date 2026-10-15. The record: ISO 14001:2015, Certified, a certification cycle of 3 years, a certificate that expires 2027-01-08.
+This lesson reads the ORASHI management system once, from the first clause to the readiness list, the way an internal auditor preparing for recertification would read it. Every figure is the engine's, and every one is true at the as-of date 2026-10-15. The record: ISO 14001:2015, Certified, a certification cycle of 3 years, a certificate that expires 2027-01-08.
 
 {{panel:compliance-readiness-explorer}}
 
@@ -10,7 +10,7 @@ The register holds 13 clauses, 12 applicable and 1 excluded. Clause 4.4 is the e
 
 ## Step two: who may examine
 
-The digest's planned internal audit over clauses 8.1, 8.2, 9.1.1 and 9.2 refuses u-kalu, u-nneka and u-tari as lead, each for owning a clause in the scope, and allows u-chidi and an external lead named in text. Inside an audit, canExamineClause refuses u-kalu as the recorder of 8.1 and allows u-chidi. Nobody examines a clause they own.
+The lab's planned internal audit over clauses 8.1, 8.2, 9.1.1 and 9.2 refuses u-kalu, u-nneka and u-tari as lead, each for owning a clause in the scope, and allows u-chidi and an external lead named in text. Inside an audit, canExamineClause refuses u-kalu as the recorder of 8.1 and allows u-chidi. Nobody examines a clause they own.
 
 ## Step three: coverage
 

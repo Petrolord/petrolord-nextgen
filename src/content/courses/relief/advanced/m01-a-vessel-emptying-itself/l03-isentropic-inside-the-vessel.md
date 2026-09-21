@@ -32,7 +32,7 @@ This is worth holding onto, because it inverts the intuition a relief valve buil
 
 ## Reading the table honestly
 
-Each row carries a time, a pressure and a temperature, and the digest prints no ratio between any two of them. Divide one pressure by another and you have produced a figure nothing here stands behind. The relationship between the pressures and the temperatures along an isentrope exists, but this course prints it nowhere, so a reader who wants it derives it and says so.
+Each row carries a time, a pressure and a temperature, and the course prints no ratio between any two of them. Divide one pressure by another and you have produced a figure nothing here stands behind. The relationship between the pressures and the temperatures along an isentrope exists, but this course prints it nowhere, so a reader who wants it derives it and says so.
 
 Read the columns for direction instead. Both fall, and neither turns. The pressure falls faster early, because the rate through a choked orifice scales with the upstream pressure and the upstream pressure is highest at the start. The temperature column follows it down for the same reason, since the temperature here is carried by the pressure through the isentropic relation and by nothing else. That is the whole of the inside half.
 

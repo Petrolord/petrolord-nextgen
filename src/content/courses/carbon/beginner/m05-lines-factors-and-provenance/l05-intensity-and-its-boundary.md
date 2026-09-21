@@ -12,7 +12,7 @@ A denominator of 0 or a blank denominator is refused as well: "A positive denomi
 
 ## The same inventory over two boundaries
 
-The digest runs the complete Igbogene inventory over two boundaries. Both boundaries and both denominators are invented for this course:
+The lab runs the complete Igbogene inventory over two boundaries. Both boundaries and both denominators are invented for this course:
 
 | boundary | denominator | unit | Scope 1 intensity | Scope 2 intensity | total intensity | reportable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ The note carries two conditions. The boundary must match, and the GWP set must m
 
 ## An intensity inherits its inventory's status
 
-An intensity is only as reportable as the inventory under it. With the electricity factor blank, the total intensity over the first boundary is 0.00822761 tCO2e per barrel of oil equivalent produced, reportable false, because: 1 line(s) could not be computed. The digest compares that figure with the complete inventory's Scope 1 intensity, 0.00822761, and prints them as the same figure: with the Scope 2 line blocked, the total is Scope 1 alone. The division still runs. The status travels with the result, so the intensity says what its inventory says.
+An intensity is only as reportable as the inventory under it. With the electricity factor blank, the total intensity over the first boundary is 0.00822761 tCO2e per barrel of oil equivalent produced, reportable false, because: 1 line(s) could not be computed. The course compares that figure with the complete inventory's Scope 1 intensity, 0.00822761, and prints them as the same figure: with the Scope 2 line blocked, the total is Scope 1 alone. The division still runs. The status travels with the result, so the intensity says what its inventory says.
 
 In practice, operators and investors compare intensities across companies, and that comparison is sound only where the boundary and the GWP set match, which is what the engine's note states.
 

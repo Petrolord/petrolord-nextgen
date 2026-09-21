@@ -1,6 +1,6 @@
 # Steps that tile the axis
 
-The curve is drawn as steps. SECTION 20 states the geometry: each step's width is its tonnes a year and its height its cost per tonne, and the steps tile the axis from 0. This lesson reads the cumulative columns the engine prints for the six invented AGBOR measures, with costs in US dollars.
+The curve is drawn as steps. The course states the geometry: each step's width is its tonnes a year and its height its cost per tonne, and the steps tile the axis from 0. This lesson reads the cumulative columns the engine prints for the six invented AGBOR measures, with costs in US dollars.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -23,11 +23,11 @@ The height of each step is the cost per tonne from the last lesson. The first th
 
 ## What the axis counts
 
-The horizontal axis is tonnes a year, added in rank order. Its end, 15460.000 t, is the tonnes of all six measures taken together as the curve adds them. SECTION 20 also prints additive false for this curve, with an interaction note: two of the measures act on the same source, and "the cumulative curve is an upper bound." Module three reads that note. For now, read 15460.000 t as the sum the curve draws.
+The horizontal axis is tonnes a year, added in rank order. Its end, 15460.000 t, is the tonnes of all six measures taken together as the curve adds them. The lab also prints additive false for this curve, with an interaction note: two of the measures act on the same source, and "the cumulative curve is an upper bound." Module three reads that note. For now, read 15460.000 t as the sum the curve draws.
 
 ## What the area of a step is
 
-SECTION 18 defines the cost per tonne as the net annual cost over the tonnes abated a year. So a step's area, its width in tonnes a year times its height in US dollars a tonne, is that measure's net annual cost in US dollars a year. SECTION 18 prints each one, and the next lesson adds them up to the net annual cost of all.
+The course defines the cost per tonne as the net annual cost over the tonnes abated a year. So a step's area, its width in tonnes a year times its height in US dollars a tonne, is that measure's net annual cost in US dollars a year. The lab prints each one, and the next lesson adds them up to the net annual cost of all.
 
 ## Two checks on any curve
 
@@ -35,7 +35,7 @@ Reading a curve, check the first start and the last end. Here they are 0.000 and
 
 ## The tiling follows the rank
 
-The cumulative columns are built in the order of the last lesson, cheapest first. Vapour recovery on the storage tanks, order 4, starts at 5310.000 t, where the three measures ranked above it end. Flare gas recovery, order 6, starts at 9260.000 t and carries the last stretch of the axis, 6200.000 t a year. SECTION 26 names the oracle route for the curve: the curve by explicit rank.
+The cumulative columns are built in the order of the last lesson, cheapest first. Vapour recovery on the storage tanks, order 4, starts at 5310.000 t, where the three measures ranked above it end. Flare gas recovery, order 6, starts at 9260.000 t and carries the last stretch of the axis, 6200.000 t a year. The course names the oracle route for the curve: the curve by explicit rank.
 
 ## Exercise
 

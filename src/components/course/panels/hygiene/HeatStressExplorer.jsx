@@ -151,7 +151,7 @@ const HeatStressExplorer = ({ initialMode = 'wbgt' }) => {
       </div>
       <Note>
         Every number on this page is a return value of the vendored exposure engine or a value read out of its golden, printed to
-        the precision the teaching digest prints. Temperatures are degrees C WBGT and metabolic rates are watts.
+        the precision the lessons use. Temperatures are degrees C WBGT and metabolic rates are watts.
       </Note>
     </PanelShell>
   );

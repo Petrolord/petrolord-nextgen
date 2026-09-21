@@ -39,7 +39,7 @@ A step matters more than its size suggests. Two relief cases a psi apart in reli
 
 Between the threshold and the crossing the correction sits below one, and a correction below one makes the required area larger than the uncorrected equation would give. The engine flags every row in that band. Above the crossing the correction rises past one for the rest of the published range, and from there it behaves the way a correction is normally expected to: it shrinks the required area, and it shrinks it more as the pressure climbs.
 
-The digest prints no width for that band, only its two ends, so this lesson prints none either.
+The course prints no width for that band, only its two ends, so this lesson prints none either.
 
 ## The two boundaries are held for literature
 

@@ -1,6 +1,6 @@
 # The Abua plan end to end
 
-Five modules have read ABUA's plan one piece at a time. This lesson reads it once, top to bottom, the way a planner reads a plan handed to them: configuration, crude, crude unit, margin, balances, limits and stream values. Every figure comes from SECTION 17's single table and the sections behind it.
+Five modules have read ABUA's plan one piece at a time. This lesson reads it once, top to bottom, the way a planner reads a plan handed to them: configuration, crude, crude unit, margin, balances, limits and stream values. Every figure comes from the single table below and the modules behind it.
 
 {{panel:refinery-plan-explorer}}
 
@@ -37,7 +37,7 @@ Revenue 172316812.90, less crude cost 160350322.58, less unit operating cost 488
 
 ## Step four: where the plan stopped
 
-Units at capacity: Diesel hydrotreater. Crudes at their availability: Forcados (illustrative) and Brass River (illustrative). No product reads true for "at its ceiling". Bonny Light runs 329032.26 bbl of 1500000.00 bbl available. The hydrotreater is the one unit at capacity. The crude unit has room, no product is at its ceiling, and Bonny Light is the crude only partly run, which is where SECTION 14's gasoil working reads the month.
+Units at capacity: Diesel hydrotreater. Crudes at their availability: Forcados (illustrative) and Brass River (illustrative). No product reads true for "at its ceiling". Bonny Light runs 329032.26 bbl of 1500000.00 bbl available. The hydrotreater is the one unit at capacity. The crude unit has room, no product is at its ceiling, and Bonny Light is the crude only partly run, which is where module four's gasoil working reads the month.
 
 ## Step five: the stream values
 
@@ -45,7 +45,7 @@ Reformate, kero, ulsd and residue print their product prices; each goes into one
 
 ## Step six: what a planner would do next
 
-The stream values and the limits point the same way. The reformer sweep prices another 20000.00 bbl of reformer capacity at 0.0000 a barrel as typed. SECTION 13 prices the hydrotreater left blank at a margin change of 95572.87. If the month is to earn more, the hydrotreater is where to look, and the question of whether it is worth building belongs to a valuation this tier does not do.
+The stream values and the limits point the same way. The reformer sweep prices another 20000.00 bbl of reformer capacity at 0.0000 a barrel as typed. The lab prices the hydrotreater left blank at a margin change of 95572.87. If the month is to earn more, the hydrotreater is where to look, and the question of whether it is worth building belongs to a valuation this tier does not do.
 
 ## Exercise
 

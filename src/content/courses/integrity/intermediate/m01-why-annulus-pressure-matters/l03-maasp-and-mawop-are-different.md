@@ -37,7 +37,7 @@ So MAASP is the physical question, what will these elements take, and MAWOP is t
 
 ## Do not read them as one well answered twice
 
-In the published digest the MAASP fixture is a single element, a casing burst at 0.8 of 30000000 Pa, allowing 20585228.21103133 Pa. The MAWOP case is a different list of three candidates on the same annulus fluid, and answers 11905664.170969129 Pa.
+In the published cases the MAASP fixture is a single element, a casing burst at 0.8 of 30000000 Pa, allowing 20585228.21103133 Pa. The MAWOP case is a different list of three candidates on the same annulus fluid, and answers 11905664.170969129 Pa.
 
 The second number is smaller for two reasons at once: a different set of elements, and factors chosen by role. Comparing them tells you nothing until you hold one of those two things fixed.
 

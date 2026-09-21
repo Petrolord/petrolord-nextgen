@@ -8,7 +8,7 @@ Verification is worth 70 metres of cement, and this is the sharpest number in th
 
 `annularBarrierCheck` picks its requirement from one boolean. With a cement evaluation log, the annular barrier needs **30 m MD**. Without one, it needs **100 m MD**.
 
-The digest records the gap directly as 70 m. Same cement, same annulus, same well. Run the log and 70 m of required length disappears.
+The lab records the gap directly as 70 m. Same cement, same annulus, same well. Run the log and 70 m of required length disappears.
 
 Both figures come from the commonly cited NORSOK D-010 rev 4 conventions carried in `D010_DEFAULT_RULES`. They are overridable, there is an armed literature gate on the module, and the standard document governs. Do not quote them as physics.
 

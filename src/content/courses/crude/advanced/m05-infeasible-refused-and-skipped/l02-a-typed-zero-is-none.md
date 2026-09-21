@@ -4,7 +4,7 @@ In the availability column three different entries mean three different things t
 
 ## Three butane tanks
 
-The digest solves the Apapa cargo three times, changing only Butane's maximum:
+The lab solves the Apapa cargo three times, changing only Butane's maximum:
 
 | butane maximum | status | butane volume bbl | total cost $ | binding |
 | --- | --- | --- | --- | --- |

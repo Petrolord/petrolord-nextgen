@@ -30,7 +30,7 @@ That is also why the movement terms are the inputs worth sweeping. A fill rate a
 
 ## Volatility doubles one of the four
 
-The digest computes the effect of volatility on the movement outbreathing directly:
+The lab computes the effect of volatility on the movement outbreathing directly:
 
 | RELATION: movement outbreathing at the same fill rate, high volatility against low | value |
 | --- | --- |
@@ -49,4 +49,4 @@ On this tank the total outbreathing is 25689.2574 scfh and the total inbreathing
 
 ## Exercise
 
-Read the venting block in digest SECTION 27 and say which of the four component terms would change if the fill rate rose while everything else stayed as stated. Then say which total that term belongs to.
+Read the venting table in this lesson and say which of the four component terms would change if the fill rate rose while everything else stayed as stated. Then say which total that term belongs to.

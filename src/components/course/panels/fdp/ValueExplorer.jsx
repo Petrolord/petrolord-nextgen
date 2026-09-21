@@ -186,7 +186,7 @@ export const EarnedMode = ({ ev, asOf, onAsOf }) => {
       />
       {onAsOf && (
         <FieldGrid>
-          <SelectField label="As of (the digest's dates only)" value={row.asOf} onChange={onAsOf} options={ODUDU_AS_OF.map((d) => [d, d])} />
+          <SelectField label="As of (the lessons' dates only)" value={row.asOf} onChange={onAsOf} options={ODUDU_AS_OF.map((d) => [d, d])} />
         </FieldGrid>
       )}
       <div className="h-48 mt-3">

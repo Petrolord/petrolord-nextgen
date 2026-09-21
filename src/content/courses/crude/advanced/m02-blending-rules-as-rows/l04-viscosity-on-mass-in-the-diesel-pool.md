@@ -1,6 +1,6 @@
 # Viscosity on mass in the diesel pool
 
-The fourth basis is an index blended on mass. Viscosity is its case, and the digest reads it in a second cargo at the same invented Lagos terminal: a 6000 bbl AGO cargo to the 50 ppm diesel template.
+The fourth basis is an index blended on mass. Viscosity is its case, and the course reads it in a second cargo at the same invented Lagos terminal: a 6000 bbl AGO cargo to the 50 ppm diesel template.
 
 ## The pool
 
@@ -35,7 +35,7 @@ The unit cost is 99.1202 $/bbl. The recipe's viscosity, with the index on mass, 
 
 ## The same recipe on another basis
 
-The digest prints the same recipe's viscosity with the same index blended on volume instead: 2.9518 cSt. Against the engine's 3.0036 cSt on mass, the two are different figures for one set of barrels. The digest prints no difference column for this pair, so read both as printed.
+The lab prints the same recipe's viscosity with the same index blended on volume instead: 2.9518 cSt. Against the engine's 3.0036 cSt on mass, the two are different figures for one set of barrels. The course prints no difference column for this pair, so read both as printed.
 
 The choice between them is a held item, C12. The engine blends the Refutas index on mass fraction, the classic Refutas form. ASTM D7152 blends the same family of index on volume. The two disagree, and the basis is a course and owner decision that this course states as a limit and does not settle. What a reader can say is what the engine does, and what the engine names: "Refutas index on mass fraction".
 

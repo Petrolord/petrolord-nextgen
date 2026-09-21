@@ -21,11 +21,11 @@ The previous lesson showed what the profile is worth: two cases with identical t
 
 ## The same result read as a check
 
-An exact agreement between two differently assembled paths is also a test, and it is one the digest performs rather than asserts. The traverse builds its answer from three segment calculations and the single call builds it from one, and both arrive at 25.660631 psi. Had the segment loop mishandled its accumulation, or dropped or double counted a boundary between segments, the two totals would differ. On this case they do not.
+An exact agreement between two differently assembled paths is also a test, and it is one the course performs rather than asserts. The traverse builds its answer from three segment calculations and the single call builds it from one, and both arrive at 25.660631 psi. Had the segment loop mishandled its accumulation, or dropped or double counted a boundary between segments, the two totals would differ. On this case they do not.
 
 ## What would have to be true for the totals to differ
 
-They would differ if something in the segment calculation depended on where the segment sat. A changing density would do it, which is what makes a compressible fluid a different problem. A changing bore would do it, and so would a changing duty, as at an offtake. Each of those makes a segment's answer depend on which segment it is. None of them is present here, so the agreement is exact rather than close, and the digest prints the difference as 0.000000 psi rather than as a small number.
+They would differ if something in the segment calculation depended on where the segment sat. A changing density would do it, which is what makes a compressible fluid a different problem. A changing bore would do it, and so would a changing duty, as at an offtake. Each of those makes a segment's answer depend on which segment it is. None of them is present here, so the agreement is exact rather than close, and the course prints the difference as 0.000000 psi rather than as a small number.
 
 An exact zero is worth more than a small residual. A small residual would need explaining, and the explanation would be either a segmentation effect or an arithmetic one, with no way to tell them apart from the total alone.
 

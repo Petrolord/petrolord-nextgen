@@ -8,7 +8,7 @@ buildInventory returns two flags that are easy to confuse. computed says whether
 
 ## Five steps from a first pass
 
-The digest builds the Igbogene inventory as a first pass, with no GWP set declared, the electricity factor box blank, the vented methane survey not yet referenced and the flare's destruction efficiency blank. Then it closes each gap in turn. Every row is a buildInventory call, and every figure is invented for this course:
+The lab builds the Igbogene inventory as a first pass, with no GWP set declared, the electricity factor box blank, the vented methane survey not yet referenced and the flare's destruction efficiency blank. Then it closes each gap in turn. Every row is a buildInventory call, and every figure is invented for this course:
 
 | step | lines | Scope 1 tCO2e | Scope 2 tCO2e | total tCO2e | computed | reportable | not reportable because |
 | --- | --- | --- | --- | --- | --- | --- | --- |

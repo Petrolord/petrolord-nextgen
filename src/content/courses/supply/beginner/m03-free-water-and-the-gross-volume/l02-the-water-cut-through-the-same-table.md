@@ -25,7 +25,7 @@ With no water the gross is the volume at the dip, 1086.941 m3. At the morning's 
 
 ## The shortcut that reads the wrong volume
 
-There is a tempting shortcut. Take the water height off the dip height first, and read the table once at the difference. The digest measures it on two tanks.
+There is a tempting shortcut. Take the water height off the dip height first, and read the table once at the difference. This lesson measures it on two tanks.
 
 On the bullet AK-03, dipped at 1847 mm with 41 mm of water, subtracting heights first gives a single reading at 1806 mm. That reads 51.126 m3, against the gross 52.161 m3 the engine returns. The reason is the curve: the water fills the narrow bottom of a curved tank, and a height taken off the top of the product column is a different slice of that tank.
 

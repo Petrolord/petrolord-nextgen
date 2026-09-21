@@ -1,6 +1,6 @@
 # One day before the period
 
-The current period has a first day, and a filing either lands on it or it does not. The digest prints the case where one day decides the answer, and it is worth reading slowly, because it is the case a person checking a register by eye will get wrong.
+The current period has a first day, and a filing either lands on it or it does not. This lesson prints the case where one day decides the answer, and it is worth reading slowly, because it is the case a person checking a register by eye will get wrong.
 
 ## The monitoring report as recorded
 
@@ -16,7 +16,7 @@ The report reads On track, and explainStatus says why: "Due in 167 days. The las
 
 ## The same report filed one day later
 
-The digest then moves the filing by one day, to 2026-03-31, the first day of the period, and changes nothing else:
+The course then moves the filing by one day, to 2026-03-31, the first day of the period, and changes nothing else:
 
 status Compliant; Last filed 2026-03-31, next due in 167 days.
 
@@ -41,4 +41,4 @@ Note where the period start comes from. It is computed from the next due date an
 
 ## Exercise
 
-Read REG-2026-004's period start, its last filed date and its status as recorded, then the status and reason the digest prints when the filing is dated 2026-03-31. Say what one day on the filing date changes, and which period each of the two filing dates belongs to. Then read REG-2026-002's last filed date and period start and say whether that filing counts for the current period, and what status the return carries as a result.
+Read REG-2026-004's period start, its last filed date and its status as recorded, then the status and reason the engine prints when the filing is dated 2026-03-31. Say what one day on the filing date changes, and which period each of the two filing dates belongs to. Then read REG-2026-002's last filed date and period start and say whether that filing counts for the current period, and what status the return carries as a result.

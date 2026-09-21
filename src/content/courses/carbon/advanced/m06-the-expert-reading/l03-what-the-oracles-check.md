@@ -1,6 +1,6 @@
 # What the oracles check
 
-A figure is trusted as far as something independent has checked it. SECTION 26 names two oracles in the engines repository that recompute these modules by other routes, and lists the outputs that neither recomputes. This lesson reads that list, because it decides which Expert figures are graded and which are taught as printed.
+A figure is trusted as far as something independent has checked it. The course names two oracles in the engines repository that recompute these modules by other routes, and lists the outputs that neither recomputes. This lesson reads that list, because it decides which Expert figures are graded and which are taught as printed.
 
 ## The two oracles
 
@@ -19,22 +19,22 @@ For this tier, that covers the costs per tonne of module one, the curve's order 
 
 ## What neither oracle recomputes
 
-SECTION 26: "Not recomputed by either oracle: carbonIntensity, the curve's residual to target and paysForItselfTonnes, compositeCurve and the simple payback. They are taught from the engine and never graded."
+The course's list: "Not recomputed by either oracle: carbonIntensity, the curve's residual to target and paysForItselfTonnes, compositeCurve and the simple payback. They are taught from the engine and never graded."
 
-Three of those are in this tier. The curve's residual to target prints on each SECTION 21 curve beside the verdict. paysForItselfTonnes prints as 5310.000 t. The simple payback prints as 2.372881 years. Each is the engine's figure, taught as printed. None carries a second route behind it, and none is graded.
+Three of those are in this tier. The curve's residual to target prints on each module three curve beside the verdict. paysForItselfTonnes prints as 5310.000 t. The simple payback prints as 2.372881 years. Each is the engine's figure, taught as printed. None carries a second route behind it, and none is graded.
 
-## The digest's own count
+## The course's own count
 
-SECTION 26 closes with a count: this digest has 73 engine answers asserted and 60 refusals asserted before printing. The count is the generator's own: engine answers and refusals it checked before the digest was printed.
+The course records a count: this course has 73 engine answers asserted and 60 refusals asserted before printing. The count is the course's own: engine answers and refusals checked before these lessons were printed.
 
 ## Why the residual is not leaned on
 
-The residual to target sits beside the target verdict on every SECTION 21 curve, and every one of those verdicts is none: each curve carries a claim the engine could not check against its source, or a claim above what its source emits. The residual is not recomputed by an oracle either. So this tier quotes the target, 16830.083 tCO2e, and the curve's total, and reads the programme's shortfall from the path, whose year ledger the oracle does recompute: finalGapTonnes 1370.083 in SECTION 22.
+The residual to target sits beside the target verdict on every module three curve, and every one of those verdicts is none: each curve carries a claim the engine could not check against its source, or a claim above what its source emits. The residual is not recomputed by an oracle either. So this tier quotes the target, 16830.083 tCO2e, and the curve's total, and reads the programme's shortfall from the path, whose year ledger the oracle does recompute: finalGapTonnes 1370.083 in module four.
 
 ## Reading a figure with its status
 
-Three statuses run through this tier. An engine output an oracle recomputes is checked by a second route. An engine output no oracle recomputes is taught as printed. A figure marked computed here is the digest's own arithmetic on engine figures: the capital against one year, the plain mean, the one-year cost of a saving. The last kind is marked computed here, and no engine call returns it.
+Three statuses run through this tier. An engine output an oracle recomputes is checked by a second route. An engine output no oracle recomputes is taught as printed. A figure marked computed here is the course's own arithmetic on engine figures: the capital against one year, the plain mean, the one-year cost of a saving. The last kind is marked computed here, and no engine call returns it.
 
 ## Exercise
 
-Read SECTION 26's list of outputs neither oracle recomputes, paysForItselfTonnes on the Agbor curve, and the cost per tonne of Tune the fired heaters. Say what the list shows about the status of each figure, and which of the two is on that list.
+Read the course's list of outputs neither oracle recomputes, paysForItselfTonnes on the Agbor curve, and the cost per tonne of Tune the fired heaters. Say what the list shows about the status of each figure, and which of the two is on that list.

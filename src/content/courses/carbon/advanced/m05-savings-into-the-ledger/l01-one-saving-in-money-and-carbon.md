@@ -1,6 +1,6 @@
 # One saving in money and carbon
 
-An energy saving is one quantity of fuel not burned. `energyEfficiency.priceSaving` prices it twice from that one quantity: once in money, once in carbon. SECTION 23 prints the call on an invented AGBOR saving, and this module reads it.
+An energy saving is one quantity of fuel not burned. `energyEfficiency.priceSaving` prices it twice from that one quantity: once in money, once in carbon. The lab prints the call on an invented AGBOR saving, and this module reads it.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -32,7 +32,7 @@ The other two bring in the implementation cost. costPerTonneCo2e, -74.2270 USD a
 
 ## Money and carbon travel together
 
-The call returns both figures from one set of inputs, and SECTION 23 prints them in the same table, each with its unit: US dollars a year and tCO2e a year. The money figure rests on the saving and the fuel price. The carbon figure rests on the saving and the factor. The saving, the price and the factor are all declared on one basis, LHV, and the next lesson reads why that declaration is required. Neither figure is converted into the other, and a reader quotes each in its own unit.
+The call returns both figures from one set of inputs, and the lab prints them in the same table, each with its unit: US dollars a year and tCO2e a year. The money figure rests on the saving and the fuel price. The carbon figure rests on the saving and the factor. The saving, the price and the factor are all declared on one basis, LHV, and the next lesson reads why that declaration is required. Neither figure is converted into the other, and a reader quotes each in its own unit.
 
 ## What a missing factor does
 

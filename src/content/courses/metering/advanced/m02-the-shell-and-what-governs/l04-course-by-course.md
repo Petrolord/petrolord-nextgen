@@ -34,4 +34,4 @@ That is worth more than it looks. A property the engine asserts about its own me
 
 ## Exercise
 
-Read the course table in digest SECTION 26 and say which course is the first one whose required thickness is above both of its own computed thicknesses. Say what that tells you about which candidate governs from there upward.
+Read the course table in this lesson and say which course is the first one whose required thickness is above both of its own computed thicknesses. Say what that tells you about which candidate governs from there upward.
