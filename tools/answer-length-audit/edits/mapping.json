@@ -1,0 +1,38 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-leave-one-out",
+  "ord": 15,
+  "option": 2,
+  "old": "The root mean square of 8.03 m.",
+  "new": "The RMS of 8.03 m."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-thickness-map",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the 200 m grid has lost the maximum as well, so both ends of the range have moved.",
+  "new": "Because the 200 m grid lost the maximum too, so both ends of the range have moved."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-isochore-workflow",
+  "ord": 14,
+  "option": 1,
+  "old": "How far the map mean moves when the least reliable well is removed from the control.",
+  "new": "How far the map mean moves when the least reliable well is dropped from the control set and the rest regridded."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-isochore-workflow",
+  "ord": 14,
+  "option": 2,
+  "old": "How much of the mapped area lies more than 800 m from any control point.",
+  "new": "How much of the mapped area lies more than 800 m from any control point, a coverage statistic for the grid."
+ }
+]
