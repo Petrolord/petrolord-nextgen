@@ -8,7 +8,7 @@
    "3801.573360"
   ],
   "answer": 0,
-  "explanation": "The simplified table prints 2758.406219 beside a 2oo3 PFDavg of 0.000362528185. 2706.319458 is the same architecture once detected failures are added to the channel. 3377.890772 is the simplified pair and 3801.573360 the simplified three channel arrangement, both of which sit lower on PFDavg and so higher here."
+  "explanation": "Beside the simplified 0.000362528185 sits 2758.406219, one over it. 2706.319458 answers the full form channel with its detected rate and its 8 hour restoration times. 3377.890772 is the simplified pair and 3801.573360 the simplified three channel arrangement, both of which sit lower on PFDavg and so higher here."
  },
  {
   "prompt": "And beside the simplified two out of two on the same channel?",
@@ -88,7 +88,7 @@
   "explanation": "The repair time sweep prints 1319.600000 hours at zero. 1322.000000 hours is the same channel at the 8 hours it is otherwise stated at, and 1326.800000 and 1341.200000 hours are the rows at 24 and 72 hours. The repair time is added once to each undetected down time, so the channel figure moves with it."
  },
  {
-  "prompt": "On that same sweep, what group equivalent down time does a repair time of 24 hours give?",
+  "prompt": "Hold the EKULAMA pair at an MTTR of 8 hours and set the repair time after a test to 24 hours. Which group equivalent down time is reported?",
   "options": [
    "881.600000",
    "888.800000",
@@ -143,15 +143,15 @@
   "explanation": "The coverage table prints 133.130974 at 0.9, still inside band 2. 174.291939 is the 0.95 row and 252.295893 the perfect test row. 189.107413 belongs to a single EKULAMA channel with detected failures, which is a different subsystem on different rates."
  },
  {
-  "prompt": "In the equivalent down time table for the EKULAMA pair, which figure is the detected common cause term?",
+  "prompt": "Besides the two equivalent down times, which other term of a redundant call does the repair time after a proof test enter?",
   "options": [
-   "0.000263280000",
-   "0.000000448000",
-   "0.000035259176",
-   "0.000105777528"
+   "The detected common cause term, betaD times lambdaDD times the MTTR, since both restoration times are charged to the same detected population.",
+   "The undetected common cause term, b lambdaDU (T1/2 + MRT), with b the beta factor.",
+   "The group coefficient in front of the squared independent rate, which moves from 2 towards 6 as the restoration time grows longer.",
+   "None, since the MRT is charged to the single channel alone."
   ],
   "answer": 1,
-  "explanation": "The table prints 0.000000448000, which is betaD multiplied by lambdaDD and by the MTTR alone, and it is almost invisible beside the rest of the answer. 0.000263280000 is the undetected common cause term, which waits half an interval. 0.000035259176 and 0.000105777528 are independent terms of the pair and of the two out of three."
+  "explanation": "The repair time section says the engine adds MRT to every undetected down time and that MRT enters the common cause DU term too, as b lambdaDU (T1/2 + MRT). The detected common cause term is carried on the MTTR, which is a different restoration time. The coefficients 2 and 6 count orderings of failures and never move with a restoration time. And MRT reaches the group figure as well as the channel figure."
  },
  {
   "prompt": "A beta factor of 0.05 is typed on the EKULAMA pair, betaD at half of it. What independent term does the call carry?",
@@ -165,15 +165,15 @@
   "explanation": "The common cause sweep prints an independent term of 0.000035005448 for the pair at 0.05. 0.000036430741 is that term at 0.02, 0.000032693162 at 0.1 and 0.000028305589 at 0.2. The term falls as the fraction rises, because those failures are taken out of the independent rate before it is squared."
  },
  {
-  "prompt": "Three channels voting two of them, at that same fraction of 0.05 and half of it: which total?",
+  "prompt": "At a beta factor of 0.02 with betaD at half of it, which term does the two out of three report as dominant?",
   "options": [
-   "0.000298845448",
-   "0.000214828223",
-   "0.000625759485",
-   "0.000368856345"
+   "The common cause contribution, 0.000105536000 against an independent term of 0.000036430741, the same turn the pair makes on that row.",
+   "The common cause contribution, since a voted arrangement is always common cause dominated once any beta factor has been typed.",
+   "Neither, since the two terms tie on that row.",
+   "The independent term, 0.000109292223 against a common cause contribution of 0.000105536000."
   ],
   "answer": 3,
-  "explanation": "The sweep prints 0.000368856345 for the 2oo3 at 0.05, the row where that arrangement first reads common cause dominated. 0.000298845448 is the pair on the same row. 0.000214828223 is the 2oo3 at 0.02 and 0.000625759485 the 2oo3 at 0.1."
+  "explanation": "The sweep reports the 2oo3 as independent dominated at 0.02, with an independent term of 0.000109292223 just above the shared common cause contribution of 0.000105536000. 0.000036430741 is the pair's independent term on the same row, which is why the pair turns there and the two out of three does not. The two terms are close and unequal, and a typed beta factor of zero leaves both arrangements independent dominated."
  },
  {
   "prompt": "And the pair itself on that row of the sweep?",
@@ -198,15 +198,15 @@
   "explanation": "The sweep prints 0.000527680000 in the common cause column of both the pair and the two out of three at 0.1. 0.000263840000 is that column at 0.05, 0.001055360000 at 0.2 and 0.000105536000 at 0.02. The column is identical across the two arrangements on every row, which is the point of the sweep."
  },
  {
-  "prompt": "At that same fraction of 0.1, what independent term does the two out of three carry?",
+  "prompt": "At a proof test coverage of 0.7 on the OBAGI valve, what share of the undetected failures is left for the ten year overhaul?",
   "options": [
-   "0.000098079485",
-   "0.000109292223",
-   "0.000105016345",
-   "0.000084916768"
+   "30.00 percent, derived.",
+   "0.7 of them, the share the coverage names, since a partial test leaves behind the fraction it was credited with.",
+   "3.685286 of the undetected failures, since that is the ratio the coverage section prints beside this row of the table.",
+   "4.53 percent, the same addition the week long repair time makes."
   ],
   "answer": 0,
-  "explanation": "The sweep prints 0.000098079485 for the 2oo3 independent term at 0.1. 0.000109292223 is that term at 0.02 and 0.000105016345 at 0.05. 0.000084916768 is the same term at 0.2, one row further down, so each answers a different claim about common cause."
+  "explanation": "The coverage section says a coverage of 0.7 leaves, derived, 30.00 percent of the undetected failures to wait for the 10 year overhaul. The coverage is the share a test reveals, so the remainder is one minus it. 3.685286 is how many times the perfect test's PFDavg the valve reaches, a ratio of PFDavg values. 4.53 percent is the repair time sweep on the EKULAMA pair."
  },
  {
   "prompt": "The two out of three is pushed to a fraction of 0.2 with betaD at half. What total is printed?",
@@ -231,18 +231,18 @@
   "explanation": "The common cause section states the two terms in that order, and neither carries an equivalent down time or a square, because a common cause failure takes the whole group at once and so behaves like one channel failing. Swapping the down times charges each population the wrong wait, which is the mix up the sweep and the golden's differing case exist to expose."
  },
  {
-  "prompt": "In the ranked table, what does the single channel read in the column that measures every architecture against it?",
+  "prompt": "In the full form table for the EKULAMA channel, which two architectures print 0.000000000000 in both common cause columns?",
   "options": [
-   "2.000000",
-   "0.056541",
-   "1.000000",
-   "0.069876"
+   "1oo2 and 2oo3, the two arrangements that share one group equivalent down time of 884.000000 hours on this channel.",
+   "Only 1oo1, since a two out of two carries a common cause term whenever its call has detected failures on it.",
+   "1oo1 and 2oo2.",
+   "2oo2 and 1oo3."
   ],
   "answer": 2,
-  "explanation": "The ranked table prints 1.000000 for the 1oo1, which is the base of that column. 2.000000 is the two out of two, the one entry above the base. 0.056541 is the pair and 0.069876 the two out of three, both far below it."
+  "explanation": "The table prints zero common cause terms for the single channel and for the two out of two, because the engine adds common cause only to the redundant arrangements and the 2oo2 form carries no beta factor term. The 1oo2, the 2oo3 and the 1oo3 all carry 0.000263280000 and 0.000000448000."
  },
  {
-  "prompt": "What does a two out of three buy that a one out of two does not, on the same hardware?",
+  "prompt": "Built from identical channels, what does voting two of three give a design that a redundant pair cannot?",
   "options": [
    "Tolerance of one channel calling for a trip on its own, which this engine computes no number for at all.",
    "A lower PFDavg, because two of its three channels have to be failed before it misses a demand at all.",
@@ -308,15 +308,15 @@
   "explanation": "The engine refuses in those words and lists what it does implement. The message about a failure rate is what a negative lambdaDU earns. The message about a time above 0 hours answers a proof test interval of zero. The message about a time in hours, zero or more, answers a negative repair time after a test, so each of the three names a different field."
  },
  {
-  "prompt": "The ORONI row is taken at a tolerable mitigated event likelihood of 1e-7 per year. What PFDavg does it require of a function?",
+  "prompt": "Where do the failure rates of the published worked function come from, and what does this course take them for?",
   "options": [
-   "0.000000024205",
-   "0.001792971954",
-   "0.001287026426",
-   "0.007407407407"
+   "The engine's own teaching table of failure rates, which the course carries so that any verification can be run without a data source of its own.",
+   "A licensed IEC table, reproduced in the engine so that every published row can be checked against the standard it came from.",
+   "Field data from the plant the source describes, offered as a recommended starting point.",
+   "The slide's own example values, cited there to SINTEF PDS and vendor certificates, and taken for nothing more than an example."
   ],
   "answer": 3,
-  "explanation": "That row requires 0.007407407407, which is the figure the achieved value is measured against when the teaching function is typed onto it. 0.000000024205 per year is the mitigated frequency the closed row returns. 0.001792971954 is what the function achieves and 0.001287026426 is a different function entirely."
+  "explanation": "The reproduction section says the rates are the slide's own, cited there to SINTEF PDS and vendor certificates, and that they are its example values and this course offers them as nothing more. The engine carries no failure rate data at all, and no licensed IEC or ISA table is reproduced anywhere in it."
  },
  {
   "prompt": "With that function typed onto the row, what mitigated frequency does the engine report?",
@@ -404,7 +404,7 @@
    "5.34E-07"
   ],
   "answer": 0,
-  "explanation": "The source prints 2.36E-04 there, which the engine's 0.000235764375 rounds to. 3.44E-04 is the same subsystem in the second table, where the beta factor is raised by half for the voted arrangement. 1.05E-03 is the valve assembly and 5.34E-07 the processor."
+  "explanation": "Printed at three figures, that row reads 2.36E-04, and the reproduction's 0.000235764375 rounds onto it. 3.44E-04 is the same subsystem in the second table, where the beta factor is raised by half for the voted arrangement. 1.05E-03 is the valve assembly and 5.34E-07 the processor."
  },
  {
   "prompt": "The warning on a rare event call names a product. What figure does it give?",
@@ -453,12 +453,12 @@
  {
   "prompt": "What had to be assumed before the published table reproduced at all?",
   "options": [
-   "That the beta factor of the voted arrangement was the printed one on every row, including the second table where it is multiplied for voting.",
+   "That every row shared one beta factor of 0.1, so the voted arrangements and the electronic cards carried one common cause fraction between them.",
    "That every row shared one proof test interval of 8760 hours, which the source declined to print anywhere alongside its results table.",
    "That the failure rates were the engine's own illustrative teaching values rather than the vendor figures the source cites for them.",
    "That the repair time after a test equalled the MTTR on every row."
   ],
   "answer": 3,
-  "explanation": "The reproduction section says the published table reproduces only with MRT equal to the MTTR on every row. The interval of one year is printed by the source throughout. The rates are the source's own, cited there to industry databases and vendor certificates. And the second table reproduces at a beta factor raised by half rather than at the printed one."
+  "explanation": "The reproduction section says the published table reproduces only with MRT equal to the MTTR on every row. The one year interval holds on every row as the table states it. The rates are the source's own, cited there to SINTEF PDS and vendor certificates. And the beta factors differ row by row: 0.1 on the pressure transmitters and the valves, 0.02 on the three electronic cards."
  }
 ]

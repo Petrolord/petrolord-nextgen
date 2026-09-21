@@ -11,7 +11,7 @@ q(2,
  "A redundant pair is claimed to share nothing at all, so both fractions are typed as zero on the diagnostics bearing teaching channel. What comes back?",
  "0.000037396736",
  ["0.000112190208","0.000035259176","0.000036430741"],
- "The sweep prints 0.000037396736 for the pair at zero, where the common cause column reads 0.000000000000 and the call is independent dominated. 0.000112190208 is the two out of three on the same zero row. 0.000036430741 is the pair's independent term once a beta factor of 0.02 is typed, and 0.000035259176 is that term at 0.05.")
+ "The sweep prints 0.000037396736 for the pair at zero, where the common cause column reads 0.000000000000 and the call is independent dominated. 0.000112190208 is the two out of three on the same zero row. 0.000036430741 is the pair's independent term once a beta factor of 0.02 is typed, and 0.000035259176 is the pair's independent term on the stated inputs of the full form table, where betaD is 0.02 against a beta factor of 0.05.")
 
 q(0,
  "Under that same claim of nothing shared, three channels voting two of them return which total?",
@@ -69,7 +69,7 @@ q(1,
  ["Because betaD is always half the beta factor, so the engine asks for it once and carries the ratio through every architecture it knows.",
   "Because betaD applies to a single channel and the beta factor applies to a group.",
   "Because betaD replaces the beta factor whenever diagnostics exist."],
- "The undetected common cause term is the beta factor times lambdaDU times T1/2 plus MRT, and the detected one is betaD times lambdaDD times the MTTR, so the two fractions weight different populations over very different down times and the engine refuses a redundant call with detected failures and no betaD. BetaD is not fixed at half the beta factor, it does not belong to one channel, and it never replaces the beta factor.")
+ "The undetected common cause term is the beta factor times lambdaDU times T1/2 plus MRT, and the detected one is betaD times lambdaDD times the MTTR, so the two fractions weight different populations over very different down times and the engine refuses a redundant call with detected failures and no betaD. BetaD is typed on its own with no fixed ratio to the beta factor, it belongs to no single channel, and it never replaces the beta factor.")
 
 q(3,
  "A two out of two is called with a beta factor typed. Which words does the engine return alongside the answer?",

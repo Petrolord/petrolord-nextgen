@@ -58,10 +58,12 @@ q(2,
  "Reproducing the five rows gives 777.344387, which rounds to the 777 the source printed, on a function banded 2. A value of 557.733208 answers the three subsystem chain taught earlier in this tier. A single simplified channel carries 190.258752, and 252.295893 belongs to a shutdown valve given a perfect proof test.")
 
 q(1,
- "The source also prints a second table in which the beta factor of a voted arrangement is multiplied. What does the engine return for the transmitter row there?",
- "0.000344085754",
- ["0.000235764375","0.000369505528","0.000362528185"],
- "At a beta factor of 0.15 the engine gives 0.000344085754, which rounds to the printed 3.44E-04. 0.000235764375 is the same row in the first table at 0.1. 0.000369505528 and 0.000362528185 are two out of three figures for the teaching channel, computed on rates that have nothing to do with this source.")
+ "How many subsystem rows does the published worked function carry into its series sum?",
+ "Five: the pressure transmitters, the analogue input card, the processor, the digital output card and the valve assembly.",
+ ["Three: a sensor, a logic solver and a final element, since the series equation the engine quotes names exactly those three letters and no more.",
+  "Four: the pressure transmitters, the processor, the digital output card and the valve assembly, with the input card folded into the processor.",
+  "Six, one of them the transmitters at a raised beta factor."],
+ "The reproduction table lists five golden cases, dolan-pt-2oo3, dolan-ai-2oo3, dolan-cpu-1oo2, dolan-do-1oo2 and dolan-valve-1oo2, and the engine sums all five. The three letters of the series equation are the usual three links, and the engine takes any non-empty list. The row with the raised beta factor comes from the source's second table and is no part of this sum.")
 
 q(3,
  "A single channel is called at lambdaDU 2e-5 per hour over a proof test interval of 8760 hours. What PFDavg does the engine return with its warning?",

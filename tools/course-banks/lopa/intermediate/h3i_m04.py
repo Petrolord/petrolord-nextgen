@@ -11,7 +11,7 @@ q(3,
  "In the ranking of all five architectures on the diagnostics bearing teaching channel, what risk reduction factor stands beside the single channel row?",
  "189.107413",
  ["777.344387","133.130974","190.258752"],
- "Ranked by PFDavg, the single channel row carries 189.107413 on a value of 0.005288000000. Drop its diagnostics and the same architecture reads 190.258752, so that figure answers a different channel. 133.130974 is a shutdown valve at a proof test coverage of 0.9, and 777.344387 belongs to a published function summed from five subsystems.")
+ "Ranked by PFDavg, the single channel row carries 189.107413 on a value of 0.005288000000. 190.258752 is the simplified single channel, with no detected failures and no repair time after a test, so that figure answers a different channel. 133.130974 is a shutdown valve at a proof test coverage of 0.9, and 777.344387 belongs to a published function summed from five subsystems.")
 
 q(1,
  "What does the engine report beside a two out of two on this channel, read as one over its PFDavg?",
@@ -47,19 +47,21 @@ q(2,
  "The ranking prints a risk reduction factor beside every architecture. Which one belongs to the pair?",
  "3344.625055",
  ["3787.861448","3801.573360","3377.890772"],
- "Ranked by PFDavg the pair carries 3344.625055 on a value of 0.000298987176, inside band 3. Take its diagnostics away and the pair reads 3377.890772 instead. 3787.861448 belongs to the three channel arrangement of this ranking, and 3801.573360 to the three channel arrangement without diagnostics.")
+ "Ranked by PFDavg the pair carries 3344.625055 on a value of 0.000298987176, inside band 3. 3377.890772 is the simplified pair, with no detected failures and no repair time after a test. 3787.861448 belongs to the three channel arrangement of this ranking, and 3801.573360 to the three channel arrangement without diagnostics.")
 
 q(0,
  "The two out of three in that ranking is credited with which risk reduction factor?",
  "2706.319458",
  ["2758.406219","3344.625055","3787.861448"],
- "The ranked table prints 2706.319458 beside a 2oo3 PFDavg of 0.000369505528. 2758.406219 is the same architecture on the channel without diagnostics. 3344.625055 is the pair of this ranking and 3787.861448 is the three channel arrangement of it, both of which sit lower on PFDavg and so higher here.")
+ "The ranked table prints 2706.319458 beside a 2oo3 PFDavg of 0.000369505528. 2758.406219 comes from the simplified forms table, where lambdaDD and MRT are both zero. 3344.625055 is the pair of this ranking and 3787.861448 is the three channel arrangement of it, both of which sit lower on PFDavg and so higher here.")
 
 q(3,
- "Three channels need two overlaps before they fail together. Which group figure in hours does the call report?",
- "665.000000",
- ["884.000000","888.800000","932.000000"],
- "For a 1oo3 the engine reports 665.000000 hours as its group figure and 884.000000 hours for the second failure, since a quarter of the interval sets the group and a third sets the second failure. The values 888.800000 and 932.000000 belong to a redundant pair whose repair time after a proof test was swept to 24 and to 168 hours.")
+ "Every architecture in the ranked table is built on one channel. What total dangerous failure rate does that channel carry, derived?",
+ "4e-6 per hour: lambdaDU of 1.2e-6 plus lambdaDD of 2.8e-6.",
+ ["1.2e-6 per hour, because the diagnostics reclassify part of the undetected rate as detected and the total the channel carries stays where it was.",
+  "2.8e-6 per hour, the detected rate alone, since a detected failure is the only one the MTTR restores.",
+  "4e-6 per hour of undetected failures, with no detected rate left."],
+ "The full form section derives lambdaD, the sum of lambdaDU and lambdaDD, as 4e-6 per hour. The detected rate is added to the channel on top of its undetected rate of 1.2e-6, so nothing is reclassified, which is why the single channel reads 0.005288000000 against 0.005256000000 with no detected failures. The total keeps its split, because the two shares are charged different down times in the channel equivalent down time.")
 
 q(1,
  "Read the ranked table by band. Which architecture is the one sitting in band 2?",

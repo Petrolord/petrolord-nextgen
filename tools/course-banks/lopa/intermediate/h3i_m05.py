@@ -30,7 +30,7 @@ q(1,
  "Add the three subsystems of the IDU function together. What total does the engine report?",
  "0.001792971954",
  ["0.001287026426","0.001286431107","0.000369505528"],
- "The engine sums the subsystems in series and prints 0.001792971954, banded 2 with the state SIL. 0.001287026426 is the valve pair alone, which is most of the total but not all of it. 0.001286431107 is the published function reproduced elsewhere in this tier. 0.000369505528 is the transmitter subsystem.")
+ "The engine sums the subsystems in series and prints 0.001792971954, banded 2 with the state SIL. 0.001287026426 is the valve pair alone, which is most of the total, with the other two parts making up the rest. 0.001286431107 is the published function reproduced elsewhere in this tier. 0.000369505528 is the transmitter subsystem.")
 
 q(2,
  "Read that function total as one over the PFDavg. What risk reduction factor does the engine print?",
@@ -62,7 +62,7 @@ q(1,
  ["PFD = 2 lD tCE (Annex B carries no beta term for 2oo2)",
   "frequencies per year; probabilities and PFDs dimensionless",
   "IEC 61508-6:2010 Annex B.3.2.2 reliability block diagram simplified equations, low demand; reduces to the ISA-TR84.00.02 simplified forms when lambdaDD = 0 and MRT = 0"],
- "The engine's method string for a function is verbatim: series sum of subsystem PFDavg (IEC 61508-6 Annex B.3.2.1: PFD_SYS = PFD_S + PFD_L + PFD_FE). The two out of two string is one architecture's formula. The units line says what the quantities are dimensioned in. The longest of the four is the basis that names which published equations a subsystem call ran and the corner they collapse in.")
+ "The engine's method string for a function is verbatim: series sum of subsystem PFDavg (IEC 61508-6 Annex B.3.2.1: PFD_SYS = PFD_S + PFD_L + PFD_FE). The two out of two string is one architecture's formula. The units line says what the quantities are dimensioned in. The Annex B.3.2.2 string is the basis that names which published equations a subsystem call ran and the corner they collapse in.")
 
 q(2,
  "Name the architecture the IDU function gives its final element.",
@@ -79,9 +79,9 @@ q(0,
  "The section states it: closing the row with this function gives a mitigated frequency of 0.000000024205 per year and meetsTmel is true. The engine prints that frequency, so nothing is declined and nothing is blocked by the layers already on the row. Reporting the frequency and then a false verdict would contradict the achieved figure sitting below what the row requires.")
 
 q(3,
- "Set what the function achieves beside what that row requires of it. Which statement is right?",
- "The achieved 0.001792971954 sits below the required 0.007407407407.",
- ["The achieved 0.001792971954 sits above the required 0.007407407407, so the row is closed on the band alone and the function has to be improved.",
+ "That row requires a PFDavg of 0.007407407407 of any function typed onto it. Set what the function achieves beside that requirement. Which statement is right?",
+ "The achieved 0.001792971954 sits below it, so the row is met.",
+ ["The achieved 0.001792971954 sits above it, so the row is closed on the band alone and the function has to be improved.",
   "The two figures are equal once the achieved value is rounded to the six decimals the engine prints risk reduction factors at, so the row is met exactly.",
   "The required figure cannot be compared with the achieved one, because one comes from the determination half and the other from the verification half."],
  "The section prints both and compares them: the achieved PFDavg of 0.001792971954 is below the required 0.007407407407, which is why meetsTmel is true. The whole discipline of this tier is that the two halves are compared, so no comparison is barred. The figures are not equal at any precision, and the achieved figure is plainly the smaller of the two.")
@@ -108,7 +108,7 @@ q(3,
  ["The logic solver proof test interval, since it is the only single channel subsystem in the chain and so the one with no redundancy behind it.",
   "The transmitter beta factor, because a voted arrangement carries the common cause term that no amount of voting can remove from the answer.",
   "The betaD of the transmitters, which is the only detected common cause fraction anywhere in this function."],
- "The share column makes the argument: the valves carry 71.78 percent of the function, derived, so their interval is the first lever and their beta factor the second. The logic solver is 7.61 percent of the total, so nothing done to it moves the function far. The transmitters are 20.61 percent, and their fractions sit behind a term smaller than the valves' by a wide margin.")
+ "The share column makes the argument: the valves carry 71.78 percent of the function, derived, so their proof test interval is the first lever. The logic solver is 7.61 percent of the total, so nothing done to it moves the function far. The transmitters are 20.61 percent, and their fractions sit behind a term smaller than the valves' by a wide margin.")
 
 emit(Q, '/root/hse-wip-lopa/banks/h3i_m05.json', expect_n=15)
 finish()
