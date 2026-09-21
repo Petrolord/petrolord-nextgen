@@ -258,35 +258,35 @@
    "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
   },
   "gate_capstone_leak.mjs": {
-   "md5": "e6b4547dfb6a99cb8d6cdf36837f6edf",
+   "md5": "3b4d2f84152b6079f4c8a12e0d02c213",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons",
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
-   "md5": "e6b4547dfb6a99cb8d6cdf36837f6edf",
+   "md5": "3b4d2f84152b6079f4c8a12e0d02c213",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-value",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
-   "md5": "e6b4547dfb6a99cb8d6cdf36837f6edf",
+   "md5": "3b4d2f84152b6079f4c8a12e0d02c213",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-input",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
-   "md5": "e6b4547dfb6a99cb8d6cdf36837f6edf",
+   "md5": "3b4d2f84152b6079f4c8a12e0d02c213",
    "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-name",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
-   "md5": "e6b4547dfb6a99cb8d6cdf36837f6edf",
+   "md5": "3b4d2f84152b6079f4c8a12e0d02c213",
    "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
    "expected": 1,
    "exit": 1,

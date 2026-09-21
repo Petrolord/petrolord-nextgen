@@ -285,7 +285,11 @@ LIVE_SIBLINGS.forEach(([w, f]) => {
 // a recut migration supersedes the course migration before it.
 const harvested = new Map();
 if (!fs.existsSync(MIGRATIONS)) die(`no migrations directory at ${MIGRATIONS}`);
-const migFiles = fs.readdirSync(MIGRATIONS).filter((f) => f.endsWith('.sql')).sort();
+// THIS COURSE'S OWN MIGRATIONS are the answer key itself, and are never a
+// sibling: they are excluded BY NAME and the count excluded is printed.
+const ownMig = fs.readdirSync(MIGRATIONS).filter((f) => /_h3_lopa_/.test(f));
+const migFiles = fs.readdirSync(MIGRATIONS).filter((f) => f.endsWith('.sql') && !/_h3_lopa_/.test(f)).sort();
+console.log(`  direction 7: ${ownMig.length} of this course's own migrations excluded by name from the live sweep`);
 migFiles.forEach((f) => {
   const t = fs.readFileSync(path.join(MIGRATIONS, f), 'utf8');
   for (const m of t.matchAll(/\{[^{}]*"expected"[^{}]*\}/g)) {
