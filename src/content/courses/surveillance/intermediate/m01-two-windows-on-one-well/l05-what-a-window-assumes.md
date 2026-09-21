@@ -22,7 +22,7 @@ A row is one calendar day, and nothing in the ledger says otherwise. The two win
 
 ## The mistake
 
-Treating the printed value as the well's condition over the window. It is the mean of one column over a date range under one reading of that column, and swapping the reading for the equally defensible other one moves the OGUTA-2 gas-oil ratio by a factor the digest records as 1.653099061020.
+Treating the printed value as the well's condition over the window. It is the mean of one column over a date range under one reading of that column, and swapping the reading for the equally defensible other one moves the OGUTA-2 gas-oil ratio by a factor the course records as 1.653099061020.
 
 ## What it refuses
 

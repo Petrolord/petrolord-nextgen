@@ -26,7 +26,7 @@ That gives 8 hours at 2,000 m and 12 hours at 3,000 m, and those are the numbers
 
 The surface section has no trip in the golden programme. It drills to 500 m and runs 20 inch casing directly.
 
-The section pricing gives it 2 hours anyway, and the digest marks that hour as synthetic. It is there so the three sections can be compared on the same form, and it is not in the schedule. Two hours at 6,000 USD/hr is 12,000 USD on a 206,000 USD section, so it does not change any conclusion, and you should still know it is there.
+The section pricing gives it 2 hours anyway, and the course marks that hour as synthetic. It is there so the three sections can be compared on the same form, and it is not in the schedule. Two hours at 6,000 USD/hr is 12,000 USD on a 206,000 USD section, so it does not change any conclusion, and you should still know it is there.
 
 ## Productive hours, not elapsed
 

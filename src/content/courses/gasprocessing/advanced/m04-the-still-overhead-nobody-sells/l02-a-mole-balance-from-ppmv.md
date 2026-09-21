@@ -25,7 +25,7 @@ Every step in that chain is a multiplication. No step solves anything, iterates,
 
 Both columns are linear in both inputs, and the rows prove it rather than the prose asserting it. Tripling the concentration from 60 to 180 ppmv at a fixed absorbed fraction multiplies the pounds a day by 3.000000000000. Doubling the absorbed fraction from 0.1 to 0.2 at a fixed concentration multiplies it by 2.000000000000.
 
-Both of those are the digest dividing two rows of the table above. Neither is an estimate and neither is an assumption about what a mole balance ought to do.
+Both of those are the course dividing two rows of the table above. Neither is an estimate and neither is an assumption about what a mole balance ought to do.
 
 A mole balance with one operating multiplier and no chemistry is exactly what those two figures describe. If either had come back as anything other than a clean whole number, something in the chain would have been doing more than multiplying.
 
@@ -43,4 +43,4 @@ It also makes the uncertainty easy to state, which is the honest use of it. The 
 
 ## Exercise
 
-Write out the chain from a concentration in ppmv through to a mass, naming each multiplication in order. Record the two linearity figures the digest prints, naming the two rows each was formed from. Then pick any row of the table and reach any other row from it using only those ratios.
+Write out the chain from a concentration in ppmv through to a mass, naming each multiplication in order. Record the two linearity figures the lesson prints, naming the two rows each was formed from. Then pick any row of the table and reach any other row from it using only those ratios.

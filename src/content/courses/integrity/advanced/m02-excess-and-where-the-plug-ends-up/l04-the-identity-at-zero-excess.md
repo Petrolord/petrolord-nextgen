@@ -1,6 +1,6 @@
 # The identity at zero excess
 
-One line in the digest is worth more than any of the others, because it is the line that tells you the rest can be trusted.
+One line in the lab is worth more than any of the others, because it is the line that tells you the rest can be trusted.
 
 {{panel:wi-pa-explorer}}
 
@@ -8,7 +8,7 @@ One line in the digest is worth more than any of the others, because it is the l
 
 Run the published geometry at zero excess. The design plug top is 1850 m MD. The settled top the engine computes, after the slurry redistributes across the full bore, is 1850 m MD. The absolute error between them is 0.
 
-Not close to zero. Zero. The engine header states the identity as a property of the model, and the digest confirms it holds.
+Not close to zero. Zero. The engine header states the identity as a property of the model, and the lab confirms it holds.
 
 ## Why it has to hold
 

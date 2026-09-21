@@ -26,7 +26,7 @@ The module's own refusal text names the range: real treatments reach about -3 to
 
 Take a published skin pair, compute its multiplier and invert it. Published case 2 runs skin 5.000 down to -2.000 for a multiplier of 2.186294988, and the inverse returns -2.000000000, a difference of 8.8818e-16. Cases 1 and 3 both return 0.000000000 with a difference of 0.0000e+0.
 
-That round trip is a check the teaching digest ran, not one the oracle wrote. The published cases assert `skinPiMultiplier` and nothing asserts `skinFromPiRatio` at all.
+That round trip is a check this course ran, not one the oracle wrote. The published cases assert `skinPiMultiplier` and nothing asserts `skinFromPiRatio` at all.
 
 ## What it refuses
 

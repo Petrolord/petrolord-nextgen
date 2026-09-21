@@ -22,7 +22,7 @@ Neither assumption is the truth. Each one is a bet about which dimension is smal
 
 ## The evidence is in the disagreement
 
-Give both models the same rock, fluid, rate and height and they still disagree, because the geometry they assume is different. In the digest sweep the KGD average width is 1.8723566993895047 times the PKN average width at a half-length of 40 m, and 3.0985171538556986 times it at 300 m.
+Give both models the same rock, fluid, rate and height and they still disagree, because the geometry they assume is different. In the course's sweep the KGD average width is 1.8723566993895047 times the PKN average width at a half-length of 40 m, and 3.0985171538556986 times it at 300 m.
 
 That growing gap is the missing third dimension making itself felt. As the fracture lengthens relative to its height, one fiction gets more defensible and the other gets less, and the answers pull apart.
 

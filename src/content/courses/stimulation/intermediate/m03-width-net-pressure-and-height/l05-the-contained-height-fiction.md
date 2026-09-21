@@ -34,6 +34,6 @@ That check lives outside the engine, in the stress profile from your geomechanic
 
 ## Exercise
 
-On paper, list the digest outputs from this module that would be wrong if the real height were twice the assumed one, and say in each case whether the error is optimistic or pessimistic.
+On paper, list the engine outputs from this module that would be wrong if the real height were twice the assumed one, and say in each case whether the error is optimistic or pessimistic.
 
 Then write the one sentence you would put next to a two dimensional half-length in a design report.

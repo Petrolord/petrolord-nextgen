@@ -37,4 +37,4 @@ A bare refusal would have said none of that. The step says how far the march got
 
 ## Exercise
 
-Record the arrival temperature, the cooling and the three coefficients for the let-down to 640.000000 psia, and the figure the digest prints for the inlet coefficient against the mean. Record the arrival and the cooling at the three deeper outlets. Then record the step, the pressure and the temperature the failed march hands back, and say what each of those three tells a reader.
+Record the arrival temperature, the cooling and the three coefficients for the let-down to 640.000000 psia, and the figure the lab prints for the inlet coefficient against the mean. Record the arrival and the cooling at the three deeper outlets. Then record the step, the pressure and the temperature the failed march hands back, and say what each of those three tells a reader.

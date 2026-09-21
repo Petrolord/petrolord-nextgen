@@ -12,7 +12,7 @@ The US gallons in a cubic foot are 7.480519480519, exact as 1728 cubic inches to
 
 ## Measured out of the engine
 
-The interesting kind. A constant is exported under a name, and the digest then asks the engine a question whose answer is that constant and nothing else, then divides the measurement by the export. A ratio of 1.000000000000 says the name and the number actually in use are the same number.
+The interesting kind. A constant is exported under a name, and the course then asks the engine a question whose answer is that constant and nothing else, then divides the measurement by the export. A ratio of 1.000000000000 says the name and the number actually in use are the same number.
 
 | constant | exported | measured | measured over exported |
 | --- | --- | --- | --- |

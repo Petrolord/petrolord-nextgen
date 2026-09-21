@@ -22,7 +22,7 @@ Work in strict SI throughout. Metres, pascals, pascal seconds, cubic metres per 
 
 ## The three checks
 
-Disagreement. The two models must differ on average width by a large factor. In the digest sweep the ratio runs from 1.8723566993895047 at a half-length of 40 m to 3.0985171538556986 at 300 m. Two widths within a few percent of each other means the same expression was evaluated twice.
+Disagreement. The two models must differ on average width by a large factor. In the lab's sweep the ratio runs from 1.8723566993895047 at a half-length of 40 m to 3.0985171538556986 at 300 m. Two widths within a few percent of each other means the same expression was evaluated twice.
 
 Volume. The injected volume must exceed the fracture volume, because leakoff only ever removes fluid. On the published case that is 209.09714590747427 m3 injected against 36.143836842230584 m3 stored.
 

@@ -34,4 +34,4 @@ A coefficient alone is not portable. It was formed at a state, from a gravity an
 
 ## Exercise
 
-Record the coefficient at the AGBADA inlet in degF per psi and in degF per 100 psi. Then record the three coefficients the march reports across the let-down to 640.000000 psia, and the figure the digest prints for the inlet against the mean. Say which of the three you would type into a flowline thermal model and what else you would have to state alongside it.
+Record the coefficient at the AGBADA inlet in degF per psi and in degF per 100 psi. Then record the three coefficients the march reports across the let-down to 640.000000 psia, and the figure the lab prints for the inlet against the mean. Say which of the three you would type into a flowline thermal model and what else you would have to state alongside it.

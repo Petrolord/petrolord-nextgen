@@ -6,7 +6,7 @@ Sixteen states, four colours, and one green.
 
 ## The whole cross product
 
-Four envelope verdicts on the primary, four on the secondary, so sixteen states for a well that can flow. Here they all are, straight from the digest.
+Four envelope verdicts on the primary, four on the secondary, so sixteen states for a well that can flow. Here they all are, straight from the engine.
 
 | primary | secondary | category |
 | --- | --- | --- |

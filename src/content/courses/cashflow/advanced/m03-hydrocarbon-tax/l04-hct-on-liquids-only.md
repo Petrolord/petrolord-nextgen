@@ -20,7 +20,7 @@ deriveHctRate:
 | frontier, either | 0.000000 |
 | override 20 anywhere | 0.200000 |
 
-On the worked example's chargeable profit of 949369854.24 the rates read: PML 284810956.27 (NPV 135185570.34), PPL 142405478.14 (NPV 277591048.48), override 20 189873970.85 (NPV 230122555.76). The licence alone moves take from 86.1703 percent to 71.6019. The marginal pre-2021 flag does the same thing at the same rate: pia_marginal_field_blend charges 26361776.50 on 175745176.68, which is 0.150000. The framework does not move it: AKATA under force_pia reports the same HCT of 77020493.72 as under nta_2025, and only the TET and levy lines change. Deep offshore under the 2025 framework is a reading, not a rule. pia_deep_offshore_nta_aggressive charges 419659147.53 and reports NPV 449025977.03; the custom 12.5 charges 174857978.14 for 693827146.42; the conservative reading charges 0.00 for 890564331.93. On AKATA the same choice is NPV 141623594.88 against 61725382.46, and the digest's own comparison is that the terrain string moves NPV more than an oil price sweep from 82 to 120, which reaches 128984232.18.
+On the worked example's chargeable profit of 949369854.24 the rates read: PML 284810956.27 (NPV 135185570.34), PPL 142405478.14 (NPV 277591048.48), override 20 189873970.85 (NPV 230122555.76). The licence alone moves take from 86.1703 percent to 71.6019. The marginal pre-2021 flag does the same thing at the same rate: pia_marginal_field_blend charges 26361776.50 on 175745176.68, which is 0.150000. The framework does not move it: AKATA under force_pia reports the same HCT of 77020493.72 as under nta_2025, and only the TET and levy lines change. Deep offshore under the 2025 framework is a reading, not a rule. pia_deep_offshore_nta_aggressive charges 419659147.53 and reports NPV 449025977.03; the custom 12.5 charges 174857978.14 for 693827146.42; the conservative reading charges 0.00 for 890564331.93. On AKATA the same choice is NPV 141623594.88 against 61725382.46, and the course's own comparison is that the terrain string moves NPV more than an oil price sweep from 82 to 120, which reaches 128984232.18.
 
 ## The base
 
@@ -30,7 +30,7 @@ On AKATA the exclusion is visible in the bases. The 2029 hct_assessable_profit i
 
 ## The mistake
 
-Taxing the whole revenue at 30 percent, which is what the legacy hatch does: on the gas-only case it turns a project worth 17380000.00 into one worth -2000000.00. The other mistake is treating the deep offshore rate as settled. Three readings, three NPVs, and pia_deep_offshore_hct_interpretation is a string somebody chose; the digest's conservative_zero is a default, not a finding.
+Taxing the whole revenue at 30 percent, which is what the legacy hatch does: on the gas-only case it turns a project worth 17380000.00 into one worth -2000000.00. The other mistake is treating the deep offshore rate as settled. Three readings, three NPVs, and pia_deep_offshore_hct_interpretation is a string somebody chose; the engine's conservative_zero is a default, not a finding.
 
 ## What it refuses
 

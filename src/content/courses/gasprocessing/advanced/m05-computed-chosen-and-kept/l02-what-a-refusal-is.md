@@ -26,7 +26,7 @@ That is the difference between an answer that is missing and an answer nobody ca
 
 ## Every guard has two sides
 
-A guard is only as good as its edges, so the digest reads each one from both sides.
+A guard is only as good as its edges, so the course reads each one from both sides.
 
 | guard | value | the engine |
 | --- | --- | --- |

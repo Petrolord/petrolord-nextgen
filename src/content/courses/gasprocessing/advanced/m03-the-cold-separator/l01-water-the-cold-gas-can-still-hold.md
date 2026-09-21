@@ -30,4 +30,4 @@ Record both contents with their two states attached. A water content quoted with
 
 ## Exercise
 
-Record the inlet pressure and temperature with the water content the gas carries there, and the cold separator pressure and temperature with the water the gas can hold there. Record the ratio the digest prints for the cold content against the warm one. Then say why both figures are quoted per MMscf and what has to happen before either becomes a load in pounds a day.
+Record the inlet pressure and temperature with the water content the gas carries there, and the cold separator pressure and temperature with the water the gas can hold there. Record the ratio the lab prints for the cold content against the warm one. Then say why both figures are quoted per MMscf and what has to happen before either becomes a load in pounds a day.

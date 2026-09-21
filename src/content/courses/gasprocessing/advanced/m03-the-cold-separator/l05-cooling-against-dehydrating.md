@@ -30,4 +30,4 @@ The seam between the three is a course boundary rather than a gap. Say which ans
 
 ## Exercise
 
-Name the three answers to the water question, the unit or engine that owns each, and what each one costs. Record the AGBADA inlet water content, the content at the cold spot and the ratio the digest prints between them. Then say what state the gas leaves each of the three units in, and which of the three states is conditional on nothing downstream getting colder.
+Name the three answers to the water question, the unit or engine that owns each, and what each one costs. Record the AGBADA inlet water content, the content at the cold spot and the ratio the lab prints between them. Then say what state the gas leaves each of the three units in, and which of the three states is conditional on nothing downstream getting colder.

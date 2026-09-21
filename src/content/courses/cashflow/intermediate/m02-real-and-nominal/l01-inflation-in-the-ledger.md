@@ -26,7 +26,7 @@ The 2029 row is the base year and is not deflated. The 2030 row is divided by on
 
 ## The proof that it does nothing else
 
-The digest sweeps AKATA's inflation from 0 to 8 percent with the escalators left as configured. The nominal total net cash flow is 141637829.18 at 0, 1, 2, 3, 5 and 8 percent inflation. Not one row moved. The real total falls from 141637829.18 to 133142489.88, 125059129.50, 117362408.71, 103036613.45 and 83912631.29, because only the deflator grew.
+The lab sweeps AKATA's inflation from 0 to 8 percent with the escalators left as configured. The nominal total net cash flow is 141637829.18 at 0, 1, 2, 3, 5 and 8 percent inflation. Not one row moved. The real total falls from 141637829.18 to 133142489.88, 125059129.50, 117362408.71, 103036613.45 and 83912631.29, because only the deflator grew.
 
 Set inflation and every escalator to zero together and the ledger does change, because the escalators went: NPV becomes 65055328.97. Set only inflation to zero and NPV stays 72534830.66.
 

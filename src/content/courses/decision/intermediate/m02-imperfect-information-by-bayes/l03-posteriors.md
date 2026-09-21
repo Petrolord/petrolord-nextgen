@@ -29,7 +29,7 @@ The posterior divides the joint by pSignal, the chance of the reading. Dividing 
 
 ## What the engine guarantees
 
-The engine computes posteriors at full precision from the prior and the likelihoods, and the digest prints them to six decimals. Because every posterior is derived from one prior, the average back to the prior always holds. Typed posteriors carry no such guarantee: rounded, or copied from another study, they can imply a different prior from the one stated. That is why the VOI Analyzer checks typed numbers for consistency, while this engine has nothing to check. A posterior is a plain probability and takes no percentile label. The engine is also single stage: one survey, read once, then one action.
+The engine computes posteriors at full precision from the prior and the likelihoods, and the lab prints them to six decimals. Because every posterior is derived from one prior, the average back to the prior always holds. Typed posteriors carry no such guarantee: rounded, or copied from another study, they can imply a different prior from the one stated. That is why the VOI Analyzer checks typed numbers for consistency, while this engine has nothing to check. A posterior is a plain probability and takes no percentile label. The engine is also single stage: one survey, read once, then one action.
 
 ## The mistake
 

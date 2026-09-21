@@ -20,7 +20,7 @@ The same routine, on the same let-down, marched at twenty thousand steps reports
 
 ## Reading the last column
 
-Each row's last entry is that row's cooling over the reference cooling. The digest prints one such ratio per row and prints no comparison between rows, so any statement about how the column behaves is a reading you take from the rows rather than a figure the engine handed over. Take it deliberately.
+Each row's last entry is that row's cooling over the reference cooling. The table prints one such ratio per row and prints no comparison between rows, so any statement about how the column behaves is a reading you take from the rows rather than a figure the engine handed over. Take it deliberately.
 
 Twenty steps is the module's default, and on this let-down it lands at 0.999997906978 of the reference. Two hundred steps lands at 0.999999979778. A reader who needs to justify the default has the two figures to justify it with.
 

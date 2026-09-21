@@ -39,9 +39,9 @@ Two numbers for one glycol, and a standard cubic foot defined at one pressure an
 
 ## Where the rest of it lives
 
-The engine's own source comments record what changed. There are 9 such comment lines in this module, counted by reading gasProcessing.js for a comment line carrying "used to", "no longer" or the repair's own name. Widen the rule to the nine keywords the digest also sweeps with and the same module reads 18, which is why the rule is stated beside the count.
+The engine's own source comments record what changed. There are 9 such comment lines in this module, counted by reading gasProcessing.js for a comment line carrying "used to", "no longer" or the repair's own name. Widen the rule to the nine keywords the course also sweeps with and the same module reads 18, which is why the rule is stated beside the count.
 
-The digest quotes no count across the whole vendored tree, and says why. It carried one once. The figure then moved because two other courses vendored three more engines of their own, so a number printed in this course answered to work in another module. A number whose tree can change under it is not a fact about this engine and should not be quoted.
+This course quotes no count across the whole vendored tree, and says why. It carried one once. The figure then moved because two other courses vendored three more engines of their own, so a number printed in this course answered to work in another module. A number whose tree can change under it is not a fact about this engine and should not be quoted.
 
 Those comments are provenance. A sentence lifted out of one and into a lesson arrives with no frame around it, and a writer cannot frame what they did not know was history.
 
