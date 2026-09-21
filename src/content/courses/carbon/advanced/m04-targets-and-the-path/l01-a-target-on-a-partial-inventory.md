@@ -1,23 +1,23 @@
 # A target on a partial inventory
 
-A target is a fraction of a baseline, and the baseline is an inventory total. If the inventory is missing a line, the baseline and the target are built on less than the whole. SECTION 22 prints that case on the invented AGBOR records. Every figure here is invented for this course.
+A target is a fraction of a baseline, and the baseline is an inventory total. If the inventory is missing a line, the baseline and the target are built on less than the whole. The lab prints that case on the invented AGBOR records. Every figure here is invented for this course.
 
 {{panel:carbon-abatement-explorer}}
 
 ## The full baseline
 
-The Agbor baseline is the inventory total on the course's set, IPCC AR6 GWP100, fossil methane: 56100.276 tCO2e. It carries five lines, among them Purchased electricity at 10988.000 tCO2e on Scope 2 (SECTION 21). SECTION 21 computes the curve's target as 30 percent of that total, 16830.083 tCO2e, as the Carbon Studio computes it. The path of SECTION 22 draws its target falling in a straight line from the baseline in 2026 to 30 percent below it in 2033.
+The Agbor baseline is the inventory total on the course's set, IPCC AR6 GWP100, fossil methane: 56100.276 tCO2e. It carries five lines, among them Purchased electricity at 10988.000 tCO2e on Scope 2 (module three). The lab computes the curve's target as 30 percent of that total, 16830.083 tCO2e, as the Carbon Studio computes it. The path in the lab draws its target falling in a straight line from the baseline in 2026 to 30 percent below it in 2033.
 
 ## The partial baseline
 
-With the electricity factor blank, SECTION 22 prints: the inventory totals 45112.276 tCO2e and is reportable false (1 line(s) could not be computed). A target and a path built on that total give:
+With the electricity factor blank, the lab prints: the inventory totals 45112.276 tCO2e and is reportable false (1 line(s) could not be computed). A target and a path built on that total give:
 
 | baseline | target in the end year t | finalGapTonnes | firstShortfallYear |
 | --- | --- | --- | --- |
 | the full inventory | 39270.193 | 1370.083 | 2027 |
 | the partial inventory | 31578.593 | 0.000 | 2027 |
 
-Read the two rows. On the full inventory the path ends with an unabated gap of 1370.083 t. On the partial inventory it ends with 0.000. The measures are the same six. What moved is the baseline, and with it the target the path is measured against. SECTION 22 prints the difference: the full baseline less the partial is 10988.000 tCO2e, the purchased electricity line of SECTION 21, so the partial inventory is the full one without it.
+Read the two rows. On the full inventory the path ends with an unabated gap of 1370.083 t. On the partial inventory it ends with 0.000. The measures are the same six. What moved is the baseline, and with it the target the path is measured against. The course computes the difference: the full baseline less the partial is 10988.000 tCO2e, the purchased electricity line named above, so the partial inventory is the full one without it.
 
 ## Why a partial total is still a total
 

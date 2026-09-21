@@ -1,12 +1,12 @@
 # The first shortfall year
 
-The path returns two summary figures: finalGapTonnes and firstShortfallYear. They answer different questions, and on the invented AGBOR records they do not tell the same story. SECTION 22 prints both, on the course's set, IPCC AR6 GWP100, fossil methane, and this lesson reads them together.
+The path returns two summary figures: finalGapTonnes and firstShortfallYear. They answer different questions, and on the invented AGBOR records they do not tell the same story. The lab prints both, on the course's set, IPCC AR6 GWP100, fossil methane, and this lesson reads them together.
 
 {{panel:carbon-abatement-explorer}}
 
 ## The two figures
 
-SECTION 22 prints firstShortfallYear 2027 and finalGapTonnes 1370.083. The first is the first year the gap column prints a gap. The second is the gap in the end year, 2033.
+The lab prints firstShortfallYear 2027 and finalGapTonnes 1370.083. The first is the first year the gap column prints a gap. The second is the gap in the end year, 2033.
 
 | year | target t | emissions t | unabated gap t | measures live |
 | --- | --- | --- | --- | --- |
@@ -23,7 +23,7 @@ A path read only by its final gap would miss 2027 and 2028. A path read only by 
 
 ## On a partial inventory
 
-SECTION 22 prints the same two figures on the partial inventory, with the electricity factor blank: firstShortfallYear 2027 and finalGapTonnes 0.000. On the full inventory they are 2027 and 1370.083. The first shortfall year is the same on both baselines. The final gap is not. A reader who took only the final gap from the partial path would read the programme as closing its gap in 2033.
+The lab prints the same two figures on the partial inventory, with the electricity factor blank: firstShortfallYear 2027 and finalGapTonnes 0.000. On the full inventory they are 2027 and 1370.083. The first shortfall year is the same on both baselines. The final gap is not. A reader who took only the final gap from the partial path would read the programme as closing its gap in 2033.
 
 ## What the start years do
 
@@ -31,7 +31,7 @@ The path is set by start years. In 2027 the two measures live are Tune the fired
 
 ## The oracle's route
 
-SECTION 26 names how the path is recomputed: the carbonAbatement oracle builds it as a year ledger, a second route beside the engine's, and its goldens are asserted by the engine test suites. The path is one of the outputs the oracles check. The curve's residual to target and paysForItselfTonnes are not, and SECTION 26 lists those separately as taught from the engine and never graded.
+This course names how the path is recomputed: the carbonAbatement oracle builds it as a year ledger, a second route beside the engine's, and its goldens are asserted by the engine test suites. The path is one of the outputs the oracles check. The curve's residual to target and paysForItselfTonnes are not, and module six lists those separately as taught from the engine and never graded.
 
 ## Exercise
 

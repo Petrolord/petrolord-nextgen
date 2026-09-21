@@ -1,12 +1,12 @@
 # The cost per tonne handed over
 
-The Energy & Utilities Efficiency Studio prices a saving, and its cost per tonne comes from the carbon engine. SECTION 1 states the hand-over: the Energy Studio's cost per tonne is `carbonAbatement.abatementCost` called from inside `energyEfficiency.priceSaving`. So a saving's cost per tonne is built exactly as the curve's measures are costed. SECTION 23 prints it on the invented AGBOR saving.
+The Energy & Utilities Efficiency Studio prices a saving, and its cost per tonne comes from the carbon engine. The course states the hand-over: the Energy Studio's cost per tonne is `carbonAbatement.abatementCost` called from inside `energyEfficiency.priceSaving`. So a saving's cost per tonne is built exactly as the curve's measures are costed. The lab prints it on the invented AGBOR saving.
 
 {{panel:carbon-abatement-explorer}}
 
 ## How the call is made
 
-SECTION 23 names the three arguments: abatementCost is called with the implementation cost as capital, the annual value as the saving and the annual tonnes as the abatement. On the Agbor saving, every figure invented for this course, that is:
+The lab names the three arguments: abatementCost is called with the implementation cost as capital, the annual value as the saving and the annual tonnes as the abatement. On the Agbor saving, every figure invented for this course, that is:
 
 | abatementCost argument | taken from | value |
 | --- | --- | --- |
@@ -16,11 +16,11 @@ SECTION 23 names the three arguments: abatementCost is called with the implement
 | life | the life of the implementation cost | 8 years |
 | discount rate | the rate | 0.1 |
 
-The answer is costPerTonneCo2e -74.2270 USD a tonne. It is negative: in the words of SECTION 18, a negative cost per tonne means the measure pays for itself and abates carbon as a side effect.
+The answer is costPerTonneCo2e -74.2270 USD a tonne. It is negative: in the words of module one, a negative cost per tonne means the measure pays for itself and abates carbon as a side effect.
 
 ## The same rules, the same refusals
 
-Because it is the same function, the cost per tonne of a saving follows the rules of module one. A capital cost is annualised by a capital recovery factor, which needs a life and a rate. SECTION 25 lists the rule in force: the cost per tonne of a saving is the levelised abatementCost, and needs a life and a rate. SECTION 23 prints the hand-over: priceSaving passes its life (8 years) and rate (0.1) to abatementCost. The same call made directly:
+Because it is the same function, the cost per tonne of a saving follows the rules of module one. A capital cost is annualised by a capital recovery factor, which needs a life and a rate. Module six lists the rule in force: the cost per tonne of a saving is the levelised abatementCost, and needs a life and a rate. The table shows the hand-over: priceSaving passes its life (8 years) and rate (0.1) to abatementCost. The same call made directly:
 
 | output | value |
 | --- | --- |
@@ -34,11 +34,11 @@ With no life and no rate, the call does not refuse. It returns costPerTonneCo2e 
 
 ## A figure marked computed here
 
-SECTION 23 also sets the whole implementation cost against one year's value and one year's tonnes, computed here by the lab: 183.5403 USD a tonne. It is marked computed here, as SECTION 18 marks its one-year column. Levelised over 8 years at 0.1, the same saving prints -74.2270 USD a tonne.
+The course also sets the whole implementation cost against one year's value and one year's tonnes, computed here by the lab: 183.5403 USD a tonne. It is marked computed here, as module one marks its one-year column. Levelised over 8 years at 0.1, the same saving prints -74.2270 USD a tonne.
 
-## What SECTION 26 says of it
+## What the oracles say of it
 
-SECTION 26 says the energyEfficiency oracle computes "a levelised cost per tonne", and the carbonAbatement oracle levels the cost per tonne from a year-by-year present value ledger where the engine uses a capital recovery factor. The cost per tonne is not on SECTION 26's list of outputs neither oracle recomputes.
+The course says the energyEfficiency oracle computes "a levelised cost per tonne", and the carbonAbatement oracle levels the cost per tonne from a year-by-year present value ledger where the engine uses a capital recovery factor. The cost per tonne is not on the course's list of outputs neither oracle recomputes.
 
 ## Reading the sign
 

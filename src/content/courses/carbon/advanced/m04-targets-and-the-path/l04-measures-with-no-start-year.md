@@ -1,6 +1,6 @@
 # Measures with no start year
 
-A measure goes on the path in the year it starts. SECTION 22 prints what happens when one AGBOR measure has no start year entered, and three calls the path engine refuses outright. The figures are invented for this course.
+A measure goes on the path in the year it starts. This lesson prints what happens when one AGBOR measure has no start year entered, and three calls the path engine refuses outright. The figures are invented for this course.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -15,7 +15,7 @@ With Vapour recovery on the storage tanks given no start year, the path prints:
 
 With every measure scheduled, finalGapTonnes is 1370.083 t. The measure without a start year is placed in no year. It is named in unscheduledMeasures with its reason, "no start year", and left off the path. The engine does not give it a default year.
 
-SECTION 25 lists the rule in force: a baseline that is not positive is refused, and a measure with no start year is named.
+Module six lists the rule in force: a baseline that is not positive is refused, and a measure with no start year is named.
 
 ## On the curve and off the path
 
@@ -33,7 +33,7 @@ The same six measures against a baseline of 12000 t, a probe the course invents:
 
 REFUSED: In 2030 the scheduled measures abate 13610 t against a baseline of 12000 t. Emissions cannot fall below zero, so check the measures for double counting or a source outside the baseline.
 
-The first refuses a baseline that is not positive, and its second sentence names the case it guards: an inventory that computed nothing. The second refuses a path with no baseline or no valid range of years. The third names the year, overAbatedYear 2030, in which the scheduled measures abate more than the baseline; SECTION 25 lists it among the rules MD45-1 put in force. Neither box is filled in. The path does not guess a baseline or a year range, and a measure's start year is never guessed either.
+The first refuses a baseline that is not positive, and its second sentence names the case it guards: an inventory that computed nothing. The second refuses a path with no baseline or no valid range of years. The third names the year, overAbatedYear 2030, in which the scheduled measures abate more than the baseline; module six lists it among the rules MD45-1 put in force. Neither box is filled in. The path does not guess a baseline or a year range, and a measure's start year is never guessed either.
 
 ## Reading the two final gaps
 

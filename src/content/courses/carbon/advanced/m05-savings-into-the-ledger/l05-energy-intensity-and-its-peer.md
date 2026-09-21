@@ -1,6 +1,6 @@
 # Energy intensity and its peer
 
-`energyEfficiency.energyIntensity` divides a plant's energy by its throughput and, if it is given one, compares the result with a peer. SECTION 24 prints it on the invented AGBOR complex, and the engine attaches two sentences that decide how the result can be read.
+`energyEfficiency.energyIntensity` divides a plant's energy by its throughput and, if it is given one, compares the result with a peer. The lab prints it on the invented AGBOR complex, and the engine attaches two sentences that decide how the result can be read.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -29,7 +29,7 @@ With all three streams, the result is complete. The shares are each stream's par
 
 With Purchased power blank, the total is 781000.000 GJ and the intensity 629.8387 MJ a tonne, and complete is false. The engine does not compare it with the peer: versus peer none and gap none. The peerNote, verbatim: "Not compared with the peer: a stream is missing, so the intensity is a floor and would flatter the plant."
 
-Read the note's two claims. The intensity is a floor, because energy is missing from the numerator. And a floor compared with a peer would flatter the plant. So the engine prints the floor and withholds the comparison. SECTION 25 lists the rule in force: an intensity with a stream missing is not compared with the peer.
+Read the note's two claims. The intensity is a floor, because energy is missing from the numerator. And a floor compared with a peer would flatter the plant. So the engine prints the floor and withholds the comparison. Module six lists the rule in force: an intensity with a stream missing is not compared with the peer.
 
 ## The peer is the user's
 
@@ -45,7 +45,7 @@ REFUSED: A throughput is required.
 
 ## Reading the gap
 
-SECTION 24 prints the arithmetic, each step computed here and equal to the engine's figure: the intensity is total GJ x 1000 over the throughput in tonnes, 877000.000 x 1000 / 1240000 = 707.2581 MJ a tonne; versus peer is the intensity over the peer, 1.040085; the gap is the intensity less the peer, 27.2581 MJ a tonne. They are printed only because every stream is present and complete is true. The lab prints no cost and no carbon figure for the gap, and this lesson computes none.
+This lesson prints the arithmetic, each step computed here and equal to the engine's figure: the intensity is total GJ x 1000 over the throughput in tonnes, 877000.000 x 1000 / 1240000 = 707.2581 MJ a tonne; versus peer is the intensity over the peer, 1.040085; the gap is the intensity less the peer, 27.2581 MJ a tonne. They are printed only because every stream is present and complete is true. The lab prints no cost and no carbon figure for the gap, and this lesson computes none.
 
 ## Energy intensity and carbon intensity
 
