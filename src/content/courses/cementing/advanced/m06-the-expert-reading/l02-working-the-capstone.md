@@ -31,7 +31,7 @@ Field 4 first. Everything with a load in it needs it.
 
 Then field 6, which needs the open hole clearance. Careful: the clearance for the SPRING RATE is the nominal one, because standoffProfile runs the annulus at zero excess. The 30 percent excess in the volume sheet does not appear here at all.
 
-Then fields 1 and 2 together, from one profile run. Then 3, by bisection. Then 5, from the blade ratio less the sag.
+Then fields 1 and 2 together, from one profile run. Then 3, by bisection. Then 5, interval by interval: the blade ratio in that interval's bore less that interval's sag, and the smallest over the whole string.
 
 ## The traps
 
@@ -41,7 +41,7 @@ Then fields 1 and 2 together, from one profile run. Then 3, by bisection. Then 5
 
 **The mud is 1300, not 1440.** Lighter mud, less buoyancy, HEAVIER casing in the hole, more load. The standoff is slightly worse than the same job at 1440 would give.
 
-**Field 5 is not the blade ratio.** The blade ratio is the standoff at the centralizer for a rigid device; the reported minimum subtracts the sag from it, exactly as it does for a bow spring.
+**Field 5 is the smallest over both bores.** The blade ratio is the standoff at the centralizer for a rigid device, and it is a ratio of diameters, so the cased hole and the open hole give different ratios. In each interval the reported standoff subtracts that interval's sag from the ratio, exactly as it does for a bow spring, and where the well is vertical the sag is zero. Work both bores and report the smaller.
 
 **Field 6 has the clearance in the denominator,** so it is a large number, of the order of a million newtons per metre.
 

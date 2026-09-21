@@ -64,6 +64,33 @@ SHIPPED = {
     ('fdp', 'beginner', 'ukot_base_irr_low_root_pct'): {'suite': 'src/utils/fdp/planEconomics.js irrReason prints each root to 4 decimals'},
 }
 
+# the B4/B5 round-off (lead's pick on each owner decision, 2026-09-21): generated
+# by roundoff_capstones.py. A tolerance fix is checked by audit.py --post like the
+# ones above; a prompt-copy fix moves no field. `decided` clears the owner flag,
+# because the decision is taken; `class` records the class once the fix ships.
+RO_FISCAL = '20261023c_ro_fiscal_tolerances.sql'
+SHIPPED.update({
+    ('fiscal', 'beginner', 'con_total_government_take_musd'): {'migration': RO_FISCAL, 'tol': [0.001, 0.05], 'decided': True},
+    ('fiscal', 'intermediate', 'psc_npv_musd'): {'migration': RO_FISCAL, 'tol': [0.001, 0.05], 'decided': True},
+    ('fiscal', 'advanced', 'cmp_top_npv_musd'): {'migration': RO_FISCAL, 'tol': [0.001, 0.05], 'decided': True},
+    ('fiscal', 'advanced', 'cmp_psc_effective_tax_rate_pct'): {'migration': RO_FISCAL, 'tol': [0.0001, 0.05], 'decided': True},
+    ('fiscal', 'advanced', 'cmp_psc_price_sweep_at_60_pct'): {'migration': RO_FISCAL, 'tol': [0.0001, 0.05], 'decided': True},
+    ('fiscal', 'advanced', 'cmp_psc_capex_loss_last_tenth_musd'): {'migration': RO_FISCAL, 'tol': [0.001, 0.1], 'decided': True},
+    ('fiscal', 'advanced', 'cmp_psc_capex_loss_eight_point_musd'): {'migration': RO_FISCAL, 'tol': [0.001, 0.1], 'decided': True},
+    ('fiscal', 'advanced', 'cmp_con_price_climb_pct_points'): {'migration': RO_FISCAL, 'tol': [0.0001, 0.1], 'decided': True},
+    ('cementing', 'advanced', 'min_standoff_rigid'): {
+        'migration': '20261023b_ro_capstone_cementing.sql', 'class': 'none', 'decided': True,
+        'prompt': 'the prompt and advanced m06 l02 now say field 5 is the smallest rigid standoff over both bores '
+                  '(blade ratio of each bore less that interval\'s sag, zero where vertical), which is what the engine '
+                  'grades; no regrade, the engine is physically right'},
+    ('casingtubing', 'advanced', 'helical_limit_N'): {
+        'migration': '20261023b_ro_capstone_casingtubing.sql',
+        'prompt': 'the prompt and advanced m06 l02 state g = 9.80665 m/s2'},
+    ('gaswell', 'advanced', 'plunger_liquid_per_day_bbl'): {
+        'migration': '20261023b_ro_capstone_gaswell.sql',
+        'prompt': 'the prompt names field 6 as the second hand-reachable value alongside field 3'},
+})
+
 
 def main(raw):
     out = os.path.join(HERE, 'annot')
@@ -83,6 +110,12 @@ def main(raw):
                     f['class'] = 'none'
                     f['leak'] = True
             s = SHIPPED.get((c, f['tier'], f['key']))
+            if s and s.get('decided'):
+                f['owner_decision'] = False
+            if s and s.get('class') and s['class'] != f['class']:
+                f['reclassed_from'] = f['class']
+                f['class'] = s['class']
+            s = {k: v for k, v in s.items() if k not in ('decided', 'class')} if s else s
             f['shipped'] = s
             if s and 'tol' in s:
                 f['fix'] = {'new_tol': s['tol'][1]}

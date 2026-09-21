@@ -396,7 +396,10 @@
    "evidence": "Slug volume pi/4 x 2.75^2/144 x 165 / 5.614583 = 1.21216 bbl; cycle 8420/812 + 8255/1085 + 165/186 + 26 + 48 = 92.8648 min; 1440/92.8648 x 1.21216 = 18.79621249 reproduced exactly. No z anywhere.",
    "notes": "The prompt says field 3 is 'the ONE graded value in this course reachable by hand'; this field is also reachable by hand. Consider correcting that sentence.",
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261023b_ro_capstone_gaswell.sql",
+    "prompt": "the prompt names field 6 as the second hand-reachable value alongside field 3"
+   }
   }
  ]
 }

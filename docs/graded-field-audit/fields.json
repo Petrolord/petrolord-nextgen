@@ -2280,7 +2280,10 @@
   "recommendation": null,
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261023b_ro_capstone_casingtubing.sql",
+   "prompt": "the prompt and advanced m06 l02 state g = 9.80665 m/s2"
+  },
   "evidence": "2(2 sqrt2 - 1) sqrt(E I w / r) with r = (0.1570736 - 0.1143)/2, inclination 90, w = 12.75 x 1.4881639 x g x (1 - 1080/7850): reproduced exactly with g = 9.80665. Tubing explorer (TubingExplorer.jsx:36) is fixed to the published 3-1/2 in tubing at 1150 kg/m3 so it cannot run the capstone; the Lubinski forms, E 206.8e9, alpha 1.2e-5 and 0.6 ballooning factor are written in advanced m02/m03, and Ai/Ao/Ap from the prompt diameters (seal bore 5 in).",
   "notes": "g is never stated in the course (only implied by intermediate worked numbers); g = 9.81 gives 264248.7 (45 N off) and g = 9.8 gives 264114.0 (90 N off) against tol 0.5 N. I = pi/64 (OD^4 - ID^4) is also not written (EI is only given as a number for the lesson tubing). Recommend the prompt state g = 9.80665 m/s2."
  },
@@ -2860,15 +2863,18 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "redesign",
+  "class": "none",
   "fix": {
    "redesign": "No value change: correct the prompt and lesson trap to say the rigid minimum is set by the WIDER cased bore above 350 m, where the pipe is vertical and there is no sag, so it is the blade ratio against 0.315341. Alternatively regrade as the open hole minimum (0.6543142173967237) if the intent was the sag lesson."
   },
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Correct the prompt and l02 copy (the graded value is right for the engine; the instructions steer the learner to a failing number). Owner picks between fixing the copy and moving the graded quantity to the open hole minimum.",
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
+  "reclassed_from": "redesign",
+  "shipped": {
+   "migration": "20261023b_ro_capstone_cementing.sql",
+   "prompt": "the prompt and advanced m06 l02 now say field 5 is the smallest rigid standoff over both bores (blade ratio of each bore less that interval's sag, zero where vertical), which is what the engine grades; no regrade, the engine is physically right"
+  },
   "evidence": "The graded 0.6424096181525695 is EXACTLY the cased-hole blade ratio (0.29-0.244475)/(0.315341-0.244475): the minimum sits in the vertical 13-3/8 inch section where sin(inc)=0 and the sag is zero. The prompt and lesson say the opposite ('Field 5 is not the blade ratio: the sag is subtracted from it', l02:44; 'from the blade ratio less the sag', l02:34); following them in the open hole gives 0.65431, which fails.",
   "notes": "Field 5 then needs no stiffness, so the EI amendment does not affect it."
  },
@@ -8926,11 +8932,17 @@
   "fix": {
    "new_tol": 0.05
   },
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261023c_ro_fiscal_tolerances.sql",
+   "tol": [
+    0.001,
+    0.05
+   ]
+  },
   "evidence": "Life total over 25 rows is read from the engine (\"proves two rows and trusts the other twenty three\", src/content/courses/fiscal/beginner/m06-the-associate-reading/l02-working-the-capstone.md:37); the Designer summary prints `{s.govTake.toFixed(1)}` against tol 0.001.",
   "notes": null
  },
@@ -9120,11 +9132,17 @@
   "fix": {
    "new_tol": 0.05
   },
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261023c_ro_fiscal_tolerances.sql",
+   "tol": [
+    0.001,
+    0.05
+   ]
+  },
   "evidence": "Summary prints `{s.npv.toFixed(1)}`; NPV over 25 year-end-discounted rows is an engine reading (intermediate m05/l01). tol 0.001 < 0.05.",
   "notes": null
  },
@@ -9157,11 +9175,17 @@
   "fix": {
    "new_tol": 0.05
   },
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261023c_ro_fiscal_tolerances.sql",
+   "tol": [
+    0.001,
+    0.05
+   ]
+  },
   "evidence": "After the sort, the first row NPV prints `{s.npv.toFixed(1)}` (20.956 shows as 21.0); tol 0.001.",
   "notes": "NextGen fiscal panels are select-only over ODIDI/default/test projects and panelCapstoneGuard.test.js bars URUAN, so no panel reaches this case; probe shows no hit."
  },
@@ -9194,11 +9218,17 @@
   "fix": {
    "new_tol": 0.05
   },
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261023c_ro_fiscal_tolerances.sql",
+   "tol": [
+    0.0001,
+    0.05
+   ]
+  },
   "evidence": "Summary table prints `${s.governmentShareOfNetRevenuePct.toFixed(1)}%`; tol 0.0001 percent.",
   "notes": null
  },
@@ -9231,11 +9261,17 @@
   "fix": {
    "new_tol": 0.05
   },
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261023c_ro_fiscal_tolerances.sql",
+   "tol": [
+    0.0001,
+    0.05
+   ]
+  },
   "evidence": "Price sweep tooltip describePoint prints `${value.toFixed(1)} %`; tol 0.0001 percent.",
   "notes": null
  },
@@ -9268,11 +9304,17 @@
   "fix": {
    "new_tol": 0.1
   },
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261023c_ro_fiscal_tolerances.sql",
+   "tol": [
+    0.001,
+    0.1
+   ]
+  },
   "evidence": "Difference of two capex-sweep tooltip readings, each `$${mm(v)}MM` toFixed(1); worst-case rounding error of the difference is 0.1 against tol 0.001.",
   "notes": null
  },
@@ -9305,11 +9347,17 @@
   "fix": {
    "new_tol": 0.1
   },
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261023c_ro_fiscal_tolerances.sql",
+   "tol": [
+    0.001,
+    0.1
+   ]
+  },
   "evidence": "First swept point (tooltip, toFixed(1)) minus a direct run at capex x1.5 (summary npv toFixed(1)); difference of two 1-decimal readings against tol 0.001.",
   "notes": "Insights may state the leader's loss via fmt = toFixed(1) (packages/engines/engines/economics/fiscalRegime.js:558), same precision."
  },
@@ -9342,11 +9390,17 @@
   "fix": {
    "new_tol": 0.1
   },
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261023c_ro_fiscal_tolerances.sql",
+   "tol": [
+    0.0001,
+    0.1
+   ]
+  },
   "evidence": "Last minus first price-sweep tooltip reading, each `${value.toFixed(1)} %`; difference of two 1-decimal readings against tol 0.0001.",
   "notes": null
  },
@@ -12864,7 +12918,10 @@
   "recommendation": null,
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261023b_ro_capstone_gaswell.sql",
+   "prompt": "the prompt names field 6 as the second hand-reachable value alongside field 3"
+  },
   "evidence": "Slug volume pi/4 x 2.75^2/144 x 165 / 5.614583 = 1.21216 bbl; cycle 8420/812 + 8255/1085 + 165/186 + 26 + 48 = 92.8648 min; 1440/92.8648 x 1.21216 = 18.79621249 reproduced exactly. No z anywhere.",
   "notes": "The prompt says field 3 is 'the ONE graded value in this course reachable by hand'; this field is also reachable by hand. Consider correcting that sentence."
  },

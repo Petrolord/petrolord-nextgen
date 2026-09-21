@@ -364,7 +364,10 @@
    "evidence": "2(2 sqrt2 - 1) sqrt(E I w / r) with r = (0.1570736 - 0.1143)/2, inclination 90, w = 12.75 x 1.4881639 x g x (1 - 1080/7850): reproduced exactly with g = 9.80665. Tubing explorer (TubingExplorer.jsx:36) is fixed to the published 3-1/2 in tubing at 1150 kg/m3 so it cannot run the capstone; the Lubinski forms, E 206.8e9, alpha 1.2e-5 and 0.6 ballooning factor are written in advanced m02/m03, and Ai/Ao/Ap from the prompt diameters (seal bore 5 in).",
    "notes": "g is never stated in the course (only implied by intermediate worked numbers); g = 9.81 gives 264248.7 (45 N off) and g = 9.8 gives 264114.0 (90 N off) against tol 0.5 N. I = pi/64 (OD^4 - ID^4) is also not written (EI is only given as a number for the lesson tubing). Recommend the prompt state g = 9.80665 m/s2.",
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261023b_ro_capstone_casingtubing.sql",
+    "prompt": "the prompt and advanced m06 l02 state g = 9.80665 m/s2"
+   }
   },
   {
    "tier": "advanced",

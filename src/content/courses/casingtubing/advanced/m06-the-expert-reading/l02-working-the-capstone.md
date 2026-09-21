@@ -43,7 +43,7 @@ Then 5, which needs the buoyed weight and the new clearance, and 6, which needs 
 
 **Field 5 needs the NEW clearance.** The tubing grew from 3-1/2 to 4-1/2 inches inside the same casing, so the radial clearance fell by half an inch of diameter, a quarter of an inch on the radius. The limit rises as a result, and if you reused the lessons' clearance you will be low.
 
-**Field 5 also needs the buoyed weight at 1080 kg/m3,** which is the external density given in the load case, not the 1150 the lessons used.
+**Field 5 also needs the buoyed weight at 1080 kg/m3,** which is the external density given in the load case, not the 1150 the lessons used. Take g as 9.80665 m/s2 when you turn the mass per metre into a weight per metre, because 9.81 moves the limit by more than the half newton it is graded to.
 
 **Field 6 is in METRES and it is positive.** Compression at the packer goes with elongation, and the thermal term at 100 degrees over 3200 m is large enough to beat both pressure terms.
 
