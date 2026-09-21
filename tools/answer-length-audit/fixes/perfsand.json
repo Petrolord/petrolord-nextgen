@@ -1,0 +1,44 @@
+{
+ "migration": "20261021b_b4_fix_perfsand.sql",
+ "title": "perfsand: reconcile two rock-change questions",
+ "items": [
+  {
+   "app_slug": "perfsand",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 14,
+   "category": "other",
+   "flag": "beginner final ord 40 vs beginner module m06 ord 14: near-same question with different keys (tunnel length vs converging-flow term); a learner may read them as contradicting",
+   "verdict": "fixed",
+   "reason": "with the rock changing the tunnel, the plane-flow and blockage distractors (both read the tunnel length) became defensible; the prompt now holds the tunnel length as given, which is how the engine works (m02 l05), so only the anisotropy term moves",
+   "changes": {
+    "prompt": {
+     "old": "Which of these would you expect to change if the same gun were run in a different rock?",
+     "new": "The same gun is run in a different rock, and the engine is given the same tunnel length. Which skin term would you expect to change?"
+    },
+    "explanation": {
+     "old": "Anisotropy is the one rock property in the skin calculation, and it enters only that term.",
+     "new": "The engine takes the penetration it is given and applies no concrete-to-rock correction, so with the tunnel length held the geometric terms are unchanged. Anisotropy is the one rock property in the skin calculation, and it enters only the converging-flow term."
+    }
+   }
+  },
+  {
+   "app_slug": "perfsand",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "other",
+   "flag": "beginner final ord 40 vs beginner module m06 ord 14: near-same question with different keys (tunnel length vs converging-flow term); a learner may read them as contradicting",
+   "verdict": "fixed",
+   "reason": "key kept; explanation now says the engine does not make the concrete-to-rock correction itself, which reconciles it with m06 ord 14",
+   "changes": {
+    "explanation": {
+     "old": "The catalog row is unchanged. What the rock does to the penetration is not.",
+     "new": "The catalog row is unchanged, but what the rock does to the penetration is not: formation penetration is generally less than the concrete figure, and it depends on the rock strength and the effective stress. This engine applies no such correction and takes the penetration it is given, so making it is your job."
+    }
+   }
+  }
+ ]
+}
