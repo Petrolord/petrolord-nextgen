@@ -38,7 +38,7 @@ That is the right place to stop. The gross observed volume is a true statement a
 
 ## The total
 
-The three tanks together hold 4581.490 m3 gross observed. In module five the digest closes a day on it against an opening stock held at standard and measures what mixing the two quantities does. For now, keep the label on it. It is the total gross observed volume, at three different observed temperatures, of three different products.
+The three tanks together hold 4581.490 m3 gross observed. In module five the course closes a day on it against an opening stock held at standard and measures what mixing the two quantities does. For now, keep the label on it. It is the total gross observed volume, at three different observed temperatures, of three different products.
 
 Use the panel to walk each tank from its dip to its gross observed volume, and read the total at the foot.
 

@@ -10,7 +10,7 @@ volumeAtDip does not know the shape of any tank. It reads a table and draws a st
 
 ## The same bullet, two tables
 
-The digest measures what that costs. It straps the same bullet every 10 mm (301 entries) and reads it against its own table every 100 mm:
+The course measures what that costs. It straps the same bullet every 10 mm (301 entries) and reads it against its own table every 100 mm:
 
 | height mm | volumeAtDip on the 100 mm table m3 | volumeAtDip on the 10 mm table m3 | the 100 mm table less the 10 mm table m3 |
 | --- | --- | --- | --- |
@@ -19,7 +19,7 @@ The digest measures what that costs. It straps the same bullet every 10 mm (301 
 
 At the morning dip, 1847 mm, the 100 mm table reads 52.501 m3 and the 10 mm table reads 52.508 m3. The 100 mm table less the 10 mm table is -0.007 m3.
 
-At 41 mm, the height of AK-03's free water this morning, the 100 mm table reads 0.341 m3 and the 10 mm table reads 0.220 m3. The 100 mm table less the 10 mm table is 0.120 m3. The engine computes that last column from the unrounded volumes, so the digest prints 0.120 m3 and that printed figure is the one to quote. The sign of that difference says the coarse table reads the higher volume at 41 mm.
+At 41 mm, the height of AK-03's free water this morning, the 100 mm table reads 0.341 m3 and the 10 mm table reads 0.220 m3. The 100 mm table less the 10 mm table is 0.120 m3. The engine computes that last column from the unrounded volumes, so the table prints 0.120 m3 and that printed figure is the one to quote. The sign of that difference says the coarse table reads the higher volume at 41 mm.
 
 Both tables describe one geometry. The only thing that differs is how often the curve was sampled.
 

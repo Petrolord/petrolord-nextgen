@@ -35,7 +35,7 @@ The bay sweep reaches the same place with the arrivals held at 9 an hour. At 3 b
 
 ## Reading the three remedies
 
-The refusal names three ways out, and each moves a different input. Adding a bay raises the denominator of the utilisation. Loading faster shortens the load minutes and so lowers the offered load. Spreading the arrivals lowers the arrivals in the peak hour. The digest sweeps all three inputs. On 4 bays at 9 arrivals an hour, the load minutes sweep prints a mean wait of 47.2652 minutes at 24 minutes a load and 10.1887 minutes at 20.
+The refusal names three ways out, and each moves a different input. Adding a bay raises the denominator of the utilisation. Loading faster shortens the load minutes and so lowers the offered load. Spreading the arrivals lowers the arrivals in the peak hour. The course sweeps all three inputs. On 4 bays at 9 arrivals an hour, the load minutes sweep prints a mean wait of 47.2652 minutes at 24 minutes a load and 10.1887 minutes at 20.
 
 ## Why a refusal is the better answer
 

@@ -3,7 +3,7 @@
 // The digest is the course authors' internal reference file, the dump in
 // tools/course-waves/<slug>/digest.txt that lesson writers quote from. No
 // learner ever sees it, so a lesson that says "the digest prints 74.737770"
-// points its reader at something that does not exist for them. Around 413
+// points its reader at something that does not exist for them. Over 400
 // lesson files across 27 courses said exactly that until they were rewritten
 // to name what the learner really has: the lab, the worked example, the
 // engine or the Studio. This gate stops it coming back.
@@ -46,6 +46,20 @@ const MIN_LEARNING_PAGES = 40;
 const LESSON_WORD = /digest/i;
 // Code: the word on its own, so identifiers pass.
 const CODE_WORD = /(?<![A-Za-z0-9_$])digest(?:s|ed|ing)?(?![A-Za-z0-9_$])/i;
+
+// HEADINGS HELD FOR AN OWNER DECISION. The copy pass that removed the word from
+// lesson prose was barred from changing any heading line, and these seven
+// headings carry it. They are excused by exact text, so a new heading or any
+// other line saying the word still fails, and each entry must be deleted when
+// its heading is rewritten (the staleness test below goes red otherwise).
+const HELD_HEADINGS = {
+  'carbon/advanced/m06-the-expert-reading/l03-what-the-oracles-check.md': ["## The digest's own count"],
+  'crude/intermediate/m01-the-blends-own-curve/l04-a-truncated-crude-in-the-blend.md': ['## The reason the digest gives'],
+  'crude/intermediate/m02-the-fifty-percent-point/l04-the-watson-factor.md': ['## What the digest says about K'],
+  'crude/intermediate/m02-the-fifty-percent-point/l05-a-screening-basis-for-k.md': ['## What the digest calls it', '## The two readings in the digest'],
+  'crude/intermediate/m05-against-the-marker/l03-the-blend-against-its-components.md': ['## The answer the digest prints'],
+  'relief/advanced/m02-the-customary-depressuring-time/l02-reading-a-time-off-a-curve.md': ['## The one comparison the digest prints here'],
+};
 
 // Unrendered string literals, by exact trimmed line. Keyed by file relative to
 // src/components/course.
@@ -140,9 +154,9 @@ export const stripComments = (src) => {
 };
 
 /** Every learner-copy occurrence in one lesson or manifest text. */
-export const lessonHits = (text) => text.split('\n')
+export const lessonHits = (text, held = []) => text.split('\n')
   .map((line, k) => ({ line: k + 1, text: line.trim() }))
-  .filter((h) => LESSON_WORD.test(h.text));
+  .filter((h) => LESSON_WORD.test(h.text) && !held.includes(h.text));
 
 /** Every non-comment, non-identifier occurrence in one code file, less the allowed lines. */
 export const codeHits = (src, allowed = []) => stripComments(src).split('\n')
@@ -165,8 +179,9 @@ describe('learner copy never names the internal digest', () => {
   });
 
   it('no lesson file and no tier manifest says digest', () => {
-    const hits = [...lessons, ...manifests].flatMap((f) => lessonHits(fs.readFileSync(f, 'utf8'))
-      .map((h) => ({ ...h, file: path.relative(SRC, f) })));
+    const hits = [...lessons, ...manifests].flatMap((f) => lessonHits(
+      fs.readFileSync(f, 'utf8'), HELD_HEADINGS[path.relative(COURSES, f).split(path.sep).join('/')] || [],
+    ).map((h) => ({ ...h, file: path.relative(SRC, f) })));
     expect(report(hits)).toBe('');
   });
 
@@ -177,6 +192,15 @@ describe('learner copy never names the internal digest', () => {
         .map((h) => ({ ...h, file: path.relative(SRC, f) }));
     });
     expect(report(hits)).toBe('');
+  });
+
+  it('every held heading still exists and is a heading, so the list cannot outlive what it excuses', () => {
+    const stale = Object.entries(HELD_HEADINGS).flatMap(([rel, lines]) => {
+      const p = path.join(COURSES, rel);
+      const have = fs.existsSync(p) ? fs.readFileSync(p, 'utf8').split('\n').map((l) => l.trim()) : [];
+      return lines.filter((l) => !l.startsWith('#') || !have.includes(l)).map((l) => `${rel}: ${l}`);
+    });
+    expect(stale).toEqual([]);
   });
 
   it('every allowed line still exists, so the allowlist cannot outlive what it excuses', () => {
@@ -213,6 +237,12 @@ describe('the digest gate itself (negative controls)', () => {
       'const re = /\\/\\/[a-z]+/; const x = 1; // digest',
     ].join('\n');
     expect(codeHits(src)).toEqual([]);
+  });
+
+  it('a held heading excuses only itself: the same words in prose still fail', () => {
+    const held = ["## The digest's own count"];
+    expect(lessonHits("## The digest's own count\n\nBody.", held)).toEqual([]);
+    expect(lessonHits("## The digest's own count\n\nThe digest's own count is 73.", held)).toHaveLength(1);
   });
 
   it('an allowed line passes only in its own exact text', () => {

@@ -12,7 +12,7 @@ VCF = exp( -alpha x dT x (1 + 0.8 x alpha x dT) )
 
 Here rho is the density at 15 C in kg/m3, and dT is the observed temperature less 15 C. K0, K1 and K2 are coefficients.
 
-Read the second line first. dT is the observed temperature less 15 C, and alpha multiplies it. The product alpha x dT sits in the exponent twice: once on its own, and once more inside the bracket with 0.8 in it. The digest prints the VCF the form gives, and no size for either part. When dT is zero, at 15 C, the exponent is zero and the VCF is exactly one; the synthetic row prints 1.000000 there. Away from 15 C the VCF moves off one: on the synthetic row at 741.6 kg/m3 it reads 1.006736 at 10 C, 0.993236 at 20 C and 0.965932 at 40 C.
+Read the second line first. dT is the observed temperature less 15 C, and alpha multiplies it. The product alpha x dT sits in the exponent twice: once on its own, and once more inside the bracket with 0.8 in it. The lab prints the VCF the form gives, and no size for either part. When dT is zero, at 15 C, the exponent is zero and the VCF is exactly one; the synthetic row prints 1.000000 there. Away from 15 C the VCF moves off one: on the synthetic row at 741.6 kg/m3 it reads 1.006736 at 10 C, 0.993236 at 20 C and 0.965932 at 40 C.
 
 Now the first line. alpha is not one number for all fuels. It is built from the density at 15 C with three coefficients. They are what makes the form fit a commodity group, they are published per commodity group, and the engine ships none and has no default. The next lesson reads what it does when they are missing.
 

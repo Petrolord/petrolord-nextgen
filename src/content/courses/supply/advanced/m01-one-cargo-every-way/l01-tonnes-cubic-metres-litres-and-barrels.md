@@ -31,7 +31,7 @@ Read the first row as the cargo itself: 34000 tonnes at 742.8 kg/m3 is 45772.752
 
 The second, third and fourth rows are the same cargo typed from a rounded quote. 45772.7 m3 and 45772700 litres are one quantity in two units, and both come back as 33999.9616 tonnes. 287900 barrels comes back as 33999.7701 tonnes and 45772.442 m3. The engine loses nothing. It converts exactly what it is handed, and what it is handed in those rows is a rounding of the cargo.
 
-So every conversion rests on the figure typed in. The four rows show it: the same cargo reads 34000.0000 tonnes from the tonne entry and 33999.7701 tonnes from the barrel entry. A common practice is to enter the quantity in the unit the governing document states, so that the engine produces the other units from it. That is practice. The engine and the digest state no such rule.
+So every conversion rests on the figure typed in. The four rows show it: the same cargo reads 34000.0000 tonnes from the tonne entry and 33999.7701 tonnes from the barrel entry. A common practice is to enter the quantity in the unit the governing document states, so that the engine produces the other units from it. That is practice. The engine and the course state no such rule.
 
 ## Precision travels with the unit
 

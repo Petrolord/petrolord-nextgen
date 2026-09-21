@@ -33,7 +33,7 @@ The morning now has two totals, and they are different quantities:
 
 Only the second is a stock. The first is a true statement about the tanks this morning, but its three parts were measured at 31.5 C, 30 C and 29 C, so the sum mixes three temperatures. The standard total states every part at standard, which is what lets it be set against an opening stock held at standard.
 
-Keep the units on both. A figure written as 4581.490 m3 without saying gross observed invites someone to close the day on it. Module five shows the digest doing exactly that and what the day then reads.
+Keep the units on both. A figure written as 4581.490 m3 without saying gross observed invites someone to close the day on it. Module five shows the course doing exactly that and what the day then reads.
 
 ## Where every figure came from
 

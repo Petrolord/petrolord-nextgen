@@ -44,7 +44,7 @@ The engine counts only the run that ends on the latest day. The same record cut 
 
 The first six days alone: run 3 days of loss; prompt: none.
 
-The digest reads the threshold off the engine by trimming the history one day at a time:
+The lab reads the threshold off the engine by trimming the history one day at a time:
 
 | days kept | run ending on the last kept day | prompt printed |
 | --- | --- | --- |

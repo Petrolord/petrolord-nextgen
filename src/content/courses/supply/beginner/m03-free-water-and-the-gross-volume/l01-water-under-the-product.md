@@ -4,7 +4,7 @@
 
 ## Free water
 
-The digest states the fact this module rests on in one line: free water sits under the product. It is a layer of its own at the bottom of the tank, with the fuel standing on top of it.
+The course states the fact this module rests on in one line: free water sits under the product. It is a layer of its own at the bottom of the tank, with the fuel standing on top of it.
 
 Free water is not stock. But it occupies the bottom of the tank, and the dip is a reading of the liquid height, product and water together. A volume read at the dip alone counts the water as if it were fuel.
 

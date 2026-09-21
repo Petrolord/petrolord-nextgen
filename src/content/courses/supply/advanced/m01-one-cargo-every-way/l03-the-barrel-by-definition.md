@@ -11,7 +11,7 @@ The `fuelPricing` module exports two unit constants:
 - `LITRES_PER_M3` is 1000;
 - `M3_PER_BBL` is 0.158987294928.
 
-Barrels are cubic metres divided by the second constant. The engine never reaches a barrel from tonnes directly. It forms the cubic metres through the density first, then divides. So a quantity entered in tonnes reaches the barrel column through the density and then the constant. The digest's density sweep shows the first step moving: the same 34000 tonnes read 45637.584 m3 at PMS's typical 745 kg/m3 and 40476.190 m3 at AGO's typical 840 kg/m3.
+Barrels are cubic metres divided by the second constant. The engine never reaches a barrel from tonnes directly. It forms the cubic metres through the density first, then divides. So a quantity entered in tonnes reaches the barrel column through the density and then the constant. The lab's density sweep shows the first step moving: the same 34000 tonnes read 45637.584 m3 at PMS's typical 745 kg/m3 and 40476.190 m3 at AGO's typical 840 kg/m3.
 
 That order tells you where to look when two barrel figures for one cargo disagree. The constant cannot be the cause. Either the density differs or the quantity typed in differs.
 

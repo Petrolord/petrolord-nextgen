@@ -46,7 +46,7 @@ The farm's four tanks, counted tank by tank:
 | days of cover | 3.8345 |
 | turns a year | 44.1108 |
 
-The pumpable stock is the sum of each tank's stock above its own heel, never below zero. IB-T2 holds 164.700 m3 against a heel of 210.000 m3 and contributes 0.000 m3. The farm's stock less its heel, 10077.700 m3, is a figure the digest prints beside the engine's, with the note that it is not pumpable stock.
+The pumpable stock is the sum of each tank's stock above its own heel, never below zero. IB-T2 holds 164.700 m3 against a heel of 210.000 m3 and contributes 0.000 m3. The farm's stock less its heel, 10077.700 m3, is a figure the course prints beside the engine's, with the note that it is not pumpable stock.
 
 The days of cover divide the pumpable stock by the liftings, and they describe the farm as one pool of three products. The petrol that can be lifted today is IB-T1's 5078.400 m3.
 

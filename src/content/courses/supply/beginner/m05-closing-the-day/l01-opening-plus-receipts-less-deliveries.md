@@ -38,7 +38,7 @@ The tanks were dipped. The closing stock is the standard total built across modu
 
 ## Every figure at standard
 
-Each figure in the ledger is in m3, and the closing stock is at standard. The opening stock is yesterday's closing dip, also at standard. A ledger only balances fairly when both ends are the same quantity, and module six reads what the digest measures when the closing end is left gross observed.
+Each figure in the ledger is in m3, and the closing stock is at standard. The opening stock is yesterday's closing dip, also at standard. A ledger only balances fairly when both ends are the same quantity, and module six reads what the course measures when the closing end is left gross observed.
 
 ## What the gap is judged against
 

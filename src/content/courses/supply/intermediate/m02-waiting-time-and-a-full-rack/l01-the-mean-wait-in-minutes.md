@@ -10,7 +10,7 @@ For an M/M/c rack the engine computes:
 
 mean wait = Erlang C / (bays x service rate - arrivals)
 
-The service rate is the loads a single bay manages an hour, 60 divided by the load minutes. The denominator is the bays times that rate, less the arrivals an hour, and the digest prints it only as that formula. The engine prints the result in minutes, to four decimals.
+The service rate is the loads a single bay manages an hour, 60 divided by the load minutes. The denominator is the bays times that rate, less the arrivals an hour, and the course prints it only as that formula. The engine prints the result in minutes, to four decimals.
 
 For IBAFO at 9 arrivals an hour, 24 minute loads and 4 bays:
 
@@ -22,7 +22,7 @@ For IBAFO at 9 arrivals an hour, 24 minute loads and 4 bays:
 
 ## An average over every truck
 
-The formula carries the probability of waiting as a factor. That tells you what the average covers: every truck that arrives, including the trucks that find a free bay and wait no time at all. Those trucks count in the mean as zero. The digest prints the mean wait of a truck that does queue as the mean wait over the probability of waiting: 47.2652 / 0.787753 = 60.0000 minutes. The engine's 47.2652 minutes averages over every truck; the 60.0000 minutes averages over the trucks that queue.
+The formula carries the probability of waiting as a factor. That tells you what the average covers: every truck that arrives, including the trucks that find a free bay and wait no time at all. Those trucks count in the mean as zero. The course computes the mean wait of a truck that does queue as the mean wait over the probability of waiting: 47.2652 / 0.787753 = 60.0000 minutes. The engine's 47.2652 minutes averages over every truck; the 60.0000 minutes averages over the trucks that queue.
 
 So a driver's complaint and the rack's mean wait can both be honest: the driver remembers the queues, and the mean includes the trucks that drove straight onto a bay. A mean wait is only comparable with another of the same kind.
 
@@ -54,7 +54,7 @@ At 3 bays the utilisation reads 1.200000, the rack is marked unstable, and the e
 
 ## Time on site
 
-The engine prints a mean time on site of 71.2652 minutes beside the mean wait of 47.2652 minutes. The digest gives the time on site no formula, so quote it by its label and keep it apart from the wait. The truck lane in module five carries queueing hours in its cycle as a typed input of its own.
+The engine prints a mean time on site of 71.2652 minutes beside the mean wait of 47.2652 minutes. The course gives the time on site no formula, so quote it by its label and keep it apart from the wait. The truck lane in module five carries queueing hours in its cycle as a typed input of its own.
 
 ## Units
 

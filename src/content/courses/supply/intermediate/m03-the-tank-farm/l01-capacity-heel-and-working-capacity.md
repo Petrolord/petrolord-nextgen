@@ -6,7 +6,7 @@ A depot's rack loads trucks from its tanks, and a tank's nameplate capacity is t
 
 ## The heel
 
-The heel is a volume stated for each tank, and the engine's formulas say what it does. Working capacity is capacity less heel. Each tank's pumpable stock is its stock above its own heel, and never below zero. The digest defines the heel by those two uses and by nothing physical, and this course reads it the same way. It is an input for each tank, and the engine does not assume one.
+The heel is a volume stated for each tank, and the engine's formulas say what it does. Working capacity is capacity less heel. Each tank's pumpable stock is its stock above its own heel, and never below zero. The engine defines the heel by those two uses and by nothing physical, and this course reads it the same way. It is an input for each tank, and the engine does not assume one.
 
 The IBAFO tank farm, invented for this course, has four tanks:
 

@@ -6,7 +6,7 @@
 
 AK-01's table starts at 0 mm with 0.000 m3. Its first entry is the empty tank, so there is no height inside the tank that lies below the table. Every dip from the floor upward has an entry at or beneath it.
 
-Not every calibration starts on the floor. The digest builds such a case deliberately: the same AK-01 tank with a partial calibration that starts at 300 mm, where the volume is 114.040 m3, and ends at 800 mm. Its first entry is a real volume, and it is not the empty tank.
+Not every calibration starts on the floor. The course builds such a case deliberately: the same AK-01 tank with a partial calibration that starts at 300 mm, where the volume is 114.040 m3, and ends at 800 mm. Its first entry is a real volume, and it is not the empty tank.
 
 ## What the engine does with a dip beneath it
 
