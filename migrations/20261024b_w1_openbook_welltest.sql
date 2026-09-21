@@ -40,6 +40,7 @@ declare
   v_written  integer := 0;
   v_ids      jsonb;
   v_extra    jsonb;
+  v_idtxt    text;
   v_allow    jsonb := '{}'::jsonb;  -- D5 allowlist: 'course/tier' -> attempt ids signed off
   v_s0       text;
   v_s1       text;
