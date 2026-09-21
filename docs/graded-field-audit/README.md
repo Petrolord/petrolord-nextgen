@@ -116,6 +116,8 @@ The worst cases are whole capstones:
 
 Nothing here can be fixed by loosening a tolerance. There is no printed value to loosen towards.
 
+Costed follow-on plan: [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md) §1 (route per course, decision D1).
+
 ### 2. 86 fields: the source prints the value too coarsely for its tolerance (`display_miss`)
 
 This is mostly the Suite apps, which print product-style precision against course-style tolerances:
@@ -140,6 +142,8 @@ Where the lessons teach a hand route that reproduces the key (decision's rollbac
 
 **Recommendation (owner):** where the prompt names an app and states a precision, the app should print that precision. The FDP irrReason is fixed here (Suite #553). For the rest, choose per course between a Suite print change (it reaches every Suite user) and the FC6 tolerance rule (see finding 5). The fiscal Designer's 8 fields already have reviewer-proposed tolerances.
 
+Costed follow-on plan: [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md) §2 (per-app pick, decision D3).
+
 ### 3. 295 fields in 21 courses: the answer is printed before the learner works
 
 The tier's own "capstone walkthrough" or "story so far" lesson prints every graded value. Sometimes it is a table of field, value and tolerance, as in `reservoircalc/beginner/m06.../l03-the-capstone-walkthrough.md:9-16`. In other courses a panel opens on the capstone case and shows the answer on first render; the probe confirms these.
@@ -151,6 +155,8 @@ The tier's own "capstone walkthrough" or "story so far" lesson prints every grad
 These are the older Ekene and typewell courses. The newer FC, EC and H waves are guarded by `panelCapstoneGuard` and leakage gates, and the probe found no collisions on them.
 
 **Recommendation (owner):** either re-case each capstone onto a case the panels do not preload and strip answers from the walkthroughs (the FC-wave pattern), or accept these capstones as open-book reading checks and say so. Removing them is a course rewrite, not a B5 fix.
+
+Costed follow-on plan: [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md) §3 (per-course pick, decisions D4 and D5).
 
 ### 4. 17 guessable or answer-by-construction fields
 
@@ -184,6 +190,8 @@ Each annotation proposes a measured replacement the learner reads in the same pa
 
 **Owner decision:** every one of these re-keys a live field. The regrade impact for each is listed under "Regrade impact".
 
+Costed follow-on plan: [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md) §4 (wave W1).
+
 **Also found:**
 - **petrophysics** beginner: the whole capstone is auto-submitted. `PetrophysicsLearningPage.jsx:130` sends `capstoneAnswers(workflow)`, computed from pre-filled parameters, instead of typed answers, so one click passes. Recommendation: typed answers, like every other tier.
 - **seismolord**: `tune25_amp` and `tune40_amp` have identical answers.
@@ -210,6 +218,8 @@ Each annotation proposes a measured replacement the learner reads in the same pa
   - mbal `pot_r2`: 0.002 to 1e-4.
   - earthmodel `krige_probe`: 0.001 to 0.0002. The naive mean shown by default passes today.
   - waterflood `hall_ratio_e4`: a default tile sits within tol.
+
+  Costed follow-on plan: [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md) §4 (decision D6).
 
 **The 40 zero-tolerance fields are all genuine integers** (counts, grid sizes, a zero-based index, depths on a sample grid). They are honest wherever the source prints the integer (34). Six sit inside redesigns for guessability, not for their tolerance.
 
