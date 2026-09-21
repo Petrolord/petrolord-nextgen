@@ -1,0 +1,326 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "Because it was fitted to gases and is extrapolated to liquids without justification.",
+  "new": "Because its polynomial was fitted to dilute gas data and is then extrapolated to dense liquids without justification."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "Either, since both are correlations and the tier difference reflects documentation.",
+  "new": "Either, since both are correlations underneath and the tier difference reflects only how thoroughly each is documented."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "Because the total is measured and the split is predicted, so only the split can be wrong.",
+  "new": "Because the total is measured in the laboratory and the split is predicted by the model, so only the split has any room to be wrong."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "Because the total is a sum of stage volumes whose individual errors cancel exactly.",
+  "new": "Because the total is a sum of stage volumes whose individual errors cancel exactly, leaving the aggregate right while each stage stays off."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "In an appendix only, so it cannot be lifted into a summary and quoted as measured.",
+  "new": "In an appendix only, so it cannot be lifted into an executive summary and quoted as measured."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "It is above the measured value, since the untuned bias is only partly corrected.",
+  "new": "It is above the measured value, since the regression only partly corrects the untuned model's high bias."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "It is larger than the characterized value, since the correction increases the translation.",
+  "new": "It is larger than the characterized value, since the regression pushes the translation further to correct the density."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "Each depends on the volume shift, the knob that moves furthest and dominates the fit.",
+  "new": "Each depends on the volume shift, the knob that moves furthest from its starting value and therefore dominates the fit to every target."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "Each tuned the model further, so the description improved monotonically across the three.",
+  "new": "Each tuned the model further than the tier before, so the fluid description improved monotonically from one tier to the next."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-equation-of-state",
+  "ord": 11,
+  "option": 2,
+  "old": "Because the linear rule is exact and the quadratic one is an approximation adopted for tractability.",
+  "new": "Because the linear rule is exact and the quadratic one is an approximation adopted so that the cubic can still be solved analytically."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-equation-of-state",
+  "ord": 12,
+  "option": 0,
+  "old": "A measure of how strongly two components repel, fitted to their mixture's excess volume.",
+  "new": "A measure of how strongly two components repel at short range, fitted to the excess volume their mixture shows on blending."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-equation-of-state",
+  "ord": 12,
+  "option": 1,
+  "old": "A scaling on the covolume of a pair, which corrects for the packing of unlike molecules.",
+  "new": "A scaling on the covolume of a pair, which corrects for the less efficient packing of unlike molecules of very different sizes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-equation-of-state",
+  "ord": 14,
+  "option": 0,
+  "old": "Equal chemical potential for every component, from which the fugacities follow by exponentiation.",
+  "new": "Equal chemical potential for every component, from which the fugacities follow by exponentiation without needing an equation of state at all."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-equation-of-state",
+  "ord": 14,
+  "option": 3,
+  "old": "Equal K values across components, which is what the Rachford-Rice equation enforces.",
+  "new": "Equal K values across components, which is what the Rachford-Rice equation enforces when it solves for the vapour fraction of the feed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-tuning",
+  "ord": 13,
+  "option": 0,
+  "old": "The Jacobian is singular when two knobs affect the same target identically, which the volume shift and the shift multiplier do.",
+  "new": "The Jacobian is singular when two knobs affect the same target identically, which the volume shift and the shift multiplier do, so the normal equations cannot be inverted."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-tuning",
+  "ord": 13,
+  "option": 2,
+  "old": "The Jacobian is computed once at the starting point and reused, which is invalid once the knobs have moved substantially.",
+  "new": "The Jacobian is computed once at the starting point and reused on every iteration, which is invalid once the knobs have moved substantially from their initial values."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-what-tuning-costs",
+  "ord": 12,
+  "option": 0,
+  "old": "The knobs, the bounds, the solver, the iteration count and the final residual.",
+  "new": "The knobs, the bounds, the solver, the iteration count and the final residual at convergence."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-what-tuning-costs",
+  "ord": 13,
+  "option": 3,
+  "old": "Fitted, because it suggests a statistical procedure where this was a physically bounded optimisation.",
+  "new": "Fitted, because it suggests a statistical procedure with confidence intervals where this was a physically bounded optimisation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-what-tuning-costs",
+  "ord": 15,
+  "option": 0,
+  "old": "A tighter prior pull, which holds the under-determined knobs at their starting values and thereby removes the ambiguity.",
+  "new": "A tighter prior pull, which holds the under-determined knobs at their starting values and thereby removes the ambiguity from the reported fit."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-what-tuning-costs",
+  "ord": 15,
+  "option": 3,
+  "old": "A covariance matrix from the converged Jacobian, which quantifies the uncertainty in each knob directly.",
+  "new": "A covariance matrix from the converged Jacobian, which quantifies the uncertainty in each knob directly and so removes the need for any reruns."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-tiers-this-course-will-not-grade",
+  "ord": 13,
+  "option": 0,
+  "old": "When the fluid is near its critical point, where a two-pseudo-component description fails entirely.",
+  "new": "When the fluid is near its critical point, where a two-pseudo-component description fails entirely and liquid shrinkage becomes unpredictable."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-tiers-this-course-will-not-grade",
+  "ord": 13,
+  "option": 3,
+  "old": "When the total gas-oil ratio is the answer, since the approximation is least reliable in the aggregate.",
+  "new": "When the total gas-oil ratio is the answer, since the approximation is least reliable in the aggregate where the stage errors accumulate."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-tiers-this-course-will-not-grade",
+  "ord": 15,
+  "option": 0,
+  "old": "To full precision with a footnote, so that a later reader can reproduce the calculation exactly.",
+  "new": "To full precision with a footnote, so that a later reader can reproduce the calculation exactly and check each intermediate step."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-tiers-this-course-will-not-grade",
+  "ord": 15,
+  "option": 3,
+  "old": "Only in an appendix, so that it cannot be lifted into a summary and quoted as though it were measured.",
+  "new": "Only in an appendix, so that it cannot be lifted into an executive summary and quoted in a decision as though it were measured."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-where-a-number-comes-from",
+  "ord": 14,
+  "option": 0,
+  "old": "What each number is, because the definitions involve reference conditions that vary between reports.",
+  "new": "What each number is, because the definitions involve reference conditions of pressure and temperature that vary between reports."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-viscosity",
+  "ord": 13,
+  "option": 1,
+  "old": "Because the temperature at which the chain is evaluated is not stated, and viscosity depends strongly on it.",
+  "new": "Because the temperature at which the chain is evaluated is not stated, and dead oil viscosity falls steeply as the reservoir temperature rises."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-what-a-laboratory-measures",
+  "ord": 14,
+  "option": 2,
+  "old": "The composition of the liberated gas, since only its gravity is reported rather than a full analysis.",
+  "new": "The composition of the liberated gas, since only its specific gravity is reported at each depletion step rather than a full analysis."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-good-oil-report",
+  "ord": 13,
+  "option": 3,
+  "old": "Nothing measurable changes, because the tank releases only a few percent of the total gas at these conditions.",
+  "new": "Nothing measurable changes, because the stock tank releases only a few percent of the total gas at these conditions and the error sits inside the laboratory scatter."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-characterizing-the-plus-fraction",
+  "ord": 14,
+  "option": 1,
+  "old": "Compatibility, since a split composition can no longer be compared against the laboratory's reported analysis.",
+  "new": "Compatibility, since a split composition can no longer be compared line by line against the laboratory's reported analysis of the plus fraction."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-characterizing-the-plus-fraction",
+  "ord": 15,
+  "option": 0,
+  "old": "A simplification should be stated only when its cost is material, since caveats on negligible effects dilute the report.",
+  "new": "A simplification should be stated only when its cost is material, since caveats on negligible effects dilute the report and train readers to skip over the ones that matter."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-characterizing-the-plus-fraction",
+  "ord": 15,
+  "option": 2,
+  "old": "A simplification should be removed rather than documented, since a documented limitation is one nobody will read.",
+  "new": "A simplification should be removed rather than documented, since a documented limitation is one nobody will read, and the extra physics costs less than the lost credibility."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-untuned-model",
+  "ord": 15,
+  "option": 1,
+  "old": "Confirm the composition sums to one and the Watson factor is plausible, which validates the two measured inputs.",
+  "new": "Confirm the composition sums to one and the Watson characterization factor is plausible, which validates the two measured inputs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-untuned-model",
+  "ord": 15,
+  "option": 2,
+  "old": "Check that the model returns a formation volume factor at reservoir conditions, since a null indicates a problem.",
+  "new": "Check that the model returns a formation volume factor at reservoir conditions, since a null there indicates a broken characterization."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-correlations-against-a-study",
+  "ord": 9,
+  "option": 2,
+  "old": "Use one only for properties that do not enter the final answer, and measure everything that does.",
+  "new": "Use one only for properties that do not enter the final answer, and send everything that does to the laboratory for measurement."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-correlations-against-a-study",
+  "ord": 12,
+  "option": 0,
+  "old": "Because the data set is larger, operators accumulating far more measurements than any single publication.",
+  "new": "Because the data set is larger, operators accumulating far more measurements over decades than any single publication could."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-correlations-against-a-study",
+  "ord": 12,
+  "option": 1,
+  "old": "Because the fitting is done more carefully, being checked against wells the company can go back to.",
+  "new": "Because the fitting is done more carefully, with each point checked against wells the company can go back to and resample."
+ }
+]
