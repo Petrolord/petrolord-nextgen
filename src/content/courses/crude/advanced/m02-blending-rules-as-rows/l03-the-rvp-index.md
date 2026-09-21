@@ -26,7 +26,7 @@ This is also why the RVP row's dual is in index units, and why module four has t
 
 ## When a specification binds
 
-At Apapa the recipe's achieved RVP is 9.0000 against the maximum of 9, with a giveaway of 0.0000, and the engine marks it binding. The test the engine applies is stated by a constant: a specification counts as binding when the achieved value is within BINDING_TOLERANCE, 1e-7, times the limit (or 1, if larger) of it. The tolerance exists because the kernel works in floating point: a limit met exactly by the mathematics can come back a hair away from it in the arithmetic, and the tolerance keeps such a specification from being misread as slack.
+At Apapa the recipe's achieved RVP is 9.0000 against the maximum of 9, with a giveaway of 0.0000, and the engine marks it binding. The test the engine applies is stated by a constant: a specification counts as binding when the achieved value is within BINDING_TOLERANCE, 1e-7, times the limit (or 1, if larger) of it.
 
 ## Why the index matters for the recipe
 

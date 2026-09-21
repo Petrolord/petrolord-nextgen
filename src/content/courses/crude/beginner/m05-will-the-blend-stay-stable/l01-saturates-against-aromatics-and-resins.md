@@ -1,12 +1,12 @@
 # Saturates against aromatics and resins
 
-Two crudes that are each stable in their own tanks can drop asphaltenes when they are mixed. The sludge settles in tanks, fouls heat exchangers and plugs lines. The studio screens for it before commingling, and the screen starts from the SARA analysis.
+Two crudes can drop asphaltenes when they are mixed, and the engine's messages ask for a test before commingling. The studio screens for it, and the screen starts from the SARA analysis.
 
 {{panel:crude-assay-explorer}}
 
 ## What SARA measures
 
-A SARA analysis splits a crude into four families by weight percent: saturates, aromatics, resins and asphaltenes. Asphaltenes are the heaviest, most polar molecules in a crude. They stay dispersed only while enough aromatics and resins surround them. Saturates do the opposite: a paraffinic, saturate-rich oil is a poor solvent for asphaltenes and pushes them out of solution.
+A SARA analysis splits a crude into four families by weight percent: saturates, aromatics, resins and asphaltenes. The library carries one for each of its four field streams, printed below, and none for the Ebocha partial assay.
 
 So the question of stability is a balance, and it is a balance of weight fractions measured on the crude as it arrives. On one side, saturates precipitate asphaltenes. On the other, aromatics and resins hold them.
 
@@ -48,7 +48,7 @@ The index of each crude alone describes that crude's composition. It does not de
 
 ## A screening index
 
-The CII is a screen. It compresses a complicated colloidal system into one ratio of four weight fractions, and it is useful because SARA is routine to measure and the ratio is quick to compute. It is not a thermodynamic model of asphaltene precipitation, and the engine never presents it as one. The next lesson sets out the bands the engine reads it against.
+The CII is a screen. It is one ratio of four weight fractions, and its bands are screening bands and are not a phase boundary. Egbema Medium with Obigbo Light, 85 and 15, screens stable at 0.6671, although Obigbo Light alone reads 1.1598, and the three bands are read against the blend's own index when crudes are mixed. The next lesson sets out the bands the engine reads it against.
 
 ## Exercise
 

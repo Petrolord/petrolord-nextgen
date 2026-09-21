@@ -36,7 +36,7 @@ Money prints to two decimals of a dollar. The lab prints the margin per m3, 1.89
 
 ## Three kinds of number
 
-The fee is charged per cubic metre and scales with throughput. The variable cost is spent per cubic metre and scales the same way: power for the pumps, additive, the consumables of loading. The fixed cost is spent whatever passes: staff, insurance on the site, the maintenance calendar. The engine's formula keeps the three apart: margin = revenue - throughput x variable cost - fixed cost, and revenue = throughput x fee. The fee and the variable cost enter once for every cubic metre. The fixed cost enters once for the period, 9400.00 USD at IBAFO, whatever the throughput.
+The fee is charged per cubic metre and scales with throughput. The variable cost is spent per cubic metre and scales the same way. The fixed cost is spent whatever passes. The engine's formula keeps the three apart: margin = revenue - throughput x variable cost - fixed cost, and revenue = throughput x fee. The fee and the variable cost enter once for every cubic metre. The fixed cost enters once for the period, 9400.00 USD at IBAFO, whatever the throughput.
 
 ## A blank input
 

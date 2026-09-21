@@ -6,7 +6,7 @@ The utilisation says how busy the bays are on average. It does not say how often
 
 ## What Erlang C answers
 
-Erlang C is the probability that a truck arriving at an M/M/c rack finds every bay occupied and has to wait. It depends on the offered load and the bay count together. The engine builds it from the Erlang B recursion, a step-by-step calculation over the bays that stays well behaved at any bay count, and then turns the Erlang B figure into Erlang C. The next lesson separates the two.
+Erlang C is the probability that a truck arriving at an M/M/c rack finds every bay occupied and has to wait. It depends on the offered load and the bay count together. The engine builds it from the Erlang B recursion, the step the model statement names, and then turns the Erlang B figure into Erlang C. The next lesson separates the two.
 
 At IBAFO, with 9 arrivals an hour, 24 minute loads and 4 bays, the engine prints:
 

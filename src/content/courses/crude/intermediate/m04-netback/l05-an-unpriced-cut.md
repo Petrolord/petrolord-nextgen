@@ -1,6 +1,6 @@
 # An unpriced cut
 
-A blank cost is a question someone may mean to ask. A blank product price is almost always a gap. The engine treats the two differently.
+A blank cost is a question someone may mean to ask. A blank product price makes the valuation incomplete. The engine treats the two differently.
 
 {{panel:crude-valuation-explorer}}
 
@@ -24,15 +24,15 @@ In the complete Kwale valuation the gross was 74.2412 and the netback 64.9473. I
 
 The previous lesson took a blank cost as zero and called the result a legitimate netback. The same treatment here would be wrong, and the reason is what the missing term represents.
 
-A netback without freight answers a real question: what is this crude worth before it is shipped. A netback without the residue price answers nothing anyone wants. The residue barrels still come out of the refinery. They still exist, they still have to be sold or stored, and they are still part of every barrel of crude. Valuing them at nothing is a statement that the refinery gives them away, which nobody typed.
+A blank cost is named and the valuation stays complete. A cut with no price contributes nothing, it is named, and the valuation reports itself incomplete. The residue's yield is still in the yield table, and only its price is missing.
 
-So the engine does compute a figure, because a partial valuation is still informative: it shows what the priced cuts are worth. But it will not let that figure pass as a netback. complete: false is the engine saying that the number below it is a sum over some of the barrels, and unpricedCuts says which barrels are missing.
+So the engine does compute a figure, from the priced cuts alone, and it reports that figure with complete false. complete: false is the engine saying that the number below it is a sum over some of the barrels, and unpricedCuts says which barrels are missing.
 
 ## Reading an incomplete valuation
 
 When complete reads false, read unpricedCuts before reading the netback. Then look at the yield of each named cut. Atmospheric residue is 43.0526 volume percent of the Kwale blend on Kwale's cuts, so the unpriced cut is 43.0526 percent of every barrel, and the figure of 40.6036 carries none of its value.
 
-A buyer who compared that figure against a marker, as module 5 does, would be comparing part of a crude against the whole of another. The flag is there to stop exactly that.
+Read complete before you set any netback against a marker, as module 5 does.
 
 ## Three names, two meanings
 

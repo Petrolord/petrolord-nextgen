@@ -32,7 +32,7 @@ For AK-02 this morning, with the dip at 5406 mm and the water at 95 mm, the engi
 
 The other two tanks read the same way. AK-01, dipped at 9318 mm with 212 mm of water, reads 3542.077 m3 at the dip, 80.588 m3 of water and a gross of 3461.489 m3. AK-03, dipped at 1847 mm with 41 mm of water, reads 52.501 m3 at the dip, 0.341 m3 of water and a gross of 52.161 m3. The morning's total gross observed volume is 4581.490 m3.
 
-The word gross in gross observed volume means product including anything still dissolved or suspended in it, measured at the temperature it was observed at. Free water has come off. Temperature has not yet been corrected; that is module four.
+The gross observed volume is the volume at the dip less the volume at the water cut, read at the temperature the tank was dipped at. Free water has come off. Temperature has not yet been corrected; that is module four.
 
 ## Water is a stock question and a quality question
 

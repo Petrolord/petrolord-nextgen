@@ -1,6 +1,6 @@
 # A loss has a weight
 
-A depot loses product. Some evaporates from tank vents and loading arms, some is left in lines, some is measured away by meters that drift. The stock ledger records the loss as a volume. The carbon ledger needs a mass. The engine converts one to the other only when it is given the one fact that links them, and this lesson reads that conversion and its refusal.
+A depot loses product. The stock ledger records the loss as a volume. The carbon ledger needs a mass. The engine converts one to the other only when it is given the one fact that links them, and this lesson reads that conversion and its refusal.
 
 {{panel:supply-depot-explorer}}
 

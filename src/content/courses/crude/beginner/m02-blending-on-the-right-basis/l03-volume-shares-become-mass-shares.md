@@ -37,7 +37,7 @@ The same three numbers, 50, 30 and 20, make two different blends depending on wh
 | by volume | 0.8804 | 29.2240 | 0.6138 |
 | by mass | 0.8783 | 29.6100 | 0.5840 |
 
-A share is a number with a basis, and the basis is part of the recipe. When a nomination says 50, 30 and 20, the first question to ask is whether those are barrels or tonnes.
+A share is a number with a basis, and the basis is part of the recipe. When a recipe says 50, 30 and 20, the first question to ask is whether those are volume shares or mass shares.
 
 ## One basis at a time
 

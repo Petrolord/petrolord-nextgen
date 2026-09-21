@@ -19,7 +19,7 @@ Read the last column. On every row the engine's blend API minus the volume-weigh
 
 The first row is the cleanest case. Half a 20 API crude and half a 40 API crude look as if they ought to make a 30 API blend, and the shortcut says 30.0000. The engine, blending the two specific gravities and converting back, gives 29.3808.
 
-The third row pairs the heaviest and the lightest crude in the library, at 17.2 and 54.6 API, and the difference printed for them is -2.0889. On a cargo priced or specified on gravity, a gap of that kind can decide whether a blend meets the contract, and nothing in the shortcut figure itself warns you that it is wrong.
+The third row pairs the heaviest and the lightest crude in the library, at 17.2 and 54.6 API, and the difference printed for them is -2.0889. Nothing in the shortcut figure itself warns you that it is wrong. The gap of -2.0889 shows only when the engine's figure is printed beside the shortcut figure in the same row.
 
 ## The reading that does work
 

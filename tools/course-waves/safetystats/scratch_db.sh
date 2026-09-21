@@ -10,13 +10,21 @@
 # copies tools/course-waves/producedwater/scratch_db.sh, which cites the
 # migrations each statement comes from). Then production's shape as of
 # 2026-09-19: the forty-four available courses as neighbours at path_order 1 to
-# 38 and 53 to 58, and the eleven FC and Assurance courses read out of the
-# COMMITTED course migrations at REF (FC1 to FC9 at 39 to 47, riskchange at 59,
-# compliance at 60), so the path_order, catalogue and prompt-sweep checks meet
-# real neighbours and real capstone rows of other courses. Those eleven sit
-# here as coming_soon, as their course migrations seed them; production has
-# since flipped them, and the rolled-back linked run of 2026-09-19 measured
-# 55 available / 0 coming_soon there.
+# 38 and 53 to 58, and the SIXTEEN FC, Commercial & Trading, Energy Transition
+# and Assurance courses read out of the COMMITTED course migrations at REF (FC1
+# to FC9 at 39 to 47, crude, refinery and supply at 48 to 50, gasvalue and
+# carbon at 51 and 52, riskchange at 59, compliance at 60), so the path_order,
+# catalogue and prompt-sweep checks meet real neighbours and real capstone rows
+# of other courses. Those sixteen sit here as coming_soon, as their course
+# migrations seed them; production has since flipped them.
+#
+# Until 2026-09-21 this loaded ELEVEN: the pattern below named FC, riskchange
+# and compliance only, so path_order 48 to 52 (the five C&T and ET courses,
+# all merged 2026-09-19 before H1 was cut) were a hole in the catalogue the
+# ladder was checked against, and a path_order or prompt-sweep clash with any of
+# them could not have been seen here. The count was hard-coded to 11, so the
+# short set passed its own assertion. Now the loaded set is asserted at 16 AND
+# every path_order from 1 to 60 is asserted occupied, so a hole refuses.
 #
 # What this cannot prove, said plainly: that production's rows match. That is
 # what `dryrun_h1.sh` with TARGET=linked is for (rolled back, snapshotted
@@ -108,10 +116,14 @@ select 'neighbour' || g, 'Neighbour ' || g,
 SQL
 n=0
 for f in $(git -C "$REPO" ls-tree --name-only "$REF" migrations/ \
-           | grep -E '_(fc[0-9]+_[a-z]+|asrc_riskchange|cq_compliance)_course\.sql$'); do
+           | grep -E '_(fc[0-9]+_[a-z]+|cr_crude|rf_refinery|tds_supply|gv_gasvalue|cef_carbon|asrc_riskchange|cq_compliance)_course\.sql$'); do
   git -C "$REPO" show "$REF:$f" | P
   n=$((n + 1))
 done
-[ "$n" = 11 ] || { echo "REFUSED: expected the 11 seeded course migrations at $REF, found $n"; exit 2; }
+[ "$n" = 16 ] || { echo "REFUSED: expected the 16 seeded course migrations at $REF, found $n"; exit 2; }
+# No hole: every path_order 1..60 must hold a row, stand-in or real, so a
+# neighbour course the pattern above misses refuses instead of passing short.
+holes=$(P -Atc "select coalesce(string_agg(g::text, ',' order by g), '') from generate_series(1, 60) g where not exists (select 1 from public.academy_apps a where a.path_order = g)")
+[ -z "$holes" ] || { echo "REFUSED: path_order hole(s) in the neighbour catalogue at $REF: $holes"; exit 2; }
 echo "$C ready: 4 academy tables, $n committed course migrations loaded at $REF"
 P -Atc "select count(*) filter (where status='available') || ' available / ' || count(*) filter (where status='coming_soon') || ' coming_soon, ' || (select count(*) from public.academy_capstones) || ' capstones' from public.academy_apps"

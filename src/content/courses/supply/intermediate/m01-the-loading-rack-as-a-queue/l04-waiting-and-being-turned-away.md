@@ -25,9 +25,9 @@ The load minutes swept at 9 arrivals an hour on 4 bays carry both:
 
 ## Which model fits a depot
 
-A loading rack with a truck park behaves like the first case. Tankers queue and load in turn, so Erlang C is the right probability.
+The engine models the first case. rackQueue is an M/M/c queue in which a truck that finds every bay busy waits, so the probability it prints is Erlang C.
 
-A depot may differ at the edges: a yard has a fence, and a driver who sees a long line may leave. The engine models only the waiting case. If your depot turns trucks away, say so beside the figure, because the printed probability of waiting comes from a model in which no truck leaves.
+The engine models only the waiting case. If your depot turns trucks away, say so beside the figure, because the printed probability of waiting comes from a model in which no truck leaves.
 
 ## What waiting costs in minutes
 
@@ -43,7 +43,7 @@ The course says of the mean wait that it averages over every truck, the ones tha
 
 ## Why the distinction matters for decisions
 
-Fewer lost liftings and shorter waits are different goals. The first needs the chance that a truck cannot be served at all. The second needs the chance that it queues, and how long for. Answering the first with an Erlang C figure overstates the lost trade, because a truck that waits still loads. Answering the second with an Erlang B figure understates the problem, because it ignores the line. Name the model before you name the figure.
+Fewer trucks leaving and shorter waits are different questions. The first needs the chance that a truck finds every bay busy in a rack with no queue, the Erlang B figure, 0.270685 at IBAFO. The second needs the chance that a truck queues, the Erlang C figure, 0.787753, and how long for. Answering either question with the other model's figure answers the other question. Name the model before you name the figure.
 
 ## Exercise
 

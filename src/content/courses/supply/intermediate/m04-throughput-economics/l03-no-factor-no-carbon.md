@@ -38,7 +38,7 @@ and it gives its reason in its own words:
 
 An emission factor is published data. It comes from an inventory methodology with a name and a version, it differs by product and by what is being counted, and it is revised. A factor built into an engine would silently become whatever version the programmer copied, and every report from that engine would carry it without a citation. When the methodology moves, the reports would not.
 
-So the factor is an input with a source. The depot's sustainability team supplies it, names where it came from, and owns its version. The engine's job is the arithmetic, and a missing factor is a missing input the same way a missing density is.
+So the factor is an input with a source. The caller supplies it, and the engine's own note calls factors "published, versioned data". The engine's job is the arithmetic, and a missing factor is a missing input the same way a missing density is.
 
 ## Why none is better than a guess
 

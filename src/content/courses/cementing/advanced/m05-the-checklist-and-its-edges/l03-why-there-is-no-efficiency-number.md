@@ -28,7 +28,7 @@ It is produced by weighting several sub-criteria and adding them up. Standoff co
 
 Five specific things, each of which is either true or false of this job, each with the number that decided it.
 
-    standoff: false. Minimum standoff 60% vs the API 67% target.
+    standoff: false. Minimum standoff 59.92% vs the API 67% target.
 
 A reader who gets that knows exactly what happened and exactly what to change. A reader who gets 80 percent knows nothing.
 

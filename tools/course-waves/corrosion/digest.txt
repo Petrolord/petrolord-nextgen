@@ -4,7 +4,7 @@
 
 # PRECISION. Partial pressures in bar and in psia, wall thicknesses and allowances in mm, corrosion rates in mm/yr, lives in years, percentages, percentage points and every dimensionless ratio print to SIX decimals; Reynolds numbers print to FOUR, because a number in the hundreds of thousands carries no information in its millionths; measured constants and ratios of them print to TWELVE; counts are whole numbers.
 
-# ENGINE. engines/facilities/corrosion.js, vendored sha-identical with petrolord-engines 5cbdca5, 783 lines, importing nothing. The vendoring closure walked from the jest suite is SIX paths. The vendored golden test-data/facilities/goldens/corrosion_cases.json carries 110 rows in 17 blocks.
+# ENGINE. engines/facilities/corrosion.js, vendored sha-identical with petrolord-engines 16fd6c9, 785 lines, importing nothing. The vendoring closure walked from the jest suite is SIX paths. The vendored golden test-data/facilities/goldens/corrosion_cases.json carries 110 rows in 17 blocks.
 
 # THE GOLDEN IS SYNTHETIC AND IT SAYS SO. golden provenance.published is false. The golden's own words: "No published de Waard-Milliams case, no MR0175 or ISO 15156 clause and no corrosion rate-band table exists anywhere in this repository, so every row here is SYNTHETIC. Route independence and the gate's pins carry the load instead. A number recalled from memory is not a published datum and none is typed here."
 
@@ -66,7 +66,7 @@ WHAT THE ENGINE NOW RETURNS IN ITS PLACE, measured at the shipped app defaults:
 | `materialGuidanceProvided` | false | the same for the material recommendation |
 | `label` | Above the H2S screening threshold | the whole verdict, in words |
 
-THE ABSENCE IS PROVED THREE WAYS, and each is a separate check this file ran: the function `sourServiceRegion` is not exported, so `typeof` it is undefined; none of the three material guidance strings and neither standard name appears anywhere in the 783 lines of the engine source; and no returned string anywhere in three whole screenings names either standard.
+THE ABSENCE IS PROVED THREE WAYS, and each is a separate check this file ran: the function `sourServiceRegion` is not exported, so `typeof` it is undefined; none of the three material guidance strings and neither standard name appears anywhere in the 785 lines of the engine source; and no returned string anywhere in three whole screenings names either standard.
 
 THE GENERAL LESSON, which is why this is the course's headline and not a footnote. A fit that is wrong by a factor of two in a number is a tolerance problem and you fix it by measuring. A fit that is invented and then labelled with somebody else's authority is a different kind of thing: the number was never the claim. The claim was "this is what the standard says", and no amount of retuning makes that true. The only repair available is to stop claiming it, and the only honest replacement is the sentence that the thing is not provided.
 
@@ -1059,8 +1059,8 @@ AND THE SAME ROUNDING HABIT MEETS A THRESHOLD. A sour threshold of 0.05 psia is 
 
 # THIS SECTION, AND ONLY THIS SECTION, DESCRIBES BEHAVIOUR THIS ENGINE NO LONGER HAS. Every sentence above this line is about the engine as it ships today. Every sentence below is about what it did before the repair that preceded this course, and each item is a GENERAL LESSON that happens to have an example here. A sentence about former behaviour that reads as current behaviour is a defect, and the frame for this material is this heading and this paragraph.
 
-- THE ENGINE SOURCE CARRIES THIS HISTORY IN ITS COMMENTS, and a sentence lifted out of a comment arrives with no frame around it. Counted by reading engines/facilities/corrosion.js: 0 comment lines carry the repair marker, and 5 comment lines are written in a past tense about former behaviour. The rule that counted them: a line that begins with a comment marker and contains one of "used to", "previous version", "earlier version", "before", "no longer", "silently" or "would have".
-- The module is 783 lines long, so roughly one line in 157 of it is a sentence about what it used to do. Engine source comments are PROVENANCE. So are the wave recon and findings reports, and so is the repair's own findings record vendored beside the oracle. None of the four is teaching truth.
+- THE ENGINE SOURCE CARRIES THIS HISTORY IN ITS COMMENTS, and a sentence lifted out of a comment arrives with no frame around it. Counted by reading engines/facilities/corrosion.js: 0 comment lines carry the repair marker, and 6 comment lines are written in a past tense about former behaviour. The rule that counted them: a line that begins with a comment marker and contains one of "used to", "previous version", "earlier version", "before", "no longer", "silently" or "would have".
+- The module is 785 lines long, so roughly one line in 131 of it is a sentence about what it used to do. Engine source comments are PROVENANCE. So are the wave recon and findings reports, and so is the repair's own findings record vendored beside the oracle. None of the four is teaching truth.
 
 # ITEM ONE. THE HEADLINE. AN INVENTED CURVE WEARING SOMEBODY ELSE'S AUTHORITY.
 - The general lesson, and it is the largest one in this course: a calculation can be wrong in a way that no amount of measurement repairs, because the number was never the claim. If a curve is labelled with a standard's name, the claim is "this is what the standard says". Retuning the curve does not make that true. The only honest repair is to withdraw the claim and say the thing is not provided.

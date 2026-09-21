@@ -34,7 +34,7 @@ prompt: 6 days of loss in a row. One day is noise; a run in one direction is wor
 
 ## Reading the prompt
 
-The prompt names three causes. A drifting meter over-reads or under-reads a little on every transfer. A passing valve lets a little product through when it is meant to be shut. A temperature effect not being corrected turns a warm stock into an apparent gain or a cool one into an apparent loss, every day in the same direction while the weather holds. None of them is a single event, so each shows up as a run.
+The prompt names three causes: a drifting meter, a passing valve, or a temperature effect not being corrected. It names them as places to look and does not say which one is at work.
 
 The cumulative percent, -0.0494, states the nine days' total gap on the nine days' total throughput. The engine prints that denominator as 55085.000 m3.
 

@@ -42,7 +42,7 @@ Each figure in the ledger is in m3, and the closing stock is at standard. The op
 
 ## What the gap is judged against
 
-A gap of zero would be remarkable. Tapes are read by people, thermometers have a resolution, tables are interpolated, and meters on the receipts and deliveries have their own uncertainty. So the day is judged against a tolerance, stated as a percent of throughput. AKODO's stated tolerance is 0.2 percent, a figure chosen for this course. The day's throughput, receipts plus deliveries, is 6182.500 m3, and the tolerance is 0.2 percent of it: 12.365 m3, and the unaccounted figure of -8.648 m3 is within tolerance: true.
+The day's gap is not zero, and the engine does not ask it to be. The day is judged against a tolerance, stated as a percent of throughput. AKODO's stated tolerance is 0.2 percent, a figure chosen for this course. The day's throughput, receipts plus deliveries, is 6182.500 m3, and the tolerance is 0.2 percent of it: 12.365 m3, and the unaccounted figure of -8.648 m3 is within tolerance: true.
 
 Lesson four reads the tolerance in detail. For now, the day closes as a loss within tolerance.
 

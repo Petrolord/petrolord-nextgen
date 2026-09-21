@@ -13,7 +13,7 @@
  "engines": [
   "engines/hse/exposure.js"
  ],
- "enginesVendoredAt": "NextGen, sha-identical with petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217). Re-vendored 2026-09-19 for #220 only: exposure.js, the jest suite and FINDINGS-exposure.md moved; the golden, the oracle and the negative-control script are byte-identical between the two commits. SIX paths, walked as an import closure from __tests__/hse.exposure.test.js by vendor_hygiene.sh: the suite, the engine and the golden it reads at runtime, plus three NAMED members (oracle_exposure.py, FINDINGS-exposure.md, negcontrol_exposure.sh mode 755). 24 proofs (blob, sha256, cmp, bytes), 0 deviations. The six paths were first ledgered kind \"extra\", group h2-hygiene-course; merging main brought the canonical pin to df31f53, which carries all six byte for byte, so the six entries were removed as STALE and VENDOR.json is now identical to main.",
+ "enginesVendoredAt": "NextGen, sha-identical with petrolord-engines 16fd6c9 (re-vendored 2026-09-21 for #231, the own-property preset lookups: exposure.js and FINDINGS-exposure.md moved, no H2 value moved, fields.json regenerates byte-identical and the digest's engine line count moved from 708 to 714; before that b43f1d9, main after #220, #222, #223; first vendored at 870cc8f, PR #217). Re-vendored 2026-09-19 for #220 only: exposure.js, the jest suite and FINDINGS-exposure.md moved; the golden, the oracle and the negative-control script are byte-identical between the two commits. SIX paths, walked as an import closure from __tests__/hse.exposure.test.js by vendor_hygiene.sh: the suite, the engine and the golden it reads at runtime, plus three NAMED members (oracle_exposure.py, FINDINGS-exposure.md, negcontrol_exposure.sh mode 755). 24 proofs (blob, sha256, cmp, bytes), 0 deviations. The six paths were first ledgered kind \"extra\", group h2-hygiene-course; merging main brought the canonical pin to df31f53, which carries all six byte for byte, so the six entries were removed as STALE and VENDOR.json is now identical to main.",
  "leakScales": [
   "1",
   "x1e3",
@@ -134,8 +134,8 @@
  "digest": {
   "lines": 1135,
   "sections": 25,
-  "md5": "c41ff4fbe968b1a75c8d677f2e2b1b8e",
-  "sha256": "bbf64e544665a3737905b286167cb9fcbc2d42c0a09fb0bfafe0d2d81a960d66",
+  "md5": "c9085ebd2861c5690f09d8e613d2107a",
+  "sha256": "4de9a0fb0253540874326fe49215b3cd512f2e54a9d21d0eddff0c2745efde7f",
   "history": null,
   "note": "The engine has no repair history, so there is no history section. Section 19 is about ERRATA IN THE SOURCES, which are current."
  },
@@ -274,7 +274,7 @@
    "result": "exempt engine strings declared: 0, hit: 0, dead: 0 -> [] | quotations of engine text found: 0 | VIOLATIONS: 0"
   },
   "h2_dump.mjs owners selftest": {
-   "md5": "abc2c56e74f5a424e07f5831e64edf85",
+   "md5": "b25c8a3fa3a9b935c0847e5b78f9ef84",
    "exit": 0,
    "expected": 0,
    "result": "OWNERS SELFTEST: a module that tier does not have refused: GENERATOR REFUSES: Associate has no m09 | OWNERS SELFTEST: a lesson that is not in the module named beside it refused: GENERATOR REFUSES: Expert m01 has no l05 | OWNERS SELFTEST: a valid clause renders as (owned by Professional m05 and Expert m05 l03 and l04)"

@@ -19,7 +19,7 @@ The template asks for a Cetane number of at least 48, Sulfur of at most 50 ppm, 
 
 **Sulfur** blends on mass, as in the gasoline pool.
 
-**Cetane and flash point** are treated linearly on volume, which the template notes is a screening approximation. The engine says so in its template and uses the linear rule as a screen, and a planner reads a recipe that binds on cetane with that in mind, because the cetane limit is one of the two rows this recipe is pressed against.
+**Cetane and flash point** are treated linearly on volume, which the template notes is a screening approximation. The engine says so in its template and uses the linear rule as a screen. The cetane limit is one of the two rows this recipe binds on.
 
 ## The recipe
 

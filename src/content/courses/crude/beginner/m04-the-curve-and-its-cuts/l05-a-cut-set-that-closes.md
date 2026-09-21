@@ -43,7 +43,7 @@ This row separates the two conditions for closing. Every cut having a yield is o
 
 ## Reading closes in practice
 
-A cut set that closes is a complete product slate, and it can be priced. One that does not close is telling you that part of the barrel is unaccounted for. The remedy is either a fuller assay or a cut set that says openly what it covers. The engine reports closes as true or false and names every cut with no yield, so a reader never mistakes a partial slate for a whole one.
+A cut set closes only when every cut has a yield and the total is within the engine's closing tolerance of 100 percent. One that does not close leaves part of the barrel with no yield, or a total away from 100. The engine reports closes as true or false and names every cut with no yield, so a reader never mistakes a partial slate for a whole one.
 
 ## Exercise
 

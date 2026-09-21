@@ -15,7 +15,7 @@ Take the export blend and leave Egbema Medium's sulfur blank.
 
 The basis cell does the reporting. With both sulfurs given it reads "mass". With one blank it reads "not blended: no value for Egbema Medium". A reader of the result knows which property is missing and which crude to go back to.
 
-A blank says the value was not measured or not entered, and that is all it says. It says nothing about how much sulfur the crude holds. The remedy is a measured value from the laboratory, entered against the crude the engine names, and until that arrives the honest answer for the blend's sulfur is no answer.
+A blank says the value was not measured or not entered, and that is all it says. It says nothing about how much sulfur the crude holds. The remedy is a value entered against the crude the engine names, and until it is entered the blend's sulfur comes back as no value.
 
 ## Why a zero would be dangerous
 

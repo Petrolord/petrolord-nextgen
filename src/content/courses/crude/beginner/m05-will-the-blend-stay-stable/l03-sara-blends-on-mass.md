@@ -32,11 +32,11 @@ As with sulfur, the table can be read against the same index formed from SARA bl
 
 Read the last column. The volume reading minus the engine is 0.2104 for Asarama Heavy with Ubie Condensate, -0.0020 for Asarama Heavy with Egbema Medium, and 0.0037 for Egbema Medium with Obigbo Light.
 
-The volume figures are plausible on every row. They are formed on a basis the SARA fractions do not have, so they are the wrong numbers, however close they land.
+The volume figures are plausible on every row. They are formed on a basis the engine does not use for SARA, so they are the wrong numbers, however close they land.
 
 ## Why the basis matters near a band edge
 
-A screen with thresholds turns a small difference into a different answer when a figure sits near a threshold. The uncertain pair's CII is 0.7161 on mass and 0.7141 on volume, a difference of -0.0020, and the lower band edge is 0.7. A blend with a CII near a band edge is exactly the case where the basis must be right. That is why the engine forms the mass shares once and uses them for every per-mass property, SARA included.
+A screen with thresholds turns a small difference into a different answer when a figure sits near a threshold. The uncertain pair's CII is 0.7161 on mass and 0.7141 on volume, a difference of -0.0020, and the lower band edge is 0.7. The engine forms the mass shares once and blends SARA on mass, so 0.7161 is the figure it reads against the band.
 
 ## The same rule, a fourth time
 

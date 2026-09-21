@@ -1,6 +1,6 @@
 # API gravity is a hyperbola
 
-Crude is priced and specified in degrees API, and the engine computes with specific gravity. The two are tied by a definition, and the shape of that definition is the first thing a blender has to understand.
+The library lists each crude's gravity in degrees API, and the engine computes with specific gravity. The two are tied by a definition, and the shape of that definition is the first thing a blender has to understand.
 
 {{panel:crude-assay-explorer}}
 
@@ -51,7 +51,7 @@ That is why the engine never averages API numbers. It blends specific gravity an
 
 ## The habit to build
 
-Whenever you see an API number in this course, hold its specific gravity beside it. The API is the number a contract quotes. The specific gravity is the number the arithmetic uses. The assay explorer shows both for every crude, and every blend you build reports the specific gravity it blended and the API it converted from it.
+Whenever you see an API number in this course, hold its specific gravity beside it. The API is the number the library lists. The specific gravity is the number the arithmetic uses. The assay explorer shows both for every crude, and every blend you build reports the specific gravity it blended and the API it converted from it.
 
 ## Exercise
 

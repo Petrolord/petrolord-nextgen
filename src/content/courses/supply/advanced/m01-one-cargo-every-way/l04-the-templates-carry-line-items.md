@@ -44,7 +44,7 @@ Every rate in both templates is absent. The module states why in its `RATE_DISCL
 
 > "Line items only. Every rate is a required input: duties, levies and regulated margins are set by regulation, differ by market and change. Confirm each against the regulation in force."
 
-Read that as a rule about authority. A duty, a levy or a regulated margin is a figure a regulator publishes for one market at one time. A library that shipped one would be quoting a regulation it cannot keep current, and every build-up that used the default would inherit the error silently.
+Read that as a rule about authority. The disclaimer sends every rate back to the regulation in force, and the module ships none of its own.
 
 The two templates also fix an order. The import lines run from freight to demurrage in the order the walk reaches their stages, and the pump lines run from the depot margin to the value added tax, the one line whose basis is a percent of the running total. The order is shipped, and the next module shows it is part of the answer, because a percentage can only bite on a base the walk has already formed.
 

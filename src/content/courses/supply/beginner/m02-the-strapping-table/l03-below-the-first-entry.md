@@ -31,7 +31,7 @@ A dip below the datum is not a reading at all. Swept down AK-01's full table, th
 | 0 | 0.000 m3 |
 | -5 | REFUSED: A dip cannot be negative. |
 
-A negative height usually means a reading typed with the wrong sign or taken from the wrong reference point. The engine does not clamp it to 0 mm, because 0 mm is the empty tank and that is a different claim.
+The refusal names no cause for a negative height and asks for no correction of its own. The engine does not clamp it to 0 mm, because 0 mm is the empty tank and that is a different claim.
 
 ## Two refusals, two causes
 

@@ -1,6 +1,6 @@
 # The load that will not fit
 
-The last link in the chain is the station's tank. A tanker arrives with a full load, and the load has to go somewhere. If the tank has too little room, the driver waits, discharges part and takes the rest away, or the order was placed too late. The engine's `stationSizing` checks the fit at the moment the order is placed.
+The last link in the chain is the station's tank. A tanker arrives with a full load, and the load has to go somewhere. If the tank has too little room at the reorder level, the engine says so in a warning. The engine's `stationSizing` checks the fit at the moment the order is placed.
 
 {{panel:supply-depot-explorer}}
 
@@ -52,7 +52,7 @@ Of the four fractions swept, only 0.1 leaves room for a 33000.00 litre delivery.
 
 ## The tension the station has to manage
 
-A lower reorder level makes room for the delivery. It also leaves less stock in hand while the truck is on the road, and the time a truck takes to arrive is a lane figure the station must know. The engine reports both sides and decides neither. The two remedies in the warning are the station's choices: order at a lower level and accept the risk of running dry, or order a part load and accept a higher cost per litre, because the lane's trip costs are then spread over fewer litres.
+A lower reorder level makes room for the delivery. It also leaves less stock in hand while the truck is on the road, and the time a truck takes to arrive is a lane figure the station must know. The engine reports both sides and decides neither. The warning names two remedies, "Order earlier or order a part load.", and the choice between them is the station's.
 
 ## The same problem at the depot
 

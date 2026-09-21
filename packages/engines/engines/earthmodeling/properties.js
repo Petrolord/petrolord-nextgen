@@ -9,6 +9,12 @@
 
 import { NULL_VALUE } from '../../lib/gridding/numeric';
 
+/** Own-property preset lookup. `TABLE[key]` walks the prototype chain, so
+ *  'constructor', 'toString', 'valueOf', 'hasOwnProperty' and '__proto__'
+ *  are "found" in every object literal and walk through a falsy guard. */
+const ownPreset = (table, key) => (typeof key === 'string' || typeof key === 'number') && Object.prototype.hasOwnProperty.call(table, key);
+
+
 /** Gaussian elimination with partial pivoting (n is tiny — wells). */
 export function solveDense(a, b) {
   const n = b.length;
@@ -175,7 +181,7 @@ export function populateZoneProperty(spec, labels, pointsByBlock, allPoints, met
   const z = new Float64Array(spec.nx * spec.ny).fill(NULL_VALUE);
   const provenance = [];
   const LADDER = { krige: ['krige', 'trend', 'constant'], trend: ['trend', 'constant'], constant: ['constant'] };
-  const ladder = LADDER[method];
+  const ladder = ownPreset(LADDER, method) ? LADDER[method] : undefined;
   if (!ladder) throw new Error(`Unknown population method "${method}".`);
   for (const block of blocks) {
     let pts = pointsByBlock[block] || [];
