@@ -1,0 +1,416 @@
+{
+ "course": "rotating",
+ "sources": {
+  "beginner": "No NextGen route: the pump explorer (panels/rotating/PumpExplorer.jsx) has only a View select and teaches on OKONO. The engine runs on the capstone case only in the Suite Pump Station Designer (named in beginner m01/l01), which prints duty flow and head fmt(v, 0) and power fmt(v, 1) (src/components/pumpstudio/PumpPanels.jsx:101-110) and no discharge pressure; the power and pressure conversions (3960, 2.31, 0.7457) are hand steps taught in m04 but need the duty at full precision.",
+  "intermediate": "Suction figures are closed forms taught in intermediate (pressure head (Ps - Pv) x 2.31 / SG, NPSHa = pressure head + static - friction), full precision by hand. The speed-mapped duty and the parallel duty need the solved crossing, available only from the Suite Pump Station Designer's 'What a change would buy' card at fmt(v, 0) (PumpPanels.jsx:241-260).",
+  "advanced": "Exponent ratio, ratio per stage and first-stage discharge temperature are closed forms taught in advanced m01-m03 (459.67 Rankine offset quoted in m04/l04). Polytropic head, gas hp and fuel need DAK Z (engine-only); the Suite Compressor Station Designer prints them at 0, 0 and 3 decimals (src/components/compressorstudio/CompressorPanels.jsx:121, :152, :204). The NextGen CompressorExplorer has no numeric inputs."
+ },
+ "fields": [
+  {
+   "tier": "beginner",
+   "key": "escravos_duty_flow_gpm",
+   "source": "suite-app",
+   "source_ref": "src/components/pumpstudio/PumpPanels.jsx:101",
+   "printed": {
+    "decimals": 0
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/fields.jsx:40-42 (fmt(v, digits) = toLocaleString min/max digits)",
+   "prompt_precision": "Flows in gpm, heads in ft, power in hp and kW, and pressure in psi, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/pumpstudio/PumpPanels.jsx:101-110, :241-260 -> print duty flow, duty head, hydraulic hp, brake hp and motor input kW with fmt(v, 6), and add a discharge pressure (psi) Stat at the duty at 6 decimals (PumpStationDesigner.jsx:38-42 mirror the same rows)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Pump Station Designer, the only place a learner can run this pump chain on the capstone case: the NextGen pump and suction explorers have no numeric inputs (a View select only) and teach on OKONO, and the least-squares fit plus crossing are engine steps the lessons describe but do not teach as a hand procedure. The Designer prints duty flow and head with 0 decimals and power with 1 (PumpPanels.jsx:101-110), against a prompt that asks six decimals. An alternative is editable inputs on the NextGen pump explorer printing six decimals as its tiles already do; a tolerance change cannot help without swallowing the method errors the tier grades.",
+   "evidence": "Duty flow Stat fmt(duty.qGpm, 0) prints 1,251 against 1250.542488 (tol 1e-4); the NextGen explorer cannot take the ESCRAVOS curve.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "escravos_duty_head_ft",
+   "source": "suite-app",
+   "source_ref": "src/components/pumpstudio/PumpPanels.jsx:102",
+   "printed": {
+    "decimals": 0
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/fields.jsx:40-42 (fmt(v, digits) = toLocaleString min/max digits)",
+   "prompt_precision": "Flows in gpm, heads in ft, power in hp and kW, and pressure in psi, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/pumpstudio/PumpPanels.jsx:101-110, :241-260 -> print duty flow, duty head, hydraulic hp, brake hp and motor input kW with fmt(v, 6), and add a discharge pressure (psi) Stat at the duty at 6 decimals (PumpStationDesigner.jsx:38-42 mirror the same rows)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Pump Station Designer, the only place a learner can run this pump chain on the capstone case: the NextGen pump and suction explorers have no numeric inputs (a View select only) and teach on OKONO, and the least-squares fit plus crossing are engine steps the lessons describe but do not teach as a hand procedure. The Designer prints duty flow and head with 0 decimals and power with 1 (PumpPanels.jsx:101-110), against a prompt that asks six decimals. An alternative is editable inputs on the NextGen pump explorer printing six decimals as its tiles already do; a tolerance change cannot help without swallowing the method errors the tier grades.",
+   "evidence": "Duty head fmt(duty.headFt, 0) prints 382 against 382.185788 (tol 1e-5).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "escravos_hydraulic_hp",
+   "source": "suite-app",
+   "source_ref": "src/components/pumpstudio/PumpPanels.jsx:105-106",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/fields.jsx:40-42 (fmt(v, digits) = toLocaleString min/max digits)",
+   "prompt_precision": "Flows in gpm, heads in ft, power in hp and kW, and pressure in psi, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/pumpstudio/PumpPanels.jsx:101-110, :241-260 -> print duty flow, duty head, hydraulic hp, brake hp and motor input kW with fmt(v, 6), and add a discharge pressure (psi) Stat at the duty at 6 decimals (PumpStationDesigner.jsx:38-42 mirror the same rows)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Pump Station Designer, the only place a learner can run this pump chain on the capstone case: the NextGen pump and suction explorers have no numeric inputs (a View select only) and teach on OKONO, and the least-squares fit plus crossing are engine steps the lessons describe but do not teach as a hand procedure. The Designer prints duty flow and head with 0 decimals and power with 1 (PumpPanels.jsx:101-110), against a prompt that asks six decimals. An alternative is editable inputs on the NextGen pump explorer printing six decimals as its tiles already do; a tolerance change cannot help without swallowing the method errors the tier grades.",
+   "evidence": "Hydraulic hp appears only in a hint, fmt(power.hydraulicHp, 1) = 99.3, against 99.329359 (tol 1e-6). Q x H x SG / 3960 by hand needs the duty at full precision.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "escravos_brake_hp",
+   "source": "suite-app",
+   "source_ref": "src/components/pumpstudio/PumpPanels.jsx:105",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/fields.jsx:40-42 (fmt(v, digits) = toLocaleString min/max digits)",
+   "prompt_precision": "Flows in gpm, heads in ft, power in hp and kW, and pressure in psi, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/pumpstudio/PumpPanels.jsx:101-110, :241-260 -> print duty flow, duty head, hydraulic hp, brake hp and motor input kW with fmt(v, 6), and add a discharge pressure (psi) Stat at the duty at 6 decimals (PumpStationDesigner.jsx:38-42 mirror the same rows)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Pump Station Designer, the only place a learner can run this pump chain on the capstone case: the NextGen pump and suction explorers have no numeric inputs (a View select only) and teach on OKONO, and the least-squares fit plus crossing are engine steps the lessons describe but do not teach as a hand procedure. The Designer prints duty flow and head with 0 decimals and power with 1 (PumpPanels.jsx:101-110), against a prompt that asks six decimals. An alternative is editable inputs on the NextGen pump explorer printing six decimals as its tiles already do; a tolerance change cannot help without swallowing the method errors the tier grades.",
+   "evidence": "Brake power fmt(power.brakeHp, 1) = 130.5 against 130.524782.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "escravos_motor_input_kw",
+   "source": "suite-app",
+   "source_ref": "src/components/pumpstudio/PumpPanels.jsx:110",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/fields.jsx:40-42 (fmt(v, digits) = toLocaleString min/max digits)",
+   "prompt_precision": "Flows in gpm, heads in ft, power in hp and kW, and pressure in psi, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/pumpstudio/PumpPanels.jsx:101-110, :241-260 -> print duty flow, duty head, hydraulic hp, brake hp and motor input kW with fmt(v, 6), and add a discharge pressure (psi) Stat at the duty at 6 decimals (PumpStationDesigner.jsx:38-42 mirror the same rows)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Pump Station Designer, the only place a learner can run this pump chain on the capstone case: the NextGen pump and suction explorers have no numeric inputs (a View select only) and teach on OKONO, and the least-squares fit plus crossing are engine steps the lessons describe but do not teach as a hand procedure. The Designer prints duty flow and head with 0 decimals and power with 1 (PumpPanels.jsx:101-110), against a prompt that asks six decimals. An alternative is editable inputs on the NextGen pump explorer printing six decimals as its tiles already do; a tolerance change cannot help without swallowing the method errors the tier grades.",
+   "evidence": "Motor input fmt(power.motorInputKw, 1) = 103.8 against 103.765793; the prompt's motor efficiency 0.938 must be typed in place of the engine default (m06/l02).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "escravos_discharge_psi",
+   "source": "suite-app",
+   "source_ref": "src/components/pumpstudio/PumpPanels.jsx:101-110",
+   "printed": null,
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/fields.jsx:40-42 (fmt(v, digits) = toLocaleString min/max digits)",
+   "prompt_precision": "Flows in gpm, heads in ft, power in hp and kW, and pressure in psi, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/pumpstudio/PumpPanels.jsx:101-110, :241-260 -> print duty flow, duty head, hydraulic hp, brake hp and motor input kW with fmt(v, 6), and add a discharge pressure (psi) Stat at the duty at 6 decimals (PumpStationDesigner.jsx:38-42 mirror the same rows)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Pump Station Designer, the only place a learner can run this pump chain on the capstone case: the NextGen pump and suction explorers have no numeric inputs (a View select only) and teach on OKONO, and the least-squares fit plus crossing are engine steps the lessons describe but do not teach as a hand procedure. The Designer prints duty flow and head with 0 decimals and power with 1 (PumpPanels.jsx:101-110), against a prompt that asks six decimals. An alternative is editable inputs on the NextGen pump explorer printing six decimals as its tiles already do; a tolerance change cannot help without swallowing the method errors the tier grades.",
+   "evidence": "The Designer prints no discharge pressure. Head x SG / 2.31 is taught (m04/l03) but from the printed 382 ft gives 135.95 against 136.164028 (tol 5e-7), so the field inherits the duty-head display defect.",
+   "notes": "Tol 5e-7 is exactly half a unit at the six decimals asked.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "bonga_pressure_head_ft",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rotating/intermediate",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/PumpPanels.jsx:194 (hint, fmt 1 decimal)",
+   "prompt_precision": "Heads in ft and flows in gpm, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "(19.4 - 3.7) x 2.31 / 0.79 = 45.907595 (2.31 ft per psi taught in beginner m04/l03). The Designer prints it only as a 1-decimal hint; the hand value at six decimals is within tol 5e-7 (exactly half a unit).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "bonga_npsha_ft",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rotating/intermediate",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/PumpPanels.jsx:193 (fmt 1 decimal)",
+   "prompt_precision": "Heads in ft and flows in gpm, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "45.907595 + 11.5 - 4.3 = 53.107595 by hand; the Designer's NPSH available prints 53.1, so the app alone fails while the hand route passes.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "bonga_npsha_raised_ft",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rotating/intermediate",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/PumpPanels.jsx:193",
+   "prompt_precision": "Heads in ft and flows in gpm, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "(46.0 - 3.7) x 2.31 / 0.79 + 7.2 = 130.887342 by hand.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "bonga_speed_flow_gpm",
+   "source": "suite-app",
+   "source_ref": "src/components/pumpstudio/PumpPanels.jsx:258-260",
+   "printed": {
+    "decimals": 0
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/fields.jsx:40-42 (fmt(v, digits) = toLocaleString min/max digits)",
+   "prompt_precision": "Heads in ft and flows in gpm, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/pumpstudio/PumpPanels.jsx:241-245, :258-260 -> print 'Duty flow before/after' and 'Old duty, moved onto the new curve' flow and head with fmt(v, 6)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Pump Station Designer, the only place a learner can run this pump chain on the capstone case: the NextGen pump and suction explorers have no numeric inputs (a View select only) and teach on OKONO, and the least-squares fit plus crossing are engine steps the lessons describe but do not teach as a hand procedure. The Designer prints duty flow and head with 0 decimals and power with 1 (PumpPanels.jsx:101-110), against a prompt that asks six decimals. An alternative is editable inputs on the NextGen pump explorer printing six decimals as its tiles already do; a tolerance change cannot help without swallowing the method errors the tier grades.",
+   "evidence": "Label is the solved duty carried by the affinity laws (0.87 x Q). The Designer's 'Old duty, moved onto the new curve' prints fmt(onCurve.qGpm, 0) = 790 against 789.698192; multiplying the printed 0-decimal duty by 0.87 errs by up to 0.44 gpm against tol 1e-4.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "bonga_speed_head_ft",
+   "source": "suite-app",
+   "source_ref": "src/components/pumpstudio/PumpPanels.jsx:258-260",
+   "printed": {
+    "decimals": 0
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/fields.jsx:40-42 (fmt(v, digits) = toLocaleString min/max digits)",
+   "prompt_precision": "Heads in ft and flows in gpm, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/pumpstudio/PumpPanels.jsx:241-245, :258-260 -> print 'Duty flow before/after' and 'Old duty, moved onto the new curve' flow and head with fmt(v, 6)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Pump Station Designer, the only place a learner can run this pump chain on the capstone case: the NextGen pump and suction explorers have no numeric inputs (a View select only) and teach on OKONO, and the least-squares fit plus crossing are engine steps the lessons describe but do not teach as a hand procedure. The Designer prints duty flow and head with 0 decimals and power with 1 (PumpPanels.jsx:101-110), against a prompt that asks six decimals. An alternative is editable inputs on the NextGen pump explorer printing six decimals as its tiles already do; a tolerance change cannot help without swallowing the method errors the tier grades.",
+   "evidence": "0.87^2 x the solved duty head; the card hint prints the head fmt(v, 0) = 119 against 119.051795 (tol 1e-5).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "bonga_parallel_flow_gpm",
+   "source": "suite-app",
+   "source_ref": "src/components/pumpstudio/PumpPanels.jsx:243-245",
+   "printed": {
+    "decimals": 0
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/pumpstudio/fields.jsx:40-42 (fmt(v, digits) = toLocaleString min/max digits)",
+   "prompt_precision": "Heads in ft and flows in gpm, to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/pumpstudio/PumpPanels.jsx:241-245, :258-260 -> print 'Duty flow before/after' and 'Old duty, moved onto the new curve' flow and head with fmt(v, 6)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Pump Station Designer, the only place a learner can run this pump chain on the capstone case: the NextGen pump and suction explorers have no numeric inputs (a View select only) and teach on OKONO, and the least-squares fit plus crossing are engine steps the lessons describe but do not teach as a hand procedure. The Designer prints duty flow and head with 0 decimals and power with 1 (PumpPanels.jsx:101-110), against a prompt that asks six decimals. An alternative is editable inputs on the NextGen pump explorer printing six decimals as its tiles already do; a tolerance change cannot help without swallowing the method errors the tier grades.",
+   "evidence": "With Parallel = 2 (PumpPanels.jsx:72) the re-solved crossing is 'Duty flow after' fmt(v, 0) = 1,048 against 1047.540904 (tol 1e-4); a parallel re-solve is an engine step.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "bonny_exponent_ratio",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rotating/advanced/m01-a-stage-is-not-a-pump/l01-the-polytropic-exponent.md",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": null,
+   "prompt_precision": "The exponent ratio ... to nine decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "(k - 1) / (k x eta_p) = 0.272 / (1.272 x 0.767) = 0.278795930 at nine decimals, within tol 5e-10 (exactly half a unit). The Designer does not print it.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "bonny_ratio_per_stage",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rotating/advanced/m03-the-train-and-what-buys-the-stages",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/components/compressorstudio/CompressorPanels.jsx:72 (fmt 2 decimals)",
+   "prompt_precision": "the ratio per stage ... to nine decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Three stages are forced (two stages give 2.9976 per stage but a first-stage discharge near 295 degF, above 285); (1240 / 138)^(1/3) = 2.078966699, within tol 1e-9. The Designer's 2-decimal 2.08 would fail, the taught closed form passes.",
+   "notes": "The stage count itself is read from the Designer's stage table or reasoned from the two limits as taught.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "bonny_stage1_discharge_f",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rotating/advanced/m01-a-stage-is-not-a-pump",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/components/compressorstudio/CompressorPanels.jsx:118 (fmt 0 decimals)",
+   "prompt_precision": "Temperatures in degF ... to four decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "(96 + 459.67) x 2.078967^0.278796 - 459.67 = 221.7762 degF, closed form with the 459.67 offset quoted in m04/l04; the Designer's stage table prints 222.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "bonny_stage1_poly_head",
+   "source": "suite-app",
+   "source_ref": "src/components/compressorstudio/CompressorPanels.jsx:152",
+   "printed": {
+    "decimals": 0
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/compressorstudio/fields.jsx:40-42",
+   "prompt_precision": "heads in ft lbf per lbm ... to four decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/compressorstudio/CompressorPanels.jsx:152 -> fmt(firstStage.headPolyFtLbfLbm, 4)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Compressor Station Designer. The polytropic head, gas horsepower and fuel need Z by Dranchuk-Abou-Kassem at both ends of the stage, an engine-only iteration; the NextGen compressor explorer has no numeric inputs. The Designer prints the first-stage polytropic head with 0 decimals (CompressorPanels.jsx:152), stage gas hp with 0 (:121) and fuel with 3 (:204), against a prompt that asks four and nine.",
+   "evidence": "Polytropic head Stat fmt(v, 0) = 35,028 against 35027.511897 (tol 0.01). Rebuilding it by hand from the Designer's zAvg printed at 4 decimals (:120) errs by roughly 2 ft lbf per lbm.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "bonny_stage1_gas_hp",
+   "source": "suite-app",
+   "source_ref": "src/components/compressorstudio/CompressorPanels.jsx:121",
+   "printed": {
+    "decimals": 0
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/compressorstudio/fields.jsx:40-42",
+   "prompt_precision": "power in hp to four decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/compressorstudio/CompressorPanels.jsx:121 -> fmt(s.gasHp, 4) in the stage table"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Compressor Station Designer. The polytropic head, gas horsepower and fuel need Z by Dranchuk-Abou-Kassem at both ends of the stage, an engine-only iteration; the NextGen compressor explorer has no numeric inputs. The Designer prints the first-stage polytropic head with 0 decimals (CompressorPanels.jsx:152), stage gas hp with 0 (:121) and fuel with 3 (:204), against a prompt that asks four and nine.",
+   "evidence": "Stage table gas hp fmt(s.gasHp, 0) = 1,678 against 1678.319118 (tol 5e-5).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "bonny_fuel_mmscfd",
+   "source": "suite-app",
+   "source_ref": "src/components/compressorstudio/CompressorPanels.jsx:204",
+   "printed": {
+    "decimals": 3
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/compressorstudio/fields.jsx:40-42",
+   "prompt_precision": "the fuel rate in MMscfd to nine decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/compressorstudio/CompressorPanels.jsx:204 (and CompressorStationDesigner.jsx:44) -> fmt(fuel.fuelMMscfd, 9)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix in the Suite Compressor Station Designer. The polytropic head, gas horsepower and fuel need Z by Dranchuk-Abou-Kassem at both ends of the stage, an engine-only iteration; the NextGen compressor explorer has no numeric inputs. The Designer prints the first-stage polytropic head with 0 decimals (CompressorPanels.jsx:152), stage gas hp with 0 (:121) and fuel with 3 (:204), against a prompt that asks four and nine.",
+   "evidence": "Fuel gas fmt(fuel.fuelMMscfd, 3) = 0.955 against 0.955190069 (tol 1e-9); the hand route (train brake hp x 7650 / 968 / 1e6 x 24) needs the whole train's brake hp, printed only to 0 decimals (:74).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  }
+ ]
+}

@@ -1,0 +1,416 @@
+{
+ "course": "geomech",
+ "sources": {
+  "beginner": "hand-calc from closed forms taught in beginner m02-m04 (Sv/Pp at 2000 m printed in full at m02/l05:32); StressExplorer Profile (k0, q at 8 dp) and UCS view (MPa at 5 dp) also reach fields 1, 2, 5, 6",
+  "intermediate": "unobtainable: engine wellboreStability (theta scan + bisection); StabilityExplorer.jsx:33 runs published PARAMS and profile UCS only, so the capstone case cannot be set",
+  "advanced": "unobtainable: mudWindowAlongWell walk; WindowExplorer.jsx:29 takes only nu, friction angle and SHmax azimuth (no E, strains, Biot, tensile strength), and has no collapse-at-tightest tile"
+ },
+ "fields": [
+  {
+   "tier": "beginner",
+   "key": "k0_used",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/beginner/m03-the-horizontal-stresses/l02-k0-and-the-poisson-ratio.md:9",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StressExplorer.jsx:74",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "k0 = nu/(1-nu) = 0.24/0.76 = 0.3157894736842105, reproduced exactly. The stress explorer Profile view also takes Poisson ratio 0.24 and prints 'k0 used' with fmt(s.k0Used, 8), which clears tol 5e-7.",
+   "notes": "Two routes, both fine: hand-calc (full precision) or StressExplorer.jsx:74 at 8 decimals.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "frictional_limit_ratio",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/beginner/m04-strength-from-a-log/l04-the-friction-angle.md:13",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StressExplorer.jsx:75",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "q = (1+sin 26)/(1-sin 26) = 2.5610706048410408, reproduced. Profile view friction angle input prints 'Frictional ratio q' with fmt(..., 8), clears tol 5e-7.",
+   "notes": "Also nextgen-panel StressExplorer.jsx:75 at 8 decimals.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "shmin_at_2000m_Pa",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/beginner/m03-the-horizontal-stresses/l01-the-uniaxial-estimate.md:15; /root/wt-b5-nextgen/src/content/courses/geomech/beginner/m03-the-horizontal-stresses/l03-the-tectonic-strain-term.md:9; /root/wt-b5-nextgen/src/content/courses/geomech/beginner/m02-the-overburden-and-the-pore-pressure/l05-effective-stress.md:32",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": null,
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Sv 45110590 Pa and Pp 22015929.25 Pa at 2000 m are printed in full at beginner m02/l05:32; k0 x (Sv - 0.9 Pp) + 0.9 Pp + E/(1-nu^2)(epsX + nu epsY) reproduces 33914681.28858234 exactly; frictional bounds 29.69 to 84.60 MPa, not clamped.",
+   "notes": "The panel cannot run it (StressExplorer Point view is published params only; the strain multiplier cannot hit 0.0002/0.0005 and E, Biot are not inputs). Using the Point view's 5-decimal MPa Sv/Pp instead would move the answer about 0.5 Pa, well inside tol 50.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "shmax_at_2000m_Pa",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/beginner/m03-the-horizontal-stresses/l01-the-uniaxial-estimate.md:15; /root/wt-b5-nextgen/src/content/courses/geomech/beginner/m03-the-horizontal-stresses/l03-the-tectonic-strain-term.md:9; /root/wt-b5-nextgen/src/content/courses/geomech/beginner/m02-the-overburden-and-the-pore-pressure/l05-effective-stress.md:32",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": null,
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Sv 45110590 Pa and Pp 22015929.25 Pa at 2000 m are printed in full at beginner m02/l05:32; k0 x (Sv - 0.9 Pp) + 0.9 Pp + E/(1-nu^2)(epsY + nu epsX) reproduces 38269519.99825976 exactly; frictional bounds 29.69 to 84.60 MPa, not clamped.",
+   "notes": "Same route as Shmin; not clamped.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "ucs_horsrud_Pa",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/beginner/m04-strength-from-a-log/l02-two-correlations.md:9",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StressExplorer.jsx:160",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "0.77 x (1000/233)^3.2 MPa = 81461382.793438 Pa, reproduced. The UCS view takes any slowness and prints MPa(out.h) = fmt(v/1e6, 5), a 10 Pa step, max rounding error 5 Pa against tol 50.",
+   "notes": "Also nextgen-panel (StressExplorer.jsx:160, 5 decimals in MPa, display_scale 1e-6). No probe leak: default slowness is 250.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "ucs_mcnally_Pa",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/beginner/m04-strength-from-a-log/l02-two-correlations.md:15",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StressExplorer.jsx:161",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "1200 exp(-0.036 x 233 x 0.3048) MPa = 93075820.554428 Pa, reproduced. Panel prints fmt(v/1e6, 5) MPa, error at most 5 Pa against tol 50.",
+   "notes": "Also nextgen-panel StressExplorer.jsx:161.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "collapse_Pa",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+   "printed": {
+    "decimals": 5
+   },
+   "display_scale": 1e-06,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:46",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+   "evidence": "Engine wellboreStability (theta scan 0..179 then 60-step bisection) at the capstone stresses, UCS 81.46 MPa, inc 55 azi 130. The panel view that prints 'Collapse pressure' (MPa to 5 decimals, StabilityExplorer.jsx:46) cannot take capstone parameters or a UCS.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "frac_init_Pa",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+   "printed": {
+    "decimals": 5
+   },
+   "display_scale": 1e-06,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:47",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+   "evidence": "Same run; tile 'Fracture initiation' MPa(s.fracInitPa) at 5 decimals would clear tol 50 Pa if the case could be set.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "breakout_theta_deg",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:48",
+   "prompt_precision": null,
+   "answer_space": 180,
+   "guess_p": 0.005555555555555556,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+   "evidence": "Engine returns the worst theta on a 1-degree grid (integer 84); the tile prints s.breakoutThetaDeg raw (StabilityExplorer.jsx:48). tol 0.5 on an integer the source shows as an integer is honest.",
+   "notes": "Guessability low: about 180 possible integer angles (0..179); a learner guessing the vertical-hole picture would say 90, not 84.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "collapse_emw_kgm3",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+   "printed": {
+    "decimals": 4
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:49",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+   "evidence": "Collapse pressure / (g x 2000); tile 'Collapse EMW' fmt(s.collapseEmw, 4) clears tol 0.005. Can be derived from field 1 by hand, but field 1 itself is unobtainable.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "frac_init_emw_kgm3",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+   "printed": {
+    "decimals": 4
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:50",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+   "evidence": "Frac init / (g x 2000); tile 'Fracture EMW' fmt(s.fracInitEmw, 4).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "window_width_emw_kgm3",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+   "printed": {
+    "decimals": 4
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:51",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+   "evidence": "(frac - collapse)/(g x 2000); tile 'Window width' fmt(s.widthEmw, 4).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "slant_tightest_width_kgm3",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+   "printed": {
+    "decimals": 4
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:71",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+   "evidence": "mudWindowAlongWell over the slant well at capstone parameters; 'Window width' tile fmt(w.tightest.widthKgM3, 4) (WindowExplorer.jsx:71), but window_ is called with only nu, friction angle and SHmax azimuth.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "slant_collapse_emw_at_tightest_kgm3",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+   "printed": {
+    "decimals": 3
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:55",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+   "evidence": "Slant tightest row collapse gradient (248.1, below the pore pressure, so the Lower bound tile shows the pore pressure instead). Only the chart tooltip shows collapse, at fmt(v, 3) (WindowExplorer.jsx:55), and needs the capstone case anyway.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "slant_frac_init_emw_at_tightest_kgm3",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+   "printed": {
+    "decimals": 4
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:73",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+   "evidence": "'Upper bound' tile fmt(w.tightest.upperEmwKgM3, 4) is the fracture initiation gradient at the tightest row; not settable to the capstone case.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "horizontal_tightest_width_kgm3",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+   "printed": {
+    "decimals": 4
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:71",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+   "evidence": "Same walk on the horizontal well; 'Window width' tile at 4 decimals.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "horizontal_collapse_emw_at_tightest_kgm3",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+   "printed": {
+    "decimals": 4
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:72",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+   "evidence": "Collapse-bound well: 'Lower bound' tile fmt(..., 4) equals the collapse gradient here (1411.197); not settable to the capstone case.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "horizontal_frac_init_emw_at_tightest_kgm3",
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+   "printed": {
+    "decimals": 4
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:73",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+   "evidence": "'Upper bound' tile at 4 decimals; not settable to the capstone case.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  }
+ ]
+}

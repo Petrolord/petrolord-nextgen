@@ -1,0 +1,435 @@
+{
+ "course": "sim",
+ "sources": {
+  "beginner": "deck text in DeckExplorer (/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx) plus StructureExplorer tiles; every answer also printed in /root/wt-b5-nextgen/src/content/courses/sim/beginner/m06-the-associate-reading/l01-the-story-so-far.md",
+  "intermediate": "StructureExplorer (/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx) tiles and well table at default state; correlated Bo not on any panel; every answer printed in /root/wt-b5-nextgen/src/content/courses/sim/intermediate/m06-the-professional-reading/l01-the-story-so-far.md",
+  "advanced": "BuildExplorer (/root/wt-b5-nextgen/src/components/course/panels/sim/BuildExplorer.jsx) trajectory and validation modes at default state; calibration and history total not on any panel; every answer printed in /root/wt-b5-nextgen/src/content/courses/sim/advanced/m06-the-expert-reading/l01-the-story-so-far.md / l02"
+ },
+ "fields": [
+  {
+   "tier": "beginner",
+   "key": "deck_cell_count",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx:75",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx:75 fmt(grid.cellCount, 0) prints '4,500'",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Integer count printed as an integer (with a thousands separator); tol 0 fine for a count. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/beginner/m06-the-associate-reading/l01-the-story-so-far.md:9 prints '30 x 30 x 5 = 4500 cells'; also the panel default tile 'Cells 4,500' (probe).",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "crest_top_ft",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:110",
+   "printed": {
+    "decimals": 2
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:110 fmt(grid.topMin, 2) (toLocaleString max 2 decimals)",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Printed 5,055.77, rounding 0.004 inside tol 0.05. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/beginner/m06-the-associate-reading/l01-the-story-so-far.md:15 prints 'The shallowest is 5055.774278215223 ft'.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "layer1_dz_ft",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx (GRID section, DZ 900*7.411105)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx deck text line 'DZ 900*7.411105'",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Deck text carries six decimals; tol 1e-3. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/beginner/m06-the-associate-reading/l01-the-story-so-far.md:21 table row '1 | 7.411104817049187'.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "swof_first_sw",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx (PROPS section, SWOF first row 0.35)",
+   "printed": {
+    "decimals": 2
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx deck text 'SWOF 0.35 0 0.9 0'",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Read from the deck text; tol 5e-4. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/beginner/m06-the-associate-reading/l01-the-story-so-far.md:33 'SWOF starts at a connate water saturation of 0.35'; the working lesson beginner/m06.../l02-working-the-capstone.md also says it equals one minus the SGOF closure.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "sgof_last_sg",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx (PROPS section, SGOF last row 0.65)",
+   "printed": {
+    "decimals": 2
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx deck text",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Read from the deck text; tol 5e-4. Equals 1 minus swof_first_sw by the course's own check, so the two fields carry one fact. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/beginner/m06-the-associate-reading/l01-the-story-so-far.md:33 'SGOF closes at 0.65'.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "vertical_connection_count",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx (SCHEDULE COMPDAT k1..k2)",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/BuildExplorer.jsx:136 'Layers 5' tile",
+   "prompt_precision": null,
+   "answer_space": 5,
+   "guess_p": 0.2,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Integer; tol 0 fine. Equals nz = 5. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/beginner/m06-the-associate-reading/l01-the-story-so-far.md:43 'each completed through all five layers, so five connections each'; also beginner/m06.../l02-working-the-capstone.md:53 'k1 = 1 and k2 = 5 is five connections'.",
+   "notes": "Without working, 1 to 5 connections are plausible for a five-layer grid; the leak, not the space, is the defect.",
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "deck_stoiip_stb",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:106",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:106 fmt(vol.stoiip_stb, 0)",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Printed 12,132,367 (default convention 'centre'); rounding 0.1 inside tol 5000. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/intermediate/m06-the-professional-reading/l01-the-story-so-far.md:19 '| deck STOIIP | 12132366.897955146 stb |'.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "stoiip_vs_booking_pct",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:108",
+   "printed": {
+    "decimals": 4
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:108 fmt(vol.gapPct, 4)",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Printed -0.0564; tol 0.005. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/intermediate/m06-the-professional-reading/l01-the-story-so-far.md:21 '| gap | -0.05635630826191784 percent |'.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "oil_cells_centre_rule",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:109",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:109 fmt(vol.oilCells, 0)",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Integer, tol 0 fine. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/intermediate/m06-the-professional-reading/l01-the-story-so-far.md:22 '| deck oil cells | 266 |'.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "ekene2_deck_top_m",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:124 (well table Deck (m) column)",
+   "printed": {
+    "decimals": 4
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:124 fmt(w.deck_top_m, 4)",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Printed 1,564.3183; tol 0.005. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/intermediate/m06-the-professional-reading/l01-the-story-so-far.md:11 '1564.3183173003902 m'.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "correlated_bo_at_pi",
+   "source": "unobtainable",
+   "source_ref": "engine correlation stack (Standing + undersaturated compressibility), not rendered by any sim panel (simLab.js pvtDivergence has no JSX caller)",
+   "printed": null,
+   "display_scale": 1,
+   "display_ref": null,
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "redesign",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "No sim panel or page renders the correlated Bo (grep: pvtDivergence is unused in src/**/*.jsx); a hand Standing Bo at pb plus an undersaturated step would need the engine's compressibility correlation. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/intermediate/m06-the-professional-reading/l01-the-story-so-far.md:39 and /root/wt-b5-nextgen/src/content/courses/sim/intermediate/m03-fluid-provenance/l01-designed-against-correlated.md:26 both print '1.2292846175634324'; l02-the-standing-gap.md:15 again.",
+   "notes": null,
+   "leak": true,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "correlated_rs_gap_pct",
+   "source": "hand-calc",
+   "source_ref": "/root/wt-b5-nextgen/src/content/courses/sim/intermediate/m03-fluid-provenance/l02-the-standing-gap.md:7-9 (Standing Rs)",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": null,
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Standing's Rs at 2000 psia, 32 API, 0.75, 180 F is a closed form; tol 0.02. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/intermediate/m06-the-professional-reading/l01-the-story-so-far.md:40 'a gap of 5.484806880676496 percent'; /root/wt-b5-nextgen/src/content/courses/sim/intermediate/m03-fluid-provenance/l01-designed-against-correlated.md:34 the same.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "deviated_connection_count",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/BuildExplorer.jsx:80",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/BuildExplorer.jsx:80 fmt(path.connections.length, 0)",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Integer, tol 0 fine; panel default toe is the capstone toe (DESIGN.deviated.to), so 'Connections 11' renders on first load. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/advanced/m06-the-expert-reading/l01-the-story-so-far.md:11 '11 connections across 8 distinct columns'.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "deviated_distinct_columns",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/BuildExplorer.jsx:81",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/BuildExplorer.jsx:81 fmt(path.distinctColumns, 0)",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Integer, tol 0 fine. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/advanced/m06-the-expert-reading/l01-the-story-so-far.md:11 and /root/wt-b5-nextgen/src/content/courses/sim/advanced/m06-the-expert-reading/l02-working-the-capstone.md:17 'Counting distinct COLUMNS gives 8, which is field 2'.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "calibration_regional_mean_m",
+   "source": "unobtainable",
+   "source_ref": "engine: kriging bisection; no panel exposes the regional mean or a bisection (StructureExplorer has only a convention select)",
+   "printed": null,
+   "display_scale": 1,
+   "display_ref": null,
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "redesign",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Bisection over a kriged 900-column surface is engine-only and no sim panel lets the learner vary the regional mean; tol 0.005 m. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/advanced/m06-the-expert-reading/l01-the-story-so-far.md:31 'mu = 1570.026311 m TVD'; /root/wt-b5-nextgen/src/content/courses/sim/advanced/m03-calibration/l02-matching-the-volume.md also prints 1570.02.",
+   "notes": null,
+   "leak": true,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "history_total_oil_stb",
+   "source": "hand-calc",
+   "source_ref": "deck SCHEDULE WCONHIST rates x DATES spans (/root/wt-b5-nextgen/src/components/course/panels/sim/DeckExplorer.jsx); method in /root/wt-b5-nextgen/src/content/courses/sim/intermediate/m05-wells-on-a-real-field/l03-history-rates-from-monthly-volumes.md:25",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": null,
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Spreadsheet sum of 36 periods of rates x calendar days is doable from the deck text; tol 50 stb. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/advanced/m06-the-expert-reading/l01-the-story-so-far.md:23 '176923.83644033302 stb' and /root/wt-b5-nextgen/src/content/courses/sim/advanced/m02-the-history-schedule/l02-rates-from-volumes.md.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "validator_rules_refused",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/BuildExplorer.jsx:133 (Validation mode)",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/BuildExplorer.jsx:133 fmt(cases.length, 0) 'Rules exercised 7'",
+   "prompt_precision": null,
+   "answer_space": 8,
+   "guess_p": 0.125,
+   "class": "redesign",
+   "fix": {
+    "redesign": "Replace with a measured count the learner must produce, e.g. 'validator error messages across the seven cases' (8, counted from the listed messages in the same Validation view), or re-case with a mutated spec the learner builds; either way remove the value from l02-working-the-capstone.md:47."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Integer, tol 0. The tile counts the fixture's seven broken specs and every one is refused by construction ('every one stops the deck', BuildExplorer.jsx:149-150), so the tile IS the answer. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/advanced/m06-the-expert-reading/l02-working-the-capstone.md:47 'the message count is eight where the case count is seven'.",
+   "notes": "By the formula 1/8 (0..7 once the seven cases are listed), but judgement puts it far higher: a fixture of deliberately broken specs is refused in full by construction, so all of them is the obvious guess.",
+   "leak": true,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "equil_datum_depth_ft",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/BuildExplorer.jsx:135 / /root/wt-b5-nextgen/src/components/course/panels/sim/StructureExplorer.jsx:111",
+   "printed": {
+    "decimals": 2
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/sim/BuildExplorer.jsx:135 fmt(datum, 2)",
+   "prompt_precision": null,
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": {
+    "redesign": "Keep the key, label and unit; re-case the capstone input (see recommendation) so the value is no longer printed in the lessons or on the panel's default state."
+   },
+   "owner_decision": true,
+   "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
+   "evidence": "Printed 5,129.97, rounding 3e-5 inside tol 0.05. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/advanced/m06-the-expert-reading/l01-the-story-so-far.md:47 '5129.97013005754 ft'.",
+   "notes": null,
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": null
+  }
+ ]
+}

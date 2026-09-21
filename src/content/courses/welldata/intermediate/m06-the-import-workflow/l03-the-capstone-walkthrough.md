@@ -11,7 +11,7 @@ The Professional capstone for this course is called SI import of the feet-denomi
 | feet_20: depth step (converted) | m | 0.001 |
 | feet_20: curves unit-converted | count | 0 |
 | feet_20: curve kinds recognised | count | 0 |
-| irregular_20 has a uniform step (1 yes / 0 no) | - | 0 |
+| irregular_20: depth samples | count | 0 |
 
 **1. feet_20: start depth (converted), in m, tolerance 0.01.** The value is 1493.52001953125 m converted, read from the start converted tile with feet_20 selected. The native start of 4900 F sits beside it. Handing in 4900 is the unit error this whole tier exists to train out of you.
 
@@ -23,15 +23,15 @@ The Professional capstone for this course is called SI import of the feet-denomi
 
 **5. feet_20: curve kinds recognised, a count, tolerance 0.** The value is 4, from the curve kinds recognised tile, whose label states that the index curve is excluded. The four are gr, density, neutron and sonic. The file has five curves, so 5 is the overcount to avoid.
 
-**6. irregular_20 has a uniform step (1 yes / 0 no), tolerance 0.** The value is 0, meaning no. This is the one field that is not read on feet_20. Switch the panel to irregular_20 and read the uniform depth step tile, where the test has returned nothing because the differences of about 0.300049 m, 0.5 m and about 0.699951 m cannot all sit inside one tolerance.
+**6. irregular_20: depth samples, a count, tolerance 0.** The value is 121, from the Samples tile. This is the one field that is not read on feet_20. Switch the panel to irregular_20, the teaching file whose depth step is not uniform: its differences of about 0.300049 m, 0.5 m and about 0.699951 m cannot all sit inside one tolerance, so the uniform depth step tile stays empty, and the sample count is what the capstone grades.
 
 Six readings, two files, one panel. Do the five feet_20 fields first and switch files once.
 
 ## Three of the six must be exact
 
-Fields 4, 5 and 6 carry a tolerance of 0. Two of them are counts and the third is the uniformity flag, and none of them has any margin at all. They are right or they score nothing.
+Fields 4, 5 and 6 carry a tolerance of 0. All three are counts, and none of them has any margin at all. They are right or they score nothing.
 
-That is the correct design for these quantities. There is no such thing as being close to 2 curves converted. A count is either the number of things or it is not, so 1 is not a near miss on 2, it is a reviewer who let a sonic in feet through. The same is true of 4 kinds against 5, where the difference is the whole question of whether the index curve is a kind. And the uniformity result is graded as the integer 1 for yes and 0 for no, so there is nothing between them to be nearly right about. The answer for irregular_20 is 0.
+That is the correct design for these quantities. There is no such thing as being close to 2 curves converted. A count is either the number of things or it is not, so 1 is not a near miss on 2, it is a reviewer who let a sonic in feet through. The same is true of 4 kinds against 5, where the difference is the whole question of whether the index curve is a kind. And a sample count is a whole number of rows, so there is nothing between 120 and 121 to be nearly right about. The answer for irregular_20 is 121.
 
 ## The two depth fields tolerate 0.01, so the hand answers pass
 
@@ -55,4 +55,4 @@ Open the panel below and locate all six values in capstone order before you subm
 
 Without opening the panel, list the six graded fields in capstone order with the unit and tolerance of each, and say which file and which tile you would read each from. Then answer in two sentences: which three fields must be exact, and why do the hand answers for the two depth fields still pass?
 
-As a self check: start depth converted in m at tolerance 0.01, 1493.52001953125 m converted; stop depth converted in m at tolerance 0.01, 1584.9599609375 m converted; depth step converted in m at tolerance 0.001, 0.609619140625 m converted; curves unit-converted as a count at tolerance 0, which is 2; curve kinds recognised as a count at tolerance 0, which is 4; and whether irregular_20 has a uniform step at tolerance 0, which is the integer 0. The first five are read on feet_20 and only the last requires switching to irregular_20. The three fields with a tolerance of 0 are the two counts and the uniformity flag, and the hand answers of 1493.52 and 1584.96 pass because both sit far inside the 0.01 window around the float32 values the pipeline stores.
+As a self check: start depth converted in m at tolerance 0.01, 1493.52001953125 m converted; stop depth converted in m at tolerance 0.01, 1584.9599609375 m converted; depth step converted in m at tolerance 0.001, 0.609619140625 m converted; curves unit-converted as a count at tolerance 0, which is 2; curve kinds recognised as a count at tolerance 0, which is 4; and the depth samples in irregular_20 as a count at tolerance 0, which is 121. The first five are read on feet_20 and only the last requires switching to irregular_20. The three fields with a tolerance of 0 are the three counts, and the hand answers of 1493.52 and 1584.96 pass because both sit far inside the 0.01 window around the float32 values the pipeline stores.
