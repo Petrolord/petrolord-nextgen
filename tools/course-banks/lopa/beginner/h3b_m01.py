@@ -79,7 +79,7 @@ q(0,
   ["initiatingEventFrequencyPerYr: must be a probability above 0 and no more than 1, because a frequency of 0 means the initiating event never occurs at all",
    "unmitigatedFrequencyPerYr: the product for this row comes to zero, so there is no consequence frequency left for the layers on it to reduce",
    "initiatingEventFrequencyPerYr: the frequency has been read as zero and the row has been set to NO_SIF_REQUIRED"],
-  "That is the engine's own wording, from the refusal table, and the field it names is initiatingEventFrequencyPerYr. The field is a frequency and not a probability, so the range clause belongs to a different row of the table. A refusal carries no number and no computed product, and it never sets an outcome state.")
+  "That is the engine's own wording, from the refusal table, and the field it names is initiatingEventFrequencyPerYr. The field is a frequency, which has no upper limit of one, so the range clause belongs to a different row of the table. A refusal carries no number and no computed product, and it never sets an outcome state.")
 
 q(1,
   "An enabling condition named 'mode' is typed as zero. Which field does the engine name, and what does the bracketed clause of its message say?",

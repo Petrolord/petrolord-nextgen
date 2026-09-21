@@ -94,7 +94,7 @@ q(2,
  ["When the computed PFDavg goes above 0.1, which is the top of the SIL 1 band and the point at which no band can be claimed for the subsystem any more.",
   "When the interval goes above the lifetime, because the uncovered failures then have no end date to be averaged against at all.",
   "When the computed PFDavg reaches one, at which point the answer has stopped being a probability."],
- "The warning threshold is the undetected failure rate times the interval above 0.1. A PFDavg of one or more is the REFUSAL boundary, not the warning, and an interval above the lifetime is refused on its own field. The band ceiling is a separate matter and does not raise a warning."),
+ "The warning threshold is the undetected failure rate times the interval above 0.1. A PFDavg of one or more meets the REFUSAL boundary, which sits beyond the warning, and an interval above the lifetime is refused on its own field. The band ceiling is a separate matter and does not raise a warning."),
 
 q(0,
  "Past the warning is the refusal. Where does the engine stop answering, and what does it say?",

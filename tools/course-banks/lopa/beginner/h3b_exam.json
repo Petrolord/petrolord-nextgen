@@ -66,15 +66,15 @@
   "explanation": "The refusal table names `ipls[0].name` and the message is that every IPL needs a name. The field named is always the offending input down to its position in the list and its own key, which is why the whole list and the whole entry are both the wrong answer here."
  },
  {
-  "prompt": "An IPL is entered with a PFD of zero. What reason does the engine attach to its refusal?",
+  "prompt": "An IPL is entered with an IPL PFD of zero. What reason does the engine attach to its refusal?",
   "options": [
    "a probability of 0 means the scenario cannot happen, which is not a LOPA scenario, so the figure cannot be carried into the product for the row",
-   "a PFD of 0 is a perfect layer, which none is",
+   "That a layer with an IPL PFD of 0 would be perfect, and no layer is.",
    "a layer with no chance of failing on demand would divide the frequency by zero, and the engine will not form a quotient it cannot report",
-   "a PFD of 0 is below the table"
+   "That an IPL PFD of 0 sits below the low demand table."
   ],
   "answer": 1,
-  "explanation": "The refusal table quotes the engine: the entry must have a PFD above 0 and no more than 1, because a PFD of 0 is a perfect layer, which none is. The clause about a scenario that cannot happen belongs to the enabling condition refusal. No quotient is formed and no band is consulted, because a refusal replaces the result."
+  "explanation": "The refusal table quotes the engine's own words: must have a PFD above 0 and no more than 1 (a PFD of 0 is a perfect layer, which none is). The clause about a scenario that cannot happen belongs to the enabling condition refusal. No quotient is formed and no band is consulted, because a refusal replaces the result."
  },
  {
   "prompt": "A proposed function is typed with a PFDavg above one. What comes back?",
@@ -354,7 +354,7 @@
  {
   "prompt": "The band table has a row for SIL 4. What risk reduction factors does it cover?",
   "options": [
-   "Above 100000 and up to 1000000, since each band is a decade wide and SIL 4 sits one decade above the highest banded function the table names.",
+   "Above 100000 with a ceiling a decade higher, since each band is a decade wide and SIL 4 sits one decade above the highest banded function the table names.",
    "Above 10000 and up to 100000.",
    "Above 1000 and up to 10000, which is the range the low demand table gives the highest of the bands it carries a row for at all.",
    "Above 10000, with no upper bound at all."

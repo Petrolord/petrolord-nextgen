@@ -5,7 +5,7 @@
    "4.000000 years, because the years figure is the hours over 8760 and HOURS_PER_YEAR is 8760.",
    "8.000000 years, because the sweep doubles at every step and 35040 hours is its last row.",
    "2.000000 years, which is the years figure printed against 17520 hours.",
-   "3.000000 years, which is the interval at which the teaching function is re-verified."
+   "Three years, which is one of the intervals the teaching function is re-verified at."
   ],
   "answer": 0,
   "explanation": "35040 hours over 8760 is 4.000000 years. 8.000000 years belongs to 70080 hours, which is the last row of the sweep, and 2.000000 years to 17520 hours. Three years is a stretch of the teaching function and is not a row of this sweep at all."
@@ -389,7 +389,7 @@
   "options": [
    "0.004062218645, which is more than double the one year figure because the redundant subsystems are turning quadratic in the interval.",
    "0.006819960176, which is the three year figure.",
-   "0.003585943908, which is exactly twice the one year figure.",
+   "Exactly twice the one year figure, as for a function linear in T1.",
    "0.001792971954, which is unchanged because the function is dominated by common cause."
   ],
   "answer": 0,
@@ -404,7 +404,7 @@
    "0.001792971954, a risk reduction factor of 557.733208, and SIL 2."
   ],
   "answer": 3,
-  "explanation": "The one year row reads 0.001792971954, 557.733208 and SIL 2. 0.004062218645 with 246.170895 is the two year row. 0.006901461880 is a budget remainder and not an achieved figure, and 146.628422 belongs to the three year row."
+  "explanation": "The one year row reads 0.001792971954, 557.733208 and SIL 2. 0.004062218645 with 246.170895 is the two year row. 0.006901461880 is the budget remainder the valves may take, and 146.628422 belongs to the three year row."
  },
  {
   "prompt": "Across the five stretches of the teaching function, on which intervals does it still meet the tolerable frequency?",

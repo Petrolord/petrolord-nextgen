@@ -102,7 +102,7 @@ q(3,
  ["That the target is met at every interval the engine tried before the bisection gave up, and it reports the last value it evaluated on the way.",
   "That the call was declined because an undetected rate of zero leaves no dangerous failure to average, so it reports a null in place of a figure.",
   "That the answer is set by the detected failures alone and therefore sits at a floor, which the engine reports as 0.014400000000."],
- "With no undetected failures T1 does not enter the arithmetic at all, so the reported 0.000008000000 is what that channel achieves at every interval. The engine returns a figure and not a null, and it refuses only when the undetected and detected rates are BOTH zero. The floor of 0.014400000000 belongs to the UNACHIEVABLE channel."),
+ "With no undetected failures T1 does not enter the arithmetic at all, so the reported 0.000008000000 is what that channel achieves at every interval. The engine returns a figure rather than a null, and it refuses only when the undetected and detected rates are BOTH zero. The floor of 0.014400000000 belongs to the UNACHIEVABLE channel."),
 
 q(1,
  "A 1oo1 with an undetected rate of 2e-8 per hour, no detected failures, a coverage of 0.9 and a lifetime of 87600 hours is searched against a target of 0.01. What comes back?",

@@ -37,7 +37,7 @@ q(1,
  ["One over PFDavg, and the two halves of the engine return the same quantity under the same name, so no distinction between them is needed at all.",
   "The ratio of a mitigated frequency to an unmitigated one, which is required from a row and achieved from a function.",
   "The ratio of an achieved PFDavg to a required one, quoted at twelve decimals."],
- "The vocabulary section fixes the risk reduction factor as one over PFDavg, and says a required one comes from LOPA while an achieved one comes from verification, so the distinction is exactly what the name carries. It is not a ratio of two frequencies and not a ratio of two PFDavg values, and risk reduction factors are quoted at six decimals.")
+ "The vocabulary section fixes the risk reduction factor as one over PFDavg, and says a required one comes from LOPA while an achieved one comes from verification, so the distinction is exactly what the name carries. A mitigated frequency over an unmitigated one is the wrong way up and falls below one, an achieved PFDavg over a required one is a different quantity, and risk reduction factors are quoted at six decimals.")
 
 q(2,
  "Which set of equations does this engine actually implement?",

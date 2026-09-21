@@ -129,7 +129,7 @@
    "That the subsystem has no undetected failures, so T1 never enters the arithmetic, and it reports 0.000008000000."
   ],
   "answer": 3,
-  "explanation": "With no undetected failures T1 does not enter the arithmetic at all, so the reported 0.000008000000 is what that channel achieves at every interval. The engine returns a figure and not a null, and it refuses only when the undetected and detected rates are BOTH zero. The floor of 0.014400000000 belongs to the UNACHIEVABLE channel."
+  "explanation": "With no undetected failures T1 does not enter the arithmetic at all, so the reported 0.000008000000 is what that channel achieves at every interval. The engine returns a figure rather than a null, and it refuses only when the undetected and detected rates are BOTH zero. The floor of 0.014400000000 belongs to the UNACHIEVABLE channel."
  },
  {
   "prompt": "A 1oo1 with an undetected rate of 2e-8 per hour, no detected failures, a coverage of 0.9 and a lifetime of 87600 hours is searched against a target of 0.01. What comes back?",

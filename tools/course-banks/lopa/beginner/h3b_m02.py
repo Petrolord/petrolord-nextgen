@@ -75,7 +75,7 @@ q(1,
 q(2,
   "The ORONI row is run again with its enabling condition left off. What does the unmitigated frequency become?",
   "0.045000000000 per year on the enabling condition row.",
-  ["0.013500000000 per year, because the enabling condition of 0.3 is a state and not a probability, so leaving it off the row changes nothing in the product.",
+  ["0.013500000000 per year, because the enabling condition of 0.3 is a state of the plant with no probability attached, so leaving it off the row changes nothing in the product.",
    "0.027000000000 per year, because dropping the condition removes one factor from a product the engine has already formed.",
    "0.135000000000 per year."],
   "The table of the same row with one term left out gives 0.045000000000 per year for the enabling condition left out. The full row is 0.013500000000 per year, so nothing unchanged is right. 0.135000000000 per year is the row with every modifier left out, which is a different omission.")

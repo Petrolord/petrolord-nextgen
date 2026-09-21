@@ -6,7 +6,7 @@ Diagnostics change the shape of a PFDavg calculation. A dangerous failure that d
 
 ## The EKULAMA channel with diagnostics
 
-The channel used through the previous module is now given a dangerous detected rate as well. The full set of stated inputs is a dangerous undetected rate of 1.2e-6 per hour, a dangerous detected rate of 2.8e-6 per hour, a proof test interval of 8760 hours, an MTTR of 8 hours, a mean repair time after a test of 8 hours, a beta factor of 0.05 and a betaD of 0.02.
+The channel from the first module of this tier is now given a dangerous detected rate as well. The full set of stated inputs is a dangerous undetected rate of 1.2e-6 per hour, a dangerous detected rate of 2.8e-6 per hour, a proof test interval of 8760 hours, an MTTR of 8 hours, a mean repair time after a test of 8 hours, a beta factor of 0.05 and a betaD of 0.02.
 
 | quantity | value |
 | --- | --- |
