@@ -1581,6 +1581,20 @@
       "group": "local-only",
       "vendoredSha": "e54c1b25a05e2fc5102c020a44ea2957688e7b66",
       "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
+    },
+    {
+      "path": "engines/hse/consequence.js",
+      "kind": "differing",
+      "group": "8-h4-consequence-revendor",
+      "vendoredSha": "3be4456f7e45d9c27cc3898b3800cc8796f0f278",
+      "reason": "engines PR #231 (own-property preset lookups): POOL_FIRE_FUELS, THERMAL_PROBITS, TOXIC_PROBITS and OVERPRESSURE_PROBITS are read with Object.hasOwn so an inherited name such as toString is refused instead of resolving. No golden and no numeric output moved; the H4 consequence digest and fields.json rebuild byte-identical. Re-vendored at engines main 16fd6c9 for the H4 consequence course ahead of the canonical pin, which stays at df31f53; the pin move carries the other 80 paths of #231."
+    },
+    {
+      "path": "tools/validation/hse/FINDINGS-consequence.md",
+      "kind": "differing",
+      "group": "8-h4-consequence-revendor",
+      "vendoredSha": "4477caa88d1d5339ed9fea64ca23ccddd74680ce",
+      "reason": "engines PR #231 appended the own-property sweep note to the consequence FINDINGS record; vendored at 16fd6c9 beside the engine it describes, for the H4 consequence course."
     }
   ]
 }
