@@ -13,7 +13,7 @@ Both are the Apapa pool with one figure removed, and both come back optimal with
 
 ## When a component lacks the property
 
-A sulfur row needs a sulfur figure on every component, because every component's coefficient in the row is built from it. If Isomerate carries no sulfur figure, the row cannot be built. The engine will not fill the gap with zero, which would make Isomerate look sulfur-free and let the recipe lean on it for a reason nobody typed. So the sulfur specification is not applied, and the result says so.
+A sulfur row needs a sulfur figure on every component, because every component's coefficient in the row is built from it. If Isomerate carries no sulfur figure, the row cannot be built. The engine will not fill the gap with zero. So the sulfur specification is not applied, and the result says so.
 
 ## When a mass basis lacks a density
 
@@ -21,7 +21,7 @@ Sulfur blends on mass. On the mass basis both weights carry the specific gravity
 
 ## Why the engine skips
 
-A missing sulfur figure is a gap in the data for one specification. The other specifications can still be met, and a recipe that meets them is information a planner can use, provided the planner knows sulfur was not imposed. So the engine solves and lists the specification as skipped, with the reason. A reader who sees the skipped list knows at once that this recipe is not certified on sulfur.
+A missing sulfur figure is a gap in the data for one specification. The other specifications can still be met. So the engine solves and lists the specification as skipped, with the reason, and nothing is dropped silently.
 
 Contrast the blank cost of the previous lesson. A cost is part of the objective, so without it there is no least-cost question at all, and the engine refuses. A specification is one row among several, so without it there is still a question, only a smaller one.
 
@@ -34,7 +34,7 @@ Read the skipped list before the recipe. The total cost of 695245.0644 $ is the 
 | Isomerate with no sulfur figure | not formed (the engine returns no value) | true | 0.7536 |
 | FCC gasoline with no SG and no API | not formed (the engine returns no value) | true | 0.7536 |
 
-Density blends on volume and needs no SG, so it is applied in both cases and achieved at 0.7536 kg/l. A recipe with a skipped sulfur row is a recipe for a different question, and it needs the missing figure before it can be offered as a cargo to the template.
+Density blends on volume and needs no SG, so it is applied in both cases and achieved at 0.7536 kg/l. A recipe with a skipped sulfur row has not been solved or checked against the 50 ppm template's sulfur limit of 50 ppm.
 
 {{panel:crude-recipe-explorer}}
 

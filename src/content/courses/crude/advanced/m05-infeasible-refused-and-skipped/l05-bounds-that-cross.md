@@ -17,7 +17,7 @@ A minimum above a maximum describes no volume. No quantity of Reformate is both 
 
 Module one met this fault inside the kernel. The problem "minimise x with a lower bound of 5 above an upper bound of 3" returns the status infeasible from solveLP. The kernel is right: a variable with crossed bounds has no feasible value, so the problem has no feasible point.
 
-optimiseBlend catches the same fault earlier and says it in plainer words. The kernel answers mathematical questions with a status. The optimizer knows which component the user typed wrongly and can name it. A trader reading "infeasible" would search the specifications for a conflict that is not there. A trader reading "Reformate has a minimum above its maximum" goes straight to the field.
+optimiseBlend catches the same fault earlier and says it in plainer words. The kernel answers mathematical questions with a status. The optimizer knows which component the user typed wrongly and can name it. Its refusal names the field: "Reformate has a minimum above its maximum."
 
 ## A floor that holds
 
@@ -31,7 +31,7 @@ The recipe takes exactly the floor, 1200.0000 bbl, so the floor itself holds exa
 
 ## How the kernel carries a floor
 
-A minimum forces barrels into the recipe. Every specification row then sits off zero after the kernel shifts the floor to the origin. The kernel works with variables that start at zero, so it measures Isomerate from its floor of 1200 bbl, and every row picks up the contribution of those fixed barrels on its right-hand side. That is why phase one matters for floors: the shifted rows do not pass through the origin.
+A minimum forces barrels into the recipe. Every specification row then sits off zero after the kernel shifts the floor to the origin. The kernel works with variables that start at zero, so it measures Isomerate from its floor of 1200 bbl, and every row picks up the contribution of those fixed barrels on its right-hand side.
 
 A floor also changes the vertex. With Isomerate held exactly at its minimum, a bound holds that did not hold at the Apapa optimum, and the butane bound that held there is slack: butane is 339.9340 bbl, inside its availability of 400. The optimum sits on a different set of constraints, and the shadow prices are read at that new vertex. That is why the sulfur relief is a different figure here.
 
