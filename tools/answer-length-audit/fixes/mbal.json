@@ -1,0 +1,17 @@
+{
+ "migration": "20261021b_b4_fix_mbal.sql",
+ "title": "mbal: judged fine",
+ "items": [
+  {
+   "app_slug": "mbal",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "category": "other",
+   "flag": "two options share the correct figure and differ only in the denominator clause; judge whether fine",
+   "verdict": "judged fine",
+   "reason": "the question asks both the figure and why the denominator matters; option 3 has the right figure but the wrong reason (revisable freely), which the explanation (errors propagate into every fraction of it) rules out, so only option 0 stands"
+  }
+ ]
+}
