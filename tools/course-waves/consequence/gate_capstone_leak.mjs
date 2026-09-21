@@ -87,7 +87,7 @@ const ENG = process.env.H4_ENGINES || path.join(REPO, 'packages/engines');
 const WAVES = process.env.H4_WAVES || path.join(REPO, 'tools/course-waves');
 const MIGRATIONS = process.env.H4_MIGRATIONS || path.join(REPO, 'migrations');
 const LIVE_SIBLINGS = (process.env.H4_LIVE_SIBLINGS
-  || 'lopa=/root/hse-wip-lopa/fields.json,hygiene=/root/hse-wip-hygiene/fields.json')
+  || '')
   .split(',').filter(Boolean).map((s) => s.split('='));
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
