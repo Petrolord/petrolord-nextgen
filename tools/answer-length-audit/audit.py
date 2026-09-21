@@ -22,7 +22,10 @@ Two numbers per bank:
              the candidate is credited 1/(tie size). This is the exposure.
 
 REFUSES (exit 2) on an empty sweep: a gate that reports success on zero input
-is worse than no gate. `--selftest` runs the negative controls.
+is worse than no gate. Every live run also plants a defect in a copy of one
+REAL bank (every correct option padded to be the longest) and refuses (exit 3)
+unless that bank goes red. `--selftest` runs the synthetic negative controls.
+Exit 1 means a served bank is out of band; exit 0 means every bank passed.
 
 Input: a JSON array of rows {app_slug, tier, scope, module_key, ord, options,
 answer_index}, from --json FILE or --container NAME (a local scratch postgres
@@ -132,6 +135,24 @@ def selftest():
     return ok
 
 
+def planted_control(rows):
+    """Negative control on the REAL sweep: copy one bank, pad every correct
+    option so it is the longest, and require that bank to go red. Returns
+    (bank label, went red)."""
+    first = rows[0]
+    key = (first['app_slug'], first['tier'], first['scope'], first['module_key'])
+    planted = []
+    for r in rows:
+        if (r['app_slug'], r['tier'], r['scope'], r['module_key']) != key:
+            continue
+        opts = list(r['options'])
+        if len(opts) == 4 and 0 <= r['answer_index'] < 4:
+            opts[r['answer_index']] += ' ' + 'x' * (max(len(o) for o in opts) + 1)
+        planted.append(dict(r, options=opts))
+    res = audit(planted)
+    return ' '.join(str(k or '-') for k in key), len(res) == 1 and not res[0]['pass'] and res[0]['r0'] == res[0]['n']
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--json'); ap.add_argument('--container')
@@ -148,12 +169,26 @@ def main():
         print(f'REFUSED: swept {len(rows)} rows, below the floor of {args.min_rows}. '
               'An empty or partial sweep is not a pass.')
         sys.exit(2)
+    label, red = planted_control(rows)
+    if not red:
+        print(f'REFUSED: the planted negative control on bank {label} did not go red.')
+        sys.exit(3)
+    print(f'negative control: bank {label} planted all-longest, went red (ok)')
     res = audit(rows)
     if args.csv:
         with open(args.csv, 'w', newline='') as f:
             w = csv.DictWriter(f, fieldnames=list(res[0].keys()))
             w.writeheader(); w.writerows(res)
     failing = [r for r in res if not r['pass']]
+    glob = [0.0] * 4
+    nq = 0
+    for q in rows:
+        if len(q['options']) == 4 and 0 <= q['answer_index'] < 4:
+            glob = [x + y for x, y in zip(glob, tie_credit(q['options'], q['answer_index']))]
+            nq += 1
+    print('always pick rank k, whole estate: ' + '  '.join(f'k={k} {glob[k] / nq:.3f}' for k in range(4)))
+    print(f"best single rank per bank (the exposure ceiling), question-weighted: "
+          f"{sum(r['read_nothing'] * r['n'] for r in res) / sum(r['n'] for r in res):.3f}")
     print(f'rows {len(rows)}  banks {len(res)}  failing {len(failing)}  '
           f'courses {len({r["app_slug"] for r in res})}  '
           f'courses with a failing bank {len({r["app_slug"] for r in failing})}')

@@ -15,7 +15,8 @@ RULES, every one enforced here (a violation refuses the whole course):
   - no NEW numeric token: every number in `new` already appears in that
     option's old text, so no edit can introduce a figure the course never
     printed or leak another tier's graded value;
-  - no em or en dash, and no "digest" (owner copy rules);
+  - no em or en dash, no new "X, not Y" contrastive, and no "digest" (owner
+    copy rules);
   - the four options stay distinct;
   - no tie with the correct option (the kit's stable sort would place it by
     option order);
@@ -82,8 +83,10 @@ def apply(rows, edits):
             errs.append(f'{tag}: stray whitespace')
         if re.search('[–—]', t):
             errs.append(f'{tag}: em or en dash')
-        if re.search(r'digest', t, re.I):
-            errs.append(f'{tag}: names the digest')
+        if re.search(r'digest', t, re.I) or re.search(r'\bSECTIONS? \d', t) or re.search(r'\bgenerator\b', t, re.I):
+            errs.append(f'{tag}: names the digest, its sections or its generator')
+        if re.search(r',\s*not\b', t) and not re.search(r',\s*not\b', e['old']):
+            errs.append(f'{tag}: adds an "X, not Y" contrastive (owner copy rule)')
         extra = set(NUM.findall(t)) - set(NUM.findall(e['old']))
         if extra:
             errs.append(f'{tag}: new numeric token(s) {sorted(extra)}')
