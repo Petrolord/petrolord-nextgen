@@ -1,0 +1,2342 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 2,
+  "old": "Doubles the deflection and quadruples the sag, since the sag depends on the square of the span rather than on its fourth power.",
+  "new": "Doubles the deflection and quadruples the sag."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 3,
+  "old": "Quadruples the deflection and multiplies the sag by sixteen, since both terms carry the span more than once.",
+  "new": "Quadruples the deflection and multiplies the sag by sixteen."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "The spring, since it acts at the centralizer directly.",
+  "new": "The spring, since doubling the restoring force halves the deflection at the centralizer, where the load is carried."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 0,
+  "old": "The centralizer bottoming out against the wall.",
+  "new": "The centralizer bottoming out against the wall once the lateral load exceeds its restoring force."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "The ratio of the two clearances, since the wells are drilled with different bits and their open hole sections differ in size.",
+  "new": "The ratio of the two clearances, since the two open hole sections differ."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "The square root of the ratio of the two buoyed weights, which differ because the two wells are cemented in different muds.",
+  "new": "The square root of the ratio of the two buoyed weights."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 3,
+  "old": "Because the buoyancy factor multiplies the clearance rather than the weight, so the effective annulus widens with density.",
+  "new": "Because the buoyancy factor multiplies the clearance, so the effective annulus widens with density."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 0,
+  "old": "That the target was met at the widest spacing.",
+  "new": "That the target was already met at the widest spacing, so no tighter programme is needed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 1,
+  "old": "That the target is reachable somewhere in the range, which the two guards check before the search starts and which holds here.",
+  "new": "That the target is reachable somewhere in the range, which the guards check."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "That the standoff is continuous in the spacing, which fails where the sag clamp engages and the reported value jumps to zero.",
+  "new": "That the standoff is continuous in the spacing, which fails at the sag clamp."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "Both pass, since the required spacings exceed 12.",
+  "new": "Both pass, since the required spacings exceed 12 on both wells and the programme runs comfortably inside them."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "About 24 percent, which is the square root of the load ratio, since the sag is quadratic in the span at fixed stiffness.",
+  "new": "About 24 percent, as though the sag were quadratic in the span."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "About 12 percent, since the centralizer deflection term partly compensates for the increase in the sag term.",
+  "new": "About 12 percent, since the deflection term partly offsets the sag."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "The minimum standoff at the spacing it returns, which has to be recovered by running the profile again at that spacing.",
+  "new": "The minimum standoff at the spacing it returns, found by rerunning the profile."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "A spacing per interval, so a programme that is wide in the vertical and tight in the open hole has to be built by hand.",
+  "new": "A spacing per interval, so the staged programme has to be assembled by hand."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 0,
+  "old": "Both use the nominal bore for consistency.",
+  "new": "Both use the nominal bore for consistency, so that volume and standoff describe the same hole."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "Conservative, since a smaller bore means a tighter annulus.",
+  "new": "Conservative, since the calculation assumes a smaller bore and a tighter annulus than the one drilled."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 1,
+  "old": "The clearance, the inclination and the buoyancy.",
+  "new": "The clearance, the inclination and the buoyancy of the casing in the mud it is run through."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 0,
+  "old": "All optimistic, so the answer is an upper bound.",
+  "new": "All optimistic, so the reported standoff is an upper bound on what the pipe really achieves."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "That the API target can always be reached by a strong enough centralizer, at any spacing, on any well.",
+  "new": "That the API target can always be reached by a strong enough centralizer, on any well."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "The standoff at the tightest achievable spacing.",
+  "new": "The standoff at the tightest achievable spacing, since that is the best the programme can ever deliver."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "The annular velocity, which needs both the annulus rows and a pump rate, and the engine's own test asserts at least five.",
+  "new": "The annular velocity, since it needs a pump rate, and the engine's test asserts at least five."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "At the shoe, where the annulus narrows into the shoe track and the velocity rises to its maximum for the whole string.",
+  "new": "At the shoe, where the annulus narrows into the shoe track and the velocity peaks."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "Yes on the horizontal well, whose longer annulus gives a lower velocity at the same rate, and no on the slant one.",
+  "new": "Yes on the horizontal well, whose longer annulus is slower at the same rate."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "It cannot be said, since the target is a screening value with no defensible basis to compare an actual velocity against.",
+  "new": "It cannot be said, since the target is only a screening value."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "Free fall and the fracture limit, against mud removal.",
+  "new": "Free fall and the fracture limit, against mud removal, which is the only one wanting a low rate."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "Because the API specification does not define one, so any number reported would not be comparable between operators.",
+  "new": "Because the API specification does not define one, so no two operators' numbers would compare."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "It is harder to compute than five booleans.",
+  "new": "It is harder to compute than five booleans, and the weighting has to be recalculated for every job."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "Standoff, annular velocity and the required spacing.",
+  "new": "Standoff, annular velocity and the required spacing for the target."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "Volumes, placement, standoff and chemistry.",
+  "new": "Volumes, placement, standoff and chemistry, the four inputs the design sheet reports."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "Compute every number to fifteen significant figures.",
+  "new": "Compute every number to fifteen significant figures, so that no rounding can hide a borderline verdict."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-why-mud-removal-decides-it",
+  "ord": 8,
+  "option": 3,
+  "old": "The eccentricity at which the flow resistance ratio between the two sides of the annulus falls below two to one.",
+  "new": "The eccentricity at which the flow resistance ratio across the annulus falls below two to one."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-why-mud-removal-decides-it",
+  "ord": 9,
+  "option": 3,
+  "old": "The target and the fraction of the clearance a bow spring can take up before it takes a permanent set from overloading.",
+  "new": "The target and the fraction of the clearance a bow spring can take up before a permanent set."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-why-mud-removal-decides-it",
+  "ord": 10,
+  "option": 1,
+  "old": "The casing weight and the mud density.",
+  "new": "The casing weight and the mud density, which set the buoyed lateral load on each span."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-why-mud-removal-decides-it",
+  "ord": 11,
+  "option": 0,
+  "old": "Only gas, which is why it appears as casing pressure.",
+  "new": "Only gas, which is why it appears as casing pressure, since a liquid would be held by the mud left in it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-why-mud-removal-decides-it",
+  "ord": 12,
+  "option": 0,
+  "old": "Immediately, at the pressure test after the job.",
+  "new": "Immediately, at the pressure test after the job, when the casing is first loaded."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-why-mud-removal-decides-it",
+  "ord": 13,
+  "option": 2,
+  "old": "A shoe track that was displaced out into the annulus, since that would show up as a low leak-off at the shoe afterwards.",
+  "new": "A shoe track displaced out into the annulus, which would show as a low leak-off at the shoe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-why-mud-removal-decides-it",
+  "ord": 13,
+  "option": 3,
+  "old": "A top of cement short of its target, which is what a temperature log run after the job is intended to find instead.",
+  "new": "A top of cement short of its target, which a temperature log run after the job finds instead."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-why-mud-removal-decides-it",
+  "ord": 15,
+  "option": 0,
+  "old": "It applies only to bow spring centralizers.",
+  "new": "It applies only to bow spring centralizers, because a rigid blade's standoff is set by its diameter alone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-centralizer",
+  "ord": 7,
+  "option": 0,
+  "old": "The buoyancy, which is applied separately.",
+  "new": "The buoyancy, which is applied separately as a factor on the air weight of the casing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-centralizer",
+  "ord": 8,
+  "option": 3,
+  "old": "At zero deflection, so the number is the force the spring exerts when it is free and has not yet touched anything.",
+  "new": "At zero deflection, the force the spring exerts when free and before it touches anything."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-centralizer",
+  "ord": 9,
+  "option": 0,
+  "old": "The restoring force divided by the clearance.",
+  "new": "The restoring force divided by the clearance, treating the quoted standoff as a label only."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-centralizer",
+  "ord": 12,
+  "option": 0,
+  "old": "0.098846924288643, the deflection over the clearance.",
+  "new": "0.098846924288643, the deflection over the clearance, which is the fraction of the gap used up."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-centralizer",
+  "ord": 13,
+  "option": 3,
+  "old": "That the spacing could be widened without penalty, since the deflection is linear in the spacing and there is room.",
+  "new": "That the spacing could be widened freely, since the deflection is linear."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-centralizer",
+  "ord": 14,
+  "option": 1,
+  "old": "The blade less the casing, over twice the clearance, which is the same thing written with the clearance rather than the bore.",
+  "new": "The blade less the casing, over twice the clearance between the casing and the bore."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-centralizer",
+  "ord": 14,
+  "option": 2,
+  "old": "The ratio of the two annular gaps, blade to casing and bore to casing, which is what standoff means for a fixed device.",
+  "new": "The ratio of the two annular gaps, blade to casing and bore to casing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-centralizer",
+  "ord": 15,
+  "option": 3,
+  "old": "Because the blade is oversized for the cased bore and is therefore clamped at the maximum standoff of one.",
+  "new": "Because the blade is oversized for the cased bore and is clamped at the maximum standoff of one."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-span-between-them",
+  "ord": 7,
+  "option": 0,
+  "old": "Doubles both, since both are linear in the load.",
+  "new": "Doubles both, since both are linear in the load and each span carries twice the weight."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-span-between-them",
+  "ord": 8,
+  "option": 0,
+  "old": "At about 20 m, where the standoff reaches zero.",
+  "new": "At about 20 m, which is where the slant well's standoff reaches zero."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-span-between-them",
+  "ord": 9,
+  "option": 0,
+  "old": "Doubling the spring, since it acts at the centralizer.",
+  "new": "Doubling the spring, since it acts at the centralizer, where the pipe is pushed off the wall."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-span-between-them",
+  "ord": 10,
+  "option": 1,
+  "old": "Because the spacing is fixed by the joint length.",
+  "new": "Because the spacing is fixed by the joint length, so the only free choice left is the device."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-span-between-them",
+  "ord": 11,
+  "option": 0,
+  "old": "The bow spring being fully compressed against the wall.",
+  "new": "The bow spring being fully compressed against the wall once the load exceeds its force."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-span-between-them",
+  "ord": 12,
+  "option": 1,
+  "old": "The square root of the ratio of the two sines, since the sag is quadratic in the span and linear in the perpendicular load.",
+  "new": "The square root of the ratio of the two sines, since the sag is quadratic in the span."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-span-between-them",
+  "ord": 12,
+  "option": 3,
+  "old": "The ratio of the two clearances, since both wells have the same casing and the same centralizer but different hole sizes.",
+  "new": "The ratio of the two clearances, since the two wells are drilled with different hole sizes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-span-between-them",
+  "ord": 13,
+  "option": 2,
+  "old": "That the relationship is linear over that range, so a simple interpolation between the two is adequate for design purposes.",
+  "new": "That the relationship is linear there, so interpolating between them is fine."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-span-between-them",
+  "ord": 13,
+  "option": 3,
+  "old": "That the centralizer has bottomed out by 16 m, and no stronger spring could recover the standoff at that spacing.",
+  "new": "That the centralizer has bottomed out by 16 m, and no stronger spring helps."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-span-between-them",
+  "ord": 14,
+  "option": 2,
+  "old": "Because a heavier mud has a higher yield stress, which resists the pipe settling toward the low side of the hole.",
+  "new": "Because a heavier mud has a higher yield stress, which holds the pipe off the low side."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 7,
+  "option": 1,
+  "old": "The minimum standoff at the answer, which the caller has to compute separately by running the profile at that spacing.",
+  "new": "The minimum standoff at the answer, which the caller must compute separately."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 7,
+  "option": 2,
+  "old": "One number per string, computed against the worst interval, when a real programme would be wide in the vertical and tight below.",
+  "new": "One number per string, computed against the worst interval in the well."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 8,
+  "option": 0,
+  "old": "The volume side uses the nominal bore.",
+  "new": "The volume side uses the nominal bore, since the cement is ordered for the hole the bit drilled."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 9,
+  "option": 3,
+  "old": "That a washed-out section is usually short, so using the nominal bore over the whole string is a reasonable average.",
+  "new": "That a washed-out section is usually short, so the nominal bore is a fair average."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 10,
+  "option": 1,
+  "old": "Conservative, because a bigger hole means more clearance.",
+  "new": "Conservative, because a bigger hole means more clearance for the spring to push the pipe into."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 11,
+  "option": 0,
+  "old": "Nothing, since the blade ratio is a fixed property.",
+  "new": "Nothing, since the blade ratio is a fixed property of the device whatever hole it is run in."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 12,
+  "option": 1,
+  "old": "Casing rotation and reciprocation, which is the most effective mud removal technique and is stated as being out of scope.",
+  "new": "Casing rotation and reciprocation, the most effective mud removal technique there is."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 12,
+  "option": 3,
+  "old": "The residual curvature of the pipe itself, which the beam model assumes away by treating the span as initially straight.",
+  "new": "The residual curvature of the pipe, which the beam model assumes away as straight."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 13,
+  "option": 0,
+  "old": "All optimistic, so the reported number is an upper bound.",
+  "new": "All optimistic, so the reported number is an upper bound on the standoff actually run."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 14,
+  "option": 1,
+  "old": "About 5 points, since the sag is unchanged.",
+  "new": "About 5 points, since the sag is unchanged and only the centralizer deflection moves at all."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-choosing-a-spacing",
+  "ord": 15,
+  "option": 2,
+  "old": "One less the sag over the clearance, which caps what any spring can achieve and should be computed before choosing a device.",
+  "new": "One less the sag over the clearance, which caps what any spring can achieve at that spacing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 7,
+  "option": 0,
+  "old": "The cased section, because it is the narrower annulus.",
+  "new": "The cased section, because it is the narrower annulus and has more wall friction per metre."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 8,
+  "option": 3,
+  "old": "Whatever velocity gives a Reynolds number above 3000 in the narrowest annulus, computed from the slurry rheology.",
+  "new": "Whatever velocity gives a Reynolds number above 3000 in the narrowest annulus, from the rheology."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 9,
+  "option": 2,
+  "old": "Yes on the horizontal well and no on the slant one, since the horizontal annulus is longer and therefore slower at the same rate.",
+  "new": "Yes on the horizontal well, whose longer annulus is slower at the same rate."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 9,
+  "option": 3,
+  "old": "It cannot be determined, since the target is a screening value and there is no defensible criterion to compare it against.",
+  "new": "It cannot be determined, since the target is a screening value with no criterion."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 10,
+  "option": 1,
+  "old": "The same way as the fracture limit: slower is better.",
+  "new": "The same way as the fracture limit: slower is better, since a lower velocity keeps the friction pressure down."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 11,
+  "option": 1,
+  "old": "Because the API specification forbids reporting a single figure of merit for a cement job without a bond log to support it.",
+  "new": "Because the API specification forbids a single figure of merit without a bond log."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 11,
+  "option": 2,
+  "old": "Because the weights are unmeasured, a score hides which item failed, and no field measurement ever returns a percentage.",
+  "new": "Because the weights are unmeasured, a score hides which item failed, and no log gives one."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 12,
+  "option": 0,
+  "old": "It is harder to compute than a list of booleans.",
+  "new": "It is harder to compute than a list of booleans, since the weights must be set again for each job."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 13,
+  "option": 0,
+  "old": "A quantitative estimate of the isolation achieved.",
+  "new": "A quantitative estimate of the isolation achieved, built up from the five items and their numbers."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 14,
+  "option": 1,
+  "old": "Hydraulics reports a single ECD for the whole well.",
+  "new": "Hydraulics reports a single ECD for the whole well, folding every interval's density into one figure."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-checklist-and-its-edges",
+  "ord": 15,
+  "option": 3,
+  "old": "None, since everything taught in the tier is graded by at least one of the six capstone fields at this level.",
+  "new": "None, since everything taught in the tier is graded by a capstone field."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 7,
+  "option": 0,
+  "old": "The required spacing must be below thirty metres.",
+  "new": "The required spacing must be below thirty metres, since beyond that the sag always reaches the clearance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 8,
+  "option": 1,
+  "old": "They agree at the centralizer and differ only at mid span, since the sag is computed identically for both device types.",
+  "new": "They agree at the centralizer and differ only at mid span, since the sag is the same for both."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 9,
+  "option": 0,
+  "old": "Makes it slightly better, since a lighter mud is thinner.",
+  "new": "Makes it slightly better, since a lighter mud is thinner and exerts less drag on the casing as it settles."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 1,
+  "old": "A guarantee that the cement job will isolate the well.",
+  "new": "A guarantee that the cement job will isolate the well, backed by the standoff profile and the five-item checklist."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 12,
+  "option": 1,
+  "old": "Drilling Fluids and Hydraulics, which supplies the loss kernel and the rheology fits the placement simulation imports.",
+  "new": "Drilling Fluids and Hydraulics, which supplies the rheology the placement imports."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "Geomechanics, which supplies the fracture gradient the peak circulating density at the previous shoe is compared against.",
+  "new": "Geomechanics, which supplies the fracture gradient the placement is checked against."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "Report the version string, log every assumption, and never quote a number without the tolerance that goes with it.",
+  "new": "Report the version string, log every assumption, and quote each number with its tolerance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 3,
+  "old": "The spring rate and the blade ratio, since both are properties of the device rather than of the string it is fitted to.",
+  "new": "The spring rate and the blade ratio, since both are properties of the device and not the string."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 1,
+  "old": "At the next casing shoe leak-off test, which is the first time the cement sheath is loaded along part of its length.",
+  "new": "At the next casing shoe leak-off test, the first time the sheath is loaded along its length."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 2,
+  "old": "Twenty years on, in the Well Integrity and P and A course, when somebody asks whether the barrier is still a barrier.",
+  "new": "Twenty years on, in a later course, when someone asks whether the barrier is still a barrier."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 2,
+  "old": "It changes the sacks, because the lead and the tail have different yields and the split decides how much of each is needed.",
+  "new": "It changes the sacks, because the lead and the tail have different yields."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 3,
+  "old": "It changes the achieved top of cement, since the two slurries have different densities and therefore different U-tube behaviour.",
+  "new": "It changes the achieved top of cement, since the two slurries differ in density."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "The inside capacity times the shoe depth of 3000 m.",
+  "new": "The inside capacity times the shoe depth of 3000 m, to the bottom of the string."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 0,
+  "old": "The annular slurry only, excluding the shoe track.",
+  "new": "The annular slurry only, excluding the shoe track, since that cement stays inside the casing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 1,
+  "old": "Because the engine computes the time from the slurry volume alone, and the displacement takes longer than the cement does.",
+  "new": "Because the engine computes the time from the slurry alone, and displacement takes longer."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 3,
+  "old": "Because the pump efficiency is below one, and the calculated rate is the theoretical output rather than the delivered one.",
+  "new": "Because the pump efficiency is below one, so the calculated rate is only theoretical."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 1,
+  "old": "One well is horizontal, so its displacement is measured along the hole while the other's is measured vertically downward.",
+  "new": "One well is horizontal, so its displacement volume is measured along the curved hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "Their float collars are at different depths, and the difference is that depth difference times the casing bore capacity.",
+  "new": "Their float collars are at different depths, times the casing bore capacity."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "The true vertical depth has to be computed separately for the placement, since the hydrostatic head depends on it directly.",
+  "new": "The true vertical depth has to be computed separately for the hydrostatic head."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "A deviated well needs more cement than a vertical one to the same true vertical depth, in proportion to the hole length.",
+  "new": "A deviated well needs more cement than a vertical one to the same true vertical depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 1,
+  "old": "The open hole excess, from offset well experience.",
+  "new": "The open hole excess, from offset well experience in the same formations."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "Whether the cement will be pumpable when it arrives.",
+  "new": "Whether the cement will be pumpable when it arrives, through the thickening time."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "Verify the inputs it was computed from.",
+  "new": "Verify the inputs it was computed from, since it encodes them."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "The annulus rows would start at the hanger, and every volume above it would be understated by the length of the work string.",
+  "new": "The annulus rows would start at the hanger, and every volume above it would be understated."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "A liner job, which would give an absurd displacement.",
+  "new": "A liner job, which would give an absurd displacement from the work string's inside capacity."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "Accept it, since the excess only affects the open hole part and the top of cement is what the sheet is really for.",
+  "new": "Accept it, since the excess only affects the open hole and the top of cement is what matters."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "24.34828356497546, which is the annular slurry including the 200 m of cased annulus above the previous shoe.",
+  "new": "24.34828356497546, the annular slurry including the 200 m of cased annulus above the shoe."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "Inside capacity times shoe depth equals displacement.",
+  "new": "Inside capacity times shoe depth equals displacement, since the plug travels to the shoe."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "Because the excess factor is applied per vertical metre, so the two depths are needed to convert the annular volumes.",
+  "new": "Because the excess factor is applied per vertical metre, so both depths convert the volumes."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "That the annulus took more cement than expected.",
+  "new": "That the annulus took more cement than expected, so less fluid was needed behind the plug."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "The slurry, because it is mixed as well as pumped.",
+  "new": "The slurry, because it is mixed as well as pumped, and the mixing sets the pace of the whole cement job."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "A published empirical fit, like the collapse coefficients, whose scatter is inherited by everything computed from it.",
+  "new": "A published empirical fit, like the collapse coefficients, whose scatter is inherited."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "A discretisation parameter, like the number of steps in the placement, whose effect can be tested by refining it.",
+  "new": "A discretisation parameter, like the placement step count, testable by refining it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "That the holder can predict whether a cement job will isolate the reservoir, given the geometry and the fluid programme.",
+  "new": "That the holder can predict whether a cement job will isolate the reservoir."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "That the holder can compute the placement pressures and the standoff, which together decide whether the job will work.",
+  "new": "That the holder can compute the placement pressures and the standoff for a job."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Neither, because the placement simulation would warn about the achieved top of cement in either direction of error.",
+  "new": "Neither, because the placement simulation would warn about the achieved top of cement either way."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "Getting the cement where it was meant to go.",
+  "new": "Getting the cement where it was meant to go, which the sheet sets out."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Only the annular capacity, since the casing is the same.",
+  "new": "Only the annular capacity, since the casing is the same and only the hole has been enlarged."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "Nothing, since the excess reduces the annular capacity.",
+  "new": "Nothing, since the excess reduces the annular capacity by the volume the filter cake takes up."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-primary-cement-job-is",
+  "ord": 10,
+  "option": 3,
+  "old": "Reproducibility, because the interface positions depend on the order the segments happened to be summed in.",
+  "new": "Reproducibility, because the interface positions depend on the order the segments were summed in."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-primary-cement-job-is",
+  "ord": 11,
+  "option": 1,
+  "old": "A checksum over the inputs, so that a result cannot be presented alongside a geometry it was not actually computed from.",
+  "new": "A checksum over the inputs, tying a result to its geometry."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-primary-cement-job-is",
+  "ord": 11,
+  "option": 3,
+  "old": "A timestamp and the name of the user who ran it, which is what makes a saved cement programme auditable after the fact.",
+  "new": "A timestamp and the name of the user who ran it, for auditing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-primary-cement-job-is",
+  "ord": 12,
+  "option": 2,
+  "old": "Because it is one of the two biggest levers a cementing engineer has, and the model can only quantify the other one.",
+  "new": "Because it is one of the two biggest levers, and the model can only quantify the other one."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-primary-cement-job-is",
+  "ord": 13,
+  "option": 3,
+  "old": "One per hole section, so a string that passes through two sections is placed as two independent stage calculations.",
+  "new": "One per hole section, so a string through two sections is placed as two stage calculations."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-primary-cement-job-is",
+  "ord": 14,
+  "option": 1,
+  "old": "Computes it from the friction of the falling fluid.",
+  "new": "Computes it from the friction of the falling fluid, balancing the head against the losses."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-primary-cement-job-is",
+  "ord": 15,
+  "option": 0,
+  "old": "Predicting whether the job will isolate the reservoir.",
+  "new": "Predicting whether the job will isolate the reservoir, from the volumes it places in the annulus."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-geometry",
+  "ord": 8,
+  "option": 3,
+  "old": "Because two cuts that close together mean two hole sections overlap, which is an inconsistency the caller should fix.",
+  "new": "Because two cuts that close together mean two hole sections overlap, which the caller should fix."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-geometry",
+  "ord": 9,
+  "option": 0,
+  "old": "The top of each row, which is where the cut was made.",
+  "new": "The top of each row, which is where the cut was made and so where the section boundary is best known."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-geometry",
+  "ord": 11,
+  "option": 1,
+  "old": "Because the annulus rows would have to start at the hanger rather than at surface, which the row cutting cannot represent.",
+  "new": "Because the annulus rows would have to start at the hanger, which row cutting cannot represent."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-geometry",
+  "ord": 11,
+  "option": 3,
+  "old": "Because a liner is run on a work string whose inside capacity differs from the liner's, so the displacement would be wrong.",
+  "new": "Because a liner is run on a work string whose inside capacity differs, so displacement is off."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-geometry",
+  "ord": 12,
+  "option": 0,
+  "old": "The top of cement, which is an annular target.",
+  "new": "The top of cement, which is an annular target set against the previous casing shoe."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-geometry",
+  "ord": 13,
+  "option": 1,
+  "old": "The total depth of the hole as drilled.",
+  "new": "The total depth of the hole as drilled, since the rows follow the hole to the bottom."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-geometry",
+  "ord": 14,
+  "option": 1,
+  "old": "The annulus rows would be cut at each change of casing weight, and the inside would be handled the same way.",
+  "new": "The annulus rows would be cut at each change of casing weight, and the inside handled the same."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-geometry",
+  "ord": 15,
+  "option": 3,
+  "old": "In the displacement volume, which is measured along the hole and therefore longer on a deviated well than a vertical one.",
+  "new": "In the displacement volume, which is measured along the hole and so longer on a deviated well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-open-hole-excess",
+  "ord": 8,
+  "option": 0,
+  "old": "Only the displacement, since the shoe track is in open hole.",
+  "new": "Only the displacement, since the shoe track is in open hole and so takes the excess with the annulus around it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-open-hole-excess",
+  "ord": 9,
+  "option": 0,
+  "old": "About 20 sacks, rising as the excess rises.",
+  "new": "About 20 sacks, rising as the excess rises, since each point costs more than the last."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-open-hole-excess",
+  "ord": 10,
+  "option": 2,
+  "old": "Nothing, because the placement simulation would have warned that the achieved top of cement missed its target by 30 m.",
+  "new": "Nothing, because the placement would have warned that the top of cement missed by 30 m."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-open-hole-excess",
+  "ord": 10,
+  "option": 3,
+  "old": "About eight minutes of job time, since the total pumped volume falls and the pump rate is unchanged throughout.",
+  "new": "About eight minutes of job time, since the total pumped volume falls at the same rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-open-hole-excess",
+  "ord": 11,
+  "option": 1,
+  "old": "Job quality, since a larger volume of slurry has to be mixed in the same time and the mix density becomes less consistent.",
+  "new": "Job quality, since a larger volume has to be mixed in the same time and the density drifts."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-open-hole-excess",
+  "ord": 11,
+  "option": 3,
+  "old": "Accuracy in the achieved top of cement, since the placement simulation is run at a different excess from the volume sheet.",
+  "new": "Accuracy in the achieved top of cement, since the placement runs at a different excess."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-open-hole-excess",
+  "ord": 12,
+  "option": 2,
+  "old": "One, the open hole excess, and every other input to the sheet is either a measurement or a deliberate design choice.",
+  "new": "One, the open hole excess, and every other input is either a measurement or a design choice."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-open-hole-excess",
+  "ord": 13,
+  "option": 3,
+  "old": "It cannot be stated at all without a caliper log, so a volume sheet without one is not a usable document.",
+  "new": "It cannot be stated without a caliper log, so a sheet without one is not a usable document."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-open-hole-excess",
+  "ord": 14,
+  "option": 3,
+  "old": "Apply it to the diameter rather than the area, and then report the resulting volume as a range rather than a point.",
+  "new": "Apply it to the diameter rather than the area, and report the resulting volume as a range."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-open-hole-excess",
+  "ord": 15,
+  "option": 3,
+  "old": "Compute every volume twice, once at the design excess and once at zero, and quote the two as a lower and upper bound.",
+  "new": "Compute every volume twice, at the design excess and at zero, and quote them as lower and upper bound."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 7,
+  "option": 1,
+  "old": "Because the shoe track volume is subtracted from the displacement, and a longer one would leave the plug short of the collar.",
+  "new": "Because the shoe track is subtracted from the displacement, and a longer one strands the plug."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 7,
+  "option": 3,
+  "old": "Because the API convention sets the shoe track at two joints, and a longer one would not be covered by the standard.",
+  "new": "Because the API convention sets the shoe track at two joints, which a longer one would break."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 8,
+  "option": 0,
+  "old": "It increases it, because two slurries need more spacer.",
+  "new": "It increases it, because two slurries need more spacer between them and each needs its own excess volume."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 9,
+  "option": 2,
+  "old": "Because it is the deepest point still protected by the casing above, so the strong cement goes where the hole is open.",
+  "new": "Because it is the deepest point protected by the casing above, so strong cement goes in open hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 10,
+  "option": 2,
+  "old": "A total pumped volume of 57.357205971317775, since the displacement is by definition everything pumped behind the top plug.",
+  "new": "A total pumped volume of 57.357205971317775, since the displacement is everything pumped behind the plug."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 11,
+  "option": 1,
+  "old": "The difference in their true vertical depths at the shoe, converted through the casing bore capacity of the string.",
+  "new": "The difference in their shoe true vertical depths, times the casing bore capacity."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 11,
+  "option": 3,
+  "old": "Two hundred metres of annulus, which is the difference between the two previous casing shoe depths on the two wells.",
+  "new": "Two hundred metres of annulus, the difference between the two previous shoe depths."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 12,
+  "option": 0,
+  "old": "Because the shoe track cement is not part of the barrier.",
+  "new": "Because the shoe track cement is not part of the barrier, so there is no need to displace it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 13,
+  "option": 3,
+  "old": "The surface density of the slurry, measured continuously, which confirms the yield and therefore the sacks ordered.",
+  "new": "The surface density of the slurry, measured continuously, which confirms the yield and the sacks."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 14,
+  "option": 0,
+  "old": "The annular velocity during the displacement phase.",
+  "new": "The annular velocity during the displacement phase, since a denser fluid moves the column up much faster."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 15,
+  "option": 0,
+  "old": "The top of cement ends up higher than planned.",
+  "new": "The top of cement ends up higher than planned, from the extra slurry that is left over."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-sacks-time-and-the-sheet",
+  "ord": 9,
+  "option": 1,
+  "old": "It is exact, since lengths and diameters are the two quantities in a well that are known to the highest precision available.",
+  "new": "It is exact, since lengths and diameters are the best-known quantities in a well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-sacks-time-and-the-sheet",
+  "ord": 9,
+  "option": 3,
+  "old": "It has to be recomputed whenever the trajectory changes, even if the casing programme and the hole sizes stay the same.",
+  "new": "It has to be recomputed whenever the trajectory changes, even with the same hole sizes."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-sacks-time-and-the-sheet",
+  "ord": 11,
+  "option": 0,
+  "old": "Whether the cement will still be pumpable when it arrives.",
+  "new": "Whether the cement will still be pumpable when it arrives at the bottom of the string."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-sacks-time-and-the-sheet",
+  "ord": 12,
+  "option": 2,
+  "old": "The Expert tier, since a channel is what forms when the formation takes fluid and the cement follows it out of the annulus.",
+  "new": "The Expert tier, since a channel forms when the formation takes fluid and the cement follows it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-sacks-time-and-the-sheet",
+  "ord": 12,
+  "option": 3,
+  "old": "None of them, because the fracture gradient comes from the Geomechanics course and this course never compares against it.",
+  "new": "None of them, because the fracture gradient comes from Geomechanics and is never compared against."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-sacks-time-and-the-sheet",
+  "ord": 13,
+  "option": 2,
+  "old": "A temperature log run after the cement sets, which locates the top of cement and therefore confirms the annular volume.",
+  "new": "A temperature log run after the cement sets, which locates the top of cement."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-sacks-time-and-the-sheet",
+  "ord": 13,
+  "option": 3,
+  "old": "The surface pressure rising through the last third of the job, which confirms that cement is arriving in the annulus.",
+  "new": "The surface pressure rising through the last third of the job, as cement enters the annulus."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-sacks-time-and-the-sheet",
+  "ord": 14,
+  "option": 0,
+  "old": "Because the excess is fixed by the API convention.",
+  "new": "Because the excess is fixed by the API convention, so the one guess on the sheet is taken out of it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-sacks-time-and-the-sheet",
+  "ord": 15,
+  "option": 3,
+  "old": "That the displacement volume is the largest number on the sheet and therefore the one most worth getting right.",
+  "new": "That the displacement volume is the largest number on the sheet and so the one most worth checking."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 7,
+  "option": 0,
+  "old": "Comparing it against the slurry volume.",
+  "new": "Comparing it against the slurry volume, since the two are fixed by the same casing size."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 8,
+  "option": 1,
+  "old": "The lead and tail split has to be placed at the previous shoe, because the engine cuts an annulus row there and nowhere else.",
+  "new": "The lead and tail split has to sit at the previous shoe, where the engine cuts a row."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 8,
+  "option": 3,
+  "old": "The annular slurry is 1150 m times the open hole capacity, since the cased section above the shoe is inside the previous string.",
+  "new": "The annular slurry is 1150 m times the open hole capacity, the cased part included."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 0,
+  "old": "It must be exactly 30 percent above the bit size.",
+  "new": "It must be exactly 30 percent above the bit size, since the excess is quoted on the diameter."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 1,
+  "old": "Expect a smaller slurry, since the interval is shorter.",
+  "new": "Expect a smaller slurry, since the interval is shorter and the slurry scales with the length cemented."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 1,
+  "old": "A prediction of the achieved top of cement to within thirty metres, given a caliper log over the open hole section.",
+  "new": "A prediction of the achieved top of cement to within thirty metres, given a caliper log."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 2,
+  "old": "A volume sheet and the placement pressures that follow from it, which together are the two halves of a cement design.",
+  "new": "A volume sheet and the placement pressures that follow from it, a complete cement design."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "How much cement to order for a given top of cement.",
+  "new": "How much cement to order for a given top of cement and a given hole geometry."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 2,
+  "old": "Drilling Fluids and Hydraulics, which owns the loss kernel the placement simulation imports for its friction term.",
+  "new": "Drilling Fluids and Hydraulics, which owns the loss kernel the placement imports for friction."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 3,
+  "old": "Report the slurry volume to three significant figures, since the precision beyond that is an artefact of the arithmetic.",
+  "new": "Report the slurry volume to three significant figures, since beyond that the precision is an artefact."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "Ordering the right volumes, and not breaking the hole.",
+  "new": "Ordering the right volumes, and not breaking the hole, the first two of them."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 1,
+  "old": "The whole annulus, divided by the shoe TVD.",
+  "new": "The whole annulus, divided by the shoe TVD, since every metre of it bears on that shoe."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 2,
+  "old": "Because nothing above that shoe has changed until cement or spacer crosses it on the way up the annulus.",
+  "new": "Because nothing above that shoe changes until cement or spacer crosses it going up."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 2,
+  "old": "Its annulus is narrower, so the same pump rate produces a much higher velocity and therefore much more friction per metre.",
+  "new": "Its annulus is narrower, so the same rate gives a higher velocity and more friction."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 3,
+  "old": "Its previous shoe is shallower, so the head above it converts to a higher equivalent density at the reference depth.",
+  "new": "Its previous shoe is shallower, so its head gives a higher equivalent density."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 1,
+  "old": "The one at the casing shoe, being the deepest.",
+  "new": "The one at the casing shoe, being the deepest and so carrying the most annular head of all."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 1,
+  "old": "The maximum over the whole series of the difference between the two heads, since that is what the floats have to hold at worst.",
+  "new": "The maximum over the whole series of the difference between the two heads, at worst."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "The annulus head less the inside head at the last step, computed with the pumps stopped so the friction term is excluded.",
+  "new": "The annulus head less the inside head at the last step, with the friction term excluded."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "The slant well's floats are rated higher, so the engine reports a larger differential against a larger rating on that well.",
+  "new": "The slant well's floats are rated higher, so the engine reports a larger differential on it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "The annular head at the last step.",
+  "new": "The annular head at the last step, which the pump has to overcome to lift the column."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "Its two columns have the same density.",
+  "new": "Its two columns have the same density, so the friction on each side cancels out exactly."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 0,
+  "old": "The volume of displacement fluid required.",
+  "new": "The volume of displacement fluid required, since the plug sits at a different depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "About eleven percent of the cement cost.",
+  "new": "About eleven percent of the cement cost, which is what the cheaper lead saves on the job."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 2,
+  "old": "By reducing the friction, since a lighter slurry has a lower annular pressure loss and therefore supports the column less.",
+  "new": "By reducing the friction, since a lighter slurry has a lower loss and supports the column less."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "By raising the achieved top of cement, so the annular column is taller and its head is greater at the moment that matters.",
+  "new": "By raising the achieved top of cement, so the annular column is taller and its head greater."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "Because only a bisected number can be checked by somebody else or compared against another programme's edge.",
+  "new": "Because only a bisected number can be checked by somebody else or compared across programmes."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "Closed, since the width is smaller than the tolerance.",
+  "new": "Closed, since the width is smaller than the tolerance the bisection was run to on each of the two edges."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "The placement grid, since a negative window usually means the free-fall dip was sampled at the wrong resolution.",
+  "new": "The placement grid, since a negative window usually means the dip was sampled too coarsely."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "Both down, since a lighter overall column needs less friction to hold and generates less at any given rate.",
+  "new": "Both down, since a lighter column needs less friction to hold and generates less."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "Volumes first, since the sheet has to be produced before anything can be simulated, and then the rate and the fluid programme.",
+  "new": "Volumes first, since the sheet comes before any simulation, then rate and fluids."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "The top of cement, then the fluid programme, then the rate window, with the rate last rather than first of the four.",
+  "new": "The top of cement, then the fluid programme, then the rate window, and the rate last."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "The depth the volume sheet said it should reach.",
+  "new": "The depth the volume sheet said it should reach, since that is the depth the slurry volume was cut to."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "Five percent of the annular slurry volume.",
+  "new": "Five percent of the annular slurry volume, measured against the volume sheet total."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "The transient free-fall rate and the float equipment pressure drop, which together set what the crew see at surface.",
+  "new": "The transient free-fall rate and the float equipment pressure drop."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Gas migration after placement and the slurry thickening time, both of which decide whether the cement sets at all.",
+  "new": "Gas migration after placement and the slurry thickening time."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "That there were two dips rather than one, which the coarse grid had merged into a single sample near the middle of them.",
+  "new": "That there were two dips rather than one, which the coarse grid had merged into a single sample."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "The two circulating densities and the free-fall flag.",
+  "new": "The two circulating densities and the free-fall flag, all read at the job's end."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "Whether the plug will bump at the calculated displacement, which is the only real-time check the field has on the job.",
+  "new": "Whether the plug will bump at the calculated displacement, the field's real-time check."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "Speed, since a rebuild is cheaper than an advance.",
+  "new": "Speed, since a rebuild is cheaper than an advance and the step count can then be raised freely."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 7,
+  "option": 0,
+  "old": "The displacement fluid, which entered most recently.",
+  "new": "The displacement fluid, which entered most recently and leads the path."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 8,
+  "option": 0,
+  "old": "The total pumped volume so far.",
+  "new": "The total pumped volume so far, since each fluid adds its length."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 9,
+  "option": 2,
+  "old": "By interpolating the minimum-curvature trajectory, since the volume coordinate is measured along the hole rather than vertically.",
+  "new": "By interpolating the minimum-curvature trajectory along the hole."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 9,
+  "option": 3,
+  "old": "By subtracting the annulus volume first, since the inside leg occupies the second half of the volume coordinate.",
+  "new": "By subtracting the annulus volume first, the inside leg being the second half."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 10,
+  "option": 3,
+  "old": "Because the true vertical depth decreases upward and the map returns a true vertical depth rather than a measured one.",
+  "new": "Because the true vertical depth decreases upward and the map returns a vertical depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 11,
+  "option": 1,
+  "old": "The fluid density, since the inside segments are all the same fluid while the annulus holds several at once during the job.",
+  "new": "The fluid density, since the inside segments are all one fluid while the annulus holds several."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 12,
+  "option": 0,
+  "old": "Speed, since a rebuild is cheaper than an advance.",
+  "new": "Speed, since a rebuild is cheaper than an advance and needs no bookkeeping from the step before."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 13,
+  "option": 0,
+  "old": "The state just before the top plug is dropped.",
+  "new": "The state just before the top plug is dropped, which is the last one the grid samples."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 14,
+  "option": 1,
+  "old": "The previous casing shoe, where the split was placed.",
+  "new": "The previous casing shoe, where the split was placed between lead and tail."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 15,
+  "option": 1,
+  "old": "On a job with more than two slurries, since each additional interface adds a mixing zone the model does not represent.",
+  "new": "On a job with more than two slurries, since each interface adds a mixing zone."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-flow-path",
+  "ord": 15,
+  "option": 3,
+  "old": "On a horizontal well, since the interfaces in a lateral are much longer on the low side than on the high side of the hole.",
+  "new": "On a horizontal well, where the interfaces are longer on the low side."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-u-tube",
+  "ord": 9,
+  "option": 0,
+  "old": "Assumes water and computes a Newtonian loss.",
+  "new": "Assumes water and computes a Newtonian loss, since every fluid has at least water's viscosity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-u-tube",
+  "ord": 10,
+  "option": 1,
+  "old": "The pump rate divided by the inside capacity.",
+  "new": "The pump rate divided by the inside capacity, since the same flow passes through both legs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-u-tube",
+  "ord": 11,
+  "option": 0,
+  "old": "Larger, because the annulus is longer.",
+  "new": "Larger, because the annulus is longer and friction builds up over the extra length."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-u-tube",
+  "ord": 12,
+  "option": 1,
+  "old": "The annular velocity falling below the minimum needed to keep the fluid interfaces stable against gravity segregation.",
+  "new": "The annular velocity falling below the minimum needed to keep the interfaces stable."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-u-tube",
+  "ord": 12,
+  "option": 3,
+  "old": "The cement front reaching the shoe before the displacement has entered, which leaves the casing partly empty above it.",
+  "new": "The cement front reaching the shoe before the displacement has entered, leaving the casing empty."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-u-tube",
+  "ord": 13,
+  "option": 0,
+  "old": "A loss of control over the pump rate.",
+  "new": "A loss of control over the pump rate, since the falling column outruns the pumps."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-u-tube",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the engine's segment ordering is not deterministic, so a strict comparison would give different answers on each run.",
+  "new": "Because the engine's segment ordering is not deterministic, so a strict test would vary per run."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-u-tube",
+  "ord": 15,
+  "option": 1,
+  "old": "About two orders of magnitude, which is enough to distinguish a real event but not enough to be sure about a marginal one.",
+  "new": "About two orders of magnitude, enough to tell a real event but not a marginal one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-u-tube",
+  "ord": 15,
+  "option": 3,
+  "old": "There is no margin, since the deadband was chosen to sit just below the smallest deficit the two wells actually produce.",
+  "new": "There is no margin, since the deadband sits just below the smallest real deficit."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-job-over-time",
+  "ord": 7,
+  "option": 2,
+  "old": "Because the annulus above the previous shoe holds only mud until cement or spacer crosses it on the way up.",
+  "new": "Because the annulus above that shoe holds only mud until cement or spacer crosses it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-job-over-time",
+  "ord": 9,
+  "option": 2,
+  "old": "Because the annulus is narrower on a horizontal well, so the same rate gives a higher velocity and much more friction.",
+  "new": "Because the annulus is narrower on a horizontal well, so the same rate gives much more friction."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-job-over-time",
+  "ord": 11,
+  "option": 0,
+  "old": "The casing shoe one is the limit, being the deepest.",
+  "new": "The casing shoe one is the limit, being the deepest, and so the one with the most head bearing on it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-job-over-time",
+  "ord": 12,
+  "option": 0,
+  "old": "At the first step, before any cement has moved.",
+  "new": "At the first step, before any cement has moved and while the columns balance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-job-over-time",
+  "ord": 13,
+  "option": 2,
+  "old": "The slant well's displacement fluid is lighter, so the inside head at the end of the job is smaller and the difference larger.",
+  "new": "The slant well's displacement fluid is lighter, so its inside head at the end is smaller."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-job-over-time",
+  "ord": 13,
+  "option": 3,
+  "old": "The horizontal well's floats are rated lower, so the engine reports a differential capped at what they can hold.",
+  "new": "The horizontal well's floats are rated lower, so its differential is capped at the rating."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-job-over-time",
+  "ord": 14,
+  "option": 1,
+  "old": "The annulus is heavier and the floats hold normally.",
+  "new": "The annulus is heavier and the floats hold normally, as they do at the end of every cement job."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-job-over-time",
+  "ord": 15,
+  "option": 1,
+  "old": "The inside head, which the float differential subtracts and the pump pressure adds, so it appears in one and not the other.",
+  "new": "The inside head, which the differential subtracts and the pump pressure adds."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-job-over-time",
+  "ord": 15,
+  "option": 2,
+  "old": "Friction at the last step, which is why the bump pressure falls when the rate is reduced for the final few cubic metres.",
+  "new": "Friction at the last step, which is why the bump falls when the final rate is reduced."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-two-programmes-one-well",
+  "ord": 8,
+  "option": 0,
+  "old": "Both want the rate low, and mud removal wants it high.",
+  "new": "Both want the rate low, and mud removal wants it high, since friction works against both of them."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-two-programmes-one-well",
+  "ord": 9,
+  "option": 2,
+  "old": "Because the relationship between rate and circulating density is nonlinear, so interpolating between sweep points is inaccurate.",
+  "new": "Because rate and circulating density are nonlinear, so interpolating a sweep is inaccurate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-two-programmes-one-well",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the free-fall flag is discrete, so a sweep would miss the transition entirely unless the step happened to straddle it.",
+  "new": "Because the free-fall flag is discrete, so a sweep would miss the transition entirely."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-two-programmes-one-well",
+  "ord": 10,
+  "option": 1,
+  "old": "It is closed, since a positive width means no rate works.",
+  "new": "It is closed, since a positive width means no rate works, the two edges having already crossed over each other."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-two-programmes-one-well",
+  "ord": 11,
+  "option": 1,
+  "old": "That the job free falls at every rate, so the ECD edge is meaningless and only the free-fall edge should be reported.",
+  "new": "That the job free falls at every rate, so the ECD edge is meaningless and only free fall is reported."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-two-programmes-one-well",
+  "ord": 13,
+  "option": 0,
+  "old": "The well, the pump rate and the excess factor.",
+  "new": "The well, the pump rate and the excess factor, since those set the annular column's friction."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-two-programmes-one-well",
+  "ord": 14,
+  "option": 2,
+  "old": "A heavier spacer, a lighter displacement fluid, a deeper float collar or a longer shoe track to reduce the annular column.",
+  "new": "A heavier spacer, a lighter displacement fluid, a deeper float collar or a longer shoe track."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-two-programmes-one-well",
+  "ord": 14,
+  "option": 3,
+  "old": "A different excess assumption, a different slurry yield, a different casing size or a different previous shoe depth.",
+  "new": "A different excess assumption, slurry yield, casing size or previous shoe depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-two-programmes-one-well",
+  "ord": 15,
+  "option": 1,
+  "old": "The rate first, since it is what the pumping equipment constrains, and then the programme is designed to fit inside that rate.",
+  "new": "The rate first, since the pumping equipment constrains it, then a programme to fit it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-two-programmes-one-well",
+  "ord": 15,
+  "option": 2,
+  "old": "The top of cement, then the fluid programme, then the rate window, and the rate last of the four rather than first.",
+  "new": "The top of cement, then the fluid programme, then the rate window, and the rate last."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-placement-result",
+  "ord": 8,
+  "option": 1,
+  "old": "That the volumes reconcile and the top of cement was reached, which are the two things the warnings actually test for.",
+  "new": "That the volumes reconcile and the top of cement was reached, the two things tested."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-placement-result",
+  "ord": 8,
+  "option": 3,
+  "old": "That every check the engine can make has passed, so the remaining risk is in the chemistry rather than the placement.",
+  "new": "That every check the engine can make has passed, so the remaining risk is chemistry."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-placement-result",
+  "ord": 9,
+  "option": 0,
+  "old": "None, since all four runs place cement as designed.",
+  "new": "None, since all four runs place cement as designed on both of the two wells."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-placement-result",
+  "ord": 10,
+  "option": 1,
+  "old": "Temperature and losses to the formation.",
+  "new": "Temperature and losses to the formation, which the placement leaves out."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-placement-result",
+  "ord": 11,
+  "option": 1,
+  "old": "Nothing beyond the surface pressure, since the volumes are still being pumped and the fronts still advance with them.",
+  "new": "Nothing beyond the surface pressure, since the fronts still advance with the volume."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-placement-result",
+  "ord": 11,
+  "option": 2,
+  "old": "The rate is unknown, and every quantity computed from it is unknown with it, so that stretch of the job has no numbers.",
+  "new": "The rate is unknown, and so is all computed from it, so that stretch has no numbers."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-placement-result",
+  "ord": 12,
+  "option": 0,
+  "old": "Time, from the start of the job to the plug bump.",
+  "new": "Time, from the start of the job to the plug bump, at equal intervals of the clock."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-placement-result",
+  "ord": 13,
+  "option": 0,
+  "old": "Discard the finding as a sampling artefact.",
+  "new": "Discard the finding as a sampling artefact of the coarse sixty one step grid."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-placement-result",
+  "ord": 14,
+  "option": 1,
+  "old": "It showed the dip was a sampling artefact.",
+  "new": "It showed the dip was a sampling artefact that vanishes once the grid is made much finer."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-placement-result",
+  "ord": 15,
+  "option": 1,
+  "old": "The achieved top of cement, the peak circulating density and the free-fall flag, since all three scan the whole series.",
+  "new": "The achieved top of cement, the peak circulating density and the free-fall flag, all scans."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "Because the annulus is always heavier at the end.",
+  "new": "Because the annulus is always heavier at the end, and the pump has to lift that extra column up."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "option": 0,
+  "old": "The peak circulating density at the previous shoe.",
+  "new": "The peak circulating density at the previous shoe, fixed by the annular column."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 1,
+  "old": "Predicting the top of cement to within thirty metres on a well with a known caliper log over the open hole section.",
+  "new": "Predicting the top of cement to within thirty metres on a well with a known caliper log."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 2,
+  "old": "Producing a placement result and a standoff profile, which together decide whether the job will isolate the reservoir.",
+  "new": "Producing a placement result and a standoff profile, which decide whether the job isolates."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "Whether the volumes were ordered correctly.",
+  "new": "Whether the volumes were ordered correctly, since the placement takes the volume sheet as given to it as input."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 0,
+  "old": "Casing and Tubing Design, through the triaxial check.",
+  "new": "Casing and Tubing Design, through the triaxial check it runs on the cemented string."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "Always pump at the lowest rate the window allows.",
+  "new": "Always pump at the lowest rate the window allows, since that keeps the most margin at the previous shoe."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 1,
+  "old": "The transient rate during a free-fall period, which is the one stretch of the job this tier's numbers do not cover.",
+  "new": "The transient rate during a free-fall period, the one stretch this tier cannot cover."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "The intermixing at the fluid interfaces, which plug flow assumes away and which the standoff calculation restores.",
+  "new": "The intermixing at the fluid interfaces, which plug flow assumes away."
+ }
+]

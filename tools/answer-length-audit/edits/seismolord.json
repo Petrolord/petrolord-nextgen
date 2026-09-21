@@ -1,0 +1,605 @@
+[
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "RC = +1, and the synthetic shows a full amplitude peak",
+  "new": "RC = +1, and the synthetic shows a full amplitude peak, as it would at a perfect mirror"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 1,
+  "old": "RC = -1, and the synthetic shows a full amplitude trough",
+  "new": "RC = -1, and the synthetic shows a full amplitude trough, because the wave comes back inverted"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "Taking the difference between neighbouring reflection coefficients",
+  "new": "Taking the difference between neighbouring reflection coefficients, so that the synthetic trace becomes the time derivative of the reflectivity series"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "Stretching one wavelet so that it spans the whole logged interval",
+  "new": "Stretching one wavelet so that it spans the whole logged interval, then scaling that single stretched wavelet by the average reflection coefficient"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "Because a low frequency Ricker wavelet has a larger peak value than a high frequency one",
+  "new": "Because a low frequency Ricker wavelet has a larger peak value than a high frequency one, so every event on the low frequency synthetic is scaled up before any summing takes place along the trace"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "Because the reflection coefficients themselves become larger when the frequency is lowered",
+  "new": "Because the reflection coefficients themselves become larger when the frequency is lowered, since the impedance contrasts are averaged over a longer window and the averaged interfaces then reflect more strongly"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "Because 15 Hz shifts every reflector to a shallower two way time",
+  "new": "Because 15 Hz shifts every reflector to a shallower two way time, where the overburden is thinner and the impedance contrasts between the shallower layers on this well are much sharper than they are deeper down"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "Two clearly separated events, each at its own correct time",
+  "new": "Two clearly separated events, each at its own correct time, because the convolution keeps every reflection coefficient on its own sample of the time grid"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "The shallower of the two interfaces is dropped from the calculation",
+  "new": "The shallower of the two interfaces is dropped from the calculation, since the engine keeps only one coefficient per wavelet length and retains the deeper one"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "An amplitude equal to the sum of the two impedances",
+  "new": "An amplitude equal to the sum of the two impedances, because the synthetic adds the rock properties on either side of each interface into a single composite value"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "Resolution falls but amplitudes rise",
+  "new": "Resolution falls but amplitudes rise, because the shorter wavelet blurs neighbouring reflectors together while its sharper peak carries more energy into every event"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "Both resolution and amplitude rise together",
+  "new": "Both resolution and amplitude rise together, since a higher frequency wavelet is both shorter in time and brighter at its peak, so every event gains on both counts"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "Nothing changes, because the reflection coefficients are the same either way",
+  "new": "Nothing changes, because the reflection coefficients are the same either way and the synthetic is fully determined by the reflectivity series whatever the wavelet"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "Mean gamma ray, mean neutron porosity, mean density, mean sonic, sample count and log step",
+  "new": "Mean gamma ray over the logged interval, mean neutron porosity over the same interval, mean bulk density from the RHOB curve, mean sonic transit time from the DT curve, the count of finite samples used, and the depth step of the log"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "Wavelet frequency, wavelet length, side lobe value, peak value, sample rate and grid length",
+  "new": "Wavelet frequency in hertz, wavelet length in milliseconds, the side lobe value of the Ricker, its central peak value, the sample rate of the time grid and the total grid length, all read from the wavelet and time grid settings"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "Mean velocity, mean density, mean impedance, mean reflection coefficient, mean amplitude and sample count",
+  "new": "Mean velocity over the interval, mean density over the interval, mean acoustic impedance, the mean reflection coefficient across all interfaces, the mean synthetic amplitude along the trace and the count of finite samples behind them"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "They should be used to mark the top and the base of the logged interval",
+  "new": "They should be used to mark the top and the base of the logged interval when the depth range is set"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "The synthetic was accidentally shifted by 60 ms during the depth to time conversion",
+  "new": "The synthetic was accidentally shifted by 60 ms during the depth to time conversion, so every event on the trace now sits later than the interface that produced it and a bulk shift of the same size would simply realign them all"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "The reflection coefficient at 1642 ms must be larger than the one at 1582 ms",
+  "new": "The reflection coefficient at 1642 ms must be larger than the one at 1582 ms, since the strongest amplitude on a synthetic always sits on the strongest single interface and the reported coefficient ranking has to be wrong"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "One of the two numbers is a reporting error, which the capstone tolerance absorbs",
+  "new": "One of the two numbers is a reporting error, which the capstone tolerance absorbs, because a synthetic amplitude cannot peak anywhere except at the time of the largest reflection coefficient that drives it on the synthetic trace"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "That the wavelet frequency must always be raised to 40 Hz before tying",
+  "new": "That the wavelet frequency must always be raised to 40 Hz before tying, because a sharper wavelet removes the lag and lets the events line up by eye"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "Module quizzes at 75 percent with no cooldown, the final exam at 75 percent, and the capstone first",
+  "new": "Module quizzes at 75 percent with no cooldown, the final exam at 75 percent, and the capstone first, so the graded numbers are read before any module quiz is attempted"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-seismic-and-the-well-tie",
+  "ord": 15,
+  "option": 0,
+  "old": "Seismic amplitudes are always too weak to pick without a well to boost them",
+  "new": "Seismic amplitudes are always too weak to pick without a well to boost them into a usable event"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-seismic-and-the-well-tie",
+  "ord": 15,
+  "option": 2,
+  "old": "Seismic surveys record depth directly, so the tie merely confirms the depths",
+  "new": "Seismic surveys record depth directly, so the tie merely confirms the depths already on the section"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-seismic-and-the-well-tie",
+  "ord": 15,
+  "option": 3,
+  "old": "Horizon mapping is done in the well domain, so seismic contributes nothing to it",
+  "new": "Horizon mapping is done in the well domain, so seismic contributes nothing to it between the wells"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-velocity-and-impedance",
+  "ord": 11,
+  "option": 0,
+  "old": "The difference between velocity and density",
+  "new": "The difference between velocity and density at each sample"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-velocity-and-impedance",
+  "ord": 11,
+  "option": 1,
+  "old": "The ratio of velocity to density",
+  "new": "The ratio of velocity to density, measured in the rock matrix"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-velocity-and-impedance",
+  "ord": 11,
+  "option": 3,
+  "old": "The reciprocal of velocity multiplied by porosity",
+  "new": "The reciprocal of velocity multiplied by porosity, sample by sample"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-to-time",
+  "ord": 7,
+  "option": 1,
+  "old": "The two-way time in milliseconds is always larger than the depth in metres",
+  "new": "The two-way time in milliseconds is always larger than the depth in metres on the teaching well at every depth"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-to-time",
+  "ord": 7,
+  "option": 3,
+  "old": "Multiplying the two-way time by velocity returns the depth you started with",
+  "new": "Multiplying the full two-way time by velocity returns the depth you started with at the well"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-to-time",
+  "ord": 11,
+  "option": 1,
+  "old": "The 2000 m/s is the measured rock velocity, and the 3145.29 m/s is the assumed overburden average",
+  "new": "The 2000 m/s is the measured rock velocity, and the 3145.29 m/s is the assumed overburden average used only to hang the log on the time axis at the well"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-to-time",
+  "ord": 11,
+  "option": 2,
+  "old": "They are two estimates of the same quantity, and the more precise one should be preferred",
+  "new": "They are two estimates of the same quantity, and the more precise one should be preferred, which makes the measured sonic average the one to carry through both the time axis and the impedance"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-to-time",
+  "ord": 12,
+  "option": 0,
+  "old": "By assuming the seismic sample interval matches the log sample interval",
+  "new": "By assuming the seismic sample interval matches the log sample interval, so each log sample can be assigned the time of its matching seismic sample"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-to-time",
+  "ord": 12,
+  "option": 1,
+  "old": "By reading the two-way time straight off the seismic display at the well location",
+  "new": "By reading the two-way time straight off the seismic display at the well location, where the strongest event is taken as the target top"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-to-time",
+  "ord": 14,
+  "option": 0,
+  "old": "Because the sonic log is recorded at exactly 2 ms intervals in the borehole",
+  "new": "Because the sonic log is recorded at exactly 2 ms intervals in the borehole, so the synthetic has to inherit that step"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-to-time",
+  "ord": 14,
+  "option": 2,
+  "old": "Because uneven spacing would make the well tops land at odd millisecond values",
+  "new": "Because uneven spacing would make the well tops land at odd millisecond values that the display cannot label"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-reflection-coefficients",
+  "ord": 12,
+  "option": 0,
+  "old": "Because positive coefficients paint as peaks only above about 0.1 in magnitude",
+  "new": "Because positive coefficients paint as peaks only above about 0.1 in magnitude, with weaker ones shown as troughs"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-reflection-coefficients",
+  "ord": 12,
+  "option": 2,
+  "old": "Because the sign of the coefficient changes with the depth of the interface",
+  "new": "Because the sign of the coefficient changes with the depth of the interface as the overburden compacts it"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-reflection-coefficients",
+  "ord": 12,
+  "option": 3,
+  "old": "Because peaks and troughs are assigned at random by interpretation software",
+  "new": "Because peaks and troughs are assigned at random by interpretation software each time a section is loaded"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-reflection-coefficients",
+  "ord": 13,
+  "option": 1,
+  "old": "At 1580 ms, which is 1580 m under the teaching time to depth function",
+  "new": "At 1580 ms, which is 1580 m under the teaching time to depth function on this well"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-reflection-coefficients",
+  "ord": 14,
+  "option": 0,
+  "old": "The peak is a noise spike, because five consecutive samples share the same sign",
+  "new": "The peak is a noise spike, because five consecutive samples share the same sign and a real event would change sign"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-reflection-coefficients",
+  "ord": 15,
+  "option": 0,
+  "old": "Zero, so the trace stays continuous through the missing interval",
+  "new": "Zero, so the trace stays continuous through the missing interval and the convolution can run unbroken"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 7,
+  "option": 0,
+  "old": "It guarantees the synthetic and the seismic have the same amplitude scale",
+  "new": "It guarantees the synthetic and the seismic have the same amplitude scale, so the two traces can be compared without any normalisation"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 8,
+  "option": 1,
+  "old": "Replace each wavelet sample with the nearest reflection coefficient",
+  "new": "Replace each wavelet sample with the nearest reflection coefficient, so the wavelet shape is resampled onto the reflectivity time grid before it is displayed"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 8,
+  "option": 3,
+  "old": "Average the reflectivity series over a window as long as the wavelet",
+  "new": "Average the reflectivity series over a window as long as the wavelet, which smooths the coefficients into a band limited trace at the seismic frequency"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 9,
+  "option": 1,
+  "old": "A peak of about plus 0.02 with negative side lobes on either side",
+  "new": "A peak of about plus 0.02 with negative side lobes on either side, as for any Ricker"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 10,
+  "option": 2,
+  "old": "Frequency changes the amplitude of the wavelet but not its length",
+  "new": "Frequency changes the amplitude of the wavelet but not its length, so resolution stays the same whichever frequency is chosen"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 11,
+  "option": 3,
+  "old": "The 15 Hz result must be a processing error, since higher frequency should always be brighter",
+  "new": "The 15 Hz result must be a processing error, since higher frequency should always be brighter for the same underlying reflectivity series"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 12,
+  "option": 0,
+  "old": "The time to depth function is 60 ms out and the synthetic needs a bulk shift",
+  "new": "The time to depth function is 60 ms out and the synthetic needs a bulk shift, after which the strongest amplitude would land back on the strongest coefficient where it belongs"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 12,
+  "option": 1,
+  "old": "The strongest coefficient was excluded from the convolution because it is negative",
+  "new": "The strongest coefficient was excluded from the convolution because it is negative, and the engine only convolves positive coefficients, so its wavelet copy never reaches the trace"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 12,
+  "option": 3,
+  "old": "The wavelet peak is offset from its centre by 60 ms",
+  "new": "The wavelet peak is offset from its centre by 60 ms, so every event on the synthetic appears later than the interface that produced it and the brightest one inherits that delay"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 13,
+  "option": 0,
+  "old": "Because the wavelet delays every event by half its length",
+  "new": "Because the wavelet delays every event by half its length, so the brightest point of the synthetic always lands later than the coefficient that caused it by that same fixed amount"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 13,
+  "option": 1,
+  "old": "Because reflection coefficients are computed in depth and amplitudes in time",
+  "new": "Because reflection coefficients are computed in depth and amplitudes in time, so the two maxima are reported on different axes and only agree once the depth scale is converted"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 13,
+  "option": 2,
+  "old": "Because negative coefficients are plotted at the following sample",
+  "new": "Because negative coefficients are plotted at the following sample, which pushes the brightest amplitude one step later than the coefficient whenever the strongest reflection is negative"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 14,
+  "option": 1,
+  "old": "Only the 15 Hz result is trustworthy, because its peak matches a real interface",
+  "new": "Only the 15 Hz result is trustworthy, because its peak matches a real interface, so the higher frequency run should be discarded before any tie is attempted"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 15,
+  "option": 2,
+  "old": "Amplitude should be ignored, since only the reflectivity series is meaningful",
+  "new": "Amplitude should be ignored, since only the reflectivity series is meaningful and everything the wavelet adds on top of it is an artefact of the chosen wavelet frequency"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wavelets-and-convolution",
+  "ord": 15,
+  "option": 3,
+  "old": "Destructive interference is harmless because cancelled events reappear at higher frequency",
+  "new": "Destructive interference is harmless because cancelled events reappear at higher frequency, so any dim interval can be recovered simply by rerunning with a sharper wavelet"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-reading-the-synthetic",
+  "ord": 10,
+  "option": 3,
+  "old": "A polarity convention problem that will disappear when the sign is flipped",
+  "new": "A polarity convention problem that will disappear once the sign is flipped on the seismic display"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-reading-the-synthetic",
+  "ord": 11,
+  "option": 1,
+  "old": "Mean sonic velocity, TWT at the top of the log, maximum impedance, the strongest reflection coefficient, the strongest synthetic amplitude and the recovered bulk shift",
+  "new": "Mean sonic velocity, TWT at the top of the log, maximum impedance, the strongest reflection coefficient, the strongest synthetic amplitude and the recovered bulk shift from the cross-correlation scan against the seismic"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-reading-the-synthetic",
+  "ord": 12,
+  "option": 0,
+  "old": "Pass the final exam at 75 percent, then the module quizzes at 70 percent, then the capstone",
+  "new": "Pass the final exam at 75 percent, then the module quizzes at 70 percent, then the capstone, so that the exam acts as the entry test and the module quizzes follow it as revision before the final gate opens"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-reading-the-synthetic",
+  "ord": 12,
+  "option": 2,
+  "old": "Read every lesson, pass each module quiz at 70 percent, then the capstone, with no final exam involved",
+  "new": "Read every lesson, pass each module quiz at 70 percent, then the capstone, with no final exam involved, since the capstone itself stands in for the exam and grants the certification once the quizzes are cleared"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-reading-the-synthetic",
+  "ord": 13,
+  "option": 0,
+  "old": "Nothing, because the two always coincide when the wavelet is zero phase",
+  "new": "Nothing, because the two always coincide when the wavelet is zero phase, since a symmetric wavelet centres every copy on its own coefficient and the brightest point must fall on the largest one"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-reading-the-synthetic",
+  "ord": 13,
+  "option": 3,
+  "old": "That the two-way factor has to be applied twice, once to each entry",
+  "new": "That the two-way factor has to be applied twice, once to each entry, because the coefficient time comes from the depth to time conversion while the amplitude time is read off the trace separately"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-reading-the-synthetic",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the capstone grades the recovered lag alongside the other numbers",
+  "new": "Because the capstone grades the recovered lag alongside the other numbers, so the planted value has to be fixed in advance for every learner to be marked against the same answer"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-reading-the-synthetic",
+  "ord": 15,
+  "option": 0,
+  "old": "A second sonic curve so the velocity can be averaged for redundancy",
+  "new": "A second sonic curve so the velocity can be averaged for redundancy, which reduces the noise in the impedance log and therefore in every reflection coefficient and synthetic amplitude built from it"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-reading-the-synthetic",
+  "ord": 15,
+  "option": 1,
+  "old": "An automatic depth conversion of the whole seismic volume",
+  "new": "An automatic depth conversion of the whole seismic volume, using the tied time to depth function from the well to move every trace from two way time into depth so the horizons can be mapped in metres"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-reading-the-synthetic",
+  "ord": 15,
+  "option": 3,
+  "old": "A null handling pass over the input curves before the impedance is formed",
+  "new": "A null handling pass over the input curves before the impedance is formed, so that gaps in DT and RHOB are filled by interpolation and the reflectivity series runs unbroken through the whole logged interval"
+ }
+]

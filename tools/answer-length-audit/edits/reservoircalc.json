@@ -1,0 +1,47 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-from-a-constant-to-a-grid",
+  "ord": 14,
+  "option": 0,
+  "old": "A model fitted to the well porosities reproduces them at the wells.",
+  "new": "A fitted model reproduces the porosities at the wells."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-limits-of-a-property-model",
+  "ord": 15,
+  "option": 1,
+  "old": "Compare the modelled range against the measured range of the data.",
+  "new": "Compare the modelled range against the measured range."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-limits-of-a-property-model",
+  "ord": 15,
+  "option": 2,
+  "old": "Compare the cell size against the average distance between wells.",
+  "new": "Compare the cell size against the mean well spacing."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-labelling-the-grid",
+  "ord": 12,
+  "option": 0,
+  "old": "Because the fault has no displacement, so the surfaces are continuous across it.",
+  "new": "Because the fault has no displacement, so the surfaces and the mask are continuous across its trace."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-labelling-the-grid",
+  "ord": 12,
+  "option": 1,
+  "old": "Because the extrapolation limit of 800 m is wider than the fault's damage zone.",
+  "new": "Because the extrapolation limit of 800 m is wider than the fault's damage zone, so the mask bridges it."
+ }
+]

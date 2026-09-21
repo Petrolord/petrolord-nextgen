@@ -1,0 +1,614 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "The fault physically throws 0.021 of porosity across its plane, measured by the model.",
+  "new": "The fault physically throws 0.021 of porosity across its plane."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "To halve the labelling computation across the model's twenty node rows.",
+  "new": "To halve the labelling cost across the twenty node rows."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "No: the surfaces are continuous.",
+  "new": "No: the surfaces are continuous across the fault, so one contact must span both blocks."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "All three equal.",
+  "new": "All three equal, since each edit changes one input to the same volume product."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "None of the three edits affects the split in any register.",
+  "new": "None of the three edits affects the split in any register, the blocks being fixed at build time."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "It is stored in the committed golden fixture, safe from any regeneration.",
+  "new": "It is stored in the golden fixture, safe from regeneration."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "The ratio factor.",
+  "new": "The ratio factor, which rescaled every deviated well's thickness."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "An obsolete number superseded by the per-block accounting.",
+  "new": "An obsolete number, superseded per block."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "The nugget sweep, which is directly sensitive to the coordinate order.",
+  "new": "The nugget sweep, sensitive to coordinate order."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "Round to three figures.",
+  "new": "Round to three figures, so no reported value overstates its precision."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "W1 only.",
+  "new": "W1 only, whose control point lies on the arm's axis."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "To reduce file size.",
+  "new": "To reduce file size, so the fixture ships inside every course bundle."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-one-model-two-blocks",
+  "ord": 8,
+  "option": 3,
+  "old": "The overlap is split evenly between the two polygons' censuses.",
+  "new": "The overlap is halved between both censuses."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-one-model-two-blocks",
+  "ord": 10,
+  "option": 2,
+  "old": "It is the only row of the frame carrying all 25 of its nodes live.",
+  "new": "It is the only row with all 25 nodes live."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-one-model-two-blocks",
+  "ord": 12,
+  "option": 3,
+  "old": "Block 1's nodes are dead in the framework.",
+  "new": "Block 1's nodes are dead in the framework, so the controls have nothing to act on."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-one-model-two-blocks",
+  "ord": 14,
+  "option": 0,
+  "old": "The kriged porosity at W1.",
+  "new": "The kriged porosity at W1, the at-well value."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-one-model-two-blocks",
+  "ord": 15,
+  "option": 1,
+  "old": "It is the hardest number to compute.",
+  "new": "It is the hardest number to compute, needing the full kriging system."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-census",
+  "ord": 11,
+  "option": 0,
+  "old": "It is publishable, provided error bars accompany the fraction.",
+  "new": "It is publishable, given error bars on the fraction."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-census",
+  "ord": 15,
+  "option": 0,
+  "old": "Compare the two means.",
+  "new": "Compare the two means, since any moved data point shifts its block's mean."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-control-points-cross-the-fault",
+  "ord": 12,
+  "option": 0,
+  "old": "Zone B has more wells.",
+  "new": "Zone B has more wells to average over."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-control-points-cross-the-fault",
+  "ord": 12,
+  "option": 2,
+  "old": "The engine caps weights at 60.",
+  "new": "The engine caps weights at 60 in every block."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-control-points-cross-the-fault",
+  "ord": 13,
+  "option": 1,
+  "old": "Throws a straddling-well error.",
+  "new": "Throws a straddling-well error and halts the block census."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-control-points-cross-the-fault",
+  "ord": 14,
+  "option": 0,
+  "old": "A longer variogram range reaching across the fault.",
+  "new": "A longer variogram range."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-control-points-cross-the-fault",
+  "ord": 14,
+  "option": 2,
+  "old": "A finer model frame with more nodes inside the block.",
+  "new": "A finer frame inside the block."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-trend-plane",
+  "ord": 10,
+  "option": 3,
+  "old": "It returns the weighted constant, 0.2903935560727246.",
+  "new": "The weighted constant, 0.2903935560727246."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-trend-plane",
+  "ord": 11,
+  "option": 1,
+  "old": "The whole model frame, always.",
+  "new": "The whole model frame, always, since the plane is defined everywhere."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-trend-plane",
+  "ord": 12,
+  "option": 1,
+  "old": "Nothing at all: three and four points behave alike in a fit.",
+  "new": "Nothing: three and four points fit alike."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-simple-kriging",
+  "ord": 14,
+  "option": 1,
+  "old": "0.315 convicts range 300.",
+  "new": "0.315 convicts range 300, a variogram too short to reach the other wells."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-simple-kriging",
+  "ord": 15,
+  "option": 0,
+  "old": "Robust to everything.",
+  "new": "Robust to everything, since every sweep leaves the digits unchanged."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-per-block-volume-and-the-workflow",
+  "ord": 13,
+  "option": 1,
+  "old": "38.0 m: the larger block's value.",
+  "new": "38.0 m: the larger block's value, since it holds most nodes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-per-block-volume-and-the-workflow",
+  "ord": 14,
+  "option": 3,
+  "old": "The census.",
+  "new": "The census, which must be entered as a whole cell count."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-depth-down-clamp",
+  "ord": 9,
+  "option": 1,
+  "old": "Pushing the shallower surface up would leave some zone thicknesses negative.",
+  "new": "Pushing the shallower surface up would leave some zone thicknesses negative in the zone above the repair."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-depth-down-clamp",
+  "ord": 9,
+  "option": 3,
+  "old": "Clamping down changes fewer nodes than pushing up would change.",
+  "new": "Clamping down changes fewer nodes than pushing up would change, which keeps the repair as small as possible."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-depth-down-clamp",
+  "ord": 13,
+  "option": 1,
+  "old": "16 percent",
+  "new": "16 percent of the frame"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-depth-down-clamp",
+  "ord": 13,
+  "option": 2,
+  "old": "56 percent",
+  "new": "56 percent of the nodes"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-depth-down-clamp",
+  "ord": 14,
+  "option": 3,
+  "old": "The two surfaces were interpreted on the same seismic reflector across the whole model.",
+  "new": "The two surfaces were interpreted on the same seismic reflector across the whole model, so they share depths."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-depth-down-clamp",
+  "ord": 15,
+  "option": 3,
+  "old": "It is a count of nodes the engine could not compute, so those nodes carry no data.",
+  "new": "It is a count of nodes the engine could not compute, so those nodes carry no data and drop out of the volume."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-bulk-rock-volume",
+  "ord": 13,
+  "option": 0,
+  "old": "Because the fluid parameters further down the chain are usually estimated from the bulk volume itself, which feeds the same error into the chain a second time.",
+  "new": "Because the fluid parameters further down the chain are usually estimated from the bulk volume itself, which feeds the same error into the chain a second time and compounds it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-bulk-rock-volume",
+  "ord": 13,
+  "option": 3,
+  "old": "Because the formation volume factor is applied twice in most volumetric workflows.",
+  "new": "Because the formation volume factor is applied twice in most volumetric workflows, once when converting the bulk volume to pore volume and again when moving to surface conditions."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-bulk-rock-volume",
+  "ord": 15,
+  "option": 2,
+  "old": "Where the clamp has had to fix nodes on the deepest surface of the stack.",
+  "new": "Where the clamp has had to fix nodes on the deepest surface of the stack, altering those nodes' thicknesses."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-earth-modeling-workflow",
+  "ord": 15,
+  "option": 0,
+  "old": "A hydrocarbon volume in place for each of the two zones.",
+  "new": "A hydrocarbon volume in place for each of the two zones, computed from the bulk rock volumes it has just derived."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-earth-modeling-workflow",
+  "ord": 15,
+  "option": 1,
+  "old": "The three source surfaces on their original grids, with a note saying which one is deepest.",
+  "new": "The three source surfaces on their original grids, with a note saying which one is deepest at each node."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-earth-modeling-workflow",
+  "ord": 15,
+  "option": 2,
+  "old": "A single mean thickness for the model, averaged across both zones together.",
+  "new": "A single mean thickness for the model, averaged across both zones together and ready for the volumetric chain."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "The frame's cells are 50 m.",
+  "new": "The frame's cells are 50 m, fine enough to resolve every landing."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "Nothing: azimuth never affects ties, only the map-view plot of the path.",
+  "new": "Nothing: azimuth never affects ties, only the map view."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "The zone A picks are miscorrelated.",
+  "new": "The zone A picks are miscorrelated, sitting on a different horizon at each well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "Nothing: the ledger identity holds only for the zone B pair.",
+  "new": "Nothing: the ledger identity holds only for the zone B pair of surfaces."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "It cannot be judged without first rebuilding the azimuth of the survey.",
+  "new": "It cannot be judged without rebuilding the survey's azimuth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "W2 TopB and the worst residual.",
+  "new": "W2 TopB and the worst residual in the table."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "Deletes the trajectories to save space.",
+  "new": "Deletes the trajectories to save space once the landings are stored."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "Re-clamps the framework one final time for the record.",
+  "new": "Re-clamps the framework one final time so the record shows a legal stack."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-well-is-not-a-vertical-line",
+  "ord": 12,
+  "option": 2,
+  "old": "Because the section is drawn at the wrong y coordinate.",
+  "new": "Because the section is drawn at the wrong y coordinate for that well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-well-is-not-a-vertical-line",
+  "ord": 15,
+  "option": 0,
+  "old": "Plus 47 m, obtained by forgetting to subtract the kelly bushing height.",
+  "new": "Plus 47 m, from forgetting the kelly bushing height."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-well-is-not-a-vertical-line",
+  "ord": 15,
+  "option": 2,
+  "old": "Minus 7 m: the well found the formation shallower than the surface.",
+  "new": "Minus 7 m: the formation came in shallower than mapped."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-minimum-curvature",
+  "ord": 13,
+  "option": 0,
+  "old": "x 1794.719681048036, adding the full 300 m of measured hold length as easting.",
+  "new": "x 1794.719681048036, adding the 300 m hold length as easting."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-minimum-curvature",
+  "ord": 13,
+  "option": 3,
+  "old": "x 1683.753937146834, adding a second build increment's worth of easting.",
+  "new": "x 1683.753937146834, adding a second build increment of easting."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-landing-the-tops",
+  "ord": 14,
+  "option": 1,
+  "old": "Only the residual changes; the surface read is fixed once per top when the table is built.",
+  "new": "Only the residual changes; the surface read is fixed once per top."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-landing-the-tops",
+  "ord": 15,
+  "option": 0,
+  "old": "The midpoint of the two segments adjacent to that survey station.",
+  "new": "The midpoint of the two segments adjacent to that survey station, averaged along the arc."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-tie-table",
+  "ord": 12,
+  "option": 0,
+  "old": "Spline overshoot in the surfaces near that particular wellhead.",
+  "new": "Spline overshoot in the surfaces near that particular wellhead, bending every top."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-tie-table",
+  "ord": 12,
+  "option": 2,
+  "old": "A pinched zone at that well.",
+  "new": "A pinched zone at that well, which collapses two surfaces onto one depth there."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-tie-table",
+  "ord": 13,
+  "option": 1,
+  "old": "Yes: each residual is one standard deviation of the surface's local uncertainty.",
+  "new": "Yes: each residual is one standard deviation of local uncertainty."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-the-cost-of-assuming-vertical",
+  "ord": 12,
+  "option": 1,
+  "old": "Underweights it, because the sideways part of the hole is discarded from the interval.",
+  "new": "Underweights it, since the hole's sideways part is discarded."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-the-cost-of-assuming-vertical",
+  "ord": 15,
+  "option": 0,
+  "old": "Neither is checkable without redrilling the well and relogging the zone.",
+  "new": "Neither is checkable without redrilling and relogging the well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-well-tie-workflow",
+  "ord": 11,
+  "option": 2,
+  "old": "Because the workflow takes days to run.",
+  "new": "Because the workflow takes days to run, far longer than a patch."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-well-tie-workflow",
+  "ord": 12,
+  "option": 1,
+  "old": "A surface re-grid, which moves every value the ties compare against.",
+  "new": "A surface re-grid, moving every tie's reference."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-well-tie-workflow",
+  "ord": 12,
+  "option": 2,
+  "old": "A change of the capstone's grading tolerance on the affected field.",
+  "new": "A change of the capstone's grading tolerance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-well-tie-workflow",
+  "ord": 14,
+  "option": 3,
+  "old": "In the capstone, by widening tolerances.",
+  "new": "In the capstone, by widening tolerances until the eastern ties pass."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-well-tie-workflow",
+  "ord": 15,
+  "option": 2,
+  "old": "They are immune to pick errors, which only deviated holes can suffer.",
+  "new": "They alone are immune to pick errors."
+ }
+]

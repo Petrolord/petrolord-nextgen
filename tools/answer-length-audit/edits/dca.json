@@ -1,0 +1,308 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 2,
+  "old": "R2 is undefined for exponential fits and RMSE should be quoted instead",
+  "new": "R2 is undefined for exponential fits because the model is nonlinear in its parameters, so RMSE should be quoted instead"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "Because the engine's forecast routine cannot produce cumulatives at arbitrary survey dates",
+  "new": "Because the engine's forecast routine cannot produce cumulatives at arbitrary survey dates, only at its fixed monthly steps"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-b-lever",
+  "ord": 14,
+  "option": 0,
+  "old": "To 226180.603901891 stb, a cut of about 30 percent that brings the booking within 10 percent of exponential",
+  "new": "To 226180.603901891 stb, a cut of about 30 percent that brings the booking within 10 percent of the exponential result"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-b-lever",
+  "ord": 14,
+  "option": 3,
+  "old": "To 243306.489069931 stb, a cut of about 2 percent, since a 5 percent floor bites hardest at high exponents",
+  "new": "To 243306.489069931 stb, a cut of about 2 percent, since a 5 percent floor bites hardest at the high exponents that flatten the tail"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-b-lever",
+  "ord": 15,
+  "option": 0,
+  "old": "A minDecline constraint on fitArpsModel, which caps the tail whenever the fitted b exceeds 1",
+  "new": "A minDecline constraint on fitArpsModel, which caps the tail whenever the fitted b exceeds 1 and hands over to an exponential"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-b-lever",
+  "ord": 15,
+  "option": 2,
+  "old": "A two-segment mode in calculateEUR, entered by passing the model type as hyperbolic-to-exponential",
+  "new": "A two-segment mode in calculateEUR, entered by passing the model type as hyperbolic-to-exponential along with a Dmin rate"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-confidence-and-scatter",
+  "ord": 13,
+  "option": 0,
+  "old": "Its upper end exceeds the planted decline of 0.0012 per day, which ought to have triggered an internal truth check",
+  "new": "Its upper end exceeds the planted decline of 0.0012 per day, failing a truth check"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-confidence-and-scatter",
+  "ord": 13,
+  "option": 3,
+  "old": "It was published because b reached the 1.95 ceiling, which disables the reasonableness test",
+  "new": "It passed because b hit the 1.95 ceiling, disabling the reasonableness test"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-confidence-and-scatter",
+  "ord": 15,
+  "option": 0,
+  "old": "The published table is rounded to six decimals, which inflates the residual scatter of the fit",
+  "new": "The table's rounding to six decimals inflates the residual scatter of the fit"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-declines-after-the-flood",
+  "ord": 12,
+  "option": 0,
+  "old": "It is reliable here, because only six of the twenty rows carry water and that is below half the window",
+  "new": "It is reliable, since only six of the twenty rows carry water"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-declines-after-the-flood",
+  "ord": 12,
+  "option": 2,
+  "old": "It is computed from RMSE rather than R2, so it is not comparable across wells with different rate magnitudes",
+  "new": "It is computed from RMSE rather than R2, so it cannot be compared across wells"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-declines-after-the-flood",
+  "ord": 13,
+  "option": 0,
+  "old": "The fitted qi, Di and b of each producer, from which material balance regenerates the rates it needs",
+  "new": "The fitted qi, Di and b of each producer, to regenerate rates"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-declines-after-the-flood",
+  "ord": 13,
+  "option": 3,
+  "old": "The type curve and its normalisation constants, so the pressure history can be matched well by well",
+  "new": "The type curve and its normalisation constants, well by well"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-declines-after-the-flood",
+  "ord": 14,
+  "option": 2,
+  "old": "261475.039999678 stb, the cumulative production at that survey",
+  "new": "261475.039999678 stb, the cumulative oil production at that survey, since F already counts every withdrawn barrel"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-declines-after-the-flood",
+  "ord": 15,
+  "option": 2,
+  "old": "The margin is irrelevant, since floods start on a fixed calendar schedule",
+  "new": "The margin is irrelevant, since floods start on a fixed calendar schedule set in the field development plan before first oil"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-booking",
+  "ord": 15,
+  "option": 1,
+  "old": "The economic limit, the decline exponent and the forecast convention",
+  "new": "The economic limit, the b exponent and the forecast rule"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-booking",
+  "ord": 15,
+  "option": 3,
+  "old": "The net-to-gross, the connate water saturation and the oil formation volume factor used in the volumetric calculation",
+  "new": "The net-to-gross, the water saturation and the oil FVF"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-declines-and-the-field",
+  "ord": 13,
+  "option": 2,
+  "old": "24 rows, because the first four months of ramp-up are dropped",
+  "new": "24 rows, because the first four months of ramp-up are dropped from every well's primary window"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-three-models",
+  "ord": 15,
+  "option": 1,
+  "old": "The rate has begun to rise again, so support has arrived from outside the well",
+  "new": "The rate is rising again, so outside support has arrived"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "It is the field's reserves, being the sum of four independently fitted and booked wells at a stated limit",
+  "new": "It is the field's reserves, the sum of four independently booked wells"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "It applies a field abandonment rate rather than a per-well limit, which is why the four EURs can be summed",
+  "new": "It uses a field abandonment rate, which is why the EURs can be summed"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "0.2 percent, so only a value carried to five decimal places has any chance of passing the field",
+  "new": "0.2 percent, so only a value carried to five decimals can pass"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "2 percent, which is wide enough to admit any fit whose R2 clears the Excellent band on its window",
+  "new": "2 percent, wide enough to admit any fit in the Excellent band"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "Because forecast length must be a multiple of it",
+  "new": "Because forecast length must be a whole multiple of the window span"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "It passes, and the distinction does not matter",
+  "new": "It passes, and the distinction does not matter once the value sits inside the tolerance"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "Because reserves auditors require every booking to cite a published analogue from the literature",
+  "new": "Because reserves auditors require each booking to cite a published analogue"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-portfolio-rollups",
+  "ord": 12,
+  "option": 0,
+  "old": "Three of the four producers were not yet on stream that month, so their January volumes are absent from the bin",
+  "new": "Three of the four producers were not yet on stream that month"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-portfolio-rollups",
+  "ord": 12,
+  "option": 1,
+  "old": "The daily sum understates the exact integral by 0.0682290617407998 percent, which accounts for the whole difference",
+  "new": "The daily sum falls 0.0682290617407998 percent short of the integral"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-portfolio-rollups",
+  "ord": 14,
+  "option": 0,
+  "old": "That the combined series still runs to 2036-11, which proves Ekene-5's forecast is still being binned into the months",
+  "new": "That the series still runs to 2036-11, so Ekene-5 is binned"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-portfolio-rollups",
+  "ord": 14,
+  "option": 1,
+  "old": "That the total is 66.7456509578234 percent of the four-well total",
+  "new": "That it is 66.7456509578234 percent of the four-well total"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-booking",
+  "ord": 12,
+  "option": 0,
+  "old": "That the full-history window is admissible after all, provided its R2 of 0.818388421218434 is quoted with the parameters",
+  "new": "That the full-history window is admissible if its R2 is quoted"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-booking",
+  "ord": 12,
+  "option": 1,
+  "old": "That R2 drops below 0.90 whenever a window spans two regimes, which is the operational test for an invalid window",
+  "new": "That R2 drops below 0.90 whenever a window spans two regimes"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-booking",
+  "ord": 13,
+  "option": 1,
+  "old": "The physical basis, which names the event fixing each boundary",
+  "new": "The physical basis, which names the event fixing each window boundary"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-booking",
+  "ord": 15,
+  "option": 2,
+  "old": "Because the window still contains the tail of the injection ramp, which biases the fitted Di upward",
+  "new": "Because the injection ramp's tail is still in the window, biasing Di up"
+ }
+]

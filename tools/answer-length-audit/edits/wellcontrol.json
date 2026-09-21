@@ -1,0 +1,2126 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 1,
+  "old": "Volume stays constant as it rises.",
+  "new": "Volume stays constant as it rises, since the mud around the bubble keeps it confined."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "Expansion of gas during a circulation.",
+  "new": "Expansion of gas during a circulation, driven up the annulus by the pumps."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 0,
+  "old": "Lowers the casing pressure only.",
+  "new": "Lowers the casing pressure only, because the rising gas lightens the column beneath the choke."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "It dissolves into the mud, which raises the column density and disguises the true size of the influx.",
+  "new": "It dissolves into the mud, raising the column density and disguising the influx size."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 0,
+  "old": "It travels faster than a liquid would.",
+  "new": "It travels faster than a liquid would, so the gas outruns the pump schedule."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 1,
+  "old": "That the influx is entirely gas.",
+  "new": "That the influx is entirely gas, so no liquid fraction enters the calculation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 1,
+  "old": "Not at all, since the total pressure deficit depends on the volume rather than on how it is distributed.",
+  "new": "Not at all, since the deficit depends only on the volume."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "Unpredictably, because the direction depends on how much of the influx has already mixed with the mud.",
+  "new": "Unpredictably, depending on how much of it has mixed in."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "Any influx taken while tripping, because the string is off bottom and the annulus geometry has changed.",
+  "new": "Any influx taken while tripping, with the string off bottom and the geometry changed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "It understates the expansion.",
+  "new": "It understates the expansion, because heating of the gas on the way up is ignored."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "It has no effect at well control pressures, which lie comfortably within the ideal gas range for hydrocarbons.",
+  "new": "No effect, since well control pressures sit in the ideal gas range."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "It makes the answer depend on the gas composition, which is not known at the time of the calculation.",
+  "new": "It makes the answer hinge on a gas composition nobody knows yet."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "Compound into a large error.",
+  "new": "Compound into a large error, since both push the expansion the same way."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 1,
+  "old": "The depth where the pore pressure gradient equals the fracture gradient and no mud weight is safe at all.",
+  "new": "The depth where pore pressure meets the fracture gradient and no mud weight is safe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "The point at which the hole size reduces, fixed by the casing programme agreed before the well was spudded.",
+  "new": "The point where the hole size reduces, fixed by the casing plan agreed before spud."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 2,
+  "old": "Compare the tolerance against the pit alarm setting and case off wherever the two values become equal.",
+  "new": "Compare the tolerance against the pit alarm setting and case off where the two become equal."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 0,
+  "old": "The calculation has not converged.",
+  "new": "The calculation has not converged, and a smaller step size would recover a usable figure."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "When the mud balances the pore pressure.",
+  "new": "When the mud balances the pore pressure, leaving no underbalance to drive an influx."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "Because the engine switches to the other case whenever the first would return a value below zero.",
+  "new": "Because the engine switches to the other case whenever the first goes negative."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "The mud weight against the prognosis.",
+  "new": "The mud weight against the prognosis, checked whenever the pore pressure estimate is revised."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "On the seabed, as on a floater.",
+  "new": "On the seabed, as on a floater, at the foot of a marine riser."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "Has no effect on the reading.",
+  "new": "Has no effect on the reading, because the line holds the same mud as the annulus."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "All of them, to numerical precision.",
+  "new": "All of them, to numerical precision, since every input is measured directly on the rig."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "The annulus friction is already inside the slow circulating rate pressure, which covers the whole system.",
+  "new": "Already included in the slow circulating rate pressure for the system."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "The operator measures it directly from the difference between the two gauges as the circulation proceeds.",
+  "new": "The operator measures it from the difference between the two gauges."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "Neither, because the friction appears on both sides of the comparison and cancels out of it entirely.",
+  "new": "Neither, because the friction cancels out of both sides."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "It depends on the rate, being conservative at low rates and unsafe at the rates used while drilling ahead.",
+  "new": "It depends on the rate: safe when slow, unsafe at drilling rates."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "It is not tolerated in modern practice.",
+  "new": "It is not tolerated in modern practice, where software adds an annulus friction estimate."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "Temperature, which the true hydrostatic pressure of a deep oil-based mud column would require.",
+  "new": "Temperature, which a deep oil-based mud column would need."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "Volume, since the calculations work in strokes and reach volume only through the pump output per stroke.",
+  "new": "Volume, since the calculations work in strokes instead."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-maasp",
+  "ord": 8,
+  "option": 0,
+  "old": "As the target casing pressure.",
+  "new": "As the target casing pressure, which the choke operator holds steady from the start of the kill to the end."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-maasp",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the mud weight is never known to better than a few kilograms per cubic metre in the active system.",
+  "new": "Because the mud weight is never known to better than a few kilograms per cubic metre in the system."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-maasp",
+  "ord": 10,
+  "option": 3,
+  "old": "The influx has reached the shoe and is passing into the cased section of the hole above it.",
+  "new": "The influx has reached the shoe and is passing into the cased hole."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-maasp",
+  "ord": 11,
+  "option": 0,
+  "old": "Changing the pump rate during a kill.",
+  "new": "Changing the pump rate during a kill, since the circulating friction is part of the value."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-maasp",
+  "ord": 12,
+  "option": 2,
+  "old": "Because the mud weight determines which of the two casing shoes in a well is the binding constraint at that time.",
+  "new": "Because the mud weight decides which casing shoe is the binding constraint."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-maasp",
+  "ord": 12,
+  "option": 3,
+  "old": "Because the fracture gradient at the shoe is expressed as an equivalent mud weight and the two must be consistent.",
+  "new": "Because the shoe fracture gradient is itself quoted as a mud weight."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-maasp",
+  "ord": 13,
+  "option": 0,
+  "old": "They are the same quantity.",
+  "new": "They are the same quantity, one quoted as a pressure and the other as a mud weight."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-maasp",
+  "ord": 14,
+  "option": 0,
+  "old": "The pore pressure and the mud weight.",
+  "new": "The pore pressure and the mud weight, since the difference between them fixes the margin."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-maasp",
+  "ord": 15,
+  "option": 1,
+  "old": "That the mud weight in use is below the pore pressure gradient and the well is at risk of taking a kick.",
+  "new": "That the mud weight is below the pore pressure and a kick is likely."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-maasp",
+  "ord": 15,
+  "option": 3,
+  "old": "That the leak-off test was terminated early and should be repeated before the section is drilled any deeper.",
+  "new": "That the leak-off test stopped early and must be repeated."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-kick-tolerance",
+  "ord": 7,
+  "option": 3,
+  "old": "It depends on the mud weight, with the circulated case binding below the pore pressure gradient.",
+  "new": "It depends on the mud weight, as the circulated case binds when it is low."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-kick-tolerance",
+  "ord": 10,
+  "option": 0,
+  "old": "The difference between the two gauges.",
+  "new": "The difference between the two gauges, read once the shut-in pressures have stabilised after the kick."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-kick-tolerance",
+  "ord": 11,
+  "option": 0,
+  "old": "The rate at which the influx enters.",
+  "new": "The rate at which the influx enters, which the flow check measures from the returns before shut-in."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-kick-tolerance",
+  "ord": 12,
+  "option": 3,
+  "old": "Only in the circulated case, where the intensity determines how much the influx expands as it rises.",
+  "new": "Only in the circulated case, where it governs the expansion."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-kick-tolerance",
+  "ord": 13,
+  "option": 1,
+  "old": "The density computed from the gauges.",
+  "new": "The density computed from the gauges, using the gap between casing and drill pipe pressures over the influx height."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-kick-tolerance",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the engine reduces the influx density when the pit gain is small relative to the annulus volume.",
+  "new": "Because the engine lowers the influx density whenever the pit gain is small."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-kick-tolerance",
+  "ord": 15,
+  "option": 1,
+  "old": "The kick tolerance calculation used the wrong annulus capacity and should be repeated with the collar value.",
+  "new": "The calculation used the wrong annulus capacity and must be repeated."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-kick-tolerance",
+  "ord": 15,
+  "option": 3,
+  "old": "The well cannot be drilled any deeper without setting casing, regardless of what the pore pressure prognosis shows.",
+  "new": "The well cannot go deeper without casing, whatever the prognosis shows."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-bubble",
+  "ord": 4,
+  "option": 0,
+  "old": "Lowers the casing pressure only.",
+  "new": "Lowers the casing pressure only, as the gas moves away from the bottom of the annulus."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-bubble",
+  "ord": 6,
+  "option": 0,
+  "old": "It flows faster than liquid does.",
+  "new": "It flows faster than liquid does, so it reaches the choke before the operator is ready."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-bubble",
+  "ord": 10,
+  "option": 3,
+  "old": "It makes the calculation indeterminate, since the gas law needs a temperature and none is supplied.",
+  "new": "It makes the calculation indeterminate, since the gas law needs a temperature."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-bubble",
+  "ord": 11,
+  "option": 1,
+  "old": "It has no effect at the pressures encountered in well control, which are well within the ideal gas range.",
+  "new": "It has no effect at well control pressures, which lie well within the ideal gas range."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-bubble",
+  "ord": 11,
+  "option": 3,
+  "old": "It makes the result depend on the gas composition, which is not known at the time of the calculation.",
+  "new": "It makes the result depend on the gas composition, which is not known at the time."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-bubble",
+  "ord": 14,
+  "option": 3,
+  "old": "The kill mud weight requirement increases in proportion to the distance the gas has travelled upward.",
+  "new": "The kill mud weight requirement rises in proportion to the distance the gas has risen."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-bubble",
+  "ord": 15,
+  "option": 0,
+  "old": "It computes it stroke by stroke.",
+  "new": "It computes it stroke by stroke, alongside the drill pipe schedule on the kill sheet."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-with-it",
+  "ord": 1,
+  "option": 2,
+  "old": "The depth at which the pore pressure gradient equals the fracture gradient, so no mud weight can be used safely.",
+  "new": "The depth at which pore pressure equals fracture gradient, so no mud weight is safe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-with-it",
+  "ord": 1,
+  "option": 3,
+  "old": "The point at which the hole size is reduced, which is set by the casing programme agreed before the well was spudded.",
+  "new": "The point where hole size is reduced, set by the casing programme agreed before spud."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-with-it",
+  "ord": 3,
+  "option": 0,
+  "old": "The largest kick ever recorded in the field.",
+  "new": "The largest kick ever recorded in the field, used as the worst case to plan against."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-with-it",
+  "ord": 4,
+  "option": 0,
+  "old": "A flat line until the fracture gradient.",
+  "new": "A flat line until the fracture gradient, where it then drops straight to zero."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-with-it",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the engine switches to the other case whenever the first one would give a value below zero.",
+  "new": "Because the engine switches to the other case whenever the first would go below zero."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-with-it",
+  "ord": 11,
+  "option": 1,
+  "old": "Comparing the mud weight against the prognosis.",
+  "new": "Comparing the mud weight against the prognosis, to confirm the well is still overbalanced."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-with-it",
+  "ord": 13,
+  "option": 0,
+  "old": "The MAASP for each section.",
+  "new": "The MAASP for each section, which falls every time the mud weight is raised."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-with-it",
+  "ord": 14,
+  "option": 0,
+  "old": "The burst and collapse loads.",
+  "new": "The burst and collapse loads, taken from the kill pressures at each shoe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 1,
+  "option": 0,
+  "old": "That it sits on the seabed.",
+  "new": "That it sits on the seabed, with the choke line friction measured and removed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 2,
+  "option": 2,
+  "old": "It reduces the reading in proportion to the length of the choke line and the density of the mud within it.",
+  "new": "It reduces the reading in proportion to the choke line length and the density of mud within it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 2,
+  "option": 3,
+  "old": "It affects only the drill pipe side, because the choke line is in series with the string during a circulation.",
+  "new": "It affects only the drill pipe side, since the choke line is in series with the string."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 5,
+  "option": 0,
+  "old": "All of them, within numerical precision.",
+  "new": "All of them, within numerical precision, since every one of them is a closed form."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 8,
+  "option": 0,
+  "old": "Conservative, by a small margin.",
+  "new": "Conservative, by a small margin, because the static column already overstates the pressure at the shoe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 10,
+  "option": 0,
+  "old": "When the influx is liquid rather than gas.",
+  "new": "When the influx is liquid rather than gas, because liquid moves up the annulus with more drag."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 11,
+  "option": 0,
+  "old": "Depth below the casing shoe.",
+  "new": "Depth below the casing shoe, since every result is referenced to the shoe alone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 15,
+  "option": 2,
+  "old": "The full kill operation including the casing pressure history and the behaviour of the influx as it rises.",
+  "new": "The full kill operation, including the casing pressure history and the influx as it rises."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 15,
+  "option": 3,
+  "old": "The volume and stroke calculations only, with the pressure work taught but explicitly left uncertified.",
+  "new": "The volume and stroke calculations only, with the pressure work taught but left uncertified."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 2,
+  "option": 0,
+  "old": "The slant well only.",
+  "new": "The slant well only, since all six of its fields come from the same tolerance sweep."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 3,
+  "option": 0,
+  "old": "The same one the lessons use throughout.",
+  "new": "The same one the lessons use throughout, so the method carries across without change."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 5,
+  "option": 1,
+  "old": "The tolerance, by a small margin.",
+  "new": "The tolerance, by a small margin, because it is the larger of the two cases on that well."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "That it is a casing burst limit.",
+  "new": "That it is a casing burst limit, set by the weakest joint in the string."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 9,
+  "option": 3,
+  "old": "That the two cases give identical answers whenever the influx density is taken as the engine's default.",
+  "new": "That the two cases agree whenever the influx density is taken as the engine's default."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "Classify the influx, compute its height and compare the pit gain against the tolerance before circulating.",
+  "new": "Classify the influx, compute its height and compare the pit gain against the tolerance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "The mud rheology and the annulus friction.",
+  "new": "The mud rheology and the annulus friction, both supplied by the geomechanics study."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 1,
+  "option": 3,
+  "old": "Both, because the mud column also supplies the pressure that closes the annular preventer against the pipe.",
+  "new": "Both, since mud pressure also closes the annular preventer around the pipe."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 2,
+  "option": 2,
+  "old": "The equivalent circulating density has dropped below the static mud weight because the pumps have been stopped.",
+  "new": "The circulating density has fallen below the static weight because the pumps were stopped."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 2,
+  "option": 3,
+  "old": "The pressure at the casing shoe has fallen below the pressure at the bit, which drives flow up the annulus.",
+  "new": "The shoe pressure has fallen below the bit pressure, which drives flow up the annulus."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 4,
+  "option": 0,
+  "old": "A gain in the active pit volume.",
+  "new": "A gain in the active pit volume, as the influx displaces mud into the tanks."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 6,
+  "option": 2,
+  "old": "Because the blowout preventer's elastomers degrade rapidly if they are closed against a flowing well for long.",
+  "new": "Because the preventer's elastomers degrade rapidly if closed against a flowing well for long."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 6,
+  "option": 3,
+  "old": "Because the mud pumps cannot be stopped safely once the annulus pressure has risen above the relief valve setting.",
+  "new": "Because the pumps cannot be stopped safely once annulus pressure passes the relief setting."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 8,
+  "option": 0,
+  "old": "Multiply by the depth and by gravity.",
+  "new": "Multiply by the depth and by gravity, which turns the gauge reading into a column."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 9,
+  "option": 2,
+  "old": "Because the choke is partly closed, and the restriction it creates shows up directly as an elevated surface reading.",
+  "new": "Because the choke is partly closed, and its restriction shows as an elevated surface reading."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 9,
+  "option": 3,
+  "old": "Because the annulus contains cuttings as well as mud, and the suspended solids raise the effective column density.",
+  "new": "Because the annulus holds cuttings as well as mud, and the solids raise the column density."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 10,
+  "option": 0,
+  "old": "A pump running at low rate.",
+  "new": "A pump running at low rate, since the friction it adds hides the static deficit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 12,
+  "option": 0,
+  "old": "True vertical depth in all cases.",
+  "new": "True vertical depth in all cases, because every depth in well control is measured vertically."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 13,
+  "option": 0,
+  "old": "Measured depth along the hole.",
+  "new": "Measured depth along the hole, since the mud column follows the full length of the wellbore."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 14,
+  "option": 2,
+  "old": "The pressure the pump develops at the standpipe when it is run at the slow circulating rate used for a kill.",
+  "new": "The pressure the pump develops at the standpipe at the slow circulating rate for a kill."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 14,
+  "option": 3,
+  "old": "The theoretical liner displacement, before any correction for valve leakage or for compressibility of the mud.",
+  "new": "The theoretical liner displacement, before any allowance for leakage or compressibility."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 3,
+  "old": "In the horizontal lateral, because the pipe lies against the low side and blocks part of the available area.",
+  "new": "In the lateral, where the pipe lies low and blocks part of the flow area."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "The ratio of the formation pressure to the fracture pressure, multiplied by the density already in the hole.",
+  "new": "The ratio of formation to fracture pressure, multiplied by the density in the hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 0,
+  "old": "It buys rate of penetration and costs barite.",
+  "new": "It buys rate of penetration and costs barite, because the heavier mud has to be mixed and kept in the pits."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "Nothing, because the well is closed in.",
+  "new": "Nothing, because the well is closed in and every fluid in it is held where it sits."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "One, the same as Wait and Weight.",
+  "new": "One, the same as Wait and Weight, since the influx and the old mud leave together."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "At the bit, since the heavier mud in the string reduces the pressure required to hold the formation back at depth.",
+  "new": "At the bit, since heavier mud in the string cuts the pressure needed to hold the formation."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "At the pump, because a single circulation means the pump runs for less total time at the kill rate.",
+  "new": "At the pump, because one circulation means the pump runs for less time at the kill rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "The pump, held at a fixed rate.",
+  "new": "The pump, held at a fixed rate so that the pressure it delivers to the bottom never varies."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "By interpolating between the initial and final circulating pressures that the kill sheet calculation produces.",
+  "new": "By interpolating between the initial and final circulating pressures on the kill sheet."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "A constant reading on the casing gauge.",
+  "new": "A constant reading on the casing gauge, from the first stroke to the last."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "Whichever of the two the learner selects in the panel before beginning the capstone attempt for the tier.",
+  "new": "Whichever of the two the learner selects in the panel before the capstone."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "Kill mud weight and formation pressure.",
+  "new": "Kill mud weight and formation pressure, both taken from the shut-in readings."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "Because they are the only two quantities in the tier that cannot be checked against the published golden files.",
+  "new": "Because they are the only two values that cannot be checked against the goldens."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "Build the kill mud, circulate it round at the measured slow rate, and confirm the well is static before opening up.",
+  "new": "Build kill mud, circulate it round at the slow rate, and confirm the well is static."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "Read both gauges, record the pit gain, and pass the three numbers to whoever is completing the kill sheet.",
+  "new": "Read both gauges, record the pit gain, and pass the numbers to whoever does the kill sheet."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-kick-is",
+  "ord": 4,
+  "option": 0,
+  "old": "A rise in the drill pipe pressure.",
+  "new": "A rise in the drill pipe pressure, since an influx at the bit pushes back against the pumps."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-kick-is",
+  "ord": 8,
+  "option": 0,
+  "old": "Initial and final circulating pressure.",
+  "new": "Initial and final circulating pressure, read on the drill pipe gauge once the kill begins."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-kick-is",
+  "ord": 9,
+  "option": 0,
+  "old": "Because the gauges have a slow response.",
+  "new": "Because the gauges have a slow mechanical response and need several minutes to settle on the true value."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-kick-is",
+  "ord": 10,
+  "option": 0,
+  "old": "A rise in the trip tank temperature.",
+  "new": "A rise in the trip tank temperature, because formation fluid arriving from depth is warmer than the mud."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-kick-is",
+  "ord": 12,
+  "option": 0,
+  "old": "It is a subsea stack on a floating rig.",
+  "new": "It is a subsea stack on a floating rig, with the choke line running up the riser."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-kick-is",
+  "ord": 14,
+  "option": 2,
+  "old": "Because it must be reported exactly, and an error in it invalidates the entire well control incident record.",
+  "new": "Because it must be reported exactly, and an error invalidates the whole well control incident record."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-kick-is",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the pit gain has to be replaced from the reserve pits before circulation can begin at the kill rate.",
+  "new": "Because the pit gain must be replaced from the reserve pits before circulating at the kill rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-kick-is",
+  "ord": 15,
+  "option": 1,
+  "old": "A blowout involves gas and a kick involves liquid, which is why gas kicks are treated with far greater urgency.",
+  "new": "A blowout involves gas and a kick involves liquid, so gas kicks are treated with far greater urgency."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-kick-is",
+  "ord": 15,
+  "option": 2,
+  "old": "A kick occurs while drilling and a blowout occurs while tripping, because the string is not on bottom to circulate.",
+  "new": "A kick occurs while drilling and a blowout while tripping, because the string is off bottom then."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-volumes-and-strokes",
+  "ord": 1,
+  "option": 0,
+  "old": "A survey of the wellbore trajectory.",
+  "new": "A survey of the wellbore trajectory, taken station by station to fix the inclination and azimuth at each depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-volumes-and-strokes",
+  "ord": 5,
+  "option": 2,
+  "old": "Because the regulator requires kill sheets to be expressed in stroke counts for consistency between operators.",
+  "new": "Because the regulator requires kill sheets in stroke counts for consistency between operators."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-volumes-and-strokes",
+  "ord": 5,
+  "option": 3,
+  "old": "Because the choke operator cannot read a clock and a pressure gauge at the same time during a kill operation.",
+  "new": "Because the choke operator cannot read a clock and a pressure gauge at the same time during a kill."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-volumes-and-strokes",
+  "ord": 7,
+  "option": 0,
+  "old": "The strokes to displace the whole hole once.",
+  "new": "The strokes to displace the whole hole once, counting the string and the annulus together as one volume."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-volumes-and-strokes",
+  "ord": 8,
+  "option": 0,
+  "old": "Twice the annulus volume in strokes.",
+  "new": "Twice the annulus volume in strokes, since the mud must travel down the annulus and back up it again."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-volumes-and-strokes",
+  "ord": 10,
+  "option": 0,
+  "old": "True vertical depth for the same reason as pressure.",
+  "new": "True vertical depth, for the same reason as pressure, since the column height is what matters."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-volumes-and-strokes",
+  "ord": 12,
+  "option": 0,
+  "old": "It makes the influx shorter and wider.",
+  "new": "It makes the influx shorter and wider, because the fluid spreads sideways when the space around the pipe narrows."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-volumes-and-strokes",
+  "ord": 13,
+  "option": 2,
+  "old": "At the flow line, where the returns pass through the smallest cross section anywhere in the circulating system.",
+  "new": "At the flow line, where returns pass the smallest cross section in the circulating system."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-volumes-and-strokes",
+  "ord": 15,
+  "option": 3,
+  "old": "Because the mud weight is always raised at a casing point, and the volumes depend on the density of the fluid.",
+  "new": "Because the mud weight is always raised at a casing point, and volumes depend on the mud density."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-shut-in-pressures",
+  "ord": 2,
+  "option": 1,
+  "old": "The pressure that the blowout preventer is holding, measured on the string side rather than on the annulus side.",
+  "new": "The pressure the blowout preventer is holding, measured on the string side of the stack."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-shut-in-pressures",
+  "ord": 2,
+  "option": 2,
+  "old": "The frictional pressure loss through the bit nozzles at the moment the pump was stopped and the well was closed.",
+  "new": "The frictional pressure loss through the bit nozzles at the moment the pump was stopped."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-shut-in-pressures",
+  "ord": 5,
+  "option": 0,
+  "old": "The size of the influx in cubic metres.",
+  "new": "The size of the influx in cubic metres, since each unit of volume adds a fixed amount of pressure difference."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-shut-in-pressures",
+  "ord": 7,
+  "option": 1,
+  "old": "It amplifies the reading in proportion to the ratio of the string bore to the nozzle area at the bit.",
+  "new": "It amplifies the reading in proportion to the ratio of the string bore to the nozzle area."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-shut-in-pressures",
+  "ord": 9,
+  "option": 0,
+  "old": "Because the casing gauge is less accurate.",
+  "new": "Because the casing gauge is less accurate, being mounted on the choke manifold where vibration and flow disturb it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-shut-in-pressures",
+  "ord": 11,
+  "option": 0,
+  "old": "The choke is leaking.",
+  "new": "The choke is leaking, so pressure from the manifold side is feeding back into the annulus."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-shut-in-pressures",
+  "ord": 12,
+  "option": 0,
+  "old": "Because the regulator requires both to be logged.",
+  "new": "Because the regulator requires both to be logged, and an incident record missing either one is incomplete."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-shut-in-pressures",
+  "ord": 13,
+  "option": 0,
+  "old": "The slow circulating rate pressure.",
+  "new": "The slow circulating rate pressure, recorded by bringing the pump up to the kill rate once the well is closed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-shut-in-pressures",
+  "ord": 14,
+  "option": 3,
+  "old": "Because a deeper well has more annulus friction, which adds to the reading even after the pump has been stopped.",
+  "new": "Because a deeper well has more annulus friction, which still adds to the reading at rest."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-kill-mud",
+  "ord": 2,
+  "option": 2,
+  "old": "Divide the formation pressure by the fracture pressure and multiply the result by the density currently in the hole.",
+  "new": "Divide the formation pressure by the fracture pressure and multiply by the density in the hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-kill-mud",
+  "ord": 2,
+  "option": 3,
+  "old": "Take the difference between the two shut-in readings and convert it to a density at the true vertical depth of the shoe.",
+  "new": "Convert the difference between the shut-in readings to a density at the vertical depth of the shoe."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-kill-mud",
+  "ord": 5,
+  "option": 2,
+  "old": "Nothing measurable, since the extra weight is small compared with the total column and does not affect the shoe.",
+  "new": "Nothing measurable, since the extra weight is small against the column and does not reach the shoe."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-kill-mud",
+  "ord": 5,
+  "option": 3,
+  "old": "The ability to read the shut-in drill pipe pressure accurately, because the string column is no longer clean.",
+  "new": "The ability to read the shut-in drill pipe pressure, since the string column is then contaminated."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-kill-mud",
+  "ord": 6,
+  "option": 0,
+  "old": "The kill sheet takes a long time to complete.",
+  "new": "The kill sheet takes a long time to complete, because every stroke count has to be worked out by hand."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-kill-mud",
+  "ord": 10,
+  "option": 0,
+  "old": "Circulating more than one full cycle.",
+  "new": "Circulating more than one full cycle, which keeps pushing mud past the shoe after the influx is already out."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-kill-mud",
+  "ord": 12,
+  "option": 0,
+  "old": "It lowers it by removing the influx.",
+  "new": "It lowers it by removing the influx, which was the fluid pushing the shoe pressure up while it stayed in the annulus."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-kill-mud",
+  "ord": 14,
+  "option": 0,
+  "old": "The influx was liquid rather than gas.",
+  "new": "The influx was liquid rather than gas, so it carried no expansion and needs less weight to control."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-kill-mud",
+  "ord": 15,
+  "option": 0,
+  "old": "Closing the blowout preventer.",
+  "new": "Closing the blowout preventer, which seals the well and holds the formation pressure for as long as needed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-circulating-it-out",
+  "ord": 3,
+  "option": 2,
+  "old": "Because the pump can be brought up to the kill rate faster when the mud density has not been changed at all.",
+  "new": "Because the pump reaches the kill rate faster when the mud density has not been changed at all."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-circulating-it-out",
+  "ord": 8,
+  "option": 0,
+  "old": "The pressure at which the pump stalls.",
+  "new": "The pressure at which the pump stalls, found by slowing it until it can no longer turn over."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-circulating-it-out",
+  "ord": 11,
+  "option": 0,
+  "old": "Because one of the two is a check on the other one.",
+  "new": "Because one of the two is a check on the other one, to catch a faulty gauge."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-circulating-it-out",
+  "ord": 12,
+  "option": 0,
+  "old": "It keeps the choke pressure at zero.",
+  "new": "It keeps the choke pressure at zero, so the choke can stay fully open for the whole circulation."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-circulating-it-out",
+  "ord": 14,
+  "option": 2,
+  "old": "It rises as the influx approaches surface and expands, then falls sharply once the influx has been bled off.",
+  "new": "It rises as the influx approaches surface and expands, then falls sharply once it is bled off."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 2,
+  "option": 1,
+  "old": "The horizontal well used throughout the lessons.",
+  "new": "The horizontal well used throughout the lessons, so the capstone checks the same numbers already worked."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 3,
+  "option": 0,
+  "old": "The two shut-in gauge readings.",
+  "new": "The two shut-in gauge readings, since every kill sheet starts from the pressures seen at the event."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 4,
+  "option": 2,
+  "old": "Because the true vertical depth is the only quantity in the course that cannot be checked against the goldens.",
+  "new": "Because the true vertical depth is the one quantity that cannot be checked against the goldens."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 5,
+  "option": 3,
+  "old": "The strokes first, because they are the only fields with a loose tolerance and can be checked against the panel.",
+  "new": "The strokes first, because they have a loose tolerance and can be checked against the panel."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 0,
+  "old": "It is the more reliable of the two gauges.",
+  "new": "It is the more reliable of the two gauges, because it reads the annulus where the influx actually sits."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "Memorising the kill mud formula.",
+  "new": "Memorising the kill mud formula, so the density can be worked out on the rig floor without a sheet."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "Because the methods are simpler to remember.",
+  "new": "Because the methods are simpler to remember, and a learner retains the arithmetic better once they are fixed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 2,
+  "old": "The preventer is the primary barrier while drilling and the mud column takes over once the well has been shut in.",
+  "new": "The preventer is the primary barrier while drilling, and the mud column takes over after shut-in."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "The casing and its cement form the primary barrier, with the mud column acting as a secondary containment layer.",
+  "new": "The casing and its cement form the primary barrier, with the mud column acting as the secondary one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 4,
+  "option": 0,
+  "old": "The shut-in drill pipe pressure alone.",
+  "new": "The shut-in drill pipe pressure alone, since the friction term is then used up."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 6,
+  "option": 0,
+  "old": "Elapsed time from the start of the kill.",
+  "new": "Elapsed time from the start of the kill, in minutes."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 8,
+  "option": 0,
+  "old": "Continues to fall towards zero.",
+  "new": "Continues to fall towards zero as more kill mud enters the annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 9,
+  "option": 3,
+  "old": "Only the interval between the influx passing the casing shoe and the influx reaching the surface choke.",
+  "new": "Only the stretch from the influx passing the shoe to it reaching surface."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 10,
+  "option": 2,
+  "old": "The casing pressure is held constant throughout the operation and therefore does not need a schedule of its own.",
+  "new": "The casing pressure is held constant throughout, so it needs no schedule of its own."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 10,
+  "option": 3,
+  "old": "The choke operator works from the drill pipe gauge alone and has no reason to look at the annulus side at all.",
+  "new": "The choke operator works from the drill pipe gauge alone and never looks at the annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 11,
+  "option": 1,
+  "old": "Produces a schedule with the correct endpoints but the wrong slope, which the operator would spot immediately.",
+  "new": "Produces a schedule with correct endpoints but the wrong slope."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 12,
+  "option": 1,
+  "old": "The pressure difference divided by gravity.",
+  "new": "The pressure difference between the gauges divided by gravity and by the mud density."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 14,
+  "option": 2,
+  "old": "The ratio of the pit gain to the annulus volume, which gives the fraction of the annulus the influx occupies.",
+  "new": "The ratio of pit gain to annulus volume, giving the fraction of annulus the influx fills."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 14,
+  "option": 3,
+  "old": "A sample taken at the choke once the influx has been circulated to surface and passed through the separator.",
+  "new": "A sample taken at the choke once the influx is circulated up and through the separator."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 15,
+  "option": 3,
+  "old": "The rate at which gas is migrating upward, expressed as a pressure rise per unit of time elapsed.",
+  "new": "The rate of gas migration upward, as a pressure rise per unit of time."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 16,
+  "option": 1,
+  "old": "The gauges were misread.",
+  "new": "The gauges were misread before they had stabilised."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 3,
+  "old": "Because the two gauges are read at different moments, so migration contaminates the difference between them.",
+  "new": "Because the gauges are read at different moments, so migration taints it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "Reporting the incident to the regulator.",
+  "new": "Reporting the incident to the regulator, who ranks gas events higher."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 0,
+  "old": "That the influx is entirely gas.",
+  "new": "That the influx is entirely gas, obeying the ideal gas law throughout."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 0,
+  "old": "The pump rate, adjusted continuously.",
+  "new": "The pump rate, adjusted continuously to trim the friction term."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "Recompute the influx height at the new rate, because the expansion depends on the annular velocity.",
+  "new": "Recompute the influx height, since expansion depends on annular velocity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 0,
+  "old": "A fall to zero at the surface.",
+  "new": "A fall to zero at the surface, since returns can no longer get through."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 2,
+  "old": "The kill mud has reached the bit sooner than the stroke count predicted, which shortens the operation.",
+  "new": "The kill mud has reached the bit sooner than the stroke count predicted."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "The pump has fallen below the kill rate and the frictional part of the reading has been lost.",
+  "new": "The pump has fallen below the kill rate, losing the frictional part."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "A plugged bit nozzle.",
+  "new": "A plugged bit nozzle, which chokes flow before it reaches the annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "That the implementation has been reviewed and signed off against the documented validation reference.",
+  "new": "That the implementation has been reviewed and signed off."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "Providing an extra golden file.",
+  "new": "Providing an extra golden file, recorded from the engine output for the build."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "A change introduced by a later edit.",
+  "new": "A change introduced by a later edit that alters a recorded output."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "Validation runs before release and regression afterwards, but both use the same reference data set.",
+  "new": "Validation runs before release and regression after, against the same reference data."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "Validation uses field measurements while regression uses synthetic cases that exercise every code path.",
+  "new": "Validation uses field data while regression uses synthetic cases for every code path."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "The horizontal well from the lessons.",
+  "new": "The horizontal well from the lessons, on the same kick."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "The influx description bridges the shut-in readings and the kick tolerance work of the Expert tier that follows.",
+  "new": "The influx description links the shut-in readings to the Expert tier's kick tolerance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "Every deviation from the schedule is either mechanical or it is the well, and the pit volume decides which.",
+  "new": "Every deviation is mechanical or it is the well, and the pit volume decides which."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-kill-sheet",
+  "ord": 4,
+  "option": 0,
+  "old": "The shut-in casing pressure at the end.",
+  "new": "The shut-in casing pressure at the end, since the annulus and string gauges converge once the kill mud is round."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-kill-sheet",
+  "ord": 7,
+  "option": 0,
+  "old": "Because pressure always falls linearly.",
+  "new": "Because pressure always falls linearly with time once the pumps are running at a constant kill rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-kill-sheet",
+  "ord": 9,
+  "option": 0,
+  "old": "It continues to fall towards zero.",
+  "new": "It continues to fall towards zero, as the kill mud keeps adding hydrostatic pressure on the way up the annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-kill-sheet",
+  "ord": 12,
+  "option": 3,
+  "old": "Because the choke operator works from the drill pipe gauge and never looks at the annulus side during a kill.",
+  "new": "Because the choke operator works from the drill pipe gauge and never watches the annulus side."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-kill-sheet",
+  "ord": 14,
+  "option": 3,
+  "old": "Produce a schedule with the wrong slope but the correct endpoints, which the operator would notice immediately.",
+  "new": "Produce a schedule with the wrong slope but correct endpoints, which the operator would notice."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-what-the-influx-is",
+  "ord": 1,
+  "option": 0,
+  "old": "Multiply the pit gain by the mud density.",
+  "new": "Multiply the pit gain by the mud density, which converts the gained volume into an equivalent column."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-what-the-influx-is",
+  "ord": 4,
+  "option": 0,
+  "old": "The frictional loss around the annulus.",
+  "new": "The frictional loss around the annulus, left over from circulation before the pumps were stopped."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-what-the-influx-is",
+  "ord": 7,
+  "option": 2,
+  "old": "Because the gauges are read at different times, so the difference between them includes a migration component.",
+  "new": "Because the gauges are read at different times, so their difference includes some migration."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-what-the-influx-is",
+  "ord": 8,
+  "option": 0,
+  "old": "That the influx is definitely oil.",
+  "new": "That the influx is definitely oil, whose density sits between that of gas and that of brine."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-what-the-influx-is",
+  "ord": 11,
+  "option": 0,
+  "old": "That the influx is entirely gas.",
+  "new": "That the influx is entirely gas, so its density can be taken from the gas law at bottom hole conditions."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-what-the-influx-is",
+  "ord": 12,
+  "option": 0,
+  "old": "Only the height is affected.",
+  "new": "Only the height is affected, because the density is worked out from the two gauge readings on their own."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-what-the-influx-is",
+  "ord": 14,
+  "option": 2,
+  "old": "The slow circulating rate pressure, which is scaled by the influx density to give the final circulating pressure.",
+  "new": "The slow rate pressure, scaled by the influx density to give the final circulating pressure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-what-the-influx-is",
+  "ord": 14,
+  "option": 3,
+  "old": "The choice between the two kill methods, which is made from the classification and the migration rate together.",
+  "new": "The choice between the two kill methods, made from the classification and the migration rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-holding-bottom-hole-pressure",
+  "ord": 2,
+  "option": 0,
+  "old": "The pump rate, adjusted stroke by stroke.",
+  "new": "The pump rate, adjusted stroke by stroke to keep the friction at the bit on target."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-holding-bottom-hole-pressure",
+  "ord": 4,
+  "option": 0,
+  "old": "Lowers it by restricting the flow.",
+  "new": "Lowers it by restricting the flow, which takes energy out of the returning mud column."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-holding-bottom-hole-pressure",
+  "ord": 7,
+  "option": 2,
+  "old": "Stop the circulation, shut the well in again, take fresh readings and rebuild the kill sheet from the beginning.",
+  "new": "Stop the circulation, shut the well in again, take fresh readings and rebuild the kill sheet."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-holding-bottom-hole-pressure",
+  "ord": 7,
+  "option": 3,
+  "old": "Recompute the influx height at the new rate, because the expansion depends on the velocity in the annulus.",
+  "new": "Recompute the influx height at the new rate, since expansion depends on annulus velocity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-holding-bottom-hole-pressure",
+  "ord": 8,
+  "option": 0,
+  "old": "The pressure falls to zero at surface.",
+  "new": "The pressure falls to zero at surface, because no returns can reach the choke gauges."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-holding-bottom-hole-pressure",
+  "ord": 10,
+  "option": 3,
+  "old": "Because the mud is compressible and absorbs the change entirely until the whole column has equilibrated.",
+  "new": "Because the mud is compressible and absorbs the change until the whole column equilibrates."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-holding-bottom-hole-pressure",
+  "ord": 12,
+  "option": 0,
+  "old": "The current stroke count of the pump.",
+  "new": "The current stroke count of the pump, read from the pressure pulses on the annulus side."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-holding-bottom-hole-pressure",
+  "ord": 14,
+  "option": 0,
+  "old": "Because it is closer to the pump.",
+  "new": "Because it is closer to the pump, so it sees a choke adjustment sooner than the annulus gauge does."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-holding-bottom-hole-pressure",
+  "ord": 15,
+  "option": 3,
+  "old": "Completing the circulation before the kill mud has been built to the full calculated density in the pits.",
+  "new": "Completing the circulation before the kill mud is built to full density in the pits."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-reading-the-sheet-back",
+  "ord": 9,
+  "option": 2,
+  "old": "Because it makes the drill pipe pressure read low, which the operator corrects by closing the choke and raising the bottom.",
+  "new": "Because it makes the drill pipe read low, so the operator closes the choke too far."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-reading-the-sheet-back",
+  "ord": 9,
+  "option": 3,
+  "old": "Because it changes the pump output per stroke, which invalidates every stroke count on the standing part of the sheet.",
+  "new": "Because it changes the pump output per stroke and so invalidates every stroke count."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-reading-the-sheet-back",
+  "ord": 12,
+  "option": 0,
+  "old": "Because the pump rate will have changed.",
+  "new": "Because the pump rate will have changed, so the friction term measured earlier no longer applies."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-reading-the-sheet-back",
+  "ord": 13,
+  "option": 2,
+  "old": "The influx is passing the casing shoe, which is the expected point of maximum divergence during any circulation.",
+  "new": "The influx is passing the shoe, which is the expected point of maximum divergence."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-reading-the-sheet-back",
+  "ord": 13,
+  "option": 3,
+  "old": "The kill mud front has become dispersed, which spreads the pressure change over a longer interval of strokes.",
+  "new": "The kill mud front has dispersed, spreading the pressure change over more strokes."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-reading-the-sheet-back",
+  "ord": 14,
+  "option": 0,
+  "old": "It is required for the incident report.",
+  "new": "It is required for the incident report, which the regulator expects to show every reading taken."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-reading-the-sheet-back",
+  "ord": 15,
+  "option": 0,
+  "old": "Every deviation means a second influx.",
+  "new": "Every deviation means a second influx, because the schedule already allows for every mechanical effect."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 2,
+  "option": 2,
+  "old": "That the engine agrees with the published well control literature to within the stated numerical tolerance.",
+  "new": "That the engine agrees with the published well control literature within the stated tolerance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 2,
+  "option": 3,
+  "old": "That the calculation has been reviewed by a second engineer and signed off against the validation reference.",
+  "new": "That the calculation has been reviewed by a second engineer and signed off for validation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 3,
+  "option": 0,
+  "old": "To provide a golden file for the build.",
+  "new": "To provide a golden file for the build, recorded from the engine on those inputs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 4,
+  "option": 0,
+  "old": "Because the source published them that way.",
+  "new": "Because the source published them that way, and the course reproduces the case exactly."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 5,
+  "option": 0,
+  "old": "That the engine is validated for field use.",
+  "new": "That the engine is validated for field use, since the hand example was built independently."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 7,
+  "option": 0,
+  "old": "A change introduced by a later edit.",
+  "new": "A change introduced by a later edit, which alters an output the engine used to return."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 9,
+  "option": 2,
+  "old": "Validation is run before release and regression is run afterwards, but both compare against the same reference data.",
+  "new": "Validation is run before release and regression afterwards, but both use the same reference data."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 9,
+  "option": 3,
+  "old": "Validation uses field measurements while regression uses synthetic cases constructed to exercise every code path.",
+  "new": "Validation uses field measurements while regression uses synthetic cases built to exercise the code."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 10,
+  "option": 3,
+  "old": "A sensitivity study showing that the outputs vary smoothly with each input across the whole of the design range.",
+  "new": "A sensitivity study showing that the outputs vary smoothly with each input across the range."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 11,
+  "option": 1,
+  "old": "That validation is unnecessary because the calculations are standard and have been in industry use for decades.",
+  "new": "That validation is unnecessary because the calculations are standard practice."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 14,
+  "option": 0,
+  "old": "Goldens are slow to run.",
+  "new": "Goldens are slow to run, so they end up skipped on the builds where they are needed most."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 1,
+  "option": 2,
+  "old": "The influx description is the bridge between the shut-in readings and the kick tolerance work of the Expert tier.",
+  "new": "The influx description is the bridge between the shut-in readings and the Expert tier's work."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 1,
+  "option": 3,
+  "old": "Every deviation from the schedule is either mechanical or it is the well, and the pit volume decides which.",
+  "new": "Every deviation from the schedule is either mechanical or the well, and pit volume decides."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 2,
+  "option": 0,
+  "old": "The horizontal well from the lessons.",
+  "new": "The horizontal well from the lessons, on the kick already worked there."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 3,
+  "option": 0,
+  "old": "All six, since the influx feeds the sheet.",
+  "new": "All six, since the influx description feeds every entry on the sheet."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 4,
+  "option": 0,
+  "old": "Because it is a harder case to solve.",
+  "new": "Because it is a harder case to solve, set to separate the stronger candidates."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 5,
+  "option": 2,
+  "old": "The initial circulating pressure, since it is the sum of a measured reading and a measured friction term.",
+  "new": "The initial circulating pressure, since it is the sum of two measured numbers."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 5,
+  "option": 3,
+  "old": "The final circulating pressure, because it needs only the density ratio and the slow circulating rate value.",
+  "new": "The final circulating pressure, since it needs only the density ratio and the slow rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 0,
+  "old": "The completed kill sheet schedule.",
+  "new": "The completed kill sheet schedule, which the Expert tier extends to the annulus side."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "The height sets the initial circulating pressure.",
+  "new": "The height sets the initial circulating pressure, through the deficit it creates in the annulus."
+ }
+]

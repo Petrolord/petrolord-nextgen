@@ -1,0 +1,2441 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 3,
+  "old": "Only the second pays anything, because a small margin carries no cost worth naming.",
+  "new": "Only the second pays anything, because a margin that small still clears the bound and so carries no cost worth naming."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 1,
+  "old": "Seven hundred and fifty to nine hundred microns, by Saucier.",
+  "new": "Seven hundred and fifty to nine hundred microns, by Saucier, taking five to six times the formation as the slot width."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 3,
+  "old": "Three hundred microns exactly, since an arch can span twice the grain diameter.",
+  "new": "Three hundred microns exactly, since an arch can span twice the grain diameter and the upper edge is the only one that binds."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 0,
+  "old": "Nothing, as the window depends only on the coarse decile.",
+  "new": "Nothing, as the window depends only on the coarse decile, and the coarse decile is measured the same way whatever the rung."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 2,
+  "old": "It becomes unreliable only where the fines exceed ten percent of the whole sample.",
+  "new": "It becomes unreliable only where the fines exceed ten percent of the whole sample, the point at which the slots start to plug."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "Yes, because a screen retaining the coarse and middle fractions should by the same mechanism retain the fine tail.",
+  "new": "Yes, since a screen that retains the coarse and middle fractions should retain the fine tail too."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 3,
+  "old": "Erosion, because a tight slot raises the velocity through what open area remains.",
+  "new": "Erosion, because a tight slot raises the velocity through what open area remains and cuts the wire at the hot spots."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "One hundred and twenty three megapascals, from three times the larger stress with the smaller and the strength added on.",
+  "new": "One hundred and twenty three megapascals, with the smaller stress and strength added on."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "One megapascal, moving in direct proportion with the drawdown.",
+  "new": "One megapascal, moving in direct proportion with the drawdown, since the flowing pressure is subtracted from the hoop stress once."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "Half a megapascal, because the rearranged criterion is divided through by two.",
+  "new": "Half a megapascal, because the rearranged criterion is divided through by two before the flowing pressure is compared with it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "Nothing, because gravel packing makes the wellbore the cavity.",
+  "new": "Nothing, because gravel packing fills the tunnels and makes the wellbore wall the cavity whose hoop stress governs failure."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "The two horizontal stresses should be swapped, taking the minimum as the larger.",
+  "new": "The two horizontal stresses should be swapped, taking the minimum as the larger so that the check errs towards a conservative margin."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "That the calibration matters, and a thick-walled cylinder test is worth paying for.",
+  "new": "That the calibration matters, and a thick-walled cylinder test is worth paying for before the completion type is chosen."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "It stays unchanged, since the boost is only reported back and never otherwise used.",
+  "new": "It stays unchanged, since the boost is only reported back alongside the result and never enters the calculation itself."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "A rate, provided the sweep is run at a fine enough step for every weak station along the interval to be represented.",
+  "new": "A rate, provided the sweep is run at a step fine enough to represent every weak station."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 3,
+  "old": "Raising the boost factor until the margin clears zero, and then producing normally.",
+  "new": "Raising the boost factor until the margin clears zero, and then producing the well normally with no sand control fitted."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "Larger steps always drop rows, whatever the interval length.",
+  "new": "Larger steps always drop rows, whatever the interval length, because the sweep is capped at a fixed number of stations."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "The clamp on the station depth fires only for steps below the survey increment.",
+  "new": "The clamp on the station depth fires only for steps below the survey increment, so the coarser step ran unclamped."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "The governing row moves to the top of the interval, and a completion is always limited by its shallowest station.",
+  "new": "The governing row moves to the top, and a completion is always limited by its shallowest station."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 1,
+  "old": "The break statement fires one iteration too late, so the sweep adds an extra station past the bottom of the interval.",
+  "new": "The break fires one iteration too late, so the sweep adds an extra station below the interval."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "No, though simply adding more stations to the same fixture would have surfaced it.",
+  "new": "No, though simply adding more stations to the same fixture at a finer step would have surfaced the missing one."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "It says the oracle simply needs a tighter tolerance before it is able to disagree.",
+  "new": "It says the oracle simply needs a tighter tolerance before it is able to disagree over the final station's margin."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "It breaks the endpoint rule, since the deepest station would then overshoot the bottom.",
+  "new": "It breaks the endpoint rule, since the deepest station would then overshoot the bottom of the perforated interval being swept."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "Confirm the shallowest row sits at the interval top, since that is where the loop begins.",
+  "new": "Confirm the shallowest row sits at the interval top, since a wrong starting depth shifts every station below it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "The bottom row check, because the bottom margin has to exceed the governing margin.",
+  "new": "The bottom row check, because on a rising profile the bottom margin has to exceed the governing margin."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "The margins all shift by one constant, so the governing row itself is unaffected.",
+  "new": "The margins all shift by one constant equal to the stress difference, so the governing row itself is unaffected."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "A middle row governs, because the profile turns over somewhere between the two ends.",
+  "new": "A middle row governs, because the profile turns over somewhere between the two ends where the pore pressure peaks."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "It must equal the stated boost, because the bisection converges back on its own input.",
+  "new": "It must equal the stated boost, because the bisection is seeded there and converges back on its own input."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "It is duplicated, because the clamp writes the bottom station once from the loop and once more on the break.",
+  "new": "It is duplicated, since the clamp writes the bottom station in the loop and again on the break."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "Because bisection is the more accurate of the two on a function that is exactly linear.",
+  "new": "Because bisection is the more accurate of the two on a function that is exactly linear in the multiplier."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "Completion Design, which supplies the string above the packer.",
+  "new": "Completion Design, which supplies the tubing string above the packer and the flowing pressure the sweep draws down to."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "Well Integrity and P and A, which supplies the long term condition of a screen.",
+  "new": "Well Integrity and P and A, which supplies the long term condition of a screen once erosion has begun to open it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 7,
+  "option": 1,
+  "old": "The last rule has no thresholds, so everything falls into it.",
+  "new": "The last rule has no thresholds of its own, so every sand the earlier rungs reject simply falls into it by default."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 7,
+  "option": 3,
+  "old": "The thresholds are round numbers, so no sand can land exactly on a boundary.",
+  "new": "The thresholds are round numbers, so no sand can land exactly on a boundary and slip between two neighbouring rungs."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 8,
+  "option": 2,
+  "old": "The fourth rung is reserved for sands whose uniformity cannot be measured reliably.",
+  "new": "The fourth rung is reserved for sands whose uniformity cannot be measured reliably because the fines smear the sieve curve."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 9,
+  "option": 3,
+  "old": "The sand carrying more fines received the premium screen and the cleaner one a gravel pack.",
+  "new": "The sand carrying more fines received the premium screen and the cleaner one a gravel pack, reversing the usual order."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 10,
+  "option": 3,
+  "old": "Their uniformities were identical to two decimal places, leaving only the fines free to differ.",
+  "new": "Their uniformities were identical to two decimal places, leaving only the fines free to differ between the two sands."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 11,
+  "option": 3,
+  "old": "The absence of a drawdown limit in the ladder, which no laboratory sieve programme can supply.",
+  "new": "The absence of a drawdown limit in the ladder, which no laboratory sieve programme can supply however many samples are run."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 12,
+  "option": 1,
+  "old": "Only where fines fall below two percent, because the first rung is the one rule that reads uniformity at all.",
+  "new": "Only where fines fall below two percent, since the first rung is the one rule that reads uniformity."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 13,
+  "option": 2,
+  "old": "On repeating the uniformity determination several times, since a fifth of a point of scatter can move the indication.",
+  "new": "On repeating the uniformity test, since a fifth of a point of scatter can move the indication."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 14,
+  "option": 0,
+  "old": "A larger sieve analysis with more points at the fine end.",
+  "new": "A larger sieve analysis with more points at the fine end, so that the fines number is pinned to a tighter tolerance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 14,
+  "option": 3,
+  "old": "The operator's field experience with completions in nearby analogue reservoirs.",
+  "new": "The operator's field experience with completions in nearby analogue reservoirs, weighted by how long each produced sand free."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-choosing-a-completion-type",
+  "ord": 15,
+  "option": 3,
+  "old": "Because a user has to acknowledge the provenance before any indication is issued.",
+  "new": "Because a user has to acknowledge the provenance before any indication is issued, and documentation cannot enforce that."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 7,
+  "option": 0,
+  "old": "It takes the finer of the two sieve openings in the designation.",
+  "new": "It takes the finer of the two sieve openings in the designation, and the flag records that the finer opening is a lower bound."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 7,
+  "option": 2,
+  "old": "It uses the coarser sieve opening, which overstates the row and is corrected later.",
+  "new": "It uses the coarser sieve opening, which overstates the row and is corrected later once the pack permeability is measured."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 8,
+  "option": 3,
+  "old": "A widened band at four to seven times, recomputed until at least one row falls inside.",
+  "new": "A widened band at four to seven times, recomputed until at least one row falls inside so the design is never left empty."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 9,
+  "option": 3,
+  "old": "Three fail to match, all of them at the fine end of the range below one hundred microns.",
+  "new": "Three fail to match, all of them at the fine end of the range below one hundred microns where the catalogue thins out."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 10,
+  "option": 2,
+  "old": "Vendors deliberately leave gaps so that custom sieved cuts remain a commercial product with a price and a lead time.",
+  "new": "Vendors deliberately leave gaps so that custom sieved cuts remain a commercial product with a price."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 11,
+  "option": 2,
+  "old": "Order a custom cut, blend two catalogue rows, or accept a higher drawdown on the well.",
+  "new": "Order a custom cut, blend two catalogue rows, or accept a higher drawdown on the well to offset the skin of a mismatched pack."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 12,
+  "option": 2,
+  "old": "Neither direction is safer, since both ends of the band were fixed by the same experiment and carry the same penalty.",
+  "new": "Neither direction is safer, since both ends of the band were fixed by the same experiment."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 13,
+  "option": 3,
+  "old": "The row with the smallest ratio between its own designation width and the width of the band.",
+  "new": "The row with the smallest ratio between its own designation width and the width of the band, so the tightest cut wins."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 14,
+  "option": 2,
+  "old": "Because rows inside the band are excluded from the ranking before the comparison is run.",
+  "new": "Because rows inside the band are excluded from the ranking before the comparison is run, leaving only one side to compare."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 15,
+  "option": 0,
+  "old": "That the sand has already been screened for its clay content.",
+  "new": "That the sand has already been screened for its clay content, since swelling clays would migrate through any gravel in the band."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-gravel",
+  "ord": 15,
+  "option": 3,
+  "old": "That the sand is poorly sorted, which is the reason the band sits well above unity.",
+  "new": "That the sand is poorly sorted, which is the reason the band sits well above unity and leaves room for a wide fines tail."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-screens",
+  "ord": 12,
+  "option": 0,
+  "old": "It doubles D10 to allow for sieve measurement error.",
+  "new": "It doubles D10 to allow for sieve measurement error in the finest decile of the grain size curve."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-screens",
+  "ord": 12,
+  "option": 2,
+  "old": "It is the ratio of the coarse decile to the median in a typical well sorted sand.",
+  "new": "It is the ratio of the coarse decile to the median in a typical well sorted formation sand sample."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-screens",
+  "ord": 13,
+  "option": 1,
+  "old": "Yes, provided the slot was sized on the formation coarse decile rather than the median, which is what the window is for.",
+  "new": "Yes, provided the slot was sized on the coarse decile rather than the median."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-screens",
+  "ord": 14,
+  "option": 1,
+  "old": "Sizing the slot against the wrong grain percentile.",
+  "new": "Sizing the slot against the wrong grain percentile, so that the bridge never forms across the opening."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-screens",
+  "ord": 15,
+  "option": 2,
+  "old": "It restores the strength of the near-wellbore rock by loading it against the pack, so that the failure no longer occurs.",
+  "new": "It restores the strength of the near-wellbore rock by loading it against the pack."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 7,
+  "option": 1,
+  "old": "The mean of the three principal stresses, paired with the reservoir pressure.",
+  "new": "The mean of the three principal stresses, paired with the reservoir pressure acting inside the open tunnel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 8,
+  "option": 0,
+  "old": "The overburden together with the pore pressure.",
+  "new": "The overburden together with the pore pressure, since the vertical load is what the cavity wall has to carry."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 8,
+  "option": 3,
+  "old": "The minimum horizontal stress paired with the flowing pressure at that depth.",
+  "new": "The minimum horizontal stress paired with the flowing pressure at that depth, which sets the effective hoop load."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 9,
+  "option": 2,
+  "old": "The open hole geometry, as the pack and screen act as one enlarged vertical cavity.",
+  "new": "The open hole geometry, as the pack and screen act as one enlarged vertical cavity carrying the load of the casing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 10,
+  "option": 1,
+  "old": "A correction on the flowing pressure that accounts for near-wall skin, defaulting to one.",
+  "new": "A correction on the flowing pressure that accounts for near-wall skin damage, defaulting to one on an undamaged well."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 11,
+  "option": 0,
+  "old": "A routine triaxial test at reservoir confining pressure.",
+  "new": "A routine triaxial test at reservoir confining pressure, whose peak stress is taken directly as the boosted strength."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 11,
+  "option": 3,
+  "old": "A sonic log calibrated against core, read at the depth of interest.",
+  "new": "A sonic log calibrated against core, read at the depth of interest and converted to a strength through a dynamic modulus."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 12,
+  "option": 3,
+  "old": "It is unaffected, because the boost scales the stresses and the strength together and the two effects cancel out.",
+  "new": "It is unaffected, since the boost scales the stresses and the strength together and they cancel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 13,
+  "option": 2,
+  "old": "The maximum drawdown available before onset, which needs a separate transient model of the near-wellbore region.",
+  "new": "The drawdown available before onset, which needs a separate transient near-wellbore model."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 14,
+  "option": 3,
+  "old": "Because onset is conservative and a rate would understate the risk to the completion.",
+  "new": "Because onset is conservative and a rate would understate the risk to the completion by averaging over the interval."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-sanding-onset",
+  "ord": 15,
+  "option": 2,
+  "old": "Screen selection, workover timing and rate allocation, with the sweep serving rate allocation.",
+  "new": "Screen selection, workover timing and rate allocation, with the sweep serving rate allocation because it lists a margin at every depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 7,
+  "option": 1,
+  "old": "Rows at 2450, 2480, 2510 and 2550 metres, because the final station was clamped forward onto the interval bottom as intended.",
+  "new": "Rows at 2450, 2480, 2510 and 2550 metres, the final station having been clamped onto the bottom."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 8,
+  "option": 0,
+  "old": "They sat after an unconditional return statement.",
+  "new": "They sat after an unconditional return statement, so control left the function before either line was reached."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 8,
+  "option": 2,
+  "old": "They were written for a different sweep and never wired into this one.",
+  "new": "They were written for a different sweep and never wired into this one, so the interval sweep ran without either guard."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 9,
+  "option": 3,
+  "old": "It stayed negative but shrank to roughly a tenth of its true magnitude at the base.",
+  "new": "It stayed negative but shrank to roughly a tenth of its true magnitude at the base, so only its size was misreported."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 10,
+  "option": 3,
+  "old": "Confirm the leading row sits exactly at the top of the perforated interval.",
+  "new": "Confirm the leading row sits exactly at the top of the perforated interval, where the sweep places its first station."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 11,
+  "option": 1,
+  "old": "It was recorded from the engine itself rather than from an independent source, so it agreed with whatever the engine happened to produce.",
+  "new": "It was recorded from the engine itself rather than an independent source, so it agreed with the engine."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 12,
+  "option": 3,
+  "old": "It shared the interpolation helpers the engine uses for the stress curves.",
+  "new": "It shared the interpolation helpers the engine uses for the stress curves, so any error there appeared in both."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 13,
+  "option": 0,
+  "old": "It compares its rows against a second golden file.",
+  "new": "It compares its rows against a second golden file recorded on a different interval, so two fixtures must agree."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 13,
+  "option": 3,
+  "old": "It runs the same loop but in a language with stricter bounds checking.",
+  "new": "It runs the same loop but in a language with stricter bounds checking, which traps any station past the bottom."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 14,
+  "option": 3,
+  "old": "Both were caused by floating point comparison on the station depths.",
+  "new": "Both were caused by floating point comparison on the station depths, where a rounded depth fell out of range."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-sweep-and-the-missing-row",
+  "ord": 15,
+  "option": 3,
+  "old": "The application guard, because it drives the tab parameter through seven values.",
+  "new": "The application guard, because it drives the tab parameter through seven values and would reject any that loses a row."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 12,
+  "option": 2,
+  "old": "The minimum curvature survey arithmetic that converts a measured depth into a true vertical depth at each station.",
+  "new": "The minimum curvature survey arithmetic that turns a measured depth into true vertical depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "Adopt the paper value, since the range reported is narrow.",
+  "new": "Adopt the paper value, since the range reported is narrow and the published rock was tested under similar confining stress."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "Recompute the Saucier band using the shipped pack median, because the band is defined against the gravel rather than the sand.",
+  "new": "Recompute the Saucier band from the shipped pack median, since the band is defined against the gravel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "Check that the step size divides evenly into the range.",
+  "new": "Check that the step size divides evenly into the range, because a fractional step count makes every row of the table drift."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 2,
+  "old": "Change the orientation at the wellsite, because it is set by how the carrier is made up rather than by the charge.",
+  "new": "Change the orientation at the wellsite, since the carrier makeup sets it independently of the charge."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "It enters through the spacing, because unshot footage stretches the average distance between holes across the zone.",
+  "new": "It enters through the spacing, since unshot footage stretches the average distance between holes."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "It enters twice, once through the converging term and once through the shell, since both read a length along a well.",
+  "new": "It enters twice, through the converging term and the shell, since both read a length along a well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 1,
+  "old": "Nothing physical changed, because that contribution is fitted to tabulated constants rather than to a flow geometry.",
+  "new": "Nothing physical changed, because that term is fitted to tabulated constants rather than a geometry."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 3,
+  "old": "The damaged shell has been shared out between more tunnels, which is what pushes the largest contribution below zero.",
+  "new": "The damaged shell is shared among more tunnels, which pushes the largest contribution below zero."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "A conventional core, because the coring fluid invades it and rearranges the grain packing before it reaches the laboratory.",
+  "new": "A conventional core, because coring fluid invasion rearranges its packing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 3,
+  "old": "A bailed sample, because it has been sitting in the rathole where cuttings from higher in the hole accumulate.",
+  "new": "A bailed sample, because rathole cuttings from higher up accumulate in it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "That the sand is exceptionally well sorted.",
+  "new": "That the sand is exceptionally well sorted, with nearly every grain close to one size."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "Exactly halfway between the two sieve openings.",
+  "new": "Exactly halfway between the two sieve openings, by simple linear interpolation."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "It understates the size by a fixed five percent.",
+  "new": "It understates the size by a fixed five percent, whatever the spacing of the two sieves."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "The finest sieve size in the stack.",
+  "new": "The finest sieve size in the stack, taken as the final reading."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 0,
+  "old": "They are needed if anyone wants to reproduce the sieve weights.",
+  "new": "They are needed if anyone wants to reproduce the sieve weights, since each weight is back-calculated from a percentile."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 3,
+  "old": "Because a finest bin above ten percent lies outside the range the sieve interpolation was ever developed against.",
+  "new": "Because a finest bin above ten percent lies outside the range the interpolation was developed on."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "The ratio of D50 to the mean grain size.",
+  "new": "The ratio of D50 to the arithmetic mean grain size of the whole sample."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "A cake of fine material builds on the outside of the slot and does the filtering, while the slot merely supports it.",
+  "new": "A cake of fine material builds outside the slot and filters, while the slot merely supports it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 1,
+  "old": "The second sand cannot form a stable arch at all, so nothing is held back and the hardware behaves as bare pipe.",
+  "new": "The second sand cannot form a stable arch, so the hardware behaves as bare pipe and holds nothing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "She is right and it therefore does not matter, since any nearby size would move the ladder rungs by the same amount.",
+  "new": "She is right and so it does not matter, since any nearby size would move the ladder rungs equally."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "The coarser pan, because larger grains pack less efficiently and therefore occupy more of the pan for equal weight.",
+  "new": "The coarser pan, since large grains pack less efficiently and fill more of the pan by weight."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "The finer pan, by about ten to one, and no pack cares because anything that small passes straight through it anyway.",
+  "new": "The finer pan, by about ten to one, and no pack cares because such fines pass straight through."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "No, and it shows the two figures came from different splits of the sample, which is a handling error in the laboratory.",
+  "new": "No, it shows the figures came from different splits of the sample, a laboratory handling error."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "Yes, because the wider span contains the narrower one and so cannot possibly return the larger of the two numbers.",
+  "new": "Yes, because the wider span contains the narrower one and so cannot return the larger number."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "No, because hardware can only be manufactured at a single slot width, so grain size cannot influence the choice.",
+  "new": "No, because hardware is made at a single slot width, so grain size cannot influence the choice."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "Approve it, since slotted pipe is tolerant of fine material.",
+  "new": "Approve it, since slotted pipe is tolerant of fine material and lets the fines pass through its slots to surface."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "Yes, the chosen screen gauge, because the pack has to bridge on the hardware as well as against the formation sand.",
+  "new": "Yes, the chosen screen gauge, because the pack has to bridge on the hardware as well as the sand."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "The carrier diameter, looking for the slimmest hardware there.",
+  "new": "The carrier diameter, looking for the slimmest hardware there, because a slim carrier leaves the widest standoff gap."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "The fine content but not the gravel size, since the median falls below the finest screen the laboratory ran.",
+  "new": "The fine content but not the gravel size, since the median falls below the finest screen run."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "The shot density, since a harder formation absorbs more of the charge energy and fewer of the shots penetrate the casing cleanly.",
+  "new": "The shot density, since a harder rock absorbs more of the charge energy."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "The wellbore radius, which is set by the bit size used to drill through the producing interval.",
+  "new": "The wellbore radius, which the bit size through the interval sets."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "That the concrete correction has not been applied yet, after which the figure becomes a legitimate tender input.",
+  "new": "That the concrete correction is unapplied, after which the figure becomes a fair tender input."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "Both halves are computed by the same engine.",
+  "new": "Both halves are computed by the same engine, which shares one set of inputs across them."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 8,
+  "option": 0,
+  "old": "Gravel pack, frac pack or standalone screen.",
+  "new": "Gravel pack, frac pack or standalone screen, since every answer to sand production is a piece of downhole hardware."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 9,
+  "option": 3,
+  "old": "How much sand a failing cavity will produce, in grams per cubic metre, over the producing life of the well.",
+  "new": "How much sand a failing cavity will produce, in grams per cubic metre."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 10,
+  "option": 2,
+  "old": "Because the ratio is computed at a reference condition and then corrected for permeability outside the engine itself.",
+  "new": "Because the ratio is taken at a reference state and corrected for permeability later."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 11,
+  "option": 1,
+  "old": "Clamps the group to the edge of the range and returns the value at the edge, which is the closest supported answer.",
+  "new": "Clamps the group to the range edge and returns the edge value."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 11,
+  "option": 3,
+  "old": "Extrapolates the fit and returns the number silently, since the expression evaluates perfectly well outside the range.",
+  "new": "Extrapolates the fit and returns the number silently."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 12,
+  "option": 0,
+  "old": "A gun whose total skin comes out positive.",
+  "new": "A gun whose total skin comes out positive, which signals a damaged completion."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the correlation was fitted before computers could handle a full three dimensional model of a tapering cavity.",
+  "new": "Because the correlation predates computers able to model a tapering cavity."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 13,
+  "option": 3,
+  "old": "Because the taper and the tip shape vary so much between charges that including them would make the answer meaningless.",
+  "new": "Because taper and tip shape vary too much between charges to be meaningful."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 14,
+  "option": 0,
+  "old": "The distribution of grain sizes, by grain count.",
+  "new": "The distribution of grain sizes, by grain count across each sieve fraction."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 15,
+  "option": 0,
+  "old": "Computing the perforation skin and the productivity ratio.",
+  "new": "Computing the perforation skin and the productivity ratio for every gun and phasing in the catalog."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 7,
+  "option": 0,
+  "old": "Because the gun cannot carry more than twelve charges per foot.",
+  "new": "Because the gun cannot carry more than twelve charges per foot, which caps the density any carrier can reach."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 8,
+  "option": 1,
+  "old": "The angle between the gun axis and the wellbore axis, which depends on how the gun is centralised in the casing.",
+  "new": "The angle between the gun axis and the wellbore axis, set by how it is centralised."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 8,
+  "option": 2,
+  "old": "The orientation of the whole gun relative to the maximum horizontal stress, set by an orienting sub above the carrier.",
+  "new": "The orientation of the whole gun relative to the maximum horizontal stress."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 9,
+  "option": 3,
+  "old": "It lets the gun be run without orientation, and it makes the entrance holes easier to find on a subsequent log.",
+  "new": "It lets the gun run without orientation and makes the holes easier to find on a log."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 10,
+  "option": 0,
+  "old": "It is simply the smallest angle in the table.",
+  "new": "It is simply the smallest angle in the table, handled by the same expression as the rest."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 11,
+  "option": 1,
+  "old": "Zero, thirty, sixty, ninety, a hundred and twenty and a hundred and eighty, which are the common commercial gun phasings.",
+  "new": "Zero, thirty, sixty, ninety, a hundred and twenty and a hundred and eighty."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 12,
+  "option": 0,
+  "old": "Penetration in the formation at reservoir conditions.",
+  "new": "Penetration in the formation at reservoir conditions of stress and temperature."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 13,
+  "option": 2,
+  "old": "Nothing at all, since every vendor uses a different charge design and no comparison between catalogs is meaningful.",
+  "new": "Nothing at all, since every vendor uses a different charge design."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 13,
+  "option": 3,
+  "old": "The shot densities and phasings, which are standardised across the industry, but not the entrance holes or penetrations.",
+  "new": "The shot densities and phasings, which are standardised across the whole industry."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 14,
+  "option": 0,
+  "old": "Converting shots per foot into shots per metre.",
+  "new": "Converting shots per foot into shots per metre for the spacing used in the skin terms."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-shot",
+  "ord": 15,
+  "option": 0,
+  "old": "Ordering a gun from a vendor.",
+  "new": "Ordering a gun from a vendor, quoting the catalog row as the specification."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-geometry-the-charge-leaves",
+  "ord": 7,
+  "option": 1,
+  "old": "The radius at which the pressure equals the average reservoir pressure, which the productivity ratio compares against.",
+  "new": "The radius at which the pressure equals the average reservoir pressure."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-geometry-the-charge-leaves",
+  "ord": 7,
+  "option": 3,
+  "old": "The radius of the crushed zone around the tunnel, measured from the tunnel axis rather than from the wellbore axis.",
+  "new": "The radius of the crushed zone around the tunnel, measured from its axis."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-geometry-the-charge-leaves",
+  "ord": 8,
+  "option": 0,
+  "old": "The calculation has produced an impossible result.",
+  "new": "The calculation has produced an impossible result, which the engine ought to have refused."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-geometry-the-charge-leaves",
+  "ord": 9,
+  "option": 3,
+  "old": "Zero degrees, because the in-line formula uses the tunnel length directly rather than scaling it by a constant.",
+  "new": "Zero degrees, because the in-line formula uses the tunnel length directly."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-geometry-the-charge-leaves",
+  "ord": 10,
+  "option": 2,
+  "old": "The zone of the casing immediately around the entrance hole, where the steel has been deformed by the passage of the jet.",
+  "new": "The casing around the entrance hole, deformed by the passage of the jet."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-geometry-the-charge-leaves",
+  "ord": 10,
+  "option": 3,
+  "old": "The region of the formation into which charge debris has been driven, extending several tunnel diameters into the rock.",
+  "new": "The formation region into which charge debris has been driven by the jet."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-geometry-the-charge-leaves",
+  "ord": 11,
+  "option": 0,
+  "old": "The tunnel radius, the crushed radius and the permeability.",
+  "new": "The tunnel radius, the crushed radius and the permeability, multiplied together directly."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-geometry-the-charge-leaves",
+  "ord": 12,
+  "option": 0,
+  "old": "Because it is the smallest of the four components.",
+  "new": "Because it is the smallest of the four components, and so the cheapest to remove."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-geometry-the-charge-leaves",
+  "ord": 13,
+  "option": 3,
+  "old": "Because the correlation was fitted only for ratios above one, so a smaller value would be an extrapolation of the fit.",
+  "new": "Because the correlation was fitted only for ratios above one, so less would extrapolate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-geometry-the-charge-leaves",
+  "ord": 15,
+  "option": 0,
+  "old": "Whether the arithmetic survives it.",
+  "new": "Whether the arithmetic survives it without a division by zero or a log error."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-sand-sample",
+  "ord": 8,
+  "option": 1,
+  "old": "Because a retained curve is easier to compute from the raw sieve weights, which are recorded as what stayed on each sieve.",
+  "new": "Because a retained curve falls straight out of the raw weights recorded on each sieve."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-sand-sample",
+  "ord": 9,
+  "option": 0,
+  "old": "Sizing a standalone screen slot.",
+  "new": "Sizing a standalone screen slot directly against the median grain size."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-sand-sample",
+  "ord": 10,
+  "option": 1,
+  "old": "Because six is the number of sieves in a standard stack.",
+  "new": "Because six is the number of sieves in a standard stack, so the engine reports one D-value for every sieve it reads."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-sand-sample",
+  "ord": 11,
+  "option": 0,
+  "old": "The arithmetic mean of the two sizes.",
+  "new": "The arithmetic mean of the two sizes, since the percentile sits exactly halfway between them."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-sand-sample",
+  "ord": 12,
+  "option": 0,
+  "old": "It understates the size, which plugs the pack.",
+  "new": "It understates the size, which plugs the pack because the gravel then comes out finer than it should."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-sand-sample",
+  "ord": 13,
+  "option": 2,
+  "old": "The size of the finest sieve in the stack, which is a real measurement and therefore the best available lower bound.",
+  "new": "The finest sieve size in the stack, as the best available lower bound."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-sand-sample",
+  "ord": 13,
+  "option": 3,
+  "old": "An extrapolated value from the last two points, flagged so that a reader can see it was not measured directly.",
+  "new": "An extrapolated value from the last two points, flagged as not measured."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-sand-sample",
+  "ord": 14,
+  "option": 2,
+  "old": "No fines percentage, since the fines cutoff sits below the finest sieve and the engine will not extrapolate to reach it.",
+  "new": "No fines percentage, since the cutoff sits below the finest sieve and is never hit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-sand-sample",
+  "ord": 14,
+  "option": 3,
+  "old": "No effect, because the advisor reads the median and the fines and neither of those needs the ninetieth percentile.",
+  "new": "No effect, since the advisor reads only the median and fines, and neither needs it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-sand-sample",
+  "ord": 15,
+  "option": 3,
+  "old": "Because the fines percentage is reported as a complement, and a complement is defined even where the curve is absent.",
+  "new": "Because the fines percentage is reported as a complement, which is defined even where the curve is absent."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 7,
+  "option": 0,
+  "old": "Because the sorting is redundant with the uniformity.",
+  "new": "Because the sorting is redundant with the uniformity and adds nothing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 8,
+  "option": 0,
+  "old": "That the sieve analysis has been done incorrectly.",
+  "new": "That the sieve analysis has been done incorrectly and so has to be rerun."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 9,
+  "option": 3,
+  "old": "The opening of the finest sieve in the stack, whichever that happens to be for the analysis being reported.",
+  "new": "The opening of the finest sieve in the stack, whichever that is for the analysis."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 10,
+  "option": 2,
+  "old": "Because they arrive first, before the coarse grains, and coat the face of the pack in a layer of very low permeability.",
+  "new": "Because they arrive first and coat the pack face in a low permeability layer."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 10,
+  "option": 3,
+  "old": "Because they are carried at a higher velocity than the coarse grains and therefore strike the pack with more energy.",
+  "new": "Because they travel faster than coarse grains and strike the pack harder."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 11,
+  "option": 3,
+  "old": "Because the count is reported per unit volume while the weight is reported per unit mass, and the densities differ.",
+  "new": "Because count is per unit volume and weight per unit mass, and the densities differ."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 12,
+  "option": 0,
+  "old": "Three and five percent.",
+  "new": "Three and five percent by weight."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 13,
+  "option": 1,
+  "old": "How much of the sample is below the cutoff.",
+  "new": "How much of the sample lies below the cutoff, expressed as a fraction of its weight."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 14,
+  "option": 0,
+  "old": "Because a third number would be too expensive to measure.",
+  "new": "Because a third number would be too expensive to measure as routine."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 15,
+  "option": 1,
+  "old": "Because a screen can only be manufactured in a handful of standard slot widths, so the median is rounded away in any case.",
+  "new": "Because screens come in only a few standard slot widths anyway."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-uniformity-and-fines",
+  "ord": 15,
+  "option": 3,
+  "old": "Because the median is the same for a well sorted and a poorly sorted sand, which makes it useless for any decision.",
+  "new": "Because the median is identical for well and poorly sorted sands."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "The penetration column, shortest first.",
+  "new": "The penetration column, shortest first, since short tunnels drain the least rock."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 1,
+  "old": "None of them, because the fines percentage is unavailable and every decision in this course depends on the fines.",
+  "new": "None of them, since every decision in this course needs the fines."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 3,
+  "old": "Only the standalone slot window, which needs the coarse decile and is unaffected by where the stack stops at the fine end.",
+  "new": "Only the standalone slot window, which needs just the coarse decile."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 2,
+  "old": "The figure needs to be converted from inches to metres first, since design documents are written in SI units throughout.",
+  "new": "The figure must first be converted from inches to metres, since design documents use SI."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 3,
+  "old": "Because it is proportional to the tunnel length, which grows as the well produces and the near-wellbore rock erodes.",
+  "new": "Because it scales with tunnel length, which grows as the near-wellbore rock erodes away."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "A gravel pack, because it satisfies the third rule.",
+  "new": "A gravel pack, because it satisfies the third rule and a pack is always the safest choice."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "Confirm the spacing is smaller than the tunnel length.",
+  "new": "Confirm the spacing is smaller than the tunnel length, measured in the same units."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "The plane-flow term, through the effective wellbore radius.",
+  "new": "The plane-flow term, through the effective wellbore radius it reads."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 2,
+  "old": "A second sieve analysis from a different depth in the same interval, so that the variability along the interval can be seen.",
+  "new": "A second sieve analysis from another depth, to see the variability."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "The vendor's charge data sheet for the actual gun, charge and casing combination that will be run on the job.",
+  "new": "The vendor's data sheet for the exact gun, charge and casing to be run."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 2,
+  "old": "Around two per cent, because a skin of two is small against a logarithm of eight.",
+  "new": "Around two per cent, because a skin of two is small against a logarithm of eight and only nudges the denominator."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 1,
+  "old": "The colleague is right, since the widest spread gives the largest effective radius.",
+  "new": "The colleague is right, since the widest spread gives the largest effective radius by draining both sides of the well equally."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 0,
+  "old": "Extra shots, which reach every term except the blockage one.",
+  "new": "Extra shots, which reach every term except the blockage one, because density sets the spacing everywhere else."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 2,
+  "old": "They reach the same three components and differ only in magnitude.",
+  "new": "They reach the same three components and differ only in magnitude, since both simply lengthen the drained region."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "Because that published gun is the only row in the table whose converging term an anisotropy is allowed to touch.",
+  "new": "Because that published gun is the only row whose converging term an anisotropy may touch."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 2,
+  "old": "Yes, since that ratio is exactly what carries layering into the converging term.",
+  "new": "Yes, since that ratio is exactly what carries layering into the converging term, so a shale bed is just a very high value."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 0,
+  "old": "Roughly minus two, since the skin carries straight through.",
+  "new": "Roughly minus two, since the skin carries straight through to the ratio without passing through any logarithm."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "Roughly four fifths, because a skin of two always costs a fifth of the ideal.",
+  "new": "Roughly four fifths, because a skin of two always costs a fifth of the ideal whichever sign it happens to carry."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "The single producer, which has more rock to drain.",
+  "new": "The single producer, which has more rock to drain, so every tunnel it carries has to deliver a larger share of the flow."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 1,
+  "old": "Neither, since the ratio is dimensionless and therefore free of any spacing.",
+  "new": "Neither, since the ratio is dimensionless and therefore free of any spacing or drainage area the well is given."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 1,
+  "old": "The ratio comes back at about thirteen, which is the answer.",
+  "new": "The ratio comes back at about thirteen, which is the answer, since the expression is simply evaluated as written."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "The engine clamps the result and reports a large but finite ratio.",
+  "new": "The engine clamps the result and reports a large but finite ratio, capped at the edge of the fitted input range."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "Reporting the four components underneath the ratio rather than the ratio alone.",
+  "new": "Reporting the four components underneath the ratio rather than the ratio alone, so each could be checked in turn."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "As proof that the better gun delivers twenty seven per cent above the field average.",
+  "new": "As proof that the better gun delivers twenty seven per cent above the field average for the same reservoir."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 3,
+  "old": "Nothing in that list, because a steady state number does not change once the well has been put on production.",
+  "new": "Nothing in that list, because a steady state number does not change once the well is on stream."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "The only row shot at zero phasing in the whole table.",
+  "new": "The only row shot at zero phasing in the whole table, which is why its plane-flow term comes out so very low."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 1,
+  "old": "The row with the shortest tunnel, which is why its blockage term is large.",
+  "new": "The row with the shortest tunnel, which is why its blockage term is large and dominates the rest of the sum."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "Its phasing is not one of the six angles the correlation tabulates constants for.",
+  "new": "Its phasing is not one of the six angles the correlation tabulates constants for, so it falls outside the fit."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "Report the value unchanged, since the warning concerns the input rather than the output.",
+  "new": "Report the value unchanged, since the warning concerns the input rather than the output and the magnitude stays valid."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "Because the finite element solution was itself only approximate near the range limits.",
+  "new": "Because the finite element solution was itself only approximate near the range limits, which the fit then inherited."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "The gun clearance limit, which decides whether the carrier can be run at all.",
+  "new": "The gun clearance limit, which decides whether the carrier can be run through the completion tubing at all."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "The gas sand, because gas expands as it surges and so the guidance holds its underbalance below the oil case.",
+  "new": "The gas sand, because gas expands as it surges, so its guidance holds the underbalance lower."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "Yes, because the classes are advisory and their boundaries carry no consequence.",
+  "new": "Yes, because the classes are advisory and their boundaries carry no consequence for the returned band."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "Every one of the four, since a tunnel radius runs right through the whole correlation.",
+  "new": "Every one of the four, since a tunnel radius runs right through the whole correlation including the blockage term."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "Convert into shots per metre and use it as it stands, because dimensionless groups need no inversion of any kind.",
+  "new": "Convert into shots per metre and use it as it stands, as dimensionless groups need no inversion."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Only the productivity ratio moves, since an effective wellbore radius appears nowhere else among the four terms.",
+  "new": "Only the productivity ratio moves, since an effective wellbore radius appears in no other term."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "Because a total is only checked against the productivity ratio and never against its parts.",
+  "new": "Because a total is only ever checked against the productivity ratio and never against its own four parts."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "The spacing group carries no root at all and the radius group carries both of them.",
+  "new": "The spacing group carries no root at all and the radius group carries both of them, one multiplying the other."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "The skin governs, because a productivity ratio above one settles the completion choice.",
+  "new": "The skin governs, because a productivity ratio above one settles the completion choice before strength is read."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "Stimulation Design for the fracture half length and its skin.",
+  "new": "Stimulation Design for the fracture half length and its skin, which the Expert tier adds to the perforation skin."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "Completion Design for the hardware and Well Integrity for the long term.",
+  "new": "Completion Design for the hardware and Well Integrity for the long term, since both sit downstream of the cavity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-skin-and-what-it-is-not",
+  "ord": 7,
+  "option": 1,
+  "old": "Four lengths and an absolute permeability.",
+  "new": "Four lengths and an absolute permeability, read in millidarcies."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-skin-and-what-it-is-not",
+  "ord": 9,
+  "option": 3,
+  "old": "Scaling the crushed zone thickness, which is otherwise reported as a fixed fraction of the tunnel radius.",
+  "new": "Scaling the crushed zone thickness as a fraction of the tunnel radius."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-skin-and-what-it-is-not",
+  "ord": 10,
+  "option": 0,
+  "old": "It grows in proportion to the rock permeability.",
+  "new": "It grows in proportion to the rock permeability that the shell sits in."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-skin-and-what-it-is-not",
+  "ord": 11,
+  "option": 2,
+  "old": "In the conversion between shot density expressed per metre and shot density expressed per foot of perforated interval.",
+  "new": "In converting shot density between per metre and per foot of interval."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-skin-and-what-it-is-not",
+  "ord": 11,
+  "option": 3,
+  "old": "In the productivity ratio, which needs a rate and therefore needs a rock quality to compute that rate from.",
+  "new": "In the productivity ratio, which needs a rate and so a rock quality."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-skin-and-what-it-is-not",
+  "ord": 12,
+  "option": 0,
+  "old": "The same well before it was cased and cemented.",
+  "new": "The same well before it was cased and cemented, drilled to the same depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-skin-and-what-it-is-not",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the correlation was derived from a finite element model rather than from any measurement made on a real completion.",
+  "new": "Because the correlation came from a finite element model rather than a real measurement."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-skin-and-what-it-is-not",
+  "ord": 13,
+  "option": 3,
+  "old": "Because open hole completions are no longer permitted by regulators in most of the jurisdictions where the correlation is used.",
+  "new": "Because regulators no longer permit open hole completions in most jurisdictions."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-skin-and-what-it-is-not",
+  "ord": 14,
+  "option": 0,
+  "old": "The pressure drop reverses direction near the wellbore.",
+  "new": "The pressure drop reverses direction near the wellbore, pushing the fluid back into the rock."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-skin-and-what-it-is-not",
+  "ord": 15,
+  "option": 1,
+  "old": "That the flow is steady and single phase.",
+  "new": "That the flow is steady and single phase at every flow rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-four-components",
+  "ord": 8,
+  "option": 3,
+  "old": "The crushed zone contrast, because it multiplies the whole vertical convergence resistance.",
+  "new": "The crushed zone contrast, because it multiplies the whole vertical convergence resistance around each tunnel."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-four-components",
+  "ord": 9,
+  "option": 1,
+  "old": "The tunnel length divided by the perforation spacing.",
+  "new": "The tunnel length divided by the perforation spacing, which sets how much of the hole the tunnels shadow."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-four-components",
+  "ord": 9,
+  "option": 2,
+  "old": "The crushed radius divided by the tunnel radius of the perforation.",
+  "new": "The crushed radius divided by the tunnel radius of the perforation, since the shell narrows the flow path."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-four-components",
+  "ord": 10,
+  "option": 1,
+  "old": "Because the tunnel radius grows with the phase angle chosen for the charge.",
+  "new": "Because the tunnel radius grows with the phase angle chosen for the charge, and the constants scale with that radius."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-four-components",
+  "ord": 11,
+  "option": 2,
+  "old": "A deep penetrating gun run into a hole with a heavily crushed tunnel wall.",
+  "new": "A deep penetrating gun run into a hole with a heavily crushed tunnel wall that chokes the entry to each shot."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-four-components",
+  "ord": 12,
+  "option": 0,
+  "old": "Shot density, entrance hole diameter and the phasing constant.",
+  "new": "Shot density, entrance hole diameter and the phasing constant, each taken straight from the gun catalog row."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-four-components",
+  "ord": 12,
+  "option": 1,
+  "old": "Crushed radius over wellbore radius, the tunnel length and the anisotropy.",
+  "new": "Crushed radius over wellbore radius, the tunnel length and the anisotropy that stretches the vertical flow path."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-four-components",
+  "ord": 13,
+  "option": 2,
+  "old": "The shell is attached to each perforation, so its cost is fixed by the spacing over tunnel length factor.",
+  "new": "The shell is attached to each perforation, so its cost is fixed by the spacing over length factor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-four-components",
+  "ord": 15,
+  "option": 2,
+  "old": "Because the logarithm of the radius ratio amplifies small differences between guns.",
+  "new": "Because the logarithm of the radius ratio amplifies small differences between the guns into large swings of skin."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 7,
+  "option": 1,
+  "old": "A hundred and eighty degrees is best because it drains the rock most symmetrically.",
+  "new": "A hundred and eighty degrees is best because it drains the rock most symmetrically from opposite sides."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 8,
+  "option": 2,
+  "old": "They rise to a peak at ninety degrees and fall away on either side of it, which is the reason ninety is the usual default.",
+  "new": "They rise to a peak at ninety degrees and fall away either side, which is why ninety is the usual default."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 9,
+  "option": 1,
+  "old": "The crushed zone term switches to another correlation once the shots line up in one plane.",
+  "new": "The crushed zone term switches to another correlation once the shots line up in one plane along the gun."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 10,
+  "option": 2,
+  "old": "Penetration enters two components and shot density enters all four of the components.",
+  "new": "Penetration enters two components and shot density enters all four, since spacing sits in every one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 11,
+  "option": 0,
+  "old": "Short tunnels fail to get past the drilling damage zone.",
+  "new": "Short tunnels fail to get past the drilling damage zone, so halving the length strands them in damaged rock."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 11,
+  "option": 2,
+  "old": "The crushed zone shell becomes proportionally thicker as the tunnel is shortened.",
+  "new": "The crushed zone shell becomes proportionally thicker as the tunnel is shortened, so the damage term takes over."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 12,
+  "option": 3,
+  "old": "Buy whichever lever the vendor quotes most cheaply, because the four components respond about equally to either of them.",
+  "new": "Buy whichever lever the vendor quotes most cheaply, since the four components respond about equally."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 13,
+  "option": 1,
+  "old": "The contrast between crushed zone and virgin permeability, felt in the crushed zone term.",
+  "new": "The contrast between crushed zone and virgin permeability, felt in the crushed zone term around each tunnel."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 14,
+  "option": 0,
+  "old": "It raises the crushed zone resistance and the entrance hole loss.",
+  "new": "It raises the crushed zone resistance and the entrance hole loss, since both scale with how far fluid travels vertically."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 14,
+  "option": 1,
+  "old": "It doubles the shot spacing and halves the tunnel length within the same expression.",
+  "new": "It doubles the shot spacing and halves the tunnel length within the same expression, lengthening every flow path."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-reading-the-catalog",
+  "ord": 15,
+  "option": 2,
+  "old": "Raise the underbalance, and treat the correlation as unusable in any rock above ten to one.",
+  "new": "Raise the underbalance to clean the laminae, and treat the correlation as unusable in any rock above ten to one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 7,
+  "option": 1,
+  "old": "Because the test is run after clean-up, when the perforations have already changed.",
+  "new": "Because the test is run after clean-up, when the perforations have already changed shape and lost their crushed zone."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 8,
+  "option": 2,
+  "old": "Quote the total skin instead of the ratio, since skin is what a well test returns.",
+  "new": "Quote the total skin instead of the ratio, since skin is what a well test returns and needs no reference stated."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 9,
+  "option": 2,
+  "old": "The drainage radius chosen for the calculation was too small to be realistic.",
+  "new": "The drainage radius chosen for the calculation was too small to be realistic, pinching the logarithm down."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 10,
+  "option": 2,
+  "old": "At any negative skin at all, because the model was derived for damaged completions and cannot represent a stimulated wellbore.",
+  "new": "At any negative skin, because the model was derived for damaged completions and not stimulated ones."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 11,
+  "option": 0,
+  "old": "Acid washes, because they remove the crushed zone entirely.",
+  "new": "Acid washes, because they remove the crushed zone entirely and so drive the skin as low as the geometry allows."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 11,
+  "option": 2,
+  "old": "Nothing does, because the bound sits outside every completion type.",
+  "new": "Nothing does, because the bound sits outside every completion type that can physically be run in a real producing well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 12,
+  "option": 3,
+  "old": "Because the clamped value would depend on the wellbore radius chosen, and that input is known far less well than the drainage radius.",
+  "new": "Because the clamped value would depend on the wellbore radius chosen, which is known less well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 13,
+  "option": 1,
+  "old": "A re-perforation run helps the crushed zone case and an acid wash helps the other.",
+  "new": "A re-perforation run helps the crushed zone case and an acid wash helps the other, by dissolving the plane-flow resistance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 14,
+  "option": 2,
+  "old": "The gun was run shallow, so only part of the interval was actually opened to flow.",
+  "new": "The gun was run shallow, so only part of the interval was actually opened to flow and the rest adds a penetration skin."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 15,
+  "option": 0,
+  "old": "The gun type, the charge weight, the phasing and the shot density.",
+  "new": "The gun type, the charge weight, the phasing and the shot density, so that a reader can rerun the whole catalog sweep."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-productivity-ratio",
+  "ord": 15,
+  "option": 1,
+  "old": "The reservoir pressure, the drawdown, the measured rate and the well test skin.",
+  "new": "The reservoir pressure, the drawdown, the measured rate and the well test skin, which together confirm the ratio directly."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 7,
+  "option": 0,
+  "old": "Because the flagged rows are computed with a different equation.",
+  "new": "Because the flagged rows are computed with a different equation, one that returns systematically higher ratios."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 7,
+  "option": 2,
+  "old": "Because extrapolation always biases a power law upward, flattering whatever row it touches.",
+  "new": "Because extrapolation always biases a power law upward, flattering whichever row it touches anywhere in the catalog."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 8,
+  "option": 3,
+  "old": "Ignore it, since the warning describes the correlation rather than the gun being modelled.",
+  "new": "Ignore it, since the warning describes the correlation rather than the particular gun being modelled on that row."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 9,
+  "option": 2,
+  "old": "The converging flow term, because the surge widens the tunnel entrance and so raises the dimensionless perforation radius.",
+  "new": "The converging flow term, as the surge widens the entrance and raises the perforation radius."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 10,
+  "option": 2,
+  "old": "Tighter rock and oil rather than gas, since oil carries debris far less readily than gas does.",
+  "new": "Tighter rock and oil rather than gas, since oil carries debris far less readily than gas does at surge rates."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 11,
+  "option": 2,
+  "old": "High is anything above a hundred millidarcies exclusively, which puts a hundred itself into the moderate class alongside ninety nine.",
+  "new": "High is anything strictly above a hundred millidarcies, so a hundred itself falls into moderate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 12,
+  "option": 0,
+  "old": "As a single recommended value in psi, rounded to the nearest hundred.",
+  "new": "As a single recommended value in psi, rounded to the nearest hundred so it can go straight onto the job sheet."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 12,
+  "option": 3,
+  "old": "As a range in pascals only, since psi is a field unit that the engine deliberately avoids.",
+  "new": "As a range in pascals only, since psi is a field unit that the engine deliberately avoids in all of its outputs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 13,
+  "option": 3,
+  "old": "The lower bound for gas wells, which the perforation module leaves to a fluid property routine.",
+  "new": "The lower bound for gas wells, which the perforation module leaves to a separate fluid property routine to compute."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 14,
+  "option": 3,
+  "old": "Productivity ratio and its drainage radius dependence, which the Expert tier takes over instead.",
+  "new": "Productivity ratio and its drainage radius dependence, which the Expert tier takes over instead of this one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-where-the-correlation-stops",
+  "ord": 15,
+  "option": 3,
+  "old": "That the gun ranking and the absolute magnitudes are both reliable across the whole catalog.",
+  "new": "That the gun ranking and the absolute magnitudes are both reliable across the whole catalog, flagged rows included."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 7,
+  "option": 0,
+  "old": "Yes, because the ratio hardly moves with drainage radius.",
+  "new": "Yes, because the ratio hardly moves with drainage radius, so any reasonable value gives the same graded answer."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 7,
+  "option": 3,
+  "old": "No, but only the four skin components need redoing, not the ratio itself.",
+  "new": "No, but only the four skin components need redoing, since the drainage radius feeds those and leaves the ratio."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 8,
+  "option": 3,
+  "old": "It is the only one of the six values carrying a physical unit worth checking.",
+  "new": "It is the only one of the six values carrying a physical unit, so it is the one worth checking against the gun sheet."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "option": 2,
+  "old": "Wrong, because the crushed term depends on the spacing and the tunnel length alone.",
+  "new": "Wrong, because the crushed term depends on the spacing and the tunnel length alone, so the shell cannot matter."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "Because the tier works in dimensionless groups, and such groups are approximate by nature.",
+  "new": "Because the tier works in dimensionless groups, and such groups are approximate by nature and blur every real difference between wells."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 3,
+  "old": "Choose an underbalance from the rock strength and certify the job against sanding.",
+  "new": "Choose an underbalance from the rock strength and certify the job against sanding directly from the published bands."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "It is a good completion, since skin is what governs the rate.",
+  "new": "It is a good completion, since skin is what governs the rate and a low skin outweighs any concern over rock strength."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "The two results belong to different courses and are reported independently.",
+  "new": "The two results belong to different courses and are reported independently, so neither one qualifies the other."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 2,
+  "old": "The coarse decile sizes the gravel, the median sets the screen gauge, and the standalone slot width comes from the fines fraction.",
+  "new": "The coarse decile sizes the gravel, the median sets the screen gauge, and the fines fraction sets the slot."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "Geomechanics supplies the unconfined strength only, and the drilling course supplies the mud weight programme that caused the damage.",
+  "new": "Geomechanics supplies only the unconfined strength, and the drilling course the mud weight programme."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "An average of the stresses over the interval compared with the strength of the gravel pack.",
+  "new": "An average of the stresses over the interval compared with the strength of the gravel pack that will be placed against it."
+ }
+]

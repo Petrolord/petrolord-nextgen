@@ -1,0 +1,2135 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 0,
+  "old": "The mud weight downhole.",
+  "new": "The mud weight downhole, which is reduced so the static column sits lower in the window."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 1,
+  "old": "The trip speed against a limit.",
+  "new": "The trip speed against a limit computed from the surge calculation for each stand."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 0,
+  "old": "Because it has no pore pressure.",
+  "new": "Because it has no pore pressure, and a kick can only be recognised by comparing against one."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 1,
+  "old": "The surge and swab rise, since a thinner mud transmits the displaced volume's pressure more efficiently.",
+  "new": "The surge and swab rise, as a thinner mud transmits displacement better."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 2,
+  "old": "The pump pressure rises, because a thinner mud is more likely to be turbulent inside the drill pipe.",
+  "new": "The pump pressure rises, as a thinner mud goes turbulent in the pipe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 1,
+  "old": "Exactly 2, so it helps a great deal.",
+  "new": "Exactly 2, so halving the speed quarters the pressure and it helps a great deal."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 0,
+  "old": "There is adequate margin.",
+  "new": "There is adequate margin, since the uplift is smaller than the window and the well stays inside it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "The swab only.",
+  "new": "The swab only, since the choke is left open while tripping out."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 1,
+  "old": "Applies zero friction there.",
+  "new": "Applies zero friction there, treating the uncovered spans as if they had no annulus at all."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 0,
+  "old": "The geometry coverage warning.",
+  "new": "The geometry coverage warning, whose tolerance on missing length the user sets."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 1,
+  "old": "Because those are monitoring functions that belong to the rig's instrumentation rather than to a calculation.",
+  "new": "Because detecting them is a monitoring job for the rig's instrumentation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "Because it does warn about all three, through the transport ratio, the concentration and the coverage flag.",
+  "new": "Because it warns about all three, through its transport and coverage flags."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "The trip tank volume, which measures the displacement the surge calculation assumes.",
+  "new": "The trip tank volume, measuring the displacement the surge assumes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "The pressures a well will actually see, verified against an independent implementation to better than 1e-6.",
+  "new": "The pressures a well will actually see, verified to better than 1e-6."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "The flow rate that cleans the hole without fracturing the formation, on any well and any geometry.",
+  "new": "The flow rate that cleans without fracturing, on any well and geometry."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "The capstone grader, which rejects an answer whose key matches one of the excluded topics.",
+  "new": "The capstone grader, which rejects an answer keyed to an excluded topic."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "The pump pressure, which is what the kill sheet uses as its slow circulating rate reference.",
+  "new": "The pump pressure, the kill sheet's slow circulating rate reference."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "The burst rating.",
+  "new": "The burst rating, set from the peak pump pressure seen during the cement job."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "The mud density.",
+  "new": "The mud density, since it is the input that enters every term of the surge calculation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "Watch the standpipe pressure, since every one of the three events this tier describes changes it first.",
+  "new": "Watch the standpipe, since every event this tier describes changes it first."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "The limits are computed here and the pressures come from the rig's instrumentation as measurements.",
+  "new": "The limits are computed here; the pressures are measured on the rig."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "Both come from geomechanics, and this course only converts between pressure and equivalent mud weight.",
+  "new": "Both come from geomechanics; this course only converts the units."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Because the surge calculation uses the clinging constant, which both implementations hard-code identically.",
+  "new": "Because both implementations hard-code the same clinging constant."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "The average of the two, since a drill string with a ported float is between the two extremes.",
+  "new": "The average of the two, since a ported float sits between them."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "Neither: plan for the speed at which the surge equals the equivalent circulating density.",
+  "new": "Neither: plan for the speed where the surge equals the ECD."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-moving-the-string",
+  "ord": 8,
+  "option": 0,
+  "old": "0.95, and it multiplies the area.",
+  "new": "0.95, and it multiplies the pipe's cross-sectional area to give the displaced volume."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-moving-the-string",
+  "ord": 9,
+  "option": 1,
+  "old": "Because the closed string's displaced volume grows as the square of the speed and the open one's grows linearly.",
+  "new": "Because the closed string's displaced volume grows as the speed squared and the open one's linearly."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-moving-the-string",
+  "ord": 10,
+  "option": 2,
+  "old": "About 1.0, since the displaced volume is proportional to the speed and the pressure follows the volume.",
+  "new": "About 1.0, as the pressure follows the displaced volume."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-moving-the-string",
+  "ord": 10,
+  "option": 3,
+  "old": "About 1.8, matching the turbulent friction factor's dependence on the Reynolds number.",
+  "new": "About 1.8, matching turbulent friction."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-moving-the-string",
+  "ord": 11,
+  "option": 0,
+  "old": "Slowing down does not help.",
+  "new": "Slowing down does not help, since the clinging term is fixed by the geometry."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-moving-the-string",
+  "ord": 12,
+  "option": 2,
+  "old": "Because a real trip is done with the pumps off, so the mud has gelled and the yield stress is higher.",
+  "new": "Because the pumps are off during a trip, so the mud has gelled and its yield is higher."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-moving-the-string",
+  "ord": 13,
+  "option": 0,
+  "old": "Pulling drill pipe fast.",
+  "new": "Pulling drill pipe fast, since the string moves quickest when it is coming out."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-moving-the-string",
+  "ord": 14,
+  "option": 2,
+  "old": "Rotate the casing, which converts the axial displacement into a tangential motion and reduces the surge.",
+  "new": "Rotate the casing, turning axial displacement into a tangential one."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-moving-the-string",
+  "ord": 14,
+  "option": 3,
+  "old": "Circulate while running, which keeps the annulus moving and prevents the displaced volume accumulating.",
+  "new": "Circulate while running, so the displaced volume never accumulates."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-moving-the-string",
+  "ord": 15,
+  "option": 3,
+  "old": "Because its mud is heavier, which raises the density term in the annular pressure loss expression.",
+  "new": "Because its mud is heavier, which raises the density term in the annular loss."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pressure-window",
+  "ord": 8,
+  "option": 2,
+  "old": "Newton iteration on the derivative of the surge pressure with respect to the trip speed.",
+  "new": "Newton iteration on the derivative of surge pressure with trip speed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pressure-window",
+  "ord": 9,
+  "option": 0,
+  "old": "The maximum in its bracket.",
+  "new": "The maximum in its bracket, because the bisection has no lower point to converge towards."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pressure-window",
+  "ord": 10,
+  "option": 1,
+  "old": "The surge, running in.",
+  "new": "The surge, running in, because it is the larger of the two pressures."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pressure-window",
+  "ord": 11,
+  "option": 2,
+  "old": "Because casing is run more slowly anyway, so the calculation is done at a different reference speed.",
+  "new": "Because casing is run slower anyway, at a different reference speed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pressure-window",
+  "ord": 11,
+  "option": 3,
+  "old": "Because casing has no tool joints, so the clinging constant does not apply to it in the same way.",
+  "new": "Because casing has no tool joints, so the clinging constant differs."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pressure-window",
+  "ord": 12,
+  "option": 0,
+  "old": "About 10 kg/m3.",
+  "new": "About 10 kg/m3, since the surge and the circulating uplift nearly cancel each other."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pressure-window",
+  "ord": 13,
+  "option": 1,
+  "old": "The swab, since it is the only one below the mud weight and has less room to work with.",
+  "new": "The swab, being the only one below the mud weight."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pressure-window",
+  "ord": 13,
+  "option": 3,
+  "old": "The static mud weight, which dominates all three of the others by more than an order of magnitude.",
+  "new": "The static mud weight, by more than an order of magnitude."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pressure-window",
+  "ord": 14,
+  "option": 1,
+  "old": "A wider window.",
+  "new": "A wider window, by raising the fracture gradient."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pressure-window",
+  "ord": 15,
+  "option": 2,
+  "old": "Because the mud gels while the pumps are off, which raises the pressure needed to restart circulation.",
+  "new": "Because the mud gels while the pumps are off, raising the pressure to restart."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-goes-wrong",
+  "ord": 8,
+  "option": 2,
+  "old": "A cement plug set to isolate a loss zone, which packs off the annulus deliberately.",
+  "new": "A cement plug set to isolate a loss zone, packing off the annulus."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-goes-wrong",
+  "ord": 9,
+  "option": 0,
+  "old": "The pit volume falling.",
+  "new": "The pit volume falling, since the cuttings held in the annulus take up mud volume."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-goes-wrong",
+  "ord": 10,
+  "option": 2,
+  "old": "It can plug the bit, stall the mud motor, and stop the measurement-while-drilling telemetry from reaching surface.",
+  "new": "It can plug the bit, stall the motor and cut the telemetry to surface."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-goes-wrong",
+  "ord": 10,
+  "option": 3,
+  "old": "It raises the pump pressure, the torque and the hookload, all three of which are monitored continuously.",
+  "new": "It raises pump pressure, torque and hookload, all monitored continuously."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-goes-wrong",
+  "ord": 11,
+  "option": 0,
+  "old": "Stopping the pumps, which hides it.",
+  "new": "Stopping the pumps, which hides it and lets the cuttings settle further."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-goes-wrong",
+  "ord": 12,
+  "option": 0,
+  "old": "The standpipe pressure.",
+  "new": "The standpipe pressure, which rises for one and falls for the other."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-goes-wrong",
+  "ord": 13,
+  "option": 1,
+  "old": "Because the formation fluid dilutes the mud, which lowers its viscosity and therefore the friction loss.",
+  "new": "Because the formation fluid dilutes the mud, lowering its viscosity and the friction loss."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-goes-wrong",
+  "ord": 14,
+  "option": 2,
+  "old": "The fracture gradient and the pore pressure, which are the limits each observation is compared against.",
+  "new": "The fracture gradient and pore pressure to compare against."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-what-goes-wrong",
+  "ord": 14,
+  "option": 3,
+  "old": "The cuttings concentration, which predicts a pack-off before it happens and gives time to react.",
+  "new": "The cuttings concentration, which predicts a pack-off."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-managing-the-window",
+  "ord": 10,
+  "option": 2,
+  "old": "Because the choke has to be set from the pump pressure, which the model computes from the flow rate.",
+  "new": "Because the choke has to be set from the pump pressure, which the model computes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-managing-the-window",
+  "ord": 12,
+  "option": 2,
+  "old": "The surge and swab pressures, recorded from a downhole gauge at each stand as the string is run.",
+  "new": "The surge and swab pressures, recorded by a downhole gauge at each stand."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-managing-the-window",
+  "ord": 12,
+  "option": 3,
+  "old": "The time each stand takes, from which the average trip speed and therefore the surge is inferred.",
+  "new": "The time each stand takes, from which trip speed and surge are inferred."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-managing-the-window",
+  "ord": 13,
+  "option": 1,
+  "old": "The surge calculation detects a kick and the trip sheet sets the speed limit that prevents one.",
+  "new": "The surge calculation detects kicks and the trip sheet sets the speed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-managing-the-window",
+  "ord": 13,
+  "option": 3,
+  "old": "The trip sheet computes the displacement and the surge calculation checks it against the fracture gradient.",
+  "new": "The sheet computes displacement; the surge checks it against fracture."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-managing-the-window",
+  "ord": 14,
+  "option": 0,
+  "old": "Because the active pit is in use.",
+  "new": "Because the active pit is in use, connected to the pumps that are circulating the well."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-managing-the-window",
+  "ord": 15,
+  "option": 0,
+  "old": "The fracture gradient.",
+  "new": "The fracture gradient, so the driller can judge each stand's surge against it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 7,
+  "option": 0,
+  "old": "Because they are both large.",
+  "new": "Because they are both large, so any error in either would dominate the answer."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 8,
+  "option": 1,
+  "old": "The gel is measured at 3 rpm and the yield stress is extrapolated to zero shear rate from the two high readings.",
+  "new": "The gel is measured at 3 rpm and the yield stress extrapolated."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 8,
+  "option": 2,
+  "old": "The gel applies to the annulus and the yield stress to the pipe, since the shear rates differ by two orders.",
+  "new": "The gel applies to the annulus and the yield stress to the pipe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 9,
+  "option": 0,
+  "old": "Raises it by the same amount.",
+  "new": "Raises it by the same amount, since the pipe on the low side narrows the flow path."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 10,
+  "option": 1,
+  "old": "Improves it, by raising the velocity.",
+  "new": "Improves it, by raising the velocity in the narrow gap where the pipe rests on the low side."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 11,
+  "option": 2,
+  "old": "It always raises it, since the tangential velocity adds to the axial one and the loss goes as the total velocity.",
+  "new": "It always raises it, since the tangential velocity adds to the axial."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 11,
+  "option": 3,
+  "old": "It has no effect, because the tangential motion is perpendicular to the axial flow and the two do not interact.",
+  "new": "It has no effect, since tangential and axial motion do not interact."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 12,
+  "option": 0,
+  "old": "Nothing measurable.",
+  "new": "Nothing measurable, because the bed lies below the pipe's reach."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 14,
+  "option": 1,
+  "old": "Records it in a documentation table.",
+  "new": "Records it in a documentation table that the course catalogue displays to learners."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 15,
+  "option": 2,
+  "old": "The equivalent circulating density to within the five to fifteen percent that field comparisons find.",
+  "new": "The ECD to within the five to fifteen percent field comparisons find."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 7,
+  "option": 0,
+  "old": "The equivalent circulating density.",
+  "new": "The equivalent circulating density, since it exists only while pumping."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 8,
+  "option": 1,
+  "old": "The three rheology fits and the four pressures the circulating system is made of, on the new mud.",
+  "new": "The three rheology fits and the four circulating pressures, on the new mud."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 11,
+  "option": 1,
+  "old": "Both equally, since surge and swab are symmetric and the window is centred on the mud weight.",
+  "new": "Both equally, since surge and swab are symmetric."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 11,
+  "option": 3,
+  "old": "Neither: the window is wide enough that the maximum search speed is returned unchanged.",
+  "new": "Neither: the maximum search speed is returned."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "Use the average over a stand.",
+  "new": "Use the average over a stand, since the model is steady."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 2,
+  "old": "Report the ECD profile rather than the value at total depth, since the deepest formation is not always the weakest.",
+  "new": "Report the ECD profile rather than the value at total depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "Report the method specification, since four of its seven points are conventions rather than derivations.",
+  "new": "Report the method specification, since four points are conventions."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "The mud's rheology.",
+  "new": "The mud's rheology, supplied ready-fitted by the mud engineer."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "The annular velocity, which sets the drag on the outside of the pipe as it is tripped through the mud.",
+  "new": "The annular velocity, which sets the drag on the outside of the pipe as it is tripped."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 3,
+  "old": "The bit's share is constant, so a single measurement at one flow rate characterises the whole system.",
+  "new": "The bit's share is constant, so one measurement characterises the system."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "Holding the hole up and not fracturing.",
+  "new": "Holding the hole up and not fracturing, which both depend on the annulus."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 2,
+  "old": "The mud has a very high plastic viscosity, since the apparent viscosity at high rate approaches it asymptotically.",
+  "new": "The mud has a very high plastic viscosity, approached at the high rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 3,
+  "old": "The measurement is unreliable, because a factor of eighteen is far beyond what a drilling mud exhibits.",
+  "new": "The measurement is unreliable, since no drilling mud thins that much."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 0,
+  "old": "The mud is too thick.",
+  "new": "The mud is too thick, so its rheology needs to be treated first."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 1,
+  "old": "The pipe, being the largest.",
+  "new": "The pipe, being the largest of the three losses."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 0,
+  "old": "Nothing, they are the same.",
+  "new": "Nothing, they are the same stress, both read at the lowest viscometer speed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "No, it should be the reverse.",
+  "new": "No, it should be the reverse, since the annulus carries the larger volume of mud."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "Take the pump pressure and multiply by the published typical bit share for the hole size being drilled.",
+  "new": "Take the pump pressure and apply the typical bit share for that hole size."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "Because the specification determines which of the three rheology models the calculation used at each element.",
+  "new": "Because it determines which rheology model was used at each element."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "Because two implementations of the same specification will disagree by a few percent in the transition region.",
+  "new": "Because two codes of the same specification disagree by a few percent."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 0,
+  "old": "The bit has more nozzles.",
+  "new": "The bit has more nozzles, and each one needs its own share of the flow to clean."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 0,
+  "old": "The pump pressure.",
+  "new": "The pump pressure, which changes with every element."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 1,
+  "old": "Raises it by five percent, since it multiplies the jet velocity and the pressure follows the velocity linearly.",
+  "new": "Raises it by five percent, as pressure follows jet velocity linearly."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 3,
+  "old": "Nothing: it cancels between the pressure and the velocity when the two are computed from the same flow rate.",
+  "new": "Nothing: it cancels between the pressure and the velocity."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "It depends on the flow rate: too high at low rates where the annulus is laminar, too low at high rates.",
+  "new": "It depends on the flow rate and the annulus regime."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "It is not wrong, since the engine converts any of the three fits to the same local power law before computing.",
+  "new": "It is not wrong: every fit becomes one power law."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 1,
+  "old": "Holding the hole up and carrying cuttings, since a denser mud is harder to circulate at a useful rate.",
+  "new": "Holding the hole up and carrying cuttings, as dense mud is hard to circulate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "Any variation with depth, since a steady state means the same conditions everywhere along the flow path.",
+  "new": "Any variation with depth, as conditions match everywhere."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "The cuttings calculation, which needs a rate of penetration and is therefore inherently time dependent.",
+  "new": "The cuttings calculation, which needs a rate of penetration."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "The density and the depth.",
+  "new": "The density and the depth, since both are entered in field units on a rig."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "Refuses to compute.",
+  "new": "Refuses to compute, since a zero velocity gives an undefined Reynolds number."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "A change in the mud weight.",
+  "new": "A change in the mud weight, since the hydrostatic column balances inside and outside the string."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "It confirms the mud rheology, which is the input most likely to have been entered from a stale mud check.",
+  "new": "It confirms the mud rheology, the input most likely to be stale."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "It bounds the discretisation error, which is the largest source of uncertainty in a long flow path.",
+  "new": "It bounds the discretisation error along a long flow path."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "It rises from a tenth to a fifth.",
+  "new": "It rises from a tenth to a fifth, as the annulus loss grows fastest."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "A high pump pressure is dangerous.",
+  "new": "A high pump pressure is dangerous, since all of it is applied against the open formation."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "The equivalent circulating density equals the mud weight times one plus the bit share.",
+  "new": "The ECD equals the mud weight times one plus the bit share."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "It will not affect the ECD.",
+  "new": "It will not affect the ECD, since the ECD depends on the mud weight alone."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "Use the Bingham model, since PV and YP are what the mud report gives and the fit is exact at both readings.",
+  "new": "Use the Bingham model, since PV and YP are on the mud report and the fit is exact there."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-hydraulics-is-for",
+  "ord": 8,
+  "option": 0,
+  "old": "The hole diameter alone.",
+  "new": "The hole diameter alone, since that is the wall the mud flows against."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-hydraulics-is-for",
+  "ord": 9,
+  "option": 1,
+  "old": "Because the mud's density varies with depth.",
+  "new": "Because the mud's density varies with depth, compressing the mud lower in the hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-hydraulics-is-for",
+  "ord": 10,
+  "option": 3,
+  "old": "Two geometry sections overlap, so the engine chose one of them arbitrarily at each integration interval.",
+  "new": "Two geometry sections overlap, so the engine chose one arbitrarily at each interval."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-hydraulics-is-for",
+  "ord": 11,
+  "option": 1,
+  "old": "What nozzles to run, which needs the fracture gradient in order to fix the split between the bit and the system.",
+  "new": "What nozzles to run, which needs the fracture gradient."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-hydraulics-is-for",
+  "ord": 11,
+  "option": 3,
+  "old": "How fast to trip, which is settled entirely by the surge and swab pressures this course computes.",
+  "new": "How fast to trip, settled by surge and swab alone."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-hydraulics-is-for",
+  "ord": 12,
+  "option": 2,
+  "old": "The well's true vertical depth, which sets the hydrostatic head the pump has to overcome to circulate.",
+  "new": "The well's true vertical depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-hydraulics-is-for",
+  "ord": 12,
+  "option": 3,
+  "old": "The flow rate alone, since every other input is fixed once the string is made up and run in the hole.",
+  "new": "The flow rate alone."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-hydraulics-is-for",
+  "ord": 14,
+  "option": 2,
+  "old": "Because the mud cannot be both dense enough to hold the hole up and thin enough to be pumped at a useful rate.",
+  "new": "Because the mud cannot be both dense enough and thin enough to pump."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-hydraulics-is-for",
+  "ord": 15,
+  "option": 0,
+  "old": "It varies by case.",
+  "new": "It varies by case, with each fixture's nozzles sized to its well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 7,
+  "option": 2,
+  "old": "A yield stress and a flow behaviour index, which together describe the curve from zero rate upward.",
+  "new": "A yield stress and a flow behaviour index, describing the curve from zero rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 8,
+  "option": 0,
+  "old": "It understates it.",
+  "new": "It understates it, since the line runs below the low-rate readings."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 9,
+  "option": 1,
+  "old": "Predicting the annular pressure loss.",
+  "new": "Predicting the annular pressure loss, since the annulus runs at the rates it describes."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 10,
+  "option": 1,
+  "old": "It is a least-squares fit to all four readings, which is why it misses each of them by a similar small amount.",
+  "new": "It is a least-squares fit to all four readings, missing each by a little."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 10,
+  "option": 3,
+  "old": "It is fitted to the gel strengths rather than to the flowing readings, which is why it captures the yield correctly.",
+  "new": "It is fitted to the gel strengths, which is why it captures the yield."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 11,
+  "option": 2,
+  "old": "They agree in the annulus, where the yield stress dominates, and differ in the pipe where the exponent matters.",
+  "new": "They agree in the annulus, where the yield dominates, and differ in the pipe."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 11,
+  "option": 3,
+  "old": "They differ everywhere, which is why the engine uses a different model for the pipe and for the annulus.",
+  "new": "They differ everywhere, so the engine picks a separate model for each part."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 12,
+  "option": 2,
+  "old": "The consistency index K, which is the stress at a shear rate of one and therefore has viscosity units.",
+  "new": "The consistency index K, the stress at a shear rate of one, in viscosity units."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 13,
+  "option": 3,
+  "old": "Interpolates between the four dial readings directly, without fitting any model to them at all.",
+  "new": "Interpolates between the four dial readings directly, without fitting a model."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 14,
+  "option": 0,
+  "old": "The heavy one, whose n is lower.",
+  "new": "The heavy one, whose n is lower, because it carries more solids."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-mud-rheology",
+  "ord": 15,
+  "option": 0,
+  "old": "The power law, being the simplest.",
+  "new": "The power law, being the simplest of the three fits to evaluate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-pressure-loss",
+  "ord": 9,
+  "option": 2,
+  "old": "Because the mud is thickest inside the pipe, where the shear rate is highest and the apparent viscosity peaks.",
+  "new": "Because the mud is thickest inside the pipe, where the shear rate peaks."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-pressure-loss",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the pipe elements are turbulent and the turbulent friction factor is much larger than the laminar one.",
+  "new": "Because the pipe is turbulent and turbulent friction dwarfs laminar."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-pressure-loss",
+  "ord": 10,
+  "option": 0,
+  "old": "Yes, it adds to the ECD.",
+  "new": "Yes, it adds to the ECD, since every pressure the pump supplies reaches the bottom of the hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-pressure-loss",
+  "ord": 12,
+  "option": 0,
+  "old": "Exactly 2, as at the bit.",
+  "new": "Exactly 2, as at the bit, like any friction loss."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-pressure-loss",
+  "ord": 13,
+  "option": 1,
+  "old": "Doubling the rate doubles the ECD.",
+  "new": "Doubling the rate doubles the ECD, since the loss is proportional to the velocity."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-pressure-loss",
+  "ord": 14,
+  "option": 1,
+  "old": "Laminar flow throughout, with the turbulent correlation applied as a correction where the Reynolds number is high.",
+  "new": "Laminar flow, with a turbulent correction where Reynolds is high."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-pressure-loss",
+  "ord": 14,
+  "option": 3,
+  "old": "A Newtonian fluid, with the shear thinning applied afterwards as a multiplier on the computed pressure loss.",
+  "new": "A Newtonian fluid, with the shear thinning applied afterwards."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-pressure-loss",
+  "ord": 15,
+  "option": 0,
+  "old": "A friction factor only.",
+  "new": "A friction factor only, from which the element's pressure loss is recomputed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-bit",
+  "ord": 7,
+  "option": 0,
+  "old": "1.0, since a nozzle is ideal.",
+  "new": "1.0, since a nozzle is ideal and converts all the pressure into jet velocity."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-bit",
+  "ord": 8,
+  "option": 3,
+  "old": "As the fourth power, because the jet velocity is proportional to the rate and it enters the power squared.",
+  "new": "As the fourth power, because the jet velocity enters the power squared."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-bit",
+  "ord": 9,
+  "option": 0,
+  "old": "Because different bits use different ones.",
+  "new": "Because different bits use different ones, as roller cones and PDC cutters remove rock differently."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-bit",
+  "ord": 10,
+  "option": 3,
+  "old": "They are API standards, so any bit programme that departs from them has to justify the departure.",
+  "new": "They are API standards, so a bit programme that departs from them must justify it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-bit",
+  "ord": 11,
+  "option": 0,
+  "old": "The mud weight.",
+  "new": "The mud weight, through the hydrostatic column."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-bit",
+  "ord": 12,
+  "option": 2,
+  "old": "About a half, which is between the impact force optimum of 48 percent and the power optimum of 65.",
+  "new": "About a half, between the two optima."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-bit",
+  "ord": 12,
+  "option": 3,
+  "old": "It cannot be stated, because the split depends on the mud and the two muds give very different answers.",
+  "new": "It cannot be stated without choosing a mud."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-bit",
+  "ord": 13,
+  "option": 1,
+  "old": "The flow rate should be raised until the bit's share reaches the classical optimum for hydraulic power.",
+  "new": "The flow rate should be raised to reach the power optimum."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-bit",
+  "ord": 13,
+  "option": 3,
+  "old": "The mud should be thinned, since a thinner mud lowers the pipe loss and frees pressure for the bit.",
+  "new": "The mud should be thinned to free pressure for the bit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-bit",
+  "ord": 14,
+  "option": 1,
+  "old": "A washout in the string.",
+  "new": "A washout in the string, which adds a leak path the pump must feed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-pump-pressure",
+  "ord": 10,
+  "option": 0,
+  "old": "The pump pressures.",
+  "new": "The pump pressures, being the final sum."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-pump-pressure",
+  "ord": 12,
+  "option": 1,
+  "old": "That the method specification is correct, since two independent derivations of it arrived at the same result.",
+  "new": "That the method specification is correct, since two derivations matched."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-pump-pressure",
+  "ord": 13,
+  "option": 1,
+  "old": "Both had disagreements of similar size.",
+  "new": "Both had disagreements of similar size, traced to rounding in the longest chains."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-pump-pressure",
+  "ord": 14,
+  "option": 1,
+  "old": "The light mud, whose lower density and thinner rheology make the pressure loss simple enough to compute by hand.",
+  "new": "The light mud, simple enough to compute by hand."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-pump-pressure",
+  "ord": 14,
+  "option": 3,
+  "old": "The bit pressure drop, which has a closed form and is exactly reproduced by both implementations.",
+  "new": "The bit pressure drop, which has a closed form."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-pump-pressure",
+  "ord": 15,
+  "option": 0,
+  "old": "The pump's own internal losses.",
+  "new": "The pump's own internal losses, which the pump curve already accounts for."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 7,
+  "option": 2,
+  "old": "Because it means the annulus loss falls as the rate rises, so a faster circulation is safer than a slow one.",
+  "new": "Because the annulus loss falls as the rate rises, so faster is safer."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 7,
+  "option": 3,
+  "old": "Because it makes the equivalent circulating density independent of the flow rate above a threshold value.",
+  "new": "Because the equivalent circulating density then ignores the flow rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "The same conditions the lessons use.",
+  "new": "The same conditions the lessons use, so the printed answers can be checked."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the goldens do not include the lesson muds at 0.030 m3/s, so the capstone had to use a different one.",
+  "new": "Because the goldens lack the lesson muds at 0.030 m3/s, so a new one was used."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 2,
+  "old": "The annulus loss should be about a fifth of the pipe loss, which is the ratio the lessons found on both muds.",
+  "new": "The annulus loss should be about a fifth of the pipe loss, as in the lessons."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "The equivalent circulating density should equal the mud weight plus five percent, which is typical for a well of this depth.",
+  "new": "The ECD should equal the mud weight plus five percent for this depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "The pipe loss and the annulus loss.",
+  "new": "The pipe loss and the annulus loss, which follow from the flow rate alone."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 2,
+  "old": "The Herschel-Bulkley yield is larger, because it is fitted to a low-rate reading rather than extrapolated.",
+  "new": "The Herschel-Bulkley yield is larger, being fitted to a low-rate reading."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "That the collars' bore dominates the pipe loss, which is two thirds of the pump pressure on this system.",
+  "new": "That the collars' bore dominates the pipe loss, two thirds of the pump pressure."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "Three, and cooling the bit opposes them.",
+  "new": "Three, and cooling the bit opposes them by wanting a thinner, faster mud."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 1,
+  "old": "The equivalent circulating density rises.",
+  "new": "The equivalent circulating density rises, since more of the pump pressure reaches the annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 0,
+  "old": "Nozzles first, then the rate.",
+  "new": "Nozzles first, then the rate, since the bit's power optimum fixes the pump pressure budget."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 0,
+  "old": "Eighteen, at about one percent.",
+  "new": "Eighteen, at about one percent, which is the rounding of the published values."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "It is computed differently in the two codes.",
+  "new": "It is computed differently in the two codes, each summing the losses its own way."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 2,
+  "old": "That the discretisation was too coarse in one of them, which a finer element list would fix.",
+  "new": "That the discretisation was too coarse in one, which finer elements would fix."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "Within one part in a million.",
+  "new": "Within one part in a million, the same as the agreement with the oracle."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "Cuttings and rotation raise it, and eccentricity and temperature lower it, so the four cancel to within a percent.",
+  "new": "Cuttings and rotation raise it, the others lower it, and all four cancel."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "All of them lower it, which is why the concentric non-rotating calculation is always conservative.",
+  "new": "All of them lower it, so the calculation is always conservative."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 0,
+  "old": "Use it to two decimal places.",
+  "new": "Use it to two decimal places, since the oracle agreement shows the calculation is that precise."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "There is comfortable margin.",
+  "new": "There is comfortable margin, since the uplift is still smaller than the window width."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "The transport ratio, by timing how long cuttings take to reach surface after a marker is added.",
+  "new": "The transport ratio, by timing cuttings to surface after a marker."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "The flow rate.",
+  "new": "The flow rate, since a faster annulus lifts cuttings off bottom sooner."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "The velocity and the slip.",
+  "new": "The velocity and the slip, whose ratio sets the cuttings' speed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "Nothing, that is a good ratio.",
+  "new": "Nothing, that is a good ratio, well inside the usual target band for any hole."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "It stays constant, since all three losses are proportional to the flow rate through the same friction factor.",
+  "new": "It stays constant, as all three scale together."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "It rises to a peak around 0.025 m3/s and then falls once the annulus becomes turbulent.",
+  "new": "It peaks around 0.025 m3/s and then falls."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "The 16 over Re laminar pipe factor.",
+  "new": "The 16 over Re laminar pipe factor, fitted to experiment."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "Because the goldens' tolerance cannot be met unless both implementations use exactly the same width.",
+  "new": "Because the goldens' tolerance needs both implementations to use the same width."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "The worst transport ratio should be in the same interval as the worst annular velocity, always.",
+  "new": "The worst transport ratio is always in the interval with the worst annular velocity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "The gel strength, which holds cuttings up during a connection and is the property this model computes.",
+  "new": "The gel strength, which this model computes for connections."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "The filtration rate, which controls the filter cake and therefore the effective hole diameter.",
+  "new": "The filtration rate, through the filter cake and hole diameter."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "At the fracture gradient.",
+  "new": "At the fracture gradient, since the profile is plotted against the window's upper limit."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Designing a flow rate that satisfies the cleaning, the pump and the formation simultaneously on any well.",
+  "new": "Designing a flow rate that satisfies every constraint on any well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "Predicting whether a hole will pack off, from the cuttings concentration and the transport ratio together.",
+  "new": "Predicting whether a hole will pack off, from the concentration."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "The pump pressure rises, since the denser annulus needs more pressure to push it and the pump supplies it.",
+  "new": "The pump pressure rises, since the denser annulus needs more pressure to push up."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-equivalent-circulating-density",
+  "ord": 8,
+  "option": 1,
+  "old": "About 1, so the ECD uplift is directly proportional to the flow rate and is easy to extrapolate.",
+  "new": "About 1, so the ECD uplift is directly proportional to rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-equivalent-circulating-density",
+  "ord": 8,
+  "option": 2,
+  "old": "It varies with the mud, so no general statement can be made about how a rate change moves the ECD.",
+  "new": "It varies with the mud, so no general statement can be made."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-equivalent-circulating-density",
+  "ord": 9,
+  "option": 0,
+  "old": "None: the difference is all density.",
+  "new": "None: the difference is all density, since the two muds' rheologies barely differ."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-equivalent-circulating-density",
+  "ord": 10,
+  "option": 1,
+  "old": "A tighter annulus.",
+  "new": "A tighter annulus, which raises the flow velocity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-equivalent-circulating-density",
+  "ord": 11,
+  "option": 2,
+  "old": "About 1.4 kg/m3, which is one percent of the mud's own density and is negligible against the friction uplift.",
+  "new": "About 1.4 kg/m3, one percent of the mud's own density and negligible."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-equivalent-circulating-density",
+  "ord": 11,
+  "option": 3,
+  "old": "It depends on the flow rate, because a faster annulus carries the cuttings for a shorter time.",
+  "new": "It depends on the flow rate, as a faster annulus carries cuttings briefly."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-equivalent-circulating-density",
+  "ord": 12,
+  "option": 0,
+  "old": "It overstates it.",
+  "new": "It overstates it, since cuttings thin the mud around them."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-equivalent-circulating-density",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the goldens do not include a coupled case, so the engine would have nothing to be checked against.",
+  "new": "Because the goldens include no coupled case, so there would be nothing to check against."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-equivalent-circulating-density",
+  "ord": 14,
+  "option": 2,
+  "old": "Multiply the annulus loss by one plus the concentration, since the friction scales with the fluid's density.",
+  "new": "Multiply the annulus loss by one plus the concentration, as friction scales with density."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-equivalent-circulating-density",
+  "ord": 15,
+  "option": 2,
+  "old": "It falls, because the annular velocity in the lateral is lower than in the build section above it.",
+  "new": "It falls, because the annular velocity in the lateral is lower than in the build."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-carrying-the-cuttings",
+  "ord": 7,
+  "option": 0,
+  "old": "The light one, being easier to pump.",
+  "new": "The light one, being easier to pump at a high annular velocity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-carrying-the-cuttings",
+  "ord": 8,
+  "option": 1,
+  "old": "Exactly 1.0, since anything less means cuttings are accumulating in the annulus faster than they are removed.",
+  "new": "Exactly 1.0, since anything less means cuttings are accumulating."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-carrying-the-cuttings",
+  "ord": 8,
+  "option": 2,
+  "old": "Below 0.5, since a high ratio means the flow rate is unnecessarily high and the ECD is being wasted.",
+  "new": "Below 0.5, since a higher ratio wastes flow rate and ECD."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-carrying-the-cuttings",
+  "ord": 9,
+  "option": 3,
+  "old": "How much flow rate would be needed to improve it, which requires the minimum-flow solver.",
+  "new": "The flow rate to improve it, which needs the minimum-flow solver."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-carrying-the-cuttings",
+  "ord": 10,
+  "option": 1,
+  "old": "The flow rate times the concentration.",
+  "new": "The flow rate times the concentration, measured as cuttings leave the annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-carrying-the-cuttings",
+  "ord": 11,
+  "option": 3,
+  "old": "Because a faster annulus is turbulent, and turbulent flow suspends cuttings far more effectively than laminar.",
+  "new": "Because a faster annulus is turbulent, and turbulence suspends cuttings far better."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-carrying-the-cuttings",
+  "ord": 12,
+  "option": 0,
+  "old": "Above one percent.",
+  "new": "Above one percent, where the bulk density starts to rise."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-carrying-the-cuttings",
+  "ord": 14,
+  "option": 1,
+  "old": "The annular velocity and the slip.",
+  "new": "The annular velocity and the slip, which set how fast cuttings rise."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-carrying-the-cuttings",
+  "ord": 15,
+  "option": 2,
+  "old": "Because the rate of penetration is higher in a soft shallow formation, so the cuttings feed rate is greater.",
+  "new": "Because the rate of penetration is higher when shallow."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-carrying-the-cuttings",
+  "ord": 15,
+  "option": 3,
+  "old": "Because the mud is thinner in the shallow section, where it has not yet been contaminated with drilled solids.",
+  "new": "Because the mud is thinner in the shallow section."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 7,
+  "option": 1,
+  "old": "Both raise the annular velocity, since a sweep is pumped at a higher rate than the normal circulating rate.",
+  "new": "Both raise the annular velocity, since a sweep is pumped at a higher rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 7,
+  "option": 3,
+  "old": "Both raise the equivalent circulating density briefly, which lifts the bed off the low side by buoyancy.",
+  "new": "Both raise the ECD briefly, lifting the bed off the low side by buoyancy."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 8,
+  "option": 2,
+  "old": "Improves it in a vertical hole and worsens it in a horizontal one, since the pipe only lies down at angle.",
+  "new": "Improves it in a vertical hole and worsens it in a horizontal one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 9,
+  "option": 1,
+  "old": "Particle size and time.",
+  "new": "Particle size and circulating time."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 10,
+  "option": 3,
+  "old": "A ranking only: it can compare two flow rates and cannot be interpreted as a fraction at all.",
+  "new": "A ranking only, useful to compare two flow rates and nothing more."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 11,
+  "option": 0,
+  "old": "All of them.",
+  "new": "All of them, since each one acts through the annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 12,
+  "option": 0,
+  "old": "The cuttings volume at the shakers.",
+  "new": "The cuttings volume at the shakers, compared against what the bit is cutting at that moment."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 13,
+  "option": 1,
+  "old": "Nothing connects them.",
+  "new": "Nothing connects them, since one course models pressure and the other models forces."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 14,
+  "option": 0,
+  "old": "Rotation and pipe movement.",
+  "new": "Rotation and pipe movement, which both stir the annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 15,
+  "option": 1,
+  "old": "Valid for any inclination, since the slip velocity is a property of the particle and the fluid rather than of the geometry.",
+  "new": "Valid at any inclination, as slip is a property of particle and fluid alone."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-cleaning-at-angle",
+  "ord": 15,
+  "option": 3,
+  "old": "Valid only for the two wells in the fixture set, since the goldens contain no other geometry to check it against.",
+  "new": "Valid only for the two fixture wells, since the goldens hold no other geometry."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-flow-rate-decision",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the ECD is computed with a margin already built in, so it appears more comfortable than it is.",
+  "new": "Because the ECD is computed with a margin built in, so it looks more comfortable."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-flow-rate-decision",
+  "ord": 10,
+  "option": 1,
+  "old": "The mud is too thin, the annulus too wide or the rate of penetration too high for any rate to keep up.",
+  "new": "The mud is too thin, the annulus too wide or the penetration rate too high."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-flow-rate-decision",
+  "ord": 11,
+  "option": 0,
+  "old": "The mud weight.",
+  "new": "The mud weight, through its density."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-flow-rate-decision",
+  "ord": 12,
+  "option": 0,
+  "old": "The equivalent circulating density.",
+  "new": "The equivalent circulating density, since a wider nozzle sends more pressure to the annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-flow-rate-decision",
+  "ord": 13,
+  "option": 2,
+  "old": "The mud first, since it is the input most easily changed at the rig and it affects both constraints at once.",
+  "new": "The mud first, as it is easiest to change at the rig."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-flow-rate-decision",
+  "ord": 13,
+  "option": 3,
+  "old": "The string's bore first, since it is the largest lever on pump pressure by a considerable margin.",
+  "new": "The string's bore first, being the largest lever."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-flow-rate-decision",
+  "ord": 14,
+  "option": 1,
+  "old": "The nozzle area affects the equivalent circulating density, so it has to be fixed before the ECD check can be made.",
+  "new": "The nozzle area affects the ECD, so it must be fixed before the ECD check."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-flow-rate-decision",
+  "ord": 14,
+  "option": 3,
+  "old": "The nozzle area affects the cleaning through the jet velocity, so the two decisions cannot be separated at all.",
+  "new": "The nozzles affect cleaning through the jet, so the two decisions are inseparable."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 11,
+  "option": 0,
+  "old": "A laboratory flow loop.",
+  "new": "A laboratory flow loop, in which the same mud is pumped through a pipe and annulus of known geometry at a range of rates."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 12,
+  "option": 0,
+  "old": "Within one part in a million.",
+  "new": "Within one part in a million, which is the same agreement the two implementations reach with each other."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 15,
+  "option": 2,
+  "old": "The method specification, the software version, the date and the engineer, which is what a fitted parameter needs.",
+  "new": "The method specification, the software version, the date and the engineer who ran it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "The transport ratio.",
+  "new": "The transport ratio, since it compares two velocities of the same annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "The two circulating densities.",
+  "new": "The two circulating densities, since both wells share one mud."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "That the pump binds before the formation does on most wells, which is why the ECD is rarely the constraint.",
+  "new": "That the pump binds before the formation does on most wells, so the ECD rarely binds."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 2,
+  "old": "The geomechanics that produce the pore pressure and the fracture gradient this tier compared against.",
+  "new": "The geomechanics behind the pore and fracture limits."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 3,
+  "old": "The transient effects the steady-state model omits, including the pressure to accelerate the mud column.",
+  "new": "The transient effects the steady-state model omits."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "Always use the highest flow rate.",
+  "new": "Always use the highest flow rate, since the ECD rises so little with rate."
+ }
+]

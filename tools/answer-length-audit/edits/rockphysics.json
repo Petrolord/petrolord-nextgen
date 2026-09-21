@@ -1,0 +1,65 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-from-a-rock-to-an-interface",
+  "ord": 15,
+  "option": 2,
+  "old": "Model both fluid cases under the same overburden.",
+  "new": "Model both fluids at one overburden."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-intercept-and-gradient",
+  "ord": 15,
+  "option": 2,
+  "old": "The fluid vector computed from the substitution.",
+  "new": "The fluid vector computed from the Gassmann substitution of the sand."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-approximation-and-exact",
+  "ord": 11,
+  "option": 1,
+  "old": "Yes, exactly, since the angle terms all vanish.",
+  "new": "Yes, the angle terms all vanish."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-putting-the-fluid-in-the-rock",
+  "ord": 12,
+  "option": 3,
+  "old": "Fluid saturation to fluid modulus and back through Wood's equation.",
+  "new": "Saturation to fluid modulus and back by Wood's equation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-substitution-workflow",
+  "ord": 14,
+  "option": 1,
+  "old": "A property model letting porosity vary across the field.",
+  "new": "A property model letting porosity vary across the field between the wells."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-substitution-workflow",
+  "ord": 14,
+  "option": 3,
+  "old": "A probabilistic treatment of the porosity uncertainty.",
+  "new": "A probabilistic treatment of the porosity uncertainty, sampled by Monte Carlo."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-substitution-workflow",
+  "ord": 15,
+  "option": 2,
+  "old": "The gas case density from the bookkeeping.",
+  "new": "The gas case density."
+ }
+]

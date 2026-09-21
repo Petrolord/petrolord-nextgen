@@ -1,0 +1,2405 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "The seals shoulder at the top of the bore.",
+  "new": "The seals shoulder at the top of the bore and the string starts to load up in tension."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 3,
+  "old": "Because the surface pressure reading is dominated by the pump pressure, which masks any change in the annulus pressure.",
+  "new": "Because the pump pressure dominates the surface reading and masks any change in the annulus."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 1,
+  "old": "The larger of the two case magnitudes, which does not change with the landing and therefore plots as a horizontal line.",
+  "new": "The larger of the two case magnitudes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "The band width, which is fixed by the bore and the two requirements and is therefore independent of where the seals land.",
+  "new": "The band width, which is fixed by the bore."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 1,
+  "old": "Exactly at the midpoint of the bore.",
+  "new": "Exactly at the midpoint of the bore, by symmetry."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "Because the elongation case is smaller and therefore always passes whatever the landing is, provided the bore is long enough.",
+  "new": "Because the elongation case is smaller and so passes at any landing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 3,
+  "old": "Because moving the landing changes the available travel without changing the budget, which is what makes the move possible.",
+  "new": "Because moving the landing changes the available travel but not the budget."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "The elongation magnitude plus the margin.",
+  "new": "The elongation magnitude plus the margin, measured from the top of the bore."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "The difference between the two case magnitudes.",
+  "new": "The difference between the two case magnitudes, less the margin at each end."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 1,
+  "old": "A different landing, a different packer, or a longer string.",
+  "new": "A different landing, a different packer setting depth, or a longer string above the seals."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 0,
+  "old": "Because the inequalities have no closed form solution.",
+  "new": "Because the two inequalities have no closed form solution and can only be solved numerically."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "That the two cases are nearly equal in magnitude, since a narrow band arises when the two requirements are close together.",
+  "new": "That the two case magnitudes are nearly equal to each other."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "That the landing should be placed at the shallow edge, since a narrow band leaves no room to favour either direction.",
+  "new": "That the landing should be placed at the shallow edge of the band."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "The band has been computed incorrectly.",
+  "new": "The band has been computed incorrectly, most likely with its two edges swapped over."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 1,
+  "old": "The contraction case fails by three tenths of a metre.",
+  "new": "The contraction case fails by three tenths of a metre, and the seals leave the bore."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 0,
+  "old": "Yes; the seals leave the bore under the contraction case.",
+  "new": "Yes; the seals leave the bore under the contraction case and the annulus seal is lost."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 1,
+  "old": "The bore must equal twice the larger case magnitude, which guarantees room in both directions whichever case dominates.",
+  "new": "The bore must equal twice the larger case magnitude, giving room whichever case dominates."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "Half a metre of extra travel in each direction, since the extra length is divided between the two ends of the receptacle.",
+  "new": "Half a metre of extra travel in each direction of the receptacle."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "Nothing, since a bore longer than the minimum leaves travel that neither of the two design cases will ever make use of.",
+  "new": "Nothing, since neither design case will ever use the extra travel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "No; the swing exceeds the bore length.",
+  "new": "No; once a margin is added at each end, the swing exceeds the bore length."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "The other course, which used the wrong three cases.",
+  "new": "The other course, which applied the wrong three cases to that tubing string."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "The drift table, which comes from the specification.",
+  "new": "The drift table, whose deduction values are looked up in the specification for each pipe size."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "Both are computed by the engine from the casing program and the string, and then presented for the user to confirm.",
+  "new": "Both are computed by the engine from the casing program and the string."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "Deviation, because a deviated string moves along the hole rather than vertically and the seals therefore travel less than computed.",
+  "new": "Deviation, since the seals then travel less than computed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "Time, because the seal elements degrade over the producing life and the effective travel available reduces as they do.",
+  "new": "Time, because the seal elements degrade over the producing life."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "No; it certifies the ability to check a completion design produced by somebody else, and not to produce one at all.",
+  "new": "No; it certifies only the ability to check a design that somebody else produced."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "Compare its outputs against a second implementation.",
+  "new": "Compare its outputs against a second, independent implementation of the same method."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "That the through bore is large enough for the coiled tubing that the stimulation job will need to run into the well.",
+  "new": "That the through bore is large enough for the coiled tubing the job will run."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "An analysis of the loads a completion string experiences and of the hardware arrangements that absorb them safely.",
+  "new": "An analysis of the loads on a completion string and the hardware that absorbs them."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "That the engine's outputs should be treated as approximate, since one of them was wrong for as long as the module existed.",
+  "new": "That the engine's outputs should all be treated as approximate from now on."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "That the engine should be rewritten, because a defect of that kind points to a structural problem in how it was built.",
+  "new": "That the engine should be rewritten, since the defect exposes a structural flaw."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 7,
+  "option": 0,
+  "old": "About half a metre.",
+  "new": "About half a metre, the change a short tubing string would see."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 8,
+  "option": 2,
+  "old": "Because the length changes are proprietary to the vendor of the tubing and cannot be recomputed from published data.",
+  "new": "Because the length changes are proprietary to the tubing vendor and cannot be recomputed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 9,
+  "option": 1,
+  "old": "The seals have to be replaced more often.",
+  "new": "The seals have to be replaced more often, since they wear against the anchor latch."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 10,
+  "option": 3,
+  "old": "It has to be set at the midpoint of the stroke, which leaves only half the travel available in each direction.",
+  "new": "It has to be set at mid stroke, leaving only half the travel each way."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 11,
+  "option": 1,
+  "old": "It costs a reduction in the through bore of the string, and it buys the ability to release the string from the packer at surface.",
+  "new": "It costs through bore, and it buys the ability to release the string at surface."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 11,
+  "option": 3,
+  "old": "It costs a larger outside diameter at the packer, and it buys the ability to hold pressure from both directions at once.",
+  "new": "It costs a larger outside diameter, and it buys pressure holding in both directions."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 12,
+  "option": 0,
+  "old": "Free, where the seals slide in a long bore.",
+  "new": "Free, where the seals slide in a long bore so the packer below them never moves."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 13,
+  "option": 1,
+  "old": "Anchored, where the string cannot move at all.",
+  "new": "Anchored, where the string cannot move at all and so has no free length change."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 14,
+  "option": 2,
+  "old": "Because the seals wear over time, so a string that starts free becomes limited as the seal stack loses its ability to slide.",
+  "new": "Because the seals wear over time, so a string that starts free becomes limited."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the boundary condition is chosen at surface by the operator before each operation and can be changed between them.",
+  "new": "Because the operator chooses the boundary condition at surface before each operation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-a-completion-is-not-static",
+  "ord": 15,
+  "option": 0,
+  "old": "Keep the string anchored under all conditions.",
+  "new": "Keep the string anchored under all conditions, so the seals never have to move."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-polished-bore-receptacle",
+  "ord": 7,
+  "option": 0,
+  "old": "Because the office does not have the well data.",
+  "new": "Because the office does not have the well data needed to work out the length changes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-polished-bore-receptacle",
+  "ord": 8,
+  "option": 1,
+  "old": "Both are unaffected, because the extra length is taken up above the seal assembly rather than inside the receptacle itself.",
+  "new": "Both are unaffected; the extra length sits above the seals."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-polished-bore-receptacle",
+  "ord": 8,
+  "option": 2,
+  "old": "Both lose a metre, because the extra length has to be accommodated somewhere and the bore is the only place available.",
+  "new": "Both lose a metre, since the bore must absorb it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-polished-bore-receptacle",
+  "ord": 9,
+  "option": 3,
+  "old": "The product of the two travels is maximised at the midpoint of the bore, which is why the midpoint is the standard landing.",
+  "new": "The product of the two travels is largest at the midpoint of the bore."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-polished-bore-receptacle",
+  "ord": 10,
+  "option": 0,
+  "old": "Landing anywhere other than the midpoint.",
+  "new": "Landing anywhere other than the midpoint, since that is where the two travels balance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-polished-bore-receptacle",
+  "ord": 11,
+  "option": 1,
+  "old": "Available is the travel in that direction, used is the fraction of it consumed, and remaining is the fraction still unused.",
+  "new": "Available is the travel that way; used and remaining are fractions of it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-polished-bore-receptacle",
+  "ord": 13,
+  "option": 1,
+  "old": "A failure, because it is below the margin.",
+  "new": "A failure, because it is below the margin and the margin is the minimum acceptable travel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-polished-bore-receptacle",
+  "ord": 14,
+  "option": 0,
+  "old": "A negative length change, and a margin of zero.",
+  "new": "A negative length change, and a margin of zero, since neither describes a real design case."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-polished-bore-receptacle",
+  "ord": 15,
+  "option": 1,
+  "old": "The seals wearing over the life of the well, which reduces the effective travel available in both directions over time.",
+  "new": "Seal wear over the life of the well, which reduces the travel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-polished-bore-receptacle",
+  "ord": 15,
+  "option": 3,
+  "old": "The packer moving, which changes the position of the receptacle and therefore the landing relative to the string above.",
+  "new": "The packer moving, which shifts the receptacle under the string."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-asymmetry",
+  "ord": 9,
+  "option": 3,
+  "old": "Two lines that meet at the midpoint of the bore, which is where both directions have the same available travel.",
+  "new": "Two lines meeting at the midpoint, where the travels are equal."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-asymmetry",
+  "ord": 10,
+  "option": 2,
+  "old": "Both cases pass with exactly the stated margin, which is what defines the crossing and makes it the recommended landing.",
+  "new": "Both cases pass with exactly the stated margin, which makes it the recommended landing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-asymmetry",
+  "ord": 11,
+  "option": 1,
+  "old": "At the midpoint, because the crossing is defined by the geometry of the bore rather than by the magnitudes of the cases.",
+  "new": "At the midpoint, which the bore geometry fixes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-asymmetry",
+  "ord": 11,
+  "option": 3,
+  "old": "It depends on the margin, since the margin shifts both requirements equally and therefore moves the crossing point too.",
+  "new": "It depends on the margin, which moves the crossing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-asymmetry",
+  "ord": 12,
+  "option": 0,
+  "old": "Nothing; the move is free and the problem is solved.",
+  "new": "Nothing; the move is free and the problem is solved, since the elongation case passes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-asymmetry",
+  "ord": 13,
+  "option": 1,
+  "old": "Whenever the bore is longer than the swing.",
+  "new": "Whenever the bore is longer than the swing, with room to spare."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-asymmetry",
+  "ord": 14,
+  "option": 2,
+  "old": "Land at the depth that makes the remaining travel in each direction proportional to the magnitude of the case in that direction.",
+  "new": "Land in proportion to the two case magnitudes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-asymmetry",
+  "ord": 14,
+  "option": 3,
+  "old": "Land at the depth that leaves the largest single remaining travel, which maximises the protection against the worst case.",
+  "new": "Land to maximise the largest remaining travel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-designing-the-space-out",
+  "ord": 7,
+  "option": 0,
+  "old": "At one point seven metres of insertion.",
+  "new": "At one point seven metres of insertion, measured from the top of the bore."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-designing-the-space-out",
+  "ord": 9,
+  "option": 2,
+  "old": "Three point one metres, which is the travel available to the elongation case at the published landing of three metres.",
+  "new": "Three point one metres, the elongation travel at the landing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-designing-the-space-out",
+  "ord": 9,
+  "option": 3,
+  "old": "Two point eight metres, which is the contraction case magnitude and therefore the room the band has to leave for it.",
+  "new": "Two point eight metres, the contraction case magnitude."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-designing-the-space-out",
+  "ord": 10,
+  "option": 3,
+  "old": "Inside the band but close to its upper edge, which is why the published job passes the elongation case comfortably.",
+  "new": "Inside the band but close to its upper edge."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-designing-the-space-out",
+  "ord": 12,
+  "option": 2,
+  "old": "Because the elongation case has slack, and any slack in one direction appears as an equal deficit in the other direction.",
+  "new": "Because slack in the elongation direction shows up as an equal deficit in the other one."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-designing-the-space-out",
+  "ord": 13,
+  "option": 2,
+  "old": "Yes; the contraction case fails outright, which is a loss of well integrity during the operation that produces it.",
+  "new": "Yes; the contraction case fails outright and integrity is lost."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-designing-the-space-out",
+  "ord": 13,
+  "option": 3,
+  "old": "No; the margin is a guideline rather than a requirement, so a landing that delivers less than it is fully compliant.",
+  "new": "No; the margin is a guideline, so delivering less is compliant."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-designing-the-space-out",
+  "ord": 15,
+  "option": 0,
+  "old": "One metre of extra travel in each direction.",
+  "new": "One metre of extra travel in each direction, since the whole extra length is usable both ways."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 7,
+  "option": 0,
+  "old": "Because the band is not always a single interval.",
+  "new": "Because the band is not always a single interval, so there may be no one point to choose from."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 8,
+  "option": 2,
+  "old": "The validation against the oracle, which compares outputs rather than choices and would therefore no longer be meaningful.",
+  "new": "The validation against the oracle, which would no longer be meaningful."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 9,
+  "option": 2,
+  "old": "The thermal and pressure loads, since those change the length of the string and therefore where each component actually sits.",
+  "new": "Thermal and pressure loads, which move where each component sits."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 9,
+  "option": 3,
+  "old": "Time, since scale and corrosion reduce the bore and therefore reduce every clearance in the string as the well ages.",
+  "new": "Time, since scale and corrosion reduce the bore and every clearance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 10,
+  "option": 0,
+  "old": "Flow, because it sets the erosion rate.",
+  "new": "Flow, because it sets the erosion rate and so how quickly the seal travel is worn away."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 11,
+  "option": 0,
+  "old": "That the holder can design a completion.",
+  "new": "That the holder can design a completion in full, including the ratings and materials the string needs."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 12,
+  "option": 0,
+  "old": "That the holder can build an exposed casing profile.",
+  "new": "That the holder can build an exposed casing profile from a casing program and a string."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 13,
+  "option": 1,
+  "old": "Because the course is shorter than a full design course.",
+  "new": "Because the course is shorter than a full design course, so it covers fewer hours of material in total."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 14,
+  "option": 3,
+  "old": "Reviewing the length change calculations supplied by the tubing designer, which this course is now qualified to check.",
+  "new": "Reviewing the length change calculations supplied by the tubing designer."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 15,
+  "option": 1,
+  "old": "That the engine should be rewritten, because a defect of that kind indicates a structural problem with how it was designed.",
+  "new": "That the engine should be rewritten, since the defect exposes a structural flaw."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges",
+  "ord": 15,
+  "option": 3,
+  "old": "That the engine's outputs should be treated as approximate, since one of them was wrong for as long as the module existed.",
+  "new": "That the engine's outputs should all be treated as approximate from now on."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 7,
+  "option": 0,
+  "old": "Yes, because every conceivable case should be carried.",
+  "new": "Yes, because every conceivable case should be carried whatever it costs."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "The argument is correct and the band should be ignored.",
+  "new": "The argument is correct and the band should be ignored, since it is only a guide to the landing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 9,
+  "option": 1,
+  "old": "Yes; the two results contradict each other directly.",
+  "new": "Yes; the two results contradict each other directly, so one of the two calculations must be wrong."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 2,
+  "old": "No; a third case cannot narrow the band at all, because the band depends only on the largest case in each of the two directions.",
+  "new": "No; the band depends only on the largest case in each direction."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "It depends on the sign of the third case, since a third contraction narrows the band and a third elongation widens it.",
+  "new": "It depends on its sign: a contraction narrows it, an elongation widens it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 11,
+  "option": 1,
+  "old": "A method for computing four volumes and two clearances from a component list and a casing program for any well.",
+  "new": "A method for computing four volumes and two clearances from a tally and a casing program."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 12,
+  "option": 2,
+  "old": "Geomechanics supplies the casing program and Stimulation Design consumes the through bore of the finished completion.",
+  "new": "Geomechanics supplies the casing program and Stimulation Design consumes the finished through bore."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "Always compute every result twice.",
+  "new": "Always compute every result twice, so that any arithmetic slip shows up as a mismatch."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "Recompute the length changes from the well conditions.",
+  "new": "Recompute the length changes from the well conditions before anything else."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 1,
+  "old": "A survey of the well, so that the dogleg allowance this course does not model can be added to the clearance calculation.",
+  "new": "A survey of the well, to add the dogleg allowance to clearance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "The measured lengths of every joint, so that the tally used for the stack up matches the string that will actually be run.",
+  "new": "The measured length of every joint, to correct the stack up."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 1,
+  "old": "About thirty nine cubic metres, the sum of the two.",
+  "new": "About thirty nine cubic metres, the sum of the two, counting the bore and the body together."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "The volume comes out too large by the same ratio.",
+  "new": "The volume comes out too large by the same ratio, since the tangent inflates the depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 0,
+  "old": "As a failed calculation that must be discarded.",
+  "new": "As a failed calculation that must be discarded, since a volume with a gap in it cannot be trusted."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "That every component in it is rated for the pressure and temperature the well will see over its producing life.",
+  "new": "That every component is rated for the well's pressure and temperature over its life."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 3,
+  "old": "That the four long rows are the ones to check first, because an error in them changes the fit of everything below.",
+  "new": "That the four long rows are the ones to check first, since they set the fit below."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 0,
+  "old": "The specification requires one before any intervention.",
+  "new": "The specification requires one before any intervention, whatever the age or history of the well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "Whether the casing program was entered correctly.",
+  "new": "Whether the casing program was entered correctly, since it sets every clearance."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "The tubing, because it makes up most of the string.",
+  "new": "The tubing, because it makes up most of the string and so sets the bore over most of the depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 1,
+  "old": "A survey of the well the string will be run into.",
+  "new": "A survey of the well the string will be run into, to correct for inclination."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 0,
+  "old": "A flow coupling, because its wall is thicker on one side.",
+  "new": "A flow coupling, because its wall is thicker on one side where the turbulence is expected."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "It provides a place to land a plug at a known depth, which is why one is placed above and below every restriction.",
+  "new": "It provides a place to land a plug at a known depth above and below every restriction."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "The wireline entry guide at the bottom.",
+  "new": "The wireline entry guide at the bottom, whose bell mouth catches and holds the plug."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 2,
+  "old": "The depth at which the packer will be set, because the drift quoted may not be the governing one for that particular depth.",
+  "new": "The packer setting depth, since the quoted drift may not govern there."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "The length of the packer, since a long component needs more clearance than a short one of the same outside diameter.",
+  "new": "The packer length, since a long component needs more clearance."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "It would make no practical difference, because the wall thickness of casing varies by only a few percent within any one size.",
+  "new": "No practical difference, since casing wall thickness varies by only a few percent within a size."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "A component placed in the wrong order, which changes the through bore without changing the total length of the string.",
+  "new": "A component placed out of order, which changes the through bore but not the total length."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "Whether the figure is a nominal bore or a drift, which for a machined nipple profile are two quite different numbers.",
+  "new": "Whether the figure is a nominal bore or a drift, which differ for a nipple."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "What the tubing size is, since a bore figure alone does not identify the pipe the completion is made up from.",
+  "new": "What the tubing size is, which a bore figure alone does not identify."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "Because the volume below the packer is used only for ordering fluid, where a gross figure is the conservative choice.",
+  "new": "Because that volume is only used to order fluid, where a gross figure is conservative."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "A temperature and pressure history for the string, from which the flowing conditions at each depth could then be derived.",
+  "new": "A temperature and pressure history for the string."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "A friction factor and a hook load model, without which the flow inside the tubing cannot be related to the pressure drop.",
+  "new": "A friction factor and a hook load model."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "Yes; the nipple should be replaced with a larger bore.",
+  "new": "Yes; the nipple should be replaced with a larger bore so that it no longer restricts access."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "It sets the hanger at the depth of the shallowest casing section, which is where a string run from surface would be hung.",
+  "new": "It sets the hanger at the depth of the shallowest casing section."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "It infers the hanger depth from the packer depth and the lengths below the packer, working upward from the reservoir.",
+  "new": "It infers the hanger depth from the packer depth and the lengths below it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "The four values increase with pipe size in equal steps, so that the deduction is proportional to the outside diameter.",
+  "new": "The four values increase with pipe size in equal steps."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "The tubing value falls between the two largest casing values, which is why tubing drifts are close to small casing drifts.",
+  "new": "The tubing value falls between the two largest casing values."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "The smallest values in the inside diameter column.",
+  "new": "The smallest values in the inside diameter column, since the tightest bore sets the run in clearance."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "Yes, unless the two entries have different lengths, in which case they represent two separately measured joints of the same type.",
+  "new": "Yes, unless the two entries have different lengths and so are separately measured joints."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "It depends on the component type, since equipment may be repeated and tubing may not be entered more than once per string.",
+  "new": "It depends on the type, since equipment may repeat and tubing may not."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "The total length of each string.",
+  "new": "The total length of each string, which sets every depth below the hanger."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "The outside diameter of the same component.",
+  "new": "The outside diameter of the same component, to see how it runs past the casing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "Run every check first, then read the tally.",
+  "new": "Run every check first, then read the tally, so that the checks guide what to look for."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-completion-is",
+  "ord": 8,
+  "option": 1,
+  "old": "Because the valve would otherwise obstruct the tubing bore completely and prevent any wireline access below it.",
+  "new": "Because the valve would otherwise block the bore to wireline access."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-completion-is",
+  "ord": 8,
+  "option": 2,
+  "old": "To keep the gas injection point away from the produced fluid stream so the two do not mix inside the mandrel.",
+  "new": "To keep the injection point away from the produced fluid stream."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-completion-is",
+  "ord": 9,
+  "option": 0,
+  "old": "How much fluid the component holds inside it.",
+  "new": "How much fluid the component holds inside it, measured from the outside of the body."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-completion-is",
+  "ord": 10,
+  "option": 3,
+  "old": "Whether it can pass the casing above it, and how much annular volume it displaces on the way down.",
+  "new": "Whether it passes the casing above, and the annular volume it displaces."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-completion-is",
+  "ord": 11,
+  "option": 1,
+  "old": "Its outside and inside diameters are both close to those of the plain tubing that runs above and below it.",
+  "new": "Its outside and inside diameters are both close to those of plain tubing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-completion-is",
+  "ord": 12,
+  "option": 0,
+  "old": "A production rate from a reservoir inflow model.",
+  "new": "A production rate from a reservoir inflow model, using the tubing bore as the flow path."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-completion-is",
+  "ord": 13,
+  "option": 0,
+  "old": "A component that is wider than the casing above it.",
+  "new": "A component that is wider than the casing above it, since such a string could never be run."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-completion-is",
+  "ord": 14,
+  "option": 2,
+  "old": "It uses the bore of the nearest casing section above the gap, on the grounds that this is the best available estimate.",
+  "new": "It uses the bore of the nearest casing section above the gap."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-completion-is",
+  "ord": 14,
+  "option": 3,
+  "old": "It returns zero for that interval, which is conservative because it understates the volume rather than overstating it.",
+  "new": "It returns zero for that interval, which understates the volume."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-completion-is",
+  "ord": 15,
+  "option": 0,
+  "old": "Because the excluded calculations are too slow to run.",
+  "new": "Because the excluded calculations are too slow to run alongside the geometric checks."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-api-drift",
+  "ord": 10,
+  "option": 1,
+  "old": "Because catalog rows change over time and a size that is not on a boundary today may be added at one in a future revision.",
+  "new": "Because catalog rows change, and a size off a boundary today may be added at one later."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-api-drift",
+  "ord": 11,
+  "option": 2,
+  "old": "That any tool of that diameter can be run to the bottom of the string in which the joint is installed at any time.",
+  "new": "That any tool of that diameter can reach the bottom of the string later."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-api-drift",
+  "ord": 12,
+  "option": 1,
+  "old": "A twelve inch mandrel passing through a new joint.",
+  "new": "A twelve inch mandrel passing through a new joint that has never been in a well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-api-drift",
+  "ord": 13,
+  "option": 0,
+  "old": "About an inch and a half.",
+  "new": "About an inch and a half, as for the heaviest casing weights."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-api-drift",
+  "ord": 14,
+  "option": 0,
+  "old": "Because the specification requires it before any intervention.",
+  "new": "Because the specification requires it before any intervention on a well that has produced."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-api-drift",
+  "ord": 15,
+  "option": 2,
+  "old": "As a conservative lower bound, because the drift is smaller than the bore that the component will actually encounter.",
+  "new": "As a conservative lower bound, since the real bore exceeds the drift."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-api-drift",
+  "ord": 15,
+  "option": 3,
+  "old": "As a nominal figure with no physical meaning, since the real bore is unknown until a drift run has been performed.",
+  "new": "As a nominal figure with no physical meaning until a drift run is done."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-stack-up",
+  "ord": 7,
+  "option": 0,
+  "old": "Because measured depth increases downward by convention.",
+  "new": "Because measured depth increases downward by convention, so a tally has to follow the same direction."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-stack-up",
+  "ord": 10,
+  "option": 1,
+  "old": "It would be unchanged, because the packer body is unchanged.",
+  "new": "It would be unchanged, because the packer body is unchanged and the clearance belongs to the component."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-stack-up",
+  "ord": 11,
+  "option": 1,
+  "old": "Because a packer set in casing rather than in a liner requires a completely different setting mechanism and sealing element.",
+  "new": "Because a packer set in casing needs a different setting mechanism and sealing element."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-stack-up",
+  "ord": 12,
+  "option": 2,
+  "old": "Because a component with no length cannot be assigned an outside diameter, so the clearance check would have nothing to compare.",
+  "new": "Because a component with no length cannot be given an outside diameter to check."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-stack-up",
+  "ord": 12,
+  "option": 3,
+  "old": "Because it would appear at the top of the string, where the tally is normally checked most carefully by the crew making it up.",
+  "new": "Because it would sit at the top of the string, where the tally is checked most."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-stack-up",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the two numbers are in different units, so the error changes the magnitude of the result by a factor of about forty.",
+  "new": "Because the two numbers are in different units, which scales the result by about forty."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-stack-up",
+  "ord": 13,
+  "option": 3,
+  "old": "Because the swapped row would be placed at the wrong depth in the tally, which shifts everything below it by its own length.",
+  "new": "Because the swapped row lands at the wrong depth and shifts everything below it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-stack-up",
+  "ord": 14,
+  "option": 1,
+  "old": "A refusal is issued for anything outside the catalog, and a failure is issued for anything inside it that does not fit.",
+  "new": "Refusal is for items outside the catalog; failure is for catalog items that do not fit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-stack-up",
+  "ord": 15,
+  "option": 0,
+  "old": "The weights, the grades and the connection types.",
+  "new": "The weights, the grades and the connection types, which between them identify every joint."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-equipment",
+  "ord": 8,
+  "option": 0,
+  "old": "The two flow couplings, the blast joint and the entry guide.",
+  "new": "The two flow couplings, the blast joint and the entry guide, since each carries a thickened wall."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-equipment",
+  "ord": 9,
+  "option": 1,
+  "old": "The safety valve, which is machined down to save weight.",
+  "new": "The safety valve, which is machined down to save weight in the upper string."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-equipment",
+  "ord": 10,
+  "option": 1,
+  "old": "Nothing fails, because five and a half inch casing at that weight has a drift larger than the widest item in the kit.",
+  "new": "Nothing fails, since that casing drifts wider than the widest item."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-equipment",
+  "ord": 10,
+  "option": 3,
+  "old": "Only the packer fails, because it is sized to seven inch casing and cannot be run into anything smaller than that.",
+  "new": "Only the packer fails, since it is sized for seven inch casing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-equipment",
+  "ord": 11,
+  "option": 2,
+  "old": "Because the tubing is the only item whose outside diameter is not published by the vendor in a form that can be compared.",
+  "new": "Because the tubing is the only item whose outside diameter the vendor does not publish."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-equipment",
+  "ord": 12,
+  "option": 2,
+  "old": "Ream the casing at the depths where the item will sit, so that the local bore is enlarged enough to accept it as designed.",
+  "new": "Ream the casing where the item will sit, so the local bore accepts it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-equipment",
+  "ord": 12,
+  "option": 3,
+  "old": "Accept the negative clearance, since the drift is a conservative figure and the actual bore is normally larger than it.",
+  "new": "Accept the negative clearance, since the real bore exceeds the drift."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-equipment",
+  "ord": 13,
+  "option": 2,
+  "old": "It shows that the row is an average across several vendors, so the true value for any one vendor is within a few percent.",
+  "new": "It shows the row is an average across vendors, so any one vendor is within a few percent."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-equipment",
+  "ord": 15,
+  "option": 0,
+  "old": "Using it to learn which item types are widest.",
+  "new": "Using it to learn which item types tend to be widest in a typical kit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-volumes-and-what-a-tally-hides",
+  "ord": 10,
+  "option": 1,
+  "old": "Because the casing program is recorded in measured depth, and converting it would require a survey the model does not carry.",
+  "new": "Because the casing program is recorded in measured depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-volumes-and-what-a-tally-hides",
+  "ord": 11,
+  "option": 0,
+  "old": "The capacity of the string.",
+  "new": "The capacity of the string below the hanger."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-volumes-and-what-a-tally-hides",
+  "ord": 12,
+  "option": 2,
+  "old": "It would leave the volume unchanged, because the areas are unaffected by the inclination of the hole at any depth.",
+  "new": "It would leave it unchanged, since areas ignore inclination."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-volumes-and-what-a-tally-hides",
+  "ord": 12,
+  "option": 3,
+  "old": "It would change the volume only in the sections where the inclination exceeds about thirty degrees from the vertical.",
+  "new": "Only sections steeper than about thirty degrees would change."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-volumes-and-what-a-tally-hides",
+  "ord": 13,
+  "option": 0,
+  "old": "How long the string is.",
+  "new": "How long the string is from the hanger to its bottom."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-volumes-and-what-a-tally-hides",
+  "ord": 14,
+  "option": 1,
+  "old": "The bore of the smallest component in the string, which is what sets the through bore once the string is in the hole.",
+  "new": "The bore of the smallest component in the string."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-volumes-and-what-a-tally-hides",
+  "ord": 14,
+  "option": 3,
+  "old": "How much annular volume there is above the packer, given a casing program to integrate the string against.",
+  "new": "The annular volume above the packer."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-volumes-and-what-a-tally-hides",
+  "ord": 15,
+  "option": 3,
+  "old": "That the string can be run to depth in the well it was designed for, given the trajectory that well was drilled on.",
+  "new": "That the string can be run to depth on the trajectory the well was drilled on."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 8,
+  "option": 1,
+  "old": "That no component has had its inside and outside diameters entered the wrong way round anywhere in the string.",
+  "new": "That no component has had its two diameters entered the wrong way round."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 1,
+  "old": "Because the section above is always wider than the missing one.",
+  "new": "Because the section above is always wider than the missing one, so the bore would be overstated."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 0,
+  "old": "It contradicts the catalog and one of the two must be wrong.",
+  "new": "It contradicts the catalog and one of the two must be wrong, since both describe the same valve for the same tubing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 1,
+  "old": "The ratio between the displacement and the capacity, which describes how much steel there is per unit of flow area.",
+  "new": "The ratio of displacement to capacity, the steel per unit flow area."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 3,
+  "old": "The drift of the shallowest casing string, since that is the first restriction anything run into the well has to pass.",
+  "new": "The drift of the shallowest casing string, the first restriction."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "The capacity of the string.",
+  "new": "The capacity of the string, since that is the fluid the string takes in as it runs."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the packer depth and the total depth are entered by different people, so naming one assigns responsibility for it.",
+  "new": "Because different people enter the two depths, so naming one assigns responsibility."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 2,
+  "old": "A second engineer to check the arithmetic, since the calculations in this course have not been independently verified.",
+  "new": "A second engineer to check the arithmetic, which is unverified here."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 3,
+  "old": "The measured lengths of the actual joints, without which no depth in the tally can be relied upon for a real string.",
+  "new": "The measured lengths of the actual joints, to trust any tally depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "The two courses cover the same material at different depths.",
+  "new": "The two courses cover the same material, taken to different depths of detail."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "Nothing; an annular area is correct below the packer.",
+  "new": "Nothing; an annular area is correct below the packer, because the tail is still tubing inside casing."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 1,
+  "old": "Neither, since both methods approximate the same integral and the true value lies somewhere between the two results.",
+  "new": "Neither, since both methods approximate one integral and the truth lies between them."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 0,
+  "old": "If the string had more than twenty components.",
+  "new": "If the string had more than twenty components, since the sum would grow too long to be exact."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 1,
+  "old": "Discard the volume and refuse to report it.",
+  "new": "Discard the volume and refuse to report it, since a partial volume is worse than none."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 0,
+  "old": "Because clearances cannot be computed without a bore.",
+  "new": "Because clearances cannot be computed at all once any bore in the program is missing."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 1,
+  "old": "The rows were computed in the wrong order.",
+  "new": "The rows were computed in the wrong order, so the summary read the first row as the last."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "Because a failing string produces a refusal rather than a summary, so the worst row is never reported for one at all.",
+  "new": "Because a failing string produces a refusal, so its worst row is never reported."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "Because the oracle computed the rows in a different order, so a selection that depends on order would not have matched anyway.",
+  "new": "Because the oracle computed the rows in a different order from the engine."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "Because the worst row is reported with extra fields that the oracle does not produce, so it was excluded from the comparison.",
+  "new": "Because the worst row carries extra fields, so it was left out of the comparison."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "The outputs that appear in the fewest test cases, since coverage is the best available proxy for the risk of a defect.",
+  "new": "The outputs in the fewest test cases, since coverage is the best proxy for risk."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "Because the ratio is independent of the warn margin, whereas the identity of the selected row depends on where it is set.",
+  "new": "Because the ratio is independent of the warn margin, whereas the selected row depends on it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 1,
+  "old": "Yes, because an unknown is the worst case.",
+  "new": "Yes, because an unknown is the worst case and has to be treated as a failure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "None; a packer is short enough to be unaffected.",
+  "new": "None; a packer is short enough to be unaffected, since its length is small against the bend."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "That the completion will work in the well.",
+  "new": "That the completion will work in the well it is designed for."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "That the warn margin was set too high, since the margin was intended to cover exactly the difference the drift run has revealed.",
+  "new": "That the warn margin was too high, since it was meant to cover this gap."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "That the drift run tool was undersized, because a drift run cannot report a bore smaller than the mill guarantee for new pipe.",
+  "new": "That the tool was undersized, since no drift run reads below the mill guarantee."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "On the through bore of each, since moving a component changes which restriction governs and therefore the advertised bore.",
+  "new": "On the through bore of each, since the move changes which restriction governs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "On the annulus volume of each, because the mandrel body displaces annulus and moving it changes how much fluid is needed.",
+  "new": "On the annulus volume of each, since the mandrel body displaces annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "The deepest component is reported as unknown and the rest are reported normally, since only that one is adjacent to the gap.",
+  "new": "The deepest component reports unknown and the rest report normally."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "The volume calculation refuses, because it integrates to total depth and the gap falls inside the range it has to cover.",
+  "new": "The volume calculation refuses, since the gap is inside its range."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "The number of rows that pass, warn and fail, which summarises the whole check in three integers rather than in one number.",
+  "new": "The counts of rows that pass, warn and fail."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "The ratio of the loosest row to the tightest, which describes the spread and therefore how concentrated the risk is.",
+  "new": "The ratio of the loosest row to the tightest one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "No; the profile must have one row per section in the program, which for two strings and three sections would be three rows.",
+  "new": "No; the profile must have one row per section in the program."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "Only if the two strings do not overlap, since an overlap always produces an extra row where both are present at once.",
+  "new": "Only if the two strings do not overlap, since overlap adds a row."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "Changing the casing weight at that depth.",
+  "new": "Changing the casing weight at that depth, which alters its drift."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "The well has a tie back inside the liner.",
+  "new": "The well has a tie back inside the liner, which restores a larger bore below it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "Because the bore at a depth is not always known.",
+  "new": "Because the bore at a depth is not always known from the casing program."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "One is a minimum over the string and the other is a sum over it, which is why one is reported per row and the other as a total.",
+  "new": "One is a minimum over the string and the other is a sum over it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "The warn margin that was applied, without which none of the thirteen clearance verdicts can be interpreted by any reader.",
+  "new": "The warn margin applied, without which no clearance verdict can be interpreted."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 7,
+  "option": 3,
+  "old": "Every hundred metres, which is the resolution at which casing programs are normally recorded and reported.",
+  "new": "Every hundred metres, the resolution casing programs are recorded at."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 8,
+  "option": 1,
+  "old": "Because the label carries the drift deduction class, which differs between strings even where their bores coincide.",
+  "new": "Because the label carries the drift class, which differs between strings even at equal bore."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 9,
+  "option": 1,
+  "old": "The liner drift, since the liner is present at that depth.",
+  "new": "The liner drift, since the liner is present at that depth and nothing else is listed there."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 10,
+  "option": 0,
+  "old": "The drift of the profile segment at that depth.",
+  "new": "The drift of the profile segment at that depth, where the component comes to rest."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 11,
+  "option": 0,
+  "old": "It is non decreasing with depth.",
+  "new": "It is non decreasing with depth, stepping up at each liner top."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 12,
+  "option": 1,
+  "old": "Four values, because the liner is run in two sections of different weight below the top of the overlap with the casing.",
+  "new": "Four values, since the liner has two sections of different weight."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 12,
+  "option": 2,
+  "old": "Three values, stepping at the packer depth and at total depth, which are the only depths the completion actually cares about.",
+  "new": "Three values, stepping at the packer depth and at total depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 13,
+  "option": 1,
+  "old": "The segment present at the depth asked about.",
+  "new": "The segment present at the depth asked about, since that is where the component is going to sit."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 14,
+  "option": 0,
+  "old": "Both refuse the calculation entirely.",
+  "new": "Both refuse the calculation entirely and return no result for either check."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 15,
+  "option": 1,
+  "old": "Because the resampling interval would have to be chosen, and no physical consideration determines what it should be.",
+  "new": "Because a resampling interval would have to be chosen."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-exposed-program",
+  "ord": 15,
+  "option": 3,
+  "old": "Because a resampled profile cannot be merged, so the row count grows and a reader cannot see where the real changes are.",
+  "new": "Because a resampled profile cannot be merged afterwards."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-getting-it-down",
+  "ord": 8,
+  "option": 0,
+  "old": "Fail below zero and pass above it, with no third verdict.",
+  "new": "Fail below zero and pass above it, with no third verdict, since a string either goes or it does not."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-getting-it-down",
+  "ord": 9,
+  "option": 1,
+  "old": "Because the outside diameters of the equipment are approximate.",
+  "new": "Because the outside diameters of the equipment are approximate and may be larger than the catalog says."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-getting-it-down",
+  "ord": 10,
+  "option": 2,
+  "old": "Because a proportional margin would have to be recomputed each time the casing weight changed, which the engine avoids.",
+  "new": "Because a proportional margin would change every time the casing weight changed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-getting-it-down",
+  "ord": 11,
+  "option": 1,
+  "old": "Because the packer body has to house a setting mechanism, which makes it wider than any other item in the completion kit.",
+  "new": "Because its setting mechanism makes it the widest item in the kit."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-getting-it-down",
+  "ord": 11,
+  "option": 3,
+  "old": "Because the packer is the last component run, so any accumulated depth error in the tally is concentrated at its depth.",
+  "new": "Because the packer is run last, so tally depth errors gather there."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-getting-it-down",
+  "ord": 12,
+  "option": 1,
+  "old": "Change the tubing size, or run the packer on a separate trip so that it does not have to pass the rest of the string first.",
+  "new": "Change the tubing size, or run the packer on a separate trip so it need not pass the string."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-getting-it-down",
+  "ord": 13,
+  "option": 2,
+  "old": "It passes at both, because the governing drift at both depths is set by the production casing rather than by the liner below.",
+  "new": "It passes at both depths, as the casing governs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-getting-it-down",
+  "ord": 13,
+  "option": 3,
+  "old": "It fails at the shallower depth and passes at the deeper one, because the liner drift is larger than the casing drift is.",
+  "new": "It fails at the shallower depth and passes deeper."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-getting-it-down",
+  "ord": 14,
+  "option": 0,
+  "old": "The depth at which the component was placed.",
+  "new": "The depth at which the component was placed, as read from the tally."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-getting-it-down",
+  "ord": 15,
+  "option": 0,
+  "old": "The row with the smaller clearance, whichever it is.",
+  "new": "The row with the smaller clearance, whichever it is, since clearance is what is being ranked."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-getting-through-it-afterwards",
+  "ord": 8,
+  "option": 0,
+  "old": "The XN no go nipple, whose bore is the smallest.",
+  "new": "The XN no go nipple, whose bore is the smallest anywhere in the string."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-getting-through-it-afterwards",
+  "ord": 9,
+  "option": 1,
+  "old": "About half the string.",
+  "new": "About half the string length."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-getting-through-it-afterwards",
+  "ord": 10,
+  "option": 1,
+  "old": "The valve restriction is deliberate, because a restricted bore is what allows the flapper to seal, and the no go is incidental.",
+  "new": "The valve restriction is deliberate to let the flapper seal; the no go is incidental."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-getting-through-it-afterwards",
+  "ord": 10,
+  "option": 3,
+  "old": "Both are deliberate, since every restriction in a completion is chosen by the designer against a list of intended tool sizes.",
+  "new": "Both are deliberate, since the designer chooses every restriction for tool sizes."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-getting-through-it-afterwards",
+  "ord": 11,
+  "option": 0,
+  "old": "The no go nipple, by machining its bore larger.",
+  "new": "The no go nipple, by machining its bore larger so that it stops only the smallest tools."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-getting-through-it-afterwards",
+  "ord": 12,
+  "option": 1,
+  "old": "An extreme is a maximum and an extent is a minimum.",
+  "new": "An extreme is a maximum and an extent is a minimum, both taken over the same string."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-getting-through-it-afterwards",
+  "ord": 13,
+  "option": 2,
+  "old": "Subtract the depth of each restriction from the depth of the next one below it, which gives the interval each one governs.",
+  "new": "Subtract each restriction depth from the next one below, giving the interval each governs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-getting-through-it-afterwards",
+  "ord": 14,
+  "option": 1,
+  "old": "When every component in the string has the same bore, in which case the extreme and the extent describe the same fact.",
+  "new": "When every component in the string has the same bore throughout."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-getting-through-it-afterwards",
+  "ord": 15,
+  "option": 1,
+  "old": "Any tool smaller than the reported value that is shorter than the drift mandrel length used for the tubing in the string.",
+  "new": "Any smaller tool shorter than the tubing drift mandrel."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-getting-through-it-afterwards",
+  "ord": 15,
+  "option": 2,
+  "old": "Any tool smaller than the reported value, provided the well is vertical over the interval the tool has to travel through.",
+  "new": "Any smaller tool, provided the well is vertical where it travels."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 7,
+  "option": 1,
+  "old": "A circulation rate calculation, where the fluid follows a path down one area and back up another rather than filling a space.",
+  "new": "A circulation rate calculation down one area and up another."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 7,
+  "option": 3,
+  "old": "A pit gain calculation while running the completion in, since the tail is the first part of the string to enter the well.",
+  "new": "A pit gain calculation while running the completion in."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 8,
+  "option": 1,
+  "old": "Because one of the two is a hard refusal and the other only produces a warning, depending on which value is out of range.",
+  "new": "Because one is a hard refusal and the other only a warning."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 9,
+  "option": 1,
+  "old": "Because the fluid density is constant with depth.",
+  "new": "Because the fluid density is constant with depth, so each unit length holds the same mass."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 10,
+  "option": 2,
+  "old": "It cannot handle a gap in the casing program, because a slice that straddles the gap has no single bore to be evaluated at.",
+  "new": "It cannot handle a slice that straddles a casing gap."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 10,
+  "option": 3,
+  "old": "It systematically overstates the volume, because the areas within each slice are evaluated at the top of that slice.",
+  "new": "It overstates the volume, evaluating areas at slice tops."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 11,
+  "option": 3,
+  "old": "If the packer depth fell between two casing section boundaries rather than exactly on one of them in the program.",
+  "new": "If the packer depth fell between two casing section boundaries."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 12,
+  "option": 0,
+  "old": "It refuses the calculation and returns nothing.",
+  "new": "It refuses the calculation and returns nothing, since a partial volume would mislead."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 13,
+  "option": 1,
+  "old": "Because volumes are less important than verdicts.",
+  "new": "Because volumes are less important than verdicts to the design."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 14,
+  "option": 0,
+  "old": "That the casing program contains no errors.",
+  "new": "That the casing program contains no errors, since any error would raise a warning."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-volumes",
+  "ord": 15,
+  "option": 0,
+  "old": "A warning naming the affected interval.",
+  "new": "A warning naming the affected interval, where the bore looks wrong."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 7,
+  "option": 3,
+  "old": "Any output computed by a reduction over an array, whether or not that reduction is reported to the user of the tool.",
+  "new": "Any output computed by a reduction over an array, reported to the user or not."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 8,
+  "option": 1,
+  "old": "It has to be written by a different engineer from the one who wrote the engine, so that the two cannot share an assumption.",
+  "new": "It has to be written by a different engineer from the engine's author."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 8,
+  "option": 2,
+  "old": "It has to reproduce the engine to the last bit, rather than to a tolerance, so that a selection difference would show up.",
+  "new": "It has to reproduce the engine to the last bit, with no tolerance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 9,
+  "option": 1,
+  "old": "Rank by clearance alone, ignoring the status.",
+  "new": "Rank by clearance alone, ignoring the status, since clearance is the physical quantity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 10,
+  "option": 0,
+  "old": "It reports both as joint worst.",
+  "new": "It reports both as joint worst, since neither can be preferred to the other."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 11,
+  "option": 0,
+  "old": "It always selects it, since an unknown is the worst case.",
+  "new": "It always selects it, since an unknown is the worst case and must be flagged."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 12,
+  "option": 2,
+  "old": "That the selected row's status matches the most severe status present anywhere in the list of rows for that string.",
+  "new": "That the selected row's status matches the most severe status present in the list."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 13,
+  "option": 1,
+  "old": "As the row with the largest outside diameter.",
+  "new": "As the row with the largest outside diameter, the hardest body to run."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 14,
+  "option": 2,
+  "old": "Rerun every calculation twice with different inputs, so that a summary that does not move can be identified as suspect.",
+  "new": "Rerun every calculation twice with different inputs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 14,
+  "option": 3,
+  "old": "Require that every summary output be reported together with the full list that it was derived from, in every report.",
+  "new": "Require every summary to be reported with its full list."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-check-critically",
+  "ord": 15,
+  "option": 0,
+  "old": "Whether every component clears the casing above it.",
+  "new": "Whether every component clears the casing above it on the way down the hole."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 7,
+  "option": 0,
+  "old": "Fill the gap with the bore of the section above it.",
+  "new": "Fill the gap with the bore of the section above it, which is the nearest known value."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 8,
+  "option": 1,
+  "old": "Whether one of them integrated to total depth rather than to the packer, which would explain a much larger discrepancy.",
+  "new": "Whether one integrated to total depth rather than to the packer."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 8,
+  "option": 2,
+  "old": "Whether one of them used the drift rather than the nominal bore, which would understate the annular area throughout.",
+  "new": "Whether one used the drift rather than the nominal bore for the area."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "option": 2,
+  "old": "A component stiffness for each item in the catalog, since the extra clearance needed depends on how much the body can flex.",
+  "new": "A component stiffness for each item in the catalog."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "option": 3,
+  "old": "A revised drift specification, because the standard mandrel test does not describe passage through a curved section at all.",
+  "new": "A revised drift specification for curved sections."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 1,
+  "old": "No; the controlling string must be at the component depth.",
+  "new": "No; the controlling string must be at the component depth, where the clearance is measured."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "Rerun the tool with different inputs and compare.",
+  "new": "Rerun the tool with different inputs and compare, to see whether the summary moves."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 2,
+  "old": "Because a string label is easier to read in a report than a depth, and the depth can always be looked up from the profile.",
+  "new": "Because a string label is easier to read in a report than a depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 3,
+  "old": "That the integration used exact breakpoints rather than a grid, which is what the absence of a warning is reporting.",
+  "new": "That the integration used exact breakpoints rather than a grid."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "Increase the number of test cases in the suite.",
+  "new": "Increase the number of test cases in the suite, so that more of the engine's paths are exercised."
+ }
+]

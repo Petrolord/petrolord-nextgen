@@ -1,0 +1,1937 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 1,
+  "old": "0.0498 ohm.m, unchanged, because K absorbs reading errors",
+  "new": "0.0498 ohm.m, unchanged, because the constant K absorbs any SSP reading error and so holds the computed Rwe at its corrected value"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "The agreement is meaningless because all three used the same water leg",
+  "new": "The agreement is meaningless because all three used the same water leg, so a shared error in that leg would move every route together and fake a convergence"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 1,
+  "old": "Always adopt the average of all three values",
+  "new": "Always adopt the average of all three values, since averaging the lab, SP and Pickett results cancels their individual errors and removes the need to review any single route"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "Always trust the lab sample because it is a direct measurement",
+  "new": "Always trust the lab sample because it is a direct measurement of the formation water, so the in-situ SP and Pickett routes can only ever confirm it and never overrule it"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "Discard the outlier immediately and without further work",
+  "new": "Discard the outlier immediately and without further work, because two routes agreeing is a majority vote that settles the value and makes checking the pair's failure modes redundant"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 2,
+  "old": "That the neutron-density porosity is biased low in the leg",
+  "new": "That the neutron-density porosity is biased low in the leg, since an understated porosity would force Archie to return a saturation pinned near one"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 1,
+  "old": "Because saturations above 1 are physically possible in transition zones",
+  "new": "Because saturations above 1 are physically possible in transition zones, where capillary effects let the water phase exceed the pore volume it occupies"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "Because clamping is only applied to porosity, never to saturation",
+  "new": "Because clamping is only applied to porosity, never to saturation, so the engine has no routine that could cap an Archie result at one in any zone of the well"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "The Pickett fit used too many points",
+  "new": "The Pickett fit used too many points, pulling the regression line off the true water trend and dragging the SP route down with it by the same amount as the Pickett value"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "The SP baseline was drawn on the wrong shale",
+  "new": "The SP baseline was drawn on the wrong shale, which lowers the SSP read against it and drags the Pickett result down alongside it, leaving the lab value as the odd one out"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "The formation temperature is wrong in the Arps step, which would also move the SP route",
+  "new": "The formation temperature is wrong in the Arps step, which would also move the SP route, so the lab value only looks high because the in-situ corrections share that error"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "Membrane potential suppression and baseline drift",
+  "new": "Membrane potential suppression and baseline drift, since the Pickett line inherits its water resistivity from the SP deflection read against the shale baseline"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 2,
+  "old": "Sample chain-of-custody breaks and bench temperature errors",
+  "new": "Sample chain-of-custody breaks and bench temperature errors, because the Pickett plot is anchored on the measured lab resistivity of a produced water sample"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "Net pay drops from 18.0 to 16.5 m",
+  "new": "Net pay drops from 18.0 to 16.5 m, because the rounded value pushes the transitional samples in SAND_A over the Sw cutoff"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 1,
+  "old": "Pay-average Sw jumps from 0.36 to 0.53",
+  "new": "Pay-average Sw jumps from 0.36 to 0.53, since Archie saturation scales with the square root of Rw and the rounding compounds it"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 2,
+  "old": "The two runs used different Vsh transforms, which explains the difference",
+  "new": "The two runs used different Vsh transforms, which explains the difference, since a steeper transform removes shaly samples from pay and lifts the average Sw"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "All samples in the zone, regardless of saturation",
+  "new": "All samples in the zone, regardless of saturation, since every Sw is scaled up by the same factor"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "Because the Professional methods were shown to be wrong at the Professional tier",
+  "new": "Because the Professional methods were shown to be wrong at the Professional tier and so could not be trusted for a booking at Expert"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "The raw Rw increases the density porosity readings",
+  "new": "The raw Rw increases the density porosity readings, because the higher water resistivity feeds back into the porosity step and lifts each sample's computed value"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "This is a rounding artefact in the engine",
+  "new": "This is a rounding artefact in the engine, which carries porosity to more decimals under the raw run and so reports a slightly higher average for the same samples"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "Porosity and saturation are correlated through the Archie equation",
+  "new": "Porosity and saturation are correlated through the Archie equation, so raising Rw raises the solved porosity at every sample in the same proportion as the Sw rise"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "SAND_B is the primary reservoir and SAND_A is upside",
+  "new": "SAND_B is the primary reservoir and SAND_A is upside, because its thicker gross section dwarfs SAND_A and the pay-average Sw still sits comfortably inside the cutoff"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "A gas cap, indicated by the low NTG",
+  "new": "A gas cap, indicated by the low NTG, since gas-bearing sands read low net-to-gross when the density-neutron crossover suppresses the porosity used by the net pay cutoffs"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "A zone where cutoffs should be abandoned to book more pay",
+  "new": "A zone where cutoffs should be abandoned to book more pay, because a transitional oil column over water is only fairly represented when every gross metre is counted"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "About an 8 percent reduction, roughly the net-pay change alone",
+  "new": "About an 8 percent reduction, roughly the net-pay change alone, as the saturation shift cancels out"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "The Expert work was unnecessary since the answer did not change",
+  "new": "The Expert work was unnecessary since the answer did not change, so the Associate tier's given value could have been booked directly with no triangulation at all"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "Three porosity means, the Pickett fit pair, and SAND_B net pay",
+  "new": "Three porosity means, the Pickett fit pair, and SAND_B net pay, covering the density, neutron-density and sonic porosity estimates, the fitted a*Rw and m from the water leg, and the thinner lower sand's booked net thickness"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "Rw from six different temperature assumptions",
+  "new": "Rw from six different temperature assumptions, each one run through the Arps correction from bench to formation conditions so that the grade tests how the learner handles the full range of thermal gradients in the typewell"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "Net, NTG and average Sw for both SAND_A and SAND_B",
+  "new": "Net, NTG and average Sw for both SAND_A and SAND_B, giving three booking quantities per zone so that the capstone grades the corrected interpretation of each sand directly and leaves the Rw routes themselves ungraded"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "Fitted at Associate, given at Professional, triangulated at Expert",
+  "new": "Fitted at Associate, given at Professional, triangulated at Expert, since the entry tier starts from a Pickett water-leg fit and the middle tier then hands that value down as a stated input"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "Triangulated at Associate, fitted at Professional, given at Expert",
+  "new": "Triangulated at Associate, fitted at Professional, given at Expert, because the course front-loads the evidence work so the senior tier can simply accept a value already defended below it"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "Given at every tier, with more decimal places each time",
+  "new": "Given at every tier, with more decimal places each time, so the provenance of rw never changes and only the precision quoted for the same stated value rises from one tier to the next"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "The final exam at any time, with module quizzes optional",
+  "new": "The final exam at any time, with module quizzes optional, since only the exam and the capstone count toward the certificate"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "An automatic upgrade of the Professional certificate",
+  "new": "An automatic upgrade of the Professional certificate, which is reissued at Expert grade and extended for a further renewal window at no extra cost"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "Nothing beyond the certificate document itself",
+  "new": "Nothing beyond the certificate document itself, since the academy keeps its certification separate from any Suite licensing or commercial offer"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "One where every number is quoted to at least four decimal places",
+  "new": "One where every number is quoted to at least four decimal places, so that another reviewer can match each reported value exactly to the output"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "Over-rounding: the saturation should carry more decimals",
+  "new": "Over-rounding: the saturation should carry more decimals, because a booking figure cut at four places hides the true resolution of the Archie result"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "Instrument error: the lab meter needs recalibration",
+  "new": "Instrument error: the lab meter needs recalibration, because a single bench resistivity reading that high points to a drifting conductivity cell"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "The specific values Rw = 0.05 and m = 2, which are universal constants",
+  "new": "The specific values Rw = 0.05 and m = 2, which are universal constants that every clastic reservoir shares and can be carried to any field unchanged"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-rw-problem",
+  "ord": 9,
+  "option": 0,
+  "old": "It is measured at bench temperature and must be corrected with Arps",
+  "new": "It is measured at bench temperature and must be corrected with Arps to formation conditions"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-rw-problem",
+  "ord": 10,
+  "option": 3,
+  "old": "They are only used when the three measured routes agree",
+  "new": "They are only used when the three measured routes agree, never when a route is in doubt"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-rw-problem",
+  "ord": 11,
+  "option": 0,
+  "old": "Because all three routes share the same physics, so agreement is guaranteed",
+  "new": "Because all three routes share the same physics, so agreement is guaranteed once any one of them is computed correctly"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-rw-problem",
+  "ord": 13,
+  "option": 0,
+  "old": "It was measured on mud filtrate rather than formation water",
+  "new": "It was measured on mud filtrate rather than formation water, so it describes the invaded zone instead of the virgin formation brine"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-rw-problem",
+  "ord": 13,
+  "option": 2,
+  "old": "The resistivity cell only works on NaCl solutions",
+  "new": "The resistivity cell only works on NaCl solutions, and a produced formation brine carries other ions that corrupt the bench reading"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-rw-problem",
+  "ord": 13,
+  "option": 3,
+  "old": "It is the equivalent resistivity Rwe, not the true Rw",
+  "new": "It is the equivalent resistivity Rwe, not the true Rw, so it must first pass through the SP chain before Archie can use it"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-rw-problem",
+  "ord": 14,
+  "option": 0,
+  "old": "Because the neutron and sonic curves are unavailable at this tier",
+  "new": "Because the neutron and sonic curves are unavailable at this tier, leaving density as the only porosity log to run"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-rw-problem",
+  "ord": 14,
+  "option": 2,
+  "old": "Because the Professional booking was found to be wrong",
+  "new": "Because the Professional booking was found to be wrong once the corrected Rw was applied to its shaly-sand run"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-rw-problem",
+  "ord": 15,
+  "option": 0,
+  "old": "That the water leg contains residual hydrocarbons",
+  "new": "That the water leg contains residual hydrocarbons, since the mean falls just short of full saturation"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-rw-problem",
+  "ord": 15,
+  "option": 1,
+  "old": "That the neutron-density porosity is biased low",
+  "new": "That the neutron-density porosity is biased low, which pushes the Archie result up toward unity"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-temperature-and-the-arps-correction",
+  "ord": 14,
+  "option": 3,
+  "old": "The SP and Pickett routes are needed to supply the salinity input that Arps requires",
+  "new": "The SP and Pickett routes are needed to supply the salinity input that Arps requires to shift the bench resistivity to formation temperature"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-sp-quicklook",
+  "ord": 12,
+  "option": 0,
+  "old": "Surface temperature, because that is where the reference electrode sits",
+  "new": "Surface temperature, because that is where the reference electrode sits and the potential is recorded"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-sp-quicklook",
+  "ord": 12,
+  "option": 3,
+  "old": "Any temperature, because K cancels out of the rearranged equation",
+  "new": "Any temperature, because K cancels out of the rearranged equation once Rmfe is taken as a ratio"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-sp-quicklook",
+  "ord": 13,
+  "option": 0,
+  "old": "The conversions only apply to oil-based muds",
+  "new": "The conversions only apply to oil-based muds, so a water-based mud system like the typewell's has no use for the Bateman and Konen charts"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-sp-quicklook",
+  "ord": 13,
+  "option": 1,
+  "old": "The conversions are numerically unstable",
+  "new": "The conversions are numerically unstable, diverging for the low-resistivity brines that dominate the typewell and producing unusable Rw values"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-sp-quicklook",
+  "ord": 13,
+  "option": 2,
+  "old": "They would make the quicklook slower than the Arps route",
+  "new": "They would make the quicklook slower than the Arps route, and a quicklook exists to give a fast answer at the wellsite before any lab work"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-sp-quicklook",
+  "ord": 14,
+  "option": 1,
+  "old": "The two values disagree by more than the capstone tolerance, so one route must be discarded",
+  "new": "The two values disagree by more than the capstone tolerance, so one route must be discarded before any Rw is adopted"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-sp-quicklook",
+  "ord": 15,
+  "option": 0,
+  "old": "A wiring fault: SSP can never be positive",
+  "new": "A wiring fault: SSP can never be positive, so the curve polarity must be reversed before use"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-sp-quicklook",
+  "ord": 15,
+  "option": 2,
+  "old": "The bed is too thin to read",
+  "new": "The bed is too thin to read, so the deflection has not developed its full static value"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-sp-quicklook",
+  "ord": 15,
+  "option": 3,
+  "old": "The formation is hydrocarbon bearing",
+  "new": "The formation is hydrocarbon bearing, since oil in the pores reverses the membrane potential"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 7,
+  "option": 0,
+  "old": "Adopt the Pickett value because it comes from the logs themselves",
+  "new": "Adopt the Pickett value because it comes from the logs themselves, and an in-situ fit on the formation outranks both the bottle and the SP"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 7,
+  "option": 3,
+  "old": "Postpone the evaluation until a fourth route becomes available",
+  "new": "Postpone the evaluation until a fourth route becomes available, since an unresolved triangle cannot support any booking or sensitivity case"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 8,
+  "option": 0,
+  "old": "Saturations rising steadily with depth",
+  "new": "Saturations rising steadily with depth toward the base of the leg"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 9,
+  "option": 1,
+  "old": "Because the neutron-density porosity is biased low in water",
+  "new": "Because the neutron-density porosity is biased low in water, and that bias shifts every Archie saturation across the leg a small fraction away from unity"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 9,
+  "option": 2,
+  "old": "Because Archie systematically underestimates saturation in clean sands",
+  "new": "Because Archie systematically underestimates saturation in clean sands, where the cementation exponent overstates the tortuosity of the connected pore network"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the engine subtracts a fixed calibration margin from computed saturations",
+  "new": "Because the engine subtracts a fixed calibration margin from computed saturations, holding them just under unity so that a water leg never trips the clamp"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 10,
+  "option": 3,
+  "old": "The convention only applies to shaly-sand models, not Archie",
+  "new": "The convention only applies to shaly-sand models, not Archie, whose clean-sand form can never mathematically exceed unity"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 11,
+  "option": 3,
+  "old": "Exactly 1.0000 after the engine normalises the leg",
+  "new": "Exactly 1.0000 after the engine normalises the leg to full water"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 12,
+  "option": 2,
+  "old": "1.26, scaling with the inverse square root",
+  "new": "1.26, scaling with the inverse square root of the Rw ratio"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 14,
+  "option": 1,
+  "old": "The Pickett route already reported 0.0500, so rounding restores the majority value",
+  "new": "The Pickett route already reported 0.0500, so rounding restores the majority value that the independent routes would jointly vote for"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 15,
+  "option": 0,
+  "old": "Ignore it unless it differs from the adopted value by more than 10 percent",
+  "new": "Ignore it unless it differs from the adopted value by more than 10 percent, because a small shift sits inside the triangulation spread and the issued report should stay as signed off"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 15,
+  "option": 2,
+  "old": "Replace the laboratory vertex in the original report and update its figures in place",
+  "new": "Replace the laboratory vertex in the original report and update its figures in place, so that readers of the evaluation always see the latest water analysis without chasing a revision"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-triangulation-and-validation",
+  "ord": 15,
+  "option": 3,
+  "old": "Treat it as unreliable because it postdates the logging campaign",
+  "new": "Treat it as unreliable because it postdates the logging campaign, since water produced after completion has mixed with drilling fluids and no longer represents the virgin aquifer"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 11,
+  "option": 1,
+  "old": "Net 11.0 m, NTG 0.361, pay-average Sw 0.4500",
+  "new": "Net 11.0 m, NTG 0.361, pay-average Sw 0.4500, a moderately good second sand of the well"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 12,
+  "option": 0,
+  "old": "Its gross interval is thicker, so more samples are exposed",
+  "new": "Its gross interval is thicker, so more samples are exposed to the Rw error and the absolute loss of net is necessarily larger"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 12,
+  "option": 3,
+  "old": "The water leg at its base makes the resistivity log unreliable there",
+  "new": "The water leg at its base makes the resistivity log unreliable there, as shoulder-bed effects from the conductive water smear the deep reading"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 13,
+  "option": 1,
+  "old": "Both sands should be reported with the raw-sample Rw as a conservative case",
+  "new": "Both sands should be reported with the raw-sample Rw as a conservative case, since the uncorrected value gives the lowest pay and a regulator will always prefer the most pessimistic booking"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 13,
+  "option": 3,
+  "old": "Sensitivity effort should be allocated in proportion to each zone's booked volume",
+  "new": "Sensitivity effort should be allocated in proportion to each zone's booked volume, so SAND_A with its thick net pay deserves most of the validation work and SAND_B can be carried as booked"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 14,
+  "option": 0,
+  "old": "Hydrocarbon-metres is the unit the drilling department uses",
+  "new": "Hydrocarbon-metres is the unit the drilling department uses, so quoting the swing that way lets the well planners compare it directly with their own target thickness and casing point reports"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 14,
+  "option": 1,
+  "old": "Net pay cannot be computed for the raw booking",
+  "new": "Net pay cannot be computed for the raw booking, because the uncorrected Rw pushes the water-leg saturations above one and the engine then refuses to apply the cutoffs to any sample in the zone"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 14,
+  "option": 2,
+  "old": "It avoids disclosing the saturation values",
+  "new": "It avoids disclosing the saturation values, keeping the individual Archie results confidential while still letting the reader compare the two bookings through a single combined volumetric figure"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 15,
+  "option": 1,
+  "old": "Multiply the reported saturations by the square-root factor and update the summary lines",
+  "new": "Multiply the reported saturations by the square-root factor and update the summary lines, since Archie saturation scales with the root of Rw and the zone averages can be corrected directly without rerunning"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 15,
+  "option": 2,
+  "old": "Keep the original booking unchanged for audit consistency",
+  "new": "Keep the original booking unchanged for audit consistency, since an issued report is a signed record and revising its numbers after release would break the traceability that reviewers depend on"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-rw-sensitivity-and-booking",
+  "ord": 15,
+  "option": 3,
+  "old": "Adjust only the water-leg check and leave the zone tables as issued",
+  "new": "Adjust only the water-leg check and leave the zone tables as issued, because the revised Rw is validated in the leg while the booked zones above it are governed by their own cutoffs instead"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-standard",
+  "ord": 9,
+  "option": 1,
+  "old": "Three porosity means, the Pickett a*Rw and m, and one saturation mean",
+  "new": "Three porosity means, the Pickett a*Rw and m, and one saturation mean, covering the density, neutron-density and sonic estimates plus the fit from the water leg"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-standard",
+  "ord": 9,
+  "option": 2,
+  "old": "Rw by Arps and by Pickett, plus net pay for SAND_A and SAND_B with each",
+  "new": "Rw by Arps and by Pickett, plus net pay for SAND_A and SAND_B with each, so that the capstone grades how the two routes carry through to both of the booked sands"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-standard",
+  "ord": 10,
+  "option": 3,
+  "old": "Module quizzes and the final exam can be taken in any order before the capstone",
+  "new": "Module quizzes and the final exam can be taken in any order before the capstone, which is the only strictly gated assessment"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-standard",
+  "ord": 11,
+  "option": 1,
+  "old": "70 percent for module quizzes, 75 percent for the final exam, with a 12 hour cooldown",
+  "new": "70 percent for module quizzes, 75 percent for the final exam, with a 12 hour cooldown applied once a learner fails any single attempt"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-standard",
+  "ord": 11,
+  "option": 3,
+  "old": "60 percent for both, with a permanent lock after three failures",
+  "new": "60 percent for both, with a permanent lock after three failures that can only ever be lifted by an academy administrator on request"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-standard",
+  "ord": 12,
+  "option": 1,
+  "old": "Free enrollment in the next course on the geoscience path",
+  "new": "Free enrollment in the next course on the geoscience path, so that the certified learner can move straight on without paying for the following tier"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-standard",
+  "ord": 12,
+  "option": 2,
+  "old": "A permanent license for the Petrophysics app",
+  "new": "A permanent license for the Petrophysics app, activated on the learner's Suite account as soon as the capstone result is recorded by the academy system"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-standard",
+  "ord": 12,
+  "option": 3,
+  "old": "An extension of the certificate's validity to twenty-four months",
+  "new": "An extension of the certificate's validity to twenty-four months, doubling the standard renewal window as a reward for clearing the hardest tier of study"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-standard",
+  "ord": 13,
+  "option": 2,
+  "old": "Because real wells with good hole conditions are the most common case",
+  "new": "Because real wells with good hole conditions are the most common case the analyst will meet in practice"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "Gross, net and NTG for SAND_A and SAND_B",
+  "new": "Gross, net and NTG for SAND_A and SAND_B, the thickness figures that describe each sand's pay"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "IGR, Vsh and phiD at three key depths",
+  "new": "IGR, Vsh and phiD at three key depths, read from the gamma ray and density curves in each sand"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Rw, a, m, n, and the two cutoff values",
+  "new": "Rw, a, m, n, and the two cutoff values that the interpretation applies to both of the sands"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "GR, RHOB and Rt at the zone top",
+  "new": "GR, RHOB and Rt at the zone top, where the log character of the sand is defined"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "The mud weight, bit size and logging date",
+  "new": "The mud weight, bit size and logging date, which set the conditions of the logs"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "The full list of per-sample pay flags",
+  "new": "The full list of per-sample pay flags, so every depth's pay decision is on record"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "The zone is actually hydrocarbon bearing",
+  "new": "The zone is actually hydrocarbon bearing, so the low Sw is a genuine oil show"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-logs-and-the-typewell",
+  "ord": 9,
+  "option": 2,
+  "old": "the sampling increment of the digital log",
+  "new": "the sampling increment of the digital log along the borehole axis"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-logs-and-the-typewell",
+  "ord": 13,
+  "option": 0,
+  "old": "microseconds per foot",
+  "new": "microseconds per foot (us/ft)"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-logs-and-the-typewell",
+  "ord": 14,
+  "option": 1,
+  "old": "SAND_A spans 2050 to 2080 m and SAND_B spans 2010 to 2030 m",
+  "new": "SAND_A spans 2050 to 2080 m and SAND_B spans 2010 to 2030 m as the upper sand"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-logs-and-the-typewell",
+  "ord": 15,
+  "option": 1,
+  "old": "The water leg sits at 2075 to 2078 m",
+  "new": "The water leg sits at 2075 to 2078 m near the base"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-shale-volume",
+  "ord": 11,
+  "option": 1,
+  "old": "Young sands contain no radioactive elements",
+  "new": "Young sands contain no radioactive elements, so any gamma signal they give must come entirely from their clay"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-shale-volume",
+  "ord": 11,
+  "option": 3,
+  "old": "The gamma ray tool reads too low in young rocks",
+  "new": "The gamma ray tool reads too low in young rocks because their loose grains let the detector stand off the borehole wall"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-shale-volume",
+  "ord": 13,
+  "option": 1,
+  "old": "Larionov older rocks, because the section is consolidated",
+  "new": "Larionov older rocks, because the section is consolidated and deeply buried"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-shale-volume",
+  "ord": 15,
+  "option": 3,
+  "old": "0.50",
+  "new": "0.50, a shaly sand"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-porosity",
+  "ord": 7,
+  "option": 0,
+  "old": "Silicon in the matrix",
+  "new": "Silicon in the matrix of the quartz grains"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-porosity",
+  "ord": 7,
+  "option": 2,
+  "old": "Iron in heavy minerals",
+  "new": "Iron in heavy minerals such as pyrite and siderite"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-porosity",
+  "ord": 7,
+  "option": 3,
+  "old": "Potassium in feldspars",
+  "new": "Potassium in feldspars and micas of the sand"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-porosity",
+  "ord": 15,
+  "option": 0,
+  "old": "Negative porosity is common in tight rock",
+  "new": "Negative porosity is common in tight rock and simply reflects the low pore volume there"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-porosity",
+  "ord": 15,
+  "option": 1,
+  "old": "Gas in the invaded zone",
+  "new": "Gas in the invaded zone, whose very light fluid distorts the density reading there"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-porosity",
+  "ord": 15,
+  "option": 3,
+  "old": "The mud filtrate is fresher than assumed",
+  "new": "The mud filtrate is fresher than assumed, so the fluid density used in the porosity equation is off"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-resistivity-and-saturation",
+  "ord": 13,
+  "option": 0,
+  "old": "The brine becomes saltier",
+  "new": "The brine becomes saltier when oil wetting strips the fresher water from the grain surfaces"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-resistivity-and-saturation",
+  "ord": 13,
+  "option": 1,
+  "old": "Oil conducts part of the current",
+  "new": "Oil conducts part of the current, adding a parallel path that distorts the resistivity response"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-resistivity-and-saturation",
+  "ord": 13,
+  "option": 3,
+  "old": "Porosity is destroyed by oil wetting",
+  "new": "Porosity is destroyed by oil wetting, as asphaltene films coat the grains and fill the pore throats"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-resistivity-and-saturation",
+  "ord": 14,
+  "option": 1,
+  "old": "Confirming the shale computes Sw near zero",
+  "new": "Confirming the shale computes Sw near zero, since shale holds no free formation water"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-resistivity-and-saturation",
+  "ord": 14,
+  "option": 3,
+  "old": "Confirming the gamma ray reads 20 API in the sands",
+  "new": "Confirming the gamma ray reads 20 API in the sands, which fixes the clean baseline"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-cutoffs-and-net-pay",
+  "ord": 13,
+  "option": 0,
+  "old": "the zone boundaries were picked half a metre too deep",
+  "new": "the zone boundaries were picked half a metre too deep, so the interval takes in extra section"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-cutoffs-and-net-pay",
+  "ord": 13,
+  "option": 1,
+  "old": "net pay was added to the gross thickness",
+  "new": "net pay was added to the gross thickness, double counting the best part of the sand"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-cutoffs-and-net-pay",
+  "ord": 13,
+  "option": 2,
+  "old": "the software rounds thickness up to the next half metre",
+  "new": "the software rounds thickness up to the next half metre before it reports the gross interval"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-cutoffs-and-net-pay",
+  "ord": 14,
+  "option": 0,
+  "old": "its shale volume exceeds the cutoff across most of the zone",
+  "new": "its shale volume exceeds the cutoff across most of the zone, so the sand fails as shale"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-interpretation-loop",
+  "ord": 7,
+  "option": 0,
+  "old": "It marks the deepest sample of the log",
+  "new": "It marks the deepest sample of the log, where the tools reach their full calibrated response"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-interpretation-loop",
+  "ord": 7,
+  "option": 1,
+  "old": "It gives the highest porosity in the well",
+  "new": "It gives the highest porosity in the well, so it anchors the top end of the porosity scale used by the cutoffs"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-interpretation-loop",
+  "ord": 8,
+  "option": 2,
+  "old": "The density log is reading bad hole",
+  "new": "The density log is reading bad hole in the badly washed-out shale"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-interpretation-loop",
+  "ord": 10,
+  "option": 3,
+  "old": "Sw is unaffected because Rw cancels",
+  "new": "Sw is unaffected because Rw cancels out of Archie"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-interpretation-loop",
+  "ord": 11,
+  "option": 1,
+  "old": "No change, because the fluid density compensates",
+  "new": "No change, because the fluid density compensates for the heavier matrix value in the equation"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-interpretation-loop",
+  "ord": 12,
+  "option": 0,
+  "old": "SAND_B is thinner in gross terms",
+  "new": "SAND_B is thinner in gross terms, so each flipped sample removes a larger share of its total section from the net pay count"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-interpretation-loop",
+  "ord": 12,
+  "option": 1,
+  "old": "SAND_B has a much higher shale volume",
+  "new": "SAND_B has a much higher shale volume, which pushes its samples against the Vsh cutoff and makes them flip with each small move"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-interpretation-loop",
+  "ord": 12,
+  "option": 3,
+  "old": "SAND_A was logged with a better tool",
+  "new": "SAND_A was logged with a better tool, so its readings carry less noise and fewer of its samples wander across the cutoff lines"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-interpretation-loop",
+  "ord": 13,
+  "option": 1,
+  "old": "Change all uncertain inputs together to see the worst case",
+  "new": "Change all uncertain inputs together to see the worst case in a single combined run"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-interpretation-loop",
+  "ord": 14,
+  "option": 2,
+  "old": "The interpreter's estimate of drilling cost",
+  "new": "The interpreter's estimate of drilling cost for the well"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "Slope +1/m and intercept Rt at phi = 0.1",
+  "new": "Slope +1/m and intercept Rt at phi = 0.1, since log RT rises with porosity"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "0.0099",
+  "new": "0.0099, the porosity term alone"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 1,
+  "old": "The fit always discards the deepest point",
+  "new": "The fit always discards the deepest point, which sits too close to the base of the sand"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "About 0.65, from one over the ratio to the power 1/4",
+  "new": "About 0.65, from one over the ratio to the power 1/4 via a double root"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 3,
+  "old": "The porosity in the leg varies from sample to sample",
+  "new": "The porosity in the leg varies from sample to sample, scattering the fit"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "Clay minerals raise the resistivity of the formation",
+  "new": "Clay minerals raise the resistivity of the formation, and Archie compensates by assigning more water to the pore space than exists"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 1,
+  "old": "The gamma ray correction is not applied to RT",
+  "new": "The gamma ray correction is not applied to RT, so the radioactivity of the clay inflates the resistivity used in Archie"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 2,
+  "old": "Shale lowers porosity below the Archie range",
+  "new": "Shale lowers porosity below the Archie range, and the equation then overstates water in any rock tighter than clean sand"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "The three models are algebraically identical everywhere",
+  "new": "The three models are algebraically identical everywhere, differing only in how they are written, so they agree at every sample in the well"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "The sample must lie in the water leg",
+  "new": "The sample must lie in the water leg, since only a fully water-bearing sample can make three different saturation models coincide"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "The saturation exponent has no effect in clean rock",
+  "new": "The saturation exponent has no effect in clean rock, so every model reduces to the same porosity term and returns one shared value"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "By setting the shale term to zero and inverting",
+  "new": "By setting the shale term to zero and inverting, which reduces the expression to the Archie form"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "Simandoux always reads above Archie",
+  "new": "Simandoux always reads above Archie, because its added shale term puts more conductivity on the water side of the equation"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "The ordering is random from sample to sample",
+  "new": "The ordering is random from sample to sample, driven by noise in the Vsh input rather than any systematic difference in the models"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "Archie reads lowest because it ignores clay",
+  "new": "Archie reads lowest because it ignores clay, so it never credits the bound water that the shaly-sand models add to Sw"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "The zone means are computed only in the water leg",
+  "new": "The zone means are computed only in the water leg, where every model is forced toward full saturation"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "The models share the same shale term",
+  "new": "The models share the same shale term, so they must return nearly identical saturations in every zone"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "Indonesia for saline dispersed shale; Simandoux for fresh laminated shale",
+  "new": "Indonesia for saline dispersed shale; Simandoux for fresh laminated shale, following the basins where each model was first calibrated"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "Either model, chosen by whichever gives lower Sw",
+  "new": "Either model, chosen by whichever gives lower Sw, since the lower saturation is always the one that best removes the clay conductivity"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "Archie for shale, Simandoux for clean sand",
+  "new": "Archie for shale, Simandoux for clean sand, because the stronger correction belongs where the sand is cleanest and Archie copes with the shale itself"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "The models compute different porosities",
+  "new": "The models compute different porosities, so the shaly-sand runs pass more samples through the porosity cutoff and so add a whole metre of pay"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "The gross interval changes with the model",
+  "new": "The gross interval changes with the model, because the shaly-sand equations extend the zone boundaries to take in the clay-rich shoulder beds"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "Rounding in the zone means",
+  "new": "Rounding in the zone means, where each model's averages are carried to a different precision and the extra metre is only a reporting artefact"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "Averaging all methods to a single compromise value",
+  "new": "Averaging all methods to a single compromise value, so that no one method's bias dominates the booked porosity or saturation"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "Booking the method that maximises net pay",
+  "new": "Booking the method that maximises net pay, since the most optimistic reading is the one the reservoir owner will act on"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Rerunning methods until they agree",
+  "new": "Rerunning methods until they agree, adjusting parameters on each pass until the porosity and saturation answers line up"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "Its value in both metric and imperial units",
+  "new": "Its value in both metric and imperial units, so reviewers in either system can read it"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "The workflow runs in under one minute",
+  "new": "The workflow runs in under one minute, so that any reviewer can regenerate the whole evaluation on demand"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "The raw curves are archived with the report",
+  "new": "The raw curves are archived with the report, which lets a later analyst reprocess the well from the source data"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Net, gross and NTG for SAND_A and SAND_B",
+  "new": "Net, gross and NTG for SAND_A and SAND_B, the thickness summary of both sands under the shaly-sand booking, since pay figures are the numbers the professional report leads with"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "Vsh, phiD and Sw at three named depths",
+  "new": "Vsh, phiD and Sw at three named depths, one in each sand and one in the water leg, so the capstone checks the point-by-point readings rather than any zone average"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "Rw, Rsh, a, m, n and the Sw cutoff",
+  "new": "Rw, Rsh, a, m, n and the Sw cutoff, the full parameter set the Professional workflow adopts, each graded as its own entry against the values fitted and given on the typewell"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "A resit of the Associate capstone",
+  "new": "A resit of the Associate capstone, taken again under Professional conditions to confirm the basics still hold"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "Only the module on method choice and reporting",
+  "new": "Only the module on method choice and reporting, since that module covers what the capstone submission assesses"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-professional-workflow",
+  "ord": 10,
+  "option": 0,
+  "old": "It corrects the neutron log for borehole washout",
+  "new": "It corrects the neutron log for borehole washout, since the clay intervals are where the hole enlarges and the neutron over-reads"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-professional-workflow",
+  "ord": 10,
+  "option": 1,
+  "old": "It scales the porosity cutoff zone by zone",
+  "new": "It scales the porosity cutoff zone by zone, lowering the threshold where clay fills pore space so shaly pay is not lost"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-professional-workflow",
+  "ord": 10,
+  "option": 3,
+  "old": "It only excludes samples through the shale cutoff, as in the beginner workflow",
+  "new": "It only excludes samples through the shale cutoff, as in the beginner workflow, so the saturation equation itself never sees any clay"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-professional-workflow",
+  "ord": 13,
+  "option": 2,
+  "old": "The matrix density and fluid density for the density porosity",
+  "new": "The matrix density and fluid density for the density porosity, read from where the water line crosses"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-professional-workflow",
+  "ord": 14,
+  "option": 2,
+  "old": "Slightly higher values, because the models add the shale conductivity term",
+  "new": "Slightly higher values, because the models add the shale conductivity term to the brine"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 10,
+  "option": 1,
+  "old": "Divides by the fixed matrix-to-fluid span of 474 us/m",
+  "new": "Divides by the fixed matrix-to-fluid span of 474 us/m, the same denominator the time average uses but paired with a steeper matrix slowness"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 10,
+  "option": 2,
+  "old": "Requires a separate compaction factor Cp in slow formations",
+  "new": "Requires a separate compaction factor Cp in slow formations, which scales the time-average result upward wherever the sand is still uncompacted"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 10,
+  "option": 3,
+  "old": "Uses the shear rather than the compressional transit time",
+  "new": "Uses the shear rather than the compressional transit time, since shear slowness is far less disturbed by the pore fluid in slow formations"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 11,
+  "option": 3,
+  "old": "Shales, where it returns effective rather than apparent porosity",
+  "new": "Shales, where it returns effective rather than apparent porosity because its empirical constant strips out the whole bound water response"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 12,
+  "option": 0,
+  "old": "RHG is correct because it is the most recent method",
+  "new": "RHG is correct because it is the most recent method, and its empirical calibration to field data supersedes both the density tool and the older Wyllie time-average transform"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 12,
+  "option": 1,
+  "old": "The three should be averaged to 0.2145 and booked",
+  "new": "The three should be averaged to 0.2145 and booked, because blending independent transforms cancels the bias each one carries and gives the most defensible single value"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 12,
+  "option": 2,
+  "old": "The density tool has failed and the sonic values should be booked",
+  "new": "The density tool has failed and the sonic values should be booked, since two sonic transforms reading above density point to a density pad lifting off the borehole wall"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 13,
+  "option": 1,
+  "old": "The correct effective porosity, since the sonic is unaffected by shale",
+  "new": "The correct effective porosity, since the sonic is unaffected by shale and sees only the connected pore space"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 14,
+  "option": 1,
+  "old": "It sets the Sw cutoff for the net pay calculation",
+  "new": "It sets the Sw cutoff for the net pay calculation, since a verified water-leg porosity fixes where saturation begins to flag pay"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 14,
+  "option": 3,
+  "old": "It shows the neutron log is not needed on this well",
+  "new": "It shows the neutron log is not needed on this well, because two agreeing transforms already pin the porosity across the whole section"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 15,
+  "option": 0,
+  "old": "It lowers DT, so computed porosity reads too low",
+  "new": "It lowers DT, so computed porosity reads too low, because gas stiffens the pore space and lets the compressional wave cross the rock faster"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 15,
+  "option": 2,
+  "old": "It has no effect, because the head wave travels only in the matrix",
+  "new": "It has no effect, because the head wave travels only in the matrix and the pore fluid never enters the refracted path that the tool times"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-sonic-porosity",
+  "ord": 15,
+  "option": 3,
+  "old": "It causes the density and sonic porosities to agree exactly",
+  "new": "It causes the density and sonic porosities to agree exactly, since gas moves both tools in the same direction by the same porosity amount"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-neutron-density-porosity",
+  "ord": 3,
+  "option": 0,
+  "old": "Heavy minerals in the matrix",
+  "new": "Heavy minerals in the matrix such as pyrite"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-neutron-density-porosity",
+  "ord": 3,
+  "option": 2,
+  "old": "Drilling-induced fractures",
+  "new": "Drilling-induced fractures open to the borehole"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-neutron-density-porosity",
+  "ord": 3,
+  "option": 3,
+  "old": "Cementation between sand grains",
+  "new": "Cementation between sand grains in tight rock"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-neutron-density-porosity",
+  "ord": 8,
+  "option": 0,
+  "old": "The density tool fails completely in shale, so the average is undefined",
+  "new": "The density tool fails completely in shale, so the average is undefined and only the neutron half of the pair carries any meaning"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-neutron-density-porosity",
+  "ord": 8,
+  "option": 1,
+  "old": "It is too low; shales typically have effective porosity above 30 percent",
+  "new": "It is too low; shales typically have effective porosity above 30 percent, so the average understates their true storage capacity"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-neutron-density-porosity",
+  "ord": 11,
+  "option": 0,
+  "old": "The neutron tool was miscalibrated over the whole section",
+  "new": "The neutron tool was miscalibrated over the whole section, masking any separation between the curves"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-neutron-density-porosity",
+  "ord": 12,
+  "option": 2,
+  "old": "Limestone, Anhydrite and Salt",
+  "new": "Limestone, Anhydrite and Salt reference lines"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-neutron-density-porosity",
+  "ord": 15,
+  "option": 1,
+  "old": "Regulations require two porosity tools for booked reserves",
+  "new": "Regulations require two porosity tools for booked reserves, so a density-only evaluation could not be submitted in a formal reserves report"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-neutron-density-porosity",
+  "ord": 15,
+  "option": 3,
+  "old": "The average always gives the highest porosity, which maximises reported volumes",
+  "new": "The average always gives the highest porosity, which maximises reported volumes and keeps the booking consistent with the pre-drill volumetric case"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-pickett-plot",
+  "ord": 10,
+  "option": 2,
+  "old": "0.0050 ohm.m",
+  "new": "0.0050 ohm.m as aRw"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-pickett-plot",
+  "ord": 11,
+  "option": 0,
+  "old": "Log-space fitting runs faster on large wells",
+  "new": "Log-space fitting runs faster on large wells, and the app favours speed because a Pickett window can hold thousands of resistivity samples"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-pickett-plot",
+  "ord": 11,
+  "option": 2,
+  "old": "The resistivity tool records logarithms natively",
+  "new": "The resistivity tool records logarithms natively, so fitting the stored values directly would apply the logarithm twice and distort the line"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-pickett-plot",
+  "ord": 11,
+  "option": 3,
+  "old": "Raw-value fitting cannot produce a negative slope",
+  "new": "Raw-value fitting cannot produce a negative slope, and a Pickett water line must fall with porosity for the cementation exponent to come out positive"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-pickett-plot",
+  "ord": 12,
+  "option": 0,
+  "old": "Curves that converge on the water line at high porosity",
+  "new": "Curves that converge on the water line at high porosity, where the saturation effect fades"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-shaly-sand-saturation",
+  "ord": 12,
+  "option": 0,
+  "old": "The result rises toward the Archie baseline",
+  "new": "The result rises toward the Archie baseline, since a larger clay term adds water to the solution"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-shaly-sand-saturation",
+  "ord": 12,
+  "option": 1,
+  "old": "Nothing, because the two errors always cancel",
+  "new": "Nothing, because the two errors always cancel inside the Vsh over Rsh ratio of the model"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-shaly-sand-saturation",
+  "ord": 14,
+  "option": 2,
+  "old": "The tolerance of the capstone is too tight to grade the zone",
+  "new": "The tolerance of the capstone is too tight to grade the zone, so any model within the spread would pass as correct"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-shaly-sand-saturation",
+  "ord": 14,
+  "option": 3,
+  "old": "The zone is a shale, because only shale makes models converge",
+  "new": "The zone is a shale, because only shale makes models converge once the clay term dominates every equation"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-shaly-sand-saturation",
+  "ord": 15,
+  "option": 0,
+  "old": "Linear Vsh is the only transform the equations accept mathematically",
+  "new": "Linear Vsh is the only transform the equations accept mathematically, because Simandoux and Indonesia were derived assuming a straight gamma response"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-shaly-sand-saturation",
+  "ord": 15,
+  "option": 1,
+  "old": "Larionov requires core data that the typewell lacks",
+  "new": "Larionov requires core data that the typewell lacks, since its age-dependent curve has to be calibrated against measured clay volumes before use"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-shaly-sand-saturation",
+  "ord": 15,
+  "option": 3,
+  "old": "Linear Vsh is faster to compute at 0.5 m sampling",
+  "new": "Linear Vsh is faster to compute at 0.5 m sampling, and the shaly-sand equations must be evaluated at every sample across both sands of the well"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-method-choice-and-reporting",
+  "ord": 8,
+  "option": 1,
+  "old": "Because averaging is only permitted for porosity methods, never for any other quantity",
+  "new": "Because averaging is only permitted for porosity methods, never for any other quantity in a booked evaluation"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-method-choice-and-reporting",
+  "ord": 10,
+  "option": 3,
+  "old": "They are omitted because the grader recomputes them anyway",
+  "new": "They are omitted because the grader recomputes them anyway from the water leg of the typewell"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-method-choice-and-reporting",
+  "ord": 11,
+  "option": 1,
+  "old": "The zone tables must quote at least four significant figures",
+  "new": "The zone tables must quote at least four significant figures, so that no reported value loses precision through rounding"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-method-choice-and-reporting",
+  "ord": 11,
+  "option": 3,
+  "old": "Every method used must have a journal reference attached",
+  "new": "Every method used must have a journal reference attached, so a reviewer can trace each equation back to its published source"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-method-choice-and-reporting",
+  "ord": 12,
+  "option": 0,
+  "old": "Net, gross and NTG for SAND_A and SAND_B",
+  "new": "Net, gross and NTG for SAND_A and SAND_B, the thickness summary of both sands under the shaly-sand booking, since pay is what the professional report leads with"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-method-choice-and-reporting",
+  "ord": 12,
+  "option": 1,
+  "old": "IGR, Vsh and phiD at three graded depths",
+  "new": "IGR, Vsh and phiD at three graded depths, one in each sand and one in the shale, so the capstone tests the point readings that feed every later calculation"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-method-choice-and-reporting",
+  "ord": 12,
+  "option": 2,
+  "old": "Rw, Rsh, a, m, n and the Sw cutoff",
+  "new": "Rw, Rsh, a, m, n and the Sw cutoff, the parameter set that drives the shaly-sand saturations, each graded against the values the typewell was built with"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-method-choice-and-reporting",
+  "ord": 13,
+  "option": 1,
+  "old": "Only the final exam, since the quizzes are optional practice",
+  "new": "Only the final exam, since the quizzes are optional practice that the server tracks without enforcing any pass mark"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-method-choice-and-reporting",
+  "ord": 14,
+  "option": 3,
+  "old": "Both should exceed the porosity cutoff of 0.08 by at least a factor of three",
+  "new": "Both should exceed the porosity cutoff of 0.08 by at least a factor of three, confirming the sand is well above tight rock"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-method-choice-and-reporting",
+  "ord": 15,
+  "option": 3,
+  "old": "Replacing the Archie family with resistivity-independent saturation methods",
+  "new": "Replacing the Archie family with resistivity-independent saturation methods such as capillary-pressure height functions"
+ }
+]

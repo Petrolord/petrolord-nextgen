@@ -1,0 +1,2027 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 1,
+  "old": "Neither flips, because a plug that once passed both checks keeps its verdict as long as its length is unchanged.",
+  "new": "Neither flips, since a plug that passed both keeps its verdict while its length is unchanged."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "The plug is 60 m short of the required length.",
+  "new": "The plug is 60 m short of the required length, so the shortfall is being logged against the zone it was meant to isolate."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 3,
+  "old": "The plug covers the source but has no cement standing above its base.",
+  "new": "The plug covers the source but has no cement standing above its base, which leaves its margin over the source top at zero."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 2,
+  "old": "Yes, but only if the foundation is recorded as tagged, because a mechanical foundation is refused on a surface plug.",
+  "new": "Yes, but only with a tagged foundation, since a mechanical one is refused on a surface plug."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "The 50 m margin above the source, because both are drawn from the same permanent barrier convention in the standard.",
+  "new": "The 50 m margin above the source, since both come from one permanent barrier convention."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 3,
+  "old": "The surface plug rule, which applies to every plug above the deepest casing shoe.",
+  "new": "The surface plug rule, which applies to every plug above the deepest casing shoe and is checked before any source rule."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "The pressure test that accompanies a logged interval by convention.",
+  "new": "The pressure test that accompanies a logged interval by convention, which the engine counts as a second piece of evidence."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "Below 30 m, which is where the requirement without a log bites hardest.",
+  "new": "Below 30 m, which is where the requirement without a log bites hardest and a verified bond makes the most difference."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "No, because the two figures apply to different casing strings rather than to one annulus.",
+  "new": "No, because the two figures apply to different casing strings rather than to one annulus, so they cannot be compared at all."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 1,
+  "old": "It refuses the flag until a bond index is supplied.",
+  "new": "It refuses the flag until a bond index is supplied, holding the interval at the unlogged requirement meanwhile."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "It passes the interval but marks the result as not verified.",
+  "new": "It passes the interval but marks the result as not verified, so the reviewer sees the channelling in the output."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "Pressure test the annulus, which the engine accepts in place of a log.",
+  "new": "Pressure test the annulus, which the engine accepts in place of a log because a held test proves the seal directly."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "Nothing is missing, because a log run over the full interval is the stronger of the two pieces of evidence by some way.",
+  "new": "Nothing, because a log over the full interval is the stronger of the two pieces of evidence."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 3,
+  "old": "The cement was never continuous over the whole of the interval that was claimed.",
+  "new": "The cement was never continuous over the whole of the interval that was claimed, and the log simply misread the channel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "Recording a mechanical foundation under P3 so that its required length halves.",
+  "new": "Recording a mechanical foundation under P3 so that its required length halves and it qualifies for the intermediate zone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "The total is quoted per phase, so three separate figures have to be added.",
+  "new": "The total is quoted per phase, so three separate figures have to be added together before the order goes to the cementing contractor."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "It appears in both lists at once, so the zone reaches two on that plug.",
+  "new": "It appears in both lists at once while it straddles the zone top, so the zone reaches two qualifying barriers on that plug."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "That the engine assessed it and found no requirement, because zones carrying no requirement are dropped from the output.",
+  "new": "That the engine assessed it and found no requirement, so the zone was dropped from the output."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "Its length and its position above the source top.",
+  "new": "Its length and its position above the source top, the two properties that decide whether a plug can be counted against a zone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "The cement blend and the thickening time behind the slurry design.",
+  "new": "The cement blend and the thickening time behind the slurry design, since a plug that sets early in the stinger never reaches its interval."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "That an annulus was graded for the primary but not for the secondary.",
+  "new": "That an annulus was graded for the primary but not for the secondary, because only the plug over the source needs a sealed annulus."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "Yes, since the pass condition asks only for a combined count of two and does not care which list they came from.",
+  "new": "Yes, since the pass condition asks only for a combined count of two from either list."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "With the zone verdicts, which already account for it.",
+  "new": "With the zone verdicts, which already account for it by folding the annular figures into each barrier count."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "Before the placements, since the annulus fixes the hole capacity.",
+  "new": "Before the placements, since the annulus fixes the hole capacity that every balanced plug volume is then computed from."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "It prices the logging runs and the slurry but leaves rig time out of the comparison.",
+  "new": "It prices the logging runs and the slurry but leaves rig time out of the comparison, so only the service costs are ranked."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "Confirmation that the plug was balanced when pumping stopped.",
+  "new": "Confirmation that the plug was balanced when pumping stopped, since a tag at the calculated depth proves the columns stood level."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "The length a plug needs to support its own weight.",
+  "new": "The length a plug needs to support its own weight, since a shorter column of set cement can slide down an open hole under load."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "The bonded area required to hold the pressure of a typical zone.",
+  "new": "The bonded area required to hold the pressure of a typical zone, worked out from shear bond strength over the hole wall."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "The surface plug, the unlogged annular figure and the foundation minimum.",
+  "new": "The surface plug, the unlogged annular figure and the foundation minimum, which are the three entries sharing one default value."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "That the engine weights the flag by the vintage of the tool that was used.",
+  "new": "That the engine weights the flag by the vintage of the tool that was used, discounting older bond logs against modern ultrasonic runs."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "An override applied to one of the default lengths.",
+  "new": "An override applied to one of the default lengths, since a changed rule set moves every threshold that reads from it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "A change in the engine version between the two runs of the case.",
+  "new": "A change in the engine version between the two runs of the case, which would reset each default threshold in the rule set."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-balanced-plug",
+  "ord": 9,
+  "option": 2,
+  "old": "A plug longer than one hundred metres, because the balanced column would then exceed the length the engine can resolve.",
+  "new": "A plug longer than one hundred metres, since the engine cannot resolve a column that tall."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-balanced-plug",
+  "ord": 10,
+  "option": 0,
+  "old": "Two spacers double the contact time on the hole wall.",
+  "new": "Two spacers double the contact time on the hole wall, which is what scrubs the filter cake away before the slurry arrives there."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-balanced-plug",
+  "ord": 10,
+  "option": 3,
+  "old": "The pair are there to thin the mud on each side so that cement can bond to the wall.",
+  "new": "The pair are there to thin the mud on each side so that cement can bond to the wall, with the trailing one cleaning up after the plug."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-balanced-plug",
+  "ord": 11,
+  "option": 0,
+  "old": "The plug length and the excess chosen for that job.",
+  "new": "The plug length and the excess chosen for that job, because a longer or larger slurry column needs more fluid to hold it level."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-balanced-plug",
+  "ord": 11,
+  "option": 1,
+  "old": "The slurry density relative to the density of the spacer.",
+  "new": "The slurry density relative to the density of the spacer, since the heavier fluid needs a shorter column to balance the hydrostatic."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-balanced-plug",
+  "ord": 12,
+  "option": 1,
+  "old": "Spacer behind stays at 0.386345 m3, because what is fixed is the ratio and not the volume.",
+  "new": "Spacer behind stays at 0.386345 m3, because what is fixed is the ratio and not the volume, whatever is pumped ahead."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-balanced-plug",
+  "ord": 13,
+  "option": 3,
+  "old": "A negative value has been entered for the leading spacer, which the engine refuses.",
+  "new": "A negative value has been entered for the leading spacer, which the engine flags because it cannot draw a column of negative height."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-balanced-plug",
+  "ord": 14,
+  "option": 1,
+  "old": "Annulus capacity times the balanced height, less the volume of the leading spacer.",
+  "new": "Annulus capacity times the balanced height, less the volume of the leading spacer that has already gone round the shoe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-balanced-plug",
+  "ord": 15,
+  "option": 3,
+  "old": "Excess is deducted from the displacement so that total pumped volume is left unchanged.",
+  "new": "Excess is deducted from the displacement so that total pumped volume is left unchanged, keeping the pump schedule identical for every job."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-excess-and-where-the-plug-ends-up",
+  "ord": 9,
+  "option": 1,
+  "old": "The density, because the column relaxes once the pipe stops carrying part of the load imposed on it.",
+  "new": "The density, because the column relaxes once the pipe stops carrying part of the load imposed on it and the slurry expands."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-excess-and-where-the-plug-ends-up",
+  "ord": 11,
+  "option": 0,
+  "old": "Nothing moves, because no excess was pumped.",
+  "new": "Nothing moves, because no excess was pumped and the drop is produced entirely by the extra slurry."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-excess-and-where-the-plug-ends-up",
+  "ord": 11,
+  "option": 1,
+  "old": "It rises 15.365 m as the slurry redistributes upward.",
+  "new": "It rises 15.365 m as the slurry redistributes upward into the space the withdrawn pipe used to occupy."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-excess-and-where-the-plug-ends-up",
+  "ord": 12,
+  "option": 3,
+  "old": "The gap is caused by contamination at the top of the column and a longer spacer is the correct answer.",
+  "new": "The gap is caused by contamination at the top of the column and a longer spacer is the correct answer, since it keeps mud off the cement."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-excess-and-where-the-plug-ends-up",
+  "ord": 13,
+  "option": 1,
+  "old": "About 15 m shallow of it, at 1834.635 m MD.",
+  "new": "About 15 m shallow of it, at 1834.635 m MD, because the settled column keeps the height it stood at inside the string."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-excess-and-where-the-plug-ends-up",
+  "ord": 13,
+  "option": 3,
+  "old": "Some 30 m deep of it, since settling always carries the top below design.",
+  "new": "Some 30 m deep of it, since settling always carries the top below design once the pipe volume leaves the hole."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-excess-and-where-the-plug-ends-up",
+  "ord": 14,
+  "option": 3,
+  "old": "A conversion between measured depth and true vertical depth, which is what the rule checks need before they can be applied.",
+  "new": "A conversion between measured and true vertical depth, which the rule checks need first."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-excess-and-where-the-plug-ends-up",
+  "ord": 15,
+  "option": 3,
+  "old": "The stinger shoe depth, since it is the only figure measured rather than calculated.",
+  "new": "The stinger shoe depth, since it is the only figure measured rather than calculated and it fixes where the plug base sits."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-rules",
+  "ord": 8,
+  "option": 1,
+  "old": "It expires after a fixed period unless a fresh tag is recorded.",
+  "new": "It expires after a fixed period unless a fresh tag is recorded, at which point the engine drops the halved length."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-rules",
+  "ord": 9,
+  "option": 2,
+  "old": "Plug length less source thickness, required to be positive.",
+  "new": "Plug length less source thickness, required to be positive so that the column is longer than the zone it isolates."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-rules",
+  "ord": 10,
+  "option": 0,
+  "old": "The sealing length itself, measured above the reservoir.",
+  "new": "The sealing length itself, measured above the reservoir, since that is the part of the column that actually holds the pressure."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-rules",
+  "ord": 10,
+  "option": 1,
+  "old": "The contamination allowance at the base of the column.",
+  "new": "The contamination allowance at the base of the column, where the slurry mixes with the mud lying beneath it at the source top."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-rules",
+  "ord": 11,
+  "option": 3,
+  "old": "A pass, provided the plug base is below the source top.",
+  "new": "A pass, provided the plug base is below the source top so that the covering check is satisfied too."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-rules",
+  "ord": 12,
+  "option": 1,
+  "old": "It looks at the midpoint of the column against the middle of the source interval.",
+  "new": "It looks at the midpoint of the column against the middle of the source interval, so a plug centred on the zone passes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-rules",
+  "ord": 13,
+  "option": 1,
+  "old": "Because one is run on measured depth and the other on true vertical depth.",
+  "new": "Because one is run on measured depth and the other on true vertical depth, so a deviated well can split the two answers."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-rules",
+  "ord": 14,
+  "option": 1,
+  "old": "Both checks pass, because the plug is longer than 100 m.",
+  "new": "Both checks pass, because the plug is longer than 100 m and a column that long is taken to cover any source beneath it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-rules",
+  "ord": 14,
+  "option": 2,
+  "old": "Both checks fail, because the plug sits far above the sand.",
+  "new": "Both checks fail, because the plug sits far above the sand, which the clearance check reads as too much distance from the source."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-rules",
+  "ord": 15,
+  "option": 2,
+  "old": "The requirement halves and a mechanical foundation becomes mandatory before the plug can be accepted as a barrier.",
+  "new": "The requirement halves and a mechanical foundation becomes mandatory before the plug is a barrier."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 7,
+  "option": 3,
+  "old": "It needs 100 m MD either way, with the log reducing the pressure test requirement instead.",
+  "new": "It needs 100 m MD either way, with the log reducing the pressure test requirement instead, since length is fixed by the standard."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 8,
+  "option": 1,
+  "old": "Half the required length, because the standard treats a logged annulus as twice as reliable as an unlogged one of the same cement.",
+  "new": "Half the required length, since the standard treats a logged annulus as twice as reliable."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 9,
+  "option": 2,
+  "old": "All nine flip, since the requirement moves for every length listed in the table.",
+  "new": "All nine flip, since the requirement moves for every length listed in the table and each verdict is read against the new figure."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 10,
+  "option": 3,
+  "old": "Logged it fails by 60 m, and unlogged it fails by 10 m, so the log is what closes the gap.",
+  "new": "Logged it fails by 60 m, and unlogged it fails by 10 m, so the log is what closes the gap to the required length."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 11,
+  "option": 3,
+  "old": "That the two figures are physical limits derived from flow through set cement.",
+  "new": "That the two figures are physical limits derived from flow through set cement, measured on cores cut from real annuli."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 12,
+  "option": 1,
+  "old": "It grades coverage and tool vintage, then interpolates a requirement somewhere between the 30 m and the 100 m figures.",
+  "new": "It grades coverage and vintage, then interpolates between the 30 m and 100 m figures."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 13,
+  "option": 0,
+  "old": "That the annulus will hold the differential across it.",
+  "new": "That the annulus will hold the differential across it, since a bonded sheath over a measured length is a proven hydraulic seal."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 13,
+  "option": 3,
+  "old": "That the top of cement matches the depth written on the job ticket.",
+  "new": "That the top of cement matches the depth on the job ticket, proving the slurry was placed exactly as the design calculation intended."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 14,
+  "option": 0,
+  "old": "Because the programme calls for two logs on every barrier.",
+  "new": "Because the programme calls for two logs on every barrier, and the pressure test is recorded as the second of those two readings."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 14,
+  "option": 2,
+  "old": "Because a log run before the plug is set expires once the plug has cured.",
+  "new": "Because a log run before the plug is set expires once the plug has cured, and the test renews it for the abandonment record."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-annular-cement",
+  "ord": 15,
+  "option": 3,
+  "old": "The element penalty is a length requirement and the cement penalty is a status downgrade.",
+  "new": "The element penalty is a length requirement and the cement penalty is a status downgrade, so extra length cures only the element."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-programme",
+  "ord": 8,
+  "option": 2,
+  "old": "It was entered twice in the plug list, once against each zone, so the engine grades two separate plugs sharing one name.",
+  "new": "It was entered twice in the plug list, once per zone, so the engine grades two plugs sharing one name."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-programme",
+  "ord": 9,
+  "option": 3,
+  "old": "It fails the length rule, since the rule check now runs with a source depth.",
+  "new": "It fails the length rule, since the rule check now runs with a source depth and asks for a longer column over the zone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-programme",
+  "ord": 10,
+  "option": 0,
+  "old": "Both, through the annular check run on each barrier.",
+  "new": "Both, through the annular check run on each barrier, which grades the cement behind the plug and the rock it has been set against."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-programme",
+  "ord": 10,
+  "option": 3,
+  "old": "Annular isolation only, using the 30 m and 100 m cement figures.",
+  "new": "Annular isolation only, applying the 30 m and 100 m cement figures to the interval behind every qualifying plug in turn."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-programme",
+  "ord": 11,
+  "option": 1,
+  "old": "They are applied to the interval behind each qualifying barrier, and a zone fails whenever the annulus there falls short.",
+  "new": "They are applied behind each qualifying barrier, and a zone fails whenever that annulus falls short."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-programme",
+  "ord": 12,
+  "option": 2,
+  "old": "Because those conditions are checked once the plugs are set, so a planning tool has no need to anticipate what tagging shows.",
+  "new": "Because those conditions are checked once the plugs are set, so a planning tool need not anticipate tagging."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-programme",
+  "ord": 13,
+  "option": 0,
+  "old": "The settled top, which is why the placement runs first.",
+  "new": "The settled top, which is why the placement runs first and hands its computed depth on to each of the length and source checks."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-programme",
+  "ord": 13,
+  "option": 3,
+  "old": "The design top adjusted by the excess fraction entered on that plug.",
+  "new": "The design top adjusted by the excess fraction entered on that plug, so a larger excess moves the checked top further up the hole."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-programme",
+  "ord": 14,
+  "option": 3,
+  "old": "Four plugs, a slurry total, and a rig time estimate for each of the phases.",
+  "new": "Four plugs, a slurry total, and a rig time estimate for each of the phases, built from the steps listed in the programme."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-programme",
+  "ord": 15,
+  "option": 2,
+  "old": "It removes the casing cut from phase 2, since cement at surface replaces it.",
+  "new": "It removes the casing cut from phase 2, since cement at surface replaces it as the last barrier the programme depends on."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 7,
+  "option": 2,
+  "old": "Work outwards from the surface plug, since it is the only plug with a fixed requirement.",
+  "new": "Work outwards from the surface plug, since it is the only plug with a fixed requirement and it anchors every other check."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 8,
+  "option": 1,
+  "old": "The overall pass first, since a passing programme makes any detailed per zone reading unnecessary for the review.",
+  "new": "The overall pass first, since a passing programme makes a detailed per zone reading unnecessary."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 9,
+  "option": 1,
+  "old": "Add a longer surface plug to lift the barrier count.",
+  "new": "Add a longer surface plug to lift the barrier count, since a surface plug is counted as cover for every zone lying beneath it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 9,
+  "option": 3,
+  "old": "Clear the flow potential flag so the zone stops raising a requirement.",
+  "new": "Clear the flow potential flag so the zone stops raising a requirement, which removes the empty primary list from the verdict."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 0,
+  "old": "Nothing, because both checks return the very same verdict.",
+  "new": "Nothing, because both checks return the very same verdict and the verdict is the only field that reaches the programme result."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 2,
+  "old": "The zone name, without which neither shortfall can be attributed.",
+  "new": "The zone name, without which neither shortfall can be attributed to the source it was meant to protect in the programme."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 11,
+  "option": 3,
+  "old": "The balanced height, which equals the design length whenever the stinger is centred.",
+  "new": "The balanced height, which equals the design length whenever the stinger is centred in the hole during the pumping."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "A pass is provisional until the takeoff shows a slurry volume for every plug.",
+  "new": "A pass is provisional until the takeoff shows a slurry volume for every plug, because an undesigned plug cannot be counted."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "The defaults are physical limits taken from cement testing, so they hold everywhere and only the reporting format changes.",
+  "new": "The defaults are physical limits taken from cement testing, so they hold in every jurisdiction."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "That she can price the abandonment and weigh a logging run against extra cement.",
+  "new": "That she can price the abandonment and weigh a logging run against extra cement, using the costs carried in the takeoff."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 2,
+  "old": "Orange, unchanged, because the flag only rescues wells that are short of an envelope rather than wells holding two.",
+  "new": "Orange, unchanged, since the flag only rescues wells that are short of an envelope."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "Green, but only once the failed secondary has been removed from the roster so that it reads as empty instead.",
+  "new": "Green, but only once the failed secondary is removed from the roster so that it reads as empty."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "A duty to record the last pressure survey date on the well, after which the engine revalidates the flag on every run.",
+  "new": "A duty to record the last pressure survey date, after which the engine revalidates the flag on every run."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "Green wells still require a monthly annulus pressure bleed down.",
+  "new": "Green wells still require a monthly annulus pressure bleed down, and a missed bleed down turns the well yellow on the next run."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "The trend would be dominated by the flow potential flag, which changes twelve of the sixteen states on its own.",
+  "new": "The trend would be dominated by the flow potential flag, which moves twelve of sixteen states."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "A trend is acceptable once the four colours have been given numeric weights that the operator has agreed in advance.",
+  "new": "A trend is acceptable once the four colours carry numeric weights the operator agreed in advance."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "That the secondary envelope decides the colour whenever it happens to be worse than the primary envelope on that well.",
+  "new": "That the secondary envelope decides the colour whenever it is worse than the primary on that well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "Orange, since ten seats against eight items means the well is two barriers short of the two it is required to hold.",
+  "new": "Orange, since ten seats against eight items leaves the well two barriers short of its requirement."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "Nothing, since an element with no certificate is not a barrier.",
+  "new": "Nothing, since an element with no certificate is not a barrier and leaving it off simply records the envelope as it really stands."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "None of it, because abandonment is categorised by plug rule checks rather than by the envelope and category chain.",
+  "new": "None of it, because abandonment is graded by plug rule checks rather than the envelope and category chain."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "The category alone, which the abandonment programme carries forward as its starting condition for the phased work.",
+  "new": "The category alone, which the abandonment programme carries forward as its starting condition."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "Intact, because the recorded status on each row still says verified.",
+  "new": "Intact, because the recorded status on each row still says verified and the engine reads the status field rather than the dates."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "Yellow, so record the degradation and set a restoration date.",
+  "new": "Yellow, so record the degradation and set a restoration date, since the primary still holds and only one row has failed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Whether the roster holds any element with no envelope assigned.",
+  "new": "Whether the roster holds any element with no envelope assigned, since an unassigned row is silently left out of both verdicts."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "Its rating, its kind and the envelope it has been assigned to.",
+  "new": "Its rating, its kind and the envelope it has been assigned to, which together fix the pressure limit it is held to."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 9,
+  "option": 2,
+  "old": "A regulatory requirement, checked by comparing the two lists for shared failure mechanisms.",
+  "new": "A regulatory requirement, checked by comparing the two lists for shared failure mechanisms each time the rollup runs."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 10,
+  "option": 3,
+  "old": "The most recently tested one, since the newest evidence about the envelope is the evidence worth acting on.",
+  "new": "The most recently tested one, since the newest evidence is the evidence worth acting on."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 11,
+  "option": 3,
+  "old": "The remaining life of the weakest string, as the number of years before its limit falls below operating pressure.",
+  "new": "The weakest string's remaining life, in years before its limit falls below operating pressure."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 12,
+  "option": 0,
+  "old": "A cement plug of 30 m measured depth, whatever it is set on.",
+  "new": "A cement plug of 30 m measured depth, whatever it is set on, provided a log has confirmed the cement across it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 12,
+  "option": 1,
+  "old": "A surface plug of 100 m, with no reduction allowed for a foundation beneath it.",
+  "new": "A surface plug of 100 m, with no reduction allowed for a foundation beneath it however well that foundation was tagged."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 13,
+  "option": 0,
+  "old": "How fast the element in question is leaking at present.",
+  "new": "How fast the element in question is leaking at present, since a leak rate needs a flow measurement the status list lacks."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 13,
+  "option": 2,
+  "old": "How much the intervention to repair the element will cost the asset.",
+  "new": "How much the intervention to repair the element will cost the asset, which would need rig rates and a repair scope."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 15,
+  "option": 1,
+  "old": "A cost estimate for the abandonment, priced from the material takeoff it produces.",
+  "new": "A cost estimate for the abandonment, priced from the material takeoff it produces for each plug in the phased programme."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 7,
+  "option": 2,
+  "old": "Because a casing string is always recorded twice, once for burst and once for collapse.",
+  "new": "Because a casing string is always recorded twice, once for burst and once for collapse, with each load assigned to one envelope."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 8,
+  "option": 1,
+  "old": "It is counted once, in the primary, and the sharing is noted in the reason string.",
+  "new": "It is counted once, in the primary, and the sharing is noted in the reason string so the secondary is not credited."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 9,
+  "option": 2,
+  "old": "Because a shared element usually turns out to be one element recorded twice by mistake.",
+  "new": "Because a shared element usually turns out to be one element recorded twice by mistake, which a reviewer can correct by hand."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 10,
+  "option": 3,
+  "old": "Green, because the wellhead is the one element the convention allows to be shared, so its failure is dispensed with.",
+  "new": "Green, because the wellhead is the one element the convention allows to be shared."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 11,
+  "option": 2,
+  "old": "By copying the element list from the last well built to the same completion design.",
+  "new": "By copying the element list from the last well built to the same completion design, since matching hardware gives matching envelopes."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 12,
+  "option": 0,
+  "old": "A verified element of any kind, tested within its interval.",
+  "new": "A verified element of any kind, tested within its interval, since a current passing test is all the convention asks of the last element."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 12,
+  "option": 1,
+  "old": "The shallowest casing shoe, above which containment is no longer required.",
+  "new": "The shallowest casing shoe, above which containment is no longer required because the formation there cannot flow to surface."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 13,
+  "option": 0,
+  "old": "Empty, on the grounds that no envelope was really formed.",
+  "new": "Empty, on the grounds that no envelope was really formed when the listed elements fail to connect into one another."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 13,
+  "option": 1,
+  "old": "Degraded, because the engine spots the gap and drops the envelope one step.",
+  "new": "Degraded, because the engine spots the gap and drops the envelope one step, as it would for an untested element."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 14,
+  "option": 2,
+  "old": "An element whose depth leaves the pressure source outside the envelope it belongs to.",
+  "new": "An element whose depth leaves the pressure source outside the envelope it belongs to, found by sorting the roster on depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-elements-and-envelopes",
+  "ord": 15,
+  "option": 3,
+  "old": "That the element has been calculated to withstand the differential it would see if the other envelope let go.",
+  "new": "That it was calculated to hold the differential it would see if the other envelope let go."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-status-and-what-it-means",
+  "ord": 9,
+  "option": 1,
+  "old": "The engine treats the two identically, so the entry makes no difference.",
+  "new": "The engine treats the two identically, so the entry makes no difference to the envelope or to the well category."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-status-and-what-it-means",
+  "ord": 10,
+  "option": 0,
+  "old": "That the element has failed and that it has been tested.",
+  "new": "That the element has failed and that it has been tested, which is what separates a degraded entry from one left untested."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-status-and-what-it-means",
+  "ord": 10,
+  "option": 1,
+  "old": "That the element is untested and that its condition is unknown.",
+  "new": "That the element is untested and that its condition is unknown, so the envelope holding it cannot be counted as intact."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-status-and-what-it-means",
+  "ord": 11,
+  "option": 2,
+  "old": "Two fail, the all verified check and the no failed elements check together.",
+  "new": "Two fail, the all verified check and the no failed elements check together, because the safety valve is not intact."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-status-and-what-it-means",
+  "ord": 12,
+  "option": 1,
+  "old": "Empty, because a failed envelope no longer counts as one.",
+  "new": "Empty, because a failed envelope no longer counts as one and the degraded primary is left to stand alone."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-status-and-what-it-means",
+  "ord": 12,
+  "option": 2,
+  "old": "Yellow, the same result a degraded primary earns on its own.",
+  "new": "Yellow, the same result a degraded primary earns on its own, since the primary alone sets the category."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-status-and-what-it-means",
+  "ord": 13,
+  "option": 1,
+  "old": "It counts failures and fails the envelope only when two or more are found.",
+  "new": "It counts failures and fails the envelope only when two or more are found, returning degraded for a single one."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-status-and-what-it-means",
+  "ord": 14,
+  "option": 2,
+  "old": "A degraded primary, an intact secondary and a yellow category as before.",
+  "new": "A degraded primary, an intact secondary and a yellow category as before, since a valve cannot fall below degraded."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-status-and-what-it-means",
+  "ord": 15,
+  "option": 1,
+  "old": "It is the status a regulator reviews first when an incident is investigated.",
+  "new": "It is the status a regulator reviews first when an incident is investigated, so the entry carries legal weight."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-envelope-verdict",
+  "ord": 7,
+  "option": 3,
+  "old": "Into whichever list is shorter, so the two envelope counts stay as close to balanced as they can.",
+  "new": "Into whichever list is shorter, so the two envelope counts stay as close to balanced as they can across the roster."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-envelope-verdict",
+  "ord": 9,
+  "option": 1,
+  "old": "It is not a check at all, merely a note printed beside the seat counts whenever the two totals fail to agree.",
+  "new": "It is not a check at all, merely a note printed beside the seat counts."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-envelope-verdict",
+  "ord": 10,
+  "option": 0,
+  "old": "The number of envelopes missing from the well.",
+  "new": "The number of envelopes missing from the well, since every missing envelope leaves its seats empty on the roster."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-envelope-verdict",
+  "ord": 10,
+  "option": 3,
+  "old": "Nothing useful, since the roster and the two envelope lists are built from separate inputs.",
+  "new": "Nothing useful, since the roster and the two envelope lists are built from separate inputs that need not agree."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-envelope-verdict",
+  "ord": 11,
+  "option": 2,
+  "old": "The envelopes are balanced in size, which is the condition the two envelopes check is actually testing for.",
+  "new": "The envelopes are balanced in size, which is what the two envelopes check is testing for."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-envelope-verdict",
+  "ord": 13,
+  "option": 1,
+  "old": "That the primary envelope was drawn up first.",
+  "new": "That the primary envelope was drawn up first, since the left hand column is always filled before the right hand one."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-envelope-verdict",
+  "ord": 13,
+  "option": 3,
+  "old": "That the elements listed form a sealed surface around the flow source at the depths given.",
+  "new": "That the elements listed form a sealed surface around the flow source at the depths given in each row of the table."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-envelope-verdict",
+  "ord": 14,
+  "option": 2,
+  "old": "An element status handed to the category is quietly treated as its nearest envelope equivalent.",
+  "new": "An element status handed to the category is quietly treated as its nearest envelope equivalent by the lookup."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-well-category",
+  "ord": 13,
+  "option": 2,
+  "old": "Because red is kept for producing wells, and a well with no recorded envelope is presumed to have been shut in already.",
+  "new": "Because red is kept for producing wells, and a well with no envelope is presumed shut in."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-well-category",
+  "ord": 14,
+  "option": 0,
+  "old": "An immediate shut in and intervention.",
+  "new": "An immediate shut in and intervention, because a repair deferred for that long means the degradation is no longer accepted."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-well-category",
+  "ord": 15,
+  "option": 0,
+  "old": "From the test interval on the failed element.",
+  "new": "From the test interval on the failed element, since the next scheduled test date is when the failure has to be resolved."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-the-well-category",
+  "ord": 15,
+  "option": 2,
+  "old": "From the flow potential flag, a well that can flow being given a shorter window than one that cannot.",
+  "new": "From the flow potential flag, a well that can flow being given a shorter window than one that cannot in the category table."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "More element kinds and a longer barrier table.",
+  "new": "More element kinds and a longer barrier table, so that wells with more complex completions can be categorised."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "The tally gives collapse and not burst, and collapse alone governs what an annulus may be operated at.",
+  "new": "The tally gives collapse, and collapse alone governs what an annulus may be operated at."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "The element stays verified until a retest returns a poor result, a lapsed interval scheduling work rather than changing a status.",
+  "new": "The element stays verified until a retest fails, since a lapsed interval only schedules work."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "The well turns orange, an expired element being treated as absent from the envelope that used to contain it.",
+  "new": "The well turns orange, an expired element being treated as absent from its envelope."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "At the flow potential flag set on the panel.",
+  "new": "At the flow potential flag set on the panel, which changes the colour of most well states when it is toggled."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 2,
+  "old": "Envelope verdict, then element claim, then obligation, then category, the colour being settled before an action is chosen.",
+  "new": "Envelope verdict, then element claim, then obligation, then category."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "Element claim, then category, then envelope verdict, the colour telling you how hard to look at each envelope.",
+  "new": "Element claim, then category, then envelope verdict, the colour steering each envelope."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "Report both rows, and let the reviewer decide which of the two limits applies.",
+  "new": "Report both rows, and let the reviewer decide which of the two limits applies once the design intent has been checked."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "As far as the rated terms, which need no fluid at all.",
+  "new": "As far as the rated terms, which need no fluid at all, leaving only the hydrostatic deductions to be filled in later."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "The second figure is larger once the clamp has been applied.",
+  "new": "The second figure is larger once the clamp has been applied, and a correction is only allowed to lower the limit it replaces."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "Nothing, provided both were run on the same annulus fluid at the same depth.",
+  "new": "Nothing, provided both were run on the same annulus fluid at the same depth, since the head term is then common to both."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "The fixture was run at a measured depth while the MAWOP case used vertical depths.",
+  "new": "The fixture was run at a measured depth while the MAWOP case used vertical depths, which inflates the fixture's hydrostatic terms."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "What the head is worth per kg/m3, which needs a survey the engine does not read.",
+  "new": "What the head is worth per kg/m3, which needs a survey the engine does not read for the true vertical depth of each row."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "The revision is refused until the whole table is rebuilt.",
+  "new": "The revision is refused until the whole table is rebuilt, since a changed rating invalidates every row built alongside it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "A survey engine that returned measured depth in place of vertical.",
+  "new": "A survey engine that returned measured depth in place of vertical, so every head term downstream of it was quietly inflated."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "An economics run that summed a whole cash flow before the discount rate had been applied to any one of its periods.",
+  "new": "An economics run that summed a whole cash flow before the discount rate had been applied to any one of its individual periods."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-annulus-pressure-matters",
+  "ord": 7,
+  "option": 3,
+  "old": "Whichever element was supplied first, since the engine keeps the top row of the table.",
+  "new": "Whichever element was supplied first, since the engine keeps the top row of the table as its answer."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-annulus-pressure-matters",
+  "ord": 8,
+  "option": 2,
+  "old": "Because a formation is always shallower than the casing shoe standing above it.",
+  "new": "Because a formation is always shallower than the casing shoe standing above it, so it sees the full surface pressure undiluted."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-annulus-pressure-matters",
+  "ord": 9,
+  "option": 3,
+  "old": "It carries a backup density equal to the annulus fluid by default.",
+  "new": "It carries a backup density equal to the annulus fluid by default, so the two head terms cancel at that element."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-annulus-pressure-matters",
+  "ord": 10,
+  "option": 0,
+  "old": "That the annulus is sound and needs no further attention.",
+  "new": "That the annulus is sound and needs no further attention, since a reading below the limit shows every element is healthy."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-annulus-pressure-matters",
+  "ord": 10,
+  "option": 3,
+  "old": "That the barrier envelope containing the annulus must be intact.",
+  "new": "That the barrier envelope containing the annulus must be intact, because a failed element would push the reading past its limit."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-annulus-pressure-matters",
+  "ord": 12,
+  "option": 2,
+  "old": "Every element is given 0.75, the middle value of the published factor table.",
+  "new": "Every element is given 0.75, the middle value of the published factor table, as a neutral compromise between the roles."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-annulus-pressure-matters",
+  "ord": 13,
+  "option": 3,
+  "old": "It substitutes the strictest value in the table, which is 0.5.",
+  "new": "It substitutes the strictest value in the table, which is 0.5, so an unknown role is always treated cautiously."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-annulus-pressure-matters",
+  "ord": 14,
+  "option": 0,
+  "old": "Because both of them are computed from the top row of the table.",
+  "new": "Because both of them are computed from the top row of the table, before the reduction has looked at any of the other rows."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-annulus-pressure-matters",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the flag counts how many rows in the table fell below zero.",
+  "new": "Because the flag counts how many rows in the table fell below zero, and the clamp needs that count to decide what to report."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-why-annulus-pressure-matters",
+  "ord": 15,
+  "option": 2,
+  "old": "Because the engine stores measured depth for the rated term and vertical depth for the head, so mixing them swaps the two.",
+  "new": "Because the engine stores measured depth for the rated term and vertical depth for the head."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 7,
+  "option": 2,
+  "old": "Both are refused only when the element also carries a zero backup density.",
+  "new": "Both are refused only when the element also carries a zero backup density, since that combination leaves the row undefined."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 8,
+  "option": 0,
+  "old": "Because the engine normalises every density to fresh water.",
+  "new": "Because the engine normalises every density to fresh water, which removes the absolute level of both fluids from the comparison."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 8,
+  "option": 3,
+  "old": "Because a backup fluid lighter than the annulus fluid is ignored.",
+  "new": "Because a backup fluid lighter than the annulus fluid is ignored, so only the annulus density acts on the element in both cases."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 9,
+  "option": 3,
+  "old": "It is worth nothing measurable until the density difference grows large.",
+  "new": "It is worth nothing measurable until the density difference grows large enough to register on a surface gauge."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 10,
+  "option": 0,
+  "old": "Nothing, because the engine then skips the hydrostatic term.",
+  "new": "Nothing, because the engine then skips the hydrostatic term and grades the element on its derated rating value alone."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 10,
+  "option": 3,
+  "old": "A far side at the local formation pressure at that depth.",
+  "new": "A far side at the local formation pressure at that depth, taken from the pore pressure the engine assumes behind every string."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 11,
+  "option": 3,
+  "old": "It keeps the deepest row, since depth drives the hydrostatic deduction.",
+  "new": "It keeps the deepest row, since depth drives the hydrostatic deduction and the deepest element always carries the largest one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 12,
+  "option": 2,
+  "old": "It would raise the negative flag, because the wrong row was picked.",
+  "new": "It would raise the negative flag, because the wrong row was picked and the engine checks the pick against the smallest row."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 13,
+  "option": 2,
+  "old": "The units, because an oracle checks magnitudes rather than whether each row was returned in pascals or in psi.",
+  "new": "The units, because an oracle checks magnitudes rather than whether rows came back in pascals or psi."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 14,
+  "option": 3,
+  "old": "The clamp and the flag are both applied per row before the reduction.",
+  "new": "The clamp and the flag are both applied per row before the reduction, so each row carries its own flag into the pick."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-maasp",
+  "ord": 15,
+  "option": 2,
+  "old": "The engine reports both names, so that a reader can see the tie and go and inspect either of the two elements on the list.",
+  "new": "The engine reports both names, so that a reader can see the tie and inspect either element."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 7,
+  "option": 0,
+  "old": "The depth at which each of the two strings is set.",
+  "new": "The depth at which each of the two strings is set, since the deeper string carries the larger hydrostatic load on its wall."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 7,
+  "option": 3,
+  "old": "The difference between a burst rating and a collapse rating.",
+  "new": "The difference between a burst rating and a collapse rating, because collapse is the less predictable of the two failure modes."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 8,
+  "option": 2,
+  "old": "Because the leak rate from an outer string is always smaller.",
+  "new": "Because the leak rate from an outer string is always smaller, being driven by the lower pressure in the outer annulus."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 9,
+  "option": 3,
+  "old": "An allowance for the temperature the string will see in service.",
+  "new": "An allowance for the temperature the string will see in service, since steel loses strength as the well heats up."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 10,
+  "option": 1,
+  "old": "The 7 in liner burst, because it sits between the other two on depth and on rating and therefore carries the middle allowable.",
+  "new": "The 7 in liner burst, because it sits between the other two on depth and on rating."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 11,
+  "option": 3,
+  "old": "Because its backup density of 1030 kg/m3 removes its hydrostatic term.",
+  "new": "Because its backup density of 1030 kg/m3 removes its hydrostatic term, leaving the row at its full factored rating."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 12,
+  "option": 0,
+  "old": "Its factor of 0.8, which is the loosest in the whole table.",
+  "new": "Its factor of 0.8, which is the loosest in the whole table and lets the liner keep more of its rating than the other two."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 12,
+  "option": 2,
+  "old": "Its depth of 1167.3419238429642 m, the shallowest of the three.",
+  "new": "Its depth of 1167.3419238429642 m, the shallowest of the three, which keeps its hydrostatic deduction the smallest on the list."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 13,
+  "option": 3,
+  "old": "That the spread comes from the depth being reread on each run.",
+  "new": "That the spread comes from the depth being reread on each run, so every role picks up a slightly different head term."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the tubing sits shallower than the casing it hangs inside.",
+  "new": "Because the tubing sits shallower than the casing it hangs inside, and a shallower element is given the stricter factor by convention."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-mawop-and-the-rp90-factors",
+  "ord": 15,
+  "option": 2,
+  "old": "The stricter of the two values, so that an explicit factor can tighten a role default but can never loosen one on its own.",
+  "new": "The stricter of the two, so an explicit factor can tighten a role default but never loosen one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 7,
+  "option": 1,
+  "old": "When the annulus fluid and the far side fluid share the same nominal density.",
+  "new": "When the annulus fluid and the far side fluid share the same nominal density, so their two head terms cancel out anyway."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 8,
+  "option": 1,
+  "old": "Average the densities recorded at each of the annual pressure tests.",
+  "new": "Average the densities recorded at each of the annual pressure tests, which smooths out any single misleading reading."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 9,
+  "option": 3,
+  "old": "It adds an amount that grows with the rated term, because the role factor multiplies both halves of the row.",
+  "new": "It adds an amount growing with the rated term, since the factor multiplies both halves of the row."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 10,
+  "option": 1,
+  "old": "Identical in size and in sign, because one single term produces them both.",
+  "new": "Identical in size and in sign, because one single term produces them both and adding weight on either side helps."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 11,
+  "option": 2,
+  "old": "Yes, since a factor of 0.8 can never produce an allowable above the raw rating.",
+  "new": "Yes, since a factor of 0.8 can never produce an allowable above the raw rating whatever stands behind the wall."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 12,
+  "option": 2,
+  "old": "The tubing contents, because they are the only column inside the completion.",
+  "new": "The tubing contents, because they are the only column inside the completion and every annulus row is referenced to them."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 13,
+  "option": 0,
+  "old": "It leaves the allowable unchanged at 24000000 Pa.",
+  "new": "It leaves the allowable unchanged at 24000000 Pa, because the outer column sits beyond the wall that the row describes."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 13,
+  "option": 1,
+  "old": "It lifts the allowable to the unfactored limit of 30000000 Pa.",
+  "new": "It lifts the allowable to the unfactored limit of 30000000 Pa, where the heavier column cancels the role factor exactly."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 14,
+  "option": 0,
+  "old": "Because each candidate carries a different role factor.",
+  "new": "Because each candidate carries a different role factor, and the factor scales the density term along with the rating."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 14,
+  "option": 2,
+  "old": "Because the shallower candidates have already been clamped at zero.",
+  "new": "Because the shallower candidates have already been clamped at zero, so extra weight cannot lift their reported rows."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-differential",
+  "ord": 15,
+  "option": 3,
+  "old": "It has no net effect at all, because the same fluid enters two rows with opposite signs and the two always cancel.",
+  "new": "It has no net effect, because the same fluid enters two rows with opposite signs that always cancel."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 7,
+  "option": 2,
+  "old": "At 2250 kg/m3, which is the first density the sweep reports as negative.",
+  "new": "At 2250 kg/m3, which is the first density the sweep reports as negative and so marks the crossing point itself."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 8,
+  "option": 2,
+  "old": "Two, since a heavier annulus is a design choice and a lighter far side is a failure.",
+  "new": "Two, since a heavier annulus is a design choice and a lighter far side is a failure, which the flag reports apart."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 9,
+  "option": 3,
+  "old": "The reported MAASP is the smallest positive row, and the flag rises when a row has had to be excluded to find one.",
+  "new": "The reported MAASP is the smallest positive row, and the flag rises when a row was excluded to find it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 10,
+  "option": 2,
+  "old": "Every row in turn, so the flag counts how many elements are past their rating.",
+  "new": "Every row in turn, so the flag counts how many elements are past their rating across the whole candidate table."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 11,
+  "option": 0,
+  "old": "Because a negative pressure has no physical meaning.",
+  "new": "Because a negative pressure has no physical meaning, so the engine treats the result as an arithmetic error to suppress."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 11,
+  "option": 1,
+  "old": "Because the permit system rejects any value outside its range.",
+  "new": "Because the permit system rejects any value outside its range, and a submission carrying a negative would simply bounce."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 12,
+  "option": 3,
+  "old": "They are rescaled so that the smallest row reads zero, while all of the other rows keep their original spacing above it.",
+  "new": "They are rescaled so the smallest row reads zero, with the others keeping their spacing above it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 13,
+  "option": 3,
+  "old": "An instruction to bleed the annulus down to atmospheric pressure and hold it there until the element can be properly re-rated.",
+  "new": "An instruction to bleed the annulus to atmospheric and hold it there until the element is re-rated."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 14,
+  "option": 3,
+  "old": "The maximum allowable annulus surface pressure for this well has been revised downwards to zero for the present.",
+  "new": "The maximum allowable annulus surface pressure for this well has been revised down to zero."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 15,
+  "option": 0,
+  "old": "The identity of the element that governs.",
+  "new": "The identity of the element that governs, which is left open until the fixes have been compared against one another."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-when-it-cannot-be-pressured",
+  "ord": 15,
+  "option": 2,
+  "old": "Whether the reported value has been clamped at zero.",
+  "new": "Whether the reported value has been clamped at zero, since the flag alone cannot show whether the clamp actually fired."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 7,
+  "option": 3,
+  "old": "Checking the reported figure is above zero, since a governing element can only change identity once the clamp has fired.",
+  "new": "Checking the figure is above zero, since the governing element changes only once the clamp has fired."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 8,
+  "option": 1,
+  "old": "A request to re-run the case after the annulus has been bled to atmospheric.",
+  "new": "A request to re-run the case after the annulus has been bled to atmospheric, when the flag should clear on its own."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "option": 2,
+  "old": "The annulus fluid density is derived from the far side entries.",
+  "new": "The annulus fluid density is derived from the far side entries, so it moved along with the edited one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 1,
+  "old": "It can, by clamping the reported limit at zero and raising the flag.",
+  "new": "It can, by clamping the reported limit at zero and raising the flag, which takes the annulus out of the operating envelope."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 1,
+  "old": "The cause, once the annulus has been bled down twice.",
+  "new": "The cause, once the annulus has been bled down twice, since a thermal build returns to the same level after each bleed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 2,
+  "old": "The time to rebuild, which the flag reports alongside the clamp.",
+  "new": "The time to rebuild, which the flag reports alongside the clamp whenever the governing row has turned negative."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "The RP 90 role factors are all replaced by a single conservative factor of one.",
+  "new": "The RP 90 role factors are all replaced by a single conservative factor of one for every element left downhole."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "That he can predict when an annulus will build pressure.",
+  "new": "That he can predict when an annulus will build pressure, working from the thermal load that the rows already carry for each element."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "That he can rank the available fixes once a row has gone negative.",
+  "new": "That he can rank the available fixes once a row has gone negative, choosing the cheapest fluid change that clears the flag."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 2,
+  "old": "Cementing supplies the trajectory, while Well Control designs the slurry and places it.",
+  "new": "Cementing supplies the trajectory, while Well Control designs the slurry and places it behind each string in the well."
+ }
+]

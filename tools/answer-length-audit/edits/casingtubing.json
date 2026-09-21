@@ -1,0 +1,2225 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 0,
+  "old": "Production heating, because it is in compression.",
+  "new": "Production heating, because it is in compression and a packer is always weakest when the tubing pushes down on it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 1,
+  "old": "All three, at sufficiently large pressure changes.",
+  "new": "All three, at sufficiently large pressure changes, since ballooning alone can drive any of them past the sinusoidal limit."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 2,
+  "old": "That the string is fully restrained, and that it is fully free, so neither is the answer for a limited motion packer.",
+  "new": "That the string is fully restrained, and that it is fully free, so a limited packer takes the average."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "Irrelevant, because the packer only sees a force once the seal assembly has bottomed out against one end of its travel.",
+  "new": "Irrelevant, because the packer only sees a force once the seal assembly bottoms out at one end of its travel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 0,
+  "old": "The difference between the two published cases.",
+  "new": "The difference between the two published cases, read as the temperature swing the seal assembly already survived."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 3,
+  "old": "Neither, because the stroke condition uses an absolute value which is insensitive to a constant offset in the length.",
+  "new": "Neither, because the stroke condition takes an absolute value, blind to a constant offset in length."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "It cannot be said without the pressure changes, since those determine where the string sits in the bore at the start.",
+  "new": "It cannot be said without the pressure changes, which set where the string sits in the bore at the start."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "That the length change came out exactly at the limit.",
+  "new": "That the length change came out exactly at the limit, so the seal assembly is neither inside nor outside its travel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "Injection cooling, at 1.81 m of contraction.",
+  "new": "Injection cooling, at 1.81 m of contraction, which the seal assembly takes up."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "A modified Euler load with an effective length factor.",
+  "new": "A modified Euler load with an effective length factor chosen to represent the spacing between the tubing contact points."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 1,
+  "old": "Because a vertical string carries no side load and therefore no contact force, so the classical solution divides by zero there.",
+  "new": "Because a vertical string has no contact force, so the classical solution divides by zero there."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 3,
+  "old": "Because a vertical hole has no low side, so the string is already free to buckle in any direction at any compressive load.",
+  "new": "Because a vertical hole has no low side, leaving the string free to buckle in any direction."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "The most conservative, since sine is largest there.",
+  "new": "The most conservative, since sine is largest there and the limit is therefore read at its worst orientation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "Doubles them, because the string has half as far to move before it contacts the wall and the contact restores it sooner.",
+  "new": "Doubles them, because the string has half as far to move before the wall contact restores it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "It refuses to compute a buckling state at all.",
+  "new": "It refuses to compute a buckling state at all and reports the completion as incomplete."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "A tight annulus, which raises the helical limit more.",
+  "new": "A tight annulus, which raises the helical limit more than the sinusoidal one because a helix needs more room to form."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "The width of the transition between the two shapes.",
+  "new": "The width of the transition between the two shapes, a material property of the tubing grade read from the catalog."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "The length change, which is fed back into the stroke.",
+  "new": "The length change, which is fed back into the stroke check automatically."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "The other two cases must be rerun at the same conditions, since a string that buckles once will carry residual curvature afterward.",
+  "new": "The other two cases must be rerun, since a string that buckles once carries residual curvature afterward."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "The length change on the buckled case is overstated, so the stroke verdict on it is conservative and can be accepted as it stands.",
+  "new": "The buckled case overstates its length change, so its stroke verdict is conservative and can be accepted."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "Certifying that the tubing will not erode in service.",
+  "new": "Certifying that the tubing will not erode in service, provided the produced stream stays below that velocity for the life of the well."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "That the square root of density is the wrong functional form, since erosion depends on the momentum flux rather than the velocity.",
+  "new": "That the square root of density is the wrong form, since erosion follows momentum flux rather than velocity."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "That it was fitted in the 1980s, and modern tubulars are made to tighter tolerances than the pipe in the original test population.",
+  "new": "That it was fitted in the 1980s, and modern tubulars are made to tighter tolerances than that test pipe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "The single mean temperature, since a gas well warms nearly uniformly and the mean is therefore an excellent approximation.",
+  "new": "The single mean temperature, since a deep gas well has the steepest temperature profile."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "The absence of friction, since a subsea completion has a long tubing string and the seal friction accumulates over its length.",
+  "new": "The absence of friction, since seal friction on a long subsea string builds up over its length."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "Because migrations are the only place assertions can run.",
+  "new": "Because migrations are the only place assertions can run, the application layer having no way to check course content."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "The three forces, the packer safety factor, the buckling state and the stroke verdict, which together summarise the completion.",
+  "new": "The forces, packer safety factor, buckling state and stroke verdict, which summarise the completion."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "Three forces, the total, the length change and the erosional velocity, since all six are computed by a single engine call.",
+  "new": "Three forces, the total, the length change and the erosional velocity, from a single engine call."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "That every constant should be derived rather than typed.",
+  "new": "That every constant should be derived rather than typed, so that no number in a design can drift from its source."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-tubing-is-a-different-problem",
+  "ord": 9,
+  "option": 2,
+  "old": "Injection cooling, at 20000000 Pa, since injection requires more pump pressure than any other routine operation on a well.",
+  "new": "Injection cooling, at 20000000 Pa, the highest pump pressure of the three."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-tubing-is-a-different-problem",
+  "ord": 9,
+  "option": 3,
+  "old": "They are equal, because all three are run at the same treating pressure and differ only in the temperature change applied.",
+  "new": "They are equal, since all three run at the same treating pressure."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-tubing-is-a-different-problem",
+  "ord": 10,
+  "option": 3,
+  "old": "Because the annulus fluid is displaced upward during injection, carrying heat away from the tubing at a higher rate.",
+  "new": "Because the annulus fluid is displaced upward during injection, carrying heat away from the tubing."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-tubing-is-a-different-problem",
+  "ord": 11,
+  "option": 1,
+  "old": "Positive is upward, which coincides with tension for the piston term and with compression for the thermal one.",
+  "new": "Positive is upward, so tension for piston and compression for thermal."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-tubing-is-a-different-problem",
+  "ord": 12,
+  "option": 0,
+  "old": "The piston one, because the bore pressure pushes upward.",
+  "new": "The piston one, because the bore pressure pushes upward on the seal area and so opposes the other two."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-tubing-is-a-different-problem",
+  "ord": 13,
+  "option": 0,
+  "old": "Pulls on it, because hot steel is stronger in tension.",
+  "new": "Pulls on it, because the heated string thins as it expands and draws the seal assembly upward."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-tubing-is-a-different-problem",
+  "ord": 14,
+  "option": 2,
+  "old": "Injection cooling, because the cold string contracts and drives the seal assembly down into the packer bore against its stop.",
+  "new": "Injection cooling, as the cold string drives the seal into the packer."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-tubing-is-a-different-problem",
+  "ord": 14,
+  "option": 3,
+  "old": "None of them, since all three apply a bore pressure and the pressure terms are always positive on this geometry.",
+  "new": "None of them, since the pressure terms are always positive here."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-tubing-is-a-different-problem",
+  "ord": 15,
+  "option": 0,
+  "old": "Because the length change is reported as an absolute value.",
+  "new": "Because the length change is reported as an absolute value, which strips its sign before it is printed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-three-forces",
+  "ord": 7,
+  "option": 1,
+  "old": "An empirical calibration factor from Lubinski's original measurements on tubing strings in producing wells in the 1960s.",
+  "new": "An empirical calibration factor from Lubinski's original tests on producing tubing strings."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-three-forces",
+  "ord": 8,
+  "option": 1,
+  "old": "Because the Poisson ratio applies only to the internal pressure, so the annulus term enters the ballooning force undamped.",
+  "new": "Because the Poisson ratio applies only to the internal pressure, so the annulus term is undamped."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-three-forces",
+  "ord": 9,
+  "option": 3,
+  "old": "The seal bore area, since the thermal force acts on the steel section rather than on any of the pressure areas.",
+  "new": "The seal bore area, since the thermal force acts on the steel section alone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-three-forces",
+  "ord": 10,
+  "option": 1,
+  "old": "About 41 kN, which is why the term dominates.",
+  "new": "About 41 kN, which is why the thermal term dominates every other contribution at the packer here."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-three-forces",
+  "ord": 12,
+  "option": 0,
+  "old": "About 6.6 MPa, so a 45 degree swing is unbeatable.",
+  "new": "About 6.6 MPa, so a 45 degree swing outweighs any routine pressure event."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-three-forces",
+  "ord": 15,
+  "option": 3,
+  "old": "The buckling limits and the erosional velocity, which together define the operating envelope for the completion.",
+  "new": "The buckling limits and the erosional velocity, which together define the operating envelope."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-length-and-what-holds-it",
+  "ord": 7,
+  "option": 1,
+  "old": "Both lengthen it, because a pressurised pipe swells and a swollen pipe accommodates the extra volume by growing longer.",
+  "new": "Both lengthen it, because a pressurised pipe swells and grows longer to hold the volume."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-length-and-what-holds-it",
+  "ord": 7,
+  "option": 2,
+  "old": "Piston shortens it and ballooning lengthens it, which is why the two are reported separately rather than as a single term.",
+  "new": "Piston shortens it and ballooning lengthens it, so they are reported separately."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-length-and-what-holds-it",
+  "ord": 8,
+  "option": 1,
+  "old": "The temperature range over which the packer seals are qualified, which the manufacturer specifies as a hundred degree band.",
+  "new": "The temperature range over which the packer seals are qualified, a hundred degree band."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-length-and-what-holds-it",
+  "ord": 10,
+  "option": 1,
+  "old": "Two metres, which is the industry standard length.",
+  "new": "Two metres, which is the industry standard length for a seal assembly whatever the string length."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-length-and-what-holds-it",
+  "ord": 11,
+  "option": 0,
+  "old": "Anchored, where the tubing is latched to the packer.",
+  "new": "Anchored, where the tubing is latched to the packer and the latch absorbs the axial load."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-length-and-what-holds-it",
+  "ord": 12,
+  "option": 3,
+  "old": "Meaningless, because the engine skips the force calculation whenever the free length change is inside the specified stroke.",
+  "new": "Meaningless, because the engine skips the force whenever the length change is inside the stroke."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-length-and-what-holds-it",
+  "ord": 13,
+  "option": 0,
+  "old": "True and false, since it is a simple comparison.",
+  "new": "True and false, since it is a simple comparison of length and stroke."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-length-and-what-holds-it",
+  "ord": 15,
+  "option": 0,
+  "old": "A heavier tubing, which moves less for the same load.",
+  "new": "A heavier tubing, which moves less for the same load because its steel cross section is larger."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-buckling",
+  "ord": 7,
+  "option": 2,
+  "old": "True and robust, because the buckling state is a discrete outcome and a seven percent exceedance is unambiguous.",
+  "new": "True and robust, because the buckling state is discrete and any exceedance is unambiguous."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-buckling",
+  "ord": 8,
+  "option": 3,
+  "old": "It varies along the string, since the casing is tapered and the tubing passes through more than one nominal size.",
+  "new": "It varies along the string, since the casing is tapered through more than one nominal size."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-buckling",
+  "ord": 9,
+  "option": 0,
+  "old": "Down, because a tight annulus concentrates the contact force.",
+  "new": "Down, because a tight annulus concentrates the contact force and lets the wave form sooner."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-buckling",
+  "ord": 11,
+  "option": 1,
+  "old": "Because a millimetre is the smallest annulus in which a tubing string can physically be run, so it is a physical rather than a numerical floor.",
+  "new": "Because a millimetre is the smallest annulus in which tubing can physically be run at all."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-buckling",
+  "ord": 12,
+  "option": 0,
+  "old": "Immediately, since the pressure terms put it in compression.",
+  "new": "Immediately, since the pressure terms put it in compression before any temperature change is applied at all."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-buckling",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the buckling state is a discrete function of temperature and a sweep would miss the crossing entirely if the step were coarse.",
+  "new": "Because the state is discrete and a coarse sweep would miss the crossing entirely."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-buckling",
+  "ord": 13,
+  "option": 3,
+  "old": "Because the relationship between temperature and force is nonlinear, so interpolating between sweep points would be inaccurate.",
+  "new": "Because temperature and force are nonlinearly related, so interpolating sweep points is inaccurate."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-buckling",
+  "ord": 14,
+  "option": 1,
+  "old": "The difference between the sinusoidal and helical mode wavelengths, expressed as an equivalent temperature through the expansion coefficient.",
+  "new": "The gap between the sinusoidal and helical wavelengths, as an equivalent temperature."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-buckling",
+  "ord": 14,
+  "option": 3,
+  "old": "The width of the transition between the two shapes, over which the string is partly sinusoidal and partly helical along its length.",
+  "new": "The width of the transition, where the string is partly sinusoidal and partly helical."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-buckling",
+  "ord": 15,
+  "option": 1,
+  "old": "To select the design factor applied to the packer force, since a buckled string transmits less load into the packer body.",
+  "new": "To select the design factor on the packer force, since a buckled string passes less load to the packer."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-envelope-and-its-edges",
+  "ord": 7,
+  "option": 0,
+  "old": "Fifty, doubled to a hundred for corrosion resistant alloys.",
+  "new": "Fifty, doubled to a hundred for corrosion resistant alloys, which tolerate a much higher velocity."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-envelope-and-its-edges",
+  "ord": 8,
+  "option": 1,
+  "old": "A velocity profile, since the correlation uses a bulk average while the erosion happens at the wall where the shear is highest.",
+  "new": "A velocity profile, since erosion happens at the wall where the shear is highest."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-envelope-and-its-edges",
+  "ord": 8,
+  "option": 3,
+  "old": "A pressure term, because the same mass rate at a lower pressure gives a much higher velocity through the same tubing bore.",
+  "new": "A pressure term, since a lower pressure raises the velocity for the same mass rate."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-envelope-and-its-edges",
+  "ord": 9,
+  "option": 2,
+  "old": "Because it is conservative, so a tubing sized against it will always be larger than an erosion rate model would require.",
+  "new": "Because it is conservative, so tubing sized against it is always larger than erosion needs."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-envelope-and-its-edges",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the recommended practice mandates it, and a design that departs from a published standard has to justify itself.",
+  "new": "Because the recommended practice mandates it, and departing from a standard needs justifying."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-envelope-and-its-edges",
+  "ord": 10,
+  "option": 3,
+  "old": "Empirical correlations fitted to measured tubing movement on producing wells, in the manner of the collapse formulas.",
+  "new": "Empirical correlations fitted to measured tubing movement on producing wells, like the collapse formulas."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-envelope-and-its-edges",
+  "ord": 11,
+  "option": 0,
+  "old": "The thermal one, between temperature and length.",
+  "new": "The thermal one, between temperature and length, since the length change never updates the temperature."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-envelope-and-its-edges",
+  "ord": 12,
+  "option": 1,
+  "old": "The pressure that accumulates in the annulus from a leaking tubing connection, which the seal rating is meant to prevent.",
+  "new": "The pressure that accumulates in the annulus from a leaking tubing connection past the seals."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-envelope-and-its-edges",
+  "ord": 13,
+  "option": 0,
+  "old": "Because friction is small for a string in tension.",
+  "new": "Because friction is small for a string in tension, and every published case here stays in tension throughout."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-envelope-and-its-edges",
+  "ord": 14,
+  "option": 1,
+  "old": "The total force at the packer, which is a screening number.",
+  "new": "The total force at the packer, which is only a screening number and so is left out of every graded question in the tier."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 7,
+  "option": 1,
+  "old": "Because the sinusoidal limit is the one compared against the compression, and the helical one is reported for information only.",
+  "new": "Because only the sinusoidal limit is checked against the compression and the helical is not."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 7,
+  "option": 2,
+  "old": "Because dividing the helical limit by the exact ratio recovers the sinusoidal one, which then checks the clearance and the weight.",
+  "new": "Because dividing the helical limit by the ratio gives the sinusoidal one and checks the clearance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 8,
+  "option": 3,
+  "old": "Neither, since the two pressure changes are measured from the same setting condition and their effects cancel in the sum.",
+  "new": "Neither, since the two pressure changes share a setting condition and their effects cancel."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 9,
+  "option": 0,
+  "old": "That the total exceeds the largest of the three.",
+  "new": "That the total exceeds the largest of the three, which a flipped sign always violates."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 2,
+  "old": "The ballooning one, since the Poisson strain acts over the whole length while the piston term is an end effect at the packer.",
+  "new": "The ballooning one, since the Poisson strain acts over the whole length and piston only at the packer."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "None individually, since the two pressure terms shorten the string and only their sum with the thermal term exceeds the stroke.",
+  "new": "None individually, since only the sum of the pressure terms with the thermal term exceeds the stroke."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "The tubing, to a heavier wall in the same size.",
+  "new": "The tubing, to a heavier wall in the same size, so it stiffens against buckling and stretch."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "Selecting a packer and a seal assembly for a given well, given the operating envelope and the manufacturer's rating data.",
+  "new": "Selecting a packer and a seal assembly for a given well from the envelope and the rating data."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 0,
+  "old": "Pressure, which every load case is built from.",
+  "new": "Pressure, which every load case is built from and which every rating in the course is expressed in."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "Check the units, check the signs, and check the areas.",
+  "new": "Check the units, check the signs, and check the areas every time."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "Well Cost and Time, which takes the purchase order.",
+  "new": "Well Cost and Time, which takes the purchase order and prices the string over the whole life of the well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 17,
+  "option": 1,
+  "old": "Because API publishes one table for all grades.",
+  "new": "Because API publishes one table for all grades, so the fractions are copied across from a single reference column rather than computed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 1,
+  "old": "The plastic regime, since its published fit was constructed to preserve proportionality with the yield strength exactly.",
+  "new": "The plastic regime, since its published fit was built to preserve proportionality with the yield."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 1,
+  "old": "Because the elastic formula is the only one that does not contain the yield strength, so it is the first to stop applying.",
+  "new": "Because the elastic formula alone lacks the yield strength, so it is the first to stop applying."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 3,
+  "old": "Because the adjusted yield falls faster than the boundaries do, so the pipe crosses each boundary from above rather than below.",
+  "new": "Because the adjusted yield falls faster than the boundaries, so the pipe crosses them from above."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "The pipe entered a fifth physical regime in which the wall yields axially before any radial mechanism can develop at all.",
+  "new": "The pipe entered a fifth physical regime where the wall yields axially before it can buckle."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "The external pressure exceeded the rating, so the engine reported the remaining capacity as zero rather than a negative.",
+  "new": "The external pressure exceeded the rating, so the engine reported zero rather than a negative."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 2,
+  "old": "The Poisson ratio, which appears in the elastic buckling solution and does not vary measurably between casing grades.",
+  "new": "The Poisson ratio, which appears in the elastic buckling solution and barely varies between grades."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 0,
+  "old": "Everything doubles, since all four scale with the yield.",
+  "new": "Everything doubles, since all four ratings scale with the yield strength."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "A shorter section, because the collapse load is the mud hydrostatic and it grows in direct proportion with the depth.",
+  "new": "A shorter section, because the collapse load is mud hydrostatic and grows in step with depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 2,
+  "old": "A proportional increase in collapse once the pipe is in tension, because the adjusted yield reintroduces the grade dependence.",
+  "new": "A proportional collapse gain under tension, as the adjusted yield restores grade dependence."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "A smaller ratio of diameter to wall, since a higher grade meets the same nominal weight at a slightly thicker wall.",
+  "new": "A smaller diameter to wall ratio, as a higher grade meets the same weight at a thicker wall."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "The inside diameter, used only for the drift check.",
+  "new": "The inside diameter, used only for the drift check, because the drift mandrel is sized from it and nothing else reads it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 0,
+  "old": "Because the mill tolerance on the wall is 12.5 percent.",
+  "new": "Because the mill tolerance on the wall is 12.5 percent, and the integrity test is set wide enough to absorb that manufacturing spread."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 1,
+  "old": "The connection sealing rating, which is available from the connection licensor and can be requested at the time of ordering.",
+  "new": "The connection sealing rating, which the licensor supplies and can be requested at ordering."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "The wear, since the amount of wall removed depends on rotating hours and side force rather than on anything the order states.",
+  "new": "The wear, because the wall removed depends on rotating hours and side force alone."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "The cheaper one, since the ratings are already equal.",
+  "new": "The cheaper one, since the ratings are already equal and the extra burst is margin that the string does not need to carry."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "Whether the number includes the design factor, since a rating and an allowable are different quantities and are often confused.",
+  "new": "Whether the number includes the design factor, as rating and allowable are often confused."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "Whether it is quoted in megapascals or in pounds per square inch, since the published tables use the latter throughout.",
+  "new": "Whether it is in megapascals or pounds per square inch, as the tables use the latter."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "Burst and collapse, both being pressures on the wall.",
+  "new": "Burst and collapse, both being pressures on the wall and both computed from the same ratio of diameter to wall."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "Nothing, since the regime depends on geometry alone.",
+  "new": "Nothing, since the regime depends on geometry alone and the grade only scales the rating inside it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "The burst column, since evacuation is a pressure load.",
+  "new": "The burst column, since evacuation is a pressure load and the emptied bore sees the largest pressure difference."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "The design factor that should be applied, since an empirical regime warrants more margin than a closed form one does.",
+  "new": "The design factor to apply, since an empirical regime warrants more margin than a closed form one."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "It is the mean of the mill's production for that grade.",
+  "new": "It is the mean of the mill's production for that grade, averaged over the heats tested during qualification."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "Because the inside diameter is rounded to three decimal places in inches while the wall is held to four in the same table.",
+  "new": "Because the inside diameter is rounded to three decimals in inches while the wall is held to four."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "They apply only to seamless pipe, since the test programme that produced them contained no electric welded product at all.",
+  "new": "They apply only to seamless pipe, since the test programme behind them held no electric welded product."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "The yield strength and the ratio of diameter to wall.",
+  "new": "The yield strength and the ratio of diameter to wall, since the steel strength sets the load at which the wall buckles."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "That the answer depends on the collapse regime, since a higher grade may buy nothing and the wall would be the better lever.",
+  "new": "That the answer depends on the collapse regime, since a higher grade may buy nothing and wall is the lever."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "Applying the wall tolerance factor to every rating.",
+  "new": "Applying the wall tolerance factor to every rating, so that each capacity reflects the thinnest wall the mill may deliver."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "In the yield regime, being the thicker of the two.",
+  "new": "In the yield regime, being the thicker of the two, since a ratio above the boundary means the wall is thick enough to yield first."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "A complete answer, since the regime is only a label.",
+  "new": "A complete answer, since the regime is only a label and the number itself already carries everything a design check needs."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-casing-string-is",
+  "ord": 7,
+  "option": 2,
+  "old": "A number with no defined statistical meaning, because a minimum yield combined with an empirical fit has neither bound.",
+  "new": "A number with no statistical meaning, since a minimum and an empirical fit have no bound."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-casing-string-is",
+  "ord": 8,
+  "option": 1,
+  "old": "That it equals the pore pressure of the formation the joint is opposite, which is why the rating varies down a string.",
+  "new": "That it equals the pore pressure of the formation the joint is opposite."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-casing-string-is",
+  "ord": 8,
+  "option": 3,
+  "old": "That it is the same as the inside pressure, so the rating describes a balanced condition with no net differential at all.",
+  "new": "That it equals the inside pressure, so the rating is a balanced condition."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-casing-string-is",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the internal yield formula uses the outside diameter, which gives a smaller answer than the mean diameter would.",
+  "new": "Because the internal yield formula uses the outside diameter, which gives less than the mean diameter."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-casing-string-is",
+  "ord": 10,
+  "option": 2,
+  "old": "The joint strength, because the connection efficiency is measured directly on the connection rather than assumed.",
+  "new": "The joint strength, because the connection efficiency is measured directly on the connection."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-casing-string-is",
+  "ord": 12,
+  "option": 0,
+  "old": "Different numbers, since each will apply their own factor.",
+  "new": "Different numbers, since each will apply their own design factor before the rating is ever reported."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-casing-string-is",
+  "ord": 14,
+  "option": 2,
+  "old": "The wear the drillstring will inflict on the inside of the pipe over the weeks the next section takes to drill.",
+  "new": "The wear the drillstring inflicts on the inside of the pipe while the next section is drilled."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-casing-string-is",
+  "ord": 15,
+  "option": 0,
+  "old": "Eighty four rows at three grades, as published.",
+  "new": "Eighty four rows at three grades, as published in the original API bulletin for casing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-burst-and-tension",
+  "ord": 11,
+  "option": 0,
+  "old": "By yielding the pipe body above it in compression.",
+  "new": "By yielding the pipe body above it in compression, because a strong connection passes the whole axial load into the thinner pipe."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-burst-and-tension",
+  "ord": 12,
+  "option": 2,
+  "old": "Burst and collapse, because both describe a pressure at which the wall reaches its yield stress under a hoop load.",
+  "new": "Burst and collapse, because both describe a pressure at which the wall reaches yield in hoop load."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-burst-and-tension",
+  "ord": 13,
+  "option": 0,
+  "old": "About 1.36, the ratio their collapse ratings show.",
+  "new": "About 1.36, the ratio their collapse ratings show, since burst and collapse scale with the grade together."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-burst-and-tension",
+  "ord": 15,
+  "option": 1,
+  "old": "A lower mud weight, because the buoyancy factor rises with the density of the fluid the string is immersed in.",
+  "new": "A lower mud weight, because the buoyancy factor rises with the density of the surrounding fluid."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-four-collapse-regimes",
+  "ord": 7,
+  "option": 2,
+  "old": "Because a ratio of forty is the boundary between the transition and elastic regimes for the grades in common surface use.",
+  "new": "Because a ratio of forty is the boundary between the transition and elastic regimes in surface grades."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-four-collapse-regimes",
+  "ord": 8,
+  "option": 0,
+  "old": "The transition one, which depends on geometry only.",
+  "new": "The transition one, which depends on geometry only because its coefficients are fixed across all the grades."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-four-collapse-regimes",
+  "ord": 9,
+  "option": 2,
+  "old": "Because the yield strength is published in ksi and converting it once at the catalog would lose precision downstream.",
+  "new": "Because the yield strength is published in ksi and converting it once at the catalog would lose precision."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-four-collapse-regimes",
+  "ord": 10,
+  "option": 2,
+  "old": "The yield strength and the wall thickness together, which is why a heavier row of the same grade has different boundaries.",
+  "new": "The yield strength and the wall thickness, so a heavier row of the same grade moves them."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-four-collapse-regimes",
+  "ord": 10,
+  "option": 3,
+  "old": "The yield strength and the outside diameter, since the empirical fits were performed separately for each nominal size.",
+  "new": "The yield strength and the outside diameter, since the fits were made for each nominal size."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-four-collapse-regimes",
+  "ord": 11,
+  "option": 0,
+  "old": "All three rise, in proportion to the yield strength.",
+  "new": "All three rise, in proportion to the yield strength, so a stronger pipe stays out of elastic collapse longer."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-four-collapse-regimes",
+  "ord": 12,
+  "option": 2,
+  "old": "That the collapse pressure rises monotonically across the boundary, since a thinner wall must always collapse sooner.",
+  "new": "That the collapse pressure rises across the boundary, since a thinner wall must always collapse sooner."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-four-collapse-regimes",
+  "ord": 13,
+  "option": 2,
+  "old": "Compute the collapse pressure with all four formulas and take whichever of the four answers comes out the smallest.",
+  "new": "Compute the collapse pressure with all four formulas and take the smallest of the four answers."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-four-collapse-regimes",
+  "ord": 13,
+  "option": 3,
+  "old": "Compare the wall thickness against the published minimum for the grade, which is what the regime boundaries encode.",
+  "new": "Compare the wall thickness against the published minimum for the grade, which the boundaries encode."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-four-collapse-regimes",
+  "ord": 15,
+  "option": 3,
+  "old": "Because the regime decides whether the wall tolerance factor of 0.875 has to be applied to the collapse value as well.",
+  "new": "Because the regime decides whether the wall tolerance factor of 0.875 applies to the collapse value."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-combined-loading",
+  "ord": 8,
+  "option": 1,
+  "old": "A small amount, because the elastic formula's constant is fitted to a population that included pipe under axial load.",
+  "new": "A small amount, because the elastic constant is fitted to a population that included pipe under load."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-combined-loading",
+  "ord": 9,
+  "option": 2,
+  "old": "The pipe reaches the plastic regime directly, skipping transition, because the two boundaries cross at that fraction.",
+  "new": "The pipe reaches the plastic regime directly, skipping transition, as the two boundaries cross there."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-combined-loading",
+  "ord": 10,
+  "option": 3,
+  "old": "The length of the string, because the axial stress at the top rises with it while the external pressure there does not.",
+  "new": "The length of the string, because top axial stress grows with it while the external pressure does not."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-combined-loading",
+  "ord": 11,
+  "option": 0,
+  "old": "Because compression cannot occur in a hanging string.",
+  "new": "Because compression cannot occur in a hanging string, whose every joint carries the weight of those below."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-combined-loading",
+  "ord": 12,
+  "option": 0,
+  "old": "An exception, which aborts the string evaluation.",
+  "new": "An exception, which aborts the string evaluation so that no rating is ever reported for a joint that has reached its yield."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-combined-loading",
+  "ord": 13,
+  "option": 2,
+  "old": "Because the elastic formula is the only one whose published fit does not extend to the axial loads in question.",
+  "new": "Because the elastic formula is the only one whose fit does not extend to these axial loads."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-combined-loading",
+  "ord": 14,
+  "option": 2,
+  "old": "Only performance, since the guard clauses that would distinguish the cases cost time on every call through the function.",
+  "new": "Only performance, since the guard clauses that separate the cases cost time on every call."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-combined-loading",
+  "ord": 14,
+  "option": 3,
+  "old": "The ability to be tested, because a function with no error paths has no branches for a test suite to exercise separately.",
+  "new": "The ability to be tested, since a function with no error paths has no branches to exercise."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-combined-loading",
+  "ord": 15,
+  "option": 1,
+  "old": "That the derating depends on the absolute axial stress rather than on its ratio to the yield strength of the grade.",
+  "new": "That the derating depends on the absolute axial stress rather than its ratio to the grade's yield."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-a-rating-table",
+  "ord": 7,
+  "option": 1,
+  "old": "A lower design factor, because the published rating for a higher grade carries less scatter from the test programme.",
+  "new": "A lower design factor, because the rating for a higher grade carries less scatter from the tests."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-a-rating-table",
+  "ord": 9,
+  "option": 0,
+  "old": "The wall thickness, which is derived from the other two.",
+  "new": "The wall thickness, which is derived from the other two by subtraction and never measured on its own at the mill."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-a-rating-table",
+  "ord": 10,
+  "option": 1,
+  "old": "A tenth of a millimetre, as with any machined dimension.",
+  "new": "A tenth of a millimetre, as with any machined dimension on a tubular produced to specification."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-a-rating-table",
+  "ord": 11,
+  "option": 1,
+  "old": "The connection efficiency, which in a real catalog is attached to the row rather than looked up in a separate table.",
+  "new": "The connection efficiency, which a real catalog attaches to the row instead of a separate table."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-a-rating-table",
+  "ord": 12,
+  "option": 2,
+  "old": "Lower bounds derived from a published survey of connection test data across the major thread licensors in the industry.",
+  "new": "Lower bounds derived from a published survey of connection test data across the thread licensors."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-a-rating-table",
+  "ord": 14,
+  "option": 1,
+  "old": "Because the omissions it makes are individually small, so the total error stays inside the design factors already applied.",
+  "new": "Because the omissions it makes are small, so the total error stays inside the design factors."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "Burst and collapse, both of which are pressures.",
+  "new": "Burst and collapse, both of which are pressures and so are computed from the same yield and hoop area."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 2,
+  "old": "When the axial stress supplied is below ten percent of the yield strength, where the adjusted yield rounds to the nominal one.",
+  "new": "When the axial stress is below ten percent of yield, where the adjusted yield rounds to nominal."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 3,
+  "old": "When the pipe is in the yield regime, where the derating cancels against the rise in the regime boundary above the pipe.",
+  "new": "When the pipe is in the yield regime, where the derating cancels against the rising boundary."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 2,
+  "old": "Because the regime boundaries can only be located by comparing two grades, since a single grade gives one set of three.",
+  "new": "Because the regime boundaries can only be located by comparing two grades against each other."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 1,
+  "old": "That the 13-3/8 inch joint is in the yield regime while the 9-5/8 inch ones are elastic, which reverses the usual order.",
+  "new": "That the 13-3/8 inch joint is in the yield regime and the 9-5/8 inch ones elastic, reversing the order."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 1,
+  "old": "That the manufacturing wall tolerance of 12.5 percent is the largest single correction applied anywhere in the tier.",
+  "new": "That the wall tolerance of 12.5 percent is the largest single correction applied in the tier."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 0,
+  "old": "Sign off a casing string against its service loads.",
+  "new": "Sign off a casing string against its service loads, since the four ratings already carry the design factors."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 3,
+  "old": "How much wall the drillstring will remove from the casing while the next hole section is being drilled through it.",
+  "new": "How much wall the drillstring will remove from the casing while the next section is drilled."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 1,
+  "old": "Well Control, which sets the shoe pressure the gas kick case is built on and therefore the burst load rather than the rating.",
+  "new": "Well Control, which sets the shoe pressure behind the gas kick burst load."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "Completion Design, which takes the production casing as given and sizes the tubing and the packer to fit inside it.",
+  "new": "Completion Design, which takes the production casing as given and sizes tubing inside it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 0,
+  "old": "Tension and triaxial, since those are forces.",
+  "new": "Tension and triaxial, since those are forces and forces have a location."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 0,
+  "old": "Because searching is faster than reasoning.",
+  "new": "Because searching is faster than reasoning, and the engine is optimised for speed over insight."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 1,
+  "old": "That the section lies outside the depth range the profile covers, so no grid point fell inside it to be evaluated.",
+  "new": "That the section lies outside the depth range of the profile, so no grid point fell inside it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 0,
+  "old": "The collapse one, through the combined loading term.",
+  "new": "The collapse one, through the combined loading term, which folds every stress into the rating."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 1,
+  "old": "All four, since bending affects every rating.",
+  "new": "All four, since bending affects every rating and the engine carries it into each of them in turn."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 1,
+  "old": "Because a positive and a negative bending stress give the same von Mises equivalent, so evaluating both is a consistency check.",
+  "new": "Because a positive and a negative bending stress give one equivalent, a consistency check."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "Because the outside of the bend is worse in tension and the inside is worse in compression, and taking the worse removes the need to know which.",
+  "new": "Because the outside of a bend is always worse in tension and the inside in compression."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 2,
+  "old": "PASS, because every one of the four safety factors is above the corresponding design factor in the published set.",
+  "new": "PASS, because every one of the four safety factors is above its design factor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "FAIL, because burst at 1.19 is below the burst warning threshold of 1.21 and a warning threshold breach is a failure.",
+  "new": "FAIL, because burst at 1.19 is below the warning threshold of 1.21."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 1,
+  "old": "Because the engine reports per case for performance.",
+  "new": "Because the engine reports per case for performance, since combining them would cost another pass over the grid."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "The triaxial check should be given its own case, since it currently only appears as a by-product of the other six cases.",
+  "new": "The triaxial check should get its own case, as it only appears as a by-product of the others."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "A case that produces a verdict from a check other than its own has been mis-specified and should be rebuilt from its intent.",
+  "new": "A case whose verdict comes from another check has been mis-specified and should be rebuilt."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 0,
+  "old": "About ten percent, the width of the warning band.",
+  "new": "About ten percent, the width of the warning band, which is the gap burst held over triaxial."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "Changing the grade, and changing the mud weight.",
+  "new": "Changing the grade, and changing the mud weight, each one separately and in turn."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "Add a wear allowance to the nominal wall at the design stage, which is what the 12.5 percent tolerance factor already does.",
+  "new": "Add a wear allowance to the nominal wall at design, which the 12.5 percent tolerance already does."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "Inspect the casing before the next section is drilled, since a predicted wear figure is less reliable than a caliper log.",
+  "new": "Inspect the casing before the next section, since predicted wear is less reliable than a caliper."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "The load cases that happen after completion.",
+  "new": "The load cases that happen after completion, run with the same fixed string and the same ratings."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "Cementing, which sets what is behind the pipe.",
+  "new": "Cementing, which sets what is behind the pipe and therefore the shoe pressure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "Raise the design factor to make the verdict a warning.",
+  "new": "Raise the design factor to make the verdict a warning, since the fail sits close to its threshold."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "The collapse number, because reducing the internal pressure increases the net external differential on the same section.",
+  "new": "The collapse number, as a lower internal pressure raises the external differential there."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "The tension number, since the test pressure acts on the internal cross-section and adds an axial load at the shoe.",
+  "new": "The tension number, since the test pressure acts on the bore and adds an axial load."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "The custom gradient case, since the surface pressure it applies is equivalent to a level above the wellhead.",
+  "new": "The custom gradient case, whose surface pressure acts as a level above the wellhead."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "The packer fluid density and the mud density.",
+  "new": "The packer fluid density and the mud density, balanced against each other across the pipe wall."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "The collapse regime, since it decides what advice follows from the collapse number and cannot be inferred from it.",
+  "new": "The collapse regime, since it decides what advice follows from the collapse number."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "By assigning each grid point to the section whose midpoint it is nearest to, which handles the boundary case unambiguously.",
+  "new": "By assigning each grid point to the section whose midpoint is nearest, settling the boundary."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "By the index, since the section boundaries are chosen to fall on grid points and the assignment is therefore exact.",
+  "new": "By the index, since section boundaries fall on grid points and the assignment is exact."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "That the collapse calculation is exact, so no allowance for uncertainty in the rating itself is required by the scheme.",
+  "new": "That the collapse calculation is exact, so no allowance for uncertainty in the rating is needed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "Seven cases times four checks, less the nulls.",
+  "new": "Seven cases times four checks, less the nulls that burst and collapse return."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Because the surface pressure of 5000000 Pa is applied to the outside as well as the inside, which reverses the differential.",
+  "new": "Because the 5000000 Pa surface pressure acts on the outside as well, which reverses the differential."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "Twenty seven, since the point at zero is not evaluated.",
+  "new": "Twenty seven, since the point at zero is not evaluated and the grid starts one step below surface."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-load-case-is-two-columns",
+  "ord": 7,
+  "option": 1,
+  "old": "Because the burst differential can turn positive above the fluid level, where the outside column has not yet built up any head.",
+  "new": "Because the burst differential turns positive above the fluid level, where the outside head is zero."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-load-case-is-two-columns",
+  "ord": 8,
+  "option": 3,
+  "old": "The buoyancy factor, since the axial profile and the pressure profile are both computed from the same mud density.",
+  "new": "The buoyancy factor, since the axial and pressure profiles are both computed from the mud density."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-load-case-is-two-columns",
+  "ord": 9,
+  "option": 0,
+  "old": "The seawater backup outside the pipe on the burst cases.",
+  "new": "The seawater backup outside the pipe on the burst cases, which is lighter than the drilling mud it replaces."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-load-case-is-two-columns",
+  "ord": 11,
+  "option": 1,
+  "old": "None, because the grid is constructed to include every section boundary in addition to the fifty uniform intervals.",
+  "new": "None, because the grid includes every section boundary in addition to the fifty uniform intervals."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-load-case-is-two-columns",
+  "ord": 12,
+  "option": 1,
+  "old": "On any case where the burst differential is negative, because the check then skips the boundary point and reports a null.",
+  "new": "On any case with a negative burst differential, since the check then skips the boundary point."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-load-case-is-two-columns",
+  "ord": 12,
+  "option": 2,
+  "old": "On a case with an internal fluid level, because the level introduces a discontinuity in the inside pressure column.",
+  "new": "On a case with an internal fluid level, which puts a discontinuity in the inside column."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-load-case-is-two-columns",
+  "ord": 13,
+  "option": 0,
+  "old": "The cementing case, where the columns are balanced.",
+  "new": "The cementing case, where the columns are balanced once the displacement plug is bumped."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-load-case-is-two-columns",
+  "ord": 14,
+  "option": 1,
+  "old": "A reservoir pressure supplied in the environment object.",
+  "new": "A reservoir pressure supplied in the environment object, carried up to the shoe along a gas gradient."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-load-case-is-two-columns",
+  "ord": 15,
+  "option": 1,
+  "old": "To provide a baseline with no differential, against which the other six cases can be compared for their incremental effect.",
+  "new": "To provide a baseline with no differential, against which the other six cases are compared."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-a-load-case-is-two-columns",
+  "ord": 15,
+  "option": 3,
+  "old": "To model the annulus pressure that builds during production, which none of the six drilling cases represents at all.",
+  "new": "To model the annulus pressure that builds during production, which no drilling case represents."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 7,
+  "option": 0,
+  "old": "The shoe must be set shallower than the fracture depth.",
+  "new": "The shoe must be set shallower than the fracture depth so that the kick cannot break down the formation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 8,
+  "option": 0,
+  "old": "A gas column from the shoe control pressure upward.",
+  "new": "A gas column from the shoe control pressure upward, exactly as in the gas kick case."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 9,
+  "option": 0,
+  "old": "Minus 7800.8495 Pa per metre, as the gas kick does.",
+  "new": "Minus 7800.8495 Pa per metre, as the gas kick does, since the backup is the same seawater column."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 10,
+  "option": 2,
+  "old": "The gas kick on the upper section and the pressure test on the lower one, because the governing depths are at opposite ends.",
+  "new": "The gas kick on the upper section and the pressure test on the lower."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 10,
+  "option": 3,
+  "old": "Neither, because their safety factors differ by less than the precision the design factors are quoted to.",
+  "new": "Neither, since their safety factors agree within the design factor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 11,
+  "option": 0,
+  "old": "Because the test pressure is limited by the wellhead rating.",
+  "new": "Because the test pressure is limited by the wellhead rating, which sits below the pipe body burst rating."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 12,
+  "option": 2,
+  "old": "Because the evaluation loop only tests the first and last grid point inside each section, for reasons of computational cost.",
+  "new": "Because the evaluation loop only tests the first and last grid point of each section to save time."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 13,
+  "option": 3,
+  "old": "The running case, because the overpull is applied at surface and therefore only affects the upper part of the string.",
+  "new": "The running case, since overpull is applied at surface and so affects only the upper string."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 14,
+  "option": 0,
+  "old": "The same number, since the section bottom governs.",
+  "new": "The same number, since the section bottom governs on every burst case this string carries."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 15,
+  "option": 1,
+  "old": "None of the seven, because the section bottom is never a grid point and the check therefore always evaluates the wrong depth.",
+  "new": "None of the seven, because the section bottom is never a grid point."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-burst-cases",
+  "ord": 15,
+  "option": 3,
+  "old": "The running case, because it has no pressure differential and both methods correctly report an infinite safety factor.",
+  "new": "The running case, where both methods report an infinite safety factor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-collapse-cases",
+  "ord": 7,
+  "option": 0,
+  "old": "Wet cement inside and mud outside, before displacement.",
+  "new": "Wet cement inside and mud outside, before displacement, so the pipe sees a net burst load instead."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-collapse-cases",
+  "ord": 9,
+  "option": 2,
+  "old": "The axial load, since the string is landed and cemented by then and the hanging weight is transferred to the wellhead.",
+  "new": "The axial load, since the landed string's hanging weight is transferred to the wellhead."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-collapse-cases",
+  "ord": 10,
+  "option": 2,
+  "old": "Transition on the upper section and plastic on the lower one, because the two sections carry different grades of steel.",
+  "new": "Transition on the upper section and plastic on the lower, as the grades differ."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-collapse-cases",
+  "ord": 11,
+  "option": 0,
+  "old": "Because the design factor depends on the regime.",
+  "new": "Because the design factor depends on the regime, being relaxed wherever the fit is well tested."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-collapse-cases",
+  "ord": 12,
+  "option": 2,
+  "old": "Yield, because a pipe thick enough to collapse by yielding is heavier and more expensive than the design probably needed.",
+  "new": "Yield, because a pipe thick enough to collapse by yielding is heavier than the design probably needed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-collapse-cases",
+  "ord": 13,
+  "option": 2,
+  "old": "Once per case, using the maximum axial force anywhere in the string, which is the most conservative single choice available.",
+  "new": "Once per case, using the maximum axial force anywhere in the string as the safe choice."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-collapse-cases",
+  "ord": 13,
+  "option": 3,
+  "old": "Nowhere, because the derating is applied to the rating in the tier below and the load case evaluation uses the derated value.",
+  "new": "Nowhere, because the tier below already derated the rating and the load case uses that value."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-collapse-cases",
+  "ord": 14,
+  "option": 2,
+  "old": "Because compression and tension have the same effect on collapse, so the sign can be discarded without loss of accuracy.",
+  "new": "Because compression and tension have the same effect on collapse, so the sign can be discarded."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-collapse-cases",
+  "ord": 15,
+  "option": 3,
+  "old": "It depends on the case, because the buoyancy factor changes with the fluid the string is immersed in for each one.",
+  "new": "It depends on the case, because the buoyancy factor changes with the fluid for each one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-axial-and-triaxial",
+  "ord": 7,
+  "option": 0,
+  "old": "All seven, since the environment object is shared.",
+  "new": "All seven, since the environment object is shared and every case reads the same hanging axial profile."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-axial-and-triaxial",
+  "ord": 8,
+  "option": 3,
+  "old": "Because its pipe body yield is smaller, which makes the same absolute force a larger fraction of the section's capacity.",
+  "new": "Because its pipe body yield is smaller, so the same force is a larger fraction of its capacity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-axial-and-triaxial",
+  "ord": 9,
+  "option": 1,
+  "old": "Because the axial profile carries the largest modelling error of the four loads, given that one weight per metre is assumed.",
+  "new": "Because the axial profile carries the largest modelling error, since one weight per metre is assumed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-axial-and-triaxial",
+  "ord": 10,
+  "option": 1,
+  "old": "The exact internal yield pressure, which Barlow approximates by assuming a uniform hoop stress across a thin wall section.",
+  "new": "The exact internal yield pressure, which Barlow approximates with a uniform hoop stress across a thin wall."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-axial-and-triaxial",
+  "ord": 12,
+  "option": 0,
+  "old": "At the mean radius, which is the standard simplification.",
+  "new": "At the mean radius, which is the standard simplification for a wall of this thickness in oilfield casing."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-axial-and-triaxial",
+  "ord": 13,
+  "option": 2,
+  "old": "The square root of three halves times the axial stress, which is the usual factor for a uniaxial state under this criterion.",
+  "new": "The square root of three halves times the axial stress, the usual uniaxial factor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-axial-and-triaxial",
+  "ord": 13,
+  "option": 3,
+  "old": "Half the axial stress, because the hoop and radial terms each contribute a quarter of the sum inside the square root.",
+  "new": "Half the axial stress, as the hoop and radial terms each contribute a quarter."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-axial-and-triaxial",
+  "ord": 14,
+  "option": 3,
+  "old": "It applies it only where the axial force is positive, since a string in compression does not carry a bending stress at all.",
+  "new": "It applies it only where the axial force is positive, since a string in compression carries no bending."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-axial-and-triaxial",
+  "ord": 15,
+  "option": 2,
+  "old": "Because tension peaks at the top and collapse at the bottom, and burst can do either depending on which case is running.",
+  "new": "Because tension peaks at the top and collapse at the bottom, and burst can do either by case."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-string-check",
+  "ord": 8,
+  "option": 0,
+  "old": "The burst one, at 1.2123376873879477 against 1.21.",
+  "new": "The burst one, at 1.2123376873879477 against 1.21, since the case is named after it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-string-check",
+  "ord": 9,
+  "option": 1,
+  "old": "Because the burst rating cannot be raised on that section without changing the grade, while the triaxial number can be improved.",
+  "new": "Because the burst rating cannot be raised on that section without a grade change, while triaxial can."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-string-check",
+  "ord": 10,
+  "option": 0,
+  "old": "By about ten percent, the width of the warning band.",
+  "new": "By about ten percent, the width of the warning band above the factor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-string-check",
+  "ord": 11,
+  "option": 2,
+  "old": "The verdict becomes a FAIL, because the burst safety factor then falls below the burst design factor rather than the band.",
+  "new": "The verdict becomes a FAIL, because the burst safety factor then falls below its design factor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-string-check",
+  "ord": 12,
+  "option": 2,
+  "old": "Changing the grade of the section, since that raises the burst rating and the yield strength the triaxial number is divided by.",
+  "new": "Changing the grade, since that raises both the burst rating and the triaxial yield divisor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-string-check",
+  "ord": 12,
+  "option": 3,
+  "old": "Reducing the mud weight, since that lowers the internal column and therefore both the burst and the triaxial differentials.",
+  "new": "Reducing the mud weight, which lowers both the burst and the triaxial differentials."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-string-check",
+  "ord": 13,
+  "option": 0,
+  "old": "The combined effect of tension on the collapse rating.",
+  "new": "The combined effect of tension on the collapse rating, which is left entirely to the tier below to handle."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-string-check",
+  "ord": 14,
+  "option": 1,
+  "old": "Because the cement column is denser than mud, so a check that assumed mud outside would understate the collapse load itself.",
+  "new": "Because cement is denser than mud, so a check assuming mud outside would understate the collapse load."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 7,
+  "option": 1,
+  "old": "Equally on both, because a tension applied at surface is carried by the whole bar and adds the same force at every depth.",
+  "new": "Equally on both, because a surface pull is carried by the whole bar and adds the same force everywhere."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "At the shoe, because the gas gradient has been reduced.",
+  "new": "At the shoe, because the gas gradient has been reduced and the inside column is now lighter."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "option": 0,
+  "old": "The burst safety factor, through the rating.",
+  "new": "The burst safety factor, through the rating, which short thread lowers at the coupling threads."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 2,
+  "old": "That the design factors are inconsistent, since a well proportioned string should show similar margins across all four checks.",
+  "new": "That the design factors are inconsistent, since a sound string shows similar margins."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "That the case producing it is unrealistic, since a real string would not be run with one check so far below the others.",
+  "new": "That the case producing it is unrealistic, since no real string runs one check that low."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "The exact value of every one of the fourteen verdicts.",
+  "new": "The exact value of every one of the fourteen verdicts, each to the full precision reported."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 1,
+  "old": "That the section assignment was correct, since the wellhead belongs to the upper section and must not be tested against the lower.",
+  "new": "That the section assignment was correct, since the wellhead belongs to the upper section only."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "That the burst rating was computed on the minimum wall, since a nominal-wall rating would shift the governing depth downward.",
+  "new": "That the burst rating used the minimum wall, since a nominal wall would shift the governing depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "The cement job, which happens before the string is run.",
+  "new": "The cement job, which happens before the string is run and so is never counted as a load on the casing string."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "Recompute the whole suite whenever a single input changes, since the ordering between the four checks is not stable.",
+  "new": "Recompute the whole suite whenever an input changes, since the ordering of the checks is unstable."
+ }
+]

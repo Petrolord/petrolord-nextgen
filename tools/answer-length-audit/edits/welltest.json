@@ -1,0 +1,83 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-gas",
+  "ord": 15,
+  "option": 2,
+  "old": "Because the three points are too few to determine two parameters plus an exponent reliably.",
+  "new": "Because the three points are too few to determine two parameters plus an exponent reliably in either fit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-well-test-is",
+  "ord": 10,
+  "option": 3,
+  "old": "A delay before radial flow begins, which shortens the usable part of the test.",
+  "new": "A delay before radial flow begins, which shortens the usable part of the test and narrows the analysis window."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-well-test-is",
+  "ord": 13,
+  "option": 1,
+  "old": "The reported answer depends on the software vendor, since each implements the equations differently.",
+  "new": "The reported answer depends on the software vendor, since each implements the well test equations in its own slightly different way."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-well-test-is",
+  "ord": 14,
+  "option": 2,
+  "old": "Because synthetic data are noise-free, and noise is the main source of error in real interpretations.",
+  "new": "Because synthetic data are noise-free, and gauge noise is the main source of error in real interpretations of pressure transients."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-choosing-the-line",
+  "ord": 15,
+  "option": 2,
+  "old": "Compare the reported permeability against the field's mapped value and reject it if it differs.",
+  "new": "Compare the reported permeability against the field's mapped value and reject the skin outright if the two differ."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "A sealing fault, since the derivative returns to a plateau after the boundary is felt.",
+  "new": "A sealing fault, since the derivative returns to a stable plateau once the boundary has been felt by the pressure response."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "A gauge that was replaced during the test, which shifts the record and then restores it.",
+  "new": "A gauge that was replaced during the test, which shifts the pressure record for a while and then restores it to the original level."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "Because it is the only fixture with no wellbore storage in it to contaminate the early data.",
+  "new": "Because it is the only fixture with no wellbore storage in it to contaminate the early data and delay the start of the usable window."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "Fit the semilog line, since the permeability is needed for every other quantity.",
+  "new": "Fit the semilog line first, since the permeability it gives is needed for every other quantity."
+ }
+]
