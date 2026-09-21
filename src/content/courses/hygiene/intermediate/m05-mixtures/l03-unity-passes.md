@@ -23,7 +23,7 @@ The digest states J7 and prints no reason for stating it, so read this paragraph
 
 ## What the flag does and does not tell you
 
-The flag is a comparison, and section 23 puts verdict words among the things this course never grades. An index of 1.000000 passes by the rule and sits at the very edge of the allowance. An index of 0.925000 also passes and leaves some room. As practice rather than as a printed rule: a report that writes "passes" for both leaves the reader without the margin, so quote the index to the precision the engine prints and let the reader see it.
+The flag is a comparison, and this course lists verdict words among the things it never grades. An index of 1.000000 passes by the rule and sits at the very edge of the allowance. An index of 0.925000 also passes and leaves some room. As a matter of practice, a report that writes "passes" for both leaves the reader without the margin, so quote the index to the precision the engine prints and let the reader see it.
 
 The course's capstones are built so that no input sits on a judgement call's boundary, and none lands exactly on unity. You meet J7 here so that you can recognise it in a real survey, where the rule will one day decide a row.
 

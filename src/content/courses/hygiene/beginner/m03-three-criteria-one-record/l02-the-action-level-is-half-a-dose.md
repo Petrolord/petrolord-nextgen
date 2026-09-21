@@ -27,7 +27,7 @@ A TWA of 85 on the OSHA scale is a noise dose of 50.000750 percent, measured by 
 
 So the OBEN day can be read against the action level either way. Its TWA of 87.635749 dBA is above 85, and its noise dose of 72.054478 percent is above 50. Both comparisons restate the same sum, and at the precision the regulation writes them they land on the same point.
 
-The two figures printed above do leave one narrow window where the comparisons can part. A noise dose above 50.000000 percent and up to 50.000750 percent is over its limit of 50 while its TWA is still at or under 85, because 50.000000 percent reads back as 84.999892 dBA. That window is under a thousandth of a percent wide, and the OBEN day sits nowhere near it.
+The two figures printed above do leave one narrow window where the comparisons can part. A noise dose above 50.000000 percent and up to 50.000750 percent is over its limit of 50 while its TWA is still at or under 85, because a TWA of exactly 85 is itself a noise dose of 50.000750 percent. That window is under a thousandth of a percent wide, and the OBEN day sits nowhere near it.
 
 ## A different metric with a similar name
 
