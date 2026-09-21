@@ -1,0 +1,115 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H3 Professional m03: Common Cause and the Beta Factor.
+# Digest sections 19 (the beta factor and betaD swept on one channel) and
+# 20 (two out of two carries no beta factor term).
+
+q(2,
+ "A redundant pair is claimed to share nothing at all, so both fractions are typed as zero on the diagnostics bearing teaching channel. What comes back?",
+ "0.000037396736",
+ ["0.000112190208","0.000035259176","0.000036430741"],
+ "The sweep prints 0.000037396736 for the pair at zero, where the common cause column reads 0.000000000000 and the call is independent dominated. 0.000112190208 is the two out of three on the same zero row. 0.000036430741 is the pair's independent term once a beta factor of 0.02 is typed, and 0.000035259176 is that term at 0.05.")
+
+q(0,
+ "Under that same claim of nothing shared, three channels voting two of them return which total?",
+ "0.000112190208",
+ ["0.000109292223","0.000105016345","0.000037396736"],
+ "With nothing in the common cause column the 2oo3 total is its independent term, 0.000112190208, which is three times the pair's on the same row. 0.000109292223 and 0.000105016345 are the 2oo3 independent terms at beta factors of 0.02 and 0.05, where some failures have already moved out of the independent rate. 0.000037396736 is the pair at zero.")
+
+q(3,
+ "Type 0.02 into the pair, holding betaD at half of it. Which total appears?",
+ "0.000141966741",
+ ["0.000214828223","0.000298845448","0.000105536000"],
+ "The sweep prints a total of 0.000141966741 for the 1oo2 at 0.02, made of an independent term of 0.000036430741 and a common cause contribution of 0.000105536000, and the call turns common cause dominated there. 0.000214828223 is the 2oo3 on the same row. 0.000298845448 is the pair at 0.05. 0.000105536000 is only the common cause part of the answer.")
+
+q(1,
+ "Both arrangements share one common cause contribution at 0.02. Which figure is it?",
+ "0.000105536000",
+ ["0.000263840000","0.000527680000","0.001055360000"],
+ "The sweep prints 0.000105536000 in the common cause column of both arrangements at 0.02, because a cause that takes every channel at once fails either arrangement equally. 0.000263840000, 0.000527680000 and 0.001055360000 are the same column at beta factors of 0.05, 0.1 and 0.2, each of which is a different claim about common cause.")
+
+q(2,
+ "Raise the fraction to 0.2 on the pair, betaD again at half. Which value is reported?",
+ "0.001083665589",
+ ["0.001140276768","0.000560373162","0.000625759485"],
+ "The sweep prints 0.001083665589 for the 1oo2 at 0.2. 0.001140276768 is the 2oo3 at the same beta factor, and the two sit close together because both are carrying the same common cause contribution of 0.001055360000 by then. 0.000560373162 and 0.000625759485 are the pair and the 2oo3 one step down the sweep at 0.1.")
+
+q(0,
+ "Across the sweep the pair's independent piece moves too. Where does it end?",
+ "0.000028305589",
+ ["0.000037396736","0.000032693162","0.000035005448"],
+ "Common cause failures are taken out of the rate that fails channels independently before it is squared, so the independent term falls across the sweep and reads 0.000028305589 at 0.2. 0.000037396736 is the same term at zero, 0.000035005448 at 0.05 and 0.000032693162 at 0.1. The total still climbs, because the failures move into a term that is linear and single channel.")
+
+q(3,
+ "Three channels voting two, at 0.1 and half of it: which total is printed?",
+ "0.000625759485",
+ ["0.000560373162","0.000368856345","0.000214828223"],
+ "The sweep prints 0.000625759485 for the 2oo3 at 0.1, of which 0.000527680000 is common cause. 0.000560373162 is the pair on the same row. 0.000368856345 is the 2oo3 at 0.05 and 0.000214828223 is the 2oo3 at 0.02, so each of those answers a different claim about common cause.")
+
+q(1,
+ "A call names two out of two and carries 0.05 in its beta factor field. Which PFDavg is returned?",
+ "0.010576000000",
+ ["0.010512000000","0.005288000000","0.000298987176"],
+ "The two out of two returns 0.010576000000 whether a beta factor is typed or not, with a common cause column of 0.000000000000 both ways, and the typed call carries a warning. 0.005288000000 is the single channel figure, which is exactly half of it. 0.010512000000 is a two out of two on the channel with no detected failures. 0.000298987176 is the redundant pair.")
+
+q(2,
+ "Read the sweep down its dominant column. Where does each arrangement hand the answer over to common cause on this channel?",
+ "The pair turns common cause dominated at a beta factor of 0.02 and the two out of three holds out until 0.05.",
+ ["The two out of three turns at a beta factor of 0.02 and the pair holds out until 0.05, because the pair starts with the smaller independent term of the two arrangements.",
+  "Both arrangements turn at a beta factor of 0.02, since the common cause contribution they carry at that point is identical and so is the moment it passes.",
+  "Neither turns anywhere in this sweep."],
+ "The sweep reports the 1oo2 as common cause dominated from 0.02 and the 2oo3 from 0.05. The 2oo3 holds out longer because its independent term carries 6 where the pair carries 2, so it starts three times larger and has further to fall behind. Their common cause contributions are identical at every row, which is why the turning points differ only through the independent side.")
+
+q(1,
+ "Why does the engine ask for betaD as an input of its own, separately from the beta factor?",
+ "Because the two fractions are separate claims: they apply to different failure populations with different down times.",
+ ["Because betaD is always half the beta factor, so the engine asks for it once and carries the ratio through every architecture it knows.",
+  "Because betaD applies to a single channel and the beta factor applies to a group.",
+  "Because betaD replaces the beta factor whenever diagnostics exist."],
+ "The undetected common cause term is the beta factor times lambdaDU times T1/2 plus MRT, and the detected one is betaD times lambdaDD times the MTTR, so the two fractions weight different populations over very different down times and the engine refuses a redundant call with detected failures and no betaD. BetaD is not fixed at half the beta factor, it does not belong to one channel, and it never replaces the beta factor.")
+
+q(3,
+ "A two out of two is called with a beta factor typed. Which words does the engine return alongside the answer?",
+ "beta does not apply to 2oo2 and was ignored",
+ ["betaD does not apply to 2oo2 and was ignored",
+  "no warning at all, because the call is simply refused",
+  "subsystems: the summed PFDavg reaches 1: not a probability"],
+ "The warning is the engine's own, verbatim: beta does not apply to 2oo2 and was ignored. It tells the analyst the typed figure did nothing, so nobody leaves a review believing it was credited. The call is answered, so it is not refused. The wording about betaD is invented here, and the message about a summed PFDavg reaching 1 is a refusal of a whole SIF and carries no result at all.")
+
+q(2,
+ "Which equation does the engine print for a two out of two?",
+ "PFD = 2 lD tCE (Annex B carries no beta term for 2oo2)",
+ ["PFD = lD tCE",
+  "PFD = 2((1-bD) lDD + (1-b) lDU)^2 tCE tGE + bD lDD MTTR + b lDU (T1/2 + MRT)",
+  "PFD = 6((1-bD) lDD + (1-b) lDU)^2 tCE tGE + bD lDD MTTR + b lDU (T1/2 + MRT)"],
+ "The engine prints the two out of two form verbatim as PFD = 2 lD tCE (Annex B carries no beta term for 2oo2), and the parenthesis is its own statement of why no common cause term appears. PFD = lD tCE is the single channel form, which is half of it. The two longer equations carry coefficients of 2 and 6 on a squared independent rate and belong to the one out of two and the two out of three.")
+
+q(0,
+ "Leaving common cause out of a two out of two is the conservative direction. Why?",
+ "A two out of two fails on the first dangerous failure of either channel, so one common cause event fails it exactly once, and treating every failure as independent counts such an event twice, which errs high.",
+ ["A two out of two needs both channels failed at the same moment, so a common cause event is the only way it can fail at all, and the independent terms are the pieces that err high here.",
+  "The common cause term is squared in every redundant form, so dropping it removes a term that would have grown faster than the independent term as the interval stretches.",
+  "A typed beta factor lowers the independent rate before it is squared, so a form that keeps no common cause term reports the higher of the two rates it was given."],
+ "The two out of two section states the mechanism: the arrangement trips only when both channels work, so it fails on the first dangerous failure of either, and a common cause failure of both is no worse than one channel failing. Counting every failure as independent therefore counts such a failure twice and errs high. A two out of two does not need both channels failed. The common cause term is never squared. The engine simply carries no such term here at all.")
+
+q(1,
+ "A redundant call arrives with no beta factor typed on it. What does the engine do?",
+ "It refuses the call and names the field, saying a beta factor of zero is a claim of no common cause and has to be typed.",
+ ["It answers with a default beta factor drawn from the scored checklist in the standards, and records the default it chose inside the basis block it returns.",
+  "It answers with a beta factor of zero and attaches a warning.",
+  "It answers and reports the call as independent dominated."],
+ "The engine answers in its own words: beta: is required for a redundant 1oo2 and must lie in [0, 1]: beta = 0 is a claim of no common cause and has to be typed. There is no default and no silent zero, the engine invents no number anywhere, and a refusal replaces the result it would otherwise have returned.")
+
+q(3,
+ "What happens to the independent term of a redundant subsystem as its beta factor is raised, all else held?",
+ "It falls, because those failures leave the independent rate.",
+ ["It stays exactly where it was, since the beta factor enters only the common cause terms and the independent rate is untouched by it.",
+  "It climbs in step with the common cause term, because both terms are built from the same dangerous rates and the same equivalent down times.",
+  "It falls only for a two out of three, whose independent coefficient of 6 makes it the one arrangement where the beta factor reaches the squared piece."],
+ "Common cause failures are removed from the rate that fails channels independently, one minus betaD times lambdaDD plus one minus the beta factor times lambdaDU, before the square is taken, so the pair's independent term falls from 0.000037396736 at zero to 0.000028305589 at 0.2. The effect is not confined to one arrangement, the independent term never climbs with the beta factor, and it is plainly not untouched.")
+
+emit(Q, '/root/hse-wip-lopa/banks/h3i_m03.json', expect_n=15)
+finish()

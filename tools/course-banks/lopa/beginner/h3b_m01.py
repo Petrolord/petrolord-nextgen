@@ -1,0 +1,133 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H3 lopa, ASSOCIATE m01 "A Scenario and Its Frequency".
+# Digest sections drawn on: 1 (what the engine computes and declines to
+# compute), 2 (frequencies, probabilities and units), 4 (the ORONI scenario),
+# 32 (the legislated vocabulary), and from the refusal table only the
+# lopaScenario, outcomeFromRequiredRrf and silFromPfdAvg rows.
+
+q(1,
+  "The engine has two halves and one vocabulary. What does the DETERMINATION half produce?",
+  "A scenario frequency, the risk reduction still missing against a tolerable frequency, and the SIL band that missing reduction falls in.",
+  ["The PFDavg a safety instrumented function achieves, by the IEC 61508-6 Annex B low demand equations, which is the engine's other half entirely.",
+   "The longest proof test interval at which a subsystem still meets a target PFDavg, together with the state that says why there is no such interval.",
+   "A consequence category and a scored band for the scenario, taken from a matrix."],
+  "The digest states the halves in one line: the determination half is a layer of protection analysis, a scenario frequency, the risk reduction still missing against a tolerable frequency, and the SIL band that missing reduction falls in. The Annex B PFDavg belongs to the verification half and to the next tier. The longest interval is a separate call again. Nothing in this engine takes a consequence category or a scored band.")
+
+q(3,
+  "`lopaScenario` is handed an initiating event frequency, enabling conditions, conditional modifiers, a list of IPLs and a tolerable frequency. Which set of results comes back?",
+  "The unmitigated and mitigated frequencies, the credited and uncredited IPLs, the required RRF, the outcome state and the required PFDavg.",
+  ["The unmitigated and mitigated frequencies, the credited and uncredited IPLs, the required RRF, and the proof test interval the function on the row would need.",
+   "A required SIL number on its own, the frequencies having been discarded once the band was decided.",
+   "The PFDavg of every subsystem and their series sum."],
+  "The function table gives `lopaScenario` exactly those returns: the unmitigated and mitigated frequencies, the credited and uncredited IPLs, the required RRF, the outcome state and the required PFDavg. A proof test interval comes from a different call. A SIL number alone is never all the engine reports, because the outcome state and the required PFDavg travel with it. A series sum of subsystems is the verification half's business.")
+
+q(0,
+  "An input arrives that cannot support the row. What comes back from the call?",
+  "An object carrying `error` and `field`, where `field` names the offending input.",
+  ["A result object whose `basis` block carries the method string, with the offending input quietly replaced by the engine's own default for that field.",
+   "A result object with the frequencies computed anyway and a warning appended, so that the worksheet still shows a number the reviewer can look at.",
+   "A partially computed row, every figure up to the offending input filled in and the remainder of the row left empty for the analyst."],
+  "Every function returns either a result object carrying a `basis` block or an object with `error` and `field`, where `field` names the offending input. There is no third answer. The engine holds no defaults to substitute, it does not answer a refused input with a warning, and it never computes part of a row.")
+
+q(2,
+  "`HOURS_PER_YEAR` is one of the constants the engine exports. What is its value and what does it do?",
+  "8760, so a one year proof test interval is 8760 hours and a longest interval returned in hours is also given in years as hours over 8760.",
+  ["8760, and the engine uses it to turn every probability on the determination row into a rate per hour before the product for the row is formed.",
+   "8760, and it converts the tolerable mitigated event likelihood into a tolerable frequency per hour before the comparison with the mitigated frequency.",
+   "8760, and it sets the longest proof test interval the engine will return."],
+  "HOURS_PER_YEAR is 8760, so a one year proof test interval is 8760 hours and the longest interval the engine returns in hours is also given in years, derived as hours over 8760. It converts nothing on the determination row: a probability has no unit to convert, and the tolerable frequency and the mitigated frequency are both per year already and are compared directly. It is a conversion constant and not a limit on any interval.")
+
+q(1,
+  "The engine invents no number. Which list says exactly what that means?",
+  "The initiating event frequency, every enabling condition and conditional modifier probability, every IPL PFD, every failure rate and the TMEL are all inputs.",
+  ["A generic initiating event frequency is supplied when the field is left empty, and everything else on the row is typed by the analyst.",
+   "A table of IPL PFDs by layer type is held inside the engine and the matching figure is applied.",
+   "The TMEL follows from the consequence described on the row."],
+  "The digest lists the inputs one by one: the initiating event frequency, every enabling condition and conditional modifier probability, every IPL PFD, every failure rate and the TMEL. The engine carries no failure rate data and no library of generic frequencies, so nothing is supplied for an empty field, no IPL PFD is looked up by layer type, and the TMEL is chosen by the organisation and typed in.")
+
+q(0,
+  "The engine's exported names are given in full. Which of these is not one of them?",
+  "`hazardCategory`, a call that would score a consequence and hand back a band for it.",
+  ["`outcomeFromRequiredRrf`, which returns the outcome state that a required risk reduction factor demands of the row.",
+   "`silFromPfdAvg`, which returns the low demand band an achieved PFDavg falls in, read from the band table.",
+   "`decadeOf`, which returns a power of ten or null."],
+  "The exported names are given in full in the digest and `outcomeFromRequiredRrf`, `silFromPfdAvg` and `decadeOf` are all on the list. No name on it scores a consequence, because nothing in this engine takes a consequence category or a scored band at all.")
+
+q(3,
+  "A LOPA row multiplies ONE frequency by probabilities. Which two fields on the determination row are the frequencies?",
+  "The initiating event frequency and the tolerable mitigated event likelihood.",
+  ["The initiating event frequency and the product of the conditional modifiers, the enabling conditions being carried as a probability alongside them.",
+   "The initiating event frequency together with every credited IPL PFD, each read by the engine as a count per year.",
+   "The tolerable mitigated event likelihood and the proposed SIF PFDavg."],
+  "The units table makes two fields frequencies per year, the initiating event frequency and the TMEL, and every other field on the determination row a probability above zero and no more than one. Enabling conditions, conditional modifiers, IPL PFDs and a proposed SIF PFDavg are all probabilities, so none of them is a second frequency.")
+
+q(2,
+  "An analyst types 2.5 into the initiating event frequency field and 2.5 into an enabling condition field on the same row. What does the engine do?",
+  "It accepts the first, because a frequency is a count per year and can exceed one, and refuses the second, because that field is a probability.",
+  ["It accepts both, since the engine reads each field as a plain number and checks only that it is above zero before forming the product for the row.",
+   "It refuses both, because no field anywhere in the determination half of the engine will take a value above one from the analyst who typed it.",
+   "It accepts both and warns on the second."],
+  "The digest says an IEF of 2.5 per year is accepted, because a frequency is a count per year and can exceed one. The same number typed as an enabling condition probability is refused, because that field is a probability above 0 and no more than 1. So one is taken and one is refused, and the refusal replaces the result and is not a warning beside it.")
+
+q(0,
+  "A row is submitted with an initiating event frequency of zero. What does the engine return?",
+  "initiatingEventFrequencyPerYr: must be a frequency above 0 per year",
+  ["initiatingEventFrequencyPerYr: must be a probability above 0 and no more than 1, because a frequency of 0 means the initiating event never occurs at all",
+   "unmitigatedFrequencyPerYr: the product for this row comes to zero, so there is no consequence frequency left for the layers on it to reduce",
+   "initiatingEventFrequencyPerYr: the frequency has been read as zero and the row has been set to NO_SIF_REQUIRED"],
+  "That is the engine's own wording, from the refusal table, and the field it names is initiatingEventFrequencyPerYr. The field is a frequency and not a probability, so the range clause belongs to a different row of the table. A refusal carries no number and no computed product, and it never sets an outcome state.")
+
+q(1,
+  "An enabling condition named 'mode' is typed as zero. Which field does the engine name, and what does the bracketed clause of its message say?",
+  "`enablingConditions[0].probability`, and the clause says a probability of 0 means the scenario cannot happen, which is not a LOPA scenario.",
+  ["`enablingConditions`, and the clause says the list must hold at least one entry before the product for the row can be formed at all.",
+   "`enablingProduct`, and the clause says the product of the enabling conditions has come out at zero and carries the whole row to zero with it.",
+   "`enablingConditions[0].name`, and the clause says every entry needs a name before its figure is read."],
+  "The refusal table names `enablingConditions[0].probability` and quotes the engine's own message, which ends with the bracketed reason that a probability of 0 means the scenario cannot happen, which is not a LOPA scenario. The field named is always the offending input down to its position in the list, so a returned product key or the list itself is never what the engine points at, and the missing name clause belongs to a different row of the table.")
+
+q(2,
+  "A worksheet lists the relief valve twice, once as `relief valve` and once as `Relief Valve`. What happens?",
+  "The engine refuses on `ipls[1].name`, because names are compared with case ignored and one credit is given per IPL.",
+  ["The engine credits both entries, because the two names differ in case and the credit rule looks only at the independence flag on each entry.",
+   "The engine credits the first entry and lists the second under `notCredited` with the reason that it is a duplicate of a layer already credited.",
+   "The engine warns and then credits the second entry only."],
+  "The refusal table carries this call: the field is `ipls[1].name` and the message is the engine's own, that 'relief valve' appears twice and one credit is given per IPL. A refusal replaces the result, so nothing is credited, nothing is listed under `notCredited` and no warning is returned. A layer counted twice would divide the frequency by its IPL PFD twice for one piece of hardware.")
+
+q(3,
+  "`silFromPfdAvg` is called with a PFDavg of zero. What is the field named in the answer?",
+  "`pfdAvg`",
+  ["`requiredSifPfdAvg`, since the call compares the figure given against the target the row demands before it bands anything",
+   "`sifPfdAvg`, which is the field a proposed function's figure is typed into on the determination row",
+   "`silFromPfdAvg`"],
+  "The refusal table gives the field as `pfdAvg`, with the engine's message that it must be a probability above 0 and no more than 1. `sifPfdAvg` is the proposed function's field on `lopaScenario` and belongs to a different call. The field named is always the offending input and never the function's own name or a target.")
+
+q(1,
+  "How many refusals does the digest table, across how many functions, and which function refuses none of them?",
+  "29 refusals across 7 functions, and `decadeOf` refuses nothing at all.",
+  ["29 refusals across 7 functions, and `lopaScenario` refuses nothing, since every check it makes returns a warning beside the result.",
+   "29 refusals across 7 functions, and `silFromPfdAvg` refuses nothing, because any figure it is handed can be placed somewhere on the band table.",
+   "29 refusals across 3 functions, and `outcomeFromRequiredRrf` refuses nothing."],
+  "The digest says 29 refusals are tabled across 7 functions. `decadeOf` refuses nothing: it returns null for zero, for a negative number, for a string and for anything off a decade. `lopaScenario`, `silFromPfdAvg` and `outcomeFromRequiredRrf` each carry refusal rows of their own in that table.")
+
+q(2,
+  "The ORONI separator overfill row starts from a level control valve failing open. What is its stated initiating event frequency, and what does the engine's method string multiply it by?",
+  "0.45 per year, multiplied by the product of the enabling conditions, the product of the conditional modifiers and the product of the IPL PFDs of the credited layers.",
+  ["0.45 per year, multiplied by the product of the conditional modifiers alone, with the enabling conditions applied afterwards to the tolerable frequency.",
+   "0.3 per year, multiplied by the products of the enabling conditions and the conditional modifiers and then by the tolerable frequency for the row.",
+   "0.45 per year, multiplied by the tolerable frequency."],
+  "The scenario table states the level control valve failing open at 0.45 per year. From that figure the engine's method string builds the row by three multiplications: the enabling conditions, then the conditional modifiers, then the IPL PFDs of the credited layers. A tolerable frequency divides the answer to give the required RRF and never multiplies into it, and the 0.3 quoted above belongs to the separator configuration on this row.")
+
+q(0,
+  "This course legislates five words before a line is written. Which statement is one of those rules?",
+  "Always write the beta factor in full, because the bare word already means a vapour fraction and an orifice diameter ratio in live courses.",
+  ["Write a consequence category beside every row, so that a reviewer can rank what is being tolerated.",
+   "Write IPL PFD for a whole safety instrumented function and PFDavg for one credited layer.",
+   "Shorten the beta factor the way the fluid and metering courses shorten it."],
+  "The vocabulary table binds five words. The bare form of the beta factor already means a vapour fraction in the fluid course and an orifice diameter ratio in the metering course, so this course always writes it in full. A consequence category belongs to the academy's risk matrices and this course scores none. PFDavg is the word for a function or a subsystem, and a credited layer's figure is an IPL PFD, which is the other way round from the option above.")
+
+emit(Q, '/root/hse-wip-lopa/banks/h3b_m01.json', expect_n=15)
+finish()

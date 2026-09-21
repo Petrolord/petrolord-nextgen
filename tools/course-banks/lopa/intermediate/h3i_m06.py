@@ -1,0 +1,109 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H3 Professional m06: A Published SIF, Reproduced.
+# Digest sections 23 (the published worked function reproduced subsystem by
+# subsystem, its total and its risk reduction factor), 24 (the warnings and
+# ignored inputs of the verification half) and, from the refusal table, the
+# pfdAvgSubsystem and pfdAvgSif refusals.
+
+q(1,
+ "In the published worked function the valve assembly is a redundant pair at lambdaDU 2.1e-6 per hour with restoration times of 120 hours and a beta factor of 0.1. What PFDavg does the engine return for it?",
+ "0.001048767640",
+ ["0.000235764375","0.000344085754","0.001287026426"],
+ "The reproduction table prints 0.001048767640 for that row, which rounds to the printed 1.05E-03. 0.000235764375 is the pressure transmitter row and 0.000344085754 is the transmitter row computed at the raised beta factor. 0.001287026426 is the valve pair of the teaching function, which is a different subsystem with different rates.")
+
+q(3,
+ "The pressure transmitters of that published function vote two out of three at lambdaDU 5e-7 and lambdaDD 8e-7 per hour, with a beta factor and a betaD of 0.1. What does the engine give?",
+ "0.000235764375",
+ ["0.000344085754","0.000369505528","0.001048767640"],
+ "The reproduction table prints 0.000235764375, which rounds to the printed 2.36E-04. 0.000344085754 is the same subsystem with the beta factor raised by half for the voted arrangement, which is the source's second table. 0.000369505528 is the teaching function's transmitters. 0.001048767640 is the valve assembly of this same published function.")
+
+q(0,
+ "What figure does the engine return for the analogue input card of that published function?",
+ "0.000000696679",
+ ["0.000000533954","0.000000668459","0.000000273209"],
+ "The reproduction table prints 0.000000696679, which rounds to the printed 6.97E-07. 0.000000533954 is the processor row and 0.000000668459 is the digital output card row, the two other electronic subsystems. 0.000000273209 is an independent term from the architecture ranking of the teaching channel and belongs to no published row at all.")
+
+q(2,
+ "The processor of that function is a redundant pair at lambdaDU 4.9e-9 and lambdaDD 1.28e-6 per hour. Which value comes back?",
+ "0.000000533954",
+ ["0.000000696679","0.000000668459","0.000000448000"],
+ "The reproduction table prints 0.000000533954, the smallest of the five rows, rounding to the printed 5.34E-07. 0.000000696679 is the analogue input card and 0.000000668459 is the digital output card. 0.000000448000 is a detected common cause term from the teaching channel and has nothing to do with this source.")
+
+q(1,
+ "Which value belongs to that source's digital output card?",
+ "0.000000668459",
+ ["0.000000696679","0.000000533954","0.000000273209"],
+ "That output card reads 0.000000668459, printed by the source as 6.68E-07. Sitting beside it in the same set are 0.000000696679, which is the card that reads the measurement in, and 0.000000533954, which is the pair that decides. The remaining value is an independent term lifted from a teaching channel.")
+
+q(3,
+ "Sum the five published subsystems. What total does the engine report?",
+ "0.001286431107",
+ ["0.001792971954","0.001048767640","0.001287026426"],
+ "The engine sums the five in series and prints 0.001286431107, which rounds to the printed 1.29E-03. 0.001048767640 is the valve assembly alone, which carries most of the total. 0.001792971954 is the teaching function of this tier and 0.001287026426 is that function's valve pair, neither of which belongs to the published source.")
+
+q(0,
+ "To how many significant figures did the source print its total, and what does that printed figure read?",
+ "1.29E-03",
+ ["1.05E-03","2.36E-04","3.44E-04"],
+ "The source prints three significant figures and its total reads 1.29E-03, which the engine's 0.001286431107 rounds to. 1.05E-03 is the printed valve assembly row and 2.36E-04 the printed pressure transmitter row. 3.44E-04 is the transmitter row printed in the source's second table, where the beta factor is raised.")
+
+q(2,
+ "What does the reproduction print as one over the published total, and what did the source round it to?",
+ "777.344387",
+ ["557.733208","190.258752","252.295893"],
+ "Reproducing the five rows gives 777.344387, which rounds to the 777 the source printed, on a function banded 2. A value of 557.733208 answers the three subsystem chain taught earlier in this tier. A single simplified channel carries 190.258752, and 252.295893 belongs to a shutdown valve given a perfect proof test.")
+
+q(1,
+ "The source also prints a second table in which the beta factor of a voted arrangement is multiplied. What does the engine return for the transmitter row there?",
+ "0.000344085754",
+ ["0.000235764375","0.000369505528","0.000362528185"],
+ "At a beta factor of 0.15 the engine gives 0.000344085754, which rounds to the printed 3.44E-04. 0.000235764375 is the same row in the first table at 0.1. 0.000369505528 and 0.000362528185 are two out of three figures for the teaching channel, computed on rates that have nothing to do with this source.")
+
+q(3,
+ "A single channel is called at lambdaDU 2e-5 per hour over a proof test interval of 8760 hours. What PFDavg does the engine return with its warning?",
+ "0.087600000000",
+ ["0.004380000000","0.010576000000","0.003963600000"],
+ "The warning table prints 0.087600000000 for that call, and the engine answers while saying the answer overstates. 0.004380000000 is the single channel call that carries an ignored beta factor. 0.010576000000 is a two out of two on the teaching channel and 0.003963600000 is a shutdown valve at a perfect proof test.")
+
+q(2,
+ "A single channel call arrives with a beta factor of 0.1 typed on it. What PFDavg comes back?",
+ "0.004380000000",
+ ["0.087600000000","0.010512000000","0.005288000000"],
+ "The warning table prints 0.004380000000 for that call, alongside the engine's own words that beta does not apply to 1oo1 and was ignored. A single channel has no second channel for a common cause to reach, so the typed figure does nothing. 0.087600000000 is the warned rare event call. 0.010512000000 and 0.005288000000 are other rows of the teaching channel.")
+
+q(0,
+ "Which words does the engine return beside a PFDavg of 0.087600000000?",
+ "lambdaDU x T = 0.1752 exceeds 0.1: the linearised (rare-event) equations overstate PFDavg noticeably here",
+ ["proofTestIntervalHours: must be a time above 0 hours",
+  "beta does not apply to 1oo1 and was ignored",
+  "beta does not apply to 2oo2 and was ignored"],
+ "The warning is the engine's own, verbatim, and it names the product that crossed the threshold. The message about a time above 0 hours is a refusal, which replaces a result and never arrives beside one. The two ignored input messages are warnings as well, but each belongs to a call where a beta factor was typed on an architecture that carries no such term.")
+
+q(1,
+ "Where does the engine draw the line between warning about an answer and refusing to give one?",
+ "It warns once lambdaDU times T is above 0.1 and refuses once the linearised value reaches one.",
+ ["It warns once the risk reduction factor falls under one hundred, and refuses once the value leaves the low demand table altogether at the top end.",
+  "It warns for any architecture but a single channel, and refuses a beta factor above 0.1.",
+  "It warns when a repair time after a test is typed, and refuses a missing lifetime."],
+ "The warning section states both boundaries: the warning threshold is lambdaDU times T above 0.1, and the refusal is a PFDavg of one or more, since a value that large is no longer a probability. Bands and risk reduction factors trigger neither. A typed beta factor on a call that ignores it returns only a warning, and a missing lifetime is a refusal that turns on coverage.")
+
+q(3,
+ "A subsystem call carries a dangerous detected rate above zero and no restoration time for it. Which field does the engine name?",
+ "mttrHours",
+ ["lambdaDuPerHour","proofTestIntervalHours","lifetimeHours"],
+ "The engine's words are that mttrHours is required when lambdaDD is above zero, because detected failures are down for the restoration time. lambdaDuPerHour is named for a negative rate or for both rates being zero. proofTestIntervalHours is named for an interval of zero or for a product far outside the rare event range. lifetimeHours is named when coverage falls below one.")
+
+q(2,
+ "A function is submitted for verification with an empty list of subsystems. What does the engine say?",
+ "subsystems: must be a non-empty list of subsystem parameter sets",
+ ["subsystems: the summed PFDavg reaches 1: not a probability",
+  "subsystems[1].beta: is required for a redundant 1oo2 and must lie in [0, 1]: beta = 0 is a claim of no common cause and has to be typed",
+  "intervalsHours: must be a non-empty list of proof test intervals in hours"],
+ "The engine refuses an empty function in those words, verbatim. The message about a summed PFDavg is the refusal for a list whose parts add past a probability, which needs parts to add. The message naming a numbered subsystem is what comes back when one member of a list is missing an input. The message about intervals belongs to a different function altogether.")
+
+emit(Q, '/root/hse-wip-lopa/banks/h3i_m06.json', expect_n=15)
+finish()
