@@ -7,7 +7,8 @@
   "class": "B",
   "correct_text_or_action": "Reword the explanation clause to keep the product unsigned: \"...from m\\\"inf 0.101 times one minus exp(-k beta D), with the heptane k beta of 1.1 per m.\" (digest line 500 prints the form, line 509 prints 1.1).",
   "safe_to_fix_now": true,
-  "notes": "Figure is correct: Babrauskas m\" = m\"inf (1 - exp(-k beta D)) with heptane k beta 1.1 (digest 500, 509). Substituting the constant into the exponent is what creates the signed literal. A digest line is not needed. Explanation-only edit: no option length moves, so it composes with B4 trivially."
+  "notes": "Figure is correct: Babrauskas m\" = m\"inf (1 - exp(-k beta D)) with heptane k beta 1.1 (digest 500, 509). Substituting the constant into the exponent is what creates the signed literal. A digest line is not needed. Explanation-only edit: no option length moves, so it composes with B4 trivially.",
+  "roundoff": "FIXED 2026-09-21: the named rewording shipped in migrations/20261023a_ro_bank_consequence.sql (live row) and in the committed bank source pair; litsweep clean on it."
  },
  {
   "course": "hygiene",
@@ -17,7 +18,8 @@
   "class": "B",
   "correct_text_or_action": "Digest line: have h2_dump.mjs print each refusal case's input in the refusal table (the golden exposure_cases.json refusal \"wbgt-below-absolute-zero\" is called with naturalWetBulbC -300, globeC 20), so -300 is printed on digest line ~713. Do not reword the prompt to \"below absolute zero\": that quotes the key's refusal message and gives the answer away.",
   "safe_to_fix_now": false,
-  "notes": "-300 is the real input of the engine golden refusal case (verified in /root/hse-wip-hygiene/scratch/eng/test-data/hse/goldens/exposure_cases.json). The digest prints the case id and message only. Not safe now: needs a generator edit, digest re-cut and waves.json re-pin, and PR #180 reports another session editing /root/hse-wip-hygiene (the H2 mirror gate is red until it is re-mirrored). Both hits (prompt and explanation) close with the one digest line."
+  "notes": "-300 is the real input of the engine golden refusal case (verified in /root/hse-wip-hygiene/scratch/eng/test-data/hse/goldens/exposure_cases.json). The digest prints the case id and message only. Not safe now: needs a generator edit, digest re-cut and waves.json re-pin, and PR #180 reports another session editing /root/hse-wip-hygiene (the H2 mirror gate is red until it is re-mirrored). Both hits (prompt and explanation) close with the one digest line.",
+  "roundoff": "FIXED 2026-09-21 by the digest line: h2_dump.mjs prints the wbgt-below-absolute-zero input (-300 C, globe 20 C) after the refusal table; digest re-cut and re-pinned in waves.json. No bank or lesson text moved; the hygiene litsweep is clean."
  },
  {
   "course": "hygiene",
@@ -27,7 +29,8 @@
   "class": "B",
   "correct_text_or_action": "Digest line: have h2_dump.mjs print each refusal case's input in the refusal table (the golden exposure_cases.json refusal \"wbgt-below-absolute-zero\" is called with naturalWetBulbC -300, globeC 20), so -300 is printed on digest line ~713. Do not reword the prompt to \"below absolute zero\": that quotes the key's refusal message and gives the answer away.",
   "safe_to_fix_now": false,
-  "notes": "-300 is the real input of the engine golden refusal case (verified in /root/hse-wip-hygiene/scratch/eng/test-data/hse/goldens/exposure_cases.json). The digest prints the case id and message only. Not safe now: needs a generator edit, digest re-cut and waves.json re-pin, and PR #180 reports another session editing /root/hse-wip-hygiene (the H2 mirror gate is red until it is re-mirrored). Both hits (prompt and explanation) close with the one digest line."
+  "notes": "-300 is the real input of the engine golden refusal case (verified in /root/hse-wip-hygiene/scratch/eng/test-data/hse/goldens/exposure_cases.json). The digest prints the case id and message only. Not safe now: needs a generator edit, digest re-cut and waves.json re-pin, and PR #180 reports another session editing /root/hse-wip-hygiene (the H2 mirror gate is red until it is re-mirrored). Both hits (prompt and explanation) close with the one digest line.",
+  "roundoff": "FIXED 2026-09-21 by the digest line: h2_dump.mjs prints the wbgt-below-absolute-zero input (-300 C, globe 20 C) after the refusal table; digest re-cut and re-pinned in waves.json. No bank or lesson text moved; the hygiene litsweep is clean."
  },
  {
   "course": "hygiene",
@@ -37,7 +40,8 @@
   "class": "B",
   "correct_text_or_action": "Reword: \"At 97 dBA the hours to 87 are one tenth of 8 h, 0.800000 h, because the level sits 10 dB above the target.\" (rest of the explanation unchanged).",
   "safe_to_fix_now": true,
-  "notes": "Arithmetic is correct: t = 8 x 10^((87 - 97)/10) = 0.800000 h, printed on digest line 805. The literal comes from writing the exponent out. Explanation-only edit: no option length moves, so it composes with B4 trivially."
+  "notes": "Arithmetic is correct: t = 8 x 10^((87 - 97)/10) = 0.800000 h, printed on digest line 805. The literal comes from writing the exponent out. Explanation-only edit: no option length moves, so it composes with B4 trivially.",
+  "roundoff": "FIXED 2026-09-21: the named rewording shipped in migrations/20261023a_ro_bank_hygiene.sql (live row) and in the committed bank source pair; litsweep clean on it."
  },
  {
   "course": "linesizing",
@@ -47,7 +51,8 @@
   "class": "B",
   "correct_text_or_action": "Digest line (one fix closes all five -30.000000 hits): in fc2_dump.mjs after line 500, print the inverse drop in the digest's six-decimal format, e.g. \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\" Today the digest prints it only as the raw JSON {\"p2Psia\":880,\"dpPsi\":-30} (digest line 336), which litsweep cannot match against -30.000000.",
   "safe_to_fix_now": true,
-  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves."
+  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves.",
+  "roundoff": "FIXED 2026-09-21 by the digest line: fc2_dump.mjs prints \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\"; digest re-cut and re-pinned in waves.json. No bank or lesson text moved; the linesizing litsweep (banks and lessons) is clean."
  },
  {
   "course": "linesizing",
@@ -57,7 +62,8 @@
   "class": "A",
   "correct_text_or_action": "Reword the distractor without inventing a bound: \"That s never exceeds one in size in either direction, which is what allows it to be handed to an exponential without the group overflowing on a tall hill.\" (154 chars against 158; keeps its length rank 1).",
   "safe_to_fix_now": true,
-  "notes": "Invented literal: the digest never prints a bound of -1.0000000000 on s (the unsigned 1.0000000000 resolved by coincidence against e to the s on a flat line). The option is a distractor and is meant to be false, so the key is unaffected; the defect is that the sweep rule \"every literal is a digest figure\" is broken. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+  "notes": "Invented literal: the digest never prints a bound of -1.0000000000 on s (the unsigned 1.0000000000 resolved by coincidence against e to the s on a flat line). The option is a distractor and is meant to be false, so the key is unaffected; the defect is that the sweep rule \"every literal is a digest figure\" is broken. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate.",
+  "roundoff": "FIXED 2026-09-21: the named rewording shipped in migrations/20261023a_ro_bank_linesizing.sql (live row) and in the committed bank source pair; litsweep clean on it."
  },
  {
   "course": "linesizing",
@@ -67,7 +73,8 @@
   "class": "B",
   "correct_text_or_action": "Digest line (one fix closes all five -30.000000 hits): in fc2_dump.mjs after line 500, print the inverse drop in the digest's six-decimal format, e.g. \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\" Today the digest prints it only as the raw JSON {\"p2Psia\":880,\"dpPsi\":-30} (digest line 336), which litsweep cannot match against -30.000000.",
   "safe_to_fix_now": true,
-  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves. This is the KEY of fc2i_m04 Q10, so it must not be reworded."
+  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves. This is the KEY of fc2i_m04 Q10, so it must not be reworded.",
+  "roundoff": "FIXED 2026-09-21 by the digest line: fc2_dump.mjs prints \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\"; digest re-cut and re-pinned in waves.json. No bank or lesson text moved; the linesizing litsweep (banks and lessons) is clean."
  },
  {
   "course": "linesizing",
@@ -77,7 +84,8 @@
   "class": "B",
   "correct_text_or_action": "Digest line (one fix closes all five -30.000000 hits): in fc2_dump.mjs after line 500, print the inverse drop in the digest's six-decimal format, e.g. \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\" Today the digest prints it only as the raw JSON {\"p2Psia\":880,\"dpPsi\":-30} (digest line 336), which litsweep cannot match against -30.000000.",
   "safe_to_fix_now": true,
-  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves."
+  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves.",
+  "roundoff": "FIXED 2026-09-21 by the digest line: fc2_dump.mjs prints \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\"; digest re-cut and re-pinned in waves.json. No bank or lesson text moved; the linesizing litsweep (banks and lessons) is clean."
  },
  {
   "course": "linesizing",
@@ -87,7 +95,8 @@
   "class": "B",
   "correct_text_or_action": "Digest line (one fix closes all five -30.000000 hits): in fc2_dump.mjs after line 500, print the inverse drop in the digest's six-decimal format, e.g. \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\" Today the digest prints it only as the raw JSON {\"p2Psia\":880,\"dpPsi\":-30} (digest line 336), which litsweep cannot match against -30.000000.",
   "safe_to_fix_now": true,
-  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves."
+  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves.",
+  "roundoff": "FIXED 2026-09-21 by the digest line: fc2_dump.mjs prints \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\"; digest re-cut and re-pinned in waves.json. No bank or lesson text moved; the linesizing litsweep (banks and lessons) is clean."
  },
  {
   "course": "linesizing",
@@ -97,7 +106,8 @@
   "class": "B",
   "correct_text_or_action": "Digest line (one fix closes all five -30.000000 hits): in fc2_dump.mjs after line 500, print the inverse drop in the digest's six-decimal format, e.g. \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\" Today the digest prints it only as the raw JSON {\"p2Psia\":880,\"dpPsi\":-30} (digest line 336), which litsweep cannot match against -30.000000.",
   "safe_to_fix_now": true,
-  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves."
+  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves.",
+  "roundoff": "FIXED 2026-09-21 by the digest line: fc2_dump.mjs prints \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\"; digest re-cut and re-pinned in waves.json. No bank or lesson text moved; the linesizing litsweep (banks and lessons) is clean."
  },
  {
   "course": "supply",
@@ -107,7 +117,8 @@
   "class": "B",
   "correct_text_or_action": "Reword the distractor so the misreading is carried in words with the printed magnitude: \"A cap surplus of 34.8249 naira a litre, and the cap covers the chain: true.\" (75 chars, keeps rank 0).",
   "safe_to_fix_now": true,
-  "notes": "Deliberate sign-flip distractor: digest line 633 prints \"shortfall 34.8249 ... covers the chain: false\" and line 632 shows a negative shortfall means the cap covers. The option is meant to be wrong; gate false positive against the new BANK_TASK \"Signs\" rule. Key (option1) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+  "notes": "Deliberate sign-flip distractor: digest line 633 prints \"shortfall 34.8249 ... covers the chain: false\" and line 632 shows a negative shortfall means the cap covers. The option is meant to be wrong; gate false positive against the new BANK_TASK \"Signs\" rule. Key (option1) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate.",
+  "roundoff": "FIXED 2026-09-21: the named rewording shipped in migrations/20261023a_ro_bank_supply.sql (live row) and in the committed bank source pair; litsweep clean on it."
  },
  {
   "course": "riskchange",
@@ -117,7 +128,8 @@
   "class": "B",
   "correct_text_or_action": "Reword: \"181 days past, overdue, counted back from the review\" (52 chars, keeps rank 2).",
   "safe_to_fix_now": true,
-  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Key (option1, 181 days to go, not overdue) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Key (option1, 181 days to go, not overdue) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate.",
+  "roundoff": "FIXED 2026-09-21: the named rewording shipped in migrations/20261023a_ro_bank_riskchange.sql (live row) and in the committed bank source pair; litsweep clean on it."
  },
  {
   "course": "riskchange",
@@ -127,7 +139,8 @@
   "class": "B",
   "correct_text_or_action": "Reword: \"45 back\" (7 chars, keeps rank 1). Alternative \"45 days ago\" (11) reads better but becomes the longest option and moves the key off rank 0; only take it if lengths.py still passes.",
   "safe_to_fix_now": true,
-  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Key (option3, \"45 days on\") is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Key (option3, \"45 days on\") is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate.",
+  "roundoff": "FIXED 2026-09-21: the named rewording shipped in migrations/20261023a_ro_bank_riskchange.sql (live row) and in the committed bank source pair; litsweep clean on it."
  },
  {
   "course": "riskchange",
@@ -137,7 +150,8 @@
   "class": "B",
   "correct_text_or_action": "Reword: \"92 back, as the date falls in another year\" (42 chars, keeps rank 3).",
   "safe_to_fix_now": true,
-  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Key (option2, 92) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Key (option2, 92) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate.",
+  "roundoff": "FIXED 2026-09-21: the named rewording shipped in migrations/20261023a_ro_bank_riskchange.sql (live row) and in the committed bank source pair; litsweep clean on it."
  },
  {
   "course": "riskchange",
@@ -147,7 +161,8 @@
   "class": "B",
   "correct_text_or_action": "Reword: \"Yes: 30 days have passed\" (24 chars, same length as today, keeps rank 2).",
   "safe_to_fix_now": true,
-  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. The gate calls this REACHES FORWARD only because -30 happens to be printed in Professional Section 11 (digest line 294, an MOC expiry 2026-09-01 at -30 days), an unrelated quantity. It is not a real cross-tier leak. Key (option0, 30 days left) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. The gate calls this REACHES FORWARD only because -30 happens to be printed in Professional Section 11 (digest line 294, an MOC expiry 2026-09-01 at -30 days), an unrelated quantity. It is not a real cross-tier leak. Key (option0, 30 days left) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate.",
+  "roundoff": "FIXED 2026-09-21: the named rewording shipped in migrations/20261023a_ro_bank_riskchange.sql (live row) and in the committed bank source pair; litsweep clean on it."
  },
  {
   "course": "riskchange",
@@ -157,7 +172,8 @@
   "class": "B",
   "correct_text_or_action": "Reword: \"30 ago\" (6 chars, keeps rank 0 among bare-number options). If that reads too terse, the owner may prefer a gate allowance for sign-flipped distractor options whose magnitude the digest prints.",
   "safe_to_fix_now": true,
-  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Same coincidental forward resolution against digest line 294 as asrcb_exam Q28; not a real leak. Key (option1, 30) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Same coincidental forward resolution against digest line 294 as asrcb_exam Q28; not a real leak. Key (option1, 30) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate.",
+  "roundoff": "FIXED 2026-09-21: the named rewording shipped in migrations/20261023a_ro_bank_riskchange.sql (live row) and in the committed bank source pair; litsweep clean on it."
  },
  {
   "course": "decision",
@@ -417,7 +433,8 @@
   "class": "B",
   "correct_text_or_action": "Digest re-cut: ec2_dump.mjs Section 23 must print the golden case irr_above_clamp_inside_old_bracket (\"-100 then 1500\", true root 1400 percent, status above-clamp, irr null). Then -100, 1500 and 1400.0000 all resolve in the Expert section.",
   "safe_to_fix_now": false,
-  "notes": "The committed fiscal digest predates the EC2-5 IRR repair: Section 23 still describes the retired doubling bisection, and the same lessons already carry pre-existing NOT IN DIGEST hits (-10.0000, 1400.0000, -99, -20.4852; 304 NOT IN DIGEST in fiscal overall). The case is real: packages/engines/test-data/economics/goldens/fiscal_cases.json, note \"-100 then 1500: the root is 1400 percent\". The -100 only resolves by coincidence against irr_known_21pct_year_end (\"-100 then 121\", line 816). Not safe as a quick edit: full digest re-cut and re-pin on a live course."
+  "notes": "The committed fiscal digest predates the EC2-5 IRR repair: Section 23 still describes the retired doubling bisection, and the same lessons already carry pre-existing NOT IN DIGEST hits (-10.0000, 1400.0000, -99, -20.4852; 304 NOT IN DIGEST in fiscal overall). The case is real: packages/engines/test-data/economics/goldens/fiscal_cases.json, note \"-100 then 1500: the root is 1400 percent\". The -100 only resolves by coincidence against irr_known_21pct_year_end (\"-100 then 121\", line 816). Not safe as a quick edit: full digest re-cut and re-pin on a live course.",
+  "roundoff": "OPEN (not a bank edit): needs the full fiscal digest re-cut from ec2_dump.mjs after the EC2-5 IRR repair, which the B5 README lists as an owner decision."
  },
  {
   "course": "fiscal",

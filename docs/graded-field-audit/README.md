@@ -73,9 +73,9 @@ An empty sweep (no fields, or no annotations) exits 2. All controls hold.
 
 | Class | Fields |
 |---|---|
-| none | 850 |
+| none | 851 |
 | display | 227 |
-| redesign | 77 |
+| redesign | 76 |
 | tolerance | 17 |
 | **total** | **1171** |
 
@@ -85,7 +85,7 @@ An empty sweep (no fields, or no annotations) exits 2. All controls hold.
 - `guessable`: 14
 - `prompt_short`: 3
 
-Of the non-`none` fields, 319 carry an owner decision.
+Of the non-`none` fields, 310 carry an owner decision (319 before the round-off below took nine of them).
 
 **Where a learner gets the number:**
 - hand-calc: 450
@@ -210,7 +210,7 @@ Costed follow-on plan: [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md) §4 (wav
 | completion / beginner | `drift_surface_casing_m` | 5e-8 | 1e-7 | 0.31137225 sits exactly on the 7th-decimal boundary; half-up rounding failed |
 
 **Owner decisions:**
-- **fiscal:** 8 Designer-read fields, from 0.001 or 0.0001 to 0.05 or 0.1, because the Designer prints `toFixed(1)`. The alternative is a full-precision export.
+- **fiscal:** 8 Designer-read fields, from 0.001 or 0.0001 to 0.05 or 0.1, because the Designer prints `toFixed(1)`. The alternative is a full-precision export. **Shipped in the round-off** (`20261023c_ro_fiscal_tolerances.sql`, see below).
 - **Tightenings** (these can turn a past pass into a fail, so check attempts first):
   - petrophysics `phind_avg_sand_a` and `phiw_avg_sand_a`: 0.005 to 0.002. A wrong-method value one click away passes today.
   - petrophysics `rw_arps` and `rwe_ssp`: 0.0005 to 0.00005. The known 0.05 passes today.
@@ -227,13 +227,13 @@ About 480 fields have a relative tolerance below 1e-6. That is honest only where
 
 ### 6. Content errors found on the way
 
-- **cementing** advanced `min_standoff_rigid`: the graded value is the cased-hole blade ratio, while the prompt and lesson (l02:44) say the sag is subtracted in the open hole. Following them gives 0.65431, which fails. Owner: correct the copy, or regrade to the open-hole minimum.
+- **cementing** advanced `min_standoff_rigid`: the graded value is the cased-hole blade ratio, while the prompt and lesson (l02:44) say the sag is subtracted in the open hole. Following them gives 0.65431, which fails. Owner: correct the copy, or regrade to the open-hole minimum. **Copy corrected in the round-off** (the engine is right; see below).
 - **riskchange** intermediate `okomu_register_ratification_overdue` = 3: the engine returns "Not required" for an Emergency change that is not yet in effect (`managementOfChange.js:249-262`), and no lesson teaches it, so a learner following the lessons answers 4. Recommendation: keep 3 and add the rule to intermediate m05 l05 and m06 l02.
 - **welldata** intermediate walkthrough still documented the retired `irregular_uniform (1 yes / 0 no)` field after its 2026-09-16 redesign to `irregular_samples = 121`. **Fixed here** (lesson copy).
-- **gaswell**: the prompt says field 3 is the only hand-reachable value, but liquid per day is too.
+- **gaswell**: the prompt says field 3 is the only hand-reachable value, but liquid per day is too. **Prompt corrected in the round-off.**
 - **wellcontrol**: the dataset metadata says the shoe is at 1500 m, while the fixture and lesson use 1400 m.
 - **compliance**: beginner m01 l02:35 says "you are not asked to count days on a calendar", but the capstone requires exactly that.
-- **casingtubing**: g = 9.80665 is never stated, and `helical_limit_N` moves 45 N at 9.81 against tol 0.5 N. State g in the prompt.
+- **casingtubing**: g = 9.80665 is never stated, and `helical_limit_N` moves 45 N at 9.81 against tol 0.5 N. State g in the prompt. **Stated in the prompt and the capstone lesson in the round-off.**
 - **welltest, welldesign**: values of 1000 or more print with a thousands comma, which the answer box rejects when pasted.
 
 ## Shipped in this PR and the Suite PR
@@ -246,6 +246,23 @@ About 480 fields have a relative tolerance below 1e-6. That is honest only where
    - Owner script: `/root/b5-apply/apply.sh`.
 2. **Suite PR #553**: FDP `irrReason` prints each IRR root to 4 dp (`-43.2259%`, 2.8e-5 from the key, where `-43.2%` missed by 0.0259). It reaches production with the next Suite zip.
 3. The welldata intermediate walkthrough now matches the live field. It reaches production with the next NextGen zip.
+
+## Round-off (2026-09-21)
+
+The owner closed the B4/B5 stream with "fix the small items with the lead's best pick on each". The capstone half of that round-off:
+
+| File | What | Rows |
+|---|---|---|
+| `20261023b_ro_capstone_cementing.sql` | advanced prompt: field 5 is the smallest rigid standoff over both bores, the blade ratio of each interval's bore less that interval's sag, zero where the well is vertical | 1 prompt |
+| `20261023b_ro_capstone_casingtubing.sql` | advanced prompt: g taken as 9.80665 m/s2 | 1 prompt |
+| `20261023b_ro_capstone_gaswell.sql` | advanced prompt: field 6 is the second hand-reachable value alongside field 3 | 1 prompt |
+| `20261023c_ro_fiscal_tolerances.sql` | the 8 Designer-read fiscal fields LOOSENED to what the Designer prints: 0.05 for a single toFixed(1) reading, 0.1 for a difference of two | 8 tolerances |
+
+All four are generated by `roundoff_capstones.py` from a scratch replay, guarded like `20261022` (a prompt must hold its current or its corrected md5 and `fields` must equal the live value; a tolerance must hold its old or new value and its expected value), idempotent, and applied by `/root/roundoff-apply/apply.sh`, which refuses until the B4 fixes batch and `20261022` are applied. `normalize.py` records them as shipped, so `audit.py --post` checks the eight fiscal tolerances on the replay.
+
+**The cementing decision.** The engine (`cementing.js` `standoffProfile`) is physically right, so nothing is regraded. It evaluates every 30 m interval as the blade ratio in that interval's bore less that interval's mid-span sag. The cased 13-3/8 inch bore (0.315341 m) is wider than the open hole (0.31115 m), so a 0.29 m blade stands the pipe off less there, (0.29 - 0.244475)/(0.315341 - 0.244475) = 0.6424096181525695, and the slant well is vertical to 500 m, so no sag is subtracted there. The open-hole minimum, 0.6827896512935882 less its sag, is 0.6543142173967237. The graded minimum is therefore the cased value, which is what a rigid spacer in a vertical, wider bore does. The prompt and advanced m06 l02 now say so in method terms without naming the answer. The lesson that teaches it already exists (advanced m04 l03, "it is worse for a rigid centralizer").
+
+The bank half (sign hits, the crude gloss, earthmodel and seismolord) is in `docs/answer-length-audit/README.md` under "Round-off".
 
 ## Regrade impact
 
@@ -287,7 +304,7 @@ The annotations were written by separate reviewers, course by course. `normalize
 | carbon | 17 | 0 | 1 | 0 | 0 | 1 | 0 |
 | cashflow | 17 | 1 | 0 | 0 | 0 | 0 | 0 |
 | casingtubing | 14 | 0 | 4 | 0 | 1 | 4 | 0 |
-| cementing | 9 | 0 | 6 | 3 | 8 | 0 | 0 |
+| cementing | 10 | 0 | 6 | 2 | 8 | 0 | 0 |
 | completion | 17 | 1 | 0 | 0 | 0 | 0 | 2 |
 | compliance | 18 | 0 | 0 | 0 | 0 | 0 | 0 |
 | consequence | 16 | 0 | 2 | 0 | 0 | 0 | 0 |
