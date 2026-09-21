@@ -23,6 +23,7 @@ import fs from 'fs';
 const ROOT = process.env.EC2_ENGINES || '/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen/packages/engines';
 const E = await import(`${ROOT}/engines/economics/fiscalRegime.js`);
 const { fiscalTemplates } = await import(`${ROOT}/engines/economics/fiscalTemplates.js`);
+const IRRK = await import(`${ROOT}/engines/economics/irrContract.js`);
 const G = JSON.parse(fs.readFileSync(`${ROOT}/test-data/economics/goldens/fiscal_cases.json`, 'utf8'));
 
 const out = [];
@@ -32,6 +33,13 @@ const m = (x) => f(x, 4);          // money, $MM
 const r = (x) => f(x, 6);          // ratios and rates
 const p = (x) => f(x, 4);          // percent
 const clone = (o) => JSON.parse(JSON.stringify(o));
+// EC2-5: calculateIRR returns null with a status instead of 0 or its bracket.
+// A rate prints to four decimals; a null prints with the status that says why,
+// and multiple-roots lists the in-band roots the engine found.
+const irrOf = (res) => (res.irr !== null && res.irr !== undefined
+  ? p(res.irr)
+  : `null (${res.irrStatus}${Array.isArray(res.irrRoots) && res.irrRoots.length ? `; roots ${res.irrRoots.map(p).join(', ')}` : ''}${res.irrRootAboveBand ? '; another root above the band' : ''})`);
+const irrRows = (rows) => irrOf(E.calculateIRRResult(rows));
 // The Suite assigns a template's id by slugging its name; the goldens use the
 // same rule, one underscore per non-alphanumeric character, trailing ones
 // stripped ("USA - Gulf of Mexico" -> "usa___gulf_of_mexico").
@@ -294,7 +302,7 @@ w();
       if (d > worstPub) { worstPub = d; wherePub = `${c.id}, year ${x.year}`; }
     }
   }
-  w(`Swept rather than asserted. Across all six templates on all three projects, 450 rows, the largest disagreement between the two sums is ${worst.toExponential(4)} (${where}). Across all 28 published cash flow cases, 700 rows, it is ${worstPub.toExponential(4)} (${wherePub}). Both are floating point noise; the identity is exact.`);
+  w(`Swept rather than asserted. Across all six templates on all three projects, 450 rows, the largest disagreement between the two sums is ${worst.toExponential(4)} (${where}). Across all ${G.cashflow.length} published cash flow cases, ${G.cashflow.length * 25} rows, it is ${worstPub.toExponential(4)} (${wherePub}). Both are floating point noise; the identity is exact.`);
   w();
 }
 w('THIS IDENTITY USED TO FAIL, AND THAT IS WHY IT IS WORTH STATING. The engine header records two defects fixed in the E1 pass, both found by checking exactly this mass balance against the canonical production sharing semantics. Recovered cost was subtracted from profit oil and then DROPPED: not credited to the contractor, not counted to the government, so the two takes came to less than revenue minus cost by exactly the cost recovered, which on a normal case is hundreds of millions of USD a year evaporating out of the comparison the app exists to make. And opex was never recoverable, because the pool was seeded with capex and nothing was ever added to it. Cost oil is now credited to the contractor and the full cost outflow enters the pool.');
@@ -316,7 +324,7 @@ for (const [label, project] of [['DEFAULT PROJECT', DEFAULT_PROJECT], ['TEST PRO
   for (const t of fiscalTemplates) {
     const g = { id: slug(t.name), name: t.name, ...clone(t.regime) };
     const rows = cf(g, project); const s = totals(rows);
-    w(`| ${t.name} | ${m(s.ncf)} | ${m(s.gov)} | ${m(s.rev)} | ${m(s.tax)} | ${payback(rows) ?? 'null'} | ${payout(rows) ?? 'null'} | ${m(E.calculateNPV(rows, project.discountRate))} | ${p(E.calculateIRR(rows))} |`);
+    w(`| ${t.name} | ${m(s.ncf)} | ${m(s.gov)} | ${m(s.rev)} | ${m(s.tax)} | ${payback(rows) ?? 'null'} | ${payout(rows) ?? 'null'} | ${m(E.calculateNPV(rows, project.discountRate))} | ${irrRows(rows)} |`);
   }
   w();
 }
@@ -326,36 +334,30 @@ w();
 // -------------------------------------------------------------- Section 11
 w('# SECTION 11: Every published cash flow case, one line each (owned by Associate m05)');
 w();
-w('The golden\'s 28 cash flow cases, with the golden\'s own note and the headline the engine returns today.');
+w(`The golden\'s ${G.cashflow.length} cash flow cases, with the golden\'s own note and the headline the engine returns today. An IRR that is not a single rate prints as null with the engine\'s status (Section 16).`);
 w();
 // ONE published note does not match its own recorded values, so it is
 // annotated here rather than reprinted as if it were true. See the caution
 // under this list.
-const STALE_NOTE = {
-  capped_5pct_never_recovers:
-    'CAUTION, THIS NOTE IS WRONG AND THE GOLDEN\'S OWN NUMBERS SAY SO. The note claims "no payback, IRR 0"; the golden records paybackYear 3 and irr 54.6792, and the engine returns the same. Only the pool half of the note is right. Read the values, not the note.',
-  rfactor_tranche_crossing:
-    'CAUTION, THIS NOTE MISATTRIBUTES ITS OWN STEPS. The R factor crosses 1.0 between year 1 (0.781480) and year 2 (1.383252), not in year 3, and that crossing steps NOTHING because 60 percent is already the first tier\'s split. The step to 40 percent in year 3 is the 1.6 threshold (1.383252 to 1.846809). Only the 2.5 crossing in year 6 is as the note describes. The table in Section 14 is the record.',
-  rfactor_falls_back:
-    'CAUTION, THIS NOTE UNDERSTATES ITS OWN PEAK. The R factor does not peak "just above 2.5"; it peaks at 2.972625 in year 11. It crosses 2.5 upward in year 5 at 2.501684, which is probably the number the note meant. The fall back through 2.5 in year 23 and the step from 30 back up to 40 are as described.',
-};
+// EC2-4: the golden's three notes that once contradicted their own numbers
+// (capped_5pct, rfactor_tranche_crossing, rfactor_falls_back) were corrected
+// at source, so no note needs a caution any more.
+const STALE_NOTE = {};
 for (const c of G.cashflow) {
   const rows = cf({ id: c.regime.id, name: c.regime.name, ...c.regime }, c.project, c.capexMultiplier ?? 1, c.priceMultiplier ?? 1);
   const s = totals(rows);
   w(`- ${c.id}: ${c.note}`);
   if (STALE_NOTE[c.id]) w(`  ${STALE_NOTE[c.id]}`);
-  w(`  total contractor NCF ${m(s.ncf)}, total government take ${m(s.gov)}, total revenue ${m(s.rev)}, total royalty ${m(s.roy)}, total cost recovered ${m(s.rec)}, total profit oil ${m(s.po)}, total tax ${m(s.tax)}, payback year ${payback(rows) ?? 'null'}, payout year ${payout(rows) ?? 'null'}, NPV ${m(E.calculateNPV(rows, c.project.discountRate))} at ${c.project.discountRate} percent, IRR ${p(E.calculateIRR(rows))} percent, closing unrecovered pool ${m(rows[rows.length - 1].unrecoveredCostPool)}.`);
+  w(`  total contractor NCF ${m(s.ncf)}, total government take ${m(s.gov)}, total revenue ${m(s.rev)}, total royalty ${m(s.roy)}, total cost recovered ${m(s.rec)}, total profit oil ${m(s.po)}, total tax ${m(s.tax)}, payback year ${payback(rows) ?? 'null'}, payout year ${payout(rows) ?? 'null'}, NPV ${m(E.calculateNPV(rows, c.project.discountRate))} at ${c.project.discountRate} percent, IRR ${irrRows(rows)}, closing unrecovered pool ${m(rows[rows.length - 1].unrecoveredCostPool)}.`);
 }
 w();
-w('A CAUTION ON THE NOTES. The note on each line is the golden\'s own prose, reprinted verbatim, and THREE of the 28 make a claim their own numbers refuse. Each is annotated above.');
+w('A NOTE ON THE NOTES. Each note is the golden\'s own prose, reprinted verbatim. Three of them once made a claim their own numbers refused, and all three were corrected at source (EC2-4):');
 w();
-w('- `capped_5pct_never_recovers` says "no payback, IRR 0" against a recorded payback in year 3 and an IRR of 54.6792 percent. The reason its author expected no payback is the thing the case actually teaches: at a 5 percent cost recovery limit almost nothing comes back as cost oil, but the revenue that cannot be recovered becomes profit oil, and this regime splits profit oil 100 percent to the contractor, so the capital comes home through the profit share instead. Cost recovery is not the only way a contractor is paid back.');
-w('- `rfactor_tranche_crossing` dates the 1.0 crossing to year 3 when it happens in year 2, and credits it with a step that the 1.6 threshold caused. Crossing 1.0 changes nothing here, because the first tier\'s split is already in force below every threshold.');
-w('- `rfactor_falls_back` says the R factor peaks "just above 2.5" when it peaks at 2.972625, nearly half a unit higher. 2.501684 is where it crosses 2.5 going up, in year 5.');
+w('- `capped_5pct_pool_never_clears` (formerly capped_5pct_never_recovers) once said "no payback, IRR 0". It pays back in year 3, because at a 5 percent cost recovery limit the revenue that cannot be recovered becomes profit oil and this regime splits profit oil 100 percent to the contractor. Its NPV is zero at 54.6792 percent and again at -14.2614 percent, so the IRR is null with the status multiple-roots. Cost recovery is not the only way a contractor is paid back.');
+w('- `rfactor_tranche_crossing` once dated the 1.0 crossing to year 3. The R factor crosses 1.0 in year 2 and that crossing steps nothing, because 60 percent is already the first tier\'s split; the step to 40 percent in year 3 is the 1.6 threshold.');
+w('- `rfactor_falls_back` once said the R factor peaks "just above 2.5". It peaks at 2.972625 in year 11 and crosses 2.5 going up in year 5, at 2.501684.');
 w();
-w('None of the three is an engine defect. All three are prose, and all three would mislead a reader who trusted the sentence over the table. They are written up in the wave FINDINGS.md as EC2-4.');
-w();
-w('THE RULE, AND IT IS THE MOST PORTABLE THING IN THIS SECTION. Quote a golden\'s NUMBERS, never a golden\'s prose. A numeric sweep of all 28 notes against everything each case computes finds nothing wrong with any of them, because every number these three notes state does appear somewhere in its case: year 3 is a real year, 2.5 is a real threshold, 0 is a real value. What is wrong is which number is attached to which event, and no mechanical check reads an ASSOCIATION. Three human readers found these three, each by doing the arithmetic the sentence claimed.');
+w('THE RULE, AND IT IS THE MOST PORTABLE THING IN THIS SECTION. Quote a golden\'s NUMBERS, never a golden\'s prose. When the three notes above were wrong, a numeric sweep of every note against everything its case computes found nothing, because every number those notes stated did appear somewhere in the case: year 3 was a real year, 2.5 a real threshold, 0 a real value. What was wrong was which number was attached to which event, and no mechanical check reads an ASSOCIATION. Three human readers found them, each by doing the arithmetic the sentence claimed.');
 w();
 
 // -------------------------------------------------------------- Section 12
@@ -436,7 +438,7 @@ w('At 50 percent the same thing happens harder and for longer: the year 1 capex 
 w();
 w('Two published cases hold the extremes:');
 w();
-for (const id of ['capped_5pct_never_recovers', 'capped_40pct', 'never_recovers_huge_capex']) {
+for (const id of ['capped_5pct_pool_never_clears', 'capped_40pct', 'never_recovers_huge_capex']) {
   const c = CASE[id];
   const rows = cf({ id: c.regime.id, name: c.regime.name, ...c.regime }, c.project, c.capexMultiplier ?? 1, c.priceMultiplier ?? 1);
   const s = totals(rows);
@@ -511,8 +513,25 @@ w();
   w(`The decomposition is exact in the engine and only APPROXIMATE at the precision printed here: each column total is rounded on its own, so CIT alone plus RRT alone can miss the published stack by one unit in the last place. Unrounded, the sum of the two is ${(totals(citOnly).tax + totals(rrtOnly).tax).toFixed(10)} against a published ${totals(all).tax.toFixed(10)}, a difference of ${Math.abs(totals(citOnly).tax + totals(rrtOnly).tax - totals(all).tax).toExponential(4)}. Quote the columns, do not assert that the printed figures add.`);
   w();
 }
-w('The RRT column is zero in the early years and stays zero for a long time, because the uplift subtracts 20 percent of the WHOLE capex from the base every year. Section 24 sweeps the uplift.');
+w('The RRT column is zero in the early years, because relief is drawn from a pool opened once at total capex times one plus the uplift (EC2-6), and the RRT is charged only on what the pool no longer covers. The first year with a charge is the year the pool runs out. Section 24 sweeps the uplift.');
 w();
+{
+  // The Professional tier teaches the pool on this sweep (m04 l03), so the
+  // table is printed in its own section too; Section 24 prints it again, with
+  // two more columns, beside the retired annual allowance.
+  const base = clone(BRAZIL);
+  w(`The pool under a sweep: the "${base.name}" instruments on the DEFAULT PROJECT with the corporate income tax set to zero, so the tax is the RRT alone at ${base.tax.rrt} percent. Total capex is ${m(totals(cf(base, DEFAULT_PROJECT)).capex)} $MM.`);
+  w();
+  w('| rrtUpliftPct | total tax | total contractor NCF | total government cash flow | first year with a positive charge |');
+  w('| --- | --- | --- | --- | --- |');
+  for (const up of [0, 5, 10, 20, 30, 50]) {
+    const g = { ...clone(base), tax: { ...clone(base.tax), cit: 0, rrtUpliftPct: up }, id: `up_${up}`, name: `uplift ${up}` };
+    const rows = cf(g, DEFAULT_PROJECT); const s = totals(rows);
+    const firstPos = rows.find((x) => x.tax > 0);
+    w(`| ${up} | ${m(s.tax)} | ${m(s.ncf)} | ${m(s.gov)} | ${firstPos ? firstPos.year : 'null'} |`);
+  }
+  w();
+}
 w('The minimum tax and the maximum, on the published case that pins it:');
 w();
 for (const id of ['minimum_tax_binds', 'rrt_uplift_default_20', 'rrt_uplift_zero_respected']) {
@@ -546,17 +565,19 @@ w();
   }
   w();
 }
-w('`calculateIRR` is a bisection, and it is documented as robust with no artificial cap. It returns 0 when the flows never change sign, and 0 when the NPV at a rate of zero is not above zero, so a project whose only root is negative reports 0 rather than a negative rate. Otherwise it brackets by doubling from 100 percent, ten times, and if the NPV is still positive at the top of that range it REPORTS THE BOUND rather than a root. Then 80 bisections.');
+w('`calculateIRR` follows the shared contract in `engines/economics/irrContract.js` (EC2-5, owner decision 2026-09-15), the one the screening engine uses. It searches the band from -99 to 1000 percent and returns a number only when exactly one rate in that band zeroes the NPV; a negative root inside the band is reported as the negative rate it is. Otherwise it returns null and `calculateIRRResult` says why: `no-sign-change` when the flows never change sign, `no-root` when no rate in the band zeroes the NPV, `above-clamp` when the only root is above the band, and `multiple-roots` when several are, with `irrRoots` listing the ones inside and `irrRootAboveBand` flagging one beyond. The retired bisection returned 0 for a flow that never changes sign and for one whose only root is negative, and reported its 102400 percent bracket as a rate.');
 w();
-w('The five published IRR cases, engine value and the golden\'s own expectation:');
+w(`The band as irrContract.js declares it: IRR_BAND_LOWER_PCT ${p(IRRK.IRR_BAND_LOWER_PCT)} percent and IRR_BAND_UPPER_PCT ${p(IRRK.IRR_BAND_UPPER_PCT)} percent. Neither edge is ever returned as a rate.`);
+w();
+w(`The ${G.irr.length} published IRR cases, engine value and the golden\'s own expectation:`);
 w();
 for (const c of G.irr) {
-  const got = E.calculateIRR(c.cashFlows);
+  const got = E.calculateIRRResult(c.cashFlows);
   w(`- ${c.id}: ${c.note}`);
-  w(`  engine ${p(got)} percent, golden expects ${p(c.expected)} percent${c.trueIrr !== undefined ? `, the true root is ${p(c.trueIrr)} percent (oracle)` : ''}${c.engine?.disagreement ? `. Disagreement pinned: ${c.engine.disagreement}` : ''}. NPV at 10 percent is ${m(c.npvAt10)}.`);
+  w(`  flows ${c.cashFlows.map((x) => x.contractorNCF).join(', ')}; engine ${irrOf(got)}, golden expects ${irrOf(c.expected)}${c.trueIrr !== undefined ? `, the true root is ${p(c.trueIrr)} percent (oracle)` : ''}${c.engine?.disagreement ? `. Disagreement pinned: ${c.engine.disagreement}` : ''}. NPV at 10 percent is ${m(c.npvAt10)}.`);
 }
 w();
-w('Two of the five are the failure modes. `irr_npv0_negative` has flows of -100 then 90, loses money at every rate, and reports 0 percent; a reader who takes 0 for "breaks even exactly" has it backwards. `irr_beyond_bracket` has flows of -1 then 2000, a true rate of 199900 percent, and reports 102400 percent, which is the bracket the doubling reached and not a root at all. Section 23 returns to it.');
+w('Three of these are the retired failure modes. `irr_all_positive_no_sign_change` used to print 0 and is now null with the status no-sign-change. `irr_negative_root_reported` has flows of -100 then 90, loses money at every rate, used to print 0, and now reports its root, -10.0000 percent. `irr_above_clamp_past_old_bracket` has flows of -1 then 2000 and a true rate of 199900 percent; the retired bisection reported 102400 percent, the bracket its doubling reached, and the engine now returns null with the status above-clamp. Section 23 returns to it.');
 w();
 // -------------------------------------------------------------- Section 17
 w('# SECTION 17: The comparison and its summary (owned by Expert m01)');
@@ -572,7 +593,7 @@ for (const c of G.comparisons) {
   w();
   w('| rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |');
   w('| --- | --- | --- | --- | --- | --- | --- | --- |');
-  res.summary.forEach((s, i) => w(`| ${i + 1} | ${s.name} | ${m(s.npv)} | ${p(s.irr)} | ${s.paybackPeriod ?? 'null'} | ${s.rFactorPayoutYear ?? 'null'} | ${m(s.govTake)} | ${p(s.effectiveTaxRate)} |`));
+  res.summary.forEach((s, i) => w(`| ${i + 1} | ${s.name} | ${m(s.npv)} | ${irrOf(s)} | ${s.paybackPeriod ?? 'null'} | ${s.rFactorPayoutYear ?? 'null'} | ${m(s.govTake)} | ${p(s.effectiveTaxRate)} |`));
   w();
 }
 w('`effectiveTaxRate` in this table is government take divided by government take plus contractor take, where contractor take has TOTAL CAPEX ADDED BACK. The add-back is what makes it a rate on profit rather than a rate on cash. Section 19 shows the other definition, in the same result object.');
@@ -610,7 +631,7 @@ w();
   w('| --- | --- | --- | --- | --- | --- | --- | --- |');
   for (const x of G.priceSweep) {
     const e = x.expected;
-    w(`| ${x.id} | ${m(e.npv)} | ${p(e.irr)} | ${m(e.totalContractorNCF)} | ${m(e.totalGovTake)} | ${e.paybackYear ?? 'null'} | ${e.rFactorPayoutYear ?? 'null'} | ${m(e.finalUnrecoveredPool)} |`);
+    w(`| ${x.id} | ${m(e.npv)} | ${e.irr === null ? `null${e.irrStatus ? ` (${e.irrStatus})` : ''}` : p(e.irr)} | ${m(e.totalContractorNCF)} | ${m(e.totalGovTake)} | ${e.paybackYear ?? 'null'} | ${e.rFactorPayoutYear ?? 'null'} | ${m(e.finalUnrecoveredPool)} |`);
   }
   w();
 }
@@ -697,7 +718,7 @@ w('| case | npv | irr | totalContractorNCF | totalGovTake | paybackYear | rFacto
 w('| --- | --- | --- | --- | --- | --- | --- |');
 for (const x of G.capexSweep) {
   const e = x.expected;
-  w(`| ${x.id} | ${m(e.npv)} | ${p(e.irr)} | ${m(e.totalContractorNCF)} | ${m(e.totalGovTake)} | ${e.paybackYear ?? 'null'} | ${e.rFactorPayoutYear ?? 'null'} |`);
+  w(`| ${x.id} | ${m(e.npv)} | ${e.irr === null ? `null${e.irrStatus ? ` (${e.irrStatus})` : ''}` : p(e.irr)} | ${m(e.totalContractorNCF)} | ${m(e.totalGovTake)} | ${e.paybackYear ?? 'null'} | ${e.rFactorPayoutYear ?? 'null'} |`);
 }
 w();
 w('What "resilience to cost overrun" therefore measures is the NPV given up between a 20 percent UNDERSPEND and a 40 percent overrun, not the 50 percent overrun the axis promises. The verdict sentence is not false, it is answering a narrower question than the label on the chart.');
@@ -784,26 +805,30 @@ w();
 // -------------------------------------------------------------- Section 23
 w('# SECTION 23: The IRR that reports its bracket (owned by Expert m05)');
 w();
-w('This is finding F4. `calculateIRR` brackets the root by starting at 100 percent and doubling ten times, reaching 102400 percent. If the NPV is STILL positive there it returns 102400 rather than continuing, and 102400 is then printed as an internal rate of return.');
+w('This is finding F4, repaired in EC2-5. The retired `calculateIRR` bracketed the root by starting at 100 percent and doubling ten times, reaching 102400 percent. If the NPV was STILL positive there it returned 102400 rather than continuing, and 102400 was printed as an internal rate of return. The repaired function searches the band from -99 to 1000 percent and returns null with the status above-clamp when the only root is above it.');
 w();
 {
-  const flows = IRRC['irr_beyond_bracket'].cashFlows;
-  w(`On the published case, cash flows ${JSON.stringify(flows)}: engine ${p(E.calculateIRR(flows))} percent, oracle ${p(IRRC['irr_beyond_bracket'].trueIrr)} percent.`);
+  const c = IRRC['irr_above_clamp_past_old_bracket'];
+  const flows = c.cashFlows;
+  w(`On the published case ${c.id}, cash flows ${flows.map((x) => x.contractorNCF).join(' then ')}: engine ${irrOf(E.calculateIRRResult(flows))}, oracle root ${p(c.trueIrr)} percent. The retired bisection returned 102400.0000.`);
   w();
-  w('The NPV of those flows at a range of rates, all from `calculateNPV`, which is what makes the bracket visible:');
+  w('The NPV of those flows at a range of rates, all from `calculateNPV`, which is what makes the old bracket visible:');
   w();
   w('| rate percent | NPV |');
   w('| --- | --- |');
   for (const rate of [0, 100, 1600, 25600, 102400, 199900, 400000]) w(`| ${rate} | ${m(E.calculateNPV(flows, rate))} |`);
   w();
+  const c2 = IRRC['irr_above_clamp_inside_old_bracket'];
+  w(`A root INSIDE the old bracket: ${c2.id}, cash flows ${c2.cashFlows.map((x) => x.contractorNCF).join(' then ')}, oracle root ${p(c2.trueIrr)} percent. The doubling would have reported that root as a rate, because it lies inside 102400. It is above the 1000 percent band, so the engine returns ${irrOf(E.calculateIRRResult(c2.cashFlows))}.`);
+  w();
 }
-w('At real project scale this is a curiosity: no field returns two thousand times its outlay in one year. It matters as a shape. A solver that reports the edge of its own search as an answer is the same failure as the screening engine reporting its 1000 percent Newton clamp, and the tell is identical in both, a suspiciously round number where a rate should be. 102400 is 100 doubled ten times, 1000 is a clamp, and neither is a root.');
+w('At real project scale this is a curiosity: no field returns two thousand times its outlay in one year. It matters as a shape. A solver that reported the edge of its own search as an answer was the same failure as the screening engine reporting its 1000 percent Newton clamp, and the tell was identical in both, a suspiciously round number where a rate should be. 102400 is 100 doubled ten times, 1000 was a clamp, and neither is a root. Both engines now share one contract and return null with a status instead.');
 w();
 
 // -------------------------------------------------------------- Section 24
-w('# SECTION 24: The uplift charged every year (owned by Expert m05)');
+w('# SECTION 24: The uplift charged every year, retired (owned by Expert m05)');
 w();
-w('This is finding F5, and the engine calls it a screening approximation in its own comment. The RRT base is the contractor profit share MINUS `totalCapex * rrtUpliftPct / 100`, and that subtraction happens in EVERY one of the 25 years. At the default uplift of 20 percent, the relief given over the life is five times the whole capex.');
+w('This was finding F5, repaired in EC2-6 (owner decision 2026-09-15). The retired engine took the RRT base as the contractor profit share MINUS `totalCapex * rrtUpliftPct / 100` in EVERY one of the 25 years, so at the default uplift of 20 percent the relief given over the life was five times the whole capex. The repaired engine opens ONE uplifted pool, total capex times one plus the uplift, and draws it against the profit share in every year that share is positive, the relief being the lesser of the base and what is left of the pool. The pool is never refilled, so relief over the life can never exceed it.');
 w();
 {
   const base = clone(BRAZIL);
@@ -818,10 +843,10 @@ w();
     w(`| ${up} | ${m(s.tax)} | ${m(s.ncf)} | ${m(s.gov)} | ${m(E.calculateNPV(rows, 10))} | ${firstPos ? firstPos.year : 'null'} |`);
   }
   w();
-  w(`Total capex on this project is ${m(totals(cf(base, DEFAULT_PROJECT)).capex)} $MM, so a 20 percent uplift removes that fraction of it from the RRT base in each of 25 years. The two published cases pin the default and the override: rrt_uplift_default_20 and rrt_uplift_zero_respected, both in Section 15. (The golden's note on the second spells the parameter rrtUpliptPct. The parameter the engine reads is rrtUpliftPct; the note has a typo and the case itself is correct.)`);
+  w(`Total capex on this project is ${m(totals(cf(base, DEFAULT_PROJECT)).capex)} $MM, so a 20 percent uplift opens a pool of 1.2 times that, drawn down once and never refilled. The two published cases pin the default and the override: rrt_uplift_default_20 and rrt_uplift_zero_respected, both in Section 15.`);
   w();
 }
-w('The point for a reader is not that the approximation is indefensible. It is that a parameter named "uplift percent" reads like a one-off capital uplift and behaves like an annual allowance, and the only way to know which it is is to sweep it and watch the tax move.');
+w('The point for a reader is the shape under a sweep. Total tax falls by a fixed amount for each point of uplift while the first charged year slides later, which is what a pool looks like. An annual allowance would have cut the tax by far more per point. The only way to know which a parameter is, is to sweep it and watch the tax move.');
 w();
 
 // -------------------------------------------------------------- Section 25
@@ -854,7 +879,7 @@ w('| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |');
 for (const t of fiscalTemplates) {
   const g = { id: slug(t.name), name: t.name, ...clone(t.regime) };
   const rows = cf(g, ODIDI); const s = totals(rows);
-  w(`| ${t.name} | ${m(s.rev)} | ${m(s.ncf)} | ${m(s.gov)} | ${m(s.tax)} | ${m(s.rec)} | ${m(rows[rows.length - 1].unrecoveredCostPool)} | ${payback(rows) ?? 'null'} | ${payout(rows) ?? 'null'} | ${m(E.calculateNPV(rows, ODIDI.discountRate))} | ${p(E.calculateIRR(rows))} |`);
+  w(`| ${t.name} | ${m(s.rev)} | ${m(s.ncf)} | ${m(s.gov)} | ${m(s.tax)} | ${m(s.rec)} | ${m(rows[rows.length - 1].unrecoveredCostPool)} | ${payback(rows) ?? 'null'} | ${payout(rows) ?? 'null'} | ${m(E.calculateNPV(rows, ODIDI.discountRate))} | ${irrRows(rows)} |`);
 }
 w();
 w('And the full comparison on ODIDI, with the sweeps and the verdicts the engine derives:');
@@ -864,7 +889,7 @@ w();
   const res = await E.runFiscalComparison({ projectInputs: ODIDI, regimes });
   w('| rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |');
   w('| --- | --- | --- | --- | --- | --- | --- | --- |');
-  res.summary.forEach((s, i) => w(`| ${i + 1} | ${s.name} | ${m(s.npv)} | ${p(s.irr)} | ${s.paybackPeriod ?? 'null'} | ${s.rFactorPayoutYear ?? 'null'} | ${m(s.govTake)} | ${p(s.effectiveTaxRate)} |`));
+  res.summary.forEach((s, i) => w(`| ${i + 1} | ${s.name} | ${m(s.npv)} | ${irrOf(s)} | ${s.paybackPeriod ?? 'null'} | ${s.rFactorPayoutYear ?? 'null'} | ${m(s.govTake)} | ${p(s.effectiveTaxRate)} |`));
   w();
   w(`Price sweep, government share percent at ${res.sensitivityData.price.labels.join(', ')} USD per bbl:`);
   w();

@@ -194,6 +194,11 @@ const buildDigest = () => {
   w(L.PLANNED_VALUE_RULE);
   s8.published.forEach((x) => w(`- published "${x.name}": engine EV ${f(x.earnedValue, 4)}, AC ${f(x.totalActuals, 4)}, CPI ${x.cpi === null ? 'null' : r(x.cpi)}, SPI ${x.spi === null ? 'null' : r(x.spi)}.`));
   w();
+  {
+    const neg = L.refusalsAndFlags().afe.find((x) => x.name === 'negative progress named by code');
+    w(`Progress is refused below zero, naming the line. The published case "${neg.name}": ${neg.ok ? 'accepted' : `${neg.errorName}: "${neg.error}"`}`);
+    w();
+  }
 
   // Section 9
   const s9 = L.asOfTable();

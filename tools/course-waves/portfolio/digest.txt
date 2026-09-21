@@ -218,6 +218,8 @@ Planned value is the budget times the elapsed fraction of the window at the as-o
 - published "progress beyond 100 percent earns beyond the budget": engine EV 150.0000, AC 90.0000, CPI 1.666667, SPI 1.500000.
 - published "suite test: empty AFE": engine EV 0.0000, AC 0.0000, CPI 1.000000, SPI 1.000000.
 
+Progress is refused below zero, naming the line. The published case "negative progress named by code": AfeInputError: "Cost item "CMP-02" has negative progress (-20 percent). Progress runs from 0 to 100 percent."
+
 # SECTION 9: The as-of date (owned by Professional m04)
 
 | as of | time progress | planned value | earned value | SPI | CPI |

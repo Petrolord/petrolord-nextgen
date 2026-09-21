@@ -436,6 +436,14 @@ w('| survey cost | emvWithInfo card | netVoi card | tree root choice |');
 w('| --- | --- | --- | --- |');
 for (const id of ['freeInformation', 'costSweep_5', 'suiteDefaults', 'costSweep_20', 'costExactlyValue', 'costSweep_40', 'pricey']) { const c = GC.voi[id]; const x = V.generateVoiData(c.inputs); w(`| ${m(c.inputs.infoScenario.cost)} | ${x.kpis.emvWithInfo} | ${x.kpis.netVoi} | ${x.tree ? x.tree.branches[x.tree.bestBranchIndex].label : 'no tree'} |`); }
 w();
+{
+  // B5 signhits (2026-09-21): the Professional lessons (m02 l05, m05 l04) cite
+  // the pre-repair IRRI cards as history, so the figures are printed in their
+  // own tier's section as well as in Section 11.
+  const old = legacyCards(IRRI_FORM());
+  w(`Before the EC4-0 repair, the IRRI inputs (both indicators typed 20 / 80 percent) printed a gross voi of ${old.voi.toFixed(2)} and a netVoi card of ${old.net.toFixed(2)} (reconstructed from engine calls, derived). The repaired Analyzer withholds both; Section 11 reads the case in full.`);
+  w();
+}
 
 // ------------------------------------------------------------- Section 11
 w('# SECTION 11: Inputs that contradict each other (owned by Expert m01)');
