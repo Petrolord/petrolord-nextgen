@@ -1,0 +1,410 @@
+{
+ "course": "consequence",
+ "sources": {
+  "beginner": "cq-release panel (NextGen /root/wt-b5-nextgen/src/components/course/panels/consequence/ReleaseExplorer.jsx), all inputs editable, every number printed six(), toFixed(6)",
+  "intermediate": "cq-fire panel (/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx): Flame view six decimals; View view twelve-decimal Fmax on TYPED length and tilt; Heat view hard-wired to ERHA",
+  "advanced": "cq-harm panel (/root/wt-b5-nextgen/src/components/course/panels/consequence/HarmExplorer.jsx): Blast, Probit (psig input) and Toxic views, six decimals"
+ },
+ "fields": [
+  {
+   "tier": "beginner",
+   "key": "okan_condensate_leak_mass_rate_kg_s",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/ReleaseExplorer.jsx:61 (Outflow view, liquid Mass rate tile)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Liquid inputs (Cd, hole, density, head, pressure above liquid) are all editable; tile prints six(l.massRateKgS). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "okan_gas_riser_choked_mass_rate_kg_s",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/ReleaseExplorer.jsx:79 (Outflow view, gas Mass rate tile)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Gas hole, upstream P, T, molar mass, gamma editable; ambient defaults to 101325 Pa as stated. Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "okan_vent_subsonic_mass_rate_kg_s",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/ReleaseExplorer.jsx:79 (Outflow view, gas Mass rate tile)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Same gas view at 128000 Pa (subsonic regime shown beside it). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "okan_deck_spill_equivalent_diameter_m",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/ReleaseExplorer.jsx:133 (Pool view, Equivalent diameter tile)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing a pool thickness switches to an unconfined pool; prints six(p.equivalentDiameterM). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": "Also a one-line hand calc (sqrt(4 V / (pi h))), full precision.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "okan_plume_receptor_concentration_ppm",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/ReleaseExplorer.jsx:195 (Plume view, Concentration ppm tile)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "x, y, z, release height, class, molar mass editable; engine converts at 298.15 K and 101325 Pa by default, matching 'convert at 25 C'. Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "okan_plume_far_distance_m",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/ReleaseExplorer.jsx:204 (Plume view, Far distance tile)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Class E, target 21 mg/m3, receptor 1.7 m, release 12 m typed into the same view; root found by the engine. Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "yokri_flame_length_with_wind_m",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:62 (Flame view)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Fuel kerosene (Babrauskas 0.039), D, wind editable; air density is the engine default 1.2 (not a panel input but equals the prompt). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "yokri_flame_tilt_deg",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:63 (Flame view)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "D, wind, kinematic viscosity editable; prints six(tl.tiltDeg). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "yokri_surface_emissive_power_mudan_w_m2",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:64 (Flame view, method = from the diameter (Mudan))",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Method selector switches the SEP tile; prints six(). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "yokri_surface_emissive_power_actual_w_m2",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:64 (Flame view, method = radiative fraction with soot)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Chained internally from the unrounded flame length; prints six(). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "yokri_view_factor_max",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:115 (View view, Fmax tile; inputs typed at :103-106)",
+   "printed": {
+    "decimals": 12
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:7 twelve = toFixed(12)",
+   "prompt_precision": "The view factor to twelve decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:146 -> make the Heat view take the Flame view's pool inputs (fuel, diameter, wind, viscosity, heat of combustion, radiative and soot fractions) instead of erhaArgs(), so it prints Fmax (twelve) and the heat flux (six) from the unrounded chain; alternatively print flame length and tilt to twelve decimals at FireExplorer.jsx:62-63"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix (Heat view driven by the learner's pool). The tolerance alternative would be about 2.5e-9 (sensitivities: 1.6e-9 for half a unit in L, 3.1e-10 for half a unit in tilt), which throws away the twelve-decimal design the wave chose for this class.",
+   "evidence": "The View view takes flame length and tilt as TYPED numbers, and the Flame view prints them to six decimals only. Running the engine on the printed L = 20.618159 m and tilt = 53.023688 deg gives Fmax 0.046024297336 against expected 0.046024298275 (difference 9.4e-10, tol 5e-13). The Heat view that chains unrounded is hard-wired to ERHA (FireExplorer.jsx:146 erhaArgs()), so it cannot be set to YOKRI.",
+   "notes": "The capstone brief (intermediate/m06.../l04-the-capstone-brief.md) tells the learner to 'carry the flame length and tilt into the view factor view' and 'round nothing on the way', which the six-decimal print makes impossible. A learner who follows the brief fails.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "yokri_solid_flame_heat_flux_w_m2",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:161 (Heat view, ERHA only) / hand calc q = tau SEP Fmax",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:146 -> Heat view driven by the learner's pool inputs (same change as yokri_view_factor_max), printing six(r.heatFluxWM2) for YOKRI directly"
+   },
+   "owner_decision": true,
+   "recommendation": "Same display fix as the view factor; one change repairs both. Tolerance alternative would be about 6e-5 W/m2.",
+   "evidence": "The Heat view is fixed to ERHA (FireExplorer.jsx:146 base = erhaArgs(); only distance and tau are editable), so YOKRI's flux must be multiplied by hand from the printed SEP and the View view's Fmax. With the Fmax the panel yields (see view factor), 0.765 x 37784.162898 x 0.046024297336 = 1330.327004 against expected 1330.327031 (difference 2.7e-5, tol 5e-7). With an exact Fmax the hand product would pass (2.5e-8).",
+   "notes": "Defect is inherited from the view factor chain.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "pennington_blast_overpressure_pa",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/HarmExplorer.jsx:58 (Blast view)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "TNT charge and distance typed; prints six(f.overpressurePa). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "pennington_blast_distance_for_overpressure_m",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/HarmExplorer.jsx:61 (Blast view, inverse)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Charge and target overpressure typed; prints six(inv.distanceM). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "pennington_overpressure_fatality_probability",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/HarmExplorer.jsx:108 (Probit view, overpressure Probability; input in psig at :94)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "The probit view takes psig, so the learner divides 65000 Pa by PA_PER_PSI as the brief says (advanced/m06.../l04-the-capstone-brief.md:24). Full-precision psig reproduces the answer exactly; psig typed to six decimals moves it by 2.5e-9, well inside tol 5e-7.",
+   "notes": "Four-decimal psig would move it by 2.5e-6 and fail; the brief says to divide, and a calculator gives full precision.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "pennington_thermal_lethality_probability",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/HarmExplorer.jsx:102 (Probit view, eisenberg)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Heat flux and time typed; prints six(th.probability). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "pennington_toxic_lethality_probability",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/HarmExplorer.jsx:166 (Toxic view, lees-chlorine, ppm)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Prints six(r.probability). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "pennington_ammonia_lethality_probability",
+   "source": "nextgen-panel",
+   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/HarmExplorer.jsx:166 (Toxic view, lees-ammonia, typed in mg/m3 with molar mass and temperature)",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1,
+   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "prompt_precision": "Every value to six decimals.",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Unit selector, molar mass 17.031 and temperature 288.15 editable; engine converts to the preset's ppm. Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  }
+ ]
+}

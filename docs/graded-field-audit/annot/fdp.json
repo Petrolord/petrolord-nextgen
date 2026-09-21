@@ -1,0 +1,410 @@
+{
+ "course": "fdp",
+ "sources": {
+  "beginner": "Suite FDP Accelerator (src/pages/apps/FDPAccelerator.jsx): scenario cards in src/components/fdp/modules/scenarios/ScenarioManager.jsx (NPV toFixed(1), IRR 'n/a' on multiple roots), roots only in the plan economics card src/components/fdp/modules/cost/EconomicsAnalysis.jsx:41-62 via src/utils/fdp/planEconomics.js:181 irrReason; reserves src/components/fdp/modules/subsurface/ReservesTable.jsx:146; sums are also hand-calc from the prompt. NextGen panels are EGINA-only (panelCapstoneGuard.test.js).",
+  "intermediate": "Suite FDP Accelerator: schedule CriticalPath.jsx:46/53 (integers), wells WellForm.jsx:178 days (integer) with cost printed only as $M toFixed(1) (WellForm.jsx:182, WellInventory.jsx:50), facilities FacilitiesCostEstimation.jsx:19/34 toFixed(1) $M. Well cost = days x rig x 2.5 is taught in intermediate/m03/l02.",
+  "advanced": "EV and completion ratio are hand-calc as taught in advanced/m04/l01; PV and SPI need the as-of date 2030-03-31, but Project Management Pro pins the as-of to the machine clock (src/pages/apps/ProjectManagementPro.jsx:26,111) and prints SPI toFixed(2) (src/components/projectmanagement/SnapshotCard.jsx:88); UKOT NPV items from FDP Accelerator ScenarioManager.jsx:144 and the tornado src/components/fdp/modules/cost/SensitivityAnalysis.jsx (Recharts Tooltip, no formatter)."
+ },
+ "fields": [
+  {
+   "tier": "beginner",
+   "key": "ukot_concept_capex_mm",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/scenarios/ScenarioManager.jsx:131",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/scenarios/ScenarioManager.jsx:131",
+   "prompt_precision": "Money to four decimals in million USD",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Scenario card prints `(CAPEX ${capex.toFixed(0)}MM)`; 410+760+150 = 1320 exactly, also a hand sum of the prompt's three capex fields (taught in beginner m06/l02).",
+   "notes": "Integer quantity with tol 0.001; honest.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "ukot_oil_p50_mmbbl",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/subsurface/ReservesTable.jsx:146",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/subsurface/ReservesTable.jsx:146",
+   "prompt_precision": "reserves to four decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Per-fluid total `t.p50Sum.toFixed(1)` prints 111.0; 82+29 = 111 exactly, a hand sum of prompt inputs.",
+   "notes": "Probe hit at 111 in ScheduleExplorer is a concatenated risk-table string (\"...1 1 1 Low\"), not a leak.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "ukot_gas_p50_bcf",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/subsurface/ReservesTable.jsx:146",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/subsurface/ReservesTable.jsx:146",
+   "prompt_precision": "reserves to four decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "`t.p50Sum.toFixed(1)` prints 74.0; 46+28 = 74 exactly.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "ukot_base_npv_mm",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/scenarios/ScenarioManager.jsx:144",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/scenarios/ScenarioManager.jsx:144",
+   "prompt_precision": "Money to four decimals in million USD",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Card prints `${npv.toFixed(1)}M` = 1694.1, |1694.1-1694.0732| = 0.027 <= tol 0.05; tol equals half a unit of the printed place.",
+   "notes": "Prompt asks four decimals but the app prints one; tol 0.05 absorbs the one-decimal display, so a learner is not failed. EconomicsAnalysis.jsx:51 prints the same toFixed(1).",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "ukot_base_irr_low_root_pct",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/cost/EconomicsAnalysis.jsx:41-62",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/utils/fdp/planEconomics.js:184",
+   "prompt_precision": "the rate to four decimals in percent",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/utils/fdp/planEconomics.js:184 -> format each root with r.toFixed(4) instead of r.toFixed(1) (keep the % suffix); update engines191Plan.test.jsx:120 expectation"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix (prompt explicitly asks four decimals). Fallback if the app cannot change: tol 0.01 -> 0.05 (half a unit of the one printed decimal).",
+   "evidence": "CONFIRMED: irrReason maps roots with `${r.toFixed(1)}%`, so the card reads 'the NPV is zero at -43.2% and ...'; |-43.2 - (-43.2259)| = 0.0259 > tol 0.01, so a learner who copies the only printed value fails. The scenario card (ScenarioManager.jsx:150) shows only 'n/a' on multiple roots.",
+   "notes": "Not hand-calc at Associate tier: no beginner lesson teaches root-finding on the cash flow (lessons only say status multiple-roots). The NextGen ValueExplorer prints roots to four decimals (ValueExplorer.jsx:108) but for EGINA only.",
+   "leak": false,
+   "shipped": {
+    "suite": "src/utils/fdp/planEconomics.js irrReason prints each root to 4 decimals"
+   }
+  },
+  {
+   "tier": "beginner",
+   "key": "ukot_alternative_npv_mm",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/scenarios/ScenarioManager.jsx:144",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/scenarios/ScenarioManager.jsx:144",
+   "prompt_precision": "Money to four decimals in million USD",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Card prints 695.4 after relinking the Board case to the tie-back concept; |695.4-695.4146| = 0.015 <= 0.05.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "ukot_network_duration_days",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/schedule/CriticalPath.jsx:46",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/schedule/CriticalPath.jsx:46",
+   "prompt_precision": "Days as whole numbers",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "`{durationDays} d` integer; 380+120+171 = 671 by the forward pass taught in intermediate m01 and m06/l02.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "ukot_calendar_span_days",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/schedule/CriticalPath.jsx:53",
+   "printed": "integer",
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/schedule/CriticalPath.jsx:53",
+   "prompt_precision": "Days as whole numbers",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "`${calendarDays} d`; 2028-06-01 to 2030-07-05 = 764 whole calendar days, also hand-countable (advanced m04/l05 states the whole-day rule).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "ukot_uk01_well_cost_usd",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/wells/WellForm.jsx:178-182",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1e-06,
+   "display_ref": "src/components/fdp/modules/wells/WellInventory.jsx:50",
+   "prompt_precision": "well costs to the nearest USD",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/fdp/modules/wells/WellInventory.jsx:50 and WellForm.jsx:182 -> print well.cost as whole USD (Math.round(cost).toLocaleString('en-US')) instead of (cost/1e6).toFixed(1)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix, low urgency: the exact value is derivable from the integer days the form prints (57 days) x 265000 x 2.5, which intermediate m03/l02 teaches; tol 1 USD is honest for that route.",
+   "evidence": "The only printed cost is `${(formData.cost / 1000000).toFixed(1)}M` = 37.8M, 37500 USD from 37762500 (tol 1). WellForm.jsx:178 prints `{formData.days} days` as an integer, and cost = days x rate x (1+1.5).",
+   "notes": "Learner who reads the cost column instead of deriving fails.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "ukot_campaign_cost_usd",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/wells/WellInventory.jsx:50",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1e-06,
+   "display_ref": "src/components/fdp/modules/wells/WellInventory.jsx:50",
+   "prompt_precision": "well costs to the nearest USD",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/fdp/modules/wells/WellInventory.jsx:50 -> whole-USD cost per row (and a whole-USD campaign total); WellStrategy.jsx shows rig days only"
+   },
+   "owner_decision": true,
+   "recommendation": "Same as UK-01: display fix; derivable meanwhile as total rig days (WellStrategy.jsx:37 prints rigDays) x 265000 x 2.5 = 130 x 662500.",
+   "evidence": "No whole-USD cost is printed anywhere; the inventory sums of 37.8+25.8+22.5 (toFixed(1) $M) give 86.1M, 25000 USD off with tol 1.",
+   "notes": "WellStrategy.jsx:37 prints `{rigDays} rig days`, so the derivation route exists and is taught (m03/l02 builds the campaign total the same way).",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "ukot_platform_capex_mm",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:19",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:19",
+   "prompt_precision": "facility money to four decimals in million USD",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:19 (and :26, :34, :42) -> costs.capex.toFixed(4); also FacilitiesForm.jsx:37-38 stores estimates rounded to toFixed(1), which FacilitiesList.jsx:49 then shows"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix (prompt asks four decimals). Fallback: tol 0.01 -> 0.05.",
+   "evidence": "`${costs.capex.toFixed(1)}M` prints 743.1; |743.1-743.1214| = 0.021 > tol 0.01. Not hand-calc: the Platform base cost and reference nameplate are not in the lessons (m04/l02 gives FPSO and tie-back only).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "ukot_platform_decommissioning_mm",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:34",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:34",
+   "prompt_precision": "facility money to four decimals in million USD",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:34 -> costs.decommissioning.toFixed(4)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix together with capex. Fallback: tol 0.01 -> 0.05.",
+   "evidence": "Card prints 111.5; |111.5-111.4682| = 0.032 > tol 0.01.",
+   "notes": "A learner who applies the taught 15 percent (m04/l03) to the printed capex 743.1 gets 111.465, which passes; the card itself fails.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "meren_planned_value_usd",
+   "source": "unobtainable",
+   "source_ref": "src/pages/apps/ProjectManagementPro.jsx:111",
+   "printed": {
+    "decimals": 0
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/projectmanagement/ProgressUpdateForm.jsx:130",
+   "prompt_precision": "USD to the nearest unit",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/pages/apps/ProjectManagementPro.jsx:111 -> add an as-of date input (default today) and pass it to calculateEVM({ asOf }) instead of todayIsoDate(); show PV on the snapshot card to whole USD"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix (an as-of input). Without it the prompt's 2030-03-31 cannot be set; the app measures to today (2026), before every planned window, so PV reads 0. Hand-calc is not a safe fallback: the day-count convention is not taught and inclusive vs exclusive days moves PV by 16000-30000 USD against tol 1.",
+   "evidence": "`calculateEVM(tasksData || [], { asOf: todayIsoDate() })` with todayIsoDate() from the machine clock. Lessons (advanced m04/l02) say the budget is 'spread across that window' without the day rule; only (end - start) days, as-of exclusive, reproduces 8205591.4674.",
+   "notes": "The course itself (m04/l05) says the as-of date is 'a parameter, not a clock', which the Suite app contradicts.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "meren_earned_value_usd",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/fdp/advanced/m04-earned-value-to-a-date/l01-three-numbers-and-two-indexes.md",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/components/projectmanagement/SnapshotCard.jsx:37",
+   "prompt_precision": "USD to the nearest unit",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "EV by hand as l01 teaches: 1800000 + 0.7x4600000 + 0.2x7300000 = 6480000; the app also prints it whole-USD (`maximumFractionDigits: 0`), independent of the as-of date.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "meren_spi",
+   "source": "unobtainable",
+   "source_ref": "src/pages/apps/ProjectManagementPro.jsx:111",
+   "printed": {
+    "decimals": 2
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/projectmanagement/SnapshotCard.jsx:88",
+   "prompt_precision": "ratios to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/pages/apps/ProjectManagementPro.jsx:111 -> as-of date input; src/components/projectmanagement/SnapshotCard.jsx:88 -> spi.toFixed(6)"
+   },
+   "owner_decision": true,
+   "recommendation": "Display fix (as-of input plus six decimals). If the app is not changed, tol cannot rescue it: PV is not reachable at the stated date.",
+   "evidence": "SnapshotCard prints `SPI: ${spi.toFixed(2)}` (0.79 vs 0.789705, tol 1e-5) and only as of today; EV/PV by hand depends on the untaught day-count convention.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "meren_completion_ratio",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/fdp/advanced/m04-earned-value-to-a-date/l03-the-ratio-that-is-not-an-index.md",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/components/projectmanagement/SnapshotCard.jsx:93",
+   "prompt_precision": "ratios to six decimals",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "EV/BAC = 6480000/23600000 = 0.274576 by hand (l01 builds BAC as the sum of planned costs); tol 1e-5 is above half a unit of six decimals.",
+   "notes": "The app only shows `Math.round(completionRatio * 100)%` and only when SPI is non-null, so the app route does not work; the hand route does.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "ukot_price_swing_mm",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/cost/SensitivityAnalysis.jsx:34-62",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/cost/SensitivityAnalysis.jsx:59",
+   "prompt_precision": "plan money to four decimals in million USD",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Tornado bars carry min/max NPV changes; `<Tooltip>` has no formatter so Recharts prints the raw floats; swing = max - min for the oil price bar.",
+   "notes": "Requires hovering the chart and subtracting; no printed swing figure. If the owner wants a printed value, add the per-driver swing to a table under the chart.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "ukot_stress_npv_mm",
+   "source": "suite-app",
+   "source_ref": "src/components/fdp/modules/scenarios/ScenarioManager.jsx:144",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/scenarios/ScenarioManager.jsx:144",
+   "prompt_precision": "plan money to four decimals in million USD",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Low case card prints -797.9; |-797.9-(-797.9292)| = 0.029 <= 0.05.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  }
+ ]
+}

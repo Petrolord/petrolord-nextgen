@@ -1,0 +1,432 @@
+{
+ "course": "separation",
+ "sources": {
+  "beginner": "Gas-side values (density, actual rate, settling velocity, gas diameter, margin) need z, i.e. the Suite Separator & Slug Catcher Designer (src/components/separatorstudio/SeparatorPanels.jsx:121-263, fmt 1 to 3 decimals) against a four-decimal prompt; height is a taught hand calc. NextGen panels are select-only.",
+  "intermediate": "Liquid length, both slug layouts and both setbacks are taught closed forms; gas velocity needs z (studio fmt 3) and its tol 1e-5 is below the prompt's four decimals.",
+  "advanced": "Interface (bisection), droplet times (Stokes) by hand; the family preference needs z (studio sweep fmt 1); the ADANGA layout rankings cannot be computed because the prompt gives no item coordinates and no Suite layout exists."
+ },
+ "fields": [
+  {
+   "tier": "beginner",
+   "key": "ejulebe1_gas_density_lbft3",
+   "source": "suite-app",
+   "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
+   "printed": {
+    "decimals": 3
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:123",
+   "prompt_precision": "\"Densities in lb/ft3, rates in ft3/s, velocities in ft/s and lengths in ft, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/separatorstudio/SeparatorPanels.jsx:123 -> fmt(conditions.rhoGas, 6)"
+   },
+   "owner_decision": true,
+   "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass.",
+   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Studio prints `fmt(conditions.rhoGas, 3)`; tol 1e-4 needs 4. Recomputing from the printed z (fmt 4, :121) carries ~1.7e-4 of error.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "ejulebe1_gas_actual_ft3s",
+   "source": "suite-app",
+   "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
+   "printed": {
+    "decimals": 2
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:126",
+   "prompt_precision": "\"Densities in lb/ft3, rates in ft3/s, velocities in ft/s and lengths in ft, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/separatorstudio/SeparatorPanels.jsx:126 -> fmt(conditions.qGasActFt3S, 6)"
+   },
+   "owner_decision": true,
+   "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass.",
+   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Studio prints `fmt(conditions.qGasActFt3S, 2)` against tol 1e-4.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "ejulebe1_terminal_velocity_fts",
+   "source": "suite-app",
+   "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
+   "printed": {
+    "decimals": 3
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:133",
+   "prompt_precision": "\"Densities in lb/ft3, rates in ft3/s, velocities in ft/s and lengths in ft, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "new_tol": 5e-05
+   },
+   "owner_decision": true,
+   "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass. The prompt asks for four decimals, so tol must also be at least 5e-5 (half a unit) or a learner who follows the instruction can fail.",
+   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Studio prints `fmt(conditions.vTerminalFtS, 3)`; tol 1e-5 is below half a unit of the four decimals the prompt asks for (1.4392 happens to pass, by 6.5e-6).",
+   "notes": null,
+   "leak": false,
+   "shipped": {
+    "migration": "20261022_b5_graded_tolerances.sql",
+    "tol": [
+     1e-05,
+     5e-05
+    ]
+   }
+  },
+  {
+   "tier": "beginner",
+   "key": "ejulebe1_gas_diameter_ft",
+   "source": "suite-app",
+   "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:262",
+   "prompt_precision": "\"Densities in lb/ft3, rates in ft3/s, velocities in ft/s and lengths in ft, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/separatorstudio/SeparatorPanels.jsx:262 -> fmt(detail.diameterGasFt, 6)"
+   },
+   "owner_decision": true,
+   "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass.",
+   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Studio prints \"Diameter the gas needs\" `fmt(detail.diameterGasFt, 1)` against tol 1e-4.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "ejulebe1_height_ft",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/separation/beginner/m05-the-vertical-vessel/l02-height-from-retention.md:1",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/content/courses/separation/beginner/m05-the-vertical-vessel/l02-height-from-retention.md:1",
+   "prompt_precision": "\"Densities in lb/ft3, rates in ft3/s, velocities in ft/s and lengths in ft, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Retention volume (7350+2480 bpd x 5.6146 ft3/bbl x 4 min / 1440) over the 6.4 ft area, plus the 6.5 ft allowance = 11.2656 ft; no z needed (beginner/m05/l02-l03, m06/l02 step five).",
+   "notes": "Suite prints Height fmt(...,1) (src/components/separatorstudio/SeparatorPanels.jsx:220), unusable at tol 1e-4; the taught hand route is exact.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "beginner",
+   "key": "ejulebe1_velocity_margin",
+   "source": "suite-app",
+   "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
+   "printed": {
+    "decimals": 2
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:263",
+   "prompt_precision": "\"Densities in lb/ft3, rates in ft3/s, velocities in ft/s and lengths in ft, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "new_tol": 5e-05
+   },
+   "owner_decision": true,
+   "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass. The prompt asks for four decimals, so tol must also be at least 5e-5 (half a unit) or a learner who follows the instruction can fail.",
+   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Studio prints `fmt(detail.velocityMargin, 2)` x; tol 1e-5 is also below half a unit of the prompt's four decimals (6.8802 passes by 2.8e-6, by luck).",
+   "notes": null,
+   "leak": false,
+   "shipped": {
+    "migration": "20261022_b5_graded_tolerances.sql",
+    "tol": [
+     1e-05,
+     5e-05
+    ]
+   }
+  },
+  {
+   "tier": "intermediate",
+   "key": "ejulebe2_liquid_length_ft",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/separation/intermediate/m02-two-lengths-one-vessel/l01-the-length-the-liquid-needs.md:1",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/content/courses/separation/intermediate/m02-two-lengths-one-vessel/l01-the-length-the-liquid-needs.md:1",
+   "prompt_precision": "\"Lengths in ft, velocities in ft/s and distances in m, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Retention volume over the exact liquid segment area at 0.45 of a 9 ft diameter (m02/l01, \"a retention volume divided by the liquid area\"); no z, full precision.",
+   "notes": "Suite prints fmt(...,1) (src/components/separatorstudio/SeparatorPanels.jsx:229).",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "ejulebe2_gas_velocity_fts",
+   "source": "suite-app",
+   "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
+   "printed": {
+    "decimals": 3
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:223",
+   "prompt_precision": "\"Lengths in ft, velocities in ft/s and distances in m, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "new_tol": 5e-05
+   },
+   "owner_decision": true,
+   "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass. The prompt asks for four decimals, so tol must also be at least 5e-5 (half a unit) or a learner who follows the instruction can fail.",
+   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Studio prints `fmt(detail.gasVelocityFtS, 3)`; and at the prompt's four decimals 0.5342 misses tol 1e-5 by 1.8e-5, so a learner with full precision who follows the instruction FAILS.",
+   "notes": null,
+   "leak": false,
+   "shipped": {
+    "migration": "20261022_b5_graded_tolerances.sql",
+    "tol": [
+     1e-05,
+     5e-05
+    ]
+   }
+  },
+  {
+   "tier": "intermediate",
+   "key": "ejulebe_slug_vessel_diameter_ft",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/separation/intermediate/m04-slug-catchers/l03-a-vessel-from-a-volume.md:1",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/content/courses/separation/intermediate/m04-slug-catchers/l03-a-vessel-from-a-volume.md:1",
+   "prompt_precision": "\"Lengths in ft, velocities in ft/s and distances in m, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Working volume (620 bbl + 19800 bpd over 8 min) over the 0.65 fill, then V = pi/4 D^2 x 5D solved for D in closed form (m04/l02-l03).",
+   "notes": "Suite prints Diameter fmt(...,1) (src/components/separatorstudio/SlugCatcherPanels.jsx:81).",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "ejulebe_finger_length_ft",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/separation/intermediate/m04-slug-catchers/l04-fingers-instead-of-a-vessel.md:1",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/content/courses/separation/intermediate/m04-slug-catchers/l04-fingers-instead-of-a-vessel.md:1",
+   "prompt_precision": "\"Lengths in ft, velocities in ft/s and distances in m, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Same working volume over 0.75 fill, divided among 7 fingers of 26 in bore: closed form, tol 0.001.",
+   "notes": "Suite prints fmt(slug.fingerLengthFt, 0) (src/components/separatorstudio/SlugCatcherPanels.jsx:72).",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "odeama_flare_setback_m",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/separation/intermediate/m05-distances-on-a-site/l03-a-flare-setback-is-computed.md:1",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/content/courses/separation/intermediate/m05-distances-on-a-site/l03-a-flare-setback-is-computed.md:1",
+   "prompt_precision": "\"Lengths in ft, velocities in ft/s and distances in m, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Point source: d = sqrt(F tau Q / (4 pi I)) with Q = 27 x 47500 kW: 65.5919 m; closed form from prompt inputs.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "intermediate",
+   "key": "odeama_pool_setback_edge_m",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/separation/intermediate/m05-distances-on-a-site/l04-a-pool-fire-and-its-edge.md:9",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/content/courses/separation/intermediate/m05-distances-on-a-site/l04-a-pool-fire-and-its-edge.md:9",
+   "prompt_precision": "\"Lengths in ft, velocities in ft/s and distances in m, to four decimals.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Pool area x burning rate x heat of combustion gives Q, the point-source radius follows, minus the 12 m pool radius (l04:9-15): 69.6531 - 12 = 57.6531 m.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "ejulebe3_interface_height_ft",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/separation/advanced/m01-three-phases-in-one-vessel/l02-the-interface-at-its-exact-height.md:11",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:244",
+   "prompt_precision": "\"Lengths in ft, times in s, distances in m and the fraction as a fraction, to four decimals or better.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "tolerance",
+   "fix": {
+    "new_tol": 5e-05
+   },
+   "owner_decision": true,
+   "recommendation": "Widen to 5e-5 (half a unit at the four decimals the prompt asks for); tightening is not involved. Also print the studio interface at 6 decimals (src/components/separatorstudio/SeparatorPanels.jsx:244 fmt 2) for learners who use it.",
+   "evidence": "Water share from the two retentions, then the depth whose segment area matches, found by bisection as l02:11 describes (a spreadsheet goal seek); no z. But at the prompt's four decimals 3.5273 misses tol 1e-5 by 2.0e-5, so a learner who follows the instruction fails.",
+   "notes": "\"or better\" in the prompt does not tell the learner that five decimals are required.",
+   "leak": false,
+   "shipped": {
+    "migration": "20261022_b5_graded_tolerances.sql",
+    "tol": [
+     1e-05,
+     5e-05
+    ]
+   }
+  },
+  {
+   "tier": "advanced",
+   "key": "ejulebe3_water_drop_fall_s",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/separation/advanced/m02-droplets-and-verdicts/l02-water-out-of-the-oil.md:1",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/content/courses/separation/advanced/m02-droplets-and-verdicts/l02-water-out-of-the-oil.md:1",
+   "prompt_precision": "\"Lengths in ft, times in s, distances in m and the fraction as a fraction, to four decimals or better.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Stokes velocity from the stated densities, viscosity and 350 micron drop (m02/l01) over the oil layer height (level minus interface); full precision once the interface is solved; tol 0.001 s.",
+   "notes": "Suite prints the fall time fmt(...,0) s (src/components/separatorstudio/SeparatorPanels.jsx:250).",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "ejulebe3_oil_drop_rise_s",
+   "source": "hand-calc",
+   "source_ref": "src/content/courses/separation/advanced/m02-droplets-and-verdicts/l03-oil-out-of-the-water.md:1",
+   "printed": "full",
+   "display_scale": 1,
+   "display_ref": "src/content/courses/separation/advanced/m02-droplets-and-verdicts/l03-oil-out-of-the-water.md:1",
+   "prompt_precision": "\"Lengths in ft, times in s, distances in m and the fraction as a fraction, to four decimals or better.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Stokes rise of the 150 micron oil drop through the water layer (the interface height); closed form after the interface.",
+   "notes": "Suite prints fmt(...,0) s (src/components/separatorstudio/SeparatorPanels.jsx:253).",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "ejulebe4_preferred_height_ft",
+   "source": "suite-app",
+   "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:190",
+   "prompt_precision": "\"Lengths in ft, times in s, distances in m and the fraction as a fraction, to four decimals or better.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "display",
+   "fix": {
+    "display": "src/components/separatorstudio/SeparatorPanels.jsx:190 -> fmt(r.lengthFt, 6) (and :220)"
+   },
+   "owner_decision": true,
+   "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass.",
+   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Preferred = smallest in-band feasible diameter; feasibility at 3 and 3.5 ft is a gas-capacity verdict that needs z. The sweep table prints `fmt(r.lengthFt, 1)` and the selected Height fmt 1 (src/components/separatorstudio/SeparatorPanels.jsx:220) against tol 1e-4.",
+   "notes": "Without the studio a learner can hand-compute the liquid-plus-allowance height of each offered size and the L/D band leaves three (3, 3.5, 4 ft: 10.72, 9.74, 9.09 ft), so a guess among them has p about 1/3.",
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "adanga_worst_absolute_shortfall_m",
+   "source": "unobtainable",
+   "source_ref": "src/components/course/panels/separation/separationLab.js:1359",
+   "printed": {
+    "decimals": 1
+   },
+   "display_scale": 1,
+   "display_ref": "src/components/facilitylayoutmapper/SpacingPanel.jsx:173",
+   "prompt_precision": "\"Lengths in ft, times in s, distances in m and the fraction as a fraction, to four decimals or better.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "redesign",
+   "fix": {
+    "redesign": "Keep the key; state the yard in the prompt as north/east offsets in m from the datum 4.9021 N, 6.8714 E for the ten items (Wellhead A 0,0 ... Yard control room 245,185; Second slop tank no coordinates), or seed an ADANGA layout the learner opens in the Facility Layout Mapper, and print the shortfall at 4 decimals (SpacingPanel.jsx:173 fmt 1)"
+   },
+   "owner_decision": true,
+   "recommendation": "Ungradable as posed: the item positions exist only in capstone-only code (separationLab.js:1359-1370, guarded from panels) and no Suite project named ADANGA exists (grep of Suite src/ and supabase/). Add the coordinates to the prompt (a haversine or flat-offset hand calc then works, intermediate/m05/l02) and fix the Layout Mapper precision.",
+   "evidence": "Prompt gives only the two setbacks and \"a portable flare that was never placed and a second slop tank carrying no coordinates\"; no coordinates for any item. Facility Layout Mapper prints `short {fmt(result.worstAbsolute.shortfallM, 1)} m`.",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  },
+  {
+   "tier": "advanced",
+   "key": "adanga_worst_relative_fraction",
+   "source": "unobtainable",
+   "source_ref": "src/components/course/panels/separation/separationLab.js:1359",
+   "printed": {
+    "decimals": 0
+   },
+   "display_scale": 100,
+   "display_ref": "src/components/facilitylayoutmapper/SpacingPanel.jsx:179",
+   "prompt_precision": "\"Lengths in ft, times in s, distances in m and the fraction as a fraction, to four decimals or better.\"",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "redesign",
+   "fix": {
+    "redesign": "Same prompt change (state the ten item offsets); and Facility Layout Mapper SpacingPanel.jsx:179 prints fmt(shortfallFraction*100, 0) percent, so print the fraction to 6 decimals"
+   },
+   "owner_decision": true,
+   "recommendation": "Same as the absolute shortfall. Also note tol 1e-6 needs six decimals while the prompt says \"four decimals or better\": at four decimals 0.6200 misses by 2.6e-5, so either widen to 5e-5 or say six decimals in the prompt.",
+   "evidence": "No coordinates in the prompt; the Layout Mapper prints the relative shortfall as a whole percent (display_scale 100).",
+   "notes": null,
+   "leak": false,
+   "shipped": null
+  }
+ ]
+}

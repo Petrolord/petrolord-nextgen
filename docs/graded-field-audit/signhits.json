@@ -1,0 +1,512 @@
+[
+ {
+  "course": "consequence",
+  "where": "bank h4i_m01 Q2 explanation [tools/course-banks/consequence/intermediate/h4i_m01.json] seeded by migrations/20261006_h4_consequence_intermediate_deep.sql (consequence, intermediate, module, m01-how-fast-a-pool-burns, ord 2)",
+  "literal": "-1.1",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Reword the explanation clause to keep the product unsigned: \"...from m\\\"inf 0.101 times one minus exp(-k beta D), with the heptane k beta of 1.1 per m.\" (digest line 500 prints the form, line 509 prints 1.1).",
+  "safe_to_fix_now": true,
+  "notes": "Figure is correct: Babrauskas m\" = m\"inf (1 - exp(-k beta D)) with heptane k beta 1.1 (digest 500, 509). Substituting the constant into the exponent is what creates the signed literal. A digest line is not needed. Explanation-only edit: no option length moves, so it composes with B4 trivially."
+ },
+ {
+  "course": "hygiene",
+  "where": "bank h2a_exam Q20 prompt [tools/course-banks/hygiene/advanced/h2a_exam.json] seeded by migrations/20261004_h2_hygiene_advanced_deep.sql:160 (hygiene, advanced, final, null, ord 20)",
+  "literal": "-300",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Digest line: have h2_dump.mjs print each refusal case's input in the refusal table (the golden exposure_cases.json refusal \"wbgt-below-absolute-zero\" is called with naturalWetBulbC -300, globeC 20), so -300 is printed on digest line ~713. Do not reword the prompt to \"below absolute zero\": that quotes the key's refusal message and gives the answer away.",
+  "safe_to_fix_now": false,
+  "notes": "-300 is the real input of the engine golden refusal case (verified in /root/hse-wip-hygiene/scratch/eng/test-data/hse/goldens/exposure_cases.json). The digest prints the case id and message only. Not safe now: needs a generator edit, digest re-cut and waves.json re-pin, and PR #180 reports another session editing /root/hse-wip-hygiene (the H2 mirror gate is red until it is re-mirrored). Both hits (prompt and explanation) close with the one digest line."
+ },
+ {
+  "course": "hygiene",
+  "where": "bank h2a_exam Q20 explanation [tools/course-banks/hygiene/advanced/h2a_exam.json] seeded by migrations/20261004_h2_hygiene_advanced_deep.sql:160 (hygiene, advanced, final, null, ord 20)",
+  "literal": "-300",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Digest line: have h2_dump.mjs print each refusal case's input in the refusal table (the golden exposure_cases.json refusal \"wbgt-below-absolute-zero\" is called with naturalWetBulbC -300, globeC 20), so -300 is printed on digest line ~713. Do not reword the prompt to \"below absolute zero\": that quotes the key's refusal message and gives the answer away.",
+  "safe_to_fix_now": false,
+  "notes": "-300 is the real input of the engine golden refusal case (verified in /root/hse-wip-hygiene/scratch/eng/test-data/hse/goldens/exposure_cases.json). The digest prints the case id and message only. Not safe now: needs a generator edit, digest re-cut and waves.json re-pin, and PR #180 reports another session editing /root/hse-wip-hygiene (the H2 mirror gate is red until it is re-mirrored). Both hits (prompt and explanation) close with the one digest line."
+ },
+ {
+  "course": "hygiene",
+  "where": "bank h2i_exam Q11 explanation [tools/course-banks/hygiene/intermediate/h2i_exam.json] seeded by migrations/20261004_h2_hygiene_intermediate_deep.sql:149 (hygiene, intermediate, final, null, ord 11)",
+  "literal": "-1",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Reword: \"At 97 dBA the hours to 87 are one tenth of 8 h, 0.800000 h, because the level sits 10 dB above the target.\" (rest of the explanation unchanged).",
+  "safe_to_fix_now": true,
+  "notes": "Arithmetic is correct: t = 8 x 10^((87 - 97)/10) = 0.800000 h, printed on digest line 805. The literal comes from writing the exponent out. Explanation-only edit: no option length moves, so it composes with B4 trivially."
+ },
+ {
+  "course": "linesizing",
+  "where": "bank fc2i_exam Q5 explanation [tools/course-banks/linesizing/intermediate/fc2i_exam.json] seeded by migrations/20260922_fc2_linesizing_intermediate_deep.sql:145 (linesizing, intermediate, final, null, ord 5)",
+  "literal": "-30.000000",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Digest line (one fix closes all five -30.000000 hits): in fc2_dump.mjs after line 500, print the inverse drop in the digest's six-decimal format, e.g. \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\" Today the digest prints it only as the raw JSON {\"p2Psia\":880,\"dpPsi\":-30} (digest line 336), which litsweep cannot match against -30.000000.",
+  "safe_to_fix_now": true,
+  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves."
+ },
+ {
+  "course": "linesizing",
+  "where": "bank fc2i_m03 Q1 option3 [tools/course-banks/linesizing/intermediate/fc2i_m03.json] seeded by migrations/20260922_fc2_linesizing_intermediate_deep.sql (linesizing, intermediate, module, m03-the-elevation-adjustment, ord 1)",
+  "literal": "-1.0000000000",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "A",
+  "correct_text_or_action": "Reword the distractor without inventing a bound: \"That s never exceeds one in size in either direction, which is what allows it to be handed to an exponential without the group overflowing on a tall hill.\" (154 chars against 158; keeps its length rank 1).",
+  "safe_to_fix_now": true,
+  "notes": "Invented literal: the digest never prints a bound of -1.0000000000 on s (the unsigned 1.0000000000 resolved by coincidence against e to the s on a flat line). The option is a distractor and is meant to be false, so the key is unaffected; the defect is that the sweep rule \"every literal is a digest figure\" is broken. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+ },
+ {
+  "course": "linesizing",
+  "where": "bank fc2i_m04 Q10 option2 [tools/course-banks/linesizing/intermediate/fc2i_m04.json] seeded by migrations/20260922_fc2_linesizing_intermediate_deep.sql (linesizing, intermediate, module, m04-the-outlet-pressure, ord 10)",
+  "literal": "-30.000000",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Digest line (one fix closes all five -30.000000 hits): in fc2_dump.mjs after line 500, print the inverse drop in the digest's six-decimal format, e.g. \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\" Today the digest prints it only as the raw JSON {\"p2Psia\":880,\"dpPsi\":-30} (digest line 336), which litsweep cannot match against -30.000000.",
+  "safe_to_fix_now": true,
+  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves. This is the KEY of fc2i_m04 Q10, so it must not be reworded."
+ },
+ {
+  "course": "linesizing",
+  "where": "bank fc2i_m06 Q9 explanation [tools/course-banks/linesizing/intermediate/fc2i_m06.json] seeded by migrations/20260922_fc2_linesizing_intermediate_deep.sql (linesizing, intermediate, module, m06-the-professional-reading, ord 9)",
+  "literal": "-30.000000",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Digest line (one fix closes all five -30.000000 hits): in fc2_dump.mjs after line 500, print the inverse drop in the digest's six-decimal format, e.g. \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\" Today the digest prints it only as the raw JSON {\"p2Psia\":880,\"dpPsi\":-30} (digest line 336), which litsweep cannot match against -30.000000.",
+  "safe_to_fix_now": true,
+  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves."
+ },
+ {
+  "course": "linesizing",
+  "where": "src/content/courses/linesizing/intermediate/m04-the-outlet-pressure/l04-downhill-where-the-drop-is-negative.md:3",
+  "literal": "-30.000000",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Digest line (one fix closes all five -30.000000 hits): in fc2_dump.mjs after line 500, print the inverse drop in the digest's six-decimal format, e.g. \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\" Today the digest prints it only as the raw JSON {\"p2Psia\":880,\"dpPsi\":-30} (digest line 336), which litsweep cannot match against -30.000000.",
+  "safe_to_fix_now": true,
+  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves."
+ },
+ {
+  "course": "linesizing",
+  "where": "src/content/courses/linesizing/intermediate/m04-the-outlet-pressure/l04-downhill-where-the-drop-is-negative.md:28",
+  "literal": "-30.000000",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Digest line (one fix closes all five -30.000000 hits): in fc2_dump.mjs after line 500, print the inverse drop in the digest's six-decimal format, e.g. \"The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.\" Today the digest prints it only as the raw JSON {\"p2Psia\":880,\"dpPsi\":-30} (digest line 336), which litsweep cannot match against -30.000000.",
+  "safe_to_fix_now": true,
+  "notes": "Figure is correct and engine-printed: dpPsi -30 on digest line 336 (Section owned by Professional). Gate false positive on formatting (a -30 literal would resolve, -30.000000 does not). Additive digest line: re-run fc2_dump.mjs, re-pin waves.json sha, re-mirror /root/fc-wip-linesizing (FC2 is a full-kit wave, mirrorcheck is byte for byte), run the linesizing vitest suites. No lesson or bank text moves."
+ },
+ {
+  "course": "supply",
+  "where": "bank tdsa_m04 Q5 option0 [tools/course-banks/supply/advanced/tdsa_m04.json] seeded by migrations/20261012_tds_supply_advanced_deep.sql (supply, advanced, module, m04-from-depot-gate-to-nozzle, ord 5)",
+  "literal": "-34.8249",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Reword the distractor so the misreading is carried in words with the printed magnitude: \"A cap surplus of 34.8249 naira a litre, and the cap covers the chain: true.\" (75 chars, keeps rank 0).",
+  "safe_to_fix_now": true,
+  "notes": "Deliberate sign-flip distractor: digest line 633 prints \"shortfall 34.8249 ... covers the chain: false\" and line 632 shows a negative shortfall means the cap covers. The option is meant to be wrong; gate false positive against the new BANK_TASK \"Signs\" rule. Key (option1) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+ },
+ {
+  "course": "riskchange",
+  "where": "bank asrcb_exam Q24 option2 [tools/course-banks/riskchange/beginner/asrcb_exam.json] seeded by migrations/20261001_asrc_riskchange_beginner_deep.sql:158 (riskchange, beginner, final, null, ord 24)",
+  "literal": "-181",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Reword: \"181 days past, overdue, counted back from the review\" (52 chars, keeps rank 2).",
+  "safe_to_fix_now": true,
+  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Key (option1, 181 days to go, not overdue) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+ },
+ {
+  "course": "riskchange",
+  "where": "bank asrcb_exam Q26 option0 [tools/course-banks/riskchange/beginner/asrcb_exam.json] seeded by migrations/20261001_asrc_riskchange_beginner_deep.sql:160 (riskchange, beginner, final, null, ord 26)",
+  "literal": "-45",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Reword: \"45 back\" (7 chars, keeps rank 1). Alternative \"45 days ago\" (11) reads better but becomes the longest option and moves the key off rank 0; only take it if lengths.py still passes.",
+  "safe_to_fix_now": true,
+  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Key (option3, \"45 days on\") is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+ },
+ {
+  "course": "riskchange",
+  "where": "bank asrcb_m04 Q2 option0 [tools/course-banks/riskchange/beginner/asrcb_m04.json] seeded by migrations/20261001_asrc_riskchange_beginner_deep.sql (riskchange, beginner, module, m04-the-calendar-date, ord 2)",
+  "literal": "-92",
+  "gate_kind": "NOT IN DIGEST",
+  "class": "B",
+  "correct_text_or_action": "Reword: \"92 back, as the date falls in another year\" (42 chars, keeps rank 3).",
+  "safe_to_fix_now": true,
+  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Key (option2, 92) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+ },
+ {
+  "course": "riskchange",
+  "where": "bank asrcb_exam Q28 option3 [tools/course-banks/riskchange/beginner/asrcb_exam.json] seeded by migrations/20261001_asrc_riskchange_beginner_deep.sql:162 (riskchange, beginner, final, null, ord 28)",
+  "literal": "-30",
+  "gate_kind": "REACHES FORWARD",
+  "class": "B",
+  "correct_text_or_action": "Reword: \"Yes: 30 days have passed\" (24 chars, same length as today, keeps rank 2).",
+  "safe_to_fix_now": true,
+  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. The gate calls this REACHES FORWARD only because -30 happens to be printed in Professional Section 11 (digest line 294, an MOC expiry 2026-09-01 at -30 days), an unrelated quantity. It is not a real cross-tier leak. Key (option0, 30 days left) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+ },
+ {
+  "course": "riskchange",
+  "where": "bank asrcb_m04 Q1 option3 [tools/course-banks/riskchange/beginner/asrcb_m04.json] seeded by migrations/20261001_asrc_riskchange_beginner_deep.sql (riskchange, beginner, module, m04-the-calendar-date, ord 1)",
+  "literal": "-30",
+  "gate_kind": "REACHES FORWARD",
+  "class": "B",
+  "correct_text_or_action": "Reword: \"30 ago\" (6 chars, keeps rank 0 among bare-number options). If that reads too terse, the owner may prefer a gate allowance for sign-flipped distractor options whose magnitude the digest prints.",
+  "safe_to_fix_now": true,
+  "notes": "Deliberate sign-flip distractor. The beginner digest teaches that a past date counts negative (Section 4, e.g. the row \"the day before ... -1\") and prints the true positive count, so the distractor is refutable; but the signed figure is not printed and BANK_TASK now says quote the digest's sign. Riskchange banks were already exit 1 before #180 on other items. Same coincidental forward resolution against digest line 294 as asrcb_exam Q28; not a real leak. Key (option1, 30) is correct. B4 answer-length plan (/root/b4-work/plan_all.json) does not currently touch this bank, but any recut must be a guarded UPDATE addressed by (app_slug, tier, scope, module_key, ord) in the style of migrations/20261015_dg_recut_*.sql, applied on top of whatever text B4 has landed by then, and must re-run the wave's lengths.py rank gate."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/intermediate/m02-imperfect-information-by-bayes/l05-evii-and-its-two-bounds.md:27",
+  "literal": "-15.00",
+  "gate_kind": "REACHES FORWARD",
+  "class": "D",
+  "correct_text_or_action": "Digest line: add the pre-repair IRRI reading to Professional Section 10 (ec4_dump.mjs), e.g. \"Before the EC4-0 repair the IRRI inputs printed a gross voi of -15.00 and a netVoi card of -25.00 (reconstructed, derived).\" This also clears the pre-existing forward reach of -25.00 on m05/l04:45. Fallback if the digest is not re-cut: reword the lesson to \"printed a negative gross value\" and drop the figure.",
+  "safe_to_fix_now": false,
+  "notes": "Genuine forward reach in a Professional TEACHING lesson: -15.00 (pre-repair IRRI gross voi) is printed only on digest line 370, Expert Section 11. Before #180 the unsigned 15.00 resolved by coincidence against emvWithoutInfo 15.00 (Section 10). The figure itself is correct. Not safe as a quick edit: digest re-cut plus waves.json re-pin on a live course; the lesson-reword fallback is safe."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/intermediate/m06-the-professional-reading/l03-onward.md:7",
+  "literal": "-15.00",
+  "gate_kind": "REACHES FORWARD",
+  "class": "D",
+  "correct_text_or_action": "Owner policy decision, not a per-line edit: either exempt the m06 l03-onward signpost lessons from the forward-reach rule (they exist to preview the next tier), or strip next-tier figures from them. Do not fix this line alone.",
+  "safe_to_fix_now": false,
+  "notes": "Onward signpost lesson previewing Expert m01. -15.00 is printed only in Expert Section 11 (line 370). This lesson already carried 17 forward reaches in decision (245.00, 0.005, 32.996, ...), and 76 across the EC onward lessons, so the sign fix only adds to a known pattern. Figure is correct."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/intermediate/m06-the-professional-reading/l03-onward.md:19",
+  "literal": "-0.00",
+  "gate_kind": "REACHES FORWARD",
+  "class": "D",
+  "correct_text_or_action": "Owner policy decision, not a per-line edit: either exempt the m06 l03-onward signpost lessons from the forward-reach rule (they exist to preview the next tier), or strip next-tier figures from them. Do not fix this line alone.",
+  "safe_to_fix_now": false,
+  "notes": "Onward signpost lesson previewing Expert m05. -0.00 (net VOI card at survey cost 33.004) is printed only in Expert Section 15 (line 481); 32.996 and 33.004 on the same line were already forward reaches. Figure is correct and the signed zero is the point of the example."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/intermediate/m05-the-voi-analyzer/l04-four-cards-five-numbers-and-a-verdict.md:45",
+  "literal": "-15.00",
+  "gate_kind": "REACHES FORWARD",
+  "class": "D",
+  "correct_text_or_action": "Digest line: add the pre-repair IRRI reading to Professional Section 10 (ec4_dump.mjs), e.g. \"Before the EC4-0 repair the IRRI inputs printed a gross voi of -15.00 and a netVoi card of -25.00 (reconstructed, derived).\" This also clears the pre-existing forward reach of -25.00 on m05/l04:45. Fallback if the digest is not re-cut: reword the lesson to \"printed a negative gross value\" and drop the figure.",
+  "safe_to_fix_now": false,
+  "notes": "Same as m02/l05: -15.00 lives only in Expert Section 11 (line 370). The -25.00 on this line was already a forward reach before #180, so this lesson was already red on the same finding."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/advanced/m05-numbers-to-distrust/l01-a-risk-neutral-choice.md:13",
+  "literal": "-80.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap of an Associate figure: EKPAN drill net loss -80.0000, printed on digest line 168/177 Section 5 (Drill -80.0000 at 0.650000). Expert Section 15 (line 470) prints it unsigned as \"loses 80.0000\", which is why it now reads as a back reach. Fails only under --strict-range."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/advanced/m05-numbers-to-distrust/l01-a-risk-neutral-choice.md:17",
+  "literal": "-80.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap of an Associate figure: EKPAN drill net loss -80.0000, printed on digest line 168 Section 5. Expert Section 15 (line 470) prints it unsigned as \"loses 80.0000\", which is why it now reads as a back reach. Fails only under --strict-range."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/advanced/m05-numbers-to-distrust/l01-a-risk-neutral-choice.md:19",
+  "literal": "-80.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap of an Associate figure: EKPAN drill net loss -80.0000, printed on digest line 69 Section 2 (EKPAN full tree, dry hole net -80.0000). Expert Section 15 (line 470) prints it unsigned as \"loses 80.0000\", which is why it now reads as a back reach. Fails only under --strict-range."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/advanced/m05-numbers-to-distrust/l05-what-a-tree-cannot-tell-you.md:9",
+  "literal": "-25.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap of an Associate figure printed on digest line 22 Section 1 (EKPAN dry hole -25.0000). Fails only under --strict-range."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/advanced/m03-the-decision-brief/l01-what-decision-studio-assembles.md:28",
+  "literal": "-25.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap of an Associate figure printed on digest line 41 Section 2 (drill chance node by hand). Fails only under --strict-range."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/advanced/m03-the-decision-brief/l01-what-decision-studio-assembles.md:32",
+  "literal": "-25.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap of an Associate figure printed on digest line 55 Section 2 (chanceRootWithBranchCosts, storm child -25.0000). Fails only under --strict-range."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/advanced/m03-the-decision-brief/l02-next-best-and-the-advantage.md:31",
+  "literal": "-80.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap of an Associate figure: EKPAN drill net loss -80.0000, printed on digest line 69 Section 2. Expert Section 15 (line 470) prints it unsigned as \"loses 80.0000\", which is why it now reads as a back reach. Fails only under --strict-range."
+ },
+ {
+  "course": "decision",
+  "where": "src/content/courses/decision/advanced/m03-the-decision-brief/l03-a-monte-carlo-payoff-enters-at-its-mean.md:24",
+  "literal": "-25.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap of an Associate figure printed on digest line 22/41 (EKPAN dry hole -25.0000). Fails only under --strict-range."
+ },
+ {
+  "course": "portfolio",
+  "where": "src/content/courses/portfolio/intermediate/m06-the-professional-reading/l03-onward.md:7",
+  "literal": "-50.0000",
+  "gate_kind": "REACHES FORWARD",
+  "class": "D",
+  "correct_text_or_action": "Owner policy decision, not a per-line edit: either exempt the m06 l03-onward signpost lessons from the forward-reach rule (they exist to preview the next tier), or strip next-tier figures from them. Do not fix this line alone.",
+  "safe_to_fix_now": false,
+  "notes": "Onward signpost lesson previewing Expert m01. -50.0000 (singleWildcat worst outcome) is printed only in Expert Section 11 (line 273); before #180 the unsigned 50.0000 resolved as a back reach by coincidence. 0.365832, 0.696100 and 150.5560 on the same line were already forward reaches. Figure is correct."
+ },
+ {
+  "course": "portfolio",
+  "where": "src/content/courses/portfolio/intermediate/m03-earned-value/l01-progress-weighted-by-budget.md:31",
+  "literal": "-20",
+  "gate_kind": "reaches back",
+  "class": "D",
+  "correct_text_or_action": "Digest line: print the AFE negative-progress refusal (\"Cost item \\\"CMP-02\\\" has negative progress (-20 percent)...\") in a Professional-owned section (Section 6 AFE or Section 8 Earned value) via ec5_dump.mjs, or add Professional m03 to the owner clause of that block. Fallback: reword the lesson to describe the refusal without quoting the case.",
+  "safe_to_fix_now": false,
+  "notes": "MASKED forward reach. The gate reports a BACK reach because -20 matched \"risked EMV -20.0000\" on digest line 74 (Associate Section 3, negativeNeverForced), an unrelated quantity. The quoted refusal message is printed only on line 360, Expert Section 14 (Refusals and flags). The figure is correct. Not safe as a quick edit: generator change and re-pin on a live course."
+ },
+ {
+  "course": "portfolio",
+  "where": "src/content/courses/portfolio/advanced/m04-refusals-and-flags/l01-a-negative-capex.md:29",
+  "literal": "-30.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: posBelowZeroClamps risked EMV -30.0000, digest line 18, Associate Section 1. Fails only under --strict-range."
+ },
+ {
+  "course": "portfolio",
+  "where": "src/content/courses/portfolio/advanced/m04-refusals-and-flags/l01-a-negative-capex.md:30",
+  "literal": "-30",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: negativeFailCostIsZero input fail_cost -30, digest line 19, Associate Section 1 (the gate names line 18 as the first hit). Fails only under --strict-range."
+ },
+ {
+  "course": "portfolio",
+  "where": "src/content/courses/portfolio/advanced/m04-refusals-and-flags/l01-a-negative-capex.md:34",
+  "literal": "-30.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: pos -0.2 gives risked EMV -30.0000, digest line 18, Associate Section 1. Fails only under --strict-range."
+ },
+ {
+  "course": "portfolio",
+  "where": "src/content/courses/portfolio/advanced/m04-refusals-and-flags/l01-a-negative-capex.md:34",
+  "literal": "-30",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: fail_cost -30 read as 0, digest line 19, Associate Section 1. Fails only under --strict-range."
+ },
+ {
+  "course": "portfolio",
+  "where": "src/content/courses/portfolio/advanced/m04-refusals-and-flags/l04-what-was-repaired-and-what-was-not.md:29",
+  "literal": "-10.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: freeProjectTightLimit gap -10.0000, digest line 163 (Associate Section 5; the gate names line 160, freeProjectZeroLimit, which prints the same gap). Fails only under --strict-range."
+ },
+ {
+  "course": "fdp",
+  "where": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l01-the-rate-that-zeroes-the-value.md:26",
+  "literal": "-2250.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None. Optional: have the Expert section that prints the cumulative (-1454.1875, -658.3750, 137.4375) also print its year-0 value -2250.0000 so the whole series resolves in range.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: EGINA Base deepest cash position / year-0 cumulative -2250.0000, digest line 103, Associate Section 4. Fails only under --strict-range. Line 26 quotes it twice, so the gate reports two items here (PR #180 counted this as one)."
+ },
+ {
+  "course": "fdp",
+  "where": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l01-the-rate-that-zeroes-the-value.md:26",
+  "literal": "-2250.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None. Optional: have the Expert section that prints the cumulative (-1454.1875, -658.3750, 137.4375) also print its year-0 value -2250.0000 so the whole series resolves in range.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: EGINA Base deepest cash position / year-0 cumulative -2250.0000, digest line 103, Associate Section 4. Fails only under --strict-range. Line 26 quotes it twice, so the gate reports two items here (PR #180 counted this as one)."
+ },
+ {
+  "course": "fdp",
+  "where": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l04-payback-and-the-honest-null.md:9",
+  "literal": "-2250.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None. Optional: have the Expert section that prints the cumulative (-1454.1875, -658.3750, 137.4375) also print its year-0 value -2250.0000 so the whole series resolves in range.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: EGINA Base deepest cash position / year-0 cumulative -2250.0000, digest line 103, Associate Section 4. Fails only under --strict-range."
+ },
+ {
+  "course": "fdp",
+  "where": "src/content/courses/fdp/advanced/m01-the-rate-of-return/l04-payback-and-the-honest-null.md:37",
+  "literal": "-2250.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None. Optional: have the Expert section that prints the cumulative (-1454.1875, -658.3750, 137.4375) also print its year-0 value -2250.0000 so the whole series resolves in range.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: EGINA Base deepest cash position / year-0 cumulative -2250.0000, digest line 103, Associate Section 4. Fails only under --strict-range."
+ },
+ {
+  "course": "fdp",
+  "where": "src/content/courses/fdp/advanced/m03-what-a-sensitivity-says/l03-the-bar-that-runs-backwards.md:20",
+  "literal": "-2250.0000",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None. Optional: have the Expert section that prints the cumulative (-1454.1875, -658.3750, 137.4375) also print its year-0 value -2250.0000 so the whole series resolves in range.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: EGINA Base deepest cash position / year-0 cumulative -2250.0000, digest line 103, Associate Section 4. Fails only under --strict-range."
+ },
+ {
+  "course": "fiscal",
+  "where": "src/content/courses/fiscal/advanced/m04-the-insights/l04-when-nothing-pays-back.md:34",
+  "literal": "-100",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None for this literal. Course-level: re-cut the fiscal digest (ec2_dump.mjs) to the post-#183-#194 engine so Section 23 prints irr_negative_root_reported and irr_above_clamp_inside_old_bracket.",
+  "safe_to_fix_now": false,
+  "notes": "The committed fiscal digest predates the EC2-5 IRR repair: Section 23 still describes the retired doubling bisection, and the same lessons already carry pre-existing NOT IN DIGEST hits (-10.0000, 1400.0000, -99, -20.4852; 304 NOT IN DIGEST in fiscal overall). Here -100 is the first flow of \"-100 then 90\", which Professional Section 16 prints for the same flows (line 825, irr_npv0_negative, the pre-repair name). Correct recap."
+ },
+ {
+  "course": "fiscal",
+  "where": "src/content/courses/fiscal/advanced/m05-numbers-to-distrust/l03-the-irr-that-reports-its-bracket.md:29",
+  "literal": "-100",
+  "gate_kind": "reaches back",
+  "class": "B",
+  "correct_text_or_action": "Digest re-cut: ec2_dump.mjs Section 23 must print the golden case irr_above_clamp_inside_old_bracket (\"-100 then 1500\", true root 1400 percent, status above-clamp, irr null). Then -100, 1500 and 1400.0000 all resolve in the Expert section.",
+  "safe_to_fix_now": false,
+  "notes": "The committed fiscal digest predates the EC2-5 IRR repair: Section 23 still describes the retired doubling bisection, and the same lessons already carry pre-existing NOT IN DIGEST hits (-10.0000, 1400.0000, -99, -20.4852; 304 NOT IN DIGEST in fiscal overall). The case is real: packages/engines/test-data/economics/goldens/fiscal_cases.json, note \"-100 then 1500: the root is 1400 percent\". The -100 only resolves by coincidence against irr_known_21pct_year_end (\"-100 then 121\", line 816). Not safe as a quick edit: full digest re-cut and re-pin on a live course."
+ },
+ {
+  "course": "fiscal",
+  "where": "src/content/courses/fiscal/advanced/m05-numbers-to-distrust/l03-the-irr-that-reports-its-bracket.md:33",
+  "literal": "-100",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None for this literal. Same course-level digest re-cut.",
+  "safe_to_fix_now": false,
+  "notes": "The committed fiscal digest predates the EC2-5 IRR repair: Section 23 still describes the retired doubling bisection, and the same lessons already carry pre-existing NOT IN DIGEST hits (-10.0000, 1400.0000, -99, -20.4852; 304 NOT IN DIGEST in fiscal overall). Same \"-100 then 90\" flows as line 825. Correct recap."
+ },
+ {
+  "course": "qra",
+  "where": "bank h5a_exam Q18 explanation [tools/course-banks/qra/advanced/h5a_exam.json] seeded by migrations/20261007_h5_qra_advanced_deep.sql:146 (qra, advanced, final, null, ord 18)",
+  "literal": "-1",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: rates of discount and growth are accepted \"above -1\", units table digest line 84, Associate Section 2. Fails only under --strict-range. Bank row: migrations/20261007_h5_qra_advanced_deep.sql:146 (qra, advanced, final, null, ord 18)."
+ },
+ {
+  "course": "qra",
+  "where": "bank h5a_exam Q18 option2 [tools/course-banks/qra/advanced/h5a_exam.json] seeded by migrations/20261007_h5_qra_advanced_deep.sql:146 (qra, advanced, final, null, ord 18)",
+  "literal": "-1",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None. This option is the KEY; do not reword it.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: rates of discount and growth are accepted \"above -1\", units table digest line 84, Associate Section 2. Fails only under --strict-range."
+ },
+ {
+  "course": "qra",
+  "where": "bank h5a_exam Q21 explanation [tools/course-banks/qra/advanced/h5a_exam.json] seeded by migrations/20261007_h5_qra_advanced_deep.sql:149 (qra, advanced, final, null, ord 21)",
+  "literal": "-1",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: rates of discount and growth are accepted \"above -1\", units table digest line 84, Associate Section 2. Fails only under --strict-range. Bank row: migrations/20261007_h5_qra_advanced_deep.sql:149 (qra, advanced, final, null, ord 21)."
+ },
+ {
+  "course": "qra",
+  "where": "src/content/courses/qra/advanced/m03-discounting-and-the-icaf/l01-year-end-present-values.md:41",
+  "literal": "-1",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None.",
+  "safe_to_fix_now": false,
+  "notes": "Correct recap: rates of discount and growth are accepted \"above -1\", units table digest line 84, Associate Section 2. Fails only under --strict-range."
+ },
+ {
+  "course": "separation",
+  "where": "src/content/courses/separation/intermediate/m04-slug-catchers/l02-the-working-volume.md:27",
+  "literal": "-5",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None. Optional: add Professional m04 to the owner clause of the slug-catcher refusal lines, or reprint them in the Professional slug-catcher section.",
+  "safe_to_fix_now": false,
+  "notes": "Correct quote of an engine refusal message (\"got -5\"), printed verbatim on digest lines 28/29, Associate Section 1. Fails only under --strict-range."
+ },
+ {
+  "course": "separation",
+  "where": "src/content/courses/separation/intermediate/m04-slug-catchers/l02-the-working-volume.md:27",
+  "literal": "-100",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None. Optional: add Professional m04 to the owner clause of the slug-catcher refusal lines, or reprint them in the Professional slug-catcher section.",
+  "safe_to_fix_now": false,
+  "notes": "Correct quote of an engine refusal message (\"got -100\"), printed verbatim on digest lines 28/29, Associate Section 1. Fails only under --strict-range."
+ },
+ {
+  "course": "separation",
+  "where": "src/content/courses/separation/intermediate/m04-slug-catchers/l05-what-a-slug-catcher-refuses.md:12",
+  "literal": "-5",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None. Optional: add Professional m04 to the owner clause of the slug-catcher refusal lines, or reprint them in the Professional slug-catcher section.",
+  "safe_to_fix_now": false,
+  "notes": "Correct quote of an engine refusal message (\"got -5\"), printed verbatim on digest lines 28/29, Associate Section 1. Fails only under --strict-range."
+ },
+ {
+  "course": "separation",
+  "where": "src/content/courses/separation/intermediate/m04-slug-catchers/l05-what-a-slug-catcher-refuses.md:13",
+  "literal": "-100",
+  "gate_kind": "reaches back",
+  "class": "C",
+  "correct_text_or_action": "None. Optional: add Professional m04 to the owner clause of the slug-catcher refusal lines, or reprint them in the Professional slug-catcher section.",
+  "safe_to_fix_now": false,
+  "notes": "Correct quote of an engine refusal message (\"got -100\"), printed verbatim on digest lines 28/29, Associate Section 1. Fails only under --strict-range."
+ }
+]
