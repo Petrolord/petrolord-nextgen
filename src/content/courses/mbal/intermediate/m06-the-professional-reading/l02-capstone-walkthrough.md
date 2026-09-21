@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
+
 The Professional capstone is called "Aquifers, and the cost of the wrong one". First you build a Fetkovich aquifer from the published geometry of Ahmed Example 10-10 and march it. Then you force an aquifer onto the Ekene tank, which does not have one, and report what it costs. Six numbers, graded server side.
 
 | Field | Unit | Tolerance | Where it is derived |

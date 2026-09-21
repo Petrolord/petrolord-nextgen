@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The capstone asks for six numbers. This lesson walks the exercise in the order that produces the fewest mistakes and names the errors that lose fields.
 
 {{panel:mp-isochore-explorer}}

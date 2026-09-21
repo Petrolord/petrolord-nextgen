@@ -1,5 +1,7 @@
 # Working the capstone
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
+
 The Professional capstone, "Carry the lab to the field," grades six numbers. Each one tests a chain, and each chain was built in a specific module. This lesson walks the mechanism for every field, names the tool, and flags the mistake that costs each one. It does not hand you shortcuts. If a step below feels unfamiliar, the module that owns it is where to go, not this page.
 
 ## The three Ahmed fields: one example, one chain, three checkpoints

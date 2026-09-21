@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Associate capstone booked one clean well. The Professional capstone worked a field as a portfolio. The Expert capstone asks you to produce numbers that are correct and uncomfortable, and to report them as they stand. Six graded fields, one per Expert skill.
 
 | Graded field | Unit | Tolerance | Owning lesson |

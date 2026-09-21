@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Associate capstone for this course is short. It grades six numbers, and every one of them is read off the map panel with the grid built at a 100 m cell on the Ekene control set. There is no essay, no free interpretation and no hidden data. If you have worked the five previous modules, the six numbers are already familiar.
 
 This lesson walks each one, says where it comes from, and points out where learners lose marks.

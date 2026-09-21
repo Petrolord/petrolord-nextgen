@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The capstone asks for six numbers from this model, and this lesson walks the full derivation of each, with the panel open for verification. Everything is a re-run of earlier lessons; the value of the walkthrough is seeing the six as one connected computation.
 
 {{panel:em-tie-explorer}}

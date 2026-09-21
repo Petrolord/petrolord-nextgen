@@ -1,5 +1,7 @@
 # Working the capstone
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
+
 The Expert capstone asks for six numbers. None of them is hard to produce once you know exactly which case it belongs to, and all of them are easy to get wrong by producing the right number from the wrong case. This lesson walks the mechanism for each field, restates every designed case in full, and then spends its second half on the discipline the tolerances enforce.
 
 ## Field one: fitted_nw_printed_grid

@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Associate capstone for this course is called Reservoir fluids and the mineral frame, and it is short. It fixes the Ekene sand at 60 degC and 25 MPa with 35,000 ppm brine, 0.6 gravity gas and a 35 API oil at GOR 50 L/L, sets the mineral frame at 70 percent quartz and 30 percent clay, mixes the pore fluid at Sw 0.8, and grades six numbers. Every one of them is read off the fluid panel. There is no essay, no free interpretation and no hidden dataset. If you have worked the five previous modules, all six are already familiar.
 
 This lesson walks them in the order the capstone asks for them, says where each is read, and points out where marks are lost.

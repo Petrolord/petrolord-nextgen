@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The capstone asks you to run the full pipeline over the well's sonic and density logs with Eaton n = 3 on the well's own NCT, and to report six values. This lesson walks the exam itself: each field, its exact expected value, its tolerance, the route to it, and the slip that most often loses it.
 
 ## The six fields

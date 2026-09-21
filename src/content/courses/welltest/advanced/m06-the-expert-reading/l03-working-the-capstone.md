@@ -1,5 +1,7 @@
 # Working the capstone
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
+
 Six numbers spanning regression, rate history, gas and production data.
 
 {{panel:wt-regression-explorer}}

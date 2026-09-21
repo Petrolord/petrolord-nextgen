@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Professional capstone for this course is called SI import of the feet-denominated well, and it is short. It asks you to run the full import pipeline on feet_20 and read the import panel, and it grades six numbers. There is no essay and no hidden dataset. This lesson walks the six in capstone order, gives the unit and tolerance of each as the assessment defines them, says where each one is read, and points out where marks are lost.
 
 ## The six graded fields

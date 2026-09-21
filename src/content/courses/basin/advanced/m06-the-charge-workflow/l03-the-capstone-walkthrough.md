@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Expert capstone grades six values from the reference basin. This lesson is the rehearsal: each field, its tolerance, its shortest defensible route, and the trap beside it. Two model runs and four lines of arithmetic cover everything.
 
 {{panel:bs-charge-explorer}}

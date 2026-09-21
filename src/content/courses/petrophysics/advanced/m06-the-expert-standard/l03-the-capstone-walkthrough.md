@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Expert capstone is the graded practical that closes the petrophysics ladder. Like the two capstones before it, it asks for numbers the app computes live from the typewell dataset, grades them server-side within stated tolerances, and certifies you when all of them land. This lesson walks the brief so that nothing in it surprises you.
 
 ## The brief

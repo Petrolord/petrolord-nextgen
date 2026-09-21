@@ -1,5 +1,7 @@
 # Working the capstone
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Associate capstone asks you to displace the Ekene sand. You run the fractional flow analysis on the fixture's rock and fluids and report six numbers, each graded server-side against the engine truth within a stated tolerance.
 
 | Field | Unit | Tolerance | Where it is owned |

@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The capstone converts the n 3 prognosis into drilling numbers, cross-checks with Bowers, and probes the calibration lever. Six fields; this lesson walks each: exact expected value, tolerance, route, and the slip that loses it.
 
 ## The six fields

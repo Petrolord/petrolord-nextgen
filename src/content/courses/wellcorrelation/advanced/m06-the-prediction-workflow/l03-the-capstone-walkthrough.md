@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Expert capstone for this course is called Predict the missing TOP_B in Ekene-4, and it is short. Ekene-4 reached total depth above TOP_B. You predict the missing pick two ways from the three wells that carry it, project the mean TOP_A to TOP_B interval down from TOP_A for the layer-cake estimate and the mean TOP_SAND to TOP_B interval down from TOP_SAND for the other, and report both predictions, their spread, the two mean intervals and the structural relief of TOP_B where it is drilled. Six numbers are graded.
 
 This lesson walks the six in capstone order, gives the unit and tolerance of each as the assessment defines them, and says where each one is read.

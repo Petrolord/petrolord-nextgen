@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 Six graded fields, all derived in this course; this lesson runs each from first principles with the panel open, and names the wrong answer each field is built to catch.
 
 {{panel:em-population-explorer}}

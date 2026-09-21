@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Professional capstone does not ask you to book one well. It asks you to work the Ekene field the way a portfolio engineer does: pin down a decline exponent, book a well from it, window a second well, read the number that proves a third well's naive fit invalid, book a well from a borrowed curve, and total the field. Six graded fields, one per skill this tier taught.
 
 | Graded field | Unit | Tolerance |

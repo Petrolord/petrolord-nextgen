@@ -1,5 +1,7 @@
 # Working the capstone
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The capstone asks for six numbers from the Ekene ledger. This lesson walks the mechanism for each one. It does not give you the answers; it makes sure that when your number disagrees with the grader, you know which step to check.
 
 ## What you are given
