@@ -18,7 +18,7 @@ Read the table as a set of promises. An event tree root must happen at some rate
 
 ## A frequency is a rate
 
-A frequency of 1e-4 per year is one event in ten thousand years on average. It says nothing about which year. It is a rate, never a probability, and that is why the engine will never accept a frequency in a probability field or the other way round. The two live in different inputs.
+A frequency of 1e-4 per year is one event in ten thousand years on average. It says nothing about which year. It is a rate, never a probability, and that is why the engine keeps the two in different inputs, each named with its unit.
 
 When you multiply a frequency by a probability you get a frequency back. EREMOR's gas release happens at 5e-4 per year, as stated, and ignites immediately with a stated probability of 0.1. The immediate fire therefore happens at 0.000050000000 per year. The unit stays per year all the way through a tree, and an individual risk is also a frequency per year: the frequency with which one person at one place is killed.
 

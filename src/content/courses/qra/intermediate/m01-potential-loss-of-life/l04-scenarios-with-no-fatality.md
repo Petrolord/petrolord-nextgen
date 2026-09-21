@@ -16,7 +16,7 @@ It only matters when N is ignored. Summing the frequencies alone gives 0.0095400
 
 ## In the F-N curve
 
-The F-N curve plots the frequency of N or more deaths. A scenario with no deaths has no place on it, because the curve starts at the smallest N above zero. The engine keeps such scenarios out of the curve and reports their frequency beside it, so nothing silently disappears. On the JISIKE off-site set, a release that reaches no one at 5e-5 per year is kept out and reported as 0.000050000000 per year. The next module builds that curve in full.
+The F-N curve plots the frequency of N or more deaths. A scenario with no deaths has no place on it, because the curve starts at the smallest N above zero. The engine keeps such scenarios out of the curve and reports their frequency beside it, so nothing silently disappears. On the JISIKE off-site set, a release that reaches no one at 5e-5 per year is kept out and reported as 0.000050000000 per year. The third module of this tier builds that curve in full.
 
 ## Why report what is left out
 

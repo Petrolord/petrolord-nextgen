@@ -13,7 +13,7 @@ A criterion line has the form F = C / N^alpha, between a smallest N and, optiona
 | 1 | risk neutral | ten times the deaths is allowed at a tenth of the frequency |
 | 2 | risk averse | ten times the deaths is allowed at a hundredth of the frequency |
 
-With alpha of 1, the line allows the same expected deaths per year at every N. With alpha of 2, large events are held to a stricter standard than their expected deaths alone would demand, which is how a line expresses a society's aversion to many deaths at once. The engine carries no aversion weighting of its own; the slope of a criterion is where aversion enters.
+With alpha of 1, F times N is the same at every point on the line. With alpha of 2, large events are held to a stricter standard than their expected deaths alone would demand, which is how a line expresses a society's aversion to many deaths at once. The engine carries no aversion weighting of its own; the slope of a criterion is where aversion enters.
 
 ## What the engine accepts
 

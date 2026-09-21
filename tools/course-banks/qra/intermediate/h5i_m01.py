@@ -84,7 +84,7 @@ q(1,
 
 q(3,
  "Where does the expected number of deaths N of each scenario come from when a PLL is built?",
- "It is a stated input from the consequence course, the probability of death over the population cell by cell, and this course never computes it.",
+ "It is a stated input: the probability of death, from the consequence course, taken over the population cell by cell, and this course never computes it.",
  ["The PLL call derives it from the LSIR at each place times the head count there, so the caller types only frequencies.",
   "It is read from the event tree, whose leaf probabilities give the share of the crew that dies in each outcome.",
   "It is the crew's head count, 60, scaled down by the fraction of the year the crew is exposed on board."],

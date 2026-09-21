@@ -20,7 +20,7 @@ The Purple Book limits exposure to a fire to 20 s and to a toxic cloud to 30 min
 
 Purple Book Appendix 6.B works one individual risk contribution at one grid point. Its early steps are consequence modelling and belong to the consequence course; from the effective cloud width onward they are QRA arithmetic. The source is internally rounded:
 
-| step | printed in the source | engine, the whole chain |
+| step | printed in the source | the whole chain, golden |
 | --- | --- | --- |
 | probability of death, Pd | 0.381 | 0.380294556093 |
 | contribution, per year | 7e-9 | 0.000000006997 |

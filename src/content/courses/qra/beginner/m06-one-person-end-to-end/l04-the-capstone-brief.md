@@ -24,7 +24,7 @@ The third is precision. Answers are per year at twelve decimals. Carry the full 
 
 ## How to check your own answer
 
-Three sums catch almost every slip. The outcome frequencies of each tree must add back to its initiating frequency, as EREMOR's overfill leaves add back to 0.002000000000 per year. The contributions at each place must add to its LSIR. And each person's contributions must add to their IRPA, over a total occupancy no greater than one, as the EREMOR operator's does over 0.497716894977 of the year.
+Three sums catch many slips. The outcome frequencies of each tree must add back to its initiating frequency, as EREMOR's overfill leaves add back to 0.002000000000 per year. The contributions at each place must add to its LSIR. And each person's contributions must add to their IRPA, over a total occupancy no greater than one, as the EREMOR operator's does over 0.497716894977 of the year.
 
 If any of the three fails, recheck the step before it. The engine would refuse a tree that does not close or a roster over one whole year, and your own sums should refuse them too.
 

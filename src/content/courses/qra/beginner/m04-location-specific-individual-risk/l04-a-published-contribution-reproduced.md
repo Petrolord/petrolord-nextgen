@@ -10,7 +10,7 @@ The appendix's early steps, the concentration, the probit and the probability in
 
 ## The chain, printed and computed
 
-| step | printed in the source | engine, the whole chain |
+| step | printed in the source | the whole chain, golden |
 | --- | --- | --- |
 | probability of death on the centreline, Pcl | 0.835 | 0.832930245430 |
 | effective cloud width ECW, m | 86.2 | 86.301293 |
@@ -19,7 +19,7 @@ The appendix's early steps, the concentration, the probit and the probability in
 | weather and direction probability PM Pphi | 0.0368 | 0.0368 |
 | contribution dIR = f PM Pphi Pd, per year | 7e-9 | 0.000000006997 |
 
-The coverage probability spreads the centreline probability of death across the wind sector: a cloud of effective width ECW, at distance R, covers only part of the sector's arc. The last step is the LSIR arithmetic of this module: a frequency times a probability of death. Here the frequency is the loss of containment frequency times the probability of the weather class and the wind direction, and the probability of death is the one at the grid point. Everything before that step belongs to the consequence course, which is why this course reads Pcl as given and starts from it.
+The whole chain column is the golden record written by the engine's independent oracle, and the engine's own run agrees with it far inside the precision the source prints. The coverage probability spreads the centreline probability of death across the wind sector: a cloud of effective width ECW, at distance R, covers only part of the sector's arc. The last step is the LSIR arithmetic of this module: a frequency times a probability of death. Here the frequency is the loss of containment frequency times the probability of the weather class and the wind direction, and the probability of death is the one at the grid point. Everything before that step belongs to the consequence course, which is why this course reads Pcl as given and starts from it.
 
 ## The last step through the engine
 

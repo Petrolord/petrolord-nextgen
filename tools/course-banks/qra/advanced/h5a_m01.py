@@ -65,7 +65,7 @@ q(2,
  "The snap is narrow: 1e-9 relative. One part in ten million is a hundred times wider, so 1.0000001e-6 per year is TOLERABLE for the public with boundary null, the golden case the digest prints. Reading the snap as a part in ten million widens it wrongly, the engine rounds nothing before banding, and a boundary is named only when the value is taken as the threshold."),
 
 q(0,
- "Which pair of sources does the digest cite for the claim that every source the engine read words its threshold so that equality falls in the lower band?",
+ "Which sources does the digest cite for the claim that every source the engine read words its threshold so that equality falls in the lower band?",
  "R2P2 paragraph 136 says \"more than\" and Bevi says \"ten hoogste\" (at most), and the checklist says costs over benefits \"greater than\" the DF.",
  ["The Purple Book Figure 6.8 caption, \"F < 1e-3 N^-2\", and R2P2's bias to safety, which together put a value lying on a line in the band above it.",
   "R2P2 paragraph 136 says \"at least\" and Bevi says \"more than\", and the engine therefore rounds a value at the threshold to the band below.",

@@ -118,7 +118,7 @@
    "GROSSLY_DISPROPORTIONATE, by the half unit that separates the printed total benefit of 9283 from the computed 9283.50."
   ],
   "answer": 0,
-  "explanation": "The computed limit is 92835.00, so 93000 lies above it by 165.00 and the engine returns GROSSLY_DISPROPORTIONATE. The checklist meant \"in the region of\", and the verdict is an artefact of its rounding. The lower band applies at the computed limit, the snap is far narrower than 165.00, and the half unit on the benefit becomes 165.00 only after the DF of 10 and the rounding up of the print."
+  "explanation": "The computed limit is 92835.00, so 93000 lies above it by 165.00 and the engine returns GROSSLY_DISPROPORTIONATE. The checklist meant \"in the region of\", and the verdict is an artefact of its rounding. The lower band applies at the computed limit, the snap is far narrower than 165.00, and the half unit on the benefit is only a small part of 165.00 even at a DF of 10: most of the margin is the print's rounding up to 93000."
  },
  {
   "prompt": "The checklist table prints the permanent incapacity value mistyped with an extra digit. Which figure does the course use, and why?",
@@ -140,7 +140,7 @@
    "A verdict of NOT_GROSSLY_DISPROPORTIONATE, because a measure with no benefit carries no disproportion to weigh at all."
   ],
   "answer": 2,
-  "explanation": "The engine refuses a negative deltaPLL with the message quoted, which is its own. It never computes a negative benefit or ratio, it never silently flips a sign, and a verdict needs a benefit to weigh, which a measure that raises individual risk does not have."
+  "explanation": "The engine refuses a negative deltaPLL with the message quoted, which is its own. It never computes a negative benefit or ratio, it never silently flips a sign, and a verdict needs a benefit to weigh, which a measure that raises the PLL does not have."
  },
  {
   "prompt": "The two HSE VPF figures carry price years. What does the engine's export say about each?",

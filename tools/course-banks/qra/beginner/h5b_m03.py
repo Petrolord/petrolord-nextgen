@@ -123,7 +123,7 @@ q(0,
   "Those are the engine's own words from the refusal table, naming `massRateKgS`. The engine does not switch a continuous call to an instantaneous one, and it assumes no band. The release type message is real engine text for a type the table does not have, and here the type was valid.")
 
 q(2,
-  "At what release sizes does the engine's lookup place gas-low-reactivity in the large band, and with what probability?",
+  "Among the release sizes the digest's lookup table prints, which does the engine place in the large band for gas-low-reactivity, and with what probability?",
   "A continuous 200 kg/s or an instantaneous 20000 kg, at 0.09.",
   ["A continuous 100 kg/s or an instantaneous 10000 kg, at 0.09, since the top edge of the middle band opens into the large band.",
    "A continuous 50 kg/s or an instantaneous 5000 kg, at 0.04, the value the column gives to every release of middle size or more.",

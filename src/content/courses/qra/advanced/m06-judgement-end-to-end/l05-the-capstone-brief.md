@@ -28,4 +28,4 @@ Open the panel, enter the stated inputs for one measure, and read the ratio, the
 
 ## Exercise
 
-Take the firewall at the checklist limits and DF 3, with a ratio of 9.350247, an ICAF of 8026550.41 and a present value of the benefit of 34337.28. Write the three quantities the capstone would ask for in the form it expects, marking which one you would still need to compute from the benefit and the DF, and say in one sentence how you would compute it.
+Take the firewall at the checklist limits and DF 3, with a ratio of 9.350247, an ICAF of 8026550.41 and a present value of the benefit of 34337.28. Write the three quantities the capstone would ask for in the form it expects, marking which one the example leaves out, and say in one sentence why you would read it from the engine instead of multiplying the rounded 34337.28 by the DF by hand.

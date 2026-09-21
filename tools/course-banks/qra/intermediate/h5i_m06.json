@@ -38,10 +38,10 @@
    "Every factor was matched against a second edition of the same source at twelve decimals",
    "The oracle found one transcription error in the explosion rules and flagged the suite red",
    "A wrong clothing factor planted in both the engine and its oracle left the suite green",
-   "The factors were fitted to the R2P2 box of industry rates and agree with it within rounding"
+   "The factors were checked against a worked Fd example the Purple Book prints for every effect"
   ],
   "answer": 2,
-  "explanation": "The digest says the engine's own validation planted a wrong clothing factor in both the engine and its oracle, and the suite stayed green, which is why no number through the fractions is graded. There is no second reading of the source behind them. No error was found and flagged, because a planted error in both places cannot be seen. The R2P2 box banks individual rates by industry and says nothing about these factors."
+  "explanation": "The digest says the engine's own validation planted a wrong clothing factor in both the engine and its oracle, and the suite stayed green, which is why no number through the fractions is graded. There is no second reading of the source behind them. No error was found and flagged, because a planted error in both places cannot be seen. The Purple Book prints no numeric example for these factors, so there was nothing to check them against."
  },
  {
   "prompt": "For an explosion, which rule does the engine apply at exactly 30000 Pa gauge?",

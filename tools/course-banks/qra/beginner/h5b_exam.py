@@ -210,15 +210,15 @@ q(0,
   ["A coverage probability of 0.456574314811, Pd = 0.380294556093 and a contribution of 0.000000006997 per year.",
    "A coverage probability of 0.456, Pd = 0.381 and a contribution of 7e-9 per year, the printed values with nothing recomputed.",
    "A Pd of 0.832930245430 and a contribution of 0.000000007010 per year."],
-  "From the printed values the digest gets a coverage probability of 0.456038429735 from the printed 86.2 m, Pd = 0.835 x 0.456 = 0.380760, and a contribution of 7.0104e-9 per year. 0.456574314811, 0.380294556093 and 0.000000006997 are the engine's whole chain. The bare printed values recompute nothing, and 0.832930245430 is the engine's centreline value.")
+  "From the printed values the digest gets a coverage probability of 0.456038429735 from the printed 86.2 m, Pd = 0.835 x 0.456 = 0.380760, and a contribution of 7.0104e-9 per year. 0.456574314811, 0.380294556093 and 0.000000006997 are the whole chain's values. The bare printed values recompute nothing, and 0.832930245430 is the whole chain's centreline value.")
 
 q(3,
-  "What centreline probability of death does Appendix 6.B print, and what does the engine's whole chain give for it?",
-  "0.835 printed; 0.832930245430 from the engine.",
-  ["0.381 printed; 0.380294556093 from the engine, which are the two values of the centreline probability of death.",
+  "Which pair gives the centreline probability of death that Appendix 6.B prints, then the value its full recomputation in the golden file reaches?",
+  "0.835 in the source; 0.832930245430 in the golden recomputation.",
+  ["0.381 in the source; 0.380294556093 in the golden recomputation, which are the two values of the centreline probability of death.",
    "0.835 in both.",
-   "0.456 printed; 0.456574314811."],
-  "The digest's table gives Pcl as 0.835 printed and 0.832930245430 through the engine's whole chain. 0.381 and 0.380294556093 are the two values of Pd = Pcl Pci, after coverage. 0.456 and 0.456574314811 are the coverage probability Pci. The whole chain computes Pcl; this course starts its own steps at the probability of death onward.")
+   "0.456 in the source; 0.456574314811 in the golden."],
+  "The digest's golden table gives Pcl as 0.835 printed and 0.832930245430 through the whole chain. 0.381 and 0.380294556093 are the two values of Pd = Pcl Pci, after coverage. 0.456 and 0.456574314811 are the coverage probability Pci. The whole chain computes Pcl; this course starts its own steps at the probability of death onward.")
 
 q(3,
   "What contribution per year does the engine's whole Appendix 6.B chain give, against the source's printed 7e-9?",
@@ -250,7 +250,7 @@ q(0,
   ["The fractions are right for the IRPA, and the engine applies them by default whenever a place is marked as being indoors.",
    "The fractions are for the ignition table, where they set how much of a release reaches an ignition source inside a building.",
    "The fractions are set by the consequence course as a dose, so they are graded there."],
-  "Purple Book indoor and outdoor fractions count deaths in a population cell, which is societal risk and the next tier's work. For one person's IRPA the digest knows of no published vulnerability factor, so the engine leaves the factor to the analyst and uses 1 when none is supplied. Nothing is applied automatically for a building, and the fractions play no part in the ignition table or in any dose, which belongs to the consequence course.")
+  "Purple Book indoor and outdoor fractions count deaths in a population cell, which is societal risk and the next tier's work. For one person's IRPA no source the engine read gives a vulnerability factor, so the engine leaves the factor to the analyst and uses 1 when none is supplied. Nothing is applied automatically for a building, and the fractions play no part in the ignition table or in any dose, which belongs to the consequence course.")
 
 q(3,
   "What LSIR does the EREMOR transect give at 200 m?",

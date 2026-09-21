@@ -2,7 +2,7 @@
 
 {{panel:qr-event-tree}}
 
-When an input cannot support a calculation, the engine computes nothing. It returns an object with `error` and `field`, where `field` names the offending input down to its position in a list. A refusal carries no number of its own, because a number would look like a result. Across the whole engine 39 refusals are tabled across 13 functions. Five of them guard the arithmetic of this tier, and each is quoted below in the engine's own words.
+When an input cannot support a calculation, the engine computes nothing. It returns an object with `error` and `field`, where `field` names the offending input down to its position in a list. A refusal carries no number of its own, because a number would look like a result. Across the whole engine 39 refusals are tabled across 13 functions. Five that guard the arithmetic of this tier are quoted below, each in the engine's own words.
 
 ## Two refusals that guard a tree
 

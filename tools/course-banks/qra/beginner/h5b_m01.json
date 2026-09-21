@@ -33,7 +33,7 @@
   "explanation": "The digest says the three functions MAKE a probability of death and that this course does not teach their inputs; that work is consequence modelling and belongs to the consequence course. So no Associate lesson teaches them, and a capstone states each probability of death it uses. A fire or an explosion is modelled in the consequence course just as a toxic cloud is, so none of the three effects is special here."
  },
  {
-  "prompt": "An analyst types 2 as a scenario frequency per year and 2 as a probability of death for the same scenario. What does the engine do with each?",
+  "prompt": "An analyst types 2 as a scenario frequency per year and 2 as a probability of death for the same scenario, named 'fire', at one place. What does the engine do with each?",
   "options": [
    "It accepts both, since it checks only that each number is 0 or more before it forms the product for the place.",
    "It accepts the frequency, which counts events per year and may exceed one, and refuses the probability of death, which must lie from 0 to 1.",

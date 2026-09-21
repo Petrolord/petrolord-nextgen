@@ -22,7 +22,7 @@ q(0,
  ["R2P2 prints a slope of zero, so the criterion is flat at every value of N",
   "A slope would double count the aversion already inside the R2P2 frequency",
   "The engine infers the slope from the Dutch line and so needs none of its own"],
- "The digest says R2P2 defers extrapolation to other N to a reference the engine did not read, so the engine gives the point NO SLOPE and compares the curve at N = 50 only. R2P2 prints no slope at all, flat or otherwise. The engine carries no aversion weighting of any kind. It borrows nothing from the Dutch line, which is a separate preset from another source.")
+ "The digest says R2P2 defers extrapolation to other N to a reference the engine did not read, so the engine gives the point NO SLOPE and compares the curve at N = 50 only. R2P2 prints no slope at all, flat or otherwise. The engine has no aversion weighting of its own; aversion enters only through the slope of a line a caller or preset gives. It borrows nothing from the Dutch line, which is a separate preset from another source.")
 
 q(3,
  "Set against the R2P2 point, how does the JISIKE off-site curve come out?",

@@ -56,7 +56,7 @@ q(1,
  ["The present value of the cost, 321062.02, over the discounted fatalities, 0.034337, the present value of the benefit over the VPF, which is 9350246.71.",
   "The undiscounted cost, 350000.00, over the fatalities prevented, 0.040000, the undiscounted ICAF.",
   "The present value of the benefit, 34337.28, over the fatalities prevented, 0.040000."],
- "The ICAF is the present value of the cost over deltaPLL times the life in years, undiscounted: 321062.02 over 0.040000 is 8026550.41. Dividing by the discounted fatalities gives 9350246.71, a number the engine never returns. 350000.00 over 0.040000 is the undiscounted row's 8750000.00, and the benefit over fatalities prevented recovers the VPF rather than any cost."),
+ "The ICAF is the present value of the cost over deltaPLL times the life in years, undiscounted: 321062.02 over 0.040000 is 8026550.41. Dividing by the discounted fatalities gives 9350246.71, a number the engine never returns. 350000.00 over 0.040000 is the undiscounted row's 8750000.00, and the present value of the benefit over the fatalities prevented divides a benefit where the ICAF divides a cost."),
 
 q(0,
  "What does the engine return as the ICAF of the EDIKAN firewall with every rate at zero?",

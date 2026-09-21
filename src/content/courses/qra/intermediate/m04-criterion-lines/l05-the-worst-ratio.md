@@ -34,4 +34,4 @@ A ratio prints to six decimals in this course, and the engine's comparison reads
 
 ## Exercise
 
-The curve's worst ratio against the Dutch line is 18.000000 at N = 300.000000. Compute the frequency the toxic cloud over the town would need for that corner's ratio to fall to 2.720000, the next worst, and say which corners would then share the worst ratio.
+The curve's worst ratio against the Dutch line is 18.000000 at N = 300.000000. Compute the frequency the toxic cloud over the town would need for that corner's ratio to fall to 2.720000. Then recompute F(40) and F(12) with that frequency, remembering that the toxic cloud is counted at every corner up to 300, and say which corner would then carry the worst ratio.

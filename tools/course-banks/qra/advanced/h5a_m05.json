@@ -132,7 +132,7 @@
   "explanation": "The digest says the engine applies the cap without refusing and states the time used: a toxic exposure of 60 minutes is computed at 30, and the toxic case belongs to the consequence side of the seam. No refusal is raised, the cap is applied by the engine itself, and nothing rescales a stated probability of death."
  },
  {
-  "prompt": "Purple Book Appendix 6.B prints Pd = 0.381, where the engine's whole chain gives 0.380294556093. What explains the gap, and what should a reproduction do?",
+  "prompt": "Purple Book Appendix 6.B prints Pd = 0.381, where the whole chain, as the golden records it, gives 0.380294556093. What explains the gap, and what should a reproduction do?",
   "options": [
    "The engine's chain is wrong in its third decimal, so a reproduction quotes the printed 0.381 and discards the engine's figure for the step and every later step built on it.",
    "The source used R = 360.555 m where the engine uses 361 m, so a reproduction replaces the engine's distance with the printed one.",
@@ -143,7 +143,7 @@
   "explanation": "The digest says the whole chain gives 0.380294556093, which rounds to 0.380, and the printed 0.381 follows only from the rounded ECW of 86.2; both routes reproduce the printed contribution of 7e-9 to two significant figures. The gap describes the SOURCE. It is the source that uses R = 361 m for a point at 360.555 m, and the gap is fully explained."
  },
  {
-  "prompt": "Which of these does the engine refuse to do, by its own design?",
+  "prompt": "Which of these does the engine decline to do, by its own design?",
   "options": [
    "Return an LSIR for a place whose probability of death is zero for some scenario, which it refuses as an incomplete input set of scenarios at that place.",
    "Compare an F-N curve with the single R2P2 point, since a point without a slope cannot be compared with a step curve at any corner of it.",
@@ -156,7 +156,7 @@
  {
   "prompt": "An analyst wants to apply the Purple Book indoor fractions as a vulnerability factor on the EREMOR operator's individual risk. What does the engine's position say?",
   "options": [
-   "No source the engine read gives a vulnerability factor for individual risk; the indoor fractions are for societal risk, so the default is 1 and the basis says what was supplied.",
+   "No source the engine read gives a vulnerability factor for individual risk; the indoor fractions are for societal risk, so the default is 1 and the result returns the factor used beside each place's contribution.",
    "The indoor fractions are the Purple Book's vulnerability factor, day 0.93 and night 0.99, and the engine applies them by default to every place.",
    "The engine refuses any vulnerability factor below 1, since only the Purple Book fractions may lower an individual risk and they are not allowed here.",
    "The engine computes a vulnerability factor from the operator's hours, so the analyst supplies no factor and the fractions are never used."

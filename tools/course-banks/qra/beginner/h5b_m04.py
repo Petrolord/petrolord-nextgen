@@ -91,14 +91,14 @@ q(0,
 
 q(3,
   "Purple Book Appendix 6.B works one individual risk contribution at one grid point. Where does this course start its steps, and why?",
-  "At the probability of death, because the concentration, the probit and the probability integral before it are consequence modelling and belong to the consequence course.",
+  "At the centreline probability of death, taken as given, because the concentration, the probit and the probability integral before it are consequence modelling and belong to the consequence course.",
   ["At the release frequency, running every step of the chain in this course so that each learner reproduces the source from the start.",
    "At the contribution per year, taking every earlier value from the source and reproducing none of the chain from the printed numbers.",
    "At the wind sector count, since that is the first step the source prints."],
   "The digest says the early steps, the concentration, the probit and the probability integral, are consequence modelling and belong to the consequence course; from the effective cloud width onward the steps are QRA arithmetic, and this course starts there. The earlier steps are never run here, and the course does reproduce the later ones, from the probability of death through to the contribution.")
 
 q(2,
-  "The whole Appendix 6.B chain through the engine gives a probability of death of 0.380294556093, and the source prints 0.381. What explains the gap?",
+  "The whole Appendix 6.B chain, as the golden records it, gives a probability of death of 0.380294556093, and the source prints 0.381. What explains the gap?",
   "The printed 0.381 follows only from the rounded effective cloud width of 86.2 m; the source is internally rounded, and both routes reproduce its contribution of 7e-9 per year.",
   ["The engine has a defect in its coverage probability, which the printed 0.381 exposes at the third decimal of the chain.",
    "The source uses 8766 hours a year where the engine uses 8760, which moves every probability of death at the third decimal.",

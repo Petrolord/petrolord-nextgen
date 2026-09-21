@@ -102,8 +102,8 @@ q(3,
  "As the engine's N or more result, checked by self-consistency, with no published F-N example behind it",
  ["As a published reproduction, since the Purple Book prints the same curve in its own worked example",
   "As verified against the Bevi points, since those three points lie on the curve at N of 10, 100 and 1000",
-  "As a figure rounded from the R2P2 box of industry rates, which prints societal frequencies for the sector"],
- "The course never presents an F-N figure as a published reproduction, because no published worked F-N example exists. The Bevi points lie on the Purple Book criterion line, which is the published side, and say nothing about this curve. The R2P2 box reports individual rates by industry and prints no F-N figure.")
+  "As a figure matched to the CCPS worked societal example, which the engine reproduces to the last printed digit"],
+ "The course never presents an F-N figure as a published reproduction, because no published worked F-N example exists. The Bevi points lie on the Purple Book criterion line, which is the published side, and say nothing about this curve. The CCPS and HSE worked examples were not available to the engine, so nothing was matched to them.")
 
 q(0,
  "Quote the basis model the engine writes beside every F-N curve.",

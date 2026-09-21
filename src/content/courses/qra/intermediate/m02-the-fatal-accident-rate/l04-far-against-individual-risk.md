@@ -22,7 +22,7 @@ The EREMOR operator from the Associate tier carries an IRPA of 0.000017541379 pe
 
 ## Where the hours differ
 
-The IRPA divides hours at a place by the 8760 hours in a year, because it asks what share of the year a person spends exposed. The FAR sums the hours a group is exposed and uses them as the denominator directly, because it asks for a rate per 100,000,000 exposed hours. The same roster enters both, doing different work. An operator who doubled their hours on the process deck would carry roughly twice the process deck contribution to their IRPA. A crew whose hours doubled with no change to the PLL would halve its FAR. That last sentence is the warning: a FAR can fall because the denominator rose, while nobody is any safer.
+The IRPA divides hours at a place by the 8760 hours in a year, because it asks what share of the year a person spends exposed. The FAR sums the hours a group is exposed and uses them as the denominator directly, because it asks for a rate per 100,000,000 exposed hours. The same roster enters both, doing different work. An operator who doubled their hours on the process deck would carry twice the process deck contribution to their IRPA. A crew whose hours doubled with no change to the PLL would halve its FAR. That last sentence is the warning: a FAR can fall because the denominator rose, while nobody is any safer.
 
 ## What each hides
 

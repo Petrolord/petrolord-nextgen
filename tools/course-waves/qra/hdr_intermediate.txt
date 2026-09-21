@@ -1,0 +1,23 @@
+-- ============================================================================
+-- H5 PROFESSIONAL DEEP SEED: Quantitative Risk Assessment, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/qra/intermediate.
+--
+-- What this tier owns: HOW MANY AT ONCE. Potential loss of life is the sum of
+-- frequency times the expected number of deaths, which need not be whole; the
+-- fatal accident rate is PLL per 100,000,000 exposed hours, the same base as
+-- the safety statistics course; the F-N curve is the frequency of N OR MORE
+-- deaths, a step function whose area is the expected fatalities; a curve is
+-- compared with a line at its corners, and with the single R2P2 point, and a
+-- curve on the line touches it. No published worked F-N example exists, so the
+-- curve is checked by self-consistency. Digest sections 15 to 24, and section
+-- 34.
+--
+-- THE TRAP THE TIER IS BUILT ON. "More than N" drops the scenario at every
+-- corner. The Professional capstone grades a PLL, a FAR, a frequency of ten or
+-- more deaths, a worst ratio to the line, where a curve exceeds and a ratio to
+-- the R2P2 point, and grades no ALARP band and no cost-benefit figure.
+-- ============================================================================

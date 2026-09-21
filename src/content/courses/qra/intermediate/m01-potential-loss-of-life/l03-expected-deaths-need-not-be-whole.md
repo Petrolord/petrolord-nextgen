@@ -39,4 +39,4 @@ The same N feeds the F-N curve, where scenarios are sorted by N and the frequenc
 
 ## Exercise
 
-The process fire's N of 1.2 is the product of a stated head count and a stated probability of death. Using the crew table, compute what the process fire's f x N would be if its N were doubled, then say by how much the crew PLL of 0.002420000000 fatalities per year would rise.
+Suppose the process fire's N of 1.2 had been assembled from a head count and a probability of death, both stated. Using the crew table, compute what the process fire's f x N would be if its N were doubled, then say by how much the crew PLL of 0.002420000000 fatalities per year would rise.

@@ -437,9 +437,9 @@ w(`Taking only the largest process deck contribution gives ${f12(deckMax)} per y
 section('pb6b', 'A published contribution reproduced: Purple Book Appendix 6.B', ['Associate m04 l04', 'Expert m05']);
 const G6 = GOLD.toxicGridPoint.pbAppendix6b;
 const gc = GOLD.individualRisk.pbAppendix6bContribution;
-w('Purple Book Appendix 6.B works one individual risk contribution at one grid point for one toxic release, one weather class and one wind sector. Its early steps (the concentration, the probit, the probability integral) are consequence modelling and belong to the consequence course. From the effective cloud width onward the steps are QRA arithmetic, and this section starts there. Values golden, as printed in the source and as the engine computes them.');
+w('Purple Book Appendix 6.B works one individual risk contribution at one grid point for one toxic release, one weather class and one wind sector. Its early steps (the concentration, the probit, the probability integral) are consequence modelling and belong to the consequence course. From the effective cloud width onward the steps are QRA arithmetic, and this section starts there. Values golden: as printed in the source, and as the engine\'s independent oracle recorded the whole chain in the golden, which the engine reproduces within its tested tolerance.');
 w();
-table(['step', 'printed in the source', 'engine, the whole chain'], [
+table(['step', 'printed in the source', 'the whole chain, golden'], [
   ['probability of death on the centreline, Pcl', String(G6.printed.centrelineProbability), f12(G6.expected.centrelineProbability)],
   ['effective cloud width ECW, m', String(G6.printed.effectiveCloudWidthM), f6(G6.expected.effectiveCloudWidthM)],
   ['coverage probability Pci = nws ECW / (2 pi R)', String(G6.printed.coverageProbability), f12(G6.expected.coverageProbability)],
@@ -459,7 +459,7 @@ w(`STEP BY STEP FROM THE PRINTED VALUES (golden): from the printed ECW of ${G6.p
 w();
 const chainPd3 = Number(G6.expected.probabilityOfDeath.toFixed(3));
 must('the whole chain rounds Pd to 0.380 while the source prints 0.381', chainPd3 === 0.38 && G6.printed.probabilityOfDeath === 0.381, chainPd3);
-w(`TWO ROUTES, TWO THIRD DECIMALS. The whole chain gives Pd = ${f12(G6.expected.probabilityOfDeath)}, which rounds to ${chainPd3.toFixed(3)}; the printed ${G6.printed.probabilityOfDeath} follows only from the rounded ECW of ${G6.printed.effectiveCloudWidthM}. The source is internally rounded, and both routes reproduce its printed contribution of ${ex(G6.printed.contributionPerYr)} per year to two significant figures (section 32 returns to this).`);
+w(`TWO ROUTES, TWO THIRD DECIMALS. The whole chain, as the golden records it, gives Pd = ${f12(G6.expected.probabilityOfDeath)}, which rounds to ${chainPd3.toFixed(3)}; the printed ${G6.printed.probabilityOfDeath} follows only from the rounded ECW of ${G6.printed.effectiveCloudWidthM}. The source is internally rounded, and both routes reproduce its printed contribution of ${ex(G6.printed.contributionPerYr)} per year to two significant figures (section 32 returns to this).`);
 
 /* ============================================================ SECTION 12 */
 
@@ -488,7 +488,7 @@ w();
 w('ONE PLACE AT A TIME. A person is in one place at a time, so the fractions may not exceed one at any place or in total. A roster of 0.6 and 0.5 of the year is refused (section 3). The occupancy check allows the total to reach one exactly.');
 w();
 const vulRun = success('EREMOR operator with an accommodation vulnerability factor', Q.individualRiskPerAnnum({ locations: T.EREMOR_OPERATOR.map((l) => ({ name: l.place, lsirPerYr: place(l.place), hoursPerYr: l.hoursPerYr, ...(l.place === 'accommodation' ? { vulnerabilityFactor: T.ACCOMMODATION_VULNERABILITY } : {}) })) }));
-w(`THE VULNERABILITY FACTOR is the analyst's own. With ${T.ACCOMMODATION_VULNERABILITY} applied in the accommodation (stated) the operator IRPA is ${f12(vulRun.irpaPerYr)} per year. No source the engine read gives a vulnerability factor for individual risk: the Purple Book indoor and outdoor fractions are for societal risk (section 24), so the default is 1 and the basis says what was supplied.`);
+w(`THE VULNERABILITY FACTOR is the analyst's own. With ${T.ACCOMMODATION_VULNERABILITY} applied in the accommodation (stated) the operator IRPA is ${f12(vulRun.irpaPerYr)} per year. No source the engine read gives a vulnerability factor for individual risk: the Purple Book indoor and outdoor fractions are for societal risk (section 24), so the default is 1 and the result returns the factor used beside each place\'s contribution.`);
 
 /* ============================================================ SECTION 13 */
 
@@ -906,7 +906,7 @@ table(['what the engine does not know', 'why, from its record', 'what the analys
 w();
 w(`EXPOSURE CAPS ARE APPLIED AND STATED. The Purple Book limits exposure to a fire to ${Q.PB_MAX_FIRE_EXPOSURE_S} s and to a toxic cloud to 30 minutes. The engine applies the cap without refusing and states the time it used; a toxic exposure of 60 minutes is computed at 30. The toxic case belongs to the consequence side of the seam.`);
 w();
-w(`THE PUBLISHED EXAMPLE IS ROUNDED. Purple Book Appendix 6.B prints Pd = ${G6.printed.probabilityOfDeath} where the whole chain gives ${f12(G6.expected.probabilityOfDeath)} (section 11). It also uses R = ${G6.args.distanceM} m for a point whose distance computes to 360.555 m, derived from its coordinates (200, 300), and one step names the point (100, 200). A reproduction that needs a rounded intermediate says which one.`);
+w(`THE PUBLISHED EXAMPLE IS ROUNDED. Purple Book Appendix 6.B prints Pd = ${G6.printed.probabilityOfDeath} where the whole chain, as the golden records it, gives ${f12(G6.expected.probabilityOfDeath)} (section 11). It also uses R = ${G6.args.distanceM} m for a point whose distance computes to 360.555 m, derived from its coordinates (200, 300), and one step names the point (100, 200). A reproduction that needs a rounded intermediate says which one.`);
 
 /* ============================================================ SECTION 33 */
 

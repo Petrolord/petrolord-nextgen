@@ -38,10 +38,10 @@
    "The largest reasonably practicable cost, 120000.00, because it is fixed by the cost and the benefit alone, whatever the DF.",
    "The cost to benefit ratio, 8.750000, because the DF moves only the verdict and the largest reasonable cost.",
    "The verdict, GROSSLY_DISPROPORTIONATE, because a verdict is a property of the measure whatever factor is applied to it.",
-   "The ICAF, 8750000.00, the only figure in the result that the DF divides."
+   "The margin by which the cost exceeds the limit, since the cost and the benefit are fixed."
   ],
   "answer": 1,
-  "explanation": "The digest says the cost to benefit ratio does not depend on the DF; only the verdict and the largest reasonable cost do. The largest reasonable cost runs 40000.00, 80000.00, 120000.00, 200000.00 and 400000.00 down the sweep, and the verdict turns at DF 10. The ICAF is also unmoved by the DF, but only because the DF never enters it at all."
+  "explanation": "The digest says the cost to benefit ratio does not depend on the DF; only the verdict and the largest reasonable cost do. The largest reasonable cost runs 40000.00, 80000.00, 120000.00, 200000.00 and 400000.00 down the sweep, and the verdict turns at DF 10. The margin between the cost and that limit shrinks as the limit climbs, although the cost and the benefit themselves stay fixed."
  },
  {
   "prompt": "What is the largest reasonably practicable cost the engine returns for the undiscounted firewall at a DF of 1, and why that figure?",

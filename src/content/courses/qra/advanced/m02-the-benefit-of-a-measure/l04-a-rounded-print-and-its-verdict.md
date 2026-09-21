@@ -14,7 +14,7 @@ Put a cost of exactly 93000 through the engine with the checklist's inputs and a
 
 ## Why the verdict flips
 
-The test is strict: a measure is grossly disproportionate when its cost is greater than the DF times its benefit. The computed limit is 92835.00. A cost of 93000 is 165.00 above it, and the test reports exactly that. The verdict is an artefact of the checklist's rounding, and nothing about the measure itself changed. The source meant its 93000 as a figure in the region of the limit, which it is. The engine reads every number it is given as exact, which is what a test on a limit has to do.
+The test is strict: a measure is grossly disproportionate when its cost is greater than the DF times its benefit. The computed limit is 92835.00. A cost of 93000 is 165.00 above it, and the test reports it as above the limit. The verdict is an artefact of the checklist's rounding, and nothing about the measure itself changed. The source meant its 93000 as a figure in the region of the limit, which it is. The engine reads every number it is given as exact, which is what a test on a limit has to do.
 
 ## A second slip in the same source
 

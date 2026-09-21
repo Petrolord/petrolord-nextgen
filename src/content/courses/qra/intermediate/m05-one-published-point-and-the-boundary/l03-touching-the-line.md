@@ -26,7 +26,7 @@ The golden case r2p2-touch compares a curve with the R2P2 point. Its F(50) is 1.
 
 ## A threshold belongs to the lower state
 
-A curve exactly on the line TOUCHES it and does not exceed it. That is the engine's convention, the owner's decision for this course: a value at a threshold belongs to the lower band. It follows the published wording. R2P2 paragraph 136 calls an event intolerable if its frequency is "more than" the point, so a frequency equal to it is on the tolerable side of that sentence. The Expert tier meets the same convention for individual risk and for cost; this tier needs it only for curves and criteria.
+A curve exactly on the line TOUCHES it and does not exceed it. That is the engine's convention, the owner's decision for this course: a value at a threshold belongs to the lower band. It follows the published wording. R2P2 paragraph 136 calls an event intolerable if its frequency is "more than" the point, so a frequency equal to it is outside what that sentence calls intolerable. The Expert tier meets the same convention for individual risk and for cost; this tier needs it only for curves and criteria.
 
 ## Why TOUCHES is a state of its own
 

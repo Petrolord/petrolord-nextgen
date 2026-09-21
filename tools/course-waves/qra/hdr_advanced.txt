@@ -1,0 +1,22 @@
+-- ============================================================================
+-- H5 EXPERT DEEP SEED: Quantitative Risk Assessment, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/qra/advanced.
+--
+-- What this tier owns: IS A FURTHER MEASURE REASONABLY PRACTICABLE, AND WHAT
+-- DOES THE ENGINE NOT KNOW. The ALARP regions and the owner's decision that a
+-- value exactly at a threshold belongs to the lower band, with the boundary
+-- snap; the benefit of a measure and the published checklist example; the two
+-- HSE discounting conventions and year-end present values; the implied cost of
+-- averting a fatality over the undiscounted fatalities prevented; the gross
+-- disproportion test, strictly greater; and what the engine does not know.
+-- Digest sections 25 to 33, and section 34.
+--
+-- THE TRAP THE TIER IS BUILT ON. The verdict can turn on the discounting
+-- convention, the DF and the VPF's year. The Expert capstone grades three cost
+-- to benefit ratios, two ICAFs and a largest reasonably practicable cost, under
+-- stated conventions, and teaches no present value mechanics beyond them.
+-- ============================================================================

@@ -30,7 +30,7 @@ The message prints the sum it found and the tolerance it applied, so you can see
 
 ## Why a tolerance and no rounding
 
-An alternative would have been to round every sum to a few decimals before comparing. That would hide real errors of the size of the third set. A tolerance of 1e-9 is loose enough to forgive the arithmetic of the machine and tight enough to catch any error a person could type. It is a declared choice, printed in the refusal itself, so every analyst who meets the rule can see exactly where the line sits.
+An alternative would have been to round every sum to a few decimals before comparing. That would hide real errors of the size of the third set. A tolerance of 1e-9 is loose enough to forgive the arithmetic of the machine and tight enough to catch a typing error such as the third set. It is a declared choice, printed in the refusal itself, so every analyst who meets the rule can see exactly where the line sits.
 
 A branch of probability zero is allowed. The golden case zero-probability-branch carries a leaf a at 0.000000000000 and a leaf b at 0.000400000000, and its set still sums to one.
 

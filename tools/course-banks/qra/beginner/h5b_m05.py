@@ -79,7 +79,7 @@ q(2,
   ["Half of the operator's IRPA, since the engine applies the factor to every place the operator occupies",
    "0.000017541379 per year, unchanged, since the engine ignores a vulnerability factor for individual risk and reports the default",
    "0.000016912100 per year, the process deck alone"],
-  "With 0.5 applied in the accommodation only, the operator IRPA is 0.000017525598 per year: the accommodation contribution halves and nothing else moves. The factor applies at the place it is supplied for, so it never halves the whole IRPA. The engine uses a supplied factor and says so in the basis; 0.000017541379 is the figure with the default of 1.")
+  "With 0.5 applied in the accommodation only, the operator IRPA is 0.000017525598 per year: the accommodation contribution halves and nothing else moves. The factor applies at the place it is supplied for, so it never halves the whole IRPA. The engine uses a supplied factor and returns it beside that place's contribution; 0.000017541379 is the figure with the default of 1.")
 
 q(0,
   "Why is the vulnerability factor 1 by default, and whose is it?",
@@ -87,7 +87,7 @@ q(0,
   ["It is the Purple Book's: the indoor and outdoor fractions set it, and the engine takes the indoor figure for any building.",
    "It is the engine's own estimate: it lowers the factor for any place with a stated probability of death below one half.",
    "It is fixed at 1 and cannot be supplied."],
-  "The digest says the vulnerability factor is the analyst's own, that no source the engine read gives one for individual risk, and so the default is 1 and the basis says what was supplied. The Purple Book indoor and outdoor fractions are for societal risk, and they are no vulnerability factor. The engine estimates nothing, and a factor can be supplied, as the accommodation example shows.")
+  "The digest says the vulnerability factor is the analyst's own, that no source the engine read gives one for individual risk, and so the default is 1 and the result returns the factor used at each place. The Purple Book indoor and outdoor fractions are for societal risk, and they are no vulnerability factor. The engine estimates nothing, and a factor can be supplied, as the accommodation example shows.")
 
 q(3,
   "A vulnerability factor above one is supplied for 'deck'. What does the engine return?",

@@ -267,9 +267,9 @@ Taking only the largest process deck contribution gives 0.000081000000 per year,
 
 # SECTION 11: A published contribution reproduced: Purple Book Appendix 6.B (owned by Associate m04 l04 and Expert m05)
 
-Purple Book Appendix 6.B works one individual risk contribution at one grid point for one toxic release, one weather class and one wind sector. Its early steps (the concentration, the probit, the probability integral) are consequence modelling and belong to the consequence course. From the effective cloud width onward the steps are QRA arithmetic, and this section starts there. Values golden, as printed in the source and as the engine computes them.
+Purple Book Appendix 6.B works one individual risk contribution at one grid point for one toxic release, one weather class and one wind sector. Its early steps (the concentration, the probit, the probability integral) are consequence modelling and belong to the consequence course. From the effective cloud width onward the steps are QRA arithmetic, and this section starts there. Values golden: as printed in the source, and as the engine's independent oracle recorded the whole chain in the golden, which the engine reproduces within its tested tolerance.
 
-| step | printed in the source | engine, the whole chain |
+| step | printed in the source | the whole chain, golden |
 | --- | --- | --- |
 | probability of death on the centreline, Pcl | 0.835 | 0.832930245430 |
 | effective cloud width ECW, m | 86.2 | 86.301293 |
@@ -284,7 +284,7 @@ Step 6 through `locationIndividualRisk`, with f PM Pphi = 1.84e-8 per year and t
 
 STEP BY STEP FROM THE PRINTED VALUES (golden): from the printed ECW of 86.2 m the coverage probability is 0.456038429735, Pd = 0.835 x 0.456 = 0.380760, and the contribution 7.0104e-9 per year.
 
-TWO ROUTES, TWO THIRD DECIMALS. The whole chain gives Pd = 0.380294556093, which rounds to 0.380; the printed 0.381 follows only from the rounded ECW of 86.2. The source is internally rounded, and both routes reproduce its printed contribution of 7e-9 per year to two significant figures (section 32 returns to this).
+TWO ROUTES, TWO THIRD DECIMALS. The whole chain, as the golden records it, gives Pd = 0.380294556093, which rounds to 0.380; the printed 0.381 follows only from the rounded ECW of 86.2. The source is internally rounded, and both routes reproduce its printed contribution of 7e-9 per year to two significant figures (section 32 returns to this).
 
 # SECTION 12: Individual risk per annum: one person over the places they occupy (owned by Associate m05)
 
@@ -309,7 +309,7 @@ The EREMOR supervisor, given as fractions of the year (stated process deck 0.05,
 
 ONE PLACE AT A TIME. A person is in one place at a time, so the fractions may not exceed one at any place or in total. A roster of 0.6 and 0.5 of the year is refused (section 3). The occupancy check allows the total to reach one exactly.
 
-THE VULNERABILITY FACTOR is the analyst's own. With 0.5 applied in the accommodation (stated) the operator IRPA is 0.000017525598 per year. No source the engine read gives a vulnerability factor for individual risk: the Purple Book indoor and outdoor fractions are for societal risk (section 24), so the default is 1 and the basis says what was supplied.
+THE VULNERABILITY FACTOR is the analyst's own. With 0.5 applied in the accommodation (stated) the operator IRPA is 0.000017525598 per year. No source the engine read gives a vulnerability factor for individual risk: the Purple Book indoor and outdoor fractions are for societal risk (section 24), so the default is 1 and the result returns the factor used beside each place's contribution.
 
 # SECTION 13: LSIR along a transect, and where it crosses the contours (owned by Associate m06)
 
@@ -677,7 +677,7 @@ The basis model string, verbatim: "grossly disproportionate when cost / benefit 
 
 EXPOSURE CAPS ARE APPLIED AND STATED. The Purple Book limits exposure to a fire to 20 s and to a toxic cloud to 30 minutes. The engine applies the cap without refusing and states the time it used; a toxic exposure of 60 minutes is computed at 30. The toxic case belongs to the consequence side of the seam.
 
-THE PUBLISHED EXAMPLE IS ROUNDED. Purple Book Appendix 6.B prints Pd = 0.381 where the whole chain gives 0.380294556093 (section 11). It also uses R = 361 m for a point whose distance computes to 360.555 m, derived from its coordinates (200, 300), and one step names the point (100, 200). A reproduction that needs a rounded intermediate says which one.
+THE PUBLISHED EXAMPLE IS ROUNDED. Purple Book Appendix 6.B prints Pd = 0.381 where the whole chain, as the golden records it, gives 0.380294556093 (section 11). It also uses R = 361 m for a point whose distance computes to 360.555 m, derived from its coordinates (200, 300), and one step names the point (100, 200). A reproduction that needs a rounded intermediate says which one.
 
 # SECTION 33: Judgement: ordering measures and the ALARP demonstration (owned by Expert m06)
 

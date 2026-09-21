@@ -23,13 +23,13 @@ The last row is the one a decision turns on. The largest reasonably practicable 
 
 ## What the reproduction proves
 
-The engine reproduces every printed figure to the precision the checklist prints it, and the figures that differ do so by the source's rounding alone. That makes the checklist example the published evidence behind the cost to benefit ratio and the largest reasonably practicable cost. It checks the benefit arithmetic line by line, the sum over a whole number of years, and the multiplication by the DF.
+The engine agrees with every printed figure, and each figure that differs does so by the source's rounding alone: a half dropped from the serious injury line and the total, and a limit rounded up to 93000. That makes the checklist example the published evidence behind the cost to benefit ratio and the largest reasonably practicable cost. It checks the benefit arithmetic line by line, the sum over a whole number of years, and the multiplication by the DF.
 
 It is one of two published checks. The other is R2P2's margin: with a VPF of 1000000, deltaPLL 1e-5 for 1 year gives 10.00 through the engine, the "about 10" the source prints. The checklist example is undiscounted, so it tests no discount rate; the discounting conventions are the subject of the next module.
 
 ## Reading a published example well
 
-Three habits come out of this reproduction. Compare line by line, so that any difference is located at once. Explain each difference before accepting it: here every one is a half dropped in print. And carry the engine's figure forward into your own note, with the printed one beside it as a check, because a decision computed from a rounded figure can land on the wrong side of a limit.
+Three habits come out of this reproduction. Compare line by line, so that any difference is located at once. Explain each difference before accepting it: here two are a half dropped in print, and the third is a limit rounded up. And carry the engine's figure forward into your own note, with the printed one beside it as a check, because a decision computed from a rounded figure can land on the wrong side of a limit.
 
 ## Exercise
 
