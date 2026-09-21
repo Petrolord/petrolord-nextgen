@@ -720,6 +720,8 @@ The vendored golden carries 57 refusal cases. Each one is called here and must r
 | heat-metabolic-not-an-hour | `nioshHeatAssessment` | `metabolicPeriods` | metabolicPeriods total 30 min: the NIOSH limits apply to a 1-hour TWA |
 | heat-bad-wbgt-row | `nioshHeatAssessment` | `wbgtPeriods[0].wbgtC` | wbgtPeriods[0].wbgtC must be a finite number |
 
+The `wbgt-below-absolute-zero` case calls `wbgtIndoorC` with a natural wet bulb of -300 C and a globe of 20 C.
+
 Refused fields, counted: `acclimatized` 1, `components` 1, `components[i].concentration` 1, `components[i].limit` 1, `criterion` 1, `criterionLevelDbA` 1, `dailyLexDbA` 2, `dailyLexDbA[i]` 1, `dosePct` 2, `durationH` 1, `exchangeRateDb` 1, `exposureDb` 1, `exposurePoints` 1, `globeC` 1, `laeqDbA` 2, `levelDbA` 1, `limit` 1, `limitDosePct` 1, `metabolicPeriods` 1, `metabolicRateW` 2, `method` 1, `naturalWetBulbC` 1, `nrrDb` 2, `periods` 8, `periods[i].concentration` 1, `periods[i].durationH` 1, `periods[i].durationMin` 1, `periods[i].laeqDbA` 1, `periods[i].levelDbA` 1, `periods[i].metabolicRateW` 1, `protectorType` 1, `referenceDurationH` 1, `shiftHours` 4, `targetLexDbA` 1, `twaCoefficientDb` 1, `twaDbA` 1, `wbgtPeriods` 1, `wbgtPeriods[i].wbgtC` 1, `weeklyHours` 2, `weighting` 2.
 
 # SECTION 11: LEX,8h, the daily noise exposure level (owned by Professional m01)

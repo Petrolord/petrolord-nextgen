@@ -1,0 +1,104 @@
+{
+ "migration": "20261023a_ro_bank_riskchange.sql",
+ "tag": "roundoff bank riskchange",
+ "banner": "B4/B5 ROUND-OFF BANK FIX",
+ "runs_after": "the 29 B4 length files, the 37 B4 fix files (20261021a/b) and 20261022",
+ "title": "five class B sign hits: sign-flipped day-count distractors carried in words",
+ "items": [
+  {
+   "app_slug": "riskchange",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "category": "sign",
+   "flag": "signhits.json class B: sign-flipped distractor -181",
+   "verdict": "fixed",
+   "reason": "The wrong reading (the date has passed) is said in words with the printed 181; same length.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "-181 days, and overdue, counted back from the review",
+      "new": "181 days past, overdue, counted back from the review"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "riskchange",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 26,
+   "category": "sign",
+   "flag": "signhits.json class B: sign-flipped distractor -45",
+   "verdict": "fixed",
+   "reason": "The wrong direction is said in words with the printed 45; the key stays the longest option.",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "-45",
+      "new": "45 back"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "riskchange",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-calendar-date",
+   "ord": 2,
+   "category": "sign",
+   "flag": "signhits.json class B: sign-flipped distractor -92",
+   "verdict": "fixed",
+   "reason": "The wrong direction is said in words with the printed 92; length rank unchanged.",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "-92, as the date falls in another year",
+      "new": "92 back, as the date falls in another year"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "riskchange",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "category": "sign",
+   "flag": "signhits.json class B: sign-flipped distractor -30",
+   "verdict": "fixed",
+   "reason": "The wrong reading (the date has passed) is said in words with the printed 30; same length.",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "Yes: it is -30 days away",
+      "new": "Yes: 30 days have passed"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "riskchange",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-calendar-date",
+   "ord": 1,
+   "category": "sign",
+   "flag": "signhits.json class B: sign-flipped distractor -30",
+   "verdict": "fixed",
+   "reason": "The wrong direction is said in words with the printed 30; it stays the longest option and the key keeps its rank.",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "-30",
+      "new": "30 back"
+     }
+    }
+   }
+  }
+ ]
+}

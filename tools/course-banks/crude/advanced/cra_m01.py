@@ -66,7 +66,7 @@ q(3, "A row is written with 1 coefficient on a problem with two variables, and t
  ["As infeasible, since the short row contradicts the rest.",
   "As unbounded, since one variable is free of that row.",
   "As optimal on the one variable the short row names."],
- "A malformed problem is not an answer, and the kernel throws. Any of the three statuses would be a claim about a problem nobody posed.")
+ "A problem that is written wrongly is neither optimal, infeasible nor unbounded. The kernel throws, which is a fault in the question, and it refuses to answer it with a status.")
 
 q(0, "In two-phase simplex, which phase finds that the rows contradict, and so returns infeasible?",
  "Phase one, when it cannot drive every artificial variable to zero.",

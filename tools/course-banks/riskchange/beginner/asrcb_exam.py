@@ -177,7 +177,7 @@ q("What is daysUntil for 2026-10-02, counted from 2026-10-01, for a reader in an
 q("OB-10 was marked \"Closed\" and still shows a review date of 2027-03-31. What does the register report for it on 2026-10-01?",
  "181 days to go, and no overdue flag",
  ["181 days, and overdue, since a closed risk still carries its date",
-  "-181 days, and overdue, counted back from the review",
+  "181 days past, overdue, counted back from the review",
   "null, and not overdue, since a closed risk has no date"],
  "daysUntil still counts the date, 181 days after 2026-10-01. The overdue test asks the status first, and a \"Closed\" risk is not live, so it can never read overdue whatever its date."),
 
@@ -190,7 +190,7 @@ q("A review date reads \"after the turnaround\". What does calendar.js parse it 
 
 q("How far is OB-03's review, set for 2026-11-15, from the as-of date 2026-10-01?",
  "45 days on",
- ["-45",
+ ["45 back",
   "60",
   "15"],
  "A date still to come gives a positive count, and mid November is 45 whole days on. The figure is only checkable with the date it was counted from."),
@@ -206,7 +206,7 @@ q("Is OB-06, an \"Open\" risk due for review on 2026-10-31, late on 2026-10-01?"
  "No: it has 30 days left",
  ["Yes, because it has no target",
   "No, as \"Open\" risks are checked at month end only",
-  "Yes: it is -30 days away"],
+  "Yes: 30 days have passed"],
  "OB-06 is live, so its date is read, and the end of October is still to come. Its missing target decides its appetite answer and has nothing to do with its review."),
 
 # ---- m05: the register as a whole

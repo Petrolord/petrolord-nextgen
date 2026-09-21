@@ -499,6 +499,9 @@ const steepQ = H.weymouthQ({ ...SOKU, elevChangeFt: SOKU_STEEP_DOWN_FT, p2Psia: 
 const steepInv = H.gasOutletPressure({ equation: 'weymouth', qScfd: steepQ.qScfd, ...SOKU, elevChangeFt: SOKU_STEEP_DOWN_FT });
 w(`Down ${e6(SOKU_STEEP_DOWN_FT)} ft, the trunk carries ${r4(steepQ.qScfd)} scfd when its outlet stands at ${e6(steepOutletPsia)} psia, which is ${e6(SOKU_STEEP_DOWN_ABOVE_INLET_PSI)} psia ABOVE its inlet of ${e6(SOKU.p1Psia)} psia.`);
 w(`Given that same rate the inverse returns ${shape(steepInv)}, and the forward call and the inverse call now differ by ${e6(steepOutletPsia - steepInv.p2Psia)} psi. The drop is NEGATIVE because the line arrives higher than it left, which is the honest reading of a descent and not an error state.`);
+// The same return in the digest's six-decimal format, so a lesson or bank that
+// quotes the drop as the course prints it resolves against a printed figure.
+w(`The inverse returns an outlet of ${e6(steepInv.p2Psia)} psia and a drop of ${e6(steepInv.dpPsi)} psi.`);
 const steepQ2 = H.weymouthQ({ ...SOKU, elevChangeFt: SOKU_STEEP_DOWN_FT, p2Psia: SOKU_STEEP_DOWN_P2_PSIA });
 const steepInv2 = H.gasOutletPressure({ equation: 'weymouth', qScfd: steepQ2.qScfd, ...SOKU, elevChangeFt: SOKU_STEEP_DOWN_FT });
 w(`THE CONTROL. Run the SAME descent with an outlet genuinely BELOW the inlet, ${e6(SOKU_STEEP_DOWN_P2_PSIA)} psia against ${e6(SOKU.p1Psia)} psia: the trunk carries ${r4(steepQ2.qScfd)} scfd and the inverse recovers ${e6(steepInv2.p2Psia)} psia, an error of ${e6(steepInv2.p2Psia - SOKU_STEEP_DOWN_P2_PSIA)} psi. Both answers come out of the same bisection. A search whose answer lies outside its bracket and a search that cannot converge look identical from a single case, and only a case with its answer inside the bracket tells the two apart.`);

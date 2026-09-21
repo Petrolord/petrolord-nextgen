@@ -34,9 +34,9 @@ At 1580 m, DT is 305.142 us/m:
 
 $$v = \frac{1000000}{305.142} = 3277.17 \ \text{m/s}$$
 
-At 1650 m, the base of the log, DT is 277.473 us/m:
+At 1650 m, the base of the log, DT is 277.473 us/m to three decimals. The log stores 277.4726, and that stored value is the one the engine divides, so it is the one to use here:
 
-$$v = \frac{1000000}{277.473} = 3603.96 \ \text{m/s}$$
+$$v = \frac{1000000}{277.4726} = 3603.96 \ \text{m/s}$$
 
 The transit times are quoted to three decimal places and the velocities to two, while the engine carries full precision through the division, so a calculator may disagree in the final digit. That is rounding and nothing more.
 

@@ -1,0 +1,66 @@
+{
+ "migration": "20261023a_ro_bank_seismolord.sql",
+ "tag": "roundoff bank seismolord",
+ "banner": "B4/B5 ROUND-OFF BANK FIX",
+ "runs_after": "the 29 B4 length files, the 37 B4 fix files (20261021a/b) and 20261022",
+ "title": "beginner bank uses the engine-rounded 3603.96 and 8189.64 throughout",
+ "items": [
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "category": "other",
+   "flag": "B4 README owner item: the beginner bank mixes 3603.95 / 8189.63 with the lessons' 3603.96 / 8189.64",
+   "verdict": "fixed",
+   "reason": "The engine divides the LAS-stored DT 277.4726 (float32 277.4725952), giving 3603.9595 m/s and Z 8189.6372, so 3603.96 and 8189.64 are the correctly rounded values; 3603.95 only comes from dividing the three-decimal 277.473. Explanations and options now use the engine values and name the stored DT. 2605.14 was also a mis-rounding of the engine 2605.1455.",
+   "changes": {
+    "explanation": {
+     "old": "At 1600 m, v = 2605.14 and Z = 5885.8. At 1650 m, v = 3603.95 and Z = 8189.63. The difference is about 2304 in favour of 1650 m. The densities are almost identical, so nearly all of the impedance change comes from the sonic log.",
+     "new": "At 1600 m, v = 2605.15 and Z = 5885.81. At 1650 m, from the stored DT of 277.4726, v = 3603.96 and Z = 8189.64. The difference is about 2304 in favour of 1650 m. The densities are almost identical, so nearly all of the impedance change comes from the sonic log."
+    }
+   }
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "category": "other",
+   "flag": "B4 README owner item: the beginner bank mixes 3603.95 / 8189.63 with the lessons' 3603.96 / 8189.64",
+   "verdict": "fixed",
+   "reason": "The engine divides the LAS-stored DT 277.4726 (float32 277.4725952), giving 3603.9595 m/s and Z 8189.6372, so 3603.96 and 8189.64 are the correctly rounded values; 3603.95 only comes from dividing the three-decimal 277.473. Explanations and options now use the engine values and name the stored DT.",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "3603.95 m/s",
+      "new": "3603.96 m/s"
+     }
+    },
+    "explanation": {
+     "old": "Averaging the velocity over all 301 finite samples gives 3145.29 m/s. The values 2501.65 and 3603.95 are single sample velocities, at 1500 m and at 1650 m, and 317.94 is a transit time in us/m rather than a velocity.",
+     "new": "Averaging the velocity over all 301 finite samples gives 3145.29 m/s. The values 2501.65 and 3603.96 are single sample velocities, at 1500 m and at 1650 m, and 317.94 is a transit time in us/m rather than a velocity."
+    }
+   }
+  },
+  {
+   "app_slug": "seismolord",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-velocity-and-impedance",
+   "ord": 5,
+   "category": "other",
+   "flag": "B4 README owner item: the beginner bank mixes 3603.95 / 8189.63 with the lessons' 3603.96 / 8189.64",
+   "verdict": "fixed",
+   "reason": "The engine divides the LAS-stored DT 277.4726 (float32 277.4725952), giving 3603.9595 m/s and Z 8189.6372, so 3603.96 and 8189.64 are the correctly rounded values; 3603.95 only comes from dividing the three-decimal 277.473. Explanations and options now use the engine values and name the stored DT.",
+   "changes": {
+    "explanation": {
+     "old": "1000000 / 277.473 gives 3603.96 m/s. Note that this is the shortest transit time of the anchor depths and therefore the highest velocity, which is the inverse relationship at work.",
+     "new": "1000000 / 277.4726, the transit time the log stores before it is printed as 277.473, gives 3603.96 m/s. Note that this is the shortest transit time of the anchor depths and therefore the highest velocity, which is the inverse relationship at work."
+    }
+   }
+  }
+ ]
+}

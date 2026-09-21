@@ -365,16 +365,20 @@
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
+   "class": "none",
    "fix": {
     "redesign": "No value change: correct the prompt and lesson trap to say the rigid minimum is set by the WIDER cased bore above 350 m, where the pipe is vertical and there is no sag, so it is the blade ratio against 0.315341. Alternatively regrade as the open hole minimum (0.6543142173967237) if the intent was the sag lesson."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Correct the prompt and l02 copy (the graded value is right for the engine; the instructions steer the learner to a failing number). Owner picks between fixing the copy and moving the graded quantity to the open hole minimum.",
    "evidence": "The graded 0.6424096181525695 is EXACTLY the cased-hole blade ratio (0.29-0.244475)/(0.315341-0.244475): the minimum sits in the vertical 13-3/8 inch section where sin(inc)=0 and the sag is zero. The prompt and lesson say the opposite ('Field 5 is not the blade ratio: the sag is subtracted from it', l02:44; 'from the blade ratio less the sag', l02:34); following them in the open hole gives 0.65431, which fails.",
    "notes": "Field 5 then needs no stiffness, so the EI amendment does not affect it.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261023b_ro_capstone_cementing.sql",
+    "prompt": "the prompt and advanced m06 l02 now say field 5 is the smallest rigid standoff over both bores (blade ratio of each bore less that interval's sag, zero where vertical), which is what the engine grades; no regrade, the engine is physically right"
+   }
   },
   {
    "tier": "advanced",

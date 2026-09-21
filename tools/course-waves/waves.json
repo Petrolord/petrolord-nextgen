@@ -28,7 +28,7 @@
       "fc2_fields_capstone.mjs"
     ],
     "pins": {
-      "digest.txt": "9b9f02688e7a241b0ef8e6ae733b72e94dca7e21ca1245314584f4412426ca2b",
+      "digest.txt": "16bbef3904a11af36da52e7830c0acf2309e5e70543f8af99163e5b671afafd3",
       "fields.json": "c61a985b69c2e74b6d7caee29bdfa4cdf5c790d80c33a1258c29044d6ad403de"
     }
   },
@@ -502,7 +502,7 @@
       "apply_h2_hygiene.sh"
     ],
     "pins": {
-      "digest.txt": "4de9a0fb0253540874326fe49215b3cd512f2e54a9d21d0eddff0c2745efde7f",
+      "digest.txt": "2b5da26ae40d5dc9c845e050c7a3400491478888039878cbac915d1d25815cff",
       "fields.json": "5271e9615617356f27a0febed887f311e5a4cdd4bc94c65644eb6bf0a6ac88a1"
     },
     "note": "FULL kit, foundation phase plus the five-migration seed ladder. The digest and its generator, the teaching records, the capstone generator, the answer key and its precision declaration, every wave gate, the build, finalise and mirror scripts, the structure and scaffold, all five writer briefs, the three tier headers, the course and go-live generators, gen_seeds.sh and its WORKTREE escape hatch, the local scratch database, the rollback-wrapped dry run with its negative-control block cutter, and the content-addressed apply script the owner runs. HSE module, path_order 62. The gates read /root paths by DEFAULT and every one takes an override."

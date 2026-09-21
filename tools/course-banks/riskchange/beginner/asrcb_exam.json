@@ -257,7 +257,7 @@
   "options": [
    "181 days, and overdue, since a closed risk still carries its date",
    "181 days to go, and no overdue flag",
-   "-181 days, and overdue, counted back from the review",
+   "181 days past, overdue, counted back from the review",
    "null, and not overdue, since a closed risk has no date"
   ],
   "answer": 1,
@@ -277,7 +277,7 @@
  {
   "prompt": "How far is OB-03's review, set for 2026-11-15, from the as-of date 2026-10-01?",
   "options": [
-   "-45",
+   "45 back",
    "60",
    "15",
    "45 days on"
@@ -302,7 +302,7 @@
    "No: it has 30 days left",
    "Yes, because it has no target",
    "No, as \"Open\" risks are checked at month end only",
-   "Yes: it is -30 days away"
+   "Yes: 30 days have passed"
   ],
   "answer": 0,
   "explanation": "OB-06 is live, so its date is read, and the end of October is still to come. Its missing target decides its appetite answer and has nothing to do with its review."

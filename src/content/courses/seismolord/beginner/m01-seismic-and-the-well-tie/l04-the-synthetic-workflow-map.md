@@ -4,7 +4,7 @@ You now know what a tie is for, what seismic actually measures, and which two cu
 
 ## The pipeline, stage by stage
 
-**Stage 1. Curves to impedance.** DT is inverted into velocity and RHOB is taken as density, then the two are multiplied into acoustic impedance sample by sample. At 1500 m, DT of 399.737 us/m gives a velocity of 2501.65 m/s, and with RHOB of 2.1893 g/cc the impedance is 5476.85. At 1650 m the same arithmetic on DT 277.473 and RHOB 2.2724 gives 3603.96 m/s and an impedance of 8189.64. The units here are metres per second times grams per cubic centimetre, which is the convention this course keeps throughout, so impedance values land in the thousands. Built in **module 2**.
+**Stage 1. Curves to impedance.** DT is inverted into velocity and RHOB is taken as density, then the two are multiplied into acoustic impedance sample by sample. At 1500 m, DT of 399.737 us/m gives a velocity of 2501.65 m/s, and with RHOB of 2.1893 g/cc the impedance is 5476.85. At 1650 m the same arithmetic on the stored DT of 277.4726 and RHOB 2.2724 gives 3603.96 m/s and an impedance of 8189.64. The units here are metres per second times grams per cubic centimetre, which is the convention this course keeps throughout, so impedance values land in the thousands. Built in **module 2**.
 
 **Stage 2. Depth to time.** The impedance log is still indexed in depth and the trace must be indexed in two-way time, so a time to depth function is applied. Real ties use a checkshot survey or integrate the sonic itself. This course uses a deliberately simple teaching function instead: a vertical well with a uniform 2000 m/s overburden, so that
 

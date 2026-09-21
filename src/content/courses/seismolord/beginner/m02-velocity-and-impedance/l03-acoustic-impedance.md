@@ -38,9 +38,9 @@ Take three anchor depths from the previous two lessons and carry each one all th
 1. $v = 1000000 / 305.142 = 3277.17$ m/s
 2. $Z = v \times 2.4349 = 7979.58$
 
-**At 1650 m**, DT is 277.473 us/m and RHOB is 2.2724 g/cc.
+**At 1650 m**, DT is 277.473 us/m (the log stores 277.4726, which the engine divides) and RHOB is 2.2724 g/cc.
 
-1. $v = 1000000 / 277.473 = 3603.96$ m/s
+1. $v = 1000000 / 277.4726 = 3603.96$ m/s
 2. $Z = v \times 2.2724 = 8189.64$
 
 A note on precision before you check these on a calculator. The velocities are quoted to two decimal places for readability, while the engine carries the full value through to the multiplication. Round the velocity first and the last digit of the impedance can shift by a hundredth. That is rounding noise, and it explains any small disagreement between your calculator and the printed value.

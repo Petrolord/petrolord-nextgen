@@ -5,7 +5,7 @@
    "31",
    "30",
    "29",
-   "-30"
+   "30 back"
   ],
   "answer": 1,
   "explanation": "From 2026-10-01 to 2026-10-31 is the thirty days of October that follow the first, so daysUntil returns 30. The first of November, 2026-11-01, is one day further at 31."
@@ -13,7 +13,7 @@
  {
   "prompt": "What does daysUntil return for 2027-01-01, counted from 2026-10-01?",
   "options": [
-   "-92, as the date falls in another year",
+   "92 back, as the date falls in another year",
    "60, as the calendar counts every month in the gap as exactly 30 days",
    "92, a positive count, as the date is still to come",
    "3, a count of the months between the two dates"

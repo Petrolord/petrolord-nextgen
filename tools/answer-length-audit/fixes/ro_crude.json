@@ -1,0 +1,26 @@
+{
+ "migration": "20261023a_ro_bank_crude.sql",
+ "tag": "roundoff bank crude",
+ "banner": "B4/B5 ROUND-OFF BANK FIX",
+ "runs_after": "the 29 B4 length files, the 37 B4 fix files (20261021a/b) and 20261022",
+ "title": "cra_m01 Q9 explanation without the gloss #182 cut from the lessons",
+ "items": [
+  {
+   "app_slug": "crude",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-what-a-linear-programme-is",
+   "ord": 9,
+   "category": "other",
+   "flag": "The explanation repeats the \"claim about a problem nobody posed\" gloss that #182 cut from advanced m01 l04",
+   "verdict": "fixed",
+   "reason": "Restated in the words the lesson now prints; key and options unchanged.",
+   "changes": {
+    "explanation": {
+     "old": "A malformed problem is not an answer, and the kernel throws. Any of the three statuses would be a claim about a problem nobody posed.",
+     "new": "A problem that is written wrongly is neither optimal, infeasible nor unbounded. The kernel throws, which is a fault in the question, and it refuses to answer it with a status."
+    }
+   }
+  }
+ ]
+}

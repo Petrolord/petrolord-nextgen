@@ -5,7 +5,7 @@
    "That s is proportional to the elevation change only over falls, the rise column being the mirror image the engine writes rather than a value it computes separately.",
    "That s grows faster than the elevation change, which is the asymmetry between climbing and descending that the rest of the module is about.",
    "That s is proportional to the elevation change, so equal distances up and down give exactly opposite values and doubling the fall doubles s.",
-   "That s is bounded between -1.0000000000 and 1.0000000000, which is what allows it to be handed to an exponential without the group overflowing on a tall hill."
+   "That s never exceeds one in size in either direction, which is what allows it to be handed to an exponential without the group overflowing on a tall hill."
   ],
   "answer": 2,
   "explanation": "s itself is well behaved. Everything awkward about a hill happens after s, when it goes into an exponential."

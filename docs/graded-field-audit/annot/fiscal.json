@@ -123,12 +123,18 @@
    "fix": {
     "new_tol": 0.05
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
    "evidence": "Life total over 25 rows is read from the engine (\"proves two rows and trusts the other twenty three\", src/content/courses/fiscal/beginner/m06-the-associate-reading/l02-working-the-capstone.md:37); the Designer summary prints `{s.govTake.toFixed(1)}` against tol 0.001.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261023c_ro_fiscal_tolerances.sql",
+    "tol": [
+     0.001,
+     0.05
+    ]
+   }
   },
   {
    "tier": "intermediate",
@@ -249,12 +255,18 @@
    "fix": {
     "new_tol": 0.05
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
    "evidence": "Summary prints `{s.npv.toFixed(1)}`; NPV over 25 year-end-discounted rows is an engine reading (intermediate m05/l01). tol 0.001 < 0.05.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261023c_ro_fiscal_tolerances.sql",
+    "tol": [
+     0.001,
+     0.05
+    ]
+   }
   },
   {
    "tier": "advanced",
@@ -273,12 +285,18 @@
    "fix": {
     "new_tol": 0.05
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
    "evidence": "After the sort, the first row NPV prints `{s.npv.toFixed(1)}` (20.956 shows as 21.0); tol 0.001.",
    "notes": "NextGen fiscal panels are select-only over ODIDI/default/test projects and panelCapstoneGuard.test.js bars URUAN, so no panel reaches this case; probe shows no hit.",
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261023c_ro_fiscal_tolerances.sql",
+    "tol": [
+     0.001,
+     0.05
+    ]
+   }
   },
   {
    "tier": "advanced",
@@ -297,12 +315,18 @@
    "fix": {
     "new_tol": 0.05
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
    "evidence": "Summary table prints `${s.governmentShareOfNetRevenuePct.toFixed(1)}%`; tol 0.0001 percent.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261023c_ro_fiscal_tolerances.sql",
+    "tol": [
+     0.0001,
+     0.05
+    ]
+   }
   },
   {
    "tier": "advanced",
@@ -321,12 +345,18 @@
    "fix": {
     "new_tol": 0.05
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
    "evidence": "Price sweep tooltip describePoint prints `${value.toFixed(1)} %`; tol 0.0001 percent.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261023c_ro_fiscal_tolerances.sql",
+    "tol": [
+     0.0001,
+     0.05
+    ]
+   }
   },
   {
    "tier": "advanced",
@@ -345,12 +375,18 @@
    "fix": {
     "new_tol": 0.1
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
    "evidence": "Difference of two capex-sweep tooltip readings, each `$${mm(v)}MM` toFixed(1); worst-case rounding error of the difference is 0.1 against tol 0.001.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261023c_ro_fiscal_tolerances.sql",
+    "tol": [
+     0.001,
+     0.1
+    ]
+   }
   },
   {
    "tier": "advanced",
@@ -369,12 +405,18 @@
    "fix": {
     "new_tol": 0.1
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
    "evidence": "First swept point (tooltip, toFixed(1)) minus a direct run at capex x1.5 (summary npv toFixed(1)); difference of two 1-decimal readings against tol 0.001.",
    "notes": "Insights may state the leader's loss via fmt = toFixed(1) (packages/engines/engines/economics/fiscalRegime.js:558), same precision.",
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261023c_ro_fiscal_tolerances.sql",
+    "tol": [
+     0.001,
+     0.1
+    ]
+   }
   },
   {
    "tier": "advanced",
@@ -393,12 +435,18 @@
    "fix": {
     "new_tol": 0.1
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tolerance to 0.05 (half a unit of the 1 decimal the Fiscal Regime Designer prints) is the minimal honest fix. Alternative: give the Designer a full-precision ledger/summary export (the lessons quote engine columns to 4 decimals that the Designer never prints) and keep 0.001.",
    "evidence": "Last minus first price-sweep tooltip reading, each `${value.toFixed(1)} %`; difference of two 1-decimal readings against tol 0.0001.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261023c_ro_fiscal_tolerances.sql",
+    "tol": [
+     0.0001,
+     0.1
+    ]
+   }
   }
  ]
 }

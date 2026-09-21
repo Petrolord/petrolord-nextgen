@@ -647,6 +647,11 @@ GOLD.refusals.forEach((c) => {
   w(`| ${c.id} | \`${c.fn}\` | \`${r.field}\` | ${String(r.error).replace(/\|/g, '/')} |`);
 });
 w();
+// The one refusal a bank question quotes by its input: print that input, so the
+// question's figure is a printed figure (and the refusal message stays the key).
+const belowZero = GOLD.refusals.find((c) => c.id === 'wbgt-below-absolute-zero');
+w(`The \`${belowZero.id}\` case calls \`${belowZero.fn}\` with a natural wet bulb of ${belowZero.args[0].naturalWetBulbC} C and a globe of ${belowZero.args[0].globeC} C.`);
+w();
 const refFields = countBy(GOLD.refusals, (c) => c.field.replace(/\[\d+\]/g, '[i]'));
 w(`Refused fields, counted: ${Object.entries(refFields).sort().map(([k, v]) => `\`${k}\` ${v}`).join(', ')}.`);
 w();

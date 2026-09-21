@@ -1,0 +1,28 @@
+{
+ "migration": "20261023a_ro_bank_linesizing.sql",
+ "tag": "roundoff bank linesizing",
+ "banner": "B4/B5 ROUND-OFF BANK FIX",
+ "runs_after": "the 29 B4 length files, the 37 B4 fix files (20261021a/b) and 20261022",
+ "title": "class A sign hit: a distractor no longer invents a bound on s",
+ "items": [
+  {
+   "app_slug": "linesizing",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-the-elevation-adjustment",
+   "ord": 1,
+   "category": "sign",
+   "flag": "signhits.json class A: option 3 invents a -1.0000000000 and 1.0000000000 bound on s that the course never prints",
+   "verdict": "fixed",
+   "reason": "The distractor stays wrong (s is unbounded; it is proportional to the elevation change) and no longer invents a figure; answer_index and length rank unchanged.",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "That s is bounded between -1.0000000000 and 1.0000000000, which is what allows it to be handed to an exponential without the group overflowing on a tall hill.",
+      "new": "That s never exceeds one in size in either direction, which is what allows it to be handed to an exponential without the group overflowing on a tall hill."
+     }
+    }
+   }
+  }
+ ]
+}
