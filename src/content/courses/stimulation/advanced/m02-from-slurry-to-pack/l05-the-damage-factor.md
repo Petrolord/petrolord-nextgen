@@ -26,7 +26,7 @@ Every one of those mechanisms is real, and not one of them is calculable from th
 
 So the engine does not pretend. It takes the factor as a stated input, requires it to lie in the range above 0 and no greater than 1, and applies it once and visibly. A factor of 1 is a claim that the well reproduces the laboratory, which is a claim you should be prepared to defend.
 
-The value carries straight through to conductivity, to dimensionless conductivity and to the pseudo-skin. Halve it and you halve all three. So state it, source it, and quote it beside the answer rather than burying it.
+The value carries straight through to conductivity, to dimensionless conductivity and to the pseudo-skin. Halve it and you halve the first two. The pseudo-skin passes through a logarithmic correlation, so it rises toward zero, a weaker stimulation, and does not halve. So state it, source it, and quote it beside the answer rather than burying it.
 
 ## Exercise
 
