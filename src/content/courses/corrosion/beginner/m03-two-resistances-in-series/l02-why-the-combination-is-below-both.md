@@ -14,7 +14,7 @@ Now a case where the two terms are close. One stream runs a reaction term of 44.
 
 ## The identity is checked rather than asserted
 
-This is one of the few claims in the module that needs no held constant at all. The digest behind this course checks the series identity on every row it prints and holds it to twelve figures: the reciprocal of the combined rate minus the reciprocal of each term comes out at zero. Because the check is arithmetic rather than a comparison against a fitted number, it survives whatever the correlation constants turn out to be.
+This is one of the few claims in the module that needs no held constant at all. The generator behind this course checks the series identity on every row it prints and holds it to twelve figures: the reciprocal of the combined rate minus the reciprocal of each term comes out at zero. Because the check is arithmetic rather than a comparison against a fitted number, it survives whatever the correlation constants turn out to be.
 
 That is what makes the combination a claim you can argue with. If a reported combined rate ever sat above either term, the arithmetic would be wrong and you could say so without reference to any source. The same reasoning gives you a quick sanity read on any screening: find the smaller term, and the printed combination should be near it and below it. A combination sitting near the larger term means one of the two inputs behind the smaller term has not reached the calculation, and the module has a refusal for exactly that case.
 

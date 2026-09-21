@@ -12,9 +12,9 @@ The question in the title is about a line that has been in service. Some of its 
 
 ## The worked case
 
-Take the digest's own example. A stated rate of 0.250000 mm/yr, a 4 mm allowance, 1.2 mm gone and a 20 year design life. The engine returns `requiredAllowanceMm` at 5.000000 mm, a remaining allowance of 2.800000 mm and a shortfall of 2.200000 mm. Now bisect the total allowance until `meetsDesignLife` turns true and the answer is 6.200000 mm.
+Take the lab's own example. A stated rate of 0.250000 mm/yr, a 4 mm allowance, 1.2 mm gone and a 20 year design life. The engine returns `requiredAllowanceMm` at 5.000000 mm, a remaining allowance of 2.800000 mm and a shortfall of 2.200000 mm. Now bisect the total allowance until `meetsDesignLife` turns true and the answer is 6.200000 mm.
 
-Put 5.000000 mm and 6.200000 mm beside each other. The gap between them is exactly the consumed depth, and the digest asserts that identity on every rebuild rather than quoting it. That is the whole lesson in one subtraction: the field measures a new line and the bisection measures this one. Note also that the shortfall of 2.200000 mm compares `requiredAllowanceMm` against what is left rather than against the allowance the line started with, so it is a third quantity again.
+Put 5.000000 mm and 6.200000 mm beside each other. The gap between them is exactly the consumed depth, and the course asserts that identity on every rebuild rather than quoting it. That is the whole lesson in one subtraction: the field measures a new line and the bisection measures this one. Note also that the shortfall of 2.200000 mm compares `requiredAllowanceMm` against what is left rather than against the allowance the line started with, so it is a third quantity again.
 
 ## Why bisect rather than add
 

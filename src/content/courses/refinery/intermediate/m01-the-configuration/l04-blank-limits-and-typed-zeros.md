@@ -6,11 +6,11 @@ Every limit in the configuration can be typed as a number, typed as 0, or left b
 
 ## The rule
 
-The digest states it in one line: a limit left blank is no limit; a limit typed as 0 is a limit of zero. A limit is a crude's availability, a unit's capacity, or a product's floor or ceiling. A typed zero is a real number, and a limit of zero means nothing may pass. A blank means the planner has set no limit, and the plan is free to go as far as everything else allows.
+The course states it in one line: a limit left blank is no limit; a limit typed as 0 is a limit of zero. A limit is a crude's availability, a unit's capacity, or a product's floor or ceiling. A typed zero is a real number, and a limit of zero means nothing may pass. A blank means the planner has set no limit, and the plan is free to go as far as everything else allows.
 
 ## The hydrotreater three ways
 
-The digest runs ABUA with the Diesel hydrotreater's capacity entered three ways, everything else as typed:
+The lab runs ABUA with the Diesel hydrotreater's capacity entered three ways, everything else as typed:
 
 | hydrotreater capacity | hydrotreater throughput (bbl) | capacity the plan reports | crude run (bbl) | margin |
 | --- | --- | --- | --- | --- |

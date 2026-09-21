@@ -36,7 +36,7 @@ The six measures as costed claim 6200 t a year from the flare through Flare gas 
 | --- | --- | --- | --- | --- | --- |
 | flare gas recovery claiming 9400 t | 18660.000 | 16830.083 | none | not assessed: claims exceed what a source emits | flare: claimed 9400.000 against 7562.133 emitted |
 
-The over-claims column names the source, the claim and the emission: 9400.000 t claimed against 7562.133 tCO2e emitted. The curve's total rises to 18660.000 t with the larger claim in it. The target of 16830.083 tCO2e is 30 percent of the inventory total, computed by the digest as the Carbon Studio computes it.
+The over-claims column names the source, the claim and the emission: 9400.000 t claimed against 7562.133 tCO2e emitted. The curve's total rises to 18660.000 t with the larger claim in it. The target of 16830.083 tCO2e is 30 percent of the inventory total, computed by the lab as the Carbon Studio computes it.
 
 ## Why the verdict is none
 
@@ -50,7 +50,7 @@ The over-claim names three things a reader can act on: which source, how much wa
 
 ## The cost per tonne falls
 
-SECTION 21 also prints the 9400 t claim costed: Flare gas recovery at a net annual cost of 484221.51 USD and a cost per tonne of 51.5129 USD. At 6200 t a year, SECTION 18 prints the same net annual cost, 484221.51 USD, and 78.1002 USD a tonne. The digest's reading: "The cost per tonne falls as the claimed tonnes rise; the over-claim makes the measure look cheaper as well as larger."
+SECTION 21 also prints the 9400 t claim costed: Flare gas recovery at a net annual cost of 484221.51 USD and a cost per tonne of 51.5129 USD. At 6200 t a year, SECTION 18 prints the same net annual cost, 484221.51 USD, and 78.1002 USD a tonne. The course's reading: "The cost per tonne falls as the claimed tonnes rise; the over-claim makes the measure look cheaper as well as larger."
 
 ## Two checks the curve runs
 

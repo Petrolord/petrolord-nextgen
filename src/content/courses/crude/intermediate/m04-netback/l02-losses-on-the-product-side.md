@@ -14,7 +14,7 @@ That locates the loss exactly. It is a reduction in what is sold. It is not a co
 
 Because losses shrink the products, they come off the product value before the costs. In the formula the gross product value is multiplied by (1 - loss percent / 100), and only then are processing cost and freight subtracted.
 
-For the Kwale blend the digest prints the loss as its own term:
+For the Kwale blend the lab prints the loss as its own term:
 
 | term | $/bbl of crude |
 | --- | --- |
@@ -28,7 +28,7 @@ The value lost is a figure in dollars per barrel of crude, reported separately, 
 
 ## Two wrong places to take it
 
-The digest computes the same terms two other ways, for contrast, and prints how far each lands from the engine's netback.
+The lab computes the same terms two other ways, for contrast, and prints how far each lands from the engine's netback.
 
 | reading | netback $/bbl | minus the engine's netback |
 | --- | --- | --- |
@@ -36,9 +36,9 @@ The digest computes the same terms two other ways, for contrast, and prints how 
 | losses taken off the netback after the costs | 65.0169 | 0.0696 |
 | losses left out | 65.5412 | 0.5939 |
 
-Taking the loss percent off the netback after the costs gives 65.0169, which the digest prints as 0.0696 from the engine's figure. That reading applies the shrinkage to a figure that already has processing and freight removed, so it shrinks the wrong quantity. Processing and freight are paid per barrel of crude whether or not every product barrel survives, so they are not reduced by product losses.
+Taking the loss percent off the netback after the costs gives 65.0169, which the table above prints as 0.0696 from the engine's figure. That reading applies the shrinkage to a figure that already has processing and freight removed, so it shrinks the wrong quantity. Processing and freight are paid per barrel of crude whether or not every product barrel survives, so they are not reduced by product losses.
 
-Leaving losses out gives 65.5412. The digest prints its distance from the engine's netback as 0.5939, and the engine's own term table prints the value lost to losses at 0.8 percent as 0.5939. Leaving the loss out simply puts that term back.
+Leaving losses out gives 65.5412. The table above prints its distance from the engine's netback as 0.5939, and the engine's own term table prints the value lost to losses at 0.8 percent as 0.5939. Leaving the loss out simply puts that term back.
 
 ## Why the wrong answers look right
 

@@ -8,13 +8,13 @@ A netback with no freight is a real question. The engine answers it, and says th
 
 Every cost field can be left empty. The engine has two honest options. It can refuse, on the grounds that a cost it does not know makes the netback unknowable. Or it can take the empty field as zero and say so.
 
-For costs, it takes the second. The digest gives the reason: a blank cost is taken as zero, because a netback with no freight is a legitimate question. A refinery may want to know what a crude is worth delivered, with freight already in the price. A trader may want the value at the gate before any processing, to set it against another crude on the same footing. Both are asking for a netback with a term deliberately absent.
+For costs, it takes the second. The engine gives the reason: a blank cost is taken as zero, because a netback with no freight is a legitimate question. A refinery may want to know what a crude is worth delivered, with freight already in the price. A trader may want the value at the gate before any processing, to set it against another crude on the same footing. Both are asking for a netback with a term deliberately absent.
 
 ## Taken as zero, and NAMED
 
 What makes that safe is the second half of the rule. The blank cost is NAMED. The engine returns a list, assumedZero, of every term it took as zero because it was blank. A figure computed on an assumption carries the assumption with it.
 
-The digest prints the Kwale case with two fields left blank:
+The lab prints the Kwale case with two fields left blank:
 
 | asked | netback $/bbl | assumedZero (named by the engine) |
 | --- | --- | --- |

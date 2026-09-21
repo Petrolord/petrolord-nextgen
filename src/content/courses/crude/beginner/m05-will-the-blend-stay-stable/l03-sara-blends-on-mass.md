@@ -16,9 +16,9 @@ Each blended fraction is a mass-weighted average of the crudes' own fractions. T
 
 ## The order of operations
 
-The engine blends the fractions first and forms the index second. The digest states both steps in one sentence: it "blends each SARA fraction on mass and forms CII = (saturates + asphaltenes) / (aromatics + resins)". So the four blended fractions in the table are the inputs to the ratio, and the CII column is the ratio formed from them, with the same formula that gives each crude its own index.
+The engine blends the fractions first and forms the index second. This course states both steps in one sentence: the engine "blends each SARA fraction on mass and forms CII = (saturates + asphaltenes) / (aromatics + resins)". So the four blended fractions in the table are the inputs to the ratio, and the CII column is the ratio formed from them, with the same formula that gives each crude its own index.
 
-Look at the first pair. Asarama Heavy alone has a CII of 0.7668 and Ubie Condensate alone 8.3458, as the first lesson of this module showed. The blend's CII is 1.7614. The blend's index is formed from the blended fractions in the table, and the digest prints no route from the two single-crude indices to it.
+Look at the first pair. Asarama Heavy alone has a CII of 0.7668 and Ubie Condensate alone 8.3458, as the first lesson of this module showed. The blend's CII is 1.7614. The blend's index is formed from the blended fractions in the table, and this course prints no route from the two single-crude indices to it.
 
 ## The wrong basis beside the right one
 

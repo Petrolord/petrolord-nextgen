@@ -27,7 +27,7 @@ A sulfur TYPED as 0 is a real zero, and the engine blends it like any other figu
 | Egbema Medium's sulfur left blank | 0.8611 | 32.8173 | not blended | 0.3915 | 4.0673 | 7.4743 |
 | Egbema Medium's sulfur typed as 0 | 0.8611 | 32.8173 | 0.0888 | 0.3915 | 4.0673 | 7.4743 |
 
-With the sulfur blank, API 32.8173, TAN 0.3915 and viscosity 7.4743 still blend. With the sulfur typed as 0, the blend sulfur is 0.0888 on mass and nothing is named missing. The digest puts it plainly: "a sulfur TYPED as 0 is a real zero, blended like any other figure." So 0.0888 is the blend of a typed figure. It is not the engine's reading of a blank, because a blank is never read as zero: the blank row prints not blended and names Egbema Medium as the crude without the figure.
+With the sulfur blank, API 32.8173, TAN 0.3915 and viscosity 7.4743 still blend. With the sulfur typed as 0, the blend sulfur is 0.0888 on mass and nothing is named missing. The course puts it plainly: "a sulfur TYPED as 0 is a real zero, blended like any other figure." So 0.0888 is the blend of a typed figure. It is not the engine's reading of a blank, because a blank is never read as zero: the blank row prints not blended and names Egbema Medium as the crude without the figure.
 
 The same rule holds for the other properties. A blank viscosity leaves the blend without one. With Egbema Medium's viscosity blank, the engine returns viscosity not blended and names the basis "not blended: a component viscosity is missing or outside the index domain". Module three explains the second half of that sentence.
 

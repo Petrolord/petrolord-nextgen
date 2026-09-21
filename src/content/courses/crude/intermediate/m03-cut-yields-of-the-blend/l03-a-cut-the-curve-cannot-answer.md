@@ -8,7 +8,7 @@ Module 1 built a blend's curve that stops short. This lesson draws Kwale's cuts 
 
 Kwale Light with the Ebocha partial assay, 50 and 50. The Ebocha curve says nothing below 110 F or above 920 F, so the blend's curve keeps only the temperatures where both crudes are known. It starts at 110 F and stops at 920 F.
 
-Kwale's cut set was drawn for whole crudes. Its LPG cut has no lower bound and runs to 90 F, and its naphtha cut runs from 90 F to 330 F. Both need the curve at 90 F, and the blend's curve has no value there. The digest's rule is that a cut with a bound below 110 F or above 920 F has no yield. Kwale's set has no bound above 920 F, so the two cuts without a yield are the two bounded at 90 F.
+Kwale's cut set was drawn for whole crudes. Its LPG cut has no lower bound and runs to 90 F, and its naphtha cut runs from 90 F to 330 F. Both need the curve at 90 F, and the blend's curve has no value there. The engine's rule is that a cut with a bound below 110 F or above 920 F has no yield. Kwale's set has no bound above 920 F, so the two cuts without a yield are the two bounded at 90 F.
 
 ## What the engine returns
 
@@ -46,7 +46,7 @@ The engine does not scale the three known yields up until they total 100. The As
 
 Valued on Kwale's prices, costs and losses, netbackValue carries the gap forward. It names the cuts with no yield (unyieldedCuts: LPG / Light ends, Naphtha), keeps their yield and value empty, and reports the valuation complete: false. Its netback over the cuts it can value is 48.3393 $/bbl.
 
-Both reports name the same two cuts. It starts in the Ebocha curve, which says nothing below 110 F, and the digest prints it in the yields and again in the valuation.
+Both reports name the same two cuts. It starts in the Ebocha curve, which says nothing below 110 F, and the engine reports it in the yields and again in the valuation.
 
 ## Exercise
 

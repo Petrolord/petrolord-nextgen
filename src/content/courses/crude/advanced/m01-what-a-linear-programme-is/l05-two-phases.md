@@ -6,7 +6,7 @@ The kernel's method is two-phase simplex. The name describes the order of work: 
 
 A simplex method walks from vertex to vertex, so it needs a vertex to start from. For a problem with only <= rows, right-hand sides of zero or more and zero lower bounds, the origin is one. A blend is never that simple. The batch row is an equation, sum(v_i) = target, and the origin does not satisfy it.
 
-Phase one solves this by adding an artificial variable to each row that the starting point cannot satisfy, and then driving those artificial variables to zero. If it succeeds, the point it ends on meets every real row, and phase two can begin from it. If it cannot, the rows contradict, and the answer is infeasible. In the digest's words, if phase one cannot, "the rows contradict and the answer is infeasible."
+Phase one solves this by adding an artificial variable to each row that the starting point cannot satisfy, and then driving those artificial variables to zero. If it succeeds, the point it ends on meets every real row, and phase two can begin from it. If it cannot, the rows contradict, and the answer is infeasible. In the course's words, if phase one cannot, "the rows contradict and the answer is infeasible."
 
 ## Phase two: from vertex to vertex
 
@@ -24,7 +24,7 @@ At a degenerate vertex a pivot can change which constraints define the corner wi
 
 Every result is the product of both phases. An optimal status says phase one found a feasible corner and phase two found the best one. An infeasible status says phase one could not begin. An unbounded status says phase two found a direction with no end.
 
-The kernel works with absolute tolerances on its pivots and on phase one, and module six states them as a limit: the digest calls them right for the barrel-scale problems the two apps pose.
+The kernel works with absolute tolerances on its pivots and on phase one, and module six states them as a limit: the course calls them right for the barrel-scale problems the two apps pose.
 
 {{panel:crude-recipe-explorer}}
 
@@ -32,4 +32,4 @@ In the panel, step the textbook case one pivot at a time and watch the point mov
 
 ## Exercise
 
-Read the textbook result: status optimal, objective 21.0000, iterations 2. Then read the digest's statement that phase one drives artificial variables to zero and, if it cannot, the rows contradict. Say which phase decides the infeasible verdict in the digest's problem with x + y <= 2 and x + y >= 3, and say which phase's work the textbook result's optimal status reports.
+Read the textbook result: status optimal, objective 21.0000, iterations 2. Then read this lesson's statement that phase one drives artificial variables to zero and, if it cannot, the rows contradict. Say which phase decides the infeasible verdict in lesson four's problem with x + y <= 2 and x + y >= 3, and say which phase's work the textbook result's optimal status reports.

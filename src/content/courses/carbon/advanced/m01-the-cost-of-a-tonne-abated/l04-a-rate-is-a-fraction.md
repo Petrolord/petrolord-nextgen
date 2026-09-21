@@ -20,7 +20,7 @@ REFUSED: Measure "Heat integration project" has a capital cost, so it needs a di
 
 ## A rate of 0 typed
 
-A rate of 0 typed is accepted. SECTION 18 says what it means: the capital recovery factor at a rate of 0 is 1/n, straight line. The digest prints all six measures at a rate of 0 beside their costs at 0.1:
+A rate of 0 typed is accepted. SECTION 18 says what it means: the capital recovery factor at a rate of 0 is 1/n, straight line. The lab prints all six measures at a rate of 0 beside their costs at 0.1:
 
 | measure | cost per tonne at 0.1 USD | cost per tonne at rate 0 USD |
 | --- | --- | --- |
@@ -37,7 +37,7 @@ That is the movement the blank-rate refusal names. On the curve of the next modu
 
 ## Which rate is right
 
-The rate is an input, and this course grades no choice of rate. The digest computes every Agbor cost at 0.1 and prints beside it the straight-line column, the engine's cost per tonne at a rate of 0. What the engine requires is that the rate be stated, and stated as a fraction. A measure with a capital of 0 typed needs no life and no rate (SECTION 19).
+The rate is an input, and this course grades no choice of rate. The lab shows every Agbor cost at 0.1 and prints beside it the straight-line column, the engine's cost per tonne at a rate of 0. What the engine requires is that the rate be stated, and stated as a fraction. A measure with a capital of 0 typed needs no life and no rate (SECTION 19).
 
 ## Exercise
 

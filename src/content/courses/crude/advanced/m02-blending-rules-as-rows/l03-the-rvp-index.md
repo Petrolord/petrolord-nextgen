@@ -6,7 +6,7 @@ Both gasoline templates cap RVP, at 9 psi in the 50 ppm template and 8.5 psi in 
 
 The rule is RVPI = RVP^n. The index is blended on volume and inverted. The exponent is RVP_INDEX_EXPONENT, and the engine states it as 1.25: an exported constant that is the default exponent of rvpIndex and rvpFromIndex. Each of those two functions takes an exponent argument that replaces the default, and the gasoline templates call them with the default. Because the constant is exported, a learner can read it rather than trust a recollection of it.
 
-rvpIndex takes a pressure to its index and rvpFromIndex takes an index back. The digest prints both for five pressures:
+rvpIndex takes a pressure to its index and rvpFromIndex takes an index back. The table prints both for five pressures:
 
 | RVP psi | rvpIndex | rvpFromIndex of that index |
 | --- | --- | --- |

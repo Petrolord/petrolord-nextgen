@@ -15,7 +15,7 @@ Module 3 found both streams consumed in full by their units, and both export pro
 
 ## Naphtha through the reformer
 
-One more barrel of naphtha arriving from outside can go to the reformer, which in the plan as typed runs at 97.07 percent and has room. The digest prints the working: what the reformer makes from a barrel at the stream values, less its operating cost, is 0.8500 x 111.0000 + 0.1000 x 0.0000 - 2.9000 = 91.4500, and the plan's naphtha value is 91.4500. Reformate at 111.0000, offgas at 0.0000, and the reformer's 2.9000 a barrel: the value of naphtha is the value of that path.
+One more barrel of naphtha arriving from outside can go to the reformer, which in the plan as typed runs at 97.07 percent and has room. The course prints the working: what the reformer makes from a barrel at the stream values, less its operating cost, is 0.8500 x 111.0000 + 0.1000 x 0.0000 - 2.9000 = 91.4500, and the plan's naphtha value is 91.4500. Reformate at 111.0000, offgas at 0.0000, and the reformer's 2.9000 a barrel: the value of naphtha is the value of that path.
 
 ## Gasoil through a full unit
 
@@ -40,7 +40,7 @@ Under the floors, naphtha prints 72.5000 and gasoil 89.5000, the same figures as
 
 With the hydrotreater left blank, gasoil prints 99.8560 and naphtha 83.6941. Removing a limit on one unit moved the value of the other unit's feed.
 
-With the hydrotreater shut, gasoil prints 87.8029, which is neither its value as typed nor the export price. The digest prints no working for that row, so read it as the plan's figure and nothing more.
+With the hydrotreater shut, gasoil prints 87.8029, which is neither its value as typed nor the export price. The course prints no working for that row, so read it as the plan's figure and nothing more.
 
 ## The reading to carry
 

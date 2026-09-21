@@ -30,7 +30,7 @@ SECTION 13 prints the current LHV efficiency at three radiation losses:
 | 1.8 | 86.4029 |
 | 2.5 | 85.7029 |
 
-The digest's own sentence over that table is that the radiation loss moves the efficiency one for one. Nothing else in the heater changes between the rows: the same fuel, the same 5.5 percent oxygen, the same stack.
+The course's own sentence over that table is that the radiation loss moves the efficiency one for one. Nothing else in the heater changes between the rows: the same fuel, the same 5.5 percent oxygen, the same stack.
 
 A reader who quotes the current LHV efficiency of 86.4029 percent quotes an efficiency with the vendor chart's 1.8 percent in it. Quoted without that input, the figure has lost a line of its ledger that no stack measurement produced.
 
@@ -51,4 +51,4 @@ Each one is a box whose figure the engine will not invent. The last two guard th
 
 ## Exercise
 
-Read the three rows of the radiation table in SECTION 13. Say what the efficiency does as the radiation loss goes from 1.0 to 1.8 to 2.5 percent, using the digest's own description of the relationship, and why the engine refuses a blank radiation loss when it could have filled the box itself.
+Read the three rows of the radiation table in SECTION 13. Say what the efficiency does as the radiation loss goes from 1.0 to 1.8 to 2.5 percent, using the course's own description of the relationship, and why the engine refuses a blank radiation loss when it could have filled the box itself.

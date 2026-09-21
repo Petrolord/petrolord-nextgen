@@ -31,7 +31,7 @@ SECTION 18 states the arithmetic that joins those figures. The net annual cost i
 
 ## Precision travels with the figure
 
-The digest prints capital recovery factors to eight decimals, money to two and US dollars per tonne to four. Quote each at the precision it prints: 0.26379748, 4748.35 USD and -167.4364 USD a tonne are three different kinds of figure, and each carries its own unit.
+The course prints capital recovery factors to eight decimals, money to two and US dollars per tonne to four. Quote each at the precision it prints: 0.26379748, 4748.35 USD and -167.4364 USD a tonne are three different kinds of figure, and each carries its own unit.
 
 ## What the factor carries into the curve
 

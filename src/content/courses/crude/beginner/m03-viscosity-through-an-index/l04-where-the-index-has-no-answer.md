@@ -28,7 +28,7 @@ At 0.1 and at 0.2 the engine returns no index. Just inside the edge, at 0.2001, 
 
 ## What a blend does with a viscosity outside the domain
 
-The digest runs the case. The Obigbo export blend is formed with Egbema Medium's viscosity typed as 0.15 cSt, which is outside the domain. The blend's viscosity is not blended, and the engine names its basis "not blended: a component viscosity is missing or outside the index domain". This is the same sentence it gives when a viscosity is blank. The engine returns no index for that crude, so there is no index for it to blend.
+This course runs the case. The Obigbo export blend is formed with Egbema Medium's viscosity typed as 0.15 cSt, which is outside the domain. The blend's viscosity is not blended, and the engine names its basis "not blended: a component viscosity is missing or outside the index domain". This is the same sentence it gives when a viscosity is blank. The engine returns no index for that crude, so there is no index for it to blend.
 
 Only the viscosity is left out. The other properties of that blend are formed as usual: API 32.8173 and sulfur 0.2642 wt%, the same figures the export blend carries with both viscosities in range. This is the blank rule of module two applied to viscosity. A missing value is absent, and a value outside the domain is absent too. In neither case does the engine put a zero, a floor or a clamp in the gap.
 
@@ -38,4 +38,4 @@ In the assay explorer, blank a viscosity on one crude of a blend. The viscosity 
 
 ## Exercise
 
-Read the four probe rows. Quote what the engine returns at 0.2, at 0.2001 and at 1. Say what these figures show about where the Refutas index stops giving an answer, and connect that to the lowest viscosity the index reaches, 0.2000. Then quote the API and sulfur the digest prints for the blend with a viscosity of 0.15 cSt, and say what they show about which property the engine leaves unblended.
+Read the four probe rows. Quote what the engine returns at 0.2, at 0.2001 and at 1. Say what these figures show about where the Refutas index stops giving an answer, and connect that to the lowest viscosity the index reaches, 0.2000. Then quote the API and sulfur this lesson prints for the blend with a viscosity of 0.15 cSt, and say what they show about which property the engine leaves unblended.

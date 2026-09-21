@@ -6,7 +6,7 @@ A feasibility screen is the cheapest look at a refinery that still produces a nu
 
 ## What the screen takes
 
-OKORDIA is the invented plant this tier screens. Its inputs, as the digest prints them:
+OKORDIA is the invented plant this tier screens. Its inputs, as the table prints them:
 
 | input | OKORDIA |
 | --- | --- |

@@ -24,7 +24,7 @@ So a call with no basis is not refused. It is marked. The note names the three q
 
 ## The same heater on two bases
 
-The Professional tier read what a basis does to one heater. SECTION 13 prints the Isiokpo heater at the same stack oxygen at 86.4029 percent on LHV and 77.9288 percent on HHV, a difference of 8.4741 percentage points that the digest computes from the engine's figures. The engine's warning on that result: "This efficiency is on LHV. An efficiency on the other basis is a different number for the same heater and the two must not be compared." A priced saving carries the same rule into money and carbon.
+The Professional tier read what a basis does to one heater. SECTION 13 prints the Isiokpo heater at the same stack oxygen at 86.4029 percent on LHV and 77.9288 percent on HHV, a difference of 8.4741 percentage points that the course computes from the engine's figures. The engine's warning on that result: "This efficiency is on LHV. An efficiency on the other basis is a different number for the same heater and the two must not be compared." A priced saving carries the same rule into money and carbon.
 
 ## What to check on a saving
 

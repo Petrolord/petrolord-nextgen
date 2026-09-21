@@ -51,7 +51,7 @@ Notice the second row too. Nothing about crude changed. The hydrotreater was shu
 
 ## Why the plan prints both
 
-If the two are one number, why print them twice? Because they come from two different places in the plan. The total crude is the sum of the plan's crude decisions, read from the crude table. The crude unit throughput is the unit table's reading of what the crude unit ran. The digest sets one beside the other and prints a flag, so that a reader never has to take the equality on trust. A planner who exports a plan to a spreadsheet should make the same check.
+If the two are one number, why print them twice? Because they come from two different places in the plan. The total crude is the sum of the plan's crude decisions, read from the crude table. The crude unit throughput is the unit table's reading of what the crude unit ran. The lab sets one beside the other and prints a flag, so that a reader never has to take the equality on trust. A planner who exports a plan to a spreadsheet should make the same check.
 
 ## The reading to carry
 

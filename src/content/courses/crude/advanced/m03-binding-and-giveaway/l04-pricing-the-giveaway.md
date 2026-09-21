@@ -8,7 +8,7 @@ A giveaway is only worth money where a unit of the property has a price. The opt
 
 ## The Apapa giveaway in money
 
-The digest types two unit values and leaves the third blank:
+The course types two unit values and leaves the third blank:
 
 | specification | giveaway | unit value $ per unit per bbl (typed) | value $ over the batch |
 | --- | --- | --- | --- |

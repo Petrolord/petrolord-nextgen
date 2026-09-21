@@ -26,7 +26,7 @@ SECTION 12 prints the calls that do not answer:
 | dry O2 blank | REFUSED: A measured dry stack oxygen is required. |
 | no stoichiometry | REFUSED: Valid stoichiometry is required. |
 
-The digest labels the first row "all air", and SECTION 1 prints the engine's air as O2_MOLE_FRACTION_DRY_AIR 0.20946. In practice, a stack reading all air is a stack where none of the air's oxygen has gone to any fuel. The engine refuses the call with the range message, and it gives no excess air for it.
+This lesson labels the first row "all air", and SECTION 1 prints the engine's air as O2_MOLE_FRACTION_DRY_AIR 0.20946. In practice, a stack reading all air is a stack where none of the air's oxygen has gone to any fuel. The engine refuses the call with the range message, and it gives no excess air for it.
 
 A reading of 21 percent and a reading of -1 percent get the same message. The message states the bound the engine applies: 0 percent or more and below 20.946 percent, the oxygen in dry air. Its second sentence names the all-air case: a reading of 20.946 percent is air with no fuel burned. SECTION 25 lists the rule among those MD45-1 put in force: the stack oxygen refusal states the bound it applies, 20.946 percent.
 
@@ -36,8 +36,8 @@ The last two refusals are about boxes left empty. A blank oxygen reading is refu
 
 The other refusal is for a call with no stoichiometry. The relation of lesson two needs the oxygen demand, the stoichiometric air and the dry products of module one, and without them there is nothing to solve.
 
-This is the same rule the Associate tier met on the flare. There, SECTION 2 prints a blank destruction efficiency refused where it could have been read as complete combustion. Here, a blank oxygen reading is refused where it could have been read as no oxygen. In both cases the blank is refused instead of being read as a figure, and the digest prints the refusal.
+This is the same rule the Associate tier met on the flare. There, SECTION 2 prints a blank destruction efficiency refused where it could have been read as complete combustion. Here, a blank oxygen reading is refused where it could have been read as no oxygen. In both cases the blank is refused instead of being read as a figure, and the engine returns the refusal.
 
 ## Exercise
 
-Read the row at 12 percent and the five refusals of SECTION 12, beside O2_MOLE_FRACTION_DRY_AIR 0.20946 in SECTION 1. Say which refused reading is the digest's all-air case and what the stack gas would be at that reading, and why a blank reading read as 0 percent would report the heater as having no excess air.
+Read the row at 12 percent and the five refusals of SECTION 12, beside O2_MOLE_FRACTION_DRY_AIR 0.20946 in SECTION 1. Say which refused reading is the lesson's all-air case and what the stack gas would be at that reading, and why a blank reading read as 0 percent would report the heater as having no excess air.

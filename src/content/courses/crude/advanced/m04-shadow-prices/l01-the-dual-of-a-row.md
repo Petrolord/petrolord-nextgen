@@ -6,7 +6,7 @@ Every row of a linear programme carries a second number, its dual or shadow pric
 
 A shadow price is the change in the optimum per unit of a row's right-hand side. The textbook case from module one shows it plainly. Maximise 5x + 4y subject to 6x + 4y <= 24 and 1x + 2y <= 6. The kernel reports an objective of 21.0000, a shadow price of 0.7500 on row 1 and 0.5000 on row 2.
 
-The digest checks each by re-solving with the right-hand side raised by one unit, on the same kernel:
+The course checks each by re-solving with the right-hand side raised by one unit, on the same kernel:
 
 | row raised by one | objective | change from the optimum |
 | --- | --- | --- |

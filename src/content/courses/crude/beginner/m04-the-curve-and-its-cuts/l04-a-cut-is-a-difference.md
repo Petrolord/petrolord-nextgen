@@ -42,7 +42,7 @@ A cut drawn backwards, from 500 F to 350 F on Obigbo Light, has no yield. The en
 
 ## What the cut table answers
 
-The digest's first section lists the question cutYields answers: what does this barrel turn into. Put the rows side by side and each crude's answer sits in its own row, cut by cut, with a total and a closes flag beside it. Each yield is two readings of a curve. A reader who checks a column against the curve it came from is checking the only two figures behind it.
+Module one's first lesson lists the question cutYields answers: what does this barrel turn into. Put the rows side by side and each crude's answer sits in its own row, cut by cut, with a total and a closes flag beside it. Each yield is two readings of a curve. A reader who checks a column against the curve it came from is checking the only two figures behind it.
 
 ## Exercise
 

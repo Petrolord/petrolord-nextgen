@@ -29,7 +29,7 @@ REFUSED: The baseline must be a positive tonnage. An inventory that computed not
 
 REFUSED: A baseline and a valid year range are required.
 
-The same six measures against a baseline of 12000 t, a probe the digest invents:
+The same six measures against a baseline of 12000 t, a probe the course invents:
 
 REFUSED: In 2030 the scheduled measures abate 13610 t against a baseline of 12000 t. Emissions cannot fall below zero, so check the measures for double counting or a source outside the baseline.
 
@@ -37,7 +37,7 @@ The first refuses a baseline that is not positive, and its second sentence names
 
 ## Reading the two final gaps
 
-The digest prints both final gaps: 1370.083 t with every measure scheduled, 3220.083 t with Vapour recovery on the storage tanks unscheduled. It also prints their relation: that gap less the scheduled plan's 1370.083 is 1850.000 t, the vapour recovery measure's tonnes a year. The path with the measure unscheduled, from 2030:
+This lesson prints both final gaps: 1370.083 t with every measure scheduled, 3220.083 t with Vapour recovery on the storage tanks unscheduled. It also prints their relation: that gap less the scheduled plan's 1370.083 is 1850.000 t, the vapour recovery measure's tonnes a year. The path with the measure unscheduled, from 2030:
 
 | year | abated t | emissions t | target t | unabated gap t |
 | --- | --- | --- | --- | --- |

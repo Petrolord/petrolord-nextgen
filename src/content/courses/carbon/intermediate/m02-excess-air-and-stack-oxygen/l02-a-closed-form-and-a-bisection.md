@@ -1,6 +1,6 @@
 # A closed form and a bisection
 
-Lesson one read the SECTION 12 table as answers. This lesson reads the relation the engine solves to reach them, and the second route the digest names for finding the same answers.
+Lesson one read the SECTION 12 table as answers. This lesson reads the relation the engine solves to reach them, and the second route the course names for finding the same answers.
 
 {{panel:carbon-efficiency-explorer}}
 
@@ -10,7 +10,7 @@ SECTION 12 states the relation in words. With E the excess-air fraction, E times
 
 E x (oxygen demand) / (stoichiometric dry products + E x stoichiometric air) = measured dry O2 fraction
 
-Three of the terms beside E are figures the learner has already met. The oxygen demand is o2PerKmolFuel, 2.089500 kmol O2 per kmol of the invented Isiokpo fuel (SECTION 11). The stoichiometric air is stoichAirPerKmolFuel, 9.975652 kmol air per kmol fuel (SECTION 11). The measured fraction is the analyser's dry oxygen reading. The fourth, the stoichiometric dry products, is a term the relation names; the digest prints no figure under that name.
+Three of the terms beside E are figures the learner has already met. The oxygen demand is o2PerKmolFuel, 2.089500 kmol O2 per kmol of the invented Isiokpo fuel (SECTION 11). The stoichiometric air is stoichAirPerKmolFuel, 9.975652 kmol air per kmol fuel (SECTION 11). The measured fraction is the analyser's dry oxygen reading. The fourth, the stoichiometric dry products, is a term the relation names; the course prints no figure under that name.
 
 Read the relation as it is written. On the top, E multiplies the oxygen demand. On the bottom, E multiplies the stoichiometric air and is added to the dry products. E is the only unknown, and it appears on both sides of the fraction bar. The measured fraction is a dry fraction, which is why the bottom carries dry products and leaves the water of module one out.
 
@@ -22,7 +22,7 @@ SECTION 12 says the relation is solved in closed form. The engine's excess air c
 
 The same line of SECTION 12 names a second route: the oracle finds the same E by bisection on the full dry flue gas. In practice, a bisection brackets the unknown between two guesses and halves the bracket until it closes, so it reaches the answer by search and never rearranges the relation.
 
-The digest's words mark two differences between the routes. The engine uses a closed form; the oracle searches. The engine works from the stoichiometric terms of the relation; the oracle works on the full dry flue gas. The digest's sentence is that both find the same E. That agreement is what the table rests on, and it is the reason this course quotes the table's excess air without reworking it.
+The course's words mark two differences between the routes. The engine uses a closed form; the oracle searches. The engine works from the stoichiometric terms of the relation; the oracle works on the full dry flue gas. The course's sentence is that both find the same E. That agreement is what the table rests on, and it is the reason this course quotes the table's excess air without reworking it.
 
 ## What the relation leaves out
 

@@ -38,7 +38,7 @@ SECTION 11 prints one more calculation: the same analysis with the CO2 taken out
 | as analysed, CO2 at 0.025 | 2.089500 | 840.9925 |
 | CO2 taken out, the rest renormalised | 2.143077 | 862.5564 |
 
-The digest's reading of that pair is one short sentence: the inerts dilute the fuel. A kilomole of the fuel as analysed carries its share of CO2, which brings no oxygen demand and no heating value, and so both figures are per kmol of a fuel that includes it.
+The course's reading of that pair is one short sentence: the inerts dilute the fuel. A kilomole of the fuel as analysed carries its share of CO2, which brings no oxygen demand and no heating value, and so both figures are per kmol of a fuel that includes it.
 
 For a reader of the engine, the lesson is about the basis of a figure. o2PerKmolFuel and lhvMJPerKmolFuel are per kmol of the fuel the analysis describes. Change the analysis and both change, even when the burning components have not.
 

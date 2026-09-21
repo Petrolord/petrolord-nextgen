@@ -6,7 +6,7 @@ Lesson 1 read the crude receipts. The other two kinds of event in ABUA's schedul
 
 ## Weeks in the period
 
-The digest prints weeks in the period 5 for a period of 31 days. Each unit has 5 run events, and each product that sells has 5 lift events. That gives unit runs 15 for ABUA's three units and product lifts 20.
+The course prints weeks in the period 5 for a period of 31 days. Each unit has 5 run events, and each product that sells has 5 lift events. That gives unit runs 15 for ABUA's three units and product lifts 20.
 
 ## The unit runs
 
@@ -43,7 +43,7 @@ Read the two sets of dates together. Runs fall on 2027-03-01, 2027-03-08, 2027-0
 
 ## The totals agree with the plan
 
-The digest sets the schedule's totals, material by material, beside the plan's. Every row agrees:
+The course sets the schedule's totals, material by material, beside the plan's. Every row agrees:
 
 | material | type | scheduled quantity (bbl) | plan quantity (bbl) | scheduled value | plan value |
 | --- | --- | --- | --- | --- | --- |

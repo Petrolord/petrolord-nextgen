@@ -14,7 +14,7 @@ The first is the model. The engine takes every fuel molecule in the invented Isi
 
 The second is the limit of the instrument. The engine is given one measurement, dry stack oxygen, and nothing in that measurement is carbon monoxide.
 
-The third is the direction of the error. A stack making CO will read as if it had more excess air than it has. The engine's sentence names the direction and gives no size, and the digest prints no case with carbon monoxide in the flue gas, so this course gives no size either.
+The third is the direction of the error. A stack making CO will read as if it had more excess air than it has. The engine's sentence names the direction and gives no size, and the course prints no case with carbon monoxide in the flue gas, so this course gives no size either.
 
 ## Where the direction matters
 
@@ -26,7 +26,7 @@ Module four prices the move from 5.5 percent to 2.8 percent oxygen. In practice,
 
 The engine does not guess where carbon monoxide begins. SECTION 14 prints its refusal when the minimum safe stack oxygen is left blank: "A minimum safe stack oxygen is required and is not defaulted. Below some excess air a burner makes carbon monoxide, and where that point sits depends on the burner, the fuel and the draught control."
 
-The two sentences belong together. The assumption says the reading cannot see carbon monoxide. The refusal says the point where carbon monoxide begins depends on the burner, the fuel and the draught control. Neither is something the engine reads from the stack, so the floor is declared by the caller. At Isiokpo that floor is 2 percent, declared after a combustion test the digest marks invented. Module four reads it in full.
+The two sentences belong together. The assumption says the reading cannot see carbon monoxide. The refusal says the point where carbon monoxide begins depends on the burner, the fuel and the draught control. Neither is something the engine reads from the stack, so the floor is declared by the caller. At Isiokpo that floor is 2 percent, declared after a combustion test the course marks invented. Module four reads it in full.
 
 ## Exercise
 

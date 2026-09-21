@@ -14,7 +14,7 @@ The worked example makes the arithmetic visible. At a stated 0.250000 mm/yr, a 4
 
 ## Reading the teaching streams
 
-The digest's teaching streams show the same distinction on the five that return a life. Etelebou runs at 1.676428 mm/yr with 2.775000 mm remaining, so `requiredAllowanceMm` is 33.528563 mm and the shortfall is 30.753563 mm. Tunu runs at 17.138674 mm/yr, so the required allowance is 342.773473 mm against a shortfall of 339.998473 mm.
+The lab's teaching streams show the same distinction on the five that return a life. Etelebou runs at 1.676428 mm/yr with 2.775000 mm remaining, so `requiredAllowanceMm` is 33.528563 mm and the shortfall is 30.753563 mm. Tunu runs at 17.138674 mm/yr, so the required allowance is 342.773473 mm against a shortfall of 339.998473 mm.
 
 Opukushi is the instructive one. At 0.076842 mm/yr the required allowance is 1.536848 mm and the shortfall is 0.000000 mm, because the remaining allowance covers it and `meetsDesignLife` is true. Angiama sits the same way at 0.014444 mm/yr, with 0.288877 mm required and a shortfall of 0.000000 mm. A shortfall of zero is a pass on this comparison and it is silent about everything else.
 

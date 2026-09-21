@@ -22,7 +22,7 @@ Read the last column. The straight average minus the engine is 3.4833 cSt for th
 
 ## What the engine does instead
 
-The digest gives the reason in one line: "Viscosity mixes nowhere near linearly, so it is blended through an index." The engine does three things. It turns each crude's viscosity into an index, VBI = A x ln(ln(nu + 0.8)) + B with nu in cSt (viscosityBlendIndex). It blends that index. Then it turns the blended index back into a viscosity (viscosityFromBlendIndex). The table above sets the engine's answer beside the straight average, and on every row the last column is positive. For the export blend the engine's figure is 7.4743 cSt, and the straight average on mass is 10.9576.
+This course gives the reason in one line: "Viscosity mixes nowhere near linearly, so it is blended through an index." The engine does three things. It turns each crude's viscosity into an index, VBI = A x ln(ln(nu + 0.8)) + B with nu in cSt (viscosityBlendIndex). It blends that index. Then it turns the blended index back into a viscosity (viscosityFromBlendIndex). The table above sets the engine's answer beside the straight average, and on every row the last column is positive. For the export blend the engine's figure is 7.4743 cSt, and the straight average on mass is 10.9576.
 
 The index this engine uses is the Refutas index. The next lesson sets out its formula and its two constants. The lesson after that deals with the fraction it is averaged on, which is a held question in this course.
 
@@ -32,4 +32,4 @@ The engine names its basis beside every viscosity it returns: "Refutas index on 
 
 ## Exercise
 
-Read the Asarama Heavy and Ubie Condensate row. Quote the two crudes' viscosities from the library, the engine's blend viscosity, the straight average on mass and the linear average minus the engine. Say what the last column shows for that pair, and quote the digest's one-line reason for blending viscosity through an index.
+Read the Asarama Heavy and Ubie Condensate row. Quote the two crudes' viscosities from the library, the engine's blend viscosity, the straight average on mass and the linear average minus the engine. Say what the last column shows for that pair, and quote this lesson's one-line reason for blending viscosity through an index.

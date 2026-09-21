@@ -30,7 +30,7 @@ SECTION 21 computes the target as 30 percent of the inventory total of 56100.276
 
 SECTION 22 draws the target in a straight line from 56100.276 t in 2026 to 39270.193 t in 2033, 30 percent below the baseline, and counts each measure in full from its start year. The path prints firstShortfallYear 2027, with a gap of 494.298 t that year, and finalGapTonnes 1370.083. The engine reports the end-year gap as unabated with no measure identified, and does not draw it as a wedge.
 
-Two variants change the reading. On the partial inventory, with the electricity factor blank, the baseline is 45112.276 tCO2e, reportable false, and the final gap reads 0.000 t with the first shortfall still in 2027. The digest prints the full baseline less the partial as 10988.000 tCO2e, the purchased electricity line. With Vapour recovery on the storage tanks given no start year, the measure is named in unscheduledMeasures and the final gap is 3220.083 t; that gap less 1370.083 is 1850.000 t, the vapour recovery measure's tonnes a year.
+Two variants change the reading. On the partial inventory, with the electricity factor blank, the baseline is 45112.276 tCO2e, reportable false, and the final gap reads 0.000 t with the first shortfall still in 2027. The course computes the full baseline less the partial as 10988.000 tCO2e, the purchased electricity line. With Vapour recovery on the storage tanks given no start year, the measure is named in unscheduledMeasures and the final gap is 3220.083 t; that gap less 1370.083 is 1850.000 t, the vapour recovery measure's tonnes a year.
 
 ## What is checked, and what is taught as printed
 

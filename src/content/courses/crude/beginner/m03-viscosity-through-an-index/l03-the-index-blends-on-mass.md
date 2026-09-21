@@ -26,7 +26,7 @@ The two bases put different weights on the same crude. Module two printed them f
 
 ## What each basis has behind it
 
-The digest calls the mass form "the classic Refutas form", and it is the one this engine uses. It says that ASTM D7152 "blends the same family of index on VOLUME", and that the two disagree.
+This course calls the mass form "the classic Refutas form", and it is the one this engine uses. It says that ASTM D7152 "blends the same family of index on VOLUME", and that the two disagree.
 
 The engine does not pick silently, and it does not hide the choice. It names its basis on every viscosity it returns, so a figure from this engine can always be told apart from a figure formed the other way.
 
@@ -34,7 +34,7 @@ The engine does not pick silently, and it does not hide the choice. It names its
 
 Treat the engine's viscosity as the engine's answer, under a basis it states. When you compare it with a figure from another tool or a laboratory report, first find out which basis that figure used. If the other figure blended on volume, a gap like those in the table above comes from the basis. It is a difference of convention, and it is not an arithmetic error on either side.
 
-The digest calls the choice between the two "a HELD decision (FINDINGS C12)". This course treats it as a stated limit. You can quote both figures from the table and the basis of each, and you can say which one the engine returns. The course does not tell you which basis is right, and neither does the engine.
+This course calls the choice between the two "a HELD decision (FINDINGS C12)". This course treats it as a stated limit. You can quote both figures from the table and the basis of each, and you can say which one the engine returns. The course does not tell you which basis is right, and neither does the engine.
 
 ## Exercise
 

@@ -25,7 +25,7 @@ Three of those are in this tier. The curve's residual to target prints on each S
 
 ## The digest's own count
 
-SECTION 26 closes with a count: this digest has 73 engine answers asserted and 60 refusals asserted before printing. The count is the generator's own: engine answers and refusals it checked before the digest was printed.
+SECTION 26 closes with a count: this course has 73 engine answers asserted and 60 refusals asserted before printing. The count is the generator's own: engine answers and refusals it checked before these lessons were printed.
 
 ## Why the residual is not leaned on
 
@@ -33,7 +33,7 @@ The residual to target sits beside the target verdict on every SECTION 21 curve,
 
 ## Reading a figure with its status
 
-Three statuses run through this tier. An engine output an oracle recomputes is checked by a second route. An engine output no oracle recomputes is taught as printed. A figure marked computed here is the digest's own arithmetic on engine figures: the capital against one year, the plain mean, the one-year cost of a saving. The last kind is marked computed here, and no engine call returns it.
+Three statuses run through this tier. An engine output an oracle recomputes is checked by a second route. An engine output no oracle recomputes is taught as printed. A figure marked computed here is the course's own arithmetic on engine figures: the capital against one year, the plain mean, the one-year cost of a saving. The last kind is marked computed here, and no engine call returns it.
 
 ## Exercise
 

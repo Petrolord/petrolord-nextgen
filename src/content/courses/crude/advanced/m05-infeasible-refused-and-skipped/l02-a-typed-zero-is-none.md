@@ -4,7 +4,7 @@ The availability column is where costly typing mistakes are made, because three 
 
 ## Three butane tanks
 
-The digest solves the Apapa cargo three times, changing only Butane's maximum:
+The lab solves the Apapa cargo three times, changing only Butane's maximum:
 
 | butane maximum | status | butane volume bbl | total cost $ | binding |
 | --- | --- | --- | --- | --- |

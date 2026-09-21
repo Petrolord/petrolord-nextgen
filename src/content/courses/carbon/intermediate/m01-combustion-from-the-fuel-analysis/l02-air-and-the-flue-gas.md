@@ -38,7 +38,7 @@ SECTION 12 prints the flue gas at a range of dry stack oxygen readings. Its firs
 
 The actual air in that row is 9.975652, the same figure SECTION 11 prints as stoichAirPerKmolFuel, and the excess air is 0.0000 percent. That is the 0 row: a stack reading of no oxygen at all, excess air 0.0000 percent.
 
-Two flue gas figures appear in the row, one dry and one wet, and every row of SECTION 12 carries both. SECTION 12 prints the relation between them: the wet flue gas less the dry is the water the hydrogen makes, 2.033000 in every row, which is products.h2oPerKmolFuel. In practice, a stack oxygen analyser reads on the dry basis. The digest also prints the air's nitrogen leaving as products.airN2PerKmolFuel 7.886152 kmol per kmol fuel, a figure lesson four returns to, because what the engine calls nitrogen there carries more than nitrogen.
+Two flue gas figures appear in the row, one dry and one wet, and every row of SECTION 12 carries both. SECTION 12 prints the relation between them: the wet flue gas less the dry is the water the hydrogen makes, 2.033000 in every row, which is products.h2oPerKmolFuel. In practice, a stack oxygen analyser reads on the dry basis. The lab also prints the air's nitrogen leaving as products.airN2PerKmolFuel 7.886152 kmol per kmol fuel, a figure lesson four returns to, because what the engine calls nitrogen there carries more than nitrogen.
 
 SECTION 12 is indexed by dry O2 percent, so the reading module two starts from is a dry reading.
 
@@ -52,7 +52,7 @@ SECTION 11 prints a mass balance at 3 percent stack oxygen, per kmol of fuel:
 | flue gas out (engine dry flue gas plus engine moisture) | 351.0222 |
 | out less in (computed here) | 0.000001 |
 
-SECTION 12 carries no row at 3 percent; the digest strikes the balance at that reading on its own. The in side is the fuel plus the air at AIR_MOLAR_MASS. The out side is the engine's dry flue gas plus its moisture. The difference, 0.000001 kg per kmol of fuel, is the digest's own arithmetic on the engine's figures, and SECTION 25 lists "the flue gas mass balance closes" among the rules in force.
+SECTION 12 carries no row at 3 percent; the lab strikes the balance at that reading on its own. The in side is the fuel plus the air at AIR_MOLAR_MASS. The out side is the engine's dry flue gas plus its moisture. The difference, 0.000001 kg per kmol of fuel, is the lab's own arithmetic on the engine's figures, and SECTION 25 lists "the flue gas mass balance closes" among the rules in force.
 
 ## Exercise
 

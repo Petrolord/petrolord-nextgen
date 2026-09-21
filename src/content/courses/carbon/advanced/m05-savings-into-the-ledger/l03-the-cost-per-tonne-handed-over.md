@@ -34,7 +34,7 @@ With no life and no rate, the call does not refuse. It returns costPerTonneCo2e 
 
 ## A figure marked computed here
 
-SECTION 23 also sets the whole implementation cost against one year's value and one year's tonnes, computed here by the digest: 183.5403 USD a tonne. It is marked computed here, as SECTION 18 marks its one-year column. Levelised over 8 years at 0.1, the same saving prints -74.2270 USD a tonne.
+SECTION 23 also sets the whole implementation cost against one year's value and one year's tonnes, computed here by the lab: 183.5403 USD a tonne. It is marked computed here, as SECTION 18 marks its one-year column. Levelised over 8 years at 0.1, the same saving prints -74.2270 USD a tonne.
 
 ## What SECTION 26 says of it
 
@@ -50,4 +50,4 @@ A saving priced in the Energy Studio and a measure costed in the Carbon Studio c
 
 ## Exercise
 
-Read the implementation cost, the annual value, the annual tonnes, the life and the rate, and the costPerTonneCo2e the engine returns, with the one-year figure the digest computes. Say what the two costs per tonne, read with the life, show about why a saving's cost per tonne is handed to abatementCost.
+Read the implementation cost, the annual value, the annual tonnes, the life and the rate, and the costPerTonneCo2e the engine returns, with the one-year figure the lab computes. Say what the two costs per tonne, read with the life, show about why a saving's cost per tonne is handed to abatementCost.

@@ -6,7 +6,7 @@ The sulfur row needed one scale to turn its dual into dollars per ppm. The RVP r
 
 Module two built the RVP row on the index basis: w_i is each component's rvpIndex, d_i is 1, and the 9 psi limit enters as its own index. So the row's natural unit is an index point, and its dual prices index points.
 
-The digest takes the first step. The RVP row's rowPrice at Apapa is -0.2569. Its scale is sum(d_i v_i), and with d_i equal to 1 that is the batch volume, 8000.0000 bbl. rowPrice x 8000.0000 bbl is -2054.8893 $ per index point.
+The course takes the first step. The RVP row's rowPrice at Apapa is -0.2569. Its scale is sum(d_i v_i), and with d_i equal to 1 that is the batch volume, 8000.0000 bbl. rowPrice x 8000.0000 bbl is -2054.8893 $ per index point.
 
 That figure is still not the answer a planner asks for. The specification is written as 9 psi, and the question is what one psi is worth.
 
@@ -14,7 +14,7 @@ That figure is still not the answer a planner asks for. The specification is wri
 
 One psi of relief on the limit moves the limit's index by the slope of the index at that limit, dIndex/dL. Multiply the value per index point by index points per psi, turn the sign for relief on a maximum, and the result is dollars per psi.
 
-The engine reports 4448.9659 $ per psi on the RVP maximum. The digest recovers the slope two ways:
+The engine reports 4448.9659 $ per psi on the RVP maximum. The course recovers the slope two ways:
 
 - Divided by the negative of the per-index figure, the reported value gives 2.1651 index points per psi, the slope of the index at the 9 psi limit.
 - The same slope from the exported exponent, RVP_INDEX_EXPONENT x 9^(RVP_INDEX_EXPONENT - 1), is 2.1651.

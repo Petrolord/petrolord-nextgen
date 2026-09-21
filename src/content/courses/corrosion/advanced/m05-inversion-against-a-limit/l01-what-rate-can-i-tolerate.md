@@ -20,7 +20,7 @@ This module gives several reasons for that caution in one door. A zero rate does
 
 There is a second reason this inversion is clean enough to grade. The rate fed into the life door does not have to come from the correlation. A capstone here states the rate from an operator's inspection survey, which means no held constant is anywhere in the chain. The whole arithmetic then reduces to a division, a multiplication and a comparison over quantities somebody measured or typed.
 
-Work the digest's own case to see the shape. At a stated rate of 0.250000 mm/yr, with a 4 mm allowance, 1.2 mm gone and a 20 year design life, the remaining allowance is 2.800000 mm and `requiredAllowanceMm` is 5.000000 mm, so the shortfall is 2.200000 mm. Every one of those is arithmetic over the four numbers handed in.
+Work the lab's own case to see the shape. At a stated rate of 0.250000 mm/yr, with a 4 mm allowance, 1.2 mm gone and a 20 year design life, the remaining allowance is 2.800000 mm and `requiredAllowanceMm` is 5.000000 mm, so the shortfall is 2.200000 mm. Every one of those is arithmetic over the four numbers handed in.
 
 ## Exercise
 

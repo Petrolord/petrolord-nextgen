@@ -36,4 +36,4 @@ The first lesson of this module read the Apapa result in one order: status, skip
 
 ## Exercise
 
-Read the Apapa price table's Total volume row, 87.5108 $/bbl, and the Sulfur maximum row, 551.8026 $ per ppm with rowPrice -0.0914. Say which of the two reads the same in both columns, and quote the digest's line on the Total volume row that explains it. Then say what the Sulfur row's price is per, and what its rowPrice is.
+Read the Apapa price table's Total volume row, 87.5108 $/bbl, and the Sulfur maximum row, 551.8026 $ per ppm with rowPrice -0.0914. Say which of the two reads the same in both columns, and quote the course's line on the Total volume row that explains it. Then say what the Sulfur row's price is per, and what its rowPrice is.

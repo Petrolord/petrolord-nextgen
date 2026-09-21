@@ -6,7 +6,7 @@ The same blend has different yields at different refineries. Nothing about the c
 
 ## Two cut sets on one curve
 
-Kwale is a topping refinery with no vacuum unit. Its cut set ends at atmospheric residue, from 650 F with no upper bound, running to 100 percent. The digest gives the reason in its own words: "The Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residue." The studio's default cut set, which the Associate tier used on the Obigbo library, is a vacuum refinery's: it splits the heavy end at 1000 F into vacuum gasoil and vacuum residue.
+Kwale is a topping refinery with no vacuum unit. Its cut set ends at atmospheric residue, from 650 F with no upper bound, running to 100 percent. The course gives the reason in its own words: "The Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residue." The studio's default cut set, which the Associate tier used on the Obigbo library, is a vacuum refinery's: it splits the heavy end at 1000 F into vacuum gasoil and vacuum residue.
 
 | cut | Kwale from F | Kwale to F |
 | --- | --- | --- |
@@ -27,7 +27,7 @@ Kwale is a topping refinery with no vacuum unit. Its cut set ends at atmospheric
 
 ## The Kwale blend on both
 
-The digest prints the Kwale blend, 55 and 45, on each.
+The tables below print the Kwale blend, 55 and 45, on each.
 
 | cut (Kwale's set) | yield volume percent |
 | --- | --- |
@@ -56,11 +56,11 @@ At the heavy end, Kwale sells one cut from 650 F where the default set sells two
 
 ## Lesson 2, several times over
 
-Going from one cut set to the other is a series of moved boundaries. The boundary between naphtha and kerosene moves from 330 F to 350 F. The one between kerosene and diesel moves from 480 F to 500 F. A new boundary appears at 1000 F inside Kwale's residue. For a moved boundary, lesson 2's rule applies: moving a cut point moves barrels between two cuts and nowhere else. The digest prints the two tables and not each move on its own, so the lesson reads the tables as printed.
+Going from one cut set to the other is a series of moved boundaries. The boundary between naphtha and kerosene moves from 330 F to 350 F. The one between kerosene and diesel moves from 480 F to 500 F. A new boundary appears at 1000 F inside Kwale's residue. For a moved boundary, lesson 2's rule applies: moving a cut point moves barrels between two cuts and nowhere else. This course prints the two tables and not each move on its own, so the lesson reads the tables as printed.
 
 ## Whose cuts
 
-The digest says of Kwale that "It draws its own cut points", and it prints the studio's default set beside them "for contrast (a vacuum refinery's cut set)". The blend's curve is the same under both tables. The cut set is what changes, so a yield is quoted with the cut set it was drawn on: 20.5591 is naphtha on Kwale's cuts, and 22.6185 is naphtha on the default's.
+The course says of Kwale that "It draws its own cut points", and it prints the studio's default set beside them "for contrast (a vacuum refinery's cut set)". The blend's curve is the same under both tables. The cut set is what changes, so a yield is quoted with the cut set it was drawn on: 20.5591 is naphtha on Kwale's cuts, and 22.6185 is naphtha on the default's.
 
 The next module values the blend on Kwale's cuts and Kwale's prices. Its netback table lists Kwale's five cuts, each with its own yield and its own price per barrel of product.
 

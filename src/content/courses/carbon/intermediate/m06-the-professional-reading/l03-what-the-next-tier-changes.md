@@ -14,7 +14,7 @@ SECTION 1 also lists functions that no section of this tier names. From carbonAb
 
 ## A new record
 
-The Expert tier works on the third record the digest describes: Agbor, a gas processing and distribution complex with six abatement measures, a curve, a target, a path, one priced saving and the plant energy intensity. Like Igbogene and Isiokpo, it is an invented record.
+The Expert tier works on the third record the course describes: Agbor, a gas processing and distribution complex with six abatement measures, a curve, a target, a path, one priced saving and the plant energy intensity. Like Igbogene and Isiokpo, it is an invented record.
 
 ## The same rules, in a new unit
 
@@ -26,7 +26,7 @@ Module three read the refusal that stops an LHV efficiency being set against an 
 
 ## What stays behind
 
-The combustion, the stack losses, the trap, the condensate and the pinch are this tier's, and the digest's sections for them are Professional sections. What moves forward is the shape of their answers: a figure with its basis, its inputs named, and a blank refused or named where the engine could have filled it.
+The combustion, the stack losses, the trap, the condensate and the pinch are this tier's, and the course's lessons for them are Professional lessons. What moves forward is the shape of their answers: a figure with its basis, its inputs named, and a blank refused or named where the engine could have filled it.
 
 ## Exercise
 

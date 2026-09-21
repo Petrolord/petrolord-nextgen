@@ -46,7 +46,7 @@ The blend's cut yields on the studio's default cuts, from the blend's own curve,
 | Vacuum residue | 17.0528 |
 | total | 100.0000 |
 
-The six yields total 100.0000. Closes: true. Cuts with no yield: nothing. The digest takes these yields from the blend's own curve and says the Professional tier explains that curve, so this tier reads the yields as printed.
+The six yields total 100.0000. Closes: true. Cuts with no yield: nothing. This lesson takes these yields from the blend's own curve and says the Professional tier explains that curve, so this tier reads the yields as printed.
 
 ## Reading it in one pass
 

@@ -2,7 +2,7 @@
 
 A validation case is worth what it can tell apart, and it can be worth nothing in two ways. A route with no case at all is an obvious gap and a listing will find it. A route with a case that cannot discriminate looks like coverage, runs green, and checks nothing, because the thing it is supposed to test is shared with whatever produced the expected answer.
 
-The digest names the second class rather than leaving it to be discovered. Every held constant in the pin table is undiscriminable by any case in the golden file. That is arithmetic rather than a criticism of the cases. An oracle sharing a constant with the engine cannot test that constant, at any tolerance, on any number of rows.
+The course names the second class rather than leaving it to be discovered. Every held constant in the pin table is undiscriminable by any case in the golden file. That is arithmetic rather than a criticism of the cases. An oracle sharing a constant with the engine cannot test that constant, at any tolerance, on any number of rows.
 
 ## What each route misses
 

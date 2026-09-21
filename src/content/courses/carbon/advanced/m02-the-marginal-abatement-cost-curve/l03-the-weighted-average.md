@@ -16,13 +16,13 @@ SECTION 20 defines it: the weighted average is the net annual cost of all the me
 
 ## Where the net annual cost of all comes from
 
-Each measure's net annual cost is printed in SECTION 18: -127251.65, -179904.83, -48447.11, 484221.51, 96300.31 and 65525.62 USD. The net annual cost of all is their sum. The digest carries a rounding note on it: the six figures as printed sum to 290443.85 USD, and the engine sums the net annual costs it holds to four decimals, which gives 290443.84 USD. Quote 290443.84 USD, which is the engine's figure. The one-cent difference is rounding in the printed rows.
+Each measure's net annual cost is printed in SECTION 18: -127251.65, -179904.83, -48447.11, 484221.51, 96300.31 and 65525.62 USD. The net annual cost of all is their sum. This lesson carries a rounding note on it: the six figures as printed sum to 290443.85 USD, and the engine sums the net annual costs it holds to four decimals, which gives 290443.84 USD. Quote 290443.84 USD, which is the engine's figure. The one-cent difference is rounding in the printed rows.
 
 ## The plain mean, computed here
 
 SECTION 20 also computes the plain mean of the six costs per tonne: -29.7913 USD. SECTION 20 prints it with one clause: "which weights a small measure the same as a large one." Tune the fired heaters counts once at -167.4364 USD a tonne on its 760.000 t, and Flare gas recovery counts once at 78.1002 USD a tonne on its 6200.000 t.
 
-The two summaries carry different signs. The weighted average is 18.7868 USD a tonne and the plain mean is -29.7913 USD a tonne. The plain mean is computed here by the digest, and no engine output in SECTION 20 carries it.
+The two summaries carry different signs. The weighted average is 18.7868 USD a tonne and the plain mean is -29.7913 USD a tonne. The plain mean is computed here by the lab, and no engine output in SECTION 20 carries it.
 
 ## Why the weights are tonnes
 
@@ -38,4 +38,4 @@ Of the six net annual costs, three are negative and three positive, and the net 
 
 ## Exercise
 
-Read netAnnualCostOfAll, totalAbatementTonnes, weightedAverageCostPerTonne and the plain mean the digest computes. Say what the weighted average and the plain mean, read together, show about how a small measure and a large measure count in each.
+Read netAnnualCostOfAll, totalAbatementTonnes, weightedAverageCostPerTonne and the plain mean the lab computes. Say what the weighted average and the plain mean, read together, show about how a small measure and a large measure count in each.

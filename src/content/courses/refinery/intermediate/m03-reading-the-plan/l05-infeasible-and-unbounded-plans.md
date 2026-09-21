@@ -26,13 +26,13 @@ The engine also returns the missing list itself: the operating cost of Naphtha r
 
 The gasoline row is worth a moment. A floor above its ceiling can never be met, and the engine sees that from the two numbers alone, so the input is invalid and no plan is attempted.
 
-**infeasible** means the input was valid and no plan satisfies it. The digest raises the jet ceiling to 1200000 and sets a jet floor of 1000000. Each number is sound on its own. But ABUA's crudes and units cannot make that much kero in a month:
+**infeasible** means the input was valid and no plan satisfies it. The lab raises the jet ceiling to 1200000 and sets a jet floor of 1000000. Each number is sound on its own. But ABUA's crudes and units cannot make that much kero in a month:
 
 REFUSED: "No plan satisfies these constraints. A product floor is probably beyond what the crudes and units can make."
 
 The engine's sentence names the usual cause and says "probably". It cannot know which limit you meant to relax. It knows only that together they leave no plan.
 
-**unbounded** means the plan could earn without limit. The digest leaves every crude availability, unit capacity and demand ceiling blank:
+**unbounded** means the plan could earn without limit. The lab leaves every crude availability, unit capacity and demand ceiling blank:
 
 REFUSED: "The plan is unbounded: a product has a price and no demand ceiling, or a crude has no availability limit and no cost."
 
@@ -48,4 +48,4 @@ An invalid status is fixed at the box it names. An infeasible status is fixed by
 
 ## Exercise
 
-Read the three statuses the digest prints for the jet floor of 1000000 with its ceiling raised to 1200000 (infeasible), for every limit left blank (unbounded), and for a gasoline floor of 500000 above its ceiling of 450000 (invalid). Say why the gasoline case is refused before any plan is attempted while the jet case is only found to have no plan by planning, and what a planner should change in each.
+Read the three statuses the lab prints for the jet floor of 1000000 with its ceiling raised to 1200000 (infeasible), for every limit left blank (unbounded), and for a gasoline floor of 500000 above its ceiling of 450000 (invalid). Say why the gasoline case is refused before any plan is attempted while the jet case is only found to have no plan by planning, and what a planner should change in each.

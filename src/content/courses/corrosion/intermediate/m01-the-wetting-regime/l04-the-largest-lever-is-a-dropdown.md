@@ -43,7 +43,7 @@ empty case is the one a form produces when nobody has chosen yet.
 ## The list is closed and short
 
 Three regimes, and no fourth. There is no gas-wet option, no stratified option
-and no annular option, and neither the engine nor the digest says why the list
+and no annular option, and neither the engine nor this course says why the list
 stops at three. What is true is that no door in this module works out a flow
 pattern, so a reader coming from a multiphase flow background should read the
 three entries as a coarse interpretation the engineer supplies rather than a regime map

@@ -1,6 +1,6 @@
 # Infeasible is an answer
 
-A blending terminal is asked for cargoes it cannot always make. The most useful thing an optimizer can do then is say so plainly, before anyone commits a tank or a ship. The digest puts it in one line: an infeasible blend is a real answer, and the useful one, because the specifications cannot be met by the components available.
+A blending terminal is asked for cargoes it cannot always make. The most useful thing an optimizer can do then is say so plainly, before anyone commits a tank or a ship. This course puts it in one line: an infeasible blend is a real answer, and the useful one, because the specifications cannot be met by the components available.
 
 ## Two infeasible Apapa cargoes
 

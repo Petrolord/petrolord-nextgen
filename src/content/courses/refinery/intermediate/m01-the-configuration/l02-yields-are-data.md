@@ -20,7 +20,7 @@ The grade names are labels. These yields are invented. Where a real crude's yiel
 
 ## Unit yields
 
-A unit's yields are volume fractions of its feed. The digest states the rule plainly: a unit's throughput consumes one barrel of its feed stream for each barrel it runs. So the Naphtha reformer, running one barrel, consumes one barrel of naphtha and makes reformate 0.8500 and offgas 0.1000. The Diesel hydrotreater consumes one barrel of gasoil for each barrel it runs and makes ulsd 0.9700 and offgas 0.0200.
+A unit's yields are volume fractions of its feed. The engine states the rule plainly: a unit's throughput consumes one barrel of its feed stream for each barrel it runs. So the Naphtha reformer, running one barrel, consumes one barrel of naphtha and makes reformate 0.8500 and offgas 0.1000. The Diesel hydrotreater consumes one barrel of gasoil for each barrel it runs and makes ulsd 0.9700 and offgas 0.0200.
 
 The crude unit is different. It has no feed stream, and its yields are the crude yields. Whatever crude runs through it yields in that crude's own proportions.
 

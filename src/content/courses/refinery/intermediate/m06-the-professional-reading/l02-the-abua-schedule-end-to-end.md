@@ -22,7 +22,7 @@ Units run in equal weekly events dated 2027-03-01, 2027-03-08, 2027-03-15, 2027-
 
 ## The totals
 
-The digest sets the schedule's totals beside the plan's for all ten materials, and every row agrees in quantity and in value. The cdu totals 2029032.26 bbl and 2536290.32 in both. Diesel totals 630500.00 bbl and 66076400.00 in both. The schedule is the plan in dated pieces, adding and losing nothing.
+The course sets the schedule's totals beside the plan's for all ten materials, and every row agrees in quantity and in value. The cdu totals 2029032.26 bbl and 2536290.32 in both. Diesel totals 630500.00 bbl and 66076400.00 in both. The schedule is the plan in dated pieces, adding and losing nothing.
 
 ## The dates
 

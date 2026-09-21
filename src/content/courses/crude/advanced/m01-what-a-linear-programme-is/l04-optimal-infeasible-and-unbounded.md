@@ -10,7 +10,7 @@ The kernel's status is always one of three words, and the caller is told which. 
 
 **Unbounded** means the region is not empty but the objective improves without limit inside it. The kernel reports it as plainly as the other two.
 
-The digest poses one small problem for each:
+This course poses one small problem for each:
 
 | problem | status |
 | --- | --- |
@@ -43,4 +43,4 @@ In the panel, pull one row's right-hand side across another until the region van
 
 ## Exercise
 
-Read the digest's third and fourth problems: a lower bound of 5 above an upper bound of 3 returns infeasible, and x + y <= 2 with y >= 2 returns optimal, objective 4.0000. Say what the relationship between the two bounds in the third problem shows, and say why the fourth problem's two rows, which both press on y, still leave the kernel a point to return as optimal.
+Read this lesson's third and fourth problems: a lower bound of 5 above an upper bound of 3 returns infeasible, and x + y <= 2 with y >= 2 returns optimal, objective 4.0000. Say what the relationship between the two bounds in the third problem shows, and say why the fourth problem's two rows, which both press on y, still leave the kernel a point to return as optimal.

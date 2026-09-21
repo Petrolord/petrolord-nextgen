@@ -13,7 +13,7 @@ SECTION 15 prints the trap failed open: a 4 mm orifice, 9 bar a upstream, a disc
 | 1.135 | 42.3520 | 355.757 | 7826.65 | 1135.851 | 63.721 |
 | 1.3 | 44.4620 | 373.481 | 8216.58 | 1192.439 | 66.896 |
 
-The stated exponent is 1.135, for dry saturated steam. At the superheated exponent the digest computes 17.724 tonnes a year more. The flow is choked. The engine's note, verbatim: "Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5774, so the loss depends on the upstream pressure alone."
+The stated exponent is 1.135, for dry saturated steam. At the superheated exponent the lab computes 17.724 tonnes a year more. The flow is choked. The engine's note, verbatim: "Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5774, so the loss depends on the upstream pressure alone."
 
 The trap refuses a blank exponent, discharge coefficient or hours. It reports the steam without a boiler efficiency and leaves the fuel and carbon absent, with the fuel note that a boiler efficiency is "not assumed to be 1". Hours left out of the call take the stated default of 8760, 371.004 tonnes a year.
 
@@ -57,4 +57,4 @@ SECTION 25 lists the trap's rule and the two pinch rules among those in force: a
 
 ## Exercise
 
-Read the three calls of this lesson. For each, name one box the engine refuses when blank. For the trap and the condensate system, name one figure the engine still reports when a different box is blank. Then say what the engine attaches to the condensate total of 121403.28 USD, and what the digest's zero at shifted 110.500 C lets the engine name.
+Read the three calls of this lesson. For each, name one box the engine refuses when blank. For the trap and the condensate system, name one figure the engine still reports when a different box is blank. Then say what the engine attaches to the condensate total of 121403.28 USD, and what the cascade's zero at shifted 110.500 C lets the engine name.

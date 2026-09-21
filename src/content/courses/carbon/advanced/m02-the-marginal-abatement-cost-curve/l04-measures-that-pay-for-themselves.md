@@ -26,7 +26,7 @@ SECTION 20's interaction table names one source: heaters, with Tune the fired he
 
 ## What no oracle recomputes
 
-SECTION 26 lists paysForItselfTonnes among the outputs recomputed by neither oracle, beside carbonIntensity, the curve's residual to target, compositeCurve and the simple payback. The digest says they are taught from the engine and never graded. SECTION 18 prints what the flag reads: "A negative cost per tonne means the measure pays for itself". The cost per tonne is not on SECTION 26's list of outputs neither oracle recomputes. paysForItselfTonnes is on it, so 5310.000 t is taught as the engine prints it.
+SECTION 26 lists paysForItselfTonnes among the outputs recomputed by neither oracle, beside carbonIntensity, the curve's residual to target, compositeCurve and the simple payback. The course says they are taught from the engine and never graded. SECTION 18 prints what the flag reads: "A negative cost per tonne means the measure pays for itself". The cost per tonne is not on SECTION 26's list of outputs neither oracle recomputes. paysForItselfTonnes is on it, so 5310.000 t is taught as the engine prints it.
 
 ## Reading the list against the tonnes
 

@@ -14,18 +14,18 @@ The two routes share a top. Both take the gap between the target and the current
 
 ## The two figures side by side
 
-The digest prints the shortcut on the same figures, computed from the engine's efficiencies and marked as the digest's own arithmetic. The engine does not return it.
+The lab prints the shortcut on the same figures, computed from the engine's efficiencies and marked as the lab's own arithmetic. The engine does not return it.
 
 | route | saving fraction | GJ a year |
 | --- | --- | --- |
 | the engine's ratio, (target - current) / target | 0.0164448058 | 6742.370 |
 | the percentage-point shortcut (computed here) | 0.0144463600 | 5923.008 |
 
-Both rows apply to the same 410000 GJ of fuel a year on LHV, invented for this course. The digest states the shortfall directly: the shortcut's 5923.008 GJ a year is 819.363 GJ below the engine's saving.
+Both rows apply to the same 410000 GJ of fuel a year on LHV, invented for this course. The lab states the shortfall directly: the shortcut's 5923.008 GJ a year is 819.363 GJ below the engine's saving.
 
 ## Which figure is the answer
 
-The engine's figure is the answer. The shortcut is computed here from the engine's efficiencies, and the digest prints that the engine does not return it. The engine's own sentence gives its direction: subtracting the percentages understates the saving. At Isiokpo the understatement is the 819.363 GJ a year the digest prints.
+The engine's figure is the answer. The shortcut is computed here from the engine's efficiencies, and the lab notes that the engine does not return it. The engine's own sentence gives its direction: subtracting the percentages understates the saving. At Isiokpo the understatement is the 819.363 GJ a year the lab prints.
 
 The trap is quiet. The shortcut's figure is a plausible number with the right units and the right sign. Nothing about 5923.008 GJ a year announces that it is wrong. The only defence is to know which quantity sits on the bottom of the ratio, and the engine's method names it.
 
@@ -37,4 +37,4 @@ The same reasoning holds on HHV. SECTION 14 prints the HHV saving fraction, comp
 
 ## Exercise
 
-Read the two rows of the side by side table and the digest's shortfall of 819.363 GJ a year. Say which route divides by the target efficiency and which by a hundred, which of the two figures the engine returns, and in which direction the shortcut moves the saving.
+Read the two rows of the side by side table and the lab's shortfall of 819.363 GJ a year. Say which route divides by the target efficiency and which by a hundred, which of the two figures the engine returns, and in which direction the shortcut moves the saving.

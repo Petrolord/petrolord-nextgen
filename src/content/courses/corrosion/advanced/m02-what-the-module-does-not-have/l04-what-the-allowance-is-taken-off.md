@@ -18,7 +18,7 @@ One more course points the other way. The Well Integrity and Plug and Abandonmen
 
 ## What the arithmetic does say
 
-Inside its own boundary the door is precise. On the digest's teaching streams the allowance is 3.175000 mm with 0.400000 mm consumed, leaving 2.775000 mm. At 1.676428 mm/yr that is 1.655305 yr remaining, and against a 20 year design life the allowance a new line would need is 33.528563 mm, short by 30.753563 mm. At 0.076842 mm/yr the same allowance gives 36.112878 yr and meets the design life with a shortfall of 0.000000 mm.
+Inside its own boundary the door is precise. On the lab's teaching streams the allowance is 3.175000 mm with 0.400000 mm consumed, leaving 2.775000 mm. At 1.676428 mm/yr that is 1.655305 yr remaining, and against a 20 year design life the allowance a new line would need is 33.528563 mm, short by 30.753563 mm. At 0.076842 mm/yr the same allowance gives 36.112878 yr and meets the design life with a shortfall of 0.000000 mm.
 
 Every one of those numbers is a division or a multiplication. The allowance and the consumed depth are typed and the rate is the correlation's, so each life inherits whatever the rate rests on. None of them knows the wall thickness, the design pressure or the pipe grade.
 

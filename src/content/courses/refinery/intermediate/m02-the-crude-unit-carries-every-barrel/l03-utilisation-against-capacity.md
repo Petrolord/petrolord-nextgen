@@ -18,7 +18,7 @@ This is the first reading a planner learns to make of a refinery plan. The crude
 
 ## A utilisation needs a finite capacity above zero
 
-The digest is explicit: the utilisation the plan reports for a unit with a blank capacity is null, and for a unit typed as 0 it is null. Both are the plan declining to divide. A blank capacity is no limit, so there is nothing to be a percent of. A capacity of zero cannot be divided into. Neither reads as 0.00 percent, and a dashboard that shows either as zero is showing something the plan did not say.
+The engine is explicit: the utilisation the plan reports for a unit with a blank capacity is null, and for a unit typed as 0 it is null. Both are the plan declining to divide. A blank capacity is no limit, so there is nothing to be a percent of. A capacity of zero cannot be divided into. Neither reads as 0.00 percent, and a dashboard that shows either as zero is showing something the plan did not say.
 
 ## The crude unit under the five changes
 

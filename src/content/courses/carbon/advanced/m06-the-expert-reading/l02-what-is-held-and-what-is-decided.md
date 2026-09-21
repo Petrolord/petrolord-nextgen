@@ -1,6 +1,6 @@
 # What is held and what is decided
 
-Every engine carries decisions and limits. SECTION 25 separates them. Four items are held: stated as limits, taught and never graded. The rest are rules in force, and each prints somewhere in the digest with a figure. This lesson reads both lists, with the Expert tier's rules in detail.
+Every engine carries decisions and limits. SECTION 25 separates them. Four items are held: stated as limits, taught and never graded. The rest are rules in force, and each prints somewhere in this course with a figure. This lesson reads both lists, with the Expert tier's rules in detail.
 
 {{panel:carbon-abatement-explorer}}
 

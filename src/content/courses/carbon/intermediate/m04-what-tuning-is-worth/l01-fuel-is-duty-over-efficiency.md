@@ -31,7 +31,7 @@ The two efficiencies are the LHV figures of SECTION 13. The saving fraction is t
 
 ## Reading the fraction to its printed decimals
 
-The efficiencies print to four decimals and the fraction to ten. The fraction is the engine's own, taken from its own efficiencies, and the course quotes it as the digest prints it and does not rework it from the rounded percents. Where a lesson needs the saving, it reads fuelSavingFraction or fuelSavingPercent off the table.
+The efficiencies print to four decimals and the fraction to ten. The fraction is the engine's own, taken from its own efficiencies, and the course quotes it as the lab prints it and does not rework it from the rounded percents. Where a lesson needs the saving, it reads fuelSavingFraction or fuelSavingPercent off the table.
 
 ## The basis is on the output
 

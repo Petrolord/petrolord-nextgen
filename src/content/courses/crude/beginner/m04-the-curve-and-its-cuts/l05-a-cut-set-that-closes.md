@@ -27,7 +27,7 @@ Four of its six studio cuts reach outside the measured range, so they have no yi
 
 ## The total as it computes
 
-The digest states the rule: the total is reported as it computes. The engine does not normalise it, and it does not scale Ebocha's two known cuts up so that they add to 100. The total of 33.6742 is the sum of the two cuts the curve can answer, 16.3881 and 17.2861, and the four cuts it cannot answer are named beside it. A reader sees both halves: what the curve accounts for, and which cuts it leaves without a yield.
+The lab states the rule: the total is reported as it computes. The engine does not normalise it, and it does not scale Ebocha's two known cuts up so that they add to 100. The total of 33.6742 is the sum of the two cuts the curve can answer, 16.3881 and 17.2861, and the four cuts it cannot answer are named beside it. A reader sees both halves: what the curve accounts for, and which cuts it leaves without a yield.
 
 ## A cut set inside the curve
 

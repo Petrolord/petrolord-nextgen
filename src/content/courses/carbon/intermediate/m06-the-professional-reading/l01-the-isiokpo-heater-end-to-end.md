@@ -32,7 +32,7 @@ The flue gas becomes an efficiency in SECTION 13. With a stack at 238 C, air at 
 | current, 5.5 percent O2 | HHV | 22.0712 | 77.9288 |
 | target, 2.8 percent O2 | HHV | 20.7657 | 79.2343 |
 
-The radiation loss is typed because the engine refuses to default it, and it moves the efficiency one for one. The basis is carried on every row. The two bases are never set against each other: the gap of 8.4741 percentage points at the current reading is the digest's arithmetic on two figures for one unchanged heater.
+The radiation loss is typed because the engine refuses to default it, and it moves the efficiency one for one. The basis is carried on every row. The two bases are never set against each other: the gap of 8.4741 percentage points at the current reading is the lab's arithmetic on two figures for one unchanged heater.
 
 ## Link four: a year of fuel saved
 
@@ -45,7 +45,7 @@ SECTION 14 takes the two LHV efficiencies, holds the target against a declared f
 | fuelSavingPercent | 1.6445 |
 | annualEnergySavedGJ | 6742.370 |
 
-The digest prints the percentage-point shortcut beside it, computed here from the engine's efficiencies: 5923.008 GJ a year, 819.363 GJ below the engine's saving. The engine returns only the ratio. On HHV, SECTION 14 prints a saving fraction of 0.0164763814 computed from the two HHV efficiencies, and no annual HHV figure; the 410000 GJ it prints is stated on LHV.
+The lab prints the percentage-point shortcut beside it, computed here from the engine's efficiencies: 5923.008 GJ a year, 819.363 GJ below the engine's saving. The engine returns only the ratio. On HHV, SECTION 14 prints a saving fraction of 0.0164763814 computed from the two HHV efficiencies, and no annual HHV figure; the 410000 GJ it prints is stated on LHV.
 
 ## The boxes along the way
 

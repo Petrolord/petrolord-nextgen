@@ -36,7 +36,7 @@ The library's four SARA analyses, and the index colloidalInstabilityIndex gives 
 | Asarama Heavy | 0.7668 |
 | Ubie Condensate | 8.3458 |
 
-Read Ubie Condensate. It carries 89.1 wt% saturates and 0.2 wt% asphaltenes, and its CII is 8.3458. The index puts saturates and asphaltenes together on top of the ratio, CII = (saturates + asphaltenes) / (aromatics + resins), and the digest gives each side its role: "Saturates precipitate asphaltenes; aromatics and resins hold them." Ubie Condensate's 9.2 wt% aromatics and 1.5 wt% resins make the bottom of its ratio.
+Read Ubie Condensate. It carries 89.1 wt% saturates and 0.2 wt% asphaltenes, and its CII is 8.3458. The index puts saturates and asphaltenes together on top of the ratio, CII = (saturates + asphaltenes) / (aromatics + resins), and the course gives each side its role: "Saturates precipitate asphaltenes; aromatics and resins hold them." Ubie Condensate's 9.2 wt% aromatics and 1.5 wt% resins make the bottom of its ratio.
 
 Read Asarama Heavy. It carries 11.9 wt% asphaltenes and 31.5 wt% saturates, against 37.2 wt% aromatics and 19.4 wt% resins. Its CII is 0.7668.
 
@@ -44,7 +44,7 @@ Read Egbema Medium. It carries 42.6 wt% aromatics and 19.8 wt% resins, against 3
 
 ## Why a crude's own index is only half the story
 
-The index of each crude alone describes that crude's composition. It does not describe a mixture. The digest's question for the screen is "will the mixture drop asphaltenes in the tank", and the answer to it is the blend's CII, which the next two lessons build from each SARA fraction blended on mass.
+The index of each crude alone describes that crude's composition. It does not describe a mixture. Module one's question for the screen is "will the mixture drop asphaltenes in the tank", and the answer to it is the blend's CII, which the next two lessons build from each SARA fraction blended on mass.
 
 ## A screening index
 

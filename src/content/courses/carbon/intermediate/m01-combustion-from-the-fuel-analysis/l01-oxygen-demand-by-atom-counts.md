@@ -1,6 +1,6 @@
 # Oxygen demand by atom counts
 
-The Associate tier counted carbon at Igbogene and turned it into an inventory. This tier walks into a second invented record, Isiokpo, which the digest describes as a gas plant with one fired heater, a failed steam trap, its condensate system and four process streams. The first Isiokpo record is the fuel gas the heater burns, and the first thing the engine does with that fuel is count its atoms.
+The Associate tier counted carbon at Igbogene and turned it into an inventory. This tier walks into a second invented record, Isiokpo, which this course describes as a gas plant with one fired heater, a failed steam trap, its condensate system and four process streams. The first Isiokpo record is the fuel gas the heater burns, and the first thing the engine does with that fuel is count its atoms.
 
 {{panel:carbon-efficiency-explorer}}
 
@@ -59,7 +59,7 @@ The same atom counts decide the products. SECTION 11 prints, per kmol of fuel:
 | products.h2oPerKmolFuel | 2.033000 | kmol per kmol fuel |
 | products.fuelN2PerKmolFuel | 0.015000 | kmol per kmol fuel |
 
-The digest states that the 0.025 kmol of fuel CO2 is inside products.co2PerKmolFuel. The carbon that burns and the carbon that arrived already burned leave the stack in the same column.
+The course states that the 0.025 kmol of fuel CO2 is inside products.co2PerKmolFuel. The carbon that burns and the carbon that arrived already burned leave the stack in the same column.
 
 ## Exercise
 

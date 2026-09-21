@@ -6,7 +6,7 @@ State the arithmetic flatly, because it is easy to nod at and hard to act on. A 
 
 ## The answer here
 
-This engine and its oracle are checked against a third location and a fourth. Thirty constants are pinned. Each one is measured out of the engine's behaviour by asking a question whose answer is that constant and nothing else, and the measurement is then compared against a literal typed in the digest generator, which is a file neither the engine nor the oracle reads. The golden then carries its own `heldConstants` block, which is a fourth copy, and 28 of the golden's 28 held constants are re-measured against the engine on every rebuild. Any two of the four agreeing is no longer enough to pass.
+This engine and its oracle are checked against a third location and a fourth. Thirty constants are pinned. Each one is measured out of the engine's behaviour by asking a question whose answer is that constant and nothing else, and the measurement is then compared against a literal typed in the course's generator, which is a file neither the engine nor the oracle reads. The golden then carries its own `heldConstants` block, which is a fourth copy, and 28 of the golden's 28 held constants are re-measured against the engine on every rebuild. Any two of the four agreeing is no longer enough to pass.
 
 A paired battery is what settled the design. Fifteen of seventeen constants moved in the engine and in the oracle at once leave a suite that compares only those two entirely green. With the pins in place, moving a constant in both files fails the pin before any measurement has run.
 

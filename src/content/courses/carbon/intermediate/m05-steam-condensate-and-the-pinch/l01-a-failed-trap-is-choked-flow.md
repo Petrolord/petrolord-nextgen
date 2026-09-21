@@ -56,7 +56,7 @@ SECTION 15 then gives the same trap a downstream pressure:
 | 7 | 0.777778 | 0.577430 | false | 37.5765 | 315.643 |
 | 8 | 0.888889 | 0.577430 | false | 29.0510 | 244.029 |
 
-The digest reads the table in one sentence: "At or below the critical ratio the loss does not move with the downstream pressure; above it the downstream pressure lowers the loss." At 3 and 5 bar a the trap is choked and loses the same 42.3520 kg an hour as the trap venting to atmosphere. At 6, 7 and 8 bar a choked is false and the loss is 41.4785, 37.5765 and 29.0510 kg an hour. In practice, a trap blowing into a closed condensate header shows no plume, and the header's pressure is what the table says to read.
+The course reads the table in one sentence: "At or below the critical ratio the loss does not move with the downstream pressure; above it the downstream pressure lowers the loss." At 3 and 5 bar a the trap is choked and loses the same 42.3520 kg an hour as the trap venting to atmosphere. At 6, 7 and 8 bar a choked is false and the loss is 41.4785, 37.5765 and 29.0510 kg an hour. In practice, a trap blowing into a closed condensate header shows no plume, and the header's pressure is what the table says to read.
 
 ## Inputs the engine will not assume
 

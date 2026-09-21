@@ -43,7 +43,7 @@ Its heat flow down the shifted temperatures:
 | 45.000 | 1480.000 |
 | 35.000 | 1470.000 |
 
-The heat flow is zero only at the top of the cascade, where the hot utility is zero. The digest states the reading: the engine reports no pinch there, because a zero at either end of the cascade is a threshold, and naming it a pinch would invent a constraint.
+The heat flow is zero only at the top of the cascade, where the hot utility is zero. The course states the reading: the engine reports no pinch there, because a zero at either end of the cascade is a threshold, and naming it a pinch would invent a constraint.
 
 The threshold case prints a hot utility of 0.000 kW and a cold utility of 1470.000 kW, and pinch hot none. The engine reports a threshold problem of true beside it, where every Isiokpo row reports false.
 

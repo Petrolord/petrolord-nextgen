@@ -31,7 +31,7 @@ SECTION 21 passes two sources to the curve: heaters, 34927.743 tCO2e, and flare,
 
 uncheckedSources is steam, power, vents, and the first row's targetBasis reads "not assessed: no computed emission to check the claims on steam, power, vents".
 
-SECTION 21 then passes every source the inventory computes: power, 10988.000 tCO2e, and vents, 2622.400 tCO2e, join heaters and flare. The verdict is still none, with the basis "not assessed: no computed emission to check the claims on steam". The digest gives the reason: the Agbor inventory has no line of its own for steam.
+SECTION 21 then passes every source the inventory computes: power, 10988.000 tCO2e, and vents, 2622.400 tCO2e, join heaters and flare. The verdict is still none, with the basis "not assessed: no computed emission to check the claims on steam". The course gives the reason: the Agbor inventory has no line of its own for steam.
 
 ## What the two rows share, and what they do not
 

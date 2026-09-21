@@ -34,7 +34,7 @@ So under the floors residue's value is Bonny Light's break-even, and SECTION 14 
 
 ## Across the other changes
 
-Read the four columns across every row of SECTION 14's change table and reformate, kero and ulsd print 111.0000, 105.5000 and 104.8000 in every row. Residue prints 59.0000 in every row but the floors. Across the six rows the digest prints, the floors are the only change that moves one of these four values.
+Read the four columns across every row of SECTION 14's change table and reformate, kero and ulsd print 111.0000, 105.5000 and 104.8000 in every row. Residue prints 59.0000 in every row but the floors. Across the six rows the lab prints, the floors are the only change that moves one of these four values.
 
 ## What to read first
 

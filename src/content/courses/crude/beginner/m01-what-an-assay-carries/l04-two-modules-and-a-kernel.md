@@ -18,13 +18,13 @@ The Product Blending Optimizer calls productBlending. Its 5 functions build and 
 
 ## One rule in one place
 
-productBlending imports the gravity and viscosity rules from crudeAssay rather than restating them. Those are the digest's words, and they say where each rule lives: in crudeAssay, once. The optimizer does not carry a second copy of either rule. It takes the one the studio uses.
+productBlending imports the gravity and viscosity rules from crudeAssay rather than restating them. Those are the engine's words, and they say where each rule lives: in crudeAssay, once. The optimizer does not carry a second copy of either rule. It takes the one the studio uses.
 
 The same idea runs through this whole tier. Every property has one rule, the rule names its basis, and the engine prints that basis beside the answer so that nobody has to guess how a figure was formed.
 
 ## What each app is for
 
-The digest lists four questions the studio answers, each with the function that answers it:
+This course lists four questions the studio answers, each with the function that answers it:
 
 | question | function |
 | --- | --- |

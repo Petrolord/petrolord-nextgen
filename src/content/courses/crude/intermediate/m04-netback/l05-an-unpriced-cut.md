@@ -6,13 +6,13 @@ A blank cost is a question someone may mean to ask. A blank product price is alm
 
 ## What a missing price does
 
-The gross product value is the sum, over the cuts, of yield fraction times product price. A cut with no price has nothing to multiply its yield by. The engine's rule is in the digest: a cut with no price contributes nothing and is named, and the valuation reports itself incomplete.
+The gross product value is the sum, over the cuts, of yield fraction times product price. A cut with no price has nothing to multiply its yield by. The engine states its rule plainly: a cut with no price contributes nothing and is named, and the valuation reports itself incomplete.
 
 Three things happen, then. The cut adds nothing to the gross. It is listed by name in unpricedCuts. And the valuation carries complete: false.
 
 ## The Kwale case with the residue unpriced
 
-The digest leaves the Atmospheric residue price blank on the Kwale blend and prints:
+Leave the Atmospheric residue price blank on the Kwale blend and the lab prints:
 
 | asked | gross $/bbl | netback $/bbl | unpricedCuts | complete |
 | --- | --- | --- | --- | --- |

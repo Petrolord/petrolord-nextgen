@@ -45,7 +45,7 @@ REFUSED: A throughput is required.
 
 ## Reading the gap
 
-SECTION 24 prints the arithmetic, each step computed here and equal to the engine's figure: the intensity is total GJ x 1000 over the throughput in tonnes, 877000.000 x 1000 / 1240000 = 707.2581 MJ a tonne; versus peer is the intensity over the peer, 1.040085; the gap is the intensity less the peer, 27.2581 MJ a tonne. They are printed only because every stream is present and complete is true. The digest prints no cost and no carbon figure for the gap, and this lesson computes none.
+SECTION 24 prints the arithmetic, each step computed here and equal to the engine's figure: the intensity is total GJ x 1000 over the throughput in tonnes, 877000.000 x 1000 / 1240000 = 707.2581 MJ a tonne; versus peer is the intensity over the peer, 1.040085; the gap is the intensity less the peer, 27.2581 MJ a tonne. They are printed only because every stream is present and complete is true. The lab prints no cost and no carbon figure for the gap, and this lesson computes none.
 
 ## Energy intensity and carbon intensity
 

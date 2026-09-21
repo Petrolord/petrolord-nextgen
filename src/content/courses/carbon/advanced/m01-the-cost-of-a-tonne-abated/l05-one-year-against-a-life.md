@@ -1,6 +1,6 @@
 # One year against a life
 
-This lesson reads one comparison the engine refuses. In the engine's own words, a one-off capital cost set against one year's saving overstates the cost per tonne of a capital measure. The digest prints that comparison anyway, in a column marked computed here. Every AGBOR figure here is invented for this course and in US dollars.
+This lesson reads one comparison the engine refuses. In the engine's own words, a one-off capital cost set against one year's saving overstates the cost per tonne of a capital measure. The lab prints that comparison anyway, in a column marked computed here. Every AGBOR figure here is invented for this course and in US dollars.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -14,7 +14,7 @@ The life is the box that lets a capital cost be spread across the years that the
 
 ## A column marked computed here
 
-SECTION 18 computes one more column from the inputs: the whole capital set against one year. Its header is marked computed here, and SECTION 18 prints why no engine figure stands beside it: "the engine refuses to compare a one-off cost with a recurring saving". It is the digest's arithmetic on the inputs, and no engine call returns it.
+SECTION 18 computes one more column from the inputs: the whole capital set against one year. Its header is marked computed here, and SECTION 18 prints why no engine figure stands beside it: "the engine refuses to compare a one-off cost with a recurring saving". It is the course's arithmetic on the inputs, and no engine call returns it.
 
 | measure | cost per tonne at 0.1 USD | capital against one year USD per tonne (computed here) |
 | --- | --- | --- |

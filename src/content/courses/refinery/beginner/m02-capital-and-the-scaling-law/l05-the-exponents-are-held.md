@@ -12,7 +12,7 @@ That second sentence is the reason for the hold. Every other figure in this tier
 
 ## The engine treats them as parameters
 
-modularRefinery.SCALING_EXPONENT names them, STICK_BUILT 0.6 and MODULAR 0.9, and the digest records that they are named, overridable parameters. scaleCapex takes an exponent as an argument and falls back to the modular one only when none is passed: at 20000 bpd with no exponent passed it returns 222860944.20 with exponent 0.9.
+modularRefinery.SCALING_EXPONENT names them, STICK_BUILT 0.6 and MODULAR 0.9, and the course records that they are named, overridable parameters. scaleCapex takes an exponent as an argument and falls back to the modular one only when none is passed: at 20000 bpd with no exponent passed it returns 222860944.20 with exponent 0.9.
 
 The screen explorer carries each exponent as a control, labelled as a default a vendor's figures replace. Changing it is the intended use of the panel.
 

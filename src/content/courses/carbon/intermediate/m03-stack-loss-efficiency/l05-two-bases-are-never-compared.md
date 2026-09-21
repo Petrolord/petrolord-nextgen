@@ -21,7 +21,7 @@ SECTION 13 shows the first claim directly:
 | current, 5.5 percent O2 | HHV | 77.9288 |
 | target, 2.8 percent O2 | HHV | 79.2343 |
 
-At the current reading the heater is 86.4029 percent on LHV and 77.9288 percent on HHV. The digest prints the gap between them as a difference of 8.4741 percentage points, computed from the engine's figures. Both figures belong to one heater at one reading; only the basis differs.
+At the current reading the heater is 86.4029 percent on LHV and 77.9288 percent on HHV. The lab prints the gap between them as a difference of 8.4741 percentage points, computed from the engine's figures. Both figures belong to one heater at one reading; only the basis differs.
 
 ## The comparisons that are allowed
 
@@ -49,4 +49,4 @@ The engine reads the basis without regard to case or spaces: " hhv " returns bas
 
 ## Exercise
 
-Read the four efficiencies of SECTION 13 and the refusal in SECTION 14 for a current efficiency on LHV and a target on HHV. Say which two pairs of efficiencies can be set against each other, what the digest's difference of 8.4741 percentage points is a difference between, and why that figure is no measure of what tuning the heater is worth.
+Read the four efficiencies of SECTION 13 and the refusal in SECTION 14 for a current efficiency on LHV and a target on HHV. Say which two pairs of efficiencies can be set against each other, what the lab's difference of 8.4741 percentage points is a difference between, and why that figure is no measure of what tuning the heater is worth.

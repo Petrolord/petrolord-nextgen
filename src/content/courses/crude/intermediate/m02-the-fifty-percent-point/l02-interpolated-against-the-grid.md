@@ -16,7 +16,7 @@ temperatureAtVolumePercent does not stop at a grid point. It finds the two curve
 
 ## Side by side
 
-The digest prints both readings for two blends.
+The lab prints both readings for two blends.
 
 | blend | T50 interpolated (the engine) F | first curve point at or past 50 percent F | grid reading minus the engine F |
 | --- | --- | --- | --- |
@@ -27,13 +27,13 @@ The grid reading is a temperature from the crudes' measurement grid. In the Kwal
 
 ## Two blends, two gaps
 
-The digest prints the grid reading minus the engine for two blends: 62.6816 F for the Kwale blend and 72.8571 F for the default pair. It prints no rule that fixes the size of that gap in advance, and this course does not offer one. Each gap is read from its own row, for its own pair of curves.
+The table prints the grid reading minus the engine for two blends: 62.6816 F for the Kwale blend and 72.8571 F for the default pair. It prints no rule that fixes the size of that gap in advance, and this course does not offer one. Each gap is read from its own row, for its own pair of curves.
 
-The grid reading is defined by the digest as "the first point of the blend's curve at or past 50 percent". The interpolated reading is temperatureAtVolumePercent(curve, 50), which uses the two curve points on either side of 50 percent and places the answer on the straight line between them. For the Kwale blend those points are 530 F at 43.6471 percent and 650 F at 56.9474 percent.
+The grid reading is defined by this course as "the first point of the blend's curve at or past 50 percent". The interpolated reading is temperatureAtVolumePercent(curve, 50), which uses the two curve points on either side of 50 percent and places the answer on the straight line between them. For the Kwale blend those points are 530 F at 43.6471 percent and 650 F at 56.9474 percent.
 
 ## What rides on T50
 
-T50 is also an input. The Watson characterisation factor in lesson 4 takes the blend's T50 as its boiling point. The digest prints K both ways:
+T50 is also an input. The Watson characterisation factor in lesson 4 takes the blend's T50 as its boiling point. The lab prints K both ways:
 
 | blend | SG | Watson K at T50 interpolated | Watson K at the grid reading |
 | --- | --- | --- | --- |

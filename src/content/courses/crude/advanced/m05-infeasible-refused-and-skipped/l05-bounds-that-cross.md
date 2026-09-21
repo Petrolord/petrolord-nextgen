@@ -21,7 +21,7 @@ optimiseBlend catches the same fault earlier and says it in plainer words. The k
 
 ## A floor that holds
 
-A minimum that sits below its maximum is a legitimate instruction: blend at least this much. The digest solves the Apapa cargo with an Isomerate floor:
+A minimum that sits below its maximum is a legitimate instruction: blend at least this much. The lab solves the Apapa cargo with an Isomerate floor:
 
 | asked | status | Isomerate bbl | total cost $ | binding | sulfur relief $ per ppm |
 | --- | --- | --- | --- | --- | --- |

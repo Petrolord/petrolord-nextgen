@@ -46,7 +46,7 @@ The engine converts each crude's viscosity into its index, takes a weighted aver
 
 ## Where the index comes from
 
-The digest names one other member of the family: "ASTM D7152 blends the same family of index on VOLUME; the two disagree, and which basis to use is a HELD decision." So two forms of the same double-log index can differ in the fraction the index is averaged on, and the digest prints both for the same blends in the next lesson. This course teaches the engine's form exactly as the engine computes it. When you meet a viscosity index in another tool, check its constants against the three printed above before comparing any figure it gives with this engine's.
+This course names one other member of the family: "ASTM D7152 blends the same family of index on VOLUME; the two disagree, and which basis to use is a HELD decision." So two forms of the same double-log index can differ in the fraction the index is averaged on, and the next lesson's table prints both for the same blends. This course teaches the engine's form exactly as the engine computes it. When you meet a viscosity index in another tool, check its constants against the three printed above before comparing any figure it gives with this engine's.
 
 ## Exercise
 

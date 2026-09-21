@@ -27,11 +27,11 @@ Take the reading of 5.5 percent. The engine reports excess air of 32.1223 percen
 
 Two rows of the table matter more than the rest for the modules that follow. SECTION 13 and SECTION 14 call the reading of 5.5 percent the heater's current state and the reading of 2.8 percent its target, where the table prints excess air of 13.9199 percent. Module three turns both into efficiencies and module four prices the move from one to the other.
 
-The excess air at every other reading in the table is read the same way, from the same fuel, and the digest prints no reading between its rows. A figure at 3.5 percent or 4.5 percent is not in SECTION 12, and this module does not supply one.
+The excess air at every other reading in the table is read the same way, from the same fuel, and the table prints no reading between its rows. A figure at 3.5 percent or 4.5 percent is not in SECTION 12, and this module does not supply one.
 
 ## The units of the answer
 
-The excess air column is a percent and prints to four decimals, as the digest's precision line says percents of excess air do. The air and flue gas columns are kilomoles per kilomole of fuel, and SECTION 12 prints them to six decimals. A reader quoting excess air quotes the percent; a reader quoting the flue gas quotes kilomoles and names whether it is dry or wet.
+The excess air column is a percent and prints to four decimals, as the course's precision line says percents of excess air do. The air and flue gas columns are kilomoles per kilomole of fuel, and SECTION 12 prints them to six decimals. A reader quoting excess air quotes the percent; a reader quoting the flue gas quotes kilomoles and names whether it is dry or wet.
 
 ## What the reading assumes
 

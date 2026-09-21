@@ -6,7 +6,7 @@ After the losses come two costs. They are simple subtractions, and the care is a
 
 ## The last two terms
 
-The netback formula ends with - processing cost - freight, all per barrel of crude. For the Kwale blend the digest prints the whole chain:
+The netback formula ends with - processing cost - freight, all per barrel of crude. For the Kwale blend the lab prints the whole chain:
 
 | term | $/bbl of crude |
 | --- | --- |
@@ -24,17 +24,17 @@ The netback, 64.9473 $/bbl of crude, is what a barrel of the Kwale blend is wort
 
 Processing cost is what it costs the refinery to run one barrel of crude through its units. It is per barrel of crude charged, because a refinery pays to process the whole barrel, including the part that ends up lost. That is why it is subtracted after the loss and is not itself scaled by the loss.
 
-This course takes processing cost as one number the refinery supplies. How a refinery builds that number, from its units, its utilities and its throughput, is refinery planning, which is taught in the `refinery` course. Here it is an input, invented like every price in the digest, and the lesson is only where it sits in the chain.
+This course takes processing cost as one number the refinery supplies. How a refinery builds that number, from its units, its utilities and its throughput, is refinery planning, which is taught in the `refinery` course. Here it is an input, invented like every price in this course, and the lesson is only where it sits in the chain.
 
 ## Freight
 
-Freight is the cost of bringing a barrel of crude from where it is bought to the refinery. It is also per barrel of crude. The digest's heading for this module names what a netback is: what a barrel of crude is worth at the refinery. Freight comes off in the formula as a figure per barrel, after the losses.
+Freight is the cost of bringing a barrel of crude from where it is bought to the refinery. It is also per barrel of crude. This course's definition for this module names what a netback is: what a barrel of crude is worth at the refinery. Freight comes off in the formula as a figure per barrel, after the losses.
 
 What freight is made of, and the terminal side of moving a cargo, belongs to the `supply` course. Here, as with processing, freight is one figure per barrel of crude.
 
 ## Why every term is reported
 
-The digest says that every term is reported beside the total. Laid out as gross 74.2412, loss 0.5939, processing 6.8000 and freight 1.9000, each term of the 64.9473 can be read on its own row. The order of the chain is visible too. Lesson 2 printed what the same terms give when the losses are taken after the costs, 65.0169, and the engine's column beside it.
+The engine's rule is that every term is reported beside the total. Laid out as gross 74.2412, loss 0.5939, processing 6.8000 and freight 1.9000, each term of the 64.9473 can be read on its own row. The order of the chain is visible too. Lesson 2 printed what the same terms give when the losses are taken after the costs, 65.0169, and the engine's column beside it.
 
 ## Complete and nothing assumed
 

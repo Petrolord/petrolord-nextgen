@@ -22,7 +22,7 @@ The first row is the shortcut the engine does not take: the gauge reading, 249, 
 
 The second row is the gauge reading plus the atmosphere: 250.0130 bar(a). On that pressure the engine returns 425.6447 kg.
 
-The third row is the difference the digest prints: absolute minus gauge-as-absolute. It is 1.0130 bar in pressure and 1.2054 kg in mass.
+The third row is the difference the table above prints: absolute minus gauge-as-absolute. It is 1.0130 bar in pressure and 1.2054 kg in mass.
 
 The pressure difference in the third row, 1.0130, is the site atmosphere typed, 1.013. The mass difference in the same row is 1.2054 kg.
 

@@ -37,7 +37,7 @@ Lesson two read the mass balance SECTION 11 prints at 3 percent stack oxygen:
 
 The in side weighs the air at AIR_MOLAR_MASS, argon and all. For the out side to weigh the same air, the non-oxygen part has to leave at a molar mass that carries the argon too, and ATMOSPHERIC_N2_MOLAR_MASS is that molar mass. SECTION 25 lists the rule as one of those in force: "Air's argon is carried at ATMOSPHERIC_N2_MOLAR_MASS, and the flue gas mass balance closes".
 
-The out less in figure, 0.000001 kg per kmol of fuel, is the digest's arithmetic on the engine's two sides, marked computed here. It is quoted as the digest prints it.
+The out less in figure, 0.000001 kg per kmol of fuel, is the lab's arithmetic on the engine's two sides, marked computed here. It is quoted as the lab prints it.
 
 ## Where the dry flue gas mass shows up again
 

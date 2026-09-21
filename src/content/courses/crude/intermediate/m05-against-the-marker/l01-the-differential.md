@@ -26,11 +26,11 @@ Always read the sign against the definition. The engine's convention is stated w
 
 ## A differential on an incomplete netback
 
-The differential is formed from the netback beneath it, whatever that netback is. The digest says so directly: "The differential is formed whether or not the valuation is complete." It prints the case. The Kwale Light and Ebocha partial assay blend of module 3, valued against the same marker, reports complete: false, a netback of 48.3393 $/bbl over the cuts it can value, and a differential of -24.1607 $/bbl. That differential is formed on a netback that leaves two cuts out, and complete: false on the netback is where a reader finds that out. A cost left blank and taken as zero is named on the netback the same way, in assumedZero.
+The differential is formed from the netback beneath it, whatever that netback is. The course says so directly: "The differential is formed whether or not the valuation is complete." It prints the case. The Kwale Light and Ebocha partial assay blend of module 3, valued against the same marker, reports complete: false, a netback of 48.3393 $/bbl over the cuts it can value, and a differential of -24.1607 $/bbl. That differential is formed on a netback that leaves two cuts out, and complete: false on the netback is where a reader finds that out. A cost left blank and taken as zero is named on the netback the same way, in assumedZero.
 
 ## Both sides on the same basis
 
-The digest values each crude on one set of terms: "Each crude alone is valued on the same Kwale cut set, product prices, processing cost, freight and losses as the blend." The marker is Kwale's too: "Kwale's marker is 72.5 $/bbl." Every differential in this module is read against that one marker on those terms.
+The lab values each crude on one set of terms: "Each crude alone is valued on the same Kwale cut set, product prices, processing cost, freight and losses as the blend." The marker is Kwale's too: "Kwale's marker is 72.5 $/bbl." Every differential in this module is read against that one marker on those terms.
 
 ## In the panel
 
@@ -38,4 +38,4 @@ The valuation explorer ends its waterfall at the netback and then draws the mark
 
 ## Exercise
 
-Read the blend's netback, the marker and the differential. State the engine's definition of the differential and use it to say what the sign of -7.5527 tells the Kwale buyer. Then read the differential the digest prints for the Kwale Light and Ebocha blend, and say which line of its netback a reader must quote beside it.
+Read the blend's netback, the marker and the differential. State the engine's definition of the differential and use it to say what the sign of -7.5527 tells the Kwale buyer. Then read the differential this lesson prints for the Kwale Light and Ebocha blend, and say which line of its netback a reader must quote beside it.

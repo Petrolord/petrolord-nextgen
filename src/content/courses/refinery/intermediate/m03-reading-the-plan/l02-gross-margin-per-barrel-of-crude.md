@@ -1,6 +1,6 @@
 # Gross margin per barrel of crude
 
-The margin is a month's total. To compare months, crudes or refineries of different sizes, planners divide it by the crude that earned it. The digest gives the definition:
+The margin is a month's total. To compare months, crudes or refineries of different sizes, planners divide it by the crude that earned it. The course gives the definition:
 
 gross margin per barrel = margin / total crude.
 
