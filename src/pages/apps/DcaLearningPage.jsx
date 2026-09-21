@@ -21,6 +21,7 @@ import { WELLS, FLOOD_START } from '@/components/course/panels/dca/declineLab';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, getCourseProgress, verificationUrl,
 } from '@/services/academyService';
+import { buildCapstoneAnswers } from '@/lib/capstoneAnswer';
 import LearningModeGate from '@/components/academy/LearningModeGate';
 
 const APP = 'dca';
@@ -103,9 +104,7 @@ const DcaLearningPage = () => {
   const submit = async () => {
     setSubmitting(true);
     try {
-      const numeric = Object.fromEntries(
-        (capstone?.fields || []).map((f) => [f.key, answers[f.key] === '' || answers[f.key] === undefined ? null : Number(answers[f.key])]),
-      );
+      const numeric = buildCapstoneAnswers(capstone?.fields, answers);
       const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
@@ -213,7 +212,7 @@ const DcaLearningPage = () => {
                     {(capstone?.fields || []).map((f) => (
                       <div key={f.key}>
                         <Label className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
-                        <Input type="number" step="any" value={answers[f.key] ?? ''}
+                        <Input type="text" inputMode="decimal" autoComplete="off" value={answers[f.key] ?? ''}
                           onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
                           className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
                       </div>
