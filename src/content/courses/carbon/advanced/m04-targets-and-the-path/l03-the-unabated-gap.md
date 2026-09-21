@@ -21,9 +21,9 @@ Three years print a positive gap: 2027 at 494.298 t, 2028 at 798.595 t and 2033 
 
 ## The engine's note
 
-The gap note, verbatim: "The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan."
+The gap note, verbatim: "The gap is reported as unabated with no measure identified. A wedge is drawn only for an identified measure, because a plan needs a named measure behind every wedge."
 
-The note makes two statements. The gap is unabated, with no measure identified: nothing in the programme as entered closes it. And the engine does not draw the gap as a wedge of future measures, because such a wedge would have nothing behind it.
+The note makes two statements. The gap is unabated, with no measure identified: nothing in the programme as entered closes it. And the engine draws a wedge only for an identified measure, so the gap is drawn with no wedge: a plan needs a named measure behind every wedge.
 
 ## Reading 1370.083 t
 

@@ -24,13 +24,13 @@ q(3, "Which bracket does priceSensitivity hand solveCrossing for the invented BA
 q(0, "solveCrossing is run against the invented cap over a bracket from 1300 to 1500 naira to the dollar. What does it return?",
  "found false; REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.",
  ["found true at 1500, the end of the bracket nearer the crossing, after 18 bisection steps.",
-  "REFUSED: The search bracket is not a valid interval, since the crossing lies above it.",
+  "REFUSED: The search bracket must be a valid interval, since the crossing lies above it.",
   "found true at 1641.7105, since the engine widens the bracket until the sign changes."],
  "Both end shortfalls, -211.7551 and -87.8167 naira a litre, are negative. The engine does not search outside the bracket it was handed and returns no value.")
 
 # audit-advanced: explanation flourish ("goes back to the person who typed it") unprinted
 q(2, "solveCrossing is handed the invented exchange rate bracket written backwards, 2100 to 1200. Which answer does it give?",
- "REFUSED: The search bracket is not a valid interval.",
+ "REFUSED: The search bracket must be a valid interval.",
  ["It swaps the ends and finds 1641.7105.",
   "REFUSED: No crossing in the range searched. The outcome has the same sign at both ends.",
   "It halves from the high end and reports none."],

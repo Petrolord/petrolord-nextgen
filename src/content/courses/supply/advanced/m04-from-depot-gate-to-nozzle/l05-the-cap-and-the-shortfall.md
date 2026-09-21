@@ -25,7 +25,7 @@ What the engine does is make the gap exact and give it a sign. A shortfall of 34
 
 ## A floor against a cap
 
-The course prices the BADAGRY build-up with the dealer margin and the levies left blank. The engine reports complete false, names both missing elements, prints a price of 1031.3197 naira a litre, and labels it: "A FLOOR, not a price: 2 rate(s) not supplied."
+The course prices the BADAGRY build-up with the dealer margin and the levies left blank. The engine reports complete false, names both missing elements, prints a price of 1031.3197 naira a litre, and labels it: "A FLOOR: 2 rate(s) not supplied, so the full price is at least this."
 
 Set that price beside the invented cap of 1040.0000 naira a litre. A reader who ignored the label could reach a verdict from those two figures alone. The complete build-up, with every invented rate supplied, prints 1074.8249 and a shortfall of 34.8249 against the same cap, with the verdict false. The floor is a figure the full price cannot be below. It can never show that a cap covers a chain, because the missing rates have not been added yet.
 

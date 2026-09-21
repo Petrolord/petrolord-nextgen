@@ -28,7 +28,7 @@ The outturn enters when the question turns from what the cargo cost to what a li
 
 It is tempting to treat the ocean loss as one more line in the build-up, a charge in dollars added to the landed total. The engine does not do that. In the digest's words, the loss divides the cost: the landed total stays the same and the litres it is spread over fall. The next lesson reads that division.
 
-The ocean loss is also an input of its own and has no row in `IMPORT_TEMPLATE`, whose 9 lines are charges, each with a basis and a stage. It still counts toward a complete build-up. Left blank, it is a missing rate: the walk reads complete false, missing Ocean loss, and labels its total "A FLOOR, not a cost: 1 rate(s) not supplied." That blank row spreads the landed total over all 45772751.75 bill-of-lading litres, 0.579252 USD a litre sold. Left out of the call entirely, the loss takes the 0 the signature states and reads complete true. A loss of 100 percent or more is refused, and so is one below 0:
+The ocean loss is also an input of its own and has no row in `IMPORT_TEMPLATE`, whose 9 lines are charges, each with a basis and a stage. It still counts toward a complete build-up. Left blank, it is a missing rate: the walk reads complete false, missing Ocean loss, and labels its total "A FLOOR: 1 rate(s) not supplied, so the full landed cost is at least this." That blank row spreads the landed total over all 45772751.75 bill-of-lading litres, 0.579252 USD a litre sold. Left out of the call entirely, the loss takes the 0 the signature states and reads complete true. A loss of 100 percent or more is refused, and so is one below 0:
 
 > REFUSED: The ocean loss must be at least 0 and under 100 percent.
 

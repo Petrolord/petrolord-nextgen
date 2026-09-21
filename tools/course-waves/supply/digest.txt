@@ -1,7 +1,7 @@
 # supply: Terminals, Depots & Fuel Supply. Teaching digest.
 # PRECISION: volumes print to three decimals of a cubic metre (a litre); VCF to six decimals and its alpha to nine; probabilities and utilisation to six decimals; offered load in erlangs, minutes and queue lengths to four; days of cover and turns to four; money in US dollars to two decimals and dollars per litre to six; local currency per litre to four; percents to four; litres to two; tonnes and barrels to four; kilometres to two; hours to three; trips to six; exchange rates to four. Heights are whole millimetres. Counts are whole numbers.
 # NO CLOCK: neither engine reads a date or a random number, so no figure below depends on when or where the digest was built.
-# ENGINES: engines/downstream/terminalDepot.js and engines/downstream/fuelPricing.js at petrolord-engines 13f0936 (MD3-0, MD3-1 and MD3-2), vendored in NextGen under packages/engines.
+# ENGINES: engines/downstream/terminalDepot.js and engines/downstream/fuelPricing.js at petrolord-engines e972ae7 (MD3-0, MD3-1 and MD3-2, with the engines #232 copy pass and queue vocabularies), vendored in NextGen under packages/engines.
 # CASES: AKODO (a coastal import terminal: three tanks, their strapping tables, a morning of dips and one day), IBAFO (an inland depot: its loading rack, tank farm, throughput economics, a truck lane, a fleet and a forecourt), BADAGRY (one petrol cargo landed and priced to the nozzle). All three are invented records.
 # RATES: every rate, margin, levy, freight, exchange rate and tax below is INVENTED for this course and is not a published figure. The engine ships no rate and no volume correction coefficient, and the one coefficient row below is SYNTHETIC.
 # Built by build_digest.sh from supply_dump.mjs and supply_fields.mjs. Never edited by hand.
@@ -12,12 +12,12 @@ Each module exports its rules as functions and its fixed data as constants. The 
 
 | module | exported functions | exported constants | names |
 | --- | --- | --- | --- |
-| terminalDepot | 8 | 0 | dipToStandardVolume, rackQueue, reconcileStock, tankFarmCover, throughputEconomics, trendUnaccounted, volumeAtDip, volumeCorrectionFactor |
-| fuelPricing | 9 | 8 | buildPumpPrice, cargoQuantities, fleetSizing, landedCost, marginWaterfall, priceSensitivity, solveCrossing, stationSizing, truckingEconomics, CHARGE_BASIS, IMPORT_TEMPLATE, LITRES_PER_M3, M3_PER_BBL, PRICE_ELEMENT_BASIS, PRODUCT_REFERENCE, PUMP_TEMPLATE, RATE_DISCLAIMER |
+| terminalDepot | 8 | 1 | dipToStandardVolume, rackQueue, reconcileStock, tankFarmCover, throughputEconomics, trendUnaccounted, volumeAtDip, volumeCorrectionFactor, RACK_VOCABULARY |
+| fuelPricing | 9 | 9 | buildPumpPrice, cargoQuantities, fleetSizing, landedCost, marginWaterfall, priceSensitivity, solveCrossing, stationSizing, truckingEconomics, CHARGE_BASIS, FORECOURT_QUEUE_VOCABULARY, IMPORT_TEMPLATE, LITRES_PER_M3, M3_PER_BBL, PRICE_ELEMENT_BASIS, PRODUCT_REFERENCE, PUMP_TEMPLATE, RATE_DISCLAIMER |
 terminalDepot exported functions (8): dipToStandardVolume, rackQueue, reconcileStock, tankFarmCover, throughputEconomics, trendUnaccounted, volumeAtDip, volumeCorrectionFactor
-terminalDepot exported constants (0): none
+terminalDepot exported constants (1): RACK_VOCABULARY
 fuelPricing exported functions (9): buildPumpPrice, cargoQuantities, fleetSizing, landedCost, marginWaterfall, priceSensitivity, solveCrossing, stationSizing, truckingEconomics
-fuelPricing exported constants (8): CHARGE_BASIS, IMPORT_TEMPLATE, LITRES_PER_M3, M3_PER_BBL, PRICE_ELEMENT_BASIS, PRODUCT_REFERENCE, PUMP_TEMPLATE, RATE_DISCLAIMER
+fuelPricing exported constants (9): CHARGE_BASIS, FORECOURT_QUEUE_VOCABULARY, IMPORT_TEMPLATE, LITRES_PER_M3, M3_PER_BBL, PRICE_ELEMENT_BASIS, PRODUCT_REFERENCE, PUMP_TEMPLATE, RATE_DISCLAIMER
 
 fuelPricing.LITRES_PER_M3: 1000
 fuelPricing.M3_PER_BBL: 0.158987294928
@@ -81,7 +81,7 @@ Each row is one call with one measured input left blank, null or absent. The eng
 | cargoQuantities | the density | REFUSED: Density is required to convert between mass and volume; it is not assumed. |
 | cargoQuantities | the quantity | REFUSED: Cargo quantity is required. |
 | landedCost | the FOB price | REFUSED: An FOB price and its basis are required. |
-| landedCost | every rate in the template | complete false, 9 rates missing, total 23392000.00 USD; A FLOOR, not a cost: 9 rate(s) not supplied. |
+| landedCost | every rate in the template | complete false, 9 rates missing, total 23392000.00 USD; A FLOOR: 9 rate(s) not supplied, so the full landed cost is at least this. |
 | buildPumpPrice | the landed cost per litre | REFUSED: A landed cost per litre is required. |
 | truckingEconomics | the distance | REFUSED: Distance, payload and average speed are required and must be positive. |
 | fleetSizing | the trips per truck | REFUSED: Demand, payload and trips per truck per day are required and must be positive. |
@@ -417,7 +417,7 @@ IBAFO to a station cluster 312.00 km away, a 33000.00 litre payload, 46 km/h ave
 | cost per litre delivered, naira | 15.0704 |
 | diesel litres a trip | 224.64 |
 | kg CO2e a trip | none |
-| carbon note | No diesel emission factor supplied, so the carbon figure is absent rather than zero. |
+| carbon note | No diesel emission factor supplied, so the carbon figure is left blank. |
 
 A cost box left BLANK is a missing cost and is named; a cost left OUT of the call takes the default the signature states:
 | the driver cost | complete | missing inputs | cost a trip, naira | cost per litre delivered, naira |
@@ -579,10 +579,10 @@ What the walk refuses:
 | a charge with the stage "customs" | REFUSED: Customs processing has an unknown stage "customs". |
 | insurance on CIF at 100 percent | REFUSED: The insurance rates on CIF add up to 100 percent or more. |
 
-With the duty and the financing rate left blank the build-up is not complete: complete false; missing Import duty, Financing and letter of credit; total 24774210.79 USD. A FLOOR, not a cost: 2 rate(s) not supplied.
-With every rate blank: complete false; 9 missing; total 23392000.00 USD, the FOB alone. A FLOOR, not a cost: 9 rate(s) not supplied.
+With the duty and the financing rate left blank the build-up is not complete: complete false; missing Import duty, Financing and letter of credit; total 24774210.79 USD. A FLOOR: 2 rate(s) not supplied, so the full landed cost is at least this.
+With every rate blank: complete false; 9 missing; total 23392000.00 USD, the FOB alone. A FLOOR: 9 rate(s) not supplied, so the full landed cost is at least this.
 The full build-up less the floor with the duty and the financing rate blank: 26513943.86 - 24774210.79 = 1739733.07 USD.
-A rate typed 0 is a rate: with the duty typed 0 the build-up is complete true, total 25114857.82 USD. With the duty left blank it is complete false, missing Import duty, total 25114857.82 USD. A FLOOR, not a cost: 1 rate(s) not supplied.
+A rate typed 0 is a rate: with the duty typed 0 the build-up is complete true, total 25114857.82 USD. With the duty left blank it is complete false, missing Import duty, total 25114857.82 USD. A FLOOR: 1 rate(s) not supplied, so the full landed cost is at least this.
 
 # SECTION 19: OCEAN LOSS AND THE LITRE SOLD (owned by Expert m03 and m06)
 
@@ -599,8 +599,8 @@ The BADAGRY cargo, insurance on CIF, the ocean loss swept (bill of lading 457727
 An ocean loss left blank is a missing rate, so the build-up is not complete and the landed total is a floor. A loss left out of the call takes the 0 the signature states. A loss of 100 percent or more, or below 0, is refused:
 | ocean loss (stated) | the engine answers |
 | --- | --- |
-| blank | complete false; missing Ocean loss; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; A FLOOR, not a cost: 1 rate(s) not supplied. |
-| null | complete false; missing Ocean loss; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; A FLOOR, not a cost: 1 rate(s) not supplied. |
+| blank | complete false; missing Ocean loss; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; A FLOOR: 1 rate(s) not supplied, so the full landed cost is at least this. |
+| null | complete false; missing Ocean loss; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; A FLOOR: 1 rate(s) not supplied, so the full landed cost is at least this. |
 | left out of the call | complete true; missing none; outturn 45772751.75 litres; landed total 26513943.86 USD; USD per litre sold 0.579252; All supplied rates applied. |
 | 100 | REFUSED: The ocean loss must be at least 0 and under 100 percent. |
 | 120 | REFUSED: The ocean loss must be at least 0 and under 100 percent. |
@@ -633,7 +633,7 @@ Against a cap of 1150.0000 naira a litre: shortfall -75.1751 naira a litre (posi
 Against a cap of 1040.0000 naira a litre: shortfall 34.8249 naira a litre; the cap covers the chain: false.
 The same 6.5 percent typed as a percent of the landed cost instead of the running total: price 1066.7292 naira a litre.
 That build-up is complete true: the basis changes the amount, and every rate is still supplied.
-With the dealer margin and the levies left blank: complete false; missing Dealer margin, Statutory levies at the pump; price 1031.3197 naira a litre. A FLOOR, not a price: 2 rate(s) not supplied.
+With the dealer margin and the levies left blank: complete false; missing Dealer margin, Statutory levies at the pump; price 1031.3197 naira a litre. A FLOOR: 2 rate(s) not supplied, so the full price is at least this.
 
 # SECTION 21: WHERE THE MONEY IN A LITRE GOES (owned by Expert m04)
 
@@ -682,7 +682,7 @@ The chain at each exchange rate, element by element:
 | 2100.0000 | 1221.9272 | 97.1210 | 1433.9982 |
 
 Searched only from 1300 to 1500: found false; REFUSED: No crossing in the range searched. The outcome has the same sign at both ends. The shortfall at the two ends: -211.7551 and -87.8167 naira a litre.
-solveCrossing over a bracket written backwards (2100 to 1200): REFUSED: The search bracket is not a valid interval.
+solveCrossing over a bracket written backwards (2100 to 1200): REFUSED: The search bracket must be a valid interval.
 With no cap there is nothing to cross: breakeven none.
 
 # SECTION 23: WHAT IS HELD AND WHAT IS DECIDED (owned by Expert m06)
@@ -709,7 +709,7 @@ tankFarmCover with no daily throughput gives no days of cover and no turns (SECT
 an opening stock derived from the day's own closing dip balances every day and measures nothing (SECTION 7).
 
 Rules the engines keep at 13f0936 from MD3-2 (engines PR #225), each measured in this digest:
-an ocean loss left blank is a missing rate and the landed total is a floor (SECTION 19): complete false; missing Ocean loss; A FLOOR, not a cost: 1 rate(s) not supplied.
+an ocean loss left blank is a missing rate and the landed total is a floor (SECTION 19): complete false; missing Ocean loss; A FLOOR: 1 rate(s) not supplied, so the full landed cost is at least this.
 an ocean loss of 100 percent or more is refused (SECTION 19): REFUSED: The ocean loss must be at least 0 and under 100 percent.
 
 # SECTION 24: WHAT THE ORACLES CHECK (owned by Expert m06)

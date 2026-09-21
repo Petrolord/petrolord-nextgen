@@ -100,17 +100,17 @@ q(2, "IBAFO's forecourt takes 14 buses an hour at 6 minutes a fill. What average
 
 q(2, "IBAFO's forecourt is run at 25 buses an hour on 2 dispensers. What does cngDispensing return?",
  "An answer: stable false and utilisation 1.2500",
- ["REFUSED: The number of bays must be a whole number, one or more.",
+ ["REFUSED: The number of dispensers must be a whole number, one or more.",
   "An average wait that grows with the 1.2500 utilisation",
   "REFUSED: Arrivals, fill time and a dispenser count are required and must be positive."],
- "SECTION 33: at 25 buses an hour on 2 dispensers the engine gives an answer and no refusal: stable false, utilisation 1.2500, and the message that no average waiting time exists.")
+ "At 25 buses an hour on 2 dispensers the engine gives an answer and no refusal: stable false, utilisation 1.2500, and the message that no average waiting time exists.")
 
 q(1, "cngDispensing is asked for 2.5 dispensers. What comes back?",
- "REFUSED: The number of bays must be a whole number, one or more.",
- ["The queue on 2 dispensers, with 2.5 rounded down to a whole number of bays.",
-  "The queue on 3 dispensers, with 2.5 rounded to the nearest whole bay.",
+ "REFUSED: The number of dispensers must be a whole number, one or more.",
+ ["The queue on 2 dispensers, with 2.5 rounded down to a whole number of dispensers.",
+  "The queue on 3 dispensers, with 2.5 rounded to the nearest whole dispenser.",
   "A queue on 2.5 dispensers, the count taken exactly as it was typed."],
- "SECTION 33's probe table prints \"REFUSED: The number of bays must be a whole number, one or more.\" for 2.5 dispensers.")
+ "The probe table prints \"REFUSED: The number of dispensers must be a whole number, one or more.\" for 2.5 dispensers.")
 
 emit(Q, '/root/wt-et-gasvalue-nextgen/tools/course-banks/gasvalue/advanced/gva_m04.json', expect_n=15)
 finish()

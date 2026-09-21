@@ -70,7 +70,7 @@ q(2, "Tune the fired heaters and the Heat integration project both act on heater
  ["It keeps the larger claim, 3400.000 t, and drops Tune the fired heaters from the total.",
   "It refuses the curve until the user sequences the two measures on the one source.",
   "It counts both in full and names heaters in the over-claims column of the curve."],
- "SECTION 20 prints both measures at 760.000 and 3400.000 t, additive false, and the note: \"Measures listed here act on the same source, so their abatements are NOT additive and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, which is why it is surfaced rather than solved.\" The costed curve prints over-claims none.")
+ "The curve prints both measures at 760.000 and 3400.000 t, additive false, and the note: \"Measures listed here act on the same source, so their abatements overlap and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, so the overlap is flagged here and the sequencing is left to that judgement.\" The costed curve prints over-claims none.")
 
 q(0, "Every SECTION 21 curve is checked against a target of 16830.083 tCO2e. What is that target?",
  "30 percent of the inventory total of 56100.276 tCO2e",

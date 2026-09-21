@@ -38,7 +38,7 @@ The engine returns gwpSetLabel: IPCC AR6 GWP100, fossil methane. computed: true.
 
 ## The inventory's own limit
 
-The engine states the limit of its own record, verbatim: "This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree."
+The engine states the limit of its own record, verbatim: "This is a quantitative inventory of tonnes. Obligations, evidence and deadlines belong in the compliance register, which keeps the one record of them; a second copy here would create two records that could disagree."
 
 ## The intensity
 

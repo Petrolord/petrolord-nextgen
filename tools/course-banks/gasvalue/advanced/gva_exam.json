@@ -382,7 +382,7 @@
    "It is 1.2500 times the fill time."
   ],
   "answer": 1,
-  "explanation": "The message: \"The rack cannot keep up with arrivals. The queue grows without limit, so no average waiting time exists. Add a bay, load faster, or spread the arrivals.\""
+  "explanation": "The message: \"The dispensers cannot keep up with arriving vehicles. The forecourt queue grows without limit, so no average waiting time exists. Add a dispenser, shorten the fill, or spread the arrivals.\""
  },
  {
   "prompt": "Two dispensers serve IBAFO's 14 buses an hour. How likely is a bus to wait, by the engine?",

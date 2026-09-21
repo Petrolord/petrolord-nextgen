@@ -1,6 +1,6 @@
 # gasvalue: Flare Gas to Value & LPG/CNG. Teaching digest.
 # PRECISION: every computed figure prints to four decimals (Btu/scf, gal/Mscf, kg/Mscf, mole fractions, carbon per mole, lb/lbmol, t/Mscf, MWh/Mscf, dollars per Mscf, dollars per tonne, kg of product a year, tonnes of LPG, m3, days, kg/m3, kJ/kg, kg/kmol, kW, minutes, erlangs, Z, reduced pressure and temperature, kg in a vessel, bar, kg per fill, naira, litres, kg of fuel, years, shares and ratios) except where the engine itself reports a quantity coarser: tonnes of CO2, methane and CO2e a year and kilograms stored, delivered and left in a cascade to three decimals; revenue, operating cost, margin, capital and cash flows in dollars to two. Every input prints exactly as it is typed, in gasvalue_fields.mjs for a case or beside the question in gasvalue_dump.mjs for a probe. Counts print as whole numbers.
-# ENGINES: engines/downstream/flareToValue.js and engines/downstream/lpgCng.js at petrolord-engines df31f53 (MD45-1, after MD4-0), with modularRefinery.js for the capital power law, vendored in NextGen under packages/engines.
+# ENGINES: engines/downstream/flareToValue.js and engines/downstream/lpgCng.js at petrolord-engines e972ae7 (MD45-1 after MD4-0, with the engines #232 copy pass and queue vocabularies), with modularRefinery.js for the capital power law, vendored in NextGen under packages/engines.
 # CASES: EGBEMA (a flow station in Imo State flaring associated gas, and the four ways to sell it), KANO (an LPG storage and bottling plant), IBAFO (a CNG mother station on the Lagos-Ibadan expressway and a Lagos bus operator switching to CNG), and beside them the two live apps' own opening examples. EVERY ANALYSIS, EFFICIENCY, GWP, PRICE, COST, FILL LIMIT AND VEHICLE FIGURE IN THIS DIGEST IS INVENTED AND ILLUSTRATIVE: no figure is a published analysis, a measured flare, a market price or a regulation. Place names are real places; the records are not. The component heating values, liquid densities and LPG properties are the engine's own labelled typical tables.
 # NO CLOCK: nothing in scope reads a date or a clock, and the digest is the same bytes in every time zone and at every machine date.
 # Built by build_digest.sh from gasvalue_dump.mjs and gasvalue_fields.mjs. Never edited by hand.
@@ -14,7 +14,7 @@ The Flare Gas to Value Studio calls flareToValue. The LPG & CNG Rollout Studio c
 | module | exported functions | exported constants and tables |
 | --- | --- | --- |
 | flareToValue | 7 (abatement, characteriseGas, compareRoutes, creditSensitivity, routeEconomics, screenRoute, yieldCeiling) | 10 (BTU_PER_MWH, FLARE_MOLAR_MASS, GAL_PER_FT3, GAS_COMPONENT_REFERENCE, GAS_REFERENCE_NOTE, LB_PER_KG, RICHNESS_GPM, ROUTE_TEMPLATES, ROUTE_TEMPLATE_NOTE, SCF_PER_LBMOL) |
-| lpgCng | 10 (assetFloat, bottlingPlant, cascadeFills, cngCompression, cngDispensing, conversionEconomics, gasMassInVessel, lpgBlendProperties, lpgStorageSizing, vaporizerDuty) | 9 (DAK_RANGE, FILL_RATIO_BASIS, KJ_PER_KWH, LPG_PROPERTY_NOTE, LPG_REFERENCE, M3_PER_SCF, PRESSURE_BASIS, PSI_PER_BAR, WATER_KG_M3) |
+| lpgCng | 10 (assetFloat, bottlingPlant, cascadeFills, cngCompression, cngDispensing, conversionEconomics, gasMassInVessel, lpgBlendProperties, lpgStorageSizing, vaporizerDuty) | 11 (BOTTLING_QUEUE_VOCABULARY, CNG_QUEUE_VOCABULARY, DAK_RANGE, FILL_RATIO_BASIS, KJ_PER_KWH, LPG_PROPERTY_NOTE, LPG_REFERENCE, M3_PER_SCF, PRESSURE_BASIS, PSI_PER_BAR, WATER_KG_M3) |
 
 The questions the two studios answer, each with the function that answers it:
 | question | function |
@@ -222,7 +222,7 @@ function: flareToValue.abatement, FLARE_MOLAR_MASS
 
 EGBEMA flares 7.5 MMscfd on 355 days a year. The flare study gives a destruction efficiency of 0.97 and a combustion efficiency of 0.955, and the study uses a methane GWP of 29.8.
 
-The engine's basis sentence: "40 CFR 98.233(n): CO2 = the CO2 in the gas plus the combustion efficiency times the hydrocarbon carbon; CH4 = the methane in the gas times one less the destruction efficiency. Unburned ethane and heavier are not methane and carry no GWP here."
+The engine's basis sentence: "40 CFR 98.233(n): CO2 = the CO2 in the gas plus the combustion efficiency times the hydrocarbon carbon; CH4 = the methane in the gas times one less the destruction efficiency. Unburned ethane and heavier carry no GWP here."
 
 The molar masses the flare's tonnes are weighed at, as the engine exports them in FLARE_MOLAR_MASS (an all-CO2 flare and an all-methane flare give the same figures back). The reference table carries CO2 at its tabulated molar mass for the gas's mass and liquids (SECTION 3); the flare's tonnes use these:
 | species | molar mass kg/kmol the flare uses |
@@ -253,7 +253,7 @@ THE CO2 IN THE GAS PASSES THROUGH. Two probes at EGBEMA's volume and days: a gas
 
 The CO2 already in the gas leaves the flare as CO2 at every efficiency, and none of it is methane.
 
-METHANE FROM THE METHANE. The methane that escapes is the methane in the gas times one less the destruction efficiency. Unburned ethane and heavier are not methane and carry no GWP here. Beside the engine, the figure a flare gives if every unburned carbon atom is counted as methane, computed here as the lb-mol a year (scfPerYear over SCF_PER_LBMOL) times carbonPerMol (every carbon atom, the CO2's included) times one less the destruction efficiency, weighed at FLARE_MOLAR_MASS.CH4 and converted with LB_PER_KG:
+METHANE FROM THE METHANE. The methane that escapes is the methane in the gas times one less the destruction efficiency. Unburned ethane and heavier carry no GWP here. Beside the engine, the figure a flare gives if every unburned carbon atom is counted as methane, computed here as the lb-mol a year (scfPerYear over SCF_PER_LBMOL) times carbonPerMol (every carbon atom, the CO2's included) times one less the destruction efficiency, weighed at FLARE_MOLAR_MASS.CH4 and converted with LB_PER_KG:
 | methane, t/yr | value | over the engine's |
 | --- | --- | --- |
 | the engine (methane in the gas) | 1136.490 | 1.0000 |
@@ -391,7 +391,7 @@ ROUTE_TEMPLATES, as the engine exports them. Every limit ships unset (null): the
 | gas_to_power | Gas to power or gas to wire | MWh | heating value | Minimum heating value | min | Btu/scf | null |
 | gas_to_power | Gas to power or gas to wire | MWh | heating value | Maximum inerts | max | mole fraction | null |
 
-The engine's note: "Requirement limits are yours to set. They are commercial and technology-specific rather than physical law: a licensor's CO2 limit is a design choice and the minimum viable volume moves with the market."
+The engine's note: "Requirement limits are yours to set. They are commercial and technology-specific: a licensor's CO2 limit is a design choice and the minimum viable volume moves with the market."
 
 Notes the templates carry on two requirements:
 - Mini LNG, Maximum CO2 before treatment: "CO2 freezes in a liquefaction train and must be removed first. The limit is the licensor's."
@@ -563,7 +563,7 @@ BLOCKED UNTIL DECLARED. abatement gives no net without every input it rests on, 
 | no counterfactual label | null | the counterfactual is not declared: what the product displaces, and what burning it emits |
 | no displaced fuel figure | null | the counterfactual is not declared: what the product displaces, and what burning it emits |
 
-The warning printed while the counterfactual is undeclared: "No abatement is reported. The flare's gross emission is not the abatement: recover the gas and somebody burns it, and if that displaces a dirtier fuel the abatement is larger while if it displaces nothing it is smaller. State what the product displaces and what burning it emits."
+The warning printed while the counterfactual is undeclared: "No abatement is reported. The flare's gross emission is the starting point, and the abatement depends on what the recovered product displaces: recover the gas and somebody burns it, and if that displaces a dirtier fuel the abatement is larger while if it displaces nothing it is smaller. State what the product displaces and what burning it emits."
 
 The flare's gross CO2e is still reported beside a blocked net, as grossClaimIfNoCounterfactual (215946.438 t/yr here): the claim the engine will not make.
 
@@ -600,7 +600,7 @@ NO ABATEMENT, NO CREDITS. What creditSensitivity refuses, and what it answers wi
 | --- | --- |
 | the gas-to-power counterfactual, which adds emissions | REFUSED: The net abatement is -2010.348 tCO2e a year: the project does not abate, so there are no credits to sell. |
 | no net abatement (the counterfactual undeclared) | REFUSED: No net abatement to sell. Declare the counterfactual first: a credit computed from a gross flare figure is a credit that cannot be issued. |
-| a hurdle that is not a number ('x') | REFUSED: The hurdle margin is not a number. |
+| a hurdle that is not a number ('x') | REFUSED: The hurdle margin must be a number. |
 | no margin for the route (price missing) | answers with no verdict: breakevenCreditPrice null; "No margin for this route, so whether it needs credits cannot be said. Supply its price and costs." |
 | hurdle left blank ('') | answers with no verdict: breakevenCreditPrice null; "No hurdle margin, so whether it needs credits cannot be said." |
 
@@ -946,11 +946,11 @@ A CNG forecourt is the same queue as the carousel and the loading rack. IBAFO: 1
 | 2 | 0.7000 | 0.5765 | 5.7647 | 224.1860 |
 | 3 | 0.4667 | 0.2024 | 0.7588 | 224.1860 |
 
-At 25 buses an hour on 2 dispensers the forecourt cannot keep up. The engine gives an answer and no refusal: stable false, utilisation 1.2500, and the queue's message "The rack cannot keep up with arrivals. The queue grows without limit, so no average waiting time exists. Add a bay, load faster, or spread the arrivals."
+At 25 buses an hour on 2 dispensers the forecourt cannot keep up. The engine gives an answer and no refusal: stable false, utilisation 1.2500, and the queue's message "The dispensers cannot keep up with arriving vehicles. The forecourt queue grows without limit, so no average waiting time exists. Add a dispenser, shorten the fill, or spread the arrivals."
 
 | probe | engine |
 | --- | --- |
-| 2.5 dispensers | REFUSED: The number of bays must be a whole number, one or more. |
+| 2.5 dispensers | REFUSED: The number of dispensers must be a whole number, one or more. |
 | no fill time | REFUSED: Arrivals, fill time and a dispenser count are required and must be positive. |
 
 The engine's note: "A CNG fill takes minutes, so a forecourt queues at traffic a liquid-fuel operator would think of as quiet."

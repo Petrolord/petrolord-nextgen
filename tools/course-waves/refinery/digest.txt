@@ -1,7 +1,7 @@
 # refinery: Refinery Feasibility & Planning. Teaching digest.
 # Precision: barrels print to two decimals, US dollars to two decimals, US dollars a barrel to four decimals, percents to two decimals, fractions to four decimals, and the screening engine's millions of US dollars to four decimals. Counts are whole numbers.
 # PERIOD START: 2027-03-01, a 31-day period. Every schedule in this digest is cascaded from this one period start, passed to the engine as that YYYY-MM-DD string; the period crosses the North American spring clock change. START YEAR: 2027, passed to every valuation. Nothing below read the machine clock, and the generator refuses to print a line from a call that did not pass them.
-# ENGINES: engines/downstream (refineryPlanning, streamModel, modularRefinery) and lib/lp/simplex at petrolord-engines e4d3b10, and engines/economics/screening as NextGen vendors it (an older copy carrying the lossCarryForward option), under packages/engines.
+# ENGINES: engines/downstream (refineryPlanning, streamModel, modularRefinery) and lib/lp/simplex at petrolord-engines e972ae7, and engines/economics/screening as NextGen vendors it (an older copy carrying the lossCarryForward option), under packages/engines.
 # CASES: OKORDIA (a modular refinery feasibility screen), ABUA (one month's refinery plan and its schedule), ODIOMA (a month's plan, its actuals and variance, and a conversion expansion valued through the screening engine). All three are invented records. Crude grade names are labels on invented yields and prices, and every price and cost in this digest is illustrative, in US dollars.
 # Built by build_digest.sh from refinery_dump.mjs and refinery_fields.mjs. Never edited by hand.
 
@@ -374,7 +374,7 @@ Pricing a debottleneck: the reformer capacity stepped, everything else as typed.
 # SECTION 15: THE SCHEDULE (owned by Professional m05)
 
 ABUA's plan cascaded from period start 2027-03-01, 31 days, cargo size 400000.00 bbl. Crude arrives in whole cargoes evenly spaced; each unit runs and each product lifts in equal weekly events.
-the engine's note: "Crude arrives in evenly spaced cargoes and units and lifts are spread evenly across the period. Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against, not a berth-level schedule."
+the engine's note: "Crude arrives in evenly spaced cargoes and units and lifts are spread evenly across the period. Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against. Berth-level scheduling needs those constraints and a scheduling tool."
 
 events: 41 in all; crude receipts 6, unit runs 15, product lifts 20; weeks in the period 5
 

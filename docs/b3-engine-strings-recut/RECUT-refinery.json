@@ -1,0 +1,46 @@
+{
+ "course": "Refinery Feasibility & Planning (refinery)",
+ "slug": "refinery",
+ "engines": "petrolord-engines e972ae7 (engines PR #232, the copy pass and the queue vocabularies)",
+ "method": "OLD is the row the APPLIED deep seed migrations/20261011_rf_refinery_<tier>_deep.sql wrote: the generator rebuilds the 132 VALUES lines from the banks before the recut (OLD_REF) and requires them to be that file's VALUES block byte for byte. NEW is what the same generator writes from the recut banks (NEW_REF). No production access: OLD was not compared with a dump of the live rows; each migration refuses a row matching neither OLD nor NEW, and the owner-run rolled-back dry run is that comparison.",
+ "tiers": {
+  "beginner": [],
+  "intermediate": [
+   {
+    "scope": "module",
+    "module_key": "m05-the-schedule",
+    "ord": 15,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 3,
+    "answer_index_new": 3,
+    "keyed_length_rank_old": 2,
+    "keyed_length_rank_new": 2,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "Which three things does the engine's note on ABUA's schedule name as not modelled?",
+     "options": [
+      "Cargo sizes, unit runs and lifts.",
+      "Crude costs, product prices and unit operating costs.",
+      "Time zones, the clock change and the period start.",
+      "Tank capacity, jetty windows and turnarounds."
+     ],
+     "explanation": "The note reads \"Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against, not a berth-level schedule.\" A turnaround is entered in the plan, as a unit typed as shut."
+    },
+    "new": {
+     "prompt": "Which three things does the engine's note on ABUA's schedule name as not modelled?",
+     "options": [
+      "Cargo sizes, unit runs and lifts.",
+      "Crude costs, product prices and unit operating costs.",
+      "Time zones, the clock change and the period start.",
+      "Tank capacity, jetty windows and turnarounds."
+     ],
+     "explanation": "The note reads \"Tank capacity, jetty windows and turnarounds are not modelled: this is the shape of the month to read actuals against. Berth-level scheduling needs those constraints and a scheduling tool.\" A turnaround is entered in the plan, as a unit typed as shut."
+    }
+   }
+  ],
+  "advanced": []
+ }
+}

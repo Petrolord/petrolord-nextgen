@@ -87,7 +87,7 @@ export default {
     { frag: 'The plan is unbounded: a product has a price and no demand ceiling, or a crude has no availability limit and no cost.', src: 'engines/downstream/refineryPlanning.js' },
     { frag: 'The plan needs at least one crude.', src: 'engines/downstream/refineryPlanning.js' },
     { frag: 'The plan needs at least one product to sell.', src: 'engines/downstream/refineryPlanning.js' },
-    { frag: 'this is the shape of the month to read actuals against, not a berth-level schedule.', src: 'engines/downstream/refineryPlanning.js' },
+    { frag: 'this is the shape of the month to read actuals against. Berth-level scheduling needs those constraints and a scheduling tool.', src: 'engines/downstream/refineryPlanning.js' },
     { frag: 'No optimal plan to cascade.', src: 'engines/downstream/refineryPlanning.js' },
     { frag: 'Event quantity is unsigned; direction comes from the event type', src: 'engines/downstream/streamModel.js' },
     { frag: 'Unknown ledger', src: 'engines/downstream/streamModel.js' },

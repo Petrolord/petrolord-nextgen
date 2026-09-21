@@ -6,7 +6,7 @@
 
 When a destruction efficiency is below 1, some of the carbon that went into the flame did not burn. The atom balance has to say what that carbon left as, and the engine states its answer in a note, quoted here verbatim:
 
-"Carbon that escaped combustion is counted as methane, which is the usual and conservative assumption, and not as CO2. Use the fossil methane potential for it. Override it if you have measured otherwise."
+"Carbon that escaped combustion is counted as methane, which is the usual and conservative assumption. Use the fossil methane potential for it. Override it if you have measured otherwise."
 
 The note names the assumption and calls it the usual and conservative one. It names the potential to convert the methane with, the fossil methane potential. And it says that a measurement overrides it.
 
@@ -26,7 +26,7 @@ At 0.98 the methane line is 485.922 tCO2e of the flare's 2677.729 tCO2e, a share
 
 ## Why the fossil value
 
-The GWP set carries a methane note of its own, and it explains the choice of potential. Part of it reads: "The atom balance here counts carbon that escapes a burner or a flare as methane and NOT as CO2, so the oxidation CO2 is counted nowhere else and the fossil value is the consistent one for vented, fugitive and unburned fossil methane alike." That is why the course computes every inventory on the fossil methane set.
+The GWP set carries a methane note of its own, and it explains the choice of potential. Part of it reads: "The atom balance here counts carbon that escapes a burner or a flare as methane, so the oxidation CO2 is counted nowhere else and the fossil value is the consistent one for vented, fugitive and unburned fossil methane alike." That is why the course computes every inventory on the fossil methane set.
 
 ## A held item
 

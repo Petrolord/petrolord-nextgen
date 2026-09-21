@@ -123,7 +123,7 @@ const lib = byId([...F.OBIGBO_LIBRARY, F.EBOCHA_PARTIAL]);
 /* ================================================================== */
 out('# crude: Crude Assay & Blending. Teaching digest.');
 out('# PRECISION: every computed figure prints to four decimals (API, specific gravity, wt%, ppm, cSt, index values, volume percent, degrees F, Watson K, CII, dollars, dollars per bbl, barrels, dollars per unit of a property, row prices). Every input prints exactly as it is typed, in crude_fields.mjs for a case or beside the question in crude_dump.mjs for a probe. Counts print as whole numbers.');
-out('# ENGINES: engines/downstream/crudeAssay.js, engines/downstream/productBlending.js and lib/lp/simplex.js at petrolord-engines 60ee266, vendored in NextGen under packages/engines.');
+out('# ENGINES: engines/downstream/crudeAssay.js, engines/downstream/productBlending.js and lib/lp/simplex.js at petrolord-engines e972ae7, vendored in NextGen under packages/engines.');
 out('# CASES: OBIGBO (a crude library at a Rivers State export terminal and its export blend), KWALE (a Delta State modular refinery valuing a blend on its own cut set), APAPA (a Lagos blending terminal making a PMS cargo and an AGO cargo), and beside them the two live apps\' own opening examples. EVERY CRUDE, STREAM, PRICE AND SPECIFICATION IN THIS DIGEST IS INVENTED AND ILLUSTRATIVE: no figure is a published assay, a market price or a regulation for any real grade or product. Place names are real places; the records are not.');
 out('# NO CLOCK: nothing in scope reads a date or a clock, and the digest is the same bytes in every time zone and at every machine date.');
 out('# Built by build_digest.sh from crude_dump.mjs and crude_fields.mjs. Never edited by hand.');
