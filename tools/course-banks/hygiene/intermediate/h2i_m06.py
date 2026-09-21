@@ -42,19 +42,19 @@ q(1, "The NIOSH derating by type and the OSHA dual-protection 5 dB are taught an
   "They are Expert tier material and are only previewed in this tier."],
  "Section 23 lists both among the items this course never grades, and gives oracle only as the reason for each: nothing a source prints stands outside the engine and its oracle to check them. Neither is licensed, since the engine holds the factors; they give different figures from Appendix B, 84.350000 dBA for an earmuff against 77.600000 dBA on the teaching case; and both are taught in full in this tier.")
 
-q(2, "Under what condition is a weekly LEX graded in this course?",
- "Only where the statutory divisor of 5 equals the number of days given, so no constant the evidence cannot fix moves the answer.",
- ["On any week of up to seven days, since the engine accepts up to seven.",
-  "Only on weeks of four days, where the divisor matters most.",
-  "Never; the weekly LEX is oracle only and taught for recognition."],
- "On a five-day week the divisor and the day count agree, so the energy averaging reproduced by Figure 26 is all that sets the answer. On a four or six day week the divisor of 5 is ORACLE ONLY, which is why the capstone gives five days and J10's boundary is never tested. The weekly LEX on five days is graded, so it is not merely taught.")
+q(2, "The time-to-target door returns 3.184857 hours for one pairing of a steady level and a target LEX,8h. Which pairing?",
+ "91.000000 dBA held alone, against a target LEX,8h of 87",
+ ["91.000000 dBA held alone, against a target LEX,8h of 85",
+  "88.000000 dBA held alone, against a target LEX,8h of 87",
+  "94.000000 dBA held alone, against a target LEX,8h of 87"],
+ "`lexAllowedDurationH` gives the hours at a level that alone reach the target: 3.184857 h at 91.000000 dBA to 87. The same level reaches 85 in 2.009509 h, and the target of 87 takes 6.354626 h at 88.000000 dBA and 1.596210 h at 94.000000 dBA. Every figure is one row of the same printed table, read at its own level and target.")
 
 q(0, "No capstone input in this tier sits on a judgement call's boundary. Which boundary belongs to J5?",
  "A protector credit reaching the floor at zero",
  ["A mixture index landing exactly on unity",
   "A record that leaves unsampled time undeclared",
-  "A weekly LEX fed a number of days other than five"],
- "J5 floors protector credit at 0 with a warning and refuses C-weighted data for the field derating. Unity is J7, unsampled time is J6, and a week of other than five days is J10. The calls are taught by name so they can be recognised in a real survey, and the capstone keeps clear of all four.")
+  "A sound level sitting exactly on a criterion threshold"],
+ "J5 floors protector credit at 0 with a warning and refuses C-weighted data for the field derating. Unity is J7, unsampled time is J6, and a level exactly on a threshold is J2. The calls are taught by name so they can be recognised in a real survey, and the capstone keeps clear of all four.")
 
 q(3, "A reviewer asks for a question whose answer is the word \"exceeds\" for the teaching mixture. Why does this course not grade that?",
  "Verdict words are never graded in this course, and section 23 lists them among what it leaves out.",

@@ -250,7 +250,7 @@
    "The boundaries are licensed text, and a capstone may carry no licensed figure as one of its inputs"
   ],
   "answer": 2,
-  "explanation": "The course calls J1 to J10 decisions the sources leave open. A learner who reasoned the other way at a threshold, a floor, unity, the cap or a week of other than five days would be marked on the engine's choice. The engine accepts boundary inputs and returns an answer, the golden does carry boundary cases such as index 1.000000, and a judgement boundary is an engine decision with nothing licensed in it."
+  "explanation": "The course calls J1 to J10 decisions the sources leave open. A learner who reasoned the other way at a threshold, a floor, unity, the cap or the weekly divisor would be marked on the engine's choice. The engine accepts boundary inputs and returns an answer, the golden does carry boundary cases such as index 1.000000, and a judgement boundary is an engine decision with nothing licensed in it."
  },
  {
   "prompt": "Why does no graded field in this course carry a verdict word such as exceeds or passes?",

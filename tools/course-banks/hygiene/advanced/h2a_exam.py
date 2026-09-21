@@ -170,7 +170,7 @@ q(2, "The course teaches judgement calls J2, J5, J6, J7, J8 and J10 by name. Why
  ["The engine refuses every input that sits on a judgement boundary, so no capstone could use one",
   "The golden holds no cases at those boundaries, so no key could be checked against a reproduced value",
   "The boundaries are licensed text, and a capstone may carry no licensed figure as one of its inputs"],
- "The course calls J1 to J10 decisions the sources leave open. A learner who reasoned the other way at a threshold, a floor, unity, the cap or a week of other than five days would be marked on the engine's choice. The engine accepts boundary inputs and returns an answer, the golden does carry boundary cases such as index 1.000000, and a judgement boundary is an engine decision with nothing licensed in it.")
+ "The course calls J1 to J10 decisions the sources leave open. A learner who reasoned the other way at a threshold, a floor, unity, the cap or the weekly divisor would be marked on the engine's choice. The engine accepts boundary inputs and returns an answer, the golden does carry boundary cases such as index 1.000000, and a judgement boundary is an engine decision with nothing licensed in it.")
 
 q(3, "Why does no graded field in this course carry a verdict word such as exceeds or passes?",
  "The graded fields are numbers, and a verdict is read from a number against a line",
