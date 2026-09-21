@@ -234,6 +234,17 @@
     }
    },
    "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  },
+  {
+   "app_slug": "hydraulics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "category": "duplicate",
+   "flag": "lead follow-up: cross-tier near duplicate of beginner m05 ord 11 (pump pressure carries the largest residual because it is the longest chain)",
+   "verdict": "judged fine",
+   "reason": "same idea, but after the intermediate m05 ord 7 rewrite this is the only intermediate question on the short-chain against long-chain residual pattern that intermediate m05 l01 re-teaches with its own numbers; its distractors (surface loss, blend width) test the method specification material"
   }
  ]
 }
