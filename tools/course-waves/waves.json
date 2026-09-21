@@ -1102,8 +1102,8 @@
   "qra": {
     "course": "H5",
     "live": "/root/hse-wip-qra",
-    "kit": "inputs",
-    "kitNote": "Foundation kit. The mirror carries the digest, its generator and the teaching streams; the eighteen graded answers, their generator, the precision declaration and the tolerance derivation's writer; the engine loader and its TypeScript hook (qra.js imports cashflow.ts); the discriminate sweep and the oracle replay; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the structure, scaffold and lengths tools; the vendoring script and this mirror script; and the five writer briefs. HSE module, path_order 65. The seed ladder lands with the migrations.",
+    "kit": "full",
+    "kitNote": "Full kit. The mirror carries everything the wave is rebuilt and gated from: the digest, its generator and the teaching streams; the eighteen graded answers, their generator, the precision declaration and the tolerance derivation's writer; the engine loader and its TypeScript hook (qra.js imports cashflow.ts); the discriminate sweep and the oracle replay; every wave gate with its negative control (the capstone leak gate with its seam direction 11) and the runner that pins every gate's md5 into wave.json; the prose rules; the structure, scaffold and lengths tools; the vendoring script and this mirror script; the five writer briefs; and, with the seed ladder, the three tier headers, the course generator (which runs the engine and renders the prompts from its inputs), the go-live generator (engine ledger, a second route in SQL, 91 traps checked against discriminate.mjs), the seed generator that stages the committed tree, the SQL verifier, the scratch database, the dry run with its negative controls and block cutter, and the owner's content-addressed apply script. HSE module, path_order 65.",
     "inputs": [
       "digest.txt",
       "fields.json",
@@ -1134,7 +1134,18 @@
       "LESSON_TASK.md",
       "BANK_TASK.md",
       "KEY_TRUTH_TASK.md",
-      "PANELS.md"
+      "PANELS.md",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_h5.sh",
+      "cut_block.py",
+      "apply_h5_qra.sh"
     ],
     "pins": {
       "digest.txt": "d1503e742b48e2aa5db340a11f901230b972300afd6502c3b4951431f1133ab3",

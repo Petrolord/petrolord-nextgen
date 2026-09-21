@@ -41,7 +41,7 @@ describe('THE H5 MIRROR GATE', () => {
   it('the wave is registered with a live directory, an inputs list and pins', () => {
     expect(entry, 'qra is not registered in tools/course-waves/waves.json').toBeTruthy();
     expect(entry.course).toBe('H5');
-    expect(entry.kit).toBe('inputs');
+    expect(entry.kit).toBe('full');
     expect(entry.inputs.length).toBeGreaterThanOrEqual(20);
     expect(entry.inputs).toContain('digest.txt');
     expect(entry.inputs).toContain('fields.json');
