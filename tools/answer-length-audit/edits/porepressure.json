@@ -1,0 +1,614 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "Eaton is wrong mid-ramp.",
+  "new": "Eaton is wrong mid-ramp, where its exponent overstates the pressure that the undercompaction ramp actually carries."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "The overburden is uncertain mid-well.",
+  "new": "The overburden is uncertain mid-well, where the density log is thinnest, and the two methods inherit that error unequally."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "Trend bias in the Eaton branch.",
+  "new": "Trend bias in the Eaton branch, which Bowers inherits through its velocity anchor."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "Exponent miscalibration.",
+  "new": "Exponent miscalibration, since the exponent is the one input the two methods share."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "The bracket check.",
+  "new": "The bracket check, since the quoted ceiling would then sit above the overburden's own wall."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "The margins ledger.",
+  "new": "The margins ledger, because the quoted width leaves no room for both the kick and loss allowances."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "Depth, pressure, tolerance and signature, in the order the capstone submission form requests them.",
+  "new": "Depth, pressure, tolerance and signature, in the capstone form's order."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "The section is marginal: 10 kg/m3 of room.",
+  "new": "The section is marginal: 10 kg/m3 of room, so the mud must be held to the floor."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "Margins cannot be assessed without leak-off data.",
+  "new": "Margins cannot be assessed without leak-off data to fix the ceiling at the shoe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "It voids the leak-off test at the shoe by exceeding the pressure the test was interpreted at.",
+  "new": "It voids the shoe's leak-off test by exceeding the pressure the test was read at."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Setting thresholds at round numbers.",
+  "new": "Setting thresholds at round numbers so that every colleague can reproduce the same detection."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "Quoting sixteen digits wherever possible.",
+  "new": "Quoting sixteen digits wherever possible, since precision is what makes a result checkable."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-from-pressure-to-mud",
+  "ord": 12,
+  "option": 1,
+  "old": "The window at the section's midpoint depth.",
+  "new": "The window at the section's midpoint depth, taken as representative of the whole open-hole interval."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-from-pressure-to-mud",
+  "ord": 12,
+  "option": 3,
+  "old": "The narrower of the windows at top and bottom of the section.",
+  "new": "The narrower of the windows at top and bottom of the section, each wall read at the same depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-from-pressure-to-mud",
+  "ord": 15,
+  "option": 3,
+  "old": "EMW is only defined at sample depths.",
+  "new": "EMW is only defined at sample depths, because the conversion needs a measured pressure at each one."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-window",
+  "ord": 15,
+  "option": 0,
+  "old": "About 0.1 MPa of underbalance.",
+  "new": "About 0.1 MPa of underbalance, the deficit read as a small density error."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-window",
+  "ord": 15,
+  "option": 1,
+  "old": "About 10 MPa of underbalance.",
+  "new": "About 10 MPa of underbalance, the deficit scaled by the full depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-exponent-lever",
+  "ord": 12,
+  "option": 3,
+  "old": "Discard the point as inconsistent with both.",
+  "new": "Discard the point as inconsistent with both, since it matches neither calibrated prognosis."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-exponent-lever",
+  "ord": 14,
+  "option": 3,
+  "old": "Averaging is acceptable and standard.",
+  "new": "Averaging is acceptable and standard when two calibrations bracket the data."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-exponent-lever",
+  "ord": 15,
+  "option": 3,
+  "old": "Rejects the kick data, since shut-in readings are systematically biased low by gas migration effects.",
+  "new": "Rejects the kick as biased by gas migration."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-bowers-loading",
+  "ord": 11,
+  "option": 3,
+  "old": "Float32 truncation in the goldens file.",
+  "new": "Float32 truncation in the goldens file, which stores the velocities at single precision."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-bowers-loading",
+  "ord": 15,
+  "option": 0,
+  "old": "About 1.9 m/s.",
+  "new": "About 1.9 m/s, since the gain amplifies every velocity error."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-unloading-and-the-crosscheck",
+  "ord": 12,
+  "option": 3,
+  "old": "That the unloading parameters sigma_max 50 and U 3 are correctly calibrated for this particular basin.",
+  "new": "That unloading parameters sigma_max 50 and U 3 are calibrated for this basin."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-unloading-and-the-crosscheck",
+  "ord": 14,
+  "option": 0,
+  "old": "The detection threshold is set too low.",
+  "new": "The detection threshold is set too low, letting noise register as a pressure difference."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-unloading-and-the-crosscheck",
+  "ord": 14,
+  "option": 1,
+  "old": "The exponent should be raised to 4.",
+  "new": "The exponent should be raised to 4 so that Eaton's reading comes down to meet Bowers."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-unloading-and-the-crosscheck",
+  "ord": 15,
+  "option": 3,
+  "old": "Bowers cannot run below 2500 m.",
+  "new": "Bowers cannot run below 2500 m, where the loading curve runs out of calibration data points."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-window-workflow",
+  "ord": 12,
+  "option": 3,
+  "old": "Rounding each layer to the 0.01 MPa tolerance as it is computed, so errors cannot accumulate silently.",
+  "new": "Rounding each layer to the 0.01 MPa tolerance as it is computed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-window-workflow",
+  "ord": 13,
+  "option": 2,
+  "old": "41.408579625 MPa: it collapses to hydrostatic.",
+  "new": "41.408579625 MPa: it collapses to hydrostatic, because the linearised fraction drops the overpressure term entirely."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-window-workflow",
+  "ord": 14,
+  "option": 3,
+  "old": "The window subtraction.",
+  "new": "The window subtraction, where a sign slip between the walls is easiest to make."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-window-workflow",
+  "ord": 15,
+  "option": 1,
+  "old": "Mapping and ReservoirCalc, whose volumetrics chain consumes the mud window as its starting surface.",
+  "new": "Mapping and ReservoirCalc, whose volumetrics consume the mud window."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-window-workflow",
+  "ord": 15,
+  "option": 2,
+  "old": "Well Data and Petrophysics, which remain formal prerequisites for the certification chain itself.",
+  "new": "Well Data and Petrophysics, formal prerequisites for certification."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-hydrostatic-column",
+  "ord": 15,
+  "option": 1,
+  "old": "2266.333384 kg/m3 from the hydrostatic curve and 1029.878049 kg/m3 from the overburden curve",
+  "new": "2266.333384 kg/m3 from the hydrostatic and 1029.878049 kg/m3 from the overburden curve"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-hydrostatic-column",
+  "ord": 15,
+  "option": 3,
+  "old": "1030 kg/m3 from the pore fluid density and 2505.265301734371 kg/m3 from the bulk density log",
+  "new": "1030 kg/m3 from the pore fluid and 2505.265301734371 kg/m3 from the bulk density log"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "Because the ramp consumed half the window.",
+  "new": "Because the ramp consumed half the window as overpressure built toward TD."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "Because the sample grid is 10 m.",
+  "new": "Because the sample grid is 10 m and the gaps are read at the last sample."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "Reject the test as inconsistent with theory.",
+  "new": "Reject the test as inconsistent with theory, the elastic value being fixed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "A low compaction trend.",
+  "new": "A low compaction trend in the shales."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 0,
+  "old": "3358.333032825104 m/s.",
+  "new": "3358.333032825104 m/s at that transit time."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "2905.6972280296195 m/s.",
+  "new": "2905.6972280296195 m/s, its reciprocal."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "Pressures below hydrostatic, since gas stiffens rock.",
+  "new": "Pressures below hydrostatic, since gas stiffens the rock frame and speeds the sonic."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "Scaling percent into megapascals.",
+  "new": "Scaling percent into megapascals through the stress budget."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "7.834533176889628 MPa.",
+  "new": "7.834533176889628 MPa, read from the exponent table."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "Floating point saturates near 6 MPa.",
+  "new": "Floating point saturates near 6 MPa, so each extra increment loses digits to rounding."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "The detection threshold absorbs the difference.",
+  "new": "The detection threshold absorbs the difference, clipping part of each step's added pressure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "The error cancels in the ratio.",
+  "new": "The error cancels in the ratio, because gravity multiplies the hydrostatic and the overburden alike."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "The overburden compensates automatically.",
+  "new": "The overburden compensates automatically, since it is integrated with the same rounded value of gravity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "0.5488116360940264.",
+  "new": "0.5488116360940264, the TD value."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "Never interpolate: always rerun the engine.",
+  "new": "Never interpolate: always rerun the engine at the target depth, since no interpolated value is defensible."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "Interpolate in log space for stability.",
+  "new": "Interpolate in log space for stability, since pressures grow roughly exponentially with depth below the onset."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-eaton-ratio",
+  "ord": 12,
+  "option": 0,
+  "old": "Zero pressure, since the method clips its output at the hydrostatic; it means the trend is locally exact.",
+  "new": "Zero pressure, as the method clips at the hydrostatic; it means the trend is locally exact."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-eaton-ratio",
+  "ord": 13,
+  "option": 1,
+  "old": "Only low trends propagate through the exponent's cube; high-side errors cancel inside the ratio before amplification.",
+  "new": "Only low trends propagate through the exponent's cube; high-side errors cancel inside the ratio."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-eaton-ratio",
+  "ord": 14,
+  "option": 0,
+  "old": "The water depth and the seawater density.",
+  "new": "The water depth and the seawater density at the mudline."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-trend-lever",
+  "ord": 10,
+  "option": 0,
+  "old": "Smoothness certifies the trend, since artefacts are always spiky.",
+  "new": "Smoothness certifies the trend, since artefacts are always spiky and a clean curve has none of them."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-trend-lever",
+  "ord": 10,
+  "option": 2,
+  "old": "They are caught at the output by inspecting curve texture.",
+  "new": "They are caught at the output by inspecting curve texture, since a biased trend leaves visible kinks in the product."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-trend-lever",
+  "ord": 12,
+  "option": 3,
+  "old": "At TD, because trend errors always compound downward.",
+  "new": "At TD, because trend errors always compound downward as the budget keeps growing."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-trend-lever",
+  "ord": 15,
+  "option": 2,
+  "old": "It would double pressures like the low trend, since errors enter through a square.",
+  "new": "It would double pressures like the low trend, since errors enter through a square that erases their sign."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-fracture-pressure",
+  "ord": 11,
+  "option": 1,
+  "old": "Because the engine requires a K per sample to run.",
+  "new": "Because the engine requires a K per sample to run, and a single number cannot be broadcast down the well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-fracture-pressure",
+  "ord": 11,
+  "option": 3,
+  "old": "Because regulations require a fresh K per casing string.",
+  "new": "Because regulations require a fresh K per casing string, whatever the leak-off tests at the shoes happen to show."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-fracture-pressure",
+  "ord": 12,
+  "option": 0,
+  "old": "The dependence of fracture pressure on pore pressure.",
+  "new": "The dependence of fracture pressure on the pore pressure acting at that depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-fracture-pressure",
+  "ord": 13,
+  "option": 3,
+  "old": "About 11.7 MPa, the cost of using nu directly.",
+  "new": "About 11.7 MPa, the cost of using nu directly in the form."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-fracture-pressure",
+  "ord": 14,
+  "option": 2,
+  "old": "Because leak-off tests are cheap while measured pressures are not.",
+  "new": "Because leak-off tests are cheap while measured pressures are not, and cost is what sets the level of alarm."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-prognosis-workflow",
+  "ord": 8,
+  "option": 1,
+  "old": "The two pore pressures, by the encoding.",
+  "new": "The two pore pressures, by the encoding that fixes the ramp at every sample."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-prognosis-workflow",
+  "ord": 11,
+  "option": 1,
+  "old": "The ceiling line: K two thirds, FP 78.695.",
+  "new": "The ceiling line: K two thirds, FP 78.695, a ceiling too close to the overburden."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-prognosis-workflow",
+  "ord": 12,
+  "option": 3,
+  "old": "The Bowers cross-check value.",
+  "new": "The Bowers cross-check value at that depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-prognosis-workflow",
+  "ord": 13,
+  "option": 1,
+  "old": "The quiet-section check.",
+  "new": "The quiet-section check, which confirms no overpressure above the detected onset."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-prognosis-workflow",
+  "ord": 13,
+  "option": 2,
+  "old": "The loop closure.",
+  "new": "The loop closure, which re-sums the chain from the trend to the pore pressure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-prognosis-workflow",
+  "ord": 14,
+  "option": 2,
+  "old": "Round the exponentials up and the cubes down to cancel.",
+  "new": "Round the exponentials up and the cubes down so that the two rounding errors cancel."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-prognosis-workflow",
+  "ord": 15,
+  "option": 0,
+  "old": "Convention: the industry standardised the order in 1975.",
+  "new": "Convention: the industry standardised the order in 1975, and reviewers expect to see it followed."
+ }
+]
