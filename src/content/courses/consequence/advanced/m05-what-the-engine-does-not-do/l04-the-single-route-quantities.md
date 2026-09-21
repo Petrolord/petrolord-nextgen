@@ -12,17 +12,17 @@ The engine's validation record plants the same mistake in both the engine and it
 
 | quantity | what catches a mistake copied into both | graded in this course |
 | --- | --- | --- |
-| liquid and gas outflow through a hole | the Yellow Book worked cases and the nozzle maximisation (section 5 and section 6) | yes |
-| the pool of stated thickness | the Yellow Book pool diameter (section 8) | yes |
-| the reflected plume | the mass flux integral (section 11) | yes |
-| the Briggs coefficients | ALOHA Table 13, read exactly (section 10) | yes |
-| the tilted view factor | the numerical surface integral (section 18) | yes |
-| Thomas with wind, tilt and the surface emissive power | the Yellow Book pool fire (section 21) | yes |
-| Kinney and Graham | the published conference column (section 24) | yes |
-| the Eisenberg, Tsao and Perry and Lees thermal presets | the OSD/30 lethal doses (section 27) | yes |
-| the overpressure probit | the OSD/30 printed points (section 28) | yes |
-| the Lees toxic coefficients | the OSD/30 columns (section 29) | yes |
-| the Purple Book toxic coefficients | one published worked case, carbon monoxide (section 29); every other substance rests on the transcription | no |
+| liquid and gas outflow through a hole | the Yellow Book worked cases and the nozzle maximisation | yes |
+| the pool of stated thickness | the Yellow Book pool diameter | yes |
+| the reflected plume | the mass flux integral | yes |
+| the Briggs coefficients | ALOHA Table 13, read exactly | yes |
+| the tilted view factor | the numerical surface integral | yes |
+| Thomas with wind, tilt and the surface emissive power | the Yellow Book pool fire | yes |
+| Kinney and Graham | the published conference column | yes |
+| the Eisenberg, Tsao and Perry and Lees thermal presets | the OSD/30 lethal doses | yes |
+| the overpressure probit | the OSD/30 printed points | yes |
+| the Lees toxic coefficients | the OSD/30 columns | yes |
+| the Purple Book toxic coefficients | one published worked case, carbon monoxide; every other substance rests on the transcription | no |
 | Mackay and Matsugu evaporation | nothing: the transcription alone | no |
 | the Bagster transmissivity | nothing: the transcription alone | no |
 | the Burgess burning rate | nothing: the transcription alone | no |

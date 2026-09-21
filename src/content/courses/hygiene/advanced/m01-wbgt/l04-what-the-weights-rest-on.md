@@ -20,7 +20,7 @@ The engine's provenance record states what happens when that is tested. Planting
 
 A door moves up to PUBLISHED, REPRODUCED when a value a source prints is reproduced by the engine at the precision the source prints it. A printed worked example would do it: readings in, an index out, both on the page. Two people copying the weights wrongly would then disagree with that printed index. No such value is known for the WBGT forms, so the class stays where it is.
 
-The unit-impulse measurement of the previous lesson but one is a third location. The generator types 0.700000000000 as a literal and the engine returns 0.700000000000 when asked, so an edit to one file alone would show. It is a pin against quiet change. It is still a copy of the same page, and it cannot tell anyone the page was read correctly.
+The unit-impulse measurement of the previous lesson but one is a third location. The build script types 0.700000000000 as a literal and the engine returns 0.700000000000 when asked, so an edit to one file alone would show. It is a pin against quiet change. It is still a copy of the same page, and it cannot tell anyone the page was read correctly.
 
 ## What the class means for a report
 

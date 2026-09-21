@@ -34,7 +34,7 @@ The Crude distillation throughput, 2029032.26 bbl, is the crude run. It is not a
 
 ## Across the five changes
 
-SECTION 13 runs ABUA under five changes. The total crude column is the crude unit's throughput in every row, by the same equality:
+The lab runs ABUA under five changes. The total crude column is the crude unit's throughput in every row, by the same equality:
 
 | change | total crude (bbl) |
 | --- | --- |

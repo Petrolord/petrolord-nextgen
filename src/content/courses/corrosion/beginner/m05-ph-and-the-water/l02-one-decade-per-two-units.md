@@ -16,7 +16,7 @@ A property like this one is worth more than an agreement to six decimals against
 
 ## Strictly falling, and asserted as such
 
-The rate falls at every step of that column, and each step down is smaller than the one above it. The generator behind this course asserts that on every rebuild rather than printing it once and trusting it, which is the difference between a claim and a check.
+The rate falls at every step of that column, and each step down is smaller than the one above it. The build of this course asserts that on every rebuild rather than printing it once and trusting it, which is the difference between a claim and a check.
 
 Two cautions belong beside the column. The slope itself is held for literature, so the decade property tells you the correction is a clean power law and tells you nothing about whether the power is the published one. And the band above the reference is the only place this walk is defined at all, which is the subject of the next lesson.
 

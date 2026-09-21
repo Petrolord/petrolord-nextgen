@@ -35,7 +35,7 @@ The two crudes at their availability are the ones the plan wants all of. Forcado
 
 Bonny Light is the crude the plan runs to fill in. It has 1500000.00 bbl available and the plan takes 329032.26 bbl. The plan stops there. Bonny Light's availability does not stop it, nor does the crude unit's capacity or any product ceiling, since none of those is on a list. The one limit left is the hydrotreater. Its gasoil feed is full. Another barrel of Bonny Light yields gasoil 0.3100, and that gasoil could only be sold as Gasoil export at 89.5000 dollars a barrel. At that price, the plan finds the extra barrel does not pay.
 
-So one unit at capacity sets the crude run of the whole refinery. That is why SECTION 13's hydrotreater rows are the ones to read next, because they move the one limit the lists name. Left blank, the crude run reads 2082608.70 bbl. Typed as shut, 735294.12 bbl.
+So one unit at capacity sets the crude run of the whole refinery. That is why the lab's hydrotreater rows are the ones to read next, because they move the one limit the lists name. Left blank, the crude run reads 2082608.70 bbl. Typed as shut, 735294.12 bbl.
 
 ## Reading a list is not the end
 
@@ -43,4 +43,4 @@ The lists say where the plan stopped. They do not say what relief is worth. Modu
 
 ## Exercise
 
-Read the three lists: units at capacity, Diesel hydrotreater; crudes at their availability, Forcados (illustrative) and Brass River (illustrative); and every product's "at its ceiling" reading false. Then read Bonny Light's volume, 329032.26 bbl, against its availability, 1500000.00 bbl. Say what the lists together show about which limit holds ABUA's crude run where it is, and name the SECTION 13 change that tests your answer.
+Read the three lists: units at capacity, Diesel hydrotreater; crudes at their availability, Forcados (illustrative) and Brass River (illustrative); and every product's "at its ceiling" reading false. Then read Bonny Light's volume, 329032.26 bbl, against its availability, 1500000.00 bbl. Say what the lists together show about which limit holds ABUA's crude run where it is, and name the lab change that tests your answer.

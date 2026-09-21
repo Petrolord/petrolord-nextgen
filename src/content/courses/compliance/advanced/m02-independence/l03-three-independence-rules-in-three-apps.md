@@ -40,7 +40,7 @@ When the author was assigned by mistake and tries to decide the task, it refuses
 
 The principle is one sentence: nobody passes judgement on their own work. What differs is where the engine finds the person's own work. In the ISO register it is a clause ownership, so the check can name several clauses. In the Audit & Findings Manager it is a single named auditee. In Document Control it is the author of one revision.
 
-Each rule compares two names its own record holds. The ISO register compares the examiner with the clause owner, the Audit & Findings Manager compares the lead auditor with the auditee, and Document Control compares the reviewer with the author of the revision. SECTION 19 prints the first comparison, and it points to SECTION 16 and SECTION 8 for the other two.
+Each rule compares two names its own record holds. The ISO register compares the examiner with the clause owner, the Audit & Findings Manager compares the lead auditor with the auditee, and Document Control compares the reviewer with the author of the revision. The lab prints the first comparison, and the Professional and Associate tiers of this course teach the other two.
 
 ## Where the principle continues
 

@@ -6,9 +6,9 @@ Two rules in this course print the same allowed row. The isoCompliance lead audi
 
 ## What the two rows say
 
-In SECTION 19, over the planned internal audit with clauses 8.1, 8.2, 9.1.1 and 9.2 in scope: an external lead auditor named in text: ALLOWED.
+In the lab, over the planned internal audit with clauses 8.1, 8.2, 9.1.1 and 9.2 in scope: an external lead auditor named in text: ALLOWED.
 
-In SECTION 16, the lead auditor against the auditee: an external lead auditor named in text, with no account: ALLOWED.
+In auditManagement's check, the lead auditor against the auditee: an external lead auditor named in text, with no account: ALLOWED.
 
 Both checks compare names held on the record. The clause owners in the ORASHI register are accounts: u-nneka, u-obinna, u-tari, u-kalu. An external auditor named in text, with no account, matches none of them, and both gates answer ALLOWED.
 
@@ -26,9 +26,9 @@ So an external person may lead an internal audit, and that audit counts towards 
 
 | row | where | verdict |
 | --- | --- | --- |
-| external lead auditor named in text | SECTION 19 lead auditor check | ALLOWED |
-| external lead auditor named in text, with no account | SECTION 16 auditIndependence | ALLOWED |
-| ISA-2026-S01, Surveillance, Closed | SECTION 20 audits table | counts towards coverage false |
+| external lead auditor named in text | the lab's lead auditor check | ALLOWED |
+| external lead auditor named in text, with no account | auditManagement's auditIndependence | ALLOWED |
+| ISA-2026-S01, Surveillance, Closed | the lab's audits table | counts towards coverage false |
 
 The first two rows answer a question about independence. The third answers a question about coverage. None of them answers the other's question.
 

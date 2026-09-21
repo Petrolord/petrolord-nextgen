@@ -1,18 +1,18 @@
 # Radiation is an input
 
-Two of the four losses in SECTION 13, the dry flue gas loss and the moisture loss, are built from the flue gas of modules one and two. The other two are typed: the unburned loss, 0 at Isiokpo, and the radiation and convection loss. In practice, the radiation and convection loss is heat that leaves a heater through its casing, and nothing in the stack gas measures it. This lesson reads how the engine handles that input.
+Two of the four losses in the lab, the dry flue gas loss and the moisture loss, are built from the flue gas of modules one and two. The other two are typed: the unburned loss, 0 at Isiokpo, and the radiation and convection loss. In practice, the radiation and convection loss is heat that leaves a heater through its casing, and nothing in the stack gas measures it. This lesson reads how the engine handles that input.
 
 {{panel:carbon-efficiency-explorer}}
 
 ## A figure typed off a chart
 
-SECTION 13 gives the Isiokpo heater a radiation and convection loss of 1.8 percent, read off the heater vendor's chart. The chart and the reading are both invented for this course. The loss sits in the table beside the others, printed as 1.8000 in every one of the four rows, current and target, LHV and HHV.
+The lab gives the Isiokpo heater a radiation and convection loss of 1.8 percent, read off the heater vendor's chart. The chart and the reading are both invented for this course. The loss sits in the table beside the others, printed as 1.8000 in every one of the four rows, current and target, LHV and HHV.
 
 It does not move with the oxygen and it does not move with the basis. The engine takes the figure it is given and carries it into the total loss.
 
 ## What a blank gets
 
-SECTION 13 prints the engine's answer when the box is left empty:
+The lab prints the engine's answer when the box is left empty:
 
 REFUSED: A radiation and convection loss is required and is not defaulted. It comes off a published chart against surface area and firing rate, which this module does not reproduce.
 
@@ -22,7 +22,7 @@ In practice, a radiation and convection loss is read for a particular heater fro
 
 ## The loss moves the efficiency one for one
 
-SECTION 13 prints the current LHV efficiency at three radiation losses:
+The lab prints the current LHV efficiency at three radiation losses:
 
 | radiation and convection loss percent | efficiency percent, LHV, current |
 | --- | --- |
@@ -36,7 +36,7 @@ A reader who quotes the current LHV efficiency of 86.4029 percent quotes an effi
 
 ## The other refusals in the same table
 
-The radiation refusal is one of the refusals SECTION 13 prints for stackLossEfficiency:
+The radiation refusal is one of the refusals the engine returns for stackLossEfficiency:
 
 | the call | the engine says |
 | --- | --- |
@@ -51,4 +51,4 @@ Each one is a box whose figure the engine will not invent. The last two guard th
 
 ## Exercise
 
-Read the three rows of the radiation table in SECTION 13. Say what the efficiency does as the radiation loss goes from 1.0 to 1.8 to 2.5 percent, using the course's own description of the relationship, and why the engine refuses a blank radiation loss when it could have filled the box itself.
+Read the three rows of the radiation table in the lab. Say what the efficiency does as the radiation loss goes from 1.0 to 1.8 to 2.5 percent, using the course's own description of the relationship, and why the engine refuses a blank radiation loss when it could have filled the box itself.

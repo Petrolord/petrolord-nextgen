@@ -21,11 +21,11 @@ The oracles live under tools/validation/assurance/, one file for each module: or
 
 Read each row as three counts. Golden cases is how many cases the oracle wrote. Distinct exports with a case is how many of the module's exports at least one case reaches. Sort cases is how many cases check an ordering.
 
-SECTION 1 printed how many functions each module exports, and SECTION 24 goes on to name the exports each golden file has no case for. It counts a sort case as a case for the sort it names. For isoCompliance it prints 34 exported functions, 0 without a case, and 25 exported lists and constants. For auditManagement it prints 33 exported functions, 0 without a case, and 20 exported lists and constants. Every one of the six modules reads 0 without a case.
+The course counted how many functions each module exports, and it also goes on to name the exports each golden file has no case for. It counts a sort case as a case for the sort it names. For isoCompliance it prints 34 exported functions, 0 without a case, and 25 exported lists and constants. For auditManagement it prints 33 exported functions, 0 without a case, and 20 exported lists and constants. Every one of the six modules reads 0 without a case.
 
 The lists and constants are data rather than functions, and the course says they carry no case of their own.
 
-Read the sort cases column beside lesson 5 of module 4. isoCompliance carries 1 sort case. SECTION 21 states the rule findingByUrgency sorts by and prints each finding's rank. The course does not say which ordering the isoCompliance sort case checks. A sort case agreeing with the engine confirms an order; the rule behind it is SECTION 21's sentence.
+Read the sort cases column beside lesson 5 of module 4. isoCompliance carries 1 sort case. Module four states the rule findingByUrgency sorts by and prints each finding's rank. The course does not say which ordering the isoCompliance sort case checks. A sort case agreeing with the engine confirms an order; the rule behind it is module four's sentence.
 
 ## What the oracles do not check
 
@@ -39,4 +39,4 @@ An expert reader of a compliance record asks how each figure is known. For the O
 
 ## Exercise
 
-Read the six rows of the oracle table. For isoCompliance and auditManagement, quote the golden cases, the distinct exports with a case and the sort cases. Beside them, quote the exported functions and the count without a case that SECTION 24 prints for each module. Say what those figures tell you about coverage and what they leave unsaid about the lists and constants. Then say what the oracles check about a refusal and what they leave unchecked.
+Read the six rows of the oracle table. For isoCompliance and auditManagement, quote the golden cases, the distinct exports with a case and the sort cases. Beside them, quote the exported functions and the count without a case that the course prints for each module. Say what those figures tell you about coverage and what they leave unsaid about the lists and constants. Then say what the oracles check about a refusal and what they leave unchecked.

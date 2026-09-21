@@ -24,9 +24,9 @@ That is the practical risk. A hygienist who picks the wrong form for the site bu
 
 ## How the weights were measured
 
-The course measures each weight by a unit impulse: set one reading to one degree and the others to zero, and the index returned is that reading's weight. The engine returns 0.700000000000 and 0.300000000000 on the indoor door, and 0.700000000000, 0.200000000000 and 0.100000000000 on the outdoor door, each against a literal typed in a third file, the course generator, with a relative difference of 0.
+The course measures each weight by a unit impulse: set one reading to one degree and the others to zero, and the index returned is that reading's weight. The engine returns 0.700000000000 and 0.300000000000 on the indoor door, and 0.700000000000, 0.200000000000 and 0.100000000000 on the outdoor door, each against a literal typed in a third file, the course's build script, with a relative difference of 0.
 
-That measurement proves the engine holds the numbers the generator holds. It cannot prove that either copy matches the page, and the next lesson but one explains why that distinction decides what this course grades.
+That measurement proves the engine holds the numbers the build script holds. It cannot prove that either copy matches the page, and the next lesson but one explains why that distinction decides what this course grades.
 
 ## Exercise
 

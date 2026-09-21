@@ -28,9 +28,9 @@ Every figure in this table is the NIOSH 2016-106 section 8.1 equation, checked f
 
 ## How the constants were checked
 
-The course measures the four constants from the running engine: the RAL at 1 W is 59.900000000000, and the RAL at 1 W less the RAL at 10 W is 14.100000000000; the NIOSH heat REL gives 56.700000000000 and 11.500000000000 the same way. Each matches a literal typed in the course generator, a third file.
+The course measures the four constants from the running engine: the RAL at 1 W is 59.900000000000, and the RAL at 1 W less the RAL at 10 W is 14.100000000000; the NIOSH heat REL gives 56.700000000000 and 11.500000000000 the same way. Each matches a literal typed in the course's build script, a third file.
 
-That proves the engine holds what the generator holds. It does not reach the page. The golden classes both doors TRANSCRIPTION ONLY, with 0 published cases and 7 oracle-only cases each, and the provenance record states that planting the same error in engine and oracle left the suite green for the NIOSH heat REL slope. No public printed value reproduces these constants.
+That proves the engine holds what the build script holds. It does not reach the page. The golden classes both doors TRANSCRIPTION ONLY, with 0 published cases and 7 oracle-only cases each, and the provenance record states that planting the same error in engine and oracle left the suite green for the NIOSH heat REL slope. No public printed value reproduces these constants.
 
 ## Using them anyway
 

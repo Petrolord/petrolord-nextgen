@@ -6,15 +6,15 @@ Lesson 1 read ABUA's plan. This lesson reads the schedule the plan cascades into
 
 ## The count
 
-SECTION 17 carries three schedule readings: schedule events 41, crude receipts 6, first receipt date 2027-03-01. SECTION 15 breaks the count down: crude receipts 6, unit runs 15, product lifts 20, weeks in the period 5.
+The lab carries three schedule readings: schedule events 41, crude receipts 6, first receipt date 2027-03-01. Its tiles break the count down: crude receipts 6, unit runs 15, product lifts 20, weeks in the period 5.
 
 Every count has a reason you can name. The receipts are the crude cargoes: one for Bonny Light, three for Forcados and two for Brass River at a cargo size of 400000.00 bbl. The runs are five weekly runs for each of the three units. The lifts are five weekly lifts for each of the four products that sell. Naphtha export and Gasoil export sell 0.00 bbl in the plan and have no lifts.
 
-SECTION 15 prints the cargo rule behind the receipts, and weeks in the period 5 behind the runs and lifts.
+The lab prints the cargo rule behind the receipts, and weeks in the period 5 behind the runs and lifts.
 
 ## The crude
 
-Every crude's first cargo arrives on 2027-03-01, the first receipt date SECTION 17 prints. Forcados follows on 2027-03-11 and 2027-03-21, and Brass River on 2027-03-16. Each receipt carries its share of the crude's volume and cost: Forcados 366666.67 bbl and 28453333.33 a cargo, Brass River 300000.00 bbl and 24120000.00, Bonny Light its whole 329032.26 bbl and 26750322.58.
+Every crude's first cargo arrives on 2027-03-01, the first receipt date the lab prints. Forcados follows on 2027-03-11 and 2027-03-21, and Brass River on 2027-03-16. Each receipt carries its share of the crude's volume and cost: Forcados 366666.67 bbl and 28453333.33 a cargo, Brass River 300000.00 bbl and 24120000.00, Bonny Light its whole 329032.26 bbl and 26750322.58.
 
 ## The units and the lifts
 
@@ -26,7 +26,7 @@ The course sets the schedule's totals beside the plan's for all ten materials, a
 
 ## The dates
 
-The schedule was built with the period start passed as the string "2027-03-01". SECTION 16 shows that string producing the same 41 dates in all seven zones it tried, first date 2027-03-01 and last date 2027-03-31 in every one. The same period start passed as a Date at local midnight moves the whole schedule to 2027-02-28 in Africa/Lagos and Pacific/Kiritimati. So confirm the period start was passed as a string, and that the first date is the period start.
+The schedule was built with the period start passed as the string "2027-03-01". The lab shows that string producing the same 41 dates in all seven zones it offers, first date 2027-03-01 and last date 2027-03-31 in every one. The same period start passed as a Date at local midnight moves the whole schedule to 2027-02-28 in Africa/Lagos and Pacific/Kiritimati. So confirm the period start was passed as a string, and that the first date is the period start.
 
 ## What the schedule is
 

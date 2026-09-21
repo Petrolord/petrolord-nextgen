@@ -27,7 +27,7 @@ At -1 the item changes severity and words:
 
 ## Two flags, never together
 
-Owner decision AS15 Q6 states the policy: an expired certificate is a serious readiness item, one inside the lead window a watch item. Rule R3 in SECTION 23 states how the flags carry it: expired and expiring are two separate flags. A certificate with certificateDays -15 reads certificateExpiring false and certificateExpired true. In every row of the edge table, at most one of the two reads true.
+Owner decision AS15 Q6 states the policy: an expired certificate is a serious readiness item, one inside the lead window a watch item. Rule R3 in this course states how the flags carry it: expired and expiring are two separate flags. A certificate with certificateDays -15 reads certificateExpiring false and certificateExpired true. In every row of the edge table, at most one of the two reads true.
 
 That matters to anybody reading the flags directly. A dashboard that tested certificateExpiring alone would show nothing for an expired certificate. Read both flags, or read the list, which already does.
 

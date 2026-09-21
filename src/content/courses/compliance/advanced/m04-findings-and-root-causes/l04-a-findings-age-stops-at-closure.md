@@ -52,7 +52,7 @@ For an audit whose planned end has passed, the two modules print isAuditOverdue:
 | Closed | false | false |
 | Cancelled | false | false |
 
-The two modules agree on every row. SECTION 21 also prints that the two AUDIT_TRANSITIONS tables agree on every status, and SECTION 23 states the rule both keep: an audit is overdue only while it is undelivered. isoCompliance.AUDIT_UNDELIVERED_STATUSES names the three statuses an audit can be overdue in: Planned, In progress and Fieldwork complete. Reported is not among them.
+The two modules agree on every row. The engine also reports that the two AUDIT_TRANSITIONS tables agree on every status, and the course states the rule both keep: an audit is overdue only while it is undelivered. isoCompliance.AUDIT_UNDELIVERED_STATUSES names the three statuses an audit can be overdue in: Planned, In progress and Fieldwork complete. Reported is not among them.
 
 The ORASHI audits show both sides at 2026-10-15. ISA-2026-001 is Reported with a planned end of 2026-06-12, and reads open true and overdue false. ISA-2026-002 is In progress with a planned end of 2026-10-09, and reads open true and overdue true.
 

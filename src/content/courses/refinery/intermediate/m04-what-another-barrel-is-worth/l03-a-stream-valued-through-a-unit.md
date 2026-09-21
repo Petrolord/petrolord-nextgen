@@ -44,7 +44,7 @@ With the hydrotreater shut, gasoil prints 87.8029, which is neither its value as
 
 ## The reading to carry
 
-Each value here is a reading of a printed row. In the plan as typed, naphtha's 91.4500 is the reformer's working, with the reformer at 97.07 percent, and gasoil's 94.1016 is Bonny Light's break-even, with the hydrotreater at 100.00 percent. Under the floors the two print their export prices, 72.5000 and 89.5000. Read each value beside its unit's utilisation and beside the working SECTION 14 prints for it, where one is printed.
+Each value here is a reading of a printed row. In the plan as typed, naphtha's 91.4500 is the reformer's working, with the reformer at 97.07 percent, and gasoil's 94.1016 is Bonny Light's break-even, with the hydrotreater at 100.00 percent. Under the floors the two print their export prices, 72.5000 and 89.5000. Read each value beside its unit's utilisation and beside the working the course prints for it, where one is printed.
 
 ## Exercise
 

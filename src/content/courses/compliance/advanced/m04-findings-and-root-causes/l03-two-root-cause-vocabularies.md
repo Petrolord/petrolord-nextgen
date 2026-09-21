@@ -37,7 +37,7 @@ The Management system category has no counterpart in the quality list at all. An
 
 ## Shared functions
 
-SECTION 1 prints two more identities between the modules:
+The engine reports two more identities between the modules:
 
 - auditManagement.canCloseFinding is the same function as isoCompliance's: true;
 - isoCompliance.isActionOverdue is the same function as qualityAssurance.isCapaOverdue: true.
@@ -50,4 +50,4 @@ A root cause recorded here can also feed a risk register or a lesson learned. Bo
 
 ## Exercise
 
-Read the two lists from SECTION 1. Name the categories that appear only in the ISO list and the one that appears only in the quality list. Then say which of the two lists a Major nonconformity in the Audit & Findings Manager is recorded against, citing the line above that tells you, and why that answer does not need a separate lesson for that app.
+Read the two lists this lesson prints. Name the categories that appear only in the ISO list and the one that appears only in the quality list. Then say which of the two lists a Major nonconformity in the Audit & Findings Manager is recorded against, citing the line above that tells you, and why that answer does not need a separate lesson for that app.

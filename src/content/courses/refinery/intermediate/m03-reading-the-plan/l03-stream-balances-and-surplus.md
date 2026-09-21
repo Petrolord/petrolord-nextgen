@@ -44,7 +44,7 @@ A surplus on a stream that does have a product is worth a second look. It means 
 
 ## The balance under the changes
 
-The same balance is struck for every change in SECTION 13. When the hydrotreater is shut, it consumes no gasoil. Gasoil must then find its home in Gasoil export, whose ceiling is 250000.00 bbl, or be left as surplus. The crude run in that change, 735294.12 bbl, is the plan's answer to how much gasoil the month can place.
+The same balance is struck for every change the lab runs. When the hydrotreater is shut, it consumes no gasoil. Gasoil must then find its home in Gasoil export, whose ceiling is 250000.00 bbl, or be left as surplus. The crude run in that change, 735294.12 bbl, is the plan's answer to how much gasoil the month can place.
 
 ## Exercise
 

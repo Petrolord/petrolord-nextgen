@@ -39,7 +39,7 @@ Lesson two reads that refusal. Notice that the count in it is 2, while planProgr
 
 ## A failure is still counted after closure
 
-SECTION 14 prints one more reading of the same points. Summarised under the plan marked Closed, they read outstanding 0, overdue 0 and failed 1. The closed status stops the engine from reporting anything as still outstanding or overdue on the plan, and the failure count survives it. A plan's history of failure stays visible on a closed plan.
+The engine prints one more reading of the same points. Summarised under the plan marked Closed, they read outstanding 0, overdue 0 and failed 1. The closed status stops the engine from reporting anything as still outstanding or overdue on the plan, and the failure count survives it. A plan's history of failure stays visible on a closed plan.
 
 ## Exercise
 

@@ -38,7 +38,7 @@ The audit's own closure gate reads stop-work findings too. Asked to close a repo
 
 The finding in that row is a minor one, and it still holds the audit open. Having stopped work is enough for the gate, whatever the finding's grade. Module five reads the closure gate in full.
 
-The programme summarise in SECTION 17 carries the count as well: open findings 1, open major 1 and stop-work open 1. One finding is behind all three: AF-2026-018, a Major nonconformity, Open, stop-work true. A stop-work finding still open appears on the programme's own dashboard, beside the audits outstanding.
+The programme summarise from the engine carries the count as well: open findings 1, open major 1 and stop-work open 1. One finding is behind all three: AF-2026-018, a Major nonconformity, Open, stop-work true. A stop-work finding still open appears on the programme's own dashboard, beside the audits outstanding.
 
 ## Why the type rule matters
 

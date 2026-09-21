@@ -22,7 +22,7 @@ The engine is explicit: the utilisation the plan reports for a unit with a blank
 
 ## The crude unit under the five changes
 
-SECTION 13 prints the crude unit's utilisation for each change:
+The lab prints the crude unit's utilisation for each change:
 
 | change | total crude (bbl) | crude unit utilisation (percent) |
 | --- | --- | --- |
@@ -35,13 +35,13 @@ SECTION 13 prints the crude unit's utilisation for each change:
 
 Read the second and third rows together. They change the hydrotreater, a unit downstream of the crude unit, and yet the crude unit's utilisation reads 28.28 percent in one and 80.10 percent in the other. The crude unit's utilisation is set by the whole plan. A shut hydrotreater leaves gasoil one home, Gasoil export, with its ceiling of 250000.00 bbl, and the crude run follows.
 
-The fourth row is the only one where the crude unit itself reads full. SECTION 13 labels it the crude unit at 1900000 barrels for the month, and it reads 100.00 percent on a total crude of 1900000.00 bbl.
+The fourth row is the only one where the crude unit itself reads full. The lab labels it the crude unit at 1900000 barrels for the month, and it reads 100.00 percent on a total crude of 1900000.00 bbl.
 
-The fifth row cancels a crude. Forcados, which ran at its full availability, is typed 0, and the crude unit reads 67.22 percent on a total crude of 1747826.09 bbl. SECTION 13 prints that row's margin change: -3047230.44.
+The fifth row cancels a crude. Forcados, which ran at its full availability, is typed 0, and the crude unit reads 67.22 percent on a total crude of 1747826.09 bbl. The lab prints that row's margin change: -3047230.44.
 
 ## Reading utilisation honestly
 
-Utilisation is an output. A high number is not a target and a low one is not a failure. A crude unit at 78.04 percent in an optimal plan is where a plan that maximises the margin (SECTION 12) stopped, under these prices and these limits. The margin tells you whether the month is good. The utilisation tells you where the plan stopped.
+Utilisation is an output. A high number is not a target and a low one is not a failure. A crude unit at 78.04 percent in an optimal plan is where a plan that maximises the margin (its objective) stopped, under these prices and these limits. The margin tells you whether the month is good. The utilisation tells you where the plan stopped.
 
 ## Exercise
 

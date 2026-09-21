@@ -46,4 +46,4 @@ Once H-11 is set aside with all three, it counts as resolved under CHECKPOINT_RE
 
 ## Exercise
 
-In the plan explorer, set H-11 Not applicable three times: with nothing, with a date and a name, then with a date, a name and a reason. Then set S-10 Not applicable with nothing recorded. Read the four answers against SECTION 10. Say what they show about the relationship between a point's type and what the gate asks for before the same status can be recorded.
+In the plan explorer, set H-11 Not applicable three times: with nothing, with a date and a name, then with a date, a name and a reason. Then set S-10 Not applicable with nothing recorded. Read the four answers the lab returns. Say what they show about the relationship between a point's type and what the gate asks for before the same status can be recorded.

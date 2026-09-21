@@ -1,6 +1,6 @@
 # Infeasible and unbounded plans
 
-Every plan read so far has had the status optimal. Not every configuration has a best month. Some cannot be run at all, some have no limit on what they would earn, and some are refused before the plan is attempted. This lesson reads the statuses the plan returns and the sentences that come with them, all from SECTION 10.
+Every plan read so far has had the status optimal. Not every configuration has a best month. Some cannot be run at all, some have no limit on what they would earn, and some are refused before the plan is attempted. This lesson reads the statuses the plan returns and the sentences that come with them, all from the engine.
 
 {{panel:refinery-plan-explorer}}
 

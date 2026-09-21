@@ -22,7 +22,7 @@ Every module of this tier has built towards one question: is the ORASHI manageme
 
 ## Why a list
 
-certificationReadiness returns a verdict, ready false, and a list of items. Each item carries a severity, a count and a sentence. It returns no percent: SECTION 23 names checklistProgress, programmeProgress and planProgress as the three exports that print a percent, and certificationReadiness is not one of them. The first blocking item names the open Major nonconformity and adds: "A certification body will not recommend certification over one."
+certificationReadiness returns a verdict, ready false, and a list of items. Each item carries a severity, a count and a sentence. It returns no percent: the course names checklistProgress, programmeProgress and planProgress as the three exports that print a percent, and certificationReadiness is not one of them. The first blocking item names the open Major nonconformity and adds: "A certification body will not recommend certification over one."
 
 Every item is counted, named in words, and given a severity. The reader sees what stands in the way and how many of each. The Associate tier learned that a status is derived from a dated record. This tier ends with the same idea at the scale of a whole system: readiness is derived, and it is derived as a list of what the record still lacks.
 
