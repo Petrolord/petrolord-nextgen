@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Professional capstone grades six values. This lesson works all six in order, with the tolerance each carries and the shortest defensible route to it. Treat it as a rehearsal: every number here has been derived somewhere in the course, and each section names where.
 
 {{panel:bs-kinetics-explorer}}

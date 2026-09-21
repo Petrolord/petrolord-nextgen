@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Expert capstone for this course is called The six-file import campaign, and its dataset is all six teaching LAS files. It asks you to run the full import pipeline on every file and read the campaign panel, and it grades six numbers. This lesson walks the six in capstone order, gives the unit and tolerance of each as the assessment defines them, says where each one is read, and points out where marks are lost.
 
 ## The six graded fields

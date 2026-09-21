@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Associate capstone for this course is called Burial and heat on the golden fixtures, and it is short. It gives you the compaction fixtures and the two layer steady heat column, then grades six numbers. There is no essay and no hidden dataset. Every one of the six is read off the burial and heat panel or computed by hand from parameters this course has already given you. This lesson walks them in capstone order, says where each is read, and points out where marks are lost.
 
 ## The six graded fields

@@ -1,5 +1,7 @@
 # Reporting and the capstone
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The last skill of the loop is communicating it. A petrophysical interpretation earns its keep when someone else can read it, audit it and act on it. This lesson describes the one-page summary that professional petrophysicists produce for a well like the typewell, and then lays out how you finish this course: quizzes, the final exam, and the capstone practical that issues your certificate.
 
 ## The one-page petrophysical summary

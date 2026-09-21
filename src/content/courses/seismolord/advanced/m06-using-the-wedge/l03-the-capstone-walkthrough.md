@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
+
 The capstone asks for six numbers. Five are read off the panel and one is calculated. This lesson walks the whole exercise in the order that produces the fewest mistakes, and names the errors that lose fields.
 
 {{panel:sl-wedge-explorer}}

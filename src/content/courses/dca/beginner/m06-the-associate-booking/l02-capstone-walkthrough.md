@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Associate capstone asks you to fit and book one well, Ekene-1, on its primary window. Six numbers are graded, each within a stated tolerance. This lesson shows you exactly where each number comes from. It does not hand you six answers to copy; it walks two of them end to end, one from the panel and one by hand, and then points you at the lesson that derives each of the rest. If you worked modules 2 through 5, nothing here is new. The capstone is the course, asked back.
 
 The six graded fields are:

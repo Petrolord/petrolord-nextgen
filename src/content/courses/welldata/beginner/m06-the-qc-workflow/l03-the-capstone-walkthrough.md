@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Associate capstone is not an essay and not a memory test. It grades exactly six numbers, and every one of them is read off the QC panel you toured in the previous lesson. Nothing is computed by hand, nothing is looked up in a table, and nothing is stored as an answer key inside the exercise. You select a file, you find the tile or the table cell that holds the reading, and you report what the parser produced. This lesson walks the six readings in order, then explains the path you have to clear before the capstone will even open.
 
 ## The six graded readings

@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Associate capstone is not an essay and not a multiple choice paper. It asks you to build the synthetic in the app and report six numbers from the summary panel, each checked against the engine's own answer within a stated tolerance. This lesson walks the six and sets out the order the server enforces before the capstone opens at all.
 
 One setting governs everything: the wavelet must be at 25 Hz. Reporting from a 15 Hz or 40 Hz run will fail even if you read the panel perfectly.

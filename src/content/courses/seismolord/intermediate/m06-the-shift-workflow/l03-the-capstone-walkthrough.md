@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
+
 The Professional capstone for this course is called Bulk shift and tuning on the basic_20 tie. It runs on the teaching well you have used throughout, the observed seismic is the 25 Hz synthetic arriving 8 ms late, and it grades six numbers. This lesson walks the six in capstone order, gives the unit and tolerance of each exactly as the assessment defines them, and says where each one is read.
 
 ## The six graded fields

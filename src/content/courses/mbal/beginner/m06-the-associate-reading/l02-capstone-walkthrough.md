@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Associate capstone asks you to close the Ekene tank. You run material balance on the six survey history and report six numbers, each graded server-side within a stated tolerance.
 
 | Field | Unit | Tolerance | Where it is derived |

@@ -1,5 +1,7 @@
 # Working the capstone
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 Six numbers, all of them things you read or compute directly from the deck. This lesson walks the mechanism for each and names the mistake most likely to produce a plausible wrong answer.
 
 ## What you are given

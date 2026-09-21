@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
+
 The Expert capstone is called "The finite aquifer and the published benchmark". It runs on two datasets. First you take Dake Exercise 9.2 through Carter-Tracy with a finite aquifer and report what the engine recovers, together with the dimensionless pressure drop that made the finite treatment necessary. Then you work the combination drive terms of Ahmed Example 11-1 and apportion the drive correctly, which means apportioning it in a convention you have stated.
 
 Six fields, graded server side.

@@ -1,5 +1,7 @@
 # Working the capstone
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
+
 Six numbers from four different tests, and the settings that make them reproducible.
 
 {{panel:wt-diagnostic-explorer}}

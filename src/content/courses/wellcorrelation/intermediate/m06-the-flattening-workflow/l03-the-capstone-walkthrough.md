@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update moves it to a case of its own.
+
 The Professional capstone for this course is called Growth analysis of the Ekene section. It asks you to flatten the section on TOP_A at a 1450 m datum and study the A-to-SAND interval, and it grades six numbers. Five are read at that setting and one at a second datum the capstone names. This lesson walks the six in capstone order, gives the unit and tolerance of each as the assessment defines them, and says where each one is read.
 
 ## The six graded fields

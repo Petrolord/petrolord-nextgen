@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update moves it to a case of its own.
+
 You have now built every piece of the Professional workflow: three porosity methods, a fitted Pickett line, two shaly-sand saturation models and the discipline of sensitivity and reporting. The capstone asks you to run that workflow end to end on the typewell and report six numbers. This lesson walks through producing each one in the app, and closes the course by looking at what comes next.
 
 ## The six graded numbers

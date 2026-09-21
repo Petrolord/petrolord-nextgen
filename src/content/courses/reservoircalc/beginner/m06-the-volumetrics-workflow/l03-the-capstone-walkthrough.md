@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+
 The Associate capstone for this course is short. It sets the oil water contact to 1560 m and grades six numbers, every one of them read off the volumetrics panel with the grid built at a 100 m cell on the Ekene control set and the properties fixed at NTG 0.8, porosity 0.20, Sw 0.35 and Bo 1.2. There is no essay, no free interpretation and no hidden dataset. If you have worked the five previous modules, all six numbers are already familiar.
 
 This lesson walks them in the order the capstone asks for them, says where each is read, and points out where marks are lost.

@@ -1,5 +1,7 @@
 # The capstone walkthrough
 
+> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update moves it to a case of its own.
+
 The Associate capstone is a reading exercise, not a memory test. It puts the Ekene section in front of you, flattened on TOP_SAND at a 1500 m datum, and grades six numbers. Five are read in that view and one in a second flattening the capstone names. Every one of them is available on the panel to anyone who knows which view to be in and how the arithmetic works. This lesson walks all six so that nothing on the day is a surprise.
 
 ## The six graded quantities
