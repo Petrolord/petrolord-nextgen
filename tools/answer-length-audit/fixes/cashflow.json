@@ -1,0 +1,46 @@
+{
+ "migration": "20261021b_b4_fix_cashflow.sql",
+ "title": "cashflow: duplicate question rewritten into a new question",
+ "items": [
+  {
+   "app_slug": "cashflow",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "category": "duplicate",
+   "flag": "duplicate of advanced module m06-the-expert-reading 11 (near p0.62 k0.75): both ask who chooses between the two deep offshore HCT readings, key counsel",
+   "verdict": "fixed",
+   "reason": "True duplicate of the m06 question; kept the module question and rewrote the final copy to test the m06 point that the terrain string outweighs the price sweep.",
+   "changes": {
+    "prompt": {
+     "old": "The engine models the conservative and aggressive readings of deep offshore HCT, 141623594.88 and 61725382.46 on AKATA, and will not choose. Who does?",
+     "new": "AKATA under the PIA reports NPV 43223505.88 in shallow water, 128984232.18 at an oil price of 120, and 141623594.88 in deep offshore under the conservative reading. What does that comparison tell a negotiator?"
+    },
+    "explanation": {
+     "old": "The engine models one reading of the law at a time; conservative_zero is a default, not a finding.",
+     "new": "Deep offshore under the conservative reading lowers the production royalty rate and zeroes the HCT, which lifts NPV to 141623594.88, further than the 128984232.18 an oil price of 120 buys. A cap, a lease status or a reading moves NPV further than the market, and those are words in a document."
+    },
+    "options": {
+     "0": {
+      "old": "The engine's default, conservative_zero, which the course records as a finding of the extraction.",
+      "new": "That the price is the bigger lever, since a market move is worth more than any word in the fiscal terms."
+     },
+     "1": {
+      "old": "The terrain string, which carries the reading with it and settles the rate once the terrain is entered.",
+      "new": "That the two moves are the same size, because deep offshore lowers only the royalty and a price rise lifts revenue by as much."
+     },
+     "2": {
+      "old": "The owner of the discount rate, since the two readings differ only in the rate at which the HCT is discounted.",
+      "new": "That the terrain string is a price effect in disguise, since a lower royalty rate acts exactly like a higher realised price on every barrel."
+     },
+     "3": {
+      "old": "Counsel; a ledger that reports one without the other has taken a legal position without saying so.",
+      "new": "That a word in the document outweighs the market: the terrain string moves NPV further than the price sweep to 120."
+     }
+    }
+   },
+   "correct_change_reason": "True duplicate rewritten into a new question on a different point, so the key is new text for the new question."
+  }
+ ]
+}
