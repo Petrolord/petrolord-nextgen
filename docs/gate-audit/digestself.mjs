@@ -23,7 +23,20 @@ if (!WAVE || !fs.existsSync(path.join(WAVE, NAME))) {
   process.exit(2);
 }
 
-const lines = fs.readFileSync(path.join(WAVE, NAME), 'utf8').split('\n');
+// COMMIT SHAS AND HEX IDS ARE NOT FIGURES. A digest header names the engine
+// commit it was cut from ("vendored sha-identical with petrolord-engines
+// 980199e"), and NUM below read 980199e as the six-figure number 980199: H1
+// safetystats failed this gate on its own provenance line. A token is taken for
+// a hex id, and blanked before any number is read, only when it is 7 to 40 hex
+// characters standing alone, carries at least one digit AND at least one of
+// a-f, and is not a bare scientific literal such as 1000000e5. UUIDs and 0x
+// literals are blanked too. Nothing else changes: a real figure on the same
+// line as a sha is still read (see the controls in wave-kit-gates.md).
+const HEXID = /(?<![\w.-])(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|0x[0-9a-fA-F]+|[0-9a-f]{7,40})(?![\w.-]*\w)/g;
+const isHexId = (t) => /^0x|-/.test(t) || (/[0-9]/.test(t) && /[a-f]/.test(t) && !/^\d+e\d+$/.test(t));
+const stripIds = (l) => l.replace(HEXID, (t) => (isHexId(t) ? ' ' : t));
+const raw = fs.readFileSync(path.join(WAVE, NAME), 'utf8').split('\n');
+const lines = raw.map(stripIds);
 const NUM = /-?\d+\.?\d*(?:[eE][-+]?\d+)?/g;
 const sig = (s) => s.replace(/[-.]/g, '').replace(/^0+/, '').length;
 
@@ -42,6 +55,15 @@ const generated = new Set();
 for (const line of lines) {
   if (isProse(line)) continue;
   for (const n of line.match(NUM) || []) generated.add(Math.abs(parseFloat(n)));
+}
+
+// AN EMPTY SWEEP IS A REFUSAL, NOT A PASS. A digest with no generated values
+// (an empty file, a dump that crashed after its header, the wrong filename
+// pattern) would otherwise print "the digest agrees with itself" having
+// compared nothing with nothing.
+if (generated.size === 0) {
+  console.error(`REFUSED: ${NAME} carries no generated values, so there is nothing to agree with`);
+  process.exit(2);
 }
 
 // Prose may ROUND a generated value, it may not invent one. A prose literal
@@ -64,7 +86,7 @@ lines.forEach((line, i) => {
   for (const n of line.match(NUM) || []) {
     if (sig(n) < 6) continue;
     checked += 1;
-    if (!matches(n)) bad.push({ line: i + 1, n, text: line.trim() });
+    if (!matches(n)) bad.push({ line: i + 1, n, text: raw[i].trim() });
   }
 });
 

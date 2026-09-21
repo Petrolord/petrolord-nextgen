@@ -183,6 +183,9 @@ def whole_number_hits(lit, lines):
     preceded or followed by a digit or a decimal point. A bare substring test
     resolves 7 against 0.7 and 123 against 1234, which is how a sweep reports
     zero on a corpus it cannot discriminate."""
+    negative = lit.startswith('-')
+    if negative:
+        lit = lit[1:]
     out = []
     for i, line in enumerate(lines):
         start = 0
@@ -219,7 +222,7 @@ def whole_number_hits(lit, lines):
                 after_frac = line[k] if k < len(line) else ''
                 if frac and set(frac) == {'0'} and not after_frac.isdigit():
                     frag_right = False
-            if not frag_left and not frag_right:
+            if not frag_left and not frag_right and (not negative or minus_before(line, at)):
                 out.append(i)
                 break
             start = at + 1
@@ -428,8 +431,36 @@ def literals(text):
     for m in NUM.finditer(text):
         if m.start() > 0 and (text[m.start() - 1].isalpha() or text[m.start() - 1] == '_'):
             continue
-        out.append(m.group(0))
+        out.append(('-' if minus_before(text, m.start()) else '') + m.group(0))
     return out
+
+
+# ----------------------------------------------------------------- THE SIGN
+# THE SWEEP COMPARED |value|, SO A SIGN ERROR PASSED. NUM carries no sign, so
+# a lesson printing -7.5 where the digest prints 7.5 swept as "7.5" and
+# resolved. A literal now carries its minus sign when one is written
+# immediately before its digits in SIGN POSITION (start of line, after a space,
+# a bracket, a pipe, an operator or punctuation), and a signed literal resolves
+# only against a digest occurrence carrying the same sign. A hyphen glued to a
+# word or a digit (B-99, 5-7.5, 1e-6) is not a sign and is left alone. The
+# unicode minus U+2212 is a sign wherever it stands.
+#
+# ONE DIRECTION ONLY, deliberately. A NEGATIVE literal must meet a negative
+# digest occurrence. A POSITIVE literal may still resolve against a negative
+# digest figure, because prose legitimately states a magnitude ("NPV falls by
+# 7.5") for a signed printout (-7.5); making that direction strict would be a
+# guard that fires on clear air.
+SIGN_CONTEXT = set(' \t([{|=,:;<>+*/~^$\u2248\u2264\u2265')
+MINUS_CHARS = ('-', '\u2212')
+
+
+def minus_before(text, at):
+    """Is the character before position `at` a minus SIGN (not a hyphen)?"""
+    if at <= 0 or text[at - 1] not in MINUS_CHARS:
+        return False
+    if text[at - 1] == '\u2212':
+        return True
+    return at - 1 == 0 or text[at - 2] in SIGN_CONTEXT
 
 
 # --------------------------------------------------------------- K7: WHICH ROW
@@ -1098,6 +1129,37 @@ def selftest():
     # and the fragments must STILL fail closed
     assert not whole_number_hits('69', zline), '69 matched inside 690.000000'
     assert not whole_number_hits('90', zline), '90 matched inside 690.000000'
+
+    # THE SIGN, NEGATIVE CONTROL AND POSITIVE CONTROL (2026-09-21). The sweep
+    # compared |value|, so a lesson printing -7.5 against a digest printing 7.5
+    # resolved. A planted sign error must now FAIL, a correctly signed figure
+    # must resolve, and the hyphens that are not signs must stay unsigned.
+    sline = ['the NPV at 12 percent is 7.5 MUSD', 'the swing is -0.25 and \u22123.5 here',
+             '| well | -12.000000 | 4-6 |']
+    assert not whole_number_hits('-7.5', sline), 'a sign error resolved: -7.5 against 7.5'
+    assert whole_number_hits('7.5', sline), 'the positive figure stopped resolving'
+    assert whole_number_hits('-0.25', sline), 'a correctly signed -0.25 did not resolve'
+    assert whole_number_hits('-3.5', sline), 'a unicode minus did not resolve as a sign'
+    assert whole_number_hits('-12', sline), '-12 did not match -12.000000'
+    assert whole_number_hits('0.25', sline), 'a magnitude quote of a signed figure was refused'
+    assert not whole_number_hits('-6', sline), 'the range 4-6 was read as a negative 6'
+    assert literals('B-99, 5-7.5, 1e-6, x = -4, (-3) and \u22122') == \
+        ['99', '5', '7.5', '1', '6', '-4', '-3', '-2'], literals('B-99, 5-7.5, 1e-6, x = -4, (-3) and \u22122')
+    dsg = tempfile.mkdtemp()
+    os.makedirs(os.path.join(dsg, 'banks'))
+    io.open(os.path.join(dsg, 'wave.json'), 'w').write(json.dumps({'prefix': 'zz', 'constants': {}}))
+    io.open(os.path.join(dsg, 'digest.txt'), 'w').write(
+        '# SECTION 1: the project (owned by Associate m01)\n'
+        'the NPV is 7.5 MUSD and the swing is -2.25 MUSD\n')
+    okq = {'prompt': 'What is the NPV?', 'options': ['7.5', '-2.25', 'c', 'd'], 'answer': 0,
+           'explanation': 'It is 7.5 MUSD, with a swing of -2.25.'}
+    json.dump([okq], io.open(os.path.join(dsg, 'banks', 'zzb_m01.json'), 'w'))
+    found, checked = run(dsg, quiet=True)
+    assert checked > 0 and not found, f'a correctly signed bank failed: {found}'
+    badq = dict(okq, explanation='It is -7.5 MUSD.')
+    json.dump([okq, badq], io.open(os.path.join(dsg, 'banks', 'zzb_m01.json'), 'w'))
+    found, _ = run(dsg, quiet=True)
+    assert [f[3] for f in found] == ['-7.5'], f'the planted sign error was missed: {found}'
     assert not whole_number_hits('16', zline), '16 matched inside 160.000000'
     assert not whole_number_hits('6', zline), '6 matched inside a longer number'
     assert not whole_number_hits('99', zline), 'an absent number resolved'
