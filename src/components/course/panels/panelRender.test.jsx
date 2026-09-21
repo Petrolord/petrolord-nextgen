@@ -78,6 +78,17 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('linesizing/GasLineExplorer.jsx');
     expect(names).toContain('linesizing/WallPigExplorer.jsx');
   });
+  it('finds the H3 LOPA and SIL panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('lopa/WorksheetExplorer.jsx');
+    expect(names).toContain('lopa/SifExplorer.jsx');
+    expect(names).toContain('lopa/ProofTestExplorer.jsx');
+  });
+  it('every H3 LOPA and SIL view renders, not only the default one', async () => {
+    const MODES = {
+      'lopa/WorksheetExplorer.jsx': ['row', 'loop', 'bands'],
+      'lopa/SifExplorer.jsx': ['subsystem', 'sif', 'published'],
+      'lopa/ProofTestExplorer.jsx': ['sensitivity', 'longest', 'coverage'],
   it('finds the H4 consequence modelling panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('consequence/ReleaseExplorer.jsx');

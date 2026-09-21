@@ -1,0 +1,30 @@
+{
+ "dba": {
+  "decimals": 6,
+  "match": "^(?:amukpe_field_derated_exposure_dba|amukpe_lex_8h_dba|amukpe_lex_weekly_dba|osioka_extended_action_level_dba|utorogu_niosh_rel_twa_dba|utorogu_osha_pel_twa_dba)$"
+ },
+ "degC": {
+  "decimals": 6,
+  "match": "^(?:osioka_wbgt_twa_c)$"
+ },
+ "min": {
+  "decimals": 6,
+  "match": "^(?:utorogu_pel_minutes_left_min)$"
+ },
+ "pct": {
+  "decimals": 6,
+  "match": "^(?:osioka_extended_action_dose_pct|utorogu_action_level_dose_pct|utorogu_niosh_rel_dose_pct|utorogu_osha_pel_dose_pct)$"
+ },
+ "ppm": {
+  "decimals": 6,
+  "match": "^(?:amukpe_benzene_twa8h_ppm|amukpe_toluene_stel_ppm|osioka_adjusted_limit_ppm)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:amukpe_mixture_index|osioka_adjusted_mixture_index)$"
+ },
+ "watt": {
+  "decimals": 6,
+  "match": "^(?:osioka_metabolic_twa_w)$"
+ }
+}

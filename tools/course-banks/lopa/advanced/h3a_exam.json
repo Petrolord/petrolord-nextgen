@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "The sensitivity sweep runs from a quarter of a year to eight years. What is its interval of 35040 hours in years?",
+  "options": [
+   "4.000000 years, because the years figure is the hours over 8760 and HOURS_PER_YEAR is 8760.",
+   "8.000000 years, because the sweep doubles at every step and 35040 hours is its last row.",
+   "2.000000 years, which is the years figure printed against 17520 hours.",
+   "Three years, which is one of the intervals the teaching function is re-verified at."
+  ],
+  "answer": 0,
+  "explanation": "35040 hours over 8760 is 4.000000 years. 8.000000 years belongs to 70080 hours, which is the last row of the sweep, and 2.000000 years to 17520 hours. Three years is a stretch of the teaching function and is not a row of this sweep at all."
+ },
+ {
+  "prompt": "What does the EKULAMA full channel as a 1oo2 achieve at a proof test interval of 2190 hours?",
+  "options": [
+   "0.000073541861, which is what the same channel achieves as a 2oo3 at that interval",
+   "0.000141276391, which is what the same 1oo2 achieves at 4380 hours",
+   "0.000068932620",
+   "0.000300179812, which is what the IDU valves achieve at that interval"
+  ],
+  "answer": 2,
+  "explanation": "The full 1oo2 reads 0.000068932620 at a quarter year interval. 0.000073541861 is the 2oo3 column on the same row, 0.000141276391 is the 1oo2 at twice the interval, and 0.000300179812 belongs to the valve column."
+ },
+ {
+  "prompt": "The EKULAMA full 2oo3 has the fastest growing ratio column in the sweep. What does that column read at its last doubling?",
+  "options": [
+   "2.689723, which is what the EKULAMA full 1oo2 reads at the same doubling",
+   "3.222922",
+   "2.657218, which is what the IDU valves read at the same doubling",
+   "2.879660, which is what this same 2oo3 column reads one doubling earlier"
+  ],
+  "answer": 1,
+  "explanation": "The 2oo3 ratio column ends at 3.222922. 2.689723 and 2.657218 are the 1oo2 and valve columns at the same row, and 2.879660 is the 2oo3 column at 35040 hours, one doubling earlier. The 2oo3 climbs fastest because the independent term, which grows with the square of T1, is the largest share of its PFDavg at one year: 0.000105777528 of 0.000369505528."
+ },
+ {
+  "prompt": "Reading one row of the sweep across at 8760 hours, what do the EKULAMA full 1oo2 and full 2oo3 columns show?",
+  "options": [
+   "0.000298987176 against 0.000369505528, so the 2oo3 buys PFDavg against the 1oo2 and is the better choice on the figures alone as the interval grows.",
+   "0.000369505528 against 0.000298987176, so the 1oo2 costs PFDavg against the 2oo3.",
+   "0.000068932620 against 0.000073541861, which is the same pair at a quarter of a year.",
+   "0.000298987176 against 0.000369505528, so the 2oo3 costs PFDavg against the 1oo2 on this channel."
+  ],
+  "answer": 3,
+  "explanation": "At 8760 hours the 1oo2 reads 0.000298987176 and the 2oo3 reads 0.000369505528, so the higher figure belongs to the 2oo3 and voting costs PFDavg here. The pair 0.000068932620 and 0.000073541861 is the quarter year row. What the voting buys is tolerance of a channel tripping spuriously, which this engine does not compute."
+ },
+ {
+  "prompt": "Which interval does the longest interval search return for the IDU valves when their target is 0.01?",
+  "options": [
+   "44396.444444 hours, or 5.068087 years, which is what a different subsystem supports against a looser target of its own",
+   "46473.426980 hours, or 5.305186 years",
+   "27640.443736 hours, or 3.155302 years, against a tighter target",
+   "35393.040486 hours"
+  ],
+  "answer": 1,
+  "explanation": "Against a target of 0.01 the valves support 46473.426980 hours, 5.305186 years. 44396.444444 hours is the OBAGI valve with a perfect test against a target of 0.02. 27640.443736 hours is the same IDU valves against 0.005, and 35393.040486 hours is the interval a budget remainder buys them."
+ },
+ {
+  "prompt": "Which target PFDavg gives the IDU valves a longest interval of 27640.443736 hours?",
+  "options": [
+   "0.002, which gives them 12957.474301 hours",
+   "0.001, which gives them 6953.661742 hours",
+   "0.01, which gives them 46473.426980 hours",
+   "0.005"
+  ],
+  "answer": 3,
+  "explanation": "27640.443736 hours, 3.155302 years, is the answer against a target of 0.005. The targets 0.002, 0.001 and 0.01 give 12957.474301, 6953.661742 and 46473.426980 hours, so each wrong target has its own printed interval."
+ },
+ {
+  "prompt": "Which two exported constants fix the units in which an interval is reported, and how?",
+  "options": [
+   "HOURS_PER_YEAR at 8760 and DECADE_SNAP at 1e-9, which between them set the tolerance the bisection converges to when it reports an interval in hours.",
+   "HOURS_PER_YEAR at 8760 alone, since the engine reports no band with an interval.",
+   "HOURS_PER_YEAR at 8760, which turns the hours into the years column, with DECADE_SNAP at 1e-9 deciding only the banding.",
+   "DECADE_SNAP at 1e-9 alone, since the years figure is carried through unrounded."
+  ],
+  "answer": 2,
+  "explanation": "The longest interval the engine returns in hours is also given in years, derived as the hours over 8760. The decade snap is a relative tolerance for banding and has nothing to do with the interval search, which converges to one part in a trillion. The engine does report a band alongside a PFDavg, so the units of an interval and the band are separate matters."
+ },
+ {
+  "prompt": "What floor does the OBAGI shutdown valve carry at a proof test coverage of 0.8?",
+  "options": [
+   "0.007905600000",
+   "0.011847600000, which is the floor at a coverage of 0.7",
+   "0.003963600000, which is the floor at a coverage of 0.9",
+   "0.000021600000, which is the floor at a perfect test"
+  ],
+  "answer": 0,
+  "explanation": "The printed floor at a coverage of 0.8 is 0.007905600000. 0.011847600000, 0.003963600000 and 0.000021600000 belong to coverages of 0.7 and 0.9 and to a perfect test, so each is one row away."
+ },
+ {
+  "prompt": "How many years may the OBAGI valve's proof test run against a target of 0.02 when its coverage is 0.7?",
+  "options": [
+   "3.835109 years, which is what the same valve supports at a coverage of 0.8 against the same target",
+   "4.520097 years, the answer the same valve gives at a coverage of 0.9",
+   "2.954410 years",
+   "1.479164 years"
+  ],
+  "answer": 2,
+  "explanation": "At a coverage of 0.7 the valve supports 25880.634921 hours, 2.954410 years. 3.835109 years belongs to a coverage of 0.8 and 4.520097 years to 0.9. 1.479164 years is the IDU valves against a target of 0.002, a different subsystem searched against a different target."
+ },
+ {
+  "prompt": "The engine splits every undetected down time when coverage is below one. Which part sees which time?",
+  "options": [
+   "The covered fraction sees the proof test interval and the uncovered fraction sees the restoration time after a test, which is the only time left once the test has missed a failure altogether.",
+   "The covered fraction sees the proof test interval and the uncovered fraction sees the lifetime.",
+   "The covered fraction sees the lifetime and the uncovered fraction sees the interval.",
+   "Both fractions see the interval, with the uncovered one weighted by the lifetime."
+  ],
+  "answer": 1,
+  "explanation": "The split charges the covered part against the interval and the uncovered part against the lifetime, each with the restoration time after a test added. Swapping the two would make a better test worse. Charging both against the interval is the treatment the engine explicitly does not take, and it is why the floor exists at all."
+ },
+ {
+  "prompt": "Two things move the floor of a partially tested subsystem. What are they?",
+  "options": [
+   "A shorter proof test interval or a longer lifetime, since both of them change how long the uncovered failures are left sitting in the equipment before it is restored.",
+   "A shorter test interval.",
+   "A longer restoration time after a test or a larger beta factor.",
+   "A better test or a shorter lifetime."
+  ],
+  "answer": 3,
+  "explanation": "Only a better test or a shorter lifetime moves the floor, because the floor carries no proof test interval in it at all. More frequent testing of the same procedure moves nothing, a target is what the floor is compared against, and a longer restoration time would raise the floor."
+ },
+ {
+  "prompt": "Why will the engine not accept a proof test coverage below one on its own?",
+  "options": [
+   "Because the uncovered failures stay until the item is restored as new, so without a lifetime there is nothing to average that waiting over.",
+   "Because a coverage below one is outside the range the field allows.",
+   "Because a coverage below one puts the answer outside the rare event range.",
+   "Because the band table has no row for a partially tested subsystem."
+  ],
+  "answer": 0,
+  "explanation": "The engine's refusal names `lifetimeHours` and gives the reason in those words: the uncovered failures stay until the item is restored as new. A coverage below one is perfectly valid, the rare event range is about the failure rate times the interval, and the band table takes a PFDavg however it was produced."
+ },
+ {
+  "prompt": "A coverage of 0.9 and a lifetime of 87600 hours meet a target at the lifetime itself. Why is returning the lifetime the honest answer?",
+  "options": [
+   "Because the bisection cannot evaluate the form at an interval longer than the lifetime, so the search has to stop at the last interval it could actually evaluate for the subsystem.",
+   "Because the engine refuses a lifetime shorter than the proof test interval, so an interval past the lifetime is a combination it declines to evaluate.",
+   "Because the target stops constraining the interval once the lifetime is reached.",
+   "Because the lifetime is the point at which the coverage stops applying."
+  ],
+  "answer": 1,
+  "explanation": "Returning an interval past the lifetime would return a combination the same engine declines, so capping keeps the two halves consistent. The form can be evaluated anywhere, the coverage applies throughout, and the observation that the target no longer constrains the answer is what the state word reports rather than the reason the cap is right."
+ },
+ {
+  "prompt": "Take the OBAGI valve from a perfect proof test down to a coverage of 0.7, against the same target of 0.02. What happens to its floor and to its longest interval?",
+  "options": [
+   "The floor stays at 0.000021600000, since the restoration time after a test sets it, and the longest interval shortens from 44396.444444 to 25880.634921 hours.",
+   "The floor rises from 0.000021600000 to 0.011847600000 and the longest interval stays at 44396.444444 hours, since the interval answers to the covered share alone.",
+   "The floor rises from 0.000021600000 to 0.011847600000 and the longest interval shortens from 44396.444444 to 25880.634921 hours.",
+   "Both stay where they were."
+  ],
+  "answer": 2,
+  "explanation": "The coverage table prints a floor of 0.000021600000 and 44396.444444 hours at a perfect test, and 0.011847600000 and 25880.634921 hours at a coverage of 0.7. The floor carries the uncovered share at half the lifetime, so it rises as the coverage falls, and a higher floor leaves less of the target for the interval to use, so the interval shortens too."
+ },
+ {
+  "prompt": "One golden 2oo2 case reads 0.017520000000 from the engine and 0.017317146501 on the time dependent route. What departure is printed against that pair?",
+  "options": [
+   "6.43 percent, which is the figure printed for a 2oo2 at a beta factor of 0.1",
+   "2.209e-2, which is the figure printed against a 2oo3 with no common cause",
+   "1.512e-1, which is the largest departure anywhere in the table",
+   "1.171e-2"
+  ],
+  "answer": 3,
+  "explanation": "The printed departure for that pair is 1.171e-2. The 6.43 percent figure compares the Annex B 2oo2 with an exact average at a beta factor of 0.1 and is a separate measurement. 2.209e-2 belongs to a 2oo3 with no common cause, and 1.512e-1 to the long interval single channel."
+ },
+ {
+  "prompt": "The golden's long interval single channel reads 0.219000000000 from the engine. What does the time dependent route give, and what does the gap show?",
+  "options": [
+   "0.190241513373, with the engine 15.12 percent above it, the widest gap in the set.",
+   "0.190241513373, and the gap is 1.512e-1, which is the smallest in the set.",
+   "0.017317146501, and the gap is 1.171e-2.",
+   "0.219000000000, since the two routes agree once the interval is long enough."
+  ],
+  "answer": 0,
+  "explanation": "The time dependent value is 0.190241513373 and the departure is the largest printed anywhere in the set. 0.017317146501 belongs to the 2oo2 case. The two routes never agree exactly, and the gap widens rather than closing as the rare event assumption is strained."
+ },
+ {
+  "prompt": "The 6.43 percent measured on a 2oo2 at a beta factor of 0.1 carries more than the missing common cause term. What else is in it?",
+  "options": [
+   "The equivalent down time convention and the coverage cross term as well, which is why the figure is larger than any other departure printed anywhere in the set of golden cases.",
+   "The linearisation, so the figure is the total conservatism of that case, of which the missing term is only one part.",
+   "Nothing else, since a 2oo2 has only one departure from the exact average.",
+   "The decade snap, which moves the figure by one part in a billion."
+  ],
+  "answer": 1,
+  "explanation": "The measured figure carries the linearisation as well as the missing common cause term, so it is the total conservatism of that case. The case carries no coverage, so the cross term is not in it, and it is far from the largest departure printed. The decade snap belongs to banding and moves no PFDavg."
+ },
+ {
+  "prompt": "What does the linearised single channel form omit, on the validation record's account?",
+  "options": [
+   "A term of the order of the failure rate times the interval, which is the whole of the rare event correction and is why the form is called linearised in the first place.",
+   "The common cause contribution, which a single channel cannot carry.",
+   "A term of the order of the failure rate times the interval, squared.",
+   "The restoration time of the detected failures, which it charges to the interval."
+  ],
+  "answer": 2,
+  "explanation": "The exact average subtracts a term of second order in the failure rate times the interval and the published form drops it, which leaves the published form high and higher the larger that product becomes. A single channel genuinely has no common cause term, and the equivalent down time convention charges the detected failures and the restoration times, which is a separate departure."
+ },
+ {
+  "prompt": "Across the sensitivity sweep, what is the longest interval at which the IDU valves are still banded SIL 3?",
+  "options": [
+   "4380 hours, half a year, where they read 0.000611621000.",
+   "8760 hours, one year, where they read 0.001287026426 and the band has already moved down to SIL 2.",
+   "2190 hours, a quarter of a year, which is the only row of the sweep the valves hold at SIL 3.",
+   "17520 hours."
+  ],
+  "answer": 0,
+  "explanation": "The band list for the valves reads SIL 3 at 2190 and at 4380 hours and SIL 2 from 8760 hours, so the last SIL 3 row is 4380 hours, at 0.000611621000. At 8760 hours the valves read 0.001287026426, which is SIL 2, and 17520 hours is SIL 2 as well."
+ },
+ {
+  "prompt": "The engine returns a result together with the rare event warning. What does a verification note do with it?",
+  "options": [
+   "Discards the figure, because a warned figure is not a result the engine stands behind and a note that quotes one is quoting something the engine did not actually say.",
+   "Quotes the time dependent value in its place, since that is the exact average.",
+   "Recomputes the figure at a shorter interval and reports only the recomputed one.",
+   "Carries the warning text alongside the figure, because between the warning and the refusal the engine keeps answering and keeps saying the answer overstates."
+  ],
+  "answer": 3,
+  "explanation": "The warning is returned WITH a result and the figure is still the number a site is assessed against, so the note carries both. The time dependent value is provenance and never enters a note as an achieved figure, and quietly recomputing at a different interval would report a different subsystem schedule from the one that was asked about."
+ },
+ {
+  "prompt": "The UNACHIEVABLE test compares a target with the part of the PFDavg that does not depend on T1. Which pieces make up that part?",
+  "options": [
+   "The common cause term and the independent term, since both of them are carried by every redundant subsystem whatever interval is chosen for it.",
+   "The detected failures over the MTTR, the MRT, and the uncovered part under partial coverage.",
+   "The detected failures over the MTTR alone, since the restoration time after a test is charged only when a test has found something.",
+   "Nothing, since every part of the PFDavg grows with T1."
+  ],
+  "answer": 1,
+  "explanation": "The digest names the three pieces: detected failures over the MTTR, the MRT, and the uncovered part under partial coverage. The independent term and the undetected common cause term both carry T1 and shrink as T1 goes to zero, and the MRT is charged on every undetected failure however often the test runs, which is why a perfect test still leaves the OBAGI valve a floor of 0.000021600000."
+ },
+ {
+  "prompt": "Read the processor row of the lifetime sweep, printed at 6.12E-07, in its five year column. What stands there?",
+  "options": [
+   "6.12E-07, which is what the row gives at the inferred lifetime of ten years",
+   "5.94E-07, which is what the row gives at a lifetime of eight years",
+   "5.68E-07",
+   "6.55E-07, which is what the row gives at a lifetime of fifteen years"
+  ],
+  "answer": 2,
+  "explanation": "At a five year lifetime the processor row comes out at 5.68E-07, short of its printed 6.12E-07. That printed figure appears only at ten years; 5.94E-07 is the eight year value and 6.55E-07 the fifteen year one."
+ },
+ {
+  "prompt": "What does the published coverage table print for the transmitter beta factor, and what value reproduces the row?",
+  "options": [
+   "It prints 10 percent, and the row reproduces at 15 percent, which the heading's MooN multiplication produces from the printed figure.",
+   "It prints 15 percent, and the row reproduces at 10 percent.",
+   "It prints 10 percent, and the row reproduces at 10 percent once the lifetime is corrected.",
+   "It prints no beta factor at all, so the value had to be inferred from the row."
+  ],
+  "answer": 0,
+  "explanation": "The table prints 10 percent and reproduces only at 15 percent, which is what the MooN multiplication in its own heading produces. The lifetime is a separate inference that the four row sweep settled at ten years, and the beta factor IS printed, which is exactly what makes this a printing slip in the source."
+ },
+ {
+  "prompt": "Which printed value does the engine's 0.000344085754 reproduce?",
+  "options": [
+   "6.76E-04, which is the printed value of the transmitter coverage row",
+   "4.74E-04, which is what the transmitter coverage row gives at the printed beta factor",
+   "1.05E-03, which is the printed value of the valve row",
+   "3.44E-04"
+  ],
+  "answer": 3,
+  "explanation": "0.000344085754 rounds to 3.44E-04, which is the printed value of the transmitter row in the raised beta factor table, at 0.15. 6.76E-04 and 4.74E-04 belong to the coverage row, and 1.05E-03 to the valve."
+ },
+ {
+  "prompt": "The golden labels the lifetime INFERRED. What does that label buy a reader?",
+  "options": [
+   "It lets a reader treat the value as an input the published source printed, since the label records that the reproduction succeeded with it and the label travels with the value wherever it is used.",
+   "It lets a reader see what the value rests on and recompute the rows at a different lifetime if they disagree with the inference.",
+   "It lets the value be graded, since a labelled inference is a defensible answer.",
+   "It lets the value stand as proof, since four rows reproduced with it."
+  ],
+  "answer": 1,
+  "explanation": "The word travels with the value everywhere it is used, so a reader who disagrees can see exactly what it rests on and recompute. It is not printed in the source, it is never graded because every capstone states its own lifetime, and four rows are strong evidence that still falls short of proof."
+ },
+ {
+  "prompt": "The dolan-do-1oo2-ptc98 row prints 7.76E-07. In which lifetime column of the sweep does it come out at 7.52E-07?",
+  "options": [
+   "Five years, where the sweep gives that row 7.16E-07",
+   "Twelve years, where the sweep gives that row 8.00E-07",
+   "Eight years.",
+   "Ten years, the lifetime the golden records as INFERRED for all four rows"
+  ],
+  "answer": 2,
+  "explanation": "The row reads 7.16E-07 at five years, 7.52E-07 at eight, 7.76E-07 at ten, 8.00E-07 at twelve and 8.36E-07 at fifteen. Only the ten year column reproduces the printed 7.76E-07, so 7.52E-07 sits in the eight year column, one of the lifetimes that misses."
+ },
+ {
+  "prompt": "Which lifetimes did the sweep behind the inference actually try?",
+  "options": [
+   "Five, eight, ten, twelve and fifteen years, and only ten years reproduces all four printed rows.",
+   "Every whole number of years from five to fifteen.",
+   "Ten and twenty years, which bracket the ordinary assumed life.",
+   "Eight, ten and twelve years, the three closest to the ordinary assumed life."
+  ],
+  "answer": 0,
+  "explanation": "The sweep covers five, eight, ten, twelve and fifteen years. That it tried only five lifetimes is part of why the digest calls the result strong evidence short of proof, so a sweep of every year or of only two or three values would each misstate what was done."
+ },
+ {
+  "prompt": "Which of these is a fact about the published SOURCE alone?",
+  "options": [
+   "That the restoration time after a proof test is added to every undetected down time while the detected restoration time is charged only on the detected share of the failures.",
+   "That a coverage below one has to arrive with a lifetime.",
+   "That a 2oo2 carries no common cause term.",
+   "That the coverage table prints a beta factor of 10 percent where 15 percent is the value that reproduces its own figures."
+  ],
+  "answer": 3,
+  "explanation": "The printing slip is a property of the published source, shown here by computing the row both ways. The treatment of the two restoration times, the lifetime requirement and the 2oo2 form are all properties of the engine and of the published equations it implements."
+ },
+ {
+  "prompt": "Which of these is NOT among the engine's exported names?",
+  "options": [
+   "maxProofTestInterval",
+   "pfhFromRates",
+   "outcomeFromRequiredRrf",
+   "proofTestSensitivity"
+  ],
+  "answer": 1,
+  "explanation": "The exported names are, in full, ARCHITECTURES, DECADE_SNAP, HOURS_PER_YEAR, LOPA_OUTCOME, PFD_STATE, SIL_BANDS_LOW_DEMAND, decadeOf, lopaScenario, maxProofTestInterval, outcomeFromRequiredRrf, pfdAvgSif, pfdAvgSubsystem, proofTestSensitivity and silFromPfdAvg. Nothing about a per hour figure is exported, because the engine has no high demand mode."
+ },
+ {
+  "prompt": "Which three functions make up the determination half of the engine?",
+  "options": [
+   "`lopaScenario`, `outcomeFromRequiredRrf` and `silFromPfdAvg`, which take a row, a required risk reduction factor and an achieved PFDavg.",
+   "`lopaScenario`, `pfdAvgSif` and `pfdAvgSubsystem`.",
+   "`lopaScenario`, `maxProofTestInterval` and `decadeOf`.",
+   "`pfdAvgSubsystem`, `proofTestSensitivity` and `maxProofTestInterval`."
+  ],
+  "answer": 0,
+  "explanation": "The determination half finds the risk reduction still missing and the band it falls in, which is what those three do. `pfdAvgSif`, `pfdAvgSubsystem`, `proofTestSensitivity` and `maxProofTestInterval` are the verification half, and `decadeOf` is a banding helper."
+ },
+ {
+  "prompt": "What does `maxProofTestInterval` take as its inputs?",
+  "options": [
+   "A subsystem and a list of intervals in hours, from which it picks the longest that meets the subsystem's own stated target for the function.",
+   "A subsystem, a target PFDavg and a lifetime, the last of which caps the search.",
+   "A subsystem and a target PFDavg.",
+   "A function and a required PFDavg."
+  ],
+  "answer": 2,
+  "explanation": "The call takes a subsystem and a `targetPfdAvg`. A list of intervals is what the sensitivity sweep takes. A lifetime is part of the subsystem's own inputs and is supplied only when the coverage is below one, and the search works on one subsystem at a time."
+ },
+ {
+  "prompt": "Which five architectures does the engine know?",
+  "options": [
+   "1oo1, 1oo2, 2oo2, 2oo3 and 2oo4, the last being the voted pair of pairs",
+   "1oo1, 1oo2, 1oo3, 2oo3 and 3oo3",
+   "1oo1, 1oo2 and 2oo3 only",
+   "1oo1, 1oo2, 2oo2, 2oo3 and 1oo3"
+  ],
+  "answer": 3,
+  "explanation": "The exported architecture list is 1oo1, 1oo2, 2oo2, 2oo3 and 1oo3, and an architecture outside it is refused by name. There is no voted pair of pairs and no three out of three in the list, and nothing is reached by combining two entries."
+ },
+ {
+  "prompt": "Which three states can `silFromPfdAvg` return alongside a band?",
+  "options": [
+   "NOT_SIL_RATED, SIL and BELOW_SIL4_TABLE_FLOOR, the last of which says the figure is off the bottom of the table.",
+   "FOUND, UNACHIEVABLE and CAPPED_AT_LIFETIME.",
+   "SIL1, SIL2 and SIL3, which are the bands a function can claim.",
+   "NO_SIF_REQUIRED, SIL and BEYOND_SIL3_REDESIGN."
+  ],
+  "answer": 0,
+  "explanation": "The band states are NOT_SIL_RATED, SIL and BELOW_SIL4_TABLE_FLOOR. FOUND, UNACHIEVABLE and CAPPED_AT_LIFETIME are states of the longest interval search, and NO_SIF_REQUIRED and BEYOND_SIL3_REDESIGN are outcomes of a layer of protection analysis row."
+ },
+ {
+  "prompt": "Why does this course never grade the auditable flag?",
+  "options": [
+   "Its effect on a row is too small to grade at the precision the capstones use.",
+   "Its shared negative control stayed green when the rule was deleted from both sides, so nothing independent checks it and a rule checked for transcription only must not carry a graded answer.",
+   "It is an optional flag, so a capstone cannot rely on an analyst having typed it.",
+   "It is decided by the oracle rather than by the engine, and the oracle is provenance."
+  ],
+  "answer": 1,
+  "explanation": "The negative control removed the auditable exclusion from both the engine and the oracle at once and the suite stayed green, so the control cannot see the rule. The academy's standing rule follows from that. The flag's effect on a row is large rather than small, and the oracle has no separate opinion about it at all."
+ },
+ {
+  "prompt": "What can the engine not see about a credited protection layer?",
+  "options": [
+   "That the layer's typed figure lies outside the range a probability may take, which is the one check the engine leaves to the analyst to perform on the row.",
+   "That the same layer has been entered twice under the same name.",
+   "That the layer shares a transmitter or a block with the initiating loop, unless the analyst says so through the flags.",
+   "That a layer flagged independent as the string yes was meant to be credited."
+  ],
+  "answer": 2,
+  "explanation": "The engine applies the flags exactly as typed and cannot see what they mean, which is why independence and auditability stay with the people who walked the system. It does check the range of a typed figure, it does refuse the same name twice with case ignored, and a flag that is the string yes is uncredited with its reason given."
+ },
+ {
+  "prompt": "Stretch every proof test in the teaching function from one year to two. What does the function reach, and why?",
+  "options": [
+   "0.004062218645, which is more than double the one year figure because the redundant subsystems are turning quadratic in the interval.",
+   "0.006819960176, which is the three year figure.",
+   "Exactly twice the one year figure, as for a function linear in T1.",
+   "0.001792971954, which is unchanged because the function is dominated by common cause."
+  ],
+  "answer": 0,
+  "explanation": "At two years the function achieves 0.004062218645, against 0.001792971954 at one year, so it grows by more than a factor of two. The two redundant subsystems, the 2oo3 transmitters and the 1oo2 valves, carry an independent term that grows with the square of the interval, which is what pushes the sum past double. 0.006819960176 belongs to the three year row, and a figure that merely doubled would describe a function that was linear in the interval throughout."
+ },
+ {
+  "prompt": "What does the teaching function achieve on a one year test, and what is its band there?",
+  "options": [
+   "0.001792971954, a risk reduction factor of 557.733208, and SIL 3, because the achieved figure sits below the lower bound of the SIL 2 decade on the low demand table.",
+   "0.004062218645 with 246.170895, SIL 2.",
+   "0.006901461880, a risk reduction factor of 146.628422, which is also SIL 2.",
+   "0.001792971954, a risk reduction factor of 557.733208, and SIL 2."
+  ],
+  "answer": 3,
+  "explanation": "The one year row reads 0.001792971954, 557.733208 and SIL 2. 0.004062218645 with 246.170895 is the two year row. 0.006901461880 is the budget remainder the valves may take, and 146.628422 belongs to the three year row."
+ },
+ {
+  "prompt": "Across the five stretches of the teaching function, on which intervals does it still meet the tolerable frequency?",
+  "options": [
+   "One year and two years only, because the three year row has already crossed the requirement even though its band has not moved at all from where it started.",
+   "One year, two years, three years and 3.5 years.",
+   "One year, two years and three years.",
+   "Every one of the five."
+  ],
+  "answer": 2,
+  "explanation": "The verdict column reads true at one, two and three years and false at 3.5 years and at four years. The function is still SIL 2 at 3.5 years, which is exactly why reading the band column alone would have put the crossing in the wrong place."
+ },
+ {
+  "prompt": "A note reports a proof test interval of 87600.000000 hours. Which state has to be beside it for the reader to know that the target did not decide the number?",
+  "options": [
+   "FOUND, which says the crossing was located and the interval is the crossing point the search converged on",
+   "CAPPED_AT_LIFETIME",
+   "INTERVAL_INDEPENDENT, which says the interval never entered",
+   "UNACHIEVABLE"
+  ],
+  "answer": 1,
+  "explanation": "CAPPED_AT_LIFETIME says the target is met even at the lifetime, so the lifetime set the number: change the target and the figure will not move. FOUND would mean a crossing was found, INTERVAL_INDEPENDENT would mean the interval never entered, and UNACHIEVABLE would carry no interval at all."
+ },
+ {
+  "prompt": "What does a verification note record beside each failure rate?",
+  "options": [
+   "Its source, because a rate with nothing beside it can be neither challenged nor defended by a later reader.",
+   "The band the subsystem reached with it.",
+   "The interval at which the rate was measured.",
+   "The oracle's value for the same quantity."
+  ],
+  "answer": 0,
+  "explanation": "The note carries each subsystem with its architecture, rates, interval, restoration times, beta factors and coverage, each rate with its source. A band belongs to the subsystem as a whole, a rate is per hour and carries no interval of its own, and the oracle holds no independent rates."
+ },
+ {
+  "prompt": "The PFDavg of a subsystem never falls as T1 grows. What does that guarantee about a longest interval search?",
+  "options": [
+   "That the search converges in a fixed number of steps whatever subsystem it is given, since a non-decreasing function is bisected the same way every time and to the same depth.",
+   "That the answer is always shorter than the lifetime of the subsystem.",
+   "That every target below one has a finite answer somewhere.",
+   "That the crossing is unique, so the longest interval meeting a target is a single well defined answer."
+  ],
+  "answer": 3,
+  "explanation": "Because the PFDavg never falls as the interval grows, there is exactly one crossing of the target and the answer is unique. The number of steps is not what the property fixes, a crossing can sit past the lifetime and is then capped, and a target below the floor has no finite answer at all."
+ },
+ {
+  "prompt": "Under which heading of the note does a warning the engine returned belong?",
+  "options": [
+   "The limits, since a warning is one of the things the engine did not check and therefore belongs beside the architectural constraint and the demand mode in the same heading.",
+   "The caveats, since a warned figure is still a figure the engine computed and stands behind.",
+   "The schedule, since every warning in this engine concerns an interval.",
+   "Nowhere, since a warning carries no number of its own."
+  ],
+  "answer": 1,
+  "explanation": "The note's caveats heading holds any warning the engine returned. The limits heading holds what the engine did not check. Two of the three warnings concern a beta factor typed against an architecture that carries none, so not every warning is about an interval, and a warning does arrive with a full result."
+ }
+]

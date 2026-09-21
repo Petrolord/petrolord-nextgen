@@ -1,0 +1,353 @@
+{
+ "app_slug": "hygiene",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-a-dosimeter-day-is",
+   "title": "What a Dosimeter Day Is",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-noise-dose-is-a-fraction-of-an-allowance",
+     "title": "A noise dose is a fraction of an allowance",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-reference-duration",
+     "title": "The reference duration",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-decibel-exchange-rate",
+     "title": "The decibel exchange rate",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-threshold-decides-what-counts",
+     "title": "The threshold decides what counts",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-what-the-engine-refuses",
+     "title": "What the engine refuses",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-from-noise-dose-to-twa",
+   "title": "From Noise Dose to TWA",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-twa-restates-the-dose",
+     "title": "The TWA restates the noise dose",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-two-printed-coefficients",
+     "title": "Two printed coefficients",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-two-published-tables",
+     "title": "Two published tables",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-dose-with-no-twa",
+     "title": "A noise dose with no TWA",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-three-criteria-one-record",
+   "title": "Three Criteria, One Record",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-osha-pel-setup",
+     "title": "The OSHA PEL setup",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-action-level-is-half-a-dose",
+     "title": "The action level is half a noise dose",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-niosh-rel",
+     "title": "The NIOSH noise REL",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-one-day-three-answers",
+     "title": "One day and three answers",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-ceilings-and-table-tops",
+     "title": "Ceilings and the tops of the tables",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-reading-a-dosimeter-record",
+   "title": "Reading a Dosimeter Record",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-periods-and-contributions",
+     "title": "Periods and their contributions",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-loudest-period-is-one-term",
+     "title": "The loudest period is one term",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-time-left-at-a-level",
+     "title": "Time left at a level",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-record-longer-than-a-day",
+     "title": "A record longer than a day",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-inverse-questions",
+   "title": "Inverse Questions",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-level-for-a-reference-duration",
+     "title": "The level for a reference duration",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-noise-dose-from-a-twa",
+     "title": "The noise dose from a TWA",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-one-decibel-is-worth",
+     "title": "What one decibel is worth",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-where-the-tables-stop",
+     "title": "Where the tables stop",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-the-associate-capstone",
+   "title": "The Associate Capstone",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-one-record-end-to-end",
+     "title": "One record, end to end",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-words-a-report-uses",
+     "title": "The words a report uses",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-this-tier-leaves-out",
+     "title": "What this tier leaves out",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "hy-noise-dosimeter"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

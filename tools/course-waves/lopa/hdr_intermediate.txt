@@ -1,0 +1,23 @@
+-- ============================================================================
+-- H3 PROFESSIONAL DEEP SEED: Process Safety: LOPA & SIL Determination,
+-- intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/lopa/intermediate.
+--
+-- What this tier owns: WHAT THE SIF ACHIEVES. PFDavg and the simplified forms,
+-- the half in 1oo1; the full IEC 61508-6 Annex B form with detected failures,
+-- the MTTR, the MRT, tCE and tGE; common cause, the beta factor and betaD, and
+-- no beta factor term in 2oo2; the architectures, 1oo2, 2oo3 and its six, and
+-- 1oo3 taught and never graded; the SIF as a series sum, its achieved RRF and
+-- SIL, and the loop back to the TMEL; and the published worked SIF reproduced
+-- with MRT equal to the MTTR, with the engine's warnings and refusals. Digest
+-- sections 14 to 24, and section 32.
+--
+-- THE TRAP THE TIER IS BUILT ON. A SIF whose band matches the requirement can
+-- still miss the required PFDavg. The Professional capstone grades three
+-- subsystem PFDavg values, the SIF's RRF, a proposed 2oo2 and the loop back to
+-- the TMEL, and grades no proof test interval.
+-- ============================================================================

@@ -199,6 +199,10 @@ export const PANELS = {
   'fc-sizing-explorer': React.lazy(() => import('@/components/course/panels/relief/SizingExplorer')),
   'fc-fire-drum-explorer': React.lazy(() => import('@/components/course/panels/relief/FireDrumExplorer')),
   'fc-blowdown-explorer': React.lazy(() => import('@/components/course/panels/relief/BlowdownExplorer')),
+  // H3 Process Safety: LOPA & SIL Determination (academy module hse)
+  'lp-worksheet': React.lazy(() => import('@/components/course/panels/lopa/WorksheetExplorer')),
+  'lp-sif-builder': React.lazy(() => import('@/components/course/panels/lopa/SifExplorer')),
+  'lp-proof-test': React.lazy(() => import('@/components/course/panels/lopa/ProofTestExplorer')),
   // H4 Consequence Modelling (academy module hse)
   'cq-release': React.lazy(() => import('@/components/course/panels/consequence/ReleaseExplorer')),
   'cq-fire': React.lazy(() => import('@/components/course/panels/consequence/FireExplorer')),
@@ -216,6 +220,10 @@ export const PANELS = {
   'fc-chemistry-explorer': React.lazy(() => import('@/components/course/panels/corrosion/ChemistryExplorer')),
   'fc-rate-explorer': React.lazy(() => import('@/components/course/panels/corrosion/RateExplorer')),
   'fc-inhibitor-integrity-explorer': React.lazy(() => import('@/components/course/panels/corrosion/InhibitorIntegrityExplorer')),
+  // H2 Occupational Hygiene: Noise, Chemical & Heat Exposure (academy module hse)
+  'hy-noise-dosimeter': React.lazy(() => import('@/components/course/panels/hygiene/NoiseDosimeterExplorer')),
+  'hy-protection-chemicals': React.lazy(() => import('@/components/course/panels/hygiene/ProtectionChemicalsExplorer')),
+  'hy-heat-stress': React.lazy(() => import('@/components/course/panels/hygiene/HeatStressExplorer')),
   // FC8 Metering, Control Valves & Storage
   'fc-meterrun-explorer': React.lazy(() => import('@/components/course/panels/metering/MeterRunExplorer')),
   'fc-choking-explorer': React.lazy(() => import('@/components/course/panels/metering/ChokingExplorer')),

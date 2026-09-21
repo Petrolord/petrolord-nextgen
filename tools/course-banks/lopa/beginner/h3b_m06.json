@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The golden case tank-overflow-below-sil1 is run through the engine. What does it report?",
+  "options": [
+   "A required RRF of 2.500000 with NO_SIF_REQUIRED, and the rational 5/2.",
+   "A required RRF of 2.500000 with SIL1, and the rational 5/2.",
+   "A required RRF of 2.500000 with the outcome RISK_REDUCTION_BELOW_SIL1, and the golden's rational is 5/2.",
+   "A required RRF of 5.000000 with RISK_REDUCTION_BELOW_SIL1."
+  ],
+  "answer": 2,
+  "explanation": "The table of golden LOPA scenarios gives tank-overflow-below-sil1 a required RRF of 2.500000, the exact rational 5/2 and the outcome RISK_REDUCTION_BELOW_SIL1, with `meetsTmel` false. A demand above one is never NO_SIF_REQUIRED, and SIL1 starts above a demand of 10."
+ },
+ {
+  "prompt": "Which golden case carries a relative difference of 1.42e-16 against the golden, and what is its outcome?",
+  "options": [
+   "rrf-exactly-100, whose outcome is SIL1.",
+   "rrf-exactly-1000, whose outcome is SIL2, and whose relative difference against the golden is the largest recorded anywhere in that table of cases.",
+   "rrf-just-above-100, whose outcome is SIL2, because that case sits a hair past a decade and so carries the largest floating point departure.",
+   "rrf-exactly-10, whose outcome is RISK_REDUCTION_BELOW_SIL1."
+  ],
+  "answer": 0,
+  "explanation": "The golden table gives rrf-exactly-100 a required RRF of 100.000000, the rational 100/1, the outcome SIL1 and a relative difference of 1.42e-16. rrf-exactly-1000 carries 1.14e-16 and rrf-exactly-10 carries 1.78e-16, and rrf-just-above-100 carries 0."
+ },
+ {
+  "prompt": "Two golden cases sit either side of one decade. What do rrf-exactly-100 and rrf-just-above-100 report?",
+  "options": [
+   "100.000000 banding SIL2, and 100.000010 banding SIL2 as well, because both figures have reached the decade that divides the two bands from each other.",
+   "100.000000 banding SIL1, and 100.000010 banding SIL1, because the second figure sits inside the snap and is read as the decade it is closest to.",
+   "100.000000 banding SIL1, and 100.000010 refused.",
+   "100.000000 banding SIL1, and 100.000010 banding SIL2."
+  ],
+  "answer": 3,
+  "explanation": "The golden table gives rrf-exactly-100 the outcome SIL1 and rrf-just-above-100, whose exact rational is 10000001/100000, the outcome SIL2. The exact decade belongs to the lower SIL and a value ten parts in a million above it is already outside the snap, which covers one part in a billion. Nothing here is refused."
+ },
+ {
+  "prompt": "Which two golden cases report `meetsTmel` as true with the outcome NO_SIF_REQUIRED?",
+  "options": [
+   "tank-overflow-below-sil1 at 2.500000 and ipl-sufficient at 0.100000, which are the two smallest demands anywhere in the table of golden cases.",
+   "f-equals-tmel at 1.000000 and ipl-sufficient at 0.100000.",
+   "f-equals-tmel at 1.000000 and enabling-and-sif at 90.000000, since both of those cases come back with the tolerance met on this row.",
+   "ipl-sufficient at 0.100000 on its own, which is the only case in the table whose demand falls below one."
+  ],
+  "answer": 1,
+  "explanation": "The golden table gives f-equals-tmel a required RRF of 1.000000 with the rational 1/1, and ipl-sufficient 0.100000 with the rational 1/10, both NO_SIF_REQUIRED and both meeting the tolerance. tank-overflow-below-sil1 sits above one and misses, and enabling-and-sif meets its tolerance while its outcome is still SIL1."
+ },
+ {
+  "prompt": "Which golden case meets its tolerable frequency while still reporting a SIL band?",
+  "options": [
+   "enabling-and-sif, banding SIL1 at 90.000000.",
+   "sif-just-short, at a required RRF of 300.000000 with the outcome SIL2, which is the case written to show a proposed function closing its row.",
+   "non-independent-not-credited, at a required RRF of 100.000000 with SIL1, because its uncredited layer leaves the row inside the tolerance anyway.",
+   "beyond-sil3-sil4-band, at a required RRF of 20000.000000."
+  ],
+  "answer": 0,
+  "explanation": "The golden table marks enabling-and-sif at 90.000000, outcome SIL1, as meeting the tolerance. sif-just-short at 300.000000 and non-independent-not-credited at 100.000000 both miss, and beyond-sil3-sil4-band at 20000.000000 is a redesign case. A row can require a band and still meet its tolerance once a proposed function has been typed."
+ },
+ {
+  "prompt": "Which two golden cases come back BEYOND_SIL3_REDESIGN, and at what required RRFs?",
+  "options": [
+   "beyond-sil3-sil4-band and rrf-exactly-10000, at 20000.000000 and 10000.000000.",
+   "beyond-sil4-band at 200000.000000 and sif-just-short at 300.000000, which are the two cases the golden marks as missing their own tolerance.",
+   "beyond-sil3-sil4-band at 20000.000000 and beyond-sil4-band at 200000.000000.",
+   "beyond-sil4-band at 200000.000000 alone."
+  ],
+  "answer": 2,
+  "explanation": "The golden table gives beyond-sil3-sil4-band 20000.000000 and beyond-sil4-band 200000.000000, both BEYOND_SIL3_REDESIGN. rrf-exactly-10000 at 10000.000000 is SIL3, on the inclusive edge of that band, and sif-just-short at 300.000000 is SIL2."
+ },
+ {
+  "prompt": "How many golden LOPA scenarios does the digest run through the engine, and on what do they all agree with the golden?",
+  "options": [
+   "13 of them, agreeing on the outcome alone, since the required RRF is computed in double by the engine and in rationals by the oracle behind it.",
+   "5 of them, agreeing on the outcome, the required RRF and `meetsTmel`, which is the count of decade cases the golden was written to cover.",
+   "13 of them, agreeing on the outcome and on nothing else.",
+   "13 of them, agreeing on the outcome, the required RRF and `meetsTmel`."
+  ],
+  "answer": 3,
+  "explanation": "The digest says all 13 agree with the golden on the outcome, the required RRF and `meetsTmel`. The relative difference column shows how close the two arithmetics come, and its largest entry is 1.82e-16, which is why the agreement extends to the figures as well as to the words."
+ },
+ {
+  "prompt": "How does the oracle behind the golden decide a boundary, and why does that matter for the cases sitting on a decade?",
+  "options": [
+   "In double arithmetic, with the same snap the engine uses.",
+   "In exact rationals with no snap, so those cases are a check on the snap the engine applies.",
+   "In exact rationals with the snap widened, so that a case on a decade is admitted to the lower band by both routes and the two always agree.",
+   "By reading the outcome the engine returned."
+  ],
+  "answer": 1,
+  "explanation": "The digest says the oracle decides every boundary in exact rationals with no snap, so the golden cases that sit on a decade are a check on the snap. An oracle that shared the engine's tolerance, or that read the engine's own answer, would check nothing at all."
+ },
+ {
+  "prompt": "The digest has a WHAT IS NOT HERE note about the golden LOPA scenarios. What does it say?",
+  "options": [
+   "The golden cases are the book's continuing example, renamed.",
+   "The golden cases carry no source line at all, so the digest cannot say where the illustrative numbers in any one of them came from.",
+   "The golden holds no case sitting exactly on a decade.",
+   "The CCPS continuing example from the book is not reproduced, and no golden claims to be it."
+  ],
+  "answer": 3,
+  "explanation": "The digest says the CCPS continuing example from the book is not reproduced, that the engine's validation record reports no copy of the book was available to check its worksheet numbers against, and that no golden claims to be that example. Every golden LOPA scenario is oracle derived and its source line says so."
+ },
+ {
+  "prompt": "What does the digest mean by saying every golden LOPA scenario is ORACLE-DERIVED?",
+  "options": [
+   "It follows the CCPS method with illustrative numbers, and the golden's source line says so.",
+   "It reproduces a published worksheet to the figures that worksheet prints.",
+   "It was generated by the engine itself and then stored, so the golden and the engine agree by construction on every case in that table.",
+   "It carries failure rate data this course recommends."
+  ],
+  "answer": 0,
+  "explanation": "The digest says every golden LOPA scenario follows the CCPS method with illustrative numbers and that the golden says so in its source line. No published worksheet is reproduced on the determination side, the golden was written by the stdlib oracle in exact rational arithmetic, independently of the engine, and every rate in this course is illustrative and never recommended data."
+ },
+ {
+  "prompt": "A LOPA row is frequency based. What does the engine take for the consequence?",
+  "options": [
+   "A consequence category, converted by the engine into a tolerance.",
+   "Nothing but the TMEL: no consequence category, no matrix score and no matrix band enters it.",
+   "A matrix score, carried through the product as one more factor.",
+   "A matrix band, which the engine compares with the band the required PFDavg falls in."
+  ],
+  "answer": 1,
+  "explanation": "The digest's seam is explicit: a LOPA row multiplies a frequency per year by probabilities and compares the result with a TMEL per year, and nothing in this engine takes a consequence category, a matrix score or a matrix band. The consequence is described in words and carried into the row through the tolerable frequency attached to it."
+ },
+ {
+  "prompt": "Which academy courses own the risk matrices this course leaves alone?",
+  "options": [
+   "The risk and change course alone, whose matrix is the only scored scale.",
+   "The field development course alone, whose scale this engine would take.",
+   "The risk and change course, which grades the five by five matrix, and the field development course, which teaches a second scale.",
+   "Neither: the matrices belong to this course and are graded here."
+  ],
+  "answer": 2,
+  "explanation": "The digest names both: the risk and change course grades the five by five matrix on its own bands, and the field development course teaches a second scale. Both rank a risk on scored bands, and this course never re-grades either of them."
+ },
+ {
+  "prompt": "Which line does the engine print for its units?",
+  "options": [
+   "frequencies per year; probabilities per year and every PFDavg carried as a fraction of the proof test interval it was averaged over",
+   "frequencies and tolerances per year; every other quantity on the row carried in hours, which is the unit the verification half works in",
+   "frequencies per year; probabilities and PFDs dimensionless",
+   "frequencies per hour; probabilities dimensionless"
+  ],
+  "answer": 2,
+  "explanation": "That is the engine's own units line, quoted verbatim, and it marks the boundary of the method: a frequency per year on one side and a dimensionless probability on the other. Hours belong to the verification half of the engine and never to a determination row."
+ },
+ {
+  "prompt": "Two checks a real project needs are absent from this engine. Which are they?",
+  "options": [
+   "A check that the tolerable frequency matches the organisation's criteria, and a check that each credited layer is genuinely independent of the cause.",
+   "A check that every failure rate has a justified source recorded, and a check that the proof test interval is one the plant can actually carry out.",
+   "A check on the arithmetic of the product.",
+   "A hardware fault tolerance check, and a high demand or continuous mode."
+  ],
+  "answer": 3,
+  "explanation": "The digest lists both as absent: the engine has no hardware fault tolerance check, because that requirement is a normative table in a licensed standard, and it has no high demand or continuous mode, so every band here is low demand. The other items are real obligations on the analyst, and this engine makes no claim to check them."
+ },
+ {
+  "prompt": "How does a LOPA consequence reach the arithmetic of the row?",
+  "options": [
+   "It is described in words and then scored on the academy's five by five matrix, and the band that scoring returns is what enters the row.",
+   "It is described in words and carried into the row through its TMEL.",
+   "It is described in words and converted by the engine into a conditional modifier, which multiplies the frequency down to the right consequence.",
+   "It is described in words on the worksheet and plays no part in the arithmetic at all."
+  ],
+  "answer": 1,
+  "explanation": "The digest says a LOPA consequence is described in words, a fatality or a release reaching the jetty, and carried into the row through its TMEL. That single frequency is what separates a row whose consequence is a fatality from a row whose consequence is a small release, so the description does reach the arithmetic, through the tolerance alone."
+ }
+]

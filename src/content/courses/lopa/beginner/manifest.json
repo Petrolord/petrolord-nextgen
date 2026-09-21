@@ -1,0 +1,359 @@
+{
+ "app_slug": "lopa",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-a-scenario-and-its-frequency",
+   "title": "A Scenario and Its Frequency",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-what-lopa-answers",
+     "title": "What a layer of protection analysis answers",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-one-cause-one-consequence",
+     "title": "One cause, one consequence",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-initiating-event-frequency",
+     "title": "The initiating event frequency",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-frequencies-per-year-and-probabilities",
+     "title": "Frequencies per year and probabilities",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-refusals-by-name",
+     "title": "The refusals, each naming its field",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-enabling-conditions-and-modifiers",
+   "title": "Enabling Conditions and Conditional Modifiers",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-an-enabling-condition",
+     "title": "An enabling condition",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-conditional-modifiers",
+     "title": "Conditional modifiers",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-unmitigated-frequency",
+     "title": "The unmitigated frequency",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-forgetting-a-factor",
+     "title": "Forgetting a factor, and what it costs",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-independent-protection-layers",
+   "title": "Independent Protection Layers",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-what-makes-a-layer-an-ipl",
+     "title": "What makes a layer an IPL",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-credit-only-when-independent",
+     "title": "Credit only when independent",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-one-credit-per-ipl",
+     "title": "One credit per IPL",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-auditable-flag",
+     "title": "The auditable flag",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-mitigated-frequency",
+     "title": "The mitigated frequency without a SIF",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-tolerable-frequency-and-the-gap",
+   "title": "The Tolerable Frequency and the Gap",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-tmel",
+     "title": "The tolerable mitigated event likelihood",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-required-risk-reduction-factor",
+     "title": "The required risk reduction factor",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-required-pfdavg-is-the-binding-target",
+     "title": "The required PFDavg is the binding target",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-closing-the-loop-with-a-sif",
+     "title": "Closing the loop with a proposed SIF",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-outcome-states-and-the-decade",
+   "title": "Outcome States and the Exact Decade",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-six-outcome-states",
+     "title": "Six outcome states",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-low-demand-bands",
+     "title": "The low demand SIL bands",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-an-exact-decade-belongs-below",
+     "title": "An exact decade belongs to the lower SIL",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-decade-snap",
+     "title": "The decade snap, and why the engine needs it",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-one-worksheet-end-to-end",
+   "title": "One Worksheet, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-a-worksheet-row-by-row",
+     "title": "A worksheet, row by row",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-beyond-sil-three",
+     "title": "Beyond SIL three, a redesign",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-lopa-does-not-do",
+     "title": "What LOPA does not do",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "lp-worksheet"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

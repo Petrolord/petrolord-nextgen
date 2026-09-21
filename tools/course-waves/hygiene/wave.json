@@ -1,0 +1,493 @@
+{
+ "slug": "hygiene",
+ "prefix": "h2",
+ "name": "Occupational Hygiene: Noise, Chemical & Heat Exposure",
+ "pathOrder": 62,
+ "module": "hse",
+ "prerequisite": null,
+ "repo": "/root/wt-h2-nextgen",
+ "branch": "feat/h2-hygiene-course",
+ "goldens": [
+  "hse/goldens/exposure_cases.json"
+ ],
+ "engines": [
+  "engines/hse/exposure.js"
+ ],
+ "enginesVendoredAt": "NextGen, sha-identical with petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217). Re-vendored 2026-09-19 for #220 only: exposure.js, the jest suite and FINDINGS-exposure.md moved; the golden, the oracle and the negative-control script are byte-identical between the two commits. SIX paths, walked as an import closure from __tests__/hse.exposure.test.js by vendor_hygiene.sh: the suite, the engine and the golden it reads at runtime, plus three NAMED members (oracle_exposure.py, FINDINGS-exposure.md, negcontrol_exposure.sh mode 755). 24 proofs (blob, sha256, cmp, bytes), 0 deviations. The six paths were first ledgered kind \"extra\", group h2-hygiene-course; merging main brought the canonical pin to df31f53, which carries all six byte for byte, so the six entries were removed as STALE and VENDOR.json is now identical to main.",
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2",
+  "x60",
+  "x1/60"
+ ],
+ "decisions": {
+  "heatLabels": "ACCEPTED 2026-09-19 (BRIEF.md): a WBGT built from thermometer readings carries \"the NIOSH 2016-106 section 9.3.2 weighting, checked for transcription only\"; a RAL, a REL or a margin against either carries the section 8.1 label. A WBGT the instrument read out, and the graded one-hour averages of stated readouts, are arithmetic on stated values and carry neither.",
+  "heat": "No graded field passes through the NIOSH 2016-106 RAL or REL equation, a margin, an exceedance verdict, or a WBGT built from globe, wet bulb and dry bulb readings. They are TAUGHT as \"the NIOSH 2016-106 section 8.1 equation, checked for transcription only\". REASON: the constants and the WBGT weights are transcription only (FINDINGS-exposure.md section 6: planting the same error in engine and oracle leaves the suite green), and NIOSH's own worked example disagrees with its own equation (27.8 C printed against 27.458939 C at 348.9 W; 25 C against 24.047916 C for the RAL), so a learner following the document's figure would be marked wrong. The two graded heat fields are one-hour time weighted averages of STATED readouts, arithmetic by definition.",
+  "coefficient16_61": "OSHA Table A-1 cannot separate 16.61 from 5/log10 2 at its printed decimal (0 of 150 rows reject the exact coefficient; digest section 5). The OSHA TWA and the extended-shift action level are graded on the coefficient the mandatory Appendix A TEXT writes. NIOSH Table 1-2 does separate 10.0 from 3/log10 2 (49 of 83 rows).",
+  "weeklyLex": "Graded with FIVE days given, so the statutory divisor of 5 equals the day count; the capstone generator measures the two agree to 1e-12. The energy average is the one L108 Figure 26 reproduces for the day.",
+  "stel": "A fifteen-minute time weighted average by definition; the prompt STATES the remainder of the window counts as zero.",
+  "oracleOnlyNeverGraded": [
+   "NIOSH protector derating by type (0.75/0.5/0.3)",
+   "OSHA dual protection +5 dB",
+   "Brief and Scala WEEKLY factor on its own (only decides which factor governs; the capstone asserts the weekly factor sits above the daily one by more than 0.2)"
+  ]
+ },
+ "constants": {
+  "$comment": "MEASURED out of the engine in digest section 3 and pinned against a literal typed in h2_dump.mjs, a third location. 40 pins, all within 1e-12 relative except the three limit doses, bisected, within 1e-9.",
+  "16.61 and 10.0": "the printed TWA coefficients, J1. GRADED through the TWA fields (decision coefficient16_61).",
+  "5 and 3": "the decibel exchange rates. GRADED through every noise field; Tables G-16a and 1-1 reproduce them.",
+  "90, 80, 80": "the thresholds of the PEL, action-level and NIOSH presets. GRADED; inclusive (J2); no capstone input sits on one.",
+  "59.9, 14.1, 56.7, 11.5": "RAL and REL constants. TRANSCRIPTION ONLY, NEVER GRADED.",
+  "0.7, 0.3, 0.2, 0.1": "WBGT weights. TRANSCRIPTION ONLY, NEVER GRADED.",
+  "0.75, 0.5, 0.3": "NIOSH protector derating. ORACLE ONLY, NEVER GRADED.",
+  "16 and 128": "Brief and Scala denominators. The daily one is reproduced by BC OHS Reg 5.50; the weekly one is ORACLE ONLY."
+ },
+ "plan": {
+  "state": "LESSONS WRITTEN (78, committed on feat/h2-hygiene-course), gates repaired 2026-09-19 before the banks: gate_capstone_leak reads the lessons (direction 8) and wave.json plus every brief (direction 9), gate_vocabulary gates digest section 24, leakage runs on all three tiers with the x60 and x1/60 scales. No bank, key truth or migration is written. No database write of any kind.",
+  "thesis": "An exposure figure is a measurement read against a criterion, and it means nothing until the criterion is named, so the course reads one record three ways, builds each metric from the formula its source prints, and says for every formula how strong the evidence behind it is.",
+  "tiers": {
+   "beginner": "Associate. NOISE DOSE AND ITS CRITERIA: reference duration, decibel exchange rate, threshold, noise dose, TWA, the printed coefficients, OSHA PEL / OSHA action level / NIOSH noise REL on one record, warnings and refusals.",
+   "intermediate": "Professional. PROTECTION AND CHEMICALS: LEX,8h and exposure points, the weekly LEX, four hearing protector methods, the 8-hour chemical TWA, the STEL, the mixture index.",
+   "advanced": "Expert. HEAT, THE LONG SHIFT, AND READING THE EVIDENCE: WBGT and the one-hour averages, the NIOSH RAL and REL as published transcription-only equations, the evidence status of every formula, the published errata, the extended-shift action level, Brief and Scala, and combining exposures into a sampling decision."
+  },
+  "modulesPerTier": 6,
+  "lessonsPerTier": 26,
+  "lessonsInWave": 78,
+  "questionsPerTier": 132,
+  "questionsPerModuleBank": 15,
+  "examQuestions": 42,
+  "panels": {
+   "hy-noise-dosimeter": "NoiseDosimeterExplorer.jsx",
+   "hy-protection-chemicals": "ProtectionChemicalsExplorer.jsx",
+   "hy-heat-stress": "HeatStressExplorer.jsx"
+  },
+  "route": "/dashboard/apps/hygiene",
+  "next": "banks (BANK_TASK.md) with a key-truth second reader (KEY_TRUTH_TASK.md), then the five-migration ladder with the go-live HELD."
+ },
+ "fields": {
+  "count": 18,
+  "perTier": {
+   "beginner": 6,
+   "intermediate": 6,
+   "advanced": 6
+  },
+  "keys": [
+   "utorogu_osha_pel_dose_pct",
+   "utorogu_osha_pel_twa_dba",
+   "utorogu_action_level_dose_pct",
+   "utorogu_niosh_rel_dose_pct",
+   "utorogu_niosh_rel_twa_dba",
+   "utorogu_pel_minutes_left_min",
+   "amukpe_lex_8h_dba",
+   "amukpe_lex_weekly_dba",
+   "amukpe_field_derated_exposure_dba",
+   "amukpe_benzene_twa8h_ppm",
+   "amukpe_toluene_stel_ppm",
+   "amukpe_mixture_index",
+   "osioka_wbgt_twa_c",
+   "osioka_metabolic_twa_w",
+   "osioka_extended_action_level_dba",
+   "osioka_extended_action_dose_pct",
+   "osioka_adjusted_limit_ppm",
+   "osioka_adjusted_mixture_index"
+  ],
+  "evidence": {
+   "utorogu_osha_pel_dose_pct": "PUBLISHED",
+   "utorogu_osha_pel_twa_dba": "PUBLISHED",
+   "utorogu_action_level_dose_pct": "PUBLISHED",
+   "utorogu_niosh_rel_dose_pct": "PUBLISHED",
+   "utorogu_niosh_rel_twa_dba": "PUBLISHED",
+   "utorogu_pel_minutes_left_min": "PUBLISHED",
+   "amukpe_lex_8h_dba": "PUBLISHED",
+   "amukpe_lex_weekly_dba": "DECISION",
+   "amukpe_field_derated_exposure_dba": "PUBLISHED",
+   "amukpe_benzene_twa8h_ppm": "PUBLISHED",
+   "amukpe_toluene_stel_ppm": "DECISION",
+   "amukpe_mixture_index": "PUBLISHED",
+   "osioka_wbgt_twa_c": "DECISION",
+   "osioka_metabolic_twa_w": "DECISION",
+   "osioka_extended_action_level_dba": "PUBLISHED",
+   "osioka_extended_action_dose_pct": "PUBLISHED",
+   "osioka_adjusted_limit_ppm": "PUBLISHED",
+   "osioka_adjusted_mixture_index": "PUBLISHED"
+  },
+  "clearanceRows": 86,
+  "itemsCleared": [
+   "T1 the NIOSH 2016 RAL constants 59.9 and 14.1 (transcription only)",
+   "T2 the NIOSH 2016 REL constants 56.7 and 11.5 (transcription only)",
+   "T3 the WBGT weights 0.7 and 0.3 indoors, 0.7, 0.2 and 0.1 outdoors (transcription only)",
+   "T4 the NIOSH protector derating factors 0.75, 0.5 and 0.3 (oracle only)",
+   "T5 the OSHA dual-protection 5 dB (oracle only)",
+   "T6 the Brief and Scala WEEKLY formula (the ESTA note, no printed number)",
+   "T7 the 116 to 580 W range of the NIOSH figures (a warning band)",
+   "J2 the threshold is inclusive",
+   "J5 protector credit floored at zero",
+   "J6 the 8-hour TWA always divides by 8 (STATED in the prompt where it matters)",
+   "J7 a mixture index of exactly 1 passes",
+   "J8 the Brief and Scala factor is capped at 1 and the smaller factor governs",
+   "J10 weekly LEX always divides by 5"
+  ]
+ },
+ "digest": {
+  "lines": 1135,
+  "sections": 25,
+  "md5": "c41ff4fbe968b1a75c8d677f2e2b1b8e",
+  "sha256": "bbf64e544665a3737905b286167cb9fcbc2d42c0a09fb0bfafe0d2d81a960d66",
+  "history": null,
+  "note": "The engine has no repair history, so there is no history section. Section 19 is about ERRATA IN THE SOURCES, which are current."
+ },
+ "vocabulary": {
+  "dose": "always \"noise dose\" (flowassurance and gasprocessing dose inhibitors)",
+  "exposure": "always qualified (fdp, uncertainty, wellcost use it for money)",
+  "noise": "say \"sound level\" for a reading (dca, welltest, seismolord use noise for scatter)",
+  "exchange rate": "always \"decibel exchange rate\" (economics)",
+  "heat": "always \"heat stress\" (heattransfer duty; separation and relief radiation)",
+  "REL": "\"NIOSH noise REL\" and \"NIOSH heat REL\" are two limits"
+ },
+ "scopeSeams": {
+  "flare and pool-fire radiation": "separation (FC1) and relief (FC5)",
+  "BTEX emissions": "gasprocessing (FC4)",
+  "incident rates": "safetystats (H1)",
+  "risk matrix": "riskchange"
+ },
+ "openItems": {},
+ "closedItems": {
+  "engine message names the wrong field": "CLOSED 2026-09-19. petrolord-engines PR #220 merged (d9c1a89, main 466f21f) and the closure was re-vendored at b43f1d9. The digest rebuilt with two lines changed: section 10 now prints \"wbgtPeriods[0].wbgtC must be a finite number\" for heat-bad-wbgt-row, and the header states b43f1d9 and the engine source length (706 to 708 lines). Numeric literal multiset: 3366 before and after, the only change the engine line count 706 to 708; no figure moved."
+ },
+ "cleared_claims": [],
+ "gates": {
+  "structure.py": {
+   "md5": "dba361a87d455fda0636a29d344e44be",
+   "exit": 0,
+   "expected": 0,
+   "result": "panels declared: ['hy-noise-dosimeter', 'hy-protection-chemicals', 'hy-heat-stress'] | history module: none (the engine has no repair history) | PROBLEMS: 0"
+  },
+  "h2_capstone.mjs": {
+   "md5": "b0a746318d05c40590deae488961e982",
+   "exit": 0,
+   "expected": 0,
+   "result": "by mechanism: BOUNDARY 11, CONSTRUCTION 5, EXCLUSION 68, MARGIN 2 | T6 margin: weekly factor minus daily factor is above 0.2, asserted (the figure is in --evidence only) | h2_capstone: 114 label-and-call, evidence and clearance assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "122f3723d56c5f942d1432d5f966f96c",
+   "exit": 0,
+   "expected": 0,
+   "result": "tolerances RAISED to the printed precision: 18 -> beginner/utorogu_osha_pel_dose_pct 1e-9 -> 5e-7; beginner/utorogu_osha_pel_twa_dba 1e-9 -> 5e-7; beginner/utorogu_action_level_dose_pct 1e-9 -> 5e-7; beginner/utorogu_niosh_rel_dose_pct 1e-9 -> 5e-7; beginner/utorogu_niosh_rel_twa_dba 1e-9 -> 5e-7; beginner/utorogu_pel_minutes_left_min 1e-9 -> 5e-7; intermediate/amukpe_lex_8h_dba 1e-9 -> 5e-7; intermediate/amukpe_lex_weekly_dba 1e-9 -> 5e-7; intermediate/amukpe_field_derated_exposure_dba 1e-9 -> 5e-7; intermediate/amukpe_benzene_twa8h_ppm 1e-9 -> 5e-7; intermediate/amukpe_toluene_stel_ppm 1e-9 "
+  },
+  "make_fields.mjs --bare-stated-tolerances (negative control, must exit 1)": {
+   "md5": "122f3723d56c5f942d1432d5f966f96c",
+   "exit": 1,
+   "expected": 1,
+   "result": "advanced/osioka_adjusted_limit_ppm: graded at 1e-9 but the ppm class prints to 6 decimals, so the finest answer a learner can give is osioka_adjusted_limit_ppm at 6 decimals and the error that quoting it carries is up to 5e-7, which is 500 times the tolerance | advanced/osioka_adjusted_mixture_index: graded at 1e-9 but the ratio class prints to 6 decimals, so the finest answer a learner can give is osioka_adjusted_mixture_index at 6 decimals and the error that quoting it carries is up to 5e-7, which is 500 times the tolerance | h2_capstone: 114 label-and-call, evidence and clearance assertions"
+  },
+  "discriminate.mjs": {
+   "md5": "6380436fb421147c6a3cb43cdf18362e",
+   "exit": 0,
+   "expected": 0,
+   "result": "ok    osioka_adjusted_mixture_index        6/6 move it | 109 plausible wrong methods over 18 routes, 0 WEAK. | CLOSEST MISS: utorogu_osha_pel_twa_dba via the exact 5/log10 2 coefficient, 253.830 tolerances away."
+  },
+  "discriminate.mjs --slack-tolerances (negative control, must exit 1)": {
+   "md5": "6380436fb421147c6a3cb43cdf18362e",
+   "exit": 1,
+   "expected": 1,
+   "result": "WEAK  osioka_adjusted_mixture_index        0/6 move it; BLIND: the unadjusted limits (0.001 tol); the weekly factor used (0.001 tol); limit over concentration, adjusted (0.014 tol); the largest adjusted term alone (0.001 tol); the index multiplied by the factor (0.002 tol); the linear 8 over h scaling (0.000 tol) | 109 plausible wrong methods over 18 routes, 18 WEAK. | CLOSEST MISS: utorogu_osha_pel_twa_dba via the exact 5/log10 2 coefficient, 0.000 tolerances away."
+  },
+  "gate_collisions.mjs": {
+   "md5": "c28d27e31040f7644a4c17c0f0a5091c",
+   "exit": 0,
+   "expected": 0,
+   "result": "row rule: 1338 scenario-case pairs, worst 0 shared whole record(s). | CONTROLS FIRED: value control rejected 1 time(s); row control matched 1 record(s). | gate_collisions: 0 collisions."
+  },
+  "gate_capstone_leak.py --no-banks": {
+   "md5": "b1ee18529a6ca0d9be4735fd12c05524",
+   "exit": 0,
+   "expected": 0,
+   "result": "direction 9 briefs: 6 files (wave.json, BRIEF.md, LESSON_TASK.md, BANK_TASK.md, KEY_TRUTH_TASK.md, PANELS.md), 984 numeric literals, 18 graded values and the T6 margin. | CONTROLS FIRED: a planted graded value and a planted condition were both caught. | gate_capstone_leak: 0 finding(s)."
+  },
+  "gate_capstone_leak.py --no-banks --plant-lesson (negative control, must exit 1)": {
+   "md5": "b1ee18529a6ca0d9be4735fd12c05524",
+   "exit": 1,
+   "expected": 1,
+   "result": "CONTROLS FIRED: a planted graded value and a planted condition were both caught. | planted in advanced/m01-wbgt/l01-three-thermometers.md: ['[8 lessons numeric] advanced/m01-wbgt/l01-three-thermometers.md carries a literal within 10 tolerances of utorogu_action_level_dose_pct at 1'] | NEGATIVE CONTROL --plant-lesson: expected a [8 lessons numeric] finding, caught"
+  },
+  "gate_capstone_leak.py --no-banks --plant-brief (negative control, must exit 1)": {
+   "md5": "b1ee18529a6ca0d9be4735fd12c05524",
+   "exit": 1,
+   "expected": 1,
+   "result": "CONTROLS FIRED: a planted graded value and a planted condition were both caught. | planted in wave.json: ['[9 briefs] wave.json carries osioka_adjusted_limit_ppm at its printed rendering', '[9 briefs numeric] wave.json carries a literal within 10 tolerances of osioka_adjusted_limit_ppm at 1'] | NEGATIVE CONTROL --plant-brief: expected a [9 briefs] finding, caught"
+  },
+  "gate_vocabulary.py": {
+   "md5": "6a23120e902b50aaac1cfee3b7d4b2bd",
+   "exit": 0,
+   "expected": 0,
+   "result": "REPORTED, NOT GATED (digest outside section 24, the lab, panels and learning page): 101 raw match(es) {'bare REL': 41, 'bare dose in a heading': 1, 'bare exchange rate': 5, 'bare exposure': 28, 'bare heat': 26} | BREACHES: 0 | gate_vocabulary: 0 breach(es)."
+  },
+  "gate_vocabulary.py --plant (negative control, must exit 1)": {
+   "md5": "6a23120e902b50aaac1cfee3b7d4b2bd",
+   "exit": 1,
+   "expected": 1,
+   "result": "BARE HEAT advanced/m01-wbgt/l01-three-thermometers.md:48  A planted exposure line. A planted noise level of 91 dBA. A planted exchange rate line. A planted heat line. A planted R | BARE REL advanced/m01-wbgt/l01-three-thermometers.md:48  A planted exposure line. A planted noise level of 91 dBA. A planted exchange rate line. A planted heat line. A planted R | NEGATIVE CONTROL: planted in advanced/m01-wbgt/l01-three-thermometers.md; expected all 7 rules caught, got ['bare REL', 'bare dose in a heading', 'bare dose, first use', 'bare exchange rate', 'bare exposure', 'bare heat', 'noise for a read"
+  },
+  "leakage.mjs --tier beginner": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "exit": 0,
+   "expected": 0,
+   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/beginner/m06-the-associate-capstone/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 1038 lines, 963 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "leakage.mjs --tier intermediate": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "exit": 0,
+   "expected": 0,
+   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/intermediate/m06-the-professional-capstone/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 987 lines, 726 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "leakage.mjs --tier advanced": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "exit": 0,
+   "expected": 0,
+   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/advanced/m06-from-exposures-to-a-sampling-decision/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 1036 lines, 912 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "leakage.mjs --selftest": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "exit": 0,
+   "expected": 0,
+   "result": "PASS  a --banks run with no bank files is REFUSED | PASS  a --banks run where nothing is a question array is REFUSED | negative control: ALL PASS"
+  },
+  "gate_claims.mjs": {
+   "md5": "53ba4378a3a576b457534056c1c1335c",
+   "exit": 0,
+   "expected": 0,
+   "result": "ok   every brief that exists names PROVENANCE or the digest as the only truth  [all say it] | declared non-digest figures: 1, hit: 1, DEAD: 0 -> | FINDINGS: 0"
+  },
+  "gate_claims.mjs --plant-a-recon-figure (negative control, must exit 1)": {
+   "md5": "53ba4378a3a576b457534056c1c1335c",
+   "exit": 1,
+   "expected": 1,
+   "result": "BRIEF.md: the figure 518 is not in the digest and is not declared AND IT IS IN THE RECON OR FINDINGS REPORT, which is the FC1 defect exactly | ... refute; that is current and permanent. The engine checks 518 tests and the golden carries 441 cas... | NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
+  },
+  "gate_copy_rule.py": {
+   "md5": "106636ef3402ae0ffa478266a39b1991",
+   "exit": 0,
+   "expected": 0,
+   "result": "exempt engine strings declared: 0, hit: 0, dead: 0 -> [] | quotations of engine text found: 0 | VIOLATIONS: 0"
+  },
+  "h2_dump.mjs owners selftest": {
+   "md5": "abc2c56e74f5a424e07f5831e64edf85",
+   "exit": 0,
+   "expected": 0,
+   "result": "OWNERS SELFTEST: a module that tier does not have refused: GENERATOR REFUSES: Associate has no m09 | OWNERS SELFTEST: a lesson that is not in the module named beside it refused: GENERATOR REFUSES: Expert m01 has no l05 | OWNERS SELFTEST: a valid clause renders as (owned by Professional m05 and Expert m05 l03 and l04)"
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "exit": 0,
+   "expected": 0,
+   "result": "the digest reproduces from its generators, byte for byte | h2_dump: 1617 label-and-call, measurement and pin assertions run, 0 failed, 40 constants pinned"
+  },
+  "digestprose.mjs --rules": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "exit": 0,
+   "expected": 0,
+   "result": "[digestprose] digest.txt: 1135 line(s), 25 section title(s) and 86 in-body marker(s) swept against their blocks, 32 history framings, 0 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+  },
+  "digestprose.mjs --lessons": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "exit": 0,
+   "expected": 0,
+   "result": "[digestprose] digest.txt: 1135 line(s), 25 section title(s) and 86 in-body marker(s) swept against their blocks, 32 history framings, 0 engine pin(s); 78 lesson file(s) swept; 78 lesson body/ies and 0 question(s) swept, 0 framed as curriculum; 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+  },
+  "digestprose.mjs --lessons --banks": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "exit": 0,
+   "expected": 0,
+   "result": "[digestprose] digest.txt: 1135 line(s), 25 section title(s) and 86 in-body marker(s) swept against their blocks, 32 history framings, 0 engine pin(s); 78 lesson file(s) swept; 78 lesson body/ies and 396 question(s) swept, 0 framed as curriculum; 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+  },
+  "check-bank-sources.py hygiene": {
+   "md5": "ab6de6165648fe4580fa8ab2246ab46b",
+   "exit": 0,
+   "expected": 0,
+   "result": "ok   hygiene: 21 bank(s) across 3 tier(s), 396 question(s) compared byte for byte | [course-banks] 21 committed pair(s) under /root/wt-h2-nextgen/tools/course-banks: 21 reproduce, 0 drifted, 0 could not run, 396 question(s) compared"
+  },
+  "bankleak.py all tiers": {
+   "md5": "7da6706b78092de1c00eba51aabac8ab",
+   "exit": 0,
+   "expected": 0,
+   "result": "[bankleak] banks READ FROM /root/wt-h2-nextgen/tools/course-banks/hygiene | [bankleak] .: 21 bank(s), 396 questions, 4173 literals compared against 18 graded field(s) in 7 unit shifting(s), at 10 tolerances | literals within 10 tolerances of a graded answer: 0"
+  },
+  "bankleak.py --selftest": {
+   "md5": "7da6706b78092de1c00eba51aabac8ab",
+   "exit": 0,
+   "expected": 0,
+   "result": "[bankleak] /tmp/tmp3_80fcbg: 1 bank(s), 1 questions, 3 literals compared against 1 graded field(s) in 5 unit shifting(s), at 10 tolerances | literals within 10 tolerances of a graded answer: 1 | [bankleak] selftest OK"
+  },
+  "leakage.mjs --banks beginner": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "exit": 0,
+   "expected": 0,
+   "result": "read /root/wt-h2-nextgen/tools/course-banks/hygiene/beginner/h2b_m06.json | hygiene banks: 7 file(s), 792 lines, 1125 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "leakage.mjs --banks intermediate": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "exit": 0,
+   "expected": 0,
+   "result": "read /root/wt-h2-nextgen/tools/course-banks/hygiene/intermediate/h2i_m06.json | hygiene banks: 7 file(s), 792 lines, 875 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "leakage.mjs --banks advanced": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "exit": 0,
+   "expected": 0,
+   "result": "read /root/wt-h2-nextgen/tools/course-banks/hygiene/advanced/h2a_m06.json | hygiene banks: 7 file(s), 792 lines, 1030 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "gate_capstone_leak.py --banks": {
+   "md5": "b1ee18529a6ca0d9be4735fd12c05524",
+   "exit": 0,
+   "expected": 0,
+   "result": "direction 9 briefs: 6 files (wave.json, BRIEF.md, LESSON_TASK.md, BANK_TASK.md, KEY_TRUTH_TASK.md, PANELS.md), 984 numeric literals, 18 graded values and the T6 margin. | CONTROLS FIRED: a planted graded value and a planted condition were both caught. | gate_capstone_leak: 0 finding(s)."
+  },
+  "dupaxes.py all three tiers": {
+   "md5": "de6a2216f5b921b10022ed60be07df1b",
+   "exit": 0,
+   "expected": 0,
+   "result": "[dupaxes] /tmp/tmp.tmEiZOZz1r threshold=0.45 banks={'h2a_exam': 42, 'h2a_m01': 15, 'h2a_m02': 15, 'h2a_m03': 15, 'h2a_m04': 15, 'h2a_m05': 15, 'h2a_m06': 15, 'h2b_exam': 42, 'h2b_m01': 15, 'h2b_m02': 15, 'h2b_m03': 15, 'h2b_m04': 15, 'h2b_m05': 15, 'h2b_m06': 15, 'h2i_exam': 42, 'h2i_m01': 15, 'h2i_m02': 15, 'h2i_m03': 15, 'h2i_m04': 15, 'h2i_m05': 15, 'h2i_m06': 15} | [dupaxes] field comparisons made: 291672  within=17892  exam-vs-module=136080  module-vs-module=137700 | [dupaxes] 0 pair(s) at or above 0.45  within=0  exam-vs-module=0  module-vs-module=0"
+  },
+  "lengthtails.py beginner": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "exit": 0,
+   "expected": 0,
+   "result": "h2b_m05         15    30.0  30.0  23.3     16.7 | h2b_m06         15    20.0  36.7  23.3     20.0 | [lengthtails] worst single strategy on any bank: 36.7 pct (chance 25.0, refuse above 40.0)"
+  },
+  "lengthtails.py intermediate": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "exit": 0,
+   "expected": 0,
+   "result": "h2i_m05         15    25.0  23.9  17.2     33.9 | h2i_m06         15    21.7  28.3  21.7     28.3 | [lengthtails] worst single strategy on any bank: 38.9 pct (chance 25.0, refuse above 40.0)"
+  },
+  "lengthtails.py advanced": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "exit": 0,
+   "expected": 0,
+   "result": "h2a_m05         15    26.7  16.7  36.7     20.0 | h2a_m06         15    26.7  22.2  28.9     22.2 | [lengthtails] worst single strategy on any bank: 36.7 pct (chance 25.0, refuse above 40.0)"
+  },
+  "litsweep.py beginner": {
+   "md5": "a236885baf5ed53d465f1b52b4ca1cf7",
+   "exit": 0,
+   "expected": 0,
+   "result": "REVIEW QUANTITY '106.602783' as dBA  h2b_exam Q15 option3  -> digest line 436 (SECTION 5 owned by beginner m02,m05), 1 row(s) match | row: | 999.000000 | 106.602783 | 106.600000 | 106.602423 | -0.002423 | | ... 46 more, pass --review-all to print them"
+  },
+  "litsweep.py intermediate": {
+   "md5": "a236885baf5ed53d465f1b52b4ca1cf7",
+   "exit": 0,
+   "expected": 0,
+   "result": "REVIEW SECTION  '94.000000' as dBA  h2i_m06 Q6 option3  -> digest line 185 (SECTION 4 owned by beginner m01,m05), 7 row(s) match | row: | 94.000000 | 4.594793 | 4.600000 | 0.050000 | -0.005207 | | ... 4 more, pass --review-all to print them"
+  },
+  "litsweep.py advanced": {
+   "md5": "a236885baf5ed53d465f1b52b4ca1cf7",
+   "exit": 0,
+   "expected": 0,
+   "result": "REVIEW SECTION  '150' as -  h2a_m03 Q5 option3  -> digest line 346 (SECTION 5 owned by beginner m02,m05), 7 row(s) match | row: | 150.000000 | 92.924876 | 92.900000 | 92.924813 | -0.024813 | | ... 32 more, pass --review-all to print them"
+  },
+  "gate_bank_copy.py": {
+   "md5": "e9df9523cf390d0c3eb8bea02fdeb05b",
+   "exit": 0,
+   "expected": 0,
+   "result": "gate_bank_copy: 21 bank file(s), 2376 string(s) swept, 0 violation(s)"
+  },
+  "gate_bank_copy.py --plant (negative control, must exit 1)": {
+   "md5": "e9df9523cf390d0c3eb8bea02fdeb05b",
+   "exit": 1,
+   "expected": 1,
+   "result": "VIOLATION PLANTED.json Q1 explanation (contrastive): It is a noise dose, not a level. | gate_bank_copy: 21 bank file(s), 2382 string(s) swept, 2 violation(s) | CONTROL FIRED: the planted dash and the planted contrastive were both caught."
+  },
+  "numsweep.mjs lessons": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "exit": 0,
+   "expected": 0,
+   "result": "hygiene: sweeping 78 lesson file(s) from /root/wt-h2-nextgen/src/content/courses/hygiene against 2153 derived values from 2 source(s) | => literals with 7+ significant figures checked: 593   unresolved: 0   (1142 round literal(s) skipped for trailing zeros, not checked)"
+  },
+  "numsweep.mjs --banks beginner": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "exit": 0,
+   "expected": 0,
+   "result": "hygiene: sweeping 7 bank file(s) from /root/wt-h2-nextgen/tools/course-banks/hygiene/beginner against 2153 derived values from 2 source(s) | => literals with 7+ significant figures checked: 318   unresolved: 0   (281 round literal(s) skipped for trailing zeros, not checked)"
+  },
+  "numsweep.mjs --banks intermediate": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "exit": 0,
+   "expected": 0,
+   "result": "hygiene: sweeping 7 bank file(s) from /root/wt-h2-nextgen/tools/course-banks/hygiene/intermediate against 2153 derived values from 2 source(s) | => literals with 7+ significant figures checked: 137   unresolved: 0   (398 round literal(s) skipped for trailing zeros, not checked)"
+  },
+  "numsweep.mjs --banks advanced": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "exit": 0,
+   "expected": 0,
+   "result": "hygiene: sweeping 7 bank file(s) from /root/wt-h2-nextgen/tools/course-banks/hygiene/advanced against 2153 derived values from 2 source(s) | => literals with 7+ significant figures checked: 142   unresolved: 0   (262 round literal(s) skipped for trailing zeros, not checked)"
+  },
+  "numsweep.mjs --selftest": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "exit": 0,
+   "expected": 0,
+   "result": "PASS  a --banks run with no bank files is REFUSED | PASS  a --banks run where nothing is a question array is REFUSED | negative control: ALL PASS"
+  },
+  "bankrepro.py all three tiers": {
+   "md5": "8f7a1541304ef66d890d774c78b345b7",
+   "exit": 0,
+   "expected": 0,
+   "result": "[bankrepro] /root/wt-h2-nextgen/tools/course-banks/hygiene/beginner: 7 source(s), 7 reproduced, 0 drifted, 0 could not run, 0 with no JSON | [bankrepro] /root/wt-h2-nextgen/tools/course-banks/hygiene/intermediate: 7 source(s), 7 reproduced, 0 drifted, 0 could not run, 0 with no JSON | [bankrepro] /root/wt-h2-nextgen/tools/course-banks/hygiene/advanced: 7 source(s), 7 reproduced, 0 drifted, 0 could not run, 0 with no JSON"
+  },
+  "bankrepro.py --selftest": {
+   "md5": "8f7a1541304ef66d890d774c78b345b7",
+   "exit": 0,
+   "expected": 0,
+   "result": "[bankrepro] selftest OK: a freshly emitted bank is clean, a JSON edited without its source is caught with the exact question named, re-emitting returns it to clean, a source that refuses to write fails rather than passing, and an empty directory refuses"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "exit": 0,
+   "expected": 0,
+   "result": "digest.txt: 1135 lines, 25 sections; checks applied: section sequence, forward promises, module coverage | => 0 completeness problem(s), all checks applied"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "exit": 0,
+   "expected": 0,
+   "result": "[digestfigures] K13 identical inputs: 40 table(s), 674 row(s), 20681 row pair(s) compared, 2 table(s) judged by the inputs the digest itself declares and 38 with no declared inputs to judge by, 0 FAILED, 0 for a human read | [digestfigures] heading against table: 0 straddle claim(s), 0 FAILED, 0 for a human read | [digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "exit": 0,
+   "expected": 0,
+   "result": "digest.txt: 3279 numeric literals on 1104 generated line(s) (31 commentary), against 18 graded fields, 3 unit shiftings | => 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "exit": 0,
+   "expected": 0,
+   "result": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "exit": 0,
+   "expected": 0,
+   "result": "[gradeprecision] 7 declared precision class(es) from ./precision.json, which override the header | [gradeprecision] .: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 7 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "exit": 0,
+   "expected": 0,
+   "result": "BRIEF.md against 18 graded fields, three unit shiftings | 0 graded answer(s) reachable from this brief"
+  },
+  "check-vendored-engines.mjs": {
+   "md5": "c1d8057c44e495f3662ca7640c368f4d",
+   "exit": 0,
+   "expected": 0,
+   "result": "vendored engines clean against canonical df31f53: 747 path(s) compared byte for byte, 874 canonical, 750 vendored, 238 recorded deviation(s) (0-out-of-scope-domain 54, 1-test-layer-gap 73, 2-copy-pass-held 2, 3-production-revendor 20, 4-economics-revendor 11, 5-unaudited-difference 11, 6-test-layer-drift 63, 7-vendor-readme 1, local-only 3)."
+  },
+  "check-wave-inputs.mjs": {
+   "md5": "0b4a33ac14407010ed582ce5abaa0c64",
+   "exit": 0,
+   "expected": 0,
+   "result": "ok   digest.txt: 28 section heading(s), 28 spelled by 18 committed generator(s), 28 of them as a generator-written TITLE with an owner clause the generator BUILDS from the curriculum rather than types | ok   fields.json: 18 graded field name(s), 18 spelled by a committed generator | [course-waves] every committed wave input is present, pinned and spelled by a committed generator."
+  }
+ }
+}
