@@ -434,7 +434,7 @@ describe('what the teaching fields show', () => {
   });
 
   it('the as-of reader refuses a date the digest does not print', () => {
-    expect(() => L.ofonAsOf('2027-08-16')).toThrow(/digest's as-of dates only/);
+    expect(() => L.ofonAsOf('2027-08-16')).toThrow(/course's as-of dates only/);
     expect(L.ofonAsOf('2027-02-01').spi).toBeNull();
   });
 

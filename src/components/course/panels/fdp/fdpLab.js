@@ -1017,7 +1017,7 @@ export const OLD_RATIO_EXAMPLE = 0.5;
 
 /** One as-of reading of ODUDU-2. Only the digest's own dates are allowed. */
 export const oduduAsOf = (asOf) => {
-  if (!ODUDU_AS_OF.includes(asOf)) throw new Error(`oduduAsOf: the digest's as-of dates only, not ${asOf}`);
+  if (!ODUDU_AS_OF.includes(asOf)) throw new Error(`oduduAsOf: the course's as-of dates only (${ODUDU_AS_OF.join(', ')}), not ${asOf}`);
   const e = PC.calculateEVM(clone(ODUDU_TASKS), { asOf });
   return { asOf, pv: e.pv, ev: e.ev, ac: e.ac, spi: e.spi, cpi: e.cpi, completionRatio: e.completionRatio, bac: e.bac, spiBasis: e.spiBasis };
 };
