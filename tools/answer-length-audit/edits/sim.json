@@ -1,0 +1,362 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "The bracket was too narrow, and the true answer lies outside it in the direction the search ran.",
+  "new": "The bracket was too narrow; the answer lies beyond that edge."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "That it equals the sum of the 36 monthly volumes divided by the mean month length, in stock tank barrels.",
+  "new": "That it equals the sum of the 36 monthly volumes divided by the mean month length, reported in stock tank barrels at surface."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Each can be read directly from the build explorer panel, so the capstone tests navigation rather than arithmetic.",
+  "new": "Each can be read directly from the build explorer panel without computing anything, so the capstone tests navigation rather than arithmetic."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "Grep it for scripting and inclusion keywords, validate it, read the warnings, run the four comparisons, and recalibrate.",
+  "new": "Grep it for scripting and inclusion keywords, validate it against the parser, read every warning it raises, run the four comparisons, and recalibrate the regional mean."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "Read the RUNSPEC, check the grid against the map, check the fluid against the laboratory report, run it, read the results.",
+  "new": "Read the RUNSPEC for dimensions and units, check the grid against the structure map, check the fluid against the laboratory report, run it, and read the results it writes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-trajectories",
+  "ord": 15,
+  "option": 2,
+  "old": "Confirm the connection count is at least as large as the number of layers the interval spans at the well's position.",
+  "new": "Confirm the connection count is at least as large as the number of layers the interval spans at the well's position, one completion per layer crossed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-history-schedule",
+  "ord": 14,
+  "option": 3,
+  "old": "Nothing changes but the keywords used, since WCONPROD with targets equal to the last observed rates is continuous.",
+  "new": "Nothing changes but the keywords used, since WCONPROD with targets equal to the last observed rates makes the prediction a continuous extension."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-calibration",
+  "ord": 15,
+  "option": 3,
+  "old": "Independent, and it would need the booking to have been produced by a second engineer working without access to the deck.",
+  "new": "Independent, and it would need the booking to have been produced by a second engineer working from the raw logs without any access to the deck."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-validation",
+  "ord": 14,
+  "option": 2,
+  "old": "Grid modification and region assignment, since both can alter cell properties after the grid has been read.",
+  "new": "Grid modification and region assignment, since both can alter cell properties and fluid assignments after the grid has been read."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reading-results",
+  "ord": 14,
+  "option": 0,
+  "old": "Oil and water carry it, because both are metered at surface; gas is missing, because the ledger's gas is an allocation.",
+  "new": "Oil and water carry it, because both are metered at the surface separator; gas is missing, because the ledger's gas figure is only an allocation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 0,
+  "old": "All six sit exactly on cell centres, and the residuals of about 2.3e-13 m are the only departure from an exact recovery.",
+  "new": "All six sit exactly on cell centres, so the kriged surface honours every mapped top, and the residuals of about 2.3e-13 m are the only departure from an exact recovery."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 1,
+  "old": "It is the shortest complete description of a reservoir model, so reading one is faster than reading the study document.",
+  "new": "It is the shortest complete description of a reservoir model, so reading one is faster than reading the study document written around it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "The length of wellbore in the cell alone, which is why a longer connection always delivers proportionally more.",
+  "new": "The length of wellbore in the cell alone, which is why a longer connection always delivers proportionally more regardless of the rock it crosses."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "The target, since it is what the well produces for as long as the reservoir has oil to give.",
+  "new": "The target, since a rate-controlled well delivers it for as long as the reservoir has oil to give and the floor only ever acts at abandonment."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "The mode, since ORAT fixes which phase the limits apply to and the others are then unconstrained.",
+  "new": "The mode, since ORAT fixes which phase the limits apply to, and the water and gas rates are then left entirely unconstrained by the block."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "DATES, because TSTEP may not appear before the history has completed and a simulator refuses a deck that uses it early.",
+  "new": "DATES, because TSTEP may not appear before the history has completed, and a simulator rejects any deck that uses it early with a keyword ordering error."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "They coincide, which is why refining the report interval reduces the time-discretisation error of the solution.",
+  "new": "They coincide one for one, so refining the report interval is how a modeller reduces the time-discretisation error of the solution."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "It must fall within one layer thickness of the mean column top, which is what a gently dipping structure implies.",
+  "new": "It must fall within one layer thickness of the mean column top, which is the relief a gently dipping structure with a modest closure implies."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "It preserves the individual values of the middle layer and breaks the outer four, since the column is symmetric.",
+  "new": "It preserves the individual value of the middle layer and breaks the outer four, since the column is symmetric about its central layer."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "The deck's structure was calibrated against the booking, so its far-field shape carries no independent information.",
+  "new": "The deck's structure was calibrated against the booking, so its far-field shape away from the wells carries no independent information."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Reading the deck strictly in the order a simulator reads it, rather than jumping to the block a question concerns.",
+  "new": "Reading the deck strictly in the order a simulator parses it, section by section, rather than jumping to the block a question concerns."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-deck-is",
+  "ord": 10,
+  "option": 3,
+  "old": "Because a defaulted field raises an error in strict mode, so decks that use them cannot be validated.",
+  "new": "Because a defaulted field raises an error when the deck is checked in strict mode, so any deck that uses one cannot pass validation and cannot be run."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-deck-is",
+  "ord": 14,
+  "option": 1,
+  "old": "Generated decks are correct by construction, so reading is only worthwhile for hand-written ones.",
+  "new": "Generated decks are correct by construction, since the software enforces the format, so reading is only worthwhile for hand-written ones."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-deck-is",
+  "ord": 15,
+  "option": 2,
+  "old": "Associate covers the grid, Professional the fluids, Expert the schedule.",
+  "new": "Associate covers the grid and its properties, Professional the fluids and rock tables, Expert the wells and the schedule that drives them."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-deck-is",
+  "ord": 15,
+  "option": 3,
+  "old": "Associate learns the format, Professional learns the simulator, Expert learns the solver.",
+  "new": "Associate learns the keyword format, Professional learns how a particular simulator interprets it, Expert learns the numerical solver underneath."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-grid",
+  "ord": 11,
+  "option": 2,
+  "old": "The number of slashes, since each record needs one and the block needs a closing one.",
+  "new": "The number of slashes, since each record needs one terminator and the block itself needs a closing one before the next keyword."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-grid",
+  "ord": 13,
+  "option": 2,
+  "old": "It delays it, because a coarse cell must fill completely before water passes to the next one.",
+  "new": "It delays it, because a coarse cell must fill completely with water before any passes on to the next one."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-tables",
+  "ord": 14,
+  "option": 3,
+  "old": "Bubble point conditions, since that is where the three phases coexist and a single density set is unambiguous.",
+  "new": "Bubble point conditions, since that is where the three phases coexist in equilibrium and a single density set is then unambiguous."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-tables",
+  "ord": 15,
+  "option": 1,
+  "old": "It appears as 400 either way, because solution gas is dimensionless and unaffected by the gas volume unit.",
+  "new": "It appears as 400 either way, because solution gas is a dimensionless ratio and is unaffected by the choice of gas volume unit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-wells-and-schedule",
+  "ord": 15,
+  "option": 1,
+  "old": "A well's reference depth moves when its completion changes, so a re-completion shifts its reported pressure history.",
+  "new": "A well's reference depth moves with its completion, so a re-completion to a different layer shifts its whole reported pressure history onto a new datum."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "It has an unusually detailed grid description, since the schedule includes the completions for every well in the model.",
+  "new": "It has an unusually detailed grid description, since the schedule carries the completions for every well and each one repeats the cell indices it connects."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "The gas-oil table has no measurement behind it, so nothing in the course is graded on its three parameters.",
+  "new": "The gas-oil table has no measurement behind it, so nothing in the course is graded on its three fitted Corey parameters."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "The naming rule and the completion strategy, since it adds a new well to the model that already exists.",
+  "new": "The naming rule and the completion strategy, since the Expert tier adds a new well to the model that already exists."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "One line each for the grid, the fluids, the wells and the schedule, matching the sections that carry data.",
+  "new": "One line each for the grid, the fluids, the wells and the schedule, matching the four sections of the deck that carry explicit data."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "One line each for the author, the date, the simulator version and the study the deck belongs to.",
+  "new": "One line each for the author, the date, the simulator version and the study the deck belongs to, as a header block at the top of the file."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-rock-curves-from-the-lab",
+  "ord": 14,
+  "option": 2,
+  "old": "How many rows, what spacing, what range, what interpolation and whether the range covers the run's expected saturations.",
+  "new": "How many rows, what saturation spacing, what endpoint range, what interpolation between rows, and whether the range covers the saturations the run is expected to reach."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-wells-on-a-real-field",
+  "ord": 13,
+  "option": 2,
+  "old": "The water salinity and the injection temperature, which decide whether scale or fines migration will damage the injectors.",
+  "new": "The water salinity and the injection temperature, which decide whether scale deposition or fines migration will progressively damage the injectors' near-wellbore rock."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-wells-on-a-real-field",
+  "ord": 15,
+  "option": 2,
+  "old": "Every table the PROPS section will need, with the source and date of each recorded before any of them is written.",
+  "new": "Every table the PROPS section will need, with the source and date of each recorded before any of them is written, so that a later reader can trace every curve."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-wells-on-a-real-field",
+  "ord": 15,
+  "option": 3,
+  "old": "Every cell property the grid will carry, with the averaging rule for each stated before the property model is upscaled.",
+  "new": "Every cell property the grid will carry, with the averaging rule for each stated before the property model is upscaled from the geological grid to the flow grid."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 0,
+  "old": "The tier stops reading the deck and starts reading the results, which is where a study's conclusions actually live.",
+  "new": "The tier stops reading the deck and starts reading the results, which is where a study's conclusions and its forecasts actually live."
+ }
+]
