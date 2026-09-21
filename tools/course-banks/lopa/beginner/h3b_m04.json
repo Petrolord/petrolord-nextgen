@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Where does the TMEL on a LOPA row come from?",
+  "options": [
+   "It is derived by the engine from the consequence described on the row.",
+   "It is an input: the frequency the organisation will tolerate for this consequence, and the engine does not choose it.",
+   "It is the mitigated frequency the row already reaches with its credited layers.",
+   "It is fixed by the low demand band table."
+  ],
+  "answer": 1,
+  "explanation": "The digest says the TMEL is the frequency the organisation will tolerate for this consequence, that it is an input and that the engine does not choose it. No description on the row produces it, the mitigated frequency is the quantity it is compared against, and the band table bands a result and sets no tolerance."
+ },
+ {
+  "prompt": "ORONI's tolerable frequency is stated as 1e-6 per year. How does the engine print it, and which key holds it?",
+  "options": [
+   "0.000001000000 under `requiredSifPfdAvg`, which is the key the row's tolerance is carried in once the outcome state has been decided for it.",
+   "0.000013500000 under `tmelPerYr`, since the tolerance is set to the frequency the credited layers already leave the row running at.",
+   "0.000001000000 under `mitigatedFrequencyWithoutSifPerYr`.",
+   "0.000001000000 under `tmelPerYr`."
+  ],
+  "answer": 3,
+  "explanation": "The digest's table of engine keys gives `tmelPerYr` as 0.000001000000. `requiredSifPfdAvg` holds 0.074074074074 on this row, and `mitigatedFrequencyWithoutSifPerYr` holds 0.000013500000 per year, which is the frequency the tolerance is compared with and never the tolerance itself."
+ },
+ {
+  "prompt": "How is the required RRF formed, and what does it come to on this row?",
+  "options": [
+   "The mitigated frequency without a SIF divided by the TMEL, giving 13.500000.",
+   "The TMEL divided by the mitigated frequency without a SIF, giving 13.500000.",
+   "The unmitigated frequency divided by the mitigated frequency without a SIF, giving 13.500000 once the credited layers have been applied to the row.",
+   "One divided by the required PFDavg, giving 0.074074074074."
+  ],
+  "answer": 0,
+  "explanation": "The engine's key table names `requiredRrf` as the first over the second: the mitigated frequency without a SIF over the TMEL, 0.000013500000 per year over 0.000001000000 per year, which is 13.500000. Taking the division the other way up would give the required PFDavg instead, and the unmitigated over the mitigated frequency is one over the credited product, which involves no tolerance at all."
+ },
+ {
+  "prompt": "What is the required SIF PFDavg on the ORONI row at its own tolerable frequency, and how is it obtained?",
+  "options": [
+   "0.074074074074, which is the required RRF of 13.500000 multiplied by the tolerable frequency the organisation has recorded against this consequence.",
+   "0.007407407407, which is one over the required RRF, and it is the figure a proposed function on this row has to come in below to close it.",
+   "0.074074074074, which is one over the required RRF of 13.500000.",
+   "13.500000, since the band and the target are the same number read two ways."
+  ],
+  "answer": 2,
+  "explanation": "The digest gives `requiredSifPfdAvg` as 0.074074074074, one over the RRF. 0.007407407407 is what the same row requires at a tolerable frequency of 1e-7 per year and belongs to a different line of the ladder. A required RRF and a required PFDavg are reciprocals of one another and never the same number."
+ },
+ {
+  "prompt": "Which outcome and required SIL does the engine report for ORONI at 1e-6 per year?",
+  "options": [
+   "The outcome SIL2, with a required SIL of 2, because the required PFDavg for the row falls inside the band running from 1e-3 up to 1e-2.",
+   "The outcome SIL1, with a required SIL of 1.",
+   "The outcome RISK_REDUCTION_BELOW_SIL1, with no required SIL, because the demand of 13.500000 is too small for the lowest banded function.",
+   "The outcome NO_SIF_REQUIRED, with no required SIL."
+  ],
+  "answer": 1,
+  "explanation": "The key table gives the outcome as SIL1 and `requiredSil` as 1 at this tolerance. A demand of 13.500000 sits above 10 and so above the floor of the SIL1 band, which rules out RISK_REDUCTION_BELOW_SIL1, and it is far below the SIL2 band. NO_SIF_REQUIRED needs a demand at or below one."
+ },
+ {
+  "prompt": "The engine's basis says why the band alone is not the specification. What are its words?",
+  "options": [
+   "The SIL band is the specification and the required PFDavg is reported beside it for information, so a function inside the band closes the row.",
+   "The required PFDavg is rounded to the nearest band edge before it is written into the safety requirements, which is what makes the band binding.",
+   "The band and the required PFDavg agree whenever the demand sits inside a decade.",
+   "The SIF must achieve requiredSifPfdAvg itself; the SIL band alone does not guarantee it."
+  ],
+  "answer": 3,
+  "explanation": "That is the engine's own basis line, quoted verbatim. A SIL is a band ten times wide and the required PFDavg is one number inside it, so a function anywhere in the band above that number misses the tolerance. Nothing is rounded to a band edge, and the two readings do not agree by sitting inside a decade."
+ },
+ {
+  "prompt": "Slacken this row's tolerance to 1e-4 per year and change nothing else. Which three figures come back?",
+  "options": [
+   "A required RRF of 0.135000 with RISK_REDUCTION_BELOW_SIL1 and 0.740740740741.",
+   "A required RRF of 1.350000, the outcome NO_SIF_REQUIRED and a required PFDavg of null, since the demand has fallen to a figure at or below one.",
+   "A required RRF of 0.135000, the outcome NO_SIF_REQUIRED and a required PFDavg of null.",
+   "A required RRF of 13.500000 with SIL1."
+  ],
+  "answer": 2,
+  "explanation": "The ladder of tolerances gives 1e-4 per year a required RRF of 0.135000, the outcome NO_SIF_REQUIRED and a required PFDavg of null. A demand at or below one needs no function, so no target is returned. The figures 1.350000 with 0.740740740741, and 13.500000 with 0.074074074074, belong to the two lines below it on that ladder."
+ },
+ {
+  "prompt": "At a tolerable frequency of 1e-5 per year this row demands 1.350000. Which outcome is that, and what required PFDavg comes with it?",
+  "options": [
+   "RISK_REDUCTION_BELOW_SIL1, with a required PFDavg of 0.740740740741.",
+   "SIL1, with a required PFDavg of 0.740740740741, because any demand above one puts the row into the lowest of the bands the engine knows about.",
+   "NO_SIF_REQUIRED, with a required PFDavg of null, because a demand as small as this one is met by the layers the row has already credited.",
+   "RISK_REDUCTION_BELOW_SIL1, with a required PFDavg of null."
+  ],
+  "answer": 0,
+  "explanation": "The ladder gives 1e-5 per year the outcome RISK_REDUCTION_BELOW_SIL1 and a required PFDavg of 0.740740740741. That state means some reduction is needed and less than a SIL 1 function supplies by definition, and the engine returns the required PFDavg for it, so null is wrong. A demand above one is not NO_SIF_REQUIRED."
+ },
+ {
+  "prompt": "Tightening ORONI's tolerance to 1e-7 per year gives which required RRF, outcome and required PFDavg?",
+  "options": [
+   "135.000000, SIL1 and 0.007407407407, because a demand of that size still sits inside the lowest band on the low demand table for this row.",
+   "135.000000, SIL2 and 0.007407407407.",
+   "1350.000000, SIL3 and 0.000740740741, which is the line this row reaches when its tolerance is tightened by one step of ten from 1e-6.",
+   "13.500000, SIL2 and 0.074074074074."
+  ],
+  "answer": 1,
+  "explanation": "The ladder gives 1e-7 per year a required RRF of 135.000000, the outcome SIL2 and a required PFDavg of 0.007407407407. A demand of 135.000000 is above 100 and so above the SIL1 band. The line reading 1350.000000 with SIL3 and 0.000740740741 is the next step down, at 1e-8 per year."
+ },
+ {
+  "prompt": "At 1e-9 per year the row reports 13500.000000. What outcome and required PFDavg does the engine give?",
+  "options": [
+   "SIL3, with a required PFDavg of 0.000074074074, because a demand of that size sits at the very top of the band the table gives to SIL 3.",
+   "BEYOND_SIL3_REDESIGN, with a required PFDavg of null, because no band exists for a demand this large and so no target is returned for it.",
+   "BEYOND_SIL3_REDESIGN, with a required PFDavg of 0.000074074074.",
+   "BEYOND_SIL3_REDESIGN, with a required PFDavg of 0.000007407407."
+  ],
+  "answer": 2,
+  "explanation": "The ladder gives 1e-9 per year the outcome BEYOND_SIL3_REDESIGN and a required PFDavg of 0.000074074074. The state carries its required PFDavg intact and never returns null. 0.000007407407 belongs to the last line of the ladder, at 1e-10 per year."
+ },
+ {
+  "prompt": "What does the ladder of tolerances show about the relation between a step in the TMEL and a step in the demand?",
+  "options": [
+   "Each step of ten in the TMEL moves the mitigated frequency by the same step.",
+   "A step of ten in the TMEL moves the required RRF by exactly one band.",
+   "A step of ten in the TMEL leaves the required RRF where it was.",
+   "Each step of ten in the TMEL is a step of ten in the required RRF, because the frequency does not move and only the tolerance does."
+  ],
+  "answer": 3,
+  "explanation": "The digest closes the ladder with exactly that sentence: each step of ten in the TMEL is a step of ten in the required RRF, the frequency does not move and only the tolerance does. The mitigated frequency is a property of the plant and its layers, so a change of tolerance leaves it alone."
+ },
+ {
+  "prompt": "A function with a PFDavg of 0.009 is proposed for the ORONI row at a tolerable frequency of 1e-7 per year. What does the engine report?",
+  "options": [
+   "The function sits in the SIL 2 band the row requires and still misses the tolerance.",
+   "The function meets the tolerance, because it sits inside the required band.",
+   "The engine refuses the call and names `sifPfdAvg`, because a proposed figure above the required target cannot be carried through the rest of the row.",
+   "The function misses, because it falls in the band below the one required."
+  ],
+  "answer": 0,
+  "explanation": "This is the point of the proposal table: a SIF of 0.009 sits in the SIL 2 band the row requires and still misses, because 0.009 is above the required 0.007407407407. The band is a label and the required PFDavg is the target. Nothing is refused, and the proposal sits inside the required band."
+ },
+ {
+  "prompt": "Which mitigated frequency with the SIF does the engine report for the proposal at 0.009, and does it meet the tolerance?",
+  "options": [
+   "0.000000121500 per year, and it meets the tolerance, because the frequency the function leaves is smaller than the one the row started out with.",
+   "0.000000270000 per year, and it does not meet the tolerance, which is the figure the proposal table prints against this particular proposed function.",
+   "0.000000121500 per year, and it does not meet it.",
+   "0.000000067500 per year, and it meets it."
+  ],
+  "answer": 2,
+  "explanation": "The proposal table gives 0.000000121500 per year for the SIF at 0.009, with `meetsTmel` false against a tolerance of 1e-7 per year. 0.000000270000 per year belongs to the proposal at 0.02 and 0.000000067500 per year to the proposal at 0.005, which is the first of the four that meets the tolerance."
+ },
+ {
+  "prompt": "Two of the four proposed functions meet the tolerance at 1e-7 per year. Which are they, and what frequencies do they leave?",
+  "options": [
+   "0.02 leaving 0.000000270000 per year, and 0.009 leaving 0.000000121500 per year.",
+   "0.005 leaving 0.000000067500 per year, and 0.0005 leaving 0.000000006750 per year.",
+   "0.009 leaving 0.000000121500 per year, and 0.005 leaving 0.000000067500 per year, the two proposals that sit inside the SIL 2 band on this table.",
+   "0.005 leaving 0.000000067500 per year alone."
+  ],
+  "answer": 1,
+  "explanation": "The proposal table marks the SIF at 0.005 and the SIF at 0.0005 as meeting the tolerance, at 0.000000067500 and 0.000000006750 per year. The proposal at 0.02 is banded 1 and misses at 0.000000270000 per year, and the proposal at 0.009 is banded 2 and still misses at 0.000000121500 per year."
+ },
+ {
+  "prompt": "With the `sifPfdAvg` field left empty, what value comes back under `meetsTmel` for this row against its own tolerance, and why?",
+  "options": [
+   "True, because the credited layers have already been applied to the row.",
+   "The key is left out of the result until a proposed function is typed in.",
+   "False, and the engine also names the field `sifPfdAvg` as missing.",
+   "False, because the outcome is not NO_SIF_REQUIRED and the loop is closed only by typing a SIF's PFDavg."
+  ],
+  "answer": 3,
+  "explanation": "The digest says that without a proposed SIF the engine reports `meetsTmel` as false for ORONI at its own tolerable frequency, because the outcome is not NO_SIF_REQUIRED, and that the loop is closed only by typing a SIF's PFDavg. The key is present and false, and a missing proposal is no refusal."
+ }
+]

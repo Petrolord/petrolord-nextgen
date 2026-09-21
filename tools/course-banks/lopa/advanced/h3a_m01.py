@@ -1,0 +1,132 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H3 lopa, Expert tier, module 01 "The Proof Test Interval".
+# Digest sections drawn on: 25 (PFDavg against the proof test interval),
+# 26 (the longest proof test interval and its states), 32 (vocabulary), and
+# the proofTestSensitivity and maxProofTestInterval refusals of section 3.
+
+q(2,
+ "What does `proofTestSensitivity` hold still, and what does it move, when it builds a table of PFDavg against the proof test interval?",
+ "It holds every other input still and moves only T1, so what comes back is the PFDavg the same subsystem achieves at each interval in the list with nothing else changed between the rows.",
+ ["It moves T1 and re-fits the beta factor at each interval so the common cause share stays constant.",
+  "It moves T1 and lengthens the MTTR alongside it, since a site that tests less often also repairs more slowly.",
+  "It searches for the one interval that just meets a stated target PFDavg and reports it with a state."],
+ "The engine takes one subsystem and a list of intervals in hours, holds every other input and returns the PFDavg at each one, which is what makes the columns comparable. The beta factor and the MTTR are typed inputs and the sweep never edits them. Searching against a target is the work of `maxProofTestInterval`, which returns an interval and a state."),
+
+q(3,
+ "The EKULAMA channel as a 1oo1 with undetected failures only reads 0.005256000000 at 8760 hours. What does the same channel read at 17520 hours?",
+ "0.010512000000",
+ ["0.021024000000, which is the figure the sensitivity sweep prints against 35040 hours",
+  "0.002628000000, which is the figure the sensitivity sweep prints against 4380 hours",
+  "0.005256000000, because a channel carrying no detected failures is unmoved by T1"],
+ "The sweep prints 0.010512000000 at 17520 hours. 0.021024000000 belongs to 35040 hours and 0.002628000000 to 4380 hours, so both are read off the wrong row. Repeating 0.005256000000 denies the sweep, since this channel is linear in T1 and its printed ratio is 2.000000 at every doubling."),
+
+q(3,
+ "In the same sweep the IDU valves as a 1oo2 read 0.000611621000 at 4380 hours. What do they read at 8760 hours?",
+ "0.001287026426",
+ ["0.000300179812, which is the figure printed for the valves against 2190 hours",
+  "0.002847929478, which is the figure printed for the valves against 17520 hours",
+  "0.006810104389, which is the figure printed for the valves against 35040 hours"],
+ "The engine returns 0.001287026426 for the IDU valves on a one year test. 0.000300179812, 0.002847929478 and 0.006810104389 are the 2190, 17520 and 35040 hour rows of the same column, each the right arithmetic at the wrong interval."),
+
+q(1,
+ "Down the whole ratio column for the EKULAMA 1oo1 with undetected failures only, every doubling prints the same figure. Which figure, and why?",
+ "2.000000, because a 1oo1 with no detected failures is linear in T1, so each doubling of the interval doubles the PFDavg.",
+ ["2.049485, because the MRT enters the down time once and makes the growth of this column slightly faster than linear at every step of the sweep.",
+  "4.000000, because the failure rate and the interval both enter the form, so their product grows with the square.",
+  "2.104288, because the common cause term grows linearly and the independent term with the square."],
+ "The printed column reads 2.000000 at every doubling. 2.049485 and 2.104288 are the first doublings of the EKULAMA full 1oo2 and of the IDU valves, which are redundant and carry two kinds of term. 4.000000 is the limit the redundant columns climb toward without reaching it in this sweep."),
+
+q(1,
+ "Why do the three redundant columns of the ratio table start just above two and climb as the interval grows?",
+ "The common cause term is linear in T1 and dominates at one year, and as T1 grows the independent term, which grows with the square of T1, takes a larger share.",
+ ["The bisection that produced the table converges more slowly at long intervals, so the later rows carry a numerical error that accumulates steadily down the column.",
+  "The beta factor is applied afresh at each interval, and a longer interval leaves a larger fraction common.",
+  "The MTTR is charged once per interval, so a longer interval charges it fewer times."],
+ "The digest gives the mechanism: these subsystems are common cause dominated at one year, the common cause term is linear in T1, and the independent term grows with the square of T1 and takes a larger share as T1 grows, so the ratio climbs toward four without reaching it here. The sweep is not produced by bisection, the beta factor is a held input, and the MTTR is not recharged per interval."),
+
+q(3,
+ "The IDU valves are SIL 3 at 2190 hours and SIL 2 at 8760 hours. Which band does the engine report for them at 70080 hours?",
+ "SIL 1",
+ ["SIL 2, which is the band the valves also hold at 17520 and at 35040 hours",
+  "SIL 3, because a redundant final element keeps its band right across the sweep",
+  "No band at all, because the achieved figure has left the low demand table"],
+ "The digest lists the band for every row of the valve column, and 70080 hours is SIL 1. The valves hold SIL 2 at 8760, 17520 and 35040 hours, so stopping at SIL 2 stops one row short, and SIL 3 holds only at 2190 and 4380 hours. A figure of 0.018095929431 sits inside the table, so no band at all is wrong too."),
+
+q(0,
+ "This course legislates how a credited protection layer's figure and a subsystem's averaged figure are each written. Which pair is correct?",
+ "IPL PFD for a credited protection layer, and PFDavg for a subsystem or for a whole safety instrumented function, which is an average over the proof test interval.",
+ ["PFDavg for both, since one average serves a credited layer and a function alike.",
+  "The risk reduction factor for a credited layer and PFDavg for a function.",
+  "IPL PFDavg for a credited layer and PFDavg for a subsystem, differing only in the prefix."],
+ "The vocabulary this course legislates writes a credited layer's figure as an IPL PFD and a subsystem's or a function's figure as PFDavg. A credited layer's figure is a single probability and is never an average over an interval, so neither PFDavg nor IPL PFDavg fits it. The risk reduction factor is one over PFDavg and is a different quantity again."),
+
+q(2,
+ "How does `maxProofTestInterval` find the longest interval that meets a target, and what makes its answer unique?",
+ "Bisection on T1 of the Annex B PFDavg, which is non-decreasing in T1, so there is exactly one crossing.",
+ ["It inverts the Annex B form for the architecture in hand, which gives a closed expression for T1 and therefore exactly one root by construction, whatever the inputs.",
+  "It steps T1 upward from the shortest interval in one hour increments and stops at the first interval whose PFDavg has passed the target.",
+  "It runs the six interval sweep and reports the last of the six still under the target."],
+ "The engine's method, in its own words, is bisection on T1 of the Annex B PFDavg, which is non-decreasing in T1, and it converges to one part in a trillion. Bisection needs only that the function can be evaluated, so no form is inverted for any architecture. A one hour step and a six row sweep would both return a coarse interval, while the engine returns 12957.474301 hours against a target of 0.002."),
+
+q(1,
+ "Against a target PFDavg of 0.002, for how many hours may the IDU valves go between proof tests?",
+ "12957.474301 hours",
+ ["6953.661742 hours, which is the answer the engine gives against a tighter target of 0.001",
+  "27640.443736 hours, which is the answer against a looser target of 0.005",
+  "3609.141022 hours"],
+ "The valve row against a target of 0.002 gives 12957.474301 hours, 1.479164 years, with the state FOUND. 6953.661742 hours belongs to a target of 0.001, 27640.443736 hours to 0.005 and 3609.141022 hours to 0.0005, so each wrong figure is the right search against the wrong target."),
+
+q(0,
+ "Every FOUND row of the longest interval table carries a final column giving the PFDavg achieved at the interval returned. What does that column show, and what is it for?",
+ "It shows the target itself, which is how a reader sees by measurement that the search stopped exactly at the crossing.",
+ ["It shows the PFDavg at half the returned interval, the last value the bisection tried.",
+  "It shows the floor this subsystem cannot reach below whatever interval is chosen.",
+  "It shows the PFDavg at the lifetime, which bounds the interval from above."],
+ "Against a target of 0.0005 the engine returns 3609.141022 hours and the column reads 0.000500000000, which is the target, so the column is the check on the search. A floor belongs to a partially tested subsystem and is reported on an UNACHIEVABLE row, and the lifetime bound belongs to a CAPPED_AT_LIFETIME row."),
+
+q(2,
+ "A 1oo1 with an undetected rate of 1e-6 per hour, a detected rate of 2e-4 per hour and an MTTR of 72 hours is searched against a target of 0.01, and the engine returns UNACHIEVABLE. What figure sits beside that state?",
+ "A floor of 0.014400000000, because the part of the PFDavg that does not depend on T1 already reaches the target.",
+ ["A floor of 0.000008000000, because the detected failures leave a residue sitting above the target whatever interval is chosen for the proof test on this channel.",
+  "A PFDavg of 0.010000000000, because the engine echoes the target back when no interval can be found and leaves the interval field empty.",
+  "No figure at all, because a state carrying no interval carries no number either."],
+ "The digest prints a floor of 0.014400000000 for this channel, above the target of 0.01, so no interval however short meets it. 0.000008000000 is what the INTERVAL_INDEPENDENT channel reports. The engine never echoes a target back, and the state does carry the floor, which is what makes it a design finding a note can quote."),
+
+q(3,
+ "A longest interval search comes back with the state INTERVAL_INDEPENDENT. What has the engine found, and what does it report?",
+ "That the subsystem has no undetected failures, so T1 never enters the arithmetic, and it reports 0.000008000000.",
+ ["That the target is met at every interval the engine tried before the bisection gave up, and it reports the last value it evaluated on the way.",
+  "That the call was declined because an undetected rate of zero leaves no dangerous failure to average, so it reports a null in place of a figure.",
+  "That the answer is set by the detected failures alone and therefore sits at a floor, which the engine reports as 0.014400000000."],
+ "With no undetected failures T1 does not enter the arithmetic at all, so the reported 0.000008000000 is what that channel achieves at every interval. The engine returns a figure rather than a null, and on the rates it refuses only when the undetected and detected rates are BOTH zero. The floor of 0.014400000000 belongs to the UNACHIEVABLE channel."),
+
+q(1,
+ "A 1oo1 with an undetected rate of 2e-8 per hour, no detected failures, a coverage of 0.9 and a lifetime of 87600 hours is searched against a target of 0.01. What comes back?",
+ "87600.000000 hours with the state CAPPED_AT_LIFETIME, and a PFDavg of 0.000876000000 at that interval.",
+ ["No interval and the state UNACHIEVABLE, because a coverage below one puts a floor under the answer that a target of this size can never reach at all.",
+  "An unbounded interval, since the target is met at every interval tried.",
+  "46473.426980 hours with the state FOUND, a crossing well inside the lifetime."],
+ "The target is met even at the lifetime, so the engine returns the lifetime of 87600.000000 hours with the state CAPPED_AT_LIFETIME, and 0.000876000000 is achieved there. No interval longer than the lifetime is meaningful, so neither an unbounded interval nor UNACHIEVABLE is right. 46473.426980 hours is the IDU valve answer against a target of 0.01."),
+
+q(0,
+ "A sensitivity call arrives with an empty list of intervals. What does the engine do?",
+ "It declines the call and names the field, in its own words: intervalsHours: must be a non-empty list of proof test intervals in hours",
+ ["It returns an empty table with the subsystem's inputs echoed back.",
+  "It substitutes the six teaching intervals and returns that table.",
+  "It returns one row, at the subsystem's own proof test interval."],
+ "The message quoted above is the engine's own, and it names the field `intervalsHours`. A refusal replaces the result entirely and carries no number, so nothing is echoed back and no row is returned. The engine invents no input, which rules out any substituted sweep."),
+
+q(2,
+ "A longest interval search is run with a target PFDavg of one. What comes back?",
+ "A refusal naming `targetPfdAvg`, in the engine's words: targetPfdAvg: must lie in (0, 1)",
+ ["The state CAPPED_AT_LIFETIME, since every subsystem meets a target of one and the lifetime is therefore the honest bound for the engine to report back.",
+  "The state INTERVAL_INDEPENDENT, since a target every interval satisfies makes the answer independent of the interval in just the sense that state names.",
+  "A result carrying the lifetime and a warning that the target was loose."],
+ "A target of one has no crossing to find, and the engine declines with the message above. That is a finding about the CALL. UNACHIEVABLE, INTERVAL_INDEPENDENT and CAPPED_AT_LIFETIME are findings about the DESIGN, where the call succeeded and the honest result is that no interval meets the target or that the interval does not enter. No warning is returned here."),
+
+emit(Q, '/root/hse-wip-lopa/banks/h3a_m01.json', expect_n=15)
+finish()

@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "The simplified forms table bands the two out of three at 3 on the EKULAMA channel. What risk reduction factor stands on that row?",
+  "options": [
+   "2758.406219",
+   "2706.319458",
+   "3377.890772",
+   "3801.573360"
+  ],
+  "answer": 0,
+  "explanation": "Beside the simplified 0.000362528185 sits 2758.406219, one over it. 2706.319458 answers the full form channel with its detected rate and its 8 hour restoration times. 3377.890772 is the simplified pair and 3801.573360 the simplified three channel arrangement, both of which sit lower on PFDavg and so higher here."
+ },
+ {
+  "prompt": "And beside the simplified two out of two on the same channel?",
+  "options": [
+   "94.553707",
+   "90.422454",
+   "95.129376",
+   "68.460327"
+  ],
+  "answer": 2,
+  "explanation": "The simplified table prints 95.129376 against a 2oo2 PFDavg of 0.010512000000 and bands it 1. 94.553707 is the same architecture once the channel carries detected failures. 90.422454 and 68.460327 belong to a shutdown valve swept over proof test coverage, which is a different subsystem entirely."
+ },
+ {
+  "prompt": "Which simplified form cubes its independent piece before dividing it?",
+  "options": [
+   "1oo1",
+   "1oo2",
+   "2oo3",
+   "1oo3"
+  ],
+  "answer": 3,
+  "explanation": "The simplified table gives the 1oo3 the form ((1 - b) lambdaDU T)^3 / 4 + b lambdaDU T / 2, the only cube among the five. The 1oo2 squares and divides by three, the 2oo3 squares with no division, and the 1oo1 is linear in lambdaDU T with no independent piece to raise at all."
+ },
+ {
+  "prompt": "The vocabulary fixes what a risk reduction factor is and where each kind of one comes from. Which reading is right?",
+  "options": [
+   "One over PFDavg, and the two halves of the engine return the same quantity under the same name, so no distinction between them is needed at all.",
+   "One over PFDavg, required when it comes from a LOPA row and achieved when it comes from verification.",
+   "The ratio of a mitigated frequency to an unmitigated one, which is required from a row and achieved from a function.",
+   "The ratio of an achieved PFDavg to a required one, quoted at twelve decimals."
+  ],
+  "answer": 1,
+  "explanation": "The vocabulary section fixes the risk reduction factor as one over PFDavg, and says a required one comes from LOPA while an achieved one comes from verification, so the distinction is exactly what the name carries. A mitigated frequency over an unmitigated one is the wrong way up and falls below one, an achieved PFDavg over a required one is a different quantity, and risk reduction factors are quoted at six decimals."
+ },
+ {
+  "prompt": "Which set of equations does this engine actually implement?",
+  "options": [
+   "The simplified forms, with corrections added for detected failures, for a repair time after a test and for a proof test coverage below one.",
+   "Both sets, choosing between them by whether the call carries detected failures.",
+   "The full Annex B low demand form, with the simplified forms falling out of it in one corner.",
+   "The time dependent route, averaged by quadrature."
+  ],
+  "answer": 2,
+  "explanation": "The identity section says the engine implements only the full form and that the simplified forms are its special case at lambdaDD = 0 and MRT = 0. It does not choose between two implementations, it adds no corrections to a short form, and the time dependent route belongs to the oracle behind the golden rather than to the engine."
+ },
+ {
+  "prompt": "Every redundant simplified form on that channel carries one term in common. Which is it?",
+  "options": [
+   "The common cause piece, written b lambdaDU T divided by two, which is a single channel term no voting arrangement removes.",
+   "The squared independent piece, which every redundant form raises to the same power and divides by the same coefficient of three.",
+   "The channel equivalent down time, which the simplified forms carry in place of the half interval they would otherwise use.",
+   "The detected common cause piece, which is betaD multiplied by the detected rate and by the restoration time."
+  ],
+  "answer": 0,
+  "explanation": "The simplified forms print b lambdaDU T / 2 in the 1oo2, the 2oo3 and the 1oo3 alike. The independent pieces differ: one is squared and divided by three, one is squared alone, one is cubed and divided by four. The equivalent down times are the full form's bookkeeping. And there are no detected failures at all in the simplified corner."
+ },
+ {
+  "prompt": "At what precision does this course quote its figures?",
+  "options": [
+   "PFDavg values at three significant figures, which is the precision the published source prints, and everything else at six decimals throughout the course.",
+   "PFDavg values and probabilities at twelve decimals, and risk reduction factors, hours and years at six.",
+   "Everything at six decimals, since that is what the engine prints.",
+   "Everything at twelve decimals, including counts and band numbers."
+  ],
+  "answer": 1,
+  "explanation": "The precision rule is that frequencies, probabilities and PFDavg values print to twelve decimals, while risk reduction factors, hours and years print to six, with counts and band numbers as whole numbers. Three significant figures is what one published source printed, and the reproduction is measured against it rather than quoted at it."
+ },
+ {
+  "prompt": "The EKULAMA pair is run with its repair time after a proof test set to zero, every other stated input held. What channel equivalent down time results?",
+  "options": [
+   "1322.000000",
+   "1326.800000",
+   "1341.200000",
+   "1319.600000"
+  ],
+  "answer": 3,
+  "explanation": "The repair time sweep prints 1319.600000 hours at zero. 1322.000000 hours is the same channel at the 8 hours it is otherwise stated at, and 1326.800000 and 1341.200000 hours are the rows at 24 and 72 hours. The repair time is added once to each undetected down time, so the channel figure moves with it."
+ },
+ {
+  "prompt": "Hold the EKULAMA pair at an MTTR of 8 hours and set the repair time after a test to 24 hours. Which group equivalent down time is reported?",
+  "options": [
+   "881.600000",
+   "888.800000",
+   "884.000000",
+   "932.000000"
+  ],
+  "answer": 1,
+  "explanation": "The sweep prints 888.800000 hours for the group at 24 hours. 881.600000 hours belongs to the zero row and 884.000000 hours to the 8 hour row. 932.000000 hours is the group figure at a week. Both equivalent down times move together across the sweep, because the same addition is made to each."
+ },
+ {
+  "prompt": "What PFDavg does the pair return at that repair time of 24 hours?",
+  "options": [
+   "0.000298347613",
+   "0.000304116193",
+   "0.000300267345",
+   "0.000311851427"
+  ],
+  "answer": 2,
+  "explanation": "The sweep prints 0.000300267345 at 24 hours, which is 1.006435 times the zero row, derived. 0.000298347613 is the zero row itself. 0.000304116193 is 72 hours and 0.000311851427 is a week, so each of those answers a longer repair time than the one asked about."
+ },
+ {
+  "prompt": "How much does a repair time after a test of a week add to that pair, measured against a repair time of zero?",
+  "options": [
+   "30.00 percent",
+   "71.78 percent",
+   "20.61 percent",
+   "4.53 percent"
+  ],
+  "answer": 3,
+  "explanation": "The repair time section prints 4.53 percent, derived, for 168 hours against zero, a modest effect on a one year interval. 30.00 percent is the undetected fraction a proof test coverage of 0.7 leaves uncovered. 71.78 percent and 20.61 percent are shares of the teaching function carried by its valves and its transmitters."
+ },
+ {
+  "prompt": "The OBAGI valve is given a perfect proof test, every other stated input held. What PFDavg comes back?",
+  "options": [
+   "0.003963600000",
+   "0.005737500000",
+   "0.007511400000",
+   "0.014607000000"
+  ],
+  "answer": 0,
+  "explanation": "The coverage table prints 0.003963600000 at a coverage of 1, with a channel equivalent down time of 4404.000000 hours and a band of 2. 0.005737500000, 0.007511400000 and 0.014607000000 are the rows at coverages of 0.95, 0.9 and 0.7, each of which leaves part of the undetected population waiting for the overhaul."
+ },
+ {
+  "prompt": "Which risk reduction factor does that valve carry at a proof test coverage of 0.9?",
+  "options": [
+   "174.291939",
+   "252.295893",
+   "133.130974",
+   "189.107413"
+  ],
+  "answer": 2,
+  "explanation": "The coverage table prints 133.130974 at 0.9, still inside band 2. 174.291939 is the 0.95 row and 252.295893 the perfect test row. 189.107413 belongs to a single EKULAMA channel with detected failures, which is a different subsystem on different rates."
+ },
+ {
+  "prompt": "Besides the two equivalent down times, which other term of a redundant call does the repair time after a proof test enter?",
+  "options": [
+   "The detected common cause term, betaD times lambdaDD times the MTTR, since both restoration times are charged to the same detected population.",
+   "The undetected common cause term, b lambdaDU (T1/2 + MRT), with b the beta factor.",
+   "The group coefficient in front of the squared independent rate, which moves from 2 towards 6 as the restoration time grows longer.",
+   "None, since the MRT is charged to the single channel alone."
+  ],
+  "answer": 1,
+  "explanation": "The repair time section says the engine adds MRT to every undetected down time and that MRT enters the common cause DU term too, as b lambdaDU (T1/2 + MRT). The detected common cause term is carried on the MTTR, which is a different restoration time. The coefficients 2 and 6 count orderings of failures and never move with a restoration time. And MRT reaches the group figure as well as the channel figure."
+ },
+ {
+  "prompt": "A beta factor of 0.05 is typed on the EKULAMA pair, betaD at half of it. What independent term does the call carry?",
+  "options": [
+   "0.000035005448",
+   "0.000036430741",
+   "0.000032693162",
+   "0.000028305589"
+  ],
+  "answer": 0,
+  "explanation": "The common cause sweep prints an independent term of 0.000035005448 for the pair at 0.05. 0.000036430741 is that term at 0.02, 0.000032693162 at 0.1 and 0.000028305589 at 0.2. The term falls as the fraction rises, because those failures are taken out of the independent rate before it is squared."
+ },
+ {
+  "prompt": "At a beta factor of 0.02 with betaD at half of it, which term does the two out of three report as dominant?",
+  "options": [
+   "The common cause contribution, 0.000105536000 against an independent term of 0.000036430741, the same turn the pair makes on that row.",
+   "The common cause contribution, since a voted arrangement is always common cause dominated once any beta factor has been typed.",
+   "Neither, since the two terms tie on that row.",
+   "The independent term, 0.000109292223 against a common cause contribution of 0.000105536000."
+  ],
+  "answer": 3,
+  "explanation": "The sweep reports the 2oo3 as independent dominated at 0.02, with an independent term of 0.000109292223 just above the shared common cause contribution of 0.000105536000. 0.000036430741 is the pair's independent term on the same row, which is why the pair turns there and the two out of three does not. The two terms are close and unequal, and a typed beta factor of zero leaves both arrangements independent dominated."
+ },
+ {
+  "prompt": "And the pair itself on that row of the sweep?",
+  "options": [
+   "0.000368856345",
+   "0.000298845448",
+   "0.000298987176",
+   "0.000141966741"
+  ],
+  "answer": 1,
+  "explanation": "The sweep prints 0.000298845448 for the 1oo2 at a beta factor of 0.05 with betaD at 0.025. 0.000368856345 is the two out of three beside it. 0.000298987176 is the same pair at the stated betaD of 0.02 rather than half the beta factor, which is a different input. 0.000141966741 is the pair at 0.02."
+ },
+ {
+  "prompt": "What common cause contribution do both arrangements carry once the fraction reaches 0.1?",
+  "options": [
+   "0.000263840000",
+   "0.001055360000",
+   "0.000527680000",
+   "0.000105536000"
+  ],
+  "answer": 2,
+  "explanation": "The sweep prints 0.000527680000 in the common cause column of both the pair and the two out of three at 0.1. 0.000263840000 is that column at 0.05, 0.001055360000 at 0.2 and 0.000105536000 at 0.02. The column is identical across the two arrangements on every row, which is the point of the sweep."
+ },
+ {
+  "prompt": "At a proof test coverage of 0.7 on the OBAGI valve, what share of the undetected failures is left for the ten year overhaul?",
+  "options": [
+   "30.00 percent, derived.",
+   "0.7 of them, the share the coverage names, since a partial test leaves behind the fraction it was credited with.",
+   "3.685286 of the undetected failures, since that is the ratio the coverage section prints beside this row of the table.",
+   "4.53 percent, the same addition the week long repair time makes."
+  ],
+  "answer": 0,
+  "explanation": "The coverage section says a coverage of 0.7 leaves, derived, 30.00 percent of the undetected failures to wait for the 10 year overhaul. The coverage is the share a test reveals, so the remainder is one minus it. 3.685286 is how many times the perfect test's PFDavg the valve reaches, a ratio of PFDavg values. 4.53 percent is the repair time sweep on the EKULAMA pair."
+ },
+ {
+  "prompt": "The two out of three is pushed to a fraction of 0.2 with betaD at half. What total is printed?",
+  "options": [
+   "0.001083665589",
+   "0.000625759485",
+   "0.000560373162",
+   "0.001140276768"
+  ],
+  "answer": 3,
+  "explanation": "The sweep prints 0.001140276768 for the 2oo3 at 0.2, and the pair beside it reads 0.001083665589, so two arrangements of quite different cost sit within a few percent of each other once common cause dominates both. 0.000625759485 and 0.000560373162 are the same two arrangements at 0.1."
+ },
+ {
+  "prompt": "How does the engine build the two common cause terms it adds back?",
+  "options": [
+   "The beta factor multiplied by lambdaDU and by the MTTR, and betaD multiplied by lambdaDD and by T1/2 plus MRT, so each population is charged the down time of the other.",
+   "The beta factor multiplied by lambdaDU and by T1/2 plus MRT, and betaD multiplied by lambdaDD and by the MTTR.",
+   "Both fractions multiplied by the total dangerous rate and by the channel equivalent down time, which is what folds the two populations into one figure.",
+   "Both fractions multiplied by the squared independent rate and by the group equivalent down time."
+  ],
+  "answer": 1,
+  "explanation": "The common cause section states the two terms in that order, and neither carries an equivalent down time or a square, because a common cause failure takes the whole group at once and so behaves like one channel failing. Swapping the down times charges each population the wrong wait, which is the mix up the sweep and the golden's differing case exist to expose."
+ },
+ {
+  "prompt": "In the full form table for the EKULAMA channel, which two architectures print 0.000000000000 in both common cause columns?",
+  "options": [
+   "1oo2 and 2oo3, the two arrangements that share one group equivalent down time of 884.000000 hours on this channel.",
+   "Only 1oo1, since a two out of two carries a common cause term whenever its call has detected failures on it.",
+   "1oo1 and 2oo2.",
+   "2oo2 and 1oo3."
+  ],
+  "answer": 2,
+  "explanation": "The table prints zero common cause terms for the single channel and for the two out of two, because the engine adds common cause only to the redundant arrangements and the 2oo2 form carries no beta factor term. The 1oo2, the 2oo3 and the 1oo3 all carry 0.000263280000 and 0.000000448000."
+ },
+ {
+  "prompt": "Built from identical channels, what does voting two of three give a design that a redundant pair cannot?",
+  "options": [
+   "Tolerance of one channel calling for a trip on its own, which this engine computes no number for at all.",
+   "A lower PFDavg, because two of its three channels have to be failed before it misses a demand at all.",
+   "A smaller common cause term, because the third channel dilutes the fraction that reaches every channel.",
+   "A shorter group equivalent down time, because three channels overlap for less of the interval."
+  ],
+  "answer": 0,
+  "explanation": "The architecture section says the two out of three buys tolerance of one channel tripping spuriously, which this engine does not compute. Its PFDavg is higher than the pair's at 1.235857 times it, derived. Its common cause term is identical to the pair's on every row of the sweep, and both carry a group figure of 884.000000 hours on this channel."
+ },
+ {
+  "prompt": "Why does the section insist that an architecture comparison hold every other input?",
+  "options": [
+   "Because the engine refuses a second call whose inputs differ from the first, and names the input that moved as the offending field of the call.",
+   "A comparison that moved the device as well as the voting would have changed two things at once and could support no conclusion about voting.",
+   "Because the equivalent down times are computed once per channel and reused across every architecture the same call is run in.",
+   "Because the beta factor has to be identical for two arrangements to share a common cause term."
+  ],
+  "answer": 1,
+  "explanation": "The section makes the point plainly: moving one input and holding the rest is what makes the ranked table an argument about voting. The engine refuses nothing about a comparison. Each call computes its own equivalent down times. And a shared common cause term is a result of the equations rather than a condition on the comparison."
+ },
+ {
+  "prompt": "What does a subsystem call return beside its PFDavg?",
+  "options": [
+   "Its risk reduction factor, its band, its terms, its equivalent down times and the longest proof test interval that would still meet the target typed with it.",
+   "Its risk reduction factor, its band and a spurious trip rate for the voting arrangement it was given, which is what the architecture choice is made on.",
+   "Its risk reduction factor, its band and a hardware fault tolerance verdict read from the normative table of the standard.",
+   "Its risk reduction factor, its band, its terms and its equivalent down times."
+  ],
+  "answer": 3,
+  "explanation": "The engine returns the PFDavg of one subsystem, its risk reduction factor and band, its terms and its equivalent down times. A longest interval is a separate function of the engine with its own inputs. No spurious trip rate is computed anywhere. And the engine has no hardware fault tolerance check, because it does not restate a licensed normative table."
+ },
+ {
+  "prompt": "Which two checks does the engine leave to the analyst entirely?",
+  "options": [
+   "The proof test coverage claimed for a written test procedure, and the lifetime at which the item is restored as new, neither of which it will accept as an input.",
+   "The series sum of the subsystems and the band the total falls in, both of which it declines to compute for a function.",
+   "The architectural constraint of the standard, and whether a low demand method is the right one at all.",
+   "The equivalent down times and the dominant term, which it reports without computing either."
+  ],
+  "answer": 2,
+  "explanation": "The engine has no hardware fault tolerance check and no high demand mode, so a PFDavg that meets a target says nothing about the architectural constraint and is the wrong quantity when the demand rate is high. Coverage and lifetime are inputs it takes and uses. It sums a function and bands it, and it computes and reports both equivalent down times and the dominant term."
+ },
+ {
+  "prompt": "Which arrangement carries a coefficient of 6 on a squared independent rate?",
+  "options": [
+   "1oo1",
+   "2oo3",
+   "1oo2",
+   "2oo2"
+  ],
+  "answer": 1,
+  "explanation": "The engine prints the two out of three form with 6 in front of the squared independent rate, from three pairs at two orderings each. The one out of two carries 2 on the same square. The two out of two is twice one channel with no square at all, and the one out of one is a single product. A 6 also appears on a cubed term elsewhere, which is a different architecture."
+ },
+ {
+  "prompt": "A subsystem call names an arrangement the engine has never heard of. What comes back?",
+  "options": [
+   "architecture: must be one of 1oo1, 1oo2, 2oo2, 2oo3, 1oo3",
+   "lambdaDuPerHour: must be a failure rate per hour, zero or more",
+   "proofTestIntervalHours: must be a time above 0 hours",
+   "mrtHours: must be a time in hours, zero or more"
+  ],
+  "answer": 0,
+  "explanation": "The engine refuses in those words and lists what it does implement. The message about a failure rate is what a negative lambdaDU earns. The message about a time above 0 hours answers a proof test interval of zero. The message about a time in hours, zero or more, answers a negative repair time after a test, so each of the three names a different field."
+ },
+ {
+  "prompt": "Where do the failure rates of the published worked function come from, and what does this course take them for?",
+  "options": [
+   "The engine's own teaching table of failure rates, which the course carries so that any verification can be run without a data source of its own.",
+   "A licensed IEC table, reproduced in the engine so that every published row can be checked against the standard it came from.",
+   "Field data from the plant the source describes, offered as a recommended starting point.",
+   "The slide's own example values, cited there to SINTEF PDS and vendor certificates, and taken for nothing more than an example."
+  ],
+  "answer": 3,
+  "explanation": "The reproduction section says the rates are the slide's own, cited there to SINTEF PDS and vendor certificates, and that they are its example values and this course offers them as nothing more. The engine carries no failure rate data at all, and no licensed IEC or ISA table is reproduced anywhere in it."
+ },
+ {
+  "prompt": "With that function typed onto the row, what mitigated frequency does the engine report?",
+  "options": [
+   "0.007407407407",
+   "0.001792971954",
+   "0.000000024205",
+   "0.000136440000"
+  ],
+  "answer": 2,
+  "explanation": "Closing the row with the teaching function gives 0.000000024205 per year, comfortably inside the tolerable frequency, and meetsTmel is true. 0.007407407407 is a required PFDavg and 0.001792971954 an achieved one, so neither is a frequency at all. 0.000136440000 is one subsystem of that function."
+ },
+ {
+  "prompt": "Why is a band never the target a function is verified against?",
+  "options": [
+   "A band is read from the achieved risk reduction factor, and a required figure is read from the achieved PFDavg, so the two are never on the same scale.",
+   "A band is a division ten times wide, so a function can sit inside the right band and still be above the PFDavg its row requires.",
+   "A band is returned only for a subsystem, so a function total carries a state and no band at all.",
+   "A band is assigned before the decade snap is applied, so any value near a decade is banded twice."
+  ],
+  "answer": 1,
+  "explanation": "The section states the rule: the required PFDavg is the target and the band is the label it wears. A band is returned for a function as well as for a subsystem, both readings come off the same PFDavg, and the decade snap is applied as part of the banding rather than before some second pass."
+ },
+ {
+  "prompt": "The engine is handed a function whose subsystems add past a probability. What does it do?",
+  "options": [
+   "It refuses the whole call, because at that point the sum is no longer a probability and the approximation has left the range it is good for.",
+   "It answers with the sum clipped to one, and attaches a warning saying the series approximation has been left behind.",
+   "It answers with the sum as computed, because the series form carries no upper boundary of its own.",
+   "It answers and reports the call as common cause dominated across the function."
+  ],
+  "answer": 0,
+  "explanation": "The engine refuses a list of subsystems whose summed PFDavg reaches 1 and says so in its own words. It clips nothing: a refusal replaces the result. The series sum is an approximation that ignores a small overlap term, and reaching a probability of one is exactly where that approximation stops being usable. A dominant term is a reading of one subsystem."
+ },
+ {
+  "prompt": "Which part of the teaching function is stated with no MTTR at all?",
+  "options": [
+   "The transmitters.",
+   "The logic solver.",
+   "Every part of it.",
+   "The valves."
+  ],
+  "answer": 3,
+  "explanation": "The stated table gives the valves a lambdaDD of 0, so they carry nothing detected to restore and no MTTR is typed for them. The transmitters and the logic solver both carry detected rates and an MTTR of 8 hours, which the engine requires whenever lambdaDD is above zero."
+ },
+ {
+  "prompt": "One member of a submitted function is missing an input it needs. Which words come back?",
+  "options": [
+   "subsystems[1].beta: is required for a redundant 1oo2 and must lie in [0, 1]: beta = 0 is a claim of no common cause and has to be typed",
+   "subsystems: must be a non-empty list of subsystem parameter sets",
+   "mttrHours: is required when lambdaDD is above zero: detected failures are down for the restoration time",
+   "subsystems: the summed PFDavg reaches 1: not a probability"
+  ],
+  "answer": 0,
+  "explanation": "A function call names the offending member and the field inside it, so the analyst can see which subsystem of the list is incomplete. The message about a non-empty list answers a function with no members at all. The message about a restoration time is what a subsystem call returns on its own. The message about a summed value answers parts that add past a probability."
+ },
+ {
+  "prompt": "How many subsystems will the engine accept in one function?",
+  "options": [
+   "Exactly three, since the published series equation names a sensor, a logic solver and a final element and the engine follows it.",
+   "Any non-empty list, so a function with two sensor groups or two final elements is verified in the same way.",
+   "At most five, one for each architecture it implements.",
+   "Any list whose members share one proof test interval."
+  ],
+  "answer": 1,
+  "explanation": "The section says the engine takes any non-empty list of subsystems and sums what it computes for each, and the three letters of the published equation are only the usual three links. Nothing caps the list at three or at five, and each member carries its own interval into its own PFDavg."
+ },
+ {
+  "prompt": "How did the published source print the value of its valve assembly?",
+  "options": [
+   "1.29E-03",
+   "2.36E-04",
+   "1.05E-03",
+   "6.97E-07"
+  ],
+  "answer": 2,
+  "explanation": "The reproduction table sets the engine's 0.001048767640 beside a printed 1.05E-03. 1.29E-03 is the printed total of the whole function. 2.36E-04 is the printed pressure transmitter row and 6.97E-07 the printed analogue input card, so each belongs to another row of the same table."
+ },
+ {
+  "prompt": "And its pressure transmitter row, as printed?",
+  "options": [
+   "2.36E-04",
+   "3.44E-04",
+   "1.05E-03",
+   "5.34E-07"
+  ],
+  "answer": 0,
+  "explanation": "Printed at three figures, that row reads 2.36E-04, and the reproduction's 0.000235764375 rounds onto it. 3.44E-04 is the same subsystem in the second table, where the beta factor is raised by half for the voted arrangement. 1.05E-03 is the valve assembly and 5.34E-07 the processor."
+ },
+ {
+  "prompt": "The warning on a rare event call names a product. What figure does it give?",
+  "options": [
+   "0.1752",
+   "4.38",
+   "8760",
+   "0.1"
+  ],
+  "answer": 0,
+  "explanation": "The warning reads that lambdaDU x T = 0.1752 exceeds 0.1, and the engine answers while saying the answer overstates. 0.1 is the threshold that product crossed rather than the product itself. 4.38 is the value quoted in the refusal further out, where the linearised equations no longer give a probability. 8760 is the interval in hours."
+ },
+ {
+  "prompt": "Past that warning lies a refusal. Which words does the engine use?",
+  "options": [
+   "proofTestIntervalHours: the simplified equations give 4.38 here, which is not a probability: lambda x T is far outside the rare-event range they assume; use an exact (Markov) model",
+   "proofTestIntervalHours: must be a time above 0 hours",
+   "lifetimeHours: must be at least the proof test interval",
+   "targetPfdAvg: must lie in (0, 1)"
+  ],
+  "answer": 0,
+  "explanation": "The engine refuses in those words and names the model that would answer. The message about a time above 0 hours answers an interval of zero. The message about a lifetime answers a lifetime shorter than the interval it is paired with. The message about a target belongs to a different function of the engine altogether."
+ },
+ {
+  "prompt": "A coverage below one arrives with no lifetime beside it. Which field does the engine name?",
+  "options": [
+   "mttrHours",
+   "lifetimeHours",
+   "betaD",
+   "proofTestCoverage"
+  ],
+  "answer": 1,
+  "explanation": "The engine names lifetimeHours and says the uncovered failures stay until the item is restored as new. mttrHours is named when a detected rate arrives with no restoration time. betaD is named when detected failures meet a redundant arrangement with no detected fraction typed. proofTestCoverage is named only when the coverage itself lies outside its own range."
+ },
+ {
+  "prompt": "Which message answers a function whose parts add past a probability?",
+  "options": [
+   "mttrHours: is required when lambdaDD is above zero: detected failures are down for the restoration time",
+   "subsystems: must be a non-empty list of subsystem parameter sets",
+   "subsystems: the summed PFDavg reaches 1: not a probability",
+   "lifetimeHours: must be at least the proof test interval"
+  ],
+  "answer": 2,
+  "explanation": "The engine refuses the sum in those words, because a total of one is no longer a probability. The message about a non-empty list answers a function with no members. The message about a restoration time answers a subsystem with detected failures and no MTTR. The message about a lifetime answers a lifetime shorter than the proof test interval."
+ },
+ {
+  "prompt": "What had to be assumed before the published table reproduced at all?",
+  "options": [
+   "That every row shared one beta factor of 0.1, so the voted arrangements and the electronic cards carried one common cause fraction between them.",
+   "That every row shared one proof test interval of 8760 hours, which the source declined to print anywhere alongside its results table.",
+   "That the failure rates were the engine's own illustrative teaching values rather than the vendor figures the source cites for them.",
+   "That the repair time after a test equalled the MTTR on every row."
+  ],
+  "answer": 3,
+  "explanation": "The reproduction section says the published table reproduces only with MRT equal to the MTTR on every row. The one year interval holds on every row as the table states it. The rates are the source's own, cited there to SINTEF PDS and vendor certificates. And the beta factors differ row by row: 0.1 on the pressure transmitters and the valves, 0.02 on the three electronic cards."
+ }
+]

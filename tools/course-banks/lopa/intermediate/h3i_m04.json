@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "In the ranking of all five architectures on the diagnostics bearing teaching channel, what risk reduction factor stands beside the single channel row?",
+  "options": [
+   "777.344387",
+   "133.130974",
+   "190.258752",
+   "189.107413"
+  ],
+  "answer": 3,
+  "explanation": "Ranked by PFDavg, the single channel row carries 189.107413 on a value of 0.005288000000. 190.258752 is the simplified single channel, with no detected failures and no repair time after a test, so that figure answers a different channel. 133.130974 is a shutdown valve at a proof test coverage of 0.9, and 777.344387 belongs to a published function summed from five subsystems."
+ },
+ {
+  "prompt": "What does the engine report beside a two out of two on this channel, read as one over its PFDavg?",
+  "options": [
+   "95.129376",
+   "94.553707",
+   "68.460327",
+   "90.422454"
+  ],
+  "answer": 1,
+  "explanation": "The ranked table prints 94.553707 against a 2oo2 PFDavg of 0.010576000000 and bands it 1, the worst of the five. 95.129376 is the two out of two of the channel with no diagnostics. 90.422454 and 68.460327 come from the coverage sweep on the OBAGI valve, which is a different subsystem entirely."
+ },
+ {
+  "prompt": "Set the two out of three against the one out of two on that channel. What does the derived comparison read?",
+  "options": [
+   "1.045262",
+   "2.000000",
+   "1.235857",
+   "1.002144"
+  ],
+  "answer": 2,
+  "explanation": "The section prints the 2oo3 over the 1oo2 as 1.235857, derived, so voting costs roughly a quarter of the pair's PFDavg while their common cause terms stay identical. 2.000000 is the two out of two over the single channel. 1.045262 and 1.002144 belong to the repair time sweep on the pair."
+ },
+ {
+  "prompt": "The ranked table measures every architecture against the single channel. What does the pair read in that column?",
+  "options": [
+   "0.056541",
+   "0.049925",
+   "0.069876",
+   "1.000000"
+  ],
+  "answer": 0,
+  "explanation": "The ranked table prints 0.056541 for the 1oo2 over the 1oo1, derived. 0.049925 belongs to the three channel arrangement and 0.069876 to the two out of three. 1.000000 is the single channel measured against itself, which is the base of the column."
+ },
+ {
+  "prompt": "Measured over the single channel row, which derived entry belongs to the two out of three?",
+  "options": [
+   "0.056541",
+   "0.049925",
+   "2.000000",
+   "0.069876"
+  ],
+  "answer": 3,
+  "explanation": "The ranked table prints 0.069876 for the 2oo3 over the 1oo1, derived, which is the largest of the three redundant entries because its independent term carries 6. 0.056541 is the pair and 0.049925 is the three channel arrangement. 2.000000 is the two out of two, which is the one entry above the single channel."
+ },
+ {
+  "prompt": "Where does the two out of two land in that same comparison?",
+  "options": [
+   "1.000000",
+   "2.000000",
+   "0.049925",
+   "1.235857"
+  ],
+  "answer": 1,
+  "explanation": "The ranked table prints 2.000000, because a 2oo2 fails on the first dangerous failure of either channel and its form is twice the single channel's. 1.000000 is the single channel itself. 0.049925 is the three channel arrangement. 1.235857 is the two out of three measured against the pair, which is a different comparison."
+ },
+ {
+  "prompt": "The ranking prints a risk reduction factor beside every architecture. Which one belongs to the pair?",
+  "options": [
+   "3787.861448",
+   "3801.573360",
+   "3344.625055",
+   "3377.890772"
+  ],
+  "answer": 2,
+  "explanation": "Ranked by PFDavg the pair carries 3344.625055 on a value of 0.000298987176, inside band 3. 3377.890772 is the simplified pair, with no detected failures and no repair time after a test. 3787.861448 belongs to the three channel arrangement of this ranking, and 3801.573360 to the three channel arrangement without diagnostics."
+ },
+ {
+  "prompt": "The two out of three in that ranking is credited with which risk reduction factor?",
+  "options": [
+   "2706.319458",
+   "2758.406219",
+   "3344.625055",
+   "3787.861448"
+  ],
+  "answer": 0,
+  "explanation": "The ranked table prints 2706.319458 beside a 2oo3 PFDavg of 0.000369505528. 2758.406219 comes from the simplified forms table, where lambdaDD and MRT are both zero. 3344.625055 is the pair of this ranking and 3787.861448 is the three channel arrangement of it, both of which sit lower on PFDavg and so higher here."
+ },
+ {
+  "prompt": "Every architecture in the ranked table is built on one channel. What total dangerous failure rate does that channel carry, derived?",
+  "options": [
+   "1.2e-6 per hour, because the diagnostics reclassify part of the undetected rate as detected and the total the channel carries stays where it was.",
+   "2.8e-6 per hour, the detected rate alone, since a detected failure is the only one the MTTR restores.",
+   "4e-6 per hour of undetected failures, with no detected rate left.",
+   "4e-6 per hour: lambdaDU of 1.2e-6 plus lambdaDD of 2.8e-6."
+  ],
+  "answer": 3,
+  "explanation": "The full form section derives lambdaD, the sum of lambdaDU and lambdaDD, as 4e-6 per hour. The detected rate is added to the channel on top of its undetected rate of 1.2e-6, so nothing is reclassified, which is why the single channel reads 0.005288000000 against 0.005256000000 with no detected failures. The total keeps its split, because the two shares are charged different down times in the channel equivalent down time."
+ },
+ {
+  "prompt": "Read the ranked table by band. Which architecture is the one sitting in band 2?",
+  "options": [
+   "1oo2",
+   "1oo1",
+   "2oo2",
+   "2oo3"
+  ],
+  "answer": 1,
+  "explanation": "The ranked table bands the 1oo1 at 2 on a PFDavg of 0.005288000000. The 2oo2 is banded 1, the worst of the five. The 1oo2 and the 2oo3 are both banded 3, alongside the three channel arrangement, so neither of them sits alone in band 2."
+ },
+ {
+  "prompt": "Why does the printed two out of three equation carry a coefficient of 6 where the one out of two carries 2?",
+  "options": [
+   "Because a two out of three fails when any two of its three channels are failed: three pairs, and either failure of a pair may come first, which is six orderings in all.",
+   "Because a two out of three has three channels and two of them must vote, so the coefficient is the channel count multiplied by the votes needed.",
+   "Because the second failure of a group waits a third of the interval where the first waits half of it, and that ratio enters the coefficient.",
+   "Because six is the coefficient Annex B gives to every architecture built on three channels, whatever its voting arrangement happens to be."
+  ],
+  "answer": 0,
+  "explanation": "The section derives the six by counting: three pairs at two orderings each. Channels times votes would give the same number here by coincidence and the wrong number elsewhere. The down time argument is what sets T1/3 in the group equivalent down time and has nothing to do with the coefficient. The three channel arrangement does carry a 6 as well, on a cubed term, and that is not why the two out of three carries one."
+ },
+ {
+  "prompt": "A design review picks a two out of three over a one out of two. What does the engine say about that choice?",
+  "options": [
+   "It reports the tolerance of a single channel calling for a trip as a second output beside the PFDavg, so the two effects can be compared on one page.",
+   "It refuses the comparison unless both calls hold every other input, and names the input that moved.",
+   "Nothing. It computes PFDavg and its terms, and no spurious trip rate at all.",
+   "It reports the choice as independent dominated and leaves the rest."
+  ],
+  "answer": 2,
+  "explanation": "The section says the two out of three buys tolerance of one channel tripping spuriously, which this engine does not compute, so the argument for it lives outside the calculation. The engine returns the PFDavg, its risk reduction factor, its band, its terms and its equivalent down times. It refuses nothing about a comparison, and the dominant term is a separate reading."
+ },
+ {
+  "prompt": "The course asks for more care with the three channel arrangement than with the other four. What is the reason?",
+  "options": [
+   "Its cubed independent term falls below the precision the engine prints, so the figure it returns cannot be quoted at the twelve decimals this tier reads.",
+   "Its validation record checks it against the time dependent route to first order only, with no published worked row behind it.",
+   "The engine refuses it whenever common cause dominates.",
+   "Annex B states no equation for it, so the engine infers one."
+  ],
+  "answer": 1,
+  "explanation": "The section states the evidence plainly: the one out of three is checked against the time dependent route to first order only, and no published worked row exists for it. The engine computes it from the published Annex B form like every other architecture, refuses nothing about it, and prints it at the same twelve decimals as the rest."
+ },
+ {
+  "prompt": "Which down times does the engine use for a three channel arrangement?",
+  "options": [
+   "The second failure uses T1/2 and the group uses T1/3, which are the same two down times a redundant pair and a two out of three already carry.",
+   "Every failure uses T1/2, and the three equivalent down times differ only through the share of the rate that each failure population carries.",
+   "The second failure uses T1/4 and the group uses T1/3, so the group is charged the longer of the two windows the arrangement can be exposed for.",
+   "The second failure uses T1/3 and the group uses T1/4."
+  ],
+  "answer": 3,
+  "explanation": "The Annex B section states that the group equivalent down time uses T1/3 in place of T1/2 for a pair and a two out of three, and that for a three channel arrangement the second failure uses T1/3 and the group T1/4. Swapping the two reverses the argument. A pair and a two out of three stop at one overlap. Charging every failure half the interval is the simplified single channel treatment."
+ },
+ {
+  "prompt": "How do the five architectures fall across the bands on this one channel?",
+  "options": [
+   "Four land in band 3 and one in band 2, because only the two out of two fails to gain from the diagnostics the channel carries.",
+   "Two land in band 3, two in band 2 and one in band 1, since a two out of three pays for its voting with a whole division of the table.",
+   "Three land in band 3, one in band 2 and one in band 1.",
+   "All five land in band 3 or better."
+  ],
+  "answer": 2,
+  "explanation": "The ranked table bands the three redundant arrangements at 3, the single channel at 2 and the two out of two at 1. The two out of two is worse than the single channel, so not all five reach band 3. The two out of three stays in band 3 beside the pair, and the single channel is the only entry in band 2."
+ }
+]

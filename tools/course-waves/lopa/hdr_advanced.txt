@@ -1,0 +1,26 @@
+-- ============================================================================
+-- H3 EXPERT DEEP SEED: Process Safety: LOPA & SIL Determination, advanced
+-- tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/lopa/advanced.
+--
+-- What this tier owns: HOW LONG THE PROOF TEST MAY RUN, AND WHAT THE ENGINE
+-- DOES NOT KNOW. Sensitivity to the interval, linear and quadratic growth, the
+-- longest interval and its four states; imperfect proof test coverage, the
+-- floor no interval reaches below and the lifetime cap; how conservative Annex
+-- B is against the time dependent route; the published example and its three
+-- inferred inputs; what the engine does not do (no hardware fault tolerance
+-- check, no high demand mode, no failure-rate data, credit rules that are
+-- specification); and judgement end to end: a budget, a stretched interval,
+-- when to redesign, the verification note. Digest sections 25 to 31, and
+-- section 32.
+--
+-- THE TRAP THE TIER IS BUILT ON. A SIL that holds is not a requirement that
+-- holds, and a target below a coverage floor is unachievable whatever the
+-- interval. The Expert capstone grades three longest intervals, a PFDavg under
+-- imperfect coverage, a coverage floor and a SIF stretched to a longer
+-- interval.
+-- ============================================================================

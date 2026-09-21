@@ -1,0 +1,742 @@
+# H3 TEACHING DIGEST: Process Safety: LOPA & SIL Determination
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The engine FINDINGS record, the oracle and the engine source comments are PROVENANCE and not teaching truth.
+
+# PRECISION. Frequencies per year, probabilities, IPL PFDs and PFDavg values print to TWELVE decimals; risk reduction factors, hours and years print to SIX decimals; failure rates per hour print in exponent form as stated; counts and SIL numbers are whole numbers; relative differences print in exponent form.
+
+# ENGINE. engines/hse/lopa.js, vendored sha-identical with petrolord-engines 6703c00, 548 lines, importing nothing. The vendored golden test-data/hse/goldens/lopa_cases.json carries 76 records, written by the stdlib oracle in exact rational arithmetic.
+
+# FAILURE RATES ARE ILLUSTRATIVE. Every lambda below is a stated teaching input or a value read from the golden, never data this course recommends. No licensed IEC or ISA table is reproduced.
+
+# WHAT IS NEVER IN THIS FILE. No capstone facility, no capstone input and no graded answer. The capstones run their own facilities and the digest never names them.
+
+# THIS ENGINE HAS NO REPAIR HISTORY. Every section below describes what the engine does today.
+
+# SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Associate m06 and Expert m05)
+
+The engine has two halves and one vocabulary. The DETERMINATION half is a layer of protection analysis: a scenario frequency, the risk reduction still missing against a tolerable frequency, and the SIL band that missing reduction falls in. The VERIFICATION half computes the PFDavg a safety instrumented function achieves, by the IEC 61508-6 Annex B low demand equations. Every function returns either a result object carrying a `basis` block or an object with `error` and `field`, where `field` names the offending input.
+
+| function | what it needs | what it returns |
+| --- | --- | --- |
+| `lopaScenario` | `initiatingEventFrequencyPerYr`, `enablingConditions`, `conditionalModifiers`, `ipls`, `tmelPerYr`, `sifPfdAvg` | the unmitigated and mitigated frequencies, the credited and uncredited IPLs, the required RRF, the outcome state and the required PFDavg |
+| `outcomeFromRequiredRrf` | `rrf` | the outcome state a required RRF demands |
+| `silFromPfdAvg` | `pfdAvg` | the low demand band an achieved PFDavg falls in |
+| `pfdAvgSubsystem` | `architecture`, `lambdaDuPerHour`, `lambdaDdPerHour`, `proofTestIntervalHours`, `mttrHours`, `mrtHours`, `beta`, `betaD`, `proofTestCoverage`, `lifetimeHours` | the PFDavg of one subsystem, its RRF and band, its terms and its equivalent down times |
+| `pfdAvgSif` | a list of subsystems | the PFDavg of a SIF as the sum of its subsystems |
+| `proofTestSensitivity` | subsystem, `intervalsHours` | the PFDavg at each proof test interval, all else held |
+| `maxProofTestInterval` | subsystem, `targetPfdAvg` | the longest proof test interval that meets a target, or the state that says why there is none |
+| `decadeOf` | `x` | the power of ten x sits on, within the decade snap, or null |
+
+The constants it exports:
+
+| name | value |
+| --- | --- |
+| `DECADE_SNAP` | 1e-9 |
+| `HOURS_PER_YEAR` | 8760 |
+| `ARCHITECTURES` | 1oo1, 1oo2, 2oo2, 2oo3, 1oo3 |
+| `LOPA_OUTCOME` | NO_SIF_REQUIRED, RISK_REDUCTION_BELOW_SIL1, SIL1, SIL2, SIL3, BEYOND_SIL3_REDESIGN |
+| `PFD_STATE` | NOT_SIL_RATED, SIL, BELOW_SIL4_TABLE_FLOOR |
+
+WHAT THE ENGINE DOES NOT DO, read from its own header and checked here against its exports:
+- It invents no number. The initiating event frequency, every enabling condition and conditional modifier probability, every IPL PFD, every failure rate and the TMEL are inputs.
+- It carries no failure-rate data. The rates in this course are illustrative teaching inputs or values read from the golden.
+- It has no hardware fault tolerance (architectural constraint) check. That requirement is a normative table in a licensed standard, and the engine does not restate it.
+- It has no high demand or continuous mode (PFH). Every band here is LOW DEMAND.
+- Its exported names are, in full: ARCHITECTURES, DECADE_SNAP, HOURS_PER_YEAR, LOPA_OUTCOME, PFD_STATE, SIL_BANDS_LOW_DEMAND, decadeOf, lopaScenario, maxProofTestInterval, outcomeFromRequiredRrf, pfdAvgSif, pfdAvgSubsystem, proofTestSensitivity, silFromPfdAvg.
+
+# SECTION 2: Frequencies per year, probabilities, and the units the engine takes (owned by Associate m01)
+
+A LOPA row multiplies ONE frequency by probabilities. The initiating event frequency and the TMEL are frequencies PER YEAR and may exceed one; every enabling condition, conditional modifier and IPL PFD is a probability above zero and no more than one. The verification half takes failure rates PER HOUR and times IN HOURS, and returns PFDavg values, which are probabilities.
+
+| quantity | unit | allowed range, from the engine |
+| --- | --- | --- |
+| initiating event frequency, IEF | per year | above 0 |
+| enabling condition, conditional modifier | probability | above 0 and no more than 1 |
+| IPL PFD | probability | above 0 and no more than 1 |
+| TMEL | per year | above 0 |
+| proposed SIF PFDavg | probability | above 0 and no more than 1 |
+| lambdaDU, lambdaDD | per hour | zero or more, and never both zero |
+| proof test interval T1, MTTR, MRT, lifetime T2 | hours | T1 above 0; MTTR and MRT zero or more; T2 at least T1 |
+| beta factor, betaD | fraction | 0 to 1 |
+| proof test coverage | fraction | above 0 and no more than 1 |
+
+An IEF of 2.5 per year (stated) is accepted: a frequency is a count per year and can exceed one. The same number typed as an enabling condition probability is refused, in the engine's words, in section 3.
+
+HOURS_PER_YEAR is 8760, so a one year proof test interval is 8760 hours and the longest interval the engine returns in hours is also given in years, derived as hours over 8760.
+
+# SECTION 3: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l05 and Professional m06 l03 and Expert m01 l05)
+
+Each row is a real call. The message column is the engine's `error` string, verbatim. A refusal carries no number.
+
+| function | what was passed | field named | the engine's message |
+| --- | --- | --- | --- |
+| `lopaScenario` | an IEF of zero | `initiatingEventFrequencyPerYr` | initiatingEventFrequencyPerYr: must be a frequency above 0 per year |
+| `lopaScenario` | no TMEL | `tmelPerYr` | tmelPerYr: the tolerable mitigated event likelihood must be a frequency above 0 per year |
+| `lopaScenario` | an enabling condition of zero | `enablingConditions[0].probability` | enablingConditions[0].probability: 'mode' must be a probability above 0 and no more than 1 (a probability of 0 means the scenario cannot happen, which is not a LOPA scenario) |
+| `lopaScenario` | an enabling condition above one | `enablingConditions[0].probability` | enablingConditions[0].probability: 'mode' must be a probability above 0 and no more than 1 (a probability of 0 means the scenario cannot happen, which is not a LOPA scenario) |
+| `lopaScenario` | a modifier with no name | `conditionalModifiers[0].name` | conditionalModifiers[0].name: every entry needs a name |
+| `lopaScenario` | IPLs not given as a list | `ipls` | ipls: must be a list of { name, pfd, independent } |
+| `lopaScenario` | an IPL with no name | `ipls[0].name` | ipls[0].name: every IPL needs a name |
+| `lopaScenario` | one IPL named twice, in different case | `ipls[1].name` | ipls[1].name: 'relief valve' appears twice: one credit per IPL |
+| `lopaScenario` | an IPL PFD of zero | `ipls[0].pfd` | ipls[0].pfd: 'relief' must have a PFD above 0 and no more than 1 (a PFD of 0 is a perfect layer, which none is) |
+| `lopaScenario` | a proposed SIF PFDavg above one | `sifPfdAvg` | sifPfdAvg: must be a PFDavg above 0 and no more than 1 |
+| `outcomeFromRequiredRrf` | a negative RRF | `rrf` | rrf: must be a finite number above 0 |
+| `silFromPfdAvg` | a PFDavg of zero | `pfdAvg` | pfdAvg: must be a probability above 0 and no more than 1 |
+| `pfdAvgSubsystem` | an architecture the engine does not know | `architecture` | architecture: must be one of 1oo1, 1oo2, 2oo2, 2oo3, 1oo3 |
+| `pfdAvgSubsystem` | a negative lambdaDU | `lambdaDuPerHour` | lambdaDuPerHour: must be a failure rate per hour, zero or more |
+| `pfdAvgSubsystem` | lambdaDU and lambdaDD both zero | `lambdaDuPerHour` | lambdaDuPerHour: lambdaDU and lambdaDD are both zero: there is no dangerous failure to average |
+| `pfdAvgSubsystem` | a proof test interval of zero | `proofTestIntervalHours` | proofTestIntervalHours: must be a time above 0 hours |
+| `pfdAvgSubsystem` | detected failures with no MTTR | `mttrHours` | mttrHours: is required when lambdaDD is above zero: detected failures are down for the restoration time |
+| `pfdAvgSubsystem` | a negative MRT | `mrtHours` | mrtHours: must be a time in hours, zero or more |
+| `pfdAvgSubsystem` | a 1oo2 with no beta factor | `beta` | beta: is required for a redundant 1oo2 and must lie in [0, 1]: beta = 0 is a claim of no common cause and has to be typed |
+| `pfdAvgSubsystem` | a 1oo2 with detected failures and no betaD | `betaD` | betaD: is required when lambdaDD is above zero in a redundant architecture and must lie in [0, 1] |
+| `pfdAvgSubsystem` | a proof test coverage of zero | `proofTestCoverage` | proofTestCoverage: must lie in (0, 1] |
+| `pfdAvgSubsystem` | coverage below one and no lifetime | `lifetimeHours` | lifetimeHours: is required when proofTestCoverage is below 1: the uncovered failures stay until the item is restored as new |
+| `pfdAvgSubsystem` | a lifetime shorter than the interval | `lifetimeHours` | lifetimeHours: must be at least the proof test interval |
+| `pfdAvgSubsystem` | a lambda T far outside the rare event range | `proofTestIntervalHours` | proofTestIntervalHours: the simplified equations give 4.38 here, which is not a probability: lambda x T is far outside the rare-event range they assume; use an exact (Markov) model |
+| `pfdAvgSif` | an empty SIF | `subsystems` | subsystems: must be a non-empty list of subsystem parameter sets |
+| `pfdAvgSif` | a SIF with one bad subsystem | `subsystems[1].beta` | subsystems[1].beta: is required for a redundant 1oo2 and must lie in [0, 1]: beta = 0 is a claim of no common cause and has to be typed |
+| `pfdAvgSif` | subsystems that sum to more than one | `subsystems` | subsystems: the summed PFDavg reaches 1: not a probability |
+| `proofTestSensitivity` | no intervals | `intervalsHours` | intervalsHours: must be a non-empty list of proof test intervals in hours |
+| `maxProofTestInterval` | a target of one | `targetPfdAvg` | targetPfdAvg: must lie in (0, 1) |
+
+29 refusals are tabled above, across 7 functions.
+
+`decadeOf` refuses nothing: it returns null for zero, for a negative number, for a string and for anything off a decade.
+
+# SECTION 4: One scenario: the initiating event, enabling conditions and conditional modifiers (owned by Associate m01 and Associate m02)
+
+The ORONI row is one separator overfill scenario. Initiating event: level control valve fails open, at 0.45 per year (stated). One enabling condition and two conditional modifiers (stated):
+
+| term | name | probability, stated |
+| --- | --- | --- |
+| enabling condition | separator on the high pressure manifold | 0.3 |
+| conditional modifier | ignition | 0.5 |
+| conditional modifier | operator in the blast zone | 0.2 |
+
+| quantity | engine key | value |
+| --- | --- | --- |
+| product of the enabling conditions | `enablingProduct` | 0.300000000000 |
+| product of the conditional modifiers | `modifierProduct` | 0.100000000000 |
+| unmitigated frequency, per year | `unmitigatedFrequencyPerYr` | 0.013500000000 |
+
+The engine's method string, verbatim: "CCPS (2001) Layer of Protection Analysis: f = IEF x prod(enabling) x prod(conditional modifiers) x prod(PFD of credited IPLs); RRF = f / TMEL; required PFDavg = TMEL / f; SIL band low demand per IEC 61511-1".
+
+An ENABLING CONDITION is a state that must hold for the initiating event to lead anywhere (the separator on the high pressure manifold). A CONDITIONAL MODIFIER is a probability that the consequence follows once it has (ignition, someone in the blast zone). The engine treats both the same way, as factors in one product; the difference is in how the analyst justifies them, and the engine keeps them in two lists so the worksheet shows which is which.
+
+# SECTION 5: Forgetting a factor: the unmitigated frequency with one term left out (owned by Associate m02 l04)
+
+ORONI again, each time with ONE term left out, and what the frequency becomes:
+
+| what was left out | unmitigated frequency per year | over the full row, derived |
+| --- | --- | --- |
+| nothing left out | 0.013500000000 | 1.000000 |
+| the enabling condition left out | 0.045000000000 | 3.333333 |
+| ignition left out | 0.027000000000 | 2.000000 |
+| the blast zone modifier left out | 0.067500000000 | 5.000000 |
+| every modifier left out | 0.135000000000 | 10.000000 |
+
+A forgotten factor is never harmless in the direction of safety or of cost. Leaving out a real enabling condition overstates the frequency and so the risk reduction demanded; typing a factor the analyst cannot justify understates it. Every factor on the row has to be defended in writing, which is why the engine keeps each one with its name.
+
+# SECTION 6: IPL credit: independence, the auditable flag and one credit per IPL (owned by Associate m03 and Expert m05 l04)
+
+ORONI carries four IPLs (stated):
+
+| IPL | IPL PFD, stated | independent, stated | auditable, stated |
+| --- | --- | --- | --- |
+| high level alarm with operator response | 0.1 | true | not given |
+| relief valve sized for the blocked outlet case | 0.01 | true | not given |
+| BPCS level trip on the initiating controller | 0.1 | false | not given |
+| operator round on a procedure never audited | 0.1 | true | false |
+
+| what the engine did | IPL | reason, verbatim |
+| --- | --- | --- |
+| credited | high level alarm with operator response |  |
+| credited | relief valve sized for the blocked outlet case |  |
+| not credited | BPCS level trip on the initiating controller | not flagged independent (independent must be true to take credit) |
+| not credited | operator round on a procedure never audited | flagged not auditable |
+
+| quantity | engine key | value |
+| --- | --- | --- |
+| product of the credited IPL PFDs | `iplProduct` | 0.001000000000 |
+| mitigated frequency without a SIF, per year | `mitigatedFrequencyWithoutSifPerYr` | 0.000013500000 |
+
+The engine's credit rule, verbatim: "an IPL is credited once, and only when flagged independent === true and not flagged auditable === false".
+
+EXACTLY TRUE. An IPL whose `independent` is the string "yes" is not credited: the engine lists it under `notCredited` with the reason "not flagged independent (independent must be true to take credit)". A missing flag is treated the same way. Credit is given only when the analyst has asserted independence in the one form the engine accepts.
+
+WHAT CREDITING EVERYTHING WOULD HAVE DONE. With all four IPLs credited the mitigated frequency reads 0.000000135000 per year against 0.000013500000: derived, 100.000000 times lower, and the required RRF drops from 13.500000 to 0.135000, which moves the outcome from SIL1 to NO_SIF_REQUIRED.
+
+ONE CREDIT PER IPL. Two IPLs with the same name are refused, case ignored (section 3). A layer counted twice would halve the frequency twice for one piece of hardware.
+
+THESE RULES ARE SPECIFICATION. The engine's own validation record says no independent route validates the credit rules; its shared negative control removed the auditable exclusion from both the engine and the oracle and the suite stayed green. They are the engine's contract, pinned by behaviour tests, and the judgement of whether a layer really is independent and auditable stays with the analyst.
+
+# SECTION 7: The TMEL, the required RRF and the required PFDavg (owned by Associate m04)
+
+ORONI's TMEL is 1e-6 per year (stated). The TMEL is the frequency the organisation will tolerate for this consequence; it is an input and the engine does not choose it.
+
+| quantity | engine key | value |
+| --- | --- | --- |
+| mitigated frequency without a SIF, per year | `mitigatedFrequencyWithoutSifPerYr` | 0.000013500000 |
+| TMEL, per year | `tmelPerYr` | 0.000001000000 |
+| required RRF, the first over the second | `requiredRrf` | 13.500000 |
+| required SIF PFDavg, one over the RRF | `requiredSifPfdAvg` | 0.074074074074 |
+| outcome | `outcome` | SIL1 |
+| required SIL | `requiredSil` | 1 |
+
+THE BINDING TARGET. The engine's basis says, verbatim: "the SIF must achieve requiredSifPfdAvg itself; the SIL band alone does not guarantee it". A SIL is a band ten times wide; the required PFDavg is one number inside it, and a SIF anywhere in the band above that number misses the TMEL (section 8).
+
+The same row against a ladder of TMELs:
+
+| TMEL per year, stated | required RRF | outcome | required SIL | required PFDavg |
+| --- | --- | --- | --- | --- |
+| 1e-4 | 0.135000 | NO_SIF_REQUIRED | none | null |
+| 1e-5 | 1.350000 | RISK_REDUCTION_BELOW_SIL1 | none | 0.740740740741 |
+| 1e-6 | 13.500000 | SIL1 | 1 | 0.074074074074 |
+| 1e-7 | 135.000000 | SIL2 | 2 | 0.007407407407 |
+| 1e-8 | 1350.000000 | SIL3 | 3 | 0.000740740741 |
+| 1e-9 | 13500.000000 | BEYOND_SIL3_REDESIGN | none | 0.000074074074 |
+| 1e-10 | 135000.000000 | BEYOND_SIL3_REDESIGN | none | 0.000007407407 |
+
+Each step of ten in the TMEL is a step of ten in the required RRF: the frequency does not move, only the tolerance does.
+
+# SECTION 8: Closing the loop with a proposed SIF (owned by Associate m04 l04 and Professional m05 l04)
+
+ORONI at a TMEL of 1e-7 per year (stated) requires SIL2 with a required PFDavg of 0.007407407407. Four proposed SIFs, each typed as a PFDavg (stated):
+
+| proposed SIF PFDavg, stated | its own SIL band | mitigated frequency with the SIF, per year | meets the TMEL |
+| --- | --- | --- | --- |
+| 0.02 | 1 | 0.000000270000 | false |
+| 0.009 | 2 | 0.000000121500 | false |
+| 0.005 | 2 | 0.000000067500 | true |
+| 0.0005 | 3 | 0.000000006750 | true |
+
+The second row is the point of this section: a SIF of 0.009 sits in the SIL2 band the row requires and still misses the TMEL, because 0.009 is above the required 0.007407407407. The band is a label. The required PFDavg is the target.
+
+Without a proposed SIF the engine reports `meetsTmel` as false for ORONI at its own TMEL, because the outcome is not NO_SIF_REQUIRED; the loop is closed only by typing a SIF's PFDavg.
+
+# SECTION 9: Six outcome states, from no SIF required to a redesign (owned by Associate m05 and Associate m06 l02)
+
+The outcome a required RRF demands, from `outcomeFromRequiredRrf`:
+
+| required RRF, stated | outcome | required SIL | required PFDavg | in the SIL 4 band |
+| --- | --- | --- | --- | --- |
+| 0.5 | NO_SIF_REQUIRED | none | null |  |
+| 1 | NO_SIF_REQUIRED | none | null |  |
+| 5 | RISK_REDUCTION_BELOW_SIL1 | none | 0.200000000000 |  |
+| 10 | RISK_REDUCTION_BELOW_SIL1 | none | 0.100000000000 |  |
+| 50 | SIL1 | 1 | 0.020000000000 |  |
+| 100 | SIL1 | 1 | 0.010000000000 |  |
+| 500 | SIL2 | 2 | 0.002000000000 |  |
+| 1000 | SIL2 | 2 | 0.001000000000 |  |
+| 5000 | SIL3 | 3 | 0.000200000000 |  |
+| 10000 | SIL3 | 3 | 0.000100000000 |  |
+| 50000 | BEYOND_SIL3_REDESIGN | none | 0.000020000000 | true |
+| 100000 | BEYOND_SIL3_REDESIGN | none | 0.000010000000 | true |
+| 500000 | BEYOND_SIL3_REDESIGN | none | 0.000002000000 | false |
+
+At an RRF of 50000 the engine's note reads: "the required PFDavg lies in the SIL 4 band: redesign the process or add non-SIS layers rather than rely on a SIL 4 SIF".
+At an RRF of 100000 the engine's note reads: "the required PFDavg lies in the SIL 4 band: redesign the process or add non-SIS layers rather than rely on a SIL 4 SIF".
+At an RRF of 500000 the engine's note reads: "the required PFDavg is below the SIL 4 band: no SIF can supply it, redesign".
+
+BEYOND SIL 3 IS NEVER CLIPPED. The state carries the required PFDavg intact, so a worksheet shows how far beyond the table the row sits. The process sector treats a demand for SIL 4 as a reason to redesign the process or add layers outside the SIS rather than to build a SIL 4 function.
+
+RISK_REDUCTION_BELOW_SIL1 means some reduction is needed and less than a SIL 1 SIF provides by definition. The engine returns the required PFDavg for it, and the gap can be closed by a SIF or by another IPL.
+
+# SECTION 10: The low demand bands, and where an exact decade falls (owned by Associate m05)
+
+| SIL | PFDavg from, inclusive | PFDavg to, exclusive | RRF above | RRF up to, inclusive |
+| --- | --- | --- | --- | --- |
+| 4 | 1e-5 | 1e-4 | 10000 | 100000 |
+| 3 | 1e-4 | 1e-3 | 1000 | 10000 |
+| 2 | 1e-3 | 1e-2 | 100 | 1000 |
+| 1 | 1e-2 | 1e-1 | 10 | 100 |
+
+An achieved PFDavg and the band `silFromPfdAvg` puts it in:
+
+| PFDavg, stated | SIL | state |
+| --- | --- | --- |
+| 1 | none | NOT_SIL_RATED |
+| 0.5 | none | NOT_SIL_RATED |
+| 0.1 | none | NOT_SIL_RATED |
+| 0.05 | 1 | SIL |
+| 0.01 | 1 | SIL |
+| 0.005 | 2 | SIL |
+| 0.001 | 2 | SIL |
+| 0.0005 | 3 | SIL |
+| 0.0001 | 3 | SIL |
+| 0.00005 | 4 | SIL |
+| 0.00001 | 4 | SIL |
+| 0.000005 | 4 | BELOW_SIL4_TABLE_FLOOR |
+
+The engine's band convention, verbatim: "IEC 61508-1 Table 2 / IEC 61511-1 low demand: SIL n holds 10^-(n+1) <= PFDavg < 10^-n; an exact decade belongs to the higher-PFD band".
+
+AN EXACT DECADE BELONGS TO THE LOWER SIL. A PFDavg of exactly 0.01 is SIL 1 and exactly 0.001 is SIL 2, because each band includes its lower PFDavg bound and excludes its upper one. In RRF terms, an RRF of exactly 100 is SIL 1 and exactly 10 is below SIL 1. A value that has just crossed a decade does not reach the higher band until it is strictly past it.
+
+Below 1e-5 the table has no row. The engine reports SIL 4 with the state BELOW_SIL4_TABLE_FLOOR and the note: "PFDavg below 1e-5 is off the table: no claim beyond SIL 4 exists".
+
+# SECTION 11: The decade snap: why an exact decade needs one (owned by Associate m05 l04)
+
+`DECADE_SNAP` is 1e-9. A value within that RELATIVE distance of a power of ten is treated as the power of ten, for the band and for the comparison of a mitigated frequency with the TMEL.
+
+Frequency products whose exact value is a decade, computed in IEEE double:
+
+| factors, stated | TMEL, stated | the double, seventeen significant digits | decadeOf | outcome with the snap | outcome of a plain comparison with 100, derived |
+| --- | --- | --- | --- | --- | --- |
+| 0.1 x 0.1 x 0.1 | 1e-5 | 100.00000000000001 | 2 | SIL1 | SIL2 |
+| 0.3 x 0.1 | 3e-4 | 100.00000000000000 | 2 | SIL1 | SIL1 |
+| 0.2 x 0.5 x 0.1 | 1e-4 | 100.00000000000001 | 2 | SIL1 | SIL2 |
+| 0.7 x 0.1 x 0.1 | 7e-5 | 100.00000000000000 | 2 | SIL1 | SIL1 |
+| 0.9 x 0.1 | 9e-4 | 100.00000000000001 | 2 | SIL1 | SIL2 |
+
+3 of the 5 products land strictly above 100 in double. Without the snap each of those would be banded SIL 2 on an RRF whose exact value is 100. The snap is what makes the engine honour its own band convention on real arithmetic.
+
+HOW WIDE THE SNAP IS. RRFs typed near 100:
+
+| RRF, stated | relative distance from 100, derived | decadeOf | outcome |
+| --- | --- | --- | --- |
+| 100 | 0 | 2 | SIL1 |
+| 100.0000001 | 1.00e-9 | 2 | SIL1 |
+| 100.000001 | 1.00e-8 | null | SIL2 |
+| 100.00001 | 1.00e-7 | null | SIL2 |
+| 99.9999999 | 1.00e-9 | 2 | SIL1 |
+
+An RRF deliberately entered one part in a billion above 100 is read as exactly 100. The snap is a chosen tolerance; the engine's validation record names it as one, and one part in a hundred million is already outside it.
+
+# SECTION 12: The golden LOPA scenarios, run through the engine (owned by Associate m06)
+
+Every LOPA scenario in the vendored golden, called through the engine and set beside the golden's own expected values. Every golden LOPA scenario is ORACLE-DERIVED: it follows the CCPS method with illustrative numbers, and the golden says so in its source line.
+
+| golden case | required RRF | golden RRF, exact rational | outcome | meets the TMEL | relative difference |
+| --- | --- | --- | --- | --- | --- |
+| tank-overflow-below-sil1 | 2.500000 | 5/2 | RISK_REDUCTION_BELOW_SIL1 | false | 0 |
+| rrf-exactly-100 | 100.000000 | 100/1 | SIL1 | false | 1.42e-16 |
+| rrf-exactly-1000 | 1000.000000 | 1000/1 | SIL2 | false | 1.14e-16 |
+| rrf-exactly-10000 | 10000.000000 | 10000/1 | SIL3 | false | 1.82e-16 |
+| rrf-exactly-10 | 10.000000 | 10/1 | RISK_REDUCTION_BELOW_SIL1 | false | 1.78e-16 |
+| f-equals-tmel | 1.000000 | 1/1 | NO_SIF_REQUIRED | true | 0 |
+| ipl-sufficient | 0.100000 | 1/10 | NO_SIF_REQUIRED | true | 0 |
+| beyond-sil3-sil4-band | 20000.000000 | 20000/1 | BEYOND_SIL3_REDESIGN | false | 0 |
+| beyond-sil4-band | 200000.000000 | 200000/1 | BEYOND_SIL3_REDESIGN | false | 1.46e-16 |
+| non-independent-not-credited | 100.000000 | 100/1 | SIL1 | false | 0 |
+| enabling-and-sif | 90.000000 | 90/1 | SIL1 | true | 1.58e-16 |
+| sif-just-short | 300.000000 | 300/1 | SIL2 | false | 0 |
+| rrf-just-above-100 | 100.000010 | 10000001/100000 | SIL2 | false | 0 |
+
+All 13 agree with the golden on the outcome, the required RRF and `meetsTmel`. The oracle decides every boundary in exact rationals with no snap, so the golden cases that sit on a decade are a check on the snap.
+
+WHAT IS NOT HERE. The CCPS continuing example from the book is not reproduced. The engine's validation record says no copy of the book was available to check its worksheet numbers against, and no golden claims to be that example.
+
+# SECTION 13: What LOPA does not grade: the risk matrix seam (owned by Associate m06 l03)
+
+A LOPA row is FREQUENCY BASED. It multiplies a frequency per year by probabilities and compares the result with a TMEL per year. Nothing in this engine takes a consequence category, a matrix score or a matrix band, and nothing in this course grades one.
+
+The academy already teaches two risk matrices: the risk and change course grades the five by five matrix on its own bands, and the field development course teaches a second scale. Both rank a risk on scored bands. This course never re-grades either, and a LOPA consequence is described in words (a fatality, a release reaching the jetty) and carried into the row through its TMEL.
+
+The engine's units line, verbatim: "frequencies per year; probabilities and PFDs dimensionless".
+
+# SECTION 14: The simplified forms, and the half in one out of one (owned by Professional m01)
+
+The EKULAMA channel for the simplified forms: lambdaDU 1.2e-6 per hour, T1 8760 hours, beta factor 0.05 where the architecture takes one, no detected failures, no MRT (all stated). In the forms below b is the beta factor and T is T1, as the engine writes them.
+
+| architecture | simplified form | engine PFDavg | simplified form, derived | relative difference | RRF | SIL |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1oo1 | lambdaDU T / 2 | 0.005256000000 | 0.005256000000 | 0 | 190.258752 | 2 |
+| 1oo2 | ((1 - b) lambdaDU T)^2 / 3 + b lambdaDU T / 2 | 0.000296042728 | 0.000296042728 | 0 | 3377.890772 | 3 |
+| 2oo2 | lambdaDU T | 0.010512000000 | 0.010512000000 | 0 | 95.129376 | 1 |
+| 2oo3 | ((1 - b) lambdaDU T)^2 + b lambdaDU T / 2 | 0.000362528185 | 0.000362528185 | 0 | 2758.406219 | 3 |
+| 1oo3 | ((1 - b) lambdaDU T)^3 / 4 + b lambdaDU T / 2 | 0.000263048981 | 0.000263048981 | 0 | 3801.573360 | 3 |
+
+lambdaDU T for this channel is, derived, 0.010512000000. The engine reproduces every simplified form to machine precision on it.
+
+THE HALF IN ONE OUT OF ONE. A dangerous undetected failure arrives at a random moment in the interval and stays until the next proof test, so on average the channel is failed for half the interval: PFDavg is lambdaDU T / 2. Dropping the half doubles it: the 1oo1 PFDavg is 0.005256000000 and lambdaDU T is 0.010512000000, derived.
+
+# SECTION 15: The full Annex B form: detected failures, the MTTR and the equivalent down times (owned by Professional m02)
+
+The Annex B equations, as the engine states them in its `basis.formula` and in its header:
+
+| architecture | the engine basis.formula, verbatim |
+| --- | --- |
+| 1oo1 | PFD = lD tCE |
+| 1oo2 | PFD = 2((1-bD) lDD + (1-b) lDU)^2 tCE tGE + bD lDD MTTR + b lDU (T1/2 + MRT) |
+| 2oo2 | PFD = 2 lD tCE (Annex B carries no beta term for 2oo2) |
+| 2oo3 | PFD = 6((1-bD) lDD + (1-b) lDU)^2 tCE tGE + bD lDD MTTR + b lDU (T1/2 + MRT) |
+| 1oo3 | PFD = 6((1-bD) lDD + (1-b) lDU)^3 tCE tG2E tGE + bD lDD MTTR + b lDU (T1/2 + MRT) |
+
+The channel equivalent down time, verbatim from `basis.tCE`: "lDU/lD (T1/2 + MRT) + lDD/lD MTTR". The group equivalent down time uses T1/3 in place of T1/2 for 1oo2 and 2oo3; for 1oo3 the second failure uses T1/3 and the group T1/4.
+
+EKULAMA with detected failures (stated): lambdaDU 1.2e-6, lambdaDD 2.8e-6 per hour, T1 8760, MTTR 8, MRT 8 hours, beta factor 0.05, betaD 0.02.
+
+| architecture | tCE hours | tGE hours | tG2E hours | independent term | common cause DU | common cause DD | PFDavg | dominant |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1oo1 | 1322.000000 | null | null | 0.005288000000 | 0.000000000000 | 0.000000000000 | 0.005288000000 | independent |
+| 1oo2 | 1322.000000 | 884.000000 | null | 0.000035259176 | 0.000263280000 | 0.000000448000 | 0.000298987176 | common cause |
+| 2oo2 | 1322.000000 | null | null | 0.010576000000 | 0.000000000000 | 0.000000000000 | 0.010576000000 | independent |
+| 2oo3 | 1322.000000 | 884.000000 | null | 0.000105777528 | 0.000263280000 | 0.000000448000 | 0.000369505528 | common cause |
+| 1oo3 | 1322.000000 | 665.000000 | 884.000000 | 0.000000273209 | 0.000263280000 | 0.000000448000 | 0.000264001209 | common cause |
+
+Derived: lambdaD, the sum of lambdaDU and lambdaDD, is 4e-6 per hour, and tCE from the stated formula is 1322.000000 hours, which is the engine's. T1/2 is 4380.000000 hours. The detected failures pull tCE far below T1/2, because a detected failure is down for the MTTR and no longer; but they also raise lambdaD, and the 1oo1 PFDavg is their product: 0.005288000000 here against 0.005256000000 for the same lambdaDU with no detected failures (section 14).
+
+# SECTION 16: The simplified forms ARE the Annex B form with no detected failures and no MRT (owned by Professional m01 l05 and Professional m02)
+
+The engine implements only the full form. The simplified TR84 forms are its special case, and the engine's basis says so, verbatim:
+
+> IEC 61508-6:2010 Annex B.3.2.2 reliability block diagram simplified equations, low demand; reduces to the ISA-TR84.00.02 simplified forms when lambdaDD = 0 and MRT = 0
+
+Setting lambdaDD and MRT to zero in the EKULAMA full channel, and comparing with the simplified forms of section 14:
+
+| architecture | full form, lambdaDD and MRT zero | simplified form, section 14 | comparison |
+| --- | --- | --- | --- |
+| 1oo1 | 0.005256000000 | 0.005256000000 | identical |
+| 1oo2 | 0.000296042728 | 0.000296042728 | identical |
+| 2oo2 | 0.010512000000 | 0.010512000000 | identical |
+| 2oo3 | 0.000362528185 | 0.000362528185 | identical |
+| 1oo3 | 0.000263048981 | 0.000263048981 | identical |
+
+Where the simplified forms stop is where the plant stops being simple: detected failures, an MRT after a test, or partial proof test coverage. The engine then keeps the equivalent down time bookkeeping the simplified forms drop.
+
+# SECTION 17: The MRT after a proof test, and an MRT different from the MTTR (owned by Professional m02 l04)
+
+MRT is the mean restoration time AFTER A PROOF TEST REVEALS a dangerous undetected failure; MTTR is the restoration time of a DETECTED failure. The engine adds MRT to every DU down time (T1/2 + MRT, T1/3 + MRT) and puts MTTR on the detected share. The EKULAMA full channel as 1oo2 at MTTR 8 hours (stated), with MRT swept:
+
+| MRT hours, stated | tCE hours | tGE hours | PFDavg | over the MRT 0 row, derived |
+| --- | --- | --- | --- | --- |
+| 0 | 1319.600000 | 881.600000 | 0.000298347613 | 1.000000 |
+| 8 | 1322.000000 | 884.000000 | 0.000298987176 | 1.002144 |
+| 24 | 1326.800000 | 888.800000 | 0.000300267345 | 1.006435 |
+| 72 | 1341.200000 | 903.200000 | 0.000304116193 | 1.019335 |
+| 168 | 1370.000000 | 932.000000 | 0.000311851427 | 1.045262 |
+
+MRT enters the common cause DU term too: b lambdaDU (T1/2 + MRT), with b the beta factor. An MRT of 168 hours, a week, adds, derived, 4.53 percent to this PFDavg against MRT zero.
+
+The golden keeps a case with MRT 168 hours and MTTR 8 hours (golden), because until MRT and MTTR differ a mix-up between them cannot be seen: the engine gives 0.000255485341 against the golden's 0.000255485341.
+
+# SECTION 18: Imperfect proof test coverage in the PFDavg (owned by Professional m02 l05)
+
+A proof test that reveals only a fraction PTC of the dangerous undetected failures leaves the rest until the item is restored as new at the lifetime T2. The engine splits every DU down time: PTC (T1/(j+1) + MRT) + (1 - PTC)(T2/(j+1) + MRT). OBAGI is one shutdown valve (stated): 1oo1, lambdaDU 9e-7 per hour, T1 8760, MRT 24, T2 87600 hours.
+
+| proof test coverage, stated | tCE hours | PFDavg | RRF | SIL | the engine basis.proofTestCoverage |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 4404.000000 | 0.003963600000 | 252.295893 | 2 | perfect proof test (PTC = 1) |
+| 0.95 | 6375.000000 | 0.005737500000 | 174.291939 | 2 | imperfect proof test: lDU down time PTC (T1/(j+1) + MRT) + (1 - PTC)(T2/(j+1) + MRT) |
+| 0.9 | 8346.000000 | 0.007511400000 | 133.130974 | 2 | imperfect proof test: lDU down time PTC (T1/(j+1) + MRT) + (1 - PTC)(T2/(j+1) + MRT) |
+| 0.8 | 12288.000000 | 0.011059200000 | 90.422454 | 1 | imperfect proof test: lDU down time PTC (T1/(j+1) + MRT) + (1 - PTC)(T2/(j+1) + MRT) |
+| 0.7 | 16230.000000 | 0.014607000000 | 68.460327 | 1 | imperfect proof test: lDU down time PTC (T1/(j+1) + MRT) + (1 - PTC)(T2/(j+1) + MRT) |
+
+A coverage of 0.7 leaves, derived, 30.00 percent of the undetected failures to wait for the 10 year overhaul, and the PFDavg is 3.685286 times the perfect test's, derived. section 27 is where coverage sets a floor no proof test interval can reach below.
+
+# SECTION 19: Common cause: the beta factor and the detected beta factor (owned by Professional m03)
+
+The beta factor is the fraction of dangerous undetected failures that strike every channel at once; betaD is the same fraction for detected failures. In the engine's notation b is the beta factor and bD is betaD. Common cause takes those failures out of the independent rate, (1 - bD) lambdaDD + (1 - b) lambdaDU, and adds them back as a single-channel term: b lambdaDU (T1/2 + MRT) + bD lambdaDD MTTR.
+
+The EKULAMA full channel as 1oo2 and 2oo3, the beta factor swept, betaD half of it (stated):
+
+| architecture | beta factor, stated | betaD, stated | independent term | common cause, DU plus DD | PFDavg | dominant |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1oo2 | 0 | 0 | 0.000037396736 | 0.000000000000 | 0.000037396736 | independent |
+| 2oo3 | 0 | 0 | 0.000112190208 | 0.000000000000 | 0.000112190208 | independent |
+| 1oo2 | 0.02 | 0.01 | 0.000036430741 | 0.000105536000 | 0.000141966741 | common cause |
+| 2oo3 | 0.02 | 0.01 | 0.000109292223 | 0.000105536000 | 0.000214828223 | independent |
+| 1oo2 | 0.05 | 0.025 | 0.000035005448 | 0.000263840000 | 0.000298845448 | common cause |
+| 2oo3 | 0.05 | 0.025 | 0.000105016345 | 0.000263840000 | 0.000368856345 | common cause |
+| 1oo2 | 0.1 | 0.05 | 0.000032693162 | 0.000527680000 | 0.000560373162 | common cause |
+| 2oo3 | 0.1 | 0.05 | 0.000098079485 | 0.000527680000 | 0.000625759485 | common cause |
+| 1oo2 | 0.2 | 0.1 | 0.000028305589 | 0.001055360000 | 0.001083665589 | common cause |
+| 2oo3 | 0.2 | 0.1 | 0.000084916768 | 0.001055360000 | 0.001140276768 | common cause |
+
+Common cause dominates the 1oo2 from a beta factor of 0.02 and the 2oo3 from 0.05 on this channel. Once it dominates, a second or third channel buys little: the common cause term is a single-channel failure that redundancy cannot vote out.
+
+THE BETA FACTOR MUST BE TYPED. For a redundant architecture a missing beta factor is refused, and the refusal says why in the engine's words (section 3): typing zero is a claim of no common cause at all.
+
+# SECTION 20: Two out of two carries no beta factor term (owned by Professional m03 l04 and Expert m03 l04)
+
+| call | PFDavg | common cause DU | warnings, verbatim |
+| --- | --- | --- | --- |
+| 2oo2, no beta factor typed | 0.010576000000 | 0.000000000000 | none |
+| 2oo2, beta factor 0.05 typed | 0.010576000000 | 0.000000000000 | beta does not apply to 2oo2 and was ignored |
+
+The engine's formula for 2oo2, verbatim: "PFD = 2 lD tCE (Annex B carries no beta term for 2oo2)". A 2oo2 trips only when BOTH channels work, so it fails on the FIRST dangerous failure of either: its PFDavg is twice one channel's. A common cause failure of both channels fails the 2oo2 no worse than one channel failing, so treating every failure as independent counts such a failure twice, which errs high. The warning tells the analyst the typed beta factor did nothing.
+
+How conservative that is, from the golden's time dependent route (golden): at beta factor 0.1 the exact 2oo2 average is 0.016460844922 against the Annex B 0.017520000000, derived 6.43 percent above it. Common cause makes a real 2oo2 slightly better than two independent channels, and Annex B does not take the credit.
+
+# SECTION 21: One channel in every architecture (owned by Professional m04)
+
+The EKULAMA full channel in all five architectures (section 15 inputs), ranked by PFDavg:
+
+| architecture | PFDavg | RRF | SIL | over 1oo1, derived |
+| --- | --- | --- | --- | --- |
+| 1oo3 | 0.000264001209 | 3787.861448 | 3 | 0.049925 |
+| 1oo2 | 0.000298987176 | 3344.625055 | 3 | 0.056541 |
+| 2oo3 | 0.000369505528 | 2706.319458 | 3 | 0.069876 |
+| 1oo1 | 0.005288000000 | 189.107413 | 2 | 1.000000 |
+| 2oo2 | 0.010576000000 | 94.553707 | 1 | 2.000000 |
+
+TWO OUT OF THREE AND ITS SIX. A 2oo3 fails when any two of its three channels fail: three pairs, and either failure of a pair can come first, so its independent term carries 6 where 1oo2 carries 2. Voting 2oo3 costs PFDavg against 1oo2 and buys tolerance of one channel tripping spuriously, which this engine does not compute. On this channel the 2oo3 over the 1oo2 is, derived, 1.235857.
+
+ONE OUT OF THREE. Three failures must accumulate; the engine uses the second failure's down time with T1/3 and the group's with T1/4. The engine's validation record checks 1oo3 against the time dependent route to first order only, with no published worked row.
+
+# SECTION 22: A SIF is the sum of its subsystems (owned by Professional m05)
+
+The IDU teaching SIF, three subsystems (stated):
+
+| subsystem | architecture | lambdaDU per hour | lambdaDD per hour | T1 hours | MTTR hours | MRT hours | beta factor | betaD |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| transmitters | 2oo3 | 1.2e-6 | 2.8e-6 | 8760 | 8 | 8 | 0.05 | 0.02 |
+| logic solver | 1oo1 | 3e-8 | 6e-7 | 8760 | 8 | 8 | none | none |
+| valves | 1oo2 | 2.6e-6 | 0 | 8760 | none | 24 | 0.1 | none |
+
+| part | architecture | PFDavg | share of the SIF, derived |
+| --- | --- | --- | --- |
+| transmitters | 2oo3 | 0.000369505528 | 20.61 percent |
+| logic solver | 1oo1 | 0.000136440000 | 7.61 percent |
+| valves | 1oo2 | 0.001287026426 | 71.78 percent |
+
+| SIF | value |
+| --- | --- |
+| PFDavg | 0.001792971954 |
+| RRF | 557.733208 |
+| SIL | 2 |
+| state | SIL |
+
+The engine's method, verbatim: "series sum of subsystem PFDavg (IEC 61508-6 Annex B.3.2.1: PFD_SYS = PFD_S + PFD_L + PFD_FE)". The valves carry the largest share, derived 71.78 percent, which is common in practice: a mechanical final element is the weakest link, and its proof test interval is the first lever.
+
+BACK TO THE TMEL. Closing the ORONI row at a TMEL of 1e-7 (section 8) with the IDU SIF gives a mitigated frequency of 0.000000024205 per year: `meetsTmel` is true. The SIF's achieved PFDavg of 0.001792971954 is below the required 0.007407407407.
+
+The sum ignores a small overlap term, which the engine's validation record names; for PFDavg values this small the overlap is second order.
+
+# SECTION 23: The published worked SIF, reproduced subsystem by subsystem (owned by Professional m06 and Expert m04)
+
+Source (golden): PUBLISHED: 61508 Association, Dolan (2024), SIL Calculations: Practical Guidance in the use of IEC 61508-6:2010, results table. The failure rates are the slide's own, which it cites to SINTEF PDS and vendor certificates; they are the slide's example values and this course offers them as nothing more. T1 is one year, 8760 hours, throughout.
+
+| golden case | architecture | lambdaDU per hour | lambdaDD per hour | T1 hours | MTTR hours | MRT hours | beta factor | betaD |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| dolan-pt-2oo3 | 2oo3 | 5e-7 | 8e-7 | 8760 | 8 | 8 | 0.1 | 0.1 |
+| dolan-ai-2oo3 | 2oo3 | 7.06e-9 | 8.86e-7 | 8760 | 8 | 8 | 0.02 | 0.01 |
+| dolan-cpu-1oo2 | 1oo2 | 4.9e-9 | 1.28e-6 | 8760 | 8 | 8 | 0.02 | 0.01 |
+| dolan-do-1oo2 | 1oo2 | 6.81e-9 | 8.61e-7 | 8760 | 8 | 8 | 0.02 | 0.01 |
+| dolan-valve-1oo2 | 1oo2 | 2.1e-6 | 4e-7 | 8760 | 120 | 120 | 0.1 | 0.1 |
+
+| golden case | engine PFDavg | engine at three significant figures | printed | relative difference against the golden |
+| --- | --- | --- | --- | --- |
+| dolan-pt-2oo3 | 0.000235764375 | 2.36E-04 | 2.36E-04 | 0 |
+| dolan-ai-2oo3 | 0.000000696679 | 6.97E-07 | 6.97E-07 | 0 |
+| dolan-cpu-1oo2 | 0.000000533954 | 5.34E-07 | 5.34E-07 | 0 |
+| dolan-do-1oo2 | 0.000000668459 | 6.68E-07 | 6.68E-07 | 0 |
+| dolan-valve-1oo2 | 0.001048767640 | 1.05E-03 | 1.05E-03 | 0 |
+
+| SIF | engine | printed |
+| --- | --- | --- |
+| PFDavg | 0.001286431107 | 1.29E-03 |
+| RRF | 777.344387 | 777 |
+| SIL | 2 |  |
+
+Every subsystem and the total round to the printed three significant figures, and the RRF rounds to the printed 777. The published table reproduces only with MRT equal to the MTTR on every row; section 29 shows what happens otherwise.
+
+Two more published rows (golden): the pressure transmitters with the beta factor raised by half, as the slide multiplies it for MooN:
+
+| golden case | beta factor, golden | engine PFDavg | engine at three significant figures | printed |
+| --- | --- | --- | --- | --- |
+| dolan-pt-2oo3-beta15 | 0.15 | 0.000344085754 | 3.44E-04 | 3.44E-04 |
+
+# SECTION 24: Warnings, ignored inputs and the refusals of the verification half (owned by Professional m06 l03 and Expert m03 l03)
+
+A warning is returned WITH a result; a refusal replaces it. The warnings the verification half can return:
+
+| call | PFDavg | warning, verbatim |
+| --- | --- | --- |
+| 1oo1, lambdaDU 2e-5, T1 8760 | 0.087600000000 | lambdaDU x T = 0.1752 exceeds 0.1: the linearised (rare-event) equations overstate PFDavg noticeably here |
+| 1oo1 with a beta factor of 0.1 typed | 0.004380000000 | beta does not apply to 1oo1 and was ignored |
+| 2oo2 with a beta factor typed, section 20 | 0.010576000000 | beta does not apply to 2oo2 and was ignored |
+
+Past the warning is the refusal: once the linearised value reaches one it is no longer a probability, and the engine refuses with, verbatim:
+
+> proofTestIntervalHours: the simplified equations give 4.38 here, which is not a probability: lambda x T is far outside the rare-event range they assume; use an exact (Markov) model
+
+The warning threshold is lambdaDU times T above 0.1; the refusal is a PFDavg of one or more. Between them the engine answers and says the answer overstates. section 28 measures by how much.
+
+# SECTION 25: PFDavg against the proof test interval (owned by Expert m01)
+
+`proofTestSensitivity` holds every input and moves T1. Intervals from a quarter year to eight years (stated): 2190, 4380, 8760, 17520, 35040, 70080 hours.
+
+| T1 hours | T1 years, derived | EKULAMA 1oo1, DU only | EKULAMA full 1oo2 | EKULAMA full 2oo3 | IDU valves 1oo2 |
+| --- | --- | --- | --- | --- | --- |
+| 2190 | 0.250000 | 0.001314000000 | 0.000068932620 | 0.000073541861 | 0.000300179812 |
+| 4380 | 0.500000 | 0.002628000000 | 0.000141276391 | 0.000159173172 | 0.000611621000 |
+| 8760 | 1.000000 | 0.005256000000 | 0.000298987176 | 0.000369505528 | 0.001287026426 |
+| 17520 | 2.000000 | 0.010512000000 | 0.000666501722 | 0.000946449167 | 0.002847929478 |
+| 35040 | 4.000000 | 0.021024000000 | 0.001609902719 | 0.002725452157 | 0.006810104389 |
+| 70080 | 8.000000 | 0.042048000000 | 0.004330192328 | 0.008783920983 | 0.018095929431 |
+
+THE RATIO FOR EACH DOUBLING, derived as the PFDavg at an interval over the PFDavg at half of it:
+
+| T1 hours | EKULAMA 1oo1, DU only | EKULAMA full 1oo2 | EKULAMA full 2oo3 | IDU valves 1oo2 |
+| --- | --- | --- | --- | --- |
+| 4380 | 2.000000 | 2.049485 | 2.164389 | 2.037515 |
+| 8760 | 2.000000 | 2.116328 | 2.321406 | 2.104288 |
+| 17520 | 2.000000 | 2.229198 | 2.561394 | 2.212798 |
+| 35040 | 2.000000 | 2.415452 | 2.879660 | 2.391248 |
+| 70080 | 2.000000 | 2.689723 | 3.222922 | 2.657218 |
+
+A 1oo1 with no detected failures is LINEAR in T1: each doubling doubles it. The three redundant subsystems here are common cause dominated at one year, and the common cause term is linear in T1, so at short intervals their ratio sits just above two. As T1 grows the independent term, which grows with the SQUARE of T1, takes a larger share and the ratio climbs toward four without reaching it in this sweep.
+
+The SIL each row falls in, for the IDU valves: 2190 hours SIL 3; 4380 hours SIL 3; 8760 hours SIL 2; 17520 hours SIL 2; 35040 hours SIL 2; 70080 hours SIL 1.
+
+# SECTION 26: The longest proof test interval, and its states (owned by Expert m01 and Expert m06)
+
+`maxProofTestInterval` finds the longest T1 at which a subsystem still meets a target PFDavg, by bisection on T1 to one part in a trillion; PFDavg never falls as T1 grows, so the answer is unique. The IDU valves against five targets (stated):
+
+| target PFDavg, stated | state | longest T1 hours | longest T1 years | PFDavg at that T1 |
+| --- | --- | --- | --- | --- |
+| 0.0005 | FOUND | 3609.141022 | 0.412002 | 0.000500000000 |
+| 0.001 | FOUND | 6953.661742 | 0.793797 | 0.001000000000 |
+| 0.002 | FOUND | 12957.474301 | 1.479164 | 0.002000000000 |
+| 0.005 | FOUND | 27640.443736 | 3.155302 | 0.005000000000 |
+| 0.01 | FOUND | 46473.426980 | 5.305186 | 0.010000000000 |
+
+The engine's method, verbatim: "bisection on T1 of the Annex B PFDavg, which is non-decreasing in T1".
+
+States with no finite answer, one subsystem each (stated):
+
+| state | subsystem, stated | target | longest T1 hours | floor PFDavg | PFDavg reported |
+| --- | --- | --- | --- | --- | --- |
+| UNACHIEVABLE | 1oo1, lambdaDU 1e-6, lambdaDD 2e-4, MTTR 72 | 0.01 | null | 0.014400000000 |  |
+| INTERVAL_INDEPENDENT | 1oo1, lambdaDU 0, lambdaDD 1e-6, MTTR 8 | 0.01 | null |  | 0.000008000000 |
+| CAPPED_AT_LIFETIME | 1oo1, lambdaDU 2e-8, lambdaDD 0, coverage 0.9, T2 87600 | 0.01 | 87600.000000 |  | 0.000876000000 |
+
+UNACHIEVABLE: the part of the PFDavg that does not depend on T1 (detected failures over the MTTR, the MRT, and the uncovered part under partial coverage) already reaches the target, so no interval, however short, meets it. INTERVAL_INDEPENDENT: with no undetected failures T1 does not enter. CAPPED_AT_LIFETIME: the target is met even at the lifetime T2, and no interval longer than T2 is meaningful.
+
+# SECTION 27: Imperfect coverage: the floor and the lifetime cap (owned by Expert m02)
+
+OBAGI (section 18) against a target of 0.02 (stated), coverage swept. The FLOOR is the PFDavg as T1 goes to zero: the uncovered failures stay down for T2/2 on average whatever the test interval.
+
+| coverage, stated | floor PFDavg | longest T1 hours at the target | longest T1 years |
+| --- | --- | --- | --- |
+| 1 | 0.000021600000 | 44396.444444 | 5.068087 |
+| 0.95 | 0.001992600000 | 42122.573099 | 4.808513 |
+| 0.9 | 0.003963600000 | 39596.049383 | 4.520097 |
+| 0.8 | 0.007905600000 | 33595.555556 | 3.835109 |
+| 0.7 | 0.011847600000 | 25880.634921 | 2.954410 |
+
+Derived for coverage 0.7: lambdaDU (1 - PTC)(T2/2 + MRT) + lambdaDU PTC MRT is 0.011847600000, which is the engine's floor. A target below the floor is UNACHIEVABLE whatever the interval; only a better test or a shorter lifetime moves the floor.
+
+THE CAP. The CAPPED_AT_LIFETIME case in section 26 with coverage 0.9 and a lifetime of 87600 hours meets its target at the lifetime itself, so the engine returns the lifetime and the state CAPPED_AT_LIFETIME.
+
+WHAT A PARTIAL TEST BUYS. A partial stroke test at a short interval plus a full test at overhaul is a coverage split: the covered part sees the short interval, the uncovered part sees the overhaul. The engine models exactly that split and nothing more elaborate.
+
+# SECTION 28: How conservative the Annex B forms are (owned by Expert m03)
+
+The oracle behind the golden has a second route, the TIME DEPENDENT unavailability averaged by numerical quadrature with nothing linearised. The golden records its value beside every PFDavg case (golden, route B). Annex B is never below it: the simplified equations are first order in lambda T and use equivalent down times, and both choices err high.
+
+| golden case | engine PFDavg | route B, golden | engine over route B minus one, derived |
+| --- | --- | --- | --- |
+| dolan-pt-2oo3 | 0.000235764375 | 0.000235575925 | 8.000e-4 |
+| dolan-ai-2oo3 | 0.000000696679 | 0.000000695574 | 1.588e-3 |
+| dolan-cpu-1oo2 | 0.000000533954 | 0.000000533545 | 7.655e-4 |
+| dolan-do-1oo2 | 0.000000668459 | 0.000000668114 | 5.170e-4 |
+| dolan-valve-1oo2 | 0.001048767640 | 0.001043789195 | 4.770e-3 |
+| dolan-pt-2oo3-beta15 | 0.000344085754 | 0.000343875460 | 6.115e-4 |
+| dolan-valve-1oo2-ptc85 | 0.002713783083 | 0.002638288099 | 2.862e-2 |
+| dolan-pt-2oo3-ptc90 | 0.000676060358 | 0.000669710253 | 9.482e-3 |
+| dolan-cpu-1oo2-ptc98 | 0.000000611583 | 0.000000611065 | 8.476e-4 |
+| dolan-do-1oo2-ptc98 | 0.000000776417 | 0.000000775912 | 6.503e-4 |
+| tr84-1oo1 | 0.008760000000 | 0.008709064891 | 5.849e-3 |
+| tr84-1oo1-with-dd | 0.008880000000 | 0.008828005530 | 5.890e-3 |
+| tr84-2oo2 | 0.017520000000 | 0.017317146501 | 1.171e-2 |
+| tr84-1oo2-beta5 | 0.000530340912 | 0.000529009407 | 2.517e-3 |
+| tr84-2oo3-beta5 | 0.000715022736 | 0.000709025673 | 8.458e-3 |
+| tr84-1oo3-beta5 | 0.000439152692 | 0.000439001274 | 3.449e-4 |
+| 1oo2-beta0 | 0.000102316800 | 0.000100983281 | 1.321e-2 |
+| 1oo2-beta1 | 0.008760000000 | 0.008709064891 | 5.849e-3 |
+| 2oo3-beta0 | 0.000306950400 | 0.000300316807 | 2.209e-2 |
+| 2oo3-beta1 | 0.008760000000 | 0.008709064891 | 5.849e-3 |
+| 1oo3-beta0 | 0.000001344443 | 0.000001316518 | 2.121e-2 |
+| 1oo3-beta1 | 0.008760000000 | 0.008709064891 | 5.849e-3 |
+| 1oo2-ccf-dominated | 0.000224179788 | 0.000224130836 | 2.184e-4 |
+| 1oo2-full-annexb | 0.000555204499 | 0.000545634667 | 1.754e-2 |
+| 1oo2-mrt-ne-mttr | 0.000255485341 | 0.000252779155 | 1.071e-2 |
+| 1oo1-mrt-ne-mttr | 0.004588000000 | 0.004574307642 | 2.993e-3 |
+| 1oo1-long-interval | 0.219000000000 | 0.190241513373 | 1.512e-1 |
+| 1oo3-full-ptc | 0.001277138663 | 0.001268449520 | 6.850e-3 |
+
+Across 28 golden cases the engine sits at or above route B every time. The largest departure is 1oo1-long-interval, at 15.12 percent, derived; its lambda T is 0.438000, derived, well past the 0.1 at which the engine warns (section 24).
+
+WHERE THE FORMS DEPART, as the engine's validation record derives them: the linearised 1oo1 omits a term of order (lambda T) squared; the equivalent down time convention charges detected failures and MRT more than the exact average does; the coverage cross term is charged at (2/3) T1 T2 where the exact average charges T1 T2 / 2 + T1^2 / 6, which is lower whenever T2 is at least T1; and 2oo2 takes no credit for common cause (section 20). Every one of them makes Annex B higher, which is the conservative direction for a PFDavg.
+
+# SECTION 29: The published example's inferred inputs, and a printing slip (owned by Expert m04)
+
+The published table does not print everything it used. Three inputs had to be INFERRED from reproduction. The golden's source lines record two of them, the lifetime and the beta factor slip; the third, MRT equal to the MTTR, is recorded in the engine's validation record and shown here.
+
+ONE. MRT EQUAL TO THE MTTR. The valve row, both ways:
+
+| MRT hours | engine PFDavg | at three significant figures | printed |
+| --- | --- | --- | --- |
+| 120 | 0.001048767640 | 1.05E-03 | 1.05E-03 |
+| 0 | 0.001017167254 | 1.02E-03 | 1.05E-03 |
+
+TWO. THE LIFETIME T2 in the coverage table is not printed. The four coverage rows, each with T2 swept (stated, in years):
+
+| golden case | printed | T2 5 years | T2 8 years | T2 10 years | T2 12 years | T2 15 years |
+| --- | --- | --- | --- | --- | --- | --- |
+| dolan-valve-1oo2-ptc85 | 2.71E-03 | 1.75E-03 | 2.31E-03 | 2.71E-03 | 3.13E-03 | 3.78E-03 |
+| dolan-pt-2oo3-ptc90 | 6.76E-04 | 4.89E-04 | 6.00E-04 | 6.76E-04 | 7.53E-04 | 8.70E-04 |
+| dolan-cpu-1oo2-ptc98 | 6.12E-07 | 5.68E-07 | 5.94E-07 | 6.12E-07 | 6.29E-07 | 6.55E-07 |
+| dolan-do-1oo2-ptc98 | 7.76E-07 | 7.16E-07 | 7.52E-07 | 7.76E-07 | 8.00E-07 | 8.36E-07 |
+
+Only T2 of 10 years reproduces all four printed rows in this sweep. That is strong evidence and not proof; the golden records it as INFERRED.
+
+THREE. A PRINTING SLIP IN THE BETA FACTOR. The transmitter coverage row prints a beta factor of 10 percent. Computed both ways:
+
+| beta factor and betaD | engine PFDavg | at three significant figures | printed |
+| --- | --- | --- | --- |
+| 0.1, as printed | 0.000473588152 | 4.74E-04 | 6.76E-04 |
+| 0.15, the value raised by half | 0.000676060358 | 6.76E-04 | 6.76E-04 |
+
+The table is headed as one that applies the MooN multiplication to the beta factor, which raises 10 percent by half to 15 percent, and only 15 percent reproduces the printed value. The printed 10 percent is a slip in the source. One more row, the analogue input card in the raised beta factor table, reproduces only with a betaD that looks like a rounded print, and the golden leaves it out as too ambiguous to use.
+
+The lesson for a verification note: a reproduction that needs an inferred input says which input and why, and a published table is evidence about the equations only for the rows it reproduces.
+
+# SECTION 30: What the engine does not do (owned by Expert m05)
+
+Read from the engine header and checked against the exports in section 1:
+
+| not in the engine | why, from the engine header | what the analyst does instead |
+| --- | --- | --- |
+| a hardware fault tolerance (architectural constraint) check | the requirement is a normative table of IEC 61511-1 and IEC 61508-2, and the engine does not restate a licensed table it could not check against a public source | checks the architecture against the standard separately; a PFDavg that meets the target does not by itself satisfy the architectural constraint |
+| high demand or continuous mode, PFH | every band here is low demand | uses a PFH method when the demand rate is high; a low demand PFDavg is the wrong quantity there |
+| failure-rate data | users supply every lambda; the golden rates are labelled illustrative or cited | takes rates from a justified source and records it |
+| the choice of TMEL, IEF or IPL PFD | every one is an input | justifies each against the organisation's criteria |
+| a judgement of independence | the credit rules are flags applied as given | audits each IPL against the initiating cause and the other layers |
+
+WHAT THE CREDIT RULES REST ON. The independence and auditable rules are specification (section 6). The engine applies them exactly as typed; it cannot see that an alarm shares a transmitter with the initiating loop unless the analyst says so.
+
+# SECTION 31: Judgement: budgets, stretched intervals and the verification note (owned by Expert m06)
+
+ALLOCATING A BUDGET. ORONI at a TMEL of 1e-7 requires a PFDavg of 0.007407407407. With the IDU transmitters at 0.000369505528 and the logic solver at 0.000136440000, both on a one year test, the valves may take, derived, 0.006901461880. The longest valve interval that keeps the SIF inside the requirement is 35393.040486 hours, 4.040301 years (state FOUND).
+
+STRETCHING EVERY INTERVAL. The IDU SIF re-verified with every proof test interval stretched together (stated, in years):
+
+| interval, years | SIF PFDavg | RRF | SIL | meets the ORONI TMEL |
+| --- | --- | --- | --- | --- |
+| 1 | 0.001792971954 | 557.733208 | 2 | true |
+| 2 | 0.004062218645 | 246.170895 | 2 | true |
+| 3 | 0.006819960176 | 146.628422 | 2 | true |
+| 3.5 | 0.008382016506 | 119.303034 | 2 | false |
+| 4 | 0.010066196546 | 99.342388 | 1 | false |
+
+At 3.5 years the SIF no longer meets the TMEL, while it is still SIL 2; it drops to SIL 1 only at 4 years. A SIL that holds is not evidence that the requirement holds (section 8).
+
+WHEN TO REDESIGN. A required RRF beyond SIL 3, a target below a coverage floor, or a common cause term that dominates every architecture on offer are each a signal that more of the same hardware will not close the gap. The engine reports each as a state or a dominant term; the decision is the analyst's.
+
+A VERIFICATION NOTE, in the shape this course grades at Expert: the LOPA row and its TMEL; the required PFDavg as well as the band; every subsystem with its architecture, rates, intervals, MTTR, MRT, beta factors and coverage, each rate with its source; the SIF sum and its RRF; the proof test intervals and the state behind each; any warning the engine returned; and what the engine did not check (the architectural constraint, a high demand mode).
+
+# SECTION 32: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+Five words in this course already mean something else elsewhere in the academy, or are easy to shorten wrongly. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| word | what it already means elsewhere | the rule here |
+| --- | --- | --- |
+| beta | a vapour fraction in the fluid course, an orifice diameter ratio in the metering course, and other quantities in the fiscal, well design and earth model courses | always "beta factor" (and betaD for detected failures), never bare "beta" |
+| PFD | the probability of failure on demand of one IPL, a single figure the analyst credits | always "PFDavg" for a SIF or a subsystem, which is an average over the proof test interval; an IPL's credited figure is written "IPL PFD" |
+| severity | a consequence category on a risk matrix in the risk and compliance courses, and other ranking scales | never used: LOPA is frequency based, and a consequence is described in words and carried by its TMEL |
+| likelihood | a likelihood score on a risk matrix, and a Bayesian likelihood in the decision analysis course | used only inside "tolerable mitigated event likelihood", the TMEL, which is a frequency per year |
+| RRF | a ratio easily misnamed | always "risk reduction factor", one over PFDavg; a required RRF comes from LOPA and an achieved RRF from verification |

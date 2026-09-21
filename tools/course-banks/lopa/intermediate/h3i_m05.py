@@ -1,0 +1,114 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H3 Professional m05: The SIF Is a Sum.
+# Digest section 22 (the IDU teaching SIF, its three subsystems, the series
+# sum, the shares, the achieved risk reduction factor and the return to the
+# tolerable mitigated event likelihood through this section's own figures).
+
+q(2,
+ "The IDU teaching function votes its transmitters two out of three, at a stated beta factor of 0.05 and a stated betaD of 0.02 on a one year test. What PFDavg does that subsystem carry?",
+ "0.000369505528",
+ ["0.000136440000","0.001287026426","0.001792971954"],
+ "The subsystem table prints 0.000369505528 for the transmitters, which is 20.61 percent of the function, derived. 0.000136440000 is the logic solver and 0.001287026426 is the valve pair, the two other links of the same chain. 0.001792971954 is the whole function, so it is the sum and not one part of it.")
+
+q(0,
+ "That function's logic solver is a single channel stated at lambdaDU 3e-8 and lambdaDD 6e-7 per hour. What does the engine return for it?",
+ "0.000136440000",
+ ["0.000369505528","0.001287026426","0.000298987176"],
+ "The subsystem table prints 0.000136440000 for the logic solver, the smallest of the three parts at 7.61 percent of the function, derived, because its undetected rate is tiny beside its detected one. 0.000369505528 is the transmitters and 0.001287026426 is the valve pair. 0.000298987176 belongs to the EKULAMA pair, which is not part of this function.")
+
+q(3,
+ "The valves of that function are a redundant pair with no detected failures, a stated beta factor of 0.1 and a stated repair time after a test of 24 hours. What PFDavg do they carry?",
+ "0.001287026426",
+ ["0.001792971954","0.000369505528","0.001083665589"],
+ "The subsystem table prints 0.001287026426 for the valves, which is 71.78 percent of the function, derived, the largest share of the three. 0.001792971954 is the function total. 0.000369505528 is the transmitter subsystem. 0.001083665589 comes from the common cause sweep on the EKULAMA pair and has nothing to do with this function.")
+
+q(1,
+ "Add the three subsystems of the IDU function together. What total does the engine report?",
+ "0.001792971954",
+ ["0.001287026426","0.001286431107","0.000369505528"],
+ "The engine sums the subsystems in series and prints 0.001792971954, banded 2 with the state SIL. 0.001287026426 is the valve pair alone, which is most of the total, with the other two parts making up the rest. 0.001286431107 is the published function reproduced elsewhere in this tier. 0.000369505528 is the transmitter subsystem.")
+
+q(2,
+ "Read that function total as one over the PFDavg. What risk reduction factor does the engine print?",
+ "557.733208",
+ ["189.107413","777.344387","252.295893"],
+ "The function table prints a risk reduction factor of 557.733208 against a PFDavg of 0.001792971954. 189.107413 belongs to a single EKULAMA channel. 777.344387 is the published function summed from five subsystems. 252.295893 is a shutdown valve at a perfect proof test, so each answers a different calculation.")
+
+q(0,
+ "Which share of the IDU function do its valves carry?",
+ "71.78 percent",
+ ["20.61 percent","30.00 percent","7.61 percent"],
+ "The share column reads 71.78 percent for the valves, derived, which makes the valve proof test interval the first lever on this function. 20.61 percent is the transmitters and 7.61 percent is the logic solver. 30.00 percent is the uncovered fraction a proof test coverage of 0.7 leaves on the OBAGI valve, which belongs to a different calculation.")
+
+q(1,
+ "And the transmitters of that same function?",
+ "20.61 percent",
+ ["71.78 percent","30.00 percent","7.61 percent"],
+ "Voted two out of three, the sensors account for 20.61 percent of the sum, derived, which places them between the other two links. A figure of 71.78 percent would be reading off the final element row, and 7.61 percent the row of the part that decides. A coverage sweep elsewhere leaves 30.00 percent uncovered, which is a different quantity altogether.")
+
+q(3,
+ "Its logic solver takes what share of the same total?",
+ "7.61 percent",
+ ["71.78 percent","20.61 percent","30.00 percent"],
+ "The share column reads 7.61 percent for the logic solver, derived, so halving it would move the function very little. 71.78 percent belongs to the valves and 20.61 percent to the transmitters. 30.00 percent is the uncovered fraction of a partially covered proof test on another subsystem.")
+
+q(1,
+ "Which words does the engine give as its method for combining subsystems into a function?",
+ "series sum of subsystem PFDavg (IEC 61508-6 Annex B.3.2.1: PFD_SYS = PFD_S + PFD_L + PFD_FE)",
+ ["PFD = 2 lD tCE (Annex B carries no beta term for 2oo2)",
+  "frequencies per year; probabilities and PFDs dimensionless",
+  "IEC 61508-6:2010 Annex B.3.2.2 reliability block diagram simplified equations, low demand; reduces to the ISA-TR84.00.02 simplified forms when lambdaDD = 0 and MRT = 0"],
+ "The engine's method string for a function is verbatim: series sum of subsystem PFDavg (IEC 61508-6 Annex B.3.2.1: PFD_SYS = PFD_S + PFD_L + PFD_FE). The two out of two string is one architecture's formula. The units line says what the quantities are dimensioned in. The Annex B.3.2.2 string is the basis that names which published equations a subsystem call ran and the corner they collapse in.")
+
+q(2,
+ "Name the architecture the IDU function gives its final element.",
+ "1oo2",
+ ["1oo1","2oo2","2oo3"],
+ "The stated subsystem table votes the valves 1oo2, the logic solver 1oo1 and the transmitters 2oo3. No part of this function is a 2oo2 at all. Reading the architecture off the wrong row changes both the coefficient and the equivalent down times the call uses.")
+
+q(0,
+ "The ORONI row is closed at a tolerable mitigated event likelihood of 1e-7 per year with this function typed onto it. What does the engine report?",
+ "A mitigated frequency of 0.000000024205 per year, with meetsTmel reading true for the row.",
+ ["A mitigated frequency of 0.000000024205 per year, and meetsTmel still false.",
+  "No mitigated frequency at all, because the row already carries four layers.",
+  "A mitigated frequency the engine declines to print."],
+ "The section states it: closing the row with this function gives a mitigated frequency of 0.000000024205 per year and meetsTmel is true. The engine prints that frequency, so nothing is declined and nothing is blocked by the layers already on the row. Reporting the frequency and then a false verdict would contradict the achieved figure sitting below what the row requires.")
+
+q(3,
+ "That row requires a PFDavg of 0.007407407407 of any function typed onto it. Set what the function achieves beside that requirement. Which statement is right?",
+ "The achieved 0.001792971954 sits below it, so the row is met.",
+ ["The achieved 0.001792971954 sits above it, so the row is closed on the band alone and the function has to be improved.",
+  "The two figures are equal once the achieved value is rounded to the six decimals the engine prints risk reduction factors at, so the row is met exactly.",
+  "The required figure cannot be compared with the achieved one, because one comes from the determination half and the other from the verification half."],
+ "The section prints both and compares them: the achieved PFDavg of 0.001792971954 is below the required 0.007407407407, which is why meetsTmel is true. The whole discipline of this tier is that the two halves are compared, so no comparison is barred. The figures are not equal at any precision, and the achieved figure is plainly the smaller of the two.")
+
+q(2,
+ "How does the engine band that function total, and what state does it return with it?",
+ "Band 2, with the state SIL.",
+ ["Band 2, with the state BELOW_SIL4_TABLE_FLOOR, since the total sits under the last row of the low demand table.",
+  "Band 3, with the state SIL, because a risk reduction factor above five hundred reaches the next division up.",
+  "Band 1, NOT_SIL_RATED."],
+ "The function table prints a band of 2 and a state of SIL for 0.001792971954, which sits inside the table clear of both ends. Band 3 would need a PFDavg below 1e-3. NOT_SIL_RATED is returned at 0.1 or worse, and BELOW_SIL4_TABLE_FLOOR below 1e-5, so neither state applies to a value near a thousandth.")
+
+q(1,
+ "What does a series sum of subsystems leave out?",
+ "A small overlap term, the chance of two subsystems being failed at the same moment, which is second order at these values.",
+ ["The common cause between subsystems, which the engine handles with one beta factor applied across the whole function in place of a subsystem figure.",
+  "The proof test intervals, which are held outside the sum.",
+  "Nothing at all: the sum is exact at any value."],
+ "The section says the sum ignores a small overlap term, which the engine's validation record names, and that for PFDavg values this small the overlap is second order. The beta factor is a within subsystem input and is never applied across a function. Every subsystem carries its own interval into its own PFDavg. And the sum is an approximation, which is why the engine refuses a list whose total reaches one.")
+
+q(3,
+ "Where does the section say the first lever on this function sits?",
+ "The valve proof test interval.",
+ ["The logic solver proof test interval, since it is the only single channel subsystem in the chain and so the one with no redundancy behind it.",
+  "The transmitter beta factor, because a voted arrangement carries the common cause term that no amount of voting can remove from the answer.",
+  "The betaD of the transmitters, which is the only detected common cause fraction anywhere in this function."],
+ "The share column makes the argument: the valves carry 71.78 percent of the function, derived, so their proof test interval is the first lever. The logic solver is 7.61 percent of the total, so nothing done to it moves the function far. The transmitters are 20.61 percent, and their fractions sit behind a term smaller than the valves' by a wide margin.")
+
+emit(Q, '/root/hse-wip-lopa/banks/h3i_m05.json', expect_n=15)
+finish()
