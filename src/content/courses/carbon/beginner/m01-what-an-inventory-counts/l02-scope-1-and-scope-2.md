@@ -36,7 +36,7 @@ Every line reaches its scope total in tCO2e. The two methane lines start as tonn
 | Scope 2 (purchased energy) | 12915.000 |
 | Total, Scope 1 and Scope 2 | 42945.777 |
 
-SECTION 7 prints the rule behind the table: every line is activity x factor x GWP, in tCO2e, Scope 1 is the sum of its 4 lines, Scope 2 the sum of its 1 line, and the total the two scopes together. The total's label says exactly what it covers.
+The course states the rule behind the table: every line is activity x factor x GWP, in tCO2e, Scope 1 is the sum of its 4 lines, Scope 2 the sum of its 1 line, and the total the two scopes together. The total's label says exactly what it covers.
 
 ## A line off both scopes
 

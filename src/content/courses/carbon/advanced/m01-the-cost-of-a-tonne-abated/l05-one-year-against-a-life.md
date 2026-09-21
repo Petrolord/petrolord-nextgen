@@ -14,7 +14,7 @@ The life is the box that lets a capital cost be spread across the years that the
 
 ## A column marked computed here
 
-SECTION 18 computes one more column from the inputs: the whole capital set against one year. Its header is marked computed here, and SECTION 18 prints why no engine figure stands beside it: "the engine refuses to compare a one-off cost with a recurring saving". It is the course's arithmetic on the inputs, and no engine call returns it.
+The lab computes one more column from the inputs: the whole capital set against one year. Its header is marked computed here, and the lab prints why no engine figure stands beside it: "the engine refuses to compare a one-off cost with a recurring saving". It is the course's arithmetic on the inputs, and no engine call returns it.
 
 | measure | cost per tonne at 0.1 USD | capital against one year USD per tonne (computed here) |
 | --- | --- | --- |
@@ -37,7 +37,7 @@ Read the column as a whole. It takes each measure's entire capital into a single
 
 ## The same comparison in a saving
 
-Module five reads it again. A saving priced in money and carbon has an implementation cost, and SECTION 23 prints its levelised cost per tonne as -74.2270 USD beside a figure computed by setting the whole cost against one year's value and one year's tonnes: 183.5403 USD a tonne, marked computed here.
+Module five reads it again. A saving priced in money and carbon has an implementation cost, and the course prints its levelised cost per tonne as -74.2270 USD beside a figure computed by setting the whole cost against one year's value and one year's tonnes: 183.5403 USD a tonne, marked computed here.
 
 ## What to carry
 
@@ -45,4 +45,4 @@ Quote the levelised figure. When a capital figure and a one-year saving sit side
 
 ## Exercise
 
-Read the levelised cost per tonne and the capital-against-one-year figure for the Heat integration project and for Tune the fired heaters, with each measure's capital and life. Say what the two pairs, read with the capital and the life, show about which measures the one-year column moves furthest from the levelised figure, and what SECTION 18 prints about the engine and that comparison.
+Read the levelised cost per tonne and the capital-against-one-year figure for the Heat integration project and for Tune the fired heaters, with each measure's capital and life. Say what the two pairs, read with the capital and the life, show about which measures the one-year column moves furthest from the levelised figure, and what the lab prints about the engine and that comparison.

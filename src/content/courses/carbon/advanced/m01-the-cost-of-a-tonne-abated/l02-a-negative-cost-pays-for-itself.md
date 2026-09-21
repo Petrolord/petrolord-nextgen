@@ -1,6 +1,6 @@
 # A negative cost pays for itself
 
-A cost per tonne can print below zero. SECTION 18 says what that means in one line: "A negative cost per tonne means the measure pays for itself and abates carbon as a side effect." This lesson reads the six invented AGBOR measures by the sign of their cost, at the invented discount rate of 0.1, with every figure in US dollars.
+A cost per tonne can print below zero. The course says what that means in one line: "A negative cost per tonne means the measure pays for itself and abates carbon as a side effect." This lesson reads the six invented AGBOR measures by the sign of their cost, at the invented discount rate of 0.1, with every figure in US dollars.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -25,15 +25,15 @@ Flare gas recovery carries 4900000 USD of capital, annualised at 644221.51 USD, 
 
 ## A negative abatement is refused
 
-The flag is read from the sign of the cost, and the tonnes are the divisor. SECTION 19 prints the call with an abatement of -500 t a year on the Heat integration project. It is refused, and the engine says why:
+The flag is read from the sign of the cost, and the tonnes are the divisor. The lab prints the call with an abatement of -500 t a year on the Heat integration project. It is refused, and the engine says why:
 
 REFUSED: Measure "Heat integration project" has a negative abatement. A measure that adds emissions is not an abatement, and its cost per tonne would change sign.
 
-The refusal states two things. A measure that adds emissions is not an abatement at all, and dividing by a negative tonnage would change the sign of the cost per tonne. SECTION 25 lists the refusal of a negative abatement among the rules in force.
+The refusal states two things. A measure that adds emissions is not an abatement at all, and dividing by a negative tonnage would change the sign of the cost per tonne. The course lists the refusal of a negative abatement among the rules in force.
 
 ## A zero abatement has no cost per tonne
 
-An abatement of 0 is accepted. SECTION 19 prints what comes back: costPerTonne none, paysForItself false. There is no tonne to divide by, so the engine returns no cost per tonne, and it does not flag the measure as paying for itself. A missing cost is printed as none.
+An abatement of 0 is accepted. The lab prints what comes back: costPerTonne none, paysForItself false. There is no tonne to divide by, so the engine returns no cost per tonne, and it does not flag the measure as paying for itself. A missing cost is printed as none.
 
 ## Exercise
 

@@ -25,9 +25,9 @@ The 100 percent row has no methane at all. The methane line is the part that dis
 
 ## A refused flare is a blocked line
 
-SECTION 5 prints what happens to the refusal: handed to atomBalanceLines, the refused flare becomes 1 line labelled "Flaring" that carries the refusal, so an inventory built with it is blocked on the flare.
+The lab shows what happens to the refusal: handed to atomBalanceLines, the refused flare becomes 1 line labelled "Flaring" that carries the refusal, so an inventory built with it is blocked on the flare.
 
-SECTION 9 prints the Igbogene inventory with every other gap closed and only the flare's efficiency blank:
+The lab prints the Igbogene inventory with every other gap closed and only the flare's efficiency blank:
 
 | lines | Scope 1 tCO2e | Scope 2 tCO2e | total tCO2e | reportable | not reportable because |
 | --- | --- | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ SECTION 9 prints the Igbogene inventory with every other gap closed and only the
 
 The blocked line is Flaring, and its reason is the refusal above, word for word. The course reads the row itself: the total leaves out the flare's CO2 and methane lines, and the inventory is not reportable while the flare stands refused. With the flare efficiency entered, the inventory has 5 lines and Scope 1 is 30030.777 tCO2e.
 
-SECTION 9 prints one more case beside it. atomBalanceLines with excluded true adds no line at all: 0 lines, for a source left out of the boundary on purpose. A refused flare is a blocked line with its reason. A source excluded on purpose adds none.
+The course prints one more case beside it. atomBalanceLines with excluded true adds no line at all: 0 lines, for a source left out of the boundary on purpose. A refused flare is a blocked line with its reason. A source excluded on purpose adds none.
 
 In practice, the person reading an inventory total rarely sees the input boxes behind it, so the blocked line is the record that a box was left blank.
 

@@ -18,7 +18,7 @@ The Igbogene flare sends 38500 kmol of gas a year to the flame at 1.32 kmol of c
 
 Start with co2Tonnes. It is 2236.537 at 1 and falls down the table to 2012.884 at 0.9. As the efficiency drops, less of the carbon burns, and less CO2 leaves the flame.
 
-Now ch4Tonnes. It is 0.000 at 1 and rises down the table to 81.531 at 0.9. The carbon that does not leave as CO2 leaves as methane. Both columns are tonnes of gas, and they are tonnes of different gases. SECTION 5 prints the flare's carbonKmolPerYear as 50820.000 at every efficiency in the table: the efficiency splits that carbon between CO2 and methane; it does not change it.
+Now ch4Tonnes. It is 0.000 at 1 and rises down the table to 81.531 at 0.9. The carbon that does not leave as CO2 leaves as methane. Both columns are tonnes of gas, and they are tonnes of different gases. The engine returns the flare's carbonKmolPerYear as 50820.000 at every efficiency in the table: the efficiency splits that carbon between CO2 and methane; it does not change it.
 
 The methane line converts ch4Tonnes on the course's set. At 1 there is no methane and so no line. At 0.99 the line is 242.961 tCO2e, at 0.98 it is 485.922, at 0.95 it is 1214.805 and at 0.9 it is 2429.610 tCO2e.
 

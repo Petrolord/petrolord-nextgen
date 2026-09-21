@@ -1,6 +1,6 @@
 # Claims above what a source emits
 
-A measure's tonnes are a claim. SECTION 21 prints what happens when a claim is larger than what its source emits. It reads the invented AGBOR inventory, passes each source's emission to the curve, and checks every claim against it. Every figure here is invented for this course; money is in US dollars.
+A measure's tonnes are a claim. The lab prints what happens when a claim is larger than what its source emits. It reads the invented AGBOR inventory, passes each source's emission to the curve, and checks every claim against it. Every figure here is invented for this course; money is in US dollars.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -19,7 +19,7 @@ The inventory is computed on the course's set, IPCC AR6 GWP100, fossil methane, 
 
 ## What the curve is given
 
-SECTION 21 says how a source reaches the curve: each source's emission is its CO2 plus its methane in CO2e, as the Carbon Studio passes it.
+The course says how a source reaches the curve: each source's emission is its CO2 plus its methane in CO2e, as the Carbon Studio passes it.
 
 | source id | emission passed to the curve tCO2e |
 | --- | --- |
@@ -30,7 +30,7 @@ The flare's 7562.133 tCO2e is its CO2 line and its unburned methane line togethe
 
 ## A claim of 9400 t against the flare
 
-The six measures as costed claim 6200 t a year from the flare through Flare gas recovery. SECTION 21 prints a second curve in which Flare gas recovery claims 9400 t a year instead:
+The six measures as costed claim 6200 t a year from the flare through Flare gas recovery. The lab prints a second curve in which Flare gas recovery claims 9400 t a year instead:
 
 | curve | total abatement t | target t | meetsTarget | targetBasis | over-claims |
 | --- | --- | --- | --- | --- | --- |
@@ -40,9 +40,9 @@ The over-claims column names the source, the claim and the emission: 9400.000 t 
 
 ## Why the verdict is none
 
-SECTION 21 states it: "Where a claim exceeds what its source emits, the curve adds up tonnes that do not exist, and the verdict is none." The total of 18660.000 t carries the whole 9400.000 t claim, including the part of it beyond the 7562.133 tCO2e the flare emits. The total and the target, 16830.083 t, are both printed, and the engine gives no verdict between them. It prints meetsTarget none, and targetBasis says why: "not assessed: claims exceed what a source emits".
+The course states it: "Where a claim exceeds what its source emits, the curve adds up tonnes that do not exist, and the verdict is none." The total of 18660.000 t carries the whole 9400.000 t claim, including the part of it beyond the 7562.133 tCO2e the flare emits. The total and the target, 16830.083 t, are both printed, and the engine gives no verdict between them. It prints meetsTarget none, and targetBasis says why: "not assessed: claims exceed what a source emits".
 
-SECTION 25 lists this among the rules in force: a curve with a claim above what its source emits returns meetsTarget none and says why.
+The course lists this among the rules in force: a curve with a claim above what its source emits returns meetsTarget none and says why.
 
 ## Reading an over-claim on a page
 
@@ -50,11 +50,11 @@ The over-claim names three things a reader can act on: which source, how much wa
 
 ## The cost per tonne falls
 
-SECTION 21 also prints the 9400 t claim costed: Flare gas recovery at a net annual cost of 484221.51 USD and a cost per tonne of 51.5129 USD. At 6200 t a year, SECTION 18 prints the same net annual cost, 484221.51 USD, and 78.1002 USD a tonne. The course's reading: "The cost per tonne falls as the claimed tonnes rise; the over-claim makes the measure look cheaper as well as larger."
+The course also prints the 9400 t claim costed: Flare gas recovery at a net annual cost of 484221.51 USD and a cost per tonne of 51.5129 USD. At 6200 t a year, the lab prints the same net annual cost, 484221.51 USD, and 78.1002 USD a tonne. The course's reading: "The cost per tonne falls as the claimed tonnes rise; the over-claim makes the measure look cheaper as well as larger."
 
 ## Two checks the curve runs
 
-The curve carries two checks on its tonnes, and they print in different places. Interaction, two measures on one source, prints in SECTION 20 as additive false and labels a verdict an upper bound when every claim is checked. An over-claim, one claim beyond its source's emission, prints in SECTION 21's over-claims column and leaves the verdict none.
+The curve carries two checks on its tonnes, and they print in different places. Interaction, two measures on one source, prints with the curve as additive false and labels a verdict an upper bound when every claim is checked. An over-claim, one claim beyond its source's emission, prints in the lab's over-claims column and leaves the verdict none.
 
 ## Exercise
 

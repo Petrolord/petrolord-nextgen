@@ -37,7 +37,7 @@ The lab takes the complete Igbogene inventory and adds two more lines, one with 
 
 Both are blocked and named. The diesel line has no registered factor. The business travel line is on a scope the inventory does not total. The totals stay the Scope 1 and Scope 2 figures of the complete inventory, total tCO2e 42945.777, and the inventory stops being reportable: reportable false, because "2 line(s) could not be computed".
 
-SECTION 9 prints two more blocked lines, a vented methane activity typed as -142 t and an electricity factor of -0.41, each blocked because an emission line cannot remove tonnes.
+The engine returns two more blocked lines, a vented methane activity typed as -142 t and an electricity factor of -0.41, each blocked because an emission line cannot remove tonnes.
 
 In practice, an inventory is often assembled from many contributors, and a line that vanished without a trace would be indistinguishable from a source that does not exist.
 

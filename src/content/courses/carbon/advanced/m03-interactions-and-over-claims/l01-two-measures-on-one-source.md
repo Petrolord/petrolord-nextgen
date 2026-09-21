@@ -1,12 +1,12 @@
 # Two measures on one source
 
-Every AGBOR measure names the source it acts on. When two measures act on the same source, the tonnes they claim cannot simply be added, and `abatementCurve` says so in its result. This lesson reads SECTION 20's interaction output on the six invented measures, with money in US dollars.
+Every AGBOR measure names the source it acts on. When two measures act on the same source, the tonnes they claim cannot simply be added, and `abatementCurve` says so in its result. This lesson reads the engine's interaction output on the six invented measures, with money in US dollars.
 
 {{panel:carbon-abatement-explorer}}
 
 ## What each measure acts on
 
-SECTION 18 prints the source beside every measure:
+The lab prints the source beside every measure:
 
 | measure | tonnes abated a year | acts on |
 | --- | --- | --- |
@@ -21,7 +21,7 @@ Two measures name heaters. Every other source is named by one measure.
 
 ## The engine's interaction output
 
-SECTION 20 prints the curve's interaction table and one flag:
+The lab prints the curve's interaction table and one flag:
 
 | source | measures |
 | --- | --- |
@@ -39,11 +39,11 @@ In practice, tuning a heater and then integrating its heat act on the same fuel,
 
 ## What the label carries into a target
 
-When the curve is checked against a target, the label travels with the verdict. SECTION 21 states the rule: "Where measures only interact and every claim is checked, the verdict stands and is labelled an upper bound." A verdict read from an upper bound is a verdict on tonnes the measures could give at most. At the Agbor inputs no curve in SECTION 21 meets the condition: every row prints meetsTarget none. The next three lessons read why.
+When the curve is checked against a target, the label travels with the verdict. The course states the rule: "Where measures only interact and every claim is checked, the verdict stands and is labelled an upper bound." A verdict read from an upper bound is a verdict on tonnes the measures could give at most. At the Agbor inputs no curve in this module meets the condition: every row prints meetsTarget none. The next three lessons read why.
 
 ## Where the flag sits among the curve's outputs
 
-SECTION 20 prints additive false in the same table as totalAbatementTonnes 15460.000, netAnnualCostOfAll 290443.84 USD and weightedAverageCostPerTonne 18.7868 USD. Every one of those figures is built on the full tonnes of both heater measures. The flag is the reader's warning that the sum beneath them is an upper bound.
+The lab prints additive false in the same table as totalAbatementTonnes 15460.000, netAnnualCostOfAll 290443.84 USD and weightedAverageCostPerTonne 18.7868 USD. Every one of those figures is built on the full tonnes of both heater measures. The flag is the reader's warning that the sum beneath them is an upper bound.
 
 ## Exercise
 

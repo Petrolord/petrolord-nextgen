@@ -1,6 +1,6 @@
 # Cheapest first
 
-A marginal abatement cost curve puts a programme of measures in one picture. `carbonAbatement.abatementCurve` takes the costed measures and ranks them cheapest first (SECTION 20). This module reads the curve the engine builds from the six invented AGBOR measures, costed at the invented discount rate of 0.1, with every figure in US dollars.
+A marginal abatement cost curve puts a programme of measures in one picture. `carbonAbatement.abatementCurve` takes the costed measures and ranks them cheapest first (the lab below). This module reads the curve the engine builds from the six invented AGBOR measures, costed at the invented discount rate of 0.1, with every figure in US dollars.
 
 {{panel:carbon-abatement-explorer}}
 
@@ -25,7 +25,7 @@ The order also does not follow the capital. The Heat integration project carries
 
 ## The ranking is not the order of entry
 
-SECTION 18 lists the measures in the order they were entered: Flare gas recovery fourth, Solar for purchased power fifth, Vapour recovery on the storage tanks sixth. The curve reorders them by cost: Vapour recovery on the storage tanks fourth, Solar for purchased power fifth and Flare gas recovery sixth. The entry order carries no meaning on the curve. Only the cost per tonne sets the order.
+The lab lists the measures in the order they were entered: Flare gas recovery fourth, Solar for purchased power fifth, Vapour recovery on the storage tanks sixth. The curve reorders them by cost: Vapour recovery on the storage tanks fourth, Solar for purchased power fifth and Flare gas recovery sixth. The entry order carries no meaning on the curve. Only the cost per tonne sets the order.
 
 ## What sets each cost
 
@@ -33,7 +33,7 @@ Every cost in the ranking is the levelised cost from module one: the capital ann
 
 ## How the rank is checked
 
-SECTION 26 names what recomputes the curve. The oracle for carbonAbatement builds the curve "by explicit rank", and its goldens are asserted by the engine test suites. The same oracle computes the cost per tonne levelised from a year-by-year present value ledger, where the engine uses a capital recovery factor. Of the curve's totals, SECTION 26 prints that it returns totalAbatementTonnes and weightedAverageCostPerTonne, and that it sums the net annual costs only inside the weighted average and returns no netAnnualCostOfAll. Two outputs of the curve are listed in SECTION 26 as recomputed by neither oracle: the residual to target and paysForItselfTonnes. Lesson four reads the second of those.
+The course names what recomputes the curve. The oracle for carbonAbatement builds the curve "by explicit rank", and its goldens are asserted by the engine test suites. The same oracle computes the cost per tonne levelised from a year-by-year present value ledger, where the engine uses a capital recovery factor. Of the curve's totals, the course records that it returns totalAbatementTonnes and weightedAverageCostPerTonne, and that it sums the net annual costs only inside the weighted average and returns no netAnnualCostOfAll. Two outputs of the curve are listed by the course as recomputed by neither oracle: the residual to target and paysForItselfTonnes. Lesson four reads the second of those.
 
 ## Exercise
 
