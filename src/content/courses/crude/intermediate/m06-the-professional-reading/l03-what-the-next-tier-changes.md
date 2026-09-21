@@ -6,7 +6,7 @@ This tier took a blend as given and asked what it was worth. The Expert tier tur
 
 Everything here started from a recipe someone chose. Kwale Light and Ughelli Medium, 55 and 45. The engine computed the blend's curve, its cut yields, its netback and its differential, and every figure followed from that one choice.
 
-A blending terminal faces the reverse problem. It has a pool of components, each with a cost, a quality and an amount on hand. It has a product specification with limits: sulfur at most this, octane at least that, vapour pressure within a band. It has a volume to deliver. The shares are no longer an input. They are the answer, and the question is which shares meet every limit at the least cost.
+A blending terminal faces the reverse problem. It has a pool of components, each with a cost, a quality and an amount on hand. It has a product specification with limits: sulfur at most this, octane at least that, density within a band. It has a volume to deliver. The shares are no longer an input. They are the answer, and the question is which shares meet every limit at the least cost.
 
 That is a decision over many volumes and many limits at once, and the optimizer solves it as a linear programme. This course owns linear programming for the whole Commercial & Trading module, and the Expert tier teaches it from the start: what an objective, rows and bounds are, why the optimum sits on a vertex, and what optimal, infeasible and unbounded mean.
 

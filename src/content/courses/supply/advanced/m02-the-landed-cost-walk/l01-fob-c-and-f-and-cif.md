@@ -28,7 +28,7 @@ Insurance is the stage the next two lessons slow down on. In BADAGRY it is quote
 
 The rule that makes this a walk is short. Each charge names the base it bites on, and a base is frozen when the walk reaches it. FOB is fixed before freight exists. C&F is fixed once freight is added. CIF is fixed once insurance is solved. A landed charge quoted as a percent of CIF then bites on that frozen CIF and on nothing that comes after it.
 
-This matters because two of the landed charges are percentages. The course's invented import duty and financing rate are both quoted on CIF. If the base were allowed to move as later charges are added, a duty would bite partly on itself and on the storage bill, and the answer would depend on the order the lines happened to be typed in. Freezing each base as the walk passes it gives one answer for one set of inputs.
+This matters because two of the landed charges are percentages. The course's invented import duty and financing rate are both quoted on CIF. The walk freezes each base when it reaches it, so both lines bite on the one CIF figure and on nothing charged after it.
 
 ## The fourth column
 

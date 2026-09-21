@@ -1,6 +1,6 @@
 # Between the measured points
 
-An assay measures a curve at a handful of temperatures. A refinery's cut points rarely fall on them. So the engine has to say something about the curve between points, and it says the simplest thing it can defend: a straight line between neighbouring measured points.
+An assay measures a curve at a handful of temperatures. A cut point can fall between them. So the engine has to say something about the curve between points, and it says the simplest thing it can defend: a straight line between neighbouring measured points.
 
 {{panel:crude-assay-explorer}}
 
@@ -38,11 +38,11 @@ Inside its measured range, the Ebocha partial assay reads exactly like a full cu
 
 ## What a straight line assumes
 
-A real TBP curve is smooth and curved, so a straight line between two points is an approximation. It is the approximation the engine states, and it has two things in its favour. It never invents a shape the data does not support, and it reproduces every measured point exactly. Its accuracy depends on how close together the measured points are. An assay with points every 10 percent gives straight segments short enough to follow the curve closely. An assay with few points gives long segments that can miss its bend.
+A straight line between two measured points is the rule the engine states. It reproduces every measured point exactly, and between two points it reads the line that joins them and nothing else. On Obigbo Light, for example, the reading of 20.2703 at 300 F lies on the straight segment that joins 10 percent at 205 F to 30 percent at 390 F. Outside the measured range it answers only where the curve says so itself, at 0 percent below a first point at 0 and at 100 percent above a last point at 100.
 
 ## Why the method matters beyond one reading
 
-The same interpolation serves every question the studio asks of a curve. A cut yield is two readings of volumePercentAt subtracted. A temperature at a volume percent is one reading of temperatureAtVolumePercent. Because the engine interpolates the same way every time, two readings of the same curve can never disagree about the shape between the points, and a cut set built from them adds up consistently.
+The same interpolation serves every question the studio asks of a curve. A cut yield is two readings of volumePercentAt subtracted. A temperature at a volume percent is one reading of temperatureAtVolumePercent. The engine interpolates the same way every time, so every reading of one curve stands on the same straight lines.
 
 In the assay explorer, drag a temperature marker along the Obigbo Light curve. Between measured points the reading moves along a straight segment. On a measured point it lands on the typed value.
 

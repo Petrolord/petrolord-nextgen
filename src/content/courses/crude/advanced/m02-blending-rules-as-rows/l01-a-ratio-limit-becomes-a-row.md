@@ -28,11 +28,11 @@ That row is linear in the volumes. Each component's coefficient is a fixed numbe
 
 ## Reading a coefficient
 
-The coefficient w_i - L d_i says how a barrel of component i pushes on the limit. A component whose property sits above a maximum carries a positive coefficient: every barrel of it uses up room. A component whose property sits below the maximum carries a negative coefficient: every barrel of it makes room for the others. The row holds when the pushing and the room-making balance at zero or better. That is why a cheap component with a poor property can still enter a recipe, carried by a costlier one with room to give.
+The coefficient w_i - L d_i says how a barrel of component i pushes on the limit. A component whose property sits above a maximum carries a positive coefficient: every barrel of it uses up room. A component whose property sits below the maximum carries a negative coefficient: every barrel of it makes room for the others. The row holds when the pushing and the room-making balance at zero or better.
 
 ## The batch row
 
-One more row makes the batch: sum(v_i) = target. At Apapa the target is 8000 bbl. It is an equation, which is why phase one is needed to find a starting point, and its price, read in module four, is the cost of one more barrel.
+One more row makes the batch: sum(v_i) = target. At Apapa the target is 8000 bbl. It is an equation, an equality row, and its price, read in module four, is the cost of one more barrel.
 
 {{panel:crude-recipe-explorer}}
 

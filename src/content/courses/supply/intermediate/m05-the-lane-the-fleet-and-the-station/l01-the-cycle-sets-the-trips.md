@@ -19,7 +19,7 @@ The IBAFO lane runs to a station cluster 312.00 km away. The inputs, each a meas
 | working hours a day | 12 |
 | working days a year | 300 |
 
-Distances print to two decimals of a kilometre, hours to three decimals. The average speed is the speed over the whole road trip, stops and slow sections included, and it is the input most often borrowed from a map when it should come from a fleet's own records.
+Distances print to two decimals of a kilometre, hours to three decimals. The average speed is a typed input, 46 km/h on the IBAFO lane, and the cycle divides the whole round trip by it.
 
 ## The cycle
 

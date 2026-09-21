@@ -4,7 +4,7 @@ Giveaway is measured in the property's own unit: octane numbers, kg/l, ppm. A co
 
 ## Where a price per unit comes from
 
-A giveaway is only worth money where a unit of the property has a price. The optimizer does not know what an octane number is worth in a market; nothing in the rows says so. So valueGiveaway takes a value per unit from the user and values the gap over the volume blended. Where no unit value is given, the gap is reported without a price. The engine never supplies a price per octane number of its own, because any figure it chose would be a guess dressed as a result.
+A giveaway is only worth money where a unit of the property has a price. So valueGiveaway takes a value per unit from the user and values the gap over the volume blended. Where no unit value is given, the gap is reported without a price. The engine never supplies a price per octane number of its own.
 
 ## The Apapa giveaway in money
 
@@ -30,7 +30,7 @@ The value of relief asks what the cargo would save if the limit moved. For RON t
 
 The priced giveaway asks what the quality already delivered would fetch at the user's price per unit. It is a statement about value handed to the buyer.
 
-A planner holds both at once. The recipe is the cheapest that meets the specifications, and it still hands over 16804.7174 $ of RON at the typed price. Recovering that value is a commercial question for the trader, outside the optimizer.
+A planner holds both at once. The recipe is the cheapest that meets the specifications, and it still hands over 16804.7174 $ of RON at the typed price.
 
 ## The unit discipline
 

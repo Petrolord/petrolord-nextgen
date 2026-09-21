@@ -37,7 +37,7 @@ The denominator is one less the sum of the CIF rates. If those rates add up to 1
 
 > REFUSED: The insurance rates on CIF add up to 100 percent or more.
 
-The refusal exists because a closed form that divides by zero or by a negative number returns a figure that looks like money, and an engine that returned it would put that figure into a duty line.
+The closed form divides by 1 less the sum of the CIF rates, and at 100 percent or more that divisor is zero or negative. The engine refuses there and prints no CIF.
 
 ## Two methods agreeing
 

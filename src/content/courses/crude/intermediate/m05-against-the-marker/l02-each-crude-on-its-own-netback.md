@@ -32,13 +32,13 @@ From gross to netback, the chain is the one module 4 built: the loss comes off t
 
 ## What single-crude netbacks are for
 
-A refinery offered two crudes wants to know three things. What is each worth to it alone. What is a mixture worth. And does mixing create or destroy value. The first two rows of the table answer the first question directly.
+The table answers three questions. What is each crude worth alone on the Kwale terms. What is the mixture worth. And how does the mixture's netback stand against the two alone. The first two rows of the table answer the first question directly.
 
 They also set up the third. If each crude has a netback, the obvious guess for the blend is the volume-weighted mean of the two. Whether that guess holds is not obvious. In the Associate tier, API went through specific gravity, sulfur blended on mass and viscosity went through an index. In module 2, T50 had to be read off the blend's own curve, and neither averaged midpoint was the engine's figure. Every one of those properties needed its own basis. For API, sulfur and T50 the digest prints the volume-weighted mean of the crudes' own figures beside the engine's figure, as a reading the engine does not use. The next lesson asks the same question of the netback, and the digest prints the answer.
 
 ## Why each crude must be valued on the same terms
 
-The three rows are comparable only because nothing but the crude changed. Change the cut set between rows, or the prices, and the difference between netbacks would mix crude quality with refinery configuration. The marker comparison has the same requirement: every differential here is against the same 72.5, built on the same Kwale terms, so the three differentials can be read side by side.
+The three rows are comparable only because nothing but the crude changed. Each crude alone is valued on the same Kwale cut set, product prices, processing cost, freight and losses as the blend. The marker comparison has the same requirement: every differential here is against the same 72.5, built on the same Kwale terms, so the three differentials can be read side by side.
 
 ## Reading the differential column
 

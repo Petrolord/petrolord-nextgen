@@ -1,6 +1,6 @@
 # A TBP curve is cumulative
 
-A true boiling point curve, or TBP curve, is how an assay says what a barrel turns into. It is measured by distilling the crude in a laboratory column and recording how much has come over by each temperature. Each point reads: this volume percent of the crude has distilled by this temperature.
+A true boiling point curve, or TBP curve, is how an assay says what a barrel turns into. Each point reads: this volume percent of the crude has distilled by this temperature.
 
 {{panel:crude-assay-explorer}}
 

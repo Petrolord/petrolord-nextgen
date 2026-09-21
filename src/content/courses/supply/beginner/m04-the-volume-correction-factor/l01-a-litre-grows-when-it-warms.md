@@ -4,9 +4,9 @@
 
 ## The same product, a different volume
 
-Fill a tank with petrol on a cool morning and dip it again in the heat of the afternoon, with nothing received and nothing delivered. The dip will have risen. No product arrived; what was there expanded. Liquid fuels grow in volume as they warm and shrink as they cool, and the effect is large enough to matter in a tank the size of AK-01.
+The correction form this course reads has the observed temperature inside it. Its factor is exactly 1.000000 at 15 C and moves as the temperature moves, so one quantity of product stated at two temperatures reads as two different gross observed volumes. The factor also moves with the product's density at 15 C, and both movements are printed below.
 
-That is a problem for anyone who has to agree a stock. A cargo loaded in a cool port and discharged in a warm one reads a different number of cubic metres at each end. A tank dipped at dawn and again at noon reads two different stocks of the same fuel.
+That is a problem for anyone who has to agree a stock. Two gross observed volumes taken at different temperatures are not on one basis, and module five closes the AKODO day against an opening stock held at standard, so every gross cubic metre is carried to standard first.
 
 ## A reference temperature
 
@@ -32,7 +32,7 @@ The next lesson gives the formula. Before that, here is its shape, drawn on a SY
 | 35 | 0.001350036 | 0.972793 |
 | 40 | 0.001350036 | 0.965932 |
 
-Read it from the middle row. At 15 C the VCF is 1.000000: product already at the reference temperature needs no correction, and the gross observed volume is the standard volume. At 10 C, a cooler tank, the VCF is 1.006736, so the standard volume is the larger. From 20 C upward the VCF is below one, and the warmer the product the further below one it reads, down to 0.965932 at 40 C. Warm product has swollen, and the correction takes the swelling back out.
+Read it from the middle row. At 15 C the VCF is 1.000000: product already at the reference temperature needs no correction, and the gross observed volume is the standard volume. At 10 C, a cooler tank, the VCF is 1.006736, so the standard volume is the larger. From 20 C upward the VCF is below one, and the warmer the product the further below one it reads, down to 0.965932 at 40 C. Above 15 C the correction takes volume off the gross figure, and below 15 C it adds volume.
 
 ## Why a coastal terminal cares
 

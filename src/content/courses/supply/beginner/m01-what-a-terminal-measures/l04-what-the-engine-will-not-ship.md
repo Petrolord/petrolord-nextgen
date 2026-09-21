@@ -36,7 +36,7 @@ REFUSED: The volume correction factor needs the API MPMS Chapter 11.1 coefficien
 
 That refusal is a held limit of the engines, taught and never graded. Module four teaches the form of the correction on a synthetic row invented for this course, and it corrects AKODO's stock with a VCF typed off the terminal's own tables, also invented.
 
-A coefficient or rate built into an engine becomes a silent default that nobody types and nobody checks. By refusing, the engine keeps the question in front of the person who can answer it.
+The engine ships no coefficient and no rate, so each one has to be typed by the caller. By refusing, the engine puts the question back to the caller, and the refusal names what is missing.
 
 ## Exercise
 

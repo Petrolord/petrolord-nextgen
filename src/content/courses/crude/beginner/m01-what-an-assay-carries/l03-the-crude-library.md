@@ -14,11 +14,11 @@ This tier works from one library: four invented field streams at an invented Riv
 | Ubie Condensate | 54.6 | 0.7603 | 0.03 | 0.05 | 0.01 | 0.4 | 0.2 | 1.1 |
 | Ebocha partial assay | 31.4 | 0.8686 | 0.22 | not given | not given | not given | not given | not given |
 
-The names say what kind of stream each one is meant to be: a light crude, a medium crude, a heavy crude and a condensate. Each column is a property a buyer or a refinery reads. Sulfur sets the treating a refinery needs and often the price. The total acid number, TAN, warns of corrosion in the crude unit. Nitrogen poisons cracking catalyst. Nickel and vanadium poison catalyst too and concentrate in the residue. Viscosity decides whether the crude pumps at the terminal's temperature.
+The names say what kind of stream each one is meant to be: a light crude, a medium crude, a heavy crude and a condensate. Each column is a property the engine can blend. Sulfur, the total acid number (TAN), nitrogen, nickel and vanadium are per unit mass and blend on mass, and viscosity blends through an index, as the next two modules show. Gravity blends as specific gravity on volume.
 
 ## A partial assay is a real kind of record
 
-The Ebocha row carries a gravity and a sulfur, and nothing else. That happens in practice when a crude is offered on a short inspection before a full assay is run. The library keeps the blanks as blanks. The engine never reads "not given" as a zero, and later lessons show what it does instead: it names the crude that lacks the value and returns the property as not blended.
+The Ebocha row carries a gravity and a sulfur, and nothing else. It is the one partial assay in the library. The library keeps the blanks as blanks. The engine never reads "not given" as a zero, and later lessons show what it does instead: it names the crude that lacks the value and returns the property as not blended.
 
 ## SARA
 

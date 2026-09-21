@@ -35,7 +35,7 @@ The share column divides each amount by the final price. The landed cost's share
 
 ## Why a waterfall
 
-A single price with no steps cannot be audited. A waterfall can, because every line is an amount, every amount has a recipient and a basis, and the running column proves the lines add up to the price. When a price is disputed, the argument moves to one row: this margin, this levy, this rate. That is where the argument belongs.
+In a waterfall every line is an amount, every amount has a recipient and a basis, and the running column shows the lines reconcile to the price. The BADAGRY build-up has the landed cost and seven elements, and its running column closes on 1074.8249 naira a litre with the note "All supplied rates applied."
 
 The order matters for the same reason it mattered in the landed cost walk. A per-litre element is the same wherever it sits. A percentage element depends on everything above it, so its place in the order is part of its value.
 

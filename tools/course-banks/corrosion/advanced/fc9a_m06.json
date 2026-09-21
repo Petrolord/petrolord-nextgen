@@ -19,7 +19,7 @@
    "Three named material recommendations: what steel to buy, when to control hardness and when to qualify weldments."
   ],
   "answer": 3,
-  "explanation": "A curve that carries a standard's name and tells an engineer what steel to buy is not a tolerance question. The three strings are gone and none of them appears anywhere in the 783 lines of the engine source."
+  "explanation": "A curve that carries a standard's name and tells an engineer what steel to buy is not a tolerance question. The three strings are gone and none of them appears anywhere in the engine source."
  },
  {
   "prompt": "Three measurements show what that pre-repair expression was worth. What did they find?",
@@ -46,7 +46,7 @@
  {
   "prompt": "The absence of the severity region is proved three ways. What are they?",
   "options": [
-   "The region function is not exported so its type is undefined, neither standard name appears in the 783 lines of source, and no returned string in three whole screenings names either standard.",
+   "The region function is not exported so its type is undefined, neither standard name appears anywhere in the source, and no returned string in three whole screenings names either standard.",
    "The region function throws when it is called, the two standard names appear only inside comments, and the studio renders the absence behind the same disclosure as the held list.",
    "The engine exports two false flags, the golden carries no region row among its 110, and the vendored jest suite asserts that a region request refuses with a message naming the standard.",
    "The held list omits the region, the not-provided list names it twice, and the pin table has no row for the boundary constants of the region expression."

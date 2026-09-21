@@ -109,6 +109,12 @@ LINKED=${LINKED:-/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextge
 # `verify` against origin/main AFTER the squash merge rather than assuming it,
 # and record the result. Reprint with `pin <ref>` if a later PR legitimately
 # changes a seed, and say in the commit which PR moved it.
+#
+# RE-PINNED 2026-09-21 (fix/held-copy-pass-and-231): exposure.js landed at
+# engines 16fd6c9 (#231), the digest's engine line moved 708 -> 714 lines and
+# its provenance to 16fd6c9, so the go-live's digest sweep reads 1631 numbers
+# (was 1632) and the course file's two provenance comments name 16fd6c9. The
+# three deep seeds did not move.
 FILES="
 20261004_h2_hygiene_course
 20261004_h2_hygiene_beginner_deep
@@ -118,11 +124,11 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261004_h2_hygiene_course           ) echo d645add6ad3fea60af953aee9581934ff948b1c82bfb96a8f50bf2ca6af83d43 ;;
+    20261004_h2_hygiene_course           ) echo 2c0a21a13f829c8f4eba408557f18890f2d6effbf34eca62c5d4506e5db85835 ;;
     20261004_h2_hygiene_beginner_deep    ) echo 0c2b31a95ffea622aff86905db64215d125f0f22205e9ad6823c69c3ca4a3d20 ;;
     20261004_h2_hygiene_intermediate_deep) echo 66e706d70bf975e6d934cc815b29ce95b699086c2a49e9777e83d1da576a43e1 ;;
     20261004_h2_hygiene_advanced_deep    ) echo d0c5f83d5cf5920d4614e5ad9d75964ba4d1548e4811b440a86c4216bf901c69 ;;
-    20261004_h2_hygiene_go_live          ) echo f886465bb399f05d3f926e897468a111549df71bddafac11f853bddf2f14ee6c ;;
+    20261004_h2_hygiene_go_live          ) echo 772ee101b755a1a05047ed05340786248533daa3730c78d3256d9bf5dd316a5c ;;
     *) echo UNPINNED ;;
   esac
 }

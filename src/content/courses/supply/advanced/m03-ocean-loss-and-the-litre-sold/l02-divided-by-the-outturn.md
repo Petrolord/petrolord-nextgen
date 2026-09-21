@@ -23,7 +23,7 @@ Then read the cost of a litre sold. At a loss of 0 it is 0.579252 USD. At 0.45 p
 
 ## Why dividing is the right operation
 
-The alternative is to price the lost litres and add them to the build-up as a charge. The trap in that is the base. A loss priced as a charge is priced at some cost per litre, and then the total is still spread over the bill-of-lading litres, as though every litre paid for were sold. Both halves of that are wrong about what happened. The litres did not arrive, so they cannot be sold, and nothing was paid to anyone for losing them.
+The engine does not add the lost litres to the build-up as a charge. The landed total stays the same, and the litres it is spread over fall from the bill-of-lading litres to the outturn litres. On the BADAGRY cargo that is 26513943.86 USD over 45566774.37 outturn litres, which is the bill of lading less the BADAGRY loss of 0.45 percent of it.
 
 Dividing by the outturn states what did happen. Every dollar in the walk was paid, and every one of them has to be recovered from the litres that arrived. The cost per litre sold is the landed total over the outturn. The engine prints it to six decimals of a dollar, and every later price in this tier is built on it.
 

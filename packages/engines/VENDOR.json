@@ -807,51 +807,10 @@
     },
     {
       "path": "__tests__/prototypeChainLookups.test.js",
-      "kind": "missing",
-      "group": "1-test-layer-gap",
-      "reason": "Engines #231's 47-case own-property probe. NOT vendored: the one suite imports every repaired file, including the excluded wellsite domain (tops, descriptionVocabulary, shows, events, abbreviations) and the held differing paths that still carry the pre-#231 lookups (production, waterflood, fdp, mbal, earthmodeling, welldata, gridding, facilities/corrosion, hse/exposure), so it cannot load or pass here until those paths reach canonical."
-    },
-    {
-      "path": "engines/drilling/cementing.js",
       "kind": "differing",
-      "group": "2-copy-pass-held",
-      "vendoredSha": "44da61f84f33e2b3ad658668ba2c9d3054988950",
-      "reason": "Printed precision only (ECD toFixed(0) to (1), standoff toFixed(0) to (2)), but three cementing/advanced lesson files quote the string 'Minimum standoff 60% vs the API 67% target.' verbatim, which canonical prints as '60.00%'. REJECTED from the zero-risk wave: it needs a lesson copy pass in the same commit."
-    },
-    {
-      "path": "engines/waterflood/vrrLedger.js",
-      "kind": "differing",
-      "group": "2-copy-pass-held",
-      "vendoredSha": "94fea91a5a5027ba28d96cc494a045f258ec0166",
-      "reason": "Printed precision only (allocation sums toFixed(3) to (6)) plus two reworded withheld reasons, but waterflood/intermediate m01-allocation lesson prose quotes 'allocation fractions sum to 1.200 (> 1)' and 'fractions sum to 0.900; the remaining 0.100' verbatim, which canonical prints at six decimals. REJECTED from the zero-risk wave: it needs a lesson copy pass in the same commit. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
-    },
-    {
-      "path": "engines/facilities/corrosion.js",
-      "kind": "differing",
-      "group": "2-copy-pass-held",
-      "vendoredSha": "5a5b7fb1eed49bbff68f21628d1b77a5d6659ecf",
-      "reason": "Engines #231 (16fd6c9) changes no value here, but its one repair adds a two-line comment ('constructor' used to come back as a regime), and the LIVE FC9 Corrosion course quotes the engine source itself: the advanced exam asks how many past-tense comment lines the module carries (answer 'Five, in a module of 783 lines', 'roughly one line in 157'), and fc9a_m01, fc9a_m06, fc9b_m01 and the m06 l01 lesson quote '783 lines'. At canonical the fc9 digest prints 785 lines and 6 comment lines. REJECTED from the re-vendor: it needs a FC9 bank and lesson copy pass, and its recut, in the same commit."
-    },
-    {
-      "path": "tools/validation/facilities/FINDINGS-corrosion.md",
-      "kind": "differing",
-      "group": "2-copy-pass-held",
-      "vendoredSha": "e8029de882ab373406f13a013e6da10ab450419b",
-      "reason": "Held with engines/facilities/corrosion.js: canonical 16fd6c9 appends the #231 own-property section describing a repair the held engine blob does not carry. Lands with corrosion.js and its FC9 copy pass."
-    },
-    {
-      "path": "engines/hse/exposure.js",
-      "kind": "differing",
-      "group": "2-copy-pass-held",
-      "vendoredSha": "3495ebf0d4e97bf6e369b7bf1fd4c9a6f8e436b9",
-      "reason": "Engines #231 (16fd6c9) moves no H2 value (every hygiene fields.json regenerates byte-identical on it), but its helper adds six lines, and the H2 Hygiene digest prints the engine's line count and provenance ('sha-identical with petrolord-engines b43f1d9, 708 lines'). Rebuilding the digest to 714 lines changes the digest-number sweep baked into the H2 go-live migration (1632 to 1631 numbers), so gen_seeds.sh stops agreeing with the committed ladder. REJECTED from the re-vendor: it needs the digest rebuild and a go-live recut in the same commit."
-    },
-    {
-      "path": "tools/validation/hse/FINDINGS-exposure.md",
-      "kind": "differing",
-      "group": "2-copy-pass-held",
-      "vendoredSha": "3e8329d34b36592045e77afc1abd300837b9a4aa",
-      "reason": "Held with engines/hse/exposure.js: canonical 16fd6c9 appends the #231 own-property section describing a repair the held engine blob does not carry."
+      "group": "8-local-test-variant",
+      "reason": "Vendored 2026-09-21 as a NextGen LOCAL VARIANT of canonical 16fd6c9's engines #231 gate. Canonical imports the wellsite domain, which NextGen deliberately does not vendor (excludedDomains), so the file could not be vendored whole. Differences from canonical, and only these (each marked NEXTGEN LOCAL VARIANT in the file): the five wellsite imports and their three cases are removed and the peerReview/tops case keeps only its peerReview half; the welldata/lasParse LAS 3.0 block case is removed because the held Group 5 lasParse.js has no blocks map; and the gasWellLoading case asserts a string error in place of canonical's `code: 'unknownCorrelation'`, a separate canonical change the held Group 3 blob does not carry. 43 cases run, every one with all five inherited names, against the #231 own-property hunks backported onto the nine held Group 3, 4 and 5 blobs; reverting any one of those nine hunks turns its case red (measured). Re-vendor this path whole once wellsite is vendored or excluded from canonical's gate and lasParse.js / gasWellLoading.js land at canonical.",
+      "vendoredSha": "6b33e5a6022ebd3d4b5fd88e4e27995daf4e3a73"
     },
     {
       "path": "engines/production/allocation.js",
@@ -906,8 +865,8 @@
       "path": "engines/production/gasWellLoading.js",
       "kind": "differing",
       "group": "3-production-revendor",
-      "vendoredSha": "8088ee1f9294216cd08ff20c18aeb2efe525f094",
-      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+      "vendoredSha": "ea589c2507e31dbc584fc3a8bb5def5e4fa7d1b5",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/production/hydrateInhibition.js",
@@ -941,8 +900,8 @@
       "path": "engines/production/networkSolve.js",
       "kind": "differing",
       "group": "3-production-revendor",
-      "vendoredSha": "68d450394a179fd2b3c6846b64fa20668b078a45",
-      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+      "vendoredSha": "a25a5a2ff1132d01f0561fb264ea317547524be5",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/production/nodal.js",
@@ -990,8 +949,8 @@
       "path": "engines/production/surveillance.js",
       "kind": "differing",
       "group": "3-production-revendor",
-      "vendoredSha": "c5104183e614e3177fd53ea1dbe70a8bcd37e39a",
-      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+      "vendoredSha": "f06289fff8d8c95b97f09cb3f5e7d8f492f6f380",
+      "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/economics/afe.js",
@@ -1011,8 +970,8 @@
       "path": "engines/economics/fdp/costCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
-      "vendoredSha": "42363da0f2ca7e6f919d29c58ed8d50d99902f1a",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+      "vendoredSha": "94675046e9e8f909a69776532a435a40a7f629ce",
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/economics/fdp/facilitiesCalculations.js",
@@ -1039,8 +998,8 @@
       "path": "engines/economics/fdp/wellCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
-      "vendoredSha": "a35fc3034598dbbe9419e5058931d63d796d6cd1",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+      "vendoredSha": "91e8eada5637361a5e9107ac49f26e67d864c386",
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/economics/montecarlo.ts",
@@ -1081,8 +1040,8 @@
       "path": "engines/earthmodeling/properties.js",
       "kind": "differing",
       "group": "5-unaudited-difference",
-      "vendoredSha": "6358e51349f81218a8639f3122ad1d1a8dc75696",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+      "vendoredSha": "10ceb0585b78234a6e54d6e82e2ae13fd967d16d",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/mapping/surface.js",
@@ -1095,8 +1054,8 @@
       "path": "engines/mbal/mbalEngine.ts",
       "kind": "differing",
       "group": "5-unaudited-difference",
-      "vendoredSha": "233b930e736558c0eeb1e7693356f35b8a2f9e93",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+      "vendoredSha": "3596975cc551af2d8b4c138e695f3a42f27b4b3b",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/petrophysics/crossplot.js",
@@ -1117,7 +1076,7 @@
       "kind": "differing",
       "group": "5-unaudited-difference",
       "vendoredSha": "cd8f62364211f23819b6a2f0dc635c5c4a3e2f9e",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor. Engines #231's own-property hunk for this file guards the LAS 3.0 `blocks` map, which the held blob does not have (it predates LAS 3.0 block parsing), so there is no counterpart to backport; it lands with this path's own re-vendor."
     },
     {
       "path": "engines/welltest/derivative.js",
@@ -1137,15 +1096,15 @@
       "path": "lib/gridding/gridmath.js",
       "kind": "differing",
       "group": "5-unaudited-difference",
-      "vendoredSha": "99ce518e1db185d71fe8b37f01cea606e0e16e2e",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+      "vendoredSha": "250c3f8691b68dceb10f95d5e925241cdc8adcff",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "lib/gridding/surfaceImport.js",
       "kind": "differing",
       "group": "5-unaudited-difference",
-      "vendoredSha": "a7ada422163167a2fae84c6cf1a1ab1250201463",
-      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; it was NOT hand-ported onto the held blob and lands with this path's own re-vendor."
+      "vendoredSha": "235557414546bedae566ed9e357a01a4626fff2a",
+      "reason": "Reachable from a live course. Its vendored suite passes, so the difference is believed cosmetic or additive, but that has not been proven by a digest rebuild. Needs its own wave. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "__tests__/drilling.cementing.test.js",
