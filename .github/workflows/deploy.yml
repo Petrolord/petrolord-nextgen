@@ -65,8 +65,16 @@ jobs:
         python3 tools/course-banks/check-bank-sources.py --selftest
         python3 tools/course-banks/check-bank-sources.py
 
-    - name: Course panel and lab gates
-      run: npx vitest run src/components/course/panels --reporter=basic
+    # THE WHOLE VITEST SUITE, not only the panels directory. Until 2026-09-21
+    # this step ran `vitest run src/components/course/panels`, so six suites
+    # outside it (src/lib courseContent, learningGate, prereqWaiver,
+    # sponsorPools, the sidebar CourseModuleNav and CapstonePrompt) never ran
+    # here: FC8's bare-key defect was red in src/lib locally on main while CI
+    # was green. vitest exits non-zero when it finds no test files, so an empty
+    # sweep cannot pass this step, and the count it prints is the check that it
+    # swept the whole tree (150 files, 5042 tests at d54538463).
+    - name: Course panel and lab gates, and every other vitest suite
+      run: npx vitest run --reporter=basic
 
     - name: Build
       run: npm run build
