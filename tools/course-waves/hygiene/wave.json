@@ -13,7 +13,7 @@
  "engines": [
   "engines/hse/exposure.js"
  ],
- "enginesVendoredAt": "NextGen, sha-identical with petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217). Re-vendored 2026-09-19 for #220 only: exposure.js, the jest suite and FINDINGS-exposure.md moved; the golden, the oracle and the negative-control script are byte-identical between the two commits. SIX paths, walked as an import closure from __tests__/hse.exposure.test.js by vendor_hygiene.sh: the suite, the engine and the golden it reads at runtime, plus three NAMED members (oracle_exposure.py, FINDINGS-exposure.md, negcontrol_exposure.sh mode 755). 24 proofs (blob, sha256, cmp, bytes), 0 deviations. The canonical pin in VENDOR.json is NOT moved; the six paths are ledgered kind \"extra\", group h2-hygiene-course, each pinned to its vendored blob, so the edit merges by path with H1 (which moves the pin to f123a57, a commit that does not carry exposure.js). The entries clear as STALE once the pin reaches b43f1d9 or later.",
+ "enginesVendoredAt": "NextGen, sha-identical with petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217). Re-vendored 2026-09-19 for #220 only: exposure.js, the jest suite and FINDINGS-exposure.md moved; the golden, the oracle and the negative-control script are byte-identical between the two commits. SIX paths, walked as an import closure from __tests__/hse.exposure.test.js by vendor_hygiene.sh: the suite, the engine and the golden it reads at runtime, plus three NAMED members (oracle_exposure.py, FINDINGS-exposure.md, negcontrol_exposure.sh mode 755). 24 proofs (blob, sha256, cmp, bytes), 0 deviations. The six paths were first ledgered kind \"extra\", group h2-hygiene-course; merging main brought the canonical pin to df31f53, which carries all six byte for byte, so the six entries were removed as STALE and VENDOR.json is now identical to main.",
  "leakScales": [
   "1",
   "x1e3",
@@ -205,7 +205,7 @@
    "md5": "b1ee18529a6ca0d9be4735fd12c05524",
    "exit": 0,
    "expected": 0,
-   "result": "direction 9 briefs: 6 files (wave.json, BRIEF.md, LESSON_TASK.md, BANK_TASK.md, KEY_TRUTH_TASK.md, PANELS.md), 711 numeric literals, 18 graded values and the T6 margin. | CONTROLS FIRED: a planted graded value and a planted condition were both caught. | gate_capstone_leak: 0 finding(s)."
+   "result": "direction 9 briefs: 6 files (wave.json, BRIEF.md, LESSON_TASK.md, BANK_TASK.md, KEY_TRUTH_TASK.md, PANELS.md), 984 numeric literals, 18 graded values and the T6 margin. | CONTROLS FIRED: a planted graded value and a planted condition were both caught. | gate_capstone_leak: 0 finding(s)."
   },
   "gate_capstone_leak.py --no-banks --plant-lesson (negative control, must exit 1)": {
    "md5": "b1ee18529a6ca0d9be4735fd12c05524",
@@ -241,7 +241,7 @@
    "md5": "e1ed8de10de5778302d00d7e5b357287",
    "exit": 0,
    "expected": 0,
-   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/intermediate/m06-the-professional-capstone/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 987 lines, 728 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/intermediate/m06-the-professional-capstone/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 987 lines, 726 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
   },
   "leakage.mjs --tier advanced": {
    "md5": "e1ed8de10de5778302d00d7e5b357287",
@@ -283,7 +283,7 @@
    "md5": "dc723d03530192367ddc22937fc0c673",
    "exit": 0,
    "expected": 0,
-   "result": "the digest reproduces from its generators, byte for byte | NOTE: truth-hygiene.json is OLDER than digest.txt. Re-run harvest_digest.py before numsweep. | h2_dump: 1617 label-and-call, measurement and pin assertions run, 0 failed, 40 constants pinned"
+   "result": "the digest reproduces from its generators, byte for byte | h2_dump: 1617 label-and-call, measurement and pin assertions run, 0 failed, 40 constants pinned"
   },
   "digestprose.mjs --rules": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -313,13 +313,13 @@
    "md5": "7da6706b78092de1c00eba51aabac8ab",
    "exit": 0,
    "expected": 0,
-   "result": "[bankleak] banks READ FROM /root/wt-h2-nextgen/tools/course-banks/hygiene | [bankleak] .: 21 bank(s), 396 questions, 4153 literals compared against 18 graded field(s) in 7 unit shifting(s), at 10 tolerances | literals within 10 tolerances of a graded answer: 0"
+   "result": "[bankleak] banks READ FROM /root/wt-h2-nextgen/tools/course-banks/hygiene | [bankleak] .: 21 bank(s), 396 questions, 4173 literals compared against 18 graded field(s) in 7 unit shifting(s), at 10 tolerances | literals within 10 tolerances of a graded answer: 0"
   },
   "bankleak.py --selftest": {
    "md5": "7da6706b78092de1c00eba51aabac8ab",
    "exit": 0,
    "expected": 0,
-   "result": "[bankleak] /tmp/tmpkktlz644: 1 bank(s), 1 questions, 3 literals compared against 1 graded field(s) in 5 unit shifting(s), at 10 tolerances | literals within 10 tolerances of a graded answer: 1 | [bankleak] selftest OK"
+   "result": "[bankleak] /tmp/tmp3_80fcbg: 1 bank(s), 1 questions, 3 literals compared against 1 graded field(s) in 5 unit shifting(s), at 10 tolerances | literals within 10 tolerances of a graded answer: 1 | [bankleak] selftest OK"
   },
   "leakage.mjs --banks beginner": {
    "md5": "e1ed8de10de5778302d00d7e5b357287",
@@ -331,7 +331,7 @@
    "md5": "e1ed8de10de5778302d00d7e5b357287",
    "exit": 0,
    "expected": 0,
-   "result": "read /root/wt-h2-nextgen/tools/course-banks/hygiene/intermediate/h2i_m06.json | hygiene banks: 7 file(s), 792 lines, 857 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+   "result": "read /root/wt-h2-nextgen/tools/course-banks/hygiene/intermediate/h2i_m06.json | hygiene banks: 7 file(s), 792 lines, 875 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
   },
   "leakage.mjs --banks advanced": {
    "md5": "e1ed8de10de5778302d00d7e5b357287",
@@ -343,13 +343,13 @@
    "md5": "b1ee18529a6ca0d9be4735fd12c05524",
    "exit": 0,
    "expected": 0,
-   "result": "direction 9 briefs: 6 files (wave.json, BRIEF.md, LESSON_TASK.md, BANK_TASK.md, KEY_TRUTH_TASK.md, PANELS.md), 711 numeric literals, 18 graded values and the T6 margin. | CONTROLS FIRED: a planted graded value and a planted condition were both caught. | gate_capstone_leak: 0 finding(s)."
+   "result": "direction 9 briefs: 6 files (wave.json, BRIEF.md, LESSON_TASK.md, BANK_TASK.md, KEY_TRUTH_TASK.md, PANELS.md), 984 numeric literals, 18 graded values and the T6 margin. | CONTROLS FIRED: a planted graded value and a planted condition were both caught. | gate_capstone_leak: 0 finding(s)."
   },
   "dupaxes.py all three tiers": {
    "md5": "de6a2216f5b921b10022ed60be07df1b",
    "exit": 0,
    "expected": 0,
-   "result": "[dupaxes] /tmp/tmp.hRWaiVSLn0 threshold=0.45 banks={'h2a_exam': 42, 'h2a_m01': 15, 'h2a_m02': 15, 'h2a_m03': 15, 'h2a_m04': 15, 'h2a_m05': 15, 'h2a_m06': 15, 'h2b_exam': 42, 'h2b_m01': 15, 'h2b_m02': 15, 'h2b_m03': 15, 'h2b_m04': 15, 'h2b_m05': 15, 'h2b_m06': 15, 'h2i_exam': 42, 'h2i_m01': 15, 'h2i_m02': 15, 'h2i_m03': 15, 'h2i_m04': 15, 'h2i_m05': 15, 'h2i_m06': 15} | [dupaxes] field comparisons made: 291672  within=17892  exam-vs-module=136080  module-vs-module=137700 | [dupaxes] 0 pair(s) at or above 0.45  within=0  exam-vs-module=0  module-vs-module=0"
+   "result": "[dupaxes] /tmp/tmp.tmEiZOZz1r threshold=0.45 banks={'h2a_exam': 42, 'h2a_m01': 15, 'h2a_m02': 15, 'h2a_m03': 15, 'h2a_m04': 15, 'h2a_m05': 15, 'h2a_m06': 15, 'h2b_exam': 42, 'h2b_m01': 15, 'h2b_m02': 15, 'h2b_m03': 15, 'h2b_m04': 15, 'h2b_m05': 15, 'h2b_m06': 15, 'h2i_exam': 42, 'h2i_m01': 15, 'h2i_m02': 15, 'h2i_m03': 15, 'h2i_m04': 15, 'h2i_m05': 15, 'h2i_m06': 15} | [dupaxes] field comparisons made: 291672  within=17892  exam-vs-module=136080  module-vs-module=137700 | [dupaxes] 0 pair(s) at or above 0.45  within=0  exam-vs-module=0  module-vs-module=0"
   },
   "lengthtails.py beginner": {
    "md5": "3ad5008fafb05e024e9c9be8073983e7",
@@ -361,7 +361,7 @@
    "md5": "3ad5008fafb05e024e9c9be8073983e7",
    "exit": 0,
    "expected": 0,
-   "result": "h2i_m05         15    25.0  23.9  17.2     33.9 | h2i_m06         15    26.7  26.7  20.0     26.7 | [lengthtails] worst single strategy on any bank: 38.9 pct (chance 25.0, refuse above 40.0)"
+   "result": "h2i_m05         15    25.0  23.9  17.2     33.9 | h2i_m06         15    21.7  28.3  21.7     28.3 | [lengthtails] worst single strategy on any bank: 38.9 pct (chance 25.0, refuse above 40.0)"
   },
   "lengthtails.py advanced": {
    "md5": "3ad5008fafb05e024e9c9be8073983e7",
@@ -379,13 +379,67 @@
    "md5": "a236885baf5ed53d465f1b52b4ca1cf7",
    "exit": 0,
    "expected": 0,
-   "result": "row: | 87.000000 | 12.125733 | 12.100000 | 0.050000 | 0.025733 | | REVIEW SECTION  '6.750000' as -  h2i_m06 Q14 explanation  -> digest line 66 (SECTION 1 owned by beginner m01 and advanced m03), 2 row(s) match | row: | J6 | the 8-hour chemical TWA always divides by 8 and warns under or over 8 hours; the STEL divides by 15 and refuses over 15 min"
+   "result": "REVIEW SECTION  '94.000000' as dBA  h2i_m06 Q6 option3  -> digest line 185 (SECTION 4 owned by beginner m01,m05), 7 row(s) match | row: | 94.000000 | 4.594793 | 4.600000 | 0.050000 | -0.005207 | | ... 4 more, pass --review-all to print them"
   },
   "litsweep.py advanced": {
    "md5": "a236885baf5ed53d465f1b52b4ca1cf7",
    "exit": 0,
    "expected": 0,
    "result": "REVIEW SECTION  '150' as -  h2a_m03 Q5 option3  -> digest line 346 (SECTION 5 owned by beginner m02,m05), 7 row(s) match | row: | 150.000000 | 92.924876 | 92.900000 | 92.924813 | -0.024813 | | ... 32 more, pass --review-all to print them"
+  },
+  "gate_bank_copy.py": {
+   "md5": "e9df9523cf390d0c3eb8bea02fdeb05b",
+   "exit": 0,
+   "expected": 0,
+   "result": "gate_bank_copy: 21 bank file(s), 2376 string(s) swept, 0 violation(s)"
+  },
+  "gate_bank_copy.py --plant (negative control, must exit 1)": {
+   "md5": "e9df9523cf390d0c3eb8bea02fdeb05b",
+   "exit": 1,
+   "expected": 1,
+   "result": "VIOLATION PLANTED.json Q1 explanation (contrastive): It is a noise dose, not a level. | gate_bank_copy: 21 bank file(s), 2382 string(s) swept, 2 violation(s) | CONTROL FIRED: the planted dash and the planted contrastive were both caught."
+  },
+  "numsweep.mjs lessons": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "exit": 0,
+   "expected": 0,
+   "result": "hygiene: sweeping 78 lesson file(s) from /root/wt-h2-nextgen/src/content/courses/hygiene against 2153 derived values from 2 source(s) | => literals with 7+ significant figures checked: 593   unresolved: 0   (1142 round literal(s) skipped for trailing zeros, not checked)"
+  },
+  "numsweep.mjs --banks beginner": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "exit": 0,
+   "expected": 0,
+   "result": "hygiene: sweeping 7 bank file(s) from /root/wt-h2-nextgen/tools/course-banks/hygiene/beginner against 2153 derived values from 2 source(s) | => literals with 7+ significant figures checked: 318   unresolved: 0   (281 round literal(s) skipped for trailing zeros, not checked)"
+  },
+  "numsweep.mjs --banks intermediate": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "exit": 0,
+   "expected": 0,
+   "result": "hygiene: sweeping 7 bank file(s) from /root/wt-h2-nextgen/tools/course-banks/hygiene/intermediate against 2153 derived values from 2 source(s) | => literals with 7+ significant figures checked: 137   unresolved: 0   (398 round literal(s) skipped for trailing zeros, not checked)"
+  },
+  "numsweep.mjs --banks advanced": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "exit": 0,
+   "expected": 0,
+   "result": "hygiene: sweeping 7 bank file(s) from /root/wt-h2-nextgen/tools/course-banks/hygiene/advanced against 2153 derived values from 2 source(s) | => literals with 7+ significant figures checked: 142   unresolved: 0   (262 round literal(s) skipped for trailing zeros, not checked)"
+  },
+  "numsweep.mjs --selftest": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "exit": 0,
+   "expected": 0,
+   "result": "PASS  a --banks run with no bank files is REFUSED | PASS  a --banks run where nothing is a question array is REFUSED | negative control: ALL PASS"
+  },
+  "bankrepro.py all three tiers": {
+   "md5": "8f7a1541304ef66d890d774c78b345b7",
+   "exit": 0,
+   "expected": 0,
+   "result": "[bankrepro] /root/wt-h2-nextgen/tools/course-banks/hygiene/beginner: 7 source(s), 7 reproduced, 0 drifted, 0 could not run, 0 with no JSON | [bankrepro] /root/wt-h2-nextgen/tools/course-banks/hygiene/intermediate: 7 source(s), 7 reproduced, 0 drifted, 0 could not run, 0 with no JSON | [bankrepro] /root/wt-h2-nextgen/tools/course-banks/hygiene/advanced: 7 source(s), 7 reproduced, 0 drifted, 0 could not run, 0 with no JSON"
+  },
+  "bankrepro.py --selftest": {
+   "md5": "8f7a1541304ef66d890d774c78b345b7",
+   "exit": 0,
+   "expected": 0,
+   "result": "[bankrepro] selftest OK: a freshly emitted bank is clean, a JSON edited without its source is caught with the exact question named, re-emitting returns it to clean, a source that refuses to write fails rather than passing, and an empty directory refuses"
   },
   "digestpromise.py": {
    "md5": "f22dd5d57795e134faa73d625358eed7",
@@ -427,13 +481,13 @@
    "md5": "c1d8057c44e495f3662ca7640c368f4d",
    "exit": 0,
    "expected": 0,
-   "result": "vendored engines clean against canonical 5cbdca5: 660 path(s) compared byte for byte, 810 canonical, 669 vendored, 267 recorded deviation(s) (0-out-of-scope-domain 76, 1-test-layer-gap 74, 2-copy-pass-held 2, 3-production-revendor 20, 4-economics-revendor 11, 5-unaudited-difference 11, 6-test-layer-drift 63, 7-vendor-readme 1, h2-hygiene-course 6, local-only 3)."
+   "result": "vendored engines clean against canonical df31f53: 747 path(s) compared byte for byte, 874 canonical, 750 vendored, 238 recorded deviation(s) (0-out-of-scope-domain 54, 1-test-layer-gap 73, 2-copy-pass-held 2, 3-production-revendor 20, 4-economics-revendor 11, 5-unaudited-difference 11, 6-test-layer-drift 63, 7-vendor-readme 1, local-only 3)."
   },
   "check-wave-inputs.mjs": {
    "md5": "0b4a33ac14407010ed582ce5abaa0c64",
    "exit": 0,
    "expected": 0,
-   "result": "ok   digest.txt: 24 section heading(s), 24 spelled by 20 committed generator(s), 24 of them as a generator-written TITLE with an owner clause the generator BUILDS from the curriculum rather than types | ok   fields.json: 18 graded field name(s), 18 spelled by a committed generator | [course-waves] every committed wave input is present, pinned and spelled by a committed generator."
+   "result": "ok   digest.txt: 28 section heading(s), 28 spelled by 18 committed generator(s), 28 of them as a generator-written TITLE with an owner clause the generator BUILDS from the curriculum rather than types | ok   fields.json: 18 graded field name(s), 18 spelled by a committed generator | [course-waves] every committed wave input is present, pinned and spelled by a committed generator."
   }
  }
 }
