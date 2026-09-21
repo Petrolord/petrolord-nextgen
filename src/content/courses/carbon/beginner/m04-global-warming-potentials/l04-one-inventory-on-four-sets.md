@@ -4,7 +4,7 @@
 
 ## The same Igbogene, four times
 
-The digest rebuilds the complete Igbogene inventory on each of the four GWP sets. The activity on every line is the same in every rebuild: the same heaters, the same flare at its stated 0.98, the same 142.000 t of vented methane and the same 31500.000 MWh of purchased power at Igbogene's invented factor. Only the set changes.
+The lab rebuilds the complete Igbogene inventory on each of the four GWP sets. The activity on every line is the same in every rebuild: the same heaters, the same flare at its stated 0.98, the same 142.000 t of vented methane and the same 31500.000 MWh of purchased power at Igbogene's invented factor. Only the set changes.
 
 | set | Scope 1 tCO2e | Scope 2 tCO2e | total tCO2e | total less the course set |
 | --- | --- | --- | --- | --- |
@@ -13,13 +13,13 @@ The digest rebuilds the complete Igbogene inventory on each of the four GWP sets
 | IPCC AR5 GWP100, fossil methane | 30062.438 | 12915.000 | 42977.438 | 31.661 |
 | IPCC AR5 GWP100, non-fossil methane | 29745.826 | 12915.000 | 42660.826 | -284.951 |
 
-The last column is the digest's arithmetic on the engine's totals, each measured from the course's set, "IPCC AR6 GWP100, fossil methane".
+The last column is the course's arithmetic on the engine's totals, each measured from the course's set, "IPCC AR6 GWP100, fossil methane".
 
 ## What moves and what holds
 
 Read the Scope 2 column first. It is 12915.000 tCO2e on all four sets. The purchased electricity line is CO2, and every CO2 line has a GWP of 1 on every set.
 
-The Scope 1 column moves, and the digest says why: only the methane lines move. Here they are on each set:
+The Scope 1 column moves, and the lab says why: only the methane lines move. Here they are on each set:
 
 | set | Flaring (unburned CH4) tCO2e | Vented and fugitive methane tCO2e |
 | --- | --- | --- |
@@ -32,9 +32,9 @@ The flare's 16.306 t of methane and the 142.000 t vented are the same tonnes of 
 
 ## Four totals for one plant
 
-The same plant, with the same activity, reports four totals: 42945.777, 42502.520, 42977.438 and 42660.826 tCO2e. From the course's set, the digest measures the others at -443.257, 31.661 and -284.951 tCO2e. Each is computed on its own set, and none can be read against another as though the set did not matter.
+The same plant, with the same activity, reports four totals: 42945.777, 42502.520, 42977.438 and 42660.826 tCO2e. From the course's set, the lab measures the others at -443.257, 31.661 and -284.951 tCO2e. Each is computed on its own set, and none can be read against another as though the set did not matter.
 
-That is what the engine's note means, verbatim: "Global warming potentials differ between IPCC assessment reports. An inventory on one report is not comparable with one on another, so the set is stated on every result." The digest adds the same point for the sets inside a report: an inventory on one set is not comparable with one on another. The engine states its set on every result as gwpSetLabel, and an intensity carries it too.
+That is what the engine's note means, verbatim: "Global warming potentials differ between IPCC assessment reports. An inventory on one report is not comparable with one on another, so the set is stated on every result." The course adds the same point for the sets inside a report: an inventory on one set is not comparable with one on another. The engine states its set on every result as gwpSetLabel, and an intensity carries it too.
 
 ## Reading a total you are handed
 
@@ -48,4 +48,4 @@ In the panel, step through the four sets and watch the two methane lines and the
 
 Read the four totals and the column "total less the course set". Say what the relationship between the four totals shows about comparing two inventories converted on different sets.
 
-Self check: the same Igbogene activity gives 42945.777, 42502.520, 42977.438 and 42660.826 tCO2e on the four sets, and the digest measures the last three from the course set at -443.257, 31.661 and -284.951 tCO2e. Scope 2 holds at 12915.000 and only the methane lines move. Two inventories on different sets differ with no change in the plant, so they are not comparable.
+Self check: the same Igbogene activity gives 42945.777, 42502.520, 42977.438 and 42660.826 tCO2e on the four sets, and the lab measures the last three from the course set at -443.257, 31.661 and -284.951 tCO2e. Scope 2 holds at 12915.000 and only the methane lines move. Two inventories on different sets differ with no change in the plant, so they are not comparable.

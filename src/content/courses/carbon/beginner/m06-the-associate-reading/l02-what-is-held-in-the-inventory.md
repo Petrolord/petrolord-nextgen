@@ -14,11 +14,11 @@ Four items in this course are held. Each is taught as a stated limit and never g
 
 ## H1: the report to file on
 
-The course computes on "IPCC AR6 GWP100, fossil methane" and prints the other three sets beside it. It does not say which report an operator should file on. The digest records where each stands: AR5 is what UNFCCC reporting has required and AR6 is what the GHG Protocol now recommends. At Igbogene the choice between the two fossil sets moves the total from 42945.777 tCO2e on AR6 to 42977.438 tCO2e on AR5. The limit is that the choice is a regulatory reading.
+The course computes on "IPCC AR6 GWP100, fossil methane" and prints the other three sets beside it. It does not say which report an operator should file on. The course records where each stands: AR5 is what UNFCCC reporting has required and AR6 is what the GHG Protocol now recommends. At Igbogene the choice between the two fossil sets moves the total from 42945.777 tCO2e on AR6 to 42977.438 tCO2e on AR5. The limit is that the choice is a regulatory reading.
 
 ## H2: the methane heating value pair
 
-The engine's fuel reference table gives methane a typical LHV of 802.6 and a typical HHV of 890.8 MJ per kmol. The digest computes the difference as 88.2, and it computes two moles of water condensed at the engine's own latent heat as 87.985 MJ: 2 x 18.015 kg, the H2O of energyEfficiency.PRODUCT_MOLAR_MASS, x 2442 kJ/kg. Both are the digest's arithmetic. The pair is labelled typical, and the fuel analysis governs.
+The engine's fuel reference table gives methane a typical LHV of 802.6 and a typical HHV of 890.8 MJ per kmol. The course computes the difference as 88.2, and it computes two moles of water condensed at the engine's own latent heat as 87.985 MJ: 2 x 18.015 kg, the H2O of energyEfficiency.PRODUCT_MOLAR_MASS, x 2442 kJ/kg. Both are the course's arithmetic. The pair is labelled typical, and the fuel analysis governs.
 
 ## H3: escaped carbon counted as methane
 
@@ -30,7 +30,7 @@ The atom balance returns co2Tonnes and ch4Tonnes and no other gas. Combustion N2
 
 ## The rules in force
 
-Beside the held items, the digest lists the rules the engine applies now. Among them are these:
+Beside the held items, the course lists the rules the engine applies now. Among them are these:
 
 A blank or null destruction efficiency is refused; left out of the call it is complete combustion. A line that errors, and a line off Scope 1 and Scope 2, is a blocked line with its reason. An intensity carries its inventory's reportable status. The GWP set carries a methane note.
 

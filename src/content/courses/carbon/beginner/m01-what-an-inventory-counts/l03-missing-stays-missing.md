@@ -31,7 +31,7 @@ One argument does have a default. Left out of the call, the destruction efficien
 | --- | --- | --- | --- |
 | combustionCo2FromCarbon({ fuelKmolPerYear: 1000, carbonPerKmolFuel: 1 }) | 1 | 44.009 | 0.000 |
 
-The digest says who that default is for: "A burner is the case that default is for. A flare is asked for its efficiency every time." A burner call may leave the argument out and get complete combustion. A flare is asked for its efficiency every time, and a blank box reaches the engine as missing, so the flare is refused until a figure is typed.
+The course says who that default is for: "A burner is the case that default is for. A flare is asked for its efficiency every time." A burner call may leave the argument out and get complete combustion. A flare is asked for its efficiency every time, and a blank box reaches the engine as missing, so the flare is refused until a figure is typed.
 
 The difference between the two is where the value came from. A default is written into the engine and stated. A blank box is a box nobody filled, and the engine does not guess what they meant.
 

@@ -16,7 +16,7 @@ The engine also reports its status beside the totals: gwpSetLabel: IPCC AR6 GWP1
 
 ## Each line as a share
 
-The digest divides each line by the total. These shares are the digest's arithmetic on the engine's figures:
+The lab divides each line by the total. These shares are the course's arithmetic on the engine's figures:
 
 | line | share of the total |
 | --- | --- |
@@ -28,7 +28,7 @@ The digest divides each line by the total. These shares are the digest's arithme
 
 Read the rows. The fired heaters are 0.538387 of the total, the purchased electricity 0.300728, the vented and fugitive methane 0.098534, the flare's CO2 0.051037 and the flare's unburned methane 0.011315. The two methane lines enter the total in tCO2e on the course's set.
 
-The digest adds a rounding note, and it matters when you check the shares: the shares as printed sum to 1.000001, because each is rounded to six decimals from the unrounded quotient. The unrounded shares sum to 1. A sum of 1.000001 is the rounding, and it is not an error in the inventory.
+The course adds a rounding note, and it matters when you check the shares: the shares as printed sum to 1.000001, because each is rounded to six decimals from the unrounded quotient. The unrounded shares sum to 1. A sum of 1.000001 is the rounding, and it is not an error in the inventory.
 
 ## What a total contains
 

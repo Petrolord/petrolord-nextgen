@@ -40,7 +40,7 @@ SECTION 7 prints the rule behind the table: every line is activity x factor x GW
 
 ## A line off both scopes
 
-SCOPE holds 1 and 2 and nothing else, so a line on any other scope is outside what buildInventory totals. The digest adds a business travel line on scope 3 to the complete Igbogene inventory, and the engine blocks it and names why:
+SCOPE holds 1 and 2 and nothing else, so a line on any other scope is outside what buildInventory totals. The course adds a business travel line on scope 3 to the complete Igbogene inventory, and the engine blocks it and names why:
 
 | line | reason |
 | --- | --- |

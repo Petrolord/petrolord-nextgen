@@ -30,7 +30,7 @@ The last row types a fuel of -1 kmol, and the engine refuses it: "A fuel quantit
 
 ## What the atom balance does not attempt
 
-A refusal is the engine saying no to an input. There is also a gas the atom balance never computes, however complete its inputs are. Its result carries these keys and no other gas: co2Tonnes, ch4Tonnes. Nitrous oxide from combustion is not computed by the atom balance, and the digest says what it needs: an emission factor line. The course holds this as a stated limit of the engine and grades nothing on it.
+A refusal is the engine saying no to an input. There is also a gas the atom balance never computes, however complete its inputs are. Its result carries these keys and no other gas: co2Tonnes, ch4Tonnes. Nitrous oxide from combustion is not computed by the atom balance, and the course says what it needs: an emission factor line. The course holds this as a stated limit of the engine and grades nothing on it.
 
 In practice, a combustion inventory often carries a nitrous oxide term, and here it would enter as its own factor line with its own source.
 

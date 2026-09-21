@@ -28,7 +28,7 @@ The last column adds the CO2 and the methane line. It is 2236.537 tCO2e at 1, 24
 
 The CO2 column falls as the efficiency drops, and the flare's total rises. Each row's total is its CO2 plus its methane line, and the two are weighted differently: CO2 carries a GWP of 1 on every set, and the methane is converted at 29.8 on the course's set. On this flare, a lower destruction efficiency makes the CO2 smaller and the total larger.
 
-That is why the efficiency is an input. The digest measures two rows against each other: read as 100 percent, the same flare is 2236.537 tCO2e with no methane line, 441.191 tCO2e below the flare at 0.98. And at 0.98 the methane line is a share of 0.181468 of the flare. Both figures are the digest's arithmetic on the engine's figures.
+That is why the efficiency is an input. The lab measures two rows against each other: read as 100 percent, the same flare is 2236.537 tCO2e with no methane line, 441.191 tCO2e below the flare at 0.98. And at 0.98 the methane line is a share of 0.181468 of the flare. Both figures are the course's arithmetic on the engine's figures.
 
 ## The row the inventory uses
 

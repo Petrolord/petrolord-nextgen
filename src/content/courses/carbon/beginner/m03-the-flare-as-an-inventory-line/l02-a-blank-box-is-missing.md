@@ -12,14 +12,14 @@ The refusal has three parts. The value is required. It is not read as 100 percen
 
 ## What 100 percent would report
 
-The digest prints what a flare read as 100 percent would report beside the same flare at its stated efficiency. The inputs are invented for this course and the methane line is on "IPCC AR6 GWP100, fossil methane":
+The lab prints what a flare read as 100 percent would report beside the same flare at its stated efficiency. The inputs are invented for this course and the methane line is on "IPCC AR6 GWP100, fossil methane":
 
 | destruction efficiency | co2Tonnes | ch4Tonnes | methane line tCO2e | flare tCO2e |
 | --- | --- | --- | --- | --- |
 | 1 | 2236.537 | 0.000 | no line (no methane) | 2236.537 |
 | 0.98 | 2191.807 | 16.306 | 485.922 | 2677.729 |
 
-Read as 100 percent, the same flare is 2236.537 tCO2e with no methane line: 441.191 tCO2e below the flare at 0.98. That difference is the digest's arithmetic on the engine's two figures.
+Read as 100 percent, the same flare is 2236.537 tCO2e with no methane line: 441.191 tCO2e below the flare at 0.98. That difference is the course's arithmetic on the engine's two figures.
 
 The 100 percent row has no methane at all. The methane line is the part that disappears, and on the course's set it is 485.922 tCO2e at the stated efficiency. A blank read as 100 percent would remove it from the inventory without anyone having decided that the flare burns completely. That is what the refusal prevents.
 
@@ -33,7 +33,7 @@ SECTION 9 prints the Igbogene inventory with every other gap closed and only the
 | --- | --- | --- | --- | --- | --- |
 | 4 | 27353.048 | 12915.000 | 40268.048 | false | 1 line(s) could not be computed |
 
-The blocked line is Flaring, and its reason is the refusal above, word for word. The digest reads the row itself: the total leaves out the flare's CO2 and methane lines, and the inventory is not reportable while the flare stands refused. With the flare efficiency entered, the inventory has 5 lines and Scope 1 is 30030.777 tCO2e.
+The blocked line is Flaring, and its reason is the refusal above, word for word. The course reads the row itself: the total leaves out the flare's CO2 and methane lines, and the inventory is not reportable while the flare stands refused. With the flare efficiency entered, the inventory has 5 lines and Scope 1 is 30030.777 tCO2e.
 
 SECTION 9 prints one more case beside it. atomBalanceLines with excluded true adds no line at all: 0 lines, for a source left out of the boundary on purpose. A refused flare is a blocked line with its reason. A source excluded on purpose adds none.
 
@@ -43,6 +43,6 @@ In the panel, clear the flare's efficiency, then type 1, then type 0.98, and com
 
 ## Exercise
 
-Read the rows for 1 and for 0.98 and the digest's difference of 441.191 tCO2e. Say what the relationship between the two rows shows about why the engine refuses a blank instead of reading it as 100 percent.
+Read the rows for 1 and for 0.98 and the lab's difference of 441.191 tCO2e. Say what the relationship between the two rows shows about why the engine refuses a blank instead of reading it as 100 percent.
 
 Self check: read as 100 percent, the flare is 2236.537 tCO2e with no methane line. At its stated 0.98 it is 2677.729 tCO2e, with a methane line of 485.922 tCO2e. The 100 percent reading is 441.191 tCO2e below the stated one and drops the methane line entirely, so a blank read as 100 percent would drop the methane line without anyone having decided that the flare burns completely.

@@ -22,7 +22,7 @@ The 16.306 t of methane is converted at 29.8, the CH4 value of the course's set,
 
 ## How much of the flare it is
 
-At 0.98 the methane line is 485.922 tCO2e of the flare's 2677.729 tCO2e, a share of 0.181468. That share is the digest's arithmetic on the engine's figures. The rest of the flare is its CO2 line, 2191.807 tCO2e.
+At 0.98 the methane line is 485.922 tCO2e of the flare's 2677.729 tCO2e, a share of 0.181468. That share is the course's arithmetic on the engine's figures. The rest of the flare is its CO2 line, 2191.807 tCO2e.
 
 ## Why the fossil value
 
@@ -30,7 +30,7 @@ The GWP set carries a methane note of its own, and it explains the choice of pot
 
 ## A held item
 
-This assumption is held by the course. Every carbon atom that escapes is counted as methane, and the digest states it as the engine's stated and conservative assumption. A method that uses the gas's own methane content is a different method, and choosing it is the owner's decision. The course teaches the assumption as the assumption it is and grades nothing that depends on changing it.
+This assumption is held by the course. Every carbon atom that escapes is counted as methane, and the course states it as the engine's stated and conservative assumption. A method that uses the gas's own methane content is a different method, and choosing it is the owner's decision. The course teaches the assumption as the assumption it is and grades nothing that depends on changing it.
 
 In practice, a flare's unburned gas contains other hydrocarbons besides methane, and a measured composition is what an override would be built on.
 
