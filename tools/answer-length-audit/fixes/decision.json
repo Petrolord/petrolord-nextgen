@@ -1,0 +1,46 @@
+{
+ "migration": "20261021b_b4_fix_decision.sql",
+ "title": "decision: duplicate question rewritten into a new question",
+ "items": [
+  {
+   "app_slug": "decision",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "duplicate of intermediate module m06-the-professional-reading 3 (near p0.72 k0.62): both ask what reading the 0.850000 likelihood as a posterior does, key 298.2500 against 207.7989",
+   "verdict": "fixed",
+   "reason": "True duplicate across tiers, also asked in advanced final 25; kept the intermediate m06 question and rewrote this copy to test the m06 onward point on capital portfolio decisions.",
+   "changes": {
+    "prompt": {
+     "old": "An expert reads the EKPAN lottery survey's likelihood of 0.850000, a bright spot given success, as the chance of success after a bright spot. What does that do to the drill after a bright spot?",
+     "new": "The onward lesson takes decision analysis on to capital portfolio decisions under one budget. Why is the best set of projects not simply the set of individually best ones?"
+    },
+    "explanation": {
+     "old": "Bayes turns 0.850000 into 0.646739 because a bright spot also appears on 0.250000 of dry holes, which makes a bright spot 0.460000 likely overall. 9.2361 is the farm-out's value after no bright spot.",
+     "new": "Capital portfolio decisions choose among many projects under one budget, and money spent on one is unavailable to the next, so the choice is of a set under that constraint. Decision Studio already sets capital allocation from a saved portfolio beside the decision analysis in one brief."
+    },
+    "options": {
+     "0": {
+      "old": "Nothing to the value, because a likelihood and a posterior are the same number whenever the survey passes its consistency check.",
+      "new": "Because each project's EMV has to be turned into a net value of information before projects on different prospects can be compared at all."
+     },
+     "1": {
+      "old": "It values the drill at 207.7989 regardless, because the engine converts any typed 0.850000 into the posterior before weighting the drill.",
+      "new": "Because a portfolio rolls every project back at the discount rate of its riskiest member, which lowers each value unevenly and so reorders them."
+     },
+     "2": {
+      "old": "It values the drill at 298.2500 in place of 207.7989, because the posterior after a bright spot is 0.646739.",
+      "new": "Because money spent on one project is unavailable to the next, so each is judged against what else the same budget buys."
+     },
+     "3": {
+      "old": "It lowers the drill after a bright spot to 9.2361, since that likelihood belongs to the reading on which the farm-out is chosen.",
+      "new": "Because an individually best project was valued with its own information already bought, and a portfolio has to strip every survey value out first."
+     }
+    }
+   },
+   "correct_change_reason": "True duplicate rewritten into a new question on a different point, so the key is new text for the new question."
+  }
+ ]
+}
