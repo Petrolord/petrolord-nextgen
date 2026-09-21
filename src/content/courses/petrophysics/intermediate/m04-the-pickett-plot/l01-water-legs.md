@@ -40,7 +40,7 @@ A leg that evaluates to exactly 100 percent water with the given parameters is t
 
 Be honest about what picking a water leg is: an interpretation, not a measurement. You are asserting that every sample in the window is at $S_w = 1$. If a transition zone creeps into the window, or a few shaly samples, or an interval still flushed by mud filtrate, that assertion is false and every parameter fitted from the window inherits the error. A water leg picked 2 m too high can hand you an $m$ that is wrong by tenths, and that error then multiplies through every saturation you compute in the reservoir above.
 
-The discipline is the same one you learned for the gamma ray anchors: choose the window deliberately, state it in your report, and treat the fitted parameters as conclusions that depend on it. The typewell's window, 2075 to 2078 m, is given to you for this course, and the capstone uses exactly that window.
+The discipline is the same one you learned for the gamma ray anchors: choose the window deliberately, state it in your report, and treat the fitted parameters as conclusions that depend on it. The typewell's water leg, 2075 to 2078 m, is given to you for this course. The capstone asks what happens when the window is stretched upward to 2072 m, so be ready to fit a window you have not been handed.
 
 ## Exercise
 

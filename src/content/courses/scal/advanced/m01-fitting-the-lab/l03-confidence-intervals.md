@@ -29,7 +29,7 @@ The interval also disciplines comparisons between plugs. Two samples reporting 2
 
 ## The capstone connection
 
-The capstone grades your fitted water exponent at a tolerance of 0.001 around 2.4999999999999996. Notice what that tolerance is calibrated to: it is enormously wider than the machine-precision recovery, so any correct execution passes, and far narrower than the gap to plausible wrong answers such as a fit run with the curves accidentally swapped or the floor disabled. Grading tolerances are confidence intervals chosen by the examiner, and reading them that way tells you what distinctions an assessment is actually testing.
+The capstone grades your fitted water exponent at a tolerance of 0.001, on the same thirteen rows printed to three decimals, the way a lab sheet reports them. Notice what that tolerance is calibrated to: it is far wider than the nine significant figures the panel prints, so any correct execution passes, and far narrower than the gap between the printed-grid fit and the plant, or a fit run with the curves accidentally swapped or the floor disabled. Grading tolerances are confidence intervals chosen by the examiner, and reading them that way tells you what distinctions an assessment is actually testing.
 
 ## The misconception to avoid
 

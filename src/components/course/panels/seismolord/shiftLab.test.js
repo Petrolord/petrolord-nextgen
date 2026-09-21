@@ -18,6 +18,9 @@ function scan() {
 describe('seismolord professional: bulk shift and tuning', () => {
   it('reproduces the NG6 professional capstone answer key', () => {
     expect(I.bulkShiftMs).toBe(8);
+    // corr_zero_lag replaced the old `corr` field (exactly 1) in W1.
+    expect(I.corrZeroLag).toBeCloseTo(0.6217418028775199, 12);
+    expect(Number(I.corrZeroLag.toFixed(6))).toBe(0.621742);
     expect(I.corr).toBeCloseTo(1, 12);
     expect(I.peak15.abs).toBeCloseTo(0.1573149710893631, 12);
     expect(I.peak40.abs).toBeCloseTo(0.0362229160964489, 12);

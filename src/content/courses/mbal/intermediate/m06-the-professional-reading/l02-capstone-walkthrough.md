@@ -9,7 +9,7 @@ The Professional capstone is called "Aquifers, and the cost of the wrong one". F
 | Decay term over one 365 day step | none | 0.002 | module 3 lesson 3 |
 | Cumulative $W_e$ after four steps | MMbbl | 0.4 | module 3 lesson 5 |
 | Oil in place when a pot aquifer is forced on Ekene | stb | 20000 | module 2 lesson 4 |
-| Fit statistic of that wrong model | none | 0.002 | module 2 lesson 4 |
+| Fit statistic of that wrong model | none | 0.0001 | module 2 lesson 4 |
 
 This lesson does not hand you six answers. It works two of them all the way through, by panel and by hand, and points at the lesson that owns each of the rest.
 

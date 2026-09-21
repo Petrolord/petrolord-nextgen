@@ -30,12 +30,12 @@ The capstone asks you to run this pipeline in the app and report six numbers. He
 | --- | --- | --- |
 | 1 | SAND_A mean neutron-density porosity | 0.1762 |
 | 2 | SAND_A mean Wyllie sonic porosity | 0.2069 |
-| 3 | Pickett fit: $a R_w$ | 0.0500 ohm.m |
-| 4 | Pickett fit: $m$ | 2.000 |
+| 3 | Pickett fit $a R_w$ over 2072 to 2078 m | your own fit |
+| 4 | Pickett fit $m$ over 2072 to 2078 m | your own fit |
 | 5 | SAND_A mean Sw, Simandoux | 0.4335 |
 | 6 | SAND_A mean Sw, Indonesia | 0.4280 |
 
-Read the table as a story. Rows one and two say porosity in SAND_A is about 18 to 21 percent depending on method, and the spread itself is information. Rows three and four say the water leg confirms the handed-down $R_w$ and $m$ exactly on this well: the product $a R_w = 1 \times 0.05 = 0.0500$ and the slope returns $m = 2.000$. Rows five and six say the two shaly-sand models agree with each other within half a saturation unit on the zone mean, which is what you expect in a sand this clean.
+Read the table as a story. Rows one and two say porosity in SAND_A is about 18 to 21 percent depending on method, and the spread itself is information. Rows three and four test the Pickett module from the other side. Over the true water leg, 2075 to 2078 m, the fit confirms the handed-down $R_w$ and $m$ exactly on this well: the product $a R_w = 1 \times 0.05 = 0.0500$ and the slope returns $m = 2.000$. The capstone grades the fit over a window that starts three metres higher, where the answer is no longer the given parameters, so you have to run it. Rows five and six say the two shaly-sand models agree with each other within half a saturation unit on the zone mean, which is what you expect in a sand this clean.
 
 ## Worked example
 

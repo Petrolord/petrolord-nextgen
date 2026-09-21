@@ -6,7 +6,7 @@ The capstone asks for six numbers. This lesson walks the exercise in the order t
 
 ## What is being asked
 
-Cross-validate the TOP_SAND grid by leave-one-out: only wells inside the control hull can be validated, so report how many that is and the residual at Ekene-6. Then blind-test the new appraisal well Ekene-7 at (1500, 1500), actual pick 1549 m: the six-well prediction there, its residual, and the crest and live node count after regridding with Ekene-7 included.
+Cross-validate the TOP_SAND grid by leave-one-out: only wells inside the control hull can be validated, so report how many that is and the residual at Ekene-6. Then blind-test the new appraisal well Ekene-7 at (1500, 1500), actual pick 1549 m: the six-well prediction there, its residual, and the crest and the depth at prospect P-1 after regridding with Ekene-7 included.
 
 | Field | Unit | Tolerance |
 | --- | --- | --- |
@@ -15,9 +15,9 @@ Cross-validate the TOP_SAND grid by leave-one-out: only wells inside the control
 | Six-well grid prediction at Ekene-7 | m | 0.1 |
 | Blind-test residual at Ekene-7 | m | 0.1 |
 | Crest depth with Ekene-7 included | m | 0.1 |
-| Live nodes with Ekene-7 included | count | 0, exact |
+| Depth at P-1 with Ekene-7 included | m | 0.01 |
 
-Two of the six are counts and both are graded exactly.
+One of the six is a count and it is graded exactly. The depth at P-1 carries the tightest tolerance, 0.01 m, because the leave-one-out readings of the same tile sit only about a tenth of a metre from it at their closest.
 
 ## The order to run it in
 
@@ -31,7 +31,7 @@ While in this state, also count the interior wells. The hull has five vertices a
 
 $$1555.8438720703125 - 1546 = +9.8438720703125\ \mathrm{m}$$
 
-**State three: six plus Ekene-7.** Read the crest, **1540.70556640625 m**, and the live node count, **201**.
+**State three: six plus Ekene-7.** Read the crest, **1540.70556640625 m**, and the depth at P-1 from the tile beside it. The live node count stays on the panel as a check, and it should read 201.
 
 **Then the arithmetic.** The blind residual needs no panel state at all:
 
@@ -67,7 +67,7 @@ The two residuals have opposite signs. Two residuals of the same sign means one 
 
 ## Worked example
 
-A learner submits 1, $+9.84$, 1549, $0$, 1540.71 and 201. Which two fields are wrong and what happened?
+A learner submits 1, $+9.84$, 1549, $0$ and 1540.71, then reads the depth at P-1 correctly. Which two fields are wrong and what happened?
 
 The prediction and the blind residual. They submitted 1549 for the prediction, which is Ekene-7's actual pick, and 0 for the residual, which follows from it.
 
@@ -77,4 +77,4 @@ What happened is that the panel was switched to the seven-well state before the 
 
 Write out the six capstone fields with their units and state which one must be read before any other, and why.
 
-As a self-check: the fields are the cross-validatable count of 1, the leave-one-out residual at Ekene-6 of $+9.8438720703125$ m, the six-well prediction at Ekene-7 of 1543.3271484375 m, the blind residual of $-5.6728515625$ m, the seven-well crest of 1540.70556640625 m, and the seven-well live node count of 201. The prediction at Ekene-7 must be read first, in the all-six-wells state, because adding Ekene-7 to the control makes the map honour its pick exactly and the prediction ceases to exist anywhere.
+As a self-check: the fields are the cross-validatable count of 1, the leave-one-out residual at Ekene-6 of $+9.8438720703125$ m, the six-well prediction at Ekene-7 of 1543.3271484375 m, the blind residual of $-5.6728515625$ m, the seven-well crest of 1540.70556640625 m, and the seven-well depth at P-1, read from its tile in the seven-well state. The prediction at Ekene-7 must be read first, in the all-six-wells state, because adding Ekene-7 to the control makes the map honour its pick exactly and the prediction ceases to exist anywhere.

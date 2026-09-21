@@ -11,7 +11,7 @@ Six fields, graded server side.
 | pD finite at reD 5 and tD 100 | none | 0.05 | module 1 lesson 4, and below |
 | Ahmed 11-1 water influx | bbl | 500 | module 3 lesson 3 |
 | Ahmed 11-1 water drive index, net convention | none | 0.002 | module 3 lesson 4, and below |
-| Ahmed 11-1 drive indices summed, net convention | none | 0.002 | module 3 lesson 4, and below |
+| Ahmed 11-1 depletion drive index, net convention | none | 0.002 | module 3 lesson 4, and below |
 
 This lesson does not hand you six answers. It takes two of them all the way through, by panel and by hand, and points at the lesson that owns each of the rest.
 
@@ -67,7 +67,7 @@ $$WDI = \frac{W_e - W_p B_w}{A} = \frac{361281.250000001}{1710200.00000000} = 0.
 
 Against a tolerance of 0.002, and against the book's printed 0.2112 that is a difference of 0.0000508770903991929, comfortably inside one unit in the last place the book printed. Do not tighten that comparison further. Ahmed divided a rounded influx by a rounded withdrawal, so a tight relative tolerance would be a test of his rounding rather than of the physics.
 
-**The trap, priced.** Divide by gross $F$ instead and the same influx gives 0.205250113623452. That is 0.00600076346694700 away from the graded value, missing the 0.002 tolerance by 3.00038173347350 times over. The sixth field goes with it: the four indices then sum to 0.971594137029883 instead of 1, missing its own 0.002 tolerance by 14.2029314850585 times. And 0.971594137029883 is not a closure failure. It is exactly $A/F$, the two denominators divided, which is what module 3 proved.
+**The trap, priced.** Divide by gross $F$ instead and the same influx gives 0.205250113623452. That is 0.00600076346694700 away from the graded value, missing the 0.002 tolerance by 3.00038173347350 times over. The sixth field goes with it. It is the depletion drive index, the oil expansion term $N E_o$ over the same net withdrawal, and the gross denominator moves it by the same factor $A/F$, far outside its own 0.002 tolerance. The four indices then sum to 0.971594137029883 instead of 1. And 0.971594137029883 is not a closure failure. It is exactly $A/F$, the two denominators divided, which is what module 3 proved.
 
 ## Where the other three come from
 

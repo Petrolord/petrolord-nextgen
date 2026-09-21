@@ -5,7 +5,7 @@
  },
  "MMBtu/hr": {
   "decimals": 6,
-  "match": "^(?:reboilerMMBtuHr)$"
+  "match": "^(?:reboilerMMBtuHr|tegReboilerMMBtuHr)$"
  },
  "degF": {
   "decimals": 6,
@@ -42,10 +42,6 @@
  "per degR": {
   "decimals": 6,
   "match": "^(?:dzdT)$"
- },
- "short tons/yr": {
-  "decimals": 6,
-  "match": "^(?:btexTonsYear)$"
  },
  "stages": {
   "decimals": 6,

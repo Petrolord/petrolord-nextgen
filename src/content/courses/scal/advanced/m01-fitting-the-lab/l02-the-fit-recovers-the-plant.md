@@ -44,7 +44,7 @@ The count of twenty four matters as much as the exponents. Twenty six curve poin
 
 ## Why a perfect recovery is the right test and not a rigged one
 
-It can feel circular: sample a Corey model, fit a Corey model, applaud when it matches. The point is what would happen if any link in the chain were broken. A wrong residual definition, a floor that ate live points, an index slip in the Jacobian, a bound clamped too early, any of these would smear the recovered exponents away from the plant by far more than $10^{-16}$. A fit that recovers a plant proves the machinery transmits information without loss. What it deliberately does not test is noise, and that is honest: noise robustness is a property of your data, not of the arithmetic. The capstone grades your fitted $n_w$ against 2.4999999999999996 at a tolerance of 0.001, wide enough for any correct route and narrow enough that a broken one fails.
+It can feel circular: sample a Corey model, fit a Corey model, applaud when it matches. The point is what would happen if any link in the chain were broken. A wrong residual definition, a floor that ate live points, an index slip in the Jacobian, a bound clamped too early, any of these would smear the recovered exponents away from the plant by far more than $10^{-16}$. A fit that recovers a plant proves the machinery transmits information without loss. What it deliberately does not test is noise, and that is honest: noise robustness is a property of your data, not of the arithmetic. The capstone takes the next step: it grades the fitted $n_w$ on the same grid printed to three decimals, where the rounding is the noise and the plant no longer comes back.
 
 ## At the panel
 

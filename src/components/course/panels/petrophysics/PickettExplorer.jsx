@@ -97,7 +97,7 @@ const PickettExplorer = () => {
       {fitError && <Note>Fit failed: {fitError}</Note>}
       {fit && (
         <TileGrid>
-          <Tile label="Fitted m" value={fmt(fit.m, 3)} />
+          <Tile label="Fitted m" value={fmt(fit.m, 4)} />
           <Tile label="Fitted a x Rw" value={fmt(fit.aRw, 4)} unit="ohm.m" />
           <Tile label="Points in fit" value={String(fit.nPoints)} />
           <Tile label="Iso-Sw lines" value="1.0 / 0.5 / 0.2" />

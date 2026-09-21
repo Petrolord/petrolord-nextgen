@@ -135,24 +135,29 @@
   {
    "tier": "intermediate",
    "key": "bulk_shift_ms",
-   "source": "prompt-given",
+   "source": "nextgen-panel",
    "source_ref": "src/components/course/panels/seismolord/ShiftExplorer.jsx:92",
    "printed": "integer",
    "display_scale": 1,
    "display_ref": "src/components/course/panels/seismolord/ShiftExplorer.jsx:92",
    "prompt_precision": null,
-   "answer_space": 1,
-   "guess_p": 1.0,
-   "class": "redesign",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
    "fix": {
     "redesign": "Keep the key but stop stating the lag: reword the prompt to 'the observed trace is the 25 Hz synthetic arriving late by an unstated lag' and drop the lag from the ShiftExplorer subtitle at ShiftExplorer.jsx:55, so 'Suggested bulk shift' (ShiftExplorer.jsx:92) is read from the scan. Alternative: grade the zero-lag correlation instead (see corr)."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Remove the planted lag from the prompt and the panel subtitle; the scan tile then carries the measurement.",
-   "evidence": "The prompt states 'The observed seismic trace is the 25 Hz synthetic arriving 8 ms late', and the panel subtitle (ShiftExplorer.jsx:55) repeats it; the answer 8 is given before any scan is run.",
+   "evidence": "W1: the prompt, the ShiftExplorer subtitle and note and the page intro card no longer state the planted lag, so the Suggested bulk shift tile carries the measurement. The lag is still stated in intermediate lessons (m01 l02, l04, m02 l03, m06 l01, l03, l04), a section 3 leak for W5 (B strip); the tier carries the open-book label.",
    "notes": null,
-   "leak": false,
-   "shipped": null
+   "leak": true,
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261024a_w1_seismolord.sql",
+    "wave": "w1",
+    "prompt": "bulk_shift_ms was stated in the prompt ('arriving 8 ms late') and the Shift explorer subtitle, so the answer was given before any scan; the prompt and panel no longer state the lag and the key, value and tolerance stay. corr graded the correlation at the winning lag, which is exactly 1 by constructi"
+   }
   },
   {
    "tier": "intermediate",
@@ -171,12 +176,38 @@
    "fix": {
     "redesign": "Replace with corr_zero_lag: label 'Correlation at zero lag, before any shift', unit '-', expected 0.621742 (ShiftExplorer.jsx:94 prints fmt(zero.corr, 6)), tol 0.0005; a measured value of the same scan that the prompt does not give."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Swap to the zero-lag correlation, which the same panel prints to six decimals and which depends on the synthetic.",
    "evidence": "Correlation of a trace with its own exact shifted copy is 1 by construction, and the panel note says so ('why the correlation reaches exactly 1'); a learner who reads the prompt knows it without running anything.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_seismolord.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "corr_zero_lag",
+     "label": "Correlation at zero lag, before any shift",
+     "unit": "-",
+     "expected": 0.6217418028775199,
+     "tol": 0.0005
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/ShiftExplorer.jsx:94",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/ShiftExplorer.jsx:94 fmt(zero.corr, 6)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "suggestBulkShift(s25 synthetic, the 25 Hz synthetic delayed 4 samples, dt 2 ms, max 40 ms) series entry at lag 0: 0.6217418028775199 (computeIntermediate().corrZeroLag, pinned in shiftLab.test.js); prints 0.621742, miss 2e-7. Nearest scan neighbours 0.771383 (lag 2 or 14) and 0.892968 are far outside tol; 1 (the winning lag) fails by 0.378; the SVG label prints it at 4 dp (0.6217, miss 4e-5, passes as it should). Not guessable: continuous.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": true
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -344,7 +375,33 @@
    "evidence": "At 40 Hz = 0.1155947596; tol 0.002.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_seismolord.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "amp40_at_6ms",
+     "label": "Amplitude of a 6 ms bed at 40 Hz",
+     "unit": "-",
+     "expected": 0.09535394608974457,
+     "tol": 0.0005
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/WedgeExplorer.jsx:121",
+     "printed": {
+      "decimals": 10
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/WedgeExplorer.jsx:121 fmt(row.amp, 10)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "computeWedge(40).rows[3] (6 ms) amp = 0.09535394608974457 (engine tuningCurve, pinned in wedgeLab.test.js); prints 0.0953539461. Neighbours at 40 Hz: 4 ms 0.0718218, 8 ms 0.1097387, 14 ms 0.0987969, 16 ms 0.0899487; 25 Hz at 6 ms 0.0682633; 50 Hz at 4 ms 0.0837294; tune25_amp 0.1155948, isolated 0.0800000: nearest is 14 ms at 40 Hz, 0.0034 away, all fail at tol 0.0005. By the f x T law 20 Hz at 12 ms prints the same number (240 Hz ms), which is physics and still a reading. Default state (25 Hz, 16 ms) prints the tuning amplitude, never this value.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",

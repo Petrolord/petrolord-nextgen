@@ -71,7 +71,7 @@ So here is the check to run on every pot regression you fit. **Look at the sprea
 
 ## The two numbers the capstone grades
 
-The Professional capstone asks for the oil in place when a pot aquifer is forced on Ekene, and for the R-squared of that fit. Both come from the second pass above: the "OOIP from the slope" tile reads $-516449.043355256$ stb and the "R-squared" tile 0.999485673716372, with tolerances of 20000 stb and 0.002. What matters is reading them from the pot setting rather than the none setting, and entering the oil in place as a negative number rather than assuming a sign error somewhere.
+The Professional capstone asks for the oil in place when a pot aquifer is forced on Ekene, and for the R-squared of that fit. Both come from the second pass above: the "OOIP from the slope" tile reads $-516449.043355256$ stb and the "R-squared" tile 0.999485673716372, with tolerances of 20000 stb and 0.0001. What matters is reading them from the pot setting rather than the none setting, and entering the oil in place as a negative number rather than assuming a sign error somewhere.
 
 Write down, beside your answer, why a graded question asks you to report a negative oil in place at all.
 

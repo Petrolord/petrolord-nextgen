@@ -1,0 +1,133 @@
+-- ============================================================================
+-- B5 FOLLOW-ON W1 (grade integrity): integrity.
+--
+-- Plan of record: docs/graded-field-audit/FOLLOW-ON-PROGRAMME.md section 4 and
+-- the annotations in docs/graded-field-audit/annot/integrity.json. Owner
+-- approved D1 to D7 as recommended, 2026-09-21.
+--
+-- BEGINNER
+--   Prompt only, no field moves. The beginner prompt said the two barrier tables
+--   were supplied with the capstone, but no page showed them (they existed only
+--   in the generator /root/dr-wip-integrity/dr11_fields.mjs), and it stated four
+--   of the six answers instead: 'nineteen physical elements', 'six serving the
+--   primary envelope only, ten serving the secondary only, and THREE serving
+--   BOTH', and the free check 'field 4 less field 3 must equal three' (B5
+--   finding 4). The prompt now publishes both tables row by row (name, kind,
+--   envelope, status) and cuts the summary counts and that free check, so every
+--   count is made on the table. Keys, expected values and tolerances are
+--   unchanged, so nobody is re-scored.
+--   PROMPT was: THE AS FOUND TABLE lists nineteen physical elements: six serving
+--   the primary envelope only, ten serving the secondary only, and THREE serving
+--   BOTH. Among them
+--   PROMPT now: Each row of the two tables below reads name, kind, envelope and
+--   status, rows are separated by semicolons, and the envelope is primary,
+--   secondary or both. THE AS FOUND TABLE: Base reservoir shale, formation,
+--   primary, verified; 7 in liner cement, casing-cement, primary, verified; 7 in
+--   production liner, casing, primary, verified; 9-5/8 x 5-1/2 production
+--   packer, production-packer, primary, failed; 5-1/2 completion tubing,
+--   completion-string, primary, verified; DHSV at 640 m MD, dhsv, primary,
+--   verified; 9-5/8 production casing cement, casing-cement, both, verified;
+--   9-5/8 production casing, casing, both, verified; Tubing hanger,
+--   tubing-hanger, both, not-verified; 13-3/8 surface casing cement,
+--   casing-cement, secondary, verified; 13-3/8 surface casing, casing,
+--   secondary, verified; 20 in conductor cement, casing-cement, secondary,
+--   verified; 20 in conductor, casing, secondary, verified; Subsea wellhead
+--   housing, wellhead, secondary, verified; 9-5/8 casing hanger seal assembly,
+--   wellhead, secondary, not-verified; 13-3/8 casing hanger seal assembly,
+--   wellhead, secondary, verified; A-annulus packer fluid, annulus-fluid,
+--   secondary, degraded; Horizontal xmas tree, xmas-tree, secondary, verified;
+--   Tree cap and crown plugs, xmas-tree, secondary, verified. Among them
+--   PROMPT was: the tree pulled and the BOP nippled up but NOT yet pressure
+--   tested.
+--   PROMPT now: the tree pulled and the BOP nippled up but NOT yet pressure
+--   tested. It reads: Base reservoir shale, formation, primary, verified; 7 in
+--   liner cement, casing-cement, primary, verified; 7 in production liner,
+--   casing, primary, verified; 5-1/2 completion tubing, completion-string,
+--   primary, verified; Deep-set tubing plug at 2180 m MD, mechanical-plug,
+--   primary, verified; Cement plug on the deep-set plug, cement-plug, primary,
+--   verified; Kill-weight brine in the tubing, fluid-column, primary, verified;
+--   Kill-weight brine in the A annulus, annulus-fluid, primary, verified; 9-5/8
+--   production casing cement, casing-cement, primary, verified; 9-5/8 production
+--   casing, casing, primary, verified; Subsea wellhead housing, wellhead, both,
+--   verified; 13-3/8 surface casing cement, casing-cement, secondary, verified;
+--   13-3/8 surface casing, casing, secondary, verified; 9-5/8 casing hanger seal
+--   assembly, wellhead, secondary, verified; BOP stack, bop, secondary,
+--   not-verified; 20 in conductor cement, casing-cement, secondary, verified; 20
+--   in conductor, casing, secondary, verified.
+--   PROMPT was: so fields 1 and 2 both include all three of them and field 3
+--   counts each of them ONCE.
+--   PROMPT now: so fields 1 and 2 both include every one of them and field 3
+--   counts each of them ONCE.
+--   PROMPT was: field 4 less field 3 must equal three, the number of common
+--   elements;
+--   PROMPT now: field 4 less field 3 must equal the number of common elements
+--   you marked on the table;
+--
+-- WHAT DOES NOT MOVE. Every other field (key, label, unit, expected, tol and
+-- position), the title, dataset, status and the row itself.
+--
+-- ATTEMPTS. This file moves no graded key or tolerance (prompt copy only), so
+-- no attempt can be graded differently and there is no attempts guard.
+--
+-- GUARDS. Each row must hold EITHER its published prompt (by md5) and fields
+-- (exact jsonb) as the post-20261023 scratch replay has them (it is
+-- rewritten), OR its W1 form (left alone). Anything else raises and the whole
+-- file rolls back. A file that will write first checks the round-off
+-- post-state (20261023*) and refuses without it. Generated by
+-- docs/graded-field-audit/w1_capstones.py. SAFE TO RE-RUN: a second run
+-- writes nothing.
+-- ============================================================================
+
+do $$
+declare
+  v_n        integer;
+  v_count    integer;
+  v_written  integer := 0;
+  v_ids      jsonb;
+  v_extra    jsonb;
+  v_allow    jsonb := '{}'::jsonb;  -- D5 allowlist: 'course/tier' -> attempt ids signed off
+  v_s0       text;
+begin
+  -- integrity / beginner
+  select count(*) into v_n from public.academy_capstones where app_slug = 'integrity' and tier = 'beginner' and active;
+  if v_n <> 1 then raise exception 'w1 integrity refused: integrity/beginner has % active capstone rows, expected 1', v_n; end if;
+  select case when md5(prompt) = '4e08c17a13cec4c59210a73035bb84a9' and fields = '[{"key": "asfound_primary_count", "tol": 5E-7, "unit": "", "label": "Primary elements, as found", "expected": 9}, {"key": "asfound_secondary_count", "tol": 5E-7, "unit": "", "label": "Secondary elements, as found", "expected": 13}, {"key": "asfound_distinct_element_count", "tol": 5E-7, "unit": "", "label": "Distinct elements, as found", "expected": 19}, {"key": "asfound_seat_total", "tol": 5E-7, "unit": "", "label": "Seat total, as found", "expected": 22}, {"key": "secured_primary_count", "tol": 5E-7, "unit": "", "label": "Primary elements, as secured", "expected": 11}, {"key": "secured_distinct_element_count", "tol": 5E-7, "unit": "", "label": "Distinct elements, as secured", "expected": 17}]'::jsonb then 'old'
+              when md5(prompt) = '0e0ac66d6b97e9f7f66b5055e1fddf7d' and fields = '[{"key": "asfound_primary_count", "tol": 5E-7, "unit": "", "label": "Primary elements, as found", "expected": 9}, {"key": "asfound_secondary_count", "tol": 5E-7, "unit": "", "label": "Secondary elements, as found", "expected": 13}, {"key": "asfound_distinct_element_count", "tol": 5E-7, "unit": "", "label": "Distinct elements, as found", "expected": 19}, {"key": "asfound_seat_total", "tol": 5E-7, "unit": "", "label": "Seat total, as found", "expected": 22}, {"key": "secured_primary_count", "tol": 5E-7, "unit": "", "label": "Primary elements, as secured", "expected": 11}, {"key": "secured_distinct_element_count", "tol": 5E-7, "unit": "", "label": "Distinct elements, as secured", "expected": 17}]'::jsonb then 'new'
+              else 'other' end
+    into v_s0 from public.academy_capstones where app_slug = 'integrity' and tier = 'beginner' and active;
+  if v_s0 = 'other' then
+    raise exception 'w1 integrity refused: integrity/beginner matches neither its published form (prompt md5 4e08c17a13cec4c59210a73035bb84a9) nor its W1 form (prompt md5 0e0ac66d6b97e9f7f66b5055e1fddf7d), with the fields this file was generated against';
+  end if;
+
+  -- nothing to write: every row is already in its W1 form
+  if v_s0 = 'new' then
+    raise notice 'w1 integrity: 0 of 1 row(s) written, all already applied';
+    return;
+  end if;
+
+  -- the round-off batch (20261023*) must be applied first: its rows are this file's base
+  if exists (select 1 from public.academy_capstones where app_slug = 'cementing' and tier = 'advanced' and active and md5(prompt) <> '7e7412057740dcb01936e298c2026745')
+     or exists (select 1 from public.academy_capstones where app_slug = 'casingtubing' and tier = 'advanced' and active and md5(prompt) <> 'f7e6749b9be66d4dbc7e692745d656d7')
+     or exists (select 1 from public.academy_capstones where app_slug = 'gaswell' and tier = 'advanced' and active and md5(prompt) <> '07f6076362de4a93714236cc10af4012')
+     or exists (select 1 from public.academy_capstones where app_slug = 'wellcontrol' and tier = 'beginner' and active and md5(dataset) <> '228b1d1a73f0474291f6142741bab7b2')
+     or exists (select 1 from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f
+                 where c.app_slug = 'fiscal' and c.tier = 'intermediate' and c.active and f->>'key' = 'psc_npv_musd'
+                   and (f->>'tol')::float8 <> 0.05) then
+    raise exception 'w1 integrity refused: the round-off batch (20261023*) is not applied on this database; apply it first (/root/roundoff-apply/apply.sh apply --prod)';
+  end if;
+
+  if v_s0 = 'old' then
+    update public.academy_capstones
+       set prompt = 'Six counts from the two barrier tables supplied with this capstone. THE WELL is subsea. Each row of the two tables below reads name, kind, envelope and status, rows are separated by semicolons, and the envelope is primary, secondary or both. THE AS FOUND TABLE: Base reservoir shale, formation, primary, verified; 7 in liner cement, casing-cement, primary, verified; 7 in production liner, casing, primary, verified; 9-5/8 x 5-1/2 production packer, production-packer, primary, failed; 5-1/2 completion tubing, completion-string, primary, verified; DHSV at 640 m MD, dhsv, primary, verified; 9-5/8 production casing cement, casing-cement, both, verified; 9-5/8 production casing, casing, both, verified; Tubing hanger, tubing-hanger, both, not-verified; 13-3/8 surface casing cement, casing-cement, secondary, verified; 13-3/8 surface casing, casing, secondary, verified; 20 in conductor cement, casing-cement, secondary, verified; 20 in conductor, casing, secondary, verified; Subsea wellhead housing, wellhead, secondary, verified; 9-5/8 casing hanger seal assembly, wellhead, secondary, not-verified; 13-3/8 casing hanger seal assembly, wellhead, secondary, verified; A-annulus packer fluid, annulus-fluid, secondary, degraded; Horizontal xmas tree, xmas-tree, secondary, verified; Tree cap and crown plugs, xmas-tree, secondary, verified. Among them a production packer has FAILED, a tubing hanger and a casing hanger seal assembly were never verified, and an annulus packer fluid is degraded. THE AS SECURED TABLE describes the same well killed, with a deep-set plug and a cement plug set in the tubing, the tree pulled and the BOP nippled up but NOT yet pressure tested. It reads: Base reservoir shale, formation, primary, verified; 7 in liner cement, casing-cement, primary, verified; 7 in production liner, casing, primary, verified; 5-1/2 completion tubing, completion-string, primary, verified; Deep-set tubing plug at 2180 m MD, mechanical-plug, primary, verified; Cement plug on the deep-set plug, cement-plug, primary, verified; Kill-weight brine in the tubing, fluid-column, primary, verified; Kill-weight brine in the A annulus, annulus-fluid, primary, verified; 9-5/8 production casing cement, casing-cement, primary, verified; 9-5/8 production casing, casing, primary, verified; Subsea wellhead housing, wellhead, both, verified; 13-3/8 surface casing cement, casing-cement, secondary, verified; 13-3/8 surface casing, casing, secondary, verified; 9-5/8 casing hanger seal assembly, wellhead, secondary, verified; BOP stack, bop, secondary, not-verified; 20 in conductor cement, casing-cement, secondary, verified; 20 in conductor, casing, secondary, verified. Report: (1) the PRIMARY element count as found; (2) the SECONDARY element count as found; (3) the DISTINCT physical element count as found; (4) the SEAT TOTAL as found, meaning the primary count plus the secondary count; (5) the PRIMARY element count as secured; and (6) the DISTINCT physical element count as secured. Traps. A COMMON element belongs to BOTH envelopes and is counted by each of them, so fields 1 and 2 both include every one of them and field 3 counts each of them ONCE. Field 4 is therefore LARGER than field 3, and the gap is not an error: it is exactly the number of common elements, and it is the honest measure of how much independence this well actually has. The as secured table is a different table, not an edit of the first, so recount it rather than adjusting. Free checks: field 4 must equal field 1 plus field 2; field 4 less field 3 must equal the number of common elements you marked on the table; and every count must be a whole number of elements you can point at on the table.',
+           fields = '[{"key": "asfound_primary_count", "tol": 5E-7, "unit": "", "label": "Primary elements, as found", "expected": 9}, {"key": "asfound_secondary_count", "tol": 5E-7, "unit": "", "label": "Secondary elements, as found", "expected": 13}, {"key": "asfound_distinct_element_count", "tol": 5E-7, "unit": "", "label": "Distinct elements, as found", "expected": 19}, {"key": "asfound_seat_total", "tol": 5E-7, "unit": "", "label": "Seat total, as found", "expected": 22}, {"key": "secured_primary_count", "tol": 5E-7, "unit": "", "label": "Primary elements, as secured", "expected": 11}, {"key": "secured_distinct_element_count", "tol": 5E-7, "unit": "", "label": "Distinct elements, as secured", "expected": 17}]'::jsonb
+     where app_slug = 'integrity' and tier = 'beginner' and active;
+    get diagnostics v_count = row_count;
+    if v_count <> 1 then raise exception 'w1 integrity refused: integrity/beginner updated % rows', v_count; end if;
+    v_written := v_written + 1;
+  end if;
+  if (select (md5(prompt) = '0e0ac66d6b97e9f7f66b5055e1fddf7d' and fields = '[{"key": "asfound_primary_count", "tol": 5E-7, "unit": "", "label": "Primary elements, as found", "expected": 9}, {"key": "asfound_secondary_count", "tol": 5E-7, "unit": "", "label": "Secondary elements, as found", "expected": 13}, {"key": "asfound_distinct_element_count", "tol": 5E-7, "unit": "", "label": "Distinct elements, as found", "expected": 19}, {"key": "asfound_seat_total", "tol": 5E-7, "unit": "", "label": "Seat total, as found", "expected": 22}, {"key": "secured_primary_count", "tol": 5E-7, "unit": "", "label": "Primary elements, as secured", "expected": 11}, {"key": "secured_distinct_element_count", "tol": 5E-7, "unit": "", "label": "Distinct elements, as secured", "expected": 17}]'::jsonb) from public.academy_capstones where app_slug = 'integrity' and tier = 'beginner' and active) is not true then
+    raise exception 'w1 integrity refused: integrity/beginner does not read back as its W1 form';
+  end if;
+
+  raise notice 'w1 integrity: % of 1 row(s) written, % already applied', v_written, 1 - v_written;
+end $$;

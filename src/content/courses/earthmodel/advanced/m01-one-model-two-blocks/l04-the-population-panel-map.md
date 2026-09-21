@@ -16,7 +16,7 @@ Watch three shapes as you play with the controls. Block 1's segment never moves:
 
 ## The tiles
 
-The tiles are the tier's graded quantities and their cross-checks: the census pair; the two per-block porosities; the jump across the fault on the profile row; the provenance line, which reports the method ACTUALLY used per block with a star when a fallback fired; the kriged value at W1 against W1's own 0.3150; the far-field kriged value; the arithmetic against weighted means, which module five will show are two different numbers used by two different parts of one engine; the trend probe with its hand value; and the per-block bulk volumes with the closure check that must read zero.
+The tiles are the tier's graded quantities and their cross-checks: the census pair; the two per-block porosities; the jump across the fault on the profile row; the provenance line, which reports the method ACTUALLY used per block with a star when a fallback fired; the kriged value at W1 against W1's own 0.3150; the far-field kriged value; a kriged probe readout at any point you type, which opens on (2000, 2300); the arithmetic against weighted means, which module five will show are two different numbers used by two different parts of one engine; the trend probe with its hand value; and the per-block bulk volumes with the closure check that must read zero.
 
 ## First experiments
 
@@ -24,7 +24,7 @@ Three quick passes to calibrate your hands. Switch the method from kriging to tr
 
 ## Worked example
 
-Use the panel to answer a question the tiles do not directly display: what porosity does block 0's kriged map carry at the fault's edge on this row? Read the green curve where it begins, just east of the orange fault line, with default parameters: about 0.292, close to W2's 0.2936 because the first block 0 node at x 1600 sits only 11 m from W2's control point at x 1610.87. The blue side of the break reads 0.3150. The break is therefore about 0.023 of porosity, and the jump tile confirms minus 0.023016035393453593. Nothing physical happens at x 1575; the jump is the bookkeeping of two data populations meeting at an administrative line, which is exactly what a sealing fault is to a property model.
+Use the panel to answer a question the tiles do not directly display: what porosity does block 0's kriged map carry at the fault's edge on this row? Read the green curve where it begins, just east of the orange fault line, with default parameters: about 0.29, close to W2's 0.2936 because the first block 0 node at x 1600 sits only 11 m from W2's control point at x 1610.87. The blue side of the break reads 0.3150. The break is therefore a little over 0.02 of porosity, downward from west to east, and the jump tile confirms it to six decimals. Nothing physical happens at x 1575; the jump is the bookkeeping of two data populations meeting at an administrative line, which is exactly what a sealing fault is to a property model.
 
 ## Exercise
 

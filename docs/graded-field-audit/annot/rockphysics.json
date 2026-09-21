@@ -367,12 +367,38 @@
    "fix": {
     "redesign": "brine_max_shuey_err, label 'Largest Shuey error, brine case', unit 'ratio', expected 0.005972 (engine value), tol 0.0001; read from the AVO panel tile 'Largest Shuey error, brine' (/root/wt-b5-nextgen/src/components/course/panels/rockphysics/AvoExplorer.jsx:99, fmt 6 dp). It measures the approximation gap the tier teaches (m04 l04 worse-on-the-brine-case) and is continuous."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Replace the class field with the measured brine-case Shuey error; if the owner wants to keep the class call as the tier's headline, keep it but accept guess_p 0.25 because the other six fields still gate the pass.",
    "evidence": "Tile 'Gas class' shows 'III' with unit '(3)' (klassNum, src/lib/rockphysicsTeaching.js:223). A 1..4 answer space with tol 0 is guessable at 0.25, and the course telegraphs it: lesson advanced/m03-the-class-flip/l03-gas-is-class-three.md, and the capstone title says the substitution 'flips the AVO class' from the brine case (class I per l02-brine-is-class-one).",
    "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/advanced/m06-the-avo-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the AVO panel opens on the capstone case (25 Hz, threshold 0.02). The module and lesson titles also name the answer.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_rockphysics.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "brine_max_shuey_err",
+     "label": "Largest Shuey error, brine case, 0 to 40 deg",
+     "unit": "ratio",
+     "expected": 0.005972095765271403,
+     "tol": 0.0001
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:99 (Tile 'Largest Shuey error, brine')",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:99 fmt(d.brine.maxErr, 6)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "rockphysicsTeaching.computeAvoDetail(...).brine.maxErr = 0.005972095765271403 (max |Shuey - Zoeppritz| at whole degrees 0..40); independent of frequency and threshold. Prints 0.005972 (miss 9.6e-8). Neighbours: gas-case tile 0.002192 and gas Shuey minus exact at 30 deg 0.002175 miss by > 0.0037.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": true
+    }
+   }
   },
   {
    "tier": "advanced",

@@ -27,15 +27,15 @@ import CardExplorer from './CardExplorer.jsx';
 import BalanceExplorer from './BalanceExplorer.jsx';
 
 const PANELS = [
-  ['pd-string-explorer', StringExplorer, ['objects', 'taper', 'note', 'linkage', 'pump']],
+  ['pd-string-explorer', StringExplorer, ['objects', 'taper', 'note', 'typed', 'linkage', 'pump']],
   ['pd-card-explorer', CardExplorer, ['march', 'stretch', 'loads', 'power', 'fillage']],
   ['pd-balance-explorer', BalanceExplorer, ['envelope', 'convergence', 'balance', 'ignored', 'stress']],
 ];
 
 describe('every mode of every rod pump panel renders', () => {
-  it('there are three panels and fifteen modes to check', () => {
+  it('there are three panels and sixteen modes to check', () => {
     expect(PANELS).toHaveLength(3);
-    expect(PANELS.flatMap(([, , modes]) => modes)).toHaveLength(15);
+    expect(PANELS.flatMap(([, , modes]) => modes)).toHaveLength(16);
   });
 
   PANELS.forEach(([id, Panel, modes]) => {

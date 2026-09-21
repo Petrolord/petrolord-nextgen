@@ -1,6 +1,6 @@
 # Counting wells with all tops
 
-Three of the four Ekene wells carry all four tops. That sentence is one of the six graded answers in this tier's capstone, and it is the only one graded with a tolerance of zero. Every other answer has a 0.01 m window around it. This one has no window. You report 3 or you report nothing.
+Three of the four Ekene wells carry all four tops. That count sits under every TOP_B figure this tier reports, because it says how many wells a TOP_B statistic can draw on. A count has no window around it. You report 3 or you have described a different section.
 
 A number that must be exact deserves a lesson to itself, because the arithmetic is trivial and the definition is where people lose the mark.
 
@@ -46,4 +46,4 @@ Open the panel, flatten the section, and count the rows that carry a value for a
 
 Without looking at the section, answer three questions. First, if a fifth well joined Ekene carrying TOP_A, TOP_SAND and TOP_B but no BASE_SAND, what would the count of wells carrying all four tops become? Second, would the pick count change by the same amount? Third, would either number change if you re-flattened the enlarged section on TOP_SAND instead of TOP_A?
 
-Self-check: the count of wells carrying all four tops stays at 3, because the new well is missing a surface and fails the test exactly as Ekene-4 does, even though the missing surface is a different one. The pick count does change, from 15 out of 16 to 18 out of 20, which shows the two measures moving independently and is the reason the capstone grades the stricter one. Neither number changes under a different flattening top or datum, because flattening shifts picks and never adds or removes them. If your answer to the first question was 4, re-read the definition: the test is every one of the four surfaces, not most of them.
+Self-check: the count of wells carrying all four tops stays at 3, because the new well is missing a surface and fails the test exactly as Ekene-4 does, even though the missing surface is a different one. The pick count does change, from 15 out of 16 to 18 out of 20, which shows the two measures moving independently and is the reason a report quotes the stricter one. Neither number changes under a different flattening top or datum, because flattening shifts picks and never adds or removes them. If your answer to the first question was 4, re-read the definition: the test is every one of the four surfaces, not most of them.

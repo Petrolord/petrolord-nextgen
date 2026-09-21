@@ -10,133 +10,163 @@
    "tier": "beginner",
    "key": "asfound_primary_count",
    "source": "hand-calc",
-   "source_ref": "src/content/courses/integrity/beginner/m06-the-associate-reading/l02-working-the-capstone.md:9",
+   "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
    "printed": "integer",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": "every count must be a whole number of elements",
-   "answer_space": 2,
-   "guess_p": 1.0,
-   "class": "redesign",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
    "fix": {
     "redesign": "Publish the two rosters the prompt says are 'supplied with this capstone' (as found: 19 rows, as secured: 17 rows, name / kind / envelope / status, from /root/dr-wip-integrity/dr11_fields.mjs:71-121) as tables in the prompt, and cut the summary 'six serving the primary envelope only, ten serving the secondary only, and THREE serving BOTH' plus the free check 'field 4 less field 3 must equal three'. Keys and expected values stay; each count becomes a count the learner makes on the table."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Supply the as-found roster table and drop the envelope summary from the prompt so 9 is counted, not added.",
-   "evidence": "The prompt states 'six serving the primary envelope only ... THREE serving BOTH' and then 'fields 1 and 2 both include all three of them', so 6 + 3 = 9 is dictated by the prompt. The only trap (6 vs 9) is resolved in the prompt text itself.",
+   "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text.",
    "notes": "The 'as found table' the prompt cites is shown nowhere: IntegrityLearningPage.jsx:310-311 renders only title and prompt, and EnvelopeExplorer.jsx:83 offers only the golden 10-element roster. Exact tol on an integer count is fine.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261024a_w1_integrity.sql",
+    "wave": "w1",
+    "prompt": "Prompt only, no field moves. The beginner prompt said the two barrier tables were supplied with the capstone, but no page showed them (they existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs), and it stated four of the six answers instead: 'nineteen physical elements', 'six serving"
+   }
   },
   {
    "tier": "beginner",
    "key": "asfound_secondary_count",
    "source": "hand-calc",
-   "source_ref": "src/content/courses/integrity/beginner/m06-the-associate-reading/l02-working-the-capstone.md:9",
+   "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
    "printed": "integer",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": "every count must be a whole number of elements",
-   "answer_space": 2,
-   "guess_p": 1.0,
-   "class": "redesign",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
    "fix": {
     "redesign": "Publish the two rosters the prompt says are 'supplied with this capstone' (as found: 19 rows, as secured: 17 rows, name / kind / envelope / status, from /root/dr-wip-integrity/dr11_fields.mjs:71-121) as tables in the prompt, and cut the summary 'six serving the primary envelope only, ten serving the secondary only, and THREE serving BOTH' plus the free check 'field 4 less field 3 must equal three'. Keys and expected values stay; each count becomes a count the learner makes on the table."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Same fix as asfound_primary_count: count it on a published table.",
-   "evidence": "10 secondary-only + 3 common = 13, both numbers and the inclusion rule stated in the prompt ('fields 1 and 2 both include all three of them').",
+   "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text.",
    "notes": "Integer, tol 5e-7 is an honest exact match.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261024a_w1_integrity.sql",
+    "wave": "w1",
+    "prompt": "Prompt only, no field moves. The beginner prompt said the two barrier tables were supplied with the capstone, but no page showed them (they existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs), and it stated four of the six answers instead: 'nineteen physical elements', 'six serving"
+   }
   },
   {
    "tier": "beginner",
    "key": "asfound_distinct_element_count",
-   "source": "prompt-given",
-   "source_ref": "prompt: 'THE AS FOUND TABLE lists nineteen physical elements'",
+   "source": "hand-calc",
+   "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
    "printed": "integer",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
-   "answer_space": 1,
-   "guess_p": 1.0,
-   "class": "redesign",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
    "fix": {
     "redesign": "Publish the two rosters the prompt says are 'supplied with this capstone' (as found: 19 rows, as secured: 17 rows, name / kind / envelope / status, from /root/dr-wip-integrity/dr11_fields.mjs:71-121) as tables in the prompt, and cut the summary 'six serving the primary envelope only, ten serving the secondary only, and THREE serving BOTH' plus the free check 'field 4 less field 3 must equal three'. Keys and expected values stay; each count becomes a count the learner makes on the table."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Remove 'lists nineteen physical elements' from the prompt and publish the roster, so the distinct count (19) is counted from rows with three of them marked both.",
-   "evidence": "Expected 19; the prompt says 'THE AS FOUND TABLE lists nineteen physical elements'. A straight giveaway.",
+   "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261024a_w1_integrity.sql",
+    "wave": "w1",
+    "prompt": "Prompt only, no field moves. The beginner prompt said the two barrier tables were supplied with the capstone, but no page showed them (they existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs), and it stated four of the six answers instead: 'nineteen physical elements', 'six serving"
+   }
   },
   {
    "tier": "beginner",
    "key": "asfound_seat_total",
    "source": "hand-calc",
-   "source_ref": "src/content/courses/integrity/beginner/m06-the-associate-reading/l02-working-the-capstone.md:13",
+   "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
    "printed": "integer",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
-   "answer_space": 2,
-   "guess_p": 1.0,
-   "class": "redesign",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
    "fix": {
     "redesign": "Publish the two rosters the prompt says are 'supplied with this capstone' (as found: 19 rows, as secured: 17 rows, name / kind / envelope / status, from /root/dr-wip-integrity/dr11_fields.mjs:71-121) as tables in the prompt, and cut the summary 'six serving the primary envelope only, ten serving the secondary only, and THREE serving BOTH' plus the free check 'field 4 less field 3 must equal three'. Keys and expected values stay; each count becomes a count the learner makes on the table."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Drop the free check 'field 4 less field 3 must equal three' along with the summary counts once the table is published.",
-   "evidence": "22 = 9 + 13, and the prompt also states 'field 4 less field 3 must equal three' with field 3 given as nineteen, so 19 + 3 = 22 from the prompt alone.",
+   "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261024a_w1_integrity.sql",
+    "wave": "w1",
+    "prompt": "Prompt only, no field moves. The beginner prompt said the two barrier tables were supplied with the capstone, but no page showed them (they existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs), and it stated four of the six answers instead: 'nineteen physical elements', 'six serving"
+   }
   },
   {
    "tier": "beginner",
    "key": "secured_primary_count",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:100-111",
+   "source": "hand-calc",
+   "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
    "printed": null,
    "display_scale": 1,
    "display_ref": "src/components/course/panels/integrity/EnvelopeExplorer.jsx:86-91",
    "prompt_precision": null,
-   "answer_space": 8,
-   "guess_p": 0.125,
-   "class": "redesign",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
    "fix": {
     "redesign": "Publish the two rosters the prompt says are 'supplied with this capstone' (as found: 19 rows, as secured: 17 rows, name / kind / envelope / status, from /root/dr-wip-integrity/dr11_fields.mjs:71-121) as tables in the prompt, and cut the summary 'six serving the primary envelope only, ten serving the secondary only, and THREE serving BOTH' plus the free check 'field 4 less field 3 must equal three'. Keys and expected values stay; each count becomes a count the learner makes on the table."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Publish the as-secured roster (10 primary-only + 1 common = 11) in the prompt; without it the field cannot be worked.",
-   "evidence": "The prompt describes the secured well only in words ('a deep-set plug and a cement plug set in the tubing, the tree pulled and the BOP nippled up'); the 17-row roster with its one common element exists only in the generator /root/dr-wip-integrity/dr11_fields.mjs:100-121. No panel or lesson carries it (grep for its element names and 'Kestrel' in src finds nothing).",
+   "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text.",
    "notes": "answer_space is a judgement: a primary count of roughly 8 to 15 from the words; one of them is right. Not guessable, but ungradable as posed.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261024a_w1_integrity.sql",
+    "wave": "w1",
+    "prompt": "Prompt only, no field moves. The beginner prompt said the two barrier tables were supplied with the capstone, but no page showed them (they existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs), and it stated four of the six answers instead: 'nineteen physical elements', 'six serving"
+   }
   },
   {
    "tier": "beginner",
    "key": "secured_distinct_element_count",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:100-121",
+   "source": "hand-calc",
+   "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
    "printed": null,
    "display_scale": 1,
    "display_ref": "src/components/course/panels/integrity/EnvelopeExplorer.jsx:86-91",
    "prompt_precision": null,
-   "answer_space": 6,
-   "guess_p": 0.17,
-   "class": "redesign",
+   "answer_space": null,
+   "guess_p": null,
+   "class": "none",
    "fix": {
     "redesign": "Publish the two rosters the prompt says are 'supplied with this capstone' (as found: 19 rows, as secured: 17 rows, name / kind / envelope / status, from /root/dr-wip-integrity/dr11_fields.mjs:71-121) as tables in the prompt, and cut the summary 'six serving the primary envelope only, ten serving the secondary only, and THREE serving BOTH' plus the free check 'field 4 less field 3 must equal three'. Keys and expected values stay; each count becomes a count the learner makes on the table."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Publish the as-secured roster (17 rows, one of them serving both envelopes).",
-   "evidence": "Expected 17; the prompt gives no count and no table for the secured state, only that it 'is a different table, not an edit of the first, so recount it'. Nothing the learner sees lists it.",
+   "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text.",
    "notes": "answer_space judged as 15 to 20 from the words (tree pulled, plugs and BOP added).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261024a_w1_integrity.sql",
+    "wave": "w1",
+    "prompt": "Prompt only, no field moves. The beginner prompt said the two barrier tables were supplied with the capstone, but no page showed them (they existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs), and it stated four of the six answers instead: 'nineteen physical elements', 'six serving"
+   }
   },
   {
    "tier": "intermediate",

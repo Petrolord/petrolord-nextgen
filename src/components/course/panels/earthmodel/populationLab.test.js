@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { computePopulation, KRIGE_PARAMS } from '@/lib/earthmodelTeaching';
+import {
+  computePopulation, KRIGE_PARAMS, NUGGET_OPTIONS, RANGE_OPTIONS, POPULATION_METHODS, PROBE_DEFAULT,
+} from '@/lib/earthmodelTeaching';
 
 // Pins the DC29 Expert panel math to the LIVE advanced capstone answer key
 // and to the tier's sharpest engine-verified teaching facts.
@@ -14,6 +16,38 @@ describe('population explorer math (DC29)', () => {
     expect(base.probes.krigeAtW1).toBeCloseTo(0.315, 12);
     expect(base.phiBlock0).toBeCloseTo(0.28631191845445614, 14);
     expect(base.volsA['1'].bulk_m3).toBeCloseTo(13998749.999999998, 3);
+  });
+
+  it('W1 re-key: the fault jump on the y = 2200 row, and no other setting passes', () => {
+    const jumpOf = (m) => m.profile[12].phi - m.profile[11].phi;
+    const want = -0.023016035393453593;
+    expect(jumpOf(base)).toBeCloseTo(want, 14);
+    expect(base.profileY).toBe(2200);
+    expect(base.profile[11].block).toBe(1);
+    expect(base.profile[12].block).toBe(0);
+    // tol 5e-5: the nearest other setting (nugget 0.00025, range 300) sits 8.8e-5
+    // away and range 600 1.9e-4; the unsigned value is 0.046 away
+    for (const meth of POPULATION_METHODS) {
+      for (const n of NUGGET_OPTIONS) {
+        for (const r of RANGE_OPTIONS) {
+          if (meth === 'krige' && n === KRIGE_PARAMS.nugget && r === KRIGE_PARAMS.range) continue;
+          expect(Math.abs(jumpOf(computePopulation(meth, n, r)) - want)).toBeGreaterThan(5e-5);
+        }
+      }
+    }
+  });
+
+  it('the probe readout reproduces krige_probe and opens away from it', () => {
+    expect(base.krigeAt(1500, 2500)).toBeCloseTo(0.2914277719922997, 14);
+    expect(PROBE_DEFAULT).toEqual({ x: 2000, y: 2300 });
+    // D2: at the default probe location, under every variogram option, the
+    // readout sits well outside krige_probe's 0.0002 tolerance
+    for (const n of NUGGET_OPTIONS) {
+      for (const r of RANGE_OPTIONS) {
+        const v = computePopulation('krige', n, r).krigeAt(PROBE_DEFAULT.x, PROBE_DEFAULT.y);
+        expect(Math.abs(v - 0.2914277719922997)).toBeGreaterThan(0.001);
+      }
+    }
   });
 
   it('the census is hand-countable and closes: 9x12 + 11x6 = 174, 326 + 174 = 500', () => {

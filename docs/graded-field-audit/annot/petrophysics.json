@@ -167,12 +167,19 @@
    "fix": {
     "new_tol": 0.002
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tighten to 0.002: still 40x half a unit of the 4-decimal print, and it rejects the RMS combine (0.1805, diff 0.0043) that tol 0.005 currently accepts. This is a tightening; the panel value passes exactly.",
    "evidence": "Panel prints 0.1762 on default state. The wrong N-D combine (Root mean square, one select click) prints 0.1805, which is within the current tol 0.005, so a wrong method passes despite the walkthrough's claim that a wrong method will miss.",
    "notes": "LEAK: probe default state prints 0.1762 (the panel is meant to be the source); walkthrough l04:11 and :44 print the answer 0.1762.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_petrophysics.sql",
+    "wave": "w1",
+    "tol": [
+     0.005,
+     0.002
+    ]
+   }
   },
   {
    "tier": "intermediate",
@@ -191,12 +198,19 @@
    "fix": {
     "new_tol": 0.002
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tighten to 0.002 so the density-porosity mean (0.2022, diff 0.0047) no longer passes as the Wyllie answer. Tightening; panel value passes exactly.",
    "evidence": "Panel prints 0.2069 on default. The SAND_A density-porosity mean printed beside it is 0.2022, within tol 0.005 of the expected Wyllie value, so reading the wrong tile passes.",
    "notes": "LEAK: probe default prints 0.2069; walkthrough l04:12 and :44 print it.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_petrophysics.sql",
+    "wave": "w1",
+    "tol": [
+     0.005,
+     0.002
+    ]
+   }
   },
   {
    "tier": "intermediate",
@@ -215,12 +229,38 @@
    "fix": {
     "redesign": "pickett_a_rw_2072_2078 / 'Pickett fit a x Rw over 2072 to 2078 m' / ohm.m, expected 0.68869 (engine pickettFitDepthWindow on N-D porosity, 12 points), tol 0.002; read in PickettExplorer after setting the window top to 2072 and clicking Fit water line (printed to 4 decimals)."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The standard water-leg fit returns exactly the given Rw 0.05 (a = 1), which is pre-filled in the page's parameter card and the ShalySwLab inputs, so the field is answerable from the givens with no fit. Grade the deliberately wrong window the panel already invites ('pick a deliberately wrong window and watch m and a x Rw move') or keep the field ungraded as a confirmation.",
    "evidence": "Expected 0.05 equals the typewell given rw 0.05 (typewell.json params; ShalySwLab.jsx:18 pre-fills rw), and the walkthrough says the fit 'landing on 0.0500 and 2.000 is the water leg confirming the given parameters'.",
    "notes": "Computed replacement values with the engine: window 2072-2078 m gives aRw 0.688685, m 0.878453, 12 points.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_petrophysics.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "pickett_a_rw_2072_2078",
+     "label": "Pickett fit over 2072 to 2078 m: a·Rw",
+     "unit": "Ω·m",
+     "expected": 0.6886854786769905,
+     "tol": 0.002
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx:101 (Tile 'Fitted a x Rw' after window 2072 to 2078 and Fit water line)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx:101 fmt(fit.aRw, 4)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typewellLab.fitPickett(phiNd, 2072, 2078) -> engine pickettFitDepthWindow, 12 points, aRw 0.6886854786769905; prints 0.6887 (miss 1.5e-5 < 0.002). Neighbours: water-leg 0.0500 (given Rw), windows 2071/2073 to 2078 give 1.1875 / 0.3481, 2072 to 2077 gives 1.3506: all miss by > 0.3.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -239,12 +279,38 @@
    "fix": {
     "redesign": "pickett_m_2072_2078 / 'Pickett fit m over 2072 to 2078 m' / -, expected 0.87845, tol 0.002; read in PickettExplorer after setting the window top to 2072 and clicking Fit water line (printed to 3 decimals)."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "m = 2 is the given Archie exponent and the textbook default, so a learner types 2 without fitting. Replace with the wrong-window fit, which is measured and not guessable.",
    "evidence": "Expected 2.0 equals the given m (typewell params m 2.0, pre-filled in the page parameter card and ShalySwLab.jsx:18); tol 0.02 accepts only 2.00 among the usual guesses 1.8/1.9/2.0/2.1/2.2.",
    "notes": "LEAK: probe prints 2.000 and 0.0500 after one click (Fit water line); walkthrough l04:13-14 print both.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_petrophysics.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "pickett_m_2072_2078",
+     "label": "Pickett fit over 2072 to 2078 m: cementation exponent m",
+     "unit": "-",
+     "expected": 0.8784525453945112,
+     "tol": 0.0002
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx:100 (Tile 'Fitted m' after window 2072 to 2078 and Fit water line)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx:100 fmt(fit.m, 4) (was 3 dp; raised in W1)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Same fit, m 0.8784525453945112; prints 0.8785 (miss 4.7e-5 < 0.0002). Tol 0.0002 because the course prints NTG 0.878 (18/20.5 = 0.87805, miss 0.0004) and an Archie-vs-shaly figure 0.8769 (miss 0.0016) in lessons; both fail at 0.0002 and would pass at 0.002. Water-leg m 2.000 and windows 2071/2073 to 2078 (0.644 / 1.171) all fail.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -307,12 +373,19 @@
    "fix": {
     "new_tol": 5e-05
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tighten to 0.00005 (half a unit of the 4-decimal print). Today the given Rw 0.05 and the Pickett fit 0.0500 both sit 0.00009 from the answer and pass without any Arps work. The printed 0.0499 and a 4-sig-fig hand value 0.04991 still pass. Tightening: flag it.",
    "evidence": "Panel pre-fills the brief's inputs (RwTriangulator.jsx:14-15) and prints 0.0499; expected 0.049910, tol 0.0005 also accepts 0.0500, the Associate-tier given Rw and the Professional Pickett answer.",
    "notes": "LEAK: walkthrough l03:11 prints 0.0499. RwTriangulator is not in the probe set, but it computes on default state with no click.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_petrophysics.sql",
+    "wave": "w1",
+    "tol": [
+     0.0005,
+     5e-05
+    ]
+   }
   },
   {
    "tier": "advanced",
@@ -331,12 +404,19 @@
    "fix": {
     "new_tol": 5e-05
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tighten to 0.00005: the printed 0.0498 (diff 0.00003) passes, 0.0500 (diff 0.00017) no longer does. Tightening: flag it.",
    "evidence": "Expected 0.049831 prints as 0.0498; tol 0.0005 accepts 0.0500, the known Rw, so the SP route is not tested.",
    "notes": "LEAK: walkthrough l03:12 prints 0.0498; panel computes it on default state.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_petrophysics.sql",
+    "wave": "w1",
+    "tol": [
+     0.0005,
+     5e-05
+    ]
+   }
   },
   {
    "tier": "advanced",
@@ -355,12 +435,19 @@
    "fix": {
     "new_tol": 0.0005
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The lessons teach that a validated Rw reads Sw of about 1 in the water leg, so typing 1 passes (diff 0.0009 < 0.005). Tighten to 0.0005 (still 10x half a unit of the 4-decimal print) so 1.0 fails and the printed 0.9991 passes. Tightening: flag it. Alternative redesign: grade the water-leg mean at the raw sample Rw instead.",
    "evidence": "Expected 0.99910; typewellLab.js waterLegMeanSw needs the log curves so it is panel-only; tol 0.005 accepts the textbook answer 1.",
    "notes": "Guessable: answer space is effectively 1 ('reads ~1', typewellLab.js:95 comment and m04/l03-the-water-leg-check). LEAK: walkthrough l03:13 prints 0.9991.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_petrophysics.sql",
+    "wave": "w1",
+    "tol": [
+     0.005,
+     0.0005
+    ]
+   }
   },
   {
    "tier": "advanced",

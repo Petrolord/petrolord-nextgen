@@ -18,11 +18,14 @@ describe('seismolord expert: wedge tuning', () => {
     expect(A.f25.tuneAmp).toBeCloseTo(0.1155947595834732, 12);
     expect(A.f40.tuneMs).toBe(10);
     expect(A.f40.tuneAmp).toBeCloseTo(0.1155947595834732, 12);
+    // amp40_at_6ms replaced tune40_amp (identical to tune25_amp) in W1.
+    expect(A.f40.rows[3].thicknessMs).toBe(6);
+    expect(A.f40.rows[3].amp).toBeCloseTo(0.09535394608974457, 14);
     expect(A.f25.isoAmp).toBeCloseTo(0.07999999821186066, 12);
     expect(A.f25.theoryMs).toBeCloseTo(15.593936024673521, 12);
   });
 
-  it('gives the two graded amplitudes as the SAME number, not merely close', () => {
+  it('gives the two tuning amplitudes as the SAME number, which is why only one is graded', () => {
     // 25 x 16 = 40 x 10 = 400 Hz ms, so both evaluate the Ricker at the
     // same argument and the arithmetic is identical.
     expect(A.f25.tuneAmp).toBe(A.f40.tuneAmp);

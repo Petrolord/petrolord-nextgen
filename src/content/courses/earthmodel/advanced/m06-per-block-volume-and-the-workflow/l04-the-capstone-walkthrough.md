@@ -12,13 +12,13 @@ Hand count from the L's two rectangles: 12 columns times 9 rows plus 6 columns t
 
 Three multiplications: $0.38 - 0.00004 \times 1250 - 0.00001 \times 2250 = 0.3075$. The trend tile carries it. Wrong answers with diagnoses: 0.29-something means the kriged value was read instead of the trend; anything requiring a computer means the coefficients were refitted numerically, which works but misses that the fixture's plane is hand-exact; a value off in the second decimal usually means gradients applied per kilometre.
 
-## Field three: kriged porosity at (1500, 2500), tolerance 0.001
+## Field three: kriged porosity at (1500, 2500), tolerance 0.0002
 
-The four-well simple krige with golden parameters: 0.2914277719922997, the probe lesson's anatomy. The panel's default probe tile is not this one; read it from the profile machinery or compute it, which is deliberate: the field checks the METHOD is runnable, not a tile is readable. Wrong answers: 0.2862746100855956 is the per-block three-well map's value, the distinction lesson five flagged; 0.295 is the trend's value here; 0.2905 means the range was effectively too short or the weights never solved, collapsing to the mean.
+The four-well simple krige with golden parameters: 0.2914277719922997, the probe lesson's anatomy. The panel's probe readout opens on a point of its own, so type 1500 and 2500 into its x and y boxes with simple kriging and the golden variogram selected, and read it at six decimals. Wrong answers: 0.2862746100855956 is the per-block three-well map's value, the distinction lesson five flagged; 0.295 is the trend's value here; 0.2905 means the range was effectively too short or the weights never solved, collapsing to the mean. The tolerance is tight enough to refuse the mean, which sits 0.0009 away.
 
-## Field four: kriged porosity AT W1, tolerance 0.0005
+## Field four: the porosity jump across the fault on the y = 2200 row, tolerance 0.00005
 
-0.315, exactly, at any valid nugget: the honor-the-data construction. The tightest tolerance in the ladder because the exactness argument permits no slack. The wrong answer it hunts: anything slightly OFF 0.315, which convicts an implementation of the continuous-covariance convention, the one that treats the nugget as measurement error to smooth through. Field four is a convention detector disguised as an easy lookup.
+The per-block kriged map, golden variogram, read along the profile row: the block 0 node just east of the fault at x 1600 minus the block 1 node just west of it at x 1550. The jump tile prints it to six decimals, signed. Block 1 is the constant 0.315 of lesson six in module five, so the jump is block 0's kriged value at x 1600 less 0.315. The wrong answers it hunts: the magnitude without its sign, which describes the cliff and loses its direction; the trend seam or the constant seam, which are the same tile read with the method switched; and the jump at a neighbouring nugget or range, which moves it by as little as a ten-thousandth and is why the tolerance is so tight. Field four checks that you read the kriged map at the stated assumptions and keep its sign.
 
 ## Field five: zone A weighted porosity, block 0, tolerance 0.001
 

@@ -43,7 +43,7 @@ The last three exist for **module 4**, and they are the ones most learners walk 
 
 - **Mean of the six well values**, computed from the wells alone with no map involved. On the isochore, 31.166666666666668 m, the sixth capstone field.
 - **Map mean minus well mean**, which on the isochore reads $+1.0876$ m.
-- **Live nodes above the well mean**, which reads 146 of 201.
+- **Live nodes above the well mean**, a count out of the 201 live nodes and the fifth capstone field.
 
 Those three together are the whole of module 4, and the fact that the last one is not close to half of 201 is the reason the module exists.
 

@@ -21,7 +21,7 @@ The tolerances are part of the fact, so learn them alongside the values.
 | reading | value | tolerance |
 |---|---|---|
 | suggested bulk shift | 8 ms of TWT | 0.5 |
-| correlation at that shift | 1 | 0.01 |
+| correlation at zero lag, before any shift | read from the scan | 0.0005 |
 | strongest synthetic amplitude at 15 Hz | 0.1573149710893631 | 0.002 |
 | strongest synthetic amplitude at 40 Hz | 0.0362229160964489 | 0.001 |
 | TWT of the 15 Hz peak | 1580 ms | 2 |
@@ -29,7 +29,7 @@ The tolerances are part of the fact, so learn them alongside the values.
 
 Read the table as three pairs rather than six items.
 
-The first pair is the tie. The shift is 8 ms of TWT with a tolerance of 0.5, which is well inside one sample of the 2 ms grid, so the answer is effectively exact and the tolerance exists only to accept a rounded write-up. The correlation is 1 with a tolerance of 0.01. That value of 1 is the most interesting number in the tier and the most misleading one, and module 2 spends a whole lesson on why it is exactly 1 here and why you should never expect it on real data.
+The first pair is the tie. The shift is 8 ms of TWT with a tolerance of 0.5, which is well inside one sample of the 2 ms grid, so the answer is effectively exact and the tolerance exists only to accept a rounded write-up. Its partner is the correlation at zero lag, the score the tie earns if you never shift it at all, graded to 0.0005 from the six decimals the scan prints. The correlation at the winning lag is exactly 1 here, which is why it is not graded: module 2 spends a whole lesson on why it is 1 on this exercise and why you should never expect it on real data. The zero lag score is the number that tells you how respectable a wrong tie can look.
 
 The second pair is amplitude at two frequencies. Both are dimensionless, both are the largest absolute value anywhere on the synthetic trace, and the only difference between the two runs is the dominant frequency of the wavelet. The lower frequency gives the larger amplitude, 0.1573149710893631 at 15 Hz against 0.0362229160964489 at 40 Hz, which is more than a factor of four. That direction is backwards from the common expectation that a sharper wavelet gives a bigger event, and module 4 explains why the expectation is wrong.
 

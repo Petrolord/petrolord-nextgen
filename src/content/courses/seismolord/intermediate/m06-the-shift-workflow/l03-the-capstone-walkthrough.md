@@ -7,7 +7,7 @@ The Professional capstone for this course is called Bulk shift and tuning on the
 | Field | Unit | Tolerance |
 | --- | --- | --- |
 | Suggested bulk shift | ms | 0.5 |
-| Correlation at the suggested shift | - | 0.01 |
+| Correlation at zero lag, before any shift | - | 0.0005 |
 | Strongest synthetic amplitude at 15 Hz | - | 0.002 |
 | Strongest synthetic amplitude at 40 Hz | - | 0.001 |
 | TWT of the 15 Hz peak | ms | 2 |
@@ -15,7 +15,7 @@ The Professional capstone for this course is called Bulk shift and tuning on the
 
 **1. Suggested bulk shift, in ms, tolerance 0.5.** The value is 8 ms. Run the bulk-shift scan and read the suggested shift the panel reports. Do not read it off the picture of the two traces, and do not round a visual impression into it. The scan tests 41 lags from minus 40 ms to plus 40 ms in one-sample steps at the 2 ms sample rate, so the only candidate answers are even numbers of milliseconds. With a tolerance of 0.5 ms, the neighbouring lags of 6 ms and 10 ms are nowhere near passing. This field is effectively exact.
 
-**2. Correlation at the suggested shift, dimensionless, tolerance 0.01.** The value is 1, read from the panel beside the suggested shift. It is worth understanding why it is exactly 1 rather than merely high, because a learner who expects that number in the field has misread it. The observed trace in this exercise is the 25 Hz synthetic copied forward by 4 samples, which is the planted 8 ms lag. At lag 8 the two series are identical over their overlap, so the normalised correlation is exactly 1. That is a property of the exercise. Correlating a trace with a shifted copy of itself is an autocorrelation, which is also why the scan curve is symmetric about the answer. A real tie never returns 1.
+**2. Correlation at zero lag, before any shift, dimensionless, tolerance 0.0005.** Read it from the scan: it is the point on the curve at a lag of 0 ms, and the panel prints it to six decimals. It is the score the tie earns if you never apply a shift. The correlation at the winning lag is not graded, because it is exactly 1 by construction: the observed trace is the 25 Hz synthetic copied forward, so at the right lag the two series are identical over their overlap. A real tie never returns 1. The zero lag score is the useful number, because it shows how respectable an unshifted tie can look while it is wrong. Report it to at least four decimals; two decimals can miss by more than the tolerance.
 
 **3. Strongest synthetic amplitude at 15 Hz, dimensionless, tolerance 0.002.** The value is 0.1573149710893631. Set the wavelet to 15 Hz and read the strongest synthetic amplitude from the panel. It is dimensionless, so no unit is expected with it, but the frequency is part of the field name, which is the habit this tier has been building.
 
@@ -45,4 +45,4 @@ Open the panel and locate all six values in capstone order before you submit any
 
 ## Exercise
 
-Without opening the panel, list the six graded fields in capstone order with the unit and tolerance of each, and say which panel state you would read each from. As a self-check: suggested bulk shift in ms at tolerance 0.5, which is 8; correlation at that shift, dimensionless at tolerance 0.01, which is 1; strongest synthetic amplitude at 15 Hz, dimensionless at tolerance 0.002, which is 0.1573149710893631; strongest synthetic amplitude at 40 Hz, dimensionless at tolerance 0.001, which is 0.0362229160964489; TWT of the 15 Hz peak at tolerance 2 ms, which is 1580 ms TWT; and TWT of the 40 Hz peak at tolerance 2 ms, which is 1646 ms TWT. Then explain in two sentences why the correlation is exactly 1 here and why you should not expect that on a real tie.
+Without opening the panel, list the six graded fields in capstone order with the unit and tolerance of each, and say which panel state you would read each from. As a self-check: suggested bulk shift in ms at tolerance 0.5, which is 8; correlation at zero lag, dimensionless at tolerance 0.0005, read from the scan at a lag of 0 ms; strongest synthetic amplitude at 15 Hz, dimensionless at tolerance 0.002, which is 0.1573149710893631; strongest synthetic amplitude at 40 Hz, dimensionless at tolerance 0.001, which is 0.0362229160964489; TWT of the 15 Hz peak at tolerance 2 ms, which is 1580 ms TWT; and TWT of the 40 Hz peak at tolerance 2 ms, which is 1646 ms TWT. Then explain in two sentences why the correlation at the winning lag is exactly 1 here, why that makes it a poor thing to grade, and why you should not expect it on a real tie.

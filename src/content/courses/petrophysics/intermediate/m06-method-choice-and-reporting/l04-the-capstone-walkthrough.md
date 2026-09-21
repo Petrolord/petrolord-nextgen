@@ -8,10 +8,10 @@ The Professional capstone grades exactly six quantities, every one of them repro
 
 | Quantity | Expected | Tolerance |
 |---|---|---|
-| SAND_A mean neutron-density porosity | 0.1762 | 0.005 |
-| SAND_A mean Wyllie sonic porosity | 0.2069 | 0.005 |
-| Pickett fit $aR_w$ | 0.0500 ohm.m | 0.002 |
-| Pickett fit $m$ | 2.000 | 0.02 |
+| SAND_A mean neutron-density porosity | 0.1762 | 0.002 |
+| SAND_A mean Wyllie sonic porosity | 0.2069 | 0.002 |
+| Pickett fit $aR_w$ over 2072 to 2078 m | read it from your own fit | 0.002 |
+| Pickett fit $m$ over 2072 to 2078 m | read it from your own fit | 0.002 |
 | SAND_A mean Simandoux $S_w$ | 0.4335 | 0.01 |
 | SAND_A mean Indonesia $S_w$ | 0.4280 | 0.01 |
 
@@ -23,7 +23,7 @@ Open Petrophysics Studio in Learning Mode on the Professional tier. The intermed
 
 The porosity pair comes from the multi-method porosity step. The panel reports the SAND_A zone means for the neutron-density average and the Wyllie sonic. Check yourself against the module: $\phi_{ND}$ is the average of density porosity and NPHI at each sample, and its zone mean of 0.1762 must sit below the Wyllie mean of 0.2069 for the reasons you learned in the reconciliation lesson. If your two porosities land in the wrong order, something upstream is wrong.
 
-The fit pair comes from the Pickett step over the water leg at 2075 to 2078 m. The panel quotes the fitted $aR_w$ and $m$ from the 6-point fit. Sanity-check them against the givens: the dataset was built with $R_w$ 0.05 and $m$ 2, so the fit landing on 0.0500 and 2.000 is the water leg confirming the given parameters, which is exactly what a Pickett fit is for.
+The fit pair comes from the Pickett step, and the capstone moves the window on purpose. Over the true water leg at 2075 to 2078 m the 6-point fit lands on 0.0500 and 2.000, the given $R_w$ and $m$, which is the water leg confirming the given parameters. You already know those two numbers, so the capstone does not grade them. It grades the fit over 2072 to 2078 m, a window whose top reaches three metres above the water leg. Set the window top to 2072 and the base to 2078 in the Pickett explorer, click Fit water line and read the fitted $aR_w$ and $m$ with their point count. Then judge them: a window that takes in samples carrying hydrocarbon drags the slope and the intercept away from the givens, and the size of that drag is the lesson of the wrong-window exercise in the Pickett module.
 
 The saturation pair comes from the shaly-sand step: Simandoux and Indonesia, both with linear $V_{sh}$ and $R_{sh}$ 2.0, averaged over SAND_A. Expect them close together and both below the Archie baseline, in the order Indonesia 0.4280, then Simandoux 0.4335.
 
@@ -42,10 +42,10 @@ The Professional tier validated $aR_w$ from the well's own water leg, but it nev
 Rehearse the submission order once, step by step:
 
 1. Read the SAND_A porosity means from the panel: 0.1762 and 0.2069, and confirm the neutron-density value is the lower of the two.
-2. Read the Pickett fit: 0.0500 ohm.m and 2.000, and confirm the point count is 6.
+2. Set the Pickett window to 2072 to 2078 m, fit, and read $aR_w$ and $m$. Confirm the point count is 12, twice the water leg's 6, and that both values have moved well away from 0.0500 and 2.000.
 3. Read the saturation means: 0.4335 and 0.4280, and confirm both sit below the Archie baseline of 0.4478.
 4. Submit, and check the response reports all six within tolerance.
 
 ## Exercise
 
-Before opening the app, write down from memory which module of this course each of the six graded quantities comes from, then check yourself against the table above. As a final self-check: state in one sentence why the tolerance on $m$ (0.02) is proportionally tighter than the tolerance on the saturation means (0.01 on a value near 0.43), and what that says about how sensitive Archie-family models are to the cementation exponent.
+Before opening the app, write down from memory which module of this course each of the six graded quantities comes from, then check yourself against the table above. As a final self-check: state in one sentence why a fit over 2072 to 2078 m returns a much lower $m$ than the water leg does, and what that says about choosing a Pickett window without first checking it is fully water saturated.

@@ -1,0 +1,58 @@
+{
+ "course": "gasprocessing",
+ "tiers": {
+  "beginner": {
+   "why": "btexTonsYear graded the BTEX carried to the still overhead, a ppmv mole balance the Associate tier never teaches (the worked lesson defers it to a later tier), and the Suite prints it to one decimal against a 1e-5 tolerance (B5 finding 1). The sixth field is now the reboiler duty, step six of the beginner worked lesson: the daily circulation times the sensible heat plus the water overhead per gallon with its reflux, over 24000000. The capstone already stated the reflux ratio 0.22; the prompt now also states the 1100 Btu a pound water overhead, the module's own typed figure, so that held-for-literature constant is a condition of the problem (as OTUMARA states its 920 Btu a gallon) and the duty is reproducible by hand from the prompt alone. The BTEX inputs no graded field uses are dropped from the prompt. The key is tegReboilerMMBtuHr (the Professional tier already grades an amine reboilerMMBtuHr, and the lab indexes the answer key by field key).",
+   "prompt_edits": [
+    [
+     "The inlet carries 155 ppmv of BTEX, of which 0.12 is absorbed, at a molecular weight of 92.",
+     "Each pound of water the still boils off costs 1100 Btu of overhead, the module's own figure, stated here so it is a condition of the problem as well."
+    ],
+    [
+     "and the BTEX that reaches the still overhead.",
+     "and the reboiler duty, the sensible heat and the water overhead with its reflux together, carried by that daily circulation."
+    ],
+    [
+     "circulations in gpm and BTEX in short tons a year, to six decimals.",
+     "circulations in gpm and the duty in MMBtu an hour, to six decimals."
+    ]
+   ],
+   "fields": {
+    "btexTonsYear": {
+     "key": "tegReboilerMMBtuHr",
+     "label": "Reboiler duty",
+     "unit": "MMBtu/hr",
+     "expected": 0.7401512387317987,
+     "tol": 1e-05
+    }
+   },
+   "annot": {
+    "tegReboilerMMBtuHr": {
+     "source": "hand-calc",
+     "source_ref": "src/content/courses/gasprocessing/beginner/m06-the-associate-reading/l02-the-capstone-worked.md (step five and step six); tools/course-waves/gasprocessing/fc4_capstone.mjs (engine tegPackage reboilerMMBtuHr)",
+     "printed": "full",
+     "display_scale": 1,
+     "display_ref": null,
+     "prompt_precision": "the duty in MMBtu an hour, to six decimals",
+     "prompt_decimals": 6,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "From the prompt alone: water 47 x (66.845130 - 5) = 2906.7211 lb/day, circulation x 3.6 = 10464.196 gal/day, sensible 9.3 x 0.55 x (368 - 109) = 1324.785 Btu/gal, overhead (1/3.6) x 1100 x 1.22 = 372.7778 Btu/gal, duty 10464.196 x 1697.5628 / 24000000 = 0.740151 MMBtu/hr; reproduces the engine value 0.7401512387317987 exactly. Six decimals round within 5e-7 of tol 1e-5. Neighbours fail: sensible only 0.5776, no reflux 0.7122. The leak guard (panelCapstoneGuard, gasprocessingLab leak gate) finds no teaching number within ten bands; the worked lesson's duty is the teaching case 0.697269.",
+     "default_state_prints": false
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "tools/course-waves/gasprocessing/fc4_capstone.mjs",
+  "tools/course-waves/gasprocessing/fc4_fields_capstone.mjs",
+  "tools/course-waves/gasprocessing/make_fields.mjs",
+  "tools/course-waves/gasprocessing/gate_movement.mjs",
+  "tools/course-waves/gasprocessing/fields.json",
+  "tools/course-waves/gasprocessing/precision.json",
+  "tools/course-waves/waves.json",
+  "src/components/course/panels/gasprocessing/gasprocessingLab.js"
+ ],
+ "tests": "check-wave-inputs green (fields.json re-pinned); make_fields.mjs regenerated fields.json and precision.json byte-identical to the committed copies (temp copy with paths redirected, worktree engines); vitest panels/gasprocessing 98 pass, 2 fail locally only: the MIRROR GATE against /root/fc-wip-gasprocessing (live wave dir not updated, per instructions) and the TIMEZONE GATE, which re-runs the same file in a subprocess and fails on that same mirror assertion.",
+ "notes": "Deviation: key tegReboilerMMBtuHr instead of reboilerMMBtuHr, because intermediate already grades reboilerMMBtuHr and the lab's capstoneValues/published maps are keyed by field key. gen_golive.py (historic FC4 go-live generator, not run in CI) still references beginner/btexTonsYear and its held-for-literature label check refuses '%reboiler dut%'; the applied go-live migration is not re-run by W1, but if the go-live were ever regenerated it would need updating. The label check's premise (the overhead is unsourced) is answered by stating 1100 in the prompt. The live wave dir /root/fc-wip-gasprocessing was not touched."
+}

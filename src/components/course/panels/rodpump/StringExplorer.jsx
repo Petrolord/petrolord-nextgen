@@ -3,15 +3,18 @@ import {
   ResponsiveContainer, LineChart, ComposedChart, Line, Scatter,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
-import { stringExplorer, ODUMA, STRING_IDS } from './rodPumpLab';
-import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import {
+  stringExplorer, ODUMA, STRING_IDS, typedStringNote,
+  TYPED_STRING_SIZES, TYPED_STRING_MAX_SECTIONS, TYPED_STRING_DEFAULT,
+} from './rodPumpLab';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // String explorer, the Associate tier. Everything a rod pump design has BEFORE
 // anything is marched: the four objects and what each one owns, the taper as a
 // compromise, the note a stepped bar rings at and the grid the engine scans for
 // it, the four-bar linkage and the stroke it gives, and the pump itself.
 //
-// Five modes, and not one of them needs a march. That is the point of the tier
+// Six modes, and not one of them needs a march. That is the point of the tier
 // and it is why this panel is fast while the other two are not.
 //
 // Every figure on this page is a return value from rodPumpLab, which is a return
@@ -32,6 +35,7 @@ const MODES = [
   { value: 'objects', label: 'Four objects, one well' },
   { value: 'taper', label: 'The rod string, and the taper as a compromise' },
   { value: 'note', label: 'The note, and the grid the scan walks' },
+  { value: 'typed', label: 'The note of a string you type' },
   { value: 'linkage', label: 'The four-bar linkage and the stroke' },
   { value: 'pump', label: 'The pump itself' },
 ];
@@ -403,6 +407,63 @@ const NoteMode = () => {
   );
 };
 
+const EMPTY_SECTION = Object.freeze({ size: '', lengthFt: '' });
+
+const initialRows = () => Array.from({ length: TYPED_STRING_MAX_SECTIONS }, (_, i) => {
+  const s = TYPED_STRING_DEFAULT[i];
+  return s ? { size: s.size, lengthFt: String(s.lengthFt) } : { ...EMPTY_SECTION };
+});
+
+const SIZE_OPTIONS = [{ value: '', label: 'none' }]
+  .concat(TYPED_STRING_SIZES.map((x) => ({ value: x, label: `${x} in` })));
+
+const Typed = () => {
+  const [rows, setRows] = useState(initialRows);
+  const setRow = (i, patch) => setRows((rs) => rs.map((r, j) => (j === i ? { ...r, ...patch } : r)));
+  const r = useSafe(() => typedStringNote(rows), [rows]);
+  return (
+    <>
+      <div className="text-xs text-slate-300">
+        Type a rod string, top section first, one size and one length per section. The view opens
+        on the {ODUMA.label} teaching string. Leave a size at none to drop that section. The note is
+        a property of the steel alone, so neither the fluid nor the grade is asked for.
+      </div>
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        {rows.map((row, i) => (
+          <FieldGrid key={`section-${i + 1}`}>
+            <SelectField label={`Section ${i + 1} size`} value={row.size}
+              onChange={(v) => setRow(i, { size: v })} options={SIZE_OPTIONS} />
+            <NumField label={`Section ${i + 1} length, ft`} value={row.lengthFt}
+              onChange={(v) => setRow(i, { lengthFt: v })} />
+          </FieldGrid>
+        ))}
+      </div>
+      {(!r || !r.ok) ? (
+        <Note>{r ? r.errors.join(' ') : 'This string cannot be built.'}</Note>
+      ) : (
+        <>
+          <div className="mt-3">
+            <TileGrid>
+              <Tile label="Engine scan fundamental" value={fmt(r.engineScanSpm, 12)} unit="spm" />
+              <Tile label="Base note n0 of a uniform bar this long" value={fmt(r.n0Spm, 12)} unit="spm" />
+              <Tile label="Taper factor" value={fmt(r.taperFactor, 12)} />
+              <Tile label="String length" value={fmt(r.lengthFt, 4)} unit="ft" />
+              <Tile label="Sections" value={String(r.sections)} />
+              <Tile label="Uniform" value={String(r.uniform)} />
+            </TileGrid>
+          </div>
+          {r.warnings.length > 0 && <Note>Engine warning: {r.warnings.map((w) => w.message).join(' ')}</Note>}
+          <Note>
+            The fundamental is the engine scan over this string, the same call the note view makes on
+            its three fixed strings. A tapered string rings above a uniform bar of the same length,
+            and the taper factor is how far above.
+          </Note>
+        </>
+      )}
+    </>
+  );
+};
+
 const Linkage = () => {
   const d = useSafe(() => stringExplorer.linkage());
   if (!d || !d.revolution.length) {
@@ -689,6 +750,7 @@ const StringExplorer = ({ initialMode = 'objects' }) => {
         {mode === 'objects' && <Objects />}
         {mode === 'taper' && <Taper />}
         {mode === 'note' && <NoteMode />}
+        {mode === 'typed' && <Typed />}
         {mode === 'linkage' && <Linkage />}
         {mode === 'pump' && <Pump />}
       </div>

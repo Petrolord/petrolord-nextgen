@@ -20,6 +20,15 @@ describe('Associate capstone: close the Ekene tank', () => {
     expect(rel(last.efwShare * 100, 39.2996108949418)).toBeLessThan(1e-12);
   });
 
+  it('W1: grades Eo at the last survey, which the Eo column prints to 7 dp inside tol 5e-5', () => {
+    expect(rel(last.Eo_rb_stb, 0.0158974810175952)).toBeLessThan(1e-12);
+    expect(Math.abs(Number(last.Eo_rb_stb.toFixed(7)) - last.Eo_rb_stb)).toBeLessThan(5e-5);
+    // Et and Efw of the same row, and the previous survey's Eo, all miss it
+    for (const v of [last.Et_rb, last.Efw_rb, rows[rows.length - 2].Eo_rb_stb]) {
+      expect(Math.abs(v - last.Eo_rb_stb)).toBeGreaterThan(5e-5);
+    }
+  });
+
   it('recovers the OOIP and closes the line', () => {
     expect(rel(result.estimated_ooip_stb, 12139208.1074968)).toBeLessThan(1e-12);
     expect(result.r_squared).toBeCloseTo(1, 12);
@@ -110,6 +119,12 @@ describe('Expert capstone: the finite aquifer and the benchmark', () => {
     expect(rel(c.We, 411281.250000001)).toBeLessThan(1e-9);
     expect(rel(c.byNetWithdrawal.WDI, 0.211250877090399)).toBeLessThan(1e-12);
     expect(c.byNetWithdrawal.sum).toBeCloseTo(1, 12);
+    // W1: the sixth Expert field is the net-convention DDI (the sum is 1 by identity)
+    expect(rel(c.byNetWithdrawal.DDI, 0.438545199391884)).toBeLessThan(1e-12);
+    expect(Math.abs(c.byGrossWithdrawal.DDI - c.byNetWithdrawal.DDI)).toBeGreaterThan(0.002);
+    for (const k of ['SDI', 'WDI', 'EDI']) {
+      expect(Math.abs(c.byNetWithdrawal[k] - c.byNetWithdrawal.DDI)).toBeGreaterThan(0.002);
+    }
     // Only the NET-withdrawal convention reproduces the book. Compare the way
     // you compare against ANY printed value whose intermediate rounding you
     // cannot see: agreement to within one unit in the last printed place. A

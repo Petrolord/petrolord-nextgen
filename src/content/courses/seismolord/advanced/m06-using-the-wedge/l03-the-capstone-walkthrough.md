@@ -13,7 +13,7 @@ Model the SAND top and base as an equal and opposite reflection pair, $+0.08$ at
 | Tuning thickness at 25 Hz | ms | 0, exact |
 | Peak amplitude at 25 Hz tuning | dimensionless | 0.002 |
 | Tuning thickness at 40 Hz | ms | 0, exact |
-| Peak amplitude at 40 Hz tuning | dimensionless | 0.002 |
+| Amplitude of the 6 ms bed at 40 Hz | dimensionless | 0.0005 |
 | Tuning amplitude over the isolated level at 25 Hz | dimensionless | 0.001 |
 | Theoretical tuning thickness at 25 Hz | ms | 0.05 |
 
@@ -30,7 +30,7 @@ Model the SAND top and base as an equal and opposite reflection pair, $+0.08$ at
 **State two: 40 Hz.** Change the frequency and read two fields.
 
 - Tuning thickness: **10 ms**.
-- Amplitude at tuning: **0.1155947595834732**, which is the same number as the 25 Hz field. It is not a copying error and it does not need checking twice. Module 4 explains it: $25 \times 16 = 40 \times 10 = 400$.
+- Amplitude of a 6 ms bed: set the thickness slider to 6 ms and read the "Amplitude there" tile, printed to ten decimals. The amplitude at 40 Hz tuning is not graded, because it is the same number as the 25 Hz field (module 4 explains it: $25 \times 16 = 40 \times 10 = 400$), so reading it twice would test nothing. The 6 ms bed sits below the 40 Hz tuning thickness, on the thin side where the amplitude falls away, and it is the reading the tier is really about: how bright a bed thinner than tuning looks. Check the frequency tile reads 40 and the thickness tile reads 6 before you record it.
 
 **The calculation.** The theoretical tuning thickness at 25 Hz:
 
@@ -50,7 +50,7 @@ Report it to at least three decimals. The tolerance is 0.05 ms, so 15.59 passes 
 
 ## The self-consistency check to run before submitting
 
-Four relationships hold across the six fields, and checking them takes a minute.
+Four relationships hold across the fields, and checking them takes a minute.
 
 $$\frac{0.1155947596}{1.4449345} = 0.0800 \qquad 25 \times 16 = 400 \qquad 40 \times 10 = 400$$
 
@@ -60,12 +60,12 @@ If the first does not return the thick end level of 0.0800, the tuning amplitude
 
 ## Worked example
 
-Suppose the panel is read and the six fields come out as 16 ms, 0.1156, 10 ms, 0.1156, 1.0 and 15.594 ms. Run the check.
+Suppose the panel is read and the fields come out as 16 ms, 0.1156, 10 ms, the 6 ms reading, 1.0 and 15.594 ms. Run the check.
 
-The ratio test fails immediately: 0.1156 divided by 1.0 is 0.1156 rather than the thick end level of 0.0800. The ratio field has been filled by dividing the tuning amplitude by itself, which is what happens when the isolated level is read off the tuning tile. Everything else passes, so exactly one field is wrong and it is identifiable without rereading the panel.
+The ratio test fails immediately: 0.1156 divided by 1.0 is 0.1156 rather than the thick end level of 0.0800. The ratio field has been filled by dividing the tuning amplitude by itself, which is what happens when the isolated level is read off the tuning tile. The other checks pass, so exactly one of those fields is wrong and it is identifiable without rereading the panel.
 
 ## Exercise
 
 Write out the six fields with their units, then state which of them would still be correct if the model had been built with a reflection pair of $\pm 0.05$ instead of $\pm 0.08$.
 
-As a self-check: the six are 16 ms, 0.1155947595834732, 10 ms, 0.1155947595834732, 1.4449345270902185 and 15.593936024673521 ms. FOUR would be unchanged: both tuning thicknesses, at 16 and 10 ms, the theoretical value of 15.593936 ms, and the ratio, which is scale invariant. Only the two tuning amplitudes would move, each scaling by 0.05 over 0.08 to 0.0722467. That the ratio survives a change of coefficients is exactly why it is graded and the isolated level is not: the level is a restatement of the pair you were given, and the ratio is what the interference did with it.
+As a self-check: the six are 16 ms, 0.1155947595834732, 10 ms, the 40 Hz amplitude of the 6 ms bed, 1.4449345270902185 and 15.593936024673521 ms. FOUR would be unchanged: both tuning thicknesses, at 16 and 10 ms, the theoretical value of 15.593936 ms, and the ratio, which is scale invariant. Only the two amplitudes would move, each scaling by exactly 0.05 over 0.08, because the model is linear in the coefficients. That the ratio survives a change of coefficients is exactly why it is graded and the isolated level is not: the level is a restatement of the pair you were given, and the ratio is what the interference did with it.

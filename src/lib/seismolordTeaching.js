@@ -209,6 +209,9 @@ export function computeIntermediate() {
   return {
     bulkShiftMs: shift?.lagMs ?? null,
     corr: shift?.corr ?? null,
+    // The graded correlation (W1, 2026-09-21): the score at zero lag, before
+    // any shift. The score at the winning lag is exactly 1 by construction.
+    corrZeroLag: shift?.series?.find((e) => e.lagMs === 0)?.corr ?? null,
     peak15: { abs: s15.summary.synPeakAbs, twt: s15.summary.synPeakTwt },
     peak40: { abs: s40.summary.synPeakAbs, twt: s40.summary.synPeakTwt },
   };

@@ -1,0 +1,84 @@
+{
+ "course": "wellcorrelation",
+ "tiers": {
+  "beginner": {
+   "why": "wells_with_top_b graded a count over four wells (3), guessable at 0.25 and printed on the panel's TOP_B tile. It is replaced by a measured depth read in the same Section explorer at a second, stated flattening: Ekene-3's TOP_B displayed depth with BASE_SAND pinned to a 1560 m datum, 1628 - 10 = 1618 m. The panel prints whole metres; tol 0.5 is half that unit and every other TOP_B reading in that view (1620, 1621) fails.",
+   "prompt_edits": [
+    [
+     "the structural relief on TOP_SAND, and how many wells the TOP_B correlation line reaches.",
+     "the structural relief on TOP_SAND, and Ekene-3's TOP_B displayed depth once the section is re-flattened on BASE_SAND at a 1560 m datum."
+    ]
+   ],
+   "fields": {
+    "wells_with_top_b": {
+     "key": "w3_top_b_displayed_base_1560_m",
+     "label": "Ekene-3: TOP_B displayed depth, flattened on BASE_SAND at 1560 m",
+     "unit": "m",
+     "expected": 1618.0,
+     "tol": 0.5
+    }
+   },
+   "annot": {
+    "w3_top_b_displayed_base_1560_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx:168 (tops table, View = Flattened on a top, Datum top = BASE_SAND, Datum depth = 1560)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx:168 fmt(hit.displayed) (toFixed(0))",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "computeSection({mode:\"flatten\", topName:\"BASE_SAND\", datumM:1560}) in src/lib/correlationTeaching.js: Ekene-3 shift 1560 - 1570 = -10, TOP_B 1628 - 10 = 1618 exactly (pinned in sectionLab.test.js). Neighbours in the same view: Ekene-1 TOP_B 1620, Ekene-2 TOP_B 1621, the true MD 1628 (structural view), all outside tol 0.5; no other beginner graded value is within 20 m. The panel opens in the structural view (1628) and the capstone flattening TOP_SAND 1500 shows 1587, so no default state prints it. No lesson prints 1618.",
+     "default_state_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "why": "wells_with_all_tops graded a count over four wells (3), guessable at 0.25 and printed on the default Flatten explorer tile. It is replaced by the shallowest displayed depth at a second, stated flattening, TOP_SAND at a 1480 m datum, read from the same panel's \"Shallowest displayed\" tile: Ekene-4 TOP_A at 1530 - 110 = 1420 m. The panel prints whole metres; tol 0.5 is half that unit and the next shallowest reading (Ekene-2 TOP_A 1427) and the datum (1480) both fail.",
+   "prompt_edits": [
+    [
+     "the number of wells carrying all four tops, and the displayed depth span of the section.",
+     "the shallowest displayed depth once the section is re-flattened on TOP_SAND at a 1480 m datum, and the displayed depth span of the section back on the TOP_A datum."
+    ]
+   ],
+   "fields": {
+    "wells_with_all_tops": {
+     "key": "shallowest_displayed_sand_1480_m",
+     "label": "Shallowest displayed depth, flattened on TOP_SAND at 1480 m",
+     "unit": "m",
+     "expected": 1420.0,
+     "tol": 0.5
+    }
+   },
+   "annot": {
+    "shallowest_displayed_sand_1480_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx:149 (Shallowest displayed tile, flattening top TOP_SAND, datum 1480)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx:149 fmt(dMin) (toFixed(0))",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Shifts at TOP_SAND 1480: -68, -85, -61, -110; displayed TOP_A 1432, 1427, 1434, 1420; min over every displayed pick 1420 exactly (pinned in flattenLab.test.js). Neighbours: 1427 (7 m), the datum 1480, and the default-state shallowest 1450 (TOP_A at 1450 m) all fail tol 0.5; no other intermediate graded value is near. The panel opens on TOP_A 1450, so no default state prints it. No lesson prints 1420.",
+     "default_state_prints": false
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx",
+  "src/components/course/panels/wellcorrelation/flattenLab.test.js",
+  "src/components/course/panels/wellcorrelation/sectionLab.test.js",
+  "src/content/courses/wellcorrelation/beginner/m05-zones-and-correlation-lines/l04-lines-that-stop-short.md",
+  "src/content/courses/wellcorrelation/beginner/m06-the-correlation-workflow/l03-the-capstone-walkthrough.md",
+  "src/content/courses/wellcorrelation/beginner/m06-the-correlation-workflow/l04-onward-to-professional.md",
+  "src/content/courses/wellcorrelation/intermediate/m01-from-reading-to-flattening/l04-the-flattening-panel-map.md",
+  "src/content/courses/wellcorrelation/intermediate/m05-missing-tops/l02-counting-wells-with-all-tops.md",
+  "src/content/courses/wellcorrelation/intermediate/m05-missing-tops/l04-never-invent-a-pick.md",
+  "src/content/courses/wellcorrelation/intermediate/m06-the-flattening-workflow/l01-the-workflow-end-to-end.md",
+  "src/content/courses/wellcorrelation/intermediate/m06-the-flattening-workflow/l03-the-capstone-walkthrough.md"
+ ],
+ "tests": "npx vitest run src/components/course/panels/{mapping,wellcorrelation,earthmodel}: 8 files, 72 tests pass; eslint clean on changed jsx/js",
+ "notes": "Both replacements are read at a second flattening named in the prompt; tol 0.5 per FC6 (integer print). Walkthroughs and lessons that said the counts were graded were reworded; the lib and the count teaching are unchanged. The rest of the course still leaks (W5)."
+}

@@ -18,7 +18,7 @@ A section larger than the one above it is accepted, not refused: the same two si
 
 ## Step four: get the note and compare the speed to it
 
-The engine refuses any design at or above the string's fundamental, with a message that names the number. Get the fundamental before choosing a speed, not after.
+The engine refuses any design at or above the string's fundamental, with a message that names the number, so get the fundamental before choosing a speed. A tapered string's note is a transfer matrix scan, with no hand route: open the string explorer's typed string view, enter the sections top first, and read the engine scan fundamental. The same view prints the base note of a uniform bar of that length and the taper factor between them, and the tapered note must sit above the uniform one.
 
 ## Step five: close the linkage
 

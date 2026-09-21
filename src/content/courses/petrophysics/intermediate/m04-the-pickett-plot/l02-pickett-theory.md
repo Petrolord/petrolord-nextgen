@@ -32,7 +32,7 @@ Third, it degrades gracefully. Even without a clean water leg, the lower envelop
 
 ## From picture to numbers
 
-For the typewell the picture is deliberately simple: six water-leg samples that fall on a perfect line. The next lesson fits that line by least squares in log space and reads off the two numbers the capstone grades, the slope giving $m = 2.000$ and the intercept giving $a R_w = 0.0500$ ohm.m. Keep the theory of this lesson in mind as you fit: the slope is a claim about pore geometry, and the intercept is a claim about the water. The plot does not know which claim is wrong when the line misfits; that judgement is yours.
+For the typewell the picture is deliberately simple: six water-leg samples that fall on a perfect line. The next lesson fits that line by least squares in log space and reads off the two numbers the fit returns, the slope giving $m = 2.000$ and the intercept giving $a R_w = 0.0500$ ohm.m. Keep the theory of this lesson in mind as you fit: the slope is a claim about pore geometry, and the intercept is a claim about the water. The plot does not know which claim is wrong when the line misfits; that judgement is yours.
 
 ## Exercise
 

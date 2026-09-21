@@ -123,12 +123,37 @@
    "fix": {
     "redesign": "replace with reboilerMMBtuHr, label \"Reboiler duty\", unit MMBtu/hr, to six decimals, tol 1e-5: step six of the beginner worked lesson (circulation gpd x (sensible + overhead Btu/gal) / 24000000), computed from the reflux ratio 0.22 and the prompt conditions the capstone already states. Alternative: keep BTEX and add the ppmv mole balance as a step in beginner m05 or the worked lesson."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Redesign or teach. As posed the beginner tier never teaches the ppmv mole balance (the worked lesson defers it to a later tier), the fc-water-explorer BTEX view is fixed on OBIAFU, and the Suite prints 1 decimal (38.7 against 38.678402, tol 1e-5). The reboiler duty uses the reflux ratio the prompt states but grades nothing.",
    "evidence": "155e-6 x 0.12 x 47e6 / 379.48357 x 92 x 365/2000 = 38.678402 reproduces the key, but none of that chain is in the beginner lessons; the only beginner BTEX mentions are a table column (m05 l05) and the default MW 92 (m01 l02).",
    "notes": "The prompt already states a reflux ratio of 0.22 that no graded field uses, which suits the replacement.",
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_gasprocessing.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "tegReboilerMMBtuHr",
+     "label": "Reboiler duty",
+     "unit": "MMBtu/hr",
+     "expected": 0.7401512387317987,
+     "tol": 1e-05
+    },
+    "rekey_annot": {
+     "source": "hand-calc",
+     "source_ref": "src/content/courses/gasprocessing/beginner/m06-the-associate-reading/l02-the-capstone-worked.md (step five and step six); tools/course-waves/gasprocessing/fc4_capstone.mjs (engine tegPackage reboilerMMBtuHr)",
+     "printed": "full",
+     "display_scale": 1,
+     "display_ref": null,
+     "prompt_precision": "the duty in MMBtu an hour, to six decimals",
+     "prompt_decimals": 6,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "From the prompt alone: water 47 x (66.845130 - 5) = 2906.7211 lb/day, circulation x 3.6 = 10464.196 gal/day, sensible 9.3 x 0.55 x (368 - 109) = 1324.785 Btu/gal, overhead (1/3.6) x 1100 x 1.22 = 372.7778 Btu/gal, duty 10464.196 x 1697.5628 / 24000000 = 0.740151 MMBtu/hr; reproduces the engine value 0.7401512387317987 exactly. Six decimals round within 5e-7 of tol 1e-5. Neighbours fail: sensible only 0.5776, no reflux 0.7122. The leak guard (panelCapstoneGuard, gasprocessingLab leak gate) finds no teaching number within ten bands; the worked lesson's duty is the teaching case 0.697269.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",

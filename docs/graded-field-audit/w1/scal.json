@@ -1,0 +1,50 @@
+{
+ "course": "scal",
+ "tiers": {
+  "advanced": {
+   "why": "fitted_nw was graded on the noise-free 13-row grid sampled from the design Corey set, so the fit recovers its own plant (2.4999999999999996) and 2.5 written from the design table, or the DesignExplorer tile labelled 'Fitted nw (plant 2.5)', passed without fitting anything (B5 finding 4). The replacement fits the SAME 13 rows with every kr rounded to the three decimals a lab sheet prints (Sw unchanged, endpoints fixed from the table, the same fitCoreyToKrTable call). The rounding moves nw to 2.4318603318221883 (scalLab.js fitPrintedLabGrid, 24 points, converged). The DesignExplorer prints it in a NON-default mode, 'Fit the printed grid (kr to 3 dp)', at 9 significant figures (2.43186033). Tol stays 0.001: the plant 2.5 misses by 0.068, the noise-free fit by 0.068, the oil exponent of the same fit (2.00765) by 0.42, and fits on a 2 dp or 4 dp grid (2.49675, 2.50045) by more than 0.06, so each fails; the 9 significant figure reading passes by 1e-9.",
+   "prompt_edits": [
+    [
+     "Fit the 13-row lab relative permeability grid (Sw 0.35 to 0.75 in twelve equal steps, Swirr 0.25 given) with fixed endpoints taken from the table and report the fitted water exponent.",
+     "Fit the 13-row lab relative permeability grid (Sw 0.35 to 0.75 in twelve equal steps, Swirr 0.25 given) as the lab sheet prints it, every kr rounded to three decimals, with fixed endpoints taken from the table and report the fitted water exponent."
+    ]
+   ],
+   "fields": {
+    "fitted_nw": {
+     "key": "fitted_nw_printed_grid",
+     "label": "Fitted water Corey exponent nw, kr printed to 3 dp",
+     "unit": "-",
+     "expected": 2.4318603318221883,
+     "tol": 0.001
+    }
+   },
+   "annot": {
+    "fitted_nw_printed_grid": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/scal/scalLab.js fitPrintedLabGrid (LAB_KR_GRID_PRINTED)",
+     "printed": {
+      "sigfigs": 9
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/scal/DesignExplorer.jsx:125 sci(fit.params.nw, 9) in mode fitPrinted",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "fitCoreyToKrTable on the 13 design rows with krw and kro rounded to 3 dp, endpoints fixed from the table: nw 2.4318603318221883, no 2.007645191216893, 24 points, rmsLog 0.0407, converged (scalLab.test.js pins it to 1e-9). Tile prints 2.43186033 (miss 1.8e-9 against tol 0.001). Neighbours that fail: plant 2.5 and the default fit mode's 2.4999999999999996 (0.068), the oil exponent 2.0076 (0.42), 2 dp grid fit 2.49675 and 4 dp grid fit 2.50045 (over 0.06). Default state (mode fit) prints 2.49999999999, which is not the answer.",
+     "default_state_prints": false
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/scal/scalLab.js",
+  "src/components/course/panels/scal/DesignExplorer.jsx",
+  "src/components/course/panels/scal/scalLab.test.js",
+  "src/content/courses/scal/advanced/m06-the-expert-reading/l02-working-the-capstone.md",
+  "src/content/courses/scal/advanced/m06-the-expert-reading/l01-the-story-so-far.md",
+  "src/content/courses/scal/advanced/m01-fitting-the-lab/l03-confidence-intervals.md",
+  "src/content/courses/scal/advanced/m01-fitting-the-lab/l02-the-fit-recovers-the-plant.md"
+ ],
+ "tests": "vitest src/components/course/panels/scal (16 pass), panelRender (220 pass), src/lib/courseContent.test.js pass, eslint clean",
+ "notes": "Key renamed fitted_nw -> fitted_nw_printed_grid at the same position. Lessons no longer print a graded nw; story-so-far row says 'read it from the printed grid fit'. m06 l01/l02 also print the other five scal advanced answers (W5 leak, untouched)."
+}
