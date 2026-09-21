@@ -1,0 +1,218 @@
+{
+ "migration": "20261021b_b4_fix_welldata.sql",
+ "title": "welldata: one arguable distractor rewritten; four near duplicates rewritten to new points",
+ "items": [
+  {
+   "app_slug": "welldata",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-qc-workflow",
+   "ord": 13,
+   "category": "double-key",
+   "flag": "distractor 0 \"Access to the Professional tier ... otherwise locked\" may be true",
+   "verdict": "fixed",
+   "reason": "passing the Associate capstone plausibly does open this course's Professional tier, so option 0 could be defended; it now claims the QC panel itself is locked until the capstone, which m06 l03 contradicts (practise in the QC panel any time).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Access to the Professional tier of Well Data Manager, which is otherwise locked to every learner on the platform",
+      "new": "Use of the Well Data Manager QC panel itself, which stays closed to a learner until the capstone has been passed"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "welldata",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-well-data-and-the-registry",
+   "ord": 10,
+   "category": "number-options",
+   "flag": "bare file-name options; review only, fix only if defective",
+   "verdict": "judged fine",
+   "reason": "nullheavy_20 is the only teaching file that declares NULL -9999 (m01 l03); file-name options are the natural form for a teaching-file recall question and each distractor is a real teaching file."
+  },
+  {
+   "app_slug": "welldata",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-well-data-and-the-registry",
+   "ord": 11,
+   "category": "number-options",
+   "flag": "bare file-name options; review only, fix only if defective",
+   "verdict": "judged fine",
+   "reason": "wrapped_12 is the only LAS 1.2 wrapped file (m01 l03, l04); the other three are real LAS 2.0 teaching files, so exactly one option stands."
+  },
+  {
+   "app_slug": "welldata",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "near duplicate of module m01 ord 4 and of module m03 ord 10 (same 1500 to 1650 m at 0.5 m log, same 301 key); the final also keeps a fence-post count at ord 6",
+   "verdict": "fixed",
+   "reason": "trivial reword of two module questions; rewritten to the m03 l02 point that each converted curve stores its source unit and factor (provenance), which the beginner final did not test.",
+   "changes": {
+    "prompt": {
+     "old": "A log runs from 1500 m to 1650 m with a constant 0.5 m step. How many depth samples does it contain?",
+     "new": "When the import pipeline converts the feet_20 sonic from US/F to US/M, what does it store on the converted curve?"
+    },
+    "options": {
+     "0": {
+      "old": "300",
+      "new": "Nothing but the converted values, since the source unit is dropped for good once the curve is in metres"
+     },
+     "1": {
+      "old": "301",
+      "new": "The source unit and the factor used, stored on the curve so the conversion stays auditable"
+     },
+     "2": {
+      "old": "299",
+      "new": "A second index curve holding the original feet depths beside the new metric frame"
+     },
+     "3": {
+      "old": "302",
+      "new": "An unconverted flag, so the import screen asks a human to confirm the unit"
+     }
+    },
+    "explanation": {
+     "old": "Fence-post counting: (1650 - 1500) / 0.5 = 300 intervals, and intervals + 1 = 301 samples. basic_20 shows exactly this.",
+     "new": "Every converted curve keeps the source unit and the factor used, so the conversion is auditable forever. The unconverted flag belongs to a curve whose unit the importer does not recognise, which it passes through unchanged."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "welldata",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-depth-units-and-steps",
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "near duplicate of module m01 ord 4 (same log, same 301 key), found while reviewing the final ord 2 pairs; m03 already has its own count at ord 3",
+   "verdict": "fixed",
+   "reason": "the fence-post count is m01's point; m03 ord 10 now tests m03 l04 'resampling is modelling': the spacing and interpolation choice belongs in the professional import pipeline with the original samples preserved.",
+   "changes": {
+    "prompt": {
+     "old": "basic_20 runs from 1500 m to 1650 m with a uniform 0.5 m step. How many depth samples does it contain?",
+     "new": "An irregular well must eventually live on a uniform grid. Where does the choice of spacing and interpolation belong?"
+    },
+    "options": {
+     "0": {
+      "old": "301",
+      "new": "In the professional import pipeline, chosen explicitly, with the original samples preserved underneath"
+     },
+     "1": {
+      "old": "300",
+      "new": "In the parser, which regrids each irregular file onto its average increment as it reads it"
+     },
+     "2": {
+      "old": "299",
+      "new": "In the header, by writing the chosen spacing into STEP so every consumer reads one grid"
+     },
+     "3": {
+      "old": "151",
+      "new": "In each downstream app, which interpolates onto whatever spacing its arithmetic needs"
+     }
+    },
+    "explanation": {
+     "old": "(1650 - 1500) / 0.5 + 1 = 300 + 1 = 301. Dropping the plus one gives 300, the increment count rather than the sample count.",
+     "new": "Choosing a spacing and an interpolation alters the data, so resampling is an interpretive trade and belongs where interpretation lives: the professional import pipeline, chosen explicitly and recorded, with the original samples kept underneath. The parser's job is fidelity, so it never regrids."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "welldata",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-from-qc-to-import",
+   "ord": 7,
+   "category": "duplicate",
+   "flag": "near duplicate pair with module m06-the-import-workflow ord 5 (same prompt, same key)",
+   "verdict": "judged fine",
+   "reason": "kept as the stronger copy (its distractors are real misreadings of the unit and position); m06 ord 5 is rewritten instead."
+  },
+  {
+   "app_slug": "welldata",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-import-workflow",
+   "ord": 5,
+   "category": "duplicate",
+   "flag": "near duplicate of module m01-from-qc-to-import ord 7 (same prompt, same key)",
+   "verdict": "fixed",
+   "reason": "rewritten to m06 l02 check 3: a curve whose mnemonic matches no name list is kept but carries no kind, so apps that ask by kind cannot see it.",
+   "changes": {
+    "prompt": {
+     "old": "What input does the importer use to decide a curve's kind?",
+     "new": "A curve's mnemonic matches none of the importer's fixed name lists. What happens to that curve?"
+    },
+    "options": {
+     "0": {
+      "old": "The unit string, since kinds and units go together",
+      "new": "It is dropped at import, since a curve with no kind has no place in the registry"
+     },
+     "1": {
+      "old": "The curve's position in the file, for every curve",
+      "new": "It takes the kind of a curve sharing its unit, since kind falls back to the unit"
+     },
+     "2": {
+      "old": "The curve description text in the curve section",
+      "new": "The import stops until someone maps it, as it does for an unrecognised depth unit"
+     },
+     "3": {
+      "old": "The mnemonic alone, upper-cased and matched against fixed name lists",
+      "new": "It is kept without a kind, and any app that asks for curves by kind will not see it at all"
+     }
+    },
+    "explanation": {
+     "old": "Kind comes from the mnemonic with any run suffix after a colon stripped, and the unit is never consulted. That makes the kind column and the converted column independent findings during QC.",
+     "new": "Kind comes from the mnemonic alone and the unit is never consulted. A curve with no match is neither dropped nor a reason to stop the import; it simply carries no kind, which makes it invisible to any app that picks curves by kind, so accept that deliberately or correct the mnemonic at source."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  },
+  {
+   "app_slug": "welldata",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-import-workflow",
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "near duplicate of module m01-from-qc-to-import ord 6 (how the importer decides a curve needs converting: exact lookup of the unit string in a fixed table)",
+   "verdict": "fixed",
+   "reason": "true duplicate (same concept, same key); m01 ord 6 is kept as the earlier module and m06 ord 2 is rewritten to the m06 l01 point that parsing, through the native depth unit it reads, governs every conversion after it.",
+   "changes": {
+    "prompt": {
+     "old": "How does the importer decide whether a curve needs unit conversion?",
+     "new": "Which stage of the import workflow produces no number of its own, yet governs every number that comes after it?"
+    },
+    "options": {
+     "0": {
+      "old": "By asking whether the curve's kind is one that carries a length",
+      "new": "Testing the step, since the measured step decides how every later depth is spaced"
+     },
+     "1": {
+      "old": "By analysing the unit for a length dimension in the numerator or denominator",
+      "new": "Recording provenance, since the stored source unit and factor fix every value the registry keeps"
+     },
+     "2": {
+      "old": "By comparing the curve unit against the depth unit in the well section",
+      "new": "Assigning kinds, since every app then finds its curves by kind"
+     },
+     "3": {
+      "old": "By an exact lookup of the unit string in a fixed conversion table",
+      "new": "Parsing, whose native depth unit selects the factor for every conversion"
+     }
+    },
+    "explanation": {
+     "old": "The unit string is trimmed, upper-cased and looked up in a fixed table, with no reasoning about what the unit means. Assuming general dimensional analysis is the error that makes an unconverted length unit look like a bug.",
+     "new": "Stage 1 parses the file and reads the native depth unit, and that unit selects the conversion factor for the depth column and for every curve denominated in feet. The step test, the kinds and the provenance record all work on what that choice produced."
+    }
+   },
+   "correct_change_reason": "the question is replaced by a new one testing a different point, so the correct option is new text at the same answer_index"
+  }
+ ]
+}
