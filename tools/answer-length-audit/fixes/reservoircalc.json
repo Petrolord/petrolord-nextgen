@@ -1,0 +1,1290 @@
+{
+ "migration": "20261021b_b4_fix_reservoircalc.sql",
+ "title": "reservoircalc: 30 exam/module duplicates rewritten, 2 true-premise distractors, 1 length margin, 1 wrong capstone tolerance",
+ "items": [
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 3,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m01-from-a-constant-to-a-grid 2 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test why P-1 needs no interpolation (m02 l03).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "It was always summing node by node and always receiving arrays.",
+      "new": "Because P-1 sits exactly on a grid node in both easting and northing."
+     },
+     "1": {
+      "old": "It converts any grid to an effective constant before summing.",
+      "new": "Because the panel evaluates the plane analytically everywhere."
+     },
+     "2": {
+      "old": "It reruns the chain once per distinct property value.",
+      "new": "Because P-1 lies at the centroid, where the plane is pinned."
+     },
+     "3": {
+      "old": "It applies porosity after the summation rather than inside it.",
+      "new": "Because P-1 is a control point, so its measured value is shown."
+     }
+    },
+    "prompt": {
+     "old": "Why did the volume engine need no modification to accept a porosity grid?",
+     "new": "Why does the panel report the trend porosity at P-1 without any interpolation?"
+    },
+    "explanation": {
+     "old": "The tiers below filled those arrays with the same value at every node, which is why the chain collapsed into four multiplications on the total.",
+     "new": "The frame starts at an easting of 400 m and a northing of 800 m with 100 m spacing, so 1600 m falls on a node in both directions and the reported value is the plane evaluated there. P-1 has no well; the nearest is 300 m away."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 4,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m01-from-a-constant-to-a-grid 3 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test the no-locality property of a plane (m02 l02).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Because the cell area can no longer be taken outside the sum.",
+      "new": "A wrong well value shifts only the nodes nearest to that one well."
+     },
+     "1": {
+      "old": "Because a sum of products is not the product of the sums.",
+      "new": "A bad value taints the whole map, yet the map stays stable."
+     },
+     "2": {
+      "old": "Because the accumulation order changes when a grid is supplied.",
+      "new": "The plane passes exactly through each well that lies inside the hull."
+     },
+     "3": {
+      "old": "Because the porosity and the oil column become correlated.",
+      "new": "Wells far from a node are ignored once the search radius is exceeded."
+     }
+    },
+    "prompt": {
+     "old": "Why does the chain stop factorising when porosity varies?",
+     "new": "In a least squares plane every well influences every node. What follows from that?"
+    },
+    "explanation": {
+     "old": "Pulling a constant out of a sum leaves it unchanged; pulling a varying quantity out changes the arithmetic. That is why three different means exist at this tier.",
+     "new": "Change one well's porosity and all three coefficients move, so every node in the frame changes, including nodes on the far side of the field. The same lack of locality means no node can be dragged around by a single nearby measurement."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 5,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m01-from-a-constant-to-a-grid 4 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test the west against east well averages (m01 l03 exercise).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "0.20 at all six, which is the constant handed out below.",
+      "new": "Because the eastern average includes two dry wells that carry no porosity value."
+     },
+     "1": {
+      "old": "0.22, 0.19, 0.23, 0.17, 0.21, 0.22, averaging 0.210822.",
+      "new": "Because three values cannot show a spatial pattern."
+     },
+     "2": {
+      "old": "0.22, 0.19, 0.23, 0.17, 0.21, 0.22, averaging 0.206667.",
+      "new": "Because Ekene-6 sits in the east block yet reads like a western well."
+     },
+     "3": {
+      "old": "0.17 to 0.23 in even steps, averaging 0.20 exactly.",
+      "new": "Because the block averages are weighted by area rather than one third per well."
+     }
+    },
+    "prompt": {
+     "old": "What are the six Ekene well porosities and their arithmetic mean?",
+     "new": "The three wells west of the fault average 0.22 and the three east of it 0.193333. Why be careful with that comparison?"
+    },
+    "explanation": {
+     "old": "Their range of 0.06 is 29 percent of the mean. The figure 0.210822 is the volume weighted mean, which is a property of the model rather than of the data.",
+     "new": "Ekene-6 at 0.22 is 100 m from the fault and behaves like its western neighbours, so the eastern average carries a well that does not belong with the other two. The west is still better rock by 0.026667, which supports the eastward decline, and all six wells supply porosity, including the two that are dry."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 12,
+   "category": "duplicate",
+   "flag": "EXACT duplicate of advanced module m02-the-trend-plane 8 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test when a plane fit first has residuals (m02 l02 exercise).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Because positive and negative measurement errors cancel.",
+      "new": "Three, since any three wells leave one residual per well."
+     },
+     "1": {
+      "old": "Because the model has an intercept.",
+      "new": "Four, since three points fit a plane exactly."
+     },
+     "2": {
+      "old": "Because the residuals are normalised after fitting.",
+      "new": "Six, since the normal equations need twice the unknowns."
+     },
+     "3": {
+      "old": "Because the method minimises their sum rather than their squares.",
+      "new": "Two, since a plane is fitted separately in each direction."
+     }
+    },
+    "prompt": {
+     "old": "Why do the residuals of a least squares plane sum to zero?",
+     "new": "How many wells does a trend fit need before it has any residuals at all?"
+    },
+    "explanation": {
+     "old": "The plane passes through the centroid of the data, so it is unbiased over the wells as a set and can still be wrong at every individual well.",
+     "new": "Three non collinear points determine a plane exactly and leave nothing over, so with three or fewer the residuals are zero by construction and measure only that the arithmetic worked. Six wells leave three degrees of freedom to measure the misfit."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "category": "duplicate",
+   "flag": "EXACT duplicate of advanced module m03-three-means 2 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test the mean of the dry live nodes (m03 l03).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "0.20, 0.206667 and 0.210822.",
+      "new": "0.206686, the same as the whole live area."
+     },
+     "1": {
+      "old": "0.206667, 0.209368 and 0.210822.",
+      "new": "0.192526, about 8.7 percent poorer than the oil bearing ground."
+     },
+     "2": {
+      "old": "0.206667, 0.210822 and 0.219745.",
+      "new": "0.206667, the same as the arithmetic well mean."
+     },
+     "3": {
+      "old": "0.209368, 0.210822 and 0.219745.",
+      "new": "0.17, the value measured at Ekene-4."
+     }
+    },
+    "prompt": {
+     "old": "What are the three means at Ekene under the trend model?",
+     "new": "Under the trend, what do the 32 live nodes that hold no oil average?"
+    },
+    "explanation": {
+     "old": "They are the arithmetic mean of the wells, the plain mean over the 169 oil cells, and the mean weighted by the rock each cell carries.",
+     "new": "The plane averages 0.206686 over all 201 live nodes; taking out the 169 oil bearing nodes leaves 32 dry live nodes averaging 0.192526. That ground lies to the east, where the plane predicts the poorest rock."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m03-three-means 5 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test the live node mean trap (m02 l05).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "That the thicker cells carry better rock than the thin ones.",
+      "new": "Because the live nodes include ground well beyond the 800 m extrapolation limit."
+     },
+     "1": {
+      "old": "That the model disagrees with the measurements at the wells.",
+      "new": "Because the live area mean leaves out both dry wells."
+     },
+     "2": {
+      "old": "That the oil bearing cells are not a representative sample.",
+      "new": "Because the booking averages the plane over the oil, weighted by rock."
+     },
+     "3": {
+      "old": "That the plane extrapolates beyond the measured range.",
+      "new": "Because the plane overshoots to 0.232281, above every value the wells measured."
+     }
+    },
+    "prompt": {
+     "old": "What does the step from the well mean to the node mean measure?",
+     "new": "The plane averages 0.206686 over the 201 live nodes, almost the well mean. Why is that no sign that the model changes nothing?"
+    },
+    "explanation": {
+     "old": "The oil sits on the structural high, which is where the plane predicts the better rock, so the low end of the distribution is absent from the population being averaged.",
+     "new": "The plane passes through the centroid of the wells and the live area is roughly centred on them, so its live mean lands near the pivot. The booking averages it over the 169 oil cells weighted by column, which gives 0.210822."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 19,
+   "category": "duplicate",
+   "flag": "EXACT duplicate of advanced module m03-three-means 9 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test recovering the effective porosity from a report (m03 l04 exercise).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The pore volume divided by the net volume.",
+      "new": "The booking used 0.23, so the quoted 0.21 is a different average."
+     },
+     "1": {
+      "old": "The pore volume divided by the gross rock volume.",
+      "new": "The report is consistent, since net times 0.21 rounds to the pore volume."
+     },
+     "2": {
+      "old": "The node mean weighted by cell area.",
+      "new": "The report double counts the water saturation."
+     },
+     "3": {
+      "old": "The well mean weighted by each well's oil column.",
+      "new": "The pore volume must be wrong, since it should equal net volume times 0.21."
+     }
+    },
+    "prompt": {
+     "old": "What is the volume weighted mean equal to?",
+     "new": "A report books a net volume of 40 and a pore volume of 9.2 million cubic metres, and quotes an average porosity of 0.21. What follows?"
+    },
+    "explanation": {
+     "old": "At Ekene that gives 0.210822, and the hand route of summed column times porosity over summed column agrees to the seventeenth digit.",
+     "new": "Pore over net gives 9.2 / 40 = 0.23, the volume weighted porosity the booking used. The quoted 0.21 is most likely a plain average of the wells or the grid, and the volumes are the numbers to trust since they are what the chain computed."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m03-three-means 8 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test which means depend on the contact (m03 l01 exercise).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "About 0.404 MMstb, overstated.",
+      "new": "All three, since the porosity model itself has not changed."
+     },
+     "1": {
+      "old": "About 0.657 MMstb, understated.",
+      "new": "The well mean and the node mean over the oil cells."
+     },
+     "2": {
+      "old": "About 0.088 MMstb, understated.",
+      "new": "Only the arithmetic mean of the six wells."
+     },
+     "3": {
+      "old": "Nothing, since the two agree to four decimals.",
+      "new": "None of the three."
+     }
+    },
+    "prompt": {
+     "old": "What does quoting the node mean where the volume weighted mean belongs cost at Ekene?",
+     "new": "The contact moves from 1560 m to 1550 m. Which of the three means stays put?"
+    },
+    "explanation": {
+     "old": "The error is small enough to survive any sanity check and large enough to matter across a portfolio. The defence is structural: sum the products and divide afterwards.",
+     "new": "The well mean depends only on the six measured values. The node mean changes because the set of oil bearing cells changes, and the volume weighted mean changes for that reason and because every surviving cell's column, and so its weight, changes."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "category": "duplicate",
+   "flag": "EXACT duplicate of advanced module m04-what-the-model-buys 4 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test applying the ratio audit to a report (m04 l02 exercise).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "1.054111.",
+      "new": "No, the two ratios disagree."
+     },
+     "1": {
+      "old": "1.033333, the ratio of the well mean to 0.20.",
+      "new": "Yes, since both runs share the same net volume of 30.0."
+     },
+     "2": {
+      "old": "1.098726, which the kriged model gives.",
+      "new": "Yes, since 21.6 over 20.0 matches 6.5 over 6.0 closely."
+     },
+     "3": {
+      "old": "1.210822, the effective porosity itself.",
+      "new": "No, since the net volumes should differ between the two models."
+     }
+    },
+    "prompt": {
+     "old": "What is the ratio of the trend booking to the constant 0.20 booking?",
+     "new": "Two porosity models book 20.0 and 21.6 MMstb, each on a net volume of 30.0, with pore volumes of 6.0 and 6.5. Are the figures consistent?"
+    },
+    "explanation": {
+     "old": "The whole property model, over all 169 cells, delivers exactly one number to the booking, and it is recoverable from two volumes and a division.",
+     "new": "The effective porosities are 0.20 and 0.216667, a ratio of 1.083333, while the STOIIP ratio is 1.08. A gap of 0.3 percent is far beyond storage noise, so something besides the porosity model changed, or a figure was rounded or transcribed wrongly."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 25,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m04-what-the-model-buys 8 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test the decomposition applied to another field (m04 l03 exercise).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "0.163936 from selection and 0.492932 from weighting.",
+      "new": "The plus 2.59 from the trend, since it is the larger step."
+     },
+     "1": {
+      "old": "0.252229 from a better constant and 0.404640 from spatial variation.",
+      "new": "The whole plus 1.2, since both steps use the same wells."
+     },
+     "2": {
+      "old": "0.404640 from a better constant and 0.252229 from spatial variation.",
+      "new": "The minus 1.39 from the well average, which follows from the measurements."
+     },
+     "3": {
+      "old": "It does not decompose, since the model acts on every cell at once.",
+      "new": "Neither, since steps of opposite sign cannot be separated from each other at all."
+     }
+    },
+    "prompt": {
+     "old": "How does the 0.656868 MMstb uplift decompose?",
+     "new": "A field books 50 MMstb at a handed out porosity of 0.18. Its wells average 0.175 and a trend model books 51.2 MMstb. Which part of the change is robust?"
+    },
+    "explanation": {
+     "old": "Nearly two thirds of what the property model appears to be worth is the correction of a constant that sat below the well average.",
+     "new": "Booking at the well average gives 50 times 0.175 / 0.18 = 48.61 MMstb, a step of minus 1.39, and the trend then adds 2.59. The first step follows from the measurements; the second depends entirely on the trend and is larger than the total change, so it needs the method and residuals attached."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 26,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m04-what-the-model-buys 10 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test per point weights in the constant method (m03 l02).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "0.163936 better constant, 0.404640 selection, 0.088293 weighting.",
+      "new": "By switching to the trend method, which weights the wells by distance."
+     },
+     "1": {
+      "old": "0.404640 better constant, 0.088293 selection, 0.163936 weighting.",
+      "new": "By averaging the modelled grid over the 169 oil bearing cells."
+     },
+     "2": {
+      "old": "0.252229 better constant, 0.240703 selection, 0.163936 weighting.",
+      "new": "It cannot, since the constant method gives every well one sixth."
+     },
+     "3": {
+      "old": "0.404640 better constant, 0.163936 selection, 0.088293 weighting.",
+      "new": "By supplying per point weights, such as Voronoi areas."
+     }
+    },
+    "prompt": {
+     "old": "Split into three, what are the parts of the Ekene uplift?",
+     "new": "How could the constant method book a weighted mean of the wells rather than the arithmetic one?"
+    },
+    "explanation": {
+     "old": "Only the last two are spatial, and the weighting part, which this tier works hardest to explain, is the smallest of the three.",
+     "new": "The engine's constant method accepts per point weights, and area weighting by a Voronoi partition of the wells is the usual choice. Nobody supplied weights at Ekene, so all six count equally and the constant is 0.206667."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 27,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m04-what-the-model-buys 9 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test using the decomposition to allocate effort (m04 l03).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The two parts carry different confidence and need different work.",
+      "new": "The seventh well, which moves the solid part and tests the trend as well."
+     },
+     "1": {
+      "old": "The total cannot be reproduced without the intermediate bookings.",
+      "new": "Refining the model, since the spatial part is the larger."
+     },
+     "2": {
+      "old": "Only the spatial part depends on the choice of method.",
+      "new": "Refining the model, since only software can shrink the residuals."
+     },
+     "3": {
+      "old": "Only the better constant part can have the wrong sign.",
+      "new": "Neither, since a week cannot change a booking of this size."
+     }
+    },
+    "prompt": {
+     "old": "Why does the decomposition matter more than the total?",
+     "new": "A study has a week left: measure porosity in a seventh well, or refine the property model. Which does the decomposition favour?"
+    },
+    "explanation": {
+     "old": "The first part rests on six measurements and one division. The second rests on a plane that misses four of six wells by more than 8 percent.",
+     "new": "The spatial part is worth 0.252229 MMstb in total, the whole effect rather than its uncertainty. A seventh well moves the 0.404640 part by roughly its deviation divided by seven, and with the largest residuals near 0.019 it would also support or contradict the plane."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m04-what-the-model-buys 13 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test the perpendicular trend case (m04 l04).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "When the contact is shallow enough that few cells hold oil.",
+      "new": "It would double, since the two trends would then reinforce each other."
+     },
+     "1": {
+      "old": "When the model extrapolates below the measured range.",
+      "new": "It would reverse sign, since the best rock would then sit downdip."
+     },
+     "2": {
+      "old": "When the wells over sample the poorest rock.",
+      "new": "It would stay at 0.088293, since the weights come from column alone."
+     },
+     "3": {
+      "old": "When the best rock lies downdip, so the covariance is negative.",
+      "new": "It would vanish, since the covariance of column and porosity would be near zero."
+     }
+    },
+    "prompt": {
+     "old": "When does a property model remove barrels relative to a constant?",
+     "new": "If the porosity trend ran perpendicular to the structural trend, what would happen to the weighting effect?"
+    },
+    "explanation": {
+     "old": "A reader who has learned that property models increase volumes has generalised from a common case. What they do is replace an unweighted assumption with a weighted one.",
+     "new": "The weighting step is the covariance of column and porosity divided by the mean column. Two trends at right angles are uncorrelated whatever the strength of either, so the gap between the node mean and the volume weighted mean disappears."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "category": "duplicate",
+   "flag": "EXACT duplicate of advanced module m04-what-the-model-buys 14 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test the uncertainty on the well mean against the uplift (m04 l05).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Roughly a fifteenth the size: 0.66 against 8 to 10 MMstb per 10 m.",
+      "new": "About 0.36 MMstb, or 3 percent, whether or not you model spatially."
+     },
+     "1": {
+      "old": "Roughly the same size, so both deserve equal attention.",
+      "new": "About 3.64 MMstb, the full range from 0.17 to 0.23."
+     },
+     "2": {
+      "old": "Larger, since the contact was measured and the porosity was not.",
+      "new": "None once a trend is fitted, since the plane averages it out."
+     },
+     "3": {
+      "old": "They cannot be compared, since one changes the geometry.",
+      "new": "About 0.088 MMstb, the size of the weighting step."
+     }
+    },
+    "prompt": {
+     "old": "How does the Ekene property model compare with the contact sensitivity?",
+     "new": "Each of the six well porosities is uncertain by one to two porosity units. What uncertainty does that put on the Ekene booking?"
+    },
+    "explanation": {
+     "old": "The contact dominates by an order of magnitude, and pinning it is worth more than any property work the study could do.",
+     "new": "Six values uncertain by one to two units give an uncertainty on the mean of around 0.6 porosity units, which is 3 percent of the booking. That is comparable to the 0.66 MMstb uplift, and it exists whatever population method is used."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 32,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m04-what-the-model-buys 15 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test the spatial part in the league table (m04 l05).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Using one at all, at 0.656868 MMstb.",
+      "new": "Roughly equal to the tie break convention and half the cross fault control effect."
+     },
+     "1": {
+      "old": "The choice of method, at 0.793817 MMstb across the three.",
+      "new": "About a quarter of the tie break and an eighth of the cross fault control."
+     },
+     "2": {
+      "old": "They are identical, since the constant is one of the three.",
+      "new": "Too different in kind to be compared."
+     },
+     "3": {
+      "old": "Neither, since both fall below the fault position uncertainty.",
+      "new": "Larger than both, since it acts on every one of the 169 oil bearing cells in the field."
+     }
+    },
+    "prompt": {
+     "old": "Which is worth more at Ekene: choosing the population method, or using one at all?",
+     "new": "How large is the spatial part of the property model beside the conventions priced in the tier below?"
+    },
+    "explanation": {
+     "old": "Constant books 12.543848, trend 12.796077 and krige 13.337665. A report that omits which method was used has left out the larger of the two decisions.",
+     "new": "The spatial part is 0.252229 MMstb, against 0.901423 for the boundary cell convention and 1.989889 for the map's ignorance of the fault. The genuinely spatial modelling is among the smallest effects priced in the course."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m05-the-limits-of-a-property-model 2 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test why the tier stopped at porosity (m05 l01).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The formation volume factor, which varies with pressure.",
+      "new": "Saturation is a fluid property, so it stays uniform within a single accumulation."
+     },
+     "1": {
+      "old": "Net to gross, which falls away from the depocentre.",
+      "new": "Saturation cannot vary between cells of a single grid."
+     },
+     "2": {
+      "old": "Water saturation, which falls with height above the contact.",
+      "new": "Porosity is measured at each well, while saturation needs capillary data."
+     },
+     "3": {
+      "old": "None, since all three are already averages over the reservoir.",
+      "new": "Porosity has the larger effect on the booking."
+     }
+    },
+    "prompt": {
+     "old": "Which constant left standing has the strongest reason to vary?",
+     "new": "Why did this tier model porosity first, although water saturation probably matters more?"
+    },
+    "explanation": {
+     "old": "A single 0.35 is a thickness weighted average of a curve applied uniformly to cells whose columns run from a sliver to 20.28 m.",
+     "new": "A saturation height model needs capillary pressure measurements on core, a free water level and a rock typing scheme, which is a different body of work. The machinery for a varying property is the same whichever property varies."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m05-the-limits-of-a-property-model 4 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test the weight for a saturation average (m05 l01 exercise).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The net to gross alone, since it is applied first.",
+      "new": "The oil column alone, since saturation depends on height."
+     },
+     "1": {
+      "old": "The oil column alone, since net to gross cancels.",
+      "new": "The net rock of each cell, since saturation follows porosity."
+     },
+     "2": {
+      "old": "The pore volume of each cell.",
+      "new": "The hydrocarbon pore volume, since that is what saturation sets."
+     },
+     "3": {
+      "old": "The product of the oil column and the net to gross at each node.",
+      "new": "The pore volume of each cell, column times net to gross times porosity."
+     }
+    },
+    "prompt": {
+     "old": "If net to gross also varied, what weight would the effective porosity take?",
+     "new": "What weight belongs in a volume weighted average of water saturation when every property may vary?"
+    },
+    "explanation": {
+     "old": "The weight is whatever the property multiplies. Area and net to gross cancelled at Ekene only because they are uniform there.",
+     "new": "The weight is whatever the saturation term multiplies, which is each cell's pore volume. Weighting by column alone is correct only when net to gross and porosity are both uniform."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "category": "duplicate",
+   "flag": "EXACT duplicate of advanced module m05-the-limits-of-a-property-model 8 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test cross validating a kriged model (m05 l03 exercise).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "That at a data location it returns the measured value.",
+      "new": "Withhold one well, krige from the rest, and compare at that well."
+     },
+     "1": {
+      "old": "That the modelled values stay inside the range of the data.",
+      "new": "Compare the kriged residuals against the uncertainty of each well value."
+     },
+     "2": {
+      "old": "That every well influences every node in the frame.",
+      "new": "Check that the residuals sum to zero."
+     },
+     "3": {
+      "old": "That the residuals sum to zero across the control set.",
+      "new": "Refit the variogram to the six wells alone."
+     }
+    },
+    "prompt": {
+     "old": "What does kriging promise that a trend does not?",
+     "new": "Kriging's residuals are zero at every well. How can a kriged model still be tested?"
+    },
+    "explanation": {
+     "old": "The trade is that its residuals become zero by construction, so the model can no longer be tested against the data at all.",
+     "new": "The residuals only show the exactness property working. Leave one out cross validation rekriges without each well in turn and compares the prediction with the withheld measurement, the procedure the mapping tier used on the structural grid."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m05-the-limits-of-a-property-model 9 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test what bounds trend extrapolation (m02 l05).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "All six, which the exactness property guarantees.",
+      "new": "The fallback ladder, which switches to a constant far from control."
+     },
+     "1": {
+      "old": "Five. Ekene-2 reads 0.191177 against 0.19.",
+      "new": "The 800 m mask on the structural grid."
+     },
+     "2": {
+      "old": "Four, since the two dry wells are excluded.",
+      "new": "A cap that holds modelled values inside the measured range."
+     },
+     "3": {
+      "old": "None, since the grid is sampled bilinearly everywhere.",
+      "new": "The least squares fit, which pins the plane at the data centroid."
+     }
+    },
+    "prompt": {
+     "old": "At how many Ekene wells does the kriged grid return the measured value exactly?",
+     "new": "A trend has no mechanism to flatten off. What keeps its far field values out of the Ekene booking?"
+    },
+    "explanation": {
+     "old": "The failure at Ekene-2 has nothing to do with the kriging and everything to do with where that well sits relative to the grid.",
+     "new": "Nodes more than 800 m from a well are dead, so the plane is never evaluated far outside the data in a way that reaches the booking. Ten kilometres west the same gradient would predict 0.43, and nothing in the plane itself would stop it."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m05-the-limits-of-a-property-model 12 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test when a constant formation volume factor stops being safe (m05 l01).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Ekene-2 was included in the trend fit but not in the kriging.",
+      "new": "Wherever the oil column rises more than 20 m above the contact."
+     },
+     "1": {
+      "old": "The trend is evaluated analytically rather than read from the grid.",
+      "new": "When porosity is modelled as a grid, since the chain is then nonlinear."
+     },
+     "2": {
+      "old": "Bilinear interpolation of a linear function is exact.",
+      "new": "Across compartments that never communicated."
+     },
+     "3": {
+      "old": "The trend uses a finer internal grid than kriging does.",
+      "new": "Toward the crest, where the water saturation is lowest."
+     }
+    },
+    "prompt": {
+     "old": "Why does the off node sampling at Ekene-2 cost the trend nothing?",
+     "new": "When does the argument for a constant formation volume factor weaken?"
+    },
+    "explanation": {
+     "old": "A plane has no curvature to lose, so the average of two nodes either side of the well is the plane's value at the well. A kriged surface bends toward the data and loses its peak.",
+     "new": "The formation volume factor is set by the composition, pressure and temperature of the oil, and within one accumulation in pressure communication it is close to uniform. Compartments with independent histories need not share it."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m05-the-limits-of-a-property-model 13 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test reading the property panel colour scale (m01 l04).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "It was excluded from the structural grid entirely.",
+      "new": "The shading shows each cell's oil column rather than porosity."
+     },
+     "1": {
+      "old": "It was the only well outside the convex hull of the control.",
+      "new": "The trend and krige maps are drawn on different grid sizes."
+     },
+     "2": {
+      "old": "Its pick was the only one the spline failed to honour.",
+      "new": "The kriged map also colours the 32 live nodes without oil."
+     },
+     "3": {
+      "old": "Three of the four nodes around it were dead.",
+      "new": "The colour scale rescales to each model's range."
+     }
+    },
+    "prompt": {
+     "old": "How did the mapping tier meet Ekene-2?",
+     "new": "Why should map shades not be compared between population methods on the property panel?"
+    },
+    "explanation": {
+     "old": "There a value could not be reported at all. Here the property grid is populated at every node, so a value always comes back and the failure is quieter.",
+     "new": "Every coloured cell is an oil bearing cell shaded from the lowest to the highest modelled porosity in the current model, so the same shade means different values under different methods. Compare the numbers instead."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m05-the-limits-of-a-property-model 14 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test what a property map cannot resolve (m05 l05).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "500 across the frame, of which 169 reach the booking.",
+      "new": "Nothing, since the plane misses four of its wells by more than that."
+     },
+     "1": {
+      "old": "169, one per oil bearing cell.",
+      "new": "Drill the western one, since the plane predicts it better."
+     },
+     "2": {
+      "old": "201, one per live node.",
+      "new": "That the gradient is confirmed at that scale."
+     },
+     "3": {
+      "old": "6, extended by the constant method.",
+      "new": "That the difference is worth 5 percent of the booking."
+     }
+    },
+    "prompt": {
+     "old": "How many modelled porosity values does Ekene produce from six measurements?",
+     "new": "Two candidate locations 500 m apart differ by 0.010 on the Ekene trend map. What should a planner conclude?"
+    },
+    "explanation": {
+     "old": "About 28 modelled values per measurement among the booked cells, and the model overrides four of the six measurements it was fitted to.",
+     "new": "At 0.020437 per kilometre the plane gives 0.010 over 500 m, a difference that comes entirely from a fit to six wells, four of which it misses by more than 8 percent. The map cannot distinguish locations closer than the well spacing, though it will appear to."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "duplicate",
+   "flag": "EXACT duplicate of advanced module m05-the-limits-of-a-property-model 15 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test applying the resolution test (m05 l05 exercise).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Compare the modelled range against the measured range.",
+      "new": "About 2 km, since the test runs at the well spacing."
+     },
+     "1": {
+      "old": "Compare the gradient times the well spacing against the residual.",
+      "new": "About 200 m, giving a signal to noise of ten at the well spacing."
+     },
+     "2": {
+      "old": "Compare the cell size against the mean well spacing.",
+      "new": "About 5 km, the residual divided by the gradient."
+     },
+     "3": {
+      "old": "Compare the effective porosity against the arithmetic well mean.",
+      "new": "Nowhere, since the residual is larger than the gradient."
+     }
+    },
+    "prompt": {
+     "old": "What is the resolution test for a property map?",
+     "new": "A property map has a gradient of 0.05 per kilometre, wells 2 km apart and a largest residual of 0.01. Beyond what distance do its predictions exceed its misfit?"
+    },
+    "explanation": {
+     "old": "At Ekene the plane predicts about 0.020 over a kilometre and its largest residual is 0.019309, so its signal to noise ratio at the well spacing scale is about one.",
+     "new": "The map predicts a change of 0.01 over 0.01 / 0.05 = 0.2 km, so beyond about 200 m its differences exceed the largest residual. Over the 2 km spacing it predicts 0.10 against 0.01, which is genuine resolution, unlike Ekene's ratio of about one."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m06-the-property-workflow 8 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote the final copy to test the failure at the collection step (m06 l01).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The ratio check across the three lower chain rows.",
+      "new": "The values are averaged before the population method is chosen."
+     },
+     "1": {
+      "old": "The geometry check against the constant booking.",
+      "new": "Dry wells are dropped because they carry no oil."
+     },
+     "2": {
+      "old": "The decomposition, costing two extra bookings and one subtraction.",
+      "new": "Core and log porosities are pooled without comment and weighted equally."
+     },
+     "3": {
+      "old": "The residual inspection at the control points.",
+      "new": "Values are fitted before their range is examined."
+     }
+    },
+    "prompt": {
+     "old": "Which check tells you how much a result depends on the property model at all?",
+     "new": "How does the first step of the property workflow, collecting the values, usually fail?"
+    },
+    "explanation": {
+     "old": "At Ekene it says 62 percent of the uplift would survive the property model being wholly discredited. The other checks verify the arithmetic rather than its importance.",
+     "new": "Each value is already an average with its own uncertainty, and a porosity from a density log with an assumed matrix density is a different animal from one from core. Recording provenance is what lets them be weighted or separated deliberately."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m02-labelling-the-grid 14 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote this copy to test where the fault sweep stops (m02 l05).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "That the barrels split evenly somewhere between those two positions.",
+      "new": "Because the mask ends at 2300 m, so the frame holds no nodes beyond it."
+     },
+     "1": {
+      "old": "That the sweep is linear in cell count across the full range.",
+      "new": "Because the fault then lies outside the frame."
+     },
+     "2": {
+      "old": "That both positions book the same volume in the west block.",
+      "new": "Because both blocks then share a single contact."
+     },
+     "3": {
+      "old": "That the accumulation is nearly symmetric in area about 1550 m.",
+      "new": "Because no oil bearing cell lies east of 2200 m at that contact."
+     }
+    },
+    "prompt": {
+     "old": "At a fault of 1500 m the split is 78 and 91 cells; at 1600 m it is 91 and 78. What does that show?",
+     "new": "Why does a fault placed at 2300 m or further east partition nothing at the 1560 m contact?"
+    },
+    "explanation": {
+     "old": "The mirror is in area only. The barrels split evenly nearer 1450 m, because the western cells carry taller columns.",
+     "new": "The sweep table has the east block at 4 cells for a fault at 2200 m and none at 2300 m, so a fault out there leaves the west block as the whole field, 169 cells and 12.139208 MMstb. A fault only matters where there is something to divide."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m03-the-block-volumes 3 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote this copy to test where accumulation order starts to matter (m03 l02).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Cell count, gross rock volume and net volume.",
+      "new": "At the pore volume step."
+     },
+     "1": {
+      "old": "Every row, since a partition is exact arithmetic on the same set of cells.",
+      "new": "At the gross rock volume step, where column multiplies cell area."
+     },
+     "2": {
+      "old": "Cell count only, since integer addition alone is exact.",
+      "new": "At the net volume step, since net to gross is a fraction."
+     },
+     "3": {
+      "old": "Cell count, gross rock volume, net volume and pore volume.",
+      "new": "Only at the final barrel conversion into STOIIP."
+     }
+    },
+    "prompt": {
+     "old": "Which rows of a partitioned chain add to the field total bit for bit?",
+     "new": "At which step of the partitioned chain does the order of summation first change the last bits?"
+    },
+    "explanation": {
+     "old": "Pore volume, hydrocarbon pore volume and STOIIP differ in the last bits, because the chain stops being exactly representable once it multiplies by a float32 porosity.",
+     "new": "Thicknesses from a float32 grid times 10,000 and 0.8 keep the running sums exactly representable, so gross and net volume agree bit for bit. At the pore step the chain multiplies by 0.20 stored as a float32, rounding begins, and the grouping starts to matter."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m04-the-fault-the-map-does-not-know 12 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote this copy to test what the east block rests on if Ekene-6 changes sides (m04 l05 exercise).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Nothing, since a dry well cannot inform a volumetric estimate.",
+      "new": "Ekene-2 alone, which would then become the eastern discovery."
+     },
+     "1": {
+      "old": "They define the eastern flank of the structure and so constrain the surfaces.",
+      "new": "No oil bearing well at all, since both remaining eastern wells are dry."
+     },
+     "2": {
+      "old": "They fix the eastern contact, since water was found at their tops.",
+      "new": "The same evidence as before, since the map itself is unchanged."
+     },
+     "3": {
+      "old": "They confirm that the eastern compartment holds no economic oil.",
+      "new": "The western wells, whose contact now applies to the east."
+     }
+    },
+    "prompt": {
+     "old": "What do the two dry Ekene wells contribute?",
+     "new": "If the fault were remapped 200 m further east so that Ekene-6 fell in the west block, what would the east block's booking rest on?"
+    },
+    "explanation": {
+     "old": "Without them the map would not know how fast the surface falls away eastward. What they cannot do is confirm that the eastern compartment holds oil, which only Ekene-6 does.",
+     "new": "Ekene-2 and Ekene-4 are both dry at the contact, so the eastern oil would be an entirely mapped quantity with no direct confirmation, while the west gained both the well and the volume. Moving a line 200 m changes confidence far more than barrels."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m05-two-blocks-two-contacts 3 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote this copy to test a free water level from pressure gradients (m05 l01).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "It falls by about 10 percent, in proportion to the change.",
+      "new": "Average the pressures measured in the compartment's wells and convert to a depth."
+     },
+     "1": {
+      "old": "It falls from 52 to 18 cells and loses 86 percent of its oil.",
+      "new": "Extrapolate the oil and water leg gradients to where they intersect."
+     },
+     "2": {
+      "old": "It is unchanged, since both its wells were already dry.",
+      "new": "Borrow the contact from the neighbouring compartment."
+     },
+     "3": {
+      "old": "It falls from 52 to 39 cells, matching a one column fault move.",
+      "new": "Take the top of the shallowest dry well as the contact."
+     }
+    },
+    "prompt": {
+     "old": "Take the east contact from 1560 m to 1550 m. What happens to the east block?",
+     "new": "How can pressure data give a compartment its own contact without a well that crosses it?"
+    },
+    "explanation": {
+     "old": "Raising a contact removes area and column together and the two compound. A block whose mean column is 8.06 m cannot survive a 10 m rise with much left.",
+     "new": "Gradients measured in the oil and water legs, extended to their intersection, give a free water level for that compartment. Two compartments with genuinely different contacts usually show different pressure regimes too, a second and independent signature."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m05-two-blocks-two-contacts 7 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; rewrote this copy to test seal capacity bounding a contact difference (m04 l04).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Because the mask limits how far the mapped area can extend eastward.",
+      "new": "The fault position uncertainty, which sets the shift between blocks."
+     },
+     "1": {
+      "old": "Because the properties scale the two directions differently.",
+      "new": "The dip of the fault, which fixes the offset between top and base."
+     },
+     "2": {
+      "old": "Because deepening floods new area on a broad gentle flank while raising only removes column.",
+      "new": "The seal capacity, since the fault rock supports only a limited column before it leaks."
+     },
+     "3": {
+      "old": "Because the western contact was held fixed throughout.",
+      "new": "Nothing, since sealed compartments have independent histories."
+     }
+    },
+    "prompt": {
+     "old": "Why is the east block's contact response asymmetric about 1560 m?",
+     "new": "What limits how far the contacts can differ across a real, partially sealing fault?"
+    },
+    "explanation": {
+     "old": "Going up 10 m costs 1.955732 MMstb and going down 10 m gains 3.527386 MMstb. On a flank the downside is bounded by the oil running out and the upside only by the spill point.",
+     "new": "Fault seal is a capacity rather than a switch: above a certain height the buoyancy pressure exceeds what the fault rock can hold. The contact difference is therefore bounded, while this tier treats the two contacts as free to differ, which is the simple case."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-labelling-the-grid",
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m04-the-fault-the-map-does-not-know 6 (same concept, same key)",
+   "verdict": "fixed",
+   "reason": "Kept the home module question; rewrote this copy to test why the fault lands on a node and what a shifted origin does (m02 l02 exercise); the cell counts against depths rule stays in m04, its home lesson.",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "The contact, which has removed column from every cell.",
+      "new": "It would send the column at 1800 m east, exactly as it does now."
+     },
+     "1": {
+      "old": "The fault position, which has relabelled cells between blocks.",
+      "new": "It would send the 1750 m column east, since it is nearest the fault."
+     },
+     "2": {
+      "old": "The mapped depths, while the control positions stayed put.",
+      "new": "Nothing, since the fault would fall between the columns at 1750 and 1850 m."
+     },
+     "3": {
+      "old": "The property set, which has been revised downward.",
+      "new": "It would split each boundary cell in half between the two blocks, since both halves are real."
+     }
+    },
+    "prompt": {
+     "old": "A partitioned model is edited and the block cell counts hold while both block volumes fall. What changed?",
+     "new": "If the frame started at an easting of 450 m with the same 100 m spacing, what would the tie break rule decide at the 1800 m fault?"
+    },
+    "explanation": {
+     "old": "Cell counts move when geometry moves and volumes move when depths move. A contact change would have moved the counts and a fault move cannot change the field total.",
+     "new": "With an origin of 450 m the node eastings are 450, 550, 650 and so on, so every node is strictly on one side of 1800 m. The 13 cells at 1750 m go west and the 13 at 1850 m go east without the tie break ever firing."
+    }
+   },
+   "correct_change_reason": "Full rewrite of a duplicated question into a new one; the key stays at the same index."
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-labelling-the-grid",
+   "ord": 12,
+   "category": "double-key",
+   "flag": "intermediate module m02 ord 12: \"the fault has no displacement\" only wrong if the course states the fault has throw",
+   "verdict": "fixed",
+   "reason": "The course states the model fault has no displacement (m04 l04), so the distractor's premise was true; rewrote it to misapply the depth/mask mechanism (the mask reads positions only).",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Because the fault has no displacement, so the surfaces and the mask are continuous across its trace.",
+      "new": "Because the mask is built from the mapped depths, and the smooth surfaces carry no step at the fault."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 8,
+   "category": "double-key",
+   "flag": "same true-premise distractor (\"the fault has no displacement\") as module m02 ord 12; found while fixing that flag",
+   "verdict": "fixed",
+   "reason": "Same fix as module m02 ord 12: the model fault really has no displacement, so the distractor now misapplies the depth/mask mechanism instead.",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Because the fault has no displacement, so the surfaces are continuous.",
+      "new": "Because the mask reads mapped depths, which run smoothly across it."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-the-limits-of-a-property-model",
+   "ord": 15,
+   "category": "other",
+   "flag": "advanced module m05 ord 15: correct option only 1 character longer than option 0 (length margin, not a content defect; review)",
+   "verdict": "fixed",
+   "reason": "Shortened distractor 0 so the correct option clears every distractor by at least 6 characters; content unchanged.",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Compare the effective porosity against the arithmetic well mean.",
+      "new": "Compare the effective porosity with the well mean."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "reservoircalc",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-property-workflow",
+   "ord": 12,
+   "category": "defect",
+   "flag": "NEW: explanation and option 3 state a 0.001 tolerance on the node mean; the capstone lesson (m06 l03) sets it at 0.0002, and the old explanation said the wrong value fails by half again the tolerance",
+   "verdict": "fixed",
+   "reason": "Corrected the tolerance to the lesson's 0.0002 in the explanation and option 3; shortened option 1, which tied the correct option at 87 characters.",
+   "changes": {
+    "options": {
+     "1": {
+      "old": "The volume weighted 0.210822; the node mean 0.209368 misses by more than the tolerance.",
+      "new": "The volume weighted 0.210822; the node mean 0.209368 falls outside the tolerance."
+     },
+     "3": {
+      "old": "Either, since both lie inside the 0.001 tolerance on that field.",
+      "new": "Either, since both lie inside the 0.0002 tolerance on that field."
+     }
+    },
+    "explanation": {
+     "old": "They differ by 0.001455 and the tolerance is 0.001, so the volume weighted value fails by half again the tolerance. Both are on the panel, so read the tile labels.",
+     "new": "They differ by 0.001455 and the tolerance on that field is 0.0002, so the volume weighted value fails by more than seven times the tolerance. Both are on the panel, so read the tile labels."
+    }
+   }
+  }
+ ]
+}
