@@ -1,0 +1,1370 @@
+{
+ "migration": "20261021b_b4_fix_sim.sql",
+ "title": "sim: 33 duplicate questions rewritten into new questions from the same lessons, and 2 capstone prompts reworded to fit their keys",
+ "items": [
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 4,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m01-what-a-deck-is ord 4 (why the six sections are in a fixed order)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test why SOLUTION must follow PROPS, from lesson m01 l02; the module question keeps the single-pass idea.",
+   "changes": {
+    "prompt": {
+     "old": "Why must the six deck sections appear in a fixed order?",
+     "new": "Why can the SOLUTION section not be placed before PROPS in a deck?"
+    },
+    "explanation": {
+     "old": "RUNSPEC declares dimensions so GRID can be checked, GRID establishes cells so PROPS has something to apply to, PROPS defines fluids so SOLUTION can equilibrate, and SOLUTION sets the state SCHEDULE starts from. Nothing goes back to reinterpret an earlier section.",
+     "new": "SOLUTION puts the fluids where gravity would have put them, and that integration needs the fluid densities and PVT that PROPS defines. A simulator reads a deck in a single pass and never goes back. The grid dimensions come from RUNSPEC, and the contacts and datum sit in SOLUTION's own EQUIL line."
+    },
+    "options": {
+     "0": {
+      "old": "Because the sections are stored as separate records and the file's index assumes them in that sequence.",
+      "new": "Because PROPS declares the grid dimensions that SOLUTION sizes its arrays by, and a simulator cannot allocate cells it has not yet been told about."
+     },
+     "1": {
+      "old": "Because a simulator reads a deck in a single pass, so each section depends on the ones before it having been read already.",
+      "new": "Because SOLUTION equilibrates the fluids under gravity, which needs the densities and PVT tables that PROPS defines."
+     },
+     "2": {
+      "old": "Because reordering them changes which defaults apply, since a default is taken from the most recently read section.",
+      "new": "Because PROPS carries the contacts and the datum, and SOLUTION needs both of them to assign each cell a fluid."
+     },
+     "3": {
+      "old": "Because the format was standardised before random access was practical, so the ordering is historical rather than functional.",
+      "new": "It can be; the order is only a convention, and a simulator reading SOLUTION first returns to PROPS later."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m02-the-grid ord 3 (what the half-cell origin offset buys)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test where the grid places Ekene-2, the well that misses the lattice, from lesson m02 l01.",
+   "changes": {
+    "prompt": {
+     "old": "The deck's origin is half a cell south-west of the field's map origin. What does that achieve?",
+     "new": "Ekene-2 is posted at (2200, 1150). Where does the block-centred grid place it?"
+    },
+    "explanation": {
+     "old": "A well on a boundary belongs to two cells and needs a tie-break, and tie-breaks differ between tools. Ekene-1 at (1000, 1000) sits at the centre of cell (11, 11) because of the offset, while Ekene-2 at a northing of 1150 m does not, which the Professional tier takes up.",
+     "new": "With the offset, cell (i, j) is centred at (i - 1) x 100 m east and (j - 1) x 100 m north, so a well on multiples of 100 m lands on a centre. 1150 is not a multiple of 100, so Ekene-2 falls in cell (23, 13) with its centre at 1200 m. The well index does not move a well within its cell, and the Professional tier measures what the offset costs."
+    },
+    "options": {
+     "0": {
+      "old": "It removes the need to transform coordinates between the map frame and the deck frame at all.",
+      "new": "Exactly on a cell centre, because the half-cell offset of the deck's origin puts every Ekene well on one."
+     },
+     "1": {
+      "old": "It centres the accumulation in the grid so the structure is symmetric about the model's middle.",
+      "new": "Across the boundary between two cells, with its connections shared equally between the cells either side."
+     },
+     "2": {
+      "old": "A well at map coordinates that are multiples of 100 m lands on a cell centre rather than on a boundary.",
+      "new": "In cell (23, 13), whose centre is at a northing of 1200 m, so the well sits half a cell from where the grid places it."
+     },
+     "3": {
+      "old": "It aligns the model with the seismic bin grid, which is conventionally offset by half a bin from the map grid.",
+      "new": "In cell (23, 13), with its well index adjusted for the well's true position so that the grid carries it exactly where it was posted."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m02-the-grid ord 7 (how the deck carries net-to-gross)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test where the one-tenth kv/kh ratio comes from, from lesson m02 l03.",
+   "changes": {
+    "prompt": {
+     "old": "The Ekene deck has no NTG keyword. How is net-to-gross carried?",
+     "new": "In every Ekene layer the vertical permeability is one tenth of the horizontal. Where does that ratio come from?"
+    },
+    "explanation": {
+     "old": "The alternative is a gross thickness of about 43 ft with an NTG applied separately, and both give the same pore volume. They give different depths to every interface below layer 1, so a deck must state which convention it uses because nothing about the numbers reveals it.",
+     "new": "The lesson states the one-tenth ratio as a design constant of the deck. The Dykstra-Parsons fit concerns the spread of horizontal permeability between the layers, and the net-to-gross is carried in the thicknesses. Real kv/kh ratios run from 0.01 to 1 and are rarely measured directly."
+    },
+    "options": {
+     "0": {
+      "old": "In the layer thicknesses, which are already net pay, combined with a porosity of 0.2 that is the porosity of net rock.",
+      "new": "It is a design constant of this deck; real fields have a kv/kh between 0.01 and 1, and it is rarely measured directly."
+     },
+     "1": {
+      "old": "In the porosity, which is the gross value already multiplied by the net-to-gross of 0.8.",
+      "new": "From the SCAL course's core plugs, which measured vertical and horizontal permeability on each layer."
+     },
+     "2": {
+      "old": "In the permeability, which is scaled down so that the layer's flow capacity comes out correct in spite of the gross thickness used.",
+      "new": "From the waterflood course's Dykstra-Parsons column, whose log-normal fit to the five layers fixes the vertical permeability at a tenth of the horizontal."
+     },
+     "3": {
+      "old": "It is not carried at all, which is the reason the deck's pore volume exceeds the volumetric booking's.",
+      "new": "From the net-to-gross of 0.8, which scales down the vertical flow capacity of each layer."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m02-the-grid ord 9 (which GRID block does not compress)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test why compressed blocks give reviewable diffs, from lesson m02 l04.",
+   "changes": {
+    "prompt": {
+     "old": "Which block in Ekene's GRID section does not compress, and what does that tell you?",
+     "new": "When a deck is kept under version control, why do compressed blocks make its changes easier to review?"
+    },
+    "explanation": {
+     "old": "PORO, PERMX, PERMY and PERMZ are all layer-constant and compress to five tokens each. TOPS is 900 distinct values and is most of the section's length. That diagnostic works on any deck: the incompressible blocks are where the modelling effort went.",
+     "new": "The lesson gives two reasons deck size matters, review and diffs. A layer-constant block such as PERMX compresses to one token per layer, so editing one layer's value changes one token, while the same edit in an expanded block touches 900 lines. Line wrapping has no meaning to the simulator either way."
+    },
+    "options": {
+     "0": {
+      "old": "PERMX, because permeability differs between the five layers rather than being constant across the grid.",
+      "new": "Because version control stores a repeat count natively and records only the count when a value changes."
+     },
+     "1": {
+      "old": "PORO, because porosity was populated cell by cell from a geostatistical property model.",
+      "new": "Because a compressed block is read faster, so each committed version can be test-run before review."
+     },
+     "2": {
+      "old": "TOPS, because every column has its own depth, and the blocks that resist compression are the ones carrying real spatial variation.",
+      "new": "Because a change to one layer's permeability is then a one-token edit in the block, where an expanded block would show a 900-line change."
+     },
+     "3": {
+      "old": "DZ, because layer thickness varies with the structure and therefore differs from column to column.",
+      "new": "Because compression removes the line wrapping, and wrapping is what makes most deck diffs unreadable."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m03-the-tables ord 1 (what the five PROPS keywords have in common)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test what the DENSITY value for oil is, from lesson m03 l01.",
+   "changes": {
+    "prompt": {
+     "old": "What do DENSITY, PVTO, PVDG, PVTW and ROCK have in common?",
+     "new": "Ekene's DENSITY block gives oil at 54.02790214067278 lb/ft3. What is that number?"
+    },
+    "explanation": {
+     "old": "A deck contains no correlations. PVTW and ROCK are lines of constants rather than tables, none is optional for a live-oil model, and DENSITY covers all three phases at once. What they share is that they are values, and their provenance lives outside the file.",
+     "new": "DENSITY carries the three phases at surface conditions, from gravities of 32 API for oil, 1.03 for brine and 0.75 for gas. The simulator combines them with the formation volume factors to get the reservoir densities that drive segregation and the contacts. Dividing 64.30084 by 1.2 does not give the deck's oil density."
+    },
+    "options": {
+     "0": {
+      "old": "Each hands the simulator numbers rather than a correlation, so the choice of correlation stays with whoever wrote the deck.",
+      "new": "The surface density that follows from the oil's 32 API gravity, which the simulator combines with Bo to get reservoir density."
+     },
+     "1": {
+      "old": "Each is indexed by pressure, so the simulator interpolates all five identically between their rows.",
+      "new": "The reservoir density at the initial 3200 psia, which the simulator divides by Bo to recover a surface value."
+     },
+     "2": {
+      "old": "Each is optional, since a simulator falls back on internal correlations for any block absent from the deck.",
+      "new": "The water density of 64.30084 lb/ft3 divided by the oil formation volume factor of 1.2, which is how the deck states the oil's buoyancy against brine."
+     },
+     "3": {
+      "old": "Each describes a single phase, so a three-phase model needs exactly three of them and the remaining two exist only for reporting.",
+      "new": "The density measured on the Material Balance course's bottom-hole sample, at reservoir conditions."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m04-initialisation ord 5 (how a cell straddling the contact is treated)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test what a 10 ft deeper contact does to the crest column and the oil area, from lesson m04 l02.",
+   "changes": {
+    "prompt": {
+     "old": "How is a cell straddling the contact treated?",
+     "new": "Ekene's crest oil column is about 62 ft. What does moving the contact 10 ft deeper do?"
+    },
+    "explanation": {
+     "old": "There is no partial cell. The staircase's tread is a cell and its riser is a layer thickness, and that roughness is exactly what the Professional tier's volumetric reconciliation measures against the booking.",
+     "new": "10 ft on a 62 ft crest column is about a sixth. A deeper contact also brings more columns into the oil leg, so the area grows by more than the column does. The datum and its pressure are a separate pair. Contacts are usually the most uncertain input and the cheapest to change, which is why a contact sensitivity is standard practice."
+    },
+    "options": {
+     "0": {
+      "old": "Partially, with saturation proportional to the fraction of the cell lying above the contact depth.",
+      "new": "It raises the pressure at the datum by the water gradient over 10 ft, and leaves the oil in place unchanged."
+     },
+     "1": {
+      "old": "Entirely oil or entirely water depending on which side its centre falls, so the modelled contact is a staircase.",
+      "new": "It adds roughly a sixth to the column at the crest, and more than that in area, as more columns come into the oil leg."
+     },
+     "2": {
+      "old": "As a transition cell, with saturations interpolated from the capillary pressure curve across the whole of its own thickness.",
+      "new": "It adds roughly a sixth to the column at the crest and leaves the oil area unchanged, because the area is fixed by the TOPS surface alone."
+     },
+     "3": {
+      "old": "It is subdivided automatically so the contact can be represented at the depth where it actually falls.",
+      "new": "It adds 10 ft to the crest column out of 161 ft of relief, about six percent, with the area unchanged."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "category": "duplicate",
+   "flag": "exact-key duplicate of beginner module m04-initialisation ord 14 (the no-well first check)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test why a state at rest is an assumption, from lesson m04 l04.",
+   "changes": {
+    "prompt": {
+     "old": "What is the standard first check on a new deck's initialisation?",
+     "new": "Equilibration asserts that the model starts at rest. Why is that an assumption rather than an observation?"
+    },
+    "explanation": {
+     "old": "If the initial state is not in equilibrium the model moves with no wells open, and the drift looks like a physical response. The usual culprits are a density inconsistent with the PVT tables or a contact outside the grid. Comparing against the booking is also worth doing and tests something different.",
+     "new": "Equilibrium means every phase pressure gradient is balanced by gravity, so nothing moves. A real field at discovery need not be in that state, and a deck that equilibrates has assumed regional flow, tilted contacts and active aquifers away. The zero capillary pressures only remove the transition zone."
+    },
+    "options": {
+     "0": {
+      "old": "Compare the reported oil in place against the booking, which is the only test of whether the contact is right.",
+      "new": "Because pressure is only measured after production starts, so the state at time zero is never observed at all."
+     },
+     "1": {
+      "old": "Run it with no wells for a short period and confirm nothing changes; a pressure drift means the initialisation and the property fields disagree.",
+      "new": "Because a real reservoir at discovery may have regional flow, tilted contacts or an active aquifer sweeping across it, and equilibrating assumes them all away."
+     },
+     "2": {
+      "old": "Confirm the datum lies within the grid's depth range, since a datum outside it cannot be integrated from.",
+      "new": "Because the simulator cannot compute flow at time zero, so rest is imposed until the first well opens."
+     },
+     "3": {
+      "old": "Check the equilibration iteration count in the log, which rises sharply when the initial state is inconsistent.",
+      "new": "Because zero capillary pressure forces every phase to be stationary, whatever the reservoir was doing."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m05-wells-and-schedule ord 9 (report steps against solver steps)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test why frequent control changes cost run time, from lesson m05 l03.",
+   "changes": {
+    "prompt": {
+     "old": "A DATES entry defines a report step. What is its relationship to the solver's own steps?",
+     "new": "Why is a history-matching deck that changes well controls every month more expensive to run than one that changes them yearly?"
+    },
+    "explanation": {
+     "old": "Ekene's 36 history entries are 36 points at which results are written rather than 36 solves. Report steps cost output volume and nothing else; a tiny report interval buys a larger file and the same answer.",
+     "new": "Report steps cost output volume and solver steps cost run time. A control change forces the solver to cut its step and rebuild, so a deck with a change every month costs more even when the physics is identical. The 36 history entries are 36 points where results are written rather than 36 solves."
+    },
+    "options": {
+     "0": {
+      "old": "None directly: the solver chooses its own step size adaptively and may take many internal steps inside one report step.",
+      "new": "Because each abrupt control change forces the solver to cut its step and rebuild, so frequent changes cost run time."
+     },
+     "1": {
+      "old": "They coincide one for one, so refining the report interval is how a modeller reduces the time-discretisation error of the solution.",
+      "new": "Because every DATES entry is a separate solve, so 36 monthly entries mean 36 solves where a yearly schedule needs only three."
+     },
+     "2": {
+      "old": "The report step bounds the solver step, so a shorter report interval forces shorter solver steps everywhere and therefore more accuracy.",
+      "new": "Because each report step writes the full state of every cell, and that output volume is what dominates the run time of a history match."
+     },
+     "3": {
+      "old": "The solver takes a fixed number of internal steps per report step, configurable through a RUNSPEC option.",
+      "new": "Because WCONHIST rates are re-read from the ledger at every internal step."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m06-the-associate-reading ord 14 (two thirds of the deck is SCHEDULE); module m01 ord 5 carries the same point",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test what a tiny PROPS section suggests, from the reading habit in lesson m01 l02.",
+   "changes": {
+    "prompt": {
+     "old": "Two thirds of the Ekene deck is SCHEDULE. What does that say about the study?",
+     "new": "When you open an unfamiliar deck, what does a very small PROPS section suggest?"
+    },
+    "explanation": {
+     "old": "A deck that is nearly all GRID is a big static model with a short run; one with a tiny PROPS section is probably using defaults worth checking. Ekene's GRID section is short because its properties are constant and compress, and its PROPS section is a full set of tables.",
+     "new": "The reading habit is to find the six section headers and note their line ranges first. A deck that is nearly all SCHEDULE is a history-matched study, one that is nearly all GRID is a big static model, and one with a tiny PROPS section is probably using defaults. A deck hands the simulator numbers rather than correlations, and PROPS tables do not grow with the grid."
+    },
+    "options": {
+     "0": {
+      "old": "It has an unusually detailed grid, since the completions for every well are written into the schedule.",
+      "new": "That the fluid is dead oil, since a live oil would need a PVTO table carrying one record per solution gas ratio."
+     },
+     "1": {
+      "old": "It was generated rather than hand-written, since a hand-written deck would balance its sections more evenly.",
+      "new": "That the fluid is described by a correlation, which the simulator evaluates internally from a handful of gravities."
+     },
+     "2": {
+      "old": "It carries a long production history, which is what a history-matched study looks like from the outside.",
+      "new": "That the deck is probably relying on defaults, which you should go and check before trusting its fluids."
+     },
+     "3": {
+      "old": "It is largely defaulted elsewhere, which is why the sections carrying explicit data look disproportionately large.",
+      "new": "That the model has few cells, since PROPS grows with the grid."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m01-where-the-structure-comes-from ord 2 (the three decisions an interpolator makes)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test what the sill does to the estimate, from lesson m01 l02.",
+   "changes": {
+    "prompt": {
+     "old": "Which three things must an interpolator decide that the data does not determine?",
+     "new": "Ekene's kriging carries a sill of 400. What does changing the sill alone do to the deck's depths?"
+    },
+    "explanation": {
+     "old": "Range, regional behaviour and exactness at the data. None is determined by six depths and each visibly changes the map. Cell size and layering are gridding decisions downstream of the surface.",
+     "new": "The sill is the variance the surface reaches at large separation. On its own it does not change the estimate, because it appears in both the weights and the system they solve, and it matters only for the uncertainty, which this deck does not carry. The range sets how far influence reaches and the nugget decides whether the surface passes through the data."
+    },
+    "options": {
+     "0": {
+      "old": "How far a well's influence reaches, what the surface does far from any well, and whether it passes exactly through the data.",
+      "new": "Nothing to the estimate, since the sill scales the covariance in both the weights and the system they solve; it matters for uncertainty."
+     },
+     "1": {
+      "old": "The cell size, the number of layers, and the depth reference the finished surface is quoted against in the deck.",
+      "new": "It moves the whole surface toward the regional mean, so a larger sill deepens every column away from the wells."
+     },
+     "2": {
+      "old": "Which of the wells to include, how heavily to weight the measurement error carried by each, and where to place the grid origin relative to the map.",
+      "new": "It changes how far each well's influence reaches, so a larger sill spreads every well's measured depth across more of the 900 columns in the deck."
+     },
+     "3": {
+      "old": "Whether to grid in time or depth, which velocity model to use, and how to tie the converted surface back to the wells.",
+      "new": "It sets how closely the surface honours each well, so a larger sill lets the map smooth through the tops."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 5,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m01-where-the-structure-comes-from ord 6 (the 2.3e-13 m residual)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test when a non-zero nugget is the right choice, from lesson m01 l03.",
+   "changes": {
+    "prompt": {
+     "old": "Two of the exactly-recovered wells carry a residual of about 2.3e-13 m. What is that?",
+     "new": "When would a non-zero nugget be the better choice for a surface like Ekene's?"
+    },
+    "explanation": {
+     "old": "Two tenths of a picometre is arithmetic rather than structure. A discrepancy at the thirteenth decimal is floating point and one at the second is a modelling decision, and knowing which you are looking at is the skill.",
+     "new": "A nugget tells the interpolator how much of the scatter to treat as noise. A well top is picked from a log by a person and two people pick differently, so forcing the surface through every pick puts a spurious feature at every well. Ekene uses zero because its six tops are exact by construction."
+    },
+    "options": {
+     "0": {
+      "old": "The metre to foot and back round trip, because the deck stores depths in feet and the conversion is not exact in binary.",
+      "new": "When the well tops carry pick error, so the surface should pass near the data instead of honouring noise as signal."
+     },
+     "1": {
+      "old": "The convergence tolerance of the kriging solve, which stops when successive estimates differ by less than that amount.",
+      "new": "When the wells are further apart than the range, so the surface needs a nugget to carry influence across the gaps between them."
+     },
+     "2": {
+      "old": "A genuine structural residual, since simple kriging is only exact in the limit and this nugget is small rather than zero.",
+      "new": "When the deck stores depths in feet, so the nugget can absorb the unit round-trip residual the kriging would otherwise leave."
+     },
+     "3": {
+      "old": "The precision of the coordinate transform between the map frame and the deck frame, applied twice in opposite directions.",
+      "new": "When the regional mean is unknown and must be estimated from six points."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 20,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m03-fluid-provenance ord 7 (symptom of a deck-only PVT update)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test how the fluid rule inverts when the deck is built first, from lesson m03 l03.",
+   "changes": {
+    "prompt": {
+     "old": "A new PVT report arrives and somebody updates the deck alone. What is the symptom months later?",
+     "new": "Occasionally the simulation model is built before the other analyses. What does the fluid rule say then?"
+    },
+    "explanation": {
+     "old": "The deck runs perfectly and returns different answers. Volumes drift from the booking, the match stops reproducing pressures, and the ledger's factors are stale, and none of it appears as an error.",
+     "new": "When the deck is the first thing built, its PVT is the reference and everything else adopts it. What is never acceptable is two authoritative sources, because a tank model on one fluid and a simulation model on another give two answers for the size of the field and no way to choose."
+    },
+    "options": {
+     "0": {
+      "old": "A model that used to match and no longer does, with no change to the geology, until somebody finds the PVT commit.",
+      "new": "It inverts: the deck's PVT becomes the reference and the other analyses must adopt it, so there is one source."
+     },
+     "1": {
+      "old": "A deck that fails to validate, because the new tables disagree with the RSVD value in the SOLUTION section.",
+      "new": "Nothing changes: the deck takes the latest laboratory report and the other analyses follow when revised."
+     },
+     "2": {
+      "old": "An error raised at initialisation, since the oil in place the deck reports no longer matches the value carried in the study document.",
+      "new": "The deck carries a correlated fluid until the laboratory report arrives, since no other analysis exists yet that it could be matched against."
+     },
+     "3": {
+      "old": "Results that differ between runs, because the two fluid descriptions are being mixed between report steps.",
+      "new": "Each analysis may keep its own fluid, provided the deck records which one it used."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m03-fluid-provenance ord 11 (why the gas is correlated and the oil designed)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test what the gas table shows across its pressure range, from lesson m03 l04.",
+   "changes": {
+    "prompt": {
+     "old": "Why is Ekene's gas table correlated while its oil is designed?",
+     "new": "Ekene's gas table runs from 400 to 3800 psia. What does it show the gas doing across that range?"
+    },
+    "explanation": {
+     "old": "The material balance course modelled Ekene as undersaturated, the ledger set the gas factor to zero and the SCAL course worked in oil and water. A correlation on the field's own gas gravity is the honest fallback.",
+     "new": "Across the twelve rows Bg falls by a factor of ten and viscosity roughly doubles. That is gas doing what gas does: it compresses hard, and compressed gas is more viscous. The table comes from the Hall and Yarborough z-factor with Lee, Gonzalez and Eakin viscosity on a gas gravity of 0.75."
+    },
+    "options": {
+     "0": {
+      "old": "Gas properties are insensitive to the correlation chosen, so a correlated gas adds negligible uncertainty to anything.",
+      "new": "Bg rises steadily with pressure while viscosity stays nearly constant, as a dry gas would at 180 F."
+     },
+     "1": {
+      "old": "The gas table is only used below the bubble point, which Ekene never reaches, so its provenance does not matter.",
+      "new": "Bg falls by a factor of ten while viscosity roughly halves, as the gas approaches the oil's properties."
+     },
+     "2": {
+      "old": "No earlier course built a gas description, so there was nothing to inherit and inventing one would mean designing a fluid nobody would check.",
+      "new": "Bg falls by a factor of ten while the viscosity roughly doubles, because gas compresses hard and compressed gas is more viscous."
+     },
+     "3": {
+      "old": "Designing a gas table needs a compositional analysis, which the field's fluid sampling programme never included.",
+      "new": "Bg and viscosity both stay near their bubble-point values, since no free gas forms in Ekene's history."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m04-rock-curves-from-the-lab ord 3 (why the deck carries a table rather than the Corey model)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test how to judge the SWOF row count, from lesson m04 l01.",
+   "changes": {
+    "prompt": {
+     "old": "Why does the deck carry a table rather than the Corey model?",
+     "new": "Ekene's SWOF carries 22 rows. What is a useful test of whether that row count is enough?"
+    },
+    "explanation": {
+     "old": "That is a deliberate design: it keeps the simulator independent of any particular saturation model, at the cost of losing the provenance at the boundary. The same trade appears throughout PROPS.",
+     "new": "The row count is a judgement: too few and the polyline departs from the curve, too many and the table is decoration. A sensitivity on the count is the direct test. Twenty two uniformly spaced rows is fine for a curve this smooth."
+    },
+    "options": {
+     "0": {
+      "old": "Because a table is faster to evaluate at run time than a power law would be at every timestep of the run.",
+      "new": "Check that the rows bracket the full saturation range, since the end rows decide the interpolation."
+     },
+     "1": {
+      "old": "Because the format has no way to express a saturation model: every simulator interpolates rows and there is no keyword for Corey.",
+      "new": "Halve the row count and see whether anything downstream moves; if nothing does, the original count was generous."
+     },
+     "2": {
+      "old": "Because simulators implement Corey differently, so a table is the only portable way to state the same curve.",
+      "new": "Use one row per percent of mobile saturation, which is the standard resolution for a Corey table."
+     },
+     "3": {
+      "old": "Because the model was fitted to laboratory points and the table is those points rather than the fit through them.",
+      "new": "Confirm the rows reproduce the six Corey parameters exactly when a curve is fitted back."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "category": "duplicate",
+   "flag": "exact-key duplicate of intermediate module m04-rock-curves-from-the-lab ord 4 (the four numbers that set scale)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test what a higher residual oil costs in movable oil, from lesson m04 l02.",
+   "changes": {
+    "prompt": {
+     "old": "Which four numbers set the scale of the displacement rather than its shape?",
+     "new": "Ekene's residual oil is 0.25. What would a value of 0.30 do?"
+    },
+    "explanation": {
+     "old": "Connate water sets the oil in place, residual oil sets the maximum displacement efficiency, and the endpoint mobilities set the mobility ratio. Everything between them is shape, which the exponents control.",
+     "new": "The movable oil is one minus connate water minus residual oil, 0.4 of the pore space at a residual of 0.25. Raising the residual by 0.05 removes 0.05 of that 0.4, which is an eighth. The two curves look nearly identical over most of their range and differ only where they stop, which is why endpoint errors hide."
+    },
+    "options": {
+     "0": {
+      "old": "Connate water, residual oil and the two endpoint mobilities.",
+      "new": "Remove an eighth of the movable oil from the field."
+     },
+     "1": {
+      "old": "The two Corey exponents and the two endpoint mobilities, since exponents give curvature and endpoints give magnitude.",
+      "new": "Leave the movable oil unchanged, since residual oil only moves the curve's end point and not the volume that can be displaced."
+     },
+     "2": {
+      "old": "The first and last rows of each table, which bracket the range every interior row is interpolated within.",
+      "new": "Remove a twentieth of the movable oil, since the residual rises by 0.05 on a total pore space of one."
+     },
+     "3": {
+      "old": "Connate water, residual oil, the row count and the row spacing, which set both the range and its resolution.",
+      "new": "Raise the water endpoint mobility, since the table must reach its krw endpoint at a lower water saturation."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m04-rock-curves-from-the-lab ord 10 (what one saturation region assumes)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test what the zero Pc column leaves out of the SCAL work, from lesson m04 l04.",
+   "changes": {
+    "prompt": {
+     "old": "One saturation region across five layers spanning a factor of six in permeability. What does that assume?",
+     "new": "Ekene's tables carry zero capillary pressure. What did the SCAL course build that the deck leaves out?"
+    },
+    "explanation": {
+     "old": "Pore structure is what makes one layer 600 md and another 100. Simulators support multiple regions for exactly this reason, and this deck uses one because the SCAL course fitted one curve.",
+     "new": "The SCAL course built a real capillary pressure curve for this sand from a Leverett J-function and used it to show that the crest is drier than the flanks. None of that is in the deck. For a field with 49 m of relief and a transition zone of a few metres that is a reasonable simplification, and the study should say so."
+    },
+    "options": {
+     "0": {
+      "old": "That pore structure, and so the shape of the relative permeability curves, is the same in the 607 md layer as in the 102 md one.",
+      "new": "A Leverett J-function capillary curve showing the crest drier than the flanks, a fair omission for a thin transition zone."
+     },
+     "1": {
+      "old": "That the five layers sit in capillary equilibrium with one another, so a single averaged curve describes their combined behaviour adequately.",
+      "new": "A hysteresis pair of drainage and imbibition curves, which a monotonic waterflood would need."
+     },
+     "2": {
+      "old": "That the flood sweeps all five layers simultaneously, so their individual curves would be averaged in any case.",
+      "new": "A second saturation region for the 607 md layer, whose lower connate water the SCAL course measured separately from the other four layers."
+     },
+     "3": {
+      "old": "That the simulator rescales the curves per cell by permeability, which is why a single region is sufficient here.",
+      "new": "A gas-oil relative permeability set, which the deck replaced with three design constants."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m05-wells-on-a-real-field ord 4 (what weights the five connections)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test which completion change is the conformance-control move, from lesson m05 l02.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene's five connections per producer are not five equal contributions. What weights them?",
+     "new": "Which completion change on an Ekene producer would be the conformance-control move, and why?"
+    },
+    "explanation": {
+     "old": "A connection in the 607 md layer delivers far more than one in the 102 md layer, so the producer's output is dominated by layer 2. That is how the waterflood course's conclusion follows in the deck.",
+     "new": "Layer 2 at 607 md is the fast layer, so a selective completion of layers 1 to 3 still includes it. Shutting that layer specifically is what conformance control would do, and doing it during the run needs a schedule that changes completions at dates."
+    },
+    "options": {
+     "0": {
+      "old": "The layer thickness alone, since the wellbore length in each layer sets the connection's transmissibility.",
+      "new": "Shutting layer 4 specifically, since it is the least permeable layer and it waters out first."
+     },
+     "1": {
+      "old": "The well index of each connection, which scales roughly with the permeability-thickness product of the layer it sits in.",
+      "new": "Shutting layer 2 specifically, since it is the fast layer and a completion in layers 1 to 3 would still include it."
+     },
+     "2": {
+      "old": "The distance from each cell centre to the wellbore itself, which differs from layer to layer because the well does not pass exactly through the centre.",
+      "new": "Opening layers 4 and 5 only, since the deeper layers sit closest to the contact and carry most of the injected water to the producer."
+     },
+     "3": {
+      "old": "The pressure drop between each layer and the wellbore, recomputed by the simulator at every timestep of the run.",
+      "new": "Completing layers 1 to 3 only, since the top three layers carry the fast streak."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m05-wells-on-a-real-field ord 8 (why mean-month errors do not cancel)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test the ledger's monthly volume convention, from lesson m05 l03.",
+   "changes": {
+    "prompt": {
+     "old": "Why do mean-month divisor errors not cancel over three years?",
+     "new": "What convention does the waterflood ledger state for a monthly volume?"
+    },
+    "explanation": {
+     "old": "February is over-produced by nearly ten percent. A history match whose residuals correlate with month length has this bug and nothing else, which makes the symptom distinctive.",
+     "new": "The waterflood course stated that a monthly volume is the rate on the first of the month held flat for that month, so the conversion to a schedule rate is exact. A real production database often holds daily allocated volumes and monthly totals that disagree, and which one a deck uses should be recorded."
+    },
+    "options": {
+     "0": {
+      "old": "Because they compound, since each month's error shifts the starting cumulative for the next month.",
+      "new": "It is the month's total divided by a mean month of 30.4375 days, so every month has one length."
+     },
+     "1": {
+      "old": "Because production declines through the history, so later months carry more weight in the total.",
+      "new": "It is the average of the daily allocated volumes, which is why it differs from the monthly total."
+     },
+     "2": {
+      "old": "Because they follow the calendar: every 31-day month is over-produced and every 30-day month under-produced.",
+      "new": "It is the rate on the first of the month held flat for that month, so the ledger and the schedule agree by construction."
+     },
+     "3": {
+      "old": "Because leap years add a day to February that the 30.4375 divisor has already accounted for twice within the same calendar year.",
+      "new": "It is the rate at the end of the month applied backward over the whole month, which is how the DATES block closing the period is read."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m05-wells-on-a-real-field ord 11 (injectors below the contact inject water into water)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test why Ekene-2 and Ekene-4 became the injectors, from lesson m05 l04.",
+   "changes": {
+    "prompt": {
+     "old": "Both Ekene injectors found the sand below the contact. What does that do in the model?",
+     "new": "Why were Ekene-2 and Ekene-4 chosen as the field's injectors?"
+    },
+    "explanation": {
+     "old": "The oil is up-structure and the injection supports it by pressure and by displacing water toward it. That is the two-jobs distinction falling out of the deck's geometry rather than being asserted separately.",
+     "new": "Both found the top of the sand below the 1560 m contact, so they came in wet. That is how flood patterns are usually chosen: the injectors were not picked for their geometry. In the model their cells initialise at a water saturation of one."
+    },
+    "options": {
+     "0": {
+      "old": "Their cells are excluded from the oil in place, which is why the deck's oil cell count differs from the booking's.",
+      "new": "They sit on the crest, so water injected there pushes oil down-structure toward the producers."
+     },
+     "1": {
+      "old": "Their cells initialise at a water saturation of one, so they inject water into water and support the oil indirectly.",
+      "new": "They were drilled as producers and came in wet, so converting them to injection cost a pump and a line rather than a well."
+     },
+     "2": {
+      "old": "Their completions must be restricted to layers above the contact, or the simulator refuses the well at initialisation.",
+      "new": "They sit at the corners of a regular pattern around the producers, which the waterflood course designed first and drilled second."
+     },
+     "3": {
+      "old": "Their injection is booked as out of zone, which is where the waterflood course's twelve percent figure comes from.",
+      "new": "They were the two wells with the highest permeability-thickness, which favours injectivity."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "category": "duplicate",
+   "flag": "exact-key duplicate of intermediate module m06-the-professional-reading ord 8 (what a validation would have needed)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test why the Expert tier's results module is ungraded, from lesson m06 l03.",
+   "changes": {
+    "prompt": {
+     "old": "The structure is described as calibrated rather than validated. What would a validation have needed?",
+     "new": "The Expert tier ends with a results module that grades nothing. Why?"
+    },
+    "explanation": {
+     "old": "Ekene has none spare: all six wells went into the interpolation. That is the honest closing line and it tells the next person what to go and get. The sensitivity run is worth doing and tests nothing the model was not already tuned against.",
+     "new": "The engines this course is built on emit decks and do geometry, and they do not solve flow equations, so there is no simulated number the course could check an answer against. The module teaches what a practitioner needs whether or not it can be checked."
+    },
+    "options": {
+     "0": {
+      "old": "A formal review by a second engineer, with the acceptance criterion agreed before any tuning began.",
+      "new": "Because reading results is a skill only a running simulator can teach, and the Studio grades it separately after each run."
+     },
+     "1": {
+      "old": "Something the model was not tuned to reproduce, such as a seventh well whose top the surface then predicts.",
+      "new": "The course's engines emit decks and do geometry without solving flow, and a course grades what it can check."
+     },
+     "2": {
+      "old": "An independent volumetric booking computed on the deck's own frame, so the two could be compared like with like.",
+      "new": "Because results depend on the history match, and grading them would reward whichever learner tuned the most parameters."
+     },
+     "3": {
+      "old": "A sensitivity run at a shallower and a deeper regional mean, showing the booking falls inside the resulting spread.",
+      "new": "Because the results would reveal the capstone answers."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m06-the-professional-reading ord 11 (what the Expert tier assumes)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test what the Expert tier's validation module works through, from lesson m06 l03.",
+   "changes": {
+    "prompt": {
+     "old": "What does the Expert tier assume from this one?",
+     "new": "What does the Expert tier's validation module work through?"
+    },
+    "explanation": {
+     "old": "Its calibration module picks the reconciliation up directly. Every volumetric statement there depends on knowing that Eclipse decides a cell's fluid by its centre depth and that the alternative gives a different and equally defensible number.",
+     "new": "The validation module isolates the validator's rules with deliberately broken specifications, one rule each, and then turns to the harder question of what a validator cannot catch, which is most of what goes wrong. SPE1 belongs to the results module."
+    },
+    "options": {
+     "0": {
+      "old": "The kriging parameters and the well positions, since the Expert tier re-intersects deviated trajectories against the very same grid.",
+      "new": "A full run of the Ekene deck in the Studio, with each warning the simulator raises traced back to its keyword."
+     },
+     "1": {
+      "old": "The PVT and rock curve provenance, since its calibration adjusts both to match the volumetric booking.",
+      "new": "The history match residuals, with each misfit traced back to the structure, the fluid or the rock curves."
+     },
+     "2": {
+      "old": "The reconciliation and that it was arranged, and the cell-centre rule for assigning a cell to oil or water.",
+      "new": "Deliberately broken specs that each trip one rule, then what a validator cannot catch."
+     },
+     "3": {
+      "old": "The naming rule and the completion strategy, since the Expert tier adds a new well to the model that already exists.",
+      "new": "The SPE1 problem, run against the published envelope."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m06-the-professional-reading ord 10 (auditing to authoring)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test how the Expert tier turns a deviated well into completions, from lesson m06 l03.",
+   "changes": {
+    "prompt": {
+     "old": "The Expert tier is described as moving from auditing to authoring. What follows?",
+     "new": "How does the Expert tier turn a deviated well into completions?"
+    },
+    "explanation": {
+     "old": "A trajectory becomes a completion list, a database becomes a schedule, and a free parameter is tuned and the tuning reported. The Expert tier has a results module and grades none of it, and the course never runs a deck.",
+     "new": "A deviated well is a path in three dimensions, and its completions are wherever that path crosses a cell. The answer is a list with a direction flag per cell rather than a k1 and a k2, and Ekene's side-track is the worked example."
+    },
+    "options": {
+     "0": {
+      "old": "It stops reading the deck and starts reading results, which is where a study's conclusions actually live.",
+      "new": "By extending k1 and k2 to cover every column the well passes through between heel and toe."
+     },
+     "1": {
+      "old": "It moves from the static model to the dynamic one, so the questions become about flow rather than geometry.",
+      "new": "By reading the perforated intervals off the well's log and mapping each to the nearest layer."
+     },
+     "2": {
+      "old": "Every decision must now be made and defended rather than found and checked, which is why its central lesson is about reporting.",
+      "new": "As an intersection problem: the connections are wherever the path crosses a cell, listed with a direction flag per cell."
+     },
+     "3": {
+      "old": "It begins running the deck, which is the step the course has deliberately deferred until its final module.",
+      "new": "By projecting the path onto the structure map and completing each column it crosses in full."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 6,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m01-trajectories ord 12 (merging a re-entered cell)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test what merging does for a path grazing a cell face, from lesson m01 l04.",
+   "changes": {
+    "prompt": {
+     "old": "A trajectory enters the same cell twice. What does the intersector do?",
+     "new": "A path runs almost exactly along a cell face. What does merging do with the result?"
+    },
+    "explanation": {
+     "old": "Two connections to the same cell would double-count the flow path. Simulators do accept duplicate COMPDAT records for a cell, and the result is exactly that double coupling.",
+     "new": "A step near a cell face can land alternately either side of it, which is a numerical artifact rather than a real feature of the well. Without merging there would be a long list of tiny connections, each with a well index near zero, and a well that appeared connected to twenty cells while barely producing."
+    },
+    "options": {
+     "0": {
+      "old": "It keeps both, because each represents a distinct interval of open wellbore with its own position in the sequence.",
+      "new": "It keeps every short connection, since each is a real pass of the wellbore through a distinct cell."
+     },
+     "1": {
+      "old": "It discards the second of the two visits, because the connection order is defined by first entry and a repeat would break that sequence.",
+      "new": "It discards the whole trajectory, since a path alternating between two cells indicates a survey integration error that must be corrected before intersecting."
+     },
+     "2": {
+      "old": "It merges the visits into one connection whose length is the total, because a cell has one pressure and the well one pressure there.",
+      "new": "It collapses the rapid alternation between the two cells into two connections with sensible totals instead of many tiny ones."
+     },
+     "3": {
+      "old": "It refuses the trajectory, because a path re-entering a cell indicates a survey integration error worth correcting.",
+      "new": "It averages the two cells' properties into one connection placed on the shared face itself."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m05-wells-on-a-real-field ord 7 and of advanced module m02-the-history-schedule ord 5 (Ekene-1's January rate)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test when LRAT is the right history control mode, from lesson m02 l01.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene-1 produced 998.5247575266284 stb in January 2023. What rate goes in the schedule?",
+     "new": "When is LRAT the right control mode for a history period?"
+    },
+    "explanation": {
+     "old": "The days come from the actual calendar. A mean-month divisor gives a rate 1.8 percent high, which the simulator then applies over the 31 days the DATES block spans.",
+     "new": "LRAT honours total liquid, which suits a well on a pump with a known liquid capacity where the oil-water split is the uncertain part. ORAT honours oil and RESV honours reservoir volume. Each choice makes a different quantity exact and leaves the others free, so it decides what the match tests."
+    },
+    "options": {
+     "0": {
+      "old": "32.804 stb/d, from dividing by the 30.4375-day mean month the prediction tail uses.",
+      "new": "When oil is the best-measured stream at the separator, so the model should honour the oil rate and compute water and gas."
+     },
+     "1": {
+      "old": "32.210476049246076 stb/d, from dividing by January's own 31 days.",
+      "new": "When a pump fixes the liquid and the oil-water split is uncertain."
+     },
+     "2": {
+      "old": "998.5247575266284 stb/d, since WCONHIST accepts the monthly volume when the periods are months.",
+      "new": "When voidage is the quantity you trust most, as in the waterflood course's ledger of reservoir barrels."
+     },
+     "3": {
+      "old": "31.79 stb/d, from dividing by 31.4 days, the average month length over the calendar year 2023.",
+      "new": "When the well has no reliable rate measurements at all, so the model is left to reproduce the observed pressures."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-history-schedule",
+   "ord": 5,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m05-wells-on-a-real-field ord 7 (Ekene-1's January rate from dividing by 31 days)",
+   "verdict": "fixed",
+   "reason": "Advanced module copy rewritten to test why history and forecast share one deck, from lesson m02 l04; the Professional module keeps the rate conversion.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene-1 produced 998.5247575266284 stb in January 2023. What rate does the schedule carry, and how is it obtained?",
+     "new": "Why does Ekene's deck carry its history and its forecast in one file?"
+    },
+    "explanation": {
+     "old": "The days come from the actual calendar. There is no uptime correction: a rate that reproduces the observed volume over the period is what the schedule wants, whether the well ran all month or not.",
+     "new": "Pressures, saturations and cumulative volumes carry across the join, so the forecast inherits the history's end state. Long studies often run the history once, save a restart and run many forecasts from it, which changes nothing about the physics; Ekene keeps both in one file because its history costs seconds."
+    },
+    "options": {
+     "0": {
+      "old": "32.210476049246076 stb/d, from dividing by January's own 31 days rather than by any average month.",
+      "new": "Because the forecast must start from the history's end state, and the only way to get that state is to run the history."
+     },
+     "1": {
+      "old": "32.804 stb/d, from dividing by the mean month of 30.4375 days the prediction tail also uses.",
+      "new": "Because a restart file cannot be written from a history period, so a separate forecast would have to begin again from the initial state."
+     },
+     "2": {
+      "old": "998.5247575266284 stb/d, because WCONHIST accepts a monthly volume directly when the history is monthly.",
+      "new": "Because the simulator resets pressures and saturations at the join unless both halves are read in a single pass of the same deck."
+     },
+     "3": {
+      "old": "32.210476049246076 stb/d, from dividing by 31 days and then correcting for the well's uptime in the month.",
+      "new": "Because TSTEP is only legal after a DATES block."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-history-schedule",
+   "ord": 7,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate module m05-wells-on-a-real-field ord 9 (the round-trip check on a history schedule)",
+   "verdict": "fixed",
+   "reason": "Advanced module copy rewritten to test the rates-after-the-date off-by-one, from lesson m02 l03; the Professional module keeps the round trip.",
+   "changes": {
+    "prompt": {
+     "old": "What does the round trip check on a history schedule consist of?",
+     "new": "A schedule writes each DATES block before the rates it was meant to close. What happens?"
+    },
+    "explanation": {
+     "old": "It catches every divisor mistake at once and costs one line. It requires no simulator run, which is the point: the check is on the deck rather than on the results.",
+     "new": "A rate block applies from the current time to the next date, so the DATES that follows it defines its period. Written the other way round, January's rates apply to February and every volume lands a month late. The arithmetic is otherwise correct, so no total reveals it; plotting rates does."
+    },
+    "options": {
+     "0": {
+      "old": "Re-deriving each month's volume from the simulator's output vectors and comparing against the schedule's rates.",
+      "new": "The validator refuses the deck, since each rate block must be closed by the DATES that follows it."
+     },
+     "1": {
+      "old": "Multiplying each rate by the days its period spans, summing over wells and periods, and comparing against the ledger's own total.",
+      "new": "The history shifts by a month: cumulative production is right while the timing is wrong, which a rate plot shows and a cumulative plot hides."
+     },
+     "2": {
+      "old": "Comparing the schedule's first and last dates against the ledger's, confirming the two cover the same interval.",
+      "new": "Nothing, since the simulator applies each rate block to the period whose date sits immediately above it."
+     },
+     "3": {
+      "old": "Confirming that the number of rate blocks equals the number of dates, which catches a dropped or duplicated period.",
+      "new": "The volumes double in every month, since each rate block is applied over two periods at once."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m03-calibration ord 1 (calibration against validation)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test what the calibration does not establish, from lesson m03 l01.",
+   "changes": {
+    "prompt": {
+     "old": "What separates a calibration from a validation?",
+     "new": "The regional mean has been calibrated to the booking. What does that calibration not establish?"
+    },
+    "explanation": {
+     "old": "Both are legitimate. A study that calls a calibration a validation believes it has an independent check when it has none.",
+     "new": "The surface now reproduces one integral of the field. It could still be the wrong shape, put the crest in the wrong place or close in the wrong direction, and the volume would still match. With all six wells used in the interpolation there is nothing spare to check it against, so the model is calibrated and unvalidated."
+    },
+    "options": {
+     "0": {
+      "old": "A validation uses a measurement and a calibration uses another model's output, so only one is grounded in data.",
+      "new": "That the volume matches, since a residual of minus 0.056 percent sits outside the stated tolerance."
+     },
+     "1": {
+      "old": "A validation is performed once and a calibration is repeated whenever new data arrives during a study.",
+      "new": "That the model reproduces the booking under the cell-centre convention, since the search ran on the column-clipped volume instead."
+     },
+     "2": {
+      "old": "A validation is a test the model could fail; a calibration is an adjustment it cannot fail, only be tuned through.",
+      "new": "That the structure is right: the surface reproduces one integral and could still put the crest in the wrong place."
+     },
+     "3": {
+      "old": "A validation adjusts several parameters at once while a calibration adjusts exactly one of them against exactly one target.",
+      "new": "That the porosity is right, since tuning the regional mean moves the porosity with it."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 19,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m03-calibration ord 8 (the three sanity checks on the bisected answer)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test why the calibrated value belongs to the calibration, from lesson m03 l02.",
+   "changes": {
+    "prompt": {
+     "old": "Which three sanity checks does the tier apply to a bisected answer?",
+     "new": "Why is the calibrated regional mean a property of the calibration rather than of the field?"
+    },
+    "explanation": {
+     "old": "1570 m is about 10 m below the contact and a little below the deepest well at 1590 m. A calibrated mean of 1400 m, shallower than every well, would have signalled that something else was wrong.",
+     "new": "The search found the regional mean that makes this model reproduce this booking under the cell-centre clipping convention. Bisecting on the column-clipped volume, or on a different grid or variogram, gives a different value. The contact is mapped and was held fixed, and bisection is deterministic."
+    },
+    "options": {
+     "0": {
+      "old": "That it is physically reasonable, that it lies inside the bracket rather than at an edge, and that the volume responds in the expected direction.",
+      "new": "Because it is the mean that makes this model reproduce this booking under this convention; change the grid, the variogram or the convention and it moves."
+     },
+     "1": {
+      "old": "That it converged, that the residual is under tolerance, and that a second search from a wider bracket agrees with it.",
+      "new": "Because the regional mean is measured at the wells, and the calibration only corrects it for the grid offset."
+     },
+     "2": {
+      "old": "That it honours the six well tops, that it respects the contact, and that the resulting surface closes structurally.",
+      "new": "Because bisection finds a different answer each time it runs, so the value carries the search's randomness."
+     },
+     "3": {
+      "old": "That it is deeper than the contact, shallower than the deepest well, and inside the mapped area of the field.",
+      "new": "Because the contact was adjusted along with it, so the two cannot be separated afterwards."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "category": "duplicate",
+   "flag": "exact-key duplicate of advanced module m03-calibration ord 13 (calibrating on cell count)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test the standard response to the concealed uncertainty, from lesson m03 l04.",
+   "changes": {
+    "prompt": {
+     "old": "Calibrating on cell count instead would give exactly 169 oil cells. What would the model hold?",
+     "new": "The regional mean is unconstrained, so the calibrated volume conceals an uncertainty. What is the standard response?"
+    },
+    "explanation": {
+     "old": "Every forecast from that model would be low by a factor of two, because a forecast is a fraction of the oil in place. That is the decisive argument for matching volume.",
+     "new": "Hiding the uncertainty in a single number is the thing to avoid. Building the model at a shallower and a deeper regional mean and forecasting on all three converts a hidden assumption into a stated sensitivity. The residual is the size of the model's smallest step and cannot be driven to zero."
+    },
+    "options": {
+     "0": {
+      "old": "Roughly the booked volume, since matching area with the same isochore reproduces the same integral.",
+      "new": "Recalibrate against the column-clipped volume as well, and report the midpoint of the two regional means as the field's best estimate."
+     },
+     "1": {
+      "old": "Roughly half the booked volume, because most of those 169 cells would be partial columns rather than full ones.",
+      "new": "Build the model at a shallower and a deeper regional mean too, run the forecast on all three, and report the spread."
+     },
+     "2": {
+      "old": "Roughly twice the booked volume, since a tighter structure concentrates the oil into fuller columns at the crest.",
+      "new": "Tighten the bisection tolerance until the residual is exactly zero, which removes the uncertainty."
+     },
+     "3": {
+      "old": "The same volume, since on a monotonic surface the two objectives have the same solution.",
+      "new": "Report the calibrated volume alone, since the booking already carries the uncertainty."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "category": "duplicate",
+   "flag": "exact-key duplicate of advanced module m05-reading-results ord 15 (field water cut matches, wells do not)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test the usual suspects when water arrives early everywhere, from lesson m05 l04.",
+   "changes": {
+    "prompt": {
+     "old": "A field water cut matches and three of four wells do not. What does that pattern mean?",
+     "new": "In a history match, water arrives too early at every well. What are the usual suspects?"
+    },
+    "explanation": {
+     "old": "It is invisible on a field plot, which is why the deck requests per-well water cut as well. Water arriving too early everywhere points at relative permeability or vertical communication instead.",
+     "new": "Water arriving too early everywhere means the model's sweep is too poor or its water too mobile, and the usual suspects are relative permeability and vertical communication. Water too late everywhere points at permeability that is too low or at connectivity the model does not have."
+    },
+    "options": {
+     "0": {
+      "old": "The observed per-well split is an allocation and only the field total is measured, so the per-well mismatch is expected.",
+      "new": "Permeability that is too low or a connectivity the model does not have, which holds the water front back."
+     },
+     "1": {
+      "old": "The relative permeability needs more than one saturation region, since a single curve cannot match wells that differ.",
+      "new": "The allocation of the observed water between wells, since the per-well split is an allocation and only the field total is measured."
+     },
+     "2": {
+      "old": "The total water is right and it is coming from the wrong places, which is the most common and most informative pattern.",
+      "new": "The relative permeability and the vertical communication, since the model's sweep is too poor or its water too mobile."
+     },
+     "3": {
+      "old": "The model's sweep is too poor, since compensating per-well errors always indicate an under-swept region.",
+      "new": "The oil rate control, since ORAT forces water to arrive with the imposed oil."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "category": "duplicate",
+   "flag": "exact-key duplicate of advanced module m06-the-expert-reading ord 14 (the five steps on an unfamiliar deck)",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test the four kinds of number the course names, from lesson m06 l03.",
+   "changes": {
+    "prompt": {
+     "old": "What are the five steps the tier recommends on an unfamiliar deck?",
+     "new": "The course says every number in a deck is one of four kinds. Which four?"
+    },
+    "explanation": {
+     "old": "If nothing was calibrated, ask why the model agrees with anything. If nothing could falsify it, the model is not making a claim. The security grep is worth doing on a deck from outside and it is not one of the five.",
+     "new": "Every tier came back to the same question: where did this number come from, and what was assumed to get it. The skill is knowing which of a deck's numbers are measurements, which are correlations, which are conventions and which are decisions, and being able to say so about each one."
+    },
+    "options": {
+     "0": {
+      "old": "Validate it, run it, check the initial oil in place against the booking, read the warnings, and plot the history match.",
+      "new": "An input, an output, a default or a derived value, depending on which section of the deck it sits in."
+     },
+     "1": {
+      "old": "Grep it for scripting and inclusion keywords, validate it against the parser, read every warning it raises, run the four comparisons, and recalibrate the regional mean.",
+      "new": "A static property, a dynamic property, a control or an observation, sorted by whether it changes with time."
+     },
+     "2": {
+      "old": "Read the RUNSPEC for dimensions and units, check the grid against the structure map, check the fluid against the laboratory report, run it, and read the results it writes.",
+      "new": "Measured, assumed, copied or computed."
+     },
+     "3": {
+      "old": "Read the six sections and note their line ranges, run the four external comparisons, find what was calibrated, read the warnings once, and ask what would falsify it.",
+      "new": "A measurement, a correlation, a convention or a decision."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 14,
+   "category": "duplicate",
+   "flag": "module-to-module duplicate of beginner module m01-what-a-deck-is ord 5 (two thirds of the deck is SCHEDULE); also restated by beginner final 42 before its rewrite",
+   "verdict": "fixed",
+   "reason": "Module m06 copy rewritten to test how the side-track's completions differ from the vertical wells', from the tier summary in lesson m06 l01; m01 keeps the SCHEDULE proportion.",
+   "changes": {
+    "prompt": {
+     "old": "Two thirds of the Ekene deck is its SCHEDULE section. What does that proportion say about the study?",
+     "new": "The tier's summary lists seven wells. How were the side-track's completions obtained, unlike those of the six vertical wells?"
+    },
+    "explanation": {
+     "old": "A deck that is nearly all GRID is a big static model with a short run; one with a tiny PROPS section is probably using defaults you should go and check. Ekene's GRID section is short precisely because its properties are constant and compress, and its PROPS section is a full set of tables.",
+     "new": "The summary describes six vertical Ekene wells completed through all five layers and one deviated side-track whose completions came from a trajectory rather than from a completion interval. A path that crosses columns has no single k1 and k2, which the Expert tier takes up."
+    },
+    "options": {
+     "0": {
+      "old": "It has an unusually detailed grid description, since the schedule carries the completions for every well and each one repeats the cell indices it connects.",
+      "new": "From the vertical wells' own k1 and k2, copied across to each neighbouring column the side-track passes through, so every one receives five connections."
+     },
+     "1": {
+      "old": "It was generated rather than written by hand, since a hand-written deck would balance the sections more evenly.",
+      "new": "From the waterflood course's completion list, which named its cells directly."
+     },
+     "2": {
+      "old": "It carries a long production history, one rate block and one date per month, which is what a history-matched study looks like from the outside.",
+      "new": "From a trajectory, by finding the cells its path crosses, where each vertical well simply spans layers 1 to 5 of its own column."
+     },
+     "3": {
+      "old": "It has been left largely at defaults elsewhere, which is why the few sections that do carry explicit data end up appearing disproportionately large by comparison.",
+      "new": "From the perforated intervals on the side-track's log, each mapped to the nearest layer of the column beneath the heel, so all of them share one column."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 1,
+   "category": "duplicate",
+   "flag": "duplicate of intermediate module m06-the-professional-reading ord 12 (894 of the 900 column depths are interpolated); module m01 ord 1 carries the same ratio",
+   "verdict": "fixed",
+   "reason": "Final copy rewritten to test the tell of a flat placeholder structure, from lesson m01 l01; the module questions keep the 894 of 900 point.",
+   "changes": {
+    "prompt": {
+     "old": "Ekene has six wells and 900 grid columns. What does that ratio say about the model's structure?",
+     "new": "What is the tell that a deck's structure is a flat placeholder nobody replaced?"
+    },
+    "explanation": {
+     "old": "That is the normal condition of every reservoir model ever built, and saying it out loud is the point. The deck carries no uncertainty at all, and the wells were placed by drilling history rather than by a sampling design.",
+     "new": "Setting every column top to the average of the six wells gives a flat grid whose contact includes everything or nothing. It happens as a placeholder that nobody replaced, and the tell is a TOPS block that compresses to one repeat count. Exactness at the wells is what a zero-nugget interpolator does anyway."
+    },
+    "options": {
+     "0": {
+      "old": "That the model is under-constrained and its structure should not be used for volumetrics until more wells are drilled.",
+      "new": "A crest that sits exactly on a mapped well top, since an exact interpolator puts it there."
+     },
+     "1": {
+      "old": "That the six wells were placed to sample the structure evenly, which is why the interpolation between them is reliable.",
+      "new": "A datum depth equal to the contact, which the equilibration forces for a flat grid."
+     },
+     "2": {
+      "old": "That 894 of the 900 column depths are interpolated, so the structure of the model is a hypothesis carrying only six anchors.",
+      "new": "A TOPS block that compresses to a single repeat count, because every column then carries the same depth."
+     },
+     "3": {
+      "old": "That the interpolation carries an estimation variance the deck records alongside each column, which is how the structural uncertainty is propagated forward.",
+      "new": "A TOPS block holding exactly six distinct values, one per mapped well, repeated across the columns nearest to each well."
+     }
+    }
+   },
+   "correct_change_reason": "Duplicate rewritten into a new question testing a different point; the new correct option keeps the same answer_index and length rank."
+  },
+  {
+   "app_slug": "sim",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 4,
+   "category": "other",
+   "flag": "editor note: the keyed option ('Giving the first saturation of SGOF instead') does not answer the prompt 'Which table have they actually read?'",
+   "verdict": "fixed",
+   "reason": "Prompt reworded to ask what mistake produced the 0, which every option (all phrased as mistakes) answers; key and options untouched.",
+   "changes": {
+    "prompt": {
+     "old": "A learner submits 0 as the saturation at which the water-oil table begins. Which table have they actually read?",
+     "new": "A learner submits 0 for capstone field 4, the saturation at which the water-oil table begins. What mistake produced that?"
+    }
+   }
+  },
+  {
+   "app_slug": "sim",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 4,
+   "category": "other",
+   "flag": "editor note: the keyed option ('Reporting the mapped top of 1565 m') does not answer the prompt 'What have they read?'; option 2 (kriged value at the well, also 1565 m) is a second defensible key once the prompt asks what produced 1565",
+   "verdict": "fixed",
+   "reason": "Prompt reworded to ask what mistake produced 1565 m; option 2 rewritten from the kriged-at-the-well value (also exactly 1565, a second key) to the cell-centre sampling, which gives the deck's shallower depth; explanation updated; key untouched.",
+   "changes": {
+    "prompt": {
+     "old": "A learner submits 1565 m as the depth the model carries at Ekene-2. What have they read?",
+     "new": "A learner submits 1565 m for capstone field 4, the depth the model carries at Ekene-2. What mistake produced that?"
+    },
+    "explanation": {
+     "old": "The check is that the answer should be shallower than 1565 and by less than a metre. If it equals 1565 exactly you have read the well database rather than the deck. Reading the kriged value at the well's own position is the same mistake seen from the other side, and it is the reason it happens.",
+     "new": "The check is that the answer should be shallower than 1565 and by less than a metre. If it equals 1565 exactly you have read the well database rather than the deck. The deck samples the surface at the centre of cell (23, 13), 50 m north of the well, which is why its depth differs from the mapped top."
+    },
+    "options": {
+     "2": {
+      "old": "Reporting the kriged value at the well's exact position, which is 1565 m and is what an exact interpolator must return there.",
+      "new": "Reporting the depth at the centre of cell (23, 13), 50 m north of the well, which is where the grid samples the surface."
+     }
+    }
+   }
+  }
+ ]
+}
