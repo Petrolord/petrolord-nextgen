@@ -6,7 +6,7 @@ Not every barrel that goes into a refinery comes out as product. Where in the ne
 
 ## What a loss is
 
-A refinery loses a little volume between the crude tank and the product tanks: light ends to flare and fuel, handling losses, measurement shrinkage. The engine treats losses as a volume shrinkage on the product side. A loss of 0.8 percent means that of the product barrels the yields describe, 0.8 percent never reach a buyer.
+The engine treats losses as a volume shrinkage on the product side. A loss of 0.8 percent takes 0.8 percent off the product value that the yields and prices give, before any cost comes off. On the Kwale blend that is 0.5939 $/bbl off a gross product value of 74.2412 $/bbl.
 
 That locates the loss exactly. It is a reduction in what is sold. It is not a cost that is paid, and it is not a discount on the crude.
 
@@ -36,15 +36,15 @@ The digest computes the same terms two other ways, for contrast, and prints how 
 | losses taken off the netback after the costs | 65.0169 | 0.0696 |
 | losses left out | 65.5412 | 0.5939 |
 
-Taking the loss percent off the netback after the costs gives 65.0169, which the digest prints as 0.0696 from the engine's figure. That reading applies the shrinkage to a figure that already has processing and freight removed, so it shrinks the wrong quantity. Processing and freight are paid per barrel of crude whether or not every product barrel survives, so they are not reduced by product losses.
+Taking the loss percent off the netback after the costs gives 65.0169, which the table above prints as 0.0696 from the engine's figure. That reading applies the shrinkage to a figure that already has processing and freight removed, so it shrinks the wrong quantity. In the engine's formula processing and freight are per barrel of crude and sit outside the loss factor, so the loss does not reduce them.
 
 Leaving losses out gives 65.5412. The digest prints its distance from the engine's netback as 0.5939, and the engine's own term table prints the value lost to losses at 0.8 percent as 0.5939. Leaving the loss out simply puts that term back.
 
 ## Why the wrong answers look right
 
-The tier header names this trap too: a loss taken after the costs gives a figure that looks finished. It is formed from the same inputs, the same percent and the same prices, and it prints to four decimals. The difference is purely where in the chain the percent is applied, and the chain is invisible if only the total is reported.
+The tier header names this trap too: a loss taken after the costs gives a figure that looks finished. It is formed from the same inputs, the same percent and the same prices, and it prints to four decimals. The difference is purely where in the chain the percent is applied.
 
-That is the reason the engine reports every term. A reader who sees gross, loss value, processing, freight and netback laid out can check that the loss came off the products, before the costs.
+The engine reports every term, never only the total. A reader who sees gross, loss value, processing, freight and netback laid out can check that the loss came off the products, before the costs.
 
 ## The panel
 

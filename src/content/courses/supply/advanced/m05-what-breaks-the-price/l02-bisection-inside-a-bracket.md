@@ -1,6 +1,6 @@
 # Bisection inside a bracket
 
-The sweep shows the invented cap covering the BADAGRY chain at 1500.0000 naira to the dollar and failing at 1650.0000. The exchange rate at which it stops covering lies between them. `solveCrossing` finds it, and the method is what makes the answer trustworthy on a chain this long.
+The sweep shows the invented cap covering the BADAGRY chain at 1500.0000 naira to the dollar and failing at 1650.0000. The exchange rate at which it stops covering lies between them. `solveCrossing` finds it by bisection inside that bracket.
 
 {{panel:supply-price-explorer}}
 

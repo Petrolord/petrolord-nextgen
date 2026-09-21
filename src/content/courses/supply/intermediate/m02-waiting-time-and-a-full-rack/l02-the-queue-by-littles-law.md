@@ -1,12 +1,12 @@
 # The queue by Little's law
 
-The mean wait is a figure for the driver. The yard manager needs a different one: how many trucks are standing in the line on average. That decides how much hardstanding the depot needs, whether trucks back up onto the public road, and how the gate is staffed. The engine prints it as the mean queue length, and it reaches it by one of the most general rules in queueing.
+The mean wait is a figure for the driver. The yard manager needs a different one: how many trucks are standing in the line on average. The engine prints it as the mean queue length, and it prints a check on it by Little's law beside its own figure.
 
 {{panel:supply-depot-explorer}}
 
 ## Little's law
 
-Little's law says that the average number of items in a system equals the rate at which they arrive multiplied by the average time each spends there. It holds for almost any queue in a steady state, which makes it a useful check.
+Little's law says that the average number of items in a system equals the rate at which they arrive multiplied by the average time each spends there. The engine prints it as a check on its own queue length.
 
 Applied to the waiting line alone, it reads:
 
@@ -16,11 +16,11 @@ The engine prints the check for IBAFO beside its own figure:
 
 9 x 47.2652 / 60 = 7.0898, the engine's queue length is 7.0898.
 
-The division by 60 turns the mean wait from minutes into hours, so that it matches the arrivals, which are per hour. The two figures agree to the four decimals the engine prints for a queue. The point is that the engine reaches the queue length through its Erlang C chain, and a one-line rule that holds for any stable queue lands on the same figure.
+The division by 60 turns the mean wait from minutes into hours, so that it matches the arrivals, which are per hour. The two figures agree to the four decimals the engine prints for a queue. The point is that the engine reaches the queue length through its Erlang C chain, and the one-line rule lands on the same figure.
 
 ## What the queue counts
 
-The mean queue length counts trucks waiting for a bay. It does not include the trucks on the bays. At IBAFO it is 7.0898 trucks, the average over the whole day, quiet hours and busy ones together. On a real morning the yard will hold more than that at some moments and none at others. A yard sized to the average will overflow for part of the time, and the engine prints no figure for how often.
+The mean queue length counts trucks waiting for a bay. It does not include the trucks on the bays. At IBAFO it is 7.0898 trucks, a mean. The engine prints no figure for how far the line moves about that mean, or for how often it runs longer.
 
 The unit is trucks, and the figure prints to four decimals. A fraction of a truck is meaningful here in a way it was not for bays: it is an average, and averages of whole counts need not be whole.
 

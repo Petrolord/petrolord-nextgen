@@ -6,9 +6,9 @@ A netback with no freight is a real question. The engine answers it, and says th
 
 ## Blank is a choice the engine has to make
 
-Every cost field can be left empty. The engine has two honest options. It can refuse, on the grounds that a cost it does not know makes the netback unknowable. Or it can take the empty field as zero and say so.
+Every cost field can be left empty. An engine could refuse such a call, or it could take the empty field as zero and say so.
 
-For costs, it takes the second. The digest gives the reason: a blank cost is taken as zero, because a netback with no freight is a legitimate question. A refinery may want to know what a crude is worth delivered, with freight already in the price. A trader may want the value at the gate before any processing, to set it against another crude on the same footing. Both are asking for a netback with a term deliberately absent.
+For costs, it takes the second. The engine gives the reason: a blank cost is taken as zero, because a netback with no freight is a legitimate question. The blank cost is named in the result, and complete stays true.
 
 ## Taken as zero, and NAMED
 
@@ -32,7 +32,7 @@ Notice that losses appear in the list. A blank loss percent is treated the same 
 
 This rule is for costs only. It does not permit filling other blanks with zero. The Associate tier taught the opposite for properties: a blank sulfur is absent. It is not read as a zero, and the property comes back as not blended with the crude named.
 
-So two kinds of blank get two answers, each chosen for what the blank would do to the result. A blank property would pull a blended value toward zero and pass it off as measured, so it is not blended. A blank netback cost changes a legitimate question into another legitimate question, so it is taken as zero and named. The principle is the same in both: the engine never lets an assumption sit unlabelled inside a figure.
+So two kinds of blank get two answers. A blank property is absent, it is not blended, and the crude without it is named. A blank netback cost is taken as zero and named, and the valuation stays complete. In both, the blank is named in the result.
 
 ## Reading the complete case again
 

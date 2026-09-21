@@ -21,7 +21,7 @@ The first two are the same refusal for the same reason. Ocean freight belongs to
 
 Insurance on CIF is also circular, and the previous lesson showed the engine solving it in closed form. So why refuse freight on CIF?
 
-The difference is what each quote means. Insurance on CIF is the usual marine quote, and the engine carries the algebra for exactly that case, named and bounded. A freight quoted on a value that contains the freight has no such standing, and its likeliest reading is a slip in the basis: a percentage picked from the list where a per-tonne rate belonged. Solving it would turn a slip into a clean figure. The engine would print a freight line, the C&F above it would include that line, and nothing on the page would show that the base was one the walk had not formed.
+The difference is what each quote means. Insurance on CIF is the usual marine quote, and the engine carries the algebra for exactly that case, named and bounded. A freight quoted on a value that contains the freight has no such algebra in the engine. The refusal gives its own reason: the percentage is of "a value that is not formed until after freight."
 
 A refusal leaves nothing to carry forward. The user sees which line is wrong and why, and fixes the basis.
 

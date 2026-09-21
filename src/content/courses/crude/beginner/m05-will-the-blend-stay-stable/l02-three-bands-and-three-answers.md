@@ -8,7 +8,7 @@ The engine reads the colloidal instability index against two thresholds, which g
 
 Below 0.7 the blend is stable, and the engine returns stable true. From 0.7 to below 0.9 the blend is uncertain, and the engine returns stable null and says spot test. At or above 0.9 the blend is unstable, and the engine returns stable false.
 
-The bands are screening bands and are not a phase boundary. They say how much confidence a screen can give, and a figure near an edge deserves the laboratory's attention whichever side it falls.
+The bands are screening bands and are not a phase boundary.
 
 ## Three pairs, three bands
 
@@ -32,7 +32,7 @@ For Egbema Medium with Obigbo Light: "Screens stable on the colloidal instabilit
 
 ## Reading the first pair
 
-Asarama Heavy carries 11.9 wt% asphaltenes, and Ubie Condensate 89.1 wt% saturates. That is the classic dangerous pairing: a heavy crude with asphaltenes to lose, diluted with a light paraffinic stream that is a poor solvent for them. The engine screens it unstable at 1.7614.
+Asarama Heavy carries 11.9 wt% asphaltenes, and Ubie Condensate 89.1 wt% saturates. The engine's gravity-contrast message calls a wide API spread with a light paraffinic crude "the combination that classically drops asphaltenes". The engine screens it unstable at 1.7614.
 
 ## Reading the middle answer
 

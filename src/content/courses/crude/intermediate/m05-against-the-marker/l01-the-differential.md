@@ -1,12 +1,12 @@
 # The differential
 
-A netback on its own says what a barrel is worth to one refinery. A trader wants to know whether that is good, and that needs something to measure it against.
+A netback on its own says what a barrel is worth to one refinery. netbackValue can also set it against a second figure, a marker netback.
 
 {{panel:crude-valuation-explorer}}
 
 ## The marker
 
-A refinery that buys crude regularly has a reference crude it knows well, one whose netback it has already worked out on its own cuts, prices and costs. That reference is the marker. Any new crude is judged by how its netback stands against the marker's.
+The marker enters as a netback in $/bbl of crude, the same unit as the crude's own netback, so the differential is the difference of two figures in one unit. The engine does not compute the marker. It takes it as a figure the caller supplies, and at Kwale that figure is 72.5 $/bbl.
 
 netbackValue takes a marker netback as an input and reports the differential: this crude's netback minus the marker's. Kwale's marker is 72.5 $/bbl. Like every figure in this course it is invented.
 

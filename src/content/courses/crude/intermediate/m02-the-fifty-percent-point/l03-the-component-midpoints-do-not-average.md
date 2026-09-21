@@ -8,7 +8,7 @@ Each crude arrives with its own T50. The tempting move is to average them. The e
 
 Kwale Light reaches 50 percent at 530 F. Ughelli Medium reaches 50 percent at 650 F. Both are measured points on the assays. With the blend at 55 and 45 by volume, the shortcut writes the blend's T50 as the volume-weighted mean of 530 and 650. A second version weights them by mass instead, on the grounds that mass is the conserved quantity.
 
-Both are the same kind of operation: an average along the temperature axis. Module 1 already said why that axis does not average. A temperature is not an amount, and the blend's curve is built by weighting amounts at fixed temperatures.
+Both are the same kind of operation: an average along the temperature axis. The engine never averages temperatures. It builds the blend's curve by weighting volume percents at fixed temperatures.
 
 ## The four readings
 

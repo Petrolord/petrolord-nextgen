@@ -35,7 +35,7 @@ A trader who asks for a cargo that the tanks cannot make needs to hear so plainl
 
 ## A malformed problem is something else
 
-A problem that is written wrongly is neither optimal, infeasible nor unbounded. When a row carries the wrong number of coefficients, the kernel throws ("Row 0 has 1 coefficients, expected 2"). That is a fault in the question, and the kernel refuses to answer it with a status, because any status would be a claim about a problem nobody posed.
+A problem that is written wrongly is neither optimal, infeasible nor unbounded. When a row carries the wrong number of coefficients, the kernel throws ("Row 0 has 1 coefficients, expected 2"). That is a fault in the question, and the kernel refuses to answer it with a status.
 
 {{panel:crude-recipe-explorer}}
 

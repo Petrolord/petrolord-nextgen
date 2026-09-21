@@ -1,10 +1,10 @@
 # The optimum sits on a vertex
 
-A linear programme has infinitely many feasible points whenever it has more than one. The kernel does not search them all, and it does not need to. The digest states the fact that makes the method possible: the optimum of a linear programme, when there is one, is found at a vertex of the feasible region, a point where at least as many constraints and bounds hold exactly as there are variables.
+The kernel does not search every feasible point of a linear programme one by one. The course states the fact that makes the method possible: the optimum of a linear programme, when there is one, is found at a vertex of the feasible region, a point where at least as many constraints and bounds hold exactly as there are variables.
 
 ## Why a corner
 
-The feasible region of a linear programme is bounded by flat faces, because every row and every bound is linear. The objective is linear too, so it rises steadily in one direction and has no hump or dip inside the region. Walking in the direction the objective improves, a point can keep moving until it meets a face. Along that face it can often keep moving until it meets another. Where it can move no further is a corner, and a corner is a place where enough constraints hold exactly to pin every variable.
+The kernel's method rests on that fact. It is two-phase simplex: phase one finds any point that meets every row, and phase two moves from vertex to vertex to the optimum. So every point phase two reads is a corner of the feasible region, and the optimum it returns is one of them. The textbook case below lists its four corners one by one, each with its objective and the kernel's status, and the kernel's optimum is among them.
 
 In two variables a vertex is where two lines meet: two rows, a row and a bound, or two bounds. In a blend with four components, a vertex is a point where at least four constraints or bounds hold exactly, counting the batch row among them.
 

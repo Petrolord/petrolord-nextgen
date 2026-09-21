@@ -6,7 +6,7 @@ Cover looks down at what a farm holds. Ullage looks up at the room it has left, 
 
 ## Ullage
 
-Ullage is the empty room in a tank above its stock, the volume a receipt can go into. A depot needs it every time a cargo or a pipeline batch is due, because product that has nowhere to go stays in the ship or the line.
+Ullage is the empty room in a tank above its stock, the volume a receipt can go into.
 
 The engine counts it tank by tank: each tank's capacity less its stock, never below zero, summed over the tanks. It prints each tank's ullage beside its capacity and stock:
 
@@ -41,13 +41,13 @@ The daily throughput is the other half of the formula, and the engine does not s
 
 ## What turns tell you
 
-A farm with many turns is working its tanks hard. Each turn is a receipt and a run of liftings, and each receipt needs ullage to arrive into. A farm with few turns is holding stock for a long time relative to what it sells. Neither is good or bad on its own. A strategic reserve is meant to turn slowly; a busy inland depot close to its market turns fast.
+Turns a year is daily throughput x 365 / working capacity. A larger throughput on the same working capacity gives more turns, and a larger working capacity on the same throughput gives fewer. The engine prints the figure and passes no judgement on it.
 
 Turns are also the figure a depot's commercial side reads. The throughput fee in module four is charged on throughput, revenue = throughput x fee, and turns are built on the same daily throughput. Module four reads the money side of IBAFO's throughput.
 
 ## The two readings together
 
-Ullage and turns pull against each other. A farm running many turns has little slack between receipts, so the ullage at any moment must be managed tightly. The forecourt in module five meets the same problem on a small scale, when a delivery arrives at a station tank that has too little room for it.
+The two readings answer different questions: ullage is the room in the tanks this morning, and turns are a rate over a year. The forecourt in module five meets the room question on a small scale, when a delivery arrives at a station tank that has too little room for it.
 
 ## Exercise
 
