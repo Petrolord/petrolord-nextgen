@@ -10,7 +10,7 @@ The three tiers of this course each answered one question. How much gets out and
 
 ## One chain, four calls
 
-The chain, from the digest's own worked example:
+The chain, on the teaching streams:
 
 | step | engine call | what it returns |
 | --- | --- | --- |
@@ -39,4 +39,4 @@ Look for the step with the least evidence behind it. In this chain it is the pre
 
 ## Exercise
 
-On the release panel, run the AMENAM gas line at 2e6 Pa and confirm 1.032722 kg/s, CHOKED. On the plume view, enter that rate for carbon monoxide in a 3 m/s wind in class F and confirm 4582.243793 mg/m3 at 200 m. On the harm panel's toxic view, enter that concentration in mg/m3 for 30 minutes on pb-carbon-monoxide and confirm a probability of 0.284726. Then repeat the plume step in class D and write one sentence on what the class choice did to the harm.
+On the release panel, run the AMENAM gas line at 2e6 Pa and confirm 1.032722 kg/s, CHOKED. On the plume view, enter that rate for carbon monoxide in a 3 m/s wind in class F and confirm 4582.243793 mg/m3 at 200 m, to within the rounding of the typed rate. On the harm panel's toxic view, enter that concentration in mg/m3 for 30 minutes on pb-carbon-monoxide and confirm a probability of 0.284726. Then repeat the plume step in class D and write one sentence on what the class choice did to the harm.

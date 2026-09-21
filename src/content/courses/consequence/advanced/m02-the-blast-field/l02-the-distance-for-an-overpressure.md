@@ -6,7 +6,7 @@ The question a plan usually asks runs backwards: how far from the charge does a 
 
 ## Bisection on Z
 
-The fit has no closed form inverse, so the engine searches. Its method, verbatim: "inverse of the Kinney and Graham fit by bisection on Z". It brackets the scaled distance at which the fit gives your target overpressure, halves the bracket until it is tight, and then converts that Z back to a distance with the charge you stated. The search runs on Z because the fit only knows Z; the charge enters once, at the end, through cube root scaling.
+The engine inverts the fit by searching. Its method, verbatim: "inverse of the Kinney and Graham fit by bisection on Z". It brackets the scaled distance at which the fit gives your target overpressure, halves the bracket until it is tight, and then converts that Z back to a distance with the charge you stated. The search runs on Z because the fit only knows Z; the charge enters once, at the end, through cube root scaling.
 
 BONGA's 500 kg of TNT, at five target overpressures (stated):
 
@@ -24,7 +24,7 @@ Halving the target from 10000 to 5000 Pa takes the distance from 79.281907 m to 
 
 Every row of that table round trips through the forward fit: feed the distance back in with the same charge and the engine returns the target overpressure. That is the check you should run on any inverse you quote. The forward table of the previous lesson gives a second, independent look. At 50 m the forward fit returned 19626.657230 Pa, just under 20000 Pa, and the inverse puts 20000 Pa at 49.426650 m, just inside 50 m.
 
-The inverse is graded in this course alongside the forward fit, because the same published column stands behind both. What is checked is the pair: a distance that round trips to its overpressure with the stated charge.
+The inverse is graded in this course alongside the forward fit, because the same published column stands behind both. A capstone grades the distance itself, at the six decimals this course prints.
 
 ## Where the inversion refuses
 
@@ -40,4 +40,4 @@ A distance for an overpressure is only as good as the charge behind it. If the c
 
 ## Exercise
 
-On the harm panel's blast view, enter 500 kg of TNT and each target in the table above, and confirm the five distances. Take the 10000 Pa row and run it forward at 79.281907 m to confirm the round trip. Then enter a target of 1000 Pa, record whether the engine returns a distance or a refusal, and name the field.
+On the harm panel's blast view, enter 500 kg of TNT and each target in the table above, and confirm the five distances. Take the 10000 Pa row and run it forward at 79.281907 m to confirm the round trip, to within the rounding of the typed distance. Then enter a target of 1000 Pa, record whether the engine returns a distance or a refusal, and name the field.

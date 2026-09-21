@@ -6,7 +6,7 @@ A toxic gas harms through what a person breathes over time. The Associate tier e
 
 ## The toxic load and its exponent
 
-The engine exports its toxic presets as `TOXIC_PROBITS`, each of the form Y = a + b ln(C^n t), with t in MINUTES and C in the unit the preset states. The toxic load is C^n t. Time always enters to the first power. The concentration enters to the power n, and n is different for every substance and every source.
+The engine exports its toxic presets as `TOXIC_PROBITS`, each of the form Y = a + b ln(C^n t), with t in MINUTES and C in the unit the preset states. The toxic load is C^n t. Time always enters to the first power. The concentration enters to the power n, and n is set by each preset, so it can differ between substances and between sources.
 
 When n is one, doubling the concentration and doubling the time do the same thing. When n is above one, the concentration counts for more, so a short exposure to a high concentration is worse than a long exposure to a low one with the same product of concentration and time.
 

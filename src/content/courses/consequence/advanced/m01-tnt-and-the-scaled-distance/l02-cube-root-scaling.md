@@ -26,9 +26,9 @@ Z is linear in the distance for a fixed charge: each step in the distance column
 
 ## The scaling test
 
-The engine's own check of the relation: eight times the charge at twice 100 m gives 7457.699887 Pa, against 7457.699887 Pa for the original charge at 100 m. Same Z, same overpressure, to every printed decimal. That identity is the whole content of cube root scaling. If a calculation of yours breaks it, the error is in how you formed Z.
+The relation, run through the engine: eight times the charge at twice 100 m gives 7457.699887 Pa, against 7457.699887 Pa for the original charge at 100 m. Same Z, same overpressure, to every printed decimal. That identity is the whole content of cube root scaling. If a calculation of yours breaks it, the error is in how you formed Z.
 
-Two slips are common. The first is taking the square root or the plain ratio R / W instead of the cube root. The second is typing the fuel mass where the TNT mass is due. BONGA's cloud is 3000 kg of butane, and at a yield factor of 0.1 its TNT equivalent is 2980.434783 kg; the charge in this lesson, 500 kg, is a stated TNT mass. The engine takes whatever mass you type as TNT, so the name of the quantity you type matters more than its size.
+Two slips are easy to make. The first is taking the square root or the plain ratio R / W instead of the cube root. The second is typing the fuel mass where the TNT mass is due. BONGA's cloud is 3000 kg of butane, and at a yield factor of 0.1 its TNT equivalent is 2980.434783 kg; the charge in this lesson, 500 kg, is a stated TNT mass. The engine takes whatever mass you type as TNT, so the name of the quantity you type matters more than its size.
 
 ## Why this matters for harm
 

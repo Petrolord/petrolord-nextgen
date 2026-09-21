@@ -39,7 +39,7 @@ q(2,
  ["19626.657230 Pa, the overpressure the forward table prints at 50 m",
   "121853.141070 Pa, the overpressure the forward table prints at the 20 m row",
   "100000 Pa, since the bisection brackets the root from above"],
- "Section 25 states that every row round trips through the forward fit, so 30.090623 m returns the 50000 Pa it was searched for. 19626.657230 Pa and 121853.141070 Pa are the forward rows at 50 m and 20 m, and 100000 Pa is another target altogether."),
+ "Section 25 states that every row round trips through the forward fit, so 30.090623 m returns the 50000 Pa it was searched for, to within the rounding of the printed distance. 19626.657230 Pa and 121853.141070 Pa are the forward rows at 50 m and 20 m, and 100000 Pa is another target altogether."),
 
 q(2,
  "The 500 kg charge gives 2121.136283 Pa at the Z = 40 edge of the judged range. A target below that overpressure is passed to `distanceForOverpressure`. What happens?",

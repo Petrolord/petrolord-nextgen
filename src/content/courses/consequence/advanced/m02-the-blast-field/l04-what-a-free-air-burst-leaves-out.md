@@ -12,7 +12,7 @@ That is a real responsibility. The fit will return a confident number to six dec
 
 ## A vapour cloud is not TNT
 
-A butane cloud is a different explosive from TNT, and the congestion around it shapes its blast. The engine bridges the gap with one input only. In the words of the engine's own account, the yield factor carries the whole difference.
+A butane cloud is a different explosive from TNT, and the congestion around it shapes its blast. The engine bridges the gap with one input only. The yield factor carries the whole difference.
 
 For BONGA's 3000 kg of butane the TNT mass runs from 596.086957 kg at a yield of 0.02 to 5960.869565 kg at 0.2. Nothing else in the engine responds to how cluttered the plant is. A tightly packed module and an open tank farm with the same fuel mass differ in the calculation only if the analyst gives them different yields.
 

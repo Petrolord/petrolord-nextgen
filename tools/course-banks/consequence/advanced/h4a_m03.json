@@ -114,11 +114,11 @@
   "options": [
    "It is the Purple Book form, which the engine already carries as purple-book with its own a and b",
    "Its coefficients take the intensity in W/m2, which the engine's thermal presets do not accept",
-   "Its printed lethal doses do not follow from its own coefficients (384.344943 and 830.355817), and the source does not say which is wrong",
+   "Its printed lethal doses do not follow from its own coefficients (the golden computes 384.344943 and 830.355817), and the source does not say which is wrong",
    "It reproduces exactly but duplicates Eisenberg, so it was merged into that preset"
   ],
   "answer": 2,
-  "explanation": "Section 27 records the erratum: the row's coefficients give 384.344943 and 830.355817 against the printed 389 and 841, so the row is not a preset. Asked for it by name the engine refuses: \"coefficients: unknown preset 'tno'; one of eisenberg, tsao-perry, lees, purple-book, or give { a, b } explicitly\". The Purple Book form is Tsao and Perry, the purple-book preset takes W/m2 itself, and the row does not reproduce."
+  "explanation": "Section 27 records the erratum: from the row's coefficients the golden computes 384.344943 and 830.355817 against the printed 389 and 841, so the row is not a preset. Asked for it by name the engine refuses: \"coefficients: unknown preset 'tno'; one of eisenberg, tsao-perry, lees, purple-book, or give { a, b } explicitly\". The Purple Book form is Tsao and Perry, the purple-book preset takes W/m2 itself, and the row does not reproduce."
  },
  {
   "prompt": "The hsc overpressure probit is Y = 1.47 + 1.37 ln(P) with P in psig. What probability does the engine give at 20 psig?",

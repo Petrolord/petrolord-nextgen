@@ -89,11 +89,11 @@ q(0,
 
 q(2,
  "OSD/30 Table 17 carries a TNO row, a = -15.3 and b = 3.02, printing lethal doses of 389 and 841. Why is it no preset in the engine?",
- "Its printed lethal doses do not follow from its own coefficients (384.344943 and 830.355817), and the source does not say which is wrong",
+ "Its printed lethal doses do not follow from its own coefficients (the golden computes 384.344943 and 830.355817), and the source does not say which is wrong",
  ["It is the Purple Book form, which the engine already carries as purple-book with its own a and b",
   "Its coefficients take the intensity in W/m2, which the engine's thermal presets do not accept",
   "It reproduces exactly but duplicates Eisenberg, so it was merged into that preset"],
- "Section 27 records the erratum: the row's coefficients give 384.344943 and 830.355817 against the printed 389 and 841, so the row is not a preset. Asked for it by name the engine refuses: \"coefficients: unknown preset 'tno'; one of eisenberg, tsao-perry, lees, purple-book, or give { a, b } explicitly\". The Purple Book form is Tsao and Perry, the purple-book preset takes W/m2 itself, and the row does not reproduce."),
+ "Section 27 records the erratum: from the row's coefficients the golden computes 384.344943 and 830.355817 against the printed 389 and 841, so the row is not a preset. Asked for it by name the engine refuses: \"coefficients: unknown preset 'tno'; one of eisenberg, tsao-perry, lees, purple-book, or give { a, b } explicitly\". The Purple Book form is Tsao and Perry, the purple-book preset takes W/m2 itself, and the row does not reproduce."),
 
 q(1,
  "The hsc overpressure probit is Y = 1.47 + 1.37 ln(P) with P in psig. What probability does the engine give at 20 psig?",

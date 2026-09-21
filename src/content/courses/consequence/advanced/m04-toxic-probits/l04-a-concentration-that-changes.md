@@ -31,4 +31,4 @@ The engine does not invent a concentration history either. A history comes from 
 
 ## Exercise
 
-On the harm panel's toxic view, set the toxic load exponent to 2 and type the history above, one step per line. Confirm the toxic load of 211500.000000. Then replace the history with a single step of 64.285714 lasting the whole time of the history and confirm 144642.857143. Finally, reorder the three original steps and record whether the toxic load changes, and write one sentence explaining your finding.
+On the harm panel's toxic view, set the toxic load exponent to 2 and type the history above, one step per line. Confirm the toxic load of 211500.000000. Then replace the history with a single step of 64.285714 lasting the whole time of the history; the toxic load matches 144642.857143 to about two decimals, because the typed mean is rounded. Finally, reorder the three original steps and record whether the toxic load changes, and write one sentence explaining your finding.

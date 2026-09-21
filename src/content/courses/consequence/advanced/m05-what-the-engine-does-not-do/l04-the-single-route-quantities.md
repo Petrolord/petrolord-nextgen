@@ -47,4 +47,4 @@ The list is also a guide to where your own work needs care. A figure resting on 
 
 ## Exercise
 
-On the fire panel's view factor view, compute a Bagster transmissivity for a path of 30 m with a water vapour partial pressure of 1500 Pa, and confirm 0.770127. On the release panel's pool view, compute the Mackay and Matsugu evaporation rate for the hexane-like pool and confirm 0.451595 kg/s. For each, write the sentence a consequence note carries saying the figure is single route and why.
+On the fire panel's view factor view, compute a Bagster transmissivity for a path of 30 m with a water vapour partial pressure of 1500 Pa, and confirm 0.770127. On the release panel's pool view, set the bund floor to 78.539816 m2, a pool 10 m across, and confirm the hexane-like pool evaporates 0.451595 kg/s. For each, write the sentence a consequence note carries saying the figure is single route and why.

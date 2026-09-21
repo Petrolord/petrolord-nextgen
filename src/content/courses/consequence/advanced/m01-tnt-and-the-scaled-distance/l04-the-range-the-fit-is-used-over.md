@@ -12,9 +12,9 @@ The word JUDGEMENT is there on purpose. The engine's validation record says the 
 
 ## Where the edges fall for BONGA
 
-For BONGA's 500 kg of TNT the farthest tabled distance, 300 m, gives Z of 37.797631 and an overpressure of 2247.931733 Pa. That is inside the span, close to its far edge. At the edge itself, Z of 40, the fit gives a ratio of 0.020934, which is 2121.136283 Pa. Beyond it the engine returns nothing at all.
+For BONGA's 500 kg of TNT the farthest tabled distance, 300 m, gives Z of 37.797631 and an overpressure of 2247.931733 Pa. That is inside the span, close to its far edge. At the edge itself, Z of 40, the fit gives a ratio of 0.020934, which is 2121.136283 Pa. Beyond it the engine returns no overpressure.
 
-At the near edge, Z of 0.05, the limit works mostly as a guard against a mistyped distance or a charge typed in grams.
+The near edge, Z of 0.05, is enforced the same way, so a target very close to the charge gets no figure either.
 
 ## The refusal
 

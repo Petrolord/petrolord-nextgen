@@ -41,7 +41,7 @@
    "Rounds it to the printed digits of OSD/30"
   ],
   "answer": 0,
-  "explanation": "Section 30 ends: a thermal dose or toxic load read back from a probability is quoted to the figures the approximation supports, and this course never grades one. The forward accuracy does not carry through the inverse, the rounding edge cells are kept apart rather than graded, and OSD/30 prints values without any rule for rounding."
+  "explanation": "Section 30 ends: a thermal dose or toxic load read back from a probability is quoted to the figures the approximation supports, and this course never grades one. The forward accuracy does not carry through the inverse, the rounding edge cells are kept apart rather than graded, and OSD/30's printed figures are the evidence the engine is checked against; they set no rounding for a read-back value."
  },
  {
   "prompt": "Why does this course print its probabilities to six decimals?",
@@ -92,11 +92,11 @@
   "options": [
    "A jet fire is a pool fire with a tilt of zero, which `poolFireSolidFlame` already covers when it is given a zero wind at the hole",
    "The only worked example read carries internal inconsistencies, so a golden could not tell a right engine from a wrong one",
-   "The Facilities courses grade jet fires through their point source model",
+   "A jet fire burns too briefly to harm the people exposed, so the engine leaves it out as negligible",
    "Jet fires fall outside the Yellow Book"
   ],
   "answer": 1,
-  "explanation": "Section 31 gives the reason quoted, and the analyst uses a jet fire model elsewhere. A pool fire is not a jet, the point source model belongs to the Facilities courses on relief and flare systems and on layout for their own purpose, and the digest says nothing about the Yellow Book lacking the subject."
+  "explanation": "Section 31 gives the reason quoted, and the analyst uses a jet fire model elsewhere. A pool fire is not a jet, nothing in the validation record calls a jet fire negligible, and the digest says nothing about the Yellow Book lacking the subject."
  },
  {
   "prompt": "Why are the Kingery-Bulmash fits absent, and what does the analyst use?",

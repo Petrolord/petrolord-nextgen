@@ -63,7 +63,7 @@ q(1,
  ["Average the methods so that the figure reported does not favour any one source",
   "Report the most cautious method alone and leave the others out of the note so that no reader can pick a lower figure",
   "Report whichever method the engine returns first"],
- "Section 33: WHEN TWO METHODS DISAGREE the note says which one it used and why and shows the other beside it. The engine does not average methods, hiding the others loses the information, and every call names its method, so nothing is returned 'first' by default."),
+ "Section 33: WHEN TWO METHODS DISAGREE the note says which one it used and why and shows the other beside it. The engine does not average methods, hiding the others loses the information, and every result names its method in its basis, so there is no order to pick a 'first' from."),
 
 q(2,
  "ERHA at a 4 m/s wind carries a surface emissive power of 30886.154395, 180128.456236 or 52025.691247 W/m2. Why must a note quote a heat flux with the method that made it?",

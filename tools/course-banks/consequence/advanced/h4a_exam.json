@@ -324,10 +324,10 @@
    "It is computed from the Mackay and Matsugu evaporation rate until the pool stops growing",
    "The Yellow Book spreading model is a differential equation for a fed pool, so only a stated thickness is implemented, and the analyst says where it came from",
    "The engine spreads the pool to 0.005 m, the thinnest stated thickness, and reports UNCONFINED_STATED_THICKNESS with the area and diameter that thickness implies",
-   "The spill is refused"
+   "The engine confines it on a default bund floor of 400 m2, the teaching stream's bund"
   ],
   "answer": 1,
-  "explanation": "Section 31: unconfined pool spreading is out of the engine because the Yellow Book model is a differential equation for a fed pool; `poolFromSpill` takes a stated thickness, and the note says where it came from. Evaporation does not size the pool, 0.005 m is only one row of a teaching sweep, and the refusal comes only when neither a bund nor a thickness is given."
+  "explanation": "Section 31: unconfined pool spreading is out of the engine because the Yellow Book model is a differential equation for a fed pool; `poolFromSpill` takes a stated thickness, and the note says where it came from. Evaporation does not size the pool, 0.005 m is only one row of a teaching sweep, and the engine carries no default bund, refusing only when neither a bund nor a thickness is given."
  },
  {
   "prompt": "Why is the TNO multi-energy method not in the engine?",
@@ -412,10 +412,10 @@
    "The engine picks a yield from the fuel name, and the note records the engine's choice",
    "The yield is the analyst's input, and the TNT equivalence behind it is a single route quantity with nothing but its transcription to catch a mistake",
    "The yield is fixed at 0.1 by the Yellow Book, and the note confirms that value was used",
-   "The note records every input"
+   "The yield sets the ambient pressure that the overpressure fit multiplies its ratio by"
   ],
   "answer": 1,
-  "explanation": "Section 33 lists a TNT yield among the stated inputs that are not the engine's own, and section 32 lists the TNT equivalence as single route, which is why a graded blast states its TNT mass. The engine carries no yield default, the Yellow Book reports 0.02 to 0.2 in use, and the note lists specific stated inputs."
+  "explanation": "Section 33 lists a TNT yield among the stated inputs that are not the engine's own, and section 32 lists the TNT equivalence as single route, which is why a graded blast states its TNT mass. The engine carries no yield default, the Yellow Book reports 0.02 to 0.2 in use, and the ambient is its own input, 101325 Pa unless stated."
  },
  {
   "prompt": "A note reports a thermal lethality of 0.953436 on Eisenberg for 35000 W/m2 for 40 s. What does section 33 ask it to show beside that figure?",

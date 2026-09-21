@@ -41,7 +41,7 @@
    "100000 Pa, since the bisection brackets the root from above"
   ],
   "answer": 2,
-  "explanation": "Section 25 states that every row round trips through the forward fit, so 30.090623 m returns the 50000 Pa it was searched for. 19626.657230 Pa and 121853.141070 Pa are the forward rows at 50 m and 20 m, and 100000 Pa is another target altogether."
+  "explanation": "Section 25 states that every row round trips through the forward fit, so 30.090623 m returns the 50000 Pa it was searched for, to within the rounding of the printed distance. 19626.657230 Pa and 121853.141070 Pa are the forward rows at 50 m and 20 m, and 100000 Pa is another target altogether."
  },
  {
   "prompt": "The 500 kg charge gives 2121.136283 Pa at the Z = 40 edge of the judged range. A target below that overpressure is passed to `distanceForOverpressure`. What happens?",

@@ -25,7 +25,7 @@ Two refusals guard the inputs. A yield typed as a percentage is refused:
 
 > yieldFactor: the TNT equivalency (yield) must lie in (0, 1]: the YB reports 0.02 to 0.2 in use
 
-And a TNT blast energy typed in kJ/kg, the most common units slip, is refused because it falls outside a plausible band:
+And a TNT blast energy typed in kJ/kg, the units slip the band is there to catch, is refused:
 
 > tntBlastEnergyJKg: must be the TNT blast energy in J/kg, between 4.0e6 and 5.0e6 (the YB cites 4.19e6 to 4.65e6)
 

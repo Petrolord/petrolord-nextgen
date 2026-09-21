@@ -11,11 +11,11 @@ An Expert is judged as much by knowing where a tool stops as by using it well. T
 | an instantaneous puff | the puff sigmas were not in a source read | models a short release with a puff model elsewhere |
 | urban dispersion coefficients | a sourced urban sigma_y was not available; only the rural Briggs set is here | uses the rural set with care, or another tool, in a built-up area |
 
-Each reason has the same shape. Where the engine's authors could not read a source with a worked example, or could not obtain the coefficients, they left the model out rather than type one with nothing behind it. That is the validation principle of this whole course applied to scope.
+The reasons differ in detail: no source with a worked example was read, a coefficient was not available, or the published model is numerical or a differential equation. In each case the engine's authors left the model out rather than type one with nothing behind it. That is the validation principle of this whole course applied to scope.
 
 ## How each absence shows up
 
-Two phase discharge is the one most likely to catch an analyst out. A pressurised liquefied gas flashes as it leaves the hole, and the liquid orifice equation assumes a liquid that stays liquid. The engine gives a liquid rate and a gas rate; it has no rate for a flashing release. Choosing either one for such a release is a modelling decision the note must defend.
+Two phase discharge is the absence to watch most closely. A pressurised liquefied gas flashes as it leaves the hole, and the liquid orifice equation assumes a liquid that stays liquid. The engine gives a liquid rate and a gas rate; it has no rate for a flashing release. Choosing either one for such a release is a modelling decision the note must defend.
 
 The spreading model is absent by name. Ask for a pool with neither a bund nor a thickness and the engine refuses:
 

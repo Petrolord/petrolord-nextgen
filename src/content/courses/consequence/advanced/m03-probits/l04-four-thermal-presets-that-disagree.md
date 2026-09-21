@@ -2,7 +2,7 @@
 
 {{panel:cq-harm}}
 
-The engine carries four thermal probit presets, and at the same heat flux and exposure time they can give answers far apart. None of them is a mistake. They come from different studies of different data, and the engine names each by its origin so that nobody mistakes one for another. This lesson reads them side by side.
+The engine carries four thermal probit presets, and at the same heat flux and exposure time they can give answers far apart. None of them is an engine mistake. Each is transcribed from a named published source, and the engine names each by its origin so that nobody mistakes one for another. This lesson reads them side by side.
 
 ## The four presets
 
@@ -31,7 +31,7 @@ OSD/30 Table 17 prints, for each named preset, the thermal dose that kills one p
 
 These printed lethal doses are what makes the three OSD presets graded quantities in this course.
 
-The same table carries a TNO row, a = -15.3 and b = 3.02, and prints lethal doses of 389 and 841 for it. Those do not follow from the row's own coefficients, which give 384.344943 and 830.355817. The source does not say which half of the row is wrong, so the engine carries no such preset. Ask for it by that name and the engine refuses:
+The same table carries a TNO row, a = -15.3 and b = 3.02, and prints lethal doses of 389 and 841 for it. Those do not follow from the row's own coefficients, which give 384.344943 and 830.355817 in the golden. The source does not say which half of the row is wrong, so the engine carries no such preset. Ask for it by that name and the engine refuses:
 
 > coefficients: unknown preset 'tno'; one of eisenberg, tsao-perry, lees, purple-book, or give { a, b } explicitly
 
@@ -39,7 +39,7 @@ The erratum belongs to the published table.
 
 ## What the disagreement means
 
-The spread between presets is information about the data behind them, and a consequence note treats it that way. It names the preset it used and its source, shows the others beside it, and says why it chose. A reader who sees only one preset cannot tell whether the answer sits at the cautious or the generous end of the published range. Because every preset is named by its origin, the choice is visible in every result the engine returns.
+The spread between presets is information about the sources behind them, and a consequence note treats it that way. It names the preset it used and its source, shows the others beside it, and says why it chose. A reader who sees only one preset cannot tell whether the answer sits at the cautious or the generous end of the published range. Because every preset is named by its origin, the choice is visible in every result the engine returns.
 
 ## Exercise
 

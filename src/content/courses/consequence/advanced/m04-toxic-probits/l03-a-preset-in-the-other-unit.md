@@ -4,7 +4,7 @@
 
 {{panel:cq-release}}
 
-A concentration arrives in one unit and a preset expects another more often than not. The Gaussian plume returns mg/m3; the Lees presets expect ppm; a gas detector reads ppm; the Purple Book presets expect mg/m3. The conversion between the two runs through a molar volume, and the molar volume depends on the temperature.
+A concentration can arrive in one unit when the preset expects another. The Gaussian plume returns mg/m3; the Lees presets expect ppm; a gas detector reads ppm; the Purple Book presets expect mg/m3. The conversion between the two runs through a molar volume, and the molar volume depends on the temperature.
 
 ## The conversion
 
@@ -39,4 +39,4 @@ The pb-hydrogen-sulfide preset in this lesson is a Purple Book preset and so a t
 
 ## Exercise
 
-On the harm panel's toxic view, enter 800 ppm of hydrogen sulphide for 15 minutes on pb-hydrogen-sulfide with 34.08 g/mol, first at 293.15 K and then with the temperature left blank. Confirm both rows above. Then switch the concentration unit to mg/m3, type 1133.397113 at 293.15 K, and confirm the probit is unchanged. Remove the molar mass and record the field the refusal names. Finally, on the release panel's plume view, give a molar mass and read a ppm figure beside its mg/m3.
+On the harm panel's toxic view, enter 800 ppm of hydrogen sulphide for 15 minutes on pb-hydrogen-sulfide with 34.08 g/mol, first at 293.15 K and then with the temperature left blank. Confirm both rows above, then remove the molar mass and record the field the refusal names. Restore it, switch the concentration unit to mg/m3, type 1133.397113 at 293.15 K, and confirm the probit is unchanged. Finally, on the release panel's plume view, give a molar mass and read a ppm figure beside its mg/m3.
