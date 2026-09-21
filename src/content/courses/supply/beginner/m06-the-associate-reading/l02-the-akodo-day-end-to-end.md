@@ -27,7 +27,7 @@ The opening stock is an input, and it is yesterday's closing dip. The expected c
 
 The digest measures three ways of closing the same day badly, and each teaches one rule.
 
-**Leave the opening stock out.** The engine refuses: "No opening stock, so the day cannot be closed. The opening stock is yesterday's closing dip." It does not start from zero, which would book yesterday's whole stock as today's gain.
+**Leave the opening stock out.** The engine refuses: "No opening stock, so the day cannot be closed. The opening stock is yesterday's closing dip." It does not start from zero, and it prints no unaccounted figure for a day with no opening stock.
 
 **Take the opening stock from today's dip.** Opening = closing dip less receipts plus deliveries plus known losses gives 4945.052 m3 on this day, and the day reads unaccounted 0.000 m3, balanced. Every closing dip the digest tries, from 4380.250 m3 to 4855.500 m3, reads balanced in the same way. Every row balances, so none of them measured anything. That is why the opening stock is an input taken from before the day began.
 

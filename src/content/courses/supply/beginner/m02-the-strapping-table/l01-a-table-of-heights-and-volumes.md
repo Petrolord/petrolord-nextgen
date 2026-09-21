@@ -4,7 +4,7 @@
 
 ## What strapping means
 
-A tank is calibrated once, carefully, and the result is written down as a table. Each row pairs a height above the tank's datum, in millimetres, with the volume the tank holds when liquid stands at that height, in cubic metres. The name comes from the old practice of measuring a tank's circumference with a steel strap at several rings, but the table can come from a strap, from an optical survey or from the tank's drawings. What matters for this course is what the table is: the only thing that links a dip to a volume for that one tank.
+Each AKODO tank carries a table of its own. Each row pairs a height above the tank's datum, in millimetres, with the volume the tank holds when liquid stands at that height, in cubic metres. The two vertical tables at AKODO are built from the tank geometry, and the horizontal bullet's table is one whose volume is not linear in height. What matters for this course is what the table is: the only thing that links a dip to a volume for that one tank.
 
 A strapping table belongs to a tank and to nothing else, and each AKODO tank carries its own. terminalDepot ships no table and refuses a dip when the tank has none:
 
