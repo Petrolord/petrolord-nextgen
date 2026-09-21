@@ -1,0 +1,34 @@
+{
+ "deg": {
+  "decimals": 6,
+  "match": "^(?:yokri_flame_tilt_deg)$"
+ },
+ "kgPerS": {
+  "decimals": 6,
+  "match": "^(?:okan_condensate_leak_mass_rate_kg_s|okan_gas_riser_choked_mass_rate_kg_s|okan_vent_subsonic_mass_rate_kg_s)$"
+ },
+ "m": {
+  "decimals": 6,
+  "match": "^(?:okan_deck_spill_equivalent_diameter_m|okan_plume_far_distance_m|pennington_blast_distance_for_overpressure_m|yokri_flame_length_with_wind_m)$"
+ },
+ "pa": {
+  "decimals": 6,
+  "match": "^(?:pennington_blast_overpressure_pa)$"
+ },
+ "ppm": {
+  "decimals": 6,
+  "match": "^(?:okan_plume_receptor_concentration_ppm)$"
+ },
+ "probability": {
+  "decimals": 6,
+  "match": "^(?:pennington_ammonia_lethality_probability|pennington_overpressure_fatality_probability|pennington_thermal_lethality_probability|pennington_toxic_lethality_probability)$"
+ },
+ "viewFactor": {
+  "decimals": 12,
+  "match": "^(?:yokri_view_factor_max)$"
+ },
+ "wPerM2": {
+  "decimals": 6,
+  "match": "^(?:yokri_solid_flame_heat_flux_w_m2|yokri_surface_emissive_power_actual_w_m2|yokri_surface_emissive_power_mudan_w_m2)$"
+ }
+}

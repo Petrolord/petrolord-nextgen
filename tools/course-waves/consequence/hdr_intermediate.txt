@@ -1,0 +1,22 @@
+-- ============================================================================
+-- H4 PROFESSIONAL DEEP SEED: Consequence Modelling, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/consequence/intermediate.
+--
+-- What this tier owns: WHAT DOES THE FIRE RADIATE. The solid flame model one
+-- step at a time: the Babrauskas burning flux and its asymptote, Burgess as a
+-- single route form, Thomas in still air and with wind, the scaled wind speed
+-- held at one, the flame tilt, three surface emissive powers that disagree,
+-- the view factor of a tilted cylinder with a flame over the target refused,
+-- the Bagster transmissivity within its band, the heat flux as a product and
+-- the distance to a heat flux, and the Yellow Book pool fire reproduced with
+-- its errata. Digest sections 14 to 22, and section 34.
+--
+-- THE TRAP THE TIER IS BUILT ON. A heat flux is quoted with the method that
+-- made it. The Professional capstone grades the solid flame chain with a
+-- STATED transmissivity, and no point source heat radiation, no setback and
+-- no single route quantity.
+-- ============================================================================

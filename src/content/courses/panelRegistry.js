@@ -207,6 +207,10 @@ export const PANELS = {
   'qr-event-tree': React.lazy(() => import('@/components/course/panels/qra/EventTreeExplorer')),
   'qr-societal': React.lazy(() => import('@/components/course/panels/qra/SocietalExplorer')),
   'qr-alarp': React.lazy(() => import('@/components/course/panels/qra/AlarpExplorer')),
+  // H4 Consequence Modelling (academy module hse)
+  'cq-release': React.lazy(() => import('@/components/course/panels/consequence/ReleaseExplorer')),
+  'cq-fire': React.lazy(() => import('@/components/course/panels/consequence/FireExplorer')),
+  'cq-harm': React.lazy(() => import('@/components/course/panels/consequence/HarmExplorer')),
 
   // FC6 Heat Exchange & Cooling
   'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),
