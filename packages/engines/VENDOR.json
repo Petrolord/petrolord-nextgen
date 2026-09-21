@@ -1555,48 +1555,6 @@
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
-      "path": "__tests__/hse.lopa.test.js",
-      "kind": "extra",
-      "group": "h3-lopa-course",
-      "vendoredSha": "5962981f07ee9bdda205547278ea854b3bd2c2ea",
-      "reason": "H3 lopa course: vendored sha-identical from petrolord-engines 6703c00 (PR #218, engines/hse/lopa.js; unchanged through b43f1d9) by the wave's vendor_lopa.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 6703c00 or later."
-    },
-    {
-      "path": "engines/hse/lopa.js",
-      "kind": "extra",
-      "group": "h3-lopa-course",
-      "vendoredSha": "8b83b8e9c4047a90d107c2fa433903fafafac646",
-      "reason": "H3 lopa course: vendored sha-identical from petrolord-engines 6703c00 (PR #218, engines/hse/lopa.js; unchanged through b43f1d9) by the wave's vendor_lopa.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 6703c00 or later."
-    },
-    {
-      "path": "test-data/hse/goldens/lopa_cases.json",
-      "kind": "extra",
-      "group": "h3-lopa-course",
-      "vendoredSha": "5c855d5e563f59d718d1e7643e3698dd35bada4b",
-      "reason": "H3 lopa course: vendored sha-identical from petrolord-engines 6703c00 (PR #218, engines/hse/lopa.js; unchanged through b43f1d9) by the wave's vendor_lopa.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 6703c00 or later."
-    },
-    {
-      "path": "tools/validation/hse/FINDINGS-lopa.md",
-      "kind": "extra",
-      "group": "h3-lopa-course",
-      "vendoredSha": "0e95aaea105130d4089c5ae411a86e9dcff693ca",
-      "reason": "H3 lopa course: vendored sha-identical from petrolord-engines 6703c00 (PR #218, engines/hse/lopa.js; unchanged through b43f1d9) by the wave's vendor_lopa.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 6703c00 or later."
-    },
-    {
-      "path": "tools/validation/hse/negcontrol_lopa.sh",
-      "kind": "extra",
-      "group": "h3-lopa-course",
-      "vendoredSha": "a764801ce7cb9233481b98e5b469c6e172d1a1cf",
-      "reason": "H3 lopa course: vendored sha-identical from petrolord-engines 6703c00 (PR #218, engines/hse/lopa.js; unchanged through b43f1d9) by the wave's vendor_lopa.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 6703c00 or later."
-    },
-    {
-      "path": "tools/validation/hse/oracle_lopa.py",
-      "kind": "extra",
-      "group": "h3-lopa-course",
-      "vendoredSha": "ba0332edc1b06b93ff63eff2152d3dcd94928af9",
-      "reason": "H3 lopa course: vendored sha-identical from petrolord-engines 6703c00 (PR #218, engines/hse/lopa.js; unchanged through b43f1d9) by the wave's vendor_lopa.sh, 24 proofs. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to 6703c00 or later."
-    },
-    {
       "path": "README.md",
       "kind": "differing",
       "group": "7-vendor-readme",
