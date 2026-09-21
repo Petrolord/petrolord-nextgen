@@ -46,8 +46,8 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261015_b3_recut_supply_intermediate   ) echo a64e43689e93a99f9388b0ae0fe0b6a287d3e3ab2e246a1736c10081e04d7a94 ;;
-    20261015_b3_recut_supply_advanced       ) echo 5cc92003907fdfce5c07bd90eb20cc8041b280988c34dee3c8bc0788476d4c00 ;;
+    20261015_b3_recut_supply_intermediate   ) echo 48cf5376e6a9c8f2fcad98f12e03578bc166e1c8c7a4b3f42e3207ec3ff0b200 ;;
+    20261015_b3_recut_supply_advanced       ) echo f70230233435eaf6a329bd5a8c590e85dc2eaf3ae0ac5141574f688539d2cd9d ;;
     *) echo UNPINNED ;;
   esac
 }

@@ -47,9 +47,9 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261015_b3_recut_carbon_beginner       ) echo bd3d2a67d78b27d9c1b4ee9c0106c760353c04b0766d3093d38da444428a0e45 ;;
-    20261015_b3_recut_carbon_intermediate   ) echo f6335c496e0f845c4a598512e8f18cec3c718fc71dffe06c497e429ad8926140 ;;
-    20261015_b3_recut_carbon_advanced       ) echo ef0987482dba61040eb34d9c4740eba4c0f91a7187a60fce19a6924f1fce6409 ;;
+    20261015_b3_recut_carbon_beginner       ) echo 6cc32beb6ae4dbc594ef40376aadbb7eca2eb285f173ad8ea174b2e76b2adc24 ;;
+    20261015_b3_recut_carbon_intermediate   ) echo 2cc91807af8b01fbee0414ee50b4c4ee00589c1fcaff37432de0fe69174a2e40 ;;
+    20261015_b3_recut_carbon_advanced       ) echo 74945c0cc111e4f9885cc102345b0ea68d1010411bf97ad68071c0504d8f2de3 ;;
     *) echo UNPINNED ;;
   esac
 }

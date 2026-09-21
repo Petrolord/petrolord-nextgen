@@ -2,9 +2,7 @@
  "course": "Refinery Feasibility & Planning (refinery)",
  "slug": "refinery",
  "engines": "petrolord-engines e972ae7 (engines PR #232, the copy pass and the queue vocabularies)",
- "old_ref": "78d0a3290",
- "new_ref": "dec51d243",
- "method": "OLD is the row the APPLIED deep seed migrations/20261011_rf_refinery_<tier>_deep.sql wrote: the generator rebuilds the 132 VALUES lines from the banks at 78d0a3290 and requires them to be that file's VALUES block byte for byte. NEW is what the same generator writes from the banks at dec51d243. No production access: OLD was not compared with a dump of the live rows; each migration refuses a row matching neither OLD nor NEW, and the owner-run rolled-back dry run is that comparison.",
+ "method": "OLD is the row the APPLIED deep seed migrations/20261011_rf_refinery_<tier>_deep.sql wrote: the generator rebuilds the 132 VALUES lines from the banks before the recut (OLD_REF) and requires them to be that file's VALUES block byte for byte. NEW is what the same generator writes from the recut banks (NEW_REF). No production access: OLD was not compared with a dump of the live rows; each migration refuses a row matching neither OLD nor NEW, and the owner-run rolled-back dry run is that comparison.",
  "tiers": {
   "beginner": [],
   "intermediate": [

@@ -45,7 +45,7 @@ FILES="
 "
 digest_for() {
   case $1 in
-    20261015_b3_recut_refinery_intermediate ) echo 42a15af972b4561ce75ebc20bddcc356b4cf1376475cd01582167c6cca3edc81 ;;
+    20261015_b3_recut_refinery_intermediate ) echo dec63e8b48dd938bd6db4c59cef9dd3d129808e529c5cd70efcf58c2d3a607ce ;;
     *) echo UNPINNED ;;
   esac
 }
