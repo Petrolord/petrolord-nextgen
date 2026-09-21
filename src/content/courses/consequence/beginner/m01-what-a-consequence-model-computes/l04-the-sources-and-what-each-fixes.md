@@ -32,7 +32,7 @@ Each source fixes a particular part of the engine:
 
 For the Associate tier three of these carry almost everything. The Yellow Book fixes the outflow through a hole, the pool diameter and the evaporation. ALOHA fixes the plume and its sigma coefficients. CCOHS fixes the conversion between ppm and mg/m3. The Purple Book adds one worked carbon monoxide plume, which module five reproduces. The other rows belong to the fire and harm tiers.
 
-The CCOHS string carries a figure worth noticing: 24.45 L/mol at 25 C. The engine does not take that figure as a constant. It computes the molar volume from the ideal gas law at the temperature and pressure you state, which gives 24.465404 L/mol at 298.15 K, and the printed 24.45 is its rounding. A source can fix a method without fixing every digit.
+The CCOHS string carries a figure worth noticing: 24.45 L/mol at 25 C. The engine does not take that figure as a constant. It computes the molar volume from the ideal gas law at the temperature and pressure you state, which gives 24.465404 L/mol at 298.15 K; the printed 24.45 approximates it to within one part in a thousand. A source can fix a method without fixing every digit.
 
 ## A result carries its own citation
 

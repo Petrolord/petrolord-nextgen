@@ -16,7 +16,7 @@ The basis reads, verbatim: "mg/m3 = ppm x M / Vm, Vm = R T / P (ideal gas)". M i
 | 293.15 | 24.055117 |
 | 298.15 | 24.465404 |
 
-At 298.15 K the molar volume is 24.465404 L/mol. The familiar CCOHS and NIOSH figure of 24.45 is its rounding, and the golden test gates the engine against it at one part in a thousand. The engine computes the molar volume every time from the temperature you state, so a study at another temperature gets the right one without a new constant.
+At 298.15 K the molar volume is 24.465404 L/mol. The familiar CCOHS and NIOSH figure of 24.45 approximates it, and the golden test gates the engine against it at one part in a thousand. The engine computes the molar volume every time from the temperature you state, so a study at another temperature gets the right one without a new constant.
 
 ## Two gases at three temperatures
 

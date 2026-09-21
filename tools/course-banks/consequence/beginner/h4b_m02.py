@@ -118,7 +118,7 @@ q(3,
   ["`holeAreaM2`, and its message says the analyst must compute the area first.",
    "`dischargeCoefficient`, since a zero hole is read as a coefficient out of range.",
    "`massRateKgS`, and its message says the mass rate would be zero."],
-  "Section 3: \"holeDiameterM: a hole diameter above 0 m (or holeAreaM2) is required\". The field named is `holeDiameterM`, and the message offers the hole area as an alternative input without requiring it. The discharge coefficient has its own refusal, and `massRateKgS` is a result, never an input the engine names in a refusal.")
+  "Section 3: \"holeDiameterM: a hole diameter above 0 m (or holeAreaM2) is required\". The field named is `holeDiameterM`, and the message offers the hole area as an alternative input without requiring it. The discharge coefficient has its own refusal, and `massRateKgS` is a result, which no refusal names.")
 
 q(1,
   "What single condition decides whether the liquid model has anything to compute?",

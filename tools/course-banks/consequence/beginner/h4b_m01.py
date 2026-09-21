@@ -79,7 +79,7 @@ q(3,
   ["It returns the concentration of the class F plume at the lowest wind the Briggs table carries, and warns that the air was calm.",
    "It returns an infinite concentration at every receptor, since the plume expression divides by a wind speed of zero.",
    "It returns a concentration from its calm-air form of the plume, with a warning that the form is an extrapolation."],
-  "Section 3 quotes the engine's own message for this call, naming `windSpeedMS`. A refusal carries no number, so there is neither an infinite concentration nor a substituted class F result, and the Briggs table holds sigma coefficients rather than winds. The plume has no calm-air form at all, which is exactly what the message says.")
+  "Section 3 quotes the engine's own message for this call, naming `windSpeedMS`. A refusal carries no number, so there is neither an infinite concentration nor a substituted class F result, and the Briggs table holds sigma coefficients and no winds. The plume has no calm-air form at all, which is exactly what the message says.")
 
 q(0,
   "`briggsRuralSigmas` is asked for class G. What comes back, and which classes does it name?",
@@ -95,7 +95,7 @@ q(2,
   ["The TNO Yellow Book CPR 14E (2005), which also fixes liquid and gas outflow through a hole.",
    "The TNO Purple Book CPR 18E (1999), which also supplies a worked carbon monoxide plume.",
    "CCOHS, the source of the molar volume."],
-  "Section 4 says ALOHA fixes the continuous Gaussian plume with ground reflection and the Briggs rural sigma coefficients. The Yellow Book fixes the outflow, the pool diameter and the evaporation. The Purple Book supplies a worked carbon monoxide plume, which is a published check on the plume and not its source; CCOHS fixes only ppm and mg/m3 through a molar volume.")
+  "Section 4 says ALOHA fixes the continuous Gaussian plume with ground reflection and the Briggs rural sigma coefficients. The Yellow Book fixes the outflow, the pool diameter and the evaporation. The Purple Book supplies a worked carbon monoxide plume, which serves as a published check on the plume; CCOHS fixes only ppm and mg/m3 through a molar volume.")
 
 q(1,
   "The engine names CCOHS as the source for one conversion. What does that source fix?",
@@ -114,7 +114,7 @@ q(0,
   "Section 4 says every basis block names the source it used, so a result carries its own citation, and quotes this one: \"NOAA TM NOS OR&R 43, ALOHA Technical Documentation (2013) section 4.3; sigmas Briggs rural (ALOHA Table 13)\". The basis is part of the returned result and is what a note quotes. It names the source of the method and says nothing of a check at 500 m. It names the one source used, and the full list is `CONSEQUENCE_SOURCES`.")
 
 q(3,
-  "The course writes a quantity per square metre four ways and never shortens them. Which list gives the four qualified names?",
+  "One word in this course is always qualified and never written bare, and it is qualified four ways. Which list gives the four qualified names?",
   "Heat flux, burning flux, evaporation flux and mass flux.",
   ["Heat flux, burning rate, evaporation rate and mass rate, each with its own unit in the argument name.",
    "Burning flux, evaporation flux, mass flux and the release rate, the last being the kilograms per second leaving the hole.",

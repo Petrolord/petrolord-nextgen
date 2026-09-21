@@ -31,7 +31,7 @@ It follows that the pool area does not depend on the spill volume, as long as th
 
 ## Two inputs, two checks
 
-The engine asks for the bund floor area and the wall height together. The floor sets the area and the diameter. The wall is the check: the depth must stay at or below it, or the bund does not confine the spill. The third lesson of this module reads what happens when it does not.
+Give the engine the bund floor area and the wall height together. The floor sets the area and the diameter. The wall is the check: the depth must stay at or below it, or the bund does not confine the spill. The engine makes that check only when a wall height is given, so a call without one returns a pool whatever its depth. The third lesson of this module reads what happens when it does not.
 
 Both are measured quantities on a real plant, taken from the layout drawings. Neither is an analyst's judgement, which is one reason the bund model is the preferred route whenever a bund exists.
 

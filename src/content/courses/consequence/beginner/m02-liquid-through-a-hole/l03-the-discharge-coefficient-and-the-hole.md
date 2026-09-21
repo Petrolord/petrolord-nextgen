@@ -32,7 +32,7 @@ With everything else held, the hole diameter swept:
 | 0.05 | 0.001963495408 | 19.354651 |
 | 0.1 | 0.007853981634 | 77.418603 |
 
-The mass rate is linear in the hole AREA, and the area goes as the square of the diameter. Doubling the diameter from 0.05 to 0.1 m multiplies the rate by, derived, 4.000000. The choice of hole size therefore moves a result more than almost any other input. A study that is unsure of the hole should run a small ladder of sizes and report each, since a guess at the diameter is squared on its way into the answer.
+The mass rate is linear in the hole AREA, and the area goes as the square of the diameter. Doubling the diameter from 0.05 to 0.1 m multiplies the rate by, derived, 4.000000. For the same fractional change, the hole size therefore moves a result faster than any other input on this line. A study that is unsure of the hole should run a small ladder of sizes and report each, since a guess at the diameter is squared on its way into the answer.
 
 ## A published case the engine reproduces
 

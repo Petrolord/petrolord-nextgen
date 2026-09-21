@@ -20,7 +20,7 @@ So every ground level concentration in the UBIT table, 239.712839 mg/m3 at 500 m
 
 ## A check on the whole plume
 
-The independent oracle integrates u times the concentration over every crosswind distance and every height above the ground, for eight plume cases, and recovers the release rate. The golden records that ratio, and it is one to within one part in a billion in every case. That is conservation of mass: everything released per second passes each downwind plane per second. A plume that dropped the reflection would return a half. This mass flux integral is a second route. It checks the reflected plume without ever writing the plume formula the same way twice.
+The independent oracle integrates u times the concentration over every crosswind distance and every height above the ground, for eight plume cases, and recovers the release rate. The golden records that ratio, and it is one to within one part in a billion in every case. That is conservation of mass: everything released per second passes each downwind plane per second. A plume that dropped the reflection would return a half. This mass flux integral is a second route. It checks the reflected plume against conservation of mass, which the formula must satisfy however it is written.
 
 ## A published plume
 

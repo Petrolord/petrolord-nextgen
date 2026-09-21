@@ -21,7 +21,7 @@ In the engine's words, at or below the critical pressure ratio the downstream pr
 
 ## What that means in practice
 
-The linearity is useful as a sanity check. If a choked release at one pressure is known, the rate at another pressure on the same line, at the same temperature, follows by proportion. If a result on a choked line fails that proportion, an input has changed that you did not intend, most often a temperature or a molar mass typed in the wrong unit.
+The linearity is useful as a sanity check. If a choked release at one pressure is known, the rate at another pressure on the same line, at the same temperature, follows by proportion. If a result on a choked line fails that proportion, an input has changed that you did not intend, such as a temperature or a molar mass typed in the wrong unit.
 
 It also tells you where the uncertainty lives. On a choked line the upstream pressure, the hole area and the coefficient each move the rate in direct proportion. Ambient pressure does not move it at all, so a study of a choked release gains nothing by refining the weather's barometric pressure and a great deal by pinning down the hole.
 
@@ -38,7 +38,7 @@ The gas outflow this course grades carries an independent check, a route that ne
 | air-barely-choked | CHOKED | 0.113903 | 0.113903 | 3.66e-16 |
 | co2-high-gamma-low | SUBSONIC | 0.216885 | 0.216885 | 3.84e-16 |
 
-The two routes agree to the last digit a double precision number carries. A mistake copied into both the engine's formula and the oracle's formula would survive a comparison of formulas. It would not survive this one, because route B never writes the choked formula down.
+The two routes agree to within the rounding of double precision arithmetic. A mistake copied into both the engine's formula and the oracle's formula would survive a comparison of formulas. It would not survive this one, because route B never writes the choked formula down.
 
 ## Exercise
 

@@ -27,7 +27,7 @@ An overtopping bund is itself a finding worth recording, because a bund exists t
 
 ## The check is simple
 
-The depth test is one division: the spill volume over the bund floor area, against the wall height. The engine performs it on every confined call. A bund result always means the liquid stayed below the wall.
+The depth test is one division: the spill volume over the bund floor area, against the wall height. The engine performs it on every confined call that states a wall height. A bund result from such a call means the liquid stood at or below the wall.
 
 ## Exercise
 

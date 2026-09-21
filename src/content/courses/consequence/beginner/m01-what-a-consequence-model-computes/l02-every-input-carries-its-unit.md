@@ -6,7 +6,7 @@ Read the argument names of any function in this engine: `massRateKgS`, `holeDiam
 
 ## The suffixes this tier meets
 
-The engine's own table of suffixes, for the fields the Associate functions use:
+The suffixes, for the fields the Associate functions use:
 
 | suffix in the argument name | unit | an example argument |
 | --- | --- | --- |

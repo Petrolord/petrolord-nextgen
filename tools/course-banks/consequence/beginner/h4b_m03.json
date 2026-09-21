@@ -16,10 +16,10 @@
    "It grows by the square root of 40.000000, because the rate goes as the square root of the driving pressure as it does for a liquid.",
    "It grows by 40.000000, the same as the pressure ratio, from 0.129090 to 5.163609 kg/s.",
    "It stays at 0.129090 kg/s, since a choked hole passes a fixed mass rate whatever the upstream pressure.",
-   "It grows by 40.000000 in the upstream density alone."
+   "It grows by 40.000000 squared, as density and speed both rise."
   ],
   "answer": 1,
-  "explanation": "Section 6: once choked the mass rate is LINEAR in the upstream pressure, and from 250000 to 10000000 Pa it grows by 40.000000, the same as the pressure ratio. The square root law is the liquid model's. The rate does not stay fixed: the table prints 0.129090 kg/s at 250000 Pa and 5.163609 kg/s at 10000000 Pa. The upstream density also grows, from 1.607640 to 64.305619 kg/m3, and the mass rate grows with it, so the density is no substitute for the rate the question asks about."
+  "explanation": "Section 6: once choked the mass rate is LINEAR in the upstream pressure, and from 250000 to 10000000 Pa it grows by 40.000000, the same as the pressure ratio. The square root law is the liquid model's. The rate does not stay fixed: the table prints 0.129090 kg/s at 250000 Pa and 5.163609 kg/s at 10000000 Pa. The upstream density grows by the same 40.000000, from 1.607640 to 64.305619 kg/m3, while the choked speed is set by the temperature and the gas, so nothing squares the ratio."
  },
  {
   "prompt": "What is the outflow coefficient psi on the AMENAM GAS line, and what does it do at the choked rows?",
@@ -93,10 +93,10 @@
    "About 1 percent, the step between the subsonic and choked branches that the Yellow Book warns of.",
    "1.00e-9 relative: psi is 1.000000000000 on both sides, so the label flips with no jump in the rate.",
    "About 0.543927 relative, the size of the critical pressure ratio of the methane line itself.",
-   "They are identical to every printed digit, and the regime flag is the one difference between the two results."
+   "A step of its own, since just below the boundary psi takes the 0.999177 printed for the last subsonic row."
   ],
   "answer": 1,
-  "explanation": "Section 7 prints it: psi is 1.000000000000 on both sides and the two mass rates differ by, derived, 1.00e-9 relative. The subsonic outflow coefficient equals one there, so the flag flips with no jump, and the regime is a label on a continuous curve. There is no percentage step, and 0.543927 is a threshold on the pressure ratio that says nothing about a gap between rates. The rates do differ, by the tiny 1.00e-9 that the pressure itself moved."
+  "explanation": "Section 7 prints it: psi is 1.000000000000 on both sides and the two mass rates differ by, derived, 1.00e-9 relative. The subsonic outflow coefficient equals one there, so the flag flips with no jump, and the regime is a label on a continuous curve. There is no percentage step, and 0.543927 is a threshold on the pressure ratio that says nothing about a gap between rates. 0.999177 is psi at 180000 Pa, well above the boundary; one part in a billion below it psi still prints 1.000000000000."
  },
  {
   "prompt": "The golden case air-barely-subsonic has ambient over upstream 0.53328947368421054 against a critical pressure ratio of 0.52828178771717416. What does the engine return?",
@@ -107,7 +107,7 @@
    "SUBSONIC, with psi 0.999944960481 and 0.112711 kg/s."
   ],
   "answer": 3,
-  "explanation": "0.53328947368421054 is above 0.52828178771717416, so the case is SUBSONIC with psi 0.999944960481, just below one, and 0.112711 kg/s. CHOKED with 0.113903 kg/s is air-barely-choked, at 0.52773437499999998. Psi 0.756455 is the methane line at 120000 Pa. The test uses the gas's own critical ratio, 0.52828178771717416 for air, never the methane line's 0.543927."
+  "explanation": "0.53328947368421054 is above 0.52828178771717416, so the case is SUBSONIC with psi 0.999944960481, just below one, and 0.112711 kg/s. CHOKED with 0.113903 kg/s is air-barely-choked, at 0.52773437499999998. Psi 0.756455 is the methane line at 120000 Pa. The test uses the gas's own critical ratio, 0.52828178771717416 for air; the methane line's 0.543927 plays no part."
  },
  {
   "prompt": "`gasOrificeDischarge` is given an upstream pressure equal to ambient. What does the engine return?",
@@ -140,7 +140,7 @@
    "It is refused: \"upstreamTemperatureK: must be an absolute temperature above 0 K\""
   ],
   "answer": 3,
-  "explanation": "The name `upstreamTemperatureK` says kelvin, the engine never converts a unit it was not asked to, and zero kelvin is refused in the quoted words. A refusal carries no number, so there is no infinite density and no result. 300 K is a stated input of the teaching line, never a default."
+  "explanation": "The name `upstreamTemperatureK` says kelvin, the engine never converts a unit it was not asked to, and zero kelvin is refused in the quoted words. A refusal carries no number, so there is no infinite density and no result. 300 K is a stated input of the teaching line, and the engine carries no default temperature."
  },
  {
   "prompt": "Why does lowering the ambient pressure below a choked hole leave its mass rate unchanged?",

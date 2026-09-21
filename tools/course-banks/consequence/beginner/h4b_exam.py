@@ -192,9 +192,9 @@ q(2,
   "The confined pool covers a 400 m2 bund floor. What does its equivalent diameter of 22.567583 m describe?",
   "The diameter of a circle with the same area as the bund floor, D = sqrt(4 A / pi).",
   ["The longest side of the bund, measured along its wall at the height the spill reaches.",
-   "The diameter the spill would reach if it spread with no bund at the stated thickness of 0.075000 m.",
+   "The distance the spill runs from the hole to the far wall of the bund before it comes to rest.",
    "The depth of the pool times the area, 0.075000 m times 400 m2."],
-  "Section 8 gives the model string \"pool covers the bund floor; D = sqrt(4 A / pi)\": the equivalent diameter is that of a circle of the bund's area. The bund's shape is not an input. 0.075000 m is the depth of the confined pool, and the engine spreads nothing. Depth times area is the volume, 30 m3, never a diameter.")
+  "Section 8 gives the model string \"pool covers the bund floor; D = sqrt(4 A / pi)\": the equivalent diameter is that of a circle of the bund's area. The bund's shape is not an input, and the engine models no run of liquid across the floor: the pool simply covers it. Depth times area is the volume, 30 m3.")
 
 q(1,
   "What comparison decides whether `poolFromSpill` refuses a spill as overtopping its bund?",
@@ -251,7 +251,7 @@ q(0,
   ["All six classes are linear in the distance for sigma_z, since sigma_z is the vertical spread and the ground limits it.",
    "Class A is clamped to a linear form inside 100 m to 10 km, the advisory range that the curves are quoted for.",
    "Its sz1 is 0, so only the sz2 term survives."],
-  "The `BRIGGS_RURAL` table gives class A sz1 0.2, sz2 0 and sz3 0, so sigma_z = sz1 x (1 + sz2 x)^sz3 reduces to 0.2 x. Class D at 1000 m is 37.947332 m, which is far from linear, so the classes differ. Nothing is clamped, and sz1 is 0.2.")
+  "The `BRIGGS_RURAL` table gives class A sz1 0.2, sz2 0 and sz3 0, so sigma_z = sz1 x (1 + sz2 x)^sz3 reduces to 0.2 x. Class D goes from 5.595029 m at 100 m to 37.947332 m at 1000 m, less than seven times as much, so the classes differ. Nothing is clamped, and sz1 is 0.2.")
 
 q(1,
   "Closer in, only 200 m out, what does the neutral class give for UBIT on the axis at the ground?",
@@ -283,7 +283,7 @@ q(0,
   ["24.45 L/mol, the CCOHS figure at every temperature.",
    "24.465404 L/mol, the molar volume the engine uses at 298.15 K.",
    "24.055117 L/mol, the molar volume the engine uses at 293.15 K."],
-  "R T / P at the freezing point gives 22.413970 L/mol, the smallest of the three temperatures tabled. Colder gas packs tighter, so the warmer rows carry the larger figures offered. The CCOHS number is a published rounding of the warmest row and is never used in place of the computed volume.")
+  "R T / P at the freezing point gives 22.413970 L/mol, the smallest of the three temperatures tabled. Colder gas packs tighter, so the warmer rows carry the larger figures offered. The CCOHS number is a published approximation of the warmest row, and the engine always computes its own volume.")
 
 q(3,
   "In the plume expression, the term exp(-(z + h)^2 / 2 sz^2) sits beside exp(-(z - h)^2 / 2 sz^2). What does it stand for?",
@@ -291,7 +291,7 @@ q(3,
   ["A correction for the stack's own height, subtracted from the first term to account for the gas absorbed by the ground below the release.",
    "The crosswind spread of the plume, which the engine adds to the vertical term to widen the plume sideways.",
    "A second release of the same size above the first, used only for a stack."],
-  "Section 11: the second exponential is the IMAGE SOURCE at minus h, and the ground reflects what reaches it. It is added, never subtracted, and total reflection absorbs nothing. The crosswind term is exp(-y^2 / 2 sy^2), a separate factor. The image sits below the ground at minus h for every release height, including a ground level one.")
+  "Section 11: the second exponential is the IMAGE SOURCE at minus h, and the ground reflects what reaches it. It is added to the first term, and total reflection absorbs nothing. The crosswind term is exp(-y^2 / 2 sy^2), a separate factor. The image sits below the ground at minus h for every release height, including a ground level one.")
 
 # ---------------------------------------------------------------- m06
 q(3,
@@ -320,7 +320,7 @@ q(3,
 
 q(0,
   "The elevated release's table repeats one maximum, 153.887548 mg/m3 at 347.557177 m, on every target row. Why does the target never move it?",
-  "The maximum belongs to the plume itself, set by the release, the stack height and the class; a target only decides where that curve is crossed.",
+  "The maximum belongs to the plume itself, set by the release rate, the wind, the stack height and the class; a target only decides where that curve is crossed.",
   ["The engine computes the maximum on the first row only and copies it to the other rows, which saves running a second search.",
    "It does move, but the six decimal print rounds away every change between the rows of the table.",
    "Every target in the table is REACHED."],

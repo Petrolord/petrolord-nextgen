@@ -151,7 +151,7 @@
    "`holeDiameterM`, and its message says a hole diameter above 0 m (or holeAreaM2) is required."
   ],
   "answer": 3,
-  "explanation": "Section 3: \"holeDiameterM: a hole diameter above 0 m (or holeAreaM2) is required\". The field named is `holeDiameterM`, and the message offers the hole area as an alternative input without requiring it. The discharge coefficient has its own refusal, and `massRateKgS` is a result, never an input the engine names in a refusal."
+  "explanation": "Section 3: \"holeDiameterM: a hole diameter above 0 m (or holeAreaM2) is required\". The field named is `holeDiameterM`, and the message offers the hole area as an alternative input without requiring it. The discharge coefficient has its own refusal, and `massRateKgS` is a result, which no refusal names."
  },
  {
   "prompt": "What single condition decides whether the liquid model has anything to compute?",

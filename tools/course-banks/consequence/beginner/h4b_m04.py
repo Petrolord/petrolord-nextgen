@@ -30,7 +30,7 @@ q(1,
   ["UNCONFINED_STATED_THICKNESS, 1500.000000 m2, equivalent diameter 43.701937 m, the row the table prints at 0.02 m.",
    "UNCONFINED_STATED_THICKNESS, 6000.000000 m2, equivalent diameter 87.403874 m, since half a centimetre is the default film.",
    "CONFINED, 400.000000 m2, since the thickness is read as a bund depth."],
-  "The thickness table prints 3000.000000 m2 and 61.803872 m at 0.01 m, from A = V / delta and D = sqrt(4 V / (pi delta)). 1500.000000 m2 and 43.701937 m are the 0.02 m row. 6000.000000 m2 and 87.403874 m are the 0.005 m row, and the engine has no default thickness at all. A thickness gives an unconfined pool, never a bund.")
+  "The thickness table prints 3000.000000 m2 and 61.803872 m at 0.01 m, from A = V / delta and D = sqrt(4 V / (pi delta)). 1500.000000 m2 and 43.701937 m are the 0.02 m row. 6000.000000 m2 and 87.403874 m are the 0.005 m row, and the engine has no default thickness at all. A stated thickness gives an unconfined pool.")
 
 q(3,
   "The stated thickness of the 30 m3 pool is halved from 0.01 m to 0.005 m. What happens to the equivalent diameter?",
@@ -94,7 +94,7 @@ q(2,
   ["0.67, the exponent in the correlation, and a constant of 0.78, the exponent on the wind.",
    "0.8, and a constant of 0.010163820387, the mass transfer coefficient of the hexane-like pool.",
    "1, and no constant."],
-  "Section 9: the Schmidt number defaults to 0.8, the Yellow Book's value for gases and vapours in general, and `MACKAY_MATSUGU_C` is 0.004786. The 0.67 and 0.78 are exponents in km = 0.004786 u10^0.78 (2r)^-0.11 Sc^-0.67. 0.010163820387 m/s is a result of the correlation for one pool, never its constant.")
+  "Section 9: the Schmidt number defaults to 0.8, the Yellow Book's value for gases and vapours in general, and `MACKAY_MATSUGU_C` is 0.004786. The 0.67 and 0.78 are exponents in km = 0.004786 u10^0.78 (2r)^-0.11 Sc^-0.67. 0.010163820387 m/s is a result of the correlation for one pool.")
 
 q(1,
   "An evaporation call is made with a wind at 10 m of zero. Why does the engine refuse it?",

@@ -16,7 +16,7 @@ q(1,
   ["A is the most stable, because its sigmas are the largest and the plume holds together, and F the most unstable, with D neutral.",
    "F is the most stable, A the most unstable, and C is neutral, since C sits in the middle of the six letters.",
    "D is the most stable, being neutral, and A and F are both unstable at the two ends of the table the engine exports."],
-  "Section 10: class A is the most unstable (a sunny afternoon, light wind) and class F the most stable (a clear night, light wind); D is neutral. A has the LARGEST sigmas because an unstable atmosphere spreads the plume fastest, so large sigmas mean mixing and not stability. Neutral is D, whatever its place in the alphabet.")
+  "Section 10: class A is the most unstable (a sunny afternoon, light wind) and class F the most stable (a clear night, light wind); D is neutral. A has the LARGEST sigmas because an unstable atmosphere spreads the plume fastest, so large sigmas mean strong mixing. Neutral is D, whatever its place in the alphabet.")
 
 q(3,
   "What sigma_z does the engine return for class D at 1000 m?",
@@ -100,11 +100,11 @@ q(3,
 
 q(1,
   "What molar volume does the engine use at 298.15 K and 101325 Pa, and how does it relate to the CCOHS 24.45 L/mol?",
-  "24.465404 L/mol from R T / P; 24.45 is its rounding, which the golden gates at one part in a thousand.",
+  "24.465404 L/mol from R T / P; the printed 24.45 lies within one part in a thousand of it.",
   ["24.45 L/mol exactly, since the engine takes the CCOHS figure as a constant for every conversion it makes.",
    "22.413970 L/mol, the molar volume at 273.15 K, which the engine uses for every temperature.",
    "24.055117 L/mol, at 293.15 K."],
-  "Section 12: the molar volume is the ideal gas R T / P at the stated temperature and pressure, 24.465404 L/mol at 298.15 K, and the CCOHS and NIOSH figure of 24.45 is its rounding, gated at one part in a thousand. The engine computes it and holds no constant 24.45. 22.413970 and 24.055117 L/mol are the 273.15 K and 293.15 K rows.")
+  "Section 12: the molar volume is the ideal gas R T / P at the stated temperature and pressure, 24.465404 L/mol at 298.15 K, and the CCOHS and NIOSH figure of 24.45 approximates it, gated at one part in a thousand. The engine computes it and holds no constant 24.45. 22.413970 and 24.055117 L/mol are the 273.15 K and 293.15 K rows.")
 
 q(0,
   "Hydrogen sulphide (34.08 g/mol) at 50 ppm reads 76.024017 mg/m3 at 273.15 K and 69.649372 mg/m3 at 298.15 K. What does that difference teach?",

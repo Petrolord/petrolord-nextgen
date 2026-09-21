@@ -6,7 +6,7 @@ A consequence model starts from one assumption: the release has happened. A flan
 
 ## What the engine turns into numbers
 
-The engine has five sections: source terms, dispersion, fires, explosions and probits. In its own words it turns a loss of containment into physical effects: how much gets out, where it goes, what a fire radiates, what a blast does and what fraction of the people exposed a probit says would be harmed. The Associate tier works in the first two sections, through these functions:
+The engine has five sections: source terms, dispersion, fires, explosions and probits. It turns a loss of containment into physical effects: how much gets out, where it goes, what a fire radiates, what a blast does and what fraction of the people exposed a probit says would be harmed. The Associate tier works in the first two sections, through these functions:
 
 | function | engine section | what it returns |
 | --- | --- | --- |
@@ -39,4 +39,4 @@ Some tools sit close to consequence modelling and belong to other courses of the
 
 ## Exercise
 
-Open the release explorer on the view for liquid and gas through a hole, and run the AMENAM crude line as it loads. Write down every quantity the engine returns for the liquid. Then write two sentences. In the first, say which of those quantities a dispersion calculation downstream would take as its input. In the second, say what further piece of information, which this engine never asks for, a quantitative risk study would need before it could use the same result.
+Open the release explorer on the view for liquid and gas through a hole, and run the AMENAM crude line as it loads. Write down every quantity the panel shows for the liquid. Then write two sentences. In the first, say which of those quantities a dispersion calculation downstream would take as its input. In the second, say what further piece of information, which this engine never asks for, a quantitative risk study would need before it could use the same result.

@@ -10,7 +10,7 @@ The pressure at the hole is the static head plus the pressure above the liquid. 
 
 > pressureAboveLiquidPa: the pressure at the hole does not exceed ambient, so nothing flows out
 
-The engine names `pressureAboveLiquidPa` because that is the input most often mistyped. A gauge reading typed into an absolute field lands one atmosphere low and can put a real, flowing tank on the wrong side of this line.
+The engine names `pressureAboveLiquidPa`, and that is the input to check first. A gauge reading typed into an absolute field lands one atmosphere low and can put a real, flowing tank on the wrong side of this line.
 
 Returning a mass rate of zero here would be arithmetically defensible and dangerous. A zero sits comfortably in a table of results and reads as a small release. The refusal cannot be mistaken for one.
 

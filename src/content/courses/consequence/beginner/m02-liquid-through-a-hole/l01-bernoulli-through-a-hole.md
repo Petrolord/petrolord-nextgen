@@ -34,4 +34,4 @@ Bernoulli through a hole assumes a liquid that stays liquid all the way out. A l
 
 ## Exercise
 
-Open the outflow view with the AMENAM defaults and confirm the driving pressure and mass rate in the table. Then subtract 101325 Pa from the pressure at the hole in the table and check that you recover the driving pressure. Finally, raise the liquid density on the panel and write one sentence on why a denser liquid raises the pressure at the hole and the mass rate together.
+Open the outflow view with the AMENAM defaults and confirm the driving pressure and mass rate in the table. Then subtract 101325 Pa from the pressure at the hole in the table and check that you recover the driving pressure. Finally, raise the liquid density on the panel and write one sentence on why a denser liquid raises the driving pressure and the mass rate together.
