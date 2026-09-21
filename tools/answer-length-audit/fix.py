@@ -357,7 +357,45 @@ def report(g):
         print(f"| {k[0]} | {k[1]} {k[2]} {k[3] or ''} ord {k[4]} | insert | fixed | {i.get('reason')} |")
 
 
+def selftest():
+    """Negative controls: each planted defect must be refused, a clean fix must pass."""
+    ok = True
+    def row(o, a, **kw):
+        r = dict(app_slug='t', tier='beginner', scope='module', module_key='m01', ord=o,
+                 prompt=f'Question {o}?', options=['aaaa' + 'x' * (o % 4), 'bbb', 'cc', 'd'], answer_index=a, explanation='e')
+        r.update(kw); return r
+    rows = [row(i, i % 4) for i in range(1, 17)]
+    for r in rows:
+        r['options'] = ['a' * 40, 'b' * 30, 'c' * 20, 'd' * 10]
+    base = dict(app_slug='t', tier='beginner', scope='module', module_key='m01', category='other', flag='f', reason='r')
+    def item(o, verdict='fixed', **ch):
+        return dict(base, ord=o, verdict=verdict, changes=ch) if ch else dict(base, ord=o, verdict=verdict)
+    def check(name, grp, want_err):
+        nonlocal ok
+        _, new, _, errs = apply(rows, grp)
+        errs = errs + [b['fails'] for b in audit.audit(list(new.values())) if not b['pass']]
+        good = bool(errs) == want_err
+        print(('  ok    ' if good else '  FAIL  ') + name + ('' if good else f'  {errs}'))
+        ok &= good
+    r1 = rows[1]   # ord 2, answer_index 2, correct option 20 characters
+    check('a clean distractor edit passes', {'items': [item(2, options={'0': {'old': r1['options'][0], 'new': 'e' * 41}})]}, False)
+    check('an em dash is refused', {'items': [item(2, options={'0': {'old': r1['options'][0], 'new': 'e' * 30 + '\u2014' + 'e' * 10}})]}, True)
+    check('a stale old text is refused', {'items': [item(2, options={'0': {'old': 'nope', 'new': 'e' * 41}})]}, True)
+    check('a correct-option change without a reason is refused', {'items': [item(2, options={'2': {'old': r1['options'][2], 'new': 'f' * 21}})]}, True)
+    check('a new number absent from the lessons is refused', {'items': [item(2, explanation={'old': 'e', 'new': 'about 987654'})]}, True)
+    check('an "X, not Y" contrastive is refused', {'items': [item(2, explanation={'old': 'e', 'new': 'The rock, not the pipe.'})]}, True)
+    check('a length tie with the correct option is refused', {'items': [item(2, options={'1': {'old': r1['options'][1], 'new': 'e' * 20}})]}, True)
+    check('a fixed verdict with no changes is refused', {'items': [item(2)]}, True)
+    tip = [item(o, options={'0': {'old': rows[o - 1]['options'][0], 'new': 'z' * 5}}) for o in (1, 5, 9, 13)]
+    check('pushing a bank out of band is refused', {'items': tip}, True)
+    dup = {'items': [item(2, prompt={'old': 'Question 2?', 'new': 'Question 3?'})]}
+    check('a prompt that duplicates another question is refused', dup, True)
+    return ok
+
+
 def main():
+    if sys.argv[1:] == ['--selftest']:
+        sys.exit(0 if selftest() else 1)
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest='cmd', required=True)
     for c in ('validate', 'sql', 'report'):
