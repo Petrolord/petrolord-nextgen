@@ -23,7 +23,7 @@ The seventeen-minute record gets the same message with its own total:
 
 ## Why over is refused and under is warned
 
-Under fifteen minutes, the unsampled remainder can be stated as zero and the arithmetic stays inside its definition: the sum of concentration x time over fifteen minutes. The assumption is visible and the warning names it. Over fifteen minutes, there is no rule in the source for what to do. Dividing seventeen minutes of samples by 15 would count seventeen minutes of chemical exposure inside a fifteen-minute window. Dividing by 17 would make it a seventeen-minute average, which is not a STEL. Trimming two minutes would mean choosing which two. Each is a decision the engine has no basis for, so it refuses and names the field. The judgement call J6 records it: the STEL divides by 15 and refuses over 15 minutes.
+The printed rule is judgement J6: the STEL divides by 15 and refuses over 15 minutes. The digest prints the two behaviours, a shorter record counting the remainder as zero and warning and a longer one refused, and it prints no reason for the asymmetry. What follows is the instructor's reading of it. Under fifteen minutes, the unsampled remainder can be stated as zero and the arithmetic stays inside its definition, the sum of concentration x time over fifteen minutes, so the assumption is visible and the warning names it. Over fifteen minutes, each of the available moves is a choice: dividing seventeen minutes of samples by 15 counts seventeen minutes of chemical exposure inside a fifteen-minute window, dividing by 17 gives a seventeen-minute average, and trimming two minutes means choosing which two. The engine refuses and names the field.
 
 ## The same pattern in the 8-hour TWA, with a difference
 

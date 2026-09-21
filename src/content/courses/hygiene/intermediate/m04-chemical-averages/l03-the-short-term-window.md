@@ -23,7 +23,7 @@ This is the chemical TWA's unsampled-time question at a smaller scale. A hygieni
 
 ## Why the window is short
 
-A STEL exists because a substance can harm in minutes at a concentration that the eight-hour average dilutes away. The full-window record shows the scale of it: a five-minute peak of 240.000000 ppm inside a STEL of 153.333333 ppm. Averaged into a shift, those five minutes would barely register. The short-term window keeps them visible, which is its whole purpose, and it is why the STEL and the 8-hour TWA are reported side by side and compared with their own limits.
+The digest prints the STEL as a fifteen-minute time weighted average and gives no reason for the window's length, so take the reason offered here as background: a substance can harm in minutes at a concentration that an eight-hour average dilutes away. What the printed figures do show is the scale of the difference. The full-window record carries a five-minute peak of 240.000000 ppm inside a STEL of 153.333333 ppm, and averaged into a shift those five minutes would barely register. The short-term window keeps them visible, and the STEL and the 8-hour TWA are reported side by side and compared with their own limits.
 
 ## Choosing the window
 

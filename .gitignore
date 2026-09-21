@@ -3,3 +3,7 @@ node_modules/
 
 # Supabase CLI scratch
 supabase/.temp/
+
+# Python bytecode from the course-wave kits (a gate run in the mirrored kit
+# directory leaves one behind, and it is never an input).
+__pycache__/

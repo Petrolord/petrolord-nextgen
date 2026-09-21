@@ -10,7 +10,7 @@ That is judgement J4: noise, LEX and chemical periods totalling over 24 hours ar
 
 ## Why refuse instead of trimming
 
-The engine could quietly keep the first 24 hours and drop the rest. It does not, because it cannot know which hours belong to which day. A download that spans two shifts, or an instrument left running overnight, holds two days' worth of periods, and splitting them is a decision for the person who knows the work pattern. The refusal hands that decision back with the field named.
+The engine could quietly keep the first 24 hours and drop the rest. The digest prints the refusal and judgement J4 and no remedy beside them. The reading behind it is the instructor's: nothing in the record says which hours belong to which day. A download spanning two shifts, or an instrument left running overnight, holds two days' worth of periods, and splitting them is a decision for the person who knows the work pattern. The refusal hands that decision back with the field named.
 
 | golden id | refused field | message |
 | --- | --- | --- |
@@ -22,17 +22,17 @@ The three rows are the record-shaped refusals of the `noiseDose` door. Each is a
 
 ## A long reference duration is a different thing
 
-Do not confuse the record limit with the reference duration. A reference duration can be much longer than a day, because it is a statement about an allowance. At 80.000000 dBA the OSHA reference duration is 32.000000 h, and at 85.000000 dBA it is 16.000000 h. On NIOSH, 80.000000 dBA gives 25.398417 h. Nobody works those hours. They are simply how long the allowance would last at that level, and a period of a few hours at 80 dBA uses a small share of it.
+Do not confuse the record limit with the reference duration. A reference duration can be much longer than a day, because it is a statement about an allowance. At 80.000000 dBA the OSHA reference duration is 32.000000 h, and at 85.000000 dBA it is 16.000000 h. On NIOSH, 80.000000 dBA gives 25.398417 h. Nobody works those hours. They are how long the allowance would last at that level.
 
 So a reference duration over 24 hours is normal and useful. A record over 24 hours is refused. The first describes a criterion, the second describes the data.
 
 ## What to do with a long download
 
-Split it into days first, at the points the work pattern says a day ends, and run each day as its own record. If the periods are in the right order and the day boundary falls inside a period, split that period into two with the hours on each side. Then report one noise dose per day and per criterion. Shifts that run longer than eight hours but still fit inside a day are accepted by this door; the Expert tier looks at what the regulations say about them.
+The digest stops at the refusal, so this section is practice. Split the download into days at the points the work pattern says a day ends, and run each day as its own record. If the periods are in the right order and the day boundary falls inside a period, split that period into two with the hours on each side. Then report one noise dose per day and per criterion. Shifts that run longer than eight hours but still fit inside a day are accepted by this door; the Expert tier looks at what the regulations say about them.
 
 ## The field tells you where to look
 
-Every refusal in this module names its field. `periods` points at the record as a whole. `periods[0].durationH` points at the first period's hours. When a refusal comes back, go to the named field in the download before changing anything else. Most refusals are one bad row in an export.
+Every refusal in this module names its field. `periods` points at the record as a whole. `periods[0].durationH` points at the first period's hours. When a refusal comes back, go to the named field in the download before changing anything else.
 
 ## Exercise
 

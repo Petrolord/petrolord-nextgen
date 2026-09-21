@@ -20,7 +20,7 @@ The three factors say that a protector type delivers a fraction of its label in 
 
 ## How strong the evidence is
 
-The engine and an independent oracle agree on every row above, and no printed value is known to set against either. That is the evidence class this course calls oracle only: two people could copy the same factor from the same page wrongly, and nothing in the suite would catch it. So the NIOSH derating by type is taught here and never graded. The estimates in the table are the engine's arithmetic on the factors it holds, and you should report them that way.
+The engine and an independent oracle agree on every row above, and no printed value is known to set against either. That is the evidence class this course calls oracle only. The oracle is written independently, so its agreement is a real check on the arithmetic, and what is missing is any published figure to set against the two of them. An answer that nothing outside the code checks is not graded on evidence, so the NIOSH derating by type is taught here and never graded. The separate class where two readers copy one page wrongly and nothing catches it is transcription only, which this course reserves for the heat stress constants. The estimates in the table are the engine's arithmetic on the factors it holds, and you should report them that way.
 
 ## What the table does show
 

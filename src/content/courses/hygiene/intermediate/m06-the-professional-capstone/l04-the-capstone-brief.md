@@ -25,7 +25,7 @@ The brief states every sound level, duration, concentration, limit and label you
 
 ## How to work it
 
-Build the daily LEX first from its tasks, then the weekly LEX from the days. Take the protector estimate by the field derating and name the method beside it. Compute the chemical TWA and the STEL by their fixed divisors, then the mixture terms and their sum. Keep every intermediate figure at full precision and round only at the end, to the six decimals the course prints. The tolerance on each field is set in one place in the course and you never need to know it.
+Build the daily LEX first from its tasks, then the weekly LEX from the days. Take the protector estimate by the field derating and name the method beside it. Compute the chemical TWA and the STEL by their fixed divisors, then the mixture terms and their sum. The course's precision convention is six decimals for concentrations, levels, durations and every dimensionless ratio, and twelve for a measured constant. It sets no rounding rule for your own working, so take this as practice: keep every intermediate figure at full precision and round only at the end, to those six decimals.
 
 ## Before you submit
 

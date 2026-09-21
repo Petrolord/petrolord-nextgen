@@ -25,7 +25,7 @@ Every doubling of hours lowers the level by one decibel exchange rate: 5 dB on O
 
 ## Reading the answer correctly
 
-The answer is a level held steady for the whole of those hours, with nothing else on the day. It gives exactly 100 percent noise dose on its own criterion. If the worker has already used part of the allowance, the level for the remaining hours has to be lower, and the right question becomes the time left at a level from the previous module.
+The answer is a level held steady for the whole of those hours, with nothing else on the day. It gives exactly 100 percent noise dose on its own criterion. If the worker has already used part of the allowance, the level for the remaining hours has to be lower, and the right question becomes the time left at a level, which you met earlier.
 
 Two rows deserve a second look. At 16.000000 h the OSHA level is 85.000000 dBA, which is above the action level threshold of 80 and below the PEL threshold of 90. A reference duration on the PEL itself stops at the threshold. The engine's formula still returns the level, and the OSHA table G-16a runs down to 80 dBA, but a period at 85 dBA would not be integrated by the PEL setup at all. At 0.250000 h the OSHA level is 115.000000 dBA, the highest level Table G-16 permits, and anything shorter pushes the level past it.
 

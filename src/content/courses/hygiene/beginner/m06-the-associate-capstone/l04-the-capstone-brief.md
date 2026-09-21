@@ -23,7 +23,7 @@ The capstone states its record in the same terms as the OBEN table, and it names
 
 The TWAs are graded on the coefficient each source prints: 16.61 on OSHA, as the mandatory Appendix A text writes it, and 10.0 on NIOSH. A TWA worked with the exact coefficient will disagree with that answer, and on NIOSH the disagreement can reach the second decimal. That is judgement J1, and the module on the printed coefficients is the place to revisit if your hand check disagrees with the engine.
 
-This course prints noise doses, TWAs and durations to six decimals. Carry full precision through each step and round only at the end, because a rounded reference duration carried into a sum moves the last printed digit.
+The course's precision convention is six decimals for noise doses, TWAs, durations and every dimensionless ratio, twelve for a measured constant, and whole numbers for counts. It sets no rounding rule for your own working, so take what follows as practice rather than as a rule: carry full precision through each step and round only at the end, because a rounded reference duration carried into a sum moves the last printed digit.
 
 ## Practising on the OBEN day
 

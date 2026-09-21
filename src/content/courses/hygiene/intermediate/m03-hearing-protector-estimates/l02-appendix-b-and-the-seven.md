@@ -15,7 +15,7 @@ The method `OSHA_APPENDIX_B` is the adequacy test of 29 CFR 1910.95 Appendix B. 
 
 ## Why the seven
 
-The NRR is stated against C-weighted sound, and an A-weighted reading of the same sound is a different number. Subtracting the full label from an A-weighted level would mix the two weightings in one sum. The appendix allows for the difference with a flat seven decibels taken off the label before it is credited. It is a single-number allowance for a spectral effect, and it is what the regulation writes.
+What the digest prints is the rule and its measurement: on A-weighted data the credit is (NRR - 7), and the engine's subtraction measures 7.000000000000 dB. No printed line gives the appendix's reason for the seven, so take the rest of this section as background. The NRR is stated against C-weighted sound, and an A-weighted reading of the same sound is a different number, so subtracting the full label from an A-weighted level would mix the two weightings in one sum. The appendix allows for that with a flat seven decibels taken off the label before it is credited, a single-number allowance for a spectral effect.
 
 ## Reproduced against a printed value
 

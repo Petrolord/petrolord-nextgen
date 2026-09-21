@@ -134,8 +134,8 @@
  "digest": {
   "lines": 1135,
   "sections": 25,
-  "md5": "a95d3c335b433494a02a4f59a1227891",
-  "sha256": "51dabb018358153ea528453534736cfbbf166139bc553e5edb22710b5e94ff85",
+  "md5": "c41ff4fbe968b1a75c8d677f2e2b1b8e",
+  "sha256": "bbf64e544665a3737905b286167cb9fcbc2d42c0a09fb0bfafe0d2d81a960d66",
   "history": null,
   "note": "The engine has no repair history, so there is no history section. Section 19 is about ERRATA IN THE SOURCES, which are current."
  },
@@ -235,19 +235,19 @@
    "md5": "e1ed8de10de5778302d00d7e5b357287",
    "exit": 0,
    "expected": 0,
-   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/beginner/m06-the-associate-capstone/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 1036 lines, 958 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/beginner/m06-the-associate-capstone/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 1038 lines, 963 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
   },
   "leakage.mjs --tier intermediate": {
    "md5": "e1ed8de10de5778302d00d7e5b357287",
    "exit": 0,
    "expected": 0,
-   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/intermediate/m06-the-professional-capstone/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 985 lines, 723 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/intermediate/m06-the-professional-capstone/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 987 lines, 728 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
   },
   "leakage.mjs --tier advanced": {
    "md5": "e1ed8de10de5778302d00d7e5b357287",
    "exit": 0,
    "expected": 0,
-   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/advanced/m06-from-exposures-to-a-sampling-decision/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 1036 lines, 907 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+   "result": "read /root/wt-h2-nextgen/src/content/courses/hygiene/advanced/m06-from-exposures-to-a-sampling-decision/l04-the-capstone-brief.md | hygiene lessons: 26 file(s), 1036 lines, 912 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
   },
   "leakage.mjs --selftest": {
    "md5": "e1ed8de10de5778302d00d7e5b357287",
@@ -274,7 +274,7 @@
    "result": "exempt engine strings declared: 0, hit: 0, dead: 0 -> [] | quotations of engine text found: 0 | VIOLATIONS: 0"
   },
   "h2_dump.mjs owners selftest": {
-   "md5": "1ef92d3d0d3fd2806eba1e1a7109a586",
+   "md5": "abc2c56e74f5a424e07f5831e64edf85",
    "exit": 0,
    "expected": 0,
    "result": "OWNERS SELFTEST: a module that tier does not have refused: GENERATOR REFUSES: Associate has no m09 | OWNERS SELFTEST: a lesson that is not in the module named beside it refused: GENERATOR REFUSES: Expert m01 has no l05 | OWNERS SELFTEST: a valid clause renders as (owned by Professional m05 and Expert m05 l03 and l04)"
@@ -290,6 +290,102 @@
    "exit": 0,
    "expected": 0,
    "result": "[digestprose] digest.txt: 1135 line(s), 25 section title(s) and 86 in-body marker(s) swept against their blocks, 32 history framings, 0 engine pin(s); 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+  },
+  "digestprose.mjs --lessons": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "exit": 0,
+   "expected": 0,
+   "result": "[digestprose] digest.txt: 1135 line(s), 25 section title(s) and 86 in-body marker(s) swept against their blocks, 32 history framings, 0 engine pin(s); 78 lesson file(s) swept; 78 lesson body/ies and 0 question(s) swept, 0 framed as curriculum; 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+  },
+  "digestprose.mjs --lessons --banks": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "exit": 0,
+   "expected": 0,
+   "result": "[digestprose] digest.txt: 1135 line(s), 25 section title(s) and 86 in-body marker(s) swept against their blocks, 32 history framings, 0 engine pin(s); 78 lesson file(s) swept; 78 lesson body/ies and 396 question(s) swept, 0 framed as curriculum; 0 warned for a human read and 0 framed as curriculum by their own heading; 0 deferred as verbatim engine strings; 0 failing"
+  },
+  "check-bank-sources.py hygiene": {
+   "md5": "ab6de6165648fe4580fa8ab2246ab46b",
+   "exit": 0,
+   "expected": 0,
+   "result": "ok   hygiene: 21 bank(s) across 3 tier(s), 396 question(s) compared byte for byte | [course-banks] 21 committed pair(s) under /root/wt-h2-nextgen/tools/course-banks: 21 reproduce, 0 drifted, 0 could not run, 396 question(s) compared"
+  },
+  "bankleak.py all tiers": {
+   "md5": "7da6706b78092de1c00eba51aabac8ab",
+   "exit": 0,
+   "expected": 0,
+   "result": "[bankleak] banks READ FROM /root/wt-h2-nextgen/tools/course-banks/hygiene | [bankleak] .: 21 bank(s), 396 questions, 4153 literals compared against 18 graded field(s) in 7 unit shifting(s), at 10 tolerances | literals within 10 tolerances of a graded answer: 0"
+  },
+  "bankleak.py --selftest": {
+   "md5": "7da6706b78092de1c00eba51aabac8ab",
+   "exit": 0,
+   "expected": 0,
+   "result": "[bankleak] /tmp/tmpkktlz644: 1 bank(s), 1 questions, 3 literals compared against 1 graded field(s) in 5 unit shifting(s), at 10 tolerances | literals within 10 tolerances of a graded answer: 1 | [bankleak] selftest OK"
+  },
+  "leakage.mjs --banks beginner": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "exit": 0,
+   "expected": 0,
+   "result": "read /root/wt-h2-nextgen/tools/course-banks/hygiene/beginner/h2b_m06.json | hygiene banks: 7 file(s), 792 lines, 1125 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "leakage.mjs --banks intermediate": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "exit": 0,
+   "expected": 0,
+   "result": "read /root/wt-h2-nextgen/tools/course-banks/hygiene/intermediate/h2i_m06.json | hygiene banks: 7 file(s), 792 lines, 857 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "leakage.mjs --banks advanced": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "exit": 0,
+   "expected": 0,
+   "result": "read /root/wt-h2-nextgen/tools/course-banks/hygiene/advanced/h2a_m06.json | hygiene banks: 7 file(s), 792 lines, 1030 numeric literals against 18 graded fields | => fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "gate_capstone_leak.py --banks": {
+   "md5": "b1ee18529a6ca0d9be4735fd12c05524",
+   "exit": 0,
+   "expected": 0,
+   "result": "direction 9 briefs: 6 files (wave.json, BRIEF.md, LESSON_TASK.md, BANK_TASK.md, KEY_TRUTH_TASK.md, PANELS.md), 711 numeric literals, 18 graded values and the T6 margin. | CONTROLS FIRED: a planted graded value and a planted condition were both caught. | gate_capstone_leak: 0 finding(s)."
+  },
+  "dupaxes.py all three tiers": {
+   "md5": "de6a2216f5b921b10022ed60be07df1b",
+   "exit": 0,
+   "expected": 0,
+   "result": "[dupaxes] /tmp/tmp.hRWaiVSLn0 threshold=0.45 banks={'h2a_exam': 42, 'h2a_m01': 15, 'h2a_m02': 15, 'h2a_m03': 15, 'h2a_m04': 15, 'h2a_m05': 15, 'h2a_m06': 15, 'h2b_exam': 42, 'h2b_m01': 15, 'h2b_m02': 15, 'h2b_m03': 15, 'h2b_m04': 15, 'h2b_m05': 15, 'h2b_m06': 15, 'h2i_exam': 42, 'h2i_m01': 15, 'h2i_m02': 15, 'h2i_m03': 15, 'h2i_m04': 15, 'h2i_m05': 15, 'h2i_m06': 15} | [dupaxes] field comparisons made: 291672  within=17892  exam-vs-module=136080  module-vs-module=137700 | [dupaxes] 0 pair(s) at or above 0.45  within=0  exam-vs-module=0  module-vs-module=0"
+  },
+  "lengthtails.py beginner": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "exit": 0,
+   "expected": 0,
+   "result": "h2b_m05         15    30.0  30.0  23.3     16.7 | h2b_m06         15    20.0  36.7  23.3     20.0 | [lengthtails] worst single strategy on any bank: 36.7 pct (chance 25.0, refuse above 40.0)"
+  },
+  "lengthtails.py intermediate": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "exit": 0,
+   "expected": 0,
+   "result": "h2i_m05         15    25.0  23.9  17.2     33.9 | h2i_m06         15    26.7  26.7  20.0     26.7 | [lengthtails] worst single strategy on any bank: 38.9 pct (chance 25.0, refuse above 40.0)"
+  },
+  "lengthtails.py advanced": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "exit": 0,
+   "expected": 0,
+   "result": "h2a_m05         15    26.7  16.7  36.7     20.0 | h2a_m06         15    26.7  22.2  28.9     22.2 | [lengthtails] worst single strategy on any bank: 36.7 pct (chance 25.0, refuse above 40.0)"
+  },
+  "litsweep.py beginner": {
+   "md5": "a236885baf5ed53d465f1b52b4ca1cf7",
+   "exit": 0,
+   "expected": 0,
+   "result": "REVIEW QUANTITY '106.602783' as dBA  h2b_exam Q15 option3  -> digest line 436 (SECTION 5 owned by beginner m02,m05), 1 row(s) match | row: | 999.000000 | 106.602783 | 106.600000 | 106.602423 | -0.002423 | | ... 46 more, pass --review-all to print them"
+  },
+  "litsweep.py intermediate": {
+   "md5": "a236885baf5ed53d465f1b52b4ca1cf7",
+   "exit": 0,
+   "expected": 0,
+   "result": "row: | 87.000000 | 12.125733 | 12.100000 | 0.050000 | 0.025733 | | REVIEW SECTION  '6.750000' as -  h2i_m06 Q14 explanation  -> digest line 66 (SECTION 1 owned by beginner m01 and advanced m03), 2 row(s) match | row: | J6 | the 8-hour chemical TWA always divides by 8 and warns under or over 8 hours; the STEL divides by 15 and refuses over 15 min"
+  },
+  "litsweep.py advanced": {
+   "md5": "a236885baf5ed53d465f1b52b4ca1cf7",
+   "exit": 0,
+   "expected": 0,
+   "result": "REVIEW SECTION  '150' as -  h2a_m03 Q5 option3  -> digest line 346 (SECTION 5 owned by beginner m02,m05), 7 row(s) match | row: | 150.000000 | 92.924876 | 92.900000 | 92.924813 | -0.024813 | | ... 32 more, pass --review-all to print them"
   },
   "digestpromise.py": {
    "md5": "f22dd5d57795e134faa73d625358eed7",

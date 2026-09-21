@@ -20,7 +20,7 @@ Truncating. NIOSH Table 1-1 prints durations in hours, minutes and seconds, and 
 
 A gate that demands every printed digit of a source that is not consistent with itself will fail on the source. So the tolerance of each golden row is set by what the source can actually be held to. For Table 1-1 that is one printed second, because the table's own rounding moves by up to that much. At 124 dBA the engine minus printed is 0.000143 h and at 127 dBA it is 0.000211 h, both inside 0.000278 h.
 
-This is different from widening a tolerance to make a failure disappear. The tolerance comes from the source's printed precision and its known rounding habits, and it is set before any row is compared. An erratum is a row that misses even that tolerance, like the 99.000000 dBA row of Table 1-1 that the first lesson of this module described, which sits 5.071055 tolerances away.
+This is different from widening a tolerance to make a failure disappear. The tolerance comes from the source's printed precision and its known rounding habits. An erratum is a row that misses even that tolerance, like the 99.000000 dBA row of Table 1-1 that the first lesson of this module described, which sits 5.071055 tolerances away.
 
 ## Reading a table as a reader
 

@@ -6,7 +6,7 @@ NIOSH 2016 Table 5-1 summarises the limits in bands of 30, 28, 26 and 25 C. At 2
 
 ## What a band is
 
-A band summary takes a continuous curve and prints one round value for a range of work. It is easy to read on site and easy to put on a poster. It is also, by construction, a different number from the equation at almost every rate inside the band. The golden does not gate Table 5-1 against the engine, because a band and a curve were never meant to agree at a point.
+A band summary takes a continuous curve and prints one round value for a range of work. It is easy to read on site and easy to put on a poster. It is also, by construction, a different number from the equation at almost every rate inside the band. The golden does not gate Table 5-1 against the engine, and the table below carries the printed reason: the band differs from the equation at every one of its four rates.
 
 Every equation value in this table is the NIOSH 2016-106 section 8.1 equation, checked for transcription only.
 

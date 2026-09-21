@@ -21,7 +21,7 @@ The energy relation has no floor. A task at 73.800000 dBA carries a small share 
 
 ## The extremes the engine reports
 
-Eight hours at 0.000000 dBA gives LEX,8h 0.000000 dBA and 0.000000 points, with both action flags false. A task of zero hours contributes nothing, and its own task LEX is reported as absent. The small case of 100.000000 dBA for 0.000000 h beside 85.000000 dBA for 8.000000 h returns 85.000000 dBA and 100.000000 points, exactly as if the loud entry were never there.
+Eight hours at 0.000000 dBA gives LEX,8h 0.000000 dBA and 0.000000 points, with both action flags false. A task of zero hours contributes nothing, and its own task LEX is reported as absent. The small case of 100.000000 dBA for 0.000000 h beside 85.000000 dBA for 8.000000 h returns 85.000000 dBA and 100.000000 points, exactly as if the loud entry were absent.
 
 A record with no time in it at all is refused. So is one that totals more than a day. The engine's own words, both on field `periods`:
 

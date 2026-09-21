@@ -30,7 +30,7 @@ The formula is the criterion. The table is a convenience printed from it. When a
 
 ## Why the engine keeps the formula
 
-An engine that copied the table row would return a TWA nearly ten decibels low for a noise dose that high. A reader trusting it would understate the noise exposure by a factor of about ten in energy. The engine evaluates the formula, and the golden pins the printed 102.0 as a case it must miss.
+An engine that copied the table row would return a TWA 9.989700 dB below the formula at that noise dose, 199.794001 tolerances away at the table's printed tolerance of 0.050000. Read back through a criterion, a TWA that low stands for a much smaller noise dose, and how much smaller depends on the criterion: one decibel on the TWA is worth a factor of 1.258925 on the NIOSH noise dose and 1.148695 on the OSHA one. Every figure built on the printed row comes back short. The engine evaluates the formula, and the golden pins the printed 102.0 as a case it must miss.
 
 ## Exercise
 

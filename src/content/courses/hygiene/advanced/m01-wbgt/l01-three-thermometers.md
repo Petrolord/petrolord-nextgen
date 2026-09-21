@@ -8,7 +8,7 @@ The indoor reading set is a natural wet bulb of 26.400000 C and a globe of 38.70
 
 The wet bulb globe temperature is an index of heat stress built from three readings, and each one answers a different physical question.
 
-The natural wet bulb is a thermometer whose bulb sits in a wet wick open to the air that moves past it. Evaporation from the wick cools it, so it reads lower in dry, moving air and close to the air temperature in still, humid air. It carries the body's ability to cool itself by sweating, which is why it carries the largest weight in both forms.
+The natural wet bulb is a thermometer whose bulb sits in a wet wick open to the air that moves past it. Evaporation from the wick cools it, so it reads lower in dry, moving air and close to the air temperature in still, humid air. The digest prints the weights and their transcription-only status and gives no rationale for them, so read the usual explanation as background: the natural wet bulb is taken to stand for the body's ability to cool itself by sweating, and that is the reason offered for the largest weight in both forms.
 
 The globe is a thermometer at the centre of a hollow black sphere. It absorbs radiant load from the sun, from hot surfaces and from furnaces, and it reads the highest of the three wherever radiant load is present. In both reading sets the globe is the highest reading, which says the spot carries radiant load.
 

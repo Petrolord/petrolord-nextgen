@@ -24,7 +24,7 @@ On NIOSH the balance shifts but the lesson holds. The loudest period's reference
 
 ## What the maximum is good for
 
-A maximum level is still worth writing down. It tells you whether a table top or a ceiling warning is in play, as the previous module showed, and it tells you where hearing protection matters most for the minutes it lasts. What it cannot do is stand in for the sum. Two records with the same maximum can carry very different noise doses, depending on everything else the day held.
+A maximum level is still worth writing down. It tells you whether a table top or a ceiling warning is in play, as you saw earlier, and it tells you where hearing protection matters most for the minutes it lasts. What it cannot do is stand in for the sum. Two records with the same maximum can carry very different noise doses, depending on everything else the day held.
 
 When you read a dosimeter download, find the maximum, then find the largest contribution. They are often different periods, and the largest contribution is the one a control should reach for first.
 

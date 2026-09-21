@@ -32,9 +32,9 @@ A word where a boolean belongs:
 
 ## Why refuse a long record
 
-A record of 75 minutes looks like more information, and it is tempting to average it and carry on. The engine refuses it because the NIOSH limits are written for an hour. An average over 75 minutes smooths a hot hour with a cooler quarter, so it reads lower than the worst hour inside it, and the worst hour is the one the limits are about. The hygienist chooses which sixty minutes to assess, and that choice belongs in the report.
+A record of 75 minutes looks like more information, and it is tempting to average it and carry on. The engine refuses it because NIOSH states its limits against a one-hour time weighted average, so a figure over any other window is not the quantity those limits apply to, and the refusal above says exactly that. Where the extra quarter is cooler than the hour inside it, the longer average will also read below that hour. Which sixty minutes to assess is the hygienist's choice, and it belongs in the report.
 
-A short record has the opposite problem. Forty-five minutes of readings says nothing about the other fifteen, and filling them with zero or with the average would each be a guess. The chemical STEL makes a different choice for a short record, counting the remainder as zero and warning, because a concentration of zero is a real reading of clean air. A WBGT of zero degrees says nothing about a missing quarter hour of work in heat stress.
+A short record has the opposite problem. Forty-five minutes of readings says nothing about the other fifteen. The digest prints the two behaviours and no reason for the difference: the chemical STEL counts the remainder of a short window as zero and warns, while the NIOSH assessment refuses. As a matter of practice, zero is a real reading of clean air for a chemical exposure and a WBGT of zero degrees is no reading at all. Take that as the instructor's reading of the difference, with no printed line behind it.
 
 ## The averaging doors are looser
 

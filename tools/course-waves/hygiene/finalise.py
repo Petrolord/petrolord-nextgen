@@ -58,6 +58,49 @@ GATES = [
     ('h2_dump.mjs owners selftest', f'{HERE}/h2_dump.mjs', 'H2_OWNERS_SELFTEST=1 node h2_dump.mjs', 0),
     ('digestrepro.sh', f'{KIT}/digestrepro.sh', f'bash {KIT}/digestrepro.sh {HERE} {NG}', 0),
     ('digestprose.mjs --rules', f'{KIT}/digestprose.mjs', f'node {KIT}/digestprose.mjs digest.txt --rules .', 0),
+    # THE DIGEST WAS THE ONLY THING THIS GATE SWEPT HERE, and digestprose takes
+    # --lessons and --banks. So the lessons went the whole foundation and bank
+    # phase unswept by it and finished with three UNFRAMED history failures and
+    # three HIGH warnings that nothing in the pinned set could see: "as the
+    # previous module showed" reads to the rule as a previous ENGINE, which is
+    # exactly the confusion the rule exists to catch. A gate the wave owns and
+    # does not run is not a gate. Both sweeps are pinned from here on.
+    ('digestprose.mjs --lessons', f'{KIT}/digestprose.mjs',
+     f'node {KIT}/digestprose.mjs digest.txt --rules . --lessons {NG}/src/content/courses/hygiene', 0),
+    ('digestprose.mjs --lessons --banks', f'{KIT}/digestprose.mjs',
+     f'node {KIT}/digestprose.mjs digest.txt --rules . --lessons {NG}/src/content/courses/hygiene '
+     f'--banks {NG}/tools/course-banks/hygiene', 0),
+    # The bank gates, pinned now that the banks exist. bankleak REFUSED every
+    # run on this course until the x1/60 opt-in reached it, so it had never
+    # swept a single H2 bank; pinning it here is what stops that recurring.
+    ('check-bank-sources.py hygiene', f'{NG}/tools/course-banks/check-bank-sources.py',
+     f'python3 {NG}/tools/course-banks/check-bank-sources.py hygiene', 0),
+    ('bankleak.py all tiers', f'{KIT}/bankleak.py',
+     f'python3 {KIT}/bankleak.py . --banks {NG}/tools/course-banks/hygiene', 0),
+    ('bankleak.py --selftest', f'{KIT}/bankleak.py', f'python3 {KIT}/bankleak.py --selftest', 0),
+    ('leakage.mjs --banks beginner', f'{KIT}/leakage.mjs',
+     f'node {KIT}/leakage.mjs . --banks {NG}/tools/course-banks/hygiene --tier beginner', 0),
+    ('leakage.mjs --banks intermediate', f'{KIT}/leakage.mjs',
+     f'node {KIT}/leakage.mjs . --banks {NG}/tools/course-banks/hygiene --tier intermediate', 0),
+    ('leakage.mjs --banks advanced', f'{KIT}/leakage.mjs',
+     f'node {KIT}/leakage.mjs . --banks {NG}/tools/course-banks/hygiene --tier advanced', 0),
+    ('gate_capstone_leak.py --banks', f'{HERE}/gate_capstone_leak.py',
+     f'python3 gate_capstone_leak.py --banks {NG}/tools/course-banks/hygiene', 0),
+    ('dupaxes.py all three tiers', f'{KIT}/dupaxes.py',
+     f'd=$(mktemp -d) && cp {NG}/tools/course-banks/hygiene/*/*.json "$d"/ '
+     f'&& python3 {KIT}/dupaxes.py "$d"; rc=$?; rm -rf "$d"; exit $rc', 0),
+    ('lengthtails.py beginner', f'{KIT}/lengthtails.py',
+     f'python3 {KIT}/lengthtails.py {NG}/tools/course-banks/hygiene/beginner --refuse 40.0 --prefix h2b', 0),
+    ('lengthtails.py intermediate', f'{KIT}/lengthtails.py',
+     f'python3 {KIT}/lengthtails.py {NG}/tools/course-banks/hygiene/intermediate --refuse 40.0 --prefix h2i', 0),
+    ('lengthtails.py advanced', f'{KIT}/lengthtails.py',
+     f'python3 {KIT}/lengthtails.py {NG}/tools/course-banks/hygiene/advanced --refuse 40.0 --prefix h2a', 0),
+    ('litsweep.py beginner', f'{KIT}/litsweep.py',
+     f'python3 {KIT}/litsweep.py . --banks {NG}/tools/course-banks/hygiene/beginner --prefix h2b', 0),
+    ('litsweep.py intermediate', f'{KIT}/litsweep.py',
+     f'python3 {KIT}/litsweep.py . --banks {NG}/tools/course-banks/hygiene/intermediate --prefix h2i', 0),
+    ('litsweep.py advanced', f'{KIT}/litsweep.py',
+     f'python3 {KIT}/litsweep.py . --banks {NG}/tools/course-banks/hygiene/advanced --prefix h2a', 0),
     ('digestpromise.py', f'{KIT}/digestpromise.py', f'python3 {KIT}/digestpromise.py .', 0),
     ('digestfigures.py', f'{KIT}/digestfigures.py', f'python3 {KIT}/digestfigures.py .', 0),
     ('digestleak.py', f'{KIT}/digestleak.py', f'python3 {KIT}/digestleak.py .', 0),

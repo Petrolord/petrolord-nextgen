@@ -45,7 +45,7 @@ A TWA restates a noise dose, and the restatement has an edge. A noise dose of ze
 
 > dosePct must be a finite percentage above zero: a zero dose has no TWA
 
-The same door refuses a coefficient below zero on `twaCoefficientDb` and a limit noise dose of zero on `limitDosePct`. The inverse door, `noiseDoseFromTwaPct`, refuses a TWA that is missing on `twaDbA`. A refusal is information about the input. A wrong number would carry no such signal and would travel into a report unnoticed.
+The same door refuses a coefficient below zero on `twaCoefficientDb` and a limit noise dose of zero on `limitDosePct`. The inverse door, `noiseDoseFromTwaPct`, refuses a TWA that is missing on `twaDbA`. A refusal is information about the input. What the digest states is the contract: every function returns a finite result or an object carrying `error` and the name of the input it refused. The rest is the instructor's point, and no printed line carries it: a figure that came back as a number would carry no such signal with it into a report.
 
 ## Reading a refusal
 

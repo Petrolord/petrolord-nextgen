@@ -18,7 +18,7 @@ The IGBOMOTORU partial record covers 6.750000 hours. Its 8-hour TWA is 30.125000
 
 ## Two numbers, two claims
 
-The partial record's samples are 38.000000 ppm for 2.500000 h, 64.000000 ppm for 1.250000 h and 22.000000 ppm for 3.000000 h. Divided by 8 they give 30.125000 ppm. Divided by the 6.750000 hours covered they give 35.703704 ppm. The first figure claims the unsampled hours were clean. The second claims those hours looked like the hours that were sampled. Neither claim is in the record.
+The partial record's samples are 38.000000 ppm for 2.500000 h, 64.000000 ppm for 1.250000 h and 22.000000 ppm for 3.000000 h. Divided by 8 they give 30.125000 ppm. Divided by the 6.750000 hours covered they give 35.703704 ppm. What the digest prints of the pair is this: the first is what the regulation writes, the second divides by the hours covered instead and is a different, higher number, and a hygienist who knows the unsampled time was clean may accept the first while one who does not has a record that cannot say. Read the second figure the same way: to prefer it is to read the unsampled hours as looking like the sampled ones, and that reading is the instructor's, since neither claim is in the record.
 
 A hygienist who knows the unsampled time was clean, because the worker left the area or the process stopped, may accept the first. One who does not know has a record that cannot say. The honest report states the hours covered beside the TWA and says what was assumed about the rest.
 

@@ -13,7 +13,9 @@ This tier taught four protector methods and grades one of them. It taught the we
 
 ## Oracle only means untested against print
 
-The NIOSH derating by type and the OSHA dual-protection rule agree between the engine and an independent oracle, and no source prints a value that could catch a misreading shared by both. A graded answer that a shared misreading would still pass is not graded on evidence. So both are taught for recognition and neither reaches a graded field.
+The NIOSH derating by type and the OSHA dual-protection rule agree between the engine and an independent oracle, and no printed value is known to set against either. That is what the course means by oracle only. The oracle is written independently, so its agreement is a real check on the arithmetic, and what is missing is any published figure to set against the two of them. An answer that nothing outside the code checks is not graded on evidence. So both are taught for recognition and neither reaches a graded field.
+
+Keep that class apart from transcription only, where the engine and the oracle each copied the constants from one page, so a shared misreading would pass every check in the suite. The heat stress row of the table above carries that class.
 
 ## Verdict words and licensed values
 

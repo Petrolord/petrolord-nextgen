@@ -10,7 +10,7 @@ Brief and Scala (1975), Am Ind Hyg Assoc J 36:467, adjust an eight-hour chemical
 
 RF = (8/h) x (24 - h)/16
 
-The first part scales the amount the body takes in: a worker on a longer shift breathes the air for more hours, so the allowed concentration falls in proportion. The second part scales the recovery time: on an eight-hour day the body has 16 hours away from the air, and on a longer shift it has fewer. The factor multiplies the eight-hour limit. The engine's door is `briefScalaDailyRf`, and the golden classes it PUBLISHED, REPRODUCED, with 4 published cases, 3 oracle-only ones and 2 refusals.
+The digest prints that formula and measures its denominators, and it prints no reading of the two parts, so take this as background. The first part is usually read as scaling the amount taken in, since a worker on a longer shift breathes the air for more hours. The second is read as scaling the recovery time, since an eight-hour day leaves 16 hours away from the air and a longer shift leaves fewer. The factor multiplies the eight-hour limit. The engine's door is `briefScalaDailyRf`, and the golden classes it PUBLISHED, REPRODUCED, with 4 published cases, 3 oracle-only ones and 2 refusals.
 
 | shift, hours | daily factor | adjusted limit for a limit of 100 |
 | --- | --- | --- |
@@ -36,7 +36,7 @@ At 24.000000 hours the factor is 0.000000, and the adjusted limit is zero. That 
 
 ## What it applies to
 
-The factor adjusts a chemical exposure limit that was set for an eight-hour day. It is a screening adjustment, and it treats every substance as if it accumulated in the body in the same simple way. A hygienist uses it where no substance-specific adjustment exists, and says so. Noise has its own extended-shift rule, the OSHA action level of the first lesson of this module, and Brief and Scala is never applied to a noise dose.
+The factor adjusts a chemical exposure limit that was set for an eight-hour day. It is a screening adjustment, and it treats every substance as if it accumulated in the body in the same simple way. A hygienist uses it where no substance-specific adjustment exists, and says so. Noise has its own extended-shift rule, the OSHA action level of the first lesson of this module. Where the Expert crew case adjusts limits, the daily factor is applied to the three chemical limits and the noise row is read as a noise dose against 50 percent, and that is the practice this course prints.
 
 ## Exercise
 

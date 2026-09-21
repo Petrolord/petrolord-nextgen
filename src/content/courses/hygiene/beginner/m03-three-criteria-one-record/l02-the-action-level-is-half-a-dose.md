@@ -23,9 +23,11 @@ The action level integrates 5 of the 6 OBEN periods. Its contributions are 14.74
 
 ## Why 85 and fifty are the same statement
 
-A TWA of 85 on the OSHA scale is a noise dose of 50.000750 percent, measured by `noiseDoseFromTwaPct`. Going the other way, OSHA Table A-1 turns a noise dose of 50.000000 percent into 84.999892 dBA. The tiny departures from 50 and 85 come from the printed coefficient 16.61, as the previous module showed, and at the precision the regulation writes they are the same point.
+A TWA of 85 on the OSHA scale is a noise dose of 50.000750 percent, measured by `noiseDoseFromTwaPct`. Going the other way, OSHA Table A-1 turns a noise dose of 50.000000 percent into 84.999892 dBA. The tiny departures from 50 and 85 come from the printed coefficient 16.61, as you saw earlier, and at the precision the regulation writes they are the same point.
 
-So the OBEN day can be read against the action level either way. Its TWA of 87.635749 dBA is above 85, and its noise dose of 72.054478 percent is above 50. The two comparisons always agree, because one is the restatement of the other.
+So the OBEN day can be read against the action level either way. Its TWA of 87.635749 dBA is above 85, and its noise dose of 72.054478 percent is above 50. Both comparisons restate the same sum, and at the precision the regulation writes them they land on the same point.
+
+The two figures printed above do leave one narrow window where the comparisons can part. A noise dose above 50.000000 percent and up to 50.000750 percent is over its limit of 50 while its TWA is still at or under 85, because 50.000000 percent reads back as 84.999892 dBA. That window is under a thousandth of a percent wide, and the OBEN day sits nowhere near it.
 
 ## A different metric with a similar name
 

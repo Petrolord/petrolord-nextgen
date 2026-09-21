@@ -26,7 +26,7 @@ The OSHA hearing conservation action level from the Associate tier is a TWA of 8
 
 ## What the flags do and do not say
 
-A flag is a comparison, and a verdict word is never graded in this course. The number is the finding. Quote LEX,8h to the precision the engine prints, name the value you compared it with, and let the reader draw the flag from the two. The 0.000000 dBA row shows why the number matters more than the word: both flags are false there, and so they are for 84.989700 dBA against the upper value, and the two situations share nothing.
+A flag is a comparison, and section 23 puts verdict words among the things this course never grades: the eighteen graded fields are numbers. How you write one up is practice rather than a printed rule, so take this as practice. Quote LEX,8h to the precision the engine prints, name the value you compared it with, and let the reader draw the flag from the two. The 0.000000 dBA row shows why that matters here: both flags are false there, and both are false for 84.989700 dBA against the upper value, and the two situations share nothing.
 
 ## Exercise
 

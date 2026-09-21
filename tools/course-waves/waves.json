@@ -1,672 +1,672 @@
 {
- "separation": {
-  "course": "FC1",
-  "live": "/root/fc-wip-separation",
-  "kit": "full",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "fc1_dump.mjs",
-   "fc1_fields.mjs",
-   "fc1_fields_capstone.mjs"
-  ],
-  "pins": {
-   "digest.txt": "00c3522f97a5779dda9107257b1408d24f9cc58083f84b69dfd0cc09fa7cea97",
-   "fields.json": "c0303b9436a37d664e2f3ae1f62b2c52d80ce11bba282c39d43679bd4483bc76"
-  }
- },
- "linesizing": {
-  "course": "FC2",
-  "live": "/root/fc-wip-linesizing",
-  "kit": "full",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "precision.json",
-   "fc2_dump.mjs",
-   "fc2_fields.mjs",
-   "fc2_fields_capstone.mjs"
-  ],
-  "pins": {
-   "digest.txt": "9b9f02688e7a241b0ef8e6ae733b72e94dca7e21ca1245314584f4412426ca2b",
-   "fields.json": "c61a985b69c2e74b6d7caee29bdfa4cdf5c790d80c33a1258c29044d6ad403de"
-  }
- },
- "rotating": {
-  "course": "FC3",
-  "live": "/root/fc-wip-rotating",
-  "kit": "full",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "fc3_dump.mjs",
-   "fc3_fields.mjs",
-   "fc3_fields_capstone.mjs"
-  ],
-  "pins": {
-   "digest.txt": "88d650a18f8514f5c75bd361da732d8800b3fff76a701e70554ec23496d7058a",
-   "fields.json": "bf1fec1a554961059d49b9ca5ddafaf86559abd6bcd6754b9afb86c66e6d8c3b"
-  }
- },
- "gasprocessing": {
-  "course": "FC4",
-  "live": "/root/fc-wip-gasprocessing",
-  "kit": "full",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "precision.json",
-   "wave.json",
-   "fc4_dump.mjs",
-   "fc4_fields.mjs",
-   "fc4_fields_capstone.mjs",
-   "fc4_capstone.mjs",
-   "make_fields.mjs",
-   "structure.py",
-   "gen_course.py",
-   "gen_golive.py",
-   "gen_seeds.sh",
-   "verify_sql.py",
-   "apply_fc4_gasprocessing.sh",
-   "dryrun_fc4.sh",
-   "hdr_beginner.txt",
-   "hdr_intermediate.txt",
-   "hdr_advanced.txt"
-  ],
-  "pins": {
-   "digest.txt": "b96df3d3a8c5724652cb7a81a1761c511e98e57f033389dc6889358ee29c7d2c",
-   "fields.json": "12bb30b71ebdc8e5ce32f0d0b9c1c527642b4c3915f5a4a4aa5cb209fe220143"
-  }
- },
- "fiscal": {
-  "course": "EC2",
-  "live": "/root/ec-wip-fiscal",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "ec2_dump.mjs",
-   "ec2_fields.mjs"
-  ],
-  "fieldsNoGeneratorSpells": [
-   "cmp_psc_capex_loss_last_tenth_musd"
-  ],
-  "fieldsNote": "No generator anywhere in /root/ec-wip-fiscal spells this graded field name, not only none that is mirrored. Recorded so a SECOND unspelled name is a failure. Reported 2026-09-16, not repaired here.",
-  "pins": {
-   "digest.txt": "f22e5aeec4fbb7b100b09eebd4b7d4f5c2b379eaf880145123b49f2262be2169",
-   "fields.json": "88e8ec45c5a3314f3596cda2f6cc97ecda959be9f4457da41c91145db54d91bb"
-  }
- },
- "uncertainty": {
-  "course": "EC3",
-  "live": "/root/ec-wip-uncertainty",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "ec3_dump.mjs",
-   "ec3_fields.mjs"
-  ],
-  "pins": {
-   "digest.txt": "a5b0d888bd9204eabaf3d38ef12e8e49af95f5f3d999caf50509211e363a69d0",
-   "fields.json": "94bf5be3f36a3babe34efac60bd39810eff853989cc46e42e2631118cfd314be"
-  }
- },
- "decision": {
-  "course": "EC4",
-  "live": "/root/ec-wip-decision",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "ec4_dump.mjs",
-   "ec4_fields.mjs"
-  ],
-  "pins": {
-   "digest.txt": "6fde16afa304314bf92949a9ac3ad43f23706c26f0929c9539b77461c1c54299",
-   "fields.json": "ed46a9f0bf33fabc9be60baea12f09ea4897a9a8d7b0efa4c301a379cd49f1fc"
-  }
- },
- "portfolio": {
-  "course": "EC5",
-  "live": "/root/ec-wip-portfolio",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "ec5_dump.mjs",
-   "ec5_fields.mjs"
-  ],
-  "pins": {
-   "digest.txt": "770360d064537e2291137eab2cc9bc81b7328979bc37a279ebfac6841a31af85",
-   "fields.json": "20d8113e5656a4608f90b424429b8b32e3751b8228eb55582b15dea5fdc27718"
-  }
- },
- "fdp": {
-  "course": "EC6",
-  "live": "/root/ec-wip-fdp",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "ec6_dump.mjs",
-   "ec6_fields.mjs",
-   "ec6_fields_capstone.mjs"
-  ],
-  "pins": {
-   "digest.txt": "747885852f6f73950be822bfa0dfab546f76b8fa11b3a2818d805d4c6f374b62",
-   "fields.json": "e886e1a2861b9160afc816d600f0d7ce3ddbf20e7ee8b3d692495baafbeb1919"
-  }
- },
- "gaslift": {
-  "course": "PD2",
-  "live": "/root/pd-wip-gaslift",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "pd2_dump.mjs",
-   "pd2_fields.mjs"
-  ],
-  "headingsNoGeneratorSpells": 4,
-  "headingsNote": "Sections 9 to 12 are one published design case each and the dump assembles their headings from the golden's case name.",
-  "pins": {
-   "digest.txt": "b241199ee3e732ef3e1e1de64ca70333682bab5086346801e3791d2113665b1a",
-   "fields.json": "4435452e7f99d15c75fd504eb341868d21ee0075f9dd35720039697251682cbe"
-  }
- },
- "esp": {
-  "course": "PD3",
-  "live": "/root/pd-wip-esp",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "pd3_dump.mjs",
-   "pd3_fields.mjs"
-  ],
-  "pins": {
-   "digest.txt": "1b657f807abe74a27cb4e76d8e8be74c914887a180ccbf3f54dcbcf227bbb9f9",
-   "fields.json": "7771e808511befb2fdefb3fd38e98a92cbe6b72e8756172994089000ed74a805"
-  }
- },
- "rodpump": {
-  "course": "PD4",
-  "live": "/root/pd-wip-rodpump",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "pd4_dump.mjs",
-   "pd4_fields.mjs"
-  ],
-  "pins": {
-   "digest.txt": "3b8665c0cc9fb9108f10c8aa09f8e551b7e787245a285b294e73663f63e6f5c2",
-   "fields.json": "6a51fe6a1ff3a837848140f172c6b91f04f85c0ebffbacd44f406aced738980f"
-  }
- },
- "gaswell": {
-  "course": "PD5",
-  "live": "/root/pd-wip-gaswell",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "pd5_dump.mjs",
-   "pd5_fields.mjs"
-  ],
-  "pins": {
-   "digest.txt": "39d97c08a73ef50a28ffae35c3995e0fb07ad2b96b95c683de87604fba3d2138",
-   "fields.json": "baf7fa1ea9959de9618d55b9f0d85643c5212b7f7125ebb5498d40793569c3aa"
-  }
- },
- "flowassurance": {
-  "course": "PD6",
-  "live": "/root/pd-wip-flowassurance",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "pd6_dump.mjs",
-   "pd6_fields.mjs",
-   "pd6_jt.mjs",
-   "pd6_ceiling.mjs",
-   "pd6_fluids.mjs",
-   "pd6_halfp.mjs",
-   "pd6_extra.mjs"
-  ],
-  "pins": {
-   "digest.txt": "7de11d05f7a324fa7c24e9ad8b9696296d963ae87058718946cbaad4d65e8199",
-   "fields.json": "db44c1495493231e4491b17cf8f9660588b66435d9a9c46071a4a6d49981f1ab"
-  }
- },
- "network": {
-  "course": "PD7",
-  "live": "/root/pd-wip-network",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "pd7_dump.mjs",
-   "pd7_fields.mjs"
-  ],
-  "pins": {
-   "digest.txt": "ca3b6c0aeb4ae8b44c64e2820c03d35cbe9ff50d78133ddae2bf7debecc8df67",
-   "fields.json": "626e8d7a7868c9b0e5510dafbf04042ffc15ff81df175f5b26c05dfc92bfd3f9"
-  }
- },
- "intervention": {
-  "course": "PD8",
-  "live": "/root/pd-wip-intervention",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "pd8_dump.mjs",
-   "pd8_fields.mjs"
-  ],
-  "pins": {
-   "digest.txt": "19b841a54c7c2c158240a0f530c7d38dc38cac0c94a796c99173a86940f1d98a",
-   "fields.json": "38c7349d9f787f07a29e06cec007328dbf43df473797e0d3e244794456cab2b2"
-  }
- },
- "surveillance": {
-  "course": "PD9",
-  "live": "/root/pd-wip-surveillance",
-  "kit": "inputs",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "pd9_dump.mjs",
-   "pd9_fields.mjs"
-  ],
-  "pins": {
-   "digest.txt": "090d101c45aa4e8aaa93b1b301342d4834efc5210c87387395b1f778278fe8a9",
-   "fields.json": "7bfa8d45e9edcee50eac517130cfa75b2cbb2d66de40bb12a4a37b5d55894c53"
-  }
- },
- "relief": {
-  "course": "FC5",
-  "live": "/root/fc-wip-relief",
-  "kit": "full",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "precision.json",
-   "wave.json",
-   "truth-relief.json",
-   "build_digest.sh",
-   "fc5_dump.mjs",
-   "fc5_fields.mjs",
-   "fc5_fields_capstone.mjs",
-   "fc5_capstone.mjs",
-   "make_fields.mjs",
-   "discriminate.mjs",
-   "structure.py",
-   "scaffold.py",
-   "lengths.py",
-   "gate_capstone_leak.py",
-   "gate_copy_rule.py",
-   "gate_typed_literals.py",
-   "gate_movement.mjs",
-   "gate_wavejson.mjs",
-   "digest_prose.rules.mjs",
-   "sweep_literals.py",
-   "BRIEF.md",
-   "LESSON_TASK.md",
-   "BANK_TASK.md",
-   "KEY_TRUTH_TASK.md",
-   "PANELS.md",
-   "finalise.sh",
-   "hdr_beginner.txt",
-   "hdr_intermediate.txt",
-   "hdr_advanced.txt",
-   "gen_course.py",
-   "gen_golive.py",
-   "gen_seeds.sh",
-   "dryrun_fc5.sh",
-   "verify_sql.py",
-   "apply_fc5_relief.sh"
-  ],
-  "pins": {
-   "digest.txt": "d3f329017cb72b89548399b64cdbb03d77ba89226242c26521ae1a4c2fc3ce7a",
-   "fields.json": "ca5d88d2d1b73842b6169ac542d44f9dbf7b6d22569ee69a56baa6059f3eb21b"
+  "separation": {
+    "course": "FC1",
+    "live": "/root/fc-wip-separation",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "fc1_dump.mjs",
+      "fc1_fields.mjs",
+      "fc1_fields_capstone.mjs"
+    ],
+    "pins": {
+      "digest.txt": "00c3522f97a5779dda9107257b1408d24f9cc58083f84b69dfd0cc09fa7cea97",
+      "fields.json": "c0303b9436a37d664e2f3ae1f62b2c52d80ce11bba282c39d43679bd4483bc76"
+    }
   },
-  "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions, the structure, the three migration headers, the course, go-live and seed generators, the SQL verifier, the dry run and the owner's apply script. The kit became \"full\" with the seed ladder."
- },
- "heattransfer": {
-  "course": "FC6",
-  "live": "/root/fc-wip-heattransfer",
-  "kit": "full",
-  "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions, the structure, the three migration headers, the course, go-live and seed generators, the SQL verifier, the dry run and the owner's apply script. The kit became \"full\" with the seed ladder.",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "precision.json",
-   "wave.json",
-   "fc6_dump.mjs",
-   "fc6_fields.mjs",
-   "fc6_capstone.mjs",
-   "fc6_fields_capstone.mjs",
-   "structure.py",
-   "hdr_beginner.txt",
-   "hdr_intermediate.txt",
-   "hdr_advanced.txt",
-   "gen_course.py",
-   "gen_golive.py",
-   "gen_seeds.sh",
-   "dryrun_fc6.sh",
-   "verify_sql.py",
-   "apply_fc6_heattransfer.sh",
-   "build_digest.sh",
-   "digest_prose.rules.mjs",
-   "oracle_heattransfer.py",
-   "source_prose.rules.mjs",
-   "truth-heattransfer.json"
-  ],
-  "pins": {
-   "digest.txt": "ad261b814fe191b74321779e9117b2ace9394560b42ffb261a654aff10c15e53",
-   "fields.json": "ba4c8e63d1dd591e11e7b213bca81a6e306fe3cef006b836b3264c771dca1dcd"
+  "linesizing": {
+    "course": "FC2",
+    "live": "/root/fc-wip-linesizing",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "fc2_dump.mjs",
+      "fc2_fields.mjs",
+      "fc2_fields_capstone.mjs"
+    ],
+    "pins": {
+      "digest.txt": "9b9f02688e7a241b0ef8e6ae733b72e94dca7e21ca1245314584f4412426ca2b",
+      "fields.json": "c61a985b69c2e74b6d7caee29bdfa4cdf5c790d80c33a1258c29044d6ad403de"
+    }
   },
-  "headingsNoGeneratorSpells": 21
- },
- "producedwater": {
-  "course": "FC7",
-  "live": "/root/fc-wip-producedwater",
-  "kit": "full",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "wave.json",
-   "precision.json",
-   "truth-producedwater.json",
-   "build_digest.sh",
-   "digest_prose.rules.mjs",
-   "fc7_dump.mjs",
-   "fc7_fields.mjs",
-   "fc7_capstone.mjs",
-   "fc7_fields_capstone.mjs",
-   "structure.py",
-   "vendor/closure.json",
-   "hdr_beginner.txt",
-   "hdr_intermediate.txt",
-   "hdr_advanced.txt",
-   "gen_course.py",
-   "gen_golive.py",
-   "gen_seeds.sh",
-   "scratch_db.sh",
-   "dryrun_fc7.sh",
-   "verify_sql.py",
-   "apply_fc7_producedwater.sh"
-  ],
-  "pins": {
-   "digest.txt": "20943b5a4fd64783d51192a2d49fe8f15dda136601398efb49a16740813a463f",
-   "fields.json": "73576e0fb180f1518d85e1906d0fa4041ba88b46ea479e25be33c83367f591fd"
+  "rotating": {
+    "course": "FC3",
+    "live": "/root/fc-wip-rotating",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "fc3_dump.mjs",
+      "fc3_fields.mjs",
+      "fc3_fields_capstone.mjs"
+    ],
+    "pins": {
+      "digest.txt": "88d650a18f8514f5c75bd361da732d8800b3fff76a701e70554ec23496d7058a",
+      "fields.json": "bf1fec1a554961059d49b9ca5ddafaf86559abd6bcd6754b9afb86c66e6d8c3b"
+    }
+  },
+  "gasprocessing": {
+    "course": "FC4",
+    "live": "/root/fc-wip-gasprocessing",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "fc4_dump.mjs",
+      "fc4_fields.mjs",
+      "fc4_fields_capstone.mjs",
+      "fc4_capstone.mjs",
+      "make_fields.mjs",
+      "structure.py",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "apply_fc4_gasprocessing.sh",
+      "dryrun_fc4.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt"
+    ],
+    "pins": {
+      "digest.txt": "b96df3d3a8c5724652cb7a81a1761c511e98e57f033389dc6889358ee29c7d2c",
+      "fields.json": "12bb30b71ebdc8e5ce32f0d0b9c1c527642b4c3915f5a4a4aa5cb209fe220143"
+    }
+  },
+  "fiscal": {
+    "course": "EC2",
+    "live": "/root/ec-wip-fiscal",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "ec2_dump.mjs",
+      "ec2_fields.mjs"
+    ],
+    "fieldsNoGeneratorSpells": [
+      "cmp_psc_capex_loss_last_tenth_musd"
+    ],
+    "fieldsNote": "No generator anywhere in /root/ec-wip-fiscal spells this graded field name, not only none that is mirrored. Recorded so a SECOND unspelled name is a failure. Reported 2026-09-16, not repaired here.",
+    "pins": {
+      "digest.txt": "f22e5aeec4fbb7b100b09eebd4b7d4f5c2b379eaf880145123b49f2262be2169",
+      "fields.json": "88e8ec45c5a3314f3596cda2f6cc97ecda959be9f4457da41c91145db54d91bb"
+    }
+  },
+  "uncertainty": {
+    "course": "EC3",
+    "live": "/root/ec-wip-uncertainty",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "ec3_dump.mjs",
+      "ec3_fields.mjs"
+    ],
+    "pins": {
+      "digest.txt": "a5b0d888bd9204eabaf3d38ef12e8e49af95f5f3d999caf50509211e363a69d0",
+      "fields.json": "94bf5be3f36a3babe34efac60bd39810eff853989cc46e42e2631118cfd314be"
+    }
+  },
+  "decision": {
+    "course": "EC4",
+    "live": "/root/ec-wip-decision",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "ec4_dump.mjs",
+      "ec4_fields.mjs"
+    ],
+    "pins": {
+      "digest.txt": "6fde16afa304314bf92949a9ac3ad43f23706c26f0929c9539b77461c1c54299",
+      "fields.json": "ed46a9f0bf33fabc9be60baea12f09ea4897a9a8d7b0efa4c301a379cd49f1fc"
+    }
+  },
+  "portfolio": {
+    "course": "EC5",
+    "live": "/root/ec-wip-portfolio",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "ec5_dump.mjs",
+      "ec5_fields.mjs"
+    ],
+    "pins": {
+      "digest.txt": "770360d064537e2291137eab2cc9bc81b7328979bc37a279ebfac6841a31af85",
+      "fields.json": "20d8113e5656a4608f90b424429b8b32e3751b8228eb55582b15dea5fdc27718"
+    }
+  },
+  "fdp": {
+    "course": "EC6",
+    "live": "/root/ec-wip-fdp",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "ec6_dump.mjs",
+      "ec6_fields.mjs",
+      "ec6_fields_capstone.mjs"
+    ],
+    "pins": {
+      "digest.txt": "747885852f6f73950be822bfa0dfab546f76b8fa11b3a2818d805d4c6f374b62",
+      "fields.json": "e886e1a2861b9160afc816d600f0d7ce3ddbf20e7ee8b3d692495baafbeb1919"
+    }
+  },
+  "gaslift": {
+    "course": "PD2",
+    "live": "/root/pd-wip-gaslift",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "pd2_dump.mjs",
+      "pd2_fields.mjs"
+    ],
+    "headingsNoGeneratorSpells": 4,
+    "headingsNote": "Sections 9 to 12 are one published design case each and the dump assembles their headings from the golden's case name.",
+    "pins": {
+      "digest.txt": "b241199ee3e732ef3e1e1de64ca70333682bab5086346801e3791d2113665b1a",
+      "fields.json": "4435452e7f99d15c75fd504eb341868d21ee0075f9dd35720039697251682cbe"
+    }
+  },
+  "esp": {
+    "course": "PD3",
+    "live": "/root/pd-wip-esp",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "pd3_dump.mjs",
+      "pd3_fields.mjs"
+    ],
+    "pins": {
+      "digest.txt": "1b657f807abe74a27cb4e76d8e8be74c914887a180ccbf3f54dcbcf227bbb9f9",
+      "fields.json": "7771e808511befb2fdefb3fd38e98a92cbe6b72e8756172994089000ed74a805"
+    }
+  },
+  "rodpump": {
+    "course": "PD4",
+    "live": "/root/pd-wip-rodpump",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "pd4_dump.mjs",
+      "pd4_fields.mjs"
+    ],
+    "pins": {
+      "digest.txt": "3b8665c0cc9fb9108f10c8aa09f8e551b7e787245a285b294e73663f63e6f5c2",
+      "fields.json": "6a51fe6a1ff3a837848140f172c6b91f04f85c0ebffbacd44f406aced738980f"
+    }
+  },
+  "gaswell": {
+    "course": "PD5",
+    "live": "/root/pd-wip-gaswell",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "pd5_dump.mjs",
+      "pd5_fields.mjs"
+    ],
+    "pins": {
+      "digest.txt": "39d97c08a73ef50a28ffae35c3995e0fb07ad2b96b95c683de87604fba3d2138",
+      "fields.json": "baf7fa1ea9959de9618d55b9f0d85643c5212b7f7125ebb5498d40793569c3aa"
+    }
+  },
+  "flowassurance": {
+    "course": "PD6",
+    "live": "/root/pd-wip-flowassurance",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "pd6_dump.mjs",
+      "pd6_fields.mjs",
+      "pd6_jt.mjs",
+      "pd6_ceiling.mjs",
+      "pd6_fluids.mjs",
+      "pd6_halfp.mjs",
+      "pd6_extra.mjs"
+    ],
+    "pins": {
+      "digest.txt": "7de11d05f7a324fa7c24e9ad8b9696296d963ae87058718946cbaad4d65e8199",
+      "fields.json": "db44c1495493231e4491b17cf8f9660588b66435d9a9c46071a4a6d49981f1ab"
+    }
+  },
+  "network": {
+    "course": "PD7",
+    "live": "/root/pd-wip-network",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "pd7_dump.mjs",
+      "pd7_fields.mjs"
+    ],
+    "pins": {
+      "digest.txt": "ca3b6c0aeb4ae8b44c64e2820c03d35cbe9ff50d78133ddae2bf7debecc8df67",
+      "fields.json": "626e8d7a7868c9b0e5510dafbf04042ffc15ff81df175f5b26c05dfc92bfd3f9"
+    }
+  },
+  "intervention": {
+    "course": "PD8",
+    "live": "/root/pd-wip-intervention",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "pd8_dump.mjs",
+      "pd8_fields.mjs"
+    ],
+    "pins": {
+      "digest.txt": "19b841a54c7c2c158240a0f530c7d38dc38cac0c94a796c99173a86940f1d98a",
+      "fields.json": "38c7349d9f787f07a29e06cec007328dbf43df473797e0d3e244794456cab2b2"
+    }
+  },
+  "surveillance": {
+    "course": "PD9",
+    "live": "/root/pd-wip-surveillance",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "pd9_dump.mjs",
+      "pd9_fields.mjs"
+    ],
+    "pins": {
+      "digest.txt": "090d101c45aa4e8aaa93b1b301342d4834efc5210c87387395b1f778278fe8a9",
+      "fields.json": "7bfa8d45e9edcee50eac517130cfa75b2cbb2d66de40bb12a4a37b5d55894c53"
+    }
+  },
+  "relief": {
+    "course": "FC5",
+    "live": "/root/fc-wip-relief",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "truth-relief.json",
+      "build_digest.sh",
+      "fc5_dump.mjs",
+      "fc5_fields.mjs",
+      "fc5_fields_capstone.mjs",
+      "fc5_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "structure.py",
+      "scaffold.py",
+      "lengths.py",
+      "gate_capstone_leak.py",
+      "gate_copy_rule.py",
+      "gate_typed_literals.py",
+      "gate_movement.mjs",
+      "gate_wavejson.mjs",
+      "digest_prose.rules.mjs",
+      "sweep_literals.py",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "finalise.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "dryrun_fc5.sh",
+      "verify_sql.py",
+      "apply_fc5_relief.sh"
+    ],
+    "pins": {
+      "digest.txt": "d3f329017cb72b89548399b64cdbb03d77ba89226242c26521ae1a4c2fc3ce7a",
+      "fields.json": "ca5d88d2d1b73842b6169ac542d44f9dbf7b6d22569ee69a56baa6059f3eb21b"
+    },
+    "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions, the structure, the three migration headers, the course, go-live and seed generators, the SQL verifier, the dry run and the owner's apply script. The kit became \"full\" with the seed ladder."
+  },
+  "heattransfer": {
+    "course": "FC6",
+    "live": "/root/fc-wip-heattransfer",
+    "kit": "full",
+    "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest, the graded answers, the precision declaration, wave.json, the dump, the teaching fields, the capstone generator, the capstone conditions, the structure, the three migration headers, the course, go-live and seed generators, the SQL verifier, the dry run and the owner's apply script. The kit became \"full\" with the seed ladder.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "fc6_dump.mjs",
+      "fc6_fields.mjs",
+      "fc6_capstone.mjs",
+      "fc6_fields_capstone.mjs",
+      "structure.py",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "dryrun_fc6.sh",
+      "verify_sql.py",
+      "apply_fc6_heattransfer.sh",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "oracle_heattransfer.py",
+      "source_prose.rules.mjs",
+      "truth-heattransfer.json"
+    ],
+    "pins": {
+      "digest.txt": "ad261b814fe191b74321779e9117b2ace9394560b42ffb261a654aff10c15e53",
+      "fields.json": "ba4c8e63d1dd591e11e7b213bca81a6e306fe3cef006b836b3264c771dca1dcd"
+    },
+    "headingsNoGeneratorSpells": 21
+  },
+  "producedwater": {
+    "course": "FC7",
+    "live": "/root/fc-wip-producedwater",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "wave.json",
+      "precision.json",
+      "truth-producedwater.json",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "fc7_dump.mjs",
+      "fc7_fields.mjs",
+      "fc7_capstone.mjs",
+      "fc7_fields_capstone.mjs",
+      "structure.py",
+      "vendor/closure.json",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "scratch_db.sh",
+      "dryrun_fc7.sh",
+      "verify_sql.py",
+      "apply_fc7_producedwater.sh"
+    ],
+    "pins": {
+      "digest.txt": "20943b5a4fd64783d51192a2d49fe8f15dda136601398efb49a16740813a463f",
+      "fields.json": "73576e0fb180f1518d85e1906d0fa4041ba88b46ea479e25be33c83367f591fd"
+    }
+  },
+  "corrosion": {
+    "course": "FC9",
+    "live": "/root/fc-wip-corrosion",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "fc9_dump.mjs",
+      "fc9_fields.mjs",
+      "fc9_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "gate_collisions.mjs",
+      "gate_capstone_leak.py",
+      "gate_copy_rule.py",
+      "gate_vocabulary.py",
+      "gate_typed_literals.py",
+      "gate_movement.mjs",
+      "gate_wavejson.mjs",
+      "gate_claims.mjs",
+      "sweep_literals.py",
+      "digest_prose.rules.mjs",
+      "structure.py",
+      "scaffold.py",
+      "lengths.py",
+      "build_digest.sh",
+      "finalise.sh",
+      "truth-corrosion.json",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "dryrun_fc9.sh",
+      "verify_sql.py",
+      "apply_fc9_corrosion.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "scratch_db.sh"
+    ],
+    "pins": {
+      "digest.txt": "21a86b5eef336027a35048c8351dfbf45349b22999e4b21430077e9b5e644413",
+      "fields.json": "44edd802bdf49afb88e53f25290de25b3ded9296e092767b5ea980ea17ebf98f"
+    },
+    "note": "FULL kit. Everything this wave is rebuilt from is committed: the digest and its generator, the teaching streams, the capstone generator, the answer key and its precision declaration, every gate that reads either, the build and re-pin scripts, the structure and scaffold, and all five writer briefs. The gates read /root paths by DEFAULT and every one takes an override, which is what makes the committed copy the thing the vitest suites read on a CI runner."
+  },
+  "hygiene": {
+    "course": "H2",
+    "live": "/root/hse-wip-hygiene",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "h2_dump.mjs",
+      "h2_fields.mjs",
+      "h2_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "gate_collisions.mjs",
+      "gate_capstone_leak.py",
+      "gate_copy_rule.py",
+      "gate_claims.mjs",
+      "gate_vocabulary.py",
+      "digest_prose.rules.mjs",
+      "structure.py",
+      "scaffold.py",
+      "lengths.py",
+      "build_digest.sh",
+      "finalise.py",
+      "mirror.sh",
+      "vendor_hygiene.sh",
+      "truth-hygiene.json",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "cut_block.py",
+      "scratch_db.sh",
+      "dryrun_h2.sh",
+      "apply_h2_hygiene.sh"
+    ],
+    "pins": {
+      "digest.txt": "bbf64e544665a3737905b286167cb9fcbc2d42c0a09fb0bfafe0d2d81a960d66",
+      "fields.json": "5271e9615617356f27a0febed887f311e5a4cdd4bc94c65644eb6bf0a6ac88a1"
+    },
+    "note": "FULL kit, foundation phase plus the five-migration seed ladder. The digest and its generator, the teaching records, the capstone generator, the answer key and its precision declaration, every wave gate, the build, finalise and mirror scripts, the structure and scaffold, all five writer briefs, the three tier headers, the course and go-live generators, gen_seeds.sh and its WORKTREE escape hatch, the local scratch database, the rollback-wrapped dry run with its negative-control block cutter, and the content-addressed apply script the owner runs. HSE module, path_order 62. The gates read /root paths by DEFAULT and every one takes an override."
+  },
+  "metering": {
+    "course": "FC8",
+    "live": "/root/fc-wip-metering",
+    "kit": "full",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "build_digest.sh",
+      "fc8_dump.mjs",
+      "fc8_fields.mjs",
+      "fc8_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "digest_prose.rules.mjs",
+      "structure.py",
+      "scaffold.py",
+      "lengths.py",
+      "gate_capstone_leak.py",
+      "gate_collisions.mjs",
+      "gate_claims.mjs",
+      "gate_copy_rule.py",
+      "gate_wavejson.mjs",
+      "finalise.sh",
+      "package.json",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "vendor/closure.py",
+      "vendor/closure.json",
+      "AUDIT-beginner.md",
+      "AUDIT-intermediate.md",
+      "AUDIT-advanced.md",
+      "NOTES.md",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "dryrun_fc8.sh",
+      "scratch_db.sh",
+      "apply_fc8_metering.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt"
+    ],
+    "pins": {
+      "digest.txt": "d31ca5bd5189ea403f09abde07713b6ab8d9d693df81aed0bddf5e099e5d0087",
+      "fields.json": "cd9195a30660a8ebbfe4d5b84d01aef4e77b33509377cc5469b2c81f356fc88e"
+    },
+    "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest and its generator, the graded answers and their generator, the precision declaration, wave.json, the three tier audits, the three migration headers, the course, go-live and seed generators, the SQL verifier, the scratch database and the dry run against it, and the owner's apply script. The kit became \"full\" with the seed ladder."
+  },
+  "riskchange": {
+    "course": "AS-RC",
+    "live": "/root/as-wip-riskchange",
+    "kit": "full",
+    "kitNote": "The mirror carries every file the wave is rebuilt and gated from: the digest and its generator with the teaching records, the eighteen graded answers with their generator and capstone records, the precision declaration, wave.json, the structure and scaffold, the three migration headers, the oracle bridge with both call ledgers it replays, every gate (as-of, reproducibility across four zones, leak, collision, promptleak, discriminate, copy rule), the prose rules and the vendoring closure and ledger scripts, and with the seed ladder the course, go-live and seed generators, the SQL verifier, the scratch database, the dry run with its negative controls and the owner's apply script.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "riskchange_dump.mjs",
+      "riskchange_fields.mjs",
+      "riskchange_capstone.mjs",
+      "riskchange_fields_capstone.mjs",
+      "structure.py",
+      "scaffold.py",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "source_prose.rules.mjs",
+      "oracle_bridge.py",
+      "calls.json",
+      "capstone_calls.json",
+      "discriminate.mjs",
+      "gate_asof.mjs",
+      "gate_repro.sh",
+      "gate_capstone_leak.py",
+      "gate_collision.py",
+      "gate_promptleak.py",
+      "gate_copy_rule.py",
+      "lengths.py",
+      "sweep_literals.py",
+      "vendor/closure.py",
+      "vendor/ledger.py",
+      "vendor/closure.json",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_asrc.sh",
+      "cut_block.py",
+      "apply_asrc_riskchange.sh"
+    ],
+    "pins": {
+      "digest.txt": "27c51a39bbd17fa9f282edb93ce1707d5b21288443e4a0cc09a983831f5797de",
+      "fields.json": "2a29733537f8f69ea915b6271db2a054243c6561deb21b75b67755c4cf1c3a6e"
+    },
+    "headingsNoGeneratorSpells": 0
+  },
+  "compliance": {
+    "course": "AS-CQ",
+    "live": "/root/as-wip-compliance",
+    "kit": "full",
+    "kitNote": "Foundation kit. The mirror carries every file the wave is rebuilt and gated from: the digest, its generator, the teaching records and the shared clock guard; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles on the capstone; every gate with its negative control (reproducibility across five zones, the clock, collisions, promptleak, capstone leak, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files; and the vendoring closure and ledger scripts. The seed ladder joined it: the course, go-live and seed generators, the SQL verifier, the scratch database, the dry run with its negative controls and block cutter, and the owner's content-addressed apply script. The kit became \"full\" with the seed ladder.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "capstone.json",
+      "compliance_dump.mjs",
+      "compliance_fields.mjs",
+      "compliance_capstone.mjs",
+      "compliance_fields_capstone.mjs",
+      "clockguard.mjs",
+      "structure.py",
+      "scaffold.py",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "source_prose.rules.mjs",
+      "oracle_check.py",
+      "discriminate.mjs",
+      "gate_repro.sh",
+      "gate_clock.sh",
+      "fakeclock.mjs",
+      "gate_collisions.py",
+      "gate_promptleak.py",
+      "gate_capstone_leak.py",
+      "gate_copy_rule.py",
+      "run_gates.sh",
+      "RECON.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "vendor/closure.py",
+      "vendor/ledger.py",
+      "vendor/closure.json",
+      "REVISE.md",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "dryrun_cq.sh",
+      "cut_block.py",
+      "scratch_db.sh",
+      "apply_cq_compliance.sh"
+    ],
+    "pins": {
+      "digest.txt": "d2830fc9ed1be24cb445acf2ca0332b7c0e8644cfae41d99baf673f79552bb88",
+      "fields.json": "792165af33c6b5cfd291f4a6810691f6011bc73105292f42280d5570f41add13"
+    }
   }
- },
- "corrosion": {
-  "course": "FC9",
-  "live": "/root/fc-wip-corrosion",
-  "kit": "full",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "precision.json",
-   "wave.json",
-   "fc9_dump.mjs",
-   "fc9_fields.mjs",
-   "fc9_capstone.mjs",
-   "make_fields.mjs",
-   "discriminate.mjs",
-   "gate_collisions.mjs",
-   "gate_capstone_leak.py",
-   "gate_copy_rule.py",
-   "gate_vocabulary.py",
-   "gate_typed_literals.py",
-   "gate_movement.mjs",
-   "gate_wavejson.mjs",
-   "gate_claims.mjs",
-   "sweep_literals.py",
-   "digest_prose.rules.mjs",
-   "structure.py",
-   "scaffold.py",
-   "lengths.py",
-   "build_digest.sh",
-   "finalise.sh",
-   "truth-corrosion.json",
-   "BRIEF.md",
-   "LESSON_TASK.md",
-   "BANK_TASK.md",
-   "KEY_TRUTH_TASK.md",
-   "PANELS.md",
-   "gen_course.py",
-   "gen_golive.py",
-   "gen_seeds.sh",
-   "dryrun_fc9.sh",
-   "verify_sql.py",
-   "apply_fc9_corrosion.sh",
-   "hdr_beginner.txt",
-   "hdr_intermediate.txt",
-   "hdr_advanced.txt",
-   "scratch_db.sh"
-  ],
-  "pins": {
-   "digest.txt": "21a86b5eef336027a35048c8351dfbf45349b22999e4b21430077e9b5e644413",
-   "fields.json": "44edd802bdf49afb88e53f25290de25b3ded9296e092767b5ea980ea17ebf98f"
-  },
-  "note": "FULL kit. Everything this wave is rebuilt from is committed: the digest and its generator, the teaching streams, the capstone generator, the answer key and its precision declaration, every gate that reads either, the build and re-pin scripts, the structure and scaffold, and all five writer briefs. The gates read /root paths by DEFAULT and every one takes an override, which is what makes the committed copy the thing the vitest suites read on a CI runner."
- },
- "hygiene": {
-  "course": "H2",
-  "live": "/root/hse-wip-hygiene",
-  "kit": "full",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "precision.json",
-   "wave.json",
-   "h2_dump.mjs",
-   "h2_fields.mjs",
-   "h2_capstone.mjs",
-   "make_fields.mjs",
-   "discriminate.mjs",
-   "gate_collisions.mjs",
-   "gate_capstone_leak.py",
-   "gate_copy_rule.py",
-   "gate_claims.mjs",
-   "gate_vocabulary.py",
-   "digest_prose.rules.mjs",
-   "structure.py",
-   "scaffold.py",
-   "lengths.py",
-   "build_digest.sh",
-   "finalise.py",
-   "mirror.sh",
-   "vendor_hygiene.sh",
-   "truth-hygiene.json",
-   "BRIEF.md",
-   "LESSON_TASK.md",
-   "BANK_TASK.md",
-   "KEY_TRUTH_TASK.md",
-   "PANELS.md",
-   "hdr_beginner.txt",
-   "hdr_intermediate.txt",
-   "hdr_advanced.txt",
-   "gen_course.py",
-   "gen_golive.py",
-   "gen_seeds.sh",
-   "cut_block.py",
-   "scratch_db.sh",
-   "dryrun_h2.sh",
-   "apply_h2_hygiene.sh"
-  ],
-  "pins": {
-   "digest.txt": "51dabb018358153ea528453534736cfbbf166139bc553e5edb22710b5e94ff85",
-   "fields.json": "5271e9615617356f27a0febed887f311e5a4cdd4bc94c65644eb6bf0a6ac88a1"
-  },
-  "note": "FULL kit, foundation phase plus the five-migration seed ladder. The digest and its generator, the teaching records, the capstone generator, the answer key and its precision declaration, every wave gate, the build, finalise and mirror scripts, the structure and scaffold, all five writer briefs, the three tier headers, the course and go-live generators, gen_seeds.sh and its WORKTREE escape hatch, the local scratch database, the rollback-wrapped dry run with its negative-control block cutter, and the content-addressed apply script the owner runs. HSE module, path_order 62. The gates read /root paths by DEFAULT and every one takes an override."
- },
- "metering": {
-  "course": "FC8",
-  "live": "/root/fc-wip-metering",
-  "kit": "full",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "precision.json",
-   "wave.json",
-   "build_digest.sh",
-   "fc8_dump.mjs",
-   "fc8_fields.mjs",
-   "fc8_capstone.mjs",
-   "make_fields.mjs",
-   "discriminate.mjs",
-   "digest_prose.rules.mjs",
-   "structure.py",
-   "scaffold.py",
-   "lengths.py",
-   "gate_capstone_leak.py",
-   "gate_collisions.mjs",
-   "gate_claims.mjs",
-   "gate_copy_rule.py",
-   "gate_wavejson.mjs",
-   "finalise.sh",
-   "package.json",
-   "BRIEF.md",
-   "LESSON_TASK.md",
-   "BANK_TASK.md",
-   "KEY_TRUTH_TASK.md",
-   "PANELS.md",
-   "vendor/closure.py",
-   "vendor/closure.json",
-   "AUDIT-beginner.md",
-   "AUDIT-intermediate.md",
-   "AUDIT-advanced.md",
-   "NOTES.md",
-   "gen_course.py",
-   "gen_golive.py",
-   "gen_seeds.sh",
-   "verify_sql.py",
-   "dryrun_fc8.sh",
-   "scratch_db.sh",
-   "apply_fc8_metering.sh",
-   "hdr_beginner.txt",
-   "hdr_intermediate.txt",
-   "hdr_advanced.txt"
-  ],
-  "pins": {
-   "digest.txt": "d31ca5bd5189ea403f09abde07713b6ab8d9d693df81aed0bddf5e099e5d0087",
-   "fields.json": "cd9195a30660a8ebbfe4d5b84d01aef4e77b33509377cc5469b2c81f356fc88e"
-  },
-  "kitNote": "The whole kit lives in the wave directory and the mirror carries every file a reviewer needs to rebuild the wave from the committed tree: the digest and its generator, the graded answers and their generator, the precision declaration, wave.json, the three tier audits, the three migration headers, the course, go-live and seed generators, the SQL verifier, the scratch database and the dry run against it, and the owner's apply script. The kit became \"full\" with the seed ladder."
- },
- "riskchange": {
-  "course": "AS-RC",
-  "live": "/root/as-wip-riskchange",
-  "kit": "full",
-  "kitNote": "The mirror carries every file the wave is rebuilt and gated from: the digest and its generator with the teaching records, the eighteen graded answers with their generator and capstone records, the precision declaration, wave.json, the structure and scaffold, the three migration headers, the oracle bridge with both call ledgers it replays, every gate (as-of, reproducibility across four zones, leak, collision, promptleak, discriminate, copy rule), the prose rules and the vendoring closure and ledger scripts, and with the seed ladder the course, go-live and seed generators, the SQL verifier, the scratch database, the dry run with its negative controls and the owner's apply script.",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "precision.json",
-   "wave.json",
-   "riskchange_dump.mjs",
-   "riskchange_fields.mjs",
-   "riskchange_capstone.mjs",
-   "riskchange_fields_capstone.mjs",
-   "structure.py",
-   "scaffold.py",
-   "hdr_beginner.txt",
-   "hdr_intermediate.txt",
-   "hdr_advanced.txt",
-   "build_digest.sh",
-   "digest_prose.rules.mjs",
-   "source_prose.rules.mjs",
-   "oracle_bridge.py",
-   "calls.json",
-   "capstone_calls.json",
-   "discriminate.mjs",
-   "gate_asof.mjs",
-   "gate_repro.sh",
-   "gate_capstone_leak.py",
-   "gate_collision.py",
-   "gate_promptleak.py",
-   "gate_copy_rule.py",
-   "lengths.py",
-   "sweep_literals.py",
-   "vendor/closure.py",
-   "vendor/ledger.py",
-   "vendor/closure.json",
-   "gen_course.py",
-   "gen_golive.py",
-   "gen_seeds.sh",
-   "verify_sql.py",
-   "scratch_db.sh",
-   "dryrun_asrc.sh",
-   "cut_block.py",
-   "apply_asrc_riskchange.sh"
-  ],
-  "pins": {
-   "digest.txt": "27c51a39bbd17fa9f282edb93ce1707d5b21288443e4a0cc09a983831f5797de",
-   "fields.json": "2a29733537f8f69ea915b6271db2a054243c6561deb21b75b67755c4cf1c3a6e"
-  },
-  "headingsNoGeneratorSpells": 0
- },
- "compliance": {
-  "course": "AS-CQ",
-  "live": "/root/as-wip-compliance",
-  "kit": "full",
-  "kitNote": "Foundation kit. The mirror carries every file the wave is rebuilt and gated from: the digest, its generator, the teaching records and the shared clock guard; the eighteen graded answers, their generator, the capstone records and the draft prompts; the precision declaration; wave.json; the structure and scaffold; the three tier headers; the oracle cross-check that replays the vendored Python oracles on the capstone; every gate with its negative control (reproducibility across five zones, the clock, collisions, promptleak, capstone leak, discriminate, copy rule) and the runner that pins their md5s; the prose rules; the recon and the four task files; and the vendoring closure and ledger scripts. The seed ladder joined it: the course, go-live and seed generators, the SQL verifier, the scratch database, the dry run with its negative controls and block cutter, and the owner's content-addressed apply script. The kit became \"full\" with the seed ladder.",
-  "inputs": [
-   "digest.txt",
-   "fields.json",
-   "precision.json",
-   "wave.json",
-   "capstone.json",
-   "compliance_dump.mjs",
-   "compliance_fields.mjs",
-   "compliance_capstone.mjs",
-   "compliance_fields_capstone.mjs",
-   "clockguard.mjs",
-   "structure.py",
-   "scaffold.py",
-   "hdr_beginner.txt",
-   "hdr_intermediate.txt",
-   "hdr_advanced.txt",
-   "build_digest.sh",
-   "digest_prose.rules.mjs",
-   "source_prose.rules.mjs",
-   "oracle_check.py",
-   "discriminate.mjs",
-   "gate_repro.sh",
-   "gate_clock.sh",
-   "fakeclock.mjs",
-   "gate_collisions.py",
-   "gate_promptleak.py",
-   "gate_capstone_leak.py",
-   "gate_copy_rule.py",
-   "run_gates.sh",
-   "RECON.md",
-   "LESSON_TASK.md",
-   "BANK_TASK.md",
-   "KEY_TRUTH_TASK.md",
-   "PANELS.md",
-   "vendor/closure.py",
-   "vendor/ledger.py",
-   "vendor/closure.json",
-   "REVISE.md",
-   "gen_course.py",
-   "gen_golive.py",
-   "gen_seeds.sh",
-   "verify_sql.py",
-   "dryrun_cq.sh",
-   "cut_block.py",
-   "scratch_db.sh",
-   "apply_cq_compliance.sh"
-  ],
-  "pins": {
-   "digest.txt": "d2830fc9ed1be24cb445acf2ca0332b7c0e8644cfae41d99baf673f79552bb88",
-   "fields.json": "792165af33c6b5cfd291f4a6810691f6011bc73105292f42280d5570f41add13"
-  }
- }
 }
