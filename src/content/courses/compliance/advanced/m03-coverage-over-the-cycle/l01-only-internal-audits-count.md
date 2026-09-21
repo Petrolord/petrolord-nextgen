@@ -27,7 +27,7 @@ A surveillance audit is carried out by the certification body. It examines the m
 
 The trap this tier is built on sits here. An examination by the certification body does not move a clause's last examined date, however late it falls. Clause 4.3 reads last examined 2023-09-20, by ISA-2023-002, and it reads stale true. A surveillance audit ended in 2026 sits on the same table, and 4.3's last examined date stays where it is.
 
-The digest prints what each ORASHI audit examined. ISA-2026-S01 examined one clause, 6.1.2, Conformant on 2026-07-22. It did not examine clause 4.3. Now read clause 6.1.2 in the coverage table: last examined never, by audit none, covered false. The only audit that examined 6.1.2 is of type Surveillance, so the coverage count reads the clause as never examined. Clause 6.1.2 is one of the 3 applicable clauses the readiness list names as never examined by an internal audit.
+The engine prints what each ORASHI audit examined. ISA-2026-S01 examined one clause, 6.1.2, Conformant on 2026-07-22. It did not examine clause 4.3. Now read clause 6.1.2 in the coverage table: last examined never, by audit none, covered false. The only audit that examined 6.1.2 is of type Surveillance, so the coverage count reads the clause as never examined. Clause 6.1.2 is one of the 3 applicable clauses the readiness list names as never examined by an internal audit.
 
 ## Why the rule matters
 

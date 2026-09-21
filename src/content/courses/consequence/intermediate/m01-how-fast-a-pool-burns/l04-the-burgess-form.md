@@ -10,7 +10,7 @@ The engine's model string reads "Burgess: m" = 0.001 dHc / (dHv + Cp (Tb - Ta))"
 
 ## A worked case in n-hexane
 
-The digest states n-hexane with these inputs:
+This lesson states n-hexane with these inputs:
 
 | input, stated | value |
 | --- | --- |

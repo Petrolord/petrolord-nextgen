@@ -30,7 +30,7 @@ The register summary prints reviews overdue 1 and reviews due soon 1. The readin
 
 ## The day counts behind the flags
 
-The digest prints the days until each clause's next review at 2026-10-15. Clause 4.3 reads -14, a review date already behind the as-of date. Clause 6.1.2 reads 18, and it is the only clause that reads review due soon true. Clause 7.2 reads 108. Quote the day count as the engine printed it, beside its as-of date. Moved to another date, every one of these counts changes, and a flag can change with it.
+The engine prints the days until each clause's next review at 2026-10-15. Clause 4.3 reads -14, a review date already behind the as-of date. Clause 6.1.2 reads 18, and it is the only clause that reads review due soon true. Clause 7.2 reads 108. Quote the day count as the engine printed it, beside its as-of date. Moved to another date, every one of these counts changes, and a flag can change with it.
 
 ## Exercise
 

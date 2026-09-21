@@ -46,7 +46,7 @@ The certificate appears on the list as a watch item, in the same table as the ot
 
 ## A register with nothing in it
 
-The digest prints one more case. A standard with no clauses in the register reads ready false, with a single blocking item of count 0:
+The engine prints one more case. A standard with no clauses in the register reads ready false, with a single blocking item of count 0:
 
 "This standard has no applicable clauses in the register yet, so there is nothing to be ready with."
 

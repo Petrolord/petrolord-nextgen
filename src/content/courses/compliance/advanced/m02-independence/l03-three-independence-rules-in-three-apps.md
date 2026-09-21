@@ -1,6 +1,6 @@
 # Three independence rules in three apps
 
-Independence is not only an ISO rule in this course. Three of the five apps check that a person does not pass judgement on their own work, and each checks it against a different name on the record. The digest says so in SECTION 19: the Audit & Findings Manager checks the lead auditor against the auditee, and Document Control checks a reviewer against the author. This lesson lays the three side by side.
+Independence is not only an ISO rule in this course. Three of the five apps check that a person does not pass judgement on their own work, and each checks it against a different name on the record. This course records it in one place: the Audit & Findings Manager checks the lead auditor against the auditee, and Document Control checks a reviewer against the author. This lesson lays the three side by side.
 
 {{panel:compliance-readiness-explorer}}
 

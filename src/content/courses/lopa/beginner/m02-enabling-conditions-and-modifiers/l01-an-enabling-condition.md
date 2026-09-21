@@ -22,7 +22,7 @@ The alternative would have been one list of factors with a free text note beside
 
 ## What one enabling condition is worth
 
-ORONI's initiating frequency is 0.45 per year. The enabling condition alone carries it to a smaller number before any modifier or layer is applied, and leaving it off the row moves the unmitigated frequency from 0.013500000000 to 0.045000000000 per year, which the digest records as a factor of 3.333333 over the full row.
+ORONI's initiating frequency is 0.45 per year. The enabling condition alone carries it to a smaller number before any modifier or layer is applied, and leaving it off the row moves the unmitigated frequency from 0.013500000000 to 0.045000000000 per year, which the course computes as a factor of 3.333333 over the full row.
 
 | what was left out | unmitigated frequency per year | over the full row, derived |
 | --- | --- | --- |

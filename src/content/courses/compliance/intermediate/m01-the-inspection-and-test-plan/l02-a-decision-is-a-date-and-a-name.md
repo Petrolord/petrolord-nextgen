@@ -40,4 +40,4 @@ The plan records who took responsibility for a check and when, and the name on t
 
 ## Exercise
 
-In the plan explorer, ask to pass H-08 with nobody named, then with a date and a verifier, and do the same for W-09. Read the four answers against the engine's rows in SECTION 10. Say what the pair of refusals shows: what the hold point and the witness point both ask for, which words differ between the two sentences, and whether H-08's status moved after the refused request.
+In the plan explorer, ask to pass H-08 with nobody named, then with a date and a verifier, and do the same for W-09. Read the four answers against the engine's rows quoted above. Say what the pair of refusals shows: what the hold point and the witness point both ask for, which words differ between the two sentences, and whether H-08's status moved after the refused request.

@@ -1,6 +1,6 @@
 # What is held and what is decided
 
-SECTION 23 of the digest lists the owner decisions in force, the ambiguities recorded and left as they are, five rules the engine keeps from ASC-0 and three more from ASC-1. None of it is a graded field. This lesson reads it as stated policy and as limits.
+This course lists the owner decisions in force, the ambiguities recorded and left as they are, five rules the engine keeps from ASC-0 and three more from ASC-1. None of it is a graded field. This lesson reads it as stated policy and as limits.
 
 {{panel:compliance-readiness-explorer}}
 

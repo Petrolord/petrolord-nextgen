@@ -2,7 +2,7 @@
 
 {{panel:ss-intervals-explorer}}
 
-The digest swept every pair of counts from 0 to 15 north and 0 to 24 south on the UTOROGU hours, leaving out only the pair where both are zero:
+The course swept every pair of counts from 0 to 15 north and 0 to 24 south on the UTOROGU hours, leaving out only the pair where both are zero:
 
 | convention | comparisons | disagreements with the engine's interval |
 | --- | --- | --- |

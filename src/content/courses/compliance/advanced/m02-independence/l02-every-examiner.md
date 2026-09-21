@@ -6,11 +6,11 @@ An audit is more than its lead. Other people on the audit record results against
 
 ## The owner decision
 
-Owner decision AS15 Q5 reads, in SECTION 23 of the digest: every examiner is checked for independence, through canExamineClause. The check is made for each clause result as it is recorded. It asks one question: does the person recording this result own this clause?
+Owner decision AS15 Q5 reads, as this course records it: every examiner is checked for independence, through canExamineClause. The check is made for each clause result as it is recorded. It asks one question: does the person recording this result own this clause?
 
 ## The two rows
 
-The digest prints canExamineClause for clause 8.1, which u-kalu owns:
+The lab prints canExamineClause for clause 8.1, which u-kalu owns:
 
 - u-kalu recording 8.1: REFUSED.
 - u-chidi recording 8.1: ALLOWED.
@@ -31,7 +31,7 @@ canExamineClause closes that gap one result at a time. The team may include some
 
 The two checks read different things:
 
-| check | what it reads | the case the digest prints |
+| check | what it reads | the case the engine prints |
 | --- | --- | --- |
 | lead auditor | the lead against every clause in scope | a planned internal audit |
 | canExamineClause | the person recording against one clause | a clause result being recorded |

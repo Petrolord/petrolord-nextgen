@@ -1,6 +1,6 @@
 # A nonconformant verdict needs two of the three
 
-Lesson 2 showed the gate asking for evidence, a date and an assessor before it lets a clause read Conformant. A Nonconformant verdict is a different statement, and the gate asks for less. This lesson reads the two Nonconformant requests the digest prints, on clause 7.2 of the ORASHI register, and the one ORASHI clause that carries the verdict, at the as-of date 2026-10-15.
+Lesson 2 showed the gate asking for evidence, a date and an assessor before it lets a clause read Conformant. A Nonconformant verdict is a different statement, and the gate asks for less. This lesson reads the two Nonconformant requests the engine answers, on clause 7.2 of the ORASHI register, and the one ORASHI clause that carries the verdict, at the as-of date 2026-10-15.
 
 {{panel:compliance-readiness-explorer}}
 
@@ -33,7 +33,7 @@ The readiness counts print nonconformant 1, and module 5 shows the blocking item
 
 ## Partially conformant asks for all three
 
-The digest prints two requests to set clause 7.2 to Partially conformant. With nothing else, it is refused with the same sentence Conformant meets: "Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown." With evidence, a date and an assessor, it is ALLOWED. So Partially conformant sits with Conformant: it asks for all three. Nonconformant asks for two.
+The engine answers two requests to set clause 7.2 to Partially conformant. With nothing else, it is refused with the same sentence Conformant meets: "Name the evidence, the date it was assessed and who assessed it. Conformity is a claim about documented information; without those three it is an opinion in a dropdown." With evidence, a date and an assessor, it is ALLOWED. So Partially conformant sits with Conformant: it asks for all three. Nonconformant asks for two.
 
 Clause 6.1.2 reads Partially conformant in the register, with claims conformity, evidence record and assessed all true. That row carries what the gate asks for the status.
 

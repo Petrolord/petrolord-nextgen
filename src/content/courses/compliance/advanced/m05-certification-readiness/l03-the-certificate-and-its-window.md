@@ -37,7 +37,7 @@ The last two rows are the limit of the rule. An expiry recorded as the text tbc,
 
 ## One item among the others
 
-The certificate item sits among ten others. At 91 days it leaves the list, and the other items stay. The digest prints the item column for each moved expiry and does not print ready for those rows, so this course states only the item. The certificate is read the way every other record in this tier is read: a dated field, one as-of date, and a derived item. A certificate that has months to run removes one line from the list and leaves every other line where it was. Booking the recertification audit does not close an open Major nonconformity.
+The certificate item sits among ten others. At 91 days it leaves the list, and the other items stay. The lab prints the item column for each moved expiry and does not print ready for those rows, so this course states only the item. The certificate is read the way every other record in this tier is read: a dated field, one as-of date, and a derived item. A certificate that has months to run removes one line from the list and leaves every other line where it was. Booking the recertification audit does not close an open Major nonconformity.
 
 ## Exercise
 

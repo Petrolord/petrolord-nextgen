@@ -1,6 +1,6 @@
 # A major nonconformity needs its root cause
 
-Lesson 1 read the two halves of an answer. A Major nonconformity asks for both, and for two things more: the cause written down, and proof that the corrective action worked. The digest prints canCloseFinding on a Major nonconformity one requirement at a time. This lesson walks it, and then reads the two ORASHI Major findings at the as-of date 2026-10-15.
+Lesson 1 read the two halves of an answer. A Major nonconformity asks for both, and for two things more: the cause written down, and proof that the corrective action worked. The lab prints canCloseFinding on a Major nonconformity one requirement at a time. This lesson walks it, and then reads the two ORASHI Major findings at the as-of date 2026-10-15.
 
 {{panel:compliance-readiness-explorer}}
 
@@ -46,7 +46,7 @@ ISF-2026-004 is Action in progress. Its actions are ac1, Corrective, In progress
 
 REFUSED: 1 action still open against this finding.
 
-The refusal names the first thing missing: ac1 is still open. Complete it, and the record would still hold no corrective action verified effective. The summary in module 5 prints awaiting an effectiveness check 1 across the register, and the digest names the action behind it: ac4, Preventive, on ISF-2026-004, Complete with no effectiveness verdict recorded.
+The refusal names the first thing missing: ac1 is still open. Complete it, and the record would still hold no corrective action verified effective. The summary in module 5 prints awaiting an effectiveness check 1 across the register, and the actions table names the action behind it: ac4, Preventive, on ISF-2026-004, Complete with no effectiveness verdict recorded.
 
 ## The Professional parallel
 

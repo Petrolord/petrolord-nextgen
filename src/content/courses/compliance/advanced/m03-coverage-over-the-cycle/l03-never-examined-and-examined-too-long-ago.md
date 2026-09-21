@@ -14,7 +14,7 @@ Lessons 1 and 2 decided which audits count. This lesson reads what the engine do
 
 Clause 8.1 was last examined by a counting audit inside the cycle, and it reads covered true. Clause 4.3 was last examined by a counting audit, and that examination falls before the cycle began: it reads covered false and stale true. Clause 7.2 has no counting examination at all. It reads never, with covered false and stale false.
 
-Read the day counts as the engine prints them. The digest does not convert -882 or -1121 into years, and neither should you. The engine has already read each date against the cycle, and the covered and stale flags are its answer.
+Read the day counts as the engine prints them. The engine does not convert -882 or -1121 into years, and neither should you. The engine has already read each date against the cycle, and the covered and stale flags are its answer.
 
 ## Stale and never are two different conditions
 
@@ -25,7 +25,7 @@ The readiness list in module 5 keeps the two apart and ranks them differently:
 - blocking: "3 applicable clauses have never been examined by an internal audit. ISO 14001:2015 §9.2 requires the organization to audit its own system."
 - serious: "1 clause was last audited before this certification cycle began."
 
-At a cycle of 3 years, the digest's table of cycle lengths prints covered 8, stale 1 and never examined 3. The three clauses that read never are 6.1.2, 7.2 and 7.5.3.
+At a cycle of 3 years, the lab's table of cycle lengths prints covered 8, stale 1 and never examined 3. The three clauses that read never are 6.1.2, 7.2 and 7.5.3.
 
 ## A register verdict is not an audit
 

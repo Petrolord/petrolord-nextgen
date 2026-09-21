@@ -44,4 +44,4 @@ Some records raise more than one item. ISF-2026-004 is on the list twice: as the
 
 ## Exercise
 
-At 2026-10-15, name the record behind each of the eleven items on the list, using the register, coverage, findings and actions tables. Then name the three records that each appear under two different severities, and say which two questions each one fails. Do not rank the items within a severity: the digest prints no order inside one.
+At 2026-10-15, name the record behind each of the eleven items on the list, using the register, coverage, findings and actions tables. Then name the three records that each appear under two different severities, and say which two questions each one fails. Do not rank the items within a severity: the engine prints no order inside one.

@@ -1,6 +1,6 @@
 # The counts beside the list
 
-certificationReadiness returns its list and a table of counts. The register's summarise returns another set. This lesson reads both at the as-of date 2026-10-15, and practises the discipline this course has asked for from its first lesson: quote a count as it prints, and form no ratio the digest does not print.
+certificationReadiness returns its list and a table of counts. The register's summarise returns another set. This lesson reads both at the as-of date 2026-10-15, and practises the discipline this course has asked for from its first lesson: quote a count as it prints, and form no ratio the engine does not print.
 
 {{panel:compliance-readiness-explorer}}
 
@@ -37,7 +37,7 @@ Some summary counts print the same figures as readiness counts under other names
 
 ## No percentage
 
-The digest prints covered 8 and applicable 12. It prints evidenced 9 and conformant 9. It prints no percentage from any of them, and certificationReadiness returns none. The list names the uncovered clauses by kind: 3 applicable clauses never examined by an internal audit, a blocking item, and 1 clause last audited before this certification cycle began, a serious one. The counts and the list are read together.
+The lab prints covered 8 and applicable 12. It prints evidenced 9 and conformant 9. It prints no percentage from any of them, and certificationReadiness returns none. The list names the uncovered clauses by kind: 3 applicable clauses never examined by an internal audit, a blocking item, and 1 clause last audited before this certification cycle began, a serious one. The counts and the list are read together.
 
 So when you report readiness, report the counts as they print and the list items beside them. Do not write a fraction or a percentage of any shape. The course has shown you why at every tier: the engine rounds its own percents where it prints them, and where it prints none there is no percent to quote.
 

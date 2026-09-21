@@ -2,7 +2,7 @@
 
 {{panel:ss-intervals-explorer}}
 
-The 95 percent Garwood interval is supposed to cover the true mean at least 95 times in a hundred. The digest checks that claim through the engine at seven true means:
+The 95 percent Garwood interval is supposed to cover the true mean at least 95 times in a hundred. This course checks that claim through the engine at seven true means:
 
 | true mean | coverage | total probability summed |
 | --- | --- | --- |

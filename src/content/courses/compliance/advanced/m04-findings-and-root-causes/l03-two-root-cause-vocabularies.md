@@ -1,6 +1,6 @@
 # Two root cause vocabularies
 
-Lesson 2 showed a Major nonconformity refused until its root cause is recorded. A root cause is recorded against a category, chosen from a frozen list. This course's apps carry two such lists, and they are different. This lesson reads both, as SECTION 1 of the digest prints them.
+Lesson 2 showed a Major nonconformity refused until its root cause is recorded. A root cause is recorded against a category, chosen from a frozen list. This course's apps carry two such lists, and they are different. This lesson reads both, as the engines ship them.
 
 {{panel:compliance-readiness-explorer}}
 
@@ -10,7 +10,7 @@ isoCompliance.ROOT_CAUSE_CATEGORIES holds 10 categories:
 
 Procedure or documentation, Human factors or competence, Design, Material or equipment, Supplier or subcontractor, Planning or scheduling, Communication, Measurement or monitoring, Management system, Other.
 
-The digest also prints that auditManagement.ROOT_CAUSE_CATEGORIES is the same list object as isoCompliance's: true. The Audit & Findings Manager and the ISO register do not hold two copies that could drift apart. They hold one list.
+The engine also prints that auditManagement.ROOT_CAUSE_CATEGORIES is the same list object as isoCompliance's: true. The Audit & Findings Manager and the ISO register do not hold two copies that could drift apart. They hold one list.
 
 ## The quality list
 
@@ -22,7 +22,7 @@ This is the list the Professional tier's NCRs are recorded against.
 
 ## Where the lists differ
 
-The digest prints the difference directly:
+The engine prints the difference directly:
 
 - only in the ISO list: Measurement or monitoring, Management system;
 - only in the quality list: Measurement or inspection.
@@ -50,4 +50,4 @@ A root cause recorded here can also feed a risk register or a lesson learned. Bo
 
 ## Exercise
 
-Read the two lists from SECTION 1. Name the categories that appear only in the ISO list and the one that appears only in the quality list. Then say which of the two lists a Major nonconformity in the Audit & Findings Manager is recorded against, citing the digest line that tells you, and why that answer does not need a separate lesson for that app.
+Read the two lists from SECTION 1. Name the categories that appear only in the ISO list and the one that appears only in the quality list. Then say which of the two lists a Major nonconformity in the Audit & Findings Manager is recorded against, citing the line above that tells you, and why that answer does not need a separate lesson for that app.
