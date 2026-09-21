@@ -1,0 +1,57 @@
+{
+ "migration": "20261021b_b4_fix_waterflood.sql",
+ "title": "waterflood: one duplicate rewrite",
+ "items": [
+  {
+   "app_slug": "waterflood",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "other",
+   "flag": "explanation quotes a 2023-04 trough miss no option uses; judge",
+   "verdict": "judged fine",
+   "reason": "the trough miss is the evidence that rebuts option 1 (interpolated track more accurate than the model track); explanation is consistent with the key and the lessons"
+  },
+  {
+   "app_slug": "waterflood",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "category": "duplicate",
+   "flag": "near duplicate of intermediate m03-advice ord 11 (differentiated targets double count a belief; same argument and key)",
+   "verdict": "fixed",
+   "reason": "kept the module question; rewrote the final copy to test the deliverability argument from the same lesson (m03 l04: Ekene-4 is the well whose injectivity degrades)",
+   "changes": {
+    "prompt": {
+     "old": "The lesson gives an argument that differentiated targets can double count a belief. What is it?",
+     "new": "Holding the South element at the field target means sending much more water through Ekene-4. Why does the lesson count that as an argument for a separate South target?"
+    },
+    "explanation": {
+     "old": "Connectivity judgements live in the matrix. Encoding the same belief a second time as a lower target for that element counts it twice and puts it in two places, which makes the recommendation harder to audit. Simplicity is also worth something: one field target is easier to operate against and harder to let quietly drift.",
+     "new": "This is the deliverability argument: increasing the South element means pushing harder on Ekene-4, the well whose injectivity degrades, and a target that cannot be delivered is not a target. At 1.05 the South scale is 1.726255853400599, inside the clamp; the scale rule knows nothing about injectivity; and the well that has never produced water is the producer Ekene-5."
+    },
+    "options": {
+     "0": {
+      "old": "A belief that one element is less connected belongs in the allocation matrix, which already encodes it once.",
+      "new": "Because Ekene-4 is the well whose injectivity degrades, and a target that cannot be delivered is not a target."
+     },
+     "1": {
+      "old": "Applying two targets means running the scale rule twice, which compounds the proportional correction.",
+      "new": "Because the clamp caps the South scale at 2.0, so Ekene-4 cannot lift the element to the target."
+     },
+     "2": {
+      "old": "A differentiated target changes the rolling window as well as the scale.",
+      "new": "Because Ekene-4 has never produced water, so the flood response there is unproven."
+     },
+     "3": {
+      "old": "The clamp is applied per element, so two targets mean two clamps and an element can be limited twice.",
+      "new": "Because the scale rule already caps Ekene-4 at its Hall slope limit, so the rest falls short."
+     }
+    }
+   },
+   "correct_change_reason": "duplicate rewritten into a new question; answer_index kept, correct option is the new key"
+  }
+ ]
+}
