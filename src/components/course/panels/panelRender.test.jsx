@@ -104,6 +104,32 @@ describe('every course panel renders with no props', () => {
     }
     expect(rendered).toBe(9);
   });
+  it('finds the H4 consequence modelling panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('consequence/ReleaseExplorer.jsx');
+    expect(names).toContain('consequence/FireExplorer.jsx');
+    expect(names).toContain('consequence/HarmExplorer.jsx');
+  });
+  it('every H4 consequence modelling view renders, not only the default one', async () => {
+    const MODES = {
+      'consequence/ReleaseExplorer.jsx': ['outflow', 'pool', 'plume'],
+      'consequence/FireExplorer.jsx': ['flame', 'view', 'heat'],
+      'consequence/HarmExplorer.jsx': ['blast', 'probit', 'toxic'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        const html = renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode }));
+        expect(html, `${name} in the ${mode} view rendered nothing`).toMatch(/<table/);
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(9);
+  });
   it('finds the compliance (Compliance, Audit & Quality) panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('compliance/RegisterExplorer.jsx');

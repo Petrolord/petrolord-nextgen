@@ -1,0 +1,361 @@
+{
+ "app_slug": "consequence",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-a-consequence-model-computes",
+   "title": "What a Consequence Model Computes",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-effects-before-frequencies",
+     "title": "Effects before frequencies",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-every-input-carries-its-unit",
+     "title": "Every input carries its unit",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-result-or-a-refusal",
+     "title": "A result or a refusal",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-sources-and-what-each-fixes",
+     "title": "The sources and what each fixes",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-refusals-by-name",
+     "title": "The refusals, each naming its field",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-liquid-through-a-hole",
+   "title": "Liquid Through a Hole",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-bernoulli-through-a-hole",
+     "title": "Bernoulli through a hole",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-static-head-and-ullage-pressure",
+     "title": "Static head and ullage pressure",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-discharge-coefficient-and-the-hole",
+     "title": "The discharge coefficient and the hole",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-when-nothing-flows-out",
+     "title": "When nothing flows out",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-gas-through-a-hole",
+   "title": "Gas Through a Hole",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-choked-and-subsonic",
+     "title": "Choked and subsonic",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-critical-pressure-ratio",
+     "title": "The critical pressure ratio",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-choked-mass-rate",
+     "title": "The choked mass rate",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-subsonic-outflow-coefficient",
+     "title": "The subsonic outflow coefficient",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-exactly-at-the-critical-ratio",
+     "title": "Exactly at the critical ratio",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-pools-and-evaporation",
+   "title": "Pools and Evaporation",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-pool-on-the-bund-floor",
+     "title": "A pool on the bund floor",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-pool-of-stated-thickness",
+     "title": "A pool of stated thickness",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-bund-that-overtops",
+     "title": "A bund that overtops",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-evaporation-by-mackay-and-matsugu",
+     "title": "Evaporation by Mackay and Matsugu",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-gaussian-plume",
+   "title": "The Gaussian Plume",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-a-continuous-point-release",
+     "title": "A continuous point release",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-stability-classes-and-the-briggs-sigmas",
+     "title": "Stability classes and the Briggs sigmas",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-reflection-at-the-ground",
+     "title": "Reflection at the ground",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-ppm-and-milligrams-per-cubic-metre",
+     "title": "Parts per million and milligrams per cubic metre",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-how-far-the-plume-reaches",
+   "title": "How Far the Plume Reaches",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-off-the-centreline-and-above-the-ground",
+     "title": "Off the centreline and above the ground",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-distance-to-a-concentration",
+     "title": "The distance to a concentration",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-near-root-a-far-root-and-three-states",
+     "title": "A near root, a far root and three states",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "cq-release"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1065 @@
+# H4 TEACHING DIGEST: Consequence Modelling
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The engine FINDINGS record, the oracle and the engine source comments are PROVENANCE and not teaching truth.
+
+# PRECISION. Mass rates in kg/s, distances and diameters in m, flame tilt in degrees, concentrations in ppm and mg/m3, heat fluxes and surface emissive powers in W/m2, overpressures in Pa, probit values, thermal doses, toxic loads and lethality probabilities print to SIX decimals; view factors, hole areas, mass transfer coefficients and evaporation fluxes print to TWELVE; stated inputs, temperatures and pressures print as typed; counts are whole numbers; relative differences print in exponent form.
+
+# ENGINE. engines/hse/consequence.js, vendored sha-identical with petrolord-engines 16fd6c9, 1285 lines. It imports three helpers and restates none of them: the critical pressure ratio from engines/facilities/relief.js, the still air Thomas flame height from engines/facilities/spacing.js and the standard normal CDF from lib/stats/stats.js. The vendored golden test-data/hse/goldens/consequence_cases.json was written by an independent Python oracle.
+
+# PROPERTIES ARE ILLUSTRATIVE. Every property below is a stated teaching input or a value read from the golden, never data this course recommends.
+
+# WHAT IS NEVER IN THIS FILE. No capstone facility, no capstone input and no graded answer. The capstones run their own facilities and the digest never names them.
+
+# THIS ENGINE HAS NO REPAIR HISTORY. Every section below describes what the engine does today. The errata taught here belong to published sources.
+
+# SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Expert m05)
+
+The engine turns a loss of containment into physical effects: how much gets out, where it goes, what a fire radiates, what a blast does and what fraction of the people exposed a probit says would be harmed. It computes effects and never frequencies. Every function returns either a result object carrying a `basis` block (the model, its source and its units) or an object with `error` and `field`, where `field` names the offending input.
+
+| function | engine section | what it returns |
+| --- | --- | --- |
+| `liquidOrificeDischarge` | source terms | the liquid mass rate through a hole |
+| `gasOrificeDischarge` | source terms | the gas mass rate through a hole, choked or subsonic |
+| `poolFromSpill` | source terms | the pool area, depth and equivalent diameter of a spill |
+| `poolEvaporationMackayMatsugu` | source terms | the evaporation rate of a pool below its boiling point |
+| `briggsRuralSigmas` | dispersion | the Briggs rural sigma_y and sigma_z for a Pasquill-Gifford class |
+| `gaussianPlume` | dispersion | the concentration of a continuous plume at a receptor |
+| `plumeDistanceToConcentration` | dispersion | the distances at which the centreline concentration meets a target |
+| `ppmToMgM3` | dispersion | a concentration in ppm converted to mg/m3 |
+| `mgM3ToPpm` | dispersion | a concentration in mg/m3 converted to ppm |
+| `poolBurningRate` | fires | the burning flux of a pool fire |
+| `poolFireFlameLength` | fires | the mean flame length, in still air or with wind |
+| `poolFireTilt` | fires | the flame tilt from the vertical |
+| `surfaceEmissivePower` | fires | the surface emissive power of the flame |
+| `cylinderViewFactor` | fires | the view factors of a cylindrical flame at a ground level target |
+| `atmosphericTransmissivityBagster` | fires | the atmospheric transmissivity by the Bagster fit |
+| `solidFlameHeatFlux` | fires | the heat flux as surface emissive power times view factor times transmissivity |
+| `poolFireSolidFlame` | fires | a confined pool fire end to end by the solid flame model |
+| `solidFlameDistanceForHeatFlux` | fires | the distance at which the solid flame heat flux falls to a target |
+| `tntEquivalentMass` | explosions | the TNT equivalent mass of a fuel |
+| `scaledDistance` | explosions | the Hopkinson-Cranz scaled distance |
+| `kinneyGrahamOverpressure` | explosions | the free air peak side-on overpressure |
+| `distanceForOverpressure` | explosions | the distance at which a TNT mass gives an overpressure |
+| `probitToProbability` | probits | the probability a probit value stands for |
+| `probabilityToProbit` | probits | the probit value of a probability |
+| `probit` | probits | a probit and its probability from coefficients and a thermal dose or toxic load |
+| `probitDoseForProbability` | probits | the thermal dose or toxic load at which a probit gives a probability |
+| `thermalProbit` | probits | a heat radiation lethality probit |
+| `toxicDose` | probits | the toxic load of a concentration history |
+| `toxicProbit` | probits | a toxic lethality probit |
+| `overpressureProbit` | probits | a blast overpressure fatality probit |
+
+The constants and tables it exports: `ATM_PA`, `BAGSTER_RANGE_PA_M`, `BRIGGS_ADVISORY_RANGE_M`, `BRIGGS_RURAL`, `CONSEQUENCE_SOURCES`, `G_M_S2`, `KINNEY_GRAHAM_Z_RANGE`, `MACKAY_MATSUGU_C`, `OVERPRESSURE_PROBITS`, `PA_PER_PSI`, `POOL_FIRE_FUELS`, `R_J_MOL_K`, `STABILITY_CLASSES`, `THERMAL_PROBITS`, `TOXIC_PROBITS`. The physical constants, as exported:
+
+| name | value |
+| --- | --- |
+| `G_M_S2` | 9.80665 |
+| `R_J_MOL_K` | 8.314462618 |
+| `ATM_PA` | 101325 |
+| `PA_PER_PSI` | 6894.757293168361 |
+| `MACKAY_MATSUGU_C` | 0.004786 |
+| `STABILITY_CLASSES` | A, B, C, D, E, F |
+| `BRIGGS_ADVISORY_RANGE_M` | 100 to 10000 |
+| `BAGSTER_RANGE_PA_M` | 10000 to 100000 |
+| `KINNEY_GRAHAM_Z_RANGE` | 0.05 to 40 |
+
+WHAT THE ENGINE DOES NOT EXPORT, checked here against its names:
+- No point source heat radiation model and no setback distance. Those live in the facilities engines, and the Facilities courses teach them.
+- No two phase discharge, no instantaneous puff, no urban dispersion coefficients, no jet fire, no Kingery-Bulmash fit and no multi-energy blast method (section 31).
+- No frequency of any kind. A consequence model says what happens if the release occurs; how often it occurs belongs elsewhere (section 22).
+
+# SECTION 2: Every input carries its unit in its name (owned by Associate m01)
+
+The engine reads its unit from the name of every argument, and it never converts a unit it was not asked to. The suffixes, and what each means:
+
+| suffix in the argument name | unit | an example argument |
+| --- | --- | --- |
+| KgS | kilograms per second | `massRateKgS` |
+| M, M2, M3 | metres, square metres, cubic metres | `holeDiameterM`, `bundAreaM2`, `spillVolumeM3` |
+| Pa | pascals, ABSOLUTE for a pressure | `upstreamPressurePa`, `ambientPressurePa` |
+| K | kelvin | `upstreamTemperatureK` |
+| KgMol, GMol | kilograms per mole (source terms), grams per mole (concentrations) | `molarMassKgMol`, `molarMassGMol` |
+| MS, 10mMS | metres per second; the 10m form is the wind at 10 m | `windSpeedMS`, `windSpeed10mMS` |
+| KgM2S | kilograms per square metre per second | `burningFluxKgM2S` |
+| WM2 | watts per square metre | `heatFluxWM2`, `surfaceEmissivePowerWM2` |
+| JKg, JKgK | joules per kilogram, joules per kilogram kelvin | `heatOfCombustionJKg` |
+| S, Minutes | seconds for a thermal exposure, minutes for a toxic exposure | `exposureTimeS`, `exposureMinutes` |
+| Ppm, MgM3 | parts per million by volume, milligrams per cubic metre | `concentrationPpm`, `concentrationMgM3` |
+| MKg13 | metres per kilogram to the one third | `scaledDistanceMKg13` |
+
+TWO MOLAR MASS UNITS. The source terms take kg/mol (methane is 0.01604, stated) and the concentration functions take g/mol (carbon monoxide is 28.01, stated). The engine's own reminder, from a refusal: "molarMassKgMol: must be a molar mass above 0 kg/mol (hydrogen is 0.002016)".
+
+PRESSURES ARE ABSOLUTE. Ambient is `ATM_PA`, 101325 Pa, unless a call states otherwise. A gauge pressure typed where an absolute one is due understates the driving pressure by one atmosphere.
+
+# SECTION 3: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l05 and Professional m06 l03 and Expert m03 l01)
+
+Each row is a real call. The message column is the engine's `error` string, verbatim. A refusal carries no number.
+
+| engine section | function | what was passed | field named | the engine's message |
+| --- | --- | --- | --- | --- |
+| source terms | `liquidOrificeDischarge` | a discharge coefficient above one | `dischargeCoefficient` | dischargeCoefficient: must lie in (0, 1]: the YB recommends 0.62 for a sharp orifice |
+| source terms | `liquidOrificeDischarge` | a hole diameter of zero | `holeDiameterM` | holeDiameterM: a hole diameter above 0 m (or holeAreaM2) is required |
+| source terms | `liquidOrificeDischarge` | a negative liquid head | `liquidHeadM` | liquidHeadM: must be a liquid height of 0 m or more above the hole |
+| source terms | `liquidOrificeDischarge` | an ullage below ambient and no head | `pressureAboveLiquidPa` | pressureAboveLiquidPa: the pressure at the hole does not exceed ambient, so nothing flows out |
+| source terms | `gasOrificeDischarge` | an upstream pressure equal to ambient | `upstreamPressurePa` | upstreamPressurePa: must exceed the ambient pressure, or nothing flows out |
+| source terms | `gasOrificeDischarge` | a heat capacity ratio of one | `heatCapacityRatio` | heatCapacityRatio: gamma = Cp/Cv must be above 1 |
+| source terms | `gasOrificeDischarge` | a temperature of zero kelvin | `upstreamTemperatureK` | upstreamTemperatureK: must be an absolute temperature above 0 K |
+| source terms | `poolFromSpill` | no bund area and no thickness | `bundAreaM2` | bundAreaM2: a bund area (confined pool) or a pool thickness (unconfined pool) is required: no spreading model is implemented |
+| source terms | `poolFromSpill` | a spill that overtops its bund | `spillVolumeM3` | spillVolumeM3: the spill overtops the bund (depth above the wall height), so the pool is not confined by it |
+| source terms | `poolEvaporationMackayMatsugu` | calm air | `windSpeed10mMS` | windSpeed10mMS: must be above 0 m/s: the correlation gives zero evaporation in calm air, which is its form and not physics |
+| source terms | `poolEvaporationMackayMatsugu` | a vapour pressure above ambient | `vapourPressurePa` | vapourPressurePa: is at or above ambient: the pool is boiling, and this non-boiling evaporation model does not apply |
+| dispersion | `briggsRuralSigmas` | a class the table does not carry | `stabilityClass` | stabilityClass: must be a Pasquill-Gifford class, one of A, B, C, D, E, F |
+| dispersion | `gaussianPlume` | a wind speed of zero | `windSpeedMS` | windSpeedMS: must be above 0 m/s: the Gaussian plume divides by the wind speed and has no calm-air form |
+| dispersion | `gaussianPlume` | a receptor at the source | `downwindDistanceM` | downwindDistanceM: must be a downwind distance above 0 m: the plume is undefined at the source |
+| dispersion | `gaussianPlume` | no class and no sigmas | `sigmaYM` | sigmaYM: a stability class or a sigma_y above 0 m is required |
+| dispersion | `plumeDistanceToConcentration` | a target of zero | `targetConcentrationMgM3` | targetConcentrationMgM3: must be a concentration above 0 mg/m3 |
+| dispersion | `ppmToMgM3` | no molar mass | `molarMassGMol` | molarMassGMol: must be a molar mass above 0 g/mol |
+| fires | `poolBurningRate` | a fuel the table does not carry | `fuel` | fuel: must be one of liquid-hydrogen, lng, lpg, butane, hexane, heptane, benzene, xylene, gasoline, kerosene, jp-5, methanol, ethanol, or give massBurningFluxInfKgM2S and kBetaPerM |
+| fires | `poolBurningRate` | a boiling point below ambient | `boilingPointK` | boilingPointK: is below ambient: the liquid boils, and the printed Burgess form assumes a liquid heated from ambient to its boiling point |
+| fires | `poolBurningRate` | a method the function does not know | `method` | method: must be 'babrauskas' or 'burgess' |
+| fires | `poolFireFlameLength` | a burning flux of zero | `burningFluxKgM2S` | burningFluxKgM2S: must be a burning flux above 0 kg/(m2 s) |
+| fires | `poolFireTilt` | no air viscosity | `airKinematicViscosityM2S` | airKinematicViscosityM2S: must be above 0 m2/s (air at 15 C is about 1.5e-5; the YB example prints 7.5133e-6) |
+| fires | `surfaceEmissivePower` | a radiative fraction above one | `radiativeFraction` | radiativeFraction: must lie in (0, 1]: the YB gives 0.1 to 0.4 |
+| fires | `cylinderViewFactor` | a target inside the flame base | `distanceFromAxisM` | distanceFromAxisM: the target is at or inside the flame base: a view factor model needs the target outside the flame |
+| fires | `cylinderViewFactor` | a flame that leans over the target | `tiltDeg` | tiltDeg: the tilted flame reaches over the target (1 + (L/R) sin(tilt) >= X/R): the closed form does not apply to a target under the flame |
+| fires | `atmosphericTransmissivityBagster` | a path too short for the fit | `pathLengthM` | pathLengthM: pw x lies outside 1e4 to 1e5 N/m, where the YB advises against the Bagster fit: supply a transmissivity from another source |
+| fires | `solidFlameHeatFlux` | a view factor above one | `viewFactor` | viewFactor: must lie in [0, 1] |
+| fires | `solidFlameDistanceForHeatFlux` | a distance search with no fixed transmissivity | `transmissivity` | transmissivity: a fixed transmissivity in (0, 1] is required for a distance search |
+| explosions | `tntEquivalentMass` | the TNT energy typed in kJ/kg | `tntBlastEnergyJKg` | tntBlastEnergyJKg: must be the TNT blast energy in J/kg, between 4.0e6 and 5.0e6 (the YB cites 4.19e6 to 4.65e6) |
+| explosions | `tntEquivalentMass` | a yield typed as a percentage | `yieldFactor` | yieldFactor: the TNT equivalency (yield) must lie in (0, 1]: the YB reports 0.02 to 0.2 in use |
+| explosions | `kinneyGrahamOverpressure` | a scaled distance beyond the range | `scaledDistanceMKg13` | scaledDistanceMKg13: Z lies outside 0.05 to 40 m/kg^(1/3), the range this fit is used over |
+| explosions | `distanceForOverpressure` | an overpressure below the range | `overpressurePa` | overpressurePa: lies outside the overpressures the fit gives over Z = 0.05 to 40 m/kg^(1/3) |
+| probits | `probabilityToProbit` | a probability of one | `probability` | probability: must lie strictly between 0 and 1 |
+| probits | `probit` | a thermal dose or toxic load of zero | `dose` | dose: must be above 0: ln(0) has no probit |
+| probits | `thermalProbit` | a preset the engine does not carry | `coefficients` | coefficients: unknown preset 'tno'; one of eisenberg, tsao-perry, lees, purple-book, or give { a, b } explicitly |
+| probits | `toxicProbit` | ppm on a mg/m3 preset with no molar mass | `molarMassGMol` | molarMassGMol: must be a molar mass above 0 g/mol |
+| probits | `toxicDose` | an empty history | `history` | history: must be a non-empty list of { concentration, minutes } |
+
+37 refusals are tabled above, across 24 functions.
+
+# SECTION 4: The sources the engine names, and what each fixes (owned by Associate m01 l04)
+
+The engine exports its sources as `CONSEQUENCE_SOURCES`, verbatim:
+
+| key | the engine string, verbatim |
+| --- | --- |
+| YB | TNO Yellow Book CPR 14E (2005) |
+| PB | TNO Purple Book CPR 18E (1999) |
+| OSD | UK HSE SPC/Tech/OSD/30, Indicative human vulnerability to the hazardous agents present offshore |
+| ALOHA | NOAA TM NOS OR&R 43, ALOHA Technical Documentation (2013) |
+| KG | Kinney and Graham (1985) Explosive Shocks in Air, 2nd ed.; as printed by Guzas and Earls (2010) eq. 5 |
+| CCOHS | CCOHS, Converting occupational exposure limits from mg/m3 to ppm (24.45 L/mol at 25 C, 760 torr) |
+
+| key | what it fixes in this engine |
+| --- | --- |
+| YB | liquid and gas outflow through a hole, Mackay and Matsugu evaporation, the pool diameter, the Babrauskas and Burgess burning rates, Thomas with wind, the flame tilt, the surface emissive power, the Bagster transmissivity, the solid flame heat flux, the view factors and the TNT equivalence |
+| PB | the probit to probability relation and its table, the toxic probit coefficients, the heat radiation probit and a worked carbon monoxide plume |
+| OSD | the thermal probits by name, the Lees toxic probits in ppm and the overpressure probit |
+| ALOHA | the continuous Gaussian plume with ground reflection and the Briggs rural sigma coefficients |
+| KG | the free air peak side-on overpressure closed form |
+| CCOHS | ppm and mg/m3 through a molar volume |
+
+Every basis block names the source it used, so a result carries its own citation. The Gaussian plume at 500 m in class D, for example, reports: "NOAA TM NOS OR&R 43, ALOHA Technical Documentation (2013) section 4.3; sigmas Briggs rural (ALOHA Table 13)".
+
+# SECTION 5: Liquid outflow through a hole (owned by Associate m02)
+
+The engine's model string, verbatim: "Bernoulli liquid outflow through a hole, qS = Cd Ah sqrt(2 (P - Pa) rhoL), P = rhoL g hL + PaL". P is the absolute pressure at the hole: the static head rhoL g hL plus the pressure above the liquid, PaL. The mass rate depends on the driving pressure P minus ambient.
+
+AMENAM is a crude run-down line (stated): discharge coefficient 0.62, hole diameter 0.05 m, density 850 kg/m3, head 6 m, pressure above the liquid 200000 Pa absolute.
+
+| quantity | engine key | value |
+| --- | --- | --- |
+| hole area, m2 | `holeAreaM2` | 0.001963495408 |
+| pressure at the hole, Pa | `pressureAtHolePa` | 250013.915000 |
+| driving pressure, Pa | `drivingPressurePa` | 148688.915000 |
+| mass rate, kg/s | `massRateKgS` | 19.354651 |
+| jet velocity, m/s | `jetVelocityMS` | 18.704445 |
+
+THE HEAD, SWEPT, with the ullage held:
+
+| head m, stated | driving pressure Pa | mass rate kg/s |
+| --- | --- | --- |
+| 0 | 98675.000000 | 15.767020 |
+| 1 | 107010.652500 | 16.419486 |
+| 3 | 123681.957500 | 17.652215 |
+| 6 | 148688.915000 | 19.354651 |
+| 12 | 198702.830000 | 22.374228 |
+
+THE ULLAGE PRESSURE, SWEPT, with the head held:
+
+| pressure above the liquid Pa, stated | driving pressure Pa | mass rate kg/s |
+| --- | --- | --- |
+| 101325 | 50013.915000 | 11.225132 |
+| 150000 | 98688.915000 | 15.768131 |
+| 200000 | 148688.915000 | 19.354651 |
+| 500000 | 448688.915000 | 33.621626 |
+| 1000000 | 948688.915000 | 48.888640 |
+
+With the ullage at ambient the driving pressure is the head alone, and the jet velocity is Torricelli's sqrt(2 g h): derived, 10.848032 m/s against the engine's 10.848032.
+
+THE DISCHARGE COEFFICIENT AND THE HOLE, each swept with everything else held:
+
+| discharge coefficient, stated | mass rate kg/s |
+| --- | --- |
+| 0.6 | 18.730307 |
+| 0.62 | 19.354651 |
+| 0.8 | 24.973743 |
+| 1 | 31.217178 |
+
+| hole diameter m, stated | hole area m2 | mass rate kg/s |
+| --- | --- | --- |
+| 0.01 | 0.000078539816 | 0.774186 |
+| 0.025 | 0.000490873852 | 4.838663 |
+| 0.05 | 0.001963495408 | 19.354651 |
+| 0.1 | 0.007853981634 | 77.418603 |
+
+The mass rate is linear in the discharge coefficient and in the hole AREA, so doubling the diameter from 0.05 to 0.1 m multiplies it by, derived, 4.000000. The engine's refusal for a coefficient above one names the Yellow Book's recommendation: "dischargeCoefficient: must lie in (0, 1]: the YB recommends 0.62 for a sharp orifice".
+
+THE PUBLISHED CASE (golden). PUBLISHED: TNO Yellow Book CPR 14E (2005) 2.6.4.1: acrylonitrile, d 0.1 m, Cd 0.62, rho 812.5, level 11.12 m at 500 s, printed qS = 58.44 kg/s. The engine gives 58.429567 kg/s against the printed 58.44, a relative difference of 1.79e-4; the level is printed to two decimals, which is why the golden allows 0.0005 relative.
+
+AN ERRATUM IN THE SAME EXAMPLE (golden). Its table prints 60.915 kg/s at time zero for a level of 11.2 m; Bernoulli at that level gives 58.639369 kg/s. The value at 500 s reproduces and the value at time zero does not, so the golden uses the one that reproduces.
+
+# SECTION 6: Gas outflow through a hole, choked and subsonic (owned by Associate m03)
+
+The engine's model string, verbatim: "ideal gas outflow through a hole, choked when Pa/P0 <= (2/(gamma+1))^(gamma/(gamma-1)) (exactly at the ratio counts as choked), subsonic psi from YB 2.25".
+
+AMENAM GAS is a methane line (stated): discharge coefficient 0.62, hole 0.025 m, 300 K, molar mass 0.01604 kg/mol, heat capacity ratio 1.31. The upstream pressure, absolute, swept:
+
+| upstream Pa, stated | Pa over P0 | regime | outflow coefficient psi | upstream density kg/m3 | mass rate kg/s |
+| --- | --- | --- | --- | --- | --- |
+| 120000 | 0.844375 | SUBSONIC | 0.756455 | 0.771667 | 0.046872 |
+| 150000 | 0.675500 | SUBSONIC | 0.958958 | 0.964584 | 0.074275 |
+| 180000 | 0.562917 | SUBSONIC | 0.999177 | 1.157501 | 0.092868 |
+| 250000 | 0.405300 | CHOKED | 1.000000 | 1.607640 | 0.129090 |
+| 500000 | 0.202650 | CHOKED | 1.000000 | 3.215281 | 0.258180 |
+| 2000000 | 0.050662 | CHOKED | 1.000000 | 12.861124 | 1.032722 |
+| 10000000 | 0.010132 | CHOKED | 1.000000 | 64.305619 | 5.163609 |
+
+The critical pressure ratio for this gas is 0.543927: the flow is CHOKED when ambient over upstream is at or below it. Once choked the mass rate is LINEAR in the upstream pressure: from 250000 to 10000000 Pa the mass rate grows by, derived, 40.000000, the same as the pressure ratio 40.000000. At or below the critical pressure ratio the downstream pressure cannot reach back into the hole.
+
+THE CRITICAL PRESSURE RATIO against the heat capacity ratio, from `gasOrificeDischarge` at the same line:
+
+| heat capacity ratio, stated | critical pressure ratio | upstream pressure to choke at 101325 Pa, derived |
+| --- | --- | --- |
+| 1.1 | 0.584679 | 173300.135461 |
+| 1.2 | 0.564474 | 179503.418325 |
+| 1.31 | 0.543927 | 186284.176006 |
+| 1.4 | 0.528282 | 191801.047009 |
+| 1.67 | 0.486669 | 208201.258009 |
+
+The critical pressure ratio falls as the heat capacity ratio rises, so a gas with a larger ratio needs a higher upstream pressure to choke into the atmosphere.
+
+THE PUBLISHED CASE (golden). PUBLISHED: TNO Yellow Book CPR 14E (2005) 2.6.2.1 / Table 2.3: hydrogen 50 bar, 288.15 K, d 0.1 m, Cd 0.62, printed 15.31 kg/s at t = 0; gamma NOT printed, 1.405 inferred (1.40 gives 15.29).
+
+| heat capacity ratio | engine mass rate kg/s | printed |
+| --- | --- | --- |
+| 1.405, inferred | 15.311760 | 15.31 |
+| 1.4 | 15.292930 | 15.31 |
+
+The example does not print its heat capacity ratio. 1.405 reproduces the printed 15.31 kg/s to its two decimals and 1.4 does not, so the golden records the ratio as INFERRED.
+
+A SECOND ROUTE (golden). For 6 gas cases the oracle maximises the isentropic nozzle mass flux over every throat pressure at or above ambient, which derives choking instead of testing a ratio. The engine against that route:
+
+| golden case | regime | engine kg/s | route B kg/s, golden | relative difference |
+| --- | --- | --- | --- | --- |
+| yb-hydrogen-t0 | CHOKED | 15.311760 | 15.311760 | 5.80e-16 |
+| methane-choked | CHOKED | 3.614864 | 3.614864 | 2.46e-16 |
+| nitrogen-subsonic | SUBSONIC | 0.016120 | 0.016120 | 2.15e-16 |
+| air-barely-subsonic | SUBSONIC | 0.112711 | 0.112711 | 4.93e-16 |
+| air-barely-choked | CHOKED | 0.113903 | 0.113903 | 3.66e-16 |
+| co2-high-gamma-low | SUBSONIC | 0.216885 | 0.216885 | 3.84e-16 |
+
+# SECTION 7: Exactly at the critical ratio (owned by Associate m03 l05)
+
+The Yellow Book tests P0 over Pa AT OR ABOVE ((gamma + 1) / 2) to the power gamma / (gamma - 1), so a ratio exactly at the critical value is CHOKED. The subsonic outflow coefficient equals one there, so the regime flag flips with no jump in the mass rate. The golden cases around the boundary, through the engine:
+
+| golden case | Pa over P0 | critical pressure ratio | regime | psi | mass rate kg/s |
+| --- | --- | --- | --- | --- | --- |
+| air-barely-subsonic | 0.53328947368421054 | 0.52828178771717416 | SUBSONIC | 0.999944960481 | 0.112711 |
+| air-barely-choked | 0.52773437499999998 | 0.52828178771717416 | CHOKED | 1.000000000000 | 0.113903 |
+
+On the AMENAM line: the upstream pressure that puts the ratio at the critical value is, derived, 186284.176006 Pa. There the engine reports CHOKED with psi 1.000000000000; one part in a billion lower it reports SUBSONIC with psi 1.000000000000, and the two mass rates differ by, derived, 1.00e-9 relative. The regime is a label on a continuous curve.
+
+# SECTION 8: A spill becomes a pool: confined, unconfined and overtopping (owned by Associate m04)
+
+A spill of 30 m3 (stated). CONFINED: the pool covers the bund floor, 400 m2, with a wall of 0.5 m (stated).
+
+| quantity | engine key | value |
+| --- | --- | --- |
+| containment | `containment` | CONFINED |
+| area m2 | `areaM2` | 400.000000 |
+| depth m | `depthM` | 0.075000 |
+| equivalent diameter m | `equivalentDiameterM` | 22.567583 |
+
+The engine's model string for a bund, verbatim: "pool covers the bund floor; D = sqrt(4 A / pi)".
+
+OVERTOPPING. The same spill in a bund of 50 m2 would stand, derived, 0.600000 m deep behind a 0.5 m wall, and the engine refuses:
+
+> spillVolumeM3: the spill overtops the bund (depth above the wall height), so the pool is not confined by it
+
+UNCONFINED, at a STATED thickness. No spreading model is implemented; the thickness is the analyst's:
+
+| thickness m, stated | containment | area m2 | equivalent diameter m |
+| --- | --- | --- | --- |
+| 0.005 | UNCONFINED_STATED_THICKNESS | 6000.000000 | 87.403874 |
+| 0.01 | UNCONFINED_STATED_THICKNESS | 3000.000000 | 61.803872 |
+| 0.02 | UNCONFINED_STATED_THICKNESS | 1500.000000 | 43.701937 |
+| 0.05 | UNCONFINED_STATED_THICKNESS | 600.000000 | 27.639532 |
+
+The diameter goes as one over the square root of the thickness: halving it from 0.01 to 0.005 m raises the diameter by, derived, 1.414214. The engine's model string, verbatim: "A = V / delta with the stated thickness; D = sqrt(4 V / (pi delta))".
+
+With neither a bund nor a thickness the engine refuses, in its words: "bundAreaM2: a bund area (confined pool) or a pool thickness (unconfined pool) is required: no spreading model is implemented".
+
+THE PUBLISHED CASE (golden). PUBLISHED: TNO Yellow Book CPR 14E (2005) 6.6.3: V 28.3 m3, delta 0.02 m, printed D = 42.445 m and A = 1415 m2. The engine: diameter 42.445659 m and area 1415.000000 m2; the book prints its values truncated.
+
+# SECTION 9: Evaporation of a pool below its boiling point (owned by Associate m04 l04 and Expert m05 l04)
+
+The engine's model string, verbatim: "Mackay and Matsugu: km = 0.004786 u10^0.78 (2r)^-0.11 Sc^-0.67; q = km Pv mu / (R T) x A". The Schmidt number defaults to 0.8, the Yellow Book's value for gases and vapours in general; the constant `MACKAY_MATSUGU_C` is 0.004786.
+
+A hexane-like pool (stated): diameter 10 m, wind at 10 m 3 m/s, vapour pressure 16000 Pa, molar mass 0.08618 kg/mol, liquid at 293.15 K.
+
+| quantity | engine key | value |
+| --- | --- | --- |
+| mass transfer coefficient m/s | `massTransferCoefficientMS` | 0.010163820387 |
+| evaporation flux kg/(m2 s) | `evaporationFluxKgM2S` | 0.005749887804 |
+| pool area m2 | `poolAreaM2` | 78.539816 |
+| evaporation rate kg/s | `evaporationRateKgS` | 0.451595 |
+
+| wind m/s, stated | evaporation rate kg/s |
+| --- | --- |
+| 1 | 0.191688 |
+| 2 | 0.329153 |
+| 3 | 0.451595 |
+| 5 | 0.672653 |
+| 8 | 0.970521 |
+
+| pool diameter m, stated | evaporation flux kg/(m2 s) | evaporation rate kg/s |
+| --- | --- | --- |
+| 2 | 0.006863506842 | 0.021562 |
+| 5 | 0.006205441275 | 0.121844 |
+| 10 | 0.005749887804 | 0.451595 |
+| 20 | 0.005327777396 | 1.673771 |
+| 40 | 0.004936654932 | 6.203584 |
+
+The rate grows with the wind to the power 0.78, and the evaporation flux per square metre FALLS slowly as the pool grows (the diameter enters to the power minus 0.11), while the rate still grows with the area.
+
+TWO REFUSALS DRAW THE MODEL'S EDGE (section 3). Calm air: "windSpeed10mMS: must be above 0 m/s: the correlation gives zero evaporation in calm air, which is its form and not physics". A boiling pool: "vapourPressurePa: is at or above ambient: the pool is boiling, and this non-boiling evaporation model does not apply".
+
+SINGLE ROUTE. This correlation has no second derivation and no public worked number behind it in the engine's validation record: the only check is the transcription from the Yellow Book (section 32). It is taught; it is never a graded answer.
+
+# SECTION 10: Pasquill-Gifford classes and the Briggs rural sigmas (owned by Associate m05)
+
+The engine's model string, verbatim: "Briggs (1973) rural open country: sigma_y = sy1 x / sqrt(1 + sy2 x); sigma_z = sz1 x (1 + sz2 x)^sz3". The coefficients, as the engine exports them in `BRIGGS_RURAL`:
+
+| class | sy1 | sy2 | sz1 | sz2 | sz3 |
+| --- | --- | --- | --- | --- | --- |
+| A | 0.22 | 0.0001 | 0.2 | 0 | 0 |
+| B | 0.16 | 0.0001 | 0.12 | 0 | 0 |
+| C | 0.11 | 0.0001 | 0.08 | 0.0002 | -0.5 |
+| D | 0.08 | 0.0001 | 0.06 | 0.0015 | -0.5 |
+| E | 0.06 | 0.0001 | 0.03 | 0.0003 | -1 |
+| F | 0.04 | 0.0001 | 0.016 | 0.0003 | -1 |
+
+Class A is the most unstable (a sunny afternoon, light wind) and class F the most stable (a clear night, light wind); D is neutral. sigma_y is the crosswind spread and sigma_z the vertical spread, both in m:
+
+| distance m, stated | sigma_y A | sigma_y B | sigma_y C | sigma_y D | sigma_y E | sigma_y F |
+| --- | --- | --- | --- | --- | --- | --- |
+| 60 | 13.160577 | 9.571329 | 6.580289 | 4.785664 | 3.589248 | 2.392832 |
+| 100 | 21.890818 | 15.920595 | 10.945409 | 7.960298 | 5.970223 | 3.980149 |
+| 300 | 65.031732 | 47.295805 | 32.515866 | 23.647903 | 17.735927 | 11.823951 |
+| 1000 | 209.761770 | 152.554014 | 104.880885 | 76.277007 | 57.207755 | 38.138504 |
+| 3000 | 578.858293 | 420.987849 | 289.429146 | 210.493925 | 157.870443 | 105.246962 |
+| 10000 | 1555.634919 | 1131.370850 | 777.817459 | 565.685425 | 424.264069 | 282.842712 |
+| 20000 | 2540.341184 | 1847.520861 | 1270.170592 | 923.760431 | 692.820323 | 461.880215 |
+
+| distance m, stated | sigma_z A | sigma_z B | sigma_z C | sigma_z D | sigma_z E | sigma_z F | warning |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 60 | 12.000000 | 7.200000 | 4.771457 | 3.448175 | 1.768173 | 0.943026 | yes |
+| 100 | 20.000000 | 12.000000 | 7.921180 | 5.595029 | 2.912621 | 1.553398 | no |
+| 300 | 60.000000 | 36.000000 | 23.310861 | 14.948186 | 8.256881 | 4.403670 | no |
+| 1000 | 200.000000 | 120.000000 | 73.029674 | 37.947332 | 23.076923 | 12.307692 | no |
+| 3000 | 600.000000 | 360.000000 | 189.736660 | 76.752258 | 47.368421 | 25.263158 | no |
+| 10000 | 2000.000000 | 1200.000000 | 461.880215 | 150.000000 | 75.000000 | 40.000000 | no |
+| 20000 | 4000.000000 | 2400.000000 | 715.541753 | 215.526362 | 85.714286 | 45.714286 | yes |
+
+Outside 100 m to 10 km the sigmas carry a warning and are still returned: "the downwind distance is outside 100 m to 10 km, the range these curves are usually quoted for; treat the result as an extrapolation". The engine's validation record says that range is from memory of the usual textbooks and not from a source it read.
+
+THE sz2 NOTE. ALOHA prints the class D sz2 as 0.0015 and notes that a value of 0.00015 printed since Briggs 1973 is incorrect. The engine carries 0.0015. At 1000 m in class D the two would give (derived, from the table's own form):
+
+| sz2 | sigma_z at 1000 m, class D |
+| --- | --- |
+| 0.0015, the engine | 37.947332 |
+| 0.00015, the misprint, derived | 55.950288 |
+
+# SECTION 11: The continuous Gaussian plume with ground reflection (owned by Associate m05 and Associate m06)
+
+The engine's model string, verbatim: "continuous point source Gaussian plume, total ground reflection (image source at -h)". The expression, from its header: C = Q / (2 pi sy sz u) exp(-y^2 / 2 sy^2) [exp(-(z - h)^2 / 2 sz^2) + exp(-(z + h)^2 / 2 sz^2)], with Q the release rate, u the wind speed, y the crosswind distance, z the receptor height and h the release height. The second exponential is the IMAGE SOURCE at minus h: the ground reflects what reaches it.
+
+UBIT is a sustained carbon monoxide release (stated): 2 kg/s in a 3 m/s wind, molar mass 28.01 g/mol. At ground level on the centreline, from a ground level release, class D:
+
+| distance m, stated | sigma_y m | sigma_z m | concentration mg/m3 | concentration ppm |
+| --- | --- | --- | --- | --- |
+| 100 | 7.960298 | 5.595029 | 4764.608684 | 4161.659226 |
+| 200 | 15.842361 | 10.524696 | 1272.709839 | 1111.651553 |
+| 500 | 39.036003 | 22.677868 | 239.712839 | 209.377772 |
+| 1000 | 76.277007 | 37.947332 | 73.313504 | 64.035861 |
+| 2000 | 146.059349 | 60.000000 | 24.214653 | 21.150349 |
+| 5000 | 326.598632 | 102.899151 | 6.314409 | 5.515336 |
+
+At ground level on the centreline from a ground level release the two exponentials are both one and the expression is Q / (pi sy sz u): the reflection DOUBLES what an unbounded plume would give there.
+
+THE CLASS, at 500 m, the same release:
+
+| class | concentration mg/m3 | concentration ppm |
+| --- | --- | --- |
+| A | 19.767914 | 17.266333 |
+| B | 45.301469 | 39.568680 |
+| C | 103.663813 | 90.545414 |
+| D | 239.712839 | 209.377772 |
+| E | 555.698014 | 485.375803 |
+| F | 1562.900663 | 1365.119445 |
+
+The stable night-time class F gives the highest ground level concentration at 500 m, derived 6.519887 times class D: the plume stays thin and near the ground.
+
+THE WIND. The concentration is inversely proportional to the wind speed at fixed sigmas, and the plume has no calm air form. The refusal, verbatim: "windSpeedMS: must be above 0 m/s: the Gaussian plume divides by the wind speed and has no calm-air form".
+
+THE PUBLISHED CASE (golden). PUBLISHED: TNO Purple Book CPR 18E (1999) Appendix 6.B: Q 100 kg/s, u 5 m/s, h = z = 1 m, sigma_y 28.8 m, sigma_z 10.3 m (as printed), C = 21.3 g/m3. The engine gives 21.260627 g/m3 against the printed 21.3 g/m3. The worked case is at z = h = 1 m with the sigmas given explicitly, which the engine accepts in place of a class.
+
+A SECOND ROUTE (golden). For 8 plume cases the oracle integrates u times the concentration over every crosswind distance and every height above the ground and recovers the release rate; the golden records that ratio, which is 1 to within one part in a billion in every case. A plume that dropped the reflection would return a half.
+
+# SECTION 12: Parts per million and milligrams per cubic metre (owned by Associate m05 l04 and Expert m04 l03)
+
+The engine's model string, verbatim: "mg/m3 = ppm x M / Vm, Vm = R T / P (ideal gas)". The molar volume is the ideal gas R T / P at the STATED temperature and pressure, in L/mol:
+
+| temperature K, stated | molar volume L/mol at 101325 Pa |
+| --- | --- |
+| 273.15 | 22.413970 |
+| 293.15 | 24.055117 |
+| 298.15 | 24.465404 |
+
+At 298.15 K the molar volume is 24.465404 L/mol; the CCOHS and NIOSH figure of 24.45 approximates it, and the golden gates the two within one part in a thousand.
+
+| substance | ppm, stated | mg/m3 at 273.15 K | mg/m3 at 293.15 K | mg/m3 at 298.15 K |
+| --- | --- | --- | --- | --- |
+| carbon monoxide, 28.01 g/mol | 50 | 62.483354 | 58.220461 | 57.244099 |
+| carbon monoxide, 28.01 g/mol | 400 | 499.866834 | 465.763690 | 457.952795 |
+| carbon monoxide, 28.01 g/mol | 1200 | 1499.600503 | 1397.291071 | 1373.858385 |
+| hydrogen sulphide, 34.08 g/mol | 50 | 76.024017 | 70.837320 | 69.649372 |
+| hydrogen sulphide, 34.08 g/mol | 400 | 608.192135 | 566.698556 | 557.194975 |
+| hydrogen sulphide, 34.08 g/mol | 1200 | 1824.576406 | 1700.095669 | 1671.584925 |
+
+A colder gas is denser, so the same ppm is more mg/m3. The two functions are exact inverses at the same temperature and pressure. The plume returns mg/m3, and ppm only when a molar mass is given; a probit preset states which unit its coefficients expect (section 29).
+
+# SECTION 13: How far the plume reaches: the distance to a concentration (owned by Associate m06)
+
+`plumeDistanceToConcentration` finds the downwind distances at which the centreline concentration at the receptor height equals a target. The states, from the engine header: REACHED, NOT_REACHED (the peak is below the target) and BEYOND_SEARCH_RANGE (still above the target at the largest distance searched).
+
+UBIT, ground level release and receptor, classes D and F, three targets (stated):
+
+| class | target mg/m3, stated | state | near distance m | far distance m |
+| --- | --- | --- | --- | --- |
+| D | 500 | REACHED | null | 331.629944 |
+| D | 100 | REACHED | null | 830.322126 |
+| D | 20 | REACHED | null | 2265.987260 |
+| F | 500 | REACHED | null | 943.433416 |
+| F | 100 | REACHED | null | 2564.337939 |
+| F | 20 | REACHED | null | 9384.252298 |
+
+From the ground the concentration falls monotonically, so there is one distance. The round trip: the plume at the far distance returns the target.
+
+Class D, target 100 mg/m3: at 830.322126 m the plume gives 100.000000 mg/m3.
+
+FROM A STACK of 25 m (stated), receptor at ground level, class D. The concentration rises from nothing, peaks and falls, so a target below the peak is met twice:
+
+| target mg/m3, stated | state | peak mg/m3 | peak distance m | near distance m | far distance m |
+| --- | --- | --- | --- | --- | --- |
+| 500 | NOT_REACHED | 153.887548 | 347.557177 | null | null |
+| 100 | REACHED | 153.887548 | 347.557177 | 221.924194 | 656.636313 |
+| 20 | REACHED | 153.887548 | 347.557177 | 150.672013 | 2151.227430 |
+| 5000 | NOT_REACHED | 153.887548 | 347.557177 | null | null |
+
+BEYOND THE SEARCH. Class F to 20 mg/m3 with the search capped at 2000 m (stated) returns BEYOND_SEARCH_RANGE with a far distance of null: the plume is still above the target where the search stops, and the engine says so instead of returning the cap.
+
+The engine's method string, verbatim: "root of the ground-reflected Gaussian plume centreline concentration, Briggs rural sigmas; bisection".
+
+OFF THE CENTRELINE, 500 m downwind, class D, ground level release and receptor:
+
+| crosswind m, stated | concentration mg/m3 | over the centreline, derived |
+| --- | --- | --- |
+| 0 | 239.712839 | 1.000000 |
+| 20 | 210.227800 | 0.876998 |
+| 50 | 105.544135 | 0.440294 |
+| 100 | 9.008708 | 0.037581 |
+
+The ratio to the centreline is exp(-y^2 / 2 sigma_y^2): the distance to a concentration is ALWAYS a centreline distance, and a receptor to the side sees less.
+
+# SECTION 14: How fast a pool burns: Babrauskas and Burgess (owned by Professional m01)
+
+THE SOLID FLAME MODEL treats a pool fire as a cylinder of flame with a uniform surface emissive power, and the heat flux at a target as that power times the fraction of the target's view the cylinder fills (the view factor) times the fraction the air lets through (the transmissivity). Every step starts from the burning flux.
+
+BABRAUSKAS: m" = m"inf (1 - exp(-k beta D)), with m"inf and the k beta product from Yellow Book Table 6.5, exported as `POOL_FIRE_FUELS`:
+
+| fuel key | m"inf kg/(m2 s) | k beta per m |
+| --- | --- | --- |
+| liquid-hydrogen | 0.169 | 6.1 |
+| lng | 0.078 | 1.1 |
+| lpg | 0.099 | 1.4 |
+| butane | 0.078 | 2.7 |
+| hexane | 0.074 | 1.9 |
+| heptane | 0.101 | 1.1 |
+| benzene | 0.085 | 2.7 |
+| xylene | 0.09 | 1.4 |
+| gasoline | 0.055 | 2.1 |
+| kerosene | 0.039 | 3.5 |
+| jp-5 | 0.054 | 1.6 |
+| methanol | 0.015 | none, independent of the diameter |
+| ethanol | 0.015 | none, independent of the diameter |
+
+A k beta of none means the table says the burning rate is independent of the diameter in the turbulent regime. The burning flux against the diameter (stated), for six fuels:
+
+| diameter m, stated | lng | lpg | heptane | gasoline | kerosene | methanol |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.5 | 0.032998 | 0.049838 | 0.042728 | 0.035753 | 0.032223 | 0.015000 |
+| 1 | 0.052036 | 0.074587 | 0.067380 | 0.048265 | 0.037822 | 0.015000 |
+| 2 | 0.069357 | 0.092980 | 0.089809 | 0.054175 | 0.038964 | 0.015000 |
+| 5 | 0.077681 | 0.098910 | 0.100587 | 0.054998 | 0.039000 | 0.015000 |
+| 10 | 0.077999 | 0.099000 | 0.100998 | 0.055000 | 0.039000 | 0.015000 |
+| 20 | 0.078000 | 0.099000 | 0.101000 | 0.055000 | 0.039000 | 0.015000 |
+| 50 | 0.078000 | 0.099000 | 0.101000 | 0.055000 | 0.039000 | 0.015000 |
+
+WHEN THE DIAMETER STOPS MATTERING. At 50 m every fuel with a k beta product sits at its asymptote to six decimals; heptane at 0.5 m burns at, derived, 42.31 percent of its asymptote. A large pool burns at m"inf, and its diameter then changes the area on fire but not the burning flux.
+
+BURGESS: "Burgess: m" = 0.001 dHc / (dHv + Cp (Tb - Ta))", for a single-component liquid below its boiling point. n-hexane (stated): heat of combustion 44700000 J/kg, heat of vaporisation 335000 J/kg, liquid heat capacity 2270 J/(kg K), boiling point 341.9 K, ambient 293.15 K. Burning flux: 0.100300 kg/(m2 s). The Babrauskas asymptote for hexane is 0.074.
+
+A boiling point below ambient is refused, because the printed form would then shrink its denominator: "boilingPointK: is below ambient: the liquid boils, and the printed Burgess form assumes a liquid heated from ambient to its boiling point". Burgess is a SINGLE ROUTE quantity (section 32), taught and never graded.
+
+# SECTION 15: The flame length, in still air and with wind (owned by Professional m02)
+
+ERHA is a heptane bund fire (stated): diameter 20 m, air density 1.2 kg/m3. Its Babrauskas burning flux is 0.101000 kg/(m2 s).
+
+STILL AIR, Thomas: "Thomas (1963), still air: L/D = 42 (m" / (rho_air sqrt(g D)))^0.61". Flame length 37.101102 m, L/D 1.855055. This is the same expression the facilities engine uses, imported and not restated.
+
+WITH WIND, Thomas as the Yellow Book states it: "Thomas with wind: L/D = 55 (m" / (rho_air sqrt(g D)))^0.67 u*^-0.21, u* = max(1, u10 / uc)". The characteristic wind speed uc = (g m" D / rho_air)^(1/3) is 2.546226 m/s for ERHA. The wind swept (stated):
+
+| wind at 10 m, m/s, stated | scaled wind speed u* | L/D | flame length m |
+| --- | --- | --- | --- |
+| 0 | 1.000000 | 1.787319 | 35.746382 |
+| 2 | 1.000000 | 1.787319 | 35.746382 |
+| 4 | 1.570953 | 1.625578 | 32.511563 |
+| 8 | 3.141905 | 1.405373 | 28.107457 |
+| 12 | 4.712858 | 1.290662 | 25.813232 |
+
+Below uc the scaled wind speed is HELD AT ONE, so every wind below 2.546226 m/s gives the same length, 35.746382 m, including no wind at all. Above it the flame SHORTENS as the wind rises, as u*^-0.21. The wind form at no wind (35.746382 m) is a different correlation from the still air form (37.101102 m); the method is named in every call and the two are not interchangeable.
+
+# SECTION 16: The flame tilt (owned by Professional m03)
+
+The engine's model string, verbatim: "tan(t)/cos(t) = 0.666 Fr10^0.333 Re^0.117; t = asin((sqrt(4c^2 + 1) - 1) / (2c))". Fr10 = u10^2 / (g D) and Re = u10 D / nu, with nu the kinematic viscosity of air, an input with no default. ERHA with nu 0.000015 m2/s (stated):
+
+| wind m/s, stated | Froude number | Reynolds number | tilt parameter c | tilt degrees from the vertical |
+| --- | --- | --- | --- | --- |
+| 0 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2 | 0.020394 | 2666666.666667 | 1.028914 | 38.746229 |
+| 4 | 0.081577 | 5333333.333333 | 1.770458 | 49.174202 |
+| 8 | 0.326309 | 10666666.666667 | 3.046437 | 58.130517 |
+| 12 | 0.734196 | 16000000.000000 | 4.184770 | 62.577136 |
+
+No wind, no tilt. The Reynolds number enters only to the power 0.117, so the viscosity matters weakly: the Yellow Book example used a viscosity half the physical value for air at 15 C (section 21).
+
+# SECTION 17: Surface emissive power: three methods (owned by Professional m03)
+
+FROM THE DIAMETER, Mudan: "Mudan: SEP = 140e3 exp(-0.12 D) + 20e3 (1 - exp(-0.12 D))". A large sooty fire hides its bright core behind smoke, so the power falls toward 20e3 W/m2 as the pool grows:
+
+| diameter m, stated | surface emissive power W/m2 |
+| --- | --- |
+| 2 | 114395.343328 |
+| 5 | 85857.396331 |
+| 10 | 56143.305429 |
+| 20 | 30886.154395 |
+| 40 | 20987.569646 |
+| 80 | 20008.127448 |
+
+FROM THE RADIATIVE FRACTION: "SEPmax = Fs m" dHc / (1 + 4 L/D)". The radiative fraction Fs is the caller's (the Yellow Book: 0.1 to 0.4). WITH SOOT: "SEPact = SEPmax (1 - soot) + SEPsoot soot, SEPmax = Fs m" dHc / (1 + 4 L/D)", the soot fraction the caller's (the Yellow Book quotes 0.8 for oil products) and the soot emissive power 20e3 W/m2 by default.
+
+ERHA at a 4 m/s wind (stated), flame length 32.511563 m, heat of combustion 44600000 J/kg, radiative fraction 0.3, soot fraction 0.8 (stated):
+
+| method | surface emissive power W/m2 |
+| --- | --- |
+| mudan-diameter | 30886.154395 |
+| radiative-fraction (the clear flame, SEPmax) | 180128.456236 |
+| radiative-fraction-soot (SEPact) | 52025.691247 |
+
+The three methods give three different answers for one fire. That is why every call names its method, and why a heat flux is quoted with the method that made it.
+
+# SECTION 18: The view factor of a cylindrical flame (owned by Professional m04)
+
+The engine's model strings, verbatim: at zero tilt "vertical cylinder view factor (Raj), target at ground level, vertical and horizontal planes; Fmax their vector sum"; with tilt "tilted cylinder view factor (Mudan), target at ground level; Fmax the vector sum of Fv and Fh". a = L / R and b = X / R, with X the distance from the axis of the flame base to a small target at ground level. Fv is the view factor of a vertical target facing the flame, Fh of a horizontal one, and Fmax = sqrt(Fv^2 + Fh^2) is the most exposed orientation.
+
+A flame of radius 10 m and length 30 m (stated), targets swept, three tilts toward the target (stated):
+
+Tilt 0 degrees toward the target (stated):
+
+| distance from axis m, stated | Fv | Fh | Fmax | or the refusal field |
+| --- | --- | --- | --- | --- |
+| 15 | 0.332171054250 | 0.222949619043 | 0.400055173586 |  |
+| 20 | 0.245031643354 | 0.145696203798 | 0.285075235764 |  |
+| 30 | 0.150735942534 | 0.071282105127 | 0.166740705537 |  |
+| 50 | 0.069804515030 | 0.021824698965 | 0.073136774631 |  |
+| 80 | 0.029868910564 | 0.005919000622 | 0.030449735411 |  |
+| 120 | 0.013574612722 | 0.001779114747 | 0.013690703409 |  |
+
+Tilt 20 degrees toward the target (stated):
+
+| distance from axis m, stated | Fv | Fh | Fmax | or the refusal field |
+| --- | --- | --- | --- | --- |
+| 15 |  |  |  | `tiltDeg` |
+| 20 |  |  |  | `tiltDeg` |
+| 30 | 0.192848362218 | 0.124341196034 | 0.229458544930 |  |
+| 50 | 0.088024443375 | 0.033830622234 | 0.094301715956 |  |
+| 80 | 0.034592488362 | 0.007637563862 | 0.035425592907 |  |
+| 120 | 0.014684569999 | 0.002020308962 | 0.014822895951 |  |
+
+Tilt 40 degrees toward the target (stated):
+
+| distance from axis m, stated | Fv | Fh | Fmax | or the refusal field |
+| --- | --- | --- | --- | --- |
+| 15 |  |  |  | `tiltDeg` |
+| 20 |  |  |  | `tiltDeg` |
+| 30 | 0.241673530915 | 0.219644967041 | 0.326573126713 |  |
+| 50 | 0.108494493589 | 0.048235496380 | 0.118733812581 |  |
+| 80 | 0.036254831073 | 0.007892895480 | 0.037104050657 |  |
+| 120 | 0.013924635005 | 0.001748781660 | 0.014034019286 |  |
+
+Tilt toward the target raises the view factor: at 50 m Fmax goes from 0.073136774631 upright to 0.118733812581 at 40 degrees. The rows with a refusal field are targets the tilted flame reaches over.
+
+A FLAME OVER THE TARGET IS REFUSED. The engine refuses when 1 + a sin(tilt) is at or above b: "tiltDeg: the tilted flame reaches over the target (1 + (L/R) sin(tilt) >= X/R): the closed form does not apply to a target under the flame". The engine's validation record shows why with its second route, a numerical integration over the visible flame surface (golden):
+
+| probe, golden | closed form Fv | route B Fv | closed form Fh | route B Fh |
+| --- | --- | --- | --- | --- |
+| a 2, b 1.5, tilt 30 degrees | 0.394516 | 0.401252 | 0.433471 | 0.433471 |
+| a 3, b 2.5, tilt 45 degrees | 0.291402 | 0.297689 | 0.350015 | 0.350015 |
+| a 3, b 2.2, tilt 60 degrees | 0.303765 | 0.374215 | 0.609719 | 0.609719 |
+
+Under the flame the closed form counts flame surface behind the target as seen, and its Fv is wrong while Fh stays right. The refusal is the engine's judgement, because the Yellow Book states no domain for the formula.
+
+A target at or inside the flame base is refused too: "distanceFromAxisM: the target is at or inside the flame base: a view factor model needs the target outside the flame".
+
+THE SECOND ROUTE ON EVERY GOLDEN VIEW FACTOR (golden): 9 cases where the closed form and a 400 by 400 Gauss-Legendre integration agree.
+
+| golden case | engine Fv | route B Fv | engine Fh | route B Fh |
+| --- | --- | --- | --- | --- |
+| yb-pool-example-vf | 0.091915844294 | 0.091915844294 | 0.029147159519 | 0.029147159519 |
+| yb-jet-example-vf | 0.026649752706 | 0.026649752706 | 0.009341560802 | 0.009341560802 |
+| vertical-h2-x2 | 0.236117430735 | 0.236117430735 | 0.126151330866 | 0.126151330866 |
+| vertical-h5-x3 | 0.161985285356 | 0.161985285356 | 0.091116026744 | 0.091116026744 |
+| tilt-40-toward | 0.241673530915 | 0.241673530915 | 0.219644967041 | 0.219644967041 |
+| tilt-40-away | 0.079320445989 | 0.079320445989 | 0.018500582395 | 0.018500582395 |
+| tilt-60-away-close | 0.071305007990 | 0.071305007990 | 0.011208372770 | 0.011208372770 |
+| near-overhang | 0.239728068499 | 0.239728068499 | 0.222306179377 | 0.222306179377 |
+| slender-far | 0.023743706812 | 0.023743706812 | 0.010867764813 | 0.010867764813 |
+
+THE PRINTED TABLE (golden). The Yellow Book's Table 6.A.1 prints the Raj view factors times 1000; 303 cells reproduce to the last printed digit, and 2 Fmax cells do not follow from their own Fh and Fv:
+
+| table | X/R | L/R | printed | computed x 1000 |
+| --- | --- | --- | --- | --- |
+| Fmax | 1.2 | 0.1 | 210 | 201.303914 |
+| Fmax | 1.4 | 0.2 | 117 | 177.287465 |
+
+# SECTION 19: Atmospheric transmissivity by the Bagster fit (owned by Professional m05)
+
+The engine's model string, verbatim: "Bagster: tau = 2.02 (pw x)^-0.09, valid 1e4 < pw x < 1e5 N/m". pw is the partial pressure of water vapour in Pa (relative humidity times the saturation pressure) and x is the path length FROM THE FLAME SURFACE to the target, in m. With pw 1500 Pa (stated):
+
+| path m, stated | pw x N/m, derived | transmissivity, or the refusal field |
+| --- | --- | --- |
+| 5 | 7500.000000 | `pathLengthM` |
+| 10 | 15000.000000 | 0.850165 |
+| 30 | 45000.000000 | 0.770127 |
+| 60 | 90000.000000 | 0.723552 |
+| 70 | 105000.000000 | `pathLengthM` |
+
+Outside 1e4 to 1e5 N/m the engine refuses, because the Yellow Book advises against the fit there, and below about 2.5e3 N/m the fit would exceed one: "pathLengthM: pw x lies outside 1e4 to 1e5 N/m, where the YB advises against the Bagster fit: supply a transmissivity from another source". The caller then supplies a transmissivity from another source. Bagster is a SINGLE ROUTE quantity (section 32): taught, and never a graded answer.
+
+# SECTION 20: The heat flux, and the distance to a heat flux (owned by Professional m05)
+
+The engine's model string, verbatim: "solid flame: q = SEP x F x tau". The heat flux is a PRODUCT of three factors, and `poolFireSolidFlame` chains every step from a pool to a heat flux.
+
+ERHA end to end (stated): the heptane Babrauskas burning flux, Thomas with a 4 m/s wind, the tilt at nu 0.000015, the soot surface emissive power, a STATED transmissivity of 0.8, targets downwind at distances from the pool centre:
+
+| distance from centre m, stated | flame length m | tilt degrees | surface emissive power W/m2 | Fmax | heat flux W/m2, or the refusal field |
+| --- | --- | --- | --- | --- | --- |
+| 25 |  |  |  |  | `tiltDeg` |
+| 40 | 32.511563 | 49.174202 | 52025.691247 | 0.250188055557 | 10412.965226 |
+| 60 | 32.511563 | 49.174202 | 52025.691247 | 0.088888022627 | 3699.568657 |
+| 100 | 32.511563 | 49.174202 | 52025.691247 | 0.022463264091 | 934.933474 |
+| 150 | 32.511563 | 49.174202 | 52025.691247 | 0.008332606429 | 346.807687 |
+
+The flame base radius is D/2: the engine does not elongate the base in the wind, which matches the Yellow Book's own worked step. The heat flux uses Fmax, the most exposed target orientation. Where the table shows a refusal field the tilted flame reaches over the target (section 18).
+
+THE DISTANCE TO A HEAT FLUX, by bisection, with the same stated transmissivity (the search refuses without one, because a root search would walk out of the Bagster band):
+
+| target heat flux W/m2, stated | state | distance from centre m | distance from edge m |
+| --- | --- | --- | --- |
+| 35000 | NOT_REACHED | null | null |
+| 12500 | REACHED | 36.451220 | 26.451220 |
+| 5000 | REACHED | 53.796232 | 43.796232 |
+
+The engine's method, verbatim: "bisection on the solid-flame heat flux (Fmax, fixed transmissivity) against distance from the pool centre". A target the heat flux never reaches even at the flame returns NOT_REACHED with the largest heat flux it found; one still exceeded at the search limit returns BEYOND_SEARCH_RANGE.
+
+# SECTION 21: The Yellow Book pool fire, reproduced step by step, and its errata (owned by Professional m06)
+
+Source (golden): PUBLISHED: TNO Yellow Book CPR 14E (2005) 6.6.3 steps 1 to 13 (benzene, confined, u10 5 m/s, X 100 m from the centre, tau 0.71474 from Hottel charts).
+
+| step | engine | printed | relative difference | tolerance the golden allows |
+| --- | --- | --- | --- | --- |
+| characteristic wind speed m/s | 3.068751 | 3.06866 | 2.97e-5 | 0.0001 |
+| scaled wind speed | 1.629327 | 1.62937 | 2.62e-5 | 0.0001 |
+| L/D | 1.102004 | 1.101938 | 5.99e-5 | 0.0001 |
+| flame length m | 46.775288 | 46.7725 | 5.96e-5 | 0.0001 |
+| Reynolds number | 28247014.532194 | 28240000 | 2.48e-4 | 0.001 |
+| tilt parameter tan/cos | 1.943154 | 1.94315 | 1.95e-6 | 0.00001 |
+| tilt degrees | 50.828697 | 50.8286 | 1.92e-6 | 0.00001 |
+| surface emissive power, Mudan W/m2 | 20736.395957 | 21000 | 1.26e-2 | 0.02 |
+| surface emissive power, clear flame W/m2 | 252421.582860 | 252400 | 8.55e-5 | 0.001 |
+| surface emissive power, with soot W/m2 | 66484.316572 | 66000 | 7.34e-3 | 0.01 |
+| Fv | 0.091923780228 | 0.091915 | 9.55e-5 | 0.0001 |
+| Fh | 0.029151753404 | 0.029146 | 1.97e-4 | 0.0002 |
+| Fmax | 0.096435502269 | 0.0964 | 3.68e-4 | 0.001 |
+| heat flux at 100 m from the centre W/m2 | 4582.518673 | 4581 | 3.32e-4 | 0.001 |
+
+Every step reproduces within the tolerance the golden states for it, with the example's own inputs: the transmissivity as printed (0.71474, read from charts) and the air viscosity as printed (0.0000075133 m2/s).
+
+THE ERRATA IN THIS EXAMPLE, each a fact about the published source:
+
+| what is printed | what the numbers say |
+| --- | --- |
+| Froude number 0.0545 | u10^2 / (g D) is 0.060060, and the printed tilt parameter and tilt follow only from that value |
+| air viscosity 0.0000075133 m2/s "for air at 15 C" | air at 15 C is about twice that; the golden uses the printed value because the printed tilt depends on it, and the Reynolds number enters only to the power 0.117 |
+| "50 m from the flame surface" in three steps | the steps compute with 100 m, the distance from the pool centre given in the inputs |
+
+# SECTION 22: What this course does not grade: the seams with other courses (owned by Professional m05 l04 and Expert m06 l02)
+
+POINT SOURCE HEAT RADIATION. The facilities engines carry a point source model (the flame treated as a point that radiates a fraction of its heat release equally in every direction) and the flare and pool fire setbacks it implies; the Facilities courses on relief and flare systems and on layout teach and grade them. This engine does not re-expose them, and its validation record carries a test that asserts it exports none of them. This course adds the solid flame model, which the facilities pool fire setback states it does not provide, and grades only the solid flame.
+
+FREQUENCIES AND RISK. A consequence model answers what happens if the release occurs. How often it occurs, and the risk a person or a population carries as a result, is the later quantitative risk course: individual risk, the potential loss of life and the F-N curve belong there, and this course never computes or grades one. The academy's risk matrices belong to the risk and change course.
+
+EMISSIONS AND PRODUCED WATER. Routine emissions and their accounting, produced water treatment and tank vapour losses are other courses' subjects. This course models an accidental release and nothing routine.
+
+# SECTION 23: The TNT equivalent mass (owned by Expert m01)
+
+The engine's model string, verbatim: "Q_TNT = alpha_e Qf Emf / Em_TNT", with alpha_e the yield factor, Qf the fuel mass, Emf its heat of combustion and Em_TNT the TNT blast energy. BONGA is a butane cloud (stated): 3000 kg, heat of combustion 45700000 J/kg, TNT blast energy 4600000 J/kg.
+
+| yield factor, stated | TNT equivalent mass kg |
+| --- | --- |
+| 0.02 | 596.086957 |
+| 0.04 | 1192.173913 |
+| 0.1 | 2980.434783 |
+| 0.2 | 5960.869565 |
+
+The yield factor is the caller's (the Yellow Book reports 0.02 to 0.2 in use), and the TNT mass is linear in it. The TNT blast energy is refused outside 4.0e6 to 5.0e6 J/kg to catch a units slip: "tntBlastEnergyJKg: must be the TNT blast energy in J/kg, between 4.0e6 and 5.0e6 (the YB cites 4.19e6 to 4.65e6)". TNT equivalence is a SINGLE ROUTE quantity (section 32).
+
+# SECTION 24: Cube root scaling and the Kinney and Graham overpressure (owned by Expert m01 and Expert m02)
+
+SCALED DISTANCE. The engine's model string, verbatim: "Hopkinson-Cranz cube-root scaling, Z = R / W^(1/3)". Two charges give the same overpressure at the same Z: a charge eight times heavier gives it at twice the distance.
+
+THE OVERPRESSURE. The engine's model string, verbatim: "Kinney and Graham free-air peak side-on overpressure, ps/pa = 808[1+(Z/4.5)^2] / (sqrt(1+(Z/0.048)^2) sqrt(1+(Z/0.32)^2) sqrt(1+(Z/1.35)^2))". Its range, verbatim: "Z in [0.05, 40] m/kg^(1/3) (judgement; see findings)". The ratio over ambient against Z (stated):
+
+| Z m/kg^(1/3), stated | overpressure over ambient | overpressure Pa |
+| --- | --- | --- |
+| 0.1 | 332.983298 | 33739532.632458 |
+| 0.5 | 39.512808 | 4003635.242148 |
+| 1 | 9.955978 | 1008789.503793 |
+| 2 | 2.052080 | 207926.999232 |
+| 5 | 0.288558 | 29238.106780 |
+| 10 | 0.098548 | 9985.363723 |
+| 20 | 0.043360 | 4393.409670 |
+| 40 | 0.020934 | 2121.136283 |
+
+BONGA's charge of 500 kg of TNT (stated) at distances (stated):
+
+| distance m, stated | Z m/kg^(1/3) | overpressure Pa |
+| --- | --- | --- |
+| 20 | 2.519842 | 121853.141070 |
+| 50 | 6.299605 | 19626.657230 |
+| 100 | 12.599210 | 7457.699887 |
+| 200 | 25.198421 | 3427.919093 |
+| 300 | 37.797631 | 2247.931733 |
+
+Eight times the charge at twice 100 m gives 7457.699887 Pa, against 7457.699887 Pa for the original charge at 100 m: the same Z, the same overpressure.
+
+THE RANGE THE FIT IS USED OVER is Z from 0.05 to 40. The engine's validation record calls this a JUDGEMENT: the sources it read print no range for the Kinney and Graham fit itself, and the span is borrowed from the Kingery-Bulmash compilation. Outside it the engine refuses: "scaledDistanceMKg13: Z lies outside 0.05 to 40 m/kg^(1/3), the range this fit is used over".
+
+THE PUBLISHED COLUMN (golden): 5 values from a 2020 conference paper's table, at an ambient of 101.325 kPa.
+
+| golden case | engine kPa | printed kPa | relative difference |
+| --- | --- | --- | --- |
+| cbu-1kg-5m | 29.238107 | 29.24 | 6.47e-5 |
+| cbu-0.5kg-5m | 19.626657 | 19.63 | 1.70e-4 |
+| cbu-0.1kg-5m | 9.065697 | 9.066 | 3.34e-5 |
+| cbu-0.1kg-2m | 38.707784 | 38.71 | 5.73e-5 |
+| cbu-0.1kg-1m | 174.869459 | 174.87 | 3.09e-6 |
+
+PRINTED CONSTANTS AND A COMPUTED COLUMN. The paper PRINTS the formula with 800 and 0.049, but its own column follows 808 and 0.048, the constants the engine uses and two other sources print. The column is the evidence, and the golden is labelled PUBLISHED because its numbers reproduce. The engine's validation record names this table as secondary.
+
+# SECTION 25: The distance for an overpressure, and what a free air burst leaves out (owned by Expert m02)
+
+`distanceForOverpressure` inverts the fit by bisection on Z. BONGA's 500 kg, targets (stated):
+
+| overpressure Pa, stated | Z m/kg^(1/3) | distance m |
+| --- | --- | --- |
+| 100000 | 2.749433 | 21.822266 |
+| 50000 | 3.791181 | 30.090623 |
+| 20000 | 6.227368 | 49.426650 |
+| 10000 | 9.988894 | 79.281907 |
+| 5000 | 17.786268 | 141.169703 |
+
+The engine's method, verbatim: "inverse of the Kinney and Graham fit by bisection on Z". Every row round trips through the forward fit. An overpressure the fit cannot give inside its range is refused: "overpressurePa: lies outside the overpressures the fit gives over Z = 0.05 to 40 m/kg^(1/3)".
+
+WHAT A FREE AIR BURST LEAVES OUT. The fit is a FREE AIR burst of TNT. A burst at the ground reflects its shock and is not modelled; the engine header says that is the caller's choice of charge weight. A vapour cloud is not TNT: the yield factor carries the whole difference, and the TNO multi-energy method, which treats congestion, is not in the engine (section 31).
+
+# SECTION 26: A probit and a probability (owned by Expert m03)
+
+The engine's model string, verbatim: "P = Phi(Y - 5), standard normal CDF (lib/stats normalCDF, Abramowitz and Stegun 7.1.26, |error| <= 1.5e-7)". A probit Y is a normal deviate shifted by five, so Y = 5 is a probability of one half. The ladder (stated):
+
+| probit, stated | probability |
+| --- | --- |
+| 2 | 0.001350 |
+| 3 | 0.022750 |
+| 4 | 0.158655 |
+| 5 | 0.500000 |
+| 6 | 0.841345 |
+| 7 | 0.977250 |
+| 8 | 0.998650 |
+
+THE PRINTED TABLE (golden). The Purple Book's Table 5.1 prints the probit for a probability to two decimals. 97 cells are in the golden; the engine's inverse reproduces 97 of them to the printed two decimals. A selection:
+
+| probability | printed probit | engine probit |
+| --- | --- | --- |
+| 0.01 | 2.67 | 2.673653 |
+| 0.05 | 3.36 | 3.355147 |
+| 0.1 | 3.72 | 3.718448 |
+| 0.25 | 4.33 | 4.325510 |
+| 0.5 | 5.00 | 5.000000 |
+| 0.75 | 5.67 | 5.674490 |
+| 0.9 | 6.28 | 6.281552 |
+| 0.99 | 7.33 | 7.326347 |
+
+2 more cells sit on a rounding edge (golden): probability 0.12 printed 3.82 where the value is 3.825013; probability 0.88 printed 6.18 where the value is 6.174987. They are within 0.006 of the printed digits and the golden keeps them apart.
+
+GENERAL FORM. `probit` computes Y = a + b ln(V) and its probability for any coefficients and any thermal dose or toxic load; its model string, verbatim: "Y = a + b ln(V); P = Phi(Y - 5)". The logarithm is NATURAL.
+
+# SECTION 27: Thermal probits and the four thirds (owned by Expert m03)
+
+`THERMAL_PROBITS`, Y = a + b ln(t I^(4/3)), t in seconds and I in the unit each source prints:
+
+| preset | a | b | intensity unit | source, verbatim |
+| --- | --- | --- | --- | --- |
+| eisenberg | -14.9 | 2.56 | kW/m2 | UK HSE SPC/Tech/OSD/30, Indicative human vulnerability to the hazardous agents present offshore Table 17: Eisenberg et al. (1975); equivalently -14.9 + 2.56 ln(t q^(4/3) / 1e4) with q in W/m2 |
+| tsao-perry | -12.8 | 2.56 | kW/m2 | UK HSE SPC/Tech/OSD/30, Indicative human vulnerability to the hazardous agents present offshore Table 17: Tsao and Perry (1979) |
+| lees | -10.7 | 1.99 | kW/m2 | UK HSE SPC/Tech/OSD/30, Indicative human vulnerability to the hazardous agents present offshore Table 17: Lees (1994) |
+| purple-book | -36.38 | 2.56 | W/m2 | TNO Purple Book CPR 18E (1999) eq. 5.4 |
+
+THE THERMAL DOSE is t I^(4/3). Each preset is fed the heat flux in W/m2 and converts it to its own unit. Heat fluxes and exposure times (stated), every preset:
+
+| exposure, stated | eisenberg probability | tsao-perry probability | lees probability | purple-book probability |
+| --- | --- | --- | --- | --- |
+| 5000 W/m2 for 10 s | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 5000 W/m2 for 20 s | 0.000000 | 0.000002 | 0.000000 | 0.000002 |
+| 5000 W/m2 for 40 s | 0.000000 | 0.002099 | 0.000022 | 0.002089 |
+| 10000 W/m2 for 10 s | 0.000000 | 0.000026 | 0.000000 | 0.000026 |
+| 10000 W/m2 for 20 s | 0.000006 | 0.011560 | 0.000142 | 0.011514 |
+| 10000 W/m2 for 40 s | 0.004702 | 0.309602 | 0.012237 | 0.309063 |
+| 20000 W/m2 for 10 s | 0.000078 | 0.046484 | 0.000764 | 0.046335 |
+| 20000 W/m2 for 20 s | 0.022455 | 0.537647 | 0.036742 | 0.537040 |
+| 20000 W/m2 for 40 s | 0.408644 | 0.969186 | 0.340737 | 0.969080 |
+| 35000 W/m2 for 10 s | 0.030756 | 0.591034 | 0.046059 | 0.590440 |
+| 35000 W/m2 for 20 s | 0.462023 | 0.977501 | 0.380195 | 0.977419 |
+| 35000 W/m2 for 40 s | 0.953436 | 0.999921 | 0.858677 | 0.999921 |
+
+At 20000 W/m2 for 20 s the Eisenberg probit is 2.994507 with the thermal dose 1085.767047 in s (kW/m2)^(4/3); Tsao and Perry gives 5.094507, derived 2.100000 probit units higher, and the Purple Book form gives 5.092979.
+
+NOT EVERY "TNO" HEAT PROBIT IS EISENBERG. The Purple Book's -36.38 + 2.56 ln(Q^(4/3) t) with Q in W/m2 is Tsao and Perry rewritten in W/m2: -12.8 - 2.56 ln(1e4) is -36.378. The presets are named by origin so the two cannot be confused. The same exposure can read as a few percent under one preset and most of the people exposed under another.
+
+THE W/m2 FORM OF EISENBERG. -14.9 + 2.56 ln(t q^(4/3) / 1e4) with q in W/m2 is the same probit, because (1000 I)^(4/3) is 1e4 I^(4/3). At 10000 W/m2 for 30 s (golden) the engine gives 1.666556, the golden 1.666556.
+
+THE LETHAL DOSES THE SOURCE PRINTS (golden, OSD/30 Table 17), in (kW/m2)^(4/3) s:
+
+| preset | engine lethal dose for one percent | printed | engine lethal dose for fifty percent | printed |
+| --- | --- | --- | --- | --- |
+| eisenberg | 957.866291 | 960 | 2376.626918 | 2380 |
+| tsao-perry | 421.742820 | 420 | 1046.414670 | 1046 |
+| lees | 829.172848 | 828 | 2668.968204 | 2670 |
+
+AN ERRATUM IN THAT TABLE (golden). Its TNO row, a = -15.3 and b = 3.02, prints lethal doses of 389 and 841, which do not follow from its own coefficients (384.344943 and 830.355817). The source does not say which is wrong, so the row is not a preset.
+
+# SECTION 28: The overpressure probit, in psig (owned by Expert m03 l05)
+
+`OVERPRESSURE_PROBITS` carries one preset, hsc: Y = 1.47 + 1.37 ln(P) with P in psig, source, verbatim: "UK HSE SPC/Tech/OSD/30, Indicative human vulnerability to the hazardous agents present offshore Equation 4a (HSC road and rail study)". The engine takes the overpressure in Pa and converts it with `PA_PER_PSI`, 6894.757293168361.
+
+| overpressure psig, stated | overpressure Pa, derived | probit | probability |
+| --- | --- | --- | --- |
+| 2 | 13789.514586 | 2.419612 | 0.004934 |
+| 5 | 34473.786466 | 3.674930 | 0.092574 |
+| 10 | 68947.572932 | 4.624542 | 0.353660 |
+| 20 | 137895.145863 | 5.574153 | 0.717068 |
+| 40 | 275790.291727 | 6.523765 | 0.936216 |
+
+THE PRINTED POINTS (golden, OSD/30 Equation 4):
+
+| probability | engine psig | printed psig | relative difference |
+| --- | --- | --- | --- |
+| 0.01 | 2.407476 | 2.4 | 3.11e-3 |
+| 0.5 | 13.152901 | 13.1 | 4.04e-3 |
+| 0.95 | 43.696383 | 43.5 | 4.51e-3 |
+
+The ninety-five percent point prints lower than the probit gives, which the engine's validation record lists as an erratum in the source. Fed the overpressure in Pa where psig is due, the probit would read a number `PA_PER_PSI` times too large.
+
+# SECTION 29: Toxic probits: the toxic load, two sources, two units (owned by Expert m04)
+
+`TOXIC_PROBITS`, Y = a + b ln(C^n t), t in MINUTES and C in the preset's unit. The Purple Book presets (pb-) are in mg/m3; the Lees presets, as OSD/30 prints them, are in ppm:
+
+| preset | a | b | n | unit |
+| --- | --- | --- | --- | --- |
+| pb-acrolein | -4.1 | 1 | 1 | mg/m3 |
+| pb-acrylonitrile | -8.6 | 1 | 1.3 | mg/m3 |
+| pb-allyl-alcohol | -11.7 | 1 | 2 | mg/m3 |
+| pb-ammonia | -15.6 | 1 | 2 | mg/m3 |
+| pb-azinphos-methyl | -4.8 | 1 | 2 | mg/m3 |
+| pb-bromine | -12.4 | 1 | 2 | mg/m3 |
+| pb-carbon-monoxide | -7.4 | 1 | 1 | mg/m3 |
+| pb-chlorine | -6.35 | 0.5 | 2.75 | mg/m3 |
+| pb-ethylene-oxide | -6.8 | 1 | 1 | mg/m3 |
+| pb-hydrogen-chloride | -37.3 | 3.69 | 1 | mg/m3 |
+| pb-hydrogen-cyanide | -9.8 | 1 | 2.4 | mg/m3 |
+| pb-hydrogen-fluoride | -8.4 | 1 | 1.5 | mg/m3 |
+| pb-hydrogen-sulfide | -11.5 | 1 | 1.9 | mg/m3 |
+| pb-methyl-bromide | -7.3 | 1 | 1.1 | mg/m3 |
+| pb-methyl-isocyanate | -1.2 | 1 | 0.7 | mg/m3 |
+| pb-nitrogen-dioxide | -18.6 | 1 | 3.7 | mg/m3 |
+| pb-parathion | -6.6 | 1 | 2 | mg/m3 |
+| pb-phosgene | -10.6 | 2 | 1 | mg/m3 |
+| pb-phosphamidon | -2.8 | 1 | 0.7 | mg/m3 |
+| pb-phosphine | -6.8 | 1 | 2 | mg/m3 |
+| pb-sulphur-dioxide | -19.2 | 1 | 2.4 | mg/m3 |
+| pb-tetraethyllead | -9.8 | 1 | 2 | mg/m3 |
+| lees-acrolein | -9.93 | 2.05 | 1 | ppm |
+| lees-ammonia | -35.9 | 1.85 | 2 | ppm |
+| lees-benzene | -109.78 | 5.3 | 2 | ppm |
+| lees-carbon-monoxide | -37.98 | 3.7 | 1 | ppm |
+| lees-chlorine | -8.29 | 0.92 | 2 | ppm |
+| lees-hydrogen-chloride | -16.85 | 2 | 1 | ppm |
+| lees-hydrogen-sulphide | -31.42 | 3.008 | 1.43 | ppm |
+| lees-nitrogen-dioxide | -13.79 | 1.4 | 2 | ppm |
+| lees-phosgene | -19.27 | 3.686 | 1 | ppm |
+| lees-sulphur-dioxide | -15.67 | 2.1 | 1 | ppm |
+| lees-toluene | -6.794 | 0.41 | 2.5 | ppm |
+| lees-hydrogen-fluoride | -35.87 | 3.354 | 1 | ppm |
+| lees-hydrogen-cyanide | -29.42 | 3.008 | 1.43 | ppm |
+
+TWO SOURCES FOR ONE SUBSTANCE. Chlorine for 10 minutes (stated), both presets, the ppm converted for the Purple Book at 25 C with a molar mass of 70.9 g/mol (stated):
+
+| chlorine ppm, stated | lees toxic load | lees probability | pb concentration mg/m3 | pb toxic load | pb probability |
+| --- | --- | --- | --- | --- | --- |
+| 50 | 25000.000000 | 0.000035 | 144.898488 | 8768505.854629 | 0.000395 |
+| 100 | 100000.000000 | 0.003487 | 289.796976 | 58987241.122310 | 0.008118 |
+| 200 | 400000.000000 | 0.077409 | 579.593951 | 396817276.843654 | 0.073459 |
+| 400 | 1600000.000000 | 0.441437 | 1159.187903 | 2669457804.868559 | 0.309443 |
+
+The two sources disagree for the same chlorine exposure, and the toxic load exponent n (2 for Lees, 2.75 for the Purple Book) decides how fast the harm grows with the concentration. The toxic load unit is printed with every result: (ppm)^2 min and (mg/m3)^2.75 min.
+
+A PRESET IN THE OTHER UNIT. Hydrogen sulphide at 800 ppm for 15 minutes on the pb-hydrogen-sulfide preset (mg/m3), molar mass 34.08 g/mol (stated). The engine converts at the temperature it is given:
+
+| temperature K | concentration mg/m3 | probit | probability |
+| --- | --- | --- | --- |
+| 293.15 | 1133.397113 | 4.570702 | 0.333853 |
+| 298.15, the default | 1114.389950 | 4.538569 | 0.322245 |
+
+Without a molar mass the conversion cannot be made and the engine refuses: "molarMassGMol: must be a molar mass above 0 g/mol".
+
+A CONCENTRATION THAT CHANGES. `toxicDose` sums C^n dt over a history: "D = sum(C^n dt)". The history (stated) 150 for 5 minutes, 90 for 10 minutes, 30 for 20 minutes, at n = 2, gives a toxic load of 211500.000000; the time-weighted mean concentration, derived 64.285714, held for the whole time gives 144642.857143. With n above one a peak counts for more than its share of the average.
+
+THE PUBLISHED CASE (golden). PUBLISHED: TNO Purple Book CPR 18E (1999) Appendix 6.B step 4.3: CO 21,300 mg/m3, 30 min, printed Pr 5.97 and P 0.835 (read from Table 5.1). The engine: probit 5.967660, probability 0.833393; printed: probit 5.97, probability 0.835. The Purple Book reads the probability off its Table 5.1, which is why the golden allows 0.002 absolute on it.
+
+THE LEES COLUMNS (golden). OSD/30 Table 2 prints, for 13 substances, the ppm that gives one and fifty percent at 5 and 30 minutes; all 52 values reproduce through the engine's inverse within one percent or one ppm.
+
+# SECTION 30: The inverse probit is approximate (owned by Expert m05 l05)
+
+The standard normal CDF this engine uses is the repository's `normalCDF`, the Abramowitz and Stegun 7.1.26 approximation; the probability basis says so, verbatim: "P = Phi(Y - 5), standard normal CDF (lib/stats normalCDF, Abramowitz and Stegun 7.1.26, |error| <= 1.5e-7)". The forward direction is good to about 1.5e-7 in probability, which is why this course prints probabilities to six decimals.
+
+THE INVERSE bisects on that same approximate CDF. The golden records the exact probit for every Table 5.1 cell, computed by the oracle with an exact normal distribution; against the engine:
+
+| probability, stated | engine probit | exact probit, golden | difference, derived |
+| --- | --- | --- | --- |
+| 0.01 | 2.673653 | 2.673652 | 8.59e-7 |
+| 0.1 | 3.718448 | 3.718448 | -3.91e-7 |
+| 0.5 | 5.000000 | 5.000000 | -1.78e-14 |
+| 0.9 | 6.281552 | 6.281552 | 3.91e-7 |
+| 0.99 | 7.326347 | 7.326348 | -8.59e-7 |
+
+At one percent the engine's probit departs from the exact one in the seventh decimal. Through a toxic load that small departure is magnified: for the lees-chlorine preset the engine's one percent toxic load is 149793.673220, and the exact probit gives, derived, 149793.533322, a difference of 0.139897. A thermal dose or toxic load read back from a probability is therefore quoted to the figures the approximation supports, and this course never grades one.
+
+# SECTION 31: What the engine does not do (owned by Expert m05)
+
+Read from the engine header and its validation record, and checked against the exports in section 1:
+
+| not in the engine | why, from the engine header and its validation record | what the analyst does instead |
+| --- | --- | --- |
+| two phase discharge | no public closed form was read with a worked example; the Yellow Book two phase models are numerical | uses a two phase model outside this engine for a flashing liquid |
+| unconfined pool spreading | the Yellow Book spreading model is a differential equation for a fed pool; only a stated thickness is implemented | states a thickness and says where it came from |
+| an instantaneous puff | the puff sigmas were not in a source read | models a short release with a puff model elsewhere |
+| urban dispersion coefficients | a sourced urban sigma_y was not available; only the rural Briggs set is here | uses the rural set with care, or another tool, in a built-up area |
+| a jet fire | the only worked example read carries internal inconsistencies, so a golden could not tell a right engine from a wrong one | uses a jet fire model elsewhere |
+| the Kingery-Bulmash fits | the coefficients were not obtained; the sources read print curves | uses Kinney and Graham within its range |
+| the TNO multi-energy method | the blast charts are graphical and no published curve fit was found | treats congestion with a method outside this engine |
+| lung, eardrum and structural probits | their source was not read, so they are not included | uses the fatality probit here and states what it covers |
+| point source heat radiation and setbacks | they live in the facilities engines and the Facilities courses grade them | uses the solid flame model here |
+| any frequency or risk | a consequence model computes effects | takes frequencies from a risk study |
+
+None of these is taught as computed. Where a lesson names one, it names it as out of the engine.
+
+# SECTION 32: The single route quantities, and the published values that catch the rest (owned by Expert m05 l04)
+
+The engine's validation record plants the same mistake in both the engine and its oracle and asks whether anything independent still catches it. Where a second route or a published worked number exists, the mistake is caught; where neither exists, it is not:
+
+| quantity | what catches a mistake copied into both | graded in this course |
+| --- | --- | --- |
+| liquid and gas outflow through a hole | the Yellow Book worked cases and the nozzle maximisation (section 5 and section 6) | yes |
+| the pool of stated thickness | the Yellow Book pool diameter (section 8) | yes |
+| the reflected plume | the mass flux integral (section 11) | yes |
+| the Briggs coefficients | ALOHA Table 13, read exactly (section 10) | yes |
+| the tilted view factor | the numerical surface integral (section 18) | yes |
+| Thomas with wind, tilt and the surface emissive power | the Yellow Book pool fire (section 21) | yes |
+| Kinney and Graham | the published conference column (section 24) | yes |
+| the Eisenberg, Tsao and Perry and Lees thermal presets | the OSD/30 lethal doses (section 27) | yes |
+| the overpressure probit | the OSD/30 printed points (section 28) | yes |
+| the Lees toxic coefficients | the OSD/30 columns (section 29) | yes |
+| the Purple Book toxic coefficients | one published worked case, carbon monoxide (section 29); every other substance rests on the transcription | no |
+| Mackay and Matsugu evaporation | nothing: the transcription alone | no |
+| the Bagster transmissivity | nothing: the transcription alone | no |
+| the Burgess burning rate | nothing: the transcription alone | no |
+| the TNT equivalence | nothing: the transcription alone | no |
+| Thomas in still air | nothing: the transcription alone | no |
+
+A single route quantity is taught and never carries a graded answer. Every capstone that needs a transmissivity or a TNT mass STATES it, and every graded toxic probit uses a Lees preset.
+
+# SECTION 33: Judgement: from release to harm, and the consequence note (owned by Expert m06)
+
+FROM RELEASE TO HARM, one chain on the teaching streams. The AMENAM gas line at 2e6 Pa releases 1.032722 kg/s (CHOKED). Treated as a sustained release of carbon monoxide in the UBIT wind, class F, it gives 4582.243793 mg/m3 at ground level 200 m downwind. Each step is one engine call, and each carries its basis; a consequence note carries every one of them.
+
+Held for 30 minutes (stated) on the pb-carbon-monoxide preset that is a probit of 4.431141 and a probability of 0.284726.
+
+WHAT A CONSEQUENCE NOTE STATES: the release case and its hole, pressure and temperature; the regime; the weather (wind and stability class) and why; the receptor height and whether it is on the centreline; every model named by the method the engine reports; every stated input that is not the engine's own (a pool thickness, a transmissivity, a TNT yield, a radiative fraction and soot fraction); every warning the engine returned; the probit preset and its source; and what the engine did not model.
+
+WHEN TWO METHODS DISAGREE (the surface emissive power, the thermal presets, the two toxic sources), the note says which one it used and why, and shows the other beside it. The disagreement is information.
+
+# SECTION 34: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+Words in this course that already mean something else in the academy, or are easy to shorten wrongly. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| word | what it already means, or the trap | the rule here |
+| --- | --- | --- |
+| flux | a heat flux in W/m2, a burning flux in kg/(m2 s), an evaporation flux and a mass flux all appear in this one course | always qualified: "heat flux", "burning flux", "evaporation flux" or "mass flux" |
+| beta | a vapour fraction, an orifice diameter ratio and a beta factor in other courses | appears only inside "k beta", the Babrauskas product |
+| dose | a radiation dose in occupational hygiene | always "thermal dose", "toxic load" or "toxic dose" |
+| severity | a consequence category on a risk matrix | never used: this course computes effects in physical units |
+| likelihood | a matrix likelihood score, a Bayesian likelihood, a frequency | never used: this course computes no frequency |
+| risk | individual risk, societal risk and the F-N curve belong to the quantitative risk course | "individual risk", "PLL", "F-N" and "ALARP" appear only where the seam is named |
+| radiation | ionising radiation in occupational hygiene | always "heat radiation" or "thermal radiation" |

@@ -1,0 +1,133 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H4 consequence, ASSOCIATE m06 "How Far the Plume Reaches".
+# Digest section 13 (the distance to a concentration: one root from the
+# ground, two roots from a stack, the three states, the round trip, the
+# method, the crosswind falloff), with section 11's reflected plume behind it
+# and the gaussianPlume and plumeDistanceToConcentration rows of section 3.
+
+q(0,
+  "The UBIT release, ground level source and receptor, class D. At what downwind distance does the centreline fall to 100 mg/m3?",
+  "830.322126 m, a single distance with the near distance null.",
+  ["2564.337939 m, the class F distance.",
+   "331.629944 m, the 500 mg/m3 distance.",
+   "656.636313 m, the stack's far root."],
+  "The section 13 table prints REACHED at 830.322126 m for class D and 100 mg/m3, with a near distance of null. 2564.337939 m is class F at the same target. 331.629944 m is the class D distance to 500 mg/m3. 656.636313 m is the far root from the 25 m stack, a different release height.")
+
+q(2,
+  "From a ground level release to a ground level receptor, why does the engine return only a far distance and a null near distance?",
+  "From the ground the concentration falls monotonically with distance, so a target is crossed once.",
+  ["The engine searches outward only, and it reports the first crossing it meets as the far root.",
+   "The near root lies inside 100 m, where the Briggs sigmas carry a warning, so the engine suppresses it and returns null in its place for safety.",
+   "The near root is always at the source, which the plume cannot evaluate, so it is set to null."],
+  "Section 13: from the ground the concentration falls monotonically, so there is one distance. The null is not a suppressed value: there is no second crossing to report. The engine finds roots by bisection and does not hide a root because of the sigma warning, and the source itself is not a root of anything.")
+
+q(3,
+  "Class F against class D for the UBIT release to 20 mg/m3 from the ground: what are the two distances?",
+  "9384.252298 m in class F against 2265.987260 m in class D.",
+  ["2265.987260 m in class F against 9384.252298 m in class D, since the stable class disperses the gas faster and so reaches the target closer in.",
+   "2564.337939 m in class F against 830.322126 m in class D, the distances the table gives for the same pair of classes.",
+   "9384.252298 m in both, since the target sets the distance and the class only sets how quickly the plume gets there."],
+  "The table prints 9384.252298 m for class F and 2265.987260 m for class D at 20 mg/m3. The stable class F keeps the plume thin and near the ground, so it reaches FARTHER; the reversed pair has the classes backwards. 2564.337939 and 830.322126 m are the two classes at 100 mg/m3. The class changes the sigmas and so the distance.")
+
+q(1,
+  "From a 25 m stack, receptor at ground level, class D, the target is 100 mg/m3. What does the engine return, and why two distances?",
+  "REACHED at 221.924194 m and 656.636313 m: the concentration rises from nothing, peaks and falls, so a target below the peak is met twice.",
+  ["REACHED at 830.322126 m only, the same as the ground level release, since the stack changes nothing at the ground.",
+   "NOT_REACHED, since the peak at the ground from a stack is 153.887548 mg/m3.",
+   "REACHED at 150.672013 m and 2151.227430 m, the two roots of a stack plume."],
+  "The stack table prints REACHED with a near distance of 221.924194 m and a far distance of 656.636313 m for 100 mg/m3: from a stack the ground concentration rises, peaks at 153.887548 mg/m3 and falls. 830.322126 m is the ground level release. The peak lies ABOVE 100 mg/m3, so the target is reached. 150.672013 and 2151.227430 m are the roots for 20 mg/m3.")
+
+q(3,
+  "The same 25 m stack is given a target of 500 mg/m3. What does the engine report?",
+  "NOT_REACHED: the peak is 153.887548 mg/m3 at 347.557177 m, below the target, and both distances are null.",
+  ["REACHED at 331.629944 m, the class D distance to 500 mg/m3 that the ground level release gives on the same centreline.",
+   "BEYOND_SEARCH_RANGE, since the engine searched as far as it could and never found the target.",
+   "A refusal, since a target above the peak is an invalid input to `plumeDistanceToConcentration` and must be lowered."],
+  "Section 13: NOT_REACHED means the peak is below the target. The stack's peak is 153.887548 mg/m3 at 347.557177 m and both distances are null. 331.629944 m belongs to the ground level release. BEYOND_SEARCH_RANGE is the other state, for a plume still ABOVE the target where the search stops. A target above the peak is a valid question with an answer, so it is not refused.")
+
+q(0,
+  "What does BEYOND_SEARCH_RANGE mean, and what does the engine do for class F to 20 mg/m3 with the search capped at 2000 m?",
+  "The plume is still above the target at the largest distance searched; the engine says so and returns a far distance of null instead of the cap.",
+  ["The peak is below the target, so no distance meets it; the far distance is set to the 2000 m cap as a bound.",
+   "The distance lies past 10 km, outside the Briggs range, so the engine refuses the call.",
+   "The engine returns 2000 m as the far distance, flagged."],
+  "Section 13: BEYOND_SEARCH_RANGE means still above the target at the largest distance searched, and for class F to 20 mg/m3 with a 2000 m cap it returns a far distance of null. The engine says so instead of returning the cap, so 2000 m is never reported as an answer. A peak below the target is NOT_REACHED. The uncapped class F distance, 9384.252298 m, is inside 10 km, and nothing is refused.")
+
+q(2,
+  "The engine names three states for a distance search. Which one says the peak concentration never reaches the target?",
+  "NOT_REACHED",
+  ["BEYOND_SEARCH_RANGE, because the target lies beyond where the plume can carry the gas at that concentration.",
+   "REACHED with both the near distance and the far distance null, since no crossing of the target was found.",
+   "SUBSONIC, the state for a plume whose peak never reaches the target."],
+  "Section 13 names the three: REACHED, NOT_REACHED (the peak is below the target) and BEYOND_SEARCH_RANGE (still above the target at the largest distance searched). BEYOND_SEARCH_RANGE is the opposite case, a plume that is too strong where the search stops. REACHED always carries a distance. SUBSONIC is a gas outflow regime from section 6.")
+
+q(1,
+  "The distance search returns 830.322126 m for class D and 100 mg/m3. How can the result be checked with the plume itself?",
+  "Run the plume at 830.322126 m: it gives 100.000000 mg/m3, the target, which is the round trip.",
+  ["Run the plume at 830.322126 m and expect 239.712839 mg/m3, the class D reading at 500 m.",
+   "Halve the distance and expect twice the target.",
+   "Compare it with the Purple Book worked case, which prints the distance to 100 mg/m3 for this release in class D at a wind of 3 m/s."],
+  "Section 13: the round trip is that the plume at the far distance returns the target, and at 830.322126 m it gives 100.000000 mg/m3. 239.712839 mg/m3 is the 500 m reading, a different distance. The concentration is not inversely proportional to the distance, since the sigmas grow with distance at their own rates. The Purple Book case is a single concentration at stated sigmas and prints no distance.")
+
+q(0,
+  "A receptor sits 50 m to the side of the centreline, 500 m downwind of the UBIT release in class D. What does it see?",
+  "105.544135 mg/m3, 0.440294 of the centreline.",
+  ["210.227800 mg/m3, 0.876998 of the centreline, the reading the crosswind table gives for a receptor at 20 m.",
+   "239.712839 mg/m3, the centreline itself.",
+   "9.008708 mg/m3, 0.037581 of the centreline."],
+  "The crosswind table prints 105.544135 mg/m3 at 50 m, 0.440294 of the centreline's 239.712839 mg/m3. 210.227800 mg/m3 is the 20 m row and 9.008708 mg/m3 the 100 m row. 239.712839 mg/m3 is the centreline itself, and the plume falls away from it as exp(-y^2 / 2 sigma_y^2) at every crosswind distance.")
+
+q(3,
+  "The distance search reports 830.322126 m for 100 mg/m3 in class D. A receptor stands 100 m to the side at that downwind distance. What does the analyst need to know?",
+  "The distance to a concentration is always a centreline distance, and a receptor to the side sees less.",
+  ["The distance already allows for the crosswind position, since the engine searches along the edge of the plume at one sigma_y.",
+   "The receptor sees exactly the target, because the plume is uniform across its width at any given downwind distance.",
+   "The receptor sees more, since the crosswind term adds a second exponential to the plume that is always greater than one."],
+  "Section 13: the ratio to the centreline is exp(-y^2 / 2 sigma_y^2), and the distance to a concentration is ALWAYS a centreline distance; a receptor to the side sees less. At 500 m in class D the ratio 100 m to the side is 0.037581. The search runs along the centreline, the plume is not uniform across its width, and the crosswind factor never exceeds one.")
+
+q(1,
+  "Which method string does `plumeDistanceToConcentration` report?",
+  "\"root of the ground-reflected Gaussian plume centreline concentration, Briggs rural sigmas; bisection\"",
+  ["\"inverse of the Gaussian plume in closed form, Briggs rural sigmas; exact\"",
+   "\"interpolation in a table of the ground-reflected Gaussian plume centreline concentration at fixed distances\"",
+   "\"pool covers the bund floor; D = sqrt(4 A / pi)\""],
+  "Section 13 quotes the method string verbatim: the engine finds the root of the ground-reflected centreline concentration by bisection, using the Briggs rural sigmas. There is no closed form inverse and no interpolation in a table. The bund string belongs to `poolFromSpill`.")
+
+q(2,
+  "Someone asks the distance search for a target of zero. Which message answers?",
+  "\"targetConcentrationMgM3: must be a concentration above 0 mg/m3\"",
+  ["BEYOND_SEARCH_RANGE, since the plume is still above zero at the largest distance searched.",
+   "NOT_REACHED with both distances null, because a concentration of zero is never reached at any finite distance.",
+   "REACHED at the cap."],
+  "Section 3 tables this refusal on `targetConcentrationMgM3` in those words. A refusal carries no number and no state, so none of the three search states comes back. The argument name also says the target is in mg/m3.")
+
+q(3,
+  "The receptor is placed right at the release point, 0 m downwind. Which refusal comes back?",
+  "\"downwindDistanceM: must be a downwind distance above 0 m: the plume is undefined at the source\"",
+  ["It returns the release rate divided by the wind speed, the concentration at the point of release.",
+   "It returns the 100 m result with a warning that the distance is outside 100 m to 10 km, the range the curves are quoted for.",
+   "\"sigmaYM: a stability class or a sigma_y above 0 m is required\""],
+  "Section 3 gives this refusal on `downwindDistanceM` in those words: the plume is undefined at the source. A refusal carries no number, so nothing is computed at 0 m and nothing is moved to 100 m. The `sigmaYM` message is the refusal for a call with no class and no sigmas.")
+
+q(0,
+  "A plume call gives neither a stability class nor a sigma_y. Which field does the engine name?",
+  "`sigmaYM`: \"sigmaYM: a stability class or a sigma_y above 0 m is required\"",
+  ["`stabilityClass`, with the message listing A, B, C, D, E, F as the classes the table carries.",
+   "`windSpeedMS`, since without a class the engine cannot tell the wind.",
+   "`downwindDistanceM`, since the sigmas depend on the distance and cannot be formed without it."],
+  "Section 3 tables this call, no class and no sigmas, on `sigmaYM` in the quoted words: the plume accepts sigmas in place of a class, as the Purple Book case shows, so it asks for one or the other. The `stabilityClass` message is for a class the table does not carry. The wind and the distance are separate inputs with their own refusals.")
+
+q(1,
+  "From the 25 m stack in class D, where on the ground is the concentration highest, and how high is it?",
+  "At 347.557177 m, where it peaks at 153.887548 mg/m3.",
+  ["At the foot of the stack.",
+   "At 221.924194 m, reaching 100 mg/m3.",
+   "At 656.636313 m, the far root."],
+  "Under the stack the ground reading climbs from nothing, tops out at 153.887548 mg/m3 when 347.557177 m downwind, then declines, so the base of the stack sees the least of it. 221.924194 and 656.636313 m are where the rising and falling limbs cross 100 mg/m3.")
+
+emit(Q, '/root/hse-wip-consequence/banks/h4b_m06.json', expect_n=15)
+finish()

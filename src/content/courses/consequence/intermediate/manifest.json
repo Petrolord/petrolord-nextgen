@@ -1,0 +1,359 @@
+{
+ "app_slug": "consequence",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-how-fast-a-pool-burns",
+   "title": "How Fast a Pool Burns",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-the-solid-flame-model",
+     "title": "The solid flame model",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-babrauskas-burning-flux",
+     "title": "The Babrauskas burning flux",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-when-the-diameter-stops-mattering",
+     "title": "When the diameter stops mattering",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-burgess-form",
+     "title": "The Burgess form",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-flame-length",
+   "title": "The Flame Length",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-thomas-in-still-air",
+     "title": "Thomas in still air",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-thomas-with-wind",
+     "title": "Thomas with wind",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-characteristic-wind-speed",
+     "title": "The characteristic wind speed",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-scaled-wind-speed-held-at-one",
+     "title": "The scaled wind speed held at one",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-flame-length-against-the-wind",
+     "title": "Flame length against the wind",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-tilt-and-surface-emissive-power",
+   "title": "Tilt and Surface Emissive Power",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-flame-tilt",
+     "title": "The flame tilt",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-froude-and-reynolds-numbers",
+     "title": "The Froude and Reynolds numbers",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-surface-emissive-power-from-the-diameter",
+     "title": "Surface emissive power from the diameter",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-radiative-fraction-and-soot",
+     "title": "Radiative fraction and soot",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-view-factor",
+   "title": "The View Factor",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-target-and-a-cylinder",
+     "title": "A target and a cylinder",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-vertical-and-horizontal-view-factors",
+     "title": "Vertical and horizontal view factors",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-maximum-view-factor",
+     "title": "The maximum view factor",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-flame-leaning-toward-the-target",
+     "title": "A flame leaning toward the target",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-flame-over-the-target-is-refused",
+     "title": "A flame over the target is refused",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-transmissivity-and-the-heat-flux",
+   "title": "Transmissivity and the Heat Flux",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-bagster-transmissivity",
+     "title": "The Bagster transmissivity and its range",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-heat-flux-as-a-product",
+     "title": "The heat flux as a product",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-distance-to-a-heat-flux",
+     "title": "The distance to a heat flux",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-point-source-belongs-elsewhere",
+     "title": "The point source belongs to another course",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-a-published-pool-fire-reproduced",
+   "title": "A Published Pool Fire, Reproduced",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-worked-pool-fire-step-by-step",
+     "title": "The worked pool fire, step by step",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-errata-in-the-worked-example",
+     "title": "The errata in the worked example",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-refusals-of-the-fire-half",
+     "title": "The refusals of the fire half",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "cq-fire"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

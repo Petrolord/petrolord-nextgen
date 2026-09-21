@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "With a water vapour partial pressure of 1500 Pa and a path of 30 m from the flame surface, what transmissivity does the Bagster fit return?",
+  "options": [
+   "0.850165",
+   "0.770127",
+   "0.723552",
+   "0.71474"
+  ],
+  "answer": 1,
+  "explanation": "tau = 2.02 (pw x)^-0.09 at pw x = 45000.000000 N/m gives 0.770127. 0.850165 is the 10 m path and 0.723552 the 60 m path; a longer path lets less through. 0.71474 is the transmissivity the Yellow Book pool fire reads from Hottel charts, a stated value from another source."
+ },
+ {
+  "prompt": "At the same 1500 Pa, a caller asks Bagster for the transmissivity over a path of only 5 m. What does the engine return?",
+  "options": [
+   "A transmissivity just above 0.850165, extrapolated from the 10 m row and flagged as a warning",
+   "A transmissivity of exactly one, because the engine caps the fit wherever it would exceed one",
+   "A refusal naming transmissivity, because the distance search needs a fixed value to run on",
+   "A refusal naming pathLengthM, because pw x of 7500.000000 N/m lies below the fit's band"
+  ],
+  "answer": 3,
+  "explanation": "The engine refuses outside 1e4 to 1e5 N/m in its own words: \"pathLengthM: pw x lies outside 1e4 to 1e5 N/m, where the YB advises against the Bagster fit: supply a transmissivity from another source\". It neither extrapolates nor caps: the band is where the Yellow Book advises the fit, and below about 2.5e3 N/m the fit would even exceed one. The refusal naming transmissivity belongs to the distance search."
+ },
+ {
+  "prompt": "In the Bagster fit, what is the path length x measured between?",
+  "options": [
+   "The flame surface and the target",
+   "The centre of the pool and the target",
+   "The tip of the flame and the ground below",
+   "The pool edge and the flame tip"
+  ],
+  "answer": 0,
+  "explanation": "Section 19 defines x as the path length FROM THE FLAME SURFACE to the target, in m, and pw as the partial pressure of water vapour. The pool centre is where the view factor and the distance search measure from. Neither the flame tip nor the ground below it enters the fit."
+ },
+ {
+  "prompt": "Bagster is a single route quantity in section 32. What does that mean for every heat flux a capstone in this course grades?",
+  "options": [
+   "Each one uses Bagster at the stated humidity, and is graded at a looser tolerance",
+   "Each one sets the transmissivity to one, so the air is left out of it",
+   "Each one uses a stated transmissivity, and no Bagster figure is ever graded",
+   "Each one uses Bagster, cross-checked against the Hottel chart values"
+  ],
+  "answer": 2,
+  "explanation": "Nothing but the transcription catches a Bagster mistake, so a single route quantity is taught and never carries a graded answer, and every capstone that needs a transmissivity STATES it. No tolerance is loosened for Bagster, the air is never simply left out, and the Hottel chart value in the Yellow Book example is one stated input, never a check on the fit."
+ },
+ {
+  "prompt": "ERHA runs end to end: the heptane burning flux, Thomas with a 4 m/s wind, the tilt at nu 0.000015 m2/s, the soot surface emissive power and a stated transmissivity of 0.8. What heat flux in W/m2 reaches a target 40 m from the pool centre?",
+  "options": [
+   "3699.568657",
+   "4582.518673",
+   "10412.965226",
+   "12500"
+  ],
+  "answer": 2,
+  "explanation": "The chain gives SEP 52025.691247 W/m2, Fmax 0.250188055557 and q = SEP x F x tau = 10412.965226 W/m2 at 40 m. 3699.568657 is the 60 m row. 4582.518673 is the Yellow Book benzene heat flux at 100 m from its centre. 12500 is a stated target heat flux for the distance search, never a computed one."
+ },
+ {
+  "prompt": "On the same ERHA chain, which Fmax does the engine use for a target 100 m from the pool centre?",
+  "options": [
+   "0.022463264091",
+   "0.008332606429",
+   "0.088888022627",
+   "0.250188055557"
+  ],
+  "answer": 0,
+  "explanation": "The ERHA table prints Fmax 0.022463264091 at 100 m, giving 934.933474 W/m2. 0.008332606429 is the 150 m row, 0.088888022627 the 60 m row and 0.250188055557 the 40 m row."
+ },
+ {
+  "prompt": "Why does the ERHA chain print a refusal field instead of a heat flux for a target 25 m from the pool centre?",
+  "options": [
+   "The target sits inside the 10 m flame base, so the call refuses with distanceFromAxisM",
+   "The heat flux there exceeds 35000 W/m2, which the engine reports as the state NOT_REACHED",
+   "The Bagster band is left behind at that short path, so the call refuses with pathLengthM",
+   "The tilted flame reaches over the target, so the view factor call refuses with tiltDeg"
+  ],
+  "answer": 3,
+  "explanation": "Section 20 says the refusal rows are targets the tilted flame reaches over (section 18), and the 25 m row carries the field tiltDeg. A target 25 m out is beyond the 10 m base radius, so distanceFromAxisM does not apply. NOT_REACHED is a distance search state, never a heat flux refusal. The chain uses a stated transmissivity of 0.8, so Bagster is never called."
+ },
+ {
+  "prompt": "A distance search on the ERHA chain, with the stated transmissivity of 0.8, asks where the heat flux falls to 12500 W/m2. Which distance from the pool centre in m comes back?",
+  "options": [
+   "26.451220",
+   "36.451220",
+   "53.796232",
+   "43.796232"
+  ],
+  "answer": 1,
+  "explanation": "The search returns REACHED at 36.451220 m from the centre. 26.451220 m is the same point measured from the pool edge, ten metres less by the radius. 53.796232 m and 43.796232 m are the centre and edge distances for the 5000 W/m2 target."
+ },
+ {
+  "prompt": "Asked for the distance to 35000 W/m2 on that chain, what state does the search return?",
+  "options": [
+   "REACHED, at a distance lying inside the pool edge",
+   "NOT_REACHED, with the largest heat flux it found",
+   "BEYOND_SEARCH_RANGE, with a far distance of null",
+   "A refusal naming tiltDeg for the close targets"
+  ],
+  "answer": 1,
+  "explanation": "Section 20 tabulates 35000 W/m2 as NOT_REACHED with null distances: a target the heat flux never reaches even at the flame returns NOT_REACHED with the largest heat flux it found. BEYOND_SEARCH_RANGE is the opposite case, a target still exceeded at the search limit. The search reports a state; it does not refuse on the overhanging close targets."
+ },
+ {
+  "prompt": "Why does solidFlameDistanceForHeatFlux refuse to run without a fixed transmissivity?",
+  "options": [
+   "A root search would walk out of the Bagster band, so the engine requires a transmissivity stated in (0, 1]",
+   "Bagster needs a humidity input the distance search function has no argument for, so it cannot be used",
+   "The transmissivity is fixed at 0.8 inside the search, so any value a caller supplies is rejected outright",
+   "The search runs on the point source form, which carries its own transmissivity and needs no stated one"
+  ],
+  "answer": 0,
+  "explanation": "Section 20 gives the reason: a root search would walk out of the Bagster band, so the engine refuses in its own words, \"transmissivity: a fixed transmissivity in (0, 1] is required for a distance search\". The search passes every argument of the chain through, a water vapour partial pressure included, so no humidity argument is missing. The 0.8 in the ERHA chain is a stated teaching input, never a built in value. The search is on the solid flame heat flux; the engine exports no point source model at all."
+ },
+ {
+  "prompt": "What flame base radius does the solid flame chain use in wind, and how does that compare with the Yellow Book's worked step?",
+  "options": [
+   "D/2 stretched downwind by the tilt, which is how the Yellow Book's worked step draws its flame",
+   "A radius equal to the flame length L, so that the cylinder comes out as wide as the flame is tall",
+   "D/2 with no elongation of the base in the wind, which matches the Yellow Book's own worked step",
+   "The radius scaled up by u* above uc, which is the correction the Yellow Book's worked step prints"
+  ],
+  "answer": 2,
+  "explanation": "Section 20 says the flame base radius is D/2 and the engine does not elongate the base in the wind, which matches the Yellow Book's own worked step. The tilt leans the cylinder without stretching its base. The flame length sets a = L / R and never the radius, and u* acts on the flame length alone."
+ },
+ {
+  "prompt": "Which view factor does the heat flux use in the solid flame chain?",
+  "options": [
+   "Fv alone, since a person stands upright to it",
+   "Fh alone, since the target is at ground level",
+   "The plain mean of Fv and Fh at that target distance",
+   "Fmax, the most exposed target orientation"
+  ],
+  "answer": 3,
+  "explanation": "Section 20 states the heat flux uses Fmax, the most exposed target orientation, which is the vector sum of Fv and Fh. Using Fv or Fh alone would pick one orientation, and a mean of the two is neither their vector sum nor any quantity the engine reports."
+ },
+ {
+  "prompt": "Point source heat radiation models and the setbacks they imply do exist in the academy's engines. Where are they taught and graded?",
+  "options": [
+   "In the Facilities courses on relief and flare systems and on layout; this course grades only the solid flame",
+   "In this course, as the fallback the engine uses whenever the solid flame refuses an overhanging target",
+   "In this course's Expert tier, where they are computed side by side with the blast effects of the same release",
+   "Nowhere at all, since the academy retired them once the solid flame model had been validated here"
+  ],
+  "answer": 0,
+  "explanation": "Section 22: the facilities engines carry the point source model and the flare and pool fire setbacks, and the Facilities courses on relief and flare systems and on layout teach and grade them. This engine does not re-expose them, and its validation record carries a test that asserts it exports none of them. The solid flame refusal is never backed by a fallback, and nothing was retired."
+ },
+ {
+  "prompt": "A reviewer asks for the individual risk, the PLL and the F-N curve of the ERHA fire. What does this course say about them?",
+  "options": [
+   "They follow directly from the ERHA heat flux table once a release frequency is typed into poolFireSolidFlame",
+   "They are graded in the capstone at the distance where the ERHA heat flux falls to 5000 W/m2 on the chain",
+   "They belong to the risk matrices of this course, where they are placed against the heat flux column",
+   "They belong to the later quantitative risk course, and this course never computes or grades one"
+  ],
+  "answer": 3,
+  "explanation": "Section 22 says a consequence model answers what happens if the release occurs; how often, and the individual risk, the potential loss of life and the F-N curve that follow, belong to the later quantitative risk course. The engine takes no frequency argument. No capstone grades a frequency or a risk measure, and the academy's risk matrices belong to the risk and change course."
+ },
+ {
+  "prompt": "Where do routine emissions, produced water treatment and tank vapour losses sit relative to this course?",
+  "options": [
+   "They are modelled here with the Gaussian plume, as soon as a routine release rate has been stated",
+   "They are other courses' subjects: this course models an accidental release and nothing routine",
+   "They are handled by the pool fire chain in this tier whenever the stored tank contents are flammable",
+   "They are taken up in the Expert tier's last module, beside the scope the engine drops"
+  ],
+  "answer": 1,
+  "explanation": "Section 22 is plain: routine emissions and their accounting, produced water treatment and tank vapour losses are other courses' subjects, and this course models an accidental release and nothing routine. The plume and the pool fire chain are consequence models of a loss of containment, and no tier of this course takes up routine releases."
+ }
+]

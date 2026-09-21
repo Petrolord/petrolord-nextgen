@@ -1,0 +1,24 @@
+-- ============================================================================
+-- H4 ASSOCIATE DEEP SEED: Consequence Modelling, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/consequence/beginner.
+--
+-- What this tier owns: HOW MUCH GETS OUT AND WHERE DOES IT GO. Liquid outflow
+-- through a hole by Bernoulli, with the static head and the pressure above the
+-- liquid; gas outflow, choked at or below the critical pressure ratio and
+-- subsonic above it, with a ratio exactly at the boundary counted as choked;
+-- a pool on a bund floor or at a stated thickness, and a bund that overtops
+-- refused; Mackay and Matsugu evaporation, taught as a single route
+-- correlation; the Briggs rural sigmas by Pasquill-Gifford class; the
+-- continuous Gaussian plume with ground reflection; ppm and mg/m3 at the
+-- stated temperature; and the distance to a concentration with its three
+-- states. Digest sections 1 to 13, and section 34.
+--
+-- THE TRAP THE TIER IS BUILT ON. A release from a height meets a
+-- concentration twice, and the far root is the one beyond the peak. The
+-- Associate capstone grades three outflows, a pool diameter, an off-axis
+-- concentration and a far distance, and no heat flux, blast or probit.
+-- ============================================================================

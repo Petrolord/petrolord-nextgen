@@ -203,6 +203,10 @@ export const PANELS = {
   'lp-worksheet': React.lazy(() => import('@/components/course/panels/lopa/WorksheetExplorer')),
   'lp-sif-builder': React.lazy(() => import('@/components/course/panels/lopa/SifExplorer')),
   'lp-proof-test': React.lazy(() => import('@/components/course/panels/lopa/ProofTestExplorer')),
+  // H4 Consequence Modelling (academy module hse)
+  'cq-release': React.lazy(() => import('@/components/course/panels/consequence/ReleaseExplorer')),
+  'cq-fire': React.lazy(() => import('@/components/course/panels/consequence/FireExplorer')),
+  'cq-harm': React.lazy(() => import('@/components/course/panels/consequence/HarmExplorer')),
 
   // FC6 Heat Exchange & Cooling
   'fc-exchanger-explorer': React.lazy(() => import('@/components/course/panels/heattransfer/ExchangerExplorer')),
