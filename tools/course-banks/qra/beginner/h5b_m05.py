@@ -1,0 +1,133 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H5 qra, ASSOCIATE m05 "Individual Risk per Annum".
+# Digest sections drawn on: 12 (IRPA over the places one person occupies, the
+# EREMOR operator in hours and supervisor in fractions, one place at a time,
+# the vulnerability factor), and from the refusal table (section 3) the
+# individualRiskPerAnnum rows this module has not already met in m01.
+
+q(2,
+  "Which formula does the basis print for one person's IRPA?",
+  "IRPA = sum LSIR_j x occupancy_j x v_j (v as supplied, default 1)",
+  ["IRPA = sum LSIR_j, the LSIRs of every place a person visits added with no weighting",
+   "IRPA = max LSIR_j x occupancy_j, the single place where the person carries the most individual risk over the year",
+   "IRPA = sum f_i x Pd_i x occupancy, a single occupancy for the whole platform"],
+  "The engine's model string, verbatim, is \"IRPA = sum LSIR_j x occupancy_j x v_j (v as supplied, default 1)\". Adding the LSIRs with no occupancy treats one person as present everywhere all year. Taking the largest place alone drops the others, and the occupancy belongs to each place in turn, since a person is in one place at a time.")
+
+q(3,
+  "The EREMOR operator spends 1000 hours a year on the process deck, 800 in the control room and 2560 in the accommodation (stated). What IRPA does the engine return?",
+  "0.000017541379",
+  ["0.000154803000 per year, the three LSIRs of the places added together with no occupancy applied",
+   "0.000017529373 per year, with every hour count divided by 8766 hours to make the fraction",
+   "0.000016912100 per year, the process deck alone"],
+  "The engine converts each hour count at 8760 hours a year, multiplies each LSIR by its fraction and sums, giving 0.000017541379 per year. Summing the LSIRs with no occupancy gives 0.000154803000, dividing by 8766 gives 0.000017529373, and the process deck alone gives 0.000016912100. Each is a wrong method the digest measures.")
+
+q(1,
+  "What occupancy fraction does the engine give the operator's 1000 hours on the process deck?",
+  "0.114155251142, which is 1000 hours over 8760.",
+  ["0.091324200913, the control room's 800 hours.",
+   "0.292237442922, from the 2560 hours.",
+   "0.497716894977, the operator's whole year across the three places."],
+  "1000 hours over 8760 is an occupancy of 0.114155251142. 0.091324200913 is the control room's 800 hours and 0.292237442922 the accommodation's 2560 hours. 0.497716894977 is the total occupancy over all three places, which is no fraction of any single one.")
+
+q(0,
+  "What total occupancy does the EREMOR operator carry over the year, and what does it say?",
+  "0.497716894977 of the year; the rest of the year the operator is away from all three places.",
+  ["1.000000000000 of the year, the whole year.",
+   "0.114155251142 of the year, the process deck alone.",
+   "The operator's hours in total, left unconverted."],
+  "The engine reports a total occupancy of 0.497716894977 of the year for the operator, so the rest of the year is spent away from these places, where this assessment adds nothing. A roster need not fill the year; the check only stops it going over. 0.114155251142 is the process deck share alone, and the engine reports fractions of the year.")
+
+q(3,
+  "A supervisor is rostered by fraction of the year (0.05, 0.2 and 0.25 across deck, control room and quarters, stated). Which IRPA comes back?",
+  "0.000008743500",
+  ["0.000017541379 per year, the same as the operator's, since both people work on the same three places of the platform",
+   "0.000154803000 per year, since fractions of the year are added to the LSIRs rather than multiplied into them by the engine",
+   "0.000016912100 per year, the operator's process deck share carried over"],
+  "The supervisor's IRPA is 0.000008743500 per year, the sum of each LSIR times the stated fraction. Individual risk per annum belongs to one person, so the operator's 0.000017541379 on the same places does not carry over. 0.000154803000 is the LSIRs summed with no occupancy. 0.000016912100 is the operator's process deck contribution, which belongs to the operator's hours and drops two places as well.")
+
+q(2,
+  "In the operator's IRPA, what does the control room add, and how?",
+  "0.000000597717 per year, its LSIR of 0.000006545000 times an occupancy of 0.091324200913.",
+  ["0.000006545000 per year, the whole control room LSIR, since the operator is in the control room on every shift worked.",
+   "0.000016912100 per year, which is the figure the engine gives the process deck for the operator's hours.",
+   "0.000000031562 per year, the accommodation's share of the operator's IRPA."],
+  "The control room contribution is its LSIR, 0.000006545000 per year, times the operator's occupancy there, 0.091324200913, which the engine returns as 0.000000597717 per year. The whole LSIR would mean presence all year. 0.000016912100 is the process deck contribution and 0.000000031562 the accommodation's.")
+
+q(0,
+  "A person is in one place at a time. How does the engine hold a roster to that?",
+  "The fractions may not exceed one at any place or in total, and the check lets the total reach one exactly.",
+  ["Each fraction may not exceed one, and the total across places is left unchecked so long as each place is inside 0 to 1.",
+   "The total must equal one exactly, so a roster that leaves part of the year unaccounted for is refused by the engine.",
+   "The total may reach 1.1, a margin for overtime."],
+  "The digest says the fractions may not exceed one at any place or in total, and that the occupancy check allows the total to reach one exactly. A roster of 0.6 and 0.5 is refused although each is below one, so the total is checked. A roster need not fill the year; the operator's total is 0.497716894977. The engine allows no margin over the whole year.")
+
+q(1,
+  "A roster gives 'deck' more hours than a year holds. What does the engine say, in its own words?",
+  "locations[0].hoursPerYr: 'deck' must lie in [0, 8760] hours",
+  ["locations: the occupancy fractions sum to more than one",
+   "The hours capped at 8760 and the IRPA formed from them",
+   "locations[0].hoursPerYr: must be above 0 hours"],
+  "Those are the engine's own words from the refusal table for more hours than a year holds. The total occupancy message belongs to a roster whose fractions sum above one, and here the fault is one place's hours. The engine caps no input, the field named is the hours the analyst typed, and a zero hour count is allowed, since the range runs from 0.")
+
+q(2,
+  "The analyst applies a vulnerability factor of 0.5 in the accommodation (stated). What operator IRPA does the engine return?",
+  "0.000017525598",
+  ["Half of the operator's IRPA, since the engine applies the factor to every place the operator occupies",
+   "0.000017541379 per year, unchanged, since the engine ignores a vulnerability factor for individual risk and reports the default",
+   "0.000016912100 per year, the process deck alone"],
+  "With 0.5 applied in the accommodation only, the operator IRPA is 0.000017525598 per year: the accommodation contribution halves and nothing else moves. The factor applies at the place it is supplied for, so it never halves the whole IRPA. The engine uses a supplied factor and says so in the basis; 0.000017541379 is the figure with the default of 1.")
+
+q(0,
+  "Why is the vulnerability factor 1 by default, and whose is it?",
+  "It is the analyst's own: no source the engine read gives a vulnerability factor for individual risk, so the default is 1.",
+  ["It is the Purple Book's: the indoor and outdoor fractions set it, and the engine takes the indoor figure for any building.",
+   "It is the engine's own estimate: it lowers the factor for any place with a stated probability of death below one half.",
+   "It is fixed at 1 and cannot be supplied."],
+  "The digest says the vulnerability factor is the analyst's own, that no source the engine read gives one for individual risk, and so the default is 1 and the basis says what was supplied. The Purple Book indoor and outdoor fractions are for societal risk, and they are no vulnerability factor. The engine estimates nothing, and a factor can be supplied, as the accommodation example shows.")
+
+q(3,
+  "A vulnerability factor above one is supplied for 'deck'. What does the engine return?",
+  "locations[0].vulnerabilityFactor: 'deck' must be a factor in [0, 1]",
+  ["An IRPA in which the deck contribution is raised by half, since a factor above one marks a place that is more dangerous than its LSIR says",
+   "The factor capped at 1, with a note in the basis",
+   "locations[0].occupancyFraction: 'deck': give exactly one of occupancyFraction and hoursPerYr"],
+  "Those are the engine's own words from the refusal table for a vulnerability factor above one. A factor may only reduce a contribution, so no IRPA is formed from it, and the engine caps no input. The message about giving exactly one of the fraction and the hours is real engine text for a different fault.")
+
+q(1,
+  "Why is dividing the operator's hours by 8766 a wrong method here, and what does it give?",
+  "The engine converts hours at 8760, the H3 HOURS_PER_YEAR; 8766 gives 0.000017529373 per year in place of 0.000017541379.",
+  ["The engine converts hours at 8766 to allow for leap years, so dividing by 8766 is right and gives the engine's 0.000017541379.",
+   "The engine takes hours with no conversion, so any divisor is wrong, and dividing by 8766 gives 0.000154803000 per year.",
+   "It gives 0.000016912100 per year, the process deck alone."],
+  "Hours convert at 8760 hours a year, the H3 engine's HOURS_PER_YEAR, and the digest measures the 8766 route at 0.000017529373 per year against the engine's 0.000017541379. 0.000154803000 is the no occupancy sum and 0.000016912100 the process deck alone, which are two other wrong methods.")
+
+q(2,
+  "How much of the operator's yearly figure comes from the hours in the accommodation block?",
+  "0.000000031562 per year, from 2560 hours at an occupancy of 0.292237442922.",
+  ["0.000000108000 per year, the whole accommodation LSIR.",
+   "0.000000597717 per year, the control room share.",
+   "Nothing, since off shift carries no individual risk."],
+  "The accommodation LSIR of 0.000000108000 per year times the occupancy of 0.292237442922 from 2560 hours gives 0.000000031562 per year. The whole LSIR would mean presence all year. 0.000000597717 is the control room contribution. Time off shift still counts wherever the person is, so the accommodation adds its share.")
+
+q(0,
+  "What does an IRPA add to the LSIRs of the places a person visits?",
+  "How long that one person spends at each place, as a fraction of the year, with any vulnerability factor the analyst supplies.",
+  ["The probability of death of that person at each place, worked out by the engine from how far each place sits from the release.",
+   "The number of people at each place, so that the IRPA counts every death at once.",
+   "A new set of scenario frequencies for each place, raised to allow for the extra time the person spends there."],
+  "An IRPA weights each LSIR by the fraction of the year one person spends there, times any vulnerability factor the analyst supplies. Probabilities of death are already inside each LSIR as stated inputs from the consequence course. Counting how many die at once is societal risk and the next tier's question, and the scenario frequencies are the same ones the LSIRs used.")
+
+q(3,
+  "The process deck LSIR is 0.000148150000 per year, yet the operator's IRPA is far smaller. Why?",
+  "The operator spends 0.114155251142 of the year on the deck, so the deck adds 0.000016912100 per year to the IRPA.",
+  ["The engine applies a vulnerability factor of 0.5 to every place by default, which halves each LSIR before it is summed into the IRPA.",
+   "The IRPA takes the smallest LSIR among the places the operator visits, since that is where the operator spends most of the year.",
+   "The IRPA divides the three LSIRs by the number of places visited."],
+  "The deck LSIR assumes presence all the time; the operator is there for 0.114155251142 of the year, so the deck contributes 0.000016912100 per year and the whole IRPA is 0.000017541379. The vulnerability factor defaults to 1 and is the analyst's own. The IRPA weights every place by its occupancy, so it neither picks the smallest LSIR nor averages the places.")
+
+emit(Q, '/root/hse-wip-qra/banks/h5b_m05.json', expect_n=15)
+finish()

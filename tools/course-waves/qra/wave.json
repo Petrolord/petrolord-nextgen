@@ -304,14 +304,14 @@
    "summary": "NEGATIVE CONTROL --plant-seam: expected a [11 seam] finding, caught"
   },
   "gate_copy_rule.py": {
-   "md5": "33dcec7f990062058c51a735fbca2fae",
+   "md5": "57c8e1896224d7969972e2e369606a15",
    "command": "python3 gate_copy_rule.py",
    "expected": 0,
    "exit": 0,
    "summary": "VIOLATIONS: 0"
   },
   "gate_copy_rule.py NEGATIVE CONTROL": {
-   "md5": "33dcec7f990062058c51a735fbca2fae",
+   "md5": "57c8e1896224d7969972e2e369606a15",
    "command": "python3 gate_copy_rule.py --plant",
    "expected": 1,
    "exit": 1,

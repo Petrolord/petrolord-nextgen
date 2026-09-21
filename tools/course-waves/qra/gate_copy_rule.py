@@ -2,7 +2,8 @@
 """GATE: the owner copy rule, over everything a learner reads.
 
 No em dashes, no en dashes, and no "X, not Y" or "X and not Y" contrastive, in
-the digest, in any lesson body or manifest title, and in the three H5 panels, their shared bits
+the digest, in any lesson body or manifest title, in every bank prompt, option
+and explanation, and in the three H5 panels, their shared bits
 and the learning page (the text a learner reads in the app). Headings included.
 
 The digest is swept because every lesson is written from it, so a contrastive
@@ -100,11 +101,24 @@ def main():
                     findings += sweep(os.path.relpath(p, COURSE), '\n'.join(titles))
                     files += 1
                     lines += len(titles)
+    bank_texts = 0
+    bdir = os.path.join(HERE, 'banks')
+    if os.path.isdir(bdir):
+        for n in sorted(os.listdir(bdir)):
+            if not n.endswith('.json'):
+                continue
+            qs = json.load(open(os.path.join(bdir, n)))
+            for k, q in enumerate(qs if isinstance(qs, list) else qs.get('questions', [])):
+                for t in [q.get('prompt'), q.get('explanation')] + list(q.get('options') or []):
+                    if isinstance(t, str):
+                        bank_texts += 1
+                        findings += sweep(f'banks/{n}#{k}', t)
+                        lines += 1
     exempt = [f for f in findings if f[4]]
     bad = [f for f in findings if not f[4]]
     hit = sorted({f[4] for f in exempt})
     dead = sorted(set(ENGINE_TEXT) - set(hit))
-    print(f'  files examined: {files}  (app sources: {app_files}, lesson bodies: {lesson_files}, lesson files on disk: {on_disk})')
+    print(f'  files examined: {files}  (app sources: {app_files}, lesson bodies: {lesson_files}, lesson files on disk: {on_disk}), bank texts: {bank_texts}')
     print(f'  lines and titles examined: {lines}')
     print(f'  exempt engine strings declared: {len(ENGINE_TEXT)}, hit: {len(hit)}, dead: {len(dead)} -> {dead}')
     print(f'  quotations of engine text found: {len(exempt)}')
