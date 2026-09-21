@@ -1,0 +1,34 @@
+{
+ "m3": {
+  "decimals": 2,
+  "match": "^(?:okomu_t1_gross_m3|okomu_t1_standard_m3|okomu_t2_standard_m3|okomu_expected_closing_m3|okomu_unaccounted_m3|okomu_tolerance_m3|ogwashi_pumpable_stock_m3)$"
+ },
+ "prob": {
+  "decimals": 4,
+  "match": "^(?:ogwashi_rack_probability_of_waiting)$"
+ },
+ "min": {
+  "decimals": 2,
+  "match": "^(?:ogwashi_rack_mean_wait_min)$"
+ },
+ "days": {
+  "decimals": 2,
+  "match": "^(?:ogwashi_days_of_cover)$"
+ },
+ "ngnPerLitre": {
+  "decimals": 4,
+  "match": "^(?:ogwashi_cost_per_litre_delivered_ngn|oron_landed_per_litre_ngn|oron_pump_price_ngn|oron_government_share_ngn)$"
+ },
+ "usd": {
+  "decimals": 2,
+  "match": "^(?:oron_cif_usd|oron_landed_total_usd)$"
+ },
+ "fx": {
+  "decimals": 2,
+  "match": "^(?:oron_breakeven_fx)$"
+ },
+ "count": {
+  "decimals": 0,
+  "match": "^(?:ogwashi_trucks_required)$"
+ }
+}

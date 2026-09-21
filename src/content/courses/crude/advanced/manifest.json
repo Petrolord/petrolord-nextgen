@@ -1,0 +1,303 @@
+{
+  "app_slug": "crude",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-linear-programme-is",
+      "title": "What a Linear Programme Is",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-a-recipe-is-a-continuous-decision",
+          "title": "A recipe is a continuous decision",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-an-objective-rows-and-bounds",
+          "title": "An objective, rows and bounds",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-optimum-sits-on-a-vertex",
+          "title": "The optimum sits on a vertex",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-optimal-infeasible-and-unbounded",
+          "title": "Optimal, infeasible and unbounded",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-phases",
+          "title": "Two phases",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-blending-rules-as-rows",
+      "title": "Blending Rules as Rows",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-ratio-limit-becomes-a-row",
+          "title": "A ratio limit becomes a row",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-volume-mass-and-index",
+          "title": "Volume, mass and index",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-rvp-index",
+          "title": "The RVP index",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-viscosity-on-mass-in-the-diesel-pool",
+          "title": "Viscosity on mass in the diesel pool",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-binding-and-giveaway",
+      "title": "Binding and Giveaway",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-the-apapa-recipe",
+          "title": "The Apapa recipe",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-binding-specifications",
+          "title": "Binding specifications",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-giveaway-is-quality-handed-over",
+          "title": "Giveaway is quality handed over",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-pricing-the-giveaway",
+          "title": "Pricing the giveaway",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-shadow-prices",
+      "title": "Shadow Prices",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-the-dual-of-a-row",
+          "title": "The dual of a row",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-relief-per-unit-of-the-property",
+          "title": "Relief per unit of the property",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-index-slope",
+          "title": "The index slope",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-marginal-barrel",
+          "title": "The marginal barrel",
+          "order": 4,
+          "est_minutes": 14,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-checking-a-price-by-re-solving",
+          "title": "Checking a price by re-solving",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-infeasible-refused-and-skipped",
+      "title": "Infeasible, Refused and Skipped",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-infeasible-is-an-answer",
+          "title": "Infeasible is an answer",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-typed-zero-is-none",
+          "title": "A typed zero is none",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-blank-cost-is-refused",
+          "title": "A blank cost is refused",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-specification-not-applied",
+          "title": "A specification not applied",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-bounds-that-cross",
+          "title": "Bounds that cross",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-apapa-pool-end-to-end",
+          "title": "The Apapa pool end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "crude-recipe-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-is-held-and-what-the-oracles-check",
+          "title": "What is held and what the oracles check",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-where-this-course-hands-over",
+          "title": "Where this course hands over",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

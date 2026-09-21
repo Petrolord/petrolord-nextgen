@@ -1,0 +1,25 @@
+-- ============================================================================
+-- H1 EXPERT DEEP SEED: Safety Performance Statistics & KPIs, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/safetystats/advanced.
+--
+-- What this tier owns: WHETHER ANYTHING IS CHANGING. The u-chart with varying
+-- exposure: exposure units, a pooled centre line and limits that move with
+-- each period's hours; a signal lies strictly outside its limits and the
+-- lower limit is floored at zero and flagged; what a signal means, and
+-- revising the limits after a found cause the intervention did not produce;
+-- before and after an intervention, with and without the flagged month;
+-- benchmarking against the IOGP published figures on the same base and the
+-- same definition; the traps in denominators, contractors and
+-- reclassification; and judgement end to end. Digest sections 21 to 27, and
+-- section 28.
+--
+-- THE TRAP THE TIER IS BUILT ON. The centre line is pooled, so every limit is
+-- drawn from the whole series, and a before-and-after comparison can turn on
+-- one flagged month. The Expert capstone grades the centre, two limits, a
+-- revised centre and the two before-and-after p-values that disagree for a
+-- reason.
+-- ============================================================================

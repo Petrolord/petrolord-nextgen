@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "What does the validation oracle oracle_flaretovalue.py rebuild from atomic weights?",
+  "options": [
+   "Molar volume",
+   "The molar masses",
+   "Heating values",
+   "The component liquid densities"
+  ],
+  "answer": 1,
+  "explanation": "In the oracle's list the atomic weights feed one check: \"molar masses rebuilt from atomic weights\". The molar volume has its own source."
+ },
+ {
+  "prompt": "From what does the oracle derive the standard molar volume?",
+  "options": [
+   "From SCF_PER_LBMOL",
+   "From the typical liquid densities in the table",
+   "From the atomic weights of each component",
+   "From the gas constant"
+  ],
+  "answer": 3,
+  "explanation": "The oracle's list derives the standard molar volume from the gas constant. SCF_PER_LBMOL, 379.49, is a constant the engine exports."
+ },
+ {
+  "prompt": "How does the oracle check the flare by the rule?",
+  "options": [
+   "By mass, cross-checked by the engine's own flare figure.",
+   "By the rule's volumetric route alone, with no second route.",
+   "By moles, cross-checked by the rule's own volumetric route.",
+   "By moles, cross-checked against a measured flare's figures."
+  ],
+  "answer": 2,
+  "explanation": "The digest: \"the flare by the rule by moles, cross-checked by the rule's own volumetric route\". The oracle checks independently of the engine, and the digest's preamble says no figure in it is a published analysis or a measured flare."
+ },
+ {
+  "prompt": "The oracle leaves the component heating values and liquid densities unvalidated. What is said of them?",
+  "options": [
+   "They are pinned, and the engine labels them typical.",
+   "They are rebuilt from atomic weights.",
+   "They are derived from the gas constant.",
+   "They are checked by the volumetric route."
+  ],
+  "answer": 0,
+  "explanation": "The oracle \"does not validate the typical heating values and liquid densities: those are pinned, and the engine labels them typical.\" Atomic weights feed the molar masses, the gas constant the standard molar volume, and the volumetric route cross-checks the flare."
+ },
+ {
+  "prompt": "In what form does the oracle carry the gas?",
+  "options": [
+   "In floating point, in pounds and standard cubic feet",
+   "In exact rationals, in pounds and standard cubic feet",
+   "In the engine's own figures, to four decimals",
+   "In exact rationals, in kilograms and cubic metres"
+  ],
+  "answer": 3,
+  "explanation": "The digest: \"the gas in exact rationals carried in kilograms and cubic metres\". Among the engine's own constants is SCF_PER_LBMOL, 379.49 standard cubic feet in one lb-mol."
+ },
+ {
+  "prompt": "Which ledgers does the oracle check on a parcel?",
+  "options": [
+   "The route and credit ledgers, leaving comparison",
+   "The route, credit and comparison ledgers",
+   "The carbon inventory and the MAC curve ledgers",
+   "The discounted cash flow and payback ledgers"
+  ],
+  "answer": 1,
+  "explanation": "The digest lists \"the route, credit and comparison ledgers\" among the oracle's checks. The engine assembles its cash flow and hands it on; it does not discount it."
+ },
+ {
+  "prompt": "In the end-to-end reading, the diesel counterfactual takes the avoided flare of 190032.865 t/yr to a net of 218032.865 t/yr. By which two typed figures, and how?",
+  "options": [
+   "Less a product combustion of 128000, plus a displaced fuel of 156000.",
+   "Less a displaced fuel of 156000, plus a product combustion of 128000.",
+   "Less a product combustion of 128000, plus the net minus the gross flare, 2086.427.",
+   "Times the recovery of 0.88, plus a displaced fuel of 156000."
+  ],
+  "answer": 0,
+  "explanation": "The net abatement is the avoided flare, less what burning the product emits, plus what the product displaces. On the diesel row the product combustion (input) reads 128000 and the displaced fuel (input) 156000. The recovery of 0.88 already sits in the avoided flare, the flare's CO2e times the recovery, and 2086.427 is the net minus the gross flare, a printed result."
+ },
+ {
+  "prompt": "In the end-to-end table of EGBEMA's CNG route, what does the step \"CNG made, kg/yr\" print?",
+  "options": [
+   "2662500.0000",
+   "26.7066",
+   "43345500.0000",
+   "40070.6250"
+  ],
+  "answer": 2,
+  "explanation": "The step table prints CNG made, kg/yr 43345500.0000. 2662500.0000 is the parcel's mscfPerYear, 26.7066 the CNG yield ceiling in kg/Mscf and 40070.6250 the mini LNG route's product in t."
+ },
+ {
+  "prompt": "The end-to-end table prints the CNG route's capital and its gross margin a year. Which pair?",
+  "options": [
+   "29337983.06 and 21008150.00",
+   "29331801.26 and 21008150.00",
+   "29337983.06 and 23840025.00",
+   "27438303.12 and 21008150.00"
+  ],
+  "answer": 0,
+  "explanation": "The table prints capital, dollars 29337983.06 and gross margin, dollars a year 21008150.00. 29331801.26 is the LPG route's capital, 23840025.00 the CNG revenue and 27438303.12 the six-tenths reading on the CNG plant."
+ },
+ {
+  "prompt": "Which step of the end-to-end table sits between the flare CO2e and the net abatement against diesel?",
+  "options": [
+   "the gross claim with no counterfactual, 215946.438 t/yr",
+   "the net against pipeline gas, 190032.865 t/yr",
+   "the avoided flare at the recovery, 202989.652 t/yr",
+   "avoided flare CO2e at the recovery, 190032.865 t/yr"
+  ],
+  "answer": 3,
+  "explanation": "The table runs flare CO2e 215946.438, then avoided flare CO2e at the recovery 190032.865, then net abatement against diesel 218032.865. 202989.652 is gas to power's avoided flare, at 0.94, and the net against pipeline gas is no step of this table."
+ },
+ {
+  "prompt": "The end-to-end table closes on the credit. What does its last step print?",
+  "options": [
+   "breakeven credit price, 16.02 dollars per tonne",
+   "breakeven credit price, 16.0152 dollars per tonne",
+   "lowest tested clearing price, 20 dollars per tonne",
+   "the first price that clears, 40 dollars per tonne"
+  ],
+  "answer": 1,
+  "explanation": "The last step is breakeven credit price, dollars per tonne, 16.0152. The verdict sentence quotes the same price as 16.02, lowestTestedClearingPrice is 20 and the first price in the order typed that clears is 40."
+ },
+ {
+  "prompt": "Read the parcel's value per Mscf step. Which dollar figure is it?",
+  "options": [
+   "8.2404",
+   "4.2447",
+   "7.8904",
+   "8.6040"
+  ],
+  "answer": 2,
+  "explanation": "The step table prints value per Mscf, dollars 7.8904. 8.2404 and 8.6040 are the CNG route's values with its variable or its fixed cost left blank, and 4.2447 is mini LNG's."
+ },
+ {
+  "prompt": "Which figure opens the step-by-step parcel reading, before the product and the capital?",
+  "options": [
+   "CNG yield typed, 18.5 kg/Mscf on the route",
+   "CNG ceiling in the refusal, 26.706618 kg/Mscf",
+   "Minimum volume actual, 7.5000 MMscfd on CNG",
+   "CNG yield ceiling, 26.7066 kg/Mscf"
+  ],
+  "answer": 3,
+  "explanation": "The first step printed is CNG yield ceiling, kg/Mscf 26.7066. The refusal at 30 kg prints the same ceiling to six decimals, 26.706618, and the yield typed and the volume are inputs and screen figures outside the step table."
+ },
+ {
+  "prompt": "The end-to-end table's net abatement step names one counterfactual. Which, at what figure?",
+  "options": [
+   "diesel, at 218032.865 t/yr",
+   "pipeline gas already burned, at 190032.865 t/yr",
+   "a market that burned nothing, at 62032.865 t/yr",
+   "a new load that burned nothing, at -2010.348 t/yr"
+  ],
+  "answer": 0,
+  "explanation": "The step reads net abatement against diesel, t/yr, 218032.865, the figure the bid table also carries on CNG. The pipeline gas and burned nothing nets are the CNG route's other two counterfactuals, and -2010.348 is gas to power's."
+ },
+ {
+  "prompt": "How is the validation oracle said to check flareToValue's figures?",
+  "options": [
+   "By re-running the engine on a second machine",
+   "Against measured flares",
+   "Independently of the engine",
+   "Against the typical heating values"
+  ],
+  "answer": 2,
+  "explanation": "The digest: \"What the validation oracle (oracle_flaretovalue.py ...) checks, independently of the engine\". Every analysis is invented and illustrative, and the typical heating values are what it does not validate."
+ }
+]

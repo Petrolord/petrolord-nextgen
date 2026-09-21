@@ -2,7 +2,7 @@
   "$comment": "Vendoring contract for packages/engines. Checked by tools/check-vendored-engines.mjs; see that file for the model. Every deviation from canonical is enumerated below with a reason, and every differing or extra path is pinned to the blob currently vendored, so a second drift on an already-known path still fails.",
   "canonical": {
     "repo": "git@github.com:Petrolord/petrolord-engines.git",
-    "commit": "5cbdca5fb78cf83771ede4119fb4a92cb7aacaa9",
+    "commit": "df31f538ecbb76aba6bb32a06582968025cbfd38",
     "manifest": "VENDOR.manifest"
   },
   "floors": {
@@ -11,11 +11,6 @@
     "testSuites": 100
   },
   "excludedDomains": [
-    {
-      "domain": "downstream",
-      "engineFiles": 11,
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
     {
       "domain": "wellsite",
       "engineFiles": 11,
@@ -48,72 +43,6 @@
     ]
   },
   "knownDeviations": [
-    {
-      "path": "__tests__/downstream.carbonAbatement.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "__tests__/downstream.crudeAssay.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "__tests__/downstream.energyEfficiency.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "__tests__/downstream.flareToValue.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "__tests__/downstream.fuelPricing.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "__tests__/downstream.lpgCng.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "__tests__/downstream.modularRefinery.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "__tests__/downstream.productBlending.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "__tests__/downstream.refineryPlanning.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "__tests__/downstream.streamModel.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "__tests__/downstream.terminalDepot.test.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
     {
       "path": "__tests__/stratigraphy.agedepth.test.js",
       "kind": "missing",
@@ -239,72 +168,6 @@
       "kind": "missing",
       "group": "0-out-of-scope-domain",
       "reason": "NextGen teaches no wellsite course and ships no wellsite panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/carbonAbatement.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/crudeAssay.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/energyEfficiency.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/flareToValue.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/fuelPricing.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/lpgCng.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/modularRefinery.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/productBlending.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/refineryPlanning.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/streamModel.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
-    },
-    {
-      "path": "engines/downstream/terminalDepot.js",
-      "kind": "missing",
-      "group": "0-out-of-scope-domain",
-      "reason": "NextGen teaches no downstream course and ships no downstream panel; the whole domain is deliberately not vendored (audit Group 0)."
     },
     {
       "path": "engines/stratigraphy/ageDepth.js",
@@ -602,12 +465,6 @@
     },
     {
       "path": "__tests__/importExtensions.test.js",
-      "kind": "missing",
-      "group": "1-test-layer-gap",
-      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
-    },
-    {
-      "path": "__tests__/lp.simplex.test.js",
       "kind": "missing",
       "group": "1-test-layer-gap",
       "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
@@ -1169,8 +1026,8 @@
       "path": "engines/economics/screening.js",
       "kind": "differing",
       "group": "4-economics-revendor",
-      "vendoredSha": "9cc861c81de21005fdbed7083806d354b9d1beda",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "vendoredSha": "9dab5bc3995fd010ec4da833319b6de09989e4fd",
+      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. MD-0 (2026-09-19): the canonical file's additive lossCarryForward option (engines #219, default false) is patched onto this deliberately older copy, and nothing else, because the Commercial & Trading course MD2 (refinery) calls it through engines/downstream/modularRefinery.js feasibilityEconomics. With the option off every economics output is unchanged, so no graded Economics value moves; the rest of the value-moving pull still waits for its recut."
     },
     {
       "path": "engines/economics/voi.js",
@@ -1724,48 +1581,6 @@
       "group": "local-only",
       "vendoredSha": "e54c1b25a05e2fc5102c020a44ea2957688e7b66",
       "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
-    },
-    {
-      "path": "__tests__/hse.exposure.test.js",
-      "kind": "extra",
-      "group": "h2-hygiene-course",
-      "vendoredSha": "d3b4c56d74031a4ab9d2900ee6a2327dc83c45d3",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Re-vendored for #220 (nioshHeatAssessment renames its refusal message with its field). Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
-    },
-    {
-      "path": "engines/hse/exposure.js",
-      "kind": "extra",
-      "group": "h2-hygiene-course",
-      "vendoredSha": "3495ebf0d4e97bf6e369b7bf1fd4c9a6f8e436b9",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Re-vendored for #220 (nioshHeatAssessment renames its refusal message with its field). Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
-    },
-    {
-      "path": "test-data/hse/goldens/exposure_cases.json",
-      "kind": "extra",
-      "group": "h2-hygiene-course",
-      "vendoredSha": "093b3e617b6e778f59c9ffea3ab0b69478c27129",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Byte-identical between 870cc8f and b43f1d9. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
-    },
-    {
-      "path": "tools/validation/hse/FINDINGS-exposure.md",
-      "kind": "extra",
-      "group": "h2-hygiene-course",
-      "vendoredSha": "3e8329d34b36592045e77afc1abd300837b9a4aa",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Re-vendored for #220 (nioshHeatAssessment renames its refusal message with its field). Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
-    },
-    {
-      "path": "tools/validation/hse/negcontrol_exposure.sh",
-      "kind": "extra",
-      "group": "h2-hygiene-course",
-      "vendoredSha": "154de162b147441e4aac96f895011808a8ba081c",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Byte-identical between 870cc8f and b43f1d9. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
-    },
-    {
-      "path": "tools/validation/hse/oracle_exposure.py",
-      "kind": "extra",
-      "group": "h2-hygiene-course",
-      "vendoredSha": "beffe81b17738b0c61704441c84983b1b97c5d66",
-      "reason": "H2 hygiene course: vendored sha-identical from petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217) by the wave's vendor_hygiene.sh, 24 proofs. Byte-identical between 870cc8f and b43f1d9. Extra only because the canonical pin predates the engine; clears as STALE when the pin moves to b43f1d9 or later."
     }
   ]
 }

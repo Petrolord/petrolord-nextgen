@@ -1,0 +1,130 @@
+{
+ "tiers": {
+  "beginner": {
+   "record": "OKOMU",
+   "prompt": "OKOMU DEPOT, Ologbo Energy Depots Ltd (an invented record). Tank OK-1 is a vertical AGO tank whose strapping table starts at the empty tank (0 mm, 0.000 m3) and is linear between entries; the entries either side of this morning's dip are 8400 mm 2282.417 m3 and 8600 mm 2336.761 m3, and either side of the water cut 0 mm 0.000 m3 and 200 mm 54.343 m3. Dip 8437 mm, water cut 143 mm, VCF 0.9868 read off the depot's own tables. Tank OK-2 is a horizontal PMS bullet whose table also starts at the empty tank; the entries either side of the dip are 2200 mm 94.464 m3 and 2300 mm 99.354 m3, and either side of the water cut 0 mm 0.000 m3 and 100 mm 1.171 m3. Dip 2265 mm, water cut 38 mm, VCF 0.9811 off the same tables. The day, all at standard: yesterday's closing stock 2498.45 m3, receipts 1180 m3, deliveries 1352.6 m3, known losses 1.4 m3; the closing dip is the two tanks' standard volumes together; the tolerance is 0.18 percent of throughput. Give six numbers in m3, each to two decimals, a loss as a negative number. (1) OK-1's gross observed volume. (2) OK-1's standard volume. (3) OK-2's standard volume. (4) The expected closing stock. (5) The unaccounted figure. (6) The tolerance.",
+   "fields": [
+    {
+     "key": "okomu_t1_gross_m3",
+     "source": "OKOMU OK-1: terminalDepot.dipToStandardVolume(...).grossM3",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "okomu_t1_standard_m3",
+     "source": "OKOMU OK-1: terminalDepot.dipToStandardVolume(... vcf typed).standardM3",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "okomu_t2_standard_m3",
+     "source": "OKOMU OK-2: terminalDepot.dipToStandardVolume(... vcf typed).standardM3",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "okomu_expected_closing_m3",
+     "source": "OKOMU day: terminalDepot.reconcileStock(...).expectedClosingM3",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "okomu_unaccounted_m3",
+     "source": "OKOMU day closed on the two standard volumes: terminalDepot.reconcileStock(...).unaccountedM3",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "okomu_tolerance_m3",
+     "source": "OKOMU day: terminalDepot.reconcileStock(...).toleranceM3",
+     "decimals": 2,
+     "tol": 0.01
+    }
+   ]
+  },
+  "intermediate": {
+   "record": "OGWASHI",
+   "prompt": "OGWASHI DEPOT, Anioma Fuel Logistics Ltd (an invented record). The loading rack: trucks arrive at random at 14 an hour, a load takes 26 minutes on average, and there are 7 bays. The tank farm: OG-1 (PMS) capacity 6200 m3, heel 180 m3, stock 4127.5 m3; OG-2 (PMS) capacity 4400 m3, heel 140 m3, stock 18.6 m3; OG-3 (AGO) capacity 2800 m3, heel 92 m3, stock 1873.9 m3. The farm's liftings are 1760 m3 a day, and it receives 1240 m3 a day by pipeline. The lane to its stations, every cost in naira and invented for the course: 238 km each way, a 42000 litre payload, 43 km/h average, 1.75 h to load, 1.25 h to discharge, 2.5 h queueing, diesel at 41 litres per 100 km and 1285 a litre, driver 72500 a trip, maintenance 52 and tyres 31 a km, tolls and levies 33500 a trip, overhead 46000 a trip, a truck costing 118000000 over 7 years, 14 working hours a day and 310 days a year, a transit loss of 0.25 percent. The stations take 2350000 litres a day. Give six numbers. (1) The probability that an arriving truck waits for a bay, to four decimals. (2) The mean wait for a bay in minutes, to two decimals. (3) The farm's pumpable stock in m3, to two decimals. (4) The farm's days of cover on its liftings, to two decimals. (5) The lane's cost per litre delivered in naira, to four decimals. (6) The number of trucks the lane needs, a whole number.",
+   "fields": [
+    {
+     "key": "ogwashi_rack_probability_of_waiting",
+     "source": "OGWASHI rack: terminalDepot.rackQueue(...).probabilityOfWaiting",
+     "decimals": 4,
+     "tol": 0.0001
+    },
+    {
+     "key": "ogwashi_rack_mean_wait_min",
+     "source": "OGWASHI rack: terminalDepot.rackQueue(...).averageWaitMinutes",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "ogwashi_pumpable_stock_m3",
+     "source": "OGWASHI farm: terminalDepot.tankFarmCover(...).pumpableStockM3",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "ogwashi_days_of_cover",
+     "source": "OGWASHI farm on its liftings: terminalDepot.tankFarmCover(...).daysOfCover",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "ogwashi_cost_per_litre_delivered_ngn",
+     "source": "OGWASHI lane: fuelPricing.truckingEconomics(...).costPerLitreDelivered",
+     "decimals": 4,
+     "tol": 0.0001
+    },
+    {
+     "key": "ogwashi_trucks_required",
+     "source": "OGWASHI fleet on the lane's trips: fuelPricing.fleetSizing(...).trucksRequired",
+     "decimals": 0,
+     "tol": 0.5
+    }
+   ]
+  },
+  "advanced": {
+   "record": "ORON",
+   "prompt": "ORON JETTY, Cross River Estuary Energy Ltd (an invented record). An AGO cargo of 28500 tonnes at 838.2 kg/m3, FOB 742.5 USD a tonne, ocean loss 0.35 percent, 1487.6 naira to the dollar. Every rate is INVENTED for the course and none is a published figure: Ocean freight 31.4 USD per tonne; Marine insurance 0.175 percent of CIF; Import duty 6.25 percent of CIF; Port and harbour charges 2.85 USD per tonne; Regulatory and inspection charges 0.0019 USD per litre; Jetty throughput and discharge 1.35 USD per m3; Storage and handling 2.1 USD per m3; Financing and letter of credit 1.25 percent of CIF; Demurrage provision 48000 USD for the cargo. Freight builds C&F, insurance builds CIF, and every other line is levied on landing; a percent-of-CIF insurance is part of the value it is charged on. The pump build-up starts from the landed cost per litre sold as the app carries it, to four decimals, and adds in order, every element invented: Depot and terminal margin (Terminal) 18.5 naira a litre; Bridging or equalisation (Chain) 26 naira a litre; Transport to station (Transporter) 22.75 naira a litre; Marketer margin (Marketer) 17.25 naira a litre; Dealer margin (Dealer) 29.5 naira a litre; Statutory levies at the pump (Government) 8.4 naira a litre; Value added tax (Government) 5.5 percent of the running total. The price cap is 1390 naira a litre. Give six numbers. (1) CIF in USD, to two decimals. (2) The landed total in USD, to two decimals. (3) The landed cost per litre sold in naira, to four decimals. (4) The pump price in naira a litre, to four decimals. (5) The government's share of that price in naira a litre, to four decimals. (6) The exchange rate, searched between 1200 and 1800 naira to the dollar, at which the pump price meets the cap, to two decimals.",
+   "fields": [
+    {
+     "key": "oron_cif_usd",
+     "source": "ORON cargo, insurance on CIF: fuelPricing.landedCost(...).cif",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "oron_landed_total_usd",
+     "source": "ORON cargo: fuelPricing.landedCost(...).totalUsd",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "oron_landed_per_litre_ngn",
+     "source": "ORON cargo: fuelPricing.landedCost(...).perLitreLocal",
+     "decimals": 4,
+     "tol": 0.0001
+    },
+    {
+     "key": "oron_pump_price_ngn",
+     "source": "ORON pump: fuelPricing.buildPumpPrice({ landedPerLitre: perLitreLocal, ... }).pricePerLitre",
+     "decimals": 4,
+     "tol": 0.0001
+    },
+    {
+     "key": "oron_government_share_ngn",
+     "source": "ORON pump: fuelPricing.marginWaterfall(...) group Government amountPerLitre",
+     "decimals": 4,
+     "tol": 0.0001
+    },
+    {
+     "key": "oron_breakeven_fx",
+     "source": "ORON: fuelPricing.priceSensitivity over ORON_FX_VALUES against ORON_CAP, breakeven.value",
+     "decimals": 2,
+     "tol": 0.01
+    }
+   ]
+  }
+ }
+}

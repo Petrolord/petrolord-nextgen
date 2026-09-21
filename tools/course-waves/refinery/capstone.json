@@ -1,0 +1,131 @@
+{
+ "periodStart": "2027-03-01",
+ "tiers": {
+  "beginner": {
+   "record": "IKARAMA",
+   "prompt": "IKARAMA MODULAR REFINERY, Ikarama Petroleum Refinery Ltd. Every price is illustrative, in US dollars. A vendor quoted a 12000 bpd plant at 150 million dollars; the sponsor studies a conversion plant of 8000 bpd with the configuration's screening yields, 335 on-stream days a year, under the tight supply scenario, crude at 71 dollars a barrel before any premium, a fixed operating cost of 9.4 million dollars a year, a variable operating cost of 4.1 dollars a barrel, 2 construction years and 20 operating years. Product prices a barrel: lpg 51.5, gasoline 106.4, kerosene 98.7, diesel 102.9, fuelOil 56.2. Give six numbers. (1) The capital cost by the modular scaling law, to the whole dollar. (2) The capital cost by the stick-built scaling law, to the whole dollar. (3) The gross value of the product slate per barrel of crude, to the cent. (4) The annual crude throughput under the scenario, to the whole barrel. (5) The gross margin per barrel of crude under the scenario, to the cent. (6) The revenue in the first operating year, to the whole dollar.",
+   "fields": [
+    {
+     "key": "ikarama_modular_capex_usd",
+     "class": "usd",
+     "source": "IKARAMA: modularRefinery.scaleCapex({baseCost, baseCapacity, capacity, exponent: SCALING_EXPONENT.MODULAR}).cost",
+     "tol": 0.5
+    },
+    {
+     "key": "ikarama_stick_built_capex_usd",
+     "class": "usd",
+     "source": "IKARAMA: modularRefinery.scaleCapex({..., exponent: SCALING_EXPONENT.STICK_BUILT}).cost",
+     "tol": 0.5
+    },
+    {
+     "key": "ikarama_gross_value_per_bbl",
+     "class": "per_bbl",
+     "source": "IKARAMA: modularRefinery.productSlate({productYields: CONFIGURATIONS.conversion.productYields, prices}).grossValuePerBbl",
+     "tol": 0.005
+    },
+    {
+     "key": "ikarama_annual_throughput_bbl",
+     "class": "bbl",
+     "source": "IKARAMA under tight supply: modularRefinery.feasibilityStreams(...).annualBbl",
+     "tol": 0.5
+    },
+    {
+     "key": "ikarama_gross_margin_per_bbl",
+     "class": "per_bbl",
+     "source": "IKARAMA under tight supply: modularRefinery.feasibilityStreams(...).grossMarginPerBbl",
+     "tol": 0.005
+    },
+    {
+     "key": "ikarama_first_year_revenue_usd",
+     "class": "usd",
+     "source": "IKARAMA under tight supply: feasibilityStreams(...).years[constructionYears].revenue",
+     "tol": 0.5
+    }
+   ]
+  },
+  "intermediate": {
+   "record": "AMASSOMA",
+   "prompt": "AMASSOMA REFINERY, Amassoma River Refining Ltd: the plan for one month. Every price is illustrative, in US dollars; yields are volume fractions. Streams: naphtha, reformate, kero, gasoil, ulsd, residue, offgas. Crudes: Amenam Blend (illustrative) at 79.4 dollars a barrel, up to 1600000 barrels, yields naphtha 0.24, kero 0.16, gasoil 0.3, residue 0.27, offgas 0.03; Okono (illustrative) at 76.1 dollars a barrel, up to 1200000 barrels, yields naphtha 0.17, kero 0.14, gasoil 0.33, residue 0.34, offgas 0.02; Qua Iboe (illustrative) at 75.2 dollars a barrel, availability typed as 0 (the cargo was cancelled), yields naphtha 0.25, kero 0.15, gasoil 0.31, residue 0.26, offgas 0.03. Units: Crude distillation, capacity 2300000 barrels, operating cost 1.35 dollars a barrel, no feed (the crude unit); Naphtha reformer, capacity 380000 barrels, operating cost 2.85 dollars a barrel, feed naphtha, yields reformate 0.86, offgas 0.09; Diesel hydrotreater, capacity 600000 barrels, operating cost 1.9 dollars a barrel, feed gasoil, yields ulsd 0.97, offgas 0.02. Products: Gasoline at 109.5 dollars a barrel, up to 400000 barrels, made from reformate 1; Naphtha export at 71.8 dollars a barrel, up to 250000 barrels, made from naphtha 1; Jet A-1 at 104.2 dollars a barrel, up to 350000 barrels, made from kero 1; Diesel (ULSD) at 103.6 dollars a barrel, up to 700000 barrels, made from ulsd 1; Gasoil export at 88 dollars a barrel, up to 300000 barrels, made from gasoil 1; Fuel oil at 58.3 dollars a barrel, up to 900000 barrels, made from residue 1. Every demand floor is 0. Give six numbers from the optimal plan. (1) The total crude run, to the whole barrel. (2) The crude unit's utilisation, in percent to two decimals. (3) The plan margin for the month, to the whole dollar. (4) The gross margin per barrel of crude, to the cent. (5) What one more barrel of naphtha is worth to the plan, in dollars a barrel to the cent. (6) What one more barrel of gasoil is worth to the plan, in dollars a barrel to the cent.",
+   "fields": [
+    {
+     "key": "amassoma_crude_run_bbl",
+     "class": "bbl",
+     "source": "AMASSOMA: refineryPlanning.planRefinery(...).totalCrude",
+     "tol": 0.5
+    },
+    {
+     "key": "amassoma_cdu_utilisation_pct",
+     "class": "pct",
+     "source": "AMASSOMA: planRefinery(...).unitRuns[crude unit].utilisation x 100",
+     "tol": 0.005
+    },
+    {
+     "key": "amassoma_plan_margin_usd",
+     "class": "usd",
+     "source": "AMASSOMA: planRefinery(...).margin",
+     "tol": 0.5
+    },
+    {
+     "key": "amassoma_gross_margin_per_bbl",
+     "class": "per_bbl",
+     "source": "AMASSOMA: planRefinery(...).grossMarginPerBbl",
+     "tol": 0.005
+    },
+    {
+     "key": "amassoma_naphtha_value_per_bbl",
+     "class": "per_bbl",
+     "source": "AMASSOMA: planRefinery(...).streamBalance[naphtha].marginalValue",
+     "tol": 0.005
+    },
+    {
+     "key": "amassoma_gasoil_value_per_bbl",
+     "class": "per_bbl",
+     "source": "AMASSOMA: planRefinery(...).streamBalance[gasoil].marginalValue",
+     "tol": 0.005
+    }
+   ]
+  },
+  "advanced": {
+   "record": "KOLOAMA",
+   "prompt": "KOLOAMA REFINERY, Koloama Energy Refining Ltd. Every price is illustrative, in US dollars; yields are volume fractions. THE MONTH: the plan for the 31-day period starting 2027-03-01, cascaded with a cargo size of 450000 barrels, is the plan ledger. Streams: naphtha, reformate, kero, gasoil, residue, offgas. Crudes: Usan (illustrative) at 77.7 dollars a barrel, up to 900000 barrels, yields naphtha 0.2, kero 0.14, gasoil 0.32, residue 0.31, offgas 0.03; Yoho (illustrative) at 80.6 dollars a barrel, up to 500000 barrels, yields naphtha 0.27, kero 0.16, gasoil 0.3, residue 0.24, offgas 0.03. Units: Crude distillation, capacity 1350000 barrels, operating cost 1.3 dollars a barrel, no feed (the crude unit); Naphtha reformer, capacity 240000 barrels, operating cost 2.95 dollars a barrel, feed naphtha, yields reformate 0.87, offgas 0.08. Products: Gasoline at 109.8 dollars a barrel, up to 260000 barrels, made from reformate 1; Jet A-1 at 103.7 dollars a barrel, up to 200000 barrels, made from kero 1; Diesel at 101.3 dollars a barrel, up to 450000 barrels, made from gasoil 1; Fuel oil at 59.4 dollars a barrel, up to 600000 barrels, made from residue 1. Every demand floor is 0. What the month did, one movement a material and type (a delivery's value is what it sold for): usan receipt 935000 barrels, 73304000 dollars; yoho receipt 205000 barrels, 16676750 dollars; cdu unit_run 1140000 barrels, 1527600 dollars; reformer unit_run 226500 barrels, 684030 dollars; gasoline delivery 197100 barrels, 21799260 dollars; jet delivery 158900 barrels, 16358755 dollars; diesel delivery 361200 barrels, 36788220 dollars; fuel_oil delivery 338400 barrels, 19847160 dollars; lpg delivery 7500 barrels, 361500 dollars. THE EXPANSION: a second hydroskimming train of 7500 bpd with the configuration's screening yields, capital by the modular scaling law from a quotation of 95 million dollars for 10000 bpd, 338 on-stream days, firm supply, crude at 72.5 dollars a barrel, fixed operating cost 8.8 million dollars a year, variable operating cost 3.4 dollars a barrel, 2 construction years, 15 operating years, tax rate 30 percent, discount rate 10 percent, product prices a barrel lpg 50.8, gasoline 107.1, naphtha 74.6, kerosene 99.3, diesel 103.4, fuelOil 57.6, valued as the Modular Refinery Feasibility Studio values it. Give six numbers. (1) The price variance on the Usan crude receipts, to the whole dollar. (2) The volume variance on the diesel lifts, to the whole dollar. (3) The month's total variance on margin across the matched lines, to the whole dollar. (4) The total variance on the cost lines as recorded, to the whole dollar. (5) The expansion's tax in the first year it pays any, in millions of dollars to four decimals. (6) The expansion's total tax over its life, in millions of dollars to four decimals.",
+   "fields": [
+    {
+     "key": "koloama_usan_price_variance_usd",
+     "class": "usd",
+     "source": "KOLOAMA: reconcilePeriod({planEvents: cascadeToSchedule(plan).events, actualEvents}).lines[usan receipt].priceVariance",
+     "tol": 0.5
+    },
+    {
+     "key": "koloama_diesel_volume_variance_usd",
+     "class": "usd",
+     "source": "KOLOAMA: reconcilePeriod(...).lines[diesel delivery].volumeVariance",
+     "tol": 0.5
+    },
+    {
+     "key": "koloama_margin_variance_usd",
+     "class": "usd",
+     "source": "KOLOAMA: reconcilePeriod(...).total.totalVariance (the margin basis)",
+     "tol": 0.5
+    },
+    {
+     "key": "koloama_cost_variance_usd",
+     "class": "usd",
+     "source": "KOLOAMA: reconcilePeriod(...).total.cost.totalVariance",
+     "tol": 0.5
+    },
+    {
+     "key": "koloama_first_tax_mm",
+     "class": "mm",
+     "source": "KOLOAMA expansion: feasibilityEconomics(...).cashflow[first year with tax > 0].tax, millions of US dollars",
+     "tol": 0.00005
+    },
+    {
+     "key": "koloama_lifetime_tax_mm",
+     "class": "mm",
+     "source": "KOLOAMA expansion: the sum of feasibilityEconomics(...).cashflow[].tax, millions of US dollars",
+     "tol": 0.00005
+    }
+   ]
+  }
+ }
+}

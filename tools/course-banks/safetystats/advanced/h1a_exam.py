@@ -1,0 +1,323 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H1 Expert final exam, 42 questions, seven from each module's ground.
+# Figures from digest Sections 21 to 27 (EGBEMA, the golden u-chart cases, the
+# before-and-after comparison, the IOGP benchmark, AMUKPE, KWALE, the monitoring
+# note) with recalls from Sections 2, 4, 7, 9, 10, 11, 13, 17 and 19. Every
+# figure is printed in the digest. AMUKPE's further reclassification is the one
+# whole-number answer (edge about 10.58, key 10). The month 3 question asks for
+# the count ON the printed limit (just under 5), because the smallest signalling
+# count is not 5 on the engine: a changed count re-pools the centre, and the
+# redrawn chart needs 6 (second-reader audit, AUDIT-advanced.md).
+
+# ---- the u-chart ----
+
+q(2, "EGBEMA's month 12 recorded 4 events in 405240 hours. On the 200,000 hour base, what u does the chart plot for it?",
+ "1.974139 per 200,000 hours, the 4 events over the month's 2.026200 exposure units",
+ ["2.026200, the month's exposure units, since a u-chart plots each month's share of the base",
+  "4, the month's count, since a u-chart plots the events recorded in each month directly",
+  "2.893273, the pooled centre line, since a month that does not signal is plotted on the centre"],
+ "Units are hours over the base, 405240 over 200,000, and u is the count over the units, the month's rate on the base: 1.974139. The units are the denominator of u. Plotting raw counts would ignore the exposure the chart is built to carry. Every month is plotted at its own u, and the centre is the line it is judged against.")
+
+q(1, "EGBEMA's 63 events sit on 21.774650 exposure units. What does that second figure measure?",
+ "The whole year's hours divided by the 200,000 hour base, which is the denominator of the centre line",
+ ["The sum of the twelve monthly u values, whose average is the chart's centre line of 2.893273 per 200,000 hours",
+  "The headcount on site averaged across the year and divided by 100, the OSHA base's 100 full-time workers",
+  "The number of base periods in the year that recorded at least one event, since a unit is one eventful month"],
+ "Each month's units are its hours over the base, so the sum is the year's hours over the base, and 63 over it gives the pooled centre, 2.893273. The mean of the monthly u is a different figure, 3.202958. The engine takes hours and has no headcount input. A unit is one base's worth of hours, whatever happened in it.")
+
+q(2, "EGBEMA's month 4 has an upper limit of 7.084918, the second widest on the chart after month 3. Why?",
+ "Its 296410 hours give 1.482050 units, the second fewest on the chart, and fewer units mean a wider band",
+ ["Its u of 3.373705 is the second highest among the quiet months, and the band widens with the reading",
+  "Its 5 events are the second highest count in the first half, and the band is set by the month's count",
+  "Its limit is drawn from the average month's exposure, which the engine uses for every month before month 7"],
+ "The limit is ubar + 3 sqrt(ubar / n_i), so after month 3's 0.486150 units, month 4's 1.482050 give the next widest band. A month's own u and count play no part in its limits. Limits from the average exposure are an approximation that would give every month one band, and it fails worst on a month as thin as month 3; the engine uses each month's own units throughout.")
+
+q(3, "An analyst draws EGBEMA's centre at 3.202958, the mean of the monthly u, and builds the limits around it. What goes wrong?",
+ "Every limit is measured from a centre that gives the thin month 3 a full twelfth of the weight, so the whole band sits too high",
+ ["Nothing, since the mean of the monthly u and the pooled centre agree on any chart whose months carry similar counts of recordable events",
+  "Only the lower limits move, since the upper limits depend on each month's units alone and ignore where the centre sits",
+  "The chart flags more months, since a higher centre narrows every band and so pushes the high months over their moving upper lines"],
+ "The engine's centre is sum then divide, 2.893273, weighting each month by its units. The mean lifts the centre because month 3's 8.227913 rests on 0.486150 units yet counts one twelfth, and every limit, upper and lower, is ubar plus or minus 3 sqrt(ubar / n_i), so both move up with it. A higher centre widens each band, since ubar sits under the square root, and so flags fewer months. The two figures differ on EGBEMA whatever the counts look like.")
+
+q(2, "An analyst prints EGBEMA's raw lower limits, which are negative, in place of the engine's 0.000000. What is wrong with that?",
+ "A negative limit is a line no month could cross, since no count falls below zero; the engine floors it at zero and flags it",
+ ["Nothing, since a negative lower limit lets a month with zero events signal low, which a floor at zero would hide",
+  "The negative limit would flag every month below, since each u is further from the centre than a negative limit allows",
+  "The negative limit changes the upper limits too, since the engine sets the band's width from the lower limit it prints"],
+ "No rate can be negative, so a limit below zero suggests a precision that is not there. The engine sets it to zero and says so with `lclFloored` true, which is the declared choice. Either way no month can signal low: a u of zero is not strictly below zero, and still less below a negative line. The upper limit is ubar plus the same square root term and does not depend on how the lower one is printed.")
+
+q(0, "`pooledRate` accepts a mothballed site with 0 hours and 0 events, returning a null period rate. `uChart` refuses a period with no hours. Why the difference?",
+ "A pooled rate only sums counts and hours, so an empty period adds nothing; a chart has to place every point, and a point with no hours has nowhere to go",
+ ["The pooled rate is computed on the million-hour base, where a period with no hours rounds to a very small exposure and can safely be carried",
+  "The u-chart refuses the period only when it also carries events, and a mothballed site with no events would be charted at a u of zero",
+  "The two functions were written to different standards, and the engine's u-chart follows a stricter data rule that the pooled rate lacks"],
+ "The u-chart's refusal names the zero-hour field and tells the caller to drop that period first. A point's u and limits both divide by its units, and zero hours give zero units. The chart refuses a zero-hour period whether or not it carries events, and the base plays no part. The pooled rate sums, so an empty period leaves the pooled figure at 0.968312.")
+
+q(1, "AKASO's 15 months include month 5, a shutdown with no hours. What should be passed to `uChart`, and what happens if all 15 months go in as they stand?",
+ "The 14 months with hours; passed whole, the engine refuses and names `exposureHours[4]`, the zero-based index of month 5",
+ ["All 15 months; the engine charts month 5 at a u of 0.000000 and floors its lower limit, as it does for any quiet month",
+  "The 14 months with hours; passed whole, the engine refuses and names `exposureHours[5]`, since its fields count from month 1",
+  "The 13 months other than months 5 and 11, since the short month of 18240 hours is refused as well for being too thin"],
+ "A period with no hours must be dropped before charting, and the refusal names the first zero-hour index, which is zero-based, so month 5 is `exposureHours[4]`. The engine never charts a zero-hour period. Month 11 is thin, 18240 hours, and thin is legitimate data: the chart simply gives it a wide band.")
+
+# ---- signals ----
+
+q(2, "Which EGBEMA month would signal at 2 sigma that does not signal at the engine's 3 sigma?",
+ "Month 3, whose u of 8.227913 clears its derived 2 sigma limit of 7.772371 and sits inside its 3 sigma limit",
+ ["Month 8, whose u of 7.599326 clears its derived 2 sigma limit of 5.237783, a band it does not clear at 3 sigma",
+  "Month 4, whose u of 3.373705 clears its derived 2 sigma limit of 5.687703 on its 1.482050 exposure units",
+  "No month, since the 2 sigma and 3 sigma bands flag the same months on any chart with a pooled centre line"],
+ "Month 8 signals at both bands, 7.599326 against 6.410039 at 3 sigma and 5.237783 at 2 sigma, so it adds nothing new. Month 3 is the one extra flag: 8.227913 against 7.772371 at 2 sigma and against 10.211920 at 3 sigma. Month 4's 3.373705 is below 5.687703. A narrower band flags more months, which is its cost.")
+
+q(1, "In the golden case uchart-points-on-the-limits, ubar is 1 and each point carries 9 units, so the limits are exactly 0 and 2. Point 1 recorded 18 events and point 2 recorded 0. Had point 1 recorded 19, what would the engine return for the two points?",
+ "above for point 1 and below for point 2: the extra event lifts the pooled centre and the lower limit off zero",
+ ["above for point 1 only, since one point's count leaves the other point's limits and its signal exactly as they were",
+  "null for both, since a single event more than the limit is within the rounding the engine allows",
+  "above for point 1 and null for point 2, since a u of zero sits on a lower limit that stays at zero"],
+ "The centre is pooled, so 19 events on 18 units lift it above 1, and both points share that centre and their 9 units. The upper limit rises too, but u rises faster, and 19 over 9 lies strictly above it: point 1 returns above. The lower limit, the centre minus 3 times the square root of the centre over 9, is exactly 0 at a centre of 1 and rises above 0 as the centre rises, so point 2's u of 0.000000 now lies strictly below it and returns below. Changing one count redraws the whole chart. The engine applies no rounding allowance.")
+
+q(1, "On the golden low-point chart, point 1 recorded 48 events in 5000000 hours: a u of 1.920000 against limits of 0.936592 and 2.512443. What does the engine return for it?",
+ "null: its u lies between its limits, and only point 4, at 0 events, falls outside and signals below",
+ ["below, since its u of 1.920000 is under the 2.000000 that most of the other points on the chart read",
+  "above, since its 48 events on 5000000 hours sit at the top of the chart's range of monthly counts",
+  "below, since any point under the centre line on a chart with positive lower limits is a low signal"],
+ "A signal needs a u strictly outside the point's own limits: 1.920000 lies between 0.936592 and 2.512443. Sitting under the other points' readings or under the centre is ordinary variation. Of the seven points, only point 4, 0 events in 4800000 hours against a lower limit of 0.920345, signals, and the golden reads it as a case for checking the reporting.")
+
+q(0, "In the golden small-exposure case, points 1 and 2 carry 2000 hours each and point 3 carries 400000. Why is point 3's upper limit, 4.965310, so much tighter than their 44.196051?",
+ "Point 3 has two hundred times their hours, so its distance from the centre is smaller by the square root of two hundred",
+ ["Point 3 recorded only 1 event, and the engine tightens a point's upper limit when its count is small",
+  "Point 3's hours exceed the base, and the engine draws a point above the base on a tighter scale than the rest",
+  "Point 3 has two hundred times their hours, so its distance from the centre is two hundred times smaller"],
+ "The golden's note: two thin periods: limits scale with 1/sqrt(n_i). The distance from the centre to the limit is 3 sqrt(ubar / n), so two hundred times the units shrinks it by the square root of two hundred. A count plays no part in its limit, and the engine treats every point on one scale whatever its hours.")
+
+q(2, "The engine's method line fixes the limits at 3 sigma. What does that convention accept, in exchange for flags that are usually worth investigating?",
+ "That a modest real change may take a while to show on the chart",
+ ["That a real change of any size will be missed until a year has closed",
+  "That every flag on a stable process will turn out to be a real change",
+  "That months with few hours are left off the chart until they fill up"],
+ "Three sigma is a trade: fewer flags on a stable process, each usually worth the investigation, at the price of detecting a modest change more slowly. A large change can still signal in the month it happens, as month 8 does. Flags on a stable process are mostly chance at any band. Thin months stay on the chart with wide limits.")
+
+q(3, "Month 3 on EGBEMA had 0.486150 units, an upper limit of 10.211920, and 4 events. What count would sit exactly on that printed limit?",
+ "Just under 5, the limit times the units, so on the drawn chart month 3's 4 events sit about one event inside it",
+ ["About 10, since the upper limit of 10.211920 is itself a count of events and needs no conversion before it is read",
+  "Exactly 4, since month 3's u of 8.227913 already sits on its upper limit once the reading is rounded",
+  "About 21, the limit divided by the units, since a rate per unit becomes a count by dividing by the units"],
+ "The count on the limit is the limit times the units, 10.211920 times 0.486150, which is just under 5, so 4 events sit about one event inside the line as drawn. The limit is a rate per 200,000 hours and becomes a count only when multiplied by the units, and being near a limit is never a signal under the strict rule. A what-if count typed into the panel is a new chart: the added events lift the pooled centre and month 3's limit with it, so a what-if is judged on the redrawn chart.")
+
+q(3, "A reader notices that month 11's u of 1.018563 is the lowest on EGBEMA and asks whether it signals low. What is the answer?",
+ "It cannot: like every month on this chart its lower limit is floored at zero, and a u above zero is inside",
+ ["It does, since the lowest u on a chart falls below the lower limit once the centre is pooled",
+  "It would, if month 8 were set aside first, since the revised centre lifts every lower limit above zero",
+  "It does, since a month whose u is under half the centre line is flagged below by the engine"],
+ "Every EGBEMA lower limit is 0.000000 with `lclFloored` true, so no month on this chart can signal low. Setting month 8 aside lowers the centre to 2.389523, which lowers every lower limit further. The engine has no half-the-centre rule; a signal is strictly outside the limits.")
+
+# ---- what a signal means ----
+
+q(2, "EGBEMA's month 9 recorded 4 events on 1.934700 units. At the centre line it would be expected to carry 5.597615. How does month 9 read?",
+ "As an ordinary month a little below the centre, inside its limits, with no signal to explain",
+ ["As a low signal, since 4 events is well short of the 5.597615 that the centre line expects of it",
+  "As proof of improvement, since it follows month 8's 16 events with a count of only 4",
+  "As a data fault, since an expected count of 5.597615 cannot be met by any whole count of events"],
+ "Its u of 2.067504 sits inside limits of 0.000000 and 6.561947, and an ordinary month falls a little above or below its expected count. A low signal needs u strictly below the lower limit, which is floored at zero here. A month read after the worst month proves nothing by itself. An expected count is a mean, so it need not be a whole number.")
+
+q(3, "Month 8 is set aside on a found cause. Which totals give EGBEMA's revised centre of 2.389523?",
+ "The remaining 47 events over the remaining units, 21.774650 less month 8's 2.105450",
+ ["The 63 events over the remaining units, since the events of a set-aside month stay in the count",
+  "The mean of the eleven remaining monthly u values, since a revised chart is centred on the kept months",
+  "The remaining 47 events over all 21.774650 units, since the hours of a set-aside month stay in"],
+ "The centre is sum then divide, so setting month 8 aside removes its 16 events and its 2.105450 units together, leaving 47 events on the rest. Dropping a month's events and keeping its hours, or the reverse, describes no period at all. The mean of the kept u values is the mean-of-rates mistake on the revised chart.")
+
+q(3, "The investigation finds that a backlog of cases from earlier months was entered in month 8's register. Which family of cause is that, and what changes if it is confirmed?",
+ "A change in counting: month 8's count falls and the earlier months carry the cases they really belong to",
+ ["A change in the work: the count stays in month 8, since a case belongs to the month in which it was entered",
+  "A change in the hours: month 8's hours rise to match the backlog, and its count stays where it is",
+  "A change in the workforce: the backlog shows new starters in month 8, so the month stays as drawn"],
+ "The Expert tier lists a backlog of earlier cases entered in one month as a counting change: it moves the count without the usual link to the month's work. Confirmed, the cases go back to the months they occurred in, which changes those months' counts as well as month 8's. The hours are unaffected. Nothing about the work or the workforce is implied by a backlog.")
+
+q(1, "On the all-months before-and-after comparison, twice the smaller tail is a derived 1.015454. Which p-value does the engine report?",
+ "1.000000, because the central p-value is twice the smaller tail, capped at 1",
+ ["1.015454, because the central p-value is twice the smaller tail with no cap applied",
+  "About half of 1.015454, because the engine reports the smaller tail itself as its p-value",
+  "0.241552, because the engine reports the comparison with the flagged month set aside"],
+ "The method line says central two-sided p-value (twice the smaller tail, capped at 1). A probability cannot exceed 1, so 1.015454 is reported as 1.000000. Halving the doubled tail gives one tail, which is a different test. 0.241552 is the other row, with month 8 set aside, which needs a found cause.")
+
+q(1, "With month 8 set aside, the engine returns a central p-value of 0.241552. The programme lead reports half of it, as a one-tailed test of improvement. What is wrong?",
+ "The one tail was chosen after seeing the direction, and the engine's p-value is central, twice the smaller tail",
+ ["Nothing, since a programme that aims to lower the rate is entitled to a one-tailed test of that aim once the result is in",
+  "Nothing, since halving the central p-value is how the minlike convention of R and of scipy reports the same test",
+  "Only the rounding, since half of 0.241552 must be quoted to six decimals like every other p-value"],
+ "The engine reports the central p-value and says so in its method line; a one-tailed figure chosen once the ratio is seen to be below 1 tests a question nobody declared in advance. Minlike is a different rule, and no fixed factor converts it to the central value. And this row stands only if month 8 had a found cause unrelated to the intervention, so halving its p-value compounds one flattering choice with another.")
+
+q(0, "An analyst compares EGBEMA's 35 events after the intervention with 28 before and calls it a rise of a quarter, as if the two periods had equal hours. What does the engine's comparison say?",
+ "On the actual hours, 2389010 after and 1965920 before, the rate ratio is 1.028627, and the test conditions on each period's share of the hours",
+ ["The same rise of a quarter, since the conditional test compares the two counts directly and the hours only set the base of the ratio",
+  "A fall, since the after period has more hours, and the conditional test always divides the larger count by the larger number of hours",
+  "Nothing at all, since the engine refuses to compare two periods whose hours differ by more than a tenth of the larger period's hours"],
+ "Equal hours is a real wrong method: the after period worked more hours, so its extra events are partly extra exposure. Given 63 events and equal rates, the after period's share of events is binomial with its share of the hours as the probability, and the ratio of rates is 1.028627 with an interval of 0.607952 to 1.755328. The engine has no hours-difference refusal; a group with no hours is what it refuses.")
+
+q(3, "Many points on a site's chart are as thin as EGBEMA's month 3. What remedy does the Expert tier offer, and at what cost?",
+ "Chart by quarter, so each point carries more exposure and tighter limits; a change then shows only once a quarter has closed",
+ ["Draw the limits at 2 sigma, so the thin months signal as readily as the full ones, at no cost in extra investigation work for anyone",
+  "Drop the thin months from the chart, so that only full months are judged, at the cost of a shorter chart to read",
+  "Chart by week, so each point is fresher and its limits react faster, at the cost of a longer table to maintain"],
+ "Pooling the hours into coarser points raises each point's units, so the limits tighten and a real change can show; the price is waiting for the quarter to close, and the grain is chosen and stated before the chart is read. A narrower band adds flags that are mostly chance. Thin months are legitimate data. Weekly points would be thinner still.")
+
+# ---- benchmarking ----
+
+q(1, "Which pair of IOGP figures reproduces the published 2023 observed FAR of 0.82?",
+ "27 fatalities in 3291382000 hours, which the engine rates at 0.820324 per 100,000,000 hours",
+ ["32 fatalities in 4158877000 hours, which the engine rates at 0.769438",
+  "21 fatal incidents in 4158877000 hours, which the engine rates at 0.504944 per 100,000,000 hours",
+  "3071 recordables in 3795000000 hours, which the engine rates at 0.809223 per 1,000,000 hours"],
+ "The 2023 golden row is 27 fatalities in 3291382000 hours: 0.820324, which IOGP prints as 0.82, with a relative difference of 0. The 32-fatality row is 2024's FAR, the 21-incident row is 2024's fatal incident rate, and 3071 recordables give the 2024 TRIR on the million-hour base.")
+
+q(0, "UGHELLI recorded 0 fatalities in 2318640 hours, an observed FAR of 0.000000. How does it compare with IOGP's 2024 observed FAR of 0.769438?",
+ "It says little: a zero on a few million hours bounds the rate from above, and that bound is what an interval supplies",
+ ["It shows UGHELLI safer than the industry, since any rate of zero sits below a published rate above zero",
+  "It shows UGHELLI's true rate is zero, since an observed FAR of zero is exact on any number of hours",
+  "It cannot be computed, since the engine refuses a FAR with no fatalities as a rate over no events"],
+ "A zero FAR on a few million hours says little. The IOGP figure rests on billions of hours; UGHELLI's rests on 2318640, and a zero count only bounds the rate from above, as the Professional tier's zero-count interval showed. The engine returns 0.000000 without complaint, since a count of zero is a whole number, zero or more.")
+
+q(1, "A company reports its LTIF, lost time cases per million hours, beside IOGP's 2024 TRIR of 0.81 on the same base. What is wrong with the comparison?",
+ "A lost time count leaves out the restricted work and medical treatment cases a TRIR includes, so the two measure different harm",
+ ["Nothing, since both rates sit on the million-hour base and so the one base check that matters most has already been passed in full",
+  "The bases differ, since an LTIF is quoted per 200,000 hours and the TRIR per 1,000,000 hours by IOGP's own convention",
+  "Only the rounding, since IOGP prints two decimals and the company's LTIF is quoted to six in its report"],
+ "Same base is necessary and not sufficient: the definitions must match too. A lost time count leaves out restricted work and medical treatment cases, so it will sit under a TRIR however the site performs. The name printed beside a number is not something the engine checks; the case class is the caller's count. The base in the prompt is already shared.")
+
+q(3, "UGHELLI's ratio to the IOGP 2024 TRIR has a 95 percent interval of 2.191251 to 9.117590. Which row of the Professional tier's IMO ladder does its width most resemble?",
+ "The 10-event row, where the upper limit was 3.835008 times the lower, since UGHELLI rests on 9 events",
+ ["The 100-event row, where the upper limit was 1.494848 times the lower, since IOGP rests on 3071 events",
+  "The 1-event row, where the upper limit was 220.068159 times the lower, since a ratio compounds two counts",
+  "The 5-event row, where the upper limit was 7.187207 times the lower, since UGHELLI has 4 DART cases"],
+ "The interval's width is almost all UGHELLI's, 9 events, so its upper over its lower limit is of the order the ladder shows near 10 events. IOGP's 3071 events make its rate behave nearly like a constant, so they do not set the width. The IOGP side adds almost nothing, so the width is not compounded. The recordable ratio rests on the 9 recordables, and the DART count is a different class.")
+
+q(0, "Which two statements can UGHELLI's comparison with the IOGP 2024 TRIR support, with the base and definition checks holding?",
+ "Its rate on the IOGP base, 3.881586, is well above the published 0.81, and the ratio's lower limit, 2.191251, is above 1",
+ ["It ranks in the worst tenth of IOGP members, and its p-value of 0.000301 measures how far it sits from the typical member",
+  "Its rate is 4.796684 times every member company's rate, and the interval shows how much the member companies differ",
+  "Its rate is below IOGP's, since 0.776317 is under 0.809223, and the p-value of 0.000301 confirms the difference"],
+ "The two safe statements are the gap on a shared base and the fact that the gap exceeds UGHELLI's own count uncertainty. A ranking needs a distribution of company rates, which the pooled figure does not carry. The ratio is to the pooled membership, and its interval is UGHELLI's uncertainty, which says nothing about how members differ. 0.776317 is on the 200,000 hour base and cannot be set beside a million-hour figure.")
+
+q(1, "Which is the one rate in the engine with a fixed base, and why is it fixed?",
+ "The FAR, on 100,000,000 hours, because the engine takes IOGP's definition; every other rate is quoted on more than one base",
+ ["The TRIR, on 200,000 hours, because OSHA's base is the legal default and every other rate is converted to it by the engine",
+  "The PSE rate, on 1,000,000 hours, because API RP 754 names one base and the engine rejects every other base for it",
+  "The severity rate, on 200,000 hours, because ANSI Z16.1 fixed its base and the engine follows that standard exactly"],
+ "`fatalAccidentRate` takes no base argument; its basis reads 100000000 and IOGP safety performance indicators, FAR. Other bodies frame a fatal rate differently, per worker-year or per working lifetime, so a FAR quoted from elsewhere needs its definition checked. Every other function requires a named base and refuses a missing one, so the engine never guesses. There is no default base. The PSE rate accepts 200,000 or 1,000,000, and the severity rate takes a required base with no ANSI Z16.1 time charges added.")
+
+q(0, "What does pooling five years of IOGP data into one observed FAR buy, and what does it cost?",
+ "More fatalities under one figure, so it is steadier; the price is that a real change shows only slowly, diluted by earlier years",
+ ["An exact rate with no scatter, since five years of fatalities remove the count uncertainty of any single year altogether",
+  "A figure that tracks the most recent year closely, since the latest year always carries the largest share of the hours",
+  "A fairer weighting of the years, since pooling gives each of the five years an equal fifth of the published figure"],
+ "A single year's observed FAR rests on a few dozen fatalities and moves; pooling steadies it, and 0.826095 hides the 2022 peak of 1.279566. More events shrink the uncertainty without removing it. The latest year carries the largest share on this series, 4158877000 hours, and still shares the figure with four others. Pooling weights by hours; equal fifths is the mean of the yearly rates, 0.833228.")
+
+# ---- the traps ----
+
+q(0, "A report divides all 13 of AMUKPE's site recordables by the company's 846200 hours alone. What does that do to the rate?",
+ "It inflates it: the count includes contractors whose hours are left out, so the rate describes no workforce",
+ ["It gives the fair company rate, since the company is responsible for every event that is recorded on its site",
+  "It deflates it, since the contractors' events are spread thinly over the company's hours and so count for less",
+  "It gives the fair site rate, since company hours are the only hours an operator can verify for itself"],
+ "Events and hours must describe the same workforce, both in or both out. This is the opposite mismatch to dividing company events by everyone's hours, and it errs the other way, upward. The fair company rate is 4 events over 846200 hours, 0.945403, and the fair site rate is 13 over 2238950, 1.161259. Either direction of mismatch breaks the rate.")
+
+q(3, "Why does AMUKPE's site rate of 1.161259 sit closer to the contractors' own rate than to the company's 0.945403?",
+ "The contractors worked most of the site's hours, 1392750 of 2238950, so they carry most of the weight in the pooled rate",
+ ["The contractors recorded more events, 9 of 13, and a pooled rate weights each group by its share of the events",
+  "The site rate is the mean of the two groups' rates, and the mean always sits closer to the higher of the two group rates",
+  "The contractors' rate is closer to IOGP's, and a site rate is pulled toward the published benchmark for the year"],
+ "A pooled rate is a weighted average of the group rates with hours as the weights, so the group with most of the hours dominates. The contractors worked 1392750 of the 2238950 hours. The weights are hours, and the event count is what is being averaged. The mean of the two rates would weight the groups equally. No benchmark enters a pooled rate.")
+
+q(2, "After 2 of AMUKPE's recordables are reclassified the site rate is 0.982603. How many further cases would need to move to first aid to bring it below the company-only 0.945403?",
+ "One more, taking the count to 10 on the same 2238950 hours",
+ ["None, since 0.982603 is already below the company-only figure of 0.945403 on these hours",
+  "Two more, since the rate falls by the same step each time and one step is not quite enough",
+  "Three more, since the fall must also clear the rate of 1.161259 recorded before the review"],
+ "The company-only rate on the site's hours corresponds to a count between 10 and 11, so 11 cases sit above it and 10 below. One more relabelling reverses the comparison with no change on site, which is why a note reports every reclassification. 0.982603 is above 0.945403. The pre-review 1.161259 is not the target in the question.")
+
+q(3, "A site launches a programme after its worst quarter, and the next quarter comes in better. What should the note say before crediting the programme?",
+ "That a quarter picked for being the worst is likely to be followed by a better one even with no change, and compare whole fixed periods",
+ ["That the programme worked, since a better quarter straight after the launch is the most direct evidence a note can offer",
+  "That the programme failed, since a real programme would show its effect in the worst quarter itself before the launch date",
+  "Nothing about the timing, since a reader is best served by the figures alone and the launch date is an internal matter"],
+ "A period chosen because it was extreme is followed by a more ordinary one: partly because chance made it extreme, or because a one-off cause does not recur. Either way the fall arrives with no programme. The comparison that counts fixes the periods before the data are read, and the note says the baseline was the peak. Nothing launched after a quarter can act on that quarter.")
+
+q(0, "In KWALE's mean of site rates, what weight does the jetty carry, and what weight in the pooled rate?",
+ "One third, 0.333333, in the mean of rates, and its share of the hours, 0.024805, in the pooled rate",
+ ["Its share of the hours, 0.024805, in both, since each of the two methods weights a site by its exposure",
+  "One third in both, since the pooled rate and the mean of rates weight all three sites exactly the same",
+  "Its share of the events, 1 of 12, in the pooled rate, and one third in the mean of site rates"],
+ "The mean of rates gives each of the three sites the same weight whatever its hours. The pooled rate weights each site by its share of the hours, and the jetty's is 61480 over 2478540, which is 0.024805. The pooled rate is the rate of the whole workforce; the mean weights a jetty crew like a flow station. Events are what is averaged, and hours are the weights.")
+
+q(0, "Mean of rates over pooled figure: KWALE 1.754760 over 0.968312, AKASO's first window 2.026485 over 1.208038, EGBEMA 3.202958 over 2.893273, IOGP 0.833228 over 0.826095. Which ratio is smallest, and why?",
+ "IOGP's, because no year's hours are a tiny fraction of another's, so the equal weights differ little from the hours",
+ ["KWALE's, because its three sites give the fewest periods to average, and fewer periods to average always narrow the gap",
+  "EGBEMA's, because a u-chart centre is exempt from the mean-of-rates mistake by the way the whole of the chart is drawn",
+  "AKASO's, because its shutdown month is left out of the mean, which pulls its mean toward its rolling rate"],
+ "The gap depends on how uneven the exposures are. IOGP's years run from 2544201000 to 4158877000 hours, so equal weights are close to the hours; KWALE's jetty carries 0.024805 of the hours and a third of the mean, which is why KWALE's ratio is printed as 1.812185. EGBEMA's thin month 3 opens a real gap too. Leaving out a no-hours period is correct and does not close AKASO's gap, which comes from the short month.")
+
+q(2, "A corporate dashboard averages the TRIRs of its five business units, one of which is a small office. What does the Expert tier say about the result?",
+ "It is the mean-of-rates mistake one level up: the small office gets a full vote, and the figure can sit anywhere",
+ ["It is sound, since each business unit is a separate report and deserves an equal share of the group's published figure",
+  "It is sound once every unit uses the same base, since the base is the only thing that the averaging of rates can distort",
+  "It is conservative, since an average of rates always sits above the pooled rate and so errs toward caution"],
+ "Small units with high rates, thin months and minor sites all carry a full vote in a mean. The group rate is sum then divide, which needs every unit's counts and hours defined the same way. A shared base is necessary for any combination and does not repair the weighting. The mean sat above the pooled figure on every stream in this course, and that direction is a property of those streams.")
+
+# ---- judgement end to end ----
+
+q(2, "Month 8's cause was found and recorded. What does the revision part of EGBEMA's monitoring note say?",
+ "That month 8 was set aside on that cause, the revised centre is 2.389523, and the revised chart flags no month",
+ ["That month 8 and month 3 were set aside, since both readings were high, giving a cleaner and lower revised centre line",
+  "That no revision was made, since a revised chart can only be drawn once the next year's data have arrived",
+  "That the limits were narrowed to 2 sigma, since a revised chart is always drawn on a narrower band than the first"],
+ "The revision part says whether the chart was redrawn, which months were set aside and the cause for each. With month 8's cause found, the revised centre is 2.389523 and nothing is flagged, both results the engine returned. Month 3 had no cause, and a high reading is not one. Revision redraws the same 3 sigma chart on the months kept, as soon as the cause is found.")
+
+q(3, "A draft of EGBEMA's before-and-after section reads: ratio 1.028627, p-value 1.000000. What else must it state?",
+ "The intervention month, the months on each side, any month set aside, the counts and hours, and the interval 0.607952 to 1.755328",
+ ["Nothing more, since the ratio and the p-value together are the full result of the conditional exact test for the two periods",
+  "The minlike p-value beside the central one, since a reader must see both conventions before judging whether the change is real or not",
+  "The mean of the monthly rates on each side, since the rate ratio needs the average monthly rate to be read by a manager"],
+ "A before-and-after claim says which months it used and why: months 1 to 6 against 7 to 12, the intervention at month 7, any month set aside with its cause, 35 events in 2389010 hours against 28 in 1965920, and the interval. The interval is what shows that large effects either way remain possible. The engine's convention is central. Rates on each side are pooled, and a mean of monthly rates is the wrong figure.")
+
+q(1, "A caller asks `pseRate` for a Tier 1 rate on the 100,000,000 hour base. What comes back?",
+ "It is refused. The field named is `base`, and the engine's message reads: base must be 200,000 or 1,000,000 for an API RP 754 PSE rate",
+ ["A rate per 100,000,000 hours, since the FAR base is accepted by every rate function in the engine without exception",
+  "A refusal naming `tier`, since the FAR base is reserved for fatalities and so cannot carry any API RP 754 process safety event tier",
+  "A rate converted to the 200,000 hour base, since the engine quietly rescales an unsupported base to the OSHA default before it rates the count"],
+ "API RP 754 rates sit on the 200,000 or 1,000,000 base, consistent with the basis for the company's occupational injury rate, and the engine refuses the FAR base for a PSE rate. The refusal names the base field and carries no number. The engine never rescales a base and has no default one.")
+
+q(3, "On review, one of UGHELLI's 4 Tier 2 events is proposed for reclassification as Tier 1. What must be seen before accepting it, and why can the engine not see it?",
+ "The classification of the release against API RP 754's threshold quantities, which are licensed and are not in the engine",
+ ["The engine's own Tier check on the release, which it runs whenever a PSE count changes from one call to the next",
+  "The new Tier 1 rate from `pseRate`, since a rate the engine accepts has already been classified correctly by it",
+  "The days lost in the event, since the engine classifies a release as Tier 1 when its severity rate passes a set threshold"],
+ "The tier is an input: the engine rates a count it is given and cannot classify a release, because the threshold quantity tables are licensed content absent from the engine, the golden and this course. It keeps nothing between calls, a rate it returns says nothing about the classification behind it, and it never classifies from days lost.")
+
+q(1, "The engine tables 22 refusals across 9 functions. What do they have in common?",
+ "Each is about the shape of an input, such as a fraction, zero hours, a missing base or a tier of 3; none refuses a wrong classification",
+ ["Each is a warning attached to a returned rate, so the caller receives a number together with a note of what was wrong with it",
+  "Each is about a figure outside a plausible range, such as a rate above the IOGP benchmark or a count far above its expected value",
+  "Each names the function that failed and leaves the offending field unnamed, so the caller has to search the inputs for the cause"],
+ "A refusal carries no number and names the field, with the engine's message verbatim. Every one concerns the form of what was passed. Nothing in the engine refuses a count that was classified wrongly, and it carries no benchmark rates to judge plausibility against. That is why the classification questions belong to the analyst and the note.")
+
+q(2, "Why does the Expert tier want the engine's central p-value, and not a minlike one, in a note that also quotes the rate-ratio interval?",
+ "The central p-value falls below 0.05 exactly when the interval excludes 1 on all 399 comparisons swept; the minlike one disagrees on 14",
+ ["The minlike p-value is always larger than the central one, so a note that uses it would understate every change it reports",
+  "The central p-value is the convention of R's poisson.test and of scipy, so a reader can check the engine's figure directly",
+  "The rate-ratio interval is computed from the p-value, so any p-value convention yields an interval that agrees with it"],
+ "The engine uses the central convention because it is the test the Clopper-Pearson interval inverts, and the course's sweep over 399 UTOROGU comparisons confirms the agreement. On UTOROGU itself the minlike value, 0.025879, is smaller than the central 0.051759 and disagrees with an interval that includes 1. Minlike is the convention of R and scipy, which is why a reader may see a different number there. The interval is computed on its own.")
+
+q(0, "A monitoring note says only: no signals this year. What must it add for the reader to judge that claim?",
+ "What the chart could have seen: the exposure behind each point, any floored lower limits, and the thinnest month's limit",
+ ["Nothing, since a year with no signals has shown the process was stable at every exposure the chart covered",
+  "The mean of the monthly rates, since a quiet chart is best summarised for a reader by the average of its monthly readings",
+  "A 2 sigma redraw, since a chart that flags nothing at 3 sigma must be narrowed until it shows at least one flagged month on it"],
+ "A quiet chart can be a chart with too little exposure per point to see anything, and floored lower limits mean it could never have found a fall. Naming the thin months and their limits tells the reader how strong the quiet is. The pooled rate with its interval summarises the year. Narrowing a band after seeing the chart chooses the band to make a flag.")
+
+emit(Q, '/root/hse-wip-safetystats/banks/h1a_exam.json', expect_n=42)
+finish()

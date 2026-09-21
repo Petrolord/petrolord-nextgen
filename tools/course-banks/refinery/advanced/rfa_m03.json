@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "How does a matched ODIOMA variance line get its direction of cost or revenue?",
+  "options": [
+   "From the sign of the line's total variance: positive reads revenue, negative cost.",
+   "From whether the line's value rose or fell against the plan.",
+   "From its event type: a delivery is revenue, a receipt or unit_run is cost.",
+   "From the unit value on the line: above plan reads revenue, below it reads cost."
+  ],
+  "answer": 2,
+  "explanation": "A delivery's value is what it sold for, so a delivery line is revenue. Every other event's value is what it cost, so a receipt line and a unit_run line are cost. The table bears it out: escravos reads a positive total and forcados a negative one, and both are cost lines."
+ },
+ {
+  "prompt": "The escravos receipt line reads a total variance of 11607000.00. What margin effect does the engine give it?",
+  "options": [
+   "-11607000.00",
+   "11607000.00",
+   "-30508000.00",
+   "-5427700.00"
+  ],
+  "answer": 0,
+  "explanation": "marginEffect is the total with its sign set by what it did to margin: as it is on a revenue line, reversed on a cost line. Escravos is a cost line, so 11607000.00 reads -11607000.00. -30508000.00 is the Forcados total as recorded and -5427700.00 the gasoline margin effect."
+ },
+ {
+  "prompt": "The jet delivery line reads a total variance of -3731500.00 and a margin effect of -3731500.00. Why does the sign stay the same?",
+  "options": [
+   "Its price variance is negative, so the engine leaves the total alone.",
+   "Its unexplained reads 0.00, so there is nothing to reverse on it.",
+   "Every negative total keeps its sign when it is put on margin.",
+   "It is a revenue line, and a revenue gap counts as it is."
+  ],
+  "answer": 3,
+  "explanation": "The engine's rule is \"margin: a revenue gap counts as it is, a cost gap with its sign reversed\". Jet is a delivery and so a revenue line. The crude unit's total of -319550.00 is also negative, and on margin it reads 319550.00 because it is a cost line."
+ },
+ {
+  "prompt": "Put on margin, the Forcados (illustrative) line's total becomes which figure?",
+  "options": [
+   "-30508000.00",
+   "30508000.00",
+   "-30720000.00",
+   "212000.00"
+  ],
+  "answer": 1,
+  "explanation": "The Forcados total variance is -30508000.00. It is a cost line, so the sign is reversed and the margin effect reads 30508000.00. -30720000.00 is its volume variance and 212000.00 its unexplained."
+ },
+ {
+  "prompt": "In the totals table, the cost lines as recorded carry which volume variance?",
+  "options": [
+   "-24572090.00",
+   "-20622400.00",
+   "-19390350.00",
+   "212000.00"
+  ],
+  "answer": 1,
+  "explanation": "As recorded, the cost lines add to -20622400.00 on volume and to -19390350.00 in total. -24572090.00 is the same column for the revenue lines, and 212000.00 is the cost lines' unexplained."
+ },
+ {
+  "prompt": "Which figure does the engine print as the month's headline variance?",
+  "options": [
+   "-44233150.00, every total added as recorded",
+   "-19390350.00, the cost lines",
+   "-24842800.00, the revenue lines as recorded",
+   "-5452450.00, the total on margin"
+  ],
+  "answer": 3,
+  "explanation": "The headline total is on margin, -5452450.00. The two rows as recorded say what happened to spending and to sales. The sum of every line's total as recorded is printed and is not the headline."
+ },
+ {
+  "prompt": "Adding every line's total variance as recorded gives -44233150.00. Why is that sum not the headline?",
+  "options": [
+   "It adds cost gaps and revenue gaps with no sign reversed.",
+   "It leaves out the Forcados line.",
+   "It counts the lpg sale twice.",
+   "It is formed at the actual unit values, which differ from the plan unit values on each line."
+  ],
+  "answer": 0,
+  "explanation": "The headline is on margin: a revenue gap counts as it is, a cost gap with its sign reversed. Adding every line's total as recorded, cost and revenue together, gives -44233150.00; the margin total is -5452450.00, and the engine prints that as the headline."
+ },
+ {
+  "prompt": "Read the headline row on margin. What price variance does it carry?",
+  "options": [
+   "-3949690.00",
+   "1020050.00",
+   "-1290760.00",
+   "-270710.00"
+  ],
+  "answer": 2,
+  "explanation": "The margin row reads a volume variance of -3949690.00, a price variance of -1290760.00, an unexplained of -212000.00 and a total of -5452450.00. 1020050.00 is the cost lines' price variance as recorded and -270710.00 the revenue lines'."
+ },
+ {
+  "prompt": "The cost lines as recorded carry an unexplained of 212000.00. What does the headline row on margin read in that column?",
+  "options": [
+   "212000.00",
+   "0.00",
+   "-212000.00",
+   "-3949690.00"
+  ],
+  "answer": 2,
+  "explanation": "A cost gap counts with its sign reversed on margin, and the only unexplained money of the month sits on a cost line, Forcados. So 212000.00 as recorded reads -212000.00 on margin: money paid out with no barrels. -3949690.00 is the margin row's volume variance."
+ },
+ {
+  "prompt": "The cost lines as recorded read a price variance of 1020050.00. What does its sign say?",
+  "options": [
+   "The month spent less on crude and on unit runs than the plan expected it to.",
+   "The crude and unit runs that did move cost more a barrel than planned.",
+   "The cost lines helped the margin on price by that figure.",
+   "Fewer barrels of crude were bought and run through the units than the plan expected."
+  ],
+  "answer": 1,
+  "explanation": "On a cost line a positive price variance is a dearer barrel. The cost row's total variance of -19390350.00 says the month spent less overall, and its volume variance of -20622400.00 says fewer barrels were bought and run."
+ },
+ {
+  "prompt": "What margin variance does reconcilePeriod read across the plan and actual ledgers?",
+  "options": [
+   "-5452450.00",
+   "-235150.00",
+   "4776300.00",
+   "-5011450.00"
+  ],
+  "answer": 3,
+  "explanation": "reconcilePeriod reads a plan margin of 4776300.00, an actual margin of -235150.00 and a margin variance of -5011450.00. -5452450.00 is the margin total of the matched lines."
+ },
+ {
+  "prompt": "The margin variance less the margin total of the matched lines comes to 441000.00. What accounts for it?",
+  "options": [
+   "The unmatched lpg sale, which the ledger margins count and the lines do not.",
+   "The Forcados bill of 212000.00, counted once in each of the two totals.",
+   "Rounding in the plan unit values, carried to four decimals on each line.",
+   "The reformer's price variance, taken on its actual 131000.00 bbl."
+  ],
+  "answer": 0,
+  "explanation": "The ledger margins count every movement and the variance lines count only the matched ones. The unmatched movements, deliveries counted as revenue and the rest as cost, come to 441000.00, the lpg delivery the plan never carried."
+ },
+ {
+  "prompt": "Which unit reads 68.95 percent of plan, and with what difference?",
+  "options": [
+   "The crude unit, a difference of -59000.00",
+   "The reformer, a difference of -59000.00",
+   "The reformer, a difference of -265000.00",
+   "The crude unit, a difference of -265000.00"
+  ],
+  "answer": 1,
+  "explanation": "The reformer ran 131000.00 bbl against a plan of 190000.00 bbl, a difference of -59000.00 bbl and 68.95 percent of plan. The crude unit reads -265000.00 bbl and 73.50 percent."
+ },
+ {
+  "prompt": "The crude unit reads 73.50 percent in the units against plan table. Against which figure is that measured?",
+  "options": [
+   "Its plan throughput, 1000000.00 bbl.",
+   "Its capacity in the configuration, 1200000.00 bbl.",
+   "Escravos received, 735000.00 bbl.",
+   "The cargo size, 350000.00 bbl."
+  ],
+  "answer": 0,
+  "explanation": "Utilisation of plan reads the actual against the plan's throughput for the unit: 735000.00 bbl against 1000000.00 bbl. The crude unit's capacity of 1200000.00 bbl is a different base, so 73.50 percent of plan is not a statement about capacity."
+ },
+ {
+  "prompt": "dualLedgerTotals reads the actual ledger apart. What revenue does it print for it?",
+  "options": [
+   "60658650.00",
+   "84825300.00",
+   "80049000.00",
+   "60423500.00"
+  ],
+  "answer": 3,
+  "explanation": "The actual ledger reads cost 60658650.00, revenue 60423500.00 and margin -235150.00. The plan ledger reads cost 80049000.00 and revenue 84825300.00. Each margin agrees with the one reconcilePeriod reads: true."
+ }
+]

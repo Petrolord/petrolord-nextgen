@@ -1,0 +1,130 @@
+{
+ "tiers": {
+  "beginner": {
+   "record": "OWAZA",
+   "prompt": "OWAZA FLOW STATION, Ukwa Basin Energy Ltd (an invented record; every flow, factor and efficiency is invented for the course). Compute the inventory on the IPCC AR6 GWP100, fossil methane (IPCC Sixth Assessment Report, 100-year horizon): methane 29.8, nitrous oxide 273. The fired heaters burn 356000 kmol of fuel gas a year carrying 1.07 kmol of carbon per kmol, at a destruction efficiency of 0.995. The flare receives 52800 kmol a year carrying 1.46 kmol of carbon per kmol, and the operator's flare study states a destruction efficiency of 0.97. Carbon that escapes a burner or the flare is counted as methane. A leak survey (referenced, version 2026 Q1) measured 96.5 t of vented and fugitive methane. The station buys 18400 MWh of electricity at a SYNTHETIC factor of 0.387 tCO2 per MWh from a referenced supplier statement (Scope 2). Every other line is Scope 1. Give six numbers, each to two decimals. (1) The fired heaters' CO2 in tonnes. (2) The flare's CO2 in tonnes. (3) The flare's methane in tonnes. (4) The flare's methane line in tCO2e. (5) Scope 1 in tCO2e. (6) The inventory total, Scope 1 and Scope 2, in tCO2e.",
+   "fields": [
+    {
+     "key": "owaza_heater_co2_t",
+     "source": "OWAZA heaters: carbonAbatement.combustionCo2FromCarbon(...).co2Tonnes",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "owaza_flare_co2_t",
+     "source": "OWAZA flare: carbonAbatement.combustionCo2FromCarbon(...).co2Tonnes",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "owaza_flare_ch4_t",
+     "source": "OWAZA flare: carbonAbatement.combustionCo2FromCarbon(...).ch4Tonnes",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "owaza_flare_ch4_tco2e",
+     "source": "OWAZA flare methane line: carbonAbatement.emissionLine(...).tCo2e on the stated set",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "owaza_scope1_tco2e",
+     "source": "OWAZA inventory: carbonAbatement.buildInventory(...).scope1Tonnes",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "owaza_total_tco2e",
+     "source": "OWAZA inventory: carbonAbatement.buildInventory(...).totalTonnes",
+     "decimals": 2,
+     "tol": 0.01
+    }
+   ]
+  },
+  "intermediate": {
+   "record": "IGRITA",
+   "prompt": "IGRITA GAS CONDITIONING PLANT, Aluu Gas Services Ltd (an invented record; every figure is invented for the course). The fired heater burns a fuel gas of mole fractions CH4 0.912, C2H6 0.041, C3H8 0.012, CO2 0.021, N2 0.014, with the typical heating values the Efficiency Studio carries for each component. Stack 251 C, combustion air 31 C, a radiation and convection loss of 2.1 percent from the vendor's chart, no unburned loss, the Studio's typical flue gas and vapour specific heats and latent heat, efficiency on LHV. The dry stack oxygen reads 6.2 percent; a combustion test has declared 2.4 percent the minimum safe oxygen, and the plan is to tune to 3.1 percent. The heater burns 365000 GJ of fuel a year on LHV. A steam trap has failed open: a 5 mm orifice, the steam upstream at 7.2 bar on the gauge with the local atmosphere at 1.013 bar, a discharge coefficient of 0.68, dry saturated steam of density 4.28 kg/m3 and isentropic exponent 1.135, in service 8200 hours a year. Four process streams, at a minimum approach of 12 C: H1 regeneration gas cooler from 187 C to 55 C at 2.72 kW/K; H2 lean amine cooler from 124 C to 46 C at 6.3 kW/K; C1 rich amine preheat from 36 C to 161 C at 4.55 kW/K; C2 fuel gas heater from 29 C to 88 C at 1.85 kW/K. Give six numbers. (1) The excess air at the current oxygen, in percent, to four decimals. (2) The heater's efficiency on LHV at the current oxygen, in percent, to four decimals. (3) The fuel saved a year by tuning to the target oxygen, in GJ, to the nearest whole GJ. (4) The steam lost through the trap in tonnes a year, to two decimals. (5) The minimum hot utility in kW, to two decimals. (6) The minimum cold utility in kW, to two decimals.",
+   "fields": [
+    {
+     "key": "igrita_excess_air_pct",
+     "source": "IGRITA heater at its current oxygen: energyEfficiency.excessAirFromFlueOxygen(...).excessAirPercent",
+     "decimals": 4,
+     "tol": 0.0001
+    },
+    {
+     "key": "igrita_efficiency_lhv_pct",
+     "source": "IGRITA heater at its current oxygen: energyEfficiency.stackLossEfficiency(... LHV).efficiencyPercent",
+     "decimals": 4,
+     "tol": 0.0001
+    },
+    {
+     "key": "igrita_tuning_saving_gj",
+     "source": "IGRITA tuning: energyEfficiency.excessAirSaving(...).annualEnergySavedGJ",
+     "decimals": 0,
+     "tol": 1
+    },
+    {
+     "key": "igrita_trap_t_per_yr",
+     "source": "IGRITA trap: energyEfficiency.steamTrapLoss(... bar a).tonnesPerYear",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "igrita_pinch_hot_utility_kw",
+     "source": "IGRITA streams: energyEfficiency.pinchTargets(...).hotUtilityKW",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "igrita_pinch_cold_utility_kw",
+     "source": "IGRITA streams: energyEfficiency.pinchTargets(...).coldUtilityKW",
+     "decimals": 2,
+     "tol": 0.01
+    }
+   ]
+  },
+  "advanced": {
+   "record": "IKORODU",
+   "prompt": "IKORODU GAS DISTRIBUTION AND POWER COMPLEX, Lagoon Midstream Holdings Ltd (an invented record; every cost, saving and factor is invented for the course, money in US dollars). The baseline inventory, on the IPCC AR6 GWP100, fossil methane (IPCC Sixth Assessment Report, 100-year horizon): methane 29.8, nitrous oxide 273: boilers 18650 tCO2, gas turbines 23200 tCO2, flaring 5270 tCO2 and 118.4 t of unburned methane, vented and fugitive methane 64.2 t (from a referenced leak survey), and 31200 MWh of purchased electricity at a SYNTHETIC factor of 0.43 tCO2 per MWh from a referenced supplier statement. Six measures, each annualised with a capital recovery factor at a discount rate of 0.09: Tune the boilers: capital 26000 USD, savings 118000 USD a year, running cost 0 USD a year, 690 tCO2e abated a year, a life of 4 years, acting on the boilers, starting in 2027; Waste heat recovery on the gas turbine exhausts: capital 3450000 USD, savings 520000 USD a year, running cost 38000 USD a year, 4150 tCO2e abated a year, a life of 18 years, acting on the turbines, starting in 2030; Repair the steam traps: capital 52000 USD, savings 176000 USD a year, running cost 0 USD a year, 980 tCO2e abated a year, a life of 3 years, acting on the boilers, starting in 2027; Flare gas recovery compressor: capital 6100000 USD, savings 410000 USD a year, running cost 155000 USD a year, 5900 tCO2e abated a year, a life of 15 years, acting on the flare, starting in 2029; Lighting and variable speed drives: capital 390000 USD, savings 88000 USD a year, running cost 0 USD a year, 610 tCO2e abated a year, a life of 10 years, acting on the power, starting in 2028; Vapour recovery on the condensate tanks: capital 540000 USD, savings 31000 USD a year, running cost 12000 USD a year, 1400 tCO2e abated a year, a life of 12 years, acting on the vents, no start year agreed yet. The target falls in a straight line from the baseline in 2026 to 35 percent below it in 2034, and each scheduled measure counts in full from its start year. One saving is priced separately: Economiser on the boilers, 9650 GJ a year at 6.8 USD a GJ, a SYNTHETIC factor of 56.1 kg CO2e per GJ, all on LHV, costing 185000 USD over 7 years at a rate of 0.09. Give six numbers, each to two decimals. (1) The cost per tonne of Tune the boilers, USD. (2) The cost per tonne of the waste heat recovery, USD. (3) The net annual cost of the flare gas recovery compressor, USD. (4) The curve's weighted average cost per tonne over all six measures, USD. (5) The unabated gap in 2034, in tCO2e. (6) The economiser's cost per tonne of CO2e, USD.",
+   "fields": [
+    {
+     "key": "ikorodu_boiler_tuning_cost_per_t_usd",
+     "source": "IKORODU Tune the boilers: carbonAbatement.abatementCost(...).costPerTonne",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "ikorodu_waste_heat_cost_per_t_usd",
+     "source": "IKORODU waste heat recovery: carbonAbatement.abatementCost(...).costPerTonne",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "ikorodu_flare_recovery_net_annual_cost_usd",
+     "source": "IKORODU flare gas recovery: carbonAbatement.abatementCost(...).netAnnualCost",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "ikorodu_curve_weighted_average_usd_per_t",
+     "source": "IKORODU curve: carbonAbatement.abatementCurve(...).weightedAverageCostPerTonne",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "ikorodu_path_final_gap_t",
+     "source": "IKORODU path: carbonAbatement.decarbonisationPath(...).finalGapTonnes",
+     "decimals": 2,
+     "tol": 0.01
+    },
+    {
+     "key": "ikorodu_saving_cost_per_t_usd",
+     "source": "IKORODU economiser: energyEfficiency.priceSaving(...).costPerTonneCo2e",
+     "decimals": 2,
+     "tol": 0.01
+    }
+   ]
+  }
+ }
+}
