@@ -1,0 +1,2252 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 3,
+  "old": "The model gap against the oracle, by refining the step until the two implementations converge.",
+  "new": "The model gap against the oracle, by refining the step to convergence."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 0,
+  "old": "Both fall by about 28 percent.",
+  "new": "Both fall by about 28 percent, since both scale directly with the remaining wall."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 2,
+  "old": "Because the crescent groove is asymmetric and collapse formulas assume a uniform wall reduction.",
+  "new": "Because the groove is asymmetric and collapse assumes uniform loss."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 1,
+  "old": "Yes, at a fine enough interval.",
+  "new": "Yes, at a fine enough interval, since refinement resolves every feature."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "The derated burst rating, which is what the casing design calculation actually needs as an input.",
+  "new": "The derated burst rating, the input casing design needs."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "The wear volume per interval, which is the model's direct output before any geometry is applied.",
+  "new": "The wear volume per interval, the model's direct output."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "The absolute one only.",
+  "new": "The absolute one only, since newtons are what the rig reads directly."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "How much the answer would change on a finer survey, since the step and the survey interval are linked.",
+  "new": "How much a finer survey would move the answer, since the two are linked."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "The horizontal well's lateral.",
+  "new": "The horizontal well's lateral, since friction there is zero once the pipe lies flat."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 2,
+  "old": "Whether the string composition lookup is right, since a vertical well has all three components in it.",
+  "new": "Whether the string composition lookup is right, as all three occur."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "Whether the integration grid is right, since the recursion still walks the full grid with no friction.",
+  "new": "Whether the integration grid is right, since the recursion walks it all."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "Because stiff string changes the total force.",
+  "new": "Because stiff string changes the total force, adding bending contact that the soft model misses."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "Whirl, and the model computes it.",
+  "new": "Whirl, and the model computes it from the rotary speed and the contact force."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "One with a finer integration step.",
+  "new": "One with a finer integration step, since completion joints are shorter than drill pipe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "Correct, since the model computes friction from the compression whatever buckling state the pipe is in.",
+  "new": "Correct, since friction is computed from compression whatever the buckling state."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "Because the standard requires it.",
+  "new": "Because the standard requires it for any course that grades an engineering tool."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "It would be too slow to compute.",
+  "new": "It would be too slow to compute, since buckling is checked at every grid station."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "The pipe has 20 percent margin left.",
+  "new": "The pipe has 20 percent margin left, which is ample for normal drilling loads."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "The broad one, which lost more metal.",
+  "new": "The broad one, which lost more metal and so carries less steel along its length."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "Refine the step until the disagreement disappears, and report the step at which it did.",
+  "new": "Refine the step until the disagreement disappears, and report that step."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "Because there is no field observation to fit it against, since casing wear cannot be measured while drilling.",
+  "new": "Because casing wear cannot be measured while drilling, so nothing fits it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Because it is a material property and the friction factor is not, so only one of them is fittable at all.",
+  "new": "Because it is a material property and friction is not, so only one fits."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "Change the trajectory, since the side force at the shoe is what produced the wear and the geometry is the cause.",
+  "new": "Change the trajectory, since the geometry at the shoe caused the wear."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "Reduce the rotary speed for the remainder of the section, which is the most direct control over the sliding distance.",
+  "new": "Reduce rotary speed for the rest of the section to cut sliding distance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "The wear is computed from the torque directly, by dividing by the tool joint radius to recover the friction force.",
+  "new": "The wear comes from the torque, divided by the tool joint radius."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "The torque is computed from the wear, since the groove's geometry determines the contact area and therefore the friction.",
+  "new": "The torque comes from the wear, since the groove sets the contact area."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-compression",
+  "ord": 7,
+  "option": 0,
+  "old": "The cased hole, being smoother.",
+  "new": "The cased hole, being smoother and so offering the pipe less lateral grip."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-compression",
+  "ord": 8,
+  "option": 0,
+  "old": "A completely separate derivation.",
+  "new": "A completely separate derivation, built on its own set of inputs."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-compression",
+  "ord": 9,
+  "option": 1,
+  "old": "Exactly two.",
+  "new": "Exactly two, the classical factor between the two stages."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-compression",
+  "ord": 10,
+  "option": 3,
+  "old": "As a way to compare implementations, since every published derivation gives the same coefficient.",
+  "new": "As a way to compare implementations, since every derivation agrees."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-compression",
+  "ord": 11,
+  "option": 2,
+  "old": "The helical limit is redundant and should not be computed, since it adds nothing the sinusoidal one does not carry.",
+  "new": "The helical limit is redundant and should not be computed at all."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-compression",
+  "ord": 11,
+  "option": 3,
+  "old": "The two describe different failure modes, so a design has to satisfy both independently with separate margins.",
+  "new": "The two describe different failure modes, so each needs its own margin."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-compression",
+  "ord": 12,
+  "option": 1,
+  "old": "The pipe wraps around the hole and begins pressing outward, which is where the contact force jumps sharply.",
+  "new": "The pipe wraps around the hole and presses outward, so contact force jumps."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-compression",
+  "ord": 15,
+  "option": 0,
+  "old": "Because the tension is always positive.",
+  "new": "Because the tension is always positive there, since the lateral's weight hangs entirely from the surface."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 7,
+  "option": 1,
+  "old": "They are approximately equal, because the lateral adds friction torque and contact length in equal measure.",
+  "new": "About equal, since the lateral adds friction torque and contact alike."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 7,
+  "option": 3,
+  "old": "Both are near zero, since a horizontal string carries neither its own weight axially nor much torque.",
+  "new": "Both are near zero, since a flat string carries little weight or torque."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 8,
+  "option": 0,
+  "old": "Both with the measured depth.",
+  "new": "Both with the measured depth, since each accumulates along the full length of the string."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 9,
+  "option": 1,
+  "old": "The constraint is the derrick.",
+  "new": "The constraint is the derrick, since the hookload grows with every extra stand of lateral."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 10,
+  "option": 2,
+  "old": "Because rotating in a lateral generates more casing wear than rotating in a vertical section of the same length.",
+  "new": "Rotating in a lateral wears casing more than in a vertical section."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 10,
+  "option": 3,
+  "old": "Because the axial share of the friction is so small at high angle that the hookload reduction is negligible.",
+  "new": "The axial share of friction at high angle is too small to matter."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 11,
+  "option": 3,
+  "old": "A bending stress term, which the soft-string model cannot compute because it assumed no bending stiffness.",
+  "new": "A bending stress term, which the soft-string model cannot compute without stiffness."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 12,
+  "option": 2,
+  "old": "Because the von Mises criterion is not applicable to a hollow section under combined tension and torsion.",
+  "new": "Because von Mises does not apply to a hollow section in tension and torsion."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 13,
+  "option": 1,
+  "old": "The tension and the torque themselves.",
+  "new": "The tension and the torque themselves, as absolute loads in newtons."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 14,
+  "option": 0,
+  "old": "Certifying the string for the well.",
+  "new": "Certifying the string for the well, as the final sign-off before it is run into the hole."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-what-the-pipe-has-left",
+  "ord": 15,
+  "option": 0,
+  "old": "Parting in tension.",
+  "new": "Parting in tension, where the axial load on the string exceeds the yield strength of the pipe body."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-casing-wear",
+  "ord": 8,
+  "option": 0,
+  "old": "Doubling the factor doubles the depth.",
+  "new": "Doubling the factor doubles the depth, since the depth is directly proportional to the factor."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-casing-wear",
+  "ord": 9,
+  "option": 0,
+  "old": "By a closed-form inversion.",
+  "new": "By a closed-form inversion of the circular segment formula for the crescent's area."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-casing-wear",
+  "ord": 10,
+  "option": 2,
+  "old": "It means the wear factor's uncertainty does not propagate into the depth, since the geometry dominates the answer.",
+  "new": "It means the wear factor's uncertainty does not propagate into the depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-casing-wear",
+  "ord": 10,
+  "option": 3,
+  "old": "It means a worn casing wears more slowly, because the contact area grows and the pressure falls with it.",
+  "new": "It means a worn casing wears more slowly, as the contact pressure falls."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-casing-wear",
+  "ord": 11,
+  "option": 0,
+  "old": "Millimetres per rotating hour.",
+  "new": "Millimetres of wall depth per rotating hour of the string."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-casing-wear",
+  "ord": 13,
+  "option": 1,
+  "old": "The side force, which is why the two are multiplied together in the model rather than treated as independent.",
+  "new": "The side force, which is why the two are multiplied together in the model."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-casing-wear",
+  "ord": 13,
+  "option": 3,
+  "old": "The rate of penetration, which sets how long the string spends rotating against any given joint of casing.",
+  "new": "The rate of penetration, which sets rotating time against each joint."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-casing-wear",
+  "ord": 14,
+  "option": 2,
+  "old": "By back-analysis of wells where a caliper log was run, in the same way that friction factors are obtained.",
+  "new": "By back-analysis of wells with a caliper log, the way friction factors are obtained."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-casing-wear",
+  "ord": 15,
+  "option": 2,
+  "old": "Unreliable, since the wear factor spans a factor of twenty and the answer is proportional to it in depth.",
+  "new": "Unreliable, since the wear factor spans a factor of twenty and the depth scales with it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-against-it",
+  "ord": 9,
+  "option": 2,
+  "old": "A lower weight on bit, which reduces the compression near the bit and therefore the side force in the casing.",
+  "new": "A lower weight on bit, reducing compression and so casing side force."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-against-it",
+  "ord": 9,
+  "option": 3,
+  "old": "A shorter lateral, which reduces the total footage and therefore the total revolutions in the well.",
+  "new": "A shorter lateral, which reduces the total revolutions in the well."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-against-it",
+  "ord": 10,
+  "option": 0,
+  "old": "Not at all until the wall halves.",
+  "new": "Not at all until the wall halves, because burst is governed by the pipe's yield strength alone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-against-it",
+  "ord": 11,
+  "option": 1,
+  "old": "In proportion, like burst.",
+  "new": "In proportion, like burst, since both ratings are set by the same wall thickness and the same yield stress."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-against-it",
+  "ord": 12,
+  "option": 0,
+  "old": "Because collapse does not matter.",
+  "new": "Because collapse does not matter for a worn string, which is always designed against burst and tension."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-against-it",
+  "ord": 13,
+  "option": 0,
+  "old": "A derated burst rating.",
+  "new": "A derated burst rating for each worn interval."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-against-it",
+  "ord": 14,
+  "option": 2,
+  "old": "The survey interval, the wear interval and the integration step, all of which are discretisation choices.",
+  "new": "The survey interval, the wear interval and the integration step, all discretisation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-against-it",
+  "ord": 14,
+  "option": 3,
+  "old": "The mud weight, the casing dimensions and the tool joint radius, all of which are measured with some error.",
+  "new": "The mud weight, the casing size and the tool joint radius, each measured with error."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-planning-against-it",
+  "ord": 15,
+  "option": 0,
+  "old": "The wear depth.",
+  "new": "The wear depth, since the crescent geometry that produces it is exact."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-when-the-model-stops",
+  "ord": 7,
+  "option": 1,
+  "old": "A limit on the weight on bit, above which the string buckles and the rate of penetration falls away.",
+  "new": "A limit on the weight on bit, above which the string buckles."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-when-the-model-stops",
+  "ord": 8,
+  "option": 0,
+  "old": "Hookload and torque only.",
+  "new": "Hookload and torque only, since those are what the rig can measure."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-when-the-model-stops",
+  "ord": 9,
+  "option": 1,
+  "old": "Hookload, then torque.",
+  "new": "Hookload, then torque, as the long lateral adds string weight at the hook first."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-when-the-model-stops",
+  "ord": 11,
+  "option": 3,
+  "old": "Because a tractor can always be run to solve the hookload problem, whereas weight transfer has no such remedy.",
+  "new": "Because a tractor can always solve the hookload problem, and weight transfer has no remedy."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-when-the-model-stops",
+  "ord": 12,
+  "option": 1,
+  "old": "On the build-and-hold well, where the build produces the largest curvature and therefore the largest side force.",
+  "new": "On the build-and-hold well, where the build gives most side force."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-when-the-model-stops",
+  "ord": 12,
+  "option": 2,
+  "old": "Spread evenly, at about 1e-4 relative everywhere with no single case standing out from the others.",
+  "new": "Spread evenly, at about 1e-4 relative with no case standing out."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-when-the-model-stops",
+  "ord": 13,
+  "option": 1,
+  "old": "Nothing, it has no friction.",
+  "new": "Nothing, it has no friction and so it cannot test either implementation's weight integral."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-when-the-model-stops",
+  "ord": 14,
+  "option": 0,
+  "old": "Because the standard requires it.",
+  "new": "Because the standard requires it, and a course that omitted it would fail the accreditation review of its content."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-when-the-model-stops",
+  "ord": 15,
+  "option": 3,
+  "old": "Gyroscopic surveying, multi-station analysis, in-field referencing and probabilistic collision risk.",
+  "new": "Gyroscopic surveying, multi-station analysis, in-field referencing and collision risk."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 2,
+  "old": "The wall loss percentage, since it is a ratio and the mud's effect cancels between the depth and the nominal wall.",
+  "new": "The wall loss percentage, since the mud's effect cancels in the ratio."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "The torsion utilization, since the torsional capacity is a property of the pipe rather than of the fluid around it.'",
+  "new": "The torsion utilization, since torsional capacity is a property of the pipe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 11,
+  "option": 2,
+  "old": "As an instruction to reduce the weight on bit until the compression falls below the sinusoidal limit.",
+  "new": "As an instruction to cut the weight on bit until compression clears the sinusoidal limit."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "Because percentages are more precise.",
+  "new": "Because percentages are more precise, carrying fewer rounding errors than a depth quoted in millimetres."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 0,
+  "old": "Because the standard requires both.",
+  "new": "Because the standard requires both in every validation report."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 2,
+  "old": "The geomechanics, which determines whether the hole stands up and what mud weight it needs to do so.",
+  "new": "The geomechanics, which says whether the hole stands up and at what mud weight."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 3,
+  "old": "That the friction factor is too high, since discretisation error scales with the size of the friction term.",
+  "new": "That the friction factor is too high, since discretisation error scales with the friction term."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 0,
+  "old": "Sliding.",
+  "new": "Sliding, where the motor carries the bit load."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 2,
+  "old": "Because it varies with depth, and a property of the rock would be constant within a single formation.",
+  "new": "Because it varies with depth, and a rock property would be constant within a formation."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 0,
+  "old": "The casing shoe.",
+  "new": "The casing shoe, where the string passes from cased hole into open hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "It shows the buckling state along the string, which the three summary hookloads do not carry at all.",
+  "new": "It shows the buckling state along the string, which the summaries lack."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 3,
+  "old": "It shows the torque as well as the tension, so both constraints can be checked from a single chart.",
+  "new": "It shows the torque as well as the tension, on a single chart."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 2,
+  "old": "The maximum inclination and the survey interval, so that the geometries can be compared station for station.",
+  "new": "The maximum inclination and the survey interval, compared station by station."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "The buoyancy factor and the buoyed string weight, since both depend only on the mud and the steel densities.",
+  "new": "The buoyancy factor and the buoyed string weight, both set by mud and steel."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "Because it is an approximation.",
+  "new": "Because it is an approximation that ignores the fluid inside the drill pipe bore."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 1,
+  "old": "The weight on bit will have to be reduced until the hookload is positive, which is a routine adjustment.",
+  "new": "The weight on bit will have to be cut until the hookload is positive, a routine adjustment."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "The weight on bit, which sets the compression at the bit end and therefore the side force in the lower string.",
+  "new": "The weight on bit, which sets the compression and so the lower string's side force."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "The mud weight, which sets the buoyancy factor and therefore how much weight the friction is acting against.",
+  "new": "The mud weight, which sets the buoyancy factor and so the weight friction acts on."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 2,
+  "old": "Take the average of the two, since neither can be preferred and the truth is likely to lie between them.",
+  "new": "Take the average of the two, since the truth likely lies between them."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "Use the finer-stepped one, since a higher-order integration scheme is by definition the more accurate.",
+  "new": "Use the finer-stepped one, as a finer step is always the more accurate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "A buckling flag at the neutral point.",
+  "new": "A buckling flag at the neutral point, since buckling should need a finite compression."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "The buckling limits, which depend on the rate at which compression is applied to the string.",
+  "new": "The buckling limits, which depend on the rate compression is applied."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "The drill pipe, being the longest.",
+  "new": "The drill pipe, being the longest component and so the heaviest in the string."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "A friction factor fitted on the vertical section, which does not include the cuttings beds a lateral accumulates.",
+  "new": "A friction factor fitted on the vertical section, missing lateral cuttings."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "A survey with too few stations, which understates the curvature and therefore the side force along the lateral.",
+  "new": "A survey with too few stations, understating curvature and side force."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "It cannot be, without integration.",
+  "new": "It cannot be, without integration, because the tension has to be accumulated station by station."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "Because the mud motor absorbs the reactive torque, so none of it is transmitted up the string to surface.",
+  "new": "Because the mud motor absorbs the reactive torque, so none reaches surface."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "Because sliding is done with the pumps off, and without circulation the bit generates no torque at all.",
+  "new": "Because sliding is done with the pumps off, so the bit generates no torque."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "It means vertical wells need no model.",
+  "new": "It means vertical wells need no model, since nothing along a vertical string can ever reach a limit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "They all rise, because drag rises.",
+  "new": "They all rise, because drag rises with the side force as the hold angle increases."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "The mud density.",
+  "new": "The mud density downhole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Only if the mud weight used in the model differs from the one used to compute the buoyed weight.",
+  "new": "Only if the model's mud weight differs from the one used for the buoyed weight."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "Comparing torque against hookload.",
+  "new": "Comparing torque against hookload, which share the same friction force."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "Because torque is not computed there.",
+  "new": "Because torque is not computed there, the model skipping any section with no inclination."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "The loads the string will actually see.",
+  "new": "The loads the string will actually see, since the survey and the string description fix them."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "The hookload, since it sets the derrick.",
+  "new": "The hookload, since it sets the derrick rating, and the derrick is what the whole rig is chosen around."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-torque-and-drag-is",
+  "ord": 8,
+  "option": 0,
+  "old": "The air weight of the whole string.",
+  "new": "The air weight of the whole string, with no mud acting."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-torque-and-drag-is",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the survey changes as the well is drilled, and the model is the only place the new survey is used.",
+  "new": "Because the survey changes as the well is drilled, and the model is the only place it is used."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-torque-and-drag-is",
+  "ord": 10,
+  "option": 0,
+  "old": "The survey tool has failed.",
+  "new": "The survey tool has failed, giving the model a trajectory the string is not actually in."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-torque-and-drag-is",
+  "ord": 11,
+  "option": 0,
+  "old": "Specifying the derrick rating.",
+  "new": "Specifying the derrick rating the rig must carry."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-torque-and-drag-is",
+  "ord": 12,
+  "option": 2,
+  "old": "High mud weights, where the buoyancy factor is smallest and the string's effective weight is most reduced by the fluid.",
+  "new": "High mud weights, where the buoyancy factor is smallest."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-torque-and-drag-is",
+  "ord": 12,
+  "option": 3,
+  "old": "High rotary speeds, where the tangential velocity dominates the direction cosines and the axial friction is small.",
+  "new": "High rotary speeds, where the tangential velocity dominates friction."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-torque-and-drag-is",
+  "ord": 13,
+  "option": 2,
+  "old": "Because dynamic loads are always smaller than static ones, so a steady-state answer is conservative by construction.",
+  "new": "Because dynamic loads are always smaller, so a steady state is conservative."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-torque-and-drag-is",
+  "ord": 13,
+  "option": 3,
+  "old": "Because the rotary speed is an input rather than a result, which fixes the dynamics before the calculation begins.",
+  "new": "Because the rotary speed is an input, which fixes the dynamics before it starts."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-torque-and-drag-is",
+  "ord": 14,
+  "option": 0,
+  "old": "Whether the trajectory closes geometrically.",
+  "new": "Whether the trajectory closes geometrically, since a well that reaches its target can always be drilled."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-soft-string-model",
+  "ord": 7,
+  "option": 0,
+  "old": "Minus the weight on bit.",
+  "new": "Minus the weight on bit, as the bit rests on bottom."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-soft-string-model",
+  "ord": 8,
+  "option": 1,
+  "old": "Resolve the string's weight into a component along the hole and a component perpendicular to it at each station.",
+  "new": "Resolve the string's weight along and across the hole per station."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-soft-string-model",
+  "ord": 8,
+  "option": 2,
+  "old": "Scale the tool joint radius so that the moment arm matches the contact point rather than the pipe body centre.",
+  "new": "Scale the tool joint radius to match the contact point."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-soft-string-model",
+  "ord": 10,
+  "option": 1,
+  "old": "It adds a bending moment at each end of the dogleg, which raises the contact force above the smeared value.",
+  "new": "It adds a bending moment at each end of the dogleg, raising the contact force."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-soft-string-model",
+  "ord": 11,
+  "option": 0,
+  "old": "The number of bisection halvings.",
+  "new": "The number of bisection halvings the solver performs."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-soft-string-model",
+  "ord": 12,
+  "option": 1,
+  "old": "In long vertical sections, where there are many intervals and the discretisation error accumulates over all of them.",
+  "new": "In long vertical sections, where discretisation error builds over many steps."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-soft-string-model",
+  "ord": 13,
+  "option": 2,
+  "old": "The ability to handle a sign change in the tension without the calculation becoming singular at the crossing.",
+  "new": "Safe handling of a sign change in the tension."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-soft-string-model",
+  "ord": 13,
+  "option": 3,
+  "old": "A correct treatment of the boundary condition at the bit, which the endpoint formulation would get wrong.",
+  "new": "A correct boundary condition at the bit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-soft-string-model",
+  "ord": 14,
+  "option": 0,
+  "old": "Static versus kinetic friction.",
+  "new": "Static versus kinetic friction, and the breakout load at the start of a trip."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-soft-string-model",
+  "ord": 15,
+  "option": 0,
+  "old": "Increase the friction factor by ten percent.",
+  "new": "Increase the friction factor by ten percent, so that the answer carries a safety margin."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-hookload",
+  "ord": 8,
+  "option": 1,
+  "old": "The string is being lifted by the mud's buoyancy, which at this angle exceeds the steel's own weight per metre.",
+  "new": "The string is being lifted by the mud's buoyancy, which exceeds its weight."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-hookload",
+  "ord": 8,
+  "option": 2,
+  "old": "The hook is supporting the string from below, which is what happens when a tractor is run on the bottom hole assembly.",
+  "new": "The hook is supporting the string from below, as when a tractor is run."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-hookload",
+  "ord": 9,
+  "option": 1,
+  "old": "The hook applies a downward force.",
+  "new": "The hook applies a downward force, pushing the string on along the lateral."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-hookload",
+  "ord": 10,
+  "option": 2,
+  "old": "Lower the friction factor in the model until the number goes positive, then use that factor for the rest of the well.",
+  "new": "Lower the friction factor in the model until the number goes positive, then carry on."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-hookload",
+  "ord": 11,
+  "option": 0,
+  "old": "Pick up is about ten percent higher.",
+  "new": "Pick up is about ten percent higher, from the friction of the string against the wall."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-hookload",
+  "ord": 12,
+  "option": 0,
+  "old": "No warnings at all.",
+  "new": "No warnings at all, since a vertical hole carries no side force."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-hookload",
+  "ord": 13,
+  "option": 1,
+  "old": "Pick up less rotating.",
+  "new": "Pick up less the rotating hookload."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-hookload",
+  "ord": 14,
+  "option": 3,
+  "old": "Whether the string is in compression anywhere, which needs the zero line the chart does not draw.",
+  "new": "Whether the string is in compression anywhere, which needs a zero line."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-hookload",
+  "ord": 15,
+  "option": 0,
+  "old": "Because the friction factor falls at high angle.",
+  "new": "Because the friction factor falls at high angle, as the string slides more easily on the low side."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-operations",
+  "ord": 8,
+  "option": 0,
+  "old": "Running in while rotating.",
+  "new": "Running in while rotating, to ream the hole ahead."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-operations",
+  "ord": 9,
+  "option": 0,
+  "old": "Evenly between the two.",
+  "new": "Evenly between the two, since both motions are present together."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-operations",
+  "ord": 10,
+  "option": 2,
+  "old": "Rig time for hole cleaning, since a slower trip removes more cuttings from the annulus per metre of hole.",
+  "new": "Rig time for hole cleaning, as a slower trip lifts cuttings."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-operations",
+  "ord": 10,
+  "option": 3,
+  "old": "Casing wear for hookload, since rotating in casing takes metal off it while reducing the load on the derrick.",
+  "new": "Casing wear for hookload, since rotating wears the casing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-operations",
+  "ord": 11,
+  "option": 2,
+  "old": "Because the moment arm is the tool joint radius, which is small, so the same friction produces little torque and much drag.",
+  "new": "Because the moment arm is the small tool joint radius, so the friction gives little torque."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-operations",
+  "ord": 12,
+  "option": 0,
+  "old": "Tripping out and tripping in.",
+  "new": "Tripping out and tripping in, at equal trip speed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-operations",
+  "ord": 13,
+  "option": 0,
+  "old": "Yes, roughly in proportion to the speed.",
+  "new": "Yes, roughly in proportion to the speed, as faster pipe drags more mud along."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-operations",
+  "ord": 14,
+  "option": 2,
+  "old": "Uses the static friction coefficient, which is higher than the kinetic one and which the engine carries separately.",
+  "new": "Uses the static friction coefficient carried separately."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-operations",
+  "ord": 14,
+  "option": 3,
+  "old": "Holds the previous operation's friction, since a stationary string retains whatever load it was left with.",
+  "new": "Holds the previous operation's friction on the string."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-operations",
+  "ord": 15,
+  "option": 0,
+  "old": "The load on the drawworks.",
+  "new": "The load on the drawworks, which back reaming shifts over to the top drive."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-output",
+  "ord": 7,
+  "option": 3,
+  "old": "That the compression exceeds the pipe's yield strength, so the pipe would deform permanently at that point.",
+  "new": "That the compression exceeds the pipe's yield strength, so the pipe deforms permanently there."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-output",
+  "ord": 8,
+  "option": 2,
+  "old": "Because the step size at 10 m is too coarse to resolve where the compression actually begins near the bit.",
+  "new": "Because the 10 m step is too coarse to resolve where compression begins near the bit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-output",
+  "ord": 9,
+  "option": 2,
+  "old": "The string extends below the last casing shoe, which is normal and the warning can safely be ignored.",
+  "new": "The string extends below the last casing shoe, which is normal and can be ignored."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-output",
+  "ord": 10,
+  "option": 0,
+  "old": "The air weight, which needs no engine run.",
+  "new": "The air weight, which needs no engine run because the mud acts on the string only in deviated hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-output",
+  "ord": 11,
+  "option": 2,
+  "old": "That the oracle is more accurate, since it uses a fourth-order scheme against the engine's midpoint predictor.",
+  "new": "That the oracle is more accurate, using a fourth-order scheme."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-output",
+  "ord": 11,
+  "option": 3,
+  "old": "That the difference between them is discretisation, which refining the step in either would remove.",
+  "new": "That the difference is discretisation, which refining the step would remove."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-output",
+  "ord": 12,
+  "option": 0,
+  "old": "The buoyancy factor.",
+  "new": "The buoyancy factor, which only matters once the string leaves vertical."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-output",
+  "ord": 13,
+  "option": 2,
+  "old": "Always compare against an independent implementation, since a closed form is not available on a real survey.",
+  "new": "Always compare against an independent implementation first."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-output",
+  "ord": 13,
+  "option": 3,
+  "old": "Always check the buckling flags first, since they indicate whether the model has left its domain of validity.",
+  "new": "Always check the buckling flags first, to see if the model left its domain."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-output",
+  "ord": 15,
+  "option": 3,
+  "old": "Because the model works in newtons rather than pascals, and the conversion needs a wall thickness that varies.",
+  "new": "Because the model works in newtons rather than pascals, and conversion needs a varying wall thickness."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 7,
+  "option": 0,
+  "old": "The tension and the torque.",
+  "new": "The tension and the torque, which come from the rig sensors."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 8,
+  "option": 3,
+  "old": "A friction factor fitted to an observed hookload, plus the torque that factor then predicts for the same well.",
+  "new": "A friction factor fitted to an observed hookload, plus the torque it then predicts."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 0,
+  "old": "Because 1500 kg/m3 is the industry standard.",
+  "new": "Because 1500 kg/m3 is the industry standard, and graded answers should use a standard mud."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 1,
+  "old": "That the vertical well has no drag.",
+  "new": "That the vertical well has no drag, whatever friction factor the model is set to use."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 2,
+  "old": "Because the model needs all three as inputs in order to calibrate the friction factors in the two hole sections.",
+  "new": "Because the model needs all three as inputs to calibrate the friction factors in both hole sections."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 1,
+  "old": "They are three pairs, each pair differing only by whether the bit is on bottom, which changes the boundary condition.",
+  "new": "They are three pairs, each differing only by whether the bit is on bottom."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 2,
+  "old": "They are two families, tripping and rotating, with sliding and back reaming being special cases of the first.",
+  "new": "They are two families, tripping and rotating, with sliding and back reaming as subsets."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 0,
+  "old": "The model needs a finer step.",
+  "new": "The model needs a finer step, since the recursion has become unstable in the compressed lateral."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "Whether the string reaches bottom.",
+  "new": "Whether the string reaches bottom without locking up on the lateral."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 2,
+  "old": "Because a different string on each well would make the buoyancy factor differ, which would invalidate the comparison.",
+  "new": "Because a different string on each well would change the buoyancy factor."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "Because the engine cannot change the string description between runs without recompiling the component lookup.",
+  "new": "Because the engine cannot change the string between runs without a recompiled lookup."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 1,
+  "old": "The tension and the curvature.",
+  "new": "The tension and the curvature, which together set the side force at every station of the lateral."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "It reduces the friction factor, because a moving contact has a lower coefficient than a stationary one.",
+  "new": "It reduces the friction factor, since a moving contact has a lower coefficient."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 0,
+  "old": "The friction factor is 20 percent low.",
+  "new": "The friction factor is 20 percent low, since torque scales directly with the friction factor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 0,
+  "old": "Because the published examples are proprietary.",
+  "new": "Because the published examples are proprietary and cannot be reproduced."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "It confirms the friction factors used are appropriate, since a wrong factor would show as a disagreement.",
+  "new": "It confirms the friction factors used are right, as a wrong one would show as a disagreement."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 2,
+  "old": "The oracle handles buckling correctly and the engine does not, which is why they diverge in that regime.",
+  "new": "The oracle handles buckling correctly and the engine does not."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 3,
+  "old": "The disagreement should be excluded from the comparison, since a buckled case is outside the model's scope.",
+  "new": "The case should be excluded, as buckling is outside the model's scope."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "A model difference.",
+  "new": "A model difference between the two sets of equations being integrated."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 0,
+  "old": "The finer-stepped one.",
+  "new": "The finer-stepped one, as it carries the smaller truncation error."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 2,
+  "old": "The oracle reproduces it exactly and the engine is a few nanonewtons off, which is floating-point noise.",
+  "new": "The oracle reproduces it exactly and the engine is off by floating-point noise."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "Neither reproduces it, because the closed form ignores the buckling flag the model raises in that case.",
+  "new": "Neither reproduces it, as the closed form ignores the buckling flag raised."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "Because it is only one well.",
+  "new": "Because it is only one well, and a single well can never establish a trend."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "A torque reading, for the bit torque.",
+  "new": "A torque reading, for the bit torque, which is the only unknown in the cased section."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 0,
+  "old": "The hookload it was fitted to.",
+  "new": "The hookload it was fitted to, which on its own is enough to reproduce the fit."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "The average of every factor ever fitted in that field, which averages out the well-specific effects.",
+  "new": "The average of every factor ever fitted in that field, averaging out well effects."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "Once for the tool joint and once for the pipe body, since both are in contact over part of each joint.",
+  "new": "Once for the tool joint and once for the pipe body, as both touch over part of a joint."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "The bit torque is partly absorbed.",
+  "new": "The bit torque is partly absorbed by the mud motor before it reaches the drill string above."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "It is not used at all, since the model is a steady state and the speed cancels out of the equations.",
+  "new": "It is not used at all, since the model is a steady state and the speed cancels out."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "The maximum friction.",
+  "new": "The maximum friction, as static friction exceeds kinetic friction."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "The bed reduces the effective hole diameter, which raises the contact pressure and therefore the friction factor.",
+  "new": "The bed reduces the effective hole diameter, raising the contact pressure and so the friction factor."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "Sticking is depth-specific.",
+  "new": "Sticking is depth-specific, while a cuttings bed moves along with the assembly."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "It converges toward the true coefficient of friction as more observations are collected over the well.",
+  "new": "It converges toward the true coefficient of friction as observations accumulate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "A heavier mud, which raises the buoyancy factor and reduces the string's weight against the low side.",
+  "new": "A heavier mud, which raises the buoyancy factor and lightens the string."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "A finer integration step, which resolves the section boundaries more accurately and lowers the computed torque.",
+  "new": "A finer integration step, resolving section boundaries to lower the torque."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "The oracle is wrong, since the engine is converging and the oracle's value is the fixed reference being compared against.",
+  "new": "The oracle is wrong, since the engine is converging and the oracle is the fixed value."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "The friction factor should be refitted at the finer step, since the fit was done against a coarse-step forward run.",
+  "new": "The friction factor should be refitted at the finer step, as the fit used a coarse run."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "Rotating off bottom.",
+  "new": "Rotating off bottom, since there is no bit torque and no axial motion."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "It predicts the hookload and torque to within a few percent, which is the accuracy the goldens comparison establishes.",
+  "new": "It predicts hookload and torque within a few percent, as the goldens comparison shows."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "It is validated against an independent implementation, so its answers can be relied on within the stated tolerance.",
+  "new": "It is validated against an independent implementation, so it holds within tolerance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-friction-factor",
+  "ord": 8,
+  "option": 0,
+  "old": "By the deeper of the two sections.",
+  "new": "By the deeper of the two sections, to be conservative at the shoe."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-friction-factor",
+  "ord": 9,
+  "option": 0,
+  "old": "Quadratic, because of the feedback.",
+  "new": "Quadratic, because of the feedback of friction on tension and tension on side force."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-friction-factor",
+  "ord": 11,
+  "option": 3,
+  "old": "Makes it depth-dependent in a way the model detects, since the fit will not converge on a single value.",
+  "new": "Makes it depth-dependent in a way the model detects, as the fit will not converge."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-friction-factor",
+  "ord": 12,
+  "option": 2,
+  "old": "It rises with rotary speed, because a rotating string breaks the filter cake seal and reduces the clamping force.",
+  "new": "It rises with rotary speed, because rotation breaks the filter cake seal."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-friction-factor",
+  "ord": 12,
+  "option": 3,
+  "old": "It falls with depth, because the pressure differential is largest at the shallowest permeable formation.",
+  "new": "It falls with depth, as the differential peaks at the shallowest formation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-friction-factor",
+  "ord": 13,
+  "option": 0,
+  "old": "It only appears in cased hole.",
+  "new": "It only appears in cased hole, where the assembly is centralised by the casing wall."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-friction-factor",
+  "ord": 14,
+  "option": 0,
+  "old": "About 8 N per 0.001 of factor.",
+  "new": "About 8 N per 0.001 of factor, since most of the string hangs vertically."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-friction-factor",
+  "ord": 15,
+  "option": 3,
+  "old": "A guarantee that the bisection converges, which needs monotonicity rather than linearity to be assured.",
+  "new": "A guarantee that bisection converges, which needs monotonicity rather than linearity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-torque",
+  "ord": 8,
+  "option": 0,
+  "old": "Because the torque is measured at surface.",
+  "new": "Because the torque is measured at surface, where the whole string's friction is summed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-torque",
+  "ord": 9,
+  "option": 0,
+  "old": "About half.",
+  "new": "About half, with the bit and the string sharing the load equally."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-torque",
+  "ord": 10,
+  "option": 3,
+  "old": "Because the rotary speed drops when weight is applied, which changes the tangential direction cosine.",
+  "new": "Because the rotary speed drops when weight is applied, changing the tangential cosine."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-torque",
+  "ord": 11,
+  "option": 2,
+  "old": "The slant one, because a constant tangent has a uniform side force that scales directly with the axial load.",
+  "new": "The slant one, as a constant tangent's side force scales with the axial load."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-torque",
+  "ord": 11,
+  "option": 3,
+  "old": "The build-and-hold one, because the compression acts through the build section where the curvature is largest.",
+  "new": "The build-and-hold one, as compression acts through the highest curvature."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-torque",
+  "ord": 12,
+  "option": 0,
+  "old": "The on-bottom one, being larger.",
+  "new": "The on-bottom one, being larger and so less affected by sensor noise."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-torque",
+  "ord": 13,
+  "option": 1,
+  "old": "Lowers it, because some of the friction that was going into torque is now going into the axial direction instead.",
+  "new": "Lowers it, as some friction that went into torque now goes axially."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-torque",
+  "ord": 13,
+  "option": 3,
+  "old": "Leaves it unchanged, since the total friction is conserved and the tangential share is fixed by the rotary speed.",
+  "new": "Leaves it unchanged, the tangential share being fixed by rotary speed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-torque",
+  "ord": 14,
+  "option": 1,
+  "old": "A downhole motor.",
+  "new": "A downhole motor, which the model treats as adding torque at every station of the string above it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-torque",
+  "ord": 15,
+  "option": 0,
+  "old": "Subtract the modelled bit torque.",
+  "new": "Subtract the modelled bit torque, which the engine computes from the weight on bit and the bit size."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-side-force",
+  "ord": 8,
+  "option": 0,
+  "old": "Build late and build hard.",
+  "new": "Build late and build hard, to save footage."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-side-force",
+  "ord": 9,
+  "option": 0,
+  "old": "The survey tool's inclination limit.",
+  "new": "The survey tool's inclination limit, above which it can no longer measure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-side-force",
+  "ord": 11,
+  "option": 2,
+  "old": "About half, since at low inclination the horizontal and vertical components of the change are comparable.",
+  "new": "About half, as the two components are comparable at low angle."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-side-force",
+  "ord": 11,
+  "option": 3,
+  "old": "None at all, because azimuth is undefined near vertical and the term is excluded below a threshold inclination.",
+  "new": "None, as azimuth is undefined near vertical."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-side-force",
+  "ord": 12,
+  "option": 0,
+  "old": "Because the sum could otherwise be negative.",
+  "new": "Because the sum could otherwise be negative whenever the well is turning to the left."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-side-force",
+  "ord": 13,
+  "option": 2,
+  "old": "The total dogleg is always the larger of the two, since the smaller contributes nothing to the hypotenuse.",
+  "new": "The total dogleg is always the larger of the two, the smaller adding none."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-side-force",
+  "ord": 14,
+  "option": 3,
+  "old": "Because side force per metre is the same on every well with the same string, so it is a useful control.",
+  "new": "Because side force per metre is the same on every well with the same string."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-side-force",
+  "ord": 15,
+  "option": 1,
+  "old": "The worst case in a build section.",
+  "new": "The worst case in a high build section, where tension and curvature both peak."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-calibration",
+  "ord": 7,
+  "option": 0,
+  "old": "Repeat the fit at a finer step.",
+  "new": "Repeat the fit at a finer step and compare the two."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-calibration",
+  "ord": 9,
+  "option": 1,
+  "old": "A missing tool joint diameter.",
+  "new": "A missing tool joint diameter, which the hookload never sees."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-calibration",
+  "ord": 10,
+  "option": 3,
+  "old": "Neither affected, since cuttings are in the annulus rather than between the string and the wall.",
+  "new": "Neither affected, since cuttings sit in the annulus rather than at the wall contact."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-calibration",
+  "ord": 11,
+  "option": 0,
+  "old": "One of each, so the fit is exact.",
+  "new": "One of each, so the fit is exact and the bisection returns a unique value."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-calibration",
+  "ord": 12,
+  "option": 1,
+  "old": "Assume the two are equal, which removes one unknown and makes the fit exact with a single observation.",
+  "new": "Assume the two are equal, removing one unknown."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-calibration",
+  "ord": 12,
+  "option": 2,
+  "old": "Use the ratio of the two published typical values as a constraint, which fixes one in terms of the other.",
+  "new": "Fix one from the ratio of the two published values."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-calibration",
+  "ord": 13,
+  "option": 3,
+  "old": "Use a commercial least-squares package, which solves for both factors from a single hookload observation.",
+  "new": "Use a commercial least-squares package, which solves both factors from one hookload."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-calibration",
+  "ord": 14,
+  "option": 2,
+  "old": "Compare the fitted value against the book value, since a large gap indicates that something else has been absorbed.",
+  "new": "Compare the fitted value against the book value, as a gap means absorption."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-calibration",
+  "ord": 14,
+  "option": 3,
+  "old": "Fit at two different target hookloads and confirm the two fitted values are consistent with a linear response.",
+  "new": "Fit two target hookloads and confirm the fitted values are consistent."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-calibration",
+  "ord": 15,
+  "option": 3,
+  "old": "Quoting it without the date, since hole condition changes over hours and a factor goes out of date quickly.",
+  "new": "Quoting it without the date, since hole condition changes and a factor soon goes out of date."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 7,
+  "option": 3,
+  "old": "Because the oracle reports a hookload with fewer significant figures than the engine, which inflates the ratio.",
+  "new": "Because the oracle reports fewer significant figures than the engine, inflating the ratio."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 8,
+  "option": 0,
+  "old": "Because newtons are the wrong units.",
+  "new": "Because newtons are the wrong units, the comparison needing to be made in kilonewtons."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 9,
+  "option": 0,
+  "old": "Leaves it unchanged.",
+  "new": "Leaves it unchanged, since the gap is fixed by where the survey stations are."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 10,
+  "option": 0,
+  "old": "Halves it, as on the horizontal well.",
+  "new": "Halves it, as on the horizontal well, since both gaps come from the step."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 11,
+  "option": 1,
+  "old": "The oracle, being fourth-order.",
+  "new": "The oracle, being fourth-order and so the more accurate at the same step."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 12,
+  "option": 0,
+  "old": "Whether the buoyancy factor is right.",
+  "new": "Whether the buoyancy factor is right, since the vertical well's weight is taken as an input."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 13,
+  "option": 1,
+  "old": "The absolute measure alone, since a relative measure on a near-zero denominator is meaningless by construction.",
+  "new": "The absolute measure alone, as ratios near zero are meaningless."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 13,
+  "option": 3,
+  "old": "The claim that the two agree to 1e-4, with the exceptions noted in a footnote for completeness.",
+  "new": "The claim that the two agree to 1e-4, with footnoted exceptions."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 14,
+  "option": 2,
+  "old": "Refine both until they converge, since two convergent schemes on the same equations must reach the same limit.",
+  "new": "Refine both until they converge, as two convergent schemes must reach one limit."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 14,
+  "option": 3,
+  "old": "Prefer the higher-order scheme, since its truncation error falls faster with the step and its limit is more reliable.",
+  "new": "Prefer the higher-order scheme, as its truncation error falls faster."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-against-the-oracle",
+  "ord": 15,
+  "option": 3,
+  "old": "Refine until the answer matches the oracle, which is the reference the engine is checked against.",
+  "new": "Refine until the answer matches the oracle, the reference the engine is checked against."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "That the model has been validated in the field.",
+  "new": "That the model has been validated in the field, on wells drilled with the same string."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 0,
+  "old": "Because 1500 is a rounder number.",
+  "new": "Because 1500 is a rounder number, and the grading tolerance is easier to state on it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 3,
+  "old": "Refine until the answer stops changing in the fourth significant figure, which is the precision of any report.",
+  "new": "Refine until the answer stops changing in the fourth significant figure, a report's precision."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "Fit both friction factors at once.",
+  "new": "Fit both friction factors at once on one reading."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 0,
+  "old": "A more accurate friction model.",
+  "new": "A more accurate friction model, one that replaces the Coulomb law with a velocity-dependent one."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 2,
+  "old": "Nearly nothing, since the bit torque dominates and the friction along the string is a small correction to it.",
+  "new": "Nearly nothing, since the bit torque dominates the surface reading."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "It depends on the rate of penetration, so no general statement is possible without knowing the bit's performance.",
+  "new": "It depends on the rate of penetration, so no general statement is possible."
+ }
+]
