@@ -15,7 +15,12 @@ describe('rockphysics AVO explorer: engine math', () => {
     expect(a.brineShuey.b).toBeCloseTo(-0.16766246414664518, 12);
     expect(a.gasShuey.a).toBeCloseTo(-0.06282494068620303, 12);
     expect(a.gasShuey.b).toBeCloseTo(-0.2565633444602355, 12);
-    expect(ROMAN_CLASS[a.gasClass]).toBe(3);
+    expect(ROMAN_CLASS[a.gasClass]).toBe(3); // no longer graded (W1): kept as the report label
+    // W1: field 5 is the largest brine Shuey error, printed to 6 dp, tol 0.0001
+    expect(d.brine.maxErr).toBeCloseTo(0.005972095765271403, 12);
+    expect(Math.abs(Number(d.brine.maxErr.toFixed(6)) - d.brine.maxErr)).toBeLessThan(0.0001);
+    expect(Math.abs(d.gas.maxErr - d.brine.maxErr)).toBeGreaterThan(0.0001);
+    expect(Math.abs(Math.abs(d.gas.shuey30 - d.gas.zoep30) - d.brine.maxErr)).toBeGreaterThan(0.0001);
     expect(a.zoep30.re).toBeCloseTo(-0.12239091302671612, 12);
     expect(a.tuning.tuningMs).toBe(16);
   });

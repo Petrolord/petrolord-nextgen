@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ekeneDisplacement, fitLabGrid, dipCase, polymerCase, averageRefit,
+  ekeneDisplacement, fitLabGrid, fitPrintedLabGrid, dipCase, polymerCase, averageRefit,
   swAvgCrestColumn, EKENE_SCAL,
 } from './scalLab';
 import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Design explorer (Expert): three ways to interrogate the same displacement.
-// Fit-the-lab recovers the Corey plant from the 13-row grid; the dip mode
+// Fit-the-lab recovers the Corey plant from the 13-row grid, and the printed
+// grid mode fits the same rows as a lab sheet prints them (kr to 3 dp); the dip mode
 // prices the gravity term at a chosen rate and angle; the polymer mode
 // thickens the water and moves the front. The base Ekene fw curve stays on
 // the plot throughout so every case is read against the same reference.
@@ -40,8 +41,8 @@ const DesignExplorer = () => {
     try {
       const base = ekeneDisplacement();
       const context = { avgA: averageRefit().fit.a, swAvg: swAvgCrestColumn() };
-      if (mode === 'fit') {
-        const { fit } = fitLabGrid();
+      if (mode === 'fit' || mode === 'fitPrinted') {
+        const { fit } = mode === 'fit' ? fitLabGrid() : fitPrintedLabGrid();
         if (!fit.ok) return { error: fit.errors.join('; ') };
         return { base, context, fit, caseOut: base };
       }
@@ -65,7 +66,7 @@ const DesignExplorer = () => {
     <line x1={x(Swc)} y1={y(0)} x2={x(bl.SwAvgBt)} y2={y(1)} stroke={stroke} strokeWidth="1" strokeDasharray="5 4" opacity="0.85" />
   ) : null);
 
-  const caseLabel = mode === 'fit' ? 'fitted Corey (overlays the base)' : mode === 'dip' ? `dip ${dip} deg at ${qt} rb/d` : `polymer, muW x ${mult}`;
+  const caseLabel = mode === 'fitPrinted' ? 'Corey fitted to the printed grid' : mode === 'fit' ? 'fitted Corey (overlays the base)' : mode === 'dip' ? `dip ${dip} deg at ${qt} rb/d` : `polymer, muW x ${mult}`;
 
   return (
     <PanelShell
@@ -77,7 +78,7 @@ const DesignExplorer = () => {
           label="Mode"
           value={mode}
           onChange={setMode}
-          options={[['fit', 'Fit the lab grid'], ['dip', 'Gravity / dip'], ['polymer', 'Polymer screening']]}
+          options={[['fit', 'Fit the lab grid'], ['fitPrinted', 'Fit the printed grid (kr to 3 dp)'], ['dip', 'Gravity / dip'], ['polymer', 'Polymer screening']]}
         />
         {mode === 'dip' && (
           <>
@@ -119,6 +120,14 @@ const DesignExplorer = () => {
             <Tile label="Points used (of 26)" value={fit.pointsUsed} />
           </>
         )}
+        {mode === 'fitPrinted' && (
+          <>
+            <Tile label="Fitted nw, printed grid" value={sci(fit.params.nw, 9)} />
+            <Tile label="Fitted no, printed grid" value={sci(fit.params.no, 9)} />
+            <Tile label="RMS log residual" value={sci(fit.rmsLog, 4)} />
+            <Tile label="Points used (of 26)" value={fit.pointsUsed} />
+          </>
+        )}
         {mode === 'dip' && (
           <>
             <Tile label="Gravity coefficient" value={sci(caseOut.gCoef, 9)} />
@@ -150,6 +159,14 @@ const DesignExplorer = () => {
           is noise free. The two context tiles are the honest numbers of this tier: the averaged
           J refit drifts off the design 0.25 through log-linear resampling, and the crest column
           averages far wetter than the flat 0.35 booking.
+        </Note>
+      )}
+      {mode === 'fitPrinted' && (
+        <Note>
+          The same thirteen rows with every kr rounded to the three decimals a lab sheet prints.
+          The rounding is small on the high end of each curve and large, in log terms, on the low
+          end, so the exponents move off the plant and the residual is no longer at machine scale.
+          This is what a fit on real printed core data looks like.
         </Note>
       )}
       {mode === 'dip' && (

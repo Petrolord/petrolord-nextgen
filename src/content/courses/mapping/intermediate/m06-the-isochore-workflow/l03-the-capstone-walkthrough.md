@@ -6,7 +6,7 @@ The capstone asks for six numbers. This lesson walks the exercise in the order t
 
 ## What is being asked
 
-Grid both SAND surfaces at the capstone settings and subtract them into an isochore. Read the panel: the thickness extremes and mean, the thickness at prospect P-1, the live node count, and the plain mean of the six well thicknesses for comparison.
+Grid both SAND surfaces at the capstone settings and subtract them into an isochore. Read the panel: the thickness extremes and mean, the thickness at prospect P-1, how many live isochore nodes sit above the plain mean of the six well thicknesses, and that plain mean itself for comparison.
 
 | Field | Unit | Tolerance |
 | --- | --- | --- |
@@ -14,7 +14,7 @@ Grid both SAND surfaces at the capstone settings and subtract them into an isoch
 | Isochore maximum thickness | m | 0.1 |
 | Isochore mean thickness | m | 0.1 |
 | Thickness at prospect P-1 | m | 0.1 |
-| Live isochore nodes | count | 0, exact |
+| Live isochore nodes above the well mean | count | 0, exact |
 | Mean of the six well thicknesses | m | 0.05 |
 
 The settings are fixed: a 100 m cell, two pad cells and an 800 m extrapolation limit, exactly as the Associate tier used.
@@ -27,11 +27,11 @@ The settings are fixed: a 100 m cell, two pad cells and an 800 m extrapolation l
 
 **Switch the surface to the isochore and read four fields in one panel state.** Minimum 25, maximum 35.897705078125, mean 32.25429068038713 and the value at P-1, 34.050048828125. Taking them together prevents the commonest failure, which is reading one of them from a different cell size.
 
-**Read the live node count last.** It is 201, and it is graded exactly.
+**Read the count above the well mean last.** It sits in the same panel state, on the tile that compares every live node against the well mean you worked by hand, and it is graded exactly. It can never exceed the live total printed beside it.
 
 ## The self-consistency checks
 
-Four relationships hold across the six fields and each takes seconds.
+Four relationships hold across the fields and the tiles beside them, and each takes seconds.
 
 $$25 \le 32.2543 \le 35.8977$$
 
@@ -57,7 +57,7 @@ The thickness at P-1 should equal the base surface minus the top surface there, 
 
 **Reporting the isochore minimum as the difference of the two surface minima.** That is $1570 - 1539.7181 = 30.28$ m, which is wrong by more than 5 m, because the two surfaces reach their extremes at different nodes.
 
-**Rounding the live node count.** It is a count with a tolerance of zero. Two hundred is not 201.
+**Reporting the live node count.** The live total, 201, sits on a tile beside the graded one and is the Associate tier's answer. The field asks how many of those nodes lie above the well mean, which is a count only the isochore produces, graded with a tolerance of zero.
 
 ## Reading the panel honestly
 
@@ -67,7 +67,7 @@ The habit that prevents most losses is to record the conditions with the numbers
 
 ## Worked example
 
-A learner submits 25, 36, 32.25, 34.05, 201 and 31.17. Which field is wrong and how would the checks find it?
+A learner submits 25, 36, 32.25 and 34.05 for the first four fields, reads the count above the well mean correctly, and submits 31.17 for the last. Which field is wrong and how would the checks find it?
 
 The maximum. Thirty six is the 50 m cell reading; the capstone's 100 m cell gives 35.8977, and the difference of 0.102 m is just outside the 0.1 m tolerance.
 
@@ -77,4 +77,4 @@ The consistency checks do not catch it, because 36 sits perfectly well above the
 
 Write out the six capstone fields with their units, then state which one requires no gridding at all and which one has a tolerance of zero.
 
-As a self-check: minimum 25 m, maximum 35.897705078125 m, mean 32.25429068038713 m, thickness at P-1 34.050048828125 m, live nodes 201, and mean well thickness 31.166666666666668 m. The mean of the six well thicknesses requires no gridding, since it is the average of six subtractions done at the wells, and the live node count is the field graded exactly, because it is a count of nodes rather than a measurement of anything.
+As a self-check: minimum 25 m, maximum 35.897705078125 m, mean 32.25429068038713 m, thickness at P-1 34.050048828125 m, the count of live nodes above the well mean read from its tile, and mean well thickness 31.166666666666668 m. The mean of the six well thicknesses requires no gridding, since it is the average of six subtractions done at the wells, and the count above the well mean is the field graded exactly, because it is a count of nodes rather than a measurement of anything.

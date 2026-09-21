@@ -1,6 +1,6 @@
 # Honoring the data
 
-The capstone's tightest-graded field, tolerance 0.0005, asks for the kriged porosity AT well W1, and the answer is W1's own 0.315 to fifteen digits. The field is not testing arithmetic; it is testing whether you know WHY an estimator with a nonzero nugget still returns the data exactly at the data. This lesson derives that why.
+The panel's kriged-at-W1 tile reads W1's own 0.315 to fifteen digits, at every valid nugget. That is no arithmetic accident, and the thing worth knowing is WHY an estimator with a nonzero nugget still returns the data exactly at the data. This lesson derives that why.
 
 ## The simple kriging estimate
 
@@ -14,11 +14,11 @@ with the weights solved from the covariance system $A w = c_0$: $A_{ij}$ the cov
 
 Put the target ON data point $k$. Then the right-hand side $c_0$ is exactly the $k$-th column of $A$: the target's covariance to each data point IS point $k$'s covariance to each data point, including $C(0) = \mathrm{sill}$ to itself. The system $A w = A_{\cdot k}$ has the immediate solution $w = e_k$, one for point $k$, zero elsewhere, and it is unique because $A$ is nonsingular. The estimate collapses to $\mu + (\phi_k - \mu) = \phi_k$. The engine's krige at (1100, 2100) returns 0.315 with the golden nugget, with nugget zero, with nugget 0.002: ANY valid nugget, always exactly.
 
-Trace where the construction mattered: $C(0)$ was set to the FULL SILL, not sill minus nugget. Had the covariance function been continuous at zero, $C(0) = \mathrm{sill} - \mathrm{nugget}$, the right-hand side at a data point would no longer be a column of $A$, the weights would spread, and the estimate at W1 would slide off 0.315 toward the neighbours. The discontinuity at $h = 0$ is not an accident of implementation; it is the documented "honor the data" choice, and the capstone's 0.0005 tolerance exists to catch every implementation that made the other choice.
+Trace where the construction mattered: $C(0)$ was set to the FULL SILL, not sill minus nugget. Had the covariance function been continuous at zero, $C(0) = \mathrm{sill} - \mathrm{nugget}$, the right-hand side at a data point would no longer be a column of $A$, the weights would spread, and the estimate at W1 would slide off 0.315 toward the neighbours. The discontinuity at $h = 0$ is not an accident of implementation; it is the documented "honor the data" choice, and reading a map back at its own wells is how you catch every implementation that made the other choice.
 
 ## Exactness is a choice, not a law
 
-The other choice is legitimate and has a name: treating the nugget as MEASUREMENT ERROR, where the map should NOT reproduce a noisy observation exactly but smooth through it. Geostatistics textbooks carry both conventions, filtered and unfiltered nugget, and real software packages differ, which is exactly the kind of convention difference that silently moves maps between tools. The engine documents its choice, the fixture pins it, and the capstone grades it; when a map from elsewhere disagrees with this engine AT THE WELLS, the first suspect is this convention, not a bug.
+The other choice is legitimate and has a name: treating the nugget as MEASUREMENT ERROR, where the map should NOT reproduce a noisy observation exactly but smooth through it. Geostatistics textbooks carry both conventions, filtered and unfiltered nugget, and real software packages differ, which is exactly the kind of convention difference that silently moves maps between tools. The engine documents its choice and the fixture pins it; when a map from elsewhere disagrees with this engine AT THE WELLS, the first suspect is this convention, not a bug.
 
 What exactness costs is visible one step off the well, next lesson's subject: honoring a noisy value exactly means the map must jump away from it fast, and the nugget sets how fast.
 

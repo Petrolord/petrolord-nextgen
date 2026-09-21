@@ -2,7 +2,7 @@
 
 Not every correlation line reaches every well. On the Ekene section, three of the four tops are picked in all four wells, but TOP_B is picked in Ekene-1, Ekene-2 and Ekene-3 only. Ekene-4 has no TOP_B at all.
 
-The engine's behaviour here is one line of logic and no ceremony. `correlationPolyline` walks the wells in section order, looks the top up in each, and when the lookup returns null it simply skips that well. No placeholder point is created. No gap is filled. The TOP_B line therefore reaches **3 wells and not 4**, and that count of 3 is one of the six numbers the capstone asks you to reproduce.
+The engine's behaviour here is one line of logic and no ceremony. `correlationPolyline` walks the wells in section order, looks the top up in each, and when the lookup returns null it simply skips that well. No placeholder point is created. No gap is filled. The TOP_B line therefore reaches **3 of the 4 wells**, and knowing which well it skips is what keeps every TOP_B figure you report honest.
 
 ## Why skipping is the honest behaviour
 

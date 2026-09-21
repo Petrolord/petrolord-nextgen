@@ -1,0 +1,42 @@
+{
+ "course": "rodpump",
+ "tiers": {
+  "beginner": {
+   "why": "string_natural_freq_spm is the product of two numbers the prompt printed (the 40.15458511 spm uniform fundamental and the 1.15865923 taper factor), so 40.15458511 x 1.15865923 = 46.52548066 passed without any work (B5 finding 4). The two figures are dropped from the trap and the free check, keeping the qualitative check that the tapered note exceeds the uniform one. The tapered note is a transfer matrix scan with no hand route, so the string explorer (pd-string-explorer) gains a typed string view ('The note of a string you type'): the learner enters the three sections the prompt states and reads the engine scan fundamental at 12 decimals. The view opens on the ODUMA-4 teaching string, so its default state lands on no graded answer (panelCapstoneGuard sweeps it). Key, expected and tolerance are unchanged; prompt only.",
+   "prompt_edits": [
+    [
+     "A stepped bar has a fundamental of its own, 40.15458511 spm here, and a taper raises it by a taper factor of 1.15865923; report the TAPERED string's note, not the uniform one.",
+     "A uniform bar of the same length has a fundamental of its own, and a taper raises it by a taper factor; report the TAPERED string's note, which the string explorer's typed string view reads from the three sections stated above."
+    ],
+    [
+     "Field 3 must EXCEED the 40.15458511 spm uniform fundamental, by exactly the taper factor, because stiffening the top of a bar can only raise its note.",
+     "Field 3 must EXCEED the fundamental of a uniform bar of the same length, by exactly the taper factor, because stiffening the top of a bar can only raise its note."
+    ]
+   ],
+   "fields": {},
+   "annot_updates": {
+    "string_natural_freq_spm": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rodpump/rodPumpLab.js typedStringNote (buildRodString + naturalFrequency)",
+     "printed": {
+      "decimals": 12
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rodpump/StringExplorer.jsx Typed view, Tile 'Engine scan fundamental' fmt(r.engineScanSpm, 12)",
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Typing 1 in x 1825 ft, 7/8 in x 2140 ft, 3/4 in x 2120 ft into the typed string view returns the engine scan fundamental equal to the key within tol 9.4e-6 at its 12 decimal print (panelCapstoneGuard.test.js 'typing the string the prompt states'). The prompt no longer prints the uniform fundamental or the taper factor, so the product route is gone. The view's default (ODUMA-4) is in teachingQuantities and lands on no graded answer."
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/rodpump/rodPumpLab.js",
+  "src/components/course/panels/rodpump/StringExplorer.jsx",
+  "src/components/course/panels/rodpump/panelCapstoneGuard.test.js",
+  "src/components/course/panels/rodpump/panelModes.test.jsx",
+  "src/content/courses/rodpump/beginner/m06-the-associate-reading/l02-working-the-capstone.md"
+ ],
+ "tests": "vitest src/components/course/panels/rodpump (guard 21 pass incl. 2 new typed-view tests; modes gate now 16 modes), panelRender pass, check-wave-inputs ok, eslint clean",
+ "notes": "No wave input change (fields.json unchanged). The guard keeps the D2 default-state sweep: typedStringNote(TYPED_STRING_DEFAULT) was added to teachingAccessors, and a positive control proves the capstone value is reachable only by typing the capstone string. No guard rule was relaxed. No local rodpump mirror gate failure."
+}

@@ -91,7 +91,11 @@ add('beginner', 'waterLbDay', 'Water the unit takes out', 'lb/day', ikPack.water
 add('beginner', 'circGpm', 'TEG circulation', 'gpm', ikPack.circGpm);
 add('beginner', 'circGpd', 'TEG circulation', 'gal/day', ikPack.circGpd);
 add('beginner', 'sensiblePerGal', 'Sensible heat per gallon circulated', 'Btu/gal', ikPack.sensiblePerGal);
-add('beginner', 'btexTonsYear', 'BTEX carried to the still overhead', 'short tons/yr', ikPack.btexTonsYear);
+// W1 (B5 follow-on, 2026-09-21): the sixth Associate field was the BTEX to the
+// still overhead, a ppmv mole balance the Associate tier never teaches. It is
+// now the reboiler duty, step six of the worked lesson, on the capstone's own
+// stated reflux ratio and the water overhead the prompt now STATES.
+add('beginner', 'tegReboilerMMBtuHr', 'Reboiler duty', 'MMBtu/hr', ikPack.reboilerMMBtuHr);
 
 /* ---------------------------------------------------- Professional ----- */
 // FC4-0 put this export inside the module's error contract: it returns

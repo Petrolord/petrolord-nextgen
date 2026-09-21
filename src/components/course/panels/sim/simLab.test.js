@@ -109,6 +109,11 @@ describe('simLab: Expert capstone oracles', () => {
   it('the rules the validator refuses', () => {
     expect(lab.validationCases()).toHaveLength(7);
     lab.validationCases().forEach((c) => expect(c.errors.length).toBeGreaterThan(0));
+    // W1: the Expert capstone grades the MESSAGES the Validation view lists, 8
+    // across the seven cases (one case is coupled to a second rule).
+    const messages = lab.validationCases().reduce((n, c) => n + c.errors.length, 0);
+    expect(messages).toBe(8);
+    lab.validationCases().forEach((c) => expect(c.errors.length).toBeLessThanOrEqual(2));
   });
 
   it('the equilibration datum depth', () => {

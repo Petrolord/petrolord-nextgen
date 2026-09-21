@@ -233,12 +233,36 @@
    "fix": {
     "redesign": "Replace with 'Live isochore nodes above the well mean' (count), read from the existing tile IsochoreExplorer.jsx:78 in the same panel state, tol 0; it is a measured isochore count that the Associate tier never produced."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Swap for a count that only the isochore produces (nodes above the well mean), so the Professional tier does not regrade an Associate number.",
    "evidence": "The isochore frame and hull are the same as the Associate capstone's TOP_SAND map, so the answer is the 201 the learner already typed for beginner live_nodes; a learner who carries that number across passes without gridding anything.",
    "notes": "LEAK: IsochoreExplorer opens on the isochore at CAPSTONE_CELL_M (IsochoreExplorer.jsx:22-23), so the default state shows this value, and /root/wt-b5-nextgen/src/content/courses/mapping/intermediate/m06-the-isochore-workflow/l03-the-capstone-walkthrough.md prints it.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_mapping.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "iso_nodes_above_well_mean",
+     "label": "Live isochore nodes above the well mean",
+     "unit": "count",
+     "expected": 146.0,
+     "tol": 0.0
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx:78 (Live nodes above the well mean tile, Isochore at the 100 m cell)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx:78 `${s.nodesAboveWellMean} of ${s.liveNodes}`",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "computeIsochoreMap(100, \"ISOCHORE\").summary.nodesAboveWellMean = 146 (pinned in isochoreLab.test.js). The same tile reads 41 on TOP_SAND and 48 on BASE_SAND, 583 and 36 on the isochore at 50 m and 200 m; the live total 201 (the old answer) is printed beside it and fails. An integer count printed exactly, tol 0. Not guessable: the answer space is 0..201 and the lessons now say only \"well over half\". The panel opens on the isochore at 100 m, so the default state prints it (the whole mapping course is a W5 re-case). The three intermediate lessons that printed 146 were reworded.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": true
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -385,12 +409,38 @@
    "fix": {
     "redesign": "Replace with 'Depth at P-1 with Ekene-7 included' (m), read from the Depth at P-1 tile (ValidationExplorer.jsx:67, fmt 4) in the Six plus Ekene-7 state, tol 0.1; it measures what the new well did to the prospect."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Replace with the post-Ekene-7 depth at P-1 so the field measures the regrid rather than regrading 201 a third time.",
    "evidence": "Ekene-7 lies inside the six-well hull, so the live count is unchanged at 201, the same number graded in the Associate (live_nodes) and Professional (iso_live) capstones; 'unchanged' is the obvious guess and it is right.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/mapping/advanced/m06-the-validation-workflow/l03-the-capstone-walkthrough.md prints this value, and the ValidationExplorer shows it on the default or a one-click control-set state (probe).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_mapping.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "depth_at_p1_with_e7_m",
+     "label": "Depth at prospect P-1 with Ekene-7 included",
+     "unit": "m",
+     "expected": 1547.105224609375,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx:67 (Depth at P-1 tile, control set Six plus Ekene-7)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx:67 fmt(s.atTarget) (toFixed(4))",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "computeValidationMap(\"plus7\").summary.atTarget = 1547.105224609375 (pinned in validationLab.test.js). The same tile under the other seven control sets reads 1542.6199 (all six, the default state and the beginner answer), 1543.0889, 1541.9392, 1543.8075, 1547.2102 (closest, 0.105 away), 1542.1936, 1549.7084: all fail tol 0.01. Printed at 4 dp, rounding miss 2.5e-5. The default state does not print it. LEAK: advanced m04 l04 and m05 l03 teach the seven-well P-1 reading (1547.105224609375) as the module's own worked result; left for the W5 re-case like the other mapping leaks.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": true
+    }
+   }
   }
  ]
 }

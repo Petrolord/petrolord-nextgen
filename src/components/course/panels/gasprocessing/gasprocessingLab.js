@@ -1567,7 +1567,7 @@ export const capstoneFields = () => {
     ['beginner', 'circGpm', r.ikPack.circGpm],
     ['beginner', 'circGpd', r.ikPack.circGpd],
     ['beginner', 'sensiblePerGal', r.ikPack.sensiblePerGal],
-    ['beginner', 'btexTonsYear', r.ikPack.btexTonsYear],
+    ['beginner', 'tegReboilerMMBtuHr', r.ikPack.reboilerMMBtuHr],
     ['intermediate', 'fractionRemoved', r.otFrac.fractionRemoved],
     ['intermediate', 'stagesNeeded', r.otStages.stages],
     ['intermediate', 'acidMolesDay', r.otAmine.acidMolesDay],

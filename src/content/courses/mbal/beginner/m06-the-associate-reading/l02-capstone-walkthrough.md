@@ -9,7 +9,7 @@ The Associate capstone asks you to close the Ekene tank. You run material balanc
 | Oil originally in place from the slope | stb | 20000 | module 3 lesson 3 |
 | Rock and water share of $E_t$ at the last survey | percent | 0.2 | module 2 lesson 4 |
 | Depletion drive index at the last survey | none | 0.005 | module 4 lesson 2 |
-| R-squared of the straight line | none | 0.001 | module 3 lesson 2 |
+| Oil expansion $E_o$ at the last survey | rb/stb | 0.00005 | module 2 lesson 2 |
 
 This lesson does not hand you six answers to copy. It walks two of them all the way through the panel and by hand, and points you at the lesson that owns each of the rest. If you worked modules 1 through 5 there is nothing new here. The capstone is the course, asked back.
 
@@ -57,7 +57,7 @@ Take the result seriously, because it is the most surprising number in this tier
 
 **Depletion drive index.** Module 4 lesson 2, and its own tile. The hand route is the oil expansion divided by the total expansion in the last row, because the withdrawal cancels: the index is $N E_o / F$ and $F$ is $N E_t$. That gives you a free check: on a tank with no water influx and no gas cap, the depletion drive index and the rock and water share must add to exactly 1.
 
-**R-squared.** Module 3 lesson 2, and its tile. It is a statement about how tightly six points sit on a line, and nothing more. The next lesson explains why a superb value here is not evidence that your model is correct.
+**Oil expansion at the last survey.** Module 2 lesson 2, and the "Eo rb/stb" column of the last row. Check it by hand: it is the oil formation volume factor at the last survey less the initial 1.2 rb/stb, and it must equal the "Et rb" cell less the "Efw rb" cell of the same row. The R-squared tile beside the slope is not graded. It says how tightly six points sit on a line and nothing more, and the next lesson explains why a superb value is not evidence that your model is correct.
 
 ## Submitting
 

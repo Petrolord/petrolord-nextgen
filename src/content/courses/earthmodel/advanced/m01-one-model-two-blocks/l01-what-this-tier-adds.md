@@ -14,9 +14,9 @@ From the Associate tier: the census 326 and 174, hand counted, and the block vol
 
 ## What is graded
 
-The Expert capstone reads six values off this model: the block 1 node count (174, exact), the plane-trend porosity at (1250, 2250), the kriged porosity at (1500, 2500), the kriged porosity AT well W1 (the exactness check), zone A's weighted porosity in block 0, and zone A's bulk volume in block 1. Two are about labelling, three about population, one about volume: the tier in miniature.
+The Expert capstone reads six values off this model: the block 1 node count (174, exact), the plane-trend porosity at (1250, 2250), the kriged porosity at (1500, 2500), the kriged porosity jump across the fault on the y = 2200 row, zone A's weighted porosity in block 0, and zone A's bulk volume in block 1. Two are about labelling, three about population, one about volume: the tier in miniature.
 
-Two of the six deserve a flag now. The kriged value AT a well is graded with the tightest tolerance in the ladder, 0.0005, because it is an exactness property of the method rather than a computed estimate: simple kriging with this engine's covariance honours its data exactly, and the capstone checks you know that. And the trend probe at (1250, 2250) is graded at 0.001 but is hand-reachable in three multiplications, for reasons module four will make embarrassing to forget.
+Two of the six deserve a flag now. The fault jump on the y = 2200 row is graded with the tightest tolerance in the ladder, 0.00005, because the panel prints it to six decimals and a neighbouring variogram setting moves it by as little as a ten-thousandth: it checks that you read the kriged map at the stated assumptions and keep its sign. And the trend probe at (1250, 2250) is graded at 0.001 but is hand-reachable in three multiplications, for reasons module four will make embarrassing to forget.
 
 ## Worked example
 

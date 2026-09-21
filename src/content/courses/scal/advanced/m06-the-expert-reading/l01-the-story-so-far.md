@@ -10,7 +10,7 @@ The Expert capstone grades six fields. Each one was earned in a specific module,
 
 | Field | Value | Designed case | Owned by |
 | --- | --- | --- | --- |
-| fitted_nw | 2.4999999999999996 | 13-row lab grid, Sw 0.35 to 0.75, fixed endpoints | m01 |
+| fitted_nw_printed_grid | read it from the printed grid fit | 13-row lab grid, Sw 0.35 to 0.75, kr printed to 3 dp, fixed endpoints | m01 |
 | avg_refit_a | 0.2491501585202375 | averageJCurves over the three Ekene plugs, Swirr 0.25 | m03 |
 | gravity_ed_bt | 0.5095807170488317 | k 250 md, A 20000 ft2, qt 2000 rb/d, dip 10 degrees updip | m04 |
 | downdip_ed_bt | 0.5081700834294871 | the same case with dip reversed to minus 10 degrees | m04 |
@@ -21,7 +21,7 @@ Look down the middle column and notice how much of it is the same quantity. Thre
 
 ## What each lever taught
 
-The fit taught you that the machinery is honest when the data is: nw came back as 2.4999999999999996 with an rmsLog of 1.3784958753881249e-16, which is the arithmetic saying the plant and the recovery are the same number. The lesson was never the fit succeeding. It was the two rows the krFloor excluded, the confidence intervals collapsing to zero width, and what both of those would look like on real, noisy core data.
+The fit taught you that the machinery is honest when the data is, and the capstone then asks what it does when the data is merely printed: nw came back as 2.4999999999999996 with an rmsLog of 1.3784958753881249e-16, which is the arithmetic saying the plant and the recovery are the same number. The lesson was never the fit succeeding. It was the two rows the krFloor excluded, the confidence intervals collapsing to zero width, and what both of those would look like on real, noisy core data.
 
 The average taught you the opposite: machinery that is honest in every visible way and still biased. The refit of the averaged curve lands at 0.2491501585202375 against a plant of 0.25, with an r2Log of 0.9998442671274563 that would pass any review in the industry. The bias enters in the one move nobody audits, the log-linear resample, and it is why the capstone grades the drifted value rather than the design value.
 

@@ -12,7 +12,7 @@ Concretely, what arrives is the tops table for four wells and four surfaces, the
 
 ## Step one: audit the tops table
 
-Before any arithmetic, count. Four wells, four top names, fifteen picks in sixteen slots, and three wells carrying all four tops. That last count is the one you will report and the one the capstone grades exactly.
+Before any arithmetic, count. Four wells, four top names, fifteen picks in sixteen slots, and three wells carrying all four tops. That last count is the one you state at the top of the report, before any TOP_B figure.
 
 The audit also fixes your vocabulary for the rest of the job. TOP_B is a three-well surface here. Anything you compute on it later is a three-well number, and you decided that at the start rather than discovering it halfway through.
 

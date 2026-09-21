@@ -12,9 +12,9 @@ const rows = JSON.parse(execFileSync('node', ['/root/fc-wip-gasprocessing/fc4_ca
 const BARE = process.argv.includes('--bare-stated-tolerances');
 const TOL = {
   inletLbMMscf: 1e-4, waterLbDay: 1e-2, circGpm: 1e-5, circGpd: 1e-2,
-  sensiblePerGal: 1e-4, btexTonsYear: 1e-5,
+  sensiblePerGal: 1e-4,
   fractionRemoved: 1e-9, stagesNeeded: 1e-6, acidMolesDay: 1e-2,
-  reboilerMMBtuHr: 1e-5, circGpmRetuned: 1e-5,
+  reboilerMMBtuHr: 1e-5, circGpmRetuned: 1e-5, tegReboilerMMBtuHr: 1e-5,
   dzdT: 1e-12, muFPerPsi: 1e-9, dropF: 1e-4, t2F: 1e-4,
   waterInLbMMscf: 1e-4, waterOutLbMMscf: 1e-4,
 };

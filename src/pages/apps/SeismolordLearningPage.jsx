@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import {
   computeSynthetic, waveletRows, traceRows, CAPSTONE_FREQ_HZ, V_OVERBURDEN_MS, DT_MS,
-  computeIntermediate, PLANTED_LAG_MS, computeAdvanced, tuningRows, WEDGE,
+  computeIntermediate, computeAdvanced, tuningRows, WEDGE,
 } from '@/lib/seismolordTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
@@ -305,7 +305,7 @@ const SeismolordLearningPage = () => {
                 <CardHeader>
                   <CardTitle className="text-white">Bulk shift and tuning (Intermediate)</CardTitle>
                   <CardDescription>
-                    The observed seismic is the 25 Hz synthetic arriving {PLANTED_LAG_MS} ms late; the scan should find exactly that. Tuning: compare the 15 Hz and 40 Hz peaks.
+                    The observed seismic is the 25 Hz synthetic arriving late by a lag the scan has to find. Tuning: compare the 15 Hz and 40 Hz peaks.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

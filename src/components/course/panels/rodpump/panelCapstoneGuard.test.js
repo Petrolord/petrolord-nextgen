@@ -236,6 +236,35 @@ describe('no teaching number lands within ten grading bands of a graded answer',
 });
 
 // ---------------------------------------------------------------------------
+// 2b. THE TYPED STRING VIEW (B5 W1, owner decision D2). The string explorer
+// takes a typed rod string, so the capstone's natural frequency is reachable by
+// TYPING the capstone string. That is the work the field asks for. What must
+// never happen is that the view's DEFAULT state lands on a graded answer, so the
+// default is inside the swept surface above, and this block proves both halves.
+// ---------------------------------------------------------------------------
+
+describe('the typed string view: reachable by typing, silent by default', () => {
+  it('its default state is part of the swept panel surface', () => {
+    const labels = new Set(L.teachingQuantities().map((r) => r.label.split('.').slice(0, 2).join('.')));
+    expect(labels.has('typedStringNote.default')).toBe(true);
+    const d = L.typedStringNote(L.TYPED_STRING_DEFAULT);
+    expect(d.ok).toBe(true);
+    [d.engineScanSpm, d.n0Spm, d.taperFactor, d.lengthFt].forEach((v) => expect(leakGuardHit(v), String(v)).toBeNull());
+  });
+
+  it('typing the string the prompt states reads the graded natural frequency (the route exists)', () => {
+    const typed = L.typedStringNote([
+      { size: '1', lengthFt: 1825 }, { size: '7/8', lengthFt: 2140 }, { size: '3/4', lengthFt: 2120 },
+    ]);
+    const [, key, value, tol] = CAPSTONE_FIELDS.find(([, k]) => k === 'string_natural_freq_spm');
+    expect(typed.ok).toBe(true);
+    // read at the view's 12 decimal print
+    expect(Math.abs(Number(typed.engineScanSpm.toFixed(12)) - value), key).toBeLessThanOrEqual(tol);
+    expect(leakGuardHit(typed.engineScanSpm).key).toBe(key);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // 3. THE GATE IS LIVE. PROVED BY PLANTING LEAKS.
 // ---------------------------------------------------------------------------
 

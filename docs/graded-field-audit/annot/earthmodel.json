@@ -313,25 +313,36 @@
   {
    "tier": "advanced",
    "key": "krige_probe",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/lib/earthmodelTeaching.js:228 krigeProbe computed but never rendered; PopulationExplorer.jsx:81-92 has no tile for it",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:96 (Kriged at a probe point tile; type x 1500, y 2500 with Simple kriging, nugget 0.00025, range 900)",
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:96 fmt(probe, 6), probe = m.krigeAt(px, py) (src/lib/earthmodelTeaching.js computePopulation.krigeAt)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "tolerance",
    "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/earthmodel/PopulationExplorer.jsx:87 -> add a tile 'Kriged at (1500, 2500)' = fmt(m.probes.krigeProbe, 6)",
     "new_tol": 0.0002
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Add the tile at 6 decimals and tighten tol to 0.0002 so the mean no longer passes; owner to accept the tightening.",
-   "evidence": "No panel prints (1500, 2500); a 4x4 simple-kriging solve is not taught as a hand method, and the walkthrough admits 'The panel's default probe tile is not this one' (advanced m06 l04:17). Worse, tol 0.001 admits the MEAN: the default 'Kriged far from all wells' tile prints 0.2905162808 (PopulationExplorer.jsx:87) and 'Arithmetic vs weighted mean' 0.290516, both 0.00091 from 0.29143, so the collapse-to-the-mean answer the walkthrough names as wrong passes.",
+   "evidence": "New probe readout with x/y inputs; krigeAt(1500, 2500) = 0.2914277719922997 exactly (populationLab.test.js). Its default location is PROBE_DEFAULT (2000, 2300), which reads 0.279119 and, under every nugget/range option, stays > 0.0017 from the key, so no default state prints it (D2). At tol 0.0002 the mean 0.290516 (0.00091 away) fails; the nugget-0 value 0.291597 (1.7e-4) still passes, as the B5 annotation noted. Rounding miss at 6 dp 2.3e-7. The advanced m06 l04 walkthrough now names the readout and the 0.0002 tolerance; m05 l03/l05 no longer describe the nugget sweep as \"one tolerance\".",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/advanced/m06-per-block-volume-and-the-workflow/l04-the-capstone-walkthrough.md prints this value, and the PopulationExplorer default state shows it (probe). The m05 l05 lesson prints 0.2914277719922997 verbatim. Tightening tol to 0.0002 can flip a pass to a fail (flag); it would still admit the nugget sweep (0 gives 0.29160) but reject the mean, the trend (0.295) and the per-block value (0.28627).",
    "leak": true,
-   "shipped": null
+   "default_state_prints": false,
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261024a_w1_earthmodel.sql",
+    "wave": "w1",
+    "prompt": "krige_at_w1 was prompt-given: the prompt called it the exactness check and the tile's unit string printed \"W1 is 0.3150\", so W1's logged porosity passed without kriging anything. It is replaced by a measured per-block kriging output, the porosity jump across the fault on the y = 2200 row (block 0 no",
+    "tol": [
+     0.001,
+     0.0002
+    ]
+   }
   },
   {
    "tier": "advanced",
@@ -350,12 +361,38 @@
    "fix": {
     "redesign": "Replace with 'Porosity jump across the fault on the y = 2200 row' (v/v), read from the existing 'Jump across the fault on this row' tile (PopulationExplorer.jsx:84, fmt 6), tol 0.0005; it is a measured per-block kriging output rather than an input datum."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Redesign to a measured per-block kriging number; keep the exactness idea as a lesson exercise.",
    "evidence": "The prompt itself says the answer is the exactness check ('simple kriging with a nugget below the sill honors the data'), so the answer is W1's logged porosity, and the tile's unit string prints 'W1 is 0.3150'. Anyone who reads W1's value passes without kriging anything.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/advanced/m06-per-block-volume-and-the-workflow/l04-the-capstone-walkthrough.md prints this value, and the PopulationExplorer default state shows it (probe). The walkthrough (m06 l04:21) calls it 'a convention detector disguised as an easy lookup', but the learner does not implement the engine, so it detects nothing.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_earthmodel.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "fault_jump_y2200",
+     "label": "Porosity jump across the fault on the y = 2200 row",
+     "unit": "v/v",
+     "expected": -0.023016035393453593,
+     "tol": 5e-05
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:92 (Jump across the fault on this row tile, Simple kriging, nugget 0.00025, range 900)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:92 fmt(jump, 6)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "computePopulation() profile[12].phi - profile[11].phi = -0.023016035393453593 (pinned in populationLab.test.js with a sweep over all 48 method/nugget/range settings, every other one more than 5e-5 away: nearest -0.0231041 at range 300 and -0.0228259 at range 600; trend -0.0210, constant -0.028688; unsigned +0.023016 is 0.046 away). Printed at 6 dp, rounding miss 3.5e-8. The panel opens on simple kriging at the golden variogram, so the DEFAULT STATE PRINTS IT (earthmodel is a full W5 re-case). Lessons reworded so no figure within tol survives: m01 l04 printed it to full precision and \"about 0.292\" at x 1600 (0.292 - 0.315 = -0.023 passes), m04 l05 printed \"krige minus 0.0230\".",
+     "class": "none",
+     "owner_decision": false,
+     "leak": true
+    }
+   }
   },
   {
    "tier": "advanced",

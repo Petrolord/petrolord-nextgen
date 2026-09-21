@@ -67,7 +67,7 @@ const FlattenExplorer = () => {
 
   return (
     <PanelShell title="Flatten explorer"
-      subtitle={`The four Ekene wells flattened on ${topName} at a ${fmt(datumM)} m datum. The capstone flattens on TOP_A at 1450 m.`}>
+      subtitle={`The four Ekene wells flattened on ${topName} at a ${fmt(datumM)} m datum. The capstone flattens on TOP_A at 1450 m and names one second datum for a single reading.`}>
       <div className="flex flex-wrap gap-2 items-end">
         {TOPS.map((t) => (
           <button key={t} type="button" onClick={() => setTopName(t)}

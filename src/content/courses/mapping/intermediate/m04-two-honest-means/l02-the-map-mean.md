@@ -26,7 +26,7 @@ They are answers to different questions and there is no reason for them to agree
 
 The panel reports the map mean as 32.2543 m against the well mean of 31.1667 m. The map average is 1.0876 m higher, which is 3.5 percent.
 
-Look at the tile below it: **146 of the 201 live nodes are above the well mean**, and only 55 below. That is 73 percent of the mapped area sitting above the average of the wells, which is a strong asymmetry and the direct cause of the gap.
+Look at the tile below it, which counts the live nodes above the well mean. On this isochore that count is well over half of the 201, so most of the mapped area sits above the average of the wells. That is a strong asymmetry and the direct cause of the gap.
 
 ## Why it is a better number for volume
 

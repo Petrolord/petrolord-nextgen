@@ -133,12 +133,38 @@
    "fix": {
     "redesign": "eo_last_rb_stb, label 'Oil expansion Eo at the last survey', unit rb/stb, expected 0.0158974810175952 (Et less Efw of the last row), tol 5e-5; read from the 'Eo rb/stb' column of the Tank explorer survey table (TankExplorer.jsx:90, 7 decimals)."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Replace the field: the expected value is exactly 1 (a synthetic tank on a perfect line), so a learner who types 1 without running anything passes. Eo is read in the same panel and ties to fields 2 and 5.",
    "evidence": "Expected is exactly 1 (integral), tol 0.001; plausible unworked guesses {1, 0.999, 0.99, 0.98}, of which 1 and 0.999 pass.",
    "notes": "Panel prints 1.00000000000 on default state (probe).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_mbal.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "eo_last_rb_stb",
+     "label": "Oil expansion Eo at the last survey",
+     "unit": "rb/stb",
+     "expected": 0.01589748101759514,
+     "tol": 5e-05
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 (survey table 'Eo rb/stb', last row)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 fmt(r.Eo_rb_stb, 7)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "tankLab.runEkeneTank().last.Eo_rb_stb = 0.01589748101759514 (Bo 1.21589748101760 less Boi 1.2); prints 0.0158975. Neighbours: Efw 0.0102926, Et 0.0261901, previous survey Eo 0.0140221 all miss by > 1.8e-3.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": true
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -267,12 +293,19 @@
    "fix": {
     "new_tol": 0.0001
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Tighten tol 0.002 -> 0.0001 (flag: a TIGHTENING; it fails anyone who typed 1 or 0.999, which is the intent, while the tile's 12 sig figs keep honest learners far inside). Alternative redesign if the owner prefers not to tighten: pot_wdi 'Water drive index of that wrong-model fit' = 1.04254388249892, tol 0.002, read from the Water drive index tile (TankExplorer.jsx:107, 6 sig figs).",
    "evidence": "Expected 0.999485673716372 with tol 0.002, so a blind guess of 1 (|1 - 0.99949| = 0.00051) passes; unworked guesses {1, 0.999, 0.99, 0.98}, two pass.",
    "notes": "Probe reads 0.999485673716 one click from default.",
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_mbal.sql",
+    "wave": "w1",
+    "tol": [
+     0.002,
+     0.0001
+    ]
+   }
   },
   {
    "tier": "advanced",
@@ -391,12 +424,36 @@
    "fix": {
     "redesign": "a111_ddi, label 'Ahmed 11-1 depletion drive index, net convention', unit -, expected N Eo / A = 0.438545199391884, tol 0.002; hand-calc from the terms in advanced m03/l03 (book prints 0.4385)."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Replace the field. Under the net convention the four indices sum to 1 by identity, which the textbook states, so 1 passes without working; the only plausible alternative is the gross A/F figure. A per-index measurement keeps the convention test.",
    "evidence": "Expected exactly 1 (integral), tol 0.002. Unworked answer space {1, 0.9716 (A/F)}; 1 passes.",
    "notes": "Walkthrough says the indices 'sum to 0.971594137029883 instead of 1' under the wrong convention, which confirms the answer is 1.",
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_mbal.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "a111_ddi",
+     "label": "Ahmed 11-1 depletion drive index, net convention",
+     "unit": "-",
+     "expected": 0.43854519939188374,
+     "tol": 0.002
+    },
+    "rekey_annot": {
+     "source": "hand-calc",
+     "source_ref": "src/content/courses/mbal/advanced/m03-combination-drive/l03-ahmed-11-1.md; src/components/course/panels/mbal/tankLab.js:157 combinationDrive().byNetWithdrawal.DDI",
+     "printed": "full",
+     "display_scale": 1,
+     "display_ref": null,
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "N Eo / A = 1e7 x 0.075 / 1710200 = 0.43854519939188374. Book prints 0.4385 (inside tol, the net convention). Gross convention 0.42608794 misses by 0.0125; SDI 0.3465, WDI 0.2113, EDI 0.0038 all far.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": true
+    }
+   }
   }
  ]
 }

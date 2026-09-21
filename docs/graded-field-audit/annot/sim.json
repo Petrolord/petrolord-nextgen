@@ -399,12 +399,36 @@
    "fix": {
     "redesign": "Replace with a measured count the learner must produce, e.g. 'validator error messages across the seven cases' (8, counted from the listed messages in the same Validation view), or re-case with a mutated spec the learner builds; either way remove the value from l02-working-the-capstone.md:47."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole sim capstone set is printed in the course's own lessons (every one of the 18 values appears, most to full precision, in the three m06 'story so far' lessons), and the panels render the same case on first load. Re-case the three capstones on a variant the lessons do not work (for example a different contact, a different side-track toe, a different booking target), which keeps every field and its tolerance; scrubbing the lessons instead would remove the course's own worked narrative. A re-cased calibration and history total then need a learner-settable surface (a contact or booking input on StructureExplorer, a bisection readout), because kriging bisection is engine-only.",
    "evidence": "Integer, tol 0. The tile counts the fixture's seven broken specs and every one is refused by construction ('every one stops the deck', BuildExplorer.jsx:149-150), so the tile IS the answer. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/sim/advanced/m06-the-expert-reading/l02-working-the-capstone.md:47 'the message count is eight where the case count is seven'.",
    "notes": "By the formula 1/8 (0..7 once the seven cases are listed), but judgement puts it far higher: a fixture of deliberately broken specs is refused in full by construction, so all of them is the obvious guess.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261024a_w1_sim.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "validator_error_messages",
+     "label": "Validator error messages across the seven cases",
+     "unit": "count",
+     "expected": 8.0,
+     "tol": 0.0
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/BuildExplorer.jsx:139-145 (Validation mode lists each case's errors); src/components/course/panels/sim/simLab.js validationCases()",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/BuildExplorer.jsx:141 one line per message",
+     "prompt_precision": null,
+     "answer_space": 8,
+     "guess_p": 0.125,
+     "evidence": "Counted from the listed messages in Validation mode: no title 1, no start date 2, layer count 1, well outside grid 1, completion below layers 1, single-node PVT 1, history off start date 1 = 8 (simLab.test.js pins it). No tile prints 8; the Rules exercised tile prints 7, the case count, which now fails. Validation mode is not the panel's default mode (default is trajectory).",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",

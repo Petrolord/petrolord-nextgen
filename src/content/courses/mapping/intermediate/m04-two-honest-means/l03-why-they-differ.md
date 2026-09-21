@@ -41,7 +41,7 @@ The remaining $+0.453$ m is the interpolator.
 
 A thin-plate spline does not produce a surface whose average is the average of its control points. It minimises bending energy subject to passing through them exactly, and a minimum-bending surface through six scattered values overshoots and undershoots between them. Those departures do not cancel, because the control points are not symmetrically arranged.
 
-On this field the net effect is upward: the surface spends more of its area above the level its control implies than below it. The tile that reads **146 of 201 nodes above the well mean** is the direct measurement of that asymmetry.
+On this field the net effect is upward: the surface spends more of its area above the level its control implies than below it. The tile that counts the **live nodes above the well mean** is the direct measurement of that asymmetry.
 
 So the decomposition is:
 

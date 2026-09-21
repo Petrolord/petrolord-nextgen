@@ -20,7 +20,7 @@ Module 6 puts the five together as a workflow in the order you would run them on
 
 ## The tier setting
 
-Everything graded at this tier uses one setting: flatten on TOP_A at a 1450 m datum. Set the panel to that and leave it there while you work through the modules. Move it deliberately when a lesson asks you to, then put it back.
+Five of the six graded readings at this tier use one setting: flatten on TOP_A at a 1450 m datum. Set the panel to that and leave it there while you work through the modules. Move it deliberately when a lesson asks you to, then put it back. The sixth reading is taken at a second setting the capstone names, flattened on TOP_SAND at a 1480 m datum, to show that the rules travel to a datum you have not been walked through.
 
 ## The six graded numbers
 
@@ -32,10 +32,10 @@ The tolerances are part of the fact, so learn them alongside the values.
 | Ekene-2 TOP_SAND displayed depth | 1503 m | 0.01 |
 | Ekene-4 TOP_A to TOP_SAND interval | 60 m | 0.01 |
 | A-to-SAND growth range | 14 m | 0.01 |
-| wells carrying all four tops | 3 | 0, must be exact |
+| shallowest displayed depth, flattened on TOP_SAND at 1480 m | read at the capstone | 0.5 |
 | displayed depth span of the section | 150 m | 0.01 |
 
-Look at the shape of that table before the values. Five of the six are continuous quantities in metres with a tolerance on them, and one is a count with no tolerance at all. That difference is not a grading detail. A count of wells is a definition, so an answer one off is a wrong model rather than a rounding miss, and the grader is saying exactly that by refusing it any room.
+Look at the shape of that table before the values. All six are quantities in metres with a tolerance on them, and five of them come from one setting. The sixth comes from a different flattening top and datum, and it is there because a shift is one subtraction whatever the datum: the arithmetic that reads the tier setting reads any other setting just as well.
 
 Three of the six are worth flagging now because each has a standard way of going wrong.
 
@@ -59,6 +59,6 @@ The panel below flattens the Ekene section on the top and datum you choose, and 
 
 ## Exercise
 
-Open the panel on TOP_A at 1450 m and find all six graded readings on it. Beside each one, write the module that will explain it and the kind of number it is from the five kinds above. Then change the datum depth on its own, leaving the flattening top on TOP_A, and note which of the six move and which do not.
+Open the panel on TOP_A at 1450 m and find the five graded readings taken at that setting. Beside each one, write the module that will explain it and the kind of number it is from the five kinds above. Then change the datum depth on its own, leaving the flattening top on TOP_A, and note which of the five move and which do not.
 
-Self-check: the shift, the displayed depth and the displayed span belong to modules 2 and 3, and the interval, the growth range and the well count belong to modules 4 and 5. By kind, the -80 m is a shift, the 1503 m is a displayed depth, the 60 m and the 150 m are an interval and a displayed span, the 14 m is a difference between intervals, and the 3 is a count. Changing the datum depth alone moves the shifts and every displayed depth, including the 1503 m, and leaves the interval, the growth range, the count and the 150 m displayed span unchanged.
+Self-check: the shift, the displayed depth and the displayed span belong to modules 2 and 3, and the interval and the growth range belong to module 4. By kind, the -80 m is a shift, the 1503 m is a displayed depth, the 60 m and the 150 m are an interval and a displayed span, and the 14 m is a difference between intervals. Changing the datum depth alone moves the shifts and every displayed depth, including the 1503 m, and leaves the interval, the growth range and the 150 m displayed span unchanged.

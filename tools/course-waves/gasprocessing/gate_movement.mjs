@@ -26,7 +26,7 @@ const run=(G,kremserIsObject)=>{
   return {
     'beginner/inletLbMMscf':sat.lbPerMMscf, 'beginner/waterLbDay':pk.waterLbDay,
     'beginner/circGpm':pk.circGpm, 'beginner/circGpd':pk.circGpd,
-    'beginner/sensiblePerGal':pk.sensiblePerGal, 'beginner/btexTonsYear':pk.btexTonsYear,
+    'beginner/sensiblePerGal':pk.sensiblePerGal, 'beginner/tegReboilerMMBtuHr':pk.reboilerMMBtuHr,
     'intermediate/fractionRemoved':kremserIsObject?kf.fractionRemoved:kf,
     'intermediate/stagesNeeded':st.stages, 'intermediate/acidMolesDay':am.acidMolesDay,
     'intermediate/circGpm':am.circGpm, 'intermediate/reboilerMMBtuHr':am.reboilerMMBtuHr,
@@ -49,7 +49,7 @@ const CAUSE = {
 const EXPECT = {
   'beginner/inletLbMMscf':'base', 'beginner/waterLbDay':'baseMinusSpec',
   'beginner/circGpm':'baseMinusSpec', 'beginner/circGpd':'baseMinusSpec',
-  'beginner/btexTonsYear':'base',
+  'beginner/tegReboilerMMBtuHr':'baseMinusSpec',
   'intermediate/acidMolesDay':'base', 'intermediate/circGpm':'base',
   'intermediate/reboilerMMBtuHr':'base', 'intermediate/circGpmRetuned':'base',
   'advanced/waterInLbMMscf':'base',

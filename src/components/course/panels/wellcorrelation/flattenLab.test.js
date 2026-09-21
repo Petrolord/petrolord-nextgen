@@ -16,8 +16,20 @@ describe('wellcorrelation professional: flattening and growth', () => {
     expect(row('W2').sandDisplayed).toBe(1503);
     expect(row('W4').aToSand).toBe(60);
     expect(I.growthRange).toBe(14);
-    expect(I.wellsWithAllTops).toBe(3);
     expect(I.displayedSpan).toBe(150);
+  });
+
+  it('reproduces the W1 re-key: shallowest displayed depth on TOP_SAND at a 1480 m datum', () => {
+    const shown = TEACHING_WELLS.flatMap((w) => {
+      const shift = 1480 - pick(w.id, 'TOP_SAND');
+      return w.tops.map((t) => t.md_m + shift);
+    }).sort((a, b) => a - b);
+    expect(shown[0]).toBe(1420);
+    // the next shallowest reading is Ekene-2's TOP_A, 7 m away, far outside tol 0.5
+    expect(shown[1]).toBe(1427);
+    // the panel's default datum (TOP_A at 1450 m) shows 1450 as its shallowest
+    expect(Math.min(...I.rows.flatMap((r) => TEACHING_WELLS.find((w) => w.id === r.id)
+      .tops.map((t) => t.md_m + r.shift)))).toBe(1450);
   });
 
   it('makes every shift a single subtraction from the datum', () => {

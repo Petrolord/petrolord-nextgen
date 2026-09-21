@@ -51,7 +51,7 @@ const ShiftExplorer = () => {
 
   return (
     <PanelShell title="Shift explorer"
-      subtitle={`The observed trace is the 25 Hz synthetic arriving ${PLANTED_LAG_MS} ms late. The scan tests ${scan.series.length} lags from ${lagMin} to ${lagMax} ms at a ${DT_MS} ms sample rate.`}>
+      subtitle={`The observed trace is the 25 Hz synthetic arriving late by a lag the scan has to find. The scan tests ${scan.series.length} lags from ${lagMin} to ${lagMax} ms at a ${DT_MS} ms sample rate.`}>
       <div className="flex flex-wrap gap-2 items-center">
         <span className="text-xs text-gray-400">wavelet frequency</span>
         {FREQS.map((f) => (
@@ -104,7 +104,7 @@ const ShiftExplorer = () => {
         Two things to work here. The scan curve is symmetric about its answer because the observed
         trace is this synthetic shifted, which makes it an autocorrelation and is why the
         correlation reaches exactly 1. At zero lag it still reads {fmt(zero.corr, 4)}, which is
-        respectable enough to accept while the tie is a full {PLANTED_LAG_MS} ms wrong. Then change
+        respectable enough to accept while the tie is wrong by the whole lag the scan finds. Then change
         the frequency: the bottom four tiles move while the reflection coefficient and its time
         stay put, because reflectivity belongs to the rock and the peak belongs to the pairing of
         rock and wavelet.

@@ -14,11 +14,11 @@ The estimate decomposes as the mean 0.2905162808206047 plus weighted residuals. 
 
 Range: 300 gives 0.2905162808206047, the mean EXACTLY, because every well is beyond 300 m and all covariances to the target vanish; 600 gives 0.29047270952788345, marginally BELOW the mean; 900 the graded 0.29142777199229974; 1800 gives 0.2924708301904079. The value is range-sensitive at the 0.001 level, and the direction is not monotone toward any well: at 600, W3 and W4's negative residuals reach the probe while W1's positive one still barely does; widening further lets W1 pull the estimate back up. Weight geometry, not folklore.
 
-Nugget: 0 gives 0.2915971137588124, 0.002 gives 0.29060333792448684: a slide toward the mean as individual wells are discounted, spanning about one tolerance across the whole valid sweep, as the nugget lesson explained for far probes.
+Nugget: 0 gives 0.2915971137588124, 0.002 gives 0.29060333792448684: a slide toward the mean as individual wells are discounted, spanning about a thousandth across the whole valid sweep, as the nugget lesson explained for far probes.
 
 Model: exponential at the same parameters gives 0.291000548626652, 0.0004 below spherical, the tail trading nearby dominance for far-field reach.
 
-The summary a reviewer wants: the graded value is robust to the nugget, mildly sensitive to the range with a non-monotone signature, and stable to the model family within half a tolerance. An answer that can produce THAT sentence understands the probe.
+The summary a reviewer wants: the graded value moves by about a thousandth across the nugget sweep, is mildly sensitive to the range with a non-monotone signature, and shifts by 0.0004 with the model family. Each is small against the porosity itself, and most of them are larger than the 0.0002 the capstone grades to, which is why the capstone states its variogram. An answer that can produce THAT sentence understands the probe.
 
 ## The probe against the trend
 

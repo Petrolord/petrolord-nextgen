@@ -18,8 +18,23 @@ describe('well correlation section explorer: engine math', () => {
     expect(byName['Ekene-3'].thickness).toBe(29);
     expect(byName['Ekene-4'].tops.find((t) => t.name === 'BASE_SAND').displayed).toBe(1525);
     expect(structuralRelief('TOP_SAND')).toBe(49);
-    expect(section.polylines.find((p) => p.name === 'TOP_B').points).toHaveLength(3);
     expect(byName['Ekene-1'].tops.find((t) => t.name === 'TOP_B').displayed).toBe(1592);
+  });
+
+  it('reproduces the W1 re-key: Ekene-3 TOP_B displayed with BASE_SAND at a 1560 m datum', () => {
+    const base = computeSection({ mode: 'flatten', topName: 'BASE_SAND', datumM: 1560 });
+    const e3 = base.rows.find((r) => r.name === 'Ekene-3');
+    expect(e3.shift).toBe(-10);
+    expect(e3.tops.find((t) => t.name === 'TOP_B').displayed).toBe(1618);
+    // the nearest other TOP_B readings sit 2 m and more away, far outside tol 0.5
+    const others = base.rows.filter((r) => r.name !== 'Ekene-3')
+      .map((r) => r.tops.find((t) => t.name === 'TOP_B')?.displayed).filter((v) => v != null);
+    expect(others).toEqual([1620, 1621]);
+    // the default (structural) view and the TOP_SAND 1500 m view never print it
+    for (const v of [computeSection({ mode: 'structural' }), section]) {
+      const shown = v.rows.flatMap((r) => r.tops.map((t) => t.displayed));
+      expect(shown.some((d) => Math.abs(d - 1618) <= 0.5)).toBe(false);
+    }
   });
 
   it('pins the datum top to the datum in every well and preserves thickness', () => {

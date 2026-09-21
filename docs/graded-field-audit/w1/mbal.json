@@ -1,0 +1,83 @@
+{
+ "course": "mbal",
+ "tiers": {
+  "beginner": {
+   "why": "r_squared graded exactly 1 (a synthetic tank on a perfect line), so typing 1 passed with no work. Replaced by the oil expansion Eo at the last survey, read from the Eo column of the Tank explorer survey table (7 dp) and hand-checkable as Bo less 1.2 or Et less Efw.",
+   "prompt_edits": [
+    [
+     "the depletion drive index, and the quality of the straight line itself.",
+     "the depletion drive index, and the oil expansion Eo at the last survey."
+    ]
+   ],
+   "fields": {
+    "r_squared": {
+     "key": "eo_last_rb_stb",
+     "label": "Oil expansion Eo at the last survey",
+     "unit": "rb/stb",
+     "expected": 0.01589748101759514,
+     "tol": 5e-05
+    }
+   },
+   "annot": {
+    "eo_last_rb_stb": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 (survey table 'Eo rb/stb', last row)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 fmt(r.Eo_rb_stb, 7)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "tankLab.runEkeneTank().last.Eo_rb_stb = 0.01589748101759514 (Bo 1.21589748101760 less Boi 1.2); prints 0.0158975. Neighbours: Efw 0.0102926, Et 0.0261901, previous survey Eo 0.0140221 all miss by > 1.8e-3.",
+     "default_state_prints": true,
+     "lesson_prints": true
+    }
+   }
+  },
+  "advanced": {
+   "why": "a111_index_sum graded the sum of the four Ahmed 11-1 drive indices under the net convention, which is 1 by identity, so 1 passed with no work. Replaced by the depletion drive index under the same net convention, N Eo / A, which still separates the conventions (gross gives 0.42609, 0.0125 away).",
+   "prompt_edits": [
+    [
+     "the water influx, the water drive index, and the sum of the four indices under the convention that actually closes.",
+     "the water influx, the water drive index, and the depletion drive index, each under the convention that actually closes."
+    ]
+   ],
+   "fields": {
+    "a111_index_sum": {
+     "key": "a111_ddi",
+     "label": "Ahmed 11-1 depletion drive index, net convention",
+     "unit": "-",
+     "expected": 0.43854519939188374,
+     "tol": 0.002
+    }
+   },
+   "annot": {
+    "a111_ddi": {
+     "source": "hand-calc",
+     "source_ref": "src/content/courses/mbal/advanced/m03-combination-drive/l03-ahmed-11-1.md; src/components/course/panels/mbal/tankLab.js:157 combinationDrive().byNetWithdrawal.DDI",
+     "printed": "full",
+     "display_scale": 1,
+     "display_ref": null,
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "N Eo / A = 1e7 x 0.075 / 1710200 = 0.43854519939188374. Book prints 0.4385 (inside tol, the net convention). Gross convention 0.42608794 misses by 0.0125; SDI 0.3465, WDI 0.2113, EDI 0.0038 all far.",
+     "default_state_prints": false,
+     "lesson_prints": true
+    }
+   },
+   "leak_note": "the net depletion drive index is printed in advanced m03 l04 (W5 B strip)"
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/mbal/tankLab.test.js",
+  "src/content/courses/mbal/beginner/m06-the-associate-reading/l02-capstone-walkthrough.md",
+  "src/content/courses/mbal/advanced/m06-the-expert-reading/l02-capstone-walkthrough.md",
+  "src/content/courses/mbal/intermediate/m06-the-professional-reading/l02-capstone-walkthrough.md",
+  "src/content/courses/mbal/intermediate/m02-the-pot-aquifer/l04-the-cost-of-a-wrong-aquifer.md"
+ ],
+ "tests": "vitest mbal panels green",
+ "notes": "LEAK carried to W5: Eo last (0.0158974810175951) is the course's own worked example in beginner m01 l03, m02 l02/l04/l05, m04 l02 and m06 l01; the net DDI 0.438545199391884 is printed in advanced m03 l04 (table) and the book value 0.4385 in m03 l03 / m05 l04. Stripping them would gut the teaching; both tiers are already leak tiers (mbal beginner A, advanced B in W5). Walkthroughs do not print the new values. Intermediate walkthrough and m02 l04 now state pot_r2 tol 0.0001 (lead's tightening)."
+}

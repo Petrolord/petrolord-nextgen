@@ -27,6 +27,22 @@ describe('petrophysics teaching panels: engine math', () => {
     expect(fit.aRw).toBeCloseTo(0.05, 6);
   });
 
+  it('W1: the Professional capstone grades the Pickett fit over 2072 to 2078 m, and the panel prints it inside tol', () => {
+    const { phiNdArr } = porosityCurves(givens);
+    const fit = fitPickett(phiNdArr, 2072, 2078);
+    expect(fit.nPoints).toBe(12);
+    expect(fit.aRw).toBeCloseTo(0.6886854786769905, 10);
+    expect(fit.m).toBeCloseTo(0.8784525453945112, 10);
+    // the Tile prints aRw to 4 dp (tol 0.002) and m to 4 dp (tol 0.0002)
+    expect(Math.abs(Number(fit.aRw.toFixed(4)) - fit.aRw)).toBeLessThanOrEqual(0.002);
+    expect(Math.abs(Number(fit.m.toFixed(4)) - fit.m)).toBeLessThanOrEqual(0.0002);
+    // the course prints NTG 0.878 (18.0/20.5) and a shaly-sand 0.8769; neither may pass for m
+    for (const v of [0.878, 18 / 20.5, 0.8769]) expect(Math.abs(v - fit.m)).toBeGreaterThan(0.0002);
+    // the given water-leg answers no longer pass
+    expect(Math.abs(0.05 - fit.aRw)).toBeGreaterThan(0.002);
+    expect(Math.abs(2 - fit.m)).toBeGreaterThan(0.0002);
+  });
+
   it('shaly-sand lab reproduces the NG6 Simandoux and Indonesia SAND_A means', () => {
     const { phiNdArr } = porosityCurves(givens);
     const vsh = vshLinearCurve(TW.gr_clean, TW.gr_clay);

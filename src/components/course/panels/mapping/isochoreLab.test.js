@@ -30,6 +30,14 @@ describe('mapping professional: the isochore', () => {
     expect(s.wellMean).toBeCloseTo(I.meanWellThickness, 12);
   });
 
+  it('reproduces the W1 re-key: live isochore nodes above the well mean at the capstone cell', () => {
+    // iso_live (201) re-graded the Associate live count; its replacement is a
+    // count only the isochore produces, read from the same panel state
+    expect(iso.summary.nodesAboveWellMean).toBe(146);
+    expect(iso.summary.nodesAboveWellMean).not.toBe(top.summary.nodesAboveWellMean);
+    expect(iso.summary.nodesAboveWellMean).not.toBe(base.summary.nodesAboveWellMean);
+  });
+
   it('grids both surfaces on one frame, so the mask is shared', () => {
     expect([iso.spec.nx, iso.spec.ny]).toEqual([25, 20]);
     expect(iso.spec.nx * iso.spec.ny).toBe(500);

@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {
-  KRIGE_PARAMS, NUGGET_OPTIONS, RANGE_OPTIONS, POPULATION_METHODS, computePopulation,
+  KRIGE_PARAMS, NUGGET_OPTIONS, RANGE_OPTIONS, POPULATION_METHODS, PROBE_DEFAULT, computePopulation,
 } from '@/lib/earthmodelTeaching';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Population explorer: zone-A porosity populated per fault block, drawn
 // along the model row through y = 2200 because that row crosses the fault
@@ -19,6 +19,8 @@ const PopulationExplorer = () => {
   const [method, setMethod] = useState('krige');
   const [nugget, setNugget] = useState(String(KRIGE_PARAMS.nugget));
   const [range, setRange] = useState(String(KRIGE_PARAMS.range));
+  const [probeX, setProbeX] = useState(String(PROBE_DEFAULT.x));
+  const [probeY, setProbeY] = useState(String(PROBE_DEFAULT.y));
 
   const m = useMemo(
     () => computePopulation(method, Number(nugget), Number(range)),
@@ -38,6 +40,10 @@ const PopulationExplorer = () => {
     .join(' ');
   const faultX = sx(1575);
   const jump = m.profile[12].phi - m.profile[11].phi;
+  const px = Number(probeX);
+  const py = Number(probeY);
+  const probeOk = probeX.trim() !== '' && probeY.trim() !== '' && Number.isFinite(px) && Number.isFinite(py);
+  const probe = probeOk && method === 'krige' ? m.krigeAt(px, py) : NaN;
 
   return (
     <PanelShell title="Population explorer"
@@ -49,6 +55,8 @@ const PopulationExplorer = () => {
           options={NUGGET_OPTIONS.map((v) => [String(v), String(v)])} />
         <SelectField label="Range (assumed)" value={range} onChange={setRange}
           options={RANGE_OPTIONS.map((v) => [String(v), `${v} m`])} />
+        <NumField label="Probe x (m)" value={probeX} onChange={setProbeX} />
+        <NumField label="Probe y (m)" value={probeY} onChange={setProbeY} />
       </div>
 
       <div className="overflow-x-auto">
@@ -85,6 +93,8 @@ const PopulationExplorer = () => {
         <Tile label="Method used per block" value={m.provenance.map((p) => `b${p.block}:${p.methodUsed}${p.fellBack ? '*' : ''}`).join(' ')} unit="* = fell back" />
         <Tile label="Kriged at W1 (1100, 2100)" value={fmt(m.probes.krigeAtW1, 4)} unit="v/v (W1 is 0.3150)" />
         <Tile label="Kriged far from all wells" value={fmt(m.probes.far, 10)} unit="v/v" />
+        <Tile label={probeOk ? `Kriged at a probe point (${px}, ${py})` : 'Kriged at a probe point'}
+          value={fmt(probe, 6)} unit={method === 'krige' ? 'v/v' : 'v/v (simple kriging only)'} />
         <Tile label="Arithmetic vs weighted mean" value={`${fmt(m.arithmeticMean, 6)} / ${fmt(m.weightedConstant, 6)}`} unit="v/v" />
         <Tile label="Trend at (1250, 2250)" value={fmt(m.probes.trendProbe, 6)} unit="v/v (hand: 0.3075)" />
         <Tile label="Zone A bulk, block 0 / block 1" value={`${fmt(m.volsA['0'].bulk_m3 / 1e6, 5)} / ${fmt(m.volsA['1'].bulk_m3 / 1e6, 5)}`} unit="10^6 m3" />

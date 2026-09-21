@@ -1,0 +1,75 @@
+{
+ "course": "petrophysics",
+ "tiers": {
+  "intermediate": {
+   "why": "pickett_a_rw and pickett_m graded the water-leg fit (2075 to 2078 m), which returns exactly the given Rw 0.05 and m 2 pre-filled in the parameter card, so both were answerable with no fit (guess_p 1.0). The fields are replaced by the same fit over 2072 to 2078 m, a window the panel invites the learner to try (12 points, 3 m above the water leg), read in PickettExplorer after setting the window and clicking Fit water line. m is tightened to 0.0002 and the panel now prints fitted m to 4 dp, because at 0.002 the course's printed NTG 0.878 (18.0/20.5) and a shaly-sand 0.8769 would pass as m.",
+   "prompt_edits": [
+    [
+     "fit a Pickett line in the water leg (2075–2078 m)",
+     "fit a Pickett line over 2072 to 2078 m, a window that starts three metres above the water leg"
+    ],
+    [
+     "Report the SAND_A (2010–2030 m) zone means and the Pickett fit.",
+     "Report the SAND_A (2010 to 2030 m) zone means and the Pickett fit over 2072 to 2078 m."
+    ]
+   ],
+   "fields": {
+    "pickett_a_rw": {
+     "key": "pickett_a_rw_2072_2078",
+     "label": "Pickett fit over 2072 to 2078 m: a·Rw",
+     "unit": "Ω·m",
+     "expected": 0.6886854786769905,
+     "tol": 0.002
+    },
+    "pickett_m": {
+     "key": "pickett_m_2072_2078",
+     "label": "Pickett fit over 2072 to 2078 m: cementation exponent m",
+     "unit": "-",
+     "expected": 0.8784525453945112,
+     "tol": 0.0002
+    }
+   },
+   "annot": {
+    "pickett_a_rw_2072_2078": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx:101 (Tile 'Fitted a x Rw' after window 2072 to 2078 and Fit water line)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx:101 fmt(fit.aRw, 4)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typewellLab.fitPickett(phiNd, 2072, 2078) -> engine pickettFitDepthWindow, 12 points, aRw 0.6886854786769905; prints 0.6887 (miss 1.5e-5 < 0.002). Neighbours: water-leg 0.0500 (given Rw), windows 2071/2073 to 2078 give 1.1875 / 0.3481, 2072 to 2077 gives 1.3506: all miss by > 0.3.",
+     "default_state_prints": false
+    },
+    "pickett_m_2072_2078": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx:100 (Tile 'Fitted m' after window 2072 to 2078 and Fit water line)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx:100 fmt(fit.m, 4) (was 3 dp; raised in W1)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Same fit, m 0.8784525453945112; prints 0.8785 (miss 4.7e-5 < 0.0002). Tol 0.0002 because the course prints NTG 0.878 (18/20.5 = 0.87805, miss 0.0004) and an Archie-vs-shaly figure 0.8769 (miss 0.0016) in lessons; both fail at 0.0002 and would pass at 0.002. Water-leg m 2.000 and windows 2071/2073 to 2078 (0.644 / 1.171) all fail.",
+     "default_state_prints": false
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/petrophysics/PickettExplorer.jsx",
+  "src/components/course/panels/petrophysics/typewellLab.test.js",
+  "src/content/courses/petrophysics/intermediate/m06-method-choice-and-reporting/l04-the-capstone-walkthrough.md",
+  "src/content/courses/petrophysics/intermediate/m01-the-professional-workflow/l04-the-intermediate-workflow-map.md",
+  "src/content/courses/petrophysics/intermediate/m04-the-pickett-plot/l01-water-legs.md",
+  "src/content/courses/petrophysics/intermediate/m04-the-pickett-plot/l02-pickett-theory.md",
+  "src/content/courses/petrophysics/intermediate/m04-the-pickett-plot/l03-fitting-the-typewell-leg.md"
+ ],
+ "tests": "vitest petrophysics panels + PetrophysicsLearningPage.capstone + courseContent: green",
+ "notes": "Walkthrough m06 l04 table also shows the lead's phind/phiw tightening (0.002). New values (0.6887, 0.8785, 0.68869, 0.87845) appear in no lesson. Deviation from the plan: pickett_m tol 0.0002 (plan 0.002) plus Tile m print 3 dp -> 4 dp, to exclude NTG 0.878 and 0.8769 printed in lessons."
+}

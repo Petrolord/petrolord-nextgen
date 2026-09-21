@@ -151,13 +151,22 @@ def evaluate(caps, annots):
     return rows, errors
 
 
-def post_check(before, after, rows):
-    """After the recut: tolerance fixes carry new_tol and clear their flags; nothing else moved."""
+def in_wave(shipped, waves):
+    """A shipped fix is checked when it belongs to no wave (B5, round-off) or to a named one."""
+    return isinstance(shipped, dict) and (shipped.get('wave') is None or shipped.get('wave') in waves)
+
+
+def post_check(before, after, rows, waves=()):
+    """After the recut: tolerance fixes carry new_tol and clear their flags; re-keys carry
+    their replacement field in place; nothing else moved. A fix tagged with a wave (W1
+    onward) is checked only when that wave is named, so an earlier batch's dry run is
+    not held to a later wave's state."""
     errs = []
     idx_b = {(c['app'], c['tier']): c for c in before}
     idx_a = {(c['app'], c['tier']): c for c in after}
-    fix_tol = {(r['course'], r['tier'], r['key']): r['shipped']['tol'][1] for r in rows
-               if isinstance(r.get('shipped'), dict) and 'tol' in r['shipped']}
+    live = [r for r in rows if in_wave(r.get('shipped'), waves)]
+    fix_tol = {(r['course'], r['tier'], r['key']): r['shipped']['tol'][1] for r in live if 'tol' in r['shipped']}
+    rekey = {(r['course'], r['tier'], r['key']): r['shipped']['rekey'] for r in live if 'rekey' in r['shipped']}
     if not fix_tol:
         errs.append('post-recut check has no shipped tolerance fix to verify (empty sweep)')
     for ck, cb in idx_b.items():
@@ -167,12 +176,20 @@ def post_check(before, after, rows):
             continue
         fb = {f['key']: f for f in cb['fields']}
         fa = {f['key']: f for f in ca['fields']}
-        if list(fb) != list(fa):
-            errs.append(f'{ck}: field keys moved {list(fb)} -> {list(fa)}')
+        want_keys = [rekey[(ck[0], ck[1], k)]['key'] if (ck[0], ck[1], k) in rekey else k for k in fb]
+        if want_keys != list(fa):
+            errs.append(f'{ck}: field keys moved {list(fb)} -> {list(fa)} (expected {want_keys})')
             continue
         for key, f0 in fb.items():
-            f1 = fa[key]
             k = (ck[0], ck[1], key)
+            if k in rekey:
+                nf = rekey[k]
+                f1 = fa[nf['key']]
+                got = {x: (float(f1[x]) if x in ('expected', 'tol') else f1[x]) for x in ('key', 'label', 'unit', 'expected', 'tol')}
+                if got != nf or set(f1) != set(nf):
+                    errs.append(f'{k}: re-keyed to {f1}, the fix says {nf}')
+                continue
+            f1 = fa[key]
             if k in fix_tol:
                 if float(f1['tol']) != float(fix_tol[k]):
                     errs.append(f'{k}: tol {f1["tol"]} after the recut, the fix says {fix_tol[k]}')
@@ -180,11 +197,26 @@ def post_check(before, after, rows):
                     errs.append(f'{k}: something other than tol moved')
             elif f0 != f1:
                 errs.append(f'{k}: moved but the recut does not name it')
-    re_rows, re_err = evaluate(after, ANNOTS_FOR_POST)
+    # the replacement fields are gated like any live field, under their own annotation
+    ann = copy.deepcopy(ANNOTS_FOR_POST)
+    for r in live:
+        if 'rekey' in r['shipped']:
+            ann[r['course']]['fields'].append({'tier': r['tier'], 'key': r['shipped']['rekey']['key'],
+                                               **r['shipped'].get('rekey_annot', {'class': 'none'})})
+    re_rows, re_err = evaluate(after, ann)
+    new_keys = {(c, t, nf['key']) for (c, t, _), nf in rekey.items()}
     for r in re_rows:
         k = (r['course'], r['tier'], r['key'])
         if k in fix_tol and set(r.get('flags', [])) & {'prompt_short', 'nonint_zero'}:
             errs.append(f'{k}: still flagged {r["flags"]} after its tolerance fix')
+        if k in new_keys:
+            if r.get('class') != 'none' or [x for x in r.get('flags', []) if x != 'zero_tol']:
+                errs.append(f'{k}: the replacement field is class {r.get("class")} flagged {r.get("flags")}')
+            if not r.get('evidence'):
+                errs.append(f'{k}: the replacement field carries no evidence')
+    for e in re_err:
+        if any(f"'{nk[2]}')" in e for nk in new_keys):
+            errs.append(e)
     return errs
 
 
@@ -230,29 +262,56 @@ def selftest(caps, annots):
     global ANNOTS_FOR_POST
     ANNOTS_FOR_POST = annots
     rows = evaluate(caps, annots)[0]
+    waves = tuple(sorted({r['shipped']['wave'] for r in rows if isinstance(r.get('shipped'), dict) and r['shipped'].get('wave')}))
     shipped = {(r['course'], r['tier'], r['key']): r['shipped']['tol'][1] for r in rows
                if isinstance(r.get('shipped'), dict) and 'tol' in r['shipped']}
-    def after(skip=None, move=None):
+    rekeys = {(r['course'], r['tier'], r['key']): r['shipped']['rekey'] for r in rows
+              if isinstance(r.get('shipped'), dict) and 'rekey' in r['shipped']}
+    wave_of = {(r['course'], r['tier'], r['key']): r['shipped'].get('wave') for r in rows if isinstance(r.get('shipped'), dict)}
+    def after(skip=None, move=None, upto=waves):
         c2 = copy.deepcopy(caps)
         for c in c2:
-            for f in c['fields']:
+            for i, f in enumerate(c['fields']):
                 k = (c['app'], c['tier'], f['key'])
+                if wave_of.get(k) and wave_of[k] not in upto:
+                    continue
                 if k in shipped and k != skip:
                     f['tol'] = shipped[k]
                 if k == move:
                     f['tol'] = float(f['tol']) * 2 + 1
+                if k in rekeys and k != skip:
+                    c['fields'][i] = dict(rekeys[k])
         return c2
-    clean = not post_check(caps, after(), rows)
-    print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: every shipped fix applied")
+    clean = not post_check(caps, after(), rows, waves)
+    print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: every shipped fix applied{' (waves ' + ', '.join(waves) + ')' if waves else ''}")
     ok &= clean
     if shipped:
-        first = next(iter(shipped))
-        red = bool(post_check(caps, after(skip=first), rows))
+        first = next(k for k in shipped if not wave_of.get(k))
+        red = bool(post_check(caps, after(skip=first), rows, waves))
         print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: one shipped fix not applied")
         ok &= red
+    if rekeys:
+        first = next(iter(rekeys))
+        red = bool(post_check(caps, after(skip=first), rows, waves))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: one shipped re-key not applied")
+        ok &= red
+        c2 = after()
+        k = first
+        f = next(x for c in c2 if (c['app'], c['tier']) == k[:2] for x in c['fields'] if x['key'] == rekeys[k]['key'])
+        f['expected'] = float(f['expected']) + 1
+        red = bool(post_check(caps, c2, rows, waves))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a re-key carrying a different expected")
+        ok &= red
+    if waves:
+        clean = not post_check(caps, after(upto=()), rows, ())
+        print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: the pre-wave state checked without --wave (an earlier batch's dry run)")
+        ok &= clean
+        red = bool(post_check(caps, after(), rows, ()))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: the wave's state checked without --wave")
+        ok &= red
     other = next((c['app'], c['tier'], f['key']) for c in caps for f in c['fields']
-                 if (c['app'], c['tier'], f['key']) not in shipped)
-    red = bool(post_check(caps, after(move=other), rows))
+                 if (c['app'], c['tier'], f['key']) not in shipped and (c['app'], c['tier'], f['key']) not in rekeys)
+    red = bool(post_check(caps, after(move=other), rows, waves))
     print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a field the recut does not name moved")
     ok &= red
     base = evaluate(caps, annots)[1]
@@ -272,6 +331,7 @@ def main():
     ap.add_argument('--post')
     ap.add_argument('--selftest', action='store_true')
     ap.add_argument('--no-write', action='store_true')
+    ap.add_argument('--wave', action='append', default=[], help='also check the fixes shipped in this wave (e.g. w1)')
     a = ap.parse_args()
     caps, annots = load(a.caps, a.annot)
     nfields = sum(len(c['fields']) for c in caps)
@@ -295,7 +355,7 @@ def main():
         global ANNOTS_FOR_POST
         ANNOTS_FOR_POST = annots
         after = json.load(open(a.post))
-        perr = post_check(caps, after, rows)
+        perr = post_check(caps, after, rows, tuple(a.wave))
         for e in perr:
             print('POST', e)
         print('post-recut check:', 'CLEAN' if not perr else f'{len(perr)} problem(s)')

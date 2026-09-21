@@ -128,6 +128,9 @@ export const KRIGE_PARAMS = goldens.population.krige_spherical.params;
 export const NUGGET_OPTIONS = [0, 0.00025, 0.001, 0.002];
 export const RANGE_OPTIONS = [300, 600, 900, 1800];
 export const POPULATION_METHODS = ['krige', 'trend', 'constant'];
+// The Population explorer's probe readout opens here, away from every graded
+// probe location, so no default panel state prints a capstone answer.
+export const PROBE_DEFAULT = { x: 2000, y: 2300 };
 
 /** Professional panel: one well tied in detail. The panel's exposed
  *  assumption is the survey itself: vertical=true replaces the well's
@@ -216,6 +219,9 @@ export function computePopulation(method = 'krige', nugget = KRIGE_PARAMS.nugget
     labels,
     census,
     byBlock,
+    // simple kriging at any (x, y) with this call's variogram: the panel's
+    // probe readout, whose default location is not a graded probe point
+    krigeAt,
     provenance,
     profile,
     profileY: MODEL_SPEC.y0 + profileRow * MODEL_SPEC.dy,

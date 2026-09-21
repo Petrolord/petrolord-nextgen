@@ -24,6 +24,17 @@ describe('mapping expert: validating the map', () => {
     expect(A.liveWithE7).toBe(201);
   });
 
+  it('reproduces the W1 re-key: depth at P-1 with Ekene-7 included, and no neighbour passes', () => {
+    const want = 1547.105224609375;
+    expect(plus7.summary.atTarget).toBeCloseTo(want, 12);
+    // tol 0.01: every other control set's P-1 reading fails, the closest being
+    // the drop-Ekene-4 jackknife at 1547.2102 (0.105 away); the default
+    // (all six) state prints 1542.6199
+    for (const c of CONTROL_SETS.filter((x) => x.key !== PLUS_SEVEN)) {
+      expect(Math.abs(computeValidationMap(c.key).summary.atTarget - want)).toBeGreaterThan(0.1);
+    }
+  });
+
   it('offers eight control sets', () => {
     expect(CONTROL_SETS).toHaveLength(8);
     expect(CONTROL_SETS[0].key).toBe(ALL_SIX);

@@ -6,8 +6,8 @@ import { describe, it, expect } from 'vitest';
 import {
   ekeneDisplacement, textbookCase, displacementWith, btDaysAt,
   plugJTables, collapseSpread, fitPlugJ, averageRefit, reservoirCapillary,
-  swAvgCrestColumn, ahmedChain, fitLabGrid, dipCase, polymerCase,
-  GAMMA_O, EKENE_SCAL, LAB_KR_GRID,
+  swAvgCrestColumn, ahmedChain, fitLabGrid, fitPrintedLabGrid, dipCase, polymerCase,
+  GAMMA_O, EKENE_SCAL, LAB_KR_GRID, LAB_KR_GRID_PRINTED,
 } from './scalLab';
 
 const rel = (a, b) => Math.abs(a - b) / Math.max(Math.abs(b), 1e-12);
@@ -111,7 +111,7 @@ describe('Professional capstone: carry the lab to the field', () => {
 });
 
 describe('Expert capstone: fit, average, and design the flood', () => {
-  it('the lab-grid fit reproduces fitted_nw', () => {
+  it('the noise-free lab-grid fit recovers the plant (teaching, no longer graded)', () => {
     const { grid, fit } = fitLabGrid();
     expect(grid).toHaveLength(13);
     expect(rel(grid[0].kro, 0.9)).toBeLessThan(1e-12);
@@ -121,6 +121,28 @@ describe('Expert capstone: fit, average, and design the flood', () => {
     expect(rel(fit.params.no, 2)).toBeLessThan(1e-12);
     expect(fit.pointsUsed).toBe(24);
     expect(fit.converged).toBe(true);
+  });
+
+  it('the printed-grid fit (kr to 3 dp) reproduces fitted_nw_printed_grid, and the plant fails', () => {
+    const { grid, fit } = fitPrintedLabGrid();
+    expect(grid).toHaveLength(13);
+    grid.forEach((r, i) => {
+      expect(r.Sw).toBe(LAB_KR_GRID[i].Sw);
+      expect(Math.abs(r.krw - LAB_KR_GRID[i].krw)).toBeLessThanOrEqual(0.0005 + 1e-15);
+      expect(Math.abs(r.kro - LAB_KR_GRID[i].kro)).toBeLessThanOrEqual(0.0005 + 1e-15);
+    });
+    expect(LAB_KR_GRID_PRINTED[1].krw).toBe(0.001);
+    expect(fit.ok).toBe(true);
+    expect(fit.converged).toBe(true);
+    expect(fit.pointsUsed).toBe(24);
+    expect(rel(fit.params.nw, 2.4318603318221883)).toBeLessThan(1e-9);
+    // graded at tol 0.001: the plant 2.5, the noise-free fit and the oil
+    // exponent all sit far outside it; the 9-significant-figure tile passes.
+    const tol = 0.001;
+    expect(Math.abs(2.5 - fit.params.nw)).toBeGreaterThan(50 * tol);
+    expect(Math.abs(fitLabGrid().fit.params.nw - fit.params.nw)).toBeGreaterThan(50 * tol);
+    expect(Math.abs(fit.params.no - fit.params.nw)).toBeGreaterThan(50 * tol);
+    expect(Math.abs(Number(fit.params.nw.toPrecision(9)) - fit.params.nw)).toBeLessThan(tol / 1000);
   });
 
   it('the averaged refit drifts to the graded a', () => {

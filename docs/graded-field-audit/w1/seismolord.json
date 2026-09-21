@@ -1,0 +1,112 @@
+{
+ "course": "seismolord",
+ "tiers": {
+  "intermediate": {
+   "why": "bulk_shift_ms was stated in the prompt ('arriving 8 ms late') and the Shift explorer subtitle, so the answer was given before any scan; the prompt and panel no longer state the lag and the key, value and tolerance stay. corr graded the correlation at the winning lag, which is exactly 1 by construction (the observed trace is the synthetic shifted), so typing 1 passed. It is replaced by the correlation at zero lag, before any shift, 0.6217418028775199, printed to six decimals by the same scan (ShiftExplorer 'Correlation at zero lag' tile), tol 0.0005. The prompt's em dash is removed.",
+   "prompt_edits": [
+    [
+     "the 25 Hz synthetic arriving 8 ms late.",
+     "the 25 Hz synthetic arriving late by a lag this brief does not state."
+    ],
+    [
+     "the suggested shift and its correlation.",
+     "the suggested shift, and the correlation at zero lag, which is what the tie scores if you never shift it."
+    ],
+    [
+     "at each frequency — tuning moves both.",
+     "at each frequency. Tuning moves both."
+    ]
+   ],
+   "fields": {
+    "corr": {
+     "key": "corr_zero_lag",
+     "label": "Correlation at zero lag, before any shift",
+     "unit": "-",
+     "expected": 0.6217418028775199,
+     "tol": 0.0005
+    }
+   },
+   "annot": {
+    "corr_zero_lag": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/ShiftExplorer.jsx:94",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/ShiftExplorer.jsx:94 fmt(zero.corr, 6)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "suggestBulkShift(s25 synthetic, the 25 Hz synthetic delayed 4 samples, dt 2 ms, max 40 ms) series entry at lag 0: 0.6217418028775199 (computeIntermediate().corrZeroLag, pinned in shiftLab.test.js); prints 0.621742, miss 2e-7. Nearest scan neighbours 0.771383 (lag 2 or 14) and 0.892968 are far outside tol; 1 (the winning lag) fails by 0.378; the SVG label prints it at 4 dp (0.6217, miss 4e-5, passes as it should). Not guessable: continuous.",
+     "default_state_prints": true
+    }
+   },
+   "leak_updates": {
+    "bulk_shift_ms": true,
+    "corr_zero_lag": true
+   },
+   "leak_note": "corr_zero_lag is printed in seven intermediate lessons and on the ShiftExplorer default state; the 8 ms lag is still stated in intermediate lessons. Both are section 3 leaks for W5 (B strip); the tier carries the open-book label.",
+   "annot_updates": {
+    "bulk_shift_ms": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/ShiftExplorer.jsx:92",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/ShiftExplorer.jsx:92",
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "W1: the prompt, the ShiftExplorer subtitle and note and the page intro card no longer state the planted lag, so the Suggested bulk shift tile carries the measurement. The lag is still stated in intermediate lessons (m01 l02, l04, m02 l03, m06 l01, l03, l04), a section 3 leak for W5 (B strip); the tier carries the open-book label.",
+     "leak": true
+    }
+   }
+  },
+  "advanced": {
+   "why": "tune40_amp was identical to tune25_amp (0.1155947595834732): 25 x 16 = 40 x 10 = 400 Hz ms, so both evaluate the Ricker at the same argument and one reading answered both fields. It is replaced by the 40 Hz amplitude of a stated 6 ms bed, below the 40 Hz tuning thickness, 0.09535394608974457, read from the Wedge explorer 'Amplitude there' tile at ten decimals with the thickness selector at 6 ms, tol 0.0005.",
+   "prompt_edits": [
+    [
+     "the tuning thickness and its peak amplitude at each frequency,",
+     "the tuning thickness at each frequency, the peak amplitude at 25 Hz tuning, the amplitude of a 6 ms bed at 40 Hz,"
+    ]
+   ],
+   "fields": {
+    "tune40_amp": {
+     "key": "amp40_at_6ms",
+     "label": "Amplitude of a 6 ms bed at 40 Hz",
+     "unit": "-",
+     "expected": 0.09535394608974457,
+     "tol": 0.0005
+    }
+   },
+   "annot": {
+    "amp40_at_6ms": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/WedgeExplorer.jsx:121",
+     "printed": {
+      "decimals": 10
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/WedgeExplorer.jsx:121 fmt(row.amp, 10)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "computeWedge(40).rows[3] (6 ms) amp = 0.09535394608974457 (engine tuningCurve, pinned in wedgeLab.test.js); prints 0.0953539461. Neighbours at 40 Hz: 4 ms 0.0718218, 8 ms 0.1097387, 14 ms 0.0987969, 16 ms 0.0899487; 25 Hz at 6 ms 0.0682633; 50 Hz at 4 ms 0.0837294; tune25_amp 0.1155948, isolated 0.0800000: nearest is 14 ms at 40 Hz, 0.0034 away, all fail at tol 0.0005. By the f x T law 20 Hz at 12 ms prints the same number (240 Hz ms), which is physics and still a reading. Default state (25 Hz, 16 ms) prints the tuning amplitude, never this value.",
+     "default_state_prints": false
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/seismolord/ShiftExplorer.jsx",
+  "src/pages/apps/SeismolordLearningPage.jsx",
+  "src/lib/seismolordTeaching.js",
+  "src/components/course/panels/seismolord/shiftLab.test.js",
+  "src/components/course/panels/seismolord/wedgeLab.test.js",
+  "src/content/courses/seismolord/intermediate/m01-from-tie-to-shift/l04-the-shift-panel-map.md",
+  "src/content/courses/seismolord/intermediate/m06-the-shift-workflow/l03-the-capstone-walkthrough.md",
+  "src/content/courses/seismolord/advanced/m01-the-wedge-experiment/l01-what-this-tier-adds.md",
+  "src/content/courses/seismolord/advanced/m06-using-the-wedge/l03-the-capstone-walkthrough.md"
+ ],
+ "tests": "npx vitest run src/components/course/panels/seismolord: 3 files 28 tests pass; npx vitest run src/lib src/pages: 8 files 137 pass; eslint on changed js/jsx clean; no em/en dash in edited lessons.",
+ "notes": "1) corr_zero_lag 0.621742 is ALREADY printed in 7 intermediate lessons (m01 l02, m02 l02, m02 l04, m03 l01 table + prose, m06 l01 twice, m06 l04); module 3 lesson 2 is built around it. The replacement is therefore a lesson leak from day one, and the ShiftExplorer default state prints it at 6 dp. Seismolord intermediate was not on the §3 leak list; it should join W5 (B strip) or the owner accepts it as open-book. Not stripped here (it would gut module 3). 2) The 8 ms lag is still stated in many intermediate lessons (m01 l02 'the planted lag', m01 l04 table, m02 l03, m06 l01/l03/l04); only prompt, panel subtitle/note and page intro card were changed per scope; bulk_shift_ms remains a lesson leak (W5). 3) The page intermediate card (SeismolordLearningPage ~308) still shows computed shift/corr values (pre-existing). 4) amp40_at_6ms (0.0953539461) appears in no lesson; 20 Hz at 12 ms prints the identical number (f x T law). 5) Added computeIntermediate().corrZeroLag in src/lib/seismolordTeaching.js."
+}

@@ -1,0 +1,66 @@
+{
+ "course": "earthmodel",
+ "tiers": {
+  "advanced": {
+   "why": "krige_at_w1 was prompt-given: the prompt called it the exactness check and the tile's unit string printed \"W1 is 0.3150\", so W1's logged porosity passed without kriging anything. It is replaced by a measured per-block kriging output, the porosity jump across the fault on the y = 2200 row (block 0 node at x 1600 minus block 1 node at x 1550, signed), read from the Population explorer's \"Jump across the fault on this row\" tile at 6 dp: -0.023016035393453593. tol 5e-5: the nearest variogram options (nugget 0.00025 with range 300, 8.8e-5 away; range 600, 1.9e-4) and the trend and constant seams (-0.0210, -0.0287) all fail. The prompt now states the variogram. krige_probe keeps its key; a probe readout with x and y inputs (default 2000, 2300) now prints it at 6 dp, and the lead tightens its tol 0.001 -> 0.0002.",
+   "prompt_edits": [
+    [
+     "the kriged porosity at (1500, 2500) and AT well W1 (the exactness check: simple kriging with a nugget below the sill honors the data),",
+     "the kriged porosity at (1500, 2500), and the porosity jump across the fault on the y = 2200 row of the per-block kriged map (the block 0 node at x 1600 minus the block 1 node at x 1550, sign kept), both by simple kriging on the stated spherical variogram (sill 0.0025, nugget 0.00025, range 900 m),"
+    ]
+   ],
+   "fields": {
+    "krige_at_w1": {
+     "key": "fault_jump_y2200",
+     "label": "Porosity jump across the fault on the y = 2200 row",
+     "unit": "v/v",
+     "expected": -0.023016035393453593,
+     "tol": 5e-05
+    }
+   },
+   "annot": {
+    "fault_jump_y2200": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:92 (Jump across the fault on this row tile, Simple kriging, nugget 0.00025, range 900)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:92 fmt(jump, 6)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "computePopulation() profile[12].phi - profile[11].phi = -0.023016035393453593 (pinned in populationLab.test.js with a sweep over all 48 method/nugget/range settings, every other one more than 5e-5 away: nearest -0.0231041 at range 300 and -0.0228259 at range 600; trend -0.0210, constant -0.028688; unsigned +0.023016 is 0.046 away). Printed at 6 dp, rounding miss 3.5e-8. The panel opens on simple kriging at the golden variogram, so the DEFAULT STATE PRINTS IT (earthmodel is a full W5 re-case). Lessons reworded so no figure within tol survives: m01 l04 printed it to full precision and \"about 0.292\" at x 1600 (0.292 - 0.315 = -0.023 passes), m04 l05 printed \"krige minus 0.0230\".",
+     "default_state_prints": true
+    }
+   },
+   "annot_updates": {
+    "krige_probe": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:96 (Kriged at a probe point tile; type x 1500, y 2500 with Simple kriging, nugget 0.00025, range 900)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:96 fmt(probe, 6), probe = m.krigeAt(px, py) (src/lib/earthmodelTeaching.js computePopulation.krigeAt)",
+     "evidence": "New probe readout with x/y inputs; krigeAt(1500, 2500) = 0.2914277719922997 exactly (populationLab.test.js). Its default location is PROBE_DEFAULT (2000, 2300), which reads 0.279119 and, under every nugget/range option, stays > 0.0017 from the key, so no default state prints it (D2). At tol 0.0002 the mean 0.290516 (0.00091 away) fails; the nugget-0 value 0.291597 (1.7e-4) still passes, as the B5 annotation noted. Rounding miss at 6 dp 2.3e-7. The advanced m06 l04 walkthrough now names the readout and the 0.0002 tolerance; m05 l03/l05 no longer describe the nugget sweep as \"one tolerance\".",
+     "default_state_prints": false
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/lib/earthmodelTeaching.js",
+  "src/components/course/panels/earthmodel/PopulationExplorer.jsx",
+  "src/components/course/panels/earthmodel/populationLab.test.js",
+  "src/content/courses/earthmodel/advanced/m01-one-model-two-blocks/l01-what-this-tier-adds.md",
+  "src/content/courses/earthmodel/advanced/m01-one-model-two-blocks/l04-the-population-panel-map.md",
+  "src/content/courses/earthmodel/advanced/m04-the-trend-plane/l05-trend-per-block.md",
+  "src/content/courses/earthmodel/advanced/m05-simple-kriging/l02-honoring-the-data.md",
+  "src/content/courses/earthmodel/advanced/m05-simple-kriging/l03-the-nugget.md",
+  "src/content/courses/earthmodel/advanced/m05-simple-kriging/l05-the-probe-value.md",
+  "src/content/courses/earthmodel/advanced/m06-per-block-volume-and-the-workflow/l04-the-capstone-walkthrough.md"
+ ],
+ "tests": "npx vitest run src/components/course/panels/{mapping,wellcorrelation,earthmodel}: 8 files, 72 tests pass; eslint clean on changed jsx/js",
+ "notes": "Lead applies the krige_probe tightening 0.001 -> 0.0002 (not in fields here). Prompt now states the variogram. fault_jump_y2200 is printed on the Population explorer default state (course is a full W5 re-case). Added PROBE_DEFAULT and computePopulation().krigeAt to src/lib/earthmodelTeaching.js."
+}

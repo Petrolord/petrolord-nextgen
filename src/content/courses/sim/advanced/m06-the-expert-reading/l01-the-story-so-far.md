@@ -36,7 +36,7 @@ It cost area: 266 oil cells against the booking's 169, so a larger accumulation 
 
 ## Validation
 
-Seven broken specifications, each isolating one rule, six of them raising exactly one error. Writing that set was harder than it looks: the first attempt cascaded, and a case that raises 180 errors teaches the opposite of what it is for.
+Seven broken specifications, each isolating one rule, and each one read to the end of its message list. Writing that set was harder than it looks: the first attempt cascaded, and a case that raises 180 errors teaches the opposite of what it is for.
 
 What the validator cannot catch is the larger list: right structure and wrong field, right shape and wrong place, right numbers and wrong units, right convention and wrong provenance. Those need comparison against something outside the deck, and there are four such comparisons worth running before any deck is trusted.
 

@@ -248,9 +248,28 @@ export const LAB_KR_GRID = buildLabKrGrid();
 
 /** Fit the lab grid back to Corey. With fixed endpoints from the table the
  *  fit recovers nw 2.4999999999999996 and no 2 from 24 usable points (the
- *  two endpoint zeros are definitional and sit under the kr floor). */
+ *  two endpoint zeros are definitional and sit under the kr floor). This is
+ *  the teaching recovery; the capstone fits the printed grid below. */
 export function fitLabGrid(opts = {}) {
   return { grid: LAB_KR_GRID, fit: fitCoreyToKrTable(LAB_KR_GRID, opts) };
+}
+
+/** The same 13 rows as a lab sheet prints them: every kr rounded to three
+ *  decimals (Sw left as the twelve equal steps). The rounding is what real
+ *  core data carries, and it moves the fitted exponents off the plant, so the
+ *  fit on this grid is a measurement the design table cannot answer. The
+ *  Expert capstone grades nw from THIS fit (fixed endpoints from the table). */
+export const PRINTED_KR_DECIMALS = 3;
+const roundTo = (v, d) => Math.round(v * 10 ** d) / 10 ** d;
+export const LAB_KR_GRID_PRINTED = LAB_KR_GRID.map((r) => ({
+  Sw: r.Sw,
+  krw: roundTo(r.krw, PRINTED_KR_DECIMALS),
+  kro: roundTo(r.kro, PRINTED_KR_DECIMALS),
+}));
+
+/** Fit the printed (3 dp) grid back to Corey, endpoints fixed from the table. */
+export function fitPrintedLabGrid(opts = {}) {
+  return { grid: LAB_KR_GRID_PRINTED, fit: fitCoreyToKrTable(LAB_KR_GRID_PRINTED, opts) };
 }
 
 /** Fit an arbitrary kr table (the panel's fit-the-lab mode with edits). */

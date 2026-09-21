@@ -1,0 +1,75 @@
+{
+ "course": "integrity",
+ "tiers": {
+  "beginner": {
+   "why": "Prompt only, no field moves. The beginner prompt said the two barrier tables were supplied with the capstone, but no page showed them (they existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs), and it stated four of the six answers instead: 'nineteen physical elements', 'six serving the primary envelope only, ten serving the secondary only, and THREE serving BOTH', and the free check 'field 4 less field 3 must equal three' (B5 finding 4). The prompt now publishes both tables row by row (name, kind, envelope, status) and cuts the summary counts and that free check, so every count is made on the table. Keys, expected values and tolerances are unchanged, so nobody is re-scored.",
+   "prompt_edits": [
+    [
+     "THE AS FOUND TABLE lists nineteen physical elements: six serving the primary envelope only, ten serving the secondary only, and THREE serving BOTH. Among them",
+     "Each row of the two tables below reads name, kind, envelope and status, rows are separated by semicolons, and the envelope is primary, secondary or both. THE AS FOUND TABLE: Base reservoir shale, formation, primary, verified; 7 in liner cement, casing-cement, primary, verified; 7 in production liner, casing, primary, verified; 9-5/8 x 5-1/2 production packer, production-packer, primary, failed; 5-1/2 completion tubing, completion-string, primary, verified; DHSV at 640 m MD, dhsv, primary, verified; 9-5/8 production casing cement, casing-cement, both, verified; 9-5/8 production casing, casing, both, verified; Tubing hanger, tubing-hanger, both, not-verified; 13-3/8 surface casing cement, casing-cement, secondary, verified; 13-3/8 surface casing, casing, secondary, verified; 20 in conductor cement, casing-cement, secondary, verified; 20 in conductor, casing, secondary, verified; Subsea wellhead housing, wellhead, secondary, verified; 9-5/8 casing hanger seal assembly, wellhead, secondary, not-verified; 13-3/8 casing hanger seal assembly, wellhead, secondary, verified; A-annulus packer fluid, annulus-fluid, secondary, degraded; Horizontal xmas tree, xmas-tree, secondary, verified; Tree cap and crown plugs, xmas-tree, secondary, verified. Among them"
+    ],
+    [
+     "the tree pulled and the BOP nippled up but NOT yet pressure tested.",
+     "the tree pulled and the BOP nippled up but NOT yet pressure tested. It reads: Base reservoir shale, formation, primary, verified; 7 in liner cement, casing-cement, primary, verified; 7 in production liner, casing, primary, verified; 5-1/2 completion tubing, completion-string, primary, verified; Deep-set tubing plug at 2180 m MD, mechanical-plug, primary, verified; Cement plug on the deep-set plug, cement-plug, primary, verified; Kill-weight brine in the tubing, fluid-column, primary, verified; Kill-weight brine in the A annulus, annulus-fluid, primary, verified; 9-5/8 production casing cement, casing-cement, primary, verified; 9-5/8 production casing, casing, primary, verified; Subsea wellhead housing, wellhead, both, verified; 13-3/8 surface casing cement, casing-cement, secondary, verified; 13-3/8 surface casing, casing, secondary, verified; 9-5/8 casing hanger seal assembly, wellhead, secondary, verified; BOP stack, bop, secondary, not-verified; 20 in conductor cement, casing-cement, secondary, verified; 20 in conductor, casing, secondary, verified."
+    ],
+    [
+     "so fields 1 and 2 both include all three of them and field 3 counts each of them ONCE.",
+     "so fields 1 and 2 both include every one of them and field 3 counts each of them ONCE."
+    ],
+    [
+     "field 4 less field 3 must equal three, the number of common elements;",
+     "field 4 less field 3 must equal the number of common elements you marked on the table;"
+    ]
+   ],
+   "fields": {},
+   "annot": {},
+   "annot_updates": {
+    "asfound_primary_count": {
+     "source": "hand-calc",
+     "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text."
+    },
+    "asfound_secondary_count": {
+     "source": "hand-calc",
+     "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text."
+    },
+    "asfound_distinct_element_count": {
+     "source": "hand-calc",
+     "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text."
+    },
+    "asfound_seat_total": {
+     "source": "hand-calc",
+     "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text."
+    },
+    "secured_primary_count": {
+     "source": "hand-calc",
+     "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text."
+    },
+    "secured_distinct_element_count": {
+     "source": "hand-calc",
+     "source_ref": "capstone prompt tables (as found and as secured rosters, published in W1)",
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Counted on the two tables the prompt now publishes (as found 19 rows, as secured 17 rows, each with its envelope): as found primary 9, secondary 13, distinct 19, seat total 22; as secured primary 11, distinct 17. The summary counts and the 'less three' free check are cut, so each count is made on the table. Reproduced by parsing the published prompt text."
+    }
+   }
+  }
+ },
+ "files_changed": [],
+ "tests": "counts reproduced from the published prompt text (script); no repo file changes",
+ "notes": "Rows are unnumbered on purpose: numbered rows would print the distinct counts (19, 17). Status word 'not-verified' is a roster value, not a contrastive. The four annotations that were class redesign for guessability can move to none; secured_* were unobtainable and become hand-calc."
+}

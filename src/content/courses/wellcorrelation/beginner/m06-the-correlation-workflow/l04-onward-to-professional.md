@@ -12,7 +12,7 @@ The question is what happens in the interval between TOP_A and TOP_SAND. Read ac
 
 That is the jump from beginner to Professional. At this tier you would have said the interval varies. At that tier the 14 m spread becomes a measurement of a syn-depositional process, with consequences for where the reservoir is thickest and why.
 
-The Professional tier also asks two housekeeping questions with real teeth. How many wells carry all four tops: three, because Ekene-4 stops before TOP_B, and any analysis wanting the complete column is a three-well analysis. And what the displayed span of the flattened section is: 150 m from the shallowest drawn top to the deepest. The span is a sanity read on the view itself, confirming the panel is showing the whole column and not clipping it.
+The Professional tier also settles two housekeeping questions with real teeth. How many wells carry all four tops: three, because Ekene-4 stops before TOP_B, and any analysis wanting the complete column is a three-well analysis. And what the displayed span of the flattened section is: 150 m from the shallowest drawn top to the deepest. The span is a sanity read on the view itself, confirming the panel is showing the whole column and not clipping it.
 
 ## Expert: predicting what was never drilled
 

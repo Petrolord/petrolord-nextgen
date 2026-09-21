@@ -1,6 +1,6 @@
 # Fitting the typewell water leg
 
-Theory says water-leg samples fall on a straight line in log-log space. This lesson does the fit on the typewell and reads off the two numbers the capstone grades: the cementation exponent $m$ and the product $a R_w$.
+Theory says water-leg samples fall on a straight line in log-log space. This lesson does the fit on the typewell and reads off the two numbers the fit returns: the cementation exponent $m$ and the product $a R_w$.
 
 ## The fitting window and its points
 
@@ -27,7 +27,7 @@ For the typewell the fit returns:
 
 $$m = 2.000 \qquad a R_w = 0.0500 \ \text{ohm.m}$$
 
-These are two of the six capstone numbers, graded with tolerances of 0.02 on $m$ and 0.002 ohm.m on $a R_w$. The tolerances are tight because the leg is clean and the fit is essentially exact; on real data you would quote wider uncertainty.
+These two numbers confirm the given parameters, which is why the capstone does not grade them. It grades the same fit over 2072 to 2078 m, a wider window you run yourself, with tolerances of 0.0002 on $m$ and 0.002 ohm.m on $a R_w$. On real data you would quote wider uncertainty.
 
 ## Worked example: the fit by hand
 

@@ -92,7 +92,7 @@ import {
 } from '@petrolord/engines/engines/production/rodPumpDesign.js';
 import {
   rodArea, rodSize, parseRodSize, rodGrade, bareRodWeightLbPerFt, steelAcousticVelocityFtS,
-  PLUNGER_SIZES, ROD_ELASTIC_MODULUS_PSI, ROD_ACOUSTIC_VELOCITY_FT_S, COUPLING_ALLOWANCE,
+  ROD_SIZES, PLUNGER_SIZES, ROD_ELASTIC_MODULUS_PSI, ROD_ACOUSTIC_VELOCITY_FT_S, COUPLING_ALLOWANCE,
   STEEL_SG, STEEL_DENSITY_LB_FT3,
 } from '@petrolord/engines/engines/production/data/rodCatalog.js';
 
@@ -618,6 +618,42 @@ const modeScan = (string, count = 3, hiSpm = MODE_SCAN_TOP_SPM, N = MODE_SCAN_PO
 };
 
 export const STRING_IDS = Object.freeze(['uniform', 'taper', ODUMA.label]);
+
+/**
+ * A STRING THE LEARNER TYPES. The note view reads three fixed strings; this one
+ * reads whatever sections are typed, top section first, through the same
+ * `buildRodString` and `naturalFrequency` calls. It opens on the ODUMA-4
+ * teaching string, so its default state prints only numbers the teaching
+ * surface already carries (the guard sweeps that default below). The note is a
+ * property of the steel alone: fluid gravity and grade do not enter it, so the
+ * view asks for neither.
+ */
+export const TYPED_STRING_SIZES = Object.freeze(ROD_SIZES.map((r) => r.label));
+export const TYPED_STRING_MAX_SECTIONS = 4;
+export const TYPED_STRING_DEFAULT = Object.freeze(ODUMA.sections.map((s) => Object.freeze({ ...s })));
+
+export const typedStringNote = (sections) => {
+  const clean = (sections || [])
+    .filter((s) => s && String(s.size || '').trim() !== '')
+    .map((s) => ({ size: String(s.size).trim(), lengthFt: Number(s.lengthFt) }));
+  const bad = clean.find((s) => !(Number.isFinite(s.lengthFt) && s.lengthFt > 0));
+  if (bad) return { ok: false, errors: [`Section ${bad.size} needs a length in feet greater than zero.`] };
+  const st = buildRodString({ sections: clean, fluidSg: ODUMA.fluidSg, gradeId: ODUMA.gradeId });
+  if (!st.ok) return { ok: false, errors: st.errors };
+  const f = naturalFrequency({ string: st });
+  return {
+    ok: true,
+    errors: [],
+    warnings: st.warnings || [],
+    sections: clean.length,
+    lengthFt: st.lengthFt,
+    engineScanSpm: f.nPrimeSpm,
+    n0Spm: f.n0Spm,
+    taperFactor: f.taperFactor,
+    uniform: f.uniform === true,
+    unresolved: f.unresolved === true,
+  };
+};
 
 const stringById = (id) => (id === ODUMA.label ? teachingString() : publishedString(id));
 const frequencyById = (id) => (id === ODUMA.label ? teachingFrequency() : publishedFrequency(id));
@@ -2876,6 +2912,7 @@ export const teachingAccessors = () => [
   ['noteRoutes.uniform', () => noteRoutes('uniform')],
   ['noteRoutes.taper', () => noteRoutes('taper')],
   ['noteRoutes.teaching', () => noteRoutes(ODUMA.label)],
+  ['typedStringNote.default', () => typedStringNote(TYPED_STRING_DEFAULT)],
   ['scanGridReplica.taper', () => scanGridReplica('taper')],
   ['scanGridReplica.teaching', () => scanGridReplica(ODUMA.label)],
   ['speedRefusal', () => speedRefusal()],

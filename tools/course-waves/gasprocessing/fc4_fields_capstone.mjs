@@ -12,9 +12,11 @@
 //     the pressure at which the engine warns, and its saturation answer is
 //     inside the band the module stands behind;
 //   * the water overhead the reboiler pays for is a typed constant with no
-//     source, so NO graded field reads a reboiler duty on the Associate
-//     capstone: the duty is taught and the SENSIBLE half, which is built
-//     entirely from stated inputs, is what is graded;
+//     source, so the Associate capstone STATES it (1100 Btu a pound of water,
+//     the module's own figure) as a condition of the problem, exactly as
+//     OTUMARA states its duty per gallon. Since W1 (2026-09-21) the Associate
+//     grades the reboiler duty on that stated figure and its stated reflux
+//     ratio, in place of the BTEX figure the tier never taught;
 //   * the amine contactor's liquid density is a typed constant that is the
 //     wrong fluid for an amine, so NO graded field on the Professional
 //     capstone reads a contactor diameter;

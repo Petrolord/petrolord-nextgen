@@ -1,0 +1,46 @@
+{
+ "course": "rockphysics",
+ "tiers": {
+  "advanced": {
+   "why": "gas_class graded the Rutherford-Williams class as a number 1 to 4 (tol 0), a one-in-four guess that the course names outright (module lesson slug gas-is-class-three, capstone title 'flips the AVO class'). Replaced by the largest absolute Shuey minus exact Zoeppritz error on the brine case over 0 to 40 degrees, the measured approximation gap advanced m04 teaches, read from the AVO explorer tile at 6 dp.",
+   "prompt_edits": [
+    [
+     "the gas case's Rutherford-Williams class (as a number, 1 to 4),",
+     "the largest absolute gap between Shuey and exact Zoeppritz on the brine case over 0 to 40 degrees,"
+    ]
+   ],
+   "fields": {
+    "gas_class": {
+     "key": "brine_max_shuey_err",
+     "label": "Largest Shuey error, brine case, 0 to 40 deg",
+     "unit": "ratio",
+     "expected": 0.005972095765271403,
+     "tol": 0.0001
+    }
+   },
+   "annot": {
+    "brine_max_shuey_err": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:99 (Tile 'Largest Shuey error, brine')",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:99 fmt(d.brine.maxErr, 6)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "rockphysicsTeaching.computeAvoDetail(...).brine.maxErr = 0.005972095765271403 (max |Shuey - Zoeppritz| at whole degrees 0..40); independent of frequency and threshold. Prints 0.005972 (miss 9.6e-8). Neighbours: gas-case tile 0.002192 and gas Shuey minus exact at 30 deg 0.002175 miss by > 0.0037.",
+     "default_state_prints": true,
+     "lesson_prints": true
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/rockphysics/avoLab.test.js",
+  "src/content/courses/rockphysics/advanced/m06-the-avo-workflow/l03-the-capstone-walkthrough.md"
+ ],
+ "tests": "vitest rockphysics panels green",
+ "notes": "LEAK carried to W5: the brine Shuey error 0.005972 is printed in advanced m04 l03/l04, m01 l04, m06 l01 (rockphysics is an A re-case course). The walkthrough no longer prints the class as a graded answer and does not print the new value."
+}

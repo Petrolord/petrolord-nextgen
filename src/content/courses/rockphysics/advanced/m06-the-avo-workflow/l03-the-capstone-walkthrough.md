@@ -4,7 +4,7 @@ Seven fields, which is one more than every other capstone in this programme. Thi
 
 ## The task
 
-Put the Ekene shale over the sand and screen both cases: the logged brine sand and its gas substituted twin from the Professional tier. Report the Shuey intercept and gradient for each, the gas case's Rutherford-Williams class as a number, the exact Zoeppritz reflection at 30 degrees for the gas case, and the wedge tuning thickness at 25 Hz.
+Put the Ekene shale over the sand and screen both cases: the logged brine sand and its gas substituted twin from the Professional tier. Report the Shuey intercept and gradient for each, the largest gap between the Shuey approximation and the exact Zoeppritz solution on the brine case over 0 to 40 degrees, the exact Zoeppritz reflection at 30 degrees for the gas case, and the wedge tuning thickness at 25 Hz.
 
 ## The settings
 
@@ -22,7 +22,7 @@ Set the frequency to 25 Hz and the class threshold to 0.02, which is the panel's
 
 **Gas gradient -0.2565633444602355**, tolerance 0.001.
 
-**Gas class 3**, tolerance 0. Reported as a number, not a Roman numeral.
+**Largest Shuey error on the brine case**, tolerance 0.0001. Read it from the tile of that name, printed to six decimals. It is the largest absolute difference between the dashed and solid brine lines at any whole degree from 0 to 40.
 
 **Exact Zoeppritz at 30 degrees, gas case, -0.12239091302671612**, tolerance 0.001.
 
@@ -32,7 +32,7 @@ Set the frequency to 25 Hz and the class threshold to 0.02, which is the panel's
 
 The four coefficients test the Shuey computation for both cases, and the pairing tests whether the substitution was carried through correctly: getting the brine pair right and the gas pair wrong means the rocks from the tier below were not brought over properly.
 
-The class tests whether the classification rule was applied, including that the intercept is compared against a threshold rather than to zero.
+The brine Shuey error tests module 4: whether you know which case the approximation serves worse, and read the brine tile rather than the gas one beside it. The class call is still worth making for your report (gas intercept below -0.02 with a negative gradient is class III), but it is a one-in-four label, so the capstone grades the brine error instead.
 
 The exact value at 30 degrees tests whether the exact solution was used where it was asked for. The Shuey value there is -0.12456555923100084, which fails the 0.001 tolerance by more than a factor of two, so this field cannot be answered from the approximation.
 
@@ -42,7 +42,7 @@ The tuning thickness tests the wedge model, and it is graded exactly because it 
 
 Reporting the Shuey value at 30 degrees instead of the exact one. The two differ by 0.0021746462042847164, which is 2.17 times the tolerance.
 
-Reporting the class as a Roman numeral. The field wants 3.
+Reading the gas case's Shuey error where the brine case's is asked for. The two tiles sit side by side, and the gas figure is far outside the tolerance.
 
 Confusing the two cases. The brine intercept is positive and the gas intercept negative, so a sign check on those two catches a transposition immediately.
 
@@ -50,9 +50,9 @@ Confusing the two cases. The brine intercept is positive and the gas intercept n
 
 Every other tier in this programme grades six. This one grades seven because the response it describes needs two coefficients per fluid case rather than one value per quantity.
 
-Four of the seven are the two coefficients for the two cases, and they only mean anything in pairs: an intercept without its gradient describes a stack, not a gather. The remaining three are the class, which is what the pair is usually reduced to for reporting, the exact value at one angle, which is the check on the approximation, and the tuning thickness, which says whether any of it applies to a real bed.
+Four of the seven are the two coefficients for the two cases, and they only mean anything in pairs: an intercept without its gradient describes a stack, not a gather. The remaining three are the brine case's largest Shuey error, which says how far the two-term approximation can be trusted on this interface, the exact value at one angle, which is the check on the approximation for the gas case, and the tuning thickness, which says whether any of it applies to a real bed.
 
-That is the shape of the tier written into its assessment: two cases, two coefficients each, one label, one exactness check and one resolution limit.
+That is the shape of the tier written into its assessment: two cases, two coefficients each, two exactness checks and one resolution limit.
 
 ## Checks before submitting
 

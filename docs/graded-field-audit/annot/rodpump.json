@@ -49,24 +49,31 @@
   {
    "tier": "beginner",
    "key": "string_natural_freq_spm",
-   "source": "prompt-given",
-   "source_ref": "prompt: \"A stepped bar has a fundamental of its own, 40.15458511 spm here, and a taper raises it by a taper factor of 1.15865923\" and free check \"Field 3 must EXCEED the 40.15458511 spm uniform fundamental, by exactly the taper factor\"",
-   "printed": "full",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/rodPumpLab.js typedStringNote (buildRodString + naturalFrequency)",
+   "printed": {
+    "decimals": 12
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/StringExplorer.jsx:327 fmt(r.engineScanSpm, 12) (teaching strings only)",
+   "display_ref": "src/components/course/panels/rodpump/StringExplorer.jsx Typed view, Tile 'Engine scan fundamental' fmt(r.engineScanSpm, 12)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
+   "class": "none",
    "fix": {
     "redesign": "keep string_natural_freq_spm but drop the two figures (40.15458511 and 1.15865923) from the prompt's traps and free checks, keeping the qualitative check that the tapered note must exceed the uniform one; then give pd-string-explorer an editable taper so the learner reads the engine scan fundamental at its 12-decimal print. Without the panel change the field becomes unobtainable, because the tapered note is a transfer-matrix scan (beginner m03 l01)."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The answer is 40.15458511 x 1.15865923 = 46.52548066, 1.1e-7 from the key against tol 9.4e-6, so the prompt hands it over. Remove the numbers and pair that with an editable string view.",
-   "evidence": "The product of the two prompt numbers passes; with them removed there is no hand route (the engine scans a transfer matrix for the tapered fundamental, beginner m03 l01-l02).",
+   "evidence": "Typing 1 in x 1825 ft, 7/8 in x 2140 ft, 3/4 in x 2120 ft into the typed string view returns the engine scan fundamental equal to the key within tol 9.4e-6 at its 12 decimal print (panelCapstoneGuard.test.js 'typing the string the prompt states'). The prompt no longer prints the uniform fundamental or the taper factor, so the product route is gone. The view's default (ODUMA-4) is in teachingQuantities and lands on no graded answer.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261024a_w1_rodpump.sql",
+    "wave": "w1",
+    "prompt": "string_natural_freq_spm is the product of two numbers the prompt printed (the 40.15458511 spm uniform fundamental and the 1.15865923 taper factor), so 40.15458511 x 1.15865923 = 46.52548066 passed without any work (B5 finding 4). The two figures are dropped from the trap and the free check, keeping "
+   }
   },
   {
    "tier": "beginner",

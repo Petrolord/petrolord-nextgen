@@ -40,13 +40,13 @@ The likely mistake is a mean month of 30.4375 days instead of the real calendar 
 
 The check: your total must reproduce the RC4 ledger's own oil sum, because the schedule was built from it.
 
-## Field 5: the validator rules
+## Field 5: the validator messages
 
-Count the broken specifications the validator refuses.
+Count the error messages the validator raises across the seven broken specifications. Validation mode lists every message under the case that raised it, so read each list to its end.
 
-The likely mistake is counting ERROR MESSAGES rather than cases. One case raises two messages, so the message count is eight where the case count is seven.
+The likely mistake is reporting the case count, which the Rules exercised tile prints. A case can be coupled to a second rule, and then it raises more than one message.
 
-The check: six of the cases raise exactly one message each.
+The check: every case raises at least one message, and no case raises more than two.
 
 ## Field 6: the equilibration datum
 

@@ -1,0 +1,84 @@
+{
+ "course": "mapping",
+ "tiers": {
+  "intermediate": {
+   "why": "iso_live re-graded the Associate tier's live node count (201), which the isochore inherits unchanged, so a learner carried the beginner answer across without gridding. It is replaced by a count only the isochore produces, read in the same panel state: the live isochore nodes above the mean of the six well thicknesses, 146 of 201 at the 100 m capstone cell.",
+   "prompt_edits": [
+    [
+     "the thickness at prospect P-1, the live node count, and the plain mean of the six well thicknesses for comparison.",
+     "the thickness at prospect P-1, how many live isochore nodes sit above the plain mean of the six well thicknesses, and that plain mean itself for comparison."
+    ]
+   ],
+   "fields": {
+    "iso_live": {
+     "key": "iso_nodes_above_well_mean",
+     "label": "Live isochore nodes above the well mean",
+     "unit": "count",
+     "expected": 146.0,
+     "tol": 0.0
+    }
+   },
+   "annot": {
+    "iso_nodes_above_well_mean": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx:78 (Live nodes above the well mean tile, Isochore at the 100 m cell)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx:78 `${s.nodesAboveWellMean} of ${s.liveNodes}`",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "computeIsochoreMap(100, \"ISOCHORE\").summary.nodesAboveWellMean = 146 (pinned in isochoreLab.test.js). The same tile reads 41 on TOP_SAND and 48 on BASE_SAND, 583 and 36 on the isochore at 50 m and 200 m; the live total 201 (the old answer) is printed beside it and fails. An integer count printed exactly, tol 0. Not guessable: the answer space is 0..201 and the lessons now say only \"well over half\". The panel opens on the isochore at 100 m, so the default state prints it (the whole mapping course is a W5 re-case). The three intermediate lessons that printed 146 were reworded.",
+     "default_state_prints": true
+    }
+   }
+  },
+  "advanced": {
+   "why": "live_with_e7 was 201 a third time: Ekene-7 is interior to the six-well hull, so the live count is unchanged and \"unchanged\" was the obvious guess. It is replaced by the depth at prospect P-1 on the seven-well grid, read from the Validation explorer's Depth at P-1 tile (4 dp) in the Six plus Ekene-7 state: 1547.105224609375 m. tol 0.01 (the annotation proposed 0.1, which the drop-Ekene-4 jackknife reading 1547.2102, 0.105 away, only just clears).",
+   "prompt_edits": [
+    [
+     "its residual, and the crest and live node count after regridding with Ekene-7 included.",
+     "its residual, and the crest and the depth at prospect P-1 after regridding with Ekene-7 included."
+    ]
+   ],
+   "fields": {
+    "live_with_e7": {
+     "key": "depth_at_p1_with_e7_m",
+     "label": "Depth at prospect P-1 with Ekene-7 included",
+     "unit": "m",
+     "expected": 1547.105224609375,
+     "tol": 0.01
+    }
+   },
+   "annot": {
+    "depth_at_p1_with_e7_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx:67 (Depth at P-1 tile, control set Six plus Ekene-7)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx:67 fmt(s.atTarget) (toFixed(4))",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "computeValidationMap(\"plus7\").summary.atTarget = 1547.105224609375 (pinned in validationLab.test.js). The same tile under the other seven control sets reads 1542.6199 (all six, the default state and the beginner answer), 1543.0889, 1541.9392, 1543.8075, 1547.2102 (closest, 0.105 away), 1542.1936, 1549.7084: all fail tol 0.01. Printed at 4 dp, rounding miss 2.5e-5. The default state does not print it. LEAK: advanced m04 l04 and m05 l03 teach the seven-well P-1 reading (1547.105224609375) as the module's own worked result; left for the W5 re-case like the other mapping leaks.",
+     "default_state_prints": false,
+     "lesson_prints": true
+    }
+   },
+   "leak_note": "the P-1 depth with Ekene-7 is the worked result of advanced m04 l04 and m05 l03 (W5 re-case)"
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/mapping/isochoreLab.test.js",
+  "src/components/course/panels/mapping/validationLab.test.js",
+  "src/content/courses/mapping/advanced/m06-the-validation-workflow/l03-the-capstone-walkthrough.md",
+  "src/content/courses/mapping/intermediate/m01-a-second-surface/l04-the-isochore-panel-map.md",
+  "src/content/courses/mapping/intermediate/m04-two-honest-means/l02-the-map-mean.md",
+  "src/content/courses/mapping/intermediate/m04-two-honest-means/l03-why-they-differ.md",
+  "src/content/courses/mapping/intermediate/m06-the-isochore-workflow/l03-the-capstone-walkthrough.md"
+ ],
+ "tests": "npx vitest run src/components/course/panels/{mapping,wellcorrelation,earthmodel}: 8 files, 72 tests pass; eslint clean on changed jsx/js",
+ "notes": "tol for depth_at_p1_with_e7_m set to 0.01 (annotation said 0.1; the drop-Ekene-4 jackknife 0.105 away only barely failed 0.1). iso_nodes_above_well_mean is printed on the panel default state; depth_at_p1_with_e7_m is printed by advanced m04 l04 and m05 l03 teaching lessons (module content, left for W5). 146 scrubbed from three intermediate lessons."
+}

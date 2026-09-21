@@ -1,6 +1,6 @@
 # The capstone walkthrough
 
-The Associate capstone is a reading exercise, not a memory test. It puts the Ekene section in front of you, flattened on TOP_SAND at a 1500 m datum, and grades six numbers. Every one of them is available on the panel to anyone who knows which view to be in and how the arithmetic works. This lesson walks all six so that nothing on the day is a surprise.
+The Associate capstone is a reading exercise, not a memory test. It puts the Ekene section in front of you, flattened on TOP_SAND at a 1500 m datum, and grades six numbers. Five are read in that view and one in a second flattening the capstone names. Every one of them is available on the panel to anyone who knows which view to be in and how the arithmetic works. This lesson walks all six so that nothing on the day is a surprise.
 
 ## The six graded quantities
 
@@ -12,13 +12,13 @@ The Associate capstone is a reading exercise, not a memory test. It puts the Eke
 
 **The structural relief on TOP_SAND across the section.** Relief is the deepest pick minus the shallowest: 1590 minus 1541, which is 49 m. This one carries a trap worth naming clearly. You read it in the structural view, not the flattened one, because flattening on TOP_SAND removes exactly that relief by construction. Look for it on the flattened panel and you will find zero, which is the correct reading of the wrong view. Switch views, take the number, switch back.
 
-**The number of wells the TOP_B correlation line reaches.** Three. Ekene-4 stopped above TOP_B, so the surface has no pick there and the line ends after the third well. Count what the line touches, not how many wells are on the panel.
+**Ekene-3's TOP_B displayed depth with BASE_SAND at a 1560 m datum.** This is the one reading taken off a second view. Re-flatten the section on BASE_SAND and set the datum to 1560 m. Ekene-3's shift is now the datum minus its own BASE_SAND pick, and its TOP_B displays at the true pick plus that shift. A shift belongs to a well and a datum together, so work it fresh when the datum top changes; carrying Ekene-3's TOP_SAND shift across gives the wrong depth. Then put the panel back on TOP_SAND at 1500 m for the last reading.
 
 **Ekene-1's TOP_B displayed depth.** Same arithmetic as before: 1640 m true, shift -48 m, so it displays at 1592 m. Note that the shift belongs to the well and not to the surface. Ekene-1's shift was computed from its TOP_SAND pick, and it then applies to every top in that well, TOP_B included.
 
 ## Tolerances
 
-The five depth, thickness and relief answers are marked to 0.01 m, which means the arithmetic has to be right but there is no rounding trap: every one of these numbers is a whole number of metres. The well count is marked exactly. There is no partial credit on a count of three.
+The five answers read in the capstone view are marked to 0.01 m, which means the arithmetic has to be right but there is no rounding trap: every one of these numbers is a whole number of metres. The reading in the second view is marked to half a metre, half the whole metre the panel prints. Every pick is a whole metre too, so that half metre forgives a slip of the eye and nothing else: the TOP_B of any other well in that view sits further away than that.
 
 ## What has to happen before the capstone opens
 
@@ -38,7 +38,7 @@ Passing the capstone grants the Associate certification for this course. That ce
 
 There is nothing to memorise. Get comfortable with three habits and the capstone follows.
 
-Know which view answers which question. Relief lives in the structural view. Displayed depths live in the flattened view. Thicknesses and counts live in both.
+Know which view answers which question. Relief lives in the structural view. Displayed depths live in the flattened view, and each one belongs to the datum it was read at. Thicknesses and counts live in both.
 
 Know the two pieces of arithmetic by feel: shift equals datum minus datum-top depth, and displayed equals true plus shift. Every depth answer in the capstone is one of those two, applied once.
 
