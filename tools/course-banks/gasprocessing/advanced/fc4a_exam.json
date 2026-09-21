@@ -363,15 +363,15 @@
   "explanation": "There is nothing in this repository to check any of those values against, and the oracle says as much in its own comment. It is worth having and it is not a validation."
  },
  {
-  "prompt": "How was the standard cubic feet in a pound mole measured out of the engine rather than read from an export?",
+  "prompt": "How was the water overhead of 1100.000000000000 Btu a lb measured out of the engine rather than read from its export?",
   "options": [
-   "By dividing the gas constant by the standard pressure and multiplying by the standard temperature, which are all exported.",
-   "By taking the saturation answer over the mole fraction the same call returns, which leaves the constant alone.",
-   "By running the BTEX mole balance at one MMscfd, a million ppmv, a unit absorbed fraction and a unit molecular weight, where the answer is a million over the constant and nothing else.",
-   "By comparing the engine's water content against the golden's, since the golden builds the same volume from the SI gas constant."
+   "By dividing the overhead term at a reflux ratio of 0.250000 by the water a gallon carries, which leaves the constant alone.",
+   "By running the BTEX mole balance at a unit absorbed fraction, where the still overhead in pounds a day is the constant.",
+   "By running the reboiler at a circulation ratio of one gallon per pound with no reflux, where the vaporization term is the overhead alone and nothing else.",
+   "By comparing the reboiler duty against the golden's, since the golden builds the same overhead from a steam table value."
   ],
   "answer": 2,
-  "explanation": "To measure a constant, ask the engine a question whose answer is that constant and nothing else, then print the ratio of the measurement to the export. The saturation route is how the molecular weight of water was measured."
+  "explanation": "To measure a constant, ask the engine a question whose answer is that constant and nothing else. At one gallon per pound a gallon carries one pound of water, and with no reflux the overhead is charged once, so the term reads the Btu a lb directly. A reflux ratio of 0.250000 adds a quarter on top, and the BTEX still overhead is aromatics."
  },
  {
   "prompt": "The US gallons in a cubic foot is 7.480519480519. Which kind of constant is it?",
