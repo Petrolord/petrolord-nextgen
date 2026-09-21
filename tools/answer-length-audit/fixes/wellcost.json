@@ -1,0 +1,61 @@
+{
+ "migration": "20261021b_b4_fix_wellcost.sql",
+ "title": "wellcost: two arguably-correct distractors rewritten; one flag judged fine",
+ "items": [
+  {
+   "app_slug": "wellcost",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-reading-a-risked-result",
+   "ord": 13,
+   "category": "double-key",
+   "flag": "option 0 arguably also unanswered by a converged run",
+   "verdict": "fixed",
+   "reason": "l05 says the run takes the engine as given, so 'whether the engine evaluated each realisation correctly' is also unanswered; option 0 now claims the run cannot give the mean, which l01 shows it reports beside the median.",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "Whether the engine evaluated each realisation correctly when it rolled up the nine cost lines for every draw of the run.",
+      "new": "Whether the mean sits above or below the median, since percentiles read off a sorted list by index cannot give the average of the draws."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "wellcost",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-the-cost-time-curve",
+   "ord": 13,
+   "category": "double-key",
+   "flag": "option 3 overlaps the correct option",
+   "verdict": "fixed",
+   "reason": "option 3 (schedule slipped / NPT allowance too low, extra rig hours billed) restates the correct 'running late' story and could be defended; it now gives the l04 below-the-line story (not yet drilled, money still owed), misapplied to a well above the line.",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "Either the schedule slipped or the non-productive allowance was set too low, so extra rig hours are being billed.",
+      "new": "Either it has not yet drilled the section or it is behind on depth, so the money it has not spent is still owed."
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "wellcost",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "category": "double-key",
+   "flag": "option 2 hours are the published fixture hour set; follow-on: explanation shows no working",
+   "verdict": "fixed",
+   "reason": "option 2 is the intended m05 l01 fixture trap and stays; the explanation now shows the three hour terms from m05 l02 and why 16 is wrong.",
+   "changes": {
+    "explanation": {
+     "old": "Every hour in the form is productive, so none of the three carries the non productive allowance the schedule applies.",
+     "new": "Drilling is 1,000 m at 10 m/hr, which is 100 hours; the flat connection allowance is 4 hours; and the round trip is twice 3,000 m over 500 m/hr, which is 12 hours. The 16 hour trip belongs to the published fixture, which is no section of this well. Every hour in the form is productive, so none of the three carries the non productive allowance."
+    }
+   }
+  }
+ ]
+}
