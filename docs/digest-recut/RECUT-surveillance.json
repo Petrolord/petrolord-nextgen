@@ -1,0 +1,56 @@
+{
+ "app_slug": "surveillance",
+ "rows": 2,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "hand edits in the recut generator (this course has no committed bank source)",
+ "edits": [
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "fields": {
+    "prompt": {
+     "old": "Where does a course number that is not in the digest come from, and what should be done with it?",
+     "new": "Where does a course number the course never printed come from, and what should be done with it?"
+    },
+    "options": {
+     "old": [
+      "It comes from the goldens and may be used wherever the golden case is named beside it.",
+      "It comes from the engine re-run and may be used once it has been checked against the oracle, which is the route the digest itself took.",
+      "It has no provenance, and it may not be used, because recomputing a figure is not a substitute for a published or derived one.",
+      "It comes from the teaching field and may be used as long as the field is described as invented and the number is labelled as a teaching one."
+     ],
+     "new": [
+      "It comes from the goldens and may be used wherever the golden case is named beside it.",
+      "It comes from the engine re-run and may be used once it has been checked against the oracle, which is the route the course itself took.",
+      "It has no provenance, and it may not be used, because recomputing a figure is not a substitute for a published or derived one.",
+      "It comes from the teaching field and may be used as long as the field is described as invented and the number is labelled as a teaching one."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 2,
+   "fields": {
+    "options": {
+     "old": [
+      "As an absolute difference in that field's own units against a tolerance in the same units, which is not a percentage of anything.",
+      "As a relative error, so a watercut carried as a per cent and the same watercut as a fraction are near misses of each other.",
+      "As a match to a stated number of significant figures, which is why the digest prints twelve of them.",
+      "As a match after both values are normalised to SI units."
+     ],
+     "new": [
+      "As an absolute difference in that field's own units against a tolerance in the same units, which is not a percentage of anything.",
+      "As a relative error, so a watercut carried as a per cent and the same watercut as a fraction are near misses of each other.",
+      "As a match to a stated number of significant figures, which is why the course prints twelve of them.",
+      "As a match after both values are normalised to SI units."
+     ]
+    }
+   }
+  }
+ ]
+}

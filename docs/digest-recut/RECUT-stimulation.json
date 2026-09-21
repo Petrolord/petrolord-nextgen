@@ -1,0 +1,42 @@
+{
+ "app_slug": "stimulation",
+ "rows": 2,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "hand edits in the recut generator (this course has no committed bank source)",
+ "edits": [
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-material-balance",
+   "ord": 15,
+   "fields": {
+    "options": {
+     "old": [
+      "A single closed form expression is evaluated once, with no iteration.",
+      "A guess of 0.5 for efficiency is refined until it settles, which took 9 passes on the published case.",
+      "The leakoff coefficient is swept over a table of values and interpolated, which is why the digest reports a sweep.",
+      "A guess of one for efficiency is stepped down, reaching the answer after the full 200 passes."
+     ],
+     "new": [
+      "A single closed form expression is evaluated once, with no iteration.",
+      "A guess of 0.5 for efficiency is refined until it settles, which took 9 passes on the published case.",
+      "The leakoff coefficient is swept over a table of values and interpolated, which is why the course reports a sweep.",
+      "A guess of one for efficiency is stepped down, reaching the answer after the full 200 passes."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 4,
+   "fields": {
+    "explanation": {
+     "old": "In the digest sweep the ratio runs from 1.8723566993895047 at a half-length of 40 m up to 3.0985171538556986 at 300 m.",
+     "new": "In the course's sweep the ratio runs from 1.8723566993895047 at a half-length of 40 m up to 3.0985171538556986 at 300 m."
+    }
+   }
+  }
+ ]
+}

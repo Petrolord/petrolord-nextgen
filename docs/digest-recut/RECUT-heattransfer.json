@@ -1,0 +1,44 @@
+{
+ "app_slug": "heattransfer",
+ "rows": 3,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/heattransfer, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 20,
+   "fields": {
+    "prompt": {
+     "old": "The teaching digest lists the states this balance will not compute. How many are there, and what do they have in common?",
+     "new": "The course lists the states this balance will not compute. How many are there, and what do they have in common?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-this-engine-rates",
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "On the probes the teaching digest runs, three of the twelve doors handed back more than a message when they refused. What were the extra keys?",
+     "new": "On the probes the course runs, three of the twelve doors handed back more than a message when they refused. What were the extra keys?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "fields": {
+    "explanation": {
+     "old": "Section 20 reads the held register itself rather than quoting a count from the module's header sentence, which is how the disagreement between 7 and six was found.",
+     "new": "The course reads the held register itself rather than quoting a count from the module's header sentence, which is how the disagreement between 7 and six was found."
+    }
+   }
+  }
+ ]
+}

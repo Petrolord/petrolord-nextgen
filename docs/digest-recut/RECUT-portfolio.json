@@ -1,0 +1,24 @@
+{
+ "app_slug": "portfolio",
+ "rows": 1,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "hand edits in the recut generator (this course has no committed bank source)",
+ "edits": [
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-the-s-curve",
+   "ord": 14,
+   "fields": {
+    "prompt": {
+     "old": "The digest draws OFON-1's first point as \"Feb 27\" with the timezone pinned to UTC. Drawn in America/Los_Angeles, the same AFE labels its first point \"Jan 27\" and every Planned value shifts. Why (finding EC5-5)?",
+     "new": "The course draws OFON-1's first point as \"Feb 27\" with the timezone pinned to UTC. Drawn in America/Los_Angeles, the same AFE labels its first point \"Jan 27\" and every Planned value shifts. Why (finding EC5-5)?"
+    },
+    "explanation": {
+     "old": "The metrics are unaffected, and Lagos, Tokyo and UTC agree with the digest's table; a curve compared across offices can disagree on every Planned point.",
+     "new": "The metrics are unaffected, and Lagos, Tokyo and UTC agree with the course's table; a curve compared across offices can disagree on every Planned point."
+    }
+   }
+  }
+ ]
+}

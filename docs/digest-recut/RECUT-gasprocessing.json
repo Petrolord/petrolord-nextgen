@@ -1,0 +1,386 @@
+{
+ "app_slug": "gasprocessing",
+ "rows": 21,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/gasprocessing, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 7,
+   "fields": {
+    "explanation": {
+     "old": "Naming a constant is what makes the difference between the three kinds visible at all, and it is what lets the digest measure four of them back out of return values.",
+     "new": "Naming a constant is what makes the difference between the three kinds visible at all, and it is what lets the course measure four of them back out of return values."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-this-engine-conditions",
+   "ord": 5,
+   "fields": {
+    "prompt": {
+     "old": "For four of its constants the digest asks the engine a question whose answer is that constant and nothing else, then divides the measurement by the export. Every one of the four comes back at 1.000000000000. What does that establish?",
+     "new": "For four of its constants the course asks the engine a question whose answer is that constant and nothing else, then divides the measurement by the export. Every one of the four comes back at 1.000000000000. What does that establish?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-this-engine-conditions",
+   "ord": 8,
+   "fields": {
+    "options": {
+     "old": [
+      "Any future edit to the density, because a value a gate has pinned is one that cannot be moved again without the gate failing on the arithmetic.",
+      "The density being a declared value, since a figure the digest has checked against a second route has stopped being a value with nothing behind it.",
+      "An error in 9.300000 lb a gallon itself, which two agreeing routes would catch.",
+      "One fluid carrying two numbers, so that nothing downstream can tell which of them it is holding."
+     ],
+     "new": [
+      "Any future edit to the density, because a value a gate has pinned is one that cannot be moved again without the gate failing on the arithmetic.",
+      "The density being a declared value, since a figure the course has checked against a second route has stopped being a value with nothing behind it.",
+      "An error in 9.300000 lb a gallon itself, which two agreeing routes would catch.",
+      "One fluid carrying two numbers, so that nothing downstream can tell which of them it is holding."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 15,
+   "fields": {
+    "options": {
+     "old": [
+      "Which number the published cases cover, which one the golden reaches by a second road, and which one nothing checks.",
+      "Which number the engine computed, which one you chose, and which one it kept to itself.",
+      "Which number is intensive, which is extensive, and which belongs to a vessel.",
+      "Which number the studio prints, which one the digest prints, and which one only the engine holds."
+     ],
+     "new": [
+      "Which number the published cases cover, which one the golden reaches by a second road, and which one nothing checks.",
+      "Which number the engine computed, which one you chose, and which one it kept to itself.",
+      "Which number is intensive, which is extensive, and which belongs to a vessel.",
+      "Which number the studio prints, which one the course prints, and which one only the engine holds."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "fields": {
+    "prompt": {
+     "old": "Digest Section 20 is the one section whose subject is what this engine used to do, and it says so in its title and its first line. What does the course require of a sentence drawn from it?",
+     "new": "One section of this course is about what this engine used to do, and it says so in its title and its first line. What does the course require of a sentence drawn from it?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-dew-point-control-by-expansion",
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "The march across the AGBADA let-down reports 0.061607962 at the inlet, 0.071833233 at the last half step and 0.067252747 as the mean. Which of the three belongs beside the arrival temperature, and what does the digest print for the inlet against it?",
+     "new": "The march across the AGBADA let-down reports 0.061607962 at the inlet, 0.071833233 at the last half step and 0.067252747 as the mean. Which of the three belongs beside the arrival temperature, and what does the course report for the inlet against it?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-marching-a-pressure-drop",
+   "ord": 9,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints one ratio against the reference on every row of the convergence table and prints no comparison between one row and the next. What follows for a reader who wants to say how the column behaves?",
+     "new": "The course prints one ratio against the reference on every row of the convergence table and prints no comparison between one row and the next. What follows for a reader who wants to say how the column behaves?"
+    },
+    "options": {
+     "old": [
+      "The column cannot be read at all until the ratios between successive rows are computed, which is the first thing to do with a convergence table.",
+      "The ratios between rows are implied by the second-order claim, so a reader may quote a factor of four between successive rows without computing anything.",
+      "The statement is a reading taken from the rows, and dividing one row by the row above it produces a figure the engine never formed.",
+      "The missing column is an oversight in the digest, and the figures needed to fill it are all on the page."
+     ],
+     "new": [
+      "The column cannot be read at all until the ratios between successive rows are computed, which is the first thing to do with a convergence table.",
+      "The ratios between rows are implied by the second-order claim, so a reader may quote a factor of four between successive rows without computing anything.",
+      "The statement is a reading taken from the rows, and dividing one row by the row above it produces a figure the engine never formed.",
+      "The missing column is an oversight in the course, and the figures needed to fill it are all on the page."
+     ]
+    },
+    "explanation": {
+     "old": "Where the digest prints a table and no ratio, the two figures are not in a relationship this engine computes. Take the reading deliberately and say that you took it.",
+     "new": "Where the course prints a table and no ratio, the two figures are not in a relationship this engine computes. Take the reading deliberately and say that you took it."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-marching-a-pressure-drop",
+   "ord": 14,
+   "fields": {
+    "explanation": {
+     "old": "The gas cools past the reduced temperature its own compressibility correlation is valid at, and the coefficient the next step needs cannot be formed. The same gas entering at 10.000000 degF and let down to 200.000000 psia is the case the digest prints.",
+     "new": "The gas cools past the reduced temperature its own compressibility correlation is valid at, and the coefficient the next step needs cannot be formed. The same gas entering at 10.000000 degF and let down to 200.000000 psia is the case the course prints."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-the-cold-separator",
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "What does the digest print for the cold water content read against the warm one, and what kind of quantity is it?",
+     "new": "What does the course print for the cold water content read against the warm one, and what kind of quantity is it?"
+    },
+    "options": {
+     "old": [
+      "0.555085832 lb per MMscf, the content the gas leaves the separator with.",
+      "15.038835973, the free water that appears in the boot, expressed against the inlet.",
+      "0.555085832, a dimensionless ratio of the two saturated contents.",
+      "0.916066108, which is the ratio the digest prints between two of the march's own coefficients."
+     ],
+     "new": [
+      "0.555085832 lb per MMscf, the content the gas leaves the separator with.",
+      "15.038835973, the free water that appears in the boot, expressed against the inlet.",
+      "0.555085832, a dimensionless ratio of the two saturated contents.",
+      "0.916066108, which is the ratio the course prints between two of the march's own coefficients."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-the-cold-separator",
+   "ord": 9,
+   "fields": {
+    "explanation": {
+     "old": "The second and third rows are a designed comparison rather than two unrelated answers. Where the digest prints a table and no ratio between the rows, forming one produces a figure nothing stands behind.",
+     "new": "The second and third rows are a designed comparison rather than two unrelated answers. Where the course prints a table and no ratio between the rows, forming one produces a figure nothing stands behind."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-still-overhead-nobody-sells",
+   "ord": 6,
+   "fields": {
+    "options": {
+     "old": [
+      "The engine, which returns a sensitivity beside each answer so a reader can see how the balance responds.",
+      "The oracle, which publishes the ratio as a case of its own.",
+      "The digest dividing two rows of the printed table by one another.",
+      "An assumption about what a mole balance ought to do."
+     ],
+     "new": [
+      "The engine, which returns a sensitivity beside each answer so a reader can see how the balance responds.",
+      "The oracle, which publishes the ratio as a case of its own.",
+      "The lesson dividing two rows of the printed table by one another.",
+      "An assumption about what a mole balance ought to do."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-still-overhead-nobody-sells",
+   "ord": 10,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints 0.182500000000 for the still overhead. What is that figure?",
+     "new": "The course prints 0.182500000000 for the still overhead. What is that figure?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-still-overhead-nobody-sells",
+   "ord": 12,
+   "fields": {
+    "prompt": {
+     "old": "A constant is measured out of the engine and the digest prints a ratio of 1.000000000000 between the measurement and the exported name. What has that established?",
+     "new": "A constant is measured out of the engine and the course prints a ratio of 1.000000000000 between the measurement and the exported name. What has that established?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-still-overhead-nobody-sells",
+   "ord": 14,
+   "fields": {
+    "options": {
+     "old": [
+      "Declared, so pinning it is all any gate can do.",
+      "Measured, so the digest can ask the engine a question whose answer is the molecular weight and nothing else.",
+      "Derived, so it cannot be wrong unless the thing it is computed from is wrong as well.",
+      "Declared, so the published cases check it against the golden every time they are run."
+     ],
+     "new": [
+      "Declared, so pinning it is all any gate can do.",
+      "Measured, so the course can ask the engine a question whose answer is the molecular weight and nothing else.",
+      "Derived, so it cannot be wrong unless the thing it is computed from is wrong as well.",
+      "Declared, so the published cases check it against the golden every time they are run."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-computed-chosen-and-kept",
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "Before its repair this routine carried an error of exactly one over the compressibility. Reading the repaired engine's own compressibilities of 0.997251744 at 20.000000 psia and 0.789943160 at 2500.000000 psia, the digest prints 1.002755830 and 1.265913867 beside them. What is that last column, and why is it printed on current figures?",
+     "new": "Before its repair this routine carried an error of exactly one over the compressibility. Reading the repaired engine's own compressibilities of 0.997251744 at 20.000000 psia and 0.789943160 at 2500.000000 psia, the course prints 1.002755830 and 1.265913867 beside them. What is that last column, and why is it printed on current figures?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-computed-chosen-and-kept",
+   "ord": 5,
+   "fields": {
+    "explanation": {
+     "old": "Section 2 now shows one of each and shows the derived ones being derived. A defect of this kind is a defect whatever its size.",
+     "new": "The course now shows one of each and shows the derived ones being derived. A defect of this kind is a defect whatever its size."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-computed-chosen-and-kept",
+   "ord": 6,
+   "fields": {
+    "prompt": {
+     "old": "The digest counts 9 repair-history comment lines in gasProcessing.js by three phrases, and states that rule beside the count. It also declines to quote any count across the whole vendored tree, and gives a reason. What is that reason?",
+     "new": "The course counts 9 repair-history comment lines in gasProcessing.js by three phrases, and states that rule beside the count. It also declines to quote any count across the whole vendored tree, and gives a reason. What is that reason?"
+    },
+    "options": {
+     "old": [
+      "A tree-wide count answers to which engines NextGen happens to vendor, so it can move without anything in this engine changing.",
+      "A tree-wide count would have to be taken over the canonical engines repository rather than the vendored subset, and that repository is not present here.",
+      "The three phrases are the only ones the authors were permitted to use, so a wider tree would need a wider rule and the two counts would not compare.",
+      "A count over more than one module cannot be reproduced from this course's own generators, which read one file each."
+     ],
+     "new": [
+      "A tree-wide count answers to which engines NextGen happens to vendor, so it can move without anything in this engine changing.",
+      "A tree-wide count would have to be taken over the canonical engines repository rather than the vendored subset, and that repository is not present here.",
+      "The three phrases are the only ones the authors were permitted to use, so a wider tree would need a wider rule and the two counts would not compare.",
+      "A count over more than one module cannot be reproduced from this course's own runs, which read one file each."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-computed-chosen-and-kept",
+   "ord": 7,
+   "fields": {
+    "options": {
+     "old": [
+      "Whether the comment is still present in the module it came from, since a quote that has moved is the defect a pin exists to catch.",
+      "Whether the sentence names a figure the digest also prints, since a comment that carries no number cannot mislead a reader.",
+      "Whether it describes what the engine does now.",
+      "Whether the comment was written by the same author as the routine beneath it, since only that author can vouch for the claim."
+     ],
+     "new": [
+      "Whether the comment is still present in the module it came from, since a quote that has moved is the defect a pin exists to catch.",
+      "Whether the sentence names a figure the course also prints, since a comment that carries no number cannot mislead a reader.",
+      "Whether it describes what the engine does now.",
+      "Whether the comment was written by the same author as the routine beneath it, since only that author can vouch for the claim."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-computed-chosen-and-kept",
+   "ord": 11,
+   "fields": {
+    "options": {
+     "old": [
+      "The water fit is exported and the strength is declared, and only an exported band can be enforced at the value it states.",
+      "The water fit is read from both sides in the digest and the strength is read from one, so the two tables are not comparable at their edges.",
+      "The fit holds at its stated limits, and a strength of 100 weight percent is unreachable while a loop below 90 is a different kind of loop.",
+      "The water guard protects a correlation and the strength guard protects a balance, and a balance is always guarded more tightly than a fit."
+     ],
+     "new": [
+      "The water fit is exported and the strength is declared, and only an exported band can be enforced at the value it states.",
+      "The water fit is read from both sides in the course and the strength is read from one, so the two tables are not comparable at their edges.",
+      "The fit holds at its stated limits, and a strength of 100 weight percent is unreachable while a loop below 90 is a different kind of loop.",
+      "The water guard protects a correlation and the strength guard protects a balance, and a balance is always guarded more tightly than a fit."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 6,
+   "fields": {
+    "options": {
+     "old": [
+      "To hold the values the published cases compare against, so that changing one breaks a case rather than an answer.",
+      "To collect the inputs whose defaults a caller is most likely to leave alone, so that a reader can see them in one place.",
+      "To say which numbers no check in this package can reach.",
+      "To separate the constants the module derives from the constants it measures, which is the distinction the digest is built on."
+     ],
+     "new": [
+      "To hold the values the published cases compare against, so that changing one breaks a case rather than an answer.",
+      "To collect the inputs whose defaults a caller is most likely to leave alone, so that a reader can see them in one place.",
+      "To say which numbers no check in this package can reach.",
+      "To separate the constants the module derives from the constants it measures, which is the distinction the course is built on."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 7,
+   "fields": {
+    "options": {
+     "old": [
+      "A limit is a guard that refuses an input, and an absence is a guard that warns and answers anyway.",
+      "A limit is a number this package holds and cannot check, and an absence is a subject this engine does not contain.",
+      "A limit is a figure the digest prints without a source, and an absence is a figure the digest does not print at all.",
+      "A limit belongs to this engine and an absence belongs to another one, so an absence is always a course boundary."
+     ],
+     "new": [
+      "A limit is a guard that refuses an input, and an absence is a guard that warns and answers anyway.",
+      "A limit is a number this package holds and cannot check, and an absence is a subject this engine does not contain.",
+      "A limit is a figure the course prints without a source, and an absence is a figure the course does not print at all.",
+      "A limit belongs to this engine and an absence belongs to another one, so an absence is always a course boundary."
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,1022 @@
+{
+ "app_slug": "corrosion",
+ "rows": 63,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/corrosion, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "At a total pressure of 100.000000 bar with the digest's fixed composition, what are the three chemistry figures?",
+     "new": "At a total pressure of 100.000000 bar with the course's fixed composition, what are the three chemistry figures?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "fields": {
+    "prompt": {
+     "old": "One exponent of the transport term is described in the digest as a property rather than as a typed constant. Which, and why?",
+     "new": "One exponent of the transport term is described in the course as a property rather than as a typed constant. Which, and why?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "fields": {
+    "prompt": {
+     "old": "In the digest's sweep of the transport term against velocity at four line diameters, both ratio columns are constant down the table and equal to each other. Why is that the claim being made?",
+     "new": "In the course's sweep of the transport term against velocity at four line diameters, both ratio columns are constant down the table and equal to each other. Why is that the claim being made?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 19,
+   "fields": {
+    "explanation": {
+     "old": "The series identity is checked on every row the digest prints and held to twelve figures. Find the smaller term, and the printed combination should be near it and below it.",
+     "new": "The series identity is checked on every row the course prints and held to twelve figures. Find the smaller term, and the printed combination should be near it and below it."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "fields": {
+    "prompt": {
+     "old": "At the pH reference the factor is exactly 1.000000, and the digest says that is by definition rather than by a clamp. What does that mean?",
+     "new": "At the pH reference the factor is exactly 1.000000, and the course says that is by definition rather than by a clamp. What does that mean?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-this-screen-answers-and-what-it-withdrew",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "The digest proves the withdrawn severity region is genuinely gone three separate ways. Which of these is one of them?",
+     "new": "The course proves the withdrawn severity region is genuinely gone three separate ways. Which of these is one of them?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-this-screen-answers-and-what-it-withdrew",
+   "ord": 7,
+   "fields": {
+    "prompt": {
+     "old": "Digest section 3 measures every held constant out of the engine's behaviour and also prints what the engine exports. Why print both columns?",
+     "new": "The course's pin table measures every held constant out of the engine's behaviour and also prints what the engine exports. Why print both columns?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-this-screen-answers-and-what-it-withdrew",
+   "ord": 8,
+   "fields": {
+    "explanation": {
+     "old": "That is why section 3 compares each measured value against a literal in a THIRD file, and why the golden's own copy of the constants is treated as a FOURTH. Any two of them agreeing is no longer enough.",
+     "new": "That is why the pin table compares each measured value against a literal in a THIRD file, and why the golden's own copy of the constants is treated as a FOURTH. Any two of them agreeing is no longer enough."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-this-screen-answers-and-what-it-withdrew",
+   "ord": 9,
+   "fields": {
+    "prompt": {
+     "old": "How many held constants does the digest pin, how many does the engine export by name, and how many does the vendored golden carry in its own block?",
+     "new": "How many held constants does the course pin, how many does the engine export by name, and how many does the vendored golden carry in its own block?"
+    },
+    "options": {
+     "old": [
+      "11 pinned, 8 exported and 17 in the golden, which are the sizes of the two exported lists and of the case block beside them.",
+      "30 pinned, 30 exported and 30 carried in the golden, since the whole point of a pin is to force all three independent copies to hold exactly the same entries.",
+      "30 pinned, 15 exported and 28 in the golden's own block.",
+      "28 pinned, 15 exported and 30 in the golden, so the generator is the widest of the three copies and the golden the narrowest."
+     ],
+     "new": [
+      "11 pinned, 8 exported and 17 in the golden, which are the sizes of the two exported lists and of the case block beside them.",
+      "30 pinned, 30 exported and 30 carried in the golden, since the whole point of a pin is to force all three independent copies to hold exactly the same entries.",
+      "30 pinned, 15 exported and 28 in the golden's own block.",
+      "28 pinned, 15 exported and 30 in the golden, so the pin table is the widest of the three copies and the golden the narrowest."
+     ]
+    },
+    "explanation": {
+     "old": "30 constants are pinned in section 3, the engine exports 15 of them by name, and the golden's `heldConstants` block carries 28 that are re-measured against the engine's behaviour.",
+     "new": "30 constants are pinned in the course, the engine exports 15 of them by name, and the golden's `heldConstants` block carries 28 that are re-measured against the engine's behaviour."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-this-screen-answers-and-what-it-withdrew",
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "The definitions of the bar and of the pound force give 14.503773773021, and the engine's factor sits 1.910e-9 above that. The digest measures the engine's factor out of the psia it reports for a partial pressure of exactly 1 bar.",
+     "new": "The definitions of the bar and of the pound force give 14.503773773021, and the engine's factor sits 1.910e-9 above that. The course measures the engine's factor out of the psia it reports for a partial pressure of exactly 1 bar."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-this-screen-answers-and-what-it-withdrew",
+   "ord": 14,
+   "fields": {
+    "options": {
+     "old": [
+      "Two rates that differ by 1.434e-6 as a fraction, which is why no graded field in this course is converted through the studio.",
+      "Two rates that differ in the second decimal, which is enough to move the band label and is the reason the label is never graded.",
+      "Nothing measurable, because the difference falls below the precision the digest prints and the two conversions give the same double.",
+      "Two rates that differ by 1.806e-6 as a fraction, which is the same figure as the divisor gap because the rate is linear in the pressure."
+     ],
+     "new": [
+      "Two rates that differ by 1.434e-6 as a fraction, which is why no graded field in this course is converted through the studio.",
+      "Two rates that differ in the second decimal, which is enough to move the band label and is the reason the label is never graded.",
+      "Nothing measurable, because the difference falls below the precision the course prints and the two conversions give the same double.",
+      "Two rates that differ by 1.806e-6 as a fraction, which is the same figure as the divisor gap because the rate is linear in the pressure."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-what-is-in-the-stream",
+   "ord": 7,
+   "fields": {
+    "explanation": {
+     "old": "Section 21 lists the 250 bar fugacity cap and what the correlation does above it as one held item. No graded field in this course sits above the cap for that reason.",
+     "new": "The course lists the 250 bar fugacity cap and what the correlation does above it as one held item. No graded field in this course sits above the cap for that reason."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-two-resistances-in-series",
+   "ord": 5,
+   "fields": {
+    "prompt": {
+     "old": "The series identity is checked on every row the digest prints. What exactly is checked, and to what?",
+     "new": "The series identity is checked on every row the course prints. What exactly is checked, and to what?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-protective-film",
+   "ord": 4,
+   "fields": {
+    "prompt": {
+     "old": "The digest sweeps the onset across seven carbon dioxide fugacities. What do those figures show?",
+     "new": "The course sweeps the onset across seven carbon dioxide fugacities. What do those figures show?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-protective-film",
+   "ord": 5,
+   "fields": {
+    "prompt": {
+     "old": "Across the fugacities the digest sweeps, how far does the onset move?",
+     "new": "Across the fugacities the course sweeps, how far does the onset move?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-protective-film",
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "It is an identity rather than a tolerance, which is why it is worth stating as the reason. The capstone generator asserts it rather than assuming it.",
+     "new": "It is an identity rather than a tolerance, which is why it is worth stating as the reason. The course asserts it rather than assuming it."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-ph-and-the-water",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "What is the scale free property of the pH correction, and what did the digest measure for it?",
+     "new": "What is the scale free property of the pH correction, and what did the course measure for it?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-ph-and-the-water",
+   "ord": 4,
+   "fields": {
+    "explanation": {
+     "old": "The rate falls at every step of that column and each step down is smaller than the one above it. The generator asserts that on every rebuild rather than printing it once and trusting it.",
+     "new": "The rate falls at every step of that column and each step down is smaller than the one above it. The course asserts that on every rebuild rather than printing it once and trusting it."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-ph-and-the-water",
+   "ord": 8,
+   "fields": {
+    "options": {
+     "old": [
+      "It is the most limiting answer available, so it would report a rate above anything the correlation could support at that acidity.",
+      "It is the least limiting answer available, and it would make an input inert across a whole range while the box still accepted values.",
+      "It would break the one decade per two pH units property, which is asserted across the whole swept band and would fail on the first rebuild of the digest.",
+      "It would disagree with the boundary value the engine returns at exactly 4.000000, where a factor above one is what the correction gives instead."
+     ],
+     "new": [
+      "It is the most limiting answer available, so it would report a rate above anything the correlation could support at that acidity.",
+      "It is the least limiting answer available, and it would make an input inert across a whole range while the box still accepted values.",
+      "It would break the one decade per two pH units property, which is asserted across the whole swept band and would fail on the first rebuild of the course.",
+      "It would disagree with the boundary value the engine returns at exactly 4.000000, where a factor above one is what the correction gives instead."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "fields": {
+    "prompt": {
+     "old": "The digest's swept branch table carries seven rows. How many of them are flagged as near the switch?",
+     "new": "The course's swept branch table carries seven rows. How many of them are flagged as near the switch?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "fields": {
+    "prompt": {
+     "old": "One digest stream has a friction factor of 4.740191 and another has 0.002867. Why are they so far apart?",
+     "new": "One course stream has a friction factor of 4.740191 and another has 0.002867. Why are they so far apart?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "fields": {
+    "prompt": {
+     "old": "Of the six streams the digest screens, how many have their corrosion inhibitor film stripped?",
+     "new": "Of the six streams the course screens, how many have their corrosion inhibitor film stripped?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "fields": {
+    "prompt": {
+     "old": "Two of the digest's streams report remaining lives of 36.112878 yr and 192.123424 yr. What does a life of that size tell you?",
+     "new": "Two of the course's streams report remaining lives of 36.112878 yr and 192.123424 yr. What does a life of that size tell you?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "fields": {
+    "prompt": {
+     "old": "One digest stream sits at an H2S to CO2 ratio of 0.140495867769. What does the engine report for it?",
+     "new": "One course stream sits at an H2S to CO2 ratio of 0.140495867769. What does the engine report for it?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-wetting-regime",
+   "ord": 8,
+   "fields": {
+    "explanation": {
+     "old": "A direct caller that omits the key entirely gets a wetting factor of 1.000000, which is the water-wet answer, and the digest records that direction as conservative. A water cut typed as not-a-number refuses instead, and not-a-number is what the studio layer produces from a blank box.",
+     "new": "A direct caller that omits the key entirely gets a wetting factor of 1.000000, which is the water-wet answer, and the course records that direction as conservative. A water cut typed as not-a-number refuses instead, and not-a-number is what the studio layer produces from a blank box."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-efficiency-is-not-protection",
+   "ord": 4,
+   "fields": {
+    "explanation": {
+     "old": "The engine's own warning on that case reads that a 95 percent inhibitor at 80 percent availability gives 76.0 percent effective protection, which is 4.80 times the metal loss of the datasheet number, and it names availability as what limits it. Those are the engine's words and they are quoted verbatim in the digest.",
+     "new": "The engine's own warning on that case reads that a 95 percent inhibitor at 80 percent availability gives 76.0 percent effective protection, which is 4.80 times the metal loss of the datasheet number, and it names availability as what limits it. Those are the engine's words and they are quoted verbatim in the course."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-wall-shear",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "One of the digest's streams runs at a Reynolds number of 3.3754. Which branch does this module's friction factor take there?",
+     "new": "One of the course's streams runs at a Reynolds number of 3.3754. Which branch does this module's friction factor take there?"
+    },
+    "explanation": {
+     "old": "That stream is viscous, small and slow, and it is in the digest so a lesson has one laminar case. Its friction factor comes from the other expression entirely.",
+     "new": "That stream is viscous, small and slow, and it is in the course so a lesson has one laminar case. Its friction factor comes from the other expression entirely."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-wall-shear",
+   "ord": 15,
+   "fields": {
+    "options": {
+     "old": [
+      "313781.4400, which is the figure the first of the digest's streams carries.",
+      "416686.8569.",
+      "1063231.0691, the figure carried by the one stream whose film is stripped.",
+      "63287.5636, which is the swept row at one metre a second."
+     ],
+     "new": [
+      "313781.4400, which is the figure the first of the course's streams carries.",
+      "416686.8569.",
+      "1063231.0691, the figure carried by the one stream whose film is stripped.",
+      "63287.5636, which is the swept row at one metre a second."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-the-shear-acts-on-the-rate",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "For the one digest stream whose film is stripped, the stripped rate is how many times the credited rate?",
+     "new": "For the one course stream whose film is stripped, the stripped rate is how many times the credited rate?"
+    },
+    "explanation": {
+     "old": "That factor is exactly the reciprocal of the fraction of the metal loss the corrosion inhibitor programme leaves behind. The digest asserts the property to twelve figures on every rebuild.",
+     "new": "That factor is exactly the reciprocal of the fraction of the metal loss the corrosion inhibitor programme leaves behind. The course asserts the property to twelve figures on every rebuild."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-the-shear-acts-on-the-rate",
+   "ord": 6,
+   "fields": {
+    "options": {
+     "old": [
+      "4.699248, the same figure the stripped digest stream carries.",
+      "1.45, which the shipped warning names on the default case.",
+      "1.000000, because the chemistry was not altered between the two screens.",
+      "6.896552."
+     ],
+     "new": [
+      "4.699248, the same figure the stripped course stream carries.",
+      "1.45, which the shipped warning names on the default case.",
+      "1.000000, because the chemistry was not altered between the two screens.",
+      "6.896552."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-the-shear-acts-on-the-rate",
+   "ord": 7,
+   "fields": {
+    "options": {
+     "old": [
+      "It falls from 4.207953 yr to 0.242737 yr.",
+      "It falls from 4.207953 yr to 0.760876 yr, which is the stripped digest stream's credited life.",
+      "It is withheld, because the corrosion inhibitor credit is no longer being taken on that case.",
+      "It is unchanged, because the allowance and the design life were not altered."
+     ],
+     "new": [
+      "It falls from 4.207953 yr to 0.242737 yr.",
+      "It falls from 4.207953 yr to 0.760876 yr, which is the stripped course stream's credited life.",
+      "It is withheld, because the corrosion inhibitor credit is no longer being taken on that case.",
+      "It is unchanged, because the allowance and the design life were not altered."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-the-shear-acts-on-the-rate",
+   "ord": 9,
+   "fields": {
+    "explanation": {
+     "old": "Five of the digest's six streams are in that position and on each of them the two rate columns agree and the two life columns agree. Printing a figure twice looks redundant until you meet the case where they differ.",
+     "new": "Five of the course's six streams are in that position and on each of them the two rate columns agree and the two life columns agree. Printing a figure twice looks redundant until you meet the case where they differ."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-the-shear-acts-on-the-rate",
+   "ord": 15,
+   "fields": {
+    "prompt": {
+     "old": "On the stripped digest stream the binding constraint names the wall shear. What does the engine say to change first?",
+     "new": "On the stripped course stream the binding constraint names the wall shear. What does the engine say to change first?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-the-allowance",
+   "ord": 3,
+   "fields": {
+    "options": {
+     "old": [
+      "0.242737 yr, which the same case reaches at 60 ft per second.",
+      "4.207953 yr.",
+      "20.000000 yr, which is the design life the case was given.",
+      "36.112878 yr, which one of the digest's own streams carries."
+     ],
+     "new": [
+      "0.242737 yr, which the same case reaches at 60 ft per second.",
+      "4.207953 yr.",
+      "20.000000 yr, which is the design life the case was given.",
+      "36.112878 yr, which one of the course's own streams carries."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-which-film-governs",
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "The digest forms the H2S to CO2 ratio two ways at five pressures and prints the difference. What is the difference column?",
+     "new": "The course forms the H2S to CO2 ratio two ways at five pressures and prints the difference. What is the difference column?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 8,
+   "fields": {
+    "options": {
+     "old": [
+      "Reading the export answers it, because an exported name is the value the functions close over and there is no second copy anywhere in a module that imports nothing.",
+      "A measurement of the behaviour answers it. Reading the export answers only what the module declares about itself.",
+      "Comparing the export against the golden's `heldConstants` block answers it, because the golden was generated by running the engine rather than by reading it.",
+      "Neither answers it, which is why the digest prints both columns."
+     ],
+     "new": [
+      "Reading the export answers it, because an exported name is the value the functions close over and there is no second copy anywhere in a module that imports nothing.",
+      "A measurement of the behaviour answers it. Reading the export answers only what the module declares about itself.",
+      "Comparing the export against the golden's `heldConstants` block answers it, because the golden was generated by running the engine rather than by reading it.",
+      "Neither answers it, which is why the course prints both columns."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "fields": {
+    "options": {
+     "old": [
+      "For those sixteen the pin compares the golden against the digest generator instead, so the engine is out of the comparison and the pin is weaker by one copy.",
+      "For those sixteen no pin is possible, so they are carried by the constant-free invariants and by the route independence the golden's own file describes.",
+      "For those sixteen the digest reads the literals out of the source.",
+      "For those sixteen the measurement is the only column there is, which is the case the technique was built for."
+     ],
+     "new": [
+      "For those sixteen the pin compares the golden against the course's literals instead, so the engine is out of the comparison and the pin is weaker by one copy.",
+      "For those sixteen no pin is possible, so they are carried by the constant-free invariants and by the route independence the golden's own file describes.",
+      "For those sixteen the course reads the literals out of the source.",
+      "For those sixteen the measurement is the only column there is, which is the case the technique was built for."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "fields": {
+    "options": {
+     "old": [
+      "Neither lets a fitted constant reach its answer, so the two lists are one property seen twice.",
+      "Both were chosen from the golden's seventeen whole cases, which is the block the digest compares route by route and the block the graded fields are taken from.",
+      "Both are pinned in the digest against a literal in a third file, and a pinned quantity is one a route can check and a graded field is permitted to reach through.",
+      "Both are exported by the engine under their own names, and an exported quantity has been declared in a way that a route and a graded field can each rely on."
+     ],
+     "new": [
+      "Neither lets a fitted constant reach its answer, so the two lists are one property seen twice.",
+      "Both were chosen from the golden's seventeen whole cases, which is the block the course compares route by route and the block the graded fields are taken from.",
+      "Both are pinned in the course against a literal in a third file, and a pinned quantity is one a route can check and a graded field is permitted to reach through.",
+      "Both are exported by the engine under their own names, and an exported quantity has been declared in a way that a route and a graded field can each rely on."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "fields": {
+    "prompt": {
+     "old": "The H2S screening threshold was left where it was, and the digest says why. What argument says that tightening the category bands would not repair them either?",
+     "new": "The H2S screening threshold was left where it was, and the course says why. What argument says that tightening the category bands would not repair them either?"
+    },
+    "options": {
+     "old": [
+      "Both numbers are pinned in the digest against a literal in a third file, and a pinned number cannot be moved without the gate separating the two columns.",
+      "Both numbers are exported by the engine, and an exported constant is part of the module's public interface, so moving one is a change to every caller at once.",
+      "Both numbers sit on the eleven-item held list, and an item on that list is frozen until a source for it is vendored into the repository beside the engine.",
+      "A replacement would be just as unsourced as the original while wearing the appearance of a fix, so the screen would gain a claim of correctness it had never had."
+     ],
+     "new": [
+      "Both numbers are pinned in the course against a literal in a third file, and a pinned number cannot be moved without the gate separating the two columns.",
+      "Both numbers are exported by the engine, and an exported constant is part of the module's public interface, so moving one is a change to every caller at once.",
+      "Both numbers sit on the eleven-item held list, and an item on that list is frozen until a source for it is vendored into the repository beside the engine.",
+      "A replacement would be just as unsourced as the original while wearing the appearance of a fix, so the screen would gain a claim of correctness it had never had."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "fields": {
+    "explanation": {
+     "old": "The digest lists every one of the studio's conversions for exactly this reason: a learner reading a number off the app needs to know which layer produced it. Every graded condition in this course is stated in the engine's units.",
+     "new": "The course lists every one of the studio's conversions for exactly this reason: a learner reading a number off the app needs to know which layer produced it. Every graded condition in this course is stated in the engine's units."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "fields": {
+    "explanation": {
+     "old": "Section 20 lists the routes with what each one cannot check, section 3 carries 30 pins measured out of the behaviour, and sections 5, 6, 7 and 13 carry the invariants. Naming which is which is what makes the coverage readable.",
+     "new": "The route table lists what each route cannot check, the pin table carries 30 pins measured out of the behaviour, and the invariant checks carry the invariants. Naming which is which is what makes the coverage readable."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "fields": {
+    "options": {
+     "old": [
+      "A guard that fires more often, which is what makes the warning visible at the shipped defaults where the previous one had been silent about the availability.",
+      "A guard with a pinned trigger, which is what lets the digest measure it.",
+      "A guard on the output the warning is about, which survives a change in which of the two inputs a programme happens to be short on.",
+      "A guard that is inclusive rather than strict, which is the whole of the repair and is why the shipped efficiency of exactly ninety now passes through it."
+     ],
+     "new": [
+      "A guard that fires more often, which is what makes the warning visible at the shipped defaults where the previous one had been silent about the availability.",
+      "A guard with a pinned trigger, which is what lets the course measure it.",
+      "A guard on the output the warning is about, which survives a change in which of the two inputs a programme happens to be short on.",
+      "A guard that is inclusive rather than strict, which is the whole of the repair and is why the shipped efficiency of exactly ninety now passes through it."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "fields": {
+    "explanation": {
+     "old": "Twelve golden category rows and a measurement by bisection establish that the edges are where the digest says they are. Neither establishes where the numbers came from, and `categoryHeld` comes back true beside the word.",
+     "new": "Twelve golden category rows and a measurement by bisection establish that the edges are where the course says they are. Neither establishes where the numbers came from, and `categoryHeld` comes back true beside the word."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "fields": {
+    "options": {
+     "old": [
+      "The rate and the remaining life, because both are computed by the engine and both are reported to six decimals, which is the precision a graded field is checked at.",
+      "The word and the remaining life, because the band edges are pinned and the life is a single division, so both are traceable to numbers the digest measures.",
+      "The partial pressure and the effective protection figure, because one is a total pressure times a mole fraction and the other is arithmetic over two typed percentages.",
+      "All five, because every figure on that screen is reproduced by the golden and the golden agrees with the engine on all seventeen of its whole cases."
+     ],
+     "new": [
+      "The rate and the remaining life, because both are computed by the engine and both are reported to six decimals, which is the precision a graded field is checked at.",
+      "The word and the remaining life, because the band edges are pinned and the life is a single division, so both are traceable to numbers the course measures.",
+      "The partial pressure and the effective protection figure, because one is a total pressure times a mole fraction and the other is arithmetic over two typed percentages.",
+      "All five, because every figure on that screen is reproduced by the golden and the golden agrees with the engine on all seventeen of its whole cases."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "fields": {
+    "prompt": {
+     "old": "One digest section describes behaviour this engine no longer has, and one describes a current absence that looks like history. How are the two told apart?",
+     "new": "One course section describes behaviour this engine no longer has, and one describes a current absence that looks like history. How are the two told apart?"
+    },
+    "options": {
+     "old": [
+      "The history section is the only one that names the repair, and the withdrawal section is identified by the two flags it describes rather than by anything it says.",
+      "The history section is the last in the file and the withdrawal section is the second, so their positions in the digest are what carry the frame for each of them.",
+      "Neither is told apart in the digest. The frame lives in the module directory name in the course and in the lesson heading, which is where the gate looks for it.",
+      "The history section says so in its own title and its first line and nothing follows it. The withdrawal section says in its own second line that it is not repair history."
+     ],
+     "new": [
+      "The history section is the only one that names the repair, and the withdrawal section is identified by the two flags it describes rather than by anything it says.",
+      "The history section is the last in the course and the withdrawal section is the second, so their positions in that list are what carry the frame for each of them.",
+      "Neither is told apart in the text. The frame lives in the module directory name in the course and in the lesson heading, which is where the gate looks for it.",
+      "The history section says so in its own title and its first line and nothing follows it. The withdrawal section says in its own second line that it is not repair history."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-what-this-module-holds-back",
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "The eleven items are the de Waard-Milliams constants, the scale placement question, the scale constants, the pH slope and reference, the 250 bar cap, the H2S threshold, the two transition ratios, the two shear thresholds, the category bands, the Blasius pair with the Reynolds 4000 switch, and three absent criteria. The engine exports the conversion factor as `BAR_TO_PSIA` and the digest measures it as the psia reported for exactly 1 bar. The Pipeline and Line Sizing course computes its own friction factor and its own Reynolds number on a different correlation with a different transition, so the two will not agree on the same pipe.",
+     "new": "The eleven items are the de Waard-Milliams constants, the scale placement question, the scale constants, the pH slope and reference, the 250 bar cap, the H2S threshold, the two transition ratios, the two shear thresholds, the category bands, the Blasius pair with the Reynolds 4000 switch, and three absent criteria. The engine exports the conversion factor as `BAR_TO_PSIA` and the course measures it as the psia reported for exactly 1 bar. The Pipeline and Line Sizing course computes its own friction factor and its own Reynolds number on a different correlation with a different transition, so the two will not agree on the same pipe."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-what-this-module-holds-back",
+   "ord": 5,
+   "fields": {
+    "explanation": {
+     "old": "No tolerance saves a shared constant, because a tighter comparison makes it more invisible rather than less. Thirty constants are pinned instead, each measured out of the engine's behaviour and compared against a literal in the digest generator, which is a third file, with the golden's own block as a fourth.",
+     "new": "No tolerance saves a shared constant, because a tighter comparison makes it more invisible rather than less. Thirty constants are pinned instead, each measured out of the engine's behaviour and compared against a literal typed in a third file, with the golden's own block as a fourth."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-what-this-module-holds-back",
+   "ord": 6,
+   "fields": {
+    "prompt": {
+     "old": "A pinned constant agrees with the literal typed in the digest generator. What has that proved, and what does it leave open?",
+     "new": "A pinned constant agrees with the literal the course typed in a third file. What has that proved, and what does it leave open?"
+    },
+    "options": {
+     "old": [
+      "That the constant is the published value, since the generator's literals were transcribed out of the correlation's own papers.",
+      "That the engine and the golden agree with each other, which is what a pin is for and what the generator records.",
+      "That nobody moved the number quietly. Where the number came from is still held, because a pin compares a measurement against a third copy rather than against a source.",
+      "Nothing whatever, because a literal typed by whoever read the engine is the same file twice over and the pin table decorates a comparison nobody made."
+     ],
+     "new": [
+      "That the constant is the published value, since the course's literals were transcribed out of the correlation's own papers.",
+      "That the engine and the golden agree with each other, which is what a pin is for and what the course records.",
+      "That nobody moved the number quietly. Where the number came from is still held, because a pin compares a measurement against a third copy rather than against a source.",
+      "Nothing whatever, because a literal typed by whoever read the engine is the same file twice over and the pin table decorates a comparison nobody made."
+     ]
+    },
+    "explanation": {
+     "old": "A pin is a weaker instrument than a validation. Thirty constants are pinned that way, with the golden's own block as a fourth copy, and the digest says plainly that no source for any of them exists in this repository.",
+     "new": "A pin is a weaker instrument than a validation. Thirty constants are pinned that way, with the golden's own block as a fourth copy, and the course says plainly that no source for any of them exists in this repository."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-what-this-module-holds-back",
+   "ord": 7,
+   "fields": {
+    "prompt": {
+     "old": "How does the digest reach the pH reference of 4.000000000000 and the friction branch switch at Reynolds 4000.000000?",
+     "new": "How does the course reach the pH reference of 4.000000000000 and the friction branch switch at Reynolds 4000.000000?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-what-this-module-holds-back",
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "The scale constant A measures 2399.999999999998 out of the engine against a literal of 2400.000000000000. Why does the digest print that rather than round it into agreement?",
+     "new": "The scale constant A measures 2399.999999999998 out of the engine against a literal of 2400.000000000000. Why does the course print that rather than round it into agreement?"
+    },
+    "options": {
+     "old": [
+      "The engine genuinely holds 2399.999999999998, and the literal in the generator is the typing error that the pin table exists to find and to report on every rebuild of the digest.",
+      "The gap is floating point arithmetic on a slope taken between two temperatures, and a measurement tidied into agreement with its own expectation has stopped being a measurement.",
+      "The relative difference of 9.474e-16 sits outside the tolerance the pin table applies, so the row prints as a failure and is left where it is for the next repair to resolve.",
+      "The slope is taken where the factor is clamped at one, so the measurement is reading a clamped expression and the last few digits are the clamp arriving in the answer."
+     ],
+     "new": [
+      "The engine genuinely holds 2399.999999999998, and the literal in the third file is the typing error that the pin table exists to find and to report on every rebuild of the course.",
+      "The gap is floating point arithmetic on a slope taken between two temperatures, and a measurement tidied into agreement with its own expectation has stopped being a measurement.",
+      "The relative difference of 9.474e-16 sits outside the tolerance the pin table applies, so the row prints as a failure and is left where it is for the next repair to resolve.",
+      "The slope is taken where the factor is clamped at one, so the measurement is reading a clamped expression and the last few digits are the clamp arriving in the answer."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-what-this-module-holds-back",
+   "ord": 9,
+   "fields": {
+    "prompt": {
+     "old": "The engine exports fifteen constants by name and the digest prints a declared column and a measured column for all fifteen. What is the second column for?",
+     "new": "The engine exports fifteen constants by name and the course prints a declared column and a measured column for all fifteen. What is the second column for?"
+    },
+    "options": {
+     "old": [
+      "So a disagreement between what the module declares and what it actually uses would be visible in the table rather than inferred later from a surprising screen.",
+      "So the export can be checked against the golden's fourth copy, which is the comparison the vendored jest suite runs and which the digest reproduces here for the reader.",
+      "So the sixteen pinned constants that carry no export at all have somewhere to sit, which is why the mass-transfer coefficient and the Blasius pair both appear in that table.",
+      "So the measured value can replace the declared one wherever the two differ, which keeps the digest reporting behaviour in preference to declarations throughout."
+     ],
+     "new": [
+      "So a disagreement between what the module declares and what it actually uses would be visible in the table rather than inferred later from a surprising screen.",
+      "So the export can be checked against the golden's fourth copy, which is the comparison the vendored jest suite runs and which the course reproduces here for the reader.",
+      "So the sixteen pinned constants that carry no export at all have somewhere to sit, which is why the mass-transfer coefficient and the Blasius pair both appear in that table.",
+      "So the measured value can replace the declared one wherever the two differ, which keeps the course reporting behaviour in preference to declarations throughout."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-what-this-module-holds-back",
+   "ord": 12,
+   "fields": {
+    "options": {
+     "old": [
+      "As a defect on case 7, since sixteen cases reaching machine precision beside one reaching 8.901e-5 is the signature of a route that has drifted out of step with the engine.",
+      "As a size, which is what makes the agreement a result. The digest prints the difference on every case rather than printing a pass.",
+      "As a tolerance far too loose at 1e-3, because a comparison admitting a gap four orders of magnitude above the others will admit whatever the route happens to produce.",
+      "As the fugacity cap arriving, since case 7 is the case whose total pressure sits above 250.000000000000 bar and the coefficient is carried flat from there upward."
+     ],
+     "new": [
+      "As a defect on case 7, since sixteen cases reaching machine precision beside one reaching 8.901e-5 is the signature of a route that has drifted out of step with the engine.",
+      "As a size, which is what makes the agreement a result. The course prints the difference on every case rather than printing a pass.",
+      "As a tolerance far too loose at 1e-3, because a comparison admitting a gap four orders of magnitude above the others will admit whatever the route happens to produce.",
+      "As the fugacity cap arriving, since case 7 is the case whose total pressure sits above 250.000000000000 bar and the coefficient is carried flat from there upward."
+     ]
+    },
+    "explanation": {
+     "old": "Agreement between two separate derivations is a result with a size and the digest prints the size. The combined rate on the same case agrees at 5.458e-16 against a tolerance of 1e-9, so the two columns are checked at two different tolerances on purpose.",
+     "new": "Agreement between two separate derivations is a result with a size and the course prints the size. The combined rate on the same case agrees at 5.458e-16 against a tolerance of 1e-9, so the two columns are checked at two different tolerances on purpose."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-what-the-module-does-not-have",
+   "ord": 15,
+   "fields": {
+    "prompt": {
+     "old": "On one of the digest's teaching streams the allowance is 3.175000 mm with 0.400000 mm consumed, the rate is 1.676428 mm/yr, the remaining life is 1.655305 yr and the required allowance is 33.528563 mm. What do those four numbers rest on?",
+     "new": "On one of the course's teaching streams the allowance is 3.175000 mm with 0.400000 mm consumed, the rate is 1.676428 mm/yr, the remaining life is 1.655305 yr and the required allowance is 33.528563 mm. What do those four numbers rest on?"
+    },
+    "options": {
+     "old": [
+      "The pin table alone, since a remaining life is itself one of the thirty constants the digest measures out of the engine and pins against a literal.",
+      "A minimum thickness the module computes from the allowance, which is what makes the required allowance of 33.528563 mm a statement about a real wall.",
+      "A division and a multiplication over a typed allowance, a typed consumed depth and the correlation's rate, and none of them knows the wall thickness or the pipe grade.",
+      "The Barlow relation, which this module applies with a default design factor so that the allowance can be checked against the wall it is taken off."
+     ],
+     "new": [
+      "The pin table alone, since a remaining life is itself one of the thirty constants the course measures out of the engine and pins against a literal.",
+      "A minimum thickness the module computes from the allowance, which is what makes the required allowance of 33.528563 mm a statement about a real wall.",
+      "A division and a multiplication over a typed allowance, a typed consumed depth and the correlation's rate, and none of them knows the wall thickness or the pipe grade.",
+      "The Barlow relation, which this module applies with a default design factor so that the allowance can be checked against the wall it is taken off."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-the-label-and-the-band",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "The digest names a fourth boundary in this door. Where is it?",
+     "new": "The course names a fourth boundary in this door. Where is it?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-the-label-and-the-band",
+   "ord": 4,
+   "fields": {
+    "options": {
+     "old": [
+      "It is the only row where the golden and the engine disagree, so the extra digits are there to show the size of the gap between the two of them.",
+      "At six decimals it would read 0.000000 and a reader would see the row above it twice.",
+      "It sits on an edge, and every row on an edge is printed at the precision the edge is measured to so that the comparison can be checked by hand.",
+      "It is the row the vendored jest suite pins, and a pin is printed at the full precision of the double rather than at the digest's own precision."
+     ],
+     "new": [
+      "It is the only row where the golden and the engine disagree, so the extra digits are there to show the size of the gap between the two of them.",
+      "At six decimals it would read 0.000000 and a reader would see the row above it twice.",
+      "It sits on an edge, and every row on an edge is printed at the precision the edge is measured to so that the comparison can be checked by hand.",
+      "It is the row the vendored jest suite pins, and a pin is printed at the full precision of the double rather than at the course's own precision."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-summary-that-was-missing",
+   "ord": 10,
+   "fields": {
+    "prompt": {
+     "old": "The shipped default case binds on the corrosion allowance against the design life at 4.2 yr of 20 yr. What happens to the constraint under the four changes the digest sweeps?",
+     "new": "The shipped default case binds on the corrosion allowance against the design life at 4.2 yr of 20 yr. What happens to the constraint under the four changes the course sweeps?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-inversion-against-a-limit",
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "The digest asserts that identity on every rebuild rather than quoting it. The shortfall of 2.200000 mm is a third quantity again, because it compares the required allowance against what is left rather than against the allowance the line started with.",
+     "new": "The course asserts that identity on every rebuild rather than quoting it. The shortfall of 2.200000 mm is a third quantity again, because it compares the required allowance against what is left rather than against the allowance the line started with."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-inversion-against-a-limit",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "The shipped case gives a rate of 0.754524 mm/yr against an uninhibited 5.203611 mm/yr on the same conditions. The capstone generator measures the invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap.",
+     "new": "The shipped case gives a rate of 0.754524 mm/yr against an uninhibited 5.203611 mm/yr on the same conditions. The course measures the invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-inversion-against-a-limit",
+   "ord": 11,
+   "fields": {
+    "options": {
+     "old": [
+      "The Reynolds number is a definition over four supplied properties, and the Blasius pair and the branch switch act on the friction factor downstream of it.",
+      "The Reynolds number is exported and the wall shear is not, and a quantity the engine exports by name has been declared in a way the pin table can carry.",
+      "The Reynolds number is dimensionless and the wall shear is not, so only the Reynolds number is free of the unit conversions the studio layer applies.",
+      "The Reynolds number is pinned in the digest and the wall shear is bisected out of the risk word, and only a pinned quantity can be graded in this course."
+     ],
+     "new": [
+      "The Reynolds number is a definition over four supplied properties, and the Blasius pair and the branch switch act on the friction factor downstream of it.",
+      "The Reynolds number is exported and the wall shear is not, and a quantity the engine exports by name has been declared in a way the pin table can carry.",
+      "The Reynolds number is dimensionless and the wall shear is not, so only the Reynolds number is free of the unit conversions the studio layer applies.",
+      "The Reynolds number is pinned in the course and the wall shear is bisected out of the risk word, and only a pinned quantity can be graded in this course."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-inversion-against-a-limit",
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "The capstone generator asserts the condition rather than assuming it. Nothing downstream of that factor is graded anywhere in this course, and five of the six digest streams also have a factor of exactly one.",
+     "new": "The course asserts the condition rather than assuming it. Nothing downstream of that factor is graded anywhere in this course, and five of the six teaching streams also have a factor of exactly one."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-what-this-engine-used-to-do",
+   "ord": 4,
+   "fields": {
+    "explanation": {
+     "old": "The absence arrives as a field, so a caller cannot read the gap as an unset property. The digest section that states it says in its own second line that it is not repair history.",
+     "new": "The absence arrives as a field, so a caller cannot read the gap as an unset property. The course section that states it says in its own second line that it is not repair history."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-what-this-engine-used-to-do",
+   "ord": 5,
+   "fields": {
+    "explanation": {
+     "old": "Each is a separate check. The two flags are how the engine states the absence, and the three proofs are how the digest established that the function and its strings have actually gone rather than been hidden.",
+     "new": "Each is a separate check. The two flags are how the engine states the absence, and the three proofs are how the course established that the function and its strings have actually gone rather than been hidden."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-what-this-engine-used-to-do",
+   "ord": 9,
+   "fields": {
+    "explanation": {
+     "old": "The span is a factor of 316.227766 and every step down the column is smaller than the one above it, which the digest generator asserts on every rebuild. The refusal names the reference so that a caller can print the boundary.",
+     "new": "The span is a factor of 316.227766 and every step down the column is smaller than the one above it, which the course asserts on every rebuild. The refusal names the reference so that a caller can print the boundary."
+    }
+   }
+  }
+ ]
+}

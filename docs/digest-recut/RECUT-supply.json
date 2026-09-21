@@ -1,0 +1,574 @@
+{
+ "app_slug": "supply",
+ "rows": 44,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/supply, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "AK-02's table starts at the empty tank and stops at 12000 mm. Between the two it interpolates; the digest's dip at 12010 mm gets the refusal for a dip above the last strapping entry.",
+     "new": "AK-02's table starts at the empty tank and stops at 12000 mm. Between the two it interpolates; the course's dip at 12010 mm gets the refusal for a dip above the last strapping entry."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 7,
+   "fields": {
+    "prompt": {
+     "old": "The digest straps two AKODO tanks a second time at 10 mm. On which of them does the step change the reading at the dip?",
+     "new": "The course straps two AKODO tanks a second time at 10 mm. On which of them does the step change the reading at the dip?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "fields": {
+    "prompt": {
+     "old": "In the trimmed record, what is the shortest run of loss the digest shows printing the prompt?",
+     "new": "In the trimmed record, what is the shortest run of loss the course shows printing the prompt?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-the-strapping-table",
+   "ord": 4,
+   "fields": {
+    "prompt": {
+     "old": "At 41 mm on AK-03 the 100 mm table reads 0.341 m3 and the 10 mm table 0.220 m3. Which figure does the digest print for the 100 mm table less the 10 mm table?",
+     "new": "At 41 mm on AK-03 the 100 mm table reads 0.341 m3 and the 10 mm table 0.220 m3. Which figure does the course print for the 100 mm table less the 10 mm table?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-volume-correction-factor",
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "The engine sums the unrounded standard volumes and the digest prints that total as 4499.452 m3. The sum of the printed rows is not the figure the day closes on.",
+     "new": "The engine sums the unrounded standard volumes and the course prints that total as 4499.452 m3. The sum of the printed rows is not the figure the day closes on."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "At 26 minutes the engine prints 0.975000, 0.945114 and 245.7297 minutes. The 0.300939 at that row is the Erlang B the digest derives from the Erlang C. The 0.950000 row is 9.5 arrivals in the arrivals sweep.",
+     "new": "At 26 minutes the engine prints 0.975000, 0.945114 and 245.7297 minutes. The 0.300939 at that row is the Erlang B the course derives from the Erlang C. The 0.950000 row is 9.5 arrivals in the arrivals sweep."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "At 16 minute loads the digest prints a probability of waiting of 0.287043 and an Erlang B of 0.138706 worked out from it. Which one is the chance an arriving truck queues?",
+     "new": "At 16 minute loads the course prints a probability of waiting of 0.287043 and an Erlang B of 0.138706 worked out from it. Which one is the chance an arriving truck queues?"
+    },
+    "explanation": {
+     "old": "The engine reports Erlang C as the probability of waiting. Erlang B is the probability every bay is busy in a rack with no queue, where the truck leaves, and the digest derives it from the engine's Erlang C.",
+     "new": "The engine reports Erlang C as the probability of waiting. Erlang B is the probability every bay is busy in a rack with no queue, where the truck leaves, and the course derives it from the engine's Erlang C."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 4,
+   "fields": {
+    "prompt": {
+     "old": "The IBAFO rack's mean wait is 47.2652 minutes and the digest works out 60.0000 minutes from the engine's figures. Which statement is true?",
+     "new": "The IBAFO rack's mean wait is 47.2652 minutes and the course works out 60.0000 minutes from the engine's figures. Which statement is true?"
+    },
+    "explanation": {
+     "old": "The engine's figure takes in the trucks that load at once. The digest divides it by the probability of waiting to reach the trucks that queue. 7.0353 minutes is the 5 bay rack, and the time on site is a separate row of the rack table.",
+     "new": "The engine's figure takes in the trucks that load at once. The course divides it by the probability of waiting to reach the trucks that queue. 7.0353 minutes is the 5 bay rack, and the time on site is a separate row of the rack table."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "The tank-by-tank count gives IB-T2 0.000 m3, since it holds 164.700 m3 against its 210.000 m3 heel. The netted farm figure charges IB-T2's heel against the product in the other three tanks, which the digest rules out: no pump lends one tank's volume to another's heel.",
+     "new": "The tank-by-tank count gives IB-T2 0.000 m3, since it holds 164.700 m3 against its 210.000 m3 heel. The netted farm figure charges IB-T2's heel against the product in the other three tanks, which the course rules out: no pump lends one tank's volume to another's heel."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "The digest defines working capacity as capacity less heel, and the farm rows read 22500.000 m3, 655.000 m3 and 21845.000 m3. 11767.300 m3 is the ullage and 10732.700 m3 the stock; 210.000 m3 is one tank's heel.",
+     "new": "The course defines working capacity as capacity less heel, and the farm rows read 22500.000 m3, 655.000 m3 and 21845.000 m3. 11767.300 m3 is the ullage and 10732.700 m3 the stock; 210.000 m3 is one tank's heel."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 18,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints revenue 20592.00 USD and margin 4988.00 USD in all three rows. The margin is revenue less the variable and fixed costs; a missing factor or density leaves the carbon columns none and moves no money figure.",
+     "new": "The course prints revenue 20592.00 USD and margin 4988.00 USD in all three rows. The margin is revenue less the variable and fixed costs; a missing factor or density leaves the carbon columns none and moves no money figure."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "fields": {
+    "prompt": {
+     "old": "The IBAFO farm prints an ullage, and the IBAFO forecourt prints an ullage at reorder. Which pair does the digest print?",
+     "new": "The IBAFO farm prints an ullage, and the IBAFO forecourt prints an ullage at reorder. Which pair does the course print?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "fields": {
+    "explanation": {
+     "old": "The forecourt is rackQueue with nozzles for bays, so its mean wait averages over every arrival, as the rack's 47.2652 minutes does. The 60.0000 minutes the digest works out for the rack averages the trucks that queue.",
+     "new": "The forecourt is rackQueue with nozzles for bays, so its mean wait averages over every arrival, as the rack's 47.2652 minutes does. The 60.0000 minutes the course works out for the rack averages the trucks that queue."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-loading-rack-as-a-queue",
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "A load that takes no time is a missing measurement. The digest's refusal table prints the load time of 0 against 9 arrivals and 4 bays with the sentence about the arrival rate and the load time, the same sentence a blank load time gets.",
+     "new": "A load that takes no time is a missing measurement. The course's refusal table prints the load time of 0 against 9 arrivals and 4 bays with the sentence about the arrival rate and the load time, the same sentence a blank load time gets."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-loading-rack-as-a-queue",
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints offered load (erlangs) = arrivals per hour / (60 / load minutes), and utilisation = offered load / bays. Dividing the offered load by the bays again gives the utilisation, 0.900000. The bay count is not in the offered load, and neither is the probability of waiting, 0.787753.",
+     "new": "The course prints offered load (erlangs) = arrivals per hour / (60 / load minutes), and utilisation = offered load / bays. Dividing the offered load by the bays again gives the utilisation, 0.900000. The bay count is not in the offered load, and neither is the probability of waiting, 0.787753."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-loading-rack-as-a-queue",
+   "ord": 5,
+   "fields": {
+    "explanation": {
+     "old": "The digest names it: the probability that an arriving truck waits is Erlang C. 0.900000 is the utilisation, offered load / bays. Erlang B, the rack where a truck that finds every bay busy leaves, is not exported by the engine, and 216 is the trucks per day at this arrival rate.",
+     "new": "The course names it: the probability that an arriving truck waits is Erlang C. 0.900000 is the utilisation, offered load / bays. Erlang B, the rack where a truck that finds every bay busy leaves, is not exported by the engine, and 216 is the trucks per day at this arrival rate."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-loading-rack-as-a-queue",
+   "ord": 7,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints an Erlang B of 0.270685 beside the IBAFO rack's Erlang C of 0.787753. Where does that Erlang B come from?",
+     "new": "The course prints an Erlang B of 0.270685 beside the IBAFO rack's Erlang C of 0.787753. Where does that Erlang B come from?"
+    },
+    "options": {
+     "old": [
+      "rackQueue exports it as a blocking probability.",
+      "The engine's probability of waiting at 16 minute loads.",
+      "The utilisation times the engine's Erlang C.",
+      "The digest works it out from the engine's Erlang C by an identity."
+     ],
+     "new": [
+      "rackQueue exports it as a blocking probability.",
+      "The engine's probability of waiting at 16 minute loads.",
+      "The utilisation times the engine's Erlang C.",
+      "The course works it out from the engine's Erlang C by an identity."
+     ]
+    },
+    "explanation": {
+     "old": "The engine builds Erlang C from the Erlang B recursion and exports only Erlang C. The digest derives B = C x (1 - utilisation) / (1 - utilisation x C), which gives 0.270685 on the IBAFO rack, and labels it as worked out from the engine's figure.",
+     "new": "The engine builds Erlang C from the Erlang B recursion and exports only Erlang C. The course derives B = C x (1 - utilisation) / (1 - utilisation x C), which gives 0.270685 on the IBAFO rack, and labels it as worked out from the engine's figure."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-loading-rack-as-a-queue",
+   "ord": 8,
+   "fields": {
+    "explanation": {
+     "old": "The digest defines this Erlang B for a rack with NO queue, in which a truck that meets every bay busy drives off, and works it out for IBAFO as 0.270685. rackQueue runs the M/M/c queue instead and reports its Erlang C, 0.787753.",
+     "new": "The course defines this Erlang B for a rack with NO queue, in which a truck that meets every bay busy drives off, and works it out for IBAFO as 0.270685. rackQueue runs the M/M/c queue instead and reports its Erlang C, 0.787753."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-loading-rack-as-a-queue",
+   "ord": 9,
+   "fields": {
+    "explanation": {
+     "old": "At 20 minutes the engine's Erlang C is 0.509434. The 0.206107 is the Erlang B the digest derives from that Erlang C, 0.750000 is the utilisation, and 0.642160 is the probability of waiting at 22 minutes a load.",
+     "new": "At 20 minutes the engine's Erlang C is 0.509434. The 0.206107 is the Erlang B the course derives from that Erlang C, 0.750000 is the utilisation, and 0.642160 is the probability of waiting at 22 minutes a load."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-loading-rack-as-a-queue",
+   "ord": 14,
+   "fields": {
+    "explanation": {
+     "old": "The digest labels it trucks per day at this arrival rate, and the rate is 9 arrivals an hour. The bays do not enter it, and neither does the probability of waiting. The tank farm divides by its daily throughput in m3, 2640.000 m3.",
+     "new": "The course labels it trucks per day at this arrival rate, and the rate is 9 arrivals an hour. The bays do not enter it, and neither does the probability of waiting. The tank farm divides by its daily throughput in m3, 2640.000 m3."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-loading-rack-as-a-queue",
+   "ord": 15,
+   "fields": {
+    "explanation": {
+     "old": "The engine's figure is the Erlang C of an M/M/c queue, 0.787753, in which a truck that finds every bay busy waits. The digest works the no-queue Erlang B, 0.270685, out of it by an identity, and the engine exports none. Little's law gives its queue length of 7.0898 from the arrivals and the mean wait.",
+     "new": "The engine's figure is the Erlang C of an M/M/c queue, 0.787753, in which a truck that finds every bay busy waits. The course works the no-queue Erlang B, 0.270685, out of it by an identity, and the engine exports none. Little's law gives its queue length of 7.0898 from the arrivals and the mean wait."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-waiting-time-and-a-full-rack",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "The IBAFO table prints the probability of waiting as Erlang C, 0.787753, and the mean wait formula divides that Erlang C. 0.900000 is the utilisation and 3.6000 erlangs the offered load. 0.270685 is the Erlang B the digest works out from the Erlang C, and the engine does not export it.",
+     "new": "The IBAFO table prints the probability of waiting as Erlang C, 0.787753, and the mean wait formula divides that Erlang C. 0.900000 is the utilisation and 3.6000 erlangs the offered load. 0.270685 is the Erlang B the course works out from the Erlang C, and the engine does not export it."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-waiting-time-and-a-full-rack",
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "The digest says the engine's averageWaitMinutes averages over every truck, the ones that load at once included. The mean wait of a truck that does queue, 47.2652 / 0.787753 = 60.0000 minutes, is worked out in the digest. The mean time on site is a separate row of the table.",
+     "new": "The course says the engine's averageWaitMinutes averages over every truck, the ones that load at once included. The mean wait of a truck that does queue, 47.2652 / 0.787753 = 60.0000 minutes, is worked out in the course. The mean time on site is a separate row of the table."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-waiting-time-and-a-full-rack",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "A driver who queued asks what the average wait is for trucks that actually queue at IBAFO. Which figure does the digest give, worked out from the engine's figures?",
+     "new": "A driver who queued asks what the average wait is for trucks that actually queue at IBAFO. Which figure does the course give, worked out from the engine's figures?"
+    },
+    "explanation": {
+     "old": "The digest prints 47.2652 / 0.787753 = 60.0000 minutes and labels it as worked out from the engine's figures. The engine's 47.2652 averages over every truck; dividing by the probability of waiting leaves the average over the trucks that queue.",
+     "new": "The course prints 47.2652 / 0.787753 = 60.0000 minutes and labels it as worked out from the engine's figures. The engine's 47.2652 averages over every truck; dividing by the probability of waiting leaves the average over the trucks that queue."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-waiting-time-and-a-full-rack",
+   "ord": 5,
+   "fields": {
+    "prompt": {
+     "old": "The digest checks the queue length by Little's law: 9 x 47.2652 / 60 = 7.0898. Why is the division by 60 there?",
+     "new": "The course checks the queue length by Little's law: 9 x 47.2652 / 60 = 7.0898. Why is the division by 60 there?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-waiting-time-and-a-full-rack",
+   "ord": 6,
+   "fields": {
+    "explanation": {
+     "old": "The digest reaches 7.0898 by Little's law from the mean wait: 9 x 47.2652 / 60, the arrivals times the wait in hours. The time on the bay is not in that line. The figure is a mean queue length, so it is no maximum, and rackQueue has no peak hour.",
+     "new": "The course reaches 7.0898 by Little's law from the mean wait: 9 x 47.2652 / 60, the arrivals times the wait in hours. The time on the bay is not in that line. The figure is a mean queue length, so it is no maximum, and rackQueue has no peak hour."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-waiting-time-and-a-full-rack",
+   "ord": 15,
+   "fields": {
+    "prompt": {
+     "old": "Why does the digest print the Little's law line beside the engine's queue length?",
+     "new": "Why does the course print the Little's law line beside the engine's queue length?"
+    },
+    "explanation": {
+     "old": "The digest prints Little's law, queue length = arrivals per hour x mean wait in hours: 9 x 47.2652 / 60 = 7.0898, and beside it the engine's queue length, 7.0898. The Erlang B is worked out from the Erlang C, and a mean queue is no maximum.",
+     "new": "The course prints Little's law, queue length = arrivals per hour x mean wait in hours: 9 x 47.2652 / 60 = 7.0898, and beside it the engine's queue length, 7.0898. The Erlang B is worked out from the Erlang C, and a mean queue is no maximum."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-the-tank-farm",
+   "ord": 5,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints the farm's stock less the farm's heel as 10077.700 m3 and says it is not pumpable stock. What is wrong with it?",
+     "new": "The course prints the farm's stock less the farm's heel as 10077.700 m3 and says it is not pumpable stock. What is wrong with it?"
+    },
+    "explanation": {
+     "old": "Netting across the farm lets IB-T2's missing heel volume be made good from other tanks' product. In the digest's words, \"no pump lends one tank's volume to another's heel\". Counted tank by tank the pumpable stock is 10123.000 m3.",
+     "new": "Netting across the farm lets IB-T2's missing heel volume be made good from other tanks' product. In the course's words, \"no pump lends one tank's volume to another's heel\". Counted tank by tank the pumpable stock is 10123.000 m3."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-the-tank-farm",
+   "ord": 11,
+   "fields": {
+    "explanation": {
+     "old": "IB-T2's row prints capacity 7500.000 m3, stock 164.700 m3 and ullage 7335.300 m3, and the digest counts the farm's ullage as each tank's capacity less its stock, never below zero, summed over the tanks. The heel appears in no part of that count.",
+     "new": "IB-T2's row prints capacity 7500.000 m3, stock 164.700 m3 and ullage 7335.300 m3, and the course counts the farm's ullage as each tank's capacity less its stock, never below zero, summed over the tanks. The heel appears in no part of that count."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-throughput-economics",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "The engine ships no emission factor. The digest labels 850 kg CO2e a tonne SYNTHETIC, invented for this course and not a published figure. It exists only to show the arithmetic.",
+     "new": "The engine ships no emission factor. The course labels 850 kg CO2e a tonne SYNTHETIC, invented for this course and not a published figure. It exists only to show the arithmetic."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "Ocean freight typed as a percent of C&F is refused on the invented BADAGRY walk. Which other entry does the digest show refused with the same sentence?",
+     "new": "Ocean freight typed as a percent of C&F is refused on the invented BADAGRY walk. Which other entry does the course show refused with the same sentence?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints REFUSED: Unknown quantity unit \"kg\". for cargoQuantities and REFUSED: Customs processing has an unknown stage \"customs\". for landedCost. Neither returns a figure, and neither is a forward reference or a floor.",
+     "new": "The engine returns REFUSED: Unknown quantity unit \"kg\". for cargoQuantities and REFUSED: Customs processing has an unknown stage \"customs\". for landedCost. Neither returns a figure, and neither is a forward reference or a floor."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-one-cargo-every-way",
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints this row as REFUSED: Unknown quantity unit \"kg\". The cargo table converts entries in tonne, m3, litre and bbl, and kg is none of them, so the row returns no figure.",
+     "new": "The course prints this row as REFUSED: Unknown quantity unit \"kg\". The cargo table converts entries in tonne, m3, litre and bbl, and kg is none of them, so the row returns no figure."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-one-cargo-every-way",
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the zero quantity case as the refusal \"Cargo quantity is required.\" The engine forms no volume for a cargo it has not been given.",
+     "new": "The engine answers the zero quantity case with the refusal \"Cargo quantity is required.\" The engine forms no volume for a cargo it has not been given."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-landed-cost-walk",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "The engine adds what it was given, names what it was not and labels the sum. The digest prints \"A FLOOR, not a cost: 2 rate(s) not supplied.\" beside 24774210.79 USD.",
+     "new": "The engine adds what it was given, names what it was not and labels the sum. The engine returns \"A FLOOR, not a cost: 2 rate(s) not supplied.\" beside 24774210.79 USD."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-landed-cost-walk",
+   "ord": 13,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints 26513943.86 - 24774210.79 = 1739733.07 USD for BADAGRY, every rate invented. Which lines does the floor build leave out of its total?",
+     "new": "The course prints 26513943.86 - 24774210.79 = 1739733.07 USD for BADAGRY, every rate invented. Which lines does the floor build leave out of its total?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-ocean-loss-and-the-litre-sold",
+   "ord": 4,
+   "fields": {
+    "prompt": {
+     "old": "The digest's rule for the ocean loss reads \"The loss divides the cost.\" Which reading of BADAGRY does that statement rule out?",
+     "new": "The course's rule for the ocean loss reads \"The loss divides the cost.\" Which reading of BADAGRY does that statement rule out?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-ocean-loss-and-the-litre-sold",
+   "ord": 8,
+   "fields": {
+    "explanation": {
+     "old": "The dollar cost a litre sold needs no exchange rate. The naira figure is the dollar figure x the exchange rate, and with no exchange rate the digest prints the local figure as none.",
+     "new": "The dollar cost a litre sold needs no exchange rate. The naira figure is the dollar figure x the exchange rate, and with no exchange rate the engine returns the local figure as none."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-ocean-loss-and-the-litre-sold",
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "The digest lists H1 among the items held by the engines repository in FINDINGS-supply, taught as limits and never graded. Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know, and the engine answers every per-quantity line on the bill of lading.",
+     "new": "The course lists H1 among the items held by the engines repository in FINDINGS-supply, taught as limits and never graded. Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know, and the engine answers every per-quantity line on the bill of lading."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-from-depot-gate-to-nozzle",
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints price 1066.7292 naira a litre for that build and says it is complete true: the basis changes the amount, and every rate is still supplied.",
+     "new": "The engine returns price 1066.7292 naira a litre for that build and says it is complete true: the basis changes the amount, and every rate is still supplied."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-from-depot-gate-to-nozzle",
+   "ord": 11,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints marginWaterfall on a refused build-up as REFUSED: A landed cost per litre is required., the sentence buildPumpPrice gives when it has no landed cost.",
+     "new": "The engine answers marginWaterfall on a refused build-up with REFUSED: A landed cost per litre is required., the sentence buildPumpPrice gives when it has no landed cost."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-what-breaks-the-price",
+   "ord": 4,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the bracket written backwards, 2100 to 1200, as that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500.",
+     "new": "The engine answers the bracket written backwards, 2100 to 1200, with that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 9,
+   "fields": {
+    "explanation": {
+     "old": "The rule reads: pumpable stock is counted tank by tank, and the digest measures it on IB-T1 and IB-T2 as 5078.400 m3 of pumpable stock. Each tank's pumpable stock is its stock above its own heel and never below zero, and no pump lends one tank's volume to another's heel.",
+     "new": "The rule reads: pumpable stock is counted tank by tank, and the course measures it on IB-T1 and IB-T2 as 5078.400 m3 of pumpable stock. Each tank's pumpable stock is its stock above its own heel and never below zero, and no pump lends one tank's volume to another's heel."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "The digest lists the rule \"a load time of zero minutes is refused\" with that sentence. The bays rule prints \"The number of bays must be a whole number, one or more.\", the money rule \"Throughput and the throughput fee are both needed for the money answer.\" and the opening stock rule \"No opening stock, so the day cannot be closed.\"",
+     "new": "The course lists the rule \"a load time of zero minutes is refused\" with that sentence. The bays rule prints \"The number of bays must be a whole number, one or more.\", the money rule \"Throughput and the throughput fee are both needed for the money answer.\" and the opening stock rule \"No opening stock, so the day cannot be closed.\""
+    }
+   }
+  }
+ ]
+}
