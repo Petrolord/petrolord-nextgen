@@ -39,7 +39,7 @@ Bisection on the engine itself, with the other condition held well past its own 
 
 Asarama Heavy with Ubie Condensate flags. The engine's message reads: "No SARA analysis supplied. On gravity contrast alone (37.4 degrees API, with a light paraffinic component) this is the combination that classically drops asphaltenes. Supply SARA for a colloidal instability index, and spot test before commingling."
 
-The export blend does not flag, and the engine's message is careful about what that means: "No SARA analysis supplied, so this is an API-contrast screen only. The gravity spread is not the classic heavy-plus-light-paraffinic combination, which is not evidence that the blend is stable. Supply SARA for a real index."
+The export blend does not flag, and the engine's message is careful about what that means: "No SARA analysis supplied, so this is an API-contrast screen only. The gravity spread falls outside the classic heavy-plus-light-paraffinic combination, and that alone says nothing about whether the blend is stable. Supply SARA for a real index."
 
 ## Why the rule cannot clear a blend
 

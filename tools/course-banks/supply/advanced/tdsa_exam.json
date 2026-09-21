@@ -52,7 +52,7 @@
    "1074.8249 naira a litre, with every invented element supplied."
   ],
   "answer": 1,
-  "explanation": "The pump sentence is \"A FLOOR, not a price: 2 rate(s) not supplied.\" The walk's floor of 24774210.79 is in US dollars for the cargo, and 1066.7292 is complete true."
+  "explanation": "The pump sentence is \"A FLOOR: 2 rate(s) not supplied, so the full price is at least this.\" The walk's floor of 24774210.79 is in US dollars for the cargo, and 1066.7292 is complete true."
  },
  {
   "prompt": "Every invented rate in the BADAGRY import template is supplied. How does landedCost label the build-up?",

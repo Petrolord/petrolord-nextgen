@@ -84,6 +84,8 @@ const ALLOWED = {
   420: 'the bottom of the word band, settled by structure.py',
   460: 'the middle minimum of the word band, settled by structure.py',
   560: 'the ceiling of the word band, settled by structure.py',
+  2026: 'the year of the date the kit key-truth rule was added (BANK_TASK.md, "2026-09-21", from nextgen #180): a date, no figure',
+  '09': 'the month of that same date, 2026-09-21',
 };
 
 const findings = [];

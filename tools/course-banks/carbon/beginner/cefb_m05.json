@@ -140,7 +140,7 @@
    "Obligations, evidence and deadlines"
   ],
   "answer": 3,
-  "explanation": "SECTION 7 quotes it: \"This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree.\" The inventory itself carries each line's factor, source and version, its totals and its blocked lines."
+  "explanation": "The disclaimer reads: \"This is a quantitative inventory of tonnes. Obligations, evidence and deadlines belong in the compliance register, which keeps the one record of them; a second copy here would create two records that could disagree.\" The inventory itself carries each line's factor, source and version, its totals and its blocked lines."
  },
  {
   "prompt": "In the first pass, Scope 2 reads 0.000 tCO2e. What does the digest show behind that figure?",

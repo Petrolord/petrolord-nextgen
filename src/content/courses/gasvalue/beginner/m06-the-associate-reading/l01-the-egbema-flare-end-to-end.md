@@ -40,7 +40,7 @@ EGBEMA flares 7.5 MMscfd on 355 days a year, scfPerYear 2662500000, at a destruc
 
 The flare's CO2 is 182079.024 tonnes a year. It is the CO2 in the gas plus the combustion efficiency times the hydrocarbon carbon: the 1.3320 per mole from line four, at 0.955, and the CO2 in the gas passing through at every efficiency.
 
-The flare's methane is 1136.490 tonnes a year. It is the methane in the gas times one less the destruction efficiency: EGBEMA's methane, 0.7420 of the moles, at one less 0.97. Unburned ethane and heavier are not methane and carry no GWP here.
+The flare's methane is 1136.490 tonnes a year. It is the methane in the gas times one less the destruction efficiency: EGBEMA's methane, 0.7420 of the moles, at one less 0.97. Unburned ethane and heavier carry no GWP here.
 
 The flare's CO2e is 215946.438 tonnes a year, the CO2 plus the methane times the study's GWP of 29.8. The methane share of it is 0.1568.
 

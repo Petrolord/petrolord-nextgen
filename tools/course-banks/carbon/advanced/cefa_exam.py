@@ -162,7 +162,7 @@ q(3, "How does the energyIntensity disclaimer frame the peer figure of 680 MJ a 
  ["As the Solomon Energy Intensity Index for Agbor",
   "As a benchmark the engine ships with the module",
   "As the intensity with a stream missing, a floor"],
- "The disclaimer's last sentence: the peer figure compared is one you supplied and have the right to use. The Solomon index is named only to say this figure is NOT it, and floor is the peerNote's word for a missing stream.")
+ "The disclaimer's last sentence: the peer figure compared is one you supplied and have the right to use. The Solomon index is named only to say this figure is independent of it, and floor is the peerNote's word for a missing stream.")
 q(0, "Which heating value basis does priceSaving return for the invented Agbor saving?",
  "LHV, the basis all three quantities declare",
  ["HHV, the basis the factor would need",

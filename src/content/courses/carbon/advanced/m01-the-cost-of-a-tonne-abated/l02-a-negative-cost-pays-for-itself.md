@@ -27,9 +27,9 @@ Flare gas recovery carries 4900000 USD of capital, annualised at 644221.51 USD, 
 
 The flag is read from the sign of the cost, and the tonnes are the divisor. The lab prints the call with an abatement of -500 t a year on the Heat integration project. It is refused, and the engine says why:
 
-REFUSED: Measure "Heat integration project" has a negative abatement. A measure that adds emissions is not an abatement, and its cost per tonne would change sign.
+REFUSED: Measure "Heat integration project" has a negative abatement. A measure that adds emissions has no place on an abatement curve, and its cost per tonne would change sign.
 
-The refusal states two things. A measure that adds emissions is not an abatement at all, and dividing by a negative tonnage would change the sign of the cost per tonne. The course lists the refusal of a negative abatement among the rules in force.
+The refusal states two things. A measure that adds emissions has no place on an abatement curve, and dividing by a negative tonnage would change the sign of the cost per tonne. The refusal of a negative abatement is one of the rules in force.
 
 ## A zero abatement has no cost per tonne
 

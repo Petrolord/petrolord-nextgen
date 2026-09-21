@@ -81,10 +81,11 @@ Run it over your lessons as well as the digest.
 2. **A refusal is quoted verbatim or described, never re-worded inside quotation
    marks.** The digest prints each one after `REFUSED:`. The oracles check
    answers and never wording.
-3. **ONE ENGINE STRING BREAKS THE COPY RULE AND IS QUOTED ANYWAY.** The schedule
-   note (SECTION 15) ends "this is the shape of the month to read actuals
-   against, not a berth-level schedule." You may quote it inside quotation marks
-   as the engine's words. You may not write that shape yourself.
+3. **THE SCHEDULE NOTE IS QUOTED AS THE ENGINE WRITES IT.** The schedule note
+   (SECTION 15) ends "this is the shape of the month to read actuals against.
+   Berth-level scheduling needs those constraints and a scheduling tool." It
+   used to end in a contrastive; engines #232 recast it, so no engine string
+   is exempt from the copy rule now.
 4. **Crude grade names are LABELS.** "Bonny Light (illustrative)" is a label on
    invented yields and prices. Never write that a real grade yields or costs what
    the digest prints, and never quote a real market price.

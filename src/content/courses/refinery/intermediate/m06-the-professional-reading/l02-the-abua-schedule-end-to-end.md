@@ -30,7 +30,7 @@ The schedule was built with the period start passed as the string "2027-03-01". 
 
 ## What the schedule is
 
-The engine's own note says it: "this is the shape of the month to read actuals against, not a berth-level schedule." Tanks, jetties and turnarounds are not in it. What is in it is the plan, spread across March 2027 in the dates each piece would fall on if the month ran evenly.
+The engine's own note says it: "this is the shape of the month to read actuals against. Berth-level scheduling needs those constraints and a scheduling tool." Tanks, jetties and turnarounds are not in it. What is in it is the plan, spread across March 2027 in the dates each piece would fall on if the month ran evenly.
 
 That is the object the next tier works on. When the month has run, its actual receipts, runs and lifts are set beside this shape.
 

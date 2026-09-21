@@ -69,7 +69,7 @@
   "prompt": "Density is missing from the IBAFO period. Which note explains the gap in the carbon columns?",
   "options": [
    "No emission factor supplied, so the carbon side is not computed. Factors are published, versioned data; an invented one would be worse than none.",
-   "No diesel emission factor supplied, so the carbon figure is absent rather than zero.",
+   "No diesel emission factor supplied, so the carbon figure is left blank.",
    "No product density supplied, so the loss has no weight and the carbon side is not computed.",
    "REFUSED: Density is required to convert between mass and volume; it is not assumed."
   ],

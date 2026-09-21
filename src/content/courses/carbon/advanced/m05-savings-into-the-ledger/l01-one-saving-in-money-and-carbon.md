@@ -36,7 +36,7 @@ The call returns both figures from one set of inputs, and the lab prints them in
 
 ## What a missing factor does
 
-The carbon figure needs an emission factor. With no factor supplied, the lab prints annualTonnesCo2e none, with the carbonNote: "No emission factor supplied, so the carbon figure is absent rather than zero." A saving with no factor still has a money value. Its carbon is missing, and the engine prints it as missing. It does not print 0 tCO2e.
+The carbon figure needs an emission factor. With no factor supplied, the engine prints annualTonnesCo2e none, with the carbonNote: "No emission factor supplied, so the carbon figure is left blank." A saving with no factor still has a money value. Its carbon is missing, and the engine prints it as missing. It does not print 0 tCO2e.
 
 ## A saving is required
 

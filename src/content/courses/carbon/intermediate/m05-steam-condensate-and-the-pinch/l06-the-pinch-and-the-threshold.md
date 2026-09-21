@@ -10,7 +10,7 @@ The lab prints the reading of the Isiokpo cascade at a minimum approach of 15 C:
 
 The words inside the range carry the rule. The cascade runs from 155.500 shifted at the top to 33.500 at the bottom, and 110.500 is between them. The course lists the rule among those in force: only an interior zero of the cascade is a pinch.
 
-The engine's note on the pinch, verbatim: "Heat carried across the pinch costs twice: one unit more hot utility and one unit more cold utility. That is what makes the pinch the constraint rather than a curiosity."
+The engine's note on the pinch, verbatim: "Heat carried across the pinch costs twice: one unit more hot utility and one unit more cold utility. That double cost is what makes the pinch the constraint on the design."
 
 In practice, the part of the plant above the pinch is short of heat and the part below it has heat to reject, which is how one unit carried across becomes one unit more of each utility. The note's own word for the pinch is the constraint.
 

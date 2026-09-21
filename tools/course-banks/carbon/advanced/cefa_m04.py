@@ -35,7 +35,7 @@ q(3, "How does decarbonisationPath report the Agbor gap of 1370.083 t in the end
  ["As a wedge of future measures that closes it by 2033",
   "As a cost, at the curve's weighted average of 18.7868 USD a tonne",
   "As a refusal until a measure is named to close it"],
- "SECTION 22, the gap note: \"The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan.\" The path prints finalGapTonnes 1370.083 and no refusal.")
+ "The gap note: \"The gap is reported as unabated with no measure identified. A wedge is drawn only for an identified measure, because a plan needs a named measure behind every wedge.\" The path prints finalGapTonnes 1370.083 and no refusal.")
 
 q(3, "In 2029 the Agbor path prints emissions of 48690.276 t against a target of 48887.383 t. What does the unabated gap column print?",
  "0.000 t, by the rule in every row",
@@ -70,7 +70,7 @@ q(0, "An inventory that computed nothing is handed to decarbonisationPath as a b
  ["It draws the path from 0 and prints every gap as 0.000.",
   "It builds the path on the partial total of 45112.276 tCO2e.",
   "It names the inventory in unscheduledMeasures and goes on."],
- "SECTION 22: REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero. SECTION 25 lists it: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank.")
+ "REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing leaves the baseline unknown. It is a rule in force: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank.")
 
 q(3, "Which invented Agbor measure joins the path in 2028?",
  "Solar for purchased power",

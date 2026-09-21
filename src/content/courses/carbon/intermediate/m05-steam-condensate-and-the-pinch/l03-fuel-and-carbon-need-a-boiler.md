@@ -30,9 +30,9 @@ The engine reports the same trap with the boiler efficiency left blank. The trap
 
 fuelNote: "Fuel needs a boiler efficiency in (0, 1]. It is not assumed to be 1."
 
-carbonNote: "Carbon needs the steam energy content, the boiler efficiency and an emission factor. Without them it is absent rather than zero."
+carbonNote: "Carbon needs the steam energy content, the boiler efficiency and an emission factor. Without them the carbon figure is left blank."
 
-The fuel note names the value the engine refuses to assume: a blank is not read as a boiler efficiency of 1. The carbon note lists everything the carbon figure depends on and says what happens when any is missing: the figure is absent. Absent is the engine's word. A blank carbon figure is not a zero tonne figure. It is a figure nobody can compute from what was typed.
+The fuel note names the value the engine refuses to assume: a blank is not read as a boiler efficiency of 1. The carbon note lists everything the carbon figure depends on and says what happens when any is missing: the figure is left blank. Left blank is the engine's phrase. A blank carbon figure is not a zero tonne figure. It is a figure nobody can compute from what was typed.
 
 The steam loss is unaffected, at the same 355.757 tonnes a year. The engine reports the part it can compute and names the parts it cannot.
 

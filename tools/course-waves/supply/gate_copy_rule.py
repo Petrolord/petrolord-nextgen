@@ -5,9 +5,9 @@ wave that the kit's digestprose does not already sweep.
 No em dash, no en dash, and no "X, not Y" contrastive, in: the task files and
 tier headers, the three draft capstone prompts, every module and lesson title in
 structure.py, the three tier manifests and the 78 placeholder lessons in the
-worktree. The digest itself is swept by digestprose.mjs, which defers the
-engine's verbatim "A FLOOR" sentences; they are allowed here only inside
-quotation marks and only verbatim.
+worktree. The digest itself is swept by digestprose.mjs. Nothing is exempt:
+the engine's "A FLOOR" sentences, once contrastives allowed here inside
+quotation marks, were recast by engines #232 and meet the rule.
 
 Negative control: --plant adds one em dash and one contrastive to the swept
 text and the gate must name both.
@@ -20,7 +20,6 @@ import sys
 
 W = os.path.dirname(os.path.abspath(__file__))
 REPO = '/root/wt-md-supply-nextgen/src/content/courses/supply'
-ENGINE_VERBATIM = ['A FLOOR, not a cost:', 'A FLOOR, not a price:']
 CONTRAST = re.compile(r"\b\w+, not (a |an |the )?\w+", re.I)
 
 
@@ -52,12 +51,9 @@ def main():
                 bad.append(f'{name}:{i} dash: {line.strip()[:100]}')
         # A contrastive can wrap across a line break, so it is read per
         # paragraph with the lines joined. Exempt BY TEXT: the rule's own name,
-        # "X, not Y", where the task files state the rule, and the engine's
-        # verbatim sentences inside quotation marks.
+        # "X, not Y", where the task files state the rule.
         for para in re.split(r'\n\s*\n', text):
             flat = re.sub(r'\s+', ' ', para).replace('"X, not Y"', '')
-            for v in ENGINE_VERBATIM:
-                flat = re.sub(r'"[^"]*' + re.escape(v) + r'[^"]*"', '', flat)
             m = CONTRAST.search(flat)
             if m:
                 bad.append(f'{name} contrastive: ...{flat[max(0, m.start() - 40):m.end() + 20]}...')

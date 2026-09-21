@@ -14,7 +14,7 @@ The engine turns the rate and the days into a year's volume. It reports scfPerYe
 
 The engine follows 40 CFR 98.233(n), and its basis sentence states the rule in full:
 
-"40 CFR 98.233(n): CO2 = the CO2 in the gas plus the combustion efficiency times the hydrocarbon carbon; CH4 = the methane in the gas times one less the destruction efficiency. Unburned ethane and heavier are not methane and carry no GWP here."
+"40 CFR 98.233(n): CO2 = the CO2 in the gas plus the combustion efficiency times the hydrocarbon carbon; CH4 = the methane in the gas times one less the destruction efficiency. Unburned ethane and heavier carry no GWP here."
 
 The rest of this module reads the sentence part by part. The second lesson reads the combustion efficiency times the hydrocarbon carbon, the third reads the CO2 in the gas, the fourth reads the methane and the unburned ethane and heavier, and the fifth reads the two efficiencies side by side.
 

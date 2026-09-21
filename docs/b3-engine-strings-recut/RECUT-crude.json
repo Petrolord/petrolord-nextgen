@@ -1,0 +1,47 @@
+{
+ "course": "Crude Assay & Blending (crude)",
+ "slug": "crude",
+ "engines": "petrolord-engines e972ae7 (engines PR #232, the copy pass and the queue vocabularies)",
+ "method": "OLD is the row the APPLIED deep seed migrations/20261010_cr_crude_<tier>_deep.sql wrote: the generator rebuilds the 132 VALUES lines from the banks before the recut (OLD_REF) and requires them to be that file's VALUES block byte for byte. NEW is what the same generator writes from the recut banks (NEW_REF). No production access: OLD was not compared with a dump of the live rows; each migration refuses a row matching neither OLD nor NEW, and the owner-run rolled-back dry run is that comparison.",
+ "tiers": {
+  "beginner": [
+   {
+    "scope": "final",
+    "module_key": null,
+    "ord": 31,
+    "fields": [
+     "options",
+     "explanation"
+    ],
+    "keyed_answer_text_changed": true,
+    "answer_index_old": 2,
+    "answer_index_new": 2,
+    "keyed_length_rank_old": 0,
+    "keyed_length_rank_new": 0,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "When the gravity rule does not flag the export blend, what does the engine's message say about the result?",
+     "options": [
+      "That the blend screens stable on gravity contrast, pending a SARA analysis.",
+      "That the blend is uncertain and needs a spot test to ASTM D7112 or D7157.",
+      "That the spread is not the classic combination, which is no evidence the blend is stable.",
+      "That no stability screen was made because not every crude has a gravity."
+     ],
+     "explanation": "The message reads, in part: The gravity spread is not the classic heavy-plus-light-paraffinic combination, which is not evidence that the blend is stable. Supply SARA for a real index."
+    },
+    "new": {
+     "prompt": "When the gravity rule does not flag the export blend, what does the engine's message say about the result?",
+     "options": [
+      "That the blend screens stable on gravity contrast, pending a SARA analysis.",
+      "That the blend is uncertain and needs a spot test to ASTM D7112 or D7157.",
+      "That the spread falls outside the classic combination, and that alone says nothing of stability.",
+      "That no stability screen was made because not every crude has a gravity."
+     ],
+     "explanation": "The message reads, in part: The gravity spread falls outside the classic heavy-plus-light-paraffinic combination, and that alone says nothing about whether the blend is stable. Supply SARA for a real index."
+    }
+   }
+  ],
+  "intermediate": [],
+  "advanced": []
+ }
+}

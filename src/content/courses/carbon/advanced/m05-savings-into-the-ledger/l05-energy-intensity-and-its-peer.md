@@ -33,7 +33,7 @@ Read the note's two claims. The intensity is a floor, because energy is missing 
 
 ## The peer is the user's
 
-The disclaimer, verbatim: "This is the plant's own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use."
+The disclaimer, verbatim: "This is the plant's own energy per tonne of throughput. It is independent of the Solomon Energy Intensity Index, a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use."
 
 Two limits follow from it. The engine computes the plant's own energy per tonne and nothing more. And the peer, 680 MJ a tonne here, is an input the user supplies and must have the right to use. The course's peer is invented, and this lesson names no published benchmark figure.
 

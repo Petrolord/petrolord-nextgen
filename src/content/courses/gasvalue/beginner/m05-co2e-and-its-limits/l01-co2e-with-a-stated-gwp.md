@@ -6,7 +6,7 @@ Module four gave the flare two species, CO2 and methane. CO2e puts them on one s
 
 ## The rule for CO2e
 
-CO2e is the CO2 plus the methane times the GWP. The GWP here is the methane global warming potential, and it multiplies the methane alone. The engine's basis sentence for the flare says of the rest: unburned ethane and heavier are not methane and carry no GWP here.
+CO2e is the CO2 plus the methane times the GWP. The GWP here is the methane global warming potential, and it multiplies the methane alone. The engine's basis sentence for the flare says of the rest: unburned ethane and heavier carry no GWP here.
 
 ## The GWP is an input
 

@@ -1,6 +1,6 @@
 # The forecourt queue
 
-Buses arrive at IBAFO's forecourt and wait for a dispenser. `cngDispensing` sizes the forecourt as a queue. A CNG forecourt is the same queue as the carousel and the loading rack: lpgCng calls the loading-rack queue in terminalDepot for both, and the supply course (`supply`) is where this academy teaches that queue.
+Buses arrive at IBAFO's forecourt and wait for a dispenser. `cngDispensing` sizes the forecourt as a queue. A CNG forecourt is the same queue as the carousel and the loading rack: lpgCng calls the loading-rack queue in terminalDepot for both, and the supply course (`supply`) is where this academy teaches that queue. The forecourt hands the queue its own words, CNG_QUEUE_VOCABULARY, so its messages speak of dispensers and vehicles.
 
 {{panel:gasvalue-rollout-explorer}}
 
@@ -23,22 +23,22 @@ The engine's note on the forecourt: "A CNG fill takes minutes, so a forecourt qu
 
 ## A forecourt that cannot keep up
 
-At 25 buses an hour on 2 dispensers the forecourt cannot keep up. The engine gives an answer and no refusal: stable false, utilisation 1.2500, and the queue's message: "The rack cannot keep up with arrivals. The queue grows without limit, so no average waiting time exists. Add a bay, load faster, or spread the arrivals."
+At 25 buses an hour on 2 dispensers the forecourt cannot keep up. The engine gives an answer and no refusal: stable false, utilisation 1.2500, and the queue's message: "The dispensers cannot keep up with arriving vehicles. The forecourt queue grows without limit, so no average waiting time exists. Add a dispenser, shorten the fill, or spread the arrivals."
 
-This is an answer with a flag. stable prints false and the utilisation prints 1.2500. The message says no average waiting time exists. It is the queue's message, and it speaks of a rack and a bay: the forecourt calls the loading-rack queue.
+This is an answer with a flag. stable prints false and the utilisation prints 1.2500. The message says no average waiting time exists. It speaks the forecourt's own vocabulary: dispensers, arriving vehicles and the fill. Its three remedies are the three levers a forecourt has: another dispenser, a shorter fill, or arrivals spread over more of the day.
 
 ## Whole dispensers
 
 | probe | engine |
 | --- | --- |
-| 2.5 dispensers | REFUSED: The number of bays must be a whole number, one or more. |
+| 2.5 dispensers | REFUSED: The number of dispensers must be a whole number, one or more. |
 | no fill time | REFUSED: Arrivals, fill time and a dispenser count are required and must be positive. |
 
-A dispenser count must be whole. 2.5 is refused, in the queue's own words about bays. A fill time is required, and so are the arrivals and the dispenser count, each positive.
+A dispenser count must be whole. 2.5 is refused, and the refusal names what was typed: the number of dispensers. A fill time is required, and so are the arrivals and the dispenser count, each positive.
 
 ## The same queue three times
 
-This tier has now run the same queue twice. The carousel ran it on KANO's positions wholly working, 16, with cylinders arriving at 320.0000 an hour. The forecourt runs it on whole dispensers, 2 or 3, with buses arriving at 14 an hour. The field names are shared: utilisation, probabilityOfWaiting, averageWaitMinutes. On the carousel they printed 0.7333, 0.1769 and 0.0912 minutes.
+This tier has now run the same queue twice. The carousel ran it on KANO's positions wholly working, 16, with cylinders arriving at 320.0000 an hour. The forecourt runs it on whole dispensers, 2 or 3, with buses arriving at 14 an hour. The field names are shared: utilisation, probabilityOfWaiting, averageWaitMinutes. On the carousel they printed 0.7333, 0.1769 and 0.0912 minutes. The model is shared too, and each facility words its messages for itself: the loading rack speaks of bays, the carousel of filling positions, and the forecourt of dispensers.
 
 In practice, the arrivals a forecourt study types come from counting the buses at the busiest hour.
 

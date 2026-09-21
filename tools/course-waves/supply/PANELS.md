@@ -98,5 +98,5 @@ the detector fires. Match whole tokens, never substrings.
 ## Copy
 
 No em dashes, no en dashes, no "X, not Y" contrastive in any label, tooltip or
-caption. The engine's "A FLOOR" sentence may be shown verbatim as the engine's
-words.
+caption. The engine's "A FLOOR" sentences meet the rule since engines #232
+and are shown verbatim as the engine's words.

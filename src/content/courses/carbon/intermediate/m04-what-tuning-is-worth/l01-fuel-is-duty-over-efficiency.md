@@ -6,7 +6,7 @@ Module three gave the invented Isiokpo heater two efficiencies on LHV: 86.4029 p
 
 ## The engine's method
 
-The lab prints the method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. Subtracting the efficiency percentages divides by a hundred instead of by the target efficiency, and understates the saving."
+The engine prints the method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. The divisor is the target efficiency. Subtracting the efficiency percentages divides by a hundred and understates the saving."
 
 The first sentence is the rule this lesson teaches. The second is the trap lesson two reads.
 

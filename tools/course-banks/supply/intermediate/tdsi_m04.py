@@ -54,7 +54,7 @@ q(3, "IBAFO's period loss of petrol, at a density of 745.2 kg/m3, weighs 3.4279 
 q(2, "Density is missing from the IBAFO period. Which note explains the gap in the carbon columns?",
  "No product density supplied, so the loss has no weight and the carbon side is not computed.",
  ["No emission factor supplied, so the carbon side is not computed. Factors are published, versioned data; an invented one would be worse than none.",
-  "No diesel emission factor supplied, so the carbon figure is absent rather than zero.",
+  "No diesel emission factor supplied, so the carbon figure is left blank.",
   "REFUSED: Density is required to convert between mass and volume; it is not assumed."],
  "throughputEconomics does not refuse the call; it prints the money side and names why the carbon side is missing. The refusal about mass and volume belongs to cargoQuantities, and the diesel note to the truck lane.")
 

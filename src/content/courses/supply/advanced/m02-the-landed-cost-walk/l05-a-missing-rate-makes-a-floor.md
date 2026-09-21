@@ -15,9 +15,9 @@ With the course's invented duty and financing rate left blank, the engine report
 - complete false;
 - missing Import duty, Financing and letter of credit;
 - total 24774210.79 USD;
-- and the label "A FLOOR, not a cost: 2 rate(s) not supplied."
+- and the label "A FLOOR: 2 rate(s) not supplied, so the full landed cost is at least this."
 
-With every rate blank, the engine reports complete false, 9 missing, and a total of 23392000.00 USD, which is the FOB alone, with the same label: "A FLOOR, not a cost: 9 rate(s) not supplied."
+With every rate blank, the engine reports complete false, 9 missing, and a total of 23392000.00 USD, which is the FOB alone, with the same label: "A FLOOR: 9 rate(s) not supplied, so the full landed cost is at least this."
 
 ## What each part of the answer does
 
@@ -27,7 +27,7 @@ The fully blank build-up shows why the label matters. Its total is 23392000.00 U
 
 ## A rate typed 0 is a rate
 
-The course prices the cargo twice more, changing only the duty. With the course's invented duty typed 0, the build-up is complete true, total 25114857.82 USD. With the duty left blank, it is complete false, missing Import duty, total 25114857.82 USD, labelled "A FLOOR, not a cost: 1 rate(s) not supplied."
+The engine prices the cargo twice more, changing only the duty. With the course's invented duty typed 0, the build-up is complete true, total 25114857.82 USD. With the duty left blank, it is complete false, missing Import duty, total 25114857.82 USD, labelled "A FLOOR: 1 rate(s) not supplied, so the full landed cost is at least this."
 
 The two totals print the same figure. The flag and the missing list tell them apart. In the course's words, a rate typed 0 is a rate, and the engine applies it. A blank duty is an absence, and the engine names it. The template's rate column is empty on purpose, so a default of zero would make every untouched line a claim that the charge does not exist.
 

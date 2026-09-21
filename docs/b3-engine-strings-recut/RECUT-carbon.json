@@ -1,0 +1,355 @@
+{
+ "course": "Carbon & Energy Efficiency (carbon)",
+ "slug": "carbon",
+ "engines": "petrolord-engines e972ae7 (engines PR #232, the copy pass and the queue vocabularies)",
+ "method": "OLD is the row the APPLIED deep seed migrations/20261014_cef_carbon_<tier>_deep.sql wrote: the generator rebuilds the 132 VALUES lines from the banks before the recut (OLD_REF) and requires them to be that file's VALUES block byte for byte. NEW is what the same generator writes from the recut banks (NEW_REF). No production access: OLD was not compared with a dump of the live rows; each migration refuses a row matching neither OLD nor NEW, and the owner-run rolled-back dry run is that comparison.",
+ "tiers": {
+  "beginner": [
+   {
+    "scope": "module",
+    "module_key": "m05-lines-factors-and-provenance",
+    "ord": 13,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 3,
+    "answer_index_new": 3,
+    "keyed_length_rank_old": 3,
+    "keyed_length_rank_new": 3,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "The engine's disclaimer on the inventory names three things that belong in the compliance register. Which three?",
+     "options": [
+      "Factors, sources and versions of each line",
+      "Scope 1, Scope 2 and the total, in tCO2e",
+      "Blocked lines, their reasons and the set",
+      "Obligations, evidence and deadlines"
+     ],
+     "explanation": "SECTION 7 quotes it: \"This is a quantitative inventory. It is not a regulatory compliance register: obligations, evidence and deadlines belong in the compliance register, and keeping a second copy of them here would create two records that could disagree.\" The inventory itself carries each line's factor, source and version, its totals and its blocked lines."
+    },
+    "new": {
+     "prompt": "The engine's disclaimer on the inventory names three things that belong in the compliance register. Which three?",
+     "options": [
+      "Factors, sources and versions of each line",
+      "Scope 1, Scope 2 and the total, in tCO2e",
+      "Blocked lines, their reasons and the set",
+      "Obligations, evidence and deadlines"
+     ],
+     "explanation": "The disclaimer reads: \"This is a quantitative inventory of tonnes. Obligations, evidence and deadlines belong in the compliance register, which keeps the one record of them; a second copy here would create two records that could disagree.\" The inventory itself carries each line's factor, source and version, its totals and its blocked lines."
+    }
+   },
+   {
+    "scope": "final",
+    "module_key": null,
+    "ord": 28,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 3,
+    "answer_index_new": 3,
+    "keyed_length_rank_old": 3,
+    "keyed_length_rank_new": 3,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "The inventory disclaimer warns against keeping a second copy of obligations in the inventory. What would the copy create?",
+     "options": [
+      "A blocked line for each obligation",
+      "A total that counts each tonne twice",
+      "An unsourced factor in the register",
+      "Two records that could disagree"
+     ],
+     "explanation": "The disclaimer in SECTION 7 ends: keeping a second copy of them here would create two records that could disagree."
+    },
+    "new": {
+     "prompt": "The inventory disclaimer warns against keeping a second copy of obligations in the inventory. What would the copy create?",
+     "options": [
+      "A blocked line for each obligation",
+      "A total that counts each tonne twice",
+      "An unsourced factor in the register",
+      "Two records that could disagree"
+     ],
+     "explanation": "The disclaimer ends: a second copy here would create two records that could disagree."
+    }
+   }
+  ],
+  "intermediate": [
+   {
+    "scope": "module",
+    "module_key": "m04-what-tuning-is-worth",
+    "ord": 1,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 1,
+    "answer_index_new": 1,
+    "keyed_length_rank_old": 3,
+    "keyed_length_rank_new": 3,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "SECTION 14 prints the engine's method for the saving from tuning the invented Isiokpo heater. Which ratio does it give?",
+     "options": [
+      "(target - current) / current",
+      "(target - current) / target",
+      "(target - current) / a hundred",
+      "(target - current) / (target + current)"
+     ],
+     "explanation": "The method, verbatim: \"Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. Subtracting the efficiency percentages divides by a hundred instead of by the target efficiency, and understates the saving.\""
+    },
+    "new": {
+     "prompt": "SECTION 14 prints the engine's method for the saving from tuning the invented Isiokpo heater. Which ratio does it give?",
+     "options": [
+      "(target - current) / current",
+      "(target - current) / target",
+      "(target - current) / a hundred",
+      "(target - current) / (target + current)"
+     ],
+     "explanation": "The method, verbatim: \"Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. The divisor is the target efficiency. Subtracting the efficiency percentages divides by a hundred and understates the saving.\""
+    }
+   }
+  ],
+  "advanced": [
+   {
+    "scope": "module",
+    "module_key": "m02-the-marginal-abatement-cost-curve",
+    "ord": 8,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 1,
+    "answer_index_new": 1,
+    "keyed_length_rank_old": 0,
+    "keyed_length_rank_new": 0,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "The Agbor curve prints additive false. Which entry in SECTION 20 goes with that flag?",
+     "options": [
+      "An over-claims entry naming the flare: Flare gas recovery claiming more than it emits",
+      "An interaction table naming heaters: Tune the fired heaters and the Heat integration project",
+      "A refusedMeasures entry naming the Heat integration project, whose capital was blank",
+      "A paysForItselfMeasures entry naming Tune the fired heaters and Repair failed steam traps"
+     ],
+     "explanation": "SECTION 20 prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that measures acting on the same source are NOT additive. The costed curve carries no refused measure, over-claims belong to the 9400 t claim of SECTION 21, and paysForItselfMeasures names three measures."
+    },
+    "new": {
+     "prompt": "The Agbor curve prints additive false. Which entry in SECTION 20 goes with that flag?",
+     "options": [
+      "An over-claims entry naming the flare: Flare gas recovery claiming more than it emits",
+      "An interaction table naming heaters: Tune the fired heaters and the Heat integration project",
+      "A refusedMeasures entry naming the Heat integration project, whose capital was blank",
+      "A paysForItselfMeasures entry naming Tune the fired heaters and Repair failed steam traps"
+     ],
+     "explanation": "The curve prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that the abatements of measures acting on the same source overlap. The costed curve carries no refused measure, over-claims belong to the 9400 t flare gas recovery claim, and paysForItselfMeasures names three measures."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m03-interactions-and-over-claims",
+    "ord": 9,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 2,
+    "answer_index_new": 2,
+    "keyed_length_rank_old": 0,
+    "keyed_length_rank_new": 0,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "Tune the fired heaters and the Heat integration project both act on heaters. What does the engine do with their tonnes on the curve?",
+     "options": [
+      "It keeps the larger claim, 3400.000 t, and drops Tune the fired heaters from the total.",
+      "It refuses the curve until the user sequences the two measures on the one source.",
+      "It counts both in full, 760.000 and 3400.000 t, and calls the cumulative curve an upper bound.",
+      "It counts both in full and names heaters in the over-claims column of the curve."
+     ],
+     "explanation": "SECTION 20 prints both measures at 760.000 and 3400.000 t, additive false, and the note: \"Measures listed here act on the same source, so their abatements are NOT additive and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, which is why it is surfaced rather than solved.\" The costed curve prints over-claims none."
+    },
+    "new": {
+     "prompt": "Tune the fired heaters and the Heat integration project both act on heaters. What does the engine do with their tonnes on the curve?",
+     "options": [
+      "It keeps the larger claim, 3400.000 t, and drops Tune the fired heaters from the total.",
+      "It refuses the curve until the user sequences the two measures on the one source.",
+      "It counts both in full, 760.000 and 3400.000 t, and calls the cumulative curve an upper bound.",
+      "It counts both in full and names heaters in the over-claims column of the curve."
+     ],
+     "explanation": "The curve prints both measures at 760.000 and 3400.000 t, additive false, and the note: \"Measures listed here act on the same source, so their abatements overlap and the cumulative curve is an upper bound. Resolving the overlap needs an engineering judgement about sequencing, so the overlap is flagged here and the sequencing is left to that judgement.\" The costed curve prints over-claims none."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m04-targets-and-the-path",
+    "ord": 4,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 3,
+    "answer_index_new": 3,
+    "keyed_length_rank_old": 3,
+    "keyed_length_rank_new": 3,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "How does decarbonisationPath report the Agbor gap of 1370.083 t in the end year?",
+     "options": [
+      "As a wedge of future measures that closes it by 2033",
+      "As a cost, at the curve's weighted average of 18.7868 USD a tonne",
+      "As a refusal until a measure is named to close it",
+      "As unabated, with no measure identified"
+     ],
+     "explanation": "SECTION 22, the gap note: \"The gap is reported as unabated with no measure identified. It is deliberately not drawn as a wedge of future measures, because a wedge with nothing behind it is not a plan.\" The path prints finalGapTonnes 1370.083 and no refusal."
+    },
+    "new": {
+     "prompt": "How does decarbonisationPath report the Agbor gap of 1370.083 t in the end year?",
+     "options": [
+      "As a wedge of future measures that closes it by 2033",
+      "As a cost, at the curve's weighted average of 18.7868 USD a tonne",
+      "As a refusal until a measure is named to close it",
+      "As unabated, with no measure identified"
+     ],
+     "explanation": "The gap note: \"The gap is reported as unabated with no measure identified. A wedge is drawn only for an identified measure, because a plan needs a named measure behind every wedge.\" The path prints finalGapTonnes 1370.083 and no refusal."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m04-targets-and-the-path",
+    "ord": 9,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 0,
+    "answer_index_new": 0,
+    "keyed_length_rank_old": 3,
+    "keyed_length_rank_new": 3,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "An inventory that computed nothing is handed to decarbonisationPath as a baseline of 0. What does the engine say?",
+     "options": [
+      "It refuses: the baseline must be a positive tonnage.",
+      "It draws the path from 0 and prints every gap as 0.000.",
+      "It builds the path on the partial total of 45112.276 tCO2e.",
+      "It names the inventory in unscheduledMeasures and goes on."
+     ],
+     "explanation": "SECTION 22: REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing is not a baseline of zero. SECTION 25 lists it: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank."
+    },
+    "new": {
+     "prompt": "An inventory that computed nothing is handed to decarbonisationPath as a baseline of 0. What does the engine say?",
+     "options": [
+      "It refuses: the baseline must be a positive tonnage.",
+      "It draws the path from 0 and prints every gap as 0.000.",
+      "It builds the path on the partial total of 45112.276 tCO2e.",
+      "It names the inventory in unscheduledMeasures and goes on."
+     ],
+     "explanation": "REFUSED: The baseline must be a positive tonnage. An inventory that computed nothing leaves the baseline unknown. It is a rule in force: a baseline that is not positive is refused. 45112.276 tCO2e is the partial inventory with the electricity factor blank."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m05-savings-into-the-ledger",
+    "ord": 1,
+    "fields": [
+     "options",
+     "explanation"
+    ],
+    "keyed_answer_text_changed": true,
+    "answer_index_old": 3,
+    "answer_index_new": 3,
+    "keyed_length_rank_old": 1,
+    "keyed_length_rank_new": 1,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "The invented AGBOR saving is priced with no emission factor supplied. What does priceSaving return for the carbon?",
+     "options": [
+      "annualTonnesCo2e 0.000, with the money value returned beside it as usual",
+      "A refusal saying an emission factor is required before any pricing",
+      "annualTonnesCo2e 661.980, read from a factor the engine ships",
+      "annualTonnesCo2e none, with a note that the carbon figure is absent"
+     ],
+     "explanation": "SECTION 23, no emission factor: annualTonnesCo2e none; carbonNote \"No emission factor supplied, so the carbon figure is absent rather than zero.\" SECTION 25: emission factors are inputs and neither engine ships one. 661.980 is the carbon with the SYNTHETIC factor of 56.1 kg CO2e per GJ."
+    },
+    "new": {
+     "prompt": "The invented AGBOR saving is priced with no emission factor supplied. What does priceSaving return for the carbon?",
+     "options": [
+      "annualTonnesCo2e 0.000, with the money value returned beside it as usual",
+      "A refusal saying an emission factor is required before any pricing",
+      "annualTonnesCo2e 661.980, read from a factor the engine ships",
+      "annualTonnesCo2e none, with a note that the carbon figure is left blank"
+     ],
+     "explanation": "No emission factor: annualTonnesCo2e none; carbonNote \"No emission factor supplied, so the carbon figure is left blank.\" Emission factors are inputs and neither engine ships one. 661.980 is the carbon with the SYNTHETIC factor of 56.1 kg CO2e per GJ."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m05-savings-into-the-ledger",
+    "ord": 13,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 0,
+    "answer_index_new": 0,
+    "keyed_length_rank_old": 2,
+    "keyed_length_rank_new": 2,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "What does the energyIntensity disclaimer say the Agbor figure is?",
+     "options": [
+      "The plant's own energy per tonne of throughput",
+      "The Solomon Energy Intensity Index for the plant",
+      "The plant's energy on a standard-energy basis",
+      "A published peer benchmark supplied by the engine"
+     ],
+     "explanation": "SECTION 24, the disclaimer: \"This is the plant's own energy per tonne of throughput. It is NOT the Solomon Energy Intensity Index, which is a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use.\""
+    },
+    "new": {
+     "prompt": "What does the energyIntensity disclaimer say the Agbor figure is?",
+     "options": [
+      "The plant's own energy per tonne of throughput",
+      "The Solomon Energy Intensity Index for the plant",
+      "The plant's energy on a standard-energy basis",
+      "A published peer benchmark supplied by the engine"
+     ],
+     "explanation": "The disclaimer: \"This is the plant's own energy per tonne of throughput. It is independent of the Solomon Energy Intensity Index, a proprietary benchmark with its own standard-energy methodology. Any peer figure compared here is one you supplied and have the right to use.\""
+    }
+   },
+   {
+    "scope": "final",
+    "module_key": null,
+    "ord": 21,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 3,
+    "answer_index_new": 3,
+    "keyed_length_rank_old": 0,
+    "keyed_length_rank_new": 0,
+    "length_rank_moved": false,
+    "old": {
+     "prompt": "How does the energyIntensity disclaimer frame the peer figure of 680 MJ a tonne?",
+     "options": [
+      "As the Solomon Energy Intensity Index for Agbor",
+      "As a benchmark the engine ships with the module",
+      "As the intensity with a stream missing, a floor",
+      "As one the user supplied and has the right to use"
+     ],
+     "explanation": "The disclaimer's last sentence: the peer figure compared is one you supplied and have the right to use. The Solomon index is named only to say this figure is NOT it, and floor is the peerNote's word for a missing stream."
+    },
+    "new": {
+     "prompt": "How does the energyIntensity disclaimer frame the peer figure of 680 MJ a tonne?",
+     "options": [
+      "As the Solomon Energy Intensity Index for Agbor",
+      "As a benchmark the engine ships with the module",
+      "As the intensity with a stream missing, a floor",
+      "As one the user supplied and has the right to use"
+     ],
+     "explanation": "The disclaimer's last sentence: the peer figure compared is one you supplied and have the right to use. The Solomon index is named only to say this figure is independent of it, and floor is the peerNote's word for a missing stream."
+    }
+   }
+  ]
+ }
+}
