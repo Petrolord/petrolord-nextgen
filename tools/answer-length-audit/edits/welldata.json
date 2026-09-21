@@ -1,0 +1,605 @@
+[
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "The depths at which the tool was calibrated",
+  "new": "The depths at which the tool was calibrated before the run, which the service company records so each curve can be corrected back to its reference"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 2,
+  "old": "The interval the service company certified",
+  "new": "The interval the service company certified as meeting its quality standard, which is always narrower than the depth range the file header declares"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "Nothing; they always equal the file's start and stop",
+  "new": "Nothing; they always equal the file's start and stop depths, because every curve in a LAS file is written over the same shared depth column"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 0,
+  "old": "Blank fields are illegal in LAS",
+  "new": "Blank fields are illegal in LAS, and the standard names this particular value as the only permitted way to mark a sample the tool failed to record"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 1,
+  "old": "The flag doubles as an error code from the logging tool",
+  "new": "The flag doubles as an error code from the logging tool, telling the interpreter which kind of acquisition fault produced each missing reading"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "It compresses better than whitespace",
+  "new": "It compresses better than whitespace when large files are archived, so storing an explicit number for each missing sample keeps delivered volumes small"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "The tool serial numbers and run tickets",
+  "new": "The tool serial numbers and the run tickets recorded for each logging pass"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 0,
+  "old": "Guess the field from the file name and proceed",
+  "new": "Guess the field from the file name and proceed with loading, since the curves themselves parsed cleanly and that is what interpreters use"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "Reject the file, since identity entries are mandatory",
+  "new": "Reject the file outright, since identity entries are mandatory and a well without a company, field and location cannot be held in the registry"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "Copy identity entries from another well in the same folder",
+  "new": "Copy identity entries from another well in the same folder, because files delivered together normally come from the same field and operator"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 0,
+  "old": "The header, because it is the official record",
+  "new": "The header, because it is the official record written by the service company"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "Whichever gives the rounder numbers",
+  "new": "Whichever gives the rounder numbers, since those are less likely to be typing errors"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "The header is right and the data column has typos",
+  "new": "The header is right and the data column has typos, so the depth column should be regenerated from STRT and the declared step before any further use"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "The step is 0.5 on average so the file may be treated as uniform",
+  "new": "The step is 0.5 on average so the file may be treated as uniform, since small wobbles in the increments cancel out over the logged interval"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "The file uses feet and the header uses metres",
+  "new": "The file uses feet and the header uses metres, so the wandering increments are only a rounding artefact of converting between the two depth units"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 0,
+  "old": "Because the registry sorts wells alphabetically by company",
+  "new": "Because the registry sorts wells alphabetically by company, so a wrong entry only moves the well in the listing order"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "Because interpreters read the header before the curves",
+  "new": "Because interpreters read the header before the curves, so it shapes their first impression of the whole data set"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "They set the depth reference datum",
+  "new": "They set the depth reference datum, since the service company and the date together fix which elevation the depths in the file are measured from"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 2,
+  "old": "They control the parser's unit conversion",
+  "new": "They control the parser's unit conversion, because each service company writes its curves in its own house units and the date decides the convention"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "They are purely decorative fields",
+  "new": "They are purely decorative fields, carried over from the paper era of logging and ignored by every modern parser and by the registry after import"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "The file is merged into the existing well automatically since names match",
+  "new": "The file is merged into the existing well automatically since names match and the well name is the registry's join key"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "The name is ignored and a new anonymous well is created",
+  "new": "The name is ignored and a new anonymous well is created, so neither record can ever overwrite the other"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "Cross-plots against offset wells",
+  "new": "Cross-plots against offset wells, to confirm that the curve values fall in a sensible range for the field"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "Nothing; statistics are independent of the rest",
+  "new": "Nothing; statistics are independent of the rest, since a mean or a null count only reads the numbers in each column"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "Six mean values, one per curve of basic_20 plus depth",
+  "new": "Six mean values, one per curve of basic_20 plus depth, each read from the finite-sample mean column of the curve table so only that column is tested"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "The STRT, STOP and STEP of two files",
+  "new": "The STRT, STOP and STEP of two files, read straight from each well header table so that the capstone checks the declared depth frame and nothing else"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "The null counts of all curves in all six files",
+  "new": "The null counts of all curves in all six files of the teaching set, because counting nulls correctly is the single skill the Associate tier certifies"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "As soon as the first module quiz is passed",
+  "new": "As soon as the first module quiz has been passed at the required mark"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "It must be computed by hand from the raw text",
+  "new": "It must be computed by hand by scanning the raw text of the data section"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "Manual editing of curve values",
+  "new": "Manual editing of curve values, so the Professional user can overwrite suspect samples directly in the table instead of flagging them"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Writing LAS files back to disk",
+  "new": "Writing LAS files back to disk after QC, with corrected headers exported so the vendor's original deliveries can be replaced in the archive"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "Seismic tie quality control",
+  "new": "Seismic tie quality control, matching each well's sonic and density curves against the seismic volume before the data is published"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "A discount on the Professional tier",
+  "new": "A discount on the Professional tier of this course, applied automatically at checkout once the capstone certificate is live"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "Automatic enrollment in all other courses",
+  "new": "Automatic enrollment in all other courses in the Academy catalogue, which the platform performs as soon as the certificate is issued"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "Nothing beyond the certificate",
+  "new": "Nothing beyond the certificate, since each geoscience course has its own entry requirements that are checked independently"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-well-data-and-the-registry",
+  "ord": 7,
+  "option": 1,
+  "old": "Acoustic travel time; it reads high in slow formations",
+  "new": "Acoustic travel time; it reads high in slow formations such as shale and uncompacted sand"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-well-data-and-the-registry",
+  "ord": 9,
+  "option": 0,
+  "old": "301, because the null flag is a valid measurement",
+  "new": "301, because the null flag is a valid measurement and is averaged like any other sample"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-well-data-and-the-registry",
+  "ord": 9,
+  "option": 1,
+  "old": "301, because nulls are replaced by zero before averaging",
+  "new": "301, because nulls are replaced by zero before averaging so the sample count is unchanged"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-well-data-and-the-registry",
+  "ord": 12,
+  "option": 2,
+  "old": "The step must be read from the first two data rows instead",
+  "new": "The step must be read from the first two data rows of the file instead"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-well-data-and-the-registry",
+  "ord": 13,
+  "option": 0,
+  "old": "A curve whose mean falls outside its physical range",
+  "new": "A curve whose mean falls outside its physical range, such as a negative gamma ray"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-well-data-and-the-registry",
+  "ord": 13,
+  "option": 1,
+  "old": "A curve recorded by a decommissioned tool",
+  "new": "A curve recorded by a decommissioned tool that the service company no longer supports"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-well-data-and-the-registry",
+  "ord": 13,
+  "option": 2,
+  "old": "A curve whose mnemonic is not recognised",
+  "new": "A curve whose mnemonic is not recognised, so the parser cannot assign it a curve kind"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-well-data-and-the-registry",
+  "ord": 15,
+  "option": 0,
+  "old": "Registry storage is more expensive",
+  "new": "Registry storage is more expensive, so every bad curve held there adds a running cost that a local project file does not carry"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-well-data-and-the-registry",
+  "ord": 15,
+  "option": 1,
+  "old": "The registry rejects corrections once a curve is written",
+  "new": "The registry rejects corrections once a curve is written, so a published error can never be fixed and must stay there permanently"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-well-data-and-the-registry",
+  "ord": 15,
+  "option": 3,
+  "old": "Local files are backed up more often",
+  "new": "Local files are backed up more often, so a bad curve kept locally can always be rolled back to the version the vendor delivered"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-units-and-steps",
+  "ord": 14,
+  "option": 1,
+  "old": "The header step, because the export software wrote it from the acquisition settings",
+  "new": "The header step, because the export software wrote it directly from the acquisition settings used at the wellsite"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-units-and-steps",
+  "ord": 14,
+  "option": 3,
+  "old": "Any of the three, since a well-formed LAS file makes all three agree",
+  "new": "Any of the three, since a well-formed LAS file makes all three agree and a parser only accepts well-formed files"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-units-and-steps",
+  "ord": 15,
+  "option": 0,
+  "old": "Resample it onto the nearest round step so downstream thickness logic has a spacing to use",
+  "new": "Resample it onto the nearest round step at import so downstream thickness logic has a regular spacing to use straight away"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-depth-units-and-steps",
+  "ord": 15,
+  "option": 2,
+  "old": "Write the average increment into the step field so the file looks uniform to consumers",
+  "new": "Write the average increment into the step field so the file looks uniform to consumers and thickness logic has a spacing to work with"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-nulls-and-data-quality",
+  "ord": 13,
+  "option": 0,
+  "old": "The minimum and maximum gamma ray readings in the curve.",
+  "new": "The minimum and maximum gamma ray readings recorded anywhere in the curve, found by scanning every sample."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-nulls-and-data-quality",
+  "ord": 13,
+  "option": 3,
+  "old": "The two samples that were flagged null at the run boundaries.",
+  "new": "The two samples that were flagged null at the run boundaries, where the tool was still settling at the top and bottom."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-nulls-and-data-quality",
+  "ord": 14,
+  "option": 0,
+  "old": "Because NaN takes less memory than a floating-point sentinel.",
+  "new": "Because NaN takes less memory than a floating-point sentinel, which matters when large delivered files with thousands of null samples are loaded into the registry at once."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-nulls-and-data-quality",
+  "ord": 14,
+  "option": 1,
+  "old": "Because NaN restores the missing measurement by interpolation.",
+  "new": "Because NaN restores the missing measurement by interpolation between the nearest finite samples above and below it, so the curve stays continuous for every downstream calculation."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-nulls-and-data-quality",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the LAS standard requires NaN in the data section.",
+  "new": "Because the LAS standard requires NaN in the data section, and a parser that kept the sentinel number would produce arrays that no longer conform to the specification."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-nulls-and-data-quality",
+  "ord": 15,
+  "option": 0,
+  "old": "Interpolate it from neighbouring curves, or leave it untouched for the interpreter to handle.",
+  "new": "Interpolate it from neighbouring curves to fill the gap, or leave it untouched in the registry for the interpreter to handle later."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-nulls-and-data-quality",
+  "ord": 15,
+  "option": 2,
+  "old": "Replace the sentinels with zeros, or rename the curve so downstream software ignores it.",
+  "new": "Replace the sentinels with zeros so the column parses as numbers, or rename the curve so downstream software ignores it without anyone noticing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-nulls-and-data-quality",
+  "ord": 15,
+  "option": 3,
+  "old": "Re-declare the file's NULL value, or delete the file and request a redelivery.",
+  "new": "Re-declare the file's NULL value so the sentinels read as real values, or delete the whole file and request a redelivery from the vendor."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-headers-and-metadata",
+  "ord": 12,
+  "option": 0,
+  "old": "The header is authoritative, so recomputing from the data wastes time",
+  "new": "The header is authoritative, so recomputing the depth frame from the data only wastes QC time"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-headers-and-metadata",
+  "ord": 13,
+  "option": 1,
+  "old": "A display label only, since apps join on the file name",
+  "new": "A display label only, since apps join on the file name that the curves were originally loaded from at import"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-headers-and-metadata",
+  "ord": 13,
+  "option": 2,
+  "old": "A value the registry recomputes from the depth range",
+  "new": "A value the registry recomputes from the depth range, so two files covering the same interval share one name"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-headers-and-metadata",
+  "ord": 15,
+  "option": 0,
+  "old": "The UWI is always the safest identity key, so it should override the well name",
+  "new": "The UWI is always the safest identity key, so it should override the well name and each file should be registered under its own UWI value"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-headers-and-metadata",
+  "ord": 15,
+  "option": 1,
+  "old": "The four files are therefore four different boreholes and must be kept apart",
+  "new": "The four files are therefore four different boreholes and must be kept apart as separate wells in the registry, whatever their shared well name suggests"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-headers-and-metadata",
+  "ord": 15,
+  "option": 2,
+  "old": "UWI entries should be deleted from headers before publishing",
+  "new": "UWI entries should be deleted from headers before publishing, since conflicting identifiers across files that share a well name only cause confusion downstream"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-qc-workflow",
+  "ord": 13,
+  "option": 0,
+  "old": "Access to the Professional tier of Well Data Manager, which is otherwise locked",
+  "new": "Access to the Professional tier of Well Data Manager, which is otherwise locked to every learner on the platform"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-qc-workflow",
+  "ord": 13,
+  "option": 1,
+  "old": "A record of the six readings, which is filed with the well registry",
+  "new": "A record of the six readings, which is filed with the well registry as the verified QC result for the teaching wells"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-qc-workflow",
+  "ord": 14,
+  "option": 2,
+  "old": "The pipeline rejects any file whose curves are not already in metric units",
+  "new": "The pipeline rejects any file whose curves are not already in metric units, so feet files must be converted outside the platform before import"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-qc-workflow",
+  "ord": 14,
+  "option": 3,
+  "old": "The pipeline converts depth only, and leaves other curves to the interpreter",
+  "new": "The pipeline converts the depth column only, and leaves every other curve, including the sonic, for the interpreter to convert by hand"
+ }
+]
