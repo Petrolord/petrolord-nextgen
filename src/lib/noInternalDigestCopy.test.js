@@ -83,12 +83,6 @@ const ALLOWED = {
   'panels/relief/reliefLab.js': [
     "framedBy: 'digest section 29, whose own title and first line say it is repair history, and nothing follows it',",
   ],
-  'panels/fdp/fdpLab.js': [
-    "if (!ODUDU_AS_OF.includes(asOf)) throw new Error(`oduduAsOf: the digest's as-of dates only, not ${asOf}`);",
-  ],
-  'panels/portfolio/portfolioLab.js': [
-    "throw new Error(`OFON-1 is read at the digest's as-of dates only (${OFON_AS_OF.join(', ')}); ${asOf} is not one`);",
-  ],
 };
 
 const walk = (dir, keep, out = []) => {

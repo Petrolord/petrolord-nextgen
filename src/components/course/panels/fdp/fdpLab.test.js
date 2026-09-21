@@ -671,7 +671,7 @@ describe('what the teaching fields show', () => {
   });
 
   it('the as-of reader refuses a date the digest does not print', () => {
-    expect(() => L.oduduAsOf('2028-12-30')).toThrow(/digest's as-of dates only/);
+    expect(() => L.oduduAsOf('2028-12-30')).toThrow(/course's as-of dates only/);
     expect(L.oduduAsOf('2028-01-01').spi).toBeNull();
   });
 

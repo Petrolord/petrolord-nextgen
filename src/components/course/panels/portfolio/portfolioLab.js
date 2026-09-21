@@ -454,7 +454,7 @@ export const AS_OF_CASE_NAMES = ['asOf mid-window: SPI against 256 of 729 days',
 /** OFON-1 at one of the digest's six as-of dates. Any other date is refused: the panel's picker offers only these. */
 export const ofonAsOf = (asOf) => {
   if (!OFON_AS_OF.includes(asOf)) {
-    throw new Error(`OFON-1 is read at the digest's as-of dates only (${OFON_AS_OF.join(', ')}); ${asOf} is not one`);
+    throw new Error(`OFON-1 is read at the course's as-of dates only (${OFON_AS_OF.join(', ')}); ${asOf} is not one`);
   }
   const x = ofonMetrics(asOf);
   return {
