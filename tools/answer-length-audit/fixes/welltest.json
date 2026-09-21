@@ -1,0 +1,11 @@
+{"migration": "20261021b_b4_fix_welltest.sql",
+ "title": "welltest: one partly-valid distractor sharpened into a clearly wrong one",
+ "items": [
+  {"app_slug": "welltest", "tier": "advanced", "scope": "module", "module_key": "m04-gas", "ord": 15,
+   "category": "double-key",
+   "flag": "distractor 2 (three points too few to fit reliably) close to partly valid",
+   "verdict": "fixed",
+   "reason": "'too few points' echoes l05's point that real tests have too few stabilised points, so it could be half-defended; it now claims three points leave the back-pressure fit underdetermined, which l05 contradicts (two parameters, one degree of freedom left over, r squared near 1).",
+   "changes": {"options": {"2": {"old": "Because the three points are too few to determine two parameters plus an exponent reliably in either fit.",
+                                 "new": "Because three points leave the back-pressure fit underdetermined, so its exponent is only loosely fixed by the data."}}}}
+ ]}
