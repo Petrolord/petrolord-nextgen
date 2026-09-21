@@ -14,7 +14,7 @@ For costs, it takes the second. The engine gives the reason: a blank cost is tak
 
 What makes that safe is the second half of the rule. The blank cost is NAMED. The engine returns a list, assumedZero, of every term it took as zero because it was blank. A figure computed on an assumption carries the assumption with it.
 
-The digest prints the Kwale case with two fields left blank:
+The lab prints the Kwale case with two fields left blank:
 
 | asked | netback $/bbl | assumedZero (named by the engine) |
 | --- | --- | --- |

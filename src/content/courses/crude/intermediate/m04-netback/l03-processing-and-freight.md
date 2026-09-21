@@ -6,7 +6,7 @@ After the losses come two costs. They are simple subtractions, and the care is a
 
 ## The last two terms
 
-The netback formula ends with - processing cost - freight, all per barrel of crude. For the Kwale blend the digest prints the whole chain:
+The netback formula ends with - processing cost - freight, all per barrel of crude. For the Kwale blend the lab prints the whole chain:
 
 | term | $/bbl of crude |
 | --- | --- |
@@ -34,7 +34,7 @@ What freight is made of, and the terminal side of moving a cargo, belongs to the
 
 ## Why every term is reported
 
-The digest says that every term is reported beside the total. Laid out as gross 74.2412, loss 0.5939, processing 6.8000 and freight 1.9000, each term of the 64.9473 can be read on its own row. The order of the chain is visible too. Lesson 2 printed what the same terms give when the losses are taken after the costs, 65.0169, and the engine's column beside it.
+The engine's rule is that every term is reported beside the total. Laid out as gross 74.2412, loss 0.5939, processing 6.8000 and freight 1.9000, each term of the 64.9473 can be read on its own row. The order of the chain is visible too. Lesson 2 printed what the same terms give when the losses are taken after the costs, 65.0169, and the engine's column beside it.
 
 ## Complete and nothing assumed
 
