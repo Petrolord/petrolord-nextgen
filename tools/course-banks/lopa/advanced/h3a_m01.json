@@ -88,20 +88,20 @@
   "explanation": "The engine's method, in its own words, is bisection on T1 of the Annex B PFDavg, which is non-decreasing in T1, and it converges to one part in a trillion. Bisection needs only that the function can be evaluated, so no form is inverted for any architecture. A one hour step and a six row sweep would both return a coarse interval, while the engine returns 12957.474301 hours against a target of 0.002."
  },
  {
-  "prompt": "The IDU valves are searched against a target PFDavg of 0.002. What longest interval does the engine return?",
+  "prompt": "Against a target PFDavg of 0.002, for how many hours may the IDU valves go between proof tests?",
   "options": [
-   "6953.661742 hours, which is 0.793797 years, the answer the engine gives against a tighter target",
-   "12957.474301 hours, which is 1.479164 years",
-   "27640.443736 hours, or 3.155302 years",
-   "3609.141022 hours, or 0.412002 years"
+   "6953.661742 hours, which is the answer the engine gives against a tighter target of 0.001",
+   "12957.474301 hours",
+   "27640.443736 hours, which is the answer against a looser target of 0.005",
+   "3609.141022 hours"
   ],
   "answer": 1,
-  "explanation": "The valve row against a target of 0.002 gives 12957.474301 hours, 1.479164 years, with the state FOUND. 6953.661742 hours belongs to a target of 0.001, 27640.443736 hours to 0.005 and 3609.141022 hours to 0.0005, so each wrong figure is the right arithmetic against the wrong target."
+  "explanation": "The valve row against a target of 0.002 gives 12957.474301 hours, 1.479164 years, with the state FOUND. 6953.661742 hours belongs to a target of 0.001, 27640.443736 hours to 0.005 and 3609.141022 hours to 0.0005, so each wrong figure is the right search against the wrong target."
  },
  {
   "prompt": "Every FOUND row of the longest interval table carries a final column giving the PFDavg achieved at the interval returned. What does that column show, and what is it for?",
   "options": [
-   "It shows the target itself, which is how a reader sees by measurement that the search stopped exactly at the crossing and did not stop somewhere near it.",
+   "It shows the target itself, which is how a reader sees by measurement that the search stopped exactly at the crossing.",
    "It shows the PFDavg at half the returned interval, the last value the bisection tried.",
    "It shows the floor this subsystem cannot reach below whatever interval is chosen.",
    "It shows the PFDavg at the lifetime, which bounds the interval from above."
@@ -129,7 +129,7 @@
    "That the subsystem has no undetected failures, so T1 never enters the arithmetic, and it reports 0.000008000000."
   ],
   "answer": 3,
-  "explanation": "With no undetected failures T1 does not enter the arithmetic at all, so the reported 0.000008000000 is what that channel achieves at every interval. The engine returns a figure rather than a null, and it refuses only when the undetected and detected rates are BOTH zero. The floor of 0.014400000000 belongs to the UNACHIEVABLE channel."
+  "explanation": "With no undetected failures T1 does not enter the arithmetic at all, so the reported 0.000008000000 is what that channel achieves at every interval. The engine returns a figure rather than a null, and on the rates it refuses only when the undetected and detected rates are BOTH zero. The floor of 0.014400000000 belongs to the UNACHIEVABLE channel."
  },
  {
   "prompt": "A 1oo1 with an undetected rate of 2e-8 per hour, no detected failures, a coverage of 0.9 and a lifetime of 87600 hours is searched against a target of 0.01. What comes back?",

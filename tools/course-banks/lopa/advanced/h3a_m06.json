@@ -30,7 +30,7 @@
    "It says the target was reached exactly, which the interval column also shows."
   ],
   "answer": 0,
-  "explanation": "FOUND means the PFDavg rises to meet the target at a finite interval, so scheduling alone closes the budget. A state that only reported convergence would be worth nothing, since the engine returns a state on every call. Being inside the lifetime is what CAPPED_AT_LIFETIME reports on, and every FOUND row reaches its target exactly, which is a property of the search and not a reason to record the state."
+  "explanation": "FOUND means the PFDavg rises to meet the target at a finite interval, so scheduling alone closes the budget. A state that only reported convergence would be worth nothing, since the engine returns a state on every call. Being inside the lifetime is what CAPPED_AT_LIFETIME reports on, and every FOUND row reaches its target exactly, which is a property of the search and gives no separate reason to record the state."
  },
  {
   "prompt": "The teaching function is re-verified with every proof test interval stretched to 3.5 years. What does it achieve, and what is the verdict?",
@@ -49,7 +49,7 @@
    "119.303034 and SIL 2, which is what the function reports at a stretch of 3.5 years",
    "146.628422 and SIL 2, which is what the function reports at a stretch of three years",
    "246.170895 and SIL 2, which is what the function reports at a stretch of two years",
-   "99.342388 and SIL 1"
+   "99.342388, in the SIL 1 band"
   ],
   "answer": 3,
   "explanation": "At four years the function achieves 0.010066196546, a risk reduction factor of 99.342388, and SIL 1. 119.303034, 146.628422 and 246.170895 belong to the 3.5 year, three year and two year rows, all of which are still SIL 2."
@@ -63,7 +63,7 @@
    "146.628422, and it still meets the requirement"
   ],
   "answer": 3,
-  "explanation": "The three year row reads a PFDavg of 0.006819960176 and a risk reduction factor of 146.628422, and it still meets the tolerable frequency. 119.303034 and 99.342388 are the 3.5 year and four year rows, both of which miss, and 246.170895 is the two year row."
+  "explanation": "Three years is the last stretch that still meets the tolerable frequency, with a PFDavg of 0.006819960176 and a risk reduction factor of 146.628422. The figures 119.303034 and 99.342388 go with the stretches of 3.5 and four years, where the function misses, and 246.170895 goes with two years."
  },
  {
   "prompt": "Read the band column of that stretch table alone. What would a reader miss?",
@@ -107,7 +107,7 @@
    "The inputs and the outputs of every engine call made, in the order they were made."
   ],
   "answer": 0,
-  "explanation": "The digest lists the shape of the note item by item, and every one of them is there so a reader who disagrees can recompute the answer. A band and a verdict cannot be audited, a pair of figures leaves out the rates and the states, and a log of calls in order is a record of work and not a verification argument."
+  "explanation": "The digest lists the shape of the note item by item, and every one of them is there so a reader who disagrees can recompute the answer. A band and a verdict cannot be audited, a pair of figures leaves out the rates and the states, and a log of calls in order records the work without making the verification argument."
  },
  {
   "prompt": "Why does the note carry the required PFDavg as well as the band it falls in?",

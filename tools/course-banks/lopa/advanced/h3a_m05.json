@@ -77,7 +77,7 @@
   "explanation": "The credit rules are flags applied as given, and the analyst does the auditing against the initiating cause and the other layers. The engine cannot see that an alarm shares a transmitter with the initiating loop unless the analyst says so, so it neither compares devices nor refuses an unaudited row, and it withholds credit only where the flags say to."
  },
  {
-  "prompt": "What is the engine's credit rule, in its own words?",
+  "prompt": "Which sentence does the engine give, verbatim, as the rule for crediting an IPL?",
   "options": [
    "An IPL is credited once, and only when flagged independent === true and also flagged auditable === true, so that a layer with no auditable flag at all goes uncredited.",
    "An IPL is credited once, and only when flagged independent === true and not flagged auditable === false.",
@@ -85,7 +85,7 @@
    "An IPL is credited whenever its typed figure lies above zero and no higher than one, since a valid figure is what credit turns on."
   ],
   "answer": 1,
-  "explanation": "The rule quoted above is the engine's own. A missing auditable flag is not a false one, so a layer with no such flag can still be credited, which is what makes the rule exactly as narrow as it is. Credit is one per IPL whatever it protects, and a valid figure is a range check and not a credit rule."
+  "explanation": "The rule quoted above is the engine's own. A missing auditable flag is not a false one, so a layer with no such flag can still be credited, which is what makes the rule exactly as narrow as it is. Credit is one per IPL whatever it protects, and a valid figure is a range check with no bearing on credit."
  },
  {
   "prompt": "What evidence stands behind the IPL credit rules?",

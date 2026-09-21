@@ -11,18 +11,18 @@
   "explanation": "The digest states that three inputs had to be INFERRED. Stopping at the lifetime and the beta factor leaves out the restoration time after a proof test, which the valve row needs. Stopping at the lifetime alone leaves out two. The reproduction is the reason the inferences were needed at all, so none is not an option."
  },
  {
-  "prompt": "The published valve subsystem is computed with the restoration time after a proof test set equal to the detected restoration time of 120 hours. What comes back, and does it reproduce?",
+  "prompt": "The published valve subsystem is computed with the restoration time after a proof test set equal to its detected restoration time of 120 hours. Does the row reproduce, and what does that settle?",
   "options": [
-   "0.001017167254, which is 1.02E-03 at three significant figures and matches the printed 1.05E-03 once the rounding is allowed for.",
-   "0.001048767640, which is 1.05E-03 at three significant figures and matches the printed 1.05E-03.",
-   "0.000676060358, which is 6.76E-04 and reproduces a printed value in the coverage table.",
-   "0.000473588152, which misses the printed value at the third figure."
+   "It misses the printed 1.05E-03 at the third figure, and only the row with that time set to zero reproduces, so the table used an MRT of zero throughout.",
+   "It reproduces the printed 1.05E-03 to three figures, and setting that time to zero does not, so the table used MRT equal to the MTTR.",
+   "It reproduces, and so does the row with that time set to zero, so the restoration time after a test is too short to matter on this subsystem.",
+   "It misses until the beta factor is raised to 0.15."
   ],
   "answer": 1,
-  "explanation": "With the two restoration times equal the valve row returns 0.001048767640 and reproduces the printed 1.05E-03. 0.001017167254 is the same row with the restoration time after a test set to zero, and it rounds to 1.02E-03, which misses at the third figure. 0.000676060358 and 0.000473588152 both belong to the transmitter coverage row, computed at two different beta factors."
+  "explanation": "With the two restoration times equal the engine returns 0.001048767640, which rounds to the printed 1.05E-03. With the restoration time after a test set to zero it returns 0.001017167254, which rounds to 1.02E-03 and misses at the third figure. That is the first of the three inferences: the published table reproduces only with MRT equal to the MTTR. The beta factor slip belongs to the transmitter coverage row and does not touch the valve."
  },
  {
-  "prompt": "The same valve row is computed with the restoration time after a proof test set to zero. What does the engine return?",
+  "prompt": "Suppose the published valve row meant no restoration time after a test at all. What does the engine return for it then?",
   "options": [
    "0.001048767640, which is what the same row gives with that time at 120 hours",
    "0.000676060358, which is what the transmitter coverage row gives at a beta factor of 0.15",
@@ -57,7 +57,7 @@
  {
   "prompt": "The coverage table's lifetime is not printed. What did the sweep of lifetimes show, and what is the honest label for the result?",
   "options": [
-   "Only a lifetime of ten years reproduces all four printed coverage rows in the sweep, which is strong evidence and not proof, so the golden records the value as INFERRED.",
+   "Only a lifetime of ten years reproduces all four printed coverage rows in the sweep, which is strong evidence short of proof, so the golden records the value as INFERRED.",
    "Every lifetime in the sweep reproduces at least one row, so no lifetime can be preferred.",
    "A lifetime of eight years reproduces all four rows and is recorded as a measured input.",
    "The sweep was inconclusive, so the coverage rows were abandoned as unreproducible."
@@ -85,7 +85,7 @@
    "Four rows exhaust the published table, so nothing is left that could disagree."
   ],
   "answer": 2,
-  "explanation": "A single figure can be hit by accident, which is why one row would prove little; four independent subsystems agreeing at one lifetime and failing elsewhere is what carries the argument. The rows are computed from their own inputs and not from one another, more chances to hit by accident would weaken the case, and the published table carries five subsystems in its main results."
+  "explanation": "A single figure can be hit by accident, which is why one row would prove little; four independent subsystems agreeing at one lifetime and failing elsewhere is what carries the argument. Each row is computed from its own inputs, more chances to hit by accident would weaken the case, and the published table carries five subsystems in its main results."
  },
  {
   "prompt": "Reading the valve row of the coverage sweep across its lifetime columns, at which lifetime does it read 3.78E-03?",
@@ -99,7 +99,7 @@
   "explanation": "3.78E-03 stands in the fifteen year column. The five, eight and twelve year columns of that row read 1.75E-03, 2.31E-03 and 3.13E-03, and the printed 2.71E-03 is reproduced only in the ten year column."
  },
  {
-  "prompt": "The transmitter coverage row prints a beta factor of 10 percent. Computed at that printed value, what does the engine return?",
+  "prompt": "The transmitter coverage row prints a beta factor of 10 percent. Computed with the beta factor and betaD at that printed value, what does the engine return?",
   "options": [
    "0.000676060358, which is 6.76E-04 at three significant figures and reproduces the printed value exactly.",
    "0.000473588152, which is 4.74E-04 at three significant figures against a printed 6.76E-04.",
@@ -107,14 +107,14 @@
    "0.001017167254, which is 1.02E-03 and misses its printed value at the third figure."
   ],
   "answer": 1,
-  "explanation": "At the printed beta factor the engine returns 0.000473588152, which rounds to 4.74E-04 and misses the printed 6.76E-04 by far more than rounding can explain. 0.000676060358 is the same row at a beta factor of 0.15. 0.000344085754 belongs to the transmitters without coverage, and 0.001017167254 to the valve with its restoration time after a test set to zero."
+  "explanation": "At the printed beta factor the engine returns 0.000473588152, which rounds to 4.74E-04 and misses the printed 6.76E-04 by far more than rounding can explain. 0.000676060358 is the same row at a beta factor of 0.15. 0.000344085754 in the raised beta factor table belongs to the transmitters without coverage, and 0.001017167254 to the valve with its restoration time after a test set to zero."
  },
  {
   "prompt": "At what beta factor does that transmitter coverage row reproduce, and with what figure?",
   "options": [
    "At 0.1, the printed value, where the engine returns 0.000473588152 and the printed figure follows once the third figure is rounded the other way.",
    "At 0.02, the beta factor of the other two coverage rows, where the row returns its printed value without any adjustment at all.",
-   "At 0.15, where the engine returns 0.000676060358, which is 6.76E-04 at three significant figures.",
+   "At a beta factor and betaD of 0.15, where the engine returns 0.000676060358, which is 6.76E-04 at three significant figures.",
    "At 0.1, with the lifetime lengthened to fifteen years to make up the difference."
   ],
   "answer": 2,
@@ -135,12 +135,12 @@
   "prompt": "A second published row confirms the beta factor reading. Which row, and what does it return?",
   "options": [
    "The valve subsystem at a beta factor of 0.15, which returns 0.001048767640 and so reproduces the printed 1.05E-03 that the restoration time inference had already accounted for.",
-   "The pressure transmitters without coverage at a beta factor of 0.15, which return 0.000344085754, reproducing their own printed 3.44E-04.",
+   "The pressure transmitter row of the raised beta factor table, which reproduces its printed 3.44E-04 with the beta factor and betaD both at 0.15.",
    "The analogue input card in the raised table, which reproduces at 0.15 and is recorded in the golden.",
    "The summed function, whose total moves to the printed value once the beta factor is raised."
   ],
   "answer": 1,
-  "explanation": "The transmitters without coverage return 0.000344085754 at a beta factor of 0.15 and reproduce their printed 3.44E-04, so two independent rows reproduce at 15 percent and neither reproduces at 10 percent. The valve carries its own beta factor and its own inference. The analogue input card is the row the golden leaves out, and no total is offered as evidence here."
+  "explanation": "The transmitter row of the raised beta factor table returns 0.000344085754 at 0.15 and reproduces its printed 3.44E-04, so two independent rows reproduce at 15 percent, and neither printed figure reproduces at 10 percent. The valve carries its own beta factor and its own inference. The analogue input card is the row the golden leaves out, and no total is offered as evidence here."
  },
  {
   "prompt": "One further row of the raised beta factor table was left out of the golden. Which, and why?",
