@@ -1,0 +1,359 @@
+{
+ "app_slug": "qra",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-a-qra-answers",
+   "title": "What a Quantitative Risk Assessment Answers",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-what-a-qra-answers",
+     "title": "What a quantitative risk assessment answers",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-frequencies-per-year-and-probabilities",
+     "title": "Frequencies per year and probabilities",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-where-the-probability-of-death-comes-from",
+     "title": "Where the probability of death comes from",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-refusals-by-name",
+     "title": "The refusals, each naming its field",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-event-trees",
+   "title": "Event Trees",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-tree-of-branches",
+     "title": "A tree of branches",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-every-branch-set-sums-to-one",
+     "title": "Every branch set sums to one",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-leaf-frequency",
+     "title": "The leaf frequency",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-pooling-leaves-into-outcomes",
+     "title": "Pooling leaves into outcomes",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-tree-that-does-not-close",
+     "title": "A tree that does not close",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-a-flammable-release",
+   "title": "A Flammable Release",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-immediate-and-delayed-ignition",
+     "title": "Immediate and delayed ignition",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-delayed-ignition-is-conditional",
+     "title": "Delayed ignition is conditional",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-flash-fire-and-explosion",
+     "title": "Flash fire and explosion",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-direct-ignition-table",
+     "title": "The direct ignition table",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-forgetting-a-branch",
+     "title": "Forgetting a branch, and what it costs",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-location-specific-individual-risk",
+   "title": "Location-Specific Individual Risk",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-risk-at-a-place",
+     "title": "Individual risk at a place",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-summing-the-contributions",
+     "title": "Summing the contributions",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-outdoors-unprotected-all-the-time",
+     "title": "Outdoors, unprotected, all the time",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-published-contribution-reproduced",
+     "title": "A published contribution, reproduced",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-individual-risk-per-annum",
+   "title": "Individual Risk per Annum",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-one-person-many-places",
+     "title": "One person, many places",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-hours-and-fractions-of-the-year",
+     "title": "Hours and fractions of the year",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-one-place-at-a-time",
+     "title": "One place at a time",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-vulnerability-factor",
+     "title": "The vulnerability factor",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-one-person-end-to-end",
+   "title": "One Person, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-risk-along-a-transect",
+     "title": "Individual risk along a transect",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-contours-on-a-plot-plan",
+     "title": "Contours on a plot plan",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-individual-risk-does-not-say",
+     "title": "What individual risk does not say",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

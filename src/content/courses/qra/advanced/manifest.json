@@ -1,0 +1,362 @@
+{
+ "app_slug": "qra",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-alarp-regions",
+   "title": "The ALARP Regions",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-three-regions",
+     "title": "Three regions",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-workers-and-the-public",
+     "title": "Workers and the public",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-threshold-belongs-to-the-lower-band",
+     "title": "A threshold belongs to the lower band",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-boundary-snap",
+     "title": "The boundary snap",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-published-rates-banded",
+     "title": "Published rates, banded",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-benefit-of-a-measure",
+   "title": "The Benefit of a Measure",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-fatality-prevented-and-its-value",
+     "title": "A fatality prevented, and its value",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-injuries-beside-fatalities",
+     "title": "Injuries beside fatalities",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-published-worked-example",
+     "title": "The published worked example",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-rounded-print-and-its-verdict",
+     "title": "A rounded print and its verdict",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-discounting-and-the-icaf",
+   "title": "Discounting and the ICAF",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-year-end-present-values",
+     "title": "Year-end present values",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-two-hse-conventions",
+     "title": "Two HSE conventions",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-implied-cost-of-averting-a-fatality",
+     "title": "The implied cost of averting a fatality",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-counting-fatalities-undiscounted",
+     "title": "Counting fatalities undiscounted",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-gross-disproportion",
+   "title": "Gross Disproportion",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-disproportion-factor",
+     "title": "The disproportion factor",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-strictly-greater",
+     "title": "Strictly greater",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-largest-reasonable-cost",
+     "title": "The largest reasonably practicable cost",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-sweeping-the-factor",
+     "title": "Sweeping the factor",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-what-the-engine-does-not-know",
+   "title": "What the Engine Does Not Know",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-no-aversion-and-no-slope",
+     "title": "No aversion weighting and no slope",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-repealed-and-dated-values",
+     "title": "Repealed and dated values",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp",
+      "qr-societal"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-transcription-only-factors",
+     "title": "Factors resting on one reading",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qr-societal",
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-consequence-seam",
+     "title": "The consequence seam",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-judgement-end-to-end",
+   "title": "Judgement, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-ordering-measures",
+     "title": "Ordering measures",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-an-alarp-case",
+     "title": "An ALARP case",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp",
+      "qr-event-tree"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-demonstration",
+     "title": "Writing the demonstration",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-when-the-numbers-are-not-enough",
+     "title": "When the numbers are not enough",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "qr-alarp"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
