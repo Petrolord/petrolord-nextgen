@@ -17,7 +17,7 @@ The Crude Assay & Blending Studio answers four questions, and each has its own f
 
 The first question is about products. A barrel of crude is sold to a refinery as a set of cuts: light ends, naphtha, kerosene, diesel, vacuum gasoil and residue. The curve decides how much of each the barrel holds.
 
-The second question is about mixing. Crudes are blended at export terminals so that one cargo meets a buyer's limits on gravity and sulfur. Each property of the mixture has its own rule, and the rule is the heart of this tier.
+The second question is about mixing. The Obigbo library sits at an invented export terminal, and its crudes are blended into one export blend. Each property of the mixture has its own rule, and the rule is the heart of this tier.
 
 The third question is about the tank. Some mixtures of a heavy crude and a light one drop asphaltenes as a sludge, and a screen catches it before commingling.
 
