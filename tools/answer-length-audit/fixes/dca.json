@@ -1,0 +1,25 @@
+{
+ "migration": "20261021b_b4_fix_dca.sql",
+ "title": "dca: one near-duplicate option",
+ "items": [
+  {
+   "app_slug": "dca",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "category": "other",
+   "flag": "two options both open with \"2 percent\", near-duplicate options; make the wrong one clearly distinct",
+   "verdict": "fixed",
+   "reason": "option 2 shared the right figure and differed only in its clause; replaced with a distinct wrong fraction (reading 0.00002 straight off as a percentage)",
+   "changes": {
+    "options": {
+     "2": {
+      "old": "2 percent, wide enough to admit any fit in the Excellent band",
+      "new": "0.02 percent, reading 0.00002 straight off as a percentage"
+     }
+    }
+   }
+  }
+ ]
+}
