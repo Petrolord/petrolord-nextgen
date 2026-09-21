@@ -660,7 +660,7 @@
       "apply_h3_lopa.sh"
     ],
     "pins": {
-      "digest.txt": "908293ea1c908bd83bea80b3732e48b6a551cb6660935c1d6d08f776694f66c7",
+      "digest.txt": "c57c23f3a2597fd957d53470ecc79581727e497f8101016e78db8127389aa77f",
       "fields.json": "c96f1a630822b12a1ca635a4aaef3df981e9878075046272c173cafb45f3483c"
     }
   },
@@ -771,7 +771,7 @@
       "apply_cr_crude.sh"
     ],
     "pins": {
-      "digest.txt": "c22b514520b0dba14ca5f5372f1e343f30911579f795fbed16b4451ce564f7a8",
+      "digest.txt": "805856ee14b6064aa57d7dfc4b340c1fc07d22c25e6d3759dac7d37de89a4122",
       "fields.json": "aa36514e7aaf8017dce9e5436faa56ccd55fcc2508ce8d4e970d507cda9711fc"
     }
   },
@@ -827,7 +827,7 @@
       "apply_rf_refinery.sh"
     ],
     "pins": {
-      "digest.txt": "c66c57d634c4de6953ef40118a9789bec32f17ac4f67b14975c3d966c50bb7f2",
+      "digest.txt": "5742949dc528a3ac432e96dddf43a2d90c775cd8162fd14936e71ea173d0513f",
       "fields.json": "a7eb4fa757dfc7408ccb987b205965f5fc9ad56da67c02d65535e0e6713a2bcd"
     }
   },
@@ -881,7 +881,7 @@
       "apply_tds_supply.sh"
     ],
     "pins": {
-      "digest.txt": "186440d40db46261e26dd39dd7e3b170a67ddb66022a874ad22ee240079257ba",
+      "digest.txt": "f7308937db786edef6202c94487fd34a78974349adbfd2353025f64877ea8b15",
       "fields.json": "e2318d8ea06db86f28ac2496f03a66740ee1fc6664ed56db592ef52ae7a8a971"
     }
   },
@@ -935,7 +935,7 @@
       "apply_gv_gasvalue.sh"
     ],
     "pins": {
-      "digest.txt": "e4ec4f14bd52c5ce2979a0e478cb037cd7f5cea791e1984efaf66c8a3ef3449e",
+      "digest.txt": "121c10880b06ed3b809b470a6e4a33a16360498018e2fda996c52476a3d1b64c",
       "fields.json": "724482add4404f1d6de2c1126efa30c0ddd412742829c1fc70138e1b95c4e7fc"
     }
   },
@@ -991,7 +991,7 @@
       "apply_cef_carbon.sh"
     ],
     "pins": {
-      "digest.txt": "85ff151201e2a641cc7b451092d654f118b041ed5c2087012a1a3426d2c53a8a",
+      "digest.txt": "52e10806f70dd9cbc5587a58ef492e6dca6a7cca1eb604a2f7043049e9444425",
       "fields.json": "da6e741d3873ae8b182356e37fc6e417375dc200d9d4d1eeeaee2e20f17abf18"
     }
   },
@@ -1148,7 +1148,7 @@
       "apply_h5_qra.sh"
     ],
     "pins": {
-      "digest.txt": "d1503e742b48e2aa5db340a11f901230b972300afd6502c3b4951431f1133ab3",
+      "digest.txt": "e55155a458df235bd6184b6f9bd3d6bf93721eda649a898985dd8893ee182941",
       "fields.json": "17cb9d2bebf9b7bff6e5978d8c9e74cfb370f1470ade5286f3390d97817837f9"
     }
   }

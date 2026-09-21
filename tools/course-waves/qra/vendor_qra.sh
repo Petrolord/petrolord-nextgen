@@ -12,6 +12,12 @@
 # when they are already vendored, proved byte for byte) and PROVES the other
 # eight closure paths are vendored at the same blob as 16fd6c9 and the pin.
 #
+# RE-PINNED TO e972ae7 (engines #232, nextgen b3 re-vendor, 2026-09-21). #232
+# changes engines/hse/qra.js (the occupancy refusal names the field typed),
+# the suite and FINDINGS-qra.md, and moves no qra graded value. Run at
+# 16fd6c9 this script would copy the older qra.js back over the vendored one,
+# so REV and PIN follow the canonical pin in VENDOR.json.
+#
 # The engines clone is read-only: the tree is read from a `git archive`
 # export of REV into a throwaway directory, and the blob hashes from the clone.
 #
@@ -22,11 +28,11 @@ set -euo pipefail
 GITDIR=${H5_ENGINES_GIT:-/root/petrolord-engines}
 if [ -n "${H5_ENGINES_SRC:-}" ]; then ENG=$H5_ENGINES_SRC; else
   ENG=$(mktemp -d /tmp/h5eng.XXXXXX); trap 'rm -rf "$ENG"' EXIT
-  git -C "$GITDIR" archive 16fd6c96dcb91f372d2d76b4ecd2c7fa4cbd4b4f | tar -x -C "$ENG"
+  git -C "$GITDIR" archive e972ae755ed8599031e430968b95853a9e163f86 | tar -x -C "$ENG"
 fi
 NG=${H5_NEXTGEN:-/root/wt-h5-nextgen}
-REV=16fd6c96dcb91f372d2d76b4ecd2c7fa4cbd4b4f
-PIN=16fd6c96dcb91f372d2d76b4ecd2c7fa4cbd4b4f
+REV=e972ae755ed8599031e430968b95853a9e163f86
+PIN=e972ae755ed8599031e430968b95853a9e163f86
 COPY="__tests__/hse.qra.test.js engines/hse/qra.js test-data/hse/goldens/qra_cases.json tools/validation/hse/oracle_qra.py tools/validation/hse/FINDINGS-qra.md tools/validation/hse/negcontrol_qra.sh"
 
 cd "$ENG"

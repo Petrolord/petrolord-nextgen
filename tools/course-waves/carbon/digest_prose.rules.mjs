@@ -155,7 +155,6 @@ export default {
     { frag: "The treatment cost is the one usually left out.", src: 'engines/downstream/energyEfficiency.js' },
     { frag: "The two efficiencies are on different bases (", src: 'engines/downstream/energyEfficiency.js' },
     { frag: "The unburned and other loss cannot be negative:", src: 'engines/downstream/energyEfficiency.js' },
-    { frag: "This is a quantitative inventory.", src: 'engines/downstream/carbonAbatement.js' },
     { frag: "This is conservation of mass, so it needs no source document.", src: 'engines/downstream/carbonAbatement.js' },
     { frag: "This is the plant\\'s own energy per tonne of throughput.", src: 'engines/downstream/energyEfficiency.js' },
     { frag: "This set holds one.", src: 'engines/downstream/carbonAbatement.js' },
