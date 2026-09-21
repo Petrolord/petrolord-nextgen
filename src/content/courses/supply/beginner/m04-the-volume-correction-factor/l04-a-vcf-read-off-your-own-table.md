@@ -28,7 +28,7 @@ This is why the course never lines the two up. Nothing ties them to each other, 
 
 ## What typing a VCF changes
 
-A typed VCF is still an input, and every rule about inputs applies. It carries the terminal's table, the density sample and the thermometer with it. If any of those is wrong, the VCF is wrong, and the engine cannot tell. What the engine can do is refuse to run without one, and name the standard volume as none when it is missing, as it did for AK-01 in module one:
+A typed VCF is still an input, and every rule about inputs applies. The engine takes the typed figure as it stands and prints the standard volume it gives. What the engine can do is refuse to run without one, and name the standard volume as none when it is missing, as it did for AK-01 in module one:
 
 gross 3461.489 m3, standard none; note: No volume correction factor supplied, so only the gross observed volume is reported.
 

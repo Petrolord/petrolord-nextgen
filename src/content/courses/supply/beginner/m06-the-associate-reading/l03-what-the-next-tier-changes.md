@@ -12,7 +12,7 @@ At IBAFO, trucks arrive at the loading rack at random and each spends a random t
 
 ## The tank farm
 
-IBAFO has several tanks, each with a heel: product below the outlet that cannot be pumped out. The Professional tier counts pumpable stock tank by tank, each tank's stock above its own heel and never below zero, and turns it into days of cover and turns a year. It is the first time a stock figure is used for planning.
+IBAFO has several tanks, each with a heel. The Professional tier counts pumpable stock tank by tank, each tank's stock above its own heel and never below zero, and turns it into days of cover and turns a year. It is the first time a stock figure is used for planning.
 
 ## Money and carbon
 

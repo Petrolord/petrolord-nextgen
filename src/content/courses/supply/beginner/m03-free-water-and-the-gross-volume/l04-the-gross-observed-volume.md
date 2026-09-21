@@ -26,7 +26,7 @@ Two words in the name carry the meaning.
 
 Gross means free water has come off and nothing else has. The volume still stands at whatever temperature the product was at when it was dipped.
 
-Observed means exactly that: the volume as the tank held it this morning, at this morning's temperature. Liquid fuel expands as it warms. The same mass of petrol takes up more cubic metres on a hot afternoon than on a cool night, so two gross observed volumes taken at different temperatures cannot be added, compared or reconciled against each other on a fair basis. The unit is m3, and it is gross observed m3. It is a different quantity from m3 at standard, which module four introduces.
+Observed means exactly that: the volume as the tank held it this morning, at this morning's temperature. The correction form of module four moves with the observed temperature, so two gross observed volumes taken at different temperatures are not on one basis. The unit is m3, and it is gross observed m3. It is a different quantity from m3 at standard, which module four introduces.
 
 ## Where the engine stops without a VCF
 

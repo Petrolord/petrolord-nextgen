@@ -1,6 +1,6 @@
 # The marginal barrel
 
-Two numbers describe what a barrel of the Apapa cargo costs, and they answer different questions. The unit cost is the average: total cost over total volume. The volume row's price is the margin: what one more barrel of product would add. A trader quoting a cargo extension needs the second.
+Two numbers describe what a barrel of the Apapa cargo costs, and they answer different questions. The unit cost is the average: total cost over total volume. The volume row's price is the margin: what one more barrel of product would add.
 
 ## The volume row's price
 
@@ -31,9 +31,7 @@ The optimizer's default pool is a gasoline cargo of 1000 bbl on the same 50 ppm 
 
 ## What the trader does with it
 
-A buyer who asks for more cargo is asking for marginal barrels. Quoting them at the unit cost would give away 0.1731 $/bbl on every added barrel at Apapa, at least for as long as the vertex holds. And the vertex will not hold forever: the price of the next barrel is a rate at the current optimum, and a large enough extension changes which constraints bind. Lesson five shows how far a whole unit of relief can stray from a rate.
-
-A refinery's stream values are marginal values of the same kind, from the same kernel, and the `refinery` course reads them.
+A buyer who asks for more cargo is asking for marginal barrels. At Apapa the marginal barrel costs 0.1731 $/bbl more than the unit cost, the figure the table prints as marginal minus average, for as long as the vertex holds. The price of the next barrel is a rate read at the current optimum, the Apapa vertex. Lesson five shows how far a whole unit of relief can stray from a rate.
 
 {{panel:crude-recipe-explorer}}
 

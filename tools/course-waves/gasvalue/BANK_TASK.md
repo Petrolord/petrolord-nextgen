@@ -110,8 +110,9 @@ them right the first time:
    derived count. If the only support is a lesson sentence, the question goes.
 2. **Every distractor must be provably false by a printed line.** A distractor
    the digest cannot refute, or one that is defensibly true, makes two answers.
-3. **Signs.** litsweep compares absolute values: a figure with its sign
-   stripped passes it. Quote every number with the sign the digest prints.
+3. **Signs.** Quote every number with the sign the digest prints. (When
+   this was written litsweep compared absolute values, so a figure with its
+   sign stripped passed it; it is sign-aware since 2026-09-21.)
 4. **No throwaway distractors** ("Nowhere.", "Phase one."): the strategy "drop
    the short options, pick the shortest remaining" must stay near chance, as
    must lengthtails' strategies (refused above 40 percent).

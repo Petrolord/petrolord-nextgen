@@ -24,7 +24,7 @@ A list, a count of the ones that hold, and a count of the ones there are. Five a
 
 Each item carries a DETAIL string with its own numbers in it:
 
-    Minimum standoff 60% vs the API 67% target.
+    Minimum standoff 59.92% vs the API 67% target.
     Minimum annular velocity 1.48 m/s (target >= 0.3 m/s for mud removal).
 
 ## On this course's wells

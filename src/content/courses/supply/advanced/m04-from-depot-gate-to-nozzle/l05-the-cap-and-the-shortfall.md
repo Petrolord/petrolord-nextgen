@@ -19,7 +19,7 @@ Against a cap of 1150.0000 naira a litre, the shortfall is -75.1751 and the cap 
 
 ## Reading the second cap
 
-A cap that does not cover the chain means some line in the chain is not being paid in full at that price. The engine does not say which. It prints the shortfall in naira a litre, one figure, and leaves the question of who absorbs it to the reader. Who absorbs a shortfall is settled outside the chain, and nothing that settles it is an input to this engine.
+A positive shortfall means the cap is below the chain's cost. The engine names no line. It prints the shortfall in naira a litre, one figure, and leaves the question of who absorbs it to the reader. No input to this engine says who absorbs it.
 
 What the engine does is make the gap exact and give it a sign. A shortfall of 34.8249 naira a litre is a specific figure, and every row of the waterfall is still on the page beside it, so an argument about closing it can point at particular rows.
 

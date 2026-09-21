@@ -19,7 +19,7 @@ So both discharge lines are levied on 45772.752 m3, and the volume discharged is
 
 Whether a terminal bills its jetty and storage charges on the bill-of-lading quantity or on the outturn is a term of the contract between the importer and the terminal. A contract can state either. The engine does not know which contract a cargo is under.
 
-The engines repository records this as a held finding, H1. The final module of this tier reads it beside the other held finding. A held finding is a limit the engines repository states. It is taught as a limit, and it is never graded, because a graded answer would have to pick one contract term and present it as the rule.
+The engines repository records this as a held finding, H1. The final module of this tier reads it beside the other held finding. A held finding is a limit the engines repository states. It is taught as a limit, and it is never graded.
 
 ## What the limit means for a reader
 

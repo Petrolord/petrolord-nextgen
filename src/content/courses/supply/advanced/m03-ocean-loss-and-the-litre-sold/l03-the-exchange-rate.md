@@ -1,6 +1,6 @@
 # The exchange rate
 
-The BADAGRY cargo is bought in US dollars and sold in naira. Somewhere in the chain the currency changes, and where it changes is a design decision with consequences. The engine converts once, at the end of the landed cost, on the cost of a litre sold.
+The BADAGRY cargo is bought in US dollars and sold in naira. The engine converts once, at the end of the landed cost, on the cost of a litre sold.
 
 {{panel:supply-price-explorer}}
 
@@ -10,7 +10,7 @@ The rule is naira per litre sold = USD per litre sold x 1520.4000. That rate, 15
 
 Everything before that line is in dollars. FOB, freight, insurance, CIF, the course's invented import duty and every other landed line are dollar amounts. The landed total is 26513943.86 USD, and over the outturn it is 0.581870 USD a litre sold. Only then does the exchange rate enter, and the engine reports 884.6753 naira a litre sold.
 
-Converting once keeps the exchange rate as a single, visible input. A build-up that converted line by line would carry the rate into every line. A reader checking the figure would have to confirm the same rate had been used in every one. Here there is one multiplication and one rate to check.
+So the rate enters in one multiplication, on one figure. With no exchange rate the local figure is none, and every dollar figure above it still stands.
 
 ## The precision changes with the currency
 

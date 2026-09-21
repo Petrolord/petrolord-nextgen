@@ -24,7 +24,7 @@ The module does carry densities. `PRODUCT_REFERENCE` lists a typical density and
 | LPG | Liquefied petroleum gas | 545 | 500-580 |
 | HFO | Heavy fuel oil | 960 | 920-1010 |
 
-Nothing in the module reads them unless a caller passes one in, and the certificate of quality is the authority. That is a design choice worth understanding. A table of typical densities is useful for checking that a typed figure is plausible. It is dangerous as a default, because a default fills the gap silently and the learner never sees that the cargo's own figure was missing.
+Nothing in the module reads them unless a caller passes one in, and the certificate of quality is the authority. So the typical figures are labels only. A cargo with no density typed is refused, as the density refusal at the start of this lesson shows.
 
 ## What a wrong density moves
 

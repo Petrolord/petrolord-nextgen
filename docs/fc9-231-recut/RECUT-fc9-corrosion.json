@@ -1,0 +1,235 @@
+{
+ "course": "FC9 Corrosion & Integrity (corrosion)",
+ "slug": "corrosion",
+ "engines": "petrolord-engines 16fd6c9 (#231, own-property preset lookups)",
+ "method": "Every OLD question string below is the row the APPLIED seed migration migrations/20260925_fc9_corrosion_<tier>_deep.sql wrote (applied 2026-09-19); that file was proved to regenerate byte for byte from the committed banks at origin/main d54538463 with gen_seeds.sh. Every NEW string is what the same generator writes from the recut banks on this branch. This branch had no production access, so OLD was NOT compared against a dump of the live rows: the migrations refuse any row matching neither OLD nor NEW, and the owner-run rolled-back dry run in the PR is that comparison.",
+ "tiers": {
+  "beginner": [
+   {
+    "scope": "module",
+    "module_key": "m01-what-this-screen-answers-and-what-it-withdrew",
+    "ord": 3,
+    "fields": [
+     "options"
+    ],
+    "keyed_answer_text_changed": true,
+    "answer_index_old": 0,
+    "answer_index_new": 0,
+    "old": {
+     "prompt": "The digest proves the withdrawn severity region is genuinely gone three separate ways. Which of these is one of them?",
+     "options": [
+      "None of the three material guidance strings and neither standard name appears anywhere in the 783 lines of the engine source.",
+      "The function is still exported, and every call to it now returns an error object that names the standard it is no longer willing to cite.",
+      "The vendored golden carries no row for the region, so a case that asked for one would fail the suite.",
+      "The studio hides the region rows behind a disclosure, so nothing reaches the screen even when the field is populated."
+     ],
+     "explanation": "The three checks are that `sourServiceRegion` is not exported so typeof it is undefined, that neither standard name nor any of the three guidance strings is anywhere in the source, and that no returned string in three whole screenings names either standard."
+    },
+    "new": {
+     "prompt": "The digest proves the withdrawn severity region is genuinely gone three separate ways. Which of these is one of them?",
+     "options": [
+      "None of the three material guidance strings and neither standard name appears anywhere in the engine source.",
+      "The function is still exported, and every call to it now returns an error object that names the standard it is no longer willing to cite.",
+      "The vendored golden carries no row for the region, so a case that asked for one would fail the suite.",
+      "The studio hides the region rows behind a disclosure, so nothing reaches the screen even when the field is populated."
+     ],
+     "explanation": "The three checks are that `sourServiceRegion` is not exported so typeof it is undefined, that neither standard name nor any of the three guidance strings is anywhere in the source, and that no returned string in three whole screenings names either standard."
+    }
+   }
+  ],
+  "intermediate": [],
+  "advanced": [
+   {
+    "scope": "module",
+    "module_key": "m01-what-this-module-holds-back",
+    "ord": 2,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 0,
+    "answer_index_new": 0,
+    "old": {
+     "prompt": "The withdrawn sour-service severity region is not on `HELD_FOR_LITERATURE`, and `NOT_PROVIDED` names it marked withdrawn. Why is it not on the held list?",
+     "options": [
+      "It is not waiting for a source. The claim was withdrawn outright, and the engine also reports that absence through `regionProvided` and `materialGuidanceProvided`.",
+      "It sits on a third exported list of withdrawn features, which the whole screening door returns alongside the other two so that a caller can render all three of them together.",
+      "It is held rather than listed, because the region expression still runs on every screening and only the two standard names were stripped out of the strings it returns.",
+      "It came off both lists when the threshold value was kept, since a module that still prints a screening threshold is still classifying severity at that threshold."
+     ],
+     "explanation": "Both fields are false today and will stay false, so the absence arrives as a field and a caller cannot read it as an unset property. The region function is not exported and neither standard name appears anywhere in the 783 lines of the engine source."
+    },
+    "new": {
+     "prompt": "The withdrawn sour-service severity region is not on `HELD_FOR_LITERATURE`, and `NOT_PROVIDED` names it marked withdrawn. Why is it not on the held list?",
+     "options": [
+      "It is not waiting for a source. The claim was withdrawn outright, and the engine also reports that absence through `regionProvided` and `materialGuidanceProvided`.",
+      "It sits on a third exported list of withdrawn features, which the whole screening door returns alongside the other two so that a caller can render all three of them together.",
+      "It is held rather than listed, because the region expression still runs on every screening and only the two standard names were stripped out of the strings it returns.",
+      "It came off both lists when the threshold value was kept, since a module that still prints a screening threshold is still classifying severity at that threshold."
+     ],
+     "explanation": "Both fields are false today and will stay false, so the absence arrives as a field and a caller cannot read it as an unset property. The region function is not exported and neither standard name appears anywhere in the engine source."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m06-what-this-engine-used-to-do",
+    "ord": 2,
+    "fields": [
+     "explanation"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 3,
+    "answer_index_new": 3,
+    "old": {
+     "prompt": "What did the pre-repair engine serve off that severity region?",
+     "options": [
+      "An inspection interval and a retirement thickness, both taken from the region the stream landed in, which is why neither appears in this module today.",
+      "A rate category band for sour streams, which sat beside the CO2 band and is the reason the category bands are held rather than merely unsourced.",
+      "A wall shear threshold for sour service, set below the 100.000000000000 Pa used elsewhere, which was withdrawn with the region it was derived from.",
+      "Three named material recommendations: what steel to buy, when to control hardness and when to qualify weldments."
+     ],
+     "explanation": "A curve that carries a standard's name and tells an engineer what steel to buy is not a tolerance question. The three strings are gone and none of them appears anywhere in the 783 lines of the engine source."
+    },
+    "new": {
+     "prompt": "What did the pre-repair engine serve off that severity region?",
+     "options": [
+      "An inspection interval and a retirement thickness, both taken from the region the stream landed in, which is why neither appears in this module today.",
+      "A rate category band for sour streams, which sat beside the CO2 band and is the reason the category bands are held rather than merely unsourced.",
+      "A wall shear threshold for sour service, set below the 100.000000000000 Pa used elsewhere, which was withdrawn with the region it was derived from.",
+      "Three named material recommendations: what steel to buy, when to control hardness and when to qualify weldments."
+     ],
+     "explanation": "A curve that carries a standard's name and tells an engineer what steel to buy is not a tolerance question. The three strings are gone and none of them appears anywhere in the engine source."
+    }
+   },
+   {
+    "scope": "module",
+    "module_key": "m06-what-this-engine-used-to-do",
+    "ord": 5,
+    "fields": [
+     "options"
+    ],
+    "keyed_answer_text_changed": true,
+    "answer_index_old": 0,
+    "answer_index_new": 0,
+    "old": {
+     "prompt": "The absence of the severity region is proved three ways. What are they?",
+     "options": [
+      "The region function is not exported so its type is undefined, neither standard name appears in the 783 lines of source, and no returned string in three whole screenings names either standard.",
+      "The region function throws when it is called, the two standard names appear only inside comments, and the studio renders the absence behind the same disclosure as the held list.",
+      "The engine exports two false flags, the golden carries no region row among its 110, and the vendored jest suite asserts that a region request refuses with a message naming the standard.",
+      "The held list omits the region, the not-provided list names it twice, and the pin table has no row for the boundary constants of the region expression."
+     ],
+     "explanation": "Each is a separate check. The two flags are how the engine states the absence, and the three proofs are how the digest established that the function and its strings have actually gone rather than been hidden."
+    },
+    "new": {
+     "prompt": "The absence of the severity region is proved three ways. What are they?",
+     "options": [
+      "The region function is not exported so its type is undefined, neither standard name appears anywhere in the source, and no returned string in three whole screenings names either standard.",
+      "The region function throws when it is called, the two standard names appear only inside comments, and the studio renders the absence behind the same disclosure as the held list.",
+      "The engine exports two false flags, the golden carries no region row among its 110, and the vendored jest suite asserts that a region request refuses with a message naming the standard.",
+      "The held list omits the region, the not-provided list names it twice, and the pin table has no row for the boundary constants of the region expression."
+     ],
+     "explanation": "Each is a separate check. The two flags are how the engine states the absence, and the three proofs are how the digest established that the function and its strings have actually gone rather than been hidden."
+    }
+   },
+   {
+    "scope": "final",
+    "module_key": null,
+    "ord": 8,
+    "fields": [
+     "options"
+    ],
+    "keyed_answer_text_changed": false,
+    "answer_index_old": 1,
+    "answer_index_new": 1,
+    "old": {
+     "prompt": "A reader wants to know whether this engine actually uses the value it exports for a constant. What answers that, and what does not?",
+     "options": [
+      "Reading the export answers it, because an exported name is the value the functions close over and there is no second copy anywhere in a module of 783 lines.",
+      "A measurement of the behaviour answers it. Reading the export answers only what the module declares about itself.",
+      "Comparing the export against the golden's `heldConstants` block answers it, because the golden was generated by running the engine rather than by reading it.",
+      "Neither answers it, which is why the digest prints both columns."
+     ],
+     "explanation": "The two can differ through a second copy inside a function, a branch that never reaches the exported name, or a value transformed on the way in. Nothing in this module currently separates, and that is a result with a size attached."
+    },
+    "new": {
+     "prompt": "A reader wants to know whether this engine actually uses the value it exports for a constant. What answers that, and what does not?",
+     "options": [
+      "Reading the export answers it, because an exported name is the value the functions close over and there is no second copy anywhere in a module that imports nothing.",
+      "A measurement of the behaviour answers it. Reading the export answers only what the module declares about itself.",
+      "Comparing the export against the golden's `heldConstants` block answers it, because the golden was generated by running the engine rather than by reading it.",
+      "Neither answers it, which is why the digest prints both columns."
+     ],
+     "explanation": "The two can differ through a second copy inside a function, a branch that never reaches the exported name, or a value transformed on the way in. Nothing in this module currently separates, and that is a result with a size attached."
+    }
+   },
+   {
+    "scope": "final",
+    "module_key": null,
+    "ord": 38,
+    "fields": [
+     "prompt",
+     "options",
+     "explanation"
+    ],
+    "keyed_answer_text_changed": true,
+    "answer_index_old": 0,
+    "answer_index_new": 0,
+    "old": {
+     "prompt": "A sentence lifted out of an engine source comment arrives with no frame around it. How many of this module's comment lines are written in a past tense about former behaviour?",
+     "options": [
+      "Five, in a module of 783 lines, and none of them carries a repair marker.",
+      "Eleven, one for each held item, and each one carries a repair marker naming the change that removed the behaviour it describes for a reader of the source.",
+      "None, because the repair stripped every past-tense comment out of the module and moved the history into the digest section that carries the frame for it.",
+      "Eight, matching the entries in the not-provided list, and each one records the behaviour that stood where the absence is now declared."
+     ],
+     "explanation": "Roughly one line in 157 of the module carries a past-tense sentence about former behaviour. Engine source comments are provenance, and so are the wave recon and findings reports and the repair record vendored beside the oracle."
+    },
+    "new": {
+     "prompt": "A stream screens above the 0.003500000000 bar H2S threshold. What does this module tell the engineer about the steel for the line?",
+     "options": [
+      "That the stream is sour by the screening comparison and nothing more. Which material qualifies has to come from a sour-service assessment made outside this module.",
+      "That carbon steel is acceptable up to the first region boundary, since the threshold marks the lower edge of the mildest band the engine still classifies against.",
+      "That a corrosion resistant alloy is required, because any stream above the threshold lands in the hardest recommendation the module returns for a sour regime.",
+      "That the choice follows from the H2S to CO2 ratio, since the regime word the engine returns beside the sour flag names the material family to specify."
+     ],
+     "explanation": "The sour flag is a comparison against one held number. The severity region and its three material recommendations were withdrawn, and the engine reports that through `regionProvided` and `materialGuidanceProvided`, both false."
+    }
+   }
+  ]
+ },
+ "lessons": [
+  {
+   "path": "src/content/courses/corrosion/advanced/m06-what-this-engine-used-to-do/l01-an-invented-curve-wearing-authority.md",
+   "old": "None of the three material guidance strings and neither standard name appears anywhere in the 783 lines of the engine source.",
+   "new": "None of the three material guidance strings and neither standard name appears anywhere in the engine source.",
+   "why": "The engine is 785 lines at 16fd6c9. The count was incidental to the proof and is dropped rather than re-pinned, so the next comment-only engine change cannot falsify it again.",
+   "ships": "front-end upload (lessons are not database rows)"
+  }
+ ],
+ "migrations": [
+  {
+   "file": "20260926_fc9_recut_corrosion_beginner.sql",
+   "questions": 1,
+   "field_edits": 1
+  },
+  {
+   "file": "20260926_fc9_recut_corrosion_advanced.sql",
+   "questions": 5,
+   "field_edits": 7
+  }
+ ],
+ "graded_fields": {
+  "fields.json": "byte-identical at 16fd6c9 (18 fields, make_fields.mjs regenerated against the vendored engine on this branch)",
+  "precision.json": "byte-identical",
+  "capstones": "no capstone row is touched by either recut migration"
+ },
+ "digest": {
+  "lines_moved": [
+   "# ENGINE line: 783 -> 785 lines, provenance 5cbdca5 -> 16fd6c9",
+   "section 2 absence proof: 783 -> 785 lines",
+   "history section: 5 -> 6 past-tense comment lines, one line in 157 -> 131, 783 -> 785"
+  ],
+  "everything_else": "byte-identical"
+ }
+}

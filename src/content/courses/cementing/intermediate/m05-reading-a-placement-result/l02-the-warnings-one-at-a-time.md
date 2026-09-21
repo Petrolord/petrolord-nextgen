@@ -31,7 +31,7 @@ Raised when the float differential is negative.
 
 ## Five, the shoe above
 
-    ECD at the previous shoe peaks at 1712 kg/m3, above the fracture EMW 1700 kg/m3.
+    ECD at the previous shoe peaks at 1712.1 kg/m3, above the fracture EMW 1700 kg/m3.
 
 Only raised if a fracture equivalent mud weight was supplied. No limit, no warning, and the peak is still reported.
 

@@ -55,7 +55,7 @@ The neat programme is worse by about 55 kg/m3 on the slant well and 62 on the ho
 
 A leak-off or formation integrity test at that shoe, expressed as an equivalent mud weight. This engine takes it as an optional input and warns:
 
-    ECD at the previous shoe peaks at 1658 kg/m3, above the fracture EMW 1600 kg/m3.
+    ECD at the previous shoe peaks at 1657.7 kg/m3, above the fracture EMW 1600 kg/m3.
 
 If no limit is supplied, no warning is issued, and the peak is reported anyway for the reader to compare.
 

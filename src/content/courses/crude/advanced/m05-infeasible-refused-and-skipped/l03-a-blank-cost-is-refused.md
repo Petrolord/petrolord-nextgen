@@ -14,7 +14,7 @@ The engine names the component and gives the two ways forward: remove it, or giv
 
 The cost column is the objective. Every component's volume is multiplied by its cost, and the kernel minimises the sum. A component with no cost has no coefficient in the objective, and there is no honest number to put there.
 
-Consider the two numbers a program might quietly substitute. A cost of zero would make Isomerate free, and a least-cost recipe would take as much of it as the specifications and its 1500 bbl tank allow, for a reason that has nothing to do with its value. A very large cost would keep it out of every recipe, again for a reason nobody stated. Either way the recipe would look optimal and be an answer to a question the user did not ask.
+The engine puts no number of its own in that place, neither zero nor a large figure.
 
 So the engine does neither. It refuses, and says why in the words above. This is the same stance the whole course takes toward missing data: a blank is not a zero, and the engine does not guess.
 
@@ -33,7 +33,7 @@ The optimizer checks the question before it builds any rows. Two more refusals c
 | no components | REFUSED: No components to blend. |
 | a target volume of 0 | REFUSED: The target volume must be greater than zero. |
 
-A recipe with no components has no variables. A target of zero is no cargo at all. Each is a malformed question, and the engine refuses it by name. A refusal is not a status. The kernel's three statuses, optimal, infeasible and unbounded, describe a problem that was posed. A refusal says the problem was not posed well enough to hand to the kernel.
+A recipe with no components has no variables. A target of zero is no cargo at all. Each is a malformed question, and the engine refuses it by name. Each refusal carries the status invalid and no recipe, and the engine gives it before the problem reaches the kernel. The kernel's three statuses, optimal, infeasible and unbounded, describe a problem that reached it.
 
 ## Reading a refusal
 

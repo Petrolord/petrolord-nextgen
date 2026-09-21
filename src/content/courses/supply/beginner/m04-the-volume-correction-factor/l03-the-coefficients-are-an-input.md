@@ -12,7 +12,7 @@ It names what is missing, says where it lives, says the engine does not ship it,
 
 ## Why there is no default
 
-The form of the last lesson is fixed. The coefficients are not. They are a published table per commodity group, so the row that fits a petrol is not the row that fits a diesel or a kerosene. The engine ships none of that table and has no default.
+The form of the last lesson is fixed. The coefficients are not. They are a published table per commodity group, and the caller supplies the row for its own product. The engine ships none of that table and has no default.
 
 A default row would be a coefficient that nobody typed. With no default, every VCF the form returns rests on three coefficients the caller supplied, and without them the form returns no VCF at all, only the refusal above. The synthetic row shows the same form moving with density: at 31.5 C it reads 0.975246 at 700 kg/m3 and 0.983832 at 900 kg/m3, so the row and the density both reach the figure that multiplies the stock.
 

@@ -6,11 +6,11 @@ Ekene's two allocation rows sum to 0.90 and 0.85. That is not sloppiness and it 
 
 The engine checks three things and grades them differently.
 
-**A row summing above one is an ERROR.** You have allocated more water than the injector produced. There is no physical reading of that; it is arithmetic that cannot be true. The validation fails and reports the offending sum, for example "Ekene-2: allocation fractions sum to 1.200 (> 1)."
+**A row summing above one is an ERROR.** You have allocated more water than the injector produced. There is no physical reading of that; it is arithmetic that cannot be true. The validation fails and reports the offending sum, for example "Ekene-2: allocation fractions sum to 1.200000 (> 1)."
 
 **A negative or non-numeric fraction is an ERROR.** A negative allocation would mean an injector removing water from a producer's support. The message names the specific cell: "Ekene-2 to Ekene-1: fraction -0.1 is not a number >= 0."
 
-**A row summing below one is a WARNING.** It reports the shortfall by name: "Ekene-2: fractions sum to 0.900; the remaining 0.100 counts as out-of-zone." The analysis proceeds. The shortfall is booked, not rejected.
+**A row summing below one is a WARNING.** It reports the shortfall by name: "Ekene-2: fractions sum to 0.900000; the remaining 0.100000 counts as out-of-zone." The analysis proceeds. The shortfall is booked, not rejected.
 
 ## Why below one is not an error
 

@@ -30,7 +30,7 @@ The first is that the numerator is pumpable stock. The engine uses the tank-by-t
 
 The second is that the whole farm is one pool. IBAFO holds petrol, gas oil and kerosene. The farm's days of cover divides all three together by all liftings together. A depot that runs short of petrol while it still holds plenty of gas oil has run out of cover for petrol, and the farm figure will not show it. The engine's farm figure is a farm figure. A product's cover needs that product's tanks and that product's liftings.
 
-The third is that the rate holds. A depot's liftings vary by day of the week and by season, and a cover quoted against an average day will be wrong on a busy one.
+The third is that the rate holds. Days of cover divides the pumpable stock by one daily throughput, and the engine is told nothing about any other day's liftings.
 
 ## Why the numerator is where errors hide
 

@@ -1,6 +1,6 @@
 # Capacity, heel and working capacity
 
-A depot's rack loads trucks from its tanks, and a tank's nameplate capacity is the first figure anyone quotes about it. It is also the figure that overstates what the tank can do. Every tank keeps a volume in the bottom that the pumps cannot draw, and the engine takes that volume off before it counts anything a depot can sell.
+A depot's rack loads trucks from its tanks, and a tank's nameplate capacity is the first figure anyone quotes about it. The engine does not count stock against it alone. Each tank carries a heel, and the engine takes the heel off the capacity to give working capacity and off the stock to give pumpable stock.
 
 {{panel:supply-depot-explorer}}
 

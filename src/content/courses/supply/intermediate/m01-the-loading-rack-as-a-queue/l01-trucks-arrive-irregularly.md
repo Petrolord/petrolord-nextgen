@@ -16,11 +16,11 @@ IBAFO is an inland depot invented for this course. Its rack is described by thre
 | mean load minutes | 24 |
 | bays | 4 |
 
-At that arrival rate the engine counts 216 trucks a day. The day count is a mean rate multiplied out. It says nothing about how those trucks bunch, and bunching is what builds a queue: in one hour the trucks come evenly spaced, in another several arrive together and the last of them finds every bay busy.
+At that arrival rate the engine counts 216 trucks a day. The day count is a mean rate multiplied out. It says nothing about how those trucks are spaced. The model takes them as arriving at random about the mean rate, and every queue figure the engine prints comes from that random pattern.
 
 ## Why randomness is the honest assumption
 
-A random arrival pattern is the least you can assume about drivers you do not dispatch. If a depot runs a strict booking system, its gate is more regular than the model supposes, and you should say so beside any figure you quote. Either way the model is stated, and a stated model can be checked against a week of gate logs.
+Random arrivals are the model's stated assumption, and every figure quoted from it carries that assumption. If your depot's arrivals follow some other pattern, say so beside any figure you quote. The model is stated, so a reader can check it.
 
 The load time is random for the same reason. A mean of 24 minutes describes a typical load, and the model lets individual loads run shorter and longer around it.
 

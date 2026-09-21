@@ -41,6 +41,20 @@ is a real wrong method with its real number:
 9. **undiscounted fatalities.** The EDIKAN ICAF at the checklist limits is
    8026550.41; dividing by discounted fatalities gives 9350246.71.
 
+## EVERY KEY RESTS ON A LINE THE DIGEST PRINTS
+
+Added 2026-09-21 for every wave that copies this file. The Commercial & Trading
+and Energy Transition key-truth audits (2026-09-19) found **12 to 22 keys per
+tier resting on a lesson sentence rather than on a digest line**, and replaced
+every one. The KEY of every question must be provable from a line `digest.txt`
+PRINTS: never a lesson sentence the digest does not print (a gloss, a
+rationale, a definition, an "In practice" aside, course routing), never a
+reading the digest does not draw, never learner arithmetic or a derived count.
+If the only support for a key is a lesson sentence, the question goes. Every
+distractor must be provably false by a printed line. Quote every number with
+the sign the digest prints: `litsweep.py` is sign-aware since 2026-09-21. Hand
+back, per question, the digest line its key rests on.
+
 ## THE CAPSTONES ARE NOT YOURS
 
 The three capstone facilities live in `h5_capstone.mjs` and NOTHING ABOUT THEM IS

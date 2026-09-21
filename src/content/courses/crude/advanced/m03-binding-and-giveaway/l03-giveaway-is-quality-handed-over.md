@@ -10,7 +10,7 @@ Giveaway is how far inside its limit the blend sits. The engine computes it by t
 - for a minimum, the achieved value minus the limit;
 - for a range, the smaller of the two.
 
-Positive giveaway is quality handed over for nothing. The buyer asked for a RON of at least 91 and pays for a cargo that meets 91. Every octane number above that is delivered and not charged for.
+Positive giveaway is quality handed over for nothing. The template asks for a RON of at least 91, and every octane number above that is giveaway.
 
 ## The Apapa giveaway
 
@@ -28,7 +28,7 @@ RON has a giveaway of 3.5010 and MON of 3.4928, each the achieved value minus it
 
 It can look like waste. If the cargo only needs 91 RON, why does the cheapest recipe deliver more? The answer is in the rows that bind. The recipe is pressed against sulfur and RVP, and those rows, with the batch and Butane's tank limit, hold it at its vertex. The RON row does not: module four reads its value of one unit of relief as 0.0000, so lowering the RON minimum saves nothing. The octane above 91 arrives with the barrels the binding rows call for, and among them is Reformate, which carries a RON of 98.6.
 
-So a planner who wants to cut the octane giveaway looks first at sulfur and RVP, because those are the rows holding the recipe where it is.
+So the rows holding the recipe where it is are sulfur and RVP, and the RON row is not among them.
 
 ## Giveaway and binding are two views of one table
 

@@ -1,6 +1,6 @@
 # A typed zero is none
 
-The availability column is where costly typing mistakes are made, because three different entries look alike on a screen and mean three different things to the kernel. The engine's rule is short. A maximum left blank is no limit. A typed number is exactly that number, and a typed 0 is none.
+In the availability column three different entries mean three different things to the kernel. The engine's rule is short. A maximum left blank is no limit. A typed number is exactly that number, and a typed 0 is none.
 
 ## Three butane tanks
 
@@ -24,7 +24,7 @@ Each row is a different problem with a different answer.
 
 A blank and a zero must not be confused, in either direction.
 
-If a blank were read as zero, every component whose availability nobody filled in would vanish from the recipe, and the optimizer would report a costlier cargo, or an infeasible one, for a reason nobody typed. If a typed zero were read as blank, a tank that is genuinely empty would be treated as bottomless, and the recipe would call for barrels that do not exist. Both mistakes produce a confident, optimal-looking answer. Neither would show as an error.
+The rule keeps the three apart. A blank adds no limit, a typed number is that limit, and a typed 0 allows no barrels of the component at all.
 
 So the engine takes each entry literally. A number means that number. Zero is a number. Blank means the user did not state a limit, and the engine does not invent one.
 

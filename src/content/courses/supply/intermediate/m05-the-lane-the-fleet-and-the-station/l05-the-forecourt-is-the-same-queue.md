@@ -60,9 +60,9 @@ At 4 and 5 nozzles the forecourt cannot keep up with its peak, and the engine pr
 
 ## What is different about a forecourt
 
-The model is the same and the stakes are different. A truck at a rack waits because its load is booked. A driver at a forecourt who sees a queue may drive to the next station, which is the lost trade the waiting model does not count.
+The model is the same at both ends of the lane. A car that finds every nozzle busy waits, as a truck at the rack does, and the model counts no car that leaves.
 
-The peak share matters as much as the daily throughput. The forecourt is sized for the peak hour's 135.00 transactions, and the peak share is an input the station supplies from its own till records. A forecourt sized on the daily average would be sized for a quiet hour, and its queue figures would describe a station that exists only in the middle of the afternoon.
+The peak share matters as much as the daily throughput. The forecourt is sized for the peak hour's 135.00 transactions, and the peak share, 0.12 at IBAFO, is an input the station supplies. The engine sizes the forecourt on the peak hour's transactions and prints no queue figure for any other hour.
 
 ## What the engine refuses
 
