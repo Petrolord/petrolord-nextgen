@@ -8,7 +8,7 @@
    "A consequence category for the scenario."
   ],
   "answer": 2,
-  "explanation": "Section 1 says the engine turns a loss of containment into physical effects and computes effects and never frequencies. It carries no failure data, so it cannot say how often anything happens. It therefore has no frequency to multiply by an effect, and nothing in its exports assigns a category to a scenario; how often a release occurs belongs elsewhere."
+  "explanation": "The course says the engine turns a loss of containment into physical effects and computes effects and never frequencies. It carries no failure data, so it cannot say how often anything happens. It therefore has no frequency to multiply by an effect, and nothing in its exports assigns a category to a scenario; how often a release occurs belongs elsewhere."
  },
  {
   "prompt": "Every function in the engine ends one of two ways. What are they?",
@@ -19,7 +19,7 @@
    "A result object for a valid call, or a partly filled result object in which the fields computed before the offending input are kept and the rest are left empty."
   ],
   "answer": 0,
-  "explanation": "Section 1 states it: every function returns either a result object carrying a `basis` block (the model, its source and its units) or an object with `error` and `field`, where `field` names the offending input. The engine substitutes no default and fills in no partial result. A bare number without its basis never comes back, and every refusal names its field."
+  "explanation": "The course states it: every function returns either a result object carrying a `basis` block (the model, its source and its units) or an object with `error` and `field`, where `field` names the offending input. The engine substitutes no default and fills in no partial result. A bare number without its basis never comes back, and every refusal names its field."
  },
  {
   "prompt": "An argument is named `windSpeed10mMS`. What does its name tell the analyst to type?",
@@ -30,7 +30,7 @@
    "A wind speed in metres per second, taken at 10 m."
   ],
   "answer": 3,
-  "explanation": "Section 2 tables the suffixes: MS is metres per second, and the 10m form is the wind at 10 m. It is not the wind at the release height. The 10m part names a height and has nothing to do with a time average, and a mass rate carries the suffix KgS, as in `massRateKgS`."
+  "explanation": "The course lists the suffixes: MS is metres per second, and the 10m form is the wind at 10 m. It is not the wind at the release height. The 10m part names a height and has nothing to do with a time average, and a mass rate carries the suffix KgS, as in `massRateKgS`."
  },
  {
   "prompt": "Methane is typed as 0.01604 in one call and carbon monoxide as 28.01 in another. Why are both correct?",
@@ -41,7 +41,7 @@
    "Both are in kg/mol, and the engine carries two different ideal gas constants, one for the source terms and one for the concentrations, so either scale works."
   ],
   "answer": 1,
-  "explanation": "Section 2 says two molar mass units coexist: the source terms take kg/mol (methane is 0.01604, stated) and the concentration functions take g/mol (carbon monoxide is 28.01, stated), and `molarMassKgMol` and `molarMassGMol` say which. The engine never converts a unit it was not asked to, so it does not rescale a figure. Methane at 0.01604 g/mol would be absurd, and the engine exports one gas constant, `R_J_MOL_K`, 8.314462618."
+  "explanation": "The course says two molar mass units coexist: the source terms take kg/mol (methane is 0.01604, stated) and the concentration functions take g/mol (carbon monoxide is 28.01, stated), and `molarMassKgMol` and `molarMassGMol` say which. The engine never converts a unit it was not asked to, so it does not rescale a figure. Methane at 0.01604 g/mol would be absurd, and the engine exports one gas constant, `R_J_MOL_K`, 8.314462618."
  },
  {
   "prompt": "A vessel gauge reads its pressure above the atmosphere, and the analyst types that gauge figure into `upstreamPressurePa`. What has gone wrong?",
@@ -52,7 +52,7 @@
    "The driving pressure is overstated by one atmosphere, 101325 Pa, so the mass rate the engine returns comes out too high."
   ],
   "answer": 1,
-  "explanation": "Section 2: pressures are absolute, ambient is `ATM_PA`, 101325 Pa, and a gauge pressure typed where an absolute one is due understates the driving pressure by one atmosphere. The engine never converts a unit it was not asked to, so it adds nothing. No suffix separates gauge from absolute, so there is no refusal. The error runs low: typing the smaller gauge figure understates the pressure."
+  "explanation": "The course explains: pressures are absolute, ambient is `ATM_PA`, 101325 Pa, and a gauge pressure typed where an absolute one is due understates the driving pressure by one atmosphere. The engine never converts a unit it was not asked to, so it adds nothing. No suffix separates gauge from absolute, so there is no refusal. The error runs low: typing the smaller gauge figure understates the pressure."
  },
  {
   "prompt": "A liquid outflow call is given a discharge coefficient above one. What comes back?",
@@ -63,7 +63,7 @@
    "A refusal naming `dischargeCoefficient`, in the engine's words: \"dischargeCoefficient: must lie in (0, 1]: the YB recommends 0.62 for a sharp orifice\""
   ],
   "answer": 3,
-  "explanation": "Section 3 tables this refusal: the field named is `dischargeCoefficient`, and that string is the engine's own. A refusal carries no number, so there is no clipped rate, no substituted 0.62 and no rate at the typed value. The coefficient must lie in (0, 1], and the message names the Yellow Book's 0.62 as its recommendation without applying it."
+  "explanation": "The course lists this refusal: the field named is `dischargeCoefficient`, and that string is the engine's own. A refusal carries no number, so there is no clipped rate, no substituted 0.62 and no rate at the typed value. The coefficient must lie in (0, 1], and the message names the Yellow Book's 0.62 as its recommendation without applying it."
  },
  {
   "prompt": "A tank has its ullage below ambient and no liquid above the hole. Which field does the engine name, and in what words?",
@@ -74,7 +74,7 @@
    "`holeDiameterM`: no hole is open"
   ],
   "answer": 0,
-  "explanation": "Section 3 gives the row for an ullage below ambient and no head: the field is `pressureAboveLiquidPa`, and the quoted string is the engine's message. A head of zero is itself allowed (the head must be 0 m or more), so `liquidHeadM` is not the field named. The `upstreamPressurePa` message belongs to the gas outflow function, and the hole is not what is wrong."
+  "explanation": "The course gives the row for an ullage below ambient and no head: the field is `pressureAboveLiquidPa`, and the quoted string is the engine's message. A head of zero is itself allowed (the head must be 0 m or more), so `liquidHeadM` is not the field named. The `upstreamPressurePa` message belongs to the gas outflow function, and the hole is not what is wrong."
  },
  {
   "prompt": "A spill is passed to `poolFromSpill` with no bund area and no thickness. Why does the engine refuse it?",
@@ -96,7 +96,7 @@
    "\"windSpeedMS: must be above 0 m/s: the Gaussian plume divides by the wind speed and has no calm-air form\""
   ],
   "answer": 3,
-  "explanation": "Section 3 quotes the engine's own message for this call, naming `windSpeedMS`. A refusal carries no number, so there is neither an infinite concentration nor a substituted class F result, and the Briggs table holds sigma coefficients and no winds. The plume has no calm-air form at all, which is exactly what the message says."
+  "explanation": "The course quotes the engine's own message for this call, naming `windSpeedMS`. A refusal carries no number, so there is neither an infinite concentration nor a substituted class F result, and the Briggs table holds sigma coefficients and no winds. The plume has no calm-air form at all, which is exactly what the message says."
  },
  {
   "prompt": "`briggsRuralSigmas` is asked for class G. What comes back, and which classes does it name?",
@@ -107,7 +107,7 @@
    "A refusal on `stabilityClass` naming A to D."
   ],
   "answer": 0,
-  "explanation": "Section 3 gives the message \"stabilityClass: must be a Pasquill-Gifford class, one of A, B, C, D, E, F\", and `STABILITY_CLASSES` in section 1 exports exactly those six. The engine does not fall back on class F or on the neutral class D, because a refusal carries no number. E and F are in the table, so a list stopping at D is wrong."
+  "explanation": "The course gives the message \"stabilityClass: must be a Pasquill-Gifford class, one of A, B, C, D, E, F\", and the exported `STABILITY_CLASSES` lists exactly those six. The engine does not fall back on class F or on the neutral class D, because a refusal carries no number. E and F are in the table, so a list stopping at D is wrong."
  },
  {
   "prompt": "Which of the engine's six sources fixes the Briggs rural sigma coefficients and the continuous Gaussian plume with ground reflection?",
@@ -118,7 +118,7 @@
    "CCOHS, the source of the molar volume."
   ],
   "answer": 2,
-  "explanation": "Section 4 says ALOHA fixes the continuous Gaussian plume with ground reflection and the Briggs rural sigma coefficients. The Yellow Book fixes the outflow, the pool diameter and the evaporation. The Purple Book supplies a worked carbon monoxide plume, which serves as a published check on the plume; CCOHS fixes only ppm and mg/m3 through a molar volume."
+  "explanation": "The course says ALOHA fixes the continuous Gaussian plume with ground reflection and the Briggs rural sigma coefficients. The Yellow Book fixes the outflow, the pool diameter and the evaporation. The Purple Book supplies a worked carbon monoxide plume, which serves as a published check on the plume; CCOHS fixes only ppm and mg/m3 through a molar volume."
  },
  {
   "prompt": "The engine names CCOHS as the source for one conversion. What does that source fix?",
@@ -129,7 +129,7 @@
    "The ideal gas constant 8.314462618, which the engine defines itself."
   ],
   "answer": 1,
-  "explanation": "Section 4 prints the CCOHS string, \"Converting occupational exposure limits from mg/m3 to ppm (24.45 L/mol at 25 C, 760 torr)\", and says it fixes ppm and mg/m3 through a molar volume. The engine carries no table of molar masses: the molar mass is a stated input. The Briggs coefficients come from ALOHA, and `R_J_MOL_K` is an engine constant that no source row claims."
+  "explanation": "The course shows the CCOHS string, \"Converting occupational exposure limits from mg/m3 to ppm (24.45 L/mol at 25 C, 760 torr)\", and says it fixes ppm and mg/m3 through a molar volume. The engine carries no table of molar masses: the molar mass is a stated input. The Briggs coefficients come from ALOHA, and `R_J_MOL_K` is an engine constant that no source row claims."
  },
  {
   "prompt": "The Gaussian plume at 500 m in class D reports a source string in its basis. What is the point of that string?",
@@ -140,7 +140,7 @@
    "It lists every source the engine knows."
   ],
   "answer": 0,
-  "explanation": "Section 4 says every basis block names the source it used, so a result carries its own citation, and quotes this one: \"NOAA TM NOS OR&R 43, ALOHA Technical Documentation (2013) section 4.3; sigmas Briggs rural (ALOHA Table 13)\". The basis is part of the returned result and is what a note quotes. It names the source of the method and says nothing of a check at 500 m. It names the one source used, and the full list is `CONSEQUENCE_SOURCES`."
+  "explanation": "The course says every basis block names the source it used, so a result carries its own citation, and quotes this one: \"NOAA TM NOS OR&R 43, ALOHA Technical Documentation (2013) section 4.3; sigmas Briggs rural (ALOHA Table 13)\". The basis is part of the returned result and is what a note quotes. It names the source of the method and says nothing of a check at 500 m. It names the one source used, and the full list is `CONSEQUENCE_SOURCES`."
  },
  {
   "prompt": "One word in this course is always qualified and never written bare, and it is qualified four ways. Which list gives the four qualified names?",
@@ -151,10 +151,10 @@
    "Heat flux, burning flux, evaporation flux and mass flux."
   ],
   "answer": 3,
-  "explanation": "Section 34 names them: a heat flux in W/m2, a burning flux in kg/(m2 s), an evaporation flux and a mass flux all appear in this one course, and each is always qualified. A mass rate or an evaporation rate is kilograms per second and is not a quantity per square metre. The release through a hole is a mass rate, `massRateKgS`. A view factor is a fraction with no unit."
+  "explanation": "The course names them: a heat flux in W/m2, a burning flux in kg/(m2 s), an evaporation flux and a mass flux all appear in this one course, and each is always qualified. A mass rate or an evaporation rate is kilograms per second and is not a quantity per square metre. The release through a hole is a mass rate, `massRateKgS`. A view factor is a fraction with no unit."
  },
  {
-  "prompt": "The digest tables how many refusals, across how many functions?",
+  "prompt": "The course lists how many refusals, across how many functions?",
   "options": [
    "24 refusals across 37 functions, one refusal for every function the engine exports and more functions than refusals.",
    "6 refusals, one for each of the Pasquill-Gifford classes, across the dispersion section alone.",
@@ -162,6 +162,6 @@
    "37 refusals, all of them in the source terms."
   ],
   "answer": 2,
-  "explanation": "Section 3 closes its table with \"37 refusals are tabled above, across 24 functions\". Reversing the two counts is wrong, and the refusals span every one of the engine's five sections. The six Pasquill-Gifford classes are what one refusal message lists and are no count of refusals."
+  "explanation": "The course closes its table with \"37 refusals are tabled above, across 24 functions\". Reversing the two counts is wrong, and the refusals span every one of the engine's five sections. The six Pasquill-Gifford classes are what one refusal message lists and are no count of refusals."
  }
 ]

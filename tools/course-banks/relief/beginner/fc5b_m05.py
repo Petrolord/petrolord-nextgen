@@ -20,7 +20,7 @@ q(2, "Which letters does the published ladder skip between D and T?",
  ["I, O and U.",
   "I, S and V.",
   "O, S and X."],
- "Read the exported table top to bottom: D, E, F, G, H, J, K, L, M, N, P, Q, R and T. Fourteen letters are printed across a span of seventeen, and the three absent ones are what is left. Why the published table leaves them out is not something the engine or the digest says."),
+ "Read the exported table top to bottom: D, E, F, G, H, J, K, L, M, N, P, Q, R and T. Fourteen letters are printed across a span of seventeen, and the three absent ones are what is left. Why the published table leaves them out is not something the engine or the course says."),
 
 q(0, "State the selection rule this engine applies.",
  "Return the smallest listed orifice whose area is at or above the required area.",

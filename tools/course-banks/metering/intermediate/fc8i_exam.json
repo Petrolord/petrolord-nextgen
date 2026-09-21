@@ -110,7 +110,7 @@
   "explanation": "A row can carry a cavitation word with the flag still false, which means the valve is being damaged while the sizing equation is still working normally."
  },
  {
-  "prompt": "What pressures does the digest state for the flashing case?",
+  "prompt": "What pressures does the course state for the flashing case?",
   "options": [
    "An outlet pressure of 28.740000 psia against a vapour pressure of 26.740000 psia.",
    "An outlet pressure of 20.000000 psia against a vapour pressure of 28.740000 psia.",
@@ -213,7 +213,7 @@
   "options": [
    "They are cited to the sizing standard the coefficients are defined in.",
    "They are cited to the vendor catalogues the styles were averaged from.",
-   "They are cited in the module's own source comments, which the digest quotes.",
+   "They are cited in the module's own source comments, which the course quotes.",
    "They are not cited to a document in this repository."
   ],
   "answer": 3,
@@ -360,7 +360,7 @@
    "None of them, since the stream power moved all three."
   ],
   "answer": 2,
-  "explanation": "Its ratio band and its final band both read high, so nothing was moved on it and the digest prints no reason to look further."
+  "explanation": "Its ratio band and its final band both read high, so nothing was moved on it and the course prints no reason to look further."
  },
  {
   "prompt": "Whose are the two sets of thresholds the screen reads against?",

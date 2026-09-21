@@ -42,12 +42,12 @@ q(0, "The traverse spends 25.660631 psi over 26400.000000 ft in three segments a
   "That the single call is internally marching the same three segments, which is why the two agree exactly and why only one of them needs to be run."],
  "A liquid is incompressible, so the density, the velocity, the Reynolds number and the friction factor do not change along the pipe. Splitting it changes nothing the arithmetic depends on.")
 
-q(2, "The digest prints the difference between the marched and single-call totals as 0.000000 psi rather than as a small number. Why is an exact zero worth more than a small residual?",
+q(2, "The course prints the difference between the marched and single-call totals as 0.000000 psi rather than as a small number. Why is an exact zero worth more than a small residual?",
  "A small residual would need explaining, and the explanation would be either a segmentation effect or an arithmetic one with no way to tell them apart from the total alone.",
  ["A small residual would breach the six-decimal convention the liquid half of this course prints at, and a figure that cannot be printed at its stated precision cannot be checked against a golden.",
   "A small residual would mean the traverse had dropped a boundary between two of its three segments, which is the one defect a total can diagnose on its own.",
   "A small residual would place the answer outside the tolerance the published cases are checked at, so the comparison could not be used as a check on the segment loop."],
- "An exact agreement between two differently assembled paths is a test the digest performs rather than asserts. A mishandled accumulation or a dropped boundary would show as a difference.")
+ "An exact agreement between two differently assembled paths is a test the course performs rather than asserts. A mishandled accumulation or a dropped boundary would show as a difference.")
 
 q(1, "What would have to be present for a marched total to differ from a single call over the same length?",
  "Something that makes a segment's answer depend on which segment it is, such as a changing density, a changing bore or a changing duty at an offtake.",

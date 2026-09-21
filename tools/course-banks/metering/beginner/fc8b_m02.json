@@ -55,7 +55,7 @@
   "explanation": "Nothing was read from the source and nothing was typed. A threshold found by bisecting a returned flag stays true when the engine is rebuilt and turns false loudly if the engine changes."
  },
  {
-  "prompt": "What is the only statement the digest licenses about the size of the small bore step in the coefficient?",
+  "prompt": "What is the only statement the course licenses about the size of the small bore step in the coefficient?",
   "options": [
    "That the step is small enough at every beta and every Reynolds number to be left out of an ordinary flow calculation without any consequence for the answer.",
    "That the correction raises the coefficient, since an extra term in the equation can only add to it.",

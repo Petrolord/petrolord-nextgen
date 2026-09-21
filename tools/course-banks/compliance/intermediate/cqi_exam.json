@@ -129,7 +129,7 @@
    "null, since an edge day belongs to no band."
   ],
   "answer": 0,
-  "explanation": "The digest's edge rows print 30 days in 0 to 30 days and 31 days in 31 to 60 days."
+  "explanation": "The course's edge rows print 30 days in 0 to 30 days and 31 days in 31 to 60 days."
  },
  {
   "prompt": "NCR-2026-011 was raised on 2026-05-11 and voided on 2026-05-13. What is its age?",
@@ -327,7 +327,7 @@
    "REFUSED: This non-conformance is already closed."
   ],
   "answer": 3,
-  "explanation": "The digest prints the same refusal for NCR-2026-006, also Closed, and \"This non-conformance is already voided.\" for NCR-2026-011."
+  "explanation": "The course prints the same refusal for NCR-2026-006, also Closed, and \"This non-conformance is already voided.\" for NCR-2026-011."
  },
  {
   "prompt": "TWO MODULES. What two rules about the lead auditor does this tier read?",
@@ -415,7 +415,7 @@
    "63, the figure for 5 of 8."
   ],
   "answer": 1,
-  "explanation": "Half up on the exact fraction gives 58 here, and that is the line the digest carries."
+  "explanation": "Half up on the exact fraction gives 58 here, and that is the line the course carries."
  },
  {
   "prompt": "At the as-of date canCloseNcr allows NCR-2026-019, a Critical NCR. Which record meets the last requirement of the Critical walk?",

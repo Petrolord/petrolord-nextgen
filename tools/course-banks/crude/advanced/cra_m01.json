@@ -8,7 +8,7 @@
    "it throws, as the rows contradict each other"
   ],
   "answer": 2,
-  "explanation": "Infeasible and unbounded are answers, and the digest prints this problem's status as infeasible. The kernel throws only on a malformed problem."
+  "explanation": "Infeasible and unbounded are answers, and the course prints this problem's status as infeasible. The kernel throws only on a malformed problem."
  },
  {
   "prompt": "In the kernel's own terms, what is the 400 bbl of Butane the Apapa terminal holds?",

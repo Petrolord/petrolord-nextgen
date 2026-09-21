@@ -5,10 +5,10 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # FC2 Expert m05, What the Method Does Not Know. Digest section 17.
 
-q(2, "The digest lists five things this course teaches as limits and never as answers, while the lessons speak of four held items. How do those two counts fit together?",
+q(2, "The course's held list names five things this course teaches as limits and never as answers, while the lessons speak of four held items. How do those two counts fit together?",
  "Four of the five are a figure or a law nobody in this package has read a source for, and the fifth is the provenance of the published cases rather than a figure at all.",
  ["The fifth is the multiphase half, which is absent rather than held, so the lessons drop it from the list of held items and count the remaining four.",
-  "The fifth is the transitional band, which the engine bounds at a Reynolds number of 2100 and 4000, and a bounded item is counted as held by the digest and as closed by the lessons.",
+  "The fifth is the transitional band, which the engine bounds at a Reynolds number of 2100 and 4000, and a bounded item is counted as held by the list and as closed by the lessons.",
   "The fifth is the efficiency multiplier, which the lessons fold into the fully rough friction law Weymouth assumes, because neither of the two is a property of any pipe that anybody entered."],
  "The four are the API RP 14E c factors, the efficiency multiplier, the band between the branches and the friction law Weymouth assumes. The fifth entry records that every published case in this course is synthetic.")
 
@@ -36,9 +36,9 @@ q(3, "The band from a Reynolds number of 2100 to one of 4000 is held for the lit
 q(0, "The fully rough friction law Weymouth assumes is on the held list even though this course measured it. Why does measuring it not take it off the list?",
  "The measurement extracts the law out of the engine and nothing in the package sources the law itself, so what survives is the qualitative statement rather than a figure to grade.",
  ["The measurement was made on four bores only, so the law is held until the remaining published bores have been swept and the implied friction factor confirmed on each of them.",
-  "The measurement depends on the General Flow friction factor, which the digest records as failing to settle on these four bores, so the implied figures inherit an open question.",
+  "The measurement depends on the General Flow friction factor, which the course records as failing to settle on these four bores, so the implied figures inherit an open question.",
   "The measurement is stated at ten decimals where the goldens work to four, so the figures cannot be compared against an independent implementation and stay unchecked for that reason."],
- "Section 15 measures it by asking General Flow what friction factor would make it agree. What the four rows establish on their own is that Weymouth's friction depends on the diameter.")
+ "The course measures it by asking General Flow what friction factor would make it agree. What the four rows establish on their own is that Weymouth's friction depends on the diameter.")
 
 q(2, "What keeps a held item from quietly carrying a graded answer in this course?",
  "Every value that touches one states its own assumption alongside, so every graded erosional figure states its c factor and every graded gas figure states its efficiency.",
@@ -100,7 +100,7 @@ q(0, "Why is an absence harder for a reader to notice than a held item?",
  "A held item announces itself in writing, and an absence has no field to attach a warning to, so a two-phase line returns a velocity, a Reynolds number, a friction factor and a pressure drop that are all arithmetically correct for a single-phase fluid.",
  ["An absence is refused by the engine in the ordinary way, so a reader sees only an error string and has no figure in front of them to question.",
   "A held item is graded and an absence is not, so a reader meets the held item in the capstone and never meets the absence at all.",
-  "An absence is recorded in the digest under a different heading from the held items, and a reader working from the lessons alone never reaches that part of the digest."],
+  "An absence is recorded in an appendix under a different heading from the held items, and a reader working from the lessons alone never reaches that appendix at all."],
  "The engine cannot detect it, because a mixture density is a perfectly ordinary number. Nothing in the answer says the single-phase result is the wrong model rather than an imprecise one.")
 
 q(3, "A report states that the golden suite for this engine is green and describes that as validation of the line sizing method. What has been overstated?",

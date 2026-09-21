@@ -41,7 +41,7 @@
    "A reason and a second verifier."
   ],
   "answer": 2,
-  "explanation": "The refusal for this request is \"Record the date this was decided and who decided it.\" and the refusal for a waiver with no reason is the waiver sentence. Only with all three does the digest print ALLOWED."
+  "explanation": "The refusal for this request is \"Record the date this was decided and who decided it.\" and the refusal for a waiver with no reason is the waiver sentence. Only with all three does the course print ALLOWED."
  },
  {
   "prompt": "Does canDecideCheckpoint allow a hold point to be waived?",
@@ -52,7 +52,7 @@
    "Only after it has first Failed."
   ],
   "answer": 2,
-  "explanation": "H-08 waived with a date, a verifier and a reason is ALLOWED. The digest states that canDecideCheckpoint has no rule that forbids waiving a hold point, and a waived hold point with its record and reason is resolved like any waived point."
+  "explanation": "H-08 waived with a date, a verifier and a reason is ALLOWED. The course states that canDecideCheckpoint has no rule that forbids waiving a hold point, and a waived hold point with its record and reason is resolved like any waived point."
  },
  {
   "prompt": "H-11, the pre-commissioning release, is to be set Not applicable. In what order does canDecideCheckpoint ask for what it needs?",
@@ -74,7 +74,7 @@
    "ALLOWED, with nothing asked of it."
   ],
   "answer": 3,
-  "explanation": "A surveillance point stops nothing, and the digest prints ALLOWED for S-10 with nothing recorded: no date, no name and no reason. Not applicable is one of the three statuses in CHECKPOINT_RESOLVED_STATUSES. The same request on H-11, a hold point, is refused until a date, a name and a reason are on the record."
+  "explanation": "A surveillance point stops nothing, and the course prints ALLOWED for S-10 with nothing recorded: no date, no name and no reason. Not applicable is one of the three statuses in CHECKPOINT_RESOLVED_STATUSES. The same request on H-11, a hold point, is refused until a date, a name and a reason are on the record."
  },
  {
   "prompt": "Which of these points is inside planProgress's resolved 6 at the as-of date?",
@@ -99,7 +99,7 @@
   "explanation": "A failure does not finish a point. H-05 is not in the resolved list, it is the failed 1, and it is one of the outstanding six with H-08, W-09, S-10, H-11 and R-12."
  },
  {
-  "prompt": "SECTION 11 prints four cases of how a planProgress percent rounds. Which pairing is one of them?",
+  "prompt": "The course prints four cases of how a planProgress percent rounds. Which pairing is one of them?",
   "options": [
    "5 of 8 prints 58.",
    "1 of 8 prints 63.",

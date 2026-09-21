@@ -29,7 +29,7 @@ q(3, "On that same 120.000000 psi system the valve is given 70.000000 psi. What 
  ["0.708333",
   "0.833333",
   "0.458333"],
- "Seven valve drops are run against one total in the digest, and this rung is the fifth of them.")
+ "Seven valve drops are run against one total in the course, and this rung is the fifth of them.")
 
 q(1, "Why does a valve with a small share of the system drop make a loop hard to tune?",
  "Opening it hands most of the newly released pressure straight to the pipework, so the flow barely moves and the gain changes enormously across the range.",

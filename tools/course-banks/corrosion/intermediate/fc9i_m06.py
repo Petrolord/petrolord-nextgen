@@ -16,7 +16,7 @@ q(1, "Why does the H2S to CO2 ratio need no pressure at all?",
   "Because the mole fractions are normalised to one bar before the division."],
  "A partial pressure is the total pressure multiplied by a mole fraction, so dividing one by the other leaves the ratio of the two mole fractions at any pressure whatsoever. Two mole percentages out of a gas analysis are enough to form it.")
 
-q(3, "The digest forms the H2S to CO2 ratio two ways at five pressures and prints the difference. What is the difference column?",
+q(3, "The course forms the H2S to CO2 ratio two ways at five pressures and prints the difference. What is the difference column?",
  "Zero at every pressure.",
  ["Zero below the fugacity cap and non-zero above it.",
   "Small and falling as the pressure rises towards the cap.",

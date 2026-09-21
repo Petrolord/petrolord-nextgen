@@ -89,7 +89,7 @@ q(3, "Raising the Apapa sulfur maximum to 51 ppm prints a saving of 551.6796 $, 
   "Four-place rounding of the re-solved totals opens the gap."],
  "A shadow price is the value of relief at the margin, a derivative at the optimum; the saving from one whole unit of relief is a different number, and the re-solve table prints both savings beside the price of 551.8026 $ per ppm.")
 
-q(2, "The RVP shadow price at Apapa is 4448.9659 $ per psi. Where does the digest read what relieving the maximum by one whole psi saves?",
+q(2, "The RVP shadow price at Apapa is 4448.9659 $ per psi. Where does the course read what relieving the maximum by one whole psi saves?",
  "From the re-solve at an RVP limit of 10, which prints 3651.3942 $.",
  ["From the shadow price, since it holds for any move of the RVP maximum, however large.",
   "From the average of the two re-solves, taken as the value of a psi.",

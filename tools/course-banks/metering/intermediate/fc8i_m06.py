@@ -51,7 +51,7 @@ q(2, "Equal percentage trim at a rangeability of 50 puts the normal duty at 74.7
   "0.000000"],
  "The duty has not changed. The flow, the pressure drop, the fluid and the required coefficient are all the same on both, and only the shape of the relationship between travel and coefficient has changed.")
 
-q(3, "The digest sets those two travels against each other. What ratio does it print, the first over the second?",
+q(3, "The course sets those two travels against each other. What ratio does it print, the first over the second?",
  "2.007880",
  ["1.021201",
   "1.074452",

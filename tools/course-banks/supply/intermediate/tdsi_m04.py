@@ -77,7 +77,7 @@ q(1, "What is the 850 kg CO2e a tonne factor used in the IBAFO carbon ledger?",
  ["The engine's shipped default for petrol.",
   "A published factor for petrol, quoted here for the arithmetic.",
   "The PRODUCT_REFERENCE value the engine reads when none is typed."],
- "The engine ships no emission factor. The digest labels 850 kg CO2e a tonne SYNTHETIC, invented for this course and not a published figure. It exists only to show the arithmetic.")
+ "The engine ships no emission factor. The course labels 850 kg CO2e a tonne SYNTHETIC, invented for this course and not a published figure. It exists only to show the arithmetic.")
 
 q(0, "With the synthetic 850 kg CO2e a tonne factor, IBAFO prints 1.481061 kg CO2e per tonne of throughput. What is that figure?",
  "The emissions spread over the period's throughput weighed in tonnes.",

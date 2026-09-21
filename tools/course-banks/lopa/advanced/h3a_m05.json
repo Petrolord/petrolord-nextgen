@@ -19,7 +19,7 @@
    "The analyst raises it only when the engine returns a warning about the architecture."
   ],
   "answer": 1,
-  "explanation": "The digest states the action plainly: check the architecture against the standard separately, because a PFDavg that meets the target does not by itself satisfy the architectural constraint. The engine returns no band, no warning and no output of any kind about the constraint, so nothing in its answer can settle it, and redundancy alone is not the test the standard applies."
+  "explanation": "The course states the action plainly: check the architecture against the standard separately, because a PFDavg that meets the target does not by itself satisfy the architectural constraint. The engine returns no band, no warning and no output of any kind about the constraint, so nothing in its answer can settle it, and redundancy alone is not the test the standard applies."
  },
  {
   "prompt": "What does the engine do about high demand or continuous mode?",
@@ -41,7 +41,7 @@
    "Uses a PFH method, because a low demand PFDavg is the wrong quantity there."
   ],
   "answer": 3,
-  "explanation": "The digest's row says the analyst uses a PFH method when the demand rate is high, and that a low demand PFDavg is the wrong quantity there. A wrong quantity is not repaired by shortening an interval, by a caveat beside it or by scaling the target, because the average probability is no longer what characterises the function."
+  "explanation": "The course's row says the analyst uses a PFH method when the demand rate is high, and that a low demand PFDavg is the wrong quantity there. A wrong quantity is not repaired by shortening an interval, by a caveat beside it or by scaling the target, because the average probability is no longer what characterises the function."
  },
  {
   "prompt": "What failure rate data does the engine carry?",
@@ -63,7 +63,7 @@
    "Every one is derived by the engine from the scenario description supplied with the row."
   ],
   "answer": 2,
-  "explanation": "The digest's row reads that every one is an input and the analyst justifies each against the organisation's criteria. The engine invents no number and derives none of these, it checks only the ranges its own refusals police, and a missing term is refused rather than worked around."
+  "explanation": "The course's row reads that every one is an input and the analyst justifies each against the organisation's criteria. The engine invents no number and derives none of these, it checks only the ranges its own refusals police, and a missing term is refused rather than worked around."
  },
  {
   "prompt": "The engine forms no judgement about whether a layer is truly independent. What does it do, and what is left to the analyst?",
@@ -151,7 +151,7 @@
    "A value inside the snap of a decade, which it treats as ambiguous."
   ],
   "answer": 2,
-  "explanation": "The digest says `decadeOf` refuses nothing and returns null in all four of those cases. A value inside the snap is exactly the case it DOES answer, by returning the power of ten. Nothing is named as an offending input, because there is no error object here at all."
+  "explanation": "The engine's `decadeOf` refuses nothing and returns null in all four of those cases. A value inside the snap is exactly the case it DOES answer, by returning the power of ten. Nothing is named as an offending input, because there is no error object here at all."
  },
  {
   "prompt": "The engine invents no number. Which inputs does that statement cover?",

@@ -29,7 +29,7 @@ q(2,
  ["As a point at the flame centre that radiates a fraction of the heat release",
   "As a cone of flame whose emissive power rises steadily from base to tip",
   "As a flat disc over the pool that radiates straight upward and sideways"],
- "Section 14 opens with it: the solid flame model treats a pool fire as a cylinder of flame with a uniform surface emissive power, then multiplies by a view factor and a transmissivity. Treating the flame as a radiating point belongs to the facilities engines and is another course's model. No cone or disc geometry appears in the engine.")
+ "The course opens with it: the solid flame model treats a pool fire as a cylinder of flame with a uniform surface emissive power, then multiplies by a view factor and a transmissivity. Treating the flame as a radiating point belongs to the facilities engines and is another course's model. No cone or disc geometry appears in the engine.")
 
 q(3,
  "Reading the Babrauskas sweep at a diameter of 10 m, which columns still sit below their asymptotes at six decimals?",
@@ -45,13 +45,13 @@ q(3,
  ["Any mixture, provided its heat of combustion is stated",
   "A liquid that is already boiling at the ambient temperature",
   "A cryogenic liquid, since Burgess was written for lng and lpg"],
- "Section 14 describes Burgess, m\" = 0.001 dHc / (dHv + Cp (Tb - Ta)), as for a single-component liquid below its boiling point. A boiling liquid is exactly what the boilingPointK refusal turns away, and the form carries a single boiling point, which a mixture does not have.")
+ "The course describes Burgess, m\" = 0.001 dHc / (dHv + Cp (Tb - Ta)), as for a single-component liquid below its boiling point. A boiling liquid is exactly what the boilingPointK refusal turns away, and the form carries a single boiling point, which a mixture does not have.")
 
 q(1,
  "poolBurningRate is asked for a fuel key that POOL_FIRE_FUELS does not contain and no constants are given. Which field does the refusal name?",
  "fuel",
  ["method","boilingPointK","kBetaPerM"],
- "Section 3 tables it as the field fuel, with a message listing the thirteen keys and the alternative of giving massBurningFluxInfKgM2S and kBetaPerM. method is named for an unknown method string, boilingPointK for a Burgess liquid that boils below ambient, and kBetaPerM is one of the two constants the message invites, never the field refused.")
+ "The course lists it as the field fuel, with a message listing the thirteen keys and the alternative of giving massBurningFluxInfKgM2S and kBetaPerM. method is named for an unknown method string, boilingPointK for a Burgess liquid that boils below ambient, and kBetaPerM is one of the two constants the message invites, never the field refused.")
 
 q(0,
  "Two fuels in Table 6.5 share a k beta product of 2.7 per m. Which pair?",
@@ -143,7 +143,7 @@ q(3,
  "When SEPact = SEPmax (1 - soot) + SEPsoot soot is called without a soot emissive power, which SEPsoot does the engine use?",
  "20e3 W/m2",
  ["140e3 W/m2","0.8 of SEPmax","52025.691247 W/m2"],
- "Section 17 gives the soot emissive power a default of 20e3 W/m2, while the soot fraction itself is the caller's. 140e3 W/m2 is the leading term of Mudan's diameter form. 0.8 is the soot fraction the Yellow Book quotes for oil products. 52025.691247 W/m2 is ERHA's SEPact, the result of the form.")
+ "The course gives the soot emissive power a default of 20e3 W/m2, while the soot fraction itself is the caller's. 140e3 W/m2 is the leading term of Mudan's diameter form. 0.8 is the soot fraction the Yellow Book quotes for oil products. 52025.691247 W/m2 is ERHA's SEPact, the result of the form.")
 
 q(1,
  "Doubling the ERHA wind from 4 to 8 m/s doubles Re. What value appears at 8 m/s?",
@@ -217,7 +217,7 @@ q(0,
  ["When the target heat flux is never reached anywhere, even right at the flame",
   "When no fixed transmissivity was supplied for the search to run on at all",
   "When the tilted flame reaches over the nearest target"],
- "Section 20: a target still exceeded at the search limit returns BEYOND_SEARCH_RANGE, and one never reached even at the flame returns NOT_REACHED with the largest heat flux found. A missing transmissivity is a refusal naming transmissivity, and the overhang is a view factor refusal.")
+ "The course explains: a target still exceeded at the search limit returns BEYOND_SEARCH_RANGE, and one never reached even at the flame returns NOT_REACHED with the largest heat flux found. A missing transmissivity is a refusal naming transmissivity, and the overhang is a view factor refusal.")
 
 q(1,
  "Bisection hunts for 5000 W/m2 on ERHA. Measured from the rim of the pool rather than its middle, where is it found?",
@@ -231,7 +231,7 @@ q(3,
  ["The facilities setback has been withdrawn, so the solid flame model now replaces it in every course across the whole academy",
   "The two models give identical heat fluxes at every distance, so the course simply prefers the newer and more detailed of the two",
   "The facilities setback is graded in this course too, side by side with the solid flame heat flux at each target distance"],
- "Section 22 says the facilities pool fire setback states it does not provide the solid flame model, which this course adds and grades alone. The point source model and setbacks stay with the Facilities courses on relief and flare systems and on layout, nothing is withdrawn, and this course never grades a setback.")
+ "The course says the facilities pool fire setback states it does not provide the solid flame model, which this course adds and grades alone. The point source model and setbacks stay with the Facilities courses on relief and flare systems and on layout, nothing is withdrawn, and this course never grades a setback.")
 
 q(3,
  "Beyond the Yellow Book's advice, what goes wrong with the Bagster fit at very small pw x?",
@@ -239,10 +239,10 @@ q(3,
  ["Below about 2.5e3 N/m it would return a negative transmissivity",
   "Below 1e4 N/m it returns exactly 2.02, the fit's own constant",
   "Below 1e4 N/m the humidity term drops out and tau becomes 0.8"],
- "Section 19 notes that below about 2.5e3 N/m the fit tau = 2.02 (pw x)^-0.09 would exceed one, a transmissivity no air can have. It never turns negative, never collapses to its constant and never falls back to 0.8, which is only the transmissivity stated for the ERHA chain.")
+ "The course notes that below about 2.5e3 N/m the fit tau = 2.02 (pw x)^-0.09 would exceed one, a transmissivity no air can have. It never turns negative, never collapses to its constant and never falls back to 0.8, which is only the transmissivity stated for the ERHA chain.")
 
 q(2,
- "At 1500 Pa, what product pw x in N/m does section 19 derive for a 60 m path?",
+ "At 1500 Pa, what product pw x in N/m does the course derive for a 60 m path?",
  "90000.000000",
  ["45000.000000","105000.000000","15000.000000"],
  "1500 Pa times 60 m is 90000.000000 N/m, inside the band, giving 0.723552. 45000.000000 is the 30 m path and 15000.000000 the 10 m path. 105000.000000 is the 70 m path, above 1e5 N/m and refused with pathLengthM.")
@@ -283,7 +283,7 @@ q(0,
  "What does Mudan's diameter form give the Yellow Book benzene pool, in W/m2, against a printed 21000?",
  "20736.395957",
  ["21000","20987.569646","30886.154395"],
- "The engine gives 20736.395957 W/m2, a relative difference of 1.26e-2, inside the 0.02 the golden allows for this step. 21000 is the printed figure. 20987.569646 and 30886.154395 are Mudan at 40 m and 20 m in section 17.")
+ "The engine gives 20736.395957 W/m2, a relative difference of 1.26e-2, inside the 0.02 the golden allows for this step. 21000 is the printed figure. 20987.569646 and 30886.154395 are Mudan at 40 m and 20 m in the course's table.")
 
 q(1,
  "solidFlameHeatFlux is handed a view factor of 1.2. What does the engine reply?",
@@ -291,7 +291,7 @@ q(1,
  ["A heat flux computed with the view factor quietly capped at one",
   "A refusal naming tiltDeg, since the flame must overhang",
   "A heat flux of 1.2 times the product of SEP and tau"],
- "Section 3 tables it: a view factor above one is refused with \"viewFactor: must lie in [0, 1]\". The engine returns a result or a refusal and never caps an input quietly. tiltDeg belongs to the view factor function, and multiplying by an impossible view factor is exactly what the refusal prevents.")
+ "The course lists it: a view factor above one is refused with \"viewFactor: must lie in [0, 1]\". The engine returns a result or a refusal and never caps an input quietly. tiltDeg belongs to the view factor function, and multiplying by an impossible view factor is exactly what the refusal prevents.")
 
 emit(Q, '/root/hse-wip-consequence/banks/h4i_exam.json', expect_n=42)
 finish()

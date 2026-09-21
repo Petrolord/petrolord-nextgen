@@ -1,0 +1,410 @@
+{
+ "app_slug": "refinery",
+ "rows": 30,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/refinery, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-a-feasibility-screen-computes",
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "Some exports read the machine clock when an argument is left out. Which pairing of function and missing argument does the digest print?",
+     "new": "Some exports read the machine clock when an argument is left out. Which pairing of function and missing argument does the course print?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-a-feasibility-screen-computes",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "The digest counts each module's exports. Which count belongs to modularRefinery?",
+     "new": "The course counts each module's exports. Which count belongs to modularRefinery?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-a-feasibility-screen-computes",
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "The digest's case line says all three records are invented and every price and cost in it is illustrative, in US dollars. None is a market quotation for any date, and a crude grade name is a label on invented yields and prices.",
+     "new": "The course's case line says all three records are invented and every price and cost in it is illustrative, in US dollars. None is a market quotation for any date, and a crude grade name is a label on invented yields and prices."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-capital-and-the-scaling-law",
+   "ord": 8,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints: capital per bpd falls at every step as capacity rises, modular true, stick-built true; total capital rises at every step, modular true, stick-built true. The plant costs more and each bpd of it costs less.",
+     "new": "The course prints: capital per bpd falls at every step as capacity rises, modular true, stick-built true; total capital rises at every step, modular true, stick-built true. The plant costs more and each bpd of it costs less."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "fields": {
+    "prompt": {
+     "old": "What margin difference does the digest print between the configuration as typed and the one where distillation is no longer feedless?",
+     "new": "What margin difference does the course print between the configuration as typed and the one where distillation is no longer feedless?"
+    },
+    "explanation": {
+     "old": "The fed configuration prints a margin of 9614225.81 against 7077935.48, and the digest prints the difference as 2536290.33. The crude unit runs 0.00 bbl and charges 0.00 for distillation.",
+     "new": "The fed configuration prints a margin of 9614225.81 against 7077935.48, and the course prints the difference as 2536290.33. The crude unit runs 0.00 bbl and charges 0.00 for distillation."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the crude unit utilisation in that configuration as 0.00 percent, with the unit running 0.00 bbl. A null utilisation belongs to a unit whose capacity is blank or typed as 0.",
+     "new": "The course prints the crude unit utilisation in that configuration as 0.00 percent, with the unit running 0.00 bbl. A null utilisation belongs to a unit whose capacity is blank or typed as 0."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 18,
+   "fields": {
+    "prompt": {
+     "old": "Which status does each of the five changes in the digest's change table return?",
+     "new": "Which status does each of the five changes in the course's change table return?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 20,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints Fuel oil 700000.00 under the floors, and the fuel oil floor is met exactly: true. 633129.03 bbl is Fuel oil's volume as typed and 1000000.00 bbl its ceiling.",
+     "new": "The course prints Fuel oil 700000.00 under the floors, and the fuel oil floor is met exactly: true. 633129.03 bbl is Fuel oil's volume as typed and 1000000.00 bbl its ceiling."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "fields": {
+    "prompt": {
+     "old": "In the digest's gasoil working, which yield divides the break-even?",
+     "new": "In the course's gasoil working, which yield divides the break-even?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 25,
+   "fields": {
+    "prompt": {
+     "old": "What margin does the digest print with the reformer's capacity at 400000.00 bbl?",
+     "new": "What margin does the course print with the reformer's capacity at 400000.00 bbl?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "fields": {
+    "prompt": {
+     "old": "At a cargo size of 150000 bbl, what is the last Forcados receipt date the digest prints?",
+     "new": "At a cargo size of 150000 bbl, what is the last Forcados receipt date the course prints?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-the-crude-unit-carries-every-barrel",
+   "ord": 7,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the fed configuration's margin, 9614225.81, against 7077935.48 for the configuration as typed. 9614225.81 is also the fed configuration with that unit's capacity typed as 0, and 7173508.35 and 6847760.00 are the hydrotreater left blank and the crude unit at 1900000 barrels.",
+     "new": "The course prints the fed configuration's margin, 9614225.81, against 7077935.48 for the configuration as typed. 9614225.81 is also the fed configuration with that unit's capacity typed as 0, and 7173508.35 and 6847760.00 are the hydrotreater left blank and the crude unit at 1900000 barrels."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-reading-the-plan",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "The digest's definition is margin = product revenue - crude cost - unit operating cost. Fixed costs, capital, tax and financing are not terms in it.",
+     "new": "The course's definition is margin = product revenue - crude cost - unit operating cost. Fixed costs, capital, tax and financing are not terms in it."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-what-another-barrel-is-worth",
+   "ord": 4,
+   "fields": {
+    "prompt": {
+     "old": "The plan values naphtha at 91.4500. Which working does the digest print for that figure?",
+     "new": "The plan values naphtha at 91.4500. Which working does the course print for that figure?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-what-another-barrel-is-worth",
+   "ord": 5,
+   "fields": {
+    "prompt": {
+     "old": "The Diesel hydrotreater is at capacity. Through which crude does the digest's working value gasoil at 94.1016?",
+     "new": "The Diesel hydrotreater is at capacity. Through which crude does the course's working value gasoil at 94.1016?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-what-another-barrel-is-worth",
+   "ord": 6,
+   "fields": {
+    "options": {
+     "old": [
+      "The reformer's operating cost of 2.9000 a barrel is taken off each barrel of room.",
+      "The step is the first one the digest prints, so it carries no change in margin.",
+      "Gasoline reaches its ceiling inside that step and holds the reformer back.",
+      "The reformer fills partway through the step and reads 97.07 percent at 420000.00 bbl."
+     ],
+     "new": [
+      "The reformer's operating cost of 2.9000 a barrel is taken off each barrel of room.",
+      "The step is the first one the course prints, so it carries no change in margin.",
+      "Gasoline reaches its ceiling inside that step and holds the reformer back.",
+      "The reformer fills partway through the step and reads 97.07 percent at 420000.00 bbl."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-what-another-barrel-is-worth",
+   "ord": 13,
+   "fields": {
+    "prompt": {
+     "old": "Across all six rows of the digest's stream values under each change, which streams print one value in every row?",
+     "new": "Across all six rows of the course's stream values under each change, which streams print one value in every row?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-the-schedule",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the rule: cargoes = the crude run divided by the cargo size, rounded UP to a whole cargo (at least one). The days between cargoes are the 31 days divided by the cargoes, rounded DOWN.",
+     "new": "The course prints the rule: cargoes = the crude run divided by the cargo size, rounded UP to a whole cargo (at least one). The days between cargoes are the 31 days divided by the cargoes, rounded DOWN."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-the-schedule",
+   "ord": 5,
+   "fields": {
+    "prompt": {
+     "old": "The same plan is cascaded again at a cargo size of 150000 bbl. What does the digest show changing?",
+     "new": "The same plan is cascaded again at a cargo size of 150000 bbl. What does the course show changing?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-the-schedule",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "The digest names the argument: cascadeToSchedule reads it when periodStart is left out. The same plan cascaded on two different days would then give two different schedules.",
+     "new": "The course names the argument: cascadeToSchedule reads it when periodStart is left out. The same plan cascaded on two different days would then give two different schedules."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-the-schedule",
+   "ord": 11,
+   "fields": {
+    "prompt": {
+     "old": "ABUA's schedule is built in seven time zones with the period start passed as the string \"2027-03-01\". What does the digest print?",
+     "new": "ABUA's schedule is built in seven time zones with the period start passed as the string \"2027-03-01\". What does the course print?"
+    },
+    "explanation": {
+     "old": "A period start given as a YYYY-MM-DD string is the same calendar day in every zone. That is how the Suite page passes it and how this digest passes it.",
+     "new": "A period start given as a YYYY-MM-DD string is the same calendar day in every zone. That is how the Suite page passes it and how this course passes it."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-the-schedule",
+   "ord": 12,
+   "fields": {
+    "options": {
+     "old": [
+      "America/New_York and America/Los_Angeles.",
+      "Pacific/Pago_Pago and Pacific/Kiritimati.",
+      "Africa/Lagos and Pacific/Kiritimati.",
+      "Every zone the digest tried except UTC."
+     ],
+     "new": [
+      "America/New_York and America/Los_Angeles.",
+      "Pacific/Pago_Pago and Pacific/Kiritimati.",
+      "Africa/Lagos and Pacific/Kiritimati.",
+      "Every zone the course tried except UTC."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 9,
+   "fields": {
+    "explanation": {
+     "old": "In the fed configuration the digest prints crude unit operating cost 0.00, and the crude is still run. The three other options read ABUA as typed: 78.04 percent, the agreement flag true, and 2536290.32 at 1.2500 a barrel.",
+     "new": "In the fed configuration the course prints crude unit operating cost 0.00, and the crude is still run. The three other options read ABUA as typed: 78.04 percent, the agreement flag true, and 2536290.32 at 1.2500 a barrel."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 10,
+   "fields": {
+    "prompt": {
+     "old": "Of these changes the digest prices around ABUA's month, which one raises the margin?",
+     "new": "Of these changes the course prices around ABUA's month, which one raises the margin?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 13,
+   "fields": {
+    "options": {
+     "old": [
+      "Leave it out, so the schedule is dated from the day it is built.",
+      "Pass it as a Date at local midnight, as the Suite page does.",
+      "Pass it as a Date, the way the digest's seven zone run does.",
+      "Pass it as a YYYY-MM-DD string, so no clock or zone can move it."
+     ],
+     "new": [
+      "Leave it out, so the schedule is dated from the day it is built.",
+      "Pass it as a Date at local midnight, as the Suite page does.",
+      "Pass it as a Date, the way the course's seven zone run does.",
+      "Pass it as a YYYY-MM-DD string, so no clock or zone can move it."
+     ]
+    },
+    "explanation": {
+     "old": "Left out, the period start is read from the machine clock. A YYYY-MM-DD string is the same calendar day in every zone, and that is how the Suite page and the digest pass it, 2027-03-01 for ABUA. A Date built at local midnight starts on 2027-02-28 in Africa/Lagos and Pacific/Kiritimati.",
+     "new": "Left out, the period start is read from the machine clock. A YYYY-MM-DD string is the same calendar day in every zone, and that is how the Suite page and the course pass it, 2027-03-01 for ABUA. A Date built at local midnight starts on 2027-02-28 in Africa/Lagos and Pacific/Kiritimati."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 15,
+   "fields": {
+    "explanation": {
+     "old": "The digest sets the schedule's totals beside the plan's for all ten materials, and every row agrees. The cdu row reads 2029032.26 bbl and 2536290.32 in both, so the schedule adds no barrels and loses none.",
+     "new": "The course sets the schedule's totals beside the plan's for all ten materials, and every row agrees. The cdu row reads 2029032.26 bbl and 2536290.32 in both, so the schedule adds no barrels and loses none."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 27,
+   "fields": {
+    "explanation": {
+     "old": "Year 0 takes the start year as its label. The money in every row is unchanged, which the digest confirms by printing the same NPV and total tax for both runs.",
+     "new": "Year 0 takes the start year as its label. The money in every row is unchanged, which the course confirms by printing the same NPV and total tax for both runs."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "fields": {
+    "explanation": {
+     "old": "The digest states: the tax = (taxable income - the loss carried in) x the tax rate of 30 percent once that is above zero. The loss is set against income before the rate is applied.",
+     "new": "The course states: the tax = (taxable income - the loss carried in) x the tax rate of 30 percent once that is above zero. The loss is set against income before the rate is applied."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-investment-case",
+   "ord": 7,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the sum: 291.7664 + 15.7651 = 307.5315, and the cash flow's opex reads 307.5315. The crude cost sits inside opexFixed, so a fixed and variable cost alone would leave the crude out.",
+     "new": "The course prints the sum: 291.7664 + 15.7651 = 307.5315, and the cash flow's opex reads 307.5315. The crude cost sits inside opexFixed, so a fixed and variable cost alone would leave the crude out."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-tax-losses-carried-forward",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "Each four-decimal figure is rounded on its own, so the digest prints the construction years through year 6 to nine decimals for arithmetic. Each nine-decimal figure agrees with the engine's own to within two units in the ninth decimal.",
+     "new": "Each four-decimal figure is rounded on its own, so the course prints the construction years through year 6 to nine decimals for arithmetic. Each nine-decimal figure agrees with the engine's own to within two units in the ninth decimal."
+    }
+   }
+  }
+ ]
+}

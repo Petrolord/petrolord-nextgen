@@ -191,7 +191,7 @@ q(3, "A reviewer wants the teaching crew's toluene figure compared with a glycol
  ["The two can be compared directly once both are converted to ppm, since BTEX includes toluene",
   "The emission should be read against the toluene limit adjusted by Brief and Scala for the crew's schedule",
   "The comparison belongs to the 5x5 risk matrix, which the Risk, Change and Learning course applies to both"],
- "Section 25 puts BTEX from a glycol unit with the Gas Processing course. A personal air sample read as an 8-hour TWA measures what a worker breathed, and an emission rate measures what left a unit, so the two figures answer different questions even where they share a substance and a unit. The 5x5 matrix ranks hazards and takes no part in this comparison.")
+ "The course puts BTEX from a glycol unit with the Gas Processing course. A personal air sample read as an 8-hour TWA measures what a worker breathed, and an emission rate measures what left a unit, so the two figures answer different questions even where they share a substance and a unit. The 5x5 matrix ranks hazards and takes no part in this comparison.")
 
 q(1, "What does every one of the golden's 57 refusal cases return?",
  "An `error` and a `field` naming the input refused, with the message in the engine's own words",
@@ -226,7 +226,7 @@ q(2, "How does the course measure a WBGT weight out of the running engine?",
  ["By fitting the weights to the golden's oracle-only cases, then comparing the fit with the page",
   "By reading the weights from the engine's source file and comparing them with the NIOSH page",
   "By passing equal readings to both forms and dividing the two indices returned by each other"],
- "Setting one reading to one degree and the rest to zero leaves only that reading's weight in the sum, so the engine reports 0.700000000000, 0.300000000000 and so on, each set against a literal in the generator. That asks the engine a question whose answer is the constant and nothing else. No fit is involved, source comments are provenance, and equal readings through both forms both return that reading, which gives no weight at all.")
+ "Setting one reading to one degree and the rest to zero leaves only that reading's weight in the sum, so the engine reports 0.700000000000, 0.300000000000 and so on, each set against a literal the course records. That asks the engine a question whose answer is the constant and nothing else. No fit is involved, source comments are provenance, and equal readings through both forms both return that reading, which gives no weight at all.")
 
 q(1, "Why can the section 1.1.3 worked example not serve as the printed value that would move the section 8.1 equations up to PUBLISHED, REPRODUCED?",
  "It was read off a figure and misses the equation by more than its printed tolerance, so it reproduces nothing",
@@ -284,12 +284,12 @@ q(2, "Which three doors does the golden class ARITHMETIC BY DEFINITION?",
   "`metabolicRateTwaW`, `lexWeeklyDbA` and `chemicalStel15Min`, the three averages over a fixed window"],
  "The course gives the class to the two one-hour averages and the STEL, whose only constant is the window. `chemicalTwa8h` is PUBLISHED, REPRODUCED on the 1910.1000(d)(1) worked example. The WBGT forms are TRANSCRIPTION ONLY because their weights were copied. `lexWeeklyDbA` is PUBLISHED, REPRODUCED on one case with an oracle-only divisor.")
 
-q(3, "The course measures the NIOSH earmuff derating as 0.750000000000 against a literal typed in the generator. Why does the NIOSH derating by type stay ORACLE ONLY?",
+q(3, "The course measures the NIOSH earmuff derating as 0.750000000000 against a literal the course records. Why does the NIOSH derating by type stay ORACLE ONLY?",
  "The measurement ties the engine to a third copy; no printed value sets the method against a source",
  ["The earmuff derating applies to C-weighted data only, which no printed OSHA or NIOSH example uses",
   "The measurement differs from the literal in its last digit, so the class cannot move until the two agree",
   "The derating by type is licensed NIOSH text, so the course may measure it but never cite a printed case"],
- "A constant measured out of the engine and set against a generator literal is a pin against quiet change, and every copy may still share a reading. A class moves up only when a value a source prints is reproduced, and none is known for the NIOSH method, which is why it is never graded. The measured value matches the literal with a relative difference of 0, the method takes C- and A-weighted data alike, and NIOSH text is public.")
+ "A constant measured out of the engine and set against a literal the course records is a pin against quiet change, and every copy may still share a reading. A class moves up only when a value a source prints is reproduced, and none is known for the NIOSH method, which is why it is never graded. The measured value matches the literal with a relative difference of 0, the method takes C- and A-weighted data alike, and NIOSH text is public.")
 
 q(0, "If the three solvents of the teaching mixture were known to potentiate each other, how should its index of 1.059500 be read?",
  "As understating the hazard, since the additive sum assumes no interaction",

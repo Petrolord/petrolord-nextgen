@@ -2,7 +2,7 @@
  {
   "prompt": "This module is the one place in the course whose subject is what the engine used to do. Four other places carry the same history without a frame. Which are they?",
   "options": [
-   "The digest's audit section, the published golden file, and the validation oracle's header.",
+   "The course's audit section, the published golden file, and the validation oracle's header.",
    "The lesson exercises, the teaching lab, and the three explorer panels that are built on it.",
    "Engine comments, the wave's recon and findings records, and the repair's findings file.",
    "The refusal messages, the warning texts, and the notes the engine returns on a successful call."
@@ -140,10 +140,10 @@
    "The tolerances were tightened until the twenty planted defects all went red, which is the standing form of the check."
   ],
   "answer": 0,
-  "explanation": "Naming the two is the honest statement of the limit. Sections 27 and 28 are the standing form of that lesson, about the engine as it is now, and nothing graded in this course rests on either of the two shared fits."
+  "explanation": "Naming the two is the honest statement of the limit. The previous module's audit lessons are the standing form of that lesson, about the engine as it is now, and nothing graded in this course rests on either of the two shared fits."
  },
  {
-  "prompt": "The digest counts the history that sits in the engine source: 12 comment lines carrying the repair marker and 16 written in a past tense, in a module 619 lines long. What is that count for?",
+  "prompt": "The course counts the history that sits in the engine source: 12 comment lines carrying the repair marker and 16 written in a past tense, in a module 619 lines long. What is that count for?",
   "options": [
    "It measures how much of the repair is still outstanding, as a tally of lines yet to be cleared.",
    "It is the tally the copy-rule gate runs against every lesson body in this wave.",

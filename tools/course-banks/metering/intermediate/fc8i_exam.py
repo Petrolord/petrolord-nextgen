@@ -83,7 +83,7 @@ q(0, "Two answers about damage come back on every liquid sizing row and they ans
   "The cavitation index and the basis line beside it."],
  "A row can carry a cavitation word with the flag still false, which means the valve is being damaged while the sizing equation is still working normally.")
 
-q(2, "What pressures does the digest state for the flashing case?",
+q(2, "What pressures does the course state for the flashing case?",
  "An outlet pressure of 26.740000 psia against a vapour pressure of 28.740000 psia.",
  ["An outlet pressure of 28.740000 psia against a vapour pressure of 26.740000 psia.",
   "An outlet pressure of 20.000000 psia against a vapour pressure of 28.740000 psia.",
@@ -152,7 +152,7 @@ q(3, "What does the engine say about whether its pressure recovery factors are c
  "They are not cited to a document in this repository.",
  ["They are cited to the sizing standard the coefficients are defined in.",
   "They are cited to the vendor catalogues the styles were averaged from.",
-  "They are cited in the module's own source comments, which the digest quotes."],
+  "They are cited in the module's own source comments, which the course quotes."],
  "Following them back to a published source from here is not possible, which is what a reader has to know before quoting one in a calculation.")
 
 q(1, "A certified recovery factor is genuinely unavailable on a project. What does the course say to do?",
@@ -248,7 +248,7 @@ q(2, "Which of the three probes did the engine leave where the pressure ratio ha
  ["The one scfh bleed at a pressure ratio near twelve.",
   "The hundred million scfh at a pressure ratio near two.",
   "None of them, since the stream power moved all three."],
- "Its ratio band and its final band both read high, so nothing was moved on it and the digest prints no reason to look further.")
+ "Its ratio band and its final band both read high, so nothing was moved on it and the course prints no reason to look further.")
 
 q(0, "Whose are the two sets of thresholds the screen reads against?",
  "Both sets are this engine's stated screen.",

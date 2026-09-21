@@ -95,7 +95,7 @@ q(1,
  ["Always the common cause ratio, with a detected common cause ratio beside it.",
   "Always the common cause fraction, written out on every use.",
   "Always the dependent failure factor, abbreviated after first use."],
- "The vocabulary section rules that the bare word already means a vapour fraction in the fluid course and an orifice diameter ratio in the metering course, so this course writes the beta factor every time, with betaD for detected failures. The three other wordings are invented here and appear nowhere in the engine or its digest.")
+ "The vocabulary section rules that the bare word already means a vapour fraction in the fluid course and an orifice diameter ratio in the metering course, so this course writes the beta factor every time, with betaD for detected failures. The three other wordings are invented here and appear nowhere in the engine or the course.")
 
 q(2,
  "How does this course write the probability of failure on demand of a subsystem, and how does it write the credited figure of an individual protection layer?",

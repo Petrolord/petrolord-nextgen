@@ -40,7 +40,7 @@ q(2, "Why does the budget carry a share of variance column when it already carri
   "Because the contribution column is computed for the engine's own default uncertainties and the share column for the ones actually supplied."],
  "Quote the share column when you are deciding what to improve, and quote the total when you are stating what the meter is worth."),
 
-q(0, "What does the digest print about the two largest shares of the variance on the ABOH run at its design reading?",
+q(0, "What does the course print about the two largest shares of the variance on the ABOH run at its design reading?",
  "The discharge coefficient at 74.045614 percent against expansibility at 11.847298 percent, a difference of 62.198316 and a ratio of 6.250000.",
  ["The discharge coefficient at 74.045614 percent against density at 6.664105 percent, which are the two terms the engine names on that run.",
   "The discharge coefficient at 0.500000 percent against density at 0.300000 percent, which are contributions rather than shares.",
@@ -103,7 +103,7 @@ q(1, "The budget returns a flag saying whether the lead is clear. What does a fa
   "Rerun the budget with the typed differential uncertainty, because a false flag is how the engine reports that the transmitter route produced an unstable ranking."],
  "The engine's own words in that case are that the two shares are too close to call a dominant term. In a root sum of squares two terms of similar share have to be attacked together."),
 
-q(0, "On the ABOH run at its design reading the lead is clear, and the digest records where that stops being true. Where?",
+q(0, "On the ABOH run at its design reading the lead is clear, and the course records where that stops being true. Where?",
  "At a reading of 16.862007 in H2O.",
  ["At a reading of 15.000000 in H2O, which is the same reading the name changes at.",
   "At a reading of 16.000000 in H2O, where the flow turndown reaches 3.651484 and the name changes.",

@@ -52,7 +52,7 @@
    "The floor at zero removes a flat 7 dB from any credit on an A-weighted level."
   ],
   "answer": 2,
-  "explanation": "The engine's Appendix B rule is A-weighted minus (NRR - 7) and C-weighted minus the NRR, so the two attenuations on one label differ by exactly the 7, which section 3 measures as 7.000000000000 dB by taking 30 less the attenuation at an NRR of 30. Derating by type is the separate NIOSH_TYPE method, halving the credit is the field derating, and the floor applies only where the rule would give a negative attenuation."
+  "explanation": "The engine's Appendix B rule is A-weighted minus (NRR - 7) and C-weighted minus the NRR, so the two attenuations on one label differ by exactly the 7, which the course measures as 7.000000000000 dB by taking 30 less the attenuation at an NRR of 30. Derating by type is the separate NIOSH_TYPE method, halving the credit is the field derating, and the floor applies only where the rule would give a negative attenuation."
  },
  {
   "prompt": "On the A-weighted teaching case, 97.600000 dBA with an NRR of 27.000000 dB, what attenuation does the field derating credit?",
@@ -140,7 +140,7 @@
    "`OSHA_DUAL`, the dual-protection rule"
   ],
   "answer": 1,
-  "explanation": "The field derating is the method the digest attaches to the engineering-controls question, and it credits (NRR - 7) x 50 percent on A-weighted data. Appendix B carries the adequacy test instead, the NIOSH derating by type says what a kind of protector is worth, and dual protection says what two worn together give."
+  "explanation": "The field derating is the method the course attaches to the engineering-controls question, and it credits (NRR - 7) x 50 percent on A-weighted data. Appendix B carries the adequacy test instead, the NIOSH derating by type says what a kind of protector is worth, and dual protection says what two worn together give."
  },
  {
   "prompt": "What does the engine return when a protector call names a method it does not recognise?",

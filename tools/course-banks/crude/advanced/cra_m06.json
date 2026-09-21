@@ -85,7 +85,7 @@
    "L4: the Refutas index taken on mass fraction in the AGO rows."
   ],
   "answer": 0,
-  "explanation": "SECTION 27 lists three held items: L4, the LP kernel's absolute tolerances on its pivots and on phase one; C12, the Refutas index on mass fraction; C13, Watson K taken at the blend's T50."
+  "explanation": "The course lists three held items: L4, the LP kernel's absolute tolerances on its pivots and on phase one; C12, the Refutas index on mass fraction; C13, Watson K taken at the blend's T50."
  },
  {
   "prompt": "oracle_lp.py checks the kernel on 181 problems (124 optimal, 44 infeasible, 13 unbounded) by exact rational vertex enumeration with no simplex at all. What fact from the first module makes that route possible?",
@@ -129,7 +129,7 @@
    "A default price per unit of relief for every binding row."
   ],
   "answer": 0,
-  "explanation": "The digest lists the constants the engines state, read from the modules: CII_BANDS.STABLE 0.7, CII_BANDS.UNSTABLE 0.9, RVP_INDEX_EXPONENT 1.25 and BINDING_TOLERANCE 1e-7. SPEC_TEMPLATES are starting points; the regulation in force governs."
+  "explanation": "The course lists the constants the engines state, read from the modules: CII_BANDS.STABLE 0.7, CII_BANDS.UNSTABLE 0.9, RVP_INDEX_EXPONENT 1.25 and BINDING_TOLERANCE 1e-7. SPEC_TEMPLATES are starting points; the regulation in force governs."
  },
  {
   "prompt": "oracle_lp.py holds the kernel to 181 problems. How does it compute shadow prices?",
@@ -154,7 +154,7 @@
   "explanation": "Both pools bind on Sulfur and RVP. The marginal barrel differs from the average at Apapa by 0.1731 and matches it in the default pool, where nothing sits at its availability."
  },
  {
-  "prompt": "The digest counts the refusals it prints: 17. What stands behind that count?",
+  "prompt": "The course counts the refusals it prints: 17. What stands behind that count?",
   "options": [
    "Each was asserted against the engine before it was printed.",
    "Each was written by the course from the engine's rules, so the wording is the course's own paraphrase.",
@@ -162,6 +162,6 @@
    "Each is graded against the capstone's own figures."
   ],
   "answer": 0,
-  "explanation": "The digest closes: \"Refusals printed in this digest, each asserted against the engine before it was printed: 17.\""
+  "explanation": "The course closes on its count of refusals, each asserted against the engine before it was printed: 17."
  }
 ]

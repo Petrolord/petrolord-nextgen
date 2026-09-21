@@ -30,7 +30,7 @@
    "Items 13 and 14 have no row at all; 10 and 11 have a row that is not an answer."
   ],
   "answer": 3,
-  "explanation": "The digest prints that items 10 (Not applicable, a blank note) and 11 (Not applicable, no note) have a recorded row that is not an answer, and that items 13 and 14 have no row at all. Item 13 is Minor and item 14 Major."
+  "explanation": "The course prints that items 10 (Not applicable, a blank note) and 11 (Not applicable, no note) have a recorded row that is not an answer, and that items 13 and 14 have no row at all. Item 13 is Minor and item 14 Major."
  },
  {
   "prompt": "Items 2 and 6 are answered Nonconformant. What do they do to checklistProgress's percent 71?",
@@ -77,7 +77,7 @@
   "explanation": "criticalAnswersWithoutFindings lists 0 items and the report is ALLOWED. The finding rule applies to Critical items only, and the engine has no rule that a Major or Minor nonconformance must raise a finding before the audit is reported."
  },
  {
-  "prompt": "The digest walks canRaiseFinding through three refusals before it reaches the stop-work rows. What do those three ask for?",
+  "prompt": "The course walks canRaiseFinding through three refusals before it reaches the stop-work rows. What do those three ask for?",
   "options": [
    "A finding type, an owner and a due date.",
    "A finding type, a one-line statement and objective evidence.",
@@ -140,7 +140,7 @@
    "One: AF-2026-018, a Major nonconformity, Open, stop-work true."
   ],
   "answer": 3,
-  "explanation": "The digest names the findings summarise counts: AF-2026-018 alone. One finding is behind open findings 1, open major 1 and stop-work open 1."
+  "explanation": "The course names the findings summarise counts: AF-2026-018 alone. One finding is behind open findings 1, open major 1 and stop-work open 1."
  },
  {
   "prompt": "With every item answered and items 10 and 11 given reasons, canReportAudit refuses on critical item 6 alone. Why is item 2 not named?",

@@ -57,7 +57,7 @@ q(0, "Across the bore sweep at a fixed length the field column reads 1322.687929
   "Because the field is DECLARED at 1000 g and the module scales it only with the liner count of the bank."],
  "The turndown is the flow through one liner over its design flow, and neither of those carries a bore. That is what makes the race in this sweep a race between the residence and the travel and nothing else.")
 
-q(2, "The digest prints a derived column beside the bore sweep, the cut size multiplied by the square root of the bore. What does it read?",
+q(2, "The course prints a derived column beside the bore sweep, the cut size multiplied by the square root of the bore. What does it read?",
  "0.828906 on every one of the five rows, across a tenfold span of bore from 0.01 to 0.1 m.",
  ["0.828906 on the declared bore alone, and it drifts away from that figure at the two extremes of the span.",
   "1.000000 on every row, because the column is normalised against the module's own declared bore of 0.035 m.",

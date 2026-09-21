@@ -68,19 +68,19 @@ q(0, "What throughput does ABUA's Naphtha reformer run, against what capacity?",
   "346525.81 bbl of 450000.00 bbl, below its ceiling."],
  "The unit table prints the reformer at 407677.42 of 420000.00 bbl, 97.07 percent, with an operating cost of 1182264.52. 346525.81 bbl is the Gasoline sold, against Gasoline's ceiling.")
 
-q(3, "What margin difference does the digest print between the configuration as typed and the one where distillation is no longer feedless?",
+q(3, "What margin difference does the course print between the configuration as typed and the one where distillation is no longer feedless?",
  "2536290.33",
  ["95572.87",
   "-230175.48",
   "9614225.81"],
- "The fed configuration prints a margin of 9614225.81 against 7077935.48, and the digest prints the difference as 2536290.33. The crude unit runs 0.00 bbl and charges 0.00 for distillation.")
+ "The fed configuration prints a margin of 9614225.81 against 7077935.48, and the course prints the difference as 2536290.33. The crude unit runs 0.00 bbl and charges 0.00 for distillation.")
 
 q(1, "When distillation is given a feed, which utilisation is printed for it?",
  "0.00 percent",
  ["null",
   "78.04 percent",
   "100.00 percent"],
- "The digest prints the crude unit utilisation in that configuration as 0.00 percent, with the unit running 0.00 bbl. A null utilisation belongs to a unit whose capacity is blank or typed as 0.")
+ "The course prints the crude unit utilisation in that configuration as 0.00 percent, with the unit running 0.00 bbl. A null utilisation belongs to a unit whose capacity is blank or typed as 0.")
 
 q(2, "What crude cost does ABUA's plan print for Brass River (illustrative), on what volume?",
  "48240000.00 on 600000.00 bbl.",
@@ -132,7 +132,7 @@ q(1, "Which of ABUA's products sells 0.00 bbl in the plan as typed?",
   "Gasoline"],
  "The product table prints Gasoil export and Naphtha export at 0.00 bbl, and the stream balance shows gasoil and naphtha consumed in full by the hydrotreater and the reformer.")
 
-q(2, "Which status does each of the five changes in the digest's change table return?",
+q(2, "Which status does each of the five changes in the course's change table return?",
  "optimal",
  ["infeasible",
   "invalid",
@@ -151,7 +151,7 @@ q(3, "Once the two floors are added, how many barrels of Fuel oil does the month
  ["633129.03 bbl, as in the plan as typed.",
   "1000000.00 bbl, its ceiling.",
   "324178.57 bbl, the Jet A-1 figure."],
- "The digest prints Fuel oil 700000.00 under the floors, and the fuel oil floor is met exactly: true. 633129.03 bbl is Fuel oil's volume as typed and 1000000.00 bbl its ceiling.")
+ "The course prints Fuel oil 700000.00 under the floors, and the fuel oil floor is met exactly: true. 633129.03 bbl is Fuel oil's volume as typed and 1000000.00 bbl its ceiling.")
 
 # m04, what another barrel is worth (SECTION 14)
 q(1, "How many dollars is one more barrel of ulsd worth to ABUA's month?",
@@ -168,7 +168,7 @@ q(2, "With the crude unit at 1900000 barrels, what do naphtha and gasoil read?",
   "72.5000 and 89.5000."],
  "The crude unit row prints naphtha 91.4500, as typed, and gasoil 99.8560. 83.6941 and 99.8560 are the blank hydrotreater and the cancelled cargo, and 72.5000 and 89.5000 the floors.")
 
-q(0, "In the digest's gasoil working, which yield divides the break-even?",
+q(0, "In the course's gasoil working, which yield divides the break-even?",
  "Bonny Light's gasoil yield, 0.3100.",
  ["Bonny Light's residue yield, 0.2800.",
   "The hydrotreater's ulsd yield, 0.9700.",
@@ -182,7 +182,7 @@ q(3, "Under the jet and fuel oil floors, which crude is only partly run, and how
   "Bonny Light (illustrative), run at 329032.26 bbl as typed."],
  "Under the floors the plan runs Bonny Light (illustrative) 567857.14, Forcados (illustrative) 1100000.00 and Brass River (illustrative) 600000.00. 329032.26 bbl is Bonny Light's run in the plan as typed.")
 
-q(1, "What margin does the digest print with the reformer's capacity at 400000.00 bbl?",
+q(1, "What margin does the course print with the reformer's capacity at 400000.00 bbl?",
  "7018390.09",
  ["6863271.83",
   "7077935.48",
@@ -225,7 +225,7 @@ q(2, "What value does each diesel lift carry?",
   "7692872.90"],
  "Each diesel lift moves 126100.00 bbl and carries 13215280.00, its share of the Diesel (ULSD) revenue. The others are the fuel_oil, jet and gasoline lifts.")
 
-q(0, "At a cargo size of 150000 bbl, what is the last Forcados receipt date the digest prints?",
+q(0, "At a cargo size of 150000 bbl, what is the last Forcados receipt date the course prints?",
  "2027-03-22, after seven earlier Forcados dates.",
  ["2027-03-21, as at the 400000.00 bbl cargo size.",
   "2027-03-19, the last of eight Forcados dates.",

@@ -8,7 +8,7 @@
    "gauge plus atmosphere (bar)"
   ],
   "answer": 0,
-  "explanation": "SECTION 30: every pressure in lpgCng is absolute, and the engine says so on every CNG result: pressureBasis \"absolute (bar(a))\"."
+  "explanation": "The bank lesson: every pressure in lpgCng is absolute, and the engine says so on every CNG result: pressureBasis \"absolute (bar(a))\"."
  },
  {
   "prompt": "Of the three IBAFO banks, which mass does gasMassInVessel print for the Mid bank at 250 bar(a)?",
@@ -33,7 +33,7 @@
   "explanation": "The Low row prints z 0.8181 and realVersusIdeal 1.2224. 0.8369 is the Mid bank's Z and 0.8584 the High bank's."
  },
  {
-  "prompt": "Every IBAFO bank prints realVersusIdeal above one. What does the digest say that shows?",
+  "prompt": "Every IBAFO bank prints realVersusIdeal above one. What does the course say that shows?",
   "options": [
    "Every bank holds less gas than the ideal gas law says.",
    "Every bank holds more gas than the ideal gas law says.",
@@ -41,7 +41,7 @@
    "The correlation is outside its range for every bank."
   ],
   "answer": 1,
-  "explanation": "SECTION 30: at these pressures Z is below one, so every bank holds more gas than the ideal gas law says (realVersusIdeal above one). The three rows print correlationInRange true."
+  "explanation": "The bank lesson: at these pressures Z is below one, so every bank holds more gas than the ideal gas law says (realVersusIdeal above one). The three rows print correlationInRange true."
  },
  {
   "prompt": "IBAFO's three banks are all at 30 C. Which column of the bank table prints the same figure on all three?",
@@ -63,7 +63,7 @@
    "The gas mass over the bank volume at 30 C"
   ],
   "answer": 0,
-  "explanation": "SECTION 30: M is the gas's molar mass, its specific gravity times the molar mass of air, in kg/kmol."
+  "explanation": "The bank lesson: M is the gas's molar mass, its specific gravity times the molar mass of air, in kg/kmol."
  },
  {
   "prompt": "In what unit does the pressure P enter the mass equation in gasMassInVessel?",
@@ -74,7 +74,7 @@
    "Pa, as bar(a) times 100000"
   ],
   "answer": 3,
-  "explanation": "SECTION 30: P is the pressure in Pa (bar(a) times 100000). Every pressure in lpgCng is absolute."
+  "explanation": "The bank lesson: P is the pressure in Pa (bar(a) times 100000). Every pressure in lpgCng is absolute."
  },
  {
   "prompt": "An IBAFO bank reads 249 bar on its gauge, and 249 is typed straight into the engine as if absolute. What mass comes back?",
@@ -107,7 +107,7 @@
    "ppr 1 to 30, tpr 0.2 to 3"
   ],
   "answer": 0,
-  "explanation": "SECTION 30: DAK_RANGE: ppr 0.2 to 30, tpr 1 to 3. Outside it the engine still answers and says so."
+  "explanation": "The bank lesson: DAK_RANGE: ppr 0.2 to 30, tpr 1 to 3. Outside it the engine still answers and says so."
  },
  {
   "prompt": "IBAFO's Low bank is run at -80 C. What does gasMassInVessel do?",
@@ -118,7 +118,7 @@
    "It answers, with correlationInRange false and a note calling the value an extrapolation."
   ],
   "answer": 3,
-  "explanation": "SECTION 30 prints the probe with tpr 0.9727, correlationInRange false, and the note \"Outside the range the Dranchuk-Abou-Kassem correlation was fitted over. The value is an extrapolation and should be checked against measured data.\" Outside the range the engine still answers."
+  "explanation": "The bank lesson prints the probe with tpr 0.9727, correlationInRange false, and the note \"Outside the range the Dranchuk-Abou-Kassem correlation was fitted over. The value is an extrapolation and should be checked against measured data.\" Outside the range the engine still answers."
  },
  {
   "prompt": "Which Z method does gasMassInVessel use for massKg?",
@@ -129,7 +129,7 @@
    "Dranchuk-Abou-Kassem on the gauge pressure"
   ],
   "answer": 1,
-  "explanation": "SECTION 30: Z by Dranchuk-Abou-Kassem on Sutton pseudo-criticals. Z taken as one is how the engine forms idealMassKg, which it prints beside massKg; the pressures are absolute."
+  "explanation": "The bank lesson: Z by Dranchuk-Abou-Kassem on Sutton pseudo-criticals. Z taken as one is how the engine forms idealMassKg, which it prints beside massKg; the pressures are absolute."
  },
  {
   "prompt": "IBAFO's bank is put to gasMassInVessel with the gas gravity left blank (''). What does the engine print?",
@@ -140,7 +140,7 @@
    "REFUSED: A temperature is required."
   ],
   "answer": 2,
-  "explanation": "SECTION 30's probe table prints \"REFUSED: A gas specific gravity is required.\" for a blank gas gravity. The pressure and temperature refusals are the probes with no pressure and no temperature."
+  "explanation": "The bank lesson's probe table prints \"REFUSED: A gas specific gravity is required.\" for a blank gas gravity. The pressure and temperature refusals are the probes with no pressure and no temperature."
  },
  {
   "prompt": "gasMassInVessel prints idealMassKg beside massKg on every bank. What is idealMassKg?",
@@ -151,7 +151,7 @@
    "The mass on the specific gravity alone, M taken as 0.62"
   ],
   "answer": 1,
-  "explanation": "SECTION 30: the ideal mass is the same m = P V M over Z R T with Z taken as one. The gauge reading typed as absolute is its own row of the gauge table, and M is the specific gravity times the molar mass of air."
+  "explanation": "The bank lesson: the ideal mass is the same m = P V M over Z R T with Z taken as one. The gauge reading typed as absolute is its own row of the gauge table, and M is the specific gravity times the molar mass of air."
  },
  {
   "prompt": "Which massKg and idealMassKg does the engine print for the IBAFO bank at 230 bar(a)?",

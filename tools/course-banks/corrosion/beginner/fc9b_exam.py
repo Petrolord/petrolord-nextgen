@@ -61,7 +61,7 @@ q(1, "Two mole fractions are each inside nought to one and the engine still refu
   "The sum of the two against the fugacity cap, because above the cap the coefficient is held and the sum can no longer be resolved."],
  "The message names the sum it formed. A sum of exactly one is accepted, and the screening runs with a partial pressure sum of 51.000427 bar against a total of 51.000427 bar."),
 
-q(2, "At a total pressure of 100.000000 bar with the digest's fixed composition, what are the three chemistry figures?",
+q(2, "At a total pressure of 100.000000 bar with the course's fixed composition, what are the three chemistry figures?",
  "A coefficient of 0.775834, a carbon dioxide partial pressure of 3.000000 bar and a fugacity of 2.327502 bar.",
  ["A coefficient of 0.775834, a partial pressure of 2.327502 bar and a fugacity of 3.000000 bar.",
   "A coefficient of 0.880814, a partial pressure of 3.000000 bar and a fugacity of 2.327502 bar.",
@@ -119,14 +119,14 @@ q(2, "On the stream whose combined rate is 0.990899 of its smaller term, which i
   "Nothing, because a controlling margin of 107.879479 is outside the reporting margin and the engine declines to name a term."],
  "Where transport controls, velocity and line size move this rate and the chemistry does not. Where the reaction controls, temperature and carbon dioxide move it and the flow does not."),
 
-q(1, "One exponent of the transport term is described in the digest as a property rather than as a typed constant. Which, and why?",
+q(1, "One exponent of the transport term is described in the course as a property rather than as a typed constant. Which, and why?",
  "The fugacity exponent, measured at 1.000000000000, because the term is exactly linear in fugacity and nothing needs to be typed to make it so.",
  ["The velocity exponent, measured at 0.800000000000, because it can be reached entirely from the outside by doubling the velocity at a fixed line diameter.",
   "The diameter exponent, measured at 0.200000000000, because it enters the term the other way round from the velocity and has to be read off a halving.",
   "The coefficient in front of the term, measured at 2.450000000000, because it is read at unit velocity, unit diameter and unit fugacity."],
  "The base two log of the doubling ratio in fugacity comes out at exactly one. The other three are held for literature and pinned against a literal in a third file."),
 
-q(3, "In the digest's sweep of the transport term against velocity at four line diameters, both ratio columns are constant down the table and equal to each other. Why is that the claim being made?",
+q(3, "In the course's sweep of the transport term against velocity at four line diameters, both ratio columns are constant down the table and equal to each other. Why is that the claim being made?",
  "It is what a power law in velocity means, and it is a statement about the shape of the term that holds whatever its constants turn out to be.",
  ["It is what a linear term means, since a doubling in a term that is linear produces a fixed difference in the answer rather than a fixed ratio.",
   "It is what agreement with the vendored oracle means, since the oracle reaches exactly the same ratio through a route of its own that shares nothing.",
@@ -145,7 +145,7 @@ q(1, "A reported combined rate sits above one of the two terms it was built from
  ["That the film multiplier has been applied to the wrong one of the two terms, which is the single arrangement question this module leaves open.",
   "That the stream is in the sulphide regime, where the rate is retained only as an upper bound and may exceed either term.",
   "That the correlation has been run outside its published validity band, which the engine cannot detect and does not report."],
- "The series identity is checked on every row the digest prints and held to twelve figures. Find the smaller term, and the printed combination should be near it and below it."),
+ "The series identity is checked on every row the course prints and held to twelve figures. Find the smaller term, and the printed combination should be near it and below it."),
 
 # ---- module 4: the protective film ----
 
@@ -228,7 +228,7 @@ q(0, "The pH door returns a factor and the reference it was taken against. Which
   "Neither, since both are exported by name and an exported constant is one the module has a source for."],
  "They are measured out of the engine's behaviour and pinned against a literal in a third file, so the module is using what it declares. No source here says whether the declared values are the published ones."),
 
-q(3, "At the pH reference the factor is exactly 1.000000, and the digest says that is by definition rather than by a clamp. What does that mean?",
+q(3, "At the pH reference the factor is exactly 1.000000, and the course says that is by definition rather than by a clamp. What does that mean?",
  "The correction is the ratio of the water you have to the water the fit was made on, so at the fitted condition it cannot be anything else.",
  ["The engine tests the pH against the reference and substitutes one whenever the two agree, which is what a clamp at a boundary does.",
   "The factor is clamped at one from above in the same way the film multiplier is, so no correction anywhere can ever raise a rate.",

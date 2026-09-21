@@ -96,7 +96,7 @@ q(1, "With every invented rate left blank, landedCost prints a total of 23392000
   "The CIF value, formed before any landed charge applies."],
  "It is the same figure as the FOB line of the full build. The engine prints it with complete false, 9 rates missing and \"A FLOOR: 9 rate(s) not supplied, so the full landed cost is at least this.\"")
 
-q(0, "The digest prints 26513943.86 - 24774210.79 = 1739733.07 USD for BADAGRY, every rate invented. Which lines does the floor build leave out of its total?",
+q(0, "The course prints 26513943.86 - 24774210.79 = 1739733.07 USD for BADAGRY, every rate invented. Which lines does the floor build leave out of its total?",
  "The invented import duty and the invented financing line, both percents of CIF.",
  ["The invented port and jetty lines, both levied on the bill-of-lading quantity of the cargo.",
   "The invented insurance and freight lines, both formed before CIF is frozen.",

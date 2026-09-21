@@ -19,7 +19,7 @@
    "Above it in most cases and below it in a few, with no stated direction to the error."
   ],
   "answer": 1,
-  "explanation": "The digest states that across 28 golden cases the engine sits at or above route B every time, and names the two reasons. There is no case in the set where the engine falls below, so a mixed direction or a direction that depends on the architecture is wrong. Being below everywhere would be the unconservative direction and is the opposite of what is measured."
+  "explanation": "The course states that across 28 golden cases the engine sits at or above route B every time, and names the two reasons. There is no case in the set where the engine falls below, so a mixed direction or a direction that depends on the architecture is wrong. Being below everywhere would be the unconservative direction and is the opposite of what is measured."
  },
  {
   "prompt": "Which golden case departs furthest from the time dependent route, and by how much?",
@@ -63,7 +63,7 @@
    "Both charge the same term, and the coverage cases depart for a different reason."
   ],
   "answer": 0,
-  "explanation": "The digest derives the departure exactly this way, and notes that the exact charge is lower whenever the lifetime is at least the interval, which the engine requires it to be. Halving or taking the whole lifetime misstates both sides, and the coverage cases do depart, by 2.862e-2 on the valve at reduced coverage against 4.770e-3 with a perfect test."
+  "explanation": "The course derives the departure exactly this way, and notes that the exact charge is lower whenever the lifetime is at least the interval, which the engine requires it to be. Halving or taking the whole lifetime misstates both sides, and the coverage cases do depart, by 2.862e-2 on the valve at reduced coverage against 4.770e-3 with a perfect test."
  },
  {
   "prompt": "Which of these is one of the four places the published forms depart from the exact average?",
@@ -77,7 +77,7 @@
   "explanation": "The four departures are the linearised single channel term, the equivalent down time convention, the coverage cross term and the missing 2oo2 common cause term. The decade rule is a band convention and moves no PFDavg. The sum does ignore a small overlap, which is second order at these values and is not one of the four. Bisection belongs to the interval search."
  },
  {
-  "prompt": "Why does Annex B overstate a 2oo2, on the counting the digest gives?",
+  "prompt": "Why does Annex B overstate a 2oo2, on the counting the course gives?",
   "options": [
    "A 2oo2 needs both channels to fail before it fails, so every common cause failure is counted only once where two independent failures would have been counted twice over.",
    "A 2oo2 fails on the first dangerous failure of either channel, so a failure that takes out both at once is counted twice where it should be counted once.",
@@ -107,7 +107,7 @@
    "The difference between the group and the channel equivalent down times."
   ],
   "answer": 0,
-  "explanation": "The digest prints the counting mechanism and the measured 6.43 percent, and that is all. A closed form would have to be derived rather than read, and none is published here, so none of the three expressions above has a printed line behind it. The measured figure also carries the linearisation, so it is the total conservatism of that case."
+  "explanation": "The course sets out the counting mechanism and the measured 6.43 percent, and that is all. A closed form would have to be derived rather than read, and none is published here, so none of the three expressions above has a printed line behind it. The measured figure also carries the linearisation, so it is the total conservatism of that case."
  },
  {
   "prompt": "On a subsystem with a perfect proof test, where does the engine's rare event warning fire?",

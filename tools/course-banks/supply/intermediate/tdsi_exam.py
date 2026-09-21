@@ -24,21 +24,21 @@ q(0, "Read the load minutes sweep at 26 minutes a load on IBAFO's 4 bays. Which 
  ["Utilisation 0.950000, probability of waiting 0.891419, mean wait 106.9703 minutes.",
   "Utilisation 0.975000, probability of waiting 0.300939, mean wait 245.7297 minutes.",
   "Utilisation 1.000000, probability of waiting 1.000000, mean wait none."],
- "At 26 minutes the engine prints 0.975000, 0.945114 and 245.7297 minutes. The 0.300939 at that row is the Erlang B the digest derives from the Erlang C. The 0.950000 row is 9.5 arrivals in the arrivals sweep.")
+ "At 26 minutes the engine prints 0.975000, 0.945114 and 245.7297 minutes. The 0.300939 at that row is the Erlang B the course derives from the Erlang C. The 0.950000 row is 9.5 arrivals in the arrivals sweep.")
 
-q(1, "At 16 minute loads the digest prints a probability of waiting of 0.287043 and an Erlang B of 0.138706 worked out from it. Which one is the chance an arriving truck queues?",
+q(1, "At 16 minute loads the course prints a probability of waiting of 0.287043 and an Erlang B of 0.138706 worked out from it. Which one is the chance an arriving truck queues?",
  "0.287043, the Erlang C.",
  ["0.138706, the blocking figure.",
   "Both: they describe one rack.",
   "Neither: the rack is unstable."],
- "The engine reports Erlang C as the probability of waiting. Erlang B is the probability every bay is busy in a rack with no queue, where the truck leaves, and the digest derives it from the engine's Erlang C.")
+ "The engine reports Erlang C as the probability of waiting. Erlang B is the probability every bay is busy in a rack with no queue, where the truck leaves, and the course derives it from the engine's Erlang C.")
 
-q(1, "The IBAFO rack's mean wait is 47.2652 minutes and the digest works out 60.0000 minutes from the engine's figures. Which statement is true?",
+q(1, "The IBAFO rack's mean wait is 47.2652 minutes and the course works out 60.0000 minutes from the engine's figures. Which statement is true?",
  "47.2652 averages every truck; 60.0000 averages the trucks that queue.",
  ["47.2652 averages the trucks that queue; 60.0000 averages every truck.",
   "60.0000 is the mean wait plus the 24 minute load, the time on site.",
   "60.0000 is the wait at 5 bays, 47.2652 the wait at 4."],
- "The engine's figure takes in the trucks that load at once. The digest divides it by the probability of waiting to reach the trucks that queue. 7.0353 minutes is the 5 bay rack, and the time on site is a separate row of the rack table.")
+ "The engine's figure takes in the trucks that load at once. The course divides it by the probability of waiting to reach the trucks that queue. 7.0353 minutes is the 5 bay rack, and the time on site is a separate row of the rack table.")
 
 q(2, "In the bay sweep at 9 arrivals an hour, the 6 bay row prints a mean wait of 1.9657 minutes. Which mean queue sits beside it?",
  "0.2948 trucks",
@@ -95,14 +95,14 @@ q(3, "On this IBAFO morning, which tank decides that the netted and tank-by-tank
  ["IB-T1, the petrol tank in use.",
   "IB-T3, the gas oil tank.",
   "IB-T4, the kerosene tank."],
- "The tank-by-tank count gives IB-T2 0.000 m3, since it holds 164.700 m3 against its 210.000 m3 heel. The netted farm figure charges IB-T2's heel against the product in the other three tanks, which the digest rules out: no pump lends one tank's volume to another's heel.")
+ "The tank-by-tank count gives IB-T2 0.000 m3, since it holds 164.700 m3 against its 210.000 m3 heel. The netted farm figure charges IB-T2's heel against the product in the other three tanks, which the course rules out: no pump lends one tank's volume to another's heel.")
 
 q(2, "The IBAFO farm prints a working capacity of 21845.000 m3. What does the engine take off the capacity of 22500.000 m3 to reach it?",
  "The farm's heel, 655.000 m3.",
  ["The farm's ullage, 11767.300 m3.",
   "The farm's stock, 10732.700 m3.",
   "IB-T2's heel alone, 210.000 m3."],
- "The digest defines working capacity as capacity less heel, and the farm rows read 22500.000 m3, 655.000 m3 and 21845.000 m3. 11767.300 m3 is the ullage and 10732.700 m3 the stock; 210.000 m3 is one tank's heel.")
+ "The course defines working capacity as capacity less heel, and the farm rows read 22500.000 m3, 655.000 m3 and 21845.000 m3. 11767.300 m3 is the ullage and 10732.700 m3 the stock; 210.000 m3 is one tank's heel.")
 
 # ---- throughput economics (m04)
 q(0, "IBAFO's invented costs are 2.35 USD/m3 variable and 9400.00 USD fixed. Which margin does the engine print with both typed?",
@@ -138,7 +138,7 @@ q(2, "The IBAFO period prints three carbon cases: factor and density supplied, n
  ["Only the case with the factor and the density supplied.",
   "The two cases with a density, since the loss is priced.",
   "None of them, since the margin waits on the carbon side."],
- "The digest prints revenue 20592.00 USD and margin 4988.00 USD in all three rows. The margin is revenue less the variable and fixed costs; a missing factor or density leaves the carbon columns none and moves no money figure.")
+ "The course prints revenue 20592.00 USD and margin 4988.00 USD in all three rows. The margin is revenue less the variable and fixed costs; a missing factor or density leaves the carbon columns none and moves no money figure.")
 
 # ---- the lane, the fleet and the station (m05)
 q(3, "On the IBAFO lane, why is trips a truck a day 0.664260, below one?",
@@ -247,7 +247,7 @@ q(2, "The station's dead stock of 2500.00 litres and IB-T3's heel of 150.000 m3 
   "A reserve the operator holds for breakdowns."],
  "The station's usable litres are capacity less dead stock, 37500.00 litres, and a depot tank's working capacity is capacity less heel. Room for a receipt is the ullage, capacity less stock, and neither figure is water or a breakdown reserve.")
 
-q(0, "The IBAFO farm prints an ullage, and the IBAFO forecourt prints an ullage at reorder. Which pair does the digest print?",
+q(0, "The IBAFO farm prints an ullage, and the IBAFO forecourt prints an ullage at reorder. Which pair does the course print?",
  "Farm 11767.300 m3; forecourt 28125.00 litres.",
  ["Farm 10123.000 m3; forecourt 28125.00 litres.",
   "Farm 11767.300 m3; forecourt 11875.00 litres.",
@@ -280,7 +280,7 @@ q(0, "At the forecourt the mean wait is 2.2083 minutes at 6 nozzles. Which cars 
  ["Only the cars that queue, as the rack's 60.0000 minutes does.",
   "Only the cars in the peak hour that find the nozzles full.",
   "The cars that queue plus their time at the nozzle."],
- "The forecourt is rackQueue with nozzles for bays, so its mean wait averages over every arrival, as the rack's 47.2652 minutes does. The 60.0000 minutes the digest works out for the rack averages the trucks that queue.")
+ "The forecourt is rackQueue with nozzles for bays, so its mean wait averages over every arrival, as the rack's 47.2652 minutes does. The 60.0000 minutes the course works out for the rack averages the trucks that queue.")
 
 q(3, "The daily count of 216 trucks at the rack sits beside days of cover of 3.8345. Why does the farm not use the truck count?",
  "The rack model carries no load volume.",

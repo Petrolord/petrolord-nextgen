@@ -8,7 +8,7 @@
    "A list of items, each with a severity, a count and a sentence, and a table of counts."
   ],
   "answer": 3,
-  "explanation": "The list has eleven items across blocking, serious and watch, and a table of counts beside it. The digest prints no percentage and no score for it, and ready false stands beside four blocking items."
+  "explanation": "The list has eleven items across blocking, serious and watch, and a table of counts beside it. The course prints no percentage and no score for it, and ready false stands beside four blocking items."
  },
  {
   "prompt": "Under which severity does the item \"3 applicable clauses have never been examined by an internal audit.\" sit?",
@@ -151,7 +151,7 @@
    "Quote covered less the stale clause, as the effective coverage of the register."
   ],
   "answer": 0,
-  "explanation": "The digest prints no percentage from these counts and neither does the engine. The list already says 3 uncovered clauses are never examined and blocking and 1 is stale and serious; a percentage would average that away."
+  "explanation": "The course prints no percentage from these counts and neither does the engine. The list already says 3 uncovered clauses are never examined and blocking and 1 is stale and serious; a percentage would average that away."
  },
  {
   "prompt": "The readiness counts print partial 1 and nonconformant 1. Which clause is behind each?",

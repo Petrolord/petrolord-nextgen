@@ -41,7 +41,7 @@
    "It halves from the high end and reports none."
   ],
   "answer": 2,
-  "explanation": "The digest prints the bracket written backwards, 2100 to 1200, as that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500."
+  "explanation": "The engine answers the bracket written backwards, 2100 to 1200, with that refusal, with no breakeven. The same-sign refusal belongs to a valid bracket that holds no crossing, such as 1300 to 1500."
  },
  {
   "prompt": "The breakeven search is run on the invented BADAGRY chain with no cap. What does the engine report?",

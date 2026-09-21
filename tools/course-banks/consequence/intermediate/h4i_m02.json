@@ -8,7 +8,7 @@
    "46.775288"
   ],
   "answer": 1,
-  "explanation": "The still air form L/D = 42 (m\" / (rho_air sqrt(g D)))^0.61 gives ERHA a flame length of 37.101102 m. 35.746382 m is Thomas with wind at a wind below the characteristic speed, a different correlation. 32.511563 m is Thomas with wind at 4 m/s. 46.775288 m is the Yellow Book benzene pool fire of section 21, a different fire."
+  "explanation": "The still air form L/D = 42 (m\" / (rho_air sqrt(g D)))^0.61 gives ERHA a flame length of 37.101102 m. 35.746382 m is Thomas with wind at a wind below the characteristic speed, a different correlation. 32.511563 m is Thomas with wind at 4 m/s. 46.775288 m is the Yellow Book benzene pool fire, a different fire."
  },
  {
   "prompt": "What ratio of flame length to pool diameter does the still air Thomas form return for ERHA?",
@@ -30,7 +30,7 @@
    "1.629327"
   ],
   "answer": 0,
-  "explanation": "Section 15 prints uc = 2.546226 m/s for ERHA. 3.068751 m/s is the characteristic wind speed of the Yellow Book benzene fire, a different pool. 1.570953 is ERHA's scaled wind speed u* at 4 m/s, a ratio with no unit. 1.629327 is the scaled wind speed of the Yellow Book example."
+  "explanation": "The course shows uc = 2.546226 m/s for ERHA. 3.068751 m/s is the characteristic wind speed of the Yellow Book benzene fire, a different pool. 1.570953 is ERHA's scaled wind speed u* at 4 m/s, a ratio with no unit. 1.629327 is the scaled wind speed of the Yellow Book example."
  },
  {
   "prompt": "With a 4 m/s wind at 10 m over ERHA, what scaled wind speed u* does the engine use?",
@@ -74,7 +74,7 @@
    "The burning flux falls with the wind at exactly the rate that cancels the u* power law"
   ],
   "answer": 0,
-  "explanation": "Section 15 says the scaled wind speed is held at one below uc, 2.546226 m/s for ERHA, so every wind below it gives 35.746382 m, no wind included. The engine never swaps correlations on its own: the still air form gives 37.101102 m and is only used when named. The tilt is a separate function with no effect on the length, and the burning flux is set by Babrauskas with no wind in it."
+  "explanation": "The course says the scaled wind speed is held at one below uc, 2.546226 m/s for ERHA, so every wind below it gives 35.746382 m, no wind included. The engine never swaps correlations on its own: the still air form gives 37.101102 m and is only used when named. The tilt is a separate function with no effect on the length, and the burning flux is set by Babrauskas with no wind in it."
  },
  {
   "prompt": "Thomas with wind is called with no wind at all, and Thomas in still air is called on the same fire. How do their answers relate?",
@@ -85,7 +85,7 @@
    "They differ by the ratio 1.570953, which is the scaled wind speed the wind form applies"
   ],
   "answer": 2,
-  "explanation": "Section 15 states the wind form at no wind (35.746382 m) is a different correlation from the still air form (37.101102 m): the constants 55 and 0.67 against 42 and 0.61. The method is named in every call and the two are not interchangeable. The wind form holds u* at one and does not refuse a zero wind, and 1.570953 is u* at 4 m/s, unrelated to this comparison."
+  "explanation": "The course states the wind form at no wind (35.746382 m) is a different correlation from the still air form (37.101102 m): the constants 55 and 0.67 against 42 and 0.61. The method is named in every call and the two are not interchangeable. The wind form holds u* at one and does not refuse a zero wind, and 1.570953 is u* at 4 m/s, unrelated to this comparison."
  },
  {
   "prompt": "Which constants belong to Thomas with wind as the Yellow Book states it?",
@@ -96,7 +96,7 @@
    "A leading 55, an exponent of 0.67 and a factor u* to the power -0.21"
   ],
   "answer": 3,
-  "explanation": "The engine's string reads \"Thomas with wind: L/D = 55 (m\" / (rho_air sqrt(g D)))^0.67 u*^-0.21, u* = max(1, u10 / uc)\". 42 with 0.61 is the still air form. 0.666 with 0.333 and 0.117 are the tilt correlation of section 16. 140e3 and 20e3 with exp(-0.12 D) are Mudan's surface emissive power."
+  "explanation": "The engine's string reads \"Thomas with wind: L/D = 55 (m\" / (rho_air sqrt(g D)))^0.67 u*^-0.21, u* = max(1, u10 / uc)\". 42 with 0.61 is the still air form. 0.666 with 0.333 and 0.117 are the tilt correlation. 140e3 and 20e3 with exp(-0.12 D) are Mudan's surface emissive power."
  },
  {
   "prompt": "Above uc, how does the Thomas with wind flame length respond as the wind strengthens?",
@@ -107,7 +107,7 @@
    "It shortens in proportion to the wind speed itself"
   ],
   "answer": 0,
-  "explanation": "Section 15 says that above uc the flame shortens as the wind rises, as u*^-0.21: 32.511563 m at 4 m/s, 28.107457 m at 8 m/s and 25.813232 m at 12 m/s. The length does not grow with the wind. 35.746382 m holds only below uc, and a power of -0.21 is far weaker than a straight proportion: tripling the wind from 4 to 12 m/s shortens the flame by much less than two thirds."
+  "explanation": "The course says that above uc the flame shortens as the wind rises, as u*^-0.21: 32.511563 m at 4 m/s, 28.107457 m at 8 m/s and 25.813232 m at 12 m/s. The length does not grow with the wind. 35.746382 m holds only below uc, and a power of -0.21 is far weaker than a straight proportion: tripling the wind from 4 to 12 m/s shortens the flame by much less than two thirds."
  },
  {
   "prompt": "Where does the engine's still air Thomas flame height come from?",
@@ -118,10 +118,10 @@
    "It is derived from the wind form by setting u* to one in every case"
   ],
   "answer": 1,
-  "explanation": "The digest's engine note says the consequence engine imports the still air Thomas flame height from engines/facilities/spacing.js and restates none of its helpers, and section 15 repeats that the expression is imported. A golden is test data and is never read at run time. Setting u* to one in the wind form gives 35.746382 m for ERHA, a different number from the still air 37.101102 m."
+  "explanation": "The course's engine note says the consequence engine imports the still air Thomas flame height from engines/facilities/spacing.js and restates none of its helpers, and the course repeats that the expression is imported. A golden is test data and is never read at run time. Setting u* to one in the wind form gives 35.746382 m for ERHA, a different number from the still air 37.101102 m."
  },
  {
-  "prompt": "Section 32 lists Thomas in still air among the single route quantities. What does a capstone in this course do about it?",
+  "prompt": "The course lists Thomas in still air among the single route quantities. What does a capstone in this course do about it?",
   "options": [
    "It grades the still air length at a looser tolerance, to allow for the transcription it rests on",
    "It grades it only for heptane, where the Yellow Book pool fire provides the check",
@@ -129,7 +129,7 @@
    "It grades the still air length as the upper bound on any flame length with wind"
   ],
   "answer": 2,
-  "explanation": "Section 32 marks Thomas in still air as caught by nothing but the transcription, and a single route quantity is taught and never carries a graded answer. No tolerance is loosened for it. The Yellow Book pool fire checks Thomas WITH wind, and it is a benzene fire in any case. The still air length is no bound on the wind form either: the two are separate correlations."
+  "explanation": "The course marks Thomas in still air as caught by nothing but the transcription, and a single route quantity is taught and never carries a graded answer. No tolerance is loosened for it. The Yellow Book pool fire checks Thomas WITH wind, and it is a benzene fire in any case. The still air length is no bound on the wind form either: the two are separate correlations."
  },
  {
   "prompt": "Which inputs fix ERHA's characteristic wind speed uc?",
@@ -140,7 +140,7 @@
    "The heat of combustion and the radiative fraction of the fuel"
   ],
   "answer": 0,
-  "explanation": "Section 15 gives uc = (g m\" D / rho_air)^(1/3): gravity, the burning flux, the diameter and the air density. The wind and the viscosity enter the tilt through the Froude and Reynolds numbers. The flame length and tilt are outputs downstream of uc, and the heat of combustion with the radiative fraction set the surface emissive power."
+  "explanation": "The course gives uc = (g m\" D / rho_air)^(1/3): gravity, the burning flux, the diameter and the air density. The wind and the viscosity enter the tilt through the Froude and Reynolds numbers. The flame length and tilt are outputs downstream of uc, and the heat of combustion with the radiative fraction set the surface emissive power."
  },
  {
   "prompt": "A caller hands poolFireFlameLength a burning flux of zero. What comes back?",
@@ -151,7 +151,7 @@
    "A refusal naming burningFluxKgM2S, whose words say it must be a burning flux above 0 kg/(m2 s)"
   ],
   "answer": 3,
-  "explanation": "Section 3 tables it: \"burningFluxKgM2S: must be a burning flux above 0 kg/(m2 s)\". The engine returns a result or a refusal, so a zero length with a warning is not what it does, and it never swaps a named method. The fuel refusal belongs to poolBurningRate, a different function."
+  "explanation": "The course lists it: \"burningFluxKgM2S: must be a burning flux above 0 kg/(m2 s)\". The engine returns a result or a refusal, so a zero length with a warning is not what it does, and it never swaps a named method. The fuel refusal belongs to poolBurningRate, a different function."
  },
  {
   "prompt": "How long is the ERHA flame, in metres, by the wind correlation when the breeze is 4 m/s?",
@@ -162,6 +162,6 @@
    "37.101102"
   ],
   "answer": 1,
-  "explanation": "The 4 m/s row prints u* 1.570953, L/D 1.625578 and a flame length of 32.511563 m, the length section 17 then carries into the surface emissive power. 28.107457 m belongs to 8 m/s. 35.746382 m is the held length below uc. 37.101102 m is the still air form."
+  "explanation": "The 4 m/s row prints u* 1.570953, L/D 1.625578 and a flame length of 32.511563 m, the length the course then carries into the surface emissive power. 28.107457 m belongs to 8 m/s. 35.746382 m is the held length below uc. 37.101102 m is the still air form."
  }
 ]

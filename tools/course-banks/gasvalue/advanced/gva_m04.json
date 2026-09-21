@@ -8,7 +8,7 @@
    "hitFillLimit true; the next vehicle reaches 197.7590 bar(a)"
   ],
   "answer": 1,
-  "explanation": "SECTION 31 prints hitFillLimit false and nextVehicleReachesBar 197.7590: hitFillLimit reads true only when the count reaches the maxFills cap the call carries, and here it stopped on a vehicle that could not reach its target. 195.5640 bar(a) is the studio's opening cascade."
+  "explanation": "The cascade lesson prints hitFillLimit false and nextVehicleReachesBar 197.7590: hitFillLimit reads true only when the count reaches the maxFills cap the call carries, and here it stopped on a vehicle that could not reach its target. 195.5640 bar(a) is the studio's opening cascade."
  },
  {
   "prompt": "What leftInBanksKg does IBAFO's three-bank cascade print?",
@@ -66,7 +66,7 @@
   "explanation": "The note: \"Each vehicle equalises with the lowest bank above it, then the next bank up, until it reaches its target. A bank delivers only while its pressure exceeds the vehicle tank.\" The Low bank ends at 58.9110 bar(a)."
  },
  {
-  "prompt": "What does the digest say of the heat of a fast fill in the cascade?",
+  "prompt": "What does the course say of the heat of a fast fill in the cascade?",
   "options": [
    "It is not modelled; the count is a ceiling in that one respect.",
    "It is modelled, and it brings the count down from 38 fills to 33.",
@@ -74,10 +74,10 @@
    "It raises the count, so 38 is a floor."
   ],
   "answer": 0,
-  "explanation": "SECTION 31: both engine and oracle are isothermal: the heat of a fast fill is not modelled, so a real fill settles lower and the count is a ceiling in that one respect. 33 is the studio's opening cascade."
+  "explanation": "The cascade lesson: both engine and oracle are isothermal: the heat of a fast fill is not modelled, so a real fill settles lower and the count is a ceiling in that one respect. 33 is the studio's opening cascade."
  },
  {
-  "prompt": "Which storedKg does IBAFO's cascade print, and what does the digest print beside it?",
+  "prompt": "Which storedKg does IBAFO's cascade print, and what does the course print beside it?",
   "options": [
    "608.505 kg, the same as the Low, Mid and High bank masses summed",
    "665.879 kg, the same as the Low, Mid and High bank masses summed",
@@ -85,7 +85,7 @@
    "1274.384 kg, the same as the Low, Mid and High bank masses summed"
   ],
   "answer": 3,
-  "explanation": "The cascade table prints storedKg 1274.384 and, beside it, the Low, Mid and High bank masses summed (SECTION 30) as 1274.384. storedKg minus deliveredKg minus leftInBanksKg prints 0.000."
+  "explanation": "The cascade table prints storedKg 1274.384 and, beside it, the Low, Mid and High bank masses summed (the bank lesson) as 1274.384. storedKg minus deliveredKg minus leftInBanksKg prints 0.000."
  },
  {
   "prompt": "What does cngCompression do with the Facilities compression engine?",
@@ -96,7 +96,7 @@
    "It checks that engine's thermodynamics by an oracle of its own."
   ],
   "answer": 1,
-  "explanation": "SECTION 32: cngCompression does not compute compression itself. It converts the station's metric inputs to the field units the Facilities compression engine speaks, calls it, and converts the answer back. Its basis reads that it converts units and does not reimplement the thermodynamics, and SECTION 32 says the thermodynamics belong to the Facilities course."
+  "explanation": "The compressor lesson: cngCompression does not compute compression itself. It converts the station's metric inputs to the field units the Facilities compression engine speaks, calls it, and converts the answer back. Its basis reads that it converts units and does not reimplement the thermodynamics, and the compressor lesson says the thermodynamics belong to the Facilities course."
  },
  {
   "prompt": "For IBAFO's 400 kg/h of gas 0.62 with suction at 5 bar(a), what does the bridge print?",
@@ -118,7 +118,7 @@
    "4 stages, each at 2.6723"
   ],
   "answer": 3,
-  "explanation": "SECTION 32 prints stageCount 4 and a ratio of 2.6723 on every stage, from 5.0000 to 255.0000 bar(a). 13.3620 and 35.7070 are stage discharge pressures in bar(a)."
+  "explanation": "The compressor lesson prints stageCount 4 and a ratio of 2.6723 on every stage, from 5.0000 to 255.0000 bar(a). 13.3620 and 35.7070 are stage discharge pressures in bar(a)."
  },
  {
   "prompt": "cngCompression is given a discharge below its suction. What does it print?",
@@ -129,7 +129,7 @@
    "A train with a single stage whose ratio is below one."
   ],
   "answer": 2,
-  "explanation": "SECTION 32's probe table prints this refusal for discharge below suction. The start and target refusal is the cascade's (SECTION 31); the throughput refusal is the probe with no throughput."
+  "explanation": "The compressor lesson's probe table prints this refusal for discharge below suction. The start and target refusal is the cascade's (the cascade lesson); the throughput refusal is the probe with no throughput."
  },
  {
   "prompt": "IBAFO's forecourt takes 14 buses an hour at 6 minutes a fill. What average wait does it give on 3 dispensers?",
@@ -140,7 +140,7 @@
    "0.2024 minutes"
   ],
   "answer": 2,
-  "explanation": "SECTION 33 prints averageWaitMinutes 5.7647 on 2 dispensers and 0.7588 on 3. 0.5765 and 0.2024 are the probabilityOfWaiting on 2 and on 3."
+  "explanation": "The forecourt lesson prints averageWaitMinutes 5.7647 on 2 dispensers and 0.7588 on 3. 0.5765 and 0.2024 are the probabilityOfWaiting on 2 and on 3."
  },
  {
   "prompt": "IBAFO's forecourt is run at 25 buses an hour on 2 dispensers. What does cngDispensing return?",

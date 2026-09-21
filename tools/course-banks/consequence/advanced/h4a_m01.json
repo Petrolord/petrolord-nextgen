@@ -8,7 +8,7 @@
    "1192.173913 kg, which is the row printed for 0.04"
   ],
   "answer": 2,
-  "explanation": "The engine's model string is Q_TNT = alpha_e Qf Emf / Em_TNT and the digest prints 2980.434783 kg against a yield factor of 0.1. 596.086957, 1192.173913 and 5960.869565 kg are the rows for 0.02, 0.04 and 0.2: each is the right arithmetic at a different stated yield, and the TNT mass is linear in the yield, so reading the wrong row moves the answer in proportion."
+  "explanation": "The engine's model string is Q_TNT = alpha_e Qf Emf / Em_TNT and the engine returns 2980.434783 kg against a yield factor of 0.1. 596.086957, 1192.173913 and 5960.869565 kg are the rows for 0.02, 0.04 and 0.2: each is the right arithmetic at a different stated yield, and the TNT mass is linear in the yield, so reading the wrong row moves the answer in proportion."
  },
  {
   "prompt": "On the same BONGA cloud, which stated yield factor produces the TNT equivalent mass of 1192.173913 kg?",
@@ -19,7 +19,7 @@
    "0.2"
   ],
   "answer": 0,
-  "explanation": "The digest's table pairs 1192.173913 kg with a yield factor of 0.04. The yield of 0.02 gives 596.086957 kg, 0.1 gives 2980.434783 kg and 0.2 gives 5960.869565 kg. The yield is the caller's input; the Yellow Book reports 0.02 to 0.2 in use, and the engine carries no default for it."
+  "explanation": "The course's table pairs 1192.173913 kg with a yield factor of 0.04. The yield of 0.02 gives 596.086957 kg, 0.1 gives 2980.434783 kg and 0.2 gives 5960.869565 kg. The yield is the caller's input; the Yellow Book reports 0.02 to 0.2 in use, and the engine carries no default for it."
  },
  {
   "prompt": "An analyst types the TNT blast energy in kJ/kg instead of J/kg. What does the engine return, in its own words?",
@@ -30,7 +30,7 @@
    "A refusal naming `tntBlastEnergyJKg`: \"tntBlastEnergyJKg: must be the TNT blast energy in J/kg, between 4.0e6 and 5.0e6 (the YB cites 4.19e6 to 4.65e6)\""
   ],
   "answer": 3,
-  "explanation": "Section 3 tables this refusal: the TNT blast energy is refused outside 4.0e6 to 5.0e6 J/kg precisely to catch a units slip, and the field named is `tntBlastEnergyJKg`. No result comes back, so neither a scaled up TNT mass nor a warning is returned. The yield field is a different refusal with its own message."
+  "explanation": "The course lists this refusal: the TNT blast energy is refused outside 4.0e6 to 5.0e6 J/kg precisely to catch a units slip, and the field named is `tntBlastEnergyJKg`. No result comes back, so neither a scaled up TNT mass nor a warning is returned. The yield field is a different refusal with its own message."
  },
  {
   "prompt": "A yield factor is typed as a percentage, 10, where the engine expects a fraction. Which message does the engine return?",
@@ -44,7 +44,7 @@
   "explanation": "The yield must lie in (0, 1], so 10 is refused on the field `yieldFactor` with the message quoted. The TNT energy message belongs to a units slip in the blast energy. The discharge coefficient and radiative fraction messages share the (0, 1] form but belong to `liquidOrificeDischarge` and `surfaceEmissivePower`, and the engine names the field that failed."
  },
  {
-  "prompt": "Section 32 plants the same mistake in the engine and its oracle and asks what still catches it. What does it say catches a mistake in the TNT equivalence?",
+  "prompt": "The course's test plants the same mistake in the engine and its oracle and asks what still catches it. What does it say catches a mistake in the TNT equivalence?",
   "options": [
    "The published conference column, which the golden labels as a published case and reproduces within 1.70e-4",
    "Nothing: the transcription alone, so the TNT equivalence is taught and never graded",
@@ -52,7 +52,7 @@
    "The Yellow Book worked cases, together with the oracle's own nozzle maximisation"
   ],
   "answer": 1,
-  "explanation": "The section 32 row for the TNT equivalence reads 'nothing: the transcription alone' and 'no' under graded. The conference column stands behind Kinney and Graham, the OSD/30 lethal doses behind the thermal presets, and the Yellow Book worked cases with the nozzle maximisation behind the outflow through a hole. That is why every capstone that needs a TNT mass STATES it."
+  "explanation": "The course's row for the TNT equivalence reads 'nothing: the transcription alone' and 'no' under graded. The conference column stands behind Kinney and Graham, the OSD/30 lethal doses behind the thermal presets, and the Yellow Book worked cases with the nozzle maximisation behind the outflow through a hole. That is why every capstone that needs a TNT mass STATES it."
  },
  {
   "prompt": "BONGA's stated charge is 500 kg of TNT. What scaled distance does the engine report for a target 100 m away?",
@@ -77,7 +77,7 @@
   "explanation": "Two charges give the same overpressure at the same Z, and Z divides the distance by the cube root of the charge. A charge eight times heavier therefore meets the same Z at twice the distance. Proportional scaling and square root scaling are wrong laws for this model, and holding the distance fixed raises the overpressure because Z falls."
  },
  {
-  "prompt": "The digest runs eight times BONGA's 500 kg charge at twice 100 m. What overpressure does the engine print for that case?",
+  "prompt": "The course runs eight times BONGA's 500 kg charge at twice 100 m. What overpressure does the engine print for that case?",
   "options": [
    "3427.919093 Pa, the original 500 kg charge at the 200 m row",
    "19626.657230 Pa, which is the original charge at the 50 m row",
@@ -88,7 +88,7 @@
   "explanation": "Eight times the charge at twice the distance has the same Z as the original charge at 100 m, so the engine gives 7457.699887 Pa both ways. 3427.919093 Pa is the original charge at 200 m, which forgets to scale the charge. 19626.657230 Pa is the 50 m row, and 9985.363723 Pa is the ratio table at Z = 10, a nearby Z that is not this one."
  },
  {
-  "prompt": "In the digest's table of the ratio over ambient against Z, what overpressure in Pa does the Kinney and Graham fit give at Z = 5?",
+  "prompt": "In the course's table of the ratio over ambient against Z, what overpressure in Pa does the Kinney and Graham fit give at Z = 5?",
   "options": [
    "9985.363723 Pa",
    "207926.999232 Pa",
@@ -118,7 +118,7 @@
    "It is fixed by the conference column, whose five published cases run from Z = 0.05 up to 40"
   ],
   "answer": 2,
-  "explanation": "Section 24 says the validation record calls the range a JUDGEMENT, and the engine's range string reads \"Z in [0.05, 40] m/kg^(1/3) (judgement; see findings)\". The sources read print no range for Kinney and Graham itself, so it is neither printed with the fit nor stated by the Yellow Book, and the conference column's five cases do not define a span."
+  "explanation": "The course says the validation record calls the range a JUDGEMENT, and the engine's range string reads \"Z in [0.05, 40] m/kg^(1/3) (judgement; see findings)\". The sources read print no range for Kinney and Graham itself, so it is neither printed with the fit nor stated by the Yellow Book, and the conference column's five cases do not define a span."
  },
  {
   "prompt": "A call asks `kinneyGrahamOverpressure` for a scaled distance beyond 40 m/kg^(1/3). What comes back?",

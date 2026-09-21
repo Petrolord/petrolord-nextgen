@@ -98,9 +98,9 @@ FILES="
 digest_for() {
   case $1 in
     20261007_h5_qra_course           ) echo 6fc6b28ff0531dfc73e282ef6a192ab69d274af0ccb6234c13eb95cf2d438a23 ;;
-    20261007_h5_qra_beginner_deep    ) echo a8fe8891dcbf985de4e9f016dfaf17febc18bdcc84839206775dff61d955f87f ;;
-    20261007_h5_qra_intermediate_deep) echo afda92fe199f394823f0515fc07e323c37f41e40376a26ae12fc46cad46915ad ;;
-    20261007_h5_qra_advanced_deep    ) echo dea1d5d5909bc8444edb90b717b133ab01a6a5177e742f49d3d0cb21ca868e74 ;;
+    20261007_h5_qra_beginner_deep    ) echo 7f555dc0c28a5101f312292cc54e3e88d45cad4f122cb3c7ab72a033fd19dcf2 ;;
+    20261007_h5_qra_intermediate_deep) echo 7cd80890e4174460bc52321874dd70dbabd526d4b40f615ede7223d66fb7c923 ;;
+    20261007_h5_qra_advanced_deep    ) echo 87fec3be4a4788b4952623d27a6337042adb5d2f2ab31d1b7ed7ed1ff5674369 ;;
     20261007_h5_qra_go_live          ) echo 37d5a89bae0d8eb101f7a5bb7a9d5d6244028be6d62d717bef5ac830c4b4f5ea ;;
     *) echo UNPINNED ;;
   esac

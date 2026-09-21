@@ -44,7 +44,7 @@
   "explanation": "10123.000 m3 is the sum of each tank's stock above its own heel. 10077.700 m3 is the farm's stock less the farm's heel in one step, 10732.700 m3 the stock with no heel taken off, and 21845.000 m3 the working capacity."
  },
  {
-  "prompt": "The digest prints the farm's stock less the farm's heel as 10077.700 m3 and says it is not pumpable stock. What is wrong with it?",
+  "prompt": "The course prints the farm's stock less the farm's heel as 10077.700 m3 and says it is not pumpable stock. What is wrong with it?",
   "options": [
    "It counts IB-T2's 164.700 m3 as pumpable, since the whole stock is netted in one step.",
    "It fills IB-T2's heel shortfall with product from the other tanks.",
@@ -52,7 +52,7 @@
    "It leaves the heel of IB-T4 out, since kerosene is netted apart from petrol."
   ],
   "answer": 1,
-  "explanation": "Netting across the farm lets IB-T2's missing heel volume be made good from other tanks' product. In the digest's words, \"no pump lends one tank's volume to another's heel\". Counted tank by tank the pumpable stock is 10123.000 m3."
+  "explanation": "Netting across the farm lets IB-T2's missing heel volume be made good from other tanks' product. In the course's words, \"no pump lends one tank's volume to another's heel\". Counted tank by tank the pumpable stock is 10123.000 m3."
  },
  {
   "prompt": "The IBAFO farm prints 3.8345 days of cover. Which two figures does the engine divide to get it?",
@@ -118,7 +118,7 @@
    "As IB-T2's capacity less its stock, summed with the other tanks."
   ],
   "answer": 3,
-  "explanation": "IB-T2's row prints capacity 7500.000 m3, stock 164.700 m3 and ullage 7335.300 m3, and the digest counts the farm's ullage as each tank's capacity less its stock, never below zero, summed over the tanks. The heel appears in no part of that count."
+  "explanation": "IB-T2's row prints capacity 7500.000 m3, stock 164.700 m3 and ullage 7335.300 m3, and the course counts the farm's ullage as each tank's capacity less its stock, never below zero, summed over the tanks. The heel appears in no part of that count."
  },
  {
   "prompt": "IBAFO's days of cover of 3.8345 is pumpable stock over daily throughput. Which quantity has no place in that formula?",

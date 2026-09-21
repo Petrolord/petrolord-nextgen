@@ -8,7 +8,7 @@
    "flare CO2, t/yr and flare methane, t/yr"
   ],
   "answer": 0,
-  "explanation": "SECTION 9 says of kgPerMscf and c3PlusKgPerMscf: they are the most any route can take out of a thousand standard cubic feet, by mass. On EGBEMA they read 26.7066 and 6.6647."
+  "explanation": "The mass ceiling lesson says of kgPerMscf and c3PlusKgPerMscf: they are the most any route can take out of a thousand standard cubic feet, by mass. On EGBEMA they read 26.7066 and 6.6647."
  },
  {
   "prompt": "Which line of the EGBEMA end-to-end table needs the methane GWP of 29.8?",
@@ -22,7 +22,7 @@
   "explanation": "CO2e is the CO2 plus the methane times the GWP. With the GWP left blank the engine still reports flareCo2Tonnes 182079.024 and flareCh4Tonnes 1136.490, and flareCo2eTonnes reads null."
  },
  {
-  "prompt": "The digest reads the studio's opening gas the same way as EGBEMA. At which line does its table end?",
+  "prompt": "The course reads the studio's opening gas the same way as EGBEMA. At which line does its table end?",
   "options": [
    "flare CO2, t/yr",
    "flare CO2e, t/yr",
@@ -44,7 +44,7 @@
   "explanation": "The studio's table prints liquids 2.6894 and richness rich; 2.6894 is at or above the upper edge of 2.5000. 5.0897 is its gpmC2Plus and 3.2205 is EGBEMA's liquids line."
  },
  {
-  "prompt": "Beside its analysis, which flare inputs does the digest give EGBEMA?",
+  "prompt": "Beside its analysis, which flare inputs does the course give EGBEMA?",
   "options": [
    "10 MMscfd, 350 days, 0.97, 0.955 and a GWP of 29.8",
    "7.5 MMscfd, 355 days, 0.97, 0.955 and a GWP of 20",
@@ -74,7 +74,7 @@
    "1308.6069"
   ],
   "answer": 1,
-  "explanation": "SECTION 15's studio table opens at 1210.7800; 1248.4110 opens EGBEMA's."
+  "explanation": "The end-to-end lesson's studio table opens at 1210.7800; 1248.4110 opens EGBEMA's."
  },
  {
   "prompt": "Line one of EGBEMA's table reads sheet sum 1.0000. What does the same sheet typed short report?",
@@ -143,7 +143,7 @@
   "explanation": "CO2e is the CO2 plus the methane times the GWP; the destruction efficiency sets the methane and the combustion efficiency sets the CO2. With the GWP left blank the CO2 and the methane are still reported."
  },
  {
-  "prompt": "EGBEMA is analysed with propane's liquid density left blank. Which two end-to-end lines does the digest print as null on that probe?",
+  "prompt": "EGBEMA is analysed with propane's liquid density left blank. Which two end-to-end lines does the course print as null on that probe?",
   "options": [
    "The liquids line and the propane and heavier kg/Mscf",
    "The heating value line and the liquids line",
@@ -151,7 +151,7 @@
    "The liquids line and the richness line"
   ],
   "answer": 3,
-  "explanation": "SECTION 8's probe row prints gpmC3Plus null and richness null beside ghvBtuScf 1248.4110. SECTION 9 prints c3PlusKgPerMscf 6.6647 and kgPerMscf 26.7066 on the same probe."
+  "explanation": "The density lesson's probe row prints gpmC3Plus null and richness null beside ghvBtuScf 1248.4110. The mass ceiling lesson prints c3PlusKgPerMscf 6.6647 and kgPerMscf 26.7066 on the same probe."
  },
  {
   "prompt": "On the studio's opening gas, which figure counts only the carbon that can burn, per mole?",

@@ -8,7 +8,7 @@
    "0.129090 kg/s, CHOKED"
   ],
   "answer": 1,
-  "explanation": "Section 33 opens the chain with 1.032722 kg/s, CHOKED, the 2000000 Pa row of the AMENAM gas table. 0.129090, 0.258180 and 5.163609 kg/s are the 250000, 500000 and 10000000 Pa rows: once choked the mass rate is linear in the upstream pressure, so each is right only at its own pressure."
+  "explanation": "The course opens the chain with 1.032722 kg/s, CHOKED, the 2000000 Pa row of the AMENAM gas table. 0.129090, 0.258180 and 5.163609 kg/s are the 250000, 500000 and 10000000 Pa rows: once choked the mass rate is linear in the upstream pressure, so each is right only at its own pressure."
  },
  {
   "prompt": "That rate is treated as a sustained release of carbon monoxide in the UBIT wind, class F. What concentration, in mg/m3, does the engine give at ground level 200 m downwind?",
@@ -19,7 +19,7 @@
    "4582.243793"
   ],
   "answer": 3,
-  "explanation": "Section 33 prints 4582.243793 mg/m3 for the chained release, class F, at 200 m. The other three are UBIT's own 2 kg/s release at other classes or distances: 1272.709839 in class D at 200 m, 1562.900663 in class F at 500 m and 4764.608684 in class D at 100 m. Each step of the chain is one engine call carrying its basis."
+  "explanation": "The course shows 4582.243793 mg/m3 for the chained release, class F, at 200 m. The other three are UBIT's own 2 kg/s release at other classes or distances: 1272.709839 in class D at 200 m, 1562.900663 in class F at 500 m and 4764.608684 in class D at 100 m. Each step of the chain is one engine call carrying its basis."
  },
  {
   "prompt": "Held for 30 minutes on the pb-carbon-monoxide preset, what lethality probability does the chain end at?",
@@ -30,7 +30,7 @@
    "0.500000"
   ],
   "answer": 0,
-  "explanation": "Section 33 gives a probit of 4.431141 and a probability of 0.284726. Reporting 4.431141 gives the probit where a probability is asked for. 0.833393 is the Purple Book's worked case at 21,300 mg/m3 for 30 minutes, a far higher concentration, and one half would need a probit of 5."
+  "explanation": "The course gives a probit of 4.431141 and a probability of 0.284726. Reporting 4.431141 gives the probit where a probability is asked for. 0.833393 is the Purple Book's worked case at 21,300 mg/m3 for 30 minutes, a far higher concentration, and one half would need a probit of 5."
  },
  {
   "prompt": "The chain ends on a Purple Book toxic preset. What standing does that probability have in this course?",
@@ -41,10 +41,10 @@
    "It stands as a risk figure for the receptor"
   ],
   "answer": 2,
-  "explanation": "The brief lists any Purple Book toxic preset, other than as a teaching comparison, among what is never graded, and section 32 says every graded toxic probit uses a Lees preset. The carbon monoxide case is evidence for that one preset without making the chain gradable, a conversion changes nothing about the chain as written, and a probability of harm given the release is no risk figure."
+  "explanation": "The brief lists any Purple Book toxic preset, other than as a teaching comparison, among what is never graded, and the course says every graded toxic probit uses a Lees preset. The carbon monoxide case is evidence for that one preset without making the chain gradable, a conversion changes nothing about the chain as written, and a probability of harm given the release is no risk figure."
  },
  {
-  "prompt": "Which of these must a consequence note state, by section 33?",
+  "prompt": "Which of these must a consequence note state, by the course's rule?",
   "options": [
    "Every warning the engine returned, beside every model named by the method the engine reports",
    "The frequency of the release and the individual risk at the receptor, so that the reader can judge the consequence",
@@ -52,10 +52,10 @@
    "The tolerance to which the capstone grades"
   ],
   "answer": 0,
-  "explanation": "Section 33 lists what the note states: the release case, the regime, the weather and why, the receptor, every model by the method the engine reports, every stated input, every warning, the probit preset and its source, and what the engine did not model. Frequency and individual risk belong to the later quantitative risk course, the steps are the note's content, and tolerances are no part of it."
+  "explanation": "The course lists what the note states: the release case, the regime, the weather and why, the receptor, every model by the method the engine reports, every stated input, every warning, the probit preset and its source, and what the engine did not model. Frequency and individual risk belong to the later quantitative risk course, the steps are the note's content, and tolerances are no part of it."
  },
  {
-  "prompt": "Section 33 asks the note to list every stated input that is not the engine's own. Which list is it?",
+  "prompt": "The course asks the note to list every stated input that is not the engine's own. Which list is it?",
   "options": [
    "The gravitational constant, the gas constant and the ambient pressure, which the engine exports as named constants",
    "The Briggs coefficients, the Kinney and Graham constants and the Table 5.1 cells, which the engine exports",
@@ -63,10 +63,10 @@
    "A pool thickness, a transmissivity, a TNT yield, a radiative fraction and a soot fraction"
   ],
   "answer": 3,
-  "explanation": "The inputs section 33 names are the analyst's judgements: a pool thickness (no spreading model), a transmissivity (stated for any graded heat flux), a TNT yield (the caller's), a radiative fraction and a soot fraction. G_M_S2, R_J_MOL_K, ATM_PA and the Briggs and Kinney and Graham constants are the engine's own, and neither the discharge coefficient of 0.62 nor the default Schmidt number of 0.8 is on the section 33 list."
+  "explanation": "The inputs the course names are the analyst's judgements: a pool thickness (no spreading model), a transmissivity (stated for any graded heat flux), a TNT yield (the caller's), a radiative fraction and a soot fraction. G_M_S2, R_J_MOL_K, ATM_PA and the Briggs and Kinney and Graham constants are the engine's own, and neither the discharge coefficient of 0.62 nor the default Schmidt number of 0.8 is on the course's list."
  },
  {
-  "prompt": "The surface emissive power, the thermal presets and the two toxic sources each give different answers for one case. What does section 33 ask the note to do?",
+  "prompt": "The surface emissive power, the thermal presets and the two toxic sources each give different answers for one case. What does the course ask the note to do?",
   "options": [
    "Average the methods so that the figure reported does not favour any one source",
    "Say which method it used and why, and show the other beside it: the disagreement is information",
@@ -74,7 +74,7 @@
    "Report whichever method the engine returns first"
   ],
   "answer": 1,
-  "explanation": "Section 33: WHEN TWO METHODS DISAGREE the note says which one it used and why and shows the other beside it. The engine does not average methods, hiding the others loses the information, and every result names its method in its basis, so there is no order to pick a 'first' from."
+  "explanation": "The course explains: WHEN TWO METHODS DISAGREE the note says which one it used and why and shows the other beside it. The engine does not average methods, hiding the others loses the information, and every result names its method in its basis, so there is no order to pick a 'first' from."
  },
  {
   "prompt": "ERHA at a 4 m/s wind carries a surface emissive power of 30886.154395, 180128.456236 or 52025.691247 W/m2. Why must a note quote a heat flux with the method that made it?",
@@ -85,7 +85,7 @@
    "Because the three figures are the same power in three different units, W/m2, kW/m2 and MW/m2"
   ],
   "answer": 2,
-  "explanation": "Section 17 prints the three methods, mudan-diameter, radiative-fraction and radiative-fraction-soot, for one fire and says that is why every call names its method and a heat flux is quoted with it. All three are valid calls, no capstone method is involved, and all three are in W/m2."
+  "explanation": "The course shows the three methods, mudan-diameter, radiative-fraction and radiative-fraction-soot, for one fire and says that is why every call names its method and a heat flux is quoted with it. All three are valid calls, no capstone method is involved, and all three are in W/m2."
  },
  {
   "prompt": "Which model does this course add that the facilities pool fire setback states it does not provide?",
@@ -96,7 +96,7 @@
    "The Bagster transmissivity, which the facilities engines leave out of their fire work"
   ],
   "answer": 2,
-  "explanation": "Section 22: the facilities pool fire setback states it does not provide the solid flame model; this course adds it and grades only the solid flame. The engine re-exposes no point source model and carries a test asserting it exports none, no jet fire is in the engine, and Bagster is a single route quantity of this engine that the facilities setback has no bearing on."
+  "explanation": "The course explains: the facilities pool fire setback states it does not provide the solid flame model; this course adds it and grades only the solid flame. The engine re-exposes no point source model and carries a test asserting it exports none, no jet fire is in the engine, and Bagster is a single route quantity of this engine that the facilities setback has no bearing on."
  },
  {
   "prompt": "A manager asks for this consequence to be placed in a band of a risk matrix. Which course do the academy's risk matrices belong to?",
@@ -107,10 +107,10 @@
    "The Facilities courses"
   ],
   "answer": 0,
-  "explanation": "Section 22 assigns the academy's risk matrices to the risk and change course. This course computes effects in physical units and places nothing on a matrix. The later quantitative risk course owns individual risk, the potential loss of life and the F-N curve, and the Facilities courses own setbacks."
+  "explanation": "The course assigns the academy's risk matrices to the risk and change course. This course computes effects in physical units and places nothing on a matrix. The later quantitative risk course owns individual risk, the potential loss of life and the F-N curve, and the Facilities courses own setbacks."
  },
  {
-  "prompt": "Routine emissions, produced water treatment and tank vapour losses come up in a review of the same facility. Where does section 22 place them?",
+  "prompt": "Routine emissions, produced water treatment and tank vapour losses come up in a review of the same facility. Where does the course place them?",
   "options": [
    "In this course's Associate tier, since the Mackay and Matsugu pool evaporation already computes a tank vapour loss",
    "In the Gaussian plume, which the engine runs for a routine release when it is given a stack height",
@@ -118,7 +118,7 @@
    "In other courses: this course models an accidental release and nothing routine"
   ],
   "answer": 3,
-  "explanation": "Section 22 says routine emissions and their accounting, produced water treatment and tank vapour losses are other courses' subjects, and this course models an accidental release. Mackay and Matsugu is a pool evaporation rate for a spill, the plume models an accidental release even from a stack, and the quantitative risk course owns frequency and risk measures with no greenhouse or oil in water measure among them."
+  "explanation": "The course says routine emissions and their accounting, produced water treatment and tank vapour losses are other courses' subjects, and this course models an accidental release. Mackay and Matsugu is a pool evaporation rate for a spill, the plume models an accidental release even from a stack, and the quantitative risk course owns frequency and risk measures with no greenhouse or oil in water measure among them."
  },
  {
   "prompt": "A note states the weather and why. Why might it state class F for a ground level release of UBIT?",
@@ -129,7 +129,7 @@
    "Because class F is the only class inside the 100 m to 10 km range where the Briggs sigmas carry no warning"
   ],
   "answer": 1,
-  "explanation": "Section 11: the stable night-time class F gives 1562.900663 mg/m3 at 500 m, derived 6.519887 times class D, because the plume stays thin and near the ground, so a note says why it chose it. D is neutral and the engine applies no default class; A is the most unstable; and every class has the same warning range."
+  "explanation": "The course explains: the stable night-time class F gives 1562.900663 mg/m3 at 500 m, derived 6.519887 times class D, because the plume stays thin and near the ground, so a note says why it chose it. D is neutral and the engine applies no default class; A is the most unstable; and every class has the same warning range."
  },
  {
   "prompt": "UBIT at 500 m in class D gives 239.712839 mg/m3 on the centreline and 105.544135 mg/m3 at 50 m crosswind. Why must the note say whether its receptor is on the centreline?",
@@ -140,7 +140,7 @@
    "Because the ground reflection doubles the off axis value"
   ],
   "answer": 0,
-  "explanation": "Section 13: the ratio to the centreline is exp(-y^2 / 2 sigma_y^2), 0.440294 at 50 m, and the distance to a concentration is ALWAYS a centreline distance, so a receptor to the side sees less. The plume accepts off axis receptors, 0.876998 is the ratio at 20 m and is less than one, and the reflection doubles the ground level value everywhere it applies."
+  "explanation": "The course explains: the ratio to the centreline is exp(-y^2 / 2 sigma_y^2), 0.440294 at 50 m, and the distance to a concentration is ALWAYS a centreline distance, so a receptor to the side sees less. The plume accepts off axis receptors, 0.876998 is the ratio at 20 m and is less than one, and the reflection doubles the ground level value everywhere it applies."
  },
  {
   "prompt": "A note on BONGA's blast lists what the engine did not model. Which entry belongs there?",
@@ -151,7 +151,7 @@
    "The distance for an overpressure"
   ],
   "answer": 2,
-  "explanation": "Section 25: the fit is a FREE AIR burst and a burst at the ground reflects its shock and is not modelled; the multi-energy method, which treats congestion, is not in the engine. The fit is refused only outside Z = 0.05 to 40, so 300 m is simply the last printed row; `tntEquivalentMass` and `distanceForOverpressure` are both engine functions."
+  "explanation": "The course explains: the fit is a FREE AIR burst and a burst at the ground reflects its shock and is not modelled; the multi-energy method, which treats congestion, is not in the engine. The fit is refused only outside Z = 0.05 to 40, so 300 m is simply the last printed row; `tntEquivalentMass` and `distanceForOverpressure` are both engine functions."
  },
  {
   "prompt": "Which statement of the chain's harm result meets the consequence note's standard for the probit preset?",
@@ -162,6 +162,6 @@
    "A probability of 0.284726 on the pb-carbon-monoxide preset, source TNO Purple Book CPR 18E (1999), for 30 minutes"
   ],
   "answer": 3,
-  "explanation": "Section 33 asks for the probit preset and its source; the preset names its origin so two sources cannot be confused, and the Purple Book string is TNO Purple Book CPR 18E (1999). A bare probability hides the preset, 'a TNO probit' is ambiguous and rounding throws away figures the engine supports, and a probit alone leaves the reader to do the engine's work."
+  "explanation": "The course asks for the probit preset and its source; the preset names its origin so two sources cannot be confused, and the Purple Book string is TNO Purple Book CPR 18E (1999). A bare probability hides the preset, 'a TNO probit' is ambiguous and rounding throws away figures the engine supports, and a probit alone leaves the reader to do the engine's work."
  }
 ]

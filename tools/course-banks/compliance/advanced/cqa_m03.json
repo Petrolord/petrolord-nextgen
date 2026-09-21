@@ -55,7 +55,7 @@
   "explanation": "A clause can be stale only if it was once examined by a counting audit. 4.3 was, before the cycle began, at -1121 days. 7.2 has no counting examination, so it gets its own outcome, never, with stale false."
  },
  {
-  "prompt": "Across the four cycle lengths the digest prints for the ORASHI register, which column never changes?",
+  "prompt": "Across the four cycle lengths the course prints for the ORASHI register, which column never changes?",
   "options": [
    "stale, at 3 in every row",
    "covered, at 8 in every row",
@@ -85,7 +85,7 @@
    "Only that this register gives that pair at those two lengths."
   ],
   "answer": 3,
-  "explanation": "The table shows this register at the four lengths printed and nothing more. Never examined also reads 3 at those lengths, a separate count from stale. Quote only the rows the digest prints."
+  "explanation": "The table shows this register at the four lengths printed and nothing more. Never examined also reads 3 at those lengths, a separate count from stale. Quote only the rows the course prints."
  },
  {
   "prompt": "clauseCoverageByStandard reads ISO 14001:2015 clause 8.1 and ISO 45001:2018 clause 6.1.2, both last examined 2025-10-14. Why do they give two answers?",
@@ -129,7 +129,7 @@
    "A refusal naming 7.2 and 8.1 as the two clauses in scope with no result yet"
   ],
   "answer": 3,
-  "explanation": "The digest prints: \"2 clauses in scope have no result yet (7.2, 8.1).\" The sentence about an audit with no clauses in its scope belongs to an empty scope, a separate row."
+  "explanation": "The course prints: \"2 clauses in scope have no result yet (7.2, 8.1).\" The sentence about an audit with no clauses in its scope belongs to an empty scope, a separate row."
  },
  {
   "prompt": "What has to happen, in order, before ISA-2026-002 can move any clause's last examined date?",

@@ -96,10 +96,10 @@
    "The crude unit charging 1.2500 a barrel on every barrel of crude."
   ],
   "answer": 2,
-  "explanation": "In the fed configuration the digest prints crude unit operating cost 0.00, and the crude is still run. The three other options read ABUA as typed: 78.04 percent, the agreement flag true, and 2536290.32 at 1.2500 a barrel."
+  "explanation": "In the fed configuration the course prints crude unit operating cost 0.00, and the crude is still run. The three other options read ABUA as typed: 78.04 percent, the agreement flag true, and 2536290.32 at 1.2500 a barrel."
  },
  {
-  "prompt": "Of these changes the digest prices around ABUA's month, which one raises the margin?",
+  "prompt": "Of these changes the course prices around ABUA's month, which one raises the margin?",
   "options": [
    "The reformer stepped from 420000.00 to 440000.00 bbl.",
    "The crude unit held at 1900000 barrels for the month.",
@@ -136,11 +136,11 @@
   "options": [
    "Leave it out, so the schedule is dated from the day it is built.",
    "Pass it as a Date at local midnight, as the Suite page does.",
-   "Pass it as a Date, the way the digest's seven zone run does.",
+   "Pass it as a Date, the way the course's seven zone run does.",
    "Pass it as a YYYY-MM-DD string, so no clock or zone can move it."
   ],
   "answer": 3,
-  "explanation": "Left out, the period start is read from the machine clock. A YYYY-MM-DD string is the same calendar day in every zone, and that is how the Suite page and the digest pass it, 2027-03-01 for ABUA. A Date built at local midnight starts on 2027-02-28 in Africa/Lagos and Pacific/Kiritimati."
+  "explanation": "Left out, the period start is read from the machine clock. A YYYY-MM-DD string is the same calendar day in every zone, and that is how the Suite page and the course pass it, 2027-03-01 for ABUA. A Date built at local midnight starts on 2027-02-28 in Africa/Lagos and Pacific/Kiritimati."
  },
  {
   "prompt": "Which of ABUA's streams is valued through a unit that has room?",
@@ -162,6 +162,6 @@
    "The offgas surplus of 103638.71 bbl, lifted weekly."
   ],
   "answer": 2,
-  "explanation": "The digest sets the schedule's totals beside the plan's for all ten materials, and every row agrees. The cdu row reads 2029032.26 bbl and 2536290.32 in both, so the schedule adds no barrels and loses none."
+  "explanation": "The course sets the schedule's totals beside the plan's for all ten materials, and every row agrees. The cdu row reads 2029032.26 bbl and 2536290.32 in both, so the schedule adds no barrels and loses none."
  }
 ]

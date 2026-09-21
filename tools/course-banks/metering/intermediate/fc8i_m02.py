@@ -65,7 +65,7 @@ q(1, "How were the outlet pressures at which the regime word changes established
   "By taking the exported thresholds and scaling them on the allowable drop of the valve."],
  "Stable gives way to incipient cavitation at an outlet pressure of 174.180000 psia and incipient gives way to cavitating at an outlet pressure of 137.820000 psia.")
 
-q(2, "The engine exports the two sigma values its regime ladder turns on. What does the digest say about where those two values come from?",
+q(2, "The engine exports the two sigma values its regime ladder turns on. What does the course say about where those two values come from?",
  "Both belong to this engine, which exports them so that a reader can see what decided the word.",
  ["They are read from the published source the recovery factors come from.",
   "They are derived from the critical pressure ratio factor of the fluid.",
@@ -93,7 +93,7 @@ q(3, "An outlet pressure of 26.740000 psia sits against a vapour pressure of 28.
   "Flashing true, with the coefficient recomputed on a two-phase density the engine derives."],
  "When the outlet is at or below the vapour pressure the liquid is flashing rather than cavitating, and the engine separates the two and says which one it has.")
 
-q(2, "What does the digest print about the outlet pressure at which the flashing flag turns on, set against the stated vapour pressure?",
+q(2, "What does the course print about the outlet pressure at which the flashing flag turns on, set against the stated vapour pressure?",
  "A difference, the first less the second, of 0.000000 and a ratio, the first over the second, of 1.000000.",
  ["A difference of 2.000000 and a ratio of 1.074452, which is the margin the engine leaves before the flag turns on.",
   "A difference of 0.000000 and a ratio of 0.892161, the fluid's own critical pressure ratio factor.",

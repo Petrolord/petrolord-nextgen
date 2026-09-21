@@ -8,7 +8,7 @@
    "That the three cases protect one vessel, so exactly one of them is the size that vessel is built to."
   ],
   "answer": 2,
-  "explanation": "A load and a set of conditions arrive, a relieving pressure is worked out, one factor is computed and one is typed, a coefficient is stated, and out comes an area, a letter and a margin. The digest states only that these are three relief cases on one train, and it ranks nothing among them."
+  "explanation": "A load and a set of conditions arrive, a relieving pressure is worked out, one factor is computed and one is typed, a coefficient is stated, and out comes an area, a letter and a margin. The course states only that these are three relief cases on one train, and it ranks nothing among them."
  },
  {
   "prompt": "Which pairing of a computed factor with a typed one is correct?",
@@ -52,7 +52,7 @@
    "They are three readings of one load, taken at the three points on the train where it is measured."
   ],
   "answer": 2,
-  "explanation": "The three columns cannot be ranked by load and nothing in the digest offers a conversion between them. The required areas are comparable, because they are the same quantity in the same unit."
+  "explanation": "The three columns cannot be ranked by load and nothing in the course offers a conversion between them. The required areas are comparable, because they are the same quantity in the same unit."
  },
  {
   "prompt": "Two of the three streams end at the L orifice from required areas of 2.223779 in2 and 1.867758 in2. What does that show?",

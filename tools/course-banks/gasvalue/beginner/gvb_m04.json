@@ -19,10 +19,10 @@
    "The hydrocarbon carbon times one less the destruction efficiency"
   ],
   "answer": 0,
-  "explanation": "The methane that escapes is the methane in the gas times one less the destruction efficiency. Every unburned carbon counted as methane is the shortcut the digest prints beside the engine at 2083.055 t/yr against the engine's 1136.490."
+  "explanation": "The methane that escapes is the methane in the gas times one less the destruction efficiency. Every unburned carbon counted as methane is the shortcut the course prints beside the engine at 2083.055 t/yr against the engine's 1136.490."
  },
  {
-  "prompt": "What does the digest print for EGBEMA's methane if every unburned carbon atom is counted as methane, and over the engine's figure?",
+  "prompt": "What does the course print for EGBEMA's methane if every unburned carbon atom is counted as methane, and over the engine's figure?",
   "options": [
    "3788.301 t/yr, 1.8329 over the engine's 1136.490",
    "2083.055 t/yr, 1.8329 over the engine's 1136.490",
@@ -63,7 +63,7 @@
    "Both, through the product of the two efficiencies."
   ],
   "answer": 0,
-  "explanation": "The digest: \"The CO2 already in the gas leaves the flare as CO2 at every efficiency, and none of it is methane.\" The all-CO2 probe reads 140054.324 t/yr at EGBEMA's efficiencies and at both efficiencies 0.5."
+  "explanation": "The course states: \"The CO2 already in the gas leaves the flare as CO2 at every efficiency, and none of it is methane.\" The all-CO2 probe reads 140054.324 t/yr at EGBEMA's efficiencies and at both efficiencies 0.5."
  },
  {
   "prompt": "At what molar mass does the flare weigh its CO2 tonnes?",
@@ -121,7 +121,7 @@
   "explanation": "The range reads methane 3788.301 at 0.9, 1894.151 at 0.95, 1136.490 at 0.97, 378.830 at 0.99 and 0.000 at 1."
  },
  {
-  "prompt": "Which efficiency does the digest define as the share oxidised to CO2?",
+  "prompt": "Which efficiency does the course define as the share oxidised to CO2?",
   "options": [
    "The destruction efficiency, which sets the CO2",
    "The combustion efficiency, which sets the CO2",
@@ -132,7 +132,7 @@
   "explanation": "The DESTRUCTION efficiency is the share of hydrocarbon destroyed and sets the methane. The COMBUSTION efficiency is the share oxidised to CO2 and sets the CO2. A combustion efficiency cannot exceed the destruction efficiency."
  },
  {
-  "prompt": "In EGBEMA's \"left out minus given\" row the CO2 reads 2798.286 and the CO2e 2798.285, with the methane at 0.000. What reason does the digest give?",
+  "prompt": "In EGBEMA's \"left out minus given\" row the CO2 reads 2798.286 and the CO2e 2798.285, with the methane at 0.000. What reason does the course give?",
   "options": [
    "Each tonnage is reported to three decimals before the difference is taken.",
    "The CO2e carries the methane at the GWP, and the methane moved slightly.",

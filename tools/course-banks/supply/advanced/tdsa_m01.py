@@ -19,14 +19,14 @@ q(0, "The invented BADAGRY cargo is entered as 34000 with the unit typed as kg a
  ["A cargo of 34000 tonnes, because the engine maps a mass unit it does not list to the nearest mass unit it does.",
   "REFUSED: Density is required to convert between mass and volume; it is not assumed.",
   "REFUSED: Cargo quantity is required."],
- "The digest prints this row as REFUSED: Unknown quantity unit \"kg\". The cargo table converts entries in tonne, m3, litre and bbl, and kg is none of them, so the row returns no figure.")
+ "The course prints this row as REFUSED: Unknown quantity unit \"kg\". The cargo table converts entries in tonne, m3, litre and bbl, and kg is none of them, so the row returns no figure.")
 
 q(3, "A quantity of zero is put to cargoQuantities with a valid unit and the density of 742.8 kg/m3. What comes back?",
  "REFUSED: Cargo quantity is required.",
  ["An empty cargo in every unit, since a zero quantity is still a quantity the rules can convert.",
   "REFUSED: Density is required to convert between mass and volume; it is not assumed.",
   "REFUSED: Unknown quantity unit \"kg\"."],
- "The digest prints the zero quantity case as the refusal \"Cargo quantity is required.\" The engine forms no volume for a cargo it has not been given.")
+ "The engine answers the zero quantity case with the refusal \"Cargo quantity is required.\" The engine forms no volume for a cargo it has not been given.")
 
 q(1, "34000 tonnes of the invented BADAGRY petrol cargo are entered at its certificate density of 742.8 kg/m3. How many cubic metres does the engine return?",
  "45772.752 m3",

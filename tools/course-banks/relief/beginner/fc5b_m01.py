@@ -91,7 +91,7 @@ q(3, "The atmospheric constant of 14.700000000000 psia is not exported. How is i
  ["By reading it off the module source, where it sits as a named constant beside the leading constants of the four routes.",
   "By subtracting a stated gauge set pressure from the absolute relieving pressure the engine returns for the same case.",
   "By taking the published value the standard states and confirming that the engine agrees with it to twelve decimals."],
- "This digest never types a number the engine keeps to itself. It arranges a call whose only possible answer is that constant and says which call, and here three separate arrangements agree, one of them in the blowdown march own choked flow floor."),
+ "This course never types a number the engine keeps to itself. It arranges a call whose only possible answer is that constant and says which call, and here three separate arrangements agree, one of them in the blowdown march own choked flow floor."),
 
 q(1, "Which of these figures does the engine take as a typed input rather than compute?",
  "The balanced bellows back pressure factor Kb, which is a published chart.",

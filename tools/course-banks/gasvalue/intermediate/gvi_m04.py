@@ -15,14 +15,14 @@ q(0, "The CNG route recovers 0.88 of EGBEMA's flare of 215946.438 t/yr of CO2e. 
  ["215946.438",
   "218032.865",
   "202989.652"],
- "The digest: \"The gas it does not recover is still flared, so the avoided flare CO2e is the flare's CO2e times the recovery.\" CNG prints 190032.865. 215946.438 is the whole flare, 218032.865 the net against diesel and 202989.652 the gas to power route's avoided flare at 0.94.")
+ "The course states: \"The gas it does not recover is still flared, so the avoided flare CO2e is the flare's CO2e times the recovery.\" CNG prints 190032.865. 215946.438 is the whole flare, 218032.865 the net against diesel and 202989.652 the gas to power route's avoided flare at 0.94.")
 
 q(2, "How does abatement form the net abatement from its three terms?",
  "The avoided flare, less what burning the product emits, plus what the product displaces.",
  ["The avoided flare, plus what burning the product emits, less what the product displaces.",
   "The whole flare, less what burning the product emits, plus what the product displaces.",
   "What the product displaces, less the avoided flare, less what burning the product emits."],
- "The digest: \"The net abatement is the avoided flare, less what burning the product emits, plus what the product displaces.\" The avoided flare is the flare's CO2e times the recovery, 190032.865 on the CNG route.")
+ "The course states: \"The net abatement is the avoided flare, less what burning the product emits, plus what the product displaces.\" The avoided flare is the flare's CO2e times the recovery, 190032.865 on the CNG route.")
 
 q(1, "Against the counterfactual \"CNG displacing diesel in haulage trucks\", what does abatement print?",
  "net 218032.865; net minus the gross flare 2086.427",
@@ -50,14 +50,14 @@ q(1, "On the three CNG counterfactuals, which one gives a net abatement LARGER t
  ["Displacing pipeline gas already burned",
   "A market that burned nothing, as no fuel is burned",
   "None of the three: a net never exceeds the flare"],
- "The digest: \"Displacing diesel, the net abatement is larger than the gross flare; displacing gas already burned, or selling into a market that burned nothing, it is smaller.\" The diesel row's net minus the gross flare is 2086.427.")
+ "The course states: \"Displacing diesel, the net abatement is larger than the gross flare; displacing gas already burned, or selling into a market that burned nothing, it is smaller.\" The diesel row's net minus the gross flare is 2086.427.")
 
 q(0, "Gas to power recovers 0.94, and its counterfactual \"Gas to power for a new load that burned nothing\" types product combustion 205000 and displaced 0. What does abatement print?",
  "avoided 202989.652; net -2010.348; this route adds emissions",
  ["avoided 202989.652; net 218032.865; this route abates",
   "avoided 190032.865; net 62032.865; this route abates",
   "avoided 215946.438; net -2010.348; this route adds emissions"],
- "The digest prints avoidedFlareCo2eTonnes 202989.652 and netAbatementTonnesCo2ePerYear -2010.348, and: \"The net is below zero: this route adds emissions.\" 215946.438 is the whole flare, and 190032.865 and 62032.865 are the CNG route's figures.")
+ "The course prints avoidedFlareCo2eTonnes 202989.652 and netAbatementTonnesCo2ePerYear -2010.348, and: \"The net is below zero: this route adds emissions.\" 215946.438 is the whole flare, and 190032.865 and 62032.865 are the CNG route's figures.")
 
 q(2, "Across its three counterfactuals, what does the CNG route's avoidedFlareCo2eTonnes print?",
  "190032.865 on each of the three rows",
@@ -71,14 +71,14 @@ q(0, "In abatement's blocked probe table, which probe prints the blockedBy text 
  ["the probe at 1.5",
   "the no label probe",
   "the probe with no displaced fuel figure"],
- "The digest's probe \"no GWP\" prints a net of null beside blockedBy \"no methane global warming potential supplied\". Recovery 1.5 prints the recovery text, and the label and displaced fuel probes print the counterfactual text.")
+ "The course's probe \"no GWP\" prints a net of null beside blockedBy \"no methane global warming potential supplied\". Recovery 1.5 prints the recovery text, and the label and displaced fuel probes print the counterfactual text.")
 
 q(3, "A recovery of 1.5 is typed into abatement. What does blockedBy read?",
  "no recovery fraction in (0, 1]: gas the plant does not recover is still flared",
  ["the counterfactual is not declared: what the product displaces, and what burning it emits",
   "no methane global warming potential supplied",
   "recovery capped at 1: the whole flare is taken as avoided"],
- "The digest's probe \"recovery 1.5\" prints a net of null and blockedBy \"no recovery fraction in (0, 1]: gas the plant does not recover is still flared\", the same text as the probe with no recovery fraction.")
+ "The course's probe \"recovery 1.5\" prints a net of null and blockedBy \"no recovery fraction in (0, 1]: gas the plant does not recover is still flared\", the same text as the probe with no recovery fraction.")
 
 q(2, "Two probes leave out a counterfactual input: one has no counterfactual label, the other no displaced fuel figure. What does blockedBy read?",
  "The same text on both: the counterfactual is not declared",
@@ -92,7 +92,7 @@ q(1, "Beside a blocked net, which figure does abatement still report, and in whi
  ["190032.865 t/yr, as grossClaimIfNoCounterfactual",
   "215946.438 t/yr, as netAbatementTonnesCo2ePerYear",
   "218032.865 t/yr, as grossClaimIfNoCounterfactual"],
- "The digest: \"The flare's gross CO2e is still reported beside a blocked net, as grossClaimIfNoCounterfactual (215946.438 t/yr here): the claim the engine will not make.\" The net itself prints null on every blocked probe.")
+ "The course states: \"The flare's gross CO2e is still reported beside a blocked net, as grossClaimIfNoCounterfactual (215946.438 t/yr here): the claim the engine will not make.\" The net itself prints null on every blocked probe.")
 
 q(3, "The warning abatement prints while the counterfactual is undeclared closes on an instruction. Which?",
  "\"State what the product displaces and what burning it emits.\"",

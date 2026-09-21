@@ -19,7 +19,7 @@
    "The noise exposure was 89.242460 dBA on the NIOSH noise REL, which is over the limit and fails."
   ],
   "answer": 0,
-  "explanation": "Digest section 24 requires \"noise dose\", a qualified noise exposure and \"NIOSH noise REL\" written in full, and the course never grades a verdict word: a comparison names the criterion and its limit noise dose in the same sentence. The rewrite ending in \"fails\" still closes on a bare verdict, and the one saying \"NIOSH noise dose\" names only the agency, which leaves open which NIOSH limit is meant. The one in dBA swaps the noise dose for its TWA and keeps the verdict."
+  "explanation": "The course's naming rules require \"noise dose\", a qualified noise exposure and \"NIOSH noise REL\" written in full, and the course never grades a verdict word: a comparison names the criterion and its limit noise dose in the same sentence. The rewrite ending in \"fails\" still closes on a bare verdict, and the one saying \"NIOSH noise dose\" names only the agency, which leaves open which NIOSH limit is meant. The one in dBA swaps the noise dose for its TWA and keeps the verdict."
  },
  {
   "prompt": "The same three letters name two different NIOSH limits in this course. How must each be written?",
@@ -30,7 +30,7 @@
    "As \"NIOSH noise REL\" or \"NIOSH heat REL\", every time."
   ],
   "answer": 3,
-  "explanation": "Digest section 24 legislates it: the NIOSH recommended exposure limit for noise in this tier and the NIOSH recommended exposure limit for heat stress in the Expert tier share an acronym, so the qualifier goes in every time. Naming the agency alone leaves the limit ambiguous, which is the whole problem, and a reader may open any page without the first use in view."
+  "explanation": "The course's naming rules settle it: the NIOSH recommended exposure limit for noise in this tier and the NIOSH recommended exposure limit for heat stress in the Expert tier share an acronym, so the qualifier goes in every time. Naming the agency alone leaves the limit ambiguous, which is the whole problem, and a reader may open any page without the first use in view."
  },
  {
   "prompt": "Why does this course write \"decibel exchange rate\" in full?",
@@ -41,7 +41,7 @@
    "Because the engine refuses the field name `exchangeRateDb`."
   ],
   "answer": 1,
-  "explanation": "Digest section 24, rule 4: the words already mean a currency rate in the Economics courses, so this course always writes \"decibel exchange rate\" or \"an exchange rate of 5 dB\". It is a rule about readers arriving from other courses. `exchangeRateDb` is a valid engine field, refused only when it is not a finite number of dB above zero."
+  "explanation": "The course's naming rule 4: the words already mean a currency rate in the Economics courses, so this course always writes \"decibel exchange rate\" or \"an exchange rate of 5 dB\". It is a rule about readers arriving from other courses. `exchangeRateDb` is a valid engine field, refused only when it is not a finite number of dB above zero."
  },
  {
   "prompt": "Why does this course call a reading from a sound level meter a sound level?",
@@ -52,7 +52,7 @@
    "A sound level is a percentage of an allowance, while a reading is in dBA."
   ],
   "answer": 0,
-  "explanation": "Digest section 24, rule 3: noise already means scatter in data in the Decline Curve Analysis, Well Test and Seismolord courses, so a reading is a sound level and noise exposure is kept for a noise dose. It is a rule about readers arriving from other courses. A sound level is in dBA; the percentage of an allowance is the noise dose."
+  "explanation": "The course's naming rule 3: noise already means scatter in data in the Decline Curve Analysis, Well Test and Seismolord courses, so a reading is a sound level and noise exposure is kept for a noise dose. It is a rule about readers arriving from other courses. A sound level is in dBA; the percentage of an allowance is the noise dose."
  },
  {
   "prompt": "The capstone TWAs are graded on which coefficient, and why?",
@@ -63,18 +63,18 @@
    "The printed ones, 16.61 and 10.0, as judgement J1 has each preset use."
   ],
   "answer": 3,
-  "explanation": "The TWAs are graded on the coefficient each source prints: 16.61 on OSHA, as the mandatory Appendix A text writes it, and 10.0 on NIOSH. A TWA worked with the exact coefficient will disagree, and the digest measures how far: eight hours at a constant 100 dBA on the NIOSH preset gives 100.051500 dBA where the exact coefficient gives 100.000000. That is judgement J1, the same rule the engine's presets follow."
+  "explanation": "The TWAs are graded on the coefficient each source prints: 16.61 on OSHA, as the mandatory Appendix A text writes it, and 10.0 on NIOSH. A TWA worked with the exact coefficient will disagree, and the course measures how far: eight hours at a constant 100 dBA on the NIOSH preset gives 100.051500 dBA where the exact coefficient gives 100.000000. That is judgement J1, the same rule the engine's presets follow."
  },
  {
   "prompt": "To how many decimals does this course print a sound level, a noise dose or a duration?",
   "options": [
    "One decimal, the precision at which OSHA Table A-1 and Table G-16a print their own rows.",
-   "Twelve throughout, the precision the constants of digest section 3 carry.",
+   "Twelve throughout, the precision the constants of the lesson tables carry.",
    "Six, while a measured constant prints to twelve and a count is a whole number.",
    "Two, as the printed coefficients 16.61 and 10.0 are written."
   ],
   "answer": 2,
-  "explanation": "The digest's precision rule: sound levels in dBA, noise doses and percentages, durations in hours and in minutes, concentrations, indices, temperatures and metabolic rates print to six decimals, measured constants print to twelve and counts are whole numbers. One decimal is what the published tables print, which is a property of the sources. Twelve belongs to the measured constants alone, such as the PEL threshold at 90.000000000000 dBA."
+  "explanation": "The course's precision rule: sound levels in dBA, noise doses and percentages, durations in hours and in minutes, concentrations, indices, temperatures and metabolic rates print to six decimals, measured constants print to twelve and counts are whole numbers. One decimal is what the published tables print, which is a property of the sources. Twelve belongs to the measured constants alone, such as the PEL threshold at 90.000000000000 dBA."
  },
  {
   "prompt": "Why can judgement J2, the inclusive threshold, never decide a graded capstone answer?",
@@ -85,7 +85,7 @@
    "Because J2 applies only to NIOSH and never to OSHA."
   ],
   "answer": 1,
-  "explanation": "Digest section 23: the judgement calls are taught by name and never tested at their boundary, and no capstone input sits on a threshold. The rule still matters for real records, which do put periods on the line. The eighteen graded fields of this course include LEX values and chemical averages, so no capstone rests on the OSHA PEL alone, and levels are stated to six decimals, such as the 84.300000 dBA of the first OBEN period."
+  "explanation": "The course states it: the judgement calls are taught by name and never tested at their boundary, and no capstone input sits on a threshold. The rule still matters for real records, which do put periods on the line. The eighteen graded fields of this course include LEX values and chemical averages, so no capstone rests on the OSHA PEL alone, and levels are stated to six decimals, such as the 84.300000 dBA of the first OBEN period."
  },
  {
   "prompt": "Which of these is never graded in this course, in any tier?",
@@ -96,7 +96,7 @@
    "The LEX,8h of a day of tasks, in dBA, which the next tier adds."
   ],
   "answer": 0,
-  "explanation": "Digest section 23 lists any verdict word, exceeds, passes or at or above an action value, among the things never graded, because a verdict means nothing without its criterion and the same record gives different verdicts on different criteria. The other three name quantities the digest counts among the eighteen graded fields of this course: noise doses and TWAs, LEX values, a protector estimate, chemical averages and indices, reduction-factor arithmetic and two one-hour averages."
+  "explanation": "The course lists any verdict word, exceeds, passes or at or above an action value, among the things never graded, because a verdict means nothing without its criterion and the same record gives different verdicts on different criteria. The other three name quantities the course counts among the eighteen graded fields of this course: noise doses and TWAs, LEX values, a protector estimate, chemical averages and indices, reduction-factor arithmetic and two one-hour averages."
  },
  {
   "prompt": "A site manager asks for the OBEN worker's ACGIH noise limit to set beside the figures. What does this course do?",
@@ -107,7 +107,7 @@
    "It never quotes one, since ACGIH values are licensed and every limit is an input."
   ],
   "answer": 3,
-  "explanation": "Digest section 25: ACGIH TLVs, ISO 9612 and ISO 7243 text are licensed and never quoted, the engine embeds no limit table, and every limit is typed as an input from a public OSHA or NIOSH value. Asking for the preset 'ACGIH' is refused on `criterion`. Claiming two bodies publish the same value is itself a licensed claim this course does not make."
+  "explanation": "The course's rule: ACGIH TLVs, ISO 9612 and ISO 7243 text are licensed and never quoted, the engine embeds no limit table, and every limit is typed as an input from a public OSHA or NIOSH value. Asking for the preset 'ACGIH' is refused on `criterion`. Claiming two bodies publish the same value is itself a licensed claim this course does not make."
  },
  {
   "prompt": "Four subjects sit beside this course and are owned elsewhere. What does this course do with them?",
@@ -118,10 +118,10 @@
    "It refers them to the Expert tier, where every seam is taught in full."
   ],
   "answer": 2,
-  "explanation": "Digest section 25 says to cite and to stop. A radiant flux in kW/m2, an emission from a glycol unit, a rate per hours worked and a matrix of likelihood and consequence are each a different quantity from a noise dose, measured a different way, so this course names the owner beside the figure and computes nothing. No tier of it teaches them, and the engine offers no conversion between them."
+  "explanation": "The course says to cite and to stop. A radiant flux in kW/m2, an emission from a glycol unit, a rate per hours worked and a matrix of likelihood and consequence are each a different quantity from a noise dose, measured a different way, so this course names the owner beside the figure and computes nothing. No tier of it teaches them, and the engine offers no conversion between them."
  },
  {
-  "prompt": "Rule 1 of digest section 24 keeps one word from standing on its own here. Which word, and who else claims it?",
+  "prompt": "Rule 1 of the course's naming rules keeps one word from standing on its own here. Which word, and who else claims it?",
   "options": [
    "The word for a reading from a meter, claimed by three other courses of the academy.",
    "The shorter word for a noise dose, claimed by Flow Assurance and Gas Processing.",
@@ -129,7 +129,7 @@
    "The words for a decibel exchange rate, claimed by the Economics courses."
   ],
   "answer": 1,
-  "explanation": "Digest section 24, rule 1: this course writes \"noise dose\" on first use in every lesson and every bank question and never the shorter word on its own in a prompt, an option or a heading, because that word already belongs to inhibitor and methanol work in the Flow Assurance and Gas Processing courses. The reading, the acronym and the decibel exchange rate are rules 3, 4 and the two misreadings that close the section, each a different collision."
+  "explanation": "The course's naming rule 1: this course writes \"noise dose\" on first use in every lesson and every bank question and never the shorter word on its own in a prompt, an option or a heading, because that word already belongs to inhibitor and methanol work in the Flow Assurance and Gas Processing courses. The reading, the acronym and the decibel exchange rate are rules 3, 4 and the two misreadings that close the rules, each a different collision."
  },
  {
   "prompt": "A question asks for an octave-band protector estimate or an ISO 9612 uncertainty budget. What is the honest answer from this engine?",
@@ -140,7 +140,7 @@
    "It computes them only on the NIOSH noise REL."
   ],
   "answer": 0,
-  "explanation": "Digest section 1 lists what the engine does not provide and says so by having no door: spectral (octave-band) protector methods, ISO 9612 uncertainty budgets, ISO 7243 adjustments and any licensed limit table. `hearingProtectorEstimate` takes a named method from a fixed list, and none of them is spectral."
+  "explanation": "The course lists what the engine does not provide and says so by having no door: spectral (octave-band) protector methods, ISO 9612 uncertainty budgets, ISO 7243 adjustments and any licensed limit table. `hearingProtectorEstimate` takes a named method from a fixed list, and none of them is spectral."
  },
  {
   "prompt": "A reading taken on the C-weighting is typed into a report. How should it be written?",
@@ -151,7 +151,7 @@
    "In dBC, since it is a different weighting from dBA."
   ],
   "answer": 3,
-  "explanation": "Digest section 25: levels are in dBA unless a row says dBC, and a level read in dBC is a different weighting that must never be written as dBA. Adding a fixed step to turn one weighting into the other is no conversion this tier teaches, and a noise dose is built from A-weighted levels."
+  "explanation": "The course's unit rule: levels are in dBA unless a row says dBC, and a level read in dBC is a different weighting that must never be written as dBA. Adding a fixed step to turn one weighting into the other is no conversion this tier teaches, and a noise dose is built from A-weighted levels."
  },
  {
   "prompt": "A report of the OBEN day on the OSHA PEL lists each period's contribution. What does that list let a reader see that the total alone cannot?",

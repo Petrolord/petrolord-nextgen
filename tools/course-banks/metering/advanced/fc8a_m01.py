@@ -41,7 +41,7 @@ q(0, "What makes the choice between the two capacities such a quiet mistake to m
   "The working capacity is returned in barrels and the nominal in cubic feet, so a mix-up shows up as a units error rather than as a wrong volume."],
  "The engine returns 19608.4845 bbl and 18845.9323 bbl side by side and both are honest answers to different questions, which is why the result carries a name against each.")
 
-q(3, "The digest prints a relation between the two capacities of this tank. What does it actually give a writer permission to say?",
+q(3, "The course prints a relation between the two capacities of this tank. What does it actually give a writer permission to say?",
  "That the difference is 762.5522 bbl and the ratio is 1.040462, because the relation line carries both values, their difference and their ratio.",
  ["That the working capacity is the larger of the two by 762.5522 bbl, which is the difference printed as the first value less the second.",
   "That the ratio of 1.040462 is the working capacity over the nominal, so the working figure is what the line divides by.",

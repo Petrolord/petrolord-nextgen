@@ -29,10 +29,10 @@ q(0,
  ["The centre of the pool and the target",
   "The tip of the flame and the ground below",
   "The pool edge and the flame tip"],
- "Section 19 defines x as the path length FROM THE FLAME SURFACE to the target, in m, and pw as the partial pressure of water vapour. The pool centre is where the view factor and the distance search measure from. Neither the flame tip nor the ground below it enters the fit.")
+ "The course defines x as the path length FROM THE FLAME SURFACE to the target, in m, and pw as the partial pressure of water vapour. The pool centre is where the view factor and the distance search measure from. Neither the flame tip nor the ground below it enters the fit.")
 
 q(2,
- "Bagster is a single route quantity in section 32. What does that mean for every heat flux a capstone in this course grades?",
+ "The course lists Bagster as a single route quantity. What does that mean for every heat flux a capstone in this course grades?",
  "Each one uses a stated transmissivity, and no Bagster figure is ever graded",
  ["Each one uses Bagster at the stated humidity, and is graded at a looser tolerance",
   "Each one sets the transmissivity to one, so the air is left out of it",
@@ -57,7 +57,7 @@ q(3,
  ["The target sits inside the 10 m flame base, so the call refuses with distanceFromAxisM",
   "The heat flux there exceeds 35000 W/m2, which the engine reports as the state NOT_REACHED",
   "The Bagster band is left behind at that short path, so the call refuses with pathLengthM"],
- "Section 20 says the refusal rows are targets the tilted flame reaches over (section 18), and the 25 m row carries the field tiltDeg. A target 25 m out is beyond the 10 m base radius, so distanceFromAxisM does not apply. NOT_REACHED is a distance search state, never a heat flux refusal. The chain uses a stated transmissivity of 0.8, so Bagster is never called.")
+ "The course says the refusal rows are targets the tilted flame reaches over, and the 25 m row carries the field tiltDeg. A target 25 m out is beyond the 10 m base radius, so distanceFromAxisM does not apply. NOT_REACHED is a distance search state, never a heat flux refusal. The chain uses a stated transmissivity of 0.8, so Bagster is never called.")
 
 q(1,
  "A distance search on the ERHA chain, with the stated transmissivity of 0.8, asks where the heat flux falls to 12500 W/m2. Which distance from the pool centre in m comes back?",
@@ -71,7 +71,7 @@ q(1,
  ["REACHED, at a distance lying inside the pool edge",
   "BEYOND_SEARCH_RANGE, with a far distance of null",
   "A refusal naming tiltDeg for the close targets"],
- "Section 20 tabulates 35000 W/m2 as NOT_REACHED with null distances: a target the heat flux never reaches even at the flame returns NOT_REACHED with the largest heat flux it found. BEYOND_SEARCH_RANGE is the opposite case, a target still exceeded at the search limit. The search reports a state; it does not refuse on the overhanging close targets.")
+ "The course lists 35000 W/m2 as NOT_REACHED with null distances: a target the heat flux never reaches even at the flame returns NOT_REACHED with the largest heat flux it found. BEYOND_SEARCH_RANGE is the opposite case, a target still exceeded at the search limit. The search reports a state; it does not refuse on the overhanging close targets.")
 
 q(0,
  "Why does solidFlameDistanceForHeatFlux refuse to run without a fixed transmissivity?",
@@ -79,7 +79,7 @@ q(0,
  ["Bagster needs a humidity input the distance search function has no argument for, so it cannot be used",
   "The transmissivity is fixed at 0.8 inside the search, so any value a caller supplies is rejected outright",
   "The search runs on the point source form, which carries its own transmissivity and needs no stated one"],
- "Section 20 gives the reason: a root search would walk out of the Bagster band, so the engine refuses in its own words, \"transmissivity: a fixed transmissivity in (0, 1] is required for a distance search\". The search passes every argument of the chain through, a water vapour partial pressure included, so no humidity argument is missing. The 0.8 in the ERHA chain is a stated teaching input, never a built in value. The search is on the solid flame heat flux; the engine exports no point source model at all.")
+ "The course gives the reason: a root search would walk out of the Bagster band, so the engine refuses in its own words, \"transmissivity: a fixed transmissivity in (0, 1] is required for a distance search\". The search passes every argument of the chain through, a water vapour partial pressure included, so no humidity argument is missing. The 0.8 in the ERHA chain is a stated teaching input, never a built in value. The search is on the solid flame heat flux; the engine exports no point source model at all.")
 
 q(2,
  "What flame base radius does the solid flame chain use in wind, and how does that compare with the Yellow Book's worked step?",
@@ -87,7 +87,7 @@ q(2,
  ["D/2 stretched downwind by the tilt, which is how the Yellow Book's worked step draws its flame",
   "A radius equal to the flame length L, so that the cylinder comes out as wide as the flame is tall",
   "The radius scaled up by u* above uc, which is the correction the Yellow Book's worked step prints"],
- "Section 20 says the flame base radius is D/2 and the engine does not elongate the base in the wind, which matches the Yellow Book's own worked step. The tilt leans the cylinder without stretching its base. The flame length sets a = L / R and never the radius, and u* acts on the flame length alone.")
+ "The course says the flame base radius is D/2 and the engine does not elongate the base in the wind, which matches the Yellow Book's own worked step. The tilt leans the cylinder without stretching its base. The flame length sets a = L / R and never the radius, and u* acts on the flame length alone.")
 
 q(3,
  "Which view factor does the heat flux use in the solid flame chain?",
@@ -95,7 +95,7 @@ q(3,
  ["Fv alone, since a person stands upright to it",
   "Fh alone, since the target is at ground level",
   "The plain mean of Fv and Fh at that target distance"],
- "Section 20 states the heat flux uses Fmax, the most exposed target orientation, which is the vector sum of Fv and Fh. Using Fv or Fh alone would pick one orientation, and a mean of the two is neither their vector sum nor any quantity the engine reports.")
+ "The course states the heat flux uses Fmax, the most exposed target orientation, which is the vector sum of Fv and Fh. Using Fv or Fh alone would pick one orientation, and a mean of the two is neither their vector sum nor any quantity the engine reports.")
 
 q(0,
  "Point source heat radiation models and the setbacks they imply do exist in the academy's engines. Where are they taught and graded?",
@@ -103,7 +103,7 @@ q(0,
  ["In this course, as the fallback the engine uses whenever the solid flame refuses an overhanging target",
   "In this course's Expert tier, where they are computed side by side with the blast effects of the same release",
   "Nowhere at all, since the academy retired them once the solid flame model had been validated here"],
- "Section 22: the facilities engines carry the point source model and the flare and pool fire setbacks, and the Facilities courses on relief and flare systems and on layout teach and grade them. This engine does not re-expose them, and its validation record carries a test that asserts it exports none of them. The solid flame refusal is never backed by a fallback, and nothing was retired.")
+ "The course explains: the facilities engines carry the point source model and the flare and pool fire setbacks, and the Facilities courses on relief and flare systems and on layout teach and grade them. This engine does not re-expose them, and its validation record carries a test that asserts it exports none of them. The solid flame refusal is never backed by a fallback, and nothing was retired.")
 
 q(3,
  "A reviewer asks for the individual risk, the PLL and the F-N curve of the ERHA fire. What does this course say about them?",
@@ -111,7 +111,7 @@ q(3,
  ["They follow directly from the ERHA heat flux table once a release frequency is typed into poolFireSolidFlame",
   "They are graded in the capstone at the distance where the ERHA heat flux falls to 5000 W/m2 on the chain",
   "They belong to the risk matrices of this course, where they are placed against the heat flux column"],
- "Section 22 says a consequence model answers what happens if the release occurs; how often, and the individual risk, the potential loss of life and the F-N curve that follow, belong to the later quantitative risk course. The engine takes no frequency argument. No capstone grades a frequency or a risk measure, and the academy's risk matrices belong to the risk and change course.")
+ "The course says a consequence model answers what happens if the release occurs; how often, and the individual risk, the potential loss of life and the F-N curve that follow, belong to the later quantitative risk course. The engine takes no frequency argument. No capstone grades a frequency or a risk measure, and the academy's risk matrices belong to the risk and change course.")
 
 q(1,
  "Where do routine emissions, produced water treatment and tank vapour losses sit relative to this course?",
@@ -119,7 +119,7 @@ q(1,
  ["They are modelled here with the Gaussian plume, as soon as a routine release rate has been stated",
   "They are handled by the pool fire chain in this tier whenever the stored tank contents are flammable",
   "They are taken up in the Expert tier's last module, beside the scope the engine drops"],
- "Section 22 is plain: routine emissions and their accounting, produced water treatment and tank vapour losses are other courses' subjects, and this course models an accidental release and nothing routine. The plume and the pool fire chain are consequence models of a loss of containment, and no tier of this course takes up routine releases.")
+ "The course is plain: routine emissions and their accounting, produced water treatment and tank vapour losses are other courses' subjects, and this course models an accidental release and nothing routine. The plume and the pool fire chain are consequence models of a loss of containment, and no tier of this course takes up routine releases.")
 
 emit(Q, '/root/hse-wip-consequence/banks/h4i_m05.json', expect_n=15)
 finish()

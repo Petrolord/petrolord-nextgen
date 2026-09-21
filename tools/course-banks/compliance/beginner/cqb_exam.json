@@ -30,7 +30,7 @@
    "Only deriveStatus refuses an unreadable today, which is AS15 Q1."
   ],
   "answer": 3,
-  "explanation": "The register's refusal is the RangeError deriveStatus throws. The library's Review scheduled is an answer given as though nothing were due, a held limit of the digest, and it says nothing about the document."
+  "explanation": "The register's refusal is the RangeError deriveStatus throws. The library's Review scheduled is an answer given as though nothing were due, a held limit of the course, and it says nothing about the document."
  },
  {
   "prompt": "Remove the expiry from REG-2026-005, the radioactive source licence, and change nothing else. What does it read?",
@@ -107,7 +107,7 @@
    "Overdue, an empty field reads as zero."
   ],
   "answer": 0,
-  "explanation": "An empty string is not a usable lead time, so the engine applies DEFAULT_LEAD_TIME_DAYS. The digest prints '' (empty) as Due soon, beside null, -5, 'ten' and a field left out."
+  "explanation": "An empty string is not a usable lead time, so the engine applies DEFAULT_LEAD_TIME_DAYS. The course prints '' (empty) as Due soon, beside null, -5, 'ten' and a field left out."
  },
  {
   "prompt": "An Annual and a Biennial obligation both fall due 2026-10-31. On which dates do their current periods begin?",
@@ -176,7 +176,7 @@
   "explanation": "Each of the five apps is backed by one module, with the calendar under all of them. ISO Compliance holds a clause register for a standard, and the Quality Assurance Plan & NCR app holds inspection and test plans and NCRs."
  },
  {
-  "prompt": "Which next due date, and which day count, does the digest print for the Biennial roll from 2026-08-31?",
+  "prompt": "Which next due date, and which day count, does the course print for the Biennial roll from 2026-08-31?",
   "options": [
    "2028-08-31, 320 days ahead.",
    "2027-08-31, 686 days ahead.",
@@ -206,7 +206,7 @@
    "2027-08-28"
   ],
   "answer": 3,
-  "explanation": "The digest prints 2026-08-31, 2027-02-28 and then 2027-08-28 for Semi-annual. The second step starts from the twenty-eighth it landed on in February. 2027-08-31 is the Annual roll from 2026-08-31, 2028-08-31 the Biennial one, and 2027-02-28 is the first step itself."
+  "explanation": "The course prints 2026-08-31, 2027-02-28 and then 2027-08-28 for Semi-annual. The second step starts from the twenty-eighth it landed on in February. 2027-08-31 is the Annual roll from 2026-08-31, 2028-08-31 the Biennial one, and 2027-02-28 is the first step itself."
  },
  {
   "prompt": "A department 'Operations' files a 'Plan'. Which document number prefix comes back?",
@@ -217,7 +217,7 @@
    "GEN-DOC"
   ],
   "answer": 1,
-  "explanation": "documentPrefix takes the first three letters of each. OPS-PLA-0002 is a number as it stands in the library, and the digest does not say how it was issued. GEN-DOC is what an empty department and category give."
+  "explanation": "documentPrefix takes the first three letters of each. OPS-PLA-0002 is a number as it stands in the library, and the course does not say how it was issued. GEN-DOC is what an empty department and category give."
  },
  {
   "prompt": "atLeastConfidential is read against the default floor Confidential. What does it answer for Internal and for Restricted?",
@@ -228,7 +228,7 @@
    "false for both, because only Confidential meets the floor."
   ],
   "answer": 2,
-  "explanation": "atLeastConfidential answers true at the floor or above it. The digest prints Public false, Internal false, Confidential true and Restricted true."
+  "explanation": "atLeastConfidential answers true at the floor or above it. The course prints Public false, Internal false, Confidential true and Restricted true."
  },
  {
   "prompt": "Two issue dates, each with its own review period, are sent by nextReviewDate to the same review date of 2026-02-28. Which two?",
@@ -308,7 +308,7 @@
   "explanation": "DEFAULT_REVIEW_PERIOD_MONTHS is 24, and 24 months on from 2025-03-14 is 2027-03-14, 150 days from the as-of date. 2028-10-01 is what counting from a correction would give."
  },
  {
-  "prompt": "HSE-PRO-0007 was issued 2024-09-30 on a 24 month period. Its recorded next review is 2026-09-30. What does the digest's recomputation show?",
+  "prompt": "HSE-PRO-0007 was issued 2024-09-30 on a 24 month period. Its recorded next review is 2026-09-30. What does the course's recomputation show?",
   "options": [
    "The recomputed date disagrees and the record has to be corrected.",
    "Nothing, an overdue document is left out.",
@@ -316,7 +316,7 @@
    "The recomputed date agrees only once the default period is applied."
   ],
   "answer": 2,
-  "explanation": "nextReviewDate from 2024-09-30 on 24 months gives 2026-09-30, and the digest prints true for the two agreeing. OPS-PLA-0002 and ENG-STD-0011 agree as well."
+  "explanation": "nextReviewDate from 2024-09-30 on 24 months gives 2026-09-30, and the course prints true for the two agreeing. OPS-PLA-0002 and ENG-STD-0011 agree as well."
  },
  {
   "prompt": "Why can nextReviewDate give OPS-PHI-0001, the flare management philosophy, no review date?",
@@ -327,7 +327,7 @@
    "It has no issue date on the record to count from."
   ],
   "answer": 3,
-  "explanation": "The digest names four documents with no issue date recorded: OPS-PHI-0001, OPS-PRO-0004, HSE-PRO-0012 and ENG-PRO-0019. OPS-PHI-0001 is Published and in force, and reads No review scheduled."
+  "explanation": "The course names four documents with no issue date recorded: OPS-PHI-0001, OPS-PRO-0004, HSE-PRO-0012 and ENG-PRO-0019. OPS-PHI-0001 is Published and in force, and reads No review scheduled."
  },
  {
   "prompt": "byUrgency sorts the register and byReviewUrgency sorts the library. Which rule do the two sorts share?",
@@ -401,10 +401,10 @@
    "It is the date the IKORO records were last edited by hand.",
    "Each is derived against that date and is true at no other.",
    "It is the date the regulator fixed for every return in the register.",
-   "It is the date the machine clock read when the digest was built, which the engine records."
+   "It is the date the machine clock read when the course was built, which the engine records."
   ],
   "answer": 1,
-  "explanation": "Move the as-of date and the same record reads differently with nobody having edited it. The digest never read the machine clock."
+  "explanation": "Move the as-of date and the same record reads differently with nobody having edited it. The course never read the machine clock."
  },
  {
   "prompt": "The monthly water quality return is filed late and rolled on. Of the summarise counts, which one loses it?",
@@ -415,7 +415,7 @@
    "Expired"
   ],
   "answer": 2,
-  "explanation": "As recorded it reads Overdue. After the filing and the roll the digest prints status Due soon, so it leaves Overdue and joins Due soon, which is still an attention status."
+  "explanation": "As recorded it reads Overdue. After the filing and the roll the course prints status Due soon, so it leaves Overdue and joins Due soon, which is still an attention status."
  },
  {
   "prompt": "REG-2026-003 is given a lead time of 16 in place of its recorded 14. Which summarise count loses it?",

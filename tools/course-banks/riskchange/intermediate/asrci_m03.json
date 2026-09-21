@@ -154,7 +154,7 @@
   "explanation": "The engine holds no rule for moving an approval. It still refuses the originator at the decision, even when somebody assigned the approval to them."
  },
  {
-  "prompt": "A report says: \"The engine lets a decided approval be reopened by the assignee.\" What does the digest support?",
+  "prompt": "A report says: \"The engine lets a decided approval be reopened by the assignee.\" What does the course support?",
   "options": [
    "The report is right for Rejected rows, which the assignee can reopen once to answer the objection that was raised.",
    "The report is right, because only the assignee decides.",

@@ -1,0 +1,426 @@
+{
+ "app_slug": "metering",
+ "rows": 30,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/metering, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "fields": {
+    "prompt": {
+     "old": "Two cells of the coefficient sweep bound the span the digest prints. What is the difference between them and what is their ratio?",
+     "new": "Two cells of the coefficient sweep bound the span the course prints. What is the difference between them and what is their ratio?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "fields": {
+    "prompt": {
+     "old": "At what beta does the digest show the extrapolation warning firing?",
+     "new": "At what beta does the course show the extrapolation warning firing?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "fields": {
+    "prompt": {
+     "old": "What are the two ends of the expansibility span the digest prints?",
+     "new": "What are the two ends of the expansibility span the course prints?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m02-the-discharge-coefficient",
+   "ord": 6,
+   "fields": {
+    "prompt": {
+     "old": "What is the only statement the digest licenses about the size of the small bore step in the coefficient?",
+     "new": "What is the only statement the course licenses about the size of the small bore step in the coefficient?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-permanent-loss-turbines-and-straight-run",
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "What does the digest print about the permanent loss at the two ends of the published beta range?",
+     "new": "What does the course print about the permanent loss at the two ends of the published beta range?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-permanent-loss-turbines-and-straight-run",
+   "ord": 4,
+   "fields": {
+    "explanation": {
+     "old": "The engine itself refuses to assume a coefficient. The digest performed the second calculation deliberately so that the cost of the assumption is printed rather than asserted.",
+     "new": "The engine itself refuses to assume a coefficient. The course performed the second calculation deliberately so that the cost of the assumption is printed rather than asserted."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-the-transmitter-and-turndown",
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "What does the digest print for the transmitter contribution at the top and the bottom of this span?",
+     "new": "What does the course print for the transmitter contribution at the top and the bottom of this span?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-the-transmitter-and-turndown",
+   "ord": 7,
+   "fields": {
+    "prompt": {
+     "old": "The engine holds two turndown limits. What are they, and what is the relationship the digest prints between them?",
+     "new": "The engine holds two turndown limits. What are they, and what is the relationship the course prints between them?"
+    },
+    "explanation": {
+     "old": "They are the same rule written in two quantities, and the digest prints the relationship rather than leaving a reader to work it out.",
+     "new": "They are the same rule written in two quantities, and the course prints the relationship rather than leaving a reader to work it out."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-uncertainty-budget",
+   "ord": 6,
+   "fields": {
+    "prompt": {
+     "old": "What does the digest print about the two largest shares of the variance on the ABOH run at its design reading?",
+     "new": "What does the course print about the two largest shares of the variance on the ABOH run at its design reading?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-uncertainty-budget",
+   "ord": 15,
+   "fields": {
+    "prompt": {
+     "old": "On the ABOH run at its design reading the lead is clear, and the digest records where that stops being true. Where?",
+     "new": "On the ABOH run at its design reading the lead is clear, and the course records where that stops being true. Where?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "fields": {
+    "prompt": {
+     "old": "What pressures does the digest state for the flashing case?",
+     "new": "What pressures does the course state for the flashing case?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 20,
+   "fields": {
+    "options": {
+     "old": [
+      "They are cited to the sizing standard the coefficients are defined in.",
+      "They are cited to the vendor catalogues the styles were averaged from.",
+      "They are cited in the module's own source comments, which the digest quotes.",
+      "They are not cited to a document in this repository."
+     ],
+     "new": [
+      "They are cited to the sizing standard the coefficients are defined in.",
+      "They are cited to the vendor catalogues the styles were averaged from.",
+      "They are cited in the module's own source comments, which the course quotes.",
+      "They are not cited to a document in this repository."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "fields": {
+    "explanation": {
+     "old": "Its ratio band and its final band both read high, so nothing was moved on it and the digest prints no reason to look further.",
+     "new": "Its ratio band and its final band both read high, so nothing was moved on it and the course prints no reason to look further."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-cavitation-and-the-screen",
+   "ord": 9,
+   "fields": {
+    "prompt": {
+     "old": "The engine exports the two sigma values its regime ladder turns on. What does the digest say about where those two values come from?",
+     "new": "The engine exports the two sigma values its regime ladder turns on. What does the course say about where those two values come from?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-cavitation-and-the-screen",
+   "ord": 13,
+   "fields": {
+    "prompt": {
+     "old": "What does the digest print about the outlet pressure at which the flashing flag turns on, set against the stated vapour pressure?",
+     "new": "What does the course print about the outlet pressure at which the flashing flag turns on, set against the stated vapour pressure?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-authority-and-the-characteristic",
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "Seven valve drops are run against one total in the digest, and this rung is the fifth of them.",
+     "new": "Seven valve drops are run against one total in the course, and this rung is the fifth of them."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-travel-rangeability-and-the-verdict",
+   "ord": 7,
+   "fields": {
+    "prompt": {
+     "old": "The digest sets those two travels against each other. What ratio does it print, the first over the second?",
+     "new": "The course sets those two travels against each other. What ratio does it print, the first over the second?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "fields": {
+    "prompt": {
+     "old": "What would it take for this digest to print a row labelled a refusal under numbers from a call that actually succeeded?",
+     "new": "What would it take for this course to print a row labelled a refusal under numbers from a call that actually succeeded?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-the-tank-and-its-geometry",
+   "ord": 6,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints a relation between the two capacities of this tank. What does it actually give a writer permission to say?",
+     "new": "The course prints a relation between the two capacities of this tank. What does it actually give a writer permission to say?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-shell-and-what-governs",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "The digest reports that the water test takes the bottom course of this tank below a gravity of 0.931727. How was that figure obtained?",
+     "new": "The course reports that the water test takes the bottom course of this tank below a gravity of 0.931727. How was that figure obtained?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-normal-venting",
+   "ord": 4,
+   "fields": {
+    "options": {
+     "old": [
+      "That the outbreathing stands at twice the inbreathing, since 2.000000 is the ratio this pair is printed at on the relation line the digest carries for the two directions.",
+      "That the two are close enough to be treated as one figure, which is why the engine forms a single predicate rather than reporting each direction separately.",
+      "That the inbreathing is the larger of the two by 2487.4395 scfh, since the relation prints the difference as the first value less the second.",
+      "That the difference is 2487.4395 scfh and the ratio is 1.107209, both quoted from the relation line the digest prints."
+     ],
+     "new": [
+      "That the outbreathing stands at twice the inbreathing, since 2.000000 is the ratio this pair is printed at on the relation line the course carries for the two directions.",
+      "That the two are close enough to be treated as one figure, which is why the engine forms a single predicate rather than reporting each direction separately.",
+      "That the inbreathing is the larger of the two by 2487.4395 scfh, since the relation prints the difference as the first value less the second.",
+      "That the difference is 2487.4395 scfh and the ratio is 1.107209, both quoted from the relation line the course prints."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-normal-venting",
+   "ord": 10,
+   "fields": {
+    "prompt": {
+     "old": "What does the digest print about the thermal inbreathing of this tank with insulation applied?",
+     "new": "What does the course print about the thermal inbreathing of this tank with insulation applied?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-fire-case-and-the-withheld-vent",
+   "ord": 11,
+   "fields": {
+    "prompt": {
+     "old": "At the edge where the 1000 to 2800 ft2 band gives way to the band above it, the digest prints a duty of 14091137.6199 Btu/hr below the edge and 14089282.6189 Btu/hr above it. Why print both?",
+     "new": "At the edge where the 1000 to 2800 ft2 band gives way to the band above it, the course prints a duty of 14091137.6199 Btu/hr below the edge and 14089282.6189 Btu/hr above it. Why print both?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-fire-case-and-the-withheld-vent",
+   "ord": 13,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints the fire duty on this tank with and without a stated drainage credit. What does that relation carry?",
+     "new": "The course prints the fire duty on this tank with and without a stated drainage credit. What does that relation carry?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-losses-and-what-control-saves",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints a relation over the two halves of the annual loss. What does it carry?",
+     "new": "The course prints a relation over the two halves of the annual loss. What does it carry?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-register-and-the-refusals",
+   "ord": 1,
+   "fields": {
+    "options": {
+     "old": [
+      "The assertion list the generator built while it ran, filtered to the ones labelled a refusal, with one count per distinct assertion text, each asserting that the engine returned an error key.",
+      "The refusal messages the three engines export as named constants, with one count for each distinct message.",
+      "The guard clauses written in the three engine sources, with one count for each clause that can return early.",
+      "The inputs the generator rejected before calling anything, with one count for each input rejected."
+     ],
+     "new": [
+      "The assertion list the course build made while it ran, filtered to the ones labelled a refusal, with one count per distinct assertion text, each asserting that the engine returned an error key.",
+      "The refusal messages the three engines export as named constants, with one count for each distinct message.",
+      "The guard clauses written in the three engine sources, with one count for each clause that can return early.",
+      "The inputs the course build rejected before calling anything, with one count for each input rejected."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-register-and-the-refusals",
+   "ord": 2,
+   "fields": {
+    "options": {
+     "old": [
+      "The result matched a golden case for the same function, which is what separates a call that ran from a call that ran correctly.",
+      "The result carried a figure the digest went on to print, so a call whose output is never quoted anywhere is not counted as a success.",
+      "The result carried no error key and no non-finite number in it.",
+      "The result carried no warning and no note, since a call that returns a caveat is neither a refusal nor a clean success."
+     ],
+     "new": [
+      "The result matched a golden case for the same function, which is what separates a call that ran from a call that ran correctly.",
+      "The result carried a figure the course went on to print, so a call whose output is never quoted anywhere is not counted as a success.",
+      "The result carried no error key and no non-finite number in it.",
+      "The result carried no warning and no note, since a call that returns a caveat is neither a refusal nor a clean success."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-register-and-the-refusals",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "A generator labels a row a refusal and then calls a case that succeeds. What is the shape of that defect and what stops it here?",
+     "new": "A course build labels a row a refusal and then calls a case that succeeds. What is the shape of that defect and what stops it here?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-register-and-the-refusals",
+   "ord": 12,
+   "fields": {
+    "prompt": {
+     "old": "The digest pins fifty engine strings verbatim. What does the pinning actually buy?",
+     "new": "The course pins fifty engine strings verbatim. What does the pinning actually buy?"
+    },
+    "explanation": {
+     "old": "A digest that paraphrased an error message would teach a sentence the learner will never see on the screen, and the same is true of a lesson.",
+     "new": "A worked example that paraphrased an error message would teach a sentence the learner will never see on the screen, and the same is true of a lesson."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-register-and-the-refusals",
+   "ord": 13,
+   "fields": {
+    "options": {
+     "old": [
+      "A message the engine returns, because a sentence is not a figure and cannot be checked against an engine output.",
+      "A figure printed in the digest at six decimals, since a rendering is not a value.",
+      "A comment in the engine source, because it often describes what the code did at some earlier time.",
+      "A relation line, because a comparison is somebody's reading of two figures."
+     ],
+     "new": [
+      "A message the engine returns, because a sentence is not a figure and cannot be checked against an engine output.",
+      "A figure printed in the course at six decimals, since a rendering is not a value.",
+      "A comment in the engine source, because it often describes what the code did at some earlier time.",
+      "A relation line, because a comparison is somebody's reading of two figures."
+     ]
+    }
+   }
+  }
+ ]
+}

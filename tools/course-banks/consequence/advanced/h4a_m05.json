@@ -8,7 +8,7 @@
    "It uses Newton's method on the probit equation"
   ],
   "answer": 2,
-  "explanation": "Section 30: the forward CDF is the repository's `normalCDF`, Abramowitz and Stegun 7.1.26 with an error of at most 1.5e-7, and the inverse bisects on that same approximate CDF. The oracle's exact normal distribution is what the golden compares against, Table 5.1 is evidence and no lookup, and there is no Newton step."
+  "explanation": "The course explains: the forward CDF is the repository's `normalCDF`, Abramowitz and Stegun 7.1.26 with an error of at most 1.5e-7, and the inverse bisects on that same approximate CDF. The oracle's exact normal distribution is what the golden compares against, Table 5.1 is evidence and no lookup, and there is no Newton step."
  },
  {
   "prompt": "At a probability of 0.01 the engine's probit is 2.673653 and the exact probit in the golden is 2.673652. How large is the difference?",
@@ -22,7 +22,7 @@
   "explanation": "The inverse table prints 8.59e-7 at 0.01, so the engine departs from the exact probit in the seventh decimal. -1.78e-14 is the 0.5 row, 3.91e-7 the 0.9 row, and 0.139897 is what that departure becomes once it is carried through the lees-chlorine toxic load."
  },
  {
-  "prompt": "For the lees-chlorine preset the engine's one percent toxic load is 149793.673220. What does the exact probit give, derived in the digest?",
+  "prompt": "For the lees-chlorine preset the engine's one percent toxic load is 149793.673220. What does the exact probit give, derived in the course?",
   "options": [
    "149793.673220, identical, since the toxic load does not depend on the probit",
    "0.139897, the size of the difference itself",
@@ -30,18 +30,18 @@
    "149793.533322"
   ],
   "answer": 3,
-  "explanation": "Section 30 derives 149793.533322 from the exact probit, a difference of 0.139897: a seventh decimal departure in the probit is magnified through the toxic load. The engine's own figure is the thing being checked, 0.139897 is the gap between the two, and 100000.000000 is a forward load at a stated exposure."
+  "explanation": "The course derives 149793.533322 from the exact probit, a difference of 0.139897: a seventh decimal departure in the probit is magnified through the toxic load. The engine's own figure is the thing being checked, 0.139897 is the gap between the two, and 100000.000000 is a forward load at a stated exposure."
  },
  {
   "prompt": "Given that small magnification, what does the course do with a thermal dose or toxic load read back from a probability?",
   "options": [
    "Quotes it to the figures the approximation supports, and never grades one",
-   "Grades it at six decimals like every other figure the digest prints, since the forward CDF is good to about 1.5e-7",
+   "Grades it at six decimals like every other figure the course shows, since the forward CDF is good to about 1.5e-7",
    "Grades it to the tolerance the golden allows for the Table 5.1 cells on a rounding edge",
    "Rounds it to the printed digits of OSD/30"
   ],
   "answer": 0,
-  "explanation": "Section 30 ends: a thermal dose or toxic load read back from a probability is quoted to the figures the approximation supports, and this course never grades one. The forward accuracy does not carry through the inverse, the rounding edge cells are kept apart rather than graded, and OSD/30's printed figures are the evidence the engine is checked against; they set no rounding for a read-back value."
+  "explanation": "The course ends: a thermal dose or toxic load read back from a probability is quoted to the figures the approximation supports, and this course never grades one. The forward accuracy does not carry through the inverse, the rounding edge cells are kept apart rather than graded, and OSD/30's printed figures are the evidence the engine is checked against; they set no rounding for a read-back value."
  },
  {
   "prompt": "Why does this course print its probabilities to six decimals?",
@@ -52,7 +52,7 @@
    "The OSD/30 lethal doses print six decimals"
   ],
   "answer": 1,
-  "explanation": "Section 30: the forward direction is good to about 1.5e-7 in probability, which is why the course prints probabilities to six decimals. Table 5.1 prints probits to two decimals, the lees-chlorine loads differ by 0.139897, and OSD/30 prints lethal doses such as 960 and 2380."
+  "explanation": "The course explains: the forward direction is good to about 1.5e-7 in probability, which is why the course prints probabilities to six decimals. Table 5.1 prints probits to two decimals, the lees-chlorine loads differ by 0.139897, and OSD/30 prints lethal doses such as 960 and 2380."
  },
  {
   "prompt": "Why is two phase discharge not in the engine, and what does the analyst do instead?",
@@ -63,10 +63,10 @@
    "It was dropped as too rare offshore"
   ],
   "answer": 2,
-  "explanation": "Section 31 gives the reason quoted and the remedy: a two phase model outside this engine for a flashing liquid. The engine has no flash factor, never relabels a liquid as a gas, and the digest names no offshore frequency argument. None of the section 31 items is taught as computed."
+  "explanation": "The course gives the reason quoted and the remedy: a two phase model outside this engine for a flashing liquid. The engine has no flash factor, never relabels a liquid as a gas, and the course names no offshore frequency argument. None of the items the course lists as out of the engine is taught as computed."
  },
  {
-  "prompt": "An instantaneous release needs a puff. What does section 31 record about it?",
+  "prompt": "An instantaneous release needs a puff. What does the course record about it?",
   "options": [
    "The puff sigmas were not in a source read, so the analyst models a short release with a puff model elsewhere",
    "The engine models it as a Gaussian plume with a very short duration and warns the caller that the result is an extrapolation",
@@ -74,7 +74,7 @@
    "It is modelled by the multi-energy method"
   ],
   "answer": 0,
-  "explanation": "Section 31 lists the instantaneous puff as not in the engine because its sigmas were not in a source read. The plume is continuous and has no duration input, a single route quantity is one the engine does compute, and the multi-energy method is itself absent."
+  "explanation": "The course lists the instantaneous puff as not in the engine because its sigmas were not in a source read. The plume is continuous and has no duration input, a single route quantity is one the engine does compute, and the multi-energy method is itself absent."
  },
  {
   "prompt": "A release sits in a built-up area. What does the engine offer for urban dispersion?",
@@ -85,7 +85,7 @@
    "Nothing: a sourced urban sigma_y was not available, so the analyst uses the rural set with care, or another tool"
   ],
   "answer": 3,
-  "explanation": "Section 31: only the rural Briggs set is here, because a sourced urban sigma_y was not available. There is no urban flag, 0.00015 is the misprint ALOHA corrects in class D, and class F is the most stable rural class, a weather state that has nothing to do with buildings."
+  "explanation": "The course explains: only the rural Briggs set is here, because a sourced urban sigma_y was not available. There is no urban flag, 0.00015 is the misprint ALOHA corrects in class D, and class F is the most stable rural class, a weather state that has nothing to do with buildings."
  },
  {
   "prompt": "Why does the engine carry no jet fire model?",
@@ -96,7 +96,7 @@
    "Jet fires fall outside the Yellow Book"
   ],
   "answer": 1,
-  "explanation": "Section 31 gives the reason quoted, and the analyst uses a jet fire model elsewhere. A pool fire is not a jet, nothing in the validation record calls a jet fire negligible, and the digest says nothing about the Yellow Book lacking the subject."
+  "explanation": "The course gives the reason quoted, and the analyst uses a jet fire model elsewhere. A pool fire is not a jet, nothing in the validation record calls a jet fire negligible, and the course says nothing about the Yellow Book lacking the subject."
  },
  {
   "prompt": "Why are the Kingery-Bulmash fits absent, and what does the analyst use?",
@@ -107,10 +107,10 @@
    "The coefficients were not obtained, since the sources read print curves; Kinney and Graham within its range is used"
   ],
   "answer": 3,
-  "explanation": "Section 31 records the reason quoted. The conference column is evidence for Kinney and Graham and was never run against Kingery-Bulmash, the engine has no ground burst option, and the only thing borrowed from the Kingery-Bulmash compilation is the judged span of Z from 0.05 to 40."
+  "explanation": "The course records the reason quoted. The conference column is evidence for Kinney and Graham and was never run against Kingery-Bulmash, the engine has no ground burst option, and the only thing borrowed from the Kingery-Bulmash compilation is the judged span of Z from 0.05 to 40."
  },
  {
-  "prompt": "Lung, eardrum and structural probits do not appear in `OVERPRESSURE_PROBITS`. What does section 31 say?",
+  "prompt": "Lung, eardrum and structural probits do not appear in `OVERPRESSURE_PROBITS`. What does the course say?",
   "options": [
    "They are folded into the hsc preset, which returns a combined injury probability for every blast target",
    "They are single route quantities, taught in this course with no graded answer",
@@ -118,7 +118,7 @@
    "They need an impulse, which the engine computes but does not export"
   ],
   "answer": 2,
-  "explanation": "Section 31 names lung, eardrum and structural probits as out of the engine because their source was not read. The hsc preset is a single fatality probit from OSD/30 Equation 4a, section 32 lists no such single route quantity, and the fit returns a peak side-on overpressure with no impulse."
+  "explanation": "The course names lung, eardrum and structural probits as out of the engine because their source was not read. The hsc preset is a single fatality probit from OSD/30 Equation 4a, the course lists no such single route quantity, and the fit returns a peak side-on overpressure with no impulse."
  },
  {
   "prompt": "A reviewer asks this engine for a point source heat radiation level and a setback distance. Where do those belong?",
@@ -129,7 +129,7 @@
    "In `solidFlameHeatFlux`"
   ],
   "answer": 0,
-  "explanation": "Section 22 and section 31: the point source model and the setbacks it implies live in the facilities engines, this engine does not re-expose them, and its validation record carries a test that asserts it exports none. The solid flame functions are this course's own model and return no setback. Individual risk and the F-N curve are a different seam."
+  "explanation": "The course explains: the point source model and the setbacks it implies live in the facilities engines, this engine does not re-expose them, and its validation record carries a test that asserts it exports none. The solid flame functions are this course's own model and return no setback. Individual risk and the F-N curve are a different seam."
  },
  {
   "prompt": "What does the engine say about frequencies and risk, and which course do individual risk, PLL and the F-N curve belong to?",
@@ -140,10 +140,10 @@
    "It computes effects and no frequency; those measures belong to the later quantitative risk course, with frequencies taken from a risk study"
   ],
   "answer": 3,
-  "explanation": "A consequence model says what happens if the release occurs. Section 22 places individual risk, the potential loss of life and the F-N curve in the later quantitative risk course, and the risk matrices in the risk and change course. The engine returns no frequency, computes no risk measure, and this course grades none of them."
+  "explanation": "A consequence model says what happens if the release occurs. The course places individual risk, the potential loss of life and the F-N curve in the later quantitative risk course, and the risk matrices in the risk and change course. The engine returns no frequency, computes no risk measure, and this course grades none of them."
  },
  {
-  "prompt": "Section 32 asks what still catches a mistake copied into both the engine and its oracle. Which of these quantities IS graded in this course?",
+  "prompt": "The course asks what still catches a mistake copied into both the engine and its oracle. Which of these quantities IS graded in this course?",
   "options": [
    "The Bagster transmissivity, backed by the Yellow Book pool fire's printed transmissivity of 0.71474 from Hottel charts",
    "The Burgess burning rate, backed by the Babrauskas asymptote for hexane",
@@ -151,7 +151,7 @@
    "Thomas in still air, backed by the facilities engine it is imported from"
   ],
   "answer": 2,
-  "explanation": "The section 32 row for the Lees toxic coefficients reads 'the OSD/30 columns (section 29)' and 'yes'. Bagster, Burgess and Thomas in still air each read 'nothing: the transcription alone' and 'no'. A single route quantity is taught and never carries a graded answer."
+  "explanation": "The course's row for the Lees toxic coefficients reads 'the OSD/30 columns' and 'yes'. Bagster, Burgess and Thomas in still air each read 'nothing: the transcription alone' and 'no'. A single route quantity is taught and never carries a graded answer."
  },
  {
   "prompt": "Why is no Purple Book toxic preset graded, apart from its use as a teaching comparison?",
@@ -162,6 +162,6 @@
    "The Purple Book presets have no source string"
   ],
   "answer": 0,
-  "explanation": "Section 32 records one published worked case, carbon monoxide, and says every other substance rests on the transcription, so the row reads 'no'; every graded toxic probit uses a Lees preset. The Purple Book presets take mg/m3, the OSD/30 columns test the Lees presets, and each preset names its source."
+  "explanation": "The course records one published worked case, carbon monoxide, and says every other substance rests on the transcription, so the row reads 'no'; every graded toxic probit uses a Lees preset. The Purple Book presets take mg/m3, the OSD/30 columns test the Lees presets, and each preset names its source."
  }
 ]

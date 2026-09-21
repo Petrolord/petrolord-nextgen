@@ -5,21 +5,21 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # FC5 Expert m04, The Point Source, Twice. Digest section 25.
 
-q(3, "The solid angle in the point-source relation is not exported, and the digest recovers 12.566370614359 from one returned intensity against its own stated inputs. Which class does that figure fall into?",
+q(3, "The solid angle in the point-source relation is not exported, and the course recovers 12.566370614359 from one returned intensity against its own stated inputs. Which class does that figure fall into?",
  "Computed, because the oracle reaches the same figure by quadrature of the sphere area.",
  ["Typed, because the value is a published geometric constant that the engine takes as an input and names.",
   "Held for literature, because nothing here can derive it.",
   "A stated convention of this engine, pinned by the suite so that it cannot move without somebody noticing."],
  "It is one of the constants in this module that something actually checks. Measuring it out of behaviour is what made it visible at all, since the engine keeps it inside the relation.")
 
-q(1, "The AFIESERE flare is stated as 210000.0000 lb/hr at 19400.0000 Btu/lb, and the digest derives a heat release of 1193971.5392 kW. Who owns that derivation?",
+q(1, "The AFIESERE flare is stated as 210000.0000 lb/hr at 19400.0000 Btu/lb, and the course derives a heat release of 1193971.5392 kW. Who owns that derivation?",
  "The caller. The engine takes a heat release in kW and knows nothing about rates or heating values.",
  ["The engine, which converts the rate and the heating value on the way into the intensity relation.",
   "The oracle, which carries the unit packaging so the engine can work in kW throughout.",
-  "The digest alone, since the engine refuses a release stated in any unit other than Btu/hr."],
+  "The course alone, since the engine refuses a release stated in any unit other than Btu/hr."],
  "The mass rate and the heating value are the caller's arithmetic and the caller owns any error in them. Stating a release in kW is also how a capstone answer stays clear of a conversion nobody graded.")
 
-q(2, "At 40.000000 m the intensity is 17.482435 kW/m2 and at 80.000000 m it is 4.370609 kW/m2. Which comparison does the digest invite you to make on those rows?",
+q(2, "At 40.000000 m the intensity is 17.482435 kW/m2 and at 80.000000 m it is 4.370609 kW/m2. Which comparison does the course invite you to make on those rows?",
  "The ratio of the two intensities against the ratio of the squared distances.",
  ["The ratio of the two intensities against the ratio of the distances themselves.",
   "The difference of the intensities against the difference of the distances.",
@@ -63,7 +63,7 @@ q(2, "The stated flare at a radiated fraction of 0.320000 and a transmissivity o
 
 q(3, "You have an intensity relation and a route that returns a distance. Why does this course compute no flare setback?",
  "The setback, the pool fire behind it and the customary allowable intensities are owned by a merged sibling course.",
- ["A setback needs a flame height, which this engine has no route for and the digest never prints.",
+ ["A setback needs a flame height, which this engine has no route for and the course never prints.",
   "The four customary intensities are held for literature, so no distance solved against one may be reported.",
   "The point source is a screening model, and a setback has to come from a solid-flame model instead."],
  "That course computes a setback, does the pool fire and the flame height beside it, teaches the limitations of the point source, and grades a setback in its own Professional capstone. This module hands the question back by name.")

@@ -8,18 +8,18 @@
    "Heat integration project, at -14.2492 USD a tonne, with its 3400.000 t"
   ],
   "answer": 1,
-  "explanation": "SECTION 20's second row is Repair failed steam traps, costed at -156.4390 USD a tonne; the first row is Tune the fired heaters, and Solar sits fifth."
+  "explanation": "The curve's second row is Repair failed steam traps, costed at -156.4390 USD a tonne; the first row is Tune the fired heaters, and Solar sits fifth."
  },
  {
   "prompt": "What sets a measure's order on the Agbor curve?",
   "options": [
    "Its tonnes a year, largest first",
-   "The order it was entered in SECTION 18's table",
+   "The order it was entered in the course's table",
    "Its capital cost, the smallest capital first",
    "Its cost per tonne, cheapest first"
   ],
   "answer": 3,
-  "explanation": "SECTION 20: the six measures ranked cheapest first. Flare gas recovery has the largest tonnes, 6200.000, and is order 6. Vapour recovery on the storage tanks is entered sixth and is order 4. The Heat integration project, with 2750000 USD of capital, is order 3 ahead of Vapour recovery at 610000 USD."
+  "explanation": "The curve holds the six measures ranked cheapest first. Flare gas recovery has the largest tonnes, 6200.000, and is order 6. Vapour recovery on the storage tanks is entered sixth and is order 4. The Heat integration project, with 2750000 USD of capital, is order 3 ahead of Vapour recovery at 610000 USD."
  },
  {
   "prompt": "Where does the invented Heat integration project's step start and end on the Agbor curve's axis?",
@@ -30,10 +30,10 @@
    "From 0.000 t to 3400.000 t, as the first step"
   ],
   "answer": 0,
-  "explanation": "SECTION 20 prints the Heat integration project, order 3, with cumulative start 1910.000 t and cumulative end 5310.000 t; its width is its 3400.000 t a year. 760.000 to 1910.000 is Repair failed steam traps and 5310.000 to 7160.000 is Vapour recovery on the storage tanks."
+  "explanation": "The curve prints the Heat integration project, order 3, with cumulative start 1910.000 t and cumulative end 5310.000 t; its width is its 3400.000 t a year. 760.000 to 1910.000 is Repair failed steam traps and 5310.000 to 7160.000 is Vapour recovery on the storage tanks."
  },
  {
-  "prompt": "The Agbor curve prints weightedAverageCostPerTonne 18.7868 USD. How does SECTION 20 define that figure?",
+  "prompt": "The Agbor curve prints weightedAverageCostPerTonne 18.7868 USD. How does the course define that figure?",
   "options": [
    "The mean of the six costs per tonne, each counted once",
    "netAnnualCostOfAll over paysForItselfTonnes, 5310.000 t",
@@ -41,10 +41,10 @@
    "The middle step's cost per tonne"
   ],
   "answer": 2,
-  "explanation": "SECTION 20: the weighted average is the net annual cost of all the measures over the total tonnes, 290443.84 USD over 15460.000 t. The mean of the six costs per tonne, each counted once, is -29.7913 USD (computed here)."
+  "explanation": "In the course, the weighted average is the net annual cost of all the measures over the total tonnes, 290443.84 USD over 15460.000 t. The mean of the six costs per tonne, each counted once, is -29.7913 USD (computed here)."
  },
  {
-  "prompt": "SECTION 20 computes a plain mean of the six Agbor costs per tonne, -29.7913 USD. What does the digest say that plain mean does?",
+  "prompt": "The course computes a plain mean of the six Agbor costs per tonne, -29.7913 USD. What does the course say that plain mean does?",
   "options": [
    "It counts the heater measures twice, as they share a source.",
    "It leaves the three measures that pay for themselves out of it.",
@@ -52,10 +52,10 @@
    "It sums the net annual costs to four decimals before dividing."
   ],
   "answer": 2,
-  "explanation": "SECTION 20: the plain mean of the six costs per tonne (computed here) is -29.7913 USD, which weights a small measure the same as a large one. The four-decimal sum belongs to the rounding note on netAnnualCostOfAll, and the plain mean takes in all six costs."
+  "explanation": "In the course, the plain mean of the six costs per tonne (computed here) is -29.7913 USD, which weights a small measure the same as a large one. The four-decimal sum belongs to the rounding note on netAnnualCostOfAll, and the plain mean takes in all six costs."
  },
  {
-  "prompt": "The six net annual costs as SECTION 18 prints them sum to 290443.85 USD, while the curve prints netAnnualCostOfAll 290443.84 USD. What does the rounding note say the engine does?",
+  "prompt": "The six net annual costs as the cost table prints them sum to 290443.85 USD, while the curve prints netAnnualCostOfAll 290443.84 USD. What does the rounding note say the engine does?",
   "options": [
    "It sums the net annual costs it holds to four decimals.",
    "It drops one cent for the measure that is refused.",
@@ -63,7 +63,7 @@
    "It rounds each cost per tonne before weighting the six."
   ],
   "answer": 0,
-  "explanation": "SECTION 20's ROUNDING NOTE: the six net annual costs as printed in SECTION 18 sum to 290443.85 USD; the engine sums the net annual costs it holds to four decimals, which gives 290443.84 USD. No measure is refused on this curve, and the overlap is surfaced as additive false."
+  "explanation": "The curve's ROUNDING NOTE: the six net annual costs as printed in the cost table sum to 290443.85 USD; the engine sums the net annual costs it holds to four decimals, which gives 290443.84 USD. No measure is refused on this curve, and the overlap is surfaced as additive false."
  },
  {
   "prompt": "The Agbor curve prints paysForItselfTonnes 5310.000. Which figure on the step table carries the same value?",
@@ -74,10 +74,10 @@
    "The cumulative end of order 3, the Heat integration project"
   ],
   "answer": 3,
-  "explanation": "SECTION 20 prints order 3, the Heat integration project, with cumulative end 5310.000 t, and paysForItselfTonnes 5310.000 with paysForItselfMeasures naming orders 1 to 3. The other options carry 1910.000, 3400.000 and 9260.000 t."
+  "explanation": "The curve prints order 3, the Heat integration project, with cumulative end 5310.000 t, and paysForItselfTonnes 5310.000 with paysForItselfMeasures naming orders 1 to 3. The other options carry 1910.000, 3400.000 and 9260.000 t."
  },
  {
-  "prompt": "The Agbor curve prints additive false. Which entry in SECTION 20 goes with that flag?",
+  "prompt": "The Agbor curve prints additive false. Which entry in the curve table goes with that flag?",
   "options": [
    "An over-claims entry naming the flare: Flare gas recovery claiming more than it emits",
    "An interaction table naming heaters: Tune the fired heaters and the Heat integration project",
@@ -88,7 +88,7 @@
   "explanation": "The curve prints the interaction table, heaters: Tune the fired heaters; Heat integration project, with the note that the abatements of measures acting on the same source overlap. The costed curve carries no refused measure, over-claims belong to the 9400 t flare gas recovery claim, and paysForItselfMeasures names three measures."
  },
  {
-  "prompt": "Which of these does SECTION 26 list as recomputed by neither oracle?",
+  "prompt": "Which of these does the course list as recomputed by neither oracle?",
   "options": [
    "paysForItselfTonnes on the curve",
    "the curve's rank order",
@@ -96,18 +96,18 @@
    "the path's year-by-year abated tonnes"
   ],
   "answer": 0,
-  "explanation": "SECTION 26 lists paysForItselfTonnes as recomputed by neither oracle. oracle_carbonabatement.py takes the curve by explicit rank, each cost per tonne from a present value ledger and the path as a year ledger."
+  "explanation": "The course lists paysForItselfTonnes as recomputed by neither oracle. oracle_carbonabatement.py takes the curve by explicit rank, each cost per tonne from a present value ledger and the path as a year ledger."
  },
  {
-  "prompt": "SECTION 20 prints 0.343467 beside the Agbor curve's outputs. What is it?",
+  "prompt": "The course prints 0.343467 beside the Agbor curve's outputs. What is it?",
   "options": [
    "Flare gas recovery's share of the axis, returned by the engine with the curve",
-   "The weighted average cost per tonne over the plain mean, computed by the digest",
+   "The weighted average cost per tonne over the plain mean, computed by the course",
    "The capital recovery factor of the Heat integration project at a rate of 0.1",
-   "paysForItselfTonnes as a share of totalAbatementTonnes, computed by the digest"
+   "paysForItselfTonnes as a share of totalAbatementTonnes, computed by the course"
   ],
   "answer": 3,
-  "explanation": "SECTION 20: paysForItselfTonnes as a share of totalAbatementTonnes (computed here), 0.343467. The Heat integration project's capital recovery factor is 0.13147378 (SECTION 18), and the digest prints no share for Flare gas recovery and no ratio of the two averages."
+  "explanation": "The course gives paysForItselfTonnes as a share of totalAbatementTonnes (computed here), 0.343467. The Heat integration project's capital recovery factor is 0.13147378, and the course prints no share for Flare gas recovery and no ratio of the two averages."
  },
  {
   "prompt": "The invented Flare gas recovery abates 6200.000 t a year. Which order does the Agbor curve give it, and where does its step start?",
@@ -118,7 +118,7 @@
    "Order 6, starting at 7160.000 t"
   ],
   "answer": 2,
-  "explanation": "SECTION 20 prints Flare gas recovery as order 6 at 78.1002 USD a tonne, cumulative start 9260.000 t and end 15460.000 t. 7160.000 t is where order 5, Solar for purchased power, starts, and 5310.000 t is the start of order 4."
+  "explanation": "The curve prints Flare gas recovery as order 6 at 78.1002 USD a tonne, cumulative start 9260.000 t and end 15460.000 t. 7160.000 t is where order 5, Solar for purchased power, starts, and 5310.000 t is the start of order 4."
  },
  {
   "prompt": "On the Agbor step chart, what does the height of a step show?",
@@ -129,10 +129,10 @@
    "The measure's cumulative end on the axis"
   ],
   "answer": 1,
-  "explanation": "SECTION 20: each step's width is its tonnes a year and its height its cost per tonne; the steps tile the axis from 0. The cumulative end is where a step stops along the width axis."
+  "explanation": "On the curve, each step's width is its tonnes a year and its height its cost per tonne; the steps tile the axis from 0. The cumulative end is where a step stops along the width axis."
  },
  {
-  "prompt": "Which pair gives the Agbor curve's weighted average and the digest's plain mean, in that order?",
+  "prompt": "Which pair gives the Agbor curve's weighted average and the course's plain mean, in that order?",
   "options": [
    "-29.7913 and 18.7868 USD a tonne",
    "18.7868 USD a tonne and 0.343467",
@@ -140,7 +140,7 @@
    "18.7868 and -29.7913 USD a tonne"
   ],
   "answer": 3,
-  "explanation": "18.7868 USD is the engine's weightedAverageCostPerTonne; -29.7913 USD is the digest's own plain mean, computed here. 290443.84 USD is a money total and 0.343467 a share of tonnes."
+  "explanation": "18.7868 USD is the engine's weightedAverageCostPerTonne; -29.7913 USD is the course's own plain mean, computed here. 290443.84 USD is a money total and 0.343467 a share of tonnes."
  },
  {
   "prompt": "Where does the first step of the Agbor curve start, and which measure is it?",
@@ -151,7 +151,7 @@
    "At 0.000 t, Flare gas recovery"
   ],
   "answer": 0,
-  "explanation": "SECTION 20: the steps tile the axis from 0, and order 1 is Tune the fired heaters, cumulative start 0.000 and end 760.000 t, at -167.4364 USD a tonne. Repair failed steam traps is order 2 from 760.000 t, and Flare gas recovery is order 6."
+  "explanation": "On the curve, the steps tile the axis from 0, and order 1 is Tune the fired heaters, cumulative start 0.000 and end 760.000 t, at -167.4364 USD a tonne. Repair failed steam traps is order 2 from 760.000 t, and Flare gas recovery is order 6."
  },
  {
   "prompt": "Which two measures sit either side of zero on the Agbor curve, as orders 3 and 4?",
@@ -162,6 +162,6 @@
    "Vapour recovery on the storage tanks at 35.4193 and Solar for purchased power at 45.8573"
   ],
   "answer": 1,
-  "explanation": "Read SECTION 20's order column: 3 is the Heat integration project, the last negative step, and 4 is Vapour recovery on the storage tanks, the first positive one."
+  "explanation": "Read the curve's order column: 3 is the Heat integration project, the last negative step, and 4 is Vapour recovery on the storage tanks, the first positive one."
  }
 ]

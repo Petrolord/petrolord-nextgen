@@ -14,7 +14,7 @@ q(1,
   ["It is derived by the engine from the consequence described on the row.",
    "It is the mitigated frequency the row already reaches with its credited layers.",
    "It is fixed by the low demand band table."],
-  "The digest says the TMEL is the frequency the organisation will tolerate for this consequence, that it is an input and that the engine does not choose it. No description on the row produces it, the mitigated frequency is the quantity it is compared against, and the band table bands a result and sets no tolerance.")
+  "The course says the TMEL is the frequency the organisation will tolerate for this consequence, that it is an input and that the engine does not choose it. No description on the row produces it, the mitigated frequency is the quantity it is compared against, and the band table bands a result and sets no tolerance.")
 
 q(3,
   "ORONI's tolerable frequency is stated as 1e-6 per year. How does the engine print it, and which key holds it?",
@@ -22,7 +22,7 @@ q(3,
   ["0.000001000000 under `requiredSifPfdAvg`, which is the key the row's tolerance is carried in once the outcome state has been decided for it.",
    "0.000013500000 under `tmelPerYr`, since the tolerance is set to the frequency the credited layers already leave the row running at.",
    "0.000001000000 under `mitigatedFrequencyWithoutSifPerYr`."],
-  "The digest's table of engine keys gives `tmelPerYr` as 0.000001000000. `requiredSifPfdAvg` holds 0.074074074074 on this row, and `mitigatedFrequencyWithoutSifPerYr` holds 0.000013500000 per year, which is the frequency the tolerance is compared with and never the tolerance itself.")
+  "The course's table of engine keys gives `tmelPerYr` as 0.000001000000. `requiredSifPfdAvg` holds 0.074074074074 on this row, and `mitigatedFrequencyWithoutSifPerYr` holds 0.000013500000 per year, which is the frequency the tolerance is compared with and never the tolerance itself.")
 
 q(0,
   "How is the required RRF formed, and what does it come to on this row?",
@@ -38,7 +38,7 @@ q(2,
   ["0.074074074074, which is the required RRF of 13.500000 multiplied by the tolerable frequency the organisation has recorded against this consequence.",
    "0.007407407407, which is one over the required RRF, and it is the figure a proposed function on this row has to come in below to close it.",
    "13.500000, since the band and the target are the same number read two ways."],
-  "The digest gives `requiredSifPfdAvg` as 0.074074074074, one over the RRF. 0.007407407407 is what the same row requires at a tolerable frequency of 1e-7 per year and belongs to a different line of the ladder. A required RRF and a required PFDavg are reciprocals of one another and never the same number.")
+  "The engine returns `requiredSifPfdAvg` as 0.074074074074, one over the RRF. 0.007407407407 is what the same row requires at a tolerable frequency of 1e-7 per year and belongs to a different line of the ladder. A required RRF and a required PFDavg are reciprocals of one another and never the same number.")
 
 q(1,
   "Which outcome and required SIL does the engine report for ORONI at 1e-6 per year?",
@@ -94,7 +94,7 @@ q(3,
   ["Each step of ten in the TMEL moves the mitigated frequency by the same step.",
    "A step of ten in the TMEL moves the required RRF by exactly one band.",
    "A step of ten in the TMEL leaves the required RRF where it was."],
-  "The digest closes the ladder with exactly that sentence: each step of ten in the TMEL is a step of ten in the required RRF, the frequency does not move and only the tolerance does. The mitigated frequency is a property of the plant and its layers, so a change of tolerance leaves it alone.")
+  "The course closes the ladder with exactly that sentence: each step of ten in the TMEL is a step of ten in the required RRF, the frequency does not move and only the tolerance does. The mitigated frequency is a property of the plant and its layers, so a change of tolerance leaves it alone.")
 
 q(0,
   "A function with a PFDavg of 0.009 is proposed for the ORONI row at a tolerable frequency of 1e-7 per year. What does the engine report?",
@@ -126,7 +126,7 @@ q(3,
   ["True, because the credited layers have already been applied to the row.",
    "The key is left out of the result until a proposed function is typed in.",
    "False, and the engine also names the field `sifPfdAvg` as missing."],
-  "The digest says that without a proposed SIF the engine reports `meetsTmel` as false for ORONI at its own tolerable frequency, because the outcome is not NO_SIF_REQUIRED, and that the loop is closed only by typing a SIF's PFDavg. The key is present and false, and a missing proposal is no refusal.")
+  "The course says that without a proposed SIF the engine reports `meetsTmel` as false for ORONI at its own tolerable frequency, because the outcome is not NO_SIF_REQUIRED, and that the loop is closed only by typing a SIF's PFDavg. The key is present and false, and a missing proposal is no refusal.")
 
 emit(Q, '/root/hse-wip-lopa/banks/h3b_m04.json', expect_n=15)
 finish()

@@ -19,7 +19,7 @@
    "Only once an audit finding has been raised and recorded against the clause."
   ],
   "answer": 0,
-  "explanation": "The digest prints Nonconformant with a date and an assessor: ALLOWED. Partially conformant asks for all three, as Conformant does. A problem needs less on the record than a claim of conformity."
+  "explanation": "The course prints Nonconformant with a date and an assessor: ALLOWED. Partially conformant asks for all three, as Conformant does. A problem needs less on the record than a claim of conformity."
  },
  {
   "prompt": "An ISO 45001:2018 register sets a clause to Not applicable on both fields and gives no reason. What does the refusal name?",
@@ -426,7 +426,7 @@
    "Nowhere, since a Complete action leaves every count"
   ],
   "answer": 0,
-  "explanation": "The summary's open actions 2 are ac1 and ac3, and overdue actions 1 is ac1. ac4 reads open false and overdue false, and the digest names it as the action awaiting an effectiveness check."
+  "explanation": "The summary's open actions 2 are ac1 and ac3, and overdue actions 1 is ac1. ac4 reads open false and overdue false, and the course names it as the action awaiting an effectiveness check."
  },
  {
   "prompt": "How does canCloseFinding in the Audit & Findings Manager relate to canCloseFinding in the ISO register?",

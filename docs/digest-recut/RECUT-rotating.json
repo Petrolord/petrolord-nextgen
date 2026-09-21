@@ -1,0 +1,66 @@
+{
+ "app_slug": "rotating",
+ "rows": 4,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/rotating, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-these-engines-size",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "The digest names lib/units/fieldUnits.js as the source of the two power packagings, read by compression.js and by pumps.js.",
+     "new": "The course names lib/units/fieldUnits.js as the source of the two power packagings, read by compression.js and by pumps.js."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-these-engines-size",
+   "ord": 2,
+   "fields": {
+    "explanation": {
+     "old": "The digest preamble lists three sources for compression.js: gasProperties.js for the gas constant, the molecular weight of air and the Rankine offset, separatorSizing.js for the compressibility validity window, and fieldUnits.js for the two power packagings.",
+     "new": "The course lists three sources for compression.js: gasProperties.js for the gas constant, the molecular weight of air and the Rankine offset, separatorSizing.js for the compressibility validity window, and fieldUnits.js for the two power packagings."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "fields": {
+    "prompt": {
+     "old": "The Hydraulic Institute viscosity correction is held, and the digest names a further simplification inside it. What is it?",
+     "new": "The Hydraulic Institute viscosity correction is held, and the course names a further simplification inside it. What is it?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 8,
+   "fields": {
+    "options": {
+     "old": [
+      "From the precision the digest prints that field at, so the gate and the course agree.",
+      "From the worst gap on the whole table, applied to every field so one number covers them all.",
+      "From the tolerance the published file declares beside each case it carries.",
+      "From the size of the disagreement the two routes really have."
+     ],
+     "new": [
+      "From the precision the lesson prints that field at, so the gate and the course agree.",
+      "From the worst gap on the whole table, applied to every field so one number covers them all.",
+      "From the tolerance the published file declares beside each case it carries.",
+      "From the size of the disagreement the two routes really have."
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -22,14 +22,14 @@ q(0, "The IBAFO rack is called with 9 arrivals an hour, 4 bays and a load time t
  ["REFUSED: The number of bays must be a whole number, one or more.",
   "REFUSED: The rack cannot keep up with arrivals. The queue grows without limit, so no average waiting time exists. Add a bay, load faster, or spread the arrivals.",
   "No refusal: stable true and a mean wait of none."],
- "A load that takes no time is a missing measurement. The digest's refusal table prints the load time of 0 against 9 arrivals and 4 bays with the sentence about the arrival rate and the load time, the same sentence a blank load time gets.")
+ "A load that takes no time is a missing measurement. The course's refusal table prints the load time of 0 against 9 arrivals and 4 bays with the sentence about the arrival rate and the load time, the same sentence a blank load time gets.")
 
 q(3, "At IBAFO the offered load is 3.6000 erlangs. How does rackQueue form it?",
  "Arrivals per hour / (60 / load minutes).",
  ["Arrivals per hour / (60 / load minutes) / bays.",
   "Arrivals per hour x bays / (60 / load minutes).",
   "Probability of waiting x bays."],
- "The digest prints offered load (erlangs) = arrivals per hour / (60 / load minutes), and utilisation = offered load / bays. Dividing the offered load by the bays again gives the utilisation, 0.900000. The bay count is not in the offered load, and neither is the probability of waiting, 0.787753.")
+ "The course prints offered load (erlangs) = arrivals per hour / (60 / load minutes), and utilisation = offered load / bays. Dividing the offered load by the bays again gives the utilisation, 0.900000. The bay count is not in the offered load, and neither is the probability of waiting, 0.787753.")
 
 q(1, "The bay sweep holds IBAFO's 9 arrivals an hour and 24 minute loads. Going from 4 bays to 5, which printed figure moves, and how?",
  "The utilisation, from 0.900000 to 0.720000.",
@@ -43,7 +43,7 @@ q(2, "IBAFO's rack prints a utilisation of 0.900000 and a probability of waiting
  ["The share of each bay's hour spent loading, across the 4 bays.",
   "The chance a truck finding every bay busy is turned away.",
   "The share of the day's 216 trucks that load within the mean load minutes."],
- "The digest names it: the probability that an arriving truck waits is Erlang C. 0.900000 is the utilisation, offered load / bays. Erlang B, the rack where a truck that finds every bay busy leaves, is not exported by the engine, and 216 is the trucks per day at this arrival rate.")
+ "The course names it: the probability that an arriving truck waits is Erlang C. 0.900000 is the utilisation, offered load / bays. Erlang B, the rack where a truck that finds every bay busy leaves, is not exported by the engine, and 216 is the trucks per day at this arrival rate.")
 
 q(3, "The 6 bay rack at 9 arrivals an hour and the 4 bay rack at 6 arrivals an hour both print a utilisation of 0.600000. Which probability of waiting does the 6 bay rack print?",
  "0.196566",
@@ -52,26 +52,26 @@ q(3, "The 6 bay rack at 9 arrivals an hour and the 4 bay rack at 6 arrivals an h
   "0.600000"],
  "The bay sweep prints 0.196566 for 6 bays at 9 arrivals. The arrivals sweep prints 0.287043 for 4 bays at 6 arrivals, and the load minutes sweep prints the same 0.287043 for 4 bays at 16 minutes a load, also at 0.600000. The same utilisation prints two different probabilities. 0.410394 is the 5 bay row and 0.600000 is the utilisation itself.")
 
-q(3, "The digest prints an Erlang B of 0.270685 beside the IBAFO rack's Erlang C of 0.787753. Where does that Erlang B come from?",
- "The digest works it out from the engine's Erlang C by an identity.",
+q(3, "The course prints an Erlang B of 0.270685 beside the IBAFO rack's Erlang C of 0.787753. Where does that Erlang B come from?",
+ "The course works it out from the engine's Erlang C by an identity.",
  ["rackQueue exports it as a blocking probability.",
   "The engine's probability of waiting at 16 minute loads.",
   "The utilisation times the engine's Erlang C."],
- "The engine builds Erlang C from the Erlang B recursion and exports only Erlang C. The digest derives B = C x (1 - utilisation) / (1 - utilisation x C), which gives 0.270685 on the IBAFO rack, and labels it as worked out from the engine's figure.")
+ "The engine builds Erlang C from the Erlang B recursion and exports only Erlang C. The course derives B = C x (1 - utilisation) / (1 - utilisation x C), which gives 0.270685 on the IBAFO rack, and labels it as worked out from the engine's figure.")
 
 q(1, "What rack does the derived Erlang B of 0.270685 describe?",
  "A rack with no queue, where a truck that finds every bay busy leaves.",
  ["The IBAFO rack as it runs, where a truck that finds every bay busy waits in the yard.",
   "A rack where every truck waits in the yard.",
   "A rack of one bay, where B and C agree."],
- "The digest defines this Erlang B for a rack with NO queue, in which a truck that meets every bay busy drives off, and works it out for IBAFO as 0.270685. rackQueue runs the M/M/c queue instead and reports its Erlang C, 0.787753.")
+ "The course defines this Erlang B for a rack with NO queue, in which a truck that meets every bay busy drives off, and works it out for IBAFO as 0.270685. rackQueue runs the M/M/c queue instead and reports its Erlang C, 0.787753.")
 
 q(2, "The load minutes are swept at 9 arrivals an hour on 4 bays. At 20 minutes a load, which figure is rackQueue's probability of waiting?",
  "0.509434",
  ["0.206107",
   "0.750000",
   "0.642160"],
- "At 20 minutes the engine's Erlang C is 0.509434. The 0.206107 is the Erlang B the digest derives from that Erlang C, 0.750000 is the utilisation, and 0.642160 is the probability of waiting at 22 minutes a load.")
+ "At 20 minutes the engine's Erlang C is 0.509434. The 0.206107 is the Erlang B the course derives from that Erlang C, 0.750000 is the utilisation, and 0.642160 is the probability of waiting at 22 minutes a load.")
 
 q(3, "The IBAFO rack is called with its 9 arrivals and 24 minute loads and a bay count of 2.5. What happens?",
  "REFUSED: The number of bays must be a whole number, one or more.",
@@ -106,14 +106,14 @@ q(2, "The engine counts 216 trucks a day at IBAFO's arrival rate. What is that c
  ["The trucks the 4 bays can load in a day before the rack stops being stable.",
   "The trucks that load without waiting, the day's share not caught by the Erlang C.",
   "The day's liftings in trucks, the divisor the tank farm uses for days of cover."],
- "The digest labels it trucks per day at this arrival rate, and the rate is 9 arrivals an hour. The bays do not enter it, and neither does the probability of waiting. The tank farm divides by its daily throughput in m3, 2640.000 m3.")
+ "The course labels it trucks per day at this arrival rate, and the rate is 9 arrivals an hour. The bays do not enter it, and neither does the probability of waiting. The tank farm divides by its daily throughput in m3, 2640.000 m3.")
 
 q(0, "A depot turns trucks away at its gate when every bay is busy. Why note that beside rackQueue's probability of waiting?",
  "rackQueue models an M/M/c queue, and the no-queue Erlang B is not exported.",
  ["The engine then switches to Erlang B and prints the blocking probability instead.",
   "rackQueue counts the turned away trucks in its mean queue length of 7.0898.",
   "The printed probability counts the turned away trucks twice, once at the gate and once queued."],
- "The engine's figure is the Erlang C of an M/M/c queue, 0.787753, in which a truck that finds every bay busy waits. The digest works the no-queue Erlang B, 0.270685, out of it by an identity, and the engine exports none. Little's law gives its queue length of 7.0898 from the arrivals and the mean wait.")
+ "The engine's figure is the Erlang C of an M/M/c queue, 0.787753, in which a truck that finds every bay busy waits. The course works the no-queue Erlang B, 0.270685, out of it by an identity, and the engine exports none. Little's law gives its queue length of 7.0898 from the arrivals and the mean wait.")
 
 emit(Q, '/root/wt-md-supply-nextgen/tools/course-banks/supply/intermediate/tdsi_m01.json', label='tdsi_m01', expect_n=15)
 finish()

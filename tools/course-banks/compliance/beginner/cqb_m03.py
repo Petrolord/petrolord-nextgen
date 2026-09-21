@@ -13,9 +13,9 @@ q(2, "REG-2026-003, the quarterly flare and venting return, is due 2026-10-31, 1
  ["On track, because the due date and the as-of date have not moved.",
   "Overdue, because the window now reaches back past the as-of date.",
   "On track, because the recorded lead time of 14 wins over a new one."],
- "The digest prints 17 as Due soon. Only the lead time changed, and that alone turned On track into Due soon: the window now reaches the 16 days that remain."),
+ "The course prints 17 as Due soon. Only the lead time changed, and that alone turned On track into Due soon: the window now reaches the 16 days that remain."),
 
-q(0, "In the digest's lead time table for REG-2026-003, what is the largest lead time that still leaves the return On track?",
+q(0, "In the course's lead time table for REG-2026-003, what is the largest lead time that still leaves the return On track?",
  "15",
  ["14",
   "16",
@@ -27,7 +27,7 @@ q(3, "REG-2026-003 has 16 days to its due date. With a lead time of 16, the same
  ["On track, so the edge sits outside the window.",
   "On track, because the window opens on the day after the lead time is reached.",
   "Due soon only on the as-of date itself."],
- "The digest prints 15 On track and 16 Due soon. A lead time equal to the 16 days that remain puts the return inside its window, and the row reads Due soon."),
+ "The course prints 15 On track and 16 Due soon. A lead time equal to the 16 days that remain puts the return inside its window, and the row reads Due soon."),
 
 q(1, "REG-2026-003 is given the word 'ten' as its lead time. What does it read, and where does its window come from?",
  "Due soon, from DEFAULT_LEAD_TIME_DAYS.",
@@ -48,7 +48,7 @@ q(0, "A negative lead time, -5, is typed on the flare return's record. Which sta
  ["On track, because a negative window opens after the due date and is not open yet.",
   "Overdue, because a negative lead time reads the due date as five days passed.",
   "On track, the status it carries with a lead time of 0."],
- "The digest prints -5 as Due soon. With no usable lead time the engine uses DEFAULT_LEAD_TIME_DAYS, and a negative number is not usable."),
+ "The course prints -5 as Due soon. With no usable lead time the engine uses DEFAULT_LEAD_TIME_DAYS, and a negative number is not usable."),
 
 q(3, "REG-2026-012, the annual concession rental, is Due soon at 25 days. Its reason names a lead time. What is recorded as its lead time on the register?",
  "null",
@@ -83,7 +83,7 @@ q(0, "REG-2026-004, the annual monitoring report, is due 2027-03-31 and its peri
  ["Compliant as recorded, because a filing at the end of March covers a report due at the end of March.",
   "On track either way, because the filing date is not what decides the status here.",
   "Overdue as recorded, and On track with the filing dated 2026-03-31."],
- "Dated 2026-03-30 the filing belongs to the earlier period. Dated 2026-03-31, the first day of the period, it counts, and the digest prints status Compliant. The first day of the period is inside the period."),
+ "Dated 2026-03-30 the filing belongs to the earlier period. Dated 2026-03-31, the first day of the period, it counts, and the course prints status Compliant. The first day of the period is inside the period."),
 
 q(1, "REG-2026-002, the monthly water quality return, was due 2026-10-10 and was last filed 2026-09-09. Its period starts 2026-09-10. What does it read, and why?",
  "Overdue, because that filing counts for the period before.",

@@ -16,7 +16,7 @@ q(1, "Take the 1030 F row of the Kwale table, where Kwale Light has distilled 90
   "74.9677 percent."],
  "The blend at 55 and 45 is the volume-weighted sum of the two at a fixed temperature. 92.9219 is the blend at 1200 F and 74.9677 the blend at 860 F.")
 
-q(3, "The studio opens on its default pair, 60 and 40. What does the digest print for the two crudes' own fifty percent points averaged by volume share, minus the engine's interpolated T50?",
+q(3, "The studio opens on its default pair, 60 and 40. What does the course print for the two crudes' own fifty percent points averaged by volume share, minus the engine's interpolated T50?",
  "-5.1429 F.",
  ["-2.9207 F.",
   "-3.3184 F.",
@@ -70,7 +70,7 @@ q(2, "The Kwale blend's curve reaches 212.2121 F at which volume percent?",
  ["8.0714 percent.",
   "14.5833 percent.",
   "30 percent."],
- "The digest reads the Kwale blend at 10, 30, 50, 70 and 90 percent: 212.2121, 411.6294, 587.3184, 796.5882 and 1133.0737 F. 8.0714 is the blend at 190 F and 14.5833 at 265 F.")
+ "The course reads the Kwale blend at 10, 30, 50, 70 and 90 percent: 212.2121, 411.6294, 587.3184, 796.5882 and 1133.0737 F. 8.0714 is the blend at 190 F and 14.5833 at 265 F.")
 
 q(0, "The Kwale blend's curve is read at 10, 30, 50, 70 and 90 percent. Why is each of those five temperatures an interpolation?",
  "None of the five is a volume percent that any of the blend's 14 points reads, so each falls between two points.",
@@ -121,7 +121,7 @@ q(3, "On the studio's default cut set, how much of the Kwale blend lands in Vacu
   "43.0526 percent by volume."],
  "The default set splits the heavy end at 1000 F. 26.6940 is the blend's Vacuum gasoil, 43.0526 its Atmospheric residue on Kwale's cuts, and 18.7143 the default pair's Vacuum residue.")
 
-q(2, "Which cut set does the digest call a vacuum refinery's?",
+q(2, "Which cut set does the course call a vacuum refinery's?",
  "The studio's default cuts, which split the heavy end at 1000 F.",
  ["Kwale's own cuts, with a single heavy cut from 650 F upward.",
   "The cut set drawn inside the Ebocha partial curve, from 110 F to 920 F.",
@@ -184,7 +184,7 @@ q(1, "Which terms does netbackValue report beside the Kwale netback of 64.9473 $
   "Gross 74.2412, loss value 0.5939, processing 1.9000 and freight 6.8000."],
  "Every term is reported beside the total: gross product value 74.2412, value lost to losses at 0.8 percent 0.5939, processing cost 6.8000 and freight 1.9000 $/bbl of crude. 0.0696 is how far the after-the-costs reading lands from the engine.")
 
-q(0, "Under the complete Kwale valuation the digest prints: Costs taken as zero because they were blank: nothing. What does that line confirm?",
+q(0, "Under the complete Kwale valuation the course prints: Costs taken as zero because they were blank: nothing. What does that line confirm?",
  "assumedZero is empty, so the netback of 64.9473 carries no assumed zero.",
  ["Every cut had a price, so unpricedCuts is empty and the valuation is complete.",
   "Every cost was refused and none entered the netback of 64.9473.",
@@ -219,7 +219,7 @@ q(0, "What is Kwale's marker of 72.5 $/bbl?",
   "The Kwale blend's gross product value before the loss and the costs."],
  "netbackValue takes a marker netback and reports the differential: this crude's netback minus the marker's. Like every figure in the course, 72.5 is invented. 64.9473 is the volume-weighted mean of the two crudes' netbacks and 74.2412 the blend's gross.")
 
-q(3, "What does the digest print as the first point of the default pair's blend curve at or past 50 percent?",
+q(3, "What does the course print as the first point of the default pair's blend curve at or past 50 percent?",
  "690 F.",
  ["650 F.",
   "617.1429 F.",
@@ -238,7 +238,7 @@ q(1, "What kind of test is D86, and how is a crude assay reported?",
  ["D86 is the crude assay test; TBP is kept for finished products.",
   "D86 is a product test; a crude assay is reported as a D86 curve converted by d86ToTbp.",
   "D86 is a crude assay test that d86ToTbp converts with its own table."],
- "The digest: D86 is a product test; a crude assay is reported as a TBP distillation. d86ToTbp ships no coefficient table, and called without one it refuses.")
+ "The course: D86 is a product test; a crude assay is reported as a TBP distillation. d86ToTbp ships no coefficient table, and called without one it refuses.")
 
 q(0, "Why does d86ToTbp ship no coefficient table for API Technical Data Book Procedure 3A1.1?",
  "Reproducing a published table from memory is something the engines refuse to do.",
@@ -301,7 +301,7 @@ q(0, "The Kwale blend, 55 and 45, prints API 33.1219 and sulfur 0.2268 wt%. Whic
  ["0.8727.",
   "0.8328.",
   "0.8922."],
- "The digest prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 0.8727 is the studio's default pair's SG, 0.8328 Kwale Light's and 0.8922 Ughelli Medium's.")
+ "The course prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 0.8727 is the studio's default pair's SG, 0.8328 Kwale Light's and 0.8922 Ughelli Medium's.")
 
 emit(Q, '/root/wt-md-crude-nextgen/tools/course-banks/crude/intermediate/cri_exam.json', label='cri_exam', expect_n=42)
 finish()

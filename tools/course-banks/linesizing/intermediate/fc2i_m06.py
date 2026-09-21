@@ -48,7 +48,7 @@ q(3, "The OGBIA line flat and over a ridge both arrive at 874.339369 psia while 
   "That the traverse is the more accurate of the two calls on an undulating line, since it resolves the crest that a single call over the whole length averages away."],
  "The arrival is the same and the middle of the line is not. That difference is invisible in every report quoting an arrival pressure.")
 
-q(0, "The digest prints gas rates to four decimals and the friction factor General Flow settles on to ten. Why does the tier insist a figure be quoted at the precision the engine printed it?",
+q(0, "The course prints gas rates to four decimals and the friction factor General Flow settles on to ten. Why does the tier insist a figure be quoted at the precision the engine printed it?",
  "Because rounding on the way through moves every figure computed from the rounded one, and the tolerances a graded gas value is marked against are far tighter than the rounding would be.",
  ["Because the two conventions distinguish a gas quantity from a liquid one, so the number of decimals is how a reader tells which half of the engine a figure came from.",
   "Because the goldens are checked at those precisions, so a figure quoted at fewer digits cannot be matched against the published case it belongs to.",

@@ -99,7 +99,7 @@
   "explanation": "The threshold values are held and the coupling between them is not. A verdict taken on an unsourced threshold still changes which rate is formed, so a life computed without it is a life at the wrong rate."
  },
  {
-  "prompt": "The shipped default case binds on the corrosion allowance against the design life at 4.2 yr of 20 yr. What happens to the constraint under the four changes the digest sweeps?",
+  "prompt": "The shipped default case binds on the corrosion allowance against the design life at 4.2 yr of 20 yr. What happens to the constraint under the four changes the course sweeps?",
   "options": [
    "At 60 ft per second it binds on mass transfer to the wall, and at 1 mol percent H2S and oil wet it binds on wall shear on the corrosion inhibitor film.",
    "At 60 ft per second it binds on wall shear at 362 Pa, at 1 mol percent H2S on the allowance against the design life, and oil wet on the model not applying.",

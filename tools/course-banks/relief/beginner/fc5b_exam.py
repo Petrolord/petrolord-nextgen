@@ -72,7 +72,7 @@ q(1, "One liquid reading is 0.984776 and another on the same stream is 0.984858.
  ["The first is the correction at the stated viscosity and the second is the correction at the clamp itself.",
   "The first is the correction this engine returned and the second is the correction the validation oracle derived.",
   "The first is the correction on the converged area and the second the correction on the inviscid one."],
- "Each figure carries its own Reynolds number, 17546.394776 for the shortcut and 17412.317969 for the loop. The shortcut is what a hand calculation usually does, and the digest prints the ratio between the two areas they imply."),
+ "Each figure carries its own Reynolds number, 17546.394776 for the shortcut and 17412.317969 for the loop. The shortcut is what a hand calculation usually does, and the course prints the ratio between the two areas they imply."),
 
 q(0, "Which pair below is a computed figure standing beside the typed figure on the same route?",
  "KN 1.021727 beside KSH 1.000000.",
@@ -95,7 +95,7 @@ q(1, "Where does a figure that the module never exports come from in this course
   "From a fit to several returned answers, since one call can never isolate a constant hidden inside an equation."],
  "Reading the source and reading the behaviour are two different claims, and only the second one catches a name attached to a different number. Three separate arrangements agree on the atmospheric constant of 14.700000000000 psia."),
 
-q(2, "The digest recovers only three of the four published Napier coefficients. Why?",
+q(2, "The course recovers only three of the four published Napier coefficients. Why?",
  "Because a ratio of two lines is unchanged when all four of its coefficients are scaled together.",
  ["Because the fourth is the threshold pressure, which is a published boundary rather than a coefficient.",
   "Because the fourth is only active above the exported crossing, where the published range has ended.",
@@ -210,18 +210,18 @@ q(2, "Which published block puts a row where a fit term that is worth almost not
  "Without a case down there the steepest term of the viscosity fit would never be exercised by any published row. The steam row at 1550.000000 psia is valuable for a different reason, which is the interval where the correction is below one."),
 
 q(2, "On an active steam row the published correction reads 0.998366 and the returned one 0.998342. What is that difference?",
- "One published fit evaluated twice, which is why the digest prints both columns side by side.",
+ "One published fit evaluated twice, which is why the course prints both columns side by side.",
  ["A tolerance that the validation suite allows itself on a fit it cannot derive independently.",
   "The step that the correction takes at its published threshold, caught between the two evaluations.",
   "The superheat factor on that row, which the published answer applies and the re-run of it does not."],
  "A tolerance is a property of a check rather than of two numbers, and the superheat factor on that row is 1.000000 on both sides. The row sits inside the interval where the correction is below one."),
 
 q(0, "A published set is described as agreeing with the engine to better than two parts in a thousand. Where does that figure come from?",
- "A relative difference column the digest computes between the published answer and the re-run answer.",
+ "A relative difference column the course computes between the published answer and the re-run answer.",
  ["A tolerance the validation suite declares before any case is run against it.",
-  "The precision the digest prints each quantity at, which sets the smallest difference visible.",
+  "The precision the course prints each quantity at, which sets the smallest difference visible.",
   "The residual the loop stopped on, which bounds how far the re-run answer can be from the published one."],
- "It is one of the very few two figure relationships in this course that a lesson may quote, because the digest works it out rather than a reader forming it. A residual belongs to an iteration and is a statement about the loop."),
+ "It is one of the very few two figure relationships in this course that a lesson may quote, because the course works it out rather than a reader forming it. A residual belongs to an iteration and is a statement about the loop."),
 
 # --- units, pressures and the traps -----------------------------------------
 
@@ -274,7 +274,7 @@ q(1, "What is the one shape every column of the three stream summary shares?",
  ["A stated load and conditions, a relieving pressure, two computed factors, a stated coefficient, an area and a letter.",
   "A stated load and conditions, a relieving pressure, one computed factor, one typed factor, an area, a letter and a governing case.",
   "A stated load, a set pressure, an outlet pressure, a branch, one computed factor, an area and a letter."],
- "Nothing in the tier ranks one of the three against another, and the digest prints no relation between them. Choosing between scenarios happens within one protected item."),
+ "Nothing in the tier ranks one of the three against another, and the course prints no relation between them. Choosing between scenarios happens within one protected item."),
 
 q(3, "A candidate reports a branch as 0.551208 rather than as a word. What has gone wrong?",
  "A branch is a regime the engine reports, and 0.551208 is the critical ratio that decides it.",

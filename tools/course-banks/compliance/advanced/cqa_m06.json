@@ -107,7 +107,7 @@
    "They check neither, leaving gates to the app screens that display them."
   ],
   "answer": 2,
-  "explanation": "Every refusal sentence in the digest is the engine's own and is quoted rather than checked. That is why this course quotes a refusal verbatim or describes it, and never rewords one inside quotation marks."
+  "explanation": "Every refusal sentence in the course is the engine's own and is quoted rather than checked. That is why this course quotes a refusal verbatim or describes it, and never rewords one inside quotation marks."
  },
  {
   "prompt": "Which module's oracle carries the most golden cases?",

@@ -28,7 +28,7 @@ q(3, "The same plan has every hold point Passed and every NCR closed, and W-09, 
  ["ALLOWED, since a witness point does not stop work.",
   "REFUSED, with the hold point sentence naming W-09.",
   "ALLOWED, and planProgress keeps W-09 in failed 1."],
- "The digest fails W-09, R-04, M-07 and S-10 one at a time and each is refused with \"1 checkpoint has failed and has not been resolved.\" A failed point blocks closure whatever its type, including the types whose stops work column reads false.")
+ "The course fails W-09, R-04, M-07 and S-10 one at a time and each is refused with \"1 checkpoint has failed and has not been resolved.\" A failed point blocks closure whatever its type, including the types whose stops work column reads false.")
 
 q(1, "The third refusal reads \"3 non-conformances raised against this plan are still open.\" Which NCR statuses does the plan gate treat as open?",
  "Actions in progress, Open and Disposition agreed.",
@@ -107,7 +107,7 @@ q(3, "At the allowed step planProgress reads resolved 9 of 12 and percent 75. Wh
   "That H-08 and H-11 are still pending."],
  "The allowed step comes after H-05, H-08 and H-11 are resolved and every NCR is closed or voided. A witness point, a surveillance point and a review point stand unresolved, because the gate asks only about failed points, hold points and NCRs.")
 
-q(2, "SECTION 12 prints overdue 3 and hold points outstanding 3 for the plan. Which point sits in both lists?",
+q(2, "The course prints overdue 3 and hold points outstanding 3 for the plan. Which point sits in both lists?",
  "H-05 alone.",
  ["H-08 and H-11.",
   "S-10 and R-12.",

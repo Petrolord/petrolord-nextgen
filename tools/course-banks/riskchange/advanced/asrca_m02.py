@@ -40,7 +40,7 @@ q(0, "IK-01's blocking comments are withdrawn. C-06 (\"Minor\"), C-07 (\"Editori
  ["No: 3 open comments remain, and a review waits for every open comment before it closes.",
   "No: C-09 carries no severity, so the engine reads it as \"Critical\" and it blocks the close.",
   "No: the close waits until the coordinator has closed out C-02 and C-08 first."],
- "Only \"Critical\" and \"Major\" block. The digest records the close as ALLOWED with a Minor, an Editorial and an unrated comment still Open. Verified comments waiting on the coordinator hold nothing open either, because they are resolved.")
+ "Only \"Critical\" and \"Major\" block. The course records the close as ALLOWED with a Minor, an Editorial and an unrated comment still Open. Verified comments waiting on the coordinator hold nothing open either, because they are resolved.")
 
 q(3, "summarise is run over IK-01 and its own log. What are totalComments, openComments and blockingComments?",
  "9, 6 and 3: every comment, every unresolved comment, and the unresolved ones rated \"Critical\" or \"Major\".",
@@ -106,11 +106,11 @@ q(0, "u-efe, the author of IK-01, asks to close out C-02, a comment the reviewer
  "Segregation of duties in peer review restricts the reviewer's three moves. The author's own move, \"Responded\", and the coordinator's, \"Closed\", are not restricted by it, and closing out a verified comment is administrative once the reviewer has accepted the response.")
 
 q(1, "An external reviewer is put on IK-01 named only by display name. What does the engine do, and what does that show about the independence rule?",
- "It allows the reviewer, since a display name alone cannot be matched to the author, and the digest holds that as a limit.",
+ "It allows the reviewer, since a display name alone cannot be matched to the author, and the course holds that as a limit.",
  ["It refuses, because every reviewer has to be a signed-in user of the app.",
   "It refuses with \"Choose the reviewer.\", because a display name alone names nobody.",
   "It allows the reviewer as an Observer only, so nothing on the review can be judged by them."],
- "The digest records the external reviewer as ALLOWED and lists the limit among the held items: a reviewer named by display name only cannot be matched to the author, and a review with no author recorded cannot be checked either.")
+ "The course records the external reviewer as ALLOWED and lists the limit among the held items: a reviewer named by display name only cannot be matched to the author, and a review with no author recorded cannot be checked either.")
 
 emit(Q, '/root/wt-as-riskchange-nextgen/tools/course-banks/riskchange/advanced/asrca_m02.json', expect_n=15)
 finish()

@@ -1,0 +1,210 @@
+{
+ "app_slug": "producedwater",
+ "rows": 11,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/producedwater, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-the-droplets",
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "On the bin count sweep the digest divides the reported tail by twice the module's own cdf below the span edge, and the column reads 1.000000000000 on every row. What does that rule out?",
+     "new": "On the bin count sweep the course divides the reported tail by twice the module's own cdf below the span edge, and the column reads 1.000000000000 on every row. What does that rule out?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-the-droplets",
+   "ord": 11,
+   "fields": {
+    "options": {
+     "old": [
+      "It warns outside 0.5 to 1 and refuses above 1.5, which is the widest row the digest sweeps and the last one that answers.",
+      "It warns outside 0.5 to 1 and refuses above 2, because a wider spread than that is not what produced water carries.",
+      "It warns above 1 only, since a tight distribution is always within what the log-normal form can describe.",
+      "It refuses outside 0.5 to 1, because a spread outside the customary band would carry volume beyond the span the grid reaches."
+     ],
+     "new": [
+      "It warns outside 0.5 to 1 and refuses above 1.5, which is the widest row the course sweeps and the last one that answers.",
+      "It warns outside 0.5 to 1 and refuses above 2, because a wider spread than that is not what produced water carries.",
+      "It warns above 1 only, since a tight distribution is always within what the log-normal form can describe.",
+      "It refuses outside 0.5 to 1, because a spread outside the customary band would carry volume beyond the span the grid reaches."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-the-hydrocyclone",
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "The digest prints a derived column beside the bore sweep, the cut size multiplied by the square root of the bore. What does it read?",
+     "new": "The course prints a derived column beside the bore sweep, the cut size multiplied by the square root of the bore. What does it read?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "On the UZERE inlet it returns 26.000000 micron against a typed 26, on every grid in the digest.",
+     "new": "On the UZERE inlet it returns 26.000000 micron against a typed 26, on every grid in the course."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 26,
+   "fields": {
+    "options": {
+     "old": [
+      "Because a suite whose every case runs at the defaults cannot tell a default from a derivation.",
+      "Because a row at the defaults would duplicate the row the digest already prints for that device.",
+      "Because the defaults are pinned by literal in the jest suite, so a case running at them checks nothing new.",
+      "Because a golden row has to straddle a threshold, and no default sits on a threshold."
+     ],
+     "new": [
+      "Because a suite whose every case runs at the defaults cannot tell a default from a derivation.",
+      "Because a row at the defaults would duplicate the row the course already prints for that device.",
+      "Because the defaults are pinned by literal in the jest suite, so a case running at them checks nothing new.",
+      "Because a golden row has to straddle a threshold, and no default sits on a threshold."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-band-and-the-balance",
+   "ord": 7,
+   "fields": {
+    "options": {
+     "old": [
+      "A tolerance of 1e-12, which is the figure the jest suite asserts the cyclone group to.",
+      "The oracle's own bisection step, which stops once its bracket is narrower than the gap shown.",
+      "The six decimal print of this digest, which is where two figures stop being comparable.",
+      "Nothing. Both sides are exact arguments about one geometry, so the gap is floating point noise and anything materially larger would be a real disagreement to go and find."
+     ],
+     "new": [
+      "A tolerance of 1e-12, which is the figure the jest suite asserts the cyclone group to.",
+      "The oracle's own bisection step, which stops once its bracket is narrower than the gap shown.",
+      "The six decimal print of this course, which is where two figures stop being comparable.",
+      "Nothing. Both sides are exact arguments about one geometry, so the gap is floating point noise and anything materially larger would be a real disagreement to go and find."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-band-and-the-balance",
+   "ord": 9,
+   "fields": {
+    "options": {
+     "old": [
+      "That the oracle had stopped being independent, because that is what two copies of one calculation produce.",
+      "That the particle count had been raised until the sampling noise in the golden fell well under the precision this digest prints at.",
+      "That the quadrature over the bins had converged, which is the property the default grid of 60 bins is chosen to deliver.",
+      "That the engine had been rewritten to track particles, which is the route the golden takes on those rows."
+     ],
+     "new": [
+      "That the oracle had stopped being independent, because that is what two copies of one calculation produce.",
+      "That the particle count had been raised until the sampling noise in the golden fell well under the precision this course prints at.",
+      "That the quadrature over the bins had converged, which is the property the default grid of 60 bins is chosen to deliver.",
+      "That the engine had been rewritten to track particles, which is the route the golden takes on those rows."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-the-band-and-the-balance",
+   "ord": 10,
+   "fields": {
+    "options": {
+     "old": [
+      "That the tolerance on that whole family of published cases is far too loose and ought to be tightened until it sits exactly at the gap the reviewer has just observed.",
+      "That the case sits inside a band both methods are stated to, where agreement is expected and carries no information.",
+      "That the comparison is being made at the print precision of the digest rather than at full float.",
+      "That the two sides are sharing something they were meant to derive separately, which is the quiet failure that lets a bent engine and a bent oracle agree perfectly."
+     ],
+     "new": [
+      "That the tolerance on that whole family of published cases is far too loose and ought to be tightened until it sits exactly at the gap the reviewer has just observed.",
+      "That the case sits inside a band both methods are stated to, where agreement is expected and carries no information.",
+      "That the comparison is being made at the print precision of the course rather than at full float.",
+      "That the two sides are sharing something they were meant to derive separately, which is the quiet failure that lets a bent engine and a bent oracle agree perfectly."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-what-a-gate-can-catch",
+   "ord": 7,
+   "fields": {
+    "prompt": {
+     "old": "This course found a defect of its own in the media filter while building the digest against the already repaired engine. What was it, and what did the second repair put in its place?",
+     "new": "This course found a defect of its own in the media filter while building its worked tables against the already repaired engine. What was it, and what did the second repair put in its place?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-what-a-gate-can-catch",
+   "ord": 12,
+   "fields": {
+    "options": {
+     "old": [
+      "The measured gap table printed in this digest, since a bent pair of files will agree with itself very much more closely than two genuinely independent routes ever should.",
+      "Three things: a route with no place to type the constant, the identities that need no source, and an explicit pin with the value typed by hand in the test file.",
+      "The negative controls carried by every single family in the whole suite, each of which is asserted to stay green on every row of the family it belongs to.",
+      "The straddled warning fields in the golden file, since a bent pair of files moves a threshold and a straddle on both sides of it will detect that move at once."
+     ],
+     "new": [
+      "The measured gap table printed in this course, since a bent pair of files will agree with itself very much more closely than two genuinely independent routes ever should.",
+      "Three things: a route with no place to type the constant, the identities that need no source, and an explicit pin with the value typed by hand in the test file.",
+      "The negative controls carried by every single family in the whole suite, each of which is asserted to stay green on every row of the family it belongs to.",
+      "The straddled warning fields in the golden file, since a bent pair of files moves a threshold and a straddle on both sides of it will detect that move at once."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-where-the-method-stops",
+   "ord": 4,
+   "fields": {
+    "options": {
+     "old": [
+      "That it is the outlet concentration below which no device in this module removes anything at all, and that it is reported back on the return as the truncated tail.",
+      "That it is declared in the frozen constants object and applied to every train return without being asked for.",
+      "That there is one under any outlet a train can reach, and that no value for it is stated here, so the value is the caller's own.",
+      "That it exists, and that it customarily falls between the two figures the verdict block of the digest prints."
+     ],
+     "new": [
+      "That it is the outlet concentration below which no device in this module removes anything at all, and that it is reported back on the return as the truncated tail.",
+      "That it is declared in the frozen constants object and applied to every train return without being asked for.",
+      "That there is one under any outlet a train can reach, and that no value for it is stated here, so the value is the caller's own.",
+      "That it exists, and that it customarily falls between the two figures the verdict block of the course prints."
+     ]
+    }
+   }
+  }
+ ]
+}

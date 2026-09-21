@@ -33,7 +33,7 @@
   "explanation": "The importer pays the landed total and sells the outturn. At the invented 0.45 percent that is 26513943.86 USD over 45566774.37 litres, printed as 0.581870 USD a litre sold."
  },
  {
-  "prompt": "The digest's rule for the ocean loss reads \"The loss divides the cost.\" Which reading of BADAGRY does that statement rule out?",
+  "prompt": "The course's rule for the ocean loss reads \"The loss divides the cost.\" Which reading of BADAGRY does that statement rule out?",
   "options": [
    "Spreading the total over the litres that arrived.",
    "Adding the loss to the build-up as a charge in dollars.",
@@ -85,7 +85,7 @@
    "Both figures in dollars, the naira column copied from the dollar one."
   ],
   "answer": 1,
-  "explanation": "The dollar cost a litre sold needs no exchange rate. The naira figure is the dollar figure x the exchange rate, and with no exchange rate the digest prints the local figure as none."
+  "explanation": "The dollar cost a litre sold needs no exchange rate. The naira figure is the dollar figure x the exchange rate, and with no exchange rate the engine returns the local figure as none."
  },
  {
   "prompt": "Which figure does the pump price build-up of the next module start from, on the course's invented BADAGRY record?",
@@ -129,7 +129,7 @@
    "The engine refuses the jetty and storage lines until the contract basis is typed."
   ],
   "answer": 1,
-  "explanation": "The digest lists H1 among the items held by the engines repository in FINDINGS-supply, taught as limits and never graded. Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know, and the engine answers every per-quantity line on the bill of lading."
+  "explanation": "The course lists H1 among the items held by the engines repository in FINDINGS-supply, taught as limits and never graded. Whether a terminal bills on the bill of lading or on the outturn is a contract term the engine does not know, and the engine answers every per-quantity line on the bill of lading."
  },
  {
   "prompt": "H1 names the jetty and storage lines. Which other invented BADAGRY lines does the same contract question reach?",

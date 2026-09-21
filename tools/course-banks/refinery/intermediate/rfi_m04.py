@@ -30,14 +30,14 @@ q(3, "Reformate is worth 111.0000, Gasoline's price. Which reading of the plan l
   "Reformate carries a surplus of 103638.71 bbl waiting to be placed in Gasoline."],
  "The value is of one more barrel arriving from outside, and Gasoline, reformate's only product, reads false at its ceiling, selling 346525.81 of 450000.00 bbl. The surplus of 103638.71 bbl belongs to offgas, and reformate's surplus is 0.00.")
 
-q(1, "The plan values naphtha at 91.4500. Which working does the digest print for that figure?",
+q(1, "The plan values naphtha at 91.4500. Which working does the course print for that figure?",
  "What the reformer makes from a barrel at the stream values, less its 2.9000 operating cost.",
  ["Naphtha export's price of 72.5000, with the reformer's 2.9000 a barrel added on top.",
   "Gasoline's price of 111.0000, less the crude unit's 1.2500 a barrel of distillation.",
   "A barrel of Bonny Light (illustrative) at 82.5500, shared over its naphtha yield of 0.2300."],
  "0.8500 x 111.0000 + 0.1000 x 0.0000 - 2.9000 = 91.4500. The reformer runs at 97.07 percent, below its capacity, so one more barrel of naphtha goes through it.")
 
-q(2, "The Diesel hydrotreater is at capacity. Through which crude does the digest's working value gasoil at 94.1016?",
+q(2, "The Diesel hydrotreater is at capacity. Through which crude does the course's working value gasoil at 94.1016?",
  "Bonny Light (illustrative), which the plan runs only in part.",
  ["Forcados (illustrative), the crude the plan runs at its full availability.",
   "Brass River (illustrative), also run at its full availability in the plan.",
@@ -47,7 +47,7 @@ q(2, "The Diesel hydrotreater is at capacity. Through which crude does the diges
 q(3, "Why is the step from 400000.00 to 420000.00 bbl of reformer capacity priced at only 2.9773 a barrel?",
  "The reformer fills partway through the step and reads 97.07 percent at 420000.00 bbl.",
  ["The reformer's operating cost of 2.9000 a barrel is taken off each barrel of room.",
-  "The step is the first one the digest prints, so it carries no change in margin.",
+  "The step is the first one the course prints, so it carries no change in margin.",
   "Gasoline reaches its ceiling inside that step and holds the reformer back."],
  "The gain is the change in margin, 59545.39, over the change in capacity, 20000.00 bbl. Part of that room is used and part is not, so the figure averages the two stretches.")
 
@@ -93,7 +93,7 @@ q(1, "Leaving the hydrotreater capacity blank moves the value of a stream the hy
   "Reformate, from 111.0000 to 105.5000."],
  "The blank row prints naphtha at 83.6941, the reformer's feed. Gasoil also moves, to 99.8560, and gasoil is the hydrotreater's own feed. A stream's value is a property of the whole plan.")
 
-q(2, "Across all six rows of the digest's stream values under each change, which streams print one value in every row?",
+q(2, "Across all six rows of the course's stream values under each change, which streams print one value in every row?",
  "Reformate, kero, ulsd and offgas.",
  ["Reformate, kero, ulsd and residue.",
   "Naphtha, reformate, kero and ulsd.",

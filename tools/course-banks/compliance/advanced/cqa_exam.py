@@ -21,7 +21,7 @@ q(0, "An assessor finds clause 7.2 failing and has no document to point to. Can 
  ["No: every clause verdict needs evidence, a date and an assessor before it stands.",
   "Only as Partially conformant, which asks for less on the record than Nonconformant.",
   "Only once an audit finding has been raised and recorded against the clause."],
- "The digest prints Nonconformant with a date and an assessor: ALLOWED. Partially conformant asks for all three, as Conformant does. A problem needs less on the record than a claim of conformity.")
+ "The course prints Nonconformant with a date and an assessor: ALLOWED. Partially conformant asks for all three, as Conformant does. A problem needs less on the record than a claim of conformity.")
 
 q(3, "An ISO 45001:2018 register sets a clause to Not applicable on both fields and gives no reason. What does the refusal name?",
  "ISO 45001:2018, in the shape of the ISO 14001:2015 sentence",
@@ -288,7 +288,7 @@ q(0, "ac4 is Preventive, Complete, with no effectiveness verdict. Where does it 
  ["In the summary's overdue actions 1, as its due date 2026-09-01 has passed",
   "In the summary's open actions 2, counted beside ac1",
   "Nowhere, since a Complete action leaves every count"],
- "The summary's open actions 2 are ac1 and ac3, and overdue actions 1 is ac1. ac4 reads open false and overdue false, and the digest names it as the action awaiting an effectiveness check.")
+ "The summary's open actions 2 are ac1 and ac3, and overdue actions 1 is ac1. ac4 reads open false and overdue false, and the course names it as the action awaiting an effectiveness check.")
 
 # [m04, the shared functions of SECTION 1]
 q(3, "How does canCloseFinding in the Audit & Findings Manager relate to canCloseFinding in the ISO register?",

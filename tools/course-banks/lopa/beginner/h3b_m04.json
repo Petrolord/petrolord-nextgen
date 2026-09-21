@@ -8,7 +8,7 @@
    "It is fixed by the low demand band table."
   ],
   "answer": 1,
-  "explanation": "The digest says the TMEL is the frequency the organisation will tolerate for this consequence, that it is an input and that the engine does not choose it. No description on the row produces it, the mitigated frequency is the quantity it is compared against, and the band table bands a result and sets no tolerance."
+  "explanation": "The course says the TMEL is the frequency the organisation will tolerate for this consequence, that it is an input and that the engine does not choose it. No description on the row produces it, the mitigated frequency is the quantity it is compared against, and the band table bands a result and sets no tolerance."
  },
  {
   "prompt": "ORONI's tolerable frequency is stated as 1e-6 per year. How does the engine print it, and which key holds it?",
@@ -19,7 +19,7 @@
    "0.000001000000 under `tmelPerYr`."
   ],
   "answer": 3,
-  "explanation": "The digest's table of engine keys gives `tmelPerYr` as 0.000001000000. `requiredSifPfdAvg` holds 0.074074074074 on this row, and `mitigatedFrequencyWithoutSifPerYr` holds 0.000013500000 per year, which is the frequency the tolerance is compared with and never the tolerance itself."
+  "explanation": "The course's table of engine keys gives `tmelPerYr` as 0.000001000000. `requiredSifPfdAvg` holds 0.074074074074 on this row, and `mitigatedFrequencyWithoutSifPerYr` holds 0.000013500000 per year, which is the frequency the tolerance is compared with and never the tolerance itself."
  },
  {
   "prompt": "How is the required RRF formed, and what does it come to on this row?",
@@ -41,7 +41,7 @@
    "13.500000, since the band and the target are the same number read two ways."
   ],
   "answer": 2,
-  "explanation": "The digest gives `requiredSifPfdAvg` as 0.074074074074, one over the RRF. 0.007407407407 is what the same row requires at a tolerable frequency of 1e-7 per year and belongs to a different line of the ladder. A required RRF and a required PFDavg are reciprocals of one another and never the same number."
+  "explanation": "The engine returns `requiredSifPfdAvg` as 0.074074074074, one over the RRF. 0.007407407407 is what the same row requires at a tolerable frequency of 1e-7 per year and belongs to a different line of the ladder. A required RRF and a required PFDavg are reciprocals of one another and never the same number."
  },
  {
   "prompt": "Which outcome and required SIL does the engine report for ORONI at 1e-6 per year?",
@@ -118,7 +118,7 @@
    "Each step of ten in the TMEL is a step of ten in the required RRF, because the frequency does not move and only the tolerance does."
   ],
   "answer": 3,
-  "explanation": "The digest closes the ladder with exactly that sentence: each step of ten in the TMEL is a step of ten in the required RRF, the frequency does not move and only the tolerance does. The mitigated frequency is a property of the plant and its layers, so a change of tolerance leaves it alone."
+  "explanation": "The course closes the ladder with exactly that sentence: each step of ten in the TMEL is a step of ten in the required RRF, the frequency does not move and only the tolerance does. The mitigated frequency is a property of the plant and its layers, so a change of tolerance leaves it alone."
  },
  {
   "prompt": "A function with a PFDavg of 0.009 is proposed for the ORONI row at a tolerable frequency of 1e-7 per year. What does the engine report?",
@@ -162,6 +162,6 @@
    "False, because the outcome is not NO_SIF_REQUIRED and the loop is closed only by typing a SIF's PFDavg."
   ],
   "answer": 3,
-  "explanation": "The digest says that without a proposed SIF the engine reports `meetsTmel` as false for ORONI at its own tolerable frequency, because the outcome is not NO_SIF_REQUIRED, and that the loop is closed only by typing a SIF's PFDavg. The key is present and false, and a missing proposal is no refusal."
+  "explanation": "The course says that without a proposed SIF the engine reports `meetsTmel` as false for ORONI at its own tolerable frequency, because the outcome is not NO_SIF_REQUIRED, and that the loop is closed only by typing a SIF's PFDavg. The key is present and false, and a missing proposal is no refusal."
  }
 ]

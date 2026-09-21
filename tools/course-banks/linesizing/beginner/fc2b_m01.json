@@ -4,7 +4,7 @@
   "options": [
    "Nothing, because it sizes one line and nothing in it knows another line exists. A system of lines sharing a header is a network solve and lives in engines/production/networkSolve.js.",
    "It sizes the four in turn and then balances them, iterating over the four rates until the pressures the four lines report at the shared header agree with each other to a stated tolerance.",
-   "It refuses, returning an object carrying an error string, because a shared header is one of the eighteen states Section 1 lists as having no answer in this method.",
+   "It refuses, returning an object carrying an error string, because a shared header is one of the eighteen states listed as having no answer in this method.",
    "It sizes the four separately and adds the four pressure drops together, and that sum is the header pressure a network solve would have returned for the same system."
   ],
   "answer": 0,
@@ -38,7 +38,7 @@
    "That the rate was at fault, since the message lists the five inputs in the order the guard tests them and the offending one is always named first.",
    "That exactly one of the five was missing, since a value that arrived negative produces a separate message naming the sign rather than this one.",
    "That the bore, the length and the density were all usable, since the message names only the inputs the guard could not accept and leaves out the ones it could.",
-   "Nothing about which one. Five of the eighteen states Section 1 lists produce that identical string, and it states the contract the five inputs share rather than pointing at the offender."
+   "Nothing about which one. Five of the eighteen states the course lists produce that identical string, and it states the contract the five inputs share rather than pointing at the offender."
   ],
   "answer": 3,
   "explanation": "A missing rate, a negative rate, a missing bore, a missing length and a missing viscosity all return that one string. The message describes the contract and the caller still has to read the row."
@@ -77,7 +77,7 @@
   "explanation": "The mile is a measured boundary in the code rather than a note beside it. The OGBIA liquid line is stated as 26400.000000 ft, and the engine wants feet there."
  },
  {
-  "prompt": "gc is reported as 32.174000 lbm ft per lbf s2. How was that figure obtained for this digest?",
+  "prompt": "gc is reported as 32.174000 lbm ft per lbf s2. How was that figure obtained for this course?",
   "options": [
    "By reading it off the module, which exports gc along with the other constants the chain needs so that a caller can reproduce any step of the arithmetic by hand.",
    "By measuring it out of the engine, as the density times the velocity squared over twice 144 times the fittings loss at a resistance sum of one, from 2.244621 ft/s and 0.029634 psi.",
@@ -88,12 +88,12 @@
   "explanation": "gc reconciles the pound as a mass with the pound as a force. Isolating it needs a call whose only loss is the fittings term, which is why the resistance sum of one is used."
  },
  {
-  "prompt": "Why does this digest measure gc, the centipoise, the barrel and the day out of the engine rather than printing their published values?",
+  "prompt": "Why does this course measure gc, the centipoise, the barrel and the day out of the engine rather than printing their published values?",
   "options": [
    "Because the engine's own values differ slightly from the published ones, and what the chain actually used is what a reader has to be given to reproduce any figure in it.",
    "Because each of the four is a derived group with no published value behind it anywhere, so measuring it out of the engine is the only route to any figure at all.",
    "Because the module keeps those constants to itself, so a number typed into a teaching file would not be an engine return.",
-   "Because the module exports them under names this digest has no way to import, so asking the engine a question about itself is how a present but unreachable value is recovered."
+   "Because the module exports them under names this course has no way to import, so asking the engine a question about itself is how a present but unreachable value is recovered."
   ],
   "answer": 2,
   "explanation": "One centipoise comes back as 6.7197000000e-4 lbm per ft per s and one barrel as 5.6145833333333 cubic feet, each recovered by choosing inputs that isolate it."
@@ -121,7 +121,7 @@
   "explanation": "12000.000000 bpd through 7.981000 in spends 25.660631 psi and through 6.065000 in spends 97.306913 psi. The method travels between lines and the numbers do not."
  },
  {
-  "prompt": "On the liquid side, one of the states Section 1 lists is about the shape of the input rather than about a physical impossibility. Which is it, and how does it arrive?",
+  "prompt": "On the liquid side, one of the states the course lists is about the shape of the input rather than about a physical impossibility. Which is it, and how does it arrive?",
   "options": [
    "A liquid line handed a negative rate, and it arrives as a thrown exception, because a sign error is a fault in the calling code rather than a state the method has no answer for.",
    "A traverse handed no profile segment, and it arrives exactly as the others do, as an object carrying { error: \"a traverse needs at least one profile segment\" }.",

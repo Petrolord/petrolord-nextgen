@@ -125,9 +125,9 @@ FILES="
 digest_for() {
   case $1 in
     20261004_h2_hygiene_course           ) echo 2c0a21a13f829c8f4eba408557f18890f2d6effbf34eca62c5d4506e5db85835 ;;
-    20261004_h2_hygiene_beginner_deep    ) echo 0c2b31a95ffea622aff86905db64215d125f0f22205e9ad6823c69c3ca4a3d20 ;;
-    20261004_h2_hygiene_intermediate_deep) echo 66e706d70bf975e6d934cc815b29ce95b699086c2a49e9777e83d1da576a43e1 ;;
-    20261004_h2_hygiene_advanced_deep    ) echo d0c5f83d5cf5920d4614e5ad9d75964ba4d1548e4811b440a86c4216bf901c69 ;;
+    20261004_h2_hygiene_beginner_deep    ) echo b1920ab77cf7979a49752ea2b43cfcaff9aeee7f6c28b99a955bb6a3b793b373 ;;
+    20261004_h2_hygiene_intermediate_deep) echo 156135acf05dabd09dbe2eec20562d041149c83af231bb07ca2e3147572edffa ;;
+    20261004_h2_hygiene_advanced_deep    ) echo 1d26d30696e3ebbd3658e601f034d9a8979338816bfad19769d2cc77856abd36 ;;
     20261004_h2_hygiene_go_live          ) echo 772ee101b755a1a05047ed05340786248533daa3730c78d3256d9bf5dd316a5c ;;
     *) echo UNPINNED ;;
   esac

@@ -20,7 +20,7 @@ q(3, "Why does the app roll a monthly return forward from the date that was due 
  ["A roll from the filing would land on a month end the calendar has to pull back, and the pull is avoided.",
   "The filing date is not stored on the record.",
   "Rolling from the filing warns too soon."],
- "The digest prints rollForward(2026-10-10, Monthly) = 2026-11-10. The same call on the filing date would give 2026-11-14, so a roll from the filing would move the schedule later with each late filing."),
+ "The course prints rollForward(2026-10-10, Monthly) = 2026-11-10. The same call on the filing date would give 2026-11-14, so a roll from the filing would move the schedule later with each late filing."),
 
 q(0, "Once the late filing of REG-2026-002 is recorded and its due date rolled, what does the return read?",
  "Due soon, with a next action date of 2026-11-10 and 26 days to go.",
@@ -41,7 +41,7 @@ q(1, "What do the two statuses of the rolled REG-2026-002 row, Due soon with its
  ["It asks about the filing first.",
   "It reads the lead time only for a row never filed.",
   "It treats a lead time of 0 as missing."],
- "The digest states it: deriveStatus asks whether the next action date is inside the lead time before it asks about the filing. The open window is what keeps the row at Due soon."),
+ "The course states it: deriveStatus asks whether the next action date is inside the lead time before it asks about the filing. The open window is what keeps the row at Due soon."),
 
 q(0, "rollForward is given a due date of 2026-08-31 and the frequency Monthly. What next due date does it give?",
  "2026-09-30",

@@ -22,7 +22,7 @@
   "explanation": "The four bands are low, moderate, high and severe. The extra word is negligible and it is what the door returns at zero and below rather than a band it reaches by being small."
  },
  {
-  "prompt": "The digest names a fourth boundary in this door. Where is it?",
+  "prompt": "The course names a fourth boundary in this door. Where is it?",
   "options": [
    "At 4.200000 mm/yr, where the golden's highest category row sits and the severe band is taken to run out of meaning altogether.",
    "At 0.000000001 mm/yr, which is the smallest positive rate the golden carries and the value the door first stops calling a rate negligible at.",
@@ -38,7 +38,7 @@
    "It is the only row where the golden and the engine disagree, so the extra digits are there to show the size of the gap between the two of them.",
    "At six decimals it would read 0.000000 and a reader would see the row above it twice.",
    "It sits on an edge, and every row on an edge is printed at the precision the edge is measured to so that the comparison can be checked by hand.",
-   "It is the row the vendored jest suite pins, and a pin is printed at the full precision of the double rather than at the digest's own precision."
+   "It is the row the vendored jest suite pins, and a pin is printed at the full precision of the double rather than at the course's own precision."
   ],
   "answer": 1,
   "explanation": "It is the smallest positive rate the golden carries, and it is one of the two rows that pin the zero boundary. The row above it is the rate of exactly zero."

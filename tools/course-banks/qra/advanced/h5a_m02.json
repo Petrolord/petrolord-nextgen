@@ -8,7 +8,7 @@
    "deltaPLL times the VPF times the DF, so that the gross disproportion factor is already carried inside the yearly benefit."
   ],
   "answer": 2,
-  "explanation": "The digest writes B = deltaPLL x VPF + the sum of expected cases a year times the value per case, and the checklist example carries three injury lines through exactly that sum. Leaving the injuries out drops real benefit. Dividing the VPF by deltaPLL inverts the product, and the DF belongs to the test that compares cost with benefit, never to the benefit itself."
+  "explanation": "The course writes B = deltaPLL x VPF + the sum of expected cases a year times the value per case, and the checklist example carries three injury lines through exactly that sum. Leaving the injuries out drops real benefit. Dividing the VPF by deltaPLL inverts the product, and the DF belongs to the test that compares cost with benefit, never to the benefit itself."
  },
  {
   "prompt": "The EDIKAN firewall lowers the PLL by 2e-3 a year with a VPF of 1000000 over a life of 20 years. Undiscounted, what are its fatality benefit a year and the present value of the benefit?",
@@ -19,7 +19,7 @@
    "2000.00 a year, and 2000.00 over the life."
   ],
   "answer": 0,
-  "explanation": "2e-3 times 1000000 is 2000.00 a year, and twenty year-end flows of it at no discount give 40000.00, as the digest prints. 34337.28 is the same benefit at a benefit rate of 0.015, a different convention from the undiscounted one asked for. 40000.00 is the life's benefit and 350000.00 the cost, and 2000.00 over the life forgets nineteen of the twenty years."
+  "explanation": "2e-3 times 1000000 is 2000.00 a year, and twenty year-end flows of it at no discount give 40000.00, as the course shows. 34337.28 is the same benefit at a benefit rate of 0.015, a different convention from the undiscounted one asked for. 40000.00 is the life's benefit and 350000.00 the cost, and 2000.00 over the life forgets nineteen of the twenty years."
  },
  {
   "prompt": "`costBenefit` is called for the EDIKAN firewall with every input but the VPF. What does the engine return?",
@@ -41,7 +41,7 @@
    "Current recommendations, 1336800 being the value HSE publishes now and 1000000 kept only for the reproduction of older work."
   ],
   "answer": 1,
-  "explanation": "The digest is plain: both figures are exported for illustration only, in GBP at their price year, a call without a VPF is refused, and current HSE figures were not found on a live page, so neither is a recommendation. They are not defaults, the engine bounds a VPF only by requiring it above 0, and the 2003 value is a dated figure."
+  "explanation": "The course is plain: both figures are exported for illustration only, in GBP at their price year, a call without a VPF is refused, and current HSE figures were not found on a live page, so neither is a recommendation. They are not defaults, the engine bounds a VPF only by requiring it above 0, and the 2003 value is a dated figure."
  },
  {
   "prompt": "R2P2 Appendix 3 paragraph 13 says that with a VPF of 1000000 a reduction of one in a hundred thousand in one person's individual risk is worth about 10. What does the engine give for deltaPLL 1e-5 over 1 year?",
@@ -52,7 +52,7 @@
    "No benefit at all, because a single year of life is refused by the engine as too short a period to weigh against a cost."
   ],
   "answer": 2,
-  "explanation": "1e-5 times 1000000 is 10.00 for one year, which is the golden case the digest prints and the published margin note reproduced. The engine takes the life the caller states, so the EDIKAN life of 20 years has no part in this call, and 40000.00 is the EDIKAN benefit. A lifetime of 1 year is a whole number of years, 1 or more, which the engine accepts."
+  "explanation": "1e-5 times 1000000 is 10.00 for one year, which is the golden case the course shows and the published margin note reproduced. The engine takes the life the caller states, so the EDIKAN life of 20 years has no part in this call, and 40000.00 is the EDIKAN benefit. A lifetime of 1 year is a whole number of years, 1 or more, which the engine accepts."
  },
  {
   "prompt": "In the HSE CBA checklist example the fatality line is deltaPLL 0.0002 at a value of 1336800 a case over 25 years, undiscounted. What does the engine give for that line?",
@@ -129,7 +129,7 @@
    "Neither, since a value printed two ways is withheld and the permanent incapacity line is dropped from the benefit."
   ],
   "answer": 1,
-  "explanation": "The digest notes the table's mistyped value and says the checklist's worked example uses 207200, as the golden does, so that is the figure the course carries, and it reproduces the printed 2072. Choosing the more favourable verdict is not a method, and dropping the line throws away a benefit whose value the example itself confirms."
+  "explanation": "The course notes the table's mistyped value and says the checklist's worked example uses 207200, as the golden does, so that is the figure the course carries, and it reproduces the printed 2072. Choosing the more favourable verdict is not a method, and dropping the line throws away a benefit whose value the example itself confirms."
  },
  {
   "prompt": "A caller describes a measure that RAISES the PLL by passing a negative deltaPLL. What does the engine return?",
@@ -151,7 +151,7 @@
    "1000000 is about GBP 1 000 000 at 2001 prices from R2P2, and 1336800 is the 2003 Q3 checklist fatality value, times 2 for cancer."
   ],
   "answer": 3,
-  "explanation": "The export's sources are verbatim in the digest: R2P2 (2001) Appendix 3 para 13, about GBP 1 000 000 at 2001 prices, and the CBA checklist (2003 values), fatality GBP 1,336,800, times 2 for cancer. The years are not swapped, the two figures do not map to the worker and public presets, and neither is current."
+  "explanation": "The export's sources are verbatim in the course: R2P2 (2001) Appendix 3 para 13, about GBP 1 000 000 at 2001 prices, and the CBA checklist (2003 values), fatality GBP 1,336,800, times 2 for cancer. The years are not swapped, the two figures do not map to the worker and public presets, and neither is current."
  },
  {
   "prompt": "The checklist example is worked undiscounted over 25 years. Which call through `costBenefit` reproduces its benefit?",

@@ -166,7 +166,7 @@ q(0, "On a matched variance line where no barrels arrived, what actual unit valu
 q(2, "The expansion is valued with start year 2031. What does the first calendar year read?",
  "2031",
  ["2027", "2029", "2033"],
- "Year 0 takes the start year as its label. The money in every row is unchanged, which the digest confirms by printing the same NPV and total tax for both runs.")
+ "Year 0 takes the start year as its label. The money in every row is unchanged, which the course confirms by printing the same NPV and total tax for both runs.")
 
 # m05: tax losses carried forward (section 23)
 q(1, "How much loss is left in the pool at the end of 2029?",
@@ -184,7 +184,7 @@ q(3, "How is a year's tax formed once a loss is being carried?",
  ["taxable income x 30 percent, less the loss carried in, once above zero",
   "(taxable income - the tax paid last year) x 30 percent, once above zero",
   "the loss carried in x 30 percent, taken off the year's income"],
- "The digest states: the tax = (taxable income - the loss carried in) x the tax rate of 30 percent once that is above zero. The loss is set against income before the rate is applied.")
+ "The course states: the tax = (taxable income - the loss carried in) x the tax rate of 30 percent once that is above zero. The loss is set against income before the rate is applied.")
 
 q(2, "What difference in total tax over the life does carrying the loss forward make?",
  "35.3496 million",

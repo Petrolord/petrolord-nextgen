@@ -1,0 +1,30 @@
+{
+ "app_slug": "waterflood",
+ "rows": 1,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "hand edits in the recut generator (this course has no committed bank source)",
+ "edits": [
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "fields": {
+    "options": {
+     "old": [
+      "As 2.0000000000000013, since anything else discards precision the engine actually delivered.",
+      "As 2.0, while recording the raw double in the digest.",
+      "As 2, with the trailing digits treated as evidence of a small real change in injectivity over the baseline period.",
+      "As a range from 2.0 to 2.857142857142859, since the two thirds bracket the well's behaviour over the record."
+     ],
+     "new": [
+      "As 2.0000000000000013, since anything else discards precision the engine actually delivered.",
+      "As 2.0, while recording the raw double in your notes.",
+      "As 2, with the trailing digits treated as evidence of a small real change in injectivity over the baseline period.",
+      "As a range from 2.0 to 2.857142857142859, since the two thirds bracket the well's behaviour over the record."
+     ]
+    }
+   }
+  }
+ ]
+}

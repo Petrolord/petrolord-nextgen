@@ -22,7 +22,7 @@ q(3, 'In the Kwale valuation, which figure carries the label screening, and why?
   'The loss value of 0.5939 $/bbl, because a loss percent typed by the refinery is a screen until it is measured across a year.'],
  'That choice is held item C13, a stated limit. The page labels K as the screening figure and nothing is graded on it.')
 
-q(0, 'Which set of four checks does the digest show the Kwale valuation passing?',
+q(0, 'Which set of four checks does the course show the Kwale valuation passing?',
  "The yields close; nothing is assumed zero; the loss comes off before the costs; the blend's netback matches its crudes' volume-weighted mean.",
  ['The yields close; the blend API matches the volume-weighted mean of the API numbers; the Watson K sits in a paraffinic band; the differential is positive.',
   "The yields total 100.0000 after scaling; every cost is typed; the loss is taken after the costs; the T50 matches the mean of the crudes' own T50.",
@@ -50,12 +50,12 @@ q(3, "What T50 and Watson K does the studio's default pair show, and on which ba
   'T50 617.1429 F interpolated, and Watson K of 11.7452 on the mean average boiling point.'],
  "The default table prints the blend T50 F (interpolated) as 617.1429 and Watson K at T50 (screening) as 11.7452. 587.3184 and 11.8135 are the Kwale blend's.")
 
-q(0, "How is oracle_crudeassay.py written, by the digest's account?",
+q(0, "How is oracle_crudeassay.py written, by the course's account?",
  "From the rules, independently of the JavaScript engine.",
  ["From the JavaScript engine, translated line for line into Python.",
   "From the golden files, fitted to reproduce each case.",
-  "From the digest's own tables, read back as its inputs."],
- "The digest describes an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules, and counts its golden cases from the vendored file.")
+  "From the course's own tables, read back as its inputs."],
+ "The course describes an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules, and counts its golden cases from the vendored file.")
 
 q(2, "How does oracle_crudeassay.py reach a blend's T50, and how does that road differ from the engine's?",
  'By bisection on the curve for the temperature at which it reaches 50, where the engine interpolates between the two points either side.',
@@ -83,7 +83,7 @@ q(0, "What does the Python oracle for the assay engine load a blend as?",
  ["As mass shares from resolveFractions.",
   "As one barrel at the refinery gate.",
   "As volume shares normalised to 100."],
- "The digest's oracle line begins with the load: a cargo in barrels and pounds. The engine itself converts volume shares to mass shares with resolveFractions.")
+ "The course's oracle line begins with the load: a cargo in barrels and pounds. The engine itself converts volume shares to mass shares with resolveFractions.")
 
 q(2, "Which Kerosene / Jet and Diesel / Gasoil yields does the studio's default table print for its default pair?",
  "16.1124 and 16.7449 volume percent.",

@@ -19,7 +19,7 @@
    "9, because \"Open\", \"Responded\" and \"Rejected\" have two exits each and \"Verified\" has three."
   ],
   "answer": 0,
-  "explanation": "\"Closed\" and \"Withdrawn\" have no exit at all. \"Open\" and \"Rejected\" each have two, \"Responded\" has two and \"Verified\" has one: 2 + 2 + 2 + 1 gives the 7 legal moves the digest counts."
+  "explanation": "\"Closed\" and \"Withdrawn\" have no exit at all. \"Open\" and \"Rejected\" each have two, \"Responded\" has two and \"Verified\" has one: 2 + 2 + 2 + 1 gives the 7 legal moves the course counts."
  },
  {
   "prompt": "A comment is \"Open\". Which statuses may it legally move to next?",

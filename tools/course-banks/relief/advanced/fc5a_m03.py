@@ -68,12 +68,12 @@ q(2, "A time step of zero and a negative time step both come back as refusals ra
   "The step is an accounting field, and a wrong one invalidates the answer."],
  "The message on both is `the time step must be a finite number above zero`. The third refusal in that family is the time limit itself at 7199.999985603571 s, which names the orifice as the likely cause.")
 
-q(3, "Each row of the refinement study carries a ratio in its last column, and the digest computes nothing between rows. What follows for a reader?",
+q(3, "Each row of the refinement study carries a ratio in its last column, and the course computes nothing between rows. What follows for a reader?",
  "Any statement about how the column behaves is a reading you take rather than a figure you were handed.",
  ["The column can be read downward as a rate of convergence, since each entry is the previous one halved.",
   "The ratios may be divided into each other to recover the order of the method.",
   "The column means something only at the finest step, where the ratio reaches 1.000000000000."],
- "Each entry is that row's time over the time at the finest step. Take the reading deliberately and say you took it, which is a different act from quoting a figure the digest computed.")
+ "Each entry is that row's time over the time at the finest step. Take the reading deliberately and say you took it, which is a different act from quoting a figure the course computed.")
 
 q(0, "The step count runs 336 at 0.800000 s, 2685 at 0.100000 s and 21474 at 0.012500 s. What is that column recording?",
  "A fixed step on a fixed march, so the count roughly doubles each time the step is halved.",

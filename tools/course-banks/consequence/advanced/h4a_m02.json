@@ -30,7 +30,7 @@
    "A Newton iteration on the distance in m, holding the charge and the ambient fixed"
   ],
   "answer": 0,
-  "explanation": "The engine's method is the bisection quoted, run on Z, after which the distance follows from Z times the cube root of the charge. The fit has no algebraic inverse in the engine, the Kingery-Bulmash fits are not in the engine at all (section 31), and no Newton step on the distance is used."
+  "explanation": "The engine's method is the bisection quoted, run on Z, after which the distance follows from Z times the cube root of the charge. The fit has no algebraic inverse in the engine, the Kingery-Bulmash fits are not in the engine at all, as the course records, and no Newton step on the distance is used."
  },
  {
   "prompt": "The inverse table puts 50000 Pa at 30.090623 m for 500 kg. Fed back into the forward fit at that distance, what overpressure does the engine return?",
@@ -41,7 +41,7 @@
    "100000 Pa, since the bisection brackets the root from above"
   ],
   "answer": 2,
-  "explanation": "Section 25 states that every row round trips through the forward fit, so 30.090623 m returns the 50000 Pa it was searched for, to within the rounding of the printed distance. 19626.657230 Pa and 121853.141070 Pa are the forward rows at 50 m and 20 m, and 100000 Pa is another target altogether."
+  "explanation": "The course states that every row round trips through the forward fit, so 30.090623 m returns the 50000 Pa it was searched for, to within the rounding of the printed distance. 19626.657230 Pa and 121853.141070 Pa are the forward rows at 50 m and 20 m, and 100000 Pa is another target altogether."
  },
  {
   "prompt": "The 500 kg charge gives 2121.136283 Pa at the Z = 40 edge of the judged range. A target below that overpressure is passed to `distanceForOverpressure`. What happens?",
@@ -63,7 +63,7 @@
    "800 and 0.048"
   ],
   "answer": 0,
-  "explanation": "Section 24: the paper prints 800 and 0.049, but its column follows 808 and 0.048, and those are the constants in the engine's model string. Using the printed pair, or either mixed pair, would fail to reproduce the column that is the evidence."
+  "explanation": "The course explains: the paper prints 800 and 0.049, but its column follows 808 and 0.048, and those are the constants in the engine's model string. Using the printed pair, or either mixed pair, would fail to reproduce the column that is the evidence."
  },
  {
   "prompt": "Why does the golden label the conference column PUBLISHED when the paper misprints its own formula?",
@@ -74,7 +74,7 @@
    "Because the column is the evidence: its numbers reproduce through the engine, whatever the printed formula says"
   ],
   "answer": 3,
-  "explanation": "The digest says the column is the evidence and the golden is PUBLISHED because its numbers reproduce. The engine does not use the printed formula, the five values come from the 2020 paper's table, and 3.09e-6 is the difference for one case only; cbu-0.5kg-5m sits at 1.70e-4."
+  "explanation": "The course says the column is the evidence and the golden is PUBLISHED because its numbers reproduce. The engine does not use the printed formula, the five values come from the 2020 paper's table, and 3.09e-6 is the difference for one case only; cbu-0.5kg-5m sits at 1.70e-4."
  },
  {
   "prompt": "The conference case cbu-1kg-5m prints 29.24 kPa and the engine gives 29.238107 kPa. Which row of the ratio table against Z does that case sit on?",
@@ -101,9 +101,9 @@
  {
   "prompt": "Among the five conference cases, which carries the largest relative difference between the engine and the printed figure?",
   "options": [
-   "cbu-1kg-5m, which the digest prints at 6.47e-5",
-   "cbu-0.1kg-2m, which the digest prints at 5.73e-5",
-   "cbu-0.1kg-1m, which the digest prints at 3.09e-6",
+   "cbu-1kg-5m, which the course shows at 6.47e-5",
+   "cbu-0.1kg-2m, which the course shows at 5.73e-5",
+   "cbu-0.1kg-1m, which the course shows at 3.09e-6",
    "cbu-0.5kg-5m, at 1.70e-4"
   ],
   "answer": 3,
@@ -118,7 +118,7 @@
    "It switches to the Kingery-Bulmash hemispherical fit"
   ],
   "answer": 1,
-  "explanation": "Section 25: the fit is a FREE AIR burst of TNT; a burst at the ground reflects its shock and is not modelled, and the header says that is the caller's choice of charge weight. There is no doubling flag and no image charge (the image source is the plume's reflection), and Kingery-Bulmash is not in the engine."
+  "explanation": "The course explains: the fit is a FREE AIR burst of TNT; a burst at the ground reflects its shock and is not modelled, and the header says that is the caller's choice of charge weight. There is no doubling flag and no image charge (the image source is the plume's reflection), and Kingery-Bulmash is not in the engine."
  },
  {
   "prompt": "A vapour cloud explodes in a congested process area. What does this engine carry for the difference between that cloud and a TNT charge?",
@@ -129,7 +129,7 @@
    "A second heat of combustion for the cloud, which the engine uses in place of the TNT blast energy of 4600000 J/kg"
   ],
   "answer": 2,
-  "explanation": "A vapour cloud is not TNT, and section 25 says the yield factor carries the whole difference. The multi-energy method is named in section 31 as out of the engine because its charts are graphical and no published curve fit was found, so no congestion factor exists. The TNT blast energy is always the denominator."
+  "explanation": "A vapour cloud is not TNT, and the course says the yield factor carries the whole difference. The multi-energy method is named by the course as out of the engine because its charts are graphical and no published curve fit was found, so no congestion factor exists. The TNT blast energy is always the denominator."
  },
  {
   "prompt": "On BONGA's forward table for 500 kg, which stated distance gives 3427.919093 Pa?",
@@ -162,6 +162,6 @@
    "At 6894.757293168361 Pa, and as a primary source"
   ],
   "answer": 1,
-  "explanation": "Section 24 prints the column at an ambient of 101.325 kPa and says the validation record names the table as secondary. 100000 Pa is one of BONGA's targets, the table prints no per case ambient, and 6894.757293168361 is `PA_PER_PSI`, a pascal count per psi."
+  "explanation": "The course shows the column at an ambient of 101.325 kPa and says the validation record names the table as secondary. 100000 Pa is one of BONGA's targets, the table prints no per case ambient, and 6894.757293168361 is `PA_PER_PSI`, a pascal count per psi."
  }
 ]

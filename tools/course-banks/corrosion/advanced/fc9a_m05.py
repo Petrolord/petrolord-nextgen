@@ -24,7 +24,7 @@ q(3, "On that same case `requiredAllowanceMm` is 5.000000 mm and the reinstating
  ["Because the shortfall of 2.200000 mm is split between the two figures, and the part of it the remaining allowance already covers is the difference between them.",
   "Because the bisection converges from above and stops one step short, so the gap is the width of the last bracket rather than a quantity with a meaning.",
   "Because the rate of 0.250000 mm/yr is applied over the design life twice."],
- "The digest asserts that identity on every rebuild rather than quoting it. The shortfall of 2.200000 mm is a third quantity again, because it compares the required allowance against what is left rather than against the allowance the line started with.")
+ "The course asserts that identity on every rebuild rather than quoting it. The shortfall of 2.200000 mm is a third quantity again, because it compares the required allowance against what is left rather than against the allowance the line started with.")
 
 q(1, "Why bisect the engine's own verdict rather than rearrange the arithmetic on paper?",
  "The bisection meets every guard, rounding and branch inside the door, while a rearrangement answers a question you wrote down and agrees only while the door behaves as you assumed.",
@@ -73,13 +73,13 @@ q(3, "Two of the graded quantities in this course are ratios of engine rates rat
  ["The ratio is taken after the pH correction and the scale factor are applied, and those are the only two places in the chain a held constant enters.",
   "The rates are computed at conditions the pin table covers, so the held constants in them are measured rather than declared and a measured constant is not held.",
   "The ratio is rounded to six decimals before it is graded."],
- "The shipped case gives a rate of 0.754524 mm/yr against an uninhibited 5.203611 mm/yr on the same conditions. The capstone generator measures the invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap.")
+ "The shipped case gives a rate of 0.754524 mm/yr against an uninhibited 5.203611 mm/yr on the same conditions. The course measures the invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap.")
 
 q(0, "This module's Reynolds number is a graded quantity while the wall shear is not. What separates them?",
  "The Reynolds number is a definition over four supplied properties, and the Blasius pair and the branch switch act on the friction factor downstream of it.",
  ["The Reynolds number is exported and the wall shear is not, and a quantity the engine exports by name has been declared in a way the pin table can carry.",
   "The Reynolds number is dimensionless and the wall shear is not, so only the Reynolds number is free of the unit conversions the studio layer applies.",
-  "The Reynolds number is pinned in the digest and the wall shear is bisected out of the risk word, and only a pinned quantity can be graded in this course."],
+  "The Reynolds number is pinned in the course and the wall shear is bisected out of the risk word, and only a pinned quantity can be graded in this course."],
  "Density times velocity times diameter over viscosity is a definition, and no graded field in this course reads a friction factor or a shear stress. The Pipeline and Line Sizing course computes its own Reynolds number with a different correlation and a different transition, so the two will not agree on the same pipe.")
 
 q(1, "One held item is a question about where the protective scale factor belongs. How is it kept out of every graded capstone answer?",
@@ -87,7 +87,7 @@ q(1, "One held item is a question about where the protective scale factor belong
  ["The graded fields are all taken before the scale factor is applied, since the factor is the last multiplication in the chain and the capstone reads the earlier values.",
   "The capstone states the factor from an inspection survey in the way it states a rate.",
   "The capstone grades the factor as a ratio against the same case with it removed."],
- "The capstone generator asserts the condition rather than assuming it. Nothing downstream of that factor is graded anywhere in this course, and five of the six digest streams also have a factor of exactly one.")
+ "The course asserts the condition rather than assuming it. Nothing downstream of that factor is graded anywhere in this course, and five of the six teaching streams also have a factor of exactly one.")
 
 q(3, "The studio converts a psig pressure by dividing by 14.5038 and the engine exports 14.503773800722. What does the difference cost, and what was done about it?",
  "The shipped defaults give 0.754523654262 mm/yr through the studio's divisor and 0.754524736514 mm/yr through the engine's factor, so graded conditions are stated in the engine's units.",

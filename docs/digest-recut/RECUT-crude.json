@@ -1,0 +1,720 @@
+{
+ "app_slug": "crude",
+ "rows": 51,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "the regenerated bank JSON under tools/course-banks/crude, built from its committed .py sources",
+ "edits": [
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "For three crudes at 50, 30 and 20, the digest prints the figure 29.6100 in two places. What does it stand for in each?",
+     "new": "For three crudes at 50, 30 and 20, the course prints the figure 29.6100 in two places. What does it stand for in each?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 3,
+   "fields": {
+    "explanation": {
+     "old": "blendCrudes blends specific gravity on volume, and the digest states the assumption: mass is conserved and volume is taken as conserved.",
+     "new": "blendCrudes blends specific gravity on volume, and the course states the assumption: mass is conserved and volume is taken as conserved."
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "fields": {
+    "prompt": {
+     "old": "Why does the digest print a column called the volume-weighted mean of the API numbers when the engine never reports it?",
+     "new": "Why does the course print a column called the volume-weighted mean of the API numbers when the engine never reports it?"
+    }
+   }
+  },
+  {
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-an-assay-carries",
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "The digest's precision rule: every computed figure prints to four decimals, and every input prints exactly as it is typed. Viscosity in the library is typed, and specific gravity is computed from API by sgFromApi.",
+     "new": "The course's precision rule: every computed figure prints to four decimals, and every input prints exactly as it is typed. Viscosity in the library is typed, and specific gravity is computed from API by sgFromApi."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "fields": {
+    "prompt": {
+     "old": "The studio opens on its default pair, 60 and 40. What does the digest print for the two crudes' own fifty percent points averaged by volume share, minus the engine's interpolated T50?",
+     "new": "The studio opens on its default pair, 60 and 40. What does the course print for the two crudes' own fifty percent points averaged by volume share, minus the engine's interpolated T50?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "fields": {
+    "explanation": {
+     "old": "The digest reads the Kwale blend at 10, 30, 50, 70 and 90 percent: 212.2121, 411.6294, 587.3184, 796.5882 and 1133.0737 F. 8.0714 is the blend at 190 F and 14.5833 at 265 F.",
+     "new": "The course reads the Kwale blend at 10, 30, 50, 70 and 90 percent: 212.2121, 411.6294, 587.3184, 796.5882 and 1133.0737 F. 8.0714 is the blend at 190 F and 14.5833 at 265 F."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 17,
+   "fields": {
+    "prompt": {
+     "old": "Which cut set does the digest call a vacuum refinery's?",
+     "new": "Which cut set does the course call a vacuum refinery's?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 26,
+   "fields": {
+    "prompt": {
+     "old": "Under the complete Kwale valuation the digest prints: Costs taken as zero because they were blank: nothing. What does that line confirm?",
+     "new": "Under the complete Kwale valuation the course prints: Costs taken as zero because they were blank: nothing. What does that line confirm?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "fields": {
+    "prompt": {
+     "old": "What does the digest print as the first point of the default pair's blend curve at or past 50 percent?",
+     "new": "What does the course print as the first point of the default pair's blend curve at or past 50 percent?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "fields": {
+    "explanation": {
+     "old": "The digest: D86 is a product test; a crude assay is reported as a TBP distillation. d86ToTbp ships no coefficient table, and called without one it refuses.",
+     "new": "The course: D86 is a product test; a crude assay is reported as a TBP distillation. d86ToTbp ships no coefficient table, and called without one it refuses."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 0.8727 is the studio's default pair's SG, 0.8328 Kwale Light's and 0.8922 Ughelli Medium's.",
+     "new": "The course prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 0.8727 is the studio's default pair's SG, 0.8328 Kwale Light's and 0.8922 Ughelli Medium's."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-blends-own-curve",
+   "ord": 3,
+   "fields": {
+    "options": {
+     "old": [
+      "Volume is conserved on mixing and mass is not, so every property of a blend, sulfur included, has to be weighted on volume shares.",
+      "A TBP figure is a volume percent distilled, and the digest's rule is that yields are additive on volume.",
+      "The engine holds no gravity for a crude at the curve step, so a volume share is the only weight it can form for the yields there.",
+      "A volume weighting gives the larger blend yield at every temperature, which is the conservative reading."
+     ],
+     "new": [
+      "Volume is conserved on mixing and mass is not, so every property of a blend, sulfur included, has to be weighted on volume shares.",
+      "A TBP figure is a volume percent distilled, and the course's rule is that yields are additive on volume.",
+      "The engine holds no gravity for a crude at the curve step, so a volume share is the only weight it can form for the yields there.",
+      "A volume weighting gives the larger blend yield at every temperature, which is the conservative reading."
+     ]
+    },
+    "explanation": {
+     "old": "The digest's rule: yields are additive on volume, so at any temperature the blend has distilled the volume-weighted sum of what each crude has distilled. Sulfur and the other per-mass properties blend on mass. The engine can weight yields on mass too: module 3 prints blendOnMass beside the engine's cut yields.",
+     "new": "The course's rule: yields are additive on volume, so at any temperature the blend has distilled the volume-weighted sum of what each crude has distilled. Sulfur and the other per-mass properties blend on mass. The engine can weight yields on mass too: module 3 prints blendOnMass beside the engine's cut yields."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-blends-own-curve",
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "Beside the Kwale blend's curve, the digest prints the blend's properties at 55 and 45. Which set is it?",
+     "new": "Beside the Kwale blend's curve, the course prints the blend's properties at 55 and 45. Which set is it?"
+    },
+    "explanation": {
+     "old": "The digest prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 38.4, 0.8328 and 0.11 are Kwale Light's own figures, and 32.8173, 0.8611 and 0.2642 belong to the Associate tier's Obigbo export blend.",
+     "new": "The course prints Blend API 33.1219, SG 0.8595, sulfur 0.2268 wt% (mass basis). 38.4, 0.8328 and 0.11 are Kwale Light's own figures, and 32.8173, 0.8611 and 0.2642 belong to the Associate tier's Obigbo export blend."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-the-fifty-percent-point",
+   "ord": 4,
+   "fields": {
+    "prompt": {
+     "old": "What does the digest print for the grid reading minus the engine, on the Kwale blend and on the studio's default pair?",
+     "new": "What does the course print for the grid reading minus the engine, on the Kwale blend and on the studio's default pair?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-the-fifty-percent-point",
+   "ord": 5,
+   "fields": {
+    "prompt": {
+     "old": "Which volume percents make up the digest's table of other points on the Kwale blend, the T50 row among them?",
+     "new": "Which volume percents make up the course's table of other points on the Kwale blend, the T50 row among them?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-the-fifty-percent-point",
+   "ord": 6,
+   "fields": {
+    "options": {
+     "old": [
+      "584.0000 F, which the digest prints as -3.3184 F against the engine.",
+      "586.0503 F, which the digest prints as -1.2681 F against the engine.",
+      "584.0000 F, which the digest prints as 62.6816 F against the engine.",
+      "612.0000 F, which the digest prints as -5.1429 F against the engine."
+     ],
+     "new": [
+      "584.0000 F, which the course prints as -3.3184 F against the engine.",
+      "586.0503 F, which the course prints as -1.2681 F against the engine.",
+      "584.0000 F, which the course prints as 62.6816 F against the engine.",
+      "612.0000 F, which the course prints as -5.1429 F against the engine."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-the-fifty-percent-point",
+   "ord": 7,
+   "fields": {
+    "options": {
+     "old": [
+      "Yes: the digest prints the mass-weighted mean minus the engine as 0.0000 F.",
+      "No: the digest prints the mass-weighted mean minus the engine as 62.6816 F.",
+      "Yes: the mass-weighted mean of the crudes' T50 is the engine's 587.3184 F.",
+      "No: the digest prints the mass-weighted mean minus the engine as -1.2681 F."
+     ],
+     "new": [
+      "Yes: the course prints the mass-weighted mean minus the engine as 0.0000 F.",
+      "No: the course prints the mass-weighted mean minus the engine as 62.6816 F.",
+      "Yes: the mass-weighted mean of the crudes' T50 is the engine's 587.3184 F.",
+      "No: the course prints the mass-weighted mean minus the engine as -1.2681 F."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-the-fifty-percent-point",
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "For the studio's default pair, 60 and 40, which volume-weighted and mass-weighted means of the crudes' T50 does the digest print?",
+     "new": "For the studio's default pair, 60 and 40, which volume-weighted and mass-weighted means of the crudes' T50 does the course print?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-the-fifty-percent-point",
+   "ord": 9,
+   "fields": {
+    "prompt": {
+     "old": "How does the digest establish the offset watsonK adds to a temperature in F?",
+     "new": "How does the course establish the offset watsonK adds to a temperature in F?"
+    },
+    "options": {
+     "old": [
+      "It reads it back from the function: watsonK at 0 F and SG 1, cubed, is 459.6700.",
+      "It types the published Rankine offset of 459.6700 into the digest from a table of constants.",
+      "It bisects watsonK until the function stops returning a value, and takes that temperature.",
+      "It takes the offset as the grid reading minus the engine, 62.6816, scaled onto the Rankine scale."
+     ],
+     "new": [
+      "It reads it back from the function: watsonK at 0 F and SG 1, cubed, is 459.6700.",
+      "It types the published Rankine offset of 459.6700 into the course from a table of constants.",
+      "It bisects watsonK until the function stops returning a value, and takes that temperature.",
+      "It takes the offset as the grid reading minus the engine, 62.6816, scaled onto the Rankine scale."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-the-fifty-percent-point",
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "The studio takes Tb as the blend's T50, and the page labels K as the screening figure. The digest records that choice as C13, taught here as a stated limit.",
+     "new": "The studio takes Tb as the blend's T50, and the page labels K as the screening figure. The course records that choice as C13, taught here as a stated limit."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-cut-yields-of-the-blend",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "The digest gives the reason in one line: the Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residue. Kwale draws its own cut points.",
+     "new": "The course gives the reason in one line: the Kwale refinery has no vacuum unit, so its cut set ends at atmospheric residue. Kwale draws its own cut points."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-cut-yields-of-the-blend",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "On Kwale's cuts, what Diesel / AGO figures does the digest print for the Kwale blend by cutYields on its curve, by blendOnVolume and by blendOnMass?",
+     "new": "On Kwale's cuts, what Diesel / AGO figures does the course print for the Kwale blend by cutYields on its curve, by blendOnVolume and by blendOnMass?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-cut-yields-of-the-blend",
+   "ord": 8,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the rule with the table: moving a cut point moves barrels between two cuts and nowhere else. Diesel / AGO changes by 5.0376, Atmospheric residue by -5.0376 and the total by 0.0000. The total is reported as it computes and is never normalised.",
+     "new": "The course prints the rule with the table: moving a cut point moves barrels between two cuts and nowhere else. Diesel / AGO changes by 5.0376, Atmospheric residue by -5.0376 and the total by 0.0000. The total is reported as it computes and is never normalised."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-cut-yields-of-the-blend",
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints: the cuts with a yield total 76.3376 percent, and the total is reported as it computes and is never normalised. 33.6742 belongs to the Ebocha partial assay alone on the studio's cuts.",
+     "new": "The course prints: the cuts with a yield total 76.3376 percent, and the total is reported as it computes and is never normalised. 33.6742 belongs to the Ebocha partial assay alone on the studio's cuts."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-cut-yields-of-the-blend",
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints unknownCuts: LPG / Light ends, Naphtha. Closes: false. Atmospheric residue has a yield, 40.1548, because it runs from 650 F to 100 percent. Four cuts with no yield belong to the Ebocha partial assay alone on the studio's cuts.",
+     "new": "The course prints unknownCuts: LPG / Light ends, Naphtha. Closes: false. Atmospheric residue has a yield, 40.1548, because it runs from 650 F to 100 percent. Four cuts with no yield belong to the Ebocha partial assay alone on the studio's cuts."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-cut-yields-of-the-blend",
+   "ord": 14,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints unyieldedCuts: LPG / Light ends, Naphtha beside the 48.3393 $/bbl, and complete: false. Both cuts keep an empty yield and an empty value.",
+     "new": "The course prints unyieldedCuts: LPG / Light ends, Naphtha beside the 48.3393 $/bbl, and complete: false. Both cuts keep an empty yield and an empty value."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-netback",
+   "ord": 7,
+   "fields": {
+    "prompt": {
+     "old": "If the loss percent is taken off the netback after processing and freight, what does the digest print?",
+     "new": "If the loss percent is taken off the netback after processing and freight, what does the course print?"
+    },
+    "explanation": {
+     "old": "The engine takes losses off the product value before the costs, and this reading takes them off a figure that already has processing and freight removed. The digest prints it at 65.0169, 0.0696 from the engine's 64.9473. 65.5412 is the reading with losses left out.",
+     "new": "The engine takes losses off the product value before the costs, and this reading takes them off a figure that already has processing and freight removed. The course prints it at 65.0169, 0.0696 from the engine's 64.9473. 65.5412 is the reading with losses left out."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m04-netback",
+   "ord": 9,
+   "fields": {
+    "explanation": {
+     "old": "The losses left out reading is 65.5412 against the engine's 64.9473, and the digest prints that difference as 0.5939, the figure it also prints as the value lost to losses at 0.8 percent.",
+     "new": "The losses left out reading is 65.5412 against the engine's 64.9473, and the course prints that difference as 0.5939, the figure it also prints as the value lost to losses at 0.8 percent."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-against-the-marker",
+   "ord": 6,
+   "fields": {
+    "options": {
+     "old": [
+      "The mean is 65.0169 $/bbl, and the digest prints the difference as 0.0696.",
+      "The mean is 64.9473 $/bbl, and the digest prints the difference as 0.0000.",
+      "The mean is 64.9473 $/bbl, and the digest prints the difference as -7.5527.",
+      "The mean is 65.5412 $/bbl, and the digest prints the difference as 0.5939."
+     ],
+     "new": [
+      "The mean is 65.0169 $/bbl, and the course prints the difference as 0.0696.",
+      "The mean is 64.9473 $/bbl, and the course prints the difference as 0.0000.",
+      "The mean is 64.9473 $/bbl, and the course prints the difference as -7.5527.",
+      "The mean is 65.5412 $/bbl, and the course prints the difference as 0.5939."
+     ]
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-against-the-marker",
+   "ord": 8,
+   "fields": {
+    "prompt": {
+     "old": "What does the digest say d86ToTbp has the structure of?",
+     "new": "What does the course say d86ToTbp has the structure of?"
+    },
+    "explanation": {
+     "old": "The digest: d86ToTbp has the structure of the cut-point-difference conversion (API Technical Data Book Procedure 3A1.1) and ships no coefficient table. Called without the table, it refuses.",
+     "new": "The course: d86ToTbp has the structure of the cut-point-difference conversion (API Technical Data Book Procedure 3A1.1) and ships no coefficient table. Called without the table, it refuses."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-against-the-marker",
+   "ord": 10,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints the blend's netback minus the volume-weighted mean of its crudes' netbacks as 0.0000, with every row on the same cut set, prices, costs and losses.",
+     "new": "The course prints the blend's netback minus the volume-weighted mean of its crudes' netbacks as 0.0000, with every row on the same cut set, prices, costs and losses."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-against-the-marker",
+   "ord": 12,
+   "fields": {
+    "prompt": {
+     "old": "Which loss percents does the digest show netbackValue refusing?",
+     "new": "Which loss percents does the course show netbackValue refusing?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-against-the-marker",
+   "ord": 13,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints Kwale with freight and losses left blank at 67.4412 $/bbl, assumedZero naming freight, losses, and complete: true. Losses of 101 percent return REFUSED: Losses must be between 0 and 100 percent.",
+     "new": "The course prints Kwale with freight and losses left blank at 67.4412 $/bbl, assumedZero naming freight, losses, and complete: true. Losses of 101 percent return REFUSED: Losses must be between 0 and 100 percent."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "Which set of four checks does the digest show the Kwale valuation passing?",
+     "new": "Which set of four checks does the course show the Kwale valuation passing?"
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 7,
+   "fields": {
+    "prompt": {
+     "old": "How is oracle_crudeassay.py written, by the digest's account?",
+     "new": "How is oracle_crudeassay.py written, by the course's account?"
+    },
+    "options": {
+     "old": [
+      "From the rules, independently of the JavaScript engine.",
+      "From the JavaScript engine, translated line for line into Python.",
+      "From the golden files, fitted to reproduce each case.",
+      "From the digest's own tables, read back as its inputs."
+     ],
+     "new": [
+      "From the rules, independently of the JavaScript engine.",
+      "From the JavaScript engine, translated line for line into Python.",
+      "From the golden files, fitted to reproduce each case.",
+      "From the course's own tables, read back as its inputs."
+     ]
+    },
+    "explanation": {
+     "old": "The digest describes an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules, and counts its golden cases from the vendored file.",
+     "new": "The course describes an independent Python oracle, tools/validation/downstream/oracle_crudeassay.py, written from the rules, and counts its golden cases from the vendored file."
+    }
+   }
+  },
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 11,
+   "fields": {
+    "explanation": {
+     "old": "The digest's oracle line begins with the load: a cargo in barrels and pounds. The engine itself converts volume shares to mass shares with resolveFractions.",
+     "new": "The course's oracle line begins with the load: a cargo in barrels and pounds. The engine itself converts volume shares to mass shares with resolveFractions."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 3,
+   "fields": {
+    "prompt": {
+     "old": "Three Apapa requests: a target volume of 0, Reformate with a minimum of 3000 and a maximum of 2000, and the 10 ppm gasoline template. Which one does the digest print with the status infeasible?",
+     "new": "Three Apapa requests: a target volume of 0, Reformate with a minimum of 3000 and a maximum of 2000, and the 10 ppm gasoline template. Which one does the course print with the status infeasible?"
+    },
+    "explanation": {
+     "old": "The digest prints the 10 ppm template with the status infeasible and \"REFUSED: No recipe from these components can meet every specification. Relax a limit, or bring in a component that can.\" The other two are among what optimiseBlend refuses, each in its own words: \"REFUSED: The target volume must be greater than zero.\" and \"REFUSED: Reformate has a minimum above its maximum.\"",
+     "new": "The course prints the 10 ppm template with the status infeasible and \"REFUSED: No recipe from these components can meet every specification. Relax a limit, or bring in a component that can.\" The other two are among what optimiseBlend refuses, each in its own words: \"REFUSED: The target volume must be greater than zero.\" and \"REFUSED: Reformate has a minimum above its maximum.\""
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "Both pools are on the 50 ppm template and both bind on Sulfur and RVP. What the digest prints differently is availability: Butane at 400.0000 bbl at Apapa, and nothing in the default pool.",
+     "new": "Both pools are on the 50 ppm template and both bind on Sulfur and RVP. What the course prints differently is availability: Butane at 400.0000 bbl at Apapa, and nothing in the default pool."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 20,
+   "fields": {
+    "explanation": {
+     "old": "Cetane is a minimum: lowering it is the relief, and its dual already reads as a saving. Density is a maximum, and for a maximum the digest's rule turns the sign between the dual and the value of relief.",
+     "new": "Cetane is a minimum: lowering it is the relief, and its dual already reads as a saving. Density is a maximum, and for a maximum the course's rule turns the sign between the dual and the value of relief."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 27,
+   "fields": {
+    "prompt": {
+     "old": "Given held item C12, which report of the AGO viscosity matches what the digest prints?",
+     "new": "Given held item C12, which report of the AGO viscosity matches what the course prints?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "fields": {
+    "prompt": {
+     "old": "The digest solves each textbook corner with both coordinates fixed by bounds, and all four print the status optimal. Why optimal at every one?",
+     "new": "The course solves each textbook corner with both coordinates fixed by bounds, and all four print the status optimal. Why optimal at every one?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "fields": {
+    "prompt": {
+     "old": "Suppose the Apapa sulfur row had been built with volume weights in place of SG weights. Where would the digest's two-route check show it?",
+     "new": "Suppose the Apapa sulfur row had been built with volume weights in place of SG weights. Where would the course's two-route check show it?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 37,
+   "fields": {
+    "prompt": {
+     "old": "Moving the RVP limit to 10 prints a saving of 3651.3942 $, and moving it to 8 prints -4751.5037 $, around 4448.9659 $ per psi. Which causes does the digest name for that spread?",
+     "new": "Moving the RVP limit to 10 prints a saving of 3651.3942 $, and moving it to 8 prints -4751.5037 $, around 4448.9659 $ per psi. Which causes does the course name for that spread?"
+    },
+    "explanation": {
+     "old": "The RVP re-solves change what holds (at 10 psi only Sulfur binds; at 8 psi Reformate sits at its availability), so the optimum moves to a different vertex, and the RVP row is in index units, which are not a straight line in psi. Rounding is not among the causes the digest names.",
+     "new": "The RVP re-solves change what holds (at 10 psi only Sulfur binds; at 8 psi Reformate sits at its availability), so the optimum moves to a different vertex, and the RVP row is in index units, which are not a straight line in psi. Rounding is not among the causes the course names."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "fields": {
+    "explanation": {
+     "old": "The digest prints: rowPrice x 8000.0000 bbl is -2054.8893 $ per index point. The RVP row is in index units.",
+     "new": "The course prints: rowPrice x 8000.0000 bbl is -2054.8893 $ per index point. The RVP row is in index units."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "fields": {
+    "prompt": {
+     "old": "The digest counts the LP oracle's golden cases as 181 problems. How does its method stand against the kernel's absolute tolerances?",
+     "new": "The course counts the LP oracle's golden cases as 181 problems. How does its method stand against the kernel's absolute tolerances?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-what-a-linear-programme-is",
+   "ord": 1,
+   "fields": {
+    "explanation": {
+     "old": "Infeasible and unbounded are answers, and the digest prints this problem's status as infeasible. The kernel throws only on a malformed problem.",
+     "new": "Infeasible and unbounded are answers, and the course prints this problem's status as infeasible. The kernel throws only on a malformed problem."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-shadow-prices",
+   "ord": 13,
+   "fields": {
+    "prompt": {
+     "old": "The RVP shadow price at Apapa is 4448.9659 $ per psi. Where does the digest read what relieving the maximum by one whole psi saves?",
+     "new": "The RVP shadow price at Apapa is 4448.9659 $ per psi. Where does the course read what relieving the maximum by one whole psi saves?"
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-infeasible-refused-and-skipped",
+   "ord": 4,
+   "fields": {
+    "explanation": {
+     "old": "A RON minimum of 99 sits in the digest's infeasible table beside the 10 ppm template, with the same message. An infeasible blend is a real answer: the specifications cannot be met by the components available.",
+     "new": "A RON minimum of 99 sits in the course's infeasible table beside the 10 ppm template, with the same message. An infeasible blend is a real answer: the specifications cannot be met by the components available."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 8,
+   "fields": {
+    "explanation": {
+     "old": "SECTION 27 lists three held items: L4, the LP kernel's absolute tolerances on its pivots and on phase one; C12, the Refutas index on mass fraction; C13, Watson K taken at the blend's T50.",
+     "new": "The course lists three held items: L4, the LP kernel's absolute tolerances on its pivots and on phase one; C12, the Refutas index on mass fraction; C13, Watson K taken at the blend's T50."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 12,
+   "fields": {
+    "explanation": {
+     "old": "The digest lists the constants the engines state, read from the modules: CII_BANDS.STABLE 0.7, CII_BANDS.UNSTABLE 0.9, RVP_INDEX_EXPONENT 1.25 and BINDING_TOLERANCE 1e-7. SPEC_TEMPLATES are starting points; the regulation in force governs.",
+     "new": "The course lists the constants the engines state, read from the modules: CII_BANDS.STABLE 0.7, CII_BANDS.UNSTABLE 0.9, RVP_INDEX_EXPONENT 1.25 and BINDING_TOLERANCE 1e-7. SPEC_TEMPLATES are starting points; the regulation in force governs."
+    }
+   }
+  },
+  {
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 15,
+   "fields": {
+    "prompt": {
+     "old": "The digest counts the refusals it prints: 17. What stands behind that count?",
+     "new": "The course counts the refusals it prints: 17. What stands behind that count?"
+    },
+    "explanation": {
+     "old": "The digest closes: \"Refusals printed in this digest, each asserted against the engine before it was printed: 17.\"",
+     "new": "The course closes on its count of refusals, each asserted against the engine before it was printed: 17."
+    }
+   }
+  }
+ ]
+}

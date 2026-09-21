@@ -22,19 +22,19 @@ q(2, "AKASO returns an area of 1.839323 in2 with the viscosity left out and 1.86
   "A Kv of 0.984776, a Reynolds number of 17412.317969, six passes, converged false and a residual it names."],
  "The correction sits below one and the loop reports itself converged in six passes. The 1.015459516779 is the ratio of the two areas and 17546.394776 is the Reynolds number a single pass would have used."),
 
-q(1, "The digest prints 1.015459516779 for AKASO. What is that figure?",
+q(1, "The course prints 1.015459516779 for AKASO. What is that figure?",
  "The ratio of the viscous area to the inviscid one.",
  ["The ratio of the inviscid area to the viscous one.",
   "The ratio of the converged area to the one pass area.",
   "The reciprocal of the correction the loop settled on."],
- "It is the viscous area over the inviscid one, and it is quoted only because the digest computes and prints it. The converged area over the one pass area is a separate printed ratio of 1.000083905751."),
+ "It is the viscous area over the inviscid one, and it is quoted only because the course computes and prints it. The converged area over the one pass area is a separate printed ratio of 1.000083905751."),
 
 q(3, "A single pass through the liquid loop gives 1.867601 in2 at a Kv of 0.984858. What does the converged answer of 1.867758 in2 say about the shortcut?",
  "On this case the loop moves the area by about one part in ten thousand, and the single pass remains an approximation to the correct construction.",
  ["On this case the loop moves the area by about one part in a hundred, which is enough to change the orifice letter the case selects.",
   "On this case the loop and the single pass agree exactly, so the iteration exists only for viscosities far above the one stated.",
   "On this case the single pass gives the larger area, so a hand calculation done that way is conservative for any liquid."],
- "The digest prints the ratio of the converged area to the one pass area as 1.000083905751. The single pass answer is the smaller of the two, and knowing the size of an approximation is not the same as being allowed to ignore it."),
+ "The course prints the ratio of the converged area to the one pass area as 1.000083905751. The single pass answer is the smaller of the two, and knowing the size of an approximation is not the same as being allowed to ignore it."),
 
 q(0, "At 1.000000 cp and at 5.000000 cp the engine returns the inviscid area of 1.839323 in2, although a Reynolds number was computed on both rows. Why?",
  "Both rows sit above the Reynolds number of 196282.561354814417 at which the correction is held at one.",
@@ -104,7 +104,7 @@ q(2, "With no viscosity stated at all, what does the liquid route return for the
  ["A zero, which is the figure the loop starts from before it takes its first pass.",
   "A very large number standing in for the inviscid limit of the fit.",
   "The value the clamp acts at, since the correction comes back at one."],
- "The digest prints that field as absent on the inviscid row rather than as a figure. A caller doing arithmetic on it gets zero, which is a perfectly plausible looking Reynolds number, so the absence has to be handled as an absence."),
+ "The course prints that field as absent on the inviscid row rather than as a figure. A caller doing arithmetic on it gets zero, which is a perfectly plausible looking Reynolds number, so the absence has to be handled as an absence."),
 
 q(1, "AKASO states a Kd of 0.650000 while the gas and steam streams state 0.975000. What kind of figure is that?",
  "The valve manufacturer own certified discharge coefficient, validated on the way in as a fraction of an ideal.",

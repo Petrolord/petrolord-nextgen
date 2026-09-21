@@ -34,14 +34,14 @@ q(2, "W-09 is asked to be waived with a reason and no date or verifier, and the 
  ["A reason alone, since the reason is the part of a waiver that an auditor can test.",
   "A date and who decided it, with the reason optional on a point that does not stop work.",
   "A reason and a second verifier."],
- "The refusal for this request is \"Record the date this was decided and who decided it.\" and the refusal for a waiver with no reason is the waiver sentence. Only with all three does the digest print ALLOWED.")
+ "The refusal for this request is \"Record the date this was decided and who decided it.\" and the refusal for a waiver with no reason is the waiver sentence. Only with all three does the course print ALLOWED.")
 
 q(2, "Does canDecideCheckpoint allow a hold point to be waived?",
  "Yes, with a date, a verifier and a reason on the record.",
  ["No. A hold point may be Passed or set Not applicable, and Waived is refused for it.",
   "Only while its plan is still a Draft, the same stage at which it may be removed.",
   "Only after it has first Failed."],
- "H-08 waived with a date, a verifier and a reason is ALLOWED. The digest states that canDecideCheckpoint has no rule that forbids waiving a hold point, and a waived hold point with its record and reason is resolved like any waived point.")
+ "H-08 waived with a date, a verifier and a reason is ALLOWED. The course states that canDecideCheckpoint has no rule that forbids waiving a hold point, and a waived hold point with its record and reason is resolved like any waived point.")
 
 q(0, "H-11, the pre-commissioning release, is to be set Not applicable. In what order does canDecideCheckpoint ask for what it needs?",
  "The date and the name first, then the reason.",
@@ -55,7 +55,7 @@ q(3, "S-10, site surveillance, reads In progress and overdue true. It is set Not
  ["REFUSED, because S-10 reads overdue true against its planned date of 2026-10-01.",
   "REFUSED, because setting any point aside needs the date and who decided it.",
   "ALLOWED once a reason is recorded, the same record H-11 needs."],
- "A surveillance point stops nothing, and the digest prints ALLOWED for S-10 with nothing recorded: no date, no name and no reason. Not applicable is one of the three statuses in CHECKPOINT_RESOLVED_STATUSES. The same request on H-11, a hold point, is refused until a date, a name and a reason are on the record.")
+ "A surveillance point stops nothing, and the course prints ALLOWED for S-10 with nothing recorded: no date, no name and no reason. Not applicable is one of the three statuses in CHECKPOINT_RESOLVED_STATUSES. The same request on H-11, a hold point, is refused until a date, a name and a reason are on the record.")
 
 q(1, "Which of these points is inside planProgress's resolved 6 at the as-of date?",
  "W-06, the coating holiday test, which reads Waived.",
@@ -71,7 +71,7 @@ q(0, "H-05 reads Failed at the as-of date. How does planProgress count it?",
   "In outstanding 6 alone."],
  "A failure does not finish a point. H-05 is not in the resolved list, it is the failed 1, and it is one of the outstanding six with H-08, W-09, S-10, H-11 and R-12.")
 
-q(2, "SECTION 11 prints four cases of how a planProgress percent rounds. Which pairing is one of them?",
+q(2, "The course prints four cases of how a planProgress percent rounds. Which pairing is one of them?",
  "3 of 8 prints 38.",
  ["5 of 8 prints 58.",
   "1 of 8 prints 63.",

@@ -129,7 +129,7 @@
    "the mean of the two estimates"
   ],
   "answer": 0,
-  "explanation": "The digest labels the two estimates by their questions: 89.000000 dBA under the field derating is the engineering-controls answer and 80.000000 dBA under Appendix B the hearing-conservation one, from one example with one protector. Taking the lower figure answers the other question, and a mean of two methods is no method."
+  "explanation": "The course labels the two estimates by their questions: 89.000000 dBA under the field derating is the engineering-controls answer and 80.000000 dBA under Appendix B the hearing-conservation one, from one example with one protector. Taking the lower figure answers the other question, and a mean of two methods is no method."
  },
  {
   "prompt": "Move the teaching protector's label up to 30.000000 dB. Under `OSHA_FIELD_50`, what level is left on 97.600000 dBA?",
@@ -173,7 +173,7 @@
    "All four, since the engine reproduces each of them from its own source"
   ],
   "answer": 1,
-  "explanation": "The manual's example prints 89.000000 dBA under the field derating and 80.000000 dBA under Appendix B and the engine reproduces both, which is what PUBLISHED, REPRODUCED means. The NIOSH derating by type and the dual-protection 5 dB agree between the engine and an independent oracle with no printed value known to set against either, so section 23 records both as oracle only."
+  "explanation": "The manual's example prints 89.000000 dBA under the field derating and 80.000000 dBA under Appendix B and the engine reproduces both, which is what PUBLISHED, REPRODUCED means. The NIOSH derating by type and the dual-protection 5 dB agree between the engine and an independent oracle with no printed value known to set against either, so the course records both as oracle only."
  },
  {
   "prompt": "A report states: \"NIOSH earmuff estimate 84.350000 dBA, reproduced from NIOSH's printed tables.\" What is wrong with it?",
@@ -415,7 +415,7 @@
    "The qualifier tells the reader which decibel exchange rate was used to compute the figure."
   ],
   "answer": 2,
-  "explanation": "Section 24 binds the two qualified forms because the NIOSH recommended exposure limit for noise, met in the Associate tier, and the one for heat stress, met in the Expert tier, share the letters. The acronym names no licensed document, the NIOSH noise REL is a live criterion the engine presets, and a decibel exchange rate is stated on its own beside a figure."
+  "explanation": "The course's naming rules bind the two qualified forms because the NIOSH recommended exposure limit for noise, met in the Associate tier, and the one for heat stress, met in the Expert tier, share the letters. The acronym names no licensed document, the NIOSH noise REL is a live criterion the engine presets, and a decibel exchange rate is stated on its own beside a figure."
  },
  {
   "prompt": "A LEX,8h of exactly 85.000000 dBA is read against the EU values. What do the engine's two action flags say?",
@@ -426,7 +426,7 @@
    "Lower true and upper absent, because the upper flag needs the limit value too"
   ],
   "answer": 1,
-  "explanation": "The small cases print eight hours at 85 dBA as 85.000000 dBA and 100.000000 points with the lower action flag true and the upper action flag true, and the digest states that the two flags are at or above. A figure sitting on a value has reached it. The limit value of 87.000000 dBA carries no flag at all, because it applies at the ear with protection taken into account, which the engine does not compute."
+  "explanation": "The small cases print eight hours at 85 dBA as 85.000000 dBA and 100.000000 points with the lower action flag true and the upper action flag true, and the course states that the two flags are at or above. A figure sitting on a value has reached it. The limit value of 87.000000 dBA carries no flag at all, because it applies at the ear with protection taken into account, which the engine does not compute."
  },
  {
   "prompt": "Which statement about the engine's limits for chemicals is right?",
@@ -459,6 +459,6 @@
    "Field Development Planning and Well Cost, where the short word means money that is at risk"
   ],
   "answer": 2,
-  "explanation": "Section 24 rule 3 names those three courses, where the short word already means scatter in data, so this course says sound level for a reading. The Economics collision is the one that forces \"decibel exchange rate\", the Flow Assurance and Gas Processing collision forces \"noise dose\", and the Field Development Planning and Well Cost collision forces a qualified \"noise exposure\" or \"chemical exposure\"."
+  "explanation": "The course's naming rule 3 names those three courses, where the short word already means scatter in data, so this course says sound level for a reading. The Economics collision is the one that forces \"decibel exchange rate\", the Flow Assurance and Gas Processing collision forces \"noise dose\", and the Field Development Planning and Well Cost collision forces a qualified \"noise exposure\" or \"chemical exposure\"."
  }
 ]

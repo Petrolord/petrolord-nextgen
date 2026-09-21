@@ -107,7 +107,7 @@
    "The tax rate is applied after the pool is rounded down."
   ],
   "answer": 2,
-  "explanation": "Each four-decimal figure is rounded on its own, so the digest prints the construction years through year 6 to nine decimals for arithmetic. Each nine-decimal figure agrees with the engine's own to within two units in the ninth decimal."
+  "explanation": "Each four-decimal figure is rounded on its own, so the course prints the construction years through year 6 to nine decimals for arithmetic. Each nine-decimal figure agrees with the engine's own to within two units in the ninth decimal."
  },
  {
   "prompt": "How does the feasibility oracle check the loss pool?",

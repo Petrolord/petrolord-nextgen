@@ -30,7 +30,7 @@
    "The required figure measures a new line and the reinstating figure measures this one, so they differ by what has already been consumed."
   ],
   "answer": 3,
-  "explanation": "The digest asserts that identity on every rebuild rather than quoting it. The shortfall of 2.200000 mm is a third quantity again, because it compares the required allowance against what is left rather than against the allowance the line started with."
+  "explanation": "The course asserts that identity on every rebuild rather than quoting it. The shortfall of 2.200000 mm is a third quantity again, because it compares the required allowance against what is left rather than against the allowance the line started with."
  },
  {
   "prompt": "Why bisect the engine's own verdict rather than rearrange the arithmetic on paper?",
@@ -107,7 +107,7 @@
    "The two rates share the whole correlation chain, so it divides out exactly and only the corrosion inhibitor arithmetic is left in the ratio."
   ],
   "answer": 3,
-  "explanation": "The shipped case gives a rate of 0.754524 mm/yr against an uninhibited 5.203611 mm/yr on the same conditions. The capstone generator measures the invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap."
+  "explanation": "The shipped case gives a rate of 0.754524 mm/yr against an uninhibited 5.203611 mm/yr on the same conditions. The course measures the invariance rather than claiming it, by re-running at conditions that move the rate by more than half and cross the fugacity cap."
  },
  {
   "prompt": "This module's Reynolds number is a graded quantity while the wall shear is not. What separates them?",
@@ -115,7 +115,7 @@
    "The Reynolds number is a definition over four supplied properties, and the Blasius pair and the branch switch act on the friction factor downstream of it.",
    "The Reynolds number is exported and the wall shear is not, and a quantity the engine exports by name has been declared in a way the pin table can carry.",
    "The Reynolds number is dimensionless and the wall shear is not, so only the Reynolds number is free of the unit conversions the studio layer applies.",
-   "The Reynolds number is pinned in the digest and the wall shear is bisected out of the risk word, and only a pinned quantity can be graded in this course."
+   "The Reynolds number is pinned in the course and the wall shear is bisected out of the risk word, and only a pinned quantity can be graded in this course."
   ],
   "answer": 0,
   "explanation": "Density times velocity times diameter over viscosity is a definition, and no graded field in this course reads a friction factor or a shear stress. The Pipeline and Line Sizing course computes its own Reynolds number with a different correlation and a different transition, so the two will not agree on the same pipe."
@@ -129,7 +129,7 @@
    "The capstone grades the factor as a ratio against the same case with it removed."
   ],
   "answer": 1,
-  "explanation": "The capstone generator asserts the condition rather than assuming it. Nothing downstream of that factor is graded anywhere in this course, and five of the six digest streams also have a factor of exactly one."
+  "explanation": "The course asserts the condition rather than assuming it. Nothing downstream of that factor is graded anywhere in this course, and five of the six teaching streams also have a factor of exactly one."
  },
  {
   "prompt": "The studio converts a psig pressure by dividing by 14.5038 and the engine exports 14.503773800722. What does the difference cost, and what was done about it?",

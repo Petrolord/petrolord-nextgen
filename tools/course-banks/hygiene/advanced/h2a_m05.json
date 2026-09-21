@@ -107,7 +107,7 @@
    "16.000000 hours for both, since the weekly factor reuses the daily denominator once a week is given"
   ],
   "answer": 1,
-  "explanation": "DAILY RF is (8/h) x (24 - h)/16 and WEEKLY RF is (40/h) x (168 - h)/128, and each denominator is measured by asking the engine for a raw factor whose value is that constant and nothing else: 16.000000000000 hours from the raw daily factor at 4 hours, 128.000000000000 from the raw weekly factor at 20 hours. Each matches a literal typed in the generator with a relative difference of 0. The 24 and the 168 sit in the numerators, and the 8 and the 40 scale the hours of breathing the air."
+  "explanation": "DAILY RF is (8/h) x (24 - h)/16 and WEEKLY RF is (40/h) x (168 - h)/128, and each denominator is measured by asking the engine for a raw factor whose value is that constant and nothing else: 16.000000000000 hours from the raw daily factor at 4 hours, 128.000000000000 from the raw weekly factor at 20 hours. Each matches a literal the course records with a relative difference of 0. The 24 and the 168 sit in the numerators, and the 8 and the 40 scale the hours of breathing the air."
  },
  {
   "prompt": "The BC Occupational Health and Safety Regulation prints daily factors of 0.700000, 0.500000, 0.250000 and 0.100000 at 10, 12, 16 and 20 hours, and the engine reproduces all four. What does that prove?",

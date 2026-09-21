@@ -71,7 +71,7 @@ q(2, "Subtracting two printed four-decimal pool figures can differ from a printe
  ["The engine rounds only the tax column to four decimals.",
   "The pool is carried in whole millions.",
   "The tax rate is applied after the pool is rounded down."],
- "Each four-decimal figure is rounded on its own, so the digest prints the construction years through year 6 to nine decimals for arithmetic. Each nine-decimal figure agrees with the engine's own to within two units in the ninth decimal.")
+ "Each four-decimal figure is rounded on its own, so the course prints the construction years through year 6 to nine decimals for arithmetic. Each nine-decimal figure agrees with the engine's own to within two units in the ninth decimal.")
 
 q(0, "How does the feasibility oracle check the loss pool?",
  "With a dated tax-loss ledger used oldest first.",

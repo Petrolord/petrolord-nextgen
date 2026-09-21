@@ -56,7 +56,7 @@ q(1, "Which published stage field carries the worst relative gap against the eng
 
 q(3, "A gate written against one of those goldens therefore has to carry a tolerance. Where should the tolerance come from?",
  "From the size of the disagreement the two routes really have.",
- ["From the precision the digest prints that field at, so the gate and the course agree.",
+ ["From the precision the lesson prints that field at, so the gate and the course agree.",
   "From the worst gap on the whole table, applied to every field so one number covers them all.",
   "From the tolerance the published file declares beside each case it carries."],
  "Demanding equality on that table would fail on arithmetic rather than on error, and a tolerance chosen because it looks tidy is a tolerance chosen against nothing.")

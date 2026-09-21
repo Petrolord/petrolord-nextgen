@@ -33,7 +33,7 @@
   "explanation": "Every millimetre of a vertical cylinder adds the same slice, so a coarser step costs nothing at the dip: 3542.077 m3 and 3542.077 m3."
  },
  {
-  "prompt": "At 41 mm on AK-03 the 100 mm table reads 0.341 m3 and the 10 mm table 0.220 m3. Which figure does the digest print for the 100 mm table less the 10 mm table?",
+  "prompt": "At 41 mm on AK-03 the 100 mm table reads 0.341 m3 and the 10 mm table 0.220 m3. Which figure does the course print for the 100 mm table less the 10 mm table?",
   "options": [
    "-0.007 m3, the difference at that tank's morning dip",
    "0.341 m3, since the finer table reads no water",

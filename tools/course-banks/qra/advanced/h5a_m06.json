@@ -8,7 +8,7 @@
    "UNACCEPTABLE, because a supervisor is a member of the public while in the accommodation, and the public limit is exceeded there."
   ],
   "answer": 1,
-  "explanation": "The digest bands the supervisor at TOLERABLE, 8.743500 times the lower limit of 1e-6, and says an ALARP demonstration is required. Being well below the upper limit is not being broadly acceptable. 20.000000 is the ratio for 2e-5 per year, since the ratio moves with the individual risk, and a worker on site is banded as a worker in every place of the roster."
+  "explanation": "The course bands the supervisor at TOLERABLE, 8.743500 times the lower limit of 1e-6, and says an ALARP demonstration is required. Being well below the upper limit is not being broadly acceptable. 20.000000 is the ratio for 2e-5 per year, since the ratio moves with the individual risk, and a worker on site is banded as a worker in every place of the roster."
  },
  {
   "prompt": "An ALARP note must band the individual risk of the most exposed person. For EREMOR, which figure is that, and why that one?",
@@ -30,7 +30,7 @@
    "It averages the three conventions' ratios and compares the average with the DF, so that no single choice decides the verdict."
   ],
   "answer": 0,
-  "explanation": "The digest says an ALARP demonstration states each choice and why, and shows the verdict at the other defensible choices. Choosing for the most favourable verdict is not a method. Rates are inputs with two HSE conventions behind them, so the undiscounted row alone hides the choice, and no source averages the conventions."
+  "explanation": "The course says an ALARP demonstration states each choice and why, and shows the verdict at the other defensible choices. Choosing for the most favourable verdict is not a method. Rates are inputs with two HSE conventions behind them, so the undiscounted row alone hides the choice, and no source averages the conventions."
  },
  {
   "prompt": "Which of these does the ALARP note, in the shape this course grades at Expert, leave out?",
@@ -41,7 +41,7 @@
    "Each measure's deltaPLL, costs, life, VPF, other harms, discounting convention and DF, each with its source as the note states it."
   ],
   "answer": 2,
-  "explanation": "The digest's ALARP note carries the individual risk of the most exposed person and its region, the societal picture if warranted, each measure with its inputs and sources, the ratio and verdict, the ICAF beside the VPF, the measures adopted and rejected, and what the engine did not know. A risk matrix score is not part of it: the matrix belongs to the risk and change course."
+  "explanation": "The course's ALARP note carries the individual risk of the most exposed person and its region, the societal picture if warranted, each measure with its inputs and sources, the ratio and verdict, the ICAF beside the VPF, the measures adopted and rejected, and what the engine did not know. A risk matrix score is not part of it: the matrix belongs to the risk and change course."
  },
  {
   "prompt": "An individual risk comes back TOLERABLE. Is it acceptable?",
@@ -52,7 +52,7 @@
    "No, never, since a TOLERABLE result must be reduced until it is BROADLY_ACCEPTABLE before work continues on the installation."
   ],
   "answer": 1,
-  "explanation": "The digest says an individual risk in the TOLERABLE region is not acceptable until the demonstration is made; the engine sets `alarpDemonstrationRequired` there. TOLERABLE is no synonym for acceptable, the public limit is not the worker test, and ALARP asks for reduction as low as reasonably practicable, which need not reach the broadly acceptable region."
+  "explanation": "The course says an individual risk in the TOLERABLE region is not acceptable until the demonstration is made; the engine sets `alarpDemonstrationRequired` there. TOLERABLE is no synonym for acceptable, the public limit is not the worker test, and ALARP asks for reduction as low as reasonably practicable, which need not reach the broadly acceptable region."
  },
  {
   "prompt": "The EDIKAN firewall is GROSSLY_DISPROPORTIONATE at its stated DF of 3 under every convention. How does the ALARP note treat a measure rejected on cost?",
@@ -63,7 +63,7 @@
    "It lists it among the measures rejected as grossly disproportionate, and still weighs it against good practice, which the engine does not know."
   ],
   "answer": 3,
-  "explanation": "The digest's note lists the measures adopted and the ones rejected as grossly disproportionate, and says a measure rejected on cost is still weighed against good practice, which the engine does not know. Dropping it hides the decision. The DF is a stated choice to be justified, never tuned to pass a measure, and the largest reasonable cost is a limit, which prescribes no spend."
+  "explanation": "The course's note lists the measures adopted and the ones rejected as grossly disproportionate, and says a measure rejected on cost is still weighed against good practice, which the engine does not know. Dropping it hides the decision. The DF is a stated choice to be justified, never tuned to pass a measure, and the largest reasonable cost is a limit, which prescribes no spend."
  },
  {
   "prompt": "Each measure in the ALARP note carries its deltaPLL, costs, life, VPF, other harms, discounting convention and DF. Why must the note give a source for every one of them?",
@@ -96,7 +96,7 @@
    "EXCEEDS with a worst ratio of 18.000000 at N = 300.000000 against the Dutch line, a historical comparison since Bevi's repeal, and BELOW at 0.001000 against the R2P2 point."
   ],
   "answer": 3,
-  "explanation": "The digest prints EXCEEDS, worst ratio 18.000000 at N = 300 against the Dutch line, and BELOW at 0.001000 against the R2P2 point, which has no slope. The Dutch line is a historical published comparison because Bevi was repealed. 0.014910 is the worst ratio against the analyst's own slope minus one line, and the TOUCHES case is a different curve built to sit on the line."
+  "explanation": "The course shows EXCEEDS, worst ratio 18.000000 at N = 300 against the Dutch line, and BELOW at 0.001000 against the R2P2 point, which has no slope. The Dutch line is a historical published comparison because Bevi was repealed. 0.014910 is the worst ratio against the analyst's own slope minus one line, and the TOUCHES case is a different curve built to sit on the line."
  },
  {
   "prompt": "R2P2 says its individual risk limits are guidelines. How should an ALARP note use the band the engine returns?",
@@ -107,7 +107,7 @@
    "As an estimate the analyst may round to the nearest band edge before quoting it, since the limits are only guidelines."
   ],
   "answer": 1,
-  "explanation": "The digest says R2P2's limits are guidelines, to be applied with judgement, and the note carries the judgement: the region, the measures weighed and what the engine did not know. A band word alone settles nothing. The risk matrix belongs to the risk and change course and this course never scores one, and rounding a figure toward a band edge is the opposite of computing from the inputs."
+  "explanation": "The course says R2P2's limits are guidelines, to be applied with judgement, and the note carries the judgement: the region, the measures weighed and what the engine did not know. A band word alone settles nothing. The risk matrix belongs to the risk and change course and this course never scores one, and rounding a figure toward a band edge is the opposite of computing from the inputs."
  },
  {
   "prompt": "An analyst weighs the EDIKAN firewall at a VPF of 1000000. What must the ALARP note say about that choice?",
@@ -118,7 +118,7 @@
    "That the 2003 figure of 1336800 was rejected as too high, since the lower VPF always gives the more cautious verdict on a measure being weighed."
   ],
   "answer": 2,
-  "explanation": "The digest says the analyst states the VPF and its year and justifies it: the engine has no default VPF, and current HSE figures were not found on a live page, so neither exported value is a recommendation. A lower VPF lowers the benefit, which makes a measure look worse value, so it is the less cautious choice for the people protected."
+  "explanation": "The course says the analyst states the VPF and its year and justifies it: the engine has no default VPF, and current HSE figures were not found on a live page, so neither exported value is a recommendation. A lower VPF lowers the benefit, which makes a measure look worse value, so it is the less cautious choice for the people protected."
  },
  {
   "prompt": "Which line belongs in the 'what the engine did not know' section of an ALARP note that also carries a societal picture?",
@@ -129,7 +129,7 @@
    "That the engine could not discount a benefit growing at a rate, so the R2P2 convention was approximated by the undiscounted row."
   ],
   "answer": 0,
-  "explanation": "The digest lists no published F-N worked example among what the engine does not know, and the analyst never cites an F-N figure as published-verified. The other three describe gaps that do not exist: N need not be whole, a threshold value is banded by the engine's own lower band rule, and the engine takes a benefit growth rate as an input."
+  "explanation": "The course lists no published F-N worked example among what the engine does not know, and the analyst never cites an F-N figure as published-verified. The other three describe gaps that do not exist: N need not be whole, a threshold value is banded by the engine's own lower band rule, and the engine takes a benefit growth rate as an input."
  },
  {
   "prompt": "A draft note argues that construction workers in the R2P2 box carried 0.000046646142 per year, so the EREMOR operator's 0.000017541379 needs no ALARP demonstration. What is wrong with the argument?",
@@ -151,7 +151,7 @@
    "Whether the ICAF is formed over undiscounted fatalities, which the engine leaves as a choice for the analyst in each call to its cost function."
   ],
   "answer": 1,
-  "explanation": "The digest says a measure rejected on cost is still weighed against good practice, which the engine does not know. The engine bands the individual risk against the stated thresholds, returns the ratio and the verdict, and always forms the ICAF over undiscounted fatalities prevented, which is its declared choice."
+  "explanation": "The course says a measure rejected on cost is still weighed against good practice, which the engine does not know. The engine bands the individual risk against the stated thresholds, returns the ratio and the verdict, and always forms the ICAF over undiscounted fatalities prevented, which is its declared choice."
  },
  {
   "prompt": "The EDIKAN firewall passes only at a DF of 10 in the undiscounted sweep. What must a note that adopts it at DF 10 add?",
@@ -162,6 +162,6 @@
    "The discounted verdict at DF 10, since only a discounted verdict counts and the undiscounted sweep is shown to the reader for interest only."
   ],
   "answer": 2,
-  "explanation": "The digest says the verdict can turn on the DF, and a demonstration states each choice and why: DFs vary from upwards of 1, the checklist's example says above 10 is unlikely, and EDIKAN is GROSSLY_DISPROPORTIONATE at DF 5 and NOT_GROSSLY_DISPROPORTIONATE at DF 10. The ratio is never divided by the DF, and the undiscounted row is a defensible convention in its own right."
+  "explanation": "The course says the verdict can turn on the DF, and a demonstration states each choice and why: DFs vary from upwards of 1, the checklist's example says above 10 is unlikely, and EDIKAN is GROSSLY_DISPROPORTIONATE at DF 5 and NOT_GROSSLY_DISPROPORTIONATE at DF 10. The ratio is never divided by the DF, and the undiscounted row is a defensible convention in its own right."
  }
 ]

@@ -8,7 +8,7 @@
    "Because a worker's individual risk never carries an ALARP demonstration, which R2P2 reserves for members of the public off the site."
   ],
   "answer": 2,
-  "explanation": "The digest prints 1e-2 per year as UNACCEPTABLE for workers with the flag false: above the upper limit an individual risk is unacceptable whatever the benefit, and the demonstration belongs to the TOLERABLE region between the limits. The engine bands the value normally, the flag is false in the broadly acceptable region too, and workers in the middle region do need a demonstration."
+  "explanation": "The course shows 1e-2 per year as UNACCEPTABLE for workers with the flag false: above the upper limit an individual risk is unacceptable whatever the benefit, and the demonstration belongs to the TOLERABLE region between the limits. The engine bands the value normally, the flag is false in the broadly acceptable region too, and workers in the middle region do need a demonstration."
  },
  {
   "prompt": "Down the ladder of stated individual risks from 1e-2 to 0 per year, which rows get a different band word from the two R2P2 presets?",
@@ -41,10 +41,10 @@
    "BROADLY_ACCEPTABLE, with the boundary null, since the engine rounds a product of stated factors to twelve decimals before banding it."
   ],
   "answer": 1,
-  "explanation": "The digest's third snap row: 0.2 x 0.000005 lands a hair above 1e-6 in double, the 1e-9 relative snap takes it as the limit, and the limit is at or below, so the band is BROADLY_ACCEPTABLE with the boundary named. Without the snap it would read TOLERABLE. The engine names the boundary because it snapped, and it rounds nothing before banding."
+  "explanation": "The course's third snap row: 0.2 x 0.000005 lands a hair above 1e-6 in double, the 1e-9 relative snap takes it as the limit, and the limit is at or below, so the band is BROADLY_ACCEPTABLE with the boundary named. Without the snap it would read TOLERABLE. The engine names the boundary because it snapped, and it rounds nothing before banding."
  },
  {
-  "prompt": "Of the five R2P2 box rates the digest bands, each against the preset its source names, how many come back TOLERABLE?",
+  "prompt": "Of the five R2P2 box rates the course bands, each against the preset its source names, how many come back TOLERABLE?",
   "options": [
    "None: R2P2 says worker rates are normally well below the upper limit, so each of the five comes back BROADLY_ACCEPTABLE against its preset.",
    "Five: every published industry rate lies between the limits of its preset, which is why R2P2 prints them together in one box of rates.",
@@ -52,7 +52,7 @@
    "Three: agriculture, construction, and mining and quarrying, with the service sector and the public gas rate both BROADLY_ACCEPTABLE."
   ],
   "answer": 2,
-  "explanation": "The digest bands agriculture 0.000077017868, construction 0.000046646142, mining and quarrying 0.000068662455 and the service sector 0.000002573572 TOLERABLE against workers, and the public gas rate 0.000000662252 BROADLY_ACCEPTABLE against the public preset. Well below the upper limit is still above the lower one, and the service sector is still above 1 in a million."
+  "explanation": "The course bands agriculture 0.000077017868, construction 0.000046646142, mining and quarrying 0.000068662455 and the service sector 0.000002573572 TOLERABLE against workers, and the public gas rate 0.000000662252 BROADLY_ACCEPTABLE against the public preset. Well below the upper limit is still above the lower one, and the service sector is still above 1 in a million."
  },
  {
   "prompt": "Agriculture's 1999/00 fatality rate, 1 in 12 984, is written 0.000077017868 per year. What does R2P2 say of worker rates like it, and what band follows?",
@@ -74,7 +74,7 @@
    "UNACCEPTABLE if IR > upper; BROADLY_ACCEPTABLE if IR <= lower; TOLERABLE (reduce ALARP) between"
   ],
   "answer": 3,
-  "explanation": "The digest quotes the basis model verbatim, and its two comparisons carry the lower band convention: strictly greater than the upper limit is unacceptable, at or below the lower limit is broadly acceptable. Each distractor moves a threshold value into the upper band at one limit or both, the convention the engine declined."
+  "explanation": "The course quotes the basis model verbatim, and its two comparisons carry the lower band convention: strictly greater than the upper limit is unacceptable, at or below the lower limit is broadly acceptable. Each distractor moves a threshold value into the upper band at one limit or both, the convention the engine declined."
  },
  {
   "prompt": "Zero per year goes into `alarpBand` under the worker preset. Which band comes back, and why does `atBoundary` stay null?",
@@ -85,7 +85,7 @@
    "TOLERABLE with the boundary null, because a zero individual risk cannot be demonstrated and so must stay in the middle region."
   ],
   "answer": 1,
-  "explanation": "The digest's last row bands 0 as BROADLY_ACCEPTABLE with boundary null under both presets. `atBoundary` names a threshold only when the value sits on it within the snap, and 0 is far from 1e-6. The engine accepts an individual risk of 0 or more, and a zero sits at or below the lower limit."
+  "explanation": "The course's last row bands 0 as BROADLY_ACCEPTABLE with boundary null under both presets. `atBoundary` names a threshold only when the value sits on it within the snap, and 0 is far from 1e-6. The engine accepts an individual risk of 0 or more, and a zero sits at or below the lower limit."
  },
  {
   "prompt": "Slight injuries in the HSE example: 0.002 cases a year, 300 each, for 25 years. How much benefit, and does the printed figure match?",
@@ -107,7 +107,7 @@
    "Fatalities and permanent incapacity agree; serious and slight injury are both printed rounded, which is why the total falls short of 9283.50."
   ],
   "answer": 2,
-  "explanation": "The digest's table prints 6684.00, 2072.00 and 15.00 against printed 6684, 2072 and 15, and 512.50 against 512, so the total 9283.50 is printed 9283; the limit 92835.00 printed 93000 is a further rounding. The example is undiscounted in both, and the slight injury line is exact."
+  "explanation": "The course's table prints 6684.00, 2072.00 and 15.00 against printed 6684, 2072 and 15, and 512.50 against 512, so the total 9283.50 is printed 9283; the limit 92835.00 printed 93000 is a further rounding. The example is undiscounted in both, and the slight injury line is exact."
  },
  {
   "prompt": "The 2003 checklist fatality value the engine exports carries a note in its source string. What does it say?",
@@ -118,7 +118,7 @@
    "Fatality GBP 1,336,800 (times 2 for cancer)."
   ],
   "answer": 3,
-  "explanation": "The export's source string, quoted verbatim in the digest, reads: UK HSE, Cost Benefit Analysis (CBA) checklist (2003 values): fatality GBP 1,336,800 (times 2 for cancer). The 4 percent uprating is R2P2's convention, VPF has no default, and the 2001 figure is R2P2's VPF at 2001 prices, no public value."
+  "explanation": "The export's source string, quoted verbatim in the course, reads: UK HSE, Cost Benefit Analysis (CBA) checklist (2003 values): fatality GBP 1,336,800 (times 2 for cancer). The 4 percent uprating is R2P2's convention, VPF has no default, and the 2001 figure is R2P2's VPF at 2001 prices, no public value."
  },
  {
   "prompt": "In what currency does `costBenefit` return its present values, its largest reasonably practicable cost and its ICAF?",
@@ -129,7 +129,7 @@
    "US dollars, since the economics engine that supplies the year-end present value works in one reporting currency only."
   ],
   "answer": 1,
-  "explanation": "The digest's units table gives VPF and costs in the currency of the inputs, and the basis says the same. The two HSE figures are GBP at their price year and are illustrations only, and the engine converts nothing, so an analyst mixing currencies or price years would get a meaningless ratio."
+  "explanation": "The course's units table gives VPF and costs in the currency of the inputs, and the basis says the same. The two HSE figures are GBP at their price year and are illustrations only, and the engine converts nothing, so an analyst mixing currencies or price years would get a meaningless ratio."
  },
  {
   "prompt": "The EDIKAN firewall's deltaPLL is 2e-3. What is that quantity, in this course's vocabulary?",
@@ -140,7 +140,7 @@
    "A fraction of 2e-3 of the facility's fatalities, which the firewall prevents in every year in which it stays in service."
   ],
   "answer": 0,
-  "explanation": "The digest's vocabulary says PLL is expected fatalities per year and never a probability, and deltaPLL is the reduction in it that a measure delivers. It is a population quantity, so it is no one person's individual risk, and it is an expected number per year, which is no share of anything."
+  "explanation": "The course's vocabulary says PLL is expected fatalities per year and never a probability, and deltaPLL is the reduction in it that a measure delivers. It is a population quantity, so it is no one person's individual risk, and it is an expected number per year, which is no share of anything."
  },
  {
   "prompt": "The engine builds the benefit over a measure's life from each year's benefit B. How does a benefit growth rate enter, when one is given?",
@@ -151,7 +151,7 @@
    "It is subtracted from the cost rate, so that costs and benefits are discounted at the same net rate throughout the life."
   ],
   "answer": 2,
-  "explanation": "The digest says the benefit over the life is the present value of B each year, uprated by a growth rate if one is given, and R2P2's convention uses both a 0.06 discount and a 0.04 uprating. The growth rate replaces no rate, it acts on every year's benefit, and it never touches the cost side."
+  "explanation": "The course says the benefit over the life is the present value of B each year, uprated by a growth rate if one is given, and R2P2's convention uses both a 0.06 discount and a 0.04 uprating. The growth rate replaces no rate, it acts on every year's benefit, and it never touches the cost side."
  },
  {
   "prompt": "Whatever the convention, which part of the EDIKAN firewall's cost keeps its full value in the present value of the cost?",
@@ -184,7 +184,7 @@
    "The deltaPLL of the firewall after discounting, which the engine substitutes for 2e-3 whenever a benefit rate is given."
   ],
   "answer": 0,
-  "explanation": "Dividing the benefit's present value by the VPF counts fatalities at a discount, and the digest derives 0.034337 only to show the wrong route: 321062.02 over it gives 9350246.71. The engine divides by deltaPLL times the life, 0.040000, for 8026550.41. It is no ratio of cost to benefit, and deltaPLL stays 2e-3 whatever the rates."
+  "explanation": "Dividing the benefit's present value by the VPF counts fatalities at a discount, and the course derives 0.034337 only to show the wrong route: 321062.02 over it gives 9350246.71. The engine divides by deltaPLL times the life, 0.040000, for 8026550.41. It is no ratio of cost to benefit, and deltaPLL stays 2e-3 whatever the rates."
  },
  {
   "prompt": "How does a caller type a benefit discount rate of 1.5 percent, and what range does the engine accept for a rate?",
@@ -195,7 +195,7 @@
    "As 0.015, and only the four rates the two HSE conventions name."
   ],
   "answer": 2,
-  "explanation": "The digest's units table says rates of discount and growth are per year, above -1, written 0.035 for 3.5 percent, so 1.5 percent is 0.015. The engine reads a rate as typed, it bounds rates only from below, and it takes any rate as an input rather than a list of conventions."
+  "explanation": "The course's units table says rates of discount and growth are per year, above -1, written 0.035 for 3.5 percent, so 1.5 percent is 0.015. The engine reads a rate as typed, it bounds rates only from below, and it takes any rate as an input rather than a list of conventions."
  },
  {
   "prompt": "Under R2P2's convention the firewall's benefit is uprated by 4 percent a year and discounted at 6 percent. Why is its present value 32946.93, below the undiscounted 40000.00?",
@@ -228,7 +228,7 @@
    "Because the checklist prints them as the limits of a sensitivity range, and the engine runs the test at both ends of each range automatically."
   ],
   "answer": 0,
-  "explanation": "The digest says the CBA checklist discounts benefits at no more than 1.5 percent and costs at no less than 3.5 percent, and the row sits at those bounds. The engine takes any rate above -1 as an input, so nothing is refused or hard coded, and it runs one call per convention, never a range."
+  "explanation": "The course says the CBA checklist discounts benefits at no more than 1.5 percent and costs at no less than 3.5 percent, and the row sits at those bounds. The engine takes any rate above -1 as an input, so nothing is refused or hard coded, and it runs one call per convention, never a range."
  },
  {
   "prompt": "Stepping the factor to 5 lifts the most the firewall may cost to 200000.00. Does it pass there?",
@@ -294,7 +294,7 @@
    "Adopt the measure, because a measure whose cost is not grossly disproportionate to its benefit is reasonably practicable."
   ],
   "answer": 3,
-  "explanation": "NOT_GROSSLY_DISPROPORTIONATE means the measure is reasonably practicable, and the digest says the duty to adopt it stands, even at the boundary. ALARP is a duty in the TOLERABLE region, where reducing an individual risk further is required when practicable, and the DF is a stated choice, which is no second hurdle."
+  "explanation": "NOT_GROSSLY_DISPROPORTIONATE means the measure is reasonably practicable, and the course says the duty to adopt it stands, even at the boundary. ALARP is a duty in the TOLERABLE region, where reducing an individual risk further is required when practicable, and the DF is a stated choice, which is no second hurdle."
  },
  {
   "prompt": "What does a DF of exactly 1 accept, and how does the undiscounted firewall fare at it?",
@@ -327,7 +327,7 @@
    "It prints the weather and direction probability 0.0368 where the engine computes a different figure from the same inputs."
   ],
   "answer": 2,
-  "explanation": "The digest says the example uses R = 361 m for a point whose distance computes to 360.555 m from its coordinates (200, 300), and one step names the point (100, 200); a reproduction that needs a rounded intermediate says which one. The 12 sectors and the frequency of 5e-7 are the golden inputs, and 0.0368 is reproduced exactly."
+  "explanation": "The course says the example uses R = 361 m for a point whose distance computes to 360.555 m from its coordinates (200, 300), and one step names the point (100, 200); a reproduction that needs a rounded intermediate says which one. The 12 sectors and the frequency of 5e-7 are the golden inputs, and 0.0368 is reproduced exactly."
  },
  {
   "prompt": "Purple Book Table 4.5 prints its middle band as \"10 - 100 kg/s\". How does the engine read the edges, and what status does its validation record give them?",
@@ -338,7 +338,7 @@
    "Closed at both ends, so exactly 10 and 100 kg/s fall in the middle band; the record labels the band edge cells the engine's own reading and the interior cells published."
   ],
   "answer": 3,
-  "explanation": "The basis says \"table lookup; the middle band is closed at both ends\", and the digest's table puts 10 and 100 kg/s in the medium band. The validation record labels the band edge cells as the engine's own reading and the interior cells as published. The lower band convention is about thresholds of individual risk and cost, which is a separate matter."
+  "explanation": "The basis says \"table lookup; the middle band is closed at both ends\", and the course's table puts 10 and 100 kg/s in the medium band. The validation record labels the band edge cells as the engine's own reading and the interior cells as published. The lower band convention is about thresholds of individual risk and cost, which is a separate matter."
  },
  {
   "prompt": "Why does every graded exercise in this course state its ignition probabilities and its vapour cloud split instead of asking for a lookup?",
@@ -349,7 +349,7 @@
    "Because the split changes with the substance class, and a graded exercise cannot state a substance class without giving the answer away."
   ],
   "answer": 0,
-  "explanation": "The digest says the table cells and the split are single transcriptions and nothing in the validation checks them against a second reading, so every capstone states the values it uses. The lookup takes any positive rate or mass and returns its band. The table is taught in this course, and the preset split is one pair for every substance."
+  "explanation": "The course says the table cells and the split are single transcriptions and nothing in the validation checks them against a second reading, so every capstone states the values it uses. The lookup takes any positive rate or mass and returns its band. The table is taught in this course, and the preset split is one pair for every substance."
  },
  {
   "prompt": "The engine has three functions that call the consequence engine to MAKE a probability of death. What does this course do with them?",
@@ -360,7 +360,7 @@
    "It replaces them with the Purple Book Table 5.3 fractions, which give a probability of death at any place without any consequence model."
   ],
   "answer": 1,
-  "explanation": "The digest says this course does not teach their inputs and grades nothing through them; a probability of death is a stated input that belongs to the consequence course. The Table 5.3 fractions are the share of a population indoors for societal risk, and they produce no probability of death at a place."
+  "explanation": "The course says it does not teach their inputs and grades nothing through them; a probability of death is a stated input that belongs to the consequence course. The Table 5.3 fractions are the share of a population indoors for societal risk, and they produce no probability of death at a place."
  },
  {
   "prompt": "Along the EREMOR transect the LSIR crosses 1e-5 per year at 126.982958 m. Why is a crossing distance like this never graded?",
@@ -371,7 +371,7 @@
    "Because a contour of 1e-5 per year is not one of the levels the Purple Book asks to be shown, so its crossing carries no weight at all."
   ],
   "answer": 2,
-  "explanation": "The digest says a crossing is interpolated in log10 of the LSIR between the two bracketing points, linearly where one side is zero, and calls that a presentation rule the engine chose, which nothing published fixes. The transect is stated per scenario, so no wind rose enters, nothing is rounded to the grid, and 1e-5 is one of the five Purple Book contour levels."
+  "explanation": "The course says a crossing is interpolated in log10 of the LSIR between the two bracketing points, linearly where one side is zero, and calls that a presentation rule the engine chose, which nothing published fixes. The transect is stated per scenario, so no wind rose enters, nothing is rounded to the grid, and 1e-5 is one of the five Purple Book contour levels."
  },
  {
   "prompt": "The Purple Book's introduction to societal risk says \"more than N\" while its equation 6.6 says \"N or more\". Which reading does the engine follow, and what does the other one do to F(12) for the JISIKE off-site curve?",
@@ -382,7 +382,7 @@
    "The equation's \"N or more\", giving F(12) = 0.000009700000; \"more than N\" would drop the corner's own scenario and give 0.000001700000."
   ],
   "answer": 3,
-  "explanation": "The engine follows the equation, and the digest prints F(12) = 0.000009700000 for N or more and 0.000001700000 for more than N, which drops the flash fire at the road sitting exactly at N = 12. 0.000008000000 is the scenario at exactly 12 alone. \"N or more\" counts each scenario once, and the engine returns one curve."
+  "explanation": "The engine follows the equation, and the course shows F(12) = 0.000009700000 for N or more and 0.000001700000 for more than N, which drops the flash fire at the road sitting exactly at N = 12. 0.000008000000 is the scenario at exactly 12 alone. \"N or more\" counts each scenario once, and the engine returns one curve."
  },
  {
   "prompt": "When does the ALARP note this course grades at Expert carry a societal picture beside the individual risk of the most exposed person?",
@@ -393,7 +393,7 @@
    "Only when the individual risk is UNACCEPTABLE, since a societal picture is needed only to argue that the facility should be shut."
   ],
   "answer": 0,
-  "explanation": "The digest's note lists the individual risk of the most exposed person and its region, then the societal picture if the population warrants it. It is no fixed requirement, and nothing makes it depend on the individual risk band. Expert may use the Professional tier's figures; the Dutch line is a historical published comparison the analyst chooses to make."
+  "explanation": "The course's note lists the individual risk of the most exposed person and its region, then the societal picture if the population warrants it. It is no fixed requirement, and nothing makes it depend on the individual risk band. Expert may use the Professional tier's figures; the Dutch line is a historical published comparison the analyst chooses to make."
  },
  {
   "prompt": "The undiscounted EDIKAN ICAF is 8750000.00 and the VPF is 1000000. Read beside each other in the note at the stated DF of 3, what do they say?",
@@ -404,7 +404,7 @@
    "The ICAF is 8.750000 times the VPF, which means the firewall prevents 8.750000 fatalities, and the note reports that count of deaths beside the verdict."
   ],
   "answer": 1,
-  "explanation": "The digest says a measure whose ICAF is below VPF times the DF passes when injuries add nothing. 8750000.00 is well above three times 1000000, so the firewall fails at DF 3, in agreement with the verdict. Below ten times the VPF is the DF 10 reading. Both are money per fatality in the currency of the inputs, and the firewall prevents 0.040000 fatalities."
+  "explanation": "The course says a measure whose ICAF is below VPF times the DF passes when injuries add nothing. 8750000.00 is well above three times 1000000, so the firewall fails at DF 3, in agreement with the verdict. Below ten times the VPF is the DF 10 reading. Both are money per fatality in the currency of the inputs, and the firewall prevents 0.040000 fatalities."
  },
  {
   "prompt": "A note bands the operator's individual risk and then weighs a measure by its deltaPLL. How are the two quantities related?",
@@ -415,7 +415,7 @@
    "The band is of the PLL, and the deltaPLL is the fall in the band, measured in the number of regions the measure moves the facility down."
   ],
   "answer": 2,
-  "explanation": "The digest separates them: IRPA is the individual risk one person carries, banded against the R2P2 limits, and PLL is expected fatalities per year across a population, whose reduction deltaPLL times the VPF is the benefit. They are different quantities, a measure's benefit counts every fatality prevented, and a band is never of the PLL."
+  "explanation": "The course separates them: IRPA is the individual risk one person carries, banded against the R2P2 limits, and PLL is expected fatalities per year across a population, whose reduction deltaPLL times the VPF is the benefit. They are different quantities, a measure's benefit counts every fatality prevented, and a band is never of the PLL."
  },
  {
   "prompt": "An off-site resident's individual risk is to be banded in the note. Which preset applies, and what changes against the worker preset?",
@@ -437,7 +437,7 @@
    "Because the ratio is the factor by which a measure must reduce the individual risk, which the engine and the note then treat as the DF of that measure."
   ],
   "answer": 0,
-  "explanation": "The engine returns the ratios to both thresholds beside the band, and the digest quotes the supervisor at 8.743500 times the lower limit to show where in the TOLERABLE region the individual risk lies. The band still matters to the note. The ratio is no probability of death, and the DF is a stated input for the cost-benefit test with no link to this ratio."
+  "explanation": "The engine returns the ratios to both thresholds beside the band, and the course quotes the supervisor at 8.743500 times the lower limit to show where in the TOLERABLE region the individual risk lies. The band still matters to the note. The ratio is no probability of death, and the DF is a stated input for the cost-benefit test with no link to this ratio."
  },
  {
   "prompt": "An analyst writing up a worker who sits on the upper limit wants to argue for the stricter reading of that limit. What may the ALARP note do?",
@@ -448,7 +448,7 @@
    "Nothing, since the lower band convention binds every note and no argument against a convention of the engine may be written into one."
   ],
   "answer": 1,
-  "explanation": "The lower band rule is a declared choice, and the digest names R2P2's bias to safety as the argument the other way; the note is where the analyst's judgement is written, beside the result the engine returned. The engine has no option to flip the convention, and a note that altered the engine's band word would misreport the calculation."
+  "explanation": "The lower band rule is a declared choice, and the course names R2P2's bias to safety as the argument the other way; the note is where the analyst's judgement is written, beside the result the engine returned. The engine has no option to flip the convention, and a note that altered the engine's band word would misreport the calculation."
  },
  {
   "prompt": "The EDIKAN firewall is weighed with every rate left at its default. Why must the note still state the rates?",
@@ -459,6 +459,6 @@
    "Because the checklist forbids undiscounted weighing, so the note must explain why its rates were left at zero against that rule."
   ],
   "answer": 2,
-  "explanation": "Every rate defaults to zero, which is undiscounted, and the digest says the verdict can turn on the discounting convention, so a demonstration states each choice. A rate of zero changes the result as surely as any other rate. The note is a document, never an engine input, and the checklist's own example is undiscounted."
+  "explanation": "Every rate defaults to zero, which is undiscounted, and the course says the verdict can turn on the discounting convention, so a demonstration states each choice. A rate of zero changes the result as surely as any other rate. The note is a document, never an engine input, and the checklist's own example is undiscounted."
  }
 ]

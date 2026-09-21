@@ -33,7 +33,7 @@ q(2, "The band between the two branches is held for the literature rather than s
   "An interpolation would move the boundary from 2100 to 4000, and a moving guard cannot be read on both sides."],
  "Nothing physical happens between a Reynolds number of 2099.9999999 and one of 2100.0000. The friction factor moves from 0.0304761905 to 0.0488545386 because the engine changes laws there, which is a fact about the engine rather than about the flow.")
 
-q(3, "Colebrook was published for a relative roughness reaching about 0.05. Which of the five rows the digest walks at a Reynolds number of 1000000.0000 sit outside that range?",
+q(3, "Colebrook was published for a relative roughness reaching about 0.05. Which of the five rows the course walks at a Reynolds number of 1000000.0000 sit outside that range?",
  "The rows at 0.100000, 0.200000 and 0.500000, returning 0.1016731332, 0.1557055485 and 0.3308894263.",
  ["Only the row at 0.500000, returning 0.3308894263, since a relative roughness of 0.200000 is still inside the range the correlation was fitted over and the engine flags it for that reason.",
   "None of them, because the engine answers all five and raises nothing, and a correlation that is being asked outside its range is refused by this engine in the ordinary way.",
@@ -54,7 +54,7 @@ q(2, "Roughness carries a guard and a relative roughness of 0.500000 passes stra
   "The flow area, since a roughness approaching the bore would leave nothing for the flow to move through."],
  "A negative roughness returns the message that absolute roughness is a length and cannot be negative. The presence of one guard invites the assumption that the other exists too.")
 
-q(0, "Weymouth takes no friction factor and no roughness. How does the digest recover the friction Weymouth is assuming?",
+q(0, "Weymouth takes no friction factor and no roughness. How does the course recover the friction Weymouth is assuming?",
  "By asking General Flow what friction factor would make its own rate match the Weymouth rate, using the fact that a General Flow rate goes as one over the square root of the friction factor.",
  ["By reading the Weymouth coefficient out of the published form directly, since the fully rough friction law is stated inside it and only has to be rearranged to be seen.",
   "By comparing the Weymouth rate against the Panhandle A and Panhandle B rates on the same line, since the three published forms bracket the friction factor between them.",
@@ -96,11 +96,11 @@ q(0, "Of the four transmission forms, only one reports anything about the pipe b
   "General Flow, which returns the Reynolds number it reached, so a reader can check the flow was turbulent before accepting the rate the form produced."],
  "Weymouth, Panhandle A and Panhandle B report a rate and nothing else. The form with the most visible assumption is also the only one that can be argued with.")
 
-q(3, "Two answers in this module come out of loops. What is missing from both returns, and how far does the digest go in describing it?",
- "There is no converged field, no iteration count and no residual, and the digest records that both loops converge everywhere it looked.",
- ["There is no converged field, and the digest records that the General Flow solve was found not to settle on the largest of the four bores, which is why that row carries an implied friction factor.",
-  "There is no iteration count, and the digest records that the friction solve is the only one of the two that iterates, since the General Flow rate is formed in a single pass once the friction factor is known.",
-  "There is no residual reported, and the digest records that the two loops disagree by 0.0126337788 on the nearly dead trunk, which is the size of the convergence gap between them."],
+q(3, "Two answers in this module come out of loops. What is missing from both returns, and how far does the course go in describing it?",
+ "There is no converged field, no iteration count and no residual, and the course records that both loops converge everywhere it looked.",
+ ["There is no converged field, and the course records that the General Flow solve was found not to settle on the largest of the four bores, which is why that row carries an implied friction factor.",
+  "There is no iteration count, and the course records that the friction solve is the only one of the two that iterates, since the General Flow rate is formed in a single pass once the friction factor is known.",
+  "There is no residual reported, and the course records that the two loops disagree by 0.0126337788 on the nearly dead trunk, which is the size of the convergence gap between them."],
  "The friction factor solve runs a fixed point and the General Flow solve runs a rate and a friction factor against each other. No wrong number has been produced by either, and what is absent is the evidence.")
 
 q(2, "A cautious reader runs the same General Flow case twice to see whether the answer is stable. What does the second run tell them?",

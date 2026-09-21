@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "The digest counts, for each module, the exports that read a date against today. Which module has the most of them?",
+  "prompt": "The course counts, for each module, the exports that read a date against today. Which module has the most of them?",
   "options": [
    "qualityAssurance, with 7.",
    "documentControl, which exports 14 functions.",
@@ -11,15 +11,15 @@
   "explanation": "The export table prints 10 for isoCompliance, 7 for qualityAssurance and 4 each for complianceStatus, documentControl and auditManagement. The 14 is documentControl's count of exported functions, which is a different column."
  },
  {
-  "prompt": "Every figure in the digest is stated as true at 2026-10-15. What makes that statement safe to make?",
+  "prompt": "Every figure in the course is stated as true at 2026-10-15. What makes that statement safe to make?",
   "options": [
    "Every call that reads a date against today is passed that one date, and no line comes from a call that read the machine clock.",
-   "The digest was generated on 2026-10-15, so the machine clock and the as-of date agreed on the day it ran.",
+   "The course was produced on 2026-10-15, so the machine clock and the as-of date agreed on the day it ran.",
    "Each module stores the date it was last run with, and reads it back on the next call.",
    "The records themselves carry 2026-10-15 as a field, which the engine copies into each status."
   ],
   "answer": 0,
-  "explanation": "The as-of date is an argument. The generator refuses to print a line from a call that did not pass it, so the same inputs give the same answers on any machine on any day."
+  "explanation": "The as-of date is an argument. The course refuses to print a line from a call that did not pass it, so the same inputs give the same answers on any machine on any day."
  },
  {
   "prompt": "At the as-of date, daysUntil of 2026-09-30 prints -15. What does the minus sign tell a reader?",
@@ -107,7 +107,7 @@
    "That the document has been reviewed, because a passed review date with no today is read as done."
   ],
   "answer": 0,
-  "explanation": "The digest records this as a held limit. reviewState answers as though nothing were due, and the course teaches it as a limit and never as a figure."
+  "explanation": "The course records this as a held limit. reviewState answers as though nothing were due, and the course teaches it as a limit and never as a figure."
  },
  {
   "prompt": "An open NCR was due 2020-01-06. qualityAssurance.isNcrOverdue is handed a today it cannot read. What is its answer?",
@@ -118,7 +118,7 @@
    "null, the value the calendar gives for an unreadable date."
   ],
   "answer": 2,
-  "explanation": "false says the NCR is not overdue, which no reader can rely on here. deriveStatus is the one export that throws; this answer is recorded in SECTION 2 as a limit."
+  "explanation": "false says the NCR is not overdue, which no reader can rely on here. deriveStatus is the one export that throws; this answer is recorded in the course as a limit."
  },
  {
   "prompt": "documentControl.reviewState is passed today as the STRING 2026-10-15. What happens?",
@@ -140,7 +140,7 @@
    "An unreadable record date reads as today."
   ],
   "answer": 1,
-  "explanation": "Q1 is the refusal the digest prints for deriveStatus: RangeError: deriveStatus needs a valid date for today. The two other modules answering as though nothing were due is a held limit, and a string today makes reviewState throw a TypeError."
+  "explanation": "Q1 is the refusal the course prints for deriveStatus: RangeError: deriveStatus needs a valid date for today. The two other modules answering as though nothing were due is a held limit, and a string today makes reviewState throw a TypeError."
  },
  {
   "prompt": "The panel lets you move the as-of date. When you move it, statuses change. What was edited on the records in between?",
@@ -151,10 +151,10 @@
    "The lead time on each record, shortened by the panel."
   ],
   "answer": 2,
-  "explanation": "That is what derived means in this course. A status is never typed, so moving the date back to 2026-10-15 makes every row match the digest again."
+  "explanation": "That is what derived means in this course. A status is never typed, so moving the date back to 2026-10-15 makes every row match the course tables again."
  },
  {
-  "prompt": "The digest's header says in what form it prints every figure. Which form is that?",
+  "prompt": "The course says in what form it prints every figure. Which form is that?",
   "options": [
    "Whole numbers: day counts, counts, and percents the engine has already rounded.",
    "Days and fractions of a day, so a late evening time reads short of the plain date.",
@@ -162,6 +162,6 @@
    "Whole weeks, with each day count rounded to the nearest week before it prints."
   ],
   "answer": 0,
-  "explanation": "The header reads: every figure is a whole number, days from daysUntil and ages, counts, and percents the engine has already rounded. 2026-11-30 reads 46 and 2027-02-28 reads 136, and the lessons quote those figures as printed."
+  "explanation": "The course states it: every figure is a whole number, days from daysUntil and ages, counts, and percents the engine has already rounded. 2026-11-30 reads 46 and 2027-02-28 reads 136, and the lessons quote those figures as printed."
  }
 ]

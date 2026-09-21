@@ -7,20 +7,20 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # Digest SECTIONS 30, 31 and 32. 15 questions.
 
 q(0, "This course calls and proves 28 distinct refusals. What was that count taken over, and what made a call count?",
- "The assertion list the generator built while it ran, filtered to the ones labelled a refusal, with one count per distinct assertion text, each asserting that the engine returned an error key.",
+ "The assertion list the course build made while it ran, filtered to the ones labelled a refusal, with one count per distinct assertion text, each asserting that the engine returned an error key.",
  ["The refusal messages the three engines export as named constants, with one count for each distinct message.",
   "The guard clauses written in the three engine sources, with one count for each clause that can return early.",
-  "The inputs the generator rejected before calling anything, with one count for each input rejected."],
+  "The inputs the course build rejected before calling anything, with one count for each input rejected."],
  "A list compiled by reading the source would be a list of refusals somebody believed were reachable, which is a weaker claim than one that provoked every case.")
 
 q(2, "What rule decides whether a call this course made counts as one of its 238 successes?",
  "The result carried no error key and no non-finite number in it.",
  ["The result matched a golden case for the same function, which is what separates a call that ran from a call that ran correctly.",
-  "The result carried a figure the digest went on to print, so a call whose output is never quoted anywhere is not counted as a success.",
+  "The result carried a figure the course went on to print, so a call whose output is never quoted anywhere is not counted as a success.",
   "The result carried no warning and no note, since a call that returns a caveat is neither a refusal nor a clean success."],
  "The successes and the refusals are counted over the same assertion list filtered two ways, and the rule is what tells the two halves apart.")
 
-q(1, "A generator labels a row a refusal and then calls a case that succeeds. What is the shape of that defect and what stops it here?",
+q(1, "A course build labels a row a refusal and then calls a case that succeeds. What is the shape of that defect and what stops it here?",
  "Real engine output would print under a false sentence, and nothing numeric could see it, so the file writes nothing at all if any label disagrees with its call.",
  ["The numbers would be invented rather than returned, so a sweep of the literals against the engine finds them and the build stops there.",
   "The row would carry a null where a figure belongs, which the reproducibility check catches on the second build of the file.",
@@ -83,17 +83,17 @@ q(1, "Two counts on this tank are taken over the same courses array. What separa
   "The head, with the courses below the design liquid level counted in the first and the courses above it counted in the second."],
  "Written without their rules, those two numbers are a one and a four attached to a tank, and a reader cannot tell whether they overlap or exhaust the table.")
 
-q(3, "The digest pins fifty engine strings verbatim. What does the pinning actually buy?",
+q(3, "The course pins fifty engine strings verbatim. What does the pinning actually buy?",
  "Each was asserted to contain a fragment of its own text as the file was built, so a reworded message fails the build rather than teaching wording nobody will see.",
  ["A reader can search the engine source for the string and confirm the message has not been edited since the file was built.",
   "A screen showing a message and an engine returning one cannot drift apart, because the pinned string is the named constant the interface reads and the engine returns on the call itself.",
   "A message that breaches the owner copy rule is exempted by exact text, which is what allows a contrastive to be quoted at all."],
- "A digest that paraphrased an error message would teach a sentence the learner will never see on the screen, and the same is true of a lesson.")
+ "A worked example that paraphrased an error message would teach a sentence the learner will never see on the screen, and the same is true of a lesson.")
 
 q(2, "Which of these is never a source for a figure in a document about this package?",
  "A comment in the engine source, because it often describes what the code did at some earlier time.",
  ["A message the engine returns, because a sentence is not a figure and cannot be checked against an engine output.",
-  "A figure printed in the digest at six decimals, since a rendering is not a value.",
+  "A figure printed in the course at six decimals, since a rendering is not a value.",
   "A relation line, because a comparison is somebody's reading of two figures."],
  "The test is whether you can make the package produce the figure right now by calling it. A repair note and a review document are in the same position as the comment.")
 

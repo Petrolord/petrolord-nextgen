@@ -1,0 +1,30 @@
+{
+ "app_slug": "intervention",
+ "rows": 1,
+ "old_text_source": "replay of every question migration at origin/main in a local scratch database",
+ "new_text_source": "hand edits in the recut generator (this course has no committed bank source)",
+ "edits": [
+  {
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-what-removing-skin-is-worth",
+   "ord": 10,
+   "fields": {
+    "options": {
+     "old": [
+      "A Theil-Sen route written by the oracle, the median of every pairwise slope, which is the same independent estimator it turns on the log-log slope.",
+      "A round trip on the published pairs run by the teaching digest: case 2 inverts to -2.000000000 at a difference of 8.8818e-16.",
+      "A radial Darcy rate in SI written by the oracle, which is the route that checks the multiplier it inverts.",
+      "The five published skin pairs, each one of which carries an expected implied skin printed in the golden beside its published multiplier."
+     ],
+     "new": [
+      "A Theil-Sen route written by the oracle, the median of every pairwise slope, which is the same independent estimator it turns on the log-log slope.",
+      "A round trip on the published pairs run by the teaching course: case 2 inverts to -2.000000000 at a difference of 8.8818e-16.",
+      "A radial Darcy rate in SI written by the oracle, which is the route that checks the multiplier it inverts.",
+      "The five published skin pairs, each one of which carries an expected implied skin printed in the golden beside its published multiplier."
+     ]
+    }
+   }
+  }
+ ]
+}

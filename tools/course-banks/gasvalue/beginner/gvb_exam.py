@@ -21,14 +21,14 @@ q(0, "Which exported constant holds 7.480519?",
   "M3_PER_SCF"],
  "The constants table: GAL_PER_FT3, 7.480519, US gallons in one cubic foot.")
 
-q(2, "In the digest's arithmetic for kgPerMscf, which constant turns pounds into kilograms?",
+q(2, "In the course's arithmetic for kgPerMscf, which constant turns pounds into kilograms?",
  "LB_PER_KG, 2.20462262",
  ["SCF_PER_LBMOL, 379.49",
   "GAL_PER_FT3, 7.480519",
   "PSI_PER_BAR, 14.503773773"],
  "The kilograms are the pounds over LB_PER_KG, pounds in one kilogram. SCF_PER_LBMOL gives the lb-mol in one Mscf (1000 over it), GAL_PER_FT3 is gallons in a cubic foot and PSI_PER_BAR is lpgCng's psi in one bar.")
 
-q(3, "The digest recomputes kgPerMscf for pure methane and pure carbon dioxide from the constants, beside the engine. What does its difference column read?",
+q(3, "The course recomputes kgPerMscf for pure methane and pure carbon dioxide from the constants, beside the engine. What does its difference column read?",
  "0.0000 on both rows",
  ["0.0000 on methane, with the CO2 row left to the engine",
   "19.1757 on methane and 52.6038 on carbon dioxide",
@@ -56,14 +56,14 @@ q(0, "EGBEMA's sheet typed short gets a normalisation note. What does the note e
   "Confirm the scaled sheet against the laboratory."],
  "The note's second sentence is the request: \"Check the analysis if that was not intended.\" The first reports the raw sum.")
 
-q(1, "OGUTA is the lean non-associated gas. Which ghvBtuScf does the digest print for it?",
+q(1, "OGUTA is the lean non-associated gas. Which ghvBtuScf does the course print for it?",
  "1035.6050",
  ["1248.4110",
   "1210.7800",
   "1010"],
  "OGUTA's ghvBtuScf is 1035.6050. 1248.4110 is EGBEMA, 1210.7800 the studio's opening gas and 1010 is methane's typical heating value in the reference table.")
 
-q(1, "What does the digest print as OGUTA's inertMoleFraction, and from which fractions?",
+q(1, "What does the course print as OGUTA's inertMoleFraction, and from which fractions?",
  "0.0270, from N2 0.0120 plus CO2 0.0150",
  ["0.0150, from CO2 0.0150 alone",
   "0.0460, from N2 0.0180 plus CO2 0.0280",
@@ -82,7 +82,7 @@ q(3, "What carbonPerMol does characteriseGas give OGUTA?",
  ["1.0430",
   "1.3600",
   "1.3000"],
- "SECTION 5 prints OGUTA at carbonPerMol 1.0580; 1.0430 is its hydrocarbon count, and the other two are EGBEMA and the studio gas.")
+ "The gas lesson prints OGUTA at carbonPerMol 1.0580; 1.0430 is its hydrocarbon count, and the other two are EGBEMA and the studio gas.")
 
 q(2, "A sheet is typed with every mole fraction zero. What does characteriseGas answer?",
  "REFUSED: The gas composition sums to nothing.",
@@ -124,7 +124,7 @@ q(1, "On-stream days are omitted in one call and typed blank in another. How doe
  ["Omitted days are refused; blank days take the default, scfPerYear 2625000000",
   "Either way the default applies, and scfPerYear reads 2625000000",
   "Either way the call is refused with the on-stream days sentence"],
- "SECTION 13: omitted from the call, the days take the stated default (onstreamDays 350). Typed blank (''), they are refused with the range more than 0 and no more than 366.")
+ "The refusals lesson: omitted from the call, the days take the stated default (onstreamDays 350). Typed blank (''), they are refused with the range more than 0 and no more than 366.")
 
 q(1, "Propane's carbon number is left blank in one analysis and an unknown code, XX, carries none in another. What does characteriseGas do with each?",
  "Propane's is filled from the reference by its code; XX is refused",
@@ -133,7 +133,7 @@ q(1, "Propane's carbon number is left blank in one analysis and an unknown code,
   "Both are filled, at one carbon per molecule each"],
  "The propane probe reads carbonPerMol 1.2000 with the carbon number typed and with it blank. XX has no reference row: \"REFUSED: No carbon number for XX.\"")
 
-q(3, "From which carbon count does the digest's every-unburned-carbon methane shortcut start?",
+q(3, "From which carbon count does the course's every-unburned-carbon methane shortcut start?",
  "carbonPerMol, every carbon atom, the CO2's included",
  ["hydrocarbonCarbonPerMol, only the carbon that can burn",
   "methaneMoleFraction, the methane in the gas",
@@ -154,12 +154,12 @@ q(1, "In the destruction efficiency range (combustion left out), which methaneSh
   "0.1110"],
  "The range reads methaneShareOfFlareCo2e 0.2376 at 0.95, 0.1548 at 0.97, 0.0565 at 0.99 and 0.0000 at 1. 0.1110 is the share at the comparison GWP of 20, with both efficiencies given.")
 
-q(2, "In the digest's words, what is the destruction efficiency?",
+q(2, "In the course's words, what is the destruction efficiency?",
  "The share of hydrocarbon destroyed",
  ["The share oxidised to CO2",
   "The share of the gas sent to an unlit flare",
   "The share of the CO2 that passes through"],
- "SECTION 11 defines it as the share of hydrocarbon destroyed; its partner is the share oxidised to CO2.")
+ "The efficiency lesson defines it as the share of hydrocarbon destroyed; its partner is the share oxidised to CO2.")
 
 q(2, "The destruction efficiency stands in at 0.97 on EGBEMA. Which CO2e comes back?",
  "218744.723",
@@ -168,7 +168,7 @@ q(2, "The destruction efficiency stands in at 0.97 on EGBEMA. Which CO2e comes b
   "199897.495"],
  "With the destruction efficiency standing in at 0.97, flareCo2eTonnes reads 218744.723. 215946.438 is with both efficiencies given; 237591.952 and 199897.495 are the 0.95 and 0.99 rows of the range.")
 
-q(1, "Whose choice does the digest say the assessment report behind a methane GWP is?",
+q(1, "Whose choice does the course say the assessment report behind a methane GWP is?",
  "The study's",
  ["The engine's, which ships a default",
   "The course's, which picks one edition",
@@ -187,7 +187,7 @@ q(0, "Which ethane figure, gpmC2Plus minus gpmC3Plus, belongs to the studio's ga
  ["2.7737",
   "0.8268",
   "2.6894"],
- "2.4003 is the studio row of SECTION 7's ethane column. 2.6894 is that gas's gpmC3Plus.")
+ "2.4003 is the studio row of the liquids lesson's ethane column. 2.6894 is that gas's gpmC3Plus.")
 
 q(2, "What does the sum row of EGBEMA's per-component gallons print?",
  "5.9942 for gpmC2Plus and 3.2205 for gpmC3Plus",
@@ -201,7 +201,7 @@ q(2, "EGBEMA's ethane row gives 2.7737 gal/Mscf. Which liquid cut holds it?",
  ["gpmC3Plus only",
   "Both gpmC2Plus and gpmC3Plus",
   "Neither, as ethane reads recoverable false"],
- "The C2 row reads recoverable true, in gpmC2Plus true and in gpmC3Plus false, at 2.7737. The digest prints the same figure as gpmC2Plus minus gpmC3Plus, the ethane.")
+ "The C2 row reads recoverable true, in gpmC2Plus true and in gpmC3Plus false, at 2.7737. The course prints the same figure as gpmC2Plus minus gpmC3Plus, the ethane.")
 
 q(2, "Which figure is OGUTA's c3PlusKgPerMscf, the propane and heavier part of its mass?",
  "0.9798",
@@ -245,12 +245,12 @@ q(3, "Which functions answer \"how much LPG can the vessel hold, and when to reo
   "cngCompression, cngDispensing"],
  "The table of questions pairs the vessel and its reorder with lpgBlendProperties and lpgStorageSizing. vaporizerDuty, bottlingPlant and assetFloat answer the vaporizer, carousel and cylinders; gasMassInVessel and cascadeFills the bank and cascade; cngCompression and cngDispensing the compressor and forecourt.")
 
-q(2, "The digest names one module flareToValue draws on. Which, and for what?",
+q(2, "The course names one module flareToValue draws on. Which, and for what?",
  "modularRefinery, for capital by the power law",
  ["terminalDepot, for its loading-rack queue",
   "production/gasProperties, for the Z factor",
   "facilities/compression, for its compressors"],
- "flareToValue scales capital with the power law in modularRefinery. terminalDepot, production/gasProperties and facilities/compression are the three modules the digest names lpgCng calling.")
+ "flareToValue scales capital with the power law in modularRefinery. terminalDepot, production/gasProperties and facilities/compression are the three modules the course names lpgCng calling.")
 
 q(0, "When the destruction efficiency stands in for the combustion efficiency, what does the engine's note say about the CO2?",
  "It is slightly high, as the rule puts combustion 1.5 points below destruction.",
@@ -271,35 +271,35 @@ q(0, "Which on-stream days does abatement accept?",
  ["367",
   "0",
   "blank ('')"],
- "EGBEMA's 355 days are answered, scfPerYear 2662500000. The refusal states the range, more than 0 and no more than 366, and 0, 367 and a blank are all refused in the digest's table.")
+ "EGBEMA's 355 days are answered, scfPerYear 2662500000. The refusal states the range, more than 0 and no more than 366, and 0, 367 and a blank are all refused in the course's table.")
 
-q(0, "Which of these does the digest state as a limit of the flare model?",
+q(0, "Which of these does the course state as a limit of the flare model?",
  "An unlit flare is not modelled.",
  ["A gas that carries CO2 is not modelled.",
   "A gas that carries nitrogen is not modelled.",
   "A combustion efficiency below the destruction efficiency is not modelled."],
  "The stated limits: the efficiencies have no default, an unlit flare is not modelled, the GWP and credit prices are case inputs, and the reference figures are typical. EGBEMA carries N2 0.018 and CO2 0.028 and a combustion efficiency of 0.955 below its 0.97, and is answered.")
 
-q(2, "On the Flare Gas to Value Studio's opening flare, which parcel does the digest run?",
+q(2, "On the Flare Gas to Value Studio's opening flare, which parcel does the course run?",
  "10 MMscfd on 350 days",
  ["7.5 MMscfd on 355 days",
   "10 MMscfd on 355 days",
   "7.5 MMscfd on 350 days"],
  "The studio's opening gas is run at 10 MMscfd and 350 days with the efficiencies blank, and abatement refuses. 7.5 MMscfd on 355 days is EGBEMA.")
 
-q(0, "Which record does the digest describe as a flow station in Imo State flaring associated gas?",
+q(0, "Which record does the course describe as a flow station in Imo State flaring associated gas?",
  "EGBEMA",
  ["OGUTA",
   "KANO",
   "IBAFO"],
  "EGBEMA is the flow station flaring associated gas. OGUTA is a lean non-associated gas, KANO an LPG storage and bottling plant and IBAFO a CNG mother station. Every record is invented; the places are real.")
 
-q(1, "What does the digest say of EGBEMA's efficiencies, 0.97 and 0.955?",
- "They are invented and illustrative, as every efficiency in the digest is.",
+q(1, "What does the course say of EGBEMA's efficiencies, 0.97 and 0.955?",
+ "They are invented and illustrative, as every efficiency in the course is.",
  ["They are the tiered default pair of 40 CFR 98.233(n)(1).",
   "They are the NUPRC flare regulations' basis for Imo State.",
   "They were measured on the Egbema flare by the flare study."],
- "The digest's preamble: every analysis, efficiency, GWP, price, cost, fill limit and vehicle figure is invented and illustrative, and no figure is a measured flare or a regulation.")
+ "The course's opening note: every analysis, efficiency, GWP, price, cost, fill limit and vehicle figure is invented and illustrative, and no figure is a measured flare or a regulation.")
 
 emit(Q, '/root/wt-et-gasvalue-nextgen/tools/course-banks/gasvalue/beginner/gvb_exam.json', expect_n=42)
 finish()

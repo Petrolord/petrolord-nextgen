@@ -19,7 +19,7 @@
    "4e+7, the hours of the case checked against the other course"
   ],
   "answer": 0,
-  "explanation": "The digest derives 120000 exposed hours a year from 60 people each exposed 2000 hours, and that is what the crew's PLL is divided by, since the PLL counts deaths across the whole crew. 2000 is one person's hours and gives the inflated 121.000000. 8760 is a whole year for one person and belongs to occupancy. 4e+7 is the stated hours of the whole-PLL check against the safety statistics course."
+  "explanation": "The course derives 120000 exposed hours a year from 60 people each exposed 2000 hours, and that is what the crew's PLL is divided by, since the PLL counts deaths across the whole crew. 2000 is one person's hours and gives the inflated 121.000000. 8760 is a whole year for one person and belongs to occupancy. 4e+7 is the stated hours of the whole-PLL check against the safety statistics course."
  },
  {
   "prompt": "An analyst divides the JISIKE crew PLL by the 2000 hours one person works. Which FAR do they report?",
@@ -30,7 +30,7 @@
    "121.000000"
   ],
   "answer": 3,
-  "explanation": "Dividing by one person's hours gives 0.002420000000 times 100,000,000 over 2000, which the digest prints as 121.000000, sixty times the right figure. 2.016667 is the engine's FAR over the crew's 120000 hours. 0.020167 is the crew figure on the wrong base of 1,000,000 hours. 1.312785 is the golden platform case, a different set of inputs."
+  "explanation": "Dividing by one person's hours gives 0.002420000000 times 100,000,000 over 2000, which the course shows as 121.000000, sixty times the right figure. 2.016667 is the engine's FAR over the crew's 120000 hours. 0.020167 is the crew figure on the wrong base of 1,000,000 hours. 1.312785 is the golden platform case, a different set of inputs."
  },
  {
   "prompt": "Which is the engine's model string for the fatal accident rate, verbatim?",
@@ -41,7 +41,7 @@
    "FAR = IRPA x 100,000,000 / 8760 hours per year"
   ],
   "answer": 1,
-  "explanation": "The digest quotes the model string exactly as the key reads it. A base of 1,000,000 hours is the mistake that turns the JISIKE crew figure into 0.020167. Multiplying by the hours inverts the rate. The FAR is built from a PLL, the expected deaths of a group, and an IRPA over a year of 8760 hours is one person's individual risk."
+  "explanation": "The course quotes the model string exactly as the key reads it. A base of 1,000,000 hours is the mistake that turns the JISIKE crew figure into 0.020167. Multiplying by the hours inverts the rate. The FAR is built from a PLL, the expected deaths of a group, and an IRPA over a year of 8760 hours is one person's individual risk."
  },
  {
   "prompt": "A FAR is requested over zero exposed hours. Quote the refusal the engine sends back.",
@@ -63,7 +63,7 @@
    "The safety statistics engine's RATE_BASES.FAR_100M, IOGP fatalities per 100,000,000 hours"
   ],
   "answer": 3,
-  "explanation": "The digest quotes the basis source as engines/hse/safetyStats.js RATE_BASES.FAR_100M (IOGP: fatalities per 100,000,000 hours). The H3 hours in a year is imported too, but it converts occupancy hours for individual risk and sets no FAR base; the LOPA method itself belongs to the LOPA course. Purple Book section 6.3 defines the F-N curve, and the R2P2 point is a frequency of fifty or more deaths per year."
+  "explanation": "The course quotes the basis source as engines/hse/safetyStats.js RATE_BASES.FAR_100M (IOGP: fatalities per 100,000,000 hours). The H3 hours in a year is imported too, but it converts occupancy hours for individual risk and sets no FAR base; the LOPA method itself belongs to the LOPA course. Purple Book section 6.3 defines the F-N curve, and the R2P2 point is a frequency of fifty or more deaths per year."
  },
  {
   "prompt": "A PLL of 2 over 4e+7 exposed hours is stated. What FAR does this engine return, and what does the safety statistics engine return for 2 fatalities over the same hours?",
@@ -74,7 +74,7 @@
    "2.016667 from each, since both divide by the crew's hours"
   ],
   "answer": 1,
-  "explanation": "The digest prints 5.000000 from both engines on these inputs, the same number to the last bit, because the base is shared. The safety statistics course states its FAR per 100,000,000 hours as well, so no factor of a hundred separates them. 12.000000 is the golden whole-count case. 2.016667 is the JISIKE crew figure, whose PLL and hours are different."
+  "explanation": "The course shows 5.000000 from both engines on these inputs, the same number to the last bit, because the base is shared. The safety statistics course states its FAR per 100,000,000 hours as well, so no factor of a hundred separates them. 12.000000 is the golden whole-count case. 2.016667 is the JISIKE crew figure, whose PLL and hours are different."
  },
  {
   "prompt": "The same base gives the same FAR in this course and in the safety statistics course. What separates the two numbers?",
@@ -85,10 +85,10 @@
    "That course reports the FAR as a probability; this one reports it per year"
   ],
   "answer": 0,
-  "explanation": "The digest says it plainly: that course counts deaths that happened, and this one counts deaths expected, through a PLL. The base is RATE_BASES.FAR_100M in both, per 100,000,000 hours, so a PLL of 2 over 4e+7 hours gives 5.000000 in each. Neither engine splits hours by location, and a FAR is a rate per exposed hours in both, never a probability."
+  "explanation": "The course says it plainly: the safety statistics course counts deaths that happened, and this one counts deaths expected, through a PLL. The base is RATE_BASES.FAR_100M in both, per 100,000,000 hours, so a PLL of 2 over 4e+7 hours gives 5.000000 in each. Neither engine splits hours by location, and a FAR is a rate per exposed hours in both, never a probability."
  },
  {
-  "prompt": "Which pair of figures does the digest print for the two golden FAR cases run through the engine?",
+  "prompt": "Which pair of figures does the course print for the two golden FAR cases run through the engine?",
   "options": [
    "platform 2.016667 and whole-count 5.000000",
    "platform 121.000000 and whole-count 12.000000",
@@ -96,7 +96,7 @@
    "platform 1.312785 and whole-count 0.020167"
   ],
   "answer": 2,
-  "explanation": "The digest prints the golden FAR cases as platform 1.312785 and whole-count 12.000000. 2.016667 and 5.000000 are the JISIKE crew and the check against the safety statistics course. 121.000000 is the crew over one person's hours, and 0.020167 is the crew on a base of 1,000,000 hours, both wrong builds of a teaching stream."
+  "explanation": "The course shows the golden FAR cases as platform 1.312785 and whole-count 12.000000. 2.016667 and 5.000000 are the JISIKE crew and the check against the safety statistics course. 121.000000 is the crew over one person's hours, and 0.020167 is the crew on a base of 1,000,000 hours, both wrong builds of a teaching stream."
  },
  {
   "prompt": "How does a FAR differ from an IRPA?",
@@ -107,7 +107,7 @@
    "A FAR follows one person through a working year, while an IRPA spreads a whole crew's expected deaths over the hours in a year."
   ],
   "answer": 1,
-  "explanation": "The digest builds the FAR from a PLL, expected deaths across everyone, divided by the exposed hours of that population, and builds the IRPA as the sum over places of LSIR times occupancy for one person. The two answer different questions and neither converts into the other by a unit change. A FAR is a rate and no probability, and the reading that has the FAR following one person swaps the roles of the two quantities."
+  "explanation": "The course builds the FAR from a PLL, expected deaths across everyone, divided by the exposed hours of that population, and builds the IRPA as the sum over places of LSIR times occupancy for one person. The two answer different questions and neither converts into the other by a unit change. A FAR is a rate and no probability, and the reading that has the FAR following one person swaps the roles of the two quantities."
  },
  {
   "prompt": "Why is 121.000000 the wrong FAR for the JISIKE crew?",
@@ -118,7 +118,7 @@
    "The PLL counts deaths across all 60 people, so its hours must be the crew's 120000; one person's hours inflate the rate sixty times."
   ],
   "answer": 3,
-  "explanation": "The digest prints 121.000000 as the PLL over one person's hours, beside the engine's 2.016667 over the crew's 120000. Dividing a group's expected deaths by one member's hours overstates the rate by the head count. The wrong base gives 0.020167, which is too small. The spill adds zero to the PLL either way, and nothing in the calculation reads the PLL as a probability."
+  "explanation": "The course shows 121.000000 as the PLL over one person's hours, beside the engine's 2.016667 over the crew's 120000. Dividing a group's expected deaths by one member's hours overstates the rate by the head count. The wrong base gives 0.020167, which is too small. The spill adds zero to the PLL either way, and nothing in the calculation reads the PLL as a probability."
  },
  {
   "prompt": "A FAR call is made directly. What must the caller pass to fatalAccidentRateFromPll?",
@@ -129,7 +129,7 @@
    "individualRiskPerYr and the hours one person spends on the plant"
   ],
   "answer": 0,
-  "explanation": "The function table in the digest lists pllPerYr and exposedHoursPerYr, and the call returns the FAR per 100,000,000 exposed hours. The scenarios go to potentialLossOfLife first, whose PLL is then passed in. No head count is taken, since the caller supplies the exposed hours directly. An individual risk per year belongs to other functions and never feeds the FAR."
+  "explanation": "The function table in the course lists pllPerYr and exposedHoursPerYr, and the call returns the FAR per 100,000,000 exposed hours. The scenarios go to potentialLossOfLife first, whose PLL is then passed in. No head count is taken, since the caller supplies the exposed hours directly. An individual risk per year belongs to other functions and never feeds the FAR."
  },
  {
   "prompt": "A report quotes the JISIKE crew FAR as 2.016667 with no unit beside it. What does the course's vocabulary require?",
@@ -140,7 +140,7 @@
    "That it be stated per person per year of exposure on board"
   ],
   "answer": 2,
-  "explanation": "Section 34 rules that FAR is always per 100,000,000 exposed hours, because the same rate appears in the safety statistics course and a bare number invites a wrong base. Expected fatalities per year is the unit of the PLL. A FAR is never a probability, and a figure per person per year is the shape of an individual risk."
+  "explanation": "The course's vocabulary rules that FAR is always per 100,000,000 exposed hours, because the same rate appears in the safety statistics course and a bare number invites a wrong base. Expected fatalities per year is the unit of the PLL. A FAR is never a probability, and a figure per person per year is the shape of an individual risk."
  },
  {
   "prompt": "The JISIKE crew FAR is 2.016667. What would the same PLL give on a base of 1,000,000 hours, and why is that wrong?",
@@ -151,7 +151,7 @@
    "2.016667, since the base cancels out whenever the hours are the whole crew's own"
   ],
   "answer": 1,
-  "explanation": "The digest prints 0.020167 for a base of 1,000,000 hours, derived, and the engine's base is 100,000,000 hours, imported from the safety statistics engine. 121.000000 is a different mistake, one person's hours. The safety statistics course uses the same 100,000,000 hour base, and its matching case is 5.000000 on other inputs. The base never cancels, since it multiplies the PLL directly."
+  "explanation": "The course shows 0.020167 for a base of 1,000,000 hours, derived, and the engine's base is 100,000,000 hours, imported from the safety statistics engine. 121.000000 is a different mistake, one person's hours. The safety statistics course uses the same 100,000,000 hour base, and its matching case is 5.000000 on other inputs. The base never cancels, since it multiplies the PLL directly."
  },
  {
   "prompt": "The engine's FAR is built from a PLL. What does that make the FAR's deaths?",
@@ -162,6 +162,6 @@
    "The deaths of scenarios with an N of one or more, since fractional N is dropped before the rate is taken"
   ],
   "answer": 0,
-  "explanation": "PLL is expected fatalities per year, the sum of f times a stated N, so the FAR built on it counts deaths expected, which is how the digest separates it from the safety statistics course that counts deaths that happened. The FAR takes the whole PLL, every scenario included. A fractional N such as 0.5 stays in the sum, since the engine accepts an expected number that is not whole."
+  "explanation": "PLL is expected fatalities per year, the sum of f times a stated N, so the FAR built on it counts deaths expected, which is how the course separates it from the safety statistics course that counts deaths that happened. The FAR takes the whole PLL, every scenario included. A fractional N such as 0.5 stays in the sum, since the engine accepts an expected number that is not whole."
  }
 ]

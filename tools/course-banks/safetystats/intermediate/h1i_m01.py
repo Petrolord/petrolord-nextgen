@@ -41,7 +41,7 @@ q(2, "On the IMO ladder at 1 event, what is the upper 95 percent limit divided b
  ["5.546326, which is the width of the interval measured against the rate on that row",
   "29.828286, which is the same ratio read on the second rung of the ladder",
   "1.494848, which is the ratio at the top of the ladder at 100 events"],
- "The row for 1 event reads 0.050636 to 11.143287, and the digest prints their ratio as 220.068159. The figure 5.546326 is the width over the rate, a different column, and 29.828286 belongs to 2 events.")
+ "The row for 1 event reads 0.050636 to 11.143287, and the course gives their ratio as 220.068159. The figure 5.546326 is the width over the rate, a different column, and 29.828286 belongs to 2 events.")
 
 q(3, "The IMO ladder's ratio of limits falls from 220.068159 to 29.828286 between 1 and 2 events, and only from 1.776261 to 1.494848 between 50 and 100. What does that say about adding exposure?",
  "Most of the certainty arrives early, so the first few extra events narrow the interval far more than later ones.",

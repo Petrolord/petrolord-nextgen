@@ -103,9 +103,9 @@ q(3, "The Well Integrity and Plug and Abandonment course is the one live course 
   "It states that it cites this module for a remaining life, so the barrier verdict there is reached from the allowance arithmetic computed here."],
  "A barrier envelope is a different object from a corrosion allowance and neither term substitutes for the other. A lesson here may name that course as the owner of barrier logic and must not borrow its vocabulary.")
 
-q(2, "On one of the digest's teaching streams the allowance is 3.175000 mm with 0.400000 mm consumed, the rate is 1.676428 mm/yr, the remaining life is 1.655305 yr and the required allowance is 33.528563 mm. What do those four numbers rest on?",
+q(2, "On one of the course's teaching streams the allowance is 3.175000 mm with 0.400000 mm consumed, the rate is 1.676428 mm/yr, the remaining life is 1.655305 yr and the required allowance is 33.528563 mm. What do those four numbers rest on?",
  "A division and a multiplication over a typed allowance, a typed consumed depth and the correlation's rate, and none of them knows the wall thickness or the pipe grade.",
- ["The pin table alone, since a remaining life is itself one of the thirty constants the digest measures out of the engine and pins against a literal.",
+ ["The pin table alone, since a remaining life is itself one of the thirty constants the course measures out of the engine and pins against a literal.",
   "A minimum thickness the module computes from the allowance, which is what makes the required allowance of 33.528563 mm a statement about a real wall.",
   "The Barlow relation, which this module applies with a default design factor so that the allowance can be checked against the wall it is taken off."],
  "The arithmetic inside the door is exact, and the rate it divides by inherits whatever the correlation rests on. On another stream the same allowance at 0.076842 mm/yr gives 36.112878 yr, a required allowance of 1.536848 mm and a shortfall of 0.000000 mm.")

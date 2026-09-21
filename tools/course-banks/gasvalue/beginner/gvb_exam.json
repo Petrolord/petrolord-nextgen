@@ -22,7 +22,7 @@
   "explanation": "The constants table: GAL_PER_FT3, 7.480519, US gallons in one cubic foot."
  },
  {
-  "prompt": "In the digest's arithmetic for kgPerMscf, which constant turns pounds into kilograms?",
+  "prompt": "In the course's arithmetic for kgPerMscf, which constant turns pounds into kilograms?",
   "options": [
    "SCF_PER_LBMOL, 379.49",
    "GAL_PER_FT3, 7.480519",
@@ -33,7 +33,7 @@
   "explanation": "The kilograms are the pounds over LB_PER_KG, pounds in one kilogram. SCF_PER_LBMOL gives the lb-mol in one Mscf (1000 over it), GAL_PER_FT3 is gallons in a cubic foot and PSI_PER_BAR is lpgCng's psi in one bar."
  },
  {
-  "prompt": "The digest recomputes kgPerMscf for pure methane and pure carbon dioxide from the constants, beside the engine. What does its difference column read?",
+  "prompt": "The course recomputes kgPerMscf for pure methane and pure carbon dioxide from the constants, beside the engine. What does its difference column read?",
   "options": [
    "0.0000 on methane, with the CO2 row left to the engine",
    "19.1757 on methane and 52.6038 on carbon dioxide",
@@ -77,7 +77,7 @@
   "explanation": "The note's second sentence is the request: \"Check the analysis if that was not intended.\" The first reports the raw sum."
  },
  {
-  "prompt": "OGUTA is the lean non-associated gas. Which ghvBtuScf does the digest print for it?",
+  "prompt": "OGUTA is the lean non-associated gas. Which ghvBtuScf does the course print for it?",
   "options": [
    "1248.4110",
    "1035.6050",
@@ -88,7 +88,7 @@
   "explanation": "OGUTA's ghvBtuScf is 1035.6050. 1248.4110 is EGBEMA, 1210.7800 the studio's opening gas and 1010 is methane's typical heating value in the reference table."
  },
  {
-  "prompt": "What does the digest print as OGUTA's inertMoleFraction, and from which fractions?",
+  "prompt": "What does the course print as OGUTA's inertMoleFraction, and from which fractions?",
   "options": [
    "0.0150, from CO2 0.0150 alone",
    "0.0270, from N2 0.0120 plus CO2 0.0150",
@@ -118,7 +118,7 @@
    "1.0580"
   ],
   "answer": 3,
-  "explanation": "SECTION 5 prints OGUTA at carbonPerMol 1.0580; 1.0430 is its hydrocarbon count, and the other two are EGBEMA and the studio gas."
+  "explanation": "The gas lesson prints OGUTA at carbonPerMol 1.0580; 1.0430 is its hydrocarbon count, and the other two are EGBEMA and the studio gas."
  },
  {
   "prompt": "A sheet is typed with every mole fraction zero. What does characteriseGas answer?",
@@ -184,7 +184,7 @@
    "Either way the call is refused with the on-stream days sentence"
   ],
   "answer": 1,
-  "explanation": "SECTION 13: omitted from the call, the days take the stated default (onstreamDays 350). Typed blank (''), they are refused with the range more than 0 and no more than 366."
+  "explanation": "The refusals lesson: omitted from the call, the days take the stated default (onstreamDays 350). Typed blank (''), they are refused with the range more than 0 and no more than 366."
  },
  {
   "prompt": "Propane's carbon number is left blank in one analysis and an unknown code, XX, carries none in another. What does characteriseGas do with each?",
@@ -198,7 +198,7 @@
   "explanation": "The propane probe reads carbonPerMol 1.2000 with the carbon number typed and with it blank. XX has no reference row: \"REFUSED: No carbon number for XX.\""
  },
  {
-  "prompt": "From which carbon count does the digest's every-unburned-carbon methane shortcut start?",
+  "prompt": "From which carbon count does the course's every-unburned-carbon methane shortcut start?",
   "options": [
    "hydrocarbonCarbonPerMol, only the carbon that can burn",
    "methaneMoleFraction, the methane in the gas",
@@ -231,7 +231,7 @@
   "explanation": "The range reads methaneShareOfFlareCo2e 0.2376 at 0.95, 0.1548 at 0.97, 0.0565 at 0.99 and 0.0000 at 1. 0.1110 is the share at the comparison GWP of 20, with both efficiencies given."
  },
  {
-  "prompt": "In the digest's words, what is the destruction efficiency?",
+  "prompt": "In the course's words, what is the destruction efficiency?",
   "options": [
    "The share oxidised to CO2",
    "The share of the gas sent to an unlit flare",
@@ -239,7 +239,7 @@
    "The share of the CO2 that passes through"
   ],
   "answer": 2,
-  "explanation": "SECTION 11 defines it as the share of hydrocarbon destroyed; its partner is the share oxidised to CO2."
+  "explanation": "The efficiency lesson defines it as the share of hydrocarbon destroyed; its partner is the share oxidised to CO2."
  },
  {
   "prompt": "The destruction efficiency stands in at 0.97 on EGBEMA. Which CO2e comes back?",
@@ -253,7 +253,7 @@
   "explanation": "With the destruction efficiency standing in at 0.97, flareCo2eTonnes reads 218744.723. 215946.438 is with both efficiencies given; 237591.952 and 199897.495 are the 0.95 and 0.99 rows of the range."
  },
  {
-  "prompt": "Whose choice does the digest say the assessment report behind a methane GWP is?",
+  "prompt": "Whose choice does the course say the assessment report behind a methane GWP is?",
   "options": [
    "The engine's, which ships a default",
    "The study's",
@@ -283,7 +283,7 @@
    "2.6894"
   ],
   "answer": 0,
-  "explanation": "2.4003 is the studio row of SECTION 7's ethane column. 2.6894 is that gas's gpmC3Plus."
+  "explanation": "2.4003 is the studio row of the liquids lesson's ethane column. 2.6894 is that gas's gpmC3Plus."
  },
  {
   "prompt": "What does the sum row of EGBEMA's per-component gallons print?",
@@ -305,7 +305,7 @@
    "Neither, as ethane reads recoverable false"
   ],
   "answer": 2,
-  "explanation": "The C2 row reads recoverable true, in gpmC2Plus true and in gpmC3Plus false, at 2.7737. The digest prints the same figure as gpmC2Plus minus gpmC3Plus, the ethane."
+  "explanation": "The C2 row reads recoverable true, in gpmC2Plus true and in gpmC3Plus false, at 2.7737. The course prints the same figure as gpmC2Plus minus gpmC3Plus, the ethane."
  },
  {
   "prompt": "Which figure is OGUTA's c3PlusKgPerMscf, the propane and heavier part of its mass?",
@@ -374,7 +374,7 @@
   "explanation": "The table of questions pairs the vessel and its reorder with lpgBlendProperties and lpgStorageSizing. vaporizerDuty, bottlingPlant and assetFloat answer the vaporizer, carousel and cylinders; gasMassInVessel and cascadeFills the bank and cascade; cngCompression and cngDispensing the compressor and forecourt."
  },
  {
-  "prompt": "The digest names one module flareToValue draws on. Which, and for what?",
+  "prompt": "The course names one module flareToValue draws on. Which, and for what?",
   "options": [
    "terminalDepot, for its loading-rack queue",
    "production/gasProperties, for the Z factor",
@@ -382,7 +382,7 @@
    "facilities/compression, for its compressors"
   ],
   "answer": 2,
-  "explanation": "flareToValue scales capital with the power law in modularRefinery. terminalDepot, production/gasProperties and facilities/compression are the three modules the digest names lpgCng calling."
+  "explanation": "flareToValue scales capital with the power law in modularRefinery. terminalDepot, production/gasProperties and facilities/compression are the three modules the course names lpgCng calling."
  },
  {
   "prompt": "When the destruction efficiency stands in for the combustion efficiency, what does the engine's note say about the CO2?",
@@ -415,10 +415,10 @@
    "blank ('')"
   ],
   "answer": 0,
-  "explanation": "EGBEMA's 355 days are answered, scfPerYear 2662500000. The refusal states the range, more than 0 and no more than 366, and 0, 367 and a blank are all refused in the digest's table."
+  "explanation": "EGBEMA's 355 days are answered, scfPerYear 2662500000. The refusal states the range, more than 0 and no more than 366, and 0, 367 and a blank are all refused in the course's table."
  },
  {
-  "prompt": "Which of these does the digest state as a limit of the flare model?",
+  "prompt": "Which of these does the course state as a limit of the flare model?",
   "options": [
    "An unlit flare is not modelled.",
    "A gas that carries CO2 is not modelled.",
@@ -429,7 +429,7 @@
   "explanation": "The stated limits: the efficiencies have no default, an unlit flare is not modelled, the GWP and credit prices are case inputs, and the reference figures are typical. EGBEMA carries N2 0.018 and CO2 0.028 and a combustion efficiency of 0.955 below its 0.97, and is answered."
  },
  {
-  "prompt": "On the Flare Gas to Value Studio's opening flare, which parcel does the digest run?",
+  "prompt": "On the Flare Gas to Value Studio's opening flare, which parcel does the course run?",
   "options": [
    "7.5 MMscfd on 355 days",
    "10 MMscfd on 355 days",
@@ -440,7 +440,7 @@
   "explanation": "The studio's opening gas is run at 10 MMscfd and 350 days with the efficiencies blank, and abatement refuses. 7.5 MMscfd on 355 days is EGBEMA."
  },
  {
-  "prompt": "Which record does the digest describe as a flow station in Imo State flaring associated gas?",
+  "prompt": "Which record does the course describe as a flow station in Imo State flaring associated gas?",
   "options": [
    "EGBEMA",
    "OGUTA",
@@ -451,14 +451,14 @@
   "explanation": "EGBEMA is the flow station flaring associated gas. OGUTA is a lean non-associated gas, KANO an LPG storage and bottling plant and IBAFO a CNG mother station. Every record is invented; the places are real."
  },
  {
-  "prompt": "What does the digest say of EGBEMA's efficiencies, 0.97 and 0.955?",
+  "prompt": "What does the course say of EGBEMA's efficiencies, 0.97 and 0.955?",
   "options": [
    "They are the tiered default pair of 40 CFR 98.233(n)(1).",
-   "They are invented and illustrative, as every efficiency in the digest is.",
+   "They are invented and illustrative, as every efficiency in the course is.",
    "They are the NUPRC flare regulations' basis for Imo State.",
    "They were measured on the Egbema flare by the flare study."
   ],
   "answer": 1,
-  "explanation": "The digest's preamble: every analysis, efficiency, GWP, price, cost, fill limit and vehicle figure is invented and illustrative, and no figure is a measured flare or a regulation."
+  "explanation": "The course's opening note: every analysis, efficiency, GWP, price, cost, fill limit and vehicle figure is invented and illustrative, and no figure is a measured flare or a regulation."
  }
 ]

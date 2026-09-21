@@ -18,9 +18,9 @@ q(0, "Which methane does the engine count as escaping the flare?",
  ["Every unburned carbon atom, counted as methane",
   "The methane in the gas times one less the combustion efficiency",
   "The hydrocarbon carbon times one less the destruction efficiency"],
- "The methane that escapes is the methane in the gas times one less the destruction efficiency. Every unburned carbon counted as methane is the shortcut the digest prints beside the engine at 2083.055 t/yr against the engine's 1136.490.")
+ "The methane that escapes is the methane in the gas times one less the destruction efficiency. Every unburned carbon counted as methane is the shortcut the course prints beside the engine at 2083.055 t/yr against the engine's 1136.490.")
 
-q(1, "What does the digest print for EGBEMA's methane if every unburned carbon atom is counted as methane, and over the engine's figure?",
+q(1, "What does the course print for EGBEMA's methane if every unburned carbon atom is counted as methane, and over the engine's figure?",
  "2083.055 t/yr, 1.8329 over the engine's 1136.490",
  ["3788.301 t/yr, 1.8329 over the engine's 1136.490",
   "2083.055 t/yr, 1.8329 over the engine's 1531.658",
@@ -46,7 +46,7 @@ q(0, "Which of the two efficiencies changes how much of the CO2 already in the g
  ["The combustion efficiency, which sets the CO2.",
   "The destruction efficiency, which sets the share destroyed.",
   "Both, through the product of the two efficiencies."],
- "The digest: \"The CO2 already in the gas leaves the flare as CO2 at every efficiency, and none of it is methane.\" The all-CO2 probe reads 140054.324 t/yr at EGBEMA's efficiencies and at both efficiencies 0.5.")
+ "The course states: \"The CO2 already in the gas leaves the flare as CO2 at every efficiency, and none of it is methane.\" The all-CO2 probe reads 140054.324 t/yr at EGBEMA's efficiencies and at both efficiencies 0.5.")
 
 q(2, "At what molar mass does the flare weigh its CO2 tonnes?",
  "44.009 kg/kmol, from FLARE_MOLAR_MASS",
@@ -83,14 +83,14 @@ q(3, "In the destruction efficiency range (combustion left out), which input giv
   "0.97"],
  "The range reads methane 3788.301 at 0.9, 1894.151 at 0.95, 1136.490 at 0.97, 378.830 at 0.99 and 0.000 at 1.")
 
-q(1, "Which efficiency does the digest define as the share oxidised to CO2?",
+q(1, "Which efficiency does the course define as the share oxidised to CO2?",
  "The combustion efficiency, which sets the CO2",
  ["The destruction efficiency, which sets the CO2",
   "The destruction efficiency, which sets the methane",
   "The combustion efficiency, which sets the methane"],
  "The DESTRUCTION efficiency is the share of hydrocarbon destroyed and sets the methane. The COMBUSTION efficiency is the share oxidised to CO2 and sets the CO2. A combustion efficiency cannot exceed the destruction efficiency.")
 
-q(0, "In EGBEMA's \"left out minus given\" row the CO2 reads 2798.286 and the CO2e 2798.285, with the methane at 0.000. What reason does the digest give?",
+q(0, "In EGBEMA's \"left out minus given\" row the CO2 reads 2798.286 and the CO2e 2798.285, with the methane at 0.000. What reason does the course give?",
  "Each tonnage is reported to three decimals before the difference is taken.",
  ["The CO2e carries the methane at the GWP, and the methane moved slightly.",
   "The CO2e is formed at 0.955 and the CO2 at 0.97.",

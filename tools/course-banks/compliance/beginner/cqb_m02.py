@@ -15,7 +15,7 @@ q(1, "REG-2026-005, the radioactive source licence, is Active with a due date of
   "Due soon, counted to 2026-12-31."],
  "The next action date is the earlier of the due date and the expiry, here 2026-09-30. A passed expiry gives Expired, and explainStatus says \"The permit expired 15 days ago.\""),
 
-q(3, "The digest varies REG-2026-005 one field at a time. Which single variant makes the licence read Overdue?",
+q(3, "The course varies REG-2026-005 one field at a time. Which single variant makes the licence read Overdue?",
  "The due date moved to 2026-10-01 with no expiry.",
  ["The expiry removed.",
   "The expiry moved out to 2027-09-30.",
@@ -99,7 +99,7 @@ q(3, "On track sits fourth in complianceStatus.STATUS_SEVERITY and Compliant fif
   "A lifecycle other than Active."],
  "REG-2026-003 and REG-2026-004 each give the reason that the last filing was for an earlier period, so nothing has been filed for this one yet. REG-2026-008 was filed inside its period and REG-2026-006 is a filed One-off. All four are Active with no expiry, and only REG-2026-006's due date has passed."),
 
-q(1, "The digest's variant sets REG-2026-005's lifecycle to Superseded. Of these summarise counts, which one would lose the licence?",
+q(1, "The course's variant sets REG-2026-005's lifecycle to Superseded. Of these summarise counts, which one would lose the licence?",
  "Expired",
  ["Overdue",
   "No date set",

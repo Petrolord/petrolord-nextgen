@@ -55,7 +55,7 @@
   "explanation": "Quote the share column when you are deciding what to improve, and quote the total when you are stating what the meter is worth."
  },
  {
-  "prompt": "What does the digest print about the two largest shares of the variance on the ABOH run at its design reading?",
+  "prompt": "What does the course print about the two largest shares of the variance on the ABOH run at its design reading?",
   "options": [
    "The discharge coefficient at 74.045614 percent against expansibility at 11.847298 percent, a difference of 62.198316 and a ratio of 6.250000.",
    "The discharge coefficient at 74.045614 percent against density at 6.664105 percent, which are the two terms the engine names on that run.",
@@ -154,7 +154,7 @@
   "explanation": "The engine's own words in that case are that the two shares are too close to call a dominant term. In a root sum of squares two terms of similar share have to be attacked together."
  },
  {
-  "prompt": "On the ABOH run at its design reading the lead is clear, and the digest records where that stops being true. Where?",
+  "prompt": "On the ABOH run at its design reading the lead is clear, and the course records where that stops being true. Where?",
   "options": [
    "At a reading of 16.862007 in H2O.",
    "At a reading of 15.000000 in H2O, which is the same reading the name changes at.",

@@ -39,14 +39,14 @@ q(2, "Of the 83 rows of NIOSH Table 1-2, how many fall outside their printed tol
  ["0, since both coefficients round to the same printed decimal.",
   "150, every row, since the exact coefficient is refuted.",
   "83, since the table was typed from the exact values."],
- "Digest section 5: with the exact coefficient 49 of the 83 printed rows fall outside their printed tolerance, so the table was computed with the coefficient NIOSH prints. The tempting 0 is the OSHA Table A-1 result, 0 of 150, because the OSHA gap is too small to move a printed decimal. Some NIOSH rows, such as 20.000000 percent, cannot tell the two apart.")
+ "The course records it: with the exact coefficient 49 of the 83 printed rows fall outside their printed tolerance, so the table was computed with the coefficient NIOSH prints. The tempting 0 is the OSHA Table A-1 result, 0 of 150, because the OSHA gap is too small to move a printed decimal. Some NIOSH rows, such as 20.000000 percent, cannot tell the two apart.")
 
 q(0, "Eight hours at a constant 100 dBA on the NIOSH preset: what TWA does the engine report?",
  "100.051500 dBA, a little above the level, the cost of the printed 10.0.",
  ["100.000000 dBA, since a constant level always returns itself as its TWA.",
   "97.000000 dBA, since the NIOSH scale sits 3 dB below the OSHA scale.",
   "85.000000 dBA, since a TWA on NIOSH is stated at its criterion level."],
- "Digest section 5 measures 100.051500 dBA on the NIOSH preset, where the level itself is 100. The tempting 100.000000 dBA is what a custom criterion with the exact coefficient returns for the same record. The printed 10.0 sits 0.034215715338 dB above the exact coefficient, and that excess is what lifts the TWA above the constant level.")
+ "The course measures 100.051500 dBA on the NIOSH preset, where the level itself is 100. The tempting 100.000000 dBA is what a custom criterion with the exact coefficient returns for the same record. The printed 10.0 sits 0.034215715338 dB above the exact coefficient, and that excess is what lifts the TWA above the constant level.")
 
 q(3, "A criterion typed by hand, with no coefficient given, has a 4 dB decibel exchange rate. Which TWA coefficient does the engine default to?",
  "The exact one, the decibel exchange rate over log10 2.",

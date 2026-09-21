@@ -13,7 +13,7 @@ q(2, "Three relief cases on one train are gathered on one page, one gas, one liq
  ["That the three cases can be ranked against each other by load, which is how the governing case on a train is chosen.",
   "That the three required areas stand in a relationship this engine works out for itself and then prints as a ratio.",
   "That the three cases protect one vessel, so exactly one of them is the size that vessel is built to."],
- "A load and a set of conditions arrive, a relieving pressure is worked out, one factor is computed and one is typed, a coefficient is stated, and out comes an area, a letter and a margin. The digest states only that these are three relief cases on one train, and it ranks nothing among them."),
+ "A load and a set of conditions arrive, a relieving pressure is worked out, one factor is computed and one is typed, a coefficient is stated, and out comes an area, a letter and a margin. The course states only that these are three relief cases on one train, and it ranks nothing among them."),
 
 q(1, "Which pairing of a computed factor with a typed one is correct?",
  "Gas has a critical ratio computed and Kb typed, liquid has Kv computed and Kw typed, steam has KN computed and KSH typed.",
@@ -41,7 +41,7 @@ q(2, "What can be said about the three loads of 68000.0000 lb/hr, 860.0000 gpm a
  ["They can be ranked, since the steam load is the largest of the three and is therefore the governing case on the train.",
   "They can be compared once the liquid rate has been converted, using the specific gravity that the case already states.",
   "They are three readings of one load, taken at the three points on the train where it is measured."],
- "The three columns cannot be ranked by load and nothing in the digest offers a conversion between them. The required areas are comparable, because they are the same quantity in the same unit."),
+ "The three columns cannot be ranked by load and nothing in the course offers a conversion between them. The required areas are comparable, because they are the same quantity in the same unit."),
 
 q(0, "Two of the three streams end at the L orifice from required areas of 2.223779 in2 and 1.867758 in2. What does that show?",
  "The ladder at work, since there is nothing between K and L to buy.",

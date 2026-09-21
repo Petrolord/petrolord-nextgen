@@ -79,7 +79,7 @@ q(2, "What do the oracles check about a gate, and what do they leave unchecked?"
  ["They check the wording of each refusal, sentence by sentence, against a golden copy.",
   "They check the verdict and the wording both, for gates that name a standard.",
   "They check neither, leaving gates to the app screens that display them."],
- "Every refusal sentence in the digest is the engine's own and is quoted rather than checked. That is why this course quotes a refusal verbatim or describes it, and never rewords one inside quotation marks.")
+ "Every refusal sentence in the course is the engine's own and is quoted rather than checked. That is why this course quotes a refusal verbatim or describes it, and never rewords one inside quotation marks.")
 
 q(1, "Which module's oracle carries the most golden cases?",
  "qualityAssurance, with 422",

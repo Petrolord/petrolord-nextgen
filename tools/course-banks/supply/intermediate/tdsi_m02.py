@@ -15,21 +15,21 @@ q(1, "rackQueue's mean wait = Erlang C / (bays x service rate - arrivals). Which
  ["The utilisation, 0.900000.",
   "The Erlang B worked out from it, 0.270685.",
   "The offered load of the traffic, 3.6000 erlangs."],
- "The IBAFO table prints the probability of waiting as Erlang C, 0.787753, and the mean wait formula divides that Erlang C. 0.900000 is the utilisation and 3.6000 erlangs the offered load. 0.270685 is the Erlang B the digest works out from the Erlang C, and the engine does not export it.")
+ "The IBAFO table prints the probability of waiting as Erlang C, 0.787753, and the mean wait formula divides that Erlang C. 0.900000 is the utilisation and 3.6000 erlangs the offered load. 0.270685 is the Erlang B the course works out from the Erlang C, and the engine does not export it.")
 
 q(3, "IBAFO's mean wait is 47.2652 minutes. Which trucks is that figure averaged over?",
  "Every arriving truck, the ones that load at once counted as zero.",
  ["Only the trucks that queue, since a truck that finds a free bay has no wait to record.",
   "The trucks that queue in the peak hour, the only hour the rack is ever full.",
   "The trucks on the bays and in the yard together, the whole visit of each one."],
- "The digest says the engine's averageWaitMinutes averages over every truck, the ones that load at once included. The mean wait of a truck that does queue, 47.2652 / 0.787753 = 60.0000 minutes, is worked out in the digest. The mean time on site is a separate row of the table.")
+ "The course says the engine's averageWaitMinutes averages over every truck, the ones that load at once included. The mean wait of a truck that does queue, 47.2652 / 0.787753 = 60.0000 minutes, is worked out in the course. The mean time on site is a separate row of the table.")
 
-q(0, "A driver who queued asks what the average wait is for trucks that actually queue at IBAFO. Which figure does the digest give, worked out from the engine's figures?",
+q(0, "A driver who queued asks what the average wait is for trucks that actually queue at IBAFO. Which figure does the course give, worked out from the engine's figures?",
  "60.0000 minutes, the mean wait over the probability of waiting.",
  ["47.2652 minutes, the engine's averageWaitMinutes.",
   "7.0353 minutes, the 5 bay wait.",
   "24 minutes, the mean time on the bay."],
- "The digest prints 47.2652 / 0.787753 = 60.0000 minutes and labels it as worked out from the engine's figures. The engine's 47.2652 averages over every truck; dividing by the probability of waiting leaves the average over the trucks that queue.")
+ "The course prints 47.2652 / 0.787753 = 60.0000 minutes and labels it as worked out from the engine's figures. The engine's 47.2652 averages over every truck; dividing by the probability of waiting leaves the average over the trucks that queue.")
 
 q(2, "Read the arrivals sweep at 8 trucks an hour on IBAFO's 4 bays. Which utilisation, probability of waiting and mean wait does that row print, in that order?",
  "0.800000, 0.596432 and 17.8930 minutes.",
@@ -38,7 +38,7 @@ q(2, "Read the arrivals sweep at 8 trucks an hour on IBAFO's 4 bays. Which utili
   "0.800000, 0.596432 and 47.2652 minutes."],
  "The arrivals sweep prints a utilisation of 0.800000, a probability of waiting of 0.596432 and a mean wait of 17.8930 minutes at 8 arrivals. 0.428654 and 8.5731 minutes are the 7 arrival row, and 0.787753 and 47.2652 minutes the 9 arrival row.")
 
-q(3, "The digest checks the queue length by Little's law: 9 x 47.2652 / 60 = 7.0898. Why is the division by 60 there?",
+q(3, "The course checks the queue length by Little's law: 9 x 47.2652 / 60 = 7.0898. Why is the division by 60 there?",
  "It turns the wait from minutes into hours.",
  ["It turns 9 arrivals an hour into arrivals a minute for each bay.",
   "It spreads the queue over a bay's hour.",
@@ -50,7 +50,7 @@ q(1, "What does IBAFO's mean queue length of 7.0898 trucks count?",
  ["Trucks waiting and trucks on the bays, on average.",
   "The most trucks the yard holds at the busiest moment.",
   "Trucks waiting for a bay in the peak hour alone."],
- "The digest reaches 7.0898 by Little's law from the mean wait: 9 x 47.2652 / 60, the arrivals times the wait in hours. The time on the bay is not in that line. The figure is a mean queue length, so it is no maximum, and rackQueue has no peak hour.")
+ "The course reaches 7.0898 by Little's law from the mean wait: 9 x 47.2652 / 60, the arrivals times the wait in hours. The time on the bay is not in that line. The figure is a mean queue length, so it is no maximum, and rackQueue has no peak hour.")
 
 q(2, "The load minutes are swept on IBAFO's 4 bays at 9 arrivals an hour. If the mean load drops from 24 minutes to 20, which printed pair describes the change?",
  "Mean wait from 47.2652 minutes to 10.1887.",
@@ -108,12 +108,12 @@ q(1, "Traffic at IBAFO grows from 9 to 9.5 arrivals an hour on the same 4 bays. 
   "From 47.2652 minutes to none."],
  "The arrivals sweep prints 106.9703 minutes at 9.5 arrivals an hour, and the refusal comes at 10. 17.8930 minutes is the row at 8 arrivals, and 245.7297 minutes is a load minutes row.")
 
-q(2, "Why does the digest print the Little's law line beside the engine's queue length?",
+q(2, "Why does the course print the Little's law line beside the engine's queue length?",
  "It reaches the engine's 7.0898 a second way, from the arrivals and the mean wait.",
  ["It shows the yard never holds more than 7.0898 trucks at any moment.",
   "It derives the Erlang B of the rack from the engine's queue length.",
   "It replaces the engine's figure, which the Erlang recursion cannot form."],
- "The digest prints Little's law, queue length = arrivals per hour x mean wait in hours: 9 x 47.2652 / 60 = 7.0898, and beside it the engine's queue length, 7.0898. The Erlang B is worked out from the Erlang C, and a mean queue is no maximum.")
+ "The course prints Little's law, queue length = arrivals per hour x mean wait in hours: 9 x 47.2652 / 60 = 7.0898, and beside it the engine's queue length, 7.0898. The Erlang B is worked out from the Erlang C, and a mean queue is no maximum.")
 
 emit(Q, '/root/wt-md-supply-nextgen/tools/course-banks/supply/intermediate/tdsi_m02.json', label='tdsi_m02', expect_n=15)
 finish()

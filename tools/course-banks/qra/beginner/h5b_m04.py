@@ -39,7 +39,7 @@ q(3,
   ["0.000081000000 per year, since every scenario adds its whole frequency to the LSIR at a place however far the place lies from it.",
    "0.000006545000 per year, the whole control room LSIR, since the flash fire is the outcome that sets the LSIR at every place.",
    "0.000081000000 per year times the occupancy of the control room, which is where a place's distance enters the sum."],
-  "A scenario whose probability of death is zero at a place contributes zero there, and the digest says the flash fire at the control room, which lies outside the flammable cloud, adds 0.000000000000. A frequency adds only through its probability of death, which is a stated input. 0.000006545000 is the whole control room LSIR, which comes from the other three outcomes, and occupancy belongs to the individual risk per annum of a person.")
+  "A scenario whose probability of death is zero at a place contributes zero there, and the course says the flash fire at the control room, which lies outside the flammable cloud, adds 0.000000000000. A frequency adds only through its probability of death, which is a stated input. 0.000006545000 is the whole control room LSIR, which comes from the other three outcomes, and occupancy belongs to the individual risk per annum of a person.")
 
 q(3,
   "What share of the EREMOR process deck LSIR does the flash fire carry, and what is its contribution?",
@@ -79,7 +79,7 @@ q(1,
   ["The LSIR per year, since each probability of death already carries its scenario frequency folded inside it as a stated input.",
    "The probability of death of a person at the process deck over a whole year, which the engine reports beside the LSIR.",
    "A worst case LSIR, larger than the engine's figure."],
-  "The digest says summing the probabilities of death without their frequencies gives a number with no unit at all, and that the LSIR is the SUM of f times Pd. A probability of death is a conditional probability given the scenario, so it carries no frequency. The engine reports no yearly probability of death beside the LSIR, and a sum with no unit is no bound on an LSIR, however large it looks.")
+  "The course says summing the probabilities of death without their frequencies gives a number with no unit at all, and that the LSIR is the SUM of f times Pd. A probability of death is a conditional probability given the scenario, so it carries no frequency. The engine reports no yearly probability of death beside the LSIR, and a sum with no unit is no bound on an LSIR, however large it looks.")
 
 q(0,
   "Why does an LSIR describe a PLACE rather than a person?",
@@ -95,7 +95,7 @@ q(3,
   ["At the release frequency, running every step of the chain in this course so that each learner reproduces the source from the start.",
    "At the contribution per year, taking every earlier value from the source and reproducing none of the chain from the printed numbers.",
    "At the wind sector count, since that is the first step the source prints."],
-  "The digest says the early steps, the concentration, the probit and the probability integral, are consequence modelling and belong to the consequence course; from the effective cloud width onward the steps are QRA arithmetic, and this course starts there. The earlier steps are never run here, and the course does reproduce the later ones, from the probability of death through to the contribution.")
+  "The course says the early steps, the concentration, the probit and the probability integral, are consequence modelling and belong to the consequence course; from the effective cloud width onward the steps are QRA arithmetic, and this course starts there. The earlier steps are never run here, and the course does reproduce the later ones, from the probability of death through to the contribution.")
 
 q(2,
   "The whole Appendix 6.B chain, as the golden records it, gives a probability of death of 0.380294556093, and the source prints 0.381. What explains the gap?",
@@ -103,7 +103,7 @@ q(2,
   ["The engine has a defect in its coverage probability, which the printed 0.381 exposes at the third decimal of the chain.",
    "The source uses 8766 hours a year where the engine uses 8760, which moves every probability of death at the third decimal.",
    "The engine rounds each step to three decimals and so loses the last digit."],
-  "The digest says the whole chain gives 0.380294556093, which rounds to 0.380, and that the printed 0.381 follows only from the rounded effective cloud width of 86.2 m. The source is internally rounded, which is a fact about the SOURCE, and both routes reproduce its printed contribution of 7e-9 per year to two significant figures. No hours enter this chain, and the engine rounds no step.")
+  "The course says the whole chain gives 0.380294556093, which rounds to 0.380, and that the printed 0.381 follows only from the rounded effective cloud width of 86.2 m. The source is internally rounded, which is a fact about the SOURCE, and both routes reproduce its printed contribution of 7e-9 per year to two significant figures. No hours enter this chain, and the engine rounds no step.")
 
 q(0,
   "Step 6 of Appendix 6.B is run through `locationIndividualRisk` with f PM Pphi of 1.84e-8 per year and the printed probability of death of 0.381. What does the engine return?",
@@ -114,7 +114,7 @@ q(0,
   "Through `locationIndividualRisk` the product 1.84e-8 times 0.381 is 0.000000007010 per year, and the source prints 7e-9. 0.000000006997 is the whole chain's contribution, which uses the engine's own probability of death; this call uses the printed one as stated. The engine drops no contribution for being small, and the probability of death still multiplies the frequency.")
 
 q(2,
-  "What inputs does the digest give for the Appendix 6.B chain, and how is the coverage probability formed?",
+  "What inputs does the course give for the Appendix 6.B chain, and how is the coverage probability formed?",
   "A frequency f of 5e-7 per year, 12 wind sectors and R = 361 m; the coverage probability is Pci = nws ECW / (2 pi R).",
   ["A frequency f of 5e-7 per year, 12 wind sectors and R = 361 m; the coverage probability is ECW / R, with the sector count used later.",
    "A frequency f of 1.84e-8 per year, 12 wind sectors and R = 86.2 m; the coverage probability is nws ECW / (2 pi R).",

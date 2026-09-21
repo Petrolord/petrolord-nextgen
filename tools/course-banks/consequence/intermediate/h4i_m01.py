@@ -14,7 +14,7 @@ q(2,
  ["The burning flux, the flame length and the flame tilt from the vertical",
   "The heat of combustion, the pool area and a radiative fraction of one half",
   "The surface emissive power, the target distance squared and the wind speed"],
- "Section 14 describes the flame as a cylinder of uniform surface emissive power, and the heat flux as that power times the fraction of the target's view the cylinder fills (the view factor) times the fraction the air lets through (the transmissivity). The burning flux, flame length and tilt are upstream steps that shape the cylinder and never multiply into the heat flux directly. Pool area with a fixed fraction is no part of the model, and dividing by a distance squared with a wind term describes no expression the fire section carries.")
+ "The course describes the flame as a cylinder of uniform surface emissive power, and the heat flux as that power times the fraction of the target's view the cylinder fills (the view factor) times the fraction the air lets through (the transmissivity). The burning flux, flame length and tilt are upstream steps that shape the cylinder and never multiply into the heat flux directly. Pool area with a fixed fraction is no part of the model, and dividing by a distance squared with a wind term describes no expression the fire section carries.")
 
 q(0,
  "Using the Babrauskas form with the Table 6.5 heptane row, what burning flux in kg/(m2 s) does the engine return for a heptane pool of 1 m diameter?",
@@ -47,12 +47,12 @@ q(1,
  "A k beta of none means Table 6.5 says the burning rate is independent of the diameter in the turbulent regime, so methanol prints 0.015000 at every diameter in the sweep, 0.5 m included. 0.032998 is lng at 0.5 m, 0.032223 is kerosene there and 0.035753 is gasoline, all fuels whose half metre pools burn below their asymptotes.")
 
 q(0,
- "Heptane at a diameter of 0.5 m burns well below its large pool value. What share of the asymptote does section 14 derive for it?",
+ "Heptane at a diameter of 0.5 m burns well below its large pool value. What share of the asymptote does the course derive for it?",
  "42.31 percent of the 0.101 kg/(m2 s) asymptote",
  ["The whole asymptote, since heptane has k beta 1.1",
   "0.042728 percent, a burning flux read as a share",
   "Half of it, as the pool is half a metre wide"],
- "Section 14 derives heptane at 0.5 m as 42.31 percent of its asymptote: the table prints 0.042728 against an m\"inf of 0.101. A k beta of 1.1 does not put a half metre pool at the asymptote; only the large pools reach it. Reading 0.042728 as a percentage confuses a burning flux with a share, and a half metre diameter sets no share by itself: the share comes from the exponential in k beta D.")
+ "The course derives heptane at 0.5 m as 42.31 percent of its asymptote: the table prints 0.042728 against an m\"inf of 0.101. A k beta of 1.1 does not put a half metre pool at the asymptote; only the large pools reach it. Reading 0.042728 as a percentage confuses a burning flux with a share, and a half metre diameter sets no share by itself: the share comes from the exponential in k beta D.")
 
 q(2,
  "Which fuel key in the exported POOL_FIRE_FUELS table carries the largest m\"inf?",
@@ -68,7 +68,7 @@ q(1,
  ["The burning flux, which keeps rising with the diameter without any limit",
   "Nothing at all, because the whole fire has stopped depending on size",
   "The fuel's k beta product, which Table 6.5 lets grow with the pool"],
- "Section 14 states that a large pool burns at m\"inf and that its diameter then changes the area on fire but no longer the burning flux. The Babrauskas form has an asymptote, so the burning flux does not rise without limit. The fire as a whole still grows with the area, and k beta is a fixed property of the fuel in the table.")
+ "The course states that a large pool burns at m\"inf and that its diameter then changes the area on fire but no longer the burning flux. The Babrauskas form has an asymptote, so the burning flux does not rise without limit. The fire as a whole still grows with the area, and k beta is a fixed property of the fuel in the table.")
 
 q(2,
  "The Burgess form is used for n-hexane with a heat of combustion of 44700000 J/kg, a heat of vaporisation of 335000 J/kg, a liquid heat capacity of 2270 J/(kg K), a boiling point of 341.9 K and an ambient of 293.15 K. What burning flux in kg/(m2 s) does the engine print?",
@@ -88,15 +88,15 @@ q(0,
  ["The Burgess form has no heat of vaporisation term, so a boiling liquid gives a burning flux of exactly zero here",
   "The engine converts every boiling liquid into the Babrauskas form on its own and reports the switch as a refusal",
   "A boiling point below ambient makes the heat of combustion negative, and the engine refuses every negative input"],
- "Section 14 says the refusal exists because the printed form would shrink its denominator: dHv + Cp (Tb - Ta) assumes Tb above Ta, the liquid heated from ambient to boiling. The form does carry a heat of vaporisation. The engine never silently swaps methods; every call names its method. The heat of combustion is a stated input and a boiling point has no effect on its sign.")
+ "The course says the refusal exists because the printed form would shrink its denominator: dHv + Cp (Tb - Ta) assumes Tb above Ta, the liquid heated from ambient to boiling. The form does carry a heat of vaporisation. The engine never silently swaps methods; every call names its method. The heat of combustion is a stated input and a boiling point has no effect on its sign.")
 
 q(2,
- "Section 32 lists the Burgess burning rate as a single route quantity. What follows from that for this course?",
+ "The course lists the Burgess burning rate as a single route quantity. What follows from that for this course?",
  "It is taught and never carries a graded answer, because only its transcription stands behind it",
  ["It is graded at twelve decimals, because a single route makes it an exact quantity",
   "It is graded only when the fuel is in Table 6.5, where the asymptote gives it a check",
   "It is dropped from the engine, which exports only the Babrauskas route as a result"],
- "Section 32 says nothing independent catches a Burgess mistake copied into both engine and oracle: the transcription alone stands behind it, so it is taught and never graded. Burning fluxes print to six decimals, and twelve belongs to view factors. A Table 6.5 asymptote is a different method and cannot check Burgess. The engine does export Burgess; poolBurningRate takes 'babrauskas' or 'burgess'.")
+ "The course says nothing independent catches a Burgess mistake copied into both engine and oracle: the transcription alone stands behind it, so it is taught and never graded. Burning fluxes print to six decimals, and twelve belongs to view factors. A Table 6.5 asymptote is a different method and cannot check Burgess. The engine does export Burgess; poolBurningRate takes 'babrauskas' or 'burgess'.")
 
 q(3,
  "What does the engine answer when poolBurningRate is handed a method string it does not know?",
@@ -104,7 +104,7 @@ q(3,
  ["It falls back to Babrauskas and returns a result with a warning in its basis",
   "It returns the asymptote m\"inf of the named fuel and a basis block naming Table 6.5",
   "It refuses with the field fuel and the list of every fuel key the table carries"],
- "Section 3 tables this refusal: an unknown method names the field method with the message \"method: must be 'babrauskas' or 'burgess'\". The engine returns a result or a refusal, so it never guesses a method with a warning or hands back an asymptote in its place. The refusal that lists the fuel keys belongs to the field fuel and is for a fuel the table does not carry.")
+ "The course lists this refusal: an unknown method names the field method with the message \"method: must be 'babrauskas' or 'burgess'\". The engine returns a result or a refusal, so it never guesses a method with a warning or hands back an asymptote in its place. The refusal that lists the fuel keys belongs to the field fuel and is for a fuel the table does not carry.")
 
 q(1,
  "A caller wants a Babrauskas burning flux for a fuel that Table 6.5 does not carry. What does the engine's refusal tell them to supply?",

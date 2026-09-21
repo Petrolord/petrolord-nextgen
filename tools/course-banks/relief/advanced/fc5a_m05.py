@@ -29,7 +29,7 @@ q(0, "What is the difference between an oracle that is an independent derivation
 q(2, "The pool fire pair is held for literature, yet the oracle does check something about it. What?",
  "The unit packaging, by checking the USC pair against the published SI pair with the exponent carried through the conversion.",
  ["The exponent of 0.820000000000, which falls straight out of the log ratio of two duties taken at 100 and at 1000 ft2 respectively.",
-  "The credit between the two constants, which the digest measures as a drainage factor of 1.642857142857.",
+  "The credit between the two constants, which the course measures as a drainage factor of 1.642857142857.",
   "The physics, since the same duty comes back from a second correlation the oracle carries in SI."],
  "A packaging error would be caught even though the constants themselves are not in question. That is a hedge on a held figure rather than a check of it, and the audit column says which it is.")
 

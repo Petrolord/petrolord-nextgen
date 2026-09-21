@@ -68,7 +68,7 @@ q(3, "Both thresholds in the film stripping comparison are held. What does that 
   "It moves the step below the allowance test, since a typed comparison outranks a held one."],
  "The threshold values are held and the coupling between them is not. A verdict taken on an unsourced threshold still changes which rate is formed, so a life computed without it is a life at the wrong rate.")
 
-q(2, "The shipped default case binds on the corrosion allowance against the design life at 4.2 yr of 20 yr. What happens to the constraint under the four changes the digest sweeps?",
+q(2, "The shipped default case binds on the corrosion allowance against the design life at 4.2 yr of 20 yr. What happens to the constraint under the four changes the course sweeps?",
  "At 60 ft per second it binds on wall shear at 362 Pa, and at 1 mol percent H2S and oil wet it binds on the model not applying.",
  ["At 60 ft per second it binds on mass transfer to the wall, and at 1 mol percent H2S and oil wet it binds on wall shear on the corrosion inhibitor film.",
   "At 60 ft per second it binds on wall shear at 362 Pa, at 1 mol percent H2S on the allowance against the design life, and oil wet on the model not applying.",

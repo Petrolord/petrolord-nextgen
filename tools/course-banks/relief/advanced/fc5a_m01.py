@@ -17,7 +17,7 @@ q(0, "Every blowdown call returns the pressure below which its choked assumption
  ["The final temperature of 340.807983 degR, because the floor and the end state are both fixed by the pressure ratio and the exponent.",
   "The universal gas constant of 1545.349000000000, which this floor is the only route to since the march exports it nowhere.",
   "The end pressure of 145.000000 psia the march was asked for, because a march always stops a fixed ratio above its own floor."],
- "Section 2 measures the same 14.700000000000 three separate ways and this is the third of them. Asking a routine a question whose answer is one constant and nothing else is how a figure it never exports gets measured.")
+ "The course measures the same 14.700000000000 three separate ways and this is the third of them. Asking a routine a question whose answer is one constant and nothing else is how a figure it never exports gets measured.")
 
 q(3, "Taken to an end pressure of 25.000000 psia the same call still succeeds, still returns a time, and attaches the engine's choked-flow warning. Which way is that time wrong?",
  "Optimistic. The march keeps assuming choked flow after the flow has stopped being choked, which overstates the rate and understates the time.",
@@ -40,7 +40,7 @@ q(0, "A discharge coefficient of 0.600000 gives 366.839286 s and 1.000000 gives 
   "Rounding in the printed figures, since a blowdown time prints to six decimals and a ratio of two of them to twelve."],
  "Two readings of one quantity. A caller's figure used once and unmultiplied gives exactly this: agreement to about a part in a million, with the residue belonging to the integration rather than to the handling of the input.")
 
-q(2, "The digest builds a closed-form time from the engine's own gas coefficient, the recovered gas constant and the stated geometry, then prints the ratio of the marched time to it. What can that column catch?",
+q(2, "The course builds a closed-form time from the engine's own gas coefficient, the recovered gas constant and the stated geometry, then prints the ratio of the marched time to it. What can that column catch?",
  "A discharge coefficient applied twice, a coefficient hidden inside the mass flow, or an isentropic exponent off by one.",
  ["A wrongly stated end pressure, because the closed form integrates between the two masses the caller asked for.",
   "An error in the thinning of the trajectory, since the closed form is assembled from the 270 stations the march returns.",
@@ -61,7 +61,7 @@ q(3, "Across all 270 AFIESERE stations the temperature falls from 545.000000 deg
   "The compressibility falls away as the pressure drops, and the temperature the march prints follows it down."],
  "The march takes the expansion as isentropic at the stated exponent and holds the compressibility constant at the stated value. Both are decisions rather than results, and the audit module names them as such.")
 
-q(0, "AFIESERE returns 3469.2925 lb and 648.7449 lb, and the digest prints 0.813004 beside them. Which question does 0.813004 answer?",
+q(0, "AFIESERE returns 3469.2925 lb and 648.7449 lb, and the course prints 0.813004 beside them. Which question does 0.813004 answer?",
  "How much of the starting inventory left, as a share of it.",
  ["How far the pressure fell, as 145.000000 psia over the 1240.000000 psia the vessel started at.",
   "How much of the march ran above the choked floor of 26.758009 psia before the warning would have fired.",
@@ -103,12 +103,12 @@ q(0, "Which of these AFIESERE figures is something the march worked out rather t
   "The orifice of 1.250000 in."],
  "The stated case is the volume, both pressures, the temperature, the molecular weight, the isentropic exponent, the compressibility, the orifice and the discharge coefficient. The inventory is the first thing the march builds from them.")
 
-q(3, "The digest prints 4.473650 min and -118.862017 degF on the AFIESERE row and marks both as derived. What does that label mean here?",
- "The engine returned a time in s and a temperature in degR, and the digest converted each into a second unit.",
+q(3, "The course prints 4.473650 min and -118.862017 degF on the AFIESERE row and marks both as derived. What does that label mean here?",
+ "The engine returned a time in s and a temperature in degR, and the course converted each into a second unit.",
  ["The engine returned both, and the label records only which of its fields carry a unit at all.",
   "Both came from the closed form rather than from the march, and are printed beside the marched figures for comparison.",
   "Both were read off the last station of the trajectory rather than off the top-level fields of the return."],
- "A derived figure is arithmetic on an engine return and the digest says so. What the engine handed back is 268.419002 s and 340.807983 degR, and those are the figures an answer should be recorded at.")
+ "A derived figure is arithmetic on an engine return and the course says so. What the engine handed back is 268.419002 s and 340.807983 degR, and those are the figures an answer should be recorded at.")
 
 emit(Q, '/root/wt-fc5-nextgen/tools/course-banks/relief/advanced/fc5a_m01.json', label='fc5a_m01', expect_n=15)
 finish()

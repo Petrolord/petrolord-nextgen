@@ -33,7 +33,7 @@
   "explanation": "At 650 F the blend's curve reads 56.9474 percent. The grid reading minus the engine is 62.6816 F for the Kwale blend."
  },
  {
-  "prompt": "What does the digest print for the grid reading minus the engine, on the Kwale blend and on the studio's default pair?",
+  "prompt": "What does the course print for the grid reading minus the engine, on the Kwale blend and on the studio's default pair?",
   "options": [
    "72.8571 F on the Kwale blend and 62.6816 F on the default pair.",
    "62.6816 F on the Kwale blend and 72.8571 F on the default pair.",
@@ -44,7 +44,7 @@
   "explanation": "The Kwale grid reading is 650 F against 587.3184 F, and the default pair's is 690 F against 617.1429 F. -3.3184 and -5.1429 F are the volume-weighted means minus the engine, and -2.9207 F is the default pair's mass-weighted mean minus the engine."
  },
  {
-  "prompt": "Which volume percents make up the digest's table of other points on the Kwale blend, the T50 row among them?",
+  "prompt": "Which volume percents make up the course's table of other points on the Kwale blend, the T50 row among them?",
   "options": [
    "At 0, 25, 50, 75 and 100 percent.",
    "At each of the 14 points of the blend's curve.",
@@ -57,10 +57,10 @@
  {
   "prompt": "For the Kwale blend, what is the volume-weighted mean of the crudes' own T50, and how far does it sit from the engine?",
   "options": [
-   "584.0000 F, which the digest prints as -3.3184 F against the engine.",
-   "586.0503 F, which the digest prints as -1.2681 F against the engine.",
-   "584.0000 F, which the digest prints as 62.6816 F against the engine.",
-   "612.0000 F, which the digest prints as -5.1429 F against the engine."
+   "584.0000 F, which the course prints as -3.3184 F against the engine.",
+   "586.0503 F, which the course prints as -1.2681 F against the engine.",
+   "584.0000 F, which the course prints as 62.6816 F against the engine.",
+   "612.0000 F, which the course prints as -5.1429 F against the engine."
   ],
   "answer": 0,
   "explanation": "The volume-weighted mean of 530 and 650 at 55 and 45 is printed as 584.0000 F. 586.0503 F is the mass-weighted mean, and 612.0000 F belongs to the default pair."
@@ -68,16 +68,16 @@
  {
   "prompt": "The mass-weighted mean of the API numbers is the blend API. Does mass weighting do the same for the Kwale crudes' own T50?",
   "options": [
-   "Yes: the digest prints the mass-weighted mean minus the engine as 0.0000 F.",
-   "No: the digest prints the mass-weighted mean minus the engine as 62.6816 F.",
+   "Yes: the course prints the mass-weighted mean minus the engine as 0.0000 F.",
+   "No: the course prints the mass-weighted mean minus the engine as 62.6816 F.",
    "Yes: the mass-weighted mean of the crudes' T50 is the engine's 587.3184 F.",
-   "No: the digest prints the mass-weighted mean minus the engine as -1.2681 F."
+   "No: the course prints the mass-weighted mean minus the engine as -1.2681 F."
   ],
   "answer": 3,
   "explanation": "The Kwale row prints the mass-weighted mean of the crudes' T50 as 586.0503 F beside the engine's 587.3184 F, and the difference as -1.2681 F. 62.6816 F is the grid reading minus the engine. The 0.0000 belongs to the mass-weighted mean of the API numbers."
  },
  {
-  "prompt": "For the studio's default pair, 60 and 40, which volume-weighted and mass-weighted means of the crudes' T50 does the digest print?",
+  "prompt": "For the studio's default pair, 60 and 40, which volume-weighted and mass-weighted means of the crudes' T50 does the course print?",
   "options": [
    "584.0000 F and 586.0503 F.",
    "612.0000 F and 614.2222 F.",
@@ -88,10 +88,10 @@
   "explanation": "The default pair's row reads the volume-weighted mean of the crudes' T50 as 612.0000 F and the mass-weighted mean as 614.2222 F, beside the engine's 617.1429 F. 584.0000 F and 586.0503 F are the Kwale blend's."
  },
  {
-  "prompt": "How does the digest establish the offset watsonK adds to a temperature in F?",
+  "prompt": "How does the course establish the offset watsonK adds to a temperature in F?",
   "options": [
    "It reads it back from the function: watsonK at 0 F and SG 1, cubed, is 459.6700.",
-   "It types the published Rankine offset of 459.6700 into the digest from a table of constants.",
+   "It types the published Rankine offset of 459.6700 into the course from a table of constants.",
    "It bisects watsonK until the function stops returning a value, and takes that temperature.",
    "It takes the offset as the grid reading minus the engine, 62.6816, scaled onto the Rankine scale."
   ],
@@ -129,7 +129,7 @@
    "As the strict basis, since the interpolated T50 of a two crude blend is its mean average boiling point."
   ],
   "answer": 1,
-  "explanation": "The studio takes Tb as the blend's T50, and the page labels K as the screening figure. The digest records that choice as C13, taught here as a stated limit."
+  "explanation": "The studio takes Tb as the blend's T50, and the page labels K as the screening figure. The course records that choice as C13, taught here as a stated limit."
  },
  {
   "prompt": "Which two Watson K figures sit on the default pair's row, at T50 interpolated and then at the grid reading?",

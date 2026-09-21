@@ -41,7 +41,7 @@
    "Every severity, Observation included."
   ],
   "answer": 2,
-  "explanation": "NCR_EFFECTIVENESS_REQUIRED holds Critical and Major. On a Minor NCR the digest prints ALLOWED for one corrective action complete and never checked."
+  "explanation": "NCR_EFFECTIVENESS_REQUIRED holds Critical and Major. On a Minor NCR the course prints ALLOWED for one corrective action complete and never checked."
  },
  {
   "prompt": "What may a Minor NCR close without, once its disposition and date are recorded?",
@@ -140,7 +140,7 @@
    "The two overdue NCRs."
   ],
   "answer": 0,
-  "explanation": "The digest prints the ages the mean is taken over: 43, 64 and 117, their sum 224 over 3. The closed ages 8, 2 and 48 are not in it."
+  "explanation": "The course prints the ages the mean is taken over: 43, 64 and 117, their sum 224 over 3. The closed ages 8, 2 and 48 are not in it."
  },
  {
   "prompt": "isCapaOpen reads true for k5, the corrective action on NCR-2026-011. Is k5 in the action summarise's open 2?",
@@ -151,7 +151,7 @@
    "No. Its NCR is Voided, and summarise leaves it out."
   ],
   "answer": 3,
-  "explanation": "The open two are k2 and k6, and the overdue one is k2. The digest prints that summarise leaves k5 out of the open and overdue counts because it sits on NCR-2026-011, which is Voided."
+  "explanation": "The open two are k2 and k6, and the overdue one is k2. The course prints that summarise leaves k5 out of the open and overdue counts because it sits on NCR-2026-011, which is Voided."
  },
  {
   "prompt": "The same actions summarised with no NCRs supplied print open 3 and overdue 2. What changed?",
@@ -162,6 +162,6 @@
    "k3 counts as open again."
   ],
   "answer": 1,
-  "explanation": "The digest's line reads \"A child whose parent is not supplied counts.\" Without the NCRs the engine cannot know that k5's parent is Voided, so the counts move from open 2 and overdue 1."
+  "explanation": "The course's line reads \"A child whose parent is not supplied counts.\" Without the NCRs the engine cannot know that k5's parent is Voided, so the counts move from open 2 and overdue 1."
  }
 ]

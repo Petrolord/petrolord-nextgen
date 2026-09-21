@@ -57,7 +57,7 @@ q(1, "Why does this module export every constant it uses under a name?",
  ["So the published cases can vary each one of them in turn and record exactly what moved.",
   "So the studio can offer every one of them as a box on the page.",
   "So a gate can re-derive each one from the publication it came from."],
- "Naming a constant is what makes the difference between the three kinds visible at all, and it is what lets the digest measure four of them back out of return values."),
+ "Naming a constant is what makes the difference between the three kinds visible at all, and it is what lets the course measure four of them back out of return values."),
 
 # --- how much water a gas carries -------------------------------------------
 

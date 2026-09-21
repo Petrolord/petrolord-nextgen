@@ -74,7 +74,7 @@
    "Both are held for literature, so a screening run above the cap is reporting a convention back to the reader."
   ],
   "answer": 3,
-  "explanation": "Section 21 lists the 250 bar fugacity cap and what the correlation does above it as one held item. No graded field in this course sits above the cap for that reason."
+  "explanation": "The course lists the 250 bar fugacity cap and what the correlation does above it as one held item. No graded field in this course sits above the cap for that reason."
  },
  {
   "prompt": "A user types 3 into the box that wants a carbon dioxide mole fraction. What does the engine do?",

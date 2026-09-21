@@ -49,12 +49,12 @@ q(0, 'In the Kwale netback, what is the value lost to losses, and where does the
   '0.8 $/bbl of crude, the loss percent charged as a cost per barrel beside freight.'],
  "A loss of 0.8 percent is a volume shrinkage on the product side. 0.0696 is how far the after-the-costs reading lands from the engine's netback of 64.9473.")
 
-q(3, "If the loss percent is taken off the netback after processing and freight, what does the digest print?",
+q(3, "If the loss percent is taken off the netback after processing and freight, what does the course print?",
  "65.0169 $/bbl, which is 0.0696 above the engine's netback.",
  ["65.5412 $/bbl, which is 0.5939 above the engine's netback.",
   "64.9473 $/bbl, which is 0.0000 from the engine's netback.",
   "65.0169 $/bbl, which is 0.5939 above the engine's netback."],
- "The engine takes losses off the product value before the costs, and this reading takes them off a figure that already has processing and freight removed. The digest prints it at 65.0169, 0.0696 from the engine's 64.9473. 65.5412 is the reading with losses left out.")
+ "The engine takes losses off the product value before the costs, and this reading takes them off a figure that already has processing and freight removed. The course prints it at 65.0169, 0.0696 from the engine's 64.9473. 65.5412 is the reading with losses left out.")
 
 q(1, 'Why are processing cost and freight not reduced by the product losses?',
  'They are charged per barrel of crude, and the loss is a shrinkage of the product side only.',
@@ -68,7 +68,7 @@ q(2, "The losses left out reading lands 0.5939 above the engine's netback. Which
  ['The distance of the after-the-costs reading from the engine, 0.0696 $/bbl.',
   'The freight, 1.9000 $/bbl of crude, taken off after the losses.',
   'The processing cost, 6.8000 $/bbl of crude, taken off before freight.'],
- "The losses left out reading is 65.5412 against the engine's 64.9473, and the digest prints that difference as 0.5939, the figure it also prints as the value lost to losses at 0.8 percent.")
+ "The losses left out reading is 65.5412 against the engine's 64.9473, and the course prints that difference as 0.5939, the figure it also prints as the value lost to losses at 0.8 percent.")
 
 q(3, 'The engine can return assumedZero, unpricedCuts and unyieldedCuts. Which of them leaves the valuation complete?',
  'assumedZero: a blank cost is named and the valuation stays complete.',

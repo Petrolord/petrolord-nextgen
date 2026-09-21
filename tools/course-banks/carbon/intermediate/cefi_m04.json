@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "SECTION 14 prints the engine's method for the saving from tuning the invented Isiokpo heater. Which ratio does it give?",
+  "prompt": "The course prints the engine's method for the saving from tuning the invented Isiokpo heater. Which ratio does it give?",
   "options": [
    "(target - current) / current",
    "(target - current) / target",
@@ -11,7 +11,7 @@
   "explanation": "The method, verbatim: \"Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. The divisor is the target efficiency. Subtracting the efficiency percentages divides by a hundred and understates the saving.\""
  },
  {
-  "prompt": "The digest works the percentage-point shortcut on the invented Isiokpo figures, 410000 GJ a year on LHV. What does it print for it?",
+  "prompt": "The course works the percentage-point shortcut on the invented Isiokpo figures, 410000 GJ a year on LHV. What does it print for it?",
   "options": [
    "5923.008 GJ a year, 819.363 GJ above the engine's saving.",
    "6742.370 GJ a year, the same figure the engine returns.",
@@ -19,10 +19,10 @@
    "5923.008 GJ a year, 819.363 GJ below the engine's saving."
   ],
   "answer": 3,
-  "explanation": "SECTION 14, computed here from the engine's efficiencies: a saving fraction of 0.0144463600, which is 5923.008 GJ a year, 819.363 GJ below the engine's saving. The engine's own sentence says subtracting the percentages understates the saving. 6742.370 is annualEnergySavedGJ and 8337.934 the 2.0 row of the sweep."
+  "explanation": "The course, computed here from the engine's efficiencies: a saving fraction of 0.0144463600, which is 5923.008 GJ a year, 819.363 GJ below the engine's saving. The engine's own sentence says subtracting the percentages understates the saving. 6742.370 is annualEnergySavedGJ and 8337.934 the 2.0 row of the sweep."
  },
  {
-  "prompt": "Which figure in SECTION 14 is the saving fraction of the percentage-point shortcut, the digest's own arithmetic on the invented Isiokpo efficiencies?",
+  "prompt": "Which figure in the lesson is the saving fraction of the percentage-point shortcut, the course's own arithmetic on the invented Isiokpo efficiencies?",
   "options": [
    "0.0144463600",
    "0.0164448058",
@@ -30,10 +30,10 @@
    "6742.370"
   ],
   "answer": 0,
-  "explanation": "SECTION 14 prints the shortcut's fraction as 0.0144463600 and marks it computed here; the engine does not return it. 0.0164448058 is the engine's fuelSavingFraction on LHV, 0.0164763814 the HHV fraction from the two HHV efficiencies of the stack loss section, and 6742.370 is annualEnergySavedGJ."
+  "explanation": "The lesson prints the shortcut's fraction as 0.0144463600 and marks it computed here; the engine does not return it. 0.0164448058 is the engine's fuelSavingFraction on LHV, 0.0164763814 the HHV fraction from the two HHV efficiencies of the stack loss section, and 6742.370 is annualEnergySavedGJ."
  },
  {
-  "prompt": "The invented Isiokpo tuning is asked for a target of 1.5 percent oxygen against the 2 percent floor declared after a combustion test. What does SECTION 14 print?",
+  "prompt": "The invented Isiokpo tuning is asked for a target of 1.5 percent oxygen against the 2 percent floor declared after a combustion test. What does the course print?",
   "options": [
    "REFUSED: The target stack oxygen is required, so that it can be checked against the declared safe floor.",
    "No refusal: the saving is printed above the 8337.934 GJ a year of the 2.0 row, with a note that the target sits below the floor.",
@@ -41,7 +41,7 @@
    "REFUSED: A minimum safe stack oxygen is required and is not defaulted. Below some excess air a burner makes carbon monoxide, and where that point sits depends on the burner, the fuel and the draught control."
   ],
   "answer": 2,
-  "explanation": "SECTION 14 prints the 1.5 percent target refused with that sentence, naming both figures. The target-required refusal answers a blank target and the floor refusal a blank floor. The sweep prints no row below the floor."
+  "explanation": "The course prints the 1.5 percent target refused with that sentence, naming both figures. The target-required refusal answers a blank target and the floor refusal a blank floor. The sweep prints no row below the floor."
  },
  {
   "prompt": "A tuning call for the invented Isiokpo heater gives a current reading and a safe floor but leaves the target empty. Which answer comes back from excessAirSaving?",
@@ -52,10 +52,10 @@
    "REFUSED: The two efficiencies are on different bases (LHV and HHV) and cannot be compared."
   ],
   "answer": 1,
-  "explanation": "SECTION 14 prints the blank target refused with that sentence. 8337.934 GJ is the 2.0 row and 6742.370 GJ the 2.8 row, each a typed target. The different-bases refusal answers a current efficiency on LHV with a target on HHV."
+  "explanation": "The course prints the blank target refused with that sentence. 8337.934 GJ is the 2.0 row and 6742.370 GJ the 2.8 row, each a typed target. The different-bases refusal answers a current efficiency on LHV with a target on HHV."
  },
  {
-  "prompt": "excessAirSaving is given a current efficiency on LHV and a target efficiency on HHV for the invented Isiokpo heater. What does SECTION 14 print?",
+  "prompt": "excessAirSaving is given a current efficiency on LHV and a target efficiency on HHV for the invented Isiokpo heater. What does the course print?",
   "options": [
    "No refusal: the engine converts the HHV target to LHV and prints fuelSavingPercent 1.6445.",
    "No refusal: basis HHV and a fuelSavingPercent of 1.6476, the HHV fraction as a percent.",
@@ -63,7 +63,7 @@
    "REFUSED: The two efficiencies are on different bases (LHV and HHV) and cannot be compared."
   ],
   "answer": 3,
-  "explanation": "SECTION 14 prints the mixed pair refused with that sentence. 1.6445 is the LHV fuelSavingPercent from two LHV efficiencies and 1.6476 the HHV figure from two HHV efficiencies. The target-required refusal answers a blank target."
+  "explanation": "The course prints the mixed pair refused with that sentence. 1.6445 is the LHV fuelSavingPercent from two LHV efficiencies and 1.6476 the HHV figure from two HHV efficiencies. The target-required refusal answers a blank target."
  },
  {
   "prompt": "Reading the sweep table, which saving percent does the 3.5 percent target carry?",
@@ -77,7 +77,7 @@
   "explanation": "fuelSavingPercent 1.2718 belongs to the 3.5 percent target, beside 5214.422 GJ a year. The 4.5 target carries 0.6786, the floor at 2.0 carries 2.0336 and the Isiokpo 2.8 target 1.6445."
  },
  {
-  "prompt": "Which target row of the SECTION 14 sweep sits on the declared 2 percent floor of the invented Isiokpo burner, and what does it save a year?",
+  "prompt": "Which target row of the course's sweep sits on the declared 2 percent floor of the invented Isiokpo burner, and what does it save a year?",
   "options": [
    "The 2.0 row, 8337.934 GJ a year",
    "The 2.8 row, 6742.370 GJ a year",
@@ -96,10 +96,10 @@
    "It divides the 410000 GJ a year by the target efficiency of 87.8476 and subtracts the fuel."
   ],
   "answer": 1,
-  "explanation": "SECTION 14 prints the fraction, 0.0164448058, and the fuel it is applied to, 410000 GJ a year on LHV (invented); annualEnergySavedGJ is 6742.370. The digest's shortcut applies 0.0144463600 to the same fuel and gets 5923.008 GJ."
+  "explanation": "The course prints the fraction, 0.0164448058, and the fuel it is applied to, 410000 GJ a year on LHV (invented); annualEnergySavedGJ is 6742.370. The course's shortcut applies 0.0144463600 to the same fuel and gets 5923.008 GJ."
  },
  {
-  "prompt": "SECTION 14 prints a saving fraction of 0.0164763814 for the same invented tuning on HHV. What does it say about the fuel figure that fraction multiplies?",
+  "prompt": "The course prints a saving fraction of 0.0164763814 for the same invented tuning on HHV. What does it say about the fuel figure that fraction multiplies?",
   "options": [
    "The engine converts the 410000 GJ to HHV before it multiplies, so the basis always matches.",
    "The engine refuses any annual fuel figure that is not labelled with its heating value basis.",
@@ -107,7 +107,7 @@
    "The engine multiplies the fraction by the fuel it is given, and matching its basis is the caller's job."
   ],
   "answer": 3,
-  "explanation": "SECTION 14: \"The engine multiplies a saving fraction by the annual fuel it is given, and the basis of that fuel figure is the caller's to match.\" It prints no annual HHV saving in gigajoules, and the 410000 GJ it prints is stated on LHV."
+  "explanation": "The course states: \"The engine multiplies a saving fraction by the annual fuel it is given, and the basis of that fuel figure is the caller's to match.\" It prints no annual HHV saving in gigajoules, and the 410000 GJ it prints is stated on LHV."
  },
  {
   "prompt": "Which efficiency sits on the bottom of the engine's saving ratio for the invented Isiokpo tuning on LHV?",
@@ -121,7 +121,7 @@
   "explanation": "The method: the saving is (target - current) / target, so the target efficiency sits below the line, 87.8476 percent on LHV at 2.8 percent oxygen. Dividing by a hundred is the shortcut the same sentence says understates the saving."
  },
  {
-  "prompt": "What fuelSavingPercent does SECTION 14 print for the same invented tuning, 5.5 to 2.8 percent oxygen, on HHV?",
+  "prompt": "What fuelSavingPercent does the course print for the same invented tuning, 5.5 to 2.8 percent oxygen, on HHV?",
   "options": [
    "1.6445",
    "2.0336",
@@ -154,7 +154,7 @@
   "explanation": "The output rows are basis, currentEfficiencyPercent, targetEfficiencyPercent, fuelSavingFraction, fuelSavingPercent and annualEnergySavedGJ. The shortcut figure sits outside that table, marked computed here."
  },
  {
-  "prompt": "What basis does the SECTION 14 output carry for the invented Isiokpo tuning, and on what basis is its 410000 GJ of fuel a year stated?",
+  "prompt": "What basis does the course's output carry for the invented Isiokpo tuning, and on what basis is its 410000 GJ of fuel a year stated?",
   "options": [
    "Basis LHV, with the fuel stated on LHV.",
    "Basis HHV, with the fuel stated on LHV.",
@@ -162,6 +162,6 @@
    "No basis output; fuel stated on HHV."
   ],
   "answer": 0,
-  "explanation": "SECTION 14's output table prints basis LHV, and its inputs are 410000 GJ of fuel a year on LHV (invented). The two efficiencies it takes, 86.4029 and 87.8476, are the LHV rows of the stack loss section."
+  "explanation": "The course's output table prints basis LHV, and its inputs are 410000 GJ of fuel a year on LHV (invented). The two efficiencies it takes, 86.4029 and 87.8476, are the LHV rows of the stack loss section."
  }
 ]

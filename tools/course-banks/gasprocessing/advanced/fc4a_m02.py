@@ -63,12 +63,12 @@ q(0, "At the module default of twenty steps the cooling is 0.999997906978 of the
   "That twenty steps is the right count for any let-down whatever its depth."],
  "A table this clean invites the wrong conclusion. Converging beautifully to a wrong answer is a thing numerical methods do very well, and the published cases are where the identity is answered.")
 
-q(2, "The digest prints one ratio against the reference on every row of the convergence table and prints no comparison between one row and the next. What follows for a reader who wants to say how the column behaves?",
+q(2, "The course prints one ratio against the reference on every row of the convergence table and prints no comparison between one row and the next. What follows for a reader who wants to say how the column behaves?",
  "The statement is a reading taken from the rows, and dividing one row by the row above it produces a figure the engine never formed.",
  ["The column cannot be read at all until the ratios between successive rows are computed, which is the first thing to do with a convergence table.",
   "The ratios between rows are implied by the second-order claim, so a reader may quote a factor of four between successive rows without computing anything.",
-  "The missing column is an oversight in the digest, and the figures needed to fill it are all on the page."],
- "Where the digest prints a table and no ratio, the two figures are not in a relationship this engine computes. Take the reading deliberately and say that you took it.")
+  "The missing column is an oversight in the course, and the figures needed to fill it are all on the page."],
+ "Where the course prints a table and no ratio, the two figures are not in a relationship this engine computes. Take the reading deliberately and say that you took it.")
 
 q(1, "A march of 0 steps, a march of -5 steps and a march of 0.4 steps all come back refused. What does each message carry?",
  "The same required shape, a positive whole number of steps, with the value it was handed printed in each case.",
@@ -103,7 +103,7 @@ q(2, "What kills a march part way down, and what does the engine say about it?",
  ["A deep outlet, and the refusal names the outlet pressure that was asked for and the shallowest one that would have worked.",
   "A step count too low to resolve the drop, and the refusal names the count that would have carried it.",
   "A gravity the pseudo-criticals cannot carry, and the refusal names the gravity and the step the march had reached when it read it."],
- "The gas cools past the reduced temperature its own compressibility correlation is valid at, and the coefficient the next step needs cannot be formed. The same gas entering at 10.000000 degF and let down to 200.000000 psia is the case the digest prints.")
+ "The gas cools past the reduced temperature its own compressibility correlation is valid at, and the coefficient the next step needs cannot be formed. The same gas entering at 10.000000 degF and let down to 200.000000 psia is the case the course prints.")
 
 q(0, "That failed march hands back step 11 of 20, a pressure of 690.000000 psia and a temperature of -105.517249 degF. What do those three fields buy a reader?",
  "They say how far the march got and name the state it could not carry, which is what a choice between a warmer inlet and a shallower drop needs.",

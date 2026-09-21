@@ -58,7 +58,7 @@ q(2, "Two doors in this module answer with thirteen keys each and two answer wit
   "The air cooler and the tube count, because a bay and a bundle are the two answers in this module that describe a piece of hardware."],
  "A capacity rate and an area carry one key each, because each is a single number with no parts. The tube count and the tube-side film carry ten."),
 
-q(3, "On the probes the teaching digest runs, three of the twelve doors handed back more than a message when they refused. What were the extra keys?",
+q(3, "On the probes the course runs, three of the twelve doors handed back more than a message when they refused. What were the extra keys?",
  "The numbers that produced the state the door refused.",
  ["The defaults the door would have substituted had it been willing to answer the call at all.",
   "The nearest input value that would have been accepted, so a caller can see how far outside the band the study sits.",

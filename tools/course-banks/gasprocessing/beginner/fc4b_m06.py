@@ -110,7 +110,7 @@ q(1, "What does this course ask at every tier, with only the answers changing?",
  "Which number the engine computed, which one you chose, and which one it kept to itself.",
  ["Which number the published cases cover, which one the golden reaches by a second road, and which one nothing checks.",
   "Which number is intensive, which is extensive, and which belongs to a vessel.",
-  "Which number the studio prints, which one the digest prints, and which one only the engine holds."],
+  "Which number the studio prints, which one the course prints, and which one only the engine holds."],
  "The discipline is the reason the water chain came first. The three questions are the same on a Kremser removal and on a Joule-Thomson coefficient as on a circulation in gpm."),
 
 emit(Q, '/root/wt-fc4-nextgen/tools/course-banks/gasprocessing/beginner/fc4b_m06.json', label='fc4b_m06', expect_n=15)

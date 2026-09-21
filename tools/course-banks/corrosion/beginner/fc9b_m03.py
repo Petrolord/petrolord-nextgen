@@ -34,7 +34,7 @@ q(2, "One stream runs a reaction term of 44.114126 mm/yr against a transport ter
   "Reaction kinetics, with a combination of 44.114126 mm/yr, since a series chain returns its slowest step unchanged."],
  "This is the one stream of the six where the chemistry is slower than the transport. Its margin is 0.602425, which is the nearest of the six to the boundary at which the engine would answer comparable instead."),
 
-q(0, "The series identity is checked on every row the digest prints. What exactly is checked, and to what?",
+q(0, "The series identity is checked on every row the course prints. What exactly is checked, and to what?",
  "That the reciprocal of the combined rate minus the reciprocal of each term is zero, held to twelve figures.",
  ["That the combined rate agrees with the vendored golden's own combined rate to a tolerance of one part in a thousand on every case.",
   "That the combined rate lies between the smaller term and half of it, which is the band the identity allows on any positive pair.",
