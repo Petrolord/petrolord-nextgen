@@ -334,6 +334,7 @@ A flat line ends its bracket at its own inlet. A DESCENT ends it above the inlet
 
 Down -3000.000000 ft, the trunk carries 29457958.5967 scfd when its outlet stands at 880.000000 psia, which is 30.000000 psia ABOVE its inlet of 850.000000 psia.
 Given that same rate the inverse returns {"p2Psia":880,"dpPsi":-30}, and the forward call and the inverse call now differ by 0.000000 psi. The drop is NEGATIVE because the line arrives higher than it left, which is the honest reading of a descent and not an error state.
+The inverse returns an outlet of 880.000000 psia and a drop of -30.000000 psi.
 THE CONTROL. Run the SAME descent with an outlet genuinely BELOW the inlet, 700.000000 psia against 850.000000 psia: the trunk carries 65259103.7761 scfd and the inverse recovers 700.000000 psia, an error of 0.000000 psi. Both answers come out of the same bisection. A search whose answer lies outside its bracket and a search that cannot converge look identical from a single case, and only a case with its answer inside the bracket tells the two apart.
 
 The climb is the same bracket read from the other side, and it is the commoner case. Up 3000.000000 ft, asked for 20000000.0000 scfd, the trunk delivers at 766.523922 psia for a drop of 83.476078 psi, and the ceiling on the table above, 784.964657 psia, stands 18.440735 psi above that delivery (derived from the two figures on this row) and is as close to the inlet as any rate can bring it.
