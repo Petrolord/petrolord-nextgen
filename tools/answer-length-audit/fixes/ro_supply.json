@@ -1,0 +1,28 @@
+{
+ "migration": "20261023a_ro_bank_supply.sql",
+ "tag": "roundoff bank supply",
+ "banner": "B4/B5 ROUND-OFF BANK FIX",
+ "runs_after": "the 29 B4 length files, the 37 B4 fix files (20261021a/b) and 20261022",
+ "title": "class B sign hit: a sign-flipped distractor carried in words",
+ "items": [
+  {
+   "app_slug": "supply",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m04-from-depot-gate-to-nozzle",
+   "ord": 5,
+   "category": "sign",
+   "flag": "signhits.json class B: the sign-flipped distractor prints -34.8249, which the course prints only as the shortfall 34.8249",
+   "verdict": "fixed",
+   "reason": "The misreading is carried in words (a surplus where the course prints a shortfall) with the printed magnitude; still wrong, key unchanged.",
+   "changes": {
+    "options": {
+     "0": {
+      "old": "A shortfall of -34.8249 naira a litre, and the cap covers the chain: true.",
+      "new": "A cap surplus of 34.8249 naira a litre, and the cap covers the chain: true."
+     }
+    }
+   }
+  }
+ ]
+}

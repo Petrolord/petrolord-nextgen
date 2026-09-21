@@ -39,7 +39,7 @@ q(2, "Two pump elements, the invented dealer margin and the statutory levies, ar
 
 q(1, "Against the course's invented cap of 1040.0000 naira a litre, the complete BADAGRY price of 1074.8249 gives which answer?",
  "A shortfall of 34.8249 naira a litre, and the cap covers the chain: false.",
- ["A shortfall of -34.8249 naira a litre, and the cap covers the chain: true.",
+ ["A cap surplus of 34.8249 naira a litre, and the cap covers the chain: true.",
   "A shortfall of -75.1751 naira a litre, and the cap covers the chain: true.",
   "A shortfall of 34.8249 naira a litre, and the cap covers the chain: true."],
  "The shortfall is the chain's price less the cap. A positive figure means the cap is below the chain's cost, so the verdict is false.")

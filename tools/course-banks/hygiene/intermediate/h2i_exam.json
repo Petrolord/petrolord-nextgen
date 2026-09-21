@@ -118,7 +118,7 @@
    "0.800000 h"
   ],
   "answer": 3,
-  "explanation": "At 97 dBA the hours to 87 are 8 x 10^(-1), 0.800000 h. 0.504766 h is the time to 85 and 0.159621 h the time to 80; 3.031433 h is the OSHA reference duration at 97 dBA, a different criterion on a different relation."
+  "explanation": "At 97 dBA the hours to 87 are one tenth of 8 h, 0.800000 h, because the level sits 10 dB above the target. 0.504766 h is the time to 85 and 0.159621 h the time to 80; 3.031433 h is the OSHA reference duration at 97 dBA, a different criterion on a different relation."
  },
  {
   "prompt": "The OSHA Technical Manual example, 98 dBA and an NRR of 25, gives two estimates. Which one belongs in a decision on engineering controls?",

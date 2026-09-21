@@ -20,7 +20,7 @@ q(0,
  "Using the Babrauskas form with the Table 6.5 heptane row, what burning flux in kg/(m2 s) does the engine return for a heptane pool of 1 m diameter?",
  "0.067380",
  ["0.074587","0.052036","0.089809"],
- "The burning flux table prints 0.067380 for heptane at 1 m, from m\"inf 0.101 times one minus exp(-1.1 D). 0.074587 is the lpg column at the same diameter, whose k beta of 1.4 brings it closer to its asymptote. 0.052036 is lng at 1 m. 0.089809 is heptane again at 2 m, where the larger diameter has pushed it further up its curve.")
+ "The burning flux table prints 0.067380 for heptane at 1 m, from m\"inf 0.101 times one minus exp(-k beta D), with the heptane k beta of 1.1 per m. 0.074587 is the lpg column at the same diameter, whose k beta of 1.4 brings it closer to its asymptote. 0.052036 is lng at 1 m. 0.089809 is heptane again at 2 m, where the larger diameter has pushed it further up its curve.")
 
 q(3,
  "For an lpg pool only half a metre across, which burning flux in kg/(m2 s) does the swept table print?",

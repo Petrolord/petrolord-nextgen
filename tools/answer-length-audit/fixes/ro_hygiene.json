@@ -1,0 +1,26 @@
+{
+ "migration": "20261023a_ro_bank_hygiene.sql",
+ "tag": "roundoff bank hygiene",
+ "banner": "B4/B5 ROUND-OFF BANK FIX",
+ "runs_after": "the 29 B4 length files, the 37 B4 fix files (20261021a/b) and 20261022",
+ "title": "class B sign hit: the tenfold exposure-time relation stated in words",
+ "items": [
+  {
+   "app_slug": "hygiene",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "category": "sign",
+   "flag": "signhits.json class B: -1 is the written-out exponent of 8 x 10^((87 - 97)/10)",
+   "verdict": "fixed",
+   "reason": "The explanation says one tenth of 8 h in words, as the course prints the relation; the figure 0.800000 h is unchanged.",
+   "changes": {
+    "explanation": {
+     "old": "At 97 dBA the hours to 87 are 8 x 10^(-1), 0.800000 h. 0.504766 h is the time to 85 and 0.159621 h the time to 80; 3.031433 h is the OSHA reference duration at 97 dBA, a different criterion on a different relation.",
+     "new": "At 97 dBA the hours to 87 are one tenth of 8 h, 0.800000 h, because the level sits 10 dB above the target. 0.504766 h is the time to 85 and 0.159621 h the time to 80; 3.031433 h is the OSHA reference duration at 97 dBA, a different criterion on a different relation."
+    }
+   }
+  }
+ ]
+}

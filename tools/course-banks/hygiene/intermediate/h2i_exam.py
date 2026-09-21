@@ -82,7 +82,7 @@ q(1, "A task runs at 100.000000 dBA. After how many hours on its own has it used
 q(3, "A 97.000000 dBA task is the only noise on a shift. After how long does the day reach LEX,8h 87?",
  "0.800000 h",
  ["0.504766 h", "3.031433 h", "0.159621 h"],
- "At 97 dBA the hours to 87 are 8 x 10^(-1), 0.800000 h. 0.504766 h is the time to 85 and 0.159621 h the time to 80; 3.031433 h is the OSHA reference duration at 97 dBA, a different criterion on a different relation.")
+ "At 97 dBA the hours to 87 are one tenth of 8 h, 0.800000 h, because the level sits 10 dB above the target. 0.504766 h is the time to 85 and 0.159621 h the time to 80; 3.031433 h is the OSHA reference duration at 97 dBA, a different criterion on a different relation.")
 
 # 12
 q(0, "The OSHA Technical Manual example, 98 dBA and an NRR of 25, gives two estimates. Which one belongs in a decision on engineering controls?",

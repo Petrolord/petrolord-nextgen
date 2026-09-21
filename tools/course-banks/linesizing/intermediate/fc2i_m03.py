@@ -10,7 +10,7 @@ q(2, "On the SOKU trunk 1500.000000 ft of rise gives s as 0.0795976556 and 1500.
  "That s is proportional to the elevation change, so equal distances up and down give exactly opposite values and doubling the fall doubles s.",
  ["That s is proportional to the elevation change only over falls, the rise column being the mirror image the engine writes rather than a value it computes separately.",
   "That s grows faster than the elevation change, which is the asymmetry between climbing and descending that the rest of the module is about.",
-  "That s is bounded between -1.0000000000 and 1.0000000000, which is what allows it to be handed to an exponential without the group overflowing on a tall hill."],
+  "That s never exceeds one in size in either direction, which is what allows it to be handed to an exponential without the group overflowing on a tall hill."],
  "s itself is well behaved. Everything awkward about a hill happens after s, when it goes into an exponential.")
 
 q(0, "At 1500.000000 ft of rise e to the s is 1.0828513009 and at 1500.000000 ft of fall it is 0.9234878318. What does each of those do to the driving group?",
