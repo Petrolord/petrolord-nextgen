@@ -1,0 +1,24 @@
+-- ============================================================================
+-- H3 ASSOCIATE DEEP SEED: Process Safety: LOPA & SIL Determination, beginner
+-- tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/lopa/beginner.
+--
+-- What this tier owns: HOW MUCH RISK REDUCTION IS MISSING. A LOPA row is one
+-- initiating event frequency times its enabling conditions and conditional
+-- modifiers; an IPL is credited once, and only when flagged independent and
+-- not flagged unauditable; the required risk reduction factor is the mitigated
+-- frequency over the TMEL and the required PFDavg is its reciprocal, the
+-- binding target; six outcome states; the low demand bands; an exact decade
+-- belongs to the lower SIL, and the engine snaps within one part in a billion;
+-- and one worksheet end to end, with the risk matrix seam. Digest sections 1
+-- to 13, and section 32.
+--
+-- THE TRAP THE TIER IS BUILT ON. A band is a label and the required PFDavg is
+-- the target. The Associate capstone grades frequencies, a required RRF, a
+-- required PFDavg, the loop through a proposed SIF and an exact decade, and
+-- grades no PFDavg computed from failure rates.
+-- ============================================================================

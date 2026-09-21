@@ -4,7 +4,7 @@
 
 {{panel:lp-sif-builder}}
 
-The Expert capstone asks the question this tier owns: how long may the proof test run, and what does the engine not know. It gives a facility, a scenario with its tolerable mitigated event likelihood, and a safety instrumented function with every input stated, including the lifetime wherever coverage is below one. Nothing has to be inferred, and no figure from a published paper is carried in. The work is to compute, to band, to find the interval and to say what was not checked.
+The Expert capstone asks the question this tier owns: how long may the proof test run, and what does the engine not know. It gives a facility, the PFDavg budget or target each part of a safety instrumented function has to meet, and every input stated, including the lifetime wherever coverage is below one. Nothing has to be inferred, and no figure from a published paper is carried in. The work is to compute, to band, to find the interval and to say what was not checked.
 
 ## The method, in order
 

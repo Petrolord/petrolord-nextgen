@@ -565,8 +565,8 @@
   "lopa": {
     "course": "H3",
     "live": "/root/hse-wip-lopa",
-    "kit": "foundation",
-    "kitNote": "Foundation kit: everything the wave is rebuilt and gated from before a lesson is written. The digest, its generator and the teaching streams; the eighteen graded answers, their generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle replay in exact rationals; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the structure, scaffold and lengths tools; the vendoring script and this mirror script; and the five writer briefs. HSE module, path_order 63. The seed ladder joins it with the migrations.",
+    "kit": "full",
+    "kitNote": "Full kit. The mirror carries everything the wave is rebuilt and gated from: the digest, its generator and the teaching streams; the eighteen graded answers, their generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle replay in exact rationals; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the structure, scaffold and lengths tools; the vendoring script and this mirror script; the five writer briefs; and, with the seed ladder, the three tier headers, the course generator (which runs the engine and renders the prompts from its inputs), the go-live generator (engine ledger, a second route in SQL with the Annex B form and the interval roots, 94 traps checked against discriminate.mjs), the seed generator that stages the committed tree, the SQL verifier, the scratch database, the dry run with its negative controls and block cutter, and the owner's content-addressed apply script. HSE module, path_order 63. The kit became \"full\" with the seed ladder.",
     "inputs": [
       "digest.txt",
       "fields.json",
@@ -595,7 +595,18 @@
       "LESSON_TASK.md",
       "BANK_TASK.md",
       "KEY_TRUTH_TASK.md",
-      "PANELS.md"
+      "PANELS.md",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_h3.sh",
+      "cut_block.py",
+      "apply_h3_lopa.sh"
     ],
     "pins": {
       "digest.txt": "908293ea1c908bd83bea80b3732e48b6a551cb6660935c1d6d08f776694f66c7",
