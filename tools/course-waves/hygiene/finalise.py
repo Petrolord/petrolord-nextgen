@@ -101,6 +101,24 @@ GATES = [
      f'python3 {KIT}/litsweep.py . --banks {NG}/tools/course-banks/hygiene/intermediate --prefix h2i', 0),
     ('litsweep.py advanced', f'{KIT}/litsweep.py',
      f'python3 {KIT}/litsweep.py . --banks {NG}/tools/course-banks/hygiene/advanced --prefix h2a', 0),
+    # Pinned at the close of the lesson fix pass (2026-09-21). numsweep and
+    # bankrepro were run by hand at each audit and never pinned, and the bank
+    # copy rule was swept only by per-tier scratch scripts the audits kept.
+    ('gate_bank_copy.py', f'{HERE}/gate_bank_copy.py', 'python3 gate_bank_copy.py', 0),
+    ('gate_bank_copy.py --plant (negative control, must exit 1)', f'{HERE}/gate_bank_copy.py', 'python3 gate_bank_copy.py --plant', 1),
+    ('numsweep.mjs lessons', f'{KIT}/numsweep.mjs',
+     f'node {KIT}/numsweep.mjs . --content {NG}/src/content/courses/hygiene', 0),
+    ('numsweep.mjs --banks beginner', f'{KIT}/numsweep.mjs',
+     f'node {KIT}/numsweep.mjs . --banks {NG}/tools/course-banks/hygiene/beginner', 0),
+    ('numsweep.mjs --banks intermediate', f'{KIT}/numsweep.mjs',
+     f'node {KIT}/numsweep.mjs . --banks {NG}/tools/course-banks/hygiene/intermediate', 0),
+    ('numsweep.mjs --banks advanced', f'{KIT}/numsweep.mjs',
+     f'node {KIT}/numsweep.mjs . --banks {NG}/tools/course-banks/hygiene/advanced', 0),
+    ('numsweep.mjs --selftest', f'{KIT}/numsweep.mjs', f'node {KIT}/numsweep.mjs --selftest', 0),
+    ('bankrepro.py all three tiers', f'{KIT}/bankrepro.py',
+     f'python3 {KIT}/bankrepro.py {NG}/tools/course-banks/hygiene/beginner {NG}/tools/course-banks/hygiene/intermediate '
+     f'{NG}/tools/course-banks/hygiene/advanced --prefix h2', 0),
+    ('bankrepro.py --selftest', f'{KIT}/bankrepro.py', f'python3 {KIT}/bankrepro.py --selftest', 0),
     ('digestpromise.py', f'{KIT}/digestpromise.py', f'python3 {KIT}/digestpromise.py .', 0),
     ('digestfigures.py', f'{KIT}/digestfigures.py', f'python3 {KIT}/digestfigures.py .', 0),
     ('digestleak.py', f'{KIT}/digestleak.py', f'python3 {KIT}/digestleak.py .', 0),
@@ -135,7 +153,7 @@ WAVE = {
     'branch': 'feat/h2-hygiene-course',
     'goldens': ['hse/goldens/exposure_cases.json'],
     'engines': ['engines/hse/exposure.js'],
-    'enginesVendoredAt': 'NextGen, sha-identical with petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217). Re-vendored 2026-09-19 for #220 only: exposure.js, the jest suite and FINDINGS-exposure.md moved; the golden, the oracle and the negative-control script are byte-identical between the two commits. SIX paths, walked as an import closure from __tests__/hse.exposure.test.js by vendor_hygiene.sh: the suite, the engine and the golden it reads at runtime, plus three NAMED members (oracle_exposure.py, FINDINGS-exposure.md, negcontrol_exposure.sh mode 755). 24 proofs (blob, sha256, cmp, bytes), 0 deviations. The canonical pin in VENDOR.json is NOT moved; the six paths are ledgered kind "extra", group h2-hygiene-course, each pinned to its vendored blob, so the edit merges by path with H1 (which moves the pin to f123a57, a commit that does not carry exposure.js). The entries clear as STALE once the pin reaches b43f1d9 or later.',
+    'enginesVendoredAt': 'NextGen, sha-identical with petrolord-engines b43f1d9 (main after #220, #222, #223; first vendored at 870cc8f, PR #217). Re-vendored 2026-09-19 for #220 only: exposure.js, the jest suite and FINDINGS-exposure.md moved; the golden, the oracle and the negative-control script are byte-identical between the two commits. SIX paths, walked as an import closure from __tests__/hse.exposure.test.js by vendor_hygiene.sh: the suite, the engine and the golden it reads at runtime, plus three NAMED members (oracle_exposure.py, FINDINGS-exposure.md, negcontrol_exposure.sh mode 755). 24 proofs (blob, sha256, cmp, bytes), 0 deviations. The six paths were first ledgered kind "extra", group h2-hygiene-course; merging main brought the canonical pin to df31f53, which carries all six byte for byte, so the six entries were removed as STALE and VENDOR.json is now identical to main.',
     'leakScales': ['1', 'x1e3', 'x1e-3', 'x1e2', 'x1e-2', 'x60', 'x1/60'],
     'decisions': {
         'heatLabels': 'ACCEPTED 2026-09-19 (BRIEF.md): a WBGT built from thermometer readings carries "the NIOSH 2016-106 section 9.3.2 weighting, checked for transcription only"; a RAL, a REL or a margin against either carries the section 8.1 label. A WBGT the instrument read out, and the graded one-hour averages of stated readouts, are arithmetic on stated values and carry neither.',

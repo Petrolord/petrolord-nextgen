@@ -120,8 +120,8 @@ digest_for() {
   case $1 in
     20261004_h2_hygiene_course           ) echo d645add6ad3fea60af953aee9581934ff948b1c82bfb96a8f50bf2ca6af83d43 ;;
     20261004_h2_hygiene_beginner_deep    ) echo 0c2b31a95ffea622aff86905db64215d125f0f22205e9ad6823c69c3ca4a3d20 ;;
-    20261004_h2_hygiene_intermediate_deep) echo 159574e214ba24d0dd3e6f2e2174069c49e94da3fa33016c0794f1b911c2c5b6 ;;
-    20261004_h2_hygiene_advanced_deep    ) echo d845e742804cf7291edad80b3390944c0a2399057b6fde1e80167be520d933e2 ;;
+    20261004_h2_hygiene_intermediate_deep) echo 66e706d70bf975e6d934cc815b29ce95b699086c2a49e9777e83d1da576a43e1 ;;
+    20261004_h2_hygiene_advanced_deep    ) echo d0c5f83d5cf5920d4614e5ad9d75964ba4d1548e4811b440a86c4216bf901c69 ;;
     20261004_h2_hygiene_go_live          ) echo f886465bb399f05d3f926e897468a111549df71bddafac11f853bddf2f14ee6c ;;
     *) echo UNPINNED ;;
   esac
