@@ -1,0 +1,303 @@
+{
+  "app_slug": "supply",
+  "tier": "beginner",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-what-a-terminal-measures",
+      "title": "What a Terminal Measures",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-two-apps-and-one-chain",
+          "title": "Two apps and one chain",
+          "order": 1,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-everything-starts-from-a-dip",
+          "title": "Everything starts from a dip",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-missing-stays-missing",
+          "title": "Missing stays missing",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-what-the-engine-will-not-ship",
+          "title": "What the engine will not ship",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-strapping-table",
+      "title": "The Strapping Table",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-a-table-of-heights-and-volumes",
+          "title": "A table of heights and volumes",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-between-two-entries",
+          "title": "Between two entries",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-below-the-first-entry",
+          "title": "Below the first entry",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-above-the-last-entry",
+          "title": "Above the last entry",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-horizontal-tank-and-its-curve",
+          "title": "A horizontal tank and its curve",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-free-water-and-the-gross-volume",
+      "title": "Free Water and the Gross Volume",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-water-under-the-product",
+          "title": "Water under the product",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-water-cut-through-the-same-table",
+          "title": "The water cut through the same table",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-water-cut-the-engine-refuses",
+          "title": "A water cut the engine refuses",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-gross-observed-volume",
+          "title": "The gross observed volume",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-the-volume-correction-factor",
+      "title": "The Volume Correction Factor",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-litre-grows-when-it-warms",
+          "title": "A litre grows when it warms",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-form-of-the-correction",
+          "title": "The form of the correction",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-coefficients-are-an-input",
+          "title": "The coefficients are an input",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-vcf-read-off-your-own-table",
+          "title": "A VCF read off your own table",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-standard-volume",
+          "title": "The standard volume",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-closing-the-day",
+      "title": "Closing the Day",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-opening-plus-receipts-less-deliveries",
+          "title": "Opening plus receipts less deliveries",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-no-opening-stock-no-day",
+          "title": "No opening stock, no day",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-reconciliation-that-cannot-fail",
+          "title": "A reconciliation that cannot fail",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-tolerance-on-what-moved",
+          "title": "Tolerance on what moved",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-a-run-in-one-direction",
+          "title": "A run in one direction",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-associate-reading",
+      "title": "The Associate Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-akodo-tanks-end-to-end",
+          "title": "The Akodo tanks end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-akodo-day-end-to-end",
+          "title": "The Akodo day end to end",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "supply-tank-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

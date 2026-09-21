@@ -1,0 +1,28 @@
+-- ============================================================================
+-- carbon ASSOCIATE DEEP SEED: Carbon & Energy Efficiency, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed.
+--
+-- What this tier owns: THE INVENTORY. Combustion CO2 is carbon counted atom by
+-- atom, never an empirical factor; a flare is one line of the inventory and
+-- its destruction efficiency is an input nobody may leave blank; carbon that
+-- escapes is counted as methane; a GWP set carries its report and its
+-- horizon; a factor is a record with a source and a version; an inventory can
+-- be computed and still not be reportable; an intensity names its boundary.
+--
+-- THE ENGINE FACT THIS TIER OWNS. A missing value stays missing. A blank
+-- destruction efficiency is refused rather than read as 100 percent, a line
+-- with no factor is blocked and named, and an undeclared GWP set blocks every
+-- methane line.
+--
+-- THE TRAP THE TIER IS BUILT ON. A flare read as 100 percent destruction is
+-- the best case, and it drops the methane line from the inventory entirely.
+--
+-- HELD, taught as limits and never graded: which IPCC report to file on (H1),
+-- the typical methane heating value pair (H2), escaped carbon counted as
+-- methane (H3), combustion N2O not computed (H4). The capstone grades six
+-- figures in tonnes, each to two decimals, at a tolerance of 0.01 t, on the
+-- IPCC AR6 100-year set with fossil methane stated in the prompt.
+-- ============================================================================

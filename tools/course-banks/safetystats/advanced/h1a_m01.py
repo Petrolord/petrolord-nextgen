@@ -1,0 +1,117 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H1 Expert m01, The u-Chart.
+# Figures from digest Section 21 (the EGBEMA chart), Section 4 (the two uChart
+# refusals), Section 17 (the ABO upper limit, recalled) and Section 28. Every
+# figure below is printed in the digest; none is derived here.
+
+q(2, "EGBEMA is charted on the 200,000 hour base. Month 3 recorded 4 events in 97230 hours. Which exposure units and which u does the engine return for that month?",
+ "0.486150 units and a u of 8.227913, which is simply month 3's own rate per 200,000 hours",
+ ["4 units and a u of 8.227913, since one exposure unit on a u-chart stands for one recorded event in the month",
+  "0.486150 units and a u of 2.893273, since every point on a u-chart is read at the pooled centre line of the year",
+  "2.011750 units and a u of 2.982478, since the units of the chart's first month are carried across all twelve points"],
+ "A month's units are its hours over the base, 97230 over 200,000, which is 0.486150, and u is the count over the units, 8.227913: the month's rate on the chosen base, rearranged. A unit is one base's worth of hours and has nothing to do with the event count. The centre line of 2.893273 is the one reference every month is judged against, so it cannot also be month 3's reading, and month 1's 2.011750 units belong to month 1 alone.")
+
+q(0, "EGBEMA's twelve months carry 63 events on 21.774650 exposure units, and the twelve monthly u values average 3.202958. Where does the engine draw the centre line?",
+ "At 2.893273, the sum of the counts over the sum of the units, so each month weighs in with its own exposure",
+ ["At 3.202958, the mean of the monthly u, so that each month carries an equal one twelfth share of the line whatever its hours",
+  "At 2.893273, a figure the engine reaches by taking the median of the twelve monthly u values plotted on the chart",
+  "At 2.389523, because the month that signals is taken out of the year before the engine draws the centre"],
+ "The method line reads ubar = sum(c) / sum(n): 63 over 21.774650 is 2.893273, sum then divide applied to months. The mean of the monthly u gives a thin month the same vote as a full one and is a different number. The median is not what the engine computes. 2.389523 is the revised centre with month 8 set aside, and a month is set aside only after an investigation finds a cause, never as a step in drawing the chart.")
+
+q(3, "Month 1 on EGBEMA has 2.011750 units and an upper limit of 6.491006. Month 3 has 0.486150 units and an upper limit of 10.211920. What makes month 3's limit so much wider?",
+ "Its exposure units are fewer, and the distance from the centre to each limit is 3 times the square root of the centre over the month's units",
+ ["Its u is higher, and the engine widens each month's limits in proportion to the reading that the month itself returned",
+  "Its count is lower, and each month's limit is the centre plus 3 times the square root of that month's own count",
+  "It falls early in the year, and the engine widens the first quarter's limits while its centre line is still settling"],
+ "The limits are ubar +/- 3 sqrt(ubar / n_i) with one centre for the whole chart, so only n moves them: fewer units, wider limits. A month's own u plays no part in its limits, which is why month 3's high reading can sit inside a wide band. Month 3's count of 4 equals months 2, 9, 10 and 12, whose limits are far tighter. The centre is pooled over the whole year at once, so no month's limits depend on where it falls in the calendar.")
+
+q(1, "On a u-chart with one pooled centre, month A carries four times the exposure units of month B. How does month A's distance from the centre to its upper limit compare with month B's?",
+ "It is half of month B's distance, because that distance shrinks with the square root of the units",
+ ["It is a quarter of month B's distance, because the distance shrinks in direct proportion to the units in the month",
+  "It is the same as month B's distance, because both months are measured from one pooled centre line for the year",
+  "It is twice month B's distance, because a month with more exposure is expected to carry more events around its mean"],
+ "The distance is 3 sqrt(ubar / n), so four times the units divides it by the square root of four, which is two. Under the Poisson count model the spread of a count grows with the square root of its mean, so the spread of the rate shrinks with the square root of the units, and the shrinkage is slower than in proportion. A shared centre fixes where the band is centred, and the width still follows each month's own units. More events in absolute terms is a statement about the count; on the rate scale the band narrows.")
+
+q(1, "Every one of EGBEMA's twelve lower control limits reads 0.000000 with `lclFloored` true. What should the monitoring note say about it?",
+ "That the raw lower limits were negative at this exposure, so this chart could only ever have found months that ran high",
+ ["That every month cleared its lower limit, which shows that incident reporting held steady on the site for the whole year",
+  "That the lower half of the chart ran at a centre of zero, and only the upper limits carry the Poisson count model",
+  "That no month recorded zero events, so the engine had no reason to test the low side of this particular chart"],
+ "Each raw lower limit, the centre minus 3 times the square root of the centre over the units, is negative on months of about 2 units, so the engine sets it to zero and flags it. A u cannot be strictly below zero, so no month could signal low, and the low side was never tested: a quiet low side says nothing about reporting. The centre and the Poisson count model are the same on both sides of the chart. The floor comes from the exposure, whatever the monthly counts happened to be.")
+
+q(3, "Month 8 on EGBEMA has 2.105450 units against a centre of 2.893273. Why is its raw lower control limit negative before the floor is applied?",
+ "Because the centre of 2.893273 is smaller than 3 times the square root of the centre divided by 2.105450 units",
+ ["Because month 8 signalled above, and the engine pushes a signalling month's lower limit below zero to mark it out",
+  "Because the engine subtracts month 8's own u of 7.599326 from the centre, and that u is larger than the centre",
+  "Because the lower limit is drawn from the mean of the monthly u, 3.202958, and month 8's u sits well above it"],
+ "The raw lower limit is ubar minus 3 sqrt(ubar / n). At about 2 units the square root term times 3 is larger than 2.893273 itself, so the difference is negative, and it would stay negative whatever month 8 had recorded. A signal is read against the limits and never changes them. The month's own u does not enter its limits, and the centre in every limit is the pooled 2.893273, never the mean of the monthly u.")
+
+q(0, "A monthly series is passed to `uChart` in which the second period has zero hours. What does the engine return?",
+ "A refusal naming `exposureHours[1]`, in the engine's own words: exposureHours[1] is zero: a u-chart point needs exposure; drop periods with no hours before charting",
+ ["A chart with the second point returned as null and the other points drawn around a pooled centre, the way `pooledRate` treats a mothballed site",
+  "A chart with the second point at a u of 0.000000 and a floored lower limit, since a period with no hours also has no events",
+  "A refusal naming `counts`, because a period with no hours has no events to chart and the engine asks for its count to be removed"],
+ "A point's units are its hours over the base, so zero hours give zero units, and both u and the limits divide by the units. The engine refuses, names the field and says what to do. `pooledRate` can pass over a period with no hours because it only sums, but a chart has to place every point it is given. The refusal that names `counts` is the other uChart refusal, for a series with no events at all.")
+
+q(2, "A site's twelve months carry no recordables at all, and the series is passed to `uChart`. Why does the engine refuse it, and what does the course use instead?",
+ "The centre would be zero and every limit would have zero width; a zero count is read as an upper bound, as with the ABO crew's 17.863823",
+ ["Months with no events count as months with no exposure, so the engine refuses on the hours and asks for the periods to be dropped",
+  "The chart would flag every month below, since each u of zero sits under its lower limit, so the engine declines to draw it",
+  "The engine will only draw a chart that has at least one signal on it, and a year without a single event cannot produce one"],
+ "The engine's own words: counts are all zero: the centre line is zero and every limit has zero width. With no events the pooled centre is zero, the square root term is zero, and the band collapses. The Professional tier's answer to a zero count is its interval: the ABO crew's 0 recordables in 41300 hours still leave a 95 percent upper limit of 17.863823 per 200,000 hours. Hours are exposure whether or not anything happened. A u of zero on a lower limit of zero is not strictly below it, and the engine draws quiet charts routinely.")
+
+q(3, "EGBEMA is redrawn on the 1,000,000 hour base in place of the 200,000 hour base. What changes on the chart?",
+ "Every n shrinks and every u grows by the same factor, and the chart's shape and its signals stay exactly as they were",
+ ["The centre moves to 3.202958, because a larger base changes how much weight each month carries in the pooled line",
+  "Month 3 begins to signal, because the smaller units on the larger base tighten the limits relative to each month's own u",
+  "Nothing on the chart changes, because the engine converts every base back to 200,000 hours before it charts a series"],
+ "The count and the hours did not change; only the base did. Units scale down, u, the centre and every limit scale up by the same factor, so every point keeps its position relative to its limits and month 8 remains the only signal. The weights in the pooled centre are the units, and a common factor cancels out of them. The engine does not convert bases: it charts on the base the caller names, which is why the note must state it.")
+
+q(0, "EGBEMA's mean of the monthly u is 3.202958 against a pooled centre of 2.893273. Which month does most to open that gap?",
+ "Month 3, whose u of 8.227913 rests on only 0.486150 units and still counts as one twelfth of the mean",
+ ["Month 8, the flagged month, because the engine sets a signalling month aside before it pools the centre line",
+  "Month 11, whose u of 1.018563 is the lowest on the chart and drags the pooled centre down",
+  "Month 1, whose 402350 hours make it the heaviest month in the mean of the monthly u, which weighs by hours"],
+ "In the pooled centre month 3 carries 0.486150 of 21.774650 units, a small share, while in the mean it carries one twelfth, and its reading is the highest on the chart. That mismatch of weights is what lifts the mean above the centre. Month 8 is in the centre as drawn; nothing is set aside until a cause is found. Month 11 has near-average exposure, so its weight barely differs between the two. The mean of the monthly u is unweighted, so hours play no part in it.")
+
+q(2, "Which EGBEMA month has the tightest limits on the chart, and why?",
+ "Month 8, with 421090 hours, the most on the chart, which gives it the smallest distance from the centre to its limit",
+ ["Month 11, whose 2 events are the fewest of the year, because each month's limit is set by the count in that month",
+  "Month 3, whose u of 8.227913 is the highest of the year, because the engine draws tighter limits around a high reading",
+  "Every month shares a single pair of limits, because the centre line is pooled across the year and the base is fixed"],
+ "The limits depend on the centre and the month's units only. Month 8's 2.105450 units are the most on the chart, and its upper limit of 6.410039 is the lowest. Month 11's count and month 3's u do not enter their limits; month 3 in fact has the widest band, 10.211920, because it has the fewest hours. A pooled centre is shared by every month, and the limits still move with each month's units.")
+
+q(1, "An analyst redraws EGBEMA with one flat upper limit, computed from the average month's exposure, in place of the engine's moving limits. What does that chart get wrong about month 3?",
+ "It puts month 3 over the line and hides that its reading rests on under a quarter of month 1's hours",
+ ["Nothing, because a flat limit and moving limits flag the same months on any chart that has a pooled centre line",
+  "It clears month 8, whose u of 7.599326 would sit under an upper limit drawn from the average month's exposure",
+  "It lowers the centre line, because the average month carries fewer events than the pooled year taken as a whole"],
+ "A limit from the average exposure is narrower than month 3's own limit of 10.211920, so month 3's u of 8.227913 crosses it, and the chart calls a thin month unusual without saying it is thin. The engine takes each month's exposure because that is what keeps each limit honest about its own evidence. Month 8 sits well above any limit an average month produces. The centre is computed from counts and units whatever limits are drawn around it.")
+
+q(0, "Which model does the u-chart's limit formula rest on, going by how the Expert tier explains the square root in it?",
+ "The Poisson count model, in which the spread of a month's count grows with the square root of its mean",
+ ["A normal model of the twelve monthly rates, with its spread estimated from the scatter of the monthly u values",
+  "A binomial model of the share of workers injured in a month, with the month's headcount taken as the trials",
+  "A model in which the spread of a month's count grows in direct proportion to the count the month is expected to carry"],
+ "The square root term is the spread the Poisson count model expects for that month's exposure, one sigma, and three of them each side is the Shewhart convention. The limits come from the centre and the units, so the scatter of the monthly readings is not used. The engine has no headcount input at all. A spread growing in proportion to the mean would make the band narrow in proportion to the units, and the formula narrows it with the square root of the units instead.")
+
+q(3, "Which inputs does `uChart` take, going by the engine's own function table?",
+ "counts, exposureHours and base, with the base named by the caller exactly as for every other rate in the engine",
+ ["counts and exposureHours only, since a u-chart always runs on the 200,000 hour base and so has no base left to choose",
+  "counts, exposureHours, base and confidence, since each month's limits are a 95 percent interval on that month",
+  "counts, headcount and base, since each month's units are the people on site during the month divided by the base"],
+ "The function table lists counts, exposureHours, base, and the u-chart takes a named base for the same reason every rate in the engine does. The limits are 3 sigma limits from the method line and take no confidence input; confidence belongs to the interval and the comparison. Hours are the exposure, and the engine has no headcount input anywhere.")
+
+q(2, "EGBEMA's month 5 has 1.859400 units and a u of 1.613424. Which reading of it follows from the engine's method line, with its limits at ubar +/- 3 sqrt(ubar / n_i) and the lower limit floored at 0?",
+ "Its upper limit is 6.635494 and its lower limit is floored at zero, so month 5 sits inside its limits",
+ ["Its upper limit is 5.388087, which is what the method line gives at three sigma for a month of 1.859400 units",
+  "Its upper limit is 6.635494, and it signals below because its u is under the chart's centre line of 2.893273",
+  "Its upper limit is 6.491006, month 1's limit, since every month shares one pooled centre"],
+ "Month 5's printed limits are 0.000000 and 6.635494, and 1.613424 lies between them, so its signal is null. 5.388087 is month 5's derived 2 sigma limit, a narrower band than the engine draws. Sitting below the centre is ordinary; a low signal needs a u strictly below the lower limit, and here that limit is zero. A shared centre does not give a shared limit, because each month's units set its own band.")
+
+emit(Q, '/root/hse-wip-safetystats/banks/h1a_m01.json', expect_n=15)
+finish()

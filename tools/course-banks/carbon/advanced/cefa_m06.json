@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Which of these does SECTION 25 hold as a stated limit under H1?",
+  "options": [
+   "Which IPCC report a Nigerian operator files on is the owner's decision.",
+   "The engine ships the AR6 set as its default when no GWP is supplied.",
+   "The course's set is the one a Nigerian operator is to file its inventory on.",
+   "The AR5 values are retired from the digest and no longer printed beside it."
+  ],
+  "answer": 0,
+  "explanation": "H1 is held: the report is a regulatory reading left to the owner. No GWP ships with the engine, and both reports are printed side by side for the course."
+ },
+ {
+  "prompt": "SECTION 26 names two oracles in the engines repository. Where are their goldens asserted?",
+  "options": [
+   "By the course's capstone grader",
+   "By the digest's computed-here lines",
+   "By the engine test suites",
+   "By the Carbon Studio each time it runs"
+  ],
+  "answer": 2,
+  "explanation": "SECTION 26: two independent oracles in tools/validation/downstream recompute these modules by other routes, and their goldens are asserted by the engine test suites."
+ },
+ {
+  "prompt": "What does held item H3 state?",
+  "options": [
+   "Every escaped carbon atom is counted as CO2 at combustion.",
+   "Every escaped carbon atom is counted as methane.",
+   "Escaped carbon is left out of the inventory.",
+   "Escaped carbon is split by the fuel analysis."
+  ],
+  "answer": 1,
+  "explanation": "SECTION 25, H3: every escaped carbon atom is counted as methane (SECTION 5). It is a held item, taught as a stated limit and never graded."
+ },
+ {
+  "prompt": "SECTION 25 lists each rule in force with the section that prints it. Which rule does it place in SECTION 21?",
+  "options": [
+   "A refused measure is named in refusedMeasures and kept off the curve and its totals",
+   "A year whose scheduled measures abate more than the baseline is refused by the path",
+   "A saving, its price and its factor declared on different bases are refused outright",
+   "A curve with a claim above what its source emits returns meetsTarget none and says why"
+  ],
+  "answer": 3,
+  "explanation": "SECTION 25 places the over-claim rule, and the rule that a verdict is none while a claim acts on a source with no computed emission passed, in SECTION 21. The refusedMeasures rule prints in SECTION 19, the over-abatement refusal in SECTION 22 and the basis refusal in SECTION 23."
+ },
+ {
+  "prompt": "The curve prints additive false for the two heater measures. How does the path count them once they are live?",
+  "options": [
+   "Only the larger one",
+   "Neither, until sequenced",
+   "Each in full, from its own start year",
+   "Each at its tonnes less the other's claim"
+  ],
+  "answer": 2,
+  "explanation": "SECTION 22: each measure counts in full from its start year. Tune the fired heaters counts from 2027 and the Heat integration project from 2029, and by 2031 the abated column reads 15460.000 t, the curve's total."
+ },
+ {
+  "prompt": "By which route does oracle_carbonabatement.py recompute a measure's cost per tonne?",
+  "options": [
+   "Levelised from a year-by-year present value ledger",
+   "By the capital recovery factor the engine itself uses",
+   "By explicit rank, the route it takes for the curve",
+   "As a species ledger whose mass balance must close"
+  ],
+  "answer": 0,
+  "explanation": "SECTION 26: the cost per tonne LEVELISED from a year-by-year present value ledger where the engine uses a capital recovery factor; the curve by explicit rank. The species ledger is oracle_energyefficiency.py's combustion route."
+ },
+ {
+  "prompt": "Solar for purchased power is order 5 on the Agbor curve. In which year does it go live on the path?",
+  "options": [
+   "2030, a year after the Heat integration project",
+   "2027, with Tune the fired heaters and the steam traps",
+   "2031, the last start year among the six measures",
+   "2028, a year before the Heat integration project"
+  ],
+  "answer": 3,
+  "explanation": "Start years are inputs. SECTION 22 gives Solar for purchased power 2028 and the Heat integration project, order 3 on the curve of SECTION 20, 2029; the path goes by those years."
+ },
+ {
+  "prompt": "How does oracle_energyefficiency.py model the steam trap?",
+  "options": [
+   "By the choked and subsonic flux formulas that the engine itself uses for the trap",
+   "As an isentropic nozzle, its throat at the larger of the downstream and critical pressures",
+   "As a duty ledger, the route the oracle takes for the tuning saving",
+   "By bisection on the downstream pressure, the route it takes for excess air"
+  ],
+  "answer": 1,
+  "explanation": "SECTION 26: the steam trap as an ISENTROPIC NOZZLE with its throat at the larger of the downstream and critical pressures, where the engine uses the choked and subsonic flux formulas. The duty ledger is the tuning saving's route and bisection is the excess air route."
+ },
+ {
+  "prompt": "What are H1 to H4 in this course?",
+  "options": [
+   "Rules in force, each shown with a figure",
+   "Figures to compute with at the owner's rates",
+   "Limits, taught as stated and never graded",
+   "Rules in force, each with its section"
+  ],
+  "answer": 2,
+  "explanation": "SECTION 25: HELD, taught as stated limits and never graded. The rules in force are printed in tables of their own, each as the engine answers now with the section that prints it, and H1 to H4 are not among them."
+ },
+ {
+  "prompt": "Which figure is both the Agbor curve's totalAbatementTonnes and the path's abated tonnes in 2031?",
+  "options": [
+   "13610.000 t",
+   "15460.000 t",
+   "12060.000 t",
+   "7410.000 t"
+  ],
+  "answer": 1,
+  "explanation": "SECTION 20 prints totalAbatementTonnes 15460.000, and SECTION 22's 2031 row prints 15460.000 t abated with all six measures live. 13610.000 t is the 2030 row, 12060.000 t the curve with one measure refused, and 7410.000 t the 2029 row."
+ },
+ {
+  "prompt": "Two outputs of the Agbor curve are on SECTION 26's list of what neither oracle recomputes. Which two?",
+  "options": [
+   "The rank order and the costs per tonne it ranks",
+   "The residual to target and paysForItselfTonnes",
+   "The residual to target and the path's year ledger",
+   "The weighted average and the explicit rank order"
+  ],
+  "answer": 1,
+  "explanation": "Both curve outputs sit on SECTION 26's closing list beside carbonIntensity, compositeCurve and the simple payback: taught from the engine and never graded. Rank order has an oracle route of its own."
+ },
+ {
+  "prompt": "How does oracle_carbonabatement.py compute combustion?",
+  "options": [
+   "As a ledger, the route it takes for the inventory",
+   "As a species ledger whose mass balance closes",
+   "By bisection on the stack oxygen reading",
+   "By mass, in exact rationals"
+  ],
+  "answer": 3,
+  "explanation": "SECTION 26: combustion by MASS in exact rationals (kg of carbon times the CO2/C and CH4/C mass ratios, molar masses built from atomic weights). The ledger is its route for the inventory, the species ledger is oracle_energyefficiency.py's combustion route, and bisection is that oracle's route for excess air."
+ },
+ {
+  "prompt": "The engine finds the pinch from a cascade. Which route does the efficiency oracle take to it?",
+  "options": [
+   "By the problem table cascade the engine uses",
+   "As a loss ledger, the route for efficiency",
+   "By the largest heat deficit, with no cascade",
+   "By bisection, the route it takes for excess air"
+  ],
+  "answer": 2,
+  "explanation": "SECTION 26: the pinch by the LARGEST HEAT DEFICIT with no cascade. The loss ledger is the efficiency route and bisection the excess air route; SECTION 25 lists the engine's rule that only an interior zero of the cascade is a pinch."
+ },
+ {
+  "prompt": "SECTION 22 prints the full Agbor baseline less the partial one as 10988.000 tCO2e. What does it say that figure is?",
+  "options": [
+   "The heaters' emission passed to the curve",
+   "The vented and fugitive methane line",
+   "The gap between the two end-year targets",
+   "The purchased electricity line of SECTION 21"
+  ],
+  "answer": 3,
+  "explanation": "SECTION 22: the full baseline less the partial is 10988.000 tCO2e (computed here), the purchased electricity line of SECTION 21: the partial inventory is the full one without it. The heaters are passed as 34927.743 tCO2e and the vented line is 2622.400 tCO2e."
+ },
+ {
+  "prompt": "Flare gas recovery goes live on the Agbor path in 2030. What emissions and target does the path print that year?",
+  "options": [
+   "42490.276 t emitted, against a target of 46483.086 t",
+   "48690.276 t emitted, against a target of 48887.383 t",
+   "42490.276 t emitted, against a target of 41674.491 t",
+   "40640.276 t emitted, against a target of 44078.788 t"
+  ],
+  "answer": 0,
+  "explanation": "In the 2030 row, emissions are the baseline less 13610.000 t abated, 42490.276 t, and the straight-line target stands at 46483.086 t. 48690.276 and 48887.383 t are the 2029 row, 41674.491 t the 2032 target and 40640.276 t the emissions from 2031."
+ }
+]

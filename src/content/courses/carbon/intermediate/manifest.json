@@ -1,0 +1,307 @@
+{
+  "app_slug": "carbon",
+  "tier": "intermediate",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-combustion-from-the-fuel-analysis",
+      "title": "Combustion from the Fuel Analysis",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-oxygen-demand-by-atom-counts",
+          "title": "Oxygen demand by atom counts",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-air-and-the-flue-gas",
+          "title": "Air and the flue gas",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-inerts-ride-through",
+          "title": "Inerts ride through",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-atmospheric-nitrogen-and-its-argon",
+          "title": "Atmospheric nitrogen and its argon",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-excess-air-and-stack-oxygen",
+      "title": "Excess Air and Stack Oxygen",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-reading-excess-air-from-oxygen",
+          "title": "Reading excess air from oxygen",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-closed-form-and-a-bisection",
+          "title": "A closed form and a bisection",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-oxygen-reading-cannot-see",
+          "title": "What the oxygen reading cannot see",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-an-oxygen-the-fuel-cannot-reach",
+          "title": "An oxygen the fuel cannot reach",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-stack-loss-efficiency",
+      "title": "Stack Loss Efficiency",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-losses-out-of-the-stack",
+          "title": "Losses out of the stack",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-lhv-and-hhv",
+          "title": "LHV and HHV",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-moisture-loss-on-each-basis",
+          "title": "The moisture loss on each basis",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-radiation-is-an-input",
+          "title": "Radiation is an input",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-two-bases-are-never-compared",
+          "title": "Two bases are never compared",
+          "order": 5,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-what-tuning-is-worth",
+      "title": "What Tuning Is Worth",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-fuel-is-duty-over-efficiency",
+          "title": "Fuel is duty over efficiency",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-ratio-and-the-shortcut",
+          "title": "The ratio and the shortcut",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-safe-oxygen-floor",
+          "title": "The safe oxygen floor",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-year-of-fuel-saved",
+          "title": "A year of fuel saved",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-steam-condensate-and-the-pinch",
+      "title": "Steam, Condensate and the Pinch",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-a-failed-trap-is-choked-flow",
+          "title": "A failed trap is choked flow",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-isentropic-exponent",
+          "title": "The isentropic exponent",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-fuel-and-carbon-need-a-boiler",
+          "title": "Fuel and carbon need a boiler",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-condensate-return-and-its-floor",
+          "title": "Condensate return and its floor",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-problem-table",
+          "title": "The problem table",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l06-the-pinch-and-the-threshold",
+          "title": "The pinch and the threshold",
+          "order": 6,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-professional-reading",
+      "title": "The Professional Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-isiokpo-heater-end-to-end",
+          "title": "The Isiokpo heater end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-isiokpo-steam-and-streams-end-to-end",
+          "title": "The Isiokpo steam and streams end to end",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-efficiency-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-next-tier-changes",
+          "title": "What the next tier changes",
+          "order": 3,
+          "est_minutes": 12,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}

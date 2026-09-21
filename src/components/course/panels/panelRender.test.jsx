@@ -110,6 +110,36 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('compliance/PlanExplorer.jsx');
     expect(names).toContain('compliance/ReadinessExplorer.jsx');
   });
+  it('finds the crude (Crude Assay & Blending) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('crude/AssayExplorer.jsx');
+    expect(names).toContain('crude/ValuationExplorer.jsx');
+    expect(names).toContain('crude/RecipeExplorer.jsx');
+  });
+  it('finds the refinery (Refinery Feasibility & Planning) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('refinery/ScreenExplorer.jsx');
+    expect(names).toContain('refinery/PlanExplorer.jsx');
+    expect(names).toContain('refinery/VarianceExplorer.jsx');
+  });
+  it('finds the carbon (Carbon & Energy Efficiency) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('carbon/InventoryExplorer.jsx');
+    expect(names).toContain('carbon/EfficiencyExplorer.jsx');
+    expect(names).toContain('carbon/AbatementExplorer.jsx');
+  });
+  it('finds the supply (Terminals, Depots & Fuel Supply) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('supply/TankExplorer.jsx');
+    expect(names).toContain('supply/DepotExplorer.jsx');
+    expect(names).toContain('supply/PriceExplorer.jsx');
+  });
+  it('finds the gasvalue (Flare Gas to Value & LPG/CNG) panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('gasvalue/FlareExplorer.jsx');
+    expect(names).toContain('gasvalue/RouteExplorer.jsx');
+    expect(names).toContain('gasvalue/RolloutExplorer.jsx');
+  });
   it('finds the FC8 metering, control valve and storage panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('metering/MeterRunExplorer.jsx');
@@ -122,6 +152,34 @@ describe('every course panel renders with no props', () => {
     expect(names).toContain('corrosion/ChemistryExplorer.jsx');
     expect(names).toContain('corrosion/RateExplorer.jsx');
     expect(names).toContain('corrosion/InhibitorIntegrityExplorer.jsx');
+  });
+  it('finds the H1 safety statistics panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('safetystats/RatesExplorer.jsx');
+    expect(names).toContain('safetystats/IntervalsExplorer.jsx');
+    expect(names).toContain('safetystats/UChartExplorer.jsx');
+  });
+  it('every H1 safety statistics view renders, not only the default one', async () => {
+    const MODES = {
+      'safetystats/RatesExplorer.jsx': ['rate', 'kinds', 'pool', 'rolling'],
+      'safetystats/IntervalsExplorer.jsx': ['interval', 'zero', 'compare', 'ladder'],
+      'safetystats/UChartExplorer.jsx': ['chart', 'revise', 'beforeafter'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        expect(
+          () => renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode })),
+          `${name} in the ${mode} view`,
+        ).not.toThrow();
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(11);
   });
   // EVERY MODE, not only the default one. A panel with four views renders one
   // of them with no props, and the other three are exactly where a crash hides:

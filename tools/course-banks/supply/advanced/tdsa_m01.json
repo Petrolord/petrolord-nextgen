@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "cargoQuantities is called on the invented BADAGRY cargo with its quantity and unit given and the density left out. What does the engine return?",
+  "options": [
+   "REFUSED: Cargo quantity is required.",
+   "The cargo converted at the petrol density of 745 kg/m3 that PRODUCT_REFERENCE lists for PMS.",
+   "REFUSED: Density is required to convert between mass and volume; it is not assumed.",
+   "REFUSED: Unknown quantity unit \"kg\"."
+  ],
+  "answer": 2,
+  "explanation": "Every volume the function forms needs the density, so with none supplied it forms nothing and names the density as the missing input."
+ },
+ {
+  "prompt": "The invented BADAGRY cargo is entered as 34000 with the unit typed as kg and its density of 742.8 kg/m3 given. Which answer does cargoQuantities give?",
+  "options": [
+   "REFUSED: Unknown quantity unit \"kg\".",
+   "A cargo of 34000 tonnes, because the engine maps a mass unit it does not list to the nearest mass unit it does.",
+   "REFUSED: Density is required to convert between mass and volume; it is not assumed.",
+   "REFUSED: Cargo quantity is required."
+  ],
+  "answer": 0,
+  "explanation": "The digest prints this row as REFUSED: Unknown quantity unit \"kg\". The cargo table converts entries in tonne, m3, litre and bbl, and kg is none of them, so the row returns no figure."
+ },
+ {
+  "prompt": "A quantity of zero is put to cargoQuantities with a valid unit and the density of 742.8 kg/m3. What comes back?",
+  "options": [
+   "An empty cargo in every unit, since a zero quantity is still a quantity the rules can convert.",
+   "REFUSED: Density is required to convert between mass and volume; it is not assumed.",
+   "REFUSED: Unknown quantity unit \"kg\".",
+   "REFUSED: Cargo quantity is required."
+  ],
+  "answer": 3,
+  "explanation": "The digest prints the zero quantity case as the refusal \"Cargo quantity is required.\" The engine forms no volume for a cargo it has not been given."
+ },
+ {
+  "prompt": "34000 tonnes of the invented BADAGRY petrol cargo are entered at its certificate density of 742.8 kg/m3. How many cubic metres does the engine return?",
+  "options": [
+   "45637.584 m3",
+   "45772.752 m3",
+   "45772.700 m3",
+   "45772.442 m3"
+  ],
+  "answer": 1,
+  "explanation": "m3 = tonnes x 1000 / density gives 45772.752 m3. 45637.584 m3 is the same tonnes at the reference density of 745 kg/m3, and the other two are the rows typed as 45772.7 m3 and as 287900 bbl."
+ },
+ {
+  "prompt": "BADAGRY is entered as 45772.7 m3 at 742.8 kg/m3 and comes back as 33999.9616 tonnes. Why does the tonne figure not read 34000.0000?",
+  "options": [
+   "The barrel constant of 0.158987294928 is itself rounded, so every trip through a volume sheds a little mass.",
+   "The engine stores litres to two decimals and rebuilds the tonnes from that stored litre figure.",
+   "The typed 45772.7 m3 is short of the cargo's 45772.752 m3, and the engine converts it as typed.",
+   "The density of 742.8 kg/m3 is applied at the observed temperature when the entry is a volume."
+  ],
+  "answer": 2,
+  "explanation": "m3 = tonnes x 1000 / density, so the engine forms tonnes from the volume it is handed. 34000 tonnes at 742.8 kg/m3 is 45772.752 m3, and the 45772.7 m3 typed converts to 33999.9616 tonnes."
+ },
+ {
+  "prompt": "A BADAGRY entry of 287900 bbl, density 742.8 kg/m3, comes back from cargoQuantities in tonnes as what?",
+  "options": [
+   "33999.7701 tonnes",
+   "33999.9616 tonnes",
+   "34000.0000 tonnes",
+   "45772.442 tonnes"
+  ],
+  "answer": 0,
+  "explanation": "The 287900 bbl row reads 45772.442 m3 and 33999.7701 tonnes. 34000.0000 tonnes is the row entered in tonnes, 33999.9616 tonnes the rows entered as 45772.7 m3 and as 45772700 litres, and 45772.442 is the barrel row's volume in m3."
+ },
+ {
+  "prompt": "34000 tonnes are run through cargoQuantities at the kerosene density of 800 kg/m3 that PRODUCT_REFERENCE lists for DPK. What comes back?",
+  "options": [
+   "40476.190 m3 and 40476190.48 litres",
+   "45637.584 m3 and 45637583.89 litres",
+   "45772.752 m3 and 45772751.75 litres",
+   "42500.000 m3 and 42500000.00 litres"
+  ],
+  "answer": 3,
+  "explanation": "The density rows read 42500.000 m3 and 42500000.00 litres for DPK at 800 kg/m3. 40476.190 m3 is the AGO row at 840 kg/m3, 45637.584 m3 the PMS row at 745 kg/m3, and 45772.752 m3 the BADAGRY cargo at its own 742.8 kg/m3."
+ },
+ {
+  "prompt": "The same 34000 tonnes are run at 742.8 kg/m3 and at the petrol reference density of 745 kg/m3. What does the pair of results show?",
+  "options": [
+   "Both densities are petrol, so the engine returns 45772.752 m3 for each and the reference figure is harmless.",
+   "A density inside the petrol range can still describe a different cargo on paper: 45772.752 m3 against 45637.584 m3.",
+   "The reference density is rejected because it falls outside the petrol range the module lists.",
+   "The two volumes agree to the litre once each is expressed in barrels through the constant 0.158987294928."
+  ],
+  "answer": 1,
+  "explanation": "Both are petrol densities in PRODUCT_REFERENCE, yet the engine returns 45772.752 m3 at 742.8 kg/m3 and 45637.584 m3 at 745 kg/m3. The certificate of quality is the authority, which is why the cargo's own figure is the one typed."
+ },
+ {
+  "prompt": "The invented BADAGRY cargo is entered once as 45772.7 m3 and once as 45772700 litres, both at 742.8 kg/m3. What do the two entries return?",
+  "options": [
+   "The same figures: 45772.700 m3, 33999.9616 tonnes and 287901.6215 barrels.",
+   "The litre entry refused, since litres are not a unit the cargo table converts.",
+   "The same m3, with 34000.0000 tonnes on the litre entry.",
+   "Two m3 figures 1000 apart, since the litre entry is read as m3."
+  ],
+  "answer": 0,
+  "explanation": "The two rows print alike: 45772.700 m3, 45772700.00 litres, 33999.9616 tonnes and 287901.6215 barrels. litres = m3 x 1000, so the two entries are one quantity."
+ },
+ {
+  "prompt": "Two barrel figures for the invented BADAGRY cargo at 742.8 kg/m3 disagree: 287900.0000 and 287901.9470. What differs between the two rows?",
+  "options": [
+   "The barrel constant, which each row carries to a different number of decimals.",
+   "The litre count, which one row rounds to two decimals before it forms the barrels.",
+   "The quantity typed: 287900 bbl in one row and 34000 tonnes in the other.",
+   "The density, 742.8 kg/m3 in one row and 745 kg/m3 in the other."
+  ],
+  "answer": 2,
+  "explanation": "Both rows are the BADAGRY cargo at 742.8 kg/m3. The 287900 bbl row returns 287900.0000 barrels and the 34000 tonne row 287901.9470, and barrels = m3 / 0.158987294928 with one constant for every row."
+ },
+ {
+  "prompt": "How does cargoQuantities reach the barrel figure of 287901.9470 for 34000 tonnes at 742.8 kg/m3?",
+  "options": [
+   "It multiplies the tonnes by a barrels-per-tonne factor held for each product in PRODUCT_REFERENCE.",
+   "It divides the 45772751.75 litres by 1000 and then by the typical petrol density of 745 kg/m3.",
+   "It divides the tonnes by 0.158987294928 and then corrects the result with the density of 742.8 kg/m3.",
+   "It forms 45772.752 m3 through the density, then divides by 0.158987294928."
+  ],
+  "answer": 3,
+  "explanation": "The engine never reaches a barrel from tonnes directly. The density gives the m3, 45772.752, and dividing by M3_PER_BBL, 0.158987294928, gives the barrels."
+ },
+ {
+  "prompt": "In IMPORT_TEMPLATE, which basis does the Marine insurance line ship with?",
+  "options": [
+   "percent_of_cif",
+   "percent_of_cf",
+   "percent_of_fob",
+   "per_tonne"
+  ],
+  "answer": 1,
+  "explanation": "The template ships insurance as percent_of_cf. Import duty and Financing and letter of credit are the lines shipped on percent_of_cif, and freight and port are per_tonne."
+ },
+ {
+  "prompt": "Which of these bases belongs to PRICE_ELEMENT_BASIS and appears nowhere in CHARGE_BASIS?",
+  "options": [
+   "percent_of_cif",
+   "per_litre",
+   "percent_of_running",
+   "per_cargo"
+  ],
+  "answer": 2,
+  "explanation": "CHARGE_BASIS carries per_tonne, per_m3, per_litre, per_bbl, per_cargo, percent_of_fob, percent_of_cf and percent_of_cif. PRICE_ELEMENT_BASIS carries per_litre, percent_of_landed and percent_of_running, so per_litre is in both lists."
+ },
+ {
+  "prompt": "Every line in IMPORT_TEMPLATE and PUMP_TEMPLATE ships its rate as none. What does RATE_DISCLAIMER tell the user to do with each rate?",
+  "options": [
+   "Confirm it against the regulation in force.",
+   "Use the template rate until a regulation is published.",
+   "Read it from the oracles' golden files.",
+   "Take a missing rate as zero and name it."
+  ],
+  "answer": 0,
+  "explanation": "RATE_DISCLAIMER ends \"Confirm each against the regulation in force.\" The templates ship every rate as none, and the fuelpricing golden file ships none either, since every rate in it is synthetic."
+ },
+ {
+  "prompt": "Which pair of IMPORT_TEMPLATE lines ships with the basis percent_of_cif?",
+  "options": [
+   "Marine insurance, and Import duty.",
+   "Ocean freight, and Port and harbour charges.",
+   "Jetty throughput and discharge, and Storage and handling.",
+   "Import duty, and Financing and letter of credit."
+  ],
+  "answer": 3,
+  "explanation": "Two landed lines bite on CIF in the template: Import duty and Financing and letter of credit. The insurance line itself ships on C&F, which is why it cannot be one of them."
+ }
+]

@@ -230,6 +230,31 @@ export const PANELS = {
   'compliance-register-explorer': React.lazy(() => import('@/components/course/panels/compliance/RegisterExplorer')),
   'compliance-plan-explorer': React.lazy(() => import('@/components/course/panels/compliance/PlanExplorer')),
   'compliance-readiness-explorer': React.lazy(() => import('@/components/course/panels/compliance/ReadinessExplorer')),
+  // crude: Crude Assay & Blending (academy module commercial_trading)
+  'crude-assay-explorer': React.lazy(() => import('@/components/course/panels/crude/AssayExplorer')),
+  'crude-valuation-explorer': React.lazy(() => import('@/components/course/panels/crude/ValuationExplorer')),
+  'crude-recipe-explorer': React.lazy(() => import('@/components/course/panels/crude/RecipeExplorer')),
+
+  // refinery: Refinery Feasibility & Planning (academy module commercial_trading)
+  'refinery-screen-explorer': React.lazy(() => import('@/components/course/panels/refinery/ScreenExplorer')),
+  'refinery-plan-explorer': React.lazy(() => import('@/components/course/panels/refinery/PlanExplorer')),
+  'refinery-variance-explorer': React.lazy(() => import('@/components/course/panels/refinery/VarianceExplorer')),
+  // MD3 supply: Terminals, Depots & Fuel Supply (academy module supply_chain)
+  'supply-tank-explorer': React.lazy(() => import('@/components/course/panels/supply/TankExplorer')),
+  'supply-depot-explorer': React.lazy(() => import('@/components/course/panels/supply/DepotExplorer')),
+  'supply-price-explorer': React.lazy(() => import('@/components/course/panels/supply/PriceExplorer')),
+  // gasvalue: Flare Gas to Value & LPG/CNG (academy module energy_transition)
+  'gasvalue-flare-explorer': React.lazy(() => import('@/components/course/panels/gasvalue/FlareExplorer')),
+  'gasvalue-route-explorer': React.lazy(() => import('@/components/course/panels/gasvalue/RouteExplorer')),
+  'gasvalue-rollout-explorer': React.lazy(() => import('@/components/course/panels/gasvalue/RolloutExplorer')),
+  // MD5 carbon: Carbon & Energy Efficiency (academy module energy_transition)
+  'carbon-inventory-explorer': React.lazy(() => import('@/components/course/panels/carbon/InventoryExplorer')),
+  'carbon-efficiency-explorer': React.lazy(() => import('@/components/course/panels/carbon/EfficiencyExplorer')),
+  'carbon-abatement-explorer': React.lazy(() => import('@/components/course/panels/carbon/AbatementExplorer')),
+  // H1 Safety Performance Statistics & KPIs (academy module hse)
+  'ss-rates-explorer': React.lazy(() => import('@/components/course/panels/safetystats/RatesExplorer')),
+  'ss-intervals-explorer': React.lazy(() => import('@/components/course/panels/safetystats/IntervalsExplorer')),
+  'ss-uchart-explorer': React.lazy(() => import('@/components/course/panels/safetystats/UChartExplorer')),
 };
 
 export function resolvePanel(id) {

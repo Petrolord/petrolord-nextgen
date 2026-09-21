@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "IOGP's 2024 TRIR rests on 3071 recordable cases in 3795000000 hours. The engine returns 0.809223 per 1,000,000 hours and IOGP prints 0.81. How much of the engine's figure can a benchmark comparison lean on?",
+  "options": [
+   "All six decimals, since the engine reproduces the golden with a relative difference of 0 on this row",
+   "Only the first decimal, since IOGP rounds its published rates to one place before they reach the engine",
+   "Down to about its third decimal, because the hours are printed to the nearest million and half a million moves the fourth",
+   "None of it, since a figure the engine recomputes from published inputs cannot then be quoted beside a published rate at all"
+  ],
+  "answer": 2,
+  "explanation": "The IOGP report prints the TRIR hours to the nearest million, and half a million hours either way moves the rate in its fourth decimal, so 0.809223 is exact for the hours as printed and good to about one unit in the fourth decimal for the hours as worked. A relative difference of 0 against the golden shows the arithmetic matches the golden, which carries the same rounded hours. IOGP prints 0.81, two decimals. Quote IOGP's 0.81 as the published figure and carry 0.809223 through the arithmetic, labelled as such."
+ },
+ {
+  "prompt": "In 2024 IOGP recorded 32 fatalities in 21 fatal incidents on 4158877000 hours. Which pair of rates per 100,000,000 hours do those counts give?",
+  "options": [
+   "An observed FAR of 0.769438 from the fatalities and a fatal incident rate of 0.504944 from the incidents",
+   "An observed FAR of 0.504944 from the incidents, since the FAR counts each fatal event once whatever its toll",
+   "An observed FAR of 0.769438 from both counts, since IOGP adds fatalities and fatal incidents into one rate",
+   "An observed FAR of 0.820324, since the 2024 FAR is always quoted on the prior year's hours by IOGP convention"
+  ],
+  "answer": 0,
+  "explanation": "The FAR counts fatalities, so an incident that kills several people moves it by several and the incident rate by one: 32 gives 0.769438 and 21 gives 0.504944 on the same hours. The two counts are kept separate, and a benchmark comparison must say which it uses. 0.820324 is the 2023 observed FAR, 27 fatalities on 2023's own 3291382000 hours."
+ },
+ {
+  "prompt": "UGHELLI's recordable rate is 0.776317 per 200,000 hours; the IOGP 2024 TRIR is 0.809223 per 1,000,000 hours. What does the honest comparison show?",
+  "options": [
+   "UGHELLI's rate is below the industry's, since 0.776317 is smaller than the IOGP figure of 0.809223",
+   "The two rates are about the same, since 0.776317 and 0.809223 differ in their second decimal only",
+   "UGHELLI sits a few percent under the industry, since 0.776317 against 0.809223 is a small gap in the site's favour",
+   "On the IOGP base UGHELLI reads 3.881586, which is 4.796684 times the IOGP figure"
+  ],
+  "answer": 3,
+  "explanation": "The base must match first. The count and the hours do not change when the base does, so UGHELLI's rate on the million-hour base is 5 times its OSHA figure, 3.881586, and set against IOGP's 0.809223 it is 4.796684 times the industry figure. Comparing across the two bases is off by a factor of five, in the flattering direction for whoever quotes the smaller base."
+ },
+ {
+  "prompt": "UGHELLI and IOGP are now both on the million-hour base. What must still be checked before the ratio of 4.796684 means anything?",
+  "options": [
+   "Nothing further, since a shared base is the one condition a benchmark comparison needs before the ratio can be read",
+   "That the case classes match IOGP's TRIR, which counts fatalities, lost workday, restricted workday and medical treatment cases",
+   "That UGHELLI's hours were counted to the nearest million, so its rounding matches the rounding of IOGP's hours",
+   "That UGHELLI had at least 32 recordables, the count under IOGP's 2024 FAR, so both rates rest on similar counts"
+  ],
+  "answer": 1,
+  "explanation": "A shared base is necessary and not sufficient: the definition and the workforce must match too, both contractor and company in or both out. The engine takes a count that arrives classified and cannot check the name printed beside it, so the definition check is a reading exercise. Rounding UGHELLI's hours to a million would destroy the figure. The FAR's count is irrelevant to a recordable rate."
+ },
+ {
+  "prompt": "Run through the engine as if the IOGP 2024 total were a second workforce, UGHELLI reads a rate ratio of 4.796684 with a 95 percent interval of 2.191251 to 9.117590. Whose uncertainty does that interval mostly carry?",
+  "options": [
+   "UGHELLI's, because its rate rests on 9 events while the IOGP total rests on 3071",
+   "IOGP's, because its total spans billions of hours pooled across many companies and years",
+   "Both equally, because the conditional exact test splits the uncertainty evenly between the groups",
+   "Neither, because a rate ratio against a published figure is exact and carries no uncertainty"
+  ],
+  "answer": 0,
+  "explanation": "On the conditional exact test the IOGP rate, resting on 3071 events, behaves almost like a known constant; UGHELLI's 9 events make the interval wide. Its upper limit over its lower is of the same order as the Professional tier's ladder at a handful of events. Narrowing it takes more UGHELLI exposure; more IOGP hours would change almost nothing. The ratio is an estimate from counts and carries their uncertainty."
+ },
+ {
+  "prompt": "The UGHELLI against IOGP comparison returns a central p-value of 0.000301. What does the Expert tier say that p-value tells you?",
+  "options": [
+   "That UGHELLI's workforce is proven worse than every IOGP company at the 0.000301 level, since the test compares the site with each of them",
+   "That the two rates are equal, since a p-value below 0.05 means the test found no evidence of a difference between the two groups",
+   "Little: it tests whether UGHELLI shares one pooled rate with all of IOGP, which nobody expected, so the ratio and its interval carry the information",
+   "That the comparison is unreliable, since the engine refuses a p-value when one group's hours are over a thousand times the other's"
+  ],
+  "answer": 2,
+  "explanation": "The test treats the IOGP total as one workforce under one rate; it is many workforces under many. Nobody expects a single site to share the pooled rate exactly, so a small p-value answers a question that was never in doubt. The information is in the ratio, 4.796684, and its interval, whose lower limit of 2.191251 is above 1. The test knows nothing of individual companies. A p-value below 0.05 is the opposite of no evidence, and the engine runs the comparison without complaint."
+ },
+ {
+  "prompt": "An analyst wants a narrower interval on UGHELLI's ratio to the IOGP 2024 TRIR. What would narrow it?",
+  "options": [
+   "More IOGP hours, since the reference total is the larger of the two groups and dominates the test",
+   "A move to the 200,000 hour base, since it shrinks both limits by a factor of five",
+   "A 90 percent confidence level quoted as 95 percent, since the two intervals differ only slightly",
+   "More UGHELLI exposure, since the interval's width comes almost entirely from UGHELLI's 9 events"
+  ],
+  "answer": 3,
+  "explanation": "The IOGP rate behaves nearly like a constant on 3071 events, so more IOGP hours would change almost nothing; UGHELLI's count is where the uncertainty lives. A rate ratio has no base in it, since the base cancels. Quoting a 90 percent interval as 95 percent misstates it; a lower confidence level is a real choice that must be stated as such."
+ },
+ {
+  "prompt": "A site manager asks where UGHELLI ranks among IOGP's member companies. What can the engine's comparison support?",
+  "options": [
+   "A ranking in the top tenth of member companies, since the lower limit of the rate ratio, 2.191251, is well above 1",
+   "No ranking: placing a site in a percentile needs the distribution of company rates, which the pooled IOGP figure does not carry",
+   "A ranking in the bottom half, since a p-value of 0.000301 places UGHELLI in the worst 0.000301 share of companies",
+   "A ranking at the median, since the pooled IOGP rate is by construction the rate of the median member company"
+  ],
+  "answer": 1,
+  "explanation": "The IOGP figure pools companies; it is a reference line with no distribution behind it in the engine, which carries no benchmark rates at all. The ratio's interval says UGHELLI's gap to the pooled figure is larger than its own count uncertainty, and nothing about other companies. A p-value is not a percentile. A pooled rate is the rate of the whole membership, generally different from the median company's."
+ },
+ {
+  "prompt": "Where do the IOGP counts and hours used in this module come from?",
+  "options": [
+   "From a benchmark table exported by the engine, which ships IOGP's rates so that a caller can compare a site",
+   "From the engine's `RATE_BASES` export, which pairs each named base with the IOGP rate last published on that base",
+   "From the vendored golden, where they sit as published inputs; the engine carries no benchmark rates of its own",
+   "From the capstone's own inputs, which supply each year's IOGP figures for the benchmark part of the course"
+  ],
+  "answer": 2,
+  "explanation": "The course says so: the engine carries no benchmark rates, and the IOGP figures come from the vendored golden, where they are published inputs; the engine recomputes each rate from them and matches the golden with a relative difference of 0. `RATE_BASES` holds three bases and nothing else. The capstone's workplaces are separate and are never a source of teaching figures."
+ },
+ {
+  "prompt": "IOGP's five-year observed FAR for 2020 to 2024 is 0.826095 by sum then divide, and the mean of the five yearly rates is 0.833228. Which should a report quote, and why?",
+  "options": [
+   "0.833228, because each year is a report and every report deserves an equal fifth of the weight",
+   "0.826095, because IOGP computes its own five-year figure as the sum of fatalities over the sum of hours",
+   "0.833228, because the mean of the yearly rates removes the effect of the membership's hours growing",
+   "Either one, because the two methods agree on any five-year series and differ only by rounding in the last places"
+  ],
+  "answer": 1,
+  "explanation": "IOGP pools, and the engine reproduces its 0.826095 exactly, as a pooled rate and as one rolling window of 5 years. The mean of the yearly rates weights 2022's 2579000000 hours like 2024's 4158877000 and is a different number; averaging IOGP's rates is the mean-of-rates mistake at industry scale. The two methods differ by construction: the gap between 0.826095 and 0.833228 comes from the weighting, and rounding plays no part in it."
+ },
+ {
+  "prompt": "The observed FAR fell from 0.820324 in 2023 to 0.769438 in 2024. The 2024 FAR's 95 percent interval runs from 0.526295 to 1.086218. What does that interval say about the fall?",
+  "options": [
+   "It is a real improvement, since the 2024 rate is lower and it rests on more hours than the 2023 rate did",
+   "It is a real improvement, since 0.769438 is below 0.820324 and both figures reproduce IOGP's published rates",
+   "It cannot be judged at all, since an interval on an observed FAR is only defined for the five-year pooled figure",
+   "It is smaller than 32 fatalities can resolve: the 2023 figure sits inside the 2024 interval, so the fall sits within the count's own scatter"
+  ],
+  "answer": 3,
+  "explanation": "A single year's observed FAR rests on a few dozen fatalities. 0.820324 lies between 0.526295 and 1.086218, so the 2024 data are consistent with the 2023 rate, and a headline calling the fall an improvement is reading scatter. More hours do not remove the uncertainty of a small count. Matching the published figure says the arithmetic is right. Any single year's FAR has its own exact interval."
+ },
+ {
+  "prompt": "What does IOGP's five-year pooled observed FAR of 0.826095 hide that the yearly figures show?",
+  "options": [
+   "The 2022 peak of 1.279566, which the five-year figure dilutes among the years around it",
+   "Nothing, since the pooled figure carries the same information as the five yearly rates together",
+   "The fall in hours after 2020, which the pooled figure removes by weighting every year by one fifth",
+   "The 2020 figure of 0.550271, which sum then divide drops as an incomplete year"
+  ],
+  "answer": 0,
+  "explanation": "A five-year figure is steady because it pools, and the price is that a real change shows only slowly, diluted by the years before it. The 2022 peak is visible in the yearly column and invisible in 0.826095. Pooling weights each year by its hours, and the hours grew from 2544201000 in 2020 to 4158877000 in 2024. Every year is in the pooled figure."
+ },
+ {
+  "prompt": "The UGHELLI against IOGP comparison reports an expectedProportion of 0.000611. What is that figure?",
+  "options": [
+   "UGHELLI's events as a share of all the events in the comparison, which is its 9 over the events counted in the two groups taken together",
+   "The chance that a rate ratio as large as 4.796684 would appear by chance alone, which is the test's one-tailed p-value",
+   "UGHELLI's hours as a share of all the hours in the comparison, which is its expected share of the events if the rates were equal",
+   "The ratio of UGHELLI's rate to the IOGP rate expressed per million hours, divided by the published IOGP figure of 0.81"
+  ],
+  "answer": 2,
+  "explanation": "Given the total events and equal rates, UGHELLI's share of the events is binomial with its share of the hours as the probability, and that share is 0.000611. The observed share of events is a different figure. The p-value is 0.000301, central and two-sided. A ratio of rates is 4.796684, nowhere near 0.000611."
+ },
+ {
+  "prompt": "A risk assessment document for the same field reports a predicted FAR next to the site's recorded fatalities. What does the course's vocabulary require of the recorded one?",
+  "options": [
+   "Call it the observed FAR, since here FAR is a rate counted after the fact and a predicted FAR is a different quantity",
+   "Call it the FAR without qualification, since a FAR has one IOGP definition wherever it appears in a report or a document",
+   "Call it the fatality severity rate, since the course reserves FAR for predicted rates drawn from a quantitative risk assessment",
+   "Put both on the million-hour base, since an observed FAR and a predicted FAR only differ in the base they use"
+  ],
+  "answer": 0,
+  "explanation": "The course's vocabulary rule: here FAR is an observed rate, and the planned QRA course will teach a predicted one; write observed FAR wherever the two could be confused. The fixed IOGP definition is of the rate's base and count, and it does not make an observed and a predicted figure the same thing. A severity rate is days lost per base hours. FAR's base is fixed at 100,000,000 hours."
+ },
+ {
+  "prompt": "IOGP's rule is a five-year rolling average. Run through `rollingRate` over 2020 to 2024 with a window of 5, what does the engine return?",
+  "options": [
+   "5 windows, one per year, each carrying that year's own FAR, from 0.550271 to 0.769438",
+   "1 window, with a rate of 0.833228, since a rolling rate averages the rates inside its window",
+   "No window, since a rolling window needs one more period than its length before it can start",
+   "1 window, with a rate of 0.826095, the same figure as the pooled rate over the five years"
+  ],
+  "answer": 3,
+  "explanation": "One complete window of 5 years exists in a 5-year series, and a rolling rate is sum then divide inside the window, so it returns 0.826095, the pooled figure for the same five years. The mean of the rates, 0.833228, is shown for comparison only. A window of 5 needs 5 periods, no more."
+ }
+]

@@ -1,0 +1,307 @@
+{
+  "app_slug": "carbon",
+  "tier": "advanced",
+  "content_version": 1,
+  "modules": [
+    {
+      "key": "m01-the-cost-of-a-tonne-abated",
+      "title": "The Cost of a Tonne Abated",
+      "order": 1,
+      "lessons": [
+        {
+          "key": "l01-capital-recovery",
+          "title": "Capital recovery",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-negative-cost-pays-for-itself",
+          "title": "A negative cost pays for itself",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-blank-is-not-free",
+          "title": "A blank is not free",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-rate-is-a-fraction",
+          "title": "A rate is a fraction",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-one-year-against-a-life",
+          "title": "One year against a life",
+          "order": 5,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m02-the-marginal-abatement-cost-curve",
+      "title": "The Marginal Abatement Cost Curve",
+      "order": 2,
+      "lessons": [
+        {
+          "key": "l01-cheapest-first",
+          "title": "Cheapest first",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-steps-that-tile-the-axis",
+          "title": "Steps that tile the axis",
+          "order": 2,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-weighted-average",
+          "title": "The weighted average",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-measures-that-pay-for-themselves",
+          "title": "Measures that pay for themselves",
+          "order": 4,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m03-interactions-and-over-claims",
+      "title": "Interactions and Over-claims",
+      "order": 3,
+      "lessons": [
+        {
+          "key": "l01-two-measures-on-one-source",
+          "title": "Two measures on one source",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-claims-above-what-a-source-emits",
+          "title": "Claims above what a source emits",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-a-verdict-left-unassessed",
+          "title": "A verdict left unassessed",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-a-source-with-no-emission-passed",
+          "title": "A source with no emission passed",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m04-targets-and-the-path",
+      "title": "Targets and the Path",
+      "order": 4,
+      "lessons": [
+        {
+          "key": "l01-a-target-on-a-partial-inventory",
+          "title": "A target on a partial inventory",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-a-straight-line-to-the-end-year",
+          "title": "A straight line to the end year",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-unabated-gap",
+          "title": "The unabated gap",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-measures-with-no-start-year",
+          "title": "Measures with no start year",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-the-first-shortfall-year",
+          "title": "The first shortfall year",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m05-savings-into-the-ledger",
+      "title": "Savings into the Ledger",
+      "order": 5,
+      "lessons": [
+        {
+          "key": "l01-one-saving-in-money-and-carbon",
+          "title": "One saving in money and carbon",
+          "order": 1,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-the-heating-value-basis",
+          "title": "The heating value basis",
+          "order": 2,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-the-cost-per-tonne-handed-over",
+          "title": "The cost per tonne handed over",
+          "order": 3,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l04-the-simple-payback",
+          "title": "The simple payback",
+          "order": 4,
+          "est_minutes": 12,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l05-energy-intensity-and-its-peer",
+          "title": "Energy intensity and its peer",
+          "order": 5,
+          "est_minutes": 13,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        }
+      ]
+    },
+    {
+      "key": "m06-the-expert-reading",
+      "title": "The Expert Reading",
+      "order": 6,
+      "lessons": [
+        {
+          "key": "l01-the-agbor-programme-end-to-end",
+          "title": "The Agbor programme end to end",
+          "order": 1,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l02-what-is-held-and-what-is-decided",
+          "title": "What is held and what is decided",
+          "order": 2,
+          "est_minutes": 14,
+          "panels": [
+            "carbon-abatement-explorer"
+          ],
+          "has_exercise": true
+        },
+        {
+          "key": "l03-what-the-oracles-check",
+          "title": "What the oracles check",
+          "order": 3,
+          "est_minutes": 13,
+          "panels": [],
+          "has_exercise": true
+        }
+      ]
+    }
+  ]
+}
