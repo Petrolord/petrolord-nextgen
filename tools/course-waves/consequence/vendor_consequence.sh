@@ -9,9 +9,8 @@
 # golden or numeric output moved. `--copy` writes every closure path from $REV
 # (the two changed paths are the only ones that differ); without it the script
 # only WALKS the closure from the jest suite, as the H3 vendor did, and runs the
-# four proofs a path against $REV. The canonical pin stays at df31f53 and the
-# two paths are ledgered in VENDOR.json as differing, group
-# 8-h4-consequence-revendor, each pinned to its vendored blob.
+# four proofs a path against $REV. Since nextgen #176 the canonical pin is
+# 16fd6c9 itself, so no ledger row is needed for any closure path.
 #
 # Four independent proofs per path: the git blob hash, a sha256 over the bytes,
 # a byte-for-byte cmp, and a byte COUNT on both sides.
