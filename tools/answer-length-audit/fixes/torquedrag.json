@@ -257,6 +257,129 @@
    "flag": "same key as advanced final ord 27",
    "verdict": "judged fine",
    "reason": "Kept as the module question; the advanced final copy was rewritten to a different point."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "category": "duplicate",
+   "flag": "lead review: intermediate final 33 duplicates intermediate module m02-torque ord 10 (why going on bottom adds less than the bit torque)",
+   "verdict": "fixed",
+   "reason": "Same concept and answer as the module question, kept there; the final copy now asks for the catch in using surface torque as the hole-condition signal (intermediate m02 l03), a point no question tested.",
+   "changes": {
+    "prompt": {
+     "old": "Going on bottom raises the torque by less than the bit torque on three of five wells. Why?",
+     "new": "Torque is the better hole-condition signal on a long well. What is the catch?"
+    },
+    "explanation": {
+     "old": "On the horizontal well the effect reverses and the torque rises by more, because a buckling string presses outward.",
+     "new": "The better signal comes through a worse instrument. Top drive torque is noisy, affected by the drive's own losses and swings hard in stick-slip, so both readings are watched and a downhole measurement near the bit is better than either. The friction share grows with the lateral, and the tool joint radius carries the moment."
+    },
+    "options": {
+     "0": {
+      "old": "The bit torque is partly absorbed by the mud motor before it reaches the drill string above.",
+      "new": "Its friction share falls as the lateral lengthens, so the signal weakens on exactly the wells where it matters."
+     },
+     "1": {
+      "old": "The rotary speed falls when weight is applied, which changes the tangential share of the friction.",
+      "new": "It needs a friction factor fitted to torque, because a factor fitted to a hookload cannot be used to predict it."
+     },
+     "2": {
+      "old": "The engine applies the bit torque as a boundary condition rather than adding it to the surface value.",
+      "new": "It is set by the pipe body radius, which wear changes, so the same friction reads differently over time."
+     },
+     "3": {
+      "old": "The compression it adds reduces the side force in the curved sections near the bit.",
+      "new": "It comes through the top drive, a noisy instrument with its own losses that swings in stick-slip."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index is unchanged."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-torque",
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "lead review: duplicate of intermediate final 33",
+   "verdict": "judged fine",
+   "reason": "Kept as the module question; the final copy was rewritten to a different point."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "lead review: intermediate module m06 ord 15 duplicates intermediate module m02-torque ord 9 (friction share of surface torque)",
+   "verdict": "fixed",
+   "reason": "Same fact as the teaching module question, kept there; the summary-module copy now asks for the units of the capstone side force and why they matter (intermediate m06 l02 traps), a point no question tested.",
+   "changes": {
+    "prompt": {
+     "old": "What is the friction share of surface torque on a deviated well, and why does it matter?",
+     "new": "The capstone asks for a maximum side force. What units does the engine report it in, and why does that matter?"
+    },
+    "explanation": {
+     "old": "The signal comes through a noisier instrument, which is why both are watched and a downhole measurement beats either.",
+     "new": "The engine reports side force as force per unit length of string, so the capstone field is in N/m. A total force over an interval would be a much bigger number, and the maximum is a summary of the whole profile rather than the value at one depth."
+    },
+    "options": {
+     "0": {
+      "old": "Around 83 to 90 percent, which is why torque is the better hole-condition indicator.",
+      "new": "Newtons per metre, since side force is per unit length of string, and a total over an interval is far larger."
+     },
+     "1": {
+      "old": "About half, so both signals are equal.",
+      "new": "Newtons, as a total contact force."
+     },
+     "2": {
+      "old": "Nearly nothing, since the bit torque dominates the surface reading.",
+      "new": "Newton-metres, since it is a moment about the pipe axis."
+     },
+     "3": {
+      "old": "It depends on the rate of penetration, so no general statement is possible.",
+      "new": "Newtons per square metre, as a contact pressure on the wall."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index is unchanged."
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "category": "defect",
+   "flag": "lead review: prompt \"why is torque zero while sliding above the motor\" contradicts beginner m04 l04 and module m04 ord 5 (surface torque is exactly the bit torque, 2700 N.m)",
+   "verdict": "fixed",
+   "reason": "The engine starts the torque at the bit torque and adds no tangential friction with ft = 0, so the torque along the string while sliding is the bit torque (l04 table: 2700 N.m on every well); it is the FRICTION torque that is zero. The prompt now asks that, the key stands, and the explanation agrees; module m04 ord 5 was already right.",
+   "changes": {
+    "prompt": {
+     "old": "Why is torque zero while sliding above the motor?",
+     "new": "Why does sliding add no friction torque anywhere above the motor?"
+    },
+    "explanation": {
+     "old": "The surface torque equals the bit torque exactly, and that is true on every well in this course.",
+     "new": "With no rotation above the motor the tangential direction cosine is zero, so no friction torque accumulates. The surface torque is the bit torque alone, 2700 N.m on every well in this course, which is why sliding is not a zero-torque operation at surface."
+    }
+   }
+  },
+  {
+   "app_slug": "torquedrag",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-operations",
+   "ord": 5,
+   "category": "defect",
+   "flag": "lead review: checked against beginner final 34 on sliding torque",
+   "verdict": "judged fine",
+   "reason": "Matches beginner m04 l04 and the engine (torque starts at the bit torque, ft = 0 while sliding): surface torque is exactly the bit torque; the contradiction was in final 34, now fixed."
   }
  ]
 }
