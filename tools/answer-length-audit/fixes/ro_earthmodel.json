@@ -1,0 +1,31 @@
+{
+ "migration": "20261023a_ro_bank_earthmodel.sql",
+ "tag": "roundoff bank earthmodel",
+ "banner": "B4/B5 ROUND-OFF BANK FIX",
+ "runs_after": "the 29 B4 length files, the 37 B4 fix files (20261021a/b) and 20261022",
+ "title": "intermediate m02 ord 13 option 3 arithmetic matches its own description",
+ "items": [
+  {
+   "app_slug": "earthmodel",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m02-minimum-curvature",
+   "ord": 13,
+   "category": "other",
+   "flag": "B4 README owner item: option 3 arithmetic does not match its own description (1683.75 is 1511.88 + 171.88, and the build increment is 111.88)",
+   "verdict": "fixed",
+   "reason": "The figure is now what its description does (1400 + 2 x 111.87696857341697), still wrong, and the correct 1794.719681048036 is not printed by it; same length.",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "x 1683.753937146834, adding a second build increment of easting.",
+      "new": "x 1623.753937146834, adding a second build increment of easting."
+     }
+    }
+   },
+   "derived_numbers": {
+    "1623.753937146834": "the build start 1400 plus twice the build easting 111.87696857341697, both printed in intermediate m02 l02"
+   }
+  }
+ ]
+}
