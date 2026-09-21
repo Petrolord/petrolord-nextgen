@@ -1,0 +1,46 @@
+{
+ "migration": "20261021b_b4_fix_gaswell.sql",
+ "title": "gaswell: duplicate question rewritten into a new question",
+ "items": [
+  {
+   "app_slug": "gaswell",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 7,
+   "category": "duplicate",
+   "flag": "duplicate of advanced module m01-chosen-once-used-everywhere 4 (near p0.60 k1.00): both ask what the recommendation returns at each of the six EBOCHA-5 stations, same key",
+   "verdict": "fixed",
+   "reason": "True duplicate across tiers; kept the advanced module question and rewrote this final copy to test the m01 lesson point that interfacial tension and liquid density are typed inputs.",
+   "changes": {
+    "prompt": {
+     "old": "Asked at each of the six EBOCHA-5 stations rather than once at the gauge, what does recommendCorrelation return?",
+     "new": "EBOCHA-5 is profiled with an interfacial tension of 62.0 dyne/cm and a liquid density of 66.2 lbm/ft3. Where did those two figures come from?"
+    },
+    "explanation": {
+     "old": "The comparison is strict against 1000.0 psia, so the wellhead choice is coleman while the controlling station would have chosen turner.",
+     "new": "Interfacial tension and liquid density are inputs, and neither is a function of anything the modules know. The published Turner properties, water at 60.0 dyne/cm and 67.0 lbm/ft3, are labelled starting points rather than correlations, and EBOCHA-5 does not use them."
+    },
+    "options": {
+     "0": {
+      "old": "coleman at every station, because the function is handed the wellhead pressure by the profile and has no other pressure available to it.",
+      "new": "They were computed at the shoe from its pressure, temperature and z, which is why the controlling station carries them."
+     },
+     "1": {
+      "old": "turner at every station, since each station inherits the correlation the study was run under and the study was run under a single name.",
+      "new": "They were read off the published water row and corrected for each station's pressure, since tension falls as the gas gets denser."
+     },
+     "2": {
+      "old": "coleman at 880.0 psia and 978.0 psia, then turner at 1090.0, 1218.0, 1350.0 and 1500.0 psia.",
+      "new": "They were typed in as inputs, and nothing the modules know computes either of them."
+     },
+     "3": {
+      "old": "coleman down to 4500.0 ft, then turner below it.",
+      "new": "They are the Turner defaults loadingProfile applies to every well."
+     }
+    }
+   },
+   "correct_change_reason": "True duplicate rewritten into a new question on a different point, so the key is new text for the new question."
+  }
+ ]
+}
