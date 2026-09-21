@@ -42,24 +42,29 @@ const MIN_MANIFESTS = 150;
 const MIN_COMPONENT_FILES = 200;
 const MIN_LEARNING_PAGES = 40;
 
-// Lesson copy: any occurrence, in any case, inside any word.
+// Lesson copy. The word itself: any occurrence, in any case, inside any word.
 const LESSON_WORD = /digest/i;
+// A pointer into a numbered section of the internal file. The file's own style
+// is capitals ("SECTION 13", "SECTIONS 12 and 14"), and lessons also wrote a
+// bare section number in parentheses ("(Section 14)", "(section 29)"). A
+// published document's section ("NIOSH 2016-106 section 8.1") and a casing
+// string's "section 2" are neither, and pass.
+const SECTION_POINTER = /\bSECTIONS? \d|\((?:SECTIONS?|[Ss]ections?) \d+(?:(?:,| and| or| to) \d+)*\)/;
+// The authors' generator, the script that wrote the internal file and asserted
+// its figures, named by what it did ("the generator asserts", "the numbers the
+// generator holds", "the course's generator", "the capstone generator"). A
+// random number generator, a seeded generator, a deck generator or a data
+// set's generator is something the learner meets in the engine or the studio,
+// and passes.
+const AUTHORS_GENERATOR = /\b(?:the|a) generator (?:now )?(?:asserts|types|holds|built|builds|measures)\b|\b(?:course's|capstone) generator\b|\bgenerator behind (?:this|the) course\b|\bthe generator's own\b/i;
+const LESSON_PATTERNS = [LESSON_WORD, SECTION_POINTER, AUTHORS_GENERATOR];
+
+// Legitimate lines the generator pattern would otherwise catch, by exact
+// trimmed text: a data set's generator the lesson describes to the learner.
+const LESSON_ALLOWED = {
+};
 // Code: the word on its own, so identifiers pass.
 const CODE_WORD = /(?<![A-Za-z0-9_$])digest(?:s|ed|ing)?(?![A-Za-z0-9_$])/i;
-
-// HEADINGS HELD FOR AN OWNER DECISION. The copy pass that removed the word from
-// lesson prose was barred from changing any heading line, and these seven
-// headings carry it. They are excused by exact text, so a new heading or any
-// other line saying the word still fails, and each entry must be deleted when
-// its heading is rewritten (the staleness test below goes red otherwise).
-const HELD_HEADINGS = {
-  'carbon/advanced/m06-the-expert-reading/l03-what-the-oracles-check.md': ["## The digest's own count"],
-  'crude/intermediate/m01-the-blends-own-curve/l04-a-truncated-crude-in-the-blend.md': ['## The reason the digest gives'],
-  'crude/intermediate/m02-the-fifty-percent-point/l04-the-watson-factor.md': ['## What the digest says about K'],
-  'crude/intermediate/m02-the-fifty-percent-point/l05-a-screening-basis-for-k.md': ['## What the digest calls it', '## The two readings in the digest'],
-  'crude/intermediate/m05-against-the-marker/l03-the-blend-against-its-components.md': ['## The answer the digest prints'],
-  'relief/advanced/m02-the-customary-depressuring-time/l02-reading-a-time-off-a-curve.md': ['## The one comparison the digest prints here'],
-};
 
 // Unrendered string literals, by exact trimmed line. Keyed by file relative to
 // src/components/course.
@@ -154,9 +159,9 @@ export const stripComments = (src) => {
 };
 
 /** Every learner-copy occurrence in one lesson or manifest text. */
-export const lessonHits = (text, held = []) => text.split('\n')
+export const lessonHits = (text, allowed = []) => text.split('\n')
   .map((line, k) => ({ line: k + 1, text: line.trim() }))
-  .filter((h) => LESSON_WORD.test(h.text) && !held.includes(h.text));
+  .filter((h) => LESSON_PATTERNS.some((re) => re.test(h.text)) && !allowed.includes(h.text));
 
 /** Every non-comment, non-identifier occurrence in one code file, less the allowed lines. */
 export const codeHits = (src, allowed = []) => stripComments(src).split('\n')
@@ -170,7 +175,7 @@ const pages = walk(APP_PAGES, (f) => /LearningPage\.jsx$/.test(f));
 
 const report = (hits) => hits.map((h) => `${h.file}:${h.line}: ${h.text.slice(0, 160)}`).join('\n');
 
-describe('learner copy never names the internal digest', () => {
+describe('learner copy never names the internal digest, its sections or its generator', () => {
   it('REFUSES AN EMPTY SWEEP: every surface has at least its minimum number of files', () => {
     expect(lessons.length).toBeGreaterThanOrEqual(MIN_LESSONS);
     expect(manifests.length).toBeGreaterThanOrEqual(MIN_MANIFESTS);
@@ -178,9 +183,9 @@ describe('learner copy never names the internal digest', () => {
     expect(pages.length).toBeGreaterThanOrEqual(MIN_LEARNING_PAGES);
   });
 
-  it('no lesson file and no tier manifest says digest', () => {
+  it('no lesson file and no tier manifest says digest, points at an internal SECTION or names the authors\' generator', () => {
     const hits = [...lessons, ...manifests].flatMap((f) => lessonHits(
-      fs.readFileSync(f, 'utf8'), HELD_HEADINGS[path.relative(COURSES, f).split(path.sep).join('/')] || [],
+      fs.readFileSync(f, 'utf8'), LESSON_ALLOWED[path.relative(COURSES, f).split(path.sep).join('/')] || [],
     ).map((h) => ({ ...h, file: path.relative(SRC, f) })));
     expect(report(hits)).toBe('');
   });
@@ -194,11 +199,11 @@ describe('learner copy never names the internal digest', () => {
     expect(report(hits)).toBe('');
   });
 
-  it('every held heading still exists and is a heading, so the list cannot outlive what it excuses', () => {
-    const stale = Object.entries(HELD_HEADINGS).flatMap(([rel, lines]) => {
+  it('every allowed lesson line still exists, so the list cannot outlive what it excuses', () => {
+    const stale = Object.entries(LESSON_ALLOWED).flatMap(([rel, lines]) => {
       const p = path.join(COURSES, rel);
       const have = fs.existsSync(p) ? fs.readFileSync(p, 'utf8').split('\n').map((l) => l.trim()) : [];
-      return lines.filter((l) => !l.startsWith('#') || !have.includes(l)).map((l) => `${rel}: ${l}`);
+      return lines.filter((l) => !have.includes(l)).map((l) => `${rel}: ${l}`);
     });
     expect(stale).toEqual([]);
   });
@@ -239,10 +244,29 @@ describe('the digest gate itself (negative controls)', () => {
     expect(codeHits(src)).toEqual([]);
   });
 
-  it('a held heading excuses only itself: the same words in prose still fail', () => {
-    const held = ["## The digest's own count"];
-    expect(lessonHits("## The digest's own count\n\nBody.", held)).toEqual([]);
-    expect(lessonHits("## The digest's own count\n\nThe digest's own count is 73.", held)).toHaveLength(1);
+  it('GOES RED on a planted internal SECTION pointer, in capitals or in parentheses', () => {
+    expect(lessonHits('SECTION 13 prints the heater at its current reading.')).toHaveLength(1);
+    expect(lessonHits('Read the refusals of SECTIONS 12 and 14.')).toHaveLength(1);
+    expect(lessonHits('The independence rule allows one (Section 14).')).toHaveLength(1);
+    expect(lessonHits('| the Lees toxic coefficients | the OSD/30 columns (section 29) | yes |')).toHaveLength(1);
+  });
+
+  it('GOES RED on the authors\' generator, and passes an ordinary one', () => {
+    expect(lessonHits('The generator asserts that ordering on every rebuild.')).toHaveLength(1);
+    expect(lessonHits("The count is the generator's own.")).toHaveLength(1);
+    expect(lessonHits('The capstone generator measures that invariance.')).toHaveLength(1);
+    expect(lessonHits("a literal typed in the course's generator")).toHaveLength(1);
+    expect(lessonHits('That proves the engine holds what the generator holds.')).toHaveLength(1);
+    expect(lessonHits('Every random draw goes through an injectable generator, so a seeded run repeats.')).toHaveLength(0);
+    expect(lessonHits('The old engine called an unseeded generator.')).toHaveLength(0);
+    expect(lessonHits("The generator's next three draws are 0.732031, 0.064278 and 0.391443.")).toHaveLength(0);
+    expect(lessonHits('On planar data the trend IS the generator, so the gap is small.')).toHaveLength(0);
+  });
+
+  it('passes a published section and a casing section', () => {
+    expect(lessonHits('which is the NIOSH 2016-106 section 8.1 equation')).toHaveLength(0);
+    expect(lessonHits('works a pool fire from start to finish in section 6.6.3')).toHaveLength(0);
+    expect(lessonHits('Section 2 on this case gives 1.2882443095792595.')).toHaveLength(0);
   });
 
   it('an allowed line passes only in its own exact text', () => {
