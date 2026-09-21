@@ -281,6 +281,7 @@ count on production; run it before applying.
   wellcorrelation that became a sweep. Whether finals should be module
   reprises at all is a curriculum decision. A full rewrite of every final is a
   programme of its own.
+  Costed options and a pick: [../graded-field-audit/FOLLOW-ON-PROGRAMME.md](../graded-field-audit/FOLLOW-ON-PROGRAMME.md) §5 (decision D7).
 * completion beginner m02 l02 says casing drift mandrels are "twelve inches
   long for most sizes". API 5CT uses 6 in below 9-5/8 in and 12 in from
   9-5/8 in up. Check this against the spec before editing the lesson. The
