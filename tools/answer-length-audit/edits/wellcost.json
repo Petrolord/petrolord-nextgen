@@ -1,0 +1,2045 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "It equals the sampled mean once the iteration count passes two thousand.",
+  "new": "It equals the sampled mean once the iteration count passes two thousand, because sampling noise is then too small to separate the two figures."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "Yes, because a deterministic run ought to reproduce the sampled mean.",
+  "new": "Yes, because a deterministic run at the modes ought to reproduce the sampled mean, so any gap between them exposes an error in the base."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "The run has not converged, since 2,000 iterations leave the tails noisy.",
+  "new": "The run has not converged, since 2,000 iterations leave the tails noisy and a coefficient of variation read off noisy tails is not yet stable."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "Compare the coefficient of variation against the published fixture value and treat anything larger as a decision that uncertainty controls.",
+  "new": "Compare the coefficient of variation with the fixture value and treat anything larger as uncertainty led."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "Neither, because a portfolio figure has to be built on a tail percentile if it is to carry any confidence statement at all.",
+  "new": "Neither, since a portfolio figure must rest on a tail percentile to carry confidence."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "It confuses the mean of a distribution with its median.",
+  "new": "It confuses the mean of a distribution with its median, and on a right skewed cost those two figures can sit a long way apart."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "Because a deterministic run at the modes cannot be reproduced without a seed, and an unreproducible figure should never be funded on its own.",
+  "new": "Because a deterministic run needs a seed to be reproduced, and an unreproducible figure is unfundable."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "Confirm that the sampled mean exceeds the deterministic total, which is the diagnostic that catches a reversed range on a rate.",
+  "new": "Confirm that the sampled mean exceeds the deterministic total, which catches a reversed rate range."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "Every line, in proportion to its share of the 5,380,000 USD base.",
+  "new": "Every line, in proportion to its share of the 5,380,000 USD base, since a longer well spreads its extra cost across all nine lines."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "The correlation applied, which is the one item that shifts a reported mean and therefore the one that cannot be reconstructed later.",
+  "new": "The correlation applied, the one item that shifts a reported mean and cannot be rebuilt later."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "The cost time curve, redrawn on productive hours so as to isolate the delay.",
+  "new": "The cost time curve, redrawn on productive hours so as to isolate the delay from the rest of the well and price the lost days directly."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "A complete set of ranges, provided both wells share a rig and a crew, which is what makes one outcome transferable to the next.",
+  "new": "A full set of ranges, if both wells share a rig and crew, which makes one outcome transferable."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 7,
+  "option": 0,
+  "old": "It is spread evenly across the duration of that activity.",
+  "new": "It is spread evenly across the duration of that activity, accruing hour by hour in the same way a per day line would."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 7,
+  "option": 3,
+  "old": "It is placed at spud regardless of which activity it names.",
+  "new": "It is placed at spud regardless of which activity it names, since every lump is treated as committed when the well starts."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 8,
+  "option": 2,
+  "old": "The engine samples on a regular time slice and eleven slices are enough to hold the shape of a well of that length.",
+  "new": "The engine samples on a regular time slice, and eleven slices hold the shape of a well that long."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 9,
+  "option": 3,
+  "old": "The figure carries a share of the contingency provision allotted to spud.",
+  "new": "The figure carries a share of the contingency provision allotted to spud, charged as the rig arrives on location."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 10,
+  "option": 0,
+  "old": "It is 480,000 USD of per day accrual and no lump at all.",
+  "new": "It is 480,000 USD of per day accrual and no lump at all, because the casing crew and cement unit are both hired by the day."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 10,
+  "option": 2,
+  "old": "It is 300,000 USD of accrual with a 180,000 USD lump on top.",
+  "new": "It is 300,000 USD of accrual with a 180,000 USD lump on top, the lump being the cement job billed once the string is landed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 11,
+  "option": 3,
+  "old": "The hole stands at 2,000 m and the well is exactly half way through its scheduled hours.",
+  "new": "The hole stands at 2,000 m and the well is exactly half way through its scheduled hours at that point."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 12,
+  "option": 2,
+  "old": "Against the approved total of 5,918,000 USD, because that is the figure the operator is actually authorised to spend on the well.",
+  "new": "Against the approved total of 5,918,000 USD, the figure the operator is authorised to spend."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 13,
+  "option": 3,
+  "old": "Either the schedule slipped or the non-productive allowance was set too low.",
+  "new": "Either the schedule slipped or the non-productive allowance was set too low, so extra rig hours are being billed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 14,
+  "option": 3,
+  "old": "Because lump lines are excluded from the curve until the well reaches total depth.",
+  "new": "Because lump lines are excluded from the curve until the well reaches total depth, so the line understates the spend."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-cost-time-curve",
+  "ord": 15,
+  "option": 0,
+  "old": "No, since any hour spent above the line consumes authority directly.",
+  "new": "No, since any hour spent above the line consumes authority directly and leaves nothing in reserve to finish on."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 7,
+  "option": 0,
+  "old": "The curve runs one boundary past the schedule to hold the lumps.",
+  "new": "The curve runs one boundary past the schedule to hold the lumps, which land after the last activity has closed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 8,
+  "option": 3,
+  "old": "The base is stated in cash terms while the total is stated in accrual terms.",
+  "new": "The base is stated in cash terms while the total is stated in accrual terms, and only cash can be plotted against hours."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 9,
+  "option": 2,
+  "old": "That trouble is concentrated at handover, which is the one part of the programme where operational surprises are least likely to appear.",
+  "new": "That trouble is concentrated at handover, where operational surprises are least likely to appear."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 10,
+  "option": 1,
+  "old": "Exactly on it, since running to programme is what the line describes.",
+  "new": "Exactly on it, since running to programme is what the line describes, provision and all, at every single hour."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 11,
+  "option": 0,
+  "old": "First, ahead of every contracted line on the estimate.",
+  "new": "First, ahead of every contracted line on the estimate, since it is sized on the whole of the base."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 11,
+  "option": 3,
+  "old": "Sixth, just behind the wireline logging lump.",
+  "new": "Sixth, just behind the wireline logging lump, and small enough to sit inside the slope of the accrual."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 12,
+  "option": 1,
+  "old": "Compare the tangible and intangible subtotals against each other.",
+  "new": "Compare the tangible and intangible subtotals against each other, since those two halves of the AFE have to balance."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 13,
+  "option": 2,
+  "old": "The per metre line has been billed against the total depth of the well rather than against the metres of hole that were actually made.",
+  "new": "The per metre line has been billed on total depth rather than on the metres actually drilled."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 14,
+  "option": 1,
+  "old": "A lump line linked to the wrong activity, which shifts a step sideways.",
+  "new": "A lump line linked to the wrong activity, which shifts a step sideways and drops part of its value off the end."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 15,
+  "option": 0,
+  "old": "It places the lump at the end of the last activity.",
+  "new": "It places the lump at the end of the last activity, so that the money still arrives before the curve closes out."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-endpoint-identity",
+  "ord": 15,
+  "option": 3,
+  "old": "It keeps the lump in the rollup but leaves it off the curve.",
+  "new": "It keeps the lump in the rollup but leaves it off the curve, logging a warning against the missing reference."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 7,
+  "option": 3,
+  "old": "It is flat, because the interval fixes the hours whatever the rate.",
+  "new": "It is flat, because the interval fixes the hours whatever the rate, the footage being set by the programmed depth alone."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 8,
+  "option": 0,
+  "old": "It is the only distribution the shared sampler carries.",
+  "new": "It is the only distribution the shared sampler carries, so every one of the ranges has to be expressed in that form."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 8,
+  "option": 1,
+  "old": "It is the distribution that produces the widest tails.",
+  "new": "It is the distribution that produces the widest tails, so a provision sized from it can never be undercooked."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 9,
+  "option": 1,
+  "old": "That the rate is equally likely anywhere between the bounds.",
+  "new": "That the rate is equally likely anywhere between the bounds, with no single value favoured over another."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 10,
+  "option": 0,
+  "old": "It equals the mode, which is why the mode is called most likely.",
+  "new": "It equals the mode, which is why the mode is called most likely and is then used as the planning value."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 11,
+  "option": 0,
+  "old": "Because the two sections share a single measured depth reference.",
+  "new": "Because the two sections share a single measured depth reference, so a depth error in one carries to the other."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 12,
+  "option": 1,
+  "old": "It shifts the whole distribution towards the optimistic end.",
+  "new": "It shifts the whole distribution towards the optimistic end, pulling the mean down along with both of the tails."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 12,
+  "option": 3,
+  "old": "It has no effect once the iteration count is high enough.",
+  "new": "It has no effect once the iteration count is high enough, as the sampled pairs then cover every combination there is."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 13,
+  "option": 1,
+  "old": "It reweights the finished iterations so that the correlation appears in the summary statistics.",
+  "new": "It reweights the finished iterations so that the correlation appears in the summary statistics after sampling."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 14,
+  "option": 2,
+  "old": "In the panel component, so that each screen can hold the sampling behaviour its own charts happen to need.",
+  "new": "In the panel component, so each screen holds the sampling behaviour its own charts need."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-uncertainty",
+  "ord": 15,
+  "option": 2,
+  "old": "The ability to change a percentile convention in one app without any of the other apps that share the module being affected by it.",
+  "new": "The ability to change a percentile convention in one app without the other apps sharing it being affected."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-why-convexity-bites",
+  "ord": 10,
+  "option": 0,
+  "old": "The seed alone, since it fixes every draw in the run.",
+  "new": "The seed alone, since it fixes every draw in the run, and the distributions and iteration count can be read back out of the output."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-why-convexity-bites",
+  "ord": 10,
+  "option": 3,
+  "old": "The deterministic base cost and the contingency fraction that was applied to it.",
+  "new": "The deterministic base cost and the contingency fraction that was applied to it, from which the risked total follows by simple arithmetic."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-why-convexity-bites",
+  "ord": 11,
+  "option": 1,
+  "old": "The engine begins rounding the schedule to whole days once a rate is uncertain, and rounding has no closed form expression at all.",
+  "new": "The engine rounds the schedule to whole days once a rate is uncertain, and rounding has no closed form."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-why-convexity-bites",
+  "ord": 13,
+  "option": 3,
+  "old": "It omits the contingency line, which would have to be sampled separately before the total could be quoted.",
+  "new": "It omits the contingency line, which would have to be sampled separately as its own input before the total could be quoted."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-why-convexity-bites",
+  "ord": 15,
+  "option": 0,
+  "old": "Compare the sampled mean against the deterministic base cost.",
+  "new": "Compare the sampled mean against the deterministic base cost, and accept the median once the two sit within a small margin."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-why-convexity-bites",
+  "ord": 15,
+  "option": 3,
+  "old": "Raise the iteration count until the reported median stops changing in its final digit.",
+  "new": "Raise the iteration count until the reported median stops changing in its final digit, since a stable middle means stable tails."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reading-a-risked-result",
+  "ord": 8,
+  "option": 2,
+  "old": "Subtract the contingency from the sampled mean, since contingency is the only line that separates a deterministic total from a sampled one.",
+  "new": "Subtract the contingency from the sampled mean, the one line that separates a deterministic total from a sampled one."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reading-a-risked-result",
+  "ord": 10,
+  "option": 3,
+  "old": "A share that cannot be quoted, since the provision is a line of the total rather than a proportion of it.",
+  "new": "A share that cannot be quoted, since the provision is a line of the total rather than a proportion of it, and lines are not expressed as shares."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reading-a-risked-result",
+  "ord": 12,
+  "option": 1,
+  "old": "Choose the fraction the last well in the field used.",
+  "new": "Choose the fraction the last well in the field used, since offset precedent is the most defensible basis an approver will accept."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reading-a-risked-result",
+  "ord": 12,
+  "option": 3,
+  "old": "Choose the fraction that makes the total match the sampled mean of the run.",
+  "new": "Choose the fraction that makes the total match the sampled mean of the run, so the approved figure is centred on the distribution."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reading-a-risked-result",
+  "ord": 13,
+  "option": 0,
+  "old": "Whether the engine evaluated each realisation correctly.",
+  "new": "Whether the engine evaluated each realisation correctly when it rolled up the nine cost lines for every draw of the run."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reading-a-risked-result",
+  "ord": 13,
+  "option": 2,
+  "old": "Whether the totals were sorted before the percentiles were read off them.",
+  "new": "Whether the totals were sorted before the percentiles were read off them, since an unsorted column gives meaningless percentiles."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-reading-a-risked-result",
+  "ord": 14,
+  "option": 1,
+  "old": "It widens the tails, since independent draws can pair the worst intermediate section with the worst production section far more often.",
+  "new": "It widens the tails, as independent draws pair the worst intermediate and worst production sections more often."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "The first, because the overrun is larger in money terms.",
+  "new": "The first, because the overrun is larger in money terms and money is what the approvers will ask about."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "Ranges from another campaign are never transferable at all.",
+  "new": "Ranges from another campaign are never transferable at all, because every campaign brings its own rig, crew and geology."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "The objection is only that the rig rate will have changed since the previous campaign was drilled.",
+  "new": "The objection is only that the rig rate will have changed since the previous campaign was drilled, so the day cost is stale."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 2,
+  "old": "That the estimate should have carried a larger provision, since a well in the wrong place is the clearest case of an uncertainty that no range on a rate of penetration can ever cover.",
+  "new": "That it needed a larger provision, since no rate range can cover a well drilled in the wrong place."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 18,
+  "option": 1,
+  "old": "Two and a half days, once the saving is stretched by the allowance and converted.",
+  "new": "Two and a half days, once the saving is stretched by the allowance and converted from hours into days on the clock."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "option": 2,
+  "old": "The schedule gains a row and the allowance is applied twice across that interval.",
+  "new": "The schedule gains a row and the allowance is applied twice across that interval, once for each of the two drill rows."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 3,
+  "old": "It cannot be answered directly, because the allowance couples that section to every other activity in the programme.",
+  "new": "It cannot be answered directly, since the allowance couples that section to every other activity."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 2,
+  "old": "Connection hours are subtracted from the drilling hours of a section before that section's rate of penetration is applied to it.",
+  "new": "Connection hours are subtracted from a section's drilling hours before its rate of penetration is applied."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "A fraction of 0.0417, because the quoted days sit only 4 above the unstretched 16.",
+  "new": "A fraction of 0.0417, because the quoted days sit only 4 above the unstretched 16 and the fraction is read per elapsed hour."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 1,
+  "old": "Three quarters, since the productive part is what remains after the trouble.",
+  "new": "Three quarters, since the productive part is what remains after the trouble and the field asks for that share."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 1,
+  "old": "The allowance was applied twice, once across the rows and once to the total.",
+  "new": "The allowance was applied twice, once across the rows and once to the total, so the productive hours were stretched."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "Drilled metres fall in step with the hours, since both of them follow the drill rows.",
+  "new": "Drilled metres fall in step with the hours, since both of them follow the drill rows and are summed from the same activities."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 0,
+  "old": "Nothing, since the allowance is a single fraction either way.",
+  "new": "Nothing, since the allowance is a single fraction either way and the offset wells simply supply its value as it stands."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "The allowance is too high, since rig repair already sits inside the flat rows.",
+  "new": "The allowance is too high, since rig repair already sits inside the flat rows and would be counted a second time over."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 0,
+  "old": "Because only productive hours are billed by the rig.",
+  "new": "Because only productive hours are billed by the rig, so hours taken out of the allowance would save no money at all."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "Because drilled metres move with productive hours alone.",
+  "new": "Because drilled metres move with productive hours alone, and the reviewer needs to know whether the depth has changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "That the allowance is zero, since the fraction is derived from the gap between a quoted rate and an achievable one.",
+  "new": "That the allowance is zero, since the fraction is the gap between a quoted and an achievable rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 2,
+  "old": "The allowance fraction against the share of elapsed time it produces.",
+  "new": "The allowance fraction against the share of elapsed time it produces, which must be equal on a sound schedule."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "The allowance, which can no longer be recovered from a rounded day figure.",
+  "new": "The allowance, which can no longer be recovered from a rounded day figure, since the fraction is stored only in the day count."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "The programme mixes two allowances, one for drilling and one for flat work.",
+  "new": "The programme mixes two allowances, one for drilling and one for flat work, and this row carries the flat one."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "Rates of penetration are the only inputs the engine derives for itself, so there is nothing in them for a meeting to decide.",
+  "new": "Rates of penetration are the only inputs the engine derives itself, so a meeting has nothing to decide."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "Yes, but only for the flat activities, since drilling and tripping run across shifts while flat work does not.",
+  "new": "Yes, but only for flat activities, since drilling and tripping run across shifts."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "Drilled metres and productive hours, because trouble time is not billable.",
+  "new": "Drilled metres and productive hours, because trouble time is not billable under a standard dayrate contract."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 3,
+  "old": "Three, once the 67.5 hour completion is added to the two drill rows.",
+  "new": "Three, once the 67.5 hour completion is added to the two drill rows that sit at the very top of the list."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 1,
+  "old": "A drill activity, with the hours standing in place of a rate of penetration.",
+  "new": "A drill activity, with the hours standing in place of a rate of penetration over the whole depth it carries."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 1,
+  "old": "The split should not have been quoted beside the day count at all.",
+  "new": "The split should not have been quoted beside the day count at all, because the two are stated on different bases."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "Nothing, since days are reported as decimals.",
+  "new": "Nothing, since days are reported as decimals and a gap of that size is simply rounding between the three figures."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "All three, since the whole estimate scales with the schedule.",
+  "new": "All three, since the whole estimate scales with the schedule and every line is ultimately billed over the calendar."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "The lump lines only, since they have no quantity to protect them.",
+  "new": "The lump lines only, since they have no quantity to protect them and so absorb whatever cost the delay brings."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "That the rig will be released two days early.",
+  "new": "That the rig will be released two days early, which frees the rig slot for the next well in the drilling campaign."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "That the productive hours have come down along with the elapsed hours.",
+  "new": "That the productive hours have come down along with the elapsed hours, because the bit is assumed to run faster."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "The trip speed and the run speed were swapped between the two kinds.",
+  "new": "The trip speed and the run speed were swapped between the two kinds of row on the submitted schedule."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "The authorisation for expenditure to both, since it carries the day count.",
+  "new": "The authorisation for expenditure to both, since it carries the day count and every figure either of them needs."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "The risked percentiles to the superintendent and the base case to finance.",
+  "new": "The risked percentiles to the superintendent and the base case to finance, which books only the deterministic number."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "The flat activity is ignored, because the allowance takes precedence over any duration a user has stated by hand.",
+  "new": "The flat activity is ignored, because the allowance overrides any duration typed by hand."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 8,
+  "option": 2,
+  "old": "It is the production hole cost divided by the 1,000 m that section drills.",
+  "new": "It is the production hole cost divided by the 1,000 m that section drills, rounded to the nearest dollar per metre."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 9,
+  "option": 2,
+  "old": "Because the engine has no way of representing a triangular distribution on a rate of penetration and therefore has to be handed sampled values.",
+  "new": "Because the engine cannot represent a triangular on a rate, so it must be handed sampled values."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 10,
+  "option": 0,
+  "old": "That it was derived from the mud weight and the annular velocity.",
+  "new": "That it was derived from the mud weight and the annular velocity, which the engine then checks against hole cleaning."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 10,
+  "option": 3,
+  "old": "That it applies only until the first connection is made in the section.",
+  "new": "That it applies only until the first connection is made in the section, after which a slower rate takes over."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 11,
+  "option": 3,
+  "old": "It refuses the activity and asks for a survey listing before proceeding.",
+  "new": "It refuses the activity and asks for a survey listing before proceeding, since a trip needs the full well path."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 12,
+  "option": 0,
+  "old": "It searches the neighbouring casing depths and returns the cheapest of them.",
+  "new": "It searches the neighbouring casing depths and returns the cheapest of them as its recommended programme instead."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 13,
+  "option": 3,
+  "old": "They are audited historical averages that the engine requires you to justify.",
+  "new": "They are audited historical averages that the engine requires you to justify before any deviation is accepted."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 14,
+  "option": 0,
+  "old": "Because depth is recorded once per day rather than continuously.",
+  "new": "Because depth is recorded once per day rather than continuously, so each day shows up on the chart as its own riser."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 14,
+  "option": 3,
+  "old": "Because the curve plots true vertical depth against measured depth.",
+  "new": "Because the curve plots true vertical depth against measured depth, which steps up at every change in the hole angle."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-this-course-decides",
+  "ord": 15,
+  "option": 2,
+  "old": "The estimate is overstated, because rotating hours already carry the non-productive allowance while the elapsed hours do not carry it at all.",
+  "new": "The estimate is overstated, because rotating hours already carry the non-productive allowance."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 7,
+  "option": 3,
+  "old": "Tripping leads, since the two round trips are the deepest activities in the list.",
+  "new": "Tripping leads, since the two round trips are the deepest activities in the list and trip time grows with depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 8,
+  "option": 3,
+  "old": "The depth fields, from which the engine infers what sort of work is intended.",
+  "new": "The depth fields, from which the engine infers what sort of work is intended by checking whether the hole deepens."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 9,
+  "option": 3,
+  "old": "An interval in metres and a duration in hours, checked against each other.",
+  "new": "An interval in metres and a duration in hours, checked against each other so that the implied rate is sensible."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 10,
+  "option": 0,
+  "old": "The trip speed, which falls back to the run speed of the casing string above.",
+  "new": "The trip speed, which falls back to the run speed of the casing string set above it in the programme list."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 11,
+  "option": 2,
+  "old": "Because the engine measures a casing run from the shoe of the previous string, so its depth is a difference that is allowed to come out at nothing.",
+  "new": "Because a casing run is measured from the previous shoe, so its depth may come out at nothing."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 12,
+  "option": 3,
+  "old": "It cannot be computed, because a drill activity may not follow a casing run.",
+  "new": "It cannot be computed, because a drill activity may never follow a casing run anywhere in the programme list."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 13,
+  "option": 1,
+  "old": "It reads a depth and a flat term, and ignores the rate of penetration.",
+  "new": "It reads a depth and a flat term, and ignores the rate of penetration, as a casing activity with no running leg."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 13,
+  "option": 3,
+  "old": "It reads nothing at all and takes its hours from the activity above.",
+  "new": "It reads nothing at all and takes its hours from the activity above, so it inherits whatever that row returned."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 14,
+  "option": 2,
+  "old": "Tripping is much the heavier of the two once both round trips have been stretched by the non-productive allowance applied to them.",
+  "new": "Tripping is the heavier once both round trips are stretched by the non-productive allowance."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 15,
+  "option": 0,
+  "old": "Each activity carries a dayrate that the engine multiplies by its hours.",
+  "new": "Each activity carries a dayrate that the engine multiplies by its own hours to give that activity's cost on the AFE."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-activity",
+  "ord": 15,
+  "option": 3,
+  "old": "Cost is attached to the hole sections rather than to individual activities.",
+  "new": "Cost is attached to the hole sections rather than to individual activities, with one price for each section drilled."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-closed-forms",
+  "ord": 8,
+  "option": 3,
+  "old": "The trip takes about half as long, since it makes no hole on the way.",
+  "new": "The trip takes about half as long, since it makes no hole on the way and the pipe moves at a higher speed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-closed-forms",
+  "ord": 9,
+  "option": 0,
+  "old": "A purely proportional one in the depth of the string being run.",
+  "new": "A purely proportional one in the depth of the string being run, so doubling the depth doubles the whole job."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-closed-forms",
+  "ord": 9,
+  "option": 3,
+  "old": "The same form as a trip, with the factor of two replaced by one.",
+  "new": "The same form as a trip, with the factor of two replaced by one, since a casing string only travels one way."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-closed-forms",
+  "ord": 10,
+  "option": 1,
+  "old": "About 9.5 hours, since the flat term is halved once the running leg falls below one hour and the crew is no longer waiting on pipe.",
+  "new": "About 9.5 hours, since the flat term is halved once the running leg falls below one hour."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-closed-forms",
+  "ord": 11,
+  "option": 3,
+  "old": "The interval between the casing point and the shoe track of the string.",
+  "new": "The interval between the casing point and the shoe track of the string, drilled out after the job is landed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-closed-forms",
+  "ord": 12,
+  "option": 0,
+  "old": "That the durations agree to within a tolerance of one hour per activity.",
+  "new": "That the durations agree to within a tolerance of one hour per activity across the whole of the programme."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-closed-forms",
+  "ord": 13,
+  "option": 0,
+  "old": "It lets the engine reorder the activity list to find a shorter well.",
+  "new": "It lets the engine reorder the activity list to find a shorter well, testing each sequence against the closed forms."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-closed-forms",
+  "ord": 13,
+  "option": 3,
+  "old": "It allows a rate of penetration to vary continuously down a section.",
+  "new": "It allows a rate of penetration to vary continuously down a section, following the hardness of each formation it meets."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-closed-forms",
+  "ord": 14,
+  "option": 2,
+  "old": "As one activity with the faster rate, leaving the shale to be picked up by the non-productive time allowance that is applied on top of every productive duration.",
+  "new": "As one activity at the faster rate, leaving the shale to the non-productive time allowance on top."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-closed-forms",
+  "ord": 15,
+  "option": 3,
+  "old": "Nowhere, since the engine treats them as already covered by the closed forms.",
+  "new": "Nowhere, since the engine treats them as already covered by the closed forms of each individual activity."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-productive-and-non-productive",
+  "ord": 8,
+  "option": 1,
+  "old": "Split evenly between the two buckets, because a slow section is partly a rate problem and partly an unforeseen hole problem.",
+  "new": "Split evenly between the two buckets, because a slow section is partly a rate problem and partly a hole problem."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-productive-and-non-productive",
+  "ord": 11,
+  "option": 1,
+  "old": "Because auditors require the definition to sit in the same file as the programme before an estimate can be issued for review.",
+  "new": "Because auditors require the definition in the same file as the programme before an estimate is issued."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-productive-and-non-productive",
+  "ord": 12,
+  "option": 0,
+  "old": "That the drill activities are the only rows worth reviewing.",
+  "new": "That the drill activities are the only rows worth reviewing, since they alone carry a rate that can be improved."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-productive-and-non-productive",
+  "ord": 13,
+  "option": 1,
+  "old": "It rises, since drill rows are stretched more than flat rows.",
+  "new": "It rises, since drill rows are stretched more than flat rows by the allowance, trouble being concentrated where hole is made."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-productive-and-non-productive",
+  "ord": 13,
+  "option": 3,
+  "old": "It moves unpredictably, depending on the order of the activities.",
+  "new": "It moves unpredictably, depending on the order of the activities and on where the trouble hours happen to fall in the programme."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-productive-and-non-productive",
+  "ord": 14,
+  "option": 3,
+  "old": "Because only productive hours are converted into days at the rollup.",
+  "new": "Because only productive hours are converted into days at the rollup, and the trouble hours are reported separately."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-productive-and-non-productive",
+  "ord": 15,
+  "option": 0,
+  "old": "Nothing, provided the elapsed days come out the same.",
+  "new": "Nothing, provided the elapsed days come out the same, since the rig is paid by the day whatever the cause of the delay."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-productive-and-non-productive",
+  "ord": 15,
+  "option": 3,
+  "old": "It moves hours from the flat rows into the drill rows.",
+  "new": "It moves hours from the flat rows into the drill rows, which distorts the share each kind of activity holds of the schedule."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 7,
+  "option": 3,
+  "old": "The deepest drill activity, extended to the reported total depth.",
+  "new": "The deepest drill activity, extended to the reported total depth, since the deepest row carries the whole of the hole."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 8,
+  "option": 1,
+  "old": "Casing is run to the same depth as the deepest hole section, and the engine takes the shallower of the two counters when it reports.",
+  "new": "Casing is run to the same depth as the deepest hole section, and the engine reports the shallower of the two counters."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 9,
+  "option": 0,
+  "old": "Only the depth column moves, while drilled metres holds at 3,000.",
+  "new": "Only the depth column moves, while drilled metres holds at 3,000 because the new hole is not a fresh section."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 10,
+  "option": 1,
+  "old": "It rises with the days, since more hours on the well means more hole.",
+  "new": "It rises with the days, since more hours on the well means more hole drilled at the rates set in the drilling programme."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 11,
+  "option": 1,
+  "old": "That the two deep sections were drilled at the same rate of penetration, since their durations came out identical to the tenth of an hour.",
+  "new": "That the two deep sections share one rate of penetration, since their durations match to the tenth of an hour."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 12,
+  "option": 0,
+  "old": "The ratio must rise down the schedule as the clock accumulates.",
+  "new": "The ratio must rise down the schedule as the clock accumulates, because later rows inherit the trouble hours of earlier ones."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 13,
+  "option": 0,
+  "old": "Because flat rows carry no depth and so break the depth chain.",
+  "new": "Because flat rows carry no depth and so break the depth chain from which the drilled metres counter is built up row by row."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 13,
+  "option": 3,
+  "old": "Because the engine assigns flat rows a default duration.",
+  "new": "Because the engine assigns flat rows a default duration whenever a stated figure is missing from the programme it evaluates."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 14,
+  "option": 3,
+  "old": "Three, the elapsed days, the drilled metres and the total depth.",
+  "new": "Three, the elapsed days, the drilled metres and the total depth, which a per-metre line reads for the deepest section."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 15,
+  "option": 0,
+  "old": "Nothing is lost, since the rollup passes the whole case document.",
+  "new": "Nothing is lost, since the rollup passes the whole case document forward and every cost line can read whatever figure it needs."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-rolling-up-a-programme",
+  "ord": 15,
+  "option": 2,
+  "old": "The allowance fraction is lost, but the split itself survives.",
+  "new": "The allowance fraction is lost, but the split itself survives, carried forward as two separate hour figures beside the day count."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 7,
+  "option": 2,
+  "old": "That the drilled metres change with the allowance, which is the sign that the stretch has been carried through the depth chain as well as the clock.",
+  "new": "That the drilled metres change with the allowance, the sign that the stretch reached the depth chain as well as the clock."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 8,
+  "option": 3,
+  "old": "The schedule is correct, since the two are equal by definition.",
+  "new": "The schedule is correct, since the two are equal by definition whenever trouble time is expressed as a share of the elapsed hours."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 0,
+  "old": "The drilled metres, which the day count conceals.",
+  "new": "The drilled metres, which the day count conceals and which a partner needs before making any comparison with offset wells."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 3,
+  "old": "The rig dayrate, so the number can be read as money.",
+  "new": "The rig dayrate, so that the number can be read as money and set directly against the approved budget for the whole well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 1,
+  "old": "Every number in it is a cost with the currency symbol removed.",
+  "new": "Every number in it is a cost with the currency symbol removed, ready to be priced directly against a rate sheet."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 0,
+  "old": "Add a rounding allowance to the day figure before quoting it.",
+  "new": "Add a rounding allowance to the day figure before quoting it, so that the rig slot can be booked and paid in whole days."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 0,
+  "old": "The productive hours and the non-productive hours.",
+  "new": "The productive hours and the non-productive hours, because each of those two buckets is priced at its own separate day rate."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "The total depth and the number of casing strings run.",
+  "new": "The total depth and the number of casing strings run, since the tubulars are the largest material item she will have to price."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "None of them, because the base estimate is fixed at sanction.",
+  "new": "None of them, because the base estimate is fixed at sanction and the whole overrun is charged to the provision instead."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 3,
+  "old": "It shows the largest line has been priced on the wrong basis.",
+  "new": "It shows the largest line has been priced on the wrong basis, since no contracted line should ever trail the provision."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 1,
+  "old": "Optimise the order of its activities, since the evaluator will search the alternatives once the programme has been entered correctly.",
+  "new": "Optimise the order of its activities, as the evaluator searches the alternatives once the programme is entered."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "A fraction of 0.0909, applied directly to the base cost.",
+  "new": "A fraction of 0.0909, applied directly to the base cost, since the board pack quotes the fraction exactly as it was typed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 3,
+  "old": "A fraction of 0.2, halved because the provision is quoted against a denominator that includes it.",
+  "new": "A fraction of 0.2, halved because the provision is quoted against a denominator that includes it along with the whole base."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 1,
+  "old": "The intangible subtotal is already the larger of the two, and a provision must be placed in the smaller one for the split to balance.",
+  "new": "The intangible subtotal is already the larger of the two, and a provision must go in the smaller one for the split to balance."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 1,
+  "old": "A second base cost computed over the committed lines alone, which the engine forms whenever a line names an activity.",
+  "new": "A second base cost over the committed lines alone, which the engine forms whenever a line names an activity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "Rather more than a full day, at twenty four hours.",
+  "new": "Rather more than a full day, at twenty four hours, since the bit has to recover its price on productive drilling alone."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "About two hours, the bit being 0.06493506493506493 of the published rate and the rig the remainder of it.",
+  "new": "About two hours, the bit being 0.06493506493506493 of the published rate and the rig the remainder of it on that section."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 2,
+  "old": "One hundred rotating hours, four on the allowance and sixteen on the trip, which is the hour set the published fixture carries.",
+  "new": "One hundred rotating hours, four on the allowance and sixteen on the trip, as the published fixture carries."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "The bit cost omitted from the numerator, which on a deep section is a small enough share of the answer to pass unnoticed.",
+  "new": "The bit cost omitted from the numerator, which on a deep section is too small a share to be noticed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "It reverses his argument, since the section where the bit is the smaller share is the section where its price matters most to the rate.",
+  "new": "It reverses his argument, since where the bit is the smaller share is where its price matters most to the rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "It is 160,000 USD per metre, the day having cut one metre or less.",
+  "new": "It is 160,000 USD per metre, the day having cut one metre or less, which the form then rounds up to a single metre."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "It is zero, because the numerator of the form counts only rig hours that were spent making hole.",
+  "new": "It is zero, because the numerator of the form counts only the rig hours that were spent making hole on the section."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "Nothing, provided the fraction is applied at each step.",
+  "new": "Nothing, provided the fraction is applied at each step, so that the provision builds up in line with the elapsed time."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "The golden schedule, which every capstone is priced against.",
+  "new": "The golden schedule, which every capstone is priced against so that its answers can be checked to the dollar."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "The category split, fixed price lines all being tangible.",
+  "new": "The category split, fixed price lines all being tangible, so the whole intangible subtotal collapses to nothing on the sheet."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-an-afe-is-a-structure",
+  "ord": 7,
+  "option": 3,
+  "old": "Because the vendor contract already records the duration, so repeating it would be redundant.",
+  "new": "Because the vendor contract already records the duration, so repeating it on the sheet would be redundant."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-an-afe-is-a-structure",
+  "ord": 8,
+  "option": 1,
+  "old": "Only to the per-day lines, since those are the ones a schedule slip can move, leaving the rest untouched.",
+  "new": "Only to the per-day lines, since a schedule slip can move those, leaving the rest untouched."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-an-afe-is-a-structure",
+  "ord": 9,
+  "option": 1,
+  "old": "That every lump line on a valid sheet has to be tangible.",
+  "new": "That every lump line on a valid sheet has to be tangible, since a lump buys an item rather than a service."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-an-afe-is-a-structure",
+  "ord": 9,
+  "option": 3,
+  "old": "That lump lines are excluded from both of the subtotals.",
+  "new": "That lump lines are excluded from both of the subtotals and reported beneath the base as a separate block."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-an-afe-is-a-structure",
+  "ord": 10,
+  "option": 0,
+  "old": "The basis fixes the subtotal and the category fixes the multiplier.",
+  "new": "The basis fixes the subtotal and the category fixes the multiplier that the amount on each of the lines is scaled by."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-an-afe-is-a-structure",
+  "ord": 10,
+  "option": 3,
+  "old": "Both decide arithmetic, with the category scaling the amount by a fiscal factor.",
+  "new": "Both decide arithmetic, with the category scaling the amount by a fiscal factor before it reaches the subtotal."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-an-afe-is-a-structure",
+  "ord": 11,
+  "option": 2,
+  "old": "It keeps the line in the base while quietly omitting it from the cost-time curve.",
+  "new": "It keeps the line in the base while quietly omitting it from the cost-time curve and the category split."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-an-afe-is-a-structure",
+  "ord": 12,
+  "option": 3,
+  "old": "The item list, the productive hour count, the measured total depth and the rig day rate.",
+  "new": "The item list, the productive hour count, the measured total depth and the rig day rate used to price all of the hours."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-an-afe-is-a-structure",
+  "ord": 13,
+  "option": 3,
+  "old": "Twenty days, being the elapsed figure rounded upward to leave room for weather delays.",
+  "new": "Twenty days, being the elapsed figure rounded upward to leave room for weather delays on the rig contract."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-an-afe-is-a-structure",
+  "ord": 14,
+  "option": 3,
+  "old": "Drilled metres excludes the surface hole, which is credited to the mobilisation instead.",
+  "new": "Drilled metres excludes the surface hole, which is credited to the mobilisation instead of to the drilling lines."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-three-cost-bases",
+  "ord": 8,
+  "option": 1,
+  "old": "It rises in step with the elapsed day count, as every priced line does.",
+  "new": "It rises in step with the elapsed day count, as every priced line on the sheet does over time."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-three-cost-bases",
+  "ord": 9,
+  "option": 0,
+  "old": "Only at spud, before any activity has started.",
+  "new": "Only at spud, before any activity has started, since consumables are drawn down from then until the rig is released."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-three-cost-bases",
+  "ord": 9,
+  "option": 2,
+  "old": "At every point where a fixed price step lands on the curve.",
+  "new": "At every point where a fixed price step lands on the curve, because the two bases cannot accrue together at one hour."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-three-cost-bases",
+  "ord": 11,
+  "option": 3,
+  "old": "They come to 450,000 USD, and deepening the hole lifts them in proportion.",
+  "new": "They come to 450,000 USD, and deepening the hole lifts them in proportion to the extra metres added below the plan."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-three-cost-bases",
+  "ord": 13,
+  "option": 3,
+  "old": "Always lump, because the supplier quotes a fixed price for the run.",
+  "new": "Always lump, because the supplier quotes a fixed price for the run regardless of whatever footage the bit achieves."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-three-cost-bases",
+  "ord": 14,
+  "option": 1,
+  "old": "All three rise together, since they were calibrated to agree.",
+  "new": "All three rise together, since they were calibrated to agree and a slip moves each one of them by exactly the same share."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-three-cost-bases",
+  "ord": 14,
+  "option": 3,
+  "old": "All three hold flat, because the hole is still at the same depth.",
+  "new": "All three hold flat, because the hole is still at the same depth and all of the priced work has already been bought."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-three-cost-bases",
+  "ord": 15,
+  "option": 0,
+  "old": "The daily hire version, because deeper holes take proportionally longer.",
+  "new": "The daily hire version, because deeper holes take proportionally longer and every one of the added hours is billed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-tangible-and-intangible",
+  "ord": 7,
+  "option": 1,
+  "old": "Because the payment terms are held on the contract, not the line.",
+  "new": "Because the payment terms are held on the vendor contract and never on the cost line, so the category cannot inherit them."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-tangible-and-intangible",
+  "ord": 7,
+  "option": 3,
+  "old": "Because most vendors bill on more than one basis across a single well.",
+  "new": "Because most vendors bill on more than one basis across a single well, so no one basis could ever mark the category."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-tangible-and-intangible",
+  "ord": 8,
+  "option": 0,
+  "old": "Because hardware is bought as a lump and services are bought per day.",
+  "new": "Because hardware is bought as a lump and services are bought per day, and the basis sets which side a line is on."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-tangible-and-intangible",
+  "ord": 10,
+  "option": 2,
+  "old": "As a provision, since the possibility of milling was unplanned work.",
+  "new": "As a provision, since the possibility of milling it out was unplanned work that the base could never have priced."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-tangible-and-intangible",
+  "ord": 11,
+  "option": 1,
+  "old": "Because the engine needs it to place the fixed price steps correctly along the cost-time curve for cash flow work.",
+  "new": "Because the engine needs it to place the fixed price steps along the cost-time curve for cash flow work."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-tangible-and-intangible",
+  "ord": 12,
+  "option": 2,
+  "old": "The rig contractor, who invoices against whichever of the two subtotals covers the services actually delivered.",
+  "new": "The rig contractor, who invoices against whichever subtotal covers the services delivered."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-tangible-and-intangible",
+  "ord": 13,
+  "option": 0,
+  "old": "Last, below every contracted line on the sheet.",
+  "new": "Last, below every contracted line on the sheet, since a provision is only a small fraction of the whole of the base cost."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-tangible-and-intangible",
+  "ord": 13,
+  "option": 3,
+  "old": "Second, immediately under the rig dayrate line.",
+  "new": "Second, immediately under the rig dayrate line, being sized on the whole of the base that the rig itself dominates."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-tangible-and-intangible",
+  "ord": 14,
+  "option": 3,
+  "old": "The arithmetic, because sorted amounts no longer add back to the base.",
+  "new": "The arithmetic, because the sorted amounts no longer add back to the base once the rows have lost their activity order."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-tangible-and-intangible",
+  "ord": 15,
+  "option": 0,
+  "old": "Because the share is fixed by the fiscal regime rather than by the operator.",
+  "new": "Because the share is fixed by the fiscal regime rather than by the operator, whatever the well itself actually costs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 7,
+  "option": 0,
+  "old": "The approved total, which is the figure every share on the form is quoted on.",
+  "new": "The approved total, which is the figure every share on the form is quoted on so that the provision is included."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 7,
+  "option": 2,
+  "old": "The sum of the lump items only, which is what the split is computed over.",
+  "new": "The sum of the lump items only, which is what the split is computed over once the per-day lines are set aside."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 8,
+  "option": 3,
+  "old": "It grows to 960,000 USD, the amount by which the base has moved above the golden figure.",
+  "new": "It grows to 960,000 USD, the amount by which the base has moved above the golden figure, covering the slip in full."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 9,
+  "option": 3,
+  "old": "It reaches 0.1 of the rig dayrate, because the fraction applies to each line separately.",
+  "new": "It reaches 0.1 of the rig dayrate, because the fraction applies to each line separately before the total is formed."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 10,
+  "option": 3,
+  "old": "The fraction must exceed L divided by the approved total rather than by the base.",
+  "new": "The fraction must exceed L divided by the approved total rather than by the base, since the provision sits in the total."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 11,
+  "option": 3,
+  "old": "It shows the rig dayrate is the largest line, which the sort had already established.",
+  "new": "It shows the rig dayrate is the largest line, which the sort had already established before any bisection was run."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 12,
+  "option": 2,
+  "old": "0.15, at which the published ladder already records the provision in third place.",
+  "new": "0.15, at which the published ladder already records the provision in third place, so the pass must already be complete."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 13,
+  "option": 1,
+  "old": "The provision reaches 2,152,000 USD and still ranks second.",
+  "new": "The provision reaches 2,152,000 USD and still ranks second, behind the rig dayrate which remains the largest line."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 13,
+  "option": 3,
+  "old": "The provision is 2,690,000 USD, which is a third of what finally gets approved.",
+  "new": "The provision is 2,690,000 USD, which is a third of what finally gets approved once the base has been added to it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 14,
+  "option": 1,
+  "old": "That it is a P50, because a base built from most likely inputs sits in the middle of the outcome distribution.",
+  "new": "That it is a P50, since a base built from most likely inputs sits mid distribution."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-contingency",
+  "ord": 15,
+  "option": 2,
+  "old": "Averaging the two rates of penetration, since the mean of a rate carries straight through into the mean of the cost.",
+  "new": "Averaging the two rates of penetration, since a mean rate carries straight into the mean cost."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-cost-per-metre",
+  "ord": 8,
+  "option": 2,
+  "old": "None of them, because a flat allowance affects every section in the same proportion.",
+  "new": "None of them, because a flat allowance affects every section in the same proportion whatever its length."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-cost-per-metre",
+  "ord": 9,
+  "option": 0,
+  "old": "Depth over the trip speed, giving 4 hours and 6 hours.",
+  "new": "Depth over the trip speed, giving 4 hours and 6 hours, since a trip is costed on the way out of hole."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-cost-per-metre",
+  "ord": 9,
+  "option": 3,
+  "old": "A flat 16 hours at every depth, taken from the published worked example.",
+  "new": "A flat 16 hours at every depth, taken from the published worked example so that all sections match it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-cost-per-metre",
+  "ord": 10,
+  "option": 2,
+  "old": "The running time for the 20 inch casing, which the section pricing charges as a trip because the two are alike.",
+  "new": "The running time for the 20 inch casing, charged as a trip since the two are alike."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-cost-per-metre",
+  "ord": 11,
+  "option": 2,
+  "old": "The rate counts elapsed hours and the AFE line counts productive days, which is why the rate is the larger figure.",
+  "new": "The rate counts elapsed hours and the AFE line counts productive days, so the rate is larger."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-cost-per-metre",
+  "ord": 12,
+  "option": 2,
+  "old": "It reports the correct rate, because the whole well drilled 3,000 m in any case.",
+  "new": "It reports the correct rate, because the whole well drilled 3,000 m in any case and the form reads the well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-cost-per-metre",
+  "ord": 14,
+  "option": 0,
+  "old": "Below 9.027081243731192 m/hr, where the section is slowest.",
+  "new": "Below 9.027081243731192 m/hr, where the section is slowest and its rig hours come to dominate both of the rankings."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-cost-per-metre",
+  "ord": 14,
+  "option": 3,
+  "old": "Nowhere, because a section that costs more in total always costs more per metre.",
+  "new": "Nowhere, because a section that costs more in total always costs more per metre, whichever rate it is drilled at."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-cost-per-metre",
+  "ord": 15,
+  "option": 3,
+  "old": "A comparison of their casing and completion scopes, which the section rates carry implicitly.",
+  "new": "A comparison of their casing and completion scopes, which the section rates carry implicitly in their totals."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 7,
+  "option": 3,
+  "old": "Connection hours counted twice, which would flatter a long section most of all.",
+  "new": "Connection hours counted twice, which would flatter a long section most of all across its many stands."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 8,
+  "option": 1,
+  "old": "Convert it to a section total by multiplying by your own interval, which makes the two figures comparable straight away.",
+  "new": "Convert it to a section total with your own interval, which makes the two figures comparable."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "option": 0,
+  "old": "Settle the rate first, since it is the contracted number.",
+  "new": "Settle the rate first, since it is the contracted number and every other line on the sheet depends on it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "option": 2,
+  "old": "Move the line to a lump basis so the argument stops mattering.",
+  "new": "Move the line to a lump basis so the argument stops mattering, the amount then being fixed whatever the days."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "The category split, since the provision sits inside the intangible subtotal.",
+  "new": "The category split, since the provision sits inside the intangible subtotal alongside the rig and services lines."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 3,
+  "old": "It is a tangible line, and tangible lines are settled by purchase order.",
+  "new": "It is a tangible line, and tangible lines are all settled by purchase order long before the well is spudded."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "Never, because a drilling estimate cannot be given a probability at all.",
+  "new": "Never, because a drilling estimate cannot be given a probability at all, however its inputs are described."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "The non-productive allowance, which the curve applies to time and not to money.",
+  "new": "The non-productive allowance, which the curve applies to time alone and leaves out of the money it accumulates."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "Because a rig dayrate enters the cost through a division as well, which bends the relationship between its mean and its mode.",
+  "new": "Because a rig dayrate enters the cost through a division too, bending its mean from its mode."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "Predict the final well cost to within the provision carried.",
+  "new": "Predict the final well cost to within the provision carried, since the provision bounds the whole error."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "Say which percentile of the outcome the approved total reaches.",
+  "new": "Say which percentile of the outcome the approved total reaches, reading it off the provision fraction."
+ }
+]
