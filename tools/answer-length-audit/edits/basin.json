@@ -1,0 +1,812 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "monotone TR.",
+  "new": "monotone TR, the kerogen state being unable to refill at any step of the march."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "the two reflectance anchors.",
+  "new": "the two reflectance anchors, recovered from the vitrinite clock at its closed-form endpoints."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 2,
+  "old": "the phantom was deposited at 50 Ma.",
+  "new": "the phantom was already deposited at 50 Ma, heating the source early."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "120 Ma.",
+  "new": "120 Ma, dating from the Mid Sand's arrival."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 1,
+  "old": "the source is exhausted.",
+  "new": "the source is exhausted, its reactive kerogen spent and no further generation possible at depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 2,
+  "old": "74 percent of generated oil was expelled.",
+  "new": "74 percent of generated oil was expelled, the rest held back under the source's retention cap."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "the panel caches it.",
+  "new": "the panel caches it from the first run and never recomputes it when the erosion slider is moved."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 3,
+  "old": "the tile is hard-coded.",
+  "new": "the tile is hard-coded to the reference basin's value, so no control on the panel can change it."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "exactly correct.",
+  "new": "exactly correct, the step ages matching the rock's true onset dates."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "A thick condensed section.",
+  "new": "A thick condensed section, whose slow sedimentation implies a long gap in the preserved record."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "Seismic amplitude dimming.",
+  "new": "Seismic amplitude dimming across the source interval, read as gas charge from a deeper kitchen."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "a prerequisite for Rock Physics.",
+  "new": "a prerequisite for the Rock Physics course."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "running every model twice.",
+  "new": "running every model twice, once with the event and once without, and trusting only the difference between them."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "memorising the capstone keys.",
+  "new": "memorising the capstone keys and their tolerances so that any later model can be checked against them from memory."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-reference-basin",
+  "ord": 10,
+  "option": 2,
+  "old": "70 mW/m2.",
+  "new": "70 mW/m2, the segment's younger endpoint."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-reference-basin",
+  "ord": 10,
+  "option": 3,
+  "old": "77 mW/m2.",
+  "new": "77 mW/m2, rounding the interpolation up."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-reference-basin",
+  "ord": 13,
+  "option": 0,
+  "old": "the burial track rebounds at 10 Ma and the regrown bucket releases its stored excess.",
+  "new": "the source rebounds at 10 Ma and its regrown bucket releases stored oil."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-reference-basin",
+  "ord": 14,
+  "option": 3,
+  "old": "temperature still elevated from the hot decade while the reflectance curves have converged onto the no-event run.",
+  "new": "temperature still elevated from the hot decade while reflectance has converged onto the no-event run."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-forward-march",
+  "ord": 10,
+  "option": 2,
+  "old": "The heat flow rose at 120 Ma and fell at 80 Ma.",
+  "new": "The heat flow rose at 120 Ma and fell at 80 Ma, pushing the source's temperature each way."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-forward-march",
+  "ord": 11,
+  "option": 0,
+  "old": "each thermal cell separately.",
+  "new": "each thermal cell separately, giving every cell inside the layer its own kinetic state."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-forward-march",
+  "ord": 11,
+  "option": 1,
+  "old": "the layer's top temperature.",
+  "new": "the layer's top temperature, the coolest and so most conservative reading."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-forward-march",
+  "ord": 12,
+  "option": 1,
+  "old": "3200 m, the source's base.",
+  "new": "3200 m, the source's base, where it runs hottest."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-forward-march",
+  "ord": 13,
+  "option": 2,
+  "old": "plastic below 2000 m and elastic above.",
+  "new": "plastic below 2000 m and elastic in the shallower section."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-forward-march",
+  "ord": 14,
+  "option": 0,
+  "old": "The erosion signature is erased.",
+  "new": "The erosion signature is erased once the unroofed layers re-expand."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-forward-march",
+  "ord": 15,
+  "option": 2,
+  "old": "a bug to be reported.",
+  "new": "a bug to be reported, since a correct engine would deposit each layer gradually across its window."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-forward-march",
+  "ord": 15,
+  "option": 3,
+  "old": "an artefact of the plotting.",
+  "new": "an artefact of the plotting, which joins the sparse age samples with horizontal and vertical segments."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-erosion-event",
+  "ord": 8,
+  "option": 0,
+  "old": "0.0567 degrees, mirroring the reflectance signature on the thermal channel.",
+  "new": "0.0567 degrees, mirroring the reflectance signature."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-erosion-event",
+  "ord": 9,
+  "option": 1,
+  "old": "the heat flow resets each step.",
+  "new": "the heat flow resets each step, wiping the previous profile before the next one is solved."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-erosion-event",
+  "ord": 9,
+  "option": 3,
+  "old": "the engine truncates old profiles.",
+  "new": "the engine truncates old profiles after a few steps to keep the march's memory footprint small."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-erosion-event",
+  "ord": 10,
+  "option": 0,
+  "old": "the engine stores every historical profile.",
+  "new": "the engine stores every historical profile and replays the hottest one at every later step."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-erosion-event",
+  "ord": 10,
+  "option": 2,
+  "old": "reflectance is measured, not modelled.",
+  "new": "reflectance is a measured property that no later cooling of the rock can ever revise downward."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-erosion-event",
+  "ord": 11,
+  "option": 3,
+  "old": "the drop in expelled mass without the event.",
+  "new": "the drop in expelled mass without the event, read at present day in the source layer."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-erosion-event",
+  "ord": 12,
+  "option": 0,
+  "old": "the oracle removes them.",
+  "new": "the oracle removes them before the two runs are compared, leaving a clean residual."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-erosion-event",
+  "ord": 12,
+  "option": 1,
+  "old": "the engine subtracts them explicitly.",
+  "new": "the engine subtracts them explicitly, carrying a correction term for each through the march."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-erosion-event",
+  "ord": 13,
+  "option": 1,
+  "old": "at the 10 Ma removal step.",
+  "new": "at the 10 Ma removal step itself, as the column unroofed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-erosion-event",
+  "ord": 15,
+  "option": 0,
+  "old": "easier to see than large ones, their kinetic signal being much less saturated at the low end.",
+  "new": "easier to see than large ones, their kinetic signal being less saturated."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-generation-and-expulsion",
+  "ord": 7,
+  "option": 2,
+  "old": "porosity x depth x grain density.",
+  "new": "porosity x depth x grain density, summed over the source layer."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-generation-and-expulsion",
+  "ord": 8,
+  "option": 0,
+  "old": "the source lost grain to compaction.",
+  "new": "the source lost grain to compaction, thinning its solid framework as it was buried."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-generation-and-expulsion",
+  "ord": 8,
+  "option": 3,
+  "old": "the engine rescaled the cap at 80 Ma.",
+  "new": "the engine rescaled the cap at 80 Ma to account for the arrival of the Upper Shale seal."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-generation-and-expulsion",
+  "ord": 9,
+  "option": 3,
+  "old": "only after the erosion event.",
+  "new": "only after the erosion event, when the squeeze first overfills the bucket."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-generation-and-expulsion",
+  "ord": 12,
+  "option": 0,
+  "old": "half came from each mechanism.",
+  "new": "half came from each mechanism, the squeeze and the extra generation sharing it equally."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-generation-and-expulsion",
+  "ord": 12,
+  "option": 2,
+  "old": "all of it came from the squeeze.",
+  "new": "all of it came from the squeeze, the hot decade adding no generation beyond the no-event run."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-generation-and-expulsion",
+  "ord": 13,
+  "option": 0,
+  "old": "the basin is at its lifetime maximum heat flow when the squeeze arrives.",
+  "new": "the basin is at its maximum heat flow as the squeeze arrives."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-generation-and-expulsion",
+  "ord": 14,
+  "option": 3,
+  "old": "temperature monotone in its own maximum, with both of the other two state variables memoryless.",
+  "new": "temperature monotone in its own maximum, the other two state variables memoryless."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-what-the-model-buys",
+  "ord": 7,
+  "option": 2,
+  "old": "the removal step at 10 Ma.",
+  "new": "the removal step at 10 Ma, when the column cooled."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-what-the-model-buys",
+  "ord": 8,
+  "option": 0,
+  "old": "under-heat them.",
+  "new": "under-heat them, because it ignores the heat carried down with the new sediment."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-what-the-model-buys",
+  "ord": 8,
+  "option": 3,
+  "old": "crash on the discontinuity.",
+  "new": "crash on the discontinuity, having no earlier profile to carry across the arrival."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-what-the-model-buys",
+  "ord": 9,
+  "option": 2,
+  "old": "heat flow against radiogenic production.",
+  "new": "heat flow against radiogenic production, which together set the column's internal heat budget."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-what-the-model-buys",
+  "ord": 10,
+  "option": 3,
+  "old": "the six verification checks of the workflow's third step, listed in rising cost order.",
+  "new": "the six verification checks of the workflow's third step, in rising cost order."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-what-the-model-buys",
+  "ord": 12,
+  "option": 2,
+  "old": "five-figure precision is merely a formatting convention that the capstone's grader imposes.",
+  "new": "five-figure precision is a formatting convention the capstone's grader imposes."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-what-the-model-buys",
+  "ord": 13,
+  "option": 1,
+  "old": "the two anchors and the signature.",
+  "new": "the two anchors and the erosion signature, all read at the source."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-what-the-model-buys",
+  "ord": 15,
+  "option": 2,
+  "old": "the heat-flow history, whose youngest points control the final expulsion steps.",
+  "new": "the heat-flow history, whose youngest points control late expulsion."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-charge-workflow",
+  "ord": 11,
+  "option": 0,
+  "old": "scaling the reference answers by depth ratio.",
+  "new": "scaling the reference answers by depth ratio, since temperature and maturity both track burial depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-charge-workflow",
+  "ord": 11,
+  "option": 3,
+  "old": "asking the panel for a new erosion amount.",
+  "new": "asking the panel for a new erosion amount that reproduces the flank block's shallower source depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-charge-workflow",
+  "ord": 12,
+  "option": 1,
+  "old": "maps, logs and seismic.",
+  "new": "maps, logs and seismic, the three data types every basin model is ultimately calibrated against."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-charge-workflow",
+  "ord": 12,
+  "option": 2,
+  "old": "porosity, temperature and pressure.",
+  "new": "porosity, temperature and pressure, the three state variables the forward model carries through time."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-charge-workflow",
+  "ord": 13,
+  "option": 1,
+  "old": "all ten of the capstone answer keys, memorised at full precision together with their tolerances.",
+  "new": "all ten capstone answer keys, memorised at full precision with their tolerances."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-charge-workflow",
+  "ord": 14,
+  "option": 1,
+  "old": "faster processors.",
+  "new": "faster processors, so the same forward model can run at finer time steps."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "present-day temperatures.",
+  "new": "present-day temperatures, since reflectance tracks the column as it now stands."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "double the reflectance.",
+  "new": "double the reflectance, since each step's reaction increment is then applied twice."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 1,
+  "old": "the answer alone, concision being the mark of confidence.",
+  "new": "the answer alone, stated concisely."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 1,
+  "old": "the vitrinite F.",
+  "new": "the vitrinite F, the reacted fraction of the Easy%Ro ladder."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "fall gradually back toward the floor as the temperature drops.",
+  "new": "fall back as the temperature drops."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "preferring hot models.",
+  "new": "preferring hot models, since a hotter history brackets maturity from the safe side."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "four kerogen readings and two vitrinite readings, all six integrated.",
+  "new": "four kerogen and two vitrinite readings, all integrated."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-from-a-snapshot-to-a-clock",
+  "ord": 11,
+  "option": 2,
+  "old": "the capstone grades all three at 150 degC.",
+  "new": "the capstone grades all three at 150 degC, so each curve has to be readable against the others."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-from-a-snapshot-to-a-clock",
+  "ord": 11,
+  "option": 3,
+  "old": "averaging them approximates a real basin's heating.",
+  "new": "averaging them approximates a real basin's heating, whose rate varies between the three ramps."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-from-a-snapshot-to-a-clock",
+  "ord": 13,
+  "option": 2,
+  "old": "heating rates can be pushed beyond anything a burial history under real heat flow could produce.",
+  "new": "heating rates can be pushed beyond anything a real burial history could produce."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-from-a-snapshot-to-a-clock",
+  "ord": 14,
+  "option": 0,
+  "old": "How mature is this rock compared with a measured sample?",
+  "new": "How mature is this rock compared with a measured sample from the same well?"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-from-a-snapshot-to-a-clock",
+  "ord": 15,
+  "option": 1,
+  "old": "separate integrators tuned to each state's stiffness.",
+  "new": "separate integrators tuned to each state's stiffness, the kerogen spectrum being far stiffer."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-easy-ro-scheme",
+  "ord": 13,
+  "option": 1,
+  "old": "comparing a full ramp against the independent Python oracle at 1e-9.",
+  "new": "comparing a ramp against the Python oracle."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-easy-ro-scheme",
+  "ord": 14,
+  "option": 2,
+  "old": "the rock's reflectance is at 43 percent of the full-reaction value of 4.688.",
+  "new": "Ro is 43 percent of the 4.688 full-reaction value."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-heating-ramp",
+  "ord": 13,
+  "option": 1,
+  "old": "rate uncertainty compounds quadratically, doubling with each factor of 3 in rate.",
+  "new": "rate error compounds quadratically with each factor of 3 in rate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-heating-ramp",
+  "ord": 14,
+  "option": 2,
+  "old": "Because laboratory calibration concentrated there.",
+  "new": "Because laboratory calibration of the scheme concentrated its samples there."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-heating-ramp",
+  "ord": 15,
+  "option": 1,
+  "old": "About 0.99, the rate 3 value, since rate stops mattering once it exceeds 10 degC per Ma.",
+  "new": "About 0.99, as rate stops mattering above 10 degC per Ma."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-kerogen-clock",
+  "ord": 12,
+  "option": 3,
+  "old": "both the transformation curve and the reflectance curves, each scaled by its spectrum.",
+  "new": "both transformation and reflectance curves, each by its spectrum."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-kerogen-clock",
+  "ord": 13,
+  "option": 2,
+  "old": "only the maturity call, since Ro 0.7 is barely inside the window.",
+  "new": "only the maturity call; Ro 0.7 is barely in the window."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-kerogen-clock",
+  "ord": 14,
+  "option": 2,
+  "old": "integrating the spectrum a second time.",
+  "new": "integrating the spectrum a second time, weighted by each bin's activation energy."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-kerogen-clock",
+  "ord": 15,
+  "option": 0,
+  "old": "34 through 44, the empty toe.",
+  "new": "34 through 44, the low-energy toe where conversion always begins."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-kerogen-clock",
+  "ord": 15,
+  "option": 3,
+  "old": "54 only, the peak.",
+  "new": "54 only, the peak, since it carries most of the spectrum's weight."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-maturity",
+  "ord": 13,
+  "option": 1,
+  "old": "Ro of 4.2 late in a very hot history.",
+  "new": "Ro of 4.2 late in a very hot history, close to the scheme's ceiling."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-maturity",
+  "ord": 13,
+  "option": 3,
+  "old": "The slow ramp reading above the fast one.",
+  "new": "The slow ramp reading above the fast one at the same temperature."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-maturity",
+  "ord": 14,
+  "option": 0,
+  "old": "a corrupted weight table.",
+  "new": "a corrupted weight table in the spectrum."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-maturity",
+  "ord": 14,
+  "option": 3,
+  "old": "an oracle disagreement.",
+  "new": "an oracle disagreement at that ramp row."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-maturity",
+  "ord": 15,
+  "option": 1,
+  "old": "1e-2, which every graded tolerance is wide enough to absorb.",
+  "new": "1e-2, which every graded tolerance absorbs."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-kinetics-workflow",
+  "ord": 13,
+  "option": 2,
+  "old": "the software version and license.",
+  "new": "the software version and license under which the run was made."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-kinetics-workflow",
+  "ord": 13,
+  "option": 3,
+  "old": "every bin's final state.",
+  "new": "every bin's final state, so the reader can re-derive TR."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-kinetics-workflow",
+  "ord": 14,
+  "option": 2,
+  "old": "So the fixtures can be regenerated.",
+  "new": "So the fixtures can be regenerated automatically whenever the engine's constants change."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-kinetics-workflow",
+  "ord": 14,
+  "option": 3,
+  "old": "To match the oracle's output format.",
+  "new": "To match the oracle's output format, which prints every intermediate value it computes."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-kinetics-workflow",
+  "ord": 15,
+  "option": 1,
+  "old": "reflectance: the Expert tier replaces Easy%Ro with a per-basin calibrated scheme.",
+  "new": "reflectance: the Expert tier replaces Easy%Ro with a calibrated scheme."
+ }
+]
