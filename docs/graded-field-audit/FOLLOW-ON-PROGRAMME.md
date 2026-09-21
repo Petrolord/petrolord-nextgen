@@ -1,6 +1,6 @@
-# B5 group 3: costed follow-on programme (plan only)
+# B5 group 3: costed follow-on programme
 
-Status: PLAN, nothing built. Written 2026-09-21 after the owner chose to finish the small B4/B5 items now and to cost group 3 as its own programme.
+Status: APPROVED 2026-09-21. The owner approved all seven decisions (D1 to D7) as recommended ("Follow your recommended options for the seven decisions"). Building starts with W1. Written 2026-09-21 after the owner chose to finish the small B4/B5 items now and to cost group 3 as its own programme.
 
 Sources: this folder (`README.md`, `fields.json`, `annot/<course>.json`), `docs/answer-length-audit/README.md` ("Owner decisions raised"), the panel probe output `/root/b5/probe/`, and a read-only look at the Suite files named below. Every count here is recomputed from `fields.json` on main b9e3683b9.
 
@@ -10,7 +10,7 @@ Effort is in agent-days (d). S is up to 0.5 d, M is 0.5 to 2 d, L is over 2 d. E
 
 Only the choices that need the owner. Each has a recommendation.
 
-| # | Decision | Options | Recommended |
+| # | Decision | Options | Recommended (all APPROVED 2026-09-21) |
 |---|---|---|---|
 | D1 | Route per course for the 188 unobtainable fields (§1) | (a) publish inputs in the prompt; (b) typed "your case" panel mode | Approve the §1 table as written. It follows the README except **gaswell**, moved to (a): stating z at each station makes every gaswell field a taught closed form, moves no graded value, and costs 0.5 d against about 3 d for three panel modes. |
 | D2 | `panelCapstoneGuard` policy once panels take typed input (§1 route b) | keep "no panel can reach the capstone case"; or change to "no panel **default** state lands on a graded answer" | Change to the default-state rule. Typing the case is the work the capstone asks for. The guard keeps catching preloads. |
