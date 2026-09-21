@@ -1,0 +1,542 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 2,
+  "old": "The bound was reached because the iteration cap was hit first, so the fix is to allow more iterations",
+  "new": "The bound was reached because the iteration cap was hit first, leaving the search stranded partway, so the fix is to allow more iterations"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 3,
+  "old": "The parameter is not identifiable from the data and should be removed from the match entirely",
+  "new": "The parameter is not identifiable from the data, as the search ran to the edge unopposed, and it should be removed from the match entirely"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 1,
+  "old": "Whichever of the two is closer to the preliminary regression, since the match should not move the answer far",
+  "new": "Whichever of the two is closer to the preliminary regression, since a well posed match should not move the answer far from its starting estimate"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 2,
+  "old": "Neither on its own. The two are averaged, which is why the engine reports both alongside each other",
+  "new": "Neither on its own. The two are averaged, which is why the engine reports both alongside each other and labels neither as the headline"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "That negative results should be clipped to zero before the drive indices are formed, as the influx series already is",
+  "new": "That negative results should be clipped to zero before the drive indices are formed, exactly as the influx series already is in the engine"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "Always `engineering_basis`, since fitted parameters cannot be benchmarked against a published example",
+  "new": "Always `engineering_basis`, since fitted parameters cannot be benchmarked against a published example once a minimiser has chosen them"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 3,
+  "old": "No tier at all, the field being left empty so that a consumer cannot quote a benchmark claim over a fitted result",
+  "new": "No tier at all, the field being left empty so that a consumer cannot quote a benchmark claim over a result the data were fitted to"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "As a measure of how much data was available for each benchmark, wider tolerances meaning fewer test cases",
+  "new": "As a measure of how much data was available for each benchmark, wider tolerances meaning fewer test cases stood behind the path"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 1,
+  "old": "It claims a wider tolerance than a benchmark path, and claims nothing about the traceability of the calculation or about the assumptions the workflow rests on",
+  "new": "It claims a wider tolerance than a benchmark path, and claims nothing about traceability or the assumptions the workflow rests on"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 3,
+  "old": "Eleven, the only exception being the volumetric gas line, which is the one path that is not benchmark verified anywhere in the mapping",
+  "new": "Eleven, the only exception being the volumetric gas line, the one path not benchmark verified anywhere"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "It is promoted into the warnings array whenever the fit statistic on that path exceeds 0.99",
+  "new": "It is promoted into the warnings array whenever the fit statistic on that path exceeds 0.99, where the application surfaces it to the user"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "It is written to the golden tier file that the application badge reads, but not to the engine result",
+  "new": "It is written to the golden tier file that the application badge reads, but not to the engine result that the calling panel receives"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 0,
+  "old": "The string is inconsistent with itself and one of the two figures must be a typing error in the source",
+  "new": "The string is inconsistent with itself and one of the two figures must be a typing error in the source, most likely a dropped zero in the tolerance"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "The 10 percent figure is the tolerance on the aquifer geometry inputs rather than on the result the path produces",
+  "new": "The 10 percent figure is the tolerance on the aquifer geometry inputs rather than on the result the path produces, so it bounds the radii and angle entered"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "Recording a counterfactual whose result is close to the headline answer, since that is not a meaningful alternative",
+  "new": "Recording a counterfactual whose result is close to the headline answer, since that is not a meaningful alternative and only pads the decision map"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "Because the engine refuses to run any case whose surveys straddle the bubble point without a laboratory table covering both sides of it",
+  "new": "Because the engine refuses any case whose surveys straddle the bubble point without a laboratory table covering both sides"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "Convention, since all three depend on whether the indices were divided by gross or net withdrawal, which the third module spends a whole lesson on",
+  "new": "Convention, since all three depend on whether the indices were divided by gross or net withdrawal"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "4.65 percent, and the denominator matters only for reserves reporting rather than for engineering decisions",
+  "new": "4.65 percent, and the denominator matters only for reserves reporting rather than for the engineering decisions made on it"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "Prefer bounded solutions to unbounded ones, prefer measured properties to correlated ones, and prefer benchmarked paths to others wherever a choice between them exists",
+  "new": "Prefer bounded solutions to unbounded ones, measured properties to correlated ones, and benchmarked paths to others wherever a choice exists"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-finite-aquifer",
+  "ord": 15,
+  "option": 1,
+  "old": "Both wrong aquifers break the fit, so the correct radius ratio is the one that maximises R squared across the range of geometries the mapping allows",
+  "new": "Both wrong aquifers break the fit, so the correct radius ratio is the one that maximises R squared across the range of geometries the mapping allows, read off a scan of reD"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-carter-tracy",
+  "ord": 14,
+  "option": 3,
+  "old": "Rounding in the published PVT table, whose formation volume factors are quoted to three decimal places and whose solution gas ratios are quoted as whole numbers",
+  "new": "Rounding in the published PVT table, whose formation volume factors are quoted to three decimal places and whose solution gas ratios are quoted as whole numbers, an error that accumulates over the ten surveys"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-history-matching",
+  "ord": 10,
+  "option": 2,
+  "old": "At least ten in every case, which is why short histories cannot be matched at all",
+  "new": "At least ten in every case, which is why short histories cannot be matched at all by the engine"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-history-matching",
+  "ord": 15,
+  "option": 3,
+  "old": "That the reported confidence intervals are valid at the 95 percent level for this particular run",
+  "new": "That the reported confidence intervals are valid at the 95 percent level for this particular run and its matched parameters"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "option": 2,
+  "old": "Both come to about 25 percent",
+  "new": "Both come to about 25 percent, since the same oil was produced in each case"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-the-tank-idea",
+  "ord": 14,
+  "option": 0,
+  "old": "The connate water is absent, and Swi applies to the aquifer",
+  "new": "The connate water is absent from the tank, and Swi applies to the aquifer alone"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-the-tank-idea",
+  "ord": 14,
+  "option": 1,
+  "old": "The rock and water expansion term drops out, and Et reduces to Eo",
+  "new": "The rock and water expansion term drops out entirely, and Et reduces to Eo alone"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 2,
+  "old": "It becomes unfittable, because the misgrouped term makes the plotted points curve away from a line",
+  "new": "It becomes unfittable, because the misgrouped term curves the points off a line"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "The regression, since an index sum below 1 usually follows from a poorly conditioned slope",
+  "new": "The regression, since an index sum below 1 usually follows from a poorly conditioned slope estimate"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 2,
+  "old": "An R-squared far below 0.95, which is what triggers the engine's low correlation warning",
+  "new": "An R-squared far below 0.95, which triggers the low correlation warning"
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "A conversion factor between reservoir and stock tank barrels at that pressure",
+  "new": "A conversion factor between reservoir and stock tank barrels at that pressure, much like a formation volume factor"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "It cannot be compared, since the two factors are quoted at different reference pressures entirely",
+  "new": "They cannot be compared, being quoted at different reference pressures"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "The validation tier, the tolerance percentage and the reference string attached to that path",
+  "new": "The validation tier, the tolerance percentage and the path's reference string"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "It is required before the validation tier may be quoted in a reserves memo to a client",
+  "new": "It is required before the validation tier may be quoted in a reserves memo"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "It allows the engine to check your diagnosis against the drive mechanism it classifies",
+  "new": "It lets the engine check your diagnosis against the mechanism it classifies"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "It shortens the run time, because the aquifer model can be set before the first pass",
+  "new": "It cuts run time, because the aquifer model can be set before the first pass"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 1,
+  "old": "Reproduce the influx, since naming the model determines every constant it uses uniquely",
+  "new": "Reproduce the influx, as naming the model fixes every constant it uses"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 2,
+  "old": "Check the drive index closure, which is enough to confirm the constants were consistent",
+  "new": "Check the drive index closure, enough to confirm consistent constants"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 3,
+  "old": "Nothing at all, since aquifer models cannot be reviewed without access to the software itself",
+  "new": "Nothing, since aquifer models cannot be reviewed without the software"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 0,
+  "old": "Re-run with a larger aquifer, since a negative oil in place indicates the influx was undersized",
+  "new": "Re-run with a larger aquifer, since a negative oil in place means undersized influx"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "Report the magnitude without the sign, since oil in place is conventionally quoted as a positive volume",
+  "new": "Report the magnitude without the sign, as oil in place is quoted as a positive volume"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 0,
+  "old": "The number of surveys and the total depletion behind the fit, which the Associate version left out",
+  "new": "The number of surveys and the total depletion behind the fit, left out at Associate"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "The validation tier and its tolerance, which become quotable once an aquifer model is present",
+  "new": "The validation tier and tolerance, quotable once an aquifer model is present"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "The reconciliation against volumetrics, which is only meaningful once influx has been modelled",
+  "new": "The reconciliation against volumetrics, meaningful only once influx is modelled"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-fetkovich",
+  "ord": 13,
+  "option": 3,
+  "old": "It is understated at first and overstated later, so the cumulative influx after four steps happens to land on the printed value",
+  "new": "It is understated at first and overstated later, so the cumulative influx after four steps happens to land on the printed value as the errors cancel"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-fetkovich",
+  "ord": 14,
+  "option": 2,
+  "old": "The drawdown is the full 240 psi, so the first step delivers twice the water the published solution reports for it",
+  "new": "The drawdown is the full 240 psi, so the first step delivers twice the water the published solution reports for it and overshoots from the start"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-fetkovich",
+  "ord": 14,
+  "option": 3,
+  "old": "The drawdown is undefined until the aquifer pressure has been updated at least once by a completed timestep",
+  "new": "The drawdown is undefined until the aquifer pressure has been updated at least once by a completed timestep, so the engine halts on the first row"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-fetkovich",
+  "ord": 15,
+  "option": 0,
+  "old": "As a failure to reproduce the benchmark, since a validated engine should match a published table exactly",
+  "new": "As a failure to reproduce the benchmark, since a validated engine should match a published table exactly to every printed digit"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-gas-and-p-over-z",
+  "ord": 8,
+  "option": 2,
+  "old": "114.976909090015 Bcf with an R squared of 0.999907270407081, which is what the whole history supports",
+  "new": "114.976909090015 Bcf with an R squared of 0.999907270407081, which is what the whole history supports once every point is used"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-gas-and-p-over-z",
+  "ord": 9,
+  "option": 2,
+  "old": "Because the fitted intercept replaces the measured value once enough history has accumulated to make the regression reliable",
+  "new": "Because the fitted intercept replaces the measured value once enough history has accumulated to make the regression reliable, the initial survey being the noisiest point on the plot"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-gas-and-p-over-z",
+  "ord": 9,
+  "option": 3,
+  "old": "Because an intercept above the measured value is the normal consequence of least squares and confirms that the fit is unbiased",
+  "new": "Because an intercept above the measured value is the normal consequence of least squares and confirms that the fit is unbiased, the residuals balancing about the line by construction"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-gas-and-p-over-z",
+  "ord": 10,
+  "option": 1,
+  "old": "By less than 7 percent, because the gas already produced is known exactly and dilutes the error across the whole booking",
+  "new": "By less than 7 percent, because the gas already produced is known exactly and dilutes the error across the whole booking, damping it in the remainder"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-gas-and-p-over-z",
+  "ord": 12,
+  "option": 2,
+  "old": "Gas in place within 10 percent and every other quantity reported for information only, with no numerical gate applied to them",
+  "new": "Gas in place within 10 percent and every other quantity reported for information only, with no numerical gate applied to them, since the aquifer quantities are inferred indirectly and cannot be gated"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-gas-and-p-over-z",
+  "ord": 12,
+  "option": 3,
+  "old": "Gas in place within 2 percent and an R squared above 0.9999, with the aquifer quantities left ungated because they are not observable",
+  "new": "Gas in place within 2 percent and an R squared above 0.9999, with the aquifer quantities left ungated because they are not observable at any well and enter the analysis only through the slope of the plot"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-pvt-and-precedence",
+  "ord": 13,
+  "option": 1,
+  "old": "Under none of them, since the date check runs before the aquifer model is consulted at all",
+  "new": "Under none of them, since the date check runs for every model before the aquifer setting is consulted at all"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-pvt-and-precedence",
+  "ord": 13,
+  "option": 2,
+  "old": "Under Carter-Tracy, which superposes over pressure changes rather than over elapsed time",
+  "new": "Under Carter-Tracy, which superposes over pressure changes rather than over elapsed time between the rows"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-pvt-and-precedence",
+  "ord": 14,
+  "option": 0,
+  "old": "A unit conversion, since the correlation returns the ratio in standard cubic feet per reservoir barrel rather than per stock tank barrel",
+  "new": "A unit conversion, since the correlation returns the ratio per reservoir barrel rather than per stock tank barrel"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-pvt-and-precedence",
+  "ord": 15,
+  "option": 3,
+  "old": "Report the result with the warnings attached and no comment, so the reviewer can decide what they mean",
+  "new": "Report the result with the warnings attached and no comment, so the reviewer can decide for themselves what they mean"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "That the encroachment angle was applied twice, since the fraction should sit much nearer to one half",
+  "new": "That the encroachment angle was applied twice, since the fraction should sit much nearer to one half for an aquifer of this size"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 0,
+  "old": "It proves the engine is more accurate than the published table, whose author rounded every intermediate value before printing it",
+  "new": "It proves the engine is more accurate than the published table, whose author rounded every intermediate value"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "Both panels left at their defaults throughout, since every graded field is read from the configuration as loaded",
+  "new": "Both panels left at their defaults, since every graded field is read from the configuration as loaded"
+ }
+]
