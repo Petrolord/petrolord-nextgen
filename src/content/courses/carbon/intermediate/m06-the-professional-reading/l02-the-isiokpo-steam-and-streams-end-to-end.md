@@ -6,7 +6,7 @@ This lesson reads the rest of the Isiokpo plant as a chain: one failed trap, one
 
 ## The trap
 
-SECTION 15 prints the trap failed open: a 4 mm orifice, 9 bar a upstream, a discharge coefficient of 0.72, a steam density of 4.65 kg/m3 and 8400 hours a year.
+The lab prints the trap failed open: a 4 mm orifice, 9 bar a upstream, a discharge coefficient of 0.72, a steam density of 4.65 kg/m3 and 8400 hours a year.
 
 | isentropic exponent | kg an hour | tonnes a year | annual cost USD | annual fuel GJ | annual tCO2e |
 | --- | --- | --- | --- | --- | --- |
@@ -19,7 +19,7 @@ The trap refuses a blank exponent, discharge coefficient or hours. It reports th
 
 ## The condensate
 
-SECTION 16 raises the return from 0.35 to 0.65 on 16 t of steam an hour, with condensate at 92 C and makeup at 27 C.
+The record raises the return from 0.35 to 0.65 on 16 t of steam an hour, with condensate at 92 C and makeup at 27 C.
 
 | output | with treatment priced | with treatment left blank |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ With the treatment cost blank the value is a floor, and the engine says so in it
 
 ## The streams
 
-SECTION 17 targets the four streams:
+The engine targets the four streams:
 
 | minimum approach C | hot utility kW | cold utility kW | pinch hot C | pinch cold C | heat recovered kW |
 | --- | --- | --- | --- | --- | --- |
@@ -53,7 +53,7 @@ It answers in part and names the gap. A trap with no boiler efficiency reports i
 
 It applies a stated default only where one is stated. Hours left out of the trap's call take 8760. Hours left blank are refused.
 
-SECTION 25 lists the trap's rule and the two pinch rules among those in force: a trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year; only an interior zero of the cascade is a pinch; a negative heat capacity flowrate is refused. Its MD45-1 table adds that a trap is choked only at or below the critical pressure ratio.
+The course lists the trap's rule and the two pinch rules among those in force: a trap needs a boiler efficiency for fuel and carbon, an isentropic exponent, and hours a year; only an interior zero of the cascade is a pinch; a negative heat capacity flowrate is refused. Its MD45-1 table adds that a trap is choked only at or below the critical pressure ratio.
 
 ## Exercise
 

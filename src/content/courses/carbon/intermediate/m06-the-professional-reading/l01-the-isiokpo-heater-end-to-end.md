@@ -6,7 +6,7 @@ Modules one to four read the Isiokpo heater one function at a time. This lesson 
 
 ## Link one: the fuel analysis
 
-The chain starts from the fuel gas analysis of SECTION 11: CH4 0.868, C2H6 0.071, C3H8 0.021, CO2 0.025, N2 0.015. Counted atom by atom against FUEL_REFERENCE, it gives:
+The chain starts from the fuel gas analysis of module one: CH4 0.868, C2H6 0.071, C3H8 0.021, CO2 0.025, N2 0.015. Counted atom by atom against FUEL_REFERENCE, it gives:
 
 | output | value | unit |
 | --- | --- | --- |
@@ -19,11 +19,11 @@ The inerts ride through: the fuel's CO2 sits inside products.co2PerKmolFuel, 1.0
 
 ## Link two: the stack oxygen
 
-The stoichiometry meets one measurement, the dry stack oxygen. SECTION 12 turns the current reading of 5.5 percent into 32.1223 percent excess air and the target of 2.8 percent into 13.9199 percent. Both carry the engine's assumption, verbatim: "Complete combustion. An oxygen reading alone cannot see carbon monoxide, so a stack making CO will read as if it had more excess air than it has." A blank reading is refused, and so is a reading of air itself.
+The stoichiometry meets one measurement, the dry stack oxygen. The engine turns the current reading of 5.5 percent into 32.1223 percent excess air and the target of 2.8 percent into 13.9199 percent. Both carry the engine's assumption, verbatim: "Complete combustion. An oxygen reading alone cannot see carbon monoxide, so a stack making CO will read as if it had more excess air than it has." A blank reading is refused, and so is a reading of air itself.
 
 ## Link three: the efficiency on a declared basis
 
-The flue gas becomes an efficiency in SECTION 13. With a stack at 238 C, air at 28 C and a radiation and convection loss of 1.8 percent read off the vendor's chart:
+The flue gas becomes an efficiency in module three. With a stack at 238 C, air at 28 C and a radiation and convection loss of 1.8 percent read off the vendor's chart:
 
 | case | basis | total loss percent | efficiency percent |
 | --- | --- | --- | --- |
@@ -36,7 +36,7 @@ The radiation loss is typed because the engine refuses to default it, and it mov
 
 ## Link four: a year of fuel saved
 
-SECTION 14 takes the two LHV efficiencies, holds the target against a declared floor of 2 percent, and applies the ratio to 410000 GJ a year on LHV:
+The engine takes the two LHV efficiencies, holds the target against a declared floor of 2 percent, and applies the ratio to 410000 GJ a year on LHV:
 
 | output | value |
 | --- | --- |
@@ -45,7 +45,7 @@ SECTION 14 takes the two LHV efficiencies, holds the target against a declared f
 | fuelSavingPercent | 1.6445 |
 | annualEnergySavedGJ | 6742.370 |
 
-The lab prints the percentage-point shortcut beside it, computed here from the engine's efficiencies: 5923.008 GJ a year, 819.363 GJ below the engine's saving. The engine returns only the ratio. On HHV, SECTION 14 prints a saving fraction of 0.0164763814 computed from the two HHV efficiencies, and no annual HHV figure; the 410000 GJ it prints is stated on LHV.
+The lab prints the percentage-point shortcut beside it, computed here from the engine's efficiencies: 5923.008 GJ a year, 819.363 GJ below the engine's saving. The engine returns only the ratio. On HHV, the lab prints a saving fraction of 0.0164763814 computed from the two HHV efficiencies, and no annual HHV figure; the 410000 GJ it prints is stated on LHV.
 
 ## The boxes along the way
 
@@ -53,4 +53,4 @@ Read the chain again for what the caller had to supply. The fuel analysis. The s
 
 ## Exercise
 
-Follow one figure through the chain: the current reading of 5.5 percent oxygen. Say what excess air SECTION 12 turns it into, what LHV efficiency SECTION 13 reports for it, and where it enters the saving of SECTION 14. Then say which two boxes in the chain the engine refuses to default and what each refusal gives as its reason.
+Follow one figure through the chain: the current reading of 5.5 percent oxygen. Say what excess air the engine turns it into, what LHV efficiency module three reports for it, and where it enters the saving of module four. Then say which two boxes in the chain the engine refuses to default and what each refusal gives as its reason.

@@ -6,9 +6,9 @@ Lesson one read the first sentence of the engine's method. This lesson reads the
 
 ## The second sentence
 
-SECTION 14 prints the method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. Subtracting the efficiency percentages divides by a hundred instead of by the target efficiency, and understates the saving."
+The lab prints the method, verbatim: "Fuel scales inversely with efficiency at the same duty, so the saving is (target - current) / target. Subtracting the efficiency percentages divides by a hundred instead of by the target efficiency, and understates the saving."
 
-The shortcut it describes is tempting because the heater's efficiencies arrive as percents. The invented Isiokpo heater moves from 86.4029 percent to 87.8476 percent on LHV (SECTION 13), and a reader who subtracts one from the other gets a difference in percentage points and reads it as the percent of fuel saved. The engine's sentence says what that subtraction does: it divides the gap by a hundred, where the ratio divides it by the target efficiency.
+The shortcut it describes is tempting because the heater's efficiencies arrive as percents. The invented Isiokpo heater moves from 86.4029 percent to 87.8476 percent on LHV (module three), and a reader who subtracts one from the other gets a difference in percentage points and reads it as the percent of fuel saved. The engine's sentence says what that subtraction does: it divides the gap by a hundred, where the ratio divides it by the target efficiency.
 
 The two routes share a top. Both take the gap between the target and the current efficiency. They differ only on the bottom. The engine divides by the target efficiency, 87.8476 percent at Isiokpo. The shortcut divides by a hundred.
 
@@ -31,9 +31,9 @@ The trap is quiet. The shortcut's figure is a plausible number with the right un
 
 ## Why the bottom matters
 
-The method's first sentence carries the reason: fuel scales inversely with efficiency at the same duty. The ratio follows from that sentence, with the target efficiency on the bottom. In practice, a hundred percent is an efficiency no fired heater reaches, and the SECTION 14 sweep prints the Isiokpo heater's target efficiency at 88.1965 percent on LHV when the target sits on the 2 percent floor.
+The method's first sentence carries the reason: fuel scales inversely with efficiency at the same duty. The ratio follows from that sentence, with the target efficiency on the bottom. In practice, a hundred percent is an efficiency no fired heater reaches, and the lab's tuning sweep prints the Isiokpo heater's target efficiency at 88.1965 percent on LHV when the target sits on the 2 percent floor.
 
-The same reasoning holds on HHV. SECTION 14 prints the HHV saving fraction, computed from the two HHV efficiencies of SECTION 13, as 0.0164763814, a fuelSavingPercent of 1.6476. It is the ratio on the other basis, and it prints no shortcut of its own.
+The same reasoning holds on HHV. The lab prints the HHV saving fraction, computed from the two HHV efficiencies of module three, as 0.0164763814, a fuelSavingPercent of 1.6476. It is the ratio on the other basis, and it prints no shortcut of its own.
 
 ## Exercise
 

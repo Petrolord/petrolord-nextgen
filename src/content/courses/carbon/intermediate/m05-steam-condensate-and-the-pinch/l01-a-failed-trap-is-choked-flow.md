@@ -1,12 +1,12 @@
 # A failed trap is choked flow
 
-Isiokpo's second record is its steam system. This lesson reads one failed steam trap through steamTrapLoss, one of the energyEfficiency functions SECTION 1 lists, and the flow model the engine states for it.
+Isiokpo's second record is its steam system. This lesson reads one failed steam trap through steamTrapLoss, one of the energyEfficiency functions this course lists, and the flow model the engine states for it.
 
 {{panel:carbon-efficiency-explorer}}
 
 ## The trap
 
-SECTION 15 prints one trap failed open. Every figure is invented for this course, and the fuel emission factor is SYNTHETIC:
+The lab prints one trap failed open. Every figure is invented for this course, and the fuel emission factor is SYNTHETIC:
 
 | input | value |
 | --- | --- |
@@ -27,7 +27,7 @@ In practice, a steam trap is a valve that lets condensate out of a steam line an
 
 ## The loss
 
-SECTION 15 prints the trap's loss at its stated exponent:
+The lab prints the trap's loss at its stated exponent:
 
 | isentropic exponent | kg an hour | tonnes a year | annual cost USD | annual fuel GJ | annual tCO2e |
 | --- | --- | --- | --- | --- | --- |
@@ -39,13 +39,13 @@ Each column carries its own unit. The flow is kilograms an hour and prints to fo
 
 ## The flow model
 
-SECTION 15 prints the engine's note on the flow, verbatim: "Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5774, so the loss depends on the upstream pressure alone."
+The lab prints the engine's note on the flow, verbatim: "Choked flow: the pressure ratio 0.1126 is at or below the critical 0.5774, so the loss depends on the upstream pressure alone."
 
-With no downstream pressure given, the trap is taken to vent to atmosphere, ATMOSPHERE_BAR_A, 1.01325 bar a. SECTION 15 states the test: the flow is choked while the downstream pressure over the upstream is at or below the critical ratio (2/(k+1))^(k/(k-1)). At 0.1126 against 0.5774 the Isiokpo trap is choked, and the loss the table prints is set by the upstream pressure, 9 bar a, together with the orifice, the discharge coefficient, the steam density and the exponent.
+With no downstream pressure given, the trap is taken to vent to atmosphere, ATMOSPHERE_BAR_A, 1.01325 bar a. The course states the test: the flow is choked while the downstream pressure over the upstream is at or below the critical ratio (2/(k+1))^(k/(k-1)). At 0.1126 against 0.5774 the Isiokpo trap is choked, and the loss the table prints is set by the upstream pressure, 9 bar a, together with the orifice, the discharge coefficient, the steam density and the exponent.
 
 ## A downstream pressure
 
-SECTION 15 then gives the same trap a downstream pressure:
+The course then gives the same trap a downstream pressure:
 
 | downstream bar a | pressure ratio | critical ratio at 1.135 | choked | kg an hour | tonnes a year |
 | --- | --- | --- | --- | --- | --- |
@@ -60,7 +60,7 @@ The course reads the table in one sentence: "At or below the critical ratio the 
 
 ## Inputs the engine will not assume
 
-SECTION 15 prints the refusals for the flow's own inputs:
+The lab prints the refusals for the flow's own inputs:
 
 | the call | the engine says |
 | --- | --- |
@@ -71,4 +71,4 @@ The discharge coefficient, 0.72 at Isiokpo, is required because it depends on th
 
 ## Exercise
 
-Read the SECTION 15 downstream table and the engine's choked-flow note. Say which rows are choked, what the kg an hour column does across those rows, and what it does in the rows where choked is false. Then say what that means for a trap at a downstream pressure of 5 bar a and of 8 bar a.
+Read the downstream table above and the engine's choked-flow note. Say which rows are choked, what the kg an hour column does across those rows, and what it does in the rows where choked is false. Then say what that means for a trap at a downstream pressure of 5 bar a and of 8 bar a.
