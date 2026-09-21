@@ -397,6 +397,37 @@ def lesson_tier(path):
 LESSON_MODULE_RE = re.compile(r'(?:^|/)m(\d{1,2})[-/]')
 
 
+# ------------------------------------------------ OWNER DECISION 2026-09-21 (a)
+# THE ONWARD PREVIEW IS EXEMPT FROM THE FORWARD-REACH RULE, BY ROLE. Every
+# Associate and Professional tier ends module m06 with a signpost lesson
+# ("Onward", "Onward to Professional", "What the next tier changes") whose job
+# is to preview the next tier, so quoting a next-tier figure there is the
+# lesson doing its job and never a leak. B5's litsweep triage counted 76
+# forward reaches of exactly this shape. The owner chose the exemption over
+# stripping the figures.
+#
+# The exemption is by ROLE, read from the lesson's place and name together:
+# the lesson must sit in module m06 of a tier that HAS a next tier, and carry
+# one of the signpost slugs. The same file name in any other module, or a
+# figure the digest does not print at all, is swept exactly as before. It
+# exempts FORWARD reaches only: a backward reach, a sign error and a figure
+# missing from the digest all still fail in an onward lesson.
+ONWARD_PREVIEW_SLUGS = frozenset([
+    'onward', 'onward-to-professional', 'onward-to-expert', 'what-the-next-tier-changes',
+])
+LESSON_ROLE_RE = re.compile(r'(?:^|/)m(\d{1,2})-[^/]*/l\d{1,2}-([^/]+)\.md$')
+
+
+def lesson_role(path, tier):
+    """'onward-preview' for the m06 signpost lesson of a tier with a next tier,
+    'lesson' for everything else."""
+    m = LESSON_ROLE_RE.search(path.replace(os.sep, '/'))
+    if (m and int(m.group(1)) == 6 and m.group(2) in ONWARD_PREVIEW_SLUGS
+            and tier in ('beginner', 'intermediate')):
+        return 'onward-preview'
+    return 'lesson'
+
+
 def lesson_module(path):
     """A lesson's own module key, `m03`, from <tier>/m03-.../l02-....md. Used
     only to say which section a resolve came from, never to fail anything."""
@@ -461,6 +492,40 @@ def minus_before(text, at):
     if text[at - 1] == '\u2212':
         return True
     return at - 1 == 0 or text[at - 2] in SIGN_CONTEXT
+
+
+# ------------------------------------------------ OWNER DECISION 2026-09-21 (b)
+# A SIGN-FLIPPED DISTRACTOR IS LEGITIMATE. "-30 days" offered against a keyed
+# "30 days ago" tests exactly the sign convention the lesson teaches, and B5's
+# triage found 16 correct figures failing only because the digest prints the
+# magnitude. So a NEGATIVE literal in a bank OPTION THAT IS NOT THE KEY may
+# resolve against the digest's positive printing of the same magnitude.
+#
+# Nothing else relaxes. The magnitude must still be a whole-number hit (a
+# wrong magnitude fails exactly as before), the tier-range check runs on the
+# magnitude's hits, and the KEYED option, the prompt and the explanation keep
+# the strict same-sign rule, because those are the places the course states a
+# figure as true.
+
+
+def is_distractor_field(field, q):
+    """True for `optionN` when N is not the keyed answer."""
+    if not field.startswith('option'):
+        return False
+    try:
+        j = int(field[len('option'):])
+    except ValueError:
+        return False
+    key = q.get('answer', q.get('answer_index'))
+    return key is not None and j != key
+
+
+def sign_flip_hits(lit, lines):
+    """Hits for the MAGNITUDE of a negative literal, or [] when `lit` is not
+    negative. Only callers sweeping a distractor may use these."""
+    if not lit.startswith('-'):
+        return []
+    return whole_number_hits(lit[1:], lines)
 
 
 # --------------------------------------------------------------- K7: WHICH ROW
@@ -678,6 +743,7 @@ def sweep_lessons(lessons_dir, lines, sections, allowed, strict_range=False, qui
                       f'is not a pass.')
     checked = as_constant = 0
     bad, reach_back, reach_fwd, review = [], [], [], []
+    onward_exempt = []
     ranged = 0
     prose_lits = table_lits = table_rows = table_rules = panel_lines = digit_rows = 0
     for f in files:
@@ -692,6 +758,7 @@ def sweep_lessons(lessons_dir, lines, sections, allowed, strict_range=False, qui
         desc = owns_desc(sections, tier)
         module = lesson_module(f)
         rel = os.path.relpath(f, lessons_dir)
+        role = lesson_role(rel, tier)
         for i, line in enumerate(open(f, encoding='utf-8').read().split('\n'), 1):
             if line.lstrip().startswith('{{panel'):
                 # A panel is a component invocation rather than a sentence, and
@@ -728,6 +795,9 @@ def sweep_lessons(lessons_dir, lines, sections, allowed, strict_range=False, qui
                 if kind != 'in':
                     row = (rel, tier, i, field, lit, min(hits) + 1,
                            f'{section_owner_desc(sec)}; {tier} owns {desc}')
+                    if kind == 'fwd' and role == 'onward-preview':
+                        onward_exempt.append(row)
+                        continue
                     (reach_fwd if kind == 'fwd' else reach_back).append(row)
                     continue
                 r = review_resolve(f'{rel}:{i} {field}', tier, module, lit, line, hits, lines,
@@ -769,11 +839,13 @@ def sweep_lessons(lessons_dir, lines, sections, allowed, strict_range=False, qui
         print(f'[litsweep] lessons: {len(bad)} not in the digest, {len(reach_fwd)} reaching '
               f'FORWARD, {len(reach_back)} reaching back '
               f'({nf_t} forward and {nb_t} back from table rows)')
+        print(f'[litsweep] lessons: {len(onward_exempt)} forward reach(es) in m06 onward '
+              f'preview lessons, exempt by role (owner decision 2026-09-21)')
         print_review(review, review_all, 'lessons')
     counts = {'files': len(files), 'literals': checked, 'prose': prose_lits,
               'table': table_lits, 'table_rows': table_rows, 'digit_rows': digit_rows,
               'ranged': ranged, 'not_in_digest': len(bad), 'forward': len(reach_fwd),
-              'back': len(reach_back),
+              'back': len(reach_back), 'onward_exempt': len(onward_exempt),
               'table_forward': sum(1 for r in reach_fwd if r[3] == 'table'),
               'table_not_in_digest': sum(1 for r in bad if r[2] == 'table')}
     return bad + reach_fwd + (reach_back if strict_range else []), counts
@@ -837,6 +909,7 @@ def run(wave_dir, banks_dir=None, prefix=None, quiet=False, strict_range=False,
 
     checked = 0
     bad, reach_back, reach_fwd = [], [], []
+    sign_flips = []
     if banks_refusal is None:
         checked = as_constant = 0
         bad, reach_back, reach_fwd, review = [], [], [], []
@@ -869,6 +942,16 @@ def run(wave_dir, banks_dir=None, prefix=None, quiet=False, strict_range=False,
                     for lit in literals(text):
                         checked += 1
                         hits = whole_number_hits(lit, lines)
+                        if is_distractor_field(field, q) and not (
+                                hits and range_of(hits, sections, btier)[0] == 'in'):
+                            # The magnitude's hits JOIN the signed ones, so a
+                            # distractor whose negative form only sits on a
+                            # later page still resolves where its magnitude is
+                            # printed in range. The tier range reads both.
+                            flip = [h for h in sign_flip_hits(lit, lines) if h not in hits]
+                            if flip:
+                                hits = sorted(hits + flip)
+                                sign_flips.append((name, i, field, lit))
                         if not hits:
                             if lit in allowed:
                                 as_constant += 1
@@ -920,6 +1003,10 @@ def run(wave_dir, banks_dir=None, prefix=None, quiet=False, strict_range=False,
                 print(f'   NOT IN DIGEST {lit!r}  {name} Q{i} {field}')
                 print(f'      ...{text[:160]}')
             print(f'[litsweep] {len(bad)} literal(s) not in the digest')
+            print(f'[litsweep] {len(sign_flips)} sign-flipped distractor(s) resolved on the '
+                  f'magnitude the digest prints (owner decision 2026-09-21)')
+            for name, i, field, lit in sign_flips:
+                print(f'   sign-flipped distractor {lit!r}  {name} Q{i} {field}')
             for name, btier, i, field, lit, line, where in reach_fwd:
                 print(f'   REACHES FORWARD {lit!r}  {name} Q{i} {field} '
                       f'(digest line {line}; {where})')
@@ -938,6 +1025,7 @@ def run(wave_dir, banks_dir=None, prefix=None, quiet=False, strict_range=False,
                                                    strict_range, quiet, review_all, vocab)
         failing = failing + lesson_fail
     run.last_lesson_counts = lesson_counts
+    run.last_sign_flips = sign_flips
     # THE BANKS HALF REFUSES BY NAME, AFTER the lesson result has been printed.
     # A wave that means to be bankless says so with --lessons-only.
     if banks_refusal is not None and not lessons_only:
@@ -1436,6 +1524,102 @@ def selftest():
         pass
     else:
         raise AssertionError('a wave with no banks did not refuse')
+
+    # ------------------------------------------- OWNER DECISION 2026-09-21 (a)
+    # THE ONWARD PREVIEW, BY ROLE. One digest, one Expert-only figure, and the
+    # same beginner sentence quoting it from four lessons. Only the m06
+    # signpost may reach forward; the same slug in m05, the capstone lesson
+    # beside it in m06, and a figure the digest never prints all still fail.
+    d14 = tempfile.mkdtemp()
+    os.makedirs(os.path.join(d14, 'banks'))
+    io.open(os.path.join(d14, 'wave.json'), 'w').write(json.dumps({'prefix': 'zz', 'constants': {}}))
+    io.open(os.path.join(d14, 'digest.txt'), 'w').write(
+        '# SECTION 1: the ladder (owned by Associate m01)\n'
+        'the G orifice is 0.503000 in2\n'
+        '# SECTION 13: the blowdown (owned by Expert m01)\n'
+        'the march ends at 1500.000000 lb/hr\n')
+    preview = 'The next tier marches the blowdown to 1500.000000 lb/hr.\n'
+
+    def lesson_tree(files):
+        root = tempfile.mkdtemp(dir=d14)
+        for rel, text in files.items():
+            os.makedirs(os.path.dirname(os.path.join(root, rel)), exist_ok=True)
+            io.open(os.path.join(root, rel), 'w').write(text)
+        return root
+
+    anchor_md = {'beginner/m01-the-ladder/l01.md': 'The G orifice is 0.503000 in2.\n'}
+    for slug in sorted(ONWARD_PREVIEW_SLUGS):
+        for tier in ('beginner', 'intermediate'):
+            assert lesson_role(f'{tier}/m06-the-reading/l03-{slug}.md', tier) == 'onward-preview', slug
+    assert lesson_role('advanced/m06-the-reading/l03-onward.md', 'advanced') == 'lesson', \
+        'an Expert onward lesson has no next tier to preview'
+    assert lesson_role('beginner/m05-the-reading/l03-onward.md', 'beginner') == 'lesson'
+    assert lesson_role('beginner/m06-the-reading/l02-working-the-capstone.md', 'beginner') == 'lesson'
+    assert lesson_role('beginner/m06-the-reading/l03-onward-bound.md', 'beginner') == 'lesson'
+    # POSITIVE: the m06 onward preview quoting the Expert figure is exempt.
+    root = lesson_tree(dict(anchor_md, **{'beginner/m06-the-reading/l03-onward.md': preview}))
+    found, _ = run(d14, quiet=True, lessons_dir=root, lessons_only=True)
+    c14 = run.last_lesson_counts
+    assert not found and c14['onward_exempt'] == 1, \
+        f'the m06 onward preview was not exempted by role: {found} {c14}'
+    # NEGATIVE: the same sentence anywhere else still reaches forward.
+    for rel in ('beginner/m05-the-reading/l03-onward.md',
+                'beginner/m06-the-reading/l02-working-the-capstone.md'):
+        root = lesson_tree(dict(anchor_md, **{rel: preview}))
+        found, _ = run(d14, quiet=True, lessons_dir=root, lessons_only=True)
+        assert any(len(f) == 7 and f[4] == '1500.000000' for f in found), \
+            f'{rel} quoting an Expert-only figure was exempted: {found}'
+    # NEGATIVE: an onward preview is not exempt from the digest itself.
+    root = lesson_tree(dict(anchor_md, **{
+        'beginner/m06-the-reading/l03-onward.md': 'The next tier reaches 1499.000000 lb/hr.\n'}))
+    found, _ = run(d14, quiet=True, lessons_dir=root, lessons_only=True)
+    assert [f[3] for f in found] == ['1499.000000'], \
+        f'an invented figure in an onward preview passed: {found}'
+    print('[litsweep] onward control FIRED: an m06 onward preview may reach forward, the '
+          'same figure in m05 or in the m06 capstone lesson still fails, and so does a '
+          'figure the digest never prints')
+
+    # ------------------------------------------- OWNER DECISION 2026-09-21 (b)
+    # A SIGN-FLIPPED DISTRACTOR resolves on its magnitude; a wrong magnitude,
+    # a sign-flipped KEY and a sign-flipped explanation all still fail.
+    d15 = tempfile.mkdtemp()
+    os.makedirs(os.path.join(d15, 'banks'))
+    io.open(os.path.join(d15, 'wave.json'), 'w').write(json.dumps({'prefix': 'zz', 'constants': {}}))
+    io.open(os.path.join(d15, 'digest.txt'), 'w').write(
+        '# SECTION 1: the calendar (owned by Associate m01)\n'
+        'the review fell due 30 days ago; days until 45\n'
+        '# SECTION 13: the late register (owned by Expert m01)\n'
+        'the overdue count is 181 days\n')
+    base = {'prompt': 'How far off is the review?', 'options': ['30 days ago', '-30', '45', 'none'],
+            'answer': 0, 'explanation': 'It fell due 30 days ago.'}
+    bank = os.path.join(d15, 'banks', 'zzb_m01.json')
+    json.dump([base], io.open(bank, 'w'))
+    found, checked = run(d15, quiet=True)
+    assert checked > 0 and not found, f'a sign-flipped distractor was refused: {found}'
+    assert [x[3] for x in run.last_sign_flips] == ['-30'], run.last_sign_flips
+    for label, q in (
+            ('a wrong magnitude', dict(base, options=['30 days ago', '-31', '45', 'none'])),
+            ('a sign-flipped KEY', dict(base, options=['-45', '30', '45 days', 'none'])),
+            ('a sign-flipped explanation', dict(base, explanation='It is -30 days out.')),
+            ('a sign-flipped prompt', dict(base, prompt='Is -45 days right?'))):
+        json.dump([q], io.open(bank, 'w'))
+        found, _ = run(d15, quiet=True)
+        assert found, f'{label} passed the gate'
+    # and the magnitude still carries the TIER RANGE: an Associate distractor
+    # whose magnitude lives only on an Expert page reaches forward.
+    json.dump([dict(base, options=['30 days ago', '-181', '45', 'none'])], io.open(bank, 'w'))
+    found, _ = run(d15, quiet=True)
+    assert any(len(f) == 7 and f[4] == '-181' for f in found), \
+        f'a sign-flipped distractor escaped the tier range: {found}'
+    # and the case the B5 triage met on riskchange: the negative form is
+    # printed only on a LATER page while the magnitude is printed in range.
+    io.open(os.path.join(d15, 'digest.txt'), 'a').write('a late change reads -30 days\n')
+    json.dump([base], io.open(bank, 'w'))
+    found, _ = run(d15, quiet=True)
+    assert not found, f'an in-range magnitude was overruled by a later signed printing: {found}'
+    print('[litsweep] sign-flip control FIRED: a sign-flipped distractor resolves on the '
+          'printed magnitude; a wrong magnitude, a flipped key, prompt or explanation and a '
+          'forward-reaching magnitude all still fail')
     print('[litsweep] selftest OK')
     return 0
 
