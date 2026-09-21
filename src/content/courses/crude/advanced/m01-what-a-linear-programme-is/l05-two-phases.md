@@ -6,7 +6,7 @@ The kernel's method is two-phase simplex. The name describes the order of work: 
 
 Phase two moves from vertex to vertex, and phase one finds the point it starts from: any point that meets every row. The batch row is an equation, sum(v_i) = target, and the origin does not satisfy it.
 
-Phase one drives artificial variables to zero. If it succeeds, the point it ends on meets every real row, and phase two can begin from it. If it cannot, the rows contradict, and the answer is infeasible. In the digest's words, if phase one cannot, "the rows contradict and the answer is infeasible."
+Phase one drives artificial variables to zero. If it succeeds, the point it ends on meets every real row, and phase two can begin from it. If it cannot, the rows contradict, and the answer is infeasible. In the course's words, if phase one cannot, "the rows contradict and the answer is infeasible."
 
 ## Phase two: from vertex to vertex
 

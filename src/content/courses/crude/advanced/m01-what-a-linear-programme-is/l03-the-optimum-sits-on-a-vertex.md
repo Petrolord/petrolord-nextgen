@@ -1,6 +1,6 @@
 # The optimum sits on a vertex
 
-The kernel does not search every feasible point of a linear programme one by one. The digest states the fact that makes the method possible: the optimum of a linear programme, when there is one, is found at a vertex of the feasible region, a point where at least as many constraints and bounds hold exactly as there are variables.
+The kernel does not search every feasible point of a linear programme one by one. The course states the fact that makes the method possible: the optimum of a linear programme, when there is one, is found at a vertex of the feasible region, a point where at least as many constraints and bounds hold exactly as there are variables.
 
 ## Why a corner
 

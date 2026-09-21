@@ -36,7 +36,7 @@ The digest computes the same terms two other ways, for contrast, and prints how 
 | losses taken off the netback after the costs | 65.0169 | 0.0696 |
 | losses left out | 65.5412 | 0.5939 |
 
-Taking the loss percent off the netback after the costs gives 65.0169, which the digest prints as 0.0696 from the engine's figure. That reading applies the shrinkage to a figure that already has processing and freight removed, so it shrinks the wrong quantity. In the engine's formula processing and freight are per barrel of crude and sit outside the loss factor, so the loss does not reduce them.
+Taking the loss percent off the netback after the costs gives 65.0169, which the table above prints as 0.0696 from the engine's figure. That reading applies the shrinkage to a figure that already has processing and freight removed, so it shrinks the wrong quantity. In the engine's formula processing and freight are per barrel of crude and sit outside the loss factor, so the loss does not reduce them.
 
 Leaving losses out gives 65.5412. The digest prints its distance from the engine's netback as 0.5939, and the engine's own term table prints the value lost to losses at 0.8 percent as 0.5939. Leaving the loss out simply puts that term back.
 

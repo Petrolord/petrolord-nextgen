@@ -8,7 +8,7 @@ A netback with no freight is a real question. The engine answers it, and says th
 
 Every cost field can be left empty. An engine could refuse such a call, or it could take the empty field as zero and say so.
 
-For costs, it takes the second. The digest gives the reason: a blank cost is taken as zero, because a netback with no freight is a legitimate question. The blank cost is named in the result, and complete stays true.
+For costs, it takes the second. The engine gives the reason: a blank cost is taken as zero, because a netback with no freight is a legitimate question. The blank cost is named in the result, and complete stays true.
 
 ## Taken as zero, and NAMED
 

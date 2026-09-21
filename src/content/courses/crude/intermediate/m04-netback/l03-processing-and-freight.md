@@ -24,11 +24,11 @@ The netback, 64.9473 $/bbl of crude, is what a barrel of the Kwale blend is wort
 
 Processing cost is an input per barrel of crude, 6.8000 $/bbl of crude for the Kwale blend. In the formula it is subtracted after the loss factor, so the loss does not scale it.
 
-This course takes processing cost as one number the refinery supplies. How a refinery builds that number is taught in the `refinery` course. Here it is an input, invented like every price in the digest, and the lesson is only where it sits in the chain.
+This course takes processing cost as one number the refinery supplies. How a refinery builds that number is taught in the `refinery` course. Here it is an input, invented like every price in this course, and the lesson is only where it sits in the chain.
 
 ## Freight
 
-Freight is the other cost input, and it is also per barrel of crude. The digest's heading for this module names what a netback is: what a barrel of crude is worth at the refinery. Freight comes off in the formula as a figure per barrel, after the losses.
+Freight is the other cost input, and it is also per barrel of crude. This course's definition for this module names what a netback is: what a barrel of crude is worth at the refinery. Freight comes off in the formula as a figure per barrel, after the losses.
 
 What freight is made of, and the terminal side of moving a cargo, belongs to the `supply` course. Here, as with processing, freight is one figure per barrel of crude.
 
