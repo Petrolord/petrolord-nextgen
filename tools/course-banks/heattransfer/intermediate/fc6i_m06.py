@@ -15,12 +15,12 @@ q(1, "The chain on this engine is a loop rather than a line. What needs what?",
   "The area needs the film, the film needs the coefficient, the coefficient needs the duty, the duty needs the count."],
  "A map like that is a contraction, so plain iteration settles it. A coefficient computed at a tube count the same screen contradicts is not a coefficient of anything.")
 
-q(3, "What is the tube count trail on the studio case, and how many passes of the loop does it take?",
- "2, 60, 72 and 74 tubes, converged in 4 passes.",
- ["2, 12, 60 and 300 tubes, converged in 4 passes.",
-  "4, 56 and 64 tubes, converged in 3 passes.",
-  "2, 60, 72 and 74 tubes, converged in 2 passes."],
- "The ladder of seeds the studio walks is 2, 12, 60 and 300 tubes, and the first seed that evaluates starts the loop. The trail is what the loop left behind on the way to the answer.")
+q(3, "The fouling penalty on a capstone stack can be reached twice, from U clean and U dirty and as the two fouling terms' share of the total. What does a disagreement between the two routes point to?",
+ "Something upstream of both, usually an inside term put into the stack without the diameter ratio on it.",
+ ["Nothing in particular, since the two routes measure different quantities.",
+  "The wall term, which the share column reads on a flat plate while the two coefficients read it on the tube itself.",
+  "Rounding in the printed penalty, which carries six decimals and so cannot match a share of the stack to the last place."],
+ "The fouling penalty in percent is the same number as the two fouling terms taken as a share of the total, so on one stack the two routes must agree. If they do not, something upstream of both is wrong, and it is usually an inside term that never reached the reference surface.")
 
 q(0, "ORON runs the same chain on a four-pass bundle. What ladder of seeds does it walk?",
  "4, 24, 120 and 600 tubes.",

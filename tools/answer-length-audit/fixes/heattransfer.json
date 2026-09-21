@@ -1,0 +1,46 @@
+{
+ "migration": "20261021b_b4_fix_heattransfer.sql",
+ "title": "heattransfer: duplicate question rewritten into a new question",
+ "items": [
+  {
+   "app_slug": "heattransfer",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "duplicate of beginner module m06-the-associate-reading 8 (near p0.79 k1.00): both ask for the tube count trail on the studio case, same key",
+   "verdict": "fixed",
+   "reason": "True duplicate across tiers; kept the beginner m06 question and rewrote this copy to test the m06 capstone point on the free check of the fouling penalty.",
+   "changes": {
+    "prompt": {
+     "old": "What is the tube count trail on the studio case, and how many passes of the loop does it take?",
+     "new": "The fouling penalty on a capstone stack can be reached twice, from U clean and U dirty and as the two fouling terms' share of the total. What does a disagreement between the two routes point to?"
+    },
+    "explanation": {
+     "old": "The ladder of seeds the studio walks is 2, 12, 60 and 300 tubes, and the first seed that evaluates starts the loop. The trail is what the loop left behind on the way to the answer.",
+     "new": "The fouling penalty in percent is the same number as the two fouling terms taken as a share of the total, so on one stack the two routes must agree. If they do not, something upstream of both is wrong, and it is usually an inside term that never reached the reference surface."
+    },
+    "options": {
+     "0": {
+      "old": "2, 12, 60 and 300 tubes, converged in 4 passes.",
+      "new": "Nothing in particular, since the two routes measure different quantities."
+     },
+     "1": {
+      "old": "4, 56 and 64 tubes, converged in 3 passes.",
+      "new": "The wall term, which the share column reads on a flat plate while the two coefficients read it on the tube itself."
+     },
+     "2": {
+      "old": "2, 60, 72 and 74 tubes, converged in 2 passes.",
+      "new": "Rounding in the printed penalty, which carries six decimals and so cannot match a share of the stack to the last place."
+     },
+     "3": {
+      "old": "2, 60, 72 and 74 tubes, converged in 4 passes.",
+      "new": "Something upstream of both, usually an inside term put into the stack without the diameter ratio on it."
+     }
+    }
+   },
+   "correct_change_reason": "True duplicate rewritten into a new question on a different point, so the key is new text for the new question."
+  }
+ ]
+}
