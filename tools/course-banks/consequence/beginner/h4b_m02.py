@@ -1,0 +1,132 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H4 consequence, ASSOCIATE m02 "Liquid Through a Hole".
+# Digest section 5 (the AMENAM crude run-down line, its sweeps, the Yellow
+# Book acrylonitrile case and its erratum) and the liquidOrificeDischarge rows
+# of the section 3 refusal table.
+
+q(1,
+  "In the engine's liquid outflow model, P = rhoL g hL + PaL. What is P?",
+  "The absolute pressure at the hole: the static head of the liquid plus the pressure above the liquid.",
+  ["The pressure above the liquid alone, typed as a gauge figure, since the head is added later inside the square root.",
+   "The driving pressure, already net of ambient, which the engine multiplies by the density and takes the square root of.",
+   "The ambient pressure outside the hole."],
+  "Section 5 says P is the absolute pressure at the hole, the static head rhoL g hL plus the pressure above the liquid, PaL, and the mass rate depends on P minus ambient. P is not the driving pressure itself, because ambient has not yet been taken off it. Every pressure is absolute, so PaL is never a gauge figure, and ambient is the Pa that P is compared with.")
+
+q(3,
+  "On the AMENAM line the pressure at the hole is 250013.915000 Pa. Which pressure sets the mass rate of 19.354651 kg/s?",
+  "The driving pressure, 148688.915000 Pa.",
+  ["The pressure at the hole, 250013.915000 Pa, since the model string carries the absolute P under its square root.",
+   "The pressure above the liquid, 200000 Pa absolute, as typed for the line.",
+   "The static head on its own, 98675.000000 Pa, since the ullage pressure only matters once the head is gone."],
+  "The model is qS = Cd Ah sqrt(2 (P - Pa) rhoL), so the square root holds P minus ambient, the driving pressure, which section 5 prints as 148688.915000 Pa. The 250013.915000 Pa is P before ambient is taken off. 200000 Pa is the stated ullage. 98675.000000 Pa is the driving pressure the head sweep prints at a head of 0 m, which is the ullage over ambient with no liquid above the hole.")
+
+q(0,
+  "The AMENAM line is modelled with the ullage left at ambient, 101325 Pa, in place of its 200000 Pa blanket. What mass rate does the engine return?",
+  "11.225132 kg/s, from the head alone.",
+  ["15.768131 kg/s, the 150000 Pa row.",
+   "19.354651 kg/s, since the head of 6 m is unchanged and the head alone sets the rate.",
+   "15.767020 kg/s, the 0 m head row."],
+  "The ullage sweep prints 11.225132 kg/s at 101325 Pa, with a driving pressure of 50013.915000 Pa: with the ullage at ambient only the head drives the flow. 15.768131 kg/s belongs to the 150000 Pa row. 19.354651 kg/s needs the 200000 Pa blanket. 15.767020 kg/s is the head sweep's row at 0 m, where the blanket drives the flow with no liquid above the hole.")
+
+q(2,
+  "With the ullage at ambient the jet velocity from the AMENAM hole is Torricelli's sqrt(2 g h). What does the engine return?",
+  "10.848032 m/s, matching the derived Torricelli figure.",
+  ["18.704445 m/s, the jet velocity with the 200000 Pa blanket still in place above the liquid.",
+   "11.225132 m/s, since the jet velocity and the mass rate carry the same figure at ambient ullage.",
+   "9.80665 m/s, the gravitational acceleration."],
+  "Section 5 derives 10.848032 m/s from sqrt(2 g h) and the engine gives 10.848032. 18.704445 m/s is the jet velocity at the stated 200000 Pa ullage. 11.225132 is the mass rate in kg/s at ambient ullage, a different quantity in a different unit. 9.80665 is `G_M_S2`, an acceleration in m/s2 and never a velocity.")
+
+q(2,
+  "The AMENAM level falls until no liquid stands above the hole, with the 200000 Pa ullage held. Does anything still flow?",
+  "Yes: the ullage over ambient drives 98675.000000 Pa and the engine returns 15.767020 kg/s.",
+  ["No, because a head of 0 m is refused with the message that nothing flows out once the liquid height reaches zero.",
+   "No: with the head at 0 m the driving pressure is zero whatever the ullage, and the engine returns 0 kg/s.",
+   "Yes, 11.225132 kg/s, the head alone."],
+  "The head sweep's 0 m row prints a driving pressure of 98675.000000 Pa and 15.767020 kg/s: the blanket alone pushes the liquid out. A head of 0 m is allowed (the refusal is for a NEGATIVE head, and the ullage refusal needs the pressure at the hole not to exceed ambient). The driving pressure is not zero because the ullage is above ambient. 11.225132 kg/s is the ambient ullage row with the full 6 m head.")
+
+q(0,
+  "The AMENAM head is doubled from 6 m to 12 m with the ullage held. Why does the mass rate go from 19.354651 to only 22.374228 kg/s?",
+  "The rate goes as the square root of the driving pressure, and the driving pressure includes the ullage, so doubling the head raises it from 148688.915000 to 198702.830000 Pa.",
+  ["The rate is linear in the head, but the discharge coefficient falls as the head rises, which offsets part of the gain.",
+   "The engine caps the head at the height of the tank wall.",
+   "The jet velocity is fixed by the hole, so only the density term grows."],
+  "The model carries sqrt(2 (P - Pa) rhoL), and the head sweep shows the driving pressure going from 148688.915000 Pa at 6 m to 198702.830000 Pa at 12 m, because the ullage contribution does not double with the head. The discharge coefficient is a stated input that never changes with the head. The liquid model has no tank wall, and the jet velocity is not fixed by the hole; the density is a stated input.")
+
+q(3,
+  "Everything on the AMENAM line is held and the discharge coefficient is raised from 0.62 to 1. What mass rate comes back?",
+  "31.217178 kg/s.",
+  ["24.973743 kg/s, which the coefficient sweep prints at 0.8.",
+   "19.354651 kg/s, since the Yellow Book value of 0.62 is always used.",
+   "18.730307 kg/s, which the sweep prints at 0.6."],
+  "The coefficient sweep prints 31.217178 kg/s at 1, and the mass rate is linear in the discharge coefficient. 24.973743 and 18.730307 kg/s are the rows at 0.8 and 0.6. The engine uses the typed coefficient; 0.62 is only what its refusal message recommends for a sharp orifice, and 1 lies inside (0, 1] so it is accepted.")
+
+q(1,
+  "The AMENAM hole is doubled from 0.05 m to 0.1 m in diameter. By what factor does the mass rate change, and why?",
+  "By 4.000000, because the rate is linear in the hole area and the area goes as the square of the diameter.",
+  ["By 2, because the mass rate is linear in the hole diameter, just as it is linear in the discharge coefficient.",
+   "By 1.414214, since the diameter enters the model under the square root with the pressure.",
+   "By 4.000000, because the jet velocity doubles as well as the diameter."],
+  "Section 5 says the mass rate is linear in the discharge coefficient and in the hole AREA, so doubling the diameter multiplies it by 4.000000, from 19.354651 to 77.418603 kg/s. It is not linear in the diameter. The square root holds the driving pressure and the density; 1.414214 is the pool diameter factor for a halved thickness in section 8. The jet velocity depends on the driving pressure alone and does not change with the hole.")
+
+q(3,
+  "The engine prints hole areas to twelve decimals. What area does it report for the 0.025 m hole on the AMENAM line?",
+  "0.000490873852 m2.",
+  ["0.001963495408 m2, the area it reports for the line's own 0.05 m hole.",
+   "0.000078539816 m2, the area of the 0.01 m hole in the same sweep.",
+   "0.007853981634 m2, the area of the 0.1 m hole in the same sweep."],
+  "The hole sweep prints 0.000490873852 m2 for 0.025 m, with a mass rate of 4.838663 kg/s. 0.001963495408 m2 belongs to 0.05 m, 0.000078539816 m2 to 0.01 m and 0.007853981634 m2 to 0.1 m; each is pi d squared over four for its own diameter, so none of them is the 0.025 m hole.")
+
+q(1,
+  "The AMENAM ullage is doubled from 500000 to 1000000 Pa with the head held. What does the engine return, and why does the rate not double?",
+  "48.888640 kg/s against 33.621626 kg/s, because the rate goes as the square root of the driving pressure.",
+  ["19.354651 kg/s, since the head sets the rate and the ullage only moves the pressure at the hole.",
+   "33.621626 kg/s, since a liquid outflow chokes and further pressure adds nothing.",
+   "48.888640 kg/s, because the head term falls as the ullage rises."],
+  "The ullage sweep prints 33.621626 kg/s at 500000 Pa and 48.888640 kg/s at 1000000 Pa; the driving pressure goes from 448688.915000 to 948688.915000 Pa and the rate follows its square root. 19.354651 kg/s is the rate at the stated 200000 Pa ullage, and the ullage plainly moves the rate across the sweep. Linear growth in pressure is the choked GAS result of section 6, and a liquid through a hole is never choked in this model. The head term rhoL g hL does not depend on the ullage at all.")
+
+q(0,
+  "The Yellow Book acrylonitrile case prints 58.44 kg/s and the engine gives 58.429567 kg/s. Why does the golden allow 0.0005 relative?",
+  "The level is printed to two decimals, 11.12 m, so the printed rate cannot be matched more closely than that rounding allows.",
+  ["The engine uses a discharge coefficient of 0.6 where the book uses 0.62, and the tolerance absorbs the difference.",
+   "The book computes the rate at time zero and the engine at 500 s.",
+   "The relative difference is 1.79e-4 because the engine rounds the density of 812.5 kg/m3 before use."],
+  "Section 5: the engine gives 58.429567 kg/s against the printed 58.44, a relative difference of 1.79e-4, and the level is printed to two decimals, which is why the golden allows 0.0005 relative. Both use Cd 0.62, and both are at 500 s. The density is the stated 812.5 kg/m3 and nothing is rounded by the engine.")
+
+q(2,
+  "The same Yellow Book example prints 60.915 kg/s at time zero for a level of 11.2 m. What does the golden do with that figure?",
+  "It sets it aside: Bernoulli at that level gives 58.639369 kg/s, so the golden uses the value at 500 s, which reproduces.",
+  ["It gates the engine against 60.915 kg/s at a looser tolerance, because the value at time zero is the one the book prints first.",
+   "It records a heat capacity ratio as inferred so that the engine reproduces 60.915 kg/s at time zero.",
+   "It uses 60.915 as the engine's answer."],
+  "Section 5 calls this an erratum in the published example: Bernoulli at 11.2 m gives 58.639369 kg/s, so the value at 500 s reproduces and the value at time zero does not, and the golden uses the one that reproduces. It does not gate against a figure that does not reproduce. A heat capacity ratio belongs to the gas outflow of section 6 and plays no part in a liquid. The erratum is a fact about the published source and changes nothing the engine returns.")
+
+q(0,
+  "A liquid outflow call is given a head of minus 1 m. What does the engine return?",
+  "\"liquidHeadM: must be a liquid height of 0 m or more above the hole\"",
+  ["A mass rate computed as if the head were 0 m.",
+   "\"pressureAboveLiquidPa: the pressure at the hole does not exceed ambient, so nothing flows out\"",
+   "A mass rate with the head taken as 1 m."],
+  "Section 3 gives this row: a negative liquid head is refused on `liquidHeadM`, and that string is the engine's own. A refusal carries no number, so nothing is computed at 0 m or at 1 m. The `pressureAboveLiquidPa` message is the refusal for an ullage below ambient with no head, a different row.")
+
+q(3,
+  "A liquid outflow call is given a hole diameter of zero. Which field does the refusal name, and what does it offer instead?",
+  "`holeDiameterM`, and its message says a hole diameter above 0 m (or holeAreaM2) is required.",
+  ["`holeAreaM2`, and its message says the analyst must compute the area first.",
+   "`dischargeCoefficient`, since a zero hole is read as a coefficient out of range.",
+   "`massRateKgS`, and its message says the mass rate would be zero."],
+  "Section 3: \"holeDiameterM: a hole diameter above 0 m (or holeAreaM2) is required\". The field named is `holeDiameterM`, and the message offers the hole area as an alternative input without requiring it. The discharge coefficient has its own refusal, and `massRateKgS` is a result, never an input the engine names in a refusal.")
+
+q(1,
+  "What single condition decides whether the liquid model has anything to compute?",
+  "The absolute pressure at the hole must exceed ambient, whether from the head, the ullage or both.",
+  ["The ullage must exceed ambient, since the head alone never drives a liquid out in this model.",
+   "The head must exceed 0 m.",
+   "The upstream pressure over ambient must reach the critical pressure ratio before any liquid leaves the hole."],
+  "The mass rate depends on P minus ambient, and the engine refuses with \"pressureAboveLiquidPa: the pressure at the hole does not exceed ambient, so nothing flows out\" when that difference is not positive. The head alone drives 11.225132 kg/s on the AMENAM line at ambient ullage, and the ullage alone drives 15.767020 kg/s at a head of 0 m, so neither is needed on its own. The critical pressure ratio belongs to gas outflow.")
+
+emit(Q, '/root/hse-wip-consequence/banks/h4b_m02.json', expect_n=15)
+finish()

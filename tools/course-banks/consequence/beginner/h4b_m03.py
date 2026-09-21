@@ -1,0 +1,133 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# H4 consequence, ASSOCIATE m03 "Gas Through a Hole".
+# Digest sections 6 (the AMENAM GAS methane line, the critical pressure ratio
+# against the heat capacity ratio, the Yellow Book hydrogen case, the nozzle
+# maximisation route) and 7 (exactly at the critical ratio), with the
+# gasOrificeDischarge rows of the section 3 refusal table.
+
+q(3,
+  "The AMENAM GAS methane line is set to 180000 Pa absolute. Ambient over upstream is 0.562917 and the critical pressure ratio is 0.543927. What regime does the engine report?",
+  "SUBSONIC, with an outflow coefficient psi of 0.999177 and 0.092868 kg/s.",
+  ["CHOKED, because the upstream pressure is well above ambient, with psi of 1.000000 and 0.129090 kg/s.",
+   "CHOKED, since any ratio below one chokes the hole, with 0.092868 kg/s.",
+   "SUBSONIC, with psi of 0.958958 and 0.074275 kg/s, since the flow is below the critical ratio."],
+  "The flow is CHOKED only when ambient over upstream is at or below the critical pressure ratio. 0.562917 lies above 0.543927, so the 180000 Pa row is SUBSONIC with psi 0.999177 and 0.092868 kg/s. 0.129090 kg/s with psi 1.000000 is the 250000 Pa row, the first choked one. A ratio below one only means gas flows. Psi 0.958958 and 0.074275 kg/s belong to 150000 Pa.")
+
+q(1,
+  "Once the AMENAM GAS line is choked, the upstream pressure is raised from 250000 to 10000000 Pa. How does the mass rate respond?",
+  "It grows by 40.000000, the same as the pressure ratio, from 0.129090 to 5.163609 kg/s.",
+  ["It grows by the square root of 40.000000, because the rate goes as the square root of the driving pressure as it does for a liquid.",
+   "It stays at 0.129090 kg/s, since a choked hole passes a fixed mass rate whatever the upstream pressure.",
+   "It grows by 40.000000 in the upstream density alone."],
+  "Section 6: once choked the mass rate is LINEAR in the upstream pressure, and from 250000 to 10000000 Pa it grows by 40.000000, the same as the pressure ratio. The square root law is the liquid model's. The rate does not stay fixed: the table prints 0.129090 kg/s at 250000 Pa and 5.163609 kg/s at 10000000 Pa. The upstream density also grows, from 1.607640 to 64.305619 kg/m3, and the mass rate grows with it, so the density is no substitute for the rate the question asks about.")
+
+q(0,
+  "What is the outflow coefficient psi on the AMENAM GAS line, and what does it do at the choked rows?",
+  "The Yellow Book subsonic outflow coefficient; it sits below one on the subsonic rows (0.756455 at 120000 Pa) and equals 1.000000 on every choked row.",
+  ["The discharge coefficient of the hole, 0.62 on every row, which the engine multiplies into the mass rate.",
+   "The critical pressure ratio for the gas, 0.543927, repeated on each row for reference.",
+   "A factor that rises above one once choked, 1.607640 at 250000 Pa, which is why the rate grows linearly."],
+  "The model string says \"subsonic psi from YB 2.25\", and the table shows psi 0.756455, 0.958958 and 0.999177 on the subsonic rows and 1.000000 on every choked row. The discharge coefficient is a separate stated input, 0.62. The critical pressure ratio is a threshold on ambient over upstream. 1.607640 is the upstream density in kg/m3 at 250000 Pa, and psi never exceeds one.")
+
+q(2,
+  "For which heat capacity ratio does the engine's table print a critical pressure ratio of 0.486669, and what upstream pressure chokes that gas into 101325 Pa?",
+  "1.67, choking at 208201.258009 Pa.",
+  ["1.1, choking at 173300.135461 Pa, since a smaller ratio gives a smaller critical pressure ratio.",
+   "1.4, choking at 191801.047009 Pa.",
+   "1.31, choking at 186284.176006 Pa, the methane line."],
+  "The table against the heat capacity ratio prints 0.486669 for 1.67 and a choking pressure of 208201.258009 Pa. 1.1 gives 0.584679 and 173300.135461 Pa: the critical pressure ratio FALLS as the heat capacity ratio rises, which is the reverse of what the first distractor claims. 1.4 gives 0.528282 and 191801.047009 Pa. 1.31 gives 0.543927 and 186284.176006 Pa.")
+
+q(0,
+  "Two gases share the AMENAM hole and temperature; one has a heat capacity ratio of 1.1 and the other 1.67. Which needs the higher upstream pressure to choke into the atmosphere?",
+  "The 1.67 gas, because its critical pressure ratio is lower, 0.486669 against 0.584679.",
+  ["The 1.1 gas, because a gas closer to one has the higher critical pressure ratio and so needs more pressure to choke.",
+   "Neither: every gas chokes at twice atmospheric pressure.",
+   "The 1.1 gas, 173300.135461 Pa against 208201.258009 Pa."],
+  "Section 6 says the critical pressure ratio falls as the heat capacity ratio rises, so a gas with a larger ratio needs a higher upstream pressure to choke: 208201.258009 Pa for 1.67 against 173300.135461 Pa for 1.1. A higher critical pressure ratio is reached at a LOWER upstream pressure, so the 1.1 gas chokes sooner. The table shows no single choking pressure shared by every gas.")
+
+q(3,
+  "The Yellow Book hydrogen example (50 bar, 288.15 K, d 0.1 m, Cd 0.62) prints 15.31 kg/s and does not print its heat capacity ratio. What does the golden record?",
+  "A ratio of 1.405, marked INFERRED, because it reproduces 15.31 to two decimals and 1.4 gives 15.292930.",
+  ["A ratio of 1.4, the usual value for a diatomic gas, accepting 15.292930 kg/s as close enough to the printed figure.",
+   "A ratio of 1.31, the methane line's, since the example leaves the ratio to the analyst.",
+   "A ratio of 1.405 as printed in the example."],
+  "Section 6: gamma is NOT printed, and 1.405 is inferred because it gives 15.311760 kg/s, reproducing the printed 15.31 to its two decimals, while 1.4 gives 15.292930 and does not. The golden records the ratio as INFERRED and never as printed. 1.31 belongs to the methane teaching line and to no hydrogen source.")
+
+q(2,
+  "For six gas cases the oracle takes a second route to the mass rate. What is it, and what does it show?",
+  "It maximises the isentropic nozzle mass flux over every throat pressure at or above ambient, deriving choking instead of testing a ratio, and agrees with the engine to within 5.80e-16 relative.",
+  ["It repeats the engine's ratio test in Python, so the two agree exactly by construction and the agreement shows the code was copied correctly.",
+   "It reads the six rates off the Yellow Book tables, and the engine matches them to the printed decimals.",
+   "It runs the engine twice with different compilers."],
+  "Section 6 describes route B: the oracle maximises the isentropic nozzle mass flux over every throat pressure at or above ambient, which derives choking instead of testing a ratio, and the relative differences run from 2.15e-16 to 5.80e-16. Restating the same test would catch nothing, which is why the route is independent. Only the hydrogen case is a published Yellow Book figure, and nothing is run twice.")
+
+q(1,
+  "Where the ratio of ambient over upstream lands exactly on the critical pressure ratio, what regime does the engine report?",
+  "CHOKED, because the Yellow Book tests at or above the critical value and the engine counts the boundary as choked.",
+  ["SUBSONIC, because choking needs the ratio strictly below the critical value.",
+   "A refusal, because the regime is undefined at the boundary.",
+   "CHOKED or SUBSONIC at random, depending on floating point rounding in the last digit of the ratio."],
+  "The engine's model string says \"exactly at the ratio counts as choked\", and section 7 says the Yellow Book tests P0 over Pa AT OR ABOVE ((gamma + 1) / 2) to the power gamma / (gamma - 1). The boundary is a defined choice, so there is no refusal and nothing random, and a tie is choked.")
+
+q(1,
+  "On the AMENAM GAS line at 186284.176006 Pa the engine reports CHOKED; one part in a billion lower it reports SUBSONIC. How far apart are the two mass rates?",
+  "1.00e-9 relative: psi is 1.000000000000 on both sides, so the label flips with no jump in the rate.",
+  ["About 1 percent, the step between the subsonic and choked branches that the Yellow Book warns of.",
+   "About 0.543927 relative, the size of the critical pressure ratio of the methane line itself.",
+   "They are identical to every printed digit, and the regime flag is the one difference between the two results."],
+  "Section 7 prints it: psi is 1.000000000000 on both sides and the two mass rates differ by, derived, 1.00e-9 relative. The subsonic outflow coefficient equals one there, so the flag flips with no jump, and the regime is a label on a continuous curve. There is no percentage step, and 0.543927 is a threshold on the pressure ratio that says nothing about a gap between rates. The rates do differ, by the tiny 1.00e-9 that the pressure itself moved.")
+
+q(3,
+  "The golden case air-barely-subsonic has ambient over upstream 0.53328947368421054 against a critical pressure ratio of 0.52828178771717416. What does the engine return?",
+  "SUBSONIC, with psi 0.999944960481 and 0.112711 kg/s.",
+  ["CHOKED, with psi 1.000000000000 and 0.113903 kg/s, since the two ratios agree to two decimals.",
+   "SUBSONIC, with psi 0.756455 and 0.046872 kg/s, the lowest subsonic row of the methane line.",
+   "CHOKED, since the ratio 0.53328947368421054 sits below the critical ratio of the methane line, 0.543927."],
+  "0.53328947368421054 is above 0.52828178771717416, so the case is SUBSONIC with psi 0.999944960481, just below one, and 0.112711 kg/s. CHOKED with 0.113903 kg/s is air-barely-choked, at 0.52773437499999998. Psi 0.756455 is the methane line at 120000 Pa. The test uses the gas's own critical ratio, 0.52828178771717416 for air, never the methane line's 0.543927.")
+
+q(0,
+  "`gasOrificeDischarge` is given an upstream pressure equal to ambient. What does the engine return?",
+  "\"upstreamPressurePa: must exceed the ambient pressure, or nothing flows out\"",
+  ["A SUBSONIC result at 0 kg/s with psi of zero.",
+   "\"pressureAboveLiquidPa: the pressure at the hole does not exceed ambient, so nothing flows out\"",
+   "A CHOKED result, since a ratio of one is at or below the critical ratio."],
+  "Section 3 tables this refusal on `upstreamPressurePa`, and the quoted string is the engine's own. A refusal carries no number, so there is no zero rate. The `pressureAboveLiquidPa` message belongs to the liquid function. A ratio of one lies ABOVE every critical ratio in the table, so it could never be choked.")
+
+q(2,
+  "A call types the heat capacity ratio as 1. Which message comes back?",
+  "\"heatCapacityRatio: gamma = Cp/Cv must be above 1\"",
+  ["A CHOKED result, since at a ratio of one the critical pressure ratio falls to zero and every flow chokes.",
+   "A result computed with the ratio of 1.4, the default the engine carries for air and other diatomic gases.",
+   "\"upstreamTemperatureK: must be an absolute temperature above 0 K\""],
+  "Section 3: a heat capacity ratio of one is refused on `heatCapacityRatio` in those words, because the critical pressure ratio expression divides by gamma minus one. The engine carries no default ratio: 1.4 is a stated input in the table. The temperature message is a different refusal, for zero kelvin.")
+
+q(3,
+  "An analyst types the upstream temperature as 0, meaning degrees Celsius. What happens?",
+  "It is refused: \"upstreamTemperatureK: must be an absolute temperature above 0 K\"",
+  ["The engine converts 0 C to 273.15 K and computes the rate, since the argument is a temperature.",
+   "The engine computes an infinite upstream density and reports the mass rate as CHOKED at no limit, with a warning attached.",
+   "The engine takes the 300 K of the methane line as a default and returns 0.129090 kg/s at 250000 Pa."],
+  "The name `upstreamTemperatureK` says kelvin, the engine never converts a unit it was not asked to, and zero kelvin is refused in the quoted words. A refusal carries no number, so there is no infinite density and no result. 300 K is a stated input of the teaching line, never a default.")
+
+q(0,
+  "Why does lowering the ambient pressure below a choked hole leave its mass rate unchanged?",
+  "At or below the critical pressure ratio the downstream pressure cannot reach back into the hole.",
+  ["Because the engine fixes ambient at 101325 Pa and never reads a different ambient.",
+   "It does change: the rate rises as the ambient pressure falls, whatever the regime of the flow.",
+   "Because a choked hole passes the same mass rate for every upstream pressure too."],
+  "Section 6: at or below the critical pressure ratio the downstream pressure cannot reach back into the hole, which is what choked means. Ambient defaults to `ATM_PA` unless a call states otherwise, so it can be changed. A choked rate still grows linearly with the UPSTREAM pressure, by 40.000000 from 250000 to 10000000 Pa.")
+
+q(1,
+  "In the gas model string, the critical test reads Pa/P0 <= (2/(gamma+1))^(gamma/(gamma-1)). Which pressures are Pa and P0?",
+  "Pa is ambient and P0 is the upstream pressure, both absolute.",
+  ["Pa is the pressure in pascals of the hole and P0 is ambient at sea level, 101325 Pa.",
+   "Pa is the upstream gauge pressure and P0 is ambient.",
+   "Pa is the driving pressure and P0 is the pressure at the hole, as in the liquid model string."],
+  "Section 6 tabulates ambient over upstream as \"Pa over P0\" and says the flow is CHOKED when ambient over upstream is at or below the critical pressure ratio; pressures are absolute throughout (section 2). Ambient is Pa, and no gauge figure appears. The liquid model's driving pressure and pressure at the hole are a different model.")
+
+emit(Q, '/root/hse-wip-consequence/banks/h4b_m03.json', expect_n=15)
+finish()

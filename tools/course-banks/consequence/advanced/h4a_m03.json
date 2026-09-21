@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The engine's model string is \"P = Phi(Y - 5), standard normal CDF\". What probability does it return for a probit of 6?",
+  "options": [
+   "0.158655, the probability of a probit of 4",
+   "0.841345",
+   "0.977250",
+   "0.500000"
+  ],
+  "answer": 1,
+  "explanation": "A probit is a normal deviate shifted by five, so Y = 6 is one standard deviation above the mean and the ladder prints 0.841345. 0.158655 is Y = 4, one below; 0.977250 is Y = 7; 0.500000 is Y = 5, where Phi(0) is one half."
+ },
+ {
+  "prompt": "The Purple Book's Table 5.1 prints 3.36 for a probability of 0.05, and the engine's inverse gives 3.355147. Why does the golden count that cell as reproduced?",
+  "options": [
+   "The golden allows 0.002 absolute on every probit cell, the tolerance it uses for the carbon monoxide probability",
+   "The table prints to two decimals, and 3.355147 rounds to the printed 3.36",
+   "The engine rounds its own inverse to two decimals before the comparison with the printed Table 5.1 cell is made",
+   "The golden accepts any cell within one percent relative"
+  ],
+  "answer": 1,
+  "explanation": "Table 5.1 prints each probit to two decimals, and the engine's inverse reproduces 97 of its 97 cells at the printed two decimals; 3.355147 rounds to 3.36. The 0.002 absolute tolerance belongs to the Purple Book's carbon monoxide probability read off the table, the engine does not round its output, and no one percent rule applies here."
+ },
+ {
+  "prompt": "Two cells of Table 5.1 sit on a rounding edge. What are they, and how does the golden treat them?",
+  "options": [
+   "Probability 0.01, printed 2.67 against 2.673653, and 0.99, printed 7.33 against 7.326347; kept apart as errata",
+   "Probability 0.25, printed 4.33 against 4.325510, and 0.75, printed 5.67 against 5.674490; counted as errata of the Purple Book",
+   "Probability 0.12, printed 3.82 against 3.825013, and 0.88, printed 6.18 against 6.174987; within 0.006 of the printed digits, kept apart",
+   "Probability 0.1 and 0.9, both dropped from the golden"
+  ],
+  "answer": 2,
+  "explanation": "Section 26 names 0.12 and 0.88: their values, 3.825013 and 6.174987, sit on a rounding edge within 0.006 of the printed digits, so the golden keeps them apart. The 0.01, 0.99, 0.25 and 0.75 cells reproduce to two decimals and are in the 97, and the 0.1 and 0.9 cells are there too."
+ },
+ {
+  "prompt": "`probit` computes Y = a + b ln(V) for any coefficients. What does ln mean here?",
+  "options": [
+   "The natural logarithm, as the engine's model string \"Y = a + b ln(V); P = Phi(Y - 5)\" states",
+   "The logarithm to base 10, as a probit fitted on a log scale of the exposure would read on a printed chart",
+   "The natural logarithm of V divided by 1e4, whatever the preset's unit",
+   "The logarithm to base 2"
+  ],
+  "answer": 0,
+  "explanation": "Section 26 says the logarithm is NATURAL. A base 10 log would change every coefficient's meaning, and the division by 1e4 belongs only to the W/m2 form of Eisenberg, where it converts the unit of the intensity. No base 2 form appears."
+ },
+ {
+  "prompt": "What coefficients and intensity unit does the engine's eisenberg thermal preset carry?",
+  "options": [
+   "a = -14.9, b = 2.56, with the intensity in kW/m2",
+   "a = -12.8, b = 2.56, with the intensity in kW/m2, as OSD/30 Table 17 prints them",
+   "a = -36.38, b = 2.56, with the intensity in W/m2, the form of eq. 5.4",
+   "a = -10.7, b = 1.99, with the intensity in kW/m2, as OSD/30 Table 17 prints them"
+  ],
+  "answer": 0,
+  "explanation": "`THERMAL_PROBITS` lists eisenberg as -14.9 and 2.56 in kW/m2. -12.8 with 2.56 is tsao-perry, -36.38 with 2.56 in W/m2 is purple-book (eq. 5.4), and -10.7 with 1.99 is lees. Each is named by its source so the presets cannot be confused."
+ },
+ {
+  "prompt": "A person is exposed to 20000 W/m2 for 20 s. What lethality probability does the eisenberg preset give?",
+  "options": [
+   "0.537647, the tsao-perry figure for this exposure",
+   "0.537040, the purple-book figure for this exposure",
+   "0.022455",
+   "0.036742"
+  ],
+  "answer": 2,
+  "explanation": "The thermal preset table prints 0.022455 under Eisenberg for 20000 W/m2 for 20 s. Tsao and Perry gives 0.537647 and the Purple Book 0.537040, with Lees at 0.036742. The same exposure reads as a few percent under one preset and most of the people exposed under another, which is why a result is quoted with its preset."
+ },
+ {
+  "prompt": "At 20000 W/m2 for 20 s the Eisenberg probit is 2.994507 and the Tsao and Perry probit is 5.094507, derived 2.100000 higher. Where does that fixed gap come from?",
+  "options": [
+   "Tsao and Perry takes the intensity in W/m2, so its thermal dose is larger by the conversion from kW/m2",
+   "Tsao and Perry raises the intensity to the power 1.99 where Eisenberg uses four thirds",
+   "Tsao and Perry takes the exposure time in minutes where Eisenberg uses seconds, so the time term is larger",
+   "Both presets have b = 2.56 and the same thermal dose, so the gap is the difference in a, -12.8 against -14.9"
+  ],
+  "answer": 3,
+  "explanation": "Both presets are Y = a + 2.56 ln(t I^(4/3)) with I in kW/m2 and t in seconds, so for one thermal dose, 1085.767047 s (kW/m2)^(4/3), the probits differ by the difference in a. Both take kW/m2, 1.99 is Lees's b and no exponent, and minutes belong to the toxic probits."
+ },
+ {
+  "prompt": "Which preset is the Purple Book heat probit, -36.38 + 2.56 ln(Q^(4/3) t) with Q in W/m2, rewritten from?",
+  "options": [
+   "Eisenberg, since the Purple Book is a TNO source and the TNO heat probit is Eisenberg's form",
+   "Tsao and Perry: -12.8 - 2.56 ln(1e4) is -36.378",
+   "Lees, rewritten into W/m2 with its own b",
+   "The TNO row of OSD/30 Table 17, a = -15.3 and b = 3.02"
+  ],
+  "answer": 1,
+  "explanation": "Section 27: NOT EVERY TNO HEAT PROBIT IS EISENBERG. Shifting Tsao and Perry into W/m2 subtracts 2.56 ln(1e4) from -12.8 and gives -36.378, the Purple Book's constant; that is why its probability at 20000 W/m2 for 20 s, 0.537040, sits beside Tsao and Perry's 0.537647. Lees has b = 1.99, and the TNO row is an erratum that is no preset."
+ },
+ {
+  "prompt": "OSD/30 also writes Eisenberg as -14.9 + 2.56 ln(t q^(4/3) / 1e4) with q in W/m2. At 10000 W/m2 for 30 s the engine gives 1.666556. Why is that the same probit as the kW/m2 form?",
+  "options": [
+   "Because the engine converts every preset to W/m2 internally and drops the 1e4 as a rounding term of no consequence",
+   "Because the four thirds power cancels the thousand between the units exactly",
+   "Because the two forms differ only at exposures above 30 s",
+   "Because (1000 I)^(4/3) is 1e4 I^(4/3), so dividing by 1e4 turns a W/m2 thermal dose back into the kW/m2 one"
+  ],
+  "answer": 3,
+  "explanation": "The factor 1000 between the units becomes 1000^(4/3) = 1e4 inside the thermal dose, and dividing by 1e4 undoes it, so both forms give 1.666556 at the golden case. The engine feeds each preset the heat flux in W/m2 and converts it to that preset's unit; nothing is dropped, and the forms agree at every exposure."
+ },
+ {
+  "prompt": "OSD/30 Table 17 prints Eisenberg's lethal dose for one percent as 960 (kW/m2)^(4/3) s. What does the engine give?",
+  "options": [
+   "957.866291",
+   "421.742820",
+   "2376.626918",
+   "829.172848"
+  ],
+  "answer": 0,
+  "explanation": "The engine's Eisenberg one percent lethal dose is 957.866291 against the printed 960. 421.742820 and 829.172848 are the Tsao and Perry and Lees one percent figures, and 2376.626918 is Eisenberg at fifty percent, printed as 2380."
+ },
+ {
+  "prompt": "OSD/30 Table 17 carries a TNO row, a = -15.3 and b = 3.02, printing lethal doses of 389 and 841. Why is it no preset in the engine?",
+  "options": [
+   "It is the Purple Book form, which the engine already carries as purple-book with its own a and b",
+   "Its coefficients take the intensity in W/m2, which the engine's thermal presets do not accept",
+   "Its printed lethal doses do not follow from its own coefficients (384.344943 and 830.355817), and the source does not say which is wrong",
+   "It reproduces exactly but duplicates Eisenberg, so it was merged into that preset"
+  ],
+  "answer": 2,
+  "explanation": "Section 27 records the erratum: the row's coefficients give 384.344943 and 830.355817 against the printed 389 and 841, so the row is not a preset. Asked for it by name the engine refuses: \"coefficients: unknown preset 'tno'; one of eisenberg, tsao-perry, lees, purple-book, or give { a, b } explicitly\". The Purple Book form is Tsao and Perry, the purple-book preset takes W/m2 itself, and the row does not reproduce."
+ },
+ {
+  "prompt": "The hsc overpressure probit is Y = 1.47 + 1.37 ln(P) with P in psig. What probability does the engine give at 20 psig?",
+  "options": [
+   "0.353660, the probability printed at 10 psig",
+   "0.717068",
+   "0.936216, the probability printed at 40 psig",
+   "0.500000"
+  ],
+  "answer": 1,
+  "explanation": "The overpressure probit table prints a probit of 5.574153 and a probability of 0.717068 at 20 psig, which the engine takes as 137895.145863 Pa and converts with `PA_PER_PSI`. 0.353660 and 0.936216 are the 10 and 40 psig rows, and one half is reached near 13.152901 psig."
+ },
+ {
+  "prompt": "An analyst feeds the hsc probit the overpressure in Pa where the coefficients expect psig, bypassing the engine's conversion. What goes wrong?",
+  "options": [
+   "The value inside the logarithm is `PA_PER_PSI` times too large, 6894.757293168361 times, so the probit reads far too high",
+   "Nothing, because the logarithm makes the probit insensitive to the unit of the overpressure",
+   "The probit reads too low by the factor 101325, the ambient pressure",
+   "The engine refuses on `overpressurePa` with the message it uses for a target outside the fit's range"
+  ],
+  "answer": 0,
+  "explanation": "Section 28: fed Pa where psig is due, the probit reads a number `PA_PER_PSI` times too large, and with b = 1.37 on a natural log that raises Y by a large fixed amount. The logarithm shifts the result; it does not remove the error. 101325 is `ATM_PA`, and the `overpressurePa` refusal belongs to `distanceForOverpressure`."
+ },
+ {
+  "prompt": "OSD/30 Equation 4 prints 43.5 psig as the overpressure for a probability of 0.95. The engine gives 43.696383 psig. How does the validation record read that gap?",
+  "options": [
+   "As a fault in the engine's psig conversion, which it corrects by carrying `PA_PER_PSI` to more digits",
+   "As the rounding of a two decimal table, the same effect as the Table 5.1 cells on a rounding edge",
+   "As proof that the hsc preset should be refitted to the three printed points before a capstone grades it",
+   "As an erratum in the source: the ninety-five percent point prints lower than the probit gives"
+  ],
+  "answer": 3,
+  "explanation": "Section 28 says the ninety-five percent point prints lower than the probit gives, which the validation record lists as an erratum in the source; its relative difference is 4.51e-3. The one percent and fifty percent points, 2.407476 and 13.152901 psig against 2.4 and 13.1, stand as printed evidence and the overpressure probit is graded."
+ },
+ {
+  "prompt": "Digest section 34 legislates the words for t I^(4/3) and for the sum of C^n dt. Which pair does this course use?",
+  "options": [
+   "The heat exposure for t I^(4/3) and the toxic concentration for the sum of C^n dt, as the probit presets print them",
+   "The thermal dose for t I^(4/3) and the toxic load for the sum of C^n dt",
+   "The thermal load for t I^(4/3) and the toxic intake for the sum of C^n dt",
+   "The heat product for t I^(4/3) and the concentration time for the sum of C^n dt"
+  ],
+  "answer": 1,
+  "explanation": "Section 27 calls t I^(4/3) the thermal dose, and section 29 calls the sum of C^n dt the toxic load; section 34 binds every lesson and bank to those qualified words, because the bare word already means an occupational hygiene quantity elsewhere in the academy. The other pairs are not the course's terms."
+ }
+]
