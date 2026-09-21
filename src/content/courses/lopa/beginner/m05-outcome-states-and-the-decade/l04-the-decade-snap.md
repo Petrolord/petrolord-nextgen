@@ -36,7 +36,7 @@ Notice that nothing about the inputs looks delicate. Three IPL PFDs of 0.1, or a
 
 A risk reduction factor typed one part in a billion above 100 is read as exactly 100. One part in a hundred million is already outside the snap and bands as SIL2. The window is narrow enough that no figure an analyst would deliberately type falls inside it by accident, and wide enough to cover the last bits of a double.
 
-It is worth being clear about what the snap does not do. It does not round results for display, it does not widen any band, and it does not touch a value that is not near a power of ten. It changes the answer only for values whose exact arithmetic already sits on a decade.
+It is worth being clear about what the snap does not do. It does not round results for display, it does not widen any band, and it does not touch a value that is not near a power of ten. It changes the answer only for values within one part in a billion of a decade.
 
 ## A chosen tolerance, named as one
 

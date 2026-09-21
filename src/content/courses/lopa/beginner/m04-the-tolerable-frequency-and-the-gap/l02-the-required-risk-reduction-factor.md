@@ -30,7 +30,7 @@ When the mitigated frequency already meets the tolerance the ratio comes out at 
 
 Two rows can report the same 13.500000 for very different reasons. One may have a high initiating frequency and strong layers, another a low initiating frequency and almost no layers. The required factor is identical and the plants are not alike at all. That is why the engine returns the unmitigated frequency, both products and the credited and uncredited layers alongside the ratio, so the reviewer reads the chain and then the ratio.
 
-The order matters in a review. A required risk reduction factor of 13.500000 arrived at from an unmitigated frequency of 0.013500000000 per year and a credited IPL product of 0.001000000000 is a row whose layers are already carrying three orders of magnitude. If one of those layers turns out to be unjustified the demand moves by its whole IPL PFD, and the band can move with it. Reading the ratio on its own hides all of that behind a single tidy number.
+The order matters in a review. A required risk reduction factor of 13.500000 arrived at from an unmitigated frequency of 0.013500000000 per year and a credited IPL product of 0.001000000000 is a row whose layers are already carrying three orders of magnitude. If one of those layers turns out to be unjustified the demand grows by a factor of one over its IPL PFD, and the band can move with it. Reading the ratio on its own hides all of that behind a single tidy number.
 
 ## Exercise
 

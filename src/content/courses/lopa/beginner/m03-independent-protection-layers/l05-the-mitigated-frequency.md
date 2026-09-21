@@ -22,7 +22,7 @@ The engine names the field carefully. This is the frequency with the existing la
 
 ## Reading the number honestly
 
-0.000013500000 per year is roughly one occurrence in seventy four thousand years for this one scenario at this one separator. Two things follow. The first is that no plant has the history to confirm a figure like that, which is why it is built from a product of factors each defended on its own. The second is that a site has many such rows, and a frequency that looks negligible alone is not negligible summed over a facility. LOPA judges one row at a time, and the sum across rows is somebody else's arithmetic.
+0.000013500000 per year is a very small frequency for this one scenario at this one separator. Two things follow. The first is that no plant has the history to confirm a figure like that, which is why it is built from a product of factors each defended on its own. The second is that a site has many such rows, and a frequency that looks negligible alone is not negligible summed over a facility. LOPA judges one row at a time, and the sum across rows is somebody else's arithmetic.
 
 What the engine guarantees here is the multiplication and the bookkeeping. Every factor is printed with its name, the credited layers are separated from the uncredited ones with reasons, and the frequency comes back to twelve decimals so the comparison with the tolerable frequency is made on the figure itself.
 

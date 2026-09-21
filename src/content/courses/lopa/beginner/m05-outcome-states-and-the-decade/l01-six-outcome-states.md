@@ -26,7 +26,7 @@ A worksheet that reports it should say which of those two routes was taken, beca
 
 ## Beyond SIL three is never clipped
 
-The state BEYOND_SIL3_REDESIGN carries its required PFDavg intact. At a demand of 50000 the required PFDavg is 0.000020000000 and at 500000 it is 0.000002000000. The engine could have clipped such a row to the lowest band it knows and reported SIL3, which would make every worksheet fit the table. It does not take that route, because a reader then cannot see how far beyond the table the row sits, and that distance is the whole message.
+The state BEYOND_SIL3_REDESIGN carries its required PFDavg intact. At a demand of 50000 the required PFDavg is 0.000020000000 and at 500000 it is 0.000002000000. The engine could have clipped such a row to the highest band it knows and reported SIL3, which would make every worksheet fit the table. It does not take that route, because a reader then cannot see how far beyond the table the row sits, and that distance is the whole message.
 
 The process sector treats a demand of that size as a reason to redesign the process or add layers outside the safety instrumented system. The next module's second lesson reads the engine's own notes on those rows.
 

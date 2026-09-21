@@ -19,7 +19,7 @@ The channel from the first module of this tier is now given a dangerous detected
 
 ## Two effects that pull opposite ways
 
-Adding diagnostics does two things at once. It moves failures out of the undetected population, where they wait for an average of half the proof test interval, into the detected population, where they wait only for the MTTR. That pulls the equivalent down time of the channel far below the 4380.000000 hours that half the interval would give: on these inputs it lands at 1322.000000 hours. At the same time it raises the total dangerous rate, because lambdaD is the sum of both rates and now reads 4e-6 per hour against the 1.2e-6 of the undetected rate alone.
+Adding a detected rate does two things at once. The engine adds it beside the undetected rate, which stays at 1.2e-6 per hour, and detected failures wait only for the MTTR where undetected ones wait for an average of half the proof test interval. That pulls the equivalent down time of the channel far below the 4380.000000 hours that half the interval would give: on these inputs it lands at 1322.000000 hours. At the same time it raises the total dangerous rate, because lambdaD is the sum of both rates and now reads 4e-6 per hour against the 1.2e-6 of the undetected rate alone.
 
 ## What the two effects give together
 
@@ -30,7 +30,7 @@ The one out of one PFDavg is the product of those two quantities, so the answer 
 | EKULAMA with detected failures | 0.005288000000 |
 | EKULAMA, undetected failures only | 0.005256000000 |
 
-The two are close, and the channel with diagnostics reads slightly higher. That happens because this channel was given additional dangerous failures when the detected rate was added, so the comparison is between two different channels. Diagnostics that reclassify an existing failure rate from undetected to detected are a large gain. Diagnostics that simply reveal dangerous failures nobody had counted are not.
+The two are close, and the channel with diagnostics reads slightly higher. That happens because this channel was given additional dangerous failures when the detected rate was added, so the comparison is between two different channels. The comparison channel also carries no MRT, where this one carries 8 hours. What diagnostics that reclassify an existing rate would buy is a different question, and the digest does not measure it.
 
 ## The MTTR must be typed
 

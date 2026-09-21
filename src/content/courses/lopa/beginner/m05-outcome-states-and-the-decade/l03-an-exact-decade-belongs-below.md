@@ -37,7 +37,7 @@ It also explains a shape worth recognising on a worksheet. A row sitting within 
 
 ## Why a rule is needed at all
 
-The alternative would have been to leave the join undefined and let whichever comparison happened to run first decide it. That is how two engineers produce two SILs from one row. The convention is written down, it is printed in the engine's basis with every result, and it is the same on every row, which is the property that matters more than which way it points.
+The alternative would have been to leave the join undefined and let whichever comparison happened to run first decide it. That is how two engineers produce two SILs from one row. The convention is written down, it is printed in the basis `silFromPfdAvg` returns and, in its own words, in the one `lopaScenario` returns, and it is the same on every row, which is the property that matters more than which way it points.
 
 ## Exercise
 

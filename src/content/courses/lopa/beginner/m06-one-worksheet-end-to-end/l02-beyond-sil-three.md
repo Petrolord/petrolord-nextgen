@@ -33,7 +33,7 @@ The demand can be reduced anywhere along the chain, and every one of those route
 | --- | --- |
 | the initiating event | remove the cause, and the frequency falls at the head of the chain |
 | the enabling condition | change the configuration, and the fraction of time falls |
-| an independent protection layer | add one, and the credited product falls by its IPL PFD |
+| an independent protection layer | add one, and the credited product is multiplied by its IPL PFD |
 | the consequence | change the inventory or the layout, and the row's tolerable frequency is set against a different consequence |
 
 Most rows that land here are rows whose layers are thin, and adding one credited layer at an IPL PFD of 0.1 moves the demand by a decade on its own. That is usually cheaper and always easier to maintain than a function nobody in the sector builds.

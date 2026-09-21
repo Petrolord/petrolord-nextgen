@@ -2,7 +2,7 @@
 
 {{panel:lp-worksheet}}
 
-When an input cannot support a LOPA row, the engine returns an object with `error` and `field` and computes nothing. The `field` names the offending input, down to its position in a list, so a worksheet can point at the cell the analyst has to fix. A refusal carries no number, because a number would look like a result. Across the whole engine, 29 refusals are tabled across 7 functions. Five of them belong to the determination row you are learning here, and each is quoted below in the engine's own words.
+When an input cannot support a LOPA row, the engine returns an object with `error` and `field` and computes nothing. The `field` names the offending input, down to its position in a list, so a worksheet can point at the cell the analyst has to fix. A refusal carries no number, because a number would look like a result. Across the whole engine, 29 refusals are tabled across 7 functions. Eleven rows of that table belong to `lopaScenario`, the call behind the determination row you are learning here, and six of them are quoted below in the engine's own words.
 
 ## A frequency of zero, and a frequency missing
 
@@ -30,7 +30,7 @@ A nameless layer cannot be defended in a review and cannot be checked for indepe
 
 > ipls[1].name: 'relief valve' appears twice: one credit per IPL
 
-Names are compared with case ignored, so the same layer entered twice in different case is caught. The reason is arithmetic as much as bookkeeping: one piece of hardware credited twice would divide the frequency by its IPL PFD twice, and the row would claim a reduction the plant does not have.
+Names are compared with case ignored, so the same layer entered twice in different case is caught. The reason is arithmetic as much as bookkeeping: one piece of hardware credited twice would multiply the frequency by its IPL PFD twice, and the row would claim a reduction the plant does not have.
 
 ## Reading a refusal on a worksheet
 

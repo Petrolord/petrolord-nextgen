@@ -39,7 +39,7 @@ Read the table of terms and the picture is clear. The independent term of 0.0000
 
 ## The price of the second channel
 
-A one out of two costs a second set of everything: a second transmitter, a second process connection, a second input card, a second calibration, a second entry in the test schedule. It also doubles the rate at which a channel spuriously calls for a trip, because either channel acting is enough to act. That trade is what the two out of two and the two out of three exist to manage, and the last two lessons of this module take it up.
+A one out of two costs a second set of everything: a second transmitter, a second process connection, a second input card, a second calibration, a second entry in the test schedule. It also means either channel alone can call for a spurious trip, because either channel acting is enough to act. That trade is what the two out of two and the two out of three exist to manage, and the last two lessons of this module take it up.
 
 ## Exercise
 

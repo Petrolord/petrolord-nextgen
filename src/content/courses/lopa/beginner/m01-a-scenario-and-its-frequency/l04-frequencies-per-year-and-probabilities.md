@@ -14,7 +14,7 @@ Two kinds of number sit on a LOPA row and mixing them up is the commonest way to
 | TMEL | per year | above 0 |
 | proposed SIF PFDavg | probability | above 0 and no more than 1 |
 
-The engine's units line says it in four words, verbatim: "frequencies per year; probabilities and PFDs dimensionless".
+The engine's units line says it in one line, verbatim: "frequencies per year; probabilities and PFDs dimensionless".
 
 Only two fields on the determination row are frequencies: the initiating event frequency and the tolerable mitigated event likelihood. Everything else is a probability. That is why an IEF of 2.5 per year is accepted and the same 2.5 typed as an enabling condition is refused.
 

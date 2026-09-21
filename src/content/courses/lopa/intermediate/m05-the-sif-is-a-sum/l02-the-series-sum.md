@@ -27,7 +27,7 @@ The valves carry 71.78 percent of this function on their own, and they are a red
 
 ## What the sum leaves out
 
-The sum ignores a small overlap term, the probability that two subsystems are failed at the same moment, which the engine's validation record names openly. For PFDavg values of this size the overlap is second order: the product of two figures near a thousandth is near a millionth, which is below the last digit that matters here. The engine does refuse a list of subsystems whose summed PFDavg reaches one, because at that point the sum is no longer a probability and the approximation has left the range it is good for.
+The sum ignores a small overlap term, the probability that two subsystems are failed at the same moment, which the engine's validation record names openly. For PFDavg values of this size the overlap is second order: the product of two figures near a thousandth is near a millionth, a second order term the series sum leaves out. The engine does refuse a list of subsystems whose summed PFDavg reaches one, because at that point the sum is no longer a probability and the approximation has left the range it is good for.
 
 ## Reading the shares
 
