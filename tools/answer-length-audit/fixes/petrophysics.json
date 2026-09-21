@@ -1,0 +1,676 @@
+{
+ "migration": "20261021b_b4_fix_petrophysics.sql",
+ "title": "petrophysics: incoherent distractor tidied, duplicate questions rewritten, beginner final brought to 42",
+ "items": [
+  {
+   "app_slug": "petrophysics",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-porosity",
+   "ord": 14,
+   "category": "number-options",
+   "flag": "beginner module m03 ord 14 bare numbers: review only",
+   "verdict": "judged fine",
+   "reason": "Key 0.21 and 0.14 matches the lesson pay averages 0.208 and 0.142; distractors are the swap, the cutoff pairing and the shale apparent value, one defensible answer"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m03-neutron-density-porosity",
+   "ord": 9,
+   "category": "number-options",
+   "flag": "intermediate module m03 ord 9 bare numbers: review only",
+   "verdict": "judged fine",
+   "reason": "Key 0.0803 is the lesson worked example 0.1803 - 1.0 x 0.10; distractors are plausible arithmetic slips, one defensible answer"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "category": "duplicate",
+   "flag": "true duplicate of intermediate module m01 ord 2 and m05 ord 1 (why Archie reads Sw too high in shaly sand); editor also flagged option 0 as internally incoherent",
+   "verdict": "fixed",
+   "reason": "Kept the module question (m05 ord 1); the final now tests how the Archie error scales with clay volume, from the why Archie fails lesson, which also retires the incoherent option 0",
+   "changes": {
+    "prompt": {
+     "old": "Why does Archie read water saturation too HIGH in shaly sand?",
+     "new": "In shaly sand, how does the error in the Archie water saturation behave as clay volume rises?"
+    },
+    "explanation": {
+     "old": "The rock conducts more than Archie expects because clay-bound water conducts alongside the pore brine. Extra conductivity is misread as extra water, inflating Sw. On the typewell shale point Archie gives 0.8769 against Simandoux 0.5730.",
+     "new": "Clay adds a parallel conductive path that Archie can only read as extra water, and more clay means more of that path, so Archie reads Sw too high by an amount that grows with clay volume. A sand half full of oil can grade as wet."
+    },
+    "options": {
+     "0": {
+      "old": "Clay minerals raise the resistivity of the formation, and Archie compensates by assigning more water to the pore space than exists",
+      "new": "It shrinks as clay rises, because shale lowers porosity and Archie then needs less water"
+     },
+     "1": {
+      "old": "The gamma ray correction is not applied to RT, so the radioactivity of the clay inflates the resistivity used in Archie",
+      "new": "It stays constant, since the clay term is a fixed offset added to every sample"
+     },
+     "2": {
+      "old": "Shale lowers porosity below the Archie range, and the equation then overstates water in any rock tighter than clean sand",
+      "new": "It changes sign above Vsh 0.5, where Archie starts to read too dry"
+     },
+     "3": {
+      "old": "Clay surfaces add a parallel conductive path, and Archie attributes all conductivity to brine in clean pores",
+      "new": "It grows with clay volume, reading ever wetter"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-professional-workflow",
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "true duplicate of intermediate module m05 ord 1 (both ask why Archie overstates Sw in shaly sand)",
+   "verdict": "fixed",
+   "reason": "Kept m05 ord 1 in the module that teaches shaly-sand saturation; m01 ord 2 now tests where the clean-rock assumption costs most, from the beyond the quicklook lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why does the Archie equation overstate water saturation in a shaly sand?",
+     "new": "Where does the clean-rock assumption behind Archie do the most commercial damage?"
+    },
+    "explanation": {
+     "old": "Archie assumes brine is the only conductor. Conductive clay adds signal that the equation can only explain as more water.",
+     "new": "Archie blames clay conduction on water and reads Sw too high, which understates hydrocarbons in the shaly, marginal intervals where booking decisions are closest. In clean sand the shaly-sand models collapse to Archie, and a shale is never booked anyway."
+    },
+    "options": {
+     "0": {
+      "old": "Clay minerals lower the gamma ray reading, which biases the porosity input",
+      "new": "In clean sands, where the absence of clay leaves Archie with too little conductivity to explain"
+     },
+     "1": {
+      "old": "Archie attributes all measured conductivity to pore water, so clay conduction is booked as extra water",
+      "new": "In shaly sands of marginal quality, where reading Sw too high understates hydrocarbons exactly where the reservoir is weakest"
+     },
+     "2": {
+      "old": "Shale increases the resistivity of the formation, which Archie reads as hydrocarbon",
+      "new": "In the thick shale at 2000 m, where Archie books the clay-bound water as producible oil"
+     },
+     "3": {
+      "old": "The n exponent doubles in the presence of clay-bound water",
+      "new": "In the water leg, where Archie reads the brine as hydrocarbon and books false pay"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m05-shaly-sand-saturation",
+   "ord": 1,
+   "category": "other",
+   "flag": "option 3 has the same self-contradiction as final 29 (shale raises resistivity, which Archie converts into extra water)",
+   "verdict": "fixed",
+   "reason": "Option 3 now names a coherent but wrong mechanism (a shorter current path lowering the true m) instead of a resistivity rise that would make Archie read drier",
+   "changes": {
+    "options": {
+     "3": {
+      "old": "Shale raises the measured resistivity, which Archie converts into extra water",
+      "new": "Clay shortens the current paths, so the true m drops below the m of 2 Archie assumes"
+     }
+    }
+   }
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 1,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m02-shale-volume ord 1 (what the gamma ray tool measures)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests API calibration from the same gamma ray lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does the gamma ray (GR) log actually measure?",
+     "new": "What makes gamma ray readings in API units comparable between different tools and wells?"
+    },
+    "explanation": {
+     "old": "The GR tool counts natural gamma radiation, which comes mostly from potassium, thorium and uranium concentrated in clay minerals, which is why GR is the workhorse shale indicator.",
+     "new": "A test pit at the University of Houston holds an artificial shale defined as 200 API, and every tool is calibrated to it. Normalising to clean and clay lines is a later interpretation step that turns API readings into IGR."
+    },
+    "options": {
+     "0": {
+      "old": "The electrical conductivity of the formation",
+      "new": "Each log is normalised to its own clean and clay lines before it is displayed"
+     },
+     "1": {
+      "old": "The hydrogen content of the pore fluid",
+      "new": "The tool counts only potassium, whose abundance is the same in every shale"
+     },
+     "2": {
+      "old": "Natural radioactivity from potassium, thorium and uranium in the rock",
+      "new": "Every tool is calibrated against a standard test pit whose artificial shale is defined as 200 API"
+     },
+     "3": {
+      "old": "The bulk density of the formation",
+      "new": "API units are scaled to the bit size, which removes the effect of the hole"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m03-porosity ord 5 (RHOB 2.485 gives 0.10); final ord 17 also reuses 2.485",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests the fluid density sensitivity from the choosing matrix and fluid lesson",
+   "changes": {
+    "prompt": {
+     "old": "With matrix density 2.65 g/cm3 and fluid density 1.0 g/cm3, what porosity does RHOB = 2.485 g/cm3 give?",
+     "new": "The 2020 m sample (RHOB 2.3035 g/cm3, matrix 2.65 g/cm3) is recomputed with salty filtrate at 1.1 g/cm3 in place of 1.0 g/cm3. What happens to density porosity?"
+    },
+    "explanation": {
+     "old": "phiD = (2.65 - 2.485) / (2.65 - 1.0) = 0.165 / 1.65 = 0.10.",
+     "new": "phiD = (2.65 - 2.3035) / (2.65 - 1.1) = 0.3465 / 1.55 = 0.2235, a little over one porosity unit higher. The measured RHOB does not change; a denser fluid only shrinks the denominator."
+    },
+    "options": {
+     "0": {
+      "old": "0.10",
+      "new": "It rises from 0.2100 to about 0.2235"
+     },
+     "1": {
+      "old": "0.165",
+      "new": "It falls, because a denser pore fluid brings the bulk density closer to the matrix value"
+     },
+     "2": {
+      "old": "0.20",
+      "new": "It is unchanged at 0.2100"
+     },
+     "3": {
+      "old": "0.08",
+      "new": "It falls to about 0.20"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "category": "duplicate",
+   "flag": "near duplicate of beginner module m04-resistivity-and-saturation ord 8 (Sw 0.35 at 2020 m)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests reading the resistivity index against the wet baseline from the Archie lesson",
+   "changes": {
+    "prompt": {
+     "old": "At 2020 m the typewell reads porosity 0.21 and Rt = 9.2554 ohm.m, with a = 1, m = 2, n = 2, Rw = 0.05 ohm.m. Sw is closest to:",
+     "new": "At 2020 m the wet baseline R0 is 1.134 ohm.m, yet the sand reads Rt = 9.2554 ohm.m. What does a resistivity index of about 8 tell the interpreter?"
+    },
+    "explanation": {
+     "old": "phi^2 = 0.0441, so Sw = sqrt(0.05 / (0.0441 x 9.2554)) = sqrt(0.1225) = 0.35.",
+     "new": "R0 = Rw / phi^2 = 0.05 / 0.0441 = 1.134 ohm.m already accounts for porosity, so a sand reading about eight times its wet baseline must hold an insulator in place of brine: unambiguous pay. Clay conduction would lower the resistivity rather than raise it."
+    },
+    "options": {
+     "0": {
+      "old": "0.35",
+      "new": "Much of the brine has been displaced by insulating hydrocarbon, so the sand is clear pay"
+     },
+     "1": {
+      "old": "0.21",
+      "new": "The porosity must be far below 0.21, since tighter rock reads more resistive"
+     },
+     "2": {
+      "old": "0.50",
+      "new": "The sand is shaly, since clay conduction raises the measured resistivity"
+     },
+     "3": {
+      "old": "0.65",
+      "new": "The sand is wet, because both Rt and R0 read above Rw"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-resistivity-and-saturation",
+   "ord": 8,
+   "category": "duplicate",
+   "flag": "near pair with advanced final ord 5 (Sw about 0.35 at 2020 m)",
+   "verdict": "judged fine",
+   "reason": "Different tiers and different point: the advanced item uses the Arps-corrected Rw 0.049910 and its distractor 0.53 tests the raw-Rw error, so it examines the correction, not basic Archie"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-temperature-and-the-arps-correction",
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "near pair with advanced module m02 ord 8 (two Arps calculations)",
+   "verdict": "judged fine",
+   "reason": "Two separate Arps exercises with different inputs and answers; ord 15 adds the raw-ratio-without-offsets trap (0.1500), so both earn their place"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 4,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m01-the-rw-problem ord 13 (why the 0.114 lab value cannot be used directly)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests what the brief does not contain, from the typewell brief lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why can the typewell's lab water resistivity of 0.114 ohm.m not be used directly in the saturation equations?",
+     "new": "The typewell brief includes no salinity report for the laboratory water sample. What does that absence leave unverified?"
+    },
+    "explanation": {
+     "old": "Resistivity is temperature dependent; the bench value must be corrected to formation temperature (Arps) before use.",
+     "new": "Arps is calibrated for NaCl-dominated brines, and without a salinity report that assumption goes unverified. The 180 degF formation temperature, the SSP and the Pickett fit do not depend on a salinity analysis; a real study would list the missing report as an assumption carried."
+    },
+    "options": {
+     "0": {
+      "old": "Because laboratory resistivity meters read equivalent rather than true resistivity",
+      "new": "The formation temperature of 180 degF, which the brief can only derive from the salt content"
+     },
+     "1": {
+      "old": "Because the sample was measured on a NaCl scale and the formation brine is not NaCl",
+      "new": "The static SP reading of -93 mV, which must be calibrated against a measured salinity"
+     },
+     "2": {
+      "old": "Because 0.114 ohm.m is outside the valid range of the Archie equation",
+      "new": "The Pickett product a times Rw, because the water-leg fit needs a salinity input"
+     },
+     "3": {
+      "old": "Because it was measured at 75 degF while the formation sits at 180 degF, and brine resistivity falls strongly with temperature",
+      "new": "The NaCl assumption behind the Arps correction, since the sample salt chemistry was never analysed"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "category": "duplicate",
+   "flag": "near duplicate of advanced module m06-the-expert-standard ord 9 (the six capstone quantities)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests the real-field evidence from the beyond the typewell lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which six quantities does the Petrophysics Expert capstone grade?",
+     "new": "Beyond the typewell, which real-field evidence locates fluid contacts independently of any resistivity argument?"
+    },
+    "explanation": {
+     "old": "Two triangulation routes, the water-leg validation, the corrected booking pair, and the raw-Rw counterfactual net: the six numbers of the Expert workflow.",
+     "new": "Wireline formation testers measure pressure gradients, and the change of gradient locates fluid contacts without any resistivity interpretation. Image logs resolve thin beds, core refines m and n, and catalogs only give context for Rw."
+    },
+    "options": {
+     "0": {
+      "old": "Three porosity means, the Pickett fit pair, and SAND_B net pay, covering the density, neutron-density and sonic porosity estimates, the fitted a*Rw and m from the water leg, and the thinner lower sand's booked net thickness",
+      "new": "Image logs, which reveal the thin beds and laminations that standard tools average away"
+     },
+     "1": {
+      "old": "The Arps-corrected sample Rw, the SP-quicklook Rwe, the water-leg mean Sw with the Arps Rw, SAND_A net pay with the Arps Rw, SAND_A pay-average Sw with the Arps Rw, and SAND_A net pay with the raw sample value",
+      "new": "Pressure gradients from wireline formation testers"
+     },
+     "2": {
+      "old": "Rw from six different temperature assumptions, each one run through the Arps correction from bench to formation conditions so that the grade tests how the learner handles the full range of thermal gradients in the typewell",
+      "new": "Core plugs, whose laboratory m and n replace the classic Archie defaults"
+     },
+     "3": {
+      "old": "Net, NTG and average Sw for both SAND_A and SAND_B, giving three booking quantities per zone so that the capstone grades the corrected interpretation of each sand directly and leaves the Rw routes themselves ungraded",
+      "new": "Regional water catalogs, which give the expected Rw for the aquifer and depth"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m01-the-rw-problem",
+   "ord": 13,
+   "category": "duplicate",
+   "flag": "true duplicate of advanced module m02 ord 1 (why the 0.114 lab value cannot be used directly)",
+   "verdict": "fixed",
+   "reason": "Kept m02 ord 1 in the temperature module that owns the point; m01 ord 13 now tests the one exception to the inherited booking recipe, from the typewell brief lesson",
+   "changes": {
+    "prompt": {
+     "old": "Why can the lab value of 0.114 ohm.m not be used directly in the typewell saturation work?",
+     "new": "The Expert capstone reuses the Associate recipe for its SAND_A bookings. Which check is the single exception to that recipe?"
+    },
+    "explanation": {
+     "old": "The sample is genuine formation water, but bench temperature is far below reservoir temperature; the Arps correction brings it to formation conditions.",
+     "new": "Both SAND_A bookings keep density porosity, Larionov tertiary Vsh, Archie and the standard cutoffs so that only Rw changes. The single exception is the water-leg validation, which uses neutron-density porosity to match how the Professional tier characterised the leg."
+    },
+    "options": {
+     "0": {
+      "old": "It was measured on mud filtrate rather than formation water, so it describes the invaded zone instead of the virgin formation brine",
+      "new": "The raw-Rw booking, which switches to Simandoux so the clay term absorbs the error"
+     },
+     "1": {
+      "old": "It was measured at 75 degF while the formation is at 180 degF, and brine resistivity falls steeply with temperature",
+      "new": "The water-leg check, which uses neutron-density porosity"
+     },
+     "2": {
+      "old": "The resistivity cell only works on NaCl solutions, and a produced formation brine carries other ions that corrupt the bench reading",
+      "new": "The SAND_A booking, which uses Larionov older rocks for the consolidated sand"
+     },
+     "3": {
+      "old": "It is the equivalent resistivity Rwe, not the true Rw, so it must first pass through the SP chain before Archie can use it",
+      "new": "The SP quicklook, which books SAND_A with sonic porosity from the Wyllie transform"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 22,
+   "category": "duplicate",
+   "flag": "near pair with advanced module m04 ord 1 (the three-route spread)",
+   "verdict": "judged fine",
+   "reason": "Different angle: m04 ord 1 is the spread arithmetic, while final 22 asks for the adoption judgment and rejects the shared-water-leg misconception, a point no module question tests"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 25,
+   "category": "duplicate",
+   "flag": "true duplicate of advanced module m04 ord 10 (why the engine does not clamp Sw at 1)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests why the constancy of the water-leg result matters, from the water-leg check lesson",
+   "changes": {
+    "prompt": {
+     "old": "Run with the RAW sample value 0.114 ohm.m, the water-leg sample at 2076 m returns Archie Sw = 1.51. The engine reports this value without clamping it to 1. Why?",
+     "new": "Across the typewell water leg all six samples return Sw = 0.99910. Why does that constancy matter as much as the level?"
+    },
+    "explanation": {
+     "old": "An impossible Sw in a known water leg is the failure signature of a bad parameter. Silently clamping it to 1 would hide the error.",
+     "new": "Porosity and resistivity move together down the leg exactly as Archie at Sw = 1 demands, so every sample reads the same. A leg whose saturations drift or scatter is reporting shale, invasion or a transition zone even when its mean looks acceptable. At Sw = 1 the exponent n drops out, so the leg cannot confirm it."
+    },
+    "options": {
+     "0": {
+      "old": "Because the engine has a bug in its saturation routine",
+      "new": "It shows the engine rounds every sample to five decimals"
+     },
+     "1": {
+      "old": "Because saturations above 1 are physically possible in transition zones, where capillary effects let the water phase exceed the pore volume it occupies",
+      "new": "It proves the Pickett fit was made on other samples, since a fit through these same points could never return them so uniformly"
+     },
+     "2": {
+      "old": "Because Sw greater than 1 is information: it announces that the parameter set is wrong (here, an uncorrected Rw) before it can corrupt a booking",
+      "new": "Drift or scatter across a leg flags shale, invasion or a transition zone even when the mean looks right"
+     },
+     "3": {
+      "old": "Because clamping is only applied to porosity, never to saturation, so the engine has no routine that could cap an Archie result at one in any zone of the well",
+      "new": "It confirms n = 2 directly, because constant saturation across the leg is only possible when the saturation exponent is correct"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 38,
+   "category": "duplicate",
+   "flag": "true duplicate of advanced module m06 ord 10 (deep-path gate order)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests the order in which the three tiers are run on a new well, from the three-tier workflow lesson",
+   "changes": {
+    "prompt": {
+     "old": "On the deep path, in what order must a learner clear the Expert course's gates?",
+     "new": "When you evaluate a new well in practice, in what order does the course say you run the three tiers?"
+    },
+    "explanation": {
+     "old": "Lessons unlock module quizzes, quizzes unlock the exam, and the exam unlocks the capstone; the server enforces the sequence.",
+     "new": "Each tier only makes sense once the one below is settled: there is no use triangulating Rw without the loop that consumes it, or comparing saturation models on an unexamined porosity. So the order is loop, methods, parameters, and then the booking with its sensitivities."
+    },
+    "options": {
+     "0": {
+      "old": "All module quizzes (75 percent pass each), then the final exam (70 percent), and only then does the capstone unlock",
+      "new": "The loop, then the methods, then the parameters, then the booking with its sensitivities"
+     },
+     "1": {
+      "old": "The capstone first, then the final exam as confirmation",
+      "new": "Methods first, then the loop, then the parameters"
+     },
+     "2": {
+      "old": "The final exam at any time, with module quizzes optional, since only the exam and the capstone count toward the certificate",
+      "new": "Parameters first, since triangulating Rw before any loop is run keeps the booking free of every given value"
+     },
+     "3": {
+      "old": "Any order, as long as everything is passed eventually",
+      "new": "All three at once, in whichever order the data allow"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "category": "duplicate",
+   "flag": "true duplicate of advanced module m06 ord 12 (the Expert discount code)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests how route spreads compare in field data, from the uncertainty and defensibility lesson",
+   "changes": {
+    "prompt": {
+     "old": "What does earning the Expert certification trigger commercially?",
+     "new": "The typewell Rw routes span about 0.4 percent. What spread between routes does the course say is common in field data?"
+    },
+    "explanation": {
+     "old": "The Suite bridge issues the discount code automatically on Expert certification, linking the academy ladder to the professional tools.",
+     "new": "The typewell spread is small because the dataset was built to converge. In field data a spread of 10 to 20 percent between routes is common, and reporting it honestly lets the next user decide whether it matters for their question."
+    },
+    "options": {
+     "0": {
+      "old": "Lifetime free access to the NextGen Academy",
+      "new": "Under 0.1 percent"
+     },
+     "1": {
+      "old": "An automatic upgrade of the Professional certificate, which is reissued at Expert grade and extended for a further renewal window at no extra cost",
+      "new": "About 0.4 percent as well, because every well converges once its routes are corrected to formation temperature"
+     },
+     "2": {
+      "old": "A personal single-use 50 percent discount code for the corresponding Petrolord Suite module, valid for the certificate's 12-month window",
+      "new": "10 to 20 percent, which is why the spread must be reported honestly"
+     },
+     "3": {
+      "old": "Nothing beyond the certificate document itself, since the academy keeps its certification separate from any Suite licensing or commercial offer",
+      "new": "Over 50 percent, so field routes are compared only for direction and never adopted as a value"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "duplicate",
+   "flag": "true duplicate of advanced module m06 ord 7 (definition of a defensible evaluation)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests thin-bed and laminated sands, from the beyond the typewell lesson",
+   "changes": {
+    "prompt": {
+     "old": "Which statement best captures the course's definition of a defensible evaluation?",
+     "new": "Where sands and shales interleave below tool resolution, how do the saturation models of this ladder read?"
+    },
+    "explanation": {
+     "old": "Defensibility is reproducibility plus examined assumptions: provenance, uncertainty and sensitivity for every load-bearing parameter.",
+     "new": "Standard tools average thin sands with their conductive shale laminae, so the models of this ladder read too pessimistic and dedicated thin-bed and laminated-sand techniques take over. Shale laminae lower the averaged resistivity rather than raising it."
+    },
+    "options": {
+     "0": {
+      "old": "One produced by the most senior petrophysicist available",
+      "new": "Exactly right, since the averaging cancels out"
+     },
+     "1": {
+      "old": "Another expert, given the report and the data, reproduces the numbers and can find no unexamined assumption doing load-bearing work",
+      "new": "Too pessimistic, so dedicated thin-bed and laminated-sand techniques take over"
+     },
+     "2": {
+      "old": "One where every number is quoted to at least four decimal places, so that another reviewer can match each reported value exactly to the output",
+      "new": "Too optimistic, because the deep tool blends the shale laminae into the sand and reads a higher resistivity than the sand holds"
+     },
+     "3": {
+      "old": "One that matches the pre-drill estimate",
+      "new": "Unaffected, as the logs resolve every lamina"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "category": "duplicate",
+   "flag": "true duplicate of advanced module m06 ord 8 (false precision)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests which added log partitions porosity into bound and free fluid, from the beyond the typewell lesson",
+   "changes": {
+    "prompt": {
+     "old": "A report quotes SAND_A water saturation as 0.3609 while its Rw came from a single uncorrected lab measurement. What failure does the course name here?",
+     "new": "A real study adds logs the typewell never needed. Which one gives porosity partitioned into bound and free fluid?"
+    },
+    "explanation": {
+     "old": "Precision in the output means nothing while the input parameter's provenance is unexamined; the fix is triangulation and sensitivity, not more decimals.",
+     "new": "NMR gives porosity partitioned into bound and free fluid. Dielectric tools estimate water-filled porosity almost independently of salinity, image logs reveal thin beds and laminations, and the caliper measures hole size."
+    },
+    "options": {
+     "0": {
+      "old": "Over-rounding: the saturation should carry more decimals, because a booking figure cut at four places hides the true resolution of the Archie result",
+      "new": "Dielectric logging, which reads the salinity of the formation water directly and so replaces the SP quicklook"
+     },
+     "1": {
+      "old": "Under-booking: the cutoffs were too strict",
+      "new": "The caliper log"
+     },
+     "2": {
+      "old": "Instrument error: the lab meter needs recalibration, because a single bench resistivity reading that high points to a drifting conductivity cell",
+      "new": "Image logging, which measures the pore-size distribution around the borehole and converts it into bound water"
+     },
+     "3": {
+      "old": "False precision: four-decimal output resting on an unexamined single-source input, the exact failure the Expert tier exists to prevent",
+      "new": "NMR, which splits porosity into bound and free fluid"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "category": "duplicate",
+   "flag": "true duplicate of advanced module m06 ord 15 (what transfers unchanged from the typewell)",
+   "verdict": "fixed",
+   "reason": "Kept the module question; the final now tests multi-well consistency, from the beyond the typewell lesson",
+   "changes": {
+    "prompt": {
+     "old": "The typewell deliberately keeps hole conditions ideal. What transfers unchanged from this course to real-field petrophysics?",
+     "new": "What validation does a field study gain that no single well can provide?"
+    },
+    "explanation": {
+     "old": "Real studies add core, pressure data and advanced logs, but the parameter discipline is the same; the typewell's ideal conditions exist so that logic stays visible.",
+     "new": "A field study interprets every well with one parameter set and one documented set of exceptions, and the field-wide coherence of the result is itself a validation no single well can provide."
+    },
+    "options": {
+     "0": {
+      "old": "The triangulate, validate and stress-test discipline, the provenance ladder, and the refusal to let one unexamined number drive a booking",
+      "new": "The coherence of one documented parameter set, with its stated exceptions, across every well in the field"
+     },
+     "1": {
+      "old": "The specific values Rw = 0.05 and m = 2, which are universal constants that every clastic reservoir shares and can be carried to any field unchanged",
+      "new": "The deepest well alone, whose water leg becomes the reference and whose parameters are then copied to every other well unchanged"
+     },
+     "2": {
+      "old": "The assumption that water legs are always present and clean",
+      "new": "A separate Rw for each well, chosen freely"
+     },
+     "3": {
+      "old": "The exact 0.6 Sw cutoff, mandated for all reservoirs",
+      "new": "The average of all the capstone answers"
+     }
+    }
+   },
+   "correct_change_reason": "the duplicate is rewritten into a new question, so its key is the new correct option; answer_index is unchanged"
+  }
+ ],
+ "inserts": [
+  {
+   "app_slug": "petrophysics",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "prompt": "Between the pay in SAND_B and its water leg, computed Sw climbs smoothly toward 1.0 instead of jumping. What does this pattern show?",
+   "options": [
+    "A change from sand to shale, which the gamma ray would confirm with a rising clay volume",
+    "A capillary transition zone grading from pay down to the aquifer",
+    "A deepening invasion front, where filtrate lowers the deep resistivity reading",
+    "A gas cap above an oil leg"
+   ],
+   "answer_index": 1,
+   "explanation": "Capillary forces hold more water in the smaller pores as the free water level approaches, so Sw grades from pay values to 1.0 at the aquifer while porosity stays roughly constant. SAND_B is clean on GR, and the deep reading is designed to see past invasion.",
+   "reason": "tier parity: beginner final held 40 questions where every other final holds 42"
+  },
+  {
+   "app_slug": "petrophysics",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "prompt": "In a deviated well, net pay is summed from samples along measured depth (MD). Compared with the true vertical thickness of the bed, that sum:",
+   "options": [
+    "Understates it, because the tool leans on the low side of the hole and misses part of the bed",
+    "Equals it, as the sampling is fixed",
+    "Overstates it, because MD runs along the inclined well path",
+    "Understates it by half"
+   ],
+   "answer_index": 2,
+   "explanation": "MD is distance along the well path and TVD is vertical distance, so in a deviated well an MD thickness sum overstates the vertical thickness of a bed. On the vertical typewell the two coincide, but the first question to ask of any real net pay is whether it is measured or vertical thickness.",
+   "reason": "tier parity: beginner final held 40 questions where every other final holds 42"
+  }
+ ]
+}
