@@ -264,6 +264,46 @@
    "flag": "near duplicate of intermediate final 15",
    "verdict": "judged fine",
    "reason": "Kept as the module question; the intermediate final copy was rewritten to a different point."
+  },
+  {
+   "app_slug": "geomech",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "duplicate",
+   "flag": "lead review: advanced final 40 duplicates advanced module m05-the-edges-of-the-model ord 13 (same key)",
+   "verdict": "fixed",
+   "reason": "Same concept and key as the module question, kept there; the final copy now asks what evidence says the intact-rock upper bound may not be operative (advanced m05 l04, image logs and offset losses), a point no question tested.",
+   "changes": {
+    "prompt": {
+     "old": "In a formation full of existing planes, what number should cap the mud weight?",
+     "new": "Without a fracture network model, what tells you the intact-rock upper bound may not be the operative one?"
+    },
+    "explanation": {
+     "old": "Using the minimum horizontal stress is a cheap and defensible conservatism.",
+     "new": "Fracture orientation and density are directly observable on image logs, and a field with losses at low equivalent circulating densities is telling you the intact-rock upper bound is not the operative one. The quality score and the collapse gradient say nothing about natural fractures."
+    },
+    "options": {
+     "0": {
+      "old": "The computed fracture initiation pressure, since it already includes the tensile strength of the wall.",
+      "new": "A quality score below 100, which flags that the stress model has stopped believing itself at that depth."
+     },
+     "1": {
+      "old": "The overburden gradient, since a fracture cannot propagate against a stress larger than the vertical in a normal regime.",
+      "new": "A collapse gradient above the pore pressure, which shows the rock at the wall is already failing in shear."
+     },
+     "2": {
+      "old": "The pore pressure plus the intact tensile strength, which is when the first natural fracture would begin to open.",
+      "new": "A wide static window at the tightest point, which leaves room for any natural fracture to stay closed."
+     },
+     "3": {
+      "old": "A measured leak-off, a loss history, or the minimum horizontal stress.",
+      "new": "Image logs of fracture density, and offset losses at low circulating densities."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one on a different point, so its key is new text; answer_index is unchanged."
   }
  ]
 }
