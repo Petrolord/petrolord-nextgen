@@ -65,6 +65,14 @@ jobs:
         python3 tools/course-banks/check-bank-sources.py --selftest
         python3 tools/course-banks/check-bank-sources.py
 
+    # The wave kit's literal sweep carries its own negative and positive
+    # controls, including the 2026-09-21 owner decisions (the m06 onward
+    # preview is exempt from the forward-reach rule by role; a sign-flipped
+    # distractor resolves on the magnitude the digest prints). Its selftest
+    # needs no wave directory, so it runs here on every push.
+    - name: Wave kit literal sweep selftest
+      run: python3 docs/gate-audit/litsweep.py --selftest
+
     # THE WHOLE VITEST SUITE, not only the panels directory. Until 2026-09-21
     # this step ran `vitest run src/components/course/panels`, so six suites
     # outside it (src/lib courseContent, learningGate, prereqWaiver,

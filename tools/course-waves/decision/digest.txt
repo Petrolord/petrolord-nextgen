@@ -342,6 +342,8 @@ The verdict sentence, by net VOI sign (verbatim tails of the insight):
 | 40.0000 | 8.00 | -7.00 | No further information |
 | 50.0000 | -2.00 | -17.00 | No further information |
 
+Before the EC4-0 repair, the IRRI inputs (both indicators typed 20 / 80 percent) printed a gross voi of -15.00 and a netVoi card of -25.00 (reconstructed from engine calls, derived). The repaired Analyzer withholds both; Section 11 reads the case in full.
+
 # SECTION 11: Inputs that contradict each other (owned by Expert m01)
 
 impliedPriors: implied P(outcome) = sum over indicators of P(indicator) x P(outcome | indicator); consistent when every delta against the stated prior is within 0.005.

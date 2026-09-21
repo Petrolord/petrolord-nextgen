@@ -7,6 +7,8 @@ An Emergency change goes in on its first signature. The remaining levels must th
 The engine's ratification states are "Not required", "Awaiting ratification", "Ratification overdue" and "Ratified".
 
 - "Not required": the change is not on the emergency route. A Temporary change reads "Not required"; ratification belongs to the emergency route alone.
+
+The window only opens once the change is in effect, in "Implementation" or "Closed". An Emergency change still in Draft, Screening, Review or Approval has not gone in, so there is nothing yet to ratify, and it reads "Not required" as well. So does one that was "Rejected" or "Cancelled" before it went in. That holds whatever its levels show and whatever implementation date the record carries. Read the type and the stage together before you read the window.
 - "Awaiting ratification": an Emergency change with levels still unsigned, inside its window.
 - "Ratification overdue": an Emergency change with levels still unsigned, past its window or with no implementation date recorded.
 - "Ratified": every level signed, however long ago it went in.

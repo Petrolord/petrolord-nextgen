@@ -242,6 +242,15 @@ for (const n of ['suite test: weighted earned value', 'suite test: CPI 1.25', 'p
   w(`- published "${n}": engine EV ${f(x.earnedValue, 4)}, AC ${f(x.totalActuals, 4)}, CPI ${x.cpi === null ? 'null' : r(x.cpi)}, SPI ${x.spi === null ? 'null' : r(x.spi)}.`);
 }
 w();
+{
+  // B5 signhits (2026-09-21): Professional m03 l01 quotes the negative
+  // progress refusal, so the published case is printed in its own tier's
+  // section as well as in Section 14.
+  const c = GA.metricsRefusals.find((x) => x.name === 'negative progress named by code');
+  const a = attempt(() => A.calculateMetrics(c.inputs.afe, c.inputs.costItems, c.inputs.invoices, c.inputs.asOf));
+  w(`Progress is refused below zero, naming the line. The published case "${c.name}": ${a.ok ? 'accepted' : `${a.name}: "${a.error}"`}`);
+  w();
+}
 
 // -------------------------------------------------------------- Section 9
 w('# SECTION 9: The as-of date (owned by Professional m04)');

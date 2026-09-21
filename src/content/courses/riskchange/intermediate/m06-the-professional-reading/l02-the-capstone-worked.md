@@ -20,7 +20,7 @@ For a change in effect with a readable expiry, count whole calendar days from th
 
 ## Count ratification from the actual implementation date
 
-For an Emergency change, add EMERGENCY_RATIFY_DAYS, 7 days, to the date it actually went in. That is the due date. A due date on or after the as-of date is "Awaiting ratification"; before it, "Ratification overdue". Every level signed is "Ratified". No implementation date recorded is "Ratification overdue" with no due date, because the window cannot be shown open. Any other type reads "Not required".
+For an Emergency change, add EMERGENCY_RATIFY_DAYS, 7 days, to the date it actually went in. That is the due date. A due date on or after the as-of date is "Awaiting ratification"; before it, "Ratification overdue". Every level signed is "Ratified". No implementation date recorded is "Ratification overdue" with no due date, because the window cannot be shown open. Any other type reads "Not required", and so does an Emergency change that is not yet in effect: one still in Draft, Screening, Review or Approval reads "Not required" until it reaches "Implementation", and so does one that was "Rejected" or "Cancelled". Count ratification only over Emergency changes you have marked in effect.
 
 {{panel:rc-change-explorer}}
 

@@ -14,7 +14,7 @@ That is the whole definition. There is no calculation in it. The drift diameter 
 
 The length is not incidental. A short mandrel would pass through a bent joint that a long one would jam in, so the length is what makes the test say something about straightness rather than only about bore.
 
-For casing the mandrel is twelve inches long for most sizes. For tubing it is forty two inches. Tubing gets the longer mandrel because tubing is run in longer unsupported strings and because the tools that go through it are longer.
+API 5CT sets the casing mandrel length by outside diameter. For casing smaller than nine and five eighths inches the mandrel is six inches (152 mm) long; for nine and five eighths inches and larger it is twelve inches (305 mm) long. For tubing it is forty two inches (1067 mm). Tubing gets the longer mandrel because tubing is run in longer unsupported strings and because the tools that go through it are longer.
 
 ## Why the deduction is a step function
 

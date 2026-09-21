@@ -93,7 +93,7 @@
     ],
     "fieldsNote": "No generator anywhere in /root/ec-wip-fiscal spells this graded field name, not only none that is mirrored. Recorded so a SECOND unspelled name is a failure. Reported 2026-09-16, not repaired here.",
     "pins": {
-      "digest.txt": "f22e5aeec4fbb7b100b09eebd4b7d4f5c2b379eaf880145123b49f2262be2169",
+      "digest.txt": "b09efc6910b1a05cd32c06416e064529cb1266ea57d2502efcad44eb747edec6",
       "fields.json": "88e8ec45c5a3314f3596cda2f6cc97ecda959be9f4457da41c91145db54d91bb"
     }
   },
@@ -123,7 +123,7 @@
       "ec4_fields.mjs"
     ],
     "pins": {
-      "digest.txt": "6fde16afa304314bf92949a9ac3ad43f23706c26f0929c9539b77461c1c54299",
+      "digest.txt": "4f3453ce63dcb7daf231ca980c1e64e09803882a873e5b54562e3e09ea1d5d2b",
       "fields.json": "ed46a9f0bf33fabc9be60baea12f09ea4897a9a8d7b0efa4c301a379cd49f1fc"
     }
   },
@@ -138,7 +138,7 @@
       "ec5_fields.mjs"
     ],
     "pins": {
-      "digest.txt": "770360d064537e2291137eab2cc9bc81b7328979bc37a279ebfac6841a31af85",
+      "digest.txt": "58e3821bac104d90d6f0afe169ac077dfcb3c904d2529864222239e084a18e4e",
       "fields.json": "20d8113e5656a4608f90b424429b8b32e3751b8228eb55582b15dea5fdc27718"
     }
   },

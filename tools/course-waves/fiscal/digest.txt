@@ -318,7 +318,7 @@ Angola - Deepwater PSC (cost recovery limit 50) on the DEFAULT PROJECT:
 
 The last two columns agree on every row of both tables, and the two regimes are as far apart as this template set goes: one recovers cost in full and carries nothing, the other recovers half of revenue after royalty at most and is still working off a balance years later. The closing pools differ by hundreds of millions of USD and the sums do not differ at all.
 
-Swept rather than asserted. Across all six templates on all three projects, 450 rows, the largest disagreement between the two sums is 1.7053e-13 (Angola - Deepwater PSC, year 1). Across all 28 published cash flow cases, 700 rows, it is 1.7053e-13 (template_angola___deepwater_psc_test_project, year 1). Both are floating point noise; the identity is exact.
+Swept rather than asserted. Across all six templates on all three projects, 450 rows, the largest disagreement between the two sums is 1.1369e-13 (Nigeria - PIA (2021), year 2). Across all 32 published cash flow cases, 800 rows, it is 1.1369e-13 (flat_test_project, year 4). Both are floating point noise; the identity is exact.
 
 THIS IDENTITY USED TO FAIL, AND THAT IS WHY IT IS WORTH STATING. The engine header records two defects fixed in the E1 pass, both found by checking exactly this mass balance against the canonical production sharing semantics. Recovered cost was subtracted from profit oil and then DROPPED: not credited to the contractor, not counted to the government, so the two takes came to less than revenue minus cost by exactly the cost recovered, which on a normal case is hundreds of millions of USD a year evaporating out of the comparison the app exists to make. And opex was never recoverable, because the pool was seeded with capex and nothing was ever added to it. Cost oil is now credited to the contractor and the full cost outflow enters the pool.
 
@@ -336,97 +336,100 @@ DEFAULT PROJECT:
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Nigeria - PIA (2021) | 406.2057 | 1339.2784 | 2686.9277 | 174.0882 | 4 | 3 | 154.8286 | 28.2129 |
 | Ghana - Deepwater | 428.8774 | 1316.6067 | 2686.9277 | 230.9340 | 3 | 3 | 172.7531 | 33.2329 |
-| Brazil - Concession | 912.1029 | 833.3812 | 2686.9277 | 564.6884 | 3 | 3 | 357.8728 | 43.0919 |
+| Brazil - Concession | 623.9658 | 1121.5184 | 2686.9277 | 852.8256 | 3 | 3 | 287.2804 | 44.0823 |
 | USA - Gulf of Mexico | 980.9313 | 764.5528 | 2686.9277 | 260.7539 | 3 | 3 | 382.0660 | 40.2125 |
-| Angola - Deepwater PSC | 545.1955 | 1200.2886 | 2686.9277 | 181.7318 | 4 | 3 | 223.7100 | 32.5073 |
+| Angola - Deepwater PSC | 481.7318 | 1263.7523 | 2686.9277 | 245.1955 | 4 | 3 | 211.3787 | 32.3741 |
 | Generic Royalty/Tax | 986.7327 | 758.7514 | 2686.9277 | 422.8854 | 3 | 3 | 397.0445 | 44.6574 |
 
 TEST PROJECT:
 
 | regime | total contractor NCF | total government take | total revenue | total tax | payback year | payout year | NPV at the project rate | IRR percent |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 778.4845 | 3372.6496 | 7001.1938 | 389.4896 | 2 | 2 | 478.1985 | 69.5722 |
-| Ghana - Deepwater | 899.0915 | 3252.0426 | 7001.1938 | 529.7561 | 2 | 2 | 531.9201 | 88.3418 |
-| Brazil - Concession | 1812.4483 | 2338.6858 | 7001.1938 | 1638.5664 | 2 | 2 | 961.7819 | 107.2817 |
-| USA - Gulf of Mexico | 2221.9251 | 1929.2089 | 7001.1938 | 616.4851 | 2 | 2 | 1232.0557 | 104.9545 |
-| Angola - Deepwater PSC | 948.6796 | 3202.4544 | 7001.1938 | 517.7164 | 3 | 2 | 600.1883 | 64.8632 |
-| Generic Royalty/Tax | 2269.3714 | 1881.7626 | 7001.1938 | 1006.6134 | 2 | 2 | 1262.3470 | 124.5777 |
+| Nigeria - PIA (2021) | 778.4845 | 3372.6496 | 7001.1938 | 389.4896 | 2 | 2 | 478.1985 | null (multiple-roots; roots -12.1036, 69.5722) |
+| Ghana - Deepwater | 899.0915 | 3252.0426 | 7001.1938 | 529.7561 | 2 | 2 | 531.9201 | null (multiple-roots; roots -14.7956, 88.3418) |
+| Brazil - Concession | 1323.4598 | 2827.6743 | 7001.1938 | 2127.5549 | 2 | 2 | 831.8148 | null (multiple-roots; roots -16.2620, 127.4602) |
+| USA - Gulf of Mexico | 2221.9251 | 1929.2089 | 7001.1938 | 616.4851 | 2 | 2 | 1232.0557 | null (multiple-roots; roots -19.0970, 104.9545) |
+| Angola - Deepwater PSC | 777.8587 | 3373.2753 | 7001.1938 | 688.5373 | 2 | 2 | 593.3430 | null (multiple-roots; roots -8.3932, 81.3020) |
+| Generic Royalty/Tax | 2269.3714 | 1881.7626 | 7001.1938 | 1006.6134 | 2 | 2 | 1262.3470 | null (multiple-roots; roots -20.4061, 124.5777) |
 
 Total revenue is identical down each column, because the regime never touches production or price. Everything else moves.
 
 # SECTION 11: Every published cash flow case, one line each (owned by Associate m05)
 
-The golden's 28 cash flow cases, with the golden's own note and the headline the engine returns today.
+The golden's 32 cash flow cases, with the golden's own note and the headline the engine returns today. An IRR that is not a single rate prints as null with the engine's status (Section 16).
 
 - flat_test_project: Suite test: the flat regime (royalty 12.5, full recovery, 100 split, CIT 30, no uplift) on the 30000 bopd test project. Its contractorNCF equals the screening engine's PSC ncf (psc_fiscal_parity_25yr) and its NPV times sqrt(1.1) equals that mid-year NPV.
-  total contractor NCF 2269.3714, total government take 1881.7626, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2770.6665, total profit oil 3355.3781, total tax 1006.6134, payback year 2, payout year 2, NPV 1262.3470 at 10 percent, IRR 124.5777 percent, closing unrecovered pool 79.3932.
+  total contractor NCF 2269.3714, total government take 1881.7626, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2770.6665, total profit oil 3355.3781, total tax 1006.6134, payback year 2, payout year 2, NPV 1262.3470 at 10 percent, IRR null (multiple-roots; roots -20.4061, 124.5777), closing unrecovered pool 79.3932.
 - complex_test_project: Suite test: sliding royalty, 70 percent recovery, tiered split, RRT 20 with 20 percent uplift, minimum tax 2.
-  total contractor NCF 1217.1164, total government take 2934.0177, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2669.3404, total profit oil 3456.7041, total tax 611.4281, payback year 2, payout year 2, NPV 709.3642 at 10 percent, IRR 75.2565 percent, closing unrecovered pool 180.7193.
-- capped_5pct_never_recovers: Suite test: recovery capped at 5 percent, the pool grows past the 1000 capex and never clears; no payback, IRR 0.
-  CAUTION, THIS NOTE IS WRONG AND THE GOLDEN'S OWN NUMBERS SAY SO. The note claims "no payback, IRR 0"; the golden records paybackYear 3 and irr 54.6792, and the engine returns the same. Only the pool half of the note is right. Read the values, not the note.
-  total contractor NCF 1530.0622, total government take 2621.0719, total revenue 7001.1938, total royalty 875.1492, total cost recovered 306.3022, total profit oil 5819.7423, total tax 1745.9227, payback year 3, payout year 2, NPV 829.6617 at 10 percent, IRR 54.6792 percent, closing unrecovered pool 2543.7575.
+  total contractor NCF 1063.9126, total government take 3087.2215, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2669.3404, total profit oil 3456.7041, total tax 764.6319, payback year 2, payout year 2, NPV 657.4150 at 10 percent, IRR null (multiple-roots; roots -12.4786, 75.2433), closing unrecovered pool 180.7193.
+- capped_5pct_pool_never_clears: Suite test: recovery capped at 5 percent, so the cost pool grows past the 1000 capex and never clears (2543.8 still unrecovered in year 25). The contractor pays back anyway, in year 3, because the flat regime's 100 percent split hands it the profit oil the cap leaves. Its NPV is zero at 54.6792 percent and again at -14.2614 percent (late-life contractor cash flow is negative), so under EC2-5 the IRR is null with status multiple-roots and both roots listed.
+  total contractor NCF 1530.0622, total government take 2621.0719, total revenue 7001.1938, total royalty 875.1492, total cost recovered 306.3022, total profit oil 5819.7423, total tax 1745.9227, payback year 3, payout year 2, NPV 829.6617 at 10 percent, IRR null (multiple-roots; roots -14.2614, 54.6792), closing unrecovered pool 2543.7575.
 - capped_40pct: Suite test: recovery capped at 40 percent of revenue after royalty.
-  total contractor NCF 2173.2968, total government take 1977.8372, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2450.4178, total profit oil 3675.6267, total tax 1102.6880, payback year 3, payout year 2, NPV 1194.1092 at 10 percent, IRR 81.7908 percent, closing unrecovered pool 399.6419.
+  total contractor NCF 2173.2968, total government take 1977.8372, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2450.4178, total profit oil 3675.6267, total tax 1102.6880, payback year 3, payout year 2, NPV 1194.1092 at 10 percent, IRR null (multiple-roots; roots -17.4076, 81.7908), closing unrecovered pool 399.6419.
 - harsh_split_40_royalty_20: Suite test: a 40 percent split and 20 percent royalty leave the contractor less and the government more than the flat regime.
-  total contractor NCF 697.1414, total government take 3453.9927, total revenue 7001.1938, total royalty 1400.2388, total cost recovered 2748.5190, total profit oil 2852.4360, total tax 342.2923, payback year 2, payout year 2, NPV 394.1036 at 10 percent, IRR 53.9038 percent, closing unrecovered pool 101.5407.
-- rfactor_tranche_crossing: The Nigeria PIA tranches on a 10000 bopd project (capex 350, opex 20 + 1 $/boe) at $80: the R-factor walks through 1.0 in year 3 and 2.5 in year 6, so `contractorSplit` steps 60 -> 40 -> 30 at exactly those years.
-  CAUTION, THIS NOTE MISATTRIBUTES ITS OWN STEPS. The R factor crosses 1.0 between year 1 (0.781480) and year 2 (1.383252), not in year 3, and that crossing steps NOTHING because 60 percent is already the first tier's split. The step to 40 percent in year 3 is the 1.6 threshold (1.383252 to 1.846809). Only the 2.5 crossing in year 6 is as the note describes. The table in Section 14 is the record.
-  total contractor NCF 279.5803, total government take 1174.9793, total revenue 2333.7313, total royalty 233.3731, total cost recovered 840.4427, total profit oil 1259.9154, total tax 136.4182, payback year 2, payout year 2, NPV 168.2190 at 10 percent, IRR 70.0940 percent, closing unrecovered pool 38.7289.
-- rfactor_falls_back: The same regime with capex 320 and opex 25: the R-factor peaks just above 2.5 and then FALLS as revenue declines while opex keeps accruing, so the split steps back up from 30 to 40 in year 23. The R-factor is a ratio of cumulatives and is not monotone.
-  CAUTION, THIS NOTE UNDERSTATES ITS OWN PEAK. The R factor does not peak "just above 2.5"; it peaks at 2.972625 in year 11. It crosses 2.5 upward in year 5 at 2.501684, which is probably the number the note meant. The fall back through 2.5 in year 23 and the step from 30 back up to 40 are as described.
-  total contractor NCF 225.7346, total government take 1133.8250, total revenue 2333.7313, total royalty 233.3731, total cost recovered 899.6478, total profit oil 1200.7103, total tax 128.6822, payback year 2, payout year 2, NPV 159.5115 at 10 percent, IRR 83.3648 percent, closing unrecovered pool 74.5238.
+  total contractor NCF 697.1414, total government take 3453.9927, total revenue 7001.1938, total royalty 1400.2388, total cost recovered 2748.5190, total profit oil 2852.4360, total tax 342.2923, payback year 2, payout year 2, NPV 394.1036 at 10 percent, IRR null (multiple-roots; roots -12.5216, 53.9038), closing unrecovered pool 101.5407.
+- rfactor_tranche_crossing: The Nigeria PIA tranches on a 10000 bopd project (capex 350, opex 20 + 1 $/boe) at $80: the R-factor walks through 1.0 in year 2, 1.6 in year 3 and 2.5 in year 6. The 60 tranche applies from the start (below 1.0 the lowest tier applies), so `contractorSplit` steps 60 -> 40 when R reaches 1.6 in year 3 and 40 -> 30 when it reaches 2.5 in year 6.
+  total contractor NCF 279.5803, total government take 1174.9793, total revenue 2333.7313, total royalty 233.3731, total cost recovered 840.4427, total profit oil 1259.9154, total tax 136.4182, payback year 2, payout year 2, NPV 168.2190 at 10 percent, IRR null (multiple-roots; roots -13.0252, 70.0940), closing unrecovered pool 38.7289.
+- rfactor_falls_back: The same regime with capex 320 and opex 25: the R-factor peaks at 2.972625 in year 11 and then FALLS as revenue declines while opex keeps accruing, so the split steps back up from 30 to 40 in year 23. The R-factor is a ratio of cumulatives and is not monotone.
+  total contractor NCF 225.7346, total government take 1133.8250, total revenue 2333.7313, total royalty 233.3731, total cost recovered 899.6478, total profit oil 1200.7103, total tax 128.6822, payback year 2, payout year 2, NPV 159.5115 at 10 percent, IRR null (multiple-roots; roots -8.7002, 83.3648), closing unrecovered pool 74.5238.
 - sliding_royalty_price_deck_crossing: The default project's three-point deck ($70, $75 from year 5, $80 from year 10) walks the Designer's default PIA sliding royalty through its $60 and $80 thresholds: 12.5 percent until year 9, 15 percent from year 10.
-  total contractor NCF 498.3862, total government take 1247.0980, total revenue 2686.9277, total royalty 360.1731, total cost recovered 941.4436, total profit oil 1385.3110, total tax 213.5941, payback year 4, payout year 3, NPV 173.4150 at 10 percent, IRR 26.2153 percent, closing unrecovered pool 0.0000.
+  total contractor NCF 475.9901, total government take 1269.4940, total revenue 2686.9277, total royalty 360.1731, total cost recovered 941.4436, total profit oil 1385.3110, total tax 235.9901, payback year 4, payout year 3, NPV 169.7176 at 10 percent, IRR 26.1629, closing unrecovered pool 0.0000.
 - price_below_every_threshold: Price multiplier 0.5 puts $35 oil below every sliding tier: the FIRST tier applies.
-  total contractor NCF 80.8085, total government take 396.7675, total revenue 1419.0195, total royalty 177.3774, total cost recovered 869.1495, total profit oil 372.4926, total tax 65.6154, payback year 12, payout year 6, NPV -111.7254 at 10 percent, IRR 2.9910 percent, closing unrecovered pool 72.2941.
-- rrt_uplift_default_20: rrtUpliftPct omitted: the default 20 percent uplift applies to the Brazil RRT.
-  total contractor NCF 1812.4483, total government take 2338.6858, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2777.3515, total profit oil 3523.7229, total tax 1638.5664, payback year 2, payout year 2, NPV 961.7819 at 10 percent, IRR 107.2817 percent, closing unrecovered pool 72.7082.
-- rrt_uplift_zero_respected: rrtUpliptPct 0 is respected (not replaced by the default).
-  total contractor NCF 843.4598, total government take 3307.6743, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2777.3515, total profit oil 3523.7229, total tax 2607.5549, payback year 2, payout year 2, NPV 473.7983 at 10 percent, IRR 72.4998 percent, closing unrecovered pool 72.7082.
+  total contractor NCF 80.8085, total government take 396.7675, total revenue 1419.0195, total royalty 177.3774, total cost recovered 869.1495, total profit oil 372.4926, total tax 65.6154, payback year 12, payout year 6, NPV -111.7254 at 10 percent, IRR null (multiple-roots; roots -29.6833, 2.9910), closing unrecovered pool 72.2941.
+- rrt_uplift_default_20: rrtUpliftPct omitted: the default 20 percent uplift sizes the Brazil RRT pool at 1.2 times the 1000 capex (EC2-6).
+  total contractor NCF 1323.4598, total government take 2827.6743, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2777.3515, total profit oil 3523.7229, total tax 2127.5549, payback year 2, payout year 2, NPV 831.8148 at 10 percent, IRR null (multiple-roots; roots -16.2620, 127.4602), closing unrecovered pool 72.7082.
+- rrt_uplift_zero_respected: rrtUpliftPct 0 is respected (not replaced by the default). The pool is then the capex itself, 1000, relieved once (EC2-6).
+  total contractor NCF 1243.4598, total government take 2907.6743, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2777.3515, total profit oil 3523.7229, total tax 2207.5549, payback year 2, payout year 2, NPV 777.1737 at 10 percent, IRR null (multiple-roots; roots -16.0758, 123.9407), closing unrecovered pool 72.7082.
+- rrt_pool_never_exhausted: EC2-6: an uplift of 900 percent opens a pool of 10000 against a 1000 capex, larger than every profit share in the life put together, so the relief never runs out, the RRT base is zero in all 25 years and the tax is the CIT alone.
+  total contractor NCF 2252.9489, total government take 1898.1852, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2777.3515, total profit oil 3523.7229, total tax 1198.0658, payback year 2, payout year 2, NPV 1254.4726 at 10 percent, IRR null (multiple-roots; roots -20.8798, 132.5583), closing unrecovered pool 72.7082.
+- rrt_pool_with_minimum_tax: EC2-6: the Brazil instruments with a 2 percent minimum tax. The pool is drawn in every year with a positive profit share, including the years the minimum binds, and it is never refilled.
+  total contractor NCF 1300.5917, total government take 2850.5423, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2777.3515, total profit oil 3523.7229, total tax 2150.4230, payback year 2, payout year 2, NPV 815.2702 at 10 percent, IRR null (multiple-roots; roots -15.8993, 119.0732), closing unrecovered pool 72.7082.
+- rrt_absent_uplift_has_no_effect: EC2-6: no RRT (rate 0) with a 20 percent uplift. The pool is opened and drawn and changes nothing, so this ledger is the flat_test_project ledger row for row.
+  total contractor NCF 2269.3714, total government take 1881.7626, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2770.6665, total profit oil 3355.3781, total tax 1006.6134, payback year 2, payout year 2, NPV 1262.3470 at 10 percent, IRR null (multiple-roots; roots -20.4061, 124.5777), closing unrecovered pool 79.3932.
 - minimum_tax_binds: A 10 percent minimum tax on gross revenue with a 0 CIT: the minimum binds every year.
-  total contractor NCF 2575.8655, total government take 1575.2686, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2770.6665, total profit oil 3355.3781, total tax 700.1194, payback year 2, payout year 2, NPV 1422.1988 at 10 percent, IRR 103.7802 percent, closing unrecovered pool 79.3932.
+  total contractor NCF 2575.8655, total government take 1575.2686, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2770.6665, total profit oil 3355.3781, total tax 700.1194, payback year 2, payout year 2, NPV 1422.1988 at 10 percent, IRR null (multiple-roots; roots -19.3004, 103.7802), closing unrecovered pool 79.3932.
 - capex_multiplier_1_3: Capex multiplier 1.3 on the flat regime.
-  total contractor NCF 2059.3714, total government take 1791.7626, total revenue 7001.1938, total royalty 875.1492, total cost recovered 3070.6665, total profit oil 3055.3781, total tax 916.6134, payback year 3, payout year 2, NPV 1062.6176 at 10 percent, IRR 63.3364 percent, closing unrecovered pool 79.3932.
-- capex_multiplier_0_7: Capex multiplier 0.7 on the flat regime.
-  total contractor NCF 2479.3714, total government take 1971.7626, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2470.6665, total profit oil 3655.3781, total tax 1096.6134, payback year 2, payout year 1, NPV 1460.6941 at 10 percent, IRR 1095.4783 percent, closing unrecovered pool 79.3932.
-- never_recovers_huge_capex: Capex 20000 on the test project: NPV(0) is negative so the engine reports IRR 0, the pool never clears, no payback.
-  total contractor NCF -15724.0151, total government take 875.1492, total revenue 7001.1938, total royalty 875.1492, total cost recovered 6126.0445, total profit oil 0.0000, total tax 0.0000, payback year null, payout year null, NPV -15453.8510 at 10 percent, IRR 0.0000 percent, closing unrecovered pool 15724.0151.
+  total contractor NCF 2059.3714, total government take 1791.7626, total revenue 7001.1938, total royalty 875.1492, total cost recovered 3070.6665, total profit oil 3055.3781, total tax 916.6134, payback year 3, payout year 2, NPV 1062.6176 at 10 percent, IRR null (multiple-roots; roots -20.3268, 63.3364), closing unrecovered pool 79.3932.
+- capex_multiplier_0_7: Capex multiplier 0.7 on the flat regime. The NPV is zero at 1095.4783 percent, above the band, and at -20.4852 percent, inside it. One root inside the band and one above it: irr null, multiple-roots, irrRoots lists -20.4852 only and irrRootAboveBand is true. The retired bisection read 1095.4783 as the IRR.
+  total contractor NCF 2479.3714, total government take 1971.7626, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2470.6665, total profit oil 3655.3781, total tax 1096.6134, payback year 2, payout year 1, NPV 1460.6941 at 10 percent, IRR null (multiple-roots; roots -20.4852; another root above the band), closing unrecovered pool 79.3932.
+- never_recovers_huge_capex: Capex 20000 on the test project: the pool never clears and there is no payback. NPV at 0 percent is negative and no rate from -99 to 1000 percent zeroes it, so the IRR is null with status no-root (the retired rule printed 0).
+  total contractor NCF -15724.0151, total government take 875.1492, total revenue 7001.1938, total royalty 875.1492, total cost recovered 6126.0445, total profit oil 0.0000, total tax 0.0000, payback year null, payout year null, NPV -15453.8510 at 10 percent, IRR null (no-root), closing unrecovered pool 15724.0151.
+- tiers_unsorted_selected_by_threshold: EC2-8: the Nigeria PIA tranches typed out of order (royalty 50 before 0, split 2.5, 1.0, 1.6) on the rfactor_tranche_crossing project. Selection is by threshold, so every row equals the sorted case; the retired list-order rule would take 7.5 percent royalty at $80 and a 40 split once R passes 2.5.
+  total contractor NCF 279.5803, total government take 1174.9793, total revenue 2333.7313, total royalty 233.3731, total cost recovered 840.4427, total profit oil 1259.9154, total tax 136.4182, payback year 2, payout year 2, NPV 168.2190 at 10 percent, IRR null (multiple-roots; roots -13.0252, 70.0940), closing unrecovered pool 38.7289.
 - gas_and_ngl_streams: Gas and NGL streams contribute revenue and boe on the default project under the Generic template.
-  total contractor NCF 986.7327, total government take 758.7514, total revenue 2686.9277, total royalty 335.8660, total cost recovered 941.4436, total profit oil 1409.6182, total tax 422.8854, payback year 3, payout year 3, NPV 397.0445 at 10 percent, IRR 44.6574 percent, closing unrecovered pool 0.0000.
+  total contractor NCF 986.7327, total government take 758.7514, total revenue 2686.9277, total royalty 335.8660, total cost recovered 941.4436, total profit oil 1409.6182, total tax 422.8854, payback year 3, payout year 3, NPV 397.0445 at 10 percent, IRR 44.6574, closing unrecovered pool 0.0000.
 - template_nigeria___pia__2021_default_project: Template "Nigeria - PIA (2021)" on the Designer's default project.
-  total contractor NCF 406.2057, total government take 1339.2784, total revenue 2686.9277, total royalty 268.6928, total cost recovered 941.4436, total profit oil 1476.7914, total tax 174.0882, payback year 4, payout year 3, NPV 154.8286 at 10 percent, IRR 28.2129 percent, closing unrecovered pool 0.0000.
+  total contractor NCF 406.2057, total government take 1339.2784, total revenue 2686.9277, total royalty 268.6928, total cost recovered 941.4436, total profit oil 1476.7914, total tax 174.0882, payback year 4, payout year 3, NPV 154.8286 at 10 percent, IRR 28.2129, closing unrecovered pool 0.0000.
 - template_nigeria___pia__2021_test_project: Template "Nigeria - PIA (2021)" on the Suite test project.
-  total contractor NCF 778.4845, total government take 3372.6496, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2719.7351, total profit oil 3581.3393, total tax 389.4896, payback year 2, payout year 2, NPV 478.1985 at 10 percent, IRR 69.5722 percent, closing unrecovered pool 130.3246.
+  total contractor NCF 778.4845, total government take 3372.6496, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2719.7351, total profit oil 3581.3393, total tax 389.4896, payback year 2, payout year 2, NPV 478.1985 at 10 percent, IRR null (multiple-roots; roots -12.1036, 69.5722), closing unrecovered pool 130.3246.
 - template_ghana___deepwater_default_project: Template "Ghana - Deepwater" on the Designer's default project.
-  total contractor NCF 428.8774, total government take 1316.6067, total revenue 2686.9277, total royalty 134.3464, total cost recovered 941.4436, total profit oil 1611.1377, total tax 230.9340, payback year 3, payout year 3, NPV 172.7531 at 10 percent, IRR 33.2329 percent, closing unrecovered pool 0.0000.
+  total contractor NCF 428.8774, total government take 1316.6067, total revenue 2686.9277, total royalty 134.3464, total cost recovered 941.4436, total profit oil 1611.1377, total tax 230.9340, payback year 3, payout year 3, NPV 172.7531 at 10 percent, IRR 33.2329, closing unrecovered pool 0.0000.
 - template_ghana___deepwater_test_project: Template "Ghana - Deepwater" on the Suite test project.
-  total contractor NCF 899.0915, total government take 3252.0426, total revenue 7001.1938, total royalty 350.0597, total cost recovered 2765.3184, total profit oil 3885.8157, total tax 529.7561, payback year 2, payout year 2, NPV 531.9201 at 10 percent, IRR 88.3418 percent, closing unrecovered pool 84.7413.
+  total contractor NCF 899.0915, total government take 3252.0426, total revenue 7001.1938, total royalty 350.0597, total cost recovered 2765.3184, total profit oil 3885.8157, total tax 529.7561, payback year 2, payout year 2, NPV 531.9201 at 10 percent, IRR null (multiple-roots; roots -14.7956, 88.3418), closing unrecovered pool 84.7413.
 - template_brazil___concession_default_project: Template "Brazil - Concession" on the Designer's default project.
-  total contractor NCF 912.1029, total government take 833.3812, total revenue 2686.9277, total royalty 268.6928, total cost recovered 941.4436, total profit oil 1476.7914, total tax 564.6884, payback year 3, payout year 3, NPV 357.8728 at 10 percent, IRR 43.0919 percent, closing unrecovered pool 0.0000.
+  total contractor NCF 623.9658, total government take 1121.5184, total revenue 2686.9277, total royalty 268.6928, total cost recovered 941.4436, total profit oil 1476.7914, total tax 852.8256, payback year 3, payout year 3, NPV 287.2804 at 10 percent, IRR 44.0823, closing unrecovered pool 0.0000.
 - template_brazil___concession_test_project: Template "Brazil - Concession" on the Suite test project.
-  total contractor NCF 1812.4483, total government take 2338.6858, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2777.3515, total profit oil 3523.7229, total tax 1638.5664, payback year 2, payout year 2, NPV 961.7819 at 10 percent, IRR 107.2817 percent, closing unrecovered pool 72.7082.
+  total contractor NCF 1323.4598, total government take 2827.6743, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2777.3515, total profit oil 3523.7229, total tax 2127.5549, payback year 2, payout year 2, NPV 831.8148 at 10 percent, IRR null (multiple-roots; roots -16.2620, 127.4602), closing unrecovered pool 72.7082.
 - template_usa___gulf_of_mexico_default_project: Template "USA - Gulf of Mexico" on the Designer's default project.
-  total contractor NCF 980.9313, total government take 764.5528, total revenue 2686.9277, total royalty 503.7989, total cost recovered 941.4436, total profit oil 1241.6852, total tax 260.7539, payback year 3, payout year 3, NPV 382.0660 at 10 percent, IRR 40.2125 percent, closing unrecovered pool 0.0000.
+  total contractor NCF 980.9313, total government take 764.5528, total revenue 2686.9277, total royalty 503.7989, total cost recovered 941.4436, total profit oil 1241.6852, total tax 260.7539, payback year 3, payout year 3, NPV 382.0660 at 10 percent, IRR 40.2125, closing unrecovered pool 0.0000.
 - template_usa___gulf_of_mexico_test_project: Template "USA - Gulf of Mexico" on the Suite test project.
-  total contractor NCF 2221.9251, total government take 1929.2089, total revenue 7001.1938, total royalty 1312.7238, total cost recovered 2752.8266, total profit oil 2935.6433, total tax 616.4851, payback year 2, payout year 2, NPV 1232.0557 at 10 percent, IRR 104.9545 percent, closing unrecovered pool 97.2331.
+  total contractor NCF 2221.9251, total government take 1929.2089, total revenue 7001.1938, total royalty 1312.7238, total cost recovered 2752.8266, total profit oil 2935.6433, total tax 616.4851, payback year 2, payout year 2, NPV 1232.0557 at 10 percent, IRR null (multiple-roots; roots -19.0970, 104.9545), closing unrecovered pool 97.2331.
 - template_angola___deepwater_psc_default_project: Template "Angola - Deepwater PSC" on the Designer's default project.
-  total contractor NCF 545.1955, total government take 1200.2886, total revenue 2686.9277, total royalty 0.0000, total cost recovered 941.4436, total profit oil 1745.4841, total tax 181.7318, payback year 4, payout year 3, NPV 223.7100 at 10 percent, IRR 32.5073 percent, closing unrecovered pool 0.0000.
+  total contractor NCF 481.7318, total government take 1263.7523, total revenue 2686.9277, total royalty 0.0000, total cost recovered 941.4436, total profit oil 1745.4841, total tax 245.1955, payback year 4, payout year 3, NPV 211.3787 at 10 percent, IRR 32.3741, closing unrecovered pool 0.0000.
 - template_angola___deepwater_psc_test_project: Template "Angola - Deepwater PSC" on the Suite test project.
-  total contractor NCF 948.6796, total government take 3202.4544, total revenue 7001.1938, total royalty 0.0000, total cost recovered 2598.4060, total profit oil 4402.7878, total tax 517.7164, payback year 3, payout year 2, NPV 600.1883 at 10 percent, IRR 64.8632 percent, closing unrecovered pool 251.6537.
+  total contractor NCF 777.8587, total government take 3373.2753, total revenue 7001.1938, total royalty 0.0000, total cost recovered 2598.4060, total profit oil 4402.7878, total tax 688.5373, payback year 2, payout year 2, NPV 593.3430 at 10 percent, IRR null (multiple-roots; roots -8.3932, 81.3020), closing unrecovered pool 251.6537.
 - template_generic_royalty_tax_default_project: Template "Generic Royalty/Tax" on the Designer's default project.
-  total contractor NCF 986.7327, total government take 758.7514, total revenue 2686.9277, total royalty 335.8660, total cost recovered 941.4436, total profit oil 1409.6182, total tax 422.8854, payback year 3, payout year 3, NPV 397.0445 at 10 percent, IRR 44.6574 percent, closing unrecovered pool 0.0000.
+  total contractor NCF 986.7327, total government take 758.7514, total revenue 2686.9277, total royalty 335.8660, total cost recovered 941.4436, total profit oil 1409.6182, total tax 422.8854, payback year 3, payout year 3, NPV 397.0445 at 10 percent, IRR 44.6574, closing unrecovered pool 0.0000.
 - template_generic_royalty_tax_test_project: Template "Generic Royalty/Tax" on the Suite test project.
-  total contractor NCF 2269.3714, total government take 1881.7626, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2770.6665, total profit oil 3355.3781, total tax 1006.6134, payback year 2, payout year 2, NPV 1262.3470 at 10 percent, IRR 124.5777 percent, closing unrecovered pool 79.3932.
+  total contractor NCF 2269.3714, total government take 1881.7626, total revenue 7001.1938, total royalty 875.1492, total cost recovered 2770.6665, total profit oil 3355.3781, total tax 1006.6134, payback year 2, payout year 2, NPV 1262.3470 at 10 percent, IRR null (multiple-roots; roots -20.4061, 124.5777), closing unrecovered pool 79.3932.
 
-A CAUTION ON THE NOTES. The note on each line is the golden's own prose, reprinted verbatim, and THREE of the 28 make a claim their own numbers refuse. Each is annotated above.
+A NOTE ON THE NOTES. Each note is the golden's own prose, reprinted verbatim. Three of them once made a claim their own numbers refused, and all three were corrected at source (EC2-4):
 
-- `capped_5pct_never_recovers` says "no payback, IRR 0" against a recorded payback in year 3 and an IRR of 54.6792 percent. The reason its author expected no payback is the thing the case actually teaches: at a 5 percent cost recovery limit almost nothing comes back as cost oil, but the revenue that cannot be recovered becomes profit oil, and this regime splits profit oil 100 percent to the contractor, so the capital comes home through the profit share instead. Cost recovery is not the only way a contractor is paid back.
-- `rfactor_tranche_crossing` dates the 1.0 crossing to year 3 when it happens in year 2, and credits it with a step that the 1.6 threshold caused. Crossing 1.0 changes nothing here, because the first tier's split is already in force below every threshold.
-- `rfactor_falls_back` says the R factor peaks "just above 2.5" when it peaks at 2.972625, nearly half a unit higher. 2.501684 is where it crosses 2.5 going up, in year 5.
+- `capped_5pct_pool_never_clears` (formerly capped_5pct_never_recovers) once said "no payback, IRR 0". It pays back in year 3, because at a 5 percent cost recovery limit the revenue that cannot be recovered becomes profit oil and this regime splits profit oil 100 percent to the contractor. Its NPV is zero at 54.6792 percent and again at -14.2614 percent, so the IRR is null with the status multiple-roots. Cost recovery is not the only way a contractor is paid back.
+- `rfactor_tranche_crossing` once dated the 1.0 crossing to year 3. The R factor crosses 1.0 in year 2 and that crossing steps nothing, because 60 percent is already the first tier's split; the step to 40 percent in year 3 is the 1.6 threshold.
+- `rfactor_falls_back` once said the R factor peaks "just above 2.5". It peaks at 2.972625 in year 11 and crosses 2.5 going up in year 5, at 2.501684.
 
-None of the three is an engine defect. All three are prose, and all three would mislead a reader who trusted the sentence over the table. They are written up in the wave FINDINGS.md as EC2-4.
-
-THE RULE, AND IT IS THE MOST PORTABLE THING IN THIS SECTION. Quote a golden's NUMBERS, never a golden's prose. A numeric sweep of all 28 notes against everything each case computes finds nothing wrong with any of them, because every number these three notes state does appear somewhere in its case: year 3 is a real year, 2.5 is a real threshold, 0 is a real value. What is wrong is which number is attached to which event, and no mechanical check reads an ASSOCIATION. Three human readers found these three, each by doing the arithmetic the sentence claimed.
+THE RULE, AND IT IS THE MOST PORTABLE THING IN THIS SECTION. Quote a golden's NUMBERS, never a golden's prose. When the three notes above were wrong, a numeric sweep of every note against everything its case computes found nothing, because every number those notes stated did appear somewhere in the case: year 3 was a real year, 2.5 a real threshold, 0 a real value. What was wrong was which number was attached to which event, and no mechanical check reads an ASSOCIATION. Three human readers found them, each by doing the arithmetic the sentence claimed.
 
 # SECTION 12: The sliding-scale royalty (owned by Professional m01)
 
@@ -562,9 +565,9 @@ At 50 percent the same thing happens harder and for longer: the year 1 capex can
 
 Two published cases hold the extremes:
 
-- capped_5pct_never_recovers: Suite test: recovery capped at 5 percent, the pool grows past the 1000 capex and never clears; no payback, IRR 0. Cost recovery limit 5 percent. Total cost recovered 306.3022, total profit oil 5819.7423, total contractor NCF 1530.0622, closing unrecovered pool 2543.7575 $MM, payback year 3.
+- capped_5pct_pool_never_clears: Suite test: recovery capped at 5 percent, so the cost pool grows past the 1000 capex and never clears (2543.8 still unrecovered in year 25). The contractor pays back anyway, in year 3, because the flat regime's 100 percent split hands it the profit oil the cap leaves. Its NPV is zero at 54.6792 percent and again at -14.2614 percent (late-life contractor cash flow is negative), so under EC2-5 the IRR is null with status multiple-roots and both roots listed. Cost recovery limit 5 percent. Total cost recovered 306.3022, total profit oil 5819.7423, total contractor NCF 1530.0622, closing unrecovered pool 2543.7575 $MM, payback year 3.
 - capped_40pct: Suite test: recovery capped at 40 percent of revenue after royalty. Cost recovery limit 40 percent. Total cost recovered 2450.4178, total profit oil 3675.6267, total contractor NCF 2173.2968, closing unrecovered pool 399.6419 $MM, payback year 3.
-- never_recovers_huge_capex: Capex 20000 on the test project: NPV(0) is negative so the engine reports IRR 0, the pool never clears, no payback. Cost recovery limit 100 percent. Total cost recovered 6126.0445, total profit oil 0.0000, total contractor NCF -15724.0151, closing unrecovered pool 15724.0151 $MM, payback year null.
+- never_recovers_huge_capex: Capex 20000 on the test project: the pool never clears and there is no payback. NPV at 0 percent is negative and no rate from -99 to 1000 percent zeroes it, so the IRR is null with status no-root (the retired rule printed 0). Cost recovery limit 100 percent. Total cost recovered 6126.0445, total profit oil 0.0000, total contractor NCF -15724.0151, closing unrecovered pool 15724.0151 $MM, payback year null.
 
 What cost recovery is NOT. It is not a deduction against tax: the tax base in this model is the contractor's profit share, and cost recovered is added to the contractor's cash separately. It is not depreciation, and there is no schedule. And an unrecovered balance is not a loss carried forward for tax; it is only a claim on future revenue after royalty.
 
@@ -606,7 +609,7 @@ The implied split is the tier the R factor selected, read back out of the ledger
 
 Three published cases, one for each behaviour:
 
-- rfactor_tranche_crossing: The Nigeria PIA tranches on a 10000 bopd project (capex 350, opex 20 + 1 $/boe) at $80: the R-factor walks through 1.0 in year 3 and 2.5 in year 6, so `contractorSplit` steps 60 -> 40 -> 30 at exactly those years.
+- rfactor_tranche_crossing: The Nigeria PIA tranches on a 10000 bopd project (capex 350, opex 20 + 1 $/boe) at $80: the R-factor walks through 1.0 in year 2, 1.6 in year 3 and 2.5 in year 6. The 60 tranche applies from the start (below 1.0 the lowest tier applies), so `contractorSplit` steps 60 -> 40 when R reaches 1.6 in year 3 and 40 -> 30 when it reaches 2.5 in year 6.
   royalty sliding on price, tiers 0 USD/bbl -> 7.5 percent, 50 USD/bbl -> 10 percent; cost recovery limit 80 percent; profit split tiered on the R factor, R 1 -> 60 percent, R 1.6 -> 40 percent, R 2.5 -> 30 percent; CIT 30 percent, RRT 0 percent, minimum tax 0 percent.
 
   | year | rFactor | profitOil | implied split (derived) |
@@ -637,7 +640,7 @@ Three published cases, one for each behaviour:
   | 24 | 2.700983 | 2.7782 | 0.300000 |
   | 25 | 2.654466 | 2.4448 | 0.300000 |
 
-- rfactor_falls_back: The same regime with capex 320 and opex 25: the R-factor peaks just above 2.5 and then FALLS as revenue declines while opex keeps accruing, so the split steps back up from 30 to 40 in year 23. The R-factor is a ratio of cumulatives and is not monotone.
+- rfactor_falls_back: The same regime with capex 320 and opex 25: the R-factor peaks at 2.972625 in year 11 and then FALLS as revenue declines while opex keeps accruing, so the split steps back up from 30 to 40 in year 23. The R-factor is a ratio of cumulatives and is not monotone.
   royalty sliding on price, tiers 0 USD/bbl -> 7.5 percent, 50 USD/bbl -> 10 percent; cost recovery limit 80 percent; profit split tiered on the R factor, R 1 -> 60 percent, R 1.6 -> 40 percent, R 2.5 -> 30 percent; CIT 30 percent, RRT 0 percent, minimum tax 0 percent.
 
   | year | rFactor | profitOil | implied split (derived) |
@@ -714,34 +717,45 @@ Because the tax rates do not enter the base, the stack decomposes exactly: runni
 | 1 | 271.9889 | 0.0000 | 0.0000 | 0.0000 | 13.5994 | 0.0000 |
 | 2 | 244.4628 | 0.0000 | 0.0000 | 0.0000 | 12.2231 | 0.0000 |
 | 3 | 219.7286 | 75.7962 | 25.7707 | 0.0000 | 10.9864 | 25.7707 |
-| 4 | 197.5024 | 152.5706 | 51.8740 | 21.0282 | 9.8751 | 72.9022 |
-| 5 | 191.1513 | 148.4098 | 50.4593 | 19.3639 | 9.5576 | 69.8233 |
-| 6 | 171.8074 | 132.3955 | 45.0145 | 12.9582 | 8.5904 | 57.9727 |
-| 7 | 154.4254 | 118.0035 | 40.1212 | 7.2014 | 7.7213 | 47.3226 |
-| 8 | 138.8057 | 105.0690 | 35.7235 | 2.0276 | 6.9403 | 37.7511 |
-| 9 | 124.7694 | 93.4441 | 31.7710 | 0.0000 | 6.2385 | 31.7710 |
-| 10 | 120.0964 | 90.1428 | 30.6486 | 0.0000 | 6.0048 | 30.6486 |
-| 11 | 107.9490 | 80.0217 | 27.2074 | 0.0000 | 5.3974 | 27.2074 |
-| 12 | 97.0328 | 70.9255 | 24.1147 | 0.0000 | 4.8516 | 24.1147 |
-| 13 | 87.2228 | 62.7502 | 21.3351 | 0.0000 | 4.3611 | 21.3351 |
-| 14 | 78.4067 | 55.4024 | 18.8368 | 0.0000 | 3.9203 | 18.8368 |
-| 15 | 70.4834 | 48.7981 | 16.5914 | 0.0000 | 3.5242 | 16.5914 |
-| 16 | 63.3625 | 42.8620 | 14.5731 | 0.0000 | 3.1681 | 14.5731 |
-| 17 | 56.9623 | 37.5262 | 12.7589 | 0.0000 | 2.8481 | 12.7589 |
-| 18 | 51.2099 | 32.7300 | 11.1282 | 0.0000 | 2.5605 | 11.1282 |
-| 19 | 46.0394 | 28.4187 | 9.6623 | 0.0000 | 2.3020 | 9.6623 |
-| 20 | 41.3920 | 24.5431 | 8.3446 | 0.0000 | 2.0696 | 8.3446 |
-| 21 | 37.2145 | 21.0591 | 7.1601 | 0.0000 | 1.8607 | 7.1601 |
-| 22 | 33.4594 | 17.9271 | 6.0952 | 0.0000 | 1.6730 | 6.0952 |
-| 23 | 30.0838 | 15.1114 | 5.1379 | 0.0000 | 1.5042 | 5.1379 |
-| 24 | 27.0494 | 12.5801 | 4.2772 | 0.0000 | 1.3525 | 4.2772 |
-| 25 | 24.3216 | 10.3043 | 3.5035 | 0.0000 | 1.2161 | 3.5035 |
+| 4 | 197.5024 | 152.5706 | 51.8740 | 0.0000 | 9.8751 | 51.8740 |
+| 5 | 191.1513 | 148.4098 | 50.4593 | 0.0000 | 9.5576 | 50.4593 |
+| 6 | 171.8074 | 132.3955 | 45.0145 | 0.0000 | 8.5904 | 45.0145 |
+| 7 | 154.4254 | 118.0035 | 40.1212 | 10.8703 | 7.7213 | 50.9914 |
+| 8 | 138.8057 | 105.0690 | 35.7235 | 42.0276 | 6.9403 | 77.7511 |
+| 9 | 124.7694 | 93.4441 | 31.7710 | 37.3776 | 6.2385 | 69.1486 |
+| 10 | 120.0964 | 90.1428 | 30.6486 | 36.0571 | 6.0048 | 66.7057 |
+| 11 | 107.9490 | 80.0217 | 27.2074 | 32.0087 | 5.3974 | 59.2160 |
+| 12 | 97.0328 | 70.9255 | 24.1147 | 28.3702 | 4.8516 | 52.4849 |
+| 13 | 87.2228 | 62.7502 | 21.3351 | 25.1001 | 4.3611 | 46.4352 |
+| 14 | 78.4067 | 55.4024 | 18.8368 | 22.1610 | 3.9203 | 40.9978 |
+| 15 | 70.4834 | 48.7981 | 16.5914 | 19.5193 | 3.5242 | 36.1106 |
+| 16 | 63.3625 | 42.8620 | 14.5731 | 17.1448 | 3.1681 | 31.7179 |
+| 17 | 56.9623 | 37.5262 | 12.7589 | 15.0105 | 2.8481 | 27.7694 |
+| 18 | 51.2099 | 32.7300 | 11.1282 | 13.0920 | 2.5605 | 24.2202 |
+| 19 | 46.0394 | 28.4187 | 9.6623 | 11.3675 | 2.3020 | 21.0298 |
+| 20 | 41.3920 | 24.5431 | 8.3446 | 9.8172 | 2.0696 | 18.1619 |
+| 21 | 37.2145 | 21.0591 | 7.1601 | 8.4236 | 1.8607 | 15.5837 |
+| 22 | 33.4594 | 17.9271 | 6.0952 | 7.1708 | 1.6730 | 13.2660 |
+| 23 | 30.0838 | 15.1114 | 5.1379 | 6.0446 | 1.5042 | 11.1824 |
+| 24 | 27.0494 | 12.5801 | 4.2772 | 5.0320 | 1.3525 | 9.3092 |
+| 25 | 24.3216 | 10.3043 | 3.5035 | 4.1217 | 1.2161 | 7.6252 |
 
-Totals: CIT alone 502.1091, RRT alone 62.5794, minimum tax alone at 5 percent 134.3464, tax as published 564.6884 $MM.
+Totals: CIT alone 502.1091, RRT alone 350.7165, minimum tax alone at 5 percent 134.3464, tax as published 852.8256 $MM.
 
-The decomposition is exact in the engine and only APPROXIMATE at the precision printed here: each column total is rounded on its own, so CIT alone plus RRT alone can miss the published stack by one unit in the last place. Unrounded, the sum of the two is 564.6884366927 against a published 564.6884366927, a difference of 1.1369e-13. Quote the columns, do not assert that the printed figures add.
+The decomposition is exact in the engine and only APPROXIMATE at the precision printed here: each column total is rounded on its own, so CIT alone plus RRT alone can miss the published stack by one unit in the last place. Unrounded, the sum of the two is 852.8256004720 against a published 852.8256004720, a difference of 0.0000e+0. Quote the columns, do not assert that the printed figures add.
 
-The RRT column is zero in the early years and stays zero for a long time, because the uplift subtracts 20 percent of the WHOLE capex from the base every year. Section 24 sweeps the uplift.
+The RRT column is zero in the early years, because relief is drawn from a pool opened once at total capex times one plus the uplift (EC2-6), and the RRT is charged only on what the pool no longer covers. The first year with a charge is the year the pool runs out. Section 24 sweeps the uplift.
+
+The pool under a sweep: the "Brazil - Concession" instruments on the DEFAULT PROJECT with the corporate income tax set to zero, so the tax is the RRT alone at 40 percent. Total capex is 500.0000 $MM.
+
+| rrtUpliftPct | total tax | total contractor NCF | total government cash flow | first year with a positive charge |
+| --- | --- | --- | --- | --- |
+| 0 | 390.7165 | 1086.0748 | 659.4093 | 6 |
+| 5 | 380.7165 | 1096.0748 | 649.4093 | 7 |
+| 10 | 370.7165 | 1106.0748 | 639.4093 | 7 |
+| 20 | 350.7165 | 1126.0748 | 619.4093 | 7 |
+| 30 | 330.7165 | 1146.0748 | 599.4093 | 8 |
+| 50 | 290.7165 | 1186.0748 | 559.4093 | 9 |
 
 The minimum tax and the maximum, on the published case that pins it:
 
@@ -759,29 +773,29 @@ The minimum tax and the maximum, on the published case that pins it:
   | 7 | 406.8180 | 275.6248 | 40.6818 |
   | 8 | 357.9998 | 235.3499 | 35.8000 |
 
-- rrt_uplift_default_20: rrtUpliftPct omitted: the default 20 percent uplift applies to the Brazil RRT.
-  royalty flat 10 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 34 percent, RRT 40 percent, minimum tax 0 percent. Total tax 1638.5664, total contractor NCF 1812.4483 $MM.
+- rrt_uplift_default_20: rrtUpliftPct omitted: the default 20 percent uplift sizes the Brazil RRT pool at 1.2 times the 1000 capex (EC2-6).
+  royalty flat 10 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 34 percent, RRT 40 percent, minimum tax 0 percent. Total tax 2127.5549, total contractor NCF 1323.4598 $MM.
 
   | year | grossRevenue | profitOil | tax |
   | --- | --- | --- | --- |
   | 1 | 876.0000 | 0.0000 | 0.0000 |
-  | 2 | 770.8800 | 279.8480 | 127.0875 |
-  | 3 | 678.3744 | 516.6182 | 302.2975 |
-  | 4 | 596.9695 | 447.4241 | 251.0938 |
-  | 5 | 525.3331 | 386.5332 | 206.0345 |
-  | 6 | 462.2932 | 332.9492 | 166.3824 |
-  | 7 | 406.8180 | 285.7953 | 131.4885 |
-  | 8 | 357.9998 | 244.2998 | 100.7819 |
+  | 2 | 770.8800 | 279.8480 | 95.1483 |
+  | 3 | 678.3744 | 516.6182 | 175.6502 |
+  | 4 | 596.9695 | 447.4241 | 169.6803 |
+  | 5 | 525.3331 | 386.5332 | 286.0345 |
+  | 6 | 462.2932 | 332.9492 | 246.3824 |
+  | 7 | 406.8180 | 285.7953 | 211.4885 |
+  | 8 | 357.9998 | 244.2998 | 180.7819 |
 
-- rrt_uplift_zero_respected: rrtUpliptPct 0 is respected (not replaced by the default).
-  royalty flat 10 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 34 percent, RRT 40 percent, minimum tax 0 percent, RRT uplift 0 percent. Total tax 2607.5549, total contractor NCF 843.4598 $MM.
+- rrt_uplift_zero_respected: rrtUpliftPct 0 is respected (not replaced by the default). The pool is then the capex itself, 1000, relieved once (EC2-6).
+  royalty flat 10 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 34 percent, RRT 40 percent, minimum tax 0 percent, RRT uplift 0 percent. Total tax 2207.5549, total contractor NCF 1243.4598 $MM.
 
   | year | grossRevenue | profitOil | tax |
   | --- | --- | --- | --- |
   | 1 | 876.0000 | 0.0000 | 0.0000 |
-  | 2 | 770.8800 | 279.8480 | 207.0875 |
-  | 3 | 678.3744 | 516.6182 | 382.2975 |
-  | 4 | 596.9695 | 447.4241 | 331.0938 |
+  | 2 | 770.8800 | 279.8480 | 95.1483 |
+  | 3 | 678.3744 | 516.6182 | 175.6502 |
+  | 4 | 596.9695 | 447.4241 | 249.6803 |
   | 5 | 525.3331 | 386.5332 | 286.0345 |
   | 6 | 462.2932 | 332.9492 | 246.3824 |
   | 7 | 406.8180 | 285.7953 | 211.4885 |
@@ -807,22 +821,32 @@ What the stack leaves out. There is no loss carryforward, so a year whose base i
 | 25 | 100.4166 | 112.2692 | 1.118034 |
 | 30 | 57.0224 | 65.0156 | 1.140175 |
 
-`calculateIRR` is a bisection, and it is documented as robust with no artificial cap. It returns 0 when the flows never change sign, and 0 when the NPV at a rate of zero is not above zero, so a project whose only root is negative reports 0 rather than a negative rate. Otherwise it brackets by doubling from 100 percent, ten times, and if the NPV is still positive at the top of that range it REPORTS THE BOUND rather than a root. Then 80 bisections.
+`calculateIRR` follows the shared contract in `engines/economics/irrContract.js` (EC2-5, owner decision 2026-09-15), the one the screening engine uses. It searches the band from -99 to 1000 percent and returns a number only when exactly one rate in that band zeroes the NPV; a negative root inside the band is reported as the negative rate it is. Otherwise it returns null and `calculateIRRResult` says why: `no-sign-change` when the flows never change sign, `no-root` when no rate in the band zeroes the NPV, `above-clamp` when the only root is above the band, and `multiple-roots` when several are, with `irrRoots` listing the ones inside and `irrRootAboveBand` flagging one beyond. The retired bisection returned 0 for a flow that never changes sign and for one whose only root is negative, and reported its 102400 percent bracket as a rate.
 
-The five published IRR cases, engine value and the golden's own expectation:
+The band as irrContract.js declares it: IRR_BAND_LOWER_PCT -99.0000 percent and IRR_BAND_UPPER_PCT 1000.0000 percent. Neither edge is ever returned as a rate.
 
-- irr_all_positive: Suite test: no sign change, IRR 0.
-  engine 0.0000 percent, golden expects 0.0000 percent. NPV at 10 percent is 25.6198.
+The 9 published IRR cases, engine value and the golden's own expectation:
+
+- irr_all_positive_no_sign_change: Suite test: no sign change, so no IRR exists: null with status no-sign-change (EC2-5; the retired rule printed 0).
+  flows 10, 20; engine null (no-sign-change), golden expects null (no-sign-change). NPV at 10 percent is 25.6198.
 - irr_known_21pct_year_end: -100 then 121 at year-end discounting: (1 + r) = 1.21, IRR 21 percent.
-  engine 21.0000 percent, golden expects 21.0000 percent. NPV at 10 percent is 9.0909.
-- irr_npv0_negative: NPV at 0 percent is negative: the engine reports 0 rather than a negative rate.
-  engine 0.0000 percent, golden expects 0.0000 percent. NPV at 10 percent is -16.5289.
-- irr_beyond_bracket: -1 then 2000: the rate is 199900 percent, past the engine's 102400 percent bracket, so the engine reports the bracket. Both numbers pinned.
-  engine 102400.0000 percent, golden expects 102400.0000 percent, the true root is 199900.0000 percent (oracle). Disagreement pinned: bracket reported as the IRR. NPV at 10 percent is 1651.9835.
+  flows -100, 121; engine 21.0000, golden expects 21.0000. NPV at 10 percent is 9.0909.
+- irr_negative_root_reported: -100 then 90: NPV at 0 percent is negative and the only root is 1 + r = 0.9, IRR -10 percent, inside the band, so it IS reported (EC2-5; the retired rule printed 0).
+  flows -100, 90; engine -10.0000, golden expects -10.0000, the true root is -10.0000 percent (oracle). NPV at 10 percent is -16.5289.
+- irr_above_clamp_past_old_bracket: -1 then 2000: the root is 199900 percent, above the 1000 percent band, so null with status above-clamp (EC2-5; the retired rule reported its 102400 percent bracket as the rate).
+  flows -1, 2000; engine null (above-clamp; another root above the band), golden expects null (above-clamp; another root above the band), the true root is 199900.0000 percent (oracle). NPV at 10 percent is 1651.9835.
+- irr_above_clamp_inside_old_bracket: -100 then 1500: the root is 1400 percent, which the retired bisection reported as a rate; it is above the 1000 percent band, so null with status above-clamp.
+  flows -100, 1500; engine null (above-clamp; another root above the band), golden expects null (above-clamp; another root above the band), the true root is 1400.0000 percent (oracle). NPV at 10 percent is 1148.7603.
 - irr_three_period: -1000, 600, 600: the year-end IRR solves 1000 x^2 = 600 x + 600, x = 1/(1+r).
-  engine 13.0662 percent, golden expects 13.0662 percent. NPV at 10 percent is 37.5657.
+  flows -1000, 600, 600; engine 13.0662, golden expects 13.0662, the true root is 13.0662 percent (oracle). NPV at 10 percent is 37.5657.
+- irr_no_root_below_band: -100 then 0.5: the only root is 1 + r = 0.005, -99.5 percent, below the band; NPV is negative at both ends, so null with status no-root.
+  flows -100, 0.5; engine null (no-root), golden expects null (no-root), the true root is -99.5000 percent (oracle). NPV at 10 percent is -90.4959.
+- irr_root_above_band_with_one_inside: -5, 84, -64: with x = 1/(1+r), 64 x^2 - 84 x + 5 = 0 gives roots at -20 and 1500 percent. One is inside the band and one above it: null, multiple-roots, irrRoots lists -20 only, irrRootAboveBand true.
+  flows -5, 84, -64; engine null (multiple-roots; roots -20.0000; another root above the band), golden expects null (multiple-roots; roots -20.0000; another root above the band). NPV at 10 percent is 16.7919.
+- irr_multiple_roots_listed: -100, 230, -132: with x = 1/(1+r), 132 x^2 - 230 x + 100 = 0 gives x = 240/264 and 220/264, roots 10 and 20 percent; null with status multiple-roots and both listed.
+  flows -100, 230, -132; engine null (multiple-roots; roots 10.0000, 20.0000), golden expects null (multiple-roots; roots 10.0000, 20.0000). NPV at 10 percent is -0.0000.
 
-Two of the five are the failure modes. `irr_npv0_negative` has flows of -100 then 90, loses money at every rate, and reports 0 percent; a reader who takes 0 for "breaks even exactly" has it backwards. `irr_beyond_bracket` has flows of -1 then 2000, a true rate of 199900 percent, and reports 102400 percent, which is the bracket the doubling reached and not a root at all. Section 23 returns to it.
+Three of these are the retired failure modes. `irr_all_positive_no_sign_change` used to print 0 and is now null with the status no-sign-change. `irr_negative_root_reported` has flows of -100 then 90, loses money at every rate, used to print 0, and now reports its root, -10.0000 percent. `irr_above_clamp_past_old_bracket` has flows of -1 then 2000 and a true rate of 199900 percent; the retired bisection reported 102400 percent, the bracket its doubling reached, and the engine now returns null with the status above-clamp. Section 23 returns to it.
 
 # SECTION 17: The comparison and its summary (owned by Expert m01)
 
@@ -836,7 +860,7 @@ Regimes: "Nigerian PIA (PSC)", "Concessionary (Royalty/Tax)". Discount rate 10 p
 | rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Concessionary (Royalty/Tax) | 274.3670 | 37.4526 | 3 | 3 | 1040.6750 | 46.3452 |
-| 2 | Nigerian PIA (PSC) | 173.4150 | 26.2153 | 4 | 3 | 1247.0980 | 55.5380 |
+| 2 | Nigerian PIA (PSC) | 169.7176 | 26.1629 | 4 | 3 | 1269.4940 | 56.5354 |
 
 **cmp_all_templates_default_project**: All six templates on the default project.
 Regimes: "Nigeria - PIA (2021)", "Ghana - Deepwater", "Brazil - Concession", "USA - Gulf of Mexico", "Angola - Deepwater PSC", "Generic Royalty/Tax". Discount rate 10 percent.
@@ -845,8 +869,8 @@ Regimes: "Nigeria - PIA (2021)", "Ghana - Deepwater", "Brazil - Concession", "US
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Generic Royalty/Tax | 397.0445 | 44.6574 | 3 | 3 | 758.7514 | 33.7901 |
 | 2 | USA - Gulf of Mexico | 382.0660 | 40.2125 | 3 | 3 | 764.5528 | 34.0485 |
-| 3 | Brazil - Concession | 357.8728 | 43.0919 | 3 | 3 | 833.3812 | 37.1137 |
-| 4 | Angola - Deepwater PSC | 223.7100 | 32.5073 | 4 | 3 | 1200.2886 | 53.4534 |
+| 3 | Brazil - Concession | 287.2804 | 44.0823 | 3 | 3 | 1121.5184 | 49.9455 |
+| 4 | Angola - Deepwater PSC | 211.3787 | 32.3741 | 4 | 3 | 1263.7523 | 56.2797 |
 | 5 | Ghana - Deepwater | 172.7531 | 33.2329 | 3 | 3 | 1316.6067 | 58.6335 |
 | 6 | Nigeria - PIA (2021) | 154.8286 | 28.2129 | 4 | 3 | 1339.2784 | 59.6432 |
 
@@ -855,32 +879,32 @@ Regimes: "Nigeria - PIA (2021)", "Ghana - Deepwater", "Brazil - Concession", "US
 
 | rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Generic Royalty/Tax | 1262.3470 | 124.5777 | 2 | 2 | 1881.7626 | 36.5310 |
-| 2 | USA - Gulf of Mexico | 1232.0557 | 104.9545 | 2 | 2 | 1929.2089 | 37.4521 |
-| 3 | Brazil - Concession | 961.7819 | 107.2817 | 2 | 2 | 2338.6858 | 45.4014 |
-| 4 | Angola - Deepwater PSC | 600.1883 | 64.8632 | 3 | 2 | 3202.4544 | 62.1699 |
-| 5 | Ghana - Deepwater | 531.9201 | 88.3418 | 2 | 2 | 3252.0426 | 63.1326 |
-| 6 | Nigeria - PIA (2021) | 478.1985 | 69.5722 | 2 | 2 | 3372.6496 | 65.4739 |
+| 1 | Generic Royalty/Tax | 1262.3470 | null (multiple-roots; roots -20.4061, 124.5777) | 2 | 2 | 1881.7626 | 36.5310 |
+| 2 | USA - Gulf of Mexico | 1232.0557 | null (multiple-roots; roots -19.0970, 104.9545) | 2 | 2 | 1929.2089 | 37.4521 |
+| 3 | Brazil - Concession | 831.8148 | null (multiple-roots; roots -16.2620, 127.4602) | 2 | 2 | 2827.6743 | 54.8942 |
+| 4 | Angola - Deepwater PSC | 593.3430 | null (multiple-roots; roots -8.3932, 81.3020) | 2 | 2 | 3373.2753 | 65.4861 |
+| 5 | Ghana - Deepwater | 531.9201 | null (multiple-roots; roots -14.7956, 88.3418) | 2 | 2 | 3252.0426 | 63.1326 |
+| 6 | Nigeria - PIA (2021) | 478.1985 | null (multiple-roots; roots -12.1036, 69.5722) | 2 | 2 | 3372.6496 | 65.4739 |
 
 **cmp_flat_vs_complex**: The two Suite test regimes side by side.
 Regimes: "Flat", "Complex". Discount rate 10 percent.
 
 | rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Flat | 1262.3470 | 124.5777 | 2 | 2 | 1881.7626 | 36.5310 |
-| 2 | Complex | 709.3642 | 75.2565 | 2 | 2 | 2934.0177 | 56.9587 |
+| 1 | Flat | 1262.3470 | null (multiple-roots; roots -20.4061, 124.5777) | 2 | 2 | 1881.7626 | 36.5310 |
+| 2 | Complex | 657.4150 | null (multiple-roots; roots -12.4786, 75.2433) | 2 | 2 | 3087.2215 | 59.9329 |
 
-**cmp_never_recovers**: Templates on a project with capex 20000: nothing pays back, every IRR 0, the payback insight says so.
+**cmp_never_recovers**: Templates on a project with capex 20000: nothing pays back and every IRR is null with status no-root; the payback insight says so.
 Regimes: "Nigeria - PIA (2021)", "Ghana - Deepwater", "Brazil - Concession", "USA - Gulf of Mexico", "Angola - Deepwater PSC", "Generic Royalty/Tax". Discount rate 10 percent.
 
 | rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Brazil - Concession | -15354.6816 | 0.0000 | null | null | 700.1194 | 13.5916 |
-| 2 | Ghana - Deepwater | -15361.7226 | 0.0000 | null | null | 712.5465 | 13.8328 |
-| 3 | Generic Royalty/Tax | -15453.8510 | 0.0000 | null | null | 875.1492 | 16.9894 |
-| 4 | USA - Gulf of Mexico | -15701.7744 | 0.0000 | null | null | 1312.7238 | 25.4842 |
-| 5 | Nigeria - PIA (2021) | -15768.8129 | 0.0000 | null | null | 1431.0440 | 27.7811 |
-| 6 | Angola - Deepwater PSC | -15900.1132 | 0.0000 | null | null | 1662.7835 | 32.2800 |
+| 1 | Brazil - Concession | -15354.6816 | null (no-root) | null | null | 700.1194 | 13.5916 |
+| 2 | Ghana - Deepwater | -15361.7226 | null (no-root) | null | null | 712.5465 | 13.8328 |
+| 3 | Generic Royalty/Tax | -15453.8510 | null (no-root) | null | null | 875.1492 | 16.9894 |
+| 4 | USA - Gulf of Mexico | -15701.7744 | null (no-root) | null | null | 1312.7238 | 25.4842 |
+| 5 | Nigeria - PIA (2021) | -15768.8129 | null (no-root) | null | null | 1431.0440 | 27.7811 |
+| 6 | Angola - Deepwater PSC | -15900.1132 | null (no-root) | null | null | 1662.7835 | 32.2800 |
 
 **cmp_angola_capex_x3**: EC2-1: Angola - Deepwater PSC on the default project with every capex line tripled. Profit is not positive at 40 (undefined, null), small and positive at 50 (exceeds, 2223 percent) and 60, and a share from 70 up (85.6015).
 Regimes: "Angola - Deepwater PSC". Discount rate 10 percent.
@@ -907,26 +931,26 @@ All six templates on the DEFAULT PROJECT, government share percent at each swept
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Nigeria - PIA (2021) | 69.6344 | 73.5963 | 74.2694 | 76.7282 | 78.2773 | 78.6226 | 79.2134 | 79.5507 | 79.7764 | 10.1420 |
 | Ghana - Deepwater | 69.9215 | 72.0008 | 74.3024 | 75.4293 | 76.7284 | 76.4647 | 77.2412 | 77.0702 | 77.8175 | 7.8960 |
-| Brazil - Concession | 50.0329 | 46.7731 | 46.6052 | 47.7450 | 49.9607 | 51.8024 | 52.8980 | 54.5626 | 56.0720 | 6.0391 |
+| Brazil - Concession | 50.0329 | 55.4903 | 61.0188 | 64.2526 | 66.3747 | 67.8744 | 68.9904 | 69.8534 | 70.5405 | 20.5076 |
 | USA - Gulf of Mexico | 56.9830 | 49.4713 | 45.8941 | 43.8018 | 42.4286 | 41.4583 | 40.7362 | 40.1778 | 39.7332 | -17.2498 |
-| Angola - Deepwater PSC | 63.4520 | 59.5510 | 65.7226 | 68.7654 | 70.9486 | 72.5065 | 73.7920 | 74.1974 | 75.5825 | 12.1305 |
+| Angola - Deepwater PSC | 63.4520 | 59.5510 | 66.9424 | 72.4012 | 76.0199 | 78.4920 | 80.3565 | 81.6019 | 83.1392 | 19.6873 |
 | Generic Royalty/Tax | 51.2558 | 46.8185 | 44.7054 | 43.4694 | 42.6583 | 42.0851 | 41.6585 | 41.3287 | 41.0660 | -10.1897 |
 
-The nine published price-sweep cases run ONE regime alone on the default project. READ THE NAME CAREFULLY: it is the Designer's own default regime, id 1, "Nigerian PIA (PSC)", and it is NOT the "Nigeria - PIA (2021)" TEMPLATE. The two share a country and nothing else. The Designer regime recovers cost at 70 percent against the template's 80, splits profit oil 60 percent from R 1 and 50 percent from R 1.5 against the template's three tranches, and charges royalty 12.5 percent from 60 USD/bbl and 15 percent from 80 USD/bbl against the template's 7.5 percent from 0 and 10 percent from 50. On the default project the template returns NPV 154.8286 and the Designer regime 173.4150. Anything keyed to "the PIA template" on these sixteen sweep cases is mis-keyed.
+The nine published price-sweep cases run ONE regime alone on the default project. READ THE NAME CAREFULLY: it is the Designer's own default regime, id 1, "Nigerian PIA (PSC)", and it is NOT the "Nigeria - PIA (2021)" TEMPLATE. The two share a country and nothing else. The Designer regime recovers cost at 70 percent against the template's 80, splits profit oil 60 percent from R 1 and 50 percent from R 1.5 against the template's three tranches, and charges royalty 12.5 percent from 60 USD/bbl and 15 percent from 80 USD/bbl against the template's 7.5 percent from 0 and 10 percent from 50. On the default project the template returns NPV 154.8286 and the Designer regime 169.7176. Anything keyed to "the PIA template" on these sixteen sweep cases is mis-keyed.
 
 The nine cases pin the whole result at each price, not only the share:
 
 | case | npv | irr | totalContractorNCF | totalGovTake | paybackYear | rFactorPayoutYear | finalUnrecoveredPool |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| price_40_pia_default | -51.1673 | 6.6994 | 176.7787 | 481.9270 | 9 | 5 | 5.9578 |
+| price_40_pia_default | -51.1673 | null (multiple-roots) | 176.7787 | 481.9270 | 9 | 5 | 5.9578 |
 | price_50_pia_default | 34.9271 | 12.6081 | 288.4069 | 732.5583 | 6 | 4 | 0.7642 |
 | price_60_pia_default | 107.7526 | 19.0202 | 397.2743 | 985.9503 | 5 | 3 | 0.0000 |
-| price_70_pia_default | 173.4150 | 26.2153 | 498.3862 | 1247.0980 | 4 | 3 | 0.0000 |
-| price_80_pia_default | 226.7999 | 32.7410 | 592.5344 | 1515.2092 | 4 | 2 | 0.0000 |
-| price_90_pia_default | 286.5859 | 41.5870 | 697.0946 | 1772.9085 | 3 | 2 | 0.0000 |
-| price_100_pia_default | 347.4937 | 52.4218 | 804.6219 | 2027.6406 | 3 | 2 | 0.0000 |
-| price_110_pia_default | 404.9801 | 64.8969 | 908.9574 | 2285.5646 | 3 | 2 | 0.0000 |
-| price_120_pia_default | 452.5105 | 78.2522 | 1000.3405 | 2556.4410 | 2 | 2 | 0.0000 |
+| price_70_pia_default | 169.7176 | 26.1629 | 475.9901 | 1269.4940 | 4 | 3 | 0.0000 |
+| price_80_pia_default | 216.2344 | 32.5939 | 543.2388 | 1564.5047 | 4 | 2 | 0.0000 |
+| price_90_pia_default | 266.5716 | 41.3255 | 617.9247 | 1852.0784 | 3 | 2 | 0.0000 |
+| price_100_pia_default | 317.1934 | 52.1437 | 695.7890 | 2136.4735 | 3 | 2 | 0.0000 |
+| price_110_pia_default | 365.3942 | 64.7918 | 773.6534 | 2420.8686 | 3 | 2 | 0.0000 |
+| price_120_pia_default | 408.0752 | 79.0360 | 846.3067 | 2710.4748 | 2 | 2 | 0.0000 |
 
 The states, the climb over the whole sweep, the climb over the COMMON SHARE WINDOW the price verdict ranks (Section 21), and the verdict, on three published comparisons:
 
@@ -936,12 +960,12 @@ The states, the climb over the whole sweep, the climb over the COMMON SHARE WIND
 | --- | --- | --- | --- |
 | Nigeria - PIA (2021) | share, share, share, share, share, share, share, share, share | 10.1420 | 10.1420 |
 | Ghana - Deepwater | share, share, share, share, share, share, share, share, share | 7.8960 | 7.8960 |
-| Brazil - Concession | share, share, share, share, share, share, share, share, share | 6.0391 | 6.0391 |
+| Brazil - Concession | share, share, share, share, share, share, share, share, share | 20.5076 | 20.5076 |
 | USA - Gulf of Mexico | share, share, share, share, share, share, share, share, share | -17.2498 | -17.2498 |
-| Angola - Deepwater PSC | share, share, share, share, share, share, share, share, share | 12.1305 | 12.1305 |
+| Angola - Deepwater PSC | share, share, share, share, share, share, share, share, share | 19.6873 | 19.6873 |
 | Generic Royalty/Tax | share, share, share, share, share, share, share, share, share | -10.1897 | -10.1897 |
 
-- `price`: "Angola - Deepwater PSC" is the most progressive: its government take (undiscounted) rises 12.1 percentage points across the swept price range, so it captures upside fastest.
+- `price`: No regime can be ranked across this sweep: the steepest climb in government take (undiscounted), 20.5 percentage points for "Brazil - Concession", is within one percentage point of the next, 19.7 for "Angola - Deepwater PSC". "Nigeria - PIA (2021)", "Ghana - Deepwater", "Brazil - Concession", "USA - Gulf of Mexico", "Angola - Deepwater PSC" and "Generic Royalty/Tax" are already economic at 40 USD per bbl, the lowest price swept.
 
 **cmp_all_templates_test_project**, common share window 50 to 120 USD per bbl, 8 prices:
 
@@ -949,21 +973,21 @@ The states, the climb over the whole sweep, the climb over the COMMON SHARE WIND
 | --- | --- | --- | --- |
 | Nigeria - PIA (2021) | exceeds, share, share, share, share, share, share, share, share | -27.2520 | -6.8624 |
 | Ghana - Deepwater | exceeds, share, share, share, share, share, share, share, share | -26.7801 | -2.5353 |
-| Brazil - Concession | share, share, share, share, share, share, share, share, share | -23.6720 | 2.0567 |
+| Brazil - Concession | share, share, share, share, share, share, share, share, share | -13.4045 | 11.2181 |
 | USA - Gulf of Mexico | exceeds, share, share, share, share, share, share, share, share | -70.0730 | -25.4837 |
-| Angola - Deepwater PSC | exceeds, share, share, share, share, share, share, share, share | -49.1305 | -0.3641 |
+| Angola - Deepwater PSC | exceeds, share, share, share, share, share, share, share, share | -44.5025 | 2.6159 |
 | Generic Royalty/Tax | share, share, share, share, share, share, share, share, share | -49.0246 | -17.3596 |
 
-- `price`: "Brazil - Concession" is the most progressive: its government take (undiscounted) rises 2.1 percentage points between 50 and 120 USD per bbl, the prices at which every regime's government take is within 0 to 100 percent, so it captures upside fastest.
+- `price`: "Brazil - Concession" is the most progressive: its government take (undiscounted) rises 11.2 percentage points between 50 and 120 USD per bbl, the prices at which every regime's government take is within 0 to 100 percent, so it captures upside fastest.
 
 **cmp_designer_defaults**, common share window 40 to 120 USD per bbl, 9 prices:
 
 | regime | states at 40, 50, 60, 70, 80, 90, 100, 110, 120 | climb, last minus first (derived) | climb over the window (derived) |
 | --- | --- | --- | --- |
-| Nigerian PIA (PSC) | share, share, share, share, share, share, share, share, share | -1.2876 | -1.2876 |
+| Nigerian PIA (PSC) | share, share, share, share, share, share, share, share, share | 3.0431 | 3.0431 |
 | Concessionary (Royalty/Tax) | share, share, share, share, share, share, share, share, share | -7.2784 | -7.2784 |
 
-- `price`: No regime is progressive: every government take (undiscounted) falls across the swept price range. "Nigerian PIA (PSC)" is the least regressive, falling 1.3 percentage points.
+- `price`: "Nigerian PIA (PSC)" is the most progressive: its government take (undiscounted) rises 3.0 percentage points across the swept price range, so it captures upside fastest.
 
 A regime whose share RISES with price is progressive: it captures the upside. A regime whose share FALLS with price is regressive, and the flat-royalty concessions in this template set are exactly that, because a fixed royalty rate and a fixed tax rate on a growing profit give the government a shrinking fraction once cost recovery has been paid off.
 
@@ -976,7 +1000,7 @@ This is finding F2 of the oracle. The summary table computes government take ove
 | regime | effectiveTaxRate in the summary table (capex added back) | the price sweep at the same price (no add-back) | difference, percentage points (derived) |
 | --- | --- | --- | --- |
 | Concessionary (Royalty/Tax) | 46.3452 | 59.6210 | 13.2758 |
-| Nigerian PIA (PSC) | 55.5380 | 71.4471 | 15.9091 |
+| Nigerian PIA (PSC) | 56.5354 | 72.7302 | 16.1948 |
 
 **cmp_all_templates_default_project**, at the deck's own first-year price of 70 USD per bbl (sweep label index 3):
 
@@ -984,8 +1008,8 @@ This is finding F2 of the oracle. The summary table computes government take ove
 | --- | --- | --- | --- |
 | Generic Royalty/Tax | 33.7901 | 43.4694 | 9.6793 |
 | USA - Gulf of Mexico | 34.0485 | 43.8018 | 9.7533 |
-| Brazil - Concession | 37.1137 | 47.7450 | 10.6313 |
-| Angola - Deepwater PSC | 53.4534 | 68.7654 | 15.3119 |
+| Brazil - Concession | 49.9455 | 64.2526 | 14.3071 |
+| Angola - Deepwater PSC | 56.2797 | 72.4012 | 16.1215 |
 | Ghana - Deepwater | 58.6335 | 75.4293 | 16.7958 |
 | Nigeria - PIA (2021) | 59.6432 | 76.7282 | 17.0850 |
 
@@ -997,18 +1021,18 @@ The sweep's definition has a second problem that the summary's does not, because
 
 This is finding F1. The capex sweep is written as a for loop from a multiplier of 0.8 to 1.5 in steps of 0.1, and its axis is labelled 0.8 to 1.5. Adding 0.1 to a binary floating point number does not land on 1.5: the accumulated multiplier reaches 1.5000000000000004, which fails the `<= 1.5` test, so the sweep has SEVEN points and its last label reads "1.4".
 
-The engine returns 7 labels: 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4.
+The engine returns 8 labels: 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5.
 
 All six templates on the DEFAULT PROJECT, contractor NPV at each swept capex multiplier, and the eighth point the loop never reaches computed by calling the engine directly at a multiplier of 1.5:
 
-| regime | x0.8 | x0.9 | x1.0 | x1.1 | x1.2 | x1.3 | x1.4 | x1.5, called directly | loss over the SEVEN swept points, 0.8 to 1.4 (derived) | loss over EIGHT points, 0.8 to 1.5 (derived) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 176.9424 | 161.3220 | 154.8286 | 132.7266 | 121.6623 | 97.0074 | 79.1811 | 58.5739 | 97.7613 | 118.3685 |
-| Ghana - Deepwater | 195.6257 | 185.0914 | 172.7531 | 160.6465 | 143.3384 | 129.9510 | 107.3627 | 85.7833 | 88.2631 | 109.8425 |
-| Brazil - Concession | 369.1782 | 367.7987 | 357.8728 | 335.6628 | 318.1476 | 291.3317 | 260.5129 | 228.3016 | 108.6653 | 140.8766 |
-| USA - Gulf of Mexico | 457.1975 | 419.6318 | 382.0660 | 343.9464 | 305.6635 | 267.3371 | 228.4023 | 189.4674 | 228.7953 | 267.7301 |
-| Angola - Deepwater PSC | 232.3129 | 238.0330 | 223.7100 | 214.0834 | 191.4408 | 174.9866 | 147.4539 | 124.9212 | 84.8591 | 107.3918 |
-| Generic Royalty/Tax | 465.4141 | 431.2293 | 397.0445 | 362.8597 | 327.8018 | 292.5924 | 257.3831 | 221.3360 | 208.0310 | 244.0782 |
+| regime | x0.8 | x0.9 | x1.0 | x1.1 | x1.2 | x1.3 | x1.4 | x1.5 | x1.5, called directly | loss over the SEVEN swept points, 0.8 to 1.4 (derived) | loss over EIGHT points, 0.8 to 1.5 (derived) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Nigeria - PIA (2021) | 176.9424 | 161.3220 | 154.8286 | 132.7266 | 121.6623 | 97.0074 | 79.1811 | 58.5739 | 58.5739 | 118.3685 | 118.3685 |
+| Ghana - Deepwater | 195.6257 | 185.0914 | 172.7531 | 160.6465 | 143.3384 | 129.9510 | 107.3627 | 85.7833 | 85.7833 | 109.8425 | 109.8425 |
+| Brazil - Concession | 304.7089 | 296.9901 | 287.2804 | 275.6317 | 261.4250 | 244.4347 | 225.4505 | 203.9903 | 203.9903 | 100.7185 | 100.7185 |
+| USA - Gulf of Mexico | 457.1975 | 419.6318 | 382.0660 | 343.9464 | 305.6635 | 267.3371 | 228.4023 | 189.4674 | 189.4674 | 267.7301 | 267.7301 |
+| Angola - Deepwater PSC | 213.5335 | 218.7874 | 211.3787 | 206.8935 | 189.9459 | 174.9866 | 147.4539 | 124.9212 | 124.9212 | 88.6123 | 88.6123 |
+| Generic Royalty/Tax | 465.4141 | 431.2293 | 397.0445 | 362.8597 | 327.8018 | 292.5924 | 257.3831 | 221.3360 | 221.3360 | 244.0782 | 244.0782 |
 
 The golden publishes the seven engine points as `engineCapexPoints` and the seven engine losses as `capexLossesAsEngine`, beside the oracle's eight point sweep, so both are pinned and a silent change to either is caught.
 
@@ -1016,13 +1040,15 @@ The seven published capex-sweep cases run the same Designer default regime as th
 
 | case | npv | irr | totalContractorNCF | totalGovTake | paybackYear | rFactorPayoutYear |
 | --- | --- | --- | --- | --- | --- | --- |
-| capex_0.7_pia_default | 240.3937 | 52.6023 | 545.7223 | 1349.7619 | 3 | 2 |
-| capex_0.8_pia_default | 218.5119 | 39.9569 | 529.3487 | 1316.1355 | 3 | 2 |
-| capex_0.9_pia_default | 198.2887 | 32.2084 | 515.8862 | 1279.5980 | 4 | 2 |
-| capex_1.0_pia_default | 173.4150 | 26.2153 | 498.3862 | 1247.0980 | 4 | 3 |
-| capex_1.1_pia_default | 150.6191 | 22.0913 | 484.5153 | 1210.9688 | 4 | 3 |
+| capex_0.7_pia_default | 220.1703 | 52.3347 | 474.6062 | 1420.8779 | 3 | 2 |
+| capex_0.8_pia_default | 204.6839 | 39.7238 | 474.1062 | 1371.3779 | 3 | 2 |
+| capex_0.9_pia_default | 189.9756 | 32.0803 | 476.4901 | 1318.9940 | 4 | 2 |
+| capex_1.0_pia_default | 169.7176 | 26.1629 | 475.9901 | 1269.4940 | 4 | 3 |
+| capex_1.1_pia_default | 149.8784 | 22.0822 | 478.0823 | 1217.4018 | 4 | 3 |
 | capex_1.2_pia_default | 123.6342 | 18.6242 | 467.0153 | 1178.4688 | 5 | 3 |
 | capex_1.3_pia_default | 98.2520 | 16.0479 | 453.0277 | 1142.4564 | 5 | 4 |
+| capex_1.4_pia_default | 69.4751 | 13.8121 | 435.5277 | 1109.9564 | 6 | 4 |
+| capex_1.5_pia_default | 41.2671 | 12.0333 | 421.1846 | 1074.2995 | 6 | 4 |
 
 What "resilience to cost overrun" therefore measures is the NPV given up between a 20 percent UNDERSPEND and a 40 percent overrun, not the 50 percent overrun the axis promises. The verdict sentence is not false, it is answering a narrower question than the label on the chart.
 
@@ -1035,81 +1061,158 @@ A small inconsistency worth noticing rather than repeating, because it is in the
 Every published insights case, with the sentence the engine returns today:
 
 **insights_suite**: Suite test summary: Beta pays back fastest and collects most; Beta resilient; Beta progressive.
-  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
   - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
-  - `government` / Best for the government: "Beta" collects the most, $900.0MM against $400.0MM for the next highest, "Alpha".
-  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
 
 **insights_flipped**: Beta ranked first by NPV: government verdict still follows the take.
-  - `npv` / Best for the contractor: "Beta" delivers the highest contractor NPV at $300.0MM, with an IRR of 18.0%.
+  - `npv` / Best for the contractor: "Beta" delivers the highest contractor NPV at 300.0 million USD, with an IRR of 18.0%.
   - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
-  - `government` / Best for the government: "Beta" collects the most, $900.0MM against $400.0MM for the next highest, "Alpha".
-  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
 
 **insights_never_pays_back**: Every paybackPeriod null.
-  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
   - `payback` / Capital recovery: No regime pays back within the project life on these inputs.
-  - `government` / Best for the government: "Beta" collects the most, $900.0MM against $400.0MM for the next highest, "Alpha".
-  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
 
 **insights_single_regime**: One regime: no sweep verdicts, government sentence in its single form.
-  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
   - `payback` / Fastest capital recovery: "Alpha" pays back in year 6. No other regime pays back within the project life.
-  - `government` / Best for the government: "Alpha" collects $400.0MM in total government cash flow.
+  - `government` / Best for the government: "Alpha" collects 400.0 million USD in total government cash flow.
 
-**insights_ties**: Ties on payback and government take: strict comparisons keep the FIRST of tied regimes.
-  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.
-  - `payback` / Fastest capital recovery: "Alpha" pays back in year 4, against year 4 for "Beta".
-  - `government` / Best for the government: "Alpha" collects the most, $900.0MM against $900.0MM for the next highest, "Beta".
-  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+**insights_ties**: Ties on payback and government take. Payback names BOTH regimes at year 4 (EC2-10); the government verdict still keeps the first of the tied regimes.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
+  - `payback` / Fastest capital recovery: "Alpha" and "Beta" both pay back in year 4.
+  - `government` / Best for the government: "Alpha" collects the most, 900.0 million USD against 900.0 million USD for the next highest, "Beta".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_payback_tie_with_slower**: EC2-10: Alpha and Beta both pay back in year 4 and Gamma in year 6; both winners are named.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
+  - `payback` / Fastest capital recovery: "Alpha" and "Beta" pay back in year 4, against year 6 for "Gamma".
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 500.0 million USD for the next highest, "Gamma".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_payback_tie_with_nonpayer**: EC2-10: Alpha and Beta tie at year 4 and Gamma never pays back.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
+  - `payback` / Fastest capital recovery: "Alpha" and "Beta" pay back in year 4. No other regime pays back within the project life.
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 500.0 million USD for the next highest, "Gamma".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_capex_all_tied**: EC2-4: losses of 100 and 100.05 million USD are within 0.1 of each other, so no regime is ranked.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
+  - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: No regime can be ranked on resilience to cost overrun: over the swept capex range "Alpha" and "Beta" give up 100.0 million USD each of contractor NPV, within 0.1 million USD of each other.
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_capex_least_end_tied**: EC2-4: Alpha 50 and Beta 50.04 tie at the least end and are named together; Gamma 90 is named alone at the most end.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
+  - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 500.0 million USD for the next highest, "Gamma".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Alpha" and "Beta" give up the least contractor NPV (50.0 million USD each); "Gamma" gives up the most (90.0 million USD). Regimes named together are within 0.1 million USD of each other, so they are not ranked.
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_capex_one_step_ranks**: EC2-4: a lead of one printed step, 50 against 50.1, ranks (the lead in binary is 0.10000000000000142).
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
+  - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Alpha" gives up the least contractor NPV (50.0 million USD) and "Beta" the most (50.1 million USD).
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_capex_ends_meet**: EC2-4: 10, 10.06 and 10.12: the least end ties 10 with 10.06 and the most end ties 10.12 with 10.06; the ends share Beta, so nothing is ranked.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
+  - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 500.0 million USD for the next highest, "Gamma".
+  - `capex` / Resilience to cost overrun: No regime can be ranked on resilience to cost overrun: over the swept capex range "Alpha", "Beta" and "Gamma" give up between 10.0 million USD and 10.1 million USD of contractor NPV, within 0.1 million USD of each other.
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_irr_no_sign_change**: EC2-5: the contractor sentence states that no IRR exists.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with no IRR because its contractor cash flow never changes sign.
+  - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_irr_no_root**: EC2-5: no root in the band.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with no IRR because no rate from -99 to 1000 percent brings its NPV to zero.
+  - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_irr_above_clamp**: EC2-5: above the band.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR above 1000 percent.
+  - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_irr_multiple_roots**: EC2-5: every root named.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with no single IRR because its NPV is zero at 10.0% and 20.0%.
+  - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
+  - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
+
+**insights_irr_null_without_status**: EC2-5: a null IRR with no status is not printed as n/a percent.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with no IRR defined.
+  - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
 
 **insights_rounding**: toFixed rounding pins: 0.25 is exact in binary and JavaScript rounds the tie up to 0.3 (Python would give 0.2); 2.45 is stored just above the tie so 2.5; 0.35 is stored just below so 0.3; 1.05 is stored just above so 1.1; -0.05 is stored just above the tie in magnitude so -0.1.
-  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at $0.3MM, with an IRR of 0.3%.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 0.3 million USD, with an IRR of 0.3%.
   - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
-  - `government` / Best for the government: "Alpha" collects the most, $2.5MM against $1.1MM for the next highest, "Beta".
-  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+  - `government` / Best for the government: "Alpha" collects the most, 2.5 million USD against 1.1 million USD for the next highest, "Beta".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
 
 **insights_empty**: No regimes: an empty list.
   (returns an empty list)
 
 **insights_price_two_points**: EC2-1: two swept prices are fewer than three, so no regime is ranked; both are economic at the lowest price.
-  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
   - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
-  - `government` / Best for the government: "Beta" collects the most, $900.0MM against $400.0MM for the next highest, "Alpha".
-  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price` / Response to higher prices: No regime can be ranked across this sweep: fewer than 3 swept prices give every regime a government take within 0 to 100 percent. "Alpha" and "Beta" are already economic at 40 USD per bbl, the lowest price swept.
 
 **insights_price_within_one_point**: EC2-1: climbs of 10 and 10.5 points are within one point, so no regime is ranked.
-  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
   - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
-  - `government` / Best for the government: "Beta" collects the most, $900.0MM against $400.0MM for the next highest, "Alpha".
-  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price` / Response to higher prices: No regime can be ranked across this sweep: the steepest climb in government take (undiscounted), 10.5 percentage points for "Beta", is within one percentage point of the next, 10.0 for "Alpha". "Alpha" and "Beta" are already economic at 40 USD per bbl, the lowest price swept.
 
 **insights_price_exceeds_excluded**: EC2-1: Alpha exceeds 100 at 40, so the climb runs 50 to 70 for both; an endpoint read from 40 would give Alpha -86.
-  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
   - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
-  - `government` / Best for the government: "Beta" collects the most, $900.0MM against $400.0MM for the next highest, "Alpha".
-  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price` / Response to higher prices: "Beta" is the most progressive: its government take (undiscounted) rises 21.0 percentage points between 50 and 70 USD per bbl, the prices at which every regime's government take is within 0 to 100 percent, so it captures upside fastest.
 
 **insights_price_never_economic**: EC2-1: every point undefined, so no rank and no regime economic at any swept price.
-  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
   - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
-  - `government` / Best for the government: "Beta" collects the most, $900.0MM against $400.0MM for the next highest, "Alpha".
-  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price` / Response to higher prices: No regime can be ranked across this sweep: fewer than 3 swept prices give every regime a government take within 0 to 100 percent. No regime is economic at any swept price from 40 to 60 USD per bbl.
 
 **insights_price_first_economic**: EC2-1: one common share price is fewer than three; Beta is the first regime economic, at 50.
-  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.
+  - `npv` / Best for the contractor: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
   - `payback` / Fastest capital recovery: "Beta" pays back in year 4, against year 6 for "Alpha".
-  - `government` / Best for the government: "Beta" collects the most, $900.0MM against $400.0MM for the next highest, "Alpha".
-  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+  - `government` / Best for the government: "Beta" collects the most, 900.0 million USD against 400.0 million USD for the next highest, "Alpha".
+  - `capex` / Resilience to cost overrun: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price` / Response to higher prices: No regime can be ranked across this sweep: fewer than 3 swept prices give every regime a government take within 0 to 100 percent. The first regime to become economic is "Beta", at 50 USD per bbl.
 
 THE PRICE VERDICT SINCE EC2-1. It ranks the climb only over the longest run of consecutive swept prices at which EVERY regime's point is a share, the later run on a tie, so no climb starts or ends on an `exceeds` point or a null. It names a most progressive regime only when that run has at least three prices and the steepest climb leads the next by at least one percentage point. When the lead climb is not positive it names no progressive regime and calls the leader the least regressive. Otherwise it says no regime can be ranked across the sweep and names the first price at which a regime is economic, or says that none is.
@@ -1120,21 +1223,21 @@ Three shapes are worth naming. When no regime pays back, the payback verdict say
 
 This is finding F3. The capex verdict picks its winner with a strict less-than in a reduce, which returns the first element when two are equal and therefore breaks a tie by list order. The price verdict did the same until EC2-1, and now declines to rank when the lead is under one percentage point (Section 21). When the tie is not exact but differs in the fifteenth significant figure, the winner is whichever regime's rounding noise happened to be smallest, and the sentence names it with the confidence of a result.
 
-**cmp_never_recovers**: Templates on a project with capex 20000: nothing pays back, every IRR 0, the payback insight says so.
+**cmp_never_recovers**: Templates on a project with capex 20000: nothing pays back and every IRR is null with status no-root; the payback insight says so.
 
 | regime | npv | capex sweep first point | capex sweep last point | loss (derived) |
 | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | -15768.8129 | -12132.449284 | -23041.540193 | 10909.090909 |
-| Ghana - Deepwater | -15361.7226 | -11725.358969 | -22634.449878 | 10909.090909 |
-| Brazil - Concession | -15354.6816 | -11718.317943 | -22627.408852 | 10909.090909 |
-| USA - Gulf of Mexico | -15701.7744 | -12065.410782 | -22974.501691 | 10909.090909 |
-| Angola - Deepwater PSC | -15900.1132 | -12263.749547 | -23172.840456 | 10909.090909 |
-| Generic Royalty/Tax | -15453.8510 | -11817.487326 | -22726.578235 | 10909.090909 |
+| Nigeria - PIA (2021) | -15768.8129 | -12132.449284 | -24859.722012 | 12727.272727 |
+| Ghana - Deepwater | -15361.7226 | -11725.358969 | -24452.631697 | 12727.272727 |
+| Brazil - Concession | -15354.6816 | -11718.317943 | -24445.590670 | 12727.272727 |
+| USA - Gulf of Mexico | -15701.7744 | -12065.410782 | -24792.683509 | 12727.272727 |
+| Angola - Deepwater PSC | -15900.1132 | -12263.749547 | -24991.022274 | 12727.272727 |
+| Generic Royalty/Tax | -15453.8510 | -11817.487326 | -24544.760053 | 12727.272727 |
 
-- `npv`: "Brazil - Concession" delivers the highest contractor NPV at $-15354.7MM, with an IRR of 0.0%.
+- `npv`: "Brazil - Concession" delivers the highest contractor NPV at -15,354.7 million USD, with no IRR because no rate from -99 to 1000 percent brings its NPV to zero.
 - `payback`: No regime pays back within the project life on these inputs.
-- `government`: "Angola - Deepwater PSC" collects the most, $1662.8MM against $1431.0MM for the next highest, "Nigeria - PIA (2021)".
-- `capex`: Over the swept capex range, "USA - Gulf of Mexico" gives up the least contractor NPV ($10909.1MM) and "Nigeria - PIA (2021)" the most ($10909.1MM).
+- `government`: "Angola - Deepwater PSC" collects the most, 1,662.8 million USD against 1,431.0 million USD for the next highest, "Nigeria - PIA (2021)".
+- `capex`: No regime can be ranked on resilience to cost overrun: over the swept capex range "Nigeria - PIA (2021)", "Ghana - Deepwater", "Brazil - Concession", "USA - Gulf of Mexico", "Angola - Deepwater PSC" and "Generic Royalty/Tax" give up 12,727.3 million USD each of contractor NPV, within 0.1 million USD of each other.
 - `price`: No regime can be ranked across this sweep: fewer than 3 swept prices give every regime a government take within 0 to 100 percent. No regime is economic at any swept price from 40 to 120 USD per bbl.
 
 The golden records that the engine names "USA - Gulf of Mexico" as the most resilient here and the oracle's arithmetic names "Brazil - Concession". Neither is a result. The golden therefore carries the ranked quantities, `capexLossesAsEngine` and `priceClimbs`, and the gate treats a tie as a tie rather than pinning a winner.
@@ -1160,29 +1263,29 @@ The price verdict on the same case declines to rank: every point of every series
 
 No tie-break rule could be right here. A rule that picks the first, the last, the alphabetically smallest or the largest is picking among six answers that are the same answer. The only correct behaviour is to say so.
 
-**insights_ties**: Ties on payback and government take: strict comparisons keep the FIRST of tied regimes.
-  - `npv`: "Alpha" delivers the highest contractor NPV at $150.0MM, with an IRR of 22.0%.
-  - `payback`: "Alpha" pays back in year 4, against year 4 for "Beta".
-  - `government`: "Alpha" collects the most, $900.0MM against $900.0MM for the next highest, "Beta".
-  - `capex`: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+**insights_ties**: Ties on payback and government take. Payback names BOTH regimes at year 4 (EC2-10); the government verdict still keeps the first of the tied regimes.
+  - `npv`: "Alpha" delivers the highest contractor NPV at 150.0 million USD, with an IRR of 22.0%.
+  - `payback`: "Alpha" and "Beta" both pay back in year 4.
+  - `government`: "Alpha" collects the most, 900.0 million USD against 900.0 million USD for the next highest, "Beta".
+  - `capex`: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price`: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
 
 **insights_rounding**: toFixed rounding pins: 0.25 is exact in binary and JavaScript rounds the tie up to 0.3 (Python would give 0.2); 2.45 is stored just above the tie so 2.5; 0.35 is stored just below so 0.3; 1.05 is stored just above so 1.1; -0.05 is stored just above the tie in magnitude so -0.1.
-  - `npv`: "Alpha" delivers the highest contractor NPV at $0.3MM, with an IRR of 0.3%.
+  - `npv`: "Alpha" delivers the highest contractor NPV at 0.3 million USD, with an IRR of 0.3%.
   - `payback`: "Beta" pays back in year 4, against year 6 for "Alpha".
-  - `government`: "Alpha" collects the most, $2.5MM against $1.1MM for the next highest, "Beta".
-  - `capex`: Over the swept capex range, "Beta" gives up the least contractor NPV ($30.0MM) and "Alpha" the most ($100.0MM).
+  - `government`: "Alpha" collects the most, 2.5 million USD against 1.1 million USD for the next highest, "Beta".
+  - `capex`: Over the swept capex range, "Beta" gives up the least contractor NPV (30.0 million USD) and "Alpha" the most (100.0 million USD).
   - `price`: "Beta" is the most progressive: its government take (undiscounted) rises 25.0 percentage points across the swept price range, so it captures upside fastest.
 
 The reading rule that follows: a verdict naming a winner is only a verdict when the quantities it ranks are separated by more than the precision they are printed to. The insight sentences round to one decimal place. Two regimes whose losses print the same to one decimal have not been ranked by the sentence, whatever the sentence says.
 
 # SECTION 23: The IRR that reports its bracket (owned by Expert m05)
 
-This is finding F4. `calculateIRR` brackets the root by starting at 100 percent and doubling ten times, reaching 102400 percent. If the NPV is STILL positive there it returns 102400 rather than continuing, and 102400 is then printed as an internal rate of return.
+This is finding F4, repaired in EC2-5. The retired `calculateIRR` bracketed the root by starting at 100 percent and doubling ten times, reaching 102400 percent. If the NPV was STILL positive there it returned 102400 rather than continuing, and 102400 was printed as an internal rate of return. The repaired function searches the band from -99 to 1000 percent and returns null with the status above-clamp when the only root is above it.
 
-On the published case, cash flows [{"contractorNCF":-1,"year":1},{"contractorNCF":2000,"year":2}]: engine 102400.0000 percent, oracle 199900.0000 percent.
+On the published case irr_above_clamp_past_old_bracket, cash flows -1 then 2000: engine null (above-clamp; another root above the band), oracle root 199900.0000 percent. The retired bisection returned 102400.0000.
 
-The NPV of those flows at a range of rates, all from `calculateNPV`, which is what makes the bracket visible:
+The NPV of those flows at a range of rates, all from `calculateNPV`, which is what makes the old bracket visible:
 
 | rate percent | NPV |
 | --- | --- |
@@ -1194,26 +1297,28 @@ The NPV of those flows at a range of rates, all from `calculateNPV`, which is wh
 | 199900 | 0.0000 |
 | 400000 | -0.0001 |
 
-At real project scale this is a curiosity: no field returns two thousand times its outlay in one year. It matters as a shape. A solver that reports the edge of its own search as an answer is the same failure as the screening engine reporting its 1000 percent Newton clamp, and the tell is identical in both, a suspiciously round number where a rate should be. 102400 is 100 doubled ten times, 1000 is a clamp, and neither is a root.
+A root INSIDE the old bracket: irr_above_clamp_inside_old_bracket, cash flows -100 then 1500, oracle root 1400.0000 percent. The doubling would have reported that root as a rate, because it lies inside 102400. It is above the 1000 percent band, so the engine returns null (above-clamp; another root above the band).
 
-# SECTION 24: The uplift charged every year (owned by Expert m05)
+At real project scale this is a curiosity: no field returns two thousand times its outlay in one year. It matters as a shape. A solver that reported the edge of its own search as an answer was the same failure as the screening engine reporting its 1000 percent Newton clamp, and the tell was identical in both, a suspiciously round number where a rate should be. 102400 is 100 doubled ten times, 1000 was a clamp, and neither is a root. Both engines now share one contract and return null with a status instead.
 
-This is finding F5, and the engine calls it a screening approximation in its own comment. The RRT base is the contractor profit share MINUS `totalCapex * rrtUpliftPct / 100`, and that subtraction happens in EVERY one of the 25 years. At the default uplift of 20 percent, the relief given over the life is five times the whole capex.
+# SECTION 24: The uplift charged every year, retired (owned by Expert m05)
+
+This was finding F5, repaired in EC2-6 (owner decision 2026-09-15). The retired engine took the RRT base as the contractor profit share MINUS `totalCapex * rrtUpliftPct / 100` in EVERY one of the 25 years, so at the default uplift of 20 percent the relief given over the life was five times the whole capex. The repaired engine opens ONE uplifted pool, total capex times one plus the uplift, and draws it against the profit share in every year that share is positive, the relief being the lesser of the base and what is left of the pool. The pool is never refilled, so relief over the life can never exceed it.
 
 The "Brazil - Concession" instruments on the DEFAULT PROJECT with the RESOURCE RENT TAX ISOLATED, swept across the uplift. The template's own corporate income tax of 34 percent is set to ZERO in every row below, so the tax column is the resource rent tax alone at 40 percent and nothing else. Section 15 prints the same isolation beside the published stack, and the published stack itself (CIT 34 and RRT 40 together) is in Sections 10 and 11. Do not read these four columns as the regime's:
 
 | rrtUpliftPct | total tax | total contractor NCF | total government take | NPV at 10 percent | first year with a positive RRT charge |
 | --- | --- | --- | --- | --- | --- |
-| 0 | 590.7165 | 886.0748 | 859.4093 | 357.3957 | 3 |
-| 5 | 380.1066 | 1096.6848 | 648.7993 | 428.7343 | 3 |
-| 10 | 233.9725 | 1242.8188 | 502.6653 | 490.6506 | 3 |
-| 20 | 62.5794 | 1414.2120 | 331.2721 | 577.8474 | 4 |
-| 30 | 1.0282 | 1475.7631 | 269.7210 | 615.4871 | 4 |
-| 50 | 0.0000 | 1476.7914 | 268.6928 | 616.1893 | null |
+| 0 | 390.7165 | 1086.0748 | 659.4093 | 486.5404 | 6 |
+| 5 | 380.7165 | 1096.0748 | 649.4093 | 491.8603 | 7 |
+| 10 | 370.7165 | 1106.0748 | 639.4093 | 496.9919 | 7 |
+| 20 | 350.7165 | 1126.0748 | 619.4093 | 507.2550 | 7 |
+| 30 | 330.7165 | 1146.0748 | 599.4093 | 517.0923 | 8 |
+| 50 | 290.7165 | 1186.0748 | 559.4093 | 535.4514 | 9 |
 
-Total capex on this project is 500.0000 $MM, so a 20 percent uplift removes that fraction of it from the RRT base in each of 25 years. The two published cases pin the default and the override: rrt_uplift_default_20 and rrt_uplift_zero_respected, both in Section 15. (The golden's note on the second spells the parameter rrtUpliptPct. The parameter the engine reads is rrtUpliftPct; the note has a typo and the case itself is correct.)
+Total capex on this project is 500.0000 $MM, so a 20 percent uplift opens a pool of 1.2 times that, drawn down once and never refilled. The two published cases pin the default and the override: rrt_uplift_default_20 and rrt_uplift_zero_respected, both in Section 15.
 
-The point for a reader is not that the approximation is indefensible. It is that a parameter named "uplift percent" reads like a one-off capital uplift and behaves like an annual allowance, and the only way to know which it is is to sweep it and watch the tax move.
+The point for a reader is the shape under a sweep. Total tax falls by a fixed amount for each point of uplift while the first charged year slides later, which is what a pool looks like. An annual allowance would have cut the tax by far more per point. The only way to know which a parameter is, is to sweep it and watch the tax move.
 
 # SECTION 25: ODIDI under all six templates, end to end (owned by Associate m06, Professional m06 and Expert m06)
 
@@ -1287,23 +1392,23 @@ Every template on ODIDI, one line each:
 
 | regime | total revenue | total contractor NCF | total government take | total tax | total cost recovered | closing unrecovered pool | payback year | payout year | NPV at 12 percent | IRR percent |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 1236.1983 | 113.0236 | 312.9610 | 61.5480 | 779.6254 | 30.5883 | 7 | 6 | -43.7842 | 7.4603 |
-| Ghana - Deepwater | 1236.1983 | 117.1399 | 308.8447 | 74.7196 | 788.5887 | 21.6250 | 6 | 6 | -27.4074 | 8.7906 |
-| Brazil - Concession | 1236.1983 | 192.9896 | 232.9950 | 109.3752 | 790.8868 | 19.3270 | 6 | 6 | -5.8662 | 11.4055 |
-| USA - Gulf of Mexico | 1236.1983 | 148.3166 | 277.6679 | 45.8808 | 785.9313 | 24.2824 | 7 | 6 | -37.3123 | 8.4381 |
-| Angola - Deepwater PSC | 1236.1983 | 109.1947 | 316.7898 | 100.4364 | 618.0991 | 192.1146 | 8 | 6 | -58.1813 | 6.4905 |
-| Generic Royalty/Tax | 1236.1983 | 183.8652 | 242.1194 | 87.5946 | 789.6914 | 20.5223 | 7 | 6 | -13.3840 | 10.6728 |
+| Nigeria - PIA (2021) | 1236.1983 | 113.0236 | 312.9610 | 61.5480 | 779.6254 | 30.5883 | 7 | 6 | -43.7842 | null (multiple-roots; roots -14.9830, 7.4603) |
+| Ghana - Deepwater | 1236.1983 | 117.1399 | 308.8447 | 74.7196 | 788.5887 | 21.6250 | 6 | 6 | -27.4074 | null (multiple-roots; roots -15.5925, 8.7906) |
+| Brazil - Concession | 1236.1983 | 192.9896 | 232.9950 | 109.3752 | 790.8868 | 19.3270 | 6 | 6 | -5.8662 | null (multiple-roots; roots -18.7724, 11.4055) |
+| USA - Gulf of Mexico | 1236.1983 | 148.3166 | 277.6679 | 45.8808 | 785.9313 | 24.2824 | 7 | 6 | -37.3123 | null (multiple-roots; roots -17.0511, 8.4381) |
+| Angola - Deepwater PSC | 1236.1983 | 109.1947 | 316.7898 | 100.4364 | 618.0991 | 192.1146 | 8 | 6 | -58.1813 | null (multiple-roots; roots -14.5072, 6.4905) |
+| Generic Royalty/Tax | 1236.1983 | 183.8652 | 242.1194 | 87.5946 | 789.6914 | 20.5223 | 7 | 6 | -13.3840 | null (multiple-roots; roots -18.3591, 10.6728) |
 
 And the full comparison on ODIDI, with the sweeps and the verdicts the engine derives:
 
 | rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Brazil - Concession | -5.8662 | 11.4055 | 6 | 6 | 232.9950 | 27.5413 |
-| 2 | Generic Royalty/Tax | -13.3840 | 10.6728 | 7 | 6 | 242.1194 | 28.6198 |
-| 3 | Ghana - Deepwater | -27.4074 | 8.7906 | 6 | 6 | 308.8447 | 36.5071 |
-| 4 | USA - Gulf of Mexico | -37.3123 | 8.4381 | 7 | 6 | 277.6679 | 32.8219 |
-| 5 | Nigeria - PIA (2021) | -43.7842 | 7.4603 | 7 | 6 | 312.9610 | 36.9937 |
-| 6 | Angola - Deepwater PSC | -58.1813 | 6.4905 | 8 | 6 | 316.7898 | 37.4463 |
+| 1 | Brazil - Concession | -5.8662 | null (multiple-roots; roots -18.7724, 11.4055) | 6 | 6 | 232.9950 | 27.5413 |
+| 2 | Generic Royalty/Tax | -13.3840 | null (multiple-roots; roots -18.3591, 10.6728) | 7 | 6 | 242.1194 | 28.6198 |
+| 3 | Ghana - Deepwater | -27.4074 | null (multiple-roots; roots -15.5925, 8.7906) | 6 | 6 | 308.8447 | 36.5071 |
+| 4 | USA - Gulf of Mexico | -37.3123 | null (multiple-roots; roots -17.0511, 8.4381) | 7 | 6 | 277.6679 | 32.8219 |
+| 5 | Nigeria - PIA (2021) | -43.7842 | null (multiple-roots; roots -14.9830, 7.4603) | 7 | 6 | 312.9610 | 36.9937 |
+| 6 | Angola - Deepwater PSC | -58.1813 | null (multiple-roots; roots -14.5072, 6.4905) | 8 | 6 | 316.7898 | 37.4463 |
 
 Price sweep, government share percent at 40, 50, 60, 70, 80, 90, 100, 110, 120 USD per bbl:
 
@@ -1311,27 +1416,27 @@ Price sweep, government share percent at 40, 50, 60, 70, 80, 90, 100, 110, 120 U
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Nigeria - PIA (2021) | 79.2711 | 75.4528 | 75.8405 | 75.1077 | 77.0633 | 78.1716 | 78.0059 | 79.2372 | 79.4678 | 0.1968 |
 | Ghana - Deepwater | 74.9711 | 72.2734 | 73.2267 | 74.8944 | 75.3276 | 75.9015 | 76.2850 | 77.1423 | 76.9682 | 1.9971 |
-| Brazil - Concession | 61.5443 | 51.1116 | 47.9455 | 47.7606 | 48.4665 | 50.7245 | 51.9561 | 52.9260 | 54.6084 | -6.9358 |
+| Brazil - Concession | 61.5443 | 51.1116 | 55.2594 | 60.1317 | 63.1943 | 65.3184 | 66.8943 | 68.0875 | 69.0195 | 7.4752 |
 | USA - Gulf of Mexico | 78.5512 | 58.1144 | 50.8086 | 47.0817 | 44.8331 | 43.3338 | 42.2659 | 41.4713 | 40.8517 | -37.6994 |
-| Angola - Deepwater PSC | 88.8440 | 65.2613 | 62.1619 | 67.2138 | 69.1555 | 70.4804 | 72.5488 | 73.6990 | 74.0196 | -14.8244 |
+| Angola - Deepwater PSC | 88.8440 | 65.2613 | 62.1619 | 67.3690 | 71.9092 | 74.9348 | 77.4674 | 79.2427 | 80.4567 | -8.3874 |
 | Generic Royalty/Tax | 65.3928 | 52.3580 | 47.7613 | 45.4573 | 44.0881 | 43.1917 | 42.5613 | 42.0927 | 41.7268 | -23.6661 |
 
-Capex sweep, contractor NPV at multipliers 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4:
+Capex sweep, contractor NPV at multipliers 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5:
 
-| regime | x0.8 | x0.9 | x1.0 | x1.1 | x1.2 | x1.3 | x1.4 | loss over the swept points (derived) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 3.3937 | -18.9565 | -43.7842 | -73.0703 | -104.3452 | -137.8299 | -175.3299 | 178.7236 |
-| Ghana - Deepwater | 16.4714 | -4.5411 | -27.4074 | -52.1090 | -78.5659 | -105.6497 | -134.4307 | 150.9021 |
-| Brazil - Concession | 54.0480 | 24.3991 | -5.8662 | -36.6793 | -67.9867 | -99.8987 | -132.4638 | 186.5119 |
-| USA - Gulf of Mexico | 29.2303 | -3.8020 | -37.3123 | -71.1856 | -105.5077 | -140.3181 | -175.6457 | 204.8760 |
-| Angola - Deepwater PSC | 10.9118 | -22.8707 | -58.1813 | -92.7360 | -129.1957 | -166.6957 | -204.1957 | 215.1075 |
-| Generic Royalty/Tax | 48.5980 | 17.7848 | -13.3840 | -45.1844 | -77.4757 | -110.2956 | -143.7606 | 192.3586 |
+| regime | x0.8 | x0.9 | x1.0 | x1.1 | x1.2 | x1.3 | x1.4 | x1.5 | loss over the swept points (derived) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Nigeria - PIA (2021) | 3.3937 | -18.9565 | -43.7842 | -73.0703 | -104.3452 | -137.8299 | -175.3299 | -212.8299 | 216.2236 |
+| Ghana - Deepwater | 16.4714 | -4.5411 | -27.4074 | -52.1090 | -78.5659 | -105.6497 | -134.4307 | -164.7208 | 181.1922 |
+| Brazil - Concession | 53.9349 | 24.3991 | -5.8662 | -36.6793 | -67.9867 | -99.8987 | -132.4638 | -165.7162 | 219.6510 |
+| USA - Gulf of Mexico | 29.2303 | -3.8020 | -37.3123 | -71.1856 | -105.5077 | -140.3181 | -175.6457 | -211.4664 | 240.6967 |
+| Angola - Deepwater PSC | 10.9118 | -22.8707 | -58.1813 | -92.7360 | -129.1957 | -166.6957 | -204.1957 | -241.6957 | 252.6075 |
+| Generic Royalty/Tax | 48.5980 | 17.7848 | -13.3840 | -45.1844 | -77.4757 | -110.2956 | -143.7606 | -177.8770 | 226.4750 |
 
-- `npv` / Best for the contractor: "Brazil - Concession" delivers the highest contractor NPV at $-5.9MM, with an IRR of 11.4%.
-- `payback` / Fastest capital recovery: "Brazil - Concession" pays back in year 6, against year 8 for "Angola - Deepwater PSC".
-- `government` / Best for the government: "Angola - Deepwater PSC" collects the most, $316.8MM against $313.0MM for the next highest, "Nigeria - PIA (2021)".
-- `capex` / Resilience to cost overrun: Over the swept capex range, "Ghana - Deepwater" gives up the least contractor NPV ($150.9MM) and "Angola - Deepwater PSC" the most ($215.1MM).
-- `price` / Response to higher prices: "Ghana - Deepwater" is the most progressive: its government take (undiscounted) rises 2.0 percentage points across the swept price range, so it captures upside fastest.
+- `npv` / Best for the contractor: "Brazil - Concession" delivers the highest contractor NPV at -5.9 million USD, with no single IRR because its NPV is zero at -18.8% and 11.4%.
+- `payback` / Fastest capital recovery: "Brazil - Concession" and "Ghana - Deepwater" pay back in year 6, against year 8 for "Angola - Deepwater PSC".
+- `government` / Best for the government: "Angola - Deepwater PSC" collects the most, 316.8 million USD against 313.0 million USD for the next highest, "Nigeria - PIA (2021)".
+- `capex` / Resilience to cost overrun: Over the swept capex range, "Ghana - Deepwater" gives up the least contractor NPV (181.2 million USD) and "Angola - Deepwater PSC" the most (252.6 million USD).
+- `price` / Response to higher prices: "Brazil - Concession" is the most progressive: its government take (undiscounted) rises 7.5 percentage points across the swept price range, so it captures upside fastest.
 
 The PIA royalty tier changes inside ODIDI's life, which is the one thing none of the published template cases do, so the royalty column in Section 12 and the R factor column here move for two different reasons in the same field.
 
@@ -1347,7 +1452,7 @@ Three states live on one curve.
 
 The third case, on the published comparison built for it:
 
-**cmp_never_recovers**: Templates on a project with capex 20000: nothing pays back, every IRR 0, the payback insight says so. Capex is 10000.0000 drilling plus 10000.0000 facilities plus 0.0000 subsea $MM. The production is the TEST PROJECT's, 30000 bbl/d of oil declining 12 percent with no gas and no NGL, not the default project's three streams.
+**cmp_never_recovers**: Templates on a project with capex 20000: nothing pays back and every IRR is null with status no-root; the payback insight says so. Capex is 10000.0000 drilling plus 10000.0000 facilities plus 0.0000 subsea $MM. The production is the TEST PROJECT's, 30000 bbl/d of oil declining 12 percent with no gas and no NGL, not the default project's three streams.
 
 | regime | total government take | total contractor NCF | the two added (derived) | value and state the sweep returns, at every one of the nine prices |
 | --- | --- | --- | --- | --- |
@@ -1364,8 +1469,8 @@ The second case, reached by making the same project progressively more expensive
 
 | capex multiple | 40 | 50 | 60 | 70 | 80 | 90 | 100 | 110 | 120 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| x1 | 63.4520 | 59.5510 | 65.7226 | 68.7654 | 70.9486 | 72.5065 | 73.7920 | 74.1974 | 75.5825 |
-| x2 | 239.4592 | 89.4632 | 65.5264 | 56.3684 | 57.4398 | 61.8510 | 64.6858 | 67.2930 | 68.3499 |
+| x1 | 63.4520 | 59.5510 | 66.9424 | 72.4012 | 76.0199 | 78.4920 | 80.3565 | 81.6019 | 83.1392 |
+| x2 | 239.4592 | 89.4632 | 65.5264 | 56.3684 | 57.4398 | 61.8510 | 64.6858 | 67.2930 | 69.8215 |
 | x3 | null | 2223.0766 | 144.0692 | 85.6015 | 67.2176 | 59.3155 | 53.8218 | 56.8449 | 59.9462 |
 | x4 | null | null | null | 259.9538 | 119.1591 | 83.5274 | 68.4803 | 61.2595 | 56.4963 |
 
@@ -1388,12 +1493,12 @@ Payback in this engine is an INTEGER year, the first year cumulative contractor 
 | --- | --- | --- | --- |
 | 1 | Generic Royalty/Tax | 397.0445 | 3 |
 | 2 | USA - Gulf of Mexico | 382.0660 | 3 |
-| 3 | Brazil - Concession | 357.8728 | 3 |
-| 4 | Angola - Deepwater PSC | 223.7100 | 4 |
+| 3 | Brazil - Concession | 287.2804 | 3 |
+| 4 | Angola - Deepwater PSC | 211.3787 | 4 |
 | 5 | Ghana - Deepwater | 172.7531 | 3 |
 | 6 | Nigeria - PIA (2021) | 154.8286 | 4 |
 
-The verdict the engine returns: "Generic Royalty/Tax" pays back in year 3, against year 4 for "Angola - Deepwater PSC".
+The verdict the engine returns: "Generic Royalty/Tax", "USA - Gulf of Mexico", "Brazil - Concession" and "Ghana - Deepwater" pay back in year 3, against year 4 for "Angola - Deepwater PSC".
 
 Read it against the table. Four regimes pay back in year 3 and two in year 4, so "fastest capital recovery" has a four-way tie at the top and a two-way tie at the bottom. The regime the sentence names is the first of the four in summary order, and the summary is sorted by contractor NPV, so on any project where payback ties the payback verdict names WHICHEVER REGIME HAS THE HIGHEST NPV. It is the NPV ranking wearing a different label.
 
@@ -1401,7 +1506,7 @@ That is the exact claim `deriveInsights` was written to eliminate. The function 
 
 The capex and price verdicts have the same reduce and the same tie behaviour, and the golden records a case where the engine and the oracle name different winners on quantities that differ in the fifteenth figure. The payback verdict differs in one way that makes it worse rather than better: those two rank continuous quantities, where an exact tie is rare and a near-tie is the hazard, while THIS one ranks a small integer, where an exact tie is the normal case.
 
-The same six templates on the TEST PROJECT pay back in years 2, 2, 2, 3, 2, 2 reading down the summary, and the verdict reads: "Generic Royalty/Tax" pays back in year 2, against year 3 for "Angola - Deepwater PSC".
+The same six templates on the TEST PROJECT pay back in years 2, 2, 2, 2, 2, 2 reading down the summary, and the verdict reads: "Generic Royalty/Tax", "USA - Gulf of Mexico", "Brazil - Concession", "Angola - Deepwater PSC", "Ghana - Deepwater" and "Nigeria - PIA (2021)" all pay back in year 2.
 
 On the Designer's own two default regimes the two payback years differ, Concessionary (Royalty/Tax) year 3 and Nigerian PIA (PSC) year 4, so there the verdict is a real ranking: "Concessionary (Royalty/Tax)" pays back in year 3, against year 4 for "Nigerian PIA (PSC)".
 
@@ -1416,7 +1521,7 @@ THE SAME THING HAPPENS ON THE TEACHING FIELD, which matters because ODIDI is whe
 | 5 | Nigeria - PIA (2021) | -43.7842 | 7 |
 | 6 | Angola - Deepwater PSC | -58.1813 | 8 |
 
-The verdict: "Brazil - Concession" pays back in year 6, against year 8 for "Angola - Deepwater PSC".
+The verdict: "Brazil - Concession" and "Ghana - Deepwater" pay back in year 6, against year 8 for "Angola - Deepwater PSC".
 
 2 regimes pay back in year 6 on ODIDI: Brazil - Concession, Ghana - Deepwater. The verdict names one of them.
 
@@ -1437,7 +1542,7 @@ THE RATIO OF THE TWO IS A PROPERTY OF THE PROJECT. Revenue less opex (NR) and ca
 | regime | government cash flow | royalty | royalty share of government cash flow, percent (derived) | government take, undiscounted | state | government take, discounted at 10 percent | state | government share of net revenue, undiscounted | take minus share, percentage points (derived) | take over share (derived) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Concessionary (Royalty/Tax) | 1040.6750 | 335.8660 | 32.2739 | 59.6210 | share | 63.7418 | share | 46.3452 | 13.2758 | 1.286453 |
-| Nigerian PIA (PSC) | 1247.0980 | 360.1731 | 28.8809 | 71.4471 | share | 77.0828 | share | 55.5380 | 15.9091 | 1.286453 |
+| Nigerian PIA (PSC) | 1269.4940 | 360.1731 | 28.3714 | 72.7302 | share | 77.5715 | share | 56.5354 | 16.1948 | 1.286453 |
 
 **cmp_all_templates_default_project**: total capex 500.0000, revenue less opex 2245.4841 on every regime, pre-take net cash flow 1745.4841, NR / (NR - C) 1.286453 (derived), discount rate 10 percent.
 
@@ -1445,8 +1550,8 @@ THE RATIO OF THE TWO IS A PROPERTY OF THE PROJECT. Revenue less opex (NR) and ca
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Generic Royalty/Tax | 758.7514 | 335.8660 | 44.2656 | 43.4694 | share | 47.5297 | share | 33.7901 | 9.6793 | 1.286453 |
 | USA - Gulf of Mexico | 764.5528 | 503.7989 | 65.8946 | 43.8018 | share | 49.5092 | share | 34.0485 | 9.7533 | 1.286453 |
-| Brazil - Concession | 833.3812 | 268.6928 | 32.2413 | 47.7450 | share | 52.7064 | share | 37.1137 | 10.6313 | 1.286453 |
-| Angola - Deepwater PSC | 1200.2886 | 0.0000 | 0.0000 | 68.7654 | share | 70.4362 | share | 53.4534 | 15.3119 | 1.286453 |
+| Brazil - Concession | 1121.5184 | 268.6928 | 23.9579 | 64.2526 | share | 62.0353 | share | 49.9455 | 14.3071 | 1.286453 |
+| Angola - Deepwater PSC | 1263.7523 | 0.0000 | 0.0000 | 72.4012 | share | 72.0659 | share | 56.2797 | 16.1215 | 1.286453 |
 | Ghana - Deepwater | 1316.6067 | 134.3464 | 10.2040 | 75.4293 | share | 77.1703 | share | 58.6335 | 16.7958 | 1.286453 |
 | Nigeria - PIA (2021) | 1339.2784 | 268.6928 | 20.0625 | 76.7282 | share | 79.5391 | share | 59.6432 | 17.0850 | 1.286453 |
 
@@ -1456,8 +1561,8 @@ THE RATIO OF THE TWO IS A PROPERTY OF THE PROJECT. Revenue less opex (NR) and ca
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Generic Royalty/Tax | 1881.7626 | 875.1492 | 46.5069 | 45.3313 | share | 45.4645 | share | 36.5310 | 8.8003 | 1.240898 |
 | USA - Gulf of Mexico | 1929.2089 | 1312.7238 | 68.0447 | 46.4743 | share | 46.7731 | share | 37.4521 | 9.0221 | 1.240898 |
-| Brazil - Concession | 2338.6858 | 700.1194 | 29.9364 | 56.3385 | share | 58.4494 | share | 45.4014 | 10.9371 | 1.240898 |
-| Angola - Deepwater PSC | 3202.4544 | 0.0000 | 0.0000 | 77.1465 | share | 74.0708 | share | 62.1699 | 14.9766 | 1.240898 |
+| Brazil - Concession | 2827.6743 | 700.1194 | 24.7595 | 68.1181 | share | 64.0642 | share | 54.8942 | 13.2239 | 1.240898 |
+| Angola - Deepwater PSC | 3373.2753 | 0.0000 | 0.0000 | 81.2615 | share | 74.3666 | share | 65.4861 | 15.7755 | 1.240898 |
 | Ghana - Deepwater | 3252.0426 | 350.0597 | 10.7643 | 78.3411 | share | 77.0201 | share | 63.1326 | 15.2085 | 1.240898 |
 | Nigeria - PIA (2021) | 3372.6496 | 700.1194 | 20.7587 | 81.2465 | share | 79.3410 | share | 65.4739 | 15.7725 | 1.240898 |
 

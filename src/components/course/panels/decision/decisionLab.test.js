@@ -312,6 +312,9 @@ const SECTIONS = {
     w('| --- | --- | --- | --- |');
     an.costTable.forEach((x) => w(`| ${m(x.cost)} | ${x.emvWithInfo} | ${x.netVoi} | ${x.rootChoice ?? 'no tree'} |`));
     w();
+    const old = L.contradictions().irri.beforeRepair;
+    w(`Before the EC4-0 repair, the IRRI inputs (both indicators typed 20 / 80 percent) printed a gross voi of ${old.voi.toFixed(2)} and a netVoi card of ${old.net.toFixed(2)} (reconstructed from engine calls, derived). The repaired Analyzer withholds both; Section 11 reads the case in full.`);
+    w();
   },
 
   11: (w) => {
