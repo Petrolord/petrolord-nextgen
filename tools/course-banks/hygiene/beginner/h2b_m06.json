@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Walking a dosimeter record from download to report, which step comes first?",
+  "options": [
+   "Add the contributions, since the total is what every criterion reports.",
+   "Restate the TWA, since the percentage is easier to read as a level.",
+   "Name the criterion, since it sets the threshold and every reference duration.",
+   "Find the loudest period, since it decides the noise dose of the whole day on any criterion."
+  ],
+  "answer": 2,
+  "explanation": "Naming the criterion first is the habit that makes the rest mean something: it decides which periods pass the threshold and what each reference duration is. On the OBEN day, changing it alone moves the noise dose from 27.748183 to 72.054478 or 265.610944 percent. The loudest period is one term in the sum and decides nothing on its own."
+ },
+ {
+  "prompt": "A draft report gives the OBEN day's NIOSH figure of 265.610944 percent with the acronym unqualified and a closing verdict word. Which rewrite follows this course's rules?",
+  "options": [
+   "The noise dose on the NIOSH noise REL was 265.610944 percent, against a limit noise dose of 100 percent.",
+   "The NIOSH noise REL figure was 265.610944 percent, so the worker's noise exposure fails on that day.",
+   "The NIOSH noise dose was 265.610944 percent, which is over the limit on that criterion's scale.",
+   "The noise exposure was 89.242460 dBA on the NIOSH noise REL, which is over the limit and fails."
+  ],
+  "answer": 0,
+  "explanation": "Digest section 24 requires \"noise dose\", a qualified noise exposure and \"NIOSH noise REL\" written in full, and the course never grades a verdict word: a comparison names the criterion and its limit noise dose in the same sentence. The rewrite ending in \"fails\" still closes on a bare verdict, and the one saying \"NIOSH noise dose\" names only the agency, which leaves open which NIOSH limit is meant. The one in dBA swaps the noise dose for its TWA and keeps the verdict."
+ },
+ {
+  "prompt": "The same three letters name two different NIOSH limits in this course. How must each be written?",
+  "options": [
+   "As the bare acronym, once the tier makes plain which is meant.",
+   "As the agency and acronym alone, since NIOSH publishes both.",
+   "With the qualifier on first use only, and bare after that.",
+   "As \"NIOSH noise REL\" or \"NIOSH heat REL\", every time."
+  ],
+  "answer": 3,
+  "explanation": "Digest section 24 legislates it: the NIOSH recommended exposure limit for noise in this tier and the NIOSH recommended exposure limit for heat stress in the Expert tier share an acronym, so the qualifier goes in every time. Naming the agency alone leaves the limit ambiguous, which is the whole problem, and a reader may open any page without the first use in view."
+ },
+ {
+  "prompt": "Why does this course write \"decibel exchange rate\" in full?",
+  "options": [
+   "Because OSHA's text defines it only under that full name in Appendix A.",
+   "Because the Economics courses use \"exchange rate\" for currency.",
+   "Because a bare rate could be read as a sampling frequency on the instrument.",
+   "Because the engine refuses the field name `exchangeRateDb`."
+  ],
+  "answer": 1,
+  "explanation": "Digest section 24, rule 4: the words already mean a currency rate in the Economics courses, so this course always writes \"decibel exchange rate\" or \"an exchange rate of 5 dB\". It is a rule about readers arriving from other courses. `exchangeRateDb` is a valid engine field, refused only when it is not a finite number of dB above zero."
+ },
+ {
+  "prompt": "Why does this course call a reading from a sound level meter a sound level?",
+  "options": [
+   "Other courses use noise for scatter in data, so the word is kept for noise exposure.",
+   "OSHA's Appendix A has no other word for a reading taken by an instrument.",
+   "The engine refuses any input field whose name refers to noise directly.",
+   "A sound level is a percentage of an allowance, while a reading is in dBA."
+  ],
+  "answer": 0,
+  "explanation": "Digest section 24, rule 3: noise already means scatter in data in the Decline Curve Analysis, Well Test and Seismolord courses, so a reading is a sound level and noise exposure is kept for a noise dose. It is a rule about readers arriving from other courses. A sound level is in dBA; the percentage of an allowance is the noise dose."
+ },
+ {
+  "prompt": "The capstone TWAs are graded on which coefficient, and why?",
+  "options": [
+   "The exact ones, since a graded answer must use the most precise values.",
+   "Either, since the two land within the grading tolerance on both scales.",
+   "The exact one on NIOSH and the printed one on OSHA, where tables agree.",
+   "The printed ones, 16.61 and 10.0, as judgement J1 has each preset use."
+  ],
+  "answer": 3,
+  "explanation": "The TWAs are graded on the coefficient each source prints: 16.61 on OSHA, as the mandatory Appendix A text writes it, and 10.0 on NIOSH. A TWA worked with the exact coefficient will disagree, and the digest measures how far: eight hours at a constant 100 dBA on the NIOSH preset gives 100.051500 dBA where the exact coefficient gives 100.000000. That is judgement J1, the same rule the engine's presets follow."
+ },
+ {
+  "prompt": "To how many decimals does this course print a sound level, a noise dose or a duration?",
+  "options": [
+   "One decimal, the precision at which OSHA Table A-1 and Table G-16a print their own rows.",
+   "Twelve throughout, the precision the constants of digest section 3 carry.",
+   "Six, while a measured constant prints to twelve and a count is a whole number.",
+   "Two, as the printed coefficients 16.61 and 10.0 are written."
+  ],
+  "answer": 2,
+  "explanation": "The digest's precision rule: sound levels in dBA, noise doses and percentages, durations in hours and in minutes, concentrations, indices, temperatures and metabolic rates print to six decimals, measured constants print to twelve and counts are whole numbers. One decimal is what the published tables print, which is a property of the sources. Twelve belongs to the measured constants alone, such as the PEL threshold at 90.000000000000 dBA."
+ },
+ {
+  "prompt": "Why can judgement J2, the inclusive threshold, never decide a graded capstone answer?",
+  "options": [
+   "Because the capstone only uses the OSHA PEL criterion.",
+   "Because no capstone input sits exactly on a threshold.",
+   "Because the capstone rounds every level to whole decibels.",
+   "Because J2 applies only to NIOSH and never to OSHA."
+  ],
+  "answer": 1,
+  "explanation": "Digest section 23: the judgement calls are taught by name and never tested at their boundary, and no capstone input sits on a threshold. The rule still matters for real records, which do put periods on the line. The eighteen graded fields of this course include LEX values and chemical averages, so no capstone rests on the OSHA PEL alone, and levels are stated to six decimals, such as the 84.300000 dBA of the first OBEN period."
+ },
+ {
+  "prompt": "Which of these is never graded in this course, in any tier?",
+  "options": [
+   "A verdict word such as exceeds or passes, standing for the number.",
+   "The TWA of a noise dose on a named criterion, worked from its printed formula.",
+   "The noise dose of a record on the OSHA action level, in percent.",
+   "The LEX,8h of a day of tasks, in dBA, which the next tier adds."
+  ],
+  "answer": 0,
+  "explanation": "Digest section 23 lists any verdict word, exceeds, passes or at or above an action value, among the things never graded, because a verdict means nothing without its criterion and the same record gives different verdicts on different criteria. The other three name quantities the digest counts among the eighteen graded fields of this course: noise doses and TWAs, LEX values, a protector estimate, chemical averages and indices, reduction-factor arithmetic and two one-hour averages."
+ },
+ {
+  "prompt": "A site manager asks for the OBEN worker's ACGIH noise limit to set beside the figures. What does this course do?",
+  "options": [
+   "It quotes the ACGIH value from the engine's own table of licensed limits.",
+   "It uses the NIOSH noise REL, since ACGIH and NIOSH publish the same values.",
+   "It asks the engine for the preset 'ACGIH', which returns the licensed limit.",
+   "It never quotes one, since ACGIH values are licensed and every limit is an input."
+  ],
+  "answer": 3,
+  "explanation": "Digest section 25: ACGIH TLVs, ISO 9612 and ISO 7243 text are licensed and never quoted, the engine embeds no limit table, and every limit is typed as an input from a public OSHA or NIOSH value. Asking for the preset 'ACGIH' is refused on `criterion`. Claiming two bodies publish the same value is itself a licensed claim this course does not make."
+ },
+ {
+  "prompt": "Four subjects sit beside this course and are owned elsewhere. What does this course do with them?",
+  "options": [
+   "It teaches each of them briefly, so that a single report can cover the whole workplace.",
+   "It converts each into a noise exposure figure the engine can then integrate.",
+   "It cites the owner and stops, since each is a different quantity from a noise dose.",
+   "It refers them to the Expert tier, where every seam is taught in full."
+  ],
+  "answer": 2,
+  "explanation": "Digest section 25 says to cite and to stop. A radiant flux in kW/m2, an emission from a glycol unit, a rate per hours worked and a matrix of likelihood and consequence are each a different quantity from a noise dose, measured a different way, so this course names the owner beside the figure and computes nothing. No tier of it teaches them, and the engine offers no conversion between them."
+ },
+ {
+  "prompt": "Rule 1 of digest section 24 keeps one word from standing on its own here. Which word, and who else claims it?",
+  "options": [
+   "The word for a reading from a meter, claimed by three other courses of the academy.",
+   "The shorter word for a noise dose, claimed by Flow Assurance and Gas Processing.",
+   "The acronym two different NIOSH limits share, which carries a qualifier of its own.",
+   "The words for a decibel exchange rate, claimed by the Economics courses."
+  ],
+  "answer": 1,
+  "explanation": "Digest section 24, rule 1: this course writes \"noise dose\" on first use in every lesson and every bank question and never the shorter word on its own in a prompt, an option or a heading, because that word already belongs to inhibitor and methanol work in the Flow Assurance and Gas Processing courses. The reading, the acronym and the decibel exchange rate are rules 3, 4 and the two misreadings that close the section, each a different collision."
+ },
+ {
+  "prompt": "A question asks for an octave-band protector estimate or an ISO 9612 uncertainty budget. What is the honest answer from this engine?",
+  "options": [
+   "It has no door for either, so this engine does not compute them.",
+   "It computes both through `hearingProtectorEstimate` with a method name.",
+   "It computes them after the noise dose, from the day's contributions.",
+   "It computes them only on the NIOSH noise REL."
+  ],
+  "answer": 0,
+  "explanation": "Digest section 1 lists what the engine does not provide and says so by having no door: spectral (octave-band) protector methods, ISO 9612 uncertainty budgets, ISO 7243 adjustments and any licensed limit table. `hearingProtectorEstimate` takes a named method from a fixed list, and none of them is spectral."
+ },
+ {
+  "prompt": "A reading taken on the C-weighting is typed into a report. How should it be written?",
+  "options": [
+   "In dBA, since every level in this course is written that way.",
+   "In dBA after adding 7 dB, the Appendix B A-weighted step.",
+   "As a noise dose, since the weighting drops out in percent.",
+   "In dBC, since it is a different weighting from dBA."
+  ],
+  "answer": 3,
+  "explanation": "Digest section 25: levels are in dBA unless a row says dBC, and a level read in dBC is a different weighting that must never be written as dBA. Adding a fixed step to turn one weighting into the other is no conversion this tier teaches, and a noise dose is built from A-weighted levels."
+ },
+ {
+  "prompt": "A report of the OBEN day on the OSHA PEL lists each period's contribution. What does that list let a reader see that the total alone cannot?",
+  "options": [
+   "That the day's noise dose would pass on every criterion it was read on.",
+   "That the TWA was computed with the exact coefficient throughout.",
+   "That the 94.600000 dBA period carries more than the 99.100000 dBA one.",
+   "That every period on the record was above the 90 dBA PEL threshold."
+  ],
+  "answer": 2,
+  "explanation": "Listing contributions shows where the percentage came from: 18.921153 percent from the 94.600000 dBA period and 8.827030 percent from the louder 99.100000 dBA one. A reader can check the arithmetic in a minute. Four of the six periods sit below the PEL threshold, and the same day is over two other criteria."
+ }
+]

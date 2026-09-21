@@ -1,0 +1,30 @@
+-- ============================================================================
+-- H2 ASSOCIATE DEEP SEED: Occupational Hygiene: Noise, Chemical & Heat
+-- Exposure, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/hygiene/beginner.
+--
+-- What this tier owns: THE NOISE DOSE AND THE CRITERIA IT IS READ AGAINST.
+-- The reference duration T = 8 / 2^((L - Lc)/q) of OSHA Table G-16a and of
+-- NIOSH Table 1-1; the decibel exchange rate of 5 dB and of 3 dB; the
+-- threshold, which decides which periods are integrated at all; the noise
+-- dose D = 100 x sum(C/T) of 1910.95 Appendix A; the time weighted average
+-- TWA = K log10(D/100) + Lc with K the coefficient the source PRINTS, 16.61
+-- for OSHA and 10.0 for NIOSH; one dosimeter record read three ways, under
+-- the OSHA permissible exposure limit, the OSHA action level and the NIOSH
+-- noise REL; the inverse questions, including the time still available at a
+-- stated sound level; and every warning and every refusal the engine
+-- produces. Digest sections 1 and 3 to 10, and section 24.
+--
+-- THE TRAP THE TIER IS BUILT ON. The same eight hours give three different
+-- answers because three different criteria are applied to them, and a figure
+-- quoted without its criterion means nothing. The Associate capstone grades
+-- two noise doses on the OSHA scale, one on the NIOSH scale, the two time
+-- weighted averages those noise doses correspond to and the minutes still
+-- available at the loudest sound level of the day. It grades no limit
+-- comparison, no hearing protector estimate, no chemical average and nothing
+-- about heat stress.
+-- ============================================================================

@@ -1,0 +1,32 @@
+-- ============================================================================
+-- H2 PROFESSIONAL DEEP SEED: Occupational Hygiene: Noise, Chemical & Heat
+-- Exposure, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/hygiene/intermediate.
+--
+-- What this tier owns: PROTECTION AND CHEMICALS. LEX,8h, the daily noise
+-- exposure level of Schedule 1 of the UK 2005 Regulations and ISO 1999
+-- clause 3.6, which has no threshold and normalises to eight hours whatever
+-- the day was; the HSE exposure points that carry the same information on a
+-- scale that adds; the weekly LEX with its statutory divisor of five; the
+-- four hearing protector methods, OSHA Appendix B, the OSHA fifty percent
+-- field derating for the engineering-controls decision, OSHA dual protection
+-- and the NIOSH derating by protector type, and which question each one
+-- answers; the eight-hour chemical average of 1910.1000(d)(1), whose divisor
+-- is eight whatever the sampled time was; the fifteen-minute short term
+-- average; and the additive mixture index of 1910.1000(d)(2). Digest
+-- sections 11 to 15, and section 24.
+--
+-- THE TRAP THE TIER IS BUILT ON. Two of these metrics divide by a constant
+-- the regulation fixes rather than by the time that was measured, and a
+-- protector estimate is only as good as the method the decision in front of
+-- you calls for. The Professional capstone grades a daily LEX,8h over a day
+-- longer than eight hours, a weekly LEX, the OSHA fifty percent field
+-- derated sound level under an earmuff, an eight-hour benzene average from a
+-- record short of eight hours, a fifteen-minute toluene average and a
+-- mixture index. The NIOSH derating by type and OSHA dual protection are
+-- taught here and graded nowhere.
+-- ============================================================================
