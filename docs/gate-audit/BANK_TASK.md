@@ -64,6 +64,33 @@ Module banks hold 15 questions. A final exam holds 42.
 - **No positional language.** No "all of the above", no "option B".
 - **No em dashes and no en dashes anywhere.** Owner rule.
 
+## EVERY KEY RESTS ON A LINE THE DIGEST PRINTS
+
+This is the rule the Commercial & Trading and Energy Transition key-truth
+audits (2026-09-19) had to enforce after the banks were written: **every tier
+had 12 to 22 keys resting on a lesson sentence rather than on a digest line**,
+and every one of them was replaced at audit. Write them right the first time.
+
+- **The KEY of every question must be provable from a line `digest.txt`
+  PRINTS.** Not from a lesson sentence the digest does not print: a gloss, a
+  rationale, a definition, an "In practice" aside, course routing, which tier
+  or wave teaches what. Not from a reading the digest does not itself draw, not
+  from learner arithmetic, not from a derived count. The lessons were written
+  FROM the digest, so a lesson sentence is a paraphrase and can carry an error
+  the digest does not; a key that rests on it inherits that error unchecked.
+  **If the only support for a key is a lesson sentence, the question goes.**
+- **Every distractor must be provably false by a printed line.** A distractor
+  the digest cannot refute, or one that is defensibly true, makes two answers.
+- **No "why" keys** unless the digest prints the reason, and never assert that
+  printed parts sum to a printed total unless the digest prints that relation.
+- **Signs.** Quote every number with the sign the digest prints. `litsweep.py`
+  is sign-aware since 2026-09-21 (a lesson or bank printing -7.5 against a
+  digest printing 7.5 fails it); before that it compared absolute values and
+  a stripped or invented sign passed.
+- **Hand back the line.** For each question, name the digest line its key rests
+  on. A key you cannot point at a printed line is the defect this rule exists
+  for, and the key-truth audit will ask for exactly that line.
+
 ## What a good question is
 
 - It examines something the lesson EXPLAINED, not something it mentioned.
@@ -85,4 +112,5 @@ Run, for each bank you wrote:
     python3 <bank>.py
 
 and report the gate line it prints. Then report, in prose, the two or three
-sharpest questions you wrote and what each turns on.
+sharpest questions you wrote and what each turns on, and for every question the
+digest line (number and text) its key rests on.
