@@ -1,0 +1,1686 @@
+{
+ "migration": "20261021b_b4_fix_fluid.sql",
+ "title": "fluid: 42 duplicate questions (mostly final-exam copies of module questions) rewritten into new questions from the same lessons",
+ "items": [
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 5,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.67 k0.85) with beginner module m01-where-a-number-comes-from 6: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m01-where-a-number-comes-from 6; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What does a tier tell you?",
+     "new": "A carefully applied correlation inside its range turns out closer to the truth than a badly run laboratory experiment. Which tiers do the two numbers carry?"
+    },
+    "explanation": {
+     "old": "An oracle gated flash is arithmetically exact and can still describe the wrong fluid. A published method correlation has no independent check and may be fine for a screening study.",
+     "new": "The tier is not a quality score. It says what kind of evidence stands behind a number and so what you would have to do to check it, and a closer answer does not change the evidence behind either value."
+    },
+    "options": {
+     "0": {
+      "old": "What kind of confidence you have rather than how much, so reading it means asking what the tier is confidence about.",
+      "new": "The correlation stays published method and the experiment stays measured, because a tier records the kind of evidence rather than the size of the error."
+     },
+     "1": {
+      "old": "How large the error is likely to be, on a scale calibrated against the engine's gate suite.",
+      "new": "The correlation moves up to measured and the experiment down to screening, because the ladder ranks numbers by how close they are to the truth."
+     },
+     "2": {
+      "old": "Whether the number may be used in a reserves booking, which is what the ladder was designed to decide.",
+      "new": "Both drop to screening until a third source settles which is right, since two disagreeing routes cannot both keep their tiers."
+     },
+     "3": {
+      "old": "How much a number would cost to improve, which is what makes the ladder useful for planning.",
+      "new": "The correlation becomes oracle gated, since the experiment now acts as an independent check that agrees with its arithmetic."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 6,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.80 k0.61) with beginner module m01-where-a-number-comes-from 7: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m01-where-a-number-comes-from 7; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Which tier does this course refuse to grade?",
+     "new": "The course teaches screening quantities and grades none of them. Which two quantities does that rule affect most?"
+    },
+    "explanation": {
+     "old": "The Expert tier has a whole module on screening quantities and grades none of it. Teaching a number and certifying it are different acts.",
+     "new": "The untuned LBC viscosity can be out by a factor of two on an oil, and the separator's gas partition is a labelled approximation. Both appear in the course and neither is graded, because certifying a learner can produce them would imply they are worth producing."
+    },
+    "options": {
+     "0": {
+      "old": "Lab tuned, because a tuned value depends entirely on which measurements it was tuned to and is not reproducible.",
+      "new": "The Standing bubble point and the Hall-Yarborough z factor, which the Associate tier's capstone asks for on the Ekene fluid."
+     },
+     "1": {
+      "old": "Screening, because certifying that a learner can produce a number implies the number is worth producing.",
+      "new": "The LBC viscosity in compositional mode and the black-oil separator's gas partition, both taught and neither graded."
+     },
+     "2": {
+      "old": "Published method, because a method with no independent check cannot support a graded field.",
+      "new": "The Vasquez-Beggs bubble point and the Beggs-Robinson dead oil viscosity, which the capstone warns about."
+     },
+     "3": {
+      "old": "Measured, because the course has no laboratory and cannot ask a learner to reproduce an experiment.",
+      "new": "The tuned saturation pressure and the tuned stock tank gravity, whose values depend on the chosen knobs."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p1.00 k0.75) with beginner module m02-the-bubble-point 4: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m02-the-bubble-point 4; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What was Standing's correlation fitted to?",
+     "new": "In Standing's form, Rs over gas gravity is raised to the power 0.83. What does that say?"
+    },
+    "explanation": {
+     "old": "That is the definition rather than a criticism, and it is why three correlations disagree. The others describe Vasquez-Beggs, the z chart and Glaso.",
+     "new": "More gas raises the bubble point and a power below one makes the increase less than proportional. Heavier gas lowers the bubble point at fixed Rs, and the 18.2 and the 1.4 are fitting constants with no physical meaning."
+    },
+    "options": {
+     "0": {
+      "old": "Over 6000 measurements from a worldwide data set, split into two coefficient sets at 30 API.",
+      "new": "Bubble point falls as dissolved gas rises, since a power below one inverts the whole dependence on Rs."
+     },
+     "1": {
+      "old": "105 bubble points from 22 crude oil and natural gas mixtures, all Californian.",
+      "new": "More dissolved gas raises the bubble point, less than proportionally, so the effect saturates."
+     },
+     "2": {
+      "old": "The Standing-Katz chart, itself assembled from measurements on natural gases in the 1940s.",
+      "new": "The gas gravity dominates the fit, since it is divided into Rs before the exponent is applied to both."
+     },
+     "3": {
+      "old": "A set of North Sea oils, which is why the engine labels it screening rather than published method.",
+      "new": "Bubble point is almost exactly proportional to Rs, since 0.83 is close enough to one to treat as linear."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.81 k1.00) with beginner module m02-the-bubble-point 5: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m02-the-bubble-point 5; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Standing gives Ekene 1912.1923059028293 psia against a designed 2000. What is that?",
+     "new": "A field has a measured bubble point and a published correlation disagrees with it. What is the trap?"
+    },
+    "explanation": {
+     "old": "The designed 2000 is a decision and the correlated 1912 is what a fit to Californian oils says. Neither is a measurement of Ekene, because nobody has measured Ekene.",
+     "new": "When a measurement exists it wins over a correlation. Moving it toward a curve fitted to other oils throws away the one number that describes this fluid."
+    },
+    "options": {
+     "0": {
+      "old": "About 4.4 percent low, which exceeds the correlation's own stated accuracy and therefore indicates an input error.",
+      "new": "Averaging the measurement with the correlation, which gives a value that splits the difference and carries both errors."
+     },
+     "1": {
+      "old": "About 8.8 percent low, since the 88 psia difference should have been taken against the correlated value.",
+      "new": "Discarding the correlation entirely, since one measurement proves it was fitted to the wrong population of oils."
+     },
+     "2": {
+      "old": "Exactly the gap the designed fluid was chosen to have, so the course would have something to measure.",
+      "new": "Reporting the correlation spread as the uncertainty, since that is how the course treats disagreement between methods."
+     },
+     "3": {
+      "old": "About 4.4 percent low, which is an entirely ordinary distance for a published correlation to sit from any particular oil.",
+      "new": "Adjusting the measured value toward the correlation because it looks more reasonable, which prefers somebody else's oils to your own."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.79 k0.85) with beginner module m02-the-bubble-point 10: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m02-the-bubble-point 10; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Why do all three Rs correlations take a bubble point as well as a pressure?",
+     "new": "A laboratory has measured the bubble point but not the solution gas. Which way should the correlation be run?"
+    },
+    "explanation": {
+     "old": "A correlation that kept increasing Rs above the bubble point would be describing an oil that dissolves gas which is not there.",
+     "new": "Use the direction the measurement supports. Feeding a correlation a number it should have produced and then quoting its output as independent is circular."
+    },
+    "options": {
+     "0": {
+      "old": "Because the bubble point selects which coefficient set applies, as Vasquez-Beggs splits at 30 API.",
+      "new": "Feed it an assumed solution gas and adjust that until the returned bubble point matches the laboratory value."
+     },
+     "1": {
+      "old": "Because an undersaturated oil has released no gas, so Rs above the bubble point is constant at Rsb.",
+      "new": "Feed it the measured bubble point and let it return Rs, so that the measurement is the input."
+     },
+     "2": {
+      "old": "Because the correlations were fitted on data reporting both, so dropping either leaves the fit under-determined.",
+      "new": "Run it both ways and average the results, since each direction holds half the fit."
+     },
+     "3": {
+      "old": "Because the bubble point sets the validity range the warning function checks the pressure against.",
+      "new": "Use the correlation's own bubble point, since it matches the rest of the table."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 19,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.80 k0.82) with beginner module m03-solution-gas-and-volume 6: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m03-solution-gas-and-volume 6; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Standing gives Ekene 1.2407824121407645 rb/stb at the designed 400 scf/stb. What does the gap do?",
+     "new": "A field-unit simulation deck carries Ekene's solution gas as 0.4. What has happened?"
+    },
+    "explanation": {
+     "old": "On Ekene's booked 12.139 million barrels that is roughly 400 thousand barrels, and it is sixty times the residual the simulation course closed on its structure.",
+     "new": "Field decks often carry Mscf/stb, so 400 scf/stb becomes 0.4. A black oil holds hundreds of scf/stb, so 0.4 is either Mscf/stb or a fluid that is barely live at all, and a value that crosses between the two without conversion is out by a factor of a thousand."
+    },
+    "options": {
+     "0": {
+      "old": "About 3.4 percent, which becomes a 3.4 percent error in every volume the field ever books.",
+      "new": "Nothing is wrong: it is in Mscf/stb, a thousand times larger unit, so it is the designed 400 scf/stb."
+     },
+     "1": {
+      "old": "About 3.4 percent, which cancels against the voidage calculation because Bo appears in both.",
+      "new": "The deck has stored the oil as nearly dead, because 0.4 scf/stb is roughly what is left in solution at the stock tank."
+     },
+     "2": {
+      "old": "About 34 percent, taking the ratio of the correlated value to the designed 1.2 directly.",
+      "new": "It is the ratio of correlated to designed value, stored as a fraction."
+     },
+     "3": {
+      "old": "Nothing measurable, since it is well inside the uncertainty of the porosity and saturation inputs.",
+      "new": "It is a reservoir volume ratio, rb of gas per rb of oil, which field decks use in place of the surface volumes."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 23,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.78 k1.00) with beginner module m04-viscosity 2: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m04-viscosity 2; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Beal raises API gravity to the power 4.53 in a denominator. What follows?",
+     "new": "Run Beal on Ekene's 32 API oil at 100 F instead of 180 F. What happens to the dead oil viscosity?"
+    },
+    "explanation": {
+     "old": "It also makes viscosity correlations far more sensitive to a gravity error than volume correlations are.",
+     "new": "Cooling the oil from 180 F to 100 F roughly doubles Beal's answer. A dead oil viscosity quoted without its temperature is a number and a missing argument."
+    },
+    "options": {
+     "0": {
+      "old": "Viscosity falls extremely steeply with gravity, so a 20 API and a 40 API oil differ by more than an order of magnitude.",
+      "new": "It roughly doubles, because liquid viscosity depends strongly and roughly exponentially on temperature, so every viscosity must carry one."
+     },
+     "1": {
+      "old": "Viscosity is largely insensitive to gravity, since a large exponent compresses the range of outcomes.",
+      "new": "It barely moves, because the API term dominates Beal's form and temperature enters only as a small correction."
+     },
+     "2": {
+      "old": "The correlation cannot be used below 20 API, because the denominator grows without bound there.",
+      "new": "It falls, because a cooler oil holds its light ends more tightly and so flows more easily at the same gravity."
+     },
+     "3": {
+      "old": "Gravity must be known to four figures, because the exponent amplifies rounding in the input.",
+      "new": "It cannot be computed, because Beal's range starts at reservoir temperature and a warning stops the call."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.95 k0.76) with beginner module m04-viscosity 3: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m04-viscosity 3; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Beal gives Ekene 2.3437444714709295 cp against a designed live oil viscosity of 1.8 cp. Is that the right way round?",
+     "new": "Beal was fitted to 655 measurements on 492 oils. How well does it do?"
+    },
+    "explanation": {
+     "old": "Dissolved gas thins oil substantially and putting it back is the next step of the chain. The two are directly comparable and the ordering is the check.",
+     "new": "The data set is broad and the scatter is still substantial, because viscosity depends on molecular structure that gravity and temperature do not capture. A correlated dead oil viscosity is the weakest number in a black-oil description."
+    },
+    "options": {
+     "0": {
+      "old": "No: a dead oil should be thinner, having lost the heavy components that make a live oil viscous.",
+      "new": "Better than the volume correlations, because its data set is several times larger than Standing's 105 points."
+     },
+     "1": {
+      "old": "Yes, but only because the two are quoted at different temperatures and would agree at a common one.",
+      "new": "Exactly within its range, because a broad data set leaves no real scatter once the conditions are inside the fit."
+     },
+     "2": {
+      "old": "It cannot be judged, since dead and live oil viscosities are not comparable quantities.",
+      "new": "It cannot be judged, since dead oil viscosity is an intermediate nobody produces."
+     },
+     "3": {
+      "old": "Yes: the dead oil is thicker because the gas that thins it has not been put back into it.",
+      "new": "Less well than volume correlations: two oils of the same gravity at one temperature can differ twofold."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 26,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.94 k0.79) with beginner module m04-viscosity 6: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m04-viscosity 6; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "The chain gives 0.7559673199800581 cp at 400 scf/stb and 0.7341185203712621 cp at 421.94. Which is correct?",
+     "new": "The effect of dissolved gas on viscosity saturates. What follows for a live oil correlation?"
+    },
+    "explanation": {
+     "old": "Same correlations, same fluid, different answer, because the input differed. The number plus the chain that produced it is the answer.",
+     "new": "The direction is simple and the magnitude is not. A correlation fitted mostly to moderate solution gas ratios will not extrapolate well to a rich oil."
+    },
+    "options": {
+     "0": {
+      "old": "The second, since 421.94 is what Standing returns at the designed bubble point.",
+      "new": "Beyond a few hundred scf/stb dissolved gas begins to thicken the oil again, reversing the direction of the effect."
+     },
+     "1": {
+      "old": "Both, and quoting either without saying which solution gas ratio went in is what is wrong.",
+      "new": "The first 100 scf/stb thins the oil far more than the next 100, so it extrapolates poorly to a rich oil."
+     },
+     "2": {
+      "old": "The first, since the designed 400 is what the rest of the series carries and consistency governs.",
+      "new": "The correlation stops depending on the dead oil viscosity once the solution gas is high enough."
+     },
+     "3": {
+      "old": "Neither, since mixing a designed solution gas ratio with a correlated viscosity chain is indefensible.",
+      "new": "The effect is linear in Rs up to the bubble point, so a fit at moderate ratios extrapolates safely to rich oils."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 28,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.90 k0.80) with beginner module m04-viscosity 12: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m04-viscosity 12; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What does composing three viscosity correlations do to the uncertainty?",
+     "new": "Run Ekene's viscosity chain at 320 F rather than 180 F. What does the engine do?"
+    },
+    "explanation": {
+     "old": "Beal's dead oil scatter is the widest of the three, so an undersaturated viscosity that looks precise inherits a dead oil viscosity that was never precise.",
+     "new": "Every correlation carries its published training range, and the warning names the correlation and the bound. Warnings arriving with the number is what lets a chain be audited after the fact."
+    },
+    "options": {
+     "0": {
+      "old": "The errors partly cancel, since the three were fitted to different data sets with independent biases.",
+      "new": "It refuses the call, because a chain cannot return a value once any stage is outside its range."
+     },
+     "1": {
+      "old": "The uncertainty is set by the last stage, where the final number is produced and rounded.",
+      "new": "It clamps the temperature to the top of the fitted range and returns that value without comment."
+     },
+     "2": {
+      "old": "The errors compound rather than average, and the first stage usually contributes the most.",
+      "new": "It returns a value with a warning naming Vasquez-Beggs and the temperature bound it left."
+     },
+     "3": {
+      "old": "The uncertainty becomes unquantifiable, since no published scatter exists for a composed chain.",
+      "new": "It silently switches to another correlation whose range covers that temperature."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.73 k0.87) with beginner module m05-gas-and-water 3: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m05-gas-and-water 3; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Why does one z chart serve all natural gases?",
+     "new": "Ekene's gas has a z near 0.86 at initial pressure. What does that mean for the gas in a pore volume?"
+    },
+    "explanation": {
+     "old": "The pseudo-criticals are a mixture average, and for a gas of known gravity the engine uses Sutton (1985) to obtain them.",
+     "new": "z is the ratio of the real molar volume to the ideal one. A z of 0.86 means the gas takes 14 percent less space than ideal, and nothing about a gas inventory survives ignoring it."
+    },
+    "options": {
+     "0": {
+      "old": "Because natural gases are all mostly methane, so one component dominates the behaviour in every case.",
+      "new": "Almost nothing, since a z close to one means the gas behaves ideally and the correction can be dropped."
+     },
+     "1": {
+      "old": "Corresponding states: two gases at the same reduced pressure and temperature behave alike.",
+      "new": "It occupies 14 percent less space than ideal, so the pore volume holds about 14 percent more gas."
+     },
+     "2": {
+      "old": "Because the chart is drawn for a reference gas with a gravity correction applied afterward.",
+      "new": "It occupies 14 percent more space than ideal, so the same pore volume holds about 14 percent less gas overall."
+     },
+     "3": {
+      "old": "Because the departures from ideality are small enough that one average curve is adequate.",
+      "new": "The gas is 14 percent more compressible than ideal, which matters only for drive."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 31,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.88 k0.83) with beginner module m05-gas-and-water 5: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m05-gas-and-water 5; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "For a 0.75 gas at 3200 psia and 180 F, what is the reduced state?",
+     "new": "Rounding the Rankine offset to 460 rather than 459.67 shifts the absolute temperature by how much, and when does that matter?"
+    },
+    "explanation": {
+     "old": "Reduced properties are absolute, so temperature must be in Rankine. The engine uses 459.67 throughout, and that offset is the first thing to check when two calculations differ in the fourth decimal.",
+     "new": "A third of a degree is about 0.05 percent of the absolute temperature. The engine uses 459.67 throughout, and when two calculations of the same z differ in the fourth decimal this is the first thing to check."
+    },
+    "options": {
+     "0": {
+      "old": "A reduced pressure of 4.874147976086212 and a reduced temperature of 1.6414421349756225 in Rankine.",
+      "new": "About 0.05 percent, negligible for most work but not when checking two implementations agree."
+     },
+     "1": {
+      "old": "A reduced pressure of 4.874147976086212 and a reduced temperature of 0.4618, taking temperature in Fahrenheit.",
+      "new": "About 0.05 percent, which the z correlations amplify into several percent at a reduced temperature near 1.6."
+     },
+     "2": {
+      "old": "A reduced pressure of 4.234 and a reduced temperature of 1.6414421349756225, using 460 not 459.67.",
+      "new": "About a third of a percent, the same size as the gap between the two z correlations."
+     },
+     "3": {
+      "old": "A reduced pressure of 0.205 and a reduced temperature of 0.609, taking both ratios the other way up.",
+      "new": "Nothing measurable, since the reduced temperature is a ratio and the offset cancels between top and bottom."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 35,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.61 k1.00) with beginner module m05-gas-and-water 13: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m05-gas-and-water 13; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Why does formation water matter on a field that has never produced water?",
+     "new": "Why does the water formation volume factor usually sit slightly above one?"
+    },
+    "explanation": {
+     "old": "Above the bubble point, water and rock expansion can be a serious fraction of the drive, because the water volume is large even though its compressibility is small.",
+     "new": "Bw typically lies between 1.00 and 1.06. The engine uses McCain on a pure water baseline because the salinity correction to Bw is small, although salinity raises water viscosity appreciably."
+    },
+    "options": {
+     "0": {
+      "old": "Because connate water is present everywhere and its expansion contributes to the drive in an undersaturated reservoir.",
+      "new": "Because reservoir temperature expands the water and reservoir pressure compresses it, and the temperature effect usually wins by a small margin."
+     },
+     "1": {
+      "old": "Because a simulator refuses a deck without a water formation volume factor, whatever the field produces.",
+      "new": "Because water compressibility is so small that pressure has no effect, leaving thermal expansion alone to set it."
+     },
+     "2": {
+      "old": "Because the water saturation enters the relative permeability curves the description must be consistent with.",
+      "new": "Because salinity adds dissolved solids, and the brine occupies more volume than the fresh water it replaced."
+     },
+     "3": {
+      "old": "Because an aquifer will eventually encroach, so the properties are needed for the later forecast.",
+      "new": "Because the stock tank barrel of water is measured at 60 F, and a reference below ambient always gives a ratio above one."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.60 k1.00) with beginner module m06-the-associate-reading 14: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of beginner module m06-the-associate-reading 14; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What is the habit this tier builds?",
+     "new": "Before submitting the capstone, what three things should be written down for each answer?"
+    },
+    "explanation": {
+     "old": "A screening number that happens to be right is still a screening number, and quoting it as measured misleads the next reader whatever its value. The others are good practice and narrower.",
+     "new": "Every likely mistake in the capstone is a different correlation, a different input, or the same correlation run the other way, so most wrong answers come from getting one of those three silently different from what the field asked."
+    },
+    "options": {
+     "0": {
+      "old": "Round every correlated number to two significant figures before it enters a downstream calculation.",
+      "new": "The value, its sixteen digits and its units, so the tolerance check can be reproduced exactly."
+     },
+     "1": {
+      "old": "Ask what tier a number is on before asking whether it is right.",
+      "new": "Which correlation, which inputs, and which pressure."
+     },
+     "2": {
+      "old": "Run every available correlation and report the spread rather than any single value.",
+      "new": "The tier, the validity warning and the spread across every correlation the engine carries for it."
+     },
+     "3": {
+      "old": "Prefer measured values wherever they exist and correlated values only where they do not.",
+      "new": "The designed value, the correlated value and the percentage gap between the two of them."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p1.00 k1.00) with intermediate module m02-the-good-oil-report 3: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m02-the-good-oil-report 3; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "The report quotes pressures in psig on a 14.65 psia base. A reported 2620 psig is what?",
+     "new": "The report prints the optimum separator at 100 psig. What absolute pressure does the fixture carry?"
+    },
+    "explanation": {
+     "old": "A study reproduced with the wrong base is out by about 15 psi everywhere, which is small enough to look like scatter.",
+     "new": "The report's pressures are psig on a 14.65 psia base, stated in the report itself, so 100 psig is 114.65 psia and the stock tank it implies sits at 14.65 psia."
+    },
+    "options": {
+     "0": {
+      "old": "2634.7 psia, using the more usual atmospheric base of 14.7 psia.",
+      "new": "100 psia, since the fixture keeps the separator pressure exactly as the report prints it."
+     },
+     "1": {
+      "old": "2605.35 psia, since a gauge pressure is an absolute pressure less the base.",
+      "new": "Whatever the laboratory's elevation gives, since a gauge base varies with altitude."
+     },
+     "2": {
+      "old": "It cannot be converted without knowing the elevation of the laboratory.",
+      "new": "It adds the 14.696 psia standard atmosphere, as the engine does for every conversion."
+     },
+     "3": {
+      "old": "2634.65 psia.",
+      "new": "114.65 psia."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.69 k0.85) with intermediate module m02-the-good-oil-report 6: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m02-the-good-oil-report 6; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Methane is 0.3647 and C7+ is 0.3329. What kind of fluid is this?",
+     "new": "The eleven mole fractions in the analysis sum to one. What does that establish?"
+    },
+    "explanation": {
+     "old": "Reading those two numbers first is the quickest way to know what kind of fluid a report describes.",
+     "new": "The sum is a useful arithmetic check and says nothing about quality. A recombination at the wrong gas-oil ratio, or C7+ properties measured on a partly weathered sample, still sum to one."
+    },
+    "options": {
+     "0": {
+      "old": "A volatile oil, since a black oil would have methane well below 0.3 and a much larger heavy fraction.",
+      "new": "That the recombination ratio was right, since a wrong ratio would leave the eleven fractions summing above or below one."
+     },
+     "1": {
+      "old": "A black oil, since a condensate has methane above 0.7 and C7+ below 0.05 and a volatile oil sits between.",
+      "new": "Only that the arithmetic closes: a composition can sum perfectly and still be wrong in its light end or its C7+."
+     },
+     "2": {
+      "old": "A gas condensate, since the methane fraction is the largest single entry in the analysis.",
+      "new": "That the C7+ properties are consistent, since the plus fraction is the residual that closes the sum."
+     },
+     "3": {
+      "old": "It cannot be determined from the composition alone without knowing where the reservoir sits on the envelope.",
+      "new": "That the sample was representative, since a sample that had lost gas would show a deficit in the sum."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.91 k1.00) with intermediate module m02-the-good-oil-report 8: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m02-the-good-oil-report 8; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "How much of this fluid does the single C7+ entry carry?",
+     "new": "Why does the laboratory report C7+ as one lump rather than compound by compound?"
+    },
+    "explanation": {
+     "old": "Its molecular weight is 218 against methane's 16. One entry out of eleven carries most of the fluid, and its properties come from two measurements and six correlations.",
+     "new": "C7+ in a real crude is hundreds of compounds. Separating it further costs more than it returns for most purposes, so the laboratory reports a molecular weight and a specific gravity instead."
+    },
+    "options": {
+     "0": {
+      "old": "A third of the moles and about the same share of the mass, since molecular weight cancels in a mole fraction.",
+      "new": "Because an equation of state can accept only one heavy component, so a finer analysis would be discarded."
+     },
+     "1": {
+      "old": "A tenth of the moles and a third of the mass, which is typical for the heavy end of a black oil.",
+      "new": "Because the heavy compounds are all paraffins of similar behaviour, so listing them separately adds nothing."
+     },
+     "2": {
+      "old": "A third of the moles and something over two thirds of the mass.",
+      "new": "Beyond about C10 a crude is a continuum rather than a list."
+     },
+     "3": {
+      "old": "It cannot be stated in mass terms, since a lumped fraction has no single molecular weight.",
+      "new": "Because the heavy end is below the chromatograph's detection limit and so cannot be quantified at all."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 13,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.87 k1.00) with intermediate module m02-the-good-oil-report 12: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m02-the-good-oil-report 12; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "The report lists one separator stage. How many flash stages does reproducing it need?",
+     "new": "The fixture stores only the reported separator stage. What does the engine do when it reproduces the study?"
+    },
+    "explanation": {
+     "old": "The stock tank is a flash stage the report does not call one, because liquid arriving at 14.65 psia from 114.65 psia releases gas, and that gas is in the reported 768 scf/stb.",
+     "new": "That appended stage is not in the report. It is the modelling step that turns a reported test into a reproducible calculation, and it has to be written down somewhere or the calculation is not reproducible."
+    },
+    "options": {
+     "0": {
+      "old": "One, since the report lists one and the tank is where oil ends up rather than a separation step.",
+      "new": "It flashes once to 114.65 psia and scales the result by the reported gas-oil ratio to recover the tank gas."
+     },
+     "1": {
+      "old": "Three, since the fluid must first be flashed from reservoir conditions to the separator inlet.",
+      "new": "It asks the user for the stock tank conditions, since the report does not state them anywhere in the tables."
+     },
+     "2": {
+      "old": "Four, one for each of the separator tests the report contains, run from high pressure to low.",
+      "new": "It reads the tank stage from the differential liberation, which ends at atmospheric pressure and 60 F."
+     },
+     "3": {
+      "old": "Two: the separator at 114.65 psia and the stock tank at 14.65 psia.",
+      "new": "It appends the stock tank stage at 75 F and 14.65 psia."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 14,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.60 k1.00) with intermediate module m02-the-good-oil-report 13: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m02-the-good-oil-report 13; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Omit the stock tank stage. What happens?",
+     "new": "Omitting the stock tank stage pushes the gas-oil ratio, stock tank volume and formation volume factor one way each. What about the stock tank gravity?"
+    },
+    "explanation": {
+     "old": "The model runs and produces a full set of numbers, every one of them wrong. It is a reading error rather than a physics error, which is what makes it the classic one.",
+     "new": "Three of the four errors point in a consistent direction. The liquid retains material that should have gone to gas, but that material is intermediates, so its effect on the stock tank density is not simply signed."
+    },
+    "options": {
+     "0": {
+      "old": "The gas-oil ratio comes out too high, since all the gas is attributed to the one remaining stage.",
+      "new": "It comes out much too light, because the gas left in the liquid lowers its density at 60 F."
+     },
+     "1": {
+      "old": "The gas-oil ratio comes out too low, the stock tank volume too large, the formation volume factor too small, and nothing fails.",
+      "new": "Its direction is less obvious than it looks, because the retained components are intermediates whose effect on density is not trivially signed."
+     },
+     "2": {
+      "old": "The calculation fails at initialisation, since a train must terminate at atmospheric pressure.",
+      "new": "It is unchanged, because gravity is measured on the tank liquid at 60 F whatever the path it took there."
+     },
+     "3": {
+      "old": "Nothing measurable changes, since the tank releases only a few percent of the total gas.",
+      "new": "It moves by exactly the ratio of the two stage pressures, since the tank flash scales the liquid density."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 18,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.82 k0.87) with intermediate module m03-characterizing-the-plus-fraction 7: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m03-characterizing-the-plus-fraction 7; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What does the acentric factor control in the equation of state?",
+     "new": "How does the engine's gate suite test the characterization correlations?"
+    },
+    "explanation": {
+     "old": "That is its whole role. Good Oil's C7+ comes out at 0.6690835265426222, against methane near 0.011 and normal decane near 0.49.",
+     "new": "nC10 has a measured boiling point and measured criticals, so that test has a real answer. It is also the honest limit of testing: the chain can be shown to work on pure substances and cannot be shown to work on a lump, which has no true answer."
+    },
+    "options": {
+     "0": {
+      "old": "The covolume, so that a less spherical molecule occupies proportionally more space.",
+      "new": "By comparing the C7+ properties against the values in the laboratory report."
+     },
+     "1": {
+      "old": "The binary interaction parameter against methane, which is why heavy components need large values.",
+      "new": "By checking the Watson K of every fluid lands between 10 and 12.5, the range of ordinary crude families."
+     },
+     "2": {
+      "old": "The critical compressibility, corrected from the two-parameter value toward the real one.",
+      "new": "By running Soreide and Kesler-Lee against each other and requiring the two to agree."
+     },
+     "3": {
+      "old": "How fast the attraction term weakens with temperature, through kappa in the alpha function.",
+      "new": "By feeding them the MW and SG of known normal alkanes and checking the recovered criticals."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 24,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.75 k1.00) with intermediate module m04-the-untuned-model 5: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m04-the-untuned-model 5; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "The model returns 31.8056416463794 API against a measured 40.7. Where does that come from?",
+     "new": "The literature gate sets the API tolerance at 10, just above the observed 8.9 bias. Why there?"
+    },
+    "explanation": {
+     "old": "The pure C7+ pseudo recovers a standard-condition specific gravity of 0.9075 against the defined 0.8515, and a six percent error in specific gravity becomes nine API because the scale is compressed.",
+     "new": "The fixture's citation text says the tolerance regression-pins a documented bias rather than certifying an acceptable answer. A loose gate hides the bias and a gate at the correct answer fails and gets ignored."
+    },
+    "options": {
+     "0": {
+      "old": "The missing stock tank stage, which leaves intermediates in the liquid and weighs it down.",
+      "new": "Because ten API is the accepted accuracy of an untuned cubic equation on stock tank oil."
+     },
+     "1": {
+      "old": "The binary interaction parameter with methane, which controls how much light material stays in the tank oil.",
+      "new": "Because a looser tolerance would let the later tuning step reach the measured gravity purely by construction."
+     },
+     "2": {
+      "old": "The Jhaveri-Youngren volume shift on the C7+ pseudo-component, which makes that lump too dense.",
+      "new": "So it passes today and fails the moment the bias changes, which is what a regression pin is for."
+     },
+     "3": {
+      "old": "The critical pressure of the pseudo-component, the least reliable output of the characterization chain.",
+      "new": "Because the API scale is compressed, so ten API corresponds to the six percent tolerance on the density."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.94 k0.61) with intermediate module m05-correlations-against-a-study 1: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m05-correlations-against-a-study 1; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Standing had 105 points from one region, Vasquez-Beggs over 6000 from everywhere. Which is better?",
+     "new": "Why is a correlation usually enough for ranking two prospects on the same kind of fluid?"
+    },
+    "explanation": {
+     "old": "A small coherent sample does well on oils like its own. A broad heterogeneous one is mediocre everywhere rather than good somewhere.",
+     "new": "A correlation's error is largely systematic, and it shifts both options the same way, so the order between them holds. It stops being enough when the decision turns on the difference."
+    },
+    "options": {
+     "0": {
+      "old": "Vasquez-Beggs, since more measurements always means a better constrained fit.",
+      "new": "Because a ranking needs only one significant figure, which any correlation inside its range provides."
+     },
+     "1": {
+      "old": "Neither in general; they are different trades between breadth and specificity.",
+      "new": "Because systematic errors cancel in a comparison, so the ranking survives."
+     },
+     "2": {
+      "old": "Standing, since a coherent regional sample gives a tighter fit than a heterogeneous one.",
+      "new": "Because ranking uses the screening tier, which need not be accurate."
+     },
+     "3": {
+      "old": "Whichever was published later, having had access to the earlier data as well as its own.",
+      "new": "Because both prospects will be measured before sanction, so the correlation's error never propagates."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.90 k1.00) with intermediate module m05-correlations-against-a-study 2: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m05-correlations-against-a-study 2; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What does a measurement change about running three correlations?",
+     "new": "A laboratory bubble point comes in 40 percent off every correlation. What is the honest use of the correlations?"
+    },
+    "explanation": {
+     "old": "Do that on enough fluids and you know something about your basin that no published correlation does.",
+     "new": "Sanity checking a measurement is one of the honest uses of a correlation. A sample from a well producing below its bubble point, for example, has lost gas and reads low, and the correlations are what flag it."
+    },
+    "options": {
+     "0": {
+      "old": "It converts a spread into an error, so you can say which is closer, by how much and in which direction.",
+      "new": "As a cross-check: a measurement that far from every correlation is worth re-examining before it is used."
+     },
+     "1": {
+      "old": "It removes the need to run them at all, since a measurement always supersedes a correlation on its own fluid.",
+      "new": "As the replacement value, since three published methods agreeing outweigh one laboratory sample from one well."
+     },
+     "2": {
+      "old": "It lets you pick the correlation that agrees, which is how a correlation is chosen for a basin.",
+      "new": "As an average with the measurement, weighting each correlation by the size of its fitted data set."
+     },
+     "3": {
+      "old": "It narrows the spread, the measurement being added to each correlation's fitted data.",
+      "new": "None, since a measurement always supersedes a correlation on the fluid it was taken from."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 39,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.92 k0.93) with intermediate module m06-the-professional-reading 7: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m06-the-professional-reading 7; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What do three of the six Professional fields have in common?",
+     "new": "Before submitting the Professional capstone, what two things should be written down for each field?"
+    },
+    "explanation": {
+     "old": "The commonest way to get a plausible wrong answer on any of the six is to report the measured value where the model value was asked for, or the reverse.",
+     "new": "Three fields ask for a model output and three for a comparison against a measurement. Reporting the measured value where the model value was asked for, or the reverse, is the commonest plausible wrong answer."
+    },
+    "options": {
+     "0": {
+      "old": "They depend on the characterization, so a C7+ error propagates into all three of them.",
+      "new": "The tier of the number and the tolerance the field applies, so the grading band is known."
+     },
+     "1": {
+      "old": "They can be read straight from the study explorer panel without any arithmetic outside it.",
+      "new": "The correlation that produced it and its validity range, since both are needed to reproduce it."
+     },
+     "2": {
+      "old": "They are evaluated at the separator conditions rather than at the study's reservoir conditions.",
+      "new": "The number of significant figures and the unit, where most plausible wrong answers come from."
+     },
+     "3": {
+      "old": "They ask for a comparison against a measurement rather than for a bare model output on its own.",
+      "new": "Whether the number came out of the model or out of the report, and which direction its error should run."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.79 k1.00) with intermediate module m06-the-professional-reading 8: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m06-the-professional-reading 8; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Which two experiments supply a reservoir engineer's Bo and Rs?",
+     "new": "Reading a PVT report you did not commission, what is the first question to ask?"
+    },
+    "explanation": {
+     "old": "Neither measures them alone. Combining them by the Amyx correction is a modelling choice, exact at the bubble point and approximate below it.",
+     "new": "A sample from a well producing below its bubble point has already lost gas and its bubble point reads low. The next two questions are which separator conditions the reported Bo corresponds to and whether the differential data was corrected."
+    },
+    "options": {
+     "0": {
+      "old": "The differential liberation supplies the shape and the separator test supplies the level.",
+      "new": "How the sample was taken, and whether the well was flowing above its bubble point."
+     },
+     "1": {
+      "old": "The constant composition expansion supplies the shape and the differential liberation the level.",
+      "new": "Which laboratory ran it, since the procedure differs enough between laboratories to matter."
+     },
+     "2": {
+      "old": "The separator test supplies both, being the only experiment referenced to a stock tank barrel.",
+      "new": "Whether the composition sums to one, since a report that fails that check cannot be used at all."
+     },
+     "3": {
+      "old": "Neither; both come from the composition run through an equation of state.",
+      "new": "Whether a tuned equation of state model is supplied with it."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.83 k0.68) with intermediate module m06-the-professional-reading 9: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m06-the-professional-reading 9; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Which number in a PVT report is most often misused?",
+     "new": "The constant composition expansion reports a relative volume column. What is it referenced to, and what does it give?"
+    },
+    "explanation": {
+     "old": "It is the biggest table in the report and it is labelled with things that look like what a simulator wants. Using them directly overstates both by several percent.",
+     "new": "Relative volume equals one at the bubble point by construction, while Bo at the bubble point is around 1.4 for this fluid. Turning cell volumes into Bo needs the separator test."
+    },
+    "options": {
+     "0": {
+      "old": "The bubble point, quoted without its temperature and therefore meaningless elsewhere.",
+      "new": "A stock tank barrel, so above the bubble point it is the undersaturated formation volume factor."
+     },
+     "1": {
+      "old": "The total gas-oil ratio, quoted without its separator conditions and therefore incomplete.",
+      "new": "The residual oil at 60 F, so it matches the differential liberation's Bod."
+     },
+     "2": {
+      "old": "The differential liberation's Bod and Rsd, used directly when they are referenced to a residual oil.",
+      "new": "The volume at the bubble point, so it equals one there, and its slope above it gives co."
+     },
+     "3": {
+      "old": "The relative volume, mistaken for the formation volume factor because both of them are dimensionless.",
+      "new": "The initial cell volume, so it stays below one and gives the oil's shrinkage."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m06-the-professional-reading",
+   "ord": 12,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.64 k0.62) with intermediate module m04-the-untuned-model 11: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of intermediate module m04-the-untuned-model 11; kept that question, whose module teaches the point, and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What four things make a bias documented rather than a defect?",
+     "new": "What did the Professional tier deliberately not do?"
+    },
+    "explanation": {
+     "old": "A defect is behaviour nobody intended and nobody knows about. Each of this tier's biases is understood by mechanism, reproducible run to run, recorded in the gates, and directional across fluids.",
+     "new": "Every model number came from composition and published characterization correlations with nothing adjusted, the saturation pressure, flash and separator train were used as they come, and the screening quantities are left for an ungraded Expert module."
+    },
+    "options": {
+     "0": {
+      "old": "Small, systematic, published and correctable, which are the four properties a regression pin requires.",
+      "new": "It did not read a real study, working instead from the designed Ekene fluid carried through the series."
+     },
+     "1": {
+      "old": "Understood, reproducible, recorded and directional.",
+      "new": "It tuned nothing, opened no equation of state, and touched no screening quantity."
+     },
+     "2": {
+      "old": "Measured, bounded, disclosed and accepted, which is the sequence a limitation goes through before release.",
+      "new": "It did not run a compositional model, comparing only correlations against the laboratory report."
+     },
+     "3": {
+      "old": "Known to the author, stated in the manual, flagged at run time and covered by a test.",
+      "new": "It did not compare anything against measurement, leaving that for the Expert tier's regression."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 1,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.67 k1.00) with advanced module m01-the-equation-of-state 3: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m01-the-equation-of-state 3; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Why does the cubic FORM matter for phase behaviour?",
+     "new": "Would replacing Peng-Robinson with a far more accurate equation much improve a model of Good Oil?"
+    },
+    "explanation": {
+     "old": "Three roots means a two-phase region: largest is the vapour volume, smallest the liquid, middle one meaningless. The mathematics produces the split rather than having it bolted on.",
+     "new": "A better equation would be more accurate for pure substances whose parameters are known. Improving it would optimise the part of the chain that is already the most rigorous, while the uncertainty sits in the characterized heavy end."
+    },
+    "options": {
+     "0": {
+      "old": "Because a cubic can be solved in closed form, which is what makes a compositional simulation fast enough to run at all.",
+      "new": "Yes, because the cubic's liquid density error is the model's largest bias, and a better equation would remove that bias at its source."
+     },
+     "1": {
+      "old": "Because a cubic has one or three real roots, so the equation itself says whether there is one phase or two.",
+      "new": "Little, because a third of the moles is a lumped pseudo-component on correlated properties, so the equation is not the limit."
+     },
+     "2": {
+      "old": "Because a cubic is the lowest order reproducing the critical point's inflection in the isotherm.",
+      "new": "Yes, because a reference equation would fix the saturation pressure bias the tuning had to chase."
+     },
+     "3": {
+      "old": "Because a cubic guarantees a unique liquid root, which is what a flash needs to converge.",
+      "new": "No, because every equation of state reduces to the same cubic once mixing rules are applied."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.67 k0.77) with advanced module m01-the-equation-of-state 4: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m01-the-equation-of-state 4; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Why are multi-parameter reference equations not used for reservoir fluids?",
+     "new": "Why does Peng-Robinson dominate reservoir work over Soave-Redlich-Kwong?"
+    },
+    "explanation": {
+     "old": "The thing we most need to model, the heavy fraction, is what they cannot describe. A cubic loses only on pure-substance accuracy, which matters least here.",
+     "new": "The two differ in the form of the attraction term's volume dependence. The engine implements Peng-Robinson 1978 alone, which is a stated scope decision rather than a claim that the other is wrong."
+    },
+    "options": {
+     "0": {
+      "old": "They need per-substance parameters a pseudo-component does not have, they do not extend to mixtures easily, and they are slow.",
+      "new": "Because its attraction term's denominator was chosen to improve liquid density predictions, and it generally does better on them."
+     },
+     "1": {
+      "old": "They are proprietary, so a simulator cannot embed them without licensing every substance.",
+      "new": "Because it is the only cubic with an exact closed form for the fugacity coefficient."
+     },
+     "2": {
+      "old": "They were fitted for cryogenic work and never extended above C6 in the hydrocarbon series.",
+      "new": "Because it needs no acentric factor, so a pseudo-component needs one fewer correlation."
+     },
+     "3": {
+      "old": "They require an iterative volume solve, which a cubic avoids with its closed-form root.",
+      "new": "Because it reproduces the critical compressibility exactly for every hydrocarbon."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 4,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.80 k0.77) with advanced module m01-the-equation-of-state 7: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m01-the-equation-of-state 7; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Where do 0.457235529 and 0.077796074 come from?",
+     "new": "Why are components with an acentric factor near 0.49 worth knowing about?"
+    },
+    "explanation": {
+     "old": "They are not fitted constants, which matters when deciding what in the equation may legitimately be adjusted.",
+     "new": "The harness records a C10 component sitting near the switch, at 0.4 against 0.491, where the branch choice was visible in the result. The engine implements both branches and selects on the acentric factor."
+    },
+    "options": {
+     "0": {
+      "old": "A least-squares fit to whatever pure-substance volumetric data happened to be available when Peng and Robinson published.",
+      "new": "Because the 1976 and 1978 kappa forms give their largest difference there, so tuning should target them."
+     },
+     "1": {
+      "old": "The critical compressibility of methane, taken as the family's reference substance.",
+      "new": "Because above that value the acentric factor stops affecting the attraction term at all."
+     },
+     "2": {
+      "old": "Exact algebra at the critical point, where the first and second derivatives of pressure with respect to volume vanish.",
+      "new": "Because two implementations that place the kappa branch switch differently will disagree on them."
+     },
+     "3": {
+      "old": "A convention chosen so the equation reduces to van der Waals at zero acentric factor.",
+      "new": "Because Lee-Kesler and Edmister diverge there, so the characterization is least reliable."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 7,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.90 k0.86) with advanced module m01-the-equation-of-state 15: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m01-the-equation-of-state 15; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Why does the volume translation not appear in the equilibrium?",
+     "new": "Why is the equilibrium condition written in fugacities rather than chemical potentials?"
+    },
+    "explanation": {
+     "old": "The engine reports untranslated fugacities and translates only volumes and densities. It improves densities and provably leaves the phase behaviour alone.",
+     "new": "Fugacity is the same physics in more usable coordinates. A residual expressed in fugacities is a quantity an engineer can reason about."
+    },
+    "options": {
+     "0": {
+      "old": "Because it is applied only to reported outputs, after the flash has already converged.",
+      "new": "Because chemical potential is not defined for a pseudo-component, which has no reference state to measure it from."
+     },
+     "1": {
+      "old": "Because its effect falls below the tolerance the outer iteration converges to.",
+      "new": "Because fugacity already includes the volume translation, which a chemical potential formulation would miss."
+     },
+     "2": {
+      "old": "Because a constant shift changes every component's fugacity in a phase by the same factor, leaving the ratio across the phases unchanged.",
+      "new": "Fugacity expresses the same condition in pressure units and stays well behaved at zero composition, where chemical potential diverges."
+     },
+     "3": {
+      "old": "Because the fugacity depends on the compressibility factor rather than on the molar volume.",
+      "new": "Because fugacities are measured directly in the laboratory, so the residual is anchored to real data."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 8,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.93 k0.79) with advanced module m02-flash-and-envelope 1: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m02-flash-and-envelope 1; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Why can a flash not decide by itself how many phases there are?",
+     "new": "A traced phase envelope puts the critical point somewhere implausible. What is it telling you?"
+    },
+    "explanation": {
+     "old": "It can converge on the trivial answer for a mixture that IS two phase, if the starting estimate is poor. Detecting it afterwards is possible and fragile.",
+     "new": "For a mixture with a lumped pseudo-component the critical point is a model output rather than a fluid property, and it moves when the characterization moves."
+    },
+    "options": {
+     "0": {
+      "old": "Because it converges on a trivial solution where both phases carry the feed composition, which satisfies equal fugacities and means nothing.",
+      "new": "That the plus fraction was probably characterized wrongly, a check far more sensitive than any single saturation pressure."
+     },
+     "1": {
+      "old": "Because the K values are an input to it rather than an output, so the phase count is assumed.",
+      "new": "That the stability test has failed near the critical point, and the tracing should simply be rerun on a finer grid."
+     },
+     "2": {
+      "old": "Because its material balance assumes two phases, making a single-phase feed inconsistent.",
+      "new": "That the fluid is genuinely unusual, since the critical point on the envelope is a measured property of the fluid."
+     },
+     "3": {
+      "old": "Because its tolerance cannot distinguish a very small vapour fraction from exactly zero.",
+      "new": "That the volume shift is wrong, since it sets where the two branches of the envelope meet."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 9,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.86 k0.80) with advanced module m02-flash-and-envelope 2: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m02-flash-and-envelope 2; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What does a stability test ask?",
+     "new": "What is the cricondentherm, and what does it explain?"
+    },
+    "explanation": {
+     "old": "If a trial phase of any composition lowers the energy the mixture is unstable. That is stronger and more reliable than counting roots.",
+     "new": "To the right of the cricondentherm the mixture is single phase at every pressure, so depletion never enters the two-phase region. The highest pressure on the loop is the cricondenbar."
+    },
+    "options": {
+     "0": {
+      "old": "Whether the cubic returns three real roots, which signals a two-phase region.",
+      "new": "The highest pressure on the loop, above which no gas can remain dissolved in the liquid phase."
+     },
+     "1": {
+      "old": "Whether Wilson's K values straddle one, which indicates a mixture that will split.",
+      "new": "Where the bubble and dew branches meet and the phases become one."
+     },
+     "2": {
+      "old": "Whether the feed lies inside the phase envelope traced at that temperature.",
+      "new": "The temperature of greatest retrograde condensation in a condensate."
+     },
+     "3": {
+      "old": "Whether adding an infinitesimal trial phase would lower the total Gibbs energy.",
+      "new": "The highest temperature two phases can exist at, which is what makes a dry gas dry."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 10,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.89 k0.86) with advanced module m02-flash-and-envelope 3: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m02-flash-and-envelope 3; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Why run the stability test from both sides?",
+     "new": "Why does the engine scan for a saturation pressure on a logarithmic grid?"
+    },
+    "explanation": {
+     "old": "A mixture mostly liquid just below its bubble point is unstable to a vapour-like trial and not a liquid-like one. Test only the liquid side and you wrongly call it stable.",
+     "new": "A heavy oil saturates at a few hundred psia and a rich condensate near ten thousand. A linear scan either misses the low end or wastes many evaluations at the high end."
+    },
+    "options": {
+     "0": {
+      "old": "Because the two sides use different starting estimates and running both improves convergence.",
+      "new": "Because the stability flag changes logarithmically with pressure, so a linear grid would bias the bracket."
+     },
+     "1": {
+      "old": "Because a mixture can be unstable to a vapour-like trial and not to a liquid-like one, and one side alone misses those cases.",
+      "new": "Because saturation pressures span orders of magnitude, from a few hundred psia to ten thousand."
+     },
+     "2": {
+      "old": "Because the vapour side finds dew points and the liquid side finds bubble points, and any given fluid may turn out to have either.",
+      "new": "Because a log grid gives the bisection its tolerance at every pressure."
+     },
+     "3": {
+      "old": "Because the energy surface has two minima and only both probes find the global one.",
+      "new": "Because the cubic's roots are spaced logarithmically, and the grid matches that spacing."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 15,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.73 k0.71) with advanced module m03-tuning 1: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m03-tuning 1; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What rule decides which parameters may be knobs?",
+     "new": "Why is adjusting Kesler-Lee's own coefficients ruled out as a tuning knob?"
+    },
+    "explanation": {
+     "old": "It is the same rule the simulation course applied to its structural calibration: calibrate the unconstrained parameter against the constrained quantity, never the reverse.",
+     "new": "Tuning adjusts the constructed properties of the pseudo-component. Changing a published correlation's coefficients would rewrite a method fitted to many substances using a single fluid."
+    },
+    "options": {
+     "0": {
+      "old": "Tune whichever parameters most reduce the residual, since that converges fastest.",
+      "new": "Because the coefficients are exact algebra from the critical point, like the Peng-Robinson constants."
+     },
+     "1": {
+      "old": "Tune exactly as many parameters as there are targets, so the system is determined.",
+      "new": "Because the coefficients have zero-width bounds, so the solver cannot move them."
+     },
+     "2": {
+      "old": "Tune constructed quantities to reproduce measured ones, and never adjust a measured quantity.",
+      "new": "Because that would not be tuning; it would be publishing a new correlation on a sample of one."
+     },
+     "3": {
+      "old": "Tune whichever parameters carry no published uncertainty, since nobody is in a position to defend those.",
+      "new": "Because Kesler-Lee does not affect any of the four targets once the multipliers exist."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.62 k0.75) with advanced module m03-tuning 3: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m03-tuning 3; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What would happen if the regression could move methane's critical temperature?",
+     "new": "What is the practical payoff of confining every knob to the pseudo-component?"
+    },
+    "explanation": {
+     "old": "The model would reproduce the four numbers and be wrong about methane everywhere. That is what happens when a regression is given a parameter it should not have.",
+     "new": "A model that had absorbed its errors into methane would be wrong about methane for every question the tuning did not cover. Holding to the rule is worth it even when a wider regression would fit better."
+    },
+    "options": {
+     "0": {
+      "old": "It would, because methane at 0.3647 strongly affects the saturation pressure and a least-squares solver takes efficient routes.",
+      "new": "The model stays correct about its library components everywhere, so it can answer questions the tuning did not cover, within reason."
+     },
+     "1": {
+      "old": "It would not, since the bounds on library components are set to zero width.",
+      "new": "The regression converges faster, because the library components need no derivatives and drop out of the Jacobian."
+     },
+     "2": {
+      "old": "It would, but negligibly, since methane's published properties are already near optimal.",
+      "new": "The tuned values can then be booked as measured, since the pseudo-component has no other source of properties."
+     },
+     "3": {
+      "old": "It would fail to converge, since the library properties feed the characterization too.",
+      "new": "The fit becomes exact, because the pseudo-component carries most of the mass of the fluid."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 18,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.78 k1.00) with advanced module m03-tuning 8: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m03-tuning 8; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Which knob cannot affect the saturation pressure?",
+     "new": "Raise the C7+ critical temperature multiplier. What happens to the saturation pressure?"
+    },
+    "explanation": {
+     "old": "That gives it an almost private effect on the stock tank gravity, which makes the regression better conditioned than four knobs fighting over the same residuals.",
+     "new": "The criticals set a and b for the pseudo-component, which set how strongly it holds on to the light components. A more liquid-like heavy fraction holds methane more tightly."
+    },
+    "options": {
+     "0": {
+      "old": "The critical pressure multiplier, since the saturation pressure depends on temperature instead.",
+      "new": "It rises, because a hotter critical point makes methane leave the liquid more readily."
+     },
+     "1": {
+      "old": "The interaction parameter, since it enters the attraction and not the phase split.",
+      "new": "Nothing; the multipliers act only on density."
+     },
+     "2": {
+      "old": "None; all four affect it through the mixture's a and b parameters.",
+      "new": "It rises and falls in turn, since the alpha function reverses sign near Tr of one."
+     },
+     "3": {
+      "old": "The volume shift, because the translation cancels in the equilibrium.",
+      "new": "It falls: the heavy fraction becomes more liquid-like."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 20,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.62 k1.00) with advanced module m03-tuning 13: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m03-tuning 13; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What is the Jacobian gotcha?",
+     "new": "Why does the stock tank gravity enter the objective as a specific gravity rather than in API?"
+    },
+    "explanation": {
+     "old": "The default nudge is about one part in a million against a 0.05 psia tolerance. Three of the four knobs affect the saturation pressure and the fit would have stalled with them untouched.",
+     "new": "The objective sums squared relative errors so that a pressure in thousands of psia and a gravity in tens of API contribute comparably. Every residual is of order 0.01 per percent of mismatch."
+    },
+    "options": {
+     "0": {
+      "old": "The saturation pressure is quantized to the bisection tolerance, so a small finite-difference step moves it by nothing and returns a zero derivative.",
+      "new": "Because API is a compressed scale, and a residual in API would weight the gravity target far more heavily than the other three."
+     },
+     "1": {
+      "old": "The Jacobian is singular because two knobs affect the same target identically.",
+      "new": "Because the laboratory reports specific gravity directly, and the API value is only derived from it afterwards."
+     },
+     "2": {
+      "old": "The step is taken in tuned rather than physical space, so the multipliers are mis-scaled.",
+      "new": "Because API is not defined for the pseudo-component, which has no stock tank density of its own."
+     },
+     "3": {
+      "old": "The Jacobian is computed once and reused after the knobs have moved substantially.",
+      "new": "Because the volume shift correlation is expressed against specific gravity rather than against API."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 21,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.60 k1.00) with advanced module m03-tuning 14: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m03-tuning 14; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Why was that failure hard to notice?",
+     "new": "After a finite-difference regression one knob has barely moved. What could that mean?"
+    },
+    "explanation": {
+     "old": "Nothing errored and nothing warned. The only way to notice was to look at how far each knob moved, see three had barely moved, and ask why.",
+     "new": "The three look identical in the output. Perturbing the knob by hand tells them apart: if the objective changes and the solver did not move it, the step size is wrong."
+    },
+    "options": {
+     "0": {
+      "old": "Because the warning it raised was suppressed by default in the engine's configuration.",
+      "new": "That it has hit its bound, since a bounded knob pressed against its limit cannot move any further."
+     },
+     "1": {
+      "old": "Because the regression converged, reported success and reduced the residual, since the one knob whose target was not quantized still worked.",
+      "new": "That it is well determined, unconstrained by the data, or invisible to the derivative, and each needs a different response."
+     },
+     "2": {
+      "old": "Because the affected knobs moved slightly, so it looked like a normal under-determined fit.",
+      "new": "That the prior pull is too strong and should be removed so the fit can move the knob freely."
+     },
+     "3": {
+      "old": "Because the tuned model still reproduced all four targets, so the fit appeared to succeed.",
+      "new": "That the knob is irrelevant to every target and can be dropped from the tuning set with no loss."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 27,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.83 k1.00) with advanced module m04-what-tuning-costs 12: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m04-what-tuning-costs 12; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "Which five lines does a tuned model's write-up need?",
+     "new": "If only one sentence of the write-up survives into a summary, what must it keep?"
+    },
+    "explanation": {
+     "old": "Without the scope a reader assumes the whole model was fitted. Without the targets they cannot tell what it was fitted to. Without the cost they will find it themselves.",
+     "new": "Drop the scope and a reader assumes the whole model was fitted. Drop the targets and they cannot tell what it was fitted to. Drop the cost and they will find it themselves."
+    },
+    "options": {
+     "0": {
+      "old": "The knobs, the bounds, the solver, the iteration count and the final residual.",
+      "new": "The final residual and the reduction factor, which together say how good the fit was."
+     },
+     "1": {
+      "old": "The composition, the characterization, the conditions, the train and the targets.",
+      "new": "The four tuned knob values, to rebuild the model."
+     },
+     "2": {
+      "old": "The model, the fluid, the date, the engine version and who ran it.",
+      "new": "The engine version and the date of the run."
+     },
+     "3": {
+      "old": "What was tuned, against what, the ledger, what was held fixed, and what it cost.",
+      "new": "The scope of the knobs, the targets matched and the cost."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 32,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.78 k0.61) with advanced module m05-the-tiers-this-course-will-not-grade 7: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m05-the-tiers-this-course-will-not-grade 7; kept the module question and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What is gated about LBC and what is not?",
+     "new": "What would it take to improve the compositional model's LBC viscosity, and does the engine do it?"
+    },
+    "explanation": {
+     "old": "An implementation can be provably correct and still produce a number nobody should book. That distinction is the whole tier system in one example.",
+     "new": "The four tuning knobs are aimed at phase behaviour and density, so every viscosity this model reports is untuned by design, and the tier label says so."
+    },
+    "options": {
+     "0": {
+      "old": "The answer is gated against the study's viscosities and the implementation only reviewed.",
+      "new": "Switching to the black-oil chain inside the flash, which the engine does whenever the fluid is a black oil."
+     },
+     "1": {
+      "old": "Both are gated, the answer against the eight Coats and Smart fluids in the harness.",
+      "new": "Adding more knobs to the phase tuning, which the engine does automatically once a viscosity target is supplied."
+     },
+     "2": {
+      "old": "The arithmetic is verified by transcription and NIST anchors; the answer is not, because no measured viscosities exist for this fluid.",
+      "new": "Tuning the critical volumes to measured viscosities, standard commercial practice that sits on the engine's out-of-scope register."
+     },
+     "3": {
+      "old": "Neither is gated, which is what the screening label means.",
+      "new": "Nothing, since the arithmetic is already gated against NIST anchors and so cannot be improved further."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  },
+  {
+   "app_slug": "fluid",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-the-expert-reading",
+   "ord": 11,
+   "category": "duplicate",
+   "flag": "duplicate candidate (near p0.78 k0.76) with advanced module m03-tuning 15: same concept and same answer, trivially reworded",
+   "verdict": "fixed",
+   "reason": "True duplicate of advanced module m03-tuning 15; kept that question, whose module teaches the point, and rewrote this one into a new question on a different point from the same module's lessons.",
+   "changes": {
+    "prompt": {
+     "old": "What is the general form of the quantized-objective trap?",
+     "new": "How was the quantized saturation pressure made visible to the regression?"
+    },
+    "explanation": {
+     "old": "The symptom is always the same: a parameter the solver decides has no effect. The check is to perturb it by hand and see whether the objective changes.",
+     "new": "One part in a thousand is large enough to move the saturation pressure across several bisection quanta and small enough to remain a local derivative, and every existing caller of the shared solver keeps the default."
+    },
+    "options": {
+     "0": {
+      "old": "Any objective evaluated by an iterative solver inherits that solver's convergence noise as derivative noise.",
+      "new": "By tightening the bisection tolerance until the default step of one part in a million could see it."
+     },
+     "1": {
+      "old": "Any target from a search with a tolerance, any counted quantity, or any rounded value returns a zero finite-difference derivative for a small enough step.",
+      "new": "By an explicit absolute Jacobian step of one part in a thousand, added as a backward-compatible per-parameter option on the shared solver."
+     },
+     "2": {
+      "old": "Any parameter whose effect is smaller than the objective's own tolerance is unidentifiable from the data.",
+      "new": "By replacing the finite differences with an analytic derivative of the saturation pressure in the solver."
+     },
+     "3": {
+      "old": "Any regression on a non-smooth objective will converge to a point on a discontinuity rather than a minimum.",
+      "new": "By dropping the saturation pressure from the objective and fitting it separately after the other three."
+     }
+    }
+   },
+   "correct_change_reason": "The question is replaced by a new one testing a different lesson point, so the keyed option is new text; answer_index and the keyed option's length rank are unchanged."
+  }
+ ]
+}
