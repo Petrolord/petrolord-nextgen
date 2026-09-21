@@ -1,0 +1,1937 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 3,
+  "old": "The static mud weight, the circulating density, the surge and the swab, all over the whole trajectory.",
+  "new": "The static mud weight, circulating density, surge and swab over the whole trajectory."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 0,
+  "old": "The tightest measured depth.",
+  "new": "The tightest measured depth, since reports usually quote the window as a range over the section."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "The breakout angle, which is in the borehole frame and will be misread as a compass bearing by most readers.",
+  "new": "The breakout angle, in the borehole frame and so misread as a compass bearing by most readers."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 1,
+  "old": "They do not meet at all.",
+  "new": "They do not meet at all, because each course picks its own shoe from its own independent pressure model."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 0,
+  "old": "Because they use different fracture gradients.",
+  "new": "Because they use different fracture gradients, one from the stress model and the other from a leak-off test at the shoe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "The static mud weight and the equivalent circulating density, both of which the hydraulics course computes directly.",
+  "new": "The static mud weight and circulating density, both from the hydraulics course."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "The kill mud weight and the trip margin, both of which the well control calculation supplies for the section.",
+  "new": "The kill mud weight and the trip margin from the well control calculation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "Salt, and a vertical hole through it.",
+  "new": "Salt, and a vertical hole through it, because the creep of a thick salt body is strongly directional."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "It is denser than water-based mud.",
+  "new": "It is denser than water-based mud, so the extra hydrostatic support holds the swelling shale back."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 2,
+  "old": "Hurts against both, since a cooler rock is more brittle and therefore fails at a lower stress in either mode.",
+  "new": "Hurts against both, since a cooler rock is brittle and fails sooner either way."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 3,
+  "old": "Leaves both unchanged, since thermal effects act on the pore fluid rather than on the grain framework.",
+  "new": "Leaves both unchanged, since thermal effects act only on the pore fluid."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 0,
+  "old": "Losses starting the moment the pumps come on.",
+  "new": "Losses starting the moment the pumps come on, as the circulating pressure is added to the static column at once."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "It rises, because a fractured rock relieves the hoop stress concentration and therefore resists tensile failure better.",
+  "new": "It rises, because the fracture relieves the hoop stress concentration and resists tension."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "It becomes indeterminate, because the fracture opening pressure depends on the aperture, which is never measured.",
+  "new": "It becomes indeterminate, since the opening pressure depends on an aperture never measured."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "The computed fracture initiation pressure.",
+  "new": "The computed fracture initiation pressure, since it already includes the tensile strength of the wall."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 2,
+  "old": "The overburden, the pore pressure, the stress azimuth, the Poisson ratio and the friction angle, all of them estimated.",
+  "new": "The overburden, pore pressure, stress azimuth, Poisson ratio and friction angle, all estimated."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "Anything involving a deviated well, since the closed forms hold only for a vertical hole and the rest is unverified.",
+  "new": "Anything involving a deviated well, since the closed forms hold only for a vertical hole."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 1,
+  "old": "The tightest point is not reliably at total depth, and on one of the two wells here it sits at the kick-off point.",
+  "new": "The tightest point is not reliably at total depth; on one well here it is at the kick-off point."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "The Poisson ratio moves the answer more than any other input, and it usually comes from a lithology seed table.",
+  "new": "The Poisson ratio moves the answer more than any other input and usually comes from a seed table."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-window-along-a-well",
+  "ord": 12,
+  "option": 2,
+  "old": "The horizontal well's is narrower, which is the expected result for a well with a long lateral section.",
+  "new": "The horizontal well's is narrower, as expected for a well with a long lateral."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-window-along-a-well",
+  "ord": 13,
+  "option": 0,
+  "old": "It is weak rock, and the remedy is a heavier mud.",
+  "new": "It is weak rock, and the remedy is a heavier mud to hold the wall up against collapse."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-window-along-a-well",
+  "ord": 14,
+  "option": 3,
+  "old": "A dogleg in the build that the survey does not resolve, which produces a local stress concentration at the wall.",
+  "new": "A dogleg in the build the survey misses, producing a local stress concentration."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-the-window-along-a-well",
+  "ord": 15,
+  "option": 0,
+  "old": "Always evaluate total depth first.",
+  "new": "Always evaluate total depth first, where the pore pressure is highest."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-which-bound-binds",
+  "ord": 7,
+  "option": 1,
+  "old": "The collapse gradient rising with depth.",
+  "new": "The collapse gradient rising with depth, as the rock weakens toward the bottom of the section."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-which-bound-binds",
+  "ord": 8,
+  "option": 0,
+  "old": "Pore pressure, by a similar margin.",
+  "new": "Pore pressure, by a similar margin, because the lateral lands in the overpressured interval."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-which-bound-binds",
+  "ord": 9,
+  "option": 3,
+  "old": "Because the stress azimuth is unfavourable there, which puts the hole across the maximum horizontal stress direction.",
+  "new": "Because the stress azimuth is unfavourable there, putting the hole across the maximum horizontal stress."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-which-bound-binds",
+  "ord": 11,
+  "option": 3,
+  "old": "Casing depth, which is the only remedy the model can quantify for a section limited by wellbore stability.",
+  "new": "Casing depth, the only remedy the model can quantify for a stability-limited section."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-which-bound-binds",
+  "ord": 12,
+  "option": 3,
+  "old": "Neither, because the operational safety factor applied to the mud weight absorbs the difference between them.",
+  "new": "Neither, because the safety factor applied to the mud weight absorbs the difference between them."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-which-bound-binds",
+  "ord": 13,
+  "option": 3,
+  "old": "The collapse gradient, the fracture gradient and the pore pressure, leaving the reader to take the maximum themselves.",
+  "new": "The collapse gradient, the fracture gradient and the pore pressure, leaving the reader to take the maximum."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-which-bound-binds",
+  "ord": 14,
+  "option": 1,
+  "old": "The collapse gradient and the fracture gradient coincide, which is a marginal condition rather than an impossible one.",
+  "new": "The collapse and fracture gradients meet: a marginal state."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-which-bound-binds",
+  "ord": 14,
+  "option": 2,
+  "old": "The model has failed to converge, which happens when the scan and the bisection disagree on the collapse pressure.",
+  "new": "The model failed to converge between scan and bisection."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-which-bound-binds",
+  "ord": 15,
+  "option": 3,
+  "old": "The survey accuracy, since an error in the inclination at that station would change the wall loading substantially.",
+  "new": "The survey accuracy, since an inclination error at that station changes the wall loading."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-sensitivity",
+  "ord": 7,
+  "option": 0,
+  "old": "It lowers the collapse gradient directly.",
+  "new": "It lowers the collapse gradient directly, by softening the rock so the wall carries less hoop stress."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-sensitivity",
+  "ord": 8,
+  "option": 0,
+  "old": "Because it is the easiest to measure.",
+  "new": "Because it is the easiest to measure, so improving it is the cheapest win in the whole study."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-sensitivity",
+  "ord": 9,
+  "option": 1,
+  "old": "By about 18 percent, as on the other well.",
+  "new": "By about 18 percent, as on the other well, through the collapse bound."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-sensitivity",
+  "ord": 10,
+  "option": 1,
+  "old": "Because the collapse gradient at that depth is below the density of water, so any change to it is numerically negligible.",
+  "new": "Because the collapse gradient there is below the density of water, so any change to it is negligible."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-sensitivity",
+  "ord": 11,
+  "option": 0,
+  "old": "Every parameter matters equally.",
+  "new": "Every parameter matters equally, so each must be measured with the same care."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-sensitivity",
+  "ord": 13,
+  "option": 2,
+  "old": "An extended leak-off test at each shoe, which measures the minimum horizontal stress directly and anchors the fracture end.",
+  "new": "An extended leak-off test at each shoe, measuring the minimum horizontal stress directly."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-sensitivity",
+  "ord": 13,
+  "option": 3,
+  "old": "An image log, which gives the stress azimuth from breakout orientations and calibrates the collapse gradient at the same time.",
+  "new": "An image log, giving the azimuth from breakouts and calibrating the collapse gradient."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-sensitivity",
+  "ord": 14,
+  "option": 1,
+  "old": "The ranking is a property of the model rather than of the well, so one sweep serves for every well the model is applied to.",
+  "new": "The ranking belongs to the model, so one sweep serves every well it is applied to."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-sensitivity",
+  "ord": 14,
+  "option": 3,
+  "old": "The ranking depends on the depth, so a separate sweep is needed for every section of every well being planned.",
+  "new": "The ranking depends on depth, so every section of every well needs its own sweep."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-sensitivity",
+  "ord": 15,
+  "option": 2,
+  "old": "About as much as the base case, since each parameter requires the whole trajectory to be walked again from the top.",
+  "new": "About as much as the base case, since each parameter needs the whole trajectory walked again from the top."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-using-it-in-a-well-plan",
+  "ord": 8,
+  "option": 3,
+  "old": "It depends on the hole size, since a larger hole has a lower kick tolerance for the same shoe fracture gradient.",
+  "new": "It depends on hole size, since a larger hole has a lower kick tolerance for the same shoe."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-using-it-in-a-well-plan",
+  "ord": 9,
+  "option": 2,
+  "old": "The static mud weight and the equivalent circulating density, both of which are computed by the hydraulics course directly.",
+  "new": "The static mud weight and circulating density, both from the hydraulics course."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-using-it-in-a-well-plan",
+  "ord": 9,
+  "option": 3,
+  "old": "The kill mud weight and the trip margin, both of which are set by the well control calculation rather than by this one.",
+  "new": "The kill mud weight and the trip margin from the well control calculation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-using-it-in-a-well-plan",
+  "ord": 10,
+  "option": 2,
+  "old": "Leaves it unchanged, since the fracture gradient is a static property of the rock and does not depend on the flow rate.",
+  "new": "Leaves it unchanged, since the fracture gradient is a static rock property independent of flow rate."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-using-it-in-a-well-plan",
+  "ord": 11,
+  "option": 0,
+  "old": "Adds to the pressure, like surge.",
+  "new": "Adds to the pressure, like surge, because any pipe movement pushes mud against the formation."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-using-it-in-a-well-plan",
+  "ord": 12,
+  "option": 1,
+  "old": "That it should be computed from the swab pressure, which the hydraulics course calculates for the planned trip speed.",
+  "new": "That it should be computed from the swab pressure the hydraulics course calculates."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-using-it-in-a-well-plan",
+  "ord": 12,
+  "option": 3,
+  "old": "That it is unnecessary in a collapse-bound section, where the mud weight is already well above the pore pressure.",
+  "new": "That it is unneeded where collapse binds, as the mud already sits above pore pressure."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-using-it-in-a-well-plan",
+  "ord": 13,
+  "option": 0,
+  "old": "A single recommended trajectory.",
+  "new": "A single recommended trajectory, chosen as the one with the widest window at total depth."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-using-it-in-a-well-plan",
+  "ord": 14,
+  "option": 2,
+  "old": "A revised set of lithology seeds, updated from any core taken during the drilling of the first well in the sequence.",
+  "new": "A revised set of lithology seeds, updated from any core taken while the first well was drilled."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-using-it-in-a-well-plan",
+  "ord": 15,
+  "option": 0,
+  "old": "The per-section table.",
+  "new": "The per-section table, since the planner reads mud weights section by section anyway."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 10,
+  "option": 3,
+  "old": "Horizontal wells, where the long lateral gives the mud time to reach thermal equilibrium with the surrounding formation.",
+  "new": "Horizontal wells, where the long lateral lets the mud reach formation temperature."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 11,
+  "option": 0,
+  "old": "Losses starting the moment the pumps come on.",
+  "new": "Losses starting the moment the pumps come on, when the annular friction pressure first lands on the wall."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 12,
+  "option": 0,
+  "old": "Raises the initiation pressure.",
+  "new": "Raises the initiation pressure, because the fracture relieves the hoop stress around the hole."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 13,
+  "option": 1,
+  "old": "The computed fracture initiation pressure.",
+  "new": "The computed fracture initiation pressure, because it already accounts for the stress concentration at the wall."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 14,
+  "option": 1,
+  "old": "It raises the collapse pressure uniformly, by an amount proportional to the difference between the two strengths.",
+  "new": "It raises the collapse pressure uniformly, whatever the hole's attitude."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 14,
+  "option": 3,
+  "old": "It moves the breakout to the bedding orientation, but the pressure at which it forms is unchanged from the intact case.",
+  "new": "It moves the breakout to the bedding, with the collapse pressure unchanged."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-the-edges-of-the-model",
+  "ord": 15,
+  "option": 3,
+  "old": "Anything involving a deviated well, since the closed forms apply only to a vertical hole and the rest is unverified.",
+  "new": "Anything involving a deviated well, since the closed forms apply only to a vertical hole."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "It is always at total depth.",
+  "new": "It is always at total depth, where the pore pressure and the overburden are both greatest."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 9,
+  "option": 3,
+  "old": "Neither is clearly bound by one candidate, since the two are within a few kilograms per cubic metre on both wells.",
+  "new": "Neither, since both candidates are within a few kilograms per cubic metre."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 10,
+  "option": 1,
+  "old": "It affects only the fracture gradient, so its influence is confined to the upper bound and leaves the floor untouched.",
+  "new": "It affects only the fracture gradient, so its influence is confined to the upper bound."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 11,
+  "option": 3,
+  "old": "That the four-curve chart should show only the lower and upper bounds, to avoid overloading the reader with detail.",
+  "new": "That the four-curve chart should show only the two bounds, to avoid overloading the reader."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 2,
+  "old": "Step the walk in true vertical depth, since the mechanical earth model is indexed by it and interpolation is then unnecessary.",
+  "new": "Step the walk in true vertical depth, the axis the model is indexed by."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "option": 3,
+  "old": "Use a thirty metre step, which is fine enough to locate the tightest point and coarse enough to keep the run time reasonable.",
+  "new": "Use a thirty metre step, fine enough to find the tightest point."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "option": 3,
+  "old": "It sends the casing point and receives the kick tolerance, which is then used to set the mud weight for the section.",
+  "new": "It sends the casing point and receives the kick tolerance, which then sets the section mud weight."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 1,
+  "old": "That the rock is isotropic there.",
+  "new": "That the rock is isotropic there, so the two stresses simply agree."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "option": 0,
+  "old": "McNally, an exponential in the slowness.",
+  "new": "McNally, an exponential in the slowness, calibrated on shale."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "Once, near the middle of the range.",
+  "new": "Once, near the middle of the range, where the two fits agree."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "The usefulness of both correlations.",
+  "new": "The usefulness of both correlations, since they cannot both be right where they disagree."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 2,
+  "old": "About three, the same as most sedimentary rocks, since halite has a friction angle close to thirty degrees in triaxial tests.",
+  "new": "About three, as for most sedimentary rocks near thirty degrees of friction."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "Undefined, because the Mohr-Coulomb criterion does not apply to a material that deforms by creep rather than by fracture.",
+  "new": "Undefined, since Mohr-Coulomb does not apply to a rock that creeps."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 1,
+  "old": "In the Mohr-Coulomb criterion and in the Biot coefficient, both of which describe how the grain framework carries load.",
+  "new": "In the Mohr-Coulomb criterion and in the Biot coefficient, which both describe grain loading."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 2,
+  "old": "In the collapse criterion and in the fracture criterion, which is why lowering it narrows the window from both directions.",
+  "new": "In the collapse and the fracture criteria, so lowering it narrows the window from both sides."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "Nothing, if the seed came from the right lithology.",
+  "new": "Nothing, provided the seed came from the right lithology class."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 1,
+  "old": "Agreement with the golden file and the clamp count.",
+  "new": "Agreement with the golden file and the clamp count, which together certify the run."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "The pore pressure exceeds the minimum horizontal stress below the ramp, which affects the deepest twenty samples of the profile.",
+  "new": "Pore pressure exceeds the minimum horizontal stress in the deepest samples."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 3,
+  "old": "The sonic log is missing over the shallowest interval, so the strength column could not be computed for those depths.",
+  "new": "The sonic log is missing shallow, so strength could not be computed there."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 1,
+  "old": "Partly, with clamping responsible above about 500 m and the estimate responsible below it over the rest of the interval.",
+  "new": "Partly, with clamping responsible above about 500 m and the estimate below it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 2,
+  "old": "It cannot be told from the output, because the engine reports the clamp count per run rather than identifying which samples.",
+  "new": "It cannot be told, since the engine reports a clamp count and not which samples."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "The overburden gradient, because a constant value overstates the vertical stress in the shallowest part of the section.",
+  "new": "The overburden, whose constant gradient overstates the shallow vertical stress."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "The Biot coefficient, because at one it removes too much of the pore pressure from the effective vertical stress.",
+  "new": "The Biot coefficient, which at one removes too much of the pore pressure."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 3,
+  "old": "Constant terms should be re-expressed as gradients, so that they scale correctly through the whole of the section.",
+  "new": "Constant terms should be re-expressed as gradients, so they scale correctly through the section."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "As the model's best estimate of the value.",
+  "new": "As the model's best estimate of the value, since the bound came from it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 0,
+  "old": "Is it in pascals or equivalent mud weight?",
+  "new": "Is it quoted in pascals or as an equivalent mud weight?"
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "To make the arithmetic harder.",
+  "new": "To make the arithmetic harder and test speed under exam conditions."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 3,
+  "old": "The two strain terms, checked by confirming that their difference equals the difference between the two horizontal stresses.",
+  "new": "The two strain terms, checked by confirming their difference equals that of the two horizontal stresses."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 0,
+  "old": "Whether the sonic reading is in the right unit.",
+  "new": "Whether the sonic reading is in the right unit for the correlation."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "A completed mud weight window per section.",
+  "new": "A completed mud weight window for every hole section."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "The sonic slowness and the strength, both of which arrive from the log analyst rather than from the geomechanics workflow.",
+  "new": "The sonic slowness and the strength, which both come from the log analyst."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "The friction angle and the Poisson ratio, both of which come from the lithology seed table rather than from measurements.",
+  "new": "The friction angle and the Poisson ratio, both taken from the lithology seed table."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "Every pressure can be converted to an equivalent mud weight by dividing by gravity and the true vertical depth.",
+  "new": "Every pressure converts to a mud weight by dividing by gravity and the true vertical depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-mechanical-earth-model-is",
+  "ord": 8,
+  "option": 0,
+  "old": "The casing programme, because it fixes the shoe depths.",
+  "new": "The casing programme, because it fixes the shoe depths and so the number of hole sections."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-mechanical-earth-model-is",
+  "ord": 9,
+  "option": 0,
+  "old": "How many casing strings to run in total.",
+  "new": "How many casing strings to run in total, counted from the kick tolerance at each shoe."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-mechanical-earth-model-is",
+  "ord": 10,
+  "option": 2,
+  "old": "Comparing two candidate trajectories to the same target on the basis of how much mud weight window each would have.",
+  "new": "Comparing two candidate trajectories to one target by how much mud weight window each has."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-mechanical-earth-model-is",
+  "ord": 11,
+  "option": 1,
+  "old": "The pore pressure, which arrives from the pore pressure course rather than being computed inside the geomechanics module.",
+  "new": "The pore pressure, which arrives from the pore pressure course."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-mechanical-earth-model-is",
+  "ord": 13,
+  "option": 3,
+  "old": "Measuring the mud weight actually used against the planned mud weight and correcting the model by the ratio of the two.",
+  "new": "Measuring the mud weight used against the plan and correcting the model by their ratio."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-overburden-and-the-pore-pressure",
+  "ord": 9,
+  "option": 1,
+  "old": "The rock has become more permeable with depth, allowing pressure to communicate upward from a deeper source.",
+  "new": "The rock became more permeable with depth, letting pressure communicate up from below."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-overburden-and-the-pore-pressure",
+  "ord": 9,
+  "option": 2,
+  "old": "The overburden gradient has increased, so the total stress and the pore pressure have both risen in proportion.",
+  "new": "The overburden gradient increased, so total stress and pore pressure rose in proportion."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-overburden-and-the-pore-pressure",
+  "ord": 10,
+  "option": 0,
+  "old": "It grows faster, because both terms are rising.",
+  "new": "It grows faster, because both terms are rising and the overburden term rises the faster."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-overburden-and-the-pore-pressure",
+  "ord": 11,
+  "option": 0,
+  "old": "Total stress divided by the pore pressure.",
+  "new": "Total stress divided by the pore pressure, giving a dimensionless load ratio."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-overburden-and-the-pore-pressure",
+  "ord": 13,
+  "option": 0,
+  "old": "The ratio of horizontal to vertical stress.",
+  "new": "The ratio of horizontal to vertical stress, set by how the grains respond to burial."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-overburden-and-the-pore-pressure",
+  "ord": 14,
+  "option": 0,
+  "old": "Tension positive, as in structural engineering.",
+  "new": "Tension positive, as in structural engineering and most elasticity texts."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-overburden-and-the-pore-pressure",
+  "ord": 15,
+  "option": 2,
+  "old": "It matters only for the lower bound, so an error in it leaves the fracture gradient and the upper bound unaffected.",
+  "new": "It matters only for the lower bound, leaving the fracture gradient unaffected."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-the-overburden-and-the-pore-pressure",
+  "ord": 15,
+  "option": 3,
+  "old": "It can be checked against the stress model, because a pore pressure above the minimum horizontal stress is impossible.",
+  "new": "It can be checked against the stress model, which caps it at the minimum stress."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-horizontal-stresses",
+  "ord": 8,
+  "option": 2,
+  "old": "The frictional limit applied to each, since the active limit bounds one of them and the passive limit bounds the other.",
+  "new": "The frictional limit, with the active limit on one and the passive on the other."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-horizontal-stresses",
+  "ord": 8,
+  "option": 3,
+  "old": "The effective vertical stress, which is computed with the Biot coefficient for one and without it for the other.",
+  "new": "The effective vertical stress, computed with the Biot coefficient for only one."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-horizontal-stresses",
+  "ord": 9,
+  "option": 0,
+  "old": "It grows in proportion to the depth.",
+  "new": "It grows in proportion to the depth, like burial."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-horizontal-stresses",
+  "ord": 10,
+  "option": 0,
+  "old": "Because the two stresses really do converge.",
+  "new": "Because the two stresses really do converge as the rock compacts at depth."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-horizontal-stresses",
+  "ord": 12,
+  "option": 3,
+  "old": "The friction angle in radians divided by a quarter of pi, which normalises it to one at 45 degrees of friction.",
+  "new": "The friction angle in radians over a quarter of pi, so one at 45 degrees of friction."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-horizontal-stresses",
+  "ord": 13,
+  "option": 0,
+  "old": "A bound is more accurate than an estimate.",
+  "new": "A bound is more accurate than an estimate, because it is fixed by fault slip mechanics."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-horizontal-stresses",
+  "ord": 14,
+  "option": 0,
+  "old": "Raises an error and refuses to run.",
+  "new": "Raises an error and refuses to run the profile further."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-horizontal-stresses",
+  "ord": 15,
+  "option": 2,
+  "old": "A negative effective stress, which is the only outcome the frictional bounds are designed to prevent from occurring.",
+  "new": "A negative effective stress, which the frictional bounds exist to prevent."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m03-the-horizontal-stresses",
+  "ord": 15,
+  "option": 3,
+  "old": "A large difference between the two horizontal stresses, since clamping always pushes them apart rather than together.",
+  "new": "A wide gap between the horizontal stresses, as clamping pushes them apart."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-strength-from-a-log",
+  "ord": 9,
+  "option": 0,
+  "old": "Use the shale correlation, which is safer.",
+  "new": "Use the shale correlation, which is safer because it usually gives the lower strength."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-strength-from-a-log",
+  "ord": 10,
+  "option": 2,
+  "old": "Because the two correlations have different units at the interface, so the string is needed to interpret the number.",
+  "new": "Because the two correlations differ in units, and the string says which applies."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-strength-from-a-log",
+  "ord": 10,
+  "option": 3,
+  "old": "Because the provenance carries the calibration range, which the engine uses to decide whether to return a value at all.",
+  "new": "Because it carries the calibration range that decides whether a value is returned."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-strength-from-a-log",
+  "ord": 11,
+  "option": 2,
+  "old": "Undefined, because salt is not a frictional material and the Mohr-Coulomb criterion does not apply to it.",
+  "new": "Undefined, because salt is not frictional and Mohr-Coulomb does not apply to it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-strength-from-a-log",
+  "ord": 12,
+  "option": 0,
+  "old": "In the tensile strength.",
+  "new": "In the tensile strength, taken as a fixed fraction of the cohesion."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-strength-from-a-log",
+  "ord": 13,
+  "option": 0,
+  "old": "Measured average properties per rock type.",
+  "new": "Measured average properties per rock type, taken from core tests across the same field."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-strength-from-a-log",
+  "ord": 14,
+  "option": 2,
+  "old": "The lowest Young's modulus, which means it deforms most under the stress concentration around the hole wall.",
+  "new": "The lowest Young's modulus, so it deforms most under the stress concentration at the wall."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-strength-from-a-log",
+  "ord": 15,
+  "option": 1,
+  "old": "When it is outside the range the correlation was calibrated over, which the engine detects and warns about automatically.",
+  "new": "When it lies outside the calibrated range, which the engine flags itself."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-strength-from-a-log",
+  "ord": 15,
+  "option": 2,
+  "old": "When two seeds are used together, since the table's rows were not derived from the same set of measurements.",
+  "new": "When two seeds are combined, since the rows came from different tests."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-model-critically",
+  "ord": 7,
+  "option": 0,
+  "old": "The Poisson ratio, which is too high.",
+  "new": "The Poisson ratio, which is too high and so inflates both horizontal stresses near surface."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-model-critically",
+  "ord": 8,
+  "option": 2,
+  "old": "At the depth where the two horizontal stresses become equal, which is the transition between two faulting regimes.",
+  "new": "At the depth where the two horizontal stresses become equal, the transition between regimes."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-model-critically",
+  "ord": 9,
+  "option": 0,
+  "old": "Refuses to run below the affected depth.",
+  "new": "Refuses to run below the affected depth until the inputs are corrected."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-model-critically",
+  "ord": 10,
+  "option": 2,
+  "old": "A model should refuse to extrapolate above its shallowest calibration point, and this engine does exactly that.",
+  "new": "A model should refuse to extrapolate above its shallowest calibration point, as this engine does."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-model-critically",
+  "ord": 11,
+  "option": 2,
+  "old": "Reduces the tectonic strain linearly to zero at surface, which restores the ordering without changing the deep answers.",
+  "new": "Reduces the tectonic strain linearly to zero at surface, leaving the deep answers intact."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-model-critically",
+  "ord": 11,
+  "option": 3,
+  "old": "Applies the frictional bounds more tightly at shallow depth, which is the purpose the bounds were introduced to serve.",
+  "new": "Applies the frictional bounds more tightly at shallow depth, which is what they exist for."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-model-critically",
+  "ord": 12,
+  "option": 0,
+  "old": "As the model's best estimate of the value.",
+  "new": "As the model's best estimate of the value, once the clamp has been applied to it."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-model-critically",
+  "ord": 13,
+  "option": 0,
+  "old": "Using pascals instead of equivalent mud weight.",
+  "new": "Using pascals instead of equivalent mud weight in the per-section summary table."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-model-critically",
+  "ord": 14,
+  "option": 2,
+  "old": "As an acceptance criterion, with a threshold below which the run should be repeated with different input parameters.",
+  "new": "As an acceptance criterion, with a threshold below which the run is redone with new inputs."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-reading-the-model-critically",
+  "ord": 14,
+  "option": 3,
+  "old": "As a comparison between runs, since a higher score always indicates a better calibrated and more reliable stress model.",
+  "new": "As a comparison between runs, since a higher score always means a better calibrated model."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 8,
+  "option": 0,
+  "old": "A completed mud weight window.",
+  "new": "A completed mud weight window for each hole section."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 9,
+  "option": 1,
+  "old": "The friction angle and the Poisson ratio.",
+  "new": "The friction angle and the Poisson ratio, which the engine imports from an upstream course."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 10,
+  "option": 0,
+  "old": "Convert as early as possible.",
+  "new": "Convert as early as possible, so every number is in the decision unit."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 2,
+  "old": "The mud weight window walked along a whole trajectory, with the tightest point identified and the two lower bounds separated.",
+  "new": "The window walked along a trajectory, with the two lower bounds separated."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "option": 3,
+  "old": "A calibration of the model against caliper and loss data from a set of offset wells in the same field.",
+  "new": "A calibration against caliper and loss data from offset wells in the field."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 12,
+  "option": 3,
+  "old": "The frictional bounds at any depth, which follow directly from the effective vertical stress and the friction angle.",
+  "new": "The frictional bounds at any depth, which follow from the effective vertical stress and friction angle."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 13,
+  "option": 0,
+  "old": "Measurements, once a leak-off test exists.",
+  "new": "Measurements, once a leak-off test exists to tie both of them directly to the formation."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 14,
+  "option": 3,
+  "old": "The unconfined compressive strength, because it comes from a correlation rather than a measurement on this well.",
+  "new": "The unconfined compressive strength, since only a correlation supplies it on this well."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 15,
+  "option": 0,
+  "old": "A validated engineering calculation.",
+  "new": "A validated engineering calculation, since the vertical well case reproduces the closed forms exactly."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "option": 0,
+  "old": "Only the breakout angle.",
+  "new": "Only the breakout angle, since the rotation changes everything else."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "option": 3,
+  "old": "Run the same case at two inclinations and check the collapse pressure changes smoothly with no discontinuity.",
+  "new": "Run the case at two inclinations and check the collapse pressure changes with no discontinuity."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 2,
+  "old": "Yes, except for a vertical hole, where the window is the same at every azimuth and therefore cannot be narrowed further.",
+  "new": "Yes, except for a vertical hole, whose window is the same at every azimuth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "option": 3,
+  "old": "It cannot be established, because the fixture sweeps too few azimuths to distinguish a trend from numerical noise.",
+  "new": "It cannot be told, since the fixture sweeps too few azimuths to see a trend."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 23,
+  "option": 0,
+  "old": "Along the maximum horizontal stress.",
+  "new": "Along the maximum horizontal stress, which keeps the larger stress out of the hole's cross section."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "option": 0,
+  "old": "The maximum horizontal stress.",
+  "new": "The maximum horizontal stress, so the fractures grow along the lateral."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "option": 1,
+  "old": "Stays fixed at ninety degrees.",
+  "new": "Stays fixed at ninety degrees, because the far-field stresses do not rotate."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 2,
+  "old": "A flank breakout is invisible to a four-arm caliper, which measures across two orthogonal axes and misses the sides.",
+  "new": "A flank breakout escapes a four-arm caliper, which misses the sides."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "option": 3,
+  "old": "A roof breakout weakens the hole against the weight of the drill string, which lies on the low side of a deviated hole.",
+  "new": "A roof breakout weakens the hole against the string lying on the low side."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 28,
+  "option": 1,
+  "old": "Yes, provided the hole is within thirty degrees of vertical, beyond which the rotation becomes too large to ignore.",
+  "new": "Yes, if the hole is within thirty degrees of vertical, past which the rotation is too large to ignore."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "option": 0,
+  "old": "The engine itself, recorded once and reviewed.",
+  "new": "The engine itself, recorded once and reviewed line by line by an engineer."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 30,
+  "option": 3,
+  "old": "It catches nothing useful, since two implementations of the same specification will always agree by construction.",
+  "new": "It catches nothing useful, since two implementations of one specification always agree by construction."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "option": 2,
+  "old": "Verification is done before release and validation afterwards, though both compare against the same reference data set.",
+  "new": "Verification is done before release and validation after, both against the same reference data set."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 32,
+  "option": 0,
+  "old": "To within a relative tolerance of 1e-6.",
+  "new": "To within a relative tolerance of 1e-6 on both pressures."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 1,
+  "old": "Three times the effective minimum stress less the effective maximum, less the strength, added to the pore pressure.",
+  "new": "Three times effective Shmin less effective SHmax, less the strength, plus the pore pressure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "option": 3,
+  "old": "The effective overburden divided by the frictional ratio, plus the pore pressure and the unconfined compressive strength.",
+  "new": "The effective overburden over the frictional ratio, plus the pore pressure and the UCS."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "option": 1,
+  "old": "The minimum horizontal stress plus the tensile strength.",
+  "new": "The minimum horizontal stress plus the tensile strength, since the fracture opens against the least principal stress."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "option": 0,
+  "old": "Because the scan is faster than a bisection.",
+  "new": "Because the scan is faster than a bisection when the pressure range to search is wide."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "option": 2,
+  "old": "The theta sweep finds a different worst angle whose margin behaves differently with respect to pressure.",
+  "new": "The theta sweep finds a new worst angle whose margin responds differently to pressure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 37,
+  "option": 0,
+  "old": "Speed, since a fixed count avoids a test each loop.",
+  "new": "Speed, since a fixed count avoids a convergence test on each pass of the loop."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "option": 2,
+  "old": "A negative effective stress, which indicates the rock at that depth is already in tension before any mud is applied.",
+  "new": "A negative effective stress, meaning the rock there is in tension before any mud is applied."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 2,
+  "old": "A numerical failure of the scan, which has found the second crossing rather than the first and should be re-run.",
+  "new": "A scan failure that found the second crossing, so re-run it."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "option": 3,
+  "old": "A normal result at shallow depth, where the fracture gradient is low and the collapse gradient has not yet fallen.",
+  "new": "A normal shallow result, where the fracture gradient is low."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "option": 0,
+  "old": "Is the answer sensitive to the Poisson ratio?",
+  "new": "Is the answer sensitive to the Poisson ratio, the input known to move the window most?"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 1,
+  "old": "The full theta sweep at the tightest depth, without which the breakout width cannot be estimated by the reader.",
+  "new": "The full theta sweep at the tightest depth, without which the breakout width is unknowable."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "option": 3,
+  "old": "A three-dimensional visualisation of the wall stress state, which is what makes the failure mechanism legible.",
+  "new": "A three-dimensional view of the wall stress state, which makes the failure legible."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 2,
+  "old": "The Kirsch solution gives the wall stresses as a function of the angle round the circumference of a circular opening.",
+  "new": "The Kirsch solution gives the wall stresses as a function of the angle round a circular hole."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "option": 3,
+  "old": "Two implementations agreeing on the same specification is verification rather than validation of the underlying model.",
+  "new": "Two implementations agreeing on one specification is verification rather than validation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-hole-in-the-rock",
+  "ord": 7,
+  "option": 0,
+  "old": "In the same place, at the hoop stress peak.",
+  "new": "In the same place, at the hoop stress peak where the wall is most loaded."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-hole-in-the-rock",
+  "ord": 8,
+  "option": 0,
+  "old": "Raises both of them equally.",
+  "new": "Raises both of them equally, since the mud pressure adds to every stress."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-hole-in-the-rock",
+  "ord": 10,
+  "option": 0,
+  "old": "Also at one plus q per unit.",
+  "new": "Also at one plus q per unit, like collapse."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-hole-in-the-rock",
+  "ord": 11,
+  "option": 2,
+  "old": "It is zero when the mud weight equals the minimum horizontal stress, which is the balanced condition at the wall.",
+  "new": "It is zero when the mud weight equals the minimum horizontal stress, the balanced state."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-hole-in-the-rock",
+  "ord": 12,
+  "option": 0,
+  "old": "One, directly from principal to borehole.",
+  "new": "One, directly from the principal frame to the borehole using the hole's attitude."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-hole-in-the-rock",
+  "ord": 13,
+  "option": 3,
+  "old": "Because the Poisson correction to the axial stress drops out when the hole is aligned with the vertical stress direction.",
+  "new": "Because the Poisson correction to the axial stress drops out when the hole follows the vertical stress."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-hole-in-the-rock",
+  "ord": 14,
+  "option": 0,
+  "old": "Raise the radial stress at the wall.",
+  "new": "Raise the radial stress acting at the wall of the hole."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-hole-in-the-rock",
+  "ord": 15,
+  "option": 1,
+  "old": "Tensile splitting of the wall, which is prevented by keeping the mud weight below the fracture initiation pressure.",
+  "new": "Tensile splitting of the wall, held off by keeping mud below fracture initiation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-hole-in-the-rock",
+  "ord": 15,
+  "option": 3,
+  "old": "Breakout widening, which is controlled by raising the mud weight until the Mohr-Coulomb criterion is satisfied everywhere.",
+  "new": "Breakout widening, cured by raising the mud weight until Mohr-Coulomb is met."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-two-criteria",
+  "ord": 7,
+  "option": 2,
+  "old": "The largest of the three principal wall stresses, since a tensile failure is the mirror image of a shear one.",
+  "new": "The largest of the three wall stresses, mirroring the shear case."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-two-criteria",
+  "ord": 7,
+  "option": 3,
+  "old": "The far-field minimum horizontal stress, which is what a fracture must open against once it leaves the wall.",
+  "new": "The far-field minimum horizontal stress it must open against."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-two-criteria",
+  "ord": 8,
+  "option": 0,
+  "old": "An upper bound on the mud weight.",
+  "new": "An upper bound on the mud weight, which is the role it plays at the top of every mud window."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-two-criteria",
+  "ord": 9,
+  "option": 3,
+  "old": "The upper bound cannot be computed at all in a fractured formation, so the window has to be quoted as open-ended above.",
+  "new": "In fractured rock the upper bound cannot be computed, so the window is left open above."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-two-criteria",
+  "ord": 12,
+  "option": 0,
+  "old": "Because wider criteria are harder to compute.",
+  "new": "Because wider criteria are harder to compute and slow the whole depth walk."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-two-criteria",
+  "ord": 13,
+  "option": 0,
+  "old": "The collapse pressure, always.",
+  "new": "The collapse pressure, always, since breakout is the lower failure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m02-the-two-criteria",
+  "ord": 15,
+  "option": 0,
+  "old": "Two candidates of its own.",
+  "new": "Two candidates of its own, the tensile criterion at the wall and a leak-off result where one exists."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-what-the-hole-attitude-costs",
+  "ord": 9,
+  "option": 3,
+  "old": "A vertical well, since only a vertical well produces fractures in a predictable plane relative to the reservoir.",
+  "new": "A vertical well, since only a vertical well produces fractures in a predictable plane."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-what-the-hole-attitude-costs",
+  "ord": 10,
+  "option": 0,
+  "old": "It stays fixed at 90 degrees.",
+  "new": "It stays fixed at 90 degrees, since the far-field stress field itself never rotates."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-what-the-hole-attitude-costs",
+  "ord": 11,
+  "option": 3,
+  "old": "Because a flank breakout weakens the hole against collapse under the weight of the drill string lying on the low side.",
+  "new": "Because a flank breakout weakens the hole against collapse under the drill string on the low side."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-what-the-hole-attitude-costs",
+  "ord": 12,
+  "option": 0,
+  "old": "Breakouts do not form on deviated wells.",
+  "new": "Breakouts do not form on deviated wells, because the shear term at the wall suppresses the hoop stress peak."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-what-the-hole-attitude-costs",
+  "ord": 13,
+  "option": 2,
+  "old": "A ranking of the candidate trajectories by total measured depth, since that is the main driver of the cost of the well.",
+  "new": "A ranking of the candidate trajectories by measured depth, the main driver of well cost."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-what-the-hole-attitude-costs",
+  "ord": 13,
+  "option": 3,
+  "old": "A recommendation to drill vertical wherever the target permits it, since vertical is the widest window at every depth.",
+  "new": "Drill vertical wherever the target permits, since vertical gives the widest window at every depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-what-the-hole-attitude-costs",
+  "ord": 15,
+  "option": 3,
+  "old": "On vertical wells, where the azimuth is the only remaining degree of freedom available to the well planner.",
+  "new": "On vertical wells, where the azimuth is the only degree of freedom left to the planner."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-against-the-oracle",
+  "ord": 7,
+  "option": 1,
+  "old": "Three times the effective Shmin less the effective SHmax, less the unconfined compressive strength, plus the pore pressure.",
+  "new": "Three times the effective Shmin less the effective SHmax, less the UCS, plus the pore pressure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-against-the-oracle",
+  "ord": 7,
+  "option": 2,
+  "old": "The effective overburden divided by the frictional ratio, plus the pore pressure and the unconfined compressive strength.",
+  "new": "The effective overburden over the frictional ratio, plus the pore pressure and the compressive strength."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-against-the-oracle",
+  "ord": 10,
+  "option": 2,
+  "old": "At forty-five degrees from the high side, where the shear stress at the wall of the hole reaches its maximum value.",
+  "new": "At forty-five degrees from the high side, where the shear stress at the wall is at its maximum."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-against-the-oracle",
+  "ord": 12,
+  "option": 0,
+  "old": "More golden files at more conditions.",
+  "new": "More golden files at more conditions, so the oracle agreement covers every attitude and depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-against-the-oracle",
+  "ord": 13,
+  "option": 0,
+  "old": "Fully validated against North Sea field data.",
+  "new": "Fully validated against North Sea field data, since the Horsrud correlation was fitted on North Sea shales."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-against-the-oracle",
+  "ord": 14,
+  "option": 2,
+  "old": "An average of several offset wells in the same field, resampled onto a common depth grid at fifty metre intervals.",
+  "new": "An average of offset wells in the same field, resampled onto a common fifty metre grid."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-against-the-oracle",
+  "ord": 15,
+  "option": 0,
+  "old": "Which engine, which version, which author.",
+  "new": "Which engine, which version, which author, since those decide how far the output can be trusted."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-stability-answer",
+  "ord": 7,
+  "option": 2,
+  "old": "The rock has no strength there, so any mud weight at all will cause the wall to fail immediately upon exposure.",
+  "new": "The rock has no strength there, so any mud weight will make the wall fail on exposure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-stability-answer",
+  "ord": 8,
+  "option": 1,
+  "old": "The search range was set too low and the calculation should be repeated with a wider bracket around the expected value.",
+  "new": "The search range was too low; repeat with a wider bracket."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-stability-answer",
+  "ord": 8,
+  "option": 2,
+  "old": "The collapse and fracture pressures coincide, which is the definition of a marginally stable wellbore.",
+  "new": "The collapse and fracture pressures coincide: a marginally stable hole."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-stability-answer",
+  "ord": 9,
+  "option": 0,
+  "old": "A stress larger than the overburden.",
+  "new": "A stress larger than the overburden anywhere in the section, flagged by the quality score."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-stability-answer",
+  "ord": 10,
+  "option": 2,
+  "old": "A blank cell, since the engine returns a null rather than a number when the criterion is satisfied at zero pressure.",
+  "new": "A blank cell, since the engine returns a null when the criterion is satisfied at zero pressure."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-stability-answer",
+  "ord": 11,
+  "option": 0,
+  "old": "Stops the walk at that depth.",
+  "new": "Stops the walk at that depth, since nothing deeper in the hole can then be trusted."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-stability-answer",
+  "ord": 13,
+  "option": 3,
+  "old": "Because a report must present them in a standard order for the results to be comparable between wells.",
+  "new": "Because a report must present them in a standard order to be comparable between wells."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-reading-a-stability-answer",
+  "ord": 14,
+  "option": 3,
+  "old": "The full theta sweep at the tightest depth, so that the breakout width can be estimated from the margin profile.",
+  "new": "The full theta sweep at the tightest depth, so breakout width can be read from the margins."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "option": 3,
+  "old": "The tightest point on each well, which the Expert tier then uses to design the mud programme per section.",
+  "new": "The tightest point on each well, which the Expert tier uses to design the mud programme."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "option": 3,
+  "old": "Use a coarser theta grid, since the hoop stress pattern on a vertical hole is smooth and needs fewer sample points.",
+  "new": "Use a coarser theta grid, since the hoop stress on a vertical hole is smooth and needs few points."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "option": 1,
+  "old": "Always use the pore pressure.",
+  "new": "Always use the pore pressure, because a kick is the more immediate hazard on any drilling well."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 1,
+  "old": "Round it up to the nearest fifty kilograms per cubic metre, which is the resolution at which mud weight is actually controlled.",
+  "new": "Round it up to the nearest fifty kilograms per cubic metre, as mud is controlled."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 12,
+  "option": 2,
+  "old": "Compare it against the pore pressure and report only the larger, since that is the number the driller acts on.",
+  "new": "Compare it with the pore pressure and report only the larger, the number drilled to."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "option": 1,
+  "old": "The breakout angle changes, since the stress ratio at the wall depends on the depth through the effective stresses.",
+  "new": "The breakout angle shifts, since the wall stress ratio varies with depth."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 14,
+  "option": 1,
+  "old": "What the breakout angle will be.",
+  "new": "What the breakout angle will be, since that is the output most easily checked on an image log."
+ }
+]
