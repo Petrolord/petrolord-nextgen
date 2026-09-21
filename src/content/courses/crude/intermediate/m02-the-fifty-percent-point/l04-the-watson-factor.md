@@ -4,7 +4,7 @@ The Watson characterisation factor takes two figures the blend already has, a bo
 
 {{panel:crude-valuation-explorer}}
 
-## What the digest says about K
+## What the course says about K
 
 The course says three things about K and no more. It gives the formula. It says the studio takes Tb as the blend's T50, "a SCREENING basis: the strict basis is the mean average boiling point, which the studio does not compute". And it says "the page labels K as the screening figure". It prints no bands on K and no reading of what a given K means, so this course sets none.
 

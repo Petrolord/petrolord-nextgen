@@ -10,7 +10,7 @@ Lesson 2 valued Kwale Light and Ughelli Medium alone at Kwale and left a questio
 
 Every earlier module in this tier has taught suspicion of exactly that move. Temperatures do not average. A T50 read off the blend's curve and a mean of the crudes' T50 are two figures, and the lab prints both. So there is every reason to check before assuming.
 
-## The answer the digest prints
+## The answer the lab prints
 
 | crude or blend | gross $/bbl | netback $/bbl | differential against the marker $/bbl |
 | --- | --- | --- | --- |

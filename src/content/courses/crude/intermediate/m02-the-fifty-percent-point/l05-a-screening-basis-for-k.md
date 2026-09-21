@@ -10,7 +10,7 @@ watsonK takes a boiling temperature and a specific gravity. The formula takes on
 
 The studio takes Tb as the blend's T50: the interpolated fifty percent point read off the blend's own curve. For the Kwale blend that gives Watson K at T50 of 11.8135, and for the studio's default pair 11.7452.
 
-## What the digest calls it
+## What the lab calls it
 
 The lab names this a SCREENING basis. In its words, the strict basis is the mean average boiling point, which the studio does not compute, and the page labels K as the screening figure.
 
@@ -26,7 +26,7 @@ The page labels K as the screening figure, and this lesson's own table header na
 
 That is the same discipline this whole course applies to blend properties. API carries "computed from the volume-blended specific gravity, never averaged directly". Viscosity carries "Refutas index on mass fraction". Watson K here carries its basis too, and the basis is T50.
 
-## The two readings in the digest
+## The two readings in the lab
 
 The lab prints K on two T50 readings for each blend, and neither of them is the mean average boiling point.
 

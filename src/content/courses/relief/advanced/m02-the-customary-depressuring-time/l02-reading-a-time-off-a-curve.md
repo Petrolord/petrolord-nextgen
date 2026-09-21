@@ -19,7 +19,7 @@ An orifice is a decision, so the useful object is the time against the orifice a
 
 Everything else is held at the AFIESERE conditions. Only the orifice moves, which is what makes the table a sweep rather than a collection of cases.
 
-## The one comparison the digest prints here
+## The one comparison the lab prints here
 
 The time does not scale with the diameter. Doubling the orifice from 1.000000 in to 2.000000 in takes the time from 419.404662 s to 104.851242 s, a ratio of 0.250000182473.
 

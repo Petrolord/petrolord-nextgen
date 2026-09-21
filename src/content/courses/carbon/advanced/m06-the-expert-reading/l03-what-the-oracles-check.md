@@ -23,7 +23,7 @@ SECTION 26: "Not recomputed by either oracle: carbonIntensity, the curve's resid
 
 Three of those are in this tier. The curve's residual to target prints on each SECTION 21 curve beside the verdict. paysForItselfTonnes prints as 5310.000 t. The simple payback prints as 2.372881 years. Each is the engine's figure, taught as printed. None carries a second route behind it, and none is graded.
 
-## The digest's own count
+## The course's own count
 
 SECTION 26 closes with a count: this course has 73 engine answers asserted and 60 refusals asserted before printing. The count is the generator's own: engine answers and refusals it checked before these lessons were printed.
 
