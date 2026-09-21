@@ -1044,5 +1044,47 @@
       "digest.txt": "9a8c3b63b699de47a812fd9a5d015197394db42dc67a6e85e2dbd85634232c06",
       "fields.json": "301f6ace1451f6c0256f0ebf95a6fb9242481e9195ca13e81ca09f1cf5bb703c"
     }
+  },
+  "qra": {
+    "course": "H5",
+    "live": "/root/hse-wip-qra",
+    "kit": "inputs",
+    "kitNote": "Foundation kit. The mirror carries the digest, its generator and the teaching streams; the eighteen graded answers, their generator, the precision declaration and the tolerance derivation's writer; the engine loader and its TypeScript hook (qra.js imports cashflow.ts); the discriminate sweep and the oracle replay; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the structure, scaffold and lengths tools; the vendoring script and this mirror script; and the five writer briefs. HSE module, path_order 65. The seed ladder lands with the migrations.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "truth-qra.json",
+      "h5_dump.mjs",
+      "h5_fields.mjs",
+      "h5_capstone.mjs",
+      "qra_engine.mjs",
+      "ts_loader.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "oracle_check.py",
+      "structure.py",
+      "scaffold.py",
+      "lengths.py",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "gate_capstone_leak.mjs",
+      "gate_claims.mjs",
+      "gate_copy_rule.py",
+      "gate_vocabulary.py",
+      "run_gates.py",
+      "vendor_qra.sh",
+      "mirror.sh",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md"
+    ],
+    "pins": {
+      "digest.txt": "535c2b931fa4b8d7966f148ed78ac0729fa06c1b594ba087181531f237517b14",
+      "fields.json": "17cb9d2bebf9b7bff6e5978d8c9e74cfb370f1470ade5286f3390d97817837f9"
+    }
   }
 }

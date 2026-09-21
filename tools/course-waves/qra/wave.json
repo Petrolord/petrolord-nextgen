@@ -1,0 +1,370 @@
+{
+ "slug": "qra",
+ "prefix": "h5",
+ "name": "Quantitative Risk Assessment",
+ "pathOrder": 65,
+ "module": "hse",
+ "prerequisite": null,
+ "repo": "/root/wt-h5-nextgen",
+ "branch": "feat/h5-qra-course",
+ "goldens": [
+  "hse/goldens/qra_cases.json"
+ ],
+ "engines": [
+  "engines/hse/qra.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines at the canonical pin petrolord-engines 16fd6c9 (nextgen #176 moved the pin; this branch merged it and took main's VENDOR.json whole, so no ledger row names a qra path). engines/hse/qra.js arrived in engines PR #230 (merged as abb41c3) and the six qra paths are byte-identical at abb41c3 and 16fd6c9. vendor_qra.sh walks the closure from the jest suite (14 paths: the suite, the engine, the golden, the H4 consequence engine and its three helpers, the H1 safety statistics engine, the H3 lopa engine, the economics cashflow.ts and irrContract.js) plus three NAMED paths (oracle_qra.py, FINDINGS-qra.md, negcontrol_qra.sh, mode 755 as upstream), proves the six qra paths sha-identical (6 x 4 proofs = 24, zero deviations) and the other eight at the same blob as 16fd6c9 and the pin. The qra jest suite passes 171 of 171. Node 18 cannot import cashflow.ts, so every wave script loads the engine through qra_engine.mjs, which registers ts_loader.mjs (esbuild type stripping, no behaviour change). The first build of the digest and fields.json at the older pin (consequence.js at df31f53) was byte-identical to the build after the pin moved.",
+ "constants": {
+  "$comment": "The engine exports BOUNDARY_SNAP (1e-9), BRANCH_SUM_TOLERANCE (1e-9), PB_VAPOUR_CLOUD_SPLIT, PB_DIRECT_IGNITION_STATIONARY, PB_FRACTION_INDOORS, PB_IGNITION_FLUX_WM2, PB_VCE_OVERPRESSURE_PA, PB_MAX_FIRE_EXPOSURE_S, PB_IR_CONTOURS_PER_YR, TOLERABILITY_PRESETS, FN_CRITERIA, HSE_ILLUSTRATIVE_VALUES and QRA_SOURCES. Digest section 1 prints them from the export. None is graded: a band word, a state word and a verdict are never graded fields."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE. Engine vendored at 16fd6c9, digest built (34 sections), fields.json and precision.json generated from the one tolerance derivation, 18 graded fields discriminating against 91 wrong methods, oracle replay in exact rationals and through the vendored Python oracle, lab and three panels shipped with vitest, route /dashboard/apps/qra registered. No lesson, bank, key truth or migration is written yet; scaffold.py and lengths.py are ready and dry-run clean.",
+  "thesis": "A quantitative risk assessment turns scenario frequencies and probabilities of death into one person's individual risk, a population's societal risk and a test of whether a further measure is reasonably practicable. Associate owns HOW OFTEN AND WHAT IS ONE PERSON'S RISK, Professional owns HOW MANY AT ONCE, Expert owns IS A FURTHER MEASURE REASONABLY PRACTICABLE AND WHAT DOES THE ENGINE NOT KNOW. Each capstone grades only its own tier's question. The suggested tier split was kept: the engine's own structure (event trees and IR, then PLL, FAR and F-N, then ALARP and cost-benefit) argues for it.",
+  "tiers": {
+   "beginner": "Associate: frequencies, event trees and individual risk. m01 what a QRA answers, units, where Pd comes from (the H4 seam), the refusals; m02 general event trees, branch sums and the tolerance, pooling; m03 the flammable release tree, conditional delayed ignition, the split, Table 4.5 and what it rests on, forgetting a branch; m04 LSIR, contributions, the PB definition, Appendix 6.B from its Pd onward; m05 IRPA, hours over 8760, one place at a time, the vulnerability factor; m06 the transect, contours (a presentation rule), what IR does not say, the capstone brief. Digest sections 1 to 14.",
+   "intermediate": "Professional: societal risk. m01 PLL; m02 FAR from PLL and the H1 identity; m03 the F-N curve, N or more, the step function, the area identity, reading it wrongly, no published worked example; m04 criterion lines, the Dutch line and the Bevi points, corners, exceedance ranges, the worst ratio; m05 the single R2P2 point, a caller line, touching and the state words; m06 the Fd fractions (transcription only, never graded) and the capstone brief. Digest sections 15 to 24.",
+   "advanced": "Expert: ALARP and cost-benefit. m01 the three regions, workers and public, a threshold belongs to the lower band, the snap, the R2P2 box; m02 the benefit, VPF, injuries, the checklist example and its rounded verdict; m03 year-end present values, the two HSE conventions, the ICAF counted undiscounted; m04 the DF, strictly greater, the largest reasonably practicable cost, the DF sweep; m05 what the engine does not know; m06 ordering measures, the ALARP note, when the numbers are not enough. Digest sections 25 to 33."
+  }
+ },
+ "fieldsDiscrimination": {
+  "ukpokiti_compressor_explosion_frequency_per_yr": "split swapped, delayed ignition unconditional, every delayed ignition an explosion, immediate probability used for delayed, flash fire reported, no ignition branch used",
+  "ukpokiti_camp_exposure_frequency_per_yr": "late isolation leaf only, failed isolation leaf only, one wind probability for both, root branch forgotten, complement reported",
+  "ukpokiti_control_room_lsir_per_yr": "pd summed without frequency, largest contribution only, flash fire at pd one, release frequency for every outcome, split swapped upstream",
+  "ukpokiti_compressor_deck_lsir_per_yr": "pd summed without frequency, largest contribution only, release frequency for every outcome, split swapped upstream, no ignition counted at deck pd",
+  "ukpokiti_operator_irpa_per_yr": "hours over 8766, occupancy ignored, deck only, camp forgotten, hours over a 2000 hour working year",
+  "ukpokiti_technician_irpa_per_yr": "deck fraction read as hours, hours over 8766, occupancy ignored, deck only, operator hours used",
+  "ogini_crew_pll_per_yr": "f over n, n ignored, largest contribution only, zero scenario counted as one, n rounded to whole",
+  "ogini_crew_far": "one persons hours, base one million, calendar hours per person, pll over hours without base, village pll used",
+  "ogini_village_frequency_ten_or_more_per_yr": "more than ten, exactly ten only, every scenario with deaths, expected fatalities reported, ten or fewer",
+  "ogini_village_vrom_max_ratio": "ratio at ten only, non cumulative curve, more than n, slope one line, ratio inverted",
+  "ogini_village_exceedance_from_fatalities": "previous corner, line minimum, slope one crossing, non cumulative crossing, crossing of the previous step",
+  "ogini_village_r2p2_point_ratio": "non cumulative nearest corner, largest n only, frequency of ten or more, ratio inverted, point read as one in fifty thousand",
+  "ebughu_deluge_cost_to_benefit_ratio": "undiscounted, benefits at the cost rate, rates swapped, injuries dropped, benefits discounted from year zero",
+  "ebughu_deluge_icaf_gbp": "fatalities discounted, cost undiscounted, net of injuries, per year denominator, capital only",
+  "ebughu_deluge_maximum_reasonably_practicable_cost_gbp": "injuries dropped, benefit undiscounted, benefit at the cost rate, df applied twice, present value of the benefit reported",
+  "ebughu_blast_wall_cost_to_benefit_ratio": "growth ignored, undiscounted, growth netted off the rate, benefits discounted from year zero, benefits undiscounted growth kept",
+  "ebughu_blast_wall_icaf_gbp": "fatalities discounted, per year denominator, lifetime minus one, fatalities uprated by growth, vpf times df reported",
+  "ebughu_gas_detection_cost_to_benefit_ratio": "annual cost ignored, annual cost from year zero, the 2001 vpf, checklist rates applied, ratio inverted",
+  "summary": "91 wrong methods over 18 routes, 0 WEAK. CLOSEST MISS ACROSS THE WHOLE SWEEP: ogini_village_r2p2_point_ratio via non_cumulative_nearest_corner, 3.740e+3 tolerances away. Every truth is an engine call and every wrong method that is a wrong input runs through the engine. Negative control at tolerance x1e15: 18 of 18 WEAK."
+ },
+ "evidence": {
+  "$comment": "H2's lesson: a formula or constant checked for transcription only carries no graded answer. The position for every graded quantity, read from FINDINGS-qra.md and re-measured in the digest.",
+  "event tree frequencies": "exact arithmetic; the engine's oracle checks every tree in exact Fractions; oracle_check.py replays both Associate trees through the oracle's own tree walker exactly. Every ignition probability AND the flash fire / explosion split are STATED in the prompt, because the Table 4.5 cells and the 0.6 / 0.4 preset are single transcriptions",
+  "LSIR and IRPA": "exact sums of stated inputs (PB 6.1, 6.2); hours over 8760 from lopa.js HOURS_PER_YEAR; every Pd stated; no vulnerability factor in any graded field",
+  "PLL and FAR": "exact arithmetic; the FAR base is checked bit for bit against safetyStats.fatalAccidentRate (a SHARED plant of the base was caught)",
+  "F-N frequency, criterion ratio, exceedance range and the R2P2 point": "PB eq. 6.6 'N or more' as the engine's declared reading (the PB's own introduction says 'more than N'); NO published worked F-N example exists, so the curve is self-consistency only (oracle brute force, a 200 001 point grid route, the area identity); the criterion side IS published: the Bevi points lie on the PB line (a SHARED plant of C was caught by them) and the R2P2 point is printed. Graded as the engine's declared convention, never presented as a published reproduction",
+  "cost to benefit ratio, ICAF, largest reasonably practicable cost": "the checklist worked example reproduces (a SHARED DF plant was caught by its 93,000), the R2P2 margin reproduces, and seven independent assertions cover every present value including an exact identity with cashflow.ts npv; oracle_check.py replays each in exact rationals and by the closed-form annuity",
+  "never graded": "a band, state or verdict word on its own; any Table 4.5 lookup or the 0.6 / 0.4 preset; any Fd fraction or factor (the SHARED clothing-factor plant stayed green); a contour crossing distance (a presentation rule, its SHARED plant stayed green); anything through the H4 functions (toxicPlumeGridPointRisk, thermalFatalityTransect, poolFireFatalityTransect); the PB Appendix 6.B chain; a vulnerability factor"
+ },
+ "history": {
+  "position": "THE ENGINE HAS ONE PIECE OF DEVELOPMENT HISTORY AND THE COURSE DOES NOT TEACH IT. FINDINGS-qra.md section 9 records six fail-opens (preset names walking the prototype chain) found and closed before #230 merged; it is provenance. The digest shows the engine's CURRENT behaviour (such a name is refused, section 3) and never frames former behaviour; structure.py and digest_prose.rules.mjs refuse any key, title or heading that reads as history."
+ },
+ "scopeSeams": {
+  "H4 consequence": "OWNS source terms, dispersion, radiation, overpressure and every probit dose calculation (being built in parallel, feat/h4-consequence-course). H5 takes Pd and every frequency as STATED inputs; the three engine functions that call H4 are named and never taught; gate_vocabulary.py confines the H4 words to the seam lessons and gate_capstone_leak.mjs direction 11 keeps H4's graded answers out of every H5 text.",
+  "the risk matrix": "OWNED BY riskchange. Never scored here; 'severity' and 'likelihood' are gated.",
+  "LOPA and SIL": "OWNED BY H3 lopa. Named only at the seam; 'SIL', 'PFDavg', 'IPL' and 'LOPA' confined to the seam lessons.",
+  "API 521 point-source radiation and setbacks": "OWNED BY FC1 and FC5. Never used; gated.",
+  "NPV mechanics": "OWNED BY the EC courses. The canonical year-end present value is used only inside the gross disproportion test and the discounted ICAF; 'NPV' and 'IRR' are never used."
+ },
+ "namingCollisions": {
+  "risk": "a matrix score (riskchange) and a cost (economics). Always qualified. Gated.",
+  "severity": "a risk-matrix category (riskchange, compliance). Never used. Gated.",
+  "likelihood": "a matrix score (riskchange) and a Bayesian likelihood (decision). Never used. Gated.",
+  "FAR": "the same rate in H1 safetystats: always per 100,000,000 exposed hours.",
+  "PLL": "expected fatalities per year, never a probability.",
+  "ICAF": "the engine's cost per fatality prevented (CPF in R2P2).",
+  "NPV": "the economics courses' measure; never used here. Gated."
+ },
+ "openItems": {},
+ "digest": {
+  "lines": 705,
+  "sections": 34,
+  "md5": "05e9da8af249680261a10be621ebd943",
+  "sha256": "535c2b931fa4b8d7966f148ed78ac0729fa06c1b594ba087181531f237517b14"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "17cb9d2bebf9b7bff6e5978d8c9e74cfb370f1470ade5286f3390d97817837f9",
+  "keys": [
+   "ukpokiti_compressor_explosion_frequency_per_yr",
+   "ukpokiti_camp_exposure_frequency_per_yr",
+   "ukpokiti_control_room_lsir_per_yr",
+   "ukpokiti_compressor_deck_lsir_per_yr",
+   "ukpokiti_operator_irpa_per_yr",
+   "ukpokiti_technician_irpa_per_yr",
+   "ogini_crew_pll_per_yr",
+   "ogini_crew_far",
+   "ogini_village_frequency_ten_or_more_per_yr",
+   "ogini_village_vrom_max_ratio",
+   "ogini_village_exceedance_from_fatalities",
+   "ogini_village_r2p2_point_ratio",
+   "ebughu_deluge_cost_to_benefit_ratio",
+   "ebughu_deluge_icaf_gbp",
+   "ebughu_deluge_maximum_reasonably_practicable_cost_gbp",
+   "ebughu_blast_wall_cost_to_benefit_ratio",
+   "ebughu_blast_wall_icaf_gbp",
+   "ebughu_gas_detection_cost_to_benefit_ratio"
+  ]
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "e21e78d162824d8fc4756b04d0db5e83",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "h5_capstone.mjs": {
+   "md5": "2290d36df06f63a614a8b672f751f94b",
+   "command": "node h5_capstone.mjs --json",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h5_capstone: 105 label-and-call and scenario assertions run, 0 failed"
+  },
+  "vendor_qra.sh": {
+   "md5": "b826de0da2bcbdd6f2c21cd1a93bf048",
+   "command": "vendor_qra.sh",
+   "expected": 0,
+   "exit": 0,
+   "summary": "8 closure paths already vendored at 16fd6c96dcb91f372d2d76b4ecd2c7fa4cbd4b4f, 0 at the pin only (named above)"
+  },
+  "make_fields.mjs": {
+   "md5": "c85da0f10c8f9513b4a6bd2c378c41f0",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h5_capstone: 105 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "c85da0f10c8f9513b4a6bd2c378c41f0",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "h5_capstone: 105 label-and-call and scenario assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "ff9d56af045992f11ce45174bec88b87",
+   "command": "/root/hseenv/bin/python oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "DISAGREEMENTS: 0"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "ff9d56af045992f11ce45174bec88b87",
+   "command": "/root/hseenv/bin/python oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: ukpokiti_operator_irpa_per_yr moved by ten tolerances; caught"
+  },
+  "discriminate.mjs": {
+   "md5": "0d660c585b6bf1f852bcb1a63c2e5825",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: ogini_village_r2p2_point_ratio via non_cumulative_nearest_corner, 3.740e+3 tolerances away"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "0d660c585b6bf1f852bcb1a63c2e5825",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh hse-wip-qra",
+   "expected": 0,
+   "exit": 0,
+   "summary": "h5_dump: 578 label-and-call, measurement and claim assertions run, 0 failed; 34 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules hse-wip-qra",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/hse-wip-qra/digest.txt: 705 line(s), 34 section title(s) and 31 in-body marker(s) swept against their blocks, 32 history framings, 24 engine pin(s); 1 warned for a human read and 0 framed as curriculu"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py hse-wip-qra",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py hse-wip-qra",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py hse-wip-qra",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py hse-wip-qra",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py hse-wip-qra",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/hse-wip-qra: 18 graded field(s), 18 OF 18 CLASSIFIED against 3 precision clause(s) in the digest header and 5 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py hse-wip-qra",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py hse-wip-qra",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL seam": {
+   "md5": "29bc4e753b7c8377dedbf150af1a346a",
+   "command": "node gate_capstone_leak.mjs --no-banks --no-lessons --plant-seam",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-seam: expected a [11 seam] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "33dcec7f990062058c51a735fbca2fae",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "33dcec7f990062058c51a735fbca2fae",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_vocabulary.py": {
+   "md5": "9205386eb8719a0d8075c7f392147e9f",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 1, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "9205386eb8719a0d8075c7f392147e9f",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected ['FC1 and FC5 word with no seam marker', 'H3 LOPA word with no seam marker', 'H4 consequence word with no seam marker', 'NPV or IRR', 'likelihood', 'risk matrix word with no seam marker', 'seve"
+  },
+  "gate_claims.mjs": {
+   "md5": "8a2c9579278059017f38c5631f625d21",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "8a2c9579278059017f38c5631f625d21",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 2."
+  },
+  "lengths.py --selftest": {
+   "md5": "e67ad8921ecc60606e9e0e1c23117270",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "scaffold.py --dry-run": {
+   "md5": "030a76dceafd482166a864ecba95422b",
+   "command": "python3 scaffold.py --dry-run",
+   "expected": 0,
+   "exit": 0,
+   "summary": "manifests: 3"
+  },
+  "check-vendored-engines.mjs": {
+   "md5": "c1d8057c44e495f3662ca7640c368f4d",
+   "command": "node /root/wt-h5-nextgen/tools/check-vendored-engines.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "vendored engines clean against canonical 16fd6c9: 753 path(s) compared byte for byte, 881 canonical, 756 vendored, 243 recorded deviation(s) (0-out-of-scope-domain 54, 1-test-layer-gap 74, 2-copy-pass-held 6, 3-productio"
+  }
+ }
+}

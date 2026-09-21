@@ -79,6 +79,7 @@ import SupplyLearningPage from '@/pages/apps/SupplyLearningPage';
 import GasvalueLearningPage from '@/pages/apps/GasvalueLearningPage';
 import CarbonLearningPage from '@/pages/apps/CarbonLearningPage';
 import LopaLearningPage from '@/pages/apps/LopaLearningPage';
+import QraLearningPage from '@/pages/apps/QraLearningPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import ModulePage from '@/pages/course/ModulePage';
 import LessonPage from '@/pages/course/LessonPage';
@@ -460,6 +461,7 @@ const DashboardPage = () => {
     <Route path="apps/gasvalue" element={<GasvalueLearningPage />} />
     <Route path="apps/carbon" element={<CarbonLearningPage />} />
     <Route path="apps/lopa" element={<LopaLearningPage />} />
+    <Route path="apps/qra" element={<QraLearningPage />} />
 
     {/* --- DEEP COURSES (depth program): syllabus, lessons, quizzes, exam.
            Static segments (quiz/exam/capstone) rank above the :moduleKey
