@@ -10,7 +10,7 @@ The population method selects how the six well values are turned into a value at
 
 Constant fills every node with the weighted mean of the well values, which with equal weights is the arithmetic mean, 0.206667.
 
-Trend fits a least squares plane through the six values and evaluates it at every node. This is the method the capstone books.
+Trend fits a least squares plane through the six values and evaluates it at every node. This is the method the capstone books, on the case its brief states.
 
 Krige uses a spherical variogram to interpolate, honouring the data at the well locations. The variogram parameters are fixed for this panel and are a teaching illustration rather than a fitted model.
 
@@ -24,7 +24,7 @@ The six wells are posted with two lines each. The first is the well name and its
 
 The ring around each well post carries the summary: green means the model reproduces the measurement to within a millionth, red means it does not.
 
-P-1, the prospect location at an easting and northing of 1600 m, is marked with a hollow lime circle and labelled with the modelled porosity there. That value is one of the six graded capstone numbers.
+P-1, the prospect location at an easting and northing of 1600 m, is marked with a hollow lime circle and labelled with the modelled porosity there. That value is one of the six numbers the capstone asks for.
 
 ## The tiles
 
@@ -46,13 +46,13 @@ The well rings change colour. Under constant, all six are red. Under trend, all 
 
 ## Worked example
 
-Set the method to trend and read the capstone values straight off the panel.
+Set the method to trend and read the teaching case's values straight off the panel.
 
 The porosity at P-1 reads 0.207142. The node mean over the oil reads 0.209368. The pore volume reads 3.7558, the hydrocarbon pore volume 2.4413, the STOIIP 12.7961 and the difference against the constant booking plus 0.6569.
 
-Those six are the capstone answers. As at the tier below, the panel does not hide them, because the point of the tier is not to make them hard to find.
+Those six are the teaching case's values. The capstone asks for the same six on a case of its own: six well porosities and a contact that you type into the boxes under the map.
 
-Now switch to krige and watch all six move: the porosity at P-1 jumps to 0.220920, the STOIIP to 13.3377, and the uplift more than doubles to plus 1.1985. The capstone books the trend, so those are not the answers; they are the measure of how much the method choice is worth, which module five discusses.
+Now switch to krige and watch all six move: the porosity at P-1 jumps to 0.220920, the STOIIP to 13.3377, and the uplift more than doubles to plus 1.1985. The capstone books the trend, so the krige figures are the measure of how much the method choice is worth, which module five discusses.
 
 ## Exercise
 

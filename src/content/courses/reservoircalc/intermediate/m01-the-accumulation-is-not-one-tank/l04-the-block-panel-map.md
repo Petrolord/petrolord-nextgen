@@ -8,7 +8,7 @@ This lesson is a tour of the instrument. The block explorer is the only panel th
 
 The fault easting moves the partition from 800 m to 2300 m in 100 m steps. Those steps match the grid spacing on purpose, so each step moves exactly one column of nodes from one block to the other. Beyond 2300 m nothing changes, because no oil bearing cell lies east of 2200 m.
 
-The west block contact and the east block contact are set independently. Both default to 1560 m, the contact the Associate tier used and the one the capstone books against. Setting them to different values is the subject of module five, and until then leave them equal.
+The west block contact and the east block contact are set independently. Both default to 1560 m, the contact the Associate tier used. They are typed boxes, so any contact can go in; a capstone brief states its own. Setting them to different values is the subject of module five, and until then leave them equal.
 
 The controls interact in one direction only. The contacts decide which cells hold oil and how much column each one carries. The fault decides which block owns each of those cells. Moving the fault never changes the total number of oil bearing cells, and changing a contact almost always does.
 
@@ -28,7 +28,7 @@ Twelve tiles sit under the map, arranged in pairs so that the west and east valu
 
 The cell counts come first. These are counts of oil bearing cells and they always add to the field total, which is printed as the denominator.
 
-Gross rock volume and STOIIP follow for each block. Those four are four of the six numbers the capstone asks for, so at the default settings you can read the capstone answers straight off the panel. That is deliberate. This tier is not trying to make the capstone hard to find; it is trying to make it impossible to report without understanding.
+Gross rock volume and STOIIP follow for each block. Those four are four of the six numbers the capstone asks for, on a case its brief states. At the default settings the panel shows them for the teaching case, which is the case every lesson in this tier works.
 
 The mean oil column for each block explains the previous pair whenever the barrels and the cells disagree about the split.
 

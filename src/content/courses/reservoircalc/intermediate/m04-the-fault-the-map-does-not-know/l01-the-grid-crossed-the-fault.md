@@ -38,7 +38,7 @@ Here is a thought experiment that makes the geometry concrete.
 
 Suppose the Ekene fault has 20 m of normal displacement, with the eastern side down. The true TOP_SAND immediately east of the fault is 20 m deeper than the smooth map says.
 
-At the capstone contact of 1560 m, the eastern cells nearest the fault carry mapped columns of roughly 10 to 16 m. Push their tops down 20 m and most of them lose their oil entirely, because their tops fall below the contact.
+At the teaching contact of 1560 m, the eastern cells nearest the fault carry mapped columns of roughly 10 to 16 m. Push their tops down 20 m and most of them lose their oil entirely, because their tops fall below the contact.
 
 The east block's 52 cells would become a much smaller number and its 2.283591 MMstb would fall sharply. Nothing about the west block would change, and the field total would fall by whatever the east lost. A single interpretation parameter that the volumetric model never asked for is capable of removing most of one compartment.
 

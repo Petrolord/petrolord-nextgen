@@ -30,7 +30,7 @@ $$\mathrm{HCPV} = \text{pore} \times (1 - S_w)$$
 
 $$3.563046 \times 0.65 = 2.315980 \text{ million m}^3$$
 
-The engine reports the hydrocarbon pore volume as 2.3159797972902343 million cubic metres, which is the figure the capstone grades.
+The engine reports the hydrocarbon pore volume as 2.3159797972902343 million cubic metres, which is the figure the panel's HCPV line prints for the teaching case.
 
 That is the volume of oil in the reservoir, measured at reservoir conditions, in cubic metres. It is the first quantity in the chain that is oil rather than rock or space. Everything before it was a container and everything after it is a change of units.
 

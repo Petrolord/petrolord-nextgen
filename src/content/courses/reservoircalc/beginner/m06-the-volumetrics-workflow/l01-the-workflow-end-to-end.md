@@ -18,7 +18,7 @@ Two surfaces are built on the same frame, so they are node for node comparable. 
 
 ## Step 3: the contact
 
-The contact is set. At the capstone it is 1560 m, and module five was entirely about how much rests on that one number.
+The contact is set. On the teaching case it is 1560 m, and module five was entirely about how much rests on that one number.
 
 ## Step 4: the columns
 

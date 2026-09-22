@@ -32,9 +32,9 @@ Notice that the steps get smaller. There is a hard reason for that on this map: 
 
 The thickness term has no such ceiling in this range.
 
-At the capstone contact the maximum oil column is the contact minus the mapped crest, $1560 - 1539.7181396484375 = 20.2818603515625$ m. The crest does not move when the contact moves, so every ten metres of contact adds exactly ten metres to the maximum column. That is the 10.2818603515625, 20.2818603515625, 30.2818603515625 sequence in the table, and it is arithmetic rather than geology.
+At the teaching contact the maximum oil column is the contact minus the mapped crest, $1560 - 1539.7181396484375 = 20.2818603515625$ m. The crest does not move when the contact moves, so every ten metres of contact adds exactly ten metres to the maximum column. That is the 10.2818603515625, 20.2818603515625, 30.2818603515625 sequence in the table, and it is arithmetic rather than geology.
 
-The increment reaches every cell, not just the crestal one. At the capstone contact the column at each of the 169 oil cells is the contact minus the top at that cell, because at all 169 the BASE_SAND surface is deeper than the contact. The accumulation is limited by the contact everywhere, so a metre of extra contact is a metre of extra column on every cell that already held oil, on top of whatever new cells joined. That stays true until the contact reaches the shallowest point on BASE_SAND at 1570 m, below which the base starts to cap columns and the column term begins to flatten too.
+The increment reaches every cell, not just the crestal one. At the teaching contact the column at each of the 169 oil cells is the contact minus the top at that cell, because at all 169 the BASE_SAND surface is deeper than the contact. The accumulation is limited by the contact everywhere, so a metre of extra contact is a metre of extra column on every cell that already held oil, on top of whatever new cells joined. That stays true until the contact reaches the shallowest point on BASE_SAND at 1570 m, below which the base starts to cap columns and the column term begins to flatten too.
 
 ## What the two terms do together
 
@@ -44,7 +44,7 @@ Two practical consequences follow.
 
 You cannot interpolate a volume between contact cases. If you know the answer at 1550 m and at 1570 m, the answer at 1560 m is not the average of them, and on this field the true mid case is below that average. Recompute at each contact rather than sketching a straight line between two.
 
-A symmetric uncertainty on the contact is not a symmetric uncertainty on the volume. Ten metres either side of the capstone contact gives 3.835815 MMstb low and 22.044451 MMstb high around a mid case of 12.139208 MMstb. Quoting that as a plus or minus is misleading, because the low and high excursions are not the same size and the mid case does not sit in the middle of them. Quote the three cases.
+A symmetric uncertainty on the contact is not a symmetric uncertainty on the volume. Ten metres either side of the teaching contact gives 3.835815 MMstb low and 22.044451 MMstb high around a mid case of 12.139208 MMstb. Quoting that as a plus or minus is misleading, because the low and high excursions are not the same size and the mid case does not sit in the middle of them. Quote the three cases.
 
 Try it yourself: step the contact through the three cases in the panel below and watch the cell count and the maximum column move together.
 

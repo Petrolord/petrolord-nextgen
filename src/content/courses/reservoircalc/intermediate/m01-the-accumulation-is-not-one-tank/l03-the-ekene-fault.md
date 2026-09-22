@@ -37,7 +37,7 @@ That is what the arithmetic gives: 117 oil bearing cells west against 52 east, a
 
 Open the block explorer below. It is the volume explorer from the Associate tier with two things added: a fault, and a colour for the block each cell belongs to. Blue cells belong to the west block, amber to the east, and the shade of each cell is still its oil column, so a pale cell is a thin sliver of oil and a saturated one is a tall column.
 
-Leave the fault at 1800 m and both contacts at 1560 m for now. That is the capstone configuration and the tiles under the map show its six graded numbers.
+Leave the fault at 1800 m and both contacts at 1560 m for now. That is the teaching configuration the panel opens on, and the tiles under the map show its six block numbers.
 
 {{panel:rc-block-explorer}}
 

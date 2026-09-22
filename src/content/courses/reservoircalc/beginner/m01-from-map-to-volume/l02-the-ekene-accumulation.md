@@ -2,7 +2,7 @@
 
 The fixture does not change. This is the same Ekene field you gridded in the mapping course, the same six wells at the same map coordinates, with the same TOP_SAND picks you already know. One thing is added: every well now also carries a pick on BASE_SAND, so the reservoir has a floor as well as a roof.
 
-Keeping the data fixed is deliberate. By the time you reach the capstone, nothing about the field should be new, and the only thing you should be learning is what volumetrics does to it.
+Keeping the data fixed is deliberate. By the time you reach the capstone, nothing about the field should be new. Its brief changes the contact and the properties, and the only thing you should be learning is what volumetrics does with them.
 
 ## The control set, both surfaces
 

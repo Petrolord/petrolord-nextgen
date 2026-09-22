@@ -4,7 +4,7 @@ The previous lesson claimed that wells on one side of the fault set depths on th
 
 ## The experiment
 
-Ekene-6 sits at an easting of 1900 m. That is 100 m east of the fault, so it belongs to the east block. It is also the only eastern well that found oil at the capstone contact.
+Ekene-6 sits at an easting of 1900 m. That is 100 m east of the fault, so it belongs to the east block. It is also the only eastern well that found oil at the teaching contact.
 
 Remove it from the control set entirely, regrid both surfaces from the remaining five wells, apply the same contact and the same fault, and book the west block again.
 
@@ -40,7 +40,7 @@ The panel cannot remove a well, so this experiment is not one you can run there.
 
 {{panel:rc-block-explorer}}
 
-Set the capstone configuration and find Ekene-6, the eastern well posted immediately right of the fault trace. Look at the strongly coloured blue cells to its west, on the other side of the line. Those cells are within a few hundred metres of it, and there is no western well nearby to compete for influence: Ekene-1 is 900 m to the south west and Ekene-3 is 900 m to the north west.
+Set the teaching configuration and find Ekene-6, the eastern well posted immediately right of the fault trace. Look at the strongly coloured blue cells to its west, on the other side of the line. Those cells are within a few hundred metres of it, and there is no western well nearby to compete for influence: Ekene-1 is 900 m to the south west and Ekene-3 is 900 m to the north west.
 
 Those blue cells are the ones that lose their column when Ekene-6 is removed.
 

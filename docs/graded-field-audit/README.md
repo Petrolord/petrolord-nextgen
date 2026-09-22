@@ -438,3 +438,4 @@ A printed number counts as a leak when typing it would pass: it lies within the 
 
 | Course | Tiers | Case (what the brief states) |
 |---|---|---|
+| reservoircalc | all | beginner: contact 1563 m, NTG 0.72, porosity 0.22, Sw 0.25, Bo 1.25. intermediate: fault at 2100 m, contacts 1553 m west and 1572 m east. advanced: six new well porosities, contact 1562 m. |

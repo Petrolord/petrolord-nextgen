@@ -42,7 +42,7 @@ Metres of column times square metres of cell area gives cubic metres, and dividi
 
 A missing factor of a million or a Bo multiplied instead of divided produces a number that looks plausible in a table and is wrong by orders of magnitude.
 
-Try it yourself: run all five checks against the panel below at the capstone contact.
+Try it yourself: run all five checks against the panel below at the teaching contact.
 
 {{panel:rc-volume-explorer}}
 

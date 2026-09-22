@@ -1,0 +1,152 @@
+[
+ {
+  "tier": "beginner",
+  "key": "oil_cells",
+  "label": "Oil-bearing grid cells",
+  "unit": "count",
+  "tol": 0,
+  "expected": 177,
+  "context": "cells|oil-bearing|nodes",
+  "context_word": "oil-bearing cells"
+ },
+ {
+  "tier": "beginner",
+  "key": "max_oil_column_m",
+  "label": "Maximum oil column",
+  "unit": "m",
+  "tol": 0.1,
+  "expected": 23.2818603515625
+ },
+ {
+  "tier": "beginner",
+  "key": "grv_mm3",
+  "label": "Gross rock volume",
+  "unit": "10^6 m3",
+  "tol": 0.05,
+  "expected": 27.46473388671875
+ },
+ {
+  "tier": "beginner",
+  "key": "pore_mm3",
+  "label": "Pore volume",
+  "unit": "10^6 m3",
+  "tol": 0.01,
+  "expected": 4.350413996952986
+ },
+ {
+  "tier": "beginner",
+  "key": "hcpv_mm3",
+  "label": "Hydrocarbon pore volume",
+  "unit": "10^6 m3",
+  "tol": 0.01,
+  "expected": 3.262810497714745
+ },
+ {
+  "tier": "beginner",
+  "key": "stoiip_mmstb",
+  "label": "STOIIP",
+  "unit": "MMstb",
+  "tol": 0.05,
+  "expected": 16.41794037482096
+ },
+ {
+  "tier": "intermediate",
+  "key": "west_cells",
+  "label": "West block: oil-bearing cells",
+  "unit": "count",
+  "tol": 0,
+  "expected": 146,
+  "context": "cells|oil-bearing|nodes",
+  "context_word": "oil-bearing cells"
+ },
+ {
+  "tier": "intermediate",
+  "key": "east_cells",
+  "label": "East block: oil-bearing cells",
+  "unit": "count",
+  "tol": 0,
+  "expected": 37,
+  "context": "cells|oil-bearing|nodes",
+  "context_word": "oil-bearing cells"
+ },
+ {
+  "tier": "intermediate",
+  "key": "west_grv_mm3",
+  "label": "West block: gross rock volume",
+  "unit": "10^6 m3",
+  "tol": 0.05,
+  "expected": 11.219761962890624
+ },
+ {
+  "tier": "intermediate",
+  "key": "east_grv_mm3",
+  "label": "East block: gross rock volume",
+  "unit": "10^6 m3",
+  "tol": 0.02,
+  "expected": 3.813426513671875
+ },
+ {
+  "tier": "intermediate",
+  "key": "west_stoiip_mmstb",
+  "label": "West block: STOIIP",
+  "unit": "MMstb",
+  "tol": 0.05,
+  "expected": 6.116072000520286
+ },
+ {
+  "tier": "intermediate",
+  "key": "east_stoiip_mmstb",
+  "label": "East block: STOIIP",
+  "unit": "MMstb",
+  "tol": 0.02,
+  "expected": 2.078759888440742
+ },
+ {
+  "tier": "advanced",
+  "key": "phi_at_p1",
+  "label": "Trend porosity at P-1",
+  "unit": "v/v",
+  "tol": 0.001,
+  "expected": 0.2335680276477857
+ },
+ {
+  "tier": "advanced",
+  "key": "phi_mean_oil",
+  "label": "Mean trend porosity over oil nodes",
+  "unit": "v/v",
+  "tol": 0.0002,
+  "expected": 0.2363793013067084
+ },
+ {
+  "tier": "advanced",
+  "key": "pore_trend_mm3",
+  "label": "Pore volume, trend model",
+  "unit": "10^6 m3",
+  "tol": 0.02,
+  "expected": 4.9149173123359065
+ },
+ {
+  "tier": "advanced",
+  "key": "hcpv_trend_mm3",
+  "label": "HCPV, trend model",
+  "unit": "10^6 m3",
+  "tol": 0.02,
+  "expected": 3.194696282313528
+ },
+ {
+  "tier": "advanced",
+  "key": "stoiip_trend_mmstb",
+  "label": "STOIIP, trend model",
+  "unit": "MMstb",
+  "tol": 0.05,
+  "expected": 16.74500056374636
+ },
+ {
+  "tier": "advanced",
+  "key": "stoiip_delta_mmstb",
+  "label": "STOIIP added over the constant model",
+  "unit": "MMstb",
+  "tol": 0.02,
+  "expected": 2.728495924102713
+ }
+]

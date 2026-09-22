@@ -6,6 +6,13 @@
 // GRV → net → pore → HCPV; STOIIP follows with the given Bo. The
 // oracle was reproduced by running exactly this pipeline in Node
 // before the migration was seeded.
+//
+// The Ekene case at a 1560 m contact is the TEACHING case: the panels open
+// on it and the lessons work it. Since W5b (2026-09) each tier's capstone is
+// a case of its own, stated in the brief and typed into the panels (contact,
+// properties, fault and block contacts, well porosities). Nothing in this
+// file carries that case, and panelCapstoneGuard.test.js checks that no
+// number the panels show at their defaults lands on a graded answer.
 import { topsToPoints, specForPoints } from '@petrolord/engines/engines/mapping/surface.js';
 import { gridSurface } from '@petrolord/engines/lib/gridding/gridding.js';
 import { isNull, sampleAtXY } from '@petrolord/engines/lib/gridding/gridmath.js';
@@ -24,7 +31,7 @@ export const TEACHING_WELLS = [
 
 export const CELL_M = 100;
 export const MAX_EXTRAP_M = 800;
-export const CAPSTONE_OWC_M = 1560;      // the capstone's contact
+export const TEACHING_OWC_M = 1560;      // the teaching case's contact
 export const OWC_OPTIONS = [1550, 1560, 1570];
 // Given reservoir properties (Beginner tier: constants, as a lab would
 // hand them out; per-node property grids arrive at higher tiers).
@@ -44,7 +51,7 @@ function buildSurfaces() {
 const SURFACES = buildSurfaces();
 
 // Volumetrics above a given contact.
-export function computeVolumes(owcM) {
+export function computeVolumes(owcM, props = PROPS) {
   const { spec, top, base, topPts } = SURFACES;
   const owc = Number(owcM);
   const n = top.length;
@@ -61,10 +68,10 @@ export function computeVolumes(owcM) {
   }
   const mk = (v) => new Float32Array(n).fill(v);
   const vols = zoneVolumes(spec, thick, null, {
-    ntg: mk(PROPS.ntg), phi: mk(PROPS.phi), sw: mk(PROPS.sw),
+    ntg: mk(props.ntg), phi: mk(props.phi), sw: mk(props.sw),
   });
   const tot = vols.total || { bulk_m3: 0, net_m3: 0, pore_m3: 0, hcpv_m3: 0, cells: 0 };
-  const stoiipStb = (tot.hcpv_m3 / PROPS.bo) * M3_TO_STB;
+  const stoiipStb = (tot.hcpv_m3 / props.bo) * M3_TO_STB;
   return {
     spec,
     topPts,
@@ -96,7 +103,7 @@ export const WELL_PHI = {
 };
 export const P1 = { x: 1600, y: 1600 };
 
-export function computeAdvanced(owcM = CAPSTONE_OWC_M) {
+export function computeAdvanced(owcM = TEACHING_OWC_M) {
   const { spec, top, base, topPts } = SURFACES;
   const owc = Number(owcM);
   const phiPts = TEACHING_WELLS.map((w) => ({
@@ -218,7 +225,7 @@ function packBlock(b, cols) {
  * puts that whole column in the east: the tie break is a convention, and
  * the panel makes it visible.
  */
-export function computeBlockModel(faultX = FAULT_X_M, owcWest = CAPSTONE_OWC_M, owcEast = owcWest) {
+export function computeBlockModel(faultX = FAULT_X_M, owcWest = TEACHING_OWC_M, owcEast = owcWest) {
   const { spec, top, base, topPts } = SURFACES;
   const fx = Number(faultX);
   const n = top.length;
@@ -286,11 +293,11 @@ export const PROPERTY_METHODS = ['constant', 'trend', 'krige'];
 // parameters, not part of any graded answer.
 export const KRIGE_PARAMS = { model: 'spherical', range: 1500, sill: 1, nugget: 0 };
 
-export function computePropertyModel(method = 'trend', owcM = CAPSTONE_OWC_M) {
+export function computePropertyModel(method = 'trend', owcM = TEACHING_OWC_M, wellPhi = WELL_PHI) {
   const { spec, top, base, topPts } = SURFACES;
   const owc = Number(owcM);
   const phiPts = TEACHING_WELLS.map((w) => ({
-    x: w.surface_x, y: w.surface_y, v: WELL_PHI[w.name],
+    x: w.surface_x, y: w.surface_y, v: Number(wellPhi[w.name]),
   }));
   const grid = populate(spec, method, phiPts, KRIGE_PARAMS);
   const [a, b, c] = planeFit(phiPts);

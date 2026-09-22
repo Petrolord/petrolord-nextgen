@@ -28,7 +28,7 @@ That is four sentences. It carries every number a reader needs in order to repro
 
 Two different audiences want two different levels of precision, and both are legitimate.
 
-The capstone wants the engine value, because it is checking that you read the panel correctly rather than that you have judgement about significant figures. Report what the panel shows.
+The capstone wants the engine value for the case its brief states, because it is checking that you ran the case and read the panel correctly rather than that you have judgement about significant figures. Report what the panel shows.
 
 A partner, a management report or a reserves submission wants a number rounded to what the inputs support. On this kind of input, about 12.1 MMstb at the mid case is the right level, with the low and high cases quoted at the same level. Rounding the mid case to twelve decimal places while the contact is uncertain by ten metres is a statement that the volume is known to a fraction of a barrel, and no reader should believe it.
 

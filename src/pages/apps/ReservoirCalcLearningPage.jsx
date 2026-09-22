@@ -15,7 +15,7 @@ import {
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
 import {
-  TEACHING_WELLS, CELL_M, CAPSTONE_OWC_M, OWC_OPTIONS, PROPS, computeVolumes,
+  TEACHING_WELLS, CELL_M, TEACHING_OWC_M, OWC_OPTIONS, PROPS, computeVolumes,
   computeIntermediate, FAULT_X_M, computeAdvanced, WELL_PHI, P1,
 } from '@/lib/reservoircalcTeaching';
 import {
@@ -96,7 +96,7 @@ const ReservoirCalcLearningPage = () => {
   const { actualRole } = useRole();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
   const [tier, setTier] = useState('beginner');
-  const [owc, setOwc] = useState(CAPSTONE_OWC_M);
+  const [owc, setOwc] = useState(TEACHING_OWC_M);
   const [capstone, setCapstone] = useState(null);
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -154,7 +154,7 @@ const ReservoirCalcLearningPage = () => {
       } else {
         toast({
           title: 'Not passing yet',
-          description: `${res.score}/${res.max_score} answers within tolerance. Set the OWC to ${CAPSTONE_OWC_M} m and re-read the panel.`,
+          description: `${res.score}/${res.max_score} answers within tolerance. Type the case the brief states into the course panels and re-read them.`,
           variant: 'destructive',
         });
       }
@@ -232,7 +232,7 @@ const ReservoirCalcLearningPage = () => {
             <Card className="bg-[#1E293B] border-gray-700">
               <CardHeader>
                 <CardTitle className="text-white">Oil extent and volumes — OWC {owc} m</CardTitle>
-                <CardDescription>The capstone grades the {CAPSTONE_OWC_M} m contact. Move the OWC and watch lesson 3 happen.</CardDescription>
+                <CardDescription>The teaching case books at {TEACHING_OWC_M} m. Move the OWC and watch lesson 3 happen.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex gap-2">
@@ -278,11 +278,11 @@ const ReservoirCalcLearningPage = () => {
           </div>
 
           {tier === 'intermediate' && (() => {
-            const inter = computeIntermediate(CAPSTONE_OWC_M);
+            const inter = computeIntermediate(TEACHING_OWC_M);
             return (
               <Card className="bg-[#1E293B] border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-white">Fault-block panel (Intermediate) at OWC {CAPSTONE_OWC_M} m</CardTitle>
+                  <CardTitle className="text-white">Fault-block panel (Intermediate) at OWC {TEACHING_OWC_M} m</CardTitle>
                   <CardDescription>
                     A sealing fault at x = {FAULT_X_M} m splits the accumulation. The two blocks must sum to the field total from the Associate tier.
                   </CardDescription>
@@ -315,11 +315,11 @@ const ReservoirCalcLearningPage = () => {
           })()}
 
           {tier === 'advanced' && (() => {
-            const adv = computeAdvanced(CAPSTONE_OWC_M);
+            const adv = computeAdvanced(TEACHING_OWC_M);
             return (
               <Card className="bg-[#1E293B] border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-white">Property-model panel (Advanced) at OWC {CAPSTONE_OWC_M} m</CardTitle>
+                  <CardTitle className="text-white">Property-model panel (Advanced) at OWC {TEACHING_OWC_M} m</CardTitle>
                   <CardDescription>
                     A porosity trend surface fitted to the six well values replaces the constant {PROPS.phi}. Same frame, same contact; only the porosity model changes.
                   </CardDescription>
@@ -430,7 +430,7 @@ const ReservoirCalcLearningPage = () => {
                     </>
                   ) : (
                     <p className="text-red-300 font-medium flex items-center gap-2">
-                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance — set the OWC to {CAPSTONE_OWC_M} m and read the panel again.
+                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the case the brief states into the course panels and read them again.
                     </p>
                   )}
                 </div>

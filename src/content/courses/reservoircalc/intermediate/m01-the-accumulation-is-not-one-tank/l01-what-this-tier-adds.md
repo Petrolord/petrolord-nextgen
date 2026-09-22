@@ -40,7 +40,7 @@ It also does not re-derive the field booking. The 12.139208 MMstb figure, the 16
 
 ## Worked example
 
-Before the first module ends, one number is worth fixing in mind. At the capstone fault position the west block holds 117 of the 169 oil bearing cells and the east block holds 52. Those two counts add to 169 exactly, which is the first and cheapest check a partition can pass.
+Before the first module ends, one number is worth fixing in mind. At the teaching fault position the west block holds 117 of the 169 oil bearing cells and the east block holds 52. Those two counts add to 169 exactly, which is the first and cheapest check a partition can pass.
 
 The barrels split 9.855617 MMstb west and 2.283591 MMstb east. Those two do not divide in the ratio 117 to 52. Work the ratios out: the cells split 69.2 percent to the west, the barrels 81.2 percent. A tenth of the field has moved from one column of the answer to the other purely because the two blocks hold different shapes of rock.
 

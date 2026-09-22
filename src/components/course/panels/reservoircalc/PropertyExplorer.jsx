@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {
-  CAPSTONE_OWC_M, PROPS, P1, PROPERTY_METHODS, computePropertyModel,
+  TEACHING_OWC_M, TEACHING_WELLS, WELL_PHI, PROPS, P1, PROPERTY_METHODS, computePropertyModel,
 } from '@/lib/reservoircalcTeaching';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Property explorer: fill the porosity grid from the six well values by
 // each of the three population methods and read what the choice is worth.
@@ -32,19 +32,42 @@ function phiColor(v, lo, hi) {
 
 const PropertyExplorer = () => {
   const [method, setMethod] = useState('trend');
+  // The contact and the six well porosities open on the teaching case; a
+  // capstone brief states its own and the learner types them in.
+  const [owc, setOwc] = useState(String(TEACHING_OWC_M));
+  const [wellPhis, setWellPhis] = useState(() => Object.fromEntries(
+    TEACHING_WELLS.map((w) => [w.name, String(WELL_PHI[w.name])]),
+  ));
+  const phiKey = TEACHING_WELLS.map((w) => wellPhis[w.name]).join('|');
 
   const m = useMemo(() => {
+    const owcM = Number(owc);
+    const vals = Object.fromEntries(TEACHING_WELLS.map((w) => [w.name, Number(wellPhis[w.name])]));
+    if (!Number.isFinite(owcM) || owcM < 1500 || owcM > 1620) return null;
+    if (Object.values(vals).some((v) => !(v > 0 && v < 1))) return null;
     try {
-      return computePropertyModel(method, CAPSTONE_OWC_M);
+      return computePropertyModel(method, owcM, vals);
     } catch {
       return null;
     }
-  }, [method]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [method, owc, phiKey]);
+
+  const inputs = (
+    <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
+      <NumField label="Oil water contact (m)" value={owc} onChange={setOwc} />
+      {TEACHING_WELLS.map((w) => (
+        <NumField key={w.name} label={`${w.name} porosity`} value={wellPhis[w.name]}
+          onChange={(v) => setWellPhis((p) => ({ ...p, [w.name]: v }))} />
+      ))}
+    </div>
+  );
 
   if (!m) {
     return (
-      <PanelShell title="Property explorer" subtitle="Choose a population method.">
-        <Note>That population method could not run on the six well values.</Note>
+      <PanelShell title="Property explorer" subtitle="Choose a population method, a contact and six well porosities.">
+        {inputs}
+        <Note>The contact must lie between 1500 and 1620 m and each porosity must be a fraction between 0 and 1.</Note>
       </PanelShell>
     );
   }
@@ -84,15 +107,17 @@ const PropertyExplorer = () => {
 
   return (
     <PanelShell title="Property explorer"
-      subtitle={`Porosity over the 169 oil-bearing cells, populated from the six well values by ${METHOD_LABEL[method]}. Cell shade runs from the lowest modelled porosity to the highest. Every well is posted with what it measured and what the model says there.`}>
+      subtitle={`Porosity over the ${m.model.cells} oil-bearing cells, populated from the six well values by ${METHOD_LABEL[method]}. Cell shade runs from the lowest modelled porosity to the highest. Every well is posted with what it measured and what the model says there.`}>
       <div className="grid gap-3 grid-cols-1 sm:grid-cols-3 items-end">
         <SelectField label="Population method" value={method} onChange={setMethod}
           options={PROPERTY_METHODS.map((v) => [v, METHOD_LABEL[v]])} />
         <div className="text-xs text-gray-500 sm:col-span-2">
-          The capstone books the trend. Switch to constant and to krige and watch the booking,
-          the porosity at P-1 and the well residuals move together.
+          The panel opens on the teaching case, the trend at a {TEACHING_OWC_M} m contact. Switch to
+          constant and to krige and watch the booking, the porosity at P-1 and the well residuals
+          move together. A capstone brief states its own contact and well values; type them below.
         </div>
       </div>
+      {inputs}
 
       <div className="overflow-x-auto">
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
