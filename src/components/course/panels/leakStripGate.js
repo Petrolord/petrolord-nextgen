@@ -88,3 +88,17 @@ export const leakHits = (text, targets, where = 'text') => {
 
 /** The W1 open-book note (D4 C) as it heads a capstone lesson and a brief. */
 export const OPEN_BOOK = /Open book/;
+
+/**
+ * The published fields of one tier from the audit's fields.json (parsed), at
+ * their LIVE tolerance: a tolerance a later migration shipped (B5, round-off,
+ * W1) replaces the baseline one, so the gate sweeps the band the grader uses.
+ */
+export const publishedFields = (rows, course, tier) => rows
+  .filter((r) => r.course === course && r.tier === tier)
+  .map((r) => ({
+    key: r.key,
+    unit: r.unit,
+    expected: r.expected,
+    tol: r.shipped && Array.isArray(r.shipped.tol) ? r.shipped.tol[1] : r.tol,
+  }));

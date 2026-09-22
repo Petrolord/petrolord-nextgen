@@ -16,8 +16,8 @@
 // still honest, so the tier cannot be declared clean by accident.
 //
 // Every graded answer comes from capstoneValues(), which runs the vendored
-// engine; the tolerances are the published ones in the B5 baseline dump, and
-// the engine is checked against that dump first.
+// engine; the tolerances are the live published ones (the audit's
+// fields.json), and the engine is checked against those expected values first.
 import { describe, it, expect } from 'vitest';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -28,7 +28,7 @@ import { capstoneValues, pageIntroFigures } from './welldesignLab.js';
 import SurveyExplorer from './SurveyExplorer.jsx';
 import UncertaintyExplorer from './UncertaintyExplorer.jsx';
 import ClearanceExplorer from './ClearanceExplorer.jsx';
-import { gradedTargets, leakHits, htmlText, OPEN_BOOK } from '../leakStripGate.js';
+import { gradedTargets, leakHits, htmlText, publishedFields, OPEN_BOOK } from '../leakStripGate.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, '../../../../..');
@@ -41,9 +41,9 @@ const CAPSTONE_LESSON = {
   advanced: 'advanced/m06-the-expert-reading/l02-working-the-capstone.md',
 };
 
-const caps = JSON.parse(fs.readFileSync(path.join(REPO, 'docs/graded-field-audit/caps.json'), 'utf8'))
-  .filter((c) => c.app === COURSE);
-const fieldsOf = (tier) => caps.find((c) => c.tier === tier).fields;
+const AUDIT = JSON.parse(fs.readFileSync(path.join(REPO, 'docs/graded-field-audit/fields.json'), 'utf8'));
+const TIERS = ['beginner', 'intermediate', 'advanced'];
+const fieldsOf = (tier) => publishedFields(AUDIT, COURSE, tier);
 const engine = capstoneValues();
 const targetsFor = (tiers) => tiers.flatMap((tier) => gradedTargets({ tier, values: engine[tier], fields: fieldsOf(tier) }));
 
@@ -65,10 +65,12 @@ const render = (Panel, props = {}) => htmlText(renderToStaticMarkup(React.create
 
 describe('the targets are the graded answers', () => {
   it('the engine reproduces every published expected value of the three tiers', () => {
-    caps.forEach((c) => c.fields.forEach((f) => {
-      expect(Math.abs(engine[c.tier][f.key] - Number(f.expected)), `${c.tier}/${f.key}`)
-        .toBeLessThanOrEqual(Number(f.tol) / 10);
-    }));
+    TIERS.forEach((tier) => {
+      expect(fieldsOf(tier)).toHaveLength(6);
+      fieldsOf(tier).forEach((f) => {
+        expect(Math.abs(engine[tier][f.key] - f.expected), `${tier}/${f.key}`).toBeLessThanOrEqual(f.tol / 10);
+      });
+    });
   });
 
   it('there are lessons and panels to sweep, so a rename cannot empty this gate', () => {
