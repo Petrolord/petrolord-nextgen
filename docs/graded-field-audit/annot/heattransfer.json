@@ -175,6 +175,12 @@
     "prompt_contains": [],
     "lessons": [
      "src/content/courses/heattransfer/intermediate/m02-shells-in-series/l01-the-equivalent-single-shell-p.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/heattransfer/intermediate/m02-shells-in-series/l01-the-equivalent-single-shell-p.md",
+      "so the value the closed form was actually read at is visible rather than implied.\n\n## The conversion itself\n\nFor N shells in series at a whole unit P and R, the engine first forms\n\n    S = ((1 - P R) / (1 - P))^(1/N)\n\nand then takes the equivalent single-shell P as\n\n    P1 = (S - 1) / (S - R)\n\nWhere R is 1 that quotient has no value, and the limit is used instead: P1 = P / (N - P (N - 1)). Both are one line in a spreadsheet, and either one reproduces the equivalent single-shell P column of the two tables below from its P, R and shell count."
+     ]
     ]
    }
   },

@@ -193,7 +193,8 @@
     "prompt_contains": [
      "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -221,7 +222,8 @@
     "prompt_contains": [
      "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -249,7 +251,8 @@
     "prompt_contains": [
      "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -277,7 +280,8 @@
     "prompt_contains": [
      "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -305,7 +309,8 @@
     "prompt_contains": [
      "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -333,7 +338,8 @@
     "prompt_contains": [
      "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -362,7 +368,8 @@
      "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
      "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -391,7 +398,8 @@
      "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
      "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -420,7 +428,8 @@
      "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
      "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -449,7 +458,8 @@
      "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
      "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -478,7 +488,8 @@
      "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
      "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -507,7 +518,8 @@
      "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
      "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   }
  ]

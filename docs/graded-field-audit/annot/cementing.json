@@ -295,7 +295,8 @@
     "prompt_contains": [
      "on the same slant trajectory. Its bending stiffness E x I is 12266792.85346564 N m2, which is E = 206.8 GPa on I = pi/64 (OD^4 - ID^4)."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -343,7 +344,8 @@
     "prompt_contains": [
      "on the same slant trajectory. Its bending stiffness E x I is 12266792.85346564 N m2, which is E = 206.8 GPa on I = pi/64 (OD^4 - ID^4)."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {

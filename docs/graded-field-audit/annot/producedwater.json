@@ -81,6 +81,12 @@
     ],
     "lessons": [
      "src/content/courses/producedwater/beginner/m02-the-water-and-the-oil/l04-crude-density-from-api-gravity.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/producedwater/beginner/m02-the-water-and-the-oil/l04-crude-density-from-api-gravity.md",
+      "and the result is then thinned by temperature at a declared rate of 0.0007 for each degree. The thinning is measured from a reference temperature of 15.56 C, which is 60 F taken to two decimals, so the whole chain is 141.5 / (131.5 + API) x 999 x (1 - 0.0007 (T - 15.56)) with T in C. Use 15.56 exactly: the unrounded 60 F, 15.5556 C, moves a density by a few thousandths of a kg/m3."
+     ]
     ]
    }
   },

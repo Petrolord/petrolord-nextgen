@@ -131,7 +131,8 @@
     "prompt_contains": [
      "The job is placed at 2380 m measured depth. At the job's true vertical depth of 2033.000 m the fracturing pressure, the closure stress there, is 36554842.99 Pa and the reservoir pressure is 22468999.12 Pa. Take the acid viscosity as exactly 0.001 Pa.s and 1 mD as 9.869233e-16 m2."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {

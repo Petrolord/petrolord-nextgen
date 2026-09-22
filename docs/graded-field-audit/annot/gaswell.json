@@ -31,7 +31,8 @@
     "prompt_contains": [
      "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -59,7 +60,8 @@
     "prompt_contains": [
      "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -87,7 +89,8 @@
     "prompt_contains": [
      "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -115,7 +118,8 @@
     "prompt_contains": [
      "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -143,7 +147,8 @@
     "prompt_contains": [
      "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -171,7 +176,8 @@
     "prompt_contains": [
      "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -199,7 +205,8 @@
     "prompt_contains": [
      "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -227,7 +234,8 @@
     "prompt_contains": [
      "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -255,7 +263,8 @@
     "prompt_contains": [
      "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -283,7 +292,8 @@
     "prompt_contains": [
      "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -311,7 +321,8 @@
     "prompt_contains": [
      "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -339,7 +350,8 @@
     "prompt_contains": [
      "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -368,7 +380,8 @@
      "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
      "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -397,7 +410,8 @@
      "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
      "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -425,7 +439,8 @@
      "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
      "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -454,7 +469,8 @@
      "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
      "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -483,7 +499,8 @@
      "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
      "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -511,7 +528,8 @@
      "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
      "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   }
  ]

@@ -151,7 +151,8 @@
     "prompt_contains": [
      "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -179,7 +180,8 @@
     "prompt_contains": [
      "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -207,7 +209,8 @@
     "prompt_contains": [
      "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -235,7 +238,8 @@
     "prompt_contains": [
      "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -307,7 +311,8 @@
     "prompt_contains": [
      "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -335,7 +340,8 @@
     "prompt_contains": [
      "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -363,7 +369,8 @@
     "prompt_contains": [
      "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -391,7 +398,8 @@
     "prompt_contains": [
      "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -419,7 +427,8 @@
     "prompt_contains": [
      "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   },
   {
@@ -447,7 +456,8 @@
     "prompt_contains": [
      "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
     ],
-    "lessons": []
+    "lessons": [],
+    "lesson_contains": []
    }
   }
  ]

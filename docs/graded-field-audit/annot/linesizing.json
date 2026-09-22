@@ -183,6 +183,20 @@
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+      "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+      "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+      "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+     ]
     ]
    }
   },
@@ -213,6 +227,20 @@
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+      "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+      "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+      "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+     ]
     ]
    }
   },
@@ -243,6 +271,20 @@
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+      "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+      "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+      "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+     ]
     ]
    }
   },
@@ -273,6 +315,20 @@
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+      "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+      "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+      "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+     ]
     ]
    }
   },
@@ -303,6 +359,20 @@
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+      "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+      "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+      "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+     ]
     ]
    }
   },
