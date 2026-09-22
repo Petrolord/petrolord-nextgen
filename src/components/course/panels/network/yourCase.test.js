@@ -29,6 +29,7 @@ import NetworkExplorer from './NetworkExplorer.jsx';
 import FightExplorer from './FightExplorer.jsx';
 import { TYPED_PRINT_DP } from './TypedNetworkFields.jsx';
 import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
+import * as D2 from '../typedCaseGuard.js';
 
 const FIELDS = JSON.parse(fs.readFileSync(waveInput('network', 'fields.json'), 'utf8'));
 
@@ -212,5 +213,58 @@ describe('both typed views render', () => {
       expect(html).not.toMatch(/undefined/);
       expect(html).toMatch(/conservation gap/i);
     }, 60000);
+  });
+});
+
+// ---- D2 SHARED RULES (typedCaseGuard.js, owner decision D2) ----------------
+// Rule 1: each typed mode's default state, run through the function the panel
+// calls, lands on no graded answer at ten grading bands in five shiftings.
+// Rule 2: no default carries a capstone-distinguishing input. The keys are
+// FROZEN here (every typed input where the capstone case differs from the
+// default when the mode was built), so a default later moved onto a capstone
+// input fails even when its outputs do not collide yet.
+const D2_MODES = [
+  { name: 'typed', typed: typedPrompt(), defaults: TYPED_NETWORK_DEFAULT, run: (x) => typedNetwork(x, { streams: true, linear: true }) },
+];
+const D2_KEYS = {"typed": ["separatorPsia", "wells.0.qmax", "wells.0.prPsia", "wells.0.k", "wells.0.kLinear", "wells.0.qoStbd", "wells.0.qwStbd", "wells.0.qgMscfd", "wells.1.qmax", "wells.1.prPsia", "wells.1.k", "wells.1.kLinear", "wells.1.qoStbd", "wells.1.qwStbd", "wells.1.qgMscfd", "wells.2.qmax", "wells.2.prPsia", "wells.2.k", "wells.2.kLinear", "wells.2.qoStbd", "wells.2.qwStbd", "wells.2.qgMscfd", "wells.3.qmax", "wells.3.prPsia", "wells.3.k", "wells.3.kLinear", "wells.3.qoStbd", "wells.3.qwStbd", "wells.3.qgMscfd", "branches.0.k", "branches.0.kLinear", "branches.1.k", "branches.1.kLinear", "branches.2.k", "branches.2.kLinear", "branches.3.k", "branches.3.kLinear"]};
+const d2Leaves = (v, p = '', out = {}) => {
+  if (v !== null && typeof v === 'object') {
+    Object.entries(v).forEach(([k, x]) => d2Leaves(x, p ? `${p}.${k}` : k, out));
+  } else if (v !== undefined && v !== '') {
+    const n = Number(v);
+    out[p] = typeof v === 'boolean' || v === null || !Number.isFinite(n) ? v : n;
+  }
+  return out;
+};
+// typedCaseGuard reads dotted paths, so a flattened key (wells.0.qmax) is renamed flat
+const flat = (k) => k.replace(/\./g, '__');
+const d2Bundle = (v) => {
+  const o = {};
+  Object.entries(d2Leaves(v)).forEach(([p, x]) => { o[p] = x; });
+  return o;
+};
+
+describe('D2 shared rules (typedCaseGuard.js)', () => {
+  const targets = D2.leakTargets(FIELDS);
+  it('rule 1: no typed default state lands on a graded answer', () => {
+    expect(targets.length).toBeGreaterThan(0);
+    expect(D2.defaultStateHits({ targets, modes: D2_MODES })).toEqual([]);
+  }, 600000);
+  D2_MODES.forEach(({ name, typed, defaults }) => {
+    it(`rule 2: the ${name} default preloads no capstone-distinguishing input`, () => {
+      const capstone = d2Bundle(typed);
+      const bundle = d2Bundle(defaults);
+      const keys = D2_KEYS[name];
+      expect(keys.length, 'the frozen key list guards nothing').toBeGreaterThan(0);
+      const lookup = (o) => Object.fromEntries(keys.map((k) => [flat(k), o[k]]));
+      expect(D2.distinguishingKeyProblems({ capstone: lookup(capstone), teachingCases: [{ name: 'default', inputs: lookup(bundle) }], keys: keys.map(flat) })).toEqual([]);
+      expect(D2.preloadHits({ capstone: lookup(capstone), bundles: [{ name: `${name} default`, inputs: lookup(bundle) }], keys: keys.map(flat) })).toEqual([]);
+    });
+    it(`rule 2 is live on the ${name} mode: the capstone typed as a default is caught`, () => {
+      const capstone = d2Bundle(typed);
+      const keys = D2_KEYS[name];
+      const lookup = (o) => Object.fromEntries(keys.map((k) => [flat(k), o[k]]));
+      expect(D2.preloadHits({ capstone: lookup(capstone), bundles: [{ name: 'planted', inputs: lookup(capstone) }], keys: keys.map(flat) }).length).toBe(keys.length);
+    });
   });
 });
