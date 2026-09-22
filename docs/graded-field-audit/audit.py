@@ -153,7 +153,19 @@ def evaluate(caps, annots):
 
 def in_wave(shipped, waves):
     """A shipped fix is checked when it belongs to no wave (B5, round-off) or to a named one."""
-    return isinstance(shipped, dict) and (shipped.get('wave') is None or shipped.get('wave') in waves)
+    return effective(shipped, waves) is not None
+
+
+def effective(shipped, waves):
+    """The fix that applies at a given set of waves. A later wave's fix on the same key
+    carries the earlier one as `prev` (W5 re-cases a field W1 re-keyed or tightened), so
+    the state after W1 alone is still checked against W1's fix."""
+    s = shipped
+    while isinstance(s, dict):
+        if s.get('wave') is None or s.get('wave') in waves:
+            return s
+        s = s.get('prev')
+    return None
 
 
 def post_check(before, after, rows, waves=()):
@@ -164,9 +176,9 @@ def post_check(before, after, rows, waves=()):
     errs = []
     idx_b = {(c['app'], c['tier']): c for c in before}
     idx_a = {(c['app'], c['tier']): c for c in after}
-    live = [r for r in rows if in_wave(r.get('shipped'), waves)]
-    fix_tol = {(r['course'], r['tier'], r['key']): r['shipped']['tol'][1] for r in live if 'tol' in r['shipped']}
-    rekey = {(r['course'], r['tier'], r['key']): r['shipped']['rekey'] for r in live if 'rekey' in r['shipped']}
+    live = [(r, effective(r.get('shipped'), waves)) for r in rows if in_wave(r.get('shipped'), waves)]
+    fix_tol = {(r['course'], r['tier'], r['key']): e['tol'][1] for r, e in live if 'tol' in e}
+    rekey = {(r['course'], r['tier'], r['key']): e['rekey'] for r, e in live if 'rekey' in e}
     if not fix_tol:
         errs.append('post-recut check has no shipped tolerance fix to verify (empty sweep)')
     for ck, cb in idx_b.items():
@@ -199,10 +211,10 @@ def post_check(before, after, rows, waves=()):
                 errs.append(f'{k}: moved but the recut does not name it')
     # the replacement fields are gated like any live field, under their own annotation
     ann = copy.deepcopy(ANNOTS_FOR_POST)
-    for r in live:
-        if 'rekey' in r['shipped']:
-            ann[r['course']]['fields'].append({'tier': r['tier'], 'key': r['shipped']['rekey']['key'],
-                                               **r['shipped'].get('rekey_annot', {'class': 'none'})})
+    for r, e in live:
+        if 'rekey' in e:
+            ann[r['course']]['fields'].append({'tier': r['tier'], 'key': e['rekey']['key'],
+                                               **e.get('rekey_annot', {'class': 'none'})})
     re_rows, re_err = evaluate(after, ann)
     new_keys = {(c, t, nf['key']) for (c, t, _), nf in rekey.items()}
     for r in re_rows:
@@ -262,25 +274,31 @@ def selftest(caps, annots):
     global ANNOTS_FOR_POST
     ANNOTS_FOR_POST = annots
     rows = evaluate(caps, annots)[0]
-    waves = tuple(sorted({r['shipped']['wave'] for r in rows if isinstance(r.get('shipped'), dict) and r['shipped'].get('wave')}))
-    shipped = {(r['course'], r['tier'], r['key']): r['shipped']['tol'][1] for r in rows
-               if isinstance(r.get('shipped'), dict) and 'tol' in r['shipped']}
-    rekeys = {(r['course'], r['tier'], r['key']): r['shipped']['rekey'] for r in rows
-              if isinstance(r.get('shipped'), dict) and 'rekey' in r['shipped']}
-    wave_of = {(r['course'], r['tier'], r['key']): r['shipped'].get('wave') for r in rows if isinstance(r.get('shipped'), dict)}
+    def waves_of(sh):
+        while isinstance(sh, dict):
+            if sh.get('wave'):
+                yield sh['wave']
+            sh = sh.get('prev')
+    waves = tuple(sorted({w for r in rows for w in waves_of(r.get('shipped'))}))
+    ship = {(r['course'], r['tier'], r['key']): r['shipped'] for r in rows if isinstance(r.get('shipped'), dict)}
+    eff_all = {k: effective(v, waves) for k, v in ship.items()}
+    shipped = {k: e['tol'][1] for k, e in eff_all.items() if e and 'tol' in e}
+    rekeys = {k: e['rekey'] for k, e in eff_all.items() if e and 'rekey' in e}
+    wave_of = {k: v.get('wave') for k, v in ship.items()}
     def after(skip=None, move=None, upto=waves):
         c2 = copy.deepcopy(caps)
         for c in c2:
             for i, f in enumerate(c['fields']):
                 k = (c['app'], c['tier'], f['key'])
-                if wave_of.get(k) and wave_of[k] not in upto:
-                    continue
-                if k in shipped and k != skip:
-                    f['tol'] = shipped[k]
+                e = effective(ship.get(k), upto)
                 if k == move:
                     f['tol'] = float(f['tol']) * 2 + 1
-                if k in rekeys and k != skip:
-                    c['fields'][i] = dict(rekeys[k])
+                if e is None:
+                    continue
+                if 'tol' in e and k != skip:
+                    f['tol'] = e['tol'][1]
+                if 'rekey' in e and k != skip:
+                    c['fields'][i] = dict(e['rekey'])
         return c2
     clean = not post_check(caps, after(), rows, waves)
     print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: every shipped fix applied{' (waves ' + ', '.join(waves) + ')' if waves else ''}")
@@ -308,6 +326,18 @@ def selftest(caps, annots):
         ok &= clean
         red = bool(post_check(caps, after(), rows, ()))
         print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: the wave's state checked without --wave")
+        ok &= red
+    for w in waves:
+        # each wave on its own: the state before it (every other wave) still checks
+        # clean without it, and its own state is red until it is named. A key that
+        # a later wave re-cases carries the earlier fix as `prev`, so this holds for
+        # W1 and W5 on the same field.
+        rest = tuple(x for x in waves if x != w)
+        clean = not post_check(caps, after(upto=rest), rows, rest)
+        print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: the state without {w}, checked without --wave {w}")
+        ok &= clean
+        red = bool(post_check(caps, after(), rows, rest))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: the state with {w}, checked without --wave {w}")
         ok &= red
     other = next((c['app'], c['tier'], f['key']) for c in caps for f in c['fields']
                  if (c['app'], c['tier'], f['key']) not in shipped and (c['app'], c['tier'], f['key']) not in rekeys)

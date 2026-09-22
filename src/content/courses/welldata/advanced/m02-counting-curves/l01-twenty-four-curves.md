@@ -1,6 +1,6 @@
 # Twenty four curves
 
-The first graded reading of the tier is the number of curves the campaign imported across the six files, with the depth index excluded. The answer is 24, the tolerance is zero, and the arithmetic is 6 x 4.
+The first graded reading of the tier is the number of curves the campaign imported across its files, with the depth index excluded. On the teaching campaign the answer is 24, the tolerance is zero, and the arithmetic is 6 x 4. The capstone asks the same count of the ODUMA campaign, so count it there file by file.
 
 That is the whole calculation. This module exists because the calculation is not the difficult part.
 
@@ -27,7 +27,7 @@ Say both out loud once, because a reader who has not separated them will eventua
 
 Curves declared across the campaign, index included, is 30. Curves imported across the campaign, index excluded, is 24. The difference is 6, one index per file, and it is a constant rather than a finding.
 
-The graded reading is 24. The next lesson gives the reason at length, and the short version is that the index is the axis the other curves are sampled against rather than a measurement in its own right. For now, take it as the platform's convention, and notice that the convention was already in force at the tier below. The Professional tier graded feet_20 at 4 recognised curve kinds out of 5 declared curves, for the same reason and with the same exclusion.
+The reading is 24. The next lesson gives the reason at length, and the short version is that the index is the axis the other curves are sampled against rather than a measurement in its own right. For now, take it as the platform's convention, and notice that the convention was already in force at the tier below. At the Professional tier feet_20 showed 4 recognised curve kinds out of 5 declared curves, for the same reason and with the same exclusion.
 
 ## Why the tolerance is zero
 
@@ -39,7 +39,7 @@ More usefully, consider what the reachable wrong answers are, because each of th
 
 **Some number between 20 and 24.** You dropped the dead curve, or curves you judged unusable, from the count. The count is of curves imported, and a dead curve is imported. It arrives, it occupies a column, it appears in the registry, and it is counted. Whether it should have been delivered is a separate question that module 3 and module 4 take seriously.
 
-**4.** You read the reading as a per-file number. Each file does contribute 4, and the graded value is the campaign total.
+**4.** You read the reading as a per-file number. Each file does contribute 4, and the reading is the campaign total.
 
 **A number that is not a multiple of 4.** You counted from memory of one file's curve section rather than from the campaign, or you assumed the files differ in curve count. In this delivery they do not, which lesson 3 examines rather than celebrates.
 
@@ -57,6 +57,6 @@ The panel below runs all six teaching files as one campaign and shows the table 
 
 ## Exercise
 
-Open the panel and confirm the curve count file by file, then check the campaign total. Now answer three questions without the panel. First, what would the campaign total be if the index were counted, and by how much would it differ from the graded reading. Second, if a seventh file arrived from the same sender with the same curve suite, what would the graded reading become, and would the tolerance change. Third, if one of the six files had shipped without its NPHI curve, what would the graded reading be and would the count still be expressible as a product.
+Open the panel and confirm the curve count file by file, then check the campaign total. Now answer three questions without the panel. First, what would the campaign total be if the index were counted, and by how much would it differ from the reading. Second, if a seventh file arrived from the same sender with the same curve suite, what would the reading become, and would the tolerance change. Third, if one of the six files had shipped without its NPHI curve, what would the reading be and would the count still be expressible as a product.
 
-Self-check: counting the index gives 30, which is 6 more than the graded 24, since the difference is one index per file. A seventh file with the same suite would take the reading to 28, and the tolerance stays at zero, because the reading remains a count and adding members to a set does not make a count approximate. Losing NPHI from one file would give 23, which is 5 files at 4 curves plus 1 file at 3, and that cannot be written as a product because the files no longer contribute equally. Note that the product form is a convenience of this particular delivery rather than a property of curve counting.
+Self-check: counting the index gives 30, which is 6 more than the correct 24, since the difference is one index per file. A seventh file with the same suite would take the reading to 28, and the tolerance stays at zero, because the reading remains a count and adding members to a set does not make a count approximate. Losing NPHI from one file would give 23, which is 5 files at 4 curves plus 1 file at 3, and that cannot be written as a product because the files no longer contribute equally. Note that the product form is a convenience of this particular delivery rather than a property of curve counting.

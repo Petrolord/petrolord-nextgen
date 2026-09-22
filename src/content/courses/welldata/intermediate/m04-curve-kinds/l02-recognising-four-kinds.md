@@ -1,6 +1,6 @@
 # Recognising four kinds
 
-Run the import pipeline on feet_20 and the importer recognises four kinds: gr, density, neutron and sonic. That 4 is the graded number for this module, and it is graded exactly.
+Run the import pipeline on feet_20 and the importer recognises four kinds: gr, density, neutron and sonic. That count is the reading this module grades, on the capstone's own feet file, and it is graded exactly.
 
 This lesson walks all five curves from what the file says to what the importer concludes, so that the count is something you derive rather than something you remember.
 
@@ -44,7 +44,7 @@ The unit here is the one that carried all the weight in the previous module: US/
 
 The fifth row is DEPT, and its kind is depth. That kind is real, it appears in the table, and it is stored on the curve.
 
-It is nevertheless not part of the count, and the graded answer for feet_20 is 4 rather than 5. The reason is that DEPT is the index curve rather than a measurement, and the count is a count of recognised measurements. The next lesson is entirely about why an index is structurally different, so take it here as a rule and go and get the reason.
+It is nevertheless not part of the count, and the answer for feet_20 is 4 rather than 5. The reason is that DEPT is the index curve rather than a measurement, and the count is a count of recognised measurements. The next lesson is entirely about why an index is structurally different, so take it here as a rule and go and get the reason.
 
 For now, the arithmetic to hold on to is this. The file declares five curves. One of them is the index. Four measurements remain, and the importer recognises all four, so the count is 4. There is no unrecognised curve in this file, which means 4 is simultaneously the number of measurements and the number of recognised measurements. Those two are not always the same number, and the last lesson of this module is about the case where they part company.
 

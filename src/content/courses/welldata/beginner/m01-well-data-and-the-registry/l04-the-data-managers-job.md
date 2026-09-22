@@ -22,7 +22,7 @@ Count the nulls per curve, hunt for dead curves, and glance at the statistics. n
 
 Open any teaching file in the app and the QC panel lays the answers out: version and wrap on top, the depth block with unit, range, native and converted step, and sample count, then the curve table with samples, nulls, first and last finite values and finite-sample means, then the header rows. Every cell is computed live by the central parser from the file you loaded. Nothing is hand-entered, which is exactly why reading the panel carefully counts as measurement, not paperwork.
 
-The six numbers the Associate capstone grades are all plain readings of this panel across the six files: basic_20's sample count (301), its GR null count (8) and GR mean (64.9272), feet_20's converted step (0.6096 m), nullheavy_20's NPHI null count (201), and wrapped_12's sample count (161). The capstone is not a puzzle. It is the job, done properly, six times.
+The six readings the Associate capstone grades are all plain readings of this panel. On the teaching files they are basic_20's sample count (301), its GR null count (8) and GR mean (64.9272), feet_20's converted step (0.6096 m), nullheavy_20's NPHI null count (201), and wrapped_12's sample count (161). The capstone asks for the same six readings on its own case files, the ODUMA campaign, which you download from the capstone card and open in the panel yourself. The capstone is not a puzzle. It is the job, done properly, six times.
 
 ## Publishing to the registry
 

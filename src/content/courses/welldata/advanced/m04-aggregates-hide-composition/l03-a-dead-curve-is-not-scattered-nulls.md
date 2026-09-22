@@ -44,7 +44,7 @@ The second is that the fields move together. Resolve the dead curve and the null
 
 Write the finding two ways and compare them.
 
-The version that hides the structure: nullheavy_20.las has 272 flagged nulls and one dead curve. Both halves are true and graded correct, and a reader takes away two problems of unstated size.
+The version that hides the structure: nullheavy_20.las has 272 flagged nulls and one dead curve. Both halves are true and would be graded correct, and a reader takes away two problems of unstated size.
 
 The version that carries it: nullheavy_20.las has 272 flagged nulls across its 4 value curves of 201 samples each, of which 201 are NPHI in V/V, a curve with no finite samples at all and the campaign's one dead curve, and 71 are gaps in GR in GAPI, which is otherwise a working curve. RHOB in G/C3 and DT in US/M have 0 nulls of 201 each.
 

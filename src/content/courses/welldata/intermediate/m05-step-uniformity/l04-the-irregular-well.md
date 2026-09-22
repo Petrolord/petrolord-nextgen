@@ -24,7 +24,7 @@ Nothing special is done to this file. The pipeline calls `uniformStepM` on the c
 
 **The walk.** The very next differences are about 0.5 m and about 0.699951 m. Measured against the candidate, they miss it by about 0.2 m and about 0.4 m. The allowance is about 0.003 m. The misses are larger than the allowance by a factor of roughly a hundred, so the first of them is enough to reject the hypothesis, and there is no second chance for another candidate.
 
-**The result.** The function returns nothing. No step exists for this file, the pipeline records that, and the capstone field for whether irregular_20 has a uniform step is the integer 0, meaning no.
+**The result.** The function returns nothing. No step exists for this file, the pipeline records that, and the verdict for whether irregular_20 has a uniform step is the integer 0, meaning no.
 
 ## The contrast is the lesson
 
@@ -50,4 +50,4 @@ Open the panel below on irregular_20 and then on feet_20, and watch the first di
 
 Run the panel on irregular_20 and write down the sample count, the first differences it lists and the uniformity verdict. Then, on paper, state the candidate step the test adopts, the tolerance it builds, the size of the first miss, and what the function returns. Finally answer in one sentence: why does float32 wobble pass this test while irregular sampling fails it, when both are differences that disagree with the candidate?
 
-As a self check: irregular_20 holds 121 depth samples and steps by about 0.300049 m, 0.5 m and about 0.699951 m, so the candidate is the first difference of about 0.300049 m and the tolerance is about 0.003 m. The next differences miss the candidate by about 0.2 m and about 0.4 m, which is roughly a hundred times the allowance, so `uniformStepM` returns nothing and the graded field for whether this file has a uniform step is 0, meaning no. Both cases are disagreements with the candidate, and the tolerance separates them by size: float32 wobble on feet_20 is about 0.000122 m against an allowance of about 0.006096 m, while real irregularity here is about 0.2 m against an allowance of about 0.003 m.
+As a self check: irregular_20 holds 121 depth samples and steps by about 0.300049 m, 0.5 m and about 0.699951 m, so the candidate is the first difference of about 0.300049 m and the tolerance is about 0.003 m. The next differences miss the candidate by about 0.2 m and about 0.4 m, which is roughly a hundred times the allowance, so `uniformStepM` returns nothing and the verdict for whether this file has a uniform step is 0, meaning no. Both cases are disagreements with the candidate, and the tolerance separates them by size: float32 wobble on feet_20 is about 0.000122 m against an allowance of about 0.006096 m, while real irregularity here is about 0.2 m against an allowance of about 0.003 m.

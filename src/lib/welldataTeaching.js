@@ -84,18 +84,32 @@ export function headerRows(well) {
     .map((k) => ({ key: k, ...well[k] }));
 }
 
-// ---- Advanced tier (NG7): the six-file import campaign. Every
-// teaching file through the full pipeline, aggregated into one panel.
-// Oracle-reproduced in Node before the NG7 migration was seeded.
-export function computeAdvanced() {
+// A LAS file the learner opened from their own computer (the capstone case
+// files download from the capstone card). It goes through exactly the same
+// parser and pipeline as a teaching file; nothing about it is preloaded.
+export function userFile(name, text) {
+  return { id: `user:${name}`, label: name, text, user: true,
+    hint: 'Your file, opened from your computer and parsed live.' };
+}
+
+// Read every File the learner picked in a file input as a user file.
+export async function readUserFiles(fileList) {
+  const files = Array.from(fileList || []);
+  const texts = await Promise.all(files.map((f) => f.text()));
+  return files.map((f, i) => userFile(f.name, texts[i]));
+}
+
+// ---- The import campaign (NG7): every file of a campaign through the full
+// pipeline, aggregated into one panel. Oracle-reproduced in Node before the
+// NG7 migration was seeded. `files` is the teaching set by default, or the
+// files a learner opened.
+export function computeCampaign(files = TEACHING_FILES) {
   const perFile = [];
   let campaignCurves = 0;
   let convertedFiles = 0;
   let deadCurves = 0;
   let uniformFiles = 0;
-  let wrappedSamples = 0;
-  let nullheavyNulls = 0;
-  for (const f of TEACHING_FILES) {
+  for (const f of files) {
     const parsed = parseLas(f.text);
     const prep = prepareLogs(parsed, { sourceFile: f.label });
     const nCurves = prep.logs.length - 1; // logs[0] is depth
@@ -116,47 +130,52 @@ export function computeAdvanced() {
       if (finite === 0) dead += 1;
     }
     deadCurves += dead;
-    if (f.id === 'nullheavy_20') nullheavyNulls = nulls;
-    if (f.id === 'wrapped_12') wrappedSamples = parsed.curves[0].data.length;
     perFile.push({
       id: f.id, label: f.label, curves: nCurves, converted, uniform,
       dead, nulls, samples: parsed.curves[0].data.length,
     });
   }
-  return {
-    perFile,
-    campaignCurves,
-    convertedFiles,
-    deadCurves,
-    uniformFiles,
-    wrappedSamples,
-    nullheavyNulls,
-  };
+  return { perFile, campaignCurves, convertedFiles, deadCurves, uniformFiles };
 }
 
-// ---- Intermediate tier: SI import (the full prepareLogs pipeline).
+// The teaching campaign, with the two per-file readings the Expert tier
+// teaches on it.
+export function computeAdvanced() {
+  const c = computeCampaign(TEACHING_FILES);
+  const of = (id) => c.perFile.find((f) => f.id === id);
+  return { ...c, wrappedSamples: of('wrapped_12').samples, nullheavyNulls: of('nullheavy_20').nulls };
+}
+
+// ---- The SI import (the full prepareLogs pipeline) of one file, with the
+// sample count and uniformity verdict of a second (irregular) file.
 // Oracle-reproduced in Node before the NG6 migration was seeded.
-export function computeIntermediate() {
-  const feetFile = TEACHING_FILES.find((f) => f.id === 'feet_20');
-  const irrFile = TEACHING_FILES.find((f) => f.id === 'irregular_20');
-  const feet = prepareLogs(parseLas(feetFile.text), { sourceFile: feetFile.label });
-  const irr = parseLas(irrFile.text);
+export function computeImport(file, irrFile) {
+  const prep = prepareLogs(parseLas(file.text), { sourceFile: file.label });
+  const irr = irrFile ? parseLas(irrFile.text) : null;
   return {
-    startMdM: feet.startMdM,
-    stopMdM: feet.stopMdM,
-    stepM: feet.stepM,
-    convertedCurves: feet.logs.filter((l) => l.converted).length,
-    recognizedKinds: feet.logs.filter((l, i) => i > 0 && l.kind).length,
-    irregularUniform: uniformStepM(irr.curves[0].data) === null ? 0 : 1,
-    // What the Professional capstone grades on irregular_20. The uniformity
-    // flag above is still true and still taught, but it is a yes/no: its own
-    // label had to print "1 yes / 0 no" to be answerable at all, which handed
-    // the answer to a coin flip. A sample count cannot be guessed and still
-    // requires loading the file.
-    irregularSamples: irr.curves[0].data.length,
-    logs: feet.logs.map((l) => ({
+    startMdM: prep.startMdM,
+    stopMdM: prep.stopMdM,
+    stepM: prep.stepM,
+    convertedCurves: prep.logs.filter((l) => l.converted).length,
+    recognizedKinds: prep.logs.filter((l, i) => i > 0 && l.kind).length,
+    irregularUniform: irr ? (uniformStepM(irr.curves[0].data) === null ? 0 : 1) : null,
+    // What the Professional capstone grades on an irregular file. The
+    // uniformity flag above is still true and still taught, but it is a
+    // yes/no: its own label had to print "1 yes / 0 no" to be answerable at
+    // all, which handed the answer to a coin flip. A sample count cannot be
+    // guessed and still requires loading the file.
+    irregularSamples: irr ? irr.curves[0].data.length : null,
+    logs: prep.logs.map((l) => ({
       mnemonic: l.mnemonic, kind: l.kind, unit: l.unit,
       sourceUnit: l.sourceUnit, converted: l.converted,
     })),
   };
+}
+
+// The teaching import: feet_20, with irregular_20 as the irregular file.
+export function computeIntermediate() {
+  return computeImport(
+    TEACHING_FILES.find((f) => f.id === 'feet_20'),
+    TEACHING_FILES.find((f) => f.id === 'irregular_20'),
+  );
 }

@@ -403,3 +403,14 @@ The annotations were written by separate reviewers, course by course. `normalize
 | welldata | 18 | 0 | 0 | 0 | 0 | 0 | 18 |
 | welldesign | 17 | 0 | 1 | 0 | 1 | 0 | 8 |
 | welltest | 18 | 0 | 0 | 0 | 0 | 0 | 9 |
+
+## W5c (section 3 re-case and strip: welldata, scal, petrophysics, mbal, welltest)
+
+Part c of W5 in [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md) section 3. `w5c_capstones.py` generates `migrations/20261028c_w5_<course>.sql` from `w5c/<course>.json` on a scratch replay of the post-W1 state (production today).
+
+- **Pick A (re-case).** The tier moves to a case no panel preloads. The course's case module (`w5c/<course>/case.mjs`) builds the case and regenerates every key through the panel lab functions, which call the vendored engine; `gen_case.mjs` writes the case and `fields.json`. The prompt and dataset are replaced and the W1 open-book label goes. Every field is re-keyed, so the file carries the attempts guard with an empty D5 allowlist.
+- **Pick B (strip).** The lessons and panels stop printing the answers; keys, expected values and tolerances stay. The W1 open-book label goes from the brief (prompt only, no guard).
+- **Gate.** Each course's `src/components/course/panels/<course>/w5cRecase.test.js` (kit: `src/lib/w5cGuardKit.js`) proves the migration's fields equal the engine's regeneration, sweeps the course's panels, learning page and every lesson for each graded value in every string shape, checks that the panels' default states land on no graded value and that the W1 lesson note is gone, with a negative control for each check. `normalize.py` records each re-key with `wave: w5c` and keeps any W1 fix on the same key as `prev`; `audit.py --post --wave w1 --wave w5c` checks the W5c state and `--wave w1` alone stays green on the W1 state.
+- **welldata** (A, all tiers): the ODUMA campaign, six LAS files in `src/content/capstone-cases/welldata/`, downloaded from the capstone card and opened in the panels with "Open your own LAS files". `w5c/welldata/oracle_lasio.py` re-reads them with lasio as a second opinion. The beginner file is `20261028c_w5_welldata_beginner.sql` on its own: welldata beginner holds capstone attempts in production, so it refuses until the owner signs the ids off (D5) and is HELD in `/root/w5c-apply`.
+
+The owner applies with `/root/w5c-apply/apply.sh` (verify, dryrun, attempts, prod-status, apply --prod, rows). Lessons, panels and the case files reach learners with the NextGen zip, near-simultaneous with the apply.
