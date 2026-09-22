@@ -1,0 +1,134 @@
+{
+ "beginner": [
+  {
+   "key": "ikpo3_sand_a_net_m",
+   "tol": 0.75,
+   "unit": "m",
+   "label": "IKPO-3 SAND_A net pay",
+   "expected": 21
+  },
+  {
+   "key": "ikpo3_sand_a_phi_avg",
+   "tol": 0.01,
+   "unit": "v/v",
+   "label": "IKPO-3 SAND_A average porosity",
+   "expected": 0.2760532518141886
+  },
+  {
+   "key": "ikpo3_sand_a_sw_avg",
+   "tol": 0.02,
+   "unit": "v/v",
+   "label": "IKPO-3 SAND_A average Sw",
+   "expected": 0.3357171074414596
+  },
+  {
+   "key": "ikpo3_sand_b_net_m",
+   "tol": 0.75,
+   "unit": "m",
+   "label": "IKPO-3 SAND_B net pay",
+   "expected": 2
+  },
+  {
+   "key": "ikpo3_sand_b_phi_avg",
+   "tol": 0.01,
+   "unit": "v/v",
+   "label": "IKPO-3 SAND_B average porosity",
+   "expected": 0.18175000132936417
+  },
+  {
+   "key": "ikpo3_sand_b_sw_avg",
+   "tol": 0.02,
+   "unit": "v/v",
+   "label": "IKPO-3 SAND_B average Sw",
+   "expected": 0.5828123287408515
+  }
+ ],
+ "intermediate": [
+  {
+   "key": "ikpo3_phind_avg_sand_a",
+   "tol": 0.002,
+   "unit": "v/v",
+   "label": "IKPO-3 SAND_A mean neutron-density porosity",
+   "expected": 0.220804395724828
+  },
+  {
+   "key": "ikpo3_phiw_avg_sand_a",
+   "tol": 0.002,
+   "unit": "v/v",
+   "label": "IKPO-3 SAND_A mean Wyllie sonic porosity",
+   "expected": 0.24152554540191523
+  },
+  {
+   "key": "ikpo3_pickett_a_rw",
+   "tol": 0.002,
+   "unit": "Ω·m",
+   "label": "IKPO-3 Pickett fit over 1773 to 1779 m: a·Rw",
+   "expected": 0.5256574094251089
+  },
+  {
+   "key": "ikpo3_pickett_m",
+   "tol": 0.0002,
+   "unit": "-",
+   "label": "IKPO-3 Pickett fit over 1773 to 1779 m: cementation exponent m",
+   "expected": 0.8502948473840143
+  },
+  {
+   "key": "ikpo3_sw_sim_sand_a",
+   "tol": 0.01,
+   "unit": "v/v",
+   "label": "IKPO-3 SAND_A mean Sw (Simandoux)",
+   "expected": 0.41662897913099867
+  },
+  {
+   "key": "ikpo3_sw_ind_sand_a",
+   "tol": 0.01,
+   "unit": "v/v",
+   "label": "IKPO-3 SAND_A mean Sw (Indonesia)",
+   "expected": 0.41326832744212
+  }
+ ],
+ "advanced": [
+  {
+   "key": "ikpo3_rw_arps",
+   "tol": 0.00005,
+   "unit": "ohm.m",
+   "label": "IKPO-3 sample Rw at formation temperature (Arps)",
+   "expected": 0.049702164792750456
+  },
+  {
+   "key": "ikpo3_rwe_ssp",
+   "tol": 0.00005,
+   "unit": "ohm.m",
+   "label": "IKPO-3 Rwe from the SP quicklook",
+   "expected": 0.05071526604329182
+  },
+  {
+   "key": "ikpo3_sw_waterleg_mean",
+   "tol": 0.0005,
+   "unit": "v/v",
+   "label": "IKPO-3 water-leg mean Sw with the Arps Rw",
+   "expected": 0.9970190768360505
+  },
+  {
+   "key": "ikpo3_sand_a_net_arps",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "IKPO-3 SAND_A net pay with the Arps Rw",
+   "expected": 21
+  },
+  {
+   "key": "ikpo3_sand_a_sw_avg_arps",
+   "tol": 0.005,
+   "unit": "v/v",
+   "label": "IKPO-3 SAND_A pay-average Sw with the Arps Rw",
+   "expected": 0.33471573024447604
+  },
+  {
+   "key": "ikpo3_sand_a_net_uncorrected",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "IKPO-3 SAND_A net pay with the raw sample Rw",
+   "expected": 20
+  }
+ ]
+}

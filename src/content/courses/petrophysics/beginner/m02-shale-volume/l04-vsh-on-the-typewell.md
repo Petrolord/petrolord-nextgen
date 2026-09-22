@@ -1,6 +1,6 @@
 # Vsh on the typewell
 
-Time to run the full chain, GR to IGR to $V_{sh}$, on the course dataset and to see what the resulting curve looks like over the interval you will interpret in the capstone.
+Time to run the full chain, GR to IGR to $V_{sh}$, on the course dataset and to see what the resulting curve looks like over the zones you will interpret, the same zones your capstone well carries at its own depths.
 
 ## The recipe on one line
 

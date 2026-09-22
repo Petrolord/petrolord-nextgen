@@ -3,18 +3,21 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, Legend,
 } from 'recharts';
 import {
-  TW, DEPTH, ZONES, porosityCurves, zoneMean, sampleIndexAt, fmt, num,
+  TW, porosityCurves, zoneMean, sampleIndexAt, fmt, num,
 } from './typewellLab';
+import { useWell } from './wellContext';
 import { PanelShell, NumField, SelectField, Tile, TileGrid, FieldGrid, Note } from './panelKit';
 
 // Multi-method porosity lab: density, Wyllie sonic, RHG and the
 // neutron-density combination, all computed live from the constants the
 // learner sets. The zone means are produced, not displayed from a key.
 const PorosityLab = () => {
+  const well = useWell();
+  const { DEPTH, ZONES } = well;
   const [p, setP] = useState({
     rhoMa: String(TW.rho_ma), rhoFl: String(TW.rho_fl),
     dtMa: String(TW.dt_ma), dtFl: String(TW.dt_fl),
-    ndMethod: 'avg', sampleDepth: '2020',
+    ndMethod: 'avg', sampleDepth: '',
   });
   const set = (k) => (v) => setP((s) => ({ ...s, [k]: v }));
 
@@ -24,9 +27,9 @@ const PorosityLab = () => {
   const valid = Object.values(parsed).every(Number.isFinite);
 
   const curves = useMemo(
-    () => (valid ? porosityCurves({ ...parsed, ndMethod: p.ndMethod }) : null),
+    () => (valid ? porosityCurves({ ...parsed, ndMethod: p.ndMethod }, well) : null),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [p.rhoMa, p.rhoFl, p.dtMa, p.dtFl, p.ndMethod, valid],
+    [p.rhoMa, p.rhoFl, p.dtMa, p.dtFl, p.ndMethod, valid, well],
   );
 
   const rows = useMemo(() => {
@@ -42,9 +45,9 @@ const PorosityLab = () => {
       });
     }
     return out;
-  }, [curves]);
+  }, [curves, DEPTH]);
 
-  const iSample = sampleIndexAt(num(p.sampleDepth) || 2020);
+  const iSample = sampleIndexAt(num(p.sampleDepth) || (ZONES.SAND_A[0] + ZONES.SAND_A[1]) / 2, well);
 
   return (
     <PanelShell title="Porosity lab"
@@ -79,12 +82,12 @@ const PorosityLab = () => {
           </div>
 
           <TileGrid>
-            <Tile label="SAND_A mean, density" value={fmt(zoneMean(curves.phiD, ZONES.SAND_A))} unit="v/v" />
-            <Tile label="SAND_A mean, Wyllie sonic" value={fmt(zoneMean(curves.phiW, ZONES.SAND_A))} unit="v/v" />
-            <Tile label="SAND_A mean, RHG" value={fmt(zoneMean(curves.phiRhg, ZONES.SAND_A))} unit="v/v" />
-            <Tile label="SAND_A mean, N-D" value={fmt(zoneMean(curves.phiNdArr, ZONES.SAND_A))} unit="v/v" />
-            <Tile label="SAND_B mean, Wyllie sonic" value={fmt(zoneMean(curves.phiW, ZONES.SAND_B))} unit="v/v" />
-            <Tile label="SAND_B mean, N-D" value={fmt(zoneMean(curves.phiNdArr, ZONES.SAND_B))} unit="v/v" />
+            <Tile label="SAND_A mean, density" value={fmt(zoneMean(curves.phiD, ZONES.SAND_A, well))} unit="v/v" />
+            <Tile label="SAND_A mean, Wyllie sonic" value={fmt(zoneMean(curves.phiW, ZONES.SAND_A, well))} unit="v/v" />
+            <Tile label="SAND_A mean, RHG" value={fmt(zoneMean(curves.phiRhg, ZONES.SAND_A, well))} unit="v/v" />
+            <Tile label="SAND_A mean, N-D" value={fmt(zoneMean(curves.phiNdArr, ZONES.SAND_A, well))} unit="v/v" />
+            <Tile label="SAND_B mean, Wyllie sonic" value={fmt(zoneMean(curves.phiW, ZONES.SAND_B, well))} unit="v/v" />
+            <Tile label="SAND_B mean, N-D" value={fmt(zoneMean(curves.phiNdArr, ZONES.SAND_B, well))} unit="v/v" />
             <Tile label={`Sample at ${DEPTH[iSample]} m, N-D`} value={fmt(curves.phiNdArr[iSample])} unit="v/v" />
             <div>
               <NumField label="Sample depth (m)" value={p.sampleDepth} onChange={set('sampleDepth')} />

@@ -15,7 +15,7 @@ Run the full well at 0.5 m sampling and average each porosity over the SAND_A in
 
 Read the table from the middle out. Density says 0.2022 and Wyllie says 0.2069: two independent physics agreeing within half a porosity unit, which is the signature of a clean, compacted, liquid-filled sand with correct anchors. RHG says 0.2344, high by the margin the previous lesson predicted for a compacted section. The neutron-density value of 0.1762 belongs to the next module, but note now that it sits lowest; when you meet the reason, remember that the choice among these four numbers moves the booked porosity by nearly six porosity units.
 
-The Wyllie SAND_A mean of 0.2069 is one of the six numbers the Professional capstone grades, with a tolerance of 0.005. It is not graded because Wyllie is "the right answer" for booking; it is graded because computing it correctly proves you can drive the transform.
+The Wyllie SAND_A mean is one of the six quantities the Professional capstone grades, on the capstone's own well, IKPO-3, with a tolerance of 0.002. On the typewell it is 0.2069. It is not graded because Wyllie is "the right answer" for booking; it is graded because computing it correctly proves you can drive the transform.
 
 For contrast, SAND_B over 2050 to 2080 m gives a Wyllie mean of 0.1200. The deeper sand is visibly tighter, and every method agrees on that ranking even where they disagree on level.
 
@@ -50,7 +50,7 @@ Put the module together as doctrine:
 * RHG replaces Wyllie when compaction is in doubt; in a compacted section expect it to read high and do not average it in to split the difference.
 * Whatever you book, the report states the source per interval and why. "Porosity: density, except 2062 to 2066 m sonic (washout, caliper +4 in)" is one line that saves the next interpreter a day.
 
-The capstone will ask you for the Wyllie SAND_A mean alongside the neutron-density mean, the Pickett fit and two saturation means. You have the first of the six numbers in hand.
+The capstone will ask you for the Wyllie SAND_A mean alongside the neutron-density mean, the Pickett fit and two saturation means, on its own well. You have the method for the first of the six in hand.
 
 ## Exercise
 

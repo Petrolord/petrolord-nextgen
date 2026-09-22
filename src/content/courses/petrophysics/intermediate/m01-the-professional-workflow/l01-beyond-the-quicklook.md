@@ -26,7 +26,7 @@ The thread running through all three is the same professional habit: do not acce
 
 ## The capstone, previewed
 
-The graded practical at the end of this course asks for six numbers, all evaluated on the SAND_A zone between 2010 and 2030 m or on the water leg. They are: the SAND_A mean neutron-density porosity, the SAND_A mean Wyllie sonic porosity, the fitted Pickett $a R_w$, the fitted Pickett cementation exponent $m$, the SAND_A mean Simandoux water saturation, and the SAND_A mean Indonesia water saturation. Every one of them is produced by the workflow you are about to learn, run inside the Petrophysics app on the same typewell dataset you already know. There is nothing hidden in the grading: if your methods and parameters are right, your numbers are right.
+The graded practical at the end of this course asks for six numbers on a well of its own, IKPO-3, evaluated on its SAND_A zone or in a window above its water leg. They are: the SAND_A mean neutron-density porosity, the SAND_A mean Wyllie sonic porosity, the fitted Pickett $a R_w$, the fitted Pickett cementation exponent $m$, the SAND_A mean Simandoux water saturation, and the SAND_A mean Indonesia water saturation. Every one of them is produced by the workflow you are about to learn, which you practise on the typewell and then run in the Petrophysics app on the capstone well. There is nothing hidden in the grading: if your methods and parameters are right, your numbers are right.
 
 ## Worked example
 

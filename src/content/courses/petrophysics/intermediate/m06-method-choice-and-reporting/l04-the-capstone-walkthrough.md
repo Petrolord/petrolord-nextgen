@@ -1,19 +1,17 @@
 # The capstone walkthrough
 
-> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update moves it to a case of its own.
-
-You have now built every piece of the Professional workflow: three porosity methods, a fitted Pickett line, two shaly-sand saturation models and the discipline of sensitivity and reporting. The capstone asks you to run that workflow end to end on the typewell and report six numbers. This lesson walks through producing each one in the app, and closes the course by looking at what comes next.
+You have now built every piece of the Professional workflow: three porosity methods, a fitted Pickett line, two shaly-sand saturation models and the discipline of sensitivity and reporting. The capstone asks you to run that workflow end to end on a well of its own, IKPO-3, and report six numbers. Download its LAS file from the capstone card, open it in the app with **Open a LAS file**, and type the zone and water-leg depths its brief states; no panel loads it for you. This lesson walks through producing each number on the typewell, your worked example, and closes the course by looking at what comes next. Your capstone numbers come from IKPO-3, so they will be different.
 
 ## The six graded numbers
 
-The Professional capstone grades exactly six quantities, every one of them reproducible by the engine from the typewell dataset and the given parameters:
+The Professional capstone grades exactly six quantities, every one of them reproducible by the engine from the capstone well and the given parameters. The middle column is the typewell, the worked example:
 
-| Quantity | Expected | Tolerance |
+| Quantity | Typewell value | Tolerance |
 |---|---|---|
 | SAND_A mean neutron-density porosity | 0.1762 | 0.002 |
 | SAND_A mean Wyllie sonic porosity | 0.2069 | 0.002 |
-| Pickett fit $aR_w$ over 2072 to 2078 m | read it from your own fit | 0.002 |
-| Pickett fit $m$ over 2072 to 2078 m | read it from your own fit | 0.002 |
+| Pickett fit $aR_w$, window from three metres above the water leg | read it from your own fit | 0.002 |
+| Pickett fit $m$, the same window | read it from your own fit | 0.0002 |
 | SAND_A mean Simandoux $S_w$ | 0.4335 | 0.01 |
 | SAND_A mean Indonesia $S_w$ | 0.4280 | 0.01 |
 
@@ -21,13 +19,13 @@ Notice what the six are: two porosity means testing the multi-method module, two
 
 ## Producing the numbers in the app
 
-Open Petrophysics Studio in Learning Mode on the Professional tier. The intermediate panel runs the whole computation from the given parameters, so your work is to read it correctly and understand what each value means.
+Open Petrophysics Studio in Learning Mode on the Professional tier. The intermediate panels run the whole computation from the given parameters on whichever well is open, so your work is to open the right well, set the right zones and window, read each value correctly and understand what it means.
 
 The porosity pair comes from the multi-method porosity step. The panel reports the SAND_A zone means for the neutron-density average and the Wyllie sonic. Check yourself against the module: $\phi_{ND}$ is the average of density porosity and NPHI at each sample, and its zone mean of 0.1762 must sit below the Wyllie mean of 0.2069 for the reasons you learned in the reconciliation lesson. If your two porosities land in the wrong order, something upstream is wrong.
 
-The fit pair comes from the Pickett step, and the capstone moves the window on purpose. Over the true water leg at 2075 to 2078 m the 6-point fit lands on 0.0500 and 2.000, the given $R_w$ and $m$, which is the water leg confirming the given parameters. You already know those two numbers, so the capstone does not grade them. It grades the fit over 2072 to 2078 m, a window whose top reaches three metres above the water leg. Set the window top to 2072 and the base to 2078 in the Pickett explorer, click Fit water line and read the fitted $aR_w$ and $m$ with their point count. Then judge them: a window that takes in samples carrying hydrocarbon drags the slope and the intercept away from the givens, and the size of that drag is the lesson of the wrong-window exercise in the Pickett module.
+The fit pair comes from the Pickett step, and the capstone moves the window on purpose. Over the true water leg at 2075 to 2078 m the 6-point fit lands on 0.0500 and 2.000, the given $R_w$ and $m$, which is the water leg confirming the given parameters. You already know those two numbers, so the capstone does not grade them. It grades a fit whose window top reaches three metres above the water leg; on the typewell that is 2072 to 2078 m, and the capstone brief states its own well's window. Set the window top and base in the Pickett explorer, click Fit water line and read the fitted $aR_w$ and $m$ with their point count. Then judge them: a window that takes in samples carrying hydrocarbon drags the slope and the intercept away from the givens, and the size of that drag is the lesson of the wrong-window exercise in the Pickett module.
 
-The saturation pair comes from the shaly-sand step: Simandoux and Indonesia, both with linear $V_{sh}$ and $R_{sh}$ 2.0, averaged over SAND_A. Expect them close together and both below the Archie baseline, in the order Indonesia 0.4280, then Simandoux 0.4335.
+The saturation pair comes from the shaly-sand step: Simandoux and Indonesia, both with linear $V_{sh}$ and $R_{sh}$ 2.0, averaged over SAND_A. Expect them close together and both below the Archie baseline; on the typewell, Indonesia 0.4280, then Simandoux 0.4335.
 
 Enter the six values in the capstone fields and submit. The grader recomputes each from the same dataset and accepts your answer if it lands within tolerance.
 
@@ -41,7 +39,7 @@ The Professional tier validated $aR_w$ from the well's own water leg, but it nev
 
 ## Worked example
 
-Rehearse the submission order once, step by step:
+Rehearse the submission order once on the typewell, step by step, then repeat it on IKPO-3:
 
 1. Read the SAND_A porosity means from the panel: 0.1762 and 0.2069, and confirm the neutron-density value is the lower of the two.
 2. Set the Pickett window to 2072 to 2078 m, fit, and read $aR_w$ and $m$. Confirm the point count is 12, twice the water leg's 6, and that both values have moved well away from 0.0500 and 2.000.

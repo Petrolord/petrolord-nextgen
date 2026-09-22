@@ -16,7 +16,7 @@ A report earns the word Expert when its critical parameters sit on the highest r
 
 Uncertainty is not an apology attached to a result; it is part of the result. On the typewell the three $R_w$ routes span 0.049831 to 0.0500 ohm.m, a spread of about 0.4 percent. That spread is your uncertainty statement, and it is small because the dataset was built to converge. In field data a spread of 10 to 20 percent between routes is common, and reporting it honestly is what lets the next user decide whether it matters for their question.
 
-Notice that the capstone itself works this way. It does not demand exact values; it grades each of its six numbers within a tolerance band: 0.0005 ohm.m on the two $R_w$ routes, 0.005 on the saturations, 0.01 m on the net pays. Tolerances are uncertainty made operational. A grader, like a partner or a regulator, needs to know not just your answer but the band within which your answer is the same answer.
+Notice that the capstone itself works this way. It does not demand exact values; it grades each of its six numbers within a tolerance band: 0.00005 ohm.m on the two $R_w$ routes, 0.0005 on the water-leg check, 0.005 on the pay saturation, 0.01 m on the net pays. Tolerances are uncertainty made operational. A grader, like a partner or a regulator, needs to know not just your answer but the band within which your answer is the same answer.
 
 ## Sensitivity as evidence
 
@@ -34,4 +34,4 @@ The opposite failure deserves a name. Quoting $S_w = 0.3609$ to four decimal pla
 
 ## Exercise
 
-Take the six numbers your capstone will report and assign each a provenance rung and an uncertainty statement. Self-check: the two $R_w$ routes are measurements you computed (Arps from the lab sample, quicklook from SSP), each graded within 0.0005 ohm.m; the water-leg mean of 0.9991 is a validation, not an input; the two 18.0 and 16.5 m bookings are a sensitivity pair whose difference, 1.5 m, is itself the evidence; and the pay-average $S_w$ of 0.3609 inherits its trustworthiness entirely from the triangulated $R_w$. Then write one sentence on why 0.3609 quoted without that triangulation would be false precision.
+Take the six quantities your capstone will report and assign each a provenance rung and an uncertainty statement, using the typewell's values as the worked example. Self-check: the two $R_w$ routes are measurements you computed (Arps from the lab sample, quicklook from SSP), each graded within 0.00005 ohm.m; the water-leg mean (0.9991 on the typewell) is a validation, not an input; the two bookings (18.0 and 16.5 m on the typewell) are a sensitivity pair whose difference is itself the evidence; and the pay-average $S_w$ (0.3609 on the typewell) inherits its trustworthiness entirely from the triangulated $R_w$. Then write one sentence on why that saturation quoted without the triangulation would be false precision.

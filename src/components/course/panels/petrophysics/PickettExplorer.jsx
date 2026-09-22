@@ -3,8 +3,9 @@ import {
   ResponsiveContainer, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts';
 import {
-  TW, DEPTH, CURVES, WATER_LEG, porosityCurves, fitPickett, isoSwSegment, fmt, num,
+  TW, porosityCurves, fitPickett, isoSwSegment, fmt, num,
 } from './typewellLab';
+import { useWell } from './wellContext';
 import { Button } from '@/components/ui/button';
 import { PanelShell, NumField, Tile, TileGrid, Note } from './panelKit';
 
@@ -12,6 +13,8 @@ import { PanelShell, NumField, Tile, TileGrid, Note } from './panelKit';
 // and fits the water line themselves. A wrong window gives a wrong fit;
 // that is the point.
 const PickettExplorer = () => {
+  const well = useWell();
+  const { DEPTH, CURVES, WATER_LEG } = well;
   const [win, setWin] = useState({ top: String(WATER_LEG[0]), base: String(WATER_LEG[1]) });
   const [nExp, setNExp] = useState('2');
   const [fit, setFit] = useState(null);
@@ -20,8 +23,8 @@ const PickettExplorer = () => {
   // Porosity for the plot is the course convention: neutron-density on
   // the given constants.
   const phi = useMemo(
-    () => porosityCurves({ rhoMa: TW.rho_ma, rhoFl: TW.rho_fl, dtMa: TW.dt_ma, dtFl: TW.dt_fl }).phiNdArr,
-    [],
+    () => porosityCurves({ rhoMa: TW.rho_ma, rhoFl: TW.rho_fl, dtMa: TW.dt_ma, dtFl: TW.dt_fl }, well).phiNdArr,
+    [well],
   );
 
   const top = num(win.top);
@@ -38,12 +41,12 @@ const PickettExplorer = () => {
       else outWin.push(row);
     }
     return { inWin, outWin };
-  }, [phi, top, base]);
+  }, [phi, top, base, DEPTH, CURVES]);
 
   const runFit = () => {
     setFitError(null);
     try {
-      setFit(fitPickett(phi, top, base));
+      setFit(fitPickett(phi, top, base, well));
     } catch (e) {
       setFit(null);
       setFitError(e.message);

@@ -18,7 +18,7 @@ Correct the typewell lab sample, 0.114 ohm.m at 75 degF, to the formation temper
 2. Form the ratio: $81.77 / 186.77 = 0.437811$.
 3. Scale the lab value: $0.114 \times 0.437811 = 0.049910$ ohm.m.
 
-So the sample that reads 0.114 ohm.m on the bench is expected to read 0.0499 ohm.m in the formation. This is one of the six numbers the Expert capstone grades, with a tolerance of 0.0005 ohm.m, and notice how close it lands to the two independent routes you will meet later: the SP quicklook gives 0.0498 and the Professional-tier Pickett fit gave 0.0500. Three routes, three methods, one answer near 0.05 ohm.m.
+So the sample that reads 0.114 ohm.m on the bench is expected to read 0.0499 ohm.m in the formation. The Expert capstone grades the same correction on its own well's water sample, IKPO-3's, with a tolerance of 0.00005 ohm.m, and notice how close it lands to the two independent routes you will meet later: the SP quicklook gives 0.0498 and the Professional-tier Pickett fit gave 0.0500. Three routes, three methods, one answer near 0.05 ohm.m.
 
 ## Intermediate stops
 

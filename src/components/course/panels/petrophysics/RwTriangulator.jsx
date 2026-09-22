@@ -1,16 +1,19 @@
 import React, { useMemo, useState } from 'react';
 import {
-  TW, WATER_LEG, rwArps, spK, rweFromSsp, fitPickett, porosityCurves,
+  TW, rwArps, spK, rweFromSsp, fitPickett, porosityCurves,
   bookSandA, waterLegMeanSw, fmt, num,
 } from './typewellLab';
 import { Button } from '@/components/ui/button';
 import { PanelShell, NumField, Tile, TileGrid, FieldGrid, Note } from './panelKit';
+import { useWell } from './wellContext';
 
 // Rw triangulator: the Expert workflow end to end. The learner corrects
 // the lab sample with Arps, converts the SP reading, fits the water leg,
 // checks the leg reads Sw ~ 1, and books SAND_A with an Rw they choose.
 // Bookings are produced on demand; nothing is pre-booked.
 const RwTriangulator = () => {
+  const well = useWell();
+  const { WATER_LEG } = well;
   const [g, setG] = useState({
     rwSample: '0.114', tSample: '75', tFm: '180', ssp: '-93', rmfe: '0.62',
   });
@@ -35,19 +38,19 @@ const RwTriangulator = () => {
   // answer): the standard water-leg window on N-D porosity.
   const pickett = useMemo(() => {
     try {
-      const phi = porosityCurves({ rhoMa: TW.rho_ma, rhoFl: TW.rho_fl, dtMa: TW.dt_ma, dtFl: TW.dt_fl }).phiNdArr;
-      return fitPickett(phi, WATER_LEG[0], WATER_LEG[1]);
+      const phi = porosityCurves({ rhoMa: TW.rho_ma, rhoFl: TW.rho_fl, dtMa: TW.dt_ma, dtFl: TW.dt_fl }, well).phiNdArr;
+      return fitPickett(phi, WATER_LEG[0], WATER_LEG[1], well);
     } catch {
       return null;
     }
-  }, []);
+  }, [well, WATER_LEG]);
 
-  const legMean = Number.isFinite(arps) ? waterLegMeanSw(arps) : NaN;
+  const legMean = Number.isFinite(arps) ? waterLegMeanSw(arps, well) : NaN;
 
   const runBooking = () => {
     const rw = num(bookRwInput);
     if (!Number.isFinite(rw) || rw <= 0) return;
-    setBookings((b) => [{ rw, summary: bookSandA(rw) }, ...b].slice(0, 4));
+    setBookings((b) => [{ rw, summary: bookSandA(rw, well) }, ...b].slice(0, 4));
   };
 
   return (

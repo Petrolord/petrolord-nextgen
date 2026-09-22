@@ -1,7 +1,5 @@
 # Reporting and the capstone
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
-
 The last skill of the loop is communicating it. A petrophysical interpretation earns its keep when someone else can read it, audit it and act on it. This lesson describes the one-page summary that professional petrophysicists produce for a well like the typewell, and then lays out how you finish this course: quizzes, the final exam, and the capstone practical that issues your certificate.
 
 ## The one-page petrophysical summary
@@ -31,7 +29,7 @@ The path from here to an Associate certificate has three gates, in a fixed order
 
 **The final exam.** When every module is complete, the final exam opens: a randomized, closed-book exam drawn from the whole course. It is deliberately broader than any single module quiz. Treat it as you would a professional certification sitting.
 
-**The capstone practical.** Passing the final exam unlocks the capstone in the petrophysics Learning Mode app. The capstone is graded on exactly six numbers: $net_m$, $\phi_{avg}$ and $S_{w,avg}$ for SAND_A, and the same three for SAND_B, each computed from the typewell with the given parameter set and graded server-side within tolerance. The app runs the same engine that produced every number in this course, so an honest pass of the workflow yields the six numbers directly. You type each of the six into its own box before you submit; nothing is sent from the parameter panel on your behalf. Passing the capstone issues your Associate certificate with a public verification code, valid for twelve months.
+**The capstone practical.** Passing the final exam unlocks the capstone in the petrophysics Learning Mode app. The capstone is graded on exactly six numbers: $net_m$, $\phi_{avg}$ and $S_{w,avg}$ for SAND_A, and the same three for SAND_B, each computed with the given parameter set on the capstone's own well and graded server-side within tolerance. That well is IKPO-3, a well no panel loads: download its LAS file from the capstone card, open it in the app with **Open a LAS file**, and type the zone depths the brief states. The summary table above is the typewell's, your worked example; no lesson prints the capstone well's numbers. The app runs the same engine that produced every number in this course, so an honest pass of the workflow on the capstone well yields its six numbers. You type each of the six into its own box before you submit; nothing is sent from the parameter panel on your behalf. Passing the capstone issues your Associate certificate with a public verification code, valid for twelve months.
 
 There is no shortcut through the sequence and no timer pushing you along. The course is finished when the work is done, at whatever pace your evenings allow.
 
@@ -41,4 +39,4 @@ The Intermediate tier takes the same well and deepens every stage: multi-method 
 
 ## Exercise
 
-Draft the one-page summary for the typewell yourself, using only this course's materials: sections 1 through 6 with the real values. Then check it against a colleague's imaginary question for each section: could they identify the well, locate the zones, rerun the arithmetic, apply the cutoffs, verify each summary row and understand your assumptions from the page alone? If any answer is no, the missing item goes in before the page is done.
+Draft the one-page summary for the typewell yourself, using only this course's materials, then draft the same page for IKPO-3 from your own run: sections 1 through 6 with the real values. Then check it against a colleague's imaginary question for each section: could they identify the well, locate the zones, rerun the arithmetic, apply the cutoffs, verify each summary row and understand your assumptions from the page alone? If any answer is no, the missing item goes in before the page is done.

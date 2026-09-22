@@ -13,7 +13,7 @@ Start with the two anchor samples from earlier lessons, then widen to the zones.
 | SAND_A mean (2010-2030 m) | 0.4478 | 0.4335 | 0.4280 |
 | SAND_B mean (2050-2080 m) | 0.7692 | 0.7504 | 0.7455 |
 
-Two of these numbers are graded: the capstone expects the SAND_A Simandoux mean of 0.4335 and the SAND_A Indonesia mean of 0.4280, each within a tolerance of 0.01.
+Two of these quantities are graded: the capstone asks for the SAND_A Simandoux mean and the SAND_A Indonesia mean on the capstone's own well, IKPO-3, each within a tolerance of 0.01. On the typewell they are 0.4335 and 0.4280, your worked example.
 
 ## Reading the table
 
