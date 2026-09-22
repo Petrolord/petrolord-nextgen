@@ -302,6 +302,18 @@ W5 re-cases or strips them with the rest of section 3.
 
 Without `--wave w1`, the same state is red. The round-off dry run, which runs before W1, is unaffected.
 
+## D2: the panel guard policy for typed modes (W4)
+
+Owner decision D2 (2026-09-21) changes what `panelCapstoneGuard` forbids. The old rule was "no panel can reach the capstone case". The rule now is "no panel DEFAULT state lands on a graded answer". A route (b) tier gets a typed "your case" mode, and a learner who types the capstone's inputs reads its answers: that is the work the capstone asks for.
+
+The rules live in one place, `src/components/course/panels/typedCaseGuard.js`, and every course guard that covers a typed mode imports them:
+
+1. **Default state.** Each typed mode is run at its default inputs through the function the panel calls, and everything it returns is swept against every graded answer at ten grading bands (absolute tolerance), in the five shiftings (as graded, x1000, x0.001, psia/psig).
+2. **Preload detection (kept).** The mode's defaults, and every preset bundle a panel offers, share no capstone-distinguishing input with the capstone case. The key list is itself checked: each key must be a capstone input that no published teaching case shares. A single-input option (0.55 among the axial fractions) is typing; a bundle that sets the case is a preset.
+3. **Naming and literals (unchanged).** No panel source names a capstone reader or prints a graded answer as a decimal literal at six significant digits or more.
+
+The route itself is proved too: `typedRouteMiss` types the capstone's stated inputs and reads the graded answer at the panel's print precision. `typedCaseGuard.test.js` carries a negative control for every rule (a capstone default, a coincident default, a unit-shifted default, a preset carrying one capstone input, a renamed input, a coarse print, a named reader, a literal) and runs the rules on the live rod pump typed string view from W1.
+
 ## Regrade impact
 
 The scratch replay has 0 capstone attempts. Production held 9 at the baseline (the cleanslate record). When the lesson-leak recut was written, the 7 that existed then were all welldata/beginner. `apply.sh attempts --prod` lists them read-only.
