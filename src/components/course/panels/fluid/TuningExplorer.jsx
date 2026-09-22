@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { goodOilTuned, tuningLedger, goodOilFlash, TIER } from './fluidLab';
+import {
+  goodOilTuned, tuningLedger, goodOilFlash, TIER, GOOD_OIL_TESTS, TEACHING_TEST,
+} from './fluidLab';
 import {
   PanelShell, Tile, TileGrid, Note, NumField,
 } from '@/components/course/panels/petrophysics/panelKit';
@@ -10,6 +12,19 @@ import {
 // fit with fewer knobs than it has things to satisfy.
 
 const MODES = ['The ledger', 'The knobs', 'Flash'];
+
+
+const TEST_OPTIONS = GOOD_OIL_TESTS.map((t, i) => [String(i), `${Math.round(t.stagesF[0][1] - 14.65)} psig separator`]);
+
+const Select = ({ label, value, onChange, options }) => (
+  <div>
+    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <select value={value} onChange={(e) => onChange(e.target.value)}
+      className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5">
+      {options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+    </select>
+  </div>
+);
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d })
@@ -26,14 +41,18 @@ const TuningExplorer = () => {
   const [mode, setMode] = useState(MODES[0]);
   const [flashT, setFlashT] = useState('220');
   const [flashP, setFlashP] = useState('1500');
+  // The regression opens on the teaching test (100 psig); a capstone brief
+  // may state another of the study's separator tests to tune against.
+  const [test, setTest] = useState(String(TEACHING_TEST));
 
   const fit = useMemo(() => {
     try {
-      return { ok: true, value: goodOilTuned(), ledger: tuningLedger() };
+      const k = Number(test);
+      return { ok: true, value: goodOilTuned(k), ledger: tuningLedger(k) };
     } catch (e) {
       return { ok: false, error: e.message };
     }
-  }, []);
+  }, [test]);
 
   const flash = useMemo(() => {
     const t = Number(flashT);
@@ -61,6 +80,12 @@ const TuningExplorer = () => {
       title="Tuning explorer"
       subtitle="Four bounded knobs on the C7+ pseudo-component, against four laboratory targets at once"
     >
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end mt-3">
+        <Select label="Tune against" value={test} onChange={setTest} options={TEST_OPTIONS} />
+        <p className="text-xs text-gray-500 sm:col-span-3">
+          Opens on the teaching regression against the 100 psig optimum test. A capstone brief may state another.
+        </p>
+      </div>
       <div className="flex flex-wrap gap-1">
         {MODES.map((m) => (
           <button

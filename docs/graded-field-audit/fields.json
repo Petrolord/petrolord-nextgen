@@ -11665,7 +11665,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ekene_pb_standing_psia",
+    "label": "Standing bubble point at 480 scf/stb",
+    "unit": "psia",
+    "expected": 2300.0408722832944,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:101 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 1
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "fmt(r.pbAtRs, 1) in the Standing row prints 1,912.2; |1912.2 - 1912.1923| = 0.0077 <= tol 0.05. tol equals half a unit of the printed decimal, so the printed value always passes.",
   "notes": "tol 0.05 is exactly half a unit of the one printed decimal: honest but with no margin. Possible LEAK: the panel's DEFAULT state is exactly the capstone case (EKENE constants, fluidLab.js:56-65), so this answer is on screen before the learner touches anything (probe: '1,912.2'). The capstone lesson embeds the panel and says 'The panel runs all of them', so it is the intended source; the field tests reading the right tile/row, not computing."
  },
@@ -11698,7 +11722,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ekene_bo_at_designed_rs",
+    "label": "Standing saturated Bo at 480 scf/stb",
+    "unit": "rb/stb",
+    "expected": 1.283936228388159,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:103 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "fmt(r.boAtRs, 4) in the Standing row (standingBoSat at the Solution gas input, saturated, fluidLab.js:95) prints 1.2408; tol 0.0005 is ten times half the printed unit.",
   "notes": "Possible LEAK: the panel's DEFAULT state is exactly the capstone case (EKENE constants, fluidLab.js:56-65), so this answer is on screen before the learner touches anything (probe: '1.2408'). The capstone lesson embeds the panel and says 'The panel runs all of them', so it is the intended source; the field tests reading the right tile/row, not computing."
  },
@@ -11731,7 +11779,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ekene_muod_beal_cp",
+    "label": "Beal dead oil viscosity",
+    "unit": "cp",
+    "expected": 1.5460324253882518,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:116 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Dead oil viscosity\" fmt(chain.deadOilCp, 4) unit \"cp, Beal\" prints 2.3437; tol 0.0005 >> 0.00005.",
   "notes": "Possible LEAK: the panel's DEFAULT state is exactly the capstone case (EKENE constants, fluidLab.js:56-65), so this answer is on screen before the learner touches anything (probe: '2.3437'). The capstone lesson embeds the panel and says 'The panel runs all of them', so it is the intended source; the field tests reading the right tile/row, not computing."
  },
@@ -11764,7 +11836,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ekene_z_hy_at_pi",
+    "label": "Hall-Yarborough z at 3600 psia",
+    "unit": "-",
+    "expected": 0.9052822188344655,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:119 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 5
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Gas z, Hall-Yarborough\" fmt(z.hallYarborough, 5) at the Pressure input (default 3200) prints 0.85775; tol 0.0005 >> 5e-6.",
   "notes": "Possible LEAK: the panel's DEFAULT state is exactly the capstone case (EKENE constants, fluidLab.js:56-65), so this answer is on screen before the learner touches anything (probe: '0.85775'). The capstone lesson embeds the panel and says 'The panel runs all of them', so it is the intended source; the field tests reading the right tile/row, not computing."
  },
@@ -11797,7 +11893,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ekene_bg_at_pi_rb_scf",
+    "label": "Gas FVF at 3600 psia",
+    "unit": "rb/scf",
+    "expected": 0.0008289024138552641,
+    "tol": 5e-07
+   },
+   "rekey_annot": {
+    "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:122 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 7
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Gas FVF\" fmt(gas.bgRbPerScf, 7) on the HY z prints 0.0008633; error 1.2e-8 against tol 5e-7 (half a unit of the 7th decimal is 5e-8).",
   "notes": "Possible LEAK: the panel's DEFAULT state is exactly the capstone case (EKENE constants, fluidLab.js:56-65), so this answer is on screen before the learner touches anything (probe: '0.0008633'). The capstone lesson embeds the panel and says 'The panel runs all of them', so it is the intended source; the field tests reading the right tile/row, not computing."
  },
@@ -11830,7 +11950,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ekene_z_correlation_gap_pct",
+    "label": "z disagreement, HY against DAK",
+    "unit": "percent",
+    "expected": -0.28438199270689335,
+    "tol": 0.002
+   },
+   "rekey_annot": {
+    "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:121 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"z disagreement\" fmt(z.gapPct, 4) percent, gapPct = (HY - DAK)/DAK*100 (fluidLab.js:147), prints -0.3303; tol 0.002 >> 5e-5.",
   "notes": "Possible LEAK: the panel's DEFAULT state is exactly the capstone case (EKENE constants, fluidLab.js:56-65), so this answer is on screen before the learner touches anything (probe: '-0.3303'). The capstone lesson embeds the panel and says 'The panel runs all of them', so it is the intended source; the field tests reading the right tile/row, not computing."
  },
@@ -11863,7 +12007,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "plus_tc_r",
+    "label": "Plus-fraction critical temperature, stated MW and SG",
+    "unit": "degR",
+    "expected": 1295.7891123916502,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (Composition view, Tile 'C7+ critical temperature' at the typed MW and SG)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (Composition view, Tile 'C7+ critical temperature' at the typed MW and SG)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Composition view tile \"C7+ critical temperature\" fmt(chr.tcR, 2) degR prints 1,324.24; tol 0.05 > 0.005.",
   "notes": "Possible LEAK: StudyExplorer has no inputs and is hard-wired to Good Oil No. 4 (fluidLab.js:210-273); the answer is one click away (probe: '1,324.24'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking the model value over the lab value."
  },
@@ -11896,7 +12067,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "untuned_psat_case_psia",
+    "label": "Untuned saturation pressure at the stated temperature",
+    "unit": "psia",
+    "expected": 2637.752970132605,
+    "tol": 0.5
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (What the model says, saturation pressure at the typed temperature)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (What the model says, saturation pressure at the typed temperature)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "\"What the model says\" table, Untuned model column fmt(model.saturationPressurePsia, 2) prints 2,791.1 (trailing zero dropped); tol 0.5.",
   "notes": "Possible LEAK: StudyExplorer has no inputs and is hard-wired to Good Oil No. 4 (fluidLab.js:210-273); the answer is one click away (probe: '2,791.1'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking the model value over the lab value."
  },
@@ -11929,7 +12127,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "gor_bias_pct",
+    "label": "Untuned total GOR above the lab value",
+    "unit": "percent",
+    "expected": 2.978994905404897,
+    "tol": 0.02
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (What the model says, Total GOR error, pct)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (What the model says, Total GOR error, pct)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Error column fmt(pct(model, lab), 2) with pct = (a/b - 1)*100 (StudyExplorer.jsx:42), relative to the lab value as the field asks, prints 5.94 pct; |5.94 - 5.9382| = 0.0018 <= tol 0.02.",
   "notes": "Possible LEAK: StudyExplorer has no inputs and is hard-wired to Good Oil No. 4 (fluidLab.js:210-273); the answer is one click away (probe: '5.94'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking the model value over the lab value."
  },
@@ -11962,7 +12187,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "good_oil_untuned_gor_scf_stb",
+    "label": "Untuned total gas-oil ratio",
+    "unit": "scf/stb",
+    "expected": 803.2361602621583,
+    "tol": 1.0
+   },
+   "rekey_annot": {
+    "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:153 (directed by src/content/courses/fluid/intermediate/m06-the-professional-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 1
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:14",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Untuned model column fmt(model.totalGorScfStb, 1) with the stock tank stage appended (fluidLab.js:216) prints 793.8; tol 1.",
   "notes": "Possible LEAK: StudyExplorer has no inputs and is hard-wired to Good Oil No. 4 (fluidLab.js:210-273); the answer is one click away (probe: '793.8'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking the model value over the lab value."
  },
@@ -11995,7 +12244,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "good_oil_untuned_sto_api",
+    "label": "Untuned stock tank gravity",
+    "unit": "API",
+    "expected": 31.581245628852542,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:161 (directed by src/content/courses/fluid/intermediate/m06-the-professional-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:14",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Untuned model column fmt(model.stockTankApi, 2) prints 31.81; |31.81 - 31.8056| = 0.0044 <= tol 0.05.",
   "notes": "Possible LEAK: StudyExplorer has no inputs and is hard-wired to Good Oil No. 4 (fluidLab.js:210-273); the answer is one click away (probe: '31.81'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking the model value over the lab value."
  },
@@ -12028,7 +12301,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "good_oil_api_bias",
+    "label": "Gravity minus the lab value",
+    "unit": "API",
+    "expected": -8.818754371147456,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:163 (directed by src/content/courses/fluid/intermediate/m06-the-professional-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:14",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Error column fmt(model.stockTankApi - lab.stockTankApi, 2) prints -8.89 API; |\u22128.89 + 8.8944| = 0.0044 <= tol 0.05.",
   "notes": "Possible LEAK: StudyExplorer has no inputs and is hard-wired to Good Oil No. 4 (fluidLab.js:210-273); the answer is one click away (probe: '-8.89'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking the model value over the lab value."
  },
@@ -12061,7 +12358,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "good_oil_tuned_bo_rb_stb",
+    "label": "Tuned formation volume factor",
+    "unit": "rb/stb",
+    "expected": 1.4621628562343378,
+    "tol": 0.001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx (The ledger, bo row, Tuned column)",
+    "printed": {
+     "decimals": 3
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx (The ledger, bo row, Tuned column)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Ledger (default mode) Tuned column fmt(r.tuned, 3) for psat prints 2,632.642; tol 0.5.",
   "notes": "Possible LEAK: TuningExplorer has no inputs and runs the capstone regression itself (fluidLab.js:277-304); the answer is on screen (probe: '2,632.642'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking tuned over untuned/measured."
  },
@@ -12094,7 +12418,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "good_oil_tuned_gor_scf_stb",
+    "label": "Tuned total gas-oil ratio",
+    "unit": "scf/stb",
+    "expected": 773.1821351682468,
+    "tol": 1.0
+   },
+   "rekey_annot": {
+    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:103 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 3
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Ledger Tuned column fmt(r.tuned, 3) for totalGor prints 761.726; tol 1.",
   "notes": "Possible LEAK: TuningExplorer has no inputs and runs the capstone regression itself (fluidLab.js:277-304); the answer is on screen (probe: '761.726'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking tuned over untuned/measured."
  },
@@ -12127,7 +12475,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "good_oil_tuned_sto_api",
+    "label": "Tuned stock tank gravity",
+    "unit": "API",
+    "expected": 38.24766599188635,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:103 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 3
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Ledger Tuned column fmt(r.tuned, 3) for stoApi prints 38.755; tol 0.05.",
   "notes": "Possible LEAK: TuningExplorer has no inputs and runs the capstone regression itself (fluidLab.js:277-304); the answer is on screen (probe: '38.755'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking tuned over untuned/measured."
  },
@@ -12160,7 +12532,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "tuned_splus_knob",
+    "label": "Tuned C7+ volume shift",
+    "unit": "-",
+    "expected": 0.0939927272825379,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:144 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "\"The knobs\" mode Tuned column fmt(f.knobs[k], 6) for sPlus prints 0.122664; tol 0.0005.",
   "notes": "Possible LEAK: TuningExplorer has no inputs and runs the capstone regression itself (fluidLab.js:277-304); the answer is on screen (probe: '0.122664'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking tuned over untuned/measured."
  },
@@ -12193,7 +12589,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "tuned_kc1_knob",
+    "label": "Tuned C1 to C7+ interaction parameter",
+    "unit": "-",
+    "expected": 0.03999571242790525,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:144 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "\"The knobs\" mode Tuned column fmt(f.knobs[k], 6) for kC1 prints 0.050325; tol 0.0005.",
   "notes": "Possible LEAK: TuningExplorer has no inputs and runs the capstone regression itself (fluidLab.js:277-304); the answer is on screen (probe: '0.050325'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking tuned over untuned/measured."
  },
@@ -12226,7 +12646,31 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_fluid.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "tuning_ssr_reduction",
+    "label": "Residual reduction factor",
+    "unit": "times",
+    "expected": 16.599912822394707,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:116 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+    "printed": {
+     "decimals": 3
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Reduction\" fmt(f.ssrReduction, 3) times (ssr0/ssr, fluidLab.js:300) prints 23.157; tol 0.05.",
   "notes": "Possible LEAK: TuningExplorer has no inputs and runs the capstone regression itself (fluidLab.js:277-304); the answer is on screen (probe: '23.157'). The capstone lesson embeds this panel, so it is the intended source; the field tests picking tuned over untuned/measured."
  },

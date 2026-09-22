@@ -1,0 +1,316 @@
+{
+ "course": "fluid",
+ "wave": "w5b",
+ "migration": "20261028b_w5_fluid.sql",
+ "fields_file": "docs/graded-field-audit/w5b/fluid.fields.json",
+ "keys_module": "docs/graded-field-audit/w5b/fluid.keys.mjs",
+ "sources": [
+  "src/components/course/panels/fluid/fluidLab.js",
+  "src/pages/apps/FluidLearningPage.jsx"
+ ],
+ "capstone_lessons": {
+  "beginner": "beginner/m06-the-associate-reading/l02-working-the-capstone.md",
+  "intermediate": "intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
+  "advanced": "advanced/m06-the-expert-reading/l02-working-the-capstone.md"
+ },
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Work the correlations",
+   "dataset": "a stated black oil (34 API, gas gravity 0.70, 195 F, 480 scf/stb, initial pressure 3600 psia)",
+   "why": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+   "prompt": "Produce a black-oil description of a second fluid from the Ekene field from the correlations the engine carries. The fluid is 34 API with a gas gravity of 0.70 at a reservoir temperature of 195 F, its designed bubble point is 2400 psia, its designed solution gas ratio is 480 scf/stb and its initial pressure is 3600 psia. Report the bubble point Standing's correlation returns for the DESIGNED 480 scf/stb; the SATURATED formation volume factor Standing returns at that same designed solution gas ratio, with no undersaturated correction applied; the dead oil viscosity Beal's correlation returns, with no dissolved gas in it; the gas z factor Hall-Yarborough returns at the INITIAL pressure of 3600 psia on Sutton pseudo-criticals; the gas formation volume factor at that pressure on that same z; and the percentage by which the Hall-Yarborough z differs from the Dranchuk-Abou-Kassem z at the same state, taken relative to Dranchuk-Abou-Kassem. The correlation explorer opens on the Ekene oil; type this fluid in.",
+   "rekey": [
+    "ekene_pb_standing_psia",
+    "ekene_bo_at_designed_rs",
+    "ekene_muod_beal_cp",
+    "ekene_z_hy_at_pi",
+    "ekene_bg_at_pi_rb_scf",
+    "ekene_z_correlation_gap_pct"
+   ],
+   "case": {
+    "api": 34,
+    "gas_sg": 0.7,
+    "temp_f": 195,
+    "pb_psia": 2400,
+    "rs_scf_stb": 480,
+    "pi_psia": 3600
+   },
+   "annot": {
+    "ekene_pb_standing_psia": {
+     "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:101 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ekene_bo_at_designed_rs": {
+     "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:103 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ekene_muod_beal_cp": {
+     "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:116 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ekene_z_hy_at_pi": {
+     "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:119 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 5
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ekene_bg_at_pi_rb_scf": {
+     "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:122 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ekene_z_correlation_gap_pct": {
+     "evidence": "The story-so-far and working lessons printed every answer and the correlation explorer opened on the Ekene oil. Re-cased on a stated second oil the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:121 (directed by src/content/courses/fluid/beginner/m06-the-associate-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/CorrelationExplorer.jsx:15",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Read a real study against an untuned model",
+   "dataset": "Good Oil Co. Well No. 4, 200 psig separator test; saturation at 180 F; a stated C7+ (MW 205, SG 0.840)",
+   "why": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+   "prompt": "Run an untuned Peng-Robinson model against a published laboratory study and quantify the gaps on a read of your own. The fluid is Good Oil Co. Well No. 4 as Core Laboratories reported it: eleven components with a C7+ fraction of molecular weight 218 and specific gravity 0.8515, at a reservoir temperature of 220 F and a measured bubble point of 2634.65 psia. Use its separator test at 200 psig and 75 F, which is 214.65 psia, to a stock tank at 14.65 psia and 75 F; that test measured a total gas-oil ratio of 780 scf/stb and a stock tank gravity of 40.4 API. First characterize a heavier-cut plus fraction of molecular weight 205 and specific gravity 0.840, as a sensitivity, and report the critical temperature it is given in degrees Rankine. Then run the model on the REPORTED composition, WITHOUT tuning anything and WITH the stock tank stage appended to the separator stage, and report its saturation pressure at 180 F; the percentage by which its total gas-oil ratio exceeds the measured 780 scf/stb; the total gas-oil ratio the separator train produces; the stock tank gravity it produces; and the difference between that gravity and the laboratory's in API. The study explorer opens on the 100 psig test at 220 F; set this read in.",
+   "rekey": [
+    "good_oil_c7plus_tc_r",
+    "good_oil_untuned_psat_psia",
+    "good_oil_psat_bias_pct",
+    "good_oil_untuned_gor_scf_stb",
+    "good_oil_untuned_sto_api",
+    "good_oil_api_bias"
+   ],
+   "case": {
+    "test": 2,
+    "sat_temp_f": 180,
+    "plus": {
+     "mw": 205,
+     "sg": 0.84
+    }
+   },
+   "annot": {
+    "plus_tc_r": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (Composition view, Tile 'C7+ critical temperature' at the typed MW and SG)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (Composition view, Tile 'C7+ critical temperature' at the typed MW and SG)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "untuned_psat_case_psia": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (What the model says, saturation pressure at the typed temperature)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (What the model says, saturation pressure at the typed temperature)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "gor_bias_pct": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (What the model says, Total GOR error, pct)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx (What the model says, Total GOR error, pct)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "good_oil_untuned_gor_scf_stb": {
+     "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:153 (directed by src/content/courses/fluid/intermediate/m06-the-professional-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:14",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "good_oil_untuned_sto_api": {
+     "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:161 (directed by src/content/courses/fluid/intermediate/m06-the-professional-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:14",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "good_oil_api_bias": {
+     "evidence": "The lessons printed every answer and the study explorer opened on the 100 psig test at 220 F. Re-cased on the 200 psig separator test, a saturation temperature of 180 F and a stated plus-fraction sensitivity; the saturation-pressure bias against the lab becomes the GOR bias, because the lab measured the bubble point at 220 F only.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:163 (directed by src/content/courses/fluid/intermediate/m06-the-professional-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/StudyExplorer.jsx:14",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "Tune it, and report what the tuning cost",
+   "dataset": "Good Oil Co. Well No. 4 tuned against the 200 psig separator test",
+   "why": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+   "prompt": "Tune the compositional model to the Good Oil Co. Well No. 4 study against its 200 psig separator test and report both the result and its price. Regress the four bounded knobs on the C7+ pseudo-component and NOTHING else, jointly against all four measurements at once: the saturation pressure of 2634.65 psia at 220 F, and the total gas-oil ratio of 780 scf/stb, the stock tank gravity of 40.4 API and the formation volume factor of 1.483 rb/stb from the separator test at 214.65 psia and 75 F, with the stock tank stage at 14.65 psia and 75 F appended to it. Report the formation volume factor, the total gas-oil ratio and the stock tank gravity the TUNED model produces; the values the regression lands on for the C7+ volume shift and for the C1 to C7+ binary interaction parameter; and the factor by which the sum of squared residuals falls, being the value before the fit divided by the value after it. Every field asks for a value AFTER the regression. The tuning explorer opens on the 100 psig regression; choose this test.",
+   "rekey": [
+    "good_oil_tuned_psat_psia",
+    "good_oil_tuned_gor_scf_stb",
+    "good_oil_tuned_sto_api",
+    "tuned_splus_knob",
+    "tuned_kc1_knob",
+    "tuning_ssr_reduction"
+   ],
+   "case": {
+    "test": 2
+   },
+   "annot": {
+    "good_oil_tuned_bo_rb_stb": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx (The ledger, bo row, Tuned column)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx (The ledger, bo row, Tuned column)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "good_oil_tuned_gor_scf_stb": {
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:103 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "good_oil_tuned_sto_api": {
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:103 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "tuned_splus_knob": {
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:144 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "tuned_kc1_knob": {
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:144 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "tuning_ssr_reduction": {
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:116 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}
