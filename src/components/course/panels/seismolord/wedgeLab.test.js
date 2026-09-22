@@ -18,7 +18,8 @@ describe('seismolord expert: wedge tuning', () => {
     expect(A.f25.tuneAmp).toBeCloseTo(0.1155947595834732, 12);
     expect(A.f40.tuneMs).toBe(10);
     expect(A.f40.tuneAmp).toBeCloseTo(0.1155947595834732, 12);
-    // amp40_at_6ms replaced tune40_amp (identical to tune25_amp) in W1.
+    // amp40_at_6ms replaced tune40_amp (identical to tune25_amp) in W1; the HD
+    // re-key replaced tune25_amp with the 25 Hz amplitude of a 24 ms bed.
     expect(A.f40.rows[3].thicknessMs).toBe(6);
     expect(A.f40.rows[3].amp).toBeCloseTo(0.09535394608974457, 14);
     expect(A.f25.isoAmp).toBeCloseTo(0.07999999821186066, 12);
@@ -49,11 +50,11 @@ describe('seismolord expert: wedge tuning', () => {
     // 1.4449345271; against the exact 0.08 it is 1.4449344948.
     expect(A.f25.tuneAmp / A.f25.isoAmp).toBeCloseTo(1.4449345270902185, 10);
     expect(A.f25.tuneAmp / WEDGE.rcTop).toBeCloseTo(1.444934494793415, 10);
-    // This ratio IS the Expert capstone's tune25_iso_ratio field, tolerance
-    // 0.001. It replaced iso25_amp, which was the reflection coefficient the
-    // prompt states and so was answerable by copying an input. Both routes
-    // above land inside the tolerance, and the ratio is scale invariant, so
-    // no statement of the coefficients can give it away.
+    // This ratio WAS the Expert capstone's tune25_iso_ratio field, tolerance
+    // 0.001 (it replaced iso25_amp, the reflection coefficient the prompt
+    // states). It is scale invariant, but it barely moves with frequency, so
+    // the HD re-key (20261030b_hd_seismolord.sql) grades the ratio of a stated
+    // 28 ms bed instead; panelCapstoneGuard.test.jsx measures both.
     expect(Math.abs(A.f25.tuneAmp / A.f25.isoAmp - 1.4449345270902185)).toBeLessThan(0.001);
     expect(Math.abs(A.f25.tuneAmp / WEDGE.rcTop - 1.4449345270902185)).toBeLessThan(0.001);
   });

@@ -41,6 +41,8 @@ def load_specs():
     out = {}
     for p in sorted(glob.glob(os.path.join(SPECS, '*.json'))):
         s = json.load(open(p))
+        if s.get('builder') != 'hdc':   # one generator per HD unit, as the waves do
+            continue
         out[s['course']] = s
     return out
 

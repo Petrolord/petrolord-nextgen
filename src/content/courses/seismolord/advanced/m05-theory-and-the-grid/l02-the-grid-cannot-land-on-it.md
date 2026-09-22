@@ -29,7 +29,7 @@ Very little, and it is worth knowing how little.
 
 The ideal peak amplitude is $0.08 \times 1.4462603 = 0.11570083$. The model reports 0.11559476. The shortfall is 0.00010607, which is **0.09 percent**.
 
-That asymmetry is a general property of a maximum. Near the top of a smooth curve the slope is zero, so a 2.6 percent error in position costs only about a tenth of a percent in height. It is why the amplitude fields can be graded to 0.002, a comfortable 1.7 percent, while the thickness fields have to be graded exactly: the amplitude is insensitive to small positional errors and the thickness is the position.
+That asymmetry is a general property of a maximum. Near the top of a smooth curve the slope is zero, so a 2.6 percent error in position costs only about a tenth of a percent in height. It is also why the tuning amplitude makes a poor graded field, while the thickness fields have to be graded exactly: the amplitude is insensitive to small positional errors and the thickness is the position. The capstone therefore reads its amplitudes on the steep flanks of the curve, away from tuning.
 
 ## The three numbers and what each is
 

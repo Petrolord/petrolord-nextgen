@@ -43,6 +43,8 @@ def load_specs(only=None):
     specs = {}
     for p in sorted(glob.glob(os.path.join(SPECS, '*.json'))):
         s = json.load(open(p), parse_float=decimal.Decimal)
+        if s.get('builder') != 'hda':   # one generator per HD unit, as the waves do
+            continue
         if only and s['course'] not in only:
             continue
         specs[s['course']] = s
