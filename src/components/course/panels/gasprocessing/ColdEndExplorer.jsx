@@ -5,9 +5,10 @@ import {
 import {
   coldEnd, flagControls, vesselGasGoesUp, refusalContract,
   AGBADA, AGBADA_STEP_REFERENCE,
+  typedColdEnd, TYPED_COLD_END_DEFAULT, TYPED_COLD_END_FIELDS,
 } from './gasprocessingLab';
 import {
-  PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
+  PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 
 // Cold end explorer, the Expert tier, and the Professional contactor.
@@ -50,6 +51,7 @@ export const MODES = [
   ['capacity', 'The heat capacity as a divisor, and the product that does not move'],
   ['march', 'The march, its step count against a converged answer, and its three coefficients'],
   ['cold', 'The cold separator, and the four states that separate the cooling from the let-down'],
+  ['typed', 'Your skid, typed: the coefficient, the march and the water from five numbers you type'],
   ['refusals', 'What the march refuses, and the evidence a refusal carries with it'],
   ['contactor', 'The contactor, for the Professional tier'],
 ];
@@ -299,6 +301,60 @@ export const ColdMode = ({ c }) => {
   );
 };
 
+export const TypedMode = () => {
+  const [vals, setVals] = useState(() => Object.fromEntries(
+    TYPED_COLD_END_FIELDS.map(([key]) => [key, String(TYPED_COLD_END_DEFAULT[key])]),
+  ));
+  const r = useMemo(() => safe(() => typedColdEnd(vals)), [vals]);
+  return (
+    <>
+      <p className="text-xs text-slate-400 mb-0">
+        Type a let-down of your own. The view opens on the teaching stream AGBADA, and every input can be retyped. The
+        chain is the one the other views run: the coefficient and its derivative at the inlet, the module&apos;s default
+        march of twenty steps down to the separator, and the water the gas can hold at the inlet and at the cold spot.
+      </p>
+      <FieldGrid>
+        {TYPED_COLD_END_FIELDS.map(([key, label]) => (
+          <NumField
+            key={key}
+            label={label}
+            value={vals[key]}
+            onChange={(x) => setVals((prev) => ({ ...prev, [key]: x }))}
+          />
+        ))}
+      </FieldGrid>
+      {(!r || !r.ok) ? (
+        <Note>{r ? r.errors.join(' ') : 'This let-down cannot be read.'}</Note>
+      ) : (
+        <>
+          <TileGrid>
+            <Tile label="Compressibility at inlet" value={nine(r.z)} />
+            <Tile label="Temperature derivative at inlet" value={twelve(r.dzdT)} unit="per degR" />
+            <Tile label="Coefficient at inlet" value={twelve(r.muFPerPsi)} unit="degF/psi" />
+            <Tile label="Cooling" value={nine(r.dropF)} unit="degF" />
+            <Tile label="Arrival temperature" value={nine(r.t2F)} unit="degF" />
+            <Tile label="Water at the inlet" value={nine(r.waterInLbMMscf)} unit="lb/MMscf" />
+            <Tile label="Water the cold gas can hold" value={nine(r.waterOutLbMMscf)} unit="lb/MMscf" />
+            <Tile label="Dropped into the boot" value={nine(r.dropOutLbMMscfDerived)} unit="lb/MMscf" />
+          </TileGrid>
+          <p className="text-xs text-slate-400 mt-2 mb-0">
+            The march took {String(r.steps)} steps. The mean coefficient it delivered is {nine(r.muMeanFPerPsi)} degF
+            per psi, which is the one that belongs beside the arrival temperature.
+          </p>
+          {r.errors.length > 0 && <Note>{r.errors.join(' ')}</Note>}
+          {r.warnings.length > 0 ? (
+            r.warnings.map((w) => (
+              <Note key={w.source}>{`Engine warning on ${w.source}: ${w.message}`}</Note>
+            ))
+          ) : (
+            <Note>The engine returned no warning on this let-down.</Note>
+          )}
+        </>
+      )}
+    </>
+  );
+};
+
 export const RefusalsMode = ({ c, f, r }) => {
   if (!c) return <Note>The march reader did not return its refusals.</Note>;
   return (
@@ -383,7 +439,7 @@ export const ContactorMode = ({ v }) => {
 
 const ColdEndExplorer = ({ initialMode = 'coefficient' }) => {
   const [mode, setMode] = useState(initialMode);
-  const c = useMemo(() => (mode === 'contactor' ? null : safe(coldEnd)), [mode]);
+  const c = useMemo(() => ((mode === 'contactor' || mode === 'typed') ? null : safe(coldEnd)), [mode]);
   const f = useMemo(() => (mode === 'refusals' ? safe(flagControls) : null), [mode]);
   const r = useMemo(() => (mode === 'refusals' ? safe(refusalContract) : null), [mode]);
   const v = useMemo(() => (mode === 'contactor' ? safe(vesselGasGoesUp) : null), [mode]);
@@ -401,12 +457,13 @@ const ColdEndExplorer = ({ initialMode = 'coefficient' }) => {
         {mode === 'capacity' && <CapacityMode c={c} />}
         {mode === 'march' && <MarchMode c={c} />}
         {mode === 'cold' && <ColdMode c={c} />}
+        {mode === 'typed' && <TypedMode />}
         {mode === 'refusals' && <RefusalsMode c={c} f={f} r={r} />}
         {mode === 'contactor' && <ContactorMode v={v} />}
       </div>
       <Note>
         Every number on this page is a return value of the vendored Gas Processing engine on the teaching stream AGBADA,
-        printed to the precision the lessons use. Pressures are in psia, temperatures in degF, the
+        or in the typed view on the let-down typed there, printed to the precision the lessons use. Pressures are in psia, temperatures in degF, the
         coefficient in degF per psi and per 100 psi, water in lb per MMscf and vessels in feet.
       </Note>
     </PanelShell>
