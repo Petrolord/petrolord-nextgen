@@ -186,23 +186,32 @@
    "source": "suite-app",
    "source_ref": "src/components/fdp/modules/wells/WellForm.jsx:178-182",
    "printed": {
-    "decimals": 1
+    "decimals": 0
    },
-   "display_scale": 1e-06,
-   "display_ref": "src/components/fdp/modules/wells/WellInventory.jsx:50",
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/wells/WellInventory.jsx Est. Cost (USD), whole USD",
    "prompt_precision": "well costs to the nearest USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/fdp/modules/wells/WellInventory.jsx:50 and WellForm.jsx:182 -> print well.cost as whole USD (Math.round(cost).toLocaleString('en-US')) instead of (cost/1e6).toFixed(1)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix, low urgency: the exact value is derivable from the integer days the form prints (57 days) x 265000 x 2.5, which intermediate m03/l02 teaches; tol 1 USD is honest for that route.",
-   "evidence": "The only printed cost is `${(formData.cost / 1000000).toFixed(1)}M` = 37.8M, 37500 USD from 37762500 (tol 1). WellForm.jsx:178 prints `{formData.days} days` as an integer, and cost = days x rate x (1+1.5).",
+   "evidence": "With Full precision on, prints at 0 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateDrillingCost through formatFull, checked against the key first).",
    "notes": "Learner who reads the cost column instead of deriving fails.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #564 (FDP Accelerator and Project Management Pro Full precision switch and PMP As of input, stacked on #554)",
+    "migration": "20261026_w3_fdp.sql",
+    "prompt_append": "Read the figures in the FDP Accelerator with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -210,23 +219,32 @@
    "source": "suite-app",
    "source_ref": "src/components/fdp/modules/wells/WellInventory.jsx:50",
    "printed": {
-    "decimals": 1
+    "decimals": 0
    },
-   "display_scale": 1e-06,
-   "display_ref": "src/components/fdp/modules/wells/WellInventory.jsx:50",
+   "display_scale": 1,
+   "display_ref": "src/components/fdp/modules/wells/WellInventory.jsx Campaign total row (shown only with Full precision on), whole USD",
    "prompt_precision": "well costs to the nearest USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/fdp/modules/wells/WellInventory.jsx:50 -> whole-USD cost per row (and a whole-USD campaign total); WellStrategy.jsx shows rig days only"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Same as UK-01: display fix; derivable meanwhile as total rig days (WellStrategy.jsx:37 prints rigDays) x 265000 x 2.5 = 130 x 662500.",
-   "evidence": "No whole-USD cost is printed anywhere; the inventory sums of 37.8+25.8+22.5 (toFixed(1) $M) give 86.1M, 25000 USD off with tol 1.",
+   "evidence": "With Full precision on, prints at 0 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateDrillingCost through formatFull, checked against the key first).",
    "notes": "WellStrategy.jsx:37 prints `{rigDays} rig days`, so the derivation route exists and is taught (m03/l02 builds the campaign total the same way).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #564 (FDP Accelerator and Project Management Pro Full precision switch and PMP As of input, stacked on #554)",
+    "migration": "20261026_w3_fdp.sql",
+    "prompt_append": "Read the figures in the FDP Accelerator with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -234,23 +252,32 @@
    "source": "suite-app",
    "source_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:19",
    "printed": {
-    "decimals": 1
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:19",
+   "display_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx Total CAPEX card",
    "prompt_precision": "facility money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:19 (and :26, :34, :42) -> costs.capex.toFixed(4); also FacilitiesForm.jsx:37-38 stores estimates rounded to toFixed(1), which FacilitiesList.jsx:49 then shows"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix (prompt asks four decimals). Fallback: tol 0.01 -> 0.05.",
-   "evidence": "`${costs.capex.toFixed(1)}M` prints 743.1; |743.1-743.1214| = 0.021 > tol 0.01. Not hand-calc: the Platform base cost and reference nameplate are not in the lessons (m04/l02 gives FPSO and tie-back only).",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateFacilityCost through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #564 (FDP Accelerator and Project Management Pro Full precision switch and PMP As of input, stacked on #554)",
+    "migration": "20261026_w3_fdp.sql",
+    "prompt_append": "Read the figures in the FDP Accelerator with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -258,23 +285,32 @@
    "source": "suite-app",
    "source_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:34",
    "printed": {
-    "decimals": 1
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:34",
+   "display_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx Decommissioning card",
    "prompt_precision": "facility money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx:34 -> costs.decommissioning.toFixed(4)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix together with capex. Fallback: tol 0.01 -> 0.05.",
-   "evidence": "Card prints 111.5; |111.5-111.4682| = 0.032 > tol 0.01.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateFacilityCost through formatFull, checked against the key first).",
    "notes": "A learner who applies the taught 15 percent (m04/l03) to the printed capex 743.1 gets 111.465, which passes; the card itself fails.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #564 (FDP Accelerator and Project Management Pro Full precision switch and PMP As of input, stacked on #554)",
+    "migration": "20261026_w3_fdp.sql",
+    "prompt_append": "Read the figures in the FDP Accelerator with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -282,23 +318,32 @@
    "source": "unobtainable",
    "source_ref": "src/pages/apps/ProjectManagementPro.jsx:111",
    "printed": {
-    "decimals": 0
+    "decimals": 2
    },
    "display_scale": 1,
-   "display_ref": "src/components/projectmanagement/ProgressUpdateForm.jsx:130",
+   "display_ref": "src/components/projectmanagement/SnapshotCard.jsx PV (shown only with Full precision on), at the new As of input",
    "prompt_precision": "USD to the nearest unit",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/pages/apps/ProjectManagementPro.jsx:111 -> add an as-of date input (default today) and pass it to calculateEVM({ asOf }) instead of todayIsoDate(); show PV on the snapshot card to whole USD"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix (an as-of input). Without it the prompt's 2030-03-31 cannot be set; the app measures to today (2026), before every planned window, so PV reads 0. Hand-calc is not a safe fallback: the day-count convention is not taught and inclusive vs exclusive days moves PV by 16000-30000 USD against tol 1.",
-   "evidence": "`calculateEVM(tasksData || [], { asOf: todayIsoDate() })` with todayIsoDate() from the machine clock. Lessons (advanced m04/l02) say the budget is 'spread across that window' without the day rule; only (end - start) days, as-of exclusive, reproduces 8205591.4674.",
+   "evidence": "With Full precision on, prints at 2 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateEVM at 2030-03-31 through formatFull, checked against the key first).",
    "notes": "The course itself (m04/l05) says the as-of date is 'a parameter, not a clock', which the Suite app contradicts.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #564 (FDP Accelerator and Project Management Pro Full precision switch and PMP As of input, stacked on #554)",
+    "migration": "20261026_w3_fdp.sql",
+    "prompt_append": "Read the figures in the Project Management Pro studio and the FDP Accelerator with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping. In Project Management Pro, type the as-of date above into the As of box in the header first.",
+    "printed_before": {
+     "decimals": 0
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -326,23 +371,32 @@
    "source": "unobtainable",
    "source_ref": "src/pages/apps/ProjectManagementPro.jsx:111",
    "printed": {
-    "decimals": 2
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/projectmanagement/SnapshotCard.jsx:88",
+   "display_ref": "src/components/projectmanagement/SnapshotCard.jsx SPI, at the new As of input",
    "prompt_precision": "ratios to six decimals",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/pages/apps/ProjectManagementPro.jsx:111 -> as-of date input; src/components/projectmanagement/SnapshotCard.jsx:88 -> spi.toFixed(6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix (as-of input plus six decimals). If the app is not changed, tol cannot rescue it: PV is not reachable at the stated date.",
-   "evidence": "SnapshotCard prints `SPI: ${spi.toFixed(2)}` (0.79 vs 0.789705, tol 1e-5) and only as of today; EV/PV by hand depends on the untaught day-count convention.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateEVM at 2030-03-31 through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #564 (FDP Accelerator and Project Management Pro Full precision switch and PMP As of input, stacked on #554)",
+    "migration": "20261026_w3_fdp.sql",
+    "prompt_append": "Read the figures in the Project Management Pro studio and the FDP Accelerator with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping. In Project Management Pro, type the as-of date above into the As of box in the header first.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "advanced",

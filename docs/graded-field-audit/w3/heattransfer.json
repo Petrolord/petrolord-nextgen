@@ -1,0 +1,32 @@
+{
+ "course": "heattransfer",
+ "suite": "Suite PR #566 (Heat Exchanger Sizer Full precision switch, stacked on #554)",
+ "tiers": {
+  "intermediate": {
+   "why": "The Sizer rounds F to 3 decimals and never showed the equivalent single-shell P; the prompt asks 6.",
+   "keys": [
+    "ubit_f_correction",
+    "ubit_p1_two_shells"
+   ],
+   "annot_updates": {
+    "ubit_f_correction": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/heatexchanger/SizingPanels.jsx SizingResults, F correction",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rodpumpHeatxFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "ubit_p1_two_shells": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/heatexchanger/SizingPanels.jsx SizingResults, Equivalent single-shell P (shown only with Full precision on and 2 or more shells; engine p1)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rodpumpHeatxFullPrecision.test.jsx, the engine result through formatFull)."
+    }
+   },
+   "append": "Read the figures in the Heat Exchanger Sizer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping."
+  }
+ }
+}

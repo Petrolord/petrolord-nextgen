@@ -11,132 +11,186 @@
    "key": "id_emv_at_first_limit_musd",
    "source": "suite-app",
    "source_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:53",
-   "printed": "integer",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13",
+   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx Risked EMV card",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13 and :53-54, :130 and src/pages/apps/CapitalPortfolioStudio.jsx:228, :387 -> formatCurrency for these $MM figures prints 4 decimals (minimumFractionDigits 4, maximumFractionDigits 4) on the Risked EMV and Success-case NPV cards, the funded-project table EMV column and the inventory EMV column"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Capital Portfolio Studio and asks for four decimals, but every $MM figure there is Intl.NumberFormat with maximumFractionDigits 0, so a learner who reads the Studio misses tol 0.001 on every beginner field. Today the fields are recoverable only by hand (risk each row, take the funded set the Studio names, and sum exact inputs, taught in beginner m06/l02); a tolerance change cannot help without reaching 0.5 million USD.",
-   "evidence": "Risked EMV card prints $344 MM against 344.326 (tol 0.001). Hand: sum of the funded projects' Pc x P50 - (1 - Pc) x loss.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+    "migration": "20261026_w3_portfolio.sql",
+    "prompt_append": "Read the figures in the Capital Portfolio Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "integer"
+   }
   },
   {
    "tier": "beginner",
    "key": "id_emv_at_second_limit_musd",
    "source": "suite-app",
    "source_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:53",
-   "printed": "integer",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13",
+   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx Risked EMV card",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13 and :53-54, :130 and src/pages/apps/CapitalPortfolioStudio.jsx:228, :387 -> formatCurrency for these $MM figures prints 4 decimals (minimumFractionDigits 4, maximumFractionDigits 4) on the Risked EMV and Success-case NPV cards, the funded-project table EMV column and the inventory EMV column"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Capital Portfolio Studio and asks for four decimals, but every $MM figure there is Intl.NumberFormat with maximumFractionDigits 0, so a learner who reads the Studio misses tol 0.001 on every beginner field. Today the fields are recoverable only by hand (risk each row, take the funded set the Studio names, and sum exact inputs, taught in beginner m06/l02); a tolerance change cannot help without reaching 0.5 million USD.",
-   "evidence": "Risked EMV card prints $416 MM against 415.906.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+    "migration": "20261026_w3_portfolio.sql",
+    "prompt_append": "Read the figures in the Capital Portfolio Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "integer"
+   }
   },
   {
    "tier": "beginner",
    "key": "id_emv_at_third_limit_musd",
    "source": "suite-app",
    "source_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:53",
-   "printed": "integer",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13",
+   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx Risked EMV card",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13 and :53-54, :130 and src/pages/apps/CapitalPortfolioStudio.jsx:228, :387 -> formatCurrency for these $MM figures prints 4 decimals (minimumFractionDigits 4, maximumFractionDigits 4) on the Risked EMV and Success-case NPV cards, the funded-project table EMV column and the inventory EMV column"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Capital Portfolio Studio and asks for four decimals, but every $MM figure there is Intl.NumberFormat with maximumFractionDigits 0, so a learner who reads the Studio misses tol 0.001 on every beginner field. Today the fields are recoverable only by hand (risk each row, take the funded set the Studio names, and sum exact inputs, taught in beginner m06/l02); a tolerance change cannot help without reaching 0.5 million USD.",
-   "evidence": "Risked EMV card prints $566 MM against 566.046.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+    "migration": "20261026_w3_portfolio.sql",
+    "prompt_append": "Read the figures in the Capital Portfolio Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "integer"
+   }
   },
   {
    "tier": "beginner",
    "key": "id_success_npv_at_first_limit_musd",
    "source": "suite-app",
    "source_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:54",
-   "printed": "integer",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13",
+   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx Success-case NPV card",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13 and :53-54, :130 and src/pages/apps/CapitalPortfolioStudio.jsx:228, :387 -> formatCurrency for these $MM figures prints 4 decimals (minimumFractionDigits 4, maximumFractionDigits 4) on the Risked EMV and Success-case NPV cards, the funded-project table EMV column and the inventory EMV column"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Capital Portfolio Studio and asks for four decimals, but every $MM figure there is Intl.NumberFormat with maximumFractionDigits 0, so a learner who reads the Studio misses tol 0.001 on every beginner field. Today the fields are recoverable only by hand (risk each row, take the funded set the Studio names, and sum exact inputs, taught in beginner m06/l02); a tolerance change cannot help without reaching 0.5 million USD.",
-   "evidence": "Success-case NPV card prints $739 MM against 738.8; the hand sum of the funded P50s is exact.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+    "migration": "20261026_w3_portfolio.sql",
+    "prompt_append": "Read the figures in the Capital Portfolio Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "integer"
+   }
   },
   {
    "tier": "beginner",
    "key": "id_value_of_excluded_project_musd",
    "source": "suite-app",
    "source_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:53",
-   "printed": "integer",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13",
+   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx Risked EMV card (difference of two runs)",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13 and :53-54, :130 and src/pages/apps/CapitalPortfolioStudio.jsx:228, :387 -> formatCurrency for these $MM figures prints 4 decimals (minimumFractionDigits 4, maximumFractionDigits 4) on the Risked EMV and Success-case NPV cards, the funded-project table EMV column and the inventory EMV column"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Capital Portfolio Studio and asks for four decimals, but every $MM figure there is Intl.NumberFormat with maximumFractionDigits 0, so a learner who reads the Studio misses tol 0.001 on every beginner field. Today the fields are recoverable only by hand (risk each row, take the funded set the Studio names, and sum exact inputs, taught in beginner m06/l02); a tolerance change cannot help without reaching 0.5 million USD.",
-   "evidence": "Difference of two Risked EMV cards (with and without ID-3 at 520), each whole; printed difference 20 or 21 against 20.142.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first).",
    "notes": "Also a hand re-solve of the knapsack without ID-3.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+    "migration": "20261026_w3_portfolio.sql",
+    "prompt_append": "Read the figures in the Capital Portfolio Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "integer"
+   }
   },
   {
    "tier": "beginner",
    "key": "id_risked_emv_tie_back_musd",
    "source": "suite-app",
    "source_ref": "src/pages/apps/CapitalPortfolioStudio.jsx:387",
-   "printed": "integer",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13",
+   "display_ref": "src/pages/apps/CapitalPortfolioStudio.jsx inventory Risked EMV column",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13 and :53-54, :130 and src/pages/apps/CapitalPortfolioStudio.jsx:228, :387 -> formatCurrency for these $MM figures prints 4 decimals (minimumFractionDigits 4, maximumFractionDigits 4) on the Risked EMV and Success-case NPV cards, the funded-project table EMV column and the inventory EMV column"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Capital Portfolio Studio and asks for four decimals, but every $MM figure there is Intl.NumberFormat with maximumFractionDigits 0, so a learner who reads the Studio misses tol 0.001 on every beginner field. Today the fields are recoverable only by hand (risk each row, take the funded set the Studio names, and sum exact inputs, taught in beginner m06/l02); a tolerance change cannot help without reaching 0.5 million USD.",
-   "evidence": "Inventory EMV column prints $136 MM against 0.5 x 402.6 - 0.5 x 131.5 = 135.55, the one-row hand risking taught as step one in beginner m06/l02.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first).",
    "notes": "The hand route is the taught one and gives 135.55 exactly; the display fix matters because the prompt sends the learner to the Studio.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+    "migration": "20261026_w3_portfolio.sql",
+    "prompt_append": "Read the figures in the Capital Portfolio Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "integer"
+   }
   },
   {
    "tier": "intermediate",
@@ -224,23 +278,32 @@
    "source": "suite-app",
    "source_ref": "src/components/afe/AFEDashboard.jsx:219-223",
    "printed": {
-    "decimals": 2
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/afe/AFEDashboard.jsx:57",
+   "display_ref": "src/components/afe/AFEDashboard.jsx CPI (Cost Efficiency) tile",
    "prompt_precision": "ratios to five decimals",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/afe/AFEDashboard.jsx:57 -> metrics.cpi.toFixed(5) (tile value), matching the prompt's five decimals"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The CPI tile prints 0.93 against 0.932342 (tol 1e-5). The hand ratio EV / actuals = 12,559,631 / 13,471,050 is taught and passes, so a learner is not locked out, but the app the prompt names cannot give the asked precision.",
-   "evidence": "cpiTile returns metrics.cpi.toFixed(2); CPI does not depend on the as-of date.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+    "migration": "20261026_w3_portfolio.sql",
+    "prompt_append": "Read the figures in the AFE Cost Control Manager with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping. Type the as-of date above into its As of box first.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -248,45 +311,63 @@
    "source": "suite-app",
    "source_ref": "src/components/afe/AFEDashboard.jsx:226-230",
    "printed": {
-    "decimals": 2
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/afe/AFEDashboard.jsx:39",
+   "display_ref": "src/components/afe/AFEDashboard.jsx SPI (Schedule Efficiency) tile, measured at the new As of input",
    "prompt_precision": "ratios to five decimals",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/afe/AFEDashboard.jsx:115 -> replace asOf = todayIsoDate() with an As-of date input (default today) passed to calculateMetrics and generateSCurveData; src/components/afe/AFEDashboard.jsx:39 -> metrics.spi.toFixed(5)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix, two parts. The dashboard pins the as-of date to the machine clock (AFEDashboard.jsx:115), so SPI as of 2028-10-03 is never shown, and the tile prints two decimals (0.80 against 0.799422). The hand ratio EV / PV (taught in m03/l04, m04/l03) passes at full precision today.",
-   "evidence": "spiTile returns metrics.spi.toFixed(2) at asOf = todayIsoDate(); EV / PV = 12,559,631 / 15,710,884.72 = 0.799422.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, calculateEVM at 2028-10-03 through formatFull, checked against the key first).",
    "notes": "Same machine-clock pin as fdp advanced (ProjectManagementPro).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+    "migration": "20261026_w3_portfolio.sql",
+    "prompt_append": "Read the figures in the AFE Cost Control Manager with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping. Type the as-of date above into its As of box first.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "advanced",
    "key": "id_p90_npv_second_limit_independent_musd",
    "source": "suite-app",
    "source_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:63-66",
-   "printed": "integer",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13",
+   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx NPV P90 (low) / P10 (high) card",
    "prompt_precision": "Money to four decimals in million USD (Portfolio money to four decimals)",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/capitalportfoliostudio/OptimizationResults.jsx:65 -> print risk.p90 and risk.p10 with 4 decimals (e.g. Number(v).toFixed(4) + ' $MM') instead of formatCurrency's maximumFractionDigits 0"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix, required: P90 comes only from the engine's seeded Monte Carlo, so no hand route exists, and the card prints $186 against 186.437484 (tol 0.001). Today the field is unobtainable within tol.",
-   "evidence": "Card value `${formatCurrency(risk.p90, '')} / ...` with maximumFractionDigits 0.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+    "migration": "20261026_w3_portfolio.sql",
+    "prompt_append": "Read the figures in the Capital Portfolio Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "integer"
+   }
   },
   {
    "tier": "advanced",
@@ -335,22 +416,31 @@
    "key": "id_p90_npv_second_limit_correlated_musd",
    "source": "suite-app",
    "source_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:63-66",
-   "printed": "integer",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx:13",
+   "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx NPV P90 (low) / P10 (high) card",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/capitalportfoliostudio/OptimizationResults.jsx:65 -> print risk.p90 and risk.p10 with 4 decimals"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix, required: Monte Carlo only, card prints $128 against 128.147628.",
-   "evidence": "Same card and formatter as the independent P90.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+    "migration": "20261026_w3_portfolio.sql",
+    "prompt_append": "Read the figures in the Capital Portfolio Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "integer"
+   }
   },
   {
    "tier": "advanced",

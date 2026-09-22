@@ -81,23 +81,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/rodpump/UnitPanel.jsx:69-74 (custom A, C, P, R, crank position) and :92",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/rodpump/UnitPanel.jsx:92 unit.kin.strokeIn.toFixed(1)",
+   "display_ref": "src/components/rodpump/UnitPanel.jsx This linkage gives a X in stroke",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/rodpump/UnitPanel.jsx:92 -> unit.kin.strokeIn.toFixed(6); or an editable unit in pd-string-explorer linkage view"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix in the Suite unit card (the geometry-only linkage can be set there exactly). The 720-angle closure is a grid the lessons describe (beginner m04 l01, \"two circles\") but do not ask the learner to tabulate. The prompt also gives 111.45474860 in and \"9.93 in longer\", i.e. 121.3847, which is 1.3e-3 off and fails tol 2.5e-5.",
-   "evidence": "Suite prints the stroke as 121.4 against 121.383376 (tol 2.5e-5).",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: rodpumpHeatxFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": "NextGen panels do not take unit dimensions.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #566 (Rod Pump Design Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_rodpump.sql",
+    "prompt_append": "Read the figures in the Rod Pump Design Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -125,23 +134,32 @@
    "source": "suite-app",
    "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/beginner/m05-the-pump-itself/l03-rated-displacement.md (0.11657115597735782 x d^2 x S x N, constant stated in the prompt)",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/rodpump/LoadsPanel.jsx:90 fmt(design.ratedBpd, 1)",
+   "display_ref": "src/components/rodpump/LoadsPanel.jsx Production hint, rated",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "same fix as unit_stroke_in: once the stroke prints at 6 decimals this is a hand product"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Follows unit_stroke_in: the product is a hand step on a stroke that no surface prints to tol.",
-   "evidence": "0.11657116 x 2.25 x 121.383376 x 11.4 = 362.942381 reproduces the key; a stroke of 121.4 gives 362.992, 0.05 off against tol 7.3e-5.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: rodpumpHeatxFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #566 (Rod Pump Design Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_rodpump.sql",
+    "prompt_append": "Read the figures in the Rod Pump Design Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "intermediate",

@@ -252,23 +252,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:53-56 (Total tile)",
    "printed": {
-    "decimals": 0
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:55",
+   "display_ref": "src/components/blendoptimizer/RecipeResults.jsx:56 Total at 6 dp with Full precision on",
    "prompt_precision": "Give six numbers, each to four decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:55 -> fmt(result.totalCost, 4)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print four decimals in the Product Blending Optimizer (matches the prompt and the course's four-decimal convention). Alternative is loosening tol to half a unit of what the app prints, which contradicts the prompt's 'to four decimals'. Also consider naming the Product Blending Optimizer in the prompt, since the ONNE LP cannot be run in any NextGen panel.",
-   "evidence": "Total prints `${fmt(result.totalCost, 0)}` (0 dp, 872013) while tol is 5e-5; the value's fractional part .3202 is unobtainable from the page. Unit cost 87.20 $/bbl at 2 dp (line 51) is worse.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull).",
    "notes": "LP (5 components, 7 rows) needs a solver: the lessons teach the engine/kernel (optimiseBlend, solveLP) and name the Product Blending Optimizer (advanced/m01/l01 line 23, m06/l01 line 39) and never teach a spreadsheet Solver route, so per the brief the app is the source. crude-recipe-explorer runs only Apapa, the textbook LP and the default pool (RecipeExplorer.jsx:179, 295), not ONNE. The ONNE spec equals the app's gasoline_50ppm template (productBlending.js:520-526) and every component property is enterable (PoolPanel.jsx:43-54); running the Suite engine on K.ONNE_POOL reproduces expected exactly. No probe number within tol. Probe prints 872711.745212 (the Apapa-shaped default), not within tol.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #563 (Product Blending Optimizer Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_crude.sql",
+    "prompt_append": "Read the figures in the Product Blending Optimizer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 0
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -276,23 +285,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/PoolPanel.jsx:56-60 (In the recipe line)",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/PoolPanel.jsx:58",
+   "display_ref": "src/components/blendoptimizer/PoolPanel.jsx:60 In the recipe (bbl) at 6 dp with Full precision on",
    "prompt_precision": "Give six numbers, each to four decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/PoolPanel.jsx:58 -> line.volume.toFixed(4) (and RecipeResults.jsx:87 tooltip fmt(v, 4))"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print four decimals in the Product Blending Optimizer (matches the prompt and the course's four-decimal convention). Alternative is loosening tol to half a unit of what the app prints, which contradicts the prompt's 'to four decimals'. Also consider naming the Product Blending Optimizer in the prompt, since the ONNE LP cannot be run in any NextGen panel.",
-   "evidence": "Recipe volume prints `line.volume.toFixed(1)` bbl (3228.2) and the chart tooltip fmt(v, 1) (RecipeResults.jsx:87); tol 5e-5 needs four decimals.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull).",
    "notes": "LP (5 components, 7 rows) needs a solver: the lessons teach the engine/kernel (optimiseBlend, solveLP) and name the Product Blending Optimizer (advanced/m01/l01 line 23, m06/l01 line 39) and never teach a spreadsheet Solver route, so per the brief the app is the source. crude-recipe-explorer runs only Apapa, the textbook LP and the default pool (RecipeExplorer.jsx:179, 295), not ONNE. The ONNE spec equals the app's gasoline_50ppm template (productBlending.js:520-526) and every component property is enterable (PoolPanel.jsx:43-54); running the Suite engine on K.ONNE_POOL reproduces expected exactly. No probe number within tol.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #563 (Product Blending Optimizer Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_crude.sql",
+    "prompt_append": "Read the figures in the Product Blending Optimizer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -300,23 +318,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/PoolPanel.jsx:56-60",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/PoolPanel.jsx:58",
+   "display_ref": "src/components/blendoptimizer/PoolPanel.jsx:60 In the recipe (bbl) at 6 dp with Full precision on",
    "prompt_precision": "Give six numbers, each to four decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/PoolPanel.jsx:58 -> line.volume.toFixed(4)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print four decimals in the Product Blending Optimizer (matches the prompt and the course's four-decimal convention). Alternative is loosening tol to half a unit of what the app prints, which contradicts the prompt's 'to four decimals'. Also consider naming the Product Blending Optimizer in the prompt, since the ONNE LP cannot be run in any NextGen panel.",
-   "evidence": "Same recipe line, toFixed(1) prints 437.0; expected 437.0326736 with tol 5e-5.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull).",
    "notes": "LP (5 components, 7 rows) needs a solver: the lessons teach the engine/kernel (optimiseBlend, solveLP) and name the Product Blending Optimizer (advanced/m01/l01 line 23, m06/l01 line 39) and never teach a spreadsheet Solver route, so per the brief the app is the source. crude-recipe-explorer runs only Apapa, the textbook LP and the default pool (RecipeExplorer.jsx:179, 295), not ONNE. The ONNE spec equals the app's gasoline_50ppm template (productBlending.js:520-526) and every component property is enterable (PoolPanel.jsx:43-54); running the Suite engine on K.ONNE_POOL reproduces expected exactly. No probe number within tol.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #563 (Product Blending Optimizer Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_crude.sql",
+    "prompt_append": "Read the figures in the Product Blending Optimizer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -324,23 +351,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:182-203 ('What each constraint is costing')",
    "printed": {
-    "decimals": 2
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:197",
+   "display_ref": "src/components/blendoptimizer/RecipeResults.jsx:199 What each constraint is costing, at 6 dp with Full precision on",
    "prompt_precision": "Give six numbers, each to four decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:197 -> fmt(row.price, 4)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print four decimals in the Product Blending Optimizer (matches the prompt and the course's four-decimal convention). Alternative is loosening tol to half a unit of what the app prints, which contradicts the prompt's 'to four decimals'. Also consider naming the Product Blending Optimizer in the prompt, since the ONNE LP cannot be run in any NextGen panel.",
-   "evidence": "Shadow price prints `$${fmt(row.price, 2)} per ppm` (reads $296.31); tol 5e-5 needs four decimals.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull).",
    "notes": "LP (5 components, 7 rows) needs a solver: the lessons teach the engine/kernel (optimiseBlend, solveLP) and name the Product Blending Optimizer (advanced/m01/l01 line 23, m06/l01 line 39) and never teach a spreadsheet Solver route, so per the brief the app is the source. crude-recipe-explorer runs only Apapa, the textbook LP and the default pool (RecipeExplorer.jsx:179, 295), not ONNE. The ONNE spec equals the app's gasoline_50ppm template (productBlending.js:520-526) and every component property is enterable (PoolPanel.jsx:43-54); running the Suite engine on K.ONNE_POOL reproduces expected exactly. No probe number within tol.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #563 (Product Blending Optimizer Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_crude.sql",
+    "prompt_append": "Read the figures in the Product Blending Optimizer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -348,23 +384,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:182-203 ('What each constraint is costing')",
    "printed": {
-    "decimals": 2
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:197",
+   "display_ref": "src/components/blendoptimizer/RecipeResults.jsx:199 What each constraint is costing, at 6 dp with Full precision on",
    "prompt_precision": "Give six numbers, each to four decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:197 -> fmt(row.price, 4)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print four decimals in the Product Blending Optimizer (matches the prompt and the course's four-decimal convention). Alternative is loosening tol to half a unit of what the app prints, which contradicts the prompt's 'to four decimals'. Also consider naming the Product Blending Optimizer in the prompt, since the ONNE LP cannot be run in any NextGen panel.",
-   "evidence": "Shadow price prints `$${fmt(row.price, 2)} per psi` (reads $6495.12); tol 5e-5 needs four decimals.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull).",
    "notes": "LP (5 components, 7 rows) needs a solver: the lessons teach the engine/kernel (optimiseBlend, solveLP) and name the Product Blending Optimizer (advanced/m01/l01 line 23, m06/l01 line 39) and never teach a spreadsheet Solver route, so per the brief the app is the source. crude-recipe-explorer runs only Apapa, the textbook LP and the default pool (RecipeExplorer.jsx:179, 295), not ONNE. The ONNE spec equals the app's gasoline_50ppm template (productBlending.js:520-526) and every component property is enterable (PoolPanel.jsx:43-54); running the Suite engine on K.ONNE_POOL reproduces expected exactly. No probe number within tol.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #563 (Product Blending Optimizer Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_crude.sql",
+    "prompt_append": "Read the figures in the Product Blending Optimizer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -372,23 +417,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:182-203 ('What each constraint is costing')",
    "printed": {
-    "decimals": 2
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:197",
+   "display_ref": "src/components/blendoptimizer/RecipeResults.jsx:199 What each constraint is costing, at 6 dp with Full precision on",
    "prompt_precision": "Give six numbers, each to four decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/blendoptimizer/RecipeResults.jsx:197 -> fmt(row.price, 4)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print four decimals in the Product Blending Optimizer (matches the prompt and the course's four-decimal convention). Alternative is loosening tol to half a unit of what the app prints, which contradicts the prompt's 'to four decimals'. Also consider naming the Product Blending Optimizer in the prompt, since the ONNE LP cannot be run in any NextGen panel.",
-   "evidence": "Shadow price prints `$${fmt(row.price, 2)} per octane number` (reads $4032.63); tol 5e-5 needs four decimals.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull).",
    "notes": "LP (5 components, 7 rows) needs a solver: the lessons teach the engine/kernel (optimiseBlend, solveLP) and name the Product Blending Optimizer (advanced/m01/l01 line 23, m06/l01 line 39) and never teach a spreadsheet Solver route, so per the brief the app is the source. crude-recipe-explorer runs only Apapa, the textbook LP and the default pool (RecipeExplorer.jsx:179, 295), not ONNE. The ONNE spec equals the app's gasoline_50ppm template (productBlending.js:520-526) and every component property is enterable (PoolPanel.jsx:43-54); running the Suite engine on K.ONNE_POOL reproduces expected exactly. No probe number within tol.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #563 (Product Blending Optimizer Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_crude.sql",
+    "prompt_append": "Read the figures in the Product Blending Optimizer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   }
  ]
 }

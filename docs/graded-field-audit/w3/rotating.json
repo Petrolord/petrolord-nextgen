@@ -1,0 +1,138 @@
+{
+ "course": "rotating",
+ "suite": "Suite PR #556 (Pump and Compressor Station Designer Full precision switch, stacked on #554)",
+ "tiers": {
+  "beginner": {
+   "why": "The Duty Point cards round flow and head to whole units and power to 1 decimal against tolerances of 5e-7 to 1e-4; there was no discharge pressure stat.",
+   "keys": [
+    "escravos_duty_flow_gpm",
+    "escravos_duty_head_ft",
+    "escravos_hydraulic_hp",
+    "escravos_brake_hp",
+    "escravos_motor_input_kw",
+    "escravos_discharge_psi"
+   ],
+   "annot_updates": {
+    "escravos_duty_flow_gpm": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/pumpstudio/PumpPanels.jsx DutyResults, Duty flow",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "escravos_duty_head_ft": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/pumpstudio/PumpPanels.jsx DutyResults, Duty head",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "escravos_hydraulic_hp": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/pumpstudio/PumpPanels.jsx DutyResults, hydraulic hp hint under Brake power",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "escravos_brake_hp": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/pumpstudio/PumpPanels.jsx DutyResults, Brake power",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "escravos_motor_input_kw": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/pumpstudio/PumpPanels.jsx DutyResults, Motor input",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "escravos_discharge_psi": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/pumpstudio/PumpPanels.jsx DutyResults, Duty head as pressure (shown only with Full precision on; engine headFtToPsi)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    }
+   },
+   "append": "Read the figures in the Pump Station Designer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping."
+  },
+  "intermediate": {
+   "why": "The change card rounds flow and head to whole units against tolerances of 1e-5 and 1e-4.",
+   "keys": [
+    "bonga_speed_flow_gpm",
+    "bonga_speed_head_ft",
+    "bonga_parallel_flow_gpm"
+   ],
+   "annot_updates": {
+    "bonga_speed_flow_gpm": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/pumpstudio/PumpPanels.jsx change card, Old duty, moved onto the new curve",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "bonga_speed_head_ft": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/pumpstudio/PumpPanels.jsx change card, head hint under Old duty, moved onto the new curve",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "bonga_parallel_flow_gpm": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/pumpstudio/PumpPanels.jsx change card, Duty flow after",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    }
+   },
+   "append": "Read the figures in the Pump Station Designer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping."
+  },
+  "advanced": {
+   "why": "The cards round head and gas hp to whole units and fuel to 3 decimals against tolerances of 1e-9 to 0.01.",
+   "keys": [
+    "bonny_stage1_poly_head",
+    "bonny_stage1_gas_hp",
+    "bonny_fuel_mmscfd"
+   ],
+   "annot_updates": {
+    "bonny_stage1_poly_head": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/compressorstudio/CompressorPanels.jsx Head both ways, Polytropic head",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "bonny_stage1_gas_hp": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/compressorstudio/CompressorPanels.jsx Stage by stage table, gas hp",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "bonny_fuel_mmscfd": {
+     "printed": {
+      "decimals": 9
+     },
+     "display_ref": "src/components/compressorstudio/CompressorPanels.jsx ScreenResults, Fuel gas at 9 dp",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 9 decimals (jest: rotatingFullPrecision.test.jsx, the engine result through formatFull)."
+    }
+   },
+   "append": "Read the figures in the Compressor Station Designer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping."
+  }
+ }
+}

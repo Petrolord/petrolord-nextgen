@@ -1,0 +1,58 @@
+{
+ "course": "linesizing",
+ "suite": "Suite PR #555 (Pipeline & Line Sizing Studio Full precision switch, stacked on #554)",
+ "tiers": {
+  "beginner": {
+   "append": "Read the figures in the Pipeline & Line Sizing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The Studio card rounds f to 4 decimals and the drops to 1 against tolerances of 1e-9 and 1e-5.",
+   "keys": [
+    "imo1_friction_factor",
+    "imo1_friction_drop_psi",
+    "imo1_total_drop_psi"
+   ],
+   "annot_updates": {
+    "imo1_friction_factor": {
+     "printed": {
+      "decimals": 10
+     },
+     "display_ref": "src/components/linesizing/SizingPanel.jsx:36 Friction factor, formatFull(sizing.f, 10) with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, the liquid Selected line card prints the friction factor at 10 decimals (jest: SizingPanel.fullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "imo1_friction_drop_psi": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/linesizing/SizingPanel.jsx:29-31 Friction drop (shown only with Full precision on), engine dpFrictionPsi at 6 dp",
+     "class": "none",
+     "evidence": "With Full precision on, a Friction drop stat prints the engine friction term at 6 decimals (jest: SizingPanel.fullPrecision.test.jsx)."
+    },
+    "imo1_total_drop_psi": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/linesizing/SizingPanel.jsx:28 Pressure drop at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, Pressure drop prints at 6 decimals (jest: SizingPanel.fullPrecision.test.jsx)."
+    }
+   }
+  },
+  "intermediate": {
+   "append": "Read the figures in the Pipeline & Line Sizing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The gas card rounds the outlet pressure to 1 decimal against a tolerance of 1e-5.",
+   "keys": [
+    "brass_outlet_pressure_psia"
+   ],
+   "annot_updates": {
+    "brass_outlet_pressure_psia": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/linesizing/SizingPanel.jsx:48 Outlet pressure at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, the gas card prints the outlet pressure at 6 decimals (jest: SizingPanel.fullPrecision.test.jsx)."
+    }
+   }
+  }
+ }
+}

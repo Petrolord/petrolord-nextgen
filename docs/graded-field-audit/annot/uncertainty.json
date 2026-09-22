@@ -11,132 +11,186 @@
    "key": "um_y5_royalty_musd",
    "source": "hand-calc",
    "source_ref": "/root/wt-b5-nextgen/src/content/courses/uncertainty/beginner/m06-the-associate-reading/l02-working-the-capstone.md (steps one and two); beginner m02 l02 decline",
-   "printed": "full",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:226 formatCurrency(row.royalty*1e6) compact",
+   "display_ref": "src/components/npv/ResultsPanel.jsx Cashflow tab, royalty column in $MM",
    "prompt_precision": "Money to four decimals in million USD.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22/225-231 and :29 -> print money in million USD to 4 decimals (v/1e6).toFixed(4) in the Cashflow table and KPI cards, and add a sensitivity table (case NPV at each sweep multiplier) to 4 decimals"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Hand route is exact and taught, but the prompt sends the learner to an app that prints two significant figures; fix the app display (preferred, it also serves the product) rather than loosening tol to half a compact unit.",
-   "evidence": "0.175 x 3900 x 365 x 0.9^4 x 64 / 1e6 = 10.46033352, reproduced exactly. The named NPV Scenario Builder prints every money figure through formatCurrency = Intl compact currency (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22), so royalty reads '$10M' and NPV '$45M', about two significant figures against tol 0.001 million USD; the Excel export (ResultsPanel.jsx:57-72) carries full-precision cash flow rows and NPV but is never mentioned.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "full"
+   }
   },
   {
    "tier": "beginner",
    "key": "um_y4_tax_musd",
    "source": "hand-calc",
    "source_ref": "/root/wt-b5-nextgen/src/content/courses/uncertainty/beginner/m06-the-associate-reading/l02-working-the-capstone.md step two",
-   "printed": "full",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:229 compact",
+   "display_ref": "src/components/npv/ResultsPanel.jsx Cashflow tab, tax column in $MM",
    "prompt_precision": "Money to four decimals in million USD.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22/225-231 and :29 -> print money in million USD to 4 decimals (v/1e6).toFixed(4) in the Cashflow table and KPI cards, and add a sensitivity table (case NPV at each sweep multiplier) to 4 decimals"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Hand route is exact and taught, but the prompt sends the learner to an app that prints two significant figures; fix the app display (preferred, it also serves the product) rather than loosening tol to half a compact unit.",
-   "evidence": "0.38 x (rev - royalty - opex) in 2031 = 14.30514425, reproduced exactly. The named NPV Scenario Builder prints every money figure through formatCurrency = Intl compact currency (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22), so royalty reads '$10M' and NPV '$45M', about two significant figures against tol 0.001 million USD; the Excel export (ResultsPanel.jsx:57-72) carries full-precision cash flow rows and NPV but is never mentioned.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "full"
+   }
   },
   {
    "tier": "beginner",
    "key": "um_y11_ncf_musd",
    "source": "hand-calc",
    "source_ref": "/root/wt-b5-nextgen/src/content/courses/uncertainty/beginner/m06-the-associate-reading/l02-working-the-capstone.md",
-   "printed": "full",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:230 compact",
+   "display_ref": "src/components/npv/ResultsPanel.jsx Cashflow tab, net cash flow column in $MM",
    "prompt_precision": "Money to four decimals in million USD.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22/225-231 and :29 -> print money in million USD to 4 decimals (v/1e6).toFixed(4) in the Cashflow table and KPI cards, and add a sensitivity table (case NPV at each sweep multiplier) to 4 decimals"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Hand route is exact and taught, but the prompt sends the learner to an app that prints two significant figures; fix the app display (preferred, it also serves the product) rather than loosening tol to half a compact unit.",
-   "evidence": "Year 11 NCF 10.48417891, reproduced exactly. The named NPV Scenario Builder prints every money figure through formatCurrency = Intl compact currency (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22), so royalty reads '$10M' and NPV '$45M', about two significant figures against tol 0.001 million USD; the Excel export (ResultsPanel.jsx:57-72) carries full-precision cash flow rows and NPV but is never mentioned.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "full"
+   }
   },
   {
    "tier": "beginner",
    "key": "um_payback_year_cum_ncf_musd",
    "source": "hand-calc",
    "source_ref": "/root/wt-b5-nextgen/src/content/courses/uncertainty/beginner/m06-the-associate-reading/l02-working-the-capstone.md step three (cumulative column)",
-   "printed": "full",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:231 compact",
+   "display_ref": "src/components/npv/ResultsPanel.jsx Cashflow tab, cumulative column in $MM",
    "prompt_precision": "Money to four decimals in million USD.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22/225-231 and :29 -> print money in million USD to 4 decimals (v/1e6).toFixed(4) in the Cashflow table and KPI cards, and add a sensitivity table (case NPV at each sweep multiplier) to 4 decimals"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Hand route is exact and taught, but the prompt sends the learner to an app that prints two significant figures; fix the app display (preferred, it also serves the product) rather than loosening tol to half a compact unit.",
-   "evidence": "Cumulative turns positive in year 5 (2032) at 19.68181129, reproduced exactly. The named NPV Scenario Builder prints every money figure through formatCurrency = Intl compact currency (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22), so royalty reads '$10M' and NPV '$45M', about two significant figures against tol 0.001 million USD; the Excel export (ResultsPanel.jsx:57-72) carries full-precision cash flow rows and NPV but is never mentioned.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "full"
+   }
   },
   {
    "tier": "beginner",
    "key": "um_npv_musd",
    "source": "hand-calc",
    "source_ref": "/root/wt-b5-nextgen/src/content/courses/uncertainty/beginner/m06-the-associate-reading/l02-working-the-capstone.md step three (mid-year factor)",
-   "printed": "full",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:29 formatCurrency(metrics.npv) compact",
+   "display_ref": "src/components/npv/ResultsPanel.jsx Dashboard, Net Present Value card",
    "prompt_precision": "Money to four decimals in million USD.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22/225-231 and :29 -> print money in million USD to 4 decimals (v/1e6).toFixed(4) in the Cashflow table and KPI cards, and add a sensitivity table (case NPV at each sweep multiplier) to 4 decimals"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Hand route is exact and taught, but the prompt sends the learner to an app that prints two significant figures; fix the app display (preferred, it also serves the product) rather than loosening tol to half a compact unit.",
-   "evidence": "Sum of NCF / 1.13^(t-0.5) = 45.46305836, reproduced exactly. The named NPV Scenario Builder prints every money figure through formatCurrency = Intl compact currency (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22), so royalty reads '$10M' and NPV '$45M', about two significant figures against tol 0.001 million USD; the Excel export (ResultsPanel.jsx:57-72) carries full-precision cash flow rows and NPV but is never mentioned.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": "Probe hit on ScreeningExplorer is a spurious substring of a concatenated table, not a leak.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "full"
+   }
   },
   {
    "tier": "beginner",
    "key": "um_npv_price_up_30_musd",
    "source": "hand-calc",
    "source_ref": "/root/wt-b5-nextgen/src/content/courses/uncertainty/beginner/m06-the-associate-reading/l02-working-the-capstone.md step four (sensitivity rows)",
-   "printed": "full",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/charts/TornadoChart.jsx:7 mm() toFixed(1); SpiderChart.jsx:22",
+   "display_ref": "src/components/npv/ResultsPanel.jsx Sensitivity tab, Sensitivity sweep table (shown only with Full precision on), Oil Price, At 30 percent higher",
    "prompt_precision": "Money to four decimals in million USD.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22/225-231 and :29 -> print money in million USD to 4 decimals (v/1e6).toFixed(4) in the Cashflow table and KPI cards, and add a sensitivity table (case NPV at each sweep multiplier) to 4 decimals"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Hand route is exact and taught, but the prompt sends the learner to an app that prints two significant figures; fix the app display (preferred, it also serves the product) rather than loosening tol to half a compact unit.",
-   "evidence": "Rerun at 83.2 USD/bbl gives 123.87393222, reproduced exactly. The app's sweep is only in the tornado/spider charts at 1 decimal (0.05 half-unit vs tol 0.001) and is not in the Excel export.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "full"
+   }
   },
   {
    "tier": "intermediate",
@@ -204,23 +258,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:63-68 (percentile cards); CSV :24",
    "printed": {
-    "decimals": 2
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:67 toFixed(2)",
+   "display_ref": "src/components/breakevenanalyzer/ResultsPanel.jsx Breakeven Summary card",
    "prompt_precision": "Prices to four decimals in USD per bbl, money in million USD.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:67 -> kpis[key].toFixed(4); /opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/BreakevenPlots.jsx:17 money -> toFixed(4) for tooltips"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print the cards at 4 decimals to match the prompt; the CSV already carries full precision so no tol change is needed.",
-   "evidence": "Seeded Monte Carlo sample, engine only. The named Probabilistic Breakeven Analyzer shows the percentile cards with toFixed(2) (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:67), half a unit 0.005 against tol 0.001 and against the prompt's 'four decimals'; its 'Export data' CSV (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:21-40) carries the full-precision percentiles and base case.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the Probabilistic Breakeven Analyzer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -228,45 +291,63 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:63-68; CSV :26",
    "printed": {
-    "decimals": 2
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:67 toFixed(2)",
+   "display_ref": "src/components/breakevenanalyzer/ResultsPanel.jsx Breakeven Summary card",
    "prompt_precision": "Prices to four decimals in USD per bbl, money in million USD.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:67 -> kpis[key].toFixed(4); /opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/BreakevenPlots.jsx:17 money -> toFixed(4) for tooltips"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Same as the 10th percentile field.",
-   "evidence": "Seeded Monte Carlo sample, engine only. The named Probabilistic Breakeven Analyzer shows the percentile cards with toFixed(2) (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:67), half a unit 0.005 against tol 0.001 and against the prompt's 'four decimals'; its 'Export data' CSV (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:21-40) carries the full-precision percentiles and base case.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the Probabilistic Breakeven Analyzer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "um_tornado_capex_high_side_usd_bbl",
    "source": "hand-calc",
    "source_ref": "/root/wt-b5-nextgen/src/content/courses/uncertainty/intermediate/m05-the-two-sided-tornado/l02-swinging-one-variable.md (bisection at capex 90th percentile minus the base)",
-   "printed": "full",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/BreakevenPlots.jsx:184 tooltip money() toFixed(2)",
+   "display_ref": "src/components/breakevenanalyzer tornado table (shown only with Full precision on), Total CAPEX, Adverse end",
    "prompt_precision": "Prices to four decimals in USD per bbl, money in million USD.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:67 -> kpis[key].toFixed(4); /opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/BreakevenPlots.jsx:17 money -> toFixed(4) for tooltips"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print tornado sides at 4 decimals (tooltip and a table); the hand route exists.",
-   "evidence": "Two taught bisections (capex at its 90th percentile, 185, and the base) give 9.6184 exactly; the Analyzer shows the bar only in a chart tooltip at 2 decimals and the CSV omits the tornado.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the Probabilistic Breakeven Analyzer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": "full"
+   }
   },
   {
    "tier": "advanced",
@@ -274,23 +355,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/riskCases.jsx:30-43 (RiskCaseCards) via /opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:324",
    "printed": {
-    "sigfigs": 2
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22 formatCurrency compact",
+   "display_ref": "src/components/npv/ResultsPanel.jsx Risk tab, Low case P90 card, after the Monte Carlo settings (shown only with Full precision on)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:321/324 -> formatValue (v/1e6).toFixed(4) in million USD, and add the risk percentiles, EMV and sorted sample to the Excel export (ResultsPanel.jsx:57-86)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix in the Scenario Builder; no tol can bridge compact notation.",
-   "evidence": "The Scenario Builder Monte Carlo cards and EMV print through compact currency (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:321/324 formatCurrency), about three significant figures ('-$9.5M', '$104M') against tol 0.001 million USD; the Excel export omits the risk block. A seeded 1200-draw Monte Carlo is engine only.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder and the Probabilistic Breakeven Analyzer with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping. With it on, the Builder's Risk tab shows the Monte Carlo settings (iterations, the three ranges and the seed) and an Export sorted sample button, a CSV of every NPV in rank order.",
+    "printed_before": {
+     "sigfigs": 2
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -298,23 +388,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/riskCases.jsx:43",
    "printed": {
-    "sigfigs": 3
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22 formatCurrency compact",
+   "display_ref": "src/components/npv/ResultsPanel.jsx Risk tab, High case P10 card",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:321/324 -> formatValue (v/1e6).toFixed(4) in million USD, and add the risk percentiles, EMV and sorted sample to the Excel export (ResultsPanel.jsx:57-86)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "As above.",
-   "evidence": "The Scenario Builder Monte Carlo cards and EMV print through compact currency (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:321/324 formatCurrency), about three significant figures ('-$9.5M', '$104M') against tol 0.001 million USD; the Excel export omits the risk block. A seeded 1200-draw Monte Carlo is engine only.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder and the Probabilistic Breakeven Analyzer with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping. With it on, the Builder's Risk tab shows the Monte Carlo settings (iterations, the three ranges and the seed) and an Export sorted sample button, a CSV of every NPV in rank order.",
+    "printed_before": {
+     "sigfigs": 3
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -322,45 +421,63 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:321",
    "printed": {
-    "sigfigs": 2
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:22 formatCurrency compact",
+   "display_ref": "src/components/npv/ResultsPanel.jsx Risk tab, EMV card",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:321/324 -> formatValue (v/1e6).toFixed(4) in million USD, and add the risk percentiles, EMV and sorted sample to the Excel export (ResultsPanel.jsx:57-86)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "As above.",
-   "evidence": "The Scenario Builder Monte Carlo cards and EMV print through compact currency (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:321/324 formatCurrency), about three significant figures ('-$9.5M', '$104M') against tol 0.001 million USD; the Excel export omits the risk block. A seeded 1200-draw Monte Carlo is engine only.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder and the Probabilistic Breakeven Analyzer with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping. With it on, the Builder's Risk tab shows the Monte Carlo settings (iterations, the three ranges and the seed) and an Export sorted sample button, a CSV of every NPV in rank order.",
+    "printed_before": {
+     "sigfigs": 2
+    }
+   }
   },
   {
    "tier": "advanced",
    "key": "um_mc_10th_percentile_floor_rule_musd",
    "source": "unobtainable",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx (the MC sample is never rendered or exported)",
-   "printed": null,
+   "printed": {
+    "decimals": 10
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/npv/ResultsPanel.jsx Risk tab, Export sorted sample CSV (npv-monte-carlo-sorted-sample-seed-9031.csv), ranked rows at 10 decimals",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:321/324 -> formatValue (v/1e6).toFixed(4) in million USD, and add the risk percentiles, EMV and sorted sample to the Excel export (ResultsPanel.jsx:57-86)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Export the sorted sample (or print this order statistic) at 4 decimals.",
-   "evidence": "sorted[floor(0.1 x 1200)] needs the 1200 NPVs, which the Scenario Builder neither shows nor exports; the Low case card (a different percentile rule) is 0.0154 away, outside tol. The Scenario Builder Monte Carlo cards and EMV print through compact currency (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/npv/ResultsPanel.jsx:321/324 formatCurrency), about three significant figures ('-$9.5M', '$104M') against tol 0.001 million USD; the Excel export omits the risk block. A seeded 1200-draw Monte Carlo is engine only.",
+   "evidence": "With Full precision on, prints at 10 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the seeded Monte Carlo sample through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder and the Probabilistic Breakeven Analyzer with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping. With it on, the Builder's Risk tab shows the Monte Carlo settings (iterations, the three ranges and the seed) and an Export sorted sample button, a CSV of every NPV in rank order.",
+    "printed_before": null
+   }
   },
   {
    "tier": "advanced",
@@ -368,23 +485,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:63-68 (median card, seed input InputPanel.jsx:193); CSV :25",
    "printed": {
-    "decimals": 2
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:67 toFixed(2)",
+   "display_ref": "src/components/breakevenanalyzer/ResultsPanel.jsx Breakeven Summary card, 50th percentile at seed 9032",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:67 -> kpis[key].toFixed(4); /opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/BreakevenPlots.jsx:17 money -> toFixed(4) for tooltips"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print the cards at 4 decimals.",
-   "evidence": "Rerun at seed 9032; seeded Monte Carlo, engine only. The named Probabilistic Breakeven Analyzer shows the percentile cards with toFixed(2) (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:67), half a unit 0.005 against tol 0.001 and against the prompt's 'four decimals'; its 'Export data' CSV (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/breakevenanalyzer/ResultsPanel.jsx:21-40) carries the full-precision percentiles and base case.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+    "migration": "20261026_w3_uncertainty.sql",
+    "prompt_append": "Read the figures in the NPV Scenario Builder and the Probabilistic Breakeven Analyzer with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping. With it on, the Builder's Risk tab shows the Monte Carlo settings (iterations, the three ranges and the seed) and an Export sorted sample button, a CSV of every NPV in rank order.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "advanced",

@@ -52,45 +52,63 @@
    "source": "suite-app",
    "source_ref": "/root/wt-b5-nextgen/src/content/courses/linesizing/beginner/m02-velocity-reynolds-and-friction/l04-colebrook-and-what-it-solves-for.md (\"It is solved rather than evaluated ... The engine iterates\"); /opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:31",
    "printed": {
-    "decimals": 4
+    "decimals": 10
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:31 fmt(sizing.f, 4)",
+   "display_ref": "src/components/linesizing/SizingPanel.jsx:36 Friction factor, formatFull(sizing.f, 10) with Full precision on",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:31 -> fmt(sizing.f, 10) (the course prints friction factors to ten decimals); or teach the Colebrook iteration in beginner m02 l04 (lesson content) so it is a spreadsheet hand-calc"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Owner choice. The one iterating step (Colebrook) is described in beginner m02 l04 but never written out as an equation for the learner to iterate, and the Suite Line Sizing studio the prompt points at (\"the chain the studio works\") prints f at 4 decimals and only the total drop at 1 decimal. Preferred: write the Colebrook equation and a fixed-point iteration into m02 l04 (a spreadsheet then reproduces f to 1e-12, verified), which makes this a hand-calc. Alternative display fix in the studio.",
-   "evidence": "Tol 1e-9 on 0.0277590 (relative 3.6e-8). Colebrook iterated in a spreadsheet at eps/D = 0.006/6.065 and Re 20628.886 reproduces 0.027758986530 exactly, but the lessons tell the learner the engine iterates rather than teaching the iteration; the studio shows 0.0278.",
+   "evidence": "With Full precision on, the liquid Selected line card prints the friction factor at 10 decimals (jest: SizingPanel.fullPrecision.test.jsx, the engine result through formatFull).",
    "notes": "The fc-liquid-explorer has no inputs (LiquidExplorer.jsx:337, view select only) and runs OGBIA.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #555 (Pipeline & Line Sizing Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_linesizing.sql",
+    "prompt_append": "Read the figures in the Pipeline & Line Sizing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 4
+    }
+   }
   },
   {
    "tier": "beginner",
    "key": "imo1_friction_drop_psi",
    "source": "suite-app",
    "source_ref": "/root/wt-b5-nextgen/src/content/courses/linesizing/beginner/m03-three-losses-kept-apart/l02-friction-along-the-pipe.md; /opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:27",
-   "printed": null,
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:27 (only the total drop, fmt(sizing.dpTotalPsi, 1)); the friction term is not printed separately",
+   "display_ref": "src/components/linesizing/SizingPanel.jsx:29-31 Friction drop (shown only with Full precision on), engine dpFrictionPsi at 6 dp",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:27 -> add a Stat for the friction term at fmt(v, 6) beside the total; or teach the Colebrook iteration (see imo1_friction_factor), after which f L/D rho v^2/(2 gc 144) is a hand step"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Owner choice. The one iterating step (Colebrook) is described in beginner m02 l04 but never written out as an equation for the learner to iterate, and the Suite Line Sizing studio the prompt points at (\"the chain the studio works\") prints f at 4 decimals and only the total drop at 1 decimal. Preferred: write the Colebrook equation and a fixed-point iteration into m02 l04 (a spreadsheet then reproduces f to 1e-12, verified), which makes this a hand-calc. Alternative display fix in the studio.",
-   "evidence": "f x 19800/(6.065/12) x 52.3 v^2 / (2 x 32.174 x 144) = 29.776304 with the converged f; tol 1e-5 psi (relative 3.4e-7) needs f to about 1e-8, which only the engine or a taught iteration gives.",
+   "evidence": "With Full precision on, a Friction drop stat prints the engine friction term at 6 decimals (jest: SizingPanel.fullPrecision.test.jsx).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #555 (Pipeline & Line Sizing Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_linesizing.sql",
+    "prompt_append": "Read the figures in the Pipeline & Line Sizing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": null
+   }
   },
   {
    "tier": "beginner",
@@ -98,23 +116,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:27",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:27 fmt(sizing.dpTotalPsi, 1)",
+   "display_ref": "src/components/linesizing/SizingPanel.jsx:28 Pressure drop at 6 dp with Full precision on",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:27 -> fmt(sizing.dpTotalPsi, 6); or teach the Colebrook iteration so friction + 3.85 velocity heads + 52.3 x 180/144 is a hand sum"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Owner choice. The one iterating step (Colebrook) is described in beginner m02 l04 but never written out as an equation for the learner to iterate, and the Suite Line Sizing studio the prompt points at (\"the chain the studio works\") prints f at 4 decimals and only the total drop at 1 decimal. Preferred: write the Colebrook equation and a fixed-point iteration into m02 l04 (a spreadsheet then reproduces f to 1e-12, verified), which makes this a hand-calc. Alternative display fix in the studio.",
-   "evidence": "Friction 29.776304 + fittings 0.107 + elevation 65.3750 = 95.256721; the studio prints 95.3 against tol 1e-5.",
+   "evidence": "With Full precision on, Pressure drop prints at 6 decimals (jest: SizingPanel.fullPrecision.test.jsx).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #555 (Pipeline & Line Sizing Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_linesizing.sql",
+    "prompt_append": "Read the figures in the Pipeline & Line Sizing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -250,23 +277,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:41 (gas mode, Weymouth outlet at a rate)",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:41 fmt(sizing.p2Psia, 1)",
+   "display_ref": "src/components/linesizing/SizingPanel.jsx:48 Outlet pressure at 6 dp with Full precision on",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:41 -> fmt(sizing.p2Psia, 6) (the course prints pressures to six decimals); or print the Weymouth equation so p2 = sqrt((p1^2 - (Q/K)^2)/e^s) is a hand step"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Owner choice. The intermediate lessons never write the Weymouth or Panhandle B equations (their constants 433.5, 737, the (Tb/Pb) exponents and d^(8/3) live only in the engine header, lineHydraulics.js:247-291), no panel accepts the BRASS inputs, and the Suite has no forward-rate mode. Verified: with the GPSA forms the engine header states, a spreadsheet reproduces Weymouth, Panhandle B and the Weymouth outlet exactly. Preferred: print the forms in intermediate m02 l01/l02 (hand-calc) and add editable inputs to GasLineExplorer for General Flow, which iterates.",
-   "evidence": "The studio inverts Weymouth at the contracted rate but prints 999.6 against 999.623258 (tol 1e-5). With the Weymouth form, the closed-form inverse reproduces 999.6232578 exactly; the lesson (m04 l01) says the engine bisects and gives no form.",
+   "evidence": "With Full precision on, the gas card prints the outlet pressure at 6 decimals (jest: SizingPanel.fullPrecision.test.jsx).",
    "notes": "The fc-gasline-explorer has no inputs (GasLineExplorer.jsx:375, view select only) and runs the SOKU trunk. The Suite Line Sizing gas mode only solves outlet pressure from a rate (LineSizingContext.jsx:275 gasOutletPressure) and never returns a forward rate.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #555 (Pipeline & Line Sizing Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_linesizing.sql",
+    "prompt_append": "Read the figures in the Pipeline & Line Sizing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "advanced",

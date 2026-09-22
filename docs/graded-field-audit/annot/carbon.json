@@ -154,23 +154,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/energyefficiency/CombustionResults.jsx:72 (Efficiency Studio, named in the prompt for the heating values and the typical cp and latent heat)",
    "printed": {
-    "decimals": 2
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/energyefficiency/CombustionResults.jsx:72 fmt(currentEfficiency.efficiencyPercent, 2); also :120",
+   "display_ref": "src/components/energyefficiency/CombustionResults.jsx:74 (also :122, :123) efficiency on LHV at 6 dp with Full precision on",
    "prompt_precision": "in percent, to four decimals",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/energyefficiency/CombustionResults.jsx:72 and :120 -> fmt(currentEfficiency.efficiencyPercent, 4) (and targetEfficiency at :121); alternatively add stack and air temperature boxes to the NextGen LossMode (EfficiencyExplorer.jsx:184, which already prints efficiency at F.pct 4 decimals but fixes the stack at 238 C and air at 28 C via heaterAt carbonLab.js:493)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt asks for four decimals and tol is 0.0001; the Studio prints 85.02 (0.0016 off) and the NextGen loss view cannot be set to a 251 C stack. Loosening to 0.005 would contradict the stated four decimals.",
-   "evidence": "The Suite heater card prints efficiency with fmt(v, 2) (toLocaleString, 2 fraction digits), so the best a learner can read is 85.02 against 85.021597 with tol 0.0001. The NextGen LossMode takes fuel, O2 and radiation loss but always uses ISIOKPO_HEATER stack 238 C and air 28 C (EfficiencyExplorer.jsx:193).",
+   "evidence": "With Full precision on, the Combustion & heaters headline prints the LHV efficiency at 6 decimals (jest: efficiencyFullPrecision.test.jsx).",
    "notes": "Hand route not taught to completion: m03 l01 prints the losses and the typical cp values but never writes the dry flue gas mass formula, so the full-precision value needs the engine.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #561 (Energy & Utilities Efficiency Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_carbon.sql",
+    "prompt_append": "Read the figures in the Energy & Utilities Efficiency Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "intermediate",

@@ -131,6 +131,34 @@ def w1_shipped():
 SHIPPED.update(w1_shipped())
 
 
+# B5 FOLLOW-ON W3 (Suite Full precision), from w3/<course>.json. The Suite app a
+# field is read in gains a Full precision switch (Suite PRs named in the spec);
+# the brief gains one sentence naming it (20261026_w3_<course>.sql, prompt only).
+# Each field the switch now prints at its graded precision records its post-W3
+# annotation (`annot_update`: printed, display_ref, evidence) and moves class;
+# `printed_before` keeps the Suite print it replaced, so audit.py --selftest can
+# prove the class move rests on the new print. `prompt_append` is checked by
+# audit.py --post --wave w3.
+def w3_shipped():
+    out = {}
+    for p in sorted(glob.glob(os.path.join(HERE, 'w3', '*.json'))):
+        s = json.load(open(p))
+        course = s['course']
+        for tier, t in s['tiers'].items():
+            for key, up in t.get('annot_updates', {}).items():
+                up = dict(up)
+                e = {'wave': 'w3', 'decided': True, 'class': up.pop('class', 'none'), 'annot_update': up,
+                     'suite': s.get('suite', '')}
+                if t.get('append'):
+                    e['migration'] = f'20261026_w3_{course}.sql'
+                    e['prompt_append'] = t['append'].strip()
+                out[(course, tier, key)] = e
+    return out
+
+
+SHIPPED.update(w3_shipped())
+
+
 def main(raw):
     out = os.path.join(HERE, 'annot')
     os.makedirs(out, exist_ok=True)
@@ -150,6 +178,8 @@ def main(raw):
                     f['leak'] = True
             s = SHIPPED.get((c, f['tier'], f['key']))
             if s and s.get('annot_update'):
+                if s.get('wave') == 'w3' and 'printed' in s['annot_update']:
+                    s = {**s, 'printed_before': f.get('printed')}
                 f.update(s['annot_update'])
             if s and s.get('decided'):
                 f['owner_decision'] = False

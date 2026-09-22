@@ -2,6 +2,8 @@
 
 Status: APPROVED 2026-09-21. The owner approved all seven decisions (D1 to D7) as recommended ("Follow your recommended options for the seven decisions"). Building starts with W1.
 
+**W3 status (2026-09-22): BUILT.** Suite #554 (shared Full precision switch) and #555 to #568 (per app, stacked on #554), 15 prompt-only files `20261026_w3_<course>.sql` PENDING, applied after the Suite zip is live (`/root/w3-apply/apply.sh`). Fiscal FC6 was already shipped by the round-off. See README.md "W3".
+
 **W1 status (2026-09-21): BUILT, migrations PENDING owner apply.** 13 files `20261024a_w1_<course>.sql` (15 re-keys, 8 tightenings, prompt copy for integrity, rodpump and seismolord) and 21 files `20261024b_w1_openbook_<course>.sql` (the D4 C label on 57 tiers: the 56 below plus seismolord intermediate, whose new zero-lag field and stated lag are printed in its lessons). Owner script `/root/w1-apply/apply.sh`, after the round-off. The D5 allowlist is empty: W1 re-keys no tier known to hold attempts. The petrophysics beginner auto-submit was already fixed in #194 (verified). Panels and lessons reach learners with the next NextGen zip. See README.md "W1". Written 2026-09-21 after the owner chose to finish the small B4/B5 items now and to cost group 3 as its own programme.
 
 Sources: this folder (`README.md`, `fields.json`, `annot/<course>.json`), `docs/answer-length-audit/README.md` ("Owner decisions raised"), the panel probe output `/root/b5/probe/`, and a read-only look at the Suite files named below. Every count here is recomputed from `fields.json` on main b9e3683b9.

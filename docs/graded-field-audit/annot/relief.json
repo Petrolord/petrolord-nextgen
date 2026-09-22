@@ -11,44 +11,62 @@
    "key": "kolocreek_critical_pressure_ratio",
    "source": "unobtainable",
    "source_ref": "src/content/courses/relief/beginner/m06-the-associate-reading/l03-the-capstone-worked.md:11",
-   "printed": null,
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx:46-50",
+   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Critical pressure ratio (shown only with Full precision on)",
    "prompt_precision": "\"The ratio as a fraction, C as a number and every area in square inches, all to six decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/reliefstudio/PsvResultsPanel.jsx:46 -> print the critical pressure ratio (toFixed(6)) beside the Critical/Subcritical sentence"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The capstone walk says to compare against \"the critical pressure ratio the engine returns\", but the studio prints only the branch sentence. Print it at 6 decimals. Hand route (2/(k+1))^(k/(k-1)) is standard API 520 but no lesson states it.",
-   "evidence": "Suite gas results show only \"Critical flow: the nozzle is choked...\" (PsvResultsPanel.jsx:46-50); grep of the relief lessons finds no (k+1) formula. NextGen panels are select-only teaching views (SelectField \"View\" only, e.g. src/components/course/panels/relief/SizingExplorer.jsx:477) and cannot be set to the capstone case.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #562 (Relief and Flare Studio Full precision switch, flare back pressure input, stacked on #554)",
+    "migration": "20261026_w3_relief.sql",
+    "prompt_append": "Read the figures in the Relief and Flare Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": null
+   }
   },
   {
    "tier": "beginner",
    "key": "kolocreek_gas_coefficient_c",
    "source": "unobtainable",
    "source_ref": "src/content/courses/relief/beginner/m02-gas-and-vapour/l01-the-coefficient-c-and-where-it-comes-from.md:26",
-   "printed": null,
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx:35",
+   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Gas coefficient C (shown only with Full precision on; engine gasConstantC)",
    "prompt_precision": "\"The ratio as a fraction, C as a number and every area in square inches, all to six decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/reliefstudio/PsvResultsPanel.jsx:35 -> add a \"Gas coefficient C\" Stat at toFixed(6) on the gas route"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print C in the studio; the lessons give the 520 leading constant (beginner/m01/l04:20) but not the k-function, so the learner has no taught route.",
-   "evidence": "No C readout anywhere in src/components/reliefstudio (grep); l01 treats C as the engine's gasConstantC output. NextGen panels are select-only teaching views (SelectField \"View\" only, e.g. src/components/course/panels/relief/SizingExplorer.jsx:477) and cannot be set to the capstone case.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #562 (Relief and Flare Studio Full precision switch, flare back pressure input, stacked on #554)",
+    "migration": "20261026_w3_relief.sql",
+    "prompt_append": "Read the figures in the Relief and Flare Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": null
+   }
   },
   {
    "tier": "beginner",
@@ -56,23 +74,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/ReliefBlowdownSizer.jsx:15",
    "printed": {
-    "decimals": 3
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx:35",
+   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Required area (gas)",
    "prompt_precision": "\"The ratio as a fraction, C as a number and every area in square inches, all to six decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/reliefstudio/PsvResultsPanel.jsx:35 -> fmt(psv.areaIn2, 6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The prompt demands six decimals and the course's own working method is \"one call per answer\" in the Relief & Flare Studio, which prints less. Either print the studio readouts at the course precision (a \"full precision\" toggle keeps the plant view clean) or widen tol to half a unit of what the studio prints. Recommend the display change: the prompts explicitly promise six decimals. Tolerance alternative: 0.0005.",
-   "evidence": "Required area prints `fmt(psv.areaIn2, 3)` (fmt = toLocaleString with fixed digits, fields.jsx:28); 1.227 vs tol 1e-6 and the prompt's six decimals.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #562 (Relief and Flare Studio Full precision switch, flare back pressure input, stacked on #554)",
+    "migration": "20261026_w3_relief.sql",
+    "prompt_append": "Read the figures in the Relief and Flare Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 3
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -80,23 +107,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/ReliefBlowdownSizer.jsx:15",
    "printed": {
-    "decimals": 3
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx:35",
+   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Required area (gas, subcritical back pressure)",
    "prompt_precision": "\"The ratio as a fraction, C as a number and every area in square inches, all to six decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/reliefstudio/PsvResultsPanel.jsx:35 -> fmt(psv.areaIn2, 6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The prompt demands six decimals and the course's own working method is \"one call per answer\" in the Relief & Flare Studio, which prints less. Either print the studio readouts at the course precision (a \"full precision\" toggle keeps the plant view clean) or widen tol to half a unit of what the studio prints. Recommend the display change: the prompts explicitly promise six decimals. Tolerance alternative: 0.0005.",
-   "evidence": "Same Stat, subcritical branch; 3 decimals printed against tol 1e-6.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #562 (Relief and Flare Studio Full precision switch, flare back pressure input, stacked on #554)",
+    "migration": "20261026_w3_relief.sql",
+    "prompt_append": "Read the figures in the Relief and Flare Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 3
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -104,23 +140,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/ReliefBlowdownSizer.jsx:15",
    "printed": {
-    "decimals": 3
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx:35",
+   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Required area (liquid)",
    "prompt_precision": "\"The ratio as a fraction, C as a number and every area in square inches, all to six decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/reliefstudio/PsvResultsPanel.jsx:35 -> fmt(psv.areaIn2, 6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The prompt demands six decimals and the course's own working method is \"one call per answer\" in the Relief & Flare Studio, which prints less. Either print the studio readouts at the course precision (a \"full precision\" toggle keeps the plant view clean) or widen tol to half a unit of what the studio prints. Recommend the display change: the prompts explicitly promise six decimals. Tolerance alternative: 0.0005.",
-   "evidence": "Liquid route area printed fmt(..., 3); tol 1e-6.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": "Suite liquid inputs include a viscosity (PsvInputsPanel.jsx:43); the capstone is inviscid, so the learner must leave Kv at 1 (check the route does not iterate on a zero viscosity).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #562 (Relief and Flare Studio Full precision switch, flare back pressure input, stacked on #554)",
+    "migration": "20261026_w3_relief.sql",
+    "prompt_append": "Read the figures in the Relief and Flare Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 3
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -128,23 +173,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/ReliefBlowdownSizer.jsx:15",
    "printed": {
-    "decimals": 3
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx:35",
+   "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Required area (steam)",
    "prompt_precision": "\"The ratio as a fraction, C as a number and every area in square inches, all to six decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/reliefstudio/PsvResultsPanel.jsx:35 -> fmt(psv.areaIn2, 6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The prompt demands six decimals and the course's own working method is \"one call per answer\" in the Relief & Flare Studio, which prints less. Either print the studio readouts at the course precision (a \"full precision\" toggle keeps the plant view clean) or widen tol to half a unit of what the studio prints. Recommend the display change: the prompts explicitly promise six decimals. Tolerance alternative: 0.0005.",
-   "evidence": "Steam area printed fmt(..., 3); tol 1e-6.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #562 (Relief and Flare Studio Full precision switch, flare back pressure input, stacked on #554)",
+    "migration": "20261026_w3_relief.sql",
+    "prompt_append": "Read the figures in the Relief and Flare Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 3
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -292,23 +346,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/ReliefBlowdownSizer.jsx:20",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/reliefstudio/BlowdownPanel.jsx:47",
+   "display_ref": "src/components/reliefstudio/BlowdownPanel.jsx Time to end pressure, seconds (shown only with Full precision on)",
    "prompt_precision": "\"Everything else to six decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/reliefstudio/BlowdownPanel.jsx:47 -> also print seconds, fmt(r.timeS, 6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The prompt demands six decimals and the course's own working method is \"one call per answer\" in the Relief & Flare Studio, which prints less. Either print the studio readouts at the course precision (a \"full precision\" toggle keeps the plant view clean) or widen tol to half a unit of what the studio prints. Recommend the display change: the prompts explicitly promise six decimals. Tolerance alternative: 0.05 (half of 0.1 min is 3 s, far wider than the trap spacing, so the display fix is the only honest one).",
-   "evidence": "Only the 0.1 s march gives this (the closed form differs by about 1e-3 relative, advanced/m05/l05:24, i.e. ~0.18 s against tol 1e-4 s); the studio prints `fmt(r.timeS / 60, 1)` minutes, 6 s steps. The NextGen BlowdownExplorer is select-only.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": "Also check the studio's default step is 0.1 s (it prints dt at BlowdownPanel.jsx:53) and that it takes a 16.5 psia back pressure (inputs at :15-30 show none).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #562 (Relief and Flare Studio Full precision switch, flare back pressure input, stacked on #554)",
+    "migration": "20261026_w3_relief.sql",
+    "prompt_append": "On the Blowdown tab, type the start and end pressures as gauge pressures (each psia figure less 14.7) and the 16.5 psia flare back pressure into Flare back pressure (psia). Read the figures in the Relief and Flare Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -335,22 +398,31 @@
    "key": "gbaran_choked_floor_psia",
    "source": "unobtainable",
    "source_ref": "src/content/courses/relief/advanced/m01-a-vessel-emptying-itself/l02-mass-out-through-a-choked-orifice.md:15",
-   "printed": null,
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": "src/components/reliefstudio/BlowdownPanel.jsx:45-55",
+   "display_ref": "src/components/reliefstudio/BlowdownPanel.jsx Choked floor (shown only with Full precision on), against the new Flare back pressure (psia) input",
    "prompt_precision": "\"Everything else to six decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/reliefstudio/BlowdownPanel.jsx:52 -> add a \"Choked floor\" Stat, fmt(r.chokedFloorPsia, 6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The capstone walk says \"read the returned floor\", but the studio never prints it. Hand route 16.5 / critical ratio(1.26) needs the ratio formula no lesson states.",
-   "evidence": "l02:15 teaches floor x critical ratio = outlet pressure; the ratio itself is only an engine return. BlowdownPanel shows time, temperature and stations only. NextGen panels are select-only teaching views (SelectField \"View\" only, e.g. src/components/course/panels/relief/SizingExplorer.jsx:477) and cannot be set to the capstone case.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #562 (Relief and Flare Studio Full precision switch, flare back pressure input, stacked on #554)",
+    "migration": "20261026_w3_relief.sql",
+    "prompt_append": "On the Blowdown tab, type the start and end pressures as gauge pressures (each psia figure less 14.7) and the 16.5 psia flare back pressure into Flare back pressure (psia). Read the figures in the Relief and Flare Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": null
+   }
   },
   {
    "tier": "advanced",

@@ -152,23 +152,32 @@
    "source": "suite-app",
    "source_ref": "src/components/refineryplanning/PlanResults.jsx:98",
    "printed": {
-    "decimals": 0
+    "decimals": 6
    },
    "display_scale": 100,
-   "display_ref": "src/components/refineryplanning/PlanResults.jsx:98",
+   "display_ref": "src/components/refineryplanning/PlanResults.jsx:100 unit utilisation at 6 dp with Full precision on",
    "prompt_precision": "in percent to two decimals",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/refineryplanning/PlanResults.jsx:98 -> (u.utilisation * 100).toFixed(2); same for ConfigPanel.jsx:105 and ActualsPanel.jsx:178"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. A learner can already derive it from the printed crude unit throughput (1,880,000 bbl, whole barrels) over the stated capacity 2,300,000, which intermediate/m06/l01 does for ABUA, so this is low urgency; tol must not be loosened to 0.5.",
-   "evidence": "Unit table prints `(u.utilisation * 100).toFixed(0)%` = 82%, 0.26 from 81.739130 with tol 0.005. The prompt asks 'in percent to two decimals'.",
+   "evidence": "With Full precision on, the plan table prints each unit utilisation at 6 decimals (jest: utilisationFullPrecision.test.jsx).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #561 (Refinery Planning & Scheduling Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_refinery.sql",
+    "prompt_append": "Read the figures in the Refinery Planning & Scheduling Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 0
+    }
+   }
   },
   {
    "tier": "intermediate",
