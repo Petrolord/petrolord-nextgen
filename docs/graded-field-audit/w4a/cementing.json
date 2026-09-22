@@ -1,0 +1,124 @@
+{
+ "course": "cementing",
+ "tiers": {
+  "intermediate": {
+   "why": "The placement march and both rate bisections are engine-only, and the placement explorer ran only the two published jobs. W4a adds a Your job view with a box for every input of a lead-and-tail placement (opening on the lessons' slant job), run through jobVolumes and simulatePlacement with both edges bisected. The brief now names the view. Prompt only.",
+   "prompt_edits": [
+    [
+     "Six placement numbers for the Associate capstone's job.",
+     "Six placement numbers for the Associate capstone's job. Type that job, with the fluids, Fann sets, rate and limit below, into the placement explorer's Your job view."
+    ]
+   ],
+   "annot_updates": {
+    "end_pump_pressure_pa": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1e-06,
+     "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'End pump pressure' fmt(v/1e6, 6)",
+     "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer."
+    },
+    "float_diff_pa": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1e-06,
+     "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'Float differential' fmt(v/1e6, 6)",
+     "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer."
+    },
+    "max_ecd_prev_shoe_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'Peak ECD at the previous shoe' fmt(v, 4)",
+     "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer."
+    },
+    "min_rate_no_free_fall_m3s": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'Slowest rate with no free fall' fmt(v, 8)",
+     "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer."
+    },
+    "max_rate_under_ecd_limit_m3s": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'Fastest rate under the limit' fmt(v, 8)",
+     "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer."
+    },
+    "rate_window_width_m3s": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'Window width' fmt(v, 8)",
+     "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer."
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/cementing/cementingLab.js",
+  "src/components/course/panels/cementing/PlacementExplorer.jsx",
+  "src/components/course/panels/cementing/panelCapstoneGuard.test.js",
+  "src/content/courses/cementing/intermediate/m06-the-professional-reading/l02-working-the-capstone.md"
+ ]
+}

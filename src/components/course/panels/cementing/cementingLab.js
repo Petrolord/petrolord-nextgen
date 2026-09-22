@@ -164,6 +164,97 @@ export const rateWindow = (well = 'slant', program = 'lead_tail', limitKgM3 = 17
   };
 };
 
+// ---------------------------------------------------------------------------
+// Your job: a whole lead-and-tail placement typed in by the learner.
+// ---------------------------------------------------------------------------
+
+// Every box of the "Your job" view, in order, with the published slant job as
+// its opening value. The view opens on the lessons' own job, so its default
+// state is a teaching case; typing a job of your own is the work.
+const pubSlant = cases.cases.find((x) => x.well === 'slant');
+const pubCased = pubSlant.holeSections.find((h) => h.cased);
+const pubOpen = pubSlant.holeSections.find((h) => !h.cased);
+export const YOUR_JOB_FIELDS = [
+  { key: 'casingOdM', label: 'Casing OD (m)', value: pubSlant.casing.odM },
+  { key: 'casingIdM', label: 'Casing ID (m)', value: pubSlant.casing.idM },
+  { key: 'shoeMd', label: 'Shoe (m MD)', value: pubSlant.casing.shoeMd },
+  { key: 'floatCollarMd', label: 'Float collar (m MD)', value: pubSlant.casing.floatCollarMd },
+  { key: 'casedToMd', label: 'Previous shoe (m MD)', value: pubCased.to_md_m },
+  { key: 'prevCasingIdM', label: 'Previous casing ID (m)', value: pubCased.casing_id_m },
+  { key: 'prevHoleIdM', label: 'Hole behind it (m)', value: pubCased.hole_id_m },
+  { key: 'openHoleIdM', label: 'Open hole (m)', value: pubOpen.hole_id_m },
+  { key: 'tocMd', label: 'Top of cement (m MD)', value: pubSlant.tocMd },
+  { key: 'excessOpenHolePct', label: 'Open hole excess (%)', value: pubSlant.excessOpenHolePct },
+  { key: 'leadTailSplitMd', label: 'Lead and tail split (m MD)', value: pubSlant.leadTailSplitMd },
+  { key: 'spacerVolM3', label: 'Spacer volume (m3)', value: PUBLISHED_FLUIDS.spacerVolM3 },
+  { key: 'mudKgM3', label: 'Mud (kg/m3)', value: PUBLISHED_FLUIDS.mudKgM3 },
+  { key: 'spacerKgM3', label: 'Spacer (kg/m3)', value: PUBLISHED_FLUIDS.spacerKgM3 },
+  { key: 'leadKgM3', label: 'Lead (kg/m3)', value: PUBLISHED_FLUIDS.leadKgM3 },
+  { key: 'tailKgM3', label: 'Tail (kg/m3)', value: PUBLISHED_FLUIDS.tailKgM3 },
+  ...['mud', 'spacer', 'lead', 'tail'].flatMap((f) => ['theta600', 'theta300', 'theta6', 'theta3'].map((t) => ({
+    key: `${f}_${t}`, label: `${f} ${t.replace('theta', '')} rpm`, value: pubSlant[`${f}Fann`][t],
+  }))),
+  { key: 'pumpRateM3s', label: 'Pump rate (m3/s)', value: pubSlant.pumpRateM3s },
+  { key: 'ecdLimitKgM3', label: 'Limit at the previous shoe (kg/m3)', value: 1700 },
+];
+export const YOUR_JOB_DEFAULT = Object.freeze(Object.fromEntries(YOUR_JOB_FIELDS.map((f) => [f.key, String(f.value)])));
+
+/** The typed boxes as a job, or null when a box is not a positive number
+ *  (the excess may be zero). */
+export const jobFromTyped = (typed) => {
+  const j = {};
+  for (const { key } of YOUR_JOB_FIELDS) {
+    const v = Number(typed[key]);
+    if (typed[key] === '' || !Number.isFinite(v) || v < 0 || (v === 0 && key !== 'excessOpenHolePct')) return null;
+    j[key] = v;
+  }
+  return j;
+};
+
+const fannOf = (j, f) => ({ theta600: j[`${f}_theta600`], theta300: j[`${f}_theta300`], theta6: j[`${f}_theta6`], theta3: j[`${f}_theta3`] });
+
+/** One typed job on a published trajectory: its volumes, its placement at the
+ *  typed rate, and the rate window (both edges bisected) against the typed
+ *  limit. Everything goes through jobVolumes and simulatePlacement. */
+export const yourJob = (well, j, { window: withWindow = true } = {}) => {
+  const stations = caseOf(well).stations;
+  const casing = { odM: j.casingOdM, idM: j.casingIdM, shoeMd: j.shoeMd, floatCollarMd: j.floatCollarMd, hangerMd: 0 };
+  const holeSections = [
+    { cased: true, from_md_m: 0, to_md_m: j.casedToMd, casing_id_m: j.prevCasingIdM, hole_id_m: j.prevHoleIdM },
+    { cased: false, from_md_m: j.casedToMd, to_md_m: j.shoeMd, hole_id_m: j.openHoleIdM },
+  ];
+  const v = jobVolumes({
+    stations, holeSections, casing, tocMd: j.tocMd, excessOpenHolePct: j.excessOpenHolePct,
+    spacerVolM3: j.spacerVolM3, slurryYieldM3PerSack: pubSlant.slurryYieldM3PerSack,
+    leadTailSplitMd: j.leadTailSplitMd, pumpRateM3s: j.pumpRateM3s,
+  });
+  const fluids = [
+    { kind: 'spacer', densityKgM3: j.spacerKgM3, volumeM3: j.spacerVolM3, rheology: hb(fannOf(j, 'spacer')) },
+    { kind: 'lead', densityKgM3: j.leadKgM3, volumeM3: v.leadM3, rheology: hb(fannOf(j, 'lead')) },
+    { kind: 'tail', densityKgM3: j.tailKgM3, volumeM3: v.tailM3, rheology: hb(fannOf(j, 'tail')) },
+    { kind: 'displacement', densityKgM3: j.mudKgM3, volumeM3: v.displacementM3, rheology: hb(fannOf(j, 'mud')) },
+  ];
+  const run = (q) => simulatePlacement({
+    stations, holeSections, casing,
+    mudInHole: { kind: 'mud', densityKgM3: j.mudKgM3, rheology: hb(fannOf(j, 'mud')) },
+    fluids, pumpRateM3s: q, tocMd: j.tocMd, excessOpenHolePct: j.excessOpenHolePct,
+  });
+  const p = run(j.pumpRateM3s);
+  if (!withWindow) return { volumes: v, placement: p };
+  const minRate = minRateNoFreeFall(run);
+  const maxRate = maxRateUnderEcd(run, j.ecdLimitKgM3);
+  return {
+    volumes: v,
+    placement: p,
+    window: {
+      minRateNoFreeFallM3s: minRate,
+      maxRateUnderEcdM3s: maxRate,
+      widthM3s: (minRate != null && maxRate != null) ? maxRate - minRate : null,
+      open: minRate != null && maxRate != null && maxRate > minRate,
+    },
+  };
+};
+
 export const rateSweep = (well = 'slant', program = 'lead_tail', rates = [
   0.005, 0.0075, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05,
 ]) => rates.map((q) => {

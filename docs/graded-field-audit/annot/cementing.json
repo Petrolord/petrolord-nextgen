@@ -129,146 +129,164 @@
   {
    "tier": "intermediate",
    "key": "end_pump_pressure_pa",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/cementing/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:62 (\"Do the six in the panel\")",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
    "printed": {
     "decimals": 6
    },
    "display_scale": 1e-06,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:73 (teaching wells only)",
+   "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'End pump pressure' fmt(v/1e6, 6)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:27-49 -> add a 'Your job' mode with editable casing OD/ID, float collar, hole sections, TOC, excess, fluid densities, four Fann sets, rate and ECD limit (run through simulatePlacement / minRateNoFreeFall / maxRateUnderEcd); the existing formatters (MPa at 6 dp = 1 Pa, ECD at 4 dp, rates at 8 dp) already clear every tol"
-   },
-   "owner_decision": true,
-   "recommendation": "Panel change so the learner types the capstone job in (no graded value printed by default, so no leak). Without it the whole Professional capstone is ungradable: no route the course offers produces these six.",
-   "evidence": "Engine-only: simulatePlacement is a 60-step time march with Herschel-Bulkley fits of each Fann set (engines/drilling/cementing.js); no closed form is taught. The Professional panel (PlacementExplorer.jsx:47-49) exposes only well, programme and pump rate on the teaching wells, so the capstone fluids, densities and Fann sets cannot be entered. The Suite CementingStudio is not named by the prompt and prints pressure at 0 dp in its own units and no rate-window bisection.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer.",
+   "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_cementing.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "float_diff_pa",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/cementing/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:62 (\"Do the six in the panel\")",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
    "printed": {
     "decimals": 6
    },
    "display_scale": 1e-06,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:74 (teaching wells only)",
+   "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'Float differential' fmt(v/1e6, 6)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:27-49 -> add a 'Your job' mode with editable casing OD/ID, float collar, hole sections, TOC, excess, fluid densities, four Fann sets, rate and ECD limit (run through simulatePlacement / minRateNoFreeFall / maxRateUnderEcd); the existing formatters (MPa at 6 dp = 1 Pa, ECD at 4 dp, rates at 8 dp) already clear every tol"
-   },
-   "owner_decision": true,
-   "recommendation": "Panel change so the learner types the capstone job in (no graded value printed by default, so no leak). Without it the whole Professional capstone is ungradable: no route the course offers produces these six.",
-   "evidence": "Engine-only: simulatePlacement is a 60-step time march with Herschel-Bulkley fits of each Fann set (engines/drilling/cementing.js); no closed form is taught. The Professional panel (PlacementExplorer.jsx:47-49) exposes only well, programme and pump rate on the teaching wells, so the capstone fluids, densities and Fann sets cannot be entered. The Suite CementingStudio is not named by the prompt and prints pressure at 0 dp in its own units and no rate-window bisection.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer.",
+   "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_cementing.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "max_ecd_prev_shoe_kgm3",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/cementing/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:62 (\"Do the six in the panel\")",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
    "printed": {
     "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:76 (teaching wells only)",
+   "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'Peak ECD at the previous shoe' fmt(v, 4)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:27-49 -> add a 'Your job' mode with editable casing OD/ID, float collar, hole sections, TOC, excess, fluid densities, four Fann sets, rate and ECD limit (run through simulatePlacement / minRateNoFreeFall / maxRateUnderEcd); the existing formatters (MPa at 6 dp = 1 Pa, ECD at 4 dp, rates at 8 dp) already clear every tol"
-   },
-   "owner_decision": true,
-   "recommendation": "Panel change so the learner types the capstone job in (no graded value printed by default, so no leak). Without it the whole Professional capstone is ungradable: no route the course offers produces these six.",
-   "evidence": "Engine-only: simulatePlacement is a 60-step time march with Herschel-Bulkley fits of each Fann set (engines/drilling/cementing.js); no closed form is taught. The Professional panel (PlacementExplorer.jsx:47-49) exposes only well, programme and pump rate on the teaching wells, so the capstone fluids, densities and Fann sets cannot be entered. The Suite CementingStudio is not named by the prompt and prints pressure at 0 dp in its own units and no rate-window bisection.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer.",
+   "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_cementing.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "min_rate_no_free_fall_m3s",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/cementing/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:62 (\"Do the six in the panel\")",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
    "printed": {
     "decimals": 8
    },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:184 (teaching wells only)",
+   "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'Slowest rate with no free fall' fmt(v, 8)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:27-49 -> add a 'Your job' mode with editable casing OD/ID, float collar, hole sections, TOC, excess, fluid densities, four Fann sets, rate and ECD limit (run through simulatePlacement / minRateNoFreeFall / maxRateUnderEcd); the existing formatters (MPa at 6 dp = 1 Pa, ECD at 4 dp, rates at 8 dp) already clear every tol"
-   },
-   "owner_decision": true,
-   "recommendation": "Panel change so the learner types the capstone job in (no graded value printed by default, so no leak). Without it the whole Professional capstone is ungradable: no route the course offers produces these six.",
-   "evidence": "Engine-only: simulatePlacement is a 60-step time march with Herschel-Bulkley fits of each Fann set (engines/drilling/cementing.js); no closed form is taught. The Professional panel (PlacementExplorer.jsx:47-49) exposes only well, programme and pump rate on the teaching wells, so the capstone fluids, densities and Fann sets cannot be entered. The Suite CementingStudio is not named by the prompt and prints pressure at 0 dp in its own units and no rate-window bisection.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer.",
+   "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_cementing.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "max_rate_under_ecd_limit_m3s",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/cementing/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:62 (\"Do the six in the panel\")",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
    "printed": {
     "decimals": 8
    },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:185 (teaching wells only)",
+   "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'Fastest rate under the limit' fmt(v, 8)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:27-49 -> add a 'Your job' mode with editable casing OD/ID, float collar, hole sections, TOC, excess, fluid densities, four Fann sets, rate and ECD limit (run through simulatePlacement / minRateNoFreeFall / maxRateUnderEcd); the existing formatters (MPa at 6 dp = 1 Pa, ECD at 4 dp, rates at 8 dp) already clear every tol"
-   },
-   "owner_decision": true,
-   "recommendation": "Panel change so the learner types the capstone job in (no graded value printed by default, so no leak). Without it the whole Professional capstone is ungradable: no route the course offers produces these six.",
-   "evidence": "Engine-only: simulatePlacement is a 60-step time march with Herschel-Bulkley fits of each Fann set (engines/drilling/cementing.js); no closed form is taught. The Professional panel (PlacementExplorer.jsx:47-49) exposes only well, programme and pump rate on the teaching wells, so the capstone fluids, densities and Fann sets cannot be entered. The Suite CementingStudio is not named by the prompt and prints pressure at 0 dp in its own units and no rate-window bisection.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer.",
+   "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_cementing.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "rate_window_width_m3s",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/cementing/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:62 (\"Do the six in the panel\")",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job view, slant trajectory, every box typed with the Associate capstone job and the Professional fluids, Fann sets, rate 0.028 and limit 1600",
    "printed": {
     "decimals": 8
    },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:186 (teaching wells only)",
+   "display_ref": "src/components/course/panels/cementing/PlacementExplorer.jsx Your job Tile 'Window width' fmt(v, 8)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/cementing/PlacementExplorer.jsx:27-49 -> add a 'Your job' mode with editable casing OD/ID, float collar, hole sections, TOC, excess, fluid densities, four Fann sets, rate and ECD limit (run through simulatePlacement / minRateNoFreeFall / maxRateUnderEcd); the existing formatters (MPa at 6 dp = 1 Pa, ECD at 4 dp, rates at 8 dp) already clear every tol"
-   },
-   "owner_decision": true,
-   "recommendation": "Panel change so the learner types the capstone job in (no graded value printed by default, so no leak). Without it the whole Professional capstone is ungradable: no route the course offers produces these six.",
-   "evidence": "Engine-only: simulatePlacement is a 60-step time march with Herschel-Bulkley fits of each Fann set (engines/drilling/cementing.js); no closed form is taught. The Professional panel (PlacementExplorer.jsx:47-49) exposes only well, programme and pump rate on the teaching wells, so the capstone fluids, densities and Fann sets cannot be entered. The Suite CementingStudio is not named by the prompt and prints pressure at 0 dp in its own units and no rate-window bisection.",
-   "notes": "Subtraction of fields 5 and 4; obtainable only if they are. Sign is stated in the prompt (negative), no guess risk on a continuous value.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing the capstone job into the Your job view reproduces capstonePlacement exactly and prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on the lessons' slant job (identical to placementFor('slant', 'lead_tail')), which prints no graded answer.",
+   "notes": "W4a typed-case mode (Your job view). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_cementing.sql"
+   }
   },
   {
    "tier": "advanced",
